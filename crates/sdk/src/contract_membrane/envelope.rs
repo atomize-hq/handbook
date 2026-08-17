@@ -818,7 +818,7 @@ fn validate_idempotency(
         (OperationClass::ReadOnly, _, IdempotencyStateRef::NotApplicable) => true,
         (
             OperationClass::AppendOnly | OperationClass::CompareAndWrite,
-            TerminalStatus::Ok,
+            TerminalStatus::Ok | TerminalStatus::Refused,
             IdempotencyStateRef::Established {
                 request_fingerprint,
                 ..

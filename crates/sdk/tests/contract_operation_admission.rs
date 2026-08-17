@@ -37,11 +37,39 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
             .filter(|row| !row.current_transports().is_empty())
             .map(|row| row.operation_id())
             .collect::<Vec<_>>(),
-        vec!["posture.transition.apply"]
+        vec![
+            "artifact.kind.list",
+            "artifact.instance.list",
+            "artifact.read",
+            "artifact.validate",
+            "intake.definition.read",
+            "intake.coverage.evaluate",
+            "intake.record.append",
+            "artifact.candidate.validate",
+            "artifact.candidate.append",
+            "artifact.candidate.promote",
+            "posture.transition.apply",
+        ]
     );
     assert!(rows.iter().all(|row| {
         if row.operation_id() == "posture.transition.apply" {
             row.current_transports() == [OperationTransport::RustSdk]
+                && row.discovery() == DiscoveryState::Discoverable
+        } else if [
+            "artifact.kind.list",
+            "artifact.instance.list",
+            "artifact.read",
+            "artifact.validate",
+            "intake.definition.read",
+            "intake.coverage.evaluate",
+            "intake.record.append",
+            "artifact.candidate.validate",
+            "artifact.candidate.append",
+            "artifact.candidate.promote",
+        ]
+        .contains(&row.operation_id())
+        {
+            row.current_transports() == [OperationTransport::CliJson]
                 && row.discovery() == DiscoveryState::Discoverable
         } else {
             row.current_transports().is_empty() && row.discovery() == DiscoveryState::Omit
@@ -95,7 +123,7 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
     let frozen_bytes = canonical_json_bytes(&frozen_tuples, &ContractLimits::packet0()).unwrap();
     assert_eq!(
         handbook_sdk::contract_membrane::sha256_fingerprint(&frozen_bytes).as_str(),
-        "sha256:6993971ab59c0b6d98485b7a6eff7c06b87f8dcc350837a2cdf2ccc1cd5d6d1f"
+        "sha256:1ef07279d47e3375d8edfc7188ac90e5a8877d5f19a8a3780a6ac9c64448cc2c"
     );
 }
 
@@ -114,7 +142,7 @@ fn current_admission_reasons_preserve_owner_and_semantic_precedence() {
     );
     assert_eq!(
         row("artifact.validate").admission_reason(),
-        AdmissionReason::IncompleteClosure
+        AdmissionReason::Admitted
     );
     assert_eq!(
         row("pipeline.route.resolve").admission_reason(),
@@ -606,6 +634,60 @@ fn response_admission_rejects_receipt_idempotency_condition_and_replay_bypasses(
     );
 
     let mutation = mutation_definition();
+    let established_refusal_terminal = TerminalFields::new(
+        TerminalStatus::Refused,
+        None,
+        BoundedVec::new(Vec::new()).unwrap(),
+        BoundedVec::new(vec![problem(ProblemCategory::Precondition)]).unwrap(),
+        BoundedVec::new(Vec::new()).unwrap(),
+    )
+    .unwrap();
+    let established_refusal = OperationResponseV1::new(
+        binding("handbook.operation-response"),
+        None,
+        request_fingerprint.clone(),
+        &mutation,
+        established_refusal_terminal.clone(),
+        IdempotencyState::established(
+            handbook_sdk::contract_membrane::sha256_fingerprint(b"refusal-key"),
+            request_fingerprint.clone(),
+            false,
+            None,
+            UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap(),
+        )
+        .unwrap(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        &FixtureSchemaValidator,
+        &limits,
+    )
+    .unwrap();
+    let replayed_refusal = OperationResponseV1::new(
+        binding("handbook.operation-response"),
+        None,
+        request_fingerprint.clone(),
+        &mutation,
+        established_refusal_terminal,
+        IdempotencyState::established(
+            handbook_sdk::contract_membrane::sha256_fingerprint(b"refusal-key"),
+            request_fingerprint.clone(),
+            true,
+            Some(established_refusal.result_fingerprint().clone()),
+            UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap(),
+        )
+        .unwrap(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        BoundedVec::new(Vec::new()).unwrap(),
+        &FixtureSchemaValidator,
+        &limits,
+    )
+    .unwrap();
+    replayed_refusal
+        .verify_replay_against(&established_refusal)
+        .unwrap();
+
     assert_eq!(
         OperationResponseV1::new(
             binding("handbook.operation-response"),

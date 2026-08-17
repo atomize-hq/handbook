@@ -8,6 +8,7 @@ use handbook_engine::artifact_mutation::{
 };
 use handbook_engine::artifact_operations::ArtifactValidationLayerStatusV1;
 use handbook_engine::artifact_repository::{ArtifactRepositoryV1, ArtifactTargetV1};
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use serde_json::Value;
 use std::collections::BTreeMap;
 use std::fmt;
@@ -27,6 +28,34 @@ pub enum ArtifactDocument {
     Object(BTreeMap<String, Self>),
 }
 
+impl Serialize for ArtifactDocument {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        match self {
+            Self::Null => serializer.serialize_none(),
+            Self::Boolean(value) => value.serialize(serializer),
+            Self::Number(value) => value
+                .parse::<serde_json::Number>()
+                .map_err(serde::ser::Error::custom)?
+                .serialize(serializer),
+            Self::String(value) => value.serialize(serializer),
+            Self::Array(values) => values.serialize(serializer),
+            Self::Object(values) => values.serialize(serializer),
+        }
+    }
+}
+
+impl<'de> Deserialize<'de> for ArtifactDocument {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        Value::deserialize(deserializer).map(document)
+    }
+}
+
 /// An opaque, bounded document accepted by an artifact operation.
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct ArtifactInputDocument {
@@ -41,6 +70,10 @@ impl ArtifactInputDocument {
             ));
         }
         Ok(Self { bytes })
+    }
+
+    pub(crate) fn bytes(&self) -> &[u8] {
+        &self.bytes
     }
 }
 
@@ -71,6 +104,16 @@ impl ArtifactSdk {
         Self {
             repo_root: repo_root.as_ref().to_path_buf(),
         }
+    }
+
+    pub fn execute_operation(
+        &self,
+        request: &crate::contract_membrane::OperationRequestV1,
+    ) -> Result<
+        crate::contract_membrane::OperationResponseV1,
+        crate::contract_membrane::ContractError,
+    > {
+        crate::contract_membrane::execute_artifact_operation(&self.repo_root, request)
     }
 
     pub fn list_kinds(&self) -> Result<ArtifactKindList, ArtifactSdkError> {

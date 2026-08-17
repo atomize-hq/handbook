@@ -22,10 +22,30 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 68] = [
+const ROOTS: [(&str, &str); 93] = [
+    (
+        "handbook.artifact-operation-details@1.0.0",
+        "handbook.artifact-operation-details/1.0.0.schema.json",
+    ),
+    (
+        "handbook.artifact-recheck.repository-authority@1.0.0",
+        "handbook.artifact-recheck.repository-authority/1.0.0.schema.json",
+    ),
+    (
+        "handbook.artifact-recheck.supported-platform@1.0.0",
+        "handbook.artifact-recheck.supported-platform/1.0.0.schema.json",
+    ),
     (
         "handbook.artifact-ref@1.0.0",
         "handbook.artifact-ref/1.0.0.schema.json",
+    ),
+    (
+        "handbook.artifact-write-condition.canonical-truth@1.0.0",
+        "handbook.artifact-write-condition.canonical-truth/1.0.0.schema.json",
+    ),
+    (
+        "handbook.artifact-write-condition.semantic-record@1.0.0",
+        "handbook.artifact-write-condition.semantic-record/1.0.0.schema.json",
     ),
     (
         "handbook.bootstrap-descriptor-schema@1.0.0",
@@ -126,6 +146,86 @@ const ROOTS: [(&str, &str); 68] = [
     (
         "handbook.operation-response@1.0.0",
         "handbook.operation-response/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-candidate-append-request@1.0.0",
+        "handbook.operation.artifact-candidate-append-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-candidate-append-result@1.0.0",
+        "handbook.operation.artifact-candidate-append-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-candidate-promote-request@1.0.0",
+        "handbook.operation.artifact-candidate-promote-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-candidate-promote-result@1.0.0",
+        "handbook.operation.artifact-candidate-promote-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-candidate-validate-request@1.0.0",
+        "handbook.operation.artifact-candidate-validate-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-candidate-validate-result@1.0.0",
+        "handbook.operation.artifact-candidate-validate-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-instance-list-request@1.0.0",
+        "handbook.operation.artifact-instance-list-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-instance-list-result@1.0.0",
+        "handbook.operation.artifact-instance-list-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-kind-list-request@1.0.0",
+        "handbook.operation.artifact-kind-list-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-kind-list-result@1.0.0",
+        "handbook.operation.artifact-kind-list-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-read-request@1.0.0",
+        "handbook.operation.artifact-read-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-read-result@1.0.0",
+        "handbook.operation.artifact-read-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-validate-request@1.0.0",
+        "handbook.operation.artifact-validate-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.artifact-validate-result@1.0.0",
+        "handbook.operation.artifact-validate-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.intake-coverage-evaluate-request@1.0.0",
+        "handbook.operation.intake-coverage-evaluate-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.intake-coverage-evaluate-result@1.0.0",
+        "handbook.operation.intake-coverage-evaluate-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.intake-definition-read-request@1.0.0",
+        "handbook.operation.intake-definition-read-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.intake-definition-read-result@1.0.0",
+        "handbook.operation.intake-definition-read-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.intake-record-append-request@1.0.0",
+        "handbook.operation.intake-record-append-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.intake-record-append-result@1.0.0",
+        "handbook.operation.intake-record-append-result/1.0.0.schema.json",
     ),
     (
         "handbook.operation.posture-transition-apply-request@1.0.0",
@@ -391,7 +491,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 68);
+    assert_eq!(entries.len(), 93);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries
@@ -537,7 +637,7 @@ fn packet_three_constructor_instances_validate_against_every_new_root_shape() {
         }
         _ => panic!("expired catalog did not return a blocked restart"),
     }
-    assert_eq!(witness.capabilities().len(), 1);
+    assert_eq!(witness.capabilities().len(), 11);
 }
 
 #[test]
@@ -922,7 +1022,14 @@ fn custom_wire_forms_are_exact_and_unfingerprinted_key_material_is_absent() {
 
     for (exact_ref, relative_path) in ROOTS {
         let schema = serde_json::from_slice::<Value>(&read_schema(relative_path)).unwrap();
-        if exact_ref == "handbook.operation.posture-transition-apply-request@1.0.0" {
+        if [
+            "handbook.operation.posture-transition-apply-request@1.0.0",
+            "handbook.operation.intake-record-append-request@1.0.0",
+            "handbook.operation.artifact-candidate-append-request@1.0.0",
+            "handbook.operation.artifact-candidate-promote-request@1.0.0",
+        ]
+        .contains(&exact_ref)
+        {
             assert!(schema.to_string().contains("idempotency_key"));
         } else {
             assert_no_unfingerprinted_key_name(&schema);
@@ -1021,6 +1128,301 @@ fn packet_four_request_result_details_and_receipt_conditions_are_exact() {
             "lifecycle_transition",
             "posture_transition",
             "resulting_kernel"
+        ])
+    );
+
+    let assert_fields = |exact_ref: &str, expected: &[&str]| {
+        let schema = schema_value(exact_ref);
+        let expected = expected.iter().copied().collect::<BTreeSet<_>>();
+        assert_eq!(
+            schema["properties"]
+                .as_object()
+                .unwrap()
+                .keys()
+                .map(String::as_str)
+                .collect::<BTreeSet<_>>(),
+            expected,
+            "properties: {exact_ref}"
+        );
+        assert_eq!(
+            schema["required"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .map(|value| value.as_str().unwrap())
+                .collect::<BTreeSet<_>>(),
+            expected,
+            "required: {exact_ref}"
+        );
+    };
+    for (exact_ref, fields) in [
+        (
+            "handbook.operation.artifact-kind-list-request@1.0.0",
+            &[][..],
+        ),
+        (
+            "handbook.operation.artifact-kind-list-result@1.0.0",
+            &["kinds", "operation_id", "selection_fingerprint"][..],
+        ),
+        (
+            "handbook.operation.artifact-instance-list-request@1.0.0",
+            &[][..],
+        ),
+        (
+            "handbook.operation.artifact-instance-list-result@1.0.0",
+            &["instances", "operation_id", "selection_fingerprint"][..],
+        ),
+        (
+            "handbook.operation.artifact-read-request@1.0.0",
+            &["instance_id", "kind_ref"][..],
+        ),
+        (
+            "handbook.operation.artifact-read-result@1.0.0",
+            &[
+                "artifact_fingerprint",
+                "canonical_path",
+                "content",
+                "instance_id",
+                "kind_ref",
+                "operation_context_fingerprint",
+                "operation_id",
+            ][..],
+        ),
+        (
+            "handbook.operation.artifact-validate-request@1.0.0",
+            &["instance_id", "kind_ref"][..],
+        ),
+        (
+            "handbook.operation.artifact-validate-result@1.0.0",
+            &[
+                "artifact_fingerprint",
+                "content",
+                "layers",
+                "operation_context_fingerprint",
+                "operation_id",
+                "outcome",
+            ][..],
+        ),
+        (
+            "handbook.operation.intake-definition-read-request@1.0.0",
+            &["instance_id", "kind_ref"][..],
+        ),
+        (
+            "handbook.operation.intake-definition-read-result@1.0.0",
+            &[
+                "candidate_schema_ref",
+                "coverage",
+                "instance_id",
+                "intake_definition_fingerprint",
+                "intake_definition_ref",
+                "kind_ref",
+                "operation_id",
+            ][..],
+        ),
+        (
+            "handbook.operation.intake-coverage-evaluate-request@1.0.0",
+            &[
+                "acquisition_mode",
+                "coverage_submissions",
+                "expected_current_artifact_fingerprint",
+                "instance_id",
+                "kind_ref",
+            ][..],
+        ),
+        (
+            "handbook.operation.intake-coverage-evaluate-result@1.0.0",
+            &[
+                "acquisition_mode",
+                "basis_artifact_fingerprint",
+                "coverage_results",
+                "evaluation_fingerprint",
+                "field_sources",
+                "normalized_content",
+                "operation_context_fingerprint",
+                "outcome",
+                "schema_id",
+                "schema_version",
+            ][..],
+        ),
+        (
+            "handbook.operation.artifact-candidate-validate-request@1.0.0",
+            &[
+                "expected_current_artifact_fingerprint",
+                "instance_id",
+                "intake_record_fingerprint",
+                "intake_record_ref",
+                "kind_ref",
+            ][..],
+        ),
+        (
+            "handbook.operation.artifact-candidate-validate-result@1.0.0",
+            &[
+                "basis_artifact_fingerprint",
+                "candidate",
+                "candidate_fingerprint",
+                "candidate_ref",
+                "intake_record_fingerprint",
+                "intake_record_ref",
+                "normalized_content",
+                "normalized_content_fingerprint",
+                "normalized_content_ref",
+                "operation_context_fingerprint",
+                "operation_id",
+                "outcome",
+                "validation_result",
+                "validation_result_fingerprint",
+                "validation_result_ref",
+            ][..],
+        ),
+        (
+            "handbook.operation.intake-record-append-request@1.0.0",
+            &[
+                "acquisition_mode",
+                "coverage_submissions",
+                "expected_current_artifact_fingerprint",
+                "idempotency_key",
+                "instance_id",
+                "kind_ref",
+            ][..],
+        ),
+        (
+            "handbook.operation.artifact-candidate-append-request@1.0.0",
+            &[
+                "expected_candidate_fingerprint",
+                "idempotency_key",
+                "instance_id",
+                "intake_record_fingerprint",
+                "intake_record_ref",
+                "kind_ref",
+            ][..],
+        ),
+        (
+            "handbook.operation.artifact-candidate-promote-request@1.0.0",
+            &[
+                "candidate_fingerprint",
+                "candidate_ref",
+                "expected_current_artifact_fingerprint",
+                "idempotency_key",
+                "instance_id",
+                "kind_ref",
+                "publisher_authority",
+            ][..],
+        ),
+    ] {
+        assert_fields(exact_ref, fields);
+    }
+
+    let mutation_fields = [
+        "authoritative_outputs",
+        "internal_transaction_evidence_fingerprint",
+        "internal_transaction_evidence_ref",
+        "operation_id",
+        "outcome",
+        "refusal",
+        "request_fingerprint",
+        "result_fingerprint",
+        "schema_id",
+        "schema_version",
+        "transaction_id",
+    ];
+    for (exact_ref, operation_id, expected_authority_classes) in [
+        (
+            "handbook.operation.intake-record-append-result@1.0.0",
+            "intake.record.append",
+            &["semantic_record"][..],
+        ),
+        (
+            "handbook.operation.artifact-candidate-append-result@1.0.0",
+            "artifact.candidate.append",
+            &["semantic_record"][..],
+        ),
+        (
+            "handbook.operation.artifact-candidate-promote-result@1.0.0",
+            "artifact.candidate.promote",
+            &["canonical_truth", "semantic_record"][..],
+        ),
+    ] {
+        assert_fields(exact_ref, &mutation_fields);
+        let schema = schema_value(exact_ref);
+        assert_eq!(schema["properties"]["operation_id"]["const"], operation_id);
+        assert_eq!(
+            schema["oneOf"][0]["properties"]["authoritative_outputs"]["minItems"],
+            expected_authority_classes.len()
+        );
+        assert_eq!(
+            schema["oneOf"][0]["properties"]["authoritative_outputs"]["maxItems"],
+            expected_authority_classes.len()
+        );
+        assert_eq!(
+            schema["oneOf"][0]["properties"]["authoritative_outputs"]["prefixItems"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .map(
+                    |item| item["allOf"][1]["properties"]["authority_class"]["const"]
+                        .as_str()
+                        .unwrap()
+                )
+                .collect::<Vec<_>>(),
+            expected_authority_classes
+        );
+        assert_eq!(
+            schema["oneOf"][1]["properties"]["authoritative_outputs"]["maxItems"],
+            0
+        );
+        assert_eq!(
+            schema["$defs"]["ArtifactMutationRefusalV1"]["oneOf"]
+                .as_array()
+                .unwrap()
+                .len(),
+            7
+        );
+    }
+
+    assert_fields(
+        "handbook.artifact-operation-details@1.0.0",
+        &["cause", "detail", "mutation_result", "operation_id"],
+    );
+    for (exact_ref, authority_class) in [
+        (
+            "handbook.artifact-write-condition.canonical-truth@1.0.0",
+            "canonical_truth",
+        ),
+        (
+            "handbook.artifact-write-condition.semantic-record@1.0.0",
+            "semantic_record",
+        ),
+    ] {
+        assert_fields(
+            exact_ref,
+            &[
+                "authority_class",
+                "fingerprint",
+                "operation_id",
+                "ref",
+                "transaction_id",
+            ],
+        );
+        assert_eq!(
+            schema_value(exact_ref)["properties"]["authority_class"]["const"],
+            authority_class
+        );
+    }
+    assert_eq!(
+        schema_value("handbook.artifact-recheck.supported-platform@1.0.0")["properties"]["cause"]
+            ["enum"],
+        serde_json::json!(["unsupported_platform"])
+    );
+    assert_eq!(
+        schema_value("handbook.artifact-recheck.repository-authority@1.0.0")["properties"]["cause"]
+            ["enum"],
+        serde_json::json!([
+            "selection_unavailable",
+            "profile_unavailable",
+            "registry_unavailable",
+            "intake_source_unavailable",
+            "repository_identity_unavailable",
+            "artifact_unavailable"
         ])
     );
 }

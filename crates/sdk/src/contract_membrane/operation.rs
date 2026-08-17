@@ -764,6 +764,19 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
         .map(
             |(index, (operation_id, owner, availability, class, admission_reason))| {
                 let is_posture_apply = operation_id == "posture.transition.apply";
+                let is_artifact_operation = matches!(
+                    operation_id,
+                    "artifact.kind.list"
+                        | "artifact.instance.list"
+                        | "artifact.read"
+                        | "artifact.validate"
+                        | "intake.definition.read"
+                        | "intake.coverage.evaluate"
+                        | "intake.record.append"
+                        | "artifact.candidate.validate"
+                        | "artifact.candidate.append"
+                        | "artifact.candidate.promote"
+                );
                 OperationInventoryRow {
                     proof_ordinal: (index + 1) as u16,
                     operation_id,
@@ -772,17 +785,19 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                     owner,
                     availability,
                     class,
-                    admission_reason: if is_posture_apply {
+                    admission_reason: if is_posture_apply || is_artifact_operation {
                         AdmissionReason::Admitted
                     } else {
                         admission_reason
                     },
                     current_transports: if is_posture_apply {
                         &[OperationTransport::RustSdk]
+                    } else if is_artifact_operation {
+                        &[OperationTransport::CliJson]
                     } else {
                         &[]
                     },
-                    discovery: if is_posture_apply {
+                    discovery: if is_posture_apply || is_artifact_operation {
                         DiscoveryState::Discoverable
                     } else {
                         DiscoveryState::Omit

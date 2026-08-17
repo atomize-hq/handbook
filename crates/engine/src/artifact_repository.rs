@@ -1,7 +1,8 @@
 use crate::approver_registry_mutation::recover_complete_registry_approval_authority_locked;
 use crate::approver_registry_observation::observe_committed_approver_registry_if_present_locked;
 use crate::artifact_intake::{
-    evaluate_coverage, CoverageEvaluationOutcomeV1, CoverageEvaluationV1, CoverageInputDocumentV1,
+    evaluate_coverage, ArtifactIntakeErrorKindV1, ArtifactIntakeErrorV1,
+    CoverageEvaluationOutcomeV1, CoverageEvaluationV1, CoverageInputDocumentV1,
     CoverageSubmissionV1,
 };
 use crate::artifact_intake_registry::{
@@ -12,8 +13,8 @@ use crate::artifact_lineage_store::GenericArtifactLineageStoreV1;
 use crate::artifact_operation_context::{ArtifactOperationAuthorityV1, ArtifactOperationContextV1};
 use crate::artifact_operations::{
     list_artifact_instances, list_artifact_kinds, ArtifactInstanceListItemV1,
-    ArtifactKindListItemV1, ArtifactOperationErrorV1, ArtifactOperationServiceV1,
-    ArtifactReadResultV1, ArtifactValidationResultV1,
+    ArtifactKindListItemV1, ArtifactOperationErrorKindV1, ArtifactOperationErrorV1,
+    ArtifactOperationServiceV1, ArtifactReadResultV1, ArtifactValidationResultV1,
 };
 use crate::charter_authority_workflow::RegistryAuthorityLocks;
 use crate::stable_role_registry::read_trusted_repo_source;
@@ -147,6 +148,26 @@ pub enum ArtifactRepositoryErrorKindV1 {
     ArtifactOperation,
     IntakeEvaluation,
     StructuralValidation,
+    RequestBoundExceeded,
+    InvalidRequest,
+    StaleCurrentArtifact,
+    IntakeMissingCoverage,
+    IntakeDuplicateCoverage,
+    IntakeUnknownCoverage,
+    IntakeBlockingUnknown,
+    IntakeBlockingContradiction,
+    IntakeWrongSource,
+    IntakeMissingValue,
+    IntakeLowSpecificity,
+    IntakeLowConfidence,
+    IntakeUnsupportedMode,
+    IntakeInvalidTarget,
+    IntakeCanonicalization,
+    OperationTargetMismatch,
+    OperationCanonicalSyntax,
+    OperationStructural,
+    OperationNotApplicable,
+    OperationStaleContext,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -157,6 +178,36 @@ pub struct ArtifactRepositoryErrorV1 {
 
 impl ArtifactRepositoryErrorV1 {
     pub fn kind(&self) -> ArtifactRepositoryErrorKindV1 {
+        match self.kind {
+            ArtifactRepositoryErrorKindV1::RequestBoundExceeded
+            | ArtifactRepositoryErrorKindV1::InvalidRequest
+            | ArtifactRepositoryErrorKindV1::StaleCurrentArtifact
+            | ArtifactRepositoryErrorKindV1::IntakeMissingCoverage
+            | ArtifactRepositoryErrorKindV1::IntakeDuplicateCoverage
+            | ArtifactRepositoryErrorKindV1::IntakeUnknownCoverage
+            | ArtifactRepositoryErrorKindV1::IntakeBlockingUnknown
+            | ArtifactRepositoryErrorKindV1::IntakeBlockingContradiction
+            | ArtifactRepositoryErrorKindV1::IntakeWrongSource
+            | ArtifactRepositoryErrorKindV1::IntakeMissingValue
+            | ArtifactRepositoryErrorKindV1::IntakeLowSpecificity
+            | ArtifactRepositoryErrorKindV1::IntakeLowConfidence
+            | ArtifactRepositoryErrorKindV1::IntakeUnsupportedMode
+            | ArtifactRepositoryErrorKindV1::IntakeInvalidTarget
+            | ArtifactRepositoryErrorKindV1::IntakeCanonicalization => {
+                ArtifactRepositoryErrorKindV1::IntakeEvaluation
+            }
+            ArtifactRepositoryErrorKindV1::OperationTargetMismatch
+            | ArtifactRepositoryErrorKindV1::OperationCanonicalSyntax
+            | ArtifactRepositoryErrorKindV1::OperationStructural
+            | ArtifactRepositoryErrorKindV1::OperationNotApplicable
+            | ArtifactRepositoryErrorKindV1::OperationStaleContext => {
+                ArtifactRepositoryErrorKindV1::ArtifactOperation
+            }
+            kind => kind,
+        }
+    }
+
+    pub fn cause(&self) -> ArtifactRepositoryErrorKindV1 {
         self.kind
     }
 
@@ -459,12 +510,7 @@ impl ArtifactRepositoryV1 {
             expected_current,
             submissions,
         )
-        .map_err(|_| {
-            repository_error(
-                ArtifactRepositoryErrorKindV1::IntakeEvaluation,
-                "the supplied intake coverage did not evaluate",
-            )
-        })?;
+        .map_err(intake_evaluation_error)?;
         if evaluation.outcome == CoverageEvaluationOutcomeV1::Complete {
             self.registry
                 .validate_json(instance_id, &evaluation.normalized_content)
@@ -488,8 +534,8 @@ impl ArtifactRepositoryV1 {
         crate::artifact_intake::require_artifact_input_document_bound(input_bytes).map_err(
             |_| {
                 repository_error(
-                    ArtifactRepositoryErrorKindV1::IntakeEvaluation,
-                    "the coverage input document was not admitted",
+                    ArtifactRepositoryErrorKindV1::RequestBoundExceeded,
+                    "the coverage input document exceeds its admitted bound",
                 )
             },
         )?;
@@ -515,7 +561,7 @@ impl ArtifactRepositoryV1 {
             None | Some("absent") => None,
             Some(value) => Some(DefinitionFingerprint::parse(value).map_err(|_| {
                 repository_error(
-                    ArtifactRepositoryErrorKindV1::IntakeEvaluation,
+                    ArtifactRepositoryErrorKindV1::InvalidRequest,
                     "the expected current artifact fingerprint is invalid",
                 )
             })?),
@@ -524,16 +570,12 @@ impl ArtifactRepositoryV1 {
             && self.current_artifact_fingerprint_under_lock(target)? != expected_current
         {
             return Err(repository_error(
-                ArtifactRepositoryErrorKindV1::IntakeEvaluation,
+                ArtifactRepositoryErrorKindV1::StaleCurrentArtifact,
                 "the expected current artifact fingerprint is stale",
             ));
         }
-        let input = CoverageInputDocumentV1::from_bytes(input_bytes).map_err(|_| {
-            repository_error(
-                ArtifactRepositoryErrorKindV1::IntakeEvaluation,
-                "the coverage input document was not admitted",
-            )
-        })?;
+        let input =
+            CoverageInputDocumentV1::from_bytes(input_bytes).map_err(intake_evaluation_error)?;
         self.evaluate_intake_under_lock(
             target.kind_ref(),
             target.instance_id(),
@@ -557,7 +599,7 @@ impl ArtifactRepositoryV1 {
         let context = self.operation_context_under_lock(target.kind_ref(), target.instance_id())?;
         let reference = context.intake_definition_ref().ok_or_else(|| {
             repository_error(
-                ArtifactRepositoryErrorKindV1::ArtifactOperation,
+                ArtifactRepositoryErrorKindV1::OperationNotApplicable,
                 "the selected artifact has no intake definition",
             )
         })?;
@@ -566,7 +608,7 @@ impl ArtifactRepositoryV1 {
             .cloned()
             .ok_or_else(|| {
                 repository_error(
-                    ArtifactRepositoryErrorKindV1::ArtifactOperation,
+                    ArtifactRepositoryErrorKindV1::OperationNotApplicable,
                     "the selected intake definition is unavailable",
                 )
             })
@@ -757,11 +799,68 @@ fn intake_admission_error(_: ArtifactRegistrationErrorV1) -> ArtifactRepositoryE
     )
 }
 
-fn operation_error(_: ArtifactOperationErrorV1) -> ArtifactRepositoryErrorV1 {
-    repository_error(
-        ArtifactRepositoryErrorKindV1::ArtifactOperation,
-        "the artifact operation was refused",
-    )
+fn operation_error(error: ArtifactOperationErrorV1) -> ArtifactRepositoryErrorV1 {
+    let kind = match error.kind() {
+        ArtifactOperationErrorKindV1::TargetMismatch => {
+            ArtifactRepositoryErrorKindV1::OperationTargetMismatch
+        }
+        ArtifactOperationErrorKindV1::CanonicalSyntax => {
+            ArtifactRepositoryErrorKindV1::OperationCanonicalSyntax
+        }
+        ArtifactOperationErrorKindV1::Structural => {
+            ArtifactRepositoryErrorKindV1::OperationStructural
+        }
+        ArtifactOperationErrorKindV1::NotApplicable => {
+            ArtifactRepositoryErrorKindV1::OperationNotApplicable
+        }
+        ArtifactOperationErrorKindV1::StaleOperationContext => {
+            ArtifactRepositoryErrorKindV1::OperationStaleContext
+        }
+    };
+    repository_error(kind, error.detail())
+}
+
+fn intake_evaluation_error(error: ArtifactIntakeErrorV1) -> ArtifactRepositoryErrorV1 {
+    let kind = match error.kind() {
+        ArtifactIntakeErrorKindV1::InvalidInputDocument => {
+            ArtifactRepositoryErrorKindV1::InvalidRequest
+        }
+        ArtifactIntakeErrorKindV1::UnsupportedMode => {
+            ArtifactRepositoryErrorKindV1::IntakeUnsupportedMode
+        }
+        ArtifactIntakeErrorKindV1::MissingCoverage => {
+            ArtifactRepositoryErrorKindV1::IntakeMissingCoverage
+        }
+        ArtifactIntakeErrorKindV1::DuplicateCoverage => {
+            ArtifactRepositoryErrorKindV1::IntakeDuplicateCoverage
+        }
+        ArtifactIntakeErrorKindV1::UnknownCoverage => {
+            ArtifactRepositoryErrorKindV1::IntakeUnknownCoverage
+        }
+        ArtifactIntakeErrorKindV1::BlockingUnknown => {
+            ArtifactRepositoryErrorKindV1::IntakeBlockingUnknown
+        }
+        ArtifactIntakeErrorKindV1::BlockingContradiction => {
+            ArtifactRepositoryErrorKindV1::IntakeBlockingContradiction
+        }
+        ArtifactIntakeErrorKindV1::WrongSource => ArtifactRepositoryErrorKindV1::IntakeWrongSource,
+        ArtifactIntakeErrorKindV1::MissingValue => {
+            ArtifactRepositoryErrorKindV1::IntakeMissingValue
+        }
+        ArtifactIntakeErrorKindV1::LowSpecificity => {
+            ArtifactRepositoryErrorKindV1::IntakeLowSpecificity
+        }
+        ArtifactIntakeErrorKindV1::LowConfidence => {
+            ArtifactRepositoryErrorKindV1::IntakeLowConfidence
+        }
+        ArtifactIntakeErrorKindV1::InvalidTarget => {
+            ArtifactRepositoryErrorKindV1::IntakeInvalidTarget
+        }
+        ArtifactIntakeErrorKindV1::Canonicalization => {
+            ArtifactRepositoryErrorKindV1::IntakeCanonicalization
+        }
+    };
+    repository_error(kind, error.detail())
 }
 
 fn repository_error(

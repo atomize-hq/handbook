@@ -91,7 +91,7 @@ impl Command {
             Command::Setup(args) => setup::run(args, machine_json),
             Command::Author(args) => author::run(args, machine_json),
             Command::Approvers(args) => approvers::run(args, machine_json),
-            Command::Artifact(args) => artifact::run(args),
+            Command::Artifact(args) => artifact::run(args, machine_json),
             Command::Pipeline(args) => pipeline::run(args),
             Command::Generate(args) => generate::run(args),
             Command::Inspect(args) => inspect::run(args),

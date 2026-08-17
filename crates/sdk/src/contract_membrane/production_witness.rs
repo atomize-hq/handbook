@@ -10,7 +10,7 @@ use super::{
 use std::collections::BTreeSet;
 
 const INVENTORY_DIGEST: &str =
-    "sha256:6993971ab59c0b6d98485b7a6eff7c06b87f8dcc350837a2cdf2ccc1cd5d6d1f";
+    "sha256:1ef07279d47e3375d8edfc7188ac90e5a8877d5f19a8a3780a6ac9c64448cc2c";
 
 macro_rules! schema_asset {
     ($reference:literal, $path:literal) => {
@@ -19,10 +19,30 @@ macro_rules! schema_asset {
 }
 
 const SCHEMA_MANIFEST_BYTES: &[u8] = include_bytes!("../../schemas/manifest.json");
-const SCHEMA_ASSETS: [(&str, &[u8]); 68] = [
+const SCHEMA_ASSETS: [(&str, &[u8]); 93] = [
+    schema_asset!(
+        "handbook.artifact-operation-details@1.0.0",
+        "../../schemas/2020-12/handbook.artifact-operation-details/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.artifact-recheck.repository-authority@1.0.0",
+        "../../schemas/2020-12/handbook.artifact-recheck.repository-authority/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.artifact-recheck.supported-platform@1.0.0",
+        "../../schemas/2020-12/handbook.artifact-recheck.supported-platform/1.0.0.schema.json"
+    ),
     schema_asset!(
         "handbook.artifact-ref@1.0.0",
         "../../schemas/2020-12/handbook.artifact-ref/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.artifact-write-condition.canonical-truth@1.0.0",
+        "../../schemas/2020-12/handbook.artifact-write-condition.canonical-truth/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.artifact-write-condition.semantic-record@1.0.0",
+        "../../schemas/2020-12/handbook.artifact-write-condition.semantic-record/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.bootstrap-descriptor-schema@1.0.0",
@@ -123,6 +143,86 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 68] = [
     schema_asset!(
         "handbook.operation-response@1.0.0",
         "../../schemas/2020-12/handbook.operation-response/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-candidate-append-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-candidate-append-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-candidate-append-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-candidate-append-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-candidate-promote-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-candidate-promote-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-candidate-promote-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-candidate-promote-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-candidate-validate-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-candidate-validate-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-candidate-validate-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-candidate-validate-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-instance-list-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-instance-list-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-instance-list-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-instance-list-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-kind-list-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-kind-list-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-kind-list-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-kind-list-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-read-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-read-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-read-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-read-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-validate-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-validate-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.artifact-validate-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.artifact-validate-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.intake-coverage-evaluate-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.intake-coverage-evaluate-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.intake-coverage-evaluate-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.intake-coverage-evaluate-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.intake-definition-read-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.intake-definition-read-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.intake-definition-read-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.intake-definition-read-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.intake-record-append-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.intake-record-append-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.intake-record-append-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.intake-record-append-result/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.operation.posture-transition-apply-request@1.0.0",
@@ -347,11 +447,19 @@ impl ProductionWitness {
         let manifest = verify_schema_assets(SCHEMA_MANIFEST_BYTES, &SCHEMA_ASSETS)?;
         let owners = current_owner_entries()?;
         let profiles = current_profile_entries()?;
+        let mut capabilities = super::artifact_operation::current_artifact_capabilities()?;
+        capabilities.push(super::posture::current_posture_capability()?);
+        capabilities.sort_by(|left, right| {
+            left.operation()
+                .reference()
+                .as_str()
+                .cmp(right.operation().reference().as_str())
+        });
         Self::assemble(
             manifest,
             owners,
             profiles,
-            vec![super::posture::current_posture_capability()?],
+            capabilities,
             retention_until_utc,
         )
     }
@@ -560,7 +668,7 @@ fn verify_schema_assets(
         &ContractLimits::packet0(),
     )
     .map_err(|_| ProductionWitnessError::StaleManifest)?;
-    if manifest.len() != 68 || assets.len() != 68 || manifest.len() != assets.len() {
+    if manifest.len() != 93 || assets.len() != 93 || manifest.len() != assets.len() {
         return Err(ProductionWitnessError::ManifestCountMismatch);
     }
     let mut seen = BTreeSet::new();
@@ -607,9 +715,15 @@ fn verify_inventory() -> Result<(), ProductionWitnessError> {
             .any(|(index, row)| row.proof_ordinal() != (index + 1) as u16)
         || rows.iter().any(|row| {
             let is_posture = row.operation_ref().as_str() == super::posture::OPERATION_REF;
+            let is_artifact = super::artifact_operation::ARTIFACT_OPERATION_REFS
+                .contains(&row.operation_ref().as_str());
             if is_posture {
                 row.admission_reason() != super::AdmissionReason::Admitted
                     || row.current_transports() != [OperationTransport::RustSdk]
+                    || row.discovery() != DiscoveryState::Discoverable
+            } else if is_artifact {
+                row.admission_reason() != super::AdmissionReason::Admitted
+                    || row.current_transports() != [OperationTransport::CliJson]
                     || row.discovery() != DiscoveryState::Discoverable
             } else {
                 !row.current_transports().is_empty() || row.discovery() != DiscoveryState::Omit
@@ -813,17 +927,32 @@ mod tests {
         let witness =
             ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
                 .unwrap();
-        assert_eq!(witness.schema_manifest().len(), 68);
+        assert_eq!(witness.schema_manifest().len(), 93);
         assert_eq!(witness.owner_versions().len(), 3);
         assert_eq!(witness.profiles().len(), 3);
-        assert_eq!(witness.capabilities().len(), 1);
-        assert_eq!(
-            witness.capabilities()[0].operation().reference().as_str(),
-            super::super::posture::OPERATION_REF
-        );
+        assert_eq!(witness.capabilities().len(), 11);
+        let posture = witness
+            .capabilities()
+            .iter()
+            .find(|entry| {
+                entry.operation().reference().as_str() == super::super::posture::OPERATION_REF
+            })
+            .unwrap();
+        assert_eq!(posture.current_transports(), &[OperationTransport::RustSdk]);
+        for operation_ref in super::super::artifact_operation::ARTIFACT_OPERATION_REFS {
+            let capability = witness
+                .capabilities()
+                .iter()
+                .find(|entry| entry.operation().reference().as_str() == operation_ref)
+                .unwrap();
+            assert_eq!(
+                capability.current_transports(),
+                &[OperationTransport::CliJson]
+            );
+        }
         assert_eq!(
             witness.catalog_roots().operations().total_entries().get(),
-            1
+            11
         );
         assert_ne!(
             witness.descriptor().schema().fingerprint(),
@@ -1005,7 +1134,7 @@ mod tests {
                 &verify_schema_assets(SCHEMA_MANIFEST_BYTES, &SCHEMA_ASSETS).unwrap(),
                 &current_owner_entries().unwrap(),
             ),
-            Err(ProductionWitnessError::MissingOperationSchema)
+            Err(ProductionWitnessError::UnprovenTransport)
         );
     }
 

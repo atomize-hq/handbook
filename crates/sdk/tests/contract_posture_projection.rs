@@ -165,7 +165,7 @@ fn admitted_request_confines_the_raw_key_and_enforces_required_nullable_correlat
 }
 
 #[test]
-fn production_witness_discovers_only_the_proven_rust_posture_capability() {
+fn production_witness_retains_the_proven_rust_posture_capability() {
     let rows = operation_inventory();
     let posture = rows
         .iter()
@@ -174,18 +174,22 @@ fn production_witness_discovers_only_the_proven_rust_posture_capability() {
     assert_eq!(posture.admission_reason(), AdmissionReason::Admitted);
     assert_eq!(posture.current_transports(), &[OperationTransport::RustSdk]);
     assert_eq!(posture.discovery(), DiscoveryState::Discoverable);
-    assert!(
+    assert_eq!(
         rows.iter()
             .filter(|row| !row.current_transports().is_empty())
-            .count()
-            == 1
+            .count(),
+        11
     );
 
     let witness =
         ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
             .unwrap();
-    assert_eq!(witness.capabilities().len(), 1);
-    let capability = &witness.capabilities()[0];
+    assert_eq!(witness.capabilities().len(), 11);
+    let capability = witness
+        .capabilities()
+        .iter()
+        .find(|entry| entry.operation().reference().as_str() == "posture.transition.apply@1.0.0")
+        .unwrap();
     assert_eq!(
         capability.operation().reference().as_str(),
         "posture.transition.apply@1.0.0"

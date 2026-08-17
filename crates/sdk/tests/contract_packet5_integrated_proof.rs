@@ -41,7 +41,7 @@ fn regeneration_manifest_and_production_catalogs_close_over_one_exact_set() {
         &ContractLimits::packet0(),
     )
     .unwrap();
-    assert_eq!(manifest.len(), 68);
+    assert_eq!(manifest.len(), 93);
 
     let mut refs = BTreeSet::new();
     let mut schema_paths = BTreeSet::new();
@@ -87,18 +87,16 @@ fn regeneration_manifest_and_production_catalogs_close_over_one_exact_set() {
     );
     assert_eq!(
         witness.catalog_roots().operations().total_entries().get(),
-        1
+        11
     );
     assert_eq!(witness.catalog_roots().profiles().total_entries().get(), 3);
-    assert_eq!(witness.capabilities().len(), 1);
-    assert_eq!(
-        witness.capabilities()[0].operation().reference().as_str(),
-        "posture.transition.apply@1.0.0"
-    );
-    assert_eq!(
-        witness.capabilities()[0].current_transports(),
-        &[OperationTransport::RustSdk]
-    );
+    assert_eq!(witness.capabilities().len(), 11);
+    let posture = witness
+        .capabilities()
+        .iter()
+        .find(|entry| entry.operation().reference().as_str() == "posture.transition.apply@1.0.0")
+        .unwrap();
+    assert_eq!(posture.current_transports(), &[OperationTransport::RustSdk]);
 
     let mut paged_refs = Vec::new();
     let mut cursor = None;
@@ -187,7 +185,7 @@ fn identity_domains_and_raw_key_confinement_hold_across_the_live_seam() {
     };
     let cursor = schema_page
         .next_cursor()
-        .expect("the 68-entry catalog has a second page");
+        .expect("the 93-entry catalog has a second page");
     let receipt = WriteReceipt::new(
         bounded("packet.five.record"),
         binding("handbook.packet-five-record@1.0.0", b"packet-five-record"),
@@ -317,19 +315,34 @@ fn owner_native_evidence_inventory_and_adapter_direction_remain_independent() {
         .iter()
         .filter(|row| row.admission_reason() == AdmissionReason::Admitted)
         .collect::<Vec<_>>();
-    assert_eq!(admitted.len(), 1);
-    assert_eq!(
-        admitted[0].operation_ref().as_str(),
-        "posture.transition.apply@1.0.0"
-    );
-    assert_eq!(
-        admitted[0].current_transports(),
-        &[OperationTransport::RustSdk]
-    );
-    assert_eq!(admitted[0].discovery(), DiscoveryState::Discoverable);
-    assert!(rows.iter().filter(|row| row != &admitted[0]).all(|row| {
-        row.current_transports().is_empty() && row.discovery() == DiscoveryState::Omit
+    assert_eq!(admitted.len(), 11);
+    let cli_json = [
+        "artifact.kind.list@1.0.0",
+        "artifact.instance.list@1.0.0",
+        "artifact.read@1.0.0",
+        "artifact.validate@1.0.0",
+        "intake.definition.read@1.0.0",
+        "intake.coverage.evaluate@1.0.0",
+        "intake.record.append@1.0.0",
+        "artifact.candidate.validate@1.0.0",
+        "artifact.candidate.append@1.0.0",
+        "artifact.candidate.promote@1.0.0",
+    ];
+    assert!(admitted.iter().all(|row| {
+        row.discovery() == DiscoveryState::Discoverable
+            && if row.operation_ref().as_str() == "posture.transition.apply@1.0.0" {
+                row.current_transports() == [OperationTransport::RustSdk]
+            } else {
+                cli_json.contains(&row.operation_ref().as_str())
+                    && row.current_transports() == [OperationTransport::CliJson]
+            }
     }));
+    assert!(rows
+        .iter()
+        .filter(|row| row.admission_reason() != AdmissionReason::Admitted)
+        .all(|row| {
+            row.current_transports().is_empty() && row.discovery() == DiscoveryState::Omit
+        }));
 
     assert!(matches!(
         admit_operation_definition(&posture_transition_apply_definition().unwrap()).unwrap(),

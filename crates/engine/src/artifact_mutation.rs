@@ -30,9 +30,28 @@ pub const HCM_2_3_OWNER_SUBJECT_FINGERPRINT: &str =
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum ArtifactMutationErrorKindV1 {
     InvalidRequest,
+    RequestBoundExceeded,
     RepositoryIdentity,
     Evaluation,
     Store,
+    TargetResolution,
+    OperationNotApplicable,
+    StaleCurrentArtifact,
+    UnsafeReference,
+    UnsupportedPlatform,
+    UnsafeFilesystem,
+    RetainedStateBoundExceeded,
+    Io,
+    IdempotencyConflict,
+    IdempotencyExpired,
+    BasisMismatch,
+    InvalidRetainedState,
+    AuthorityUnavailable,
+    SelectionAdmission,
+    IntakeAdmission,
+    IntakeRecordUnavailable,
+    IntakeRecordMismatch,
+    ValidationRefusal,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -43,6 +62,37 @@ pub struct ArtifactMutationErrorV1 {
 
 impl ArtifactMutationErrorV1 {
     pub fn kind(&self) -> ArtifactMutationErrorKindV1 {
+        match self.kind {
+            ArtifactMutationErrorKindV1::RequestBoundExceeded => {
+                ArtifactMutationErrorKindV1::InvalidRequest
+            }
+            ArtifactMutationErrorKindV1::TargetResolution
+            | ArtifactMutationErrorKindV1::OperationNotApplicable
+            | ArtifactMutationErrorKindV1::StaleCurrentArtifact
+            | ArtifactMutationErrorKindV1::AuthorityUnavailable
+            | ArtifactMutationErrorKindV1::SelectionAdmission
+            | ArtifactMutationErrorKindV1::IntakeAdmission
+            | ArtifactMutationErrorKindV1::IntakeRecordUnavailable
+            | ArtifactMutationErrorKindV1::IntakeRecordMismatch
+            | ArtifactMutationErrorKindV1::ValidationRefusal => {
+                ArtifactMutationErrorKindV1::Evaluation
+            }
+            ArtifactMutationErrorKindV1::UnsafeReference
+            | ArtifactMutationErrorKindV1::UnsupportedPlatform
+            | ArtifactMutationErrorKindV1::UnsafeFilesystem
+            | ArtifactMutationErrorKindV1::RetainedStateBoundExceeded
+            | ArtifactMutationErrorKindV1::Io
+            | ArtifactMutationErrorKindV1::IdempotencyConflict
+            | ArtifactMutationErrorKindV1::IdempotencyExpired
+            | ArtifactMutationErrorKindV1::BasisMismatch
+            | ArtifactMutationErrorKindV1::InvalidRetainedState => {
+                ArtifactMutationErrorKindV1::Store
+            }
+            kind => kind,
+        }
+    }
+
+    pub fn cause(&self) -> ArtifactMutationErrorKindV1 {
         self.kind
     }
 
@@ -354,6 +404,27 @@ pub(crate) fn validate_persisted_output_authority(
 }
 
 impl ArtifactMutationServiceV1 {
+    pub fn receipt_record_ref(
+        operation_id: &str,
+        output: &GenericAuthoritativeOutputV1,
+    ) -> Option<&'static str> {
+        match (operation_id, output.authority_class) {
+            ("intake.record.append", GenericAuthorityClassV1::SemanticRecord) => {
+                Some("handbook.artifact-record.intake-record@1.0.0")
+            }
+            ("artifact.candidate.append", GenericAuthorityClassV1::SemanticRecord) => {
+                Some("handbook.artifact-record.candidate@1.0.0")
+            }
+            ("artifact.candidate.promote", GenericAuthorityClassV1::CanonicalTruth) => {
+                Some("handbook.artifact-record.canonical-artifact@1.0.0")
+            }
+            ("artifact.candidate.promote", GenericAuthorityClassV1::SemanticRecord) => {
+                Some("handbook.artifact-record.promotion-record@1.0.0")
+            }
+            _ => None,
+        }
+    }
+
     pub fn intake_append(
         repo_root: impl AsRef<Path>,
         kind_ref: &str,
@@ -447,12 +518,7 @@ impl ArtifactMutationServiceV1 {
                     require_revalidated_plan(planned, observed)
                 },
             )
-            .map_err(|error| {
-                mutation_error(
-                    ArtifactMutationErrorKindV1::Store,
-                    format!("generic lineage store refused: {}", error.detail()),
-                )
-            })
+            .map_err(store_mutation_error)
     }
 
     #[allow(clippy::too_many_arguments)]
@@ -471,12 +537,7 @@ impl ArtifactMutationServiceV1 {
         store.evaluate_committed_read_with(
             authority.repository_identity_fingerprint().as_str(),
             HCM_2_3_OWNER_SUBJECT_FINGERPRINT,
-            |error| {
-                mutation_error(
-                    ArtifactMutationErrorKindV1::Evaluation,
-                    format!("candidate validation refused: {}", error.detail()),
-                )
-            },
+            store_mutation_error,
             |intent| validate_persisted_intent_authority(repo_root, &authority, intent),
             |intent, ordinal, final_ordinal, bytes| {
                 validate_persisted_output_authority(
@@ -502,12 +563,7 @@ impl ArtifactMutationServiceV1 {
                     intake_record_fingerprint,
                     expected_current_artifact_fingerprint,
                 )
-                .map_err(|error| {
-                    mutation_error(
-                        ArtifactMutationErrorKindV1::Evaluation,
-                        format!("candidate validation refused: {}", error.detail()),
-                    )
-                })
+                .map_err(store_mutation_error)
             },
         )
     }
@@ -579,12 +635,7 @@ impl ArtifactMutationServiceV1 {
                     require_revalidated_plan(planned, observed)
                 },
             )
-            .map_err(|error| {
-                mutation_error(
-                    ArtifactMutationErrorKindV1::Store,
-                    format!("generic lineage store refused: {}", error.detail()),
-                )
-            })
+            .map_err(store_mutation_error)
     }
 
     pub fn promote(
@@ -693,12 +744,7 @@ impl ArtifactMutationServiceV1 {
                     require_revalidated_plan(planned, observed)
                 },
             )
-            .map_err(|error| {
-                mutation_error(
-                    ArtifactMutationErrorKindV1::Store,
-                    format!("generic lineage store refused: {}", error.detail()),
-                )
-            })?;
+            .map_err(store_mutation_error)?;
         if is_context_resolution
             && execution.result.outcome == "committed"
             && matches!(
@@ -719,19 +765,14 @@ impl ArtifactMutationServiceV1 {
                         "HCM publisher transition fingerprint disappeared",
                     )
                 })?;
-            store
-                .complete_hcm_publication_quarantine(
-                    transition_fingerprint,
-                    &document.candidate_ref,
-                    &document.candidate_fingerprint,
-                    &document.idempotency_key,
-                )
-                .map_err(|error| {
-                    mutation_error(
-                        ArtifactMutationErrorKindV1::Store,
-                        format!("HCM quarantine closeout refused: {}", error.detail()),
-                    )
-                })?;
+            // The public result is already established. This private closeout is recoverable on
+            // the next owner entry and cannot downgrade the public terminal or hide public writes.
+            let _ = store.complete_hcm_publication_quarantine(
+                transition_fingerprint,
+                &document.candidate_ref,
+                &document.candidate_fingerprint,
+                &document.idempotency_key,
+            );
         }
         Ok(execution)
     }
@@ -746,29 +787,46 @@ fn candidate_preview(
     intake_record_fingerprint: &str,
     expected_current_artifact_fingerprint: Option<&str>,
 ) -> Result<ArtifactCandidatePreviewV1, GenericLineageStoreErrorV1> {
-    let target = ArtifactTargetV1::parse(kind_ref, instance_id)
-        .map_err(|error| control_error(format!("target resolution failed: {error}")))?;
+    let target = ArtifactTargetV1::parse(kind_ref, instance_id).map_err(|error| {
+        lineage_cause(
+            GenericLineageStoreErrorKindV1::TargetResolution,
+            format!("target resolution failed: {error}"),
+        )
+    })?;
     let context = repository
         .operation_context_under_lock(target.kind_ref(), target.instance_id())
-        .map_err(|error| control_error(format!("operation context failed: {error}")))?;
-    let supplied_fingerprint = DefinitionFingerprint::parse(intake_record_fingerprint)
-        .map_err(|_| control_error("intake record fingerprint is invalid"))?;
+        .map_err(|error| {
+            lineage_cause(
+                GenericLineageStoreErrorKindV1::AuthorityUnavailable,
+                format!("operation context failed: {error}"),
+            )
+        })?;
+    let supplied_fingerprint =
+        DefinitionFingerprint::parse(intake_record_fingerprint).map_err(|_| {
+            lineage_cause(
+                GenericLineageStoreErrorKindV1::UnsafeReference,
+                "intake record fingerprint is invalid",
+            )
+        })?;
     let expected_intake_ref = format!(
         ".handbook/state/artifacts/{}/intake-records/intake_{}.json",
         target.instance_id().as_str(),
         fingerprint_hex(&supplied_fingerprint)
     );
     if intake_record_ref != expected_intake_ref {
-        return Err(control_error(
+        return Err(lineage_cause(
+            GenericLineageStoreErrorKindV1::UnsafeReference,
             "intake record ref does not bind the requested target and fingerprint",
         ));
     }
 
     let store = GenericArtifactLineageStoreV1::new(repository.repo_root());
-    let intake_bytes = store.read_committed_authoritative_during_evaluation(
-        intake_record_ref,
-        intake_record_fingerprint,
-    )?;
+    let intake_bytes = store
+        .read_committed_authoritative_during_evaluation(
+            intake_record_ref,
+            intake_record_fingerprint,
+        )
+        .map_err(candidate_intake_record_read_error)?;
     let intake = parse_runtime_record(
         &intake_bytes,
         "handbook.artifact-intake-record",
@@ -777,7 +835,8 @@ fn candidate_preview(
         "record_fingerprint",
         "intake",
         intake_record_fingerprint,
-    )?;
+    )
+    .map_err(candidate_intake_record_mismatch)?;
     require_exact_object_fields(
         &intake,
         &[
@@ -801,40 +860,49 @@ fn candidate_preview(
             "record_fingerprint",
         ],
         "intake record",
-    )?;
-    validate_intake_bindings(&intake, repository, &target, &context)?;
+    )
+    .map_err(candidate_intake_record_mismatch)?;
+    validate_intake_bindings(&intake, repository, &target, &context)
+        .map_err(candidate_intake_record_mismatch)?;
 
-    let basis = nullable_fingerprint_field(&intake, "basis_artifact_fingerprint")?;
+    let basis = nullable_fingerprint_field(&intake, "basis_artifact_fingerprint")
+        .map_err(candidate_intake_record_mismatch)?;
     if let Some(requested) = expected_current_artifact_fingerprint {
         let requested = if requested == "absent" {
             None
         } else {
-            Some(
-                DefinitionFingerprint::parse(requested)
-                    .map_err(|_| control_error("expected current fingerprint is invalid"))?,
-            )
+            Some(DefinitionFingerprint::parse(requested).map_err(|_| {
+                lineage_cause(
+                    GenericLineageStoreErrorKindV1::InvalidRequest,
+                    "expected current fingerprint is invalid",
+                )
+            })?)
         };
         if requested != basis {
-            return Err(control_error(
+            return Err(lineage_cause(
+                GenericLineageStoreErrorKindV1::StaleCurrentArtifact,
                 "expected current fingerprint does not match the committed intake basis",
             ));
         }
     }
     let observed = repository
         .current_artifact_fingerprint_under_lock(&target)
-        .map_err(|error| control_error(format!("current artifact observation failed: {error}")))?;
+        .map_err(candidate_repository_error)?;
     if observed != basis {
-        return Err(control_error(
+        return Err(lineage_cause(
+            GenericLineageStoreErrorKindV1::StaleCurrentArtifact,
             "the canonical artifact no longer matches the committed intake basis",
         ));
     }
 
     let definition = repository
         .intake_definition_under_lock(&target)
-        .map_err(|error| control_error(format!("intake definition failed: {error}")))?;
-    let coverage_results = array_field(&intake, "coverage_results")?;
+        .map_err(candidate_repository_error)?;
+    let coverage_results =
+        array_field(&intake, "coverage_results").map_err(candidate_intake_record_mismatch)?;
     if coverage_results.len() != definition.coverage().len() {
-        return Err(control_error(
+        return Err(lineage_cause(
+            GenericLineageStoreErrorKindV1::IntakeRecordMismatch,
             "committed intake coverage cardinality is not exact",
         ));
     }
@@ -859,43 +927,65 @@ fn candidate_preview(
                 "waiver_ref",
             ],
             "intake coverage result",
-        )?;
-        if string_field(retained, "coverage_id")? != coverage.coverage_id()
-            || string_field(retained, "applicability")? != "applicable"
-            || string_field(retained, "source_kind")? != "user_declaration"
-            || string_field(retained, "confidence")? != "high"
-            || string_field(retained, "sensitivity")? != "internal"
-            || string_field(retained, "evaluation")? != "satisfied"
-            || !array_field(retained, "evidence_refs")?.is_empty()
-            || !array_field(retained, "contradiction_refs")?.is_empty()
+        )
+        .map_err(candidate_intake_record_mismatch)?;
+        if string_field(retained, "coverage_id").map_err(candidate_intake_record_mismatch)?
+            != coverage.coverage_id()
+            || string_field(retained, "applicability").map_err(candidate_intake_record_mismatch)?
+                != "applicable"
+            || string_field(retained, "source_kind").map_err(candidate_intake_record_mismatch)?
+                != "user_declaration"
+            || string_field(retained, "confidence").map_err(candidate_intake_record_mismatch)?
+                != "high"
+            || string_field(retained, "sensitivity").map_err(candidate_intake_record_mismatch)?
+                != "internal"
+            || string_field(retained, "evaluation").map_err(candidate_intake_record_mismatch)?
+                != "satisfied"
+            || !array_field(retained, "evidence_refs")
+                .map_err(candidate_intake_record_mismatch)?
+                .is_empty()
+            || !array_field(retained, "contradiction_refs")
+                .map_err(candidate_intake_record_mismatch)?
+                .is_empty()
             || !retained.get("freshness").is_some_and(Value::is_null)
             || !retained.get("waiver_ref").is_some_and(Value::is_null)
         {
-            return Err(control_error(
+            return Err(lineage_cause(
+                GenericLineageStoreErrorKindV1::IntakeRecordMismatch,
                 "committed intake coverage is not the exact admitted satisfied form",
             ));
         }
-        let value_ref = string_field(retained, "value_ref")?;
-        let value_fingerprint = string_field(retained, "value_fingerprint")?;
-        let value_fingerprint_parsed = DefinitionFingerprint::parse(value_fingerprint)
-            .map_err(|_| control_error("intake value fingerprint is invalid"))?;
+        let value_ref =
+            string_field(retained, "value_ref").map_err(candidate_intake_record_mismatch)?;
+        let value_fingerprint = string_field(retained, "value_fingerprint")
+            .map_err(candidate_intake_record_mismatch)?;
+        let value_fingerprint_parsed =
+            DefinitionFingerprint::parse(value_fingerprint).map_err(|_| {
+                lineage_cause(
+                    GenericLineageStoreErrorKindV1::IntakeRecordMismatch,
+                    "intake value fingerprint is invalid",
+                )
+            })?;
         let expected_value_ref = format!(
             ".handbook/evidence/artifacts/{}/intake-values/value_{}.json",
             target.instance_id().as_str(),
             fingerprint_hex(&value_fingerprint_parsed)
         );
         if value_ref != expected_value_ref {
-            return Err(control_error(
+            return Err(lineage_cause(
+                GenericLineageStoreErrorKindV1::IntakeRecordMismatch,
                 "intake value ref does not bind the target and fingerprint",
             ));
         }
-        let value_bytes = store.read_committed_closure_during_evaluation(
-            intake_record_ref,
-            intake_record_fingerprint,
-            value_ref,
-            value_fingerprint,
-        )?;
-        let value = parse_jcs_lf_value(&value_bytes)?;
+        let value_bytes = store
+            .read_committed_closure_during_evaluation(
+                intake_record_ref,
+                intake_record_fingerprint,
+                value_ref,
+                value_fingerprint,
+            )
+            .map_err(candidate_intake_closure_error)?;
+        let value = parse_jcs_lf_value(&value_bytes).map_err(candidate_intake_record_mismatch)?;
         for target_path in coverage.target_paths() {
             insert_json_pointer(&mut normalized_content, target_path, value.clone())?;
             field_sources.push(json!({
@@ -911,7 +1001,12 @@ fn candidate_preview(
     repository
         .registry()
         .validate_json(target.instance_id(), &normalized_content)
-        .map_err(|_| control_error("candidate content failed structural validation"))?;
+        .map_err(|_| {
+            lineage_cause(
+                GenericLineageStoreErrorKindV1::ValidationRefusal,
+                "candidate content failed structural validation",
+            )
+        })?;
     if kind_ref == crate::context_resolution::CONTEXT_RESOLUTION_AUTHORITY_KIND_REF
         && instance_id == crate::context_resolution::CONTEXT_RESOLUTION_AUTHORITY_INSTANCE_ID
     {
@@ -919,15 +1014,24 @@ fn candidate_preview(
             repository.repo_root(),
             &normalized_content,
         )
-        .map_err(control_error)?;
+        .map_err(|error| lineage_cause(GenericLineageStoreErrorKindV1::ValidationRefusal, error))?;
     }
     let kind = repository
         .registry()
         .kind(target.kind_ref())
-        .ok_or_else(|| control_error("selected kind disappeared"))?;
+        .ok_or_else(|| {
+            lineage_cause(
+                GenericLineageStoreErrorKindV1::AuthorityUnavailable,
+                "selected kind disappeared",
+            )
+        })?;
     let normalized_content_fingerprint =
-        DefinitionFingerprint::from_json_value(&normalized_content)
-            .map_err(|_| control_error("candidate content fingerprint failed"))?;
+        DefinitionFingerprint::from_json_value(&normalized_content).map_err(|_| {
+            lineage_cause(
+                GenericLineageStoreErrorKindV1::ValidationRefusal,
+                "candidate content fingerprint failed",
+            )
+        })?;
     let normalized_content_ref = format!(
         ".handbook/evidence/artifacts/{}/content/content_{}.json",
         target.instance_id().as_str(),
@@ -1042,6 +1146,95 @@ fn candidate_preview(
     })
 }
 
+fn candidate_intake_record_read_error(
+    error: GenericLineageStoreErrorV1,
+) -> GenericLineageStoreErrorV1 {
+    let kind = match error.kind() {
+        GenericLineageStoreErrorKindV1::RetainedResultMismatch => {
+            GenericLineageStoreErrorKindV1::IntakeRecordUnavailable
+        }
+        kind => kind,
+    };
+    lineage_cause(kind, error.detail())
+}
+
+fn candidate_intake_closure_error(error: GenericLineageStoreErrorV1) -> GenericLineageStoreErrorV1 {
+    let kind = match error.kind() {
+        GenericLineageStoreErrorKindV1::UnsupportedPlatform
+        | GenericLineageStoreErrorKindV1::UnsafeFilesystem
+        | GenericLineageStoreErrorKindV1::BoundExceeded
+        | GenericLineageStoreErrorKindV1::IoFailure => error.kind(),
+        GenericLineageStoreErrorKindV1::UnsafeReference => {
+            GenericLineageStoreErrorKindV1::InvalidPlan
+        }
+        _ => GenericLineageStoreErrorKindV1::IntakeRecordMismatch,
+    };
+    lineage_cause(kind, error.detail())
+}
+
+fn candidate_intake_record_mismatch(
+    error: GenericLineageStoreErrorV1,
+) -> GenericLineageStoreErrorV1 {
+    let kind = match error.kind() {
+        GenericLineageStoreErrorKindV1::UnsupportedPlatform
+        | GenericLineageStoreErrorKindV1::UnsafeFilesystem
+        | GenericLineageStoreErrorKindV1::BoundExceeded
+        | GenericLineageStoreErrorKindV1::IoFailure
+        | GenericLineageStoreErrorKindV1::AuthorityUnavailable
+        | GenericLineageStoreErrorKindV1::SelectionAdmission
+        | GenericLineageStoreErrorKindV1::IntakeAdmission
+        | GenericLineageStoreErrorKindV1::TargetResolution
+        | GenericLineageStoreErrorKindV1::OperationNotApplicable
+        | GenericLineageStoreErrorKindV1::StaleCurrentArtifact
+        | GenericLineageStoreErrorKindV1::ValidationRefusal => error.kind(),
+        _ => GenericLineageStoreErrorKindV1::IntakeRecordMismatch,
+    };
+    lineage_cause(kind, error.detail())
+}
+
+fn candidate_repository_error(
+    error: crate::artifact_repository::ArtifactRepositoryErrorV1,
+) -> GenericLineageStoreErrorV1 {
+    use crate::artifact_repository::ArtifactRepositoryErrorKindV1 as Cause;
+    let kind = match error.cause() {
+        Cause::SelectionRead
+        | Cause::ProfileResolution
+        | Cause::ArtifactRegistryResolution
+        | Cause::IntakeSourceRead
+        | Cause::RepositoryIdentity
+        | Cause::ArtifactRead => GenericLineageStoreErrorKindV1::AuthorityUnavailable,
+        Cause::SelectionAdmission => GenericLineageStoreErrorKindV1::SelectionAdmission,
+        Cause::IntakeAdmission => GenericLineageStoreErrorKindV1::IntakeAdmission,
+        Cause::TargetResolution | Cause::OperationTargetMismatch => {
+            GenericLineageStoreErrorKindV1::TargetResolution
+        }
+        Cause::OperationNotApplicable => GenericLineageStoreErrorKindV1::OperationNotApplicable,
+        Cause::StaleCurrentArtifact | Cause::OperationStaleContext => {
+            GenericLineageStoreErrorKindV1::StaleCurrentArtifact
+        }
+        Cause::RequestBoundExceeded => GenericLineageStoreErrorKindV1::InvalidRequest,
+        Cause::StructuralValidation
+        | Cause::OperationCanonicalSyntax
+        | Cause::OperationStructural
+        | Cause::ArtifactOperation
+        | Cause::IntakeEvaluation
+        | Cause::InvalidRequest
+        | Cause::IntakeMissingCoverage
+        | Cause::IntakeDuplicateCoverage
+        | Cause::IntakeUnknownCoverage
+        | Cause::IntakeBlockingUnknown
+        | Cause::IntakeBlockingContradiction
+        | Cause::IntakeWrongSource
+        | Cause::IntakeMissingValue
+        | Cause::IntakeLowSpecificity
+        | Cause::IntakeLowConfidence
+        | Cause::IntakeUnsupportedMode
+        | Cause::IntakeInvalidTarget
+        | Cause::IntakeCanonicalization => GenericLineageStoreErrorKindV1::ValidationRefusal,
+    };
+    lineage_cause(kind, format!("candidate authority failed: {error}"))
+}
+
 fn validate_intake_bindings(
     intake: &Value,
     repository: &ArtifactRepositoryV1,
@@ -1050,11 +1243,16 @@ fn validate_intake_bindings(
 ) -> Result<(), GenericLineageStoreErrorV1> {
     let definition = repository
         .intake_definition_under_lock(target)
-        .map_err(|error| control_error(format!("intake definition failed: {error}")))?;
+        .map_err(candidate_repository_error)?;
     let kind = repository
         .registry()
         .kind(target.kind_ref())
-        .ok_or_else(|| control_error("selected kind disappeared"))?;
+        .ok_or_else(|| {
+            lineage_cause(
+                GenericLineageStoreErrorKindV1::AuthorityUnavailable,
+                "selected kind disappeared",
+            )
+        })?;
     if string_field(intake, "intake_definition_ref")? != definition.exact_ref().as_str()
         || string_field(intake, "intake_definition_fingerprint")?
             != definition.definition_fingerprint().as_str()
@@ -1268,8 +1466,12 @@ fn build_candidate_append_plan(
     instance_id: &str,
     document: &CandidateAppendDocumentV1,
 ) -> Result<GenericPlannedOutcomeV1, GenericLineageStoreErrorV1> {
-    DefinitionFingerprint::parse(&document.expected_candidate_fingerprint)
-        .map_err(|_| control_error("expected candidate fingerprint is invalid"))?;
+    DefinitionFingerprint::parse(&document.expected_candidate_fingerprint).map_err(|_| {
+        lineage_cause(
+            GenericLineageStoreErrorKindV1::InvalidRequest,
+            "expected candidate fingerprint is invalid",
+        )
+    })?;
     let preview = candidate_preview(
         repository,
         kind_ref,
@@ -1366,9 +1568,18 @@ fn build_promotion_plan(
     document: &PromotionDocumentV1,
 ) -> Result<GenericPlannedOutcomeV1, GenericLineageStoreErrorV1> {
     let candidate_fingerprint = DefinitionFingerprint::parse(&document.candidate_fingerprint)
-        .map_err(|_| control_error("candidate fingerprint is invalid"))?;
-    let target = ArtifactTargetV1::parse(kind_ref, instance_id)
-        .map_err(|error| control_error(format!("target resolution failed: {error}")))?;
+        .map_err(|_| {
+            lineage_cause(
+                GenericLineageStoreErrorKindV1::InvalidRequest,
+                "candidate fingerprint is invalid",
+            )
+        })?;
+    let target = ArtifactTargetV1::parse(kind_ref, instance_id).map_err(|error| {
+        lineage_cause(
+            GenericLineageStoreErrorKindV1::TargetResolution,
+            format!("target resolution failed: {error}"),
+        )
+    })?;
     let context = repository
         .operation_context_under_lock(target.kind_ref(), target.instance_id())
         .map_err(|error| control_error(format!("operation context failed: {error}")))?;
@@ -1378,7 +1589,8 @@ fn build_promotion_plan(
         fingerprint_hex(&candidate_fingerprint)
     );
     if document.candidate_ref != expected_candidate_ref {
-        return Err(control_error(
+        return Err(lineage_cause(
+            GenericLineageStoreErrorKindV1::UnsafeReference,
             "candidate ref does not bind the requested target and fingerprint",
         ));
     }
@@ -1445,8 +1657,12 @@ fn build_promotion_plan(
         .expected_current_artifact_fingerprint
         .as_deref()
         .map(|value| {
-            DefinitionFingerprint::parse(value)
-                .map_err(|_| control_error("expected current fingerprint is invalid"))
+            DefinitionFingerprint::parse(value).map_err(|_| {
+                lineage_cause(
+                    GenericLineageStoreErrorKindV1::InvalidRequest,
+                    "expected current fingerprint is invalid",
+                )
+            })
         })
         .transpose()?;
     let candidate_basis = preview
@@ -1895,8 +2111,12 @@ fn parse_nullable_fingerprint(
 ) -> Result<Option<DefinitionFingerprint>, GenericLineageStoreErrorV1> {
     value
         .map(|value| {
-            DefinitionFingerprint::parse(value)
-                .map_err(|_| control_error("expected current fingerprint is invalid"))
+            DefinitionFingerprint::parse(value).map_err(|_| {
+                lineage_cause(
+                    GenericLineageStoreErrorKindV1::InvalidRequest,
+                    "expected current fingerprint is invalid",
+                )
+            })
         })
         .transpose()
 }
@@ -1904,10 +2124,44 @@ fn parse_nullable_fingerprint(
 fn repository_authority_error(
     error: crate::artifact_repository::ArtifactRepositoryErrorV1,
 ) -> ArtifactMutationErrorV1 {
-    mutation_error(
-        ArtifactMutationErrorKindV1::RepositoryIdentity,
-        format!("repository authority refused: {error}"),
-    )
+    use crate::artifact_repository::ArtifactRepositoryErrorKindV1 as Cause;
+    let kind = match error.cause() {
+        Cause::SelectionRead
+        | Cause::ProfileResolution
+        | Cause::ArtifactRegistryResolution
+        | Cause::IntakeSourceRead
+        | Cause::RepositoryIdentity
+        | Cause::ArtifactRead => ArtifactMutationErrorKindV1::RepositoryIdentity,
+        Cause::SelectionAdmission => ArtifactMutationErrorKindV1::SelectionAdmission,
+        Cause::IntakeAdmission => ArtifactMutationErrorKindV1::IntakeAdmission,
+        Cause::TargetResolution | Cause::OperationTargetMismatch => {
+            ArtifactMutationErrorKindV1::TargetResolution
+        }
+        Cause::OperationNotApplicable => ArtifactMutationErrorKindV1::OperationNotApplicable,
+        Cause::StaleCurrentArtifact | Cause::OperationStaleContext => {
+            ArtifactMutationErrorKindV1::StaleCurrentArtifact
+        }
+        Cause::RequestBoundExceeded => ArtifactMutationErrorKindV1::RequestBoundExceeded,
+        Cause::StructuralValidation
+        | Cause::OperationCanonicalSyntax
+        | Cause::OperationStructural
+        | Cause::ArtifactOperation
+        | Cause::IntakeEvaluation
+        | Cause::InvalidRequest
+        | Cause::IntakeMissingCoverage
+        | Cause::IntakeDuplicateCoverage
+        | Cause::IntakeUnknownCoverage
+        | Cause::IntakeBlockingUnknown
+        | Cause::IntakeBlockingContradiction
+        | Cause::IntakeWrongSource
+        | Cause::IntakeMissingValue
+        | Cause::IntakeLowSpecificity
+        | Cause::IntakeLowConfidence
+        | Cause::IntakeUnsupportedMode
+        | Cause::IntakeInvalidTarget
+        | Cause::IntakeCanonicalization => ArtifactMutationErrorKindV1::ValidationRefusal,
+    };
+    mutation_error(kind, format!("repository authority refused: {error}"))
 }
 
 fn require_exact_fields(value: &Value, fields: &[&str]) -> Result<(), ArtifactMutationErrorV1> {
@@ -1929,7 +2183,7 @@ fn require_exact_fields(value: &Value, fields: &[&str]) -> Result<(), ArtifactMu
 fn require_mutation_input_document_bound(bytes: &[u8]) -> Result<(), ArtifactMutationErrorV1> {
     if bytes.len() > MAX_ARTIFACT_INPUT_DOCUMENT_BYTES {
         return Err(mutation_error(
-            ArtifactMutationErrorKindV1::InvalidRequest,
+            ArtifactMutationErrorKindV1::RequestBoundExceeded,
             "mutation request exceeds the 1 MiB limit",
         ));
     }
@@ -1968,6 +2222,80 @@ fn jcs_lf(value: &Value) -> Result<Vec<u8>, GenericLineageStoreErrorV1> {
 
 fn control_error(detail: impl Into<String>) -> GenericLineageStoreErrorV1 {
     GenericLineageStoreErrorV1::new(GenericLineageStoreErrorKindV1::InvalidPlan, detail)
+}
+
+fn lineage_cause(
+    kind: GenericLineageStoreErrorKindV1,
+    detail: impl Into<String>,
+) -> GenericLineageStoreErrorV1 {
+    GenericLineageStoreErrorV1::new(kind, detail)
+}
+
+fn store_mutation_error(error: GenericLineageStoreErrorV1) -> ArtifactMutationErrorV1 {
+    let kind = match error.kind() {
+        GenericLineageStoreErrorKindV1::UnsupportedPlatform => {
+            ArtifactMutationErrorKindV1::UnsupportedPlatform
+        }
+        GenericLineageStoreErrorKindV1::InvalidRequest => {
+            ArtifactMutationErrorKindV1::InvalidRequest
+        }
+        GenericLineageStoreErrorKindV1::UnsafeReference => {
+            ArtifactMutationErrorKindV1::UnsafeReference
+        }
+        GenericLineageStoreErrorKindV1::UnsafeFilesystem => {
+            ArtifactMutationErrorKindV1::UnsafeFilesystem
+        }
+        GenericLineageStoreErrorKindV1::BoundExceeded => {
+            ArtifactMutationErrorKindV1::RetainedStateBoundExceeded
+        }
+        GenericLineageStoreErrorKindV1::IoFailure => ArtifactMutationErrorKindV1::Io,
+        GenericLineageStoreErrorKindV1::IdempotencyConflict => {
+            ArtifactMutationErrorKindV1::IdempotencyConflict
+        }
+        GenericLineageStoreErrorKindV1::IdempotencyExpired => {
+            ArtifactMutationErrorKindV1::IdempotencyExpired
+        }
+        GenericLineageStoreErrorKindV1::BasisMismatch => ArtifactMutationErrorKindV1::BasisMismatch,
+        GenericLineageStoreErrorKindV1::TargetResolution => {
+            ArtifactMutationErrorKindV1::TargetResolution
+        }
+        GenericLineageStoreErrorKindV1::AuthorityUnavailable => {
+            ArtifactMutationErrorKindV1::AuthorityUnavailable
+        }
+        GenericLineageStoreErrorKindV1::SelectionAdmission => {
+            ArtifactMutationErrorKindV1::SelectionAdmission
+        }
+        GenericLineageStoreErrorKindV1::IntakeAdmission => {
+            ArtifactMutationErrorKindV1::IntakeAdmission
+        }
+        GenericLineageStoreErrorKindV1::IntakeRecordUnavailable => {
+            ArtifactMutationErrorKindV1::IntakeRecordUnavailable
+        }
+        GenericLineageStoreErrorKindV1::IntakeRecordMismatch => {
+            ArtifactMutationErrorKindV1::IntakeRecordMismatch
+        }
+        GenericLineageStoreErrorKindV1::StaleCurrentArtifact => {
+            ArtifactMutationErrorKindV1::StaleCurrentArtifact
+        }
+        GenericLineageStoreErrorKindV1::ValidationRefusal => {
+            ArtifactMutationErrorKindV1::ValidationRefusal
+        }
+        GenericLineageStoreErrorKindV1::OperationNotApplicable => {
+            ArtifactMutationErrorKindV1::OperationNotApplicable
+        }
+        GenericLineageStoreErrorKindV1::InvalidPlan
+        | GenericLineageStoreErrorKindV1::InvalidEstablishedRefusal
+        | GenericLineageStoreErrorKindV1::InvalidTransactionIntent
+        | GenericLineageStoreErrorKindV1::InvalidCommitMarker
+        | GenericLineageStoreErrorKindV1::IncompleteStaging
+        | GenericLineageStoreErrorKindV1::ConflictingTransactionState
+        | GenericLineageStoreErrorKindV1::ConflictingRefusalState
+        | GenericLineageStoreErrorKindV1::RetainedResultMismatch
+        | GenericLineageStoreErrorKindV1::InjectedFault => {
+            ArtifactMutationErrorKindV1::InvalidRetainedState
+        }
+    };
+    mutation_error(kind, error.detail())
 }
 
 fn mutation_error(
@@ -2055,5 +2383,132 @@ mod tests {
                 "operation: {operation}"
             );
         }
+    }
+
+    #[test]
+    fn candidate_boundary_maps_owner_causes_without_reading_detail_text() {
+        let missing = candidate_intake_record_read_error(lineage_cause(
+            GenericLineageStoreErrorKindV1::RetainedResultMismatch,
+            "arbitrary missing detail",
+        ));
+        assert_eq!(
+            store_mutation_error(missing).cause(),
+            ArtifactMutationErrorKindV1::IntakeRecordUnavailable
+        );
+
+        let malformed = candidate_intake_record_mismatch(lineage_cause(
+            GenericLineageStoreErrorKindV1::InvalidPlan,
+            "arbitrary malformed detail",
+        ));
+        assert_eq!(
+            store_mutation_error(malformed).cause(),
+            ArtifactMutationErrorKindV1::IntakeRecordMismatch
+        );
+
+        let nested_unsafe = candidate_intake_closure_error(lineage_cause(
+            GenericLineageStoreErrorKindV1::UnsafeReference,
+            "arbitrary nested reference detail",
+        ));
+        assert_eq!(
+            store_mutation_error(nested_unsafe).cause(),
+            ArtifactMutationErrorKindV1::InvalidRetainedState
+        );
+
+        for (owner, projected) in [
+            (
+                GenericLineageStoreErrorKindV1::UnsafeFilesystem,
+                ArtifactMutationErrorKindV1::UnsafeFilesystem,
+            ),
+            (
+                GenericLineageStoreErrorKindV1::BoundExceeded,
+                ArtifactMutationErrorKindV1::RetainedStateBoundExceeded,
+            ),
+            (
+                GenericLineageStoreErrorKindV1::IoFailure,
+                ArtifactMutationErrorKindV1::Io,
+            ),
+        ] {
+            let error = candidate_intake_closure_error(lineage_cause(owner, "arbitrary detail"));
+            assert_eq!(store_mutation_error(error).cause(), projected);
+        }
+
+        for (owner, projected) in [
+            (
+                GenericLineageStoreErrorKindV1::InvalidRequest,
+                ArtifactMutationErrorKindV1::InvalidRequest,
+            ),
+            (
+                GenericLineageStoreErrorKindV1::UnsafeReference,
+                ArtifactMutationErrorKindV1::UnsafeReference,
+            ),
+            (
+                GenericLineageStoreErrorKindV1::TargetResolution,
+                ArtifactMutationErrorKindV1::TargetResolution,
+            ),
+        ] {
+            assert_eq!(
+                store_mutation_error(lineage_cause(owner, "arbitrary caller detail")).cause(),
+                projected
+            );
+        }
+
+        for (owner, projected) in [
+            (
+                GenericLineageStoreErrorKindV1::SelectionAdmission,
+                ArtifactMutationErrorKindV1::SelectionAdmission,
+            ),
+            (
+                GenericLineageStoreErrorKindV1::IntakeAdmission,
+                ArtifactMutationErrorKindV1::IntakeAdmission,
+            ),
+        ] {
+            let error = candidate_intake_record_mismatch(lineage_cause(owner, "arbitrary detail"));
+            assert_eq!(store_mutation_error(error).cause(), projected);
+        }
+    }
+
+    #[test]
+    fn receipt_record_bindings_are_exact_owner_native_effect_truth() {
+        let output = |authority_class| GenericAuthoritativeOutputV1 {
+            authority_class,
+            relative_ref: ".handbook/public-record.json".to_owned(),
+            fingerprint: "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+                .to_owned(),
+        };
+        assert_eq!(
+            ArtifactMutationServiceV1::receipt_record_ref(
+                "intake.record.append",
+                &output(GenericAuthorityClassV1::SemanticRecord),
+            ),
+            Some("handbook.artifact-record.intake-record@1.0.0")
+        );
+        assert_eq!(
+            ArtifactMutationServiceV1::receipt_record_ref(
+                "artifact.candidate.append",
+                &output(GenericAuthorityClassV1::SemanticRecord),
+            ),
+            Some("handbook.artifact-record.candidate@1.0.0")
+        );
+        assert_eq!(
+            ArtifactMutationServiceV1::receipt_record_ref(
+                "artifact.candidate.promote",
+                &output(GenericAuthorityClassV1::CanonicalTruth),
+            ),
+            Some("handbook.artifact-record.canonical-artifact@1.0.0")
+        );
+        assert_eq!(
+            ArtifactMutationServiceV1::receipt_record_ref(
+                "artifact.candidate.promote",
+                &output(GenericAuthorityClassV1::SemanticRecord),
+            ),
+            Some("handbook.artifact-record.promotion-record@1.0.0")
+        );
+        assert_eq!(
+            ArtifactMutationServiceV1::receipt_record_ref(
+                "artifact.candidate.append",
+                &output(GenericAuthorityClassV1::SubordinateClosure),
+            ),
+            None
+        );
     }
 }

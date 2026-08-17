@@ -1,4 +1,5 @@
 mod artifact;
+mod artifact_operation;
 mod binding;
 mod bootstrap;
 mod bootstrap_envelope;
@@ -22,6 +23,12 @@ mod verification;
 
 pub use artifact::{
     ArtifactLocator, ArtifactLocatorRef, ArtifactRef, DigestAlgorithm, Sensitivity,
+};
+pub(crate) use artifact_operation::execute_artifact_operation;
+pub use artifact_operation::{
+    artifact_operation_definition, artifact_operation_definitions,
+    artifact_operation_problem_detail, artifact_operation_request,
+    render_artifact_operation_legacy, ArtifactOperationInputV1,
 };
 pub use binding::{ExactBinding, ExactRef, Fingerprint, SemVer};
 pub use bootstrap::{

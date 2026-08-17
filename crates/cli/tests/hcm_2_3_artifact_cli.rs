@@ -267,6 +267,72 @@ fn artifact_command_exposes_only_the_frozen_generic_subcommands() {
 }
 
 #[test]
+fn artifact_machine_json_is_one_clean_invocation_document_and_conflicts_with_legacy() {
+    let repo = cli_fixture();
+    let root = repo.path().to_str().unwrap();
+    let machine = handbook(&[
+        "--json",
+        "artifact",
+        "list-kinds",
+        "--repository-root",
+        root,
+    ]);
+    assert_eq!(machine.status.code(), Some(0), "{}", stderr(&machine));
+    assert!(machine.stderr.is_empty());
+    assert_eq!(machine.stdout.last(), Some(&b'\n'));
+    assert_eq!(
+        machine.stdout.iter().filter(|byte| **byte == b'\n').count(),
+        1
+    );
+    let document: serde_json::Value = serde_json::from_slice(&machine.stdout).unwrap();
+    assert_eq!(document["response_kind"], "operation");
+    assert_eq!(document["response"]["status"], "ok");
+    assert_eq!(
+        document["response"]["operation"]["ref"],
+        "artifact.kind.list@1.0.0"
+    );
+    assert_eq!(
+        document["response"]["result_schema"]["ref"],
+        "handbook.operation.artifact-kind-list-result@1.0.0"
+    );
+
+    let conflict = handbook(&[
+        "--json",
+        "artifact",
+        "list-kinds",
+        "--repository-root",
+        root,
+        "--legacy-json",
+    ]);
+    assert_eq!(conflict.status.code(), Some(2));
+    assert!(conflict.stdout.is_empty());
+}
+
+#[test]
+fn artifact_machine_refusal_has_one_document_and_no_semantic_stderr() {
+    let repo = cli_fixture();
+    fs::remove_file(repo.path().join(".handbook/profile-selection.json")).unwrap();
+    let output = handbook(&[
+        "--json",
+        "artifact",
+        "list-kinds",
+        "--repository-root",
+        repo.path().to_str().unwrap(),
+    ]);
+    assert_eq!(output.status.code(), Some(1));
+    assert!(output.stderr.is_empty());
+    assert_eq!(output.stdout.last(), Some(&b'\n'));
+    assert_eq!(
+        output.stdout.iter().filter(|byte| **byte == b'\n').count(),
+        1
+    );
+    let document: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(document["response_kind"], "operation");
+    assert_eq!(document["response"]["status"], "blocked");
+    assert_eq!(document["response"]["receipts"], serde_json::json!([]));
+}
+
+#[test]
 fn every_artifact_operation_requires_an_explicit_repository_root() {
     for command in [
         "list-kinds",
@@ -338,6 +404,63 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             .args(args)
             .output()
             .expect("run handbook at fixture root")
+    }
+
+    fn assert_success_projection_parity(root: &Path, args: &[&str], mutation: bool) {
+        let human = run_at(root, args);
+        assert_eq!(human.status.code(), Some(0), "{}", stderr(&human));
+        assert!(human.stderr.is_empty());
+        assert_eq!(human.stdout.last(), Some(&b'\n'));
+        let mut human_value: serde_json::Value = serde_json::from_slice(&human.stdout).unwrap();
+
+        let mut legacy_args = args.to_vec();
+        legacy_args.push("--legacy-json");
+        let legacy = run_at(root, &legacy_args);
+        assert_eq!(legacy.status.code(), Some(0), "{}", stderr(&legacy));
+        assert!(legacy.stderr.is_empty());
+        assert_eq!(legacy.stdout.last(), Some(&b'\n'));
+        let mut legacy_value: serde_json::Value = serde_json::from_slice(&legacy.stdout).unwrap();
+
+        let mut machine_args = vec!["--json"];
+        machine_args.extend_from_slice(args);
+        let machine = run_at(root, &machine_args);
+        assert_eq!(machine.status.code(), Some(0), "{}", stderr(&machine));
+        assert!(machine.stderr.is_empty());
+        assert_eq!(machine.stdout.last(), Some(&b'\n'));
+        let machine_value: serde_json::Value = serde_json::from_slice(&machine.stdout).unwrap();
+        assert_eq!(machine_value["response_kind"], "operation");
+        assert_eq!(machine_value["response"]["status"], "ok");
+
+        if mutation {
+            human_value
+                .as_object_mut()
+                .unwrap()
+                .remove("execution_disposition");
+            legacy_value
+                .as_object_mut()
+                .unwrap()
+                .remove("execution_disposition");
+        }
+        assert_eq!(human_value, legacy_value);
+        assert_eq!(legacy_value, machine_value["response"]["data"]);
+
+        let machine_text = String::from_utf8(machine.stdout).unwrap();
+        for raw_key in [
+            "registry_intake_00000001",
+            "registry_candidate_00000001",
+            "registry_promotion_00000001",
+        ] {
+            assert!(!machine_text.contains(raw_key));
+        }
+        for private_field in [
+            "\"idempotency_key\":",
+            "\"subordinate_outputs\":",
+            "\"staged_outputs\":",
+            "\"marker_fingerprint\":",
+            "\"journal\":",
+        ] {
+            assert!(!machine_text.contains(private_field));
+        }
     }
 
     fn run_at_with_stdin(root: &Path, args: &[&str], input: &[u8]) -> Output {
@@ -421,6 +544,11 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
         .unwrap()
         .iter()
         .any(|kind| kind["kind_ref"] == kind_ref));
+    assert_success_projection_parity(
+        repo.path(),
+        &["artifact", "list-kinds", "--repository-root", root],
+        false,
+    );
     let instances = json(run_at(
         repo.path(),
         &[
@@ -436,6 +564,11 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
         .unwrap()
         .iter()
         .any(|instance| instance["instance_id"] == instance_id));
+    assert_success_projection_parity(
+        repo.path(),
+        &["artifact", "list-instances", "--repository-root", root],
+        false,
+    );
 
     let mut current_artifact_fingerprint = None;
     for operation in ["read", "validate", "intake-definition"] {
@@ -465,6 +598,20 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             current_artifact_fingerprint =
                 result["artifact_fingerprint"].as_str().map(str::to_owned);
         }
+        assert_success_projection_parity(
+            repo.path(),
+            &[
+                "artifact",
+                operation,
+                "--repository-root",
+                root,
+                "--kind-ref",
+                kind_ref,
+                "--instance-id",
+                instance_id,
+            ],
+            false,
+        );
     }
 
     let input_path = repo.path().join("coverage-input.json");
@@ -499,7 +646,14 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
         ],
     );
     assert!(!stale_evaluation.status.success());
-    assert!(stderr(&stale_evaluation).contains("expected current"));
+    assert!(stderr(&stale_evaluation).is_empty());
+    let stale_evaluation: serde_json::Value =
+        serde_json::from_slice(&stale_evaluation.stdout).unwrap();
+    assert_eq!(stale_evaluation["cause"], "stale_current_artifact");
+    assert!(stale_evaluation["detail"]
+        .as_str()
+        .unwrap()
+        .contains("expected current"));
     let mut normalized = None;
     for mode in ["guided-adaptive", "express", "agent-assisted"] {
         let result = json(run_at(
@@ -557,6 +711,26 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
         &fs::read(&input_path).unwrap(),
     ));
     assert_eq!(stdin_evaluation["normalized_content"], normalized.unwrap());
+    assert_success_projection_parity(
+        repo.path(),
+        &[
+            "artifact",
+            "intake-evaluate",
+            "--repository-root",
+            root,
+            "--kind-ref",
+            kind_ref,
+            "--instance-id",
+            instance_id,
+            "--mode",
+            "express",
+            "--from-inputs",
+            input,
+            "--expected-current-fingerprint",
+            current_artifact_fingerprint.as_deref().unwrap(),
+        ],
+        false,
+    );
     let after_state = fs::read_dir(repo.path().join(".handbook/state"))
         .unwrap()
         .map(|entry| entry.unwrap().file_name())
@@ -612,6 +786,22 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
         ],
     ));
     assert_eq!(intake["operation_id"], "intake.record.append");
+    assert_success_projection_parity(
+        repo.path(),
+        &[
+            "artifact",
+            "intake-append",
+            "--repository-root",
+            root,
+            "--kind-ref",
+            kind_ref,
+            "--instance-id",
+            instance_id,
+            "--from-request",
+            intake_request_path.to_str().unwrap(),
+        ],
+        true,
+    );
     assert_eq!(intake["outcome"], "committed");
     assert_eq!(intake["authoritative_outputs"].as_array().unwrap().len(), 1);
     let stale_intake_request_path = repo.path().join("stale-intake-append.json");
@@ -642,8 +832,13 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
         ],
     );
     assert!(!stale_intake.status.success());
-    let stale_intake: serde_json::Value =
-        serde_json::from_slice(&stale_intake.stdout).expect("typed refusal JSON");
+    let stale_intake: serde_json::Value = serde_json::from_slice(&stale_intake.stdout)
+        .unwrap_or_else(|error| {
+            panic!(
+                "typed refusal JSON: {error}; stderr: {}",
+                String::from_utf8_lossy(&stale_intake.stderr)
+            )
+        });
     assert_eq!(stale_intake["outcome"], "refused");
     assert_eq!(stale_intake["execution_disposition"], "refused");
     assert_eq!(stale_intake["refusal"]["code"], "stale_current_artifact");
@@ -682,6 +877,38 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
         after_stale_refusal,
         snapshot_tree(&repo.path().join(".handbook")),
         "retained refusal replay changed repository state"
+    );
+    let machine_refusal = run_at(
+        repo.path(),
+        &[
+            "--json",
+            "artifact",
+            "intake-append",
+            "--repository-root",
+            root,
+            "--kind-ref",
+            kind_ref,
+            "--instance-id",
+            instance_id,
+            "--from-request",
+            stale_intake_request_path.to_str().unwrap(),
+        ],
+    );
+    assert_eq!(machine_refusal.status.code(), Some(1));
+    assert!(machine_refusal.stderr.is_empty());
+    let machine_refusal: serde_json::Value =
+        serde_json::from_slice(&machine_refusal.stdout).unwrap();
+    assert_eq!(machine_refusal["response_kind"], "operation");
+    assert_eq!(machine_refusal["response"]["status"], "refused");
+    assert_eq!(machine_refusal["response"]["idempotency"]["replayed"], true);
+    assert!(machine_refusal["response"]["receipts"]
+        .as_array()
+        .unwrap()
+        .is_empty());
+    assert!(
+        machine_refusal["response"]["refusals"][0]["details"]["mutation_result"]
+            ["internal_transaction_evidence_ref"]
+            .is_string()
     );
     let intake_output = &intake["authoritative_outputs"][0];
     let intake_record_ref = intake_output["ref"].as_str().unwrap();
@@ -749,6 +976,26 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
         .as_str()
         .unwrap()
         .starts_with("sha256:"));
+    assert_success_projection_parity(
+        repo.path(),
+        &[
+            "artifact",
+            "candidate-validate",
+            "--repository-root",
+            root,
+            "--kind-ref",
+            kind_ref,
+            "--instance-id",
+            instance_id,
+            "--intake-record-ref",
+            intake_record_ref,
+            "--intake-record-fingerprint",
+            intake_record_fingerprint,
+            "--expected-current-fingerprint",
+            current_artifact_fingerprint.as_deref().unwrap(),
+        ],
+        false,
+    );
     assert_eq!(
         before_candidate_validate,
         snapshot_tree(&repo.path().join(".handbook")),
@@ -854,6 +1101,22 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
         candidate_append["authoritative_outputs"][0]["fingerprint"],
         candidate["candidate_fingerprint"]
     );
+    assert_success_projection_parity(
+        repo.path(),
+        &[
+            "artifact",
+            "candidate-append",
+            "--repository-root",
+            root,
+            "--kind-ref",
+            kind_ref,
+            "--instance-id",
+            instance_id,
+            "--from-request",
+            candidate_request_path.to_str().unwrap(),
+        ],
+        true,
+    );
 
     let committed_candidate = &candidate_append["authoritative_outputs"][0];
     let candidate_record = retained_json(repo.path(), committed_candidate["ref"].as_str().unwrap());
@@ -928,6 +1191,22 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
     assert_eq!(
         promotion["authoritative_outputs"].as_array().unwrap().len(),
         2
+    );
+    assert_success_projection_parity(
+        repo.path(),
+        &[
+            "artifact",
+            "promote",
+            "--repository-root",
+            root,
+            "--kind-ref",
+            kind_ref,
+            "--instance-id",
+            instance_id,
+            "--from-request",
+            promote_request_path.to_str().unwrap(),
+        ],
+        true,
     );
     let promotion_record = retained_json(
         repo.path(),
@@ -1017,6 +1296,49 @@ fn actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixtur
             replay["authoritative_outputs"],
             committed["authoritative_outputs"]
         );
+        let machine = run_at(
+            repo.path(),
+            &[
+                "--json",
+                "artifact",
+                operation,
+                "--repository-root",
+                root,
+                "--kind-ref",
+                kind_ref,
+                "--instance-id",
+                instance_id,
+                "--from-request",
+                request_path.to_str().unwrap(),
+            ],
+        );
+        assert_eq!(machine.status.code(), Some(0));
+        assert!(machine.stderr.is_empty());
+        let machine: serde_json::Value = serde_json::from_slice(&machine.stdout).unwrap();
+        assert_eq!(machine["response"]["status"], "ok");
+        assert_eq!(machine["response"]["idempotency"]["replayed"], true);
+        assert_eq!(
+            machine["response"]["receipts"].as_array().unwrap().len(),
+            if operation == "promote" { 2 } else { 1 }
+        );
+        let receipt_refs = machine["response"]["receipts"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|receipt| receipt["record"]["ref"].as_str().unwrap())
+            .collect::<Vec<_>>();
+        assert_eq!(
+            receipt_refs,
+            match operation {
+                "intake-append" => vec!["handbook.artifact-record.intake-record@1.0.0"],
+                "candidate-append" => vec!["handbook.artifact-record.candidate@1.0.0"],
+                "promote" => vec![
+                    "handbook.artifact-record.canonical-artifact@1.0.0",
+                    "handbook.artifact-record.promotion-record@1.0.0",
+                ],
+                _ => unreachable!(),
+            }
+        );
     }
     let stdin_intake_replay = json(run_at_with_stdin(
         repo.path(),
@@ -1090,7 +1412,8 @@ fn actual_binary_uses_exact_exit_codes_explicit_roots_and_absent_spelling() {
         &["artifact", "list-kinds", "--repository-root", missing_root],
     );
     assert_eq!(human_refusal.status.code(), Some(1));
-    assert!(stderr(&human_refusal).contains("artifact operation refused"));
+    assert!(stdout(&human_refusal).contains("artifact operation blocked:"));
+    assert!(stderr(&human_refusal).is_empty());
 
     let absent_repo = cli_fixture();
     fs::remove_file(
@@ -1132,6 +1455,133 @@ fn actual_binary_uses_exact_exit_codes_explicit_roots_and_absent_spelling() {
     let wrong_case = evaluate("ABSENT");
     assert_eq!(wrong_case.status.code(), Some(1));
     assert!(stderr(&wrong_case).contains("fingerprint"));
+
+    let malformed = absent_repo.path().join("malformed-inputs.json");
+    fs::write(&malformed, b"{}").unwrap();
+    let decoding = cli_at(
+        outside.path(),
+        &[
+            "--json",
+            "artifact",
+            "intake-evaluate",
+            "--repository-root",
+            absent_root,
+            "--kind-ref",
+            CLI_KIND_REF,
+            "--instance-id",
+            CLI_INSTANCE_ID,
+            "--mode",
+            "express",
+            "--from-inputs",
+            malformed.to_str().unwrap(),
+        ],
+    );
+    assert_eq!(decoding.status.code(), Some(1));
+    assert!(stderr(&decoding).is_empty());
+    let decoding: serde_json::Value = serde_json::from_slice(&decoding.stdout).unwrap();
+    assert_eq!(decoding["response"]["failure_kind"], "decoding");
+    assert_eq!(
+        decoding["response"]["refusals"][0]["details"]["reason_code"],
+        "transport.artifact_input_invalid"
+    );
+}
+
+#[test]
+fn semantic_artifact_error_is_single_typed_stdout_in_every_renderer() {
+    let repo = cli_fixture();
+    let root = repo.path().to_str().unwrap();
+    let validation = successful_json(cli_at(
+        repo.path(),
+        &[
+            "artifact",
+            "validate",
+            "--repository-root",
+            root,
+            "--kind-ref",
+            CLI_KIND_REF,
+            "--instance-id",
+            CLI_INSTANCE_ID,
+            "--legacy-json",
+        ],
+    ));
+    let request = repo.path().join("error-intake.json");
+    fs::write(
+        &request,
+        serde_json::to_vec(&serde_json::json!({
+            "idempotency_key": "error_intake_0000000001",
+            "acquisition_mode": "express",
+            "expected_current_artifact_fingerprint": validation["artifact_fingerprint"],
+            "coverage_submissions": [
+                {
+                    "coverage_id": "registry_brief.title",
+                    "state": "supplied",
+                    "source_kind": "user_declaration",
+                    "value": "Error proof",
+                    "specificity": "exact",
+                    "confidence": "high",
+                    "contradiction_refs": []
+                },
+                {
+                    "coverage_id": "registry_brief.summary",
+                    "state": "supplied",
+                    "source_kind": "user_declaration",
+                    "value": "Retained-state error projection",
+                    "specificity": "concrete",
+                    "confidence": "high",
+                    "contradiction_refs": []
+                }
+            ]
+        }))
+        .unwrap(),
+    )
+    .unwrap();
+    fs::create_dir_all(
+        repo.path()
+            .join(".handbook/state/idempotency/generic-artifact-operations/unknown"),
+    )
+    .unwrap();
+    let args = [
+        "artifact",
+        "intake-append",
+        "--repository-root",
+        root,
+        "--kind-ref",
+        CLI_KIND_REF,
+        "--instance-id",
+        CLI_INSTANCE_ID,
+        "--from-request",
+        request.to_str().unwrap(),
+    ];
+
+    let human = cli_at(repo.path(), &args);
+    assert_eq!(human.status.code(), Some(1));
+    assert!(stderr(&human).is_empty());
+    assert!(stdout(&human).contains("artifact operation error:"));
+
+    let mut legacy_args = args.to_vec();
+    legacy_args.push("--legacy-json");
+    let legacy = cli_at(repo.path(), &legacy_args);
+    assert_eq!(legacy.status.code(), Some(1));
+    assert!(stderr(&legacy).is_empty());
+    let legacy: serde_json::Value = serde_json::from_slice(&legacy.stdout).unwrap();
+    assert_eq!(legacy["cause"], "invalid_retained_state");
+    assert!(legacy["mutation_result"].is_null());
+
+    let mut machine_args = vec!["--json"];
+    machine_args.extend_from_slice(&args);
+    let machine = cli_at(repo.path(), &machine_args);
+    assert_eq!(machine.status.code(), Some(1));
+    assert!(stderr(&machine).is_empty());
+    let machine: serde_json::Value = serde_json::from_slice(&machine.stdout).unwrap();
+    assert_eq!(machine["response"]["status"], "error");
+    assert_eq!(
+        machine["response"]["errors"][0]["details"]["cause"],
+        "invalid_retained_state"
+    );
+    assert!(machine["response"]["receipts"]
+        .as_array()
+        .unwrap()
+        .is_empty());
 }
 
 #[test]
@@ -1283,7 +1733,14 @@ fn actual_binary_enforces_exact_and_different_requests_under_a_tombstone() {
     };
     let exact = invoke(&fixture.candidate_request);
     assert_eq!(exact.status.code(), Some(1));
-    assert!(stderr(&exact).contains("expired"));
+    assert!(
+        stderr(&exact).is_empty(),
+        "stdout={} stderr={}",
+        stdout(&exact),
+        stderr(&exact)
+    );
+    let exact: serde_json::Value = serde_json::from_slice(&exact.stdout).unwrap();
+    assert!(exact["detail"].as_str().unwrap().contains("expired"));
 
     let different_path = fixture
         .repo
@@ -1296,7 +1753,12 @@ fn actual_binary_enforces_exact_and_different_requests_under_a_tombstone() {
     fs::write(&different_path, serde_json::to_vec(&different).unwrap()).unwrap();
     let conflict = invoke(&different_path);
     assert_eq!(conflict.status.code(), Some(1));
-    assert!(stderr(&conflict).contains("different request"));
+    assert!(stderr(&conflict).is_empty());
+    let conflict: serde_json::Value = serde_json::from_slice(&conflict.stdout).unwrap();
+    assert!(conflict["detail"]
+        .as_str()
+        .unwrap()
+        .contains("different request"));
 
     assert!(!fixture.intake_record_ref.is_empty());
     assert!(fixture.intake_record_fingerprint.starts_with("sha256:"));

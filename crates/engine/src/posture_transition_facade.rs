@@ -38,12 +38,12 @@ pub(crate) fn matches_posture_operation_claim(
     const EXPECTED: OperationAdmissionClaim<'static> = OperationAdmissionClaim {
         operation_ref: "posture.transition.apply@1.0.0",
         definition_fingerprint:
-            "sha256:49037ca77347209fec8dc10d05862fefec580a9c56af06d2cc088b5455b8b82e",
+            "sha256:eba9cc6466a4ecbae0c79d73eedd5b7648d3110685d9f66e76124310f07e76de",
         owner_crate: "handbook-engine",
         owner_version: "0.2.0",
         owner_source_ref: "handbook.owner.engine@0.2.0",
         owner_source_fingerprint:
-            "sha256:75fddddeabf8a041b18a5eeb65dc683f199cb1805170b8db99b476b86df9c2f3",
+            "sha256:99df01064d1f6a21e7db74a5746936e7af9dee784029a2850439b7ff64696e40",
         definition_schema_ref: "handbook.operation-definition@1.0.0",
         definition_schema_fingerprint:
             "sha256:e668b32cb7ef3725e4d8c53696ec9032ba0741e387436883a7d8f264602ddd09",

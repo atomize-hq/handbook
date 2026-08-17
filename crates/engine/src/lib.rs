@@ -11,6 +11,7 @@ pub mod artifact_kind_registry;
 mod artifact_lineage_store;
 pub mod artifact_manifest;
 pub mod artifact_mutation;
+mod artifact_operation_admission;
 pub mod artifact_operation_context;
 pub mod artifact_operations;
 pub mod artifact_registry;

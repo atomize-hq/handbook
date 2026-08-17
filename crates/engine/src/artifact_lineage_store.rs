@@ -232,6 +232,15 @@ pub(crate) enum GenericLineageStoreErrorKindV1 {
     ConflictingRefusalState,
     RetainedResultMismatch,
     InjectedFault,
+    TargetResolution,
+    AuthorityUnavailable,
+    SelectionAdmission,
+    IntakeAdmission,
+    IntakeRecordUnavailable,
+    IntakeRecordMismatch,
+    StaleCurrentArtifact,
+    ValidationRefusal,
+    OperationNotApplicable,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -248,8 +257,6 @@ impl GenericLineageStoreErrorV1 {
         }
     }
 
-    #[cfg(test)]
-    #[allow(dead_code)]
     pub(crate) fn kind(&self) -> GenericLineageStoreErrorKindV1 {
         self.kind
     }

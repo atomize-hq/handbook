@@ -1,5 +1,15 @@
 //! Feature-gated JSON Schema descriptions and deterministic checked-in generation.
 
+use super::artifact_operation::{
+    ArtifactAuthoritativeOutputV1, ArtifactInstanceDtoV1, ArtifactKindDtoV1,
+    ArtifactMutationRefusalV1, ArtifactMutationResultDataV1, ArtifactProblemCauseV1,
+    ArtifactProblemDetailsV1, ArtifactRecheckV1, ArtifactWriteConditionV1,
+    CandidateAppendRequestV1, CandidateValidateRequestV1, CandidateValidationResultV1,
+    CoverageDefinitionDtoV1, CoverageSubmissionDtoV1, EmptyRequestV1, InstanceListResultV1,
+    IntakeAppendRequestV1, IntakeDefinitionResultV1, IntakeEvaluateRequestV1,
+    IntakeEvaluationResultV1, KindListResultV1, PromoteRequestV1, ReadResultV1, TargetRequestV1,
+    ValidateResultV1, ValidationLayersV1,
+};
 use super::posture::REQUEST_SCHEMA_REF;
 use super::*;
 use schemars::generate::SchemaSettings;
@@ -152,6 +162,718 @@ impl_schema!(RequestId, "RequestId", |_generator| json_schema!({
     "maxLength": 128,
     "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"
 }));
+
+impl_schema!(
+    crate::artifact::ArtifactDocument,
+    "ArtifactDocument",
+    |_generator| Schema::from(true)
+);
+
+fn artifact_text(max_length: usize) -> Schema {
+    json_schema!({"type": "string", "minLength": 1, "maxLength": max_length})
+}
+
+fn artifact_fingerprint() -> Schema {
+    json_schema!({
+        "type": "string",
+        "minLength": 71,
+        "maxLength": 71,
+        "pattern": FINGERPRINT_PATTERN
+    })
+}
+
+fn artifact_target_properties() -> Vec<(&'static str, Schema)> {
+    vec![
+        (
+            "kind_ref",
+            json_schema!({
+                "type": "string", "minLength": 7, "maxLength": 511,
+                "pattern": EXACT_REF_PATTERN
+            }),
+        ),
+        ("instance_id", artifact_text(255)),
+    ]
+}
+
+impl_schema!(EmptyRequestV1, "ArtifactEmptyRequestV1", |_generator| {
+    closed_object(Vec::new(), &[])
+});
+
+impl_schema!(TargetRequestV1, "ArtifactTargetRequestV1", |_generator| {
+    closed_object(artifact_target_properties(), &["kind_ref", "instance_id"])
+});
+
+impl_schema!(
+    CoverageSubmissionDtoV1,
+    "CoverageSubmissionDtoV1",
+    |generator| {
+        closed_object(
+            vec![
+                ("coverage_id", artifact_text(256)),
+                (
+                    "state",
+                    string_enum(&["supplied", "known_unknown", "contradicted"]),
+                ),
+                (
+                    "source_kind",
+                    string_enum(&["user_declaration", "evidence", "inferred", "defaulted"]),
+                ),
+                (
+                    "value",
+                    nullable::<crate::artifact::ArtifactDocument>(generator),
+                ),
+                (
+                    "specificity",
+                    string_enum(&["general", "concrete", "exact"]),
+                ),
+                ("confidence", string_enum(&["low", "medium", "high"])),
+                (
+                    "contradiction_refs",
+                    json_schema!({
+                        "type": "array", "maxItems": 128,
+                        "items": artifact_text(1024)
+                    }),
+                ),
+            ],
+            &[
+                "coverage_id",
+                "state",
+                "source_kind",
+                "value",
+                "specificity",
+                "confidence",
+                "contradiction_refs",
+            ],
+        )
+    }
+);
+
+impl_schema!(
+    IntakeEvaluateRequestV1,
+    "IntakeEvaluateRequestV1",
+    |generator| {
+        let mut properties = artifact_target_properties();
+        properties.extend([
+            (
+                "acquisition_mode",
+                string_enum(&["guided_adaptive", "express", "agent_assisted"]),
+            ),
+            (
+                "expected_current_artifact_fingerprint",
+                nullable::<Fingerprint>(generator),
+            ),
+            (
+                "coverage_submissions",
+                json_schema!({
+                    "type": "array", "maxItems": 128,
+                    "items": generator.subschema_for::<CoverageSubmissionDtoV1>()
+                }),
+            ),
+        ]);
+        closed_object(
+            properties,
+            &[
+                "kind_ref",
+                "instance_id",
+                "acquisition_mode",
+                "expected_current_artifact_fingerprint",
+                "coverage_submissions",
+            ],
+        )
+    }
+);
+
+impl_schema!(
+    IntakeAppendRequestV1,
+    "IntakeAppendRequestV1",
+    |generator| {
+        let mut properties = artifact_target_properties();
+        properties.extend([
+        ("acquisition_mode", string_enum(&["guided_adaptive", "express", "agent_assisted"])),
+        ("expected_current_artifact_fingerprint", nullable::<Fingerprint>(generator)),
+        ("coverage_submissions", json_schema!({
+            "type": "array", "maxItems": 128,
+            "items": generator.subschema_for::<CoverageSubmissionDtoV1>()
+        })),
+        ("idempotency_key", json_schema!({"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[!-~]+$"})),
+    ]);
+        closed_object(
+            properties,
+            &[
+                "kind_ref",
+                "instance_id",
+                "acquisition_mode",
+                "expected_current_artifact_fingerprint",
+                "coverage_submissions",
+                "idempotency_key",
+            ],
+        )
+    }
+);
+
+impl_schema!(
+    CandidateValidateRequestV1,
+    "CandidateValidateRequestV1",
+    |generator| {
+        let mut properties = artifact_target_properties();
+        properties.extend([
+            ("intake_record_ref", artifact_text(1024)),
+            ("intake_record_fingerprint", artifact_fingerprint()),
+            (
+                "expected_current_artifact_fingerprint",
+                nullable::<Fingerprint>(generator),
+            ),
+        ]);
+        closed_object(
+            properties,
+            &[
+                "kind_ref",
+                "instance_id",
+                "intake_record_ref",
+                "intake_record_fingerprint",
+                "expected_current_artifact_fingerprint",
+            ],
+        )
+    }
+);
+
+impl_schema!(
+    CandidateAppendRequestV1,
+    "CandidateAppendRequestV1",
+    |_generator| {
+        let mut properties = artifact_target_properties();
+        properties.extend([
+        ("intake_record_ref", artifact_text(1024)),
+        ("intake_record_fingerprint", artifact_fingerprint()),
+        ("expected_candidate_fingerprint", artifact_fingerprint()),
+        ("idempotency_key", json_schema!({"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[!-~]+$"})),
+    ]);
+        closed_object(
+            properties,
+            &[
+                "kind_ref",
+                "instance_id",
+                "intake_record_ref",
+                "intake_record_fingerprint",
+                "expected_candidate_fingerprint",
+                "idempotency_key",
+            ],
+        )
+    }
+);
+
+impl_schema!(PromoteRequestV1, "PromoteRequestV1", |generator| {
+    let mut properties = artifact_target_properties();
+    properties.extend([
+        ("candidate_ref", artifact_text(1024)),
+        ("candidate_fingerprint", artifact_fingerprint()),
+        ("expected_current_artifact_fingerprint", nullable::<Fingerprint>(generator)),
+        ("publisher_authority", nullable::<crate::artifact::ArtifactDocument>(generator)),
+        ("idempotency_key", json_schema!({"type": "string", "minLength": 1, "maxLength": 256, "pattern": "^[!-~]+$"})),
+    ]);
+    closed_object(
+        properties,
+        &[
+            "kind_ref",
+            "instance_id",
+            "candidate_ref",
+            "candidate_fingerprint",
+            "expected_current_artifact_fingerprint",
+            "publisher_authority",
+            "idempotency_key",
+        ],
+    )
+});
+
+impl_schema!(ArtifactKindDtoV1, "ArtifactKindDtoV1", |_generator| {
+    closed_object(
+        vec![
+            ("kind_ref", artifact_text(511)),
+            ("definition_fingerprint", artifact_fingerprint()),
+            ("schema_ref", artifact_text(511)),
+        ],
+        &["kind_ref", "definition_fingerprint", "schema_ref"],
+    )
+});
+
+impl_schema!(KindListResultV1, "KindListResultV1", |generator| {
+    closed_object(
+        vec![
+            (
+                "operation_id",
+                json_schema!({"const": "artifact.kind.list"}),
+            ),
+            ("selection_fingerprint", artifact_fingerprint()),
+            (
+                "kinds",
+                json_schema!({"type": "array", "maxItems": 128, "items": generator.subschema_for::<ArtifactKindDtoV1>()}),
+            ),
+        ],
+        &["operation_id", "selection_fingerprint", "kinds"],
+    )
+});
+
+impl_schema!(
+    ArtifactInstanceDtoV1,
+    "ArtifactInstanceDtoV1",
+    |generator| closed_object(
+        vec![
+            ("instance_id", artifact_text(255)),
+            ("kind_ref", artifact_text(511)),
+            ("canonical_path", artifact_text(4096)),
+            (
+                "intake_definition_ref",
+                nullable::<BoundedString<511>>(generator)
+            ),
+        ],
+        &[
+            "instance_id",
+            "kind_ref",
+            "canonical_path",
+            "intake_definition_ref"
+        ],
+    )
+);
+
+impl_schema!(InstanceListResultV1, "InstanceListResultV1", |generator| {
+    closed_object(
+        vec![
+            (
+                "operation_id",
+                json_schema!({"const": "artifact.instance.list"}),
+            ),
+            ("selection_fingerprint", artifact_fingerprint()),
+            (
+                "instances",
+                json_schema!({"type": "array", "maxItems": 128, "items": generator.subschema_for::<ArtifactInstanceDtoV1>()}),
+            ),
+        ],
+        &["operation_id", "selection_fingerprint", "instances"],
+    )
+});
+
+impl_schema!(ReadResultV1, "ReadResultV1", |generator| closed_object(
+    vec![
+        ("operation_id", json_schema!({"const": "artifact.read"})),
+        ("operation_context_fingerprint", artifact_fingerprint()),
+        ("kind_ref", artifact_text(511)),
+        ("instance_id", artifact_text(255)),
+        ("canonical_path", artifact_text(4096)),
+        ("artifact_fingerprint", artifact_fingerprint()),
+        (
+            "content",
+            generator.subschema_for::<crate::artifact::ArtifactDocument>()
+        ),
+    ],
+    &[
+        "operation_id",
+        "operation_context_fingerprint",
+        "kind_ref",
+        "instance_id",
+        "canonical_path",
+        "artifact_fingerprint",
+        "content"
+    ],
+));
+
+impl_schema!(ValidationLayersV1, "ValidationLayersV1", |_generator| {
+    let layer = || string_enum(&["pass", "not_applicable"]);
+    closed_object(
+        vec![
+            ("structural", layer()),
+            ("semantic", layer()),
+            ("intake", layer()),
+            ("approval", layer()),
+            ("external_evidence", layer()),
+        ],
+        &[
+            "structural",
+            "semantic",
+            "intake",
+            "approval",
+            "external_evidence",
+        ],
+    )
+});
+
+impl_schema!(ValidateResultV1, "ValidateResultV1", |generator| {
+    closed_object(
+        vec![
+            ("operation_id", json_schema!({"const": "artifact.validate"})),
+            ("operation_context_fingerprint", artifact_fingerprint()),
+            ("artifact_fingerprint", artifact_fingerprint()),
+            ("outcome", json_schema!({"const": "valid"})),
+            (
+                "content",
+                generator.subschema_for::<crate::artifact::ArtifactDocument>(),
+            ),
+            ("layers", generator.subschema_for::<ValidationLayersV1>()),
+        ],
+        &[
+            "operation_id",
+            "operation_context_fingerprint",
+            "artifact_fingerprint",
+            "outcome",
+            "content",
+            "layers",
+        ],
+    )
+});
+
+impl_schema!(
+    CoverageDefinitionDtoV1,
+    "CoverageDefinitionDtoV1",
+    |_generator| closed_object(
+        vec![
+            ("coverage_id", artifact_text(256)),
+            (
+                "target_paths",
+                json_schema!({"type": "array", "maxItems": 128, "items": artifact_text(255)})
+            ),
+            ("minimum_specificity", string_enum(&["concrete", "exact"])),
+        ],
+        &["coverage_id", "target_paths", "minimum_specificity"],
+    )
+);
+
+impl_schema!(
+    IntakeDefinitionResultV1,
+    "IntakeDefinitionResultV1",
+    |generator| closed_object(
+        vec![
+            (
+                "operation_id",
+                json_schema!({"const": "intake.definition.read"})
+            ),
+            ("kind_ref", artifact_text(511)),
+            ("instance_id", artifact_text(255)),
+            ("intake_definition_ref", artifact_text(511)),
+            ("intake_definition_fingerprint", artifact_fingerprint()),
+            ("candidate_schema_ref", artifact_text(511)),
+            (
+                "coverage",
+                json_schema!({"type": "array", "maxItems": 128, "items": generator.subschema_for::<CoverageDefinitionDtoV1>()})
+            ),
+        ],
+        &[
+            "operation_id",
+            "kind_ref",
+            "instance_id",
+            "intake_definition_ref",
+            "intake_definition_fingerprint",
+            "candidate_schema_ref",
+            "coverage"
+        ],
+    )
+);
+
+impl_schema!(
+    IntakeEvaluationResultV1,
+    "IntakeEvaluationResultV1",
+    |generator| closed_object(
+        vec![
+            (
+                "schema_id",
+                json_schema!({"const": "handbook.intake-coverage-evaluation"})
+            ),
+            ("schema_version", json_schema!({"const": "1.0"})),
+            ("operation_context_fingerprint", artifact_fingerprint()),
+            (
+                "acquisition_mode",
+                string_enum(&["guided_adaptive", "express", "agent_assisted"])
+            ),
+            (
+                "basis_artifact_fingerprint",
+                nullable::<Fingerprint>(generator)
+            ),
+            (
+                "coverage_results",
+                json_schema!({"type": "array", "maxItems": 128, "items": generator.subschema_for::<crate::artifact::ArtifactDocument>()})
+            ),
+            (
+                "normalized_content",
+                generator.subschema_for::<crate::artifact::ArtifactDocument>()
+            ),
+            (
+                "field_sources",
+                json_schema!({"type": "array", "maxItems": 128, "items": generator.subschema_for::<crate::artifact::ArtifactDocument>()})
+            ),
+            ("outcome", string_enum(&["complete", "blocked"])),
+            ("evaluation_fingerprint", artifact_fingerprint()),
+        ],
+        &[
+            "schema_id",
+            "schema_version",
+            "operation_context_fingerprint",
+            "acquisition_mode",
+            "basis_artifact_fingerprint",
+            "coverage_results",
+            "normalized_content",
+            "field_sources",
+            "outcome",
+            "evaluation_fingerprint"
+        ],
+    )
+);
+
+impl_schema!(
+    CandidateValidationResultV1,
+    "CandidateValidationResultV1",
+    |generator| closed_object(
+        vec![
+            (
+                "operation_id",
+                json_schema!({"const": "artifact.candidate.validate"})
+            ),
+            ("outcome", json_schema!({"const": "valid"})),
+            ("operation_context_fingerprint", artifact_fingerprint()),
+            ("intake_record_ref", artifact_text(1024)),
+            ("intake_record_fingerprint", artifact_fingerprint()),
+            (
+                "basis_artifact_fingerprint",
+                nullable::<Fingerprint>(generator)
+            ),
+            (
+                "normalized_content",
+                generator.subschema_for::<crate::artifact::ArtifactDocument>()
+            ),
+            ("normalized_content_ref", artifact_text(1024)),
+            ("normalized_content_fingerprint", artifact_fingerprint()),
+            (
+                "validation_result",
+                generator.subschema_for::<crate::artifact::ArtifactDocument>()
+            ),
+            ("validation_result_ref", artifact_text(1024)),
+            ("validation_result_fingerprint", artifact_fingerprint()),
+            (
+                "candidate",
+                generator.subschema_for::<crate::artifact::ArtifactDocument>()
+            ),
+            ("candidate_ref", artifact_text(1024)),
+            ("candidate_fingerprint", artifact_fingerprint()),
+        ],
+        &[
+            "operation_id",
+            "outcome",
+            "operation_context_fingerprint",
+            "intake_record_ref",
+            "intake_record_fingerprint",
+            "basis_artifact_fingerprint",
+            "normalized_content",
+            "normalized_content_ref",
+            "normalized_content_fingerprint",
+            "validation_result",
+            "validation_result_ref",
+            "validation_result_fingerprint",
+            "candidate",
+            "candidate_ref",
+            "candidate_fingerprint"
+        ],
+    )
+);
+
+impl_schema!(
+    ArtifactMutationRefusalV1,
+    "ArtifactMutationRefusalV1",
+    |generator| {
+        let mut schema = closed_object(
+            vec![
+                (
+                    "code",
+                    string_enum(&[
+                        "canonical_syntax_invalid",
+                        "structural_validation_failed",
+                        "intake_coverage_blocked",
+                        "stale_basis",
+                        "stale_current_artifact",
+                        "operation_ineligible",
+                        "publication_basis_conflict",
+                    ]),
+                ),
+                (
+                    "layer",
+                    string_enum(&[
+                        "canonical_syntax",
+                        "structural",
+                        "intake",
+                        "currentness",
+                        "eligibility",
+                        "publication",
+                    ]),
+                ),
+                ("expected_fingerprint", nullable::<Fingerprint>(generator)),
+                ("observed_fingerprint", nullable::<Fingerprint>(generator)),
+            ],
+            &[
+                "code",
+                "layer",
+                "expected_fingerprint",
+                "observed_fingerprint",
+            ],
+        );
+        schema.insert(
+            "oneOf".to_owned(),
+            serde_json::json!([
+                {"properties": {"code": {"const": "canonical_syntax_invalid"}, "layer": {"const": "canonical_syntax"}}},
+                {"properties": {"code": {"const": "structural_validation_failed"}, "layer": {"const": "structural"}}},
+                {"properties": {"code": {"const": "intake_coverage_blocked"}, "layer": {"const": "intake"}}},
+                {"properties": {"code": {"const": "stale_basis"}, "layer": {"const": "currentness"}}},
+                {"properties": {"code": {"const": "stale_current_artifact"}, "layer": {"const": "currentness"}}},
+                {"properties": {"code": {"const": "operation_ineligible"}, "layer": {"const": "eligibility"}}},
+                {"properties": {"code": {"const": "publication_basis_conflict"}, "layer": {"const": "publication"}}}
+            ]),
+        );
+        schema
+    }
+);
+
+impl_schema!(
+    ArtifactAuthoritativeOutputV1,
+    "ArtifactAuthoritativeOutputV1",
+    |_generator| closed_object(
+        vec![
+            (
+                "authority_class",
+                string_enum(&["semantic_record", "canonical_truth"])
+            ),
+            ("ref", artifact_text(1024)),
+            ("fingerprint", artifact_fingerprint()),
+        ],
+        &["authority_class", "ref", "fingerprint"],
+    )
+);
+
+impl_schema!(
+    ArtifactMutationResultDataV1,
+    "ArtifactMutationResultDataV1",
+    |generator| closed_object(
+        vec![
+            (
+                "schema_id",
+                json_schema!({"const": "handbook.generic-domain-mutation-result"})
+            ),
+            ("schema_version", json_schema!({"const": "1.0"})),
+            (
+                "operation_id",
+                string_enum(&[
+                    "intake.record.append",
+                    "artifact.candidate.append",
+                    "artifact.candidate.promote"
+                ])
+            ),
+            ("transaction_id", artifact_text(255)),
+            ("request_fingerprint", artifact_fingerprint()),
+            ("outcome", string_enum(&["committed", "refused"])),
+            ("refusal", nullable::<ArtifactMutationRefusalV1>(generator)),
+            (
+                "authoritative_outputs",
+                json_schema!({"type": "array", "maxItems": 2, "items": generator.subschema_for::<ArtifactAuthoritativeOutputV1>()})
+            ),
+            ("internal_transaction_evidence_ref", artifact_text(1024)),
+            (
+                "internal_transaction_evidence_fingerprint",
+                artifact_fingerprint()
+            ),
+            ("result_fingerprint", artifact_fingerprint()),
+        ],
+        &[
+            "schema_id",
+            "schema_version",
+            "operation_id",
+            "transaction_id",
+            "request_fingerprint",
+            "outcome",
+            "refusal",
+            "authoritative_outputs",
+            "internal_transaction_evidence_ref",
+            "internal_transaction_evidence_fingerprint",
+            "result_fingerprint"
+        ],
+    )
+);
+
+impl_schema!(
+    ArtifactProblemCauseV1,
+    "ArtifactProblemCauseV1",
+    |_generator| string_enum(&[
+        "selection_unavailable",
+        "profile_unavailable",
+        "registry_unavailable",
+        "intake_source_unavailable",
+        "repository_identity_unavailable",
+        "artifact_unavailable",
+        "unsupported_platform",
+        "selection_admission",
+        "intake_admission",
+        "canonical_syntax",
+        "structural_validation",
+        "invalid_request",
+        "target_resolution",
+        "not_applicable",
+        "stale_operation_context",
+        "stale_current_artifact",
+        "stale_basis",
+        "idempotency_conflict",
+        "idempotency_expired",
+        "unsafe_reference",
+        "request_bound_exceeded",
+        "unsafe_filesystem",
+        "retained_state_bound_exceeded",
+        "io",
+        "invalid_retained_state"
+    ])
+);
+
+impl_schema!(
+    ArtifactProblemDetailsV1,
+    "ArtifactProblemDetailsV1",
+    |generator| closed_object(
+        vec![
+            ("operation_id", artifact_text(255)),
+            ("cause", generator.subschema_for::<ArtifactProblemCauseV1>()),
+            ("detail", artifact_text(4096)),
+            (
+                "mutation_result",
+                nullable::<ArtifactMutationResultDataV1>(generator)
+            ),
+        ],
+        &["operation_id", "cause", "detail", "mutation_result"],
+    )
+);
+
+impl_schema!(ArtifactRecheckV1, "ArtifactRecheckV1", |generator| {
+    closed_object(
+        vec![
+            ("operation_id", artifact_text(255)),
+            ("cause", generator.subschema_for::<ArtifactProblemCauseV1>()),
+        ],
+        &["operation_id", "cause"],
+    )
+});
+
+impl_schema!(
+    ArtifactWriteConditionV1,
+    "ArtifactWriteConditionV1",
+    |_generator| closed_object(
+        vec![
+            ("operation_id", artifact_text(255)),
+            ("transaction_id", artifact_text(255)),
+            (
+                "authority_class",
+                string_enum(&["semantic_record", "canonical_truth"])
+            ),
+            ("ref", artifact_text(1024)),
+            ("fingerprint", artifact_fingerprint()),
+        ],
+        &[
+            "operation_id",
+            "transaction_id",
+            "authority_class",
+            "ref",
+            "fingerprint"
+        ],
+    )
+);
 
 impl_schema!(JsonPointer, "JsonPointer", |_generator| json_schema!({
     "type": "string",
@@ -3649,10 +4371,34 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 68] = [
+const INVENTORY: [SchemaDescriptor; 93] = [
+    descriptor::<ArtifactProblemDetailsV1>(
+        "handbook.artifact-operation-details@1.0.0",
+        "handbook.artifact-operation-details/1.0.0.schema.json",
+    ),
+    exact_descriptor(
+        "handbook.artifact-recheck.repository-authority@1.0.0",
+        "handbook.artifact-recheck.repository-authority/1.0.0.schema.json",
+        artifact_repository_recheck_schema,
+    ),
+    exact_descriptor(
+        "handbook.artifact-recheck.supported-platform@1.0.0",
+        "handbook.artifact-recheck.supported-platform/1.0.0.schema.json",
+        artifact_platform_recheck_schema,
+    ),
     descriptor::<ArtifactRef>(
         "handbook.artifact-ref@1.0.0",
         "handbook.artifact-ref/1.0.0.schema.json",
+    ),
+    exact_descriptor(
+        "handbook.artifact-write-condition.canonical-truth@1.0.0",
+        "handbook.artifact-write-condition.canonical-truth/1.0.0.schema.json",
+        artifact_canonical_condition_schema,
+    ),
+    exact_descriptor(
+        "handbook.artifact-write-condition.semantic-record@1.0.0",
+        "handbook.artifact-write-condition.semantic-record/1.0.0.schema.json",
+        artifact_semantic_condition_schema,
     ),
     descriptor::<BootstrapDescriptorV1>(
         "handbook.bootstrap-descriptor-schema@1.0.0",
@@ -3753,6 +4499,89 @@ const INVENTORY: [SchemaDescriptor; 68] = [
     descriptor::<OperationResponseV1>(
         "handbook.operation-response@1.0.0",
         "handbook.operation-response/1.0.0.schema.json",
+    ),
+    descriptor::<CandidateAppendRequestV1>(
+        "handbook.operation.artifact-candidate-append-request@1.0.0",
+        "handbook.operation.artifact-candidate-append-request/1.0.0.schema.json",
+    ),
+    mutation_result_descriptor(
+        "handbook.operation.artifact-candidate-append-result@1.0.0",
+        "handbook.operation.artifact-candidate-append-result/1.0.0.schema.json",
+        artifact_candidate_append_result_schema,
+    ),
+    descriptor::<PromoteRequestV1>(
+        "handbook.operation.artifact-candidate-promote-request@1.0.0",
+        "handbook.operation.artifact-candidate-promote-request/1.0.0.schema.json",
+    ),
+    mutation_result_descriptor(
+        "handbook.operation.artifact-candidate-promote-result@1.0.0",
+        "handbook.operation.artifact-candidate-promote-result/1.0.0.schema.json",
+        artifact_candidate_promote_result_schema,
+    ),
+    descriptor::<CandidateValidateRequestV1>(
+        "handbook.operation.artifact-candidate-validate-request@1.0.0",
+        "handbook.operation.artifact-candidate-validate-request/1.0.0.schema.json",
+    ),
+    descriptor::<CandidateValidationResultV1>(
+        "handbook.operation.artifact-candidate-validate-result@1.0.0",
+        "handbook.operation.artifact-candidate-validate-result/1.0.0.schema.json",
+    ),
+    descriptor::<EmptyRequestV1>(
+        "handbook.operation.artifact-instance-list-request@1.0.0",
+        "handbook.operation.artifact-instance-list-request/1.0.0.schema.json",
+    ),
+    descriptor::<InstanceListResultV1>(
+        "handbook.operation.artifact-instance-list-result@1.0.0",
+        "handbook.operation.artifact-instance-list-result/1.0.0.schema.json",
+    ),
+    descriptor::<EmptyRequestV1>(
+        "handbook.operation.artifact-kind-list-request@1.0.0",
+        "handbook.operation.artifact-kind-list-request/1.0.0.schema.json",
+    ),
+    descriptor::<KindListResultV1>(
+        "handbook.operation.artifact-kind-list-result@1.0.0",
+        "handbook.operation.artifact-kind-list-result/1.0.0.schema.json",
+    ),
+    descriptor::<TargetRequestV1>(
+        "handbook.operation.artifact-read-request@1.0.0",
+        "handbook.operation.artifact-read-request/1.0.0.schema.json",
+    ),
+    descriptor::<ReadResultV1>(
+        "handbook.operation.artifact-read-result@1.0.0",
+        "handbook.operation.artifact-read-result/1.0.0.schema.json",
+    ),
+    descriptor::<TargetRequestV1>(
+        "handbook.operation.artifact-validate-request@1.0.0",
+        "handbook.operation.artifact-validate-request/1.0.0.schema.json",
+    ),
+    descriptor::<ValidateResultV1>(
+        "handbook.operation.artifact-validate-result@1.0.0",
+        "handbook.operation.artifact-validate-result/1.0.0.schema.json",
+    ),
+    descriptor::<IntakeEvaluateRequestV1>(
+        "handbook.operation.intake-coverage-evaluate-request@1.0.0",
+        "handbook.operation.intake-coverage-evaluate-request/1.0.0.schema.json",
+    ),
+    descriptor::<IntakeEvaluationResultV1>(
+        "handbook.operation.intake-coverage-evaluate-result@1.0.0",
+        "handbook.operation.intake-coverage-evaluate-result/1.0.0.schema.json",
+    ),
+    descriptor::<TargetRequestV1>(
+        "handbook.operation.intake-definition-read-request@1.0.0",
+        "handbook.operation.intake-definition-read-request/1.0.0.schema.json",
+    ),
+    descriptor::<IntakeDefinitionResultV1>(
+        "handbook.operation.intake-definition-read-result@1.0.0",
+        "handbook.operation.intake-definition-read-result/1.0.0.schema.json",
+    ),
+    descriptor::<IntakeAppendRequestV1>(
+        "handbook.operation.intake-record-append-request@1.0.0",
+        "handbook.operation.intake-record-append-request/1.0.0.schema.json",
+    ),
+    mutation_result_descriptor(
+        "handbook.operation.intake-record-append-result@1.0.0",
+        "handbook.operation.intake-record-append-result/1.0.0.schema.json",
+        intake_record_append_result_schema,
     ),
     descriptor::<PostureTransitionApplyRequestSchemaV1>(
         "handbook.operation.posture-transition-apply-request@1.0.0",
@@ -3935,6 +4764,140 @@ const fn descriptor<T: JsonSchema>(
     }
 }
 
+const fn mutation_result_descriptor(
+    exact_ref: &'static str,
+    relative_path: &'static str,
+    generate: fn() -> Schema,
+) -> SchemaDescriptor {
+    SchemaDescriptor {
+        exact_ref,
+        relative_path,
+        generate,
+    }
+}
+
+const fn exact_descriptor(
+    exact_ref: &'static str,
+    relative_path: &'static str,
+    generate: fn() -> Schema,
+) -> SchemaDescriptor {
+    SchemaDescriptor {
+        exact_ref,
+        relative_path,
+        generate,
+    }
+}
+
+fn artifact_repository_recheck_schema() -> Schema {
+    exact_recheck_schema(&[
+        "selection_unavailable",
+        "profile_unavailable",
+        "registry_unavailable",
+        "intake_source_unavailable",
+        "repository_identity_unavailable",
+        "artifact_unavailable",
+    ])
+}
+
+fn artifact_platform_recheck_schema() -> Schema {
+    exact_recheck_schema(&["unsupported_platform"])
+}
+
+fn exact_recheck_schema(causes: &[&str]) -> Schema {
+    let mut schema = generate_root::<ArtifactRecheckV1>();
+    let properties = schema
+        .get_mut("properties")
+        .and_then(serde_json::Value::as_object_mut)
+        .expect("artifact recheck schema has object properties");
+    properties.insert("cause".to_owned(), string_enum(causes).into());
+    schema
+}
+
+fn artifact_canonical_condition_schema() -> Schema {
+    exact_write_condition_schema("canonical_truth")
+}
+
+fn artifact_semantic_condition_schema() -> Schema {
+    exact_write_condition_schema("semantic_record")
+}
+
+fn exact_write_condition_schema(authority_class: &str) -> Schema {
+    let mut schema = generate_root::<ArtifactWriteConditionV1>();
+    let properties = schema
+        .get_mut("properties")
+        .and_then(serde_json::Value::as_object_mut)
+        .expect("artifact write condition schema has object properties");
+    properties.insert(
+        "authority_class".to_owned(),
+        json_schema!({"const": authority_class}).into(),
+    );
+    schema
+}
+
+fn intake_record_append_result_schema() -> Schema {
+    exact_mutation_result_schema("intake.record.append", &["semantic_record"])
+}
+
+fn artifact_candidate_append_result_schema() -> Schema {
+    exact_mutation_result_schema("artifact.candidate.append", &["semantic_record"])
+}
+
+fn artifact_candidate_promote_result_schema() -> Schema {
+    exact_mutation_result_schema(
+        "artifact.candidate.promote",
+        &["canonical_truth", "semantic_record"],
+    )
+}
+
+fn exact_mutation_result_schema(operation_id: &str, expected_authority_classes: &[&str]) -> Schema {
+    let mut schema = generate_root::<ArtifactMutationResultDataV1>();
+    let properties = schema
+        .get_mut("properties")
+        .and_then(serde_json::Value::as_object_mut)
+        .expect("mutation result schema has object properties");
+    properties.insert(
+        "operation_id".to_owned(),
+        json_schema!({"const": operation_id}).into(),
+    );
+    let prefix_items = expected_authority_classes
+        .iter()
+        .map(|authority_class| {
+            serde_json::json!({
+                "allOf": [
+                    {"$ref": "#/$defs/ArtifactAuthoritativeOutputV1"},
+                    {"properties": {"authority_class": {"const": authority_class}}}
+                ]
+            })
+        })
+        .collect::<Vec<_>>();
+    let committed_outputs = expected_authority_classes.len();
+    schema.insert(
+        "oneOf".to_owned(),
+        serde_json::json!([
+            {
+                "properties": {
+                    "outcome": {"const": "committed"},
+                    "refusal": {"type": "null"},
+                    "authoritative_outputs": {
+                        "minItems": committed_outputs,
+                        "maxItems": committed_outputs,
+                        "prefixItems": prefix_items,
+                        "items": false
+                    }
+                }
+            },
+            {
+                "properties": {
+                    "outcome": {"const": "refused"},
+                    "refusal": {"not": {"type": "null"}},
+                    "authoritative_outputs": {"maxItems": 0}
+                }
+            }
+        ]),
+    );
+    schema
+}
+
 fn generate_root<T: JsonSchema>() -> Schema {
     SchemaSettings::draft2020_12()
         .for_deserialize()
@@ -3983,8 +4946,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 68 {
-        return Err("schema inventory must contain exactly 68 entries".to_owned());
+    if INVENTORY.len() != 93 {
+        return Err("schema inventory must contain exactly 93 entries".to_owned());
     }
 
     let mut previous_ref = None;
@@ -4059,7 +5022,13 @@ fn validate_schema(
     let value = schema.as_value();
     validate_local_references(value, value, descriptor.relative_path)?;
     validate_closed_objects(value, descriptor.relative_path)?;
-    if descriptor.exact_ref == REQUEST_SCHEMA_REF {
+    if matches!(
+        descriptor.exact_ref,
+        REQUEST_SCHEMA_REF
+            | "handbook.operation.intake-record-append-request@1.0.0"
+            | "handbook.operation.artifact-candidate-append-request@1.0.0"
+            | "handbook.operation.artifact-candidate-promote-request@1.0.0"
+    ) {
         validate_posture_request_raw_key_schema(value, descriptor.relative_path)
     } else {
         validate_no_raw_key_names(value, descriptor.relative_path)

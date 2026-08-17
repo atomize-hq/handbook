@@ -126,6 +126,13 @@ pub fn admit_contract_operation(
         });
     }
 
+    if crate::artifact_operation_admission::matches_artifact_operation_claim(claim) {
+        return Ok(OwnerOperationAdmission {
+            operation_ref: claim.operation_ref.to_owned(),
+            definition_fingerprint: claim.definition_fingerprint.to_owned(),
+        });
+    }
+
     let Some(expected_claim) = ADMITTED
         .iter()
         .find(|candidate| candidate.operation_ref == claim.operation_ref)
