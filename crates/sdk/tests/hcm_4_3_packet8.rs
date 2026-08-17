@@ -65,7 +65,10 @@ fn inventory_discovery_use_case_omission_and_schema_roots_close_exactly() {
     let expected_cli = CLI_JSON_OPERATIONS.into_iter().collect::<BTreeSet<_>>();
     let actual_cli = rows
         .iter()
-        .filter(|row| row.current_transports() == [OperationTransport::CliJson])
+        .filter(|row| {
+            row.current_transports()
+                .contains(&OperationTransport::CliJson)
+        })
         .map(|row| row.operation_ref().as_str())
         .collect::<BTreeSet<_>>();
     assert_eq!(actual_cli, expected_cli);
@@ -130,11 +133,11 @@ fn inventory_discovery_use_case_omission_and_schema_roots_close_exactly() {
             "missing public schema root {root}"
         );
     }
-    for capability in witness
-        .capabilities()
-        .iter()
-        .filter(|entry| entry.current_transports() == [OperationTransport::CliJson])
-    {
+    for capability in witness.capabilities().iter().filter(|entry| {
+        entry
+            .current_transports()
+            .contains(&OperationTransport::CliJson)
+    }) {
         for binding in [
             capability.request_schema(),
             capability.result_schema(),

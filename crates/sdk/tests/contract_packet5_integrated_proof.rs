@@ -5,10 +5,10 @@ use handbook_sdk::contract_membrane::{
     admit_operation_definition, canonical_json_bytes, operation_inventory, parse_canonical_json,
     posture_transition_apply_definition, posture_transition_apply_request, sha256_fingerprint,
     AdmissionReason, BoundedString, CatalogPageSize, ContractLimits, ContractValue, DiscoveryState,
-    ExactBinding, ExactRef, OperationAdmissionResult, OperationTransport, OwnerVersionEntry,
-    PostureCanonicalBindingDtoV1, PostureDimensionChangeDtoV1, PostureReferenceDtoV1,
-    PostureTransitionApplyRequestDataV1, ProductionCatalogRead, ProductionWitness,
-    SchemaManifestEntry, TerminalStatus, UtcTimestamp, WriteReceipt,
+    ExactBinding, ExactRef, OperationAdmissionResult, OperationClass, OperationTransport,
+    OwnerVersionEntry, PostureCanonicalBindingDtoV1, PostureDimensionChangeDtoV1,
+    PostureReferenceDtoV1, PostureTransitionApplyRequestDataV1, ProductionCatalogRead,
+    ProductionWitness, SchemaManifestEntry, TerminalStatus, UtcTimestamp, WriteReceipt,
 };
 use handbook_sdk::HandbookSdkV1;
 use serde_json::Value;
@@ -341,8 +341,13 @@ fn owner_native_evidence_inventory_and_adapter_direction_remain_independent() {
             && if row.operation_ref().as_str() == "posture.transition.apply@1.0.0" {
                 row.current_transports() == [OperationTransport::RustSdk]
             } else {
+                let expected: &[OperationTransport] = if row.class() == OperationClass::ReadOnly {
+                    &[OperationTransport::CliJson, OperationTransport::Tauri]
+                } else {
+                    &[OperationTransport::CliJson]
+                };
                 cli_json.contains(&row.operation_ref().as_str())
-                    && row.current_transports() == [OperationTransport::CliJson]
+                    && row.current_transports() == expected
             }
     }));
     assert!(rows
@@ -501,10 +506,25 @@ fn assert_adapter_sources_are_non_authoritative() {
     let workspace_manifest = fs::read_to_string(workspace_root.join("Cargo.toml")).unwrap();
     let cli_manifest = fs::read_to_string(workspace_root.join("crates/cli/Cargo.toml")).unwrap();
     let sdk_manifest = fs::read_to_string(workspace_root.join("crates/sdk/Cargo.toml")).unwrap();
+    let tauri_root = workspace_root.join("crates/tauri");
+    let tauri_manifest = fs::read_to_string(tauri_root.join("Cargo.toml")).unwrap();
     assert!(cli_manifest.contains("handbook-sdk = { path = \"../sdk\" }"));
     assert!(!sdk_manifest.contains("handbook-cli"));
-    assert!(!workspace_manifest.to_ascii_lowercase().contains("tauri"));
-    assert!(!workspace_root.join("crates/tauri").exists());
+    assert!(workspace_manifest.contains("\"crates/tauri\""));
+    assert!(tauri_manifest.contains("[lib]"));
+    assert!(tauri_manifest.contains("name = \"handbook_tauri\""));
+    assert!(tauri_manifest.contains("path = \"src/lib.rs\""));
+    assert!(tauri_root.join("src/lib.rs").is_file());
+    assert!(tauri_manifest.contains("handbook-sdk = { path = \"../sdk\""));
+    for prohibited in [
+        "handbook-cli",
+        "handbook-engine",
+        "handbook-flow",
+        "handbook-pipeline",
+    ] {
+        assert!(!tauri_manifest.contains(prohibited));
+    }
+    assert!(!sdk_manifest.to_ascii_lowercase().contains("tauri"));
 }
 
 fn read_rust_sources(root: &Path) -> String {

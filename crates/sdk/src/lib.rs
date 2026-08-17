@@ -169,6 +169,27 @@ impl HandbookSdkV1 {
         contract_membrane::execute_pipeline_operation(&self.repo_root, request)
     }
 
+    /// Dispatches one admitted read-only ordinary invocation through its existing owner route.
+    ///
+    /// HCM-4.4 Packet 3 default-denies mutations and use cases as typed transport failures.
+    pub fn invoke(
+        &self,
+        request: &contract_membrane::InvocationRequestV1,
+        limits: &contract_membrane::ContractLimits,
+    ) -> Result<contract_membrane::InvocationResponseV1, contract_membrane::ContractError> {
+        contract_membrane::dispatch_invocation(&self.repo_root, request, limits)
+    }
+
+    /// Re-admits one LF-free invocation response against its exact originating request.
+    pub fn readmit_invocation_response(
+        &self,
+        request: &contract_membrane::InvocationRequestV1,
+        response: &contract_membrane::InvocationResponseV1,
+        limits: &contract_membrane::ContractLimits,
+    ) -> Result<contract_membrane::InvocationResponseV1, contract_membrane::ContractError> {
+        contract_membrane::readmit_invocation_response(request, response, limits)
+    }
+
     /// Resolves and persists one Pipeline route exactly once through the SDK composition.
     pub fn resolve_pipeline_use_case(
         &self,

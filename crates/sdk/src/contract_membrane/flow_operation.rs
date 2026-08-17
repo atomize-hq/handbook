@@ -1734,7 +1734,7 @@ impl CurrentTransportEvidence for FlowCliTransportEvidence {
     }
 
     fn current_transports(&self) -> &[OperationTransport] {
-        &[OperationTransport::CliJson]
+        &[OperationTransport::CliJson, OperationTransport::Tauri]
     }
 }
 

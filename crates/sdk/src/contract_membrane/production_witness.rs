@@ -842,6 +842,13 @@ fn verify_inventory() -> Result<(), ProductionWitnessError> {
                 row.admission_reason() != super::AdmissionReason::Admitted
                     || row.current_transports() != [OperationTransport::RustSdk]
                     || row.discovery() != DiscoveryState::Discoverable
+            } else if (is_artifact || is_flow || is_pipeline)
+                && row.class() == super::OperationClass::ReadOnly
+            {
+                row.admission_reason() != super::AdmissionReason::Admitted
+                    || row.current_transports()
+                        != [OperationTransport::CliJson, OperationTransport::Tauri]
+                    || row.discovery() != DiscoveryState::Discoverable
             } else if is_artifact || is_flow || is_pipeline {
                 row.admission_reason() != super::AdmissionReason::Admitted
                     || row.current_transports() != [OperationTransport::CliJson]
@@ -1066,17 +1073,27 @@ mod tests {
                 .iter()
                 .find(|entry| entry.operation().reference().as_str() == operation_ref)
                 .unwrap();
-            assert_eq!(
-                capability.current_transports(),
-                &[OperationTransport::CliJson]
-            );
+            let row = operation_inventory()
+                .iter()
+                .find(|row| row.operation_ref().as_str() == operation_ref)
+                .unwrap();
+            let expected: &[OperationTransport] =
+                if row.class() == super::super::OperationClass::ReadOnly {
+                    &[OperationTransport::CliJson, OperationTransport::Tauri]
+                } else {
+                    &[OperationTransport::CliJson]
+                };
+            assert_eq!(capability.current_transports(), expected);
         }
         let flow = witness
             .capabilities()
             .iter()
             .find(|entry| entry.operation().reference().as_str() == "flow.resolve@1.0.0")
             .unwrap();
-        assert_eq!(flow.current_transports(), &[OperationTransport::CliJson]);
+        assert_eq!(
+            flow.current_transports(),
+            &[OperationTransport::CliJson, OperationTransport::Tauri]
+        );
         assert_eq!(
             witness.catalog_roots().operations().total_entries().get(),
             19

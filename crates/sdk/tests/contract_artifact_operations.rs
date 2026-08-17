@@ -5,7 +5,8 @@ use handbook_sdk::contract_membrane::{
     admit_operation_definition, artifact_operation_definitions, artifact_operation_request,
     canonical_json_bytes, operation_inventory, parse_canonical_json,
     render_artifact_operation_legacy, AdmissionReason, ArtifactOperationInputV1, ContractLimits,
-    ContractValue, DiscoveryState, OperationAdmissionResult, OperationTransport, TerminalStatus,
+    ContractValue, DiscoveryState, OperationAdmissionResult, OperationClass, OperationTransport,
+    TerminalStatus,
 };
 
 const ARTIFACT_OPERATION_REFS: [&str; 10] = [
@@ -39,7 +40,12 @@ fn ten_artifact_definitions_are_exact_independently_admitted_and_cli_only() {
             .unwrap();
         assert_eq!(row.admission_reason(), AdmissionReason::Admitted);
         assert_eq!(row.discovery(), DiscoveryState::Discoverable);
-        assert_eq!(row.current_transports(), &[OperationTransport::CliJson]);
+        let expected: &[OperationTransport] = if definition.class() == OperationClass::ReadOnly {
+            &[OperationTransport::CliJson, OperationTransport::Tauri]
+        } else {
+            &[OperationTransport::CliJson]
+        };
+        assert_eq!(row.current_transports(), expected);
     }
 
     let admitted = operation_inventory()

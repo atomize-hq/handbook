@@ -22,7 +22,10 @@ fn flow_resolve_definition_is_exact_independently_admitted_and_the_only_new_row(
         .unwrap();
     assert_eq!(row.admission_reason(), AdmissionReason::Admitted);
     assert_eq!(row.discovery(), DiscoveryState::Discoverable);
-    assert_eq!(row.current_transports(), &[OperationTransport::CliJson]);
+    assert_eq!(
+        row.current_transports(),
+        &[OperationTransport::CliJson, OperationTransport::Tauri]
+    );
     assert_eq!(operation_inventory().len(), 62);
     assert_eq!(
         operation_inventory()

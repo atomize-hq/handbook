@@ -6,7 +6,7 @@ use handbook_sdk::contract_membrane::{
     canonical_json_bytes, BootstrapFacadeResponseV1, BootstrapOutcome, BootstrapRequestV1,
     CatalogKindV1, CatalogReadRequestV1, CatalogReadResponseV1, ContractError, ContractLimits,
     InvocationRequestV1, InvocationResponseV1, ProductionCatalogRead, ProductionWitness,
-    TransportFailureKind, TransportFailureV1, UtcTimestamp,
+    UtcTimestamp,
 };
 use handbook_sdk::HandbookSdkV1;
 use serde::Serialize;
@@ -227,17 +227,13 @@ fn close_catalog_read<T>(
 
 fn execute_invocation(
     state: &TrustedFacadeState,
-    _request: InvocationRequestV1,
+    request: InvocationRequestV1,
 ) -> Result<InvocationResponseV1, HostError> {
-    let failure = TransportFailureV1::adapter_error(
-        TransportFailureKind::Adapter,
-        "transport.tauri_route_not_ready",
-        &state.limits,
-    )
-    .map_err(contract_error)?;
-    let response =
-        InvocationResponseV1::transport_failure(failure, &state.limits).map_err(contract_error)?;
-    readmit_invocation(response, &state.limits)
+    let response = state
+        ._sdk
+        .invoke(&request, &state.limits)
+        .map_err(contract_error)?;
+    readmit_invocation(state, &request, response)
 }
 
 fn readmit_bootstrap(
@@ -257,11 +253,14 @@ fn readmit_catalog(
 }
 
 fn readmit_invocation(
+    state: &TrustedFacadeState,
+    request: &InvocationRequestV1,
     response: InvocationResponseV1,
-    limits: &ContractLimits,
 ) -> Result<InvocationResponseV1, HostError> {
-    let bytes = canonical_json_bytes(&response, limits).map_err(contract_error)?;
-    InvocationResponseV1::parse_and_admit(&bytes, None, limits).map_err(contract_error)
+    state
+        ._sdk
+        .readmit_invocation_response(request, &response, &state.limits)
+        .map_err(contract_error)
 }
 
 fn contract_error(_: ContractError) -> HostError {
@@ -271,11 +270,16 @@ fn contract_error(_: ContractError) -> HostError {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use handbook_sdk::artifact::{ArtifactAcquisitionMode, ArtifactInputDocument};
     use handbook_sdk::contract_membrane::{
-        pipeline_catalog_list_operation_request, BootstrapFacadeOutcomeKindV1, BootstrapRequestV1,
-        CatalogKindV1, CatalogPageSize, CatalogReadOutcomeKindV1, CatalogReadRequestV1,
-        CatalogReadResponseBodyV1, ContractLimits, InvocationRequestV1, InvocationResponseKind,
-        SemVer, TerminalStatus, TypedCatalogCursor, UtcTimestamp,
+        artifact_operation_request, flow_resolve_operation_request,
+        pipeline_capture_direct_operation_request, pipeline_capture_plan_operation_request,
+        pipeline_catalog_list_operation_request, pipeline_catalog_read_operation_request,
+        pipeline_compile_operation_request, ArtifactOperationInputV1, BootstrapFacadeOutcomeKindV1,
+        BootstrapRequestV1, CatalogKindV1, CatalogPageSize, CatalogReadOutcomeKindV1,
+        CatalogReadRequestV1, CatalogReadResponseBodyV1, ContractLimits, InvocationRequestV1,
+        InvocationResponseKind, SemVer, TransportFailureKind, TypedCatalogCursor, UseCaseRequestV1,
+        UtcTimestamp,
     };
     use serde_json::{json, Value};
     use std::path::Path;
@@ -338,6 +342,108 @@ mod tests {
             &ContractLimits::packet0(),
         )
         .unwrap()
+    }
+
+    fn read_only_invocation_requests() -> Vec<InvocationRequestV1> {
+        let limits = ContractLimits::packet0();
+        let coverage = ArtifactInputDocument::new(
+            serde_json::to_vec(&json!({
+                "coverage_submissions": [
+                    {
+                        "coverage_id": "registry_brief.title",
+                        "state": "supplied",
+                        "source_kind": "user_declaration",
+                        "value": "Packet 3 parity",
+                        "specificity": "exact",
+                        "confidence": "high",
+                        "contradiction_refs": []
+                    },
+                    {
+                        "coverage_id": "registry_brief.summary",
+                        "state": "supplied",
+                        "source_kind": "user_declaration",
+                        "value": "Read-only invocation dispatcher",
+                        "specificity": "concrete",
+                        "confidence": "high",
+                        "contradiction_refs": []
+                    }
+                ]
+            }))
+            .unwrap(),
+        )
+        .unwrap();
+        let kind_ref = "example.artifact-kind.registry-brief@1.0.0";
+        let instance_id = "registry_brief";
+        let operation_requests = vec![
+            artifact_operation_request(None, ArtifactOperationInputV1::KindList).unwrap(),
+            artifact_operation_request(None, ArtifactOperationInputV1::InstanceList).unwrap(),
+            artifact_operation_request(
+                None,
+                ArtifactOperationInputV1::Read {
+                    kind_ref: kind_ref.to_owned(),
+                    instance_id: instance_id.to_owned(),
+                },
+            )
+            .unwrap(),
+            artifact_operation_request(
+                None,
+                ArtifactOperationInputV1::Validate {
+                    kind_ref: kind_ref.to_owned(),
+                    instance_id: instance_id.to_owned(),
+                },
+            )
+            .unwrap(),
+            artifact_operation_request(
+                None,
+                ArtifactOperationInputV1::IntakeDefinitionRead {
+                    kind_ref: kind_ref.to_owned(),
+                    instance_id: instance_id.to_owned(),
+                },
+            )
+            .unwrap(),
+            artifact_operation_request(
+                None,
+                ArtifactOperationInputV1::IntakeCoverageEvaluate {
+                    kind_ref: kind_ref.to_owned(),
+                    instance_id: instance_id.to_owned(),
+                    mode: ArtifactAcquisitionMode::Express,
+                    expected_current_artifact_fingerprint: None,
+                    input: coverage,
+                },
+            )
+            .unwrap(),
+            artifact_operation_request(
+                None,
+                ArtifactOperationInputV1::CandidateValidate {
+                    kind_ref: kind_ref.to_owned(),
+                    instance_id: instance_id.to_owned(),
+                    intake_record_ref: ".handbook/state/artifacts/registry_brief/intake-records/intake_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef.json".to_owned(),
+                    intake_record_fingerprint: "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef".to_owned(),
+                    expected_current_artifact_fingerprint: None,
+                },
+            )
+            .unwrap(),
+            flow_resolve_operation_request(None, "planning.packet").unwrap(),
+            pipeline_catalog_list_operation_request(None).unwrap(),
+            pipeline_catalog_read_operation_request(None, "pipeline.foundation_inputs").unwrap(),
+            pipeline_compile_operation_request(
+                None,
+                "pipeline.foundation_inputs",
+                "stage.10_feature_spec",
+            )
+            .unwrap(),
+            pipeline_capture_plan_operation_request(
+                None,
+                "pipeline.foundation_inputs",
+                "stage.10_feature_spec",
+                "packet-3 preview\n",
+            )
+            .unwrap(),
+        ];
+        operation_requests
+            .into_iter()
+            .map(|request| InvocationRequestV1::operation(request, &limits).unwrap())
+            .collect()
     }
 
     fn inject_repository_root<T>(request: &T) -> Value
@@ -492,26 +598,79 @@ mod tests {
     }
 
     #[test]
-    fn invocation_is_typed_default_denied_without_repository_effects() {
+    fn invocation_runs_all_twelve_read_only_routes_off_main_thread_without_reshaping() {
+        let repo = tempdir().unwrap();
+        let state = state(repo.path(), "2029-01-01T00:00:00Z", "2030-01-01T00:00:00Z");
+        let requests = read_only_invocation_requests();
+        assert_eq!(requests.len(), 12);
+
+        for request in requests {
+            let expected = state
+                .inner
+                ._sdk
+                .invoke(&request, &state.inner.limits)
+                .unwrap();
+            let caller = thread::current().id();
+            let inner = Arc::clone(&state.inner);
+            let (worker, actual) = tauri::async_runtime::block_on(run_off_main_thread(move || {
+                let worker = thread::current().id();
+                execute_invocation(&inner, request).map(|response| (worker, response))
+            }))
+            .unwrap();
+
+            assert_ne!(caller, worker);
+            assert_eq!(actual.response_kind(), InvocationResponseKind::Operation);
+            assert_eq!(actual, expected);
+        }
+    }
+
+    #[test]
+    fn invocation_default_denies_mutation_use_case_and_non_target_without_repository_effects() {
         let repo = tempdir().unwrap();
         let sentinel = repo.path().join("sentinel.txt");
         std::fs::write(&sentinel, b"unchanged").unwrap();
         let state = state(repo.path(), "2029-01-01T00:00:00Z", "2030-01-01T00:00:00Z");
+        let limits = ContractLimits::packet0();
+        let mutation = InvocationRequestV1::operation(
+            pipeline_capture_direct_operation_request(
+                None,
+                "pipeline.foundation_inputs",
+                "stage.10_feature_spec",
+                "must not execute",
+                "packet-3-denied-mutation",
+            )
+            .unwrap(),
+            &limits,
+        )
+        .unwrap();
+        let use_case = InvocationRequestV1::use_case(
+            UseCaseRequestV1::repository_doctor(&limits).unwrap(),
+            &limits,
+        )
+        .unwrap();
 
-        let response = execute_invocation(&state.inner, invocation_request()).unwrap();
+        for request in [mutation, use_case] {
+            let response = execute_invocation(&state.inner, request).unwrap();
+            assert_eq!(
+                response.response_kind(),
+                InvocationResponseKind::TransportFailure
+            );
+            assert_eq!(
+                response.transport_failure_kind(),
+                Some(TransportFailureKind::Adapter)
+            );
+            assert_eq!(
+                response.transport_failure_reason_code(&limits).unwrap(),
+                Some("transport.invocation_route_not_ready".to_owned())
+            );
+        }
 
-        assert_eq!(
-            response.response_kind(),
-            InvocationResponseKind::TransportFailure
-        );
+        let mut non_target = serde_json::to_value(invocation_request()).unwrap();
+        non_target["request"]["operation"]["ref"] = json!("pipeline.route.resolve@1.0.0");
+        assert!(serde_json::from_value::<InvocationRequestV1>(non_target).is_err());
+
         assert_eq!(std::fs::read(&sentinel).unwrap(), b"unchanged");
         assert!(!repo.path().join(".handbook").exists());
-        let value = serde_json::to_value(response).unwrap();
-        assert_eq!(value["response"]["status"], json!(TerminalStatus::Error));
-        assert_eq!(
-            value["response"]["errors"][0]["code"],
-            json!("transport.tauri_route_not_ready")
-        );
     }
 
     #[test]

@@ -817,7 +817,16 @@ pub(crate) fn current_artifact_capabilities() -> Result<Vec<CapabilityEntry>, Co
                     return Err(ContractError::InvalidInvariant)
                 }
             };
-            let evidence = ArtifactCliTransportEvidence { owner };
+            let current_transports: &'static [OperationTransport] =
+                if definition.class() == OperationClass::ReadOnly {
+                    &[OperationTransport::CliJson, OperationTransport::Tauri]
+                } else {
+                    &[OperationTransport::CliJson]
+                };
+            let evidence = ArtifactCliTransportEvidence {
+                owner,
+                current_transports,
+            };
             CapabilityEntry::new(&definition, &evidence, &ContractLimits::packet0())
         })
         .collect()
@@ -825,6 +834,7 @@ pub(crate) fn current_artifact_capabilities() -> Result<Vec<CapabilityEntry>, Co
 
 struct ArtifactCliTransportEvidence {
     owner: OwnerAdmissionToken,
+    current_transports: &'static [OperationTransport],
 }
 
 impl CurrentTransportEvidenceSealed for ArtifactCliTransportEvidence {}
@@ -835,7 +845,7 @@ impl CurrentTransportEvidence for ArtifactCliTransportEvidence {
     }
 
     fn current_transports(&self) -> &[OperationTransport] {
-        &[OperationTransport::CliJson]
+        self.current_transports
     }
 }
 

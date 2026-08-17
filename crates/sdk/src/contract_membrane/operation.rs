@@ -809,6 +809,13 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                     },
                     current_transports: if is_posture_apply {
                         &[OperationTransport::RustSdk]
+                    } else if (is_artifact_operation
+                        || is_flow_resolve
+                        || is_pipeline_read
+                        || is_pipeline_mutation_packet)
+                        && class == RO
+                    {
+                        &[OperationTransport::CliJson, OperationTransport::Tauri]
                     } else if is_artifact_operation
                         || is_flow_resolve
                         || is_pipeline_read

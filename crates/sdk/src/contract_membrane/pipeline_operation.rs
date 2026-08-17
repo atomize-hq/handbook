@@ -2991,9 +2991,18 @@ pub(crate) fn current_pipeline_capabilities() -> Result<Vec<CapabilityEntry>, Co
                 OperationAdmissionResult::Admitted(owner) => owner,
                 _ => return Err(ContractError::InvalidInvariant),
             };
+            let current_transports: &'static [OperationTransport] =
+                if definition.class() == OperationClass::ReadOnly {
+                    &[OperationTransport::CliJson, OperationTransport::Tauri]
+                } else {
+                    &[OperationTransport::CliJson]
+                };
             CapabilityEntry::new(
                 &definition,
-                &PipelineCliTransportEvidence { owner },
+                &PipelineCliTransportEvidence {
+                    owner,
+                    current_transports,
+                },
                 &ContractLimits::packet0(),
             )
         })
@@ -3002,6 +3011,7 @@ pub(crate) fn current_pipeline_capabilities() -> Result<Vec<CapabilityEntry>, Co
 
 struct PipelineCliTransportEvidence {
     owner: OwnerAdmissionToken,
+    current_transports: &'static [OperationTransport],
 }
 impl CurrentTransportEvidenceSealed for PipelineCliTransportEvidence {}
 impl CurrentTransportEvidence for PipelineCliTransportEvidence {
@@ -3009,7 +3019,7 @@ impl CurrentTransportEvidence for PipelineCliTransportEvidence {
         &self.owner
     }
     fn current_transports(&self) -> &[OperationTransport] {
-        &[OperationTransport::CliJson]
+        self.current_transports
     }
 }
 

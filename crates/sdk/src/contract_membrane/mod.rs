@@ -10,6 +10,7 @@ mod envelope;
 mod facade;
 mod flow_operation;
 mod invocation;
+mod invocation_dispatch;
 mod operation;
 mod owner_admission;
 mod pipeline_operation;
@@ -100,6 +101,7 @@ pub use invocation::{
     TransportFailureDetailsV1, TransportFailureKind, TransportFailureV1, TransportIoErrorKindV1,
     TransportIoErrorV1, TransportPresentationViewV1, UseCaseCauseV1, UseCaseResponseV1,
 };
+pub(crate) use invocation_dispatch::{dispatch_invocation, readmit_invocation_response};
 pub use operation::{
     operation_inventory, validate_complete_definition_set, validate_complete_operation_ref_set,
     AdmissionReason, DeclaredWrite, DefinitionSetError, DiscoveryState, JsonPointer,

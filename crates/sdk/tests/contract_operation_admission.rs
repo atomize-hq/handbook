@@ -85,8 +85,12 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
         ]
         .contains(&row.operation_id())
         {
-            row.current_transports() == [OperationTransport::CliJson]
-                && row.discovery() == DiscoveryState::Discoverable
+            let expected: &[OperationTransport] = if row.class() == OperationClass::ReadOnly {
+                &[OperationTransport::CliJson, OperationTransport::Tauri]
+            } else {
+                &[OperationTransport::CliJson]
+            };
+            row.current_transports() == expected && row.discovery() == DiscoveryState::Discoverable
         } else {
             row.current_transports().is_empty() && row.discovery() == DiscoveryState::Omit
         }
