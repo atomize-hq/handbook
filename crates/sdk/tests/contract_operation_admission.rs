@@ -50,6 +50,9 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
             "artifact.candidate.promote",
             "posture.transition.apply",
             "flow.resolve",
+            "pipeline.catalog.list",
+            "pipeline.catalog.read",
+            "pipeline.compile",
         ]
     );
     assert!(rows.iter().all(|row| {
@@ -68,6 +71,9 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
             "artifact.candidate.append",
             "artifact.candidate.promote",
             "flow.resolve",
+            "pipeline.catalog.list",
+            "pipeline.catalog.read",
+            "pipeline.compile",
         ]
         .contains(&row.operation_id())
         {
@@ -125,7 +131,7 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
     let frozen_bytes = canonical_json_bytes(&frozen_tuples, &ContractLimits::packet0()).unwrap();
     assert_eq!(
         handbook_sdk::contract_membrane::sha256_fingerprint(&frozen_bytes).as_str(),
-        "sha256:c07e8a9145b3969b2adedfb98b9897e98c4ab4edc3f7de1767d640925e423475"
+        "sha256:bed6022c55d5c63b903c985a18ae20b8596bd14ff78f6385b694fa7cfc7f369d"
     );
 }
 

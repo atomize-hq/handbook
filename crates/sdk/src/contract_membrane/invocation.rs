@@ -12,8 +12,10 @@ use crate::charter_product::{
     ApproverAdminLegacyFields,
 };
 use crate::pipeline_route_api::{
-    PipelineResolveOutcome, PipelineResolvedStageView, PipelineRouteRunView,
-    PipelineRouteStageReason, PipelineRouteStageStatus, PipelineRouteStateView,
+    PipelineResolveEffect, PipelineResolveExecution, PipelineResolveExecutionFailure,
+    PipelineResolveOutcome, PipelineResolvedStageView, PipelineRouteBasisPersistenceRefusal,
+    PipelineRouteRunView, PipelineRouteStageReason, PipelineRouteStageStatus,
+    PipelineRouteStateView, PipelineSelectedDefinitionFailure, PipelineSelectorRefusal,
 };
 use crate::setup::{SetupExecutionEffects, SetupExecutionResult};
 use crate::{
@@ -57,6 +59,11 @@ const AUTHOR_PROJECT_CONTEXT_EFFECT_REF: &str =
     "handbook.use-case.author-project-context-effect@1.0.0";
 const APPROVER_ADMINISTRATION_EFFECT_REF: &str =
     "handbook.use-case.approver-administration-effect@1.0.0";
+const PIPELINE_ROUTE_USE_CASE_REF: &str =
+    "handbook.use-case.pipeline-route-resolve-and-persist@1.0.0";
+const PIPELINE_ROUTE_DETAILS_REF: &str =
+    "handbook.use-case.pipeline-route-resolve-and-persist-details@1.0.0";
+const PIPELINE_ROUTE_BASIS_RECORD_REF: &str = "handbook.pipeline-record.route-basis@1.0.0";
 const TRANSPORT_DETAILS_REF: &str = "handbook.transport-failure-details@1.0.0";
 
 fn binding(reference: &str) -> Result<ExactBinding, ContractError> {
@@ -72,6 +79,7 @@ fn binding(reference: &str) -> Result<ExactBinding, ContractError> {
             | AUTHOR_CHARTER_DETAILS_REF
             | AUTHOR_PROJECT_CONTEXT_DETAILS_REF
             | APPROVER_ADMINISTRATION_DETAILS_REF
+            | PIPELINE_ROUTE_DETAILS_REF
             | TRANSPORT_DETAILS_REF
             | "handbook.use-case.author-charter-result@1.0.0"
             | "handbook.use-case.author-project-context-result@1.0.0"
@@ -2311,6 +2319,169 @@ impl PipelineRouteResolveAndPersistResultV1 {
             )?,
         })
     }
+
+    fn to_outcome(&self) -> PipelineResolveOutcome {
+        PipelineResolveOutcome {
+            pipeline_id: self.pipeline_id.as_str().to_owned(),
+            state: self.state.to_view(),
+            effective_run: self.effective_run.to_view(),
+            stages: self
+                .stages
+                .as_slice()
+                .iter()
+                .map(PipelineResolvedStageV1::to_view)
+                .collect(),
+        }
+    }
+}
+
+impl PipelineRouteRunV1 {
+    fn to_view(&self) -> PipelineRouteRunView {
+        PipelineRouteRunView {
+            runner: self.runner.as_ref().map(|value| value.as_str().to_owned()),
+            profile: self.profile.as_ref().map(|value| value.as_str().to_owned()),
+            repository_root: self
+                .repository_root
+                .as_ref()
+                .map(|value| value.as_str().to_owned()),
+        }
+    }
+}
+
+impl PipelineRouteStateV1 {
+    fn to_view(&self) -> PipelineRouteStateView {
+        PipelineRouteStateView {
+            revision: self.revision.get(),
+            routing: self
+                .routing
+                .as_slice()
+                .iter()
+                .map(|entry| (entry.variable.as_str().to_owned(), entry.value))
+                .collect(),
+            charter_ref: self
+                .charter_ref
+                .as_ref()
+                .map(|value| value.as_str().to_owned()),
+            project_context_ref: self
+                .project_context_ref
+                .as_ref()
+                .map(|value| value.as_str().to_owned()),
+            run: self.run.to_view(),
+        }
+    }
+}
+
+impl PipelineResolvedStageV1 {
+    fn to_view(&self) -> PipelineResolvedStageView {
+        PipelineResolvedStageView {
+            stage_id: self.stage_id.as_str().to_owned(),
+            status: self.status.into(),
+            reason: self
+                .reason
+                .as_ref()
+                .map(PipelineRouteStageReasonV1::to_reason),
+        }
+    }
+}
+
+impl PipelineRouteStageReasonV1 {
+    fn to_reason(&self) -> PipelineRouteStageReason {
+        match self {
+            Self::SkippedActivationFalse {
+                unsatisfied_variables,
+            } => PipelineRouteStageReason::SkippedActivationFalse {
+                unsatisfied_variables: unsatisfied_variables
+                    .as_slice()
+                    .iter()
+                    .map(|value| value.as_str().to_owned())
+                    .collect(),
+            },
+            Self::NextMissingRouteVariables { missing_variables } => {
+                PipelineRouteStageReason::NextMissingRouteVariables {
+                    missing_variables: missing_variables
+                        .as_slice()
+                        .iter()
+                        .map(|value| value.as_str().to_owned())
+                        .collect(),
+                }
+            }
+            Self::BlockedByUnresolvedStage {
+                upstream_stage_id,
+                upstream_status,
+            } => PipelineRouteStageReason::BlockedByUnresolvedStage {
+                upstream_stage_id: upstream_stage_id.as_str().to_owned(),
+                upstream_status: (*upstream_status).into(),
+            },
+        }
+    }
+}
+
+map_enum!(PipelineRouteStageStatusV1 => PipelineRouteStageStatus {
+    Active, Skipped, Blocked, Next
+});
+
+closed_enum!(PipelineRouteResolveCauseV1 {
+    Catalog,
+    UnsupportedSelector,
+    AmbiguousSelector,
+    UnknownSelector,
+    Definition,
+    RouteStateRead,
+    RouteVariables,
+    RouteResolution,
+    RouteBasisBuild,
+    RouteBasisPersistenceMalformed,
+    RouteBasisRevisionConflict,
+    RouteBasisPersistence
+});
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct PipelineRouteResolveDetailsV1 {
+    cause: PipelineRouteResolveCauseV1,
+    reason: BoundedString<8192>,
+    selector: Option<BoundedString<4096>>,
+    matches: BoundedVec<BoundedString<4096>, 128>,
+    expected_revision: Option<SafeU64>,
+    actual_revision: Option<SafeU64>,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct PipelineRouteBasisWriteConditionV1 {
+    pipeline_id: BoundedString<255>,
+    state_revision: SafeU64,
+    route_basis_fingerprint: Fingerprint,
+}
+
+impl PipelineRouteResolveDetailsV1 {
+    fn validate(&self) -> Result<(), ContractError> {
+        let selector_cause = matches!(
+            self.cause,
+            PipelineRouteResolveCauseV1::UnsupportedSelector
+                | PipelineRouteResolveCauseV1::AmbiguousSelector
+                | PipelineRouteResolveCauseV1::UnknownSelector
+        );
+        if selector_cause != self.selector.is_some()
+            || (!matches!(self.cause, PipelineRouteResolveCauseV1::AmbiguousSelector)
+                && !self.matches.as_slice().is_empty())
+            || (matches!(self.cause, PipelineRouteResolveCauseV1::AmbiguousSelector)
+                && self.matches.as_slice().is_empty())
+        {
+            return Err(ContractError::InvalidInvariant);
+        }
+        let revision_conflict = matches!(
+            self.cause,
+            PipelineRouteResolveCauseV1::RouteBasisRevisionConflict
+        );
+        if revision_conflict != (self.expected_revision.is_some() && self.actual_revision.is_some())
+            || (!revision_conflict
+                && (self.expected_revision.is_some() || self.actual_revision.is_some()))
+        {
+            return Err(ContractError::InvalidInvariant);
+        }
+        Ok(())
+    }
 }
 
 map_enum!(PipelineRouteStageStatus => PipelineRouteStageStatusV1 {
@@ -2781,6 +2952,32 @@ impl UseCaseKind {
                     admit_contract_value(problem.details(), limits)?;
                 admit_packet3_problem(problem, details.cause)
             }
+            Self::PipelineRouteResolveAndPersist
+                if problem.subject() == &binding(PIPELINE_ROUTE_USE_CASE_REF)?
+                    && problem.details_schema() == &binding(PIPELINE_ROUTE_DETAILS_REF)? =>
+            {
+                let details: PipelineRouteResolveDetailsV1 =
+                    admit_contract_value(problem.details(), limits)?;
+                details.validate()?;
+                let (status, category, retry) = pipeline_route_disposition(details.cause);
+                let cause = pipeline_route_cause_name(details.cause);
+                if problem.problem_id() != problem.code()
+                    || problem.code().as_str() != format!("pipeline.route.{cause}")
+                    || problem.category() != category
+                    || problem.retry() != retry
+                    || !problem.evidence().as_slice().is_empty()
+                    || (status == TerminalStatus::Blocked)
+                        != problem.recheck().is_some_and(|condition| {
+                            condition.condition_schema() == problem.details_schema()
+                                && condition.condition() == problem.details()
+                        })
+                    || (status == TerminalStatus::Refused) != problem.rule().is_some()
+                    || (status == TerminalStatus::Error) != problem.correlation_ref().is_some()
+                {
+                    return Err(ContractError::InvalidInvariant);
+                }
+                Ok(())
+            }
             _ => Err(ContractError::InvalidInvariant),
         }
     }
@@ -2791,6 +2988,13 @@ impl UseCaseKind {
         next_actions: &BoundedVec<NextAction, 128>,
         limits: &ContractLimits,
     ) -> Result<(), ContractError> {
+        if self == Self::PipelineRouteResolveAndPersist {
+            return next_actions
+                .as_slice()
+                .is_empty()
+                .then_some(())
+                .ok_or(ContractError::InvalidInvariant);
+        }
         if self != Self::RepositorySetup {
             return Ok(());
         }
@@ -2849,6 +3053,43 @@ impl UseCaseKind {
             Self::AuthorCharter | Self::AuthorProjectContext | Self::ApproverAdministration
         ) {
             return self.admit_packet3_receipts(terminal, receipts, limits);
+        }
+        if self == Self::PipelineRouteResolveAndPersist {
+            let success = if terminal.status() == TerminalStatus::Ok {
+                Some(admit_contract_value::<
+                    PipelineRouteResolveAndPersistResultV1,
+                >(
+                    terminal.data().ok_or(ContractError::InvalidInvariant)?,
+                    limits,
+                )?)
+            } else {
+                None
+            };
+            if success.is_some() && receipts.as_slice().len() != 1 {
+                return Err(ContractError::InvalidInvariant);
+            }
+            for receipt in receipts.as_slice() {
+                if receipt.record().reference().as_str() != PIPELINE_ROUTE_BASIS_RECORD_REF
+                    || receipt.record_kind().as_str() != "pipeline_route_basis"
+                    || receipt.authority_class().as_str() != "pipeline_owner"
+                    || receipt.atomic_group().as_str() != "pipeline_route_resolve_and_persist"
+                {
+                    return Err(ContractError::InvalidInvariant);
+                }
+                let condition: PipelineRouteBasisWriteConditionV1 =
+                    admit_contract_value(receipt.condition(), limits)?;
+                if receipt.record().fingerprint() != &condition.route_basis_fingerprint {
+                    return Err(ContractError::InvalidInvariant);
+                }
+                if let Some(result) = &success {
+                    if condition.pipeline_id.as_str() != result.pipeline_id.as_str()
+                        || condition.state_revision != result.state.revision
+                    {
+                        return Err(ContractError::InvalidInvariant);
+                    }
+                }
+            }
+            return Ok(());
         }
         if self != Self::RepositorySetup {
             return Ok(());
@@ -3440,6 +3681,263 @@ fn packet3_receipts(
             })
             .collect::<Result<Vec<_>, _>>()?,
     )
+}
+
+fn pipeline_route_receipts(
+    effects: &[PipelineResolveEffect],
+    limits: &ContractLimits,
+) -> Result<BoundedVec<WriteReceipt, 128>, ContractError> {
+    BoundedVec::new(
+        effects
+            .iter()
+            .map(|effect| {
+                let route_basis_fingerprint = canonical_fingerprint(&effect.route_basis, limits)?;
+                WriteReceipt::new(
+                    bounded("pipeline_route_basis")?,
+                    ExactBinding::new(
+                        ExactRef::parse(PIPELINE_ROUTE_BASIS_RECORD_REF)?,
+                        route_basis_fingerprint.clone(),
+                    ),
+                    bounded("pipeline_owner")?,
+                    contract_value(
+                        &PipelineRouteBasisWriteConditionV1 {
+                            pipeline_id: bounded(&effect.pipeline_id)?,
+                            state_revision: SafeU64::new(effect.state_revision)?,
+                            route_basis_fingerprint,
+                        },
+                        limits,
+                    )?,
+                    bounded("pipeline_route_resolve_and_persist")?,
+                    limits,
+                )
+            })
+            .collect::<Result<Vec<_>, ContractError>>()?,
+    )
+}
+
+fn pipeline_route_details(
+    failure: &PipelineResolveExecutionFailure,
+) -> Result<PipelineRouteResolveDetailsV1, ContractError> {
+    let mut selector = None;
+    let mut matches = Vec::new();
+    let mut expected_revision = None;
+    let mut actual_revision = None;
+    let (cause, reason) = match failure {
+        PipelineResolveExecutionFailure::Selection(PipelineSelectedDefinitionFailure::Catalog(
+            reason,
+        )) => (PipelineRouteResolveCauseV1::Catalog, reason.clone()),
+        PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Selector(PipelineSelectorRefusal::Unsupported {
+                selector: value,
+                reason,
+            }),
+        ) => {
+            selector = Some(bounded(value)?);
+            (
+                PipelineRouteResolveCauseV1::UnsupportedSelector,
+                reason.clone(),
+            )
+        }
+        PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Selector(PipelineSelectorRefusal::Ambiguous {
+                selector: value,
+                matches: values,
+            }),
+        ) => {
+            selector = Some(bounded(value)?);
+            matches = values
+                .iter()
+                .map(|value| bounded(value))
+                .collect::<Result<Vec<_>, ContractError>>()?;
+            (
+                PipelineRouteResolveCauseV1::AmbiguousSelector,
+                "selector matched more than one pipeline or stage".to_owned(),
+            )
+        }
+        PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Selector(PipelineSelectorRefusal::Unknown {
+                selector: value,
+            }),
+        ) => {
+            selector = Some(bounded(value)?);
+            (
+                PipelineRouteResolveCauseV1::UnknownSelector,
+                "selector did not match a pipeline or stage".to_owned(),
+            )
+        }
+        PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Definition(reason),
+        ) => (PipelineRouteResolveCauseV1::Definition, reason.clone()),
+        PipelineResolveExecutionFailure::RouteStateRead(reason) => {
+            (PipelineRouteResolveCauseV1::RouteStateRead, reason.clone())
+        }
+        PipelineResolveExecutionFailure::RouteVariables(reason) => {
+            (PipelineRouteResolveCauseV1::RouteVariables, reason.clone())
+        }
+        PipelineResolveExecutionFailure::RouteResolution(reason) => {
+            (PipelineRouteResolveCauseV1::RouteResolution, reason.clone())
+        }
+        PipelineResolveExecutionFailure::RouteBasisBuild(reason) => {
+            (PipelineRouteResolveCauseV1::RouteBasisBuild, reason.clone())
+        }
+        PipelineResolveExecutionFailure::RouteBasisPersistenceRefused(
+            PipelineRouteBasisPersistenceRefusal::MalformedState { reason },
+        ) => (
+            PipelineRouteResolveCauseV1::RouteBasisPersistenceMalformed,
+            reason.clone(),
+        ),
+        PipelineResolveExecutionFailure::RouteBasisPersistenceRefused(
+            PipelineRouteBasisPersistenceRefusal::RevisionConflict {
+                expected_revision: expected,
+                actual_revision: actual,
+            },
+        ) => {
+            expected_revision = Some(SafeU64::new(*expected)?);
+            actual_revision = Some(SafeU64::new(*actual)?);
+            (
+                PipelineRouteResolveCauseV1::RouteBasisRevisionConflict,
+                "route state changed before route_basis persistence".to_owned(),
+            )
+        }
+        PipelineResolveExecutionFailure::RouteBasisPersistence(reason) => (
+            PipelineRouteResolveCauseV1::RouteBasisPersistence,
+            reason.clone(),
+        ),
+    };
+    Ok(PipelineRouteResolveDetailsV1 {
+        cause,
+        reason: bounded(&reason)?,
+        selector,
+        matches: BoundedVec::new(matches)?,
+        expected_revision,
+        actual_revision,
+    })
+}
+
+fn pipeline_route_disposition(
+    cause: PipelineRouteResolveCauseV1,
+) -> (TerminalStatus, ProblemCategory, RetryDirective) {
+    match cause {
+        PipelineRouteResolveCauseV1::UnsupportedSelector
+        | PipelineRouteResolveCauseV1::AmbiguousSelector
+        | PipelineRouteResolveCauseV1::UnknownSelector => (
+            TerminalStatus::Refused,
+            ProblemCategory::Resolution,
+            RetryDirective::AfterRequestChange,
+        ),
+        PipelineRouteResolveCauseV1::Catalog
+        | PipelineRouteResolveCauseV1::RouteStateRead
+        | PipelineRouteResolveCauseV1::RouteBasisPersistence => (
+            TerminalStatus::Error,
+            ProblemCategory::Implementation,
+            RetryDirective::Transient,
+        ),
+        _ => (
+            TerminalStatus::Blocked,
+            ProblemCategory::Prerequisite,
+            RetryDirective::AfterRecheck,
+        ),
+    }
+}
+
+fn pipeline_route_cause_name(cause: PipelineRouteResolveCauseV1) -> &'static str {
+    match cause {
+        PipelineRouteResolveCauseV1::Catalog => "catalog",
+        PipelineRouteResolveCauseV1::UnsupportedSelector => "unsupported_selector",
+        PipelineRouteResolveCauseV1::AmbiguousSelector => "ambiguous_selector",
+        PipelineRouteResolveCauseV1::UnknownSelector => "unknown_selector",
+        PipelineRouteResolveCauseV1::Definition => "definition",
+        PipelineRouteResolveCauseV1::RouteStateRead => "route_state_read",
+        PipelineRouteResolveCauseV1::RouteVariables => "route_variables",
+        PipelineRouteResolveCauseV1::RouteResolution => "route_resolution",
+        PipelineRouteResolveCauseV1::RouteBasisBuild => "route_basis_build",
+        PipelineRouteResolveCauseV1::RouteBasisPersistenceMalformed => {
+            "route_basis_persistence_malformed"
+        }
+        PipelineRouteResolveCauseV1::RouteBasisRevisionConflict => "route_basis_revision_conflict",
+        PipelineRouteResolveCauseV1::RouteBasisPersistence => "route_basis_persistence",
+    }
+}
+
+fn pipeline_route_failure(
+    details: &PipelineRouteResolveDetailsV1,
+) -> Result<PipelineResolveExecutionFailure, ContractError> {
+    let reason = details.reason.as_str().to_owned();
+    let selector = || {
+        details
+            .selector
+            .as_ref()
+            .map(|value| value.as_str().to_owned())
+            .ok_or(ContractError::InvalidInvariant)
+    };
+    Ok(match details.cause {
+        PipelineRouteResolveCauseV1::Catalog => PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Catalog(reason),
+        ),
+        PipelineRouteResolveCauseV1::UnsupportedSelector => {
+            PipelineResolveExecutionFailure::Selection(PipelineSelectedDefinitionFailure::Selector(
+                PipelineSelectorRefusal::Unsupported {
+                    selector: selector()?,
+                    reason,
+                },
+            ))
+        }
+        PipelineRouteResolveCauseV1::AmbiguousSelector => {
+            PipelineResolveExecutionFailure::Selection(PipelineSelectedDefinitionFailure::Selector(
+                PipelineSelectorRefusal::Ambiguous {
+                    selector: selector()?,
+                    matches: details
+                        .matches
+                        .as_slice()
+                        .iter()
+                        .map(|value| value.as_str().to_owned())
+                        .collect(),
+                },
+            ))
+        }
+        PipelineRouteResolveCauseV1::UnknownSelector => PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Selector(PipelineSelectorRefusal::Unknown {
+                selector: selector()?,
+            }),
+        ),
+        PipelineRouteResolveCauseV1::Definition => PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Definition(reason),
+        ),
+        PipelineRouteResolveCauseV1::RouteStateRead => {
+            PipelineResolveExecutionFailure::RouteStateRead(reason)
+        }
+        PipelineRouteResolveCauseV1::RouteVariables => {
+            PipelineResolveExecutionFailure::RouteVariables(reason)
+        }
+        PipelineRouteResolveCauseV1::RouteResolution => {
+            PipelineResolveExecutionFailure::RouteResolution(reason)
+        }
+        PipelineRouteResolveCauseV1::RouteBasisBuild => {
+            PipelineResolveExecutionFailure::RouteBasisBuild(reason)
+        }
+        PipelineRouteResolveCauseV1::RouteBasisPersistenceMalformed => {
+            PipelineResolveExecutionFailure::RouteBasisPersistenceRefused(
+                PipelineRouteBasisPersistenceRefusal::MalformedState { reason },
+            )
+        }
+        PipelineRouteResolveCauseV1::RouteBasisRevisionConflict => {
+            PipelineResolveExecutionFailure::RouteBasisPersistenceRefused(
+                PipelineRouteBasisPersistenceRefusal::RevisionConflict {
+                    expected_revision: details
+                        .expected_revision
+                        .ok_or(ContractError::InvalidInvariant)?
+                        .get(),
+                    actual_revision: details
+                        .actual_revision
+                        .ok_or(ContractError::InvalidInvariant)?
+                        .get(),
+                },
+            )
+        }
+        PipelineRouteResolveCauseV1::RouteBasisPersistence => {
+            PipelineResolveExecutionFailure::RouteBasisPersistence(reason)
+        }
+    })
 }
 
 fn empty_bounded<T>() -> Result<BoundedVec<T, 128>, ContractError> {
@@ -4069,6 +4567,107 @@ impl UseCaseResponseV1 {
         )
     }
 
+    pub fn pipeline_route_resolve_and_persist_execution(
+        execution: &PipelineResolveExecution,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        let receipts = pipeline_route_receipts(&execution.effects, limits)?;
+        match &execution.result {
+            Ok(outcome) => {
+                let [effect] = execution.effects.as_slice() else {
+                    return Err(ContractError::InvalidInvariant);
+                };
+                if effect.pipeline_id != outcome.pipeline_id
+                    || effect.state_revision != outcome.state.revision
+                    || effect.route_basis.pipeline_id != outcome.pipeline_id
+                    || effect.route_basis.state_revision != outcome.state.revision
+                {
+                    return Err(ContractError::InvalidInvariant);
+                }
+                Self::pipeline_route_resolve_and_persist_success(
+                    PipelineRouteResolveAndPersistResultV1::from_outcome(outcome)?,
+                    receipts,
+                    empty_bounded()?,
+                    empty_bounded()?,
+                    limits,
+                )
+            }
+            Err(failure) => {
+                let details = pipeline_route_details(failure)?;
+                details.validate()?;
+                let (status, category, retry) = pipeline_route_disposition(details.cause);
+                let cause = pipeline_route_cause_name(details.cause);
+                let details_value = contract_value(&details, limits)?;
+                let details_schema = binding(PIPELINE_ROUTE_DETAILS_REF)?;
+                let recheck = (status == TerminalStatus::Blocked)
+                    .then(|| {
+                        RecheckCondition::new(details_schema.clone(), details_value.clone(), limits)
+                    })
+                    .transpose()?;
+                let rule = (status == TerminalStatus::Refused)
+                    .then(|| binding(&format!("handbook.pipeline-rule.{cause}@1.0.0")))
+                    .transpose()?;
+                let correlation_ref = (status == TerminalStatus::Error)
+                    .then(|| {
+                        let fingerprint = canonical_fingerprint(&details, limits)?;
+                        CorrelationRef::new(bounded(&format!(
+                            "corr_{}",
+                            fingerprint.as_str().trim_start_matches("sha256:")
+                        ))?)
+                    })
+                    .transpose()?;
+                let problem = Problem::new(
+                    bounded(&format!("pipeline.route.{cause}"))?,
+                    bounded(&format!("pipeline.route.{cause}"))?,
+                    category,
+                    binding(PIPELINE_ROUTE_USE_CASE_REF)?,
+                    rule,
+                    details_schema,
+                    details_value,
+                    empty_bounded()?,
+                    retry,
+                    recheck,
+                    correlation_ref,
+                    limits,
+                )?;
+                let terminal = match status {
+                    TerminalStatus::Blocked => TerminalFields::new(
+                        status,
+                        None,
+                        BoundedVec::new(vec![problem])?,
+                        empty_bounded()?,
+                        empty_bounded()?,
+                    )?,
+                    TerminalStatus::Refused => TerminalFields::new(
+                        status,
+                        None,
+                        empty_bounded()?,
+                        BoundedVec::new(vec![problem])?,
+                        empty_bounded()?,
+                    )?,
+                    TerminalStatus::Error => TerminalFields::new(
+                        status,
+                        None,
+                        empty_bounded()?,
+                        empty_bounded()?,
+                        BoundedVec::new(vec![problem])?,
+                    )?,
+                    TerminalStatus::Ok => return Err(ContractError::InvalidInvariant),
+                };
+                Self::from_parts(
+                    binding(USE_CASE_RESPONSE_REF)?,
+                    binding(PIPELINE_ROUTE_USE_CASE_REF)?,
+                    binding(UseCaseKind::PipelineRouteResolveAndPersist.result_ref())?,
+                    terminal,
+                    receipts,
+                    empty_bounded()?,
+                    empty_bounded()?,
+                    limits,
+                )
+            }
+        }
+    }
+
     fn success<T: Serialize>(
         kind: UseCaseKind,
         result: &T,
@@ -4302,6 +4901,10 @@ impl UseCaseResponseV1 {
         {
             return Err(ContractError::InvalidInvariant);
         }
+        if kind == UseCaseKind::PipelineRouteResolveAndPersist && !diagnostics.as_slice().is_empty()
+        {
+            return Err(ContractError::InvalidInvariant);
+        }
         if let Some(data) = terminal.data() {
             kind.admit_success(data, limits)?;
         }
@@ -4407,6 +5010,34 @@ impl UseCaseResponseV1 {
                 reason,
             } => Ok(Some(Err(doctor_error(failure_kind, reason)?))),
         }
+    }
+
+    pub fn pipeline_route_resolve_and_persist_outcome(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<
+        Option<Result<PipelineResolveOutcome, PipelineResolveExecutionFailure>>,
+        ContractError,
+    > {
+        if self.use_case.reference().as_str() != PIPELINE_ROUTE_USE_CASE_REF {
+            return Ok(None);
+        }
+        if self.status() == TerminalStatus::Ok {
+            let result: PipelineRouteResolveAndPersistResultV1 = admit_contract_value(
+                self.terminal
+                    .data()
+                    .ok_or(ContractError::InvalidInvariant)?,
+                limits,
+            )?;
+            return Ok(Some(Ok(result.to_outcome())));
+        }
+        let [problem] = self.terminal_problems() else {
+            return Err(ContractError::InvalidInvariant);
+        };
+        let details: PipelineRouteResolveDetailsV1 =
+            admit_contract_value(problem.details(), limits)?;
+        details.validate()?;
+        Ok(Some(Err(pipeline_route_failure(&details)?)))
     }
 
     pub fn repository_setup_outcome(
@@ -5331,6 +5962,21 @@ impl InvocationResponseV1 {
         match &self.response {
             InvocationResponseBodyV1::UseCase(response) => {
                 response.repository_setup_outcome(limits)
+            }
+            _ => Ok(None),
+        }
+    }
+
+    pub fn pipeline_route_resolve_and_persist_outcome(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<
+        Option<Result<PipelineResolveOutcome, PipelineResolveExecutionFailure>>,
+        ContractError,
+    > {
+        match &self.response {
+            InvocationResponseBodyV1::UseCase(response) => {
+                response.pipeline_route_resolve_and_persist_outcome(limits)
             }
             _ => Ok(None),
         }
@@ -6275,5 +6921,56 @@ mod tests {
             pipeline["stages"][0]["reason"]["missing_variables"][0],
             "approval_ready"
         );
+    }
+
+    #[test]
+    fn pipeline_route_non_ok_preserves_receipts_for_prior_writes() {
+        use handbook_pipeline::route_state::{
+            RouteBasis, RouteBasisProfilePack, RouteBasisRunner, RouteStateRefs, RouteStateRun,
+        };
+
+        let limits = ContractLimits::packet0();
+        let execution = PipelineResolveExecution {
+            result: Err(PipelineResolveExecutionFailure::RouteResolution(
+                "route resolution stopped after persistence".to_owned(),
+            )),
+            effects: vec![PipelineResolveEffect {
+                pipeline_id: "planning".to_owned(),
+                state_revision: 4,
+                route_basis: RouteBasis {
+                    schema_version: "route_basis.v1".to_owned(),
+                    pipeline_id: "planning".to_owned(),
+                    pipeline_file: "core/pipelines/planning.yaml".to_owned(),
+                    pipeline_file_sha256: fingerprint("pipeline"),
+                    state_revision: 4,
+                    routing: BTreeMap::new(),
+                    refs: RouteStateRefs::default(),
+                    run: RouteStateRun::default(),
+                    route: Vec::new(),
+                    runner: RouteBasisRunner {
+                        id: "local".to_owned(),
+                        file: "core/runners/local.md".to_owned(),
+                        file_sha256: fingerprint("runner"),
+                    },
+                    profile: RouteBasisProfilePack {
+                        id: "default".to_owned(),
+                        profile_yaml_sha256: fingerprint("profile"),
+                        commands_yaml_sha256: fingerprint("commands"),
+                        conventions_md_sha256: fingerprint("conventions"),
+                    },
+                },
+            }],
+        };
+
+        let response =
+            UseCaseResponseV1::pipeline_route_resolve_and_persist_execution(&execution, &limits)
+                .expect("adapt non-ok execution");
+        assert_eq!(response.status(), TerminalStatus::Blocked);
+        assert_eq!(response.receipts().len(), 1);
+
+        let bytes = canonical_json_bytes(&response, &limits).expect("encode response");
+        let admitted: UseCaseResponseV1 =
+            parse_canonical_json(&bytes, &limits).expect("admit response with prior-write receipt");
+        assert_eq!(admitted.receipts().len(), 1);
     }
 }

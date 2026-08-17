@@ -5,7 +5,10 @@
 //! do not compose the pipeline owner directly. Rendering intentionally remains
 //! in the client layer.
 
-use std::{collections::BTreeMap, path::PathBuf};
+use std::{
+    collections::BTreeMap,
+    path::{Path, PathBuf},
+};
 
 use handbook_pipeline::{
     pipeline::{
@@ -303,6 +306,41 @@ pub enum PipelineResolveFailure {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
+pub enum PipelineRouteBasisPersistenceRefusal {
+    MalformedState {
+        reason: String,
+    },
+    RevisionConflict {
+        expected_revision: u64,
+        actual_revision: u64,
+    },
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum PipelineResolveExecutionFailure {
+    Selection(PipelineSelectedDefinitionFailure),
+    RouteStateRead(String),
+    RouteVariables(String),
+    RouteResolution(String),
+    RouteBasisBuild(String),
+    RouteBasisPersistenceRefused(PipelineRouteBasisPersistenceRefusal),
+    RouteBasisPersistence(String),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PipelineResolveEffect {
+    pub pipeline_id: String,
+    pub state_revision: u64,
+    pub route_basis: handbook_pipeline::route_state::RouteBasis,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PipelineResolveExecution {
+    pub result: Result<PipelineResolveOutcome, PipelineResolveExecutionFailure>,
+    pub effects: Vec<PipelineResolveEffect>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum PipelineSelectedDefinitionFailure {
     Catalog(String),
     Selector(PipelineSelectorRefusal),
@@ -312,9 +350,94 @@ pub enum PipelineSelectedDefinitionFailure {
 pub fn resolve_pipeline(
     request: &PipelineResolveRequest,
 ) -> Result<PipelineResolveOutcome, PipelineResolveFailure> {
+    resolve_pipeline_execution(request)
+        .result
+        .map_err(legacy_resolve_failure)
+}
+
+pub fn resolve_pipeline_execution(request: &PipelineResolveRequest) -> PipelineResolveExecution {
+    match resolve_pipeline_once(request) {
+        Ok((outcome, effect)) => PipelineResolveExecution {
+            result: Ok(outcome),
+            effects: vec![effect],
+        },
+        Err(failure) => PipelineResolveExecution {
+            result: Err(sanitize_resolve_failure(&request.repository_root, failure)),
+            effects: Vec::new(),
+        },
+    }
+}
+
+fn sanitize_resolve_failure(
+    repo_root: &Path,
+    failure: PipelineResolveExecutionFailure,
+) -> PipelineResolveExecutionFailure {
+    let sanitize = |detail: String| {
+        detail
+            .replace(repo_root.to_string_lossy().as_ref(), "<repository>")
+            .replace('\\', "/")
+    };
+    match failure {
+        PipelineResolveExecutionFailure::Selection(PipelineSelectedDefinitionFailure::Catalog(
+            detail,
+        )) => PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Catalog(sanitize(detail)),
+        ),
+        PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Selector(PipelineSelectorRefusal::Unsupported {
+                selector,
+                reason,
+            }),
+        ) => PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Selector(PipelineSelectorRefusal::Unsupported {
+                selector,
+                reason: sanitize(reason),
+            }),
+        ),
+        PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Selector(refusal),
+        ) => PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Selector(refusal),
+        ),
+        PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Definition(detail),
+        ) => PipelineResolveExecutionFailure::Selection(
+            PipelineSelectedDefinitionFailure::Definition(sanitize(detail)),
+        ),
+        PipelineResolveExecutionFailure::RouteStateRead(detail) => {
+            PipelineResolveExecutionFailure::RouteStateRead(sanitize(detail))
+        }
+        PipelineResolveExecutionFailure::RouteVariables(detail) => {
+            PipelineResolveExecutionFailure::RouteVariables(sanitize(detail))
+        }
+        PipelineResolveExecutionFailure::RouteResolution(detail) => {
+            PipelineResolveExecutionFailure::RouteResolution(sanitize(detail))
+        }
+        PipelineResolveExecutionFailure::RouteBasisBuild(detail) => {
+            PipelineResolveExecutionFailure::RouteBasisBuild(sanitize(detail))
+        }
+        PipelineResolveExecutionFailure::RouteBasisPersistenceRefused(
+            PipelineRouteBasisPersistenceRefusal::MalformedState { reason },
+        ) => PipelineResolveExecutionFailure::RouteBasisPersistenceRefused(
+            PipelineRouteBasisPersistenceRefusal::MalformedState {
+                reason: sanitize(reason),
+            },
+        ),
+        PipelineResolveExecutionFailure::RouteBasisPersistenceRefused(refusal) => {
+            PipelineResolveExecutionFailure::RouteBasisPersistenceRefused(refusal)
+        }
+        PipelineResolveExecutionFailure::RouteBasisPersistence(detail) => {
+            PipelineResolveExecutionFailure::RouteBasisPersistence(sanitize(detail))
+        }
+    }
+}
+
+fn resolve_pipeline_once(
+    request: &PipelineResolveRequest,
+) -> Result<(PipelineResolveOutcome, PipelineResolveEffect), PipelineResolveExecutionFailure> {
     let pipeline = load_selected_pipeline_definition(&request.repository_root, &request.selector)
         .map_err(map_selected_definition_failure)
-        .map_err(PipelineResolveFailure::Selection)?;
+        .map_err(PipelineResolveExecutionFailure::Selection)?;
     let pipeline_id = pipeline.header.id.clone();
     let supported_variables = supported_route_state_variables(&pipeline);
     let state = load_route_state_with_supported_variables(
@@ -322,29 +445,53 @@ pub fn resolve_pipeline(
         &pipeline_id,
         &supported_variables,
     )
-    .map_err(|error| PipelineResolveFailure::RouteStateRead(error.to_string()))?;
+    .map_err(|error| PipelineResolveExecutionFailure::RouteStateRead(error.to_string()))?;
     let route_variables = RouteVariables::new(state.routing.clone())
-        .map_err(|error| PipelineResolveFailure::RouteVariables(error.to_string()))?;
+        .map_err(|error| PipelineResolveExecutionFailure::RouteVariables(error.to_string()))?;
     let route = resolve_pipeline_route(&pipeline, &route_variables)
-        .map_err(|error| PipelineResolveFailure::RouteResolution(error.to_string()))?;
+        .map_err(|error| PipelineResolveExecutionFailure::RouteResolution(error.to_string()))?;
     let route_basis = build_route_basis(&request.repository_root, &pipeline, &state, &route)
-        .map_err(|error| PipelineResolveFailure::RouteBasisBuild(error.to_string()))?;
+        .map_err(|error| PipelineResolveExecutionFailure::RouteBasisBuild(error.to_string()))?;
 
-    match persist_route_basis(&request.repository_root, &pipeline_id, route_basis) {
-        Ok(RouteBasisPersistOutcome::Applied(_)) => {}
+    let persisted_state = match persist_route_basis(
+        &request.repository_root,
+        &pipeline_id,
+        route_basis,
+    ) {
+        Ok(RouteBasisPersistOutcome::Applied(state)) => state,
         Ok(RouteBasisPersistOutcome::Refused(refusal)) => {
-            return Err(PipelineResolveFailure::RouteBasisPersistenceRefused(
-                refusal.to_string(),
+            return Err(PipelineResolveExecutionFailure::RouteBasisPersistenceRefused(
+                match refusal {
+                    handbook_pipeline::route_state::RouteBasisPersistRefusal::MalformedState { reason } =>
+                        PipelineRouteBasisPersistenceRefusal::MalformedState { reason },
+                    handbook_pipeline::route_state::RouteBasisPersistRefusal::RevisionConflict {
+                        expected_revision,
+                        actual_revision,
+                    } => PipelineRouteBasisPersistenceRefusal::RevisionConflict {
+                        expected_revision,
+                        actual_revision,
+                    },
+                },
             ));
         }
         Err(error) => {
-            return Err(PipelineResolveFailure::RouteBasisPersistence(
+            return Err(PipelineResolveExecutionFailure::RouteBasisPersistence(
                 error.to_string(),
             ));
         }
-    }
+    };
+    let persisted_route_basis = persisted_state.route_basis.clone().ok_or_else(|| {
+        PipelineResolveExecutionFailure::RouteBasisPersistence(
+            "persisted pipeline state omitted route_basis".to_owned(),
+        )
+    })?;
+    let effect = PipelineResolveEffect {
+        pipeline_id: pipeline_id.clone(),
+        state_revision: persisted_state.revision,
+        route_basis: persisted_route_basis,
+    };
 
-    Ok(PipelineResolveOutcome {
+    let outcome = PipelineResolveOutcome {
         pipeline_id,
         state: map_route_state(&state),
         effective_run: map_route_run(&effective_route_basis_run(
@@ -361,7 +508,40 @@ pub fn resolve_pipeline(
                 reason: stage.reason.map(map_route_reason),
             })
             .collect(),
-    })
+    };
+    Ok((outcome, effect))
+}
+
+fn legacy_resolve_failure(failure: PipelineResolveExecutionFailure) -> PipelineResolveFailure {
+    match failure {
+        PipelineResolveExecutionFailure::Selection(value) => {
+            PipelineResolveFailure::Selection(value)
+        }
+        PipelineResolveExecutionFailure::RouteStateRead(value) => {
+            PipelineResolveFailure::RouteStateRead(value)
+        }
+        PipelineResolveExecutionFailure::RouteVariables(value) => {
+            PipelineResolveFailure::RouteVariables(value)
+        }
+        PipelineResolveExecutionFailure::RouteResolution(value) => {
+            PipelineResolveFailure::RouteResolution(value)
+        }
+        PipelineResolveExecutionFailure::RouteBasisBuild(value) => {
+            PipelineResolveFailure::RouteBasisBuild(value)
+        }
+        PipelineResolveExecutionFailure::RouteBasisPersistenceRefused(value) => {
+            let value = match value {
+                PipelineRouteBasisPersistenceRefusal::MalformedState { reason } =>
+                    format!("malformed route state: {reason}"),
+                PipelineRouteBasisPersistenceRefusal::RevisionConflict { expected_revision, actual_revision } =>
+                    format!("revision conflict while persisting route_basis: expected {expected_revision}, found {actual_revision}"),
+            };
+            PipelineResolveFailure::RouteBasisPersistenceRefused(value)
+        }
+        PipelineResolveExecutionFailure::RouteBasisPersistence(value) => {
+            PipelineResolveFailure::RouteBasisPersistence(value)
+        }
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]

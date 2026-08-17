@@ -3696,7 +3696,6 @@ fn pipeline_state_set_field_surfaces_accept_run_and_refs() {
 fn pipeline_compile_feature_spec_payload_matches_shared_golden() {
     let (_dir, root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
     prepare_foundation_inputs_full_context_route_basis(root.as_path());
-
     let output = run_in_with_env(
         root.as_path(),
         &[
@@ -3823,6 +3822,312 @@ fn pipeline_compile_feature_spec_explain_matches_shared_golden() {
         !stdout.starts_with("# stage.10_feature_spec"),
         "explain mode must not include the payload header: {stdout}"
     );
+}
+
+fn packet6_json_document(output: &Output) -> serde_json::Value {
+    assert_eq!(
+        output.stdout.iter().filter(|byte| **byte == b'\n').count(),
+        1,
+        "machine output must be one canonical line: {}",
+        String::from_utf8_lossy(&output.stdout)
+    );
+    assert!(output.stdout.ends_with(b"\n"));
+    assert!(
+        output.stderr.is_empty(),
+        "semantic outcomes stay off stderr: {}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    serde_json::from_slice(&output.stdout).expect("one valid invocation document")
+}
+
+fn packet6_admit_operation(output: &Output, operation_ref: &str) {
+    let definitions = handbook_sdk::contract_membrane::pipeline_operation_definitions().unwrap();
+    let definition = definitions
+        .iter()
+        .find(|definition| definition.operation().as_str() == operation_ref)
+        .unwrap();
+    handbook_sdk::contract_membrane::InvocationResponseV1::parse_and_admit(
+        &output.stdout[..output.stdout.len() - 1],
+        Some((
+            definition,
+            &handbook_sdk::contract_membrane::PipelineOperationSchemaValidator,
+        )),
+        &handbook_sdk::contract_membrane::ContractLimits::packet0(),
+    )
+    .expect("schema-valid Pipeline ordinary invocation");
+}
+
+#[test]
+fn packet6_pipeline_catalog_json_is_exact_closed_and_semantically_framed() {
+    let (_dir, root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    let list = run_in(root.as_path(), &["--json", "pipeline", "list"]);
+    assert!(list.status.success());
+    let list_json = packet6_json_document(&list);
+    assert_eq!(list_json["response_kind"], "operation");
+    assert_eq!(
+        list_json["response"]["operation"]["ref"],
+        "pipeline.catalog.list@1.0.0"
+    );
+    assert_eq!(list_json["response"]["status"], "ok");
+    packet6_admit_operation(&list, "pipeline.catalog.list@1.0.0");
+
+    let show = run_in(
+        root.as_path(),
+        &["--json", "pipeline", "show", "--id", "foundation_inputs"],
+    );
+    assert!(show.status.success());
+    let show_json = packet6_json_document(&show);
+    assert_eq!(
+        show_json["response"]["operation"]["ref"],
+        "pipeline.catalog.read@1.0.0"
+    );
+    assert_eq!(show_json["response"]["data"]["selection_kind"], "pipeline");
+    packet6_admit_operation(&show, "pipeline.catalog.read@1.0.0");
+
+    let refused = run_in(
+        root.as_path(),
+        &["--json", "pipeline", "show", "--id", "does-not-exist"],
+    );
+    assert!(!refused.status.success());
+    let refused_json = packet6_json_document(&refused);
+    assert_eq!(refused_json["response"]["status"], "refused");
+    packet6_admit_operation(&refused, "pipeline.catalog.read@1.0.0");
+
+    let empty = tempfile::tempdir().unwrap();
+    let error = run_in(empty.path(), &["--json", "pipeline", "list"]);
+    assert!(!error.status.success());
+    let error_json = packet6_json_document(&error);
+    assert_eq!(error_json["response"]["status"], "error");
+    packet6_admit_operation(&error, "pipeline.catalog.list@1.0.0");
+
+    let legacy = run_in(root.as_path(), &["pipeline", "list", "--legacy-json"]);
+    assert_eq!(legacy.status.code(), Some(2));
+}
+
+#[test]
+fn packet6_pipeline_compile_modes_share_one_typed_execution_document() {
+    let (_dir, root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    prepare_foundation_inputs_full_context_route_basis(root.as_path());
+    let env = [(
+        handbook_pipeline::pipeline_compile::PIPELINE_COMPILE_NOW_UTC_ENV_VAR,
+        FIXED_NOW_UTC,
+    )];
+    let payload = run_in_with_env(
+        root.as_path(),
+        &[
+            "--json",
+            "pipeline",
+            "compile",
+            "--id",
+            "foundation_inputs",
+            "--stage",
+            "10_feature_spec",
+        ],
+        &env,
+    );
+    let explain = run_in_with_env(
+        root.as_path(),
+        &[
+            "--json",
+            "pipeline",
+            "compile",
+            "--id",
+            "foundation_inputs",
+            "--stage",
+            "10_feature_spec",
+            "--explain",
+        ],
+        &env,
+    );
+    assert!(payload.status.success() && explain.status.success());
+    let payload_json = packet6_json_document(&payload);
+    let explain_json = packet6_json_document(&explain);
+    assert_eq!(payload_json, explain_json);
+    assert_eq!(
+        payload_json["response"]["operation"]["ref"],
+        "pipeline.compile@1.0.0"
+    );
+    assert_eq!(
+        payload_json["response"]["data"]["target"]["stage_id"],
+        "stage.10_feature_spec"
+    );
+    assert!(payload_json["response"]["data"].get("raw").is_none());
+    packet6_admit_operation(&payload, "pipeline.compile@1.0.0");
+
+    let (_blocked_dir, blocked_root) =
+        pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    let blocked = run_in(
+        blocked_root.as_path(),
+        &[
+            "--json",
+            "pipeline",
+            "compile",
+            "--id",
+            "foundation_inputs",
+            "--stage",
+            "10_feature_spec",
+        ],
+    );
+    assert!(!blocked.status.success());
+    let blocked_json = packet6_json_document(&blocked);
+    assert_eq!(blocked_json["response"]["status"], "blocked");
+    packet6_admit_operation(&blocked, "pipeline.compile@1.0.0");
+
+    let (_oversize_dir, oversize_root) =
+        pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    let stage_path = oversize_root.join("core/stages/10_feature_spec.md");
+    let mut stage = fs::read_to_string(&stage_path).unwrap();
+    stage.push_str(&"x".repeat(70_000));
+    fs::write(&stage_path, stage).unwrap();
+    prepare_foundation_inputs_full_context_route_basis(oversize_root.as_path());
+    let oversize = run_in_with_env(
+        oversize_root.as_path(),
+        &[
+            "--json",
+            "pipeline",
+            "compile",
+            "--id",
+            "foundation_inputs",
+            "--stage",
+            "10_feature_spec",
+        ],
+        &env,
+    );
+    assert!(!oversize.status.success());
+    let oversize_json = packet6_json_document(&oversize);
+    assert_eq!(
+        oversize_json["response_kind"],
+        "operation",
+        "{}",
+        String::from_utf8_lossy(&oversize.stderr)
+    );
+    assert_eq!(oversize_json["response"]["status"], "blocked");
+    assert_eq!(
+        oversize_json["response"]["blockers"][0]["details"]["cause"],
+        "compile_result_bound_exceeded"
+    );
+    packet6_admit_operation(&oversize, "pipeline.compile@1.0.0");
+
+    let oversize_human = run_in_with_env(
+        oversize_root.as_path(),
+        &[
+            "pipeline",
+            "compile",
+            "--id",
+            "foundation_inputs",
+            "--stage",
+            "10_feature_spec",
+        ],
+        &env,
+    );
+    assert!(!oversize_human.status.success());
+    let oversize_human = String::from_utf8(oversize_human.stdout).unwrap();
+    assert!(oversize_human.starts_with("OUTCOME: REFUSED\n"));
+    assert!(oversize_human.contains("compiled Pipeline result exceeds the public contract bounds"));
+
+    let (_path_dir, path_root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    prepare_foundation_inputs_full_context_route_basis(path_root.as_path());
+    let required_input = path_root.join("artifacts/base/BASE_CONTEXT.md");
+    fs::remove_file(&required_input).unwrap();
+    fs::create_dir(&required_input).unwrap();
+    let path_failure = run_in_with_env(
+        path_root.as_path(),
+        &[
+            "--json",
+            "pipeline",
+            "compile",
+            "--id",
+            "foundation_inputs",
+            "--stage",
+            "10_feature_spec",
+        ],
+        &env,
+    );
+    assert!(!path_failure.status.success());
+    let path_json = packet6_json_document(&path_failure);
+    let path_wire = serde_json::to_string(&path_json).unwrap();
+    assert!(!path_wire.contains(path_root.to_string_lossy().as_ref()));
+    assert!(path_wire.contains("<repository>/artifacts/base/BASE_CONTEXT.md"));
+    packet6_admit_operation(&path_failure, "pipeline.compile@1.0.0");
+}
+
+#[test]
+fn packet6_pipeline_resolve_is_typed_use_case_with_realized_write_receipt() {
+    let (_dir, root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    let output = run_in(
+        root.as_path(),
+        &["--json", "pipeline", "resolve", "--id", "foundation_inputs"],
+    );
+    assert!(output.status.success());
+    let document = packet6_json_document(&output);
+    assert_eq!(document["response_kind"], "use_case");
+    assert_eq!(
+        document["response"]["use_case"]["ref"],
+        "handbook.use-case.pipeline-route-resolve-and-persist@1.0.0"
+    );
+    assert_eq!(
+        document["response"]["result_schema"]["ref"],
+        "handbook.use-case.pipeline-route-resolve-and-persist-result@1.0.0"
+    );
+    assert_eq!(
+        document["response"]["receipts"].as_array().unwrap().len(),
+        1
+    );
+    assert_eq!(
+        document["response"]["receipts"][0]["record"]["ref"],
+        "handbook.pipeline-record.route-basis@1.0.0"
+    );
+    assert_eq!(
+        document["response"]["receipts"][0]["condition"]["pipeline_id"],
+        "pipeline.foundation_inputs"
+    );
+    handbook_sdk::contract_membrane::InvocationResponseV1::parse_and_admit(
+        &output.stdout[..output.stdout.len() - 1],
+        None,
+        &handbook_sdk::contract_membrane::ContractLimits::packet0(),
+    )
+    .expect("schema-valid Pipeline resolve use-case invocation");
+    let state = std::fs::read_to_string(
+        root.join(".handbook/state/pipeline/pipeline.foundation_inputs.yaml"),
+    )
+    .unwrap();
+    assert!(state.contains("route_basis:"));
+
+    let refused = run_in(
+        root.as_path(),
+        &["--json", "pipeline", "resolve", "--id", "does-not-exist"],
+    );
+    assert!(!refused.status.success());
+    let refused_json = packet6_json_document(&refused);
+    assert_eq!(refused_json["response"]["status"], "refused");
+    assert!(refused_json["response"]["receipts"]
+        .as_array()
+        .unwrap()
+        .is_empty());
+    handbook_sdk::contract_membrane::InvocationResponseV1::parse_and_admit(
+        &refused.stdout[..refused.stdout.len() - 1],
+        None,
+        &handbook_sdk::contract_membrane::ContractLimits::packet0(),
+    )
+    .expect("schema-valid refused resolve invocation");
+
+    let empty = tempfile::tempdir().unwrap();
+    let error = run_in(
+        empty.path(),
+        &["--json", "pipeline", "resolve", "--id", "foundation_inputs"],
+    );
+    assert!(!error.status.success());
+    let error_json = packet6_json_document(&error);
+    assert_eq!(error_json["response"]["status"], "error");
+    let error_wire = serde_json::to_string(&error_json).unwrap();
+    assert!(!error_wire.contains(empty.path().to_string_lossy().as_ref()));
+    assert!(error_wire.contains("<repository>/core/pipelines"));
+    handbook_sdk::contract_membrane::InvocationResponseV1::parse_and_admit(
+        &error.stdout[..error.stdout.len() - 1],
+        None,
+        &handbook_sdk::contract_membrane::ContractLimits::packet0(),
+    )
+    .expect("schema-valid portable resolve error invocation");
 }
 
 #[test]

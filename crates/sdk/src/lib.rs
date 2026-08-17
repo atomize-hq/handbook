@@ -160,6 +160,34 @@ impl HandbookSdkV1 {
     ) -> Result<contract_membrane::OperationResponseV1, contract_membrane::ContractError> {
         contract_membrane::execute_flow_operation(&self.repo_root, request)
     }
+
+    /// Executes one exact Pipeline catalog or compile ordinary operation once.
+    pub fn execute_pipeline_operation(
+        &self,
+        request: &contract_membrane::OperationRequestV1,
+    ) -> Result<contract_membrane::OperationResponseV1, contract_membrane::ContractError> {
+        contract_membrane::execute_pipeline_operation(&self.repo_root, request)
+    }
+
+    /// Resolves and persists one Pipeline route exactly once through the SDK composition.
+    pub fn resolve_pipeline_use_case(
+        &self,
+        selector: &str,
+        limits: &contract_membrane::ContractLimits,
+    ) -> Result<contract_membrane::UseCaseResponseV1, contract_membrane::ContractError> {
+        if limits != &contract_membrane::ContractLimits::packet0() {
+            return Err(contract_membrane::ContractError::LimitOutOfRange);
+        }
+        let execution = pipeline_route_api::resolve_pipeline_execution(
+            &pipeline_route_api::PipelineResolveRequest {
+                repository_root: self.repo_root.clone(),
+                selector: selector.to_owned(),
+            },
+        );
+        contract_membrane::UseCaseResponseV1::pipeline_route_resolve_and_persist_execution(
+            &execution, limits,
+        )
+    }
 }
 
 fn execute_preflighted_setup(

@@ -86,13 +86,18 @@ pub fn admit_contract_operation(
     if claim.operation_ref == "pipeline.route.resolve@1.0.0" {
         return Err(OwnerAdmissionRefusal::SemanticMismatch);
     }
-    let Some(expected_claim) = ADMITTED
-        .iter()
-        .find(|candidate| candidate.operation_ref == claim.operation_ref)
-    else {
-        return Err(OwnerAdmissionRefusal::DefinitionMismatch);
+    let admitted = if matches!(
+        claim.operation_ref,
+        "pipeline.catalog.list@1.0.0" | "pipeline.catalog.read@1.0.0" | "pipeline.compile@1.0.0"
+    ) {
+        crate::pipeline_read_admission::matches(claim)
+    } else {
+        ADMITTED
+            .iter()
+            .find(|candidate| candidate.operation_ref == claim.operation_ref)
+            .is_some_and(|expected_claim| exact_claim_matches(claim, expected_claim))
     };
-    if !exact_claim_matches(claim, expected_claim) {
+    if !admitted {
         return Err(OwnerAdmissionRefusal::DefinitionMismatch);
     }
     Ok(OwnerOperationAdmission {

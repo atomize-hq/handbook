@@ -4,18 +4,25 @@ use super::{
     PipelineShowArgs, PipelineStateCommand, PipelineStateSetArgs, RELEASE_VERSION,
 };
 use crate::{
-    pipeline_help,
+    doctor_rendering, exit_policy, pipeline_help,
     shell_shared::{discover_managed_repo_root, read_stdin},
+};
+use handbook_sdk::contract_membrane::{
+    pipeline_catalog_list_from_response, pipeline_catalog_list_operation_request,
+    pipeline_catalog_read_from_response, pipeline_catalog_read_operation_request,
+    pipeline_compile_from_response, pipeline_compile_operation_request,
+    pipeline_operation_problem_details, ContractLimits, InvocationResponseV1, OperationResponseV1,
+    TransportFailureKind, TransportFailureV1, UseCaseResponseV1,
 };
 use handbook_sdk::pipeline_route_api as pipeline_sdk;
 use std::process::ExitCode;
 
-pub(super) fn run(args: PipelineArgs) -> ExitCode {
+pub(super) fn run(args: PipelineArgs, machine_json: bool) -> ExitCode {
     match args.command {
-        PipelineCommand::List => pipeline_list(),
-        PipelineCommand::Show(args) => pipeline_show(args),
-        PipelineCommand::Resolve(args) => pipeline_resolve(args),
-        PipelineCommand::Compile(args) => pipeline_compile(args),
+        PipelineCommand::List => pipeline_list(machine_json),
+        PipelineCommand::Show(args) => pipeline_show(args, machine_json),
+        PipelineCommand::Resolve(args) => pipeline_resolve(args, machine_json),
+        PipelineCommand::Compile(args) => pipeline_compile(args, machine_json),
         PipelineCommand::Capture(args) => pipeline_capture(args),
         PipelineCommand::Handoff(args) => pipeline_handoff(args),
         PipelineCommand::State(args) => match args.command {
@@ -24,123 +31,249 @@ pub(super) fn run(args: PipelineArgs) -> ExitCode {
     }
 }
 
-fn pipeline_list() -> ExitCode {
+fn pipeline_list(machine_json: bool) -> ExitCode {
+    let limits = ContractLimits::packet0();
     let cwd = match std::env::current_dir() {
         Ok(dir) => dir,
         Err(err) => {
-            println!("REFUSED: failed to determine repo root: {err}");
-            return ExitCode::from(1);
+            return pipeline_root_failure(machine_json, &err.to_string(), &limits);
         }
     };
     let repo_root = discover_managed_repo_root(&cwd);
-
-    let catalog = match pipeline_sdk::list_pipeline_catalog(&pipeline_sdk::PipelineCatalogRequest {
-        repository_root: repo_root,
-    }) {
-        Ok(catalog) => catalog,
-        Err(err) => {
-            println!("REFUSED: pipeline catalog error: {err}");
-            return ExitCode::from(1);
-        }
+    let request = match pipeline_catalog_list_operation_request(None) {
+        Ok(request) => request,
+        Err(_) => return pipeline_adapter_failure(machine_json, &limits),
     };
-
-    println!("{}", render_pipeline_list(&catalog));
-    ExitCode::SUCCESS
+    let response =
+        match handbook_sdk::HandbookSdkV1::open(repo_root).execute_pipeline_operation(&request) {
+            Ok(response) => response,
+            Err(_) => return pipeline_adapter_failure(machine_json, &limits),
+        };
+    emit_pipeline_list(response, machine_json, &limits)
 }
 
-fn pipeline_show(args: PipelineShowArgs) -> ExitCode {
+fn pipeline_show(args: PipelineShowArgs, machine_json: bool) -> ExitCode {
+    let limits = ContractLimits::packet0();
     let cwd = match std::env::current_dir() {
         Ok(dir) => dir,
         Err(err) => {
-            println!("REFUSED: failed to determine repo root: {err}");
-            return ExitCode::from(1);
+            return pipeline_root_failure(machine_json, &err.to_string(), &limits);
         }
     };
     let repo_root = discover_managed_repo_root(&cwd);
-
-    let selection = match pipeline_sdk::show_pipeline(&pipeline_sdk::PipelineShowRequest {
-        repository_root: repo_root,
-        selector: args.id,
-    }) {
-        Ok(selection) => selection,
-        Err(pipeline_sdk::PipelineShowFailure::Catalog(err)) => {
-            println!("REFUSED: pipeline catalog error: {err}");
-            return ExitCode::from(1);
-        }
-        Err(pipeline_sdk::PipelineShowFailure::Selector(err)) => {
-            println!("{}", render_pipeline_selector_refusal(err));
-            return ExitCode::from(1);
-        }
+    let request = match pipeline_catalog_read_operation_request(None, &args.id) {
+        Ok(request) => request,
+        Err(_) => return pipeline_adapter_failure(machine_json, &limits),
     };
-
-    println!("{}", render_pipeline_show(&selection));
-    ExitCode::SUCCESS
+    let response =
+        match handbook_sdk::HandbookSdkV1::open(repo_root).execute_pipeline_operation(&request) {
+            Ok(response) => response,
+            Err(_) => return pipeline_adapter_failure(machine_json, &limits),
+        };
+    emit_pipeline_show(response, machine_json, &limits)
 }
 
-fn pipeline_resolve(args: PipelineSelectorArgs) -> ExitCode {
+fn pipeline_resolve(args: PipelineSelectorArgs, machine_json: bool) -> ExitCode {
+    let limits = ContractLimits::packet0();
     let cwd = match std::env::current_dir() {
         Ok(dir) => dir,
         Err(err) => {
-            println!("REFUSED: failed to determine repo root: {err}");
-            return ExitCode::from(1);
+            return pipeline_root_failure(machine_json, &err.to_string(), &limits);
         }
     };
     let repo_root = discover_managed_repo_root(&cwd);
+    let response = match handbook_sdk::HandbookSdkV1::open(repo_root)
+        .resolve_pipeline_use_case(&args.id, &limits)
+    {
+        Ok(response) => response,
+        Err(_) => return pipeline_adapter_failure(machine_json, &limits),
+    };
+    emit_pipeline_resolve(response, machine_json, &limits)
+}
 
-    let outcome = match pipeline_sdk::resolve_pipeline(&pipeline_sdk::PipelineResolveRequest {
-        repository_root: repo_root,
-        selector: args.id,
-    }) {
-        Ok(outcome) => outcome,
-        Err(refusal) => {
-            println!("{}", render_pipeline_resolve_refusal(refusal));
-            return ExitCode::from(1);
+fn pipeline_compile(args: PipelineCompileArgs, machine_json: bool) -> ExitCode {
+    let limits = ContractLimits::packet0();
+    let cwd = match std::env::current_dir() {
+        Ok(dir) => dir,
+        Err(err) => {
+            return pipeline_root_failure(machine_json, &err.to_string(), &limits);
         }
     };
+    let repo_root = discover_managed_repo_root(&cwd);
+    let request = match pipeline_compile_operation_request(None, &args.id, &args.stage) {
+        Ok(request) => request,
+        Err(_) => return pipeline_adapter_failure(machine_json, &limits),
+    };
+    let response =
+        match handbook_sdk::HandbookSdkV1::open(repo_root).execute_pipeline_operation(&request) {
+            Ok(response) => response,
+            Err(_) => return pipeline_adapter_failure(machine_json, &limits),
+        };
+    emit_pipeline_compile(response, &args, machine_json, &limits)
+}
 
-    println!(
-        "{}",
-        render_pipeline_resolve_output(
+fn emit_pipeline_list(
+    response: OperationResponseV1,
+    machine_json: bool,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let semantic_exit = exit_policy::terminal(response.terminal().status());
+    if machine_json {
+        return emit_operation_invocation(response, semantic_exit, limits);
+    }
+    let rendered = match pipeline_catalog_list_from_response(&response) {
+        Ok(Some(catalog)) => render_pipeline_list(&catalog),
+        Ok(None) => match pipeline_operation_problem_details(&response) {
+            Ok(Some((detail, _, _))) => format!("REFUSED: pipeline catalog error: {detail}"),
+            _ => "PRESENTATION FAILURE: invalid Pipeline catalog response".to_owned(),
+        },
+        Err(_) => "PRESENTATION FAILURE: invalid Pipeline catalog response".to_owned(),
+    };
+    emit_human(&rendered, semantic_exit)
+}
+
+fn emit_pipeline_show(
+    response: OperationResponseV1,
+    machine_json: bool,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let semantic_exit = exit_policy::terminal(response.terminal().status());
+    if machine_json {
+        return emit_operation_invocation(response, semantic_exit, limits);
+    }
+    let rendered = match pipeline_catalog_read_from_response(&response) {
+        Ok(Some(selection)) => render_pipeline_show(&selection),
+        Ok(None) => match pipeline_operation_problem_details(&response) {
+            Ok(Some((_, Some(selector), _))) => render_pipeline_selector_refusal(selector),
+            Ok(Some((detail, None, _))) => format!("REFUSED: pipeline catalog error: {detail}"),
+            _ => "PRESENTATION FAILURE: invalid Pipeline catalog-read response".to_owned(),
+        },
+        Err(_) => "PRESENTATION FAILURE: invalid Pipeline catalog-read response".to_owned(),
+    };
+    emit_human(&rendered, semantic_exit)
+}
+
+fn emit_pipeline_compile(
+    response: OperationResponseV1,
+    args: &PipelineCompileArgs,
+    machine_json: bool,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let semantic_exit = exit_policy::terminal(response.terminal().status());
+    if machine_json {
+        return emit_operation_invocation(response, semantic_exit, limits);
+    }
+    let rendered = match pipeline_compile_from_response(&response) {
+        Ok(Some(result)) if args.explain => render_pipeline_compile_explain(&result),
+        Ok(Some(result)) => render_pipeline_compile_payload(&result),
+        Ok(None) => match pipeline_operation_problem_details(&response) {
+            Ok(Some((_, _, Some(refusal)))) => {
+                render_pipeline_compile_refusal(refusal, &args.id, &args.stage)
+            }
+            _ => "PRESENTATION FAILURE: invalid Pipeline compile response".to_owned(),
+        },
+        Err(_) => "PRESENTATION FAILURE: invalid Pipeline compile response".to_owned(),
+    };
+    emit_human(&rendered, semantic_exit)
+}
+
+fn emit_pipeline_resolve(
+    response: UseCaseResponseV1,
+    machine_json: bool,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let semantic_exit = exit_policy::terminal(response.status());
+    if machine_json {
+        let bytes = InvocationResponseV1::use_case(response, limits)
+            .map_err(|_| ())
+            .and_then(|value| doctor_rendering::render_invocation(&value).map_err(|_| ()));
+        return match bytes {
+            Ok(bytes) => exit_policy::emit_stdout(&bytes, semantic_exit),
+            Err(()) => emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.serialization_failed",
+                limits,
+            ),
+        };
+    }
+    let rendered = match response.pipeline_route_resolve_and_persist_outcome(limits) {
+        Ok(Some(Ok(outcome))) => render_pipeline_resolve_output(
             &outcome.pipeline_id,
             &outcome.state,
             &outcome.effective_run,
             &outcome.stages,
-        )
-    );
-    ExitCode::SUCCESS
+        ),
+        Ok(Some(Err(failure))) => render_pipeline_resolve_execution_failure(failure),
+        _ => "PRESENTATION FAILURE: invalid Pipeline resolve response".to_owned(),
+    };
+    emit_human(&rendered, semantic_exit)
 }
 
-fn pipeline_compile(args: PipelineCompileArgs) -> ExitCode {
-    let cwd = match std::env::current_dir() {
-        Ok(dir) => dir,
-        Err(err) => {
-            println!("REFUSED: failed to determine repo root: {err}");
-            return ExitCode::from(1);
-        }
-    };
-    let repo_root = discover_managed_repo_root(&cwd);
+fn emit_operation_invocation(
+    response: OperationResponseV1,
+    semantic_exit: ExitCode,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let bytes = InvocationResponseV1::operation_response(response, limits)
+        .map_err(|_| ())
+        .and_then(|value| doctor_rendering::render_invocation(&value).map_err(|_| ()));
+    match bytes {
+        Ok(bytes) => exit_policy::emit_stdout(&bytes, semantic_exit),
+        Err(()) => emit_transport_failure(
+            TransportFailureKind::Serialization,
+            "transport.serialization_failed",
+            limits,
+        ),
+    }
+}
 
-    match pipeline_sdk::compile_pipeline(&pipeline_sdk::PipelineCompileRequest {
-        repository_root: repo_root,
-        pipeline_selector: args.id.clone(),
-        stage_selector: args.stage.clone(),
-    }) {
-        Ok(result) => {
-            if args.explain {
-                println!("{}", render_pipeline_compile_explain(&result));
-            } else {
-                println!("{}", render_pipeline_compile_payload(&result));
-            }
-            ExitCode::SUCCESS
-        }
-        Err(refusal) => {
-            println!(
-                "{}",
-                render_pipeline_compile_refusal(refusal, &args.id, &args.stage)
-            );
-            ExitCode::from(1)
+fn pipeline_root_failure(machine_json: bool, detail: &str, limits: &ContractLimits) -> ExitCode {
+    if machine_json {
+        emit_transport_failure(
+            TransportFailureKind::Adapter,
+            "transport.repository_root_unavailable",
+            limits,
+        )
+    } else {
+        emit_human(
+            &format!("REFUSED: failed to determine repo root: {detail}"),
+            exit_policy::failure(),
+        )
+    }
+}
+
+fn pipeline_adapter_failure(machine_json: bool, limits: &ContractLimits) -> ExitCode {
+    if machine_json {
+        emit_transport_failure(
+            TransportFailureKind::Adapter,
+            "transport.pipeline_adapter_failed",
+            limits,
+        )
+    } else {
+        emit_human("REFUSED: pipeline adapter error", exit_policy::failure())
+    }
+}
+
+fn emit_transport_failure(
+    kind: TransportFailureKind,
+    reason_code: &str,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let bytes = TransportFailureV1::adapter_error(kind, reason_code, limits)
+        .and_then(|failure| InvocationResponseV1::transport_failure(failure, limits))
+        .map_err(|_| ())
+        .and_then(|value| doctor_rendering::render_invocation(&value).map_err(|_| ()));
+    match bytes {
+        Ok(bytes) => exit_policy::emit_stdout(&bytes, exit_policy::failure()),
+        Err(()) => {
+            eprintln!("handbook: failed to prepare transport-failure response");
+            exit_policy::failure()
         }
     }
+}
+
+fn emit_human(rendered: &str, semantic_exit: ExitCode) -> ExitCode {
+    exit_policy::emit_stdout(format!("{rendered}\n").as_bytes(), semantic_exit)
 }
 
 fn pipeline_capture(args: PipelineCaptureArgs) -> ExitCode {
@@ -783,27 +916,40 @@ fn render_pipeline_show(selection: &pipeline_sdk::PipelineShowOutcome) -> String
     }
 }
 
-fn render_pipeline_resolve_refusal(refusal: pipeline_sdk::PipelineResolveFailure) -> String {
-    match refusal {
-        pipeline_sdk::PipelineResolveFailure::Selection(refusal) => {
-            render_selected_definition_refusal(refusal)
+fn render_pipeline_resolve_execution_failure(
+    failure: pipeline_sdk::PipelineResolveExecutionFailure,
+) -> String {
+    match failure {
+        pipeline_sdk::PipelineResolveExecutionFailure::Selection(failure) => {
+            render_selected_definition_refusal(failure)
         }
-        pipeline_sdk::PipelineResolveFailure::RouteStateRead(reason) => {
+        pipeline_sdk::PipelineResolveExecutionFailure::RouteStateRead(reason) => {
             format!("REFUSED: {reason}")
         }
-        pipeline_sdk::PipelineResolveFailure::RouteVariables(reason) => {
+        pipeline_sdk::PipelineResolveExecutionFailure::RouteVariables(reason) => {
             format!("REFUSED: malformed route state variables: {reason}")
         }
-        pipeline_sdk::PipelineResolveFailure::RouteResolution(reason) => {
+        pipeline_sdk::PipelineResolveExecutionFailure::RouteResolution(reason) => {
             format!("REFUSED: route resolution error: {reason}")
         }
-        pipeline_sdk::PipelineResolveFailure::RouteBasisBuild(reason) => {
+        pipeline_sdk::PipelineResolveExecutionFailure::RouteBasisBuild(reason) => {
             format!("REFUSED: route basis build error: {reason}")
         }
-        pipeline_sdk::PipelineResolveFailure::RouteBasisPersistenceRefused(reason) => {
+        pipeline_sdk::PipelineResolveExecutionFailure::RouteBasisPersistenceRefused(refusal) => {
+            let reason = match refusal {
+                pipeline_sdk::PipelineRouteBasisPersistenceRefusal::MalformedState { reason } => {
+                    format!("malformed route state: {reason}")
+                }
+                pipeline_sdk::PipelineRouteBasisPersistenceRefusal::RevisionConflict {
+                    expected_revision,
+                    actual_revision,
+                } => format!(
+                    "revision conflict while persisting route_basis: expected {expected_revision}, found {actual_revision}"
+                ),
+            };
             format!("REFUSED: route basis persistence refused: {reason}")
         }
-        pipeline_sdk::PipelineResolveFailure::RouteBasisPersistence(reason) => {
+        pipeline_sdk::PipelineResolveExecutionFailure::RouteBasisPersistence(reason) => {
             format!("REFUSED: route basis persistence error: {reason}")
         }
     }

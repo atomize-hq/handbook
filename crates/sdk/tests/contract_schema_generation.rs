@@ -22,7 +22,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 97] = [
+const ROOTS: [(&str, &str); 106] = [
     (
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -244,6 +244,30 @@ const ROOTS: [(&str, &str); 97] = [
         "handbook.operation.intake-record-append-result/1.0.0.schema.json",
     ),
     (
+        "handbook.operation.pipeline-catalog-list-request@1.0.0",
+        "handbook.operation.pipeline-catalog-list-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.pipeline-catalog-list-result@1.0.0",
+        "handbook.operation.pipeline-catalog-list-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.pipeline-catalog-read-request@1.0.0",
+        "handbook.operation.pipeline-catalog-read-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.pipeline-catalog-read-result@1.0.0",
+        "handbook.operation.pipeline-catalog-read-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.pipeline-compile-request@1.0.0",
+        "handbook.operation.pipeline-compile-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.pipeline-compile-result@1.0.0",
+        "handbook.operation.pipeline-compile-result/1.0.0.schema.json",
+    ),
+    (
         "handbook.operation.posture-transition-apply-request@1.0.0",
         "handbook.operation.posture-transition-apply-request/1.0.0.schema.json",
     ),
@@ -254,6 +278,14 @@ const ROOTS: [(&str, &str); 97] = [
     (
         "handbook.owner-version-entry@1.0.0",
         "handbook.owner-version-entry/1.0.0.schema.json",
+    ),
+    (
+        "handbook.pipeline-operation-details@1.0.0",
+        "handbook.pipeline-operation-details/1.0.0.schema.json",
+    ),
+    (
+        "handbook.pipeline-recheck@1.0.0",
+        "handbook.pipeline-recheck/1.0.0.schema.json",
     ),
     (
         "handbook.posture-details.authority-conflict@1.0.0",
@@ -388,6 +420,10 @@ const ROOTS: [(&str, &str); 97] = [
         "handbook.use-case.author-project-context-result/1.0.0.schema.json",
     ),
     (
+        "handbook.use-case.pipeline-route-resolve-and-persist-details@1.0.0",
+        "handbook.use-case.pipeline-route-resolve-and-persist-details/1.0.0.schema.json",
+    ),
+    (
         "handbook.use-case.pipeline-route-resolve-and-persist-result@1.0.0",
         "handbook.use-case.pipeline-route-resolve-and-persist-result/1.0.0.schema.json",
     ),
@@ -507,7 +543,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 97);
+    assert_eq!(entries.len(), 106);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries
@@ -653,7 +689,7 @@ fn packet_three_constructor_instances_validate_against_every_new_root_shape() {
         }
         _ => panic!("expired catalog did not return a blocked restart"),
     }
-    assert_eq!(witness.capabilities().len(), 12);
+    assert_eq!(witness.capabilities().len(), 15);
 }
 
 #[test]

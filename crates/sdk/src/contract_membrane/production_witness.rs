@@ -10,7 +10,7 @@ use super::{
 use std::collections::BTreeSet;
 
 const INVENTORY_DIGEST: &str =
-    "sha256:c07e8a9145b3969b2adedfb98b9897e98c4ab4edc3f7de1767d640925e423475";
+    "sha256:bed6022c55d5c63b903c985a18ae20b8596bd14ff78f6385b694fa7cfc7f369d";
 
 macro_rules! schema_asset {
     ($reference:literal, $path:literal) => {
@@ -19,7 +19,7 @@ macro_rules! schema_asset {
 }
 
 const SCHEMA_MANIFEST_BYTES: &[u8] = include_bytes!("../../schemas/manifest.json");
-const SCHEMA_ASSETS: [(&str, &[u8]); 97] = [
+const SCHEMA_ASSETS: [(&str, &[u8]); 106] = [
     schema_asset!(
         "handbook.artifact-operation-details@1.0.0",
         "../../schemas/2020-12/handbook.artifact-operation-details/1.0.0.schema.json"
@@ -241,6 +241,30 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 97] = [
         "../../schemas/2020-12/handbook.operation.intake-record-append-result/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.operation.pipeline-catalog-list-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.pipeline-catalog-list-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.pipeline-catalog-list-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.pipeline-catalog-list-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.pipeline-catalog-read-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.pipeline-catalog-read-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.pipeline-catalog-read-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.pipeline-catalog-read-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.pipeline-compile-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.pipeline-compile-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.pipeline-compile-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.pipeline-compile-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.operation.posture-transition-apply-request@1.0.0",
         "../../schemas/2020-12/handbook.operation.posture-transition-apply-request/1.0.0.schema.json"
     ),
@@ -251,6 +275,14 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 97] = [
     schema_asset!(
         "handbook.owner-version-entry@1.0.0",
         "../../schemas/2020-12/handbook.owner-version-entry/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.pipeline-operation-details@1.0.0",
+        "../../schemas/2020-12/handbook.pipeline-operation-details/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.pipeline-recheck@1.0.0",
+        "../../schemas/2020-12/handbook.pipeline-recheck/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.posture-details.authority-conflict@1.0.0",
@@ -385,6 +417,10 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 97] = [
         "../../schemas/2020-12/handbook.use-case.author-project-context-result/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.use-case.pipeline-route-resolve-and-persist-details@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.pipeline-route-resolve-and-persist-details/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.use-case.pipeline-route-resolve-and-persist-result@1.0.0",
         "../../schemas/2020-12/handbook.use-case.pipeline-route-resolve-and-persist-result/1.0.0.schema.json"
     ),
@@ -465,6 +501,7 @@ impl ProductionWitness {
         let profiles = current_profile_entries()?;
         let mut capabilities = super::artifact_operation::current_artifact_capabilities()?;
         capabilities.push(super::flow_operation::current_flow_capability()?);
+        capabilities.extend(super::pipeline_operation::current_pipeline_capabilities()?);
         capabilities.push(super::posture::current_posture_capability()?);
         capabilities.sort_by(|left, right| {
             left.operation()
@@ -685,7 +722,7 @@ fn verify_schema_assets(
         &ContractLimits::packet0(),
     )
     .map_err(|_| ProductionWitnessError::StaleManifest)?;
-    if manifest.len() != 97 || assets.len() != 97 || manifest.len() != assets.len() {
+    if manifest.len() != 106 || assets.len() != 106 || manifest.len() != assets.len() {
         return Err(ProductionWitnessError::ManifestCountMismatch);
     }
     let mut seen = BTreeSet::new();
@@ -735,11 +772,17 @@ fn verify_inventory() -> Result<(), ProductionWitnessError> {
             let is_artifact = super::artifact_operation::ARTIFACT_OPERATION_REFS
                 .contains(&row.operation_ref().as_str());
             let is_flow = row.operation_ref().as_str() == super::flow_operation::FLOW_OPERATION_REF;
+            let is_pipeline = [
+                "pipeline.catalog.list@1.0.0",
+                "pipeline.catalog.read@1.0.0",
+                "pipeline.compile@1.0.0",
+            ]
+            .contains(&row.operation_ref().as_str());
             if is_posture {
                 row.admission_reason() != super::AdmissionReason::Admitted
                     || row.current_transports() != [OperationTransport::RustSdk]
                     || row.discovery() != DiscoveryState::Discoverable
-            } else if is_artifact || is_flow {
+            } else if is_artifact || is_flow || is_pipeline {
                 row.admission_reason() != super::AdmissionReason::Admitted
                     || row.current_transports() != [OperationTransport::CliJson]
                     || row.discovery() != DiscoveryState::Discoverable
@@ -945,10 +988,10 @@ mod tests {
         let witness =
             ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
                 .unwrap();
-        assert_eq!(witness.schema_manifest().len(), 97);
+        assert_eq!(witness.schema_manifest().len(), 106);
         assert_eq!(witness.owner_versions().len(), 3);
         assert_eq!(witness.profiles().len(), 3);
-        assert_eq!(witness.capabilities().len(), 12);
+        assert_eq!(witness.capabilities().len(), 15);
         let posture = witness
             .capabilities()
             .iter()
@@ -976,7 +1019,7 @@ mod tests {
         assert_eq!(flow.current_transports(), &[OperationTransport::CliJson]);
         assert_eq!(
             witness.catalog_roots().operations().total_entries().get(),
-            12
+            15
         );
         assert_ne!(
             witness.descriptor().schema().fingerprint(),

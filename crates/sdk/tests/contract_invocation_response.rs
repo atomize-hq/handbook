@@ -305,7 +305,7 @@ fn checked_in_invocation_schema_admits_doctor_and_closes_the_current_use_case_un
         .join("schemas/2020-12/handbook.use-case-response/1.0.0.schema.json");
     let use_case_schema: serde_json::Value =
         serde_json::from_slice(&std::fs::read(use_case_schema_path).unwrap()).unwrap();
-    assert_eq!(use_case_schema["oneOf"].as_array().unwrap().len(), 21);
+    assert_eq!(use_case_schema["oneOf"].as_array().unwrap().len(), 24);
     let wire = use_case_schema.to_string();
     for reference in [
         "handbook.use-case.repository-setup@1.0.0",
@@ -335,6 +335,6 @@ fn doctor_use_case_does_not_inflate_operation_admission_or_discovery() {
     .unwrap();
     assert_eq!(
         witness.catalog_roots().operations().total_entries().get(),
-        12
+        15
     );
 }

@@ -104,6 +104,19 @@ pub struct PipelineCompileRefusal {
     pub recovery: String,
 }
 
+impl PipelineCompileRefusal {
+    pub fn result_contract_bound_exceeded(pipeline_id: &str, stage_id: &str) -> Self {
+        Self {
+            classification: PipelineCompileRefusalClassification::InvalidState,
+            summary: "compiled Pipeline result exceeds the public contract bounds".to_owned(),
+            pipeline_id: Some(pipeline_id.to_owned()),
+            stage_id: Some(stage_id.to_owned()),
+            recovery: "reduce the selected compile input size and retry `pipeline compile`"
+                .to_owned(),
+        }
+    }
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum PipelineCompileRefusalClassification {
     UnsupportedTarget,

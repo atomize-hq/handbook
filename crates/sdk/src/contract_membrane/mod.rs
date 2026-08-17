@@ -11,6 +11,7 @@ mod flow_operation;
 mod invocation;
 mod operation;
 mod owner_admission;
+mod pipeline_operation;
 mod posture;
 mod production_witness;
 mod raw_key;
@@ -71,20 +72,21 @@ pub use invocation::{
     AuthorProjectContextResultV1, AuthorWorkingDirectoryCommandV1,
     DoctorCharterDefinitionClosureStatusV1, DoctorCharterLifecycleStateV1,
     DoctorCharterNextActionV1, InvocationResponseKind, InvocationResponseV1,
-    PipelineResolvedStageV1, PipelineRouteResolveAndPersistResultV1, PipelineRouteRunV1,
-    PipelineRouteStageReasonV1, PipelineRouteStageStatusV1, PipelineRouteStateV1,
-    PipelineRoutingEntryV1, ProfileConditionOutcomeV1, ProfileConditionReasonV1,
-    ProfileRequirednessModeV1, ReferenceFingerprintV1, RepositoryDoctorArtifactV1,
-    RepositoryDoctorCapabilityV1, RepositoryDoctorCharterDefinitionV1, RepositoryDoctorCharterV1,
-    RepositoryDoctorConditionV1, RepositoryDoctorDetailsV1, RepositoryDoctorFailureKindV1,
-    RepositoryDoctorFailureReasonV1, RepositoryDoctorProjectContextV1, RepositoryDoctorResultV1,
-    RepositoryInvocationCommandV1, RepositoryReadinessStatusV1,
-    RepositorySetupArtifactActionKindV1, RepositorySetupArtifactV1, RepositorySetupBoundsV1,
-    RepositorySetupDetailsV1, RepositorySetupErrorCodeV1, RepositorySetupErrorKindV1,
-    RepositorySetupErrorReasonV1, RepositorySetupModeV1, RepositorySetupResultV1,
-    RepositorySetupRootActionV1, RepositorySetupSizeBoundsV1, TransportFailureDetailsV1,
-    TransportFailureKind, TransportFailureV1, TransportIoErrorKindV1, TransportIoErrorV1,
-    TransportPresentationViewV1, UseCaseCauseV1, UseCaseResponseV1,
+    PipelineResolvedStageV1, PipelineRouteBasisWriteConditionV1,
+    PipelineRouteResolveAndPersistResultV1, PipelineRouteResolveCauseV1,
+    PipelineRouteResolveDetailsV1, PipelineRouteRunV1, PipelineRouteStageReasonV1,
+    PipelineRouteStageStatusV1, PipelineRouteStateV1, PipelineRoutingEntryV1,
+    ProfileConditionOutcomeV1, ProfileConditionReasonV1, ProfileRequirednessModeV1,
+    ReferenceFingerprintV1, RepositoryDoctorArtifactV1, RepositoryDoctorCapabilityV1,
+    RepositoryDoctorCharterDefinitionV1, RepositoryDoctorCharterV1, RepositoryDoctorConditionV1,
+    RepositoryDoctorDetailsV1, RepositoryDoctorFailureKindV1, RepositoryDoctorFailureReasonV1,
+    RepositoryDoctorProjectContextV1, RepositoryDoctorResultV1, RepositoryInvocationCommandV1,
+    RepositoryReadinessStatusV1, RepositorySetupArtifactActionKindV1, RepositorySetupArtifactV1,
+    RepositorySetupBoundsV1, RepositorySetupDetailsV1, RepositorySetupErrorCodeV1,
+    RepositorySetupErrorKindV1, RepositorySetupErrorReasonV1, RepositorySetupModeV1,
+    RepositorySetupResultV1, RepositorySetupRootActionV1, RepositorySetupSizeBoundsV1,
+    TransportFailureDetailsV1, TransportFailureKind, TransportFailureV1, TransportIoErrorKindV1,
+    TransportIoErrorV1, TransportPresentationViewV1, UseCaseCauseV1, UseCaseResponseV1,
 };
 pub use operation::{
     operation_inventory, validate_complete_definition_set, validate_complete_operation_ref_set,
@@ -95,6 +97,14 @@ pub use operation::{
 };
 pub use owner_admission::{
     admit_operation_definition, OperationAdmissionResult, OwnerAdmissionToken,
+};
+pub(crate) use pipeline_operation::execute_pipeline_operation;
+pub use pipeline_operation::{
+    pipeline_catalog_list_from_response, pipeline_catalog_list_operation_request,
+    pipeline_catalog_read_from_response, pipeline_catalog_read_operation_request,
+    pipeline_compile_from_response, pipeline_compile_operation_request,
+    pipeline_operation_definitions, pipeline_operation_problem_details,
+    PipelineOperationProblemProjection, PipelineOperationSchemaValidator,
 };
 pub(crate) use posture::apply_posture_transition_operation;
 pub use posture::{

@@ -20,6 +20,21 @@ use super::flow_operation::{
     FlowRecheckV1, FlowRefusalCategoryV1, FlowRefusalV1, FlowResolveRequestV1, FlowResolveResultV1,
     FlowSelectionStatusV1, FlowSelectionV1, FlowSubjectRefV1,
 };
+use super::pipeline_operation::{
+    PipelineActivationClauseV1, PipelineActivationOperatorV1, PipelineActivationV1,
+    PipelineCatalogEntryV1, PipelineCatalogListResultV1, PipelineCatalogReadRequestV1,
+    PipelineCatalogReadResultV1, PipelineCompileDocumentKindV1, PipelineCompileDocumentStatusV1,
+    PipelineCompileDocumentV1, PipelineCompileGatingV1, PipelineCompileOutputKindV1,
+    PipelineCompileOutputV1, PipelineCompileRefusalClassificationV1, PipelineCompileRefusalV1,
+    PipelineCompileRequestV1, PipelineCompileResultV1, PipelineCompileTargetV1,
+    PipelineCompileVariableV1, PipelineDeclaredStageV1, PipelineDefinitionV1,
+    PipelineEmptyRequestV1, PipelineProblemCauseV1, PipelineProblemDetailsV1, PipelineRecheckV1,
+    PipelineRouteBasisProfileV1, PipelineRouteBasisRunnerV1, PipelineRouteBasisStageV1,
+    PipelineRouteBasisV1, PipelineRouteRunV1 as PipelineOperationRouteRunV1,
+    PipelineRouteStageReasonV1 as PipelineOperationRouteStageReasonV1,
+    PipelineRouteStageStatusV1 as PipelineOperationRouteStageStatusV1,
+    PipelineRoutingEntryV1 as PipelineOperationRoutingEntryV1, PipelineStageV1,
+};
 use super::posture::REQUEST_SCHEMA_REF;
 use super::*;
 use schemars::generate::SchemaSettings;
@@ -3711,6 +3726,54 @@ impl_schema!(
 );
 
 impl_schema!(
+    PipelineRouteResolveCauseV1,
+    "PipelineRouteResolveCauseV1",
+    |_generator| string_enum(&[
+        "catalog",
+        "unsupported_selector",
+        "ambiguous_selector",
+        "unknown_selector",
+        "definition",
+        "route_state_read",
+        "route_variables",
+        "route_resolution",
+        "route_basis_build",
+        "route_basis_persistence_malformed",
+        "route_basis_revision_conflict",
+        "route_basis_persistence",
+    ])
+);
+
+impl_schema!(
+    PipelineRouteResolveDetailsV1,
+    "PipelineRouteResolveDetailsV1",
+    |generator| closed_object(
+        vec![
+            (
+                "cause",
+                generator.subschema_for::<PipelineRouteResolveCauseV1>()
+            ),
+            ("reason", generator.subschema_for::<BoundedString<8192>>()),
+            ("selector", nullable::<BoundedString<4096>>(generator)),
+            (
+                "matches",
+                generator.subschema_for::<BoundedVec<BoundedString<4096>, 128>>(),
+            ),
+            ("expected_revision", nullable::<SafeU64>(generator)),
+            ("actual_revision", nullable::<SafeU64>(generator)),
+        ],
+        &[
+            "cause",
+            "reason",
+            "selector",
+            "matches",
+            "expected_revision",
+            "actual_revision",
+        ],
+    )
+);
+
+impl_schema!(
     RepositoryDoctorDetailsV1,
     "RepositoryDoctorDetailsV1",
     |generator| {
@@ -4140,6 +4203,22 @@ impl_schema!(UseCaseResponseV1, "UseCaseResponseV1", |generator| {
         ),
     );
     for status in ["blocked", "refused", "error"] {
+        let problem = typed_problem_schema::<PipelineRouteResolveDetailsV1>(
+            generator,
+            "handbook.use-case.pipeline-route-resolve-and-persist@1.0.0",
+            "handbook.use-case.pipeline-route-resolve-and-persist-details@1.0.0",
+        );
+        variants.push(use_case_terminal_schema::<
+            PipelineRouteResolveAndPersistResultV1,
+        >(
+            generator,
+            "handbook.use-case.pipeline-route-resolve-and-persist@1.0.0",
+            "handbook.use-case.pipeline-route-resolve-and-persist-result@1.0.0",
+            status,
+            Some(problem),
+        ));
+    }
+    for status in ["blocked", "refused", "error"] {
         let problem = typed_problem_schema::<RepositoryDoctorDetailsV1>(
             generator,
             "handbook.use-case.repository-doctor@1.0.0",
@@ -4405,6 +4484,15 @@ fn flow_array<T: JsonSchema>(generator: &mut SchemaGenerator) -> Schema {
 
 fn flow_optional<T: JsonSchema>(generator: &mut SchemaGenerator) -> Schema {
     nullable::<T>(generator)
+}
+
+fn flow_optional_text(max_length: u64) -> Schema {
+    json_schema!({
+        "anyOf": [
+            {"type":"string","minLength":1,"maxLength":max_length},
+            {"type":"null"}
+        ]
+    })
 }
 
 fn flow_raw_hash() -> Schema {
@@ -4923,6 +5011,552 @@ impl_schema!(FlowRecheckV1, "FlowRecheckV1", |generator| closed_object(
     &["cause"],
 ));
 
+macro_rules! pipeline_string_enum {
+    ($ty:ty, $name:literal, [$($value:literal),+ $(,)?]) => {
+        impl_schema!($ty, $name, |_generator| string_enum(&[$($value),+]));
+    };
+}
+
+pipeline_string_enum!(
+    PipelineActivationOperatorV1,
+    "PipelineActivationOperatorV1",
+    ["any", "all"]
+);
+pipeline_string_enum!(
+    PipelineOperationRouteStageStatusV1,
+    "PipelineOperationRouteStageStatusV1",
+    ["active", "skipped", "blocked", "next"]
+);
+pipeline_string_enum!(
+    PipelineCompileDocumentKindV1,
+    "PipelineCompileDocumentKindV1",
+    ["include", "runner", "profile", "library", "artifact"]
+);
+pipeline_string_enum!(
+    PipelineCompileDocumentStatusV1,
+    "PipelineCompileDocumentStatusV1",
+    ["present", "missing_optional"]
+);
+pipeline_string_enum!(
+    PipelineCompileOutputKindV1,
+    "PipelineCompileOutputKindV1",
+    ["artifact", "repository_file"]
+);
+pipeline_string_enum!(
+    PipelineCompileRefusalClassificationV1,
+    "PipelineCompileRefusalClassificationV1",
+    [
+        "unsupported_target",
+        "invalid_definition",
+        "invalid_state",
+        "missing_route_basis",
+        "malformed_route_basis",
+        "stale_route_basis",
+        "inactive_stage",
+        "missing_required_input",
+        "empty_required_input"
+    ]
+);
+pipeline_string_enum!(
+    PipelineProblemCauseV1,
+    "PipelineProblemCauseV1",
+    [
+        "catalog_read",
+        "catalog_invalid",
+        "unsupported_selector",
+        "ambiguous_selector",
+        "unknown_selector",
+        "unsupported_compile_target",
+        "invalid_compile_definition",
+        "invalid_route_state",
+        "missing_route_basis",
+        "malformed_route_basis",
+        "stale_route_basis",
+        "inactive_stage",
+        "missing_required_input",
+        "empty_required_input",
+        "compile_result_bound_exceeded"
+    ]
+);
+
+impl_schema!(
+    PipelineEmptyRequestV1,
+    "PipelineEmptyRequestV1",
+    |_generator| closed_object(vec![], &[])
+);
+impl_schema!(
+    PipelineCatalogReadRequestV1,
+    "PipelineCatalogReadRequestV1",
+    |_generator| closed_object(vec![("selector", flow_text(4096))], &["selector"])
+);
+impl_schema!(
+    PipelineCompileRequestV1,
+    "PipelineCompileRequestV1",
+    |_generator| closed_object(
+        vec![
+            ("pipeline_selector", flow_text(4096)),
+            ("stage_selector", flow_text(4096))
+        ],
+        &["pipeline_selector", "stage_selector"]
+    )
+);
+impl_schema!(
+    PipelineCatalogEntryV1,
+    "PipelineCatalogEntryV1",
+    |_generator| closed_object(
+        vec![
+            ("id", flow_text(255)),
+            ("title", flow_text(1024)),
+            ("source_path", flow_path()),
+            (
+                "stage_count",
+                json_schema!({"type":"integer","minimum":0,"maximum":MAX_SAFE_INTEGER})
+            )
+        ],
+        &["id", "title", "source_path", "stage_count"]
+    )
+);
+impl_schema!(
+    PipelineCatalogListResultV1,
+    "PipelineCatalogListResultV1",
+    |generator| closed_object(
+        vec![
+            ("pipelines", flow_array::<PipelineCatalogEntryV1>(generator)),
+            (
+                "pipeline_count",
+                json_schema!({"type":"integer","minimum":0,"maximum":MAX_SAFE_INTEGER})
+            ),
+            (
+                "stage_count",
+                json_schema!({"type":"integer","minimum":0,"maximum":MAX_SAFE_INTEGER})
+            )
+        ],
+        &["pipelines", "pipeline_count", "stage_count"]
+    )
+);
+impl_schema!(
+    PipelineActivationClauseV1,
+    "PipelineActivationClauseV1",
+    |_generator| closed_object(
+        vec![
+            ("variable", flow_text(255)),
+            ("value", json_schema!({"type":"boolean"}))
+        ],
+        &["variable", "value"]
+    )
+);
+impl_schema!(PipelineActivationV1, "PipelineActivationV1", |generator| {
+    closed_object(
+        vec![
+            (
+                "operator",
+                generator.subschema_for::<PipelineActivationOperatorV1>(),
+            ),
+            (
+                "clauses",
+                flow_array::<PipelineActivationClauseV1>(generator),
+            ),
+        ],
+        &["operator", "clauses"],
+    )
+});
+impl_schema!(
+    PipelineDeclaredStageV1,
+    "PipelineDeclaredStageV1",
+    |generator| closed_object(
+        vec![
+            ("id", flow_text(255)),
+            ("title", flow_text(1024)),
+            ("source_path", flow_path()),
+            ("work_level", flow_optional::<String>(generator)),
+            (
+                "sets",
+                json_schema!({"anyOf":[{"type":"array","maxItems":128,"items":flow_text(255)},{"type":"null"}]})
+            ),
+            (
+                "activation",
+                flow_optional::<PipelineActivationV1>(generator)
+            )
+        ],
+        &[
+            "id",
+            "title",
+            "source_path",
+            "work_level",
+            "sets",
+            "activation"
+        ]
+    )
+);
+impl_schema!(PipelineDefinitionV1, "PipelineDefinitionV1", |generator| {
+    closed_object(
+        vec![
+            ("id", flow_text(255)),
+            ("title", flow_text(1024)),
+            ("description", flow_text(8192)),
+            ("source_path", flow_path()),
+            ("default_runner", flow_text(255)),
+            ("default_profile", flow_text(255)),
+            (
+                "default_enable_complexity",
+                json_schema!({"type":"boolean"}),
+            ),
+            ("stages", flow_array::<PipelineDeclaredStageV1>(generator)),
+        ],
+        &[
+            "id",
+            "title",
+            "description",
+            "source_path",
+            "default_runner",
+            "default_profile",
+            "default_enable_complexity",
+            "stages",
+        ],
+    )
+});
+impl_schema!(PipelineStageV1, "PipelineStageV1", |generator| {
+    closed_object(
+        vec![
+            ("id", flow_text(255)),
+            ("kind", flow_text(255)),
+            ("version", flow_text(255)),
+            ("title", flow_text(1024)),
+            ("description", flow_text(8192)),
+            ("work_level", flow_optional::<String>(generator)),
+            ("source_path", flow_path()),
+            (
+                "pipeline_ids",
+                json_schema!({"type":"array","maxItems":128,"items":flow_text(255)}),
+            ),
+        ],
+        &[
+            "id",
+            "kind",
+            "version",
+            "title",
+            "description",
+            "work_level",
+            "source_path",
+            "pipeline_ids",
+        ],
+    )
+});
+impl_schema!(
+    PipelineCatalogReadResultV1,
+    "PipelineCatalogReadResultV1",
+    |generator| json_schema!({"oneOf":[
+        closed_object(vec![("selection_kind",json_schema!({"const":"pipeline"})),("pipeline",generator.subschema_for::<PipelineDefinitionV1>())], &["selection_kind","pipeline"]),
+        closed_object(vec![("selection_kind",json_schema!({"const":"stage"})),("stage",generator.subschema_for::<PipelineStageV1>())], &["selection_kind","stage"])
+    ]})
+);
+impl_schema!(
+    PipelineOperationRouteStageReasonV1,
+    "PipelineOperationRouteStageReasonV1",
+    |generator| json_schema!({"oneOf":[
+        closed_object(vec![("reason_kind",json_schema!({"const":"skipped_activation_false"})),("unsatisfied_variables",json_schema!({"type":"array","maxItems":128,"items":flow_text(255)}))], &["reason_kind","unsatisfied_variables"]),
+        closed_object(vec![("reason_kind",json_schema!({"const":"next_missing_route_variables"})),("missing_variables",json_schema!({"type":"array","maxItems":128,"items":flow_text(255)}))], &["reason_kind","missing_variables"]),
+        closed_object(vec![("reason_kind",json_schema!({"const":"blocked_by_unresolved_stage"})),("upstream_stage_id",flow_text(255)),("upstream_status",generator.subschema_for::<PipelineOperationRouteStageStatusV1>())], &["reason_kind","upstream_stage_id","upstream_status"])
+    ]})
+);
+impl_schema!(
+    PipelineOperationRouteRunV1,
+    "PipelineOperationRouteRunV1",
+    |generator| closed_object(
+        vec![
+            ("runner", flow_optional::<String>(generator)),
+            ("profile", flow_optional::<String>(generator)),
+            ("repository_root", flow_optional::<String>(generator))
+        ],
+        &["runner", "profile", "repository_root"]
+    )
+);
+impl_schema!(
+    PipelineRouteBasisRunnerV1,
+    "PipelineRouteBasisRunnerV1",
+    |_generator| closed_object(
+        vec![
+            ("id", flow_text(255)),
+            ("file", flow_path()),
+            ("file_sha256", flow_raw_hash())
+        ],
+        &["id", "file", "file_sha256"]
+    )
+);
+impl_schema!(
+    PipelineRouteBasisProfileV1,
+    "PipelineRouteBasisProfileV1",
+    |_generator| closed_object(
+        vec![
+            ("id", flow_text(255)),
+            ("profile_yaml_sha256", flow_raw_hash()),
+            ("commands_yaml_sha256", flow_raw_hash()),
+            ("conventions_md_sha256", flow_raw_hash())
+        ],
+        &[
+            "id",
+            "profile_yaml_sha256",
+            "commands_yaml_sha256",
+            "conventions_md_sha256"
+        ]
+    )
+);
+impl_schema!(
+    PipelineRouteBasisStageV1,
+    "PipelineRouteBasisStageV1",
+    |generator| closed_object(
+        vec![
+            ("stage_id", flow_text(255)),
+            ("file", flow_path()),
+            (
+                "status",
+                generator.subschema_for::<PipelineOperationRouteStageStatusV1>()
+            ),
+            (
+                "reason",
+                flow_optional::<PipelineOperationRouteStageReasonV1>(generator)
+            )
+        ],
+        &["stage_id", "file", "status", "reason"]
+    )
+);
+impl_schema!(
+    PipelineOperationRoutingEntryV1,
+    "PipelineOperationRoutingEntryV1",
+    |_generator| closed_object(
+        vec![
+            ("variable", flow_text(255)),
+            ("value", json_schema!({"type":"boolean"}))
+        ],
+        &["variable", "value"]
+    )
+);
+impl_schema!(PipelineRouteBasisV1, "PipelineRouteBasisV1", |generator| {
+    closed_object(
+        vec![
+            ("schema_version", flow_text(255)),
+            (
+                "state_revision",
+                json_schema!({"type":"integer","minimum":0,"maximum":MAX_SAFE_INTEGER}),
+            ),
+            ("pipeline_file", flow_path()),
+            ("pipeline_file_sha256", flow_raw_hash()),
+            (
+                "routing",
+                flow_array::<PipelineOperationRoutingEntryV1>(generator),
+            ),
+            ("charter_ref", flow_optional_text(4096)),
+            ("project_context_ref", flow_optional_text(4096)),
+            ("run", generator.subschema_for::<PipelineRouteRunV1>()),
+            (
+                "runner",
+                generator.subschema_for::<PipelineRouteBasisRunnerV1>(),
+            ),
+            (
+                "profile",
+                generator.subschema_for::<PipelineRouteBasisProfileV1>(),
+            ),
+            ("route", flow_array::<PipelineRouteBasisStageV1>(generator)),
+        ],
+        &[
+            "schema_version",
+            "state_revision",
+            "pipeline_file",
+            "pipeline_file_sha256",
+            "routing",
+            "charter_ref",
+            "project_context_ref",
+            "run",
+            "runner",
+            "profile",
+            "route",
+        ],
+    )
+});
+impl_schema!(
+    PipelineCompileTargetV1,
+    "PipelineCompileTargetV1",
+    |_generator| closed_object(
+        vec![
+            ("pipeline_id", flow_text(255)),
+            ("stage_id", flow_text(255)),
+            ("stage_file", flow_path()),
+            ("title", flow_text(1024)),
+            ("description", flow_text(8192)),
+            ("work_level", flow_text(255)),
+            (
+                "tags",
+                json_schema!({"type":"array","maxItems":128,"items":flow_text(255)})
+            )
+        ],
+        &[
+            "pipeline_id",
+            "stage_id",
+            "stage_file",
+            "title",
+            "description",
+            "work_level",
+            "tags"
+        ]
+    )
+);
+impl_schema!(
+    PipelineCompileVariableV1,
+    "PipelineCompileVariableV1",
+    |_generator| closed_object(
+        vec![
+            ("name", flow_text(255)),
+            ("value", flow_optional_text(65_536))
+        ],
+        &["name", "value"]
+    )
+);
+impl_schema!(
+    PipelineCompileDocumentV1,
+    "PipelineCompileDocumentV1",
+    |generator| closed_object(
+        vec![
+            (
+                "kind",
+                generator.subschema_for::<PipelineCompileDocumentKindV1>()
+            ),
+            ("path", flow_path()),
+            ("required", json_schema!({"type":"boolean"})),
+            (
+                "status",
+                generator.subschema_for::<PipelineCompileDocumentStatusV1>()
+            ),
+            ("content", flow_optional_text(65_536))
+        ],
+        &["kind", "path", "required", "status", "content"]
+    )
+);
+impl_schema!(
+    PipelineCompileOutputV1,
+    "PipelineCompileOutputV1",
+    |generator| closed_object(
+        vec![
+            (
+                "kind",
+                generator.subschema_for::<PipelineCompileOutputKindV1>()
+            ),
+            (
+                "path",
+                json_schema!({
+                    "type":"string",
+                    "minLength":1,
+                    "maxLength":4096,
+                    "pattern":"^(\\$\\{repo_root\\}/)?[A-Za-z0-9._-]+(/[A-Za-z0-9._-]+)*$"
+                })
+            )
+        ],
+        &["kind", "path"]
+    )
+);
+impl_schema!(
+    PipelineCompileGatingV1,
+    "PipelineCompileGatingV1",
+    |_generator| closed_object(
+        vec![
+            ("mode", flow_optional_text(255)),
+            (
+                "fail_on",
+                json_schema!({"type":"array","maxItems":128,"items":flow_text(255)})
+            ),
+            (
+                "notes",
+                json_schema!({"type":"array","maxItems":128,"items":flow_text(8192)})
+            )
+        ],
+        &["mode", "fail_on", "notes"]
+    )
+);
+impl_schema!(
+    PipelineCompileResultV1,
+    "PipelineCompileResultV1",
+    |generator| closed_object(
+        vec![
+            (
+                "target",
+                generator.subschema_for::<PipelineCompileTargetV1>()
+            ),
+            ("basis", generator.subschema_for::<PipelineRouteBasisV1>()),
+            (
+                "variables",
+                flow_array::<PipelineCompileVariableV1>(generator)
+            ),
+            (
+                "documents",
+                flow_array::<PipelineCompileDocumentV1>(generator)
+            ),
+            ("outputs", flow_array::<PipelineCompileOutputV1>(generator)),
+            (
+                "gating",
+                generator.subschema_for::<PipelineCompileGatingV1>()
+            ),
+            ("stage_body", flow_optional_text(65_536))
+        ],
+        &[
+            "target",
+            "basis",
+            "variables",
+            "documents",
+            "outputs",
+            "gating",
+            "stage_body"
+        ]
+    )
+);
+impl_schema!(
+    PipelineCompileRefusalV1,
+    "PipelineCompileRefusalV1",
+    |generator| closed_object(
+        vec![
+            (
+                "classification",
+                generator.subschema_for::<PipelineCompileRefusalClassificationV1>()
+            ),
+            ("summary", flow_text(8192)),
+            ("pipeline_id", flow_optional::<String>(generator)),
+            ("stage_id", flow_optional::<String>(generator)),
+            ("recovery", flow_text(8192))
+        ],
+        &[
+            "classification",
+            "summary",
+            "pipeline_id",
+            "stage_id",
+            "recovery"
+        ]
+    )
+);
+impl_schema!(
+    PipelineProblemDetailsV1,
+    "PipelineProblemDetailsV1",
+    |generator| closed_object(
+        vec![
+            ("cause", generator.subschema_for::<PipelineProblemCauseV1>()),
+            ("detail", flow_text(8192)),
+            ("selector", flow_optional::<String>(generator)),
+            (
+                "matches",
+                json_schema!({"type":"array","maxItems":128,"items":flow_text(4096)})
+            ),
+            (
+                "compile_refusal",
+                flow_optional::<PipelineCompileRefusalV1>(generator)
+            )
+        ],
+        &["cause", "detail", "selector", "matches", "compile_refusal"]
+    )
+);
+impl_schema!(PipelineRecheckV1, "PipelineRecheckV1", |generator| {
+    closed_object(
+        vec![("cause", generator.subschema_for::<PipelineProblemCauseV1>())],
+        &["cause"],
+    )
+});
+
 const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
 
 struct SchemaDescriptor {
@@ -4931,7 +5565,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 97] = [
+const INVENTORY: [SchemaDescriptor; 106] = [
     descriptor::<ArtifactProblemDetailsV1>(
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -5160,6 +5794,30 @@ const INVENTORY: [SchemaDescriptor; 97] = [
         "handbook.operation.intake-record-append-result/1.0.0.schema.json",
         intake_record_append_result_schema,
     ),
+    descriptor::<PipelineEmptyRequestV1>(
+        "handbook.operation.pipeline-catalog-list-request@1.0.0",
+        "handbook.operation.pipeline-catalog-list-request/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineCatalogListResultV1>(
+        "handbook.operation.pipeline-catalog-list-result@1.0.0",
+        "handbook.operation.pipeline-catalog-list-result/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineCatalogReadRequestV1>(
+        "handbook.operation.pipeline-catalog-read-request@1.0.0",
+        "handbook.operation.pipeline-catalog-read-request/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineCatalogReadResultV1>(
+        "handbook.operation.pipeline-catalog-read-result@1.0.0",
+        "handbook.operation.pipeline-catalog-read-result/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineCompileRequestV1>(
+        "handbook.operation.pipeline-compile-request@1.0.0",
+        "handbook.operation.pipeline-compile-request/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineCompileResultV1>(
+        "handbook.operation.pipeline-compile-result@1.0.0",
+        "handbook.operation.pipeline-compile-result/1.0.0.schema.json",
+    ),
     descriptor::<PostureTransitionApplyRequestSchemaV1>(
         "handbook.operation.posture-transition-apply-request@1.0.0",
         "handbook.operation.posture-transition-apply-request/1.0.0.schema.json",
@@ -5171,6 +5829,14 @@ const INVENTORY: [SchemaDescriptor; 97] = [
     descriptor::<OwnerVersionEntry>(
         "handbook.owner-version-entry@1.0.0",
         "handbook.owner-version-entry/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineProblemDetailsV1>(
+        "handbook.pipeline-operation-details@1.0.0",
+        "handbook.pipeline-operation-details/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineRecheckV1>(
+        "handbook.pipeline-recheck@1.0.0",
+        "handbook.pipeline-recheck/1.0.0.schema.json",
     ),
     descriptor::<PostureAuthorityConflictDetailsSchema>(
         "handbook.posture-details.authority-conflict@1.0.0",
@@ -5303,6 +5969,10 @@ const INVENTORY: [SchemaDescriptor; 97] = [
     descriptor::<AuthorProjectContextResultV1>(
         "handbook.use-case.author-project-context-result@1.0.0",
         "handbook.use-case.author-project-context-result/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineRouteResolveDetailsV1>(
+        "handbook.use-case.pipeline-route-resolve-and-persist-details@1.0.0",
+        "handbook.use-case.pipeline-route-resolve-and-persist-details/1.0.0.schema.json",
     ),
     descriptor::<PipelineRouteResolveAndPersistResultV1>(
         "handbook.use-case.pipeline-route-resolve-and-persist-result@1.0.0",
@@ -5548,8 +6218,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 97 {
-        return Err("schema inventory must contain exactly 97 entries".to_owned());
+    if INVENTORY.len() != 106 {
+        return Err("schema inventory must contain exactly 106 entries".to_owned());
     }
 
     let mut previous_ref = None;

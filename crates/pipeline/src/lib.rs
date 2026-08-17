@@ -5,6 +5,7 @@ pub mod pipeline;
 pub mod pipeline_capture;
 pub mod pipeline_compile;
 pub mod pipeline_handoff;
+mod pipeline_read_admission;
 pub mod pipeline_route;
 mod repo_file_access;
 pub mod route_state;

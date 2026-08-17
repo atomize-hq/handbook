@@ -93,7 +93,7 @@ impl Command {
             Command::Author(args) => author::run(args, machine_json),
             Command::Approvers(args) => approvers::run(args, machine_json),
             Command::Artifact(args) => artifact::run(args, machine_json),
-            Command::Pipeline(args) => pipeline::run(args),
+            Command::Pipeline(args) => pipeline::run(args, machine_json),
             Command::Generate(args) => generate::run(args, machine_json),
             Command::Inspect(args) => inspect::run(args, machine_json),
             Command::Doctor(args) => doctor::run(args, machine_json),
