@@ -7,12 +7,14 @@ use std::path::{Path, PathBuf};
 use handbook_pipeline::{
     pipeline::load_pipeline_definition,
     pipeline_capture::{
-        apply_pipeline_capture, apply_pipeline_capture_with_storage_layout,
-        capture_pipeline_output, load_pipeline_capture_cache_entry, preview_pipeline_capture,
-        preview_pipeline_capture_with_storage_layout, render_pipeline_capture_apply_result,
-        render_pipeline_capture_preview, render_pipeline_capture_refusal,
-        PipelineCaptureCacheEntry, PipelineCapturePlan, PipelineCaptureRefusalClassification,
-        PipelineCaptureRequest, PipelineCaptureStateUpdate, PipelineCaptureStateValue,
+        apply_pipeline_capture, apply_pipeline_capture_with_effects,
+        apply_pipeline_capture_with_storage_layout, capture_pipeline_output,
+        capture_pipeline_output_with_effects, load_pipeline_capture_cache_entry,
+        preview_pipeline_capture, preview_pipeline_capture_with_storage_layout,
+        render_pipeline_capture_apply_result, render_pipeline_capture_preview,
+        render_pipeline_capture_refusal, PipelineCaptureCacheEntry, PipelineCapturePlan,
+        PipelineCaptureRefusalClassification, PipelineCaptureRequest, PipelineCaptureStateUpdate,
+        PipelineCaptureStateValue,
     },
     pipeline_compile::{
         compile_pipeline_stage_with_runtime, render_pipeline_compile_explain,
@@ -111,6 +113,34 @@ fn stage_07_capture_input() -> String {
         out.push('\n');
     }
     out
+}
+
+#[test]
+fn capture_with_state_updates_refuses_max_safe_revision_before_writes() {
+    let (_dir, repo_root) = pipeline_proof_corpus_support::install_stage_06_capture_ready_repo();
+    let state_path = pipeline_proof_corpus_support::pipeline_state_path(&repo_root);
+    let mut state: RouteState =
+        serde_yaml_bw::from_str(&fs::read_to_string(&state_path).unwrap()).unwrap();
+    state.revision = 9_007_199_254_740_991;
+    state.route_basis.as_mut().unwrap().state_revision = state.revision;
+    fs::write(&state_path, serde_yaml_bw::to_string(&state).unwrap()).unwrap();
+    let target = repo_root.join("artifacts/project_context/PROJECT_CONTEXT.md");
+    let before_target = fs::read(&target).unwrap();
+    let before_state = fs::read(&state_path).unwrap();
+
+    let failure = capture_pipeline_output_with_effects(
+        &repo_root,
+        &stage_06_request(stage_06_capture_input()),
+    )
+    .unwrap_err();
+
+    assert_eq!(
+        failure.refusal.classification,
+        PipelineCaptureRefusalClassification::InvalidState
+    );
+    assert!(failure.effects.is_empty());
+    assert_eq!(fs::read(&target).unwrap(), before_target);
+    assert_eq!(fs::read(&state_path).unwrap(), before_state);
 }
 
 fn fixed_runtime() -> PipelineCompileRuntimeContext {
@@ -893,6 +923,55 @@ fn capture_apply_foundation_pack_matches_shared_golden_and_uses_cached_preview()
         !repo_root.join("TEST_STRATEGY_BRIEF.md").exists(),
         "stage-07 apply must not materialize a repo-root inventory mirror"
     );
+}
+
+#[test]
+fn capture_apply_failure_preserves_receiptable_early_write_effects() {
+    let (_dir, repo_root) = install_stage_10_work_specification_ready_repo();
+    let preview = preview_pipeline_capture(
+        &repo_root,
+        &stage_10_request(stage_10_completed_feature_spec_input()),
+    )
+    .expect("preview");
+    let prior_targets = preview
+        .plan
+        .artifact_writes
+        .iter()
+        .chain(preview.plan.repo_mirror_writes.iter())
+        .map(|write| {
+            (
+                write.path.clone(),
+                fs::read(repo_root.join(&write.path)).ok(),
+            )
+        })
+        .collect::<Vec<_>>();
+    fs::create_dir_all(repo_root.join(STAGE_10_CAPTURE_PROVENANCE_PATH))
+        .expect("block late provenance write with directory");
+
+    let failure = apply_pipeline_capture_with_effects(&repo_root, &preview.plan.capture_id)
+        .expect_err("late capture write should fail");
+
+    assert_eq!(
+        failure.refusal.classification,
+        PipelineCaptureRefusalClassification::StatePersistenceFailure
+    );
+    assert!(!failure.effects.is_empty(), "{failure:?}");
+    assert_eq!(
+        failure.effects[0].portable_path,
+        preview.plan.artifact_writes[0].path
+    );
+    assert!(failure.effects[0].fingerprint.starts_with("sha256:"));
+    for (path, prior_bytes) in prior_targets {
+        assert_eq!(fs::read(repo_root.join(path)).ok(), prior_bytes);
+    }
+    let first_rollback = failure
+        .effects
+        .iter()
+        .position(|effect| effect.effect_kind.starts_with("pipeline_capture_rollback_"))
+        .expect("rollback writes must remain in mutation history");
+    assert!(failure.effects[..first_rollback]
+        .iter()
+        .all(|effect| !effect.effect_kind.starts_with("pipeline_capture_rollback_")));
 }
 
 #[test]

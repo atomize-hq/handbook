@@ -161,7 +161,7 @@ impl HandbookSdkV1 {
         contract_membrane::execute_flow_operation(&self.repo_root, request)
     }
 
-    /// Executes one exact Pipeline catalog or compile ordinary operation once.
+    /// Executes one exact Pipeline ordinary operation once.
     pub fn execute_pipeline_operation(
         &self,
         request: &contract_membrane::OperationRequestV1,

@@ -100,11 +100,18 @@ pub use owner_admission::{
 };
 pub(crate) use pipeline_operation::execute_pipeline_operation;
 pub use pipeline_operation::{
+    pipeline_capture_apply_from_response, pipeline_capture_apply_operation_request,
+    pipeline_capture_direct_operation_request, pipeline_capture_plan_from_response,
+    pipeline_capture_plan_operation_request, pipeline_capture_refusal_from_response,
     pipeline_catalog_list_from_response, pipeline_catalog_list_operation_request,
     pipeline_catalog_read_from_response, pipeline_catalog_read_operation_request,
     pipeline_compile_from_response, pipeline_compile_operation_request,
-    pipeline_operation_definitions, pipeline_operation_problem_details,
+    pipeline_handoff_emit_from_response, pipeline_handoff_emit_operation_request,
+    pipeline_handoff_refusal_from_response, pipeline_operation_definitions,
+    pipeline_operation_problem_details, pipeline_state_apply_from_response,
+    pipeline_state_apply_operation_request, pipeline_state_refusal_from_response,
     PipelineOperationProblemProjection, PipelineOperationSchemaValidator,
+    PipelineStateProblemProjection,
 };
 pub(crate) use posture::apply_posture_transition_operation;
 pub use posture::{

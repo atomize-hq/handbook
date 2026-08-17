@@ -22,18 +22,25 @@ use super::flow_operation::{
 };
 use super::pipeline_operation::{
     PipelineActivationClauseV1, PipelineActivationOperatorV1, PipelineActivationV1,
+    PipelineCaptureApplyModeV1, PipelineCaptureApplyRequestSchemaV1, PipelineCaptureApplyResultV1,
+    PipelineCapturePlanDtoV1, PipelineCapturePlanRequestV1, PipelineCapturePlanResultV1,
+    PipelineCaptureStateUpdateDtoV1, PipelineCaptureStateValueDtoV1, PipelineCaptureTargetDtoV1,
     PipelineCatalogEntryV1, PipelineCatalogListResultV1, PipelineCatalogReadRequestV1,
     PipelineCatalogReadResultV1, PipelineCompileDocumentKindV1, PipelineCompileDocumentStatusV1,
     PipelineCompileDocumentV1, PipelineCompileGatingV1, PipelineCompileOutputKindV1,
     PipelineCompileOutputV1, PipelineCompileRefusalClassificationV1, PipelineCompileRefusalV1,
     PipelineCompileRequestV1, PipelineCompileResultV1, PipelineCompileTargetV1,
     PipelineCompileVariableV1, PipelineDeclaredStageV1, PipelineDefinitionV1,
-    PipelineEmptyRequestV1, PipelineProblemCauseV1, PipelineProblemDetailsV1, PipelineRecheckV1,
-    PipelineRouteBasisProfileV1, PipelineRouteBasisRunnerV1, PipelineRouteBasisStageV1,
-    PipelineRouteBasisV1, PipelineRouteRunV1 as PipelineOperationRouteRunV1,
+    PipelineEmptyRequestV1, PipelineHandoffEmitRequestSchemaV1, PipelineHandoffEmitResultV1,
+    PipelineMutationProblemDetailsV1, PipelineProblemCauseV1, PipelineProblemDetailsV1,
+    PipelineRecheckV1, PipelineRouteBasisProfileV1, PipelineRouteBasisRunnerV1,
+    PipelineRouteBasisStageV1, PipelineRouteBasisV1,
+    PipelineRouteRunV1 as PipelineOperationRouteRunV1,
     PipelineRouteStageReasonV1 as PipelineOperationRouteStageReasonV1,
-    PipelineRouteStageStatusV1 as PipelineOperationRouteStageStatusV1,
+    PipelineRouteStageStatusV1 as PipelineOperationRouteStageStatusV1, PipelineRouteStateDtoV1,
     PipelineRoutingEntryV1 as PipelineOperationRoutingEntryV1, PipelineStageV1,
+    PipelineStateApplyRequestSchemaV1, PipelineStateApplyResultV1, PipelineStateMutationV1,
+    PipelineWriteConditionV1, PipelineWriteEffectV1,
 };
 use super::posture::REQUEST_SCHEMA_REF;
 use super::*;
@@ -4474,6 +4481,14 @@ fn flow_directory_path() -> Schema {
     })
 }
 
+fn flow_path_array() -> Schema {
+    json_schema!({
+        "type": "array",
+        "maxItems": 128,
+        "items": flow_path()
+    })
+}
+
 fn flow_array<T: JsonSchema>(generator: &mut SchemaGenerator) -> Schema {
     json_schema!({
         "type": "array",
@@ -4490,6 +4505,19 @@ fn flow_optional_text(max_length: u64) -> Schema {
     json_schema!({
         "anyOf": [
             {"type":"string","minLength":1,"maxLength":max_length},
+            {"type":"null"}
+        ]
+    })
+}
+
+fn flow_capture_input() -> Schema {
+    json_schema!({"type": "string", "maxLength": 65_536})
+}
+
+fn flow_optional_capture_input() -> Schema {
+    json_schema!({
+        "anyOf": [
+            {"type":"string","maxLength":65_536},
             {"type":"null"}
         ]
     })
@@ -5075,7 +5103,43 @@ pipeline_string_enum!(
         "inactive_stage",
         "missing_required_input",
         "empty_required_input",
-        "compile_result_bound_exceeded"
+        "compile_result_bound_exceeded",
+        "capture_unsupported_target",
+        "capture_invalid_definition",
+        "capture_invalid_state",
+        "capture_missing_route_basis",
+        "capture_malformed_route_basis",
+        "capture_stale_route_basis",
+        "capture_inactive_stage",
+        "capture_invalid_input",
+        "capture_invalid_write_target",
+        "capture_missing_id",
+        "capture_tampered_cache",
+        "capture_revision_conflict",
+        "capture_write_failure",
+        "capture_state_persistence_failure",
+        "capture_cache_failure",
+        "handoff_unsupported_target",
+        "handoff_invalid_state",
+        "handoff_missing_input",
+        "handoff_invalid_provenance",
+        "handoff_write_failure",
+        "state_malformed",
+        "state_unsupported_variable",
+        "state_revision_conflict",
+        "state_invalid_pipeline_id",
+        "state_invalid_supported_variables",
+        "state_invalid_mutation",
+        "state_read_failure",
+        "state_lock_failure",
+        "state_write_failure",
+        "state_serialization_failure",
+        "idempotency_invalid_operation",
+        "idempotency_lock_failure",
+        "idempotency_read_failure",
+        "idempotency_malformed_entry",
+        "idempotency_write_failure",
+        "idempotency_conflict"
     ]
 );
 
@@ -5083,6 +5147,134 @@ impl_schema!(
     PipelineEmptyRequestV1,
     "PipelineEmptyRequestV1",
     |_generator| closed_object(vec![], &[])
+);
+impl_schema!(
+    PipelineCapturePlanRequestV1,
+    "PipelineCapturePlanRequestV1",
+    |_generator| closed_object(
+        vec![
+            ("pipeline_selector", flow_text(4096)),
+            ("stage_selector", flow_text(4096)),
+            ("input", flow_capture_input()),
+        ],
+        &["pipeline_selector", "stage_selector", "input"],
+    )
+);
+impl_schema!(
+    PipelineCaptureApplyModeV1,
+    "PipelineCaptureApplyModeV1",
+    |_generator| string_enum(&["direct", "cached"])
+);
+impl_schema!(
+    PipelineCaptureApplyRequestSchemaV1,
+    "PipelineCaptureApplyRequestSchemaV1",
+    |generator| closed_object(
+        vec![
+            (
+                "idempotency_key",
+                json_schema!({"type":"string","minLength":1,"maxLength":256,"pattern":"^[!-~]{1,256}$"}),
+            ),
+            (
+                "mode",
+                generator.subschema_for::<PipelineCaptureApplyModeV1>()
+            ),
+            (
+                "capture_id",
+                json_schema!({"anyOf":[{"type":"string","pattern":"^[0-9a-f]{64}$"},{"type":"null"}]}),
+            ),
+            ("pipeline_selector", flow_optional_text(4096)),
+            ("stage_selector", flow_optional_text(4096)),
+            ("input", flow_optional_capture_input()),
+        ],
+        &[
+            "idempotency_key",
+            "mode",
+            "capture_id",
+            "pipeline_selector",
+            "stage_selector",
+            "input",
+        ],
+    )
+);
+impl_schema!(
+    PipelineHandoffEmitRequestSchemaV1,
+    "PipelineHandoffEmitRequestSchemaV1",
+    |_generator| closed_object(
+        vec![
+            (
+                "idempotency_key",
+                json_schema!({"type":"string","minLength":1,"maxLength":256,"pattern":"^[!-~]{1,256}$"}),
+            ),
+            ("pipeline_selector", flow_text(4096)),
+            ("consumer_selector", flow_text(4096)),
+            ("producer_command", flow_text(4096)),
+            ("producer_version", flow_text(255)),
+        ],
+        &[
+            "idempotency_key",
+            "pipeline_selector",
+            "consumer_selector",
+            "producer_command",
+            "producer_version",
+        ],
+    )
+);
+impl_schema!(
+    PipelineStateMutationV1,
+    "PipelineStateMutationV1",
+    |_generator| {
+        let bool_variant = closed_object(
+            vec![
+                ("mutation_kind", json_schema!({"const":"routing_variable"})),
+                ("variable", flow_text(255)),
+                ("value", json_schema!({"type":"boolean"})),
+            ],
+            &["mutation_kind", "variable", "value"],
+        );
+        let text_variant = |kind: &'static str| {
+            closed_object(
+                vec![
+                    ("mutation_kind", json_schema!({"const":kind})),
+                    ("value", flow_text(4096)),
+                ],
+                &["mutation_kind", "value"],
+            )
+        };
+        json_schema!({"oneOf":[
+            bool_variant,
+            text_variant("charter_reference"),
+            text_variant("project_context_reference"),
+            text_variant("runner"),
+            text_variant("profile")
+        ]})
+    }
+);
+impl_schema!(
+    PipelineStateApplyRequestSchemaV1,
+    "PipelineStateApplyRequestSchemaV1",
+    |generator| closed_object(
+        vec![
+            (
+                "idempotency_key",
+                json_schema!({"type":"string","minLength":1,"maxLength":256,"pattern":"^[!-~]{1,256}$"}),
+            ),
+            ("selector", flow_text(4096)),
+            (
+                "mutation",
+                generator.subschema_for::<PipelineStateMutationV1>()
+            ),
+            (
+                "expected_revision",
+                json_schema!({"type":"integer","minimum":0,"maximum":MAX_SAFE_INTEGER - 1}),
+            ),
+        ],
+        &[
+            "idempotency_key",
+            "selector",
+            "mutation",
+            "expected_revision"
+        ],
+    )
 );
 impl_schema!(
     PipelineCatalogReadRequestV1,
@@ -5098,6 +5290,191 @@ impl_schema!(
             ("stage_selector", flow_text(4096))
         ],
         &["pipeline_selector", "stage_selector"]
+    )
+);
+impl_schema!(
+    PipelineCaptureTargetDtoV1,
+    "PipelineCaptureTargetDtoV1",
+    |_generator| closed_object(
+        vec![
+            ("pipeline_id", flow_text(255)),
+            ("stage_id", flow_text(255)),
+            ("stage_file", flow_path()),
+            ("title", flow_text(1024)),
+        ],
+        &["pipeline_id", "stage_id", "stage_file", "title"],
+    )
+);
+impl_schema!(
+    PipelineCaptureStateValueDtoV1,
+    "PipelineCaptureStateValueDtoV1",
+    |_generator| json_schema!({"oneOf":[{"type":"boolean"},flow_text(4096)]})
+);
+impl_schema!(
+    PipelineCaptureStateUpdateDtoV1,
+    "PipelineCaptureStateUpdateDtoV1",
+    |generator| closed_object(
+        vec![
+            ("field_path", flow_text(4096)),
+            (
+                "value",
+                generator.subschema_for::<PipelineCaptureStateValueDtoV1>(),
+            ),
+        ],
+        &["field_path", "value"],
+    )
+);
+impl_schema!(
+    PipelineCapturePlanDtoV1,
+    "PipelineCapturePlanDtoV1",
+    |generator| closed_object(
+        vec![
+            (
+                "target",
+                generator.subschema_for::<PipelineCaptureTargetDtoV1>()
+            ),
+            (
+                "route_basis_revision",
+                json_schema!({"type":"integer","minimum":0,"maximum":MAX_SAFE_INTEGER}),
+            ),
+            ("artifact_write_paths", flow_path_array()),
+            ("repository_mirror_write_paths", flow_path_array()),
+            (
+                "state_updates",
+                flow_array::<PipelineCaptureStateUpdateDtoV1>(generator),
+            ),
+            ("capture_id", flow_raw_hash()),
+            ("post_apply_next_safe_action", flow_optional_text(4096)),
+        ],
+        &[
+            "target",
+            "route_basis_revision",
+            "artifact_write_paths",
+            "repository_mirror_write_paths",
+            "state_updates",
+            "capture_id",
+            "post_apply_next_safe_action",
+        ],
+    )
+);
+impl_schema!(
+    PipelineCapturePlanResultV1,
+    "PipelineCapturePlanResultV1",
+    |generator| closed_object(
+        vec![(
+            "plan",
+            generator.subschema_for::<PipelineCapturePlanDtoV1>()
+        )],
+        &["plan"],
+    )
+);
+impl_schema!(
+    PipelineCaptureApplyResultV1,
+    "PipelineCaptureApplyResultV1",
+    |generator| closed_object(
+        vec![
+            (
+                "plan",
+                generator.subschema_for::<PipelineCapturePlanDtoV1>()
+            ),
+            ("written_files", flow_path_array()),
+            ("persisted_state_revision", nullable::<SafeU64>(generator)),
+        ],
+        &["plan", "written_files", "persisted_state_revision"],
+    )
+);
+impl_schema!(
+    PipelineHandoffEmitResultV1,
+    "PipelineHandoffEmitResultV1",
+    |_generator| closed_object(
+        vec![
+            ("pipeline_id", flow_text(255)),
+            ("consumer_id", flow_text(255)),
+            ("feature_id", flow_text(255)),
+            ("bundle_root", flow_path()),
+            ("written_files", flow_path_array()),
+        ],
+        &[
+            "pipeline_id",
+            "consumer_id",
+            "feature_id",
+            "bundle_root",
+            "written_files",
+        ],
+    )
+);
+impl_schema!(
+    PipelineRouteStateDtoV1,
+    "PipelineRouteStateDtoV1",
+    |generator| closed_object(
+        vec![
+            (
+                "revision",
+                json_schema!({"type":"integer","minimum":0,"maximum":MAX_SAFE_INTEGER}),
+            ),
+            (
+                "routing",
+                flow_array::<PipelineOperationRoutingEntryV1>(generator),
+            ),
+            ("charter_ref", flow_optional_text(4096)),
+            ("project_context_ref", flow_optional_text(4096)),
+            ("runner", flow_optional_text(4096)),
+            ("profile", flow_optional_text(4096)),
+        ],
+        &[
+            "revision",
+            "routing",
+            "charter_ref",
+            "project_context_ref",
+            "runner",
+            "profile",
+        ],
+    )
+);
+impl_schema!(
+    PipelineStateApplyResultV1,
+    "PipelineStateApplyResultV1",
+    |generator| closed_object(
+        vec![
+            ("pipeline_id", flow_text(255)),
+            (
+                "state",
+                generator.subschema_for::<PipelineRouteStateDtoV1>()
+            ),
+        ],
+        &["pipeline_id", "state"],
+    )
+);
+impl_schema!(
+    PipelineWriteEffectV1,
+    "PipelineWriteEffectV1",
+    |generator| closed_object(
+        vec![
+            ("effect_kind", flow_text(255)),
+            ("portable_path", flow_path()),
+            ("fingerprint", generator.subschema_for::<Fingerprint>()),
+            ("revision", nullable::<SafeU64>(generator)),
+        ],
+        &["effect_kind", "portable_path", "fingerprint", "revision"],
+    )
+);
+impl_schema!(
+    PipelineWriteConditionV1,
+    "PipelineWriteConditionV1",
+    |generator| closed_object(
+        vec![
+            ("operation", generator.subschema_for::<ExactRef>()),
+            (
+                "effects",
+                json_schema!({
+                    "type":"array",
+                    "minItems":1,
+                    "maxItems":128,
+                    "items":generator.subschema_for::<PipelineWriteEffectV1>()
+                }),
+            ),
+        ],
+        &["operation", "effects"],
     )
 );
 impl_schema!(
@@ -5531,6 +5908,38 @@ impl_schema!(
     )
 );
 impl_schema!(
+    PipelineMutationProblemDetailsV1,
+    "PipelineMutationProblemDetailsV1",
+    |generator| closed_object(
+        vec![
+            ("pipeline_id", flow_optional_text(255)),
+            ("stage_id", flow_optional_text(255)),
+            ("consumer_id", flow_optional_text(255)),
+            ("recovery", flow_optional_text(8192)),
+            ("expected_revision", nullable::<SafeU64>(generator)),
+            ("actual_revision", nullable::<SafeU64>(generator)),
+            (
+                "established_request_fingerprint",
+                nullable::<Fingerprint>(generator),
+            ),
+            (
+                "actual_request_fingerprint",
+                nullable::<Fingerprint>(generator),
+            ),
+        ],
+        &[
+            "pipeline_id",
+            "stage_id",
+            "consumer_id",
+            "recovery",
+            "expected_revision",
+            "actual_revision",
+            "established_request_fingerprint",
+            "actual_request_fingerprint",
+        ],
+    )
+);
+impl_schema!(
     PipelineProblemDetailsV1,
     "PipelineProblemDetailsV1",
     |generator| closed_object(
@@ -5545,9 +5954,20 @@ impl_schema!(
             (
                 "compile_refusal",
                 flow_optional::<PipelineCompileRefusalV1>(generator)
-            )
+            ),
+            (
+                "mutation",
+                flow_optional::<PipelineMutationProblemDetailsV1>(generator)
+            ),
         ],
-        &["cause", "detail", "selector", "matches", "compile_refusal"]
+        &[
+            "cause",
+            "detail",
+            "selector",
+            "matches",
+            "compile_refusal",
+            "mutation",
+        ]
     )
 );
 impl_schema!(PipelineRecheckV1, "PipelineRecheckV1", |generator| {
@@ -5565,7 +5985,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 106] = [
+const INVENTORY: [SchemaDescriptor; 115] = [
     descriptor::<ArtifactProblemDetailsV1>(
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -5794,6 +6214,22 @@ const INVENTORY: [SchemaDescriptor; 106] = [
         "handbook.operation.intake-record-append-result/1.0.0.schema.json",
         intake_record_append_result_schema,
     ),
+    descriptor::<PipelineCaptureApplyRequestSchemaV1>(
+        "handbook.operation.pipeline-capture-apply-request@1.0.0",
+        "handbook.operation.pipeline-capture-apply-request/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineCaptureApplyResultV1>(
+        "handbook.operation.pipeline-capture-apply-result@1.0.0",
+        "handbook.operation.pipeline-capture-apply-result/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineCapturePlanRequestV1>(
+        "handbook.operation.pipeline-capture-plan-request@1.0.0",
+        "handbook.operation.pipeline-capture-plan-request/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineCapturePlanResultV1>(
+        "handbook.operation.pipeline-capture-plan-result@1.0.0",
+        "handbook.operation.pipeline-capture-plan-result/1.0.0.schema.json",
+    ),
     descriptor::<PipelineEmptyRequestV1>(
         "handbook.operation.pipeline-catalog-list-request@1.0.0",
         "handbook.operation.pipeline-catalog-list-request/1.0.0.schema.json",
@@ -5818,6 +6254,22 @@ const INVENTORY: [SchemaDescriptor; 106] = [
         "handbook.operation.pipeline-compile-result@1.0.0",
         "handbook.operation.pipeline-compile-result/1.0.0.schema.json",
     ),
+    descriptor::<PipelineHandoffEmitRequestSchemaV1>(
+        "handbook.operation.pipeline-handoff-emit-request@1.0.0",
+        "handbook.operation.pipeline-handoff-emit-request/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineHandoffEmitResultV1>(
+        "handbook.operation.pipeline-handoff-emit-result@1.0.0",
+        "handbook.operation.pipeline-handoff-emit-result/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineStateApplyRequestSchemaV1>(
+        "handbook.operation.pipeline-state-apply-request@1.0.0",
+        "handbook.operation.pipeline-state-apply-request/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineStateApplyResultV1>(
+        "handbook.operation.pipeline-state-apply-result@1.0.0",
+        "handbook.operation.pipeline-state-apply-result/1.0.0.schema.json",
+    ),
     descriptor::<PostureTransitionApplyRequestSchemaV1>(
         "handbook.operation.posture-transition-apply-request@1.0.0",
         "handbook.operation.posture-transition-apply-request/1.0.0.schema.json",
@@ -5837,6 +6289,10 @@ const INVENTORY: [SchemaDescriptor; 106] = [
     descriptor::<PipelineRecheckV1>(
         "handbook.pipeline-recheck@1.0.0",
         "handbook.pipeline-recheck/1.0.0.schema.json",
+    ),
+    descriptor::<PipelineWriteConditionV1>(
+        "handbook.pipeline-write-condition@1.0.0",
+        "handbook.pipeline-write-condition/1.0.0.schema.json",
     ),
     descriptor::<PostureAuthorityConflictDetailsSchema>(
         "handbook.posture-details.authority-conflict@1.0.0",
@@ -6218,8 +6674,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 106 {
-        return Err("schema inventory must contain exactly 106 entries".to_owned());
+    if INVENTORY.len() != 115 {
+        return Err("schema inventory must contain exactly 115 entries".to_owned());
     }
 
     let mut previous_ref = None;
@@ -6300,6 +6756,9 @@ fn validate_schema(
             | "handbook.operation.intake-record-append-request@1.0.0"
             | "handbook.operation.artifact-candidate-append-request@1.0.0"
             | "handbook.operation.artifact-candidate-promote-request@1.0.0"
+            | "handbook.operation.pipeline-capture-apply-request@1.0.0"
+            | "handbook.operation.pipeline-handoff-emit-request@1.0.0"
+            | "handbook.operation.pipeline-state-apply-request@1.0.0"
     ) {
         validate_posture_request_raw_key_schema(value, descriptor.relative_path)
     } else {

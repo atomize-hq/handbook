@@ -17,10 +17,11 @@ use handbook_pipeline::{
         load_route_state_with_storage_layout, load_route_state_with_supported_variables,
         load_trusted_pipeline_session, load_trusted_pipeline_session_with_storage_layout,
         persist_route_basis, persist_route_basis_with_storage_layout, set_route_state,
-        set_route_state_with_storage_layout, RouteBasisPersistOutcome, RouteBasisPersistRefusal,
-        RouteBasisStageStatus, RouteState, RouteStateMutation, RouteStateMutationOutcome,
-        RouteStateMutationRefusal, RouteStateReadError, RouteStateStoreError, RouteStateValue,
-        TrustedPipelineSessionRefusal, ROUTE_STATE_AUDIT_LIMIT, ROUTE_STATE_SCHEMA_VERSION,
+        set_route_state_with_effects, set_route_state_with_storage_layout,
+        RouteBasisPersistOutcome, RouteBasisPersistRefusal, RouteBasisStageStatus, RouteState,
+        RouteStateMutation, RouteStateMutationOutcome, RouteStateMutationRefusal,
+        RouteStateReadError, RouteStateStoreError, RouteStateValue, TrustedPipelineSessionRefusal,
+        ROUTE_STATE_AUDIT_LIMIT, ROUTE_STATE_SCHEMA_VERSION,
     },
     PipelineStorageLayoutContract,
 };
@@ -70,6 +71,36 @@ fn seed_run_inventory(repo_root: &Path) {
 
 fn repo_root_string(repo_root: &Path) -> String {
     repo_root.to_string_lossy().into_owned()
+}
+
+#[test]
+fn state_apply_reports_the_exact_receiptable_compare_and_write_effect() {
+    let (_dir, repo_root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    let (definition, supported_variables) =
+        pipeline_proof_corpus_support::load_foundation_inputs_definition(&repo_root);
+    let execution = set_route_state_with_effects(
+        &repo_root,
+        &definition.header.id,
+        supported_variables.iter().map(String::as_str),
+        RouteStateMutation::RoutingVariable {
+            variable: "needs_project_context".to_string(),
+            value: true,
+        },
+        0,
+    )
+    .expect("state mutation");
+
+    let RouteStateMutationOutcome::Applied(state) = execution.outcome else {
+        panic!("expected applied state")
+    };
+    assert_eq!(execution.effects.len(), 1);
+    assert_eq!(execution.effects[0].effect_kind, "pipeline_route_state");
+    assert_eq!(
+        execution.effects[0].portable_path,
+        format!(".handbook/state/pipeline/{}.yaml", definition.header.id)
+    );
+    assert_eq!(execution.effects[0].revision, Some(state.revision));
+    assert!(execution.effects[0].fingerprint.starts_with("sha256:"));
 }
 
 fn state_path(repo_root: &Path, pipeline_id: &str) -> PathBuf {

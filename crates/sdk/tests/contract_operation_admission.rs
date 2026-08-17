@@ -53,6 +53,10 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
             "pipeline.catalog.list",
             "pipeline.catalog.read",
             "pipeline.compile",
+            "pipeline.capture.plan",
+            "pipeline.capture.apply",
+            "pipeline.handoff.emit",
+            "pipeline.state.apply",
         ]
     );
     assert!(rows.iter().all(|row| {
@@ -74,6 +78,10 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
             "pipeline.catalog.list",
             "pipeline.catalog.read",
             "pipeline.compile",
+            "pipeline.capture.plan",
+            "pipeline.capture.apply",
+            "pipeline.handoff.emit",
+            "pipeline.state.apply",
         ]
         .contains(&row.operation_id())
         {
@@ -131,7 +139,7 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
     let frozen_bytes = canonical_json_bytes(&frozen_tuples, &ContractLimits::packet0()).unwrap();
     assert_eq!(
         handbook_sdk::contract_membrane::sha256_fingerprint(&frozen_bytes).as_str(),
-        "sha256:bed6022c55d5c63b903c985a18ae20b8596bd14ff78f6385b694fa7cfc7f369d"
+        "sha256:59a780b744ee5c58ffc14140ba9b28ffb5614c2c7551ad09aa0f61cea011ae7b"
     );
 }
 

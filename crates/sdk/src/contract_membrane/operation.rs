@@ -769,6 +769,13 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                     operation_id,
                     "pipeline.catalog.list" | "pipeline.catalog.read" | "pipeline.compile"
                 );
+                let is_pipeline_mutation_packet = matches!(
+                    operation_id,
+                    "pipeline.capture.plan"
+                        | "pipeline.capture.apply"
+                        | "pipeline.handoff.emit"
+                        | "pipeline.state.apply"
+                );
                 let is_artifact_operation = matches!(
                     operation_id,
                     "artifact.kind.list"
@@ -794,6 +801,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                         || is_artifact_operation
                         || is_flow_resolve
                         || is_pipeline_read
+                        || is_pipeline_mutation_packet
                     {
                         AdmissionReason::Admitted
                     } else {
@@ -801,7 +809,11 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                     },
                     current_transports: if is_posture_apply {
                         &[OperationTransport::RustSdk]
-                    } else if is_artifact_operation || is_flow_resolve || is_pipeline_read {
+                    } else if is_artifact_operation
+                        || is_flow_resolve
+                        || is_pipeline_read
+                        || is_pipeline_mutation_packet
+                    {
                         &[OperationTransport::CliJson]
                     } else {
                         &[]
@@ -810,6 +822,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                         || is_artifact_operation
                         || is_flow_resolve
                         || is_pipeline_read
+                        || is_pipeline_mutation_packet
                     {
                         DiscoveryState::Discoverable
                     } else {

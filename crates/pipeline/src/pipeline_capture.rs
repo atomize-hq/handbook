@@ -11,6 +11,7 @@ use crate::pipeline_compile::{
     compile_pipeline_stage_with_runtime_and_storage_layout, PipelineCompileRefusal,
     PipelineCompileRuntimeContext,
 };
+use crate::pipeline_mutation_effect::PipelineMutationEffect;
 use crate::repo_file_access::{
     delete_repo_relative_file, read_bytes_no_follow_path, read_string_no_follow_path,
     resolve_repo_relative_write_path, validate_repo_relative_path, write_repo_relative_bytes,
@@ -22,7 +23,7 @@ use crate::route_state::{
     normalized_state_for_persistence, persist_route_state, rebuild_canonical_route_basis,
     route_basis_mismatch_reason, route_state_path_with_storage_layout, RouteBasis,
     RouteBasisStageStatus, RouteState, RouteStateAuditEntry, RouteStateReadError, RouteStateValue,
-    ROUTE_STATE_AUDIT_LIMIT, ROUTE_STATE_SCHEMA_VERSION,
+    PIPELINE_PUBLIC_REVISION_MAX, ROUTE_STATE_AUDIT_LIMIT, ROUTE_STATE_SCHEMA_VERSION,
 };
 use crate::stage_10_feature_spec_provenance::{
     build_stage_10_feature_spec_capture_provenance,
@@ -65,11 +66,32 @@ pub struct PipelineCapturePreview {
     pub plan: PipelineCapturePlan,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub struct PipelineCaptureApplyResult {
     pub plan: PipelineCapturePlan,
     pub written_files: Vec<String>,
     pub persisted_state_revision: Option<u64>,
+}
+
+#[derive(Debug, Clone, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct PipelineCaptureApplyExecution {
+    pub result: PipelineCaptureApplyResult,
+    pub effects: Vec<PipelineMutationEffect>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PipelineCaptureApplyFailure {
+    pub refusal: Box<PipelineCaptureRefusal>,
+    pub effects: Vec<PipelineMutationEffect>,
+    pub terminal_facts: PipelineCaptureTerminalFacts,
+}
+
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct PipelineCaptureTerminalFacts {
+    pub expected_revision: Option<u64>,
+    pub actual_revision: Option<u64>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -173,6 +195,18 @@ struct SnapshotEntry {
     prior_bytes: Option<Vec<u8>>,
 }
 
+#[derive(Debug)]
+struct CaptureTargetWriteFailure {
+    summary: String,
+    realized_targets: usize,
+}
+
+impl fmt::Display for CaptureTargetWriteFailure {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.write_str(&self.summary)
+    }
+}
+
 pub fn preview_pipeline_capture(
     repo_root: impl AsRef<Path>,
     request: &PipelineCaptureRequest,
@@ -228,6 +262,38 @@ pub(crate) fn capture_pipeline_output_with_storage_layout(
     apply_capture_plan(repo_root, &plan, storage_layout)
 }
 
+pub fn capture_pipeline_output_with_effects(
+    repo_root: impl AsRef<Path>,
+    request: &PipelineCaptureRequest,
+) -> Result<PipelineCaptureApplyExecution, PipelineCaptureApplyFailure> {
+    capture_pipeline_output_with_effects_and_storage_layout(
+        repo_root,
+        request,
+        *handbook_product_pipeline_storage_layout_contract(),
+    )
+}
+
+fn capture_pipeline_output_with_effects_and_storage_layout(
+    repo_root: impl AsRef<Path>,
+    request: &PipelineCaptureRequest,
+    storage_layout: PipelineStorageLayoutContract,
+) -> Result<PipelineCaptureApplyExecution, PipelineCaptureApplyFailure> {
+    let repo_root = repo_root.as_ref();
+    let plan = build_capture_plan(
+        repo_root,
+        &request.pipeline_selector,
+        &request.stage_selector,
+        &request.input,
+        storage_layout,
+    )
+    .map_err(|refusal| PipelineCaptureApplyFailure {
+        refusal: Box::new(refusal),
+        effects: Vec::new(),
+        terminal_facts: PipelineCaptureTerminalFacts::default(),
+    })?;
+    apply_capture_plan_with_effects(repo_root, &plan, storage_layout)
+}
+
 pub fn apply_pipeline_capture(
     repo_root: impl AsRef<Path>,
     capture_id: &str,
@@ -247,6 +313,36 @@ pub fn apply_pipeline_capture_with_storage_layout(
     let repo_root = repo_root.as_ref();
     let cache_entry = load_capture_cache(repo_root, capture_id, storage_layout)?;
     apply_capture_plan(repo_root, &cache_entry.plan, storage_layout).inspect(|_| {
+        let _ = delete_capture_cache(repo_root, capture_id, storage_layout);
+    })
+}
+
+pub fn apply_pipeline_capture_with_effects(
+    repo_root: impl AsRef<Path>,
+    capture_id: &str,
+) -> Result<PipelineCaptureApplyExecution, PipelineCaptureApplyFailure> {
+    apply_pipeline_capture_with_effects_and_storage_layout(
+        repo_root,
+        capture_id,
+        *handbook_product_pipeline_storage_layout_contract(),
+    )
+}
+
+fn apply_pipeline_capture_with_effects_and_storage_layout(
+    repo_root: impl AsRef<Path>,
+    capture_id: &str,
+    storage_layout: PipelineStorageLayoutContract,
+) -> Result<PipelineCaptureApplyExecution, PipelineCaptureApplyFailure> {
+    let repo_root = repo_root.as_ref();
+    let cache_entry =
+        load_capture_cache(repo_root, capture_id, storage_layout).map_err(|refusal| {
+            PipelineCaptureApplyFailure {
+                refusal: Box::new(refusal),
+                effects: Vec::new(),
+                terminal_facts: PipelineCaptureTerminalFacts::default(),
+            }
+        })?;
+    apply_capture_plan_with_effects(repo_root, &cache_entry.plan, storage_layout).inspect(|_| {
         let _ = delete_capture_cache(repo_root, capture_id, storage_layout);
     })
 }
@@ -612,6 +708,14 @@ fn build_capture_plan(
         &stage_id,
     )?;
     let state_updates = derive_state_updates(&artifact_contents);
+    ensure_capture_revision_domain(
+        state.revision,
+        route_basis.state_revision,
+        None,
+        !state_updates.is_empty(),
+        &pipeline.header.id,
+        &stage_id,
+    )?;
     let post_apply_next_safe_action =
         build_post_apply_next_safe_action(&pipeline.header.id, &stage_definition, &state_updates);
 
@@ -644,6 +748,41 @@ fn apply_capture_plan(
     repo_root: &Path,
     plan: &PipelineCapturePlan,
     storage_layout: PipelineStorageLayoutContract,
+) -> Result<PipelineCaptureApplyResult, PipelineCaptureRefusal> {
+    apply_capture_plan_with_effects(repo_root, plan, storage_layout)
+        .map(|execution| execution.result)
+        .map_err(|failure| *failure.refusal)
+}
+
+fn apply_capture_plan_with_effects(
+    repo_root: &Path,
+    plan: &PipelineCapturePlan,
+    storage_layout: PipelineStorageLayoutContract,
+) -> Result<PipelineCaptureApplyExecution, PipelineCaptureApplyFailure> {
+    let mut effects = Vec::new();
+    let mut terminal_facts = PipelineCaptureTerminalFacts::default();
+    match apply_capture_plan_recording(
+        repo_root,
+        plan,
+        storage_layout,
+        &mut effects,
+        &mut terminal_facts,
+    ) {
+        Ok(result) => Ok(PipelineCaptureApplyExecution { result, effects }),
+        Err(refusal) => Err(PipelineCaptureApplyFailure {
+            refusal: Box::new(refusal),
+            effects,
+            terminal_facts,
+        }),
+    }
+}
+
+fn apply_capture_plan_recording(
+    repo_root: &Path,
+    plan: &PipelineCapturePlan,
+    storage_layout: PipelineStorageLayoutContract,
+    effects: &mut Vec<PipelineMutationEffect>,
+    terminal_facts: &mut PipelineCaptureTerminalFacts,
 ) -> Result<PipelineCaptureApplyResult, PipelineCaptureRefusal> {
     let supported_variables =
         supported_route_state_variables_for_plan(repo_root, &plan.target.pipeline_id)?;
@@ -700,6 +839,14 @@ fn apply_capture_plan(
                 plan.target.pipeline_id
             ),
         })?;
+    ensure_capture_revision_domain(
+        state.revision,
+        current_basis.state_revision,
+        Some(plan.basis.state_revision),
+        !plan.state_updates.is_empty(),
+        &plan.target.pipeline_id,
+        &plan.target.stage_id,
+    )?;
     let canonical_basis =
         rebuild_canonical_route_basis(repo_root, &pipeline, &state).map_err(|reason| {
             stale_basis_refusal(&plan.target.pipeline_id, &plan.target.stage_id, reason)
@@ -713,6 +860,8 @@ fn apply_capture_plan(
         &plan.target.stage_id,
     )?;
     if state.revision != plan.basis.state_revision {
+        terminal_facts.expected_revision = Some(plan.basis.state_revision);
+        terminal_facts.actual_revision = Some(state.revision);
         return Err(PipelineCaptureRefusal {
             classification: PipelineCaptureRefusalClassification::RevisionConflict,
             summary: format!(
@@ -773,12 +922,16 @@ fn apply_capture_plan(
             stage_id: Some(canonical_plan.target.stage_id.clone()),
             recovery: "fix the output targets and retry `pipeline capture`".to_string(),
         })?;
-    let written_files =
-        write_capture_targets(repo_root, &canonical_plan, &mut snapshots).map_err(|summary| {
-            rollback_snapshots(repo_root, &snapshots);
+    let written_files = write_capture_targets(repo_root, &canonical_plan, &mut snapshots, effects)
+        .map_err(|failure| {
+            let rollback_failures = rollback_snapshots_with_effects(
+                repo_root,
+                &snapshots[..failure.realized_targets],
+                effects,
+            );
             PipelineCaptureRefusal {
                 classification: PipelineCaptureRefusalClassification::WriteFailure,
-                summary,
+                summary: append_rollback_failures(failure.summary, &rollback_failures),
                 pipeline_id: Some(canonical_plan.target.pipeline_id.clone()),
                 stage_id: Some(canonical_plan.target.stage_id.clone()),
                 recovery: "fix the file-write failure and retry `pipeline capture`".to_string(),
@@ -790,7 +943,7 @@ fn apply_capture_plan(
     } else {
         let mut next_state = normalized_state_for_persistence(&state, repo_root);
         next_state.schema_version = ROUTE_STATE_SCHEMA_VERSION.to_string();
-        next_state.revision = next_state.revision.saturating_add(1);
+        next_state.revision += 1;
         for update in &canonical_plan.state_updates {
             apply_state_update(&mut next_state, update);
         }
@@ -803,29 +956,87 @@ fn apply_capture_plan(
             });
         }
         trim_audit_history(&mut next_state.audit);
+        let state_bytes = serde_yaml_bw::to_string(&next_state)
+            .map_err(|err| PipelineCaptureRefusal {
+                classification: PipelineCaptureRefusalClassification::StatePersistenceFailure,
+                summary: format!("failed to serialize post-capture state: {err}"),
+                pipeline_id: Some(canonical_plan.target.pipeline_id.clone()),
+                stage_id: Some(canonical_plan.target.stage_id.clone()),
+                recovery: "fix the route-state serialization failure and retry `pipeline capture`"
+                    .to_string(),
+            })?
+            .into_bytes();
+        let state_portable_path = portable_repo_relative_path(repo_root, &state_path)?;
+        let prior_state_bytes = observed_repo_relative_bytes(repo_root, &state_portable_path);
         if let Err(err) = persist_route_state(&state_path, &next_state) {
-            rollback_snapshots(repo_root, &snapshots);
+            record_changed_file_effect(
+                effects,
+                repo_root,
+                &state_portable_path,
+                prior_state_bytes.as_deref(),
+                &state_bytes,
+                "pipeline_route_state",
+                "pipeline_route_state_partial",
+                Some(next_state.revision),
+            );
+            let rollback_failures = rollback_snapshots_with_effects(repo_root, &snapshots, effects);
             return Err(PipelineCaptureRefusal {
                 classification: PipelineCaptureRefusalClassification::StatePersistenceFailure,
-                summary: format!("failed to persist post-capture state: {err}"),
+                summary: append_rollback_failures(
+                    format!("failed to persist post-capture state: {err}"),
+                    &rollback_failures,
+                ),
                 pipeline_id: Some(canonical_plan.target.pipeline_id.clone()),
                 stage_id: Some(canonical_plan.target.stage_id.clone()),
                 recovery: "fix the route-state persistence failure and retry `pipeline capture`"
                     .to_string(),
             });
         }
+        effects.push(PipelineMutationEffect::from_bytes(
+            "pipeline_route_state",
+            &state_portable_path,
+            &state_bytes,
+            Some(next_state.revision),
+        ));
         Some(next_state.revision)
     };
     if let Some(provenance) = stage_10_capture_provenance.as_ref() {
+        let provenance_path = RepoLayoutRoot::with_contract(repo_root, storage_layout)
+            .capture_provenance()
+            .stage_capture_provenance_relative_path(&provenance.pipeline_id, &provenance.stage_id);
+        let provenance_bytes =
+            serde_json::to_vec_pretty(provenance).map_err(|err| PipelineCaptureRefusal {
+                classification: PipelineCaptureRefusalClassification::StatePersistenceFailure,
+                summary: format!("failed to serialize stage-10 capture provenance: {err}"),
+                pipeline_id: Some(canonical_plan.target.pipeline_id.clone()),
+                stage_id: Some(canonical_plan.target.stage_id.clone()),
+                recovery: "stabilize stage-10 capture provenance and retry `pipeline capture`"
+                    .to_string(),
+            })?;
+        let prior_provenance_bytes =
+            observed_repo_relative_bytes(repo_root, provenance_path.as_str());
         if let Err(summary) = persist_stage_10_feature_spec_capture_provenance_with_storage_layout(
             repo_root,
             provenance,
             storage_layout,
         ) {
-            rollback_snapshots(repo_root, &snapshots);
+            record_changed_file_effect(
+                effects,
+                repo_root,
+                provenance_path.as_str(),
+                prior_provenance_bytes.as_deref(),
+                &provenance_bytes,
+                "pipeline_capture_provenance",
+                "pipeline_capture_provenance_partial",
+                None,
+            );
+            let rollback_failures = rollback_snapshots_with_effects(repo_root, &snapshots, effects);
             return Err(PipelineCaptureRefusal {
                 classification: PipelineCaptureRefusalClassification::StatePersistenceFailure,
-                summary: format!("failed to persist stage-10 capture provenance: {summary}"),
+                summary: append_rollback_failures(
+                    format!("failed to persist stage-10 capture provenance: {summary}"),
+                    &rollback_failures,
+                ),
                 pipeline_id: Some(canonical_plan.target.pipeline_id.clone()),
                 stage_id: Some(canonical_plan.target.stage_id.clone()),
                 recovery:
@@ -833,12 +1044,51 @@ fn apply_capture_plan(
                         .to_string(),
             });
         }
+        effects.push(PipelineMutationEffect::from_bytes(
+            "pipeline_capture_provenance",
+            provenance_path.as_str(),
+            &provenance_bytes,
+            None,
+        ));
     }
 
     Ok(PipelineCaptureApplyResult {
         plan: canonical_plan,
         written_files,
         persisted_state_revision,
+    })
+}
+
+fn ensure_capture_revision_domain(
+    state_revision: u64,
+    persisted_basis_revision: u64,
+    planned_basis_revision: Option<u64>,
+    advances_revision: bool,
+    pipeline_id: &str,
+    stage_id: &str,
+) -> Result<(), PipelineCaptureRefusal> {
+    let outside_public_domain = state_revision > PIPELINE_PUBLIC_REVISION_MAX
+        || persisted_basis_revision > PIPELINE_PUBLIC_REVISION_MAX
+        || planned_basis_revision.is_some_and(|revision| revision > PIPELINE_PUBLIC_REVISION_MAX);
+    if !(outside_public_domain
+        || advances_revision && state_revision >= PIPELINE_PUBLIC_REVISION_MAX)
+    {
+        return Ok(());
+    }
+
+    Err(PipelineCaptureRefusal {
+        classification: PipelineCaptureRefusalClassification::InvalidState,
+        summary: if outside_public_domain {
+            "route state revision is outside the public pipeline contract domain".to_string()
+        } else {
+            "route state revision cannot advance within the public pipeline contract domain"
+                .to_string()
+        },
+        pipeline_id: Some(pipeline_id.to_string()),
+        stage_id: Some(stage_id.to_string()),
+        recovery: format!(
+            "repair route state for pipeline `{pipeline_id}` before retrying `pipeline capture`"
+        ),
     })
 }
 
@@ -2160,7 +2410,8 @@ fn write_capture_targets(
     repo_root: &Path,
     plan: &PipelineCapturePlan,
     snapshots: &mut [SnapshotEntry],
-) -> Result<Vec<String>, String> {
+    effects: &mut Vec<PipelineMutationEffect>,
+) -> Result<Vec<String>, CaptureTargetWriteFailure> {
     let mut written = Vec::new();
     let writes = plan
         .artifact_writes
@@ -2170,32 +2421,187 @@ fn write_capture_targets(
     for (index, write) in writes.iter().enumerate() {
         let snapshot = snapshots
             .get(index)
-            .ok_or_else(|| "internal capture snapshot mismatch".to_string())?;
+            .ok_or_else(|| CaptureTargetWriteFailure {
+                summary: "internal capture snapshot mismatch".to_owned(),
+                realized_targets: written.len(),
+            })?;
         let bytes = write.content.as_bytes().to_vec();
-        write_repo_relative_bytes(repo_root, &snapshot.repo_relative_path, &bytes).map_err(
-            |err| {
-                format!(
+        if let Err(err) = write_repo_relative_bytes(repo_root, &snapshot.repo_relative_path, &bytes)
+        {
+            let exact_kind = if index < plan.artifact_writes.len() {
+                "pipeline_capture_artifact"
+            } else {
+                "pipeline_capture_mirror"
+            };
+            let partial_kind = if index < plan.artifact_writes.len() {
+                "pipeline_capture_artifact_partial"
+            } else {
+                "pipeline_capture_mirror_partial"
+            };
+            let failing_target_realized = record_changed_file_effect(
+                effects,
+                repo_root,
+                &snapshot.repo_relative_path,
+                snapshot.prior_bytes.as_deref(),
+                &bytes,
+                exact_kind,
+                partial_kind,
+                None,
+            );
+            return Err(CaptureTargetWriteFailure {
+                summary: format!(
                     "failed to commit `{}`: {}",
                     write.path,
                     format_repo_relative_mutation_error(&snapshot.repo_relative_path, err)
-                )
+                ),
+                realized_targets: written.len() + usize::from(failing_target_realized),
+            });
+        }
+        effects.push(PipelineMutationEffect::from_bytes(
+            if index < plan.artifact_writes.len() {
+                "pipeline_capture_artifact"
+            } else {
+                "pipeline_capture_mirror"
             },
-        )?;
+            &write.path,
+            &bytes,
+            None,
+        ));
         written.push(write.path.clone());
     }
     Ok(written)
 }
 
+fn observed_repo_relative_bytes(repo_root: &Path, relative_path: &str) -> Option<Vec<u8>> {
+    resolve_repo_relative_write_path(repo_root, relative_path)
+        .ok()
+        .and_then(|path| read_bytes_no_follow_path(&path).ok())
+}
+
+#[allow(clippy::too_many_arguments)]
+fn record_changed_file_effect(
+    effects: &mut Vec<PipelineMutationEffect>,
+    repo_root: &Path,
+    relative_path: &str,
+    prior_bytes: Option<&[u8]>,
+    intended_bytes: &[u8],
+    exact_kind: &str,
+    partial_kind: &str,
+    revision: Option<u64>,
+) -> bool {
+    let Some(actual_bytes) = observed_repo_relative_bytes(repo_root, relative_path) else {
+        return false;
+    };
+    if prior_bytes == Some(actual_bytes.as_slice()) {
+        return false;
+    }
+    let exact = actual_bytes == intended_bytes;
+    effects.push(PipelineMutationEffect::from_bytes(
+        if exact { exact_kind } else { partial_kind },
+        relative_path,
+        &actual_bytes,
+        if exact { revision } else { None },
+    ));
+    true
+}
+
+fn portable_repo_relative_path(
+    repo_root: &Path,
+    path: &Path,
+) -> Result<String, PipelineCaptureRefusal> {
+    path.strip_prefix(repo_root)
+        .map(|relative| relative.to_string_lossy().replace('\\', "/"))
+        .map_err(|_| PipelineCaptureRefusal {
+            classification: PipelineCaptureRefusalClassification::InvalidWriteTarget,
+            summary: "pipeline owner produced a write outside the repository".to_string(),
+            pipeline_id: None,
+            stage_id: None,
+            recovery: "repair the pipeline storage layout and retry `pipeline capture`".to_string(),
+        })
+}
+
+#[cfg(test)]
 fn rollback_snapshots(repo_root: &Path, snapshots: &[SnapshotEntry]) {
+    let mut effects = Vec::new();
+    let _ = rollback_snapshots_with_effects(repo_root, snapshots, &mut effects);
+}
+
+fn rollback_snapshots_with_effects(
+    repo_root: &Path,
+    snapshots: &[SnapshotEntry],
+    effects: &mut Vec<PipelineMutationEffect>,
+) -> Vec<String> {
+    let mut failures = Vec::new();
     for snapshot in snapshots.iter().rev() {
         match &snapshot.prior_bytes {
             Some(bytes) => {
-                let _ = write_repo_relative_bytes(repo_root, &snapshot.repo_relative_path, bytes);
+                let before = observed_repo_relative_bytes(repo_root, &snapshot.repo_relative_path);
+                let result =
+                    write_repo_relative_bytes(repo_root, &snapshot.repo_relative_path, bytes);
+                let after = observed_repo_relative_bytes(repo_root, &snapshot.repo_relative_path);
+                if before != after {
+                    if let Some(actual_bytes) = after.as_deref() {
+                        effects.push(PipelineMutationEffect::from_bytes(
+                            if actual_bytes == bytes.as_slice() {
+                                "pipeline_capture_rollback_restore"
+                            } else {
+                                "pipeline_capture_rollback_restore_partial"
+                            },
+                            &snapshot.repo_relative_path,
+                            actual_bytes,
+                            None,
+                        ));
+                    }
+                }
+                if let Err(error) = result {
+                    failures.push(format!(
+                        "failed to restore `{}` during rollback: {}",
+                        snapshot.repo_relative_path,
+                        format_repo_relative_mutation_error(&snapshot.repo_relative_path, error)
+                    ));
+                } else if after.as_deref() != Some(bytes.as_slice()) {
+                    failures.push(format!(
+                        "rollback restore for `{}` did not retain the prior bytes",
+                        snapshot.repo_relative_path
+                    ));
+                }
             }
             None => {
-                let _ = delete_repo_relative_file(repo_root, &snapshot.repo_relative_path);
+                let before = observed_repo_relative_bytes(repo_root, &snapshot.repo_relative_path);
+                let result = delete_repo_relative_file(repo_root, &snapshot.repo_relative_path);
+                let after = observed_repo_relative_bytes(repo_root, &snapshot.repo_relative_path);
+                if before.is_some() && after.is_none() {
+                    effects.push(PipelineMutationEffect::deletion(
+                        "pipeline_capture_rollback_delete",
+                        &snapshot.repo_relative_path,
+                    ));
+                }
+                if let Err(error) = result {
+                    failures.push(format!(
+                        "failed to delete `{}` during rollback: {}",
+                        snapshot.repo_relative_path,
+                        format_repo_relative_mutation_error(&snapshot.repo_relative_path, error)
+                    ));
+                } else if after.is_some() {
+                    failures.push(format!(
+                        "rollback delete for `{}` left the target present",
+                        snapshot.repo_relative_path
+                    ));
+                }
             }
         }
+    }
+    failures
+}
+
+fn append_rollback_failures(summary: String, rollback_failures: &[String]) -> String {
+    if rollback_failures.is_empty() {
+        summary
+    } else {
+        format!(
+            "{summary}; rollback incomplete: {}",
+            rollback_failures.join("; ")
+        )
     }
 }
 
@@ -2795,9 +3201,10 @@ impl fmt::Display for PipelineCaptureRefusalClassification {
 mod tests {
     use super::{
         build_post_apply_next_safe_action, build_repo_mirror_writes, capture_cache_path,
-        rollback_snapshots, snapshot_targets, write_capture_targets, PipelineCapturePlan,
-        PipelineCaptureStateUpdate, PipelineCaptureStateValue, PipelineCaptureTarget,
-        PipelineCaptureWriteIntent,
+        rollback_snapshots, rollback_snapshots_with_effects, snapshot_targets,
+        write_capture_targets, PipelineCapturePlan, PipelineCaptureStateUpdate,
+        PipelineCaptureStateValue, PipelineCaptureTarget, PipelineCaptureWriteIntent,
+        SnapshotEntry,
     };
     use crate::pipeline::{
         CompileStageDefinition, CompileStageGating, CompileStageInputs, CompileStageOutputs,
@@ -3032,7 +3439,7 @@ mod tests {
         let err = capture_cache_path(repo_root.path(), capture_id).expect_err("symlink refusal");
 
         assert!(
-            err.contains("cannot be written through symlink"),
+            err.summary.contains("cannot be written through symlink"),
             "expected symlink refusal, got: {err}"
         );
     }
@@ -3056,11 +3463,11 @@ mod tests {
         std::os::unix::fs::symlink(external_root.path(), repo_root.path().join("mirror"))
             .expect("swap parent with symlink");
 
-        let err =
-            write_capture_targets(repo_root.path(), &plan, &mut snapshots).expect_err("refusal");
+        let err = write_capture_targets(repo_root.path(), &plan, &mut snapshots, &mut Vec::new())
+            .expect_err("refusal");
 
         assert!(
-            err.contains("cannot be written through symlink"),
+            err.summary.contains("cannot be written through symlink"),
             "expected symlink refusal, got: {err}"
         );
         assert!(
@@ -3068,6 +3475,44 @@ mod tests {
             "commit should not create or overwrite files outside the repo"
         );
         assert_eq!(read_file(&swapped_parent.join("target.md")), "before\n");
+    }
+
+    #[test]
+    fn mid_sequence_write_failure_rolls_back_only_realized_targets() {
+        let repo_root = tempfile::tempdir().expect("tempdir");
+        fs::create_dir_all(repo_root.path().join("blocked.md")).expect("blocked target");
+        let plan = test_plan(vec![
+            write_intent("created.md", "created\n"),
+            write_intent("blocked.md", "blocked\n"),
+        ]);
+        let mut snapshots = vec![
+            SnapshotEntry {
+                repo_relative_path: "created.md".to_owned(),
+                prior_bytes: None,
+            },
+            SnapshotEntry {
+                repo_relative_path: "blocked.md".to_owned(),
+                prior_bytes: None,
+            },
+        ];
+        let mut effects = Vec::new();
+
+        let failure = write_capture_targets(repo_root.path(), &plan, &mut snapshots, &mut effects)
+            .expect_err("second target must fail");
+        assert_eq!(failure.realized_targets, 1);
+        assert_eq!(effects.len(), 1);
+        let rollback_failures = rollback_snapshots_with_effects(
+            repo_root.path(),
+            &snapshots[..failure.realized_targets],
+            &mut effects,
+        );
+
+        assert!(rollback_failures.is_empty());
+        assert!(!repo_root.path().join("created.md").exists());
+        assert!(repo_root.path().join("blocked.md").is_dir());
+        assert_eq!(effects.len(), 2);
+        assert_eq!(effects[1].portable_path, "created.md");
+        assert_eq!(effects[1].effect_kind, "pipeline_capture_rollback_delete");
     }
 
     #[cfg(unix)]
@@ -3102,8 +3547,8 @@ mod tests {
         )
         .expect("swap failing parent with symlink");
 
-        let err =
-            write_capture_targets(repo_root.path(), &plan, &mut snapshots).expect_err("refusal");
+        let err = write_capture_targets(repo_root.path(), &plan, &mut snapshots, &mut Vec::new())
+            .expect_err("refusal");
         assert!(
             err.contains("cannot be written through symlink"),
             "expected symlink refusal, got: {err}"
@@ -3159,7 +3604,8 @@ mod tests {
         let mut snapshots = snapshot_targets(repo_root.path(), &plan).expect("snapshot");
 
         let written =
-            write_capture_targets(repo_root.path(), &plan, &mut snapshots).expect("write targets");
+            write_capture_targets(repo_root.path(), &plan, &mut snapshots, &mut Vec::new())
+                .expect("write targets");
         assert_eq!(
             written,
             vec!["artifact.md".to_string(), "new-output.md".to_string()]

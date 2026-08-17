@@ -14,7 +14,7 @@ pub(crate) fn matches(claim: &OperationAdmissionClaim<'_>) -> bool {
 const PIPELINE_READ_OPERATIONS: [OperationAdmissionClaim<'static>; 3] = [
     read_claim(
         "pipeline.catalog.list@1.0.0",
-        "sha256:fb1214c80deb6c004eabec0cc3e5930cce214b4a0ae0cdbbc28552fae90f06ac",
+        "sha256:e1042da34e947a306a0d0161989b5f62bebeb38277b058972a98828fdf836982",
         "handbook.operation.pipeline-catalog-list-request@1.0.0",
         "sha256:e1dee1816e73dff88d397de58e40880a1727a2ffb95bb7bf9c2194f02a0a1b0d",
         "handbook.operation.pipeline-catalog-list-result@1.0.0",
@@ -22,7 +22,7 @@ const PIPELINE_READ_OPERATIONS: [OperationAdmissionClaim<'static>; 3] = [
     ),
     read_claim(
         "pipeline.catalog.read@1.0.0",
-        "sha256:c47d51f8bf0eee8f5928e6a9a4691e96ec92b2bb8d3b510b24f9e127cbdb8660",
+        "sha256:806c020409ec4e95c1fac0cc5b1dc6d651432eb224713466eb27e7842d528470",
         "handbook.operation.pipeline-catalog-read-request@1.0.0",
         "sha256:8732315b3c3813017404b002bab67e548c3aaece02b53d61e39f32cb4488a730",
         "handbook.operation.pipeline-catalog-read-result@1.0.0",
@@ -30,7 +30,7 @@ const PIPELINE_READ_OPERATIONS: [OperationAdmissionClaim<'static>; 3] = [
     ),
     read_claim(
         "pipeline.compile@1.0.0",
-        "sha256:63700e2192fd7564b10c71c592abfcee0dd1376f137885d1eaf406f501f652cd",
+        "sha256:2d7c637ceca7ea59bd323a7e642202028ea59c0271e8906f3d28f63d8d3170f0",
         "handbook.operation.pipeline-compile-request@1.0.0",
         "sha256:c4fa8f59d8fb13f861a1cb8e6b73f1378a4c09c83ec9aaa78968975157081a27",
         "handbook.operation.pipeline-compile-result@1.0.0",
@@ -53,7 +53,7 @@ const fn read_claim(
         owner_version: "0.1.2",
         owner_source_ref: "handbook.owner.pipeline@0.1.2",
         owner_source_fingerprint:
-            "sha256:313e778d4065b30fa56e2ae216779b1d7f8d294577ff619047fee72a40afa094",
+            "sha256:e498d7a6cc903d283ce33a90987a784f08a2da6c58e593b21d34234592a61c7b",
         mutability: "read_only",
         idempotency: "safe",
         idempotency_fingerprint:

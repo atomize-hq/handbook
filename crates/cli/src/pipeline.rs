@@ -8,11 +8,18 @@ use crate::{
     shell_shared::{discover_managed_repo_root, read_stdin},
 };
 use handbook_sdk::contract_membrane::{
+    pipeline_capture_apply_from_response, pipeline_capture_apply_operation_request,
+    pipeline_capture_direct_operation_request, pipeline_capture_plan_from_response,
+    pipeline_capture_plan_operation_request, pipeline_capture_refusal_from_response,
     pipeline_catalog_list_from_response, pipeline_catalog_list_operation_request,
     pipeline_catalog_read_from_response, pipeline_catalog_read_operation_request,
     pipeline_compile_from_response, pipeline_compile_operation_request,
-    pipeline_operation_problem_details, ContractLimits, InvocationResponseV1, OperationResponseV1,
-    TransportFailureKind, TransportFailureV1, UseCaseResponseV1,
+    pipeline_handoff_emit_from_response, pipeline_handoff_emit_operation_request,
+    pipeline_handoff_refusal_from_response, pipeline_operation_problem_details,
+    pipeline_state_apply_from_response, pipeline_state_apply_operation_request,
+    pipeline_state_refusal_from_response, sha256_fingerprint, ContractLimits, InvocationResponseV1,
+    OperationResponseV1, PipelineStateProblemProjection, TransportFailureKind, TransportFailureV1,
+    UseCaseResponseV1,
 };
 use handbook_sdk::pipeline_route_api as pipeline_sdk;
 use std::process::ExitCode;
@@ -23,10 +30,10 @@ pub(super) fn run(args: PipelineArgs, machine_json: bool) -> ExitCode {
         PipelineCommand::Show(args) => pipeline_show(args, machine_json),
         PipelineCommand::Resolve(args) => pipeline_resolve(args, machine_json),
         PipelineCommand::Compile(args) => pipeline_compile(args, machine_json),
-        PipelineCommand::Capture(args) => pipeline_capture(args),
-        PipelineCommand::Handoff(args) => pipeline_handoff(args),
+        PipelineCommand::Capture(args) => pipeline_capture(args, machine_json),
+        PipelineCommand::Handoff(args) => pipeline_handoff(args, machine_json),
         PipelineCommand::State(args) => match args.command {
-            PipelineStateCommand::Set(args) => pipeline_state_set(args),
+            PipelineStateCommand::Set(args) => pipeline_state_set(args, machine_json),
         },
     }
 }
@@ -276,156 +283,249 @@ fn emit_human(rendered: &str, semantic_exit: ExitCode) -> ExitCode {
     exit_policy::emit_stdout(format!("{rendered}\n").as_bytes(), semantic_exit)
 }
 
-fn pipeline_capture(args: PipelineCaptureArgs) -> ExitCode {
+fn pipeline_capture(args: PipelineCaptureArgs, machine_json: bool) -> ExitCode {
+    let limits = ContractLimits::packet0();
     let cwd = match std::env::current_dir() {
         Ok(dir) => dir,
         Err(err) => {
-            println!("REFUSED: failed to determine repo root: {err}");
-            return ExitCode::from(1);
+            return pipeline_root_failure(machine_json, &err.to_string(), &limits);
         }
     };
     let repo_root = discover_managed_repo_root(&cwd);
 
     match args.command {
         Some(PipelineCaptureCommand::Apply(apply_args)) => {
-            match pipeline_sdk::apply_pipeline_capture(&pipeline_sdk::PipelineCaptureApplyRequest {
-                repository_root: repo_root,
-                capture_id: apply_args.capture_id,
-            }) {
-                Ok(result) => {
-                    println!("{}", render_pipeline_capture_apply_result(&result));
-                    ExitCode::SUCCESS
-                }
-                Err(refusal) => {
-                    println!("{}", render_pipeline_capture_refusal(&refusal, None, None));
-                    ExitCode::from(1)
-                }
-            }
+            let idempotency_key = pipeline_cli_idempotency_key(
+                "pipeline.capture.apply@1.0.0",
+                &apply_args.capture_id,
+            );
+            let request = match pipeline_capture_apply_operation_request(
+                None,
+                &apply_args.capture_id,
+                &idempotency_key,
+            ) {
+                Ok(request) => request,
+                Err(_) => return pipeline_adapter_failure(machine_json, &limits),
+            };
+            let response = match handbook_sdk::HandbookSdkV1::open(repo_root)
+                .execute_pipeline_operation(&request)
+            {
+                Ok(response) => response,
+                Err(_) => return pipeline_adapter_failure(machine_json, &limits),
+            };
+            emit_pipeline_capture_apply(response, None, None, machine_json, &limits)
         }
         None => {
             let Some(pipeline_id) = args.id.as_deref() else {
-                println!("REFUSED: `pipeline capture` requires --id");
-                return ExitCode::from(1);
+                if machine_json {
+                    return emit_transport_failure(
+                        TransportFailureKind::Adapter,
+                        "transport.pipeline_capture_id_required",
+                        &limits,
+                    );
+                }
+                return emit_human(
+                    "REFUSED: `pipeline capture` requires --id",
+                    exit_policy::failure(),
+                );
             };
             let Some(stage_id) = args.stage.as_deref() else {
-                println!("REFUSED: `pipeline capture` requires --stage");
-                return ExitCode::from(1);
+                if machine_json {
+                    return emit_transport_failure(
+                        TransportFailureKind::Adapter,
+                        "transport.pipeline_capture_stage_required",
+                        &limits,
+                    );
+                }
+                return emit_human(
+                    "REFUSED: `pipeline capture` requires --stage",
+                    exit_policy::failure(),
+                );
             };
             let stdin = match read_stdin() {
                 Ok(value) => value,
                 Err(err) => {
-                    println!("REFUSED: failed to read capture input from stdin: {err}");
-                    return ExitCode::from(1);
+                    if machine_json {
+                        return emit_transport_failure(
+                            TransportFailureKind::Adapter,
+                            "transport.pipeline_capture_input_unavailable",
+                            &limits,
+                        );
+                    }
+                    return emit_human(
+                        &format!("REFUSED: failed to read capture input from stdin: {err}"),
+                        exit_policy::failure(),
+                    );
                 }
             };
-            let request = pipeline_sdk::PipelineCaptureRequestV1 {
-                repository_root: repo_root,
-                pipeline_selector: pipeline_id.to_string(),
-                stage_selector: stage_id.to_string(),
-                input: stdin,
-            };
-
             if args.preview {
-                match pipeline_sdk::preview_pipeline_capture(&request) {
-                    Ok(preview) => {
-                        println!("{}", render_pipeline_capture_preview(&preview));
-                        ExitCode::SUCCESS
-                    }
-                    Err(refusal) => {
-                        println!(
-                            "{}",
-                            render_pipeline_capture_refusal(
-                                &refusal,
-                                Some(pipeline_id),
-                                Some(stage_id)
-                            )
-                        );
-                        ExitCode::from(1)
-                    }
-                }
+                let request = match pipeline_capture_plan_operation_request(
+                    None,
+                    pipeline_id,
+                    stage_id,
+                    &stdin,
+                ) {
+                    Ok(request) => request,
+                    Err(_) => return pipeline_adapter_failure(machine_json, &limits),
+                };
+                let response = match handbook_sdk::HandbookSdkV1::open(repo_root)
+                    .execute_pipeline_operation(&request)
+                {
+                    Ok(response) => response,
+                    Err(_) => return pipeline_adapter_failure(machine_json, &limits),
+                };
+                emit_pipeline_capture_plan(
+                    response,
+                    Some(pipeline_id),
+                    Some(stage_id),
+                    machine_json,
+                    &limits,
+                )
             } else {
-                match pipeline_sdk::capture_pipeline_output(&request) {
-                    Ok(result) => {
-                        println!("{}", render_pipeline_capture_apply_result(&result));
-                        ExitCode::SUCCESS
-                    }
-                    Err(refusal) => {
-                        println!(
-                            "{}",
-                            render_pipeline_capture_refusal(
-                                &refusal,
-                                Some(pipeline_id),
-                                Some(stage_id)
-                            )
-                        );
-                        ExitCode::from(1)
-                    }
-                }
+                let key_material = format!("{pipeline_id}\0{stage_id}\0{stdin}");
+                let idempotency_key =
+                    pipeline_cli_idempotency_key("pipeline.capture.apply@1.0.0", &key_material);
+                let request = match pipeline_capture_direct_operation_request(
+                    None,
+                    pipeline_id,
+                    stage_id,
+                    &stdin,
+                    &idempotency_key,
+                ) {
+                    Ok(request) => request,
+                    Err(_) => return pipeline_adapter_failure(machine_json, &limits),
+                };
+                let response = match handbook_sdk::HandbookSdkV1::open(repo_root)
+                    .execute_pipeline_operation(&request)
+                {
+                    Ok(response) => response,
+                    Err(_) => return pipeline_adapter_failure(machine_json, &limits),
+                };
+                emit_pipeline_capture_apply(
+                    response,
+                    Some(pipeline_id),
+                    Some(stage_id),
+                    machine_json,
+                    &limits,
+                )
             }
         }
     }
 }
 
-fn pipeline_handoff(args: PipelineHandoffArgs) -> ExitCode {
+fn emit_pipeline_capture_plan(
+    response: OperationResponseV1,
+    requested_pipeline_id: Option<&str>,
+    requested_stage_id: Option<&str>,
+    machine_json: bool,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let semantic_exit = exit_policy::terminal(response.terminal().status());
+    if machine_json {
+        return emit_operation_invocation(response, semantic_exit, limits);
+    }
+    let rendered = match pipeline_capture_plan_from_response(&response) {
+        Ok(Some(preview)) => render_pipeline_capture_preview(&preview),
+        Ok(None) => match pipeline_capture_refusal_from_response(&response) {
+            Ok(Some(refusal)) => {
+                render_pipeline_capture_refusal(&refusal, requested_pipeline_id, requested_stage_id)
+            }
+            _ => "PRESENTATION FAILURE: invalid Pipeline capture-plan response".to_owned(),
+        },
+        Err(_) => "PRESENTATION FAILURE: invalid Pipeline capture-plan response".to_owned(),
+    };
+    emit_human(&rendered, semantic_exit)
+}
+
+fn emit_pipeline_capture_apply(
+    response: OperationResponseV1,
+    requested_pipeline_id: Option<&str>,
+    requested_stage_id: Option<&str>,
+    machine_json: bool,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let semantic_exit = exit_policy::terminal(response.terminal().status());
+    if machine_json {
+        return emit_operation_invocation(response, semantic_exit, limits);
+    }
+    let rendered = match pipeline_capture_apply_from_response(&response) {
+        Ok(Some(result)) => render_pipeline_capture_apply_result(&result),
+        Ok(None) => match pipeline_capture_refusal_from_response(&response) {
+            Ok(Some(refusal)) => {
+                render_pipeline_capture_refusal(&refusal, requested_pipeline_id, requested_stage_id)
+            }
+            _ => "PRESENTATION FAILURE: invalid Pipeline capture-apply response".to_owned(),
+        },
+        Err(_) => "PRESENTATION FAILURE: invalid Pipeline capture-apply response".to_owned(),
+    };
+    emit_human(&rendered, semantic_exit)
+}
+
+fn pipeline_handoff(args: PipelineHandoffArgs, machine_json: bool) -> ExitCode {
+    let limits = ContractLimits::packet0();
     let cwd = match std::env::current_dir() {
         Ok(dir) => dir,
         Err(err) => {
-            println!("REFUSED: failed to determine repo root: {err}");
-            return ExitCode::from(1);
+            return pipeline_root_failure(machine_json, &err.to_string(), &limits);
         }
     };
     let repo_root = discover_managed_repo_root(&cwd);
 
     match args.command {
         PipelineHandoffCommand::Emit(emit_args) => {
-            let supported_target = match pipeline_help::load_supported_pipeline_help_target(
-                &repo_root,
+            let supported_handoff_command = pipeline_help::render_supported_handoff_emit_command(
+                "pipeline.foundation_inputs",
+                "feature-slice-decomposer",
+            );
+            let key_material = format!(
+                "{}\0{}\0{}\0{}",
+                emit_args.id, emit_args.consumer, supported_handoff_command, RELEASE_VERSION
+            );
+            let idempotency_key =
+                pipeline_cli_idempotency_key("pipeline.handoff.emit@1.0.0", &key_material);
+            let request = match pipeline_handoff_emit_operation_request(
+                None,
+                &emit_args.id,
+                &emit_args.consumer,
+                &supported_handoff_command,
+                RELEASE_VERSION,
+                &idempotency_key,
             ) {
-                Some(target) => target,
-                None => {
-                    println!(
-                            "{}",
-                            render_pipeline_handoff_refusal(
-                                &pipeline_sdk::PipelineHandoffRefusalView {
-                                    classification:
-                                        pipeline_sdk::PipelineHandoffRefusalClassificationView::InvalidState,
-                                    summary: "failed to load supported handoff target from public pipeline metadata"
-                                        .to_string(),
-                                    pipeline_id: None,
-                                    consumer_id: None,
-                                    recovery:
-                                        "fix the pipeline/stage definitions and retry `pipeline handoff emit`"
-                                            .to_string(),
-                                },
-                                ""
-                            )
-                        );
-                    return ExitCode::from(1);
-                }
+                Ok(request) => request,
+                Err(_) => return pipeline_adapter_failure(machine_json, &limits),
             };
-            let supported_handoff_command = supported_target.handoff_emit_command();
-            let request = pipeline_sdk::PipelineHandoffRequest {
-                repository_root: repo_root,
-                pipeline_selector: emit_args.id,
-                consumer_selector: emit_args.consumer,
-                producer_command: supported_handoff_command.clone(),
-                producer_version: RELEASE_VERSION.to_string(),
+            let response = match handbook_sdk::HandbookSdkV1::open(repo_root)
+                .execute_pipeline_operation(&request)
+            {
+                Ok(response) => response,
+                Err(_) => return pipeline_adapter_failure(machine_json, &limits),
             };
-            match pipeline_sdk::emit_pipeline_handoff(&request) {
-                Ok(result) => {
-                    println!("{}", render_pipeline_handoff_emit_result(&result));
-                    ExitCode::SUCCESS
-                }
-                Err(refusal) => {
-                    println!(
-                        "{}",
-                        render_pipeline_handoff_refusal(&refusal, &supported_handoff_command)
-                    );
-                    ExitCode::from(1)
-                }
-            }
+            emit_pipeline_handoff(response, &supported_handoff_command, machine_json, &limits)
         }
     }
+}
+
+fn emit_pipeline_handoff(
+    response: OperationResponseV1,
+    supported_handoff_command: &str,
+    machine_json: bool,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let semantic_exit = exit_policy::terminal(response.terminal().status());
+    if machine_json {
+        return emit_operation_invocation(response, semantic_exit, limits);
+    }
+    let rendered = match pipeline_handoff_emit_from_response(&response) {
+        Ok(Some(result)) => render_pipeline_handoff_emit_result(&result),
+        Ok(None) => match pipeline_handoff_refusal_from_response(&response) {
+            Ok(Some(refusal)) => {
+                render_pipeline_handoff_refusal(&refusal, supported_handoff_command)
+            }
+            _ => "PRESENTATION FAILURE: invalid Pipeline handoff response".to_owned(),
+        },
+        Err(_) => "PRESENTATION FAILURE: invalid Pipeline handoff response".to_owned(),
+    };
+    emit_human(&rendered, semantic_exit)
 }
 
 fn render_pipeline_handoff_refusal(
@@ -442,12 +542,12 @@ fn render_pipeline_handoff_refusal(
     render_pipeline_handoff_refusal_output(&refusal)
 }
 
-fn pipeline_state_set(args: PipelineStateSetArgs) -> ExitCode {
+fn pipeline_state_set(args: PipelineStateSetArgs, machine_json: bool) -> ExitCode {
+    let limits = ContractLimits::packet0();
     let cwd = match std::env::current_dir() {
         Ok(dir) => dir,
         Err(err) => {
-            println!("REFUSED: failed to determine repo root: {err}");
-            return ExitCode::from(1);
+            return pipeline_root_failure(machine_json, &err.to_string(), &limits);
         }
     };
     let repo_root = discover_managed_repo_root(&cwd);
@@ -455,47 +555,100 @@ fn pipeline_state_set(args: PipelineStateSetArgs) -> ExitCode {
     let mutation = match parse_route_state_mutation(&args) {
         Ok(mutation) => mutation,
         Err(err) => {
-            println!("REFUSED: {err}");
-            return ExitCode::from(1);
+            if machine_json {
+                return emit_transport_failure(
+                    TransportFailureKind::Adapter,
+                    "transport.pipeline_state_request_invalid",
+                    &limits,
+                );
+            }
+            return emit_human(&format!("REFUSED: {err}"), exit_policy::failure());
         }
     };
-
-    let outcome =
-        match pipeline_sdk::update_pipeline_state(&pipeline_sdk::PipelineStateUpdateRequest {
-            repository_root: repo_root,
-            selector: args.id,
-            mutation,
-            expected_revision: args.expected_revision,
-        }) {
-            Ok(outcome) => outcome,
+    let expected_revision = match args.expected_revision {
+        Some(revision) => revision,
+        None => match pipeline_sdk::current_pipeline_state_revision(&repo_root, &args.id) {
+            Ok(revision) => revision,
             Err(refusal) => {
-                println!("{}", render_pipeline_state_update_refusal(refusal));
-                return ExitCode::from(1);
+                if machine_json {
+                    return emit_transport_failure(
+                        TransportFailureKind::Adapter,
+                        "transport.pipeline_state_basis_unavailable",
+                        &limits,
+                    );
+                }
+                return emit_human(
+                    &render_pipeline_state_update_refusal(refusal),
+                    exit_policy::failure(),
+                );
             }
+        },
+    };
+    let key_material = format!("{}\0{mutation:?}\0{expected_revision}", args.id);
+    let idempotency_key = pipeline_cli_idempotency_key("pipeline.state.apply@1.0.0", &key_material);
+    let request = match pipeline_state_apply_operation_request(
+        None,
+        &args.id,
+        &mutation,
+        expected_revision,
+        &idempotency_key,
+    ) {
+        Ok(request) => request,
+        Err(_) => return pipeline_adapter_failure(machine_json, &limits),
+    };
+    let response =
+        match handbook_sdk::HandbookSdkV1::open(&repo_root).execute_pipeline_operation(&request) {
+            Ok(response) => response,
+            Err(_) => return pipeline_adapter_failure(machine_json, &limits),
         };
+    emit_pipeline_state(response, &args.id, &repo_root, machine_json, &limits)
+}
 
-    match outcome.result {
-        pipeline_sdk::PipelineStateUpdateResult::Applied(state) => {
-            println!(
-                "{}",
-                render_pipeline_state_set_output(
-                    &outcome.pipeline_id,
-                    pipeline_sdk::PipelineStateUpdateResult::Applied(state),
-                )
-            );
-            ExitCode::SUCCESS
-        }
-        pipeline_sdk::PipelineStateUpdateResult::Refused(refusal) => {
-            println!(
-                "{}",
-                render_pipeline_state_set_output(
-                    &outcome.pipeline_id,
-                    pipeline_sdk::PipelineStateUpdateResult::Refused(refusal),
-                )
-            );
-            ExitCode::from(1)
-        }
+fn emit_pipeline_state(
+    response: OperationResponseV1,
+    requested_pipeline_id: &str,
+    repository_root: &std::path::Path,
+    machine_json: bool,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let semantic_exit = exit_policy::terminal(response.terminal().status());
+    if machine_json {
+        return emit_operation_invocation(response, semantic_exit, limits);
     }
+    let rendered = match pipeline_state_apply_from_response(&response) {
+        Ok(Some(mut outcome)) => {
+            if let pipeline_sdk::PipelineStateUpdateResult::Applied(state) = &mut outcome.result {
+                state.run.repository_root = Some(repository_root.display().to_string());
+            }
+            render_pipeline_state_set_output(&outcome.pipeline_id, outcome.result)
+        }
+        Ok(None) => match pipeline_state_refusal_from_response(&response) {
+            Ok(Some(PipelineStateProblemProjection::Outcome(outcome))) => {
+                render_pipeline_state_set_output(&outcome.pipeline_id, outcome.result)
+            }
+            Ok(Some(PipelineStateProblemProjection::Failure(failure))) => {
+                render_pipeline_state_update_refusal(failure)
+            }
+            Ok(None) => match pipeline_operation_problem_details(&response) {
+                Ok(Some((_, Some(selector), _))) => render_pipeline_selector_refusal(selector),
+                Ok(Some((detail, None, _))) => render_pipeline_state_set_output(
+                    requested_pipeline_id,
+                    pipeline_sdk::PipelineStateUpdateResult::Refused(detail),
+                ),
+                _ => "PRESENTATION FAILURE: invalid Pipeline state response".to_owned(),
+            },
+            Err(_) => "PRESENTATION FAILURE: invalid Pipeline state response".to_owned(),
+        },
+        Err(_) => "PRESENTATION FAILURE: invalid Pipeline state response".to_owned(),
+    };
+    emit_human(&rendered, semantic_exit)
+}
+
+fn pipeline_cli_idempotency_key(operation_ref: &str, material: &str) -> String {
+    let fingerprint = sha256_fingerprint(
+        format!("handbook.pipeline-cli-idempotency-v1\0{operation_ref}\0{material}").as_bytes(),
+    );
+    format!("cli-{}", fingerprint.as_str().trim_start_matches("sha256:"))
 }
 
 fn render_pipeline_selector_refusal(err: pipeline_sdk::PipelineSelectorRefusal) -> String {

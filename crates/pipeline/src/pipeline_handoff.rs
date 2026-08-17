@@ -12,14 +12,16 @@ use crate::pipeline_compile::{
     PipelineCompileDocumentKind, PipelineCompileDocumentStatus, PipelineCompileRefusal,
     PipelineCompileRefusalClassification, PipelineCompileResult, PipelineCompileRuntimeContext,
 };
+use crate::pipeline_mutation_effect::PipelineMutationEffect;
 use crate::repo_file_access::{
-    normalize_repo_relative_path, read_repo_relative_string, sha256_repo_relative_file,
-    write_repo_relative_bytes, RepoRelativeFileAccessError, RepoRelativeMutationError,
+    normalize_repo_relative_path, read_bytes_no_follow_path, read_repo_relative_string,
+    resolve_repo_relative_write_path, sha256_repo_relative_file, write_repo_relative_bytes,
+    RepoRelativeFileAccessError, RepoRelativeMutationError,
 };
 use crate::route_state::{
     load_route_state_with_supported_variables,
     load_route_state_with_supported_variables_and_storage_layout, rebuild_canonical_route_basis,
-    RouteStateReadError,
+    RouteStateReadError, PIPELINE_PUBLIC_REVISION_MAX,
 };
 use crate::stage_10_feature_spec_provenance::{
     build_stage_10_feature_spec_capture_provenance, load_stage_10_feature_spec_capture_provenance,
@@ -46,12 +48,26 @@ pub struct PipelineHandoffEmitRequest {
     pub producer_version: String,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub struct PipelineHandoffEmitResult {
     pub manifest: PipelineHandoffManifest,
     pub read_allowlist: PipelineHandoffReadAllowlist,
     pub bundle_root: String,
     pub written_files: Vec<String>,
+}
+
+#[derive(Debug, Clone, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct PipelineHandoffEmitExecution {
+    pub result: PipelineHandoffEmitResult,
+    pub effects: Vec<PipelineMutationEffect>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PipelineHandoffEmitFailure {
+    pub refusal: Box<PipelineHandoffRefusal>,
+    pub effects: Vec<PipelineMutationEffect>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -241,7 +257,48 @@ pub fn emit_pipeline_handoff_bundle_with_storage_layout(
     request: &PipelineHandoffEmitRequest,
     storage_layout: PipelineStorageLayoutContract,
 ) -> Result<PipelineHandoffEmitResult, PipelineHandoffRefusal> {
-    let repo_root = repo_root.as_ref();
+    emit_pipeline_handoff_bundle_with_effects_and_storage_layout(repo_root, request, storage_layout)
+        .map(|execution| execution.result)
+        .map_err(|failure| *failure.refusal)
+}
+
+pub fn emit_pipeline_handoff_bundle_with_effects(
+    repo_root: impl AsRef<Path>,
+    request: &PipelineHandoffEmitRequest,
+) -> Result<PipelineHandoffEmitExecution, PipelineHandoffEmitFailure> {
+    emit_pipeline_handoff_bundle_with_effects_and_storage_layout(
+        repo_root,
+        request,
+        *handbook_product_pipeline_storage_layout_contract(),
+    )
+}
+
+fn emit_pipeline_handoff_bundle_with_effects_and_storage_layout(
+    repo_root: impl AsRef<Path>,
+    request: &PipelineHandoffEmitRequest,
+    storage_layout: PipelineStorageLayoutContract,
+) -> Result<PipelineHandoffEmitExecution, PipelineHandoffEmitFailure> {
+    let mut effects = Vec::new();
+    match emit_pipeline_handoff_bundle_core(
+        repo_root.as_ref(),
+        request,
+        storage_layout,
+        &mut effects,
+    ) {
+        Ok(result) => Ok(PipelineHandoffEmitExecution { result, effects }),
+        Err(refusal) => Err(PipelineHandoffEmitFailure {
+            refusal: Box::new(refusal),
+            effects,
+        }),
+    }
+}
+
+fn emit_pipeline_handoff_bundle_core(
+    repo_root: &Path,
+    request: &PipelineHandoffEmitRequest,
+    storage_layout: PipelineStorageLayoutContract,
+    effects: &mut Vec<PipelineMutationEffect>,
+) -> Result<PipelineHandoffEmitResult, PipelineHandoffRefusal> {
     let registry = load_supported_handoff_target_registry_for_emit(repo_root)?;
     let supported_target = supported_handoff_target(&registry);
     validate_supported_consumer(&supported_target, &request.consumer_selector)?;
@@ -261,6 +318,19 @@ pub fn emit_pipeline_handoff_bundle_with_storage_layout(
         &compile_result.target.stage_id,
         request.consumer_selector.trim(),
     )?;
+    if compile_result.basis.state_revision > PIPELINE_PUBLIC_REVISION_MAX {
+        return Err(PipelineHandoffRefusal {
+            classification: PipelineHandoffRefusalClassification::InvalidState,
+            summary: "route state revision is outside the public pipeline contract domain"
+                .to_string(),
+            pipeline_id: Some(compile_result.target.pipeline_id.clone()),
+            consumer_id: Some(supported_target.consumer_id.clone()),
+            recovery: format!(
+                "repair route state for pipeline `{}` before retrying `pipeline handoff emit`",
+                compile_result.target.pipeline_id
+            ),
+        });
+    }
 
     let feature_spec_body = read_repo_relative_string(repo_root, WORK_SPECIFICATION_ARTIFACT_PATH)
         .map_err(|err| PipelineHandoffRefusal {
@@ -467,7 +537,13 @@ pub fn emit_pipeline_handoff_bundle_with_storage_layout(
     let mut writes = Vec::new();
     for input in &input_plans {
         let repo_relative_path = bundle_repo_relative_path(&bundle_root, &input.bundle_path);
-        write_bundle_file(repo_root, &repo_relative_path, &input.bytes, &manifest)?;
+        write_bundle_file(
+            repo_root,
+            &repo_relative_path,
+            &input.bytes,
+            &manifest,
+            effects,
+        )?;
         writes.push(repo_relative_path);
     }
 
@@ -481,7 +557,7 @@ pub fn emit_pipeline_handoff_bundle_with_storage_layout(
         ),
     ] {
         let repo_relative_path = bundle_repo_relative_path(&bundle_root, path);
-        write_bundle_file(repo_root, &repo_relative_path, bytes, &manifest)?;
+        write_bundle_file(repo_root, &repo_relative_path, bytes, &manifest, effects)?;
         writes.push(repo_relative_path);
     }
 
@@ -976,7 +1052,10 @@ fn validate_supported_consumer(
             ),
             pipeline_id: Some(supported_target.pipeline_id.clone()),
             consumer_id: Some(consumer_selector.to_string()),
-            recovery: "retry with the supported handoff emit command".to_string(),
+            recovery: format!(
+                "retry with `handbook pipeline handoff emit --id {} --consumer {}`",
+                supported_target.pipeline_id, supported_target.consumer_id
+            ),
         })
     }
 }
@@ -999,7 +1078,10 @@ fn validate_supported_compile_target(
             ),
             pipeline_id: Some(pipeline_id.to_string()),
             consumer_id: Some(consumer_id.to_string()),
-            recovery: "retry with the supported handoff emit command".to_string(),
+            recovery: format!(
+                "retry with `handbook pipeline handoff emit --id {} --consumer {}`",
+                supported_target.pipeline_id, supported_target.consumer_id
+            ),
         })
     }
 }
@@ -1421,19 +1503,72 @@ fn write_bundle_file(
     repo_relative_path: &str,
     bytes: &[u8],
     manifest: &PipelineHandoffManifest,
+    effects: &mut Vec<PipelineMutationEffect>,
 ) -> Result<(), PipelineHandoffRefusal> {
-    write_repo_relative_bytes(repo_root, repo_relative_path, bytes).map_err(|err| {
-        PipelineHandoffRefusal {
+    write_bundle_file_using(
+        repo_root,
+        repo_relative_path,
+        bytes,
+        &manifest.pipeline_id,
+        &manifest.consumer_id,
+        effects,
+        |repo_root, repo_relative_path, bytes| {
+            write_repo_relative_bytes(repo_root, repo_relative_path, bytes)
+                .map_err(|error| format_repo_mutation_error(&error))
+        },
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn write_bundle_file_using(
+    repo_root: &Path,
+    repo_relative_path: &str,
+    bytes: &[u8],
+    pipeline_id: &str,
+    consumer_id: &str,
+    effects: &mut Vec<PipelineMutationEffect>,
+    write: impl FnOnce(&Path, &str, &[u8]) -> Result<(), String>,
+) -> Result<(), PipelineHandoffRefusal> {
+    let prior_bytes = observed_bundle_bytes(repo_root, repo_relative_path);
+    if let Err(summary) = write(repo_root, repo_relative_path, bytes) {
+        if let Some(actual_bytes) = observed_bundle_bytes(repo_root, repo_relative_path)
+            .filter(|actual| prior_bytes.as_deref() != Some(actual.as_slice()))
+        {
+            effects.push(PipelineMutationEffect::from_bytes(
+                if actual_bytes == bytes {
+                    "handoff_bundle"
+                } else {
+                    "handoff_bundle_partial"
+                },
+                repo_relative_path,
+                &actual_bytes,
+                None,
+            ));
+        }
+        return Err(PipelineHandoffRefusal {
             classification: PipelineHandoffRefusalClassification::WriteFailure,
             summary: format!(
                 "failed to write handoff bundle file `{repo_relative_path}`: {}",
-                format_repo_mutation_error(&err)
+                summary
             ),
-            pipeline_id: Some(manifest.pipeline_id.clone()),
-            consumer_id: Some(manifest.consumer_id.clone()),
+            pipeline_id: Some(pipeline_id.to_owned()),
+            consumer_id: Some(consumer_id.to_owned()),
             recovery: "repair the bundle target path and retry `pipeline handoff emit`".to_string(),
-        }
-    })
+        });
+    }
+    effects.push(PipelineMutationEffect::from_bytes(
+        "handoff_bundle",
+        repo_relative_path,
+        bytes,
+        None,
+    ));
+    Ok(())
+}
+
+fn observed_bundle_bytes(repo_root: &Path, repo_relative_path: &str) -> Option<Vec<u8>> {
+    resolve_repo_relative_write_path(repo_root, repo_relative_path)
+        .ok()
+        .and_then(|path| read_bytes_no_follow_path(&path).ok())
 }
 
 fn read_bundle_json<T: for<'de> Deserialize<'de>>(
@@ -1603,8 +1738,11 @@ fn format_route_state_read_error(err: &RouteStateReadError) -> String {
 #[cfg(test)]
 mod tests {
     use super::{
-        derive_feature_id, expected_trust_class_for_source, slugify, PipelineHandoffTrustClass,
+        derive_feature_id, expected_trust_class_for_source, slugify, write_bundle_file_using,
+        PipelineHandoffTrustClass,
     };
+    use crate::pipeline_mutation_effect::PipelineMutationEffect;
+    use crate::repo_file_access::write_repo_relative_bytes;
 
     #[test]
     fn derive_feature_id_prefers_spec_id_when_present() {
@@ -1663,5 +1801,30 @@ mod tests {
     #[test]
     fn slugify_collapses_non_alphanumeric_boundaries() {
         assert_eq!(slugify("Feature / Slice: Alpha"), "feature-slice-alpha");
+    }
+
+    #[test]
+    fn post_commit_write_error_preserves_the_exact_handoff_effect() {
+        let repo_root = tempfile::tempdir().expect("tempdir");
+        let mut effects = Vec::<PipelineMutationEffect>::new();
+
+        let result = write_bundle_file_using(
+            repo_root.path(),
+            "bundle/manifest.json",
+            b"{\"ok\":true}",
+            "pipeline.test",
+            "consumer.test",
+            &mut effects,
+            |repo_root, path, bytes| {
+                write_repo_relative_bytes(repo_root, path, bytes)
+                    .expect("simulate committed write");
+                Err("simulated parent sync failure".to_owned())
+            },
+        );
+
+        assert!(result.is_err());
+        assert_eq!(effects.len(), 1);
+        assert_eq!(effects[0].effect_kind, "handoff_bundle");
+        assert_eq!(effects[0].portable_path, "bundle/manifest.json");
     }
 }

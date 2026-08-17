@@ -86,16 +86,15 @@ pub fn admit_contract_operation(
     if claim.operation_ref == "pipeline.route.resolve@1.0.0" {
         return Err(OwnerAdmissionRefusal::SemanticMismatch);
     }
-    let admitted = if matches!(
-        claim.operation_ref,
-        "pipeline.catalog.list@1.0.0" | "pipeline.catalog.read@1.0.0" | "pipeline.compile@1.0.0"
-    ) {
-        crate::pipeline_read_admission::matches(claim)
-    } else {
-        ADMITTED
-            .iter()
-            .find(|candidate| candidate.operation_ref == claim.operation_ref)
-            .is_some_and(|expected_claim| exact_claim_matches(claim, expected_claim))
+    let admitted = match claim.operation_ref {
+        "pipeline.catalog.list@1.0.0"
+        | "pipeline.catalog.read@1.0.0"
+        | "pipeline.compile@1.0.0" => crate::pipeline_read_admission::matches(claim),
+        "pipeline.capture.plan@1.0.0"
+        | "pipeline.capture.apply@1.0.0"
+        | "pipeline.handoff.emit@1.0.0"
+        | "pipeline.state.apply@1.0.0" => crate::pipeline_mutation_admission::matches(claim),
+        _ => false,
     };
     if !admitted {
         return Err(OwnerAdmissionRefusal::DefinitionMismatch);
@@ -104,15 +103,6 @@ pub fn admit_contract_operation(
         operation_ref: claim.operation_ref.to_owned(),
         definition_fingerprint: claim.definition_fingerprint.to_owned(),
     })
-}
-
-const ADMITTED: [OperationAdmissionClaim<'static>; 0] = [];
-
-fn exact_claim_matches(
-    claim: &OperationAdmissionClaim<'_>,
-    expected: &OperationAdmissionClaim<'_>,
-) -> bool {
-    claim == expected
 }
 
 const EXPECTED: [(&str, &str, &str); 8] = [

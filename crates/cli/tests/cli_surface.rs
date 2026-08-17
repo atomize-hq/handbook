@@ -2630,7 +2630,11 @@ fn pipeline_capture_apply_foundation_pack_matches_shared_golden() {
         ],
         &stage_07_capture_input(root.as_path()),
     );
-    assert!(preview.status.success(), "preview should succeed");
+    assert!(
+        preview.status.success(),
+        "preview should succeed: {}",
+        String::from_utf8_lossy(&preview.stdout)
+    );
     let preview_stdout = String::from_utf8(preview.stdout).expect("preview stdout is utf-8");
     let capture_id = preview_stdout
         .lines()
@@ -3855,6 +3859,187 @@ fn packet6_admit_operation(output: &Output, operation_ref: &str) {
         &handbook_sdk::contract_membrane::ContractLimits::packet0(),
     )
     .expect("schema-valid Pipeline ordinary invocation");
+}
+
+#[test]
+fn packet7_pipeline_capture_modes_emit_the_exact_admitted_ordinary_documents() {
+    let (_dir, root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    prepare_stage_04_capture_ready_route_basis(root.as_path());
+    let input = stage_04_capture_input(root.as_path());
+
+    let preview = run_in_with_input(
+        root.as_path(),
+        &[
+            "--json",
+            "pipeline",
+            "capture",
+            "--id",
+            "foundation_inputs",
+            "--stage",
+            "stage.04_charter_inputs",
+            "--preview",
+        ],
+        &input,
+    );
+    assert!(
+        preview.status.success(),
+        "preview should succeed: {}",
+        String::from_utf8_lossy(&preview.stdout)
+    );
+    let preview_json = packet6_json_document(&preview);
+    assert_eq!(
+        preview_json["response"]["operation"]["ref"],
+        "pipeline.capture.plan@1.0.0"
+    );
+    let capture_id = preview_json["response"]["data"]["plan"]["capture_id"]
+        .as_str()
+        .expect("capture plan id");
+    packet6_admit_operation(&preview, "pipeline.capture.plan@1.0.0");
+
+    let apply = run_in(
+        root.as_path(),
+        &[
+            "--json",
+            "pipeline",
+            "capture",
+            "apply",
+            "--capture-id",
+            capture_id,
+        ],
+    );
+    assert!(apply.status.success(), "cached apply should succeed");
+    let apply_json = packet6_json_document(&apply);
+    assert_eq!(
+        apply_json["response"]["operation"]["ref"],
+        "pipeline.capture.apply@1.0.0"
+    );
+    packet6_admit_operation(&apply, "pipeline.capture.apply@1.0.0");
+
+    let (_direct_dir, direct_root) =
+        pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    prepare_stage_04_capture_ready_route_basis(direct_root.as_path());
+    let direct = run_in_with_input(
+        direct_root.as_path(),
+        &[
+            "--json",
+            "pipeline",
+            "capture",
+            "--id",
+            "foundation_inputs",
+            "--stage",
+            "stage.04_charter_inputs",
+        ],
+        &stage_04_capture_input(direct_root.as_path()),
+    );
+    assert!(direct.status.success(), "direct capture should succeed");
+    let direct_json = packet6_json_document(&direct);
+    assert_eq!(
+        direct_json["response"]["operation"]["ref"],
+        "pipeline.capture.apply@1.0.0"
+    );
+    packet6_admit_operation(&direct, "pipeline.capture.apply@1.0.0");
+    let direct_wire = String::from_utf8_lossy(&direct.stdout);
+    assert!(!direct_wire.contains(direct_root.to_string_lossy().as_ref()));
+    assert!(!direct_wire.contains(".handbook/state/pipeline/idempotency/"));
+    assert!(!direct_wire.contains("cli-"));
+
+    let legacy = run_in(
+        direct_root.as_path(),
+        &["pipeline", "capture", "--legacy-json"],
+    );
+    assert_eq!(legacy.status.code(), Some(2));
+}
+
+#[test]
+fn packet7_pipeline_capture_json_argument_refusals_remain_singular_typed_transport() {
+    let (_dir, root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+    for args in [
+        vec!["--json", "pipeline", "capture"],
+        vec![
+            "--json",
+            "pipeline",
+            "capture",
+            "--id",
+            "pipeline.foundation_inputs",
+        ],
+    ] {
+        let output = run_in_with_input(root.as_path(), &args, "");
+        assert_eq!(output.status.code(), Some(1));
+        assert!(output.stderr.is_empty(), "{:?}", output.stderr);
+        assert_eq!(output.stdout.last(), Some(&b'\n'));
+        assert_eq!(
+            output.stdout.iter().filter(|byte| **byte == b'\n').count(),
+            1
+        );
+        let invocation = handbook_sdk::contract_membrane::InvocationResponseV1::parse_and_admit(
+            &output.stdout[..output.stdout.len() - 1],
+            None,
+            &handbook_sdk::contract_membrane::ContractLimits::packet0(),
+        )
+        .expect("typed invocation response");
+        assert_eq!(
+            invocation.terminal_status(),
+            handbook_sdk::contract_membrane::TerminalStatus::Error
+        );
+        assert!(invocation
+            .transport_failure_reason_code(
+                &handbook_sdk::contract_membrane::ContractLimits::packet0()
+            )
+            .unwrap()
+            .is_some());
+    }
+}
+
+#[test]
+fn packet7_pipeline_handoff_and_state_emit_exact_admitted_ordinary_documents() {
+    let (_dir, root) = pipeline_proof_corpus_support::install_foundation_inputs_repo();
+
+    let handoff = run_in(
+        root.as_path(),
+        &[
+            "--json",
+            "pipeline",
+            "handoff",
+            "emit",
+            "--id",
+            "foundation_inputs",
+            "--consumer",
+            "feature-slice-decomposer",
+        ],
+    );
+    let handoff_json = packet6_json_document(&handoff);
+    assert_eq!(
+        handoff_json["response"]["operation"]["ref"],
+        "pipeline.handoff.emit@1.0.0",
+        "{}",
+        String::from_utf8_lossy(&handoff.stdout)
+    );
+    packet6_admit_operation(&handoff, "pipeline.handoff.emit@1.0.0");
+
+    let state = run_in(
+        root.as_path(),
+        &[
+            "--json",
+            "pipeline",
+            "state",
+            "set",
+            "--id",
+            "foundation_inputs",
+            "--var",
+            "needs_project_context=true",
+        ],
+    );
+    assert!(state.status.success(), "state apply should succeed");
+    let state_json = packet6_json_document(&state);
+    assert_eq!(
+        state_json["response"]["operation"]["ref"],
+        "pipeline.state.apply@1.0.0"
+    );
+    packet6_admit_operation(&state, "pipeline.state.apply@1.0.0");
+    let state_wire = String::from_utf8_lossy(&state.stdout);
+    assert!(!state_wire.contains(root.to_string_lossy().as_ref()));
+    assert!(!state_wire.contains(".handbook/state/pipeline/idempotency/"));
+    assert!(!state_wire.contains("cli-"));
 }
 
 #[test]

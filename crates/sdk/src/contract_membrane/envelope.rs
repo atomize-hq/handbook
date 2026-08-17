@@ -886,14 +886,30 @@ fn validate_receipts(
     receipts: &[WriteReceipt],
     validator: &dyn OperationSchemaValidator,
 ) -> Result<(), ContractError> {
-    if status != TerminalStatus::Ok || definition.class() == OperationClass::ReadOnly {
+    if definition.class() == OperationClass::ReadOnly {
         return if receipts.is_empty() {
             Ok(())
         } else {
             Err(ContractError::InvalidInvariant)
         };
     }
-    if receipts.len() != definition.write_set().len() {
+    let partial_terminal_receipts = status != TerminalStatus::Ok
+        && matches!(
+            definition.operation().as_str(),
+            "pipeline.capture.apply@1.0.0"
+                | "pipeline.handoff.emit@1.0.0"
+                | "pipeline.state.apply@1.0.0"
+        );
+    if status != TerminalStatus::Ok && !partial_terminal_receipts {
+        return if receipts.is_empty() {
+            Ok(())
+        } else {
+            Err(ContractError::InvalidInvariant)
+        };
+    }
+    if (status == TerminalStatus::Ok && receipts.len() != definition.write_set().len())
+        || receipts.len() > definition.write_set().len()
+    {
         return Err(ContractError::InvalidInvariant);
     }
     for (declared, realized) in definition.write_set().iter().zip(receipts) {

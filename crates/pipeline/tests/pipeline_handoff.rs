@@ -11,11 +11,11 @@ use handbook_pipeline::{
         PipelineCaptureRequest,
     },
     pipeline_handoff::{
-        emit_pipeline_handoff_bundle, emit_pipeline_handoff_bundle_with_storage_layout,
-        validate_pipeline_handoff_bundle, validate_pipeline_handoff_bundle_with_storage_layout,
-        PipelineHandoffEmitRequest, PipelineHandoffManifest, PipelineHandoffRefusalClassification,
-        PipelineHandoffTrustClass, PipelineHandoffValidatedBundle,
-        PipelineHandoffValidationFailureClassification,
+        emit_pipeline_handoff_bundle, emit_pipeline_handoff_bundle_with_effects,
+        emit_pipeline_handoff_bundle_with_storage_layout, validate_pipeline_handoff_bundle,
+        validate_pipeline_handoff_bundle_with_storage_layout, PipelineHandoffEmitRequest,
+        PipelineHandoffManifest, PipelineHandoffRefusalClassification, PipelineHandoffTrustClass,
+        PipelineHandoffValidatedBundle, PipelineHandoffValidationFailureClassification,
     },
     pipeline_route::{resolve_pipeline_route, RouteVariables},
     route_state::{
@@ -400,6 +400,47 @@ fn handoff_emit_refuses_stale_stage_10_feature_spec_capture_provenance() {
         "{}",
         refusal.summary
     );
+}
+
+#[test]
+fn handoff_emit_failure_preserves_receiptable_early_write_effects() {
+    let (_dir, repo_root) = install_work_specification_handoff_repo();
+    install_canonical_inputs(&repo_root);
+    capture_feature_spec(&repo_root);
+    let request = PipelineHandoffEmitRequest {
+        pipeline_selector: PIPELINE_ID.to_string(),
+        consumer_selector: CONSUMER_ID.to_string(),
+        producer_command: format!(
+            "handbook pipeline handoff emit --id {PIPELINE_ID} --consumer {CONSUMER_ID}"
+        ),
+        producer_version: "test-suite".to_string(),
+    };
+    let first = emit_pipeline_handoff_bundle(&repo_root, &request).expect("discover bundle root");
+    fs::remove_dir_all(repo_root.join(&first.bundle_root)).expect("reset bundle");
+    fs::create_dir_all(
+        repo_root
+            .join(&first.bundle_root)
+            .join("read_allowlist.json"),
+    )
+    .expect("block a late bundle write");
+
+    let failure = emit_pipeline_handoff_bundle_with_effects(&repo_root, &request)
+        .expect_err("late bundle write should fail");
+
+    assert_eq!(
+        failure.refusal.classification,
+        PipelineHandoffRefusalClassification::WriteFailure
+    );
+    assert!(failure.effects.len() >= 2, "{failure:?}");
+    assert!(failure.effects.iter().all(|effect| {
+        effect.effect_kind == "handoff_bundle"
+            && effect.portable_path.starts_with(&first.bundle_root)
+            && effect.fingerprint.starts_with("sha256:")
+    }));
+    assert!(failure
+        .effects
+        .iter()
+        .any(|effect| effect.portable_path.ends_with("handoff_manifest.json")));
 }
 
 #[test]

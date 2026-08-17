@@ -6,14 +6,15 @@ use crate::layout::RepoLayoutRoot;
 use crate::pipeline::{
     load_selected_pipeline_definition, supported_route_state_variables, PipelineDefinition,
 };
+use crate::pipeline_mutation_effect::PipelineMutationEffect;
 use crate::pipeline_route::{
     resolve_pipeline_route, ResolvedPipelineRoute, RouteStageReason, RouteStageStatus,
     RouteVariables,
 };
 use crate::repo_file_access::{
-    sha256_repo_relative_file, CompilerWorkspace, NormalizedRepoRelativePath,
-    RepoRelativeDirectoryAccessError, RepoRelativeFileAccessError, RepoRelativeMetadataReadError,
-    TrustedRepoDirectory,
+    read_bytes_no_follow_path, sha256_repo_relative_file, CompilerWorkspace,
+    NormalizedRepoRelativePath, RepoRelativeDirectoryAccessError, RepoRelativeFileAccessError,
+    RepoRelativeMetadataReadError, TrustedRepoDirectory,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
@@ -34,6 +35,7 @@ const LEGACY_ROUTE_STATE_SCHEMA_VERSION: &str = "m1-pipeline-state-v2";
 pub const ROUTE_BASIS_SCHEMA_VERSION: &str = "m2-route-basis-v1";
 pub const ROUTE_BASIS_REPO_ROOT_SENTINEL: &str = "${repo_root}";
 pub const ROUTE_STATE_AUDIT_LIMIT: usize = 50;
+pub(crate) const PIPELINE_PUBLIC_REVISION_MAX: u64 = 9_007_199_254_740_991;
 
 static TEMP_FILE_COUNTER: AtomicU64 = AtomicU64::new(0);
 
@@ -323,13 +325,28 @@ pub enum RouteBasisBuildError {
     },
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum RouteStateMutationOutcome {
     Applied(Box<RouteState>),
     Refused(RouteStateMutationRefusal),
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct RouteStateMutationExecution {
+    pub outcome: RouteStateMutationOutcome,
+    pub effects: Vec<PipelineMutationEffect>,
+}
+
+#[derive(Debug)]
+pub struct RouteStateMutationFailure {
+    pub error: RouteStateStoreError,
+    pub effects: Vec<PipelineMutationEffect>,
+}
+
+#[derive(Debug, Clone, Deserialize, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
 pub enum RouteStateMutationRefusal {
     MalformedState {
         reason: String,
@@ -538,35 +555,75 @@ pub fn set_route_state(
     mutation: RouteStateMutation,
     expected_revision: u64,
 ) -> Result<RouteStateMutationOutcome, RouteStateStoreError> {
+    set_route_state_with_effects(
+        repo_root,
+        pipeline_id,
+        supported_variables,
+        mutation,
+        expected_revision,
+    )
+    .map(|execution| execution.outcome)
+    .map_err(|failure| failure.error)
+}
+
+pub fn set_route_state_with_effects(
+    repo_root: impl AsRef<Path>,
+    pipeline_id: impl AsRef<str>,
+    supported_variables: impl IntoIterator<Item = impl AsRef<str>>,
+    mutation: RouteStateMutation,
+    expected_revision: u64,
+) -> Result<RouteStateMutationExecution, RouteStateMutationFailure> {
+    let repo_root = repo_root.as_ref();
     let pipeline_id = pipeline_id.as_ref();
-    validate_pipeline_id(pipeline_id).map_err(|reason| {
-        RouteStateStoreError::InvalidPipelineId {
+    validate_pipeline_id(pipeline_id).map_err(|reason| RouteStateMutationFailure {
+        error: RouteStateStoreError::InvalidPipelineId {
             pipeline_id: pipeline_id.to_string(),
             reason,
-        }
+        },
+        effects: Vec::new(),
     })?;
 
-    let supported_variables = normalize_supported_variables(supported_variables)?;
-    let run_inventory = load_run_inventory(repo_root.as_ref()).map_err(|err| {
-        RouteStateStoreError::ReadFailure {
+    let supported_variables =
+        normalize_supported_variables(supported_variables).map_err(|error| {
+            RouteStateMutationFailure {
+                error,
+                effects: Vec::new(),
+            }
+        })?;
+    let run_inventory = load_run_inventory(repo_root).map_err(|err| RouteStateMutationFailure {
+        error: RouteStateStoreError::ReadFailure {
             path: err.path,
             source: err.source,
+        },
+        effects: Vec::new(),
+    })?;
+    validate_mutation(&mutation, &supported_variables, &run_inventory).map_err(|error| {
+        RouteStateMutationFailure {
+            error,
+            effects: Vec::new(),
         }
     })?;
-    validate_mutation(&mutation, &supported_variables, &run_inventory)?;
 
-    let state_path = route_state_path(repo_root.as_ref(), pipeline_id).map_err(|reason| {
-        RouteStateStoreError::InvalidPipelineId {
-            pipeline_id: pipeline_id.to_string(),
-            reason,
-        }
-    })?;
-    ensure_state_parent_dir(&state_path).map_err(|source| RouteStateStoreError::ReadFailure {
-        path: state_path.clone(),
-        source,
+    let state_path =
+        route_state_path(repo_root, pipeline_id).map_err(|reason| RouteStateMutationFailure {
+            error: RouteStateStoreError::InvalidPipelineId {
+                pipeline_id: pipeline_id.to_string(),
+                reason,
+            },
+            effects: Vec::new(),
+        })?;
+    ensure_state_parent_dir(&state_path).map_err(|source| RouteStateMutationFailure {
+        error: RouteStateStoreError::ReadFailure {
+            path: state_path.clone(),
+            source,
+        },
+        effects: Vec::new(),
     })?;
 
-    let _lock = acquire_advisory_lock(&state_path)?;
+    let _lock = acquire_advisory_lock(&state_path).map_err(|error| RouteStateMutationFailure {
+        error,
+        effects: Vec::new(),
+    })?;
     let mut state = match load_route_state_at_path(
         &state_path,
         pipeline_id,
@@ -575,47 +632,73 @@ pub fn set_route_state(
     ) {
         Ok(state) => state,
         Err(RouteStateReadError::MalformedState { reason, .. }) => {
-            return Ok(RouteStateMutationOutcome::Refused(
-                RouteStateMutationRefusal::MalformedState { reason },
-            ));
+            return Ok(RouteStateMutationExecution {
+                outcome: RouteStateMutationOutcome::Refused(
+                    RouteStateMutationRefusal::MalformedState { reason },
+                ),
+                effects: Vec::new(),
+            });
         }
         Err(RouteStateReadError::InvalidPipelineId {
             pipeline_id,
             reason,
         }) => {
-            return Err(RouteStateStoreError::InvalidPipelineId {
-                pipeline_id,
-                reason,
+            return Err(RouteStateMutationFailure {
+                error: RouteStateStoreError::InvalidPipelineId {
+                    pipeline_id,
+                    reason,
+                },
+                effects: Vec::new(),
             });
         }
         Err(RouteStateReadError::ReadFailure { path, source }) => {
-            return Err(RouteStateStoreError::ReadFailure { path, source });
+            return Err(RouteStateMutationFailure {
+                error: RouteStateStoreError::ReadFailure { path, source },
+                effects: Vec::new(),
+            });
         }
     };
 
+    if state.revision > PIPELINE_PUBLIC_REVISION_MAX {
+        return Ok(RouteStateMutationExecution {
+            outcome: RouteStateMutationOutcome::Refused(
+                RouteStateMutationRefusal::MalformedState {
+                    reason: "route state revision exceeds the public mutation domain".to_owned(),
+                },
+            ),
+            effects: Vec::new(),
+        });
+    }
+
     if let RouteStateMutation::RoutingVariable { variable, .. } = &mutation {
         if !supported_variables.contains(variable) {
-            return Ok(RouteStateMutationOutcome::Refused(
-                RouteStateMutationRefusal::UnsupportedVariable {
-                    variable: variable.clone(),
-                },
-            ));
+            return Ok(RouteStateMutationExecution {
+                outcome: RouteStateMutationOutcome::Refused(
+                    RouteStateMutationRefusal::UnsupportedVariable {
+                        variable: variable.clone(),
+                    },
+                ),
+                effects: Vec::new(),
+            });
         }
     }
 
     if state.revision != expected_revision {
-        return Ok(RouteStateMutationOutcome::Refused(
-            RouteStateMutationRefusal::RevisionConflict {
-                expected_revision,
-                actual_revision: state.revision,
-            },
-        ));
+        return Ok(RouteStateMutationExecution {
+            outcome: RouteStateMutationOutcome::Refused(
+                RouteStateMutationRefusal::RevisionConflict {
+                    expected_revision,
+                    actual_revision: state.revision,
+                },
+            ),
+            effects: Vec::new(),
+        });
     }
 
     state.schema_version = ROUTE_STATE_SCHEMA_VERSION.to_string();
     state.revision = state.revision.saturating_add(1);
     mutation.apply(&mut state);
-    state.run.repo_root = Some(derived_repo_root(repo_root.as_ref()));
+    state.run.repo_root = Some(derived_repo_root(repo_root));
     state.audit.push(RouteStateAuditEntry {
         revision: state.revision,
         field_path: mutation.field_path(),
@@ -623,9 +706,66 @@ pub fn set_route_state(
     });
     trim_audit_history(&mut state.audit);
 
-    persist_route_state(&state_path, &state)?;
+    let portable_path = state_path
+        .strip_prefix(repo_root)
+        .map(|path| path.to_string_lossy().replace('\\', "/"))
+        .map_err(|_| RouteStateMutationFailure {
+            error: RouteStateStoreError::InvalidPipelineId {
+                pipeline_id: pipeline_id.to_string(),
+                reason: "route-state path escaped the repository",
+            },
+            effects: Vec::new(),
+        })?;
+    let state_bytes = serde_yaml_bw::to_string(&state)
+        .map_err(|source| RouteStateMutationFailure {
+            error: RouteStateStoreError::SerializationFailure {
+                path: state_path.clone(),
+                reason: source.to_string(),
+            },
+            effects: Vec::new(),
+        })?
+        .into_bytes();
+    if let Err(error) = persist_route_state(&state_path, &state) {
+        let effects = route_state_mutation_effect(repo_root, pipeline_id, state.revision)
+            .into_iter()
+            .collect();
+        return Err(RouteStateMutationFailure { error, effects });
+    }
+    let effects = vec![PipelineMutationEffect::from_bytes(
+        "pipeline_route_state",
+        &portable_path,
+        &state_bytes,
+        Some(state.revision),
+    )];
 
-    Ok(RouteStateMutationOutcome::Applied(Box::new(state)))
+    Ok(RouteStateMutationExecution {
+        outcome: RouteStateMutationOutcome::Applied(Box::new(state)),
+        effects,
+    })
+}
+
+fn route_state_mutation_effect(
+    repo_root: &Path,
+    pipeline_id: &str,
+    expected_revision: u64,
+) -> Option<PipelineMutationEffect> {
+    let path = route_state_path(repo_root, pipeline_id).ok()?;
+    let bytes = read_bytes_no_follow_path(&path).ok()?;
+    let state = serde_yaml_bw::from_slice::<RouteState>(&bytes).ok()?;
+    if state.revision != expected_revision {
+        return None;
+    }
+    let portable_path = path
+        .strip_prefix(repo_root)
+        .ok()?
+        .to_string_lossy()
+        .replace('\\', "/");
+    Some(PipelineMutationEffect::from_bytes(
+        "pipeline_route_state",
+        &portable_path,
+        &bytes,
+        Some(state.revision),
+    ))
 }
 
 #[allow(dead_code)]

@@ -580,6 +580,23 @@ pub enum PipelineStateUpdateFailure {
     Mutation(String),
 }
 
+pub fn current_pipeline_state_revision(
+    repository_root: &Path,
+    selector: &str,
+) -> Result<u64, PipelineStateUpdateFailure> {
+    let pipeline = load_selected_pipeline_definition(repository_root, selector)
+        .map_err(map_selected_definition_failure)
+        .map_err(PipelineStateUpdateFailure::Selection)?;
+    let supported_variables = supported_route_state_variables(&pipeline);
+    load_route_state_with_supported_variables(
+        repository_root,
+        &pipeline.header.id,
+        &supported_variables,
+    )
+    .map(|state| state.revision)
+    .map_err(|error| PipelineStateUpdateFailure::RouteStateRead(error.to_string()))
+}
+
 pub fn update_pipeline_state(
     request: &PipelineStateUpdateRequest,
 ) -> Result<PipelineStateUpdateOutcome, PipelineStateUpdateFailure> {
