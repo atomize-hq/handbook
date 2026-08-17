@@ -19,7 +19,7 @@ macro_rules! schema_asset {
 }
 
 const SCHEMA_MANIFEST_BYTES: &[u8] = include_bytes!("../../schemas/manifest.json");
-const SCHEMA_ASSETS: [(&str, &[u8]); 115] = [
+const SCHEMA_ASSETS: [(&str, &[u8]); 120] = [
     schema_asset!(
         "handbook.artifact-operation-details@1.0.0",
         "../../schemas/2020-12/handbook.artifact-operation-details/1.0.0.schema.json"
@@ -47,6 +47,10 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 115] = [
     schema_asset!(
         "handbook.bootstrap-descriptor-schema@1.0.0",
         "../../schemas/2020-12/handbook.bootstrap-descriptor-schema/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.bootstrap-facade-response@1.0.0",
+        "../../schemas/2020-12/handbook.bootstrap-facade-response/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.bootstrap-refusal-details@1.0.0",
@@ -85,6 +89,14 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 115] = [
         "../../schemas/2020-12/handbook.catalog-read-blocked/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.catalog-read-request@1.0.0",
+        "../../schemas/2020-12/handbook.catalog-read-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.catalog-read-response@1.0.0",
+        "../../schemas/2020-12/handbook.catalog-read-response/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.catalog-root@1.0.0",
         "../../schemas/2020-12/handbook.catalog-root/1.0.0.schema.json"
     ),
@@ -111,6 +123,10 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 115] = [
     schema_asset!(
         "handbook.idempotency-state@1.0.0",
         "../../schemas/2020-12/handbook.idempotency-state/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.invocation-request@1.0.0",
+        "../../schemas/2020-12/handbook.invocation-request/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.invocation-response@1.0.0",
@@ -423,6 +439,10 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 115] = [
     schema_asset!(
         "handbook.typed-catalog-cursor@1.0.0",
         "../../schemas/2020-12/handbook.typed-catalog-cursor/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.use-case-request@1.0.0",
+        "../../schemas/2020-12/handbook.use-case-request/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.use-case-response@1.0.0",
@@ -758,7 +778,7 @@ fn verify_schema_assets(
         &ContractLimits::packet0(),
     )
     .map_err(|_| ProductionWitnessError::StaleManifest)?;
-    if manifest.len() != 115 || assets.len() != 115 || manifest.len() != assets.len() {
+    if manifest.len() != 120 || assets.len() != 120 || manifest.len() != assets.len() {
         return Err(ProductionWitnessError::ManifestCountMismatch);
     }
     let mut seen = BTreeSet::new();
@@ -1028,7 +1048,7 @@ mod tests {
         let witness =
             ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
                 .unwrap();
-        assert_eq!(witness.schema_manifest().len(), 115);
+        assert_eq!(witness.schema_manifest().len(), 120);
         assert_eq!(witness.owner_versions().len(), 3);
         assert_eq!(witness.profiles().len(), 3);
         assert_eq!(witness.capabilities().len(), 19);

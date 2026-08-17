@@ -41,7 +41,7 @@ fn regeneration_manifest_and_production_catalogs_close_over_one_exact_set() {
         &ContractLimits::packet0(),
     )
     .unwrap();
-    assert_eq!(manifest.len(), 115);
+    assert_eq!(manifest.len(), 120);
 
     let mut refs = BTreeSet::new();
     let mut schema_paths = BTreeSet::new();
@@ -185,7 +185,7 @@ fn identity_domains_and_raw_key_confinement_hold_across_the_live_seam() {
     };
     let cursor = schema_page
         .next_cursor()
-        .expect("the 115-entry catalog has a second page");
+        .expect("the 120-entry catalog has a second page");
     let receipt = WriteReceipt::new(
         bounded("packet.five.record"),
         binding("handbook.packet-five-record@1.0.0", b"packet-five-record"),

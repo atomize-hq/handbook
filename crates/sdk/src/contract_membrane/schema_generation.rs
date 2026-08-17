@@ -3976,6 +3976,759 @@ fn exact_binding_schema(generator: &mut SchemaGenerator, reference: &'static str
     )
 }
 
+impl_schema!(
+    RepositorySetupRequestV1,
+    "RepositorySetupRequestV1",
+    |generator| {
+        closed_object(
+            vec![
+                ("mode", generator.subschema_for::<RepositorySetupModeV1>()),
+                ("rewrite", json_schema!({"type": "boolean"})),
+                ("reset_state", json_schema!({"type": "boolean"})),
+            ],
+            &["mode", "rewrite", "reset_state"],
+        )
+    }
+);
+
+impl_schema!(
+    RepositoryDoctorRequestV1,
+    "RepositoryDoctorRequestV1",
+    |_generator| closed_object(Vec::new(), &[])
+);
+
+impl_schema!(
+    CharterAcquisitionModeV1,
+    "CharterAcquisitionModeV1",
+    |_generator| string_enum(&["guided_adaptive", "express", "agent_assisted"])
+);
+
+impl_schema!(
+    CharterIntakeSourceKindV1,
+    "CharterIntakeSourceKindV1",
+    |_generator| {
+        string_enum(&[
+            "user_declaration",
+            "evidenced_inference",
+            "deterministic_default",
+            "known_unknown",
+            "contradiction",
+            "waiver",
+        ])
+    }
+);
+
+impl_schema!(CharterInputEntryV1, "CharterInputEntryV1", |generator| {
+    closed_object(
+        vec![
+            ("key", json_schema!({"type": "string", "maxLength": 65_536})),
+            ("value", generator.subschema_for::<CharterInputValueV1>()),
+        ],
+        &["key", "value"],
+    )
+});
+
+impl_schema!(CharterInputValueV1, "CharterInputValueV1", |generator| {
+    let null_value = closed_object(
+        vec![("value_kind", json_schema!({"const": "null"}))],
+        &["value_kind"],
+    );
+    let boolean = closed_object(
+        vec![
+            ("value_kind", json_schema!({"const": "boolean"})),
+            ("value", json_schema!({"type": "boolean"})),
+        ],
+        &["value_kind", "value"],
+    );
+    let number = closed_object(
+        vec![
+            ("value_kind", json_schema!({"const": "number"})),
+            (
+                "value",
+                json_schema!({
+                    "type": "string",
+                    "maxLength": 65_536,
+                    "pattern": "^-?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+                }),
+            ),
+        ],
+        &["value_kind", "value"],
+    );
+    let string = closed_object(
+        vec![
+            ("value_kind", json_schema!({"const": "string"})),
+            (
+                "value",
+                json_schema!({"type": "string", "maxLength": 65_536}),
+            ),
+        ],
+        &["value_kind", "value"],
+    );
+    let sequence = closed_object(
+        vec![
+            ("value_kind", json_schema!({"const": "sequence"})),
+            (
+                "values",
+                generator.subschema_for::<BoundedVec<CharterInputValueV1, 128>>(),
+            ),
+        ],
+        &["value_kind", "values"],
+    );
+    let mapping = closed_object(
+        vec![
+            ("value_kind", json_schema!({"const": "mapping"})),
+            (
+                "entries",
+                generator.subschema_for::<BoundedVec<CharterInputEntryV1, 128>>(),
+            ),
+        ],
+        &["value_kind", "entries"],
+    );
+    json_schema!({"oneOf": [null_value, boolean, number, string, sequence, mapping]})
+});
+
+impl_schema!(
+    CharterCoverageSubmissionV1,
+    "CharterCoverageSubmissionV1",
+    |generator| {
+        closed_object(
+            vec![
+                (
+                    "coverage_id",
+                    generator.subschema_for::<BoundedString<255>>(),
+                ),
+                (
+                    "source_kind",
+                    generator.subschema_for::<CharterIntakeSourceKindV1>(),
+                ),
+                (
+                    "value_ref",
+                    generator.subschema_for::<BoundedString<4096>>(),
+                ),
+                (
+                    "evidence_refs",
+                    generator.subschema_for::<BoundedVec<BoundedString<4096>, 128>>(),
+                ),
+                (
+                    "confidence",
+                    generator.subschema_for::<BoundedString<255>>(),
+                ),
+                ("freshness", nullable::<BoundedString<255>>(generator)),
+                (
+                    "sensitivity",
+                    generator.subschema_for::<BoundedString<255>>(),
+                ),
+                (
+                    "contradiction_refs",
+                    generator.subschema_for::<BoundedVec<BoundedString<4096>, 128>>(),
+                ),
+                ("waiver_ref", nullable::<BoundedString<4096>>(generator)),
+            ],
+            &[
+                "coverage_id",
+                "source_kind",
+                "value_ref",
+                "evidence_refs",
+                "confidence",
+                "freshness",
+                "sensitivity",
+                "contradiction_refs",
+                "waiver_ref",
+            ],
+        )
+    }
+);
+
+impl_schema!(
+    CharterIntakeConsumerV1,
+    "CharterIntakeConsumerV1",
+    |generator| {
+        closed_object(
+            vec![
+                ("kind", generator.subschema_for::<BoundedString<255>>()),
+                ("id", generator.subschema_for::<BoundedString<255>>()),
+                ("version", generator.subschema_for::<BoundedString<255>>()),
+            ],
+            &["kind", "id", "version"],
+        )
+    }
+);
+
+impl_schema!(
+    CharterIntakeEnvelopeV1,
+    "CharterIntakeEnvelopeV1",
+    |generator| {
+        closed_object(
+            vec![
+                (
+                    "mode",
+                    generator.subschema_for::<CharterAcquisitionModeV1>(),
+                ),
+                ("content", generator.subschema_for::<CharterInputValueV1>()),
+                (
+                    "coverage",
+                    generator.subschema_for::<BoundedVec<CharterCoverageSubmissionV1, 128>>(),
+                ),
+                (
+                    "consumer",
+                    generator.subschema_for::<CharterIntakeConsumerV1>(),
+                ),
+                (
+                    "prompt_event_refs",
+                    generator.subschema_for::<BoundedVec<BoundedString<4096>, 128>>(),
+                ),
+                (
+                    "finalized_at_utc",
+                    generator.subschema_for::<UtcTimestamp>(),
+                ),
+                (
+                    "expected_current_fingerprint",
+                    nullable::<Fingerprint>(generator),
+                ),
+            ],
+            &[
+                "mode",
+                "content",
+                "coverage",
+                "consumer",
+                "prompt_event_refs",
+                "finalized_at_utc",
+                "expected_current_fingerprint",
+            ],
+        )
+    }
+);
+
+impl_schema!(
+    AuthorCharterRequestV1,
+    "AuthorCharterRequestV1",
+    |generator| {
+        let author = closed_object(
+            vec![
+                ("operation", json_schema!({"const": "author"})),
+                (
+                    "mode",
+                    generator.subschema_for::<CharterAcquisitionModeV1>(),
+                ),
+                (
+                    "intake",
+                    generator.subschema_for::<CharterIntakeEnvelopeV1>(),
+                ),
+            ],
+            &["operation", "mode", "intake"],
+        );
+        let approve = closed_object(
+            vec![
+                ("operation", json_schema!({"const": "approve"})),
+                (
+                    "candidate_ref",
+                    generator.subschema_for::<BoundedString<4096>>(),
+                ),
+                (
+                    "approval_class",
+                    generator.subschema_for::<BoundedString<255>>(),
+                ),
+                (
+                    "authority_ref",
+                    generator.subschema_for::<BoundedString<4096>>(),
+                ),
+                (
+                    "accepted_waiver_refs",
+                    generator.subschema_for::<BoundedVec<BoundedString<4096>, 128>>(),
+                ),
+            ],
+            &[
+                "operation",
+                "candidate_ref",
+                "approval_class",
+                "authority_ref",
+                "accepted_waiver_refs",
+            ],
+        );
+        let promote = closed_object(
+            vec![
+                ("operation", json_schema!({"const": "promote"})),
+                (
+                    "candidate_ref",
+                    generator.subschema_for::<BoundedString<4096>>(),
+                ),
+                (
+                    "approval_ref",
+                    generator.subschema_for::<BoundedString<4096>>(),
+                ),
+                (
+                    "expected_current_fingerprint",
+                    nullable::<Fingerprint>(generator),
+                ),
+            ],
+            &[
+                "operation",
+                "candidate_ref",
+                "approval_ref",
+                "expected_current_fingerprint",
+            ],
+        );
+        let validate = closed_object(
+            vec![("operation", json_schema!({"const": "validate"}))],
+            &["operation"],
+        );
+        json_schema!({"oneOf": [author, approve, promote, validate]})
+    }
+);
+
+impl_schema!(
+    ProjectContextInputV1,
+    "ProjectContextInputV1",
+    |generator| {
+        closed_object(
+            vec![
+                ("schema_id", generator.subschema_for::<BoundedString<255>>()),
+                (
+                    "schema_version",
+                    generator.subschema_for::<BoundedString<255>>(),
+                ),
+                ("record_id", generator.subschema_for::<BoundedString<255>>()),
+                ("summary", generator.subschema_for::<BoundedString<4096>>()),
+                (
+                    "system_boundaries",
+                    generator.subschema_for::<BoundedVec<BoundedString<4096>, 128>>(),
+                ),
+                (
+                    "ownership",
+                    generator.subschema_for::<BoundedVec<BoundedString<4096>, 128>>(),
+                ),
+                (
+                    "authoritative_references",
+                    generator.subschema_for::<BoundedVec<BoundedString<4096>, 128>>(),
+                ),
+                (
+                    "known_unknowns",
+                    generator.subschema_for::<BoundedVec<BoundedString<4096>, 128>>(),
+                ),
+            ],
+            &[
+                "schema_id",
+                "schema_version",
+                "record_id",
+                "summary",
+                "system_boundaries",
+                "ownership",
+                "authoritative_references",
+                "known_unknowns",
+            ],
+        )
+    }
+);
+
+impl_schema!(
+    AuthorProjectContextRequestV1,
+    "AuthorProjectContextRequestV1",
+    |generator| {
+        let author = closed_object(
+            vec![
+                ("operation", json_schema!({"const": "author"})),
+                ("input", generator.subschema_for::<ProjectContextInputV1>()),
+            ],
+            &["operation", "input"],
+        );
+        let validate = closed_object(
+            vec![
+                ("operation", json_schema!({"const": "validate"})),
+                ("input", generator.subschema_for::<ProjectContextInputV1>()),
+            ],
+            &["operation", "input"],
+        );
+        json_schema!({"oneOf": [author, validate]})
+    }
+);
+
+impl_schema!(
+    ApproverMappingRequestV1,
+    "ApproverMappingRequestV1",
+    |generator| {
+        closed_object(
+            vec![
+                (
+                    "approval_class",
+                    generator.subschema_for::<BoundedString<255>>(),
+                ),
+                (
+                    "authority_ref",
+                    generator.subschema_for::<BoundedString<4096>>(),
+                ),
+            ],
+            &["approval_class", "authority_ref"],
+        )
+    }
+);
+
+impl_schema!(
+    ApproverAdministrationRequestV1,
+    "ApproverAdministrationRequestV1",
+    |generator| {
+        let mappings = generator.subschema_for::<BoundedVec<ApproverMappingRequestV1, 128>>();
+        let bootstrap = closed_object(
+            vec![
+                ("operation", json_schema!({"const": "bootstrap"})),
+                ("initial_charter_quorum", mappings.clone()),
+            ],
+            &["operation", "initial_charter_quorum"],
+        );
+        let add = closed_object(
+            vec![
+                ("operation", json_schema!({"const": "add_credential"})),
+                ("approval_mappings", mappings.clone()),
+            ],
+            &["operation", "approval_mappings"],
+        );
+        let revoke = closed_object(
+            vec![
+                ("operation", json_schema!({"const": "revoke_credential"})),
+                (
+                    "credential_id_hash",
+                    generator.subschema_for::<BoundedString<4096>>(),
+                ),
+            ],
+            &["operation", "credential_id_hash"],
+        );
+        let update = closed_object(
+            vec![
+                ("operation", json_schema!({"const": "update_mapping"})),
+                (
+                    "credential_id_hash",
+                    generator.subschema_for::<BoundedString<4096>>(),
+                ),
+                ("approval_mappings", mappings),
+            ],
+            &["operation", "credential_id_hash", "approval_mappings"],
+        );
+        json_schema!({"oneOf": [bootstrap, add, revoke, update]})
+    }
+);
+
+impl_schema!(
+    PipelineRouteResolveAndPersistRequestV1,
+    "PipelineRouteResolveAndPersistRequestV1",
+    |generator| {
+        closed_object(
+            vec![("selector", generator.subschema_for::<BoundedString<4096>>())],
+            &["selector"],
+        )
+    }
+);
+
+fn use_case_request_schema<T: JsonSchema>(
+    generator: &mut SchemaGenerator,
+    use_case_ref: &'static str,
+) -> Schema {
+    closed_object(
+        vec![
+            (
+                "schema",
+                exact_binding_schema(generator, "handbook.use-case-request@1.0.0"),
+            ),
+            ("use_case", exact_binding_schema(generator, use_case_ref)),
+            ("request", generator.subschema_for::<T>()),
+            (
+                "request_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &["schema", "use_case", "request", "request_fingerprint"],
+    )
+}
+
+impl_schema!(UseCaseRequestV1, "UseCaseRequestV1", |generator| {
+    json_schema!({"oneOf": [
+        use_case_request_schema::<RepositorySetupRequestV1>(generator, "handbook.use-case.repository-setup@1.0.0"),
+        use_case_request_schema::<RepositoryDoctorRequestV1>(generator, "handbook.use-case.repository-doctor@1.0.0"),
+        use_case_request_schema::<AuthorCharterRequestV1>(generator, "handbook.use-case.author-charter@1.0.0"),
+        use_case_request_schema::<AuthorProjectContextRequestV1>(generator, "handbook.use-case.author-project-context@1.0.0"),
+        use_case_request_schema::<ApproverAdministrationRequestV1>(generator, "handbook.use-case.approver-administration@1.0.0"),
+        use_case_request_schema::<PipelineRouteResolveAndPersistRequestV1>(generator, "handbook.use-case.pipeline-route-resolve-and-persist@1.0.0")
+    ]})
+});
+
+impl_schema!(InvocationRequestV1, "InvocationRequestV1", |generator| {
+    let allowed_operations = json_schema!({"allOf": [
+        generator.subschema_for::<OperationRequestV1>(),
+        {
+            "properties": {
+                "schema": {
+                    "properties": {
+                        "ref": {"const": "handbook.operation-request@1.0.0"}
+                    },
+                    "required": ["ref"]
+                },
+                "operation": {
+                    "properties": {
+                        "ref": {"enum": [
+                            "artifact.kind.list@1.0.0",
+                            "artifact.instance.list@1.0.0",
+                            "artifact.read@1.0.0",
+                            "artifact.validate@1.0.0",
+                            "intake.definition.read@1.0.0",
+                            "intake.coverage.evaluate@1.0.0",
+                            "intake.record.append@1.0.0",
+                            "artifact.candidate.validate@1.0.0",
+                            "artifact.candidate.append@1.0.0",
+                            "artifact.candidate.promote@1.0.0",
+                            "flow.resolve@1.0.0",
+                            "pipeline.catalog.list@1.0.0",
+                            "pipeline.catalog.read@1.0.0",
+                            "pipeline.compile@1.0.0",
+                            "pipeline.capture.plan@1.0.0",
+                            "pipeline.capture.apply@1.0.0",
+                            "pipeline.handoff.emit@1.0.0",
+                            "pipeline.state.apply@1.0.0",
+                            "posture.transition.apply@1.0.0"
+                        ]}
+                    },
+                    "required": ["ref"]
+                }
+            },
+            "required": ["schema", "operation"]
+        }
+    ]});
+    let operation = closed_object(
+        vec![
+            (
+                "schema",
+                exact_binding_schema(generator, "handbook.invocation-request@1.0.0"),
+            ),
+            ("request_kind", json_schema!({"const": "operation"})),
+            ("request", allowed_operations),
+            (
+                "request_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &["schema", "request_kind", "request", "request_fingerprint"],
+    );
+    let use_case = closed_object(
+        vec![
+            (
+                "schema",
+                exact_binding_schema(generator, "handbook.invocation-request@1.0.0"),
+            ),
+            ("request_kind", json_schema!({"const": "use_case"})),
+            ("request", generator.subschema_for::<UseCaseRequestV1>()),
+            (
+                "request_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &["schema", "request_kind", "request", "request_fingerprint"],
+    );
+    json_schema!({"oneOf": [operation, use_case]})
+});
+
+impl_schema!(
+    BootstrapFacadeResponseV1,
+    "BootstrapFacadeResponseV1",
+    |generator| {
+        let ok_response = json_schema!({"allOf": [
+            generator.subschema_for::<BootstrapResponseV1>(),
+            embedded_schema_ref_overlay("handbook.bootstrap-response@1.0.0")
+        ]});
+        let ok = closed_object(
+            vec![
+                (
+                    "schema",
+                    exact_binding_schema(generator, "handbook.bootstrap-facade-response@1.0.0"),
+                ),
+                ("outcome_kind", json_schema!({"const": "ok"})),
+                ("response", ok_response),
+                (
+                    "response_fingerprint",
+                    generator.subschema_for::<Fingerprint>(),
+                ),
+            ],
+            &["schema", "outcome_kind", "response", "response_fingerprint"],
+        );
+        let refused_response = json_schema!({"allOf": [
+            generator.subschema_for::<BootstrapRefusalV1>(),
+            embedded_schema_ref_overlay("handbook.bootstrap-refusal@1.0.0")
+        ]});
+        let refused = closed_object(
+            vec![
+                (
+                    "schema",
+                    exact_binding_schema(generator, "handbook.bootstrap-facade-response@1.0.0"),
+                ),
+                ("outcome_kind", json_schema!({"const": "refused"})),
+                ("response", refused_response),
+                (
+                    "response_fingerprint",
+                    generator.subschema_for::<Fingerprint>(),
+                ),
+            ],
+            &["schema", "outcome_kind", "response", "response_fingerprint"],
+        );
+        json_schema!({"oneOf": [ok, refused]})
+    }
+);
+
+impl_schema!(CatalogReadRequestV1, "CatalogReadRequestV1", |generator| {
+    closed_object(
+        vec![
+            (
+                "schema",
+                exact_binding_schema(generator, "handbook.catalog-read-request@1.0.0"),
+            ),
+            (
+                "catalog_kind",
+                string_enum(&["capabilities", "schemas", "profiles"]),
+            ),
+            ("page_size", generator.subschema_for::<CatalogPageSize>()),
+            ("cursor", nullable::<TypedCatalogCursor>(generator)),
+            (
+                "request_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &[
+            "schema",
+            "catalog_kind",
+            "page_size",
+            "cursor",
+            "request_fingerprint",
+        ],
+    )
+});
+
+fn embedded_schema_ref_overlay(schema_ref: &'static str) -> Schema {
+    json_schema!({
+        "properties": {
+            "schema": {
+                "properties": {"ref": {"const": schema_ref}},
+                "required": ["ref"]
+            }
+        },
+        "required": ["schema"]
+    })
+}
+
+fn catalog_family_overlay(schema_ref: &'static str, catalog_ref: &'static str) -> Schema {
+    json_schema!({
+        "properties": {
+            "schema": {
+                "properties": {"ref": {"const": schema_ref}},
+                "required": ["ref"]
+            },
+            "root": {
+                "properties": {
+                    "catalog": {
+                        "properties": {"ref": {"const": catalog_ref}},
+                        "required": ["ref"]
+                    }
+                },
+                "required": ["catalog"]
+            }
+        },
+        "required": ["schema", "root"]
+    })
+}
+
+fn catalog_blocked_overlay(catalog_ref: &'static str) -> Schema {
+    json_schema!({
+        "properties": {
+            "schema": {
+                "properties": {"ref": {"const": "handbook.catalog-read-blocked@1.0.0"}},
+                "required": ["ref"]
+            },
+            "catalog": {
+                "properties": {"ref": {"const": catalog_ref}},
+                "required": ["ref"]
+            }
+        },
+        "required": ["schema", "catalog"]
+    })
+}
+
+fn catalog_response_schema(
+    generator: &mut SchemaGenerator,
+    catalog_kind: &'static str,
+    outcome_kind: &'static str,
+    response: Schema,
+) -> Schema {
+    closed_object(
+        vec![
+            (
+                "schema",
+                exact_binding_schema(generator, "handbook.catalog-read-response@1.0.0"),
+            ),
+            ("catalog_kind", json_schema!({"const": catalog_kind})),
+            ("outcome_kind", json_schema!({"const": outcome_kind})),
+            ("response", response),
+            (
+                "response_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+        ],
+        &[
+            "schema",
+            "catalog_kind",
+            "outcome_kind",
+            "response",
+            "response_fingerprint",
+        ],
+    )
+}
+
+impl_schema!(
+    CatalogReadResponseV1,
+    "CatalogReadResponseV1",
+    |generator| {
+        let families = [
+            (
+                "capabilities",
+                "handbook.capability-catalog-page@1.0.0",
+                "handbook.catalog.operations@1.0.0",
+                generator.subschema_for::<CapabilityCatalogPage>(),
+            ),
+            (
+                "schemas",
+                "handbook.schema-catalog-page@1.0.0",
+                "handbook.catalog.schemas@1.0.0",
+                generator.subschema_for::<SchemaCatalogPage>(),
+            ),
+            (
+                "profiles",
+                "handbook.profile-catalog-page@1.0.0",
+                "handbook.catalog.profiles@1.0.0",
+                generator.subschema_for::<ProfileCatalogPage>(),
+            ),
+        ];
+        let mut variants = Vec::new();
+        for (catalog_kind, schema_ref, catalog_ref, page) in families {
+            variants.push(catalog_response_schema(
+                generator,
+                catalog_kind,
+                "page",
+                json_schema!({"allOf": [page, catalog_family_overlay(schema_ref, catalog_ref)]}),
+            ));
+            variants.push(catalog_response_schema(
+                generator,
+                catalog_kind,
+                "cursor_mismatch",
+                json_schema!({"type": "null"}),
+            ));
+            let blocked = generator.subschema_for::<CatalogReadBlockedV1>();
+            variants.push(catalog_response_schema(
+                generator,
+                catalog_kind,
+                "blocked",
+                json_schema!({"allOf": [
+                    blocked,
+                    catalog_blocked_overlay(catalog_ref)
+                ]}),
+            ));
+        }
+        json_schema!({"oneOf": variants})
+    }
+);
+
 fn typed_problem_schema<T: JsonSchema>(
     generator: &mut SchemaGenerator,
     subject_ref: &'static str,
@@ -5989,7 +6742,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 115] = [
+const INVENTORY: [SchemaDescriptor; 120] = [
     descriptor::<ArtifactProblemDetailsV1>(
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -6021,6 +6774,10 @@ const INVENTORY: [SchemaDescriptor; 115] = [
     descriptor::<BootstrapDescriptorV1>(
         "handbook.bootstrap-descriptor-schema@1.0.0",
         "handbook.bootstrap-descriptor-schema/1.0.0.schema.json",
+    ),
+    descriptor::<BootstrapFacadeResponseV1>(
+        "handbook.bootstrap-facade-response@1.0.0",
+        "handbook.bootstrap-facade-response/1.0.0.schema.json",
     ),
     descriptor::<BootstrapRefusalDetails>(
         "handbook.bootstrap-refusal-details@1.0.0",
@@ -6058,6 +6815,14 @@ const INVENTORY: [SchemaDescriptor; 115] = [
         "handbook.catalog-read-blocked@1.0.0",
         "handbook.catalog-read-blocked/1.0.0.schema.json",
     ),
+    descriptor::<CatalogReadRequestV1>(
+        "handbook.catalog-read-request@1.0.0",
+        "handbook.catalog-read-request/1.0.0.schema.json",
+    ),
+    descriptor::<CatalogReadResponseV1>(
+        "handbook.catalog-read-response@1.0.0",
+        "handbook.catalog-read-response/1.0.0.schema.json",
+    ),
     descriptor::<CatalogRoot>(
         "handbook.catalog-root@1.0.0",
         "handbook.catalog-root/1.0.0.schema.json",
@@ -6086,6 +6851,10 @@ const INVENTORY: [SchemaDescriptor; 115] = [
     descriptor::<IdempotencyState>(
         "handbook.idempotency-state@1.0.0",
         "handbook.idempotency-state/1.0.0.schema.json",
+    ),
+    descriptor::<InvocationRequestV1>(
+        "handbook.invocation-request@1.0.0",
+        "handbook.invocation-request/1.0.0.schema.json",
     ),
     descriptor::<InvocationResponseV1>(
         "handbook.invocation-response@1.0.0",
@@ -6402,6 +7171,10 @@ const INVENTORY: [SchemaDescriptor; 115] = [
         "handbook.typed-catalog-cursor@1.0.0",
         "handbook.typed-catalog-cursor/1.0.0.schema.json",
     ),
+    descriptor::<UseCaseRequestV1>(
+        "handbook.use-case-request@1.0.0",
+        "handbook.use-case-request/1.0.0.schema.json",
+    ),
     descriptor::<UseCaseResponseV1>(
         "handbook.use-case-response@1.0.0",
         "handbook.use-case-response/1.0.0.schema.json",
@@ -6678,8 +7451,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 115 {
-        return Err("schema inventory must contain exactly 115 entries".to_owned());
+    if INVENTORY.len() != 120 {
+        return Err("schema inventory must contain exactly 120 entries".to_owned());
     }
 
     let mut previous_ref = None;

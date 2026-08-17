@@ -7,6 +7,7 @@ mod bounds;
 mod catalog;
 mod dto;
 mod envelope;
+mod facade;
 mod flow_operation;
 mod invocation;
 mod operation;
@@ -56,6 +57,17 @@ pub use dto::{
 pub use envelope::{
     OperationAdmissionRefusalV1, OperationRequestV1, OperationResponseV1, OperationSchemaValidator,
     RequestId,
+};
+pub use facade::{
+    ApproverAdministrationRequestV1, ApproverMappingRequestV1, AuthorCharterRequestV1,
+    AuthorProjectContextRequestV1, BootstrapFacadeOutcomeKindV1, BootstrapFacadeResponseBodyV1,
+    BootstrapFacadeResponseV1, CatalogKindV1, CatalogReadOutcomeKindV1, CatalogReadRequestV1,
+    CatalogReadResponseBodyV1, CatalogReadResponseV1, CharterAcquisitionModeV1,
+    CharterCoverageSubmissionV1, CharterInputEntryV1, CharterInputValueV1, CharterIntakeConsumerV1,
+    CharterIntakeEnvelopeV1, CharterIntakeSourceKindV1, InvocationRequestBodyV1,
+    InvocationRequestKindV1, InvocationRequestV1, PipelineRouteResolveAndPersistRequestV1,
+    ProjectContextInputV1, RepositoryDoctorRequestV1, RepositorySetupRequestV1,
+    UseCaseRequestBodyV1, UseCaseRequestV1,
 };
 pub(crate) use flow_operation::execute_flow_operation;
 pub use flow_operation::{

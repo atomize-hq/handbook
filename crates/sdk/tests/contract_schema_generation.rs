@@ -22,7 +22,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 115] = [
+const ROOTS: [(&str, &str); 120] = [
     (
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -50,6 +50,10 @@ const ROOTS: [(&str, &str); 115] = [
     (
         "handbook.bootstrap-descriptor-schema@1.0.0",
         "handbook.bootstrap-descriptor-schema/1.0.0.schema.json",
+    ),
+    (
+        "handbook.bootstrap-facade-response@1.0.0",
+        "handbook.bootstrap-facade-response/1.0.0.schema.json",
     ),
     (
         "handbook.bootstrap-refusal-details@1.0.0",
@@ -88,6 +92,14 @@ const ROOTS: [(&str, &str); 115] = [
         "handbook.catalog-read-blocked/1.0.0.schema.json",
     ),
     (
+        "handbook.catalog-read-request@1.0.0",
+        "handbook.catalog-read-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.catalog-read-response@1.0.0",
+        "handbook.catalog-read-response/1.0.0.schema.json",
+    ),
+    (
         "handbook.catalog-root@1.0.0",
         "handbook.catalog-root/1.0.0.schema.json",
     ),
@@ -114,6 +126,10 @@ const ROOTS: [(&str, &str); 115] = [
     (
         "handbook.idempotency-state@1.0.0",
         "handbook.idempotency-state/1.0.0.schema.json",
+    ),
+    (
+        "handbook.invocation-request@1.0.0",
+        "handbook.invocation-request/1.0.0.schema.json",
     ),
     (
         "handbook.invocation-response@1.0.0",
@@ -428,6 +444,10 @@ const ROOTS: [(&str, &str); 115] = [
         "handbook.typed-catalog-cursor/1.0.0.schema.json",
     ),
     (
+        "handbook.use-case-request@1.0.0",
+        "handbook.use-case-request/1.0.0.schema.json",
+    ),
+    (
         "handbook.use-case-response@1.0.0",
         "handbook.use-case-response/1.0.0.schema.json",
     ),
@@ -579,7 +599,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 115);
+    assert_eq!(entries.len(), 120);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries
