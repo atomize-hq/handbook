@@ -2,8 +2,10 @@ use crate::profile_readiness::RepositoryReadinessStatus;
 #[cfg(not(unix))]
 use crate::setup::run_setup;
 use crate::setup::{
-    plan_setup, plan_setup_with_decisions, run_setup_with_decisions, SetupArtifactActionKind,
-    SetupErrorCode, SetupErrorKind, SetupErrorReasonCode, SetupMode, SetupRequest, SetupRootAction,
+    apply_setup_execution, build_setup_execution_plan, inspect_root, plan_setup,
+    plan_setup_with_decisions, run_setup_with_decisions, run_setup_with_effects_and_decisions,
+    validate_root_and_request, SetupArtifactActionKind, SetupErrorCode, SetupErrorKind,
+    SetupErrorReasonCode, SetupMode, SetupRequest, SetupRootAction,
 };
 use handbook_engine::{
     resolve_shipped_profile_decisions, ResolvedProfileDecisions, REPOSITORY_IDENTITY_REPO_PATH,
@@ -50,6 +52,80 @@ fn init_plans_root_creation_but_writes_no_selected_artifact() {
     for artifact in &outcome.plan.artifacts {
         assert!(!repo.path().join(&artifact.artifact.canonical_path).exists());
     }
+}
+
+#[test]
+fn late_reset_failure_accumulates_only_the_exact_successful_prefix() {
+    let repo = tempdir().unwrap();
+    fs::create_dir_all(repo.path().join(".handbook/state")).unwrap();
+    fs::write(repo.path().join(".handbook/state/a.json"), b"a").unwrap();
+    fs::write(repo.path().join(".handbook/state/b.json"), b"b").unwrap();
+    let request = SetupRequest {
+        mode: SetupMode::Refresh,
+        rewrite: false,
+        reset_state: true,
+    };
+    let decisions = resolve_shipped_profile_decisions(repo.path()).unwrap();
+    let root = inspect_root(repo.path()).unwrap();
+    let (resolved_mode, root_action) = validate_root_and_request(root, &request).unwrap();
+    let execution = build_setup_execution_plan(
+        repo.path(),
+        &request,
+        resolved_mode,
+        root_action,
+        &decisions,
+    )
+    .unwrap();
+    fs::remove_file(repo.path().join(".handbook/state/b.json")).unwrap();
+
+    let applied = apply_setup_execution(repo.path(), execution);
+
+    assert_eq!(
+        applied.result().as_ref().unwrap_err().code(),
+        SetupErrorCode::RuntimeStateMutationFailed
+    );
+    assert_eq!(
+        applied.effects().removed_runtime_state_paths(),
+        &[".handbook/state/a.json"]
+    );
+    let response = crate::contract_membrane::UseCaseResponseV1::repository_setup_execution(
+        &applied,
+        &crate::contract_membrane::ContractLimits::packet0(),
+    )
+    .unwrap();
+    assert_eq!(
+        response.status(),
+        crate::contract_membrane::TerminalStatus::Error
+    );
+    let wire = serde_json::to_value(response).unwrap();
+    assert_eq!(
+        wire["receipts"][0]["condition"]["removed_paths"],
+        serde_json::json!([".handbook/state/a.json"])
+    );
+    assert!(!repo.path().join(".handbook/state/a.json").exists());
+}
+
+#[test]
+fn non_ready_setup_returns_every_realized_public_effect() {
+    let repo = tempdir().unwrap();
+    let decisions = resolve_shipped_profile_decisions(repo.path()).unwrap();
+
+    let execution =
+        run_setup_with_effects_and_decisions(repo.path(), &SetupRequest::default(), &decisions);
+    let outcome = execution.result().as_ref().unwrap();
+
+    assert_ne!(outcome.status, RepositoryReadinessStatus::Ready);
+    assert!(execution.effects().root_created());
+    assert!(execution.effects().removed_runtime_state_paths().is_empty());
+    let identity = execution
+        .effects()
+        .repository_identity_created()
+        .expect("created identity effect");
+    assert_eq!(identity.len(), 71);
+    assert_eq!(
+        fs::read_to_string(repo.path().join(REPOSITORY_IDENTITY_REPO_PATH)).unwrap(),
+        identity
+    );
 }
 
 #[cfg(unix)]
@@ -101,6 +177,47 @@ fn reset_state_never_selects_or_replaces_repository_identity() {
     let outcome = run_setup_with_decisions(repo.path(), &reset, &decisions).unwrap();
     assert!(outcome.reset_applied);
     assert_eq!(fs::read(identity_path).unwrap(), before);
+}
+
+#[test]
+fn oversized_reset_plan_refuses_before_any_setup_mutation() {
+    let repo = tempdir().unwrap();
+    fs::create_dir_all(repo.path().join(".handbook/state")).unwrap();
+    for index in 0..129 {
+        fs::write(
+            repo.path()
+                .join(format!(".handbook/state/entry-{index:03}.json")),
+            b"{}",
+        )
+        .unwrap();
+    }
+    let decisions = resolve_shipped_profile_decisions(repo.path()).unwrap();
+
+    let error = run_setup_with_decisions(
+        repo.path(),
+        &SetupRequest {
+            mode: SetupMode::Refresh,
+            rewrite: false,
+            reset_state: true,
+        },
+        &decisions,
+    )
+    .unwrap_err();
+
+    assert_eq!(error.code(), SetupErrorCode::RuntimeStateResetPlanTooLarge);
+    assert_eq!(
+        error.reason_code(),
+        SetupErrorReasonCode::RuntimeStateResetPlanTooLarge
+    );
+    assert_eq!(error.observed_count(), Some(129));
+    assert_eq!(error.limit(), Some(128));
+    assert!(!repo.path().join(REPOSITORY_IDENTITY_REPO_PATH).exists());
+    for index in 0..129 {
+        assert!(repo
+            .path()
+            .join(format!(".handbook/state/entry-{index:03}.json"))
+            .exists());
+    }
 }
 
 #[cfg(unix)]

@@ -1,13 +1,26 @@
-use crate::{exit_policy, SetupArgs, SetupCommand};
+use crate::{doctor_rendering, exit_policy, SetupArgs, SetupCommand};
+use handbook_sdk::contract_membrane::{
+    ContractLimits, InvocationResponseV1, TransportFailureKind, TransportFailureV1,
+};
 use std::fmt::Write;
 use std::process::ExitCode;
 
-pub(crate) fn run(args: SetupArgs) -> ExitCode {
+pub(crate) fn run(args: SetupArgs, machine_json: bool) -> ExitCode {
+    let limits = ContractLimits::packet0();
     let cwd = match std::env::current_dir() {
         Ok(dir) => dir,
         Err(_) => {
-            println!("OUTCOME: ERROR\nCATEGORY: repository_root_unavailable");
-            return exit_policy::failure();
+            if machine_json {
+                return emit_transport_failure(
+                    TransportFailureKind::Repository,
+                    "transport.repository_root_unavailable",
+                    &limits,
+                );
+            }
+            return exit_policy::emit_stdout(
+                b"OUTCOME: ERROR\nCATEGORY: repository_root_unavailable\n",
+                exit_policy::failure(),
+            );
         }
     };
     let repo_root = crate::shell_shared::discover_managed_repo_root(&cwd);
@@ -24,13 +37,82 @@ pub(crate) fn run(args: SetupArgs) -> ExitCode {
         },
     };
 
-    match handbook_sdk::HandbookSdkV1::open(&repo_root).run_setup(&request) {
-        Ok(outcome) => {
-            print!("{}", render_setup_outcome(&outcome));
-            exit_policy::repository_status(outcome.status)
+    let use_case = match handbook_sdk::HandbookSdkV1::open(&repo_root)
+        .run_setup_use_case(&request, &limits)
+    {
+        Ok(use_case) => use_case,
+        Err(_) if machine_json => {
+            return emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.invocation_construction_failed",
+                &limits,
+            );
         }
-        Err(error) => {
-            print!("{}", render_setup_error(&error));
+        Err(_) => {
+            return exit_policy::emit_stdout(
+                b"OUTCOME: ERROR\nCATEGORY: serialization\nREASON: failed to construct setup response\n",
+                exit_policy::failure(),
+            );
+        }
+    };
+    let invocation = match InvocationResponseV1::use_case(use_case, &limits) {
+        Ok(invocation) => invocation,
+        Err(_) if machine_json => {
+            return emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.invocation_construction_failed",
+                &limits,
+            );
+        }
+        Err(_) => {
+            return exit_policy::emit_stdout(
+                b"OUTCOME: ERROR\nCATEGORY: serialization\nREASON: failed to construct setup response\n",
+                exit_policy::failure(),
+            );
+        }
+    };
+    let semantic_exit = exit_policy::terminal(invocation.terminal_status());
+
+    if machine_json {
+        return match doctor_rendering::render_invocation(&invocation) {
+            Ok(bytes) => exit_policy::emit_stdout(&bytes, semantic_exit),
+            Err(_) => emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.serialization_failed",
+                &limits,
+            ),
+        };
+    }
+
+    let outcome = match invocation.repository_setup_outcome(&limits) {
+        Ok(Some(outcome)) => outcome,
+        Ok(None) | Err(_) => {
+            return exit_policy::emit_stdout(
+                b"OUTCOME: ERROR\nCATEGORY: serialization\nREASON: failed to render setup response\n",
+                exit_policy::failure(),
+            );
+        }
+    };
+    let output = match outcome {
+        Ok(outcome) => render_setup_outcome(&outcome),
+        Err(error) => render_setup_error(&error),
+    };
+    exit_policy::emit_stdout(output.as_bytes(), semantic_exit)
+}
+
+fn emit_transport_failure(
+    kind: TransportFailureKind,
+    reason_code: &str,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let bytes = TransportFailureV1::adapter_error(kind, reason_code, limits)
+        .and_then(|failure| InvocationResponseV1::transport_failure(failure, limits))
+        .map_err(|_| ())
+        .and_then(|invocation| doctor_rendering::render_invocation(&invocation).map_err(|_| ()));
+    match bytes {
+        Ok(bytes) => exit_policy::emit_stdout(&bytes, exit_policy::failure()),
+        Err(()) => {
+            eprintln!("handbook: failed to prepare transport-failure response");
             exit_policy::failure()
         }
     }
@@ -218,6 +300,12 @@ fn setup_error_reason_name(reason: handbook_sdk::SetupErrorReasonCode) -> &'stat
         }
         handbook_sdk::SetupErrorReasonCode::RuntimeStateTargetUnsafe => {
             "runtime_state_target_unsafe"
+        }
+        handbook_sdk::SetupErrorReasonCode::RuntimeStateResetPlanTooLarge => {
+            "runtime_state_reset_plan_too_large"
+        }
+        handbook_sdk::SetupErrorReasonCode::RuntimeStateResetProjectionTooLarge => {
+            "runtime_state_reset_projection_too_large"
         }
         handbook_sdk::SetupErrorReasonCode::RuntimeStateMutationFailed => {
             "runtime_state_mutation_failed"

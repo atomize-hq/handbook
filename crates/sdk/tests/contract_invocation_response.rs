@@ -1,10 +1,12 @@
 use handbook_sdk::contract_membrane::{
     canonical_json_bytes, parse_canonical_json, BoundedVec, ContractError, ContractLimits,
     InvocationResponseKind, InvocationResponseV1, RepositoryDoctorDetailsV1,
-    RepositoryDoctorResultV1, TerminalStatus, TransportFailureDetailsV1, TransportFailureKind,
-    TransportFailureV1, UseCaseResponseV1,
+    RepositoryDoctorResultV1, RepositorySetupDetailsV1, TerminalStatus, TransportFailureDetailsV1,
+    TransportFailureKind, TransportFailureV1, UseCaseResponseV1,
 };
-use handbook_sdk::{DoctorReport, RepositoryReadinessStatus};
+use handbook_sdk::{
+    DoctorReport, RepositoryReadinessStatus, SetupMode, SetupOutcome, SetupPlan, SetupRootAction,
+};
 
 fn doctor_report(status: RepositoryReadinessStatus) -> DoctorReport {
     DoctorReport {
@@ -21,6 +23,107 @@ fn doctor_report(status: RepositoryReadinessStatus) -> DoctorReport {
         charter: None,
         status,
     }
+}
+
+fn setup_outcome(status: RepositoryReadinessStatus) -> SetupOutcome {
+    SetupOutcome {
+        plan: SetupPlan {
+            requested_mode: SetupMode::Auto,
+            resolved_mode: SetupMode::Refresh,
+            root_action: SetupRootAction::Preserve,
+            profile_ref: "handbook.profile.shipped-root@1.2.0".to_owned(),
+            profile_fingerprint:
+                "sha256:1111111111111111111111111111111111111111111111111111111111111111".to_owned(),
+            stable_role_registry_ref: "handbook.roles.core@1.1.0".to_owned(),
+            stable_role_registry_fingerprint:
+                "sha256:2222222222222222222222222222222222222222222222222222222222222222".to_owned(),
+            conditions: vec![],
+            capabilities: vec![],
+            artifacts: vec![],
+            reset_paths: vec![],
+        },
+        status,
+        reset_applied: false,
+    }
+}
+
+#[test]
+fn setup_use_case_closes_all_readiness_variants_and_typed_round_trip() {
+    let limits = ContractLimits::packet0();
+    for (status, expected_terminal, expected_code, expected_actions) in [
+        (
+            RepositoryReadinessStatus::Ready,
+            TerminalStatus::Ok,
+            None,
+            0,
+        ),
+        (
+            RepositoryReadinessStatus::ActionRequired,
+            TerminalStatus::Blocked,
+            Some("repository.action_required"),
+            1,
+        ),
+        (
+            RepositoryReadinessStatus::Indeterminate,
+            TerminalStatus::Blocked,
+            Some("repository.readiness_indeterminate"),
+            0,
+        ),
+        (
+            RepositoryReadinessStatus::Invalid,
+            TerminalStatus::Blocked,
+            Some("repository.readiness_invalid"),
+            1,
+        ),
+    ] {
+        let outcome = setup_outcome(status);
+        let use_case =
+            UseCaseResponseV1::repository_setup(&outcome, &limits).expect("setup projection");
+        assert_eq!(use_case.status(), expected_terminal);
+        assert_eq!(
+            use_case.use_case().reference().as_str(),
+            "handbook.use-case.repository-setup@1.0.0"
+        );
+        assert_eq!(
+            use_case
+                .terminal_problems()
+                .first()
+                .map(|problem| problem.code().as_str()),
+            expected_code
+        );
+        assert_eq!(use_case.next_actions().len(), expected_actions);
+
+        let outer = InvocationResponseV1::use_case(use_case, &limits).unwrap();
+        let bytes = canonical_json_bytes(&outer, &limits).unwrap();
+        let parsed = InvocationResponseV1::parse_and_admit(&bytes, None, &limits).unwrap();
+        assert_eq!(parsed, outer);
+        assert_eq!(
+            parsed.repository_setup_outcome(&limits).unwrap(),
+            Some(Ok(outcome))
+        );
+    }
+}
+
+#[test]
+fn sdk_setup_boundary_returns_the_use_case_before_outer_invocation_wrapping() {
+    let limits = ContractLimits::packet0();
+    let repo = tempfile::tempdir().unwrap();
+    std::fs::create_dir(repo.path().join(".git")).unwrap();
+
+    let use_case = handbook_sdk::HandbookSdkV1::open(repo.path())
+        .run_setup_use_case(&handbook_sdk::SetupRequest::default(), &limits)
+        .unwrap();
+
+    assert_eq!(
+        use_case.use_case().reference().as_str(),
+        "handbook.use-case.repository-setup@1.0.0"
+    );
+    assert_ne!(use_case.status(), TerminalStatus::Ok);
+    let outer = InvocationResponseV1::use_case(use_case, &limits).unwrap();
+    assert_eq!(
+        outer.response_kind(),
+        handbook_sdk::contract_membrane::InvocationResponseKind::UseCase
+    );
 }
 
 #[test]
@@ -106,6 +209,7 @@ fn invocation_and_use_case_discriminators_fail_closed() {
 fn public_family_is_nominal_and_transport_failure_can_never_report_ok_or_receipts() {
     fn assert_public<T>() {}
     assert_public::<RepositoryDoctorResultV1>();
+    assert_public::<RepositorySetupDetailsV1>();
     assert_public::<RepositoryDoctorDetailsV1>();
     assert_public::<TransportFailureDetailsV1>();
 
@@ -186,12 +290,22 @@ fn checked_in_invocation_schema_admits_doctor_and_closes_the_current_use_case_un
     let schema: serde_json::Value = serde_json::from_slice(&schema_bytes).unwrap();
     let validator = jsonschema::draft202012::options().build(&schema).unwrap();
     assert!(validator.is_valid(&serde_json::to_value(&outer).unwrap()));
+    let setup_outer = InvocationResponseV1::use_case(
+        UseCaseResponseV1::repository_setup(
+            &setup_outcome(RepositoryReadinessStatus::ActionRequired),
+            &limits,
+        )
+        .unwrap(),
+        &limits,
+    )
+    .unwrap();
+    assert!(validator.is_valid(&serde_json::to_value(&setup_outer).unwrap()));
 
     let use_case_schema_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("schemas/2020-12/handbook.use-case-response/1.0.0.schema.json");
     let use_case_schema: serde_json::Value =
         serde_json::from_slice(&std::fs::read(use_case_schema_path).unwrap()).unwrap();
-    assert_eq!(use_case_schema["oneOf"].as_array().unwrap().len(), 9);
+    assert_eq!(use_case_schema["oneOf"].as_array().unwrap().len(), 12);
     let wire = use_case_schema.to_string();
     for reference in [
         "handbook.use-case.repository-setup@1.0.0",
@@ -204,13 +318,17 @@ fn checked_in_invocation_schema_admits_doctor_and_closes_the_current_use_case_un
         assert!(wire.contains(reference));
     }
     assert!(wire.contains("handbook.use-case.repository-doctor-details@1.0.0"));
+    assert!(wire.contains("handbook.use-case.repository-setup-details@1.0.0"));
 }
 
 #[test]
 fn doctor_use_case_does_not_inflate_operation_admission_or_discovery() {
     assert!(handbook_sdk::contract_membrane::operation_inventory()
         .iter()
-        .all(|row| !row.operation_ref().as_str().contains("repository-doctor")));
+        .all(|row| {
+            !row.operation_ref().as_str().contains("repository-doctor")
+                && !row.operation_ref().as_str().contains("repository-setup")
+        }));
     let witness = handbook_sdk::contract_membrane::ProductionWitness::from_current(
         handbook_sdk::contract_membrane::UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap(),
     )

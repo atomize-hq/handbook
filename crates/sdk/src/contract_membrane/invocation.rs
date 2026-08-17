@@ -11,6 +11,7 @@ use crate::pipeline_route_api::{
     PipelineResolveOutcome, PipelineResolvedStageView, PipelineRouteRunView,
     PipelineRouteStageReason, PipelineRouteStageStatus, PipelineRouteStateView,
 };
+use crate::setup::{SetupExecutionEffects, SetupExecutionResult};
 use crate::{
     ApproverOperation, ApproverOperationProjection, ApproverOperationResult, ArtifactApplicability,
     ArtifactInspectionReason, ArtifactInspectionStatus, AuthorOperationStatus,
@@ -19,7 +20,9 @@ use crate::{
     DoctorCharterNextAction, DoctorCharterRow, DoctorError, DoctorErrorKind, DoctorErrorReasonCode,
     DoctorProjectContextRow, DoctorReport, ProfileArtifactRow, ProfileCapabilityRow,
     ProfileConditionOutcome, ProfileConditionReason, ProfileConditionRow, ProfileRequirednessMode,
-    RepositoryReadinessStatus, SetupArtifactActionKind, SetupMode, SetupOutcome, SetupRootAction,
+    RepositoryReadinessStatus, SetupArtifactAction, SetupArtifactActionKind, SetupError,
+    SetupErrorCode, SetupErrorKind, SetupErrorReasonCode, SetupMode, SetupOutcome, SetupPlan,
+    SetupRootAction,
 };
 use serde::de::Error as _;
 use serde::{Deserialize, Deserializer, Serialize};
@@ -27,6 +30,14 @@ use serde::{Deserialize, Deserializer, Serialize};
 const INVOCATION_RESPONSE_REF: &str = "handbook.invocation-response@1.0.0";
 const USE_CASE_RESPONSE_REF: &str = "handbook.use-case-response@1.0.0";
 const TRANSPORT_FAILURE_REF: &str = "handbook.transport-failure@1.0.0";
+const SETUP_USE_CASE_REF: &str = "handbook.use-case.repository-setup@1.0.0";
+const SETUP_RESULT_REF: &str = "handbook.use-case.repository-setup-result@1.0.0";
+const SETUP_DETAILS_REF: &str = "handbook.use-case.repository-setup-details@1.0.0";
+const SETUP_RULE_REF: &str = "handbook.use-case.repository-setup-rule@1.0.0";
+const SETUP_ROOT_RECORD_REF: &str = "handbook.use-case.repository-setup-root@1.0.0";
+const SETUP_RESET_RECORD_REF: &str = "handbook.use-case.repository-setup-runtime-state-reset@1.0.0";
+const SETUP_IDENTITY_RECORD_REF: &str =
+    "handbook.use-case.repository-setup-repository-identity@1.0.0";
 const DOCTOR_USE_CASE_REF: &str = "handbook.use-case.repository-doctor@1.0.0";
 const DOCTOR_RESULT_REF: &str = "handbook.use-case.repository-doctor-result@1.0.0";
 const DOCTOR_DETAILS_REF: &str = "handbook.use-case.repository-doctor-details@1.0.0";
@@ -38,10 +49,11 @@ fn binding(reference: &str) -> Result<ExactBinding, ContractError> {
         INVOCATION_RESPONSE_REF
             | USE_CASE_RESPONSE_REF
             | TRANSPORT_FAILURE_REF
+            | SETUP_RESULT_REF
+            | SETUP_DETAILS_REF
             | DOCTOR_RESULT_REF
             | DOCTOR_DETAILS_REF
             | TRANSPORT_DETAILS_REF
-            | "handbook.use-case.repository-setup-result@1.0.0"
             | "handbook.use-case.author-charter-result@1.0.0"
             | "handbook.use-case.author-project-context-result@1.0.0"
             | "handbook.use-case.approver-administration-result@1.0.0"
@@ -781,6 +793,70 @@ impl RepositorySetupResultV1 {
             reset_applied: outcome.reset_applied,
         })
     }
+
+    pub fn to_outcome(&self) -> SetupOutcome {
+        SetupOutcome {
+            plan: SetupPlan {
+                requested_mode: self.requested_mode.into(),
+                resolved_mode: self.resolved_mode.into(),
+                root_action: self.root_action.into(),
+                profile_ref: self.profile.reference().as_str().to_owned(),
+                profile_fingerprint: self.profile.fingerprint().as_str().to_owned(),
+                stable_role_registry_ref: self.stable_role_registry.reference().as_str().to_owned(),
+                stable_role_registry_fingerprint: self
+                    .stable_role_registry
+                    .fingerprint()
+                    .as_str()
+                    .to_owned(),
+                conditions: self
+                    .conditions
+                    .as_slice()
+                    .iter()
+                    .map(|row| ProfileConditionRow {
+                        condition_ref: row.condition_ref.as_str().to_owned(),
+                        condition_definition_fingerprint: row
+                            .condition_definition_fingerprint
+                            .as_str()
+                            .to_owned(),
+                        outcome: row.outcome.into(),
+                        reason: row.reason.into(),
+                        evidence_closure_fingerprint: row
+                            .evidence_closure_fingerprint
+                            .as_ref()
+                            .map(|value| value.as_str().to_owned()),
+                    })
+                    .collect(),
+                capabilities: self
+                    .capabilities
+                    .as_slice()
+                    .iter()
+                    .map(|row| ProfileCapabilityRow {
+                        instance_id: row.instance_id.as_str().to_owned(),
+                        capability_id: row.capability_id.as_str().to_owned(),
+                        contract_ref: row.contract_ref.as_str().to_owned(),
+                        contract_fingerprint: row.contract_fingerprint.as_str().to_owned(),
+                    })
+                    .collect(),
+                artifacts: self
+                    .artifacts
+                    .as_slice()
+                    .iter()
+                    .map(|row| SetupArtifactAction {
+                        artifact: row.artifact.to_row(),
+                        action: row.action.into(),
+                    })
+                    .collect(),
+                reset_paths: self
+                    .reset_paths
+                    .as_slice()
+                    .iter()
+                    .map(|path| path.as_str().to_owned())
+                    .collect(),
+            },
+            status: self.readiness.into(),
+            reset_applied: self.reset_applied,
+        }
+    }
 }
 
 map_enum!(SetupMode => RepositorySetupModeV1 { Auto, Init, Refresh });
@@ -788,6 +864,324 @@ map_enum!(SetupRootAction => RepositorySetupRootActionV1 { Preserve, Create });
 map_enum!(SetupArtifactActionKind => RepositorySetupArtifactActionKindV1 {
     Preserve, AuthorRequired, OptionalAbsent, ConditionIndeterminate, Invalid
 });
+map_enum!(RepositorySetupModeV1 => SetupMode { Auto, Init, Refresh });
+map_enum!(RepositorySetupRootActionV1 => SetupRootAction { Preserve, Create });
+map_enum!(RepositorySetupArtifactActionKindV1 => SetupArtifactActionKind {
+    Preserve, AuthorRequired, OptionalAbsent, ConditionIndeterminate, Invalid
+});
+
+closed_enum!(RepositorySetupErrorKindV1 {
+    ProfileResolution,
+    ProfileDecision,
+    AlreadyInitialized,
+    MissingCanonicalRoot,
+    InvalidCanonicalRoot,
+    InvalidRequest,
+    MaterializerUnavailable,
+    RuntimeStatePlan,
+    RuntimeStateApply,
+    RepositoryIdentity,
+});
+closed_enum!(RepositorySetupErrorReasonV1 {
+    ShippedProfileUnavailable,
+    SelectedProfileDecisionInvalid,
+    UnresolvedMode,
+    InitRejectsRefreshFlags,
+    RootAlreadyInitialized,
+    RefreshRootMissing,
+    RootNotDirectory,
+    RootSymlinkRefused,
+    CanonicalRootInspectFailed,
+    CanonicalRootCreateFailed,
+    RewriteHasNoMaterializer,
+    RuntimeStateTargetUnsafe,
+    RuntimeStateResetPlanTooLarge,
+    RuntimeStateResetProjectionTooLarge,
+    RuntimeStateMutationFailed,
+    RepositoryAuthorityRecoveryBlocked,
+    RepositoryIdentityUnsafe,
+    RepositoryIdentityMismatch,
+    RepositoryIdentityEntropyUnavailable,
+    RepositoryIdentityPersistenceFailed,
+});
+closed_enum!(RepositorySetupErrorCodeV1 {
+    ShippedProfileUnavailable,
+    SelectedProfileDecisionInvalid,
+    UnresolvedMode,
+    InitRejectsRefreshFlags,
+    RootAlreadyInitialized,
+    RefreshRootMissing,
+    RootNotDirectory,
+    RootSymlinkRefused,
+    CanonicalRootInspectFailed,
+    CanonicalRootCreateFailed,
+    RewriteHasNoMaterializer,
+    RuntimeStateTargetUnsafe,
+    RuntimeStateResetPlanTooLarge,
+    RuntimeStateResetProjectionTooLarge,
+    RuntimeStateMutationFailed,
+    RepositoryAuthorityRecoveryBlocked,
+    RepositoryIdentityUnsafe,
+    RepositoryIdentityMismatch,
+    RepositoryIdentityEntropyUnavailable,
+    RepositoryIdentityPersistenceFailed,
+});
+
+map_enum!(SetupErrorKind => RepositorySetupErrorKindV1 {
+    ProfileResolution,
+    ProfileDecision,
+    AlreadyInitialized,
+    MissingCanonicalRoot,
+    InvalidCanonicalRoot,
+    InvalidRequest,
+    MaterializerUnavailable,
+    RuntimeStatePlan,
+    RuntimeStateApply,
+    RepositoryIdentity
+});
+map_enum!(RepositorySetupErrorKindV1 => SetupErrorKind {
+    ProfileResolution,
+    ProfileDecision,
+    AlreadyInitialized,
+    MissingCanonicalRoot,
+    InvalidCanonicalRoot,
+    InvalidRequest,
+    MaterializerUnavailable,
+    RuntimeStatePlan,
+    RuntimeStateApply,
+    RepositoryIdentity
+});
+map_enum!(SetupErrorReasonCode => RepositorySetupErrorReasonV1 {
+    ShippedProfileUnavailable,
+    SelectedProfileDecisionInvalid,
+    UnresolvedMode,
+    InitRejectsRefreshFlags,
+    RootAlreadyInitialized,
+    RefreshRootMissing,
+    RootNotDirectory,
+    RootSymlinkRefused,
+    CanonicalRootInspectFailed,
+    CanonicalRootCreateFailed,
+    RewriteHasNoMaterializer,
+    RuntimeStateTargetUnsafe,
+    RuntimeStateResetPlanTooLarge,
+    RuntimeStateResetProjectionTooLarge,
+    RuntimeStateMutationFailed,
+    RepositoryAuthorityRecoveryBlocked,
+    RepositoryIdentityUnsafe,
+    RepositoryIdentityMismatch,
+    RepositoryIdentityEntropyUnavailable,
+    RepositoryIdentityPersistenceFailed
+});
+map_enum!(RepositorySetupErrorReasonV1 => SetupErrorReasonCode {
+    ShippedProfileUnavailable,
+    SelectedProfileDecisionInvalid,
+    UnresolvedMode,
+    InitRejectsRefreshFlags,
+    RootAlreadyInitialized,
+    RefreshRootMissing,
+    RootNotDirectory,
+    RootSymlinkRefused,
+    CanonicalRootInspectFailed,
+    CanonicalRootCreateFailed,
+    RewriteHasNoMaterializer,
+    RuntimeStateTargetUnsafe,
+    RuntimeStateResetPlanTooLarge,
+    RuntimeStateResetProjectionTooLarge,
+    RuntimeStateMutationFailed,
+    RepositoryAuthorityRecoveryBlocked,
+    RepositoryIdentityUnsafe,
+    RepositoryIdentityMismatch,
+    RepositoryIdentityEntropyUnavailable,
+    RepositoryIdentityPersistenceFailed
+});
+map_enum!(SetupErrorCode => RepositorySetupErrorCodeV1 {
+    ShippedProfileUnavailable,
+    SelectedProfileDecisionInvalid,
+    UnresolvedMode,
+    InitRejectsRefreshFlags,
+    RootAlreadyInitialized,
+    RefreshRootMissing,
+    RootNotDirectory,
+    RootSymlinkRefused,
+    CanonicalRootInspectFailed,
+    CanonicalRootCreateFailed,
+    RewriteHasNoMaterializer,
+    RuntimeStateTargetUnsafe,
+    RuntimeStateResetPlanTooLarge,
+    RuntimeStateResetProjectionTooLarge,
+    RuntimeStateMutationFailed,
+    RepositoryAuthorityRecoveryBlocked,
+    RepositoryIdentityUnsafe,
+    RepositoryIdentityMismatch,
+    RepositoryIdentityEntropyUnavailable,
+    RepositoryIdentityPersistenceFailed
+});
+map_enum!(RepositorySetupErrorCodeV1 => SetupErrorCode {
+    ShippedProfileUnavailable,
+    SelectedProfileDecisionInvalid,
+    UnresolvedMode,
+    InitRejectsRefreshFlags,
+    RootAlreadyInitialized,
+    RefreshRootMissing,
+    RootNotDirectory,
+    RootSymlinkRefused,
+    CanonicalRootInspectFailed,
+    CanonicalRootCreateFailed,
+    RewriteHasNoMaterializer,
+    RuntimeStateTargetUnsafe,
+    RuntimeStateResetPlanTooLarge,
+    RuntimeStateResetProjectionTooLarge,
+    RuntimeStateMutationFailed,
+    RepositoryAuthorityRecoveryBlocked,
+    RepositoryIdentityUnsafe,
+    RepositoryIdentityMismatch,
+    RepositoryIdentityEntropyUnavailable,
+    RepositoryIdentityPersistenceFailed
+});
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct RepositorySetupBoundsV1 {
+    observed_count: SafeU64,
+    limit: SafeU64,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct RepositorySetupSizeBoundsV1 {
+    observed_bytes: SafeU64,
+    limit_bytes: SafeU64,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(tag = "details_kind", rename_all = "snake_case", deny_unknown_fields)]
+pub enum RepositorySetupDetailsV1 {
+    Readiness {
+        result: Box<RepositorySetupResultV1>,
+    },
+    SetupFailure {
+        code: RepositorySetupErrorCodeV1,
+        failure_kind: RepositorySetupErrorKindV1,
+        reason: RepositorySetupErrorReasonV1,
+        repo_relative_path: Option<BoundedString<4096>>,
+        bounds: Option<RepositorySetupBoundsV1>,
+        size_bounds: Option<RepositorySetupSizeBoundsV1>,
+    },
+}
+
+impl RepositorySetupDetailsV1 {
+    fn from_error(error: &SetupError) -> Result<Self, ContractError> {
+        let bounds = match (error.observed_count(), error.limit()) {
+            (Some(observed_count), Some(limit)) => Some(RepositorySetupBoundsV1 {
+                observed_count: SafeU64::new(
+                    u64::try_from(observed_count).map_err(|_| ContractError::InvalidNumber)?,
+                )?,
+                limit: SafeU64::new(
+                    u64::try_from(limit).map_err(|_| ContractError::InvalidNumber)?,
+                )?,
+            }),
+            (None, None) => None,
+            _ => return Err(ContractError::InvalidInvariant),
+        };
+        let size_bounds = match (error.observed_bytes(), error.limit_bytes()) {
+            (Some(observed_bytes), Some(limit_bytes)) => Some(RepositorySetupSizeBoundsV1 {
+                observed_bytes: SafeU64::new(
+                    u64::try_from(observed_bytes).map_err(|_| ContractError::InvalidNumber)?,
+                )?,
+                limit_bytes: SafeU64::new(
+                    u64::try_from(limit_bytes).map_err(|_| ContractError::InvalidNumber)?,
+                )?,
+            }),
+            (None, None) => None,
+            _ => return Err(ContractError::InvalidInvariant),
+        };
+        Ok(Self::SetupFailure {
+            code: error.code().into(),
+            failure_kind: error.kind().into(),
+            reason: error.reason_code().into(),
+            repo_relative_path: optional_bounded(error.repo_relative_path())?,
+            bounds,
+            size_bounds,
+        })
+    }
+
+    fn to_error(&self) -> Result<Option<SetupError>, ContractError> {
+        let Self::SetupFailure {
+            code,
+            failure_kind,
+            reason,
+            repo_relative_path,
+            bounds,
+            size_bounds,
+        } = self
+        else {
+            return Ok(None);
+        };
+        let code: SetupErrorCode = (*code).into();
+        let error = if code == SetupErrorCode::RuntimeStateResetPlanTooLarge {
+            let bounds = bounds.as_ref().ok_or(ContractError::InvalidInvariant)?;
+            if size_bounds.is_some()
+                || bounds.limit.get() != 128
+                || bounds.observed_count.get() <= bounds.limit.get()
+            {
+                return Err(ContractError::InvalidInvariant);
+            }
+            SetupError::runtime_state_reset_plan_too_large(
+                usize::try_from(bounds.observed_count.get())
+                    .map_err(|_| ContractError::InvalidNumber)?,
+            )
+        } else if code == SetupErrorCode::RuntimeStateResetProjectionTooLarge {
+            let size_bounds = size_bounds
+                .as_ref()
+                .ok_or(ContractError::InvalidInvariant)?;
+            if bounds.is_some()
+                || size_bounds.limit_bytes.get() != 1_048_576
+                || size_bounds.observed_bytes.get() <= size_bounds.limit_bytes.get()
+            {
+                return Err(ContractError::InvalidInvariant);
+            }
+            SetupError::runtime_state_reset_projection_too_large(
+                usize::try_from(size_bounds.observed_bytes.get())
+                    .map_err(|_| ContractError::InvalidNumber)?,
+            )
+        } else {
+            if bounds.is_some() || size_bounds.is_some() {
+                return Err(ContractError::InvalidInvariant);
+            }
+            SetupError::from_code(code)
+        };
+        if error.kind() != (*failure_kind).into()
+            || error.reason_code() != (*reason).into()
+            || error.repo_relative_path() != repo_relative_path.as_ref().map(BoundedString::as_str)
+        {
+            return Err(ContractError::InvalidInvariant);
+        }
+        Ok(Some(error))
+    }
+}
+
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "snake_case")]
+enum RepositorySetupResetApplicationV1 {
+    Sequential,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(tag = "effect_kind", rename_all = "snake_case", deny_unknown_fields)]
+enum RepositorySetupReceiptConditionV1 {
+    RootCreated {
+        repo_relative_path: BoundedString<4096>,
+    },
+    RuntimeStateReset {
+        application: RepositorySetupResetApplicationV1,
+        removed_paths: BoundedVec<BoundedString<4096>, 128>,
+    },
+    RepositoryIdentityCreated {
+        repo_relative_path: BoundedString<4096>,
+        repository_identity_fingerprint: Fingerprint,
+    },
+}
 
 closed_enum!(AuthorCharterOperationV1 {
     Author,
@@ -1296,6 +1690,57 @@ impl UseCaseKind {
         limits: &ContractLimits,
     ) -> Result<(), ContractError> {
         match self {
+            Self::RepositorySetup
+                if problem.subject() == &binding(SETUP_USE_CASE_REF)?
+                    && problem.details_schema() == &binding(SETUP_DETAILS_REF)?
+                    && problem.recheck().is_none_or(|condition| {
+                        condition.condition_schema() == problem.details_schema()
+                            && condition.condition() == problem.details()
+                    }) =>
+            {
+                let details: RepositorySetupDetailsV1 =
+                    admit_contract_value(problem.details(), limits)?;
+                match details {
+                    RepositorySetupDetailsV1::Readiness { result } => {
+                        if result.readiness == RepositoryReadinessStatusV1::Ready
+                            || problem.problem_id() != problem.code()
+                            || problem.code().as_str() != setup_readiness_code(result.readiness)?
+                            || problem.category() != ProblemCategory::Prerequisite
+                            || problem.retry() != RetryDirective::AfterRecheck
+                            || problem.recheck().is_none()
+                            || problem.rule().is_some()
+                            || problem.correlation_ref().is_some()
+                            || !problem.evidence().as_slice().is_empty()
+                        {
+                            return Err(ContractError::InvalidInvariant);
+                        }
+                    }
+                    details @ RepositorySetupDetailsV1::SetupFailure { .. } => {
+                        let error = details.to_error()?.ok_or(ContractError::InvalidInvariant)?;
+                        let (status, category, retry, code) = setup_error_disposition(error.code());
+                        if problem.problem_id() != problem.code()
+                            || problem.code().as_str() != code
+                            || problem.category() != category
+                            || problem.retry() != retry
+                            || !problem.evidence().as_slice().is_empty()
+                            || (status == TerminalStatus::Blocked) != problem.recheck().is_some()
+                            || (status == TerminalStatus::Refused)
+                                != problem.rule().is_some_and(|rule| {
+                                    binding(SETUP_RULE_REF).is_ok_and(|expected| rule == &expected)
+                                })
+                            || (status == TerminalStatus::Error)
+                                != problem.correlation_ref().is_some_and(|correlation| {
+                                    setup_correlation_ref(code).is_ok_and(|expected| {
+                                        correlation.value() == expected.value()
+                                    })
+                                })
+                        {
+                            return Err(ContractError::InvalidInvariant);
+                        }
+                    }
+                }
+                Ok(())
+            }
             Self::RepositoryDoctor
                 if problem.subject() == &binding(DOCTOR_USE_CASE_REF)?
                     && problem.details_schema() == &binding(DOCTOR_DETAILS_REF)?
@@ -1309,6 +1754,262 @@ impl UseCaseKind {
             _ => Err(ContractError::InvalidInvariant),
         }
     }
+
+    fn admit_terminal(
+        self,
+        terminal: &TerminalFields<ContractValue>,
+        next_actions: &BoundedVec<NextAction, 128>,
+        limits: &ContractLimits,
+    ) -> Result<(), ContractError> {
+        if self != Self::RepositorySetup {
+            return Ok(());
+        }
+        if terminal.status() == TerminalStatus::Ok {
+            return next_actions
+                .as_slice()
+                .is_empty()
+                .then_some(())
+                .ok_or(ContractError::InvalidInvariant);
+        }
+        let problems = match terminal.status() {
+            TerminalStatus::Blocked => terminal.blockers(),
+            TerminalStatus::Refused => terminal.refusals(),
+            TerminalStatus::Error => terminal.errors(),
+            TerminalStatus::Ok => return Ok(()),
+        };
+        let [problem] = problems else {
+            return Err(ContractError::InvalidInvariant);
+        };
+        let details: RepositorySetupDetailsV1 = admit_contract_value(problem.details(), limits)?;
+        match details {
+            RepositorySetupDetailsV1::Readiness { result } => {
+                if terminal.status() != TerminalStatus::Blocked {
+                    return Err(ContractError::InvalidInvariant);
+                }
+                let expected = setup_readiness_next_actions(
+                    result.readiness,
+                    &binding(SETUP_USE_CASE_REF)?,
+                    &binding(SETUP_DETAILS_REF)?,
+                    problem.details(),
+                    limits,
+                )?;
+                if next_actions != &expected {
+                    return Err(ContractError::InvalidInvariant);
+                }
+            }
+            details @ RepositorySetupDetailsV1::SetupFailure { .. } => {
+                let error = details.to_error()?.ok_or(ContractError::InvalidInvariant)?;
+                let (status, _, _, _) = setup_error_disposition(error.code());
+                if terminal.status() != status || !next_actions.as_slice().is_empty() {
+                    return Err(ContractError::InvalidInvariant);
+                }
+            }
+        }
+        Ok(())
+    }
+
+    fn admit_receipts(
+        self,
+        terminal: &TerminalFields<ContractValue>,
+        receipts: &BoundedVec<WriteReceipt, 128>,
+        limits: &ContractLimits,
+    ) -> Result<(), ContractError> {
+        if self != Self::RepositorySetup {
+            return Ok(());
+        }
+        let (result, error) = if terminal.status() == TerminalStatus::Ok {
+            let data = terminal.data().ok_or(ContractError::InvalidInvariant)?;
+            (
+                Some(admit_contract_value::<RepositorySetupResultV1>(
+                    data, limits,
+                )?),
+                None,
+            )
+        } else {
+            let problems = match terminal.status() {
+                TerminalStatus::Blocked => terminal.blockers(),
+                TerminalStatus::Refused => terminal.refusals(),
+                TerminalStatus::Error => terminal.errors(),
+                TerminalStatus::Ok => unreachable!(),
+            };
+            let [problem] = problems else {
+                return Err(ContractError::InvalidInvariant);
+            };
+            match admit_contract_value::<RepositorySetupDetailsV1>(problem.details(), limits)? {
+                RepositorySetupDetailsV1::Readiness { result } => (Some(*result), None),
+                details @ RepositorySetupDetailsV1::SetupFailure { .. } => (
+                    None,
+                    Some(details.to_error()?.ok_or(ContractError::InvalidInvariant)?),
+                ),
+            }
+        };
+
+        let mut previous_ordinal = None;
+        let mut saw_root_receipt = false;
+        let mut saw_reset_receipt = false;
+        for receipt in receipts.as_slice() {
+            let reference = receipt.record().reference().as_str();
+            let (ordinal, record_kind, atomic_group) = match reference {
+                SETUP_ROOT_RECORD_REF => {
+                    (0, "repository_setup_root", "repository_setup_root_create")
+                }
+                SETUP_RESET_RECORD_REF => (
+                    1,
+                    "repository_setup_runtime_state_reset",
+                    "repository_setup_sequential_reset",
+                ),
+                SETUP_IDENTITY_RECORD_REF => (
+                    2,
+                    "repository_setup_identity",
+                    "repository_setup_identity_create",
+                ),
+                _ => return Err(ContractError::InvalidInvariant),
+            };
+            if previous_ordinal.is_some_and(|previous| ordinal <= previous)
+                || receipt.record() != &binding(reference)?
+                || receipt.record_kind().as_str() != record_kind
+                || receipt.authority_class().as_str() != "sdk_composition"
+                || receipt.atomic_group().as_str() != atomic_group
+            {
+                return Err(ContractError::InvalidInvariant);
+            }
+            previous_ordinal = Some(ordinal);
+
+            let condition: RepositorySetupReceiptConditionV1 =
+                admit_contract_value(receipt.condition(), limits)?;
+            match (reference, condition) {
+                (
+                    SETUP_ROOT_RECORD_REF,
+                    RepositorySetupReceiptConditionV1::RootCreated { repo_relative_path },
+                ) if repo_relative_path.as_str() == ".handbook"
+                    && setup_root_receipt_is_compatible(result.as_ref(), error.as_ref()) =>
+                {
+                    saw_root_receipt = true;
+                }
+                (
+                    SETUP_RESET_RECORD_REF,
+                    RepositorySetupReceiptConditionV1::RuntimeStateReset {
+                        application: RepositorySetupResetApplicationV1::Sequential,
+                        removed_paths,
+                    },
+                ) if setup_reset_receipt_is_compatible(
+                    removed_paths.as_slice(),
+                    result.as_ref(),
+                    error.as_ref(),
+                ) =>
+                {
+                    saw_reset_receipt = true;
+                }
+                (
+                    SETUP_IDENTITY_RECORD_REF,
+                    RepositorySetupReceiptConditionV1::RepositoryIdentityCreated {
+                        repo_relative_path,
+                        ..
+                    },
+                ) if repo_relative_path.as_str()
+                    == handbook_engine::REPOSITORY_IDENTITY_REPO_PATH
+                    && setup_identity_receipt_is_compatible(result.as_ref(), error.as_ref()) => {}
+                _ => return Err(ContractError::InvalidInvariant),
+            }
+        }
+        if let Some(result) = result {
+            let root_receipt_required = result.root_action == RepositorySetupRootActionV1::Create;
+            let reset_receipt_required =
+                result.reset_applied && !result.reset_paths.as_slice().is_empty();
+            if saw_root_receipt != root_receipt_required
+                || saw_reset_receipt != reset_receipt_required
+            {
+                return Err(ContractError::InvalidInvariant);
+            }
+        }
+        Ok(())
+    }
+}
+
+fn setup_root_receipt_is_compatible(
+    result: Option<&RepositorySetupResultV1>,
+    error: Option<&SetupError>,
+) -> bool {
+    result.is_some_and(|result| result.root_action == RepositorySetupRootActionV1::Create)
+        || error.is_some_and(|error| {
+            matches!(
+                error.code(),
+                SetupErrorCode::RepositoryAuthorityRecoveryBlocked
+                    | SetupErrorCode::RepositoryIdentityUnsafe
+                    | SetupErrorCode::RepositoryIdentityMismatch
+                    | SetupErrorCode::RepositoryIdentityEntropyUnavailable
+                    | SetupErrorCode::RepositoryIdentityPersistenceFailed
+            )
+        })
+}
+
+fn setup_reset_receipt_is_compatible(
+    removed_paths: &[BoundedString<4096>],
+    result: Option<&RepositorySetupResultV1>,
+    error: Option<&SetupError>,
+) -> bool {
+    if removed_paths.is_empty()
+        || removed_paths.iter().any(|path| {
+            !setup_reset_path_is_normalized(path.as_str())
+                || removed_paths
+                    .iter()
+                    .filter(|candidate| candidate == &path)
+                    .count()
+                    != 1
+        })
+    {
+        return false;
+    }
+    if let Some(result) = result {
+        if !result.reset_applied || result.reset_paths.as_slice().len() != removed_paths.len() {
+            return false;
+        }
+        let mut expected = result
+            .reset_paths
+            .as_slice()
+            .iter()
+            .map(BoundedString::as_str)
+            .collect::<Vec<_>>();
+        let mut observed = removed_paths
+            .iter()
+            .map(BoundedString::as_str)
+            .collect::<Vec<_>>();
+        expected.sort_unstable();
+        observed.sort_unstable();
+        return expected == observed;
+    }
+    error.is_some_and(|error| {
+        matches!(
+            error.code(),
+            SetupErrorCode::RuntimeStateMutationFailed
+                | SetupErrorCode::RepositoryAuthorityRecoveryBlocked
+                | SetupErrorCode::RepositoryIdentityUnsafe
+                | SetupErrorCode::RepositoryIdentityMismatch
+                | SetupErrorCode::RepositoryIdentityEntropyUnavailable
+                | SetupErrorCode::RepositoryIdentityPersistenceFailed
+        )
+    })
+}
+
+fn setup_reset_path_is_normalized(path: &str) -> bool {
+    path.strip_prefix(".handbook/state/").is_some_and(|tail| {
+        !tail.is_empty()
+            && !tail.contains('\\')
+            && !tail.chars().any(char::is_control)
+            && tail
+                .split('/')
+                .all(|segment| !segment.is_empty() && !matches!(segment, "." | ".."))
+    })
+}
+
+fn setup_identity_receipt_is_compatible(
+    result: Option<&RepositorySetupResultV1>,
+    error: Option<&SetupError>,
+) -> bool {
+    result.is_some()
+        || error.is_some_and(|error| {
+            error.code() == SetupErrorCode::RepositoryIdentityPersistenceFailed
+        })
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
@@ -1325,7 +2026,410 @@ pub struct UseCaseResponseV1 {
     response_fingerprint: Fingerprint,
 }
 
+fn repository_setup_receipts(
+    effects: &SetupExecutionEffects,
+    limits: &ContractLimits,
+) -> Result<BoundedVec<WriteReceipt, 128>, ContractError> {
+    let mut receipts = Vec::new();
+    if effects.root_created() {
+        receipts.push(repository_setup_receipt(
+            "repository_setup_root",
+            SETUP_ROOT_RECORD_REF,
+            &RepositorySetupReceiptConditionV1::RootCreated {
+                repo_relative_path: bounded(".handbook")?,
+            },
+            "repository_setup_root_create",
+            limits,
+        )?);
+    }
+    if !effects.removed_runtime_state_paths().is_empty() {
+        receipts.push(repository_setup_receipt(
+            "repository_setup_runtime_state_reset",
+            SETUP_RESET_RECORD_REF,
+            &RepositorySetupReceiptConditionV1::RuntimeStateReset {
+                application: RepositorySetupResetApplicationV1::Sequential,
+                removed_paths: bounded_vec(effects.removed_runtime_state_paths())?,
+            },
+            "repository_setup_sequential_reset",
+            limits,
+        )?);
+    }
+    if let Some(repository_identity_fingerprint) = effects.repository_identity_created() {
+        receipts.push(repository_setup_receipt(
+            "repository_setup_identity",
+            SETUP_IDENTITY_RECORD_REF,
+            &RepositorySetupReceiptConditionV1::RepositoryIdentityCreated {
+                repo_relative_path: bounded(handbook_engine::REPOSITORY_IDENTITY_REPO_PATH)?,
+                repository_identity_fingerprint: Fingerprint::parse(
+                    repository_identity_fingerprint,
+                )?,
+            },
+            "repository_setup_identity_create",
+            limits,
+        )?);
+    }
+    BoundedVec::new(receipts)
+}
+
+fn repository_setup_receipt(
+    record_kind: &str,
+    record_ref: &str,
+    condition: &RepositorySetupReceiptConditionV1,
+    atomic_group: &str,
+    limits: &ContractLimits,
+) -> Result<WriteReceipt, ContractError> {
+    WriteReceipt::new(
+        bounded(record_kind)?,
+        binding(record_ref)?,
+        bounded("sdk_composition")?,
+        contract_value(condition, limits)?,
+        bounded(atomic_group)?,
+        limits,
+    )
+}
+
+fn empty_bounded<T>() -> Result<BoundedVec<T, 128>, ContractError> {
+    BoundedVec::new(Vec::new())
+}
+
+fn setup_readiness_code(
+    status: RepositoryReadinessStatusV1,
+) -> Result<&'static str, ContractError> {
+    match status {
+        RepositoryReadinessStatusV1::ActionRequired => Ok("repository.action_required"),
+        RepositoryReadinessStatusV1::Indeterminate => Ok("repository.readiness_indeterminate"),
+        RepositoryReadinessStatusV1::Invalid => Ok("repository.readiness_invalid"),
+        RepositoryReadinessStatusV1::Ready => Err(ContractError::InvalidInvariant),
+    }
+}
+
+fn setup_readiness_next_actions(
+    status: RepositoryReadinessStatusV1,
+    use_case: &ExactBinding,
+    details_schema: &ExactBinding,
+    details: &ContractValue,
+    limits: &ContractLimits,
+) -> Result<BoundedVec<NextAction, 128>, ContractError> {
+    let action = match status {
+        RepositoryReadinessStatusV1::Ready | RepositoryReadinessStatusV1::Indeterminate => None,
+        RepositoryReadinessStatusV1::ActionRequired => Some((
+            "repository.resolve_setup_actions",
+            "Resolve repository readiness actions and rerun setup",
+        )),
+        RepositoryReadinessStatusV1::Invalid => Some((
+            "repository.repair_readiness",
+            "Repair invalid repository inputs and rerun setup",
+        )),
+    };
+    BoundedVec::new(
+        action
+            .map(|(action_id, display_label)| {
+                NextAction::new(
+                    bounded(action_id)?,
+                    NextActionKind::ChangeRequest,
+                    use_case.clone(),
+                    details_schema.clone(),
+                    details.clone(),
+                    Some(bounded(display_label)?),
+                    limits,
+                )
+            })
+            .into_iter()
+            .collect::<Result<Vec<_>, ContractError>>()?,
+    )
+}
+
+fn setup_error_disposition(
+    code: SetupErrorCode,
+) -> (
+    TerminalStatus,
+    ProblemCategory,
+    RetryDirective,
+    &'static str,
+) {
+    match code {
+        SetupErrorCode::ShippedProfileUnavailable => (
+            TerminalStatus::Blocked,
+            ProblemCategory::Prerequisite,
+            RetryDirective::AfterRecheck,
+            "repository.shipped_profile_unavailable",
+        ),
+        SetupErrorCode::SelectedProfileDecisionInvalid => (
+            TerminalStatus::Refused,
+            ProblemCategory::Precondition,
+            RetryDirective::AfterRequestChange,
+            "repository.selected_profile_decision_invalid",
+        ),
+        SetupErrorCode::UnresolvedMode => (
+            TerminalStatus::Refused,
+            ProblemCategory::Schema,
+            RetryDirective::AfterRequestChange,
+            "setup.unresolved_mode",
+        ),
+        SetupErrorCode::InitRejectsRefreshFlags => (
+            TerminalStatus::Refused,
+            ProblemCategory::Schema,
+            RetryDirective::AfterRequestChange,
+            "setup.init_rejects_refresh_flags",
+        ),
+        SetupErrorCode::RootAlreadyInitialized => (
+            TerminalStatus::Refused,
+            ProblemCategory::Precondition,
+            RetryDirective::AfterRequestChange,
+            "repository.root_already_initialized",
+        ),
+        SetupErrorCode::RefreshRootMissing => (
+            TerminalStatus::Blocked,
+            ProblemCategory::Prerequisite,
+            RetryDirective::AfterRecheck,
+            "repository.root_missing",
+        ),
+        SetupErrorCode::RootNotDirectory => (
+            TerminalStatus::Refused,
+            ProblemCategory::Safety,
+            RetryDirective::Never,
+            "repository.root_not_directory",
+        ),
+        SetupErrorCode::RootSymlinkRefused => (
+            TerminalStatus::Refused,
+            ProblemCategory::Safety,
+            RetryDirective::Never,
+            "repository.root_symlink_refused",
+        ),
+        SetupErrorCode::CanonicalRootInspectFailed => (
+            TerminalStatus::Error,
+            ProblemCategory::Implementation,
+            RetryDirective::Never,
+            "repository.root_inspect_failed",
+        ),
+        SetupErrorCode::CanonicalRootCreateFailed => (
+            TerminalStatus::Error,
+            ProblemCategory::Implementation,
+            RetryDirective::Never,
+            "repository.root_create_failed",
+        ),
+        SetupErrorCode::RewriteHasNoMaterializer => (
+            TerminalStatus::Refused,
+            ProblemCategory::Capability,
+            RetryDirective::AfterRequestChange,
+            "setup.rewrite_materializer_unavailable",
+        ),
+        SetupErrorCode::RuntimeStateTargetUnsafe => (
+            TerminalStatus::Refused,
+            ProblemCategory::Safety,
+            RetryDirective::Never,
+            "repository.runtime_state_target_unsafe",
+        ),
+        SetupErrorCode::RuntimeStateResetPlanTooLarge => (
+            TerminalStatus::Refused,
+            ProblemCategory::Schema,
+            RetryDirective::AfterRequestChange,
+            "repository.runtime_state_reset_plan_too_large",
+        ),
+        SetupErrorCode::RuntimeStateResetProjectionTooLarge => (
+            TerminalStatus::Refused,
+            ProblemCategory::Schema,
+            RetryDirective::AfterRequestChange,
+            "repository.runtime_state_reset_projection_too_large",
+        ),
+        SetupErrorCode::RuntimeStateMutationFailed => (
+            TerminalStatus::Error,
+            ProblemCategory::Implementation,
+            RetryDirective::Transient,
+            "repository.runtime_state_mutation_failed",
+        ),
+        SetupErrorCode::RepositoryAuthorityRecoveryBlocked => (
+            TerminalStatus::Blocked,
+            ProblemCategory::Prerequisite,
+            RetryDirective::AfterRecheck,
+            "repository.authority_recovery_blocked",
+        ),
+        SetupErrorCode::RepositoryIdentityUnsafe => (
+            TerminalStatus::Refused,
+            ProblemCategory::Safety,
+            RetryDirective::Never,
+            "repository.identity_unsafe",
+        ),
+        SetupErrorCode::RepositoryIdentityMismatch => (
+            TerminalStatus::Refused,
+            ProblemCategory::Authority,
+            RetryDirective::AfterAuthorityChange,
+            "repository.identity_mismatch",
+        ),
+        SetupErrorCode::RepositoryIdentityEntropyUnavailable => (
+            TerminalStatus::Error,
+            ProblemCategory::Implementation,
+            RetryDirective::Transient,
+            "repository.identity_entropy_unavailable",
+        ),
+        SetupErrorCode::RepositoryIdentityPersistenceFailed => (
+            TerminalStatus::Error,
+            ProblemCategory::Implementation,
+            RetryDirective::Transient,
+            "repository.identity_persistence_failed",
+        ),
+    }
+}
+
+fn setup_correlation_ref(code: &str) -> Result<CorrelationRef, ContractError> {
+    let fingerprint = sha256_fingerprint(code.as_bytes());
+    CorrelationRef::new(bounded(&format!("corr_{}", &fingerprint.as_str()[7..]))?)
+}
+
+pub(crate) fn measure_repository_setup_invocation(
+    execution: &SetupExecutionResult,
+) -> Result<usize, ContractError> {
+    let measurement_limits = ContractLimits::setup_measurement();
+    let use_case = UseCaseResponseV1::repository_setup_execution(execution, &measurement_limits)?;
+    let invocation = InvocationResponseV1::use_case(use_case, &measurement_limits)?;
+    Ok(canonical_json_bytes(&invocation, &measurement_limits)?.len())
+}
+
 impl UseCaseResponseV1 {
+    pub fn repository_setup(
+        outcome: &SetupOutcome,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        let execution =
+            SetupExecutionResult::new(Ok(outcome.clone()), SetupExecutionEffects::default());
+        Self::repository_setup_execution(&execution, limits)
+    }
+
+    pub(crate) fn repository_setup_execution(
+        execution: &SetupExecutionResult,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        let use_case = binding(SETUP_USE_CASE_REF)?;
+        let result_schema = binding(SETUP_RESULT_REF)?;
+        let details_schema = binding(SETUP_DETAILS_REF)?;
+        let receipts = repository_setup_receipts(execution.effects(), limits)?;
+        match execution.result() {
+            Ok(outcome) => {
+                let result = RepositorySetupResultV1::from_outcome(outcome)?;
+                if result.readiness == RepositoryReadinessStatusV1::Ready {
+                    return Self::success(
+                        UseCaseKind::RepositorySetup,
+                        &result,
+                        receipts,
+                        empty_bounded()?,
+                        empty_bounded()?,
+                        limits,
+                    );
+                }
+                let details = contract_value(
+                    &RepositorySetupDetailsV1::Readiness {
+                        result: Box::new(result.clone()),
+                    },
+                    limits,
+                )?;
+                let code = setup_readiness_code(result.readiness)?;
+                let recheck =
+                    RecheckCondition::new(details_schema.clone(), details.clone(), limits)?;
+                let problem = Problem::new(
+                    bounded(code)?,
+                    bounded(code)?,
+                    ProblemCategory::Prerequisite,
+                    use_case.clone(),
+                    None,
+                    details_schema.clone(),
+                    details.clone(),
+                    empty_bounded()?,
+                    RetryDirective::AfterRecheck,
+                    Some(recheck),
+                    None,
+                    limits,
+                )?;
+                let next_actions = setup_readiness_next_actions(
+                    result.readiness,
+                    &use_case,
+                    &details_schema,
+                    &details,
+                    limits,
+                )?;
+                Self::from_parts(
+                    binding(USE_CASE_RESPONSE_REF)?,
+                    use_case,
+                    result_schema,
+                    TerminalFields::new(
+                        TerminalStatus::Blocked,
+                        None,
+                        BoundedVec::new(vec![problem])?,
+                        empty_bounded()?,
+                        empty_bounded()?,
+                    )?,
+                    receipts,
+                    empty_bounded()?,
+                    next_actions,
+                    limits,
+                )
+            }
+            Err(error) => {
+                let details =
+                    contract_value(&RepositorySetupDetailsV1::from_error(error)?, limits)?;
+                let (status, category, retry, code) = setup_error_disposition(error.code());
+                let recheck = (status == TerminalStatus::Blocked)
+                    .then(|| RecheckCondition::new(details_schema.clone(), details.clone(), limits))
+                    .transpose()?;
+                let rule = (status == TerminalStatus::Refused)
+                    .then(|| binding(SETUP_RULE_REF))
+                    .transpose()?;
+                let correlation_ref = if status == TerminalStatus::Error {
+                    Some(setup_correlation_ref(code)?)
+                } else {
+                    None
+                };
+                let problem = Problem::new(
+                    bounded(code)?,
+                    bounded(code)?,
+                    category,
+                    use_case.clone(),
+                    rule,
+                    details_schema,
+                    details,
+                    empty_bounded()?,
+                    retry,
+                    recheck,
+                    correlation_ref,
+                    limits,
+                )?;
+                let terminal = match status {
+                    TerminalStatus::Blocked => TerminalFields::new(
+                        status,
+                        None,
+                        BoundedVec::new(vec![problem])?,
+                        empty_bounded()?,
+                        empty_bounded()?,
+                    )?,
+                    TerminalStatus::Refused => TerminalFields::new(
+                        status,
+                        None,
+                        empty_bounded()?,
+                        BoundedVec::new(vec![problem])?,
+                        empty_bounded()?,
+                    )?,
+                    TerminalStatus::Error => TerminalFields::new(
+                        status,
+                        None,
+                        empty_bounded()?,
+                        empty_bounded()?,
+                        BoundedVec::new(vec![problem])?,
+                    )?,
+                    TerminalStatus::Ok => return Err(ContractError::InvalidInvariant),
+                };
+                Self::from_parts(
+                    binding(USE_CASE_RESPONSE_REF)?,
+                    use_case,
+                    result_schema,
+                    terminal,
+                    receipts,
+                    empty_bounded()?,
+                    empty_bounded()?,
+                    limits,
+                )
+            }
+        }
+    }
+
     pub fn repository_setup_success(
         result: RepositorySetupResultV1,
         receipts: BoundedVec<WriteReceipt, 128>,
@@ -1658,6 +2762,8 @@ impl UseCaseResponseV1 {
         {
             kind.admit_problem_details(problem, limits)?;
         }
+        kind.admit_terminal(&terminal, &next_actions, limits)?;
+        kind.admit_receipts(&terminal, &receipts, limits)?;
         let result_fingerprint = canonical_fingerprint(
             &UseCaseResultPreimage {
                 use_case: &use_case,
@@ -1749,6 +2855,33 @@ impl UseCaseResponseV1 {
                 failure_kind,
                 reason,
             } => Ok(Some(Err(doctor_error(failure_kind, reason)?))),
+        }
+    }
+
+    pub fn repository_setup_outcome(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<Result<SetupOutcome, SetupError>>, ContractError> {
+        if self.use_case.reference().as_str() != SETUP_USE_CASE_REF {
+            return Ok(None);
+        }
+        if self.status() == TerminalStatus::Ok {
+            let data = self
+                .terminal
+                .data()
+                .ok_or(ContractError::InvalidInvariant)?;
+            let result: RepositorySetupResultV1 = admit_contract_value(data, limits)?;
+            return Ok(Some(Ok(result.to_outcome())));
+        }
+        let [problem] = self.terminal_problems() else {
+            return Err(ContractError::InvalidInvariant);
+        };
+        let details: RepositorySetupDetailsV1 = admit_contract_value(problem.details(), limits)?;
+        match details {
+            RepositorySetupDetailsV1::Readiness { result } => Ok(Some(Ok(result.to_outcome()))),
+            details @ RepositorySetupDetailsV1::SetupFailure { .. } => Ok(Some(Err(details
+                .to_error()?
+                .ok_or(ContractError::InvalidInvariant)?))),
         }
     }
 
@@ -2297,6 +3430,18 @@ impl InvocationResponseV1 {
             _ => Ok(None),
         }
     }
+
+    pub fn repository_setup_outcome(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<Result<SetupOutcome, SetupError>>, ContractError> {
+        match &self.response {
+            InvocationResponseBodyV1::UseCase(response) => {
+                response.repository_setup_outcome(limits)
+            }
+            _ => Ok(None),
+        }
+    }
 }
 
 #[derive(Serialize)]
@@ -2337,9 +3482,474 @@ mod tests {
     use super::*;
     use crate::charter_product::{ApproverAdminLegacyFields, ApproverLegacyProjection};
     use std::collections::BTreeMap;
+    use std::fs;
+    use tempfile::tempdir;
 
     fn fingerprint(label: &str) -> String {
         sha256_fingerprint(label.as_bytes()).as_str().to_owned()
+    }
+
+    fn setup_projection_execution_with_fill(path_bytes: usize, fill: char) -> SetupExecutionResult {
+        let reset_paths = (0..128)
+            .map(|index| {
+                let prefix = format!(".handbook/state/{index:03}/");
+                assert!(path_bytes >= prefix.len());
+                format!(
+                    "{prefix}{}",
+                    fill.to_string().repeat(path_bytes - prefix.len())
+                )
+            })
+            .collect::<Vec<_>>();
+        SetupExecutionResult::new(
+            Ok(SetupOutcome {
+                plan: SetupPlan {
+                    requested_mode: SetupMode::Refresh,
+                    resolved_mode: SetupMode::Refresh,
+                    root_action: SetupRootAction::Create,
+                    profile_ref: "example.profile@1.0.0".to_owned(),
+                    profile_fingerprint: fingerprint("profile"),
+                    stable_role_registry_ref: "example.roles@1.0.0".to_owned(),
+                    stable_role_registry_fingerprint: fingerprint("roles"),
+                    conditions: Vec::new(),
+                    capabilities: Vec::new(),
+                    artifacts: Vec::new(),
+                    reset_paths: reset_paths.clone(),
+                },
+                status: RepositoryReadinessStatus::ActionRequired,
+                reset_applied: true,
+            }),
+            SetupExecutionEffects::for_projection_test(reset_paths),
+        )
+    }
+
+    fn setup_projection_execution(path_bytes: usize) -> SetupExecutionResult {
+        setup_projection_execution_with_fill(path_bytes, 'x')
+    }
+
+    #[test]
+    fn setup_outer_projection_measurement_closes_the_one_mib_boundary() {
+        let public_limits = ContractLimits::packet0();
+        let mut lower: usize = 24;
+        let mut upper: usize = 4096;
+        while lower < upper {
+            let candidate = lower + (upper - lower).div_ceil(2);
+            if measure_repository_setup_invocation(&setup_projection_execution(candidate)).unwrap()
+                <= public_limits.document_bytes()
+            {
+                lower = candidate;
+            } else {
+                upper = candidate - 1;
+            }
+        }
+
+        let in_bound_execution = setup_projection_execution(lower);
+        let in_bound_bytes = measure_repository_setup_invocation(&in_bound_execution).unwrap();
+        let out_of_bound_execution = setup_projection_execution(lower + 1);
+        let out_of_bound_bytes =
+            measure_repository_setup_invocation(&out_of_bound_execution).unwrap();
+        assert!(in_bound_bytes <= public_limits.document_bytes());
+        assert!(out_of_bound_bytes > public_limits.document_bytes());
+
+        let use_case =
+            UseCaseResponseV1::repository_setup_execution(&in_bound_execution, &public_limits)
+                .unwrap();
+        let invocation = InvocationResponseV1::use_case(use_case, &public_limits).unwrap();
+        assert_eq!(
+            canonical_json_bytes(&invocation, &public_limits)
+                .unwrap()
+                .len(),
+            in_bound_bytes
+        );
+    }
+
+    #[test]
+    fn setup_measurement_ceiling_admits_maximum_quote_heavy_public_paths() {
+        let observed =
+            measure_repository_setup_invocation(&setup_projection_execution_with_fill(4096, '"'))
+                .unwrap();
+
+        assert!(observed > ContractLimits::packet0().document_bytes());
+    }
+
+    #[test]
+    fn setup_error_codes_have_one_exact_terminal_disposition() {
+        let limits = ContractLimits::packet0();
+        for (code, status, category, retry) in [
+            (
+                crate::SetupErrorCode::ShippedProfileUnavailable,
+                TerminalStatus::Blocked,
+                ProblemCategory::Prerequisite,
+                RetryDirective::AfterRecheck,
+            ),
+            (
+                crate::SetupErrorCode::SelectedProfileDecisionInvalid,
+                TerminalStatus::Refused,
+                ProblemCategory::Precondition,
+                RetryDirective::AfterRequestChange,
+            ),
+            (
+                crate::SetupErrorCode::UnresolvedMode,
+                TerminalStatus::Refused,
+                ProblemCategory::Schema,
+                RetryDirective::AfterRequestChange,
+            ),
+            (
+                crate::SetupErrorCode::InitRejectsRefreshFlags,
+                TerminalStatus::Refused,
+                ProblemCategory::Schema,
+                RetryDirective::AfterRequestChange,
+            ),
+            (
+                crate::SetupErrorCode::RootAlreadyInitialized,
+                TerminalStatus::Refused,
+                ProblemCategory::Precondition,
+                RetryDirective::AfterRequestChange,
+            ),
+            (
+                crate::SetupErrorCode::RefreshRootMissing,
+                TerminalStatus::Blocked,
+                ProblemCategory::Prerequisite,
+                RetryDirective::AfterRecheck,
+            ),
+            (
+                crate::SetupErrorCode::RootNotDirectory,
+                TerminalStatus::Refused,
+                ProblemCategory::Safety,
+                RetryDirective::Never,
+            ),
+            (
+                crate::SetupErrorCode::RootSymlinkRefused,
+                TerminalStatus::Refused,
+                ProblemCategory::Safety,
+                RetryDirective::Never,
+            ),
+            (
+                crate::SetupErrorCode::CanonicalRootInspectFailed,
+                TerminalStatus::Error,
+                ProblemCategory::Implementation,
+                RetryDirective::Never,
+            ),
+            (
+                crate::SetupErrorCode::CanonicalRootCreateFailed,
+                TerminalStatus::Error,
+                ProblemCategory::Implementation,
+                RetryDirective::Never,
+            ),
+            (
+                crate::SetupErrorCode::RewriteHasNoMaterializer,
+                TerminalStatus::Refused,
+                ProblemCategory::Capability,
+                RetryDirective::AfterRequestChange,
+            ),
+            (
+                crate::SetupErrorCode::RuntimeStateTargetUnsafe,
+                TerminalStatus::Refused,
+                ProblemCategory::Safety,
+                RetryDirective::Never,
+            ),
+            (
+                crate::SetupErrorCode::RuntimeStateResetPlanTooLarge,
+                TerminalStatus::Refused,
+                ProblemCategory::Schema,
+                RetryDirective::AfterRequestChange,
+            ),
+            (
+                crate::SetupErrorCode::RuntimeStateResetProjectionTooLarge,
+                TerminalStatus::Refused,
+                ProblemCategory::Schema,
+                RetryDirective::AfterRequestChange,
+            ),
+            (
+                crate::SetupErrorCode::RuntimeStateMutationFailed,
+                TerminalStatus::Error,
+                ProblemCategory::Implementation,
+                RetryDirective::Transient,
+            ),
+            (
+                crate::SetupErrorCode::RepositoryAuthorityRecoveryBlocked,
+                TerminalStatus::Blocked,
+                ProblemCategory::Prerequisite,
+                RetryDirective::AfterRecheck,
+            ),
+            (
+                crate::SetupErrorCode::RepositoryIdentityUnsafe,
+                TerminalStatus::Refused,
+                ProblemCategory::Safety,
+                RetryDirective::Never,
+            ),
+            (
+                crate::SetupErrorCode::RepositoryIdentityMismatch,
+                TerminalStatus::Refused,
+                ProblemCategory::Authority,
+                RetryDirective::AfterAuthorityChange,
+            ),
+            (
+                crate::SetupErrorCode::RepositoryIdentityEntropyUnavailable,
+                TerminalStatus::Error,
+                ProblemCategory::Implementation,
+                RetryDirective::Transient,
+            ),
+            (
+                crate::SetupErrorCode::RepositoryIdentityPersistenceFailed,
+                TerminalStatus::Error,
+                ProblemCategory::Implementation,
+                RetryDirective::Transient,
+            ),
+        ] {
+            let error = match code {
+                crate::SetupErrorCode::RuntimeStateResetPlanTooLarge => {
+                    crate::setup::SetupError::runtime_state_reset_plan_too_large(129)
+                }
+                crate::SetupErrorCode::RuntimeStateResetProjectionTooLarge => {
+                    crate::setup::SetupError::runtime_state_reset_projection_too_large(1_048_577)
+                }
+                _ => crate::setup::SetupError::from_code(code),
+            };
+            let expected_error = error.clone();
+            let execution = crate::setup::SetupExecutionResult::new(
+                Err(error),
+                crate::setup::SetupExecutionEffects::default(),
+            );
+            let response = UseCaseResponseV1::repository_setup_execution(&execution, &limits)
+                .unwrap_or_else(|error| panic!("{code:?}: {error:?}"));
+            let [problem] = response.terminal_problems() else {
+                panic!("{code:?}: expected one terminal problem");
+            };
+            assert_eq!(response.status(), status, "{code:?}");
+            assert_eq!(problem.category(), category, "{code:?}");
+            assert_eq!(problem.retry(), retry, "{code:?}");
+            assert_eq!(problem.rule().is_some(), status == TerminalStatus::Refused);
+            assert_eq!(
+                problem.recheck().is_some(),
+                status == TerminalStatus::Blocked
+            );
+            assert_eq!(
+                problem.correlation_ref().is_some(),
+                status == TerminalStatus::Error
+            );
+            let invocation = InvocationResponseV1::use_case(response, &limits).unwrap();
+            let bytes = canonical_json_bytes(&invocation, &limits).unwrap();
+            let parsed = InvocationResponseV1::parse_and_admit(&bytes, None, &limits).unwrap();
+            assert_eq!(
+                parsed.repository_setup_outcome(&limits).unwrap(),
+                Some(Err(expected_error)),
+                "{code:?}"
+            );
+        }
+    }
+
+    #[test]
+    fn setup_error_after_reset_carries_only_the_exact_realized_reset_paths() {
+        let limits = ContractLimits::packet0();
+        let repo = tempdir().unwrap();
+        fs::create_dir_all(repo.path().join(".handbook/state/child")).unwrap();
+        fs::write(
+            repo.path()
+                .join(handbook_engine::REPOSITORY_IDENTITY_REPO_PATH),
+            b"not-a-valid-fingerprint\n",
+        )
+        .unwrap();
+        fs::write(
+            repo.path().join(".handbook/state/child/realized.json"),
+            b"{}",
+        )
+        .unwrap();
+        let request = crate::SetupRequest {
+            mode: crate::SetupMode::Refresh,
+            rewrite: false,
+            reset_state: true,
+        };
+
+        let execution = crate::setup::run_setup_with_effects(repo.path(), &request);
+        let response = UseCaseResponseV1::repository_setup_execution(&execution, &limits).unwrap();
+
+        assert_eq!(response.status(), TerminalStatus::Refused);
+        let [receipt] = response.receipts() else {
+            panic!("expected exactly one reset receipt");
+        };
+        assert_eq!(
+            receipt.record().reference().as_str(),
+            SETUP_RESET_RECORD_REF
+        );
+        let condition: RepositorySetupReceiptConditionV1 =
+            admit_contract_value(receipt.condition(), &limits).unwrap();
+        let RepositorySetupReceiptConditionV1::RuntimeStateReset {
+            application,
+            removed_paths,
+        } = condition
+        else {
+            panic!("expected reset receipt condition");
+        };
+        assert_eq!(application, RepositorySetupResetApplicationV1::Sequential);
+        assert!(removed_paths
+            .as_slice()
+            .iter()
+            .any(|path| path.as_str() == ".handbook/state/child/realized.json"));
+        assert!(!repo
+            .path()
+            .join(".handbook/state/child/realized.json")
+            .exists());
+    }
+
+    #[test]
+    fn setup_admission_rejects_fabricated_receipts_and_ready_actions() {
+        let limits = ContractLimits::packet0();
+        let ready = SetupOutcome {
+            plan: SetupPlan {
+                requested_mode: SetupMode::Refresh,
+                resolved_mode: SetupMode::Refresh,
+                root_action: SetupRootAction::Preserve,
+                profile_ref: "example.profile@1.0.0".to_owned(),
+                profile_fingerprint: fingerprint("profile"),
+                stable_role_registry_ref: "example.roles@1.0.0".to_owned(),
+                stable_role_registry_fingerprint: fingerprint("roles"),
+                conditions: Vec::new(),
+                capabilities: Vec::new(),
+                artifacts: Vec::new(),
+                reset_paths: Vec::new(),
+            },
+            status: RepositoryReadinessStatus::Ready,
+            reset_applied: false,
+        };
+        let result = RepositorySetupResultV1::from_outcome(&ready).unwrap();
+        let fabricated_root = repository_setup_receipt(
+            "repository_setup_root",
+            SETUP_ROOT_RECORD_REF,
+            &RepositorySetupReceiptConditionV1::RootCreated {
+                repo_relative_path: bounded(".handbook").unwrap(),
+            },
+            "repository_setup_root_create",
+            &limits,
+        )
+        .unwrap();
+        assert!(UseCaseResponseV1::repository_setup_success(
+            result.clone(),
+            BoundedVec::new(vec![fabricated_root]).unwrap(),
+            BoundedVec::new(Vec::new()).unwrap(),
+            BoundedVec::new(Vec::new()).unwrap(),
+            &limits,
+        )
+        .is_err());
+
+        let details = contract_value(
+            &RepositorySetupDetailsV1::Readiness {
+                result: Box::new(result.clone()),
+            },
+            &limits,
+        )
+        .unwrap();
+        let fabricated_action = NextAction::new(
+            bounded("repository.resolve_setup_actions").unwrap(),
+            NextActionKind::ChangeRequest,
+            binding(SETUP_USE_CASE_REF).unwrap(),
+            binding(SETUP_DETAILS_REF).unwrap(),
+            details,
+            Some(bounded("Resolve repository readiness actions and rerun setup").unwrap()),
+            &limits,
+        )
+        .unwrap();
+        assert!(UseCaseResponseV1::repository_setup_success(
+            result.clone(),
+            BoundedVec::new(Vec::new()).unwrap(),
+            BoundedVec::new(Vec::new()).unwrap(),
+            BoundedVec::new(vec![fabricated_action]).unwrap(),
+            &limits,
+        )
+        .is_err());
+
+        let mut effectful = ready;
+        effectful.plan.root_action = SetupRootAction::Create;
+        effectful.plan.reset_paths = vec![".handbook/state/route.json".to_owned()];
+        effectful.reset_applied = true;
+        let effectful_result = RepositorySetupResultV1::from_outcome(&effectful).unwrap();
+        let root = repository_setup_receipt(
+            "repository_setup_root",
+            SETUP_ROOT_RECORD_REF,
+            &RepositorySetupReceiptConditionV1::RootCreated {
+                repo_relative_path: bounded(".handbook").unwrap(),
+            },
+            "repository_setup_root_create",
+            &limits,
+        )
+        .unwrap();
+        let reset = repository_setup_receipt(
+            "repository_setup_runtime_state_reset",
+            SETUP_RESET_RECORD_REF,
+            &RepositorySetupReceiptConditionV1::RuntimeStateReset {
+                application: RepositorySetupResetApplicationV1::Sequential,
+                removed_paths: BoundedVec::new(
+                    vec![bounded(".handbook/state/route.json").unwrap()],
+                )
+                .unwrap(),
+            },
+            "repository_setup_sequential_reset",
+            &limits,
+        )
+        .unwrap();
+        for receipts in [
+            vec![root.clone(), root.clone()],
+            vec![reset.clone(), root.clone()],
+        ] {
+            assert!(UseCaseResponseV1::repository_setup_success(
+                effectful_result.clone(),
+                BoundedVec::new(receipts).unwrap(),
+                BoundedVec::new(Vec::<Diagnostic>::new()).unwrap(),
+                BoundedVec::new(Vec::<NextAction>::new()).unwrap(),
+                &limits,
+            )
+            .is_err());
+        }
+
+        let mismatched_reset = repository_setup_receipt(
+            "repository_setup_runtime_state_reset",
+            SETUP_RESET_RECORD_REF,
+            &RepositorySetupReceiptConditionV1::RuntimeStateReset {
+                application: RepositorySetupResetApplicationV1::Sequential,
+                removed_paths: BoundedVec::new(
+                    vec![bounded(".handbook/state/other.json").unwrap()],
+                )
+                .unwrap(),
+            },
+            "repository_setup_sequential_reset",
+            &limits,
+        )
+        .unwrap();
+        let wrong_metadata = WriteReceipt::new(
+            bounded("repository_setup_root_wrong").unwrap(),
+            binding(SETUP_ROOT_RECORD_REF).unwrap(),
+            bounded("sdk_composition").unwrap(),
+            contract_value(
+                &RepositorySetupReceiptConditionV1::RootCreated {
+                    repo_relative_path: bounded(".handbook").unwrap(),
+                },
+                &limits,
+            )
+            .unwrap(),
+            bounded("repository_setup_root_create").unwrap(),
+            &limits,
+        )
+        .unwrap();
+        for receipt in [mismatched_reset, wrong_metadata] {
+            assert!(UseCaseResponseV1::repository_setup_success(
+                effectful_result.clone(),
+                BoundedVec::new(vec![receipt]).unwrap(),
+                BoundedVec::new(Vec::<Diagnostic>::new()).unwrap(),
+                BoundedVec::new(Vec::<NextAction>::new()).unwrap(),
+                &limits,
+            )
+            .is_err());
+        }
+
+        for receipts in [Vec::new(), vec![root]] {
+            assert!(UseCaseResponseV1::repository_setup_success(
+                effectful_result.clone(),
+                BoundedVec::new(receipts).unwrap(),
+                BoundedVec::new(Vec::<Diagnostic>::new()).unwrap(),
+                BoundedVec::new(Vec::<NextAction>::new()).unwrap(),
+                &limits,
+            )
+            .is_err());
+        }
     }
 
     #[test]
@@ -2361,11 +3971,12 @@ mod tests {
             status: RepositoryReadinessStatus::ActionRequired,
             reset_applied: true,
         };
-        let setup =
-            serde_json::to_value(RepositorySetupResultV1::from_outcome(&setup).unwrap()).unwrap();
-        assert_eq!(setup["requested_mode"], "refresh");
-        assert_eq!(setup["reset_paths"][0], ".handbook/state/route.json");
-        assert_eq!(setup["reset_applied"], true);
+        let projected_setup = RepositorySetupResultV1::from_outcome(&setup).unwrap();
+        assert_eq!(projected_setup.to_outcome(), setup);
+        let setup_wire = serde_json::to_value(projected_setup).unwrap();
+        assert_eq!(setup_wire["requested_mode"], "refresh");
+        assert_eq!(setup_wire["reset_paths"][0], ".handbook/state/route.json");
+        assert_eq!(setup_wire["reset_applied"], true);
 
         let charter = CharterOperationResult {
             schema_id: "handbook.charter-operation-result".to_owned(),

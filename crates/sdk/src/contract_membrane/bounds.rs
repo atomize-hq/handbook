@@ -10,6 +10,12 @@ use time::{Date, Month};
 const MAX_STRING_BYTES: usize = 65_536;
 const MAX_ITEMS: usize = 128;
 const MAX_DOCUMENT_BYTES: usize = 1_048_576;
+// The measurement-only setup candidate can repeat each public path four times,
+// JSON escaping can double every path byte, and the remaining current setup
+// result rows and object structure fit within another twenty-four such blocks.
+const SETUP_MEASUREMENT_PUBLIC_STRING_BLOCKS: usize = (4 * 2) + 24;
+const SETUP_MEASUREMENT_DOCUMENT_BYTES: usize =
+    MAX_DOCUMENT_BYTES + (SETUP_MEASUREMENT_PUBLIC_STRING_BLOCKS * MAX_ITEMS * 4096);
 const MAX_NESTING_DEPTH: usize = 32;
 const MAX_SAFE_INTEGER: u64 = 9_007_199_254_740_991;
 const MIN_SAFE_INTEGER: i64 = -9_007_199_254_740_991;
@@ -423,6 +429,16 @@ impl ContractLimits {
     pub fn packet0() -> Self {
         Self {
             document_bytes: MAX_DOCUMENT_BYTES,
+            string_bytes: MAX_STRING_BYTES,
+            array_items: MAX_ITEMS,
+            object_members: MAX_ITEMS,
+            nesting_depth: MAX_NESTING_DEPTH,
+        }
+    }
+
+    pub(super) fn setup_measurement() -> Self {
+        Self {
+            document_bytes: SETUP_MEASUREMENT_DOCUMENT_BYTES,
             string_bytes: MAX_STRING_BYTES,
             array_items: MAX_ITEMS,
             object_members: MAX_ITEMS,

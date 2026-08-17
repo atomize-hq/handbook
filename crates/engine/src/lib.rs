@@ -262,12 +262,12 @@ pub use project_context_artifact::{
 pub use repository_invocation_identity::{
     RepositoryIdentityAllocationErrorV1, RepositoryIdentityAllocationV1,
     RepositoryIdentityInitializationDispositionV1, RepositoryIdentityInitializationV1,
-    RepositoryIdentitySetupErrorKindV1, RepositoryIdentitySetupErrorV1,
-    RepositoryInvocationContractErrorV1, RepositoryInvocationIdentityServiceV1,
-    RepositoryInvocationIdentityV1, RepositoryInvocationOperationV1,
-    RepositoryInvocationPreflightResultV1, RepositoryInvocationPreparationFailureV1,
-    RepositoryInvocationRecoveryRefusalV1, RepositoryInvocationRefusalV1,
-    REPOSITORY_IDENTITY_REPO_PATH,
+    RepositoryIdentitySetupEffectV1, RepositoryIdentitySetupErrorKindV1,
+    RepositoryIdentitySetupErrorV1, RepositoryInvocationContractErrorV1,
+    RepositoryInvocationIdentityServiceV1, RepositoryInvocationIdentityV1,
+    RepositoryInvocationOperationV1, RepositoryInvocationPreflightResultV1,
+    RepositoryInvocationPreparationFailureV1, RepositoryInvocationRecoveryRefusalV1,
+    RepositoryInvocationRefusalV1, REPOSITORY_IDENTITY_REPO_PATH,
 };
 pub use schema_registry::{
     ResolvedSchema, SchemaRegistry, SchemaRegistryEntry, StructuralValidationError,

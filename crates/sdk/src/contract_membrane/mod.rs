@@ -48,6 +48,7 @@ pub use envelope::{
     OperationAdmissionRefusalV1, OperationRequestV1, OperationResponseV1, OperationSchemaValidator,
     RequestId,
 };
+pub(crate) use invocation::measure_repository_setup_invocation;
 pub use invocation::{
     ApproverAdministrationOperationV1, ApproverAdministrationResultV1, ArtifactApplicabilityV1,
     ArtifactInspectionReasonV1, ArtifactInspectionStatusV1, AuthorCharterOperationV1,
@@ -61,8 +62,10 @@ pub use invocation::{
     RepositoryDoctorCharterV1, RepositoryDoctorConditionV1, RepositoryDoctorDetailsV1,
     RepositoryDoctorFailureKindV1, RepositoryDoctorFailureReasonV1,
     RepositoryDoctorProjectContextV1, RepositoryDoctorResultV1, RepositoryReadinessStatusV1,
-    RepositorySetupArtifactActionKindV1, RepositorySetupArtifactV1, RepositorySetupModeV1,
-    RepositorySetupResultV1, RepositorySetupRootActionV1, TransportFailureDetailsV1,
+    RepositorySetupArtifactActionKindV1, RepositorySetupArtifactV1, RepositorySetupBoundsV1,
+    RepositorySetupDetailsV1, RepositorySetupErrorCodeV1, RepositorySetupErrorKindV1,
+    RepositorySetupErrorReasonV1, RepositorySetupModeV1, RepositorySetupResultV1,
+    RepositorySetupRootActionV1, RepositorySetupSizeBoundsV1, TransportFailureDetailsV1,
     TransportFailureKind, TransportFailureV1, UseCaseResponseV1,
 };
 pub use operation::{

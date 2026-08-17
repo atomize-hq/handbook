@@ -88,7 +88,7 @@ enum Command {
 impl Command {
     fn run(self, machine_json: bool) -> ExitCode {
         match self {
-            Command::Setup(args) => setup::run(args),
+            Command::Setup(args) => setup::run(args, machine_json),
             Command::Author(args) => author::run(args),
             Command::Approvers(args) => approvers::run(args),
             Command::Artifact(args) => artifact::run(args),

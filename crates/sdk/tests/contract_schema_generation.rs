@@ -22,7 +22,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 64] = [
+const ROOTS: [(&str, &str); 65] = [
     (
         "handbook.artifact-ref@1.0.0",
         "handbook.artifact-ref/1.0.0.schema.json",
@@ -272,6 +272,10 @@ const ROOTS: [(&str, &str); 64] = [
         "handbook.use-case.repository-doctor-result/1.0.0.schema.json",
     ),
     (
+        "handbook.use-case.repository-setup-details@1.0.0",
+        "handbook.use-case.repository-setup-details/1.0.0.schema.json",
+    ),
+    (
         "handbook.use-case.repository-setup-result@1.0.0",
         "handbook.use-case.repository-setup-result/1.0.0.schema.json",
     ),
@@ -375,7 +379,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 64);
+    assert_eq!(entries.len(), 65);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries

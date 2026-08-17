@@ -1850,6 +1850,74 @@ invocation_string_enum!(
     ]
 );
 invocation_string_enum!(
+    RepositorySetupErrorKindV1,
+    "RepositorySetupErrorKindV1",
+    [
+        "profile_resolution",
+        "profile_decision",
+        "already_initialized",
+        "missing_canonical_root",
+        "invalid_canonical_root",
+        "invalid_request",
+        "materializer_unavailable",
+        "runtime_state_plan",
+        "runtime_state_apply",
+        "repository_identity"
+    ]
+);
+invocation_string_enum!(
+    RepositorySetupErrorReasonV1,
+    "RepositorySetupErrorReasonV1",
+    [
+        "shipped_profile_unavailable",
+        "selected_profile_decision_invalid",
+        "unresolved_mode",
+        "init_rejects_refresh_flags",
+        "root_already_initialized",
+        "refresh_root_missing",
+        "root_not_directory",
+        "root_symlink_refused",
+        "canonical_root_inspect_failed",
+        "canonical_root_create_failed",
+        "rewrite_has_no_materializer",
+        "runtime_state_target_unsafe",
+        "runtime_state_reset_plan_too_large",
+        "runtime_state_reset_projection_too_large",
+        "runtime_state_mutation_failed",
+        "repository_authority_recovery_blocked",
+        "repository_identity_unsafe",
+        "repository_identity_mismatch",
+        "repository_identity_entropy_unavailable",
+        "repository_identity_persistence_failed"
+    ]
+);
+invocation_string_enum!(
+    RepositorySetupErrorCodeV1,
+    "RepositorySetupErrorCodeV1",
+    [
+        "shipped_profile_unavailable",
+        "selected_profile_decision_invalid",
+        "unresolved_mode",
+        "init_rejects_refresh_flags",
+        "root_already_initialized",
+        "refresh_root_missing",
+        "root_not_directory",
+        "root_symlink_refused",
+        "canonical_root_inspect_failed",
+        "canonical_root_create_failed",
+        "rewrite_has_no_materializer",
+        "runtime_state_target_unsafe",
+        "runtime_state_reset_plan_too_large",
+        "runtime_state_reset_projection_too_large",
+        "runtime_state_mutation_failed",
+        "repository_authority_recovery_blocked",
+        "repository_identity_unsafe",
+        "repository_identity_mismatch",
+        "repository_identity_entropy_unavailable",
+        "repository_identity_persistence_failed"
+    ]
+);
+invocation_string_enum!(
     AuthorCharterOperationV1,
     "AuthorCharterOperationV1",
     ["author", "approve", "promote", "validate"]
@@ -2625,6 +2693,83 @@ impl_schema!(
 );
 
 impl_schema!(
+    RepositorySetupBoundsV1,
+    "RepositorySetupBoundsV1",
+    |generator| closed_object(
+        vec![
+            ("observed_count", generator.subschema_for::<SafeU64>()),
+            ("limit", generator.subschema_for::<SafeU64>()),
+        ],
+        &["observed_count", "limit"],
+    )
+);
+
+impl_schema!(
+    RepositorySetupSizeBoundsV1,
+    "RepositorySetupSizeBoundsV1",
+    |generator| closed_object(
+        vec![
+            ("observed_bytes", generator.subschema_for::<SafeU64>()),
+            ("limit_bytes", generator.subschema_for::<SafeU64>()),
+        ],
+        &["observed_bytes", "limit_bytes"],
+    )
+);
+
+impl_schema!(
+    RepositorySetupDetailsV1,
+    "RepositorySetupDetailsV1",
+    |generator| {
+        let readiness = closed_object(
+            vec![
+                ("details_kind", json_schema!({"const": "readiness"})),
+                (
+                    "result",
+                    generator.subschema_for::<RepositorySetupResultV1>(),
+                ),
+            ],
+            &["details_kind", "result"],
+        );
+        let failure = closed_object(
+            vec![
+                ("details_kind", json_schema!({"const": "setup_failure"})),
+                (
+                    "code",
+                    generator.subschema_for::<RepositorySetupErrorCodeV1>(),
+                ),
+                (
+                    "failure_kind",
+                    generator.subschema_for::<RepositorySetupErrorKindV1>(),
+                ),
+                (
+                    "reason",
+                    generator.subschema_for::<RepositorySetupErrorReasonV1>(),
+                ),
+                (
+                    "repo_relative_path",
+                    nullable::<BoundedString<4096>>(generator),
+                ),
+                ("bounds", nullable::<RepositorySetupBoundsV1>(generator)),
+                (
+                    "size_bounds",
+                    nullable::<RepositorySetupSizeBoundsV1>(generator),
+                ),
+            ],
+            &[
+                "details_kind",
+                "code",
+                "failure_kind",
+                "reason",
+                "repo_relative_path",
+                "bounds",
+                "size_bounds",
+            ],
+        );
+        json_schema!({"oneOf": [readiness, failure]})
+    }
+);
+
+impl_schema!(
     TransportFailureDetailsV1,
     "TransportFailureDetailsV1",
     |generator| closed_object(
@@ -2799,6 +2944,20 @@ impl_schema!(UseCaseResponseV1, "UseCaseResponseV1", |generator| {
         "handbook.use-case.repository-setup@1.0.0",
         "handbook.use-case.repository-setup-result@1.0.0",
     )];
+    for status in ["blocked", "refused", "error"] {
+        let problem = typed_problem_schema::<RepositorySetupDetailsV1>(
+            generator,
+            "handbook.use-case.repository-setup@1.0.0",
+            "handbook.use-case.repository-setup-details@1.0.0",
+        );
+        variants.push(use_case_terminal_schema::<RepositorySetupResultV1>(
+            generator,
+            "handbook.use-case.repository-setup@1.0.0",
+            "handbook.use-case.repository-setup-result@1.0.0",
+            status,
+            Some(problem),
+        ));
+    }
     variants.push(use_case_readiness_ok_schema::<RepositoryDoctorResultV1>(
         generator,
         "handbook.use-case.repository-doctor@1.0.0",
@@ -3068,7 +3227,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 64] = [
+const INVENTORY: [SchemaDescriptor; 65] = [
     descriptor::<ArtifactRef>(
         "handbook.artifact-ref@1.0.0",
         "handbook.artifact-ref/1.0.0.schema.json",
@@ -3317,6 +3476,10 @@ const INVENTORY: [SchemaDescriptor; 64] = [
         "handbook.use-case.repository-doctor-result@1.0.0",
         "handbook.use-case.repository-doctor-result/1.0.0.schema.json",
     ),
+    descriptor::<RepositorySetupDetailsV1>(
+        "handbook.use-case.repository-setup-details@1.0.0",
+        "handbook.use-case.repository-setup-details/1.0.0.schema.json",
+    ),
     descriptor::<RepositorySetupResultV1>(
         "handbook.use-case.repository-setup-result@1.0.0",
         "handbook.use-case.repository-setup-result/1.0.0.schema.json",
@@ -3386,8 +3549,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 64 {
-        return Err("schema inventory must contain exactly 64 entries".to_owned());
+    if INVENTORY.len() != 65 {
+        return Err("schema inventory must contain exactly 65 entries".to_owned());
     }
 
     let mut previous_ref = None;

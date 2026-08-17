@@ -129,9 +129,17 @@ pub enum RepositoryIdentitySetupErrorKindV1 {
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
+pub enum RepositoryIdentitySetupEffectV1 {
+    CreatedBeforeError {
+        repository_identity_fingerprint: String,
+    },
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub struct RepositoryIdentitySetupErrorV1 {
     kind: RepositoryIdentitySetupErrorKindV1,
     detail: &'static str,
+    effect: Option<RepositoryIdentitySetupEffectV1>,
 }
 
 impl RepositoryIdentitySetupErrorV1 {
@@ -141,6 +149,10 @@ impl RepositoryIdentitySetupErrorV1 {
 
     pub fn detail(&self) -> &str {
         self.detail
+    }
+
+    pub fn effect(&self) -> Option<&RepositoryIdentitySetupEffectV1> {
+        self.effect.as_ref()
     }
 }
 
@@ -335,6 +347,23 @@ impl RepositoryInvocationIdentityServiceV1 {
     where
         F: FnOnce(&mut [u8]) -> Result<(), ()>,
     {
+        self.initialize_for_setup_with_persistence(
+            repo_root,
+            fill_entropy,
+            persist_repository_identity,
+        )
+    }
+
+    fn initialize_for_setup_with_persistence<F, P>(
+        &self,
+        repo_root: &Path,
+        fill_entropy: F,
+        persist_identity: P,
+    ) -> Result<RepositoryIdentityInitializationV1, RepositoryIdentitySetupErrorV1>
+    where
+        F: FnOnce(&mut [u8]) -> Result<(), ()>,
+        P: FnOnce(&Path, &str) -> Result<(), RepositoryIdentitySetupErrorV1>,
+    {
         let _locks = RegistryAuthorityLocks::acquire(repo_root).map_err(|_| {
             setup_error(
                 RepositoryIdentitySetupErrorKindV1::AuthorityRecoveryBlocked,
@@ -389,7 +418,13 @@ impl RepositoryInvocationIdentityServiceV1 {
                     )
                 })?;
                 let repository_identity_fingerprint = derive_repository_identity(&entropy);
-                persist_repository_identity(repo_root, &repository_identity_fingerprint)?;
+                if let Err(error) = persist_identity(repo_root, &repository_identity_fingerprint) {
+                    return Err(attach_verified_created_effect(
+                        repo_root,
+                        &repository_identity_fingerprint,
+                        error,
+                    ));
+                }
                 let observed = read_repository_identity(repo_root)?.ok_or_else(|| {
                     setup_error(
                         RepositoryIdentitySetupErrorKindV1::PersistenceFailed,
@@ -981,7 +1016,29 @@ fn setup_error(
     kind: RepositoryIdentitySetupErrorKindV1,
     detail: &'static str,
 ) -> RepositoryIdentitySetupErrorV1 {
-    RepositoryIdentitySetupErrorV1 { kind, detail }
+    RepositoryIdentitySetupErrorV1 {
+        kind,
+        detail,
+        effect: None,
+    }
+}
+
+fn attach_verified_created_effect(
+    repo_root: &Path,
+    expected_fingerprint: &str,
+    mut error: RepositoryIdentitySetupErrorV1,
+) -> RepositoryIdentitySetupErrorV1 {
+    if error.kind == RepositoryIdentitySetupErrorKindV1::PersistenceFailed
+        && matches!(
+            read_repository_identity(repo_root),
+            Ok(Some(observed)) if observed == expected_fingerprint
+        )
+    {
+        error.effect = Some(RepositoryIdentitySetupEffectV1::CreatedBeforeError {
+            repository_identity_fingerprint: expected_fingerprint.to_owned(),
+        });
+    }
+    error
 }
 
 fn contract_error(detail: &'static str) -> RepositoryInvocationContractErrorV1 {
@@ -1225,11 +1282,105 @@ mod tests {
             failure.kind(),
             RepositoryIdentitySetupErrorKindV1::EntropyUnavailable
         );
+        assert_eq!(failure.effect(), None);
         assert!(!repo.path().join(REPOSITORY_IDENTITY_REPO_PATH).exists());
         assert!(!repo
             .path()
             .join(REPOSITORY_IDENTITY_TEMP_REPO_PATH)
             .exists());
+    }
+
+    #[test]
+    fn setup_pre_create_persistence_failure_has_no_created_effect() {
+        let repo = tempdir().unwrap();
+        fs::create_dir(repo.path().join(".handbook")).unwrap();
+
+        let failure = RepositoryInvocationIdentityServiceV1::new()
+            .initialize_for_setup_with_persistence(
+                repo.path(),
+                |entropy| {
+                    entropy.fill(0x2a);
+                    Ok(())
+                },
+                |_, _| {
+                    Err(setup_error(
+                        RepositoryIdentitySetupErrorKindV1::PersistenceFailed,
+                        "injected pre-create persistence failure",
+                    ))
+                },
+            )
+            .unwrap_err();
+
+        assert_eq!(
+            failure.kind(),
+            RepositoryIdentitySetupErrorKindV1::PersistenceFailed
+        );
+        assert_eq!(failure.effect(), None);
+        assert!(!repo.path().join(REPOSITORY_IDENTITY_REPO_PATH).exists());
+    }
+
+    #[test]
+    fn setup_post_create_persistence_failure_reports_verified_created_effect() {
+        let repo = tempdir().unwrap();
+        fs::create_dir(repo.path().join(".handbook")).unwrap();
+
+        let failure = RepositoryInvocationIdentityServiceV1::new()
+            .initialize_for_setup_with_persistence(
+                repo.path(),
+                |entropy| {
+                    entropy.fill(0x2a);
+                    Ok(())
+                },
+                |repo_root, expected| {
+                    persist_repository_identity(repo_root, expected).unwrap();
+                    Err(setup_error(
+                        RepositoryIdentitySetupErrorKindV1::PersistenceFailed,
+                        "injected post-create durability failure",
+                    ))
+                },
+            )
+            .unwrap_err();
+
+        let expected = fs::read_to_string(repo.path().join(REPOSITORY_IDENTITY_REPO_PATH)).unwrap();
+        assert_eq!(
+            failure.effect(),
+            Some(&RepositoryIdentitySetupEffectV1::CreatedBeforeError {
+                repository_identity_fingerprint: expected,
+            })
+        );
+    }
+
+    #[test]
+    fn setup_post_create_persistence_failure_omits_unverifiable_effect() {
+        let repo = tempdir().unwrap();
+        fs::create_dir(repo.path().join(".handbook")).unwrap();
+
+        let failure = RepositoryInvocationIdentityServiceV1::new()
+            .initialize_for_setup_with_persistence(
+                repo.path(),
+                |entropy| {
+                    entropy.fill(0x2a);
+                    Ok(())
+                },
+                |repo_root, expected| {
+                    fs::write(
+                        repo_root.join(REPOSITORY_IDENTITY_REPO_PATH),
+                        format!("{expected}\n"),
+                    )
+                    .unwrap();
+                    Err(setup_error(
+                        RepositoryIdentitySetupErrorKindV1::PersistenceFailed,
+                        "injected unverifiable post-create failure",
+                    ))
+                },
+            )
+            .unwrap_err();
+
+        assert_eq!(
+            failure.kind(),
+            RepositoryIdentitySetupErrorKindV1::PersistenceFailed
+        );
+        assert_eq!(failure.effect(), None);
     }
 
     #[test]

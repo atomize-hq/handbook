@@ -103,6 +103,29 @@ impl HandbookSdkV1 {
         setup::run_setup(&self.repo_root, request)
     }
 
+    /// Runs repository setup once and closes its owner result into the public use-case response.
+    ///
+    /// Setup writes use the frozen Packet-0 projection bound, so limits other
+    /// than [`contract_membrane::ContractLimits::packet0`] are rejected before
+    /// setup planning or mutation.
+    pub fn run_setup_use_case(
+        &self,
+        request: &SetupRequest,
+        limits: &contract_membrane::ContractLimits,
+    ) -> Result<contract_membrane::UseCaseResponseV1, contract_membrane::ContractError> {
+        if limits != &contract_membrane::ContractLimits::packet0() {
+            return Err(contract_membrane::ContractError::LimitOutOfRange);
+        }
+        let execution = match setup::prepare_setup_execution(&self.repo_root, request) {
+            Ok(plan) => execute_preflighted_setup(&self.repo_root, request, plan, limits)?,
+            Err(error) => setup::SetupExecutionResult::new(
+                Err(error),
+                setup::SetupExecutionEffects::default(),
+            ),
+        };
+        contract_membrane::UseCaseResponseV1::repository_setup_execution(&execution, limits)
+    }
+
     /// Runs the existing repository doctor composition for this SDK repository.
     pub fn doctor(&self) -> Result<DoctorReport, DoctorError> {
         doctor::doctor(&self.repo_root)
@@ -129,6 +152,101 @@ impl HandbookSdkV1 {
     }
 }
 
+fn execute_preflighted_setup(
+    repo_root: &Path,
+    request: &SetupRequest,
+    plan: setup::SetupExecutionPlan,
+    limits: &contract_membrane::ContractLimits,
+) -> Result<setup::SetupExecutionResult, contract_membrane::ContractError> {
+    let prospective = setup::prospective_setup_execution(&plan);
+    let observed_bytes = contract_membrane::measure_repository_setup_invocation(&prospective)?;
+    if observed_bytes <= limits.document_bytes() {
+        return Ok(setup::apply_setup_execution(repo_root, plan));
+    }
+    if !request.reset_state {
+        return Err(contract_membrane::ContractError::BoundExceeded);
+    }
+    Ok(setup::SetupExecutionResult::new(
+        Err(setup::SetupError::runtime_state_reset_projection_too_large(
+            observed_bytes,
+        )),
+        setup::SetupExecutionEffects::default(),
+    ))
+}
+
 pub fn workspace_contract_version() -> &'static str {
     handbook_engine::workspace_contract_version()
+}
+
+#[cfg(test)]
+mod setup_projection_tests {
+    use super::*;
+    use crate::contract_membrane::{canonical_json_bytes, InvocationResponseV1};
+    use std::fs;
+    use tempfile::tempdir;
+
+    #[test]
+    fn oversized_prospective_reset_projection_refuses_before_mutation() {
+        let repo = tempdir().unwrap();
+        fs::create_dir_all(repo.path().join(".handbook/state")).unwrap();
+        let sentinel = repo.path().join(".handbook/state/sentinel.json");
+        fs::write(&sentinel, b"{}\n").unwrap();
+        let request = SetupRequest {
+            mode: SetupMode::Refresh,
+            rewrite: false,
+            reset_state: true,
+        };
+        let limits = contract_membrane::ContractLimits::packet0();
+        let mut plan = setup::prepare_setup_execution(repo.path(), &request).unwrap();
+        let reset_paths = (0..128)
+            .map(|index| {
+                let prefix = format!(".handbook/state/{index:03}/");
+                format!("{prefix}{}", "x".repeat(4096 - prefix.len()))
+            })
+            .collect::<Vec<_>>();
+        setup::replace_reset_paths_for_projection_test(&mut plan, reset_paths);
+        let observed_bytes = contract_membrane::measure_repository_setup_invocation(
+            &setup::prospective_setup_execution(&plan),
+        )
+        .unwrap();
+        assert!(observed_bytes > limits.document_bytes());
+
+        let execution = execute_preflighted_setup(repo.path(), &request, plan, &limits).unwrap();
+
+        let error = execution.result().as_ref().unwrap_err();
+        assert_eq!(
+            error.code(),
+            SetupErrorCode::RuntimeStateResetProjectionTooLarge
+        );
+        assert_eq!(error.observed_bytes(), Some(observed_bytes));
+        assert!(sentinel.exists());
+        assert!(!repo
+            .path()
+            .join(handbook_engine::REPOSITORY_IDENTITY_REPO_PATH)
+            .exists());
+    }
+
+    #[test]
+    fn realized_in_bound_setup_outer_length_matches_the_preflight_candidate() {
+        let repo = tempdir().unwrap();
+        let request = SetupRequest::default();
+        let limits = contract_membrane::ContractLimits::packet0();
+        let plan = setup::prepare_setup_execution(repo.path(), &request).unwrap();
+        let prospective_bytes = contract_membrane::measure_repository_setup_invocation(
+            &setup::prospective_setup_execution(&plan),
+        )
+        .unwrap();
+
+        let execution = execute_preflighted_setup(repo.path(), &request, plan, &limits).unwrap();
+        assert!(execution.effects().root_created());
+        assert!(execution.effects().repository_identity_created().is_some());
+        let use_case =
+            contract_membrane::UseCaseResponseV1::repository_setup_execution(&execution, &limits)
+                .unwrap();
+        let invocation = InvocationResponseV1::use_case(use_case, &limits).unwrap();
+        assert_eq!(
+            canonical_json_bytes(&invocation, &limits).unwrap().len(),
+            prospective_bytes
+        );
+    }
 }

@@ -4,9 +4,11 @@ use crate::profile_readiness::{
 };
 use crate::route_state::{
     apply_runtime_state_reset, plan_runtime_state_reset, RuntimeStateResetPlan,
+    RuntimeStateResetPlanError,
 };
 use handbook_engine::{
     inspect_profile_repository, resolve_shipped_profile_decisions,
+    RepositoryIdentityInitializationDispositionV1, RepositoryIdentitySetupEffectV1,
     RepositoryIdentitySetupErrorKindV1, RepositoryInvocationIdentityServiceV1,
     ResolvedProfileDecisions, ShippedProfileDecisionError,
 };
@@ -108,6 +110,8 @@ pub enum SetupErrorReasonCode {
     CanonicalRootCreateFailed,
     RewriteHasNoMaterializer,
     RuntimeStateTargetUnsafe,
+    RuntimeStateResetPlanTooLarge,
+    RuntimeStateResetProjectionTooLarge,
     RuntimeStateMutationFailed,
     RepositoryAuthorityRecoveryBlocked,
     RepositoryIdentityUnsafe,
@@ -130,6 +134,8 @@ pub enum SetupErrorCode {
     CanonicalRootCreateFailed,
     RewriteHasNoMaterializer,
     RuntimeStateTargetUnsafe,
+    RuntimeStateResetPlanTooLarge,
+    RuntimeStateResetProjectionTooLarge,
     RuntimeStateMutationFailed,
     RepositoryAuthorityRecoveryBlocked,
     RepositoryIdentityUnsafe,
@@ -139,7 +145,7 @@ pub enum SetupErrorCode {
 }
 
 impl SetupErrorCode {
-    pub const ALL: [Self; 18] = [
+    pub const ALL: [Self; 20] = [
         Self::ShippedProfileUnavailable,
         Self::SelectedProfileDecisionInvalid,
         Self::UnresolvedMode,
@@ -152,6 +158,8 @@ impl SetupErrorCode {
         Self::CanonicalRootCreateFailed,
         Self::RewriteHasNoMaterializer,
         Self::RuntimeStateTargetUnsafe,
+        Self::RuntimeStateResetPlanTooLarge,
+        Self::RuntimeStateResetProjectionTooLarge,
         Self::RuntimeStateMutationFailed,
         Self::RepositoryAuthorityRecoveryBlocked,
         Self::RepositoryIdentityUnsafe,
@@ -175,6 +183,10 @@ impl SetupErrorCode {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct SetupError {
     code: SetupErrorCode,
+    observed_count: Option<usize>,
+    limit: Option<usize>,
+    observed_bytes: Option<usize>,
+    limit_bytes: Option<usize>,
 }
 
 impl SetupError {
@@ -196,7 +208,11 @@ impl SetupError {
                 SetupErrorKind::InvalidRequest
             }
             SetupErrorCode::RewriteHasNoMaterializer => SetupErrorKind::MaterializerUnavailable,
-            SetupErrorCode::RuntimeStateTargetUnsafe => SetupErrorKind::RuntimeStatePlan,
+            SetupErrorCode::RuntimeStateTargetUnsafe
+            | SetupErrorCode::RuntimeStateResetPlanTooLarge
+            | SetupErrorCode::RuntimeStateResetProjectionTooLarge => {
+                SetupErrorKind::RuntimeStatePlan
+            }
             SetupErrorCode::RuntimeStateMutationFailed => SetupErrorKind::RuntimeStateApply,
             SetupErrorCode::RepositoryAuthorityRecoveryBlocked
             | SetupErrorCode::RepositoryIdentityUnsafe
@@ -236,6 +252,12 @@ impl SetupError {
             SetupErrorCode::RuntimeStateTargetUnsafe => {
                 SetupErrorReasonCode::RuntimeStateTargetUnsafe
             }
+            SetupErrorCode::RuntimeStateResetPlanTooLarge => {
+                SetupErrorReasonCode::RuntimeStateResetPlanTooLarge
+            }
+            SetupErrorCode::RuntimeStateResetProjectionTooLarge => {
+                SetupErrorReasonCode::RuntimeStateResetProjectionTooLarge
+            }
             SetupErrorCode::RuntimeStateMutationFailed => {
                 SetupErrorReasonCode::RuntimeStateMutationFailed
             }
@@ -266,6 +288,8 @@ impl SetupError {
             | SetupErrorCode::CanonicalRootInspectFailed
             | SetupErrorCode::CanonicalRootCreateFailed => Some(".handbook"),
             SetupErrorCode::RuntimeStateTargetUnsafe
+            | SetupErrorCode::RuntimeStateResetPlanTooLarge
+            | SetupErrorCode::RuntimeStateResetProjectionTooLarge
             | SetupErrorCode::RuntimeStateMutationFailed => Some(".handbook/state"),
             SetupErrorCode::RepositoryAuthorityRecoveryBlocked => Some(".handbook/state"),
             SetupErrorCode::RepositoryIdentityUnsafe
@@ -283,7 +307,49 @@ impl SetupError {
     }
 
     pub(crate) fn from_code(code: SetupErrorCode) -> Self {
-        Self { code }
+        Self {
+            code,
+            observed_count: None,
+            limit: None,
+            observed_bytes: None,
+            limit_bytes: None,
+        }
+    }
+
+    pub fn observed_count(&self) -> Option<usize> {
+        self.observed_count
+    }
+
+    pub fn limit(&self) -> Option<usize> {
+        self.limit
+    }
+
+    pub fn observed_bytes(&self) -> Option<usize> {
+        self.observed_bytes
+    }
+
+    pub fn limit_bytes(&self) -> Option<usize> {
+        self.limit_bytes
+    }
+
+    pub(crate) fn runtime_state_reset_plan_too_large(observed_count: usize) -> Self {
+        Self {
+            code: SetupErrorCode::RuntimeStateResetPlanTooLarge,
+            observed_count: Some(observed_count),
+            limit: Some(128),
+            observed_bytes: None,
+            limit_bytes: None,
+        }
+    }
+
+    pub(crate) fn runtime_state_reset_projection_too_large(observed_bytes: usize) -> Self {
+        Self {
+            code: SetupErrorCode::RuntimeStateResetProjectionTooLarge,
+            observed_count: None,
+            limit: None,
+            observed_bytes: Some(observed_bytes),
+            limit_bytes: Some(1_048_576),
+        }
     }
 }
 
@@ -304,10 +370,67 @@ enum RootState {
 }
 
 #[derive(Debug)]
-struct SetupExecutionPlan {
+pub(crate) struct SetupExecutionPlan {
     plan: SetupPlan,
     status: RepositoryReadinessStatus,
     reset_plan: Option<RuntimeStateResetPlan>,
+}
+
+#[derive(Debug, Default)]
+pub(crate) struct SetupExecutionEffects {
+    root_created: bool,
+    removed_runtime_state_paths: Vec<String>,
+    repository_identity_created: Option<String>,
+}
+
+impl SetupExecutionEffects {
+    pub(crate) fn root_created(&self) -> bool {
+        self.root_created
+    }
+
+    pub(crate) fn removed_runtime_state_paths(&self) -> &[String] {
+        &self.removed_runtime_state_paths
+    }
+
+    pub(crate) fn repository_identity_created(&self) -> Option<&str> {
+        self.repository_identity_created.as_deref()
+    }
+
+    #[cfg(test)]
+    pub(crate) fn for_projection_test(removed_runtime_state_paths: Vec<String>) -> Self {
+        Self {
+            root_created: true,
+            removed_runtime_state_paths,
+            repository_identity_created: Some(format!("sha256:{}", "0".repeat(64))),
+        }
+    }
+}
+
+#[derive(Debug)]
+pub(crate) struct SetupExecutionResult {
+    result: Result<SetupOutcome, SetupError>,
+    effects: SetupExecutionEffects,
+}
+
+impl SetupExecutionResult {
+    pub(crate) fn new(
+        result: Result<SetupOutcome, SetupError>,
+        effects: SetupExecutionEffects,
+    ) -> Self {
+        Self { result, effects }
+    }
+
+    pub(crate) fn result(&self) -> &Result<SetupOutcome, SetupError> {
+        &self.result
+    }
+
+    pub(crate) fn effects(&self) -> &SetupExecutionEffects {
+        &self.effects
+    }
+
+    fn into_result(self) -> Result<SetupOutcome, SetupError> {
+        self.result
+    }
 }
 
 #[cfg(test)]
@@ -340,13 +463,62 @@ pub(crate) fn run_setup(
     repo_root: impl AsRef<Path>,
     request: &SetupRequest,
 ) -> Result<SetupOutcome, SetupError> {
+    run_setup_with_effects(repo_root, request).into_result()
+}
+
+pub(crate) fn run_setup_with_effects(
+    repo_root: impl AsRef<Path>,
+    request: &SetupRequest,
+) -> SetupExecutionResult {
     let repo_root = repo_root.as_ref();
+    match prepare_setup_execution(repo_root, request) {
+        Ok(execution) => apply_setup_execution(repo_root, execution),
+        Err(error) => SetupExecutionResult::new(Err(error), SetupExecutionEffects::default()),
+    }
+}
+
+pub(crate) fn prepare_setup_execution(
+    repo_root: &Path,
+    request: &SetupRequest,
+) -> Result<SetupExecutionPlan, SetupError> {
     let root = inspect_root(repo_root)?;
     let (resolved_mode, root_action) = validate_root_and_request(root, request)?;
     let decisions = resolve_shipped_profile_decisions(repo_root).map_err(map_profile_error)?;
-    let execution =
-        build_setup_execution_plan(repo_root, request, resolved_mode, root_action, &decisions)?;
-    apply_setup_execution(repo_root, execution)
+    build_setup_execution_plan(repo_root, request, resolved_mode, root_action, &decisions)
+}
+
+pub(crate) fn prospective_setup_execution(execution: &SetupExecutionPlan) -> SetupExecutionResult {
+    let reset_applied = execution.reset_plan.is_some()
+        && matches!(
+            execution.status,
+            RepositoryReadinessStatus::Ready | RepositoryReadinessStatus::ActionRequired
+        );
+    let effects = SetupExecutionEffects {
+        root_created: execution.plan.root_action == SetupRootAction::Create,
+        removed_runtime_state_paths: if reset_applied {
+            execution.plan.reset_paths.clone()
+        } else {
+            Vec::new()
+        },
+        repository_identity_created: Some(format!("sha256:{}", "0".repeat(64))),
+    };
+    SetupExecutionResult::new(
+        Ok(SetupOutcome {
+            plan: execution.plan.clone(),
+            status: execution.status,
+            reset_applied,
+        }),
+        effects,
+    )
+}
+
+#[cfg(test)]
+pub(crate) fn replace_reset_paths_for_projection_test(
+    execution: &mut SetupExecutionPlan,
+    reset_paths: Vec<String>,
+) {
+    assert!(execution.reset_plan.is_some());
+    execution.plan.reset_paths = reset_paths;
 }
 
 #[cfg(test)]
@@ -355,12 +527,25 @@ pub(crate) fn run_setup_with_decisions(
     request: &SetupRequest,
     decisions: &ResolvedProfileDecisions,
 ) -> Result<SetupOutcome, SetupError> {
+    run_setup_with_effects_and_decisions(repo_root, request, decisions).into_result()
+}
+
+#[cfg(test)]
+pub(crate) fn run_setup_with_effects_and_decisions(
+    repo_root: impl AsRef<Path>,
+    request: &SetupRequest,
+    decisions: &ResolvedProfileDecisions,
+) -> SetupExecutionResult {
     let repo_root = repo_root.as_ref();
-    let root = inspect_root(repo_root)?;
-    let (resolved_mode, root_action) = validate_root_and_request(root, request)?;
-    let execution =
-        build_setup_execution_plan(repo_root, request, resolved_mode, root_action, decisions)?;
-    apply_setup_execution(repo_root, execution)
+    let execution = (|| {
+        let root = inspect_root(repo_root)?;
+        let (resolved_mode, root_action) = validate_root_and_request(root, request)?;
+        build_setup_execution_plan(repo_root, request, resolved_mode, root_action, decisions)
+    })();
+    match execution {
+        Ok(execution) => apply_setup_execution(repo_root, execution),
+        Err(error) => SetupExecutionResult::new(Err(error), SetupExecutionEffects::default()),
+    }
 }
 
 fn inspect_root(repo_root: &Path) -> Result<RootState, SetupError> {
@@ -443,8 +628,14 @@ fn build_setup_execution_plan(
         .collect();
     let reset_plan = if request.reset_state {
         Some(
-            plan_runtime_state_reset(repo_root)
-                .map_err(|_| SetupError::from_code(SetupErrorCode::RuntimeStateTargetUnsafe))?,
+            plan_runtime_state_reset(repo_root).map_err(|error| match error {
+                RuntimeStateResetPlanError::Unsafe(_) => {
+                    SetupError::from_code(SetupErrorCode::RuntimeStateTargetUnsafe)
+                }
+                RuntimeStateResetPlanError::TooLarge { observed_count } => {
+                    SetupError::runtime_state_reset_plan_too_large(observed_count)
+                }
+            })?,
         )
     } else {
         None
@@ -496,34 +687,74 @@ fn setup_action(artifact: &ProfileArtifactRow) -> SetupArtifactActionKind {
     }
 }
 
-fn apply_setup_execution(
+pub(crate) fn apply_setup_execution(
     repo_root: &Path,
     execution: SetupExecutionPlan,
-) -> Result<SetupOutcome, SetupError> {
+) -> SetupExecutionResult {
+    let mut effects = SetupExecutionEffects::default();
     let may_reset_runtime_state = matches!(
         execution.status,
         RepositoryReadinessStatus::Ready | RepositoryReadinessStatus::ActionRequired
     );
     let mut reset_applied = false;
     if execution.plan.root_action == SetupRootAction::Create {
-        fs::create_dir(repo_root.join(".handbook"))
-            .map_err(|_| SetupError::from_code(SetupErrorCode::CanonicalRootCreateFailed))?;
+        if fs::create_dir(repo_root.join(".handbook")).is_err() {
+            return SetupExecutionResult::new(
+                Err(SetupError::from_code(
+                    SetupErrorCode::CanonicalRootCreateFailed,
+                )),
+                effects,
+            );
+        }
+        effects.root_created = true;
     }
     if may_reset_runtime_state {
         if let Some(reset_plan) = &execution.reset_plan {
-            apply_runtime_state_reset(reset_plan)
-                .map_err(|_| SetupError::from_code(SetupErrorCode::RuntimeStateMutationFailed))?;
-            reset_applied = true;
+            match apply_runtime_state_reset(reset_plan) {
+                Ok(applied) => {
+                    effects.removed_runtime_state_paths = applied.removed_paths().to_vec();
+                    reset_applied = true;
+                }
+                Err(error) => {
+                    effects.removed_runtime_state_paths = error.removed_paths().to_vec();
+                    return SetupExecutionResult::new(
+                        Err(SetupError::from_code(
+                            SetupErrorCode::RuntimeStateMutationFailed,
+                        )),
+                        effects,
+                    );
+                }
+            }
         }
     }
-    RepositoryInvocationIdentityServiceV1::new()
-        .initialize_for_setup(repo_root)
-        .map_err(map_repository_identity_error)?;
-    Ok(SetupOutcome {
-        plan: execution.plan,
-        status: execution.status,
-        reset_applied,
-    })
+    match RepositoryInvocationIdentityServiceV1::new().initialize_for_setup(repo_root) {
+        Ok(initialization) => {
+            if initialization.disposition()
+                == RepositoryIdentityInitializationDispositionV1::Created
+            {
+                effects.repository_identity_created =
+                    Some(initialization.repository_identity_fingerprint().to_owned());
+            }
+        }
+        Err(error) => {
+            if let Some(RepositoryIdentitySetupEffectV1::CreatedBeforeError {
+                repository_identity_fingerprint,
+            }) = error.effect()
+            {
+                effects.repository_identity_created =
+                    Some(repository_identity_fingerprint.to_owned());
+            }
+            return SetupExecutionResult::new(Err(map_repository_identity_error(error)), effects);
+        }
+    }
+    SetupExecutionResult::new(
+        Ok(SetupOutcome {
+            plan: execution.plan,
+            status: execution.status,
+            reset_applied,
+        }),
+        effects,
+    )
 }
 
 fn map_repository_identity_error(
@@ -624,6 +855,16 @@ mod tests {
             (
                 SetupErrorKind::RuntimeStatePlan,
                 SetupErrorReasonCode::RuntimeStateTargetUnsafe,
+                Some(".handbook/state"),
+            ),
+            (
+                SetupErrorKind::RuntimeStatePlan,
+                SetupErrorReasonCode::RuntimeStateResetPlanTooLarge,
+                Some(".handbook/state"),
+            ),
+            (
+                SetupErrorKind::RuntimeStatePlan,
+                SetupErrorReasonCode::RuntimeStateResetProjectionTooLarge,
                 Some(".handbook/state"),
             ),
             (
