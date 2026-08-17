@@ -764,6 +764,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
         .map(
             |(index, (operation_id, owner, availability, class, admission_reason))| {
                 let is_posture_apply = operation_id == "posture.transition.apply";
+                let is_flow_resolve = operation_id == "flow.resolve";
                 let is_artifact_operation = matches!(
                     operation_id,
                     "artifact.kind.list"
@@ -785,19 +786,22 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                     owner,
                     availability,
                     class,
-                    admission_reason: if is_posture_apply || is_artifact_operation {
+                    admission_reason: if is_posture_apply
+                        || is_artifact_operation
+                        || is_flow_resolve
+                    {
                         AdmissionReason::Admitted
                     } else {
                         admission_reason
                     },
                     current_transports: if is_posture_apply {
                         &[OperationTransport::RustSdk]
-                    } else if is_artifact_operation {
+                    } else if is_artifact_operation || is_flow_resolve {
                         &[OperationTransport::CliJson]
                     } else {
                         &[]
                     },
-                    discovery: if is_posture_apply || is_artifact_operation {
+                    discovery: if is_posture_apply || is_artifact_operation || is_flow_resolve {
                         DiscoveryState::Discoverable
                     } else {
                         DiscoveryState::Omit

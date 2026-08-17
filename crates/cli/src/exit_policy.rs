@@ -1,4 +1,3 @@
-use crate::rendering::PreparedFlowOutput;
 use std::io::{self, Write};
 use std::process::ExitCode;
 
@@ -8,14 +7,6 @@ pub(crate) fn success() -> ExitCode {
 
 pub(crate) fn failure() -> ExitCode {
     ExitDisposition::Failure.exit_code()
-}
-
-pub(crate) fn flow_output(output: &PreparedFlowOutput) -> ExitCode {
-    if output.is_ready() {
-        success()
-    } else {
-        failure()
-    }
 }
 
 pub(crate) fn terminal(status: handbook_sdk::contract_membrane::TerminalStatus) -> ExitCode {

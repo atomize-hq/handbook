@@ -7,6 +7,7 @@ mod bounds;
 mod catalog;
 mod dto;
 mod envelope;
+mod flow_operation;
 mod invocation;
 mod operation;
 mod owner_admission;
@@ -54,6 +55,11 @@ pub use dto::{
 pub use envelope::{
     OperationAdmissionRefusalV1, OperationRequestV1, OperationResponseV1, OperationSchemaValidator,
     RequestId,
+};
+pub(crate) use flow_operation::execute_flow_operation;
+pub use flow_operation::{
+    flow_problem_detail, flow_resolution_from_response, flow_resolve_operation_definition,
+    flow_resolve_operation_request, FlowProblemCauseV1, FlowResolveSchemaValidator,
 };
 pub(crate) use invocation::measure_repository_setup_invocation;
 pub use invocation::{

@@ -335,6 +335,6 @@ fn doctor_use_case_does_not_inflate_operation_admission_or_discovery() {
     .unwrap();
     assert_eq!(
         witness.catalog_roots().operations().total_entries().get(),
-        1
+        12
     );
 }

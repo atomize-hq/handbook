@@ -5,6 +5,7 @@ mod coverage;
 mod doctor;
 mod doctor_rendering;
 mod exit_policy;
+mod flow_command;
 #[cfg(test)]
 #[path = "../tests_support/flow_output_model_hcm_2_1_tests.rs"]
 mod flow_output_model_hcm_2_1_tests;
@@ -93,8 +94,8 @@ impl Command {
             Command::Approvers(args) => approvers::run(args, machine_json),
             Command::Artifact(args) => artifact::run(args, machine_json),
             Command::Pipeline(args) => pipeline::run(args),
-            Command::Generate(args) => generate::run(args),
-            Command::Inspect(args) => inspect::run(args),
+            Command::Generate(args) => generate::run(args, machine_json),
+            Command::Inspect(args) => inspect::run(args, machine_json),
             Command::Doctor(args) => doctor::run(args, machine_json),
         }
     }

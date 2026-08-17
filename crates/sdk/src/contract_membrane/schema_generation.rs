@@ -10,6 +10,16 @@ use super::artifact_operation::{
     IntakeEvaluationResultV1, KindListResultV1, PromoteRequestV1, ReadResultV1, TargetRequestV1,
     ValidateResultV1, ValidationLayersV1,
 };
+use super::flow_operation::{
+    FlowArtifactPresenceV1, FlowBlockerCategoryV1, FlowBlockerV1, FlowBudgetByteDomainV1,
+    FlowBudgetDispositionV1, FlowBudgetNextSafeActionV1, FlowBudgetOutcomeV1, FlowBudgetReasonV1,
+    FlowBudgetTargetV1, FlowDecisionSummaryV1, FlowFixtureContextV1, FlowNextSafeActionV1,
+    FlowPacketBodyNoteKindV1, FlowPacketBodyNoteV1, FlowPacketIdV1, FlowPacketResultV1,
+    FlowPacketSectionModeV1, FlowPacketSectionV1, FlowPacketSourceV1, FlowPacketVariantV1,
+    FlowProblemCauseV1, FlowProblemDetailsV1, FlowProblemOriginV1, FlowReadyActionV1,
+    FlowRecheckV1, FlowRefusalCategoryV1, FlowRefusalV1, FlowResolveRequestV1, FlowResolveResultV1,
+    FlowSelectionStatusV1, FlowSelectionV1, FlowSubjectRefV1,
+};
 use super::posture::REQUEST_SCHEMA_REF;
 use super::*;
 use schemars::generate::SchemaSettings;
@@ -4363,6 +4373,556 @@ impl_schema!(InvocationResponseV1, "InvocationResponseV1", |generator| {
     json_schema!({"oneOf": [operation, use_case, transport]})
 });
 
+fn flow_text(max_length: u64) -> Schema {
+    json_schema!({"type": "string", "minLength": 1, "maxLength": max_length})
+}
+
+fn flow_path() -> Schema {
+    json_schema!({
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 4096,
+        "pattern": "^[A-Za-z0-9._-]+(/[A-Za-z0-9._-]+)*$"
+    })
+}
+
+fn flow_directory_path() -> Schema {
+    json_schema!({
+        "type": "string",
+        "minLength": 2,
+        "maxLength": 4096,
+        "pattern": "^[A-Za-z0-9._-]+(/[A-Za-z0-9._-]+)*/$"
+    })
+}
+
+fn flow_array<T: JsonSchema>(generator: &mut SchemaGenerator) -> Schema {
+    json_schema!({
+        "type": "array",
+        "maxItems": 128,
+        "items": generator.subschema_for::<T>()
+    })
+}
+
+fn flow_optional<T: JsonSchema>(generator: &mut SchemaGenerator) -> Schema {
+    nullable::<T>(generator)
+}
+
+fn flow_raw_hash() -> Schema {
+    json_schema!({"type": "string", "pattern": "^[0-9a-f]{64}$"})
+}
+
+fn flow_content_hash() -> Schema {
+    json_schema!({"type": "string", "pattern": "^(sha256:)?[0-9a-f]{64}$"})
+}
+
+impl_schema!(FlowPacketIdV1, "FlowPacketIdV1", |_generator| string_enum(
+    &[
+        "planning.packet",
+        "execution.demo.packet",
+        "execution.live.packet",
+    ]
+));
+impl_schema!(
+    FlowSelectionStatusV1,
+    "FlowSelectionStatusV1",
+    |_generator| string_enum(&["selected", "blocked"])
+);
+impl_schema!(
+    FlowArtifactPresenceV1,
+    "FlowArtifactPresenceV1",
+    |_generator| string_enum(&["missing", "present_empty", "present_non_empty"])
+);
+impl_schema!(FlowPacketVariantV1, "FlowPacketVariantV1", |_generator| {
+    string_enum(&["planning", "execution_demo", "execution_live"])
+});
+impl_schema!(
+    FlowPacketBodyNoteKindV1,
+    "FlowPacketBodyNoteKindV1",
+    |_generator| string_enum(&["omission", "budget", "inherited_dependency"])
+);
+impl_schema!(
+    FlowPacketSectionModeV1,
+    "FlowPacketSectionModeV1",
+    |_generator| string_enum(&["verbatim", "summary", "rendered"])
+);
+impl_schema!(FlowReadyActionV1, "FlowReadyActionV1", |_generator| {
+    string_enum(&["inspect_proof", "generate", "run_doctor"])
+});
+impl_schema!(
+    FlowBudgetDispositionV1,
+    "FlowBudgetDispositionV1",
+    |_generator| string_enum(&["keep", "summarize", "exclude", "refuse"])
+);
+impl_schema!(FlowBudgetReasonV1, "FlowBudgetReasonV1", |_generator| {
+    string_enum(&[
+        "within_budget",
+        "optional_artifact_too_large",
+        "total_bytes_exceeded",
+        "required_artifact_too_large",
+    ])
+});
+impl_schema!(
+    FlowBudgetByteDomainV1,
+    "FlowBudgetByteDomainV1",
+    |_generator| string_enum(&["source", "rendered_output"])
+);
+impl_schema!(
+    FlowRefusalCategoryV1,
+    "FlowRefusalCategoryV1",
+    |_generator| string_enum(&[
+        "non_canonical_input_attempt",
+        "system_root_missing",
+        "system_root_not_dir",
+        "system_root_symlink_not_allowed",
+        "required_artifact_missing",
+        "required_artifact_empty",
+        "required_artifact_starter_template",
+        "required_artifact_invalid",
+        "artifact_read_error",
+        "freshness_invalid",
+        "budget_refused",
+        "unsupported_request"
+    ])
+);
+impl_schema!(
+    FlowBlockerCategoryV1,
+    "FlowBlockerCategoryV1",
+    |_generator| string_enum(&[
+        "system_root_missing",
+        "system_root_not_dir",
+        "system_root_symlink_not_allowed",
+        "required_artifact_missing",
+        "required_artifact_empty",
+        "required_artifact_starter_template",
+        "required_artifact_invalid",
+        "artifact_read_error",
+        "freshness_invalid",
+        "budget_refused",
+        "unsupported_request"
+    ])
+);
+impl_schema!(FlowProblemCauseV1, "FlowProblemCauseV1", |_generator| {
+    string_enum(&[
+        "non_canonical_input_attempt",
+        "system_root_missing",
+        "system_root_not_dir",
+        "system_root_symlink_not_allowed",
+        "required_artifact_missing",
+        "required_artifact_empty",
+        "required_artifact_starter_template",
+        "required_artifact_invalid",
+        "artifact_read_error",
+        "freshness_invalid",
+        "budget_refused",
+        "unsupported_request",
+        "owner_read_failure",
+        "owner_profile_decision",
+    ])
+});
+impl_schema!(FlowProblemOriginV1, "FlowProblemOriginV1", |_generator| {
+    string_enum(&["resolution", "owner_ingest", "owner_error"])
+});
+
+impl_schema!(FlowResolveRequestV1, "FlowResolveRequestV1", |generator| {
+    closed_object(
+        vec![("packet_id", generator.subschema_for::<FlowPacketIdV1>())],
+        &["packet_id"],
+    )
+});
+
+impl_schema!(FlowSubjectRefV1, "FlowSubjectRefV1", |_generator| {
+    let canonical = closed_object(
+        vec![
+            ("kind", json_schema!({"const": "canonical_artifact"})),
+            ("instance_id", flow_text(255)),
+            ("kind_ref", flow_text(511)),
+            ("label", flow_text(1024)),
+            ("canonical_repo_relative_path", flow_path()),
+        ],
+        &[
+            "kind",
+            "instance_id",
+            "kind_ref",
+            "label",
+            "canonical_repo_relative_path",
+        ],
+    );
+    let dependency = closed_object(
+        vec![
+            ("kind", json_schema!({"const": "inherited_dependency"})),
+            ("dependency_id", flow_text(511)),
+            (
+                "version",
+                json_schema!({"anyOf": [flow_text(255), {"type": "null"}]}),
+            ),
+        ],
+        &["kind", "dependency_id", "version"],
+    );
+    let policy = closed_object(
+        vec![
+            ("kind", json_schema!({"const": "policy"})),
+            (
+                "policy_id",
+                string_enum(&["system_root", "freshness", "budget", "packet_id"]),
+            ),
+        ],
+        &["kind", "policy_id"],
+    );
+    json_schema!({"oneOf": [canonical, dependency, policy]})
+});
+
+impl_schema!(FlowNextSafeActionV1, "FlowNextSafeActionV1", |generator| {
+    let unit = |kind| closed_object(vec![("kind", json_schema!({"const": kind}))], &["kind"]);
+    let path = |kind| {
+        closed_object(
+            vec![
+                ("kind", json_schema!({"const": kind})),
+                ("canonical_repo_relative_path", flow_path()),
+            ],
+            &["kind", "canonical_repo_relative_path"],
+        )
+    };
+    json_schema!({"oneOf": [
+        unit("run_setup"), unit("run_setup_init"), unit("run_setup_refresh"),
+        unit("run_author_charter"), unit("run_author_project_context"),
+        path("create_system_root"), path("ensure_system_root_is_directory"),
+        path("remove_system_root_symlink"), path("create_canonical_artifact"),
+        path("fill_canonical_artifact"), path("reduce_canonical_artifact_size"),
+        closed_object(vec![
+            ("kind", json_schema!({"const": "run_generate"})),
+            ("packet_id", generator.subschema_for::<FlowPacketIdV1>()),
+        ], &["kind", "packet_id"]),
+        unit("run_doctor")
+    ]})
+});
+
+impl_schema!(
+    FlowBudgetNextSafeActionV1,
+    "FlowBudgetNextSafeActionV1",
+    |_generator| closed_object(
+        vec![
+            (
+                "kind",
+                json_schema!({"const": "reduce_canonical_artifact_size"})
+            ),
+            ("canonical_repo_relative_path", flow_path()),
+        ],
+        &["kind", "canonical_repo_relative_path"],
+    )
+);
+
+impl_schema!(FlowPacketSourceV1, "FlowPacketSourceV1", |generator| {
+    closed_object(
+        vec![
+            ("instance_id", flow_text(255)),
+            ("kind_ref", flow_text(511)),
+            ("label", flow_text(1024)),
+            ("canonical_repo_relative_path", flow_path()),
+            ("required", json_schema!({"type": "boolean"})),
+            (
+                "presence",
+                generator.subschema_for::<FlowArtifactPresenceV1>(),
+            ),
+            (
+                "byte_len",
+                json_schema!({"anyOf": [{"type": "integer", "minimum": 0, "maximum": MAX_SAFE_INTEGER}, {"type": "null"}]}),
+            ),
+            (
+                "content_sha256",
+                json_schema!({"anyOf": [flow_content_hash(), {"type": "null"}]}),
+            ),
+            (
+                "rendered_output_byte_len",
+                json_schema!({"anyOf": [{"type": "integer", "minimum": 0, "maximum": MAX_SAFE_INTEGER}, {"type": "null"}]}),
+            ),
+            (
+                "rendered_output_sha256",
+                json_schema!({"anyOf": [flow_content_hash(), {"type": "null"}]}),
+            ),
+            (
+                "rendered_media_type",
+                json_schema!({"anyOf": [flow_text(255), {"type": "null"}]}),
+            ),
+        ],
+        &[
+            "instance_id",
+            "kind_ref",
+            "label",
+            "canonical_repo_relative_path",
+            "required",
+            "presence",
+            "byte_len",
+            "content_sha256",
+            "rendered_output_byte_len",
+            "rendered_output_sha256",
+            "rendered_media_type",
+        ],
+    )
+});
+
+impl_schema!(FlowPacketBodyNoteV1, "FlowPacketBodyNoteV1", |generator| {
+    closed_object(
+        vec![
+            (
+                "kind",
+                generator.subschema_for::<FlowPacketBodyNoteKindV1>(),
+            ),
+            ("text", flow_text(8192)),
+        ],
+        &["kind", "text"],
+    )
+});
+impl_schema!(FlowPacketSectionV1, "FlowPacketSectionV1", |generator| {
+    closed_object(
+        vec![
+            ("instance_id", flow_text(255)),
+            ("kind_ref", flow_text(511)),
+            ("label", flow_text(1024)),
+            ("canonical_repo_relative_path", flow_path()),
+            ("title", flow_text(1024)),
+            ("mode", generator.subschema_for::<FlowPacketSectionModeV1>()),
+            ("contents", flow_text(1_048_576)),
+            (
+                "source_content_sha256",
+                json_schema!({"anyOf": [flow_content_hash(), {"type": "null"}]}),
+            ),
+            (
+                "rendered_output_sha256",
+                json_schema!({"anyOf": [flow_content_hash(), {"type": "null"}]}),
+            ),
+        ],
+        &[
+            "instance_id",
+            "kind_ref",
+            "label",
+            "canonical_repo_relative_path",
+            "title",
+            "mode",
+            "contents",
+            "source_content_sha256",
+            "rendered_output_sha256",
+        ],
+    )
+});
+
+impl_schema!(FlowFixtureContextV1, "FlowFixtureContextV1", |generator| {
+    closed_object(
+        vec![
+            ("fixture_set_id", flow_text(255)),
+            ("fixture_basis_root", flow_directory_path()),
+            (
+                "fixture_lineage",
+                flow_array::<FlowPacketSourceV1>(generator),
+            ),
+        ],
+        &["fixture_set_id", "fixture_basis_root", "fixture_lineage"],
+    )
+});
+impl_schema!(
+    FlowDecisionSummaryV1,
+    "FlowDecisionSummaryV1",
+    |generator| closed_object(
+        vec![
+            (
+                "packet_status",
+                generator.subschema_for::<FlowSelectionStatusV1>()
+            ),
+            (
+                "budget_disposition",
+                generator.subschema_for::<FlowBudgetDispositionV1>()
+            ),
+            (
+                "budget_reason",
+                generator.subschema_for::<FlowBudgetReasonV1>()
+            ),
+            (
+                "decision_log_entries",
+                json_schema!({"type": "integer", "minimum": 0, "maximum": MAX_SAFE_INTEGER})
+            ),
+            ("summary_line", flow_text(8192)),
+            (
+                "ready_next_safe_action",
+                generator.subschema_for::<FlowReadyActionV1>()
+            ),
+        ],
+        &[
+            "packet_status",
+            "budget_disposition",
+            "budget_reason",
+            "decision_log_entries",
+            "summary_line",
+            "ready_next_safe_action"
+        ]
+    )
+);
+impl_schema!(FlowPacketResultV1, "FlowPacketResultV1", |generator| {
+    closed_object(
+        vec![
+            ("packet_id", generator.subschema_for::<FlowPacketIdV1>()),
+            ("variant", generator.subschema_for::<FlowPacketVariantV1>()),
+            (
+                "fixture_context",
+                flow_optional::<FlowFixtureContextV1>(generator),
+            ),
+            (
+                "included_sources",
+                flow_array::<FlowPacketSourceV1>(generator),
+            ),
+            ("notes", flow_array::<FlowPacketBodyNoteV1>(generator)),
+            (
+                "decision_summary",
+                generator.subschema_for::<FlowDecisionSummaryV1>(),
+            ),
+            ("sections", flow_array::<FlowPacketSectionV1>(generator)),
+        ],
+        &[
+            "packet_id",
+            "variant",
+            "fixture_context",
+            "included_sources",
+            "notes",
+            "decision_summary",
+            "sections",
+        ],
+    )
+});
+
+impl_schema!(FlowBudgetTargetV1, "FlowBudgetTargetV1", |generator| {
+    closed_object(
+        vec![
+            ("canonical_repo_relative_path", flow_path()),
+            (
+                "byte_len",
+                json_schema!({"type": "integer", "minimum": 0, "maximum": MAX_SAFE_INTEGER}),
+            ),
+            (
+                "byte_domain",
+                generator.subschema_for::<FlowBudgetByteDomainV1>(),
+            ),
+        ],
+        &["canonical_repo_relative_path", "byte_len", "byte_domain"],
+    )
+});
+impl_schema!(FlowBudgetOutcomeV1, "FlowBudgetOutcomeV1", |generator| {
+    closed_object(
+        vec![
+            (
+                "disposition",
+                generator.subschema_for::<FlowBudgetDispositionV1>(),
+            ),
+            ("reason", generator.subschema_for::<FlowBudgetReasonV1>()),
+            ("targets", flow_array::<FlowBudgetTargetV1>(generator)),
+            (
+                "next_safe_action",
+                flow_optional::<FlowBudgetNextSafeActionV1>(generator),
+            ),
+        ],
+        &["disposition", "reason", "targets", "next_safe_action"],
+    )
+});
+impl_schema!(FlowSelectionV1, "FlowSelectionV1", |generator| {
+    closed_object(
+        vec![
+            ("packet_id", generator.subschema_for::<FlowPacketIdV1>()),
+            ("status", generator.subschema_for::<FlowSelectionStatusV1>()),
+        ],
+        &["packet_id", "status"],
+    )
+});
+impl_schema!(FlowRefusalV1, "FlowRefusalV1", |generator| closed_object(
+    vec![
+        (
+            "category",
+            generator.subschema_for::<FlowRefusalCategoryV1>()
+        ),
+        ("summary", flow_text(8192)),
+        (
+            "broken_subject",
+            generator.subschema_for::<FlowSubjectRefV1>()
+        ),
+        (
+            "next_safe_action",
+            generator.subschema_for::<FlowNextSafeActionV1>()
+        ),
+    ],
+    &["category", "summary", "broken_subject", "next_safe_action"]
+));
+impl_schema!(FlowBlockerV1, "FlowBlockerV1", |generator| closed_object(
+    vec![
+        (
+            "category",
+            generator.subschema_for::<FlowBlockerCategoryV1>()
+        ),
+        ("subject", generator.subschema_for::<FlowSubjectRefV1>()),
+        ("summary", flow_text(8192)),
+        (
+            "next_safe_action",
+            generator.subschema_for::<FlowNextSafeActionV1>()
+        ),
+    ],
+    &["category", "subject", "summary", "next_safe_action"]
+));
+
+impl_schema!(FlowResolveResultV1, "FlowResolveResultV1", |generator| {
+    closed_object(
+        vec![
+            ("c04_result_version", flow_text(255)),
+            ("c03_schema_version", flow_text(255)),
+            (
+                "c03_manifest_generation_version",
+                json_schema!({"type": "integer", "minimum": 0, "maximum": MAX_SAFE_INTEGER}),
+            ),
+            ("c03_fingerprint_sha256", flow_raw_hash()),
+            (
+                "packet_result",
+                generator.subschema_for::<FlowPacketResultV1>(),
+            ),
+            (
+                "decision_log_entries",
+                json_schema!({"type": "array", "maxItems": 128, "items": flow_text(8192)}),
+            ),
+            (
+                "budget_outcome",
+                generator.subschema_for::<FlowBudgetOutcomeV1>(),
+            ),
+            ("selection", generator.subschema_for::<FlowSelectionV1>()),
+            ("refusal", flow_optional::<FlowRefusalV1>(generator)),
+            ("blockers", flow_array::<FlowBlockerV1>(generator)),
+        ],
+        &[
+            "c04_result_version",
+            "c03_schema_version",
+            "c03_manifest_generation_version",
+            "c03_fingerprint_sha256",
+            "packet_result",
+            "decision_log_entries",
+            "budget_outcome",
+            "selection",
+            "refusal",
+            "blockers",
+        ],
+    )
+});
+
+impl_schema!(FlowProblemDetailsV1, "FlowProblemDetailsV1", |generator| {
+    closed_object(
+        vec![
+            ("origin", generator.subschema_for::<FlowProblemOriginV1>()),
+            ("cause", generator.subschema_for::<FlowProblemCauseV1>()),
+            ("detail", flow_text(4096)),
+            (
+                "resolution",
+                flow_optional::<FlowResolveResultV1>(generator),
+            ),
+        ],
+        &["origin", "cause", "detail", "resolution"],
+    )
+});
+impl_schema!(FlowRecheckV1, "FlowRecheckV1", |generator| closed_object(
+    vec![("cause", generator.subschema_for::<FlowProblemCauseV1>())],
+    &["cause"],
+));
+
 const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
 
 struct SchemaDescriptor {
@@ -4371,7 +4931,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 93] = [
+const INVENTORY: [SchemaDescriptor; 97] = [
     descriptor::<ArtifactProblemDetailsV1>(
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -4455,6 +5015,15 @@ const INVENTORY: [SchemaDescriptor; 93] = [
     descriptor::<Diagnostic>(
         "handbook.diagnostic@1.0.0",
         "handbook.diagnostic/1.0.0.schema.json",
+    ),
+    descriptor::<FlowProblemDetailsV1>(
+        "handbook.flow-operation-details@1.0.0",
+        "handbook.flow-operation-details/1.0.0.schema.json",
+    ),
+    exact_descriptor(
+        "handbook.flow-recheck@1.0.0",
+        "handbook.flow-recheck/1.0.0.schema.json",
+        flow_recheck_schema,
     ),
     descriptor::<IdempotencyState>(
         "handbook.idempotency-state@1.0.0",
@@ -4557,6 +5126,14 @@ const INVENTORY: [SchemaDescriptor; 93] = [
     descriptor::<ValidateResultV1>(
         "handbook.operation.artifact-validate-result@1.0.0",
         "handbook.operation.artifact-validate-result/1.0.0.schema.json",
+    ),
+    descriptor::<FlowResolveRequestV1>(
+        "handbook.operation.flow-resolve-request@1.0.0",
+        "handbook.operation.flow-resolve-request/1.0.0.schema.json",
+    ),
+    descriptor::<FlowResolveResultV1>(
+        "handbook.operation.flow-resolve-result@1.0.0",
+        "handbook.operation.flow-resolve-result/1.0.0.schema.json",
     ),
     descriptor::<IntakeEvaluateRequestV1>(
         "handbook.operation.intake-coverage-evaluate-request@1.0.0",
@@ -4799,6 +5376,31 @@ fn artifact_repository_recheck_schema() -> Schema {
     ])
 }
 
+fn flow_recheck_schema() -> Schema {
+    let mut schema = generate_root::<FlowRecheckV1>();
+    let properties = schema
+        .get_mut("properties")
+        .and_then(serde_json::Value::as_object_mut)
+        .expect("Flow recheck schema has object properties");
+    properties.insert(
+        "cause".to_owned(),
+        string_enum(&[
+            "system_root_missing",
+            "system_root_not_dir",
+            "system_root_symlink_not_allowed",
+            "required_artifact_missing",
+            "required_artifact_empty",
+            "required_artifact_starter_template",
+            "required_artifact_invalid",
+            "artifact_read_error",
+            "freshness_invalid",
+            "budget_refused",
+        ])
+        .into(),
+    );
+    schema
+}
+
 fn artifact_platform_recheck_schema() -> Schema {
     exact_recheck_schema(&["unsupported_platform"])
 }
@@ -4946,8 +5548,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 93 {
-        return Err("schema inventory must contain exactly 93 entries".to_owned());
+    if INVENTORY.len() != 97 {
+        return Err("schema inventory must contain exactly 97 entries".to_owned());
     }
 
     let mut previous_ref = None;

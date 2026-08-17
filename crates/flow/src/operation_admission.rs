@@ -82,13 +82,15 @@ pub fn admit_contract_operation(
     if expected.1 != claim.mutability || expected.2 != claim.idempotency || !known_shape(claim) {
         return Err(OwnerAdmissionRefusal::DefinitionMismatch);
     }
-    let Some(expected_claim) = ADMITTED
-        .iter()
-        .find(|candidate| candidate.operation_ref == claim.operation_ref)
-    else {
-        return Err(OwnerAdmissionRefusal::DefinitionMismatch);
+    let admitted = if claim.operation_ref == "flow.resolve@1.0.0" {
+        crate::flow_resolve_admission::matches(claim)
+    } else {
+        ADMITTED
+            .iter()
+            .find(|candidate| candidate.operation_ref == claim.operation_ref)
+            .is_some_and(|expected_claim| exact_claim_matches(claim, expected_claim))
     };
-    if !exact_claim_matches(claim, expected_claim) {
+    if !admitted {
         return Err(OwnerAdmissionRefusal::DefinitionMismatch);
     }
     Ok(OwnerOperationAdmission {

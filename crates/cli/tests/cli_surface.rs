@@ -4978,6 +4978,200 @@ fn inspect_retry_after_repair_clears_missing_root_refusal() {
 }
 
 #[test]
+fn flow_generate_and_inspect_machine_json_share_one_exact_blocked_operation_result() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+
+    let human_generate = run_in(root, &["generate", "--packet", "planning.packet"]);
+    let human_inspect = run_in(root, &["inspect", "--packet", "planning.packet"]);
+    let generate = run_in(root, &["generate", "--json", "--packet", "planning.packet"]);
+    let inspect = run_in(root, &["inspect", "--json", "--packet", "planning.packet"]);
+
+    assert_eq!(generate.status.code(), Some(1));
+    assert_eq!(inspect.status.code(), generate.status.code());
+    assert_eq!(generate.stdout, inspect.stdout);
+    assert!(generate.stderr.is_empty());
+    assert!(inspect.stderr.is_empty());
+    assert!(generate.stdout.ends_with(b"\n"));
+    assert!(!generate.stdout.ends_with(b"\n\n"));
+    assert_eq!(
+        human_generate.status.code(),
+        generate.status.code(),
+        "human and machine exits must agree"
+    );
+    assert_eq!(human_inspect.status.code(), inspect.status.code());
+    assert_first_three_lines(
+        &String::from_utf8(human_generate.stdout).unwrap(),
+        [
+            "OUTCOME: REFUSED",
+            "OBJECT: planning.packet",
+            "NEXT SAFE ACTION: run `handbook setup`",
+        ],
+    );
+
+    let value: serde_json::Value = serde_json::from_slice(&generate.stdout).unwrap();
+    assert_eq!(value["schema"]["ref"], "handbook.invocation-response@1.0.0");
+    assert_eq!(value["response_kind"], "operation");
+    assert_eq!(value["response"]["operation"]["ref"], "flow.resolve@1.0.0");
+    assert_eq!(
+        value["response"]["result_schema"]["ref"],
+        "handbook.operation.flow-resolve-result@1.0.0"
+    );
+    assert_eq!(value["response"]["status"], "blocked");
+    assert!(value["response"]["data"].is_null());
+    let details = &value["response"]["blockers"][0]["details"];
+    assert_eq!(details["cause"], "system_root_missing");
+    assert_eq!(
+        details["resolution"]["selection"]["packet_id"],
+        "planning.packet"
+    );
+    assert!(details["resolution"]["refusal"].is_object());
+    assert!(!details["resolution"]["blockers"]
+        .as_array()
+        .unwrap()
+        .is_empty());
+    assert!(details["resolution"]["budget_outcome"].is_object());
+    assert_eq!(value["response"]["receipts"].as_array().unwrap().len(), 0);
+}
+
+#[test]
+fn flow_ready_machine_json_is_shared_while_human_renderers_remain_distinct() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    repair_to_ready(root);
+
+    let generate_json = run_in(root, &["generate", "--json"]);
+    let inspect_json = run_in(root, &["inspect", "--json"]);
+    assert_eq!(
+        generate_json.status.code(),
+        Some(0),
+        "stdout={} stderr={}",
+        String::from_utf8_lossy(&generate_json.stdout),
+        String::from_utf8_lossy(&generate_json.stderr)
+    );
+    assert_eq!(generate_json.stdout, inspect_json.stdout);
+    let value: serde_json::Value = serde_json::from_slice(&generate_json.stdout).unwrap();
+    assert_eq!(value["response"]["status"], "ok");
+    assert_eq!(
+        value["response"]["data"]["packet_result"]["packet_id"],
+        "planning.packet"
+    );
+    assert!(
+        value["response"]["data"]["packet_result"]["sections"]
+            .as_array()
+            .unwrap()
+            .len()
+            >= 2
+    );
+
+    let generate_human = String::from_utf8(run_in(root, &["generate"]).stdout).unwrap();
+    let inspect_human = String::from_utf8(run_in(root, &["inspect"]).stdout).unwrap();
+    assert!(generate_human.contains("## INCLUDED SOURCES"));
+    assert!(!generate_human.contains("## JSON FALLBACK"));
+    assert!(inspect_human.contains("## JSON FALLBACK"));
+}
+
+#[test]
+fn flow_machine_json_preserves_fixture_lineage_and_live_refusal_truth() {
+    let (_dir, root) = execution_demo_repo();
+    let generate_demo = run_in(
+        &root,
+        &[
+            "generate",
+            "--json",
+            "--packet",
+            "execution.demo.packet",
+            "--fixture-set",
+            "basic",
+        ],
+    );
+    let inspect_demo = run_in(
+        &root,
+        &[
+            "inspect",
+            "--json",
+            "--packet",
+            "execution.demo.packet",
+            "--fixture-set",
+            "basic",
+        ],
+    );
+    assert_eq!(generate_demo.status.code(), Some(0));
+    assert_eq!(generate_demo.stdout, inspect_demo.stdout);
+    let demo: serde_json::Value = serde_json::from_slice(&generate_demo.stdout).unwrap();
+    let context = &demo["response"]["data"]["packet_result"]["fixture_context"];
+    assert_eq!(context["fixture_set_id"], "basic");
+    assert_eq!(
+        context["fixture_basis_root"],
+        "tests/fixtures/execution_demo/basic/.handbook/"
+    );
+    assert!(!context["fixture_lineage"].as_array().unwrap().is_empty());
+    assert_eq!(
+        demo["response"]["data"]["budget_outcome"]["reason"],
+        "within_budget"
+    );
+    assert!(demo["response"]["receipts"].as_array().unwrap().is_empty());
+    assert!(
+        !String::from_utf8_lossy(&generate_demo.stdout).contains(root.to_string_lossy().as_ref())
+    );
+
+    let live_dir = tempfile::tempdir().expect("tempdir");
+    repair_to_ready(live_dir.path());
+    let live = run_in(
+        live_dir.path(),
+        &["generate", "--json", "--packet", "execution.live.packet"],
+    );
+    assert_eq!(live.status.code(), Some(1));
+    assert!(live.stderr.is_empty());
+    let live: serde_json::Value = serde_json::from_slice(&live.stdout).unwrap();
+    assert_eq!(live["response"]["status"], "refused");
+    assert_eq!(
+        live["response"]["refusals"][0]["details"]["cause"],
+        "unsupported_request"
+    );
+    assert_eq!(
+        live["response"]["refusals"][0]["details"]["resolution"]["selection"]["packet_id"],
+        "execution.live.packet"
+    );
+}
+
+#[test]
+fn flow_machine_transport_keeps_decoding_distinct_and_does_not_invent_legacy_json() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    let invalid = run_in(root, &["generate", "--json", "--packet", "unknown.packet"]);
+    assert_eq!(invalid.status.code(), Some(1));
+    assert!(invalid.stderr.is_empty());
+    let value: serde_json::Value = serde_json::from_slice(&invalid.stdout).unwrap();
+    assert_eq!(value["response_kind"], "transport_failure");
+    assert_eq!(value["response"]["failure_kind"], "decoding");
+    assert_eq!(value["response"]["status"], "refused");
+
+    let unavailable_fixture = run_in(
+        root,
+        &[
+            "inspect",
+            "--json",
+            "--packet",
+            "execution.demo.packet",
+            "--fixture-set",
+            "missing",
+        ],
+    );
+    assert_eq!(unavailable_fixture.status.code(), Some(1));
+    assert!(unavailable_fixture.stderr.is_empty());
+    let value: serde_json::Value = serde_json::from_slice(&unavailable_fixture.stdout).unwrap();
+    assert_eq!(value["response_kind"], "transport_failure");
+    assert_eq!(value["response"]["failure_kind"], "acquisition");
+    assert_eq!(value["response"]["status"], "refused");
+    assert!(!String::from_utf8_lossy(&unavailable_fixture.stdout)
+        .contains(root.to_string_lossy().as_ref()));
+
+    let legacy = run_in(root, &["generate", "--legacy-json"]);
+    assert_eq!(legacy.status.code(), Some(2));
+}
+
+#[test]
 #[cfg(any())]
 fn doctor_marks_empty_charter_as_invalid_baseline() {
     assert_doctor_empty_baseline_invalid(

@@ -22,7 +22,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 93] = [
+const ROOTS: [(&str, &str); 97] = [
     (
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -102,6 +102,14 @@ const ROOTS: [(&str, &str); 93] = [
     (
         "handbook.diagnostic@1.0.0",
         "handbook.diagnostic/1.0.0.schema.json",
+    ),
+    (
+        "handbook.flow-operation-details@1.0.0",
+        "handbook.flow-operation-details/1.0.0.schema.json",
+    ),
+    (
+        "handbook.flow-recheck@1.0.0",
+        "handbook.flow-recheck/1.0.0.schema.json",
     ),
     (
         "handbook.idempotency-state@1.0.0",
@@ -202,6 +210,14 @@ const ROOTS: [(&str, &str); 93] = [
     (
         "handbook.operation.artifact-validate-result@1.0.0",
         "handbook.operation.artifact-validate-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.flow-resolve-request@1.0.0",
+        "handbook.operation.flow-resolve-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.flow-resolve-result@1.0.0",
+        "handbook.operation.flow-resolve-result/1.0.0.schema.json",
     ),
     (
         "handbook.operation.intake-coverage-evaluate-request@1.0.0",
@@ -491,7 +507,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 93);
+    assert_eq!(entries.len(), 97);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries
@@ -637,7 +653,7 @@ fn packet_three_constructor_instances_validate_against_every_new_root_shape() {
         }
         _ => panic!("expired catalog did not return a blocked restart"),
     }
-    assert_eq!(witness.capabilities().len(), 11);
+    assert_eq!(witness.capabilities().len(), 12);
 }
 
 #[test]

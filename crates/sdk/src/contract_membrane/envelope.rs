@@ -65,6 +65,18 @@ pub trait OperationSchemaValidator {
         schema: &ExactBinding,
         instance: &ContractValue,
     ) -> Result<(), ContractError>;
+
+    fn validate_problem(
+        &self,
+        _status: TerminalStatus,
+        problem: &Problem,
+    ) -> Result<(), ContractError> {
+        self.validate_instance(problem.details_schema(), problem.details())?;
+        if let Some(recheck) = problem.recheck() {
+            self.validate_instance(recheck.condition_schema(), recheck.condition())?;
+        }
+        Ok(())
+    }
 }
 
 #[derive(Deserialize, Serialize)]
@@ -317,6 +329,14 @@ impl OperationResponseV1 {
         require_exact_ref(&schema, "handbook.operation-response@1.0.0")?;
         if let Some(data) = terminal.data() {
             validator.validate_instance(definition.result_schema(), data)?;
+        }
+        for problem in terminal
+            .blockers()
+            .iter()
+            .chain(terminal.refusals())
+            .chain(terminal.errors())
+        {
+            validator.validate_problem(terminal.status(), problem)?;
         }
         validate_idempotency(
             definition.class(),

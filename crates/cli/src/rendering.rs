@@ -31,10 +31,6 @@ impl PreparedFlowOutput {
 
         inject_after_first_three_lines(&rendered, &render_fixture_section_for_demo(context))
     }
-
-    pub(crate) fn is_ready(&self) -> bool {
-        self.ready
-    }
 }
 
 fn render_fixture_section_for_demo(context: &handbook_sdk::PacketFixtureContext) -> String {

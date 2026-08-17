@@ -152,6 +152,14 @@ impl HandbookSdkV1 {
             .map(flow_api::InspectPacketResult::new)
             .map_err(flow_api::FlowRouteError::from_compiler)
     }
+
+    /// Executes the exact Flow resolve ordinary operation once.
+    pub fn execute_flow_operation(
+        &self,
+        request: &contract_membrane::OperationRequestV1,
+    ) -> Result<contract_membrane::OperationResponseV1, contract_membrane::ContractError> {
+        contract_membrane::execute_flow_operation(&self.repo_root, request)
+    }
 }
 
 fn execute_preflighted_setup(

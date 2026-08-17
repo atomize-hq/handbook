@@ -23,28 +23,68 @@ pub(super) struct PreparedRequest {
     pub(super) compiler_root: PathBuf,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(super) enum RequestPreparationErrorKind {
+    Acquisition,
+    Decoding,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub(super) struct RequestPreparationError {
+    kind: RequestPreparationErrorKind,
+    detail: String,
+}
+
+impl RequestPreparationError {
+    fn decoding(detail: String) -> Self {
+        Self {
+            kind: RequestPreparationErrorKind::Decoding,
+            detail,
+        }
+    }
+
+    fn acquisition(detail: String) -> Self {
+        Self {
+            kind: RequestPreparationErrorKind::Acquisition,
+            detail,
+        }
+    }
+
+    pub(super) fn kind(&self) -> RequestPreparationErrorKind {
+        self.kind
+    }
+}
+
+impl std::fmt::Display for RequestPreparationError {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter.write_str(&self.detail)
+    }
+}
+
 pub(super) fn prepare_request(
     args: &RequestArgs,
     repo_root: &Path,
-) -> Result<PreparedRequest, String> {
-    let packet_id = parse_packet_id(&args.packet)?;
+) -> Result<PreparedRequest, RequestPreparationError> {
+    let packet_id = parse_packet_id(&args.packet).map_err(RequestPreparationError::decoding)?;
     let compiler_root = match packet_id {
         PacketId::Planning | PacketId::ExecutionLive => repo_root.to_path_buf(),
         PacketId::ExecutionDemo => {
             let fixture_set_id = match args.fixture_set.as_deref() {
                 Some(id) => id.trim(),
                 None => {
-                    return Err(format!(
+                    return Err(RequestPreparationError::decoding(format!(
                         "--fixture-set is required when --packet {PACKET_EXECUTION_DEMO_ID}"
-                    ));
+                    )));
                 }
             };
-            validate_fixture_set_id(fixture_set_id)?;
+            validate_fixture_set_id(fixture_set_id).map_err(RequestPreparationError::decoding)?;
 
             let fixture_set_dir = execution_demo_fixture_set_dir(repo_root, fixture_set_id);
-            ensure_dir(&fixture_set_dir, "fixture set directory")?;
+            ensure_dir(&fixture_set_dir, "fixture set directory")
+                .map_err(RequestPreparationError::acquisition)?;
             let basis_root = fixture_set_dir.join(".handbook");
-            ensure_dir(&basis_root, "fixture basis root")?;
+            ensure_dir(&basis_root, "fixture basis root")
+                .map_err(RequestPreparationError::acquisition)?;
             fixture_set_dir
         }
     };
