@@ -5,7 +5,7 @@ use handbook_sdk::contract_membrane::{
     pipeline_catalog_list_operation_request, pipeline_catalog_read_operation_request,
     pipeline_compile_operation_request, ArtifactOperationInputV1, ContractLimits, DiscoveryState,
     InvocationRequestV1, InvocationResponseKind, InvocationResponseV1, OperationRequestV1,
-    OperationTransport, ProductionWitness, TransportFailureKind, UseCaseRequestV1, UtcTimestamp,
+    OperationTransport, ProductionWitness, TransportFailureKind, UtcTimestamp,
 };
 use handbook_sdk::HandbookSdkV1;
 use std::collections::BTreeSet;
@@ -149,7 +149,7 @@ fn sdk_dispatcher_matches_each_direct_owner_route_for_exactly_twelve_read_only_o
 }
 
 #[test]
-fn sdk_dispatcher_default_denies_mutation_use_case_and_non_target_requests_without_writes() {
+fn sdk_dispatcher_default_denies_mutation_and_non_target_requests_without_writes() {
     let repo = tempfile::tempdir().unwrap();
     let sentinel = repo.path().join("sentinel.txt");
     std::fs::write(&sentinel, b"unchanged").unwrap();
@@ -168,27 +168,19 @@ fn sdk_dispatcher_default_denies_mutation_use_case_and_non_target_requests_witho
         &limits,
     )
     .unwrap();
-    let use_case = InvocationRequestV1::use_case(
-        UseCaseRequestV1::repository_doctor(&limits).unwrap(),
-        &limits,
-    )
-    .unwrap();
-
-    for request in [&mutation, &use_case] {
-        let response = sdk.invoke(request, &limits).unwrap();
-        assert_eq!(
-            response.response_kind(),
-            InvocationResponseKind::TransportFailure
-        );
-        assert_eq!(
-            response.transport_failure_kind(),
-            Some(TransportFailureKind::Adapter)
-        );
-        assert_eq!(
-            response.transport_failure_reason_code(&limits).unwrap(),
-            Some("transport.invocation_route_not_ready".to_owned())
-        );
-    }
+    let response = sdk.invoke(&mutation, &limits).unwrap();
+    assert_eq!(
+        response.response_kind(),
+        InvocationResponseKind::TransportFailure
+    );
+    assert_eq!(
+        response.transport_failure_kind(),
+        Some(TransportFailureKind::Adapter)
+    );
+    assert_eq!(
+        response.transport_failure_reason_code(&limits).unwrap(),
+        Some("transport.invocation_route_not_ready".to_owned())
+    );
 
     let admitted = InvocationRequestV1::operation(
         pipeline_catalog_list_operation_request(None).unwrap(),

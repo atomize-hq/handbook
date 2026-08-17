@@ -587,6 +587,15 @@ pub enum UseCaseRequestBodyV1 {
     PipelineRouteResolveAndPersist(PipelineRouteResolveAndPersistRequestV1),
 }
 
+pub(crate) enum SdkUseCaseRequest {
+    RepositorySetup(crate::SetupRequest),
+    RepositoryDoctor,
+    AuthorCharter(crate::CharterCommandRequest),
+    AuthorProjectContext(crate::ProjectContextCommandRequest),
+    ApproverAdministration(crate::ApproverCommandRequest),
+    PipelineRouteResolveAndPersist(String),
+}
+
 impl UseCaseRequestBodyV1 {
     fn use_case_ref(&self) -> &'static str {
         match self {
@@ -605,6 +614,225 @@ impl UseCaseRequestBodyV1 {
         }
         Ok(())
     }
+
+    pub(crate) fn sdk_request(&self) -> SdkUseCaseRequest {
+        match self {
+            Self::RepositorySetup(request) => {
+                SdkUseCaseRequest::RepositorySetup(crate::SetupRequest {
+                    mode: match request.mode {
+                        RepositorySetupModeV1::Auto => crate::SetupMode::Auto,
+                        RepositorySetupModeV1::Init => crate::SetupMode::Init,
+                        RepositorySetupModeV1::Refresh => crate::SetupMode::Refresh,
+                    },
+                    rewrite: request.rewrite,
+                    reset_state: request.reset_state,
+                })
+            }
+            Self::RepositoryDoctor(_) => SdkUseCaseRequest::RepositoryDoctor,
+            Self::AuthorCharter(request) => {
+                SdkUseCaseRequest::AuthorCharter(sdk_charter_request(request))
+            }
+            Self::AuthorProjectContext(request) => {
+                SdkUseCaseRequest::AuthorProjectContext(sdk_project_context_request(request))
+            }
+            Self::ApproverAdministration(request) => {
+                SdkUseCaseRequest::ApproverAdministration(sdk_approver_request(request))
+            }
+            Self::PipelineRouteResolveAndPersist(request) => {
+                SdkUseCaseRequest::PipelineRouteResolveAndPersist(
+                    request.selector.as_str().to_owned(),
+                )
+            }
+        }
+    }
+}
+
+fn sdk_charter_request(request: &AuthorCharterRequestV1) -> crate::CharterCommandRequest {
+    match request {
+        AuthorCharterRequestV1::Author { mode, intake } => crate::CharterCommandRequest::Author {
+            mode: sdk_charter_mode(*mode),
+            intake: crate::CharterIntakeEnvelope {
+                mode: sdk_charter_mode(intake.mode),
+                content: sdk_charter_value(&intake.content),
+                coverage: intake
+                    .coverage
+                    .as_slice()
+                    .iter()
+                    .map(|submission| crate::CharterCoverageSubmission {
+                        coverage_id: submission.coverage_id.as_str().to_owned(),
+                        source_kind: sdk_charter_source_kind(submission.source_kind),
+                        value_ref: submission.value_ref.as_str().to_owned(),
+                        evidence_refs: bounded_strings(&submission.evidence_refs),
+                        confidence: submission.confidence.as_str().to_owned(),
+                        freshness: submission
+                            .freshness
+                            .as_ref()
+                            .map(|value| value.as_str().to_owned()),
+                        sensitivity: submission.sensitivity.as_str().to_owned(),
+                        contradiction_refs: bounded_strings(&submission.contradiction_refs),
+                        waiver_ref: submission
+                            .waiver_ref
+                            .as_ref()
+                            .map(|value| value.as_str().to_owned()),
+                    })
+                    .collect(),
+                consumer: crate::CharterIntakeConsumer {
+                    kind: intake.consumer.kind.as_str().to_owned(),
+                    id: intake.consumer.id.as_str().to_owned(),
+                    version: intake.consumer.version.as_str().to_owned(),
+                },
+                prompt_event_refs: bounded_strings(&intake.prompt_event_refs),
+                finalized_at_utc: intake.finalized_at_utc.as_str().to_owned(),
+                expected_current_fingerprint: intake
+                    .expected_current_fingerprint
+                    .as_ref()
+                    .map(|value| value.as_str().to_owned()),
+            },
+        },
+        AuthorCharterRequestV1::Approve {
+            candidate_ref,
+            approval_class,
+            authority_ref,
+            accepted_waiver_refs,
+        } => crate::CharterCommandRequest::Approve {
+            candidate_ref: candidate_ref.as_str().to_owned(),
+            approval_class: approval_class.as_str().to_owned(),
+            authority_ref: authority_ref.as_str().to_owned(),
+            accepted_waiver_refs: bounded_strings(accepted_waiver_refs),
+        },
+        AuthorCharterRequestV1::Promote {
+            candidate_ref,
+            approval_ref,
+            expected_current_fingerprint,
+        } => crate::CharterCommandRequest::Promote {
+            candidate_ref: candidate_ref.as_str().to_owned(),
+            approval_ref: approval_ref.as_str().to_owned(),
+            expected_current_fingerprint: expected_current_fingerprint
+                .as_ref()
+                .map(|value| value.as_str().to_owned()),
+        },
+        AuthorCharterRequestV1::Validate => crate::CharterCommandRequest::Validate,
+    }
+}
+
+fn sdk_charter_value(value: &CharterInputValueV1) -> crate::CharterInputValue {
+    match value {
+        CharterInputValueV1::Null => crate::CharterInputValue::Null,
+        CharterInputValueV1::Boolean { value } => crate::CharterInputValue::Boolean(*value),
+        CharterInputValueV1::Number { value } => crate::CharterInputValue::Number(value.clone()),
+        CharterInputValueV1::String { value } => crate::CharterInputValue::String(value.clone()),
+        CharterInputValueV1::Sequence { values } => crate::CharterInputValue::Sequence(
+            values.as_slice().iter().map(sdk_charter_value).collect(),
+        ),
+        CharterInputValueV1::Mapping { entries } => crate::CharterInputValue::Mapping(
+            entries
+                .as_slice()
+                .iter()
+                .map(|entry| (entry.key.clone(), sdk_charter_value(&entry.value)))
+                .collect(),
+        ),
+    }
+}
+
+fn sdk_charter_mode(mode: CharterAcquisitionModeV1) -> crate::CharterAcquisitionMode {
+    match mode {
+        CharterAcquisitionModeV1::GuidedAdaptive => crate::CharterAcquisitionMode::GuidedAdaptive,
+        CharterAcquisitionModeV1::Express => crate::CharterAcquisitionMode::Express,
+        CharterAcquisitionModeV1::AgentAssisted => crate::CharterAcquisitionMode::AgentAssisted,
+    }
+}
+
+fn sdk_charter_source_kind(
+    source_kind: CharterIntakeSourceKindV1,
+) -> crate::CharterIntakeSourceKind {
+    match source_kind {
+        CharterIntakeSourceKindV1::UserDeclaration => {
+            crate::CharterIntakeSourceKind::UserDeclaration
+        }
+        CharterIntakeSourceKindV1::EvidencedInference => {
+            crate::CharterIntakeSourceKind::EvidencedInference
+        }
+        CharterIntakeSourceKindV1::DeterministicDefault => {
+            crate::CharterIntakeSourceKind::DeterministicDefault
+        }
+        CharterIntakeSourceKindV1::KnownUnknown => crate::CharterIntakeSourceKind::KnownUnknown,
+        CharterIntakeSourceKindV1::Contradiction => crate::CharterIntakeSourceKind::Contradiction,
+        CharterIntakeSourceKindV1::Waiver => crate::CharterIntakeSourceKind::Waiver,
+    }
+}
+
+fn sdk_project_context_request(
+    request: &AuthorProjectContextRequestV1,
+) -> crate::ProjectContextCommandRequest {
+    match request {
+        AuthorProjectContextRequestV1::Author(input) => {
+            crate::ProjectContextCommandRequest::Author(sdk_project_context_input(input))
+        }
+        AuthorProjectContextRequestV1::Validate(input) => {
+            crate::ProjectContextCommandRequest::Validate(sdk_project_context_input(input))
+        }
+    }
+}
+
+fn sdk_project_context_input(input: &ProjectContextInputV1) -> crate::ProjectContextInput {
+    crate::ProjectContextInput {
+        schema_id: input.schema_id.as_str().to_owned(),
+        schema_version: input.schema_version.as_str().to_owned(),
+        record_id: input.record_id.as_str().to_owned(),
+        summary: input.summary.as_str().to_owned(),
+        system_boundaries: bounded_strings(&input.system_boundaries),
+        ownership: bounded_strings(&input.ownership),
+        authoritative_references: bounded_strings(&input.authoritative_references),
+        known_unknowns: bounded_strings(&input.known_unknowns),
+    }
+}
+
+fn sdk_approver_request(
+    request: &ApproverAdministrationRequestV1,
+) -> crate::ApproverCommandRequest {
+    let mappings = |values: &BoundedVec<ApproverMappingRequestV1, 128>| {
+        values
+            .as_slice()
+            .iter()
+            .map(|mapping| {
+                crate::ApproverMapping::new(mapping.approval_class(), mapping.authority_ref())
+            })
+            .collect()
+    };
+    match request {
+        ApproverAdministrationRequestV1::Bootstrap {
+            initial_charter_quorum,
+        } => crate::ApproverCommandRequest::Bootstrap {
+            initial_charter_quorum: mappings(initial_charter_quorum),
+        },
+        ApproverAdministrationRequestV1::AddCredential { approval_mappings } => {
+            crate::ApproverCommandRequest::AddCredential {
+                approval_mappings: mappings(approval_mappings),
+            }
+        }
+        ApproverAdministrationRequestV1::RevokeCredential { credential_id_hash } => {
+            crate::ApproverCommandRequest::RevokeCredential {
+                credential_id_hash: credential_id_hash.as_str().to_owned(),
+            }
+        }
+        ApproverAdministrationRequestV1::UpdateMapping {
+            credential_id_hash,
+            approval_mappings,
+        } => crate::ApproverCommandRequest::UpdateMapping {
+            credential_id_hash: credential_id_hash.as_str().to_owned(),
+            approval_mappings: mappings(approval_mappings),
+        },
+    }
+}
+
+fn bounded_strings<const N: usize, const M: usize>(
+    values: &BoundedVec<BoundedString<N>, M>,
+) -> Vec<String> {
+    values
+        .as_slice()
+        .iter()
+        .map(|value| value.as_str().to_owned())
+        .collect()
 }
 
 impl Serialize for UseCaseRequestBodyV1 {

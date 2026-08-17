@@ -101,7 +101,9 @@ pub use invocation::{
     TransportFailureDetailsV1, TransportFailureKind, TransportFailureV1, TransportIoErrorKindV1,
     TransportIoErrorV1, TransportPresentationViewV1, UseCaseCauseV1, UseCaseResponseV1,
 };
-pub(crate) use invocation_dispatch::{dispatch_invocation, readmit_invocation_response};
+pub(crate) use invocation_dispatch::{
+    dispatch_invocation, dispatch_tauri_invocation, readmit_invocation_response,
+};
 pub use operation::{
     operation_inventory, validate_complete_definition_set, validate_complete_operation_ref_set,
     AdmissionReason, DeclaredWrite, DefinitionSetError, DiscoveryState, JsonPointer,

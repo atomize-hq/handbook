@@ -231,7 +231,7 @@ fn execute_invocation(
 ) -> Result<InvocationResponseV1, HostError> {
     let response = state
         ._sdk
-        .invoke(&request, &state.limits)
+        .invoke_tauri(&request, &state.limits)
         .map_err(contract_error)?;
     readmit_invocation(state, &request, response)
 }
@@ -275,12 +275,15 @@ mod tests {
         artifact_operation_request, flow_resolve_operation_request,
         pipeline_capture_direct_operation_request, pipeline_capture_plan_operation_request,
         pipeline_catalog_list_operation_request, pipeline_catalog_read_operation_request,
-        pipeline_compile_operation_request, ArtifactOperationInputV1, BootstrapFacadeOutcomeKindV1,
-        BootstrapRequestV1, CatalogKindV1, CatalogPageSize, CatalogReadOutcomeKindV1,
-        CatalogReadRequestV1, CatalogReadResponseBodyV1, ContractLimits, InvocationRequestV1,
-        InvocationResponseKind, SemVer, TransportFailureKind, TypedCatalogCursor, UseCaseRequestV1,
-        UtcTimestamp,
+        pipeline_compile_operation_request, ApproverAdministrationRequestV1,
+        ArtifactOperationInputV1, AuthorCharterRequestV1, AuthorProjectContextRequestV1,
+        BootstrapFacadeOutcomeKindV1, BootstrapRequestV1, CatalogKindV1, CatalogPageSize,
+        CatalogReadOutcomeKindV1, CatalogReadRequestV1, CatalogReadResponseBodyV1, ContractLimits,
+        InvocationRequestV1, InvocationResponseKind, PipelineRouteResolveAndPersistRequestV1,
+        ProjectContextInputV1, RepositorySetupModeV1, RepositorySetupRequestV1, SemVer,
+        TransportFailureKind, TypedCatalogCursor, UseCaseRequestV1, UtcTimestamp,
     };
+    use handbook_sdk::{SetupMode, SetupRequest};
     use serde_json::{json, Value};
     use std::path::Path;
     use std::thread;
@@ -444,6 +447,48 @@ mod tests {
             .into_iter()
             .map(|request| InvocationRequestV1::operation(request, &limits).unwrap())
             .collect()
+    }
+
+    fn use_case_invocation_requests() -> Vec<InvocationRequestV1> {
+        let limits = ContractLimits::packet0();
+        let context = ProjectContextInputV1::new(
+            "handbook.artifact.project-context",
+            "1.0",
+            "handbook.project-context",
+            "Packet 4 Tauri request",
+            vec!["SDK facade".to_owned()],
+            vec!["Project owner".to_owned()],
+            vec!["docs/START_HERE.md".to_owned()],
+            vec!["None".to_owned()],
+        )
+        .unwrap();
+        [
+            UseCaseRequestV1::repository_setup(
+                RepositorySetupRequestV1::new(RepositorySetupModeV1::Refresh, false, false),
+                &limits,
+            )
+            .unwrap(),
+            UseCaseRequestV1::repository_doctor(&limits).unwrap(),
+            UseCaseRequestV1::author_charter(AuthorCharterRequestV1::Validate, &limits).unwrap(),
+            UseCaseRequestV1::author_project_context(
+                AuthorProjectContextRequestV1::Validate(context),
+                &limits,
+            )
+            .unwrap(),
+            UseCaseRequestV1::approver_administration(
+                ApproverAdministrationRequestV1::revoke_credential("sha256:packet-four").unwrap(),
+                &limits,
+            )
+            .unwrap(),
+            UseCaseRequestV1::pipeline_route_resolve_and_persist(
+                PipelineRouteResolveAndPersistRequestV1::new("packet-four-missing").unwrap(),
+                &limits,
+            )
+            .unwrap(),
+        ]
+        .into_iter()
+        .map(|request| InvocationRequestV1::use_case(request, &limits).unwrap())
+        .collect()
     }
 
     fn inject_repository_root<T>(request: &T) -> Value
@@ -625,7 +670,56 @@ mod tests {
     }
 
     #[test]
-    fn invocation_default_denies_mutation_use_case_and_non_target_without_repository_effects() {
+    fn invocation_runs_all_six_use_cases_off_main_thread_with_fixed_tauri_presentation() {
+        let requests = use_case_invocation_requests();
+        assert_eq!(requests.len(), 6);
+
+        for (index, request) in requests.into_iter().enumerate() {
+            let direct_repo = tempdir().unwrap();
+            let tauri_repo = tempdir().unwrap();
+            if index == 4 {
+                for root in [direct_repo.path(), tauri_repo.path()] {
+                    std::fs::create_dir(root.join(".git")).unwrap();
+                    let _ = HandbookSdkV1::open(root).run_setup(&SetupRequest {
+                        mode: SetupMode::Init,
+                        rewrite: false,
+                        reset_state: false,
+                    });
+                }
+            }
+            let expected = HandbookSdkV1::open(direct_repo.path())
+                .invoke_tauri(&request, &ContractLimits::packet0())
+                .unwrap();
+            let state = state(
+                tauri_repo.path(),
+                "2029-01-01T00:00:00Z",
+                "2030-01-01T00:00:00Z",
+            );
+            let caller = thread::current().id();
+            let inner = Arc::clone(&state.inner);
+            let (worker, actual) = tauri::async_runtime::block_on(run_off_main_thread(move || {
+                let worker = thread::current().id();
+                execute_invocation(&inner, request).map(|response| (worker, response))
+            }))
+            .unwrap_or_else(|error| panic!("use-case {index}: {error:?}"));
+
+            assert_ne!(caller, worker);
+            assert_eq!(actual.response_kind(), InvocationResponseKind::UseCase);
+            assert_eq!(actual, expected);
+            if index == 3 {
+                let document = serde_json::to_value(actual).unwrap();
+                let presentation = document["response"]["data"]
+                    .as_object()
+                    .map(|_| &document["response"]["data"])
+                    .unwrap_or(&document["response"]["refusals"][0]["details"]);
+                assert_eq!(presentation["input_mode"], "structured_inputs_tauri");
+                assert_eq!(presentation["input_source"], "tauri");
+            }
+        }
+    }
+
+    #[test]
+    fn invocation_default_denies_mutation_and_non_target_without_repository_effects() {
         let repo = tempdir().unwrap();
         let sentinel = repo.path().join("sentinel.txt");
         std::fs::write(&sentinel, b"unchanged").unwrap();
@@ -643,27 +737,19 @@ mod tests {
             &limits,
         )
         .unwrap();
-        let use_case = InvocationRequestV1::use_case(
-            UseCaseRequestV1::repository_doctor(&limits).unwrap(),
-            &limits,
-        )
-        .unwrap();
-
-        for request in [mutation, use_case] {
-            let response = execute_invocation(&state.inner, request).unwrap();
-            assert_eq!(
-                response.response_kind(),
-                InvocationResponseKind::TransportFailure
-            );
-            assert_eq!(
-                response.transport_failure_kind(),
-                Some(TransportFailureKind::Adapter)
-            );
-            assert_eq!(
-                response.transport_failure_reason_code(&limits).unwrap(),
-                Some("transport.invocation_route_not_ready".to_owned())
-            );
-        }
+        let response = execute_invocation(&state.inner, mutation).unwrap();
+        assert_eq!(
+            response.response_kind(),
+            InvocationResponseKind::TransportFailure
+        );
+        assert_eq!(
+            response.transport_failure_kind(),
+            Some(TransportFailureKind::Adapter)
+        );
+        assert_eq!(
+            response.transport_failure_reason_code(&limits).unwrap(),
+            Some("transport.invocation_route_not_ready".to_owned())
+        );
 
         let mut non_target = serde_json::to_value(invocation_request()).unwrap();
         non_target["request"]["operation"]["ref"] = json!("pipeline.route.resolve@1.0.0");

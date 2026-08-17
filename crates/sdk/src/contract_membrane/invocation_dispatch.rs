@@ -1,4 +1,5 @@
 use super::artifact_operation::{ArtifactSchemaValidator, ARTIFACT_OPERATION_REFS};
+use super::facade::SdkUseCaseRequest;
 use super::flow_operation::FLOW_OPERATION_REF;
 use super::pipeline_operation::{
     PIPELINE_CAPTURE_APPLY_REF, PIPELINE_CAPTURE_PLAN_REF, PIPELINE_COMPILE_REF,
@@ -13,6 +14,7 @@ use super::{
     TransportFailureKind, TransportFailureV1,
 };
 use super::{FlowResolveSchemaValidator, OperationTransport};
+use crate::HandbookSdkV1;
 use std::path::Path;
 
 const ROUTE_NOT_READY: &str = "transport.invocation_route_not_ready";
@@ -22,6 +24,12 @@ enum OperationRoute {
     Artifact,
     Flow,
     Pipeline,
+}
+
+#[derive(Clone, Copy)]
+enum UseCasePresentation {
+    RustSdk,
+    Tauri,
 }
 
 impl OperationRoute {
@@ -62,13 +70,40 @@ pub(crate) fn dispatch_invocation(
     request: &InvocationRequestV1,
     limits: &ContractLimits,
 ) -> Result<InvocationResponseV1, ContractError> {
+    dispatch_invocation_with_presentation(repo_root, request, UseCasePresentation::RustSdk, limits)
+}
+
+pub(crate) fn dispatch_tauri_invocation(
+    repo_root: &Path,
+    request: &InvocationRequestV1,
+    limits: &ContractLimits,
+) -> Result<InvocationResponseV1, ContractError> {
+    dispatch_invocation_with_presentation(repo_root, request, UseCasePresentation::Tauri, limits)
+}
+
+fn dispatch_invocation_with_presentation(
+    repo_root: &Path,
+    request: &InvocationRequestV1,
+    presentation: UseCasePresentation,
+    limits: &ContractLimits,
+) -> Result<InvocationResponseV1, ContractError> {
     require_packet_limits(limits)?;
     readmit_request(request, limits)?;
-    let Some((route, operation)) = read_only_route(request)? else {
-        return default_denial(limits);
-    };
-    let response = route.execute(repo_root, operation)?;
-    InvocationResponseV1::operation_response(response, limits)
+    match request.request() {
+        InvocationRequestBodyV1::Operation(_) => {
+            let Some((route, operation)) = read_only_route(request)? else {
+                return default_denial(limits);
+            };
+            let response = route.execute(repo_root, operation)?;
+            InvocationResponseV1::operation_response(response, limits)
+        }
+        InvocationRequestBodyV1::UseCase(request) => dispatch_use_case(
+            repo_root,
+            request.request().sdk_request(),
+            presentation,
+            limits,
+        ),
+    }
 }
 
 pub(crate) fn readmit_invocation_response(
@@ -86,7 +121,118 @@ pub(crate) fn readmit_invocation_response(
             limits,
         );
     }
-    InvocationResponseV1::parse_and_admit(&bytes, None, limits)
+    let admitted = InvocationResponseV1::parse_and_admit(&bytes, None, limits)?;
+    if let InvocationRequestBodyV1::UseCase(request) = request.request() {
+        let matches_request = match admitted.response_kind() {
+            super::InvocationResponseKind::UseCase => {
+                admitted.use_case_binding() == Some(request.use_case())
+            }
+            super::InvocationResponseKind::TransportFailure => {
+                transport_failure_matches(request.request(), &admitted, limits)?
+            }
+            super::InvocationResponseKind::Operation => false,
+        };
+        if !matches_request {
+            return Err(ContractError::InvalidInvariant);
+        }
+    }
+    Ok(admitted)
+}
+
+fn transport_failure_matches(
+    request: &super::UseCaseRequestBodyV1,
+    response: &InvocationResponseV1,
+    limits: &ContractLimits,
+) -> Result<bool, ContractError> {
+    let Some(super::TransportPresentationViewV1::RepositoryInvocation { command, .. }) =
+        response.transport_presentation(limits)?
+    else {
+        return Ok(false);
+    };
+    Ok(matches!(
+        (request, command),
+        (
+            super::UseCaseRequestBodyV1::AuthorCharter(
+                super::AuthorCharterRequestV1::Author { .. }
+            ),
+            super::RepositoryInvocationCommandV1::CharterAuthor
+        ) | (
+            super::UseCaseRequestBodyV1::AuthorCharter(
+                super::AuthorCharterRequestV1::Approve { .. }
+            ),
+            super::RepositoryInvocationCommandV1::CharterApprove
+        ) | (
+            super::UseCaseRequestBodyV1::AuthorCharter(
+                super::AuthorCharterRequestV1::Promote { .. }
+            ),
+            super::RepositoryInvocationCommandV1::CharterPromote
+        ) | (
+            super::UseCaseRequestBodyV1::AuthorCharter(super::AuthorCharterRequestV1::Validate),
+            super::RepositoryInvocationCommandV1::CharterValidate
+        ) | (
+            super::UseCaseRequestBodyV1::ApproverAdministration(
+                super::ApproverAdministrationRequestV1::Bootstrap { .. }
+            ),
+            super::RepositoryInvocationCommandV1::ApproverBootstrap
+        ) | (
+            super::UseCaseRequestBodyV1::ApproverAdministration(
+                super::ApproverAdministrationRequestV1::AddCredential { .. }
+            ),
+            super::RepositoryInvocationCommandV1::ApproverAddCredential
+        ) | (
+            super::UseCaseRequestBodyV1::ApproverAdministration(
+                super::ApproverAdministrationRequestV1::RevokeCredential { .. }
+            ),
+            super::RepositoryInvocationCommandV1::ApproverRevokeCredential
+        ) | (
+            super::UseCaseRequestBodyV1::ApproverAdministration(
+                super::ApproverAdministrationRequestV1::UpdateMapping { .. }
+            ),
+            super::RepositoryInvocationCommandV1::ApproverUpdateMapping
+        )
+    ))
+}
+
+fn dispatch_use_case(
+    repo_root: &Path,
+    request: SdkUseCaseRequest,
+    presentation: UseCasePresentation,
+    limits: &ContractLimits,
+) -> Result<InvocationResponseV1, ContractError> {
+    let sdk = HandbookSdkV1::open(repo_root);
+    match request {
+        SdkUseCaseRequest::RepositorySetup(request) => sdk
+            .run_setup_use_case(&request, limits)
+            .and_then(|response| InvocationResponseV1::use_case(response, limits)),
+        SdkUseCaseRequest::RepositoryDoctor => {
+            let response = match sdk.doctor() {
+                Ok(report) => super::UseCaseResponseV1::repository_doctor(&report, limits),
+                Err(error) => super::UseCaseResponseV1::repository_doctor_error(error, limits),
+            }?;
+            InvocationResponseV1::use_case(response, limits)
+        }
+        SdkUseCaseRequest::AuthorCharter(request) => {
+            sdk.run_author_charter_use_case(request, limits)
+        }
+        SdkUseCaseRequest::AuthorProjectContext(request) => {
+            let (input_mode, input_source) = project_context_presentation(presentation);
+            sdk.run_author_project_context_use_case(input_mode, input_source, request, limits)
+                .and_then(|response| InvocationResponseV1::use_case(response, limits))
+        }
+        SdkUseCaseRequest::ApproverAdministration(request) => {
+            sdk.run_approver_administration_use_case(request, limits)
+        }
+        SdkUseCaseRequest::PipelineRouteResolveAndPersist(selector) => sdk
+            .resolve_pipeline_use_case(&selector, limits)
+            .and_then(|response| InvocationResponseV1::use_case(response, limits)),
+    }
+}
+
+fn project_context_presentation(presentation: UseCasePresentation) -> (&'static str, &'static str) {
+    match presentation {
+        UseCasePresentation::RustSdk => ("structured_inputs_rust_sdk", "rust_sdk"),
+        UseCasePresentation::Tauri => ("structured_inputs_tauri", "tauri"),
+    }
 }
 
 fn readmit_request(

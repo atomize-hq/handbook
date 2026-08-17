@@ -1,6 +1,8 @@
 mod request;
 mod response;
 
+pub(crate) use request::SdkUseCaseRequest;
+
 pub use request::{
     ApproverAdministrationRequestV1, ApproverMappingRequestV1, AuthorCharterRequestV1,
     AuthorProjectContextRequestV1, CharterAcquisitionModeV1, CharterCoverageSubmissionV1,

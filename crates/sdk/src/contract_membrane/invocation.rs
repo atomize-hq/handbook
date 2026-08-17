@@ -5922,6 +5922,13 @@ impl InvocationResponseV1 {
         self.response_kind
     }
 
+    pub(crate) fn use_case_binding(&self) -> Option<&ExactBinding> {
+        match &self.response {
+            InvocationResponseBodyV1::UseCase(response) => Some(response.use_case()),
+            _ => None,
+        }
+    }
+
     pub fn schema(&self) -> &ExactBinding {
         &self.schema
     }

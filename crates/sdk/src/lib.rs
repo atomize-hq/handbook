@@ -180,6 +180,18 @@ impl HandbookSdkV1 {
         contract_membrane::dispatch_invocation(&self.repo_root, request, limits)
     }
 
+    /// Dispatches one Tauri invocation with fixed transport-owned presentation facts.
+    ///
+    /// The Tauri presentation value never enters the request contract or ordinary capability
+    /// evidence and cannot be selected by the caller.
+    pub fn invoke_tauri(
+        &self,
+        request: &contract_membrane::InvocationRequestV1,
+        limits: &contract_membrane::ContractLimits,
+    ) -> Result<contract_membrane::InvocationResponseV1, contract_membrane::ContractError> {
+        contract_membrane::dispatch_tauri_invocation(&self.repo_root, request, limits)
+    }
+
     /// Re-admits one LF-free invocation response against its exact originating request.
     pub fn readmit_invocation_response(
         &self,
