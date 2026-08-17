@@ -1,4 +1,4 @@
-use crate::canonical_repo_support::CanonicalWorkspace;
+use crate::canonical_repo_support::{CanonicalWorkspace, RepoRelativeFileAccessError};
 use crate::charter_authority_transaction::{
     CharterAuthorityTransactionServiceV1, CommittedCharterAuthorityV1,
 };
@@ -11,8 +11,10 @@ use crate::charter_lifecycle::CharterLifecycleState;
 use crate::charter_lifecycle_store::{CharterLifecycleStoreV1, RetainedLifecycleAuthorityV1};
 use crate::charter_lineage_store::{
     create_new_file, create_safe_directories, reject_reparse_or_symlink, sync_directory,
-    validate_record, CandidateBundlePersistenceV1, LineageRecordClassV1, TrustedLineageStoreV1,
+    validate_record, CandidateBundlePersistenceV1, LineageRecordClassV1, LineageStoreErrorV1,
+    TrustedLineageStoreV1,
 };
+use crate::owner_facts::{OwnerCausalDispositionV1, OwnerPublicEffectV1};
 use crate::profile_builtins;
 use crate::semantic_capability_registry::SemanticCapabilityRegistry;
 use crate::{
@@ -177,6 +179,8 @@ pub enum LifecycleValidationErrorKindV1 {
 pub struct LifecycleValidationErrorV1 {
     kind: LifecycleValidationErrorKindV1,
     detail: String,
+    causal_disposition: OwnerCausalDispositionV1,
+    public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 impl LifecycleValidationErrorV1 {
@@ -184,6 +188,8 @@ impl LifecycleValidationErrorV1 {
         Self {
             kind,
             detail: detail.into(),
+            causal_disposition: default_lifecycle_validation_cause(kind),
+            public_effects: Vec::new(),
         }
     }
 
@@ -193,6 +199,37 @@ impl LifecycleValidationErrorV1 {
 
     pub fn detail(&self) -> &str {
         &self.detail
+    }
+
+    pub fn causal_disposition(&self) -> OwnerCausalDispositionV1 {
+        self.causal_disposition
+    }
+
+    pub fn public_effects(&self) -> &[OwnerPublicEffectV1] {
+        &self.public_effects
+    }
+
+    fn with_public_effect(mut self, effect: OwnerPublicEffectV1) -> Self {
+        self.public_effects.push(effect);
+        self
+    }
+
+    fn with_prior_effects(mut self, mut effects: Vec<OwnerPublicEffectV1>) -> Self {
+        for effect in self.public_effects {
+            upsert_lifecycle_effect(&mut effects, effect);
+        }
+        self.public_effects = effects;
+        self
+    }
+
+    fn with_owner_facts(
+        mut self,
+        causal_disposition: OwnerCausalDispositionV1,
+        public_effects: Vec<OwnerPublicEffectV1>,
+    ) -> Self {
+        self.causal_disposition = causal_disposition;
+        self.public_effects = public_effects;
+        self
     }
 }
 
@@ -235,120 +272,155 @@ impl CharterLifecycleValidationServiceV1 {
         let _author_lock = AuthorLockV1::acquire(&self.repo_root)?;
         let transactions = CharterAuthorityTransactionServiceV1::new(&self.repo_root);
         let retained = transactions.begin_retained_authority().map_err(|failure| {
+            let causal_disposition = failure.causal_disposition();
+            let public_effects = failure.public_effects().to_vec();
             authority_error(format!(
                 "promotion authority recovery/retention refused: {}",
                 failure.detail()
             ))
+            .with_owner_facts(causal_disposition, public_effects)
         })?;
-        let current = retained.read_committed_charter().map_err(|failure| {
-            authority_error(format!(
-                "committed Charter observation refused: {}",
-                failure.detail()
-            ))
-        })?;
-        let lifecycle = CharterLifecycleStoreV1::new(&self.repo_root)
-            .observe_retained_locked()
-            .map_err(|failure| {
+        let recovery_public_effects = retained.recovery_public_effects().to_vec();
+        let publication = (|| {
+            let current = retained.read_committed_charter().map_err(|failure| {
+                let causal_disposition = failure.causal_disposition();
+                let public_effects = failure.public_effects().to_vec();
                 authority_error(format!(
-                    "retained lifecycle observation refused: {}",
+                    "committed Charter observation refused: {}",
                     failure.detail()
                 ))
+                .with_owner_facts(causal_disposition, public_effects)
             })?;
-        let mut result = build_result(decisions, &evaluation, current.as_ref(), &lifecycle)?;
-        let validation_result_ref = result_ref(&result.validation_result_fingerprint);
-        let second_inventory = inventory_author_authority_stable(&self.repo_root)?;
-        let replay = classify_author_replay(
-            &second_inventory,
-            &evaluation.candidate_subject.candidate_subject_fingerprint,
-            &validation_result_ref,
-            &result.validation_result_fingerprint,
-        )?;
-        let lineage = TrustedLineageStoreV1::new(&self.repo_root);
-        let (candidate, persistence) = match replay {
-            AuthorReplayV1::FirstAuthoring => {
-                result.validated_at_utc = current_utc();
-                validate_result_record(&result, Some(&validation_result_ref))?;
-                let result_bytes = encode_result(&result)?;
-                self.publish_result_create_new(&validation_result_ref, &result_bytes)?;
-                let binding = result_binding(&validation_result_ref, &result, &result_bytes)?;
-                let candidate = finalize_candidate(&evaluation, binding)?;
-                #[cfg(test)]
-                refuse_candidate_publication_after_result_for_test()?;
-                let bundle = CharterCandidateBundle {
-                    intake: evaluation.intake.clone(),
-                    candidate: candidate.clone(),
-                    normalized_content: evaluation.normalized_content.clone(),
-                    charter: evaluation.charter.clone(),
-                };
-                let persistence = lineage
-                    .persist_candidate_bundle(&bundle)
-                    .map_err(|failure| {
-                        authority_error(format!(
+            let lifecycle = CharterLifecycleStoreV1::new(&self.repo_root)
+                .observe_retained_locked()
+                .map_err(|failure| {
+                    authority_error(format!(
+                        "retained lifecycle observation refused: {}",
+                        failure.detail()
+                    ))
+                    .with_owner_facts(
+                        failure.causal_disposition(),
+                        failure.public_effects().to_vec(),
+                    )
+                })?;
+            let mut result = build_result(decisions, &evaluation, current.as_ref(), &lifecycle)?;
+            let validation_result_ref = result_ref(&result.validation_result_fingerprint);
+            let second_inventory = inventory_author_authority_stable(&self.repo_root)?;
+            let replay = classify_author_replay(
+                &second_inventory,
+                &evaluation.candidate_subject.candidate_subject_fingerprint,
+                &validation_result_ref,
+                &result.validation_result_fingerprint,
+            )?;
+            let lineage = TrustedLineageStoreV1::new(&self.repo_root);
+            let (candidate, persistence) = match replay {
+                AuthorReplayV1::FirstAuthoring => {
+                    result.validated_at_utc = current_utc();
+                    validate_result_record(&result, Some(&validation_result_ref))?;
+                    let result_bytes = encode_result(&result)?;
+                    let result_effect =
+                        self.publish_result_create_new(&validation_result_ref, &result_bytes)?;
+                    let binding = result_binding(&validation_result_ref, &result, &result_bytes)?;
+                    let candidate = finalize_candidate(&evaluation, binding)?;
+                    #[cfg(test)]
+                    refuse_candidate_publication_after_result_for_test()
+                        .map_err(|failure| failure.with_public_effect(result_effect.clone()))?;
+                    let bundle = CharterCandidateBundle {
+                        intake: evaluation.intake.clone(),
+                        candidate: candidate.clone(),
+                        normalized_content: evaluation.normalized_content.clone(),
+                        charter: evaluation.charter.clone(),
+                    };
+                    let persistence =
+                        lineage
+                            .persist_candidate_bundle(&bundle)
+                            .map_err(|failure| {
+                                let causal_disposition = failure.causal_disposition();
+                                let effects = failure.public_effects().to_vec();
+                                authority_error(format!(
                             "candidate publication refused after exact result publication: {}",
                             failure.detail()
                         ))
-                    })?;
-                (candidate, persistence)
-            }
-            AuthorReplayV1::Exact {
-                candidate,
-                result_bytes,
-            } => {
-                let candidate = *candidate;
-                let binding = candidate.validation_result_binding.clone();
-                validate_bound_result_bytes(
-                    &result_bytes,
-                    &binding,
-                    &evaluation.candidate_subject.candidate_subject_fingerprint,
-                )?;
-                let content = lineage
-                    .read_candidate_content(&candidate.normalized_content_ref)
-                    .map_err(|failure| {
-                        authority_error(format!(
-                            "replay candidate content refused: {}",
-                            failure.detail()
-                        ))
-                    })?;
-                if content != evaluation.normalized_content {
-                    return Err(authority_error(
-                        "replay candidate content differs from recomputed normalized content",
-                    ));
-                }
-                let intake_fingerprint = fingerprint_from_bound_ref(
-                    &candidate.intake_record_ref,
-                    "intake-records/intake_",
-                    ".json",
-                )?;
-                lineage
-                    .read_record(
-                        LineageRecordClassV1::Intake,
-                        &candidate.intake_record_ref,
-                        &intake_fingerprint,
+                                .with_owner_facts(
+                                    causal_disposition,
+                                    std::iter::once(result_effect.clone())
+                                        .chain(effects)
+                                        .collect(),
+                                )
+                            })?;
+                    let mut public_effects = vec![result_effect];
+                    public_effects.extend(persistence.public_effects.iter().cloned());
+                    (
+                        candidate,
+                        CandidateBundlePersistenceV1 {
+                            public_effects,
+                            ..persistence
+                        },
                     )
-                    .map_err(|failure| {
-                        authority_error(format!(
-                            "replay intake authority refused: {}",
-                            failure.detail()
-                        ))
-                    })?;
-                let persistence = CandidateBundlePersistenceV1 {
-                    normalized_content_ref: candidate.normalized_content_ref.clone(),
-                    intake_ref: candidate.intake_record_ref.clone(),
-                    candidate_ref: format!("candidates/{}.json", candidate.candidate_id),
-                };
-                (candidate, persistence)
-            }
-        };
+                }
+                AuthorReplayV1::Exact {
+                    candidate,
+                    result_bytes,
+                } => {
+                    let candidate = *candidate;
+                    let binding = candidate.validation_result_binding.clone();
+                    validate_bound_result_bytes(
+                        &result_bytes,
+                        &binding,
+                        &evaluation.candidate_subject.candidate_subject_fingerprint,
+                    )?;
+                    let content = lineage
+                        .read_candidate_content(&candidate.normalized_content_ref)
+                        .map_err(|failure| {
+                            map_lineage_validation("replay candidate content refused", failure)
+                        })?;
+                    if content != evaluation.normalized_content {
+                        return Err(authority_error(
+                            "replay candidate content differs from recomputed normalized content",
+                        ));
+                    }
+                    let intake_fingerprint = fingerprint_from_bound_ref(
+                        &candidate.intake_record_ref,
+                        "intake-records/intake_",
+                        ".json",
+                    )?;
+                    lineage
+                        .read_record(
+                            LineageRecordClassV1::Intake,
+                            &candidate.intake_record_ref,
+                            &intake_fingerprint,
+                        )
+                        .map_err(|failure| {
+                            map_lineage_validation("replay intake authority refused", failure)
+                        })?;
+                    let persistence = CandidateBundlePersistenceV1 {
+                        normalized_content_ref: candidate.normalized_content_ref.clone(),
+                        intake_ref: candidate.intake_record_ref.clone(),
+                        candidate_ref: format!("candidates/{}.json", candidate.candidate_id),
+                        public_effects: Vec::new(),
+                    };
+                    (candidate, persistence)
+                }
+            };
+            Ok(FinalizedCandidatePublicationV1 {
+                bundle: CharterCandidateBundle {
+                    intake: evaluation.intake,
+                    candidate,
+                    normalized_content: evaluation.normalized_content,
+                    charter: evaluation.charter,
+                },
+                persistence,
+            })
+        })();
         drop(retained);
-        Ok(FinalizedCandidatePublicationV1 {
-            bundle: CharterCandidateBundle {
-                intake: evaluation.intake,
-                candidate,
-                normalized_content: evaluation.normalized_content,
-                charter: evaluation.charter,
-            },
-            persistence,
-        })
+        let mut publication = publication
+            .map_err(|failure| failure.with_prior_effects(recovery_public_effects.clone()))?;
+        let mut combined = recovery_public_effects;
+        for effect in publication.persistence.public_effects {
+            upsert_lifecycle_effect(&mut combined, effect);
+        }
+        publication.persistence.public_effects = combined;
+        Ok(publication)
     }
 
     pub(crate) fn validate_current_retained(
@@ -408,10 +480,7 @@ impl CharterLifecycleValidationServiceV1 {
                 Some(&intake_fingerprint),
             )
             .map_err(|failure| {
-                authority_error(format!(
-                    "candidate intake authority refused: {}",
-                    failure.detail()
-                ))
+                map_lineage_validation("candidate intake authority refused", failure)
             })?;
         for field in [
             "target_kind_ref",
@@ -557,13 +626,10 @@ impl CharterLifecycleValidationServiceV1 {
         &self,
         relative_ref: &str,
         bytes: &[u8],
-    ) -> Result<(), LifecycleValidationErrorV1> {
+    ) -> Result<OwnerPublicEffectV1, LifecycleValidationErrorV1> {
         let partition = self.repo_root.join(RESULT_INVENTORY_ROOT);
         create_safe_directories(&self.repo_root, &partition).map_err(|failure| {
-            filesystem_error(format!(
-                "validation-result partition creation refused: {}",
-                failure.detail()
-            ))
+            map_lineage_validation("validation-result partition creation refused", failure)
         })?;
         let path = self.repo_root.join(".handbook/state").join(relative_ref);
         let (temporary_path, mut file) = create_result_temporary(&partition)?;
@@ -576,24 +642,40 @@ impl CharterLifecycleValidationServiceV1 {
         drop(file);
         if let Err(failure) = rename_result_create_new(&temporary_path, &path) {
             let _ = fs::remove_file(&temporary_path);
-            return Err(LifecycleValidationErrorV1::new(
-                LifecycleValidationErrorKindV1::ExistingBytesMismatch,
-                format!("lifecycle-validation result create-new publication refused: {failure}"),
-            ));
+            return Err(map_result_publication_error(failure));
         }
+        let target_ref = format!(".handbook/state/{relative_ref}");
+        let fingerprint = DefinitionFingerprint::from_bytes(bytes).to_string();
+        let installed = OwnerPublicEffectV1::installed_unconfirmed(&target_ref, &fingerprint);
         sync_directory(&partition).map_err(|failure| {
-            io_error(format!(
-                "lifecycle-validation result parent fsync failed: {}",
-                failure.detail()
-            ))
+            map_lineage_validation("lifecycle-validation result parent fsync failed", failure)
+                .with_public_effect(installed.clone())
         })?;
-        if read_result_file(&self.repo_root, relative_ref)? != bytes {
+        let durable = OwnerPublicEffectV1::durable_created(target_ref, fingerprint);
+        if read_result_file(&self.repo_root, relative_ref)
+            .map_err(|failure| failure.with_public_effect(durable.clone()))?
+            != bytes
+        {
             return Err(LifecycleValidationErrorV1::new(
                 LifecycleValidationErrorKindV1::ExistingBytesMismatch,
                 "published lifecycle-validation result bytes are not exact-equal",
-            ));
+            )
+            .with_public_effect(durable));
         }
-        Ok(())
+        Ok(durable)
+    }
+}
+
+fn map_result_publication_error(failure: std::io::Error) -> LifecycleValidationErrorV1 {
+    if failure.kind() == std::io::ErrorKind::AlreadyExists {
+        LifecycleValidationErrorV1::new(
+            LifecycleValidationErrorKindV1::ExistingBytesMismatch,
+            format!("lifecycle-validation result create-new publication refused: {failure}"),
+        )
+    } else {
+        io_error(format!(
+            "lifecycle-validation result create-new publication failed: {failure}"
+        ))
     }
 }
 
@@ -653,19 +735,16 @@ fn validate_candidate_field_source_authority(
             Some(&intake_fingerprint),
         )
         .map_err(|failure| {
-            authority_error(format!(
-                "candidate retained intake provenance refused: {}",
-                failure.detail()
-            ))
+            map_lineage_validation("candidate retained intake provenance refused", failure)
         })?;
     let normalized_content_ref = candidate_string(candidate, "normalized_content_ref")?;
     let normalized_content = lineage
         .read_candidate_content(normalized_content_ref)
         .map_err(|failure| {
-            authority_error(format!(
-                "candidate retained normalized-content provenance refused: {}",
-                failure.detail()
-            ))
+            map_lineage_validation(
+                "candidate retained normalized-content provenance refused",
+                failure,
+            )
         })?;
     validate_candidate_field_source_bijection(candidate, &intake, &normalized_content).map_err(
         |failure| {
@@ -935,6 +1014,14 @@ fn finalize_candidate(
 }
 
 fn validate_definition_authority(
+    decisions: &ResolvedProfileDecisions,
+) -> Result<(), LifecycleValidationErrorV1> {
+    validate_definition_authority_inner(decisions).map_err(|failure| {
+        failure.with_owner_facts(OwnerCausalDispositionV1::Prerequisite, Vec::new())
+    })
+}
+
+fn validate_definition_authority_inner(
     decisions: &ResolvedProfileDecisions,
 ) -> Result<(), LifecycleValidationErrorV1> {
     let registry = load_shipped_charter_definition_registry().map_err(|_| {
@@ -1257,21 +1344,31 @@ fn read_state_file_bounded(
 ) -> Result<Vec<u8>, LifecycleValidationErrorV1> {
     let path = repo_root.join(".handbook/state").join(relative_ref);
     reject_reparse_or_symlink(&path, false).map_err(|failure| {
-        filesystem_error(format!(
-            "lifecycle-validation {label} path is unsafe: {}",
-            failure.detail()
-        ))
+        map_lineage_validation(
+            &format!("lifecycle-validation {label} path is unsafe"),
+            failure,
+        )
     })?;
     let workspace = CanonicalWorkspace::new(repo_root);
     let repo_relative = format!(".handbook/state/{relative_ref}");
     let normalized = workspace
         .normalize_repo_relative(&repo_relative)
         .map_err(|_| filesystem_error("validation-result ref is not repository-relative"))?;
-    let file = workspace.trusted_read_strict(&normalized).map_err(|_| {
-        filesystem_error(format!(
-            "validation-result {label} cannot be read without following"
-        ))
-    })?;
+    let file = workspace
+        .trusted_read_strict(&normalized)
+        .map_err(|failure| match failure {
+            RepoRelativeFileAccessError::Missing(_) => {
+                authority_error(format!("validation-result {label} is absent"))
+            }
+            RepoRelativeFileAccessError::InvalidPath(_)
+            | RepoRelativeFileAccessError::SymlinkNotAllowed(_)
+            | RepoRelativeFileAccessError::NotRegularFile(_) => filesystem_error(format!(
+                "validation-result {label} cannot be read without following"
+            )),
+            RepoRelativeFileAccessError::ReadFailure { .. } => {
+                io_error(format!("validation-result {label} read failed"))
+            }
+        })?;
     let (bytes, exceeded) = file
         .read_bytes_bounded(max_bytes)
         .map_err(|_| io_error("lifecycle-validation result read failed"))?;
@@ -1475,14 +1572,10 @@ fn scan_inventory_store(
         Err(failure) if failure.kind() == std::io::ErrorKind::NotFound => {
             return Ok((InventoryRootTupleV1::Missing, Vec::new(), Vec::new()))
         }
-        Err(_) => return Err(filesystem_error("author inventory root metadata failed")),
+        Err(_) => return Err(io_error("author inventory root metadata failed")),
     };
-    reject_reparse_or_symlink(&root, true).map_err(|failure| {
-        filesystem_error(format!(
-            "author inventory root is unsafe: {}",
-            failure.detail()
-        ))
-    })?;
+    reject_reparse_or_symlink(&root, true)
+        .map_err(|failure| map_lineage_validation("author inventory root is unsafe", failure))?;
     if !root_metadata.is_dir() {
         return Err(filesystem_error(
             "author inventory root is not a safe directory",
@@ -1493,10 +1586,8 @@ fn scan_inventory_store(
     let mut candidates = Vec::new();
     let mut results = Vec::new();
     let mut aggregate = 0_u64;
-    for entry in
-        fs::read_dir(&root).map_err(|_| filesystem_error("author inventory enumeration failed"))?
-    {
-        let entry = entry.map_err(|_| filesystem_error("author inventory entry failed"))?;
+    for entry in fs::read_dir(&root).map_err(|_| io_error("author inventory enumeration failed"))? {
+        let entry = entry.map_err(|_| io_error("author inventory entry failed"))?;
         if !inventory_entry_count_within_bound(entries.len().saturating_add(1)) {
             return Err(invalid_result(
                 "author inventory exceeds 4096 immediate entries",
@@ -1522,13 +1613,10 @@ fn scan_inventory_store(
         }
         let path = entry.path();
         reject_reparse_or_symlink(&path, false).map_err(|failure| {
-            filesystem_error(format!(
-                "author inventory entry is unsafe: {}",
-                failure.detail()
-            ))
+            map_lineage_validation("author inventory entry is unsafe", failure)
         })?;
         let before = fs::symlink_metadata(&path)
-            .map_err(|_| filesystem_error("author inventory entry metadata failed"))?;
+            .map_err(|_| io_error("author inventory entry metadata failed"))?;
         if !before.is_file() {
             return Err(filesystem_error(
                 "author inventory entry is not a regular file",
@@ -1548,7 +1636,19 @@ fn scan_inventory_store(
             .map_err(|_| filesystem_error("author inventory path is not normalized"))?;
         let file = workspace
             .trusted_read_strict(&normalized)
-            .map_err(|_| filesystem_error("author inventory entry no-follow open failed"))?;
+            .map_err(|failure| match failure {
+                RepoRelativeFileAccessError::Missing(_) => {
+                    authority_error("author inventory entry disappeared before read")
+                }
+                RepoRelativeFileAccessError::InvalidPath(_)
+                | RepoRelativeFileAccessError::SymlinkNotAllowed(_)
+                | RepoRelativeFileAccessError::NotRegularFile(_) => {
+                    filesystem_error("author inventory entry no-follow open refused")
+                }
+                RepoRelativeFileAccessError::ReadFailure { .. } => {
+                    io_error("author inventory entry no-follow open failed")
+                }
+            })?;
         let (bytes, exceeded) = file
             .read_bytes_bounded(MAX_INVENTORY_FILE_BYTES)
             .map_err(|_| io_error("author inventory entry read failed"))?;
@@ -1558,7 +1658,7 @@ fn scan_inventory_store(
             ));
         }
         let after = fs::symlink_metadata(&path)
-            .map_err(|_| filesystem_error("author inventory post-read metadata failed"))?;
+            .map_err(|_| io_error("author inventory post-read metadata failed"))?;
         if before_identity != inventory_path_identity(&path, false)? || before.len() != after.len()
         {
             return Err(authority_error(
@@ -2145,7 +2245,7 @@ fn inventory_path_identity(
     {
         use std::os::unix::fs::MetadataExt;
         let metadata = fs::symlink_metadata(path)
-            .map_err(|_| filesystem_error("author inventory identity lookup failed"))?;
+            .map_err(|_| io_error("author inventory identity lookup failed"))?;
         if metadata.is_dir() != is_directory {
             return Err(filesystem_error(
                 "author inventory native file identity type is unsafe",
@@ -2165,14 +2265,14 @@ fn inventory_path_identity(
         use std::os::windows::fs::MetadataExt;
 
         let metadata = fs::symlink_metadata(path)
-            .map_err(|_| filesystem_error("author inventory identity lookup failed"))?;
+            .map_err(|_| io_error("author inventory identity lookup failed"))?;
         if metadata.is_dir() != is_directory {
             return Err(filesystem_error(
                 "author inventory native file identity type is unsafe",
             ));
         }
         let (volume, identity_high, identity_low) = match file_id::get_file_id(path)
-            .map_err(|_| filesystem_error("author inventory native file identity lookup failed"))?
+            .map_err(|_| io_error("author inventory native file identity lookup failed"))?
         {
             file_id::FileId::LowRes {
                 volume_serial_number,
@@ -2213,15 +2313,14 @@ struct AuthorLockV1 {
 impl AuthorLockV1 {
     fn acquire(repo_root: &Path) -> Result<Self, LifecycleValidationErrorV1> {
         let lock_root = repo_root.join(".handbook/state/locks");
-        create_safe_directories(repo_root, &lock_root).map_err(|failure| {
-            filesystem_error(format!("author lock root refused: {}", failure.detail()))
-        })?;
+        create_safe_directories(repo_root, &lock_root)
+            .map_err(|failure| map_lineage_validation("author lock root refused", failure))?;
         let path = lock_root.join("author-project_authority.lock");
         let file = match create_new_file(&path) {
             Ok(file) => file,
             Err(failure) if failure.kind() == std::io::ErrorKind::AlreadyExists => {
                 reject_reparse_or_symlink(&path, false).map_err(|failure| {
-                    filesystem_error(format!("author lock path is unsafe: {}", failure.detail()))
+                    map_lineage_validation("author lock path is unsafe", failure)
                 })?;
                 let mut options = OpenOptions::new();
                 options.read(true).write(true);
@@ -2238,13 +2337,13 @@ impl AuthorLockV1 {
                 }
                 options
                     .open(&path)
-                    .map_err(|_| filesystem_error("author lock no-follow open failed"))?
+                    .map_err(|_| io_error("author lock no-follow open failed"))?
             }
             Err(_) => return Err(io_error("author lock create-new failed")),
         };
         if !file
             .metadata()
-            .map_err(|_| filesystem_error("author lock metadata failed"))?
+            .map_err(|_| io_error("author lock metadata failed"))?
             .is_file()
         {
             return Err(filesystem_error("author lock is not a regular file"));
@@ -2350,6 +2449,45 @@ fn authority_error(detail: impl Into<String>) -> LifecycleValidationErrorV1 {
     LifecycleValidationErrorV1::new(LifecycleValidationErrorKindV1::AuthorityMismatch, detail)
 }
 
+fn default_lifecycle_validation_cause(
+    kind: LifecycleValidationErrorKindV1,
+) -> OwnerCausalDispositionV1 {
+    match kind {
+        LifecycleValidationErrorKindV1::AuthorityMismatch => {
+            OwnerCausalDispositionV1::CallerRefusal
+        }
+        LifecycleValidationErrorKindV1::InvalidResult
+        | LifecycleValidationErrorKindV1::ExistingBytesMismatch
+        | LifecycleValidationErrorKindV1::UnsafeFilesystem => {
+            OwnerCausalDispositionV1::CallerRefusal
+        }
+        LifecycleValidationErrorKindV1::IoFailure => {
+            OwnerCausalDispositionV1::ImplementationFailure
+        }
+    }
+}
+
+fn map_lineage_validation(label: &str, failure: LineageStoreErrorV1) -> LifecycleValidationErrorV1 {
+    let causal_disposition = failure.causal_disposition();
+    let public_effects = failure.public_effects().to_vec();
+    authority_error(format!("{label}: {}", failure.detail()))
+        .with_owner_facts(causal_disposition, public_effects)
+}
+
+fn upsert_lifecycle_effect(
+    public_effects: &mut Vec<OwnerPublicEffectV1>,
+    public_effect: OwnerPublicEffectV1,
+) {
+    if let Some(existing) = public_effects
+        .iter_mut()
+        .find(|existing| existing.target_ref() == public_effect.target_ref())
+    {
+        *existing = public_effect;
+    } else {
+        public_effects.push(public_effect);
+    }
+}
+
 fn invalid_result(detail: impl Into<String>) -> LifecycleValidationErrorV1 {
     LifecycleValidationErrorV1::new(LifecycleValidationErrorKindV1::InvalidResult, detail)
 }
@@ -2368,7 +2506,7 @@ mod exact_result_inventory_tests {
     use crate::{
         parse_definition_yaml, resolve_shipped_profile_decisions, CharterAcquisitionMode,
         CharterAuthorPersistenceServiceV1, CharterCoverageSubmission, CharterIntakeConsumer,
-        CharterIntakeEnvelope, CharterIntakeSourceKind,
+        CharterIntakeEnvelope, CharterIntakeSourceKind, OwnerPublicEffectDispositionV1,
     };
 
     const RUNTIME_VECTORS: &[u8] = include_bytes!(concat!(
@@ -2383,6 +2521,43 @@ mod exact_result_inventory_tests {
         env!("CARGO_MANIFEST_DIR"),
         "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
     ));
+
+    #[test]
+    fn authority_shape_byte_conflict_and_unsafe_path_are_caller_refusals_while_io_is_an_error() {
+        for kind in [
+            LifecycleValidationErrorKindV1::AuthorityMismatch,
+            LifecycleValidationErrorKindV1::ExistingBytesMismatch,
+            LifecycleValidationErrorKindV1::UnsafeFilesystem,
+        ] {
+            assert_eq!(
+                LifecycleValidationErrorV1::new(kind, "test").causal_disposition(),
+                OwnerCausalDispositionV1::CallerRefusal
+            );
+        }
+        assert_eq!(
+            LifecycleValidationErrorV1::new(LifecycleValidationErrorKindV1::IoFailure, "test")
+                .causal_disposition(),
+            OwnerCausalDispositionV1::ImplementationFailure
+        );
+    }
+
+    #[test]
+    fn result_publication_distinguishes_create_new_conflict_from_io_failure() {
+        let conflict =
+            map_result_publication_error(std::io::Error::from(std::io::ErrorKind::AlreadyExists));
+        assert_eq!(
+            conflict.causal_disposition(),
+            OwnerCausalDispositionV1::CallerRefusal
+        );
+
+        let io = map_result_publication_error(std::io::Error::from(
+            std::io::ErrorKind::PermissionDenied,
+        ));
+        assert_eq!(
+            io.causal_disposition(),
+            OwnerCausalDispositionV1::ImplementationFailure
+        );
+    }
 
     #[test]
     fn inventory_limit_and_owned_name_boundaries_match_the_normative_vectors() {
@@ -2495,9 +2670,22 @@ mod exact_result_inventory_tests {
         let service = CharterAuthorPersistenceServiceV1::new(repo.path());
         REFUSE_CANDIDATE_PUBLICATION_AFTER_RESULT.with(|selected| selected.set(true));
 
-        service
+        let failure = service
             .persist(&decisions, test_author_envelope(), None)
             .expect_err("the test-only post-result candidate refusal must surface");
+        let [effect] = failure.public_effects() else {
+            panic!("the durable orphan must be reported as exactly one public effect")
+        };
+        assert_eq!(
+            effect.disposition(),
+            OwnerPublicEffectDispositionV1::DurableCreated
+        );
+        assert!(effect
+            .target_ref()
+            .starts_with(".handbook/state/lifecycle-validation-results/"));
+        assert!(effect.content_fingerprint().is_some());
+        assert!(!effect.target_ref().contains("transactions"));
+        assert!(!effect.target_ref().contains("use-head"));
         let result_root = repo.path().join(RESULT_INVENTORY_ROOT);
         let result_path = fs::read_dir(&result_root)
             .unwrap()

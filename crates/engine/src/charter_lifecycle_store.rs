@@ -15,7 +15,8 @@ use crate::charter_lineage_store::{
 use crate::definition_identity::{canonical_json_bytes, parse_definition_yaml};
 use crate::{
     load_shipped_charter_definition_registry, parse_schema_json, DefinitionFingerprint,
-    ExactDefinitionRef,
+    ExactDefinitionRef, OwnerCausalDispositionV1, OwnerPublicEffectDispositionV1,
+    OwnerPublicEffectV1,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -112,6 +113,8 @@ pub enum CharterLifecycleStoreErrorKindV1 {
 pub struct CharterLifecycleStoreErrorV1 {
     kind: CharterLifecycleStoreErrorKindV1,
     detail: String,
+    causal_disposition: OwnerCausalDispositionV1,
+    public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 impl CharterLifecycleStoreErrorV1 {
@@ -119,6 +122,8 @@ impl CharterLifecycleStoreErrorV1 {
         Self {
             kind,
             detail: detail.into(),
+            causal_disposition: default_causal_disposition(kind),
+            public_effects: Vec::new(),
         }
     }
 
@@ -128,6 +133,33 @@ impl CharterLifecycleStoreErrorV1 {
 
     pub fn detail(&self) -> &str {
         &self.detail
+    }
+
+    pub fn causal_disposition(&self) -> OwnerCausalDispositionV1 {
+        self.causal_disposition
+    }
+
+    pub fn public_effects(&self) -> &[OwnerPublicEffectV1] {
+        &self.public_effects
+    }
+
+    fn with_causal_disposition(mut self, causal_disposition: OwnerCausalDispositionV1) -> Self {
+        self.causal_disposition = causal_disposition;
+        self
+    }
+
+    fn with_public_effect(mut self, public_effect: OwnerPublicEffectV1) -> Self {
+        upsert_lifecycle_public_effect(&mut self.public_effects, public_effect);
+        self
+    }
+
+    fn with_preceding_public_effects(mut self, public_effects: &[OwnerPublicEffectV1]) -> Self {
+        let mut merged = public_effects.to_vec();
+        for public_effect in self.public_effects {
+            upsert_lifecycle_public_effect(&mut merged, public_effect);
+        }
+        self.public_effects = merged;
+        self
     }
 }
 
@@ -141,7 +173,7 @@ impl std::error::Error for CharterLifecycleStoreErrorV1 {}
 
 #[cfg(test)]
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-enum CharterLifecycleFaultPointV1 {
+pub(crate) enum CharterLifecycleFaultPointV1 {
     Intent,
     Prepared,
     ObservationInstalled,
@@ -312,7 +344,7 @@ impl CharterLifecycleStoreV1 {
     }
 
     #[cfg(test)]
-    fn record_event_with_fault_for_testing(
+    pub(crate) fn record_event_with_fault_for_testing(
         &self,
         intent: CharterLifecycleEventIntentV1,
         fault: CharterLifecycleFaultPointV1,
@@ -324,10 +356,12 @@ impl CharterLifecycleStoreV1 {
     pub fn recover(&self) -> Result<(), CharterLifecycleStoreErrorV1> {
         ensure_supported_platform()?;
         let _lock = LifecycleLock::acquire(&self.repo_root)?;
-        self.recover_pending_locked()
+        self.recover_pending_locked().map(|_| ())
     }
 
-    pub(crate) fn recover_retained_locked(&self) -> Result<(), CharterLifecycleStoreErrorV1> {
+    pub(crate) fn recover_retained_locked(
+        &self,
+    ) -> Result<Vec<OwnerPublicEffectV1>, CharterLifecycleStoreErrorV1> {
         ensure_supported_platform()?;
         self.recover_pending_locked()
     }
@@ -713,22 +747,33 @@ impl CharterLifecycleStoreV1 {
         }
     }
 
-    fn recover_pending_locked(&self) -> Result<(), CharterLifecycleStoreErrorV1> {
+    fn recover_pending_locked(
+        &self,
+    ) -> Result<Vec<OwnerPublicEffectV1>, CharterLifecycleStoreErrorV1> {
         let root = self.transaction_root();
         if !root.exists() {
-            return Ok(());
+            return Ok(Vec::new());
         }
         reject_reparse_or_symlink(&root, true).map_err(map_lineage)?;
+        let mut public_effects = Vec::new();
         for pending in transaction_directories(&root, ".pending")? {
-            self.recover_one_pending(&pending)?;
+            let recovered = self
+                .recover_one_pending(&pending)
+                .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+            for public_effect in recovered {
+                upsert_lifecycle_public_effect(&mut public_effects, public_effect);
+            }
         }
-        Ok(())
+        Ok(public_effects)
     }
 
-    fn recover_one_pending(&self, pending: &Path) -> Result<(), CharterLifecycleStoreErrorV1> {
+    fn recover_one_pending(
+        &self,
+        pending: &Path,
+    ) -> Result<Vec<OwnerPublicEffectV1>, CharterLifecycleStoreErrorV1> {
         reject_reparse_or_symlink(pending, true).map_err(map_lineage)?;
         if !pending.join("intent.json").exists() {
-            return cleanup_owned_pending(pending);
+            return cleanup_owned_pending(pending).map(|_| Vec::new());
         }
         let read_intent = read_lifecycle_intent(pending)?;
         let current = self
@@ -797,50 +842,80 @@ impl CharterLifecycleStoreV1 {
             ));
         }
         match action {
-            CharterLifecycleRecoveryActionV1::RollbackOwnedState => cleanup_owned_pending(pending),
-            CharterLifecycleRecoveryActionV1::InstallBothAndCommit => {
-                self.install_staged_record(
-                    pending,
-                    "observation.new",
-                    LineageRecordClassV1::LifecycleObservation,
-                )?;
-                self.install_staged_record(
-                    pending,
-                    "transition.new",
-                    LineageRecordClassV1::LifecycleTransition,
-                )?;
-                self.commit_and_finalize(
-                    pending,
-                    &self.committed_path(&read_intent.record.transaction_id),
-                    &read_intent.raw_bytes,
-                )
+            CharterLifecycleRecoveryActionV1::RollbackOwnedState => {
+                cleanup_owned_pending(pending).map(|_| Vec::new())
             }
-            CharterLifecycleRecoveryActionV1::InstallMissingAndCommit => {
-                if !observation_final {
-                    self.install_staged_record(
+            CharterLifecycleRecoveryActionV1::InstallBothAndCommit => {
+                let mut public_effects = Vec::new();
+                if let Some(public_effect) = self
+                    .install_staged_record(
                         pending,
                         "observation.new",
                         LineageRecordClassV1::LifecycleObservation,
-                    )?;
+                    )
+                    .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
+                {
+                    upsert_lifecycle_public_effect(&mut public_effects, public_effect);
                 }
-                if !transition_final {
-                    self.install_staged_record(
+                if let Some(public_effect) = self
+                    .install_staged_record(
                         pending,
                         "transition.new",
                         LineageRecordClassV1::LifecycleTransition,
-                    )?;
+                    )
+                    .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
+                {
+                    upsert_lifecycle_public_effect(&mut public_effects, public_effect);
                 }
                 self.commit_and_finalize(
                     pending,
                     &self.committed_path(&read_intent.record.transaction_id),
                     &read_intent.raw_bytes,
                 )
+                .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+                Ok(public_effects)
             }
-            CharterLifecycleRecoveryActionV1::RollForwardCommit => self.commit_and_finalize(
-                pending,
-                &self.committed_path(&read_intent.record.transaction_id),
-                &read_intent.raw_bytes,
-            ),
+            CharterLifecycleRecoveryActionV1::InstallMissingAndCommit => {
+                let mut public_effects = Vec::new();
+                if !observation_final {
+                    if let Some(public_effect) = self
+                        .install_staged_record(
+                            pending,
+                            "observation.new",
+                            LineageRecordClassV1::LifecycleObservation,
+                        )
+                        .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
+                    {
+                        upsert_lifecycle_public_effect(&mut public_effects, public_effect);
+                    }
+                }
+                if !transition_final {
+                    if let Some(public_effect) = self
+                        .install_staged_record(
+                            pending,
+                            "transition.new",
+                            LineageRecordClassV1::LifecycleTransition,
+                        )
+                        .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
+                    {
+                        upsert_lifecycle_public_effect(&mut public_effects, public_effect);
+                    }
+                }
+                self.commit_and_finalize(
+                    pending,
+                    &self.committed_path(&read_intent.record.transaction_id),
+                    &read_intent.raw_bytes,
+                )
+                .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+                Ok(public_effects)
+            }
+            CharterLifecycleRecoveryActionV1::RollForwardCommit => self
+                .commit_and_finalize(
+                    pending,
+                    &self.committed_path(&read_intent.record.transaction_id),
+                    &read_intent.raw_bytes,
+                )
+                .map(|_| Vec::new()),
             CharterLifecycleRecoveryActionV1::Finalize => {
                 let committed = self.committed_path(&read_intent.record.transaction_id);
                 if committed.exists() {
@@ -850,7 +925,9 @@ impl CharterLifecycleStoreV1 {
                 }
                 fs::rename(pending, &committed)
                     .map_err(|_| io_error("lifecycle recovery finalization failed"))?;
-                sync_directory(&self.transaction_root()).map_err(map_lineage)
+                sync_directory(&self.transaction_root())
+                    .map_err(map_lineage)
+                    .map(|_| Vec::new())
             }
             CharterLifecycleRecoveryActionV1::PreserveAndRefuse => Err(durability(
                 "committed lifecycle marker is missing a required final record",
@@ -863,12 +940,13 @@ impl CharterLifecycleStoreV1 {
         pending: &Path,
         name: &str,
         class: LineageRecordClassV1,
-    ) -> Result<(), CharterLifecycleStoreErrorV1> {
+    ) -> Result<Option<OwnerPublicEffectV1>, CharterLifecycleStoreErrorV1> {
         let bytes = read_bounded_regular(&pending.join(name), MAX_JOURNAL_BYTES)?;
-        self.lineage
+        let append = self
+            .lineage
             .append_record(class, &bytes)
             .map_err(map_lineage)?;
-        Ok(())
+        Ok(append.public_effect)
     }
 
     fn load_current_locked(
@@ -1768,9 +1846,16 @@ fn read_current_canonical(
             Ok(Some(bytes))
         }
         Err(RepoRelativeFileAccessError::Missing(_)) => Ok(None),
-        Err(_) => Err(unsafe_error(
+        Err(
+            RepoRelativeFileAccessError::InvalidPath(_)
+            | RepoRelativeFileAccessError::SymlinkNotAllowed(_)
+            | RepoRelativeFileAccessError::NotRegularFile(_),
+        ) => Err(unsafe_error(
             "canonical Charter is not a safe retained regular file",
         )),
+        Err(RepoRelativeFileAccessError::ReadFailure { .. }) => {
+            Err(io_error("canonical Charter retained read failed"))
+        }
     }
 }
 
@@ -2038,7 +2123,7 @@ fn ensure_supported_platform() -> Result<(), CharterLifecycleStoreErrorV1> {
 }
 
 fn map_lineage(source: LineageStoreErrorV1) -> CharterLifecycleStoreErrorV1 {
-    error(
+    let mut mapped = error(
         match source.kind() {
             crate::LineageStoreErrorKindV1::UnsupportedPlatform => {
                 CharterLifecycleStoreErrorKindV1::UnsupportedPlatform
@@ -2051,6 +2136,11 @@ fn map_lineage(source: LineageStoreErrorV1) -> CharterLifecycleStoreErrorV1 {
         },
         source.detail(),
     )
+    .with_causal_disposition(source.causal_disposition());
+    for public_effect in source.public_effects() {
+        mapped = mapped.with_public_effect(public_effect.clone());
+    }
+    mapped
 }
 
 #[cfg(test)]
@@ -2577,6 +2667,39 @@ mod lifecycle_fault_control_tests {
             }
         }
     }
+
+    #[test]
+    fn lifecycle_failure_preserves_latest_public_target_state() {
+        let target = format!(
+            ".handbook/state/lifecycle-transitions/lifecycle-transition_{}.json",
+            "a".repeat(64)
+        );
+        let fingerprint = format!("sha256:{}", "a".repeat(64));
+        let failure = CharterLifecycleStoreErrorV1::new(
+            CharterLifecycleStoreErrorKindV1::IoFailure,
+            "later recovery failure",
+        )
+        .with_public_effect(OwnerPublicEffectV1::created_incomplete(&target))
+        .with_public_effect(OwnerPublicEffectV1::installed_unconfirmed(
+            &target,
+            &fingerprint,
+        ))
+        .with_public_effect(OwnerPublicEffectV1::durable_created(&target, &fingerprint));
+
+        assert_eq!(failure.public_effects().len(), 1);
+        assert_eq!(
+            failure.public_effects()[0].disposition(),
+            crate::OwnerPublicEffectDispositionV1::DurableCreated
+        );
+    }
+
+    #[test]
+    fn stale_lifecycle_basis_is_a_caller_precondition_refusal() {
+        assert_eq!(
+            default_causal_disposition(CharterLifecycleStoreErrorKindV1::StaleBasis),
+            OwnerCausalDispositionV1::CallerRefusal
+        );
+    }
 }
 
 fn error(
@@ -2584,6 +2707,56 @@ fn error(
     detail: impl Into<String>,
 ) -> CharterLifecycleStoreErrorV1 {
     CharterLifecycleStoreErrorV1::new(kind, detail)
+}
+
+fn default_causal_disposition(kind: CharterLifecycleStoreErrorKindV1) -> OwnerCausalDispositionV1 {
+    match kind {
+        CharterLifecycleStoreErrorKindV1::AuthorityAbsent
+        | CharterLifecycleStoreErrorKindV1::UnsupportedPlatform => {
+            OwnerCausalDispositionV1::Prerequisite
+        }
+        CharterLifecycleStoreErrorKindV1::InvalidEvent
+        | CharterLifecycleStoreErrorKindV1::UnknownTrigger
+        | CharterLifecycleStoreErrorKindV1::StaleBasis
+        | CharterLifecycleStoreErrorKindV1::LineageViolation
+        | CharterLifecycleStoreErrorKindV1::UnsafeFilesystem
+        | CharterLifecycleStoreErrorKindV1::Conflict => OwnerCausalDispositionV1::CallerRefusal,
+        CharterLifecycleStoreErrorKindV1::DurabilityViolation
+        | CharterLifecycleStoreErrorKindV1::IoFailure => {
+            OwnerCausalDispositionV1::ImplementationFailure
+        }
+        #[cfg(test)]
+        CharterLifecycleStoreErrorKindV1::InjectedFault => {
+            OwnerCausalDispositionV1::ImplementationFailure
+        }
+    }
+}
+
+fn upsert_lifecycle_public_effect(
+    public_effects: &mut Vec<OwnerPublicEffectV1>,
+    public_effect: OwnerPublicEffectV1,
+) {
+    if let Some(existing) = public_effects
+        .iter_mut()
+        .find(|existing| existing.target_ref() == public_effect.target_ref())
+    {
+        let replacement_is_later = matches!(
+            (existing.disposition(), public_effect.disposition()),
+            (
+                OwnerPublicEffectDispositionV1::CreatedIncomplete,
+                OwnerPublicEffectDispositionV1::InstalledDurabilityUnconfirmed
+                    | OwnerPublicEffectDispositionV1::DurableCreated
+            ) | (
+                OwnerPublicEffectDispositionV1::InstalledDurabilityUnconfirmed,
+                OwnerPublicEffectDispositionV1::DurableCreated
+            )
+        );
+        if replacement_is_later {
+            *existing = public_effect;
+        }
+    } else {
+        public_effects.push(public_effect);
+    }
 }
 
 fn invalid_event(detail: impl Into<String>) -> CharterLifecycleStoreErrorV1 {

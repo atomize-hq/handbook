@@ -20,8 +20,11 @@ pub use crate::author::project_context::{
     AuthorProjectContextRefusal, AuthorProjectContextRefusalKind, AuthorProjectContextResult,
 };
 pub use crate::charter_product::{
-    AdapterOperationStatus as AuthorOperationStatus, AdapterRefusal as AuthorOperationRefusal,
-    ApproverAdapterResult as ApproverOperationResult, ApproverAdminOperation as ApproverOperation,
+    AdapterCausalDisposition as AuthorCausalDisposition,
+    AdapterOperationStatus as AuthorOperationStatus, AdapterPublicEffect as AuthorPublicEffect,
+    AdapterPublicEffectDisposition as AuthorPublicEffectDisposition,
+    AdapterRefusal as AuthorOperationRefusal, ApproverAdapterResult as ApproverOperationResult,
+    ApproverAdminOperation as ApproverOperation,
     ApproverLegacyProjection as ApproverOperationProjection, CharterOperation,
     CharterOperationResult, RepositoryInvocationFailureView,
 };
@@ -246,6 +249,30 @@ pub struct ProjectContextInput {
     pub known_unknowns: Vec<String>,
 }
 
+/// Closed Project Context semantic commands. Input acquisition and decoding
+/// remain transport responsibilities outside this boundary.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum ProjectContextCommandRequest {
+    Author(ProjectContextInput),
+    Validate(ProjectContextInput),
+}
+
+/// Complete typed outcome retained for human and legacy projection after the
+/// fixed Project Context use-case response has been constructed.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum ProjectContextCommandOutcome {
+    Author {
+        input_mode: String,
+        input_source: String,
+        result: Result<AuthorProjectContextResult, AuthorProjectContextRefusal>,
+    },
+    Validate {
+        input_mode: String,
+        input_source: String,
+        result: Result<(), AuthorProjectContextRefusal>,
+    },
+}
+
 /// Closed approver-administration requests.
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum ApproverCommandRequest {
@@ -343,6 +370,53 @@ impl HandbookSdkV1 {
         }
     }
 
+    /// Executes one Charter semantic path and immediately closes its typed
+    /// result into the fixed SDK use-case response.
+    pub fn run_author_charter_use_case(
+        &self,
+        request: CharterCommandRequest,
+        limits: &crate::contract_membrane::ContractLimits,
+    ) -> Result<
+        crate::contract_membrane::InvocationResponseV1,
+        crate::contract_membrane::ContractError,
+    > {
+        if limits != &crate::contract_membrane::ContractLimits::packet0() {
+            return Err(crate::contract_membrane::ContractError::LimitOutOfRange);
+        }
+        let result = self.author_charter(request);
+        if let Some(failure) = result.invocation_failure.as_ref() {
+            let command = match result.operation {
+                CharterOperation::Author => {
+                    crate::contract_membrane::RepositoryInvocationCommandV1::CharterAuthor
+                }
+                CharterOperation::Approve => {
+                    crate::contract_membrane::RepositoryInvocationCommandV1::CharterApprove
+                }
+                CharterOperation::Promote => {
+                    crate::contract_membrane::RepositoryInvocationCommandV1::CharterPromote
+                }
+                CharterOperation::Validate => {
+                    crate::contract_membrane::RepositoryInvocationCommandV1::CharterValidate
+                }
+            };
+            crate::contract_membrane::TransportFailureV1::repository_invocation_error(
+                "transport.repository_invocation_unavailable",
+                command,
+                failure,
+                limits,
+            )
+            .and_then(|failure| {
+                crate::contract_membrane::InvocationResponseV1::transport_failure(failure, limits)
+            })
+        } else {
+            crate::contract_membrane::UseCaseResponseV1::author_charter(&result, limits).and_then(
+                |response| {
+                    crate::contract_membrane::InvocationResponseV1::use_case(response, limits)
+                },
+            )
+        }
+    }
+
     /// Validates a typed Project Context input without mutating repository
     /// state.
     pub fn validate_project_context(
@@ -366,9 +440,83 @@ impl HandbookSdkV1 {
         project_context::author_project_context_from_input(&self.repo_root, input)
     }
 
+    /// Executes one Project Context semantic path and immediately closes its
+    /// complete typed outcome into the fixed SDK use-case response.
+    pub fn run_author_project_context_use_case(
+        &self,
+        input_mode: &str,
+        input_source: &str,
+        request: ProjectContextCommandRequest,
+        limits: &crate::contract_membrane::ContractLimits,
+    ) -> Result<crate::contract_membrane::UseCaseResponseV1, crate::contract_membrane::ContractError>
+    {
+        if limits != &crate::contract_membrane::ContractLimits::packet0() {
+            return Err(crate::contract_membrane::ContractError::LimitOutOfRange);
+        }
+        let outcome = match request {
+            ProjectContextCommandRequest::Author(input) => ProjectContextCommandOutcome::Author {
+                input_mode: input_mode.to_owned(),
+                input_source: input_source.to_owned(),
+                result: self.author_project_context(&input),
+            },
+            ProjectContextCommandRequest::Validate(input) => {
+                ProjectContextCommandOutcome::Validate {
+                    input_mode: input_mode.to_owned(),
+                    input_source: input_source.to_owned(),
+                    result: self.validate_project_context(&input),
+                }
+            }
+        };
+        crate::contract_membrane::UseCaseResponseV1::author_project_context(&outcome, limits)
+    }
+
     /// Executes a closed approver-administration operation for this
     /// repository.
     pub fn manage_approvers(&self, request: ApproverCommandRequest) -> ApproverAdapterResult {
         charter_product::execute_approver_admin_intent(&self.repo_root, request.into())
+    }
+
+    /// Executes one approver-administration semantic path and immediately
+    /// closes its typed result into the fixed SDK use-case response.
+    pub fn run_approver_administration_use_case(
+        &self,
+        request: ApproverCommandRequest,
+        limits: &crate::contract_membrane::ContractLimits,
+    ) -> Result<
+        crate::contract_membrane::InvocationResponseV1,
+        crate::contract_membrane::ContractError,
+    > {
+        if limits != &crate::contract_membrane::ContractLimits::packet0() {
+            return Err(crate::contract_membrane::ContractError::LimitOutOfRange);
+        }
+        let result = self.manage_approvers(request);
+        if let Some(crate::charter_product::ApproverLegacyProjection::InvocationFailure(failure)) =
+            result.legacy_projection.as_ref()
+        {
+            let command = match result.operation {
+                crate::charter_product::ApproverAdminOperation::Bootstrap => {
+                    crate::contract_membrane::RepositoryInvocationCommandV1::ApproverBootstrap
+                }
+                crate::charter_product::ApproverAdminOperation::AddCredential => {
+                    crate::contract_membrane::RepositoryInvocationCommandV1::ApproverAddCredential
+                }
+                crate::charter_product::ApproverAdminOperation::RevokeCredential => crate::contract_membrane::RepositoryInvocationCommandV1::ApproverRevokeCredential,
+                crate::charter_product::ApproverAdminOperation::UpdateMapping => crate::contract_membrane::RepositoryInvocationCommandV1::ApproverUpdateMapping,
+            };
+            crate::contract_membrane::TransportFailureV1::repository_invocation_error(
+                "transport.repository_invocation_unavailable",
+                command,
+                failure,
+                limits,
+            )
+            .and_then(|failure| {
+                crate::contract_membrane::InvocationResponseV1::transport_failure(failure, limits)
+            })
+        } else {
+            crate::contract_membrane::UseCaseResponseV1::approver_administration(&result, limits)
+                .and_then(|response| {
+                    crate::contract_membrane::InvocationResponseV1::use_case(response, limits)
+                })
+        }
     }
 }

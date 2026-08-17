@@ -15,9 +15,9 @@ use handbook_sdk::{
         PostureReferenceDtoV1, PostureTransitionApplyRequestDataV1, ProblemCategory,
         RetryDirective, TerminalStatus,
     },
-    HandbookSdkV1, PostureCanonicalBindingV1, PostureDimensionChangeRequestV1, PostureReferenceV1,
-    PostureTransitionApplyRequestV1, PostureTransitionApplyResultV1,
-    PostureTransitionRefusalCodeV1,
+    ApproverCommandRequest, ApproverMapping, HandbookSdkV1, PostureCanonicalBindingV1,
+    PostureDimensionChangeRequestV1, PostureReferenceV1, PostureTransitionApplyRequestV1,
+    PostureTransitionApplyResultV1, PostureTransitionRefusalCodeV1,
 };
 use p256::ecdsa::{signature::Signer, Signature, SigningKey};
 use serde_json::Value;
@@ -37,7 +37,10 @@ const BOUNDARY_YAML: &[u8] = include_bytes!(concat!(
 
 struct DynamicApprovalPort {
     key: SigningKey,
+    added_key: SigningKey,
     credential_id: Vec<u8>,
+    added_credential_id: Vec<u8>,
+    make_calls: usize,
     get_calls: usize,
 }
 
@@ -45,7 +48,10 @@ impl DynamicApprovalPort {
     fn new() -> Self {
         Self {
             key: SigningKey::from_slice(&[1_u8; 32]).unwrap(),
+            added_key: SigningKey::from_slice(&[2_u8; 32]).unwrap(),
             credential_id: vec![0x11; 32],
+            added_credential_id: vec![0x22; 32],
+            make_calls: 0,
             get_calls: 0,
         }
     }
@@ -56,7 +62,12 @@ impl NativeAuthenticatorPortV1 for DynamicApprovalPort {
         &mut self,
         _request_cbor: &[u8],
     ) -> Result<Vec<u8>, NativeAuthenticatorPortErrorV1> {
-        Ok(make_credential_response(&self.key, &self.credential_id))
+        self.make_calls += 1;
+        Ok(if self.make_calls == 1 {
+            make_credential_response(&self.key, &self.credential_id)
+        } else {
+            make_credential_response(&self.added_key, &self.added_credential_id)
+        })
     }
 
     fn get_assertion(
@@ -85,6 +96,18 @@ fn bootstrap_request() -> ApproverAdminRequestV1 {
         .unwrap()
         .iter()
         .find(|row| row["vector_id"] == "bootstrap-request")
+        .unwrap()["document"]
+        .clone();
+    ApproverAdminRequestV1::from_json_value(document).unwrap()
+}
+
+fn add_credential_request() -> ApproverAdminRequestV1 {
+    let fixture: Value = serde_json::from_slice(ADMIN_VECTORS).unwrap();
+    let document = fixture["vectors"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|row| row["vector_id"] == "add-request")
         .unwrap()["document"]
         .clone();
     ApproverAdminRequestV1::from_json_value(document).unwrap()
@@ -386,6 +409,114 @@ fn membrane_request(
         .unwrap(),
     )
     .unwrap()
+}
+
+#[test]
+fn public_approver_use_case_recovers_pending_registry_after_transport_preflight() {
+    let repo = tempfile::tempdir().unwrap();
+    fs::create_dir_all(repo.path().join(".handbook")).unwrap();
+    let bootstrap_request = bootstrap_request();
+    fs::write(
+        repo.path().join(".handbook/repository-identity.v1"),
+        bootstrap_request.repository_identity_fingerprint(),
+    )
+    .unwrap();
+    let mut service =
+        ApproverRegistryServiceV1::for_repository(repo.path(), DynamicApprovalPort::new());
+    let bootstrap = service
+        .bootstrap_approver_registry(bootstrap_request)
+        .to_json_value()
+        .unwrap();
+    assert_eq!(bootstrap["status"], "succeeded", "{bootstrap:#}");
+    let mut add = add_credential_request().to_json_value().unwrap();
+    add["expected_registry_state_fingerprint"] =
+        bootstrap["result_registry_state_fingerprint"].clone();
+    add["expected_transition_fingerprint"] = bootstrap["transition_fingerprint"].clone();
+    let added = service
+        .add_approver_credential(ApproverAdminRequestV1::from_json_value(add).unwrap())
+        .to_json_value()
+        .unwrap();
+    assert_eq!(added["status"], "succeeded", "{added:#}");
+
+    let root = repo.path().join(".handbook/state/transactions/registry");
+    let committed = root
+        .read_dir()
+        .unwrap()
+        .map(|entry| entry.unwrap().path())
+        .find(|directory| {
+            fs::read(directory.join("intent.json"))
+                .ok()
+                .and_then(|bytes| serde_json::from_slice::<Value>(&bytes).ok())
+                .and_then(|intent| intent["schema_id"].as_str().map(str::to_owned))
+                .as_deref()
+                == Some("handbook.registry-mutation-transaction-intent")
+        })
+        .unwrap();
+    let intent: Value =
+        serde_json::from_slice(&fs::read(committed.join("intent.json")).unwrap()).unwrap();
+    let pending = committed.with_file_name(format!(
+        "{}.pending",
+        committed
+            .file_name()
+            .unwrap()
+            .to_string_lossy()
+            .trim_end_matches(".committed")
+    ));
+    fs::rename(committed, &pending).unwrap();
+    fs::remove_file(pending.join("committed")).unwrap();
+    fs::write(
+        repo.path()
+            .join(".handbook/state")
+            .join(intent["prior_use_head_ref"].as_str().unwrap()),
+        fs::read(pending.join("prior-use-head.json")).unwrap(),
+    )
+    .unwrap();
+    for field in [
+        "response_ref",
+        "registration_ref",
+        "assertion_response_ref",
+        "assertion_ref",
+        "result_registry_state_ref",
+        "transition_ref",
+        "use_transition_ref",
+        "new_credential_use_head_ref",
+    ] {
+        if let Some(reference) = intent[field].as_str() {
+            let target = repo.path().join(".handbook/state").join(reference);
+            if target.exists() {
+                fs::remove_file(target).unwrap();
+            }
+        }
+    }
+
+    let limits = ContractLimits::packet0();
+    let invocation = HandbookSdkV1::open(repo.path())
+        .run_approver_administration_use_case(
+            ApproverCommandRequest::AddCredential {
+                approval_mappings: vec![ApproverMapping::new(
+                    "Project owner approval",
+                    "Project owner",
+                )],
+            },
+            &limits,
+        )
+        .unwrap();
+
+    let document = serde_json::to_value(&invocation).unwrap();
+    assert_eq!(
+        invocation.terminal_status(),
+        TerminalStatus::Blocked,
+        "{document:#}"
+    );
+    assert_eq!(document["response_kind"], "use_case");
+    assert_eq!(
+        document["response"]["receipts"].as_array().unwrap().len(),
+        7
+    );
+    let wire = String::from_utf8(canonical_json_bytes(&invocation, &limits).unwrap()).unwrap();
+    assert!(!wire.contains("transactions/"));
+    assert!(!wire.contains("authenticator-use-heads/"));
+    assert!(!pending.exists());
 }
 
 #[test]

@@ -2,6 +2,7 @@ use crate::charter_authenticator::{
     decode_make_credential_response, derive_authenticator_user_handle,
     encode_make_credential_request, NativeAuthenticatorPortErrorV1, NativeAuthenticatorPortV1,
 };
+use crate::{OwnerCausalDispositionV1, OwnerPublicEffectV1};
 use base64::{engine::general_purpose::STANDARD as BASE64_STANDARD, Engine as _};
 use jsonschema::PatternOptions;
 use serde::{de::Error as _, Deserialize, Deserializer, Serialize, Serializer};
@@ -89,12 +90,18 @@ impl<'de> Deserialize<'de> for ApproverAdminRequestV1 {
 #[derive(Clone, Debug, PartialEq)]
 pub struct ApproverAdminResultV1 {
     document: Value,
+    causal_disposition: Option<OwnerCausalDispositionV1>,
+    public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 impl ApproverAdminResultV1 {
     pub fn from_json_value(document: Value) -> Result<Self, ApproverAdminJsonErrorV1> {
         validate_admin_document(&document, "handbook.approver-admin-result")?;
-        Ok(Self { document })
+        Ok(Self {
+            document,
+            causal_disposition: None,
+            public_effects: Vec::new(),
+        })
     }
 
     pub fn to_json_value(&self) -> Result<Value, ApproverAdminJsonErrorV1> {
@@ -104,7 +111,48 @@ impl ApproverAdminResultV1 {
 
     fn checked(document: Value) -> Self {
         debug_assert!(Self::from_json_value(document.clone()).is_ok());
-        Self { document }
+        Self {
+            document,
+            causal_disposition: None,
+            public_effects: Vec::new(),
+        }
+    }
+
+    pub(crate) fn with_owner_facts(
+        mut self,
+        causal_disposition: Option<OwnerCausalDispositionV1>,
+        public_effects: Vec<OwnerPublicEffectV1>,
+    ) -> Self {
+        self.causal_disposition = causal_disposition;
+        self.public_effects = public_effects;
+        self
+    }
+
+    pub(crate) fn with_preceding_public_effects(
+        mut self,
+        preceding_public_effects: &[OwnerPublicEffectV1],
+    ) -> Self {
+        let mut combined = preceding_public_effects.to_vec();
+        for effect in self.public_effects {
+            if let Some(existing) = combined
+                .iter_mut()
+                .find(|existing| existing.target_ref() == effect.target_ref())
+            {
+                *existing = effect;
+            } else {
+                combined.push(effect);
+            }
+        }
+        self.public_effects = combined;
+        self
+    }
+
+    pub fn causal_disposition(&self) -> Option<OwnerCausalDispositionV1> {
+        self.causal_disposition
+    }
+
+    pub fn public_effects(&self) -> &[OwnerPublicEffectV1] {
+        &self.public_effects
     }
 }
 
@@ -167,6 +215,7 @@ impl<P: NativeAuthenticatorPortV1> ApproverRegistryServiceV1<P> {
                 "invalid_request",
                 "bootstrap endpoint requires bootstrap operation",
                 false,
+                OwnerCausalDispositionV1::CallerRefusal,
             );
         }
         if request.document["initial_charter_quorum"]
@@ -183,6 +232,7 @@ impl<P: NativeAuthenticatorPortV1> ApproverRegistryServiceV1<P> {
                 "invalid_request",
                 "bootstrap quorum duplicates the engine-owned registry administrator mapping",
                 false,
+                OwnerCausalDispositionV1::CallerRefusal,
             );
         }
 
@@ -195,6 +245,7 @@ impl<P: NativeAuthenticatorPortV1> ApproverRegistryServiceV1<P> {
                         "invalid_request",
                         "repository identity is not admissible",
                         false,
+                        OwnerCausalDispositionV1::CallerRefusal,
                     )
                 }
             };
@@ -206,6 +257,7 @@ impl<P: NativeAuthenticatorPortV1> ApproverRegistryServiceV1<P> {
                     "transaction_conflict",
                     "operating-system randomness was unavailable",
                     true,
+                    OwnerCausalDispositionV1::ImplementationFailure,
                 )
             }
         };
@@ -223,6 +275,7 @@ impl<P: NativeAuthenticatorPortV1> ApproverRegistryServiceV1<P> {
                     "registration_invalid",
                     "authenticator response was invalid",
                     false,
+                    OwnerCausalDispositionV1::CallerRefusal,
                 )
             }
         }
@@ -231,6 +284,7 @@ impl<P: NativeAuthenticatorPortV1> ApproverRegistryServiceV1<P> {
             "transaction_conflict",
             "registry transaction integration is not available in the in-memory security core",
             true,
+            OwnerCausalDispositionV1::ImplementationFailure,
         )
     }
 
@@ -287,6 +341,7 @@ impl<P: NativeAuthenticatorPortV1> ApproverRegistryServiceV1<P> {
                 "invalid_request",
                 "operation does not match endpoint",
                 false,
+                OwnerCausalDispositionV1::CallerRefusal,
             );
         }
         refused(
@@ -294,6 +349,7 @@ impl<P: NativeAuthenticatorPortV1> ApproverRegistryServiceV1<P> {
             "authorization_refused",
             "no committed registry state was supplied to authorize this operation",
             false,
+            OwnerCausalDispositionV1::Prerequisite,
         )
     }
 }
@@ -414,14 +470,20 @@ fn refused_for_port_error(
     error: NativeAuthenticatorPortErrorV1,
 ) -> ApproverAdminResultV1 {
     match error {
-        NativeAuthenticatorPortErrorV1::Unavailable | NativeAuthenticatorPortErrorV1::Transport => {
-            refused(
-                request,
-                "AUTHENTICATOR_UNAVAILABLE",
-                "native CTAP2.1 authenticator API is unavailable",
-                true,
-            )
-        }
+        NativeAuthenticatorPortErrorV1::Unavailable => refused(
+            request,
+            "AUTHENTICATOR_UNAVAILABLE",
+            "native CTAP2.1 authenticator API is unavailable",
+            true,
+            OwnerCausalDispositionV1::Prerequisite,
+        ),
+        NativeAuthenticatorPortErrorV1::Transport => refused(
+            request,
+            "AUTHENTICATOR_UNAVAILABLE",
+            "native CTAP2.1 authenticator API is unavailable",
+            true,
+            OwnerCausalDispositionV1::ImplementationFailure,
+        ),
     }
 }
 
@@ -430,6 +492,7 @@ fn refused(
     code: &str,
     message: &str,
     retryable: bool,
+    causal_disposition: OwnerCausalDispositionV1,
 ) -> ApproverAdminResultV1 {
     ApproverAdminResultV1::checked(json!({
         "assertion_fingerprint": null,
@@ -452,4 +515,5 @@ fn refused(
         "transition_fingerprint": null,
         "transition_ref": null
     }))
+    .with_owner_facts(Some(causal_disposition), Vec::new())
 }

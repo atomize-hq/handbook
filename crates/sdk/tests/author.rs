@@ -1,4 +1,5 @@
 use handbook_sdk::{
+    contract_membrane::{ContractLimits, UseCaseResponseV1},
     AuthorOperationStatus, CharterAcquisitionMode, CharterCommandRequest,
     CharterCoverageSubmission, CharterInputValue, CharterIntakeConsumer, CharterIntakeEnvelope,
     CharterIntakeSourceKind, HandbookSdkV1, ProjectContextInput,
@@ -94,6 +95,11 @@ fn closed_charter_author_request_persists_the_immutable_candidate_bundle() {
         .as_deref()
         .is_some_and(|value| value.starts_with("candidates/")));
     assert_eq!(result.changed_paths.len(), 4);
+    assert!(
+        UseCaseResponseV1::author_charter(&result, &ContractLimits::packet0()).is_ok(),
+        "author result public effects were not admissible: {:#?}",
+        result.public_effects
+    );
     assert!(result
         .changed_paths
         .iter()

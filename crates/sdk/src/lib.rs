@@ -26,11 +26,13 @@ mod setup;
 
 pub use author_route_api::{
     ApproverCommandRequest, ApproverMapping, ApproverOperation, ApproverOperationProjection,
-    ApproverOperationResult, AuthorOperationRefusal, AuthorOperationStatus,
-    AuthorProjectContextRefusal, AuthorProjectContextRefusalKind, AuthorProjectContextResult,
+    ApproverOperationResult, AuthorCausalDisposition, AuthorOperationRefusal,
+    AuthorOperationStatus, AuthorProjectContextRefusal, AuthorProjectContextRefusalKind,
+    AuthorProjectContextResult, AuthorPublicEffect, AuthorPublicEffectDisposition,
     CharterAcquisitionMode, CharterCommandRequest, CharterCoverageSubmission, CharterInputValue,
     CharterIntakeConsumer, CharterIntakeEnvelope, CharterIntakeSourceKind, CharterOperation,
-    CharterOperationResult, ProjectContextInput, RepositoryInvocationFailureView,
+    CharterOperationResult, ProjectContextCommandOutcome, ProjectContextCommandRequest,
+    ProjectContextInput, RepositoryInvocationFailureView,
 };
 pub use blocker::{Blocker, BlockerCategory};
 pub use decision_log::DecisionLog;

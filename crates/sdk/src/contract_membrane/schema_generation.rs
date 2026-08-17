@@ -1923,6 +1923,37 @@ invocation_string_enum!(
     ["author", "approve", "promote", "validate"]
 );
 invocation_string_enum!(
+    UseCaseCauseV1,
+    "UseCaseCauseV1",
+    ["prerequisite", "caller_refusal", "implementation_failure"]
+);
+invocation_string_enum!(
+    AuthorProjectContextOperationV1,
+    "AuthorProjectContextOperationV1",
+    ["author", "validate"]
+);
+invocation_string_enum!(
+    AuthorProjectContextRefusalKindV1,
+    "AuthorProjectContextRefusalKindV1",
+    [
+        "invalid_request",
+        "missing_system_root",
+        "invalid_system_root",
+        "shipped_contract_unavailable",
+        "selected_decision_missing",
+        "system_root_inspection_failed",
+        "unsafe_system_root",
+        "canonical_inspection_failed",
+        "malformed_structured_input",
+        "incomplete_structured_input",
+        "existing_canonical_truth",
+        "mutation_refused",
+        "mutation_safety_refused",
+        "mutation_io_failed",
+        "unsupported_platform_strict_mutation"
+    ]
+);
+invocation_string_enum!(
     ApproverAdministrationOperationV1,
     "ApproverAdministrationOperationV1",
     [
@@ -1961,6 +1992,63 @@ invocation_string_enum!(
         "serialization",
         "emission",
         "adapter"
+    ]
+);
+invocation_string_enum!(
+    AuthorInputTransportRouteV1,
+    "AuthorInputTransportRouteV1",
+    ["charter", "project_context"]
+);
+invocation_string_enum!(
+    TransportIoErrorKindV1,
+    "TransportIoErrorKindV1",
+    [
+        "not_found",
+        "permission_denied",
+        "connection_refused",
+        "connection_reset",
+        "connection_aborted",
+        "not_connected",
+        "addr_in_use",
+        "addr_not_available",
+        "broken_pipe",
+        "already_exists",
+        "would_block",
+        "invalid_input",
+        "invalid_data",
+        "timed_out",
+        "write_zero",
+        "interrupted",
+        "unsupported",
+        "unexpected_eof",
+        "out_of_memory",
+        "other"
+    ]
+);
+invocation_string_enum!(
+    AuthorWorkingDirectoryCommandV1,
+    "AuthorWorkingDirectoryCommandV1",
+    [
+        "charter_author",
+        "charter_approve",
+        "charter_promote",
+        "charter_validate",
+        "project_context_author",
+        "project_context_validate"
+    ]
+);
+invocation_string_enum!(
+    RepositoryInvocationCommandV1,
+    "RepositoryInvocationCommandV1",
+    [
+        "charter_author",
+        "charter_approve",
+        "charter_promote",
+        "charter_validate",
+        "approver_bootstrap",
+        "approver_add_credential",
+        "approver_revoke_credential",
+        "approver_update_mapping"
     ]
 );
 invocation_string_enum!(
@@ -2402,6 +2490,105 @@ impl_schema!(
     }
 );
 
+fn author_operation_refusal_schema(generator: &mut SchemaGenerator) -> Schema {
+    closed_object(
+        vec![
+            ("code", generator.subschema_for::<BoundedString<255>>()),
+            ("message", generator.subschema_for::<BoundedString<4096>>()),
+            ("retryable", json_schema!({"type": "boolean"})),
+        ],
+        &["code", "message", "retryable"],
+    )
+}
+
+fn repository_invocation_failure_details_schema(generator: &mut SchemaGenerator) -> Schema {
+    closed_object(
+        vec![
+            ("schema_id", generator.subschema_for::<BoundedString<255>>()),
+            (
+                "schema_version",
+                generator.subschema_for::<BoundedString<255>>(),
+            ),
+            ("operation", generator.subschema_for::<BoundedString<255>>()),
+            ("stage", nullable::<BoundedString<255>>(generator)),
+            ("status", generator.subschema_for::<BoundedString<255>>()),
+            (
+                "repository_identity_fingerprint",
+                nullable::<Fingerprint>(generator),
+            ),
+            ("operation_id", nullable::<BoundedString<255>>(generator)),
+            (
+                "changed_paths",
+                generator.subschema_for::<BoundedVec<BoundedString<4096>, 128>>(),
+            ),
+            ("refusal", author_operation_refusal_schema(generator)),
+            (
+                "next_actions",
+                generator.subschema_for::<BoundedVec<BoundedString<1024>, 128>>(),
+            ),
+        ],
+        &[
+            "schema_id",
+            "schema_version",
+            "operation",
+            "stage",
+            "status",
+            "repository_identity_fingerprint",
+            "operation_id",
+            "changed_paths",
+            "refusal",
+            "next_actions",
+        ],
+    )
+}
+
+impl_schema!(
+    AuthorCharterDetailsV1,
+    "AuthorCharterDetailsV1",
+    |generator| closed_object(
+        vec![
+            ("cause", generator.subschema_for::<UseCaseCauseV1>()),
+            (
+                "operation",
+                generator.subschema_for::<AuthorCharterOperationV1>(),
+            ),
+            ("canonical_path", nullable::<BoundedString<4096>>(generator)),
+            ("source_fingerprint", nullable::<Fingerprint>(generator)),
+            (
+                "rendered_output_fingerprint",
+                nullable::<Fingerprint>(generator),
+            ),
+            ("intake", nullable::<ReferenceFingerprintV1>(generator)),
+            ("candidate", nullable::<ReferenceFingerprintV1>(generator)),
+            ("approval", nullable::<ReferenceFingerprintV1>(generator)),
+            ("promotion", nullable::<ReferenceFingerprintV1>(generator)),
+            (
+                "changed_paths",
+                generator.subschema_for::<BoundedVec<BoundedString<4096>, 128>>(),
+            ),
+            ("refusal", author_operation_refusal_schema(generator)),
+            (
+                "next_actions",
+                generator.subschema_for::<BoundedVec<BoundedString<1024>, 128>>(),
+            ),
+        ],
+        &[
+            "cause",
+            "operation",
+            "canonical_path",
+            "source_fingerprint",
+            "rendered_output_fingerprint",
+            "intake",
+            "candidate",
+            "approval",
+            "promotion",
+            "changed_paths",
+            "refusal",
+            "next_actions",
+        ],
+    )
+);
+
 impl_schema!(
     AuthorProjectContextResultV1,
     "AuthorProjectContextResultV1",
@@ -2465,6 +2652,51 @@ impl_schema!(
 );
 
 impl_schema!(
+    AuthorProjectContextDetailsV1,
+    "AuthorProjectContextDetailsV1",
+    |generator| closed_object(
+        vec![
+            ("cause", generator.subschema_for::<UseCaseCauseV1>()),
+            (
+                "operation",
+                generator.subschema_for::<AuthorProjectContextOperationV1>(),
+            ),
+            (
+                "input_mode",
+                generator.subschema_for::<BoundedString<255>>(),
+            ),
+            (
+                "input_source",
+                generator.subschema_for::<BoundedString<4096>>(),
+            ),
+            (
+                "refusal_kind",
+                generator.subschema_for::<AuthorProjectContextRefusalKindV1>(),
+            ),
+            ("summary", generator.subschema_for::<BoundedString<4096>>()),
+            (
+                "broken_subject",
+                generator.subschema_for::<BoundedString<4096>>(),
+            ),
+            (
+                "next_safe_action",
+                generator.subschema_for::<BoundedString<4096>>(),
+            ),
+        ],
+        &[
+            "cause",
+            "operation",
+            "input_mode",
+            "input_source",
+            "refusal_kind",
+            "summary",
+            "broken_subject",
+            "next_safe_action",
+        ],
+    )
+);
+
+impl_schema!(
     ApproverAdministrationResultV1,
     "ApproverAdministrationResultV1",
     |generator| closed_object(
@@ -2517,6 +2749,92 @@ impl_schema!(
             "next_actions",
         ],
     )
+);
+
+fn approver_admin_legacy_details_schema(generator: &mut SchemaGenerator) -> Schema {
+    closed_object(
+        vec![
+            (
+                "operation_id",
+                generator.subschema_for::<BoundedString<255>>(),
+            ),
+            (
+                "repository_identity_fingerprint",
+                generator.subschema_for::<Fingerprint>(),
+            ),
+            (
+                "prior_registry_state",
+                nullable::<ReferenceFingerprintV1>(generator),
+            ),
+            (
+                "result_registry_state",
+                nullable::<ReferenceFingerprintV1>(generator),
+            ),
+            ("transition", nullable::<ReferenceFingerprintV1>(generator)),
+            (
+                "registration",
+                nullable::<ReferenceFingerprintV1>(generator),
+            ),
+            ("assertion", nullable::<ReferenceFingerprintV1>(generator)),
+        ],
+        &[
+            "operation_id",
+            "repository_identity_fingerprint",
+            "prior_registry_state",
+            "result_registry_state",
+            "transition",
+            "registration",
+            "assertion",
+        ],
+    )
+}
+
+fn approver_legacy_projection_schema(generator: &mut SchemaGenerator) -> Schema {
+    closed_object(
+        vec![
+            ("projection_kind", json_schema!({"const": "admin"})),
+            ("fields", approver_admin_legacy_details_schema(generator)),
+        ],
+        &["projection_kind", "fields"],
+    )
+}
+
+impl_schema!(
+    ApproverAdministrationDetailsV1,
+    "ApproverAdministrationDetailsV1",
+    |generator| {
+        let legacy_projection = approver_legacy_projection_schema(generator);
+        closed_object(
+            vec![
+                ("cause", generator.subschema_for::<UseCaseCauseV1>()),
+                (
+                    "operation",
+                    generator.subschema_for::<ApproverAdministrationOperationV1>(),
+                ),
+                (
+                    "changed_paths",
+                    generator.subschema_for::<BoundedVec<BoundedString<4096>, 128>>(),
+                ),
+                ("refusal", author_operation_refusal_schema(generator)),
+                (
+                    "next_actions",
+                    generator.subschema_for::<BoundedVec<BoundedString<1024>, 128>>(),
+                ),
+                (
+                    "legacy_projection",
+                    json_schema!({"anyOf": [legacy_projection, {"type": "null"}]}),
+                ),
+            ],
+            &[
+                "cause",
+                "operation",
+                "changed_paths",
+                "refusal",
+                "next_actions",
+                "legacy_projection",
+            ],
+        )
+    }
 );
 
 impl_schema!(PipelineRouteRunV1, "PipelineRouteRunV1", |generator| {
@@ -2772,17 +3090,79 @@ impl_schema!(
 impl_schema!(
     TransportFailureDetailsV1,
     "TransportFailureDetailsV1",
-    |generator| closed_object(
-        vec![
-            (
-                "failure_kind",
-                generator.subschema_for::<TransportFailureKind>(),
-            ),
-            ("reason_code", generator.subschema_for::<Token<255>>()),
-        ],
-        &["failure_kind", "reason_code"],
-    )
+    |generator| {
+        let author_input = closed_object(
+            vec![
+                ("presentation_kind", json_schema!({"const": "author_input"})),
+                (
+                    "route",
+                    generator.subschema_for::<AuthorInputTransportRouteV1>(),
+                ),
+                (
+                    "input_source",
+                    generator.subschema_for::<BoundedString<65536>>(),
+                ),
+                ("error", nullable::<TransportIoErrorV1>(generator)),
+            ],
+            &["presentation_kind", "route", "input_source", "error"],
+        );
+        let repository_invocation = closed_object(
+            vec![
+                (
+                    "presentation_kind",
+                    json_schema!({"const": "repository_invocation"}),
+                ),
+                (
+                    "command",
+                    generator.subschema_for::<RepositoryInvocationCommandV1>(),
+                ),
+                (
+                    "failure",
+                    repository_invocation_failure_details_schema(generator),
+                ),
+            ],
+            &["presentation_kind", "command", "failure"],
+        );
+        let working_directory = closed_object(
+            vec![
+                (
+                    "presentation_kind",
+                    json_schema!({"const": "working_directory"}),
+                ),
+                (
+                    "command",
+                    generator.subschema_for::<AuthorWorkingDirectoryCommandV1>(),
+                ),
+                ("error", generator.subschema_for::<TransportIoErrorV1>()),
+            ],
+            &["presentation_kind", "command", "error"],
+        );
+        closed_object(
+            vec![
+                (
+                    "failure_kind",
+                    generator.subschema_for::<TransportFailureKind>(),
+                ),
+                ("reason_code", generator.subschema_for::<Token<255>>()),
+                (
+                    "presentation",
+                    json_schema!({"oneOf": [author_input, working_directory, repository_invocation]}),
+                ),
+            ],
+            &["failure_kind", "reason_code"],
+        )
+    }
 );
+
+impl_schema!(TransportIoErrorV1, "TransportIoErrorV1", |generator| {
+    closed_object(
+        vec![
+            ("kind", generator.subschema_for::<TransportIoErrorKindV1>()),
+            ("raw_os_error", nullable::<i32>(generator)),
+        ],
+        &["kind", "raw_os_error"],
+    )
+});
 
 fn exact_binding_schema(generator: &mut SchemaGenerator, reference: &'static str) -> Schema {
     closed_object(
@@ -2968,16 +3348,58 @@ impl_schema!(UseCaseResponseV1, "UseCaseResponseV1", |generator| {
         "handbook.use-case.author-charter@1.0.0",
         "handbook.use-case.author-charter-result@1.0.0",
     ));
+    for status in ["blocked", "refused", "error"] {
+        let problem = typed_problem_schema::<AuthorCharterDetailsV1>(
+            generator,
+            "handbook.use-case.author-charter@1.0.0",
+            "handbook.use-case.author-charter-details@1.0.0",
+        );
+        variants.push(use_case_terminal_schema::<AuthorCharterResultV1>(
+            generator,
+            "handbook.use-case.author-charter@1.0.0",
+            "handbook.use-case.author-charter-result@1.0.0",
+            status,
+            Some(problem),
+        ));
+    }
     variants.push(use_case_ok_schema::<AuthorProjectContextResultV1>(
         generator,
         "handbook.use-case.author-project-context@1.0.0",
         "handbook.use-case.author-project-context-result@1.0.0",
     ));
+    for status in ["blocked", "refused", "error"] {
+        let problem = typed_problem_schema::<AuthorProjectContextDetailsV1>(
+            generator,
+            "handbook.use-case.author-project-context@1.0.0",
+            "handbook.use-case.author-project-context-details@1.0.0",
+        );
+        variants.push(use_case_terminal_schema::<AuthorProjectContextResultV1>(
+            generator,
+            "handbook.use-case.author-project-context@1.0.0",
+            "handbook.use-case.author-project-context-result@1.0.0",
+            status,
+            Some(problem),
+        ));
+    }
     variants.push(use_case_ok_schema::<ApproverAdministrationResultV1>(
         generator,
         "handbook.use-case.approver-administration@1.0.0",
         "handbook.use-case.approver-administration-result@1.0.0",
     ));
+    for status in ["blocked", "refused", "error"] {
+        let problem = typed_problem_schema::<ApproverAdministrationDetailsV1>(
+            generator,
+            "handbook.use-case.approver-administration@1.0.0",
+            "handbook.use-case.approver-administration-details@1.0.0",
+        );
+        variants.push(use_case_terminal_schema::<ApproverAdministrationResultV1>(
+            generator,
+            "handbook.use-case.approver-administration@1.0.0",
+            "handbook.use-case.approver-administration-result@1.0.0",
+            status,
+            Some(problem),
+        ));
+    }
     variants.push(
         use_case_ok_schema::<PipelineRouteResolveAndPersistResultV1>(
             generator,
@@ -3227,7 +3649,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 65] = [
+const INVENTORY: [SchemaDescriptor; 68] = [
     descriptor::<ArtifactRef>(
         "handbook.artifact-ref@1.0.0",
         "handbook.artifact-ref/1.0.0.schema.json",
@@ -3452,13 +3874,25 @@ const INVENTORY: [SchemaDescriptor; 65] = [
         "handbook.use-case-response@1.0.0",
         "handbook.use-case-response/1.0.0.schema.json",
     ),
+    descriptor::<ApproverAdministrationDetailsV1>(
+        "handbook.use-case.approver-administration-details@1.0.0",
+        "handbook.use-case.approver-administration-details/1.0.0.schema.json",
+    ),
     descriptor::<ApproverAdministrationResultV1>(
         "handbook.use-case.approver-administration-result@1.0.0",
         "handbook.use-case.approver-administration-result/1.0.0.schema.json",
     ),
+    descriptor::<AuthorCharterDetailsV1>(
+        "handbook.use-case.author-charter-details@1.0.0",
+        "handbook.use-case.author-charter-details/1.0.0.schema.json",
+    ),
     descriptor::<AuthorCharterResultV1>(
         "handbook.use-case.author-charter-result@1.0.0",
         "handbook.use-case.author-charter-result/1.0.0.schema.json",
+    ),
+    descriptor::<AuthorProjectContextDetailsV1>(
+        "handbook.use-case.author-project-context-details@1.0.0",
+        "handbook.use-case.author-project-context-details/1.0.0.schema.json",
     ),
     descriptor::<AuthorProjectContextResultV1>(
         "handbook.use-case.author-project-context-result@1.0.0",
@@ -3549,8 +3983,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 65 {
-        return Err("schema inventory must contain exactly 65 entries".to_owned());
+    if INVENTORY.len() != 68 {
+        return Err("schema inventory must contain exactly 68 entries".to_owned());
     }
 
     let mut previous_ref = None;

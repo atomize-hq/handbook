@@ -1,11 +1,16 @@
 use crate::{
-    shell_shared::discover_managed_repo_root, ApproverAddCredentialArgs, ApproverBootstrapArgs,
-    ApproverRevokeCredentialArgs, ApproverUpdateMappingArgs, ApproversArgs, ApproversCommand,
+    doctor_rendering, exit_policy, shell_shared::discover_managed_repo_root,
+    ApproverAddCredentialArgs, ApproverBootstrapArgs, ApproverRevokeCredentialArgs,
+    ApproverUpdateMappingArgs, ApproversArgs, ApproversCommand,
+};
+use handbook_sdk::contract_membrane::{
+    ContractLimits, InvocationResponseV1, RepositoryInvocationCommandV1, TransportFailureKind,
+    TransportFailureV1, TransportPresentationViewV1, UseCaseResponseV1,
 };
 use std::fmt::Write as _;
 use std::process::ExitCode;
 
-pub(crate) fn run(args: ApproversArgs) -> ExitCode {
+pub(crate) fn run(args: ApproversArgs, machine_json: bool) -> ExitCode {
     let (intent, json) = match args.command {
         ApproversCommand::Bootstrap(ApproverBootstrapArgs {
             initial_charter_quorum,
@@ -19,8 +24,9 @@ pub(crate) fn run(args: ApproversArgs) -> ExitCode {
             ),
             Err(message) => {
                 return emit_invalid_request(
+                    machine_json,
                     json,
-                    "bootstrap",
+                    handbook_sdk::ApproverOperation::Bootstrap,
                     &message,
                     "use one or more exact non-empty class=authority quorum pairs",
                 );
@@ -36,8 +42,9 @@ pub(crate) fn run(args: ApproversArgs) -> ExitCode {
             ),
             Err(message) => {
                 return emit_invalid_request(
+                    machine_json,
                     json,
-                    "add_credential",
+                    handbook_sdk::ApproverOperation::AddCredential,
                     &message,
                     "use one or more exact non-empty class=authority approval mappings",
                 );
@@ -64,8 +71,9 @@ pub(crate) fn run(args: ApproversArgs) -> ExitCode {
             ),
             Err(message) => {
                 return emit_invalid_request(
+                    machine_json,
                     json,
-                    "update_mapping",
+                    handbook_sdk::ApproverOperation::UpdateMapping,
                     &message,
                     "use one or more exact non-empty class=authority approval mappings",
                 );
@@ -74,17 +82,65 @@ pub(crate) fn run(args: ApproversArgs) -> ExitCode {
     };
     let cwd = std::env::current_dir().unwrap_or_else(|_| ".".into());
     let repo_root = discover_managed_repo_root(&cwd);
-    let result = handbook_sdk::HandbookSdkV1::open(&repo_root).manage_approvers(intent);
-    if json {
-        print!("{}", render_json(&result));
-    } else {
-        print!("{}", render_text(&result));
+    let limits = ContractLimits::packet0();
+    let invocation = match handbook_sdk::HandbookSdkV1::open(&repo_root)
+        .run_approver_administration_use_case(intent, &limits)
+    {
+        Ok(invocation) => invocation,
+        Err(_) => {
+            return emit_machine_transport(
+                TransportFailureKind::Serialization,
+                "transport.invocation_construction_failed",
+                &limits,
+            )
+        }
+    };
+    emit_approver_invocation(invocation, machine_json, json, &limits)
+}
+
+fn emit_approver_invocation(
+    invocation: InvocationResponseV1,
+    machine_json: bool,
+    legacy_json: bool,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let semantic_exit = exit_policy::terminal(invocation.terminal_status());
+    if machine_json {
+        return match doctor_rendering::render_invocation(&invocation) {
+            Ok(bytes) => exit_policy::emit_stdout(&bytes, semantic_exit),
+            Err(_) => emit_machine_transport(
+                TransportFailureKind::Serialization,
+                "transport.serialization_failed",
+                limits,
+            ),
+        };
     }
-    if result.status == handbook_sdk::AuthorOperationStatus::Succeeded {
-        ExitCode::SUCCESS
+    let projected = match invocation.approver_administration_outcome(limits) {
+        Ok(Some(result)) => result,
+        Ok(None) => match approver_transport_legacy_projection(&invocation, limits) {
+            Some(result) => result,
+            None => {
+                return emit_machine_transport(
+                    TransportFailureKind::Serialization,
+                    "transport.presentation_failed",
+                    limits,
+                )
+            }
+        },
+        Err(_) => {
+            return emit_machine_transport(
+                TransportFailureKind::Serialization,
+                "transport.presentation_failed",
+                limits,
+            )
+        }
+    };
+    let output = if legacy_json {
+        render_json(&projected)
     } else {
-        ExitCode::from(1)
-    }
+        render_text(&projected)
+    };
+    exit_policy::emit_stdout(output.as_bytes(), semantic_exit)
 }
 
 fn parse_approver_mappings(
@@ -123,31 +179,101 @@ fn parse_approver_mappings(
     Ok(mappings)
 }
 
-fn emit_invalid_request(json: bool, operation: &str, message: &str, next_action: &str) -> ExitCode {
-    if json {
-        let document = serde_json::json!({
-            "schema_id": "handbook.approver-admin-adapter-result",
-            "schema_version": "1.0",
-            "operation": operation,
-            "status": "refused",
-            "changed_paths": [],
-            "refusal": {
-                "code": "invalid_request",
-                "message": message,
-                "retryable": false,
-            },
-            "next_actions": [next_action],
-        });
-        let mut output = serde_json::to_string_pretty(&document)
-            .unwrap_or_else(|_| "{\"status\":\"refused\"}".to_owned());
-        output.push('\n');
-        print!("{output}");
-    } else {
-        print!(
-            "OUTCOME: REFUSED\nOPERATION: {operation}\nCODE: invalid_request\nMESSAGE: {message}\nRETRYABLE: false\nNEXT SAFE ACTION: {next_action}\n"
-        );
+fn approver_transport_legacy_projection(
+    invocation: &InvocationResponseV1,
+    limits: &ContractLimits,
+) -> Option<handbook_sdk::ApproverOperationResult> {
+    let Some(TransportPresentationViewV1::RepositoryInvocation { command, failure }) =
+        invocation.transport_presentation(limits).ok()?
+    else {
+        return None;
+    };
+    let operation = match command {
+        RepositoryInvocationCommandV1::ApproverBootstrap => {
+            handbook_sdk::ApproverOperation::Bootstrap
+        }
+        RepositoryInvocationCommandV1::ApproverAddCredential => {
+            handbook_sdk::ApproverOperation::AddCredential
+        }
+        RepositoryInvocationCommandV1::ApproverRevokeCredential => {
+            handbook_sdk::ApproverOperation::RevokeCredential
+        }
+        RepositoryInvocationCommandV1::ApproverUpdateMapping => {
+            handbook_sdk::ApproverOperation::UpdateMapping
+        }
+        RepositoryInvocationCommandV1::CharterAuthor
+        | RepositoryInvocationCommandV1::CharterApprove
+        | RepositoryInvocationCommandV1::CharterPromote
+        | RepositoryInvocationCommandV1::CharterValidate => return None,
+    };
+    Some(handbook_sdk::ApproverOperationResult {
+        schema_id: failure.schema_id.clone(),
+        schema_version: failure.schema_version.clone(),
+        operation,
+        status: handbook_sdk::AuthorOperationStatus::Refused,
+        changed_paths: failure.changed_paths.clone(),
+        refusal: Some(failure.refusal.clone()),
+        next_actions: failure.next_actions.clone(),
+        legacy_projection: Some(
+            handbook_sdk::ApproverOperationProjection::InvocationFailure(*failure),
+        ),
+        causal_disposition: None,
+        public_effects: Vec::new(),
+    })
+}
+
+fn emit_invalid_request(
+    machine_json: bool,
+    json: bool,
+    operation: handbook_sdk::ApproverOperation,
+    message: &str,
+    next_action: &str,
+) -> ExitCode {
+    let limits = ContractLimits::packet0();
+    let result = handbook_sdk::ApproverOperationResult {
+        schema_id: "handbook.approver-admin-adapter-result".to_owned(),
+        schema_version: "1.0".to_owned(),
+        operation,
+        status: handbook_sdk::AuthorOperationStatus::Refused,
+        changed_paths: Vec::new(),
+        refusal: Some(handbook_sdk::AuthorOperationRefusal {
+            code: "invalid_request".to_owned(),
+            message: message.to_owned(),
+            retryable: false,
+        }),
+        next_actions: vec![next_action.to_owned()],
+        legacy_projection: None,
+        causal_disposition: Some(handbook_sdk::AuthorCausalDisposition::CallerRefusal),
+        public_effects: Vec::new(),
+    };
+    let invocation = UseCaseResponseV1::approver_administration(&result, &limits)
+        .and_then(|response| InvocationResponseV1::use_case(response, &limits));
+    match invocation {
+        Ok(invocation) => emit_approver_invocation(invocation, machine_json, json, &limits),
+        Err(_) => emit_machine_transport(
+            TransportFailureKind::Serialization,
+            "transport.invocation_construction_failed",
+            &limits,
+        ),
     }
-    ExitCode::from(1)
+}
+
+fn emit_machine_transport(
+    kind: TransportFailureKind,
+    reason_code: &str,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let bytes = TransportFailureV1::adapter_error(kind, reason_code, limits)
+        .and_then(|failure| InvocationResponseV1::transport_failure(failure, limits))
+        .map_err(|_| ())
+        .and_then(|invocation| doctor_rendering::render_invocation(&invocation).map_err(|_| ()));
+    match bytes {
+        Ok(bytes) => exit_policy::emit_stdout(&bytes, exit_policy::failure()),
+        Err(()) => {
+            eprintln!("handbook: failed to prepare transport-failure response");
+            exit_policy::failure()
+        }
+    }
 }
 
 fn render_json(result: &handbook_sdk::ApproverOperationResult) -> String {

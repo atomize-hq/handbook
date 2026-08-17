@@ -205,7 +205,10 @@ fn author_finalization_builds_and_replays_the_exact_acyclic_candidate_1_3_chain(
     let second = service
         .persist(&decisions, author_envelope(), None)
         .unwrap();
-    assert_eq!(second, first);
+    let mut expected_replay = first.clone();
+    expected_replay.public_effects.clear();
+    assert_eq!(second, expected_replay);
+    assert_eq!(first.public_effects.len(), 4);
     assert_eq!(std::fs::read(candidate_path).unwrap(), candidate_bytes);
     assert_eq!(std::fs::read(validation_path).unwrap(), validation_bytes);
 }
@@ -796,7 +799,10 @@ fn exact_historical_candidate_versions_are_safe_author_replay_nonmatches() {
             .persist(&decisions, author_envelope(), None)
             .expect("exact historical candidate must remain a safe nonmatch");
 
-        assert_eq!(replayed, authored);
+        let mut expected_replay = authored.clone();
+        expected_replay.public_effects.clear();
+        assert_eq!(replayed, expected_replay);
+        assert_eq!(authored.public_effects.len(), 4);
         assert_eq!(std::fs::read(historical_path).unwrap(), historical_bytes);
     }
 }

@@ -1,3 +1,4 @@
+use crate::charter_product::{AdapterPublicEffect, AdapterPublicEffectDisposition};
 use std::fs;
 #[cfg(unix)]
 use std::fs::OpenOptions;
@@ -46,6 +47,7 @@ pub(crate) enum RepoRelativeMutationError {
     WriteFailure {
         path: PathBuf,
         source: std::io::Error,
+        public_effect: Option<AdapterPublicEffect>,
     },
 }
 
@@ -121,7 +123,7 @@ impl<'a> CompilerWorkspace<'a> {
         &self,
         relative_path: &NormalizedRepoRelativePath,
         bytes: &[u8],
-    ) -> Result<(), RepoRelativeMutationError> {
+    ) -> Result<AdapterPublicEffect, RepoRelativeMutationError> {
         write_repo_relative_bytes_from_validated(self.repo_root, relative_path.as_path(), bytes)
     }
 }
@@ -213,7 +215,7 @@ pub(crate) fn write_repo_relative_bytes(
     repo_root: &Path,
     relative_path: &str,
     bytes: &[u8],
-) -> Result<(), RepoRelativeMutationError> {
+) -> Result<AdapterPublicEffect, RepoRelativeMutationError> {
     let workspace = CompilerWorkspace::new(repo_root);
     let relative_path = workspace
         .normalize_repo_relative(relative_path)
@@ -225,7 +227,7 @@ fn write_repo_relative_bytes_from_validated(
     repo_root: &Path,
     relative_path: &Path,
     bytes: &[u8],
-) -> Result<(), RepoRelativeMutationError> {
+) -> Result<AdapterPublicEffect, RepoRelativeMutationError> {
     #[cfg(unix)]
     {
         write_repo_relative_bytes_unix(repo_root, relative_path, bytes)
@@ -331,7 +333,7 @@ fn write_repo_relative_bytes_unix(
     repo_root: &Path,
     relative_path: &Path,
     bytes: &[u8],
-) -> Result<(), RepoRelativeMutationError> {
+) -> Result<AdapterPublicEffect, RepoRelativeMutationError> {
     use std::ffi::{CString, OsStr};
     use std::fs::File;
     use std::os::fd::{AsRawFd, FromRawFd, IntoRawFd, OwnedFd};
@@ -345,6 +347,7 @@ fn write_repo_relative_bytes_unix(
         RepoRelativeMutationError::WriteFailure {
             path: repo_root.to_path_buf(),
             source,
+            public_effect: None,
         }
     })?;
     let mut parent_path = repo_root.to_path_buf();
@@ -363,6 +366,7 @@ fn write_repo_relative_bytes_unix(
         RepoRelativeMutationError::WriteFailure {
             path: temp_path.clone(),
             source,
+            public_effect: None,
         }
     })?;
     let mut temp_file = unsafe { File::from_raw_fd(temp_fd.into_raw_fd()) };
@@ -373,12 +377,14 @@ fn write_repo_relative_bytes_unix(
             .map_err(|source| RepoRelativeMutationError::WriteFailure {
                 path: temp_path.clone(),
                 source,
+                public_effect: None,
             })?;
         temp_file
             .sync_all()
             .map_err(|source| RepoRelativeMutationError::WriteFailure {
                 path: temp_path.clone(),
                 source,
+                public_effect: None,
             })?;
         drop(temp_file);
 
@@ -386,15 +392,26 @@ fn write_repo_relative_bytes_unix(
             RepoRelativeMutationError::WriteFailure {
                 path: target_path.clone(),
                 source,
+                public_effect: None,
             }
         })?;
+        let fingerprint = handbook_engine::DefinitionFingerprint::from_bytes(bytes).to_string();
+        let installed = AdapterPublicEffect {
+            target_ref: relative_path.to_string_lossy().replace('\\', "/"),
+            content_fingerprint: Some(fingerprint.clone()),
+            disposition: AdapterPublicEffectDisposition::InstalledDurabilityUnconfirmed,
+        };
         sync_directory_fd(parent_fd.as_raw_fd()).map_err(|source| {
             RepoRelativeMutationError::WriteFailure {
                 path: parent_path.clone(),
                 source,
+                public_effect: Some(installed.clone()),
             }
         })?;
-        Ok(())
+        Ok(AdapterPublicEffect {
+            disposition: AdapterPublicEffectDisposition::DurableCreated,
+            ..installed
+        })
     })();
 
     if result.is_err() {
@@ -621,7 +638,7 @@ fn write_repo_relative_bytes_fallback(
     repo_root: &Path,
     relative_path: &Path,
     bytes: &[u8],
-) -> Result<(), RepoRelativeMutationError> {
+) -> Result<AdapterPublicEffect, RepoRelativeMutationError> {
     let path = resolve_repo_relative_write_path_from_validated(repo_root, relative_path)
         .map_err(map_write_path_error_to_mutation_error)?;
     let parent = path.parent().ok_or_else(|| {
@@ -630,10 +647,20 @@ fn write_repo_relative_bytes_fallback(
     fs::create_dir_all(parent).map_err(|source| RepoRelativeMutationError::WriteFailure {
         path: parent.to_path_buf(),
         source,
+        public_effect: None,
     })?;
-    fs::write(&path, bytes)
-        .map_err(|source| RepoRelativeMutationError::WriteFailure { path, source })?;
-    Ok(())
+    fs::write(&path, bytes).map_err(|source| RepoRelativeMutationError::WriteFailure {
+        path,
+        source,
+        public_effect: None,
+    })?;
+    Ok(AdapterPublicEffect {
+        target_ref: relative_path.to_string_lossy().replace('\\', "/"),
+        content_fingerprint: Some(
+            handbook_engine::DefinitionFingerprint::from_bytes(bytes).to_string(),
+        ),
+        disposition: AdapterPublicEffectDisposition::InstalledDurabilityUnconfirmed,
+    })
 }
 
 #[cfg(not(unix))]

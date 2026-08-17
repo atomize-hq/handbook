@@ -3,6 +3,7 @@ use crate::charter_intake::{
     validate_candidate_field_source_bijection, CharterCandidateBundle, CharterFieldSource,
 };
 use crate::definition_identity::canonical_json_bytes;
+use crate::owner_facts::{OwnerCausalDispositionV1, OwnerPublicEffectV1};
 use crate::{parse_schema_json, DefinitionFingerprint};
 use serde_json::Value;
 use std::fs::{self, OpenOptions};
@@ -43,6 +44,7 @@ pub struct LineageAppendResultV1 {
     pub record_id: String,
     pub fingerprint: String,
     pub disposition: AppendDispositionV1,
+    pub public_effect: Option<OwnerPublicEffectV1>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -50,6 +52,7 @@ pub struct CandidateBundlePersistenceV1 {
     pub normalized_content_ref: String,
     pub intake_ref: String,
     pub candidate_ref: String,
+    pub public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -70,6 +73,7 @@ pub enum LineageStoreErrorKindV1 {
 pub struct LineageStoreErrorV1 {
     kind: LineageStoreErrorKindV1,
     detail: String,
+    public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 impl LineageStoreErrorV1 {
@@ -77,6 +81,7 @@ impl LineageStoreErrorV1 {
         Self {
             kind,
             detail: detail.into(),
+            public_effects: Vec::new(),
         }
     }
 
@@ -87,6 +92,40 @@ impl LineageStoreErrorV1 {
     pub fn detail(&self) -> &str {
         &self.detail
     }
+
+    pub fn causal_disposition(&self) -> OwnerCausalDispositionV1 {
+        match self.kind {
+            LineageStoreErrorKindV1::UnsupportedPlatform
+            | LineageStoreErrorKindV1::MissingDependency => OwnerCausalDispositionV1::Prerequisite,
+            LineageStoreErrorKindV1::ExistingBytesMismatch
+            | LineageStoreErrorKindV1::UnsafeFilesystem
+            | LineageStoreErrorKindV1::BoundExceeded
+            | LineageStoreErrorKindV1::UnsafeReference
+            | LineageStoreErrorKindV1::InvalidRecord
+            | LineageStoreErrorKindV1::IdentityMismatch
+            | LineageStoreErrorKindV1::BasisMismatch => OwnerCausalDispositionV1::CallerRefusal,
+            LineageStoreErrorKindV1::IoFailure => OwnerCausalDispositionV1::ImplementationFailure,
+        }
+    }
+
+    pub fn public_effects(&self) -> &[OwnerPublicEffectV1] {
+        &self.public_effects
+    }
+
+    fn with_public_effect(mut self, effect: OwnerPublicEffectV1) -> Self {
+        self.public_effects.push(effect);
+        self
+    }
+
+    fn with_prior_effects(mut self, mut effects: Vec<OwnerPublicEffectV1>) -> Self {
+        effects.append(&mut self.public_effects);
+        self.public_effects = effects;
+        self
+    }
+}
+
+struct AppendBlobResultV1 {
+    public_effect: Option<OwnerPublicEffectV1>,
 }
 
 #[derive(Clone, Debug)]
@@ -235,13 +274,30 @@ impl TrustedLineageStoreV1 {
             &candidate_bytes,
             MAX_LINEAGE_RECORD_BYTES,
         )?;
-        self.append_exact_blob(&expected_content_ref, &bundle.normalized_content)?;
-        self.append_record_inner(LineageRecordClassV1::Intake, &intake_bytes)?;
-        self.append_record_inner(LineageRecordClassV1::Candidate, &candidate_bytes)?;
+        let mut public_effects = Vec::new();
+        let content = self
+            .append_exact_blob(&expected_content_ref, &bundle.normalized_content)
+            .map_err(|failure| failure.with_prior_effects(public_effects.clone()))?;
+        if let Some(effect) = content.public_effect {
+            public_effects.push(effect);
+        }
+        let intake_append = self
+            .append_record_inner(LineageRecordClassV1::Intake, &intake_bytes)
+            .map_err(|failure| failure.with_prior_effects(public_effects.clone()))?;
+        if let Some(effect) = intake_append.public_effect {
+            public_effects.push(effect);
+        }
+        let candidate_append = self
+            .append_record_inner(LineageRecordClassV1::Candidate, &candidate_bytes)
+            .map_err(|failure| failure.with_prior_effects(public_effects.clone()))?;
+        if let Some(effect) = candidate_append.public_effect {
+            public_effects.push(effect);
+        }
         Ok(CandidateBundlePersistenceV1 {
             normalized_content_ref: expected_content_ref,
             intake_ref: intake.relative_ref,
             candidate_ref: candidate.relative_ref,
+            public_effects,
         })
     }
 
@@ -328,16 +384,26 @@ impl TrustedLineageStoreV1 {
 
         match create_new_file(&final_path) {
             Ok(mut file) => {
-                file.write_all(bytes)
-                    .map_err(|_| io_error("lineage record write failed"))?;
-                file.sync_all()
-                    .map_err(|_| io_error("lineage record fsync failed"))?;
-                sync_directory(parent)?;
+                let target_ref = record_repo_relative(class, &identity.relative_ref);
+                let incomplete = OwnerPublicEffectV1::created_incomplete(&target_ref);
+                file.write_all(bytes).map_err(|_| {
+                    io_error("lineage record write failed").with_public_effect(incomplete.clone())
+                })?;
+                let installed =
+                    OwnerPublicEffectV1::installed_unconfirmed(&target_ref, &identity.fingerprint);
+                file.sync_all().map_err(|_| {
+                    io_error("lineage record fsync failed").with_public_effect(installed.clone())
+                })?;
+                sync_directory(parent).map_err(|failure| failure.with_public_effect(installed))?;
                 Ok(LineageAppendResultV1 {
                     relative_ref: identity.relative_ref,
                     record_id: identity.record_id,
-                    fingerprint: identity.fingerprint,
+                    fingerprint: identity.fingerprint.clone(),
                     disposition: AppendDispositionV1::Created,
+                    public_effect: Some(OwnerPublicEffectV1::durable_created(
+                        target_ref,
+                        identity.fingerprint,
+                    )),
                 })
             }
             Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => {
@@ -375,6 +441,7 @@ impl TrustedLineageStoreV1 {
                     record_id: identity.record_id,
                     fingerprint: identity.fingerprint,
                     disposition: AppendDispositionV1::ReusedEqual,
+                    public_effect: None,
                 })
             }
             Err(_) => Err(io_error("lineage record create-new failed")),
@@ -487,7 +554,7 @@ impl TrustedLineageStoreV1 {
         &self,
         relative_ref: &str,
         bytes: &[u8],
-    ) -> Result<AppendDispositionV1, LineageStoreErrorV1> {
+    ) -> Result<AppendBlobResultV1, LineageStoreErrorV1> {
         validate_relative_path(relative_ref)?;
         let final_path = self.state_path(relative_ref)?;
         let parent = final_path.parent().ok_or_else(|| {
@@ -499,12 +566,25 @@ impl TrustedLineageStoreV1 {
         create_safe_directories(&self.repo_root, parent)?;
         match create_new_file(&final_path) {
             Ok(mut file) => {
-                file.write_all(bytes)
-                    .map_err(|_| io_error("candidate content write failed"))?;
-                file.sync_all()
-                    .map_err(|_| io_error("candidate content flush failed"))?;
-                sync_directory(parent)?;
-                Ok(AppendDispositionV1::Created)
+                let target_ref = format!(".handbook/state/{relative_ref}");
+                let incomplete = OwnerPublicEffectV1::created_incomplete(&target_ref);
+                file.write_all(bytes).map_err(|_| {
+                    io_error("candidate content write failed")
+                        .with_public_effect(incomplete.clone())
+                })?;
+                let fingerprint = DefinitionFingerprint::from_bytes(bytes).to_string();
+                let installed =
+                    OwnerPublicEffectV1::installed_unconfirmed(&target_ref, &fingerprint);
+                file.sync_all().map_err(|_| {
+                    io_error("candidate content flush failed").with_public_effect(installed.clone())
+                })?;
+                sync_directory(parent).map_err(|failure| failure.with_public_effect(installed))?;
+                Ok(AppendBlobResultV1 {
+                    public_effect: Some(OwnerPublicEffectV1::durable_created(
+                        target_ref,
+                        fingerprint,
+                    )),
+                })
             }
             Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => {
                 self.preflight_create_new_or_equal(
@@ -512,7 +592,9 @@ impl TrustedLineageStoreV1 {
                     bytes,
                     MAX_CANDIDATE_CONTENT_BYTES,
                 )?;
-                Ok(AppendDispositionV1::ReusedEqual)
+                Ok(AppendBlobResultV1 {
+                    public_effect: None,
+                })
             }
             Err(_) => Err(io_error("candidate content create-new failed")),
         }
@@ -1345,4 +1427,27 @@ fn map_read_error(error: RepoRelativeFileAccessError) -> LineageStoreErrorV1 {
 
 fn io_error(detail: &'static str) -> LineageStoreErrorV1 {
     LineageStoreErrorV1::new(LineageStoreErrorKindV1::IoFailure, detail)
+}
+
+#[cfg(test)]
+mod packet3_causal_disposition_tests {
+    use super::*;
+
+    #[test]
+    fn conflicts_and_unsafe_filesystem_are_caller_refusals() {
+        for kind in [
+            LineageStoreErrorKindV1::ExistingBytesMismatch,
+            LineageStoreErrorKindV1::UnsafeFilesystem,
+        ] {
+            assert_eq!(
+                LineageStoreErrorV1::new(kind, "test").causal_disposition(),
+                OwnerCausalDispositionV1::CallerRefusal
+            );
+        }
+        assert_eq!(
+            LineageStoreErrorV1::new(LineageStoreErrorKindV1::IoFailure, "test")
+                .causal_disposition(),
+            OwnerCausalDispositionV1::ImplementationFailure
+        );
+    }
 }

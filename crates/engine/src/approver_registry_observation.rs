@@ -1,22 +1,16 @@
 use crate::approver_registry_mutation::{
+    observe_committed_registry_chain_head_for_repository_preflight_locked,
     observe_committed_registry_chain_head_if_present_locked,
     observe_committed_registry_chain_head_locked, CommittedRegistryChainHeadV1,
 };
-use crate::charter_authority_workflow::{
-    read_registry_journal_file, recover_registry_authority, registry_commit_marker,
-    RegistryAuthorityLocks,
-};
-use crate::charter_lineage_store::{
-    reject_reparse_or_symlink, LineageRecordClassV1, TrustedLineageStoreV1,
-};
-use crate::{parse_schema_json, DefinitionFingerprint};
+use crate::charter_authority_workflow::{read_registry_journal_file, RegistryAuthorityLocks};
+use crate::charter_lineage_store::{LineageRecordClassV1, TrustedLineageStoreV1};
+use crate::{parse_schema_json, DefinitionFingerprint, OwnerCausalDispositionV1};
 use base64::{engine::general_purpose::STANDARD as BASE64_STANDARD, Engine as _};
-use serde::Deserialize;
 use serde_json::Value;
 use std::collections::BTreeSet;
 use std::fmt;
-use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct ApproverAuthorityPairV1 {
@@ -75,6 +69,7 @@ pub enum ApproverRegistryObservationErrorKindV1 {
 pub struct ApproverRegistryObservationErrorV1 {
     kind: ApproverRegistryObservationErrorKindV1,
     detail: String,
+    causal_disposition: OwnerCausalDispositionV1,
 }
 
 impl ApproverRegistryObservationErrorV1 {
@@ -84,6 +79,10 @@ impl ApproverRegistryObservationErrorV1 {
 
     pub fn detail(&self) -> &str {
         &self.detail
+    }
+
+    pub fn causal_disposition(&self) -> OwnerCausalDispositionV1 {
+        self.causal_disposition
     }
 }
 
@@ -95,104 +94,29 @@ impl fmt::Display for ApproverRegistryObservationErrorV1 {
 
 impl std::error::Error for ApproverRegistryObservationErrorV1 {}
 
-#[derive(Debug, Deserialize)]
-#[serde(deny_unknown_fields)]
-struct RegistryIntentV1 {
-    schema_id: String,
-    schema_version: String,
-    transaction_id: String,
-    operation: String,
-    operation_id: String,
-    repository_identity_fingerprint: String,
-    response_ref: String,
-    response_fingerprint: String,
-    registration_ref: String,
-    registration_fingerprint: String,
-    result_registry_state_ref: String,
-    result_registry_state_fingerprint: String,
-    transition_ref: String,
-    transition_fingerprint: String,
-    use_head_ref: String,
-    use_head_fingerprint: String,
-}
-
 pub fn observe_committed_approver_registry(
     repo_root: impl AsRef<Path>,
 ) -> Result<CommittedApproverRegistryObservationV1, ApproverRegistryObservationErrorV1> {
     let repo_root = repo_root.as_ref();
-    let locks = RegistryAuthorityLocks::acquire(repo_root)
-        .map_err(|_| unsafe_error("approver authority locks could not be acquired safely"))?;
-    recover_registry_authority(repo_root)
-        .map_err(|_| durability("pending registry authority could not be recovered"))?;
-
-    let committed = sole_committed_transaction(repo_root)?;
-    let intent_bytes = read_registry_journal_file(
-        repo_root,
-        &committed.join("intent.json"),
-        64 * 1024,
-        "committed registry intent",
-    )
-    .map_err(|_| unsafe_error("committed registry intent is not a safe bounded file"))?;
-    let intent: RegistryIntentV1 = serde_json::from_slice(&intent_bytes)
-        .map_err(|_| durability("committed registry intent is not closed JSON"))?;
-    let intent_value = parse_schema_json(&intent_bytes)
-        .map_err(|_| durability("committed registry intent contains duplicate JSON keys"))?;
-    let canonical = serde_json_canonicalizer::to_vec(&intent_value)
-        .map_err(|_| durability("committed registry intent cannot be canonicalized"))?;
-    if canonical != intent_bytes {
-        return Err(durability("committed registry intent is not exact JCS"));
-    }
-    validate_intent_header(&intent)?;
-    let marker = read_registry_journal_file(
-        repo_root,
-        &committed.join("committed"),
-        72,
-        "committed registry marker",
-    )
-    .map_err(|_| unsafe_error("committed registry marker is not a safe exact file"))?;
-    if marker.len() != 72 || marker != registry_commit_marker(&intent_bytes) {
-        return Err(durability(
-            "committed registry marker does not bind the raw intent bytes",
-        ));
-    }
-
-    let lineage = TrustedLineageStoreV1::new(repo_root);
-    let state_bytes = lineage
-        .read_record(
-            LineageRecordClassV1::RegistryState,
-            &intent.result_registry_state_ref,
-            &intent.result_registry_state_fingerprint,
+    let locks = RegistryAuthorityLocks::acquire(repo_root).map_err(|error| {
+        unsafe_error(
+            "approver authority locks could not be acquired safely",
+            error.causal_disposition(),
         )
-        .map_err(|_| lineage_error("committed registry state could not be re-resolved"))?;
-    let state = parse_schema_json(&state_bytes)
-        .map_err(|_| lineage_error("committed registry state is not closed JSON"))?;
-    let transition_bytes = lineage
-        .read_record(
-            LineageRecordClassV1::RegistryTransition,
-            &intent.transition_ref,
-            &intent.transition_fingerprint,
-        )
-        .map_err(|_| lineage_error("committed registry transition could not be re-resolved"))?;
-    let transition = parse_schema_json(&transition_bytes)
-        .map_err(|_| lineage_error("committed registry transition is not closed JSON"))?;
-    validate_transition_bindings(&intent, &state, &transition)?;
-
-    let credentials = resolve_credentials(repo_root, &lineage, &state)?;
-    if credentials.is_empty() {
-        return Err(lineage_error(
-            "committed registry authority has no retained credential material",
-        ));
-    }
+    })?;
+    let retained = observe_committed_approver_registry_locked(repo_root)?;
+    let head_transition = parse_schema_json(&retained.head_transition_bytes)
+        .map_err(|_| lineage_error("retained registry head is not closed JSON"))?;
     Ok(CommittedApproverRegistryObservationV1 {
-        state_ref: intent.result_registry_state_ref,
-        state_fingerprint: intent.result_registry_state_fingerprint,
-        state_bytes,
-        state,
-        head_transition_ref: intent.transition_ref,
-        head_transition_fingerprint: intent.transition_fingerprint,
-        head_transition_bytes: transition_bytes,
-        head_transition: transition,
-        credentials,
+        state_ref: retained.state_ref,
+        state_fingerprint: retained.state_fingerprint,
+        state_bytes: retained.state_bytes,
+        state: retained.state,
+        head_transition_ref: retained.head_transition_ref,
+        head_transition_fingerprint: retained.head_transition_fingerprint,
+        head_transition_bytes: retained.head_transition_bytes,
+        head_transition,
+        credentials: retained.credentials,
         _locks: locks,
     })
 }
@@ -201,7 +125,7 @@ pub(crate) fn observe_committed_approver_registry_locked(
     repo_root: &Path,
 ) -> Result<RetainedApproverRegistryObservationV1, ApproverRegistryObservationErrorV1> {
     let head = observe_committed_registry_chain_head_locked(repo_root)
-        .map_err(|error| durability(error.detail()))?;
+        .map_err(|error| durability_with_cause(error.detail(), error.causal_disposition()))?;
     resolve_retained_registry_head(repo_root, head)
 }
 
@@ -209,7 +133,16 @@ pub(crate) fn observe_committed_approver_registry_if_present_locked(
     repo_root: &Path,
 ) -> Result<Option<RetainedApproverRegistryObservationV1>, ApproverRegistryObservationErrorV1> {
     observe_committed_registry_chain_head_if_present_locked(repo_root)
-        .map_err(|error| durability(error.detail()))?
+        .map_err(|error| durability_with_cause(error.detail(), error.causal_disposition()))?
+        .map(|head| resolve_retained_registry_head(repo_root, head))
+        .transpose()
+}
+
+pub(crate) fn observe_committed_approver_registry_for_repository_preflight_locked(
+    repo_root: &Path,
+) -> Result<Option<RetainedApproverRegistryObservationV1>, ApproverRegistryObservationErrorV1> {
+    observe_committed_registry_chain_head_for_repository_preflight_locked(repo_root)
+        .map_err(|error| durability_with_cause(error.detail(), error.causal_disposition()))?
         .map(|head| resolve_retained_registry_head(repo_root, head))
         .transpose()
 }
@@ -225,7 +158,12 @@ fn resolve_retained_registry_head(
             &head.state_ref,
             &head.state_fingerprint,
         )
-        .map_err(|_| lineage_error("retained registry state could not be re-resolved"))?;
+        .map_err(|failure| {
+            lineage_error_with_cause(
+                "retained registry state could not be re-resolved",
+                failure.causal_disposition(),
+            )
+        })?;
     let state = parse_schema_json(&state_bytes)
         .map_err(|_| lineage_error("retained registry state is not closed JSON"))?;
     let head_transition_bytes = lineage
@@ -234,7 +172,12 @@ fn resolve_retained_registry_head(
             &head.transition_ref,
             &head.transition_fingerprint,
         )
-        .map_err(|_| lineage_error("retained registry head could not be re-resolved"))?;
+        .map_err(|failure| {
+            lineage_error_with_cause(
+                "retained registry head could not be re-resolved",
+                failure.causal_disposition(),
+            )
+        })?;
     let transition = parse_schema_json(&head_transition_bytes)
         .map_err(|_| lineage_error("retained registry head is not closed JSON"))?;
     if state
@@ -278,121 +221,6 @@ fn resolve_retained_registry_head(
     })
 }
 
-fn sole_committed_transaction(
-    repo_root: &Path,
-) -> Result<PathBuf, ApproverRegistryObservationErrorV1> {
-    let root = repo_root.join(".handbook/state/transactions/registry");
-    if !root.exists() {
-        return Err(absent("no committed approver registry authority exists"));
-    }
-    reject_reparse_or_symlink(&root, true)
-        .map_err(|_| unsafe_error("registry transaction root is unsafe"))?;
-    let mut committed = Vec::new();
-    for entry in
-        fs::read_dir(&root).map_err(|_| unsafe_error("registry transaction root is unreadable"))?
-    {
-        let entry = entry.map_err(|_| unsafe_error("registry transaction entry is unreadable"))?;
-        let name = entry
-            .file_name()
-            .to_str()
-            .ok_or_else(|| unsafe_error("registry transaction entry name is not UTF-8"))?
-            .to_owned();
-        if name.ends_with(".committed") {
-            reject_reparse_or_symlink(&entry.path(), true)
-                .map_err(|_| unsafe_error("committed registry transaction is unsafe"))?;
-            committed.push(entry.path());
-        } else if !name.ends_with(".pending") {
-            return Err(durability(
-                "registry transaction root contains an unknown entry",
-            ));
-        }
-    }
-    match committed.len() {
-        0 => Err(absent("no committed approver registry authority exists")),
-        1 => Ok(committed.remove(0)),
-        _ => Err(durability(
-            "multiple committed registry roots require a verified transition chain",
-        )),
-    }
-}
-
-fn validate_intent_header(
-    intent: &RegistryIntentV1,
-) -> Result<(), ApproverRegistryObservationErrorV1> {
-    if intent.schema_id != "handbook.registry-transaction-intent"
-        || intent.schema_version != "1.0"
-        || intent.operation != "bootstrap"
-        || intent.transaction_id.is_empty()
-        || intent.operation_id.is_empty()
-    {
-        return Err(durability(
-            "committed registry intent header or operation is not admitted",
-        ));
-    }
-    DefinitionFingerprint::parse(&intent.repository_identity_fingerprint)
-        .map_err(|_| lineage_error("registry repository identity fingerprint is invalid"))?;
-    for value in [
-        &intent.response_fingerprint,
-        &intent.registration_fingerprint,
-        &intent.result_registry_state_fingerprint,
-        &intent.transition_fingerprint,
-        &intent.use_head_fingerprint,
-    ] {
-        DefinitionFingerprint::parse(value)
-            .map_err(|_| lineage_error("registry intent carries an invalid fingerprint"))?;
-    }
-    if intent.response_ref.is_empty()
-        || intent.registration_ref.is_empty()
-        || intent.result_registry_state_ref.is_empty()
-        || intent.transition_ref.is_empty()
-        || intent.use_head_ref.is_empty()
-    {
-        return Err(lineage_error(
-            "registry intent carries an empty retained reference",
-        ));
-    }
-    Ok(())
-}
-
-fn validate_transition_bindings(
-    intent: &RegistryIntentV1,
-    state: &Value,
-    transition: &Value,
-) -> Result<(), ApproverRegistryObservationErrorV1> {
-    if transition
-        .get("repository_identity_fingerprint")
-        .and_then(Value::as_str)
-        != Some(intent.repository_identity_fingerprint.as_str())
-        || transition
-            .get("result_registry_state_ref")
-            .and_then(Value::as_str)
-            != Some(intent.result_registry_state_ref.as_str())
-        || transition
-            .get("result_registry_state_fingerprint")
-            .and_then(Value::as_str)
-            != Some(intent.result_registry_state_fingerprint.as_str())
-        || transition.get("authorization_ref").and_then(Value::as_str)
-            != Some(intent.registration_ref.as_str())
-        || transition
-            .get("authorization_fingerprint")
-            .and_then(Value::as_str)
-            != Some(intent.registration_fingerprint.as_str())
-        || state
-            .get("repository_identity_fingerprint")
-            .and_then(Value::as_str)
-            != Some(intent.repository_identity_fingerprint.as_str())
-        || transition.get("operation").and_then(Value::as_str) != Some("bootstrap")
-        || transition.get("authorization_kind").and_then(Value::as_str) != Some("registration")
-        || transition.get("prior_transition_ref") != Some(&Value::Null)
-        || transition.get("prior_registry_state_ref") != Some(&Value::Null)
-    {
-        return Err(lineage_error(
-            "committed registry transition, state, and intent bindings disagree",
-        ));
-    }
-    Ok(())
-}
-
 fn resolve_credentials(
     repo_root: &Path,
     lineage: &TrustedLineageStoreV1,
@@ -422,7 +250,12 @@ fn resolve_credentials(
                 &registration_ref,
                 &registration_fingerprint,
             )
-            .map_err(|_| lineage_error("credential registration could not be re-resolved"))?;
+            .map_err(|failure| {
+                lineage_error_with_cause(
+                    "credential registration could not be re-resolved",
+                    failure.causal_disposition(),
+                )
+            })?;
         let registration = parse_schema_json(&registration_bytes)
             .map_err(|_| lineage_error("credential registration is not closed JSON"))?;
         let response_ref = string(&registration, "decoded_response_ref")?;
@@ -433,7 +266,12 @@ fn resolve_credentials(
                 response_ref,
                 response_fingerprint,
             )
-            .map_err(|_| lineage_error("make-credential response could not be re-resolved"))?;
+            .map_err(|failure| {
+                lineage_error_with_cause(
+                    "make-credential response could not be re-resolved",
+                    failure.causal_disposition(),
+                )
+            })?;
         let response = parse_schema_json(&response_bytes)
             .map_err(|_| lineage_error("make-credential response is not closed JSON"))?;
         let credential_id = decode_bounded_base64(
@@ -489,7 +327,12 @@ fn read_use_head(
     let relative_ref = format!("authenticator-use-heads/{hex}.json");
     let path = repo_root.join(".handbook/state").join(&relative_ref);
     let bytes = read_registry_journal_file(repo_root, &path, 64 * 1024, "authenticator use head")
-        .map_err(|_| unsafe_error("authenticator use head is not a safe bounded file"))?;
+        .map_err(|error| {
+        unsafe_error(
+            "authenticator use head is not a safe bounded file",
+            error.causal_disposition(),
+        )
+    })?;
     let mut value = parse_schema_json(&bytes)
         .map_err(|_| lineage_error("authenticator use head is not closed JSON"))?;
     let canonical = serde_json_canonicalizer::to_vec(&value)
@@ -634,37 +477,47 @@ fn string<'a>(
         .ok_or_else(|| lineage_error(format!("required registry field {field} is absent")))
 }
 
-fn absent(detail: impl Into<String>) -> ApproverRegistryObservationErrorV1 {
-    ApproverRegistryObservationErrorV1 {
-        kind: ApproverRegistryObservationErrorKindV1::AuthorityAbsent,
-        detail: detail.into(),
-    }
-}
-
-fn durability(detail: impl Into<String>) -> ApproverRegistryObservationErrorV1 {
+fn durability_with_cause(
+    detail: impl Into<String>,
+    causal_disposition: OwnerCausalDispositionV1,
+) -> ApproverRegistryObservationErrorV1 {
     ApproverRegistryObservationErrorV1 {
         kind: ApproverRegistryObservationErrorKindV1::DurabilityViolation,
         detail: detail.into(),
+        causal_disposition,
     }
 }
 
-fn unsafe_error(detail: impl Into<String>) -> ApproverRegistryObservationErrorV1 {
+fn unsafe_error(
+    detail: impl Into<String>,
+    causal_disposition: OwnerCausalDispositionV1,
+) -> ApproverRegistryObservationErrorV1 {
     ApproverRegistryObservationErrorV1 {
         kind: ApproverRegistryObservationErrorKindV1::UnsafeFilesystem,
         detail: detail.into(),
+        causal_disposition,
     }
 }
 
 fn lineage_error(detail: impl Into<String>) -> ApproverRegistryObservationErrorV1 {
+    lineage_error_with_cause(detail, OwnerCausalDispositionV1::CallerRefusal)
+}
+
+fn lineage_error_with_cause(
+    detail: impl Into<String>,
+    causal_disposition: OwnerCausalDispositionV1,
+) -> ApproverRegistryObservationErrorV1 {
     ApproverRegistryObservationErrorV1 {
         kind: ApproverRegistryObservationErrorKindV1::LineageViolation,
         detail: detail.into(),
+        causal_disposition,
     }
 }
 
 #[cfg(test)]
 mod optional_retained_registry_tests {
     use super::*;
+    use std::fs;
 
     #[test]
     fn optional_locked_registry_observation_distinguishes_absence_from_unsafe_state() {
@@ -685,6 +538,43 @@ mod optional_retained_registry_tests {
         assert_ne!(
             failure.kind(),
             ApproverRegistryObservationErrorKindV1::AuthorityAbsent
+        );
+    }
+
+    #[test]
+    fn unsafe_observation_preserves_caller_and_io_causes() {
+        let caller = unsafe_error(
+            "unsafe repository state",
+            OwnerCausalDispositionV1::CallerRefusal,
+        );
+        let io = unsafe_error(
+            "repository inspection failed",
+            OwnerCausalDispositionV1::ImplementationFailure,
+        );
+        assert_eq!(
+            caller.causal_disposition(),
+            OwnerCausalDispositionV1::CallerRefusal
+        );
+        assert_eq!(
+            io.causal_disposition(),
+            OwnerCausalDispositionV1::ImplementationFailure
+        );
+
+        let lineage_conflict = lineage_error_with_cause(
+            "retained lineage conflict",
+            OwnerCausalDispositionV1::CallerRefusal,
+        );
+        let lineage_io = lineage_error_with_cause(
+            "retained lineage read failed",
+            OwnerCausalDispositionV1::ImplementationFailure,
+        );
+        assert_eq!(
+            lineage_conflict.causal_disposition(),
+            OwnerCausalDispositionV1::CallerRefusal
+        );
+        assert_eq!(
+            lineage_io.causal_disposition(),
+            OwnerCausalDispositionV1::ImplementationFailure
         );
     }
 }

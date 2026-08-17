@@ -27,7 +27,10 @@ use crate::charter_lineage_store::{
     create_new_file, create_safe_directories, reject_reparse_or_symlink, sync_directory,
     validate_record, LineageRecordClassV1, LineageStoreErrorV1, TrustedLineageStoreV1,
 };
-use crate::{parse_schema_json, DefinitionFingerprint, ResolvedProfileDecisions};
+use crate::{
+    parse_schema_json, DefinitionFingerprint, OwnerCausalDispositionV1, OwnerPublicEffectV1,
+    ResolvedProfileDecisions,
+};
 use base64::{engine::general_purpose::STANDARD as BASE64_STANDARD, Engine as _};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -114,6 +117,8 @@ pub struct CharterApprovalRefusalV1 {
     pub result_use_head_ref: Option<String>,
     pub result_use_head_fingerprint: Option<String>,
     pub changed_paths: Vec<String>,
+    pub causal_disposition: OwnerCausalDispositionV1,
+    pub public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 impl CharterApprovalRefusalV1 {
@@ -128,6 +133,28 @@ impl CharterApprovalRefusalV1 {
             && self.approval_fingerprint.is_none()
             && self.result_use_head_ref.is_none()
             && self.result_use_head_fingerprint.is_none()
+    }
+
+    fn with_owner_facts(
+        mut self,
+        causal_disposition: OwnerCausalDispositionV1,
+        public_effects: Vec<OwnerPublicEffectV1>,
+    ) -> Self {
+        self.causal_disposition = causal_disposition;
+        self.public_effects = public_effects;
+        self
+    }
+
+    fn with_preceding_public_effects(
+        mut self,
+        preceding_public_effects: &[OwnerPublicEffectV1],
+    ) -> Self {
+        let mut combined = preceding_public_effects.to_vec();
+        for effect in self.public_effects {
+            upsert_approval_effect(&mut combined, effect);
+        }
+        self.public_effects = combined;
+        self
     }
 }
 
@@ -145,6 +172,7 @@ pub struct CharterApprovalSuccessV1 {
     pub result_use_head_ref: String,
     pub result_use_head_fingerprint: String,
     pub changed_paths: Vec<String>,
+    pub public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -233,6 +261,10 @@ impl<P: NativeAuthenticatorPortV1> CharterApprovalServiceV1<P> {
                     false,
                     "preserve the candidate/result evidence and reauthor candidate 1.3",
                 )
+                .with_owner_facts(
+                    failure.causal_disposition(),
+                    failure.public_effects().to_vec(),
+                )
             },
         )?;
         let canonical = observe_candidate_basis(&self.repo_root, decisions, &candidate)?;
@@ -251,59 +283,78 @@ impl<P: NativeAuthenticatorPortV1> CharterApprovalServiceV1<P> {
                 false,
                 "preserve the retained journals and repair the complete authority domain",
             )
-        })?;
-        let authority = observe_committed_approver_registry_locked(&self.repo_root)
-            .map_err(map_observation_refusal)?;
-        recover_approval_authority(&self.repo_root)?;
-
-        let normalized_content_ref =
-            candidate["normalized_content_ref"]
-                .as_str()
-                .ok_or_else(|| {
-                    refused(
-                        CharterApprovalRefusalCodeV1::LineageViolation,
-                        "candidate normalized-content reference is not a string",
-                        false,
-                        "recreate the candidate through Charter intake",
-                    )
-                })?;
-        let normalized_content = lineage
-            .read_candidate_content(normalized_content_ref)
-            .map_err(map_lineage_refusal)?;
-        let current = retained.read_committed_charter().map_err(|failure| {
-            refused(
-                CharterApprovalRefusalCodeV1::TransactionConflict,
-                format!(
-                    "committed Charter authority observation refused: {}",
-                    failure.detail()
-                ),
-                false,
-                "repair retained promotion authority before approval",
+            .with_owner_facts(
+                failure.causal_disposition(),
+                failure.public_effects().to_vec(),
             )
         })?;
-        let lifecycle = CharterLifecycleStoreV1::new(&self.repo_root)
-            .observe_retained_locked()
-            .map_err(|failure| {
+        let mut recovery_public_effects = retained.recovery_public_effects().to_vec();
+        let authority = observe_committed_approver_registry_locked(&self.repo_root)
+            .map_err(map_observation_refusal)
+            .map_err(|failure| failure.with_preceding_public_effects(&recovery_public_effects))?;
+        let locally_recovered = recover_approval_authority(&self.repo_root)
+            .map_err(|failure| failure.with_preceding_public_effects(&recovery_public_effects))?;
+        for effect in locally_recovered {
+            upsert_approval_effect(&mut recovery_public_effects, effect);
+        }
+
+        let outcome = (|| {
+            let normalized_content_ref =
+                candidate["normalized_content_ref"]
+                    .as_str()
+                    .ok_or_else(|| {
+                        refused(
+                            CharterApprovalRefusalCodeV1::LineageViolation,
+                            "candidate normalized-content reference is not a string",
+                            false,
+                            "recreate the candidate through Charter intake",
+                        )
+                    })?;
+            let normalized_content = lineage
+                .read_candidate_content(normalized_content_ref)
+                .map_err(map_lineage_refusal)?;
+            let current = retained.read_committed_charter().map_err(|failure| {
                 refused(
-                    CharterApprovalRefusalCodeV1::LineageViolation,
+                    CharterApprovalRefusalCodeV1::TransactionConflict,
                     format!(
-                        "retained lifecycle authority observation refused: {}",
+                        "committed Charter authority observation refused: {}",
                         failure.detail()
                     ),
                     false,
-                    "repair retained lifecycle authority before approval",
+                    "repair retained promotion authority before approval",
+                )
+                .with_owner_facts(
+                    failure.causal_disposition(),
+                    failure.public_effects().to_vec(),
                 )
             })?;
-        CharterLifecycleValidationServiceV1::new(&self.repo_root)
-            .validate_current_retained(
-                decisions,
-                &candidate,
-                &normalized_content,
-                current.as_ref(),
-                &lifecycle,
-            )
-            .map_err(|failure| {
-                refused(
+            let lifecycle = CharterLifecycleStoreV1::new(&self.repo_root)
+                .observe_retained_locked()
+                .map_err(|failure| {
+                    refused(
+                        CharterApprovalRefusalCodeV1::LineageViolation,
+                        format!(
+                            "retained lifecycle authority observation refused: {}",
+                            failure.detail()
+                        ),
+                        false,
+                        "repair retained lifecycle authority before approval",
+                    )
+                    .with_owner_facts(
+                        failure.causal_disposition(),
+                        failure.public_effects().to_vec(),
+                    )
+                })?;
+            CharterLifecycleValidationServiceV1::new(&self.repo_root)
+                .validate_current_retained(
+                    decisions,
+                    &candidate,
+                    &normalized_content,
+                    current.as_ref(),
+                    &lifecycle,
+                )
+                .map_err(|failure| {
+                    refused(
                     CharterApprovalRefusalCodeV1::LineageViolation,
                     format!(
                         "candidate semantic lifecycle-validation authority refused: {}",
@@ -312,164 +363,171 @@ impl<P: NativeAuthenticatorPortV1> CharterApprovalServiceV1<P> {
                     false,
                     "preserve the evidence and reauthor candidate 1.3 against current authority",
                 )
-            })?;
-        let required_pairs = required_approval_pairs(&authority, canonical.record.as_ref())?;
-        let requested_pair = ApproverAuthorityPairV1 {
-            approval_class: request.approval_class.clone(),
-            authority_ref: request.authority_ref.clone(),
-        };
-        if !required_pairs.contains(&requested_pair) {
-            return Err(refused(
-                CharterApprovalRefusalCodeV1::AuthorizationRefused,
-                "requested approval class and authority are not currently required",
-                false,
-                "select one exact currently required approval pair",
-            ));
-        }
-        if committed_pair_already_satisfied(
-            &self.repo_root,
-            &request.candidate_ref,
-            &candidate_fingerprint,
-            &requested_pair,
-        )? {
-            return Err(refused(
-                CharterApprovalRefusalCodeV1::AuthorizationRefused,
-                "the exact candidate authority pair is already satisfied",
-                false,
-                "retain the committed approval or choose another required pair",
-            ));
-        }
-
-        let accepted_waivers = resolve_accepted_waivers(
-            &lineage,
-            &request.accepted_waiver_refs,
-            &candidate_fingerprint,
-        )?;
-        let credentials = eligible_credentials(&authority, &requested_pair, &required_pairs)?;
-        if credentials.is_empty() {
-            return Err(refused(
-                CharterApprovalRefusalCodeV1::AuthorizationRefused,
-                "no committed active unexhausted credential covers the exact authority pair",
-                false,
-                "register or map one usable credential to the required approval pair",
-            ));
-        }
-
-        let prior_use_heads = credentials
-            .iter()
-            .map(|credential| {
-                Ok((
-                    credential.credential_id_hash.clone(),
-                    read_retained_use_head(&self.repo_root, credential)?,
-                ))
-            })
-            .collect::<Result<BTreeMap<_, _>, CharterApprovalRefusalV1>>()?;
-        let mut nonce = [0u8; 32];
-        getrandom::fill(&mut nonce).map_err(|_| {
-            refused(
-                CharterApprovalRefusalCodeV1::TransactionConflict,
-                "operating-system randomness was unavailable",
-                true,
-                "retry the complete operation with fresh operating-system randomness",
-            )
-        })?;
-        let challenge = build_approval_challenge(
-            request,
-            &candidate_fingerprint,
-            candidate
-                .get("basis_artifact_fingerprint")
-                .unwrap_or(&Value::Null),
-            &authority,
-            &accepted_waivers,
-            nonce,
-        )?;
-        let client_data_hash: [u8; 32] = Sha256::digest(&challenge.bytes).into();
-        let allow_ids = credentials
-            .iter()
-            .map(|credential| credential.credential_id.clone())
-            .collect::<Vec<_>>();
-        let request_cbor = encode_get_assertion_request(client_data_hash, &allow_ids)
-            .map_err(map_authenticator_refusal)?;
-        let raw_response = self
-            .port
-            .get_assertion(&request_cbor)
-            .map_err(map_port_refusal)?;
-        let requested_credentials = credentials
-            .iter()
-            .map(|credential| AuthenticatorCredentialV1 {
-                credential_id: credential.credential_id.clone(),
-                cose_public_key: credential.cose_public_key.clone(),
-            })
-            .collect::<Vec<_>>();
-        let decoded = decode_and_verify_get_assertion_response(
-            &raw_response,
-            &requested_credentials,
-            client_data_hash,
-        )
-        .map_err(map_authenticator_refusal)?;
-        let credential = credentials
-            .iter()
-            .find(|credential| credential.credential_id == decoded.credential_id)
-            .ok_or_else(|| {
-                refused(
+                .with_owner_facts(
+                    failure.causal_disposition(),
+                    failure.public_effects().to_vec(),
+                )
+                })?;
+            let required_pairs = required_approval_pairs(&authority, canonical.record.as_ref())?;
+            let requested_pair = ApproverAuthorityPairV1 {
+                approval_class: request.approval_class.clone(),
+                authority_ref: request.authority_ref.clone(),
+            };
+            if !required_pairs.contains(&requested_pair) {
+                return Err(refused(
                     CharterApprovalRefusalCodeV1::AuthorizationRefused,
-                    "assertion selected no retained eligible credential",
+                    "requested approval class and authority are not currently required",
                     false,
-                    "perform a new assertion with an eligible credential",
-                )
-            })?;
-        let prior_use_head_bytes = prior_use_heads
-            .get(&credential.credential_id_hash)
-            .cloned()
-            .ok_or_else(|| {
-                refused(
-                    CharterApprovalRefusalCodeV1::LineageViolation,
-                    "selected credential has no retained use-head observation",
+                    "select one exact currently required approval pair",
+                ));
+            }
+            if committed_pair_already_satisfied(
+                &self.repo_root,
+                &request.candidate_ref,
+                &candidate_fingerprint,
+                &requested_pair,
+            )? {
+                return Err(refused(
+                    CharterApprovalRefusalCodeV1::AuthorizationRefused,
+                    "the exact candidate authority pair is already satisfied",
                     false,
-                    "repair exact append-only Charter lineage before retry",
-                )
-            })?;
-        validate_counter(credential.sign_count, decoded.sign_count)?;
-        validate_use_chain(
-            &self.repo_root,
-            credential,
-            &challenge.fingerprint,
-            &challenge.nonce_fingerprint,
-        )?;
+                    "retain the committed approval or choose another required pair",
+                ));
+            }
 
-        ensure_retained_authority_stable(
-            &self.repo_root,
-            &lineage,
-            &authority,
-            credential,
-            &candidate_bytes,
-            &request.candidate_ref,
-            &candidate_fingerprint,
-            &canonical,
-            &prior_use_head_bytes,
-        )?;
-        let records = build_approval_records(
-            request,
-            &candidate,
-            &candidate_fingerprint,
-            &authority,
-            credential,
-            &accepted_waivers,
-            &challenge,
-            &decoded,
-            client_data_hash,
-            prior_use_head_bytes,
-        )?;
-        let success = commit_approval_transaction(
-            &self.repo_root,
-            &lineage,
-            &authority,
-            credential,
-            &candidate_bytes,
-            &canonical,
-            records,
-        )?;
+            let accepted_waivers = resolve_accepted_waivers(
+                &lineage,
+                &request.accepted_waiver_refs,
+                &candidate_fingerprint,
+            )?;
+            let credentials = eligible_credentials(&authority, &requested_pair, &required_pairs)?;
+            if credentials.is_empty() {
+                return Err(refused(
+                    CharterApprovalRefusalCodeV1::AuthorizationRefused,
+                    "no committed active unexhausted credential covers the exact authority pair",
+                    false,
+                    "register or map one usable credential to the required approval pair",
+                ));
+            }
+
+            let prior_use_heads = credentials
+                .iter()
+                .map(|credential| {
+                    Ok((
+                        credential.credential_id_hash.clone(),
+                        read_retained_use_head(&self.repo_root, credential)?,
+                    ))
+                })
+                .collect::<Result<BTreeMap<_, _>, CharterApprovalRefusalV1>>()?;
+            let mut nonce = [0u8; 32];
+            getrandom::fill(&mut nonce).map_err(|_| randomness_unavailable())?;
+            let challenge = build_approval_challenge(
+                request,
+                &candidate_fingerprint,
+                candidate
+                    .get("basis_artifact_fingerprint")
+                    .unwrap_or(&Value::Null),
+                &authority,
+                &accepted_waivers,
+                nonce,
+            )?;
+            let client_data_hash: [u8; 32] = Sha256::digest(&challenge.bytes).into();
+            let allow_ids = credentials
+                .iter()
+                .map(|credential| credential.credential_id.clone())
+                .collect::<Vec<_>>();
+            let request_cbor = encode_get_assertion_request(client_data_hash, &allow_ids)
+                .map_err(map_authenticator_refusal)?;
+            let raw_response = self
+                .port
+                .get_assertion(&request_cbor)
+                .map_err(map_port_refusal)?;
+            let requested_credentials = credentials
+                .iter()
+                .map(|credential| AuthenticatorCredentialV1 {
+                    credential_id: credential.credential_id.clone(),
+                    cose_public_key: credential.cose_public_key.clone(),
+                })
+                .collect::<Vec<_>>();
+            let decoded = decode_and_verify_get_assertion_response(
+                &raw_response,
+                &requested_credentials,
+                client_data_hash,
+            )
+            .map_err(map_authenticator_refusal)?;
+            let credential = credentials
+                .iter()
+                .find(|credential| credential.credential_id == decoded.credential_id)
+                .ok_or_else(|| {
+                    refused(
+                        CharterApprovalRefusalCodeV1::AuthorizationRefused,
+                        "assertion selected no retained eligible credential",
+                        false,
+                        "perform a new assertion with an eligible credential",
+                    )
+                })?;
+            let prior_use_head_bytes = prior_use_heads
+                .get(&credential.credential_id_hash)
+                .cloned()
+                .ok_or_else(|| {
+                    refused(
+                        CharterApprovalRefusalCodeV1::LineageViolation,
+                        "selected credential has no retained use-head observation",
+                        false,
+                        "repair exact append-only Charter lineage before retry",
+                    )
+                })?;
+            validate_counter(credential.sign_count, decoded.sign_count)?;
+            validate_use_chain(
+                &self.repo_root,
+                credential,
+                &challenge.fingerprint,
+                &challenge.nonce_fingerprint,
+            )?;
+
+            ensure_retained_authority_stable(
+                &self.repo_root,
+                &lineage,
+                &authority,
+                credential,
+                &candidate_bytes,
+                &request.candidate_ref,
+                &candidate_fingerprint,
+                &canonical,
+                &prior_use_head_bytes,
+            )?;
+            let records = build_approval_records(
+                request,
+                &candidate,
+                &candidate_fingerprint,
+                &authority,
+                credential,
+                &accepted_waivers,
+                &challenge,
+                &decoded,
+                client_data_hash,
+                prior_use_head_bytes,
+            )?;
+            let success = commit_approval_transaction(
+                &self.repo_root,
+                &lineage,
+                &authority,
+                credential,
+                &candidate_bytes,
+                &canonical,
+                records,
+            )?;
+            Ok(success)
+        })();
         drop(retained);
+        let mut success = outcome.map_err(|failure: CharterApprovalRefusalV1| {
+            failure.with_preceding_public_effects(&recovery_public_effects)
+        })?;
+        let mut combined = recovery_public_effects;
+        for effect in success.public_effects {
+            upsert_approval_effect(&mut combined, effect);
+        }
+        success.public_effects = combined;
         Ok(success)
     }
 }
@@ -628,51 +686,30 @@ impl ApprovalIntentV1 {
     }
 }
 
-pub(crate) fn recover_approval_authority(repo_root: &Path) -> Result<(), CharterApprovalRefusalV1> {
+pub(crate) fn recover_approval_authority(
+    repo_root: &Path,
+) -> Result<Vec<OwnerPublicEffectV1>, CharterApprovalRefusalV1> {
     let root = repo_root.join(APPROVAL_TRANSACTION_ROOT);
     if !root.exists() {
-        return Ok(());
+        return Ok(Vec::new());
     }
     reject_reparse_or_symlink(&root, true).map_err(map_lineage_refusal)?;
     let mut pending = safe_transaction_directories(&root, ".pending")?;
     pending.sort();
+    let mut public_effects = Vec::new();
     for directory in pending {
-        if !directory.join("intent.json").exists() {
-            rollback_owned_pre_intent_journal(repo_root, &root, &directory)?;
-            continue;
+        let journal_path = directory
+            .strip_prefix(repo_root)
+            .map_err(|_| durability("approval recovery journal escaped the repository"))?
+            .to_string_lossy()
+            .replace('\\', "/");
+        let recovered = recover_one_approval_authority_journal_locked(repo_root, &journal_path)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        for effect in recovered {
+            upsert_approval_effect(&mut public_effects, effect);
         }
-        let intent_bytes = read_safe_file(repo_root, &directory.join("intent.json"), 64 * 1024)?;
-        let intent = parse_exact_intent(&intent_bytes)?;
-        let marker_path = directory.join("committed");
-        if APPROVAL_STAGE_NAMES
-            .iter()
-            .any(|name| !directory.join(name).exists())
-        {
-            if marker_path.exists() {
-                return Err(durability(
-                    "committed approval journal is missing operation-required staged bytes",
-                ));
-            }
-            rollback_incomplete_staged_journal(repo_root, &root, &directory, &intent)?;
-            continue;
-        }
-        let stages = read_staged_records(repo_root, &directory)?;
-        validate_stages_against_intent(&intent, &stages)?;
-        install_staged_approval(repo_root, &intent, &stages)?;
-        let marker = approval_commit_marker(&intent_bytes);
-        if marker_path.exists() {
-            if read_safe_file(repo_root, &marker_path, 72)? != marker {
-                return Err(durability("pending approval commit marker is not exact"));
-            }
-        } else {
-            write_new_durable(&directory.join("committed.tmp"), &marker)?;
-            fs::rename(directory.join("committed.tmp"), &marker_path)
-                .map_err(|_| durability("approval recovery marker rename failed"))?;
-            sync_directory(&directory).map_err(map_lineage_refusal)?;
-        }
-        finalize_pending_directory(&root, &directory)?;
     }
-    Ok(())
+    Ok(public_effects)
 }
 
 pub(crate) fn recover_approval_pre_intent_authority_locked(
@@ -696,7 +733,7 @@ pub(crate) fn recover_approval_pre_intent_authority_locked(
 pub(crate) fn recover_one_approval_authority_journal_locked(
     repo_root: &Path,
     journal_path: &str,
-) -> Result<(), CharterApprovalRefusalV1> {
+) -> Result<Vec<OwnerPublicEffectV1>, CharterApprovalRefusalV1> {
     let normalized = CanonicalWorkspace::new(repo_root)
         .normalize_repo_relative(journal_path)
         .map_err(|_| durability("approval recovery journal path is not normalized"))?;
@@ -707,7 +744,7 @@ pub(crate) fn recover_one_approval_authority_journal_locked(
         .and_then(|name| name.to_str())
         .is_some_and(|name| name.ends_with(".committed"))
     {
-        return Ok(());
+        return Ok(Vec::new());
     }
     if directory.parent() != Some(root.as_path()) {
         return Err(durability(
@@ -717,7 +754,8 @@ pub(crate) fn recover_one_approval_authority_journal_locked(
     reject_reparse_or_symlink(&root, true).map_err(map_lineage_refusal)?;
     reject_reparse_or_symlink(&directory, true).map_err(map_lineage_refusal)?;
     if !directory.join("intent.json").exists() {
-        return rollback_owned_pre_intent_journal(repo_root, &root, &directory);
+        rollback_owned_pre_intent_journal(repo_root, &root, &directory)?;
+        return Ok(Vec::new());
     }
     let intent_bytes = read_safe_file(repo_root, &directory.join("intent.json"), 64 * 1024)?;
     let intent = parse_exact_intent(&intent_bytes)?;
@@ -731,23 +769,34 @@ pub(crate) fn recover_one_approval_authority_journal_locked(
                 "committed approval journal is missing operation-required staged bytes",
             ));
         }
-        return rollback_incomplete_staged_journal(repo_root, &root, &directory, &intent);
+        rollback_incomplete_staged_journal(repo_root, &root, &directory, &intent)?;
+        return Ok(Vec::new());
     }
     let stages = read_staged_records(repo_root, &directory)?;
     validate_stages_against_intent(&intent, &stages)?;
-    install_staged_approval(repo_root, &intent, &stages)?;
+    let public_effects = install_staged_approval(repo_root, &intent, &stages)?;
     let marker = approval_commit_marker(&intent_bytes);
     if marker_path.exists() {
-        if read_safe_file(repo_root, &marker_path, 72)? != marker {
-            return Err(durability("pending approval commit marker is not exact"));
+        if read_safe_file(repo_root, &marker_path, 72)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
+            != marker
+        {
+            return Err(durability("pending approval commit marker is not exact")
+                .with_preceding_public_effects(&public_effects));
         }
     } else {
-        write_new_durable(&directory.join("committed.tmp"), &marker)?;
+        write_new_durable(&directory.join("committed.tmp"), &marker)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
         fs::rename(directory.join("committed.tmp"), &marker_path)
-            .map_err(|_| durability("approval recovery marker rename failed"))?;
-        sync_directory(&directory).map_err(map_lineage_refusal)?;
+            .map_err(|_| durability("approval recovery marker rename failed"))
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        sync_directory(&directory)
+            .map_err(map_lineage_refusal)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
     }
     finalize_pending_directory(&root, &directory)
+        .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+    Ok(public_effects)
 }
 
 const APPROVAL_STAGE_NAMES: [&str; 6] = [
@@ -1503,15 +1552,38 @@ fn commit_approval_transaction(
         result_use_head: records.result_use_head.bytes.clone(),
     };
     validate_stages_against_intent(&intent, &stages)?;
-    install_staged_approval(repo_root, &intent, &stages)?;
+    let public_effects = install_staged_approval(repo_root, &intent, &stages)?;
     let marker = approval_commit_marker(&intent_bytes);
-    write_new_durable(&pending.join("committed.tmp"), &marker)?;
-    fs::rename(pending.join("committed.tmp"), pending.join("committed"))
-        .map_err(|_| durability("approval commit-marker rename failed"))?;
-    sync_directory(&pending).map_err(map_lineage_refusal)?;
-    fs::rename(&pending, &committed)
-        .map_err(|_| durability("approval transaction finalization failed"))?;
-    sync_directory(&root).map_err(map_lineage_refusal)?;
+    write_new_durable(&pending.join("committed.tmp"), &marker).map_err(|failure| {
+        failure.with_owner_facts(
+            OwnerCausalDispositionV1::ImplementationFailure,
+            public_effects.clone(),
+        )
+    })?;
+    fs::rename(pending.join("committed.tmp"), pending.join("committed")).map_err(|_| {
+        durability("approval commit-marker rename failed").with_owner_facts(
+            OwnerCausalDispositionV1::ImplementationFailure,
+            public_effects.clone(),
+        )
+    })?;
+    sync_directory(&pending).map_err(|failure| {
+        map_lineage_refusal(failure).with_owner_facts(
+            OwnerCausalDispositionV1::ImplementationFailure,
+            public_effects.clone(),
+        )
+    })?;
+    fs::rename(&pending, &committed).map_err(|_| {
+        durability("approval transaction finalization failed").with_owner_facts(
+            OwnerCausalDispositionV1::ImplementationFailure,
+            public_effects.clone(),
+        )
+    })?;
+    sync_directory(&root).map_err(|failure| {
+        map_lineage_refusal(failure).with_owner_facts(
+            OwnerCausalDispositionV1::ImplementationFailure,
+            public_effects.clone(),
+        )
+    })?;
     Ok(CharterApprovalSuccessV1 {
         operation_id: records.operation_id,
         response_ref: records.response.relative_ref,
@@ -1531,6 +1603,7 @@ fn commit_approval_transaction(
             intent.approval_ref,
             intent.result_use_head_ref,
         ],
+        public_effects,
     })
 }
 
@@ -1659,8 +1732,9 @@ fn install_staged_approval(
     repo_root: &Path,
     intent: &ApprovalIntentV1,
     stages: &StagedApprovalRecords,
-) -> Result<(), CharterApprovalRefusalV1> {
+) -> Result<Vec<OwnerPublicEffectV1>, CharterApprovalRefusalV1> {
     let lineage_store = TrustedLineageStoreV1::new(repo_root);
+    let mut public_effects = Vec::new();
     for (class, bytes) in [
         (
             LineageRecordClassV1::AuthenticatorGetAssertionResponse,
@@ -1672,18 +1746,44 @@ fn install_staged_approval(
         ),
         (LineageRecordClassV1::Approval, stages.approval.as_slice()),
     ] {
-        lineage_store
-            .append_record(class, bytes)
-            .map_err(map_lineage_refusal)?;
+        match lineage_store.append_record(class, bytes) {
+            Ok(result) => {
+                if let Some(effect) = result.public_effect {
+                    public_effects.push(effect);
+                }
+            }
+            Err(failure) => {
+                let mut effects = public_effects.clone();
+                effects.extend(failure.public_effects().iter().cloned());
+                let causal_disposition = failure.causal_disposition();
+                return Err(
+                    map_lineage_refusal(failure).with_owner_facts(causal_disposition, effects)
+                );
+            }
+        }
     }
-    install_immutable_state_record(
+    if let Some(effect) = install_immutable_state_record(
         repo_root,
         &intent.use_transition_ref,
+        &intent.use_transition_fingerprint,
         &stages.use_transition,
+    )
+    .map_err(|failure| {
+        let causal_disposition = failure.causal_disposition;
+        let mut effects = public_effects.clone();
+        effects.extend(failure.public_effects.iter().cloned());
+        failure.with_owner_facts(causal_disposition, effects)
+    })? {
+        public_effects.push(effect);
+    }
+    let current = read_state_ref(repo_root, &intent.prior_use_head_ref, MAX_RECORD_BYTES).map_err(
+        |failure| {
+            let causal_disposition = failure.causal_disposition;
+            failure.with_owner_facts(causal_disposition, public_effects.clone())
+        },
     )?;
-    let current = read_state_ref(repo_root, &intent.prior_use_head_ref, MAX_RECORD_BYTES)?;
     if current == stages.result_use_head {
-        return Ok(());
+        return Ok(public_effects);
     }
     if current != stages.prior_use_head {
         return Err(refused(
@@ -1691,48 +1791,138 @@ fn install_staged_approval(
             "credential use head forked before approval commit",
             false,
             "repair or retain the exact committed credential use chain",
-        ));
+        )
+        .with_owner_facts(OwnerCausalDispositionV1::CallerRefusal, public_effects));
     }
     let target = repo_root
         .join(".handbook/state")
         .join(&intent.result_use_head_ref);
-    let parent = target
-        .parent()
-        .ok_or_else(|| durability("credential use head has no parent"))?;
-    create_safe_directories(repo_root, parent).map_err(map_lineage_refusal)?;
+    let parent = target.parent().ok_or_else(|| {
+        durability("credential use head has no parent").with_owner_facts(
+            OwnerCausalDispositionV1::ImplementationFailure,
+            public_effects.clone(),
+        )
+    })?;
+    create_safe_directories(repo_root, parent).map_err(|failure| {
+        let causal_disposition = failure.causal_disposition();
+        map_lineage_refusal(failure).with_owner_facts(causal_disposition, public_effects.clone())
+    })?;
     let temporary = parent.join(format!(".{}.approval-installing", intent.transaction_id));
     if temporary.exists() {
-        if read_safe_file(repo_root, &temporary, MAX_RECORD_BYTES)? != stages.result_use_head {
-            return Err(durability(
-                "approval use-head install stage has foreign bytes",
-            ));
+        let temporary_bytes =
+            read_safe_file(repo_root, &temporary, MAX_RECORD_BYTES).map_err(|failure| {
+                let causal_disposition = failure.causal_disposition;
+                failure.with_owner_facts(causal_disposition, public_effects.clone())
+            })?;
+        if temporary_bytes != stages.result_use_head {
+            return Err(lineage("approval use-head install stage has foreign bytes")
+                .with_owner_facts(OwnerCausalDispositionV1::CallerRefusal, public_effects));
         }
     } else {
-        write_new_durable(&temporary, &stages.result_use_head)?;
+        write_new_durable(&temporary, &stages.result_use_head).map_err(|failure| {
+            failure.with_owner_facts(
+                OwnerCausalDispositionV1::ImplementationFailure,
+                public_effects.clone(),
+            )
+        })?;
     }
-    fs::rename(&temporary, &target)
-        .map_err(|_| durability("approval use-head replacement failed"))?;
-    sync_directory(parent).map_err(map_lineage_refusal)?;
-    Ok(())
+    fs::rename(&temporary, &target).map_err(|_| {
+        durability("approval use-head replacement failed").with_owner_facts(
+            OwnerCausalDispositionV1::ImplementationFailure,
+            public_effects.clone(),
+        )
+    })?;
+    sync_directory(parent).map_err(|failure| {
+        let causal_disposition = failure.causal_disposition();
+        map_lineage_refusal(failure).with_owner_facts(causal_disposition, public_effects.clone())
+    })?;
+    Ok(public_effects)
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[cfg_attr(not(test), allow(dead_code))]
+enum ImmutableStateInstallFaultV1 {
+    Create,
+    Write,
+    FileSync,
 }
 
 fn install_immutable_state_record(
     repo_root: &Path,
     relative_ref: &str,
+    content_fingerprint: &str,
     bytes: &[u8],
-) -> Result<(), CharterApprovalRefusalV1> {
+) -> Result<Option<OwnerPublicEffectV1>, CharterApprovalRefusalV1> {
+    install_immutable_state_record_with_fault(
+        repo_root,
+        relative_ref,
+        content_fingerprint,
+        bytes,
+        None,
+    )
+}
+
+fn install_immutable_state_record_with_fault(
+    repo_root: &Path,
+    relative_ref: &str,
+    content_fingerprint: &str,
+    bytes: &[u8],
+    fault: Option<ImmutableStateInstallFaultV1>,
+) -> Result<Option<OwnerPublicEffectV1>, CharterApprovalRefusalV1> {
     let target = repo_root.join(".handbook/state").join(relative_ref);
+    let target_ref = format!(".handbook/state/{relative_ref}");
     let parent = target
         .parent()
         .ok_or_else(|| durability("immutable approval record has no parent"))?;
     create_safe_directories(repo_root, parent).map_err(map_lineage_refusal)?;
     match create_new_file(&target) {
         Ok(mut file) => {
-            file.write_all(bytes)
-                .map_err(|_| durability("immutable approval record write failed"))?;
-            file.sync_all()
-                .map_err(|_| durability("immutable approval record flush failed"))?;
-            sync_directory(parent).map_err(map_lineage_refusal)?;
+            let incomplete = OwnerPublicEffectV1::created_incomplete(&target_ref);
+            if fault == Some(ImmutableStateInstallFaultV1::Create) {
+                return Err(
+                    durability("injected immutable approval record create fault").with_owner_facts(
+                        OwnerCausalDispositionV1::ImplementationFailure,
+                        vec![incomplete],
+                    ),
+                );
+            }
+            file.write_all(bytes).map_err(|_| {
+                durability("immutable approval record write failed").with_owner_facts(
+                    OwnerCausalDispositionV1::ImplementationFailure,
+                    vec![incomplete.clone()],
+                )
+            })?;
+            let installed =
+                OwnerPublicEffectV1::installed_unconfirmed(&target_ref, content_fingerprint);
+            if fault == Some(ImmutableStateInstallFaultV1::Write) {
+                return Err(durability("injected immutable approval record write fault")
+                    .with_owner_facts(
+                        OwnerCausalDispositionV1::ImplementationFailure,
+                        vec![installed],
+                    ));
+            }
+            file.sync_all().map_err(|_| {
+                durability("immutable approval record flush failed").with_owner_facts(
+                    OwnerCausalDispositionV1::ImplementationFailure,
+                    vec![installed.clone()],
+                )
+            })?;
+            if fault == Some(ImmutableStateInstallFaultV1::FileSync) {
+                return Err(durability("injected immutable approval record flush fault")
+                    .with_owner_facts(
+                        OwnerCausalDispositionV1::ImplementationFailure,
+                        vec![installed],
+                    ));
+            }
+            sync_directory(parent).map_err(|failure| {
+                let causal_disposition = failure.causal_disposition();
+                map_lineage_refusal(failure)
+                    .with_owner_facts(causal_disposition, vec![installed.clone()])
+            })?;
+            Ok(Some(OwnerPublicEffectV1::durable_created(
+                target_ref,
+                content_fingerprint,
+            )))
         }
         Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => {
             if read_safe_file(repo_root, &target, MAX_RECORD_BYTES)? != bytes {
@@ -1740,10 +1930,10 @@ fn install_immutable_state_record(
                     "immutable approval record already has different bytes",
                 ));
             }
+            Ok(None)
         }
-        Err(_) => return Err(durability("immutable approval record create-new failed")),
+        Err(_) => Err(durability("immutable approval record create-new failed")),
     }
-    Ok(())
 }
 
 fn read_committed_approval_intents(
@@ -2203,23 +2393,33 @@ fn observe_candidate_basis(
         .map_err(|_| unsafe_filesystem("selected Charter path is not normalized"))?;
     let current = match workspace.trusted_read_strict(&relative) {
         Ok(file) => {
-            let (bytes, exceeded) = file.read_bytes_bounded(MAX_CANONICAL_BYTES).map_err(|_| {
-                unsafe_filesystem("selected Charter authority could not be read safely")
-            })?;
+            let (bytes, exceeded) = file
+                .read_bytes_bounded(MAX_CANONICAL_BYTES)
+                .map_err(|_| filesystem_io("selected Charter authority could not be read"))?;
             if exceeded {
                 return Err(refused(
                     CharterApprovalRefusalCodeV1::DurabilityViolation,
                     "selected Charter authority exceeds the admitted bound",
                     false,
                     "repair the selected Charter authority before approval",
-                ));
+                )
+                .with_owner_facts(OwnerCausalDispositionV1::CallerRefusal, Vec::new()));
             }
             Some(bytes)
         }
         Err(RepoRelativeFileAccessError::Missing(_)) => None,
-        Err(_) => {
+        Err(
+            RepoRelativeFileAccessError::InvalidPath(_)
+            | RepoRelativeFileAccessError::SymlinkNotAllowed(_)
+            | RepoRelativeFileAccessError::NotRegularFile(_),
+        ) => {
             return Err(unsafe_filesystem(
                 "selected Charter authority is not a safe regular file",
+            ))
+        }
+        Err(RepoRelativeFileAccessError::ReadFailure { .. }) => {
+            return Err(filesystem_io(
+                "selected Charter authority could not be read",
             ))
         }
     };
@@ -2581,13 +2781,15 @@ fn map_port_refusal(error: NativeAuthenticatorPortErrorV1) -> CharterApprovalRef
             "native authenticator API is unavailable",
             false,
             "use a supported native FIDO2 CTAP2.1 platform and authenticator",
-        ),
+        )
+        .with_owner_facts(OwnerCausalDispositionV1::Prerequisite, Vec::new()),
         NativeAuthenticatorPortErrorV1::Transport => refused(
             CharterApprovalRefusalCodeV1::TransactionConflict,
             "native authenticator transport failed before a complete status was received",
             true,
             "retry the complete operation with a fresh challenge",
-        ),
+        )
+        .with_owner_facts(OwnerCausalDispositionV1::ImplementationFailure, Vec::new()),
     }
 }
 
@@ -2636,6 +2838,7 @@ fn map_authenticator_refusal(error: AuthenticatorErrorV1) -> CharterApprovalRefu
 }
 
 fn map_observation_refusal(error: ApproverRegistryObservationErrorV1) -> CharterApprovalRefusalV1 {
+    let causal_disposition = error.causal_disposition();
     let code = match error.kind() {
         ApproverRegistryObservationErrorKindV1::AuthorityAbsent => {
             CharterApprovalRefusalCodeV1::AuthorityAbsent
@@ -2654,15 +2857,33 @@ fn map_observation_refusal(error: ApproverRegistryObservationErrorV1) -> Charter
         false,
         "repair or bootstrap exact committed approver authority before retry",
     )
+    .with_owner_facts(causal_disposition, Vec::new())
 }
 
 fn map_lineage_refusal(error: LineageStoreErrorV1) -> CharterApprovalRefusalV1 {
+    let causal_disposition = error.causal_disposition();
+    let public_effects = error.public_effects().to_vec();
     refused(
         CharterApprovalRefusalCodeV1::LineageViolation,
         error.detail().to_owned(),
         false,
         "repair exact append-only Charter lineage before retry",
     )
+    .with_owner_facts(causal_disposition, public_effects)
+}
+
+fn upsert_approval_effect(
+    public_effects: &mut Vec<OwnerPublicEffectV1>,
+    public_effect: OwnerPublicEffectV1,
+) {
+    if let Some(existing) = public_effects
+        .iter_mut()
+        .find(|existing| existing.target_ref() == public_effect.target_ref())
+    {
+        *existing = public_effect;
+    } else {
+        public_effects.push(public_effect);
+    }
 }
 
 fn lineage(message: impl Into<String>) -> CharterApprovalRefusalV1 {
@@ -2681,6 +2902,17 @@ fn unsafe_filesystem(message: impl Into<String>) -> CharterApprovalRefusalV1 {
         false,
         "repair the unsafe repository authority path before retry",
     )
+    .with_owner_facts(OwnerCausalDispositionV1::CallerRefusal, Vec::new())
+}
+
+fn filesystem_io(message: impl Into<String>) -> CharterApprovalRefusalV1 {
+    refused(
+        CharterApprovalRefusalCodeV1::DurabilityViolation,
+        message,
+        true,
+        "retry after restoring repository filesystem access",
+    )
+    .with_owner_facts(OwnerCausalDispositionV1::ImplementationFailure, Vec::new())
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -3040,7 +3272,44 @@ fn refusal(
         result_use_head_ref: None,
         result_use_head_fingerprint: None,
         changed_paths: Vec::new(),
+        causal_disposition: approval_causal_disposition(code),
+        public_effects: Vec::new(),
     }
+}
+
+fn approval_causal_disposition(code: CharterApprovalRefusalCodeV1) -> OwnerCausalDispositionV1 {
+    match code {
+        CharterApprovalRefusalCodeV1::AuthorityAbsent
+        | CharterApprovalRefusalCodeV1::AuthenticatorUnavailable => {
+            OwnerCausalDispositionV1::Prerequisite
+        }
+        CharterApprovalRefusalCodeV1::InvalidRequest
+        | CharterApprovalRefusalCodeV1::StaleBasis
+        | CharterApprovalRefusalCodeV1::AuthorizationRefused
+        | CharterApprovalRefusalCodeV1::LineageViolation
+        | CharterApprovalRefusalCodeV1::TransactionConflict
+        | CharterApprovalRefusalCodeV1::AuthenticatorUserTimeout
+        | CharterApprovalRefusalCodeV1::AuthenticatorResourceExhausted
+        | CharterApprovalRefusalCodeV1::AuthenticatorSecurityBlocked
+        | CharterApprovalRefusalCodeV1::AuthenticatorUserCancelled
+        | CharterApprovalRefusalCodeV1::AuthenticatorUserVerificationRetry
+        | CharterApprovalRefusalCodeV1::AuthenticatorUnknownError => {
+            OwnerCausalDispositionV1::CallerRefusal
+        }
+        CharterApprovalRefusalCodeV1::DurabilityViolation => {
+            OwnerCausalDispositionV1::ImplementationFailure
+        }
+    }
+}
+
+fn randomness_unavailable() -> CharterApprovalRefusalV1 {
+    refused(
+        CharterApprovalRefusalCodeV1::TransactionConflict,
+        "operating-system randomness was unavailable",
+        true,
+        "retry the complete operation with fresh operating-system randomness",
+    )
+    .with_owner_facts(OwnerCausalDispositionV1::ImplementationFailure, Vec::new())
 }
 
 fn _port_error_is_closed(error: NativeAuthenticatorPortErrorV1) -> CharterApprovalRefusalCodeV1 {
@@ -3057,6 +3326,114 @@ fn _port_error_is_closed(error: NativeAuthenticatorPortErrorV1) -> CharterApprov
 #[cfg(test)]
 mod approval_journal_discovery_tests {
     use super::*;
+    use crate::OwnerPublicEffectDispositionV1;
+
+    #[test]
+    fn unavailable_conflict_and_durability_causes_select_distinct_terminals() {
+        assert_eq!(
+            approval_causal_disposition(CharterApprovalRefusalCodeV1::AuthenticatorUnavailable),
+            OwnerCausalDispositionV1::Prerequisite
+        );
+        for code in [
+            CharterApprovalRefusalCodeV1::StaleBasis,
+            CharterApprovalRefusalCodeV1::TransactionConflict,
+            CharterApprovalRefusalCodeV1::LineageViolation,
+        ] {
+            assert_eq!(
+                approval_causal_disposition(code),
+                OwnerCausalDispositionV1::CallerRefusal
+            );
+        }
+        assert_eq!(
+            approval_causal_disposition(CharterApprovalRefusalCodeV1::DurabilityViolation),
+            OwnerCausalDispositionV1::ImplementationFailure
+        );
+        assert_eq!(
+            map_port_refusal(NativeAuthenticatorPortErrorV1::Unavailable).causal_disposition,
+            OwnerCausalDispositionV1::Prerequisite
+        );
+        assert_eq!(
+            map_port_refusal(NativeAuthenticatorPortErrorV1::Transport).causal_disposition,
+            OwnerCausalDispositionV1::ImplementationFailure
+        );
+        assert_eq!(
+            randomness_unavailable().causal_disposition,
+            OwnerCausalDispositionV1::ImplementationFailure
+        );
+    }
+
+    #[test]
+    fn canonical_path_safety_and_read_io_select_distinct_terminals() {
+        assert_eq!(
+            unsafe_filesystem("unsafe").causal_disposition,
+            OwnerCausalDispositionV1::CallerRefusal
+        );
+        assert_eq!(
+            filesystem_io("read failed").causal_disposition,
+            OwnerCausalDispositionV1::ImplementationFailure
+        );
+    }
+
+    #[test]
+    fn immutable_use_transition_reports_actual_target_state_and_exact_reuse() {
+        let relative_ref = "authenticator-use-transitions/authenticator-use-transition_test.json";
+        let target_ref = format!(".handbook/state/{relative_ref}");
+        let fingerprint = format!("sha256:{}", "5".repeat(64));
+        let bytes = br#"{"schema_id":"test"}"#;
+
+        for (fault, expected) in [
+            (
+                ImmutableStateInstallFaultV1::Create,
+                OwnerPublicEffectDispositionV1::CreatedIncomplete,
+            ),
+            (
+                ImmutableStateInstallFaultV1::Write,
+                OwnerPublicEffectDispositionV1::InstalledDurabilityUnconfirmed,
+            ),
+            (
+                ImmutableStateInstallFaultV1::FileSync,
+                OwnerPublicEffectDispositionV1::InstalledDurabilityUnconfirmed,
+            ),
+        ] {
+            let repo = tempfile::tempdir().unwrap();
+            let refusal = install_immutable_state_record_with_fault(
+                repo.path(),
+                relative_ref,
+                &fingerprint,
+                bytes,
+                Some(fault),
+            )
+            .expect_err("fault after public creation must retain a public effect");
+            assert_eq!(
+                refusal.causal_disposition,
+                OwnerCausalDispositionV1::ImplementationFailure
+            );
+            assert_eq!(refusal.public_effects.len(), 1);
+            assert_eq!(refusal.public_effects[0].target_ref(), target_ref);
+            assert_eq!(refusal.public_effects[0].disposition(), expected);
+            assert!(!refusal.public_effects[0]
+                .target_ref()
+                .contains("transactions"));
+            assert!(!refusal.public_effects[0].target_ref().contains("use-head"));
+        }
+
+        let repo = tempfile::tempdir().unwrap();
+        let created =
+            install_immutable_state_record(repo.path(), relative_ref, &fingerprint, bytes)
+                .unwrap()
+                .expect("first install creates the public record");
+        assert_eq!(created.target_ref(), target_ref);
+        assert_eq!(
+            created.disposition(),
+            OwnerPublicEffectDispositionV1::DurableCreated
+        );
+        assert!(
+            install_immutable_state_record(repo.path(), relative_ref, &fingerprint, bytes)
+                .unwrap()
+                .is_none(),
+            "equal existing bytes are reused, not written"
+        );
+    }
 
     #[test]
     fn approval_counter_protocol_preserves_zero_and_monotonic_boundaries() {

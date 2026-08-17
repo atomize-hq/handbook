@@ -1,7 +1,7 @@
 use handbook_engine::{
     normalize_required_approval_pairs, ApproverAuthorityPairV1, CharterPromotionCommitV1,
     CharterPromotionIntentV1, CharterPromotionWorkflowCommitV1,
-    CharterPromotionWorkflowErrorKindV1, CharterPromotionWorkflowServiceV1,
+    CharterPromotionWorkflowErrorKindV1, CharterPromotionWorkflowServiceV1, OwnerPublicEffectV1,
     MAX_LINEAGE_REFERENCE_BYTES,
 };
 use std::path::PathBuf;
@@ -100,6 +100,20 @@ fn promotion_commit(
             committed_marker_path: PathBuf::from(
                 ".handbook/state/transactions/promotions/secret-transaction.committed/committed",
             ),
+            public_effects: vec![
+                OwnerPublicEffectV1::durable_created(
+                    ".handbook/project/charter.yaml",
+                    format!("sha256:{}", "a".repeat(64)),
+                ),
+                OwnerPublicEffectV1::durable_created(
+                    format!(".handbook/state/{promotion_ref}"),
+                    format!("sha256:{}", "b".repeat(64)),
+                ),
+                OwnerPublicEffectV1::durable_created(
+                    format!(".handbook/state/{lifecycle_transition_ref}"),
+                    format!("sha256:{}", "c".repeat(64)),
+                ),
+            ],
         },
     }
 }
@@ -136,6 +150,32 @@ fn committed_promotion_projects_exact_semantic_product_effects_without_transacti
     assert_eq!(projection.next_actions.len(), 1);
     assert!(!projection.next_actions[0].is_empty());
     assert!(!format!("{projection:?}").contains("secret-transaction"));
+}
+
+#[test]
+fn promotion_projection_preserves_reused_record_absence_from_receipts() {
+    let promotion_ref = format!("promotions/promotion_{}.json", "b".repeat(64));
+    let lifecycle_ref = format!(
+        "lifecycle-transitions/lifecycle-transition_{}.json",
+        "c".repeat(64)
+    );
+    let mut commit = promotion_commit(&promotion_ref, &lifecycle_ref);
+    commit
+        .transaction
+        .public_effects
+        .retain(|effect| effect.target_ref() == ".handbook/project/charter.yaml");
+
+    let projection = commit.product_projection().expect("actual effects project");
+    assert_eq!(projection.public_effects.len(), 1);
+    assert_eq!(
+        projection.public_effects[0].target_ref(),
+        ".handbook/project/charter.yaml"
+    );
+    assert_eq!(
+        projection.changed_paths.len(),
+        3,
+        "legacy paths remain frozen"
+    );
 }
 
 #[test]

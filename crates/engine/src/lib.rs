@@ -47,6 +47,7 @@ pub mod environment_context_artifact;
 pub mod freshness;
 pub mod instance_profile;
 pub mod operation_admission;
+mod owner_facts;
 mod posture_transition_facade;
 mod profile_builtins;
 pub mod profile_decision;
@@ -70,6 +71,9 @@ pub mod vocabulary_registry;
 pub use approver_registry::{
     ApproverAdminJsonErrorV1, ApproverAdminRequestV1, ApproverAdminResultV1,
     ApproverRegistryServiceV1,
+};
+pub use approver_registry_mutation::{
+    recover_complete_registry_approval_authority, RegistryRecoveryErrorV1,
 };
 pub use approver_registry_observation::{
     observe_committed_approver_registry, ApproverAuthorityPairV1,
@@ -232,6 +236,9 @@ pub use instance_profile::{
     DefinitionSourceBinding, InstanceProfileDefinition, LayerDisposition, LayeredProfile,
     ProfileField, ProfileLayerDecision, ProfileLoadError, ProfileLoadErrorKind, ProfileScope,
     ProfileSelectionRequest, SymbolicId,
+};
+pub use owner_facts::{
+    OwnerCausalDispositionV1, OwnerPublicEffectDispositionV1, OwnerPublicEffectV1,
 };
 pub use posture_transition_facade::{
     PostureCanonicalBindingV1, PostureDimensionChangeRequestV1, PostureReferenceV1,

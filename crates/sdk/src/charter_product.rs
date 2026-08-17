@@ -6,9 +6,9 @@ use handbook_engine::{
     CharterApprovalRequestV1, CharterApprovalResultV1, CharterApprovalServiceV1,
     CharterIntakeEnvelope, CharterPromotionIntentV1, CharterPromotionWorkflowCommitV1,
     CharterPromotionWorkflowErrorV1, CharterPromotionWorkflowServiceV1,
-    NativeAuthenticatorPortErrorV1, NativeAuthenticatorPortV1,
-    RepositoryInvocationIdentityServiceV1, RepositoryInvocationOperationV1,
-    RepositoryInvocationPreparationFailureV1,
+    NativeAuthenticatorPortErrorV1, NativeAuthenticatorPortV1, OwnerCausalDispositionV1,
+    OwnerPublicEffectDispositionV1, OwnerPublicEffectV1, RepositoryInvocationIdentityServiceV1,
+    RepositoryInvocationOperationV1, RepositoryInvocationPreparationFailureV1,
 };
 use serde_json::{json, Value};
 use std::path::Path;
@@ -39,6 +39,58 @@ pub struct AdapterRefusal {
     pub retryable: bool,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum AdapterCausalDisposition {
+    Prerequisite,
+    CallerRefusal,
+    ImplementationFailure,
+}
+
+impl From<OwnerCausalDispositionV1> for AdapterCausalDisposition {
+    fn from(value: OwnerCausalDispositionV1) -> Self {
+        match value {
+            OwnerCausalDispositionV1::Prerequisite => Self::Prerequisite,
+            OwnerCausalDispositionV1::CallerRefusal => Self::CallerRefusal,
+            OwnerCausalDispositionV1::ImplementationFailure => Self::ImplementationFailure,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum AdapterPublicEffectDisposition {
+    CreatedIncomplete,
+    InstalledDurabilityUnconfirmed,
+    DurableCreated,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct AdapterPublicEffect {
+    pub target_ref: String,
+    pub content_fingerprint: Option<String>,
+    pub disposition: AdapterPublicEffectDisposition,
+}
+
+impl From<&OwnerPublicEffectV1> for AdapterPublicEffect {
+    fn from(value: &OwnerPublicEffectV1) -> Self {
+        let disposition = match value.disposition() {
+            OwnerPublicEffectDispositionV1::CreatedIncomplete => {
+                AdapterPublicEffectDisposition::CreatedIncomplete
+            }
+            OwnerPublicEffectDispositionV1::InstalledDurabilityUnconfirmed => {
+                AdapterPublicEffectDisposition::InstalledDurabilityUnconfirmed
+            }
+            OwnerPublicEffectDispositionV1::DurableCreated => {
+                AdapterPublicEffectDisposition::DurableCreated
+            }
+        };
+        Self {
+            target_ref: value.target_ref().to_owned(),
+            content_fingerprint: value.content_fingerprint().map(str::to_owned),
+            disposition,
+        }
+    }
+}
+
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct CharterOperationResult {
     pub schema_id: String,
@@ -60,6 +112,8 @@ pub struct CharterOperationResult {
     pub refusal: Option<AdapterRefusal>,
     pub next_actions: Vec<String>,
     pub invocation_failure: Option<RepositoryInvocationFailureView>,
+    pub causal_disposition: Option<AdapterCausalDisposition>,
+    pub public_effects: Vec<AdapterPublicEffect>,
 }
 
 /// Closed projection of the repository-invocation refusal. It keeps the
@@ -77,6 +131,7 @@ pub struct RepositoryInvocationFailureView {
     pub changed_paths: Vec<String>,
     pub refusal: AdapterRefusal,
     pub next_actions: Vec<String>,
+    pub causal_disposition: AdapterCausalDisposition,
 }
 
 #[derive(Clone, Debug, PartialEq)]
@@ -144,21 +199,33 @@ fn execute_charter_command_with_port<P: NativeAuthenticatorPortV1>(
             .persist(&decisions, envelope, current.as_ref())
             {
                 Ok(persistence) => persistence,
-                Err(error) => return refused_charter(
-                    CharterOperation::Author,
-                    match error.kind() {
+                Err(error) => {
+                    let code = match error.kind() {
                         handbook_engine::CharterAuthorPersistenceErrorKindV1::IntakeRefused => {
                             "charter_intake_refused"
                         }
                         handbook_engine::CharterAuthorPersistenceErrorKindV1::PersistenceRefused => {
                             "lineage_persistence_refused"
                         }
-                    },
-                    error.detail(),
-                    error.kind()
-                        == handbook_engine::CharterAuthorPersistenceErrorKindV1::PersistenceRefused,
-                    "repair the refused Charter authority input or retained state, then retry",
-                ),
+                    };
+                    let retryable = error.kind()
+                        == handbook_engine::CharterAuthorPersistenceErrorKindV1::PersistenceRefused;
+                    let cause = error.causal_disposition().into();
+                    let public_effects = error
+                        .public_effects()
+                        .iter()
+                        .map(AdapterPublicEffect::from)
+                        .collect();
+                    return refused_charter_with_facts(
+                        CharterOperation::Author,
+                        code,
+                        error.detail(),
+                        retryable,
+                        "repair the refused Charter authority input or retained state, then retry",
+                        cause,
+                        public_effects,
+                    );
+                }
             };
             CharterOperationResult {
                 schema_id: CHARTER_OPERATION_RESULT_SCHEMA_ID.to_owned(),
@@ -191,6 +258,12 @@ fn execute_charter_command_with_port<P: NativeAuthenticatorPortV1>(
                         .to_owned(),
                 ],
                 invocation_failure: None,
+                causal_disposition: None,
+                public_effects: persistence
+                    .public_effects
+                    .iter()
+                    .map(AdapterPublicEffect::from)
+                    .collect(),
             }
         }
         CharterCommandIntent::Approve {
@@ -242,6 +315,12 @@ fn execute_charter_command_with_port<P: NativeAuthenticatorPortV1>(
                     refusal: None,
                     next_actions: Vec::new(),
                     invocation_failure: None,
+                    causal_disposition: None,
+                    public_effects: success
+                        .public_effects
+                        .iter()
+                        .map(AdapterPublicEffect::from)
+                        .collect(),
                 },
                 CharterApprovalResultV1::Refused(refusal) => CharterOperationResult {
                     schema_id: CHARTER_OPERATION_RESULT_SCHEMA_ID.to_owned(),
@@ -267,6 +346,12 @@ fn execute_charter_command_with_port<P: NativeAuthenticatorPortV1>(
                     }),
                     next_actions: refusal.next_actions,
                     invocation_failure: None,
+                    causal_disposition: Some(refusal.causal_disposition.into()),
+                    public_effects: refusal
+                        .public_effects
+                        .iter()
+                        .map(AdapterPublicEffect::from)
+                        .collect(),
                 },
             }
         }
@@ -309,24 +394,46 @@ fn promotion_result(
                 refusal: None,
                 next_actions: projection.next_actions,
                 invocation_failure: None,
+                causal_disposition: None,
+                public_effects: projection
+                    .public_effects
+                    .iter()
+                    .map(AdapterPublicEffect::from)
+                    .collect(),
             },
             Err(error) => {
                 let refusal = error.product_refusal();
+                let public_effects = commit
+                    .transaction
+                    .public_effects
+                    .iter()
+                    .map(AdapterPublicEffect::from)
+                    .collect();
                 promotion_refused(
                     refusal.code,
                     refusal.message,
                     refusal.retryable,
                     refusal.next_actions,
+                    AdapterCausalDisposition::ImplementationFailure,
+                    public_effects,
                 )
             }
         },
         Err(error) => {
             let refusal = error.product_refusal();
+            let causal_disposition = error.causal_disposition().into();
+            let public_effects = error
+                .public_effects()
+                .iter()
+                .map(AdapterPublicEffect::from)
+                .collect();
             promotion_refused(
                 refusal.code,
                 refusal.message,
                 refusal.retryable,
                 refusal.next_actions,
+                causal_disposition,
+                public_effects,
             )
         }
     }
@@ -337,6 +444,8 @@ fn promotion_refused(
     message: String,
     retryable: bool,
     next_actions: Vec<String>,
+    causal_disposition: AdapterCausalDisposition,
+    public_effects: Vec<AdapterPublicEffect>,
 ) -> CharterOperationResult {
     CharterOperationResult {
         schema_id: CHARTER_OPERATION_RESULT_SCHEMA_ID.to_owned(),
@@ -362,6 +471,8 @@ fn promotion_refused(
         }),
         next_actions,
         invocation_failure: None,
+        causal_disposition: Some(causal_disposition),
+        public_effects,
     }
 }
 
@@ -413,6 +524,8 @@ fn repository_invocation_failure(
         }),
         next_actions: failure.next_actions().to_vec(),
         invocation_failure: Some(repository_invocation_failure_view(&failure)),
+        causal_disposition: None,
+        public_effects: Vec::new(),
     }
 }
 
@@ -442,6 +555,7 @@ fn repository_invocation_failure_view(
             retryable: refusal.retryable(),
         },
         next_actions: failure.next_actions().to_vec(),
+        causal_disposition: failure.causal_disposition().into(),
     }
 }
 
@@ -471,6 +585,8 @@ fn validate_selected_charter(repo_root: &Path) -> CharterOperationResult {
             refusal: None,
             next_actions: vec!["review the validated rendered Charter view".to_owned()],
             invocation_failure: None,
+            causal_disposition: None,
+            public_effects: Vec::new(),
         },
         Err(error) => selected_charter_refused(CharterOperation::Validate, &error),
     }
@@ -502,7 +618,7 @@ fn selected_charter_refused(
             "rerun after obtaining one stable selected Charter observation",
         ),
     };
-    refused_charter(
+    refused_charter_with_facts(
         operation,
         code,
         &format!(
@@ -512,16 +628,52 @@ fn selected_charter_refused(
         ),
         false,
         action,
+        selected_charter_causal_disposition(error.reason()),
+        Vec::new(),
     )
 }
 
+fn selected_charter_causal_disposition(
+    reason: ArtifactInspectionReason,
+) -> AdapterCausalDisposition {
+    match reason {
+        ArtifactInspectionReason::RequiredPathMissing
+        | ArtifactInspectionReason::OptionalPathMissing
+        | ArtifactInspectionReason::ConditionalEvidenceUnavailablePathMissing
+        | ArtifactInspectionReason::ConditionalEvidenceUnavailablePathPresent
+        | ArtifactInspectionReason::UnsupportedPlatformStrictRead => {
+            AdapterCausalDisposition::Prerequisite
+        }
+        ArtifactInspectionReason::RepositoryReadFailed => {
+            AdapterCausalDisposition::ImplementationFailure
+        }
+        ArtifactInspectionReason::PresentAndStructurallyValid
+        | ArtifactInspectionReason::YamlSyntaxInvalid
+        | ArtifactInspectionReason::DuplicateYamlKey
+        | ArtifactInspectionReason::DocumentNotObject
+        | ArtifactInspectionReason::StructuralValidationFailed
+        | ArtifactInspectionReason::DocumentLimitExceeded
+        | ArtifactInspectionReason::AggregateReadLimitExceeded
+        | ArtifactInspectionReason::SymlinkRefused
+        | ArtifactInspectionReason::NonRegularFileRefused
+        | ArtifactInspectionReason::UnsafeRepositoryPath
+        | ArtifactInspectionReason::TypedDecodeFailed
+        | ArtifactInspectionReason::RenderedViewRefused
+        | ArtifactInspectionReason::ObservationChangedDuringInspection => {
+            AdapterCausalDisposition::CallerRefusal
+        }
+    }
+}
+
 fn profile_refused(operation: CharterOperation) -> CharterOperationResult {
-    refused_charter(
+    refused_charter_with_facts(
         operation,
         "selected_profile_unavailable",
         "selected shipped profile decisions are unavailable",
         false,
         "repair selected profile definitions and retry",
+        AdapterCausalDisposition::Prerequisite,
+        Vec::new(),
     )
 }
 
@@ -605,6 +757,45 @@ mod tests {
                 committed_marker_path: PathBuf::from(
                     ".handbook/state/transactions/promotions/private.committed/committed",
                 ),
+                public_effects: vec![
+                    handbook_engine::OwnerPublicEffectV1::durable_created(
+                        ".handbook/project/charter.yaml",
+                        format!("sha256:{}", "a".repeat(64)),
+                    ),
+                    handbook_engine::OwnerPublicEffectV1::durable_created(
+                        format!(".handbook/state/{promotion_ref}"),
+                        format!("sha256:{}", "b".repeat(64)),
+                    ),
+                    handbook_engine::OwnerPublicEffectV1::durable_created(
+                        format!(".handbook/state/{lifecycle_transition_ref}"),
+                        format!("sha256:{}", "c".repeat(64)),
+                    ),
+                    handbook_engine::OwnerPublicEffectV1::durable_created(
+                        format!(".handbook/state/approvals/approval_{}.json", "d".repeat(64)),
+                        format!("sha256:{}", "d".repeat(64)),
+                    ),
+                    handbook_engine::OwnerPublicEffectV1::durable_created(
+                        format!(
+                            ".handbook/state/promotions/promotion_{}.json",
+                            "e".repeat(64)
+                        ),
+                        format!("sha256:{}", "e".repeat(64)),
+                    ),
+                    handbook_engine::OwnerPublicEffectV1::durable_created(
+                        format!(
+                            ".handbook/state/lifecycle-transitions/lifecycle-transition_{}.json",
+                            "f".repeat(64)
+                        ),
+                        format!("sha256:{}", "f".repeat(64)),
+                    ),
+                    handbook_engine::OwnerPublicEffectV1::durable_created(
+                        format!(
+                            ".handbook/state/lifecycle-observations/lifecycle-observation_{}.json",
+                            "1".repeat(64)
+                        ),
+                        format!("sha256:{}", "1".repeat(64)),
+                    ),
+                ],
             },
         }
     }
@@ -696,6 +887,7 @@ mod tests {
             ]
         );
         assert!(result.refusal.is_none());
+        assert_eq!(result.public_effects.len(), 7);
         assert!(!format!("{result:?}").contains("private.committed"));
     }
 
@@ -721,6 +913,31 @@ mod tests {
                 "repair the retained content-addressed promotion ref before retrying product projection"
             ]
         );
+        assert_eq!(result.public_effects.len(), 7);
+    }
+
+    #[test]
+    fn selected_charter_causes_distinguish_prerequisite_refusal_and_error() {
+        assert_eq!(
+            selected_charter_causal_disposition(ArtifactInspectionReason::RequiredPathMissing),
+            AdapterCausalDisposition::Prerequisite
+        );
+        for reason in [
+            ArtifactInspectionReason::StructuralValidationFailed,
+            ArtifactInspectionReason::DocumentLimitExceeded,
+            ArtifactInspectionReason::UnsafeRepositoryPath,
+            ArtifactInspectionReason::SymlinkRefused,
+            ArtifactInspectionReason::ObservationChangedDuringInspection,
+        ] {
+            assert_eq!(
+                selected_charter_causal_disposition(reason),
+                AdapterCausalDisposition::CallerRefusal
+            );
+        }
+        assert_eq!(
+            selected_charter_causal_disposition(ArtifactInspectionReason::RepositoryReadFailed),
+            AdapterCausalDisposition::ImplementationFailure
+        );
     }
 }
 
@@ -730,6 +947,26 @@ fn refused_charter(
     message: &str,
     retryable: bool,
     next_action: &str,
+) -> CharterOperationResult {
+    refused_charter_with_facts(
+        operation,
+        code,
+        message,
+        retryable,
+        next_action,
+        AdapterCausalDisposition::CallerRefusal,
+        Vec::new(),
+    )
+}
+
+fn refused_charter_with_facts(
+    operation: CharterOperation,
+    code: &str,
+    message: &str,
+    retryable: bool,
+    next_action: &str,
+    causal_disposition: AdapterCausalDisposition,
+    public_effects: Vec<AdapterPublicEffect>,
 ) -> CharterOperationResult {
     CharterOperationResult {
         schema_id: CHARTER_OPERATION_RESULT_SCHEMA_ID.to_owned(),
@@ -755,6 +992,8 @@ fn refused_charter(
         }),
         next_actions: vec![next_action.to_owned()],
         invocation_failure: None,
+        causal_disposition: Some(causal_disposition),
+        public_effects,
     }
 }
 
@@ -817,6 +1056,8 @@ pub struct ApproverAdapterResult {
     pub refusal: Option<AdapterRefusal>,
     pub next_actions: Vec<String>,
     pub legacy_projection: Option<ApproverLegacyProjection>,
+    pub causal_disposition: Option<AdapterCausalDisposition>,
+    pub public_effects: Vec<AdapterPublicEffect>,
 }
 
 pub(crate) fn execute_approver_admin_intent(
@@ -935,7 +1176,27 @@ fn execute_approver_admin_intent_with_port<P: NativeAuthenticatorPortV1>(
         "repository_identity_fingerprint".to_owned(),
         Value::String(identity.repository_identity_fingerprint().to_owned()),
     );
+    let mut preceding_public_effects = Vec::new();
     if operation != ApproverAdminOperation::Bootstrap {
+        preceding_public_effects =
+            match handbook_engine::recover_complete_registry_approval_authority(repo_root) {
+                Ok(effects) => effects.iter().map(AdapterPublicEffect::from).collect(),
+                Err(error) => {
+                    return approver_adapter_refused_with_cause_and_effects(
+                        operation,
+                        "authority_recovery_blocked",
+                        error.detail(),
+                        false,
+                        "repair retained registry authority evidence before retrying",
+                        error.causal_disposition().into(),
+                        error
+                            .public_effects()
+                            .iter()
+                            .map(AdapterPublicEffect::from)
+                            .collect(),
+                    )
+                }
+            };
         let observation = match handbook_engine::observe_committed_approver_registry(repo_root) {
             Ok(observation) => observation,
             Err(error) => {
@@ -951,7 +1212,15 @@ fn execute_approver_admin_intent_with_port<P: NativeAuthenticatorPortV1>(
                         "repair retained registry authority evidence before retrying",
                     ),
                 };
-                return approver_adapter_refused(operation, code, error.detail(), false, action);
+                return approver_adapter_refused_with_cause_and_effects(
+                    operation,
+                    code,
+                    error.detail(),
+                    false,
+                    action,
+                    error.causal_disposition().into(),
+                    preceding_public_effects,
+                );
             }
         };
         object.insert(
@@ -966,12 +1235,14 @@ fn execute_approver_admin_intent_with_port<P: NativeAuthenticatorPortV1>(
     let request = match ApproverAdminRequestV1::from_json_value(document) {
         Ok(request) => request,
         Err(error) => {
-            return approver_adapter_refused(
+            return approver_adapter_refused_with_cause_and_effects(
                 operation,
                 "invalid_request",
                 &error.to_string(),
                 false,
                 "repair the closed approver request intent before retrying",
+                AdapterCausalDisposition::CallerRefusal,
+                preceding_public_effects,
             )
         }
     };
@@ -982,7 +1253,11 @@ fn execute_approver_admin_intent_with_port<P: NativeAuthenticatorPortV1>(
         ApproverAdminOperation::RevokeCredential => service.revoke_approver_credential(request),
         ApproverAdminOperation::UpdateMapping => service.update_approver_mapping(request),
     };
-    approver_engine_result(operation, result)
+    let mut result = approver_engine_result(operation, result);
+    for effect in preceding_public_effects {
+        upsert_adapter_effect(&mut result.public_effects, effect);
+    }
+    result
 }
 
 fn mapping_values(values: Vec<ApproverMapping>) -> Result<Vec<Value>, String> {
@@ -1048,6 +1323,12 @@ fn approver_engine_result(
         legacy_projection: Some(ApproverLegacyProjection::Admin(
             approver_admin_legacy_fields(&value),
         )),
+        causal_disposition: result.causal_disposition().map(Into::into),
+        public_effects: result
+            .public_effects()
+            .iter()
+            .map(AdapterPublicEffect::from)
+            .collect(),
     }
 }
 
@@ -1071,6 +1352,8 @@ fn approver_invocation_failure(
         legacy_projection: Some(ApproverLegacyProjection::InvocationFailure(
             repository_invocation_failure_view(&failure),
         )),
+        causal_disposition: None,
+        public_effects: Vec::new(),
     }
 }
 
@@ -1123,6 +1406,44 @@ fn approver_adapter_refused(
     retryable: bool,
     action: &str,
 ) -> ApproverAdapterResult {
+    approver_adapter_refused_with_cause(
+        operation,
+        code,
+        message,
+        retryable,
+        action,
+        AdapterCausalDisposition::CallerRefusal,
+    )
+}
+
+fn approver_adapter_refused_with_cause(
+    operation: ApproverAdminOperation,
+    code: &str,
+    message: &str,
+    retryable: bool,
+    action: &str,
+    causal_disposition: AdapterCausalDisposition,
+) -> ApproverAdapterResult {
+    approver_adapter_refused_with_cause_and_effects(
+        operation,
+        code,
+        message,
+        retryable,
+        action,
+        causal_disposition,
+        Vec::new(),
+    )
+}
+
+fn approver_adapter_refused_with_cause_and_effects(
+    operation: ApproverAdminOperation,
+    code: &str,
+    message: &str,
+    retryable: bool,
+    action: &str,
+    causal_disposition: AdapterCausalDisposition,
+    public_effects: Vec<AdapterPublicEffect>,
+) -> ApproverAdapterResult {
     ApproverAdapterResult {
         schema_id: APPROVER_ADAPTER_RESULT_SCHEMA_ID.to_owned(),
         schema_version: APPROVER_ADAPTER_RESULT_SCHEMA_VERSION.to_owned(),
@@ -1136,5 +1457,21 @@ fn approver_adapter_refused(
         }),
         next_actions: vec![action.to_owned()],
         legacy_projection: None,
+        causal_disposition: Some(causal_disposition),
+        public_effects,
+    }
+}
+
+fn upsert_adapter_effect(
+    public_effects: &mut Vec<AdapterPublicEffect>,
+    public_effect: AdapterPublicEffect,
+) {
+    if let Some(existing) = public_effects
+        .iter_mut()
+        .find(|effect| effect.target_ref == public_effect.target_ref)
+    {
+        *existing = public_effect;
+    } else {
+        public_effects.push(public_effect);
     }
 }

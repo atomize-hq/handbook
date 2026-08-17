@@ -12,14 +12,16 @@ use crate::charter_authenticator::{
     AUTHENTICATOR_RP_ID,
 };
 use crate::charter_authority_workflow::{
-    read_registry_journal_file, recover_registry_authority, registry_commit_marker,
-    RegistryAuthorityLocks,
+    read_registry_journal_file, registry_commit_marker, RegistryAuthorityLocks,
 };
 use crate::charter_lineage_store::{
     create_new_file, create_safe_directories, reject_reparse_or_symlink, sync_directory,
     LineageRecordClassV1, TrustedLineageStoreV1,
 };
-use crate::{parse_definition_yaml, parse_schema_json, DefinitionFingerprint};
+use crate::{
+    parse_definition_yaml, parse_schema_json, DefinitionFingerprint, OwnerCausalDispositionV1,
+    OwnerPublicEffectV1,
+};
 use base64::{engine::general_purpose::STANDARD as BASE64_STANDARD, Engine as _};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -135,6 +137,30 @@ struct MutationRefusal {
     message: String,
     retryable: bool,
     next_action: String,
+    causal_disposition: OwnerCausalDispositionV1,
+    public_effects: Vec<OwnerPublicEffectV1>,
+}
+
+impl MutationRefusal {
+    fn with_public_effects(mut self, public_effects: Vec<OwnerPublicEffectV1>) -> Self {
+        self.public_effects = public_effects;
+        self
+    }
+
+    fn with_causal_disposition(mut self, causal_disposition: OwnerCausalDispositionV1) -> Self {
+        self.causal_disposition = causal_disposition;
+        self
+    }
+
+    fn with_preceding_public_effects(
+        mut self,
+        preceding_public_effects: &[OwnerPublicEffectV1],
+    ) -> Self {
+        let mut combined = preceding_public_effects.to_vec();
+        combined.append(&mut self.public_effects);
+        self.public_effects = combined;
+        self
+    }
 }
 
 pub(crate) fn add_credential<P: NativeAuthenticatorPortV1>(
@@ -174,6 +200,8 @@ fn mutate<P: NativeAuthenticatorPortV1>(
             "operation does not match endpoint",
             false,
             "invoke the endpoint matching the closed request operation",
+            OwnerCausalDispositionV1::CallerRefusal,
+            Vec::new(),
         );
     }
     match mutate_inner(repo_root, port, request, kind) {
@@ -184,6 +212,8 @@ fn mutate<P: NativeAuthenticatorPortV1>(
             &error.message,
             error.retryable,
             &error.next_action,
+            error.causal_disposition,
+            error.public_effects,
         ),
     }
 }
@@ -194,118 +224,125 @@ fn mutate_inner<P: NativeAuthenticatorPortV1>(
     request: &ApproverAdminRequestV1,
     kind: MutationKind,
 ) -> Result<ApproverAdminResultV1, MutationRefusal> {
-    let authority = observe_current_authority(repo_root)?;
-    crate::charter_approval_workflow::recover_approval_authority(repo_root)
-        .map_err(|_| durability("pending approval/use-head authority could not be recovered"))?;
-    validate_expected_authority(request, &authority)?;
-    let required_pairs = required_pairs(repo_root, &authority)?;
-    let requested_mappings = request_mappings(request)?;
-    let target_hash = request
-        .document()
-        .get("credential_id_hash")
-        .and_then(Value::as_str);
+    let (authority, recovery_public_effects) = observe_current_authority(repo_root)?;
+    let outcome = (|| {
+        validate_expected_authority(request, &authority)?;
+        let required_pairs = required_pairs(repo_root, &authority)?;
+        let requested_mappings = request_mappings(request)?;
+        let target_hash = request
+            .document()
+            .get("credential_id_hash")
+            .and_then(Value::as_str);
 
-    let provisional_eligible = eligible_administrators(
-        &authority,
-        kind,
-        target_hash,
-        &requested_mappings,
-        &required_pairs,
-    )?;
-    if provisional_eligible.is_empty() {
-        return Err(lockout_or_authorization(kind));
-    }
+        let provisional_eligible = eligible_administrators(
+            &authority,
+            kind,
+            target_hash,
+            &requested_mappings,
+            &required_pairs,
+        )?;
+        if provisional_eligible.is_empty() {
+            return Err(lockout_or_authorization(kind));
+        }
 
-    let registration = if kind == MutationKind::Add {
-        Some(perform_registration(
+        let registration = if kind == MutationKind::Add {
+            Some(perform_registration(
+                port,
+                request,
+                &authority,
+                &requested_mappings,
+            )?)
+        } else {
+            None
+        };
+        if let Some(registration) = &registration {
+            validate_distinct_registration(&authority, &registration.decoded)?;
+        }
+
+        let result_state = build_result_state(
+            request,
+            &authority,
+            kind,
+            target_hash,
+            &requested_mappings,
+            registration.as_ref(),
+        )?;
+        let eligible = eligible_administrators(
+            &authority,
+            kind,
+            target_hash,
+            &requested_mappings,
+            &required_pairs,
+        )?;
+        let changed_hash = registration
+            .as_ref()
+            .map(|record| record.decoded.credential_id_hash.as_str())
+            .or(target_hash)
+            .ok_or_else(|| invalid("changed credential identity is absent"))?;
+        let assertion = perform_assertion(
+            repo_root,
             port,
             request,
             &authority,
-            &requested_mappings,
-        )?)
-    } else {
-        None
-    };
-    if let Some(registration) = &registration {
-        validate_distinct_registration(&authority, &registration.decoded)?;
+            &eligible,
+            &result_state,
+            changed_hash,
+        )?;
+        let administrator = eligible
+            .iter()
+            .find(|credential| credential.credential_id == assertion.decoded.credential_id)
+            .ok_or_else(|| {
+                authorization("assertion selected no eligible retained administrator")
+            })?;
+        validate_counter(administrator.sign_count, assertion.decoded.sign_count)?;
+        ensure_result_coverage(
+            &authority,
+            &result_state,
+            administrator,
+            registration.as_ref(),
+            &required_pairs,
+        )?;
+        ensure_authority_stable(
+            repo_root,
+            &authority,
+            administrator,
+            &assertion.prior_use_head_bytes,
+        )?;
+
+        let transition = build_registry_transition(
+            request,
+            &authority,
+            kind,
+            target_hash,
+            registration.as_ref(),
+            &assertion,
+            &result_state,
+            administrator,
+        )?;
+        let public_effects = commit_mutation(
+            repo_root,
+            request,
+            &authority,
+            registration.as_ref(),
+            &assertion,
+            &result_state,
+            &transition,
+            administrator,
+        )?;
+        success_result(
+            request,
+            &authority,
+            registration.as_ref(),
+            &assertion,
+            &result_state,
+            &transition,
+            public_effects,
+        )
+    })();
+    match outcome {
+        Ok(result) => Ok(result.with_preceding_public_effects(&recovery_public_effects)),
+        Err(failure) => Err(failure.with_preceding_public_effects(&recovery_public_effects)),
     }
-
-    let result_state = build_result_state(
-        request,
-        &authority,
-        kind,
-        target_hash,
-        &requested_mappings,
-        registration.as_ref(),
-    )?;
-    let eligible = eligible_administrators(
-        &authority,
-        kind,
-        target_hash,
-        &requested_mappings,
-        &required_pairs,
-    )?;
-    let changed_hash = registration
-        .as_ref()
-        .map(|record| record.decoded.credential_id_hash.as_str())
-        .or(target_hash)
-        .ok_or_else(|| invalid("changed credential identity is absent"))?;
-    let assertion = perform_assertion(
-        repo_root,
-        port,
-        request,
-        &authority,
-        &eligible,
-        &result_state,
-        changed_hash,
-    )?;
-    let administrator = eligible
-        .iter()
-        .find(|credential| credential.credential_id == assertion.decoded.credential_id)
-        .ok_or_else(|| authorization("assertion selected no eligible retained administrator"))?;
-    validate_counter(administrator.sign_count, assertion.decoded.sign_count)?;
-    ensure_result_coverage(
-        &authority,
-        &result_state,
-        administrator,
-        registration.as_ref(),
-        &required_pairs,
-    )?;
-    ensure_authority_stable(
-        repo_root,
-        &authority,
-        administrator,
-        &assertion.prior_use_head_bytes,
-    )?;
-
-    let transition = build_registry_transition(
-        request,
-        &authority,
-        kind,
-        target_hash,
-        registration.as_ref(),
-        &assertion,
-        &result_state,
-        administrator,
-    )?;
-    commit_mutation(
-        repo_root,
-        request,
-        &authority,
-        registration.as_ref(),
-        &assertion,
-        &result_state,
-        &transition,
-        administrator,
-    )?;
-    success_result(
-        request,
-        &authority,
-        registration.as_ref(),
-        &assertion,
-        &result_state,
-        &transition,
-    )
 }
 
 #[cfg(test)]
@@ -326,6 +363,8 @@ fn refused(
     message: &str,
     retryable: bool,
     next_action: &str,
+    causal_disposition: OwnerCausalDispositionV1,
+    public_effects: Vec<OwnerPublicEffectV1>,
 ) -> ApproverAdminResultV1 {
     ApproverAdminResultV1::from_json_value(json!({
         "assertion_fingerprint": null,
@@ -349,13 +388,22 @@ fn refused(
         "transition_ref": null
     }))
     .expect("engine-built registry refusal must satisfy the closed Admin result schema")
+    .with_owner_facts(Some(causal_disposition), public_effects)
 }
 
-fn observe_current_authority(repo_root: &Path) -> Result<CurrentAuthority, MutationRefusal> {
-    let locks = RegistryAuthorityLocks::acquire(repo_root)
-        .map_err(|_| durability("registry authority locks could not be acquired safely"))?;
-    recover_registry_authority(repo_root)
-        .map_err(|_| durability("pending registry authority could not be recovered"))?;
+fn observe_current_authority(
+    repo_root: &Path,
+) -> Result<(CurrentAuthority, Vec<OwnerPublicEffectV1>), MutationRefusal> {
+    let locks = RegistryAuthorityLocks::acquire(repo_root).map_err(|error| {
+        durability("registry authority locks could not be acquired safely")
+            .with_causal_disposition(error.causal_disposition())
+    })?;
+    let recovery_public_effects = recover_complete_registry_approval_authority_locked(repo_root)
+        .map_err(|error| {
+            durability("pending registry/approval authority could not be recovered")
+                .with_causal_disposition(error.causal_disposition())
+                .with_public_effects(error.public_effects().to_vec())
+        })?;
     let root = repo_root.join(REGISTRY_TRANSACTION_ROOT);
     if !root.exists() {
         return Err(authority_absent(
@@ -371,15 +419,15 @@ fn observe_current_authority(repo_root: &Path) -> Result<CurrentAuthority, Mutat
         let name = entry
             .file_name()
             .to_str()
-            .ok_or_else(|| durability("registry transaction name is not UTF-8"))?
+            .ok_or_else(|| invalid("registry transaction name is not UTF-8"))?
             .to_owned();
         if name.ends_with(".pending") {
-            return Err(durability(
+            return Err(lineage(
                 "an unrecovered registry mutation journal blocks new native authority",
             ));
         }
         if !name.ends_with(".committed") {
-            return Err(durability(
+            return Err(lineage(
                 "registry transaction root contains an unknown entry",
             ));
         }
@@ -390,14 +438,17 @@ fn observe_current_authority(repo_root: &Path) -> Result<CurrentAuthority, Mutat
             64 * 1024,
             "committed registry intent",
         )
-        .map_err(|_| durability("committed registry intent is not a safe bounded file"))?;
+        .map_err(|error| {
+            durability("committed registry intent is not a safe bounded file")
+                .with_causal_disposition(error.causal_disposition())
+        })?;
         let intent = parse_schema_json(&intent_bytes)
-            .map_err(|_| durability("committed registry intent is not closed JSON"))?;
+            .map_err(|_| lineage("committed registry intent is not closed JSON"))?;
         if serde_json_canonicalizer::to_vec(&intent)
-            .map_err(|_| durability("committed registry intent is not canonicalizable"))?
+            .map_err(|_| lineage("committed registry intent is not canonicalizable"))?
             != intent_bytes
         {
-            return Err(durability("committed registry intent is not exact JCS"));
+            return Err(lineage("committed registry intent is not exact JCS"));
         }
         let marker = read_registry_journal_file(
             repo_root,
@@ -405,9 +456,12 @@ fn observe_current_authority(repo_root: &Path) -> Result<CurrentAuthority, Mutat
             72,
             "committed registry marker",
         )
-        .map_err(|_| durability("committed registry marker is unsafe"))?;
+        .map_err(|error| {
+            durability("committed registry marker is unsafe")
+                .with_causal_disposition(error.causal_disposition())
+        })?;
         if marker.len() != 72 || marker != registry_commit_marker(&intent_bytes) {
-            return Err(durability(
+            return Err(lineage(
                 "committed registry marker does not bind its raw intent",
             ));
         }
@@ -420,7 +474,12 @@ fn observe_current_authority(repo_root: &Path) -> Result<CurrentAuthority, Mutat
                 &transition_ref,
                 &transition_fingerprint,
             )
-            .map_err(|_| lineage("committed registry transition could not be re-resolved"))?;
+            .map_err(|error| {
+                lineage_store_refusal(
+                    "committed registry transition could not be re-resolved",
+                    error,
+                )
+            })?;
         let transition = parse_schema_json(&transition_bytes)
             .map_err(|_| lineage("committed registry transition is not closed JSON"))?;
         if transition
@@ -484,7 +543,9 @@ fn observe_current_authority(repo_root: &Path) -> Result<CurrentAuthority, Mutat
             &state_ref,
             &state_fingerprint,
         )
-        .map_err(|_| lineage("current registry state could not be re-resolved"))?;
+        .map_err(|error| {
+            lineage_store_refusal("current registry state could not be re-resolved", error)
+        })?;
     let state = parse_schema_json(&state_bytes)
         .map_err(|_| lineage("current registry state is not closed JSON"))?;
     if state
@@ -497,17 +558,20 @@ fn observe_current_authority(repo_root: &Path) -> Result<CurrentAuthority, Mutat
         return Err(lineage("current registry state identity is inconsistent"));
     }
     let credentials = resolve_credentials(repo_root, &lineage_store, &state)?;
-    Ok(CurrentAuthority {
-        state_ref,
-        state_fingerprint,
-        state_bytes,
-        state,
-        transition_ref: required_string(intent, "transition_ref")?.to_owned(),
-        transition_fingerprint: heads[0].clone(),
-        transition_bytes: transition_bytes.clone(),
-        credentials,
-        _locks: locks,
-    })
+    Ok((
+        CurrentAuthority {
+            state_ref,
+            state_fingerprint,
+            state_bytes,
+            state,
+            transition_ref: required_string(intent, "transition_ref")?.to_owned(),
+            transition_fingerprint: heads[0].clone(),
+            transition_bytes: transition_bytes.clone(),
+            credentials,
+            _locks: locks,
+        },
+        recovery_public_effects,
+    ))
 }
 
 #[allow(
@@ -587,7 +651,9 @@ fn resolve_credentials(
                 &registration_ref,
                 &registration_fingerprint,
             )
-            .map_err(|_| lineage("credential registration could not be re-resolved"))?;
+            .map_err(|error| {
+                lineage_store_refusal("credential registration could not be re-resolved", error)
+            })?;
         let registration = parse_schema_json(&registration_bytes)
             .map_err(|_| lineage("credential registration is not closed JSON"))?;
         let response_ref = required_string(&registration, "decoded_response_ref")?;
@@ -598,7 +664,9 @@ fn resolve_credentials(
                 response_ref,
                 response_fingerprint,
             )
-            .map_err(|_| lineage("credential response could not be re-resolved"))?;
+            .map_err(|error| {
+                lineage_store_refusal("credential response could not be re-resolved", error)
+            })?;
         let response = parse_schema_json(&response_bytes)
             .map_err(|_| lineage("credential response is not closed JSON"))?;
         let credential_id = decode_bounded_base64(
@@ -649,7 +717,10 @@ fn read_use_head(
         64 * 1024,
         "authenticator use head",
     )
-    .map_err(|_| lineage("authenticator use head is not a safe bounded file"))?;
+    .map_err(|error| {
+        lineage("authenticator use head is not a safe bounded file")
+            .with_causal_disposition(error.causal_disposition())
+    })?;
     let mut value = parse_schema_json(&bytes)
         .map_err(|_| lineage("authenticator use head is not closed JSON"))?;
     if serde_json_canonicalizer::to_vec(&value)
@@ -1474,6 +1545,8 @@ fn ensure_result_coverage(
                 retryable: false,
                 next_action: "retain or add another usable credential covering every required pair"
                     .to_owned(),
+                causal_disposition: OwnerCausalDispositionV1::CallerRefusal,
+                public_effects: Vec::new(),
             });
         }
     }
@@ -1493,7 +1566,9 @@ fn ensure_authority_stable(
             &authority.state_ref,
             &authority.state_fingerprint,
         )
-        .map_err(|_| lineage("retained registry state could not be re-resolved"))?
+        .map_err(|error| {
+            lineage_store_refusal("retained registry state could not be re-resolved", error)
+        })?
         != authority.state_bytes
         || lineage_store
             .read_record(
@@ -1501,7 +1576,12 @@ fn ensure_authority_stable(
                 &authority.transition_ref,
                 &authority.transition_fingerprint,
             )
-            .map_err(|_| lineage("retained registry transition could not be re-resolved"))?
+            .map_err(|error| {
+                lineage_store_refusal(
+                    "retained registry transition could not be re-resolved",
+                    error,
+                )
+            })?
             != authority.transition_bytes
         || read_state_file(repo_root, &administrator.use_head_ref)? != prior_head_bytes
     {
@@ -1568,10 +1648,14 @@ fn commit_mutation(
     result_state: &BuiltRecord,
     transition: &BuiltRecord,
     administrator: &CommittedApproverCredentialV1,
-) -> Result<(), MutationRefusal> {
+) -> Result<Vec<OwnerPublicEffectV1>, MutationRefusal> {
     let root = repo_root.join(REGISTRY_TRANSACTION_ROOT);
-    create_safe_directories(repo_root, &root)
-        .map_err(|_| durability("registry transaction root could not be created safely"))?;
+    create_safe_directories(repo_root, &root).map_err(|error| {
+        lineage_store_refusal(
+            "registry transaction root could not be created safely",
+            error,
+        )
+    })?;
     let request_bytes = serde_json_canonicalizer::to_vec(request.document())
         .map_err(|_| durability("registry request canonicalization failed"))?;
     let transaction_id = format!("registry_{:x}", Sha256::digest(&request_bytes));
@@ -1583,6 +1667,8 @@ fn commit_mutation(
             message: "registry transaction identity already exists".to_owned(),
             retryable: false,
             next_action: "retain the committed result or restart from current authority".to_owned(),
+            causal_disposition: OwnerCausalDispositionV1::CallerRefusal,
+            public_effects: Vec::new(),
         });
     }
     let intent = RegistryMutationIntent {
@@ -1670,26 +1756,31 @@ fn commit_mutation(
     sync_directory(&pending).map_err(|_| durability("registry mutation stage fsync failed"))?;
 
     let lineage_store = TrustedLineageStoreV1::new(repo_root);
+    let mut public_effects = Vec::new();
     if let Some(registration) = registration {
-        lineage_store
-            .append_record(
-                LineageRecordClassV1::AuthenticatorMakeCredentialResponse,
-                &registration.response.bytes,
-            )
-            .map_err(|_| lineage("make-credential response install failed"))?;
-        lineage_store
-            .append_record(
-                LineageRecordClassV1::AuthenticatorRegistration,
-                &registration.registration.bytes,
-            )
-            .map_err(|_| lineage("registration install failed"))?;
+        append_public_record(
+            &lineage_store,
+            LineageRecordClassV1::AuthenticatorMakeCredentialResponse,
+            &registration.response.bytes,
+            &mut public_effects,
+            "make-credential response install failed",
+        )?;
+        append_public_record(
+            &lineage_store,
+            LineageRecordClassV1::AuthenticatorRegistration,
+            &registration.registration.bytes,
+            &mut public_effects,
+            "registration install failed",
+        )?;
         install_state_file(
             repo_root,
             &registration.initial_use_head.relative_ref,
             &registration.initial_use_head.bytes,
             false,
             None,
-        )?;
+            None,
+        )
+        .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
     }
     for (class, bytes) in [
         (
@@ -1709,34 +1800,80 @@ fn commit_mutation(
             transition.bytes.as_slice(),
         ),
     ] {
-        lineage_store
-            .append_record(class, bytes)
-            .map_err(|_| lineage("registry mutation immutable record install failed"))?;
+        append_public_record(
+            &lineage_store,
+            class,
+            bytes,
+            &mut public_effects,
+            "registry mutation immutable record install failed",
+        )?;
     }
-    install_state_file(
+    if let Some(effect) = install_state_file(
         repo_root,
         &assertion.use_transition.relative_ref,
         &assertion.use_transition.bytes,
         false,
         None,
-    )?;
+        Some(&assertion.use_transition.fingerprint),
+    )
+    .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
+    {
+        public_effects.push(effect);
+    }
     install_state_file(
         repo_root,
         &assertion.result_use_head.relative_ref,
         &assertion.result_use_head.bytes,
         true,
         Some(&assertion.prior_use_head_bytes),
-    )?;
-    write_new_durable(&pending.join("records-installed"), b"installed\n")?;
+        None,
+    )
+    .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+    write_new_durable(&pending.join("records-installed"), b"installed\n")
+        .map_err(|failure| failure.with_public_effects(public_effects.clone()))?;
     let marker = registry_commit_marker(&intent_bytes);
-    write_new_durable(&pending.join("committed.tmp"), &marker)?;
-    fs::rename(pending.join("committed.tmp"), pending.join("committed"))
-        .map_err(|_| durability("registry commit marker rename failed"))?;
-    sync_directory(&pending).map_err(|_| durability("registry pending fsync failed"))?;
-    fs::rename(&pending, &committed)
-        .map_err(|_| durability("registry mutation finalization failed"))?;
-    sync_directory(&root).map_err(|_| durability("registry transaction root fsync failed"))?;
-    Ok(())
+    write_new_durable(&pending.join("committed.tmp"), &marker)
+        .map_err(|failure| failure.with_public_effects(public_effects.clone()))?;
+    fs::rename(pending.join("committed.tmp"), pending.join("committed")).map_err(|_| {
+        durability("registry commit marker rename failed")
+            .with_public_effects(public_effects.clone())
+    })?;
+    sync_directory(&pending).map_err(|_| {
+        durability("registry pending fsync failed").with_public_effects(public_effects.clone())
+    })?;
+    fs::rename(&pending, &committed).map_err(|_| {
+        durability("registry mutation finalization failed")
+            .with_public_effects(public_effects.clone())
+    })?;
+    sync_directory(&root).map_err(|_| {
+        durability("registry transaction root fsync failed")
+            .with_public_effects(public_effects.clone())
+    })?;
+    Ok(public_effects)
+}
+
+fn append_public_record(
+    lineage_store: &TrustedLineageStoreV1,
+    class: LineageRecordClassV1,
+    bytes: &[u8],
+    public_effects: &mut Vec<OwnerPublicEffectV1>,
+    message: &'static str,
+) -> Result<(), MutationRefusal> {
+    match lineage_store.append_record(class, bytes) {
+        Ok(result) => {
+            if let Some(effect) = result.public_effect {
+                public_effects.push(effect);
+            }
+            Ok(())
+        }
+        Err(failure) => {
+            let mut effects = public_effects.clone();
+            effects.extend(failure.public_effects().iter().cloned());
+            Err(lineage(message)
+                .with_causal_disposition(failure.causal_disposition())
+                .with_public_effects(effects))
+        }
+    }
 }
 
 fn success_result(
@@ -1746,6 +1883,7 @@ fn success_result(
     assertion: &AssertionRecords,
     result_state: &BuiltRecord,
     transition: &BuiltRecord,
+    public_effects: Vec<OwnerPublicEffectV1>,
 ) -> Result<ApproverAdminResultV1, MutationRefusal> {
     let mut changed_paths = Vec::new();
     if let Some(registration) = registration {
@@ -1758,7 +1896,7 @@ fn success_result(
         result_state.relative_ref.clone(),
         transition.relative_ref.clone(),
     ]);
-    ApproverAdminResultV1::from_json_value(json!({
+    let result = ApproverAdminResultV1::from_json_value(json!({
         "assertion_fingerprint": assertion.assertion.fingerprint,
         "assertion_ref": assertion.assertion.relative_ref,
         "changed_paths": changed_paths,
@@ -1778,8 +1916,14 @@ fn success_result(
         "status": "succeeded",
         "transition_fingerprint": transition.fingerprint,
         "transition_ref": transition.relative_ref
-    }))
-    .map_err(|_| durability("engine-built registry mutation result violated its schema"))
+    }));
+    match result {
+        Ok(result) => Ok(result.with_owner_facts(None, public_effects)),
+        Err(_) => Err(
+            durability("engine-built registry mutation result violated its schema")
+                .with_public_effects(public_effects),
+        ),
+    }
 }
 
 fn read_state_file(repo_root: &Path, relative_ref: &str) -> Result<Vec<u8>, MutationRefusal> {
@@ -1789,7 +1933,18 @@ fn read_state_file(repo_root: &Path, relative_ref: &str) -> Result<Vec<u8>, Muta
         MAX_RECORD_BYTES,
         "retained authority state file",
     )
-    .map_err(|_| lineage("retained authority state file is unsafe or oversized"))
+    .map_err(|error| {
+        lineage("retained authority state file is unsafe or oversized")
+            .with_causal_disposition(error.causal_disposition())
+    })
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[cfg_attr(not(test), allow(dead_code))]
+enum StateFileInstallFaultV1 {
+    Create,
+    Write,
+    FileSync,
 }
 
 fn install_state_file(
@@ -1798,13 +1953,37 @@ fn install_state_file(
     bytes: &[u8],
     replace: bool,
     expected_prior: Option<&[u8]>,
-) -> Result<(), MutationRefusal> {
+    public_fingerprint: Option<&str>,
+) -> Result<Option<OwnerPublicEffectV1>, MutationRefusal> {
+    install_state_file_with_fault(
+        repo_root,
+        relative_ref,
+        bytes,
+        replace,
+        expected_prior,
+        public_fingerprint,
+        None,
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn install_state_file_with_fault(
+    repo_root: &Path,
+    relative_ref: &str,
+    bytes: &[u8],
+    replace: bool,
+    expected_prior: Option<&[u8]>,
+    public_fingerprint: Option<&str>,
+    fault: Option<StateFileInstallFaultV1>,
+) -> Result<Option<OwnerPublicEffectV1>, MutationRefusal> {
     let target = repo_root.join(".handbook/state").join(relative_ref);
+    let target_ref = format!(".handbook/state/{relative_ref}");
     let parent = target
         .parent()
         .ok_or_else(|| durability("authority state target has no parent"))?;
-    create_safe_directories(repo_root, parent)
-        .map_err(|_| durability("authority state parent could not be created safely"))?;
+    create_safe_directories(repo_root, parent).map_err(|error| {
+        lineage_store_refusal("authority state parent could not be created safely", error)
+    })?;
     if replace {
         let prior = read_state_file(repo_root, relative_ref)?;
         if expected_prior != Some(prior.as_slice()) {
@@ -1813,6 +1992,8 @@ fn install_state_file(
                 message: "authenticator use head forked before registry commit".to_owned(),
                 retryable: false,
                 next_action: "repair or retain the exact committed use chain".to_owned(),
+                causal_disposition: OwnerCausalDispositionV1::CallerRefusal,
+                public_effects: Vec::new(),
             });
         }
         let temporary = parent.join(format!(
@@ -1822,16 +2003,59 @@ fn install_state_file(
         write_new_durable(&temporary, bytes)?;
         fs::rename(&temporary, &target)
             .map_err(|_| durability("authenticator use-head replacement failed"))?;
+        sync_directory(parent).map_err(|_| durability("authority state parent fsync failed"))?;
+        Ok(None)
     } else if target.exists() {
         if read_state_file(repo_root, relative_ref)? != bytes {
             return Err(lineage(
                 "immutable authority destination contains foreign bytes",
             ));
         }
+        Ok(None)
+    } else if let Some(content_fingerprint) = public_fingerprint {
+        let mut file = create_new_file(&target).map_err(|error| {
+            if error.kind() == std::io::ErrorKind::AlreadyExists {
+                lineage("immutable authority destination appeared during create-new")
+            } else {
+                durability("authority create-new write destination failed")
+            }
+        })?;
+        let incomplete = OwnerPublicEffectV1::created_incomplete(&target_ref);
+        if fault == Some(StateFileInstallFaultV1::Create) {
+            return Err(durability("injected authority state create fault")
+                .with_public_effects(vec![incomplete]));
+        }
+        file.write_all(bytes).map_err(|_| {
+            durability("authority durable write failed")
+                .with_public_effects(vec![incomplete.clone()])
+        })?;
+        let installed =
+            OwnerPublicEffectV1::installed_unconfirmed(&target_ref, content_fingerprint);
+        if fault == Some(StateFileInstallFaultV1::Write) {
+            return Err(durability("injected authority state write fault")
+                .with_public_effects(vec![installed]));
+        }
+        file.sync_all().map_err(|_| {
+            durability("authority durable file flush failed")
+                .with_public_effects(vec![installed.clone()])
+        })?;
+        if fault == Some(StateFileInstallFaultV1::FileSync) {
+            return Err(durability("injected authority state flush fault")
+                .with_public_effects(vec![installed]));
+        }
+        sync_directory(parent).map_err(|_| {
+            durability("authority state parent fsync failed")
+                .with_public_effects(vec![installed.clone()])
+        })?;
+        Ok(Some(OwnerPublicEffectV1::durable_created(
+            target_ref,
+            content_fingerprint,
+        )))
     } else {
         write_new_durable(&target, bytes)?;
+        sync_directory(parent).map_err(|_| durability("authority state parent fsync failed"))?;
+        Ok(None)
     }
-    sync_directory(parent).map_err(|_| durability("authority state parent fsync failed"))
 }
 
 fn write_new_durable(path: &Path, bytes: &[u8]) -> Result<(), MutationRefusal> {
@@ -1864,6 +2088,8 @@ fn random_nonce() -> Result<[u8; 32], MutationRefusal> {
         message: "operating-system randomness was unavailable".to_owned(),
         retryable: true,
         next_action: "retry the complete operation with fresh randomness".to_owned(),
+        causal_disposition: OwnerCausalDispositionV1::ImplementationFailure,
+        public_effects: Vec::new(),
     })?;
     Ok(nonce)
 }
@@ -1905,12 +2131,16 @@ fn map_port_error(error: NativeAuthenticatorPortErrorV1) -> MutationRefusal {
             message: "native CTAP2.1 authenticator API is unavailable".to_owned(),
             retryable: true,
             next_action: "correct the request and retry".to_owned(),
+            causal_disposition: OwnerCausalDispositionV1::Prerequisite,
+            public_effects: Vec::new(),
         },
         NativeAuthenticatorPortErrorV1::Transport => MutationRefusal {
             code: "transaction_conflict",
             message: "native authenticator transport failed".to_owned(),
             retryable: true,
             next_action: "retry the complete operation with a fresh challenge".to_owned(),
+            causal_disposition: OwnerCausalDispositionV1::ImplementationFailure,
+            public_effects: Vec::new(),
         },
     }
 }
@@ -1922,6 +2152,8 @@ fn map_authenticator_error(error: AuthenticatorErrorV1) -> MutationRefusal {
             message: format!("authenticator status 0x{:02x}", status.status_byte),
             retryable: status.retryable,
             next_action: status.next_action.to_owned(),
+            causal_disposition: OwnerCausalDispositionV1::CallerRefusal,
+            public_effects: Vec::new(),
         },
         error => authorization(error.to_string()),
     }
@@ -1936,12 +2168,16 @@ fn lockout_or_authorization(kind: MutationKind) -> MutationRefusal {
             next_action:
                 "add a distinct usable covering credential or use another usable administrator"
                     .to_owned(),
+            causal_disposition: OwnerCausalDispositionV1::CallerRefusal,
+            public_effects: Vec::new(),
         },
         MutationKind::Revoke => MutationRefusal {
             code: "lockout_refused",
             message: "last registry admin cannot be revoked".to_owned(),
             retryable: false,
             next_action: "correct the request and retry".to_owned(),
+            causal_disposition: OwnerCausalDispositionV1::CallerRefusal,
+            public_effects: Vec::new(),
         },
         MutationKind::Update => authorization("current administrator assertion was refused"),
     }
@@ -1953,6 +2189,8 @@ fn invalid(message: impl Into<String>) -> MutationRefusal {
         message: message.into(),
         retryable: false,
         next_action: "correct the request and committed authority before retry".to_owned(),
+        causal_disposition: OwnerCausalDispositionV1::CallerRefusal,
+        public_effects: Vec::new(),
     }
 }
 
@@ -1963,6 +2201,8 @@ fn authorization(message: impl Into<String>) -> MutationRefusal {
         retryable: false,
         next_action: "use an eligible authorized credential or change committed authority"
             .to_owned(),
+        causal_disposition: OwnerCausalDispositionV1::CallerRefusal,
+        public_effects: Vec::new(),
     }
 }
 
@@ -1972,6 +2212,8 @@ fn authority_absent(message: impl Into<String>) -> MutationRefusal {
         message: message.into(),
         retryable: false,
         next_action: "bootstrap exact committed registry authority before retry".to_owned(),
+        causal_disposition: OwnerCausalDispositionV1::Prerequisite,
+        public_effects: Vec::new(),
     }
 }
 
@@ -1981,6 +2223,8 @@ fn stale(message: impl Into<String>) -> MutationRefusal {
         message: message.into(),
         retryable: true,
         next_action: "restart from the current registry state and transition head".to_owned(),
+        causal_disposition: OwnerCausalDispositionV1::CallerRefusal,
+        public_effects: Vec::new(),
     }
 }
 
@@ -1990,7 +2234,18 @@ fn lineage(message: impl Into<String>) -> MutationRefusal {
         message: message.into(),
         retryable: false,
         next_action: "repair exact committed registry lineage before retry".to_owned(),
+        causal_disposition: OwnerCausalDispositionV1::CallerRefusal,
+        public_effects: Vec::new(),
     }
+}
+
+fn lineage_store_refusal(
+    message: impl Into<String>,
+    error: crate::LineageStoreErrorV1,
+) -> MutationRefusal {
+    lineage(message)
+        .with_causal_disposition(error.causal_disposition())
+        .with_public_effects(error.public_effects().to_vec())
 }
 
 fn durability(message: impl Into<String>) -> MutationRefusal {
@@ -1999,6 +2254,8 @@ fn durability(message: impl Into<String>) -> MutationRefusal {
         message: message.into(),
         retryable: false,
         next_action: "repair exact durable registry authority before retry".to_owned(),
+        causal_disposition: OwnerCausalDispositionV1::ImplementationFailure,
+        public_effects: Vec::new(),
     }
 }
 
@@ -2045,11 +2302,38 @@ fn civil_date_from_unix_days(days: i64) -> (i64, i64, i64) {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct RegistryRecoveryErrorV1 {
     detail: String,
+    causal_disposition: OwnerCausalDispositionV1,
+    public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 impl RegistryRecoveryErrorV1 {
     pub fn detail(&self) -> &str {
         &self.detail
+    }
+
+    pub fn causal_disposition(&self) -> OwnerCausalDispositionV1 {
+        self.causal_disposition
+    }
+
+    pub fn public_effects(&self) -> &[OwnerPublicEffectV1] {
+        &self.public_effects
+    }
+
+    fn with_causal_disposition(mut self, causal_disposition: OwnerCausalDispositionV1) -> Self {
+        self.causal_disposition = causal_disposition;
+        self
+    }
+
+    fn with_preceding_public_effects(
+        mut self,
+        preceding_public_effects: &[OwnerPublicEffectV1],
+    ) -> Self {
+        let mut combined = preceding_public_effects.to_vec();
+        for effect in self.public_effects {
+            upsert_recovery_effect(&mut combined, effect);
+        }
+        self.public_effects = combined;
+        self
     }
 }
 
@@ -2214,20 +2498,21 @@ pub struct CommittedRegistryChainHeadV1 {
     pub state_fingerprint: String,
     pub transition_ref: String,
     pub transition_fingerprint: String,
+    pub public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 pub fn observe_committed_registry_chain_head(
     repo_root: &Path,
 ) -> Result<CommittedRegistryChainHeadV1, RegistryRecoveryErrorV1> {
-    recover_registry_mutation_journals(repo_root)?;
+    let public_effects = recover_registry_mutation_journals(repo_root)?;
     let _ordered_use_journals = discover_shared_use_journal_graph(repo_root)?;
     let (state_fingerprint, transition_fingerprint) = committed_registry_head_pair(repo_root)?;
     let root = repo_root.join(REGISTRY_TRANSACTION_ROOT);
     let mut match_head = None;
     for entry in fs::read_dir(&root)
-        .map_err(|_| recovery_error("registry transaction root is unreadable"))?
+        .map_err(|_| recovery_io_error("registry transaction root is unreadable"))?
     {
-        let entry = entry.map_err(|_| recovery_error("registry journal entry is unreadable"))?;
+        let entry = entry.map_err(|_| recovery_io_error("registry journal entry is unreadable"))?;
         let name = entry
             .file_name()
             .to_str()
@@ -2256,6 +2541,7 @@ pub fn observe_committed_registry_chain_head(
             transition_ref: recovery_value_string(&intent, "transition_ref")?.to_owned(),
             transition_fingerprint: recovery_value_string(&intent, "transition_fingerprint")?
                 .to_owned(),
+            public_effects: public_effects.clone(),
         };
         if observed.state_fingerprint != state_fingerprint || match_head.replace(observed).is_some()
         {
@@ -2271,13 +2557,19 @@ pub(crate) fn observe_committed_registry_chain_head_locked(
     repo_root: &Path,
 ) -> Result<CommittedRegistryChainHeadV1, RegistryRecoveryErrorV1> {
     let _ordered_use_journals = discover_shared_use_journal_graph(repo_root)?;
+    observe_committed_registry_chain_head_without_pending_discovery_locked(repo_root)
+}
+
+fn observe_committed_registry_chain_head_without_pending_discovery_locked(
+    repo_root: &Path,
+) -> Result<CommittedRegistryChainHeadV1, RegistryRecoveryErrorV1> {
     let (state_fingerprint, transition_fingerprint) = committed_registry_head_pair(repo_root)?;
     let root = repo_root.join(REGISTRY_TRANSACTION_ROOT);
     let mut match_head = None;
     for entry in fs::read_dir(&root)
-        .map_err(|_| recovery_error("registry transaction root is unreadable"))?
+        .map_err(|_| recovery_io_error("registry transaction root is unreadable"))?
     {
-        let entry = entry.map_err(|_| recovery_error("registry journal entry is unreadable"))?;
+        let entry = entry.map_err(|_| recovery_io_error("registry journal entry is unreadable"))?;
         let name = entry
             .file_name()
             .to_str()
@@ -2306,6 +2598,7 @@ pub(crate) fn observe_committed_registry_chain_head_locked(
             transition_ref: recovery_value_string(&intent, "transition_ref")?.to_owned(),
             transition_fingerprint: recovery_value_string(&intent, "transition_fingerprint")?
                 .to_owned(),
+            public_effects: Vec::new(),
         };
         if observed.state_fingerprint != state_fingerprint || match_head.replace(observed).is_some()
         {
@@ -2315,6 +2608,39 @@ pub(crate) fn observe_committed_registry_chain_head_locked(
         }
     }
     match_head.ok_or_else(|| recovery_error("retained registry chain head intent is absent"))
+}
+
+pub(crate) fn observe_committed_registry_chain_head_for_repository_preflight_locked(
+    repo_root: &Path,
+) -> Result<Option<CommittedRegistryChainHeadV1>, RegistryRecoveryErrorV1> {
+    let root = repo_root.join(REGISTRY_TRANSACTION_ROOT);
+    if !root.exists() {
+        return Ok(None);
+    }
+    reject_reparse_or_symlink(&root, true)
+        .map_err(|_| recovery_error("registry transaction root is unsafe"))?;
+    let mut has_committed = false;
+    for entry in fs::read_dir(&root)
+        .map_err(|_| recovery_io_error("registry transaction root is unreadable"))?
+    {
+        let entry = entry.map_err(|_| recovery_io_error("registry journal entry is unreadable"))?;
+        let name = entry
+            .file_name()
+            .to_str()
+            .ok_or_else(|| recovery_error("registry journal name is not UTF-8"))?
+            .to_owned();
+        if name.ends_with(".committed") {
+            has_committed = true;
+        } else if !name.ends_with(".pending") {
+            return Err(recovery_error(
+                "registry transaction root contains an unknown entry",
+            ));
+        }
+    }
+    if !has_committed {
+        return Ok(None);
+    }
+    observe_committed_registry_chain_head_without_pending_discovery_locked(repo_root).map(Some)
 }
 
 pub(crate) fn observe_committed_registry_chain_head_if_present_locked(
@@ -2330,9 +2656,9 @@ pub(crate) fn observe_committed_registry_chain_head_if_present_locked(
     let mut has_committed = false;
     let mut has_entry = false;
     for entry in fs::read_dir(&root)
-        .map_err(|_| recovery_error("registry transaction root is unreadable"))?
+        .map_err(|_| recovery_io_error("registry transaction root is unreadable"))?
     {
-        let entry = entry.map_err(|_| recovery_error("registry journal entry is unreadable"))?;
+        let entry = entry.map_err(|_| recovery_io_error("registry journal entry is unreadable"))?;
         has_entry = true;
         let name = entry
             .file_name()
@@ -2372,10 +2698,10 @@ fn discover_registry_use_head_anchors(
     reject_reparse_or_symlink(&root, true)
         .map_err(|_| recovery_error("registry transaction root is unsafe"))?;
     let mut committed = fs::read_dir(&root)
-        .map_err(|_| recovery_error("registry transaction root is unreadable"))?
+        .map_err(|_| recovery_io_error("registry transaction root is unreadable"))?
         .map(|entry| {
             let entry =
-                entry.map_err(|_| recovery_error("registry journal entry is unreadable"))?;
+                entry.map_err(|_| recovery_io_error("registry journal entry is unreadable"))?;
             let name = entry
                 .file_name()
                 .to_str()
@@ -2539,10 +2865,10 @@ pub(crate) fn discover_registry_use_journals(
     reject_reparse_or_symlink(&root, true)
         .map_err(|_| recovery_error("registry transaction root is unsafe"))?;
     let mut directories = fs::read_dir(&root)
-        .map_err(|_| recovery_error("registry transaction root is unreadable"))?
+        .map_err(|_| recovery_io_error("registry transaction root is unreadable"))?
         .map(|entry| {
             let entry =
-                entry.map_err(|_| recovery_error("registry journal entry is unreadable"))?;
+                entry.map_err(|_| recovery_io_error("registry journal entry is unreadable"))?;
             let name = entry
                 .file_name()
                 .to_str()
@@ -2740,10 +3066,13 @@ pub(crate) fn discover_shared_use_journal_graph(
     let registry = discover_registry_use_journals(repo_root)?;
     let approval = crate::charter_approval_workflow::discover_approval_use_journals(repo_root)
         .map_err(|error| {
-            recovery_error(format!(
+            let mut failure = recovery_error(format!(
                 "approval journal discovery refused: {}",
                 error.message
             ))
+            .with_causal_disposition(error.causal_disposition);
+            failure.public_effects = error.public_effects;
+            failure
         })?
         .into_iter()
         .map(|node| SharedUseJournalObservationV1 {
@@ -2861,19 +3190,19 @@ pub(crate) fn compose_shared_use_journal_graph(
 
 pub(crate) fn recover_registry_mutation_journals(
     repo_root: &Path,
-) -> Result<(), RegistryRecoveryErrorV1> {
+) -> Result<Vec<OwnerPublicEffectV1>, RegistryRecoveryErrorV1> {
     let root = repo_root.join(REGISTRY_TRANSACTION_ROOT);
     if !root.exists() {
-        return Ok(());
+        return Ok(Vec::new());
     }
     reject_reparse_or_symlink(&root, true)
         .map_err(|_| recovery_error("registry transaction root is unsafe"))?;
     let mut pending = Vec::new();
     for entry in fs::read_dir(&root)
-        .map_err(|_| recovery_error("registry transaction root is unreadable"))?
+        .map_err(|_| recovery_io_error("registry transaction root is unreadable"))?
     {
         let entry =
-            entry.map_err(|_| recovery_error("registry transaction entry is unreadable"))?;
+            entry.map_err(|_| recovery_io_error("registry transaction entry is unreadable"))?;
         let name = entry
             .file_name()
             .to_str()
@@ -2890,32 +3219,58 @@ pub(crate) fn recover_registry_mutation_journals(
         }
     }
     pending.sort_by(|left, right| left.file_name().cmp(&right.file_name()));
+    let mut public_effects = Vec::new();
     for directory in pending {
-        recover_one_registry_mutation(repo_root, &root, &directory)?;
+        let recovered = recover_one_registry_mutation(repo_root, &root, &directory)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        for effect in recovered {
+            upsert_recovery_effect(&mut public_effects, effect);
+        }
     }
-    Ok(())
+    Ok(public_effects)
+}
+
+pub fn recover_complete_registry_approval_authority(
+    repo_root: impl AsRef<Path>,
+) -> Result<Vec<OwnerPublicEffectV1>, RegistryRecoveryErrorV1> {
+    let repo_root = repo_root.as_ref();
+    let _locks = RegistryAuthorityLocks::acquire(repo_root).map_err(|failure| {
+        recovery_error("registry/approval recovery locks could not be acquired safely")
+            .with_causal_disposition(failure.causal_disposition())
+    })?;
+    recover_complete_registry_approval_authority_locked(repo_root)
 }
 
 pub(crate) fn recover_complete_registry_approval_authority_locked(
     repo_root: &Path,
-) -> Result<(), RegistryRecoveryErrorV1> {
+) -> Result<Vec<OwnerPublicEffectV1>, RegistryRecoveryErrorV1> {
     recover_registry_pre_intent_journals_locked(repo_root)?;
+    crate::charter_authority_workflow::recover_bootstrap_registry_authority_locked(repo_root)
+        .map_err(|failure| {
+            recovery_error("bootstrap registry authority recovery could not complete safely")
+                .with_causal_disposition(failure.causal_disposition())
+        })?;
     crate::charter_approval_workflow::recover_approval_pre_intent_authority_locked(repo_root)
         .map_err(|error| {
-            recovery_error(format!(
+            let mut failure = recovery_error(format!(
                 "approval pre-intent recovery refused: {}",
                 error.message
             ))
+            .with_causal_disposition(error.causal_disposition);
+            failure.public_effects = error.public_effects;
+            failure
         })?;
 
     let ordered = discover_shared_use_journal_graph(repo_root)?;
+    let mut public_effects = Vec::new();
     for journal in ordered {
         if journal.finalized_directory {
             continue;
         }
-        match journal.family {
+        let recovered = match journal.family {
             SharedUseJournalFamilyV1::Registry => {
-                recover_one_registry_mutation_journal_locked(repo_root, &journal.journal_path)?;
+                recover_one_registry_mutation_journal_locked(repo_root, &journal.journal_path)
+                    .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
             }
             SharedUseJournalFamilyV1::Approval => {
                 crate::charter_approval_workflow::recover_one_approval_authority_journal_locked(
@@ -2923,16 +3278,23 @@ pub(crate) fn recover_complete_registry_approval_authority_locked(
                     &journal.journal_path,
                 )
                 .map_err(|error| {
-                    recovery_error(format!(
+                    let mut failure = recovery_error(format!(
                         "approval predecessor recovery refused: {}",
                         error.message
                     ))
-                })?;
+                    .with_causal_disposition(error.causal_disposition);
+                    failure.public_effects = error.public_effects;
+                    failure.with_preceding_public_effects(&public_effects)
+                })?
             }
+        };
+        for effect in recovered {
+            upsert_recovery_effect(&mut public_effects, effect);
         }
     }
-    discover_shared_use_journal_graph(repo_root)?;
-    Ok(())
+    discover_shared_use_journal_graph(repo_root)
+        .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+    Ok(public_effects)
 }
 
 fn recover_registry_pre_intent_journals_locked(
@@ -2945,10 +3307,10 @@ fn recover_registry_pre_intent_journals_locked(
     reject_reparse_or_symlink(&root, true)
         .map_err(|_| recovery_error("registry transaction root is unsafe"))?;
     let mut pending = fs::read_dir(&root)
-        .map_err(|_| recovery_error("registry transaction root is unreadable"))?
+        .map_err(|_| recovery_io_error("registry transaction root is unreadable"))?
         .map(|entry| {
             let entry =
-                entry.map_err(|_| recovery_error("registry transaction entry is unreadable"))?;
+                entry.map_err(|_| recovery_io_error("registry transaction entry is unreadable"))?;
             let name = entry
                 .file_name()
                 .to_str()
@@ -2987,7 +3349,7 @@ fn recover_registry_pre_intent_journals_locked(
 fn recover_one_registry_mutation_journal_locked(
     repo_root: &Path,
     journal_path: &str,
-) -> Result<(), RegistryRecoveryErrorV1> {
+) -> Result<Vec<OwnerPublicEffectV1>, RegistryRecoveryErrorV1> {
     let normalized = CanonicalWorkspace::new(repo_root)
         .normalize_repo_relative(journal_path)
         .map_err(|_| recovery_error("registry recovery journal path is not normalized"))?;
@@ -3014,7 +3376,7 @@ fn recover_one_registry_mutation(
     repo_root: &Path,
     root: &Path,
     pending: &Path,
-) -> Result<(), RegistryRecoveryErrorV1> {
+) -> Result<Vec<OwnerPublicEffectV1>, RegistryRecoveryErrorV1> {
     let intent_path = pending.join("intent.json");
     if !intent_path.exists() {
         let entries = journal_entry_names(pending)?;
@@ -3024,7 +3386,7 @@ fn recover_one_registry_mutation(
             ));
         }
         cleanup_owned_journal(root, pending, &entries)?;
-        return Ok(());
+        return Ok(Vec::new());
     }
 
     let intent_bytes = recovery_read(repo_root, &intent_path, 64 * 1024, "registry intent")?;
@@ -3175,7 +3537,7 @@ fn recover_one_registry_mutation(
             ));
         }
         cleanup_owned_journal(root, pending, &entries)?;
-        return Ok(());
+        return Ok(Vec::new());
     }
     if marker.is_some() {
         if !complete {
@@ -3184,7 +3546,7 @@ fn recover_one_registry_mutation(
             ));
         }
         finalize_recovered_registry_journal(repo_root, root, pending, &intent_bytes)?;
-        return Ok(());
+        return Ok(Vec::new());
     }
 
     if !complete && !remaining_stages_complete {
@@ -3197,33 +3559,43 @@ fn recover_one_registry_mutation(
             restore_prior_use_head(repo_root, &intent.prior_use_head_ref, &prior_stage)?;
         }
         cleanup_owned_journal(root, pending, &entries)?;
-        return Ok(());
+        return Ok(Vec::new());
     }
 
+    let mut public_effects = Vec::new();
     if finals == 0 || !complete {
-        install_recovery_targets(repo_root, &mut targets, &prior_stage)?;
+        public_effects = install_recovery_targets(repo_root, &mut targets, &prior_stage)?;
     }
     if !pending.join("records-installed").exists() {
         write_new_durable(&pending.join("records-installed"), b"installed\n")
-            .map_err(|_| recovery_error("records-installed recovery write failed"))?;
+            .map_err(|_| recovery_io_error("records-installed recovery write failed"))
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
     } else if recovery_read(
         repo_root,
         &pending.join("records-installed"),
         10,
         "records-installed",
-    )? != b"installed\n"
+    )
+    .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
+        != b"installed\n"
     {
-        return Err(recovery_error("records-installed marker is not exact"));
+        return Err(recovery_error("records-installed marker is not exact")
+            .with_preceding_public_effects(&public_effects));
     }
     if marker_tmp.is_none() {
         write_new_durable(&pending.join("committed.tmp"), &expected_marker)
-            .map_err(|_| recovery_error("registry recovery marker write failed"))?;
+            .map_err(|_| recovery_io_error("registry recovery marker write failed"))
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
     }
     fs::rename(pending.join("committed.tmp"), pending.join("committed"))
-        .map_err(|_| recovery_error("registry recovery marker rename failed"))?;
+        .map_err(|_| recovery_io_error("registry recovery marker rename failed"))
+        .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
     sync_directory(pending)
-        .map_err(|_| recovery_error("registry recovery journal fsync failed"))?;
+        .map_err(|_| recovery_io_error("registry recovery journal fsync failed"))
+        .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
     finalize_recovered_registry_journal(repo_root, root, pending, &intent_bytes)
+        .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+    Ok(public_effects)
 }
 
 fn validate_recovery_intent(
@@ -3312,10 +3684,10 @@ fn committed_registry_head_pair(
     let mut nodes = BTreeMap::<String, (Option<String>, String)>::new();
     let mut referenced = BTreeSet::new();
     for entry in fs::read_dir(&root)
-        .map_err(|_| recovery_error("registry transaction root is unreadable"))?
+        .map_err(|_| recovery_io_error("registry transaction root is unreadable"))?
     {
         let entry =
-            entry.map_err(|_| recovery_error("registry transaction entry is unreadable"))?;
+            entry.map_err(|_| recovery_io_error("registry transaction entry is unreadable"))?;
         let name = entry
             .file_name()
             .to_str()
@@ -3620,7 +3992,8 @@ fn install_recovery_targets(
     repo_root: &Path,
     targets: &mut [RecoveryTargetState],
     prior_use_head: &[u8],
-) -> Result<(), RegistryRecoveryErrorV1> {
+) -> Result<Vec<OwnerPublicEffectV1>, RegistryRecoveryErrorV1> {
+    let mut public_effects = Vec::new();
     for state in targets
         .iter_mut()
         .filter(|state| !state.target.replace_use_head)
@@ -3630,8 +4003,29 @@ fn install_recovery_targets(
                 .stage
                 .as_ref()
                 .ok_or_else(|| recovery_error("roll-forward stage is absent"))?;
-            install_state_file(repo_root, &state.target.relative_ref, bytes, false, None)
-                .map_err(|_| recovery_error("registry recovery final install failed"))?;
+            let public_fingerprint = (state.target.kind.partition != "authenticator-use-heads")
+                .then_some(state.target.fingerprint.as_str());
+            let effect = install_state_file(
+                repo_root,
+                &state.target.relative_ref,
+                bytes,
+                false,
+                None,
+                public_fingerprint,
+            )
+            .map_err(|failure| {
+                let mut effects = public_effects.clone();
+                for effect in failure.public_effects {
+                    upsert_recovery_effect(&mut effects, effect);
+                }
+                let mut recovered = recovery_error("registry recovery final install failed")
+                    .with_causal_disposition(failure.causal_disposition);
+                recovered.public_effects = effects;
+                recovered
+            })?;
+            if let Some(effect) = effect {
+                upsert_recovery_effect(&mut public_effects, effect);
+            }
             state.final_bytes = Some(bytes.clone());
         }
     }
@@ -3650,11 +4044,21 @@ fn install_recovery_targets(
             bytes,
             true,
             Some(prior_use_head),
+            None,
         )
-        .map_err(|_| recovery_error("registry recovery use-head replacement failed"))?;
+        .map_err(|failure| {
+            let mut effects = public_effects.clone();
+            for effect in failure.public_effects {
+                upsert_recovery_effect(&mut effects, effect);
+            }
+            let mut recovered = recovery_error("registry recovery use-head replacement failed")
+                .with_causal_disposition(failure.causal_disposition);
+            recovered.public_effects = effects;
+            recovered
+        })?;
         result_head.final_bytes = Some(bytes.clone());
     }
-    Ok(())
+    Ok(public_effects)
 }
 
 fn restore_prior_use_head(
@@ -3676,10 +4080,10 @@ fn restore_prior_use_head(
         ));
     }
     write_new_durable(&temporary, prior)
-        .map_err(|_| recovery_error("prior use-head recovery write failed"))?;
+        .map_err(|_| recovery_io_error("prior use-head recovery write failed"))?;
     fs::rename(&temporary, &target)
-        .map_err(|_| recovery_error("prior use-head recovery rename failed"))?;
-    sync_directory(parent).map_err(|_| recovery_error("prior use-head recovery fsync failed"))
+        .map_err(|_| recovery_io_error("prior use-head recovery rename failed"))?;
+    sync_directory(parent).map_err(|_| recovery_io_error("prior use-head recovery fsync failed"))
 }
 
 fn finalize_recovered_registry_journal(
@@ -3715,8 +4119,8 @@ fn finalize_recovered_registry_journal(
         return Ok(());
     }
     fs::rename(pending, &committed)
-        .map_err(|_| recovery_error("registry recovery finalization rename failed"))?;
-    sync_directory(root).map_err(|_| recovery_error("registry transaction root fsync failed"))
+        .map_err(|_| recovery_io_error("registry recovery finalization rename failed"))?;
+    sync_directory(root).map_err(|_| recovery_io_error("registry transaction root fsync failed"))
 }
 
 fn recovery_allowed_entries(intent: &RegistryMutationRecoveryIntentV1) -> BTreeSet<String> {
@@ -3746,9 +4150,9 @@ fn recovery_allowed_entries(intent: &RegistryMutationRecoveryIntentV1) -> BTreeS
 fn journal_entry_names(directory: &Path) -> Result<Vec<String>, RegistryRecoveryErrorV1> {
     let mut names = Vec::new();
     for entry in
-        fs::read_dir(directory).map_err(|_| recovery_error("registry journal is unreadable"))?
+        fs::read_dir(directory).map_err(|_| recovery_io_error("registry journal is unreadable"))?
     {
-        let entry = entry.map_err(|_| recovery_error("registry journal entry is unreadable"))?;
+        let entry = entry.map_err(|_| recovery_io_error("registry journal entry is unreadable"))?;
         reject_reparse_or_symlink(&entry.path(), false)
             .map_err(|_| recovery_error("registry journal entry is unsafe"))?;
         names.push(
@@ -3770,11 +4174,11 @@ fn cleanup_owned_journal(
 ) -> Result<(), RegistryRecoveryErrorV1> {
     for name in entries {
         fs::remove_file(directory.join(name))
-            .map_err(|_| recovery_error("owned registry journal cleanup failed"))?;
+            .map_err(|_| recovery_io_error("owned registry journal cleanup failed"))?;
     }
     fs::remove_dir(directory)
-        .map_err(|_| recovery_error("owned registry journal directory cleanup failed"))?;
-    sync_directory(root).map_err(|_| recovery_error("registry cleanup root fsync failed"))
+        .map_err(|_| recovery_io_error("owned registry journal directory cleanup failed"))?;
+    sync_directory(root).map_err(|_| recovery_io_error("registry cleanup root fsync failed"))
 }
 
 fn optional_state_read(
@@ -3810,21 +4214,131 @@ fn recovery_read(
     limit: usize,
     label: &str,
 ) -> Result<Vec<u8>, RegistryRecoveryErrorV1> {
-    read_registry_journal_file(repo_root, path, limit, label)
-        .map_err(|_| recovery_error(format!("{label} is unsafe, missing, or oversized")))
+    read_registry_journal_file(repo_root, path, limit, label).map_err(|failure| {
+        recovery_error(format!("{label} is unsafe, missing, or oversized"))
+            .with_causal_disposition(failure.causal_disposition())
+    })
 }
 
 fn recovery_error(detail: impl Into<String>) -> RegistryRecoveryErrorV1 {
     RegistryRecoveryErrorV1 {
         detail: detail.into(),
+        causal_disposition: OwnerCausalDispositionV1::CallerRefusal,
+        public_effects: Vec::new(),
+    }
+}
+
+fn recovery_io_error(detail: impl Into<String>) -> RegistryRecoveryErrorV1 {
+    recovery_error(detail).with_causal_disposition(OwnerCausalDispositionV1::ImplementationFailure)
+}
+
+fn upsert_recovery_effect(
+    public_effects: &mut Vec<OwnerPublicEffectV1>,
+    public_effect: OwnerPublicEffectV1,
+) {
+    if let Some(existing) = public_effects
+        .iter_mut()
+        .find(|existing| existing.target_ref() == public_effect.target_ref())
+    {
+        *existing = public_effect;
+    } else {
+        public_effects.push(public_effect);
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::OwnerPublicEffectDispositionV1;
     use p256::ecdsa::{signature::Signer, Signature, SigningKey};
     use serde_json::Value;
+
+    #[test]
+    fn unavailable_transport_conflict_and_durability_causes_are_distinct() {
+        assert_eq!(
+            map_port_error(NativeAuthenticatorPortErrorV1::Unavailable).causal_disposition,
+            OwnerCausalDispositionV1::Prerequisite
+        );
+        assert_eq!(
+            map_port_error(NativeAuthenticatorPortErrorV1::Transport).causal_disposition,
+            OwnerCausalDispositionV1::ImplementationFailure
+        );
+        assert_eq!(
+            lineage("conflict").causal_disposition,
+            OwnerCausalDispositionV1::CallerRefusal
+        );
+        assert_eq!(
+            stale("stale head").causal_disposition,
+            OwnerCausalDispositionV1::CallerRefusal
+        );
+        assert_eq!(
+            durability("failure").causal_disposition,
+            OwnerCausalDispositionV1::ImplementationFailure
+        );
+    }
+
+    #[test]
+    fn public_use_transition_install_reports_target_state_and_equal_reuse() {
+        let relative_ref = "authenticator-use-transitions/authenticator-use-transition_test.json";
+        let target_ref = format!(".handbook/state/{relative_ref}");
+        let fingerprint = format!("sha256:{}", "e".repeat(64));
+        let bytes = br#"{"schema_id":"test"}"#;
+        for (fault, expected) in [
+            (
+                StateFileInstallFaultV1::Create,
+                crate::OwnerPublicEffectDispositionV1::CreatedIncomplete,
+            ),
+            (
+                StateFileInstallFaultV1::Write,
+                crate::OwnerPublicEffectDispositionV1::InstalledDurabilityUnconfirmed,
+            ),
+            (
+                StateFileInstallFaultV1::FileSync,
+                crate::OwnerPublicEffectDispositionV1::InstalledDurabilityUnconfirmed,
+            ),
+        ] {
+            let repo = tempfile::tempdir().unwrap();
+            let refusal = install_state_file_with_fault(
+                repo.path(),
+                relative_ref,
+                bytes,
+                false,
+                None,
+                Some(&fingerprint),
+                Some(fault),
+            )
+            .expect_err("fault after target creation must retain its effect");
+            assert_eq!(refusal.public_effects.len(), 1);
+            assert_eq!(refusal.public_effects[0].target_ref(), target_ref);
+            assert_eq!(refusal.public_effects[0].disposition(), expected);
+        }
+
+        let repo = tempfile::tempdir().unwrap();
+        let created = install_state_file(
+            repo.path(),
+            relative_ref,
+            bytes,
+            false,
+            None,
+            Some(&fingerprint),
+        )
+        .unwrap()
+        .expect("first public install writes");
+        assert_eq!(created.target_ref(), target_ref);
+        assert!(
+            install_state_file(
+                repo.path(),
+                relative_ref,
+                bytes,
+                false,
+                None,
+                Some(&fingerprint),
+            )
+            .unwrap()
+            .is_none(),
+            "equal bytes are reuse rather than another effect"
+        );
+    }
 
     #[test]
     fn registry_counter_protocol_preserves_zero_and_monotonic_boundaries() {
@@ -4343,7 +4857,14 @@ mod tests {
         restore_prior_head_from_stage(temp.path(), &pending, &intent);
         remove_dynamic_finals(temp.path(), &intent);
 
-        recover_registry_mutation_journals(temp.path()).unwrap();
+        let public_effects = recover_registry_mutation_journals(temp.path()).unwrap();
+
+        assert_eq!(public_effects.len(), 7);
+        assert!(public_effects.iter().all(|effect| {
+            effect.disposition() == OwnerPublicEffectDispositionV1::DurableCreated
+                && !effect.target_ref().contains("transactions")
+                && !effect.target_ref().contains("use-heads")
+        }));
 
         assert!(!pending.exists());
         let committed = pending.with_file_name(format!(
@@ -4366,6 +4887,78 @@ mod tests {
             fs::read(state_path(temp.path(), &intent, "transition_ref")).unwrap(),
             fs::read(committed.join("registry-transition.new")).unwrap()
         );
+    }
+
+    #[test]
+    fn registry_recovery_failure_after_installs_retains_exact_public_effects() {
+        let (temp, pending, intent) = dynamic_pending_fixture();
+        fs::remove_file(pending.join("committed")).unwrap();
+        fs::write(pending.join("records-installed"), b"foreign\n").unwrap();
+        restore_prior_head_from_stage(temp.path(), &pending, &intent);
+        remove_dynamic_finals(temp.path(), &intent);
+
+        let failure = recover_registry_mutation_journals(temp.path()).unwrap_err();
+
+        assert_eq!(
+            failure.causal_disposition(),
+            OwnerCausalDispositionV1::CallerRefusal
+        );
+        assert_eq!(failure.public_effects().len(), 7);
+        assert!(failure.public_effects().iter().all(|effect| {
+            effect.disposition() == OwnerPublicEffectDispositionV1::DurableCreated
+                && !effect.target_ref().contains("transactions")
+                && !effect.target_ref().contains("use-heads")
+        }));
+        assert!(pending.exists());
+    }
+
+    #[test]
+    fn admin_recovery_then_stale_request_refusal_retains_exact_public_effects() {
+        let (temp, pending, intent) = dynamic_pending_fixture();
+        fs::remove_file(pending.join("committed")).unwrap();
+        restore_prior_head_from_stage(temp.path(), &pending, &intent);
+        remove_dynamic_finals(temp.path(), &intent);
+
+        let mut port = NoNativeCalls::default();
+        let result = add_credential(temp.path(), &mut port, &add_request());
+
+        assert_eq!(
+            result.causal_disposition(),
+            Some(OwnerCausalDispositionV1::CallerRefusal)
+        );
+        assert_eq!(result.public_effects().len(), 7);
+        assert!(result.public_effects().iter().all(|effect| {
+            effect.disposition() == OwnerPublicEffectDispositionV1::DurableCreated
+                && !effect.target_ref().contains("transactions")
+                && !effect.target_ref().contains("use-heads")
+        }));
+        assert_eq!(port.calls, 0);
+        assert!(!pending.exists());
+    }
+
+    #[test]
+    fn admin_recovery_failure_after_installs_retains_exact_public_effects() {
+        let (temp, pending, intent) = dynamic_pending_fixture();
+        fs::remove_file(pending.join("committed")).unwrap();
+        fs::write(pending.join("records-installed"), b"foreign\n").unwrap();
+        restore_prior_head_from_stage(temp.path(), &pending, &intent);
+        remove_dynamic_finals(temp.path(), &intent);
+
+        let mut port = NoNativeCalls::default();
+        let result = add_credential(temp.path(), &mut port, &add_request());
+
+        assert_eq!(
+            result.causal_disposition(),
+            Some(OwnerCausalDispositionV1::CallerRefusal)
+        );
+        assert_eq!(result.public_effects().len(), 7);
+        assert!(result.public_effects().iter().all(|effect| {
+            effect.disposition() == OwnerPublicEffectDispositionV1::DurableCreated
+                && !effect.target_ref().contains("transactions")
+                && !effect.target_ref().contains("use-heads")
+        }));
+        assert_eq!(port.calls, 0);
+        assert!(pending.exists());
     }
 
     #[test]
@@ -4678,5 +5271,108 @@ mod tests {
             )
             .unwrap()
         );
+    }
+
+    #[test]
+    fn repository_identity_preflight_leaves_pending_registry_recovery_to_semantics() {
+        let (temp, pending, intent) = dynamic_pending_fixture();
+        fs::remove_file(pending.join("committed")).unwrap();
+        restore_prior_head_from_stage(temp.path(), &pending, &intent);
+        remove_dynamic_finals(temp.path(), &intent);
+        fs::write(
+            temp.path().join(".handbook/repository-identity.v1"),
+            intent["repository_identity_fingerprint"].as_str().unwrap(),
+        )
+        .unwrap();
+
+        let prepared = crate::repository_invocation_identity::RepositoryInvocationIdentityServiceV1::new()
+            .prepare_operation(
+                temp.path(),
+                crate::repository_invocation_identity::RepositoryInvocationOperationV1::ApproverAddCredential,
+            );
+
+        assert!(
+            prepared.is_ok(),
+            "pending semantic recovery must not become transport failure: {prepared:?}"
+        );
+        assert!(
+            pending.exists(),
+            "transport preflight must not mutate pending authority"
+        );
+    }
+
+    fn pending_bootstrap_fixture() -> (tempfile::TempDir, PathBuf) {
+        let temp = tempfile::tempdir().unwrap();
+        let mut service = crate::approver_registry::ApproverRegistryServiceV1::for_repository(
+            temp.path(),
+            SigningPort::new(),
+        );
+        let result = service
+            .bootstrap_approver_registry(bootstrap_request())
+            .to_json_value()
+            .unwrap();
+        assert_eq!(result["status"], "succeeded", "{result:#}");
+        let root = temp.path().join(REGISTRY_TRANSACTION_ROOT);
+        let committed = root
+            .read_dir()
+            .unwrap()
+            .map(|entry| entry.unwrap().path())
+            .find(|directory| {
+                fs::read(directory.join("intent.json"))
+                    .ok()
+                    .and_then(|bytes| serde_json::from_slice::<Value>(&bytes).ok())
+                    .and_then(|intent| intent["schema_id"].as_str().map(str::to_owned))
+                    .as_deref()
+                    == Some("handbook.registry-transaction-intent")
+            })
+            .unwrap();
+        let pending = committed.with_file_name(format!(
+            "{}.pending",
+            committed
+                .file_name()
+                .unwrap()
+                .to_string_lossy()
+                .trim_end_matches(".committed")
+        ));
+        fs::rename(committed, &pending).unwrap();
+        (temp, pending)
+    }
+
+    #[test]
+    fn complete_recovery_finalizes_exact_marker_bearing_bootstrap_journal() {
+        let (temp, pending) = pending_bootstrap_fixture();
+
+        let effects = recover_complete_registry_approval_authority_locked(temp.path()).unwrap();
+
+        assert!(
+            effects.is_empty(),
+            "private finalization is not a public install"
+        );
+        assert!(!pending.exists());
+        assert!(pending
+            .with_file_name(format!(
+                "{}.committed",
+                pending
+                    .file_name()
+                    .unwrap()
+                    .to_string_lossy()
+                    .trim_end_matches(".pending")
+            ))
+            .exists());
+    }
+
+    #[test]
+    fn complete_recovery_refuses_incomplete_bootstrap_journal_without_mutation() {
+        let (temp, pending) = pending_bootstrap_fixture();
+        fs::remove_file(pending.join("committed")).unwrap();
+
+        let failure = recover_complete_registry_approval_authority_locked(temp.path()).unwrap_err();
+
+        assert_eq!(
+            failure.causal_disposition(),
+            OwnerCausalDispositionV1::Prerequisite
+        );
+        assert!(failure.public_effects().is_empty());
+        assert!(pending.exists());
     }
 }

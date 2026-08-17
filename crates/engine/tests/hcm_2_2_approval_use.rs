@@ -6,7 +6,8 @@ use handbook_engine::{
     CharterCoverageSubmission, CharterIntakeConsumer, CharterIntakeEnvelope,
     CharterIntakeSourceKind, CharterPromotionIntentV1, CharterPromotionWorkflowServiceV1,
     DefinitionFingerprint, LineageRecordClassV1, NativeAuthenticatorPortErrorV1,
-    NativeAuthenticatorPortV1, TrustedLineageStoreV1, AUTHENTICATOR_RP_ID,
+    NativeAuthenticatorPortV1, OwnerPublicEffectDispositionV1, TrustedLineageStoreV1,
+    AUTHENTICATOR_RP_ID,
 };
 use p256::ecdsa::{signature::Signer, Signature, SigningKey};
 use serde_json::Value;
@@ -676,6 +677,104 @@ fn incomplete_staged_approval_rolls_back_mutable_head_and_preserves_orphans() {
     assert_eq!(std::fs::read(use_head).unwrap(), prior_head);
     assert_eq!(std::fs::read(orphan).unwrap(), orphan_bytes);
     assert_eq!(service.into_port().get_calls.len(), 1);
+}
+
+#[test]
+fn complete_approval_recovery_reports_only_public_installs_on_later_refusal() {
+    let temp = tempfile::tempdir().unwrap();
+    let decisions = resolve_shipped_profile_decisions(Path::new(env!("CARGO_MANIFEST_DIR")))
+        .expect("shipped Charter decisions");
+    let mut registry =
+        ApproverRegistryServiceV1::for_repository(temp.path(), DynamicApprovalPort::new());
+    assert_eq!(
+        registry
+            .bootstrap_approver_registry(bootstrap_request())
+            .to_json_value()
+            .unwrap()["status"],
+        "succeeded"
+    );
+    let (candidate_ref, _) = seed_runtime_candidate(temp.path());
+    let mut service = CharterApprovalServiceV1::new(temp.path(), registry.into_port());
+    let first = service.approve_candidate(
+        &decisions,
+        CharterApprovalRequestV1 {
+            operation_id: "seed-complete-recovery".to_owned(),
+            candidate_ref: candidate_ref.clone(),
+            approval_class: "Project owner approval".to_owned(),
+            authority_ref: "Project owner".to_owned(),
+            accepted_waiver_refs: vec![],
+        },
+    );
+    let CharterApprovalResultV1::Succeeded(_) = first else {
+        panic!("seed approval must succeed: {first:?}")
+    };
+    let journal_root = temp.path().join(".handbook/state/transactions/approvals");
+    let committed = journal_root
+        .read_dir()
+        .unwrap()
+        .find_map(|entry| {
+            let path = entry.unwrap().path();
+            path.file_name()
+                .unwrap()
+                .to_string_lossy()
+                .ends_with(".committed")
+                .then_some(path)
+        })
+        .unwrap();
+    let intent: Value =
+        serde_json::from_slice(&std::fs::read(committed.join("intent.json")).unwrap()).unwrap();
+    std::fs::remove_file(committed.join("committed")).unwrap();
+    for field in [
+        "response_ref",
+        "assertion_ref",
+        "use_transition_ref",
+        "approval_ref",
+    ] {
+        std::fs::remove_file(
+            temp.path()
+                .join(".handbook/state")
+                .join(intent[field].as_str().unwrap()),
+        )
+        .unwrap();
+    }
+    std::fs::write(
+        temp.path()
+            .join(".handbook/state")
+            .join(intent["prior_use_head_ref"].as_str().unwrap()),
+        std::fs::read(committed.join("prior-use-head.json")).unwrap(),
+    )
+    .unwrap();
+    let pending = committed.with_file_name(
+        committed
+            .file_name()
+            .unwrap()
+            .to_string_lossy()
+            .replace(".committed", ".pending"),
+    );
+    std::fs::rename(&committed, &pending).unwrap();
+
+    let result = service.approve_candidate(
+        &decisions,
+        CharterApprovalRequestV1 {
+            operation_id: "recover-complete-then-refuse".to_owned(),
+            candidate_ref,
+            approval_class: "Unrequired approval".to_owned(),
+            authority_ref: "Project owner".to_owned(),
+            accepted_waiver_refs: vec![],
+        },
+    );
+
+    let CharterApprovalResultV1::Refused(refusal) = result else {
+        panic!("unrequired pair must refuse after complete recovery")
+    };
+    assert_eq!(refusal.code.as_str(), "authorization_refused");
+    assert_eq!(refusal.public_effects.len(), 4);
+    assert!(refusal.public_effects.iter().all(|effect| {
+        effect.disposition() == OwnerPublicEffectDispositionV1::DurableCreated
+            && !effect.target_ref().contains("transactions")
+            && !effect.target_ref().contains("use-heads")
+    }));
+    assert!(!pending.exists());
 }
 
 #[test]

@@ -22,7 +22,8 @@ use crate::charter_lineage_store::{
 use crate::{
     load_shipped_charter_definition_registry, parse_canonical_charter,
     resolve_shipped_profile_decisions, serialize_canonical_charter, DefinitionFingerprint,
-    ExactDefinitionRef,
+    ExactDefinitionRef, OwnerCausalDispositionV1, OwnerPublicEffectDispositionV1,
+    OwnerPublicEffectV1,
 };
 use serde_json::{json, Value};
 use std::collections::{BTreeMap, BTreeSet};
@@ -361,13 +362,18 @@ fn civil_date_from_unix_days(days: i64) -> (i64, i64, i64) {
 }
 
 fn map_lifecycle(error: CharterLifecycleStoreErrorV1) -> CharterPromotionWorkflowErrorV1 {
+    let causal_disposition = error.causal_disposition();
+    let public_effects = error.public_effects().to_vec();
     workflow_error(
         CharterPromotionWorkflowErrorKindV1::LifecycleClearanceIncomplete,
         error.detail(),
     )
+    .with_owner_facts(causal_disposition, public_effects)
 }
 
 fn map_transaction(error: crate::CharterPromotionErrorV1) -> CharterPromotionWorkflowErrorV1 {
+    let causal_disposition = error.causal_disposition();
+    let public_effects = error.public_effects().to_vec();
     workflow_error(
         match error.kind() {
             crate::CharterPromotionErrorKindV1::BasisMismatch => {
@@ -380,18 +386,39 @@ fn map_transaction(error: crate::CharterPromotionErrorV1) -> CharterPromotionWor
         },
         error.detail(),
     )
+    .with_owner_facts(causal_disposition, public_effects)
 }
 
 fn map_lineage_candidate(error: LineageStoreErrorV1) -> CharterPromotionWorkflowErrorV1 {
-    candidate_refused(error.detail())
+    let causal_disposition = error.causal_disposition();
+    let public_effects = error.public_effects().to_vec();
+    candidate_refused(error.detail()).with_owner_facts(causal_disposition, public_effects)
 }
 
 fn map_lineage_approval(error: LineageStoreErrorV1) -> CharterPromotionWorkflowErrorV1 {
-    approval_refused(error.detail())
+    let causal_disposition = error.causal_disposition();
+    let public_effects = error.public_effects().to_vec();
+    approval_refused(error.detail()).with_owner_facts(causal_disposition, public_effects)
 }
 
 fn map_lineage_registry(error: LineageStoreErrorV1) -> CharterPromotionWorkflowErrorV1 {
-    registry_refused(error.detail())
+    let causal_disposition = error.causal_disposition();
+    let public_effects = error.public_effects().to_vec();
+    registry_refused(error.detail()).with_owner_facts(causal_disposition, public_effects)
+}
+
+fn upsert_promotion_effect(
+    public_effects: &mut Vec<OwnerPublicEffectV1>,
+    public_effect: OwnerPublicEffectV1,
+) {
+    if let Some(existing) = public_effects
+        .iter_mut()
+        .find(|effect| effect.target_ref() == public_effect.target_ref())
+    {
+        *existing = public_effect;
+    } else {
+        public_effects.push(public_effect);
+    }
 }
 
 fn workflow_error(
@@ -445,6 +472,7 @@ pub struct CharterPromotionProductProjectionV1 {
     pub promotion_fingerprint: String,
     pub changed_paths: Vec<String>,
     pub next_actions: Vec<String>,
+    pub public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -539,7 +567,7 @@ impl CharterPromotionWorkflowCommitV1 {
                         "promotion ref is not an exact content-addressed promotion ref",
                     )
                 })?;
-        exact_product_ref_fingerprint(
+        let lifecycle_transition_fingerprint = exact_product_ref_fingerprint(
             &self.lifecycle_transition_ref,
             "lifecycle-transitions/",
             "lifecycle-transition_",
@@ -551,18 +579,128 @@ impl CharterPromotionWorkflowCommitV1 {
             )
         })?;
 
+        let promotion_target = format!(".handbook/state/{}", self.promotion_ref);
+        let lifecycle_target = format!(".handbook/state/{}", self.lifecycle_transition_ref);
+        let expected_effects = BTreeMap::from([
+            (CANONICAL_REF, self.canonical_fingerprint.as_str()),
+            (promotion_target.as_str(), promotion_fingerprint.as_str()),
+            (
+                lifecycle_target.as_str(),
+                lifecycle_transition_fingerprint.as_str(),
+            ),
+        ]);
+        let mut observed_targets = BTreeSet::new();
+        for effect in &self.transaction.public_effects {
+            if !observed_targets.insert(effect.target_ref()) {
+                return Err(CharterPromotionProductProjectionErrorV1::new(
+                    CharterPromotionProductProjectionErrorKindV1::InconsistentCommit,
+                    "retained transaction repeats a public effect target",
+                ));
+            }
+            if let Some(expected_fingerprint) = expected_effects.get(effect.target_ref()) {
+                if effect.disposition() != OwnerPublicEffectDispositionV1::DurableCreated
+                    || effect.content_fingerprint() != Some(*expected_fingerprint)
+                {
+                    return Err(CharterPromotionProductProjectionErrorV1::new(
+                        CharterPromotionProductProjectionErrorKindV1::InconsistentCommit,
+                        "retained transaction public effects are inconsistent with its commit",
+                    ));
+                }
+            } else if !is_recovery_public_effect(effect) {
+                return Err(CharterPromotionProductProjectionErrorV1::new(
+                    CharterPromotionProductProjectionErrorKindV1::InconsistentCommit,
+                    "retained transaction exposes an unexpected public effect target",
+                ));
+            }
+        }
+        if !observed_targets.contains(CANONICAL_REF) {
+            return Err(CharterPromotionProductProjectionErrorV1::new(
+                CharterPromotionProductProjectionErrorKindV1::InconsistentCommit,
+                "retained transaction omits the canonical Charter effect",
+            ));
+        }
+
         Ok(CharterPromotionProductProjectionV1 {
             canonical_path: CANONICAL_REF.to_owned(),
             canonical_fingerprint: self.canonical_fingerprint.clone(),
             promotion_ref: self.promotion_ref.clone(),
-            promotion_fingerprint,
+            promotion_fingerprint: promotion_fingerprint.clone(),
             changed_paths: vec![
                 CANONICAL_REF.to_owned(),
-                format!(".handbook/state/{}", self.promotion_ref),
-                format!(".handbook/state/{}", self.lifecycle_transition_ref),
+                promotion_target.clone(),
+                lifecycle_target.clone(),
             ],
             next_actions: vec!["retain the committed promotion reference".to_owned()],
+            public_effects: self.transaction.public_effects.clone(),
         })
+    }
+}
+
+fn is_recovery_public_effect(effect: &OwnerPublicEffectV1) -> bool {
+    let content_addressed_fingerprint = exact_product_ref_fingerprint(
+        effect
+            .target_ref()
+            .strip_prefix(".handbook/state/")
+            .unwrap_or_default(),
+        "promotions/",
+        "promotion_",
+    )
+    .or_else(|| {
+        exact_product_ref_fingerprint(
+            effect
+                .target_ref()
+                .strip_prefix(".handbook/state/")
+                .unwrap_or_default(),
+            "lifecycle-transitions/",
+            "lifecycle-transition_",
+        )
+    })
+    .or_else(|| {
+        exact_product_ref_fingerprint(
+            effect
+                .target_ref()
+                .strip_prefix(".handbook/state/")
+                .unwrap_or_default(),
+            "lifecycle-observations/",
+            "lifecycle-observation_",
+        )
+    });
+    if let Some(expected_fingerprint) = content_addressed_fingerprint {
+        return match effect.disposition() {
+            OwnerPublicEffectDispositionV1::CreatedIncomplete => {
+                effect.content_fingerprint().is_none()
+            }
+            OwnerPublicEffectDispositionV1::InstalledDurabilityUnconfirmed
+            | OwnerPublicEffectDispositionV1::DurableCreated => {
+                effect.content_fingerprint() == Some(expected_fingerprint.as_str())
+            }
+        };
+    }
+
+    const PUBLIC_PARTITIONS: [&str; 8] = [
+        ".handbook/state/authenticator-make-credential-responses/",
+        ".handbook/state/authenticator-registrations/",
+        ".handbook/state/authenticator-get-assertion-responses/",
+        ".handbook/state/authenticator-assertions/",
+        ".handbook/state/registry-states/",
+        ".handbook/state/registry-transitions/",
+        ".handbook/state/authenticator-use-transitions/",
+        ".handbook/state/approvals/",
+    ];
+    let target_is_public = PUBLIC_PARTITIONS.iter().any(|partition| {
+        effect.target_ref().starts_with(partition)
+            && effect.target_ref().ends_with(".json")
+            && !effect.target_ref()[partition.len()..].contains(['/', '\\'])
+    });
+    if !target_is_public {
+        return false;
+    }
+    match effect.disposition() {
+        OwnerPublicEffectDispositionV1::CreatedIncomplete => effect.content_fingerprint().is_none(),
+        OwnerPublicEffectDispositionV1::InstalledDurabilityUnconfirmed
+        | OwnerPublicEffectDispositionV1::DurableCreated => effect
+            .content_fingerprint()
+            .is_some_and(|fingerprint| DefinitionFingerprint::parse(fingerprint).is_ok()),
     }
 }
 
@@ -663,6 +801,8 @@ impl CharterPromotionWorkflowErrorKindV1 {
 pub struct CharterPromotionWorkflowErrorV1 {
     kind: CharterPromotionWorkflowErrorKindV1,
     detail: String,
+    causal_disposition: OwnerCausalDispositionV1,
+    public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 impl CharterPromotionWorkflowErrorV1 {
@@ -670,6 +810,23 @@ impl CharterPromotionWorkflowErrorV1 {
         Self {
             kind,
             detail: detail.into(),
+            causal_disposition: match kind {
+                CharterPromotionWorkflowErrorKindV1::InvalidIntent
+                | CharterPromotionWorkflowErrorKindV1::CandidateRefused
+                | CharterPromotionWorkflowErrorKindV1::ApprovalRefused
+                | CharterPromotionWorkflowErrorKindV1::BasisMismatch => {
+                    OwnerCausalDispositionV1::CallerRefusal
+                }
+                CharterPromotionWorkflowErrorKindV1::RegistryRefused
+                | CharterPromotionWorkflowErrorKindV1::DefinitionDrift
+                | CharterPromotionWorkflowErrorKindV1::LifecycleClearanceIncomplete => {
+                    OwnerCausalDispositionV1::Prerequisite
+                }
+                CharterPromotionWorkflowErrorKindV1::TransactionRefused => {
+                    OwnerCausalDispositionV1::ImplementationFailure
+                }
+            },
+            public_effects: Vec::new(),
         }
     }
 
@@ -683,6 +840,36 @@ impl CharterPromotionWorkflowErrorV1 {
 
     pub fn product_refusal(&self) -> CharterPromotionProductRefusalV1 {
         self.kind.product_refusal(self.detail.clone())
+    }
+
+    pub fn causal_disposition(&self) -> OwnerCausalDispositionV1 {
+        self.causal_disposition
+    }
+
+    pub fn public_effects(&self) -> &[OwnerPublicEffectV1] {
+        &self.public_effects
+    }
+
+    fn with_owner_facts(
+        mut self,
+        causal_disposition: OwnerCausalDispositionV1,
+        public_effects: Vec<OwnerPublicEffectV1>,
+    ) -> Self {
+        self.causal_disposition = causal_disposition;
+        self.public_effects = public_effects;
+        self
+    }
+
+    fn with_preceding_public_effects(
+        mut self,
+        preceding_public_effects: &[OwnerPublicEffectV1],
+    ) -> Self {
+        let mut combined = preceding_public_effects.to_vec();
+        for effect in self.public_effects {
+            upsert_promotion_effect(&mut combined, effect);
+        }
+        self.public_effects = combined;
+        self
     }
 }
 
@@ -730,293 +917,312 @@ impl CharterPromotionWorkflowServiceV1 {
             .transactions
             .begin_retained_authority()
             .map_err(map_transaction)?;
-        let decisions = resolve_shipped_profile_decisions(&self.repo_root).map_err(|_| {
-            workflow_error(
-                CharterPromotionWorkflowErrorKindV1::DefinitionDrift,
-                "selected shipped profile could not be re-resolved",
-            )
-        })?;
-        let definitions = load_shipped_charter_definition_registry().map_err(|_| {
-            definition_drift("shipped Charter definition closure could not be reloaded")
-        })?;
-        definitions
-            .validate_selected_decisions(&decisions)
-            .map_err(|_| {
-                definition_drift("selected decisions do not retain the Charter closure")
-            })?;
-
-        let candidate_fingerprint = fingerprint_from_ref(&intent.candidate_ref)
-            .ok_or_else(|| candidate_refused("candidate ref is not content-addressed"))?;
-        let candidate = self
-            .lineage
-            .read_record_by_ref(
-                LineageRecordClassV1::Candidate,
-                &intent.candidate_ref,
-                Some(&candidate_fingerprint),
-            )
-            .map_err(map_lineage_candidate)?;
-        validate_candidate_contract(&candidate, &decisions, &definitions)?;
-        let content_ref =
-            string_field(&candidate, "normalized_content_ref").map_err(map_lineage_candidate)?;
-        let canonical_bytes = self
-            .lineage
-            .read_candidate_content(content_ref)
-            .map_err(map_lineage_candidate)?;
-        let charter = parse_canonical_charter(&decisions, &canonical_bytes)
-            .map_err(|_| candidate_refused("candidate content is not a valid canonical Charter"))?;
-        if serialize_canonical_charter(&decisions, &charter)
-            .map_err(|_| candidate_refused("candidate Charter serialization failed"))?
-            != canonical_bytes
-        {
-            return Err(candidate_refused(
-                "candidate content is not exact deterministic canonical YAML",
-            ));
-        }
-        let canonical_fingerprint = DefinitionFingerprint::from_bytes(&canonical_bytes).to_string();
-        let current = retained_transaction
-            .read_committed_charter()
-            .map_err(map_transaction)?;
-        validate_basis(
-            &candidate,
-            intent.expected_current_fingerprint.as_deref(),
-            current
-                .as_ref()
-                .map(|authority| authority.canonical_fingerprint.as_str()),
-        )?;
-        if current
-            .as_ref()
-            .is_some_and(|authority| authority.canonical_fingerprint == canonical_fingerprint)
-        {
-            return Err(candidate_refused(
-                "an amendment must change the committed canonical Charter bytes",
-            ));
-        }
-
-        let retained_lifecycle = self
-            .lifecycle
-            .observe_retained_locked()
-            .map_err(map_lifecycle)?;
-        if retained_lifecycle.canonical_bytes.as_deref()
-            != current
-                .as_ref()
-                .map(|authority| authority.canonical_bytes.as_slice())
-        {
-            return Err(workflow_error(
-                CharterPromotionWorkflowErrorKindV1::LifecycleClearanceIncomplete,
-                "canonical basis and lifecycle retained bytes disagree",
-            ));
-        }
-        let retained_validation = CharterLifecycleValidationServiceV1::new(&self.repo_root)
-            .validate_current_retained(
-                &decisions,
-                &candidate,
-                &canonical_bytes,
-                current.as_ref(),
-                &retained_lifecycle,
-            )
-            .map_err(|failure| candidate_refused(failure.detail()))?;
-
-        let committed_approval_refs = observe_committed_candidate_approval_refs_locked(
-            &self.repo_root,
-            &intent.candidate_ref,
-            &candidate_fingerprint,
-            Some(&intent.approval_ref),
-        )
-        .map_err(|failure| approval_refused(failure.message))?;
-
-        let registry =
-            observe_committed_approver_registry_locked(&self.repo_root).map_err(|failure| {
+        let recovery_public_effects = retained_transaction.recovery_public_effects().to_vec();
+        let outcome = (|| {
+            let decisions = resolve_shipped_profile_decisions(&self.repo_root).map_err(|_| {
                 workflow_error(
-                    CharterPromotionWorkflowErrorKindV1::RegistryRefused,
-                    failure.detail(),
+                    CharterPromotionWorkflowErrorKindV1::DefinitionDrift,
+                    "selected shipped profile could not be re-resolved",
                 )
             })?;
-        let lifecycle = retained_lifecycle.authority.as_ref();
-        let registry_state_ref = registry.state_ref.clone();
-        let registry_state_fingerprint = registry.state_fingerprint.clone();
-        let registry_head_ref = registry.head_transition_ref.clone();
-        let registry_head_fingerprint = registry.head_transition_fingerprint.clone();
-        let current_charter = current
-            .as_ref()
-            .map(|_| charter_for_current(&current, &decisions))
-            .transpose()?;
-        let required_pairs =
-            required_approval_pairs_for_authority(&registry.state, current_charter.as_ref())?;
-        ensure_registry_pair_coverage(&registry.credentials, &required_pairs)?;
-        let ordered_approval_refs = self.validate_approvals(
-            &intent.candidate_ref,
-            &committed_approval_refs,
-            &candidate,
-            &candidate_fingerprint,
-            &required_pairs,
-            &registry_state_ref,
-            &registry_state_fingerprint,
-            &registry_head_ref,
-            &registry_head_fingerprint,
-        )?;
-        let lifecycle_policy = definitions
-            .record(&ExactDefinitionRef::parse(CHARTER_LIFECYCLE_POLICY_REF).expect("fixed ref"))
-            .ok_or_else(|| definition_drift("lifecycle policy is absent"))?;
-        let (prior_state, prior_state_fingerprint) = match (&current, lifecycle) {
-            (None, None) => {
-                let initial = charter_lifecycle_state_fingerprint(
-                    CHARTER_LIFECYCLE_POLICY_REF,
-                    lifecycle_policy.definition_fingerprint().as_str(),
-                    TARGET_INSTANCE_ID,
-                    &canonical_fingerprint,
-                    CharterLifecycleState::Current,
-                    &[],
+            let definitions = load_shipped_charter_definition_registry().map_err(|_| {
+                definition_drift("shipped Charter definition closure could not be reloaded")
+            })?;
+            definitions
+                .validate_selected_decisions(&decisions)
+                .map_err(|_| {
+                    definition_drift("selected decisions do not retain the Charter closure")
+                })?;
+
+            let candidate_fingerprint = fingerprint_from_ref(&intent.candidate_ref)
+                .ok_or_else(|| candidate_refused("candidate ref is not content-addressed"))?;
+            let candidate = self
+                .lineage
+                .read_record_by_ref(
+                    LineageRecordClassV1::Candidate,
+                    &intent.candidate_ref,
+                    Some(&candidate_fingerprint),
                 )
-                .map_err(map_lifecycle)?;
-                (CharterLifecycleState::Current, initial)
-            }
-            (Some(current), Some(lifecycle))
-                if lifecycle.canonical_fingerprint == current.canonical_fingerprint =>
+                .map_err(map_lineage_candidate)?;
+            validate_candidate_contract(&candidate, &decisions, &definitions)?;
+            let content_ref = string_field(&candidate, "normalized_content_ref")
+                .map_err(map_lineage_candidate)?;
+            let canonical_bytes = self
+                .lineage
+                .read_candidate_content(content_ref)
+                .map_err(map_lineage_candidate)?;
+            let charter = parse_canonical_charter(&decisions, &canonical_bytes).map_err(|_| {
+                candidate_refused("candidate content is not a valid canonical Charter")
+            })?;
+            if serialize_canonical_charter(&decisions, &charter)
+                .map_err(|_| candidate_refused("candidate Charter serialization failed"))?
+                != canonical_bytes
             {
-                self.validate_lifecycle_clearance(
-                    lifecycle,
-                    &candidate,
-                    &canonical_fingerprint,
-                    &current.canonical_fingerprint,
-                )?;
-                (lifecycle.state, lifecycle.state_fingerprint.clone())
+                return Err(candidate_refused(
+                    "candidate content is not exact deterministic canonical YAML",
+                ));
             }
-            (None, Some(_)) | (Some(_), None) | (Some(_), Some(_)) => {
+            let canonical_fingerprint =
+                DefinitionFingerprint::from_bytes(&canonical_bytes).to_string();
+            let current = retained_transaction
+                .read_committed_charter()
+                .map_err(map_transaction)?;
+            validate_basis(
+                &candidate,
+                intent.expected_current_fingerprint.as_deref(),
+                current
+                    .as_ref()
+                    .map(|authority| authority.canonical_fingerprint.as_str()),
+            )?;
+            if current
+                .as_ref()
+                .is_some_and(|authority| authority.canonical_fingerprint == canonical_fingerprint)
+            {
+                return Err(candidate_refused(
+                    "an amendment must change the committed canonical Charter bytes",
+                ));
+            }
+
+            let retained_lifecycle = self
+                .lifecycle
+                .observe_retained_locked()
+                .map_err(map_lifecycle)?;
+            if retained_lifecycle.canonical_bytes.as_deref()
+                != current
+                    .as_ref()
+                    .map(|authority| authority.canonical_bytes.as_slice())
+            {
                 return Err(workflow_error(
                     CharterPromotionWorkflowErrorKindV1::LifecycleClearanceIncomplete,
-                    "canonical and lifecycle authority observations are inconsistent",
-                ))
+                    "canonical basis and lifecycle retained bytes disagree",
+                ));
             }
-        };
-        let result_state_fingerprint = charter_lifecycle_state_fingerprint(
-            CHARTER_LIFECYCLE_POLICY_REF,
-            lifecycle_policy.definition_fingerprint().as_str(),
-            TARGET_INSTANCE_ID,
-            &canonical_fingerprint,
-            CharterLifecycleState::Current,
-            &[],
-        )
-        .map_err(map_lifecycle)?;
-        let resolved_definitions =
-            resolved_definition_bindings(&candidate, &decisions, &definitions)?;
-        let validation_result_refs = vec![retained_validation.relative_ref.clone()];
-        let authorized_by_ref = required_pairs
-            .first()
-            .expect("required pairs are non-empty")
-            .authority_ref
-            .clone();
-        let mut promotion = json!({
-            "schema_id": "handbook.artifact-promotion-record",
-            "schema_version": "1.1",
-            "candidate_ref": intent.candidate_ref,
-            "candidate_fingerprint": candidate_fingerprint,
-            "target_instance_id": TARGET_INSTANCE_ID,
-            "basis_artifact_fingerprint": intent.expected_current_fingerprint,
-            "expected_current_artifact_fingerprint": intent.expected_current_fingerprint,
-            "profile_ref": SELECTED_PROFILE_REF,
-            "resolved_profile_fingerprint": SELECTED_PROFILE_FINGERPRINT,
-            "resolved_definitions": resolved_definitions,
-            "approval_refs": ordered_approval_refs,
-            "validation_result_refs": validation_result_refs,
-            "decision": "approved",
-            "authorized_by_ref": authorized_by_ref,
-            "canonical_artifact_ref": CANONICAL_REF,
-            "canonical_artifact_fingerprint": canonical_fingerprint,
-            "approver_registry_state_ref": registry_state_ref,
-            "approver_registry_state_fingerprint": registry_state_fingerprint,
-            "registry_head_transition_ref": registry_head_ref,
-            "registry_head_transition_fingerprint": registry_head_fingerprint,
-        });
-        promotion = finalize_content_addressed_record(
-            promotion,
-            "promotion_id",
-            "promotion_fingerprint",
-            "promotion",
-            &[],
-        )
-        .map_err(map_lifecycle)?;
-        let promotion_id =
-            string_field(&promotion, "promotion_id").map_err(map_lineage_candidate)?;
-        let promotion_ref = format!("promotions/{promotion_id}.json");
-        let lifecycle_transition = build_transition_record(
-            lifecycle_policy.definition_fingerprint().as_str(),
-            prior_state,
-            &prior_state_fingerprint,
-            CharterLifecycleState::Current,
-            &result_state_fingerprint,
-            vec![],
-            vec![],
-            Some(promotion_ref.clone()),
-            transitioned_at_utc,
-        )
-        .map_err(map_lifecycle)?;
-        let promotion_bytes = serde_json_canonicalizer::to_vec(&promotion)
-            .map_err(|_| candidate_refused("promotion record canonicalization failed"))?;
-        let lifecycle_bytes = serde_json_canonicalizer::to_vec(&lifecycle_transition)
-            .map_err(|_| candidate_refused("lifecycle transition canonicalization failed"))?;
-        let mut retained_records = vec![
-            RetainedAuthorityRecordV1 {
-                label: "lifecycle validation result".to_owned(),
-                relative_ref: retained_validation.relative_ref,
-                bytes: retained_validation.bytes,
-            },
-            RetainedAuthorityRecordV1 {
-                label: "registry state".to_owned(),
-                relative_ref: registry_state_ref.clone(),
-                bytes: registry.state_bytes.clone(),
-            },
-            RetainedAuthorityRecordV1 {
-                label: "registry head".to_owned(),
-                relative_ref: registry_head_ref.clone(),
-                bytes: registry.head_transition_bytes.clone(),
-            },
-        ];
-        for approval_ref in &ordered_approval_refs {
-            let approval_fingerprint = fingerprint_from_ref(approval_ref)
-                .ok_or_else(|| approval_refused("approval ref is not content-addressed"))?;
-            retained_records.push(RetainedAuthorityRecordV1 {
-                label: format!("approval {approval_ref}"),
-                relative_ref: approval_ref.clone(),
-                bytes: self
-                    .lineage
-                    .read_record(
-                        LineageRecordClassV1::Approval,
-                        approval_ref,
-                        &approval_fingerprint,
-                    )
-                    .map_err(map_lineage_approval)?,
-            });
-        }
-        retained_records.extend(retained_lifecycle.records.into_iter().map(|record| {
-            RetainedAuthorityRecordV1 {
-                label: format!("lifecycle authority {}", record.relative_ref),
-                relative_ref: record.relative_ref,
-                bytes: record.bytes,
-            }
-        }));
-        let retained = RetainedPromotionAuthorityV1 {
-            canonical_basis_bytes: current
-                .as_ref()
-                .map(|authority| authority.canonical_bytes.clone()),
-            records: retained_records,
-        };
-        let transaction = retained_transaction
-            .promote_retained(
-                CharterPromotionRequestV1 {
-                    canonical_bytes,
-                    promotion_record_bytes: promotion_bytes,
-                    lifecycle_transition_bytes: lifecycle_bytes,
-                },
-                &retained,
+            let retained_validation = CharterLifecycleValidationServiceV1::new(&self.repo_root)
+                .validate_current_retained(
+                    &decisions,
+                    &candidate,
+                    &canonical_bytes,
+                    current.as_ref(),
+                    &retained_lifecycle,
+                )
+                .map_err(|failure| {
+                    let causal_disposition = failure.causal_disposition();
+                    let public_effects = failure.public_effects().to_vec();
+                    candidate_refused(failure.detail())
+                        .with_owner_facts(causal_disposition, public_effects)
+                })?;
+
+            let committed_approval_refs = observe_committed_candidate_approval_refs_locked(
+                &self.repo_root,
+                &intent.candidate_ref,
+                &candidate_fingerprint,
+                Some(&intent.approval_ref),
             )
-            .map_err(map_transaction)?;
-        Ok(CharterPromotionWorkflowCommitV1 {
-            canonical_fingerprint,
-            promotion_ref: promotion_ref.clone(),
-            lifecycle_transition_ref: transaction.lifecycle_transition_ref.clone(),
-            approval_refs: ordered_approval_refs,
-            required_approval_pairs: required_pairs,
-            transaction,
+            .map_err(|failure| {
+                approval_refused(failure.message)
+                    .with_owner_facts(failure.causal_disposition, failure.public_effects)
+            })?;
+
+            let registry =
+                observe_committed_approver_registry_locked(&self.repo_root).map_err(|failure| {
+                    workflow_error(
+                        CharterPromotionWorkflowErrorKindV1::RegistryRefused,
+                        failure.detail(),
+                    )
+                    .with_owner_facts(failure.causal_disposition(), Vec::new())
+                })?;
+            let lifecycle = retained_lifecycle.authority.as_ref();
+            let registry_state_ref = registry.state_ref.clone();
+            let registry_state_fingerprint = registry.state_fingerprint.clone();
+            let registry_head_ref = registry.head_transition_ref.clone();
+            let registry_head_fingerprint = registry.head_transition_fingerprint.clone();
+            let current_charter = current
+                .as_ref()
+                .map(|_| charter_for_current(&current, &decisions))
+                .transpose()?;
+            let required_pairs =
+                required_approval_pairs_for_authority(&registry.state, current_charter.as_ref())?;
+            ensure_registry_pair_coverage(&registry.credentials, &required_pairs)?;
+            let ordered_approval_refs = self.validate_approvals(
+                &intent.candidate_ref,
+                &committed_approval_refs,
+                &candidate,
+                &candidate_fingerprint,
+                &required_pairs,
+                &registry_state_ref,
+                &registry_state_fingerprint,
+                &registry_head_ref,
+                &registry_head_fingerprint,
+            )?;
+            let lifecycle_policy = definitions
+                .record(
+                    &ExactDefinitionRef::parse(CHARTER_LIFECYCLE_POLICY_REF).expect("fixed ref"),
+                )
+                .ok_or_else(|| definition_drift("lifecycle policy is absent"))?;
+            let (prior_state, prior_state_fingerprint) = match (&current, lifecycle) {
+                (None, None) => {
+                    let initial = charter_lifecycle_state_fingerprint(
+                        CHARTER_LIFECYCLE_POLICY_REF,
+                        lifecycle_policy.definition_fingerprint().as_str(),
+                        TARGET_INSTANCE_ID,
+                        &canonical_fingerprint,
+                        CharterLifecycleState::Current,
+                        &[],
+                    )
+                    .map_err(map_lifecycle)?;
+                    (CharterLifecycleState::Current, initial)
+                }
+                (Some(current), Some(lifecycle))
+                    if lifecycle.canonical_fingerprint == current.canonical_fingerprint =>
+                {
+                    self.validate_lifecycle_clearance(
+                        lifecycle,
+                        &candidate,
+                        &canonical_fingerprint,
+                        &current.canonical_fingerprint,
+                    )?;
+                    (lifecycle.state, lifecycle.state_fingerprint.clone())
+                }
+                (None, Some(_)) | (Some(_), None) | (Some(_), Some(_)) => {
+                    return Err(workflow_error(
+                        CharterPromotionWorkflowErrorKindV1::LifecycleClearanceIncomplete,
+                        "canonical and lifecycle authority observations are inconsistent",
+                    ))
+                }
+            };
+            let result_state_fingerprint = charter_lifecycle_state_fingerprint(
+                CHARTER_LIFECYCLE_POLICY_REF,
+                lifecycle_policy.definition_fingerprint().as_str(),
+                TARGET_INSTANCE_ID,
+                &canonical_fingerprint,
+                CharterLifecycleState::Current,
+                &[],
+            )
+            .map_err(map_lifecycle)?;
+            let resolved_definitions =
+                resolved_definition_bindings(&candidate, &decisions, &definitions)?;
+            let validation_result_refs = vec![retained_validation.relative_ref.clone()];
+            let authorized_by_ref = required_pairs
+                .first()
+                .expect("required pairs are non-empty")
+                .authority_ref
+                .clone();
+            let mut promotion = json!({
+                "schema_id": "handbook.artifact-promotion-record",
+                "schema_version": "1.1",
+                "candidate_ref": intent.candidate_ref,
+                "candidate_fingerprint": candidate_fingerprint,
+                "target_instance_id": TARGET_INSTANCE_ID,
+                "basis_artifact_fingerprint": intent.expected_current_fingerprint,
+                "expected_current_artifact_fingerprint": intent.expected_current_fingerprint,
+                "profile_ref": SELECTED_PROFILE_REF,
+                "resolved_profile_fingerprint": SELECTED_PROFILE_FINGERPRINT,
+                "resolved_definitions": resolved_definitions,
+                "approval_refs": ordered_approval_refs,
+                "validation_result_refs": validation_result_refs,
+                "decision": "approved",
+                "authorized_by_ref": authorized_by_ref,
+                "canonical_artifact_ref": CANONICAL_REF,
+                "canonical_artifact_fingerprint": canonical_fingerprint,
+                "approver_registry_state_ref": registry_state_ref,
+                "approver_registry_state_fingerprint": registry_state_fingerprint,
+                "registry_head_transition_ref": registry_head_ref,
+                "registry_head_transition_fingerprint": registry_head_fingerprint,
+            });
+            promotion = finalize_content_addressed_record(
+                promotion,
+                "promotion_id",
+                "promotion_fingerprint",
+                "promotion",
+                &[],
+            )
+            .map_err(map_lifecycle)?;
+            let promotion_id =
+                string_field(&promotion, "promotion_id").map_err(map_lineage_candidate)?;
+            let promotion_ref = format!("promotions/{promotion_id}.json");
+            let lifecycle_transition = build_transition_record(
+                lifecycle_policy.definition_fingerprint().as_str(),
+                prior_state,
+                &prior_state_fingerprint,
+                CharterLifecycleState::Current,
+                &result_state_fingerprint,
+                vec![],
+                vec![],
+                Some(promotion_ref.clone()),
+                transitioned_at_utc,
+            )
+            .map_err(map_lifecycle)?;
+            let promotion_bytes = serde_json_canonicalizer::to_vec(&promotion)
+                .map_err(|_| candidate_refused("promotion record canonicalization failed"))?;
+            let lifecycle_bytes = serde_json_canonicalizer::to_vec(&lifecycle_transition)
+                .map_err(|_| candidate_refused("lifecycle transition canonicalization failed"))?;
+            let mut retained_records = vec![
+                RetainedAuthorityRecordV1 {
+                    label: "lifecycle validation result".to_owned(),
+                    relative_ref: retained_validation.relative_ref,
+                    bytes: retained_validation.bytes,
+                },
+                RetainedAuthorityRecordV1 {
+                    label: "registry state".to_owned(),
+                    relative_ref: registry_state_ref.clone(),
+                    bytes: registry.state_bytes.clone(),
+                },
+                RetainedAuthorityRecordV1 {
+                    label: "registry head".to_owned(),
+                    relative_ref: registry_head_ref.clone(),
+                    bytes: registry.head_transition_bytes.clone(),
+                },
+            ];
+            for approval_ref in &ordered_approval_refs {
+                let approval_fingerprint = fingerprint_from_ref(approval_ref)
+                    .ok_or_else(|| approval_refused("approval ref is not content-addressed"))?;
+                retained_records.push(RetainedAuthorityRecordV1 {
+                    label: format!("approval {approval_ref}"),
+                    relative_ref: approval_ref.clone(),
+                    bytes: self
+                        .lineage
+                        .read_record(
+                            LineageRecordClassV1::Approval,
+                            approval_ref,
+                            &approval_fingerprint,
+                        )
+                        .map_err(map_lineage_approval)?,
+                });
+            }
+            retained_records.extend(retained_lifecycle.records.into_iter().map(|record| {
+                RetainedAuthorityRecordV1 {
+                    label: format!("lifecycle authority {}", record.relative_ref),
+                    relative_ref: record.relative_ref,
+                    bytes: record.bytes,
+                }
+            }));
+            let retained = RetainedPromotionAuthorityV1 {
+                canonical_basis_bytes: current
+                    .as_ref()
+                    .map(|authority| authority.canonical_bytes.clone()),
+                records: retained_records,
+            };
+            let transaction = retained_transaction
+                .promote_retained(
+                    CharterPromotionRequestV1 {
+                        canonical_bytes,
+                        promotion_record_bytes: promotion_bytes,
+                        lifecycle_transition_bytes: lifecycle_bytes,
+                    },
+                    &retained,
+                )
+                .map_err(map_transaction)?;
+            Ok(CharterPromotionWorkflowCommitV1 {
+                canonical_fingerprint,
+                promotion_ref: promotion_ref.clone(),
+                lifecycle_transition_ref: transaction.lifecycle_transition_ref.clone(),
+                approval_refs: ordered_approval_refs,
+                required_approval_pairs: required_pairs,
+                transaction,
+            })
+        })();
+        outcome.map_err(|failure: CharterPromotionWorkflowErrorV1| {
+            failure.with_preceding_public_effects(&recovery_public_effects)
         })
     }
 

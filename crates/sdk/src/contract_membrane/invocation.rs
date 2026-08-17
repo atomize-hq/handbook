@@ -7,6 +7,10 @@ use super::{
     OperationSchemaValidator, Problem, ProblemCategory, RecheckCondition, RetryDirective, SafeU64,
     TerminalFields, TerminalStatus, WriteReceipt,
 };
+use crate::charter_product::{
+    AdapterCausalDisposition, AdapterPublicEffect, AdapterPublicEffectDisposition,
+    ApproverAdminLegacyFields,
+};
 use crate::pipeline_route_api::{
     PipelineResolveOutcome, PipelineResolvedStageView, PipelineRouteRunView,
     PipelineRouteStageReason, PipelineRouteStageStatus, PipelineRouteStateView,
@@ -14,18 +18,20 @@ use crate::pipeline_route_api::{
 use crate::setup::{SetupExecutionEffects, SetupExecutionResult};
 use crate::{
     ApproverOperation, ApproverOperationProjection, ApproverOperationResult, ArtifactApplicability,
-    ArtifactInspectionReason, ArtifactInspectionStatus, AuthorOperationStatus,
+    ArtifactInspectionReason, ArtifactInspectionStatus, AuthorOperationRefusal,
+    AuthorOperationStatus, AuthorProjectContextRefusal, AuthorProjectContextRefusalKind,
     AuthorProjectContextResult, CharterOperation, CharterOperationResult,
     DoctorCharterDefinitionClosureStatus, DoctorCharterDefinitionRow, DoctorCharterLifecycleState,
     DoctorCharterNextAction, DoctorCharterRow, DoctorError, DoctorErrorKind, DoctorErrorReasonCode,
     DoctorProjectContextRow, DoctorReport, ProfileArtifactRow, ProfileCapabilityRow,
     ProfileConditionOutcome, ProfileConditionReason, ProfileConditionRow, ProfileRequirednessMode,
-    RepositoryReadinessStatus, SetupArtifactAction, SetupArtifactActionKind, SetupError,
-    SetupErrorCode, SetupErrorKind, SetupErrorReasonCode, SetupMode, SetupOutcome, SetupPlan,
-    SetupRootAction,
+    ProjectContextCommandOutcome, RepositoryInvocationFailureView, RepositoryReadinessStatus,
+    SetupArtifactAction, SetupArtifactActionKind, SetupError, SetupErrorCode, SetupErrorKind,
+    SetupErrorReasonCode, SetupMode, SetupOutcome, SetupPlan, SetupRootAction,
 };
 use serde::de::Error as _;
 use serde::{Deserialize, Deserializer, Serialize};
+use std::io;
 
 const INVOCATION_RESPONSE_REF: &str = "handbook.invocation-response@1.0.0";
 const USE_CASE_RESPONSE_REF: &str = "handbook.use-case-response@1.0.0";
@@ -41,6 +47,16 @@ const SETUP_IDENTITY_RECORD_REF: &str =
 const DOCTOR_USE_CASE_REF: &str = "handbook.use-case.repository-doctor@1.0.0";
 const DOCTOR_RESULT_REF: &str = "handbook.use-case.repository-doctor-result@1.0.0";
 const DOCTOR_DETAILS_REF: &str = "handbook.use-case.repository-doctor-details@1.0.0";
+const AUTHOR_CHARTER_DETAILS_REF: &str = "handbook.use-case.author-charter-details@1.0.0";
+const AUTHOR_PROJECT_CONTEXT_DETAILS_REF: &str =
+    "handbook.use-case.author-project-context-details@1.0.0";
+const APPROVER_ADMINISTRATION_DETAILS_REF: &str =
+    "handbook.use-case.approver-administration-details@1.0.0";
+const AUTHOR_CHARTER_EFFECT_REF: &str = "handbook.use-case.author-charter-effect@1.0.0";
+const AUTHOR_PROJECT_CONTEXT_EFFECT_REF: &str =
+    "handbook.use-case.author-project-context-effect@1.0.0";
+const APPROVER_ADMINISTRATION_EFFECT_REF: &str =
+    "handbook.use-case.approver-administration-effect@1.0.0";
 const TRANSPORT_DETAILS_REF: &str = "handbook.transport-failure-details@1.0.0";
 
 fn binding(reference: &str) -> Result<ExactBinding, ContractError> {
@@ -53,6 +69,9 @@ fn binding(reference: &str) -> Result<ExactBinding, ContractError> {
             | SETUP_DETAILS_REF
             | DOCTOR_RESULT_REF
             | DOCTOR_DETAILS_REF
+            | AUTHOR_CHARTER_DETAILS_REF
+            | AUTHOR_PROJECT_CONTEXT_DETAILS_REF
+            | APPROVER_ADMINISTRATION_DETAILS_REF
             | TRANSPORT_DETAILS_REF
             | "handbook.use-case.author-charter-result@1.0.0"
             | "handbook.use-case.author-project-context-result@1.0.0"
@@ -1253,11 +1272,287 @@ impl AuthorCharterResultV1 {
             next_actions: bounded_vec(&result.next_actions)?,
         })
     }
+
+    fn to_result(&self) -> CharterOperationResult {
+        CharterOperationResult {
+            schema_id: "handbook.charter-operation-result".to_owned(),
+            schema_version: "1.0".to_owned(),
+            operation: self.operation.into(),
+            status: AuthorOperationStatus::Succeeded,
+            canonical_path: optional_string(&self.canonical_path),
+            source_fingerprint: optional_fingerprint(&self.source_fingerprint),
+            rendered_output_fingerprint: optional_fingerprint(&self.rendered_output_fingerprint),
+            intake_ref: optional_reference(&self.intake),
+            intake_fingerprint: optional_reference_fingerprint_value(&self.intake),
+            candidate_ref: optional_reference(&self.candidate),
+            candidate_fingerprint: optional_reference_fingerprint_value(&self.candidate),
+            approval_ref: optional_reference(&self.approval),
+            approval_fingerprint: optional_reference_fingerprint_value(&self.approval),
+            promotion_ref: optional_reference(&self.promotion),
+            promotion_fingerprint: optional_reference_fingerprint_value(&self.promotion),
+            changed_paths: bounded_strings(&self.changed_paths),
+            refusal: None,
+            next_actions: bounded_strings(&self.next_actions),
+            invocation_failure: None,
+            causal_disposition: Some(
+                crate::charter_product::AdapterCausalDisposition::CallerRefusal,
+            ),
+            public_effects: Vec::new(),
+        }
+    }
 }
 
 map_enum!(CharterOperation => AuthorCharterOperationV1 {
     Author, Approve, Promote, Validate
 });
+
+impl From<AuthorCharterOperationV1> for CharterOperation {
+    fn from(value: AuthorCharterOperationV1) -> Self {
+        match value {
+            AuthorCharterOperationV1::Author => Self::Author,
+            AuthorCharterOperationV1::Approve => Self::Approve,
+            AuthorCharterOperationV1::Promote => Self::Promote,
+            AuthorCharterOperationV1::Validate => Self::Validate,
+        }
+    }
+}
+
+closed_enum!(UseCaseCauseV1 {
+    Prerequisite,
+    CallerRefusal,
+    ImplementationFailure,
+});
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+struct AuthorOperationRefusalV1 {
+    code: BoundedString<255>,
+    message: BoundedString<4096>,
+    retryable: bool,
+}
+
+impl AuthorOperationRefusalV1 {
+    fn from_refusal(refusal: &AuthorOperationRefusal) -> Result<Self, ContractError> {
+        Ok(Self {
+            code: bounded(&refusal.code)?,
+            message: bounded(&refusal.message)?,
+            retryable: refusal.retryable,
+        })
+    }
+
+    fn to_refusal(&self) -> AuthorOperationRefusal {
+        AuthorOperationRefusal {
+            code: self.code.as_str().to_owned(),
+            message: self.message.as_str().to_owned(),
+            retryable: self.retryable,
+        }
+    }
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+struct RepositoryInvocationFailureDetailsV1 {
+    schema_id: BoundedString<255>,
+    schema_version: BoundedString<255>,
+    operation: BoundedString<255>,
+    stage: Option<BoundedString<255>>,
+    status: BoundedString<255>,
+    repository_identity_fingerprint: Option<Fingerprint>,
+    operation_id: Option<BoundedString<255>>,
+    changed_paths: BoundedVec<BoundedString<4096>, 128>,
+    refusal: AuthorOperationRefusalV1,
+    next_actions: BoundedVec<BoundedString<1024>, 128>,
+}
+
+impl RepositoryInvocationFailureDetailsV1 {
+    fn from_view(view: &RepositoryInvocationFailureView) -> Result<Self, ContractError> {
+        let details = Self {
+            schema_id: bounded(&view.schema_id)?,
+            schema_version: bounded(&view.schema_version)?,
+            operation: bounded(&view.operation)?,
+            stage: optional_bounded(view.stage.as_deref())?,
+            status: bounded(&view.status)?,
+            repository_identity_fingerprint: view
+                .repository_identity_fingerprint
+                .as_deref()
+                .map(Fingerprint::parse)
+                .transpose()?,
+            operation_id: optional_bounded(view.operation_id.as_deref())?,
+            changed_paths: bounded_vec(&view.changed_paths)?,
+            refusal: AuthorOperationRefusalV1::from_refusal(&view.refusal)?,
+            next_actions: bounded_vec(&view.next_actions)?,
+        };
+        if details
+            .exact_preflight_cause()
+            .is_some_and(|cause| cause != view.causal_disposition)
+        {
+            return Err(ContractError::InvalidInvariant);
+        }
+        Ok(details)
+    }
+
+    fn to_view(
+        &self,
+        causal_disposition: AdapterCausalDisposition,
+    ) -> RepositoryInvocationFailureView {
+        RepositoryInvocationFailureView {
+            schema_id: self.schema_id.as_str().to_owned(),
+            schema_version: self.schema_version.as_str().to_owned(),
+            operation: self.operation.as_str().to_owned(),
+            stage: self.stage.as_ref().map(|value| value.as_str().to_owned()),
+            status: self.status.as_str().to_owned(),
+            repository_identity_fingerprint: self
+                .repository_identity_fingerprint
+                .as_ref()
+                .map(|value| value.as_str().to_owned()),
+            operation_id: self
+                .operation_id
+                .as_ref()
+                .map(|value| value.as_str().to_owned()),
+            changed_paths: bounded_strings(&self.changed_paths),
+            refusal: self.refusal.to_refusal(),
+            next_actions: bounded_strings(&self.next_actions),
+            causal_disposition,
+        }
+    }
+
+    fn exact_preflight_cause(&self) -> Option<AdapterCausalDisposition> {
+        match (
+            self.schema_id.as_str(),
+            self.stage.as_ref().map(BoundedString::as_str),
+        ) {
+            ("handbook.repository-invocation-preflight-result", Some("repository_identity")) => {
+                None
+            }
+            ("handbook.repository-invocation-preflight-result", Some("operation_id")) => {
+                Some(AdapterCausalDisposition::ImplementationFailure)
+            }
+            _ => None,
+        }
+    }
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct AuthorCharterDetailsV1 {
+    cause: UseCaseCauseV1,
+    operation: AuthorCharterOperationV1,
+    canonical_path: Option<BoundedString<4096>>,
+    source_fingerprint: Option<Fingerprint>,
+    rendered_output_fingerprint: Option<Fingerprint>,
+    intake: Option<ReferenceFingerprintV1>,
+    candidate: Option<ReferenceFingerprintV1>,
+    approval: Option<ReferenceFingerprintV1>,
+    promotion: Option<ReferenceFingerprintV1>,
+    changed_paths: BoundedVec<BoundedString<4096>, 128>,
+    refusal: AuthorOperationRefusalV1,
+    next_actions: BoundedVec<BoundedString<1024>, 128>,
+}
+
+impl AuthorCharterDetailsV1 {
+    fn from_result(result: &CharterOperationResult) -> Result<Self, ContractError> {
+        if result.status != AuthorOperationStatus::Refused || result.invocation_failure.is_some() {
+            return Err(ContractError::InvalidInvariant);
+        }
+        let refusal = result
+            .refusal
+            .as_ref()
+            .ok_or(ContractError::InvalidInvariant)?;
+        Ok(Self {
+            cause: result
+                .causal_disposition
+                .map(adapter_cause)
+                .ok_or(ContractError::InvalidInvariant)?,
+            operation: result.operation.into(),
+            canonical_path: optional_bounded(result.canonical_path.as_deref())?,
+            source_fingerprint: result
+                .source_fingerprint
+                .as_deref()
+                .map(Fingerprint::parse)
+                .transpose()?,
+            rendered_output_fingerprint: result
+                .rendered_output_fingerprint
+                .as_deref()
+                .map(Fingerprint::parse)
+                .transpose()?,
+            intake: optional_reference_fingerprint(
+                result.intake_ref.as_deref(),
+                result.intake_fingerprint.as_deref(),
+            )?,
+            candidate: optional_reference_fingerprint(
+                result.candidate_ref.as_deref(),
+                result.candidate_fingerprint.as_deref(),
+            )?,
+            approval: optional_reference_fingerprint(
+                result.approval_ref.as_deref(),
+                result.approval_fingerprint.as_deref(),
+            )?,
+            promotion: optional_reference_fingerprint(
+                result.promotion_ref.as_deref(),
+                result.promotion_fingerprint.as_deref(),
+            )?,
+            changed_paths: bounded_vec(&result.changed_paths)?,
+            refusal: AuthorOperationRefusalV1::from_refusal(refusal)?,
+            next_actions: bounded_vec(&result.next_actions)?,
+        })
+    }
+
+    fn to_result(&self) -> CharterOperationResult {
+        CharterOperationResult {
+            schema_id: "handbook.charter-operation-result".to_owned(),
+            schema_version: "1.0".to_owned(),
+            operation: self.operation.into(),
+            status: AuthorOperationStatus::Refused,
+            canonical_path: optional_string(&self.canonical_path),
+            source_fingerprint: optional_fingerprint(&self.source_fingerprint),
+            rendered_output_fingerprint: optional_fingerprint(&self.rendered_output_fingerprint),
+            intake_ref: optional_reference(&self.intake),
+            intake_fingerprint: optional_reference_fingerprint_value(&self.intake),
+            candidate_ref: optional_reference(&self.candidate),
+            candidate_fingerprint: optional_reference_fingerprint_value(&self.candidate),
+            approval_ref: optional_reference(&self.approval),
+            approval_fingerprint: optional_reference_fingerprint_value(&self.approval),
+            promotion_ref: optional_reference(&self.promotion),
+            promotion_fingerprint: optional_reference_fingerprint_value(&self.promotion),
+            changed_paths: bounded_strings(&self.changed_paths),
+            refusal: Some(self.refusal.to_refusal()),
+            next_actions: bounded_strings(&self.next_actions),
+            invocation_failure: None,
+            causal_disposition: Some(adapter_cause_from_use_case(self.cause)),
+            public_effects: Vec::new(),
+        }
+    }
+}
+
+fn bounded_strings<const N: usize, const M: usize>(
+    values: &BoundedVec<BoundedString<N>, M>,
+) -> Vec<String> {
+    values
+        .as_slice()
+        .iter()
+        .map(|value| value.as_str().to_owned())
+        .collect()
+}
+
+fn optional_string<const N: usize>(value: &Option<BoundedString<N>>) -> Option<String> {
+    value.as_ref().map(|value| value.as_str().to_owned())
+}
+
+fn optional_fingerprint(value: &Option<Fingerprint>) -> Option<String> {
+    value.as_ref().map(|value| value.as_str().to_owned())
+}
+
+fn optional_reference(value: &Option<ReferenceFingerprintV1>) -> Option<String> {
+    value
+        .as_ref()
+        .map(|value| value.reference.as_str().to_owned())
+}
+
+fn optional_reference_fingerprint_value(value: &Option<ReferenceFingerprintV1>) -> Option<String> {
+    value
+        .as_ref()
+        .map(|value| value.fingerprint.as_str().to_owned())
+}
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(tag = "result_kind", rename_all = "snake_case", deny_unknown_fields)]
@@ -1301,6 +1596,252 @@ impl AuthorProjectContextResultV1 {
             input_mode: bounded(input_mode)?,
             input_source: bounded(input_source)?,
         })
+    }
+
+    fn to_outcome(&self) -> ProjectContextCommandOutcome {
+        match self {
+            Self::Author {
+                input_mode,
+                input_source,
+                canonical_path,
+                bytes_written,
+                source_fingerprint,
+                rendered_output_fingerprint,
+                rendered_media_type,
+            } => ProjectContextCommandOutcome::Author {
+                input_mode: input_mode.as_str().to_owned(),
+                input_source: input_source.as_str().to_owned(),
+                result: Ok(AuthorProjectContextResult {
+                    canonical_repo_relative_path: canonical_path.as_str().to_owned(),
+                    bytes_written: usize::try_from(bytes_written.get()).unwrap_or(usize::MAX),
+                    source_fingerprint: source_fingerprint.as_str().to_owned(),
+                    rendered_output_fingerprint: rendered_output_fingerprint.as_str().to_owned(),
+                    rendered_media_type: match rendered_media_type.as_str() {
+                        "text/markdown" => "text/markdown",
+                        _ => "application/octet-stream",
+                    },
+                    public_effects: Vec::new(),
+                }),
+            },
+            Self::Validate {
+                input_mode,
+                input_source,
+            } => ProjectContextCommandOutcome::Validate {
+                input_mode: input_mode.as_str().to_owned(),
+                input_source: input_source.as_str().to_owned(),
+                result: Ok(()),
+            },
+        }
+    }
+}
+
+closed_enum!(AuthorProjectContextOperationV1 { Author, Validate });
+closed_enum!(Packet3EffectDispositionV1 {
+    CreatedIncomplete,
+    InstalledDurabilityUnconfirmed,
+    DurableCreated,
+});
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+struct Packet3EffectConditionV1 {
+    target_ref: BoundedString<4096>,
+    content_fingerprint: Option<Fingerprint>,
+    disposition: Packet3EffectDispositionV1,
+}
+closed_enum!(AuthorProjectContextRefusalKindV1 {
+    InvalidRequest,
+    MissingSystemRoot,
+    InvalidSystemRoot,
+    ShippedContractUnavailable,
+    SelectedDecisionMissing,
+    SystemRootInspectionFailed,
+    UnsafeSystemRoot,
+    CanonicalInspectionFailed,
+    MalformedStructuredInput,
+    IncompleteStructuredInput,
+    ExistingCanonicalTruth,
+    MutationRefused,
+    MutationSafetyRefused,
+    MutationIoFailed,
+    UnsupportedPlatformStrictMutation,
+});
+
+impl From<AuthorProjectContextRefusalKind> for AuthorProjectContextRefusalKindV1 {
+    fn from(value: AuthorProjectContextRefusalKind) -> Self {
+        match value {
+            AuthorProjectContextRefusalKind::InvalidRequest => Self::InvalidRequest,
+            AuthorProjectContextRefusalKind::MissingSystemRoot => Self::MissingSystemRoot,
+            AuthorProjectContextRefusalKind::InvalidSystemRoot => Self::InvalidSystemRoot,
+            AuthorProjectContextRefusalKind::ShippedContractUnavailable => {
+                Self::ShippedContractUnavailable
+            }
+            AuthorProjectContextRefusalKind::SelectedDecisionMissing => {
+                Self::SelectedDecisionMissing
+            }
+            AuthorProjectContextRefusalKind::SystemRootInspectionFailed => {
+                Self::SystemRootInspectionFailed
+            }
+            AuthorProjectContextRefusalKind::UnsafeSystemRoot => Self::UnsafeSystemRoot,
+            AuthorProjectContextRefusalKind::CanonicalInspectionFailed => {
+                Self::CanonicalInspectionFailed
+            }
+            AuthorProjectContextRefusalKind::MalformedStructuredInput => {
+                Self::MalformedStructuredInput
+            }
+            AuthorProjectContextRefusalKind::IncompleteStructuredInput => {
+                Self::IncompleteStructuredInput
+            }
+            AuthorProjectContextRefusalKind::ExistingCanonicalTruth => Self::ExistingCanonicalTruth,
+            AuthorProjectContextRefusalKind::MutationRefused => Self::MutationRefused,
+            AuthorProjectContextRefusalKind::MutationSafetyRefused => Self::MutationSafetyRefused,
+            AuthorProjectContextRefusalKind::MutationIoFailed => Self::MutationIoFailed,
+            AuthorProjectContextRefusalKind::UnsupportedPlatformStrictMutation => {
+                Self::UnsupportedPlatformStrictMutation
+            }
+        }
+    }
+}
+
+impl From<AuthorProjectContextRefusalKindV1> for AuthorProjectContextRefusalKind {
+    fn from(value: AuthorProjectContextRefusalKindV1) -> Self {
+        match value {
+            AuthorProjectContextRefusalKindV1::InvalidRequest => Self::InvalidRequest,
+            AuthorProjectContextRefusalKindV1::MissingSystemRoot => Self::MissingSystemRoot,
+            AuthorProjectContextRefusalKindV1::InvalidSystemRoot => Self::InvalidSystemRoot,
+            AuthorProjectContextRefusalKindV1::ShippedContractUnavailable => {
+                Self::ShippedContractUnavailable
+            }
+            AuthorProjectContextRefusalKindV1::SelectedDecisionMissing => {
+                Self::SelectedDecisionMissing
+            }
+            AuthorProjectContextRefusalKindV1::SystemRootInspectionFailed => {
+                Self::SystemRootInspectionFailed
+            }
+            AuthorProjectContextRefusalKindV1::UnsafeSystemRoot => Self::UnsafeSystemRoot,
+            AuthorProjectContextRefusalKindV1::CanonicalInspectionFailed => {
+                Self::CanonicalInspectionFailed
+            }
+            AuthorProjectContextRefusalKindV1::MalformedStructuredInput => {
+                Self::MalformedStructuredInput
+            }
+            AuthorProjectContextRefusalKindV1::IncompleteStructuredInput => {
+                Self::IncompleteStructuredInput
+            }
+            AuthorProjectContextRefusalKindV1::ExistingCanonicalTruth => {
+                Self::ExistingCanonicalTruth
+            }
+            AuthorProjectContextRefusalKindV1::MutationRefused => Self::MutationRefused,
+            AuthorProjectContextRefusalKindV1::MutationSafetyRefused => Self::MutationSafetyRefused,
+            AuthorProjectContextRefusalKindV1::MutationIoFailed => Self::MutationIoFailed,
+            AuthorProjectContextRefusalKindV1::UnsupportedPlatformStrictMutation => {
+                Self::UnsupportedPlatformStrictMutation
+            }
+        }
+    }
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct AuthorProjectContextDetailsV1 {
+    cause: UseCaseCauseV1,
+    operation: AuthorProjectContextOperationV1,
+    input_mode: BoundedString<255>,
+    input_source: BoundedString<4096>,
+    refusal_kind: AuthorProjectContextRefusalKindV1,
+    summary: BoundedString<4096>,
+    broken_subject: BoundedString<4096>,
+    next_safe_action: BoundedString<4096>,
+}
+
+impl AuthorProjectContextDetailsV1 {
+    fn from_outcome(outcome: &ProjectContextCommandOutcome) -> Result<Self, ContractError> {
+        let (operation, input_mode, input_source, refusal) = match outcome {
+            ProjectContextCommandOutcome::Author {
+                input_mode,
+                input_source,
+                result: Err(refusal),
+            } => (
+                AuthorProjectContextOperationV1::Author,
+                input_mode,
+                input_source,
+                refusal,
+            ),
+            ProjectContextCommandOutcome::Validate {
+                input_mode,
+                input_source,
+                result: Err(refusal),
+            } => (
+                AuthorProjectContextOperationV1::Validate,
+                input_mode,
+                input_source,
+                refusal,
+            ),
+            _ => return Err(ContractError::InvalidInvariant),
+        };
+        Ok(Self {
+            cause: adapter_cause(refusal.causal_disposition),
+            operation,
+            input_mode: bounded(input_mode)?,
+            input_source: bounded(input_source)?,
+            refusal_kind: refusal.kind.into(),
+            summary: bounded(&refusal.summary)?,
+            broken_subject: bounded(&refusal.broken_subject)?,
+            next_safe_action: bounded(&refusal.next_safe_action)?,
+        })
+    }
+
+    fn to_outcome(&self) -> ProjectContextCommandOutcome {
+        let refusal = AuthorProjectContextRefusal {
+            kind: self.refusal_kind.into(),
+            summary: self.summary.as_str().to_owned(),
+            broken_subject: self.broken_subject.as_str().to_owned(),
+            next_safe_action: self.next_safe_action.as_str().to_owned(),
+            causal_disposition: adapter_cause_from_use_case(self.cause),
+            public_effects: Vec::new(),
+        };
+        match self.operation {
+            AuthorProjectContextOperationV1::Author => ProjectContextCommandOutcome::Author {
+                input_mode: self.input_mode.as_str().to_owned(),
+                input_source: self.input_source.as_str().to_owned(),
+                result: Err(refusal),
+            },
+            AuthorProjectContextOperationV1::Validate => ProjectContextCommandOutcome::Validate {
+                input_mode: self.input_mode.as_str().to_owned(),
+                input_source: self.input_source.as_str().to_owned(),
+                result: Err(refusal),
+            },
+        }
+    }
+}
+
+fn adapter_cause(value: crate::charter_product::AdapterCausalDisposition) -> UseCaseCauseV1 {
+    match value {
+        crate::charter_product::AdapterCausalDisposition::Prerequisite => {
+            UseCaseCauseV1::Prerequisite
+        }
+        crate::charter_product::AdapterCausalDisposition::CallerRefusal => {
+            UseCaseCauseV1::CallerRefusal
+        }
+        crate::charter_product::AdapterCausalDisposition::ImplementationFailure => {
+            UseCaseCauseV1::ImplementationFailure
+        }
+    }
+}
+
+fn adapter_cause_from_use_case(
+    value: UseCaseCauseV1,
+) -> crate::charter_product::AdapterCausalDisposition {
+    match value {
+        UseCaseCauseV1::Prerequisite => {
+            crate::charter_product::AdapterCausalDisposition::Prerequisite
+        }
+        UseCaseCauseV1::CallerRefusal => {
+            crate::charter_product::AdapterCausalDisposition::CallerRefusal
+        }
+        UseCaseCauseV1::ImplementationFailure => {
+            crate::charter_product::AdapterCausalDisposition::ImplementationFailure
+        }
     }
 }
 
@@ -1365,11 +1906,261 @@ impl ApproverAdministrationResultV1 {
             next_actions: bounded_vec(&result.next_actions)?,
         })
     }
+
+    fn to_result(&self) -> ApproverOperationResult {
+        let fields = ApproverAdminLegacyFields {
+            operation_id: self.operation_id.as_str().to_owned(),
+            repository_identity_fingerprint: self
+                .repository_identity_fingerprint
+                .as_str()
+                .to_owned(),
+            prior_registry_state_ref: optional_reference(&self.prior_registry_state),
+            prior_registry_state_fingerprint: optional_reference_fingerprint_value(
+                &self.prior_registry_state,
+            ),
+            result_registry_state_ref: optional_reference(&self.result_registry_state),
+            result_registry_state_fingerprint: optional_reference_fingerprint_value(
+                &self.result_registry_state,
+            ),
+            transition_ref: optional_reference(&self.transition),
+            transition_fingerprint: optional_reference_fingerprint_value(&self.transition),
+            registration_ref: optional_reference(&self.registration),
+            registration_fingerprint: optional_reference_fingerprint_value(&self.registration),
+            assertion_ref: optional_reference(&self.assertion),
+            assertion_fingerprint: optional_reference_fingerprint_value(&self.assertion),
+        };
+        ApproverOperationResult {
+            schema_id: "handbook.approver-admin-result".to_owned(),
+            schema_version: "1.0".to_owned(),
+            operation: self.operation.into(),
+            status: AuthorOperationStatus::Succeeded,
+            changed_paths: bounded_strings(&self.changed_paths),
+            refusal: None,
+            next_actions: bounded_strings(&self.next_actions),
+            legacy_projection: Some(ApproverOperationProjection::Admin(fields)),
+            causal_disposition: None,
+            public_effects: Vec::new(),
+        }
+    }
 }
 
 map_enum!(ApproverOperation => ApproverAdministrationOperationV1 {
     Bootstrap, AddCredential, RevokeCredential, UpdateMapping
 });
+
+impl From<ApproverAdministrationOperationV1> for ApproverOperation {
+    fn from(value: ApproverAdministrationOperationV1) -> Self {
+        match value {
+            ApproverAdministrationOperationV1::Bootstrap => Self::Bootstrap,
+            ApproverAdministrationOperationV1::AddCredential => Self::AddCredential,
+            ApproverAdministrationOperationV1::RevokeCredential => Self::RevokeCredential,
+            ApproverAdministrationOperationV1::UpdateMapping => Self::UpdateMapping,
+        }
+    }
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+struct ApproverAdminLegacyDetailsV1 {
+    operation_id: BoundedString<255>,
+    repository_identity_fingerprint: Fingerprint,
+    prior_registry_state: Option<ReferenceFingerprintV1>,
+    result_registry_state: Option<ReferenceFingerprintV1>,
+    transition: Option<ReferenceFingerprintV1>,
+    registration: Option<ReferenceFingerprintV1>,
+    assertion: Option<ReferenceFingerprintV1>,
+}
+
+impl ApproverAdminLegacyDetailsV1 {
+    fn from_fields(fields: &ApproverAdminLegacyFields) -> Result<Self, ContractError> {
+        Ok(Self {
+            operation_id: bounded(&fields.operation_id)?,
+            repository_identity_fingerprint: Fingerprint::parse(
+                &fields.repository_identity_fingerprint,
+            )?,
+            prior_registry_state: optional_reference_fingerprint(
+                fields.prior_registry_state_ref.as_deref(),
+                fields.prior_registry_state_fingerprint.as_deref(),
+            )?,
+            result_registry_state: optional_reference_fingerprint(
+                fields.result_registry_state_ref.as_deref(),
+                fields.result_registry_state_fingerprint.as_deref(),
+            )?,
+            transition: optional_reference_fingerprint(
+                fields.transition_ref.as_deref(),
+                fields.transition_fingerprint.as_deref(),
+            )?,
+            registration: optional_reference_fingerprint(
+                fields.registration_ref.as_deref(),
+                fields.registration_fingerprint.as_deref(),
+            )?,
+            assertion: optional_reference_fingerprint(
+                fields.assertion_ref.as_deref(),
+                fields.assertion_fingerprint.as_deref(),
+            )?,
+        })
+    }
+
+    fn to_fields(&self) -> ApproverAdminLegacyFields {
+        ApproverAdminLegacyFields {
+            operation_id: self.operation_id.as_str().to_owned(),
+            repository_identity_fingerprint: self
+                .repository_identity_fingerprint
+                .as_str()
+                .to_owned(),
+            prior_registry_state_ref: optional_reference(&self.prior_registry_state),
+            prior_registry_state_fingerprint: optional_reference_fingerprint_value(
+                &self.prior_registry_state,
+            ),
+            result_registry_state_ref: optional_reference(&self.result_registry_state),
+            result_registry_state_fingerprint: optional_reference_fingerprint_value(
+                &self.result_registry_state,
+            ),
+            transition_ref: optional_reference(&self.transition),
+            transition_fingerprint: optional_reference_fingerprint_value(&self.transition),
+            registration_ref: optional_reference(&self.registration),
+            registration_fingerprint: optional_reference_fingerprint_value(&self.registration),
+            assertion_ref: optional_reference(&self.assertion),
+            assertion_fingerprint: optional_reference_fingerprint_value(&self.assertion),
+        }
+    }
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(
+    tag = "projection_kind",
+    rename_all = "snake_case",
+    deny_unknown_fields
+)]
+enum ApproverLegacyDetailsV1 {
+    Admin {
+        fields: ApproverAdminLegacyDetailsV1,
+    },
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct ApproverAdministrationDetailsV1 {
+    cause: UseCaseCauseV1,
+    operation: ApproverAdministrationOperationV1,
+    changed_paths: BoundedVec<BoundedString<4096>, 128>,
+    refusal: AuthorOperationRefusalV1,
+    next_actions: BoundedVec<BoundedString<1024>, 128>,
+    legacy_projection: Option<ApproverLegacyDetailsV1>,
+}
+
+impl ApproverAdministrationDetailsV1 {
+    fn from_result(result: &ApproverOperationResult) -> Result<Self, ContractError> {
+        if result.status != AuthorOperationStatus::Refused {
+            return Err(ContractError::InvalidInvariant);
+        }
+        let refusal = result
+            .refusal
+            .as_ref()
+            .ok_or(ContractError::InvalidInvariant)?;
+        let legacy_projection = match result.legacy_projection.as_ref() {
+            Some(ApproverOperationProjection::Admin(fields)) => {
+                Some(ApproverLegacyDetailsV1::Admin {
+                    fields: ApproverAdminLegacyDetailsV1::from_fields(fields)?,
+                })
+            }
+            Some(ApproverOperationProjection::InvocationFailure(_)) => {
+                return Err(ContractError::InvalidInvariant);
+            }
+            None => None,
+        };
+        Ok(Self {
+            cause: result
+                .causal_disposition
+                .map(adapter_cause)
+                .ok_or(ContractError::InvalidInvariant)?,
+            operation: result.operation.into(),
+            changed_paths: bounded_vec(&result.changed_paths)?,
+            refusal: AuthorOperationRefusalV1::from_refusal(refusal)?,
+            next_actions: bounded_vec(&result.next_actions)?,
+            legacy_projection,
+        })
+    }
+
+    fn to_result(&self) -> ApproverOperationResult {
+        let legacy_projection =
+            self.legacy_projection
+                .as_ref()
+                .map(|projection| match projection {
+                    ApproverLegacyDetailsV1::Admin { fields } => {
+                        ApproverOperationProjection::Admin(fields.to_fields())
+                    }
+                });
+        let (schema_id, schema_version) = match &legacy_projection {
+            Some(ApproverOperationProjection::Admin(_)) => (
+                "handbook.approver-admin-result".to_owned(),
+                "1.0".to_owned(),
+            ),
+            Some(ApproverOperationProjection::InvocationFailure(failure)) => {
+                (failure.schema_id.clone(), failure.schema_version.clone())
+            }
+            None => (
+                "handbook.approver-admin-adapter-result".to_owned(),
+                "1.0".to_owned(),
+            ),
+        };
+        ApproverOperationResult {
+            schema_id,
+            schema_version,
+            operation: self.operation.into(),
+            status: AuthorOperationStatus::Refused,
+            changed_paths: bounded_strings(&self.changed_paths),
+            refusal: Some(self.refusal.to_refusal()),
+            next_actions: bounded_strings(&self.next_actions),
+            legacy_projection,
+            causal_disposition: Some(match self.cause {
+                UseCaseCauseV1::Prerequisite => {
+                    crate::charter_product::AdapterCausalDisposition::Prerequisite
+                }
+                UseCaseCauseV1::CallerRefusal => {
+                    crate::charter_product::AdapterCausalDisposition::CallerRefusal
+                }
+                UseCaseCauseV1::ImplementationFailure => {
+                    crate::charter_product::AdapterCausalDisposition::ImplementationFailure
+                }
+            }),
+            public_effects: Vec::new(),
+        }
+    }
+}
+
+fn packet3_disposition(cause: UseCaseCauseV1) -> (TerminalStatus, ProblemCategory, RetryDirective) {
+    match cause {
+        UseCaseCauseV1::Prerequisite => (
+            TerminalStatus::Blocked,
+            ProblemCategory::Prerequisite,
+            RetryDirective::AfterRecheck,
+        ),
+        UseCaseCauseV1::CallerRefusal => (
+            TerminalStatus::Refused,
+            ProblemCategory::Precondition,
+            RetryDirective::AfterRequestChange,
+        ),
+        UseCaseCauseV1::ImplementationFailure => (
+            TerminalStatus::Error,
+            ProblemCategory::Implementation,
+            RetryDirective::Transient,
+        ),
+    }
+}
+
+fn admit_packet3_problem(problem: &Problem, cause: UseCaseCauseV1) -> Result<(), ContractError> {
+    let (status, category, retry) = packet3_disposition(cause);
+    if problem.category() != category
+        || problem.retry() != retry
+        || (status == TerminalStatus::Blocked) != problem.recheck().is_some()
+        || (status == TerminalStatus::Refused) != problem.rule().is_some()
+        || (status == TerminalStatus::Error) != problem.correlation_ref().is_some()
+    {
+        return Err(ContractError::InvalidInvariant);
+    }
+    Ok(())
+}
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
@@ -1558,11 +2349,222 @@ closed_enum!(TransportFailureKind {
     Adapter,
 });
 
+closed_enum!(AuthorInputTransportRouteV1 {
+    Charter,
+    ProjectContext,
+});
+
+closed_enum!(TransportIoErrorKindV1 {
+    NotFound,
+    PermissionDenied,
+    ConnectionRefused,
+    ConnectionReset,
+    ConnectionAborted,
+    NotConnected,
+    AddrInUse,
+    AddrNotAvailable,
+    BrokenPipe,
+    AlreadyExists,
+    WouldBlock,
+    InvalidInput,
+    InvalidData,
+    TimedOut,
+    WriteZero,
+    Interrupted,
+    Unsupported,
+    UnexpectedEof,
+    OutOfMemory,
+    Other,
+});
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct TransportIoErrorV1 {
+    kind: TransportIoErrorKindV1,
+    raw_os_error: Option<i32>,
+}
+
+impl TransportIoErrorV1 {
+    pub fn from_io_error(error: &io::Error) -> Self {
+        Self {
+            kind: TransportIoErrorKindV1::from(error.kind()),
+            raw_os_error: error.raw_os_error(),
+        }
+    }
+
+    pub fn kind(&self) -> TransportIoErrorKindV1 {
+        self.kind
+    }
+
+    pub fn raw_os_error(&self) -> Option<i32> {
+        self.raw_os_error
+    }
+
+    pub fn display_message(&self) -> String {
+        match self.raw_os_error {
+            Some(code) => io::Error::from_raw_os_error(code).to_string(),
+            None => io::Error::from(io::ErrorKind::from(self.kind)).to_string(),
+        }
+    }
+
+    pub fn is_caller_acquisition(&self) -> bool {
+        matches!(
+            self.kind,
+            TransportIoErrorKindV1::NotFound
+                | TransportIoErrorKindV1::InvalidInput
+                | TransportIoErrorKindV1::InvalidData
+        )
+    }
+}
+
+impl From<io::ErrorKind> for TransportIoErrorKindV1 {
+    fn from(kind: io::ErrorKind) -> Self {
+        match kind {
+            io::ErrorKind::NotFound => Self::NotFound,
+            io::ErrorKind::PermissionDenied => Self::PermissionDenied,
+            io::ErrorKind::ConnectionRefused => Self::ConnectionRefused,
+            io::ErrorKind::ConnectionReset => Self::ConnectionReset,
+            io::ErrorKind::ConnectionAborted => Self::ConnectionAborted,
+            io::ErrorKind::NotConnected => Self::NotConnected,
+            io::ErrorKind::AddrInUse => Self::AddrInUse,
+            io::ErrorKind::AddrNotAvailable => Self::AddrNotAvailable,
+            io::ErrorKind::BrokenPipe => Self::BrokenPipe,
+            io::ErrorKind::AlreadyExists => Self::AlreadyExists,
+            io::ErrorKind::WouldBlock => Self::WouldBlock,
+            io::ErrorKind::InvalidInput => Self::InvalidInput,
+            io::ErrorKind::InvalidData => Self::InvalidData,
+            io::ErrorKind::TimedOut => Self::TimedOut,
+            io::ErrorKind::WriteZero => Self::WriteZero,
+            io::ErrorKind::Interrupted => Self::Interrupted,
+            io::ErrorKind::Unsupported => Self::Unsupported,
+            io::ErrorKind::UnexpectedEof => Self::UnexpectedEof,
+            io::ErrorKind::OutOfMemory => Self::OutOfMemory,
+            _ => Self::Other,
+        }
+    }
+}
+
+impl From<TransportIoErrorKindV1> for io::ErrorKind {
+    fn from(kind: TransportIoErrorKindV1) -> Self {
+        match kind {
+            TransportIoErrorKindV1::NotFound => Self::NotFound,
+            TransportIoErrorKindV1::PermissionDenied => Self::PermissionDenied,
+            TransportIoErrorKindV1::ConnectionRefused => Self::ConnectionRefused,
+            TransportIoErrorKindV1::ConnectionReset => Self::ConnectionReset,
+            TransportIoErrorKindV1::ConnectionAborted => Self::ConnectionAborted,
+            TransportIoErrorKindV1::NotConnected => Self::NotConnected,
+            TransportIoErrorKindV1::AddrInUse => Self::AddrInUse,
+            TransportIoErrorKindV1::AddrNotAvailable => Self::AddrNotAvailable,
+            TransportIoErrorKindV1::BrokenPipe => Self::BrokenPipe,
+            TransportIoErrorKindV1::AlreadyExists => Self::AlreadyExists,
+            TransportIoErrorKindV1::WouldBlock => Self::WouldBlock,
+            TransportIoErrorKindV1::InvalidInput => Self::InvalidInput,
+            TransportIoErrorKindV1::InvalidData => Self::InvalidData,
+            TransportIoErrorKindV1::TimedOut => Self::TimedOut,
+            TransportIoErrorKindV1::WriteZero => Self::WriteZero,
+            TransportIoErrorKindV1::Interrupted => Self::Interrupted,
+            TransportIoErrorKindV1::Unsupported => Self::Unsupported,
+            TransportIoErrorKindV1::UnexpectedEof => Self::UnexpectedEof,
+            TransportIoErrorKindV1::OutOfMemory => Self::OutOfMemory,
+            TransportIoErrorKindV1::Other => Self::Other,
+        }
+    }
+}
+
+closed_enum!(AuthorWorkingDirectoryCommandV1 {
+    CharterAuthor,
+    CharterApprove,
+    CharterPromote,
+    CharterValidate,
+    ProjectContextAuthor,
+    ProjectContextValidate,
+});
+
+closed_enum!(RepositoryInvocationCommandV1 {
+    CharterAuthor,
+    CharterApprove,
+    CharterPromote,
+    CharterValidate,
+    ApproverBootstrap,
+    ApproverAddCredential,
+    ApproverRevokeCredential,
+    ApproverUpdateMapping,
+});
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(
+    tag = "presentation_kind",
+    rename_all = "snake_case",
+    deny_unknown_fields
+)]
+enum TransportPresentationV1 {
+    AuthorInput {
+        route: AuthorInputTransportRouteV1,
+        input_source: BoundedString<65536>,
+        error: Option<TransportIoErrorV1>,
+    },
+    WorkingDirectory {
+        command: AuthorWorkingDirectoryCommandV1,
+        error: TransportIoErrorV1,
+    },
+    RepositoryInvocation {
+        command: RepositoryInvocationCommandV1,
+        failure: Box<RepositoryInvocationFailureDetailsV1>,
+    },
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum TransportPresentationViewV1 {
+    AuthorInput {
+        route: AuthorInputTransportRouteV1,
+        input_source: String,
+        error: Option<TransportIoErrorV1>,
+    },
+    WorkingDirectory {
+        command: AuthorWorkingDirectoryCommandV1,
+        error: TransportIoErrorV1,
+    },
+    RepositoryInvocation {
+        command: RepositoryInvocationCommandV1,
+        failure: Box<RepositoryInvocationFailureView>,
+    },
+}
+
+impl TransportPresentationV1 {
+    fn to_view(&self, failure_kind: TransportFailureKind) -> TransportPresentationViewV1 {
+        match self {
+            Self::AuthorInput {
+                route,
+                input_source,
+                error,
+            } => TransportPresentationViewV1::AuthorInput {
+                route: *route,
+                input_source: input_source.as_str().to_owned(),
+                error: error.clone(),
+            },
+            Self::WorkingDirectory { command, error } => {
+                TransportPresentationViewV1::WorkingDirectory {
+                    command: *command,
+                    error: error.clone(),
+                }
+            }
+            Self::RepositoryInvocation { command, failure } => {
+                TransportPresentationViewV1::RepositoryInvocation {
+                    command: *command,
+                    failure: Box::new(failure.to_view(transport_cause(failure_kind))),
+                }
+            }
+        }
+    }
+}
+
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct TransportFailureDetailsV1 {
     failure_kind: TransportFailureKind,
     reason_code: BoundedString<255>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    presentation: Option<TransportPresentationV1>,
 }
 
 impl<'de> Deserialize<'de> for TransportFailureDetailsV1 {
@@ -1575,6 +2577,7 @@ impl<'de> Deserialize<'de> for TransportFailureDetailsV1 {
         struct Raw {
             failure_kind: TransportFailureKind,
             reason_code: BoundedString<255>,
+            presentation: Option<TransportPresentationV1>,
         }
         let raw = Raw::deserialize(deserializer).map_err(|error| {
             D::Error::custom(classify_contract_error_message(&error.to_string()))
@@ -1592,6 +2595,7 @@ impl<'de> Deserialize<'de> for TransportFailureDetailsV1 {
         Ok(Self {
             failure_kind: raw.failure_kind,
             reason_code: raw.reason_code,
+            presentation: raw.presentation,
         })
     }
 }
@@ -1751,6 +2755,32 @@ impl UseCaseKind {
                 let _: RepositoryDoctorDetailsV1 = admit_contract_value(problem.details(), limits)?;
                 Ok(())
             }
+            Self::AuthorCharter
+                if problem.subject() == &binding(self.use_case_ref())?
+                    && problem.details_schema() == &binding(AUTHOR_CHARTER_DETAILS_REF)? =>
+            {
+                let details: AuthorCharterDetailsV1 =
+                    admit_contract_value(problem.details(), limits)?;
+                admit_packet3_problem(problem, details.cause)
+            }
+            Self::AuthorProjectContext
+                if problem.subject() == &binding(self.use_case_ref())?
+                    && problem.details_schema()
+                        == &binding(AUTHOR_PROJECT_CONTEXT_DETAILS_REF)? =>
+            {
+                let details: AuthorProjectContextDetailsV1 =
+                    admit_contract_value(problem.details(), limits)?;
+                admit_packet3_problem(problem, details.cause)
+            }
+            Self::ApproverAdministration
+                if problem.subject() == &binding(self.use_case_ref())?
+                    && problem.details_schema()
+                        == &binding(APPROVER_ADMINISTRATION_DETAILS_REF)? =>
+            {
+                let details: ApproverAdministrationDetailsV1 =
+                    admit_contract_value(problem.details(), limits)?;
+                admit_packet3_problem(problem, details.cause)
+            }
             _ => Err(ContractError::InvalidInvariant),
         }
     }
@@ -1814,6 +2844,12 @@ impl UseCaseKind {
         receipts: &BoundedVec<WriteReceipt, 128>,
         limits: &ContractLimits,
     ) -> Result<(), ContractError> {
+        if matches!(
+            self,
+            Self::AuthorCharter | Self::AuthorProjectContext | Self::ApproverAdministration
+        ) {
+            return self.admit_packet3_receipts(terminal, receipts, limits);
+        }
         if self != Self::RepositorySetup {
             return Ok(());
         }
@@ -1924,6 +2960,256 @@ impl UseCaseKind {
         }
         Ok(())
     }
+
+    fn admit_packet3_receipts(
+        self,
+        terminal: &TerminalFields<ContractValue>,
+        receipts: &BoundedVec<WriteReceipt, 128>,
+        limits: &ContractLimits,
+    ) -> Result<(), ContractError> {
+        let (record_ref, record_kind, atomic_group) = match self {
+            Self::AuthorCharter => (
+                AUTHOR_CHARTER_EFFECT_REF,
+                "author_charter_effect",
+                "author_charter_owner_installs",
+            ),
+            Self::AuthorProjectContext => (
+                AUTHOR_PROJECT_CONTEXT_EFFECT_REF,
+                "author_project_context_effect",
+                "author_project_context_owner_install",
+            ),
+            Self::ApproverAdministration => (
+                APPROVER_ADMINISTRATION_EFFECT_REF,
+                "approver_administration_effect",
+                "approver_administration_owner_installs",
+            ),
+            _ => return Err(ContractError::InvalidInvariant),
+        };
+        let mut targets = std::collections::BTreeSet::new();
+        let mut conditions = Vec::with_capacity(receipts.as_slice().len());
+        for receipt in receipts.as_slice() {
+            if receipt.record() != &binding(record_ref)?
+                || receipt.record_kind().as_str() != record_kind
+                || receipt.authority_class().as_str() != "sdk_composition"
+                || receipt.atomic_group().as_str() != atomic_group
+            {
+                return Err(ContractError::InvalidInvariant);
+            }
+            let condition: Packet3EffectConditionV1 =
+                admit_contract_value(receipt.condition(), limits)?;
+            let target = condition.target_ref.as_str();
+            if !targets.insert(target.to_owned())
+                || !packet3_effect_target_is_exact(
+                    self,
+                    target,
+                    condition.content_fingerprint.as_ref(),
+                )
+            {
+                return Err(ContractError::InvalidInvariant);
+            }
+            match condition.disposition {
+                Packet3EffectDispositionV1::CreatedIncomplete => {
+                    if condition.content_fingerprint.is_some() {
+                        return Err(ContractError::InvalidInvariant);
+                    }
+                }
+                Packet3EffectDispositionV1::InstalledDurabilityUnconfirmed
+                | Packet3EffectDispositionV1::DurableCreated => {
+                    if condition.content_fingerprint.is_none() {
+                        return Err(ContractError::InvalidInvariant);
+                    }
+                }
+            }
+            conditions.push(condition);
+        }
+
+        match self {
+            Self::AuthorCharter => {
+                let operation = if terminal.status() == TerminalStatus::Ok {
+                    let result: AuthorCharterResultV1 = admit_contract_value(
+                        terminal.data().ok_or(ContractError::InvalidInvariant)?,
+                        limits,
+                    )?;
+                    result.operation
+                } else {
+                    let [problem] = terminal_problems(terminal) else {
+                        return Err(ContractError::InvalidInvariant);
+                    };
+                    let details: AuthorCharterDetailsV1 =
+                        admit_contract_value(problem.details(), limits)?;
+                    details.operation
+                };
+                if operation == AuthorCharterOperationV1::Validate && !conditions.is_empty() {
+                    return Err(ContractError::InvalidInvariant);
+                }
+            }
+            Self::AuthorProjectContext => {
+                if terminal.status() == TerminalStatus::Ok {
+                    let result: AuthorProjectContextResultV1 = admit_contract_value(
+                        terminal.data().ok_or(ContractError::InvalidInvariant)?,
+                        limits,
+                    )?;
+                    match result {
+                        AuthorProjectContextResultV1::Validate { .. } if conditions.is_empty() => {}
+                        AuthorProjectContextResultV1::Author {
+                            source_fingerprint, ..
+                        } if conditions.as_slice()
+                            == [Packet3EffectConditionV1 {
+                                target_ref: bounded(".handbook/project/context.yaml")?,
+                                content_fingerprint: Some(source_fingerprint.clone()),
+                                disposition: Packet3EffectDispositionV1::DurableCreated,
+                            }] => {}
+                        _ => return Err(ContractError::InvalidInvariant),
+                    }
+                } else {
+                    let [problem] = terminal_problems(terminal) else {
+                        return Err(ContractError::InvalidInvariant);
+                    };
+                    let details: AuthorProjectContextDetailsV1 =
+                        admit_contract_value(problem.details(), limits)?;
+                    match details.operation {
+                        AuthorProjectContextOperationV1::Validate if conditions.is_empty() => {}
+                        AuthorProjectContextOperationV1::Author
+                            if details.refusal_kind
+                                == AuthorProjectContextRefusalKindV1::MutationIoFailed
+                                && (conditions.is_empty()
+                                    || conditions.as_slice()
+                                        == [Packet3EffectConditionV1 {
+                                            target_ref: bounded(
+                                                ".handbook/project/context.yaml",
+                                            )?,
+                                            content_fingerprint: conditions[0]
+                                                .content_fingerprint
+                                                .clone(),
+                                            disposition: Packet3EffectDispositionV1::InstalledDurabilityUnconfirmed,
+                                        }]) => {}
+                        AuthorProjectContextOperationV1::Author if conditions.is_empty() => {}
+                        _ => return Err(ContractError::InvalidInvariant),
+                    }
+                }
+            }
+            Self::ApproverAdministration => {}
+            _ => return Err(ContractError::InvalidInvariant),
+        }
+        Ok(())
+    }
+}
+
+fn terminal_problems<T>(terminal: &TerminalFields<T>) -> &[Problem] {
+    match terminal.status() {
+        TerminalStatus::Blocked => terminal.blockers(),
+        TerminalStatus::Refused => terminal.refusals(),
+        TerminalStatus::Error => terminal.errors(),
+        TerminalStatus::Ok => &[],
+    }
+}
+
+fn packet3_effect_target_is_exact(
+    kind: UseCaseKind,
+    target: &str,
+    fingerprint: Option<&Fingerprint>,
+) -> bool {
+    if kind == UseCaseKind::AuthorProjectContext {
+        return target == ".handbook/project/context.yaml";
+    }
+    if kind == UseCaseKind::AuthorCharter && target == ".handbook/project/charter.yaml" {
+        return true;
+    }
+
+    const AUTHOR_TARGETS: [(&str, &str); 15] = [
+        (".handbook/state/intake-records/intake_", ".json"),
+        (".handbook/evidence/charter/candidates/candidate_", ".json"),
+        (".handbook/state/candidate-content/charter_", ".yaml"),
+        (
+            ".handbook/state/lifecycle-validation-results/lifecycle-validation-result_",
+            ".json",
+        ),
+        (".handbook/state/promotions/promotion_", ".json"),
+        (
+            ".handbook/state/lifecycle-transitions/lifecycle-transition_",
+            ".json",
+        ),
+        (
+            ".handbook/state/lifecycle-observations/lifecycle-observation_",
+            ".json",
+        ),
+        (".handbook/state/approvals/approval_", ".json"),
+        (".handbook/state/registry-states/registry-state_", ".json"),
+        (
+            ".handbook/state/registry-transitions/registry-transition_",
+            ".json",
+        ),
+        (
+            ".handbook/state/authenticator-make-credential-responses/authenticator-make-credential-response_",
+            ".json",
+        ),
+        (
+            ".handbook/state/authenticator-registrations/authenticator-registration_",
+            ".json",
+        ),
+        (
+            ".handbook/state/authenticator-get-assertion-responses/authenticator-get-assertion-response_",
+            ".json",
+        ),
+        (
+            ".handbook/state/authenticator-assertions/authenticator-assertion_",
+            ".json",
+        ),
+        (
+            ".handbook/state/authenticator-use-transitions/authenticator-use-transition_",
+            ".json",
+        ),
+    ];
+    const APPROVER_TARGETS: [(&str, &str); 8] = [
+        (".handbook/state/approvals/approval_", ".json"),
+        (".handbook/state/registry-states/registry-state_", ".json"),
+        (
+            ".handbook/state/registry-transitions/registry-transition_",
+            ".json",
+        ),
+        (
+            ".handbook/state/authenticator-make-credential-responses/authenticator-make-credential-response_",
+            ".json",
+        ),
+        (
+            ".handbook/state/authenticator-registrations/authenticator-registration_",
+            ".json",
+        ),
+        (
+            ".handbook/state/authenticator-get-assertion-responses/authenticator-get-assertion-response_",
+            ".json",
+        ),
+        (
+            ".handbook/state/authenticator-assertions/authenticator-assertion_",
+            ".json",
+        ),
+        (
+            ".handbook/state/authenticator-use-transitions/authenticator-use-transition_",
+            ".json",
+        ),
+    ];
+    let targets = match kind {
+        UseCaseKind::AuthorCharter => AUTHOR_TARGETS.as_slice(),
+        UseCaseKind::ApproverAdministration => APPROVER_TARGETS.as_slice(),
+        _ => return false,
+    };
+    targets.iter().any(|(prefix, suffix)| {
+        let Some(hex) = target
+            .strip_prefix(prefix)
+            .and_then(|rest| rest.strip_suffix(suffix))
+        else {
+            return false;
+        };
+        hex.len() == 64
+            && hex
+                .bytes()
+                .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte))
+            && (*prefix
+                == ".handbook/state/lifecycle-validation-results/lifecycle-validation-result_"
+                || fingerprint.is_none_or(|fingerprint| {
+                    fingerprint.as_str().strip_prefix("sha256:") == Some(hex)
+                }))
+    })
 }
 
 fn setup_root_receipt_is_compatible(
@@ -2085,6 +3371,74 @@ fn repository_setup_receipt(
         contract_value(condition, limits)?,
         bounded(atomic_group)?,
         limits,
+    )
+}
+
+fn packet3_receipts(
+    kind: UseCaseKind,
+    effects: &[AdapterPublicEffect],
+    limits: &ContractLimits,
+) -> Result<BoundedVec<WriteReceipt, 128>, ContractError> {
+    let (record_ref, record_kind, atomic_group) = match kind {
+        UseCaseKind::AuthorCharter => (
+            AUTHOR_CHARTER_EFFECT_REF,
+            "author_charter_effect",
+            "author_charter_owner_installs",
+        ),
+        UseCaseKind::AuthorProjectContext => (
+            AUTHOR_PROJECT_CONTEXT_EFFECT_REF,
+            "author_project_context_effect",
+            "author_project_context_owner_install",
+        ),
+        UseCaseKind::ApproverAdministration => (
+            APPROVER_ADMINISTRATION_EFFECT_REF,
+            "approver_administration_effect",
+            "approver_administration_owner_installs",
+        ),
+        _ => return Err(ContractError::InvalidInvariant),
+    };
+    BoundedVec::new(
+        effects
+            .iter()
+            .map(|effect| {
+                let disposition = match effect.disposition {
+                    AdapterPublicEffectDisposition::CreatedIncomplete => {
+                        Packet3EffectDispositionV1::CreatedIncomplete
+                    }
+                    AdapterPublicEffectDisposition::InstalledDurabilityUnconfirmed => {
+                        Packet3EffectDispositionV1::InstalledDurabilityUnconfirmed
+                    }
+                    AdapterPublicEffectDisposition::DurableCreated => {
+                        Packet3EffectDispositionV1::DurableCreated
+                    }
+                };
+                let content_fingerprint = effect
+                    .content_fingerprint
+                    .as_deref()
+                    .map(Fingerprint::parse)
+                    .transpose()?;
+                if (disposition == Packet3EffectDispositionV1::CreatedIncomplete)
+                    != content_fingerprint.is_none()
+                {
+                    return Err(ContractError::InvalidInvariant);
+                }
+                WriteReceipt::new(
+                    bounded(record_kind)?,
+                    binding(record_ref)?,
+                    bounded("sdk_composition")?,
+                    contract_value(
+                        &Packet3EffectConditionV1 {
+                            target_ref: bounded(&effect.target_ref)?,
+                            content_fingerprint,
+                            disposition,
+                        },
+                        limits,
+                    )?,
+                    bounded(atomic_group)?,
+                    limits,
+                )
+            })
+            .collect::<Result<Vec<_>, _>>()?,
     )
 }
 
@@ -2467,6 +3821,35 @@ impl UseCaseResponseV1 {
         )
     }
 
+    pub fn author_charter(
+        result: &CharterOperationResult,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        let receipts =
+            packet3_receipts(UseCaseKind::AuthorCharter, &result.public_effects, limits)?;
+        match result.status {
+            AuthorOperationStatus::Succeeded => Self::author_charter_success(
+                AuthorCharterResultV1::from_result(result)?,
+                receipts,
+                empty_bounded()?,
+                empty_bounded()?,
+                limits,
+            ),
+            AuthorOperationStatus::Refused => {
+                let details = AuthorCharterDetailsV1::from_result(result)?;
+                Self::packet3_problem(
+                    UseCaseKind::AuthorCharter,
+                    AUTHOR_CHARTER_DETAILS_REF,
+                    "author_charter",
+                    details.cause,
+                    &details,
+                    receipts,
+                    limits,
+                )
+            }
+        }
+    }
+
     pub fn author_project_context_success(
         result: AuthorProjectContextResultV1,
         receipts: BoundedVec<WriteReceipt, 128>,
@@ -2484,6 +3867,63 @@ impl UseCaseResponseV1 {
         )
     }
 
+    pub fn author_project_context(
+        outcome: &ProjectContextCommandOutcome,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        let effects = match outcome {
+            ProjectContextCommandOutcome::Author {
+                result: Ok(result), ..
+            } => result.public_effects.as_slice(),
+            ProjectContextCommandOutcome::Author {
+                result: Err(refusal),
+                ..
+            }
+            | ProjectContextCommandOutcome::Validate {
+                result: Err(refusal),
+                ..
+            } => refusal.public_effects.as_slice(),
+            ProjectContextCommandOutcome::Validate { result: Ok(()), .. } => &[],
+        };
+        let receipts = packet3_receipts(UseCaseKind::AuthorProjectContext, effects, limits)?;
+        match outcome {
+            ProjectContextCommandOutcome::Author {
+                input_mode,
+                input_source,
+                result: Ok(result),
+            } => Self::author_project_context_success(
+                AuthorProjectContextResultV1::author(input_mode, input_source, result)?,
+                receipts,
+                empty_bounded()?,
+                empty_bounded()?,
+                limits,
+            ),
+            ProjectContextCommandOutcome::Validate {
+                input_mode,
+                input_source,
+                result: Ok(()),
+            } => Self::author_project_context_success(
+                AuthorProjectContextResultV1::validate(input_mode, input_source)?,
+                empty_bounded()?,
+                empty_bounded()?,
+                empty_bounded()?,
+                limits,
+            ),
+            _ => {
+                let details = AuthorProjectContextDetailsV1::from_outcome(outcome)?;
+                Self::packet3_problem(
+                    UseCaseKind::AuthorProjectContext,
+                    AUTHOR_PROJECT_CONTEXT_DETAILS_REF,
+                    "author_project_context",
+                    details.cause,
+                    &details,
+                    receipts,
+                    limits,
+                )
+            }
+        }
+    }
+
     pub fn approver_administration_success(
         result: ApproverAdministrationResultV1,
         receipts: BoundedVec<WriteReceipt, 128>,
@@ -2497,6 +3937,117 @@ impl UseCaseResponseV1 {
             receipts,
             diagnostics,
             next_actions,
+            limits,
+        )
+    }
+
+    pub fn approver_administration(
+        result: &ApproverOperationResult,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        let receipts = packet3_receipts(
+            UseCaseKind::ApproverAdministration,
+            &result.public_effects,
+            limits,
+        )?;
+        match result.status {
+            AuthorOperationStatus::Succeeded => Self::approver_administration_success(
+                ApproverAdministrationResultV1::from_result(result)?,
+                receipts,
+                empty_bounded()?,
+                empty_bounded()?,
+                limits,
+            ),
+            AuthorOperationStatus::Refused => {
+                let details = ApproverAdministrationDetailsV1::from_result(result)?;
+                Self::packet3_problem(
+                    UseCaseKind::ApproverAdministration,
+                    APPROVER_ADMINISTRATION_DETAILS_REF,
+                    "approver_administration",
+                    details.cause,
+                    &details,
+                    receipts,
+                    limits,
+                )
+            }
+        }
+    }
+
+    fn packet3_problem<T: Serialize>(
+        kind: UseCaseKind,
+        details_ref: &str,
+        code_prefix: &str,
+        cause: UseCaseCauseV1,
+        typed_details: &T,
+        receipts: BoundedVec<WriteReceipt, 128>,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        let use_case = binding(kind.use_case_ref())?;
+        let result_schema = binding(kind.result_ref())?;
+        let details_schema = binding(details_ref)?;
+        let details = contract_value(typed_details, limits)?;
+        let (status, category, retry) = packet3_disposition(cause);
+        let suffix = match cause {
+            UseCaseCauseV1::Prerequisite => "blocked",
+            UseCaseCauseV1::CallerRefusal => "refused",
+            UseCaseCauseV1::ImplementationFailure => "error",
+        };
+        let code = format!("{code_prefix}.{suffix}");
+        let recheck = (status == TerminalStatus::Blocked)
+            .then(|| RecheckCondition::new(details_schema.clone(), details.clone(), limits))
+            .transpose()?;
+        let rule = (status == TerminalStatus::Refused)
+            .then(|| binding(&format!("handbook.use-case.{code_prefix}-rule@1.0.0")))
+            .transpose()?;
+        let correlation_ref = (status == TerminalStatus::Error)
+            .then(|| setup_correlation_ref(&code))
+            .transpose()?;
+        let problem = Problem::new(
+            bounded(&code)?,
+            bounded(&code)?,
+            category,
+            use_case.clone(),
+            rule,
+            details_schema,
+            details,
+            empty_bounded()?,
+            retry,
+            recheck,
+            correlation_ref,
+            limits,
+        )?;
+        let terminal = match status {
+            TerminalStatus::Blocked => TerminalFields::new(
+                status,
+                None,
+                BoundedVec::new(vec![problem])?,
+                empty_bounded()?,
+                empty_bounded()?,
+            )?,
+            TerminalStatus::Refused => TerminalFields::new(
+                status,
+                None,
+                empty_bounded()?,
+                BoundedVec::new(vec![problem])?,
+                empty_bounded()?,
+            )?,
+            TerminalStatus::Error => TerminalFields::new(
+                status,
+                None,
+                empty_bounded()?,
+                empty_bounded()?,
+                BoundedVec::new(vec![problem])?,
+            )?,
+            TerminalStatus::Ok => return Err(ContractError::InvalidInvariant),
+        };
+        Self::from_parts(
+            binding(USE_CASE_RESPONSE_REF)?,
+            use_case,
+            result_schema,
+            terminal,
+            receipts,
+            empty_bounded()?,
+            empty_bounded()?,
             limits,
         )
     }
@@ -2885,6 +4436,74 @@ impl UseCaseResponseV1 {
         }
     }
 
+    pub fn author_charter_outcome(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<CharterOperationResult>, ContractError> {
+        if self.use_case.reference().as_str() != "handbook.use-case.author-charter@1.0.0" {
+            return Ok(None);
+        }
+        if self.status() == TerminalStatus::Ok {
+            let data = self
+                .terminal
+                .data()
+                .ok_or(ContractError::InvalidInvariant)?;
+            let result: AuthorCharterResultV1 = admit_contract_value(data, limits)?;
+            return Ok(Some(result.to_result()));
+        }
+        let [problem] = self.terminal_problems() else {
+            return Err(ContractError::InvalidInvariant);
+        };
+        let details: AuthorCharterDetailsV1 = admit_contract_value(problem.details(), limits)?;
+        Ok(Some(details.to_result()))
+    }
+
+    pub fn author_project_context_outcome(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<ProjectContextCommandOutcome>, ContractError> {
+        if self.use_case.reference().as_str() != "handbook.use-case.author-project-context@1.0.0" {
+            return Ok(None);
+        }
+        if self.status() == TerminalStatus::Ok {
+            let data = self
+                .terminal
+                .data()
+                .ok_or(ContractError::InvalidInvariant)?;
+            let result: AuthorProjectContextResultV1 = admit_contract_value(data, limits)?;
+            return Ok(Some(result.to_outcome()));
+        }
+        let [problem] = self.terminal_problems() else {
+            return Err(ContractError::InvalidInvariant);
+        };
+        let details: AuthorProjectContextDetailsV1 =
+            admit_contract_value(problem.details(), limits)?;
+        Ok(Some(details.to_outcome()))
+    }
+
+    pub fn approver_administration_outcome(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<ApproverOperationResult>, ContractError> {
+        if self.use_case.reference().as_str() != "handbook.use-case.approver-administration@1.0.0" {
+            return Ok(None);
+        }
+        if self.status() == TerminalStatus::Ok {
+            let data = self
+                .terminal
+                .data()
+                .ok_or(ContractError::InvalidInvariant)?;
+            let result: ApproverAdministrationResultV1 = admit_contract_value(data, limits)?;
+            return Ok(Some(result.to_result()));
+        }
+        let [problem] = self.terminal_problems() else {
+            return Err(ContractError::InvalidInvariant);
+        };
+        let details: ApproverAdministrationDetailsV1 =
+            admit_contract_value(problem.details(), limits)?;
+        Ok(Some(details.to_result()))
+    }
+
     pub fn receipts(&self) -> &[WriteReceipt] {
         self.receipts.as_slice()
     }
@@ -2987,11 +4606,90 @@ impl TransportFailureV1 {
         reason_code: &str,
         limits: &ContractLimits,
     ) -> Result<Self, ContractError> {
+        Self::adapter_error_with_presentation(failure_kind, reason_code, None, limits)
+    }
+
+    pub fn author_input_error(
+        failure_kind: TransportFailureKind,
+        reason_code: &str,
+        route: AuthorInputTransportRouteV1,
+        input_source: &str,
+        error: Option<TransportIoErrorV1>,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        let exact_kind = match (&error, failure_kind) {
+            (None, TransportFailureKind::Decoding) => true,
+            (Some(error), TransportFailureKind::Acquisition) => error.is_caller_acquisition(),
+            (Some(error), TransportFailureKind::Adapter) => !error.is_caller_acquisition(),
+            _ => false,
+        };
+        if !exact_kind {
+            return Err(ContractError::InvalidInvariant);
+        }
+        Self::adapter_error_with_presentation(
+            failure_kind,
+            reason_code,
+            Some(TransportPresentationV1::AuthorInput {
+                route,
+                input_source: bounded(input_source)?,
+                error,
+            }),
+            limits,
+        )
+    }
+
+    pub fn repository_invocation_error(
+        reason_code: &str,
+        command: RepositoryInvocationCommandV1,
+        failure: &RepositoryInvocationFailureView,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        let failure_kind = match failure.causal_disposition {
+            AdapterCausalDisposition::Prerequisite => TransportFailureKind::Repository,
+            AdapterCausalDisposition::CallerRefusal => TransportFailureKind::Acquisition,
+            AdapterCausalDisposition::ImplementationFailure => TransportFailureKind::Adapter,
+        };
+        Self::adapter_error_with_presentation(
+            failure_kind,
+            reason_code,
+            Some(TransportPresentationV1::RepositoryInvocation {
+                command,
+                failure: Box::new(RepositoryInvocationFailureDetailsV1::from_view(failure)?),
+            }),
+            limits,
+        )
+    }
+
+    pub fn working_directory_error(
+        failure_kind: TransportFailureKind,
+        reason_code: &str,
+        command: AuthorWorkingDirectoryCommandV1,
+        error: TransportIoErrorV1,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        if failure_kind != TransportFailureKind::Adapter {
+            return Err(ContractError::InvalidInvariant);
+        }
+        Self::adapter_error_with_presentation(
+            failure_kind,
+            reason_code,
+            Some(TransportPresentationV1::WorkingDirectory { command, error }),
+            limits,
+        )
+    }
+
+    fn adapter_error_with_presentation(
+        failure_kind: TransportFailureKind,
+        reason_code: &str,
+        presentation: Option<TransportPresentationV1>,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
         let details_schema = binding(TRANSPORT_DETAILS_REF)?;
         let details = contract_value(
             &TransportFailureDetailsV1 {
                 failure_kind,
                 reason_code: bounded(reason_code)?,
+                presentation,
             },
             limits,
         )?;
@@ -3116,7 +4814,32 @@ impl TransportFailureV1 {
             }
             let details: TransportFailureDetailsV1 =
                 admit_contract_value(problem.details(), limits)?;
-            if details.failure_kind != failure_kind {
+            let presentation_matches = match &details.presentation {
+                None => true,
+                Some(TransportPresentationV1::AuthorInput {
+                    route,
+                    input_source: _,
+                    error,
+                }) => author_input_presentation_is_exact(
+                    failure_kind,
+                    details.reason_code.as_str(),
+                    *route,
+                    error.as_ref(),
+                ),
+                Some(TransportPresentationV1::WorkingDirectory { .. }) => {
+                    failure_kind == TransportFailureKind::Adapter
+                        && details.reason_code.as_str() == "transport.repository_root_unavailable"
+                }
+                Some(TransportPresentationV1::RepositoryInvocation { command, failure }) => {
+                    repository_invocation_presentation_is_exact(
+                        failure_kind,
+                        details.reason_code.as_str(),
+                        *command,
+                        failure,
+                    )
+                }
+            };
+            if details.failure_kind != failure_kind || !presentation_matches {
                 return Err(ContractError::InvalidInvariant);
             }
         }
@@ -3143,6 +4866,176 @@ impl TransportFailureV1 {
     pub fn status(&self) -> TerminalStatus {
         self.terminal.status()
     }
+
+    pub fn failure_kind(&self) -> TransportFailureKind {
+        self.failure_kind
+    }
+
+    pub fn reason_code(&self, limits: &ContractLimits) -> Result<String, ContractError> {
+        let problems = match self.status() {
+            TerminalStatus::Blocked => self.terminal.blockers(),
+            TerminalStatus::Refused => self.terminal.refusals(),
+            TerminalStatus::Error => self.terminal.errors(),
+            TerminalStatus::Ok => return Err(ContractError::InvalidInvariant),
+        };
+        let [problem] = problems else {
+            return Err(ContractError::InvalidInvariant);
+        };
+        let details: TransportFailureDetailsV1 = admit_contract_value(problem.details(), limits)?;
+        Ok(details.reason_code.as_str().to_owned())
+    }
+
+    pub fn presentation(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<TransportPresentationViewV1>, ContractError> {
+        let problems = match self.status() {
+            TerminalStatus::Blocked => self.terminal.blockers(),
+            TerminalStatus::Refused => self.terminal.refusals(),
+            TerminalStatus::Error => self.terminal.errors(),
+            TerminalStatus::Ok => return Err(ContractError::InvalidInvariant),
+        };
+        let [problem] = problems else {
+            return Err(ContractError::InvalidInvariant);
+        };
+        let details: TransportFailureDetailsV1 = admit_contract_value(problem.details(), limits)?;
+        Ok(details
+            .presentation
+            .as_ref()
+            .map(|presentation| presentation.to_view(self.failure_kind)))
+    }
+}
+
+fn transport_cause(failure_kind: TransportFailureKind) -> AdapterCausalDisposition {
+    match failure_kind {
+        TransportFailureKind::Repository => AdapterCausalDisposition::Prerequisite,
+        TransportFailureKind::Acquisition | TransportFailureKind::Decoding => {
+            AdapterCausalDisposition::CallerRefusal
+        }
+        TransportFailureKind::Framing
+        | TransportFailureKind::Serialization
+        | TransportFailureKind::Emission
+        | TransportFailureKind::Adapter => AdapterCausalDisposition::ImplementationFailure,
+    }
+}
+
+fn author_input_presentation_is_exact(
+    failure_kind: TransportFailureKind,
+    reason_code: &str,
+    route: AuthorInputTransportRouteV1,
+    error: Option<&TransportIoErrorV1>,
+) -> bool {
+    let expected_reason = match (route, error.is_some()) {
+        (AuthorInputTransportRouteV1::Charter, true) => {
+            "transport.author_charter_input_unavailable"
+        }
+        (AuthorInputTransportRouteV1::Charter, false) => "transport.author_charter_input_invalid",
+        (AuthorInputTransportRouteV1::ProjectContext, true) => {
+            "transport.author_project_context_input_unavailable"
+        }
+        (AuthorInputTransportRouteV1::ProjectContext, false) => {
+            "transport.author_project_context_input_invalid"
+        }
+    };
+    reason_code == expected_reason
+        && match (failure_kind, error) {
+            (TransportFailureKind::Decoding, None) => true,
+            (TransportFailureKind::Acquisition, Some(error)) => error.is_caller_acquisition(),
+            (TransportFailureKind::Adapter, Some(error)) => !error.is_caller_acquisition(),
+            _ => false,
+        }
+}
+
+fn repository_invocation_presentation_is_exact(
+    failure_kind: TransportFailureKind,
+    reason_code: &str,
+    command: RepositoryInvocationCommandV1,
+    failure: &RepositoryInvocationFailureDetailsV1,
+) -> bool {
+    let operation_matches = matches!(
+        (command, failure.operation.as_str()),
+        (
+            RepositoryInvocationCommandV1::CharterApprove,
+            "charter_approval"
+        ) | (
+            RepositoryInvocationCommandV1::ApproverBootstrap,
+            "bootstrap"
+        ) | (
+            RepositoryInvocationCommandV1::ApproverAddCredential,
+            "add_credential"
+        ) | (
+            RepositoryInvocationCommandV1::ApproverRevokeCredential,
+            "revoke_credential"
+        ) | (
+            RepositoryInvocationCommandV1::ApproverUpdateMapping,
+            "update_mapping"
+        )
+    );
+    if reason_code != "transport.repository_invocation_unavailable"
+        || !operation_matches
+        || failure.schema_version.as_str() != "1.0"
+        || failure.status.as_str() != "refused"
+        || !failure.changed_paths.as_slice().is_empty()
+        || failure.operation_id.is_some()
+        || failure.next_actions.as_slice().len() != 1
+    {
+        return false;
+    }
+
+    let (stage, code, message, retryable, action) = match (
+        failure.schema_id.as_str(),
+        failure.stage.as_ref().map(BoundedString::as_str),
+    ) {
+        (
+            "handbook.repository-invocation-preflight-result",
+            Some("repository_identity"),
+        ) if matches!(
+            failure_kind,
+            TransportFailureKind::Repository
+                | TransportFailureKind::Acquisition
+                | TransportFailureKind::Adapter
+        )
+            && failure.repository_identity_fingerprint.is_none() => (
+            "repository_identity",
+            "repository_identity_unavailable",
+            "repository invocation identity is unavailable",
+            false,
+            "run or repair handbook setup, then retry the complete operation",
+        ),
+        ("handbook.repository-invocation-preflight-result", Some("operation_id"))
+            if failure_kind == TransportFailureKind::Adapter
+                && failure.repository_identity_fingerprint.is_some() => (
+            "operation_id",
+            "operation_id_entropy_unavailable",
+            "operating-system randomness was unavailable for operation ID allocation",
+            true,
+            "retry the complete operation with fresh operating-system randomness",
+        ),
+        ("handbook.repository-invocation-recovery-refusal", None)
+            if matches!(
+                failure_kind,
+                TransportFailureKind::Repository
+                    | TransportFailureKind::Acquisition
+                    | TransportFailureKind::Adapter
+            ) && failure.repository_identity_fingerprint.is_none() => (
+            "",
+            "authority_recovery_blocked",
+            "repository authority recovery could not complete safely",
+            false,
+            "repair retained registry/approval recovery evidence, then retry the complete operation",
+        ),
+        _ => return false,
+    };
+    let observed_stage = failure
+        .stage
+        .as_ref()
+        .map(BoundedString::as_str)
+        .unwrap_or_default();
+    observed_stage == stage
+        && failure.refusal.code.as_str() == code
+        && failure.refusal.message.as_str() == message
+        && failure.refusal.retryable == retryable
+        && failure.next_actions.as_slice()[0].as_str() == action
 }
 
 fn transport_disposition(
@@ -3442,6 +5335,69 @@ impl InvocationResponseV1 {
             _ => Ok(None),
         }
     }
+
+    pub fn author_charter_outcome(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<CharterOperationResult>, ContractError> {
+        match &self.response {
+            InvocationResponseBodyV1::UseCase(response) => response.author_charter_outcome(limits),
+            _ => Ok(None),
+        }
+    }
+
+    pub fn author_project_context_outcome(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<ProjectContextCommandOutcome>, ContractError> {
+        match &self.response {
+            InvocationResponseBodyV1::UseCase(response) => {
+                response.author_project_context_outcome(limits)
+            }
+            _ => Ok(None),
+        }
+    }
+
+    pub fn approver_administration_outcome(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<ApproverOperationResult>, ContractError> {
+        match &self.response {
+            InvocationResponseBodyV1::UseCase(response) => {
+                response.approver_administration_outcome(limits)
+            }
+            _ => Ok(None),
+        }
+    }
+
+    pub fn transport_failure_reason_code(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<String>, ContractError> {
+        match &self.response {
+            InvocationResponseBodyV1::TransportFailure(response) => {
+                response.reason_code(limits).map(Some)
+            }
+            _ => Ok(None),
+        }
+    }
+
+    pub fn transport_failure_kind(&self) -> Option<TransportFailureKind> {
+        match &self.response {
+            InvocationResponseBodyV1::TransportFailure(response) => Some(response.failure_kind()),
+            _ => None,
+        }
+    }
+
+    pub fn transport_presentation(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<TransportPresentationViewV1>, ContractError> {
+        match &self.response {
+            InvocationResponseBodyV1::TransportFailure(response) => response.presentation(limits),
+            _ => Ok(None),
+        }
+    }
 }
 
 #[derive(Serialize)]
@@ -3487,6 +5443,212 @@ mod tests {
 
     fn fingerprint(label: &str) -> String {
         sha256_fingerprint(label.as_bytes()).as_str().to_owned()
+    }
+
+    fn repository_failure(operation: &str) -> RepositoryInvocationFailureView {
+        RepositoryInvocationFailureView {
+            schema_id: "handbook.repository-invocation-preflight-result".to_owned(),
+            schema_version: "1.0".to_owned(),
+            operation: operation.to_owned(),
+            stage: Some("repository_identity".to_owned()),
+            status: "refused".to_owned(),
+            repository_identity_fingerprint: None,
+            operation_id: None,
+            changed_paths: Vec::new(),
+            refusal: AuthorOperationRefusal {
+                code: "repository_identity_unavailable".to_owned(),
+                message: "repository invocation identity is unavailable".to_owned(),
+                retryable: false,
+            },
+            next_actions: vec![
+                "run or repair handbook setup, then retry the complete operation".to_owned(),
+            ],
+            causal_disposition: AdapterCausalDisposition::Prerequisite,
+        }
+    }
+
+    fn effect(
+        target_ref: &str,
+        content_fingerprint: Option<String>,
+        disposition: AdapterPublicEffectDisposition,
+    ) -> AdapterPublicEffect {
+        AdapterPublicEffect {
+            target_ref: target_ref.to_owned(),
+            content_fingerprint,
+            disposition,
+        }
+    }
+
+    #[test]
+    fn packet_three_semantic_details_reject_repository_invocation_failures() {
+        let limits = ContractLimits::packet0();
+        let charter = CharterOperationResult {
+            schema_id: "handbook.charter-operation-result".to_owned(),
+            schema_version: "1.0".to_owned(),
+            operation: CharterOperation::Approve,
+            status: AuthorOperationStatus::Refused,
+            canonical_path: None,
+            source_fingerprint: None,
+            rendered_output_fingerprint: None,
+            intake_ref: None,
+            intake_fingerprint: None,
+            candidate_ref: None,
+            candidate_fingerprint: None,
+            approval_ref: None,
+            approval_fingerprint: None,
+            promotion_ref: None,
+            promotion_fingerprint: None,
+            changed_paths: Vec::new(),
+            refusal: Some(repository_failure("charter_approval").refusal.clone()),
+            next_actions: Vec::new(),
+            invocation_failure: Some(repository_failure("charter_approval")),
+            causal_disposition: Some(AdapterCausalDisposition::Prerequisite),
+            public_effects: Vec::new(),
+        };
+        assert!(UseCaseResponseV1::author_charter(&charter, &limits).is_err());
+
+        let approver = ApproverOperationResult {
+            schema_id: "handbook.repository-invocation-preflight-result".to_owned(),
+            schema_version: "1.0".to_owned(),
+            operation: ApproverOperation::Bootstrap,
+            status: AuthorOperationStatus::Refused,
+            changed_paths: Vec::new(),
+            refusal: Some(repository_failure("bootstrap").refusal.clone()),
+            next_actions: Vec::new(),
+            legacy_projection: Some(ApproverOperationProjection::InvocationFailure(
+                repository_failure("bootstrap"),
+            )),
+            causal_disposition: Some(AdapterCausalDisposition::Prerequisite),
+            public_effects: Vec::new(),
+        };
+        assert!(UseCaseResponseV1::approver_administration(&approver, &limits).is_err());
+    }
+
+    #[test]
+    fn packet_three_validate_terminals_reject_every_receipt() {
+        let limits = ContractLimits::packet0();
+        let canonical_effect = effect(
+            ".handbook/project/charter.yaml",
+            Some(fingerprint("charter")),
+            AdapterPublicEffectDisposition::DurableCreated,
+        );
+        let success = CharterOperationResult {
+            schema_id: "handbook.charter-operation-result".to_owned(),
+            schema_version: "1.0".to_owned(),
+            operation: CharterOperation::Validate,
+            status: AuthorOperationStatus::Succeeded,
+            canonical_path: Some(".handbook/project/charter.yaml".to_owned()),
+            source_fingerprint: Some(fingerprint("charter")),
+            rendered_output_fingerprint: None,
+            intake_ref: None,
+            intake_fingerprint: None,
+            candidate_ref: None,
+            candidate_fingerprint: None,
+            approval_ref: None,
+            approval_fingerprint: None,
+            promotion_ref: None,
+            promotion_fingerprint: None,
+            changed_paths: Vec::new(),
+            refusal: None,
+            next_actions: Vec::new(),
+            invocation_failure: None,
+            causal_disposition: Some(AdapterCausalDisposition::CallerRefusal),
+            public_effects: vec![canonical_effect.clone()],
+        };
+        assert!(UseCaseResponseV1::author_charter(&success, &limits).is_err());
+
+        let refused = CharterOperationResult {
+            status: AuthorOperationStatus::Refused,
+            refusal: Some(AuthorOperationRefusal {
+                code: "candidate_refused".to_owned(),
+                message: "candidate refused".to_owned(),
+                retryable: false,
+            }),
+            public_effects: vec![canonical_effect],
+            ..success
+        };
+        assert!(UseCaseResponseV1::author_charter(&refused, &limits).is_err());
+
+        let validate_success = ProjectContextCommandOutcome::Validate {
+            input_mode: "stdin".to_owned(),
+            input_source: "standard-input".to_owned(),
+            result: Ok(()),
+        };
+        let result = AuthorProjectContextResultV1::validate("stdin", "standard-input").unwrap();
+        let receipts = packet3_receipts(
+            UseCaseKind::AuthorProjectContext,
+            &[effect(
+                ".handbook/project/context.yaml",
+                Some(fingerprint("context")),
+                AdapterPublicEffectDisposition::DurableCreated,
+            )],
+            &limits,
+        )
+        .unwrap();
+        assert!(UseCaseResponseV1::author_project_context_success(
+            result,
+            receipts,
+            empty_bounded().unwrap(),
+            empty_bounded().unwrap(),
+            &limits,
+        )
+        .is_err());
+        assert!(UseCaseResponseV1::author_project_context(&validate_success, &limits).is_ok());
+
+        let validate_refused = ProjectContextCommandOutcome::Validate {
+            input_mode: "file".to_owned(),
+            input_source: "context.yaml".to_owned(),
+            result: Err(AuthorProjectContextRefusal {
+                kind: AuthorProjectContextRefusalKind::MalformedStructuredInput,
+                summary: "invalid input".to_owned(),
+                broken_subject: "context.yaml".to_owned(),
+                next_safe_action: "repair input".to_owned(),
+                causal_disposition: AdapterCausalDisposition::CallerRefusal,
+                public_effects: vec![effect(
+                    ".handbook/project/context.yaml",
+                    Some(fingerprint("context")),
+                    AdapterPublicEffectDisposition::DurableCreated,
+                )],
+            }),
+        };
+        assert!(UseCaseResponseV1::author_project_context(&validate_refused, &limits).is_err());
+    }
+
+    #[test]
+    fn project_context_author_receipts_are_exactly_correlated_to_the_outcome() {
+        let limits = ContractLimits::packet0();
+        let source = fingerprint("context-source");
+        let authored = |public_effects| ProjectContextCommandOutcome::Author {
+            input_mode: "file".to_owned(),
+            input_source: "context.yaml".to_owned(),
+            result: Ok(AuthorProjectContextResult {
+                canonical_repo_relative_path: ".handbook/project/context.yaml".to_owned(),
+                bytes_written: 42,
+                source_fingerprint: source.clone(),
+                rendered_output_fingerprint: fingerprint("context-rendered"),
+                rendered_media_type: "text/markdown",
+                public_effects,
+            }),
+        };
+        assert!(UseCaseResponseV1::author_project_context(&authored(Vec::new()), &limits).is_err());
+        assert!(UseCaseResponseV1::author_project_context(
+            &authored(vec![effect(
+                ".handbook/project/context.yaml",
+                Some(fingerprint("wrong")),
+                AdapterPublicEffectDisposition::DurableCreated,
+            )]),
+            &limits,
+        )
+        .is_err());
+        assert!(UseCaseResponseV1::author_project_context(
+            &authored(vec![effect(
+                ".handbook/project/context.yaml",
+                Some(source.clone()),
+                AdapterPublicEffectDisposition::DurableCreated,
+            )]),
+            &limits,
+        )
+        .is_ok());
     }
 
     fn setup_projection_execution_with_fill(path_bytes: usize, fill: char) -> SetupExecutionResult {
@@ -3998,6 +6160,10 @@ mod tests {
             refusal: None,
             next_actions: vec!["review charter".to_owned()],
             invocation_failure: None,
+            causal_disposition: Some(
+                crate::charter_product::AdapterCausalDisposition::CallerRefusal,
+            ),
+            public_effects: Vec::new(),
         };
         let charter =
             serde_json::to_value(AuthorCharterResultV1::from_result(&charter).unwrap()).unwrap();
@@ -4011,6 +6177,7 @@ mod tests {
             source_fingerprint: fingerprint("context-source"),
             rendered_output_fingerprint: fingerprint("context-rendered"),
             rendered_media_type: "text/markdown",
+            public_effects: Vec::new(),
         };
         let authored = serde_json::to_value(
             AuthorProjectContextResultV1::author("file", "context.yaml", &authored).unwrap(),
@@ -4057,6 +6224,10 @@ mod tests {
                 assertion_ref: None,
                 assertion_fingerprint: None,
             })),
+            causal_disposition: Some(
+                crate::charter_product::AdapterCausalDisposition::CallerRefusal,
+            ),
+            public_effects: Vec::new(),
         };
         let approver =
             serde_json::to_value(ApproverAdministrationResultV1::from_result(&approver).unwrap())

@@ -1,8 +1,11 @@
-use crate::approver_registry_mutation::recover_complete_registry_approval_authority_locked;
-use crate::approver_registry_observation::observe_committed_approver_registry_if_present_locked;
-use crate::canonical_repo_support::CanonicalWorkspace;
+use crate::approver_registry_observation::{
+    observe_committed_approver_registry_for_repository_preflight_locked,
+    observe_committed_approver_registry_if_present_locked,
+};
+use crate::canonical_repo_support::{CanonicalWorkspace, RepoRelativeFileAccessError};
 use crate::charter_authority_workflow::RegistryAuthorityLocks;
 use crate::charter_lineage_store::{create_new_file, sync_directory};
+use crate::OwnerCausalDispositionV1;
 use serde::{Deserialize, Deserializer, Serialize};
 use sha2::{Digest, Sha256};
 use std::fmt;
@@ -172,6 +175,13 @@ pub enum RepositoryInvocationPreparationFailureV1 {
 }
 
 impl RepositoryInvocationPreparationFailureV1 {
+    pub fn causal_disposition(&self) -> OwnerCausalDispositionV1 {
+        match self {
+            Self::Recovery(refusal) => refusal.causal_disposition(),
+            Self::Preflight(refusal) => refusal.causal_disposition(),
+        }
+    }
+
     pub fn schema_id(&self) -> &str {
         match self {
             Self::Recovery(refusal) => refusal.schema_id(),
@@ -370,12 +380,6 @@ impl RepositoryInvocationIdentityServiceV1 {
                 "repository authority locks could not be acquired safely",
             )
         })?;
-        recover_complete_registry_approval_authority_locked(repo_root).map_err(|_| {
-            setup_error(
-                RepositoryIdentitySetupErrorKindV1::AuthorityRecoveryBlocked,
-                "repository authority recovery could not complete safely",
-            )
-        })?;
         let registry =
             observe_committed_approver_registry_if_present_locked(repo_root).map_err(|_| {
                 setup_error(
@@ -468,35 +472,43 @@ impl RepositoryInvocationIdentityServiceV1 {
             }
             _ => {}
         }
-        let _locks = RegistryAuthorityLocks::acquire(repo_root).map_err(|_| {
+        let _locks = RegistryAuthorityLocks::acquire(repo_root).map_err(|failure| {
             RepositoryInvocationPreparationFailureV1::Recovery(
-                RepositoryInvocationRecoveryRefusalV1::authority_recovery_blocked(operation),
-            )
-        })?;
-        recover_complete_registry_approval_authority_locked(repo_root).map_err(|_| {
-            RepositoryInvocationPreparationFailureV1::Recovery(
-                RepositoryInvocationRecoveryRefusalV1::authority_recovery_blocked(operation),
+                RepositoryInvocationRecoveryRefusalV1::authority_recovery_blocked_with_cause(
+                    operation,
+                    failure.causal_disposition(),
+                ),
             )
         })?;
         let registry =
-            observe_committed_approver_registry_if_present_locked(repo_root).map_err(|_| {
-                RepositoryInvocationPreparationFailureV1::Recovery(
-                    RepositoryInvocationRecoveryRefusalV1::authority_recovery_blocked(operation),
+            observe_committed_approver_registry_for_repository_preflight_locked(repo_root)
+                .map_err(|failure| {
+                    RepositoryInvocationPreparationFailureV1::Recovery(
+                    RepositoryInvocationRecoveryRefusalV1::authority_recovery_blocked_with_cause(
+                        operation,
+                        failure.causal_disposition(),
+                    ),
                 )
-            })?;
+                })?;
         let registry_identity =
             validated_registry_identity(registry.as_ref().map(|observation| &observation.state))
                 .map_err(|_| {
                     RepositoryInvocationPreparationFailureV1::Recovery(
-                        RepositoryInvocationRecoveryRefusalV1::authority_recovery_blocked(
-                            operation,
-                        ),
-                    )
+                RepositoryInvocationRecoveryRefusalV1::authority_recovery_blocked_with_cause(
+                    operation,
+                    OwnerCausalDispositionV1::CallerRefusal,
+                ),
+            )
                 })?;
-        let repository_identity_fingerprint = read_repository_identity(repo_root)
-            .ok()
-            .flatten()
-            .filter(|identity| registry_identity_matches(identity, registry_identity))
+        let repository_identity_fingerprint = read_repository_identity_exact(repo_root)
+            .map_err(|failure| {
+                RepositoryInvocationPreparationFailureV1::Preflight(
+                    RepositoryInvocationPreflightResultV1::repository_identity_unavailable_with_cause(
+                        operation,
+                        failure.causal_disposition(),
+                    ),
+                )
+            })?
             .ok_or_else(|| {
                 RepositoryInvocationPreparationFailureV1::Preflight(
                     RepositoryInvocationPreflightResultV1::repository_identity_unavailable(
@@ -504,6 +516,14 @@ impl RepositoryInvocationIdentityServiceV1 {
                     ),
                 )
             })?;
+        if !registry_identity_matches(&repository_identity_fingerprint, registry_identity) {
+            return Err(RepositoryInvocationPreparationFailureV1::Preflight(
+                RepositoryInvocationPreflightResultV1::repository_identity_unavailable_with_cause(
+                    operation,
+                    OwnerCausalDispositionV1::CallerRefusal,
+                ),
+            ));
+        }
 
         self.allocate_operation_id_with(operation, &repository_identity_fingerprint, fill_entropy)
             .map_err(RepositoryInvocationPreparationFailureV1::Preflight)
@@ -563,10 +583,22 @@ pub struct RepositoryInvocationPreflightResultV1 {
     changed_paths: Vec<String>,
     refusal: RepositoryInvocationRefusalV1,
     next_actions: Vec<String>,
+    #[serde(skip)]
+    causal_disposition: OwnerCausalDispositionV1,
 }
 
 impl RepositoryInvocationPreflightResultV1 {
     pub fn repository_identity_unavailable(operation: RepositoryInvocationOperationV1) -> Self {
+        Self::repository_identity_unavailable_with_cause(
+            operation,
+            OwnerCausalDispositionV1::Prerequisite,
+        )
+    }
+
+    fn repository_identity_unavailable_with_cause(
+        operation: RepositoryInvocationOperationV1,
+        causal_disposition: OwnerCausalDispositionV1,
+    ) -> Self {
         Self {
             schema_id: PREFLIGHT_SCHEMA_ID.to_owned(),
             schema_version: SCHEMA_VERSION.to_owned(),
@@ -582,6 +614,7 @@ impl RepositoryInvocationPreflightResultV1 {
                 retryable: false,
             },
             next_actions: vec![IDENTITY_UNAVAILABLE_ACTION.to_owned()],
+            causal_disposition,
         }
     }
 
@@ -610,7 +643,12 @@ impl RepositoryInvocationPreflightResultV1 {
                 retryable: true,
             },
             next_actions: vec![OPERATION_ID_ENTROPY_ACTION.to_owned()],
+            causal_disposition: OwnerCausalDispositionV1::ImplementationFailure,
         })
+    }
+
+    pub fn causal_disposition(&self) -> OwnerCausalDispositionV1 {
+        self.causal_disposition
     }
 
     pub fn operation(&self) -> RepositoryInvocationOperationV1 {
@@ -693,6 +731,7 @@ impl<'de> Deserialize<'de> for RepositoryInvocationPreflightResultV1 {
             changed_paths: wire.changed_paths,
             refusal: wire.refusal,
             next_actions: wire.next_actions,
+            causal_disposition: expected.causal_disposition,
         };
         if actual != expected {
             return Err(serde::de::Error::custom(
@@ -714,10 +753,22 @@ pub struct RepositoryInvocationRecoveryRefusalV1 {
     changed_paths: Vec<String>,
     refusal: RepositoryInvocationRefusalV1,
     next_actions: Vec<String>,
+    #[serde(skip)]
+    causal_disposition: OwnerCausalDispositionV1,
 }
 
 impl RepositoryInvocationRecoveryRefusalV1 {
     pub fn authority_recovery_blocked(operation: RepositoryInvocationOperationV1) -> Self {
+        Self::authority_recovery_blocked_with_cause(
+            operation,
+            OwnerCausalDispositionV1::Prerequisite,
+        )
+    }
+
+    pub fn authority_recovery_blocked_with_cause(
+        operation: RepositoryInvocationOperationV1,
+        causal_disposition: OwnerCausalDispositionV1,
+    ) -> Self {
         Self {
             schema_id: RECOVERY_REFUSAL_SCHEMA_ID.to_owned(),
             schema_version: SCHEMA_VERSION.to_owned(),
@@ -732,7 +783,12 @@ impl RepositoryInvocationRecoveryRefusalV1 {
                 retryable: false,
             },
             next_actions: vec![AUTHORITY_RECOVERY_ACTION.to_owned()],
+            causal_disposition,
         }
+    }
+
+    pub fn causal_disposition(&self) -> OwnerCausalDispositionV1 {
+        self.causal_disposition
     }
 
     pub fn operation(&self) -> RepositoryInvocationOperationV1 {
@@ -795,6 +851,7 @@ impl<'de> Deserialize<'de> for RepositoryInvocationRecoveryRefusalV1 {
             changed_paths: wire.changed_paths,
             refusal: wire.refusal,
             next_actions: wire.next_actions,
+            causal_disposition: expected.causal_disposition,
         };
         if actual != expected {
             return Err(serde::de::Error::custom(
@@ -841,51 +898,75 @@ fn is_repository_identity_fingerprint(value: &str) -> bool {
 pub(crate) fn read_repository_identity(
     repo_root: &Path,
 ) -> Result<Option<String>, RepositoryIdentitySetupErrorV1> {
+    read_repository_identity_exact(repo_root).map_err(|failure| {
+        setup_error(
+            RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
+            failure.detail(),
+        )
+    })
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum RepositoryIdentityReadFailureV1 {
+    Unsafe(&'static str),
+    Io(&'static str),
+}
+
+impl RepositoryIdentityReadFailureV1 {
+    fn detail(self) -> &'static str {
+        match self {
+            Self::Unsafe(detail) | Self::Io(detail) => detail,
+        }
+    }
+
+    fn causal_disposition(self) -> OwnerCausalDispositionV1 {
+        match self {
+            Self::Unsafe(_) => OwnerCausalDispositionV1::CallerRefusal,
+            Self::Io(_) => OwnerCausalDispositionV1::ImplementationFailure,
+        }
+    }
+}
+
+fn read_repository_identity_exact(
+    repo_root: &Path,
+) -> Result<Option<String>, RepositoryIdentityReadFailureV1> {
     let workspace = CanonicalWorkspace::new(repo_root);
     let relative = workspace
         .normalize_repo_relative(REPOSITORY_IDENTITY_REPO_PATH)
         .map_err(|_| {
-            setup_error(
-                RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
-                "repository identity path is not normalized",
-            )
+            RepositoryIdentityReadFailureV1::Unsafe("repository identity path is not normalized")
         })?;
     let metadata = workspace.metadata_no_follow(&relative).map_err(|_| {
-        setup_error(
-            RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
+        RepositoryIdentityReadFailureV1::Io(
             "repository identity metadata could not be observed safely",
         )
     })?;
     if metadata.is_none() {
         return Ok(None);
     }
-    let file = workspace.trusted_read_strict(&relative).map_err(|_| {
-        setup_error(
-            RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
-            "repository identity is not a safe regular file",
-        )
-    })?;
+    let file = workspace
+        .trusted_read_strict(&relative)
+        .map_err(|failure| match failure {
+            RepoRelativeFileAccessError::ReadFailure { .. } => {
+                RepositoryIdentityReadFailureV1::Io("repository identity could not be opened")
+            }
+            _ => RepositoryIdentityReadFailureV1::Unsafe(
+                "repository identity is not a safe regular file",
+            ),
+        })?;
     let (bytes, exceeded) = file.read_bytes_bounded(71).map_err(|_| {
-        setup_error(
-            RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
-            "repository identity could not be read",
-        )
+        RepositoryIdentityReadFailureV1::Io("repository identity could not be read")
     })?;
     if exceeded || bytes.len() != 71 {
-        return Err(setup_error(
-            RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
+        return Err(RepositoryIdentityReadFailureV1::Unsafe(
             "repository identity does not have the exact byte length",
         ));
     }
     let value = std::str::from_utf8(&bytes).map_err(|_| {
-        setup_error(
-            RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
-            "repository identity is not exact ASCII",
-        )
+        RepositoryIdentityReadFailureV1::Unsafe("repository identity is not exact ASCII")
     })?;
     if !is_repository_identity_fingerprint(value) {
-        return Err(setup_error(
-            RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
+        return Err(RepositoryIdentityReadFailureV1::Unsafe(
             "repository identity does not match the exact fingerprint grammar",
         ));
     }
@@ -1418,14 +1499,14 @@ mod tests {
             )
             .unwrap_err();
         assert!(matches!(
-            failure,
+            &failure,
             RepositoryInvocationPreparationFailureV1::Preflight(_)
         ));
         assert_eq!(relative_paths(repo.path()), before);
     }
 
     #[test]
-    fn unsafe_shared_recovery_wins_before_identity_preflight() {
+    fn identity_preflight_does_not_consume_shared_authority_recovery() {
         let repo = tempdir().unwrap();
         fs::create_dir_all(
             repo.path()
@@ -1439,13 +1520,18 @@ mod tests {
                 RepositoryInvocationOperationV1::ApproverBootstrap,
             )
             .unwrap_err();
-        let RepositoryInvocationPreparationFailureV1::Recovery(refusal) = failure else {
-            panic!("unsafe predecessor recovery must have precedence");
-        };
+        assert!(matches!(
+            &failure,
+            RepositoryInvocationPreparationFailureV1::Recovery(_)
+        ));
         assert_eq!(
-            serde_json::to_value(refusal).unwrap()["schema_id"],
-            RECOVERY_REFUSAL_SCHEMA_ID
+            failure.causal_disposition(),
+            OwnerCausalDispositionV1::CallerRefusal
         );
+        assert!(repo
+            .path()
+            .join(".handbook/state/transactions/registry/unknown-evidence")
+            .is_dir());
         assert!(!repo.path().join(REPOSITORY_IDENTITY_REPO_PATH).exists());
     }
 

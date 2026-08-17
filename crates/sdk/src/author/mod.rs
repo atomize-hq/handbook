@@ -121,6 +121,7 @@ fn format_repo_mutation_error(path: &str, err: RepoRelativeMutationError) -> Str
         | RepoRelativeMutationError::WriteFailure {
             path: found,
             source,
+            ..
         } => {
             format!(
                 "failed to mutate write target `{path}` at {}: {source}",

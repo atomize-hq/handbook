@@ -19,7 +19,7 @@ macro_rules! schema_asset {
 }
 
 const SCHEMA_MANIFEST_BYTES: &[u8] = include_bytes!("../../schemas/manifest.json");
-const SCHEMA_ASSETS: [(&str, &[u8]); 65] = [
+const SCHEMA_ASSETS: [(&str, &[u8]); 68] = [
     schema_asset!(
         "handbook.artifact-ref@1.0.0",
         "../../schemas/2020-12/handbook.artifact-ref/1.0.0.schema.json"
@@ -245,12 +245,24 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 65] = [
         "../../schemas/2020-12/handbook.use-case-response/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.use-case.approver-administration-details@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.approver-administration-details/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.use-case.approver-administration-result@1.0.0",
         "../../schemas/2020-12/handbook.use-case.approver-administration-result/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.use-case.author-charter-details@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.author-charter-details/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.use-case.author-charter-result@1.0.0",
         "../../schemas/2020-12/handbook.use-case.author-charter-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.use-case.author-project-context-details@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.author-project-context-details/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.use-case.author-project-context-result@1.0.0",
@@ -548,7 +560,7 @@ fn verify_schema_assets(
         &ContractLimits::packet0(),
     )
     .map_err(|_| ProductionWitnessError::StaleManifest)?;
-    if manifest.len() != 65 || assets.len() != 65 || manifest.len() != assets.len() {
+    if manifest.len() != 68 || assets.len() != 68 || manifest.len() != assets.len() {
         return Err(ProductionWitnessError::ManifestCountMismatch);
     }
     let mut seen = BTreeSet::new();
@@ -801,7 +813,7 @@ mod tests {
         let witness =
             ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
                 .unwrap();
-        assert_eq!(witness.schema_manifest().len(), 65);
+        assert_eq!(witness.schema_manifest().len(), 68);
         assert_eq!(witness.owner_versions().len(), 3);
         assert_eq!(witness.profiles().len(), 3);
         assert_eq!(witness.capabilities().len(), 1);

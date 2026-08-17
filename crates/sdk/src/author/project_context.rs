@@ -3,24 +3,35 @@ use super::project_context_shell::{
     with_project_context_authoring_lock, write_canonical_project_context_yaml,
 };
 use crate::author_route_api::ProjectContextInput;
+use crate::charter_product::{AdapterCausalDisposition, AdapterPublicEffect};
+#[cfg(any(unix, test))]
+use handbook_engine::ArtifactInspectionReason;
+#[cfg(unix)]
+use handbook_engine::ArtifactInspectionStatus;
 use handbook_engine::{
     parse_canonical_project_context, render_project_context_markdown as render_engine_view,
     resolve_shipped_profile_decisions, serialize_canonical_project_context,
     CanonicalProjectContext, ProjectContextArtifactError, ProjectContextArtifactErrorKind,
     ResolvedProfileDecisions,
 };
-#[cfg(unix)]
-use handbook_engine::{ArtifactInspectionReason, ArtifactInspectionStatus};
 use std::path::Path;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum AuthorProjectContextRefusalKind {
+    InvalidRequest,
     MissingSystemRoot,
     InvalidSystemRoot,
+    ShippedContractUnavailable,
+    SelectedDecisionMissing,
+    SystemRootInspectionFailed,
+    UnsafeSystemRoot,
+    CanonicalInspectionFailed,
     MalformedStructuredInput,
     IncompleteStructuredInput,
     ExistingCanonicalTruth,
     MutationRefused,
+    MutationSafetyRefused,
+    MutationIoFailed,
     UnsupportedPlatformStrictMutation,
 }
 
@@ -30,6 +41,8 @@ pub struct AuthorProjectContextRefusal {
     pub summary: String,
     pub broken_subject: String,
     pub next_safe_action: String,
+    pub causal_disposition: AdapterCausalDisposition,
+    pub public_effects: Vec<AdapterPublicEffect>,
 }
 
 impl std::fmt::Display for AuthorProjectContextRefusal {
@@ -47,6 +60,7 @@ pub struct AuthorProjectContextResult {
     pub source_fingerprint: String,
     pub rendered_output_fingerprint: String,
     pub rendered_media_type: &'static str,
+    pub public_effects: Vec<AdapterPublicEffect>,
 }
 
 pub(crate) fn validate_project_context_input(
@@ -100,7 +114,8 @@ pub(crate) fn author_project_context_from_input(
         preflight_author_project_context_unix(repo_root)?;
         with_project_context_authoring_lock(repo_root, || {
             preflight_author_project_context_unix(repo_root)?;
-            write_canonical_project_context_yaml(repo_root, &canonical_path, &yaml)?;
+            let public_effect =
+                write_canonical_project_context_yaml(repo_root, &canonical_path, &yaml)?;
             Ok(AuthorProjectContextResult {
                 canonical_repo_relative_path: canonical_path,
                 bytes_written: yaml.len(),
@@ -113,6 +128,7 @@ pub(crate) fn author_project_context_from_input(
                 .as_str()
                 .to_owned(),
                 rendered_media_type: "text/markdown",
+                public_effects: vec![public_effect],
             })
         })
     }
@@ -133,10 +149,12 @@ fn canonical_project_context(input: &ProjectContextInput) -> CanonicalProjectCon
 
 fn bundled_decisions() -> Result<ResolvedProfileDecisions, AuthorProjectContextRefusal> {
     resolve_shipped_profile_decisions(Path::new(".")).map_err(|_| AuthorProjectContextRefusal {
-        kind: AuthorProjectContextRefusalKind::InvalidSystemRoot,
+        kind: AuthorProjectContextRefusalKind::ShippedContractUnavailable,
         summary: "failed to resolve the shipped Project Context contract".to_owned(),
         broken_subject: "shipped Project Context profile decision".to_owned(),
         next_safe_action: "repair the installed Handbook definition package and retry".to_owned(),
+        causal_disposition: AdapterCausalDisposition::Prerequisite,
+        public_effects: Vec::new(),
     })
 }
 
@@ -149,11 +167,13 @@ fn selected_path(
         .find(|decision| decision.instance_id().as_str() == "project_context")
         .map(|decision| decision.canonical_path())
         .ok_or_else(|| AuthorProjectContextRefusal {
-            kind: AuthorProjectContextRefusalKind::InvalidSystemRoot,
+            kind: AuthorProjectContextRefusalKind::SelectedDecisionMissing,
             summary: "the shipped profile has no selected Project Context decision".to_owned(),
             broken_subject: "shipped Project Context profile decision".to_owned(),
             next_safe_action: "repair the installed Handbook definition package and retry"
                 .to_owned(),
+            causal_disposition: AdapterCausalDisposition::Prerequisite,
+            public_effects: Vec::new(),
         })
 }
 
@@ -169,22 +189,28 @@ fn preflight_author_project_context_unix(
                 summary: "canonical `.handbook` root is missing; project-context authoring requires setup first".to_owned(),
                 broken_subject: "canonical `.handbook` root".to_owned(),
                 next_safe_action: "run `handbook setup`".to_owned(),
+                causal_disposition: AdapterCausalDisposition::Prerequisite,
+                public_effects: Vec::new(),
             }
         } else {
             AuthorProjectContextRefusal {
-                kind: AuthorProjectContextRefusalKind::InvalidSystemRoot,
+                kind: AuthorProjectContextRefusalKind::SystemRootInspectionFailed,
                 summary: "failed to inspect the canonical `.handbook` root".to_owned(),
                 broken_subject: "canonical `.handbook` root".to_owned(),
                 next_safe_action: "repair the canonical `.handbook` root and retry".to_owned(),
+                causal_disposition: AdapterCausalDisposition::ImplementationFailure,
+                public_effects: Vec::new(),
             }
         }
     })?;
     if metadata.file_type().is_symlink() || !metadata.is_dir() {
         return Err(AuthorProjectContextRefusal {
-            kind: AuthorProjectContextRefusalKind::InvalidSystemRoot,
+            kind: AuthorProjectContextRefusalKind::UnsafeSystemRoot,
             summary: "canonical `.handbook` root must be a real directory".to_owned(),
             broken_subject: "canonical `.handbook` root".to_owned(),
             next_safe_action: "repair the canonical `.handbook` root and retry".to_owned(),
+            causal_disposition: AdapterCausalDisposition::CallerRefusal,
+            public_effects: Vec::new(),
         });
     }
 
@@ -196,18 +222,53 @@ fn preflight_author_project_context_unix(
             summary: "selected canonical Project Context truth already exists and is valid; authoring refuses to overwrite it".to_owned(),
             broken_subject: canonical_path.to_owned(),
             next_safe_action: format!("inspect `{canonical_path}` instead of overwriting it"),
+            causal_disposition: AdapterCausalDisposition::CallerRefusal,
+            public_effects: Vec::new(),
         }),
         Err(error) if error.reason() == ArtifactInspectionReason::RequiredPathMissing => Ok(()),
         Err(error) if error.status() == ArtifactInspectionStatus::StructurallyInvalid => Ok(()),
         Err(error) => Err(AuthorProjectContextRefusal {
-            kind: AuthorProjectContextRefusalKind::MutationRefused,
+            kind: AuthorProjectContextRefusalKind::CanonicalInspectionFailed,
             summary: format!(
                 "selected canonical Project Context cannot be safely inspected: {:?}",
                 error.reason()
             ),
             broken_subject: canonical_path.to_owned(),
             next_safe_action: "repair the selected Project Context path and retry".to_owned(),
+            causal_disposition: project_context_inspection_cause(error.reason()),
+            public_effects: Vec::new(),
         }),
+    }
+}
+
+#[cfg(any(unix, test))]
+fn project_context_inspection_cause(reason: ArtifactInspectionReason) -> AdapterCausalDisposition {
+    match reason {
+        ArtifactInspectionReason::RepositoryReadFailed => {
+            AdapterCausalDisposition::ImplementationFailure
+        }
+        ArtifactInspectionReason::RequiredPathMissing
+        | ArtifactInspectionReason::OptionalPathMissing
+        | ArtifactInspectionReason::ConditionalEvidenceUnavailablePathMissing
+        | ArtifactInspectionReason::ConditionalEvidenceUnavailablePathPresent
+        | ArtifactInspectionReason::UnsupportedPlatformStrictRead => {
+            AdapterCausalDisposition::Prerequisite
+        }
+        ArtifactInspectionReason::PresentAndStructurallyValid
+        | ArtifactInspectionReason::YamlSyntaxInvalid
+        | ArtifactInspectionReason::DuplicateYamlKey
+        | ArtifactInspectionReason::DocumentNotObject
+        | ArtifactInspectionReason::StructuralValidationFailed
+        | ArtifactInspectionReason::DocumentLimitExceeded
+        | ArtifactInspectionReason::AggregateReadLimitExceeded
+        | ArtifactInspectionReason::SymlinkRefused
+        | ArtifactInspectionReason::NonRegularFileRefused
+        | ArtifactInspectionReason::UnsafeRepositoryPath
+        | ArtifactInspectionReason::TypedDecodeFailed
+        | ArtifactInspectionReason::RenderedViewRefused
+        | ArtifactInspectionReason::ObservationChangedDuringInspection => {
+            AdapterCausalDisposition::CallerRefusal
+        }
     }
 }
 
@@ -233,6 +294,31 @@ fn map_artifact_error(error: ProjectContextArtifactError) -> AuthorProjectContex
         summary: error.detail().to_owned(),
         broken_subject: "canonical project-context input".to_owned(),
         next_safe_action: "repair the canonical `1.0` Project Context YAML and retry".to_owned(),
+        causal_disposition: project_context_artifact_cause(error.kind()),
+        public_effects: Vec::new(),
+    }
+}
+
+fn project_context_artifact_cause(
+    kind: ProjectContextArtifactErrorKind,
+) -> AdapterCausalDisposition {
+    match kind {
+        ProjectContextArtifactErrorKind::SelectedDecisionMissing
+        | ProjectContextArtifactErrorKind::SelectedContractMismatch => {
+            AdapterCausalDisposition::Prerequisite
+        }
+        ProjectContextArtifactErrorKind::SerializationFailed => {
+            AdapterCausalDisposition::ImplementationFailure
+        }
+        ProjectContextArtifactErrorKind::SourceLimitExceeded
+        | ProjectContextArtifactErrorKind::DuplicateKey
+        | ProjectContextArtifactErrorKind::SyntaxError
+        | ProjectContextArtifactErrorKind::NonObjectRoot
+        | ProjectContextArtifactErrorKind::StructuralValidationFailed
+        | ProjectContextArtifactErrorKind::TypedDecodeFailed
+        | ProjectContextArtifactErrorKind::RenderedViewRefused => {
+            AdapterCausalDisposition::CallerRefusal
+        }
     }
 }
 
@@ -243,5 +329,58 @@ fn unsupported_platform_refusal(canonical_path: &str) -> AuthorProjectContextRef
         summary: "unsupported_platform_strict_mutation: Project Context mutation requires descriptor-relative no-follow filesystem operations unavailable on this platform".to_owned(),
         broken_subject: canonical_path.to_owned(),
         next_safe_action: "run the Project Context mutation on a supported Unix host".to_owned(),
+        causal_disposition: AdapterCausalDisposition::Prerequisite,
+        public_effects: Vec::new(),
+    }
+}
+
+#[cfg(test)]
+mod packet3_causal_tests {
+    use super::*;
+
+    #[test]
+    fn inspection_safety_io_and_unavailable_causes_are_distinct() {
+        assert_eq!(
+            project_context_inspection_cause(ArtifactInspectionReason::UnsafeRepositoryPath),
+            AdapterCausalDisposition::CallerRefusal
+        );
+        assert_eq!(
+            project_context_inspection_cause(ArtifactInspectionReason::DocumentLimitExceeded),
+            AdapterCausalDisposition::CallerRefusal
+        );
+        assert_eq!(
+            project_context_inspection_cause(
+                ArtifactInspectionReason::ObservationChangedDuringInspection
+            ),
+            AdapterCausalDisposition::CallerRefusal
+        );
+        assert_eq!(
+            project_context_inspection_cause(ArtifactInspectionReason::RepositoryReadFailed),
+            AdapterCausalDisposition::ImplementationFailure
+        );
+        assert_eq!(
+            project_context_inspection_cause(
+                ArtifactInspectionReason::UnsupportedPlatformStrictRead
+            ),
+            AdapterCausalDisposition::Prerequisite
+        );
+    }
+
+    #[test]
+    fn artifact_input_profile_and_serialization_causes_are_distinct() {
+        assert_eq!(
+            project_context_artifact_cause(ProjectContextArtifactErrorKind::SyntaxError),
+            AdapterCausalDisposition::CallerRefusal
+        );
+        assert_eq!(
+            project_context_artifact_cause(
+                ProjectContextArtifactErrorKind::SelectedContractMismatch
+            ),
+            AdapterCausalDisposition::Prerequisite
+        );
+        assert_eq!(
+            project_context_artifact_cause(ProjectContextArtifactErrorKind::SerializationFailed),
+            AdapterCausalDisposition::ImplementationFailure
+        );
     }
 }

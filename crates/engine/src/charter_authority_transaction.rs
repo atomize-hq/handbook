@@ -38,10 +38,13 @@ use crate::project_posture::{
     bind_exact_canonical_bytes, derive_project_posture_kernel, prepare_posture_change,
     replay_project_posture_kernel, verify_precommit_cas, PostureChangeRequest,
 };
-use crate::DefinitionFingerprint;
 use crate::{
     load_shipped_charter_definition_registry, parse_canonical_charter,
     resolve_shipped_profile_decisions, serialize_canonical_charter, ExactDefinitionRef,
+};
+use crate::{
+    DefinitionFingerprint, OwnerCausalDispositionV1, OwnerPublicEffectDispositionV1,
+    OwnerPublicEffectV1,
 };
 use serde_json::Value;
 #[cfg(any(test, feature = "test-support"))]
@@ -281,6 +284,7 @@ pub struct CharterPromotionCommitV1 {
     pub promotion_ref: String,
     pub lifecycle_transition_ref: String,
     pub committed_marker_path: PathBuf,
+    pub public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -487,6 +491,8 @@ pub(crate) struct CommittedAuthorityHeadV1 {
 pub struct CharterPromotionErrorV1 {
     kind: CharterPromotionErrorKindV1,
     detail: String,
+    causal_disposition: OwnerCausalDispositionV1,
+    public_effects: Vec<OwnerPublicEffectV1>,
 }
 
 impl CharterPromotionErrorV1 {
@@ -494,6 +500,8 @@ impl CharterPromotionErrorV1 {
         Self {
             kind,
             detail: detail.into(),
+            causal_disposition: default_causal_disposition(kind),
+            public_effects: Vec::new(),
         }
     }
 
@@ -503,6 +511,33 @@ impl CharterPromotionErrorV1 {
 
     pub fn detail(&self) -> &str {
         &self.detail
+    }
+
+    pub fn causal_disposition(&self) -> OwnerCausalDispositionV1 {
+        self.causal_disposition
+    }
+
+    pub fn public_effects(&self) -> &[OwnerPublicEffectV1] {
+        &self.public_effects
+    }
+
+    fn with_causal_disposition(mut self, causal_disposition: OwnerCausalDispositionV1) -> Self {
+        self.causal_disposition = causal_disposition;
+        self
+    }
+
+    fn with_public_effect(mut self, public_effect: OwnerPublicEffectV1) -> Self {
+        upsert_public_effect(&mut self.public_effects, public_effect);
+        self
+    }
+
+    fn with_preceding_public_effects(mut self, public_effects: &[OwnerPublicEffectV1]) -> Self {
+        let mut merged = public_effects.to_vec();
+        for public_effect in self.public_effects {
+            upsert_public_effect(&mut merged, public_effect);
+        }
+        self.public_effects = merged;
+        self
     }
 }
 
@@ -550,6 +585,7 @@ pub(crate) struct RetainedPromotionAuthorityV1 {
 
 pub(crate) struct RetainedAuthorityTransactionV1<'a> {
     service: &'a CharterAuthorityTransactionServiceV1,
+    recovery_public_effects: Vec<OwnerPublicEffectV1>,
     _locks: AuthorityLocks,
 }
 
@@ -594,7 +630,7 @@ impl CharterAuthorityTransactionServiceV1 {
                 "recovery fault fixture requires exactly one pending transaction",
             ));
         };
-        self.recover_one_pending(pending)
+        self.recover_one_pending(pending).map(|_| ())
     }
 
     #[cfg(test)]
@@ -694,25 +730,39 @@ impl CharterAuthorityTransactionServiceV1 {
     ) -> Result<RetainedAuthorityTransactionV1<'_>, CharterPromotionErrorV1> {
         ensure_supported_platform()?;
         let locks = AuthorityLocks::acquire(&self.repo_root)?;
-        self.recover_pending_locked()?;
-        recover_complete_registry_approval_authority_locked(&self.repo_root).map_err(
-            |failure| {
-                error(
-                    CharterPromotionErrorKindV1::DurabilityViolation,
-                    format!("registry/approval recovery refused: {}", failure.detail()),
-                )
-            },
-        )?;
-        CharterLifecycleStoreV1::new(&self.repo_root)
+        let mut recovery_public_effects = self.recover_pending_locked()?;
+        let registry_approval_effects = recover_complete_registry_approval_authority_locked(
+            &self.repo_root,
+        )
+        .map_err(|failure| {
+            let mapped = error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                format!("registry/approval recovery refused: {}", failure.detail()),
+            )
+            .with_causal_disposition(failure.causal_disposition())
+            .with_preceding_public_effects(failure.public_effects());
+            mapped.with_preceding_public_effects(&recovery_public_effects)
+        })?;
+        for public_effect in registry_approval_effects {
+            upsert_public_effect(&mut recovery_public_effects, public_effect);
+        }
+        let lifecycle_effects = CharterLifecycleStoreV1::new(&self.repo_root)
             .recover_retained_locked()
             .map_err(|failure| {
-                error(
+                let mapped = error(
                     CharterPromotionErrorKindV1::DurabilityViolation,
                     format!("lifecycle recovery refused: {}", failure.detail()),
                 )
+                .with_causal_disposition(failure.causal_disposition())
+                .with_preceding_public_effects(failure.public_effects());
+                mapped.with_preceding_public_effects(&recovery_public_effects)
             })?;
+        for public_effect in lifecycle_effects {
+            upsert_public_effect(&mut recovery_public_effects, public_effect);
+        }
         Ok(RetainedAuthorityTransactionV1 {
             service: self,
+            recovery_public_effects,
             _locks: locks,
         })
     }
@@ -841,56 +891,88 @@ impl CharterAuthorityTransactionServiceV1 {
         let target = self.repo_root.join(CANONICAL_REF);
         let target_parent = target.parent().expect("fixed target has a parent");
         create_safe_directories(&self.repo_root, target_parent).map_err(map_lineage)?;
-        rename_durable(&pending.join("canonical.new"), &target, target_parent)?;
-        sync_directory(&pending).map_err(map_lineage)?;
-        if read_current_canonical(&self.repo_root)?.as_deref()
+        let mut public_effects = vec![rename_public_target_durable(
+            &pending.join("canonical.new"),
+            &target,
+            target_parent,
+            CANONICAL_REF,
+            &DefinitionFingerprint::from_bytes(&request.canonical_bytes).to_string(),
+        )?];
+        sync_directory(&pending)
+            .map_err(map_lineage)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        if read_current_canonical(&self.repo_root)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
+            .as_deref()
             != Some(request.canonical_bytes.as_slice())
         {
             return Err(error(
                 CharterPromotionErrorKindV1::DurabilityViolation,
                 "canonical target differs after atomic install",
-            ));
+            )
+            .with_preceding_public_effects(&public_effects));
         }
         #[cfg(test)]
-        inject_writer_fault(WriterBoundaryV12::W9CanonicalInstalled)?;
+        inject_writer_fault(WriterBoundaryV12::W9CanonicalInstalled)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
         #[cfg(test)]
         inject_exact_promotion_fault(
             CharterPromotionFaultPointV1::AfterCanonicalInstalled,
             "injected fault after canonical install",
-        )?;
-        publish_marker(&pending, "canonical-installed", &intent.raw_bytes)?;
+        )
+        .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        publish_marker(&pending, "canonical-installed", &intent.raw_bytes)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
         #[cfg(test)]
-        inject_writer_fault(WriterBoundaryV12::W10CanonicalMarked)?;
-        self.install_record_stage(
-            &pending,
-            OutputPurposeV12::PromotionRecord,
-            &request.promotion_record_bytes,
-            &intent.record.outputs.promotion_record,
-        )?;
+        inject_writer_fault(WriterBoundaryV12::W10CanonicalMarked)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        if let Some(public_effect) = self
+            .install_record_stage(
+                &pending,
+                OutputPurposeV12::PromotionRecord,
+                &request.promotion_record_bytes,
+                &intent.record.outputs.promotion_record,
+            )
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
+        {
+            upsert_public_effect(&mut public_effects, public_effect);
+        }
         #[cfg(test)]
-        inject_writer_fault(WriterBoundaryV12::W11PromotionInstalled)?;
-        self.install_record_stage(
-            &pending,
-            OutputPurposeV12::LifecycleTransition,
-            &request.lifecycle_transition_bytes,
-            &intent.record.outputs.lifecycle_transition,
-        )?;
+        inject_writer_fault(WriterBoundaryV12::W11PromotionInstalled)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        if let Some(public_effect) = self
+            .install_record_stage(
+                &pending,
+                OutputPurposeV12::LifecycleTransition,
+                &request.lifecycle_transition_bytes,
+                &intent.record.outputs.lifecycle_transition,
+            )
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
+        {
+            upsert_public_effect(&mut public_effects, public_effect);
+        }
         #[cfg(test)]
-        inject_writer_fault(WriterBoundaryV12::W12LifecycleInstalled)?;
+        inject_writer_fault(WriterBoundaryV12::W12LifecycleInstalled)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
         #[cfg(test)]
         inject_exact_promotion_fault(
             CharterPromotionFaultPointV1::AfterRecordsInstalled,
             "injected fault after content-addressed record install",
-        )?;
-        publish_marker(&pending, "records-installed", &intent.raw_bytes)?;
+        )
+        .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        publish_marker(&pending, "records-installed", &intent.raw_bytes)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
         #[cfg(test)]
-        inject_writer_fault(WriterBoundaryV12::W13RecordsMarked)?;
+        inject_writer_fault(WriterBoundaryV12::W13RecordsMarked)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
 
-        self.commit_and_finalize(&pending, &committed, &intent.raw_bytes)?;
+        self.commit_and_finalize(&pending, &committed, &intent.raw_bytes)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
         Ok(CharterPromotionCommitV1 {
             promotion_ref: prepared.outputs.promotion_record.record_ref,
             lifecycle_transition_ref: prepared.outputs.lifecycle_transition.record_ref,
             committed_marker_path: committed.join("committed"),
+            public_effects,
         })
     }
 
@@ -1513,20 +1595,29 @@ impl CharterAuthorityTransactionServiceV1 {
         Ok(())
     }
 
-    fn recover_pending_locked(&self) -> Result<(), CharterPromotionErrorV1> {
+    fn recover_pending_locked(&self) -> Result<Vec<OwnerPublicEffectV1>, CharterPromotionErrorV1> {
+        let mut public_effects = Vec::new();
         let root = self.transaction_root();
         if root.exists() {
             reject_reparse_or_symlink(&root, true).map_err(map_lineage)?;
             let inventory = transaction_root_inventory(&root)?;
             self.validate_terminal_inventory(&inventory)?;
             for pending in inventory.pending {
-                self.recover_one_pending(&pending)?;
+                let recovered = self
+                    .recover_one_pending(&pending)
+                    .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+                for public_effect in recovered {
+                    upsert_public_effect(&mut public_effects, public_effect);
+                }
             }
         }
-        self.recover_posture_pending_locked()?;
-        let canonical = read_current_canonical(&self.repo_root)?;
-        self.validate_terminal_history(canonical.as_deref(), None)?;
-        Ok(())
+        self.recover_posture_pending_locked()
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        let canonical = read_current_canonical(&self.repo_root)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        self.validate_terminal_history(canonical.as_deref(), None)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        Ok(public_effects)
     }
 
     fn validate_terminal_history(
@@ -1754,7 +1845,10 @@ impl CharterAuthorityTransactionServiceV1 {
         }))
     }
 
-    fn recover_one_pending(&self, pending: &Path) -> Result<(), CharterPromotionErrorV1> {
+    fn recover_one_pending(
+        &self,
+        pending: &Path,
+    ) -> Result<Vec<OwnerPublicEffectV1>, CharterPromotionErrorV1> {
         reject_reparse_or_symlink(pending, true).map_err(map_lineage)?;
         let names = pending_entry_names(pending)?;
         if !names.contains("intent.json") {
@@ -1766,7 +1860,9 @@ impl CharterAuthorityTransactionServiceV1 {
             }
             fs::remove_dir(pending)
                 .map_err(|_| io_error("empty pre-intent pending removal failed"))?;
-            return sync_directory(&self.transaction_root()).map_err(map_lineage);
+            return sync_directory(&self.transaction_root())
+                .map_err(map_lineage)
+                .map(|_| Vec::new());
         }
         let intent = read_valid_intent(pending)?;
         let directory_name = pending
@@ -1812,12 +1908,14 @@ impl CharterAuthorityTransactionServiceV1 {
             }
             sync_directory(pending).map_err(map_lineage)?;
             validate_terminal_payload(pending, &intent, PromotionTerminalKindV12::RolledBack)?;
-            return self.finalize_pending(
-                pending,
-                &rolled_destination,
-                &intent,
-                PromotionTerminalKindV12::RolledBack,
-            );
+            return self
+                .finalize_pending(
+                    pending,
+                    &rolled_destination,
+                    &intent,
+                    PromotionTerminalKindV12::RolledBack,
+                )
+                .map(|_| Vec::new());
         }
         if pending.join("committed").exists() {
             validate_committed_marker(pending, &intent.raw_bytes)?;
@@ -1830,18 +1928,22 @@ impl CharterAuthorityTransactionServiceV1 {
             self.validate_final_records(&intent.record)?;
             sync_directory(pending).map_err(map_lineage)?;
             validate_terminal_payload(pending, &intent, PromotionTerminalKindV12::Committed)?;
-            return self.finalize_pending(
-                pending,
-                &committed_destination,
-                &intent,
-                PromotionTerminalKindV12::Committed,
-            );
+            return self
+                .finalize_pending(
+                    pending,
+                    &committed_destination,
+                    &intent,
+                    PromotionTerminalKindV12::Committed,
+                )
+                .map(|_| Vec::new());
         }
         if old_is_current {
             validate_rollback_origin_or_progress(pending, &intent)?;
             #[cfg(test)]
             inject_recovery_fault(RecoveryBoundaryV12::R0Admitted)?;
-            return self.rollback_and_finalize(pending, &intent);
+            return self
+                .rollback_and_finalize(pending, &intent)
+                .map(|_| Vec::new());
         }
         if new_is_installed {
             return self.roll_forward_and_finalize(pending, &intent);
@@ -2183,6 +2285,8 @@ impl CharterAuthorityTransactionServiceV1 {
                     CharterPromotionErrorKindV1::DurabilityViolation,
                     format!("posture lifecycle basis refused: {}", failure.detail()),
                 )
+                .with_causal_disposition(failure.causal_disposition())
+                .with_preceding_public_effects(failure.public_effects())
             })?;
         let lifecycle_authority = retained.authority.ok_or_else(|| {
             error(
@@ -2541,16 +2645,31 @@ impl CharterAuthorityTransactionServiceV1 {
         &self,
         pending: &Path,
         intent: &ValidatedPromotionIntentV12,
-    ) -> Result<(), CharterPromotionErrorV1> {
+    ) -> Result<Vec<OwnerPublicEffectV1>, CharterPromotionErrorV1> {
         validate_roll_forward_origin(pending, intent)?;
         self.validate_precommit_authority(pending, intent)?;
         ensure_published_marker(pending, "canonical-installed", &intent.raw_bytes)?;
-        self.recover_record_output(pending, OutputPurposeV12::PromotionRecord, intent)?;
-        self.recover_record_output(pending, OutputPurposeV12::LifecycleTransition, intent)?;
-        ensure_published_marker(pending, "records-installed", &intent.raw_bytes)?;
-        self.validate_final_records(&intent.record)?;
+        let mut public_effects = Vec::new();
+        if let Some(public_effect) = self
+            .recover_record_output(pending, OutputPurposeV12::PromotionRecord, intent)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
+        {
+            upsert_public_effect(&mut public_effects, public_effect);
+        }
+        if let Some(public_effect) = self
+            .recover_record_output(pending, OutputPurposeV12::LifecycleTransition, intent)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?
+        {
+            upsert_public_effect(&mut public_effects, public_effect);
+        }
+        ensure_published_marker(pending, "records-installed", &intent.raw_bytes)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        self.validate_final_records(&intent.record)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
         let committed = self.committed_path(&intent.record.transaction_id);
         self.commit_and_finalize(pending, &committed, &intent.raw_bytes)
+            .map_err(|failure| failure.with_preceding_public_effects(&public_effects))?;
+        Ok(public_effects)
     }
 
     fn recover_record_output(
@@ -2558,7 +2677,7 @@ impl CharterAuthorityTransactionServiceV1 {
         pending: &Path,
         purpose: OutputPurposeV12,
         intent: &ValidatedPromotionIntentV12,
-    ) -> Result<(), CharterPromotionErrorV1> {
+    ) -> Result<Option<OwnerPublicEffectV1>, CharterPromotionErrorV1> {
         let output = match purpose {
             OutputPurposeV12::PromotionRecord => &intent.record.outputs.promotion_record,
             OutputPurposeV12::LifecycleTransition => &intent.record.outputs.lifecycle_transition,
@@ -2586,7 +2705,7 @@ impl CharterAuthorityTransactionServiceV1 {
             (Some(stage_bytes), None) | (Some(stage_bytes), Some(_)) => {
                 self.install_record_stage(pending, purpose, &stage_bytes, output)
             }
-            (None, Some(_)) => Ok(()),
+            (None, Some(_)) => Ok(None),
             (None, None) => Err(error(
                 CharterPromotionErrorKindV1::DurabilityViolation,
                 "record output is unaccounted during roll-forward recovery",
@@ -2875,6 +2994,8 @@ impl CharterAuthorityTransactionServiceV1 {
                         failure.detail()
                     ),
                 )
+                .with_causal_disposition(failure.causal_disposition())
+                .with_preceding_public_effects(failure.public_effects())
             })?;
         validate_selected_lifecycle_authority(&retained, selected)
     }
@@ -2917,7 +3038,7 @@ impl CharterAuthorityTransactionServiceV1 {
         purpose: OutputPurposeV12,
         expected_bytes: &[u8],
         expected_output: &PromotionOutputRecordV12,
-    ) -> Result<(), CharterPromotionErrorV1> {
+    ) -> Result<Option<OwnerPublicEffectV1>, CharterPromotionErrorV1> {
         let stage = pending.join(output_stage_name(purpose));
         let staged = read_bounded_regular(&stage, MAX_OUTPUT_RECORD_BYTES)?;
         if staged != expected_bytes {
@@ -2948,11 +3069,25 @@ impl CharterAuthorityTransactionServiceV1 {
             )
         })?;
         create_safe_directories(&self.repo_root, final_parent).map_err(map_lineage)?;
+        let mut public_effect = None;
         match fs::symlink_metadata(&final_path) {
             Err(failure) if failure.kind() == std::io::ErrorKind::NotFound => {
                 atomic_rename_no_replace(&stage, &final_path)?;
-                sync_directory(pending).map_err(map_lineage)?;
-                sync_directory(final_parent).map_err(map_lineage)?;
+                let target_ref = format!(".handbook/state/{}", expected_output.record_ref);
+                let installed = OwnerPublicEffectV1::installed_unconfirmed(
+                    &target_ref,
+                    expected_output.record_fingerprint.clone(),
+                );
+                sync_directory(pending)
+                    .map_err(map_lineage)
+                    .map_err(|failure| failure.with_public_effect(installed.clone()))?;
+                sync_directory(final_parent)
+                    .map_err(map_lineage)
+                    .map_err(|failure| failure.with_public_effect(installed))?;
+                public_effect = Some(OwnerPublicEffectV1::durable_created(
+                    target_ref,
+                    expected_output.record_fingerprint.clone(),
+                ));
             }
             Ok(metadata) => {
                 if metadata.file_type().is_symlink() || !metadata.is_file() {
@@ -2974,14 +3109,33 @@ impl CharterAuthorityTransactionServiceV1 {
             }
             Err(_) => return Err(io_error("record final metadata observation failed")),
         }
-        let final_bytes = read_bounded_regular(&final_path, MAX_OUTPUT_RECORD_BYTES)?;
+        let final_bytes =
+            read_bounded_regular(&final_path, MAX_OUTPUT_RECORD_BYTES).map_err(|failure| {
+                if let Some(effect) = public_effect.clone() {
+                    failure.with_public_effect(effect)
+                } else {
+                    failure
+                }
+            })?;
         if final_bytes != expected_bytes {
-            return Err(error(
+            let failure = error(
                 CharterPromotionErrorKindV1::DurabilityViolation,
                 "installed record final differs from the exact retained stage",
-            ));
+            );
+            return Err(if let Some(effect) = public_effect.clone() {
+                failure.with_public_effect(effect)
+            } else {
+                failure
+            });
         }
-        validate_record_output(class, &final_bytes, expected_output)
+        validate_record_output(class, &final_bytes, expected_output).map_err(|failure| {
+            if let Some(effect) = public_effect.clone() {
+                failure.with_public_effect(effect)
+            } else {
+                failure
+            }
+        })?;
+        Ok(public_effect)
     }
 
     fn commit_and_finalize(
@@ -3112,6 +3266,10 @@ impl CharterAuthorityTransactionServiceV1 {
 }
 
 impl RetainedAuthorityTransactionV1<'_> {
+    pub(crate) fn recovery_public_effects(&self) -> &[OwnerPublicEffectV1] {
+        &self.recovery_public_effects
+    }
+
     pub(crate) fn read_committed_charter(
         &self,
     ) -> Result<Option<CommittedCharterAuthorityV1>, CharterPromotionErrorV1> {
@@ -3123,16 +3281,29 @@ impl RetainedAuthorityTransactionV1<'_> {
         request: CharterPromotionRequestV1,
         retained: &RetainedPromotionAuthorityV1,
     ) -> Result<CharterPromotionCommitV1, CharterPromotionErrorV1> {
+        let recovery_public_effects = self.recovery_public_effects.clone();
         if request.canonical_bytes.is_empty() || request.canonical_bytes.len() > MAX_CANONICAL_BYTES
         {
             return Err(error(
                 CharterPromotionErrorKindV1::InvalidRequest,
                 "canonical artifact must be non-empty and no larger than 1 MiB",
-            ));
+            )
+            .with_preceding_public_effects(&recovery_public_effects));
         }
-        let prepared = self.service.preflight(&request)?;
-        self.service
+        let prepared = self
+            .service
+            .preflight(&request)
+            .map_err(|failure| failure.with_preceding_public_effects(&recovery_public_effects))?;
+        let mut commit = self
+            .service
             .promote_prepared_locked(request, prepared, Some(retained))
+            .map_err(|failure| failure.with_preceding_public_effects(&recovery_public_effects))?;
+        let mut combined = recovery_public_effects;
+        for effect in commit.public_effects {
+            upsert_public_effect(&mut combined, effect);
+        }
+        commit.public_effects = combined;
+        Ok(commit)
     }
 }
 
@@ -4966,6 +5137,24 @@ fn rename_durable(
     sync_directory(parent).map_err(map_lineage)
 }
 
+fn rename_public_target_durable(
+    source: &Path,
+    target: &Path,
+    parent: &Path,
+    target_ref: &str,
+    content_fingerprint: &str,
+) -> Result<OwnerPublicEffectV1, CharterPromotionErrorV1> {
+    fs::rename(source, target).map_err(|_| io_error("durable rename failed"))?;
+    let installed = OwnerPublicEffectV1::installed_unconfirmed(target_ref, content_fingerprint);
+    sync_directory(parent)
+        .map_err(map_lineage)
+        .map_err(|failure| failure.with_public_effect(installed))?;
+    Ok(OwnerPublicEffectV1::durable_created(
+        target_ref,
+        content_fingerprint,
+    ))
+}
+
 fn open_lock_file(path: &Path) -> Result<File, CharterPromotionErrorV1> {
     match create_new_file(path) {
         Ok(file) => return Ok(file),
@@ -5062,10 +5251,15 @@ fn ensure_supported_platform() -> Result<(), CharterPromotionErrorV1> {
 }
 
 fn map_lineage(source: LineageStoreErrorV1) -> CharterPromotionErrorV1 {
-    error(
+    let mut mapped = error(
         CharterPromotionErrorKindV1::LineageViolation,
         source.detail(),
     )
+    .with_causal_disposition(source.causal_disposition());
+    for public_effect in source.public_effects() {
+        mapped = mapped.with_public_effect(public_effect.clone());
+    }
+    mapped
 }
 
 fn io_error(detail: impl Into<String>) -> CharterPromotionErrorV1 {
@@ -5074,6 +5268,50 @@ fn io_error(detail: impl Into<String>) -> CharterPromotionErrorV1 {
 
 fn error(kind: CharterPromotionErrorKindV1, detail: impl Into<String>) -> CharterPromotionErrorV1 {
     CharterPromotionErrorV1::new(kind, detail)
+}
+
+fn default_causal_disposition(kind: CharterPromotionErrorKindV1) -> OwnerCausalDispositionV1 {
+    match kind {
+        CharterPromotionErrorKindV1::InvalidRequest
+        | CharterPromotionErrorKindV1::UnsafeFilesystem
+        | CharterPromotionErrorKindV1::LineageViolation
+        | CharterPromotionErrorKindV1::Conflict
+        | CharterPromotionErrorKindV1::BasisMismatch => OwnerCausalDispositionV1::CallerRefusal,
+        CharterPromotionErrorKindV1::UnsupportedPlatform => OwnerCausalDispositionV1::Prerequisite,
+        #[cfg(test)]
+        CharterPromotionErrorKindV1::InjectedFault => {
+            OwnerCausalDispositionV1::ImplementationFailure
+        }
+        CharterPromotionErrorKindV1::DurabilityViolation
+        | CharterPromotionErrorKindV1::IoFailure => OwnerCausalDispositionV1::ImplementationFailure,
+    }
+}
+
+fn upsert_public_effect(
+    public_effects: &mut Vec<OwnerPublicEffectV1>,
+    public_effect: OwnerPublicEffectV1,
+) {
+    if let Some(existing) = public_effects
+        .iter_mut()
+        .find(|existing| existing.target_ref() == public_effect.target_ref())
+    {
+        let replacement_is_later = matches!(
+            (existing.disposition(), public_effect.disposition()),
+            (
+                OwnerPublicEffectDispositionV1::CreatedIncomplete,
+                OwnerPublicEffectDispositionV1::InstalledDurabilityUnconfirmed
+                    | OwnerPublicEffectDispositionV1::DurableCreated
+            ) | (
+                OwnerPublicEffectDispositionV1::InstalledDurabilityUnconfirmed,
+                OwnerPublicEffectDispositionV1::DurableCreated
+            )
+        );
+        if replacement_is_later {
+            *existing = public_effect;
+        }
+    } else {
+        public_effects.push(public_effect);
+    }
 }
 
 #[allow(dead_code)]

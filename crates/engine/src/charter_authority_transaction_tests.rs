@@ -5,8 +5,9 @@ use super::{
 };
 use crate::{
     evaluate_charter_intake, CharterAcquisitionMode, CharterCoverageSubmission,
-    CharterIntakeConsumer, CharterIntakeEnvelope, CharterIntakeSourceKind, LineageRecordClassV1,
-    TrustedLineageStoreV1,
+    CharterIntakeConsumer, CharterIntakeEnvelope, CharterIntakeSourceKind,
+    CharterPromotionIntentV1, CharterPromotionWorkflowServiceV1, LineageRecordClassV1,
+    OwnerCausalDispositionV1, TrustedLineageStoreV1,
 };
 use serde_json::{json, Value};
 use std::sync::{Arc, Barrier};
@@ -19,6 +20,24 @@ const CANONICAL_CHARTER: &[u8] = include_bytes!(concat!(
     env!("CARGO_MANIFEST_DIR"),
     "/../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml"
 ));
+
+#[test]
+fn promotion_conflict_safety_and_durability_causes_are_terminally_distinct() {
+    for kind in [
+        CharterPromotionErrorKindV1::Conflict,
+        CharterPromotionErrorKindV1::UnsafeFilesystem,
+        CharterPromotionErrorKindV1::LineageViolation,
+    ] {
+        assert_eq!(
+            super::default_causal_disposition(kind),
+            OwnerCausalDispositionV1::CallerRefusal
+        );
+    }
+    assert_eq!(
+        super::default_causal_disposition(CharterPromotionErrorKindV1::DurabilityViolation),
+        OwnerCausalDispositionV1::ImplementationFailure
+    );
+}
 
 fn vector(class: &str) -> Value {
     let fixture: Value = serde_json::from_slice(VECTORS).unwrap();
@@ -463,6 +482,48 @@ fn promotion_is_the_single_commit_point_for_canonical_and_lifecycle_authority() 
 }
 
 #[test]
+fn promotion_receipts_omit_equal_preexisting_lineage_records() {
+    let repo = tempfile::tempdir().unwrap();
+    seed_lineage(repo.path());
+    let service = CharterAuthorityTransactionServiceV1::new(repo.path());
+    let request = request(repo.path());
+    let promotion: Value = serde_json::from_slice(&request.promotion_record_bytes).unwrap();
+    let lifecycle: Value = serde_json::from_slice(&request.lifecycle_transition_bytes).unwrap();
+    let promotion_ref = format!(
+        "promotions/{}.json",
+        promotion["promotion_id"].as_str().unwrap()
+    );
+    let lifecycle_ref = format!(
+        "lifecycle-transitions/{}.json",
+        lifecycle["transition_id"].as_str().unwrap()
+    );
+    for (relative_ref, bytes) in [
+        (&promotion_ref, request.promotion_record_bytes.as_slice()),
+        (
+            &lifecycle_ref,
+            request.lifecycle_transition_bytes.as_slice(),
+        ),
+    ] {
+        let target = repo.path().join(".handbook/state").join(relative_ref);
+        std::fs::create_dir_all(target.parent().unwrap()).unwrap();
+        std::fs::write(target, bytes).unwrap();
+    }
+
+    let commit = service
+        .promote(request)
+        .expect("equal records are reusable");
+    assert_eq!(commit.public_effects.len(), 1);
+    assert_eq!(
+        commit.public_effects[0].target_ref(),
+        ".handbook/project/charter.yaml"
+    );
+    assert_eq!(
+        commit.public_effects[0].disposition(),
+        crate::OwnerPublicEffectDispositionV1::DurableCreated
+    );
+}
+
+#[test]
 fn retained_promotion_refuses_a_coherently_rebound_unrequired_approval_pair() {
     let repo = tempfile::tempdir().unwrap();
     seed_lineage(repo.path());
@@ -537,9 +598,128 @@ fn reader_rolls_forward_w9_before_observation_and_never_exposes_partial_authorit
         )
         .unwrap_err();
     assert_eq!(error.kind(), CharterPromotionErrorKindV1::InjectedFault);
+    assert_eq!(error.public_effects().len(), 1);
+    assert_eq!(
+        error.public_effects()[0].target_ref(),
+        ".handbook/project/charter.yaml"
+    );
+    assert_eq!(
+        error.public_effects()[0].disposition(),
+        crate::OwnerPublicEffectDispositionV1::DurableCreated
+    );
+    assert!(error.public_effects().iter().all(|effect| {
+        !effect.target_ref().contains("transactions")
+            && !effect.target_ref().contains("pending")
+            && !effect.target_ref().contains("use-head")
+    }));
 
-    assert!(service.read_committed_charter().unwrap().is_some());
+    let retained = service
+        .begin_retained_authority()
+        .expect("retained-authority recovery rolls the promotion forward");
+    assert_eq!(retained.recovery_public_effects().len(), 2);
+    assert!(retained.recovery_public_effects().iter().all(|effect| {
+        effect.disposition() == crate::OwnerPublicEffectDispositionV1::DurableCreated
+            && (effect
+                .target_ref()
+                .starts_with(".handbook/state/promotions/promotion_")
+                || effect
+                    .target_ref()
+                    .starts_with(".handbook/state/lifecycle-transitions/lifecycle-transition_"))
+            && !effect.target_ref().contains("transactions")
+            && !effect.target_ref().contains("pending")
+            && !effect.target_ref().contains("use-head")
+    }));
+    assert!(retained.read_committed_charter().unwrap().is_some());
     assert!(repo.path().join(".handbook/project/charter.yaml").exists());
+}
+
+#[test]
+fn promotion_workflow_recovery_then_definition_refusal_retains_public_effects() {
+    let repo = tempfile::tempdir().unwrap();
+    seed_lineage(repo.path());
+    let transaction = CharterAuthorityTransactionServiceV1::new(repo.path());
+    let failure = transaction
+        .promote_with_fault_for_testing(
+            request(repo.path()),
+            CharterPromotionFaultPointV1::AfterCanonicalInstalled,
+        )
+        .expect_err("fault leaves a recoverable retained promotion");
+    assert_eq!(failure.public_effects().len(), 1);
+
+    let failure = CharterPromotionWorkflowServiceV1::new(repo.path())
+        .promote(CharterPromotionIntentV1 {
+            candidate_ref: format!("candidates/candidate_{}.json", "a".repeat(64)),
+            approval_ref: format!("approvals/approval_{}.json", "b".repeat(64)),
+            expected_current_fingerprint: None,
+        })
+        .expect_err("the temporary repo has no shipped definition closure");
+
+    assert_eq!(failure.public_effects().len(), 2);
+    assert!(failure.public_effects().iter().all(|effect| {
+        !effect.target_ref().contains("transactions")
+            && !effect.target_ref().contains("pending")
+            && !effect.target_ref().contains("use-head")
+    }));
+}
+
+#[test]
+fn retained_authority_reports_lifecycle_records_installed_by_current_recovery() {
+    use crate::charter_lifecycle_store::{
+        CharterLifecycleEventIntentV1, CharterLifecycleFaultPointV1, CharterLifecycleStoreV1,
+    };
+
+    let repo = tempfile::tempdir().unwrap();
+    seed_lineage(repo.path());
+    let service = CharterAuthorityTransactionServiceV1::new(repo.path());
+    service
+        .promote(request(repo.path()))
+        .expect("promotion genesis");
+
+    let lifecycle = CharterLifecycleStoreV1::new(repo.path());
+    let initial = lifecycle.observe().unwrap().unwrap();
+    let mut evidence = vector("trigger-evidence");
+    evidence["basis_canonical_fingerprint"] = Value::String(initial.canonical_fingerprint.clone());
+    evidence["event_kind"] = Value::String("production_posture_changed".to_owned());
+    resign(
+        &mut evidence,
+        "event_id",
+        "evidence_fingerprint",
+        "trigger-evidence",
+        &[],
+    );
+    let appended = TrustedLineageStoreV1::new(repo.path())
+        .append_record(LineageRecordClassV1::TriggerEvidence, &canonical(&evidence))
+        .unwrap();
+    let failure = lifecycle
+        .record_event_with_fault_for_testing(
+            CharterLifecycleEventIntentV1::TriggerEvidence {
+                evidence_ref: appended.relative_ref,
+                evidence_fingerprint: appended.fingerprint,
+            },
+            CharterLifecycleFaultPointV1::Prepared,
+        )
+        .expect_err("prepared lifecycle transaction remains for recovery");
+    assert_eq!(
+        failure.kind(),
+        crate::CharterLifecycleStoreErrorKindV1::InjectedFault
+    );
+
+    let retained = service
+        .begin_retained_authority()
+        .expect("retained authority recovers staged lifecycle records");
+    assert_eq!(retained.recovery_public_effects().len(), 2);
+    assert!(retained.recovery_public_effects().iter().all(|effect| {
+        effect.disposition() == crate::OwnerPublicEffectDispositionV1::DurableCreated
+            && (effect
+                .target_ref()
+                .starts_with(".handbook/state/lifecycle-observations/lifecycle-observation_")
+                || effect
+                    .target_ref()
+                    .starts_with(".handbook/state/lifecycle-transitions/lifecycle-transition_"))
+            && !effect.target_ref().contains("transactions")
+            && !effect.target_ref().contains("pending")
+            && !effect.target_ref().contains("use-head")
+    }));
 }
 
 #[test]
@@ -556,6 +736,13 @@ fn complete_records_without_marker_roll_forward_during_recovery() {
         )
         .unwrap_err();
     assert_eq!(error.kind(), CharterPromotionErrorKindV1::InjectedFault);
+    assert_eq!(error.public_effects().len(), 3);
+    assert!(error.public_effects().iter().all(|effect| {
+        effect.disposition() == crate::OwnerPublicEffectDispositionV1::DurableCreated
+            && !effect.target_ref().contains("transactions")
+            && !effect.target_ref().contains("pending")
+            && !effect.target_ref().contains("use-head")
+    }));
 
     let observed = service
         .read_committed_charter()

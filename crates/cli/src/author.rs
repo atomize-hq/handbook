@@ -1,12 +1,16 @@
 use crate::{
+    doctor_rendering, exit_policy,
     shell_shared::{discover_managed_repo_root, read_stdin},
     AuthorArgs, AuthorCharterArgs, AuthorCommand, AuthorProjectContextArgs, CharterModeArg, Cli,
+};
+use handbook_sdk::contract_membrane::{
+    AuthorInputTransportRouteV1, AuthorWorkingDirectoryCommandV1, ContractLimits,
+    InvocationResponseV1, RepositoryInvocationCommandV1, TransportFailureKind, TransportFailureV1,
+    TransportIoErrorV1, TransportPresentationViewV1, UseCaseResponseV1,
 };
 use serde::Deserialize;
 use std::fmt::Write as _;
 use std::fs;
-use std::io;
-use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
 #[derive(Deserialize)]
@@ -75,38 +79,230 @@ struct ProjectContextInputWire {
     known_unknowns: Vec<String>,
 }
 
-pub(crate) fn run(args: AuthorArgs) -> ExitCode {
+pub(crate) fn run(args: AuthorArgs, machine_json: bool) -> ExitCode {
     match args.command {
-        Some(AuthorCommand::Charter(args)) => author_charter_command(args),
-        Some(AuthorCommand::ProjectContext(args)) => author_project_context_command(args),
+        Some(AuthorCommand::Charter(args)) => author_charter_command(args, machine_json),
+        Some(AuthorCommand::ProjectContext(args)) => {
+            author_project_context_command(args, machine_json)
+        }
         None => crate::shell_shared::print_subcommand_help::<Cli>(&["author"]),
     }
 }
 
-pub(crate) struct RenderedCommand {
-    pub(crate) output: String,
-    pub(crate) exit_code: ExitCode,
-}
-
-fn author_charter_command(args: AuthorCharterArgs) -> ExitCode {
-    let json = args.json;
-    let result = execute_selected_author_charter_command(args);
-    let rendered = if json {
+fn author_charter_command(args: AuthorCharterArgs, machine_json: bool) -> ExitCode {
+    let legacy_json = args.json;
+    let limits = ContractLimits::packet0();
+    let invocation = match execute_selected_author_charter_command(args, &limits) {
+        Ok(invocation) => Ok(invocation),
+        Err(failure) => failure
+            .into_response(&limits)
+            .and_then(|response| InvocationResponseV1::transport_failure(response, &limits)),
+    };
+    let invocation = match invocation {
+        Ok(invocation) => invocation,
+        Err(_) => {
+            return emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.invocation_construction_failed",
+                &limits,
+            )
+        }
+    };
+    let semantic_exit = exit_policy::terminal(invocation.terminal_status());
+    if machine_json {
+        return match doctor_rendering::render_invocation(&invocation) {
+            Ok(bytes) => exit_policy::emit_stdout(&bytes, semantic_exit),
+            Err(_) => emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.serialization_failed",
+                &limits,
+            ),
+        };
+    }
+    let result = match invocation.author_charter_outcome(&limits) {
+        Ok(Some(result)) => result,
+        Ok(None) => match charter_transport_legacy_projection(&invocation, &limits) {
+            Some(result) => result,
+            None => {
+                return emit_transport_failure(
+                    TransportFailureKind::Serialization,
+                    "transport.presentation_failed",
+                    &limits,
+                )
+            }
+        },
+        Err(_) => {
+            return emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.presentation_failed",
+                &limits,
+            )
+        }
+    };
+    let rendered = if legacy_json {
         render_charter_operation_json(&result)
     } else {
         render_charter_operation_text(&result)
     };
-    print!("{rendered}");
-    if result.status == handbook_sdk::AuthorOperationStatus::Succeeded {
-        ExitCode::SUCCESS
-    } else {
-        ExitCode::from(1)
+    exit_policy::emit_stdout(rendered.as_bytes(), semantic_exit)
+}
+
+struct TransportDescriptor {
+    kind: TransportFailureKind,
+    reason_code: &'static str,
+    presentation: Option<TransportDescriptorPresentation>,
+}
+
+enum TransportDescriptorPresentation {
+    AuthorInput {
+        route: AuthorInputTransportRouteV1,
+        input_source: String,
+        error: Option<TransportIoErrorV1>,
+    },
+    WorkingDirectory {
+        command: AuthorWorkingDirectoryCommandV1,
+        error: TransportIoErrorV1,
+    },
+}
+
+impl TransportDescriptor {
+    fn plain(kind: TransportFailureKind, reason_code: &'static str) -> Self {
+        Self {
+            kind,
+            reason_code,
+            presentation: None,
+        }
     }
+
+    fn into_response(
+        self,
+        limits: &ContractLimits,
+    ) -> Result<TransportFailureV1, handbook_sdk::contract_membrane::ContractError> {
+        match self.presentation {
+            None => TransportFailureV1::adapter_error(self.kind, self.reason_code, limits),
+            Some(TransportDescriptorPresentation::AuthorInput {
+                route,
+                input_source,
+                error,
+            }) => TransportFailureV1::author_input_error(
+                self.kind,
+                self.reason_code,
+                route,
+                &input_source,
+                error,
+                limits,
+            ),
+            Some(TransportDescriptorPresentation::WorkingDirectory { command, error }) => {
+                TransportFailureV1::working_directory_error(
+                    self.kind,
+                    self.reason_code,
+                    command,
+                    error,
+                    limits,
+                )
+            }
+        }
+    }
+}
+
+fn emit_transport_failure(
+    kind: TransportFailureKind,
+    reason_code: &str,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let bytes = TransportFailureV1::adapter_error(kind, reason_code, limits)
+        .and_then(|failure| InvocationResponseV1::transport_failure(failure, limits))
+        .map_err(|_| ())
+        .and_then(|invocation| doctor_rendering::render_invocation(&invocation).map_err(|_| ()));
+    match bytes {
+        Ok(bytes) => exit_policy::emit_stdout(&bytes, exit_policy::failure()),
+        Err(()) => {
+            eprintln!("handbook: failed to prepare transport-failure response");
+            exit_policy::failure()
+        }
+    }
+}
+
+fn charter_transport_legacy_projection(
+    invocation: &InvocationResponseV1,
+    limits: &ContractLimits,
+) -> Option<handbook_sdk::CharterOperationResult> {
+    let reason = invocation
+        .transport_failure_reason_code(limits)
+        .ok()
+        .flatten()
+        .unwrap_or_default();
+    match invocation.transport_presentation(limits).ok().flatten()? {
+        TransportPresentationViewV1::RepositoryInvocation { command, failure } => {
+            charter_repository_failure_result(command, *failure)
+        }
+        TransportPresentationViewV1::AuthorInput {
+            route: AuthorInputTransportRouteV1::Charter,
+            ..
+        } if reason == "transport.author_charter_input_invalid" => {
+            Some(handbook_sdk::CharterOperationResult::invalid_intake_envelope())
+        }
+        TransportPresentationViewV1::AuthorInput {
+            route: AuthorInputTransportRouteV1::Charter,
+            ..
+        } if reason == "transport.author_charter_input_unavailable" => {
+            Some(handbook_sdk::CharterOperationResult::invalid_request(
+                handbook_sdk::CharterOperation::Author,
+            ))
+        }
+        TransportPresentationViewV1::WorkingDirectory { command, .. } => {
+            charter_working_directory_operation(command)
+                .map(handbook_sdk::CharterOperationResult::invalid_request)
+        }
+        _ => None,
+    }
+}
+
+fn charter_repository_failure_result(
+    command: RepositoryInvocationCommandV1,
+    failure: handbook_sdk::RepositoryInvocationFailureView,
+) -> Option<handbook_sdk::CharterOperationResult> {
+    let operation = match command {
+        RepositoryInvocationCommandV1::CharterAuthor => handbook_sdk::CharterOperation::Author,
+        RepositoryInvocationCommandV1::CharterApprove => handbook_sdk::CharterOperation::Approve,
+        RepositoryInvocationCommandV1::CharterPromote => handbook_sdk::CharterOperation::Promote,
+        RepositoryInvocationCommandV1::CharterValidate => handbook_sdk::CharterOperation::Validate,
+        RepositoryInvocationCommandV1::ApproverBootstrap
+        | RepositoryInvocationCommandV1::ApproverAddCredential
+        | RepositoryInvocationCommandV1::ApproverRevokeCredential
+        | RepositoryInvocationCommandV1::ApproverUpdateMapping => {
+            return None;
+        }
+    };
+    Some(handbook_sdk::CharterOperationResult {
+        schema_id: failure.schema_id.clone(),
+        schema_version: failure.schema_version.clone(),
+        operation,
+        status: handbook_sdk::AuthorOperationStatus::Refused,
+        canonical_path: None,
+        source_fingerprint: None,
+        rendered_output_fingerprint: None,
+        intake_ref: None,
+        intake_fingerprint: None,
+        candidate_ref: None,
+        candidate_fingerprint: None,
+        approval_ref: None,
+        approval_fingerprint: None,
+        promotion_ref: None,
+        promotion_fingerprint: None,
+        changed_paths: failure.changed_paths.clone(),
+        refusal: Some(failure.refusal.clone()),
+        next_actions: failure.next_actions.clone(),
+        invocation_failure: Some(failure),
+        causal_disposition: None,
+        public_effects: Vec::new(),
+    })
 }
 
 fn execute_selected_author_charter_command(
     args: AuthorCharterArgs,
-) -> handbook_sdk::CharterOperationResult {
+    limits: &ContractLimits,
+) -> Result<InvocationResponseV1, TransportDescriptor> {
     let author_selected = args.mode.is_some()
         && args.from_inputs.is_some()
         && args.approve_candidate.is_none()
@@ -155,7 +351,10 @@ fn execute_selected_author_charter_command(
         && !args.validate;
 
     if legacy_selected {
-        return handbook_sdk::CharterOperationResult::legacy_input_refused();
+        return project_charter_result(
+            handbook_sdk::CharterOperationResult::legacy_input_refused(),
+            limits,
+        );
     }
 
     let operation = if approve_selected {
@@ -168,12 +367,24 @@ fn execute_selected_author_charter_command(
         handbook_sdk::CharterOperation::Author
     };
     if !(author_selected || approve_selected || promote_selected || validate_selected) {
-        return handbook_sdk::CharterOperationResult::invalid_request(operation);
+        return project_charter_result(
+            handbook_sdk::CharterOperationResult::invalid_request(operation),
+            limits,
+        );
     }
 
     let cwd = match std::env::current_dir() {
         Ok(cwd) => cwd,
-        Err(_) => return handbook_sdk::CharterOperationResult::invalid_request(operation),
+        Err(error) => {
+            return Err(TransportDescriptor {
+                kind: TransportFailureKind::Adapter,
+                reason_code: "transport.repository_root_unavailable",
+                presentation: Some(TransportDescriptorPresentation::WorkingDirectory {
+                    command: author_working_directory_command(operation),
+                    error: TransportIoErrorV1::from_io_error(&error),
+                }),
+            })
+        }
     };
     let repo_root = discover_managed_repo_root(&cwd);
     let intent = if author_selected {
@@ -181,24 +392,44 @@ fn execute_selected_author_charter_command(
             .from_inputs
             .as_deref()
             .expect("author selection requires an input source");
-        let yaml = match read_author_inputs_source(
-            "author charter",
-            "handbook author charter --mode <mode> --from-inputs",
-            path_or_dash,
-        ) {
+        let yaml = match read_author_inputs_source(path_or_dash) {
             Ok(yaml) => yaml,
-            Err(_) => return handbook_sdk::CharterOperationResult::invalid_request(operation),
+            Err(error) => {
+                let error = TransportIoErrorV1::from_io_error(&error);
+                return Err(TransportDescriptor {
+                    kind: author_input_transport_kind(&error),
+                    reason_code: "transport.author_charter_input_unavailable",
+                    presentation: Some(TransportDescriptorPresentation::AuthorInput {
+                        route: AuthorInputTransportRouteV1::Charter,
+                        input_source: path_or_dash.to_owned(),
+                        error: Some(error),
+                    }),
+                });
+            }
         };
         let mut envelope = match parse_charter_intake_envelope(&yaml) {
             Ok(envelope) => envelope,
-            Err(()) => return handbook_sdk::CharterOperationResult::invalid_intake_envelope(),
+            Err(()) => {
+                return Err(TransportDescriptor {
+                    kind: TransportFailureKind::Decoding,
+                    reason_code: "transport.author_charter_input_invalid",
+                    presentation: Some(TransportDescriptorPresentation::AuthorInput {
+                        route: AuthorInputTransportRouteV1::Charter,
+                        input_source: path_or_dash.to_owned(),
+                        error: None,
+                    }),
+                })
+            }
         };
         if args.expected_current_fingerprint.is_some()
             && envelope.expected_current_fingerprint.is_some()
             && args.expected_current_fingerprint.as_deref()
                 != envelope.expected_current_fingerprint.as_deref()
         {
-            return handbook_sdk::CharterOperationResult::invalid_request(operation);
+            return project_charter_result(
+                handbook_sdk::CharterOperationResult::invalid_request(operation),
+                limits,
+            );
         }
         if args.expected_current_fingerprint.is_some() {
             envelope.expected_current_fingerprint = args.expected_current_fingerprint;
@@ -233,7 +464,28 @@ fn execute_selected_author_charter_command(
     } else {
         handbook_sdk::CharterCommandRequest::Validate
     };
-    handbook_sdk::HandbookSdkV1::open(repo_root).author_charter(intent)
+    handbook_sdk::HandbookSdkV1::open(repo_root)
+        .run_author_charter_use_case(intent, limits)
+        .map_err(|_| {
+            TransportDescriptor::plain(
+                TransportFailureKind::Serialization,
+                "transport.invocation_construction_failed",
+            )
+        })
+}
+
+fn project_charter_result(
+    result: handbook_sdk::CharterOperationResult,
+    limits: &ContractLimits,
+) -> Result<InvocationResponseV1, TransportDescriptor> {
+    UseCaseResponseV1::author_charter(&result, limits)
+        .and_then(|response| InvocationResponseV1::use_case(response, limits))
+        .map_err(|_| {
+            TransportDescriptor::plain(
+                TransportFailureKind::Serialization,
+                "transport.invocation_construction_failed",
+            )
+        })
 }
 
 fn charter_mode(mode: CharterModeArg) -> handbook_sdk::CharterAcquisitionMode {
@@ -241,6 +493,40 @@ fn charter_mode(mode: CharterModeArg) -> handbook_sdk::CharterAcquisitionMode {
         CharterModeArg::GuidedAdaptive => handbook_sdk::CharterAcquisitionMode::GuidedAdaptive,
         CharterModeArg::Express => handbook_sdk::CharterAcquisitionMode::Express,
         CharterModeArg::AgentAssisted => handbook_sdk::CharterAcquisitionMode::AgentAssisted,
+    }
+}
+
+fn author_working_directory_command(
+    operation: handbook_sdk::CharterOperation,
+) -> AuthorWorkingDirectoryCommandV1 {
+    match operation {
+        handbook_sdk::CharterOperation::Author => AuthorWorkingDirectoryCommandV1::CharterAuthor,
+        handbook_sdk::CharterOperation::Approve => AuthorWorkingDirectoryCommandV1::CharterApprove,
+        handbook_sdk::CharterOperation::Promote => AuthorWorkingDirectoryCommandV1::CharterPromote,
+        handbook_sdk::CharterOperation::Validate => {
+            AuthorWorkingDirectoryCommandV1::CharterValidate
+        }
+    }
+}
+
+fn charter_working_directory_operation(
+    command: AuthorWorkingDirectoryCommandV1,
+) -> Option<handbook_sdk::CharterOperation> {
+    match command {
+        AuthorWorkingDirectoryCommandV1::CharterAuthor => {
+            Some(handbook_sdk::CharterOperation::Author)
+        }
+        AuthorWorkingDirectoryCommandV1::CharterApprove => {
+            Some(handbook_sdk::CharterOperation::Approve)
+        }
+        AuthorWorkingDirectoryCommandV1::CharterPromote => {
+            Some(handbook_sdk::CharterOperation::Promote)
+        }
+        AuthorWorkingDirectoryCommandV1::CharterValidate => {
+            Some(handbook_sdk::CharterOperation::Validate)
+        }
+        AuthorWorkingDirectoryCommandV1::ProjectContextAuthor
+        | AuthorWorkingDirectoryCommandV1::ProjectContextValidate => None,
     }
 }
 
@@ -442,131 +728,249 @@ fn author_operation_status_name(status: handbook_sdk::AuthorOperationStatus) -> 
     }
 }
 
-fn author_project_context_command(args: AuthorProjectContextArgs) -> ExitCode {
-    let rendered = execute_author_project_context_command(
-        args,
-        std::env::current_dir,
-        |repo_root| {
-            handbook_sdk::HandbookSdkV1::open(repo_root).preflight_project_context_authoring()
-        },
-        |repo_root, input| {
-            handbook_sdk::HandbookSdkV1::open(repo_root).author_project_context(input)
-        },
-    );
-    println!("{}", rendered.output);
-    rendered.exit_code
+fn author_project_context_command(args: AuthorProjectContextArgs, machine_json: bool) -> ExitCode {
+    let limits = ContractLimits::packet0();
+    let validate = args.validate;
+    let invocation = if let Some(path_or_dash) = args.from_inputs.as_deref() {
+        let cwd = match std::env::current_dir() {
+            Ok(dir) => dir,
+            Err(error) => {
+                let command = if validate {
+                    AuthorWorkingDirectoryCommandV1::ProjectContextValidate
+                } else {
+                    AuthorWorkingDirectoryCommandV1::ProjectContextAuthor
+                };
+                let failure = TransportFailureV1::working_directory_error(
+                    TransportFailureKind::Adapter,
+                    "transport.repository_root_unavailable",
+                    command,
+                    TransportIoErrorV1::from_io_error(&error),
+                    &limits,
+                );
+                return emit_author_project_context_transport(failure, machine_json, &limits);
+            }
+        };
+        let repo_root = discover_managed_repo_root(&cwd);
+        let yaml = match read_author_inputs_source(path_or_dash) {
+            Ok(yaml) => yaml,
+            Err(error) => {
+                let error = TransportIoErrorV1::from_io_error(&error);
+                let failure = TransportFailureV1::author_input_error(
+                    author_input_transport_kind(&error),
+                    "transport.author_project_context_input_unavailable",
+                    AuthorInputTransportRouteV1::ProjectContext,
+                    path_or_dash,
+                    Some(error),
+                    &limits,
+                );
+                return emit_author_project_context_transport(failure, machine_json, &limits);
+            }
+        };
+        let input = match parse_project_context_input_yaml(&yaml) {
+            Ok(input) => input,
+            Err(_) => {
+                let failure = TransportFailureV1::author_input_error(
+                    TransportFailureKind::Decoding,
+                    "transport.author_project_context_input_invalid",
+                    AuthorInputTransportRouteV1::ProjectContext,
+                    path_or_dash,
+                    None,
+                    &limits,
+                );
+                return emit_author_project_context_transport(failure, machine_json, &limits);
+            }
+        };
+        let input_mode = if path_or_dash == "-" {
+            "structured_inputs_stdin"
+        } else {
+            "structured_inputs_file"
+        };
+        let request = if validate {
+            handbook_sdk::ProjectContextCommandRequest::Validate(input)
+        } else {
+            handbook_sdk::ProjectContextCommandRequest::Author(input)
+        };
+        handbook_sdk::HandbookSdkV1::open(repo_root)
+            .run_author_project_context_use_case(input_mode, path_or_dash, request, &limits)
+            .and_then(|response| InvocationResponseV1::use_case(response, &limits))
+    } else {
+        let refusal = handbook_sdk::AuthorProjectContextRefusal {
+            kind: handbook_sdk::AuthorProjectContextRefusalKind::InvalidRequest,
+            summary: "`handbook author project-context` requires `--from-inputs <path|->`"
+                .to_owned(),
+            broken_subject: "command arguments".to_owned(),
+            next_safe_action: "retry `handbook author project-context --from-inputs <path|->`"
+                .to_owned(),
+            causal_disposition: handbook_sdk::AuthorCausalDisposition::CallerRefusal,
+            public_effects: Vec::new(),
+        };
+        let outcome = if validate {
+            handbook_sdk::ProjectContextCommandOutcome::Validate {
+                input_mode: "structured_inputs_missing".to_owned(),
+                input_source: "missing".to_owned(),
+                result: Err(refusal),
+            }
+        } else {
+            handbook_sdk::ProjectContextCommandOutcome::Author {
+                input_mode: "structured_inputs_missing".to_owned(),
+                input_source: "missing".to_owned(),
+                result: Err(refusal),
+            }
+        };
+        UseCaseResponseV1::author_project_context(&outcome, &limits)
+            .and_then(|response| InvocationResponseV1::use_case(response, &limits))
+    };
+    let invocation = match invocation {
+        Ok(invocation) => invocation,
+        Err(_) => {
+            return emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.invocation_construction_failed",
+                &limits,
+            )
+        }
+    };
+    let semantic_exit = exit_policy::terminal(invocation.terminal_status());
+    if machine_json {
+        return match doctor_rendering::render_invocation(&invocation) {
+            Ok(bytes) => exit_policy::emit_stdout(&bytes, semantic_exit),
+            Err(_) => emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.serialization_failed",
+                &limits,
+            ),
+        };
+    }
+    let output = match invocation.author_project_context_outcome(&limits) {
+        Ok(Some(handbook_sdk::ProjectContextCommandOutcome::Author {
+            input_mode,
+            input_source,
+            result: Ok(result),
+        })) => render_author_project_context_success(&result, &input_mode, &input_source),
+        Ok(Some(handbook_sdk::ProjectContextCommandOutcome::Validate {
+            input_mode,
+            input_source,
+            result: Ok(()),
+        })) => render_author_project_context_validation_success(&input_mode, &input_source),
+        Ok(Some(handbook_sdk::ProjectContextCommandOutcome::Author {
+            result: Err(refusal),
+            ..
+        }))
+        | Ok(Some(handbook_sdk::ProjectContextCommandOutcome::Validate {
+            result: Err(refusal),
+            ..
+        })) => render_project_context_refusal(&refusal),
+        Ok(None) | Err(_) => {
+            return emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.presentation_failed",
+                &limits,
+            )
+        }
+    };
+    let mut bytes = output.into_bytes();
+    bytes.push(b'\n');
+    exit_policy::emit_stdout(&bytes, semantic_exit)
 }
 
-fn execute_author_project_context_command<GetCurrentDir, PreflightAuthoring, RunAuthor>(
-    args: AuthorProjectContextArgs,
-    get_current_dir: GetCurrentDir,
-    preflight_authoring: PreflightAuthoring,
-    run_author: RunAuthor,
-) -> RenderedCommand
-where
-    GetCurrentDir: FnOnce() -> io::Result<PathBuf>,
-    PreflightAuthoring: Fn(&Path) -> Result<(), handbook_sdk::AuthorProjectContextRefusal>,
-    RunAuthor: Fn(
-        &Path,
-        &handbook_sdk::ProjectContextInput,
-    ) -> Result<
-        handbook_sdk::AuthorProjectContextResult,
-        handbook_sdk::AuthorProjectContextRefusal,
-    >,
-{
-    let Some(path_or_dash) = args.from_inputs.as_deref() else {
-        return RenderedCommand {
-            output: render_author_custom_refusal(
-                "author project-context",
-                "REFUSED",
-                "InvalidRequest",
-                "`handbook author project-context` requires `--from-inputs <path|->`",
-                "command arguments",
-                "retry `handbook author project-context --from-inputs <path|->`",
+fn emit_author_project_context_transport(
+    failure: Result<TransportFailureV1, handbook_sdk::contract_membrane::ContractError>,
+    machine_json: bool,
+    limits: &ContractLimits,
+) -> ExitCode {
+    let invocation =
+        failure.and_then(|failure| InvocationResponseV1::transport_failure(failure, limits));
+    let invocation = match invocation {
+        Ok(invocation) => invocation,
+        Err(_) => {
+            return emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.invocation_construction_failed",
+                limits,
+            )
+        }
+    };
+    let semantic_exit = exit_policy::terminal(invocation.terminal_status());
+    if machine_json {
+        return match doctor_rendering::render_invocation(&invocation) {
+            Ok(bytes) => exit_policy::emit_stdout(&bytes, semantic_exit),
+            Err(_) => emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.serialization_failed",
+                limits,
             ),
-            exit_code: ExitCode::from(1),
         };
-    };
-
-    let cwd = match get_current_dir() {
-        Ok(dir) => dir,
-        Err(err) => {
-            return RenderedCommand {
-                output: render_author_custom_refusal(
-                    "author project-context",
-                    "REFUSED",
-                    "WorkingDirectoryUnavailable",
-                    &format!("failed to determine repo root: {err}"),
-                    "current working directory",
-                    "repair the current working directory and retry `handbook author project-context --from-inputs <path|->`",
-                ),
-                exit_code: ExitCode::from(1),
-            };
+    }
+    let reason = invocation
+        .transport_failure_reason_code(limits)
+        .ok()
+        .flatten();
+    let output = match invocation.transport_presentation(limits) {
+        Ok(Some(TransportPresentationViewV1::AuthorInput {
+            route: AuthorInputTransportRouteV1::ProjectContext,
+            input_source: _,
+            error: _,
+        })) if reason.as_deref() == Some("transport.author_project_context_input_invalid") => {
+            render_project_context_refusal(&handbook_sdk::AuthorProjectContextRefusal {
+                kind: handbook_sdk::AuthorProjectContextRefusalKind::MalformedStructuredInput,
+                summary: "failed to parse canonical Project Context YAML".to_owned(),
+                broken_subject: "canonical project-context input".to_owned(),
+                next_safe_action: "repair the canonical `1.0` Project Context YAML and retry"
+                    .to_owned(),
+                causal_disposition: handbook_sdk::AuthorCausalDisposition::CallerRefusal,
+                public_effects: Vec::new(),
+            })
+        }
+        Ok(Some(TransportPresentationViewV1::AuthorInput {
+            route: AuthorInputTransportRouteV1::ProjectContext,
+            input_source,
+            error: Some(error),
+        })) => render_author_custom_refusal(
+            "author project-context",
+            "REFUSED",
+            "InputReadFailure",
+            &if input_source == "-" {
+                format!(
+                    "failed to read structured inputs from stdin: {}",
+                    error.display_message()
+                )
+            } else {
+                format!(
+                    "failed to read structured inputs from `{input_source}`: {}",
+                    error.display_message()
+                )
+            },
+            "structured input source",
+            if input_source == "-" {
+                "repair stdin and retry `handbook author project-context --from-inputs -`"
+            } else {
+                "repair the structured input file and retry `handbook author project-context --from-inputs <path|->`"
+            },
+        ),
+        Ok(Some(TransportPresentationViewV1::WorkingDirectory {
+            command:
+                AuthorWorkingDirectoryCommandV1::ProjectContextAuthor
+                | AuthorWorkingDirectoryCommandV1::ProjectContextValidate,
+            error,
+        })) => render_author_custom_refusal(
+            "author project-context",
+            "REFUSED",
+            "WorkingDirectoryUnavailable",
+            &format!("failed to determine repo root: {}", error.display_message()),
+            "current working directory",
+            "repair the current working directory and retry `handbook author project-context --from-inputs <path|->`",
+        ),
+        _ => {
+            return emit_transport_failure(
+                TransportFailureKind::Serialization,
+                "transport.presentation_failed",
+                limits,
+            )
         }
     };
-    let repo_root = discover_managed_repo_root(&cwd);
-
-    let yaml = match read_author_inputs_source(
-        "author project-context",
-        "handbook author project-context --from-inputs",
-        path_or_dash,
-    ) {
-        Ok(yaml) => yaml,
-        Err(rendered) => {
-            return RenderedCommand {
-                output: rendered,
-                exit_code: ExitCode::from(1),
-            };
-        }
-    };
-    let input = match parse_project_context_input_yaml(&yaml) {
-        Ok(input) => input,
-        Err(refusal) => {
-            return RenderedCommand {
-                output: render_project_context_refusal(&refusal),
-                exit_code: ExitCode::from(1),
-            };
-        }
-    };
-
-    if let Err(refusal) =
-        handbook_sdk::HandbookSdkV1::open(&repo_root).validate_project_context(&input)
-    {
-        return RenderedCommand {
-            output: render_project_context_refusal(&refusal),
-            exit_code: ExitCode::from(1),
-        };
-    }
-
-    let input_mode = if path_or_dash == "-" {
-        "structured_inputs_stdin"
-    } else {
-        "structured_inputs_file"
-    };
-    if args.validate {
-        return RenderedCommand {
-            output: render_author_project_context_validation_success(input_mode, path_or_dash),
-            exit_code: ExitCode::SUCCESS,
-        };
-    }
-
-    if let Err(refusal) = preflight_authoring(&repo_root) {
-        return RenderedCommand {
-            output: render_project_context_refusal(&refusal),
-            exit_code: ExitCode::from(1),
-        };
-    }
-
-    match run_author(&repo_root, &input) {
-        Ok(result) => RenderedCommand {
-            output: render_author_project_context_success(&result, input_mode, path_or_dash),
-            exit_code: ExitCode::SUCCESS,
-        },
-        Err(refusal) => RenderedCommand {
-            output: render_project_context_refusal(&refusal),
-            exit_code: ExitCode::from(1),
-        },
-    }
+    let mut bytes = output.into_bytes();
+    bytes.push(b'\n');
+    exit_policy::emit_stdout(&bytes, semantic_exit)
 }
 
 fn render_author_project_context_success(
@@ -678,6 +1082,8 @@ fn parse_project_context_input_yaml(
             broken_subject: "canonical project-context input".to_owned(),
             next_safe_action: "repair the canonical `1.0` Project Context YAML and retry"
                 .to_owned(),
+            causal_disposition: handbook_sdk::AuthorCausalDisposition::CallerRefusal,
+            public_effects: Vec::new(),
         })?;
     Ok(handbook_sdk::ProjectContextInput {
         schema_id: wire.schema_id,
@@ -691,43 +1097,36 @@ fn parse_project_context_input_yaml(
     })
 }
 
-fn read_author_inputs_source(
-    object: &str,
-    command_with_flag: &str,
-    path_or_dash: &str,
-) -> Result<String, String> {
+fn read_author_inputs_source(path_or_dash: &str) -> Result<String, std::io::Error> {
     if path_or_dash == "-" {
-        return read_stdin().map_err(|err| {
-            render_author_custom_refusal(
-                object,
-                "REFUSED",
-                "InputReadFailure",
-                &format!("failed to read structured inputs from stdin: {err}"),
-                "structured input source",
-                &format!("repair stdin and retry `{command_with_flag} -`"),
-            )
-        });
+        return read_stdin();
     }
+    fs::read_to_string(path_or_dash)
+}
 
-    fs::read_to_string(path_or_dash).map_err(|err| {
-        render_author_custom_refusal(
-            object,
-            "REFUSED",
-            "InputReadFailure",
-            &format!("failed to read structured inputs from `{path_or_dash}`: {err}"),
-            "structured input source",
-            &format!("repair the structured input file and retry `{command_with_flag} <path|->`"),
-        )
-    })
+fn author_input_transport_kind(error: &TransportIoErrorV1) -> TransportFailureKind {
+    if error.is_caller_acquisition() {
+        TransportFailureKind::Acquisition
+    } else {
+        TransportFailureKind::Adapter
+    }
 }
 
 fn author_project_context_refusal_outcome_name(
     kind: handbook_sdk::AuthorProjectContextRefusalKind,
 ) -> &'static str {
     match kind {
+        handbook_sdk::AuthorProjectContextRefusalKind::InvalidRequest => "REFUSED",
         handbook_sdk::AuthorProjectContextRefusalKind::MissingSystemRoot
         | handbook_sdk::AuthorProjectContextRefusalKind::InvalidSystemRoot
-        | handbook_sdk::AuthorProjectContextRefusalKind::MutationRefused => "BLOCKED",
+        | handbook_sdk::AuthorProjectContextRefusalKind::ShippedContractUnavailable
+        | handbook_sdk::AuthorProjectContextRefusalKind::SelectedDecisionMissing
+        | handbook_sdk::AuthorProjectContextRefusalKind::SystemRootInspectionFailed
+        | handbook_sdk::AuthorProjectContextRefusalKind::UnsafeSystemRoot
+        | handbook_sdk::AuthorProjectContextRefusalKind::CanonicalInspectionFailed
+        | handbook_sdk::AuthorProjectContextRefusalKind::MutationRefused
+        | handbook_sdk::AuthorProjectContextRefusalKind::MutationSafetyRefused
+        | handbook_sdk::AuthorProjectContextRefusalKind::MutationIoFailed => "BLOCKED",
         handbook_sdk::AuthorProjectContextRefusalKind::MalformedStructuredInput
         | handbook_sdk::AuthorProjectContextRefusalKind::IncompleteStructuredInput
         | handbook_sdk::AuthorProjectContextRefusalKind::ExistingCanonicalTruth
@@ -741,8 +1140,13 @@ fn author_project_context_refusal_kind_name(
     kind: handbook_sdk::AuthorProjectContextRefusalKind,
 ) -> &'static str {
     match kind {
+        handbook_sdk::AuthorProjectContextRefusalKind::InvalidRequest => "InvalidRequest",
         handbook_sdk::AuthorProjectContextRefusalKind::MissingSystemRoot => "MissingSystemRoot",
         handbook_sdk::AuthorProjectContextRefusalKind::InvalidSystemRoot => "InvalidSystemRoot",
+        handbook_sdk::AuthorProjectContextRefusalKind::ShippedContractUnavailable
+        | handbook_sdk::AuthorProjectContextRefusalKind::SelectedDecisionMissing
+        | handbook_sdk::AuthorProjectContextRefusalKind::SystemRootInspectionFailed
+        | handbook_sdk::AuthorProjectContextRefusalKind::UnsafeSystemRoot => "InvalidSystemRoot",
         handbook_sdk::AuthorProjectContextRefusalKind::MalformedStructuredInput => {
             "MalformedStructuredInput"
         }
@@ -753,6 +1157,9 @@ fn author_project_context_refusal_kind_name(
             "ExistingCanonicalTruth"
         }
         handbook_sdk::AuthorProjectContextRefusalKind::MutationRefused => "MutationRefused",
+        handbook_sdk::AuthorProjectContextRefusalKind::CanonicalInspectionFailed
+        | handbook_sdk::AuthorProjectContextRefusalKind::MutationSafetyRefused
+        | handbook_sdk::AuthorProjectContextRefusalKind::MutationIoFailed => "MutationRefused",
         handbook_sdk::AuthorProjectContextRefusalKind::UnsupportedPlatformStrictMutation => {
             "UnsupportedPlatformStrictMutation"
         }

@@ -89,8 +89,8 @@ impl Command {
     fn run(self, machine_json: bool) -> ExitCode {
         match self {
             Command::Setup(args) => setup::run(args, machine_json),
-            Command::Author(args) => author::run(args),
-            Command::Approvers(args) => approvers::run(args),
+            Command::Author(args) => author::run(args, machine_json),
+            Command::Approvers(args) => approvers::run(args, machine_json),
             Command::Artifact(args) => artifact::run(args),
             Command::Pipeline(args) => pipeline::run(args),
             Command::Generate(args) => generate::run(args),
