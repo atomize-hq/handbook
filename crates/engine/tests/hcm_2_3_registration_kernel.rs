@@ -402,8 +402,12 @@ fn nonselected_target_and_structurally_invalid_intake_establish_no_authoritative
     )
     .expect_err("kind/instance mismatch must fail before generic establishment");
     assert_eq!(
+        error.cause(),
+        handbook_engine::artifact_mutation::ArtifactMutationErrorKindV1::TargetResolution
+    );
+    assert_eq!(
         error.kind(),
-        handbook_engine::artifact_mutation::ArtifactMutationErrorKindV1::RepositoryIdentity
+        handbook_engine::artifact_mutation::ArtifactMutationErrorKindV1::Evaluation
     );
     assert!(!repo.path().join(".handbook/state/transactions").exists());
 
