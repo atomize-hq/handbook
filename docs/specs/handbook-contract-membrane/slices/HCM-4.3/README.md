@@ -8,9 +8,8 @@ source of semantic operation identity.
 
 ## Current admission state
 
-**Packets 1 through 8 now have product and packet-level evidence checkpoints.
-The meta task still owns the one aggregate slice review, closeout, and any
-`SLICE_COMPLETE` decision.**
+**Packets 1 through 8, the one aggregate causal review, and aggregate slice
+closeout are complete. HCM-4.3 is `SLICE_COMPLETE`.**
 
 The hard predecessor, HCM-4.2, is complete. Its packet commits are
 `f54dcbd`, `4d70701`, `241b998`, `caf0ef4`, and `c1f5d33`, following the
@@ -21,9 +20,22 @@ no P1 or P2. The prior P3 status-prose drift is corrected by the current
 authority-preparation change; the separate P3 bootstrap defense-in-depth note
 remains optional and does not block this slice.
 
-Packet implementation does not itself establish aggregate slice closeout.
-HCM-4.4 and later work remain inadmissible until the meta task evaluates this
-slice at its separate aggregate boundary.
+HCM-4.3 packet implementation completed through `f901231`. Aggregate review
+then found three stale Engine test contracts caused by the Packet-3 and
+Packet-4 compatibility changes; test-only remediations `920d217` and
+`45cad19` aligned those assertions without changing product behavior. The
+formerly failing Engine binaries pass 21/21, the packet-focused Engine, SDK,
+and CLI surfaces pass, and the fresh aggregate causal review returned
+`APPROVE/PROCEED` with no P1–P4 findings. All ten slice acceptance conditions
+are satisfied: 36 supported leaves/modes route through 18 admitted `cli_json`
+ordinary operations or six fixed SDK use cases, the operation inventory
+remains exactly 62 rows with its pre-existing Rust-SDK posture capability, the
+schema manifest contains 115 roots, and pipeline route-resolve remains
+correctly omitted from ordinary transport.
+
+This closeout satisfies HCM-4.4's hard predecessor. It does not authorize or
+start HCM-4.4 or any later slice; those remain subject to their own current
+authority and explicit execution request.
 
 ## Outcome
 
@@ -482,9 +494,9 @@ HCM-4.3 does not authorize:
 
 ## Use and drift
 
-Use this document to prepare and execute only the next eligible HCM-4.3 packet.
-Source and tests remain product truth. If a packet changes the supported CLI
-surface, operation inventory, transport evidence, or schema manifest, update
-the implemented baseline, phase map, architecture context, and seam crosswalk
-only where their owned current truth changes. Do not use this authority to
-claim HCM-4.3 complete before Packet 8 and the single aggregate closeout.
+Use this document as the completed HCM-4.3 outcome and packet boundary. Source
+and tests remain product truth. If later authorized work changes the supported
+CLI surface, operation inventory, transport evidence, or schema manifest,
+update the implemented baseline, phase map, architecture context, and seam
+crosswalk only where their owned current truth changes. Do not use this
+closeout as authority to execute HCM-4.4 or later work.
