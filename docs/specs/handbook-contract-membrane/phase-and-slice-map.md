@@ -116,12 +116,24 @@ and Packet-0 checkpoints remain chronology, not evidence for this exit.
 | [`HCM-4.2` — Shared DTO and JSON Schema membrane](slices/HCM-4.2/README.md) | Implemented checkpoint; slice closeout complete | Packets 0–5 established the bounded typed kernel, 53-root schema/manifest tree, exact 62-row operation inventory and owner-admission boundary, immutable production bootstrap/catalog witness, one admitted Rust-SDK posture operation, and integrated proof through `c1f5d33`. One aggregate verification and causal review completed the slice. | Phase-3 exit, satisfied |
 | [`HCM-4.3` — Complete CLI JSON parity](slices/HCM-4.3/README.md) | Implemented checkpoint; slice closeout complete | Packets 1–8 and one aggregate review closed all 36 supported nontrivial leaves/modes through 18 admitted `cli_json` ordinary operations or six fixed SDK use cases, with one schema-valid machine document, shared human and bounded legacy projections, stable diagnostics/exits, 115 schema roots, exact 62-row discovery continuity, and route-resolve correctly omitted from ordinary transport. | **Phase-3 exit and HCM-4.2 slice closeout are satisfied** |
 | [`HCM-4.4` — Tauri-ready command facade](slices/HCM-4.4/README.md) | Implemented checkpoint; slice closeout complete | Packets 1–6 and one aggregate review close three versioned non-UI Tauri commands over five new SDK contract roots and a host-managed repository context. The 120-root schema tree, exact 19 capabilities, and six fixed non-discoverable use cases close without a normal-operation CLI subprocess, command-name-derived identity, or frontend-owned semantics. | HCM-4.3 slice closeout, satisfied |
-| [`HCM-4.5` — Capability-driven Handbook skill](slices/HCM-4.5/README.md) | Packets 1–6 implemented; aggregate closeout pending | The installed root skill and four-action generic CLI membrane discover admitted ordinary capabilities, retrieve exact contracts and schemas, gather and validate structured bodies, invoke only through current transport evidence, and preserve typed owner outcome/mutation/replay truth without prompt-owned product logic. Six fixed use cases remain outside discovery. Packet implementation is complete; this is not yet the HCM-4.5 slice-closeout or Phase-4 exit verdict. | HCM-4.4 slice closeout, satisfied |
+| [`HCM-4.5` — Capability-driven Handbook skill](slices/HCM-4.5/README.md) | Implemented checkpoint; slice closeout complete | The installed root skill and four-action generic CLI membrane discover admitted ordinary capabilities, retrieve exact contracts and schemas, gather and validate structured bodies, invoke only through current transport evidence, and preserve typed owner outcome/mutation/replay truth without prompt-owned product logic. Six fixed use cases remain outside discovery. One aggregate verification and causal review completed the slice. | HCM-4.4 slice closeout, satisfied |
 
 Packet 0's chronology is recorded, not retroactively authorized by this map.
 Phase 4 may exit only when supported SDK, CLI, and Tauri-facing use cases share
 typed owner outcomes; machine schemas cover supported responses; transports own
 no domain truth; and capability discovery does not create command-name coupling.
+
+### Phase-4 exit state
+
+**Phase exited.** HCM-4.2 through HCM-4.5 are closed. Current SDK, CLI, Tauri,
+and installed-skill consumers share typed owner outcomes and the deterministic
+120-root machine-schema tree; transports remain adapter-only; capability
+identity comes from admitted operation bindings and catalog evidence rather
+than CLI or Tauri command names. The six fixed SDK use cases remain deliberately
+outside ordinary discovery.
+
+This exit does not authorize Phase 5 or supply its unresolved contract-owner,
+evidence, verdict, gate, dock, or validator semantics.
 
 ## Phase 5 — contract membrane and docks
 

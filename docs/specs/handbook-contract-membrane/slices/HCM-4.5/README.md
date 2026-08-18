@@ -9,7 +9,8 @@ make a CLI or Tauri command name a source of semantic identity.
 
 ## Current admission state
 
-**Packets 1–6 are implemented; aggregate closeout is pending.**
+**Packets 1–6, the one aggregate verification, the aggregate causal review,
+and aggregate slice closeout are complete. HCM-4.5 is `SLICE_COMPLETE`.**
 
 The hard predecessor, HCM-4.4, is complete at `b145ce2`. Its Packets 1–6
 completed sequentially through `3ae846c`, `1fc369a`, `d12cae8`, `2042b6f`,
@@ -19,12 +20,33 @@ capabilities, the exact current transport vectors, five transport-neutral
 facade roots, three Tauri transport commands, six fixed non-discoverable SDK
 use cases, and owner-preserving read-only and mutation invocation.
 
-That evidence satisfied HCM-4.5's predecessor. Packets 1–5 were implemented at
-`81ddfd7`, `23e0a7c`, `8dd1627`, `7215fee`, and `d507143`; Packet 6 adds the
-integrated consumer/source-gate proof and current protocol documentation. This
-packet status does not make HCM-4.5 or Phase 4 complete. One aggregate
-verification and causal review, slice closeout, and separate Phase-4 exit
-decision remain with the meta task.
+That evidence satisfied HCM-4.5's predecessor. Authority was prepared at
+`3df62da`; Packets 1–6 were implemented sequentially at `81ddfd7`, `23e0a7c`,
+`8dd1627`, `7215fee`, `d507143`, and `c52b1b7`.
+
+Aggregate verification on the final product state passed the SDK Packet-1
+suite (4/4), CLI Packet-2–6 suites (29/29), repaired feature-gated integrated
+schema/catalog proof (3/3), and Tauri integrated facade proof (1/1). Packet-6
+evidence also passed HCM-4.3/HCM-4.4 parity, deterministic 120-root schema
+regeneration, temp-HOME source/release/public installation smoke, formatting,
+workspace check, strict Clippy and rustdoc, dependency/source gates, and
+Markdown links.
+
+The aggregate causal review found one authority/evidence mismatch: the sealed
+production witness has no truthful test-only seam for fabricating a newly
+admitted capability, while the original criterion 11 required exactly that
+construction. The accepted Packet-6 authority already required the strongest
+truthful alternative when injection would change production inventory or
+semantics. Criterion 11 below now states that bounded proof directly: dynamic
+structural selection from the admitted catalog plus source gates, together with
+the invariant that any real later capability first completes product-owned
+definition, schema, owner-route, admission, and transport closure. No product
+behavior was weakened or changed by this correction. The controlling aggregate
+review has no unresolved P1 or P2.
+
+The separate Phase-4 exit criteria are satisfied by the completed Phase-4
+product evidence. This closeout does not authorize Phase 5, resolve its owner
+placement decision, or start any later slice.
 
 ## Outcome
 
@@ -406,11 +428,17 @@ HCM-4.5 completes only when all of the following hold:
     120 roots, the capability witness exactly 19 entries, current transport
     vectors unchanged, and all six fixed use cases absent from discovery and
     generic invocation.
-11. A future-uptake proof shows that a newly admitted test capability with a
-    complete owner route, schemas, and current `cli_json` evidence requires no
-    capability-specific skill text or new generic CLI action; source gates show
-    current operation refs occur only in test evidence or owner/definition
-    code, not the skill or generic adapter routing.
+11. A future-uptake proof dynamically selects an admitted read-only `cli_json`
+    capability by structural catalog and schema properties without naming it in
+    the generic adapter, installed skill, or selection test. Source gates show
+    no current operation ref occurs in the installed root skill or generic
+    capability adapter/parser; test evidence and pre-existing owner,
+    definition, and typed-parity mappings remain outside that generic route.
+    The proof records that the sealed production witness has no truthful
+    synthetic-admission seam: a real later capability must first gain complete
+    product-owned definition, schemas, owner route, admission, and current
+    transport evidence, after which the unchanged skill and four generic
+    actions consume it through discovery.
 12. Root/leaf projection generation, source and release installation, discovery
     links, and live-skill smoke tests prove the capability-driven asset is what
     users receive while the fixed Charter skill remains separately available.

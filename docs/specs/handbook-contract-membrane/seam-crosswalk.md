@@ -34,8 +34,8 @@ completion or schedule:
   authorizing it.
 - `HCM-4.4` identifies the completed Tauri-facade migration without reopening
   or authorizing it.
-- `HCM-4.5` identifies the implemented generic installed-skill consumer seam;
-  aggregate slice closeout remains pending.
+- `HCM-4.5` identifies the completed generic installed-skill consumer seam
+  without reopening or authorizing it.
 - `Decision required in phase map` leaves the later owner deliberately
   unresolved.
 
