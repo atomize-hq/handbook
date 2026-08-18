@@ -15,7 +15,7 @@ This document does not:
 - define a remaining schedule or choose a future owner;
 - declare a phase or slice complete;
 - select a Phase-3 boundary or establish Phase-3 exit evidence; or
-- determine HCM-4.4 lifecycle status or authorize follow-on work.
+- determine HCM-4.5 lifecycle status or authorize follow-on work.
 
 The [`README`](README.md) remains the authority and navigation entry point.
 Execution-unit identity comes from the [`work-unit lifecycle`](work-unit-lifecycle.md), and verification and closeout rules come from the [`review and closeout policy`](review-and-closeout-policy.md).
@@ -42,6 +42,7 @@ These are product-state labels only. None is a lifecycle state, authorization, p
 | HCM-4.2 shared DTO and JSON Schema membrane | Implemented | Packets 0–5 provide bounded contract types, canonical serialization and fingerprints, a deterministic 53-root Draft 2020-12 schema tree and manifest, the exact 62-row operation inventory and independent owner-admission boundary, immutable production bootstrap/catalog witnessing, one admitted Rust-SDK posture operation, and integrated proof. |
 | Complete CLI JSON parity | Implemented | HCM-4.3 Packets 1–8 provide one global `--json` invocation envelope, 36-leaf exact coverage, six fixed use cases, 18 `cli_json` ordinary operations, a deterministic 115-root schema/manifest tree, singular writable-stdout framing, shared terminal/exit mapping, physical write-failure handling, and bounded `--legacy-json` compatibility. Aggregate slice closeout remains a lifecycle decision, not a product-state label. |
 | Tauri-ready command facade | Implemented | HCM-4.4 Packets 1–6 provide the non-UI `handbook-tauri` library, exact three-command registry, five new SDK facade roots, 120-root deterministic schema/manifest tree, host-managed repository context, all 19 current capability routes, and six fixed non-discoverable use cases. The 18 CLI operations expose exactly `[cli_json, tauri]`, posture exposes `[rust_sdk, tauri]`, and the other 43 inventory rows remain transport-empty and omitted. Aggregate slice closeout is recorded by the current HCM lifecycle/status sources; that verdict does not change this product-state label. |
+| Capability-driven installed Handbook skill | Implemented | HCM-4.5 Packets 1–6 provide one SDK consumer seam, exactly four generic CLI actions (`bootstrap`, `catalog-read`, `schema-read`, and `invoke`), and generated/source/release/public installed skill projections. The skill discovers the unchanged 19-capability witness, retrieves exact manifest-bound schemas, invokes read-only or explicitly authorized mutations, and preserves typed terminal, idempotency, receipt, and replay truth without a capability-specific route. The 120 schema roots, 62 operation rows, current transport vectors, and six fixed-use-case omissions remain unchanged. Aggregate HCM-4.5 closeout remains a lifecycle decision, not a product-state label. |
 | Future contract/evidence/gate owner and dock executor | Absent/future | No current product owner or implementation establishes these capabilities. |
 | Current publication and Substrate adoption | External-unknown | Current repository evidence does not prove a present external publication, bridge, or Substrate seam; absence from the repository is not proof of external absence. |
 

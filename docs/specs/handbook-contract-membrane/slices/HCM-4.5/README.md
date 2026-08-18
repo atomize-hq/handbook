@@ -1,15 +1,15 @@
 # HCM-4.5 Capability-driven Handbook Skill
 
-This document owns the outcome authority for HCM-4.5. It defines exactly one
-slice outcome: a deliberately thin installed Handbook skill that consumes
-ordinary capabilities through the Phase-4 bootstrap, catalog, schema, and
-invocation membrane. It does not implement a packet, authorize Phase 5 or
-Phase 6, convert fixed SDK use cases into ordinary capabilities, or make a CLI
-or Tauri command name a source of semantic identity.
+This document owns the outcome authority and current implementation status for
+HCM-4.5. It defines exactly one slice outcome: a deliberately thin installed
+Handbook skill that consumes ordinary capabilities through the Phase-4
+bootstrap, catalog, schema, and invocation membrane. It does not authorize
+Phase 5 or Phase 6, convert fixed SDK use cases into ordinary capabilities, or
+make a CLI or Tauri command name a source of semantic identity.
 
 ## Current admission state
 
-**Authority is prepared; product implementation has not begun.**
+**Packets 1–6 are implemented; aggregate closeout is pending.**
 
 The hard predecessor, HCM-4.4, is complete at `b145ce2`. Its Packets 1–6
 completed sequentially through `3ae846c`, `1fc369a`, `d12cae8`, `2042b6f`,
@@ -19,9 +19,12 @@ capabilities, the exact current transport vectors, five transport-neutral
 facade roots, three Tauri transport commands, six fixed non-discoverable SDK
 use cases, and owner-preserving read-only and mutation invocation.
 
-That evidence satisfies HCM-4.5's predecessor. It does not make HCM-4.5 or any
-packet implemented. Product execution remains inadmissible until the meta task
-reloads this authority and dispatches the first eligible packet.
+That evidence satisfied HCM-4.5's predecessor. Packets 1–5 were implemented at
+`81ddfd7`, `23e0a7c`, `8dd1627`, `7215fee`, and `d507143`; Packet 6 adds the
+integrated consumer/source-gate proof and current protocol documentation. This
+packet status does not make HCM-4.5 or Phase 4 complete. One aggregate
+verification and causal review, slice closeout, and separate Phase-4 exit
+decision remain with the meta task.
 
 ## Outcome
 
@@ -94,13 +97,25 @@ bounded current decision, it must return `STOPPED` unless the meta task grants
 that historical input explicitly; packet work may not silently reactivate a
 pre-clean skill or control package.
 
-The current root skill hardcodes several native command workflows and the
-installed projection contains only `SKILL.md` plus `agents/openai.yaml`. The
-current CLI provides complete typed JSON parity for its existing leaves, but
-does not expose bootstrap, catalog, exact schema retrieval, or one generic
-operation-ref-driven invocation action. The SDK and Tauri facade already prove
-those transport-neutral contracts and owner routes. HCM-4.5 closes only the
-missing installed-skill consumer seam.
+The current root skill is the generic capability algorithm and the installed
+projection contains its `SKILL.md` plus `agents/openai.yaml`; the separate
+Charter leaf remains available without entering ordinary discovery. The CLI
+exposes only `bootstrap`, `catalog-read`, `schema-read`, and `invoke` below the
+machine-only capability group. The SDK consumer and existing Tauri facade
+retain their transport-neutral contracts and owner routes.
+
+The production witness is deliberately closed over the current manifest,
+definitions, owner evidence, inventory, and transport evidence; it has no
+truthful test-only injection seam for a synthetic twentieth capability. Packet
+6 therefore uses the authority-permitted strongest proof: it dynamically
+selects an already admitted read-only `cli_json` capability by structural
+properties and exact schema acceptance, without naming that operation in the
+selection test, generic adapter, or installed skill. This proves routing
+independence for an admitted capability, not literal admission of a fabricated
+future capability. A real later capability must first gain complete
+product-owned definition, schemas, owner route, admission, and current
+`cli_json` evidence; the unchanged generic skill and four CLI actions then
+consume it through discovery.
 
 ## Selected consumer and adapter shape
 
