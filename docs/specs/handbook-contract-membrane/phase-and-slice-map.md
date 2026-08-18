@@ -132,8 +132,9 @@ identity comes from admitted operation bindings and catalog evidence rather
 than CLI or Tauri command names. The six fixed SDK use cases remain deliberately
 outside ordinary discovery.
 
-This exit does not authorize Phase 5 or supply its unresolved contract-owner,
-evidence, verdict, gate, dock, or validator semantics.
+This exit does not itself authorize Phase 5 or supply contract, evidence,
+verdict, gate, dock, or validator semantics. The separate HCM-5.1 authority now
+selects the contract owner and first slice boundary without changing this exit.
 
 ## Phase 5 — contract membrane and docks
 
@@ -143,7 +144,7 @@ records plus untrusted candidates.
 
 | Slice | Program status | Concise outcome and boundary | Hard predecessor |
 | --- | --- | --- | --- |
-| `HCM-5.1` — Contract lifecycle and claim model | Decision required | Establish exact versioned contract identity, immutable authority transitions, typed claims and applicability, and gate effects without encoding evaluation as lifecycle state. Contract-owner placement remains unresolved. | Phase-4 exit and owner-placement decision |
+| [`HCM-5.1` — Contract lifecycle and claim model](slices/HCM-5.1/README.md) | Authorized | Establish exact versioned contract identity, immutable authority transitions, typed claims and applicability, and gate effects without encoding evaluation as lifecycle state. The slice selects a purpose-named `handbook-contracts` owner inward of SDK with outward SDK mapping; no packet is implemented yet. | Phase-4 exit, satisfied; owner placement selected by current slice authority |
 | `HCM-5.2` — Evidence, verdict, and gate engine | Planned | Admit immutable evidence, compute closed verdicts, enforce complete accounting and freshness, and keep local closeout separate from parent promotion. | Preceding slice closeout |
 | `HCM-5.3` — Process dock protocol | Decision required | Define a bounded, default-deny executor protocol with exact bundle/runtime identity, timeouts, cleanup, and no partial evidence. The runtime and implementation choice remains unresolved; no bundled-Python choice is restored. | Contract/evidence interfaces from the preceding slices and an executor decision |
 | `HCM-5.4` — First real validator dock proof | Planned | Exercise one real offline validator through the dock into admitted evidence, verdict, and gate behavior without granting the validator or executor semantic authority. | Both evidence/gate and dock protocol closeout |
@@ -178,7 +179,6 @@ actual owner boundary. Unselected external consumers are not an exit failure.
 | Ordinary grounding SDK/JSON exposure and consumer placement | Future Phase-4 authority must choose the bounded public seam; future Phase-6 authority must separately choose any publication, bridge, and adopter |
 | Broader posture evaluation, recommendation, notification, acknowledgement, and hysteresis | Future posture authority must place this policy without transferring engine-owned mutation authority to a gate or adapter |
 | CLI operation-inventory expansion beyond the completed 62-row predecessor | HCM-4.3 does not expand the inventory for transport parity: its authority fixes the exact ordinary mappings and a closed six-entry SDK use-case registry. Any new semantic operation or use case requires later explicit authority, complete schemas, and independent owner admission where applicable. |
-| Contract-owner placement or neutral extraction | Future contract-owner authority, preserving the no-back-edge architecture rule |
 | Gate-to-posture input and policy boundary | Future gate and posture authorities, preserving posture ownership |
 | Dock implementation and runtime | Future dock authority; current Rust schema use does not preselect the executor |
 | CLI/Tauri membrane routes and framing | HCM-4.3 owns current CLI parity and framing; HCM-4.4 separately owns the Tauri facade after HCM-4.3 closeout. |
