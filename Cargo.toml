@@ -8,3 +8,9 @@ members = [
     "crates/tauri",
 ]
 resolver = "2"
+
+[profile.dev]
+debug = 1
+
+[profile.test]
+debug = 0

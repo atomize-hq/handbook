@@ -1,14 +1,14 @@
 checks:
   cargo fmt --all
   cargo clippy --workspace --all-targets --all-features -- -D warnings
-  cargo test --workspace
-  cargo check --workspace
+  cargo nextest run --workspace --no-fail-fast
+  cargo test --workspace --doc
 
 checks-with-smoke:
   cargo fmt --all
   cargo clippy --workspace --all-targets --all-features -- -D warnings
-  cargo test --workspace
-  cargo check --workspace
+  cargo nextest run --workspace --no-fail-fast
+  cargo test --workspace --doc
 
 handbook_pipeline_released_proof version="0.1.2":
   bash tools/proof/handbook_pipeline_released_boundary.sh --version {{version}}
