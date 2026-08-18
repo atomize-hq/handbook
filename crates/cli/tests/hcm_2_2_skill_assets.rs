@@ -31,9 +31,12 @@ fn installed_and_core_charter_assets_publish_the_same_frozen_commands() {
             CORE_METHOD.contains(command),
             "core method missing {command}"
         );
+        assert!(
+            !ROOT_SKILL.contains(command),
+            "generic root skill must route Charter work to the separate leaf: {command}"
+        );
     }
-    assert!(ROOT_SKILL.contains("--mode guided-adaptive"));
-    assert!(ROOT_SKILL.contains("handbook author charter --validate"));
+    assert!(ROOT_SKILL.contains("`handbook-charter-intake`"));
 }
 
 #[test]

@@ -1,19 +1,15 @@
 ---
 name: handbook
-description: "Run native Handbook Charter governance plus deterministic project-context authoring."
+description: "Discover and invoke ordinary Handbook capabilities through the installed generic contract membrane."
 ---
 
 # Handbook
 
-Native governance and baseline-authoring workflow for the `Handbook` family.
+Use this root skill for ordinary Handbook work. Discover the operation from the installed capability catalog; do not carry an operation inventory or route by a CLI command, Tauri command, schema filename, or remembered use case. Use the separate `handbook-charter-intake` skill when the requested scope is the fixed Charter workflow.
 
-- Installed home: `~/handbook/`
-- Installed thin projections: `~/handbook/.agents/skills/handbook/` and `~/handbook/.agents/skills/handbook-charter-intake/`
-- Codex discovery glue: `~/.codex/skills/handbook*`
+## Establish the bounded runtime
 
-Use this root skill from inside a real git work tree. Setup creates repository infrastructure but does not author Charter truth. Charter acquisition creates immutable lineage and requires later human approval and atomic promotion. Project Context retains its deterministic authoring commands. Canonical Environment Context is optional advisory context and is not authored through a legacy kind-specific command.
-
-Resolve the repository and installed runtime first:
+Work only from inside a real git work tree. Repository identity comes from the current working tree, never from operation input.
 
 ```bash
 repo_root="$(git rev-parse --show-toplevel 2>/dev/null)" || {
@@ -21,55 +17,108 @@ repo_root="$(git rev-parse --show-toplevel 2>/dev/null)" || {
   exit 1
 }
 handbook_home="${HANDBOOK_HOME:-$HOME/handbook}"
-for required in \
-  "$handbook_home/bin/handbook" \
-  "$handbook_home/runtime-manifest.json" \
-  "$handbook_home/resources/charter/CHARTER_INPUTS.yaml.tmpl" \
-  "$handbook_home/resources/project_context/PROJECT_CONTEXT_INPUTS.yaml.tmpl"; do
+handbook_bin="$handbook_home/bin/handbook"
+for required in "$handbook_bin" "$handbook_home/runtime-manifest.json"; do
   [[ -f "$required" ]] || {
-    echo "REFUSED: missing installed handbook home prerequisite: $required" >&2
+    echo "REFUSED: missing installed Handbook prerequisite." >&2
     exit 1
   }
 done
+umask 077
+run_dir="$(mktemp -d "${TMPDIR:-/tmp}/handbook-capability.XXXXXX")" || exit 1
+trap 'rm -rf "$run_dir"' EXIT
 export HANDBOOK_HOME="$handbook_home"
 cd "$repo_root"
 ```
 
-Workflow:
+Keep the temporary directory bounded to this run. Do not place request bodies in the repository.
 
-1. Run `$HANDBOOK_HOME/bin/handbook setup`.
-2. Gather concrete repository facts and fill temporary YAML inputs outside the target repository. For Charter, prepare the closed typed intake envelope and preserve unknowns and contradictions.
-3. Acquire, approve, promote, and validate Charter through native operations:
+## Discover one exact capability
 
-   ```bash
-   handbook author charter --mode guided-adaptive --from-inputs <path|->
-   handbook author charter --mode express --from-inputs <path|->
-   handbook author charter --mode agent-assisted --from-inputs <path|->
-   handbook author charter --approve-candidate <candidate-ref> --approval-class <class> --authority-ref <authority-ref>
-   handbook author charter --promote-candidate <candidate-ref> --approval-ref <approval-ref>
-   handbook author charter --validate
-   ```
-
-4. Validate and author Project Context:
+1. Bootstrap with the current supported client version and maximum supported page size:
 
    ```bash
-   $HANDBOOK_HOME/bin/handbook author project-context --validate --from-inputs <project-context-path|->
-   $HANDBOOK_HOME/bin/handbook author project-context --from-inputs <project-context-path|->
+   "$handbook_bin" capability bootstrap --client-version 1.0.0 --page-size 128 \
+     >"$run_dir/bootstrap.json"
    ```
 
-5. Run `$HANDBOOK_HOME/bin/handbook doctor --json` and inspect the additive Charter definition, canonical, lifecycle, source/render fingerprint, and next-action fields before claiming completion.
+   Admit the single stdout document as the typed bootstrap facade response. For an `ok` outcome, retain and check the response schema binding, negotiated API version, supported versions, ceilings, declared transports, catalog roots, owner versions, schema manifest, first capability page, page and response fingerprints, and any typed correlation. If the typed outcome is not `ok`, report that outcome and stop. If stdout is empty, report only the bounded adapter diagnostic from stderr; do not manufacture an owner response.
 
-Use `handbook-charter-intake` when the requested scope is Charter-only. Never edit canonical Charter YAML, self-approve, invent missing facts, store real secret values in inputs, or bypass a CLI refusal.
+2. Treat the first capability page as page one, then follow every returned `next_cursor` until it is `null`. Pass each returned exact cursor as canonical JSON without editing any field:
 
-Successful user-global installs refresh these surfaces together:
+   ```bash
+   "$handbook_bin" capability catalog-read \
+     --catalog-kind capabilities \
+     --page-size 128 \
+     --cursor '<exact-returned-cursor-json>' \
+     >"$run_dir/capability-page.json"
+   ```
 
-- `~/handbook/`
-- `~/.codex/skills/handbook*`
+   Admit each single stdout document as the typed catalog-read response. Preserve its catalog kind, schema binding, page/root/cursor values, retention facts, and fingerprints. A blocked page, expired or mismatched cursor, malformed response, or missing page stops discovery; never restart pagination with a guessed cursor.
 
-Preferred install/update paths:
+3. Compare the user's requested effect with the complete returned catalog. Continue only when exactly one entry is an unambiguous match. When none or more than one match, preserve the ambiguity and ask for a narrower intent; do not guess or fall back to a legacy command, friendly label, or fixed use case.
 
-- Tagged release install/update: `scripts/handbook/install.sh`
-- Source checkout global install/update: `cargo install --locked --force --path crates/cli && bash tools/codex/install.sh`
-- Repo-local projection refresh for development only: `bash tools/codex/generate.sh --repo-local` or `bash tools/codex/install.sh --repo-local`
+4. Retain the selected entry exactly, including:
 
-Do not edit generated projections under `.agents/skills/**` by hand. Edit `install/handbook-home/SKILL.md.tmpl`, `install/handbook-home/agents/openai.yaml`, `install/handbook-home/charter-intake/SKILL.md.tmpl`, or `install/handbook-home/charter-intake/openai.yaml`, then rerun `bash tools/codex/generate.sh`.
+   - `operation.ref` and its paired definition fingerprint;
+   - `entry_fingerprint`;
+   - class, deprecation, owner, and idempotency facts;
+   - declared and current transports;
+   - `request_schema`, `result_schema`, every `outcome_schemas` binding, and `required_capabilities`.
+
+   Require `cli_json` in both `declared_transports` and `current_transports`. An absent entry, incompatible deprecation or version, incomplete schema closure, or unavailable transport is unavailable. Report the typed facts and stop without a fallback.
+
+## Retrieve the exact contracts
+
+For the selected entry, retrieve the request schema, result schema, blocker/refusal/error outcome schemas, the shared `handbook.invocation-response@1.0.0` schema, and schemas needed by any `required_capabilities`.
+
+For every schema, first find the exact `(ref, fingerprint)` pair in the bootstrap `schema_manifest`; then request only that pair:
+
+```bash
+"$handbook_bin" capability schema-read \
+  --schema-ref '<exact-manifest-ref>' \
+  --manifest-fingerprint '<exact-manifest-fingerprint>' \
+  >"$run_dir/schema.json"
+```
+
+The returned schema bytes are controlling. A missing manifest entry, ref/fingerprint mismatch, malformed schema, or missing required schema stops before input acquisition. Do not substitute a similarly named schema or derive identity from a filename.
+
+## Gather one closed input
+
+Build exactly one JSON object from the selected request schema. Honor its required fields, closed properties, types, bounds, enums, and nested schema references. Preserve unknown user facts as unresolved: ask for them or stop instead of inventing, defaulting, or translating them.
+
+Store the body only in the bounded temporary directory and restrict its mode:
+
+```bash
+request_path="$run_dir/request.json"
+: >"$request_path"
+chmod 600 "$request_path"
+```
+
+Write the admitted JSON object directly to that protected file without printing it. Keep raw keys, secrets, expected-basis values, and other sensitive fields out of logs, chat summaries, fixtures, command arguments, and responses. Do not print or echo the request body. Never invent or rewrite an idempotency key or expected-basis value.
+
+Immediately before invocation, read the selected entry again through exact catalog pagination. Its operation binding, definition fingerprint, and `entry_fingerprint` must still match. Any change stops before invocation.
+
+## Apply the class boundary
+
+- For `read_only`, invoke only after the closed request body is complete.
+- For any non-read-only class, first surface the exact discovered operation binding, class, request facts, idempotency kind, key pointer, and expected-basis pointers. Require the user's exact explicit authorization for that mutation and input. Authorization is not owner truth and is not proof that the installed adapter admits mutation; if the generic action does not admit it, stop. Never route around the adapter.
+
+Never retry automatically, including after delivery uncertainty or an unknown post-commit result.
+
+## Invoke once and preserve the terminal
+
+For an admitted read-only capability, invoke once using only retained discovery values and the bounded file:
+
+```bash
+"$handbook_bin" capability invoke \
+  --operation-ref '<discovered-operation-ref>' \
+  --definition-fingerprint '<discovered-definition-fingerprint>' \
+  --capability-entry-fingerprint '<discovered-entry-fingerprint>' \
+  --from-input "$request_path" \
+  >"$run_dir/invocation.json"
+```
+
+Admit the single stdout value against the exact shared response schema. The typed response is controlling even when the process exits nonzero. Present its exact status and matching data or problem collection, diagnostics, next actions, idempotency state, receipts, result and response fingerprints, correlation, and replay indicator. Do not translate, merge, or reclassify `ok`, `blocked`, `refused`, or `error`. Do not infer success from the process exit code, prose, changed files, empty problems, local observation, receipts alone, or any stderr text.
+
+When stdout is empty, the invocation did not yield an owner terminal. Report the bounded adapter diagnostic without calling it an owner refusal, blocker, error, or success. Do not retry automatically.

@@ -1,6 +1,6 @@
 interface:
   display_name: "Handbook"
-  short_description: "Thin discovery metadata for the Handbook family and the Handbook charter intake workflow."
-  default_prompt: "Use Handbook for this task."
+  short_description: "Discover and invoke ordinary Handbook capabilities; use the separate Charter intake skill for Charter work."
+  default_prompt: "Discover the matching ordinary Handbook capability from live contracts and invoke it through the generic membrane."
 policy:
   allow_implicit_invocation: true
