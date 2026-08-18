@@ -2,18 +2,6 @@ use super::{
     identity_binding, parse_canonical_wire, parse_contract_value, require_schema_binding,
     schema_binding, RequiredOption, INVOCATION_REQUEST_REF, USE_CASE_REQUEST_REF,
 };
-use crate::contract_membrane::artifact_operation::{
-    artifact_operation_definition, ArtifactSchemaValidator,
-};
-use crate::contract_membrane::flow_operation::{
-    flow_resolve_operation_definition, FlowResolveSchemaValidator,
-};
-use crate::contract_membrane::pipeline_operation::{
-    pipeline_operation_definitions, PipelineOperationSchemaValidator,
-};
-use crate::contract_membrane::posture::{
-    posture_transition_apply_definition, PostureSchemaValidator,
-};
 use crate::contract_membrane::serialization::classify_contract_error_message;
 use crate::contract_membrane::{
     canonical_fingerprint, canonical_json_bytes, BoundedString, BoundedVec, ContractError,
@@ -1207,68 +1195,11 @@ struct InvocationRequestPreimage<'a> {
     request: &'a InvocationRequestBodyV1,
 }
 
-#[derive(Deserialize)]
-struct OperationProbe {
-    operation: ExactBinding,
-}
-
 fn admit_operation_bytes(
     bytes: &[u8],
     limits: &ContractLimits,
 ) -> Result<OperationRequestV1, ContractError> {
-    let value = parse_canonical_wire(bytes, limits)?;
-    let probe = parse_contract_value::<OperationProbe>(&value, limits)?;
-    match probe.operation.reference().as_str() {
-        "artifact.kind.list@1.0.0"
-        | "artifact.instance.list@1.0.0"
-        | "artifact.read@1.0.0"
-        | "artifact.validate@1.0.0"
-        | "intake.definition.read@1.0.0"
-        | "intake.coverage.evaluate@1.0.0"
-        | "intake.record.append@1.0.0"
-        | "artifact.candidate.validate@1.0.0"
-        | "artifact.candidate.append@1.0.0"
-        | "artifact.candidate.promote@1.0.0" => {
-            let definition = artifact_operation_definition(probe.operation.reference().as_str())?;
-            OperationRequestV1::parse_and_admit(
-                bytes,
-                &definition,
-                &ArtifactSchemaValidator,
-                limits,
-            )
-        }
-        "flow.resolve@1.0.0" => OperationRequestV1::parse_and_admit(
-            bytes,
-            &flow_resolve_operation_definition()?,
-            &FlowResolveSchemaValidator,
-            limits,
-        ),
-        "pipeline.catalog.list@1.0.0"
-        | "pipeline.catalog.read@1.0.0"
-        | "pipeline.compile@1.0.0"
-        | "pipeline.capture.plan@1.0.0"
-        | "pipeline.capture.apply@1.0.0"
-        | "pipeline.handoff.emit@1.0.0"
-        | "pipeline.state.apply@1.0.0" => {
-            let definition = pipeline_operation_definitions()?
-                .into_iter()
-                .find(|definition| definition.binding() == probe.operation.clone())
-                .ok_or(ContractError::InvalidInvariant)?;
-            OperationRequestV1::parse_and_admit(
-                bytes,
-                &definition,
-                &PipelineOperationSchemaValidator,
-                limits,
-            )
-        }
-        "posture.transition.apply@1.0.0" => OperationRequestV1::parse_and_admit(
-            bytes,
-            &posture_transition_apply_definition()?,
-            &PostureSchemaValidator,
-            limits,
-        ),
-        _ => Err(ContractError::InvalidInvariant),
-    }
+    crate::contract_membrane::invocation_dispatch::admit_operation_request_bytes(bytes, limits)
 }
 
 fn bounded<const N: usize>(value: &str) -> Result<BoundedString<N>, ContractError> {

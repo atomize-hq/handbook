@@ -5,6 +5,7 @@ mod bootstrap;
 mod bootstrap_envelope;
 mod bounds;
 mod catalog;
+mod consumer;
 mod dto;
 mod envelope;
 mod facade;
@@ -49,6 +50,7 @@ pub use bounds::{
     SafeI64, SafeU64, UtcTimestamp,
 };
 pub use catalog::{CatalogCursor, CatalogPage, CatalogRoot};
+pub use consumer::{CapabilityConsumer, CapabilityConsumerError};
 pub use dto::{
     CorrelationRef, Diagnostic, DiagnosticSeverity, DraftVersion, NextAction, NextActionKind,
     Omission, OmissionReason, Problem, ProblemBinding, ProblemCategory, ProofEffect,

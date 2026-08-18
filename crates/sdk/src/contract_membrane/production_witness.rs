@@ -598,6 +598,15 @@ impl ProductionWitness {
         self.profiles.entries()
     }
 
+    pub(super) fn schema_bytes(&self, binding: &ExactBinding) -> Option<&'static [u8]> {
+        let index = self
+            .schema_manifest
+            .iter()
+            .position(|entry| entry.schema() == binding)?;
+        let (reference, bytes) = SCHEMA_ASSETS.get(index)?;
+        (*reference == binding.reference().as_str()).then_some(*bytes)
+    }
+
     pub fn bootstrap(
         &self,
         request: &BootstrapRequestV1,

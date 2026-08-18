@@ -9,13 +9,15 @@ use super::posture::{PostureSchemaValidator, OPERATION_REF as POSTURE_OPERATION_
 use super::{
     artifact_operation_definition, canonical_json_bytes, execute_artifact_operation,
     execute_flow_operation, execute_pipeline_operation, flow_resolve_operation_definition,
-    pipeline_operation_definitions, posture_transition_apply_definition, ContractError,
-    ContractLimits, InvocationRequestBodyV1, InvocationRequestV1, InvocationResponseKind,
-    InvocationResponseV1, OperationDefinition, OperationRequestV1, OperationSchemaValidator,
-    PipelineOperationSchemaValidator, TransportFailureKind, TransportFailureV1,
+    parse_canonical_json, pipeline_operation_definitions, posture_transition_apply_definition,
+    ContractError, ContractLimits, ContractValue, ExactBinding, InvocationRequestBodyV1,
+    InvocationRequestV1, InvocationResponseKind, InvocationResponseV1, OperationDefinition,
+    OperationRequestV1, OperationSchemaValidator, PipelineOperationSchemaValidator, RequestId,
+    TransportFailureKind, TransportFailureV1,
 };
 use super::{FlowResolveSchemaValidator, OperationTransport};
 use crate::HandbookSdkV1;
+use serde::Deserialize;
 use std::path::Path;
 
 const ROUTE_NOT_READY: &str = "transport.invocation_route_not_ready";
@@ -72,6 +74,48 @@ impl OperationRoute {
     }
 }
 
+#[derive(Deserialize)]
+struct OperationProbe {
+    operation: ExactBinding,
+}
+
+pub(super) fn admit_operation_request_bytes(
+    bytes: &[u8],
+    limits: &ContractLimits,
+) -> Result<OperationRequestV1, ContractError> {
+    let value = parse_canonical_json::<serde_json::Value>(bytes, limits)?;
+    let probe =
+        serde_json::from_value::<OperationProbe>(value).map_err(|_| ContractError::InvalidJson)?;
+    let Some((route, definition)) = resolve_operation_route(probe.operation.reference().as_str())?
+    else {
+        return Err(ContractError::InvalidInvariant);
+    };
+    OperationRequestV1::parse_and_admit(bytes, &definition, route.validator(), limits)
+}
+
+pub(super) fn operation_invocation_request(
+    operation: &ExactBinding,
+    request_id: Option<RequestId>,
+    body: ContractValue,
+    limits: &ContractLimits,
+) -> Result<InvocationRequestV1, ContractError> {
+    let Some((route, definition)) = resolve_operation_route(operation.reference().as_str())? else {
+        return Err(ContractError::InvalidInvariant);
+    };
+    if operation != &definition.binding() {
+        return Err(ContractError::InvalidInvariant);
+    }
+    let request = OperationRequestV1::new(
+        super::production_witness::current_schema_binding("handbook.operation-request@1.0.0")?,
+        request_id,
+        &definition,
+        body,
+        route.validator(),
+        limits,
+    )?;
+    InvocationRequestV1::operation(request, limits)
+}
+
 pub(crate) fn dispatch_invocation(
     repo_root: &Path,
     request: &InvocationRequestV1,
@@ -98,7 +142,7 @@ fn dispatch_invocation_with_presentation(
     readmit_request(request, limits)?;
     match request.request() {
         InvocationRequestBodyV1::Operation(_) => {
-            let Some((route, operation)) = operation_route(request)? else {
+            let Some((route, _, operation)) = operation_route(request)? else {
                 return default_denial(limits);
             };
             let response = route.execute(repo_root, operation)?;
@@ -121,7 +165,7 @@ pub(crate) fn readmit_invocation_response(
     require_packet_limits(limits)?;
     let bytes = canonical_json_bytes(response, limits)?;
     if matches!(request.request(), InvocationRequestBodyV1::Operation(_)) {
-        let Some((route, operation)) = operation_route(request)? else {
+        let Some((route, definition, operation)) = operation_route(request)? else {
             let admitted = InvocationResponseV1::parse_and_admit(&bytes, None, limits)?;
             let is_exact_default_denial = admitted.response_kind()
                 == InvocationResponseKind::TransportFailure
@@ -135,7 +179,6 @@ pub(crate) fn readmit_invocation_response(
                 Err(ContractError::InvalidInvariant)
             };
         };
-        let definition = route.definition(operation.operation().reference().as_str())?;
         let admitted = InvocationResponseV1::parse_and_admit(
             &bytes,
             Some((&definition, route.validator())),
@@ -282,12 +325,34 @@ fn readmit_request(
 
 fn operation_route(
     request: &InvocationRequestV1,
-) -> Result<Option<(OperationRoute, &OperationRequestV1)>, ContractError> {
+) -> Result<Option<(OperationRoute, OperationDefinition, &OperationRequestV1)>, ContractError> {
     let operation = match request.request() {
         InvocationRequestBodyV1::Operation(operation) => operation,
         InvocationRequestBodyV1::UseCase(_) => return Ok(None),
     };
     let operation_ref = operation.operation().reference().as_str();
+    let Some((route, definition)) = resolve_operation_route(operation_ref)? else {
+        return Ok(None);
+    };
+    let required_predecessor_transport = if matches!(route, OperationRoute::Posture) {
+        OperationTransport::RustSdk
+    } else {
+        OperationTransport::CliJson
+    };
+    if !definition
+        .declared_transports()
+        .contains(&required_predecessor_transport)
+        || operation.operation() != &definition.binding()
+        || operation.body_schema() != definition.request_schema()
+    {
+        return Ok(None);
+    }
+    Ok(Some((route, definition, operation)))
+}
+
+fn resolve_operation_route(
+    operation_ref: &str,
+) -> Result<Option<(OperationRoute, OperationDefinition)>, ContractError> {
     let route = if ARTIFACT_OPERATION_REFS.contains(&operation_ref) {
         OperationRoute::Artifact
     } else if operation_ref == FLOW_OPERATION_REF {
@@ -310,20 +375,7 @@ fn operation_route(
         return Ok(None);
     };
     let definition = route.definition(operation_ref)?;
-    let required_predecessor_transport = if matches!(route, OperationRoute::Posture) {
-        OperationTransport::RustSdk
-    } else {
-        OperationTransport::CliJson
-    };
-    if !definition
-        .declared_transports()
-        .contains(&required_predecessor_transport)
-        || operation.operation() != &definition.binding()
-        || operation.body_schema() != definition.request_schema()
-    {
-        return Ok(None);
-    }
-    Ok(Some((route, operation)))
+    Ok(Some((route, definition)))
 }
 
 fn default_denial(limits: &ContractLimits) -> Result<InvocationResponseV1, ContractError> {

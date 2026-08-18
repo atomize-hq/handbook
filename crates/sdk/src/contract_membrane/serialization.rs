@@ -66,6 +66,27 @@ pub fn parse_canonical_json<T: DeserializeOwned + Serialize>(
     Ok(value)
 }
 
+pub(super) fn parse_structured_json<T: DeserializeOwned + Serialize>(
+    bytes: &[u8],
+    limits: &ContractLimits,
+) -> Result<T, ContractError> {
+    if bytes.is_empty() {
+        return Err(ContractError::Empty);
+    }
+    if bytes.len() > limits.document_bytes() {
+        return Err(ContractError::BoundExceeded);
+    }
+    std::str::from_utf8(bytes).map_err(|_| ContractError::InvalidJson)?;
+
+    let parsed = JsonParser::new(bytes, limits).parse_document()?;
+    let mut canonical = String::new();
+    parsed.write_canonical(&mut canonical)?;
+    let value: T = serde_json::from_slice(canonical.as_bytes())
+        .map_err(|error| classify_contract_error_message(&error.to_string()))?;
+    canonical_json_bytes(&value, limits)?;
+    Ok(value)
+}
+
 fn classify_serde_error(error: &serde_json::Error) -> ContractError {
     classify_contract_error_message(&error.to_string())
 }
