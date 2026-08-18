@@ -172,7 +172,10 @@ fn production_witness_retains_the_proven_rust_posture_capability() {
         .find(|row| row.operation_id() == "posture.transition.apply")
         .unwrap();
     assert_eq!(posture.admission_reason(), AdmissionReason::Admitted);
-    assert_eq!(posture.current_transports(), &[OperationTransport::RustSdk]);
+    assert_eq!(
+        posture.current_transports(),
+        &[OperationTransport::RustSdk, OperationTransport::Tauri]
+    );
     assert_eq!(posture.discovery(), DiscoveryState::Discoverable);
     assert_eq!(
         rows.iter()
@@ -196,7 +199,7 @@ fn production_witness_retains_the_proven_rust_posture_capability() {
     );
     assert_eq!(
         capability.current_transports(),
-        &[OperationTransport::RustSdk]
+        &[OperationTransport::RustSdk, OperationTransport::Tauri]
     );
 }
 

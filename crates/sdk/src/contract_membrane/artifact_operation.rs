@@ -818,11 +818,7 @@ pub(crate) fn current_artifact_capabilities() -> Result<Vec<CapabilityEntry>, Co
                 }
             };
             let current_transports: &'static [OperationTransport] =
-                if definition.class() == OperationClass::ReadOnly {
-                    &[OperationTransport::CliJson, OperationTransport::Tauri]
-                } else {
-                    &[OperationTransport::CliJson]
-                };
+                &[OperationTransport::CliJson, OperationTransport::Tauri];
             let evidence = ArtifactCliTransportEvidence {
                 owner,
                 current_transports,

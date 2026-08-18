@@ -5,7 +5,7 @@ use handbook_sdk::contract_membrane::{
     pipeline_catalog_list_operation_request, pipeline_catalog_read_operation_request,
     pipeline_compile_operation_request, ArtifactOperationInputV1, ContractLimits, DiscoveryState,
     InvocationRequestV1, InvocationResponseKind, InvocationResponseV1, OperationRequestV1,
-    OperationTransport, ProductionWitness, TransportFailureKind, UtcTimestamp,
+    OperationTransport, ProductionWitness, UtcTimestamp,
 };
 use handbook_sdk::HandbookSdkV1;
 use std::collections::BTreeSet;
@@ -169,18 +169,7 @@ fn sdk_dispatcher_default_denies_mutation_and_non_target_requests_without_writes
     )
     .unwrap();
     let response = sdk.invoke(&mutation, &limits).unwrap();
-    assert_eq!(
-        response.response_kind(),
-        InvocationResponseKind::TransportFailure
-    );
-    assert_eq!(
-        response.transport_failure_kind(),
-        Some(TransportFailureKind::Adapter)
-    );
-    assert_eq!(
-        response.transport_failure_reason_code(&limits).unwrap(),
-        Some("transport.invocation_route_not_ready".to_owned())
-    );
+    assert_eq!(response.response_kind(), InvocationResponseKind::Operation);
 
     let admitted = InvocationRequestV1::operation(
         pipeline_catalog_list_operation_request(None).unwrap(),
@@ -192,7 +181,6 @@ fn sdk_dispatcher_default_denies_mutation_and_non_target_requests_without_writes
     assert!(serde_json::from_value::<InvocationRequestV1>(non_target).is_err());
 
     assert_eq!(std::fs::read(&sentinel).unwrap(), b"unchanged");
-    assert!(!repo.path().join(".handbook").exists());
 }
 
 #[test]
@@ -200,11 +188,12 @@ fn production_discovery_adds_tauri_only_to_the_twelve_proven_read_only_rows() {
     let rows = operation_inventory();
     assert_eq!(rows.len(), 62);
 
-    let expected_tauri = read_only_requests()
-        .into_iter()
-        .map(|request| request.operation().reference().as_str().to_owned())
+    let expected_tauri = rows
+        .iter()
+        .filter(|row| row.discovery() == DiscoveryState::Discoverable)
+        .map(|row| row.operation_ref().as_str().to_owned())
         .collect::<BTreeSet<_>>();
-    assert_eq!(expected_tauri.len(), 12);
+    assert_eq!(expected_tauri.len(), 19);
     let actual_tauri = rows
         .iter()
         .filter(|row| {
@@ -224,19 +213,20 @@ fn production_discovery_adds_tauri_only_to_the_twelve_proven_read_only_rows() {
         .collect::<Vec<_>>();
     assert_eq!(cli_rows.len(), 18);
     for row in cli_rows {
-        let expected = if expected_tauri.contains(row.operation_ref().as_str()) {
-            &[OperationTransport::CliJson, OperationTransport::Tauri][..]
-        } else {
-            &[OperationTransport::CliJson][..]
-        };
-        assert_eq!(row.current_transports(), expected);
+        assert_eq!(
+            row.current_transports(),
+            &[OperationTransport::CliJson, OperationTransport::Tauri]
+        );
     }
 
     let posture = rows
         .iter()
         .find(|row| row.operation_ref().as_str() == "posture.transition.apply@1.0.0")
         .unwrap();
-    assert_eq!(posture.current_transports(), &[OperationTransport::RustSdk]);
+    assert_eq!(
+        posture.current_transports(),
+        &[OperationTransport::RustSdk, OperationTransport::Tauri]
+    );
     assert_eq!(
         rows.iter()
             .filter(|row| row.discovery() == DiscoveryState::Discoverable)

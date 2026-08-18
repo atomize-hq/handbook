@@ -61,7 +61,7 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
     );
     assert!(rows.iter().all(|row| {
         if row.operation_id() == "posture.transition.apply" {
-            row.current_transports() == [OperationTransport::RustSdk]
+            row.current_transports() == [OperationTransport::RustSdk, OperationTransport::Tauri]
                 && row.discovery() == DiscoveryState::Discoverable
         } else if [
             "artifact.kind.list",
@@ -85,11 +85,8 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
         ]
         .contains(&row.operation_id())
         {
-            let expected: &[OperationTransport] = if row.class() == OperationClass::ReadOnly {
-                &[OperationTransport::CliJson, OperationTransport::Tauri]
-            } else {
-                &[OperationTransport::CliJson]
-            };
+            let expected: &[OperationTransport] =
+                &[OperationTransport::CliJson, OperationTransport::Tauri];
             row.current_transports() == expected && row.discovery() == DiscoveryState::Discoverable
         } else {
             row.current_transports().is_empty() && row.discovery() == DiscoveryState::Omit

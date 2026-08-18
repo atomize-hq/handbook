@@ -5,8 +5,7 @@ use handbook_sdk::contract_membrane::{
     admit_operation_definition, artifact_operation_definitions, artifact_operation_request,
     canonical_json_bytes, operation_inventory, parse_canonical_json,
     render_artifact_operation_legacy, AdmissionReason, ArtifactOperationInputV1, ContractLimits,
-    ContractValue, DiscoveryState, OperationAdmissionResult, OperationClass, OperationTransport,
-    TerminalStatus,
+    ContractValue, DiscoveryState, OperationAdmissionResult, OperationTransport, TerminalStatus,
 };
 
 const ARTIFACT_OPERATION_REFS: [&str; 10] = [
@@ -40,11 +39,8 @@ fn ten_artifact_definitions_are_exact_independently_admitted_and_cli_only() {
             .unwrap();
         assert_eq!(row.admission_reason(), AdmissionReason::Admitted);
         assert_eq!(row.discovery(), DiscoveryState::Discoverable);
-        let expected: &[OperationTransport] = if definition.class() == OperationClass::ReadOnly {
-            &[OperationTransport::CliJson, OperationTransport::Tauri]
-        } else {
-            &[OperationTransport::CliJson]
-        };
+        let expected: &[OperationTransport] =
+            &[OperationTransport::CliJson, OperationTransport::Tauri];
         assert_eq!(row.current_transports(), expected);
     }
 
@@ -57,7 +53,10 @@ fn ten_artifact_definitions_are_exact_independently_admitted_and_cli_only() {
         .iter()
         .find(|row| row.operation_ref().as_str() == "posture.transition.apply@1.0.0")
         .unwrap();
-    assert_eq!(posture.current_transports(), &[OperationTransport::RustSdk]);
+    assert_eq!(
+        posture.current_transports(),
+        &[OperationTransport::RustSdk, OperationTransport::Tauri]
+    );
 }
 
 fn copy_tree(source: &std::path::Path, target: &std::path::Path) {

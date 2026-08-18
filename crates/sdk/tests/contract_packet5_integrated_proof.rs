@@ -96,7 +96,10 @@ fn regeneration_manifest_and_production_catalogs_close_over_one_exact_set() {
         .iter()
         .find(|entry| entry.operation().reference().as_str() == "posture.transition.apply@1.0.0")
         .unwrap();
-    assert_eq!(posture.current_transports(), &[OperationTransport::RustSdk]);
+    assert_eq!(
+        posture.current_transports(),
+        &[OperationTransport::RustSdk, OperationTransport::Tauri]
+    );
 
     let mut paged_refs = Vec::new();
     let mut cursor = None;
@@ -339,13 +342,10 @@ fn owner_native_evidence_inventory_and_adapter_direction_remain_independent() {
     assert!(admitted.iter().all(|row| {
         row.discovery() == DiscoveryState::Discoverable
             && if row.operation_ref().as_str() == "posture.transition.apply@1.0.0" {
-                row.current_transports() == [OperationTransport::RustSdk]
+                row.current_transports() == [OperationTransport::RustSdk, OperationTransport::Tauri]
             } else {
-                let expected: &[OperationTransport] = if row.class() == OperationClass::ReadOnly {
-                    &[OperationTransport::CliJson, OperationTransport::Tauri]
-                } else {
-                    &[OperationTransport::CliJson]
-                };
+                let expected: &[OperationTransport] =
+                    &[OperationTransport::CliJson, OperationTransport::Tauri];
                 cli_json.contains(&row.operation_ref().as_str())
                     && row.current_transports() == expected
             }

@@ -5,13 +5,14 @@ use super::pipeline_operation::{
     PIPELINE_CAPTURE_APPLY_REF, PIPELINE_CAPTURE_PLAN_REF, PIPELINE_COMPILE_REF,
     PIPELINE_HANDOFF_EMIT_REF, PIPELINE_LIST_REF, PIPELINE_READ_REF, PIPELINE_STATE_APPLY_REF,
 };
+use super::posture::{PostureSchemaValidator, OPERATION_REF as POSTURE_OPERATION_REF};
 use super::{
     artifact_operation_definition, canonical_json_bytes, execute_artifact_operation,
     execute_flow_operation, execute_pipeline_operation, flow_resolve_operation_definition,
-    pipeline_operation_definitions, ContractError, ContractLimits, InvocationRequestBodyV1,
-    InvocationRequestV1, InvocationResponseV1, OperationClass, OperationDefinition,
-    OperationRequestV1, OperationSchemaValidator, PipelineOperationSchemaValidator,
-    TransportFailureKind, TransportFailureV1,
+    pipeline_operation_definitions, posture_transition_apply_definition, ContractError,
+    ContractLimits, InvocationRequestBodyV1, InvocationRequestV1, InvocationResponseKind,
+    InvocationResponseV1, OperationDefinition, OperationRequestV1, OperationSchemaValidator,
+    PipelineOperationSchemaValidator, TransportFailureKind, TransportFailureV1,
 };
 use super::{FlowResolveSchemaValidator, OperationTransport};
 use crate::HandbookSdkV1;
@@ -24,6 +25,7 @@ enum OperationRoute {
     Artifact,
     Flow,
     Pipeline,
+    Posture,
 }
 
 #[derive(Clone, Copy)]
@@ -41,6 +43,7 @@ impl OperationRoute {
                 .into_iter()
                 .find(|definition| definition.operation().as_str() == operation_ref)
                 .ok_or(ContractError::InvalidInvariant),
+            Self::Posture => posture_transition_apply_definition(),
         }
     }
 
@@ -49,6 +52,7 @@ impl OperationRoute {
             Self::Artifact => &ArtifactSchemaValidator,
             Self::Flow => &FlowResolveSchemaValidator,
             Self::Pipeline => &PipelineOperationSchemaValidator,
+            Self::Posture => &PostureSchemaValidator,
         }
     }
 
@@ -61,6 +65,9 @@ impl OperationRoute {
             Self::Artifact => execute_artifact_operation(repo_root, request),
             Self::Flow => execute_flow_operation(repo_root, request),
             Self::Pipeline => execute_pipeline_operation(repo_root, request),
+            Self::Posture => {
+                HandbookSdkV1::open(repo_root).apply_posture_transition_operation(request)
+            }
         }
     }
 }
@@ -91,7 +98,7 @@ fn dispatch_invocation_with_presentation(
     readmit_request(request, limits)?;
     match request.request() {
         InvocationRequestBodyV1::Operation(_) => {
-            let Some((route, operation)) = read_only_route(request)? else {
+            let Some((route, operation)) = operation_route(request)? else {
                 return default_denial(limits);
             };
             let response = route.execute(repo_root, operation)?;
@@ -113,13 +120,39 @@ pub(crate) fn readmit_invocation_response(
 ) -> Result<InvocationResponseV1, ContractError> {
     require_packet_limits(limits)?;
     let bytes = canonical_json_bytes(response, limits)?;
-    if let Some((route, operation)) = read_only_route(request)? {
+    if matches!(request.request(), InvocationRequestBodyV1::Operation(_)) {
+        let Some((route, operation)) = operation_route(request)? else {
+            let admitted = InvocationResponseV1::parse_and_admit(&bytes, None, limits)?;
+            let is_exact_default_denial = admitted.response_kind()
+                == InvocationResponseKind::TransportFailure
+                && admitted.transport_failure_kind() == Some(TransportFailureKind::Adapter)
+                && admitted.transport_failure_reason_code(limits)?.as_deref()
+                    == Some(ROUTE_NOT_READY)
+                && admitted.transport_presentation(limits)?.is_none();
+            return if is_exact_default_denial {
+                Ok(admitted)
+            } else {
+                Err(ContractError::InvalidInvariant)
+            };
+        };
         let definition = route.definition(operation.operation().reference().as_str())?;
-        return InvocationResponseV1::parse_and_admit(
+        let admitted = InvocationResponseV1::parse_and_admit(
             &bytes,
             Some((&definition, route.validator())),
             limits,
-        );
+        )?;
+        let Some((response_operation, request_fingerprint, request_id)) =
+            admitted.operation_request_binding()
+        else {
+            return Err(ContractError::InvalidInvariant);
+        };
+        if response_operation != operation.operation()
+            || request_fingerprint != operation.request_fingerprint()
+            || request_id != operation.request_id()
+        {
+            return Err(ContractError::InvalidInvariant);
+        }
+        return Ok(admitted);
     }
     let admitted = InvocationResponseV1::parse_and_admit(&bytes, None, limits)?;
     if let InvocationRequestBodyV1::UseCase(request) = request.request() {
@@ -247,7 +280,7 @@ fn readmit_request(
     Ok(())
 }
 
-fn read_only_route(
+fn operation_route(
     request: &InvocationRequestV1,
 ) -> Result<Option<(OperationRoute, &OperationRequestV1)>, ContractError> {
     let operation = match request.request() {
@@ -271,14 +304,20 @@ fn read_only_route(
     .contains(&operation_ref)
     {
         OperationRoute::Pipeline
+    } else if operation_ref == POSTURE_OPERATION_REF {
+        OperationRoute::Posture
     } else {
         return Ok(None);
     };
     let definition = route.definition(operation_ref)?;
-    if definition.class() != OperationClass::ReadOnly
-        || !definition
-            .declared_transports()
-            .contains(&OperationTransport::CliJson)
+    let required_predecessor_transport = if matches!(route, OperationRoute::Posture) {
+        OperationTransport::RustSdk
+    } else {
+        OperationTransport::CliJson
+    };
+    if !definition
+        .declared_transports()
+        .contains(&required_predecessor_transport)
         || operation.operation() != &definition.binding()
         || operation.body_schema() != definition.request_schema()
     {

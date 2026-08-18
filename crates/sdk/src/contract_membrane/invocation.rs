@@ -4,8 +4,8 @@ use super::{
     BoundedString, BoundedVec, ContractError, ContractLimits, ContractValue, CorrelationRef,
     Diagnostic, ExactBinding, ExactRef, Fingerprint, NextAction, NextActionKind,
     OperationAdmissionRefusalV1, OperationDefinition, OperationResponseV1,
-    OperationSchemaValidator, Problem, ProblemCategory, RecheckCondition, RetryDirective, SafeU64,
-    TerminalFields, TerminalStatus, WriteReceipt,
+    OperationSchemaValidator, Problem, ProblemCategory, RecheckCondition, RequestId,
+    RetryDirective, SafeU64, TerminalFields, TerminalStatus, WriteReceipt,
 };
 use crate::charter_product::{
     AdapterCausalDisposition, AdapterPublicEffect, AdapterPublicEffectDisposition,
@@ -5925,6 +5925,19 @@ impl InvocationResponseV1 {
     pub(crate) fn use_case_binding(&self) -> Option<&ExactBinding> {
         match &self.response {
             InvocationResponseBodyV1::UseCase(response) => Some(response.use_case()),
+            _ => None,
+        }
+    }
+
+    pub(crate) fn operation_request_binding(
+        &self,
+    ) -> Option<(&ExactBinding, &Fingerprint, Option<&RequestId>)> {
+        match &self.response {
+            InvocationResponseBodyV1::Operation(OperationBodyV1::Response(response)) => Some((
+                response.operation(),
+                response.request_fingerprint(),
+                response.request_id(),
+            )),
             _ => None,
         }
     }

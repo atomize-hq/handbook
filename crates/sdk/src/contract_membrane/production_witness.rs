@@ -840,18 +840,13 @@ fn verify_inventory() -> Result<(), ProductionWitnessError> {
             .contains(&row.operation_ref().as_str());
             if is_posture {
                 row.admission_reason() != super::AdmissionReason::Admitted
-                    || row.current_transports() != [OperationTransport::RustSdk]
-                    || row.discovery() != DiscoveryState::Discoverable
-            } else if (is_artifact || is_flow || is_pipeline)
-                && row.class() == super::OperationClass::ReadOnly
-            {
-                row.admission_reason() != super::AdmissionReason::Admitted
                     || row.current_transports()
-                        != [OperationTransport::CliJson, OperationTransport::Tauri]
+                        != [OperationTransport::RustSdk, OperationTransport::Tauri]
                     || row.discovery() != DiscoveryState::Discoverable
             } else if is_artifact || is_flow || is_pipeline {
                 row.admission_reason() != super::AdmissionReason::Admitted
-                    || row.current_transports() != [OperationTransport::CliJson]
+                    || row.current_transports()
+                        != [OperationTransport::CliJson, OperationTransport::Tauri]
                     || row.discovery() != DiscoveryState::Discoverable
             } else {
                 !row.current_transports().is_empty() || row.discovery() != DiscoveryState::Omit
@@ -1066,23 +1061,18 @@ mod tests {
                 entry.operation().reference().as_str() == super::super::posture::OPERATION_REF
             })
             .unwrap();
-        assert_eq!(posture.current_transports(), &[OperationTransport::RustSdk]);
+        assert_eq!(
+            posture.current_transports(),
+            &[OperationTransport::RustSdk, OperationTransport::Tauri]
+        );
         for operation_ref in super::super::artifact_operation::ARTIFACT_OPERATION_REFS {
             let capability = witness
                 .capabilities()
                 .iter()
                 .find(|entry| entry.operation().reference().as_str() == operation_ref)
                 .unwrap();
-            let row = operation_inventory()
-                .iter()
-                .find(|row| row.operation_ref().as_str() == operation_ref)
-                .unwrap();
             let expected: &[OperationTransport] =
-                if row.class() == super::super::OperationClass::ReadOnly {
-                    &[OperationTransport::CliJson, OperationTransport::Tauri]
-                } else {
-                    &[OperationTransport::CliJson]
-                };
+                &[OperationTransport::CliJson, OperationTransport::Tauri];
             assert_eq!(capability.current_transports(), expected);
         }
         let flow = witness

@@ -2992,11 +2992,7 @@ pub(crate) fn current_pipeline_capabilities() -> Result<Vec<CapabilityEntry>, Co
                 _ => return Err(ContractError::InvalidInvariant),
             };
             let current_transports: &'static [OperationTransport] =
-                if definition.class() == OperationClass::ReadOnly {
-                    &[OperationTransport::CliJson, OperationTransport::Tauri]
-                } else {
-                    &[OperationTransport::CliJson]
-                };
+                &[OperationTransport::CliJson, OperationTransport::Tauri];
             CapabilityEntry::new(
                 &definition,
                 &PipelineCliTransportEvidence {

@@ -229,11 +229,92 @@ fn execute_invocation(
     state: &TrustedFacadeState,
     request: InvocationRequestV1,
 ) -> Result<InvocationResponseV1, HostError> {
+    execute_invocation_with_fault(state, request, InvocationFault::None)
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum InvocationFault {
+    None,
+    #[cfg(test)]
+    PreCommit,
+    #[cfg(test)]
+    PostCommit,
+}
+
+fn execute_invocation_with_fault(
+    state: &TrustedFacadeState,
+    request: InvocationRequestV1,
+    fault: InvocationFault,
+) -> Result<InvocationResponseV1, HostError> {
+    #[cfg(not(test))]
+    let _ = fault;
+    #[cfg(test)]
+    if fault == InvocationFault::PreCommit {
+        return pre_commit_transport_failure(&request, &state.limits);
+    }
     let response = state
         ._sdk
         .invoke_tauri(&request, &state.limits)
         .map_err(contract_error)?;
-    readmit_invocation(state, &request, response)
+    let response = readmit_invocation(state, &request, response)?;
+    #[cfg(test)]
+    if fault == InvocationFault::PostCommit {
+        return Err(HostError::ContractUnavailable);
+    }
+    Ok(response)
+}
+
+#[cfg(test)]
+fn pre_commit_transport_failure(
+    request: &InvocationRequestV1,
+    limits: &ContractLimits,
+) -> Result<InvocationResponseV1, HostError> {
+    use handbook_sdk::contract_membrane::{
+        operation_inventory, InvocationRequestBodyV1, OperationTransport, TransportFailureKind,
+        TransportFailureV1,
+    };
+
+    let InvocationRequestBodyV1::Operation(operation) = request.request() else {
+        return Err(HostError::ContractUnavailable);
+    };
+    let selected = operation_inventory().iter().any(|row| {
+        row.operation_ref() == operation.operation().reference()
+            && row
+                .current_transports()
+                .contains(&OperationTransport::Tauri)
+    });
+    if !selected {
+        return Err(HostError::ContractUnavailable);
+    }
+    let response = InvocationResponseV1::transport_failure(
+        TransportFailureV1::adapter_error(
+            TransportFailureKind::Adapter,
+            "transport.invocation_construction_failed",
+            limits,
+        )
+        .map_err(contract_error)?,
+        limits,
+    )
+    .map_err(contract_error)?;
+    let bytes = canonical_json_bytes(&response, limits).map_err(contract_error)?;
+    let admitted =
+        InvocationResponseV1::parse_and_admit(&bytes, None, limits).map_err(contract_error)?;
+    let exact = admitted == response
+        && admitted.transport_failure_kind() == Some(TransportFailureKind::Adapter)
+        && admitted
+            .transport_failure_reason_code(limits)
+            .map_err(contract_error)?
+            .as_deref()
+            == Some("transport.invocation_construction_failed")
+        && admitted
+            .transport_presentation(limits)
+            .map_err(contract_error)?
+            .is_none();
+    if exact {
+        Ok(admitted)
+    } else {
+        Err(HostError::ContractUnavailable)
+    }
 }
 
 fn readmit_bootstrap(
@@ -270,22 +351,30 @@ fn contract_error(_: ContractError) -> HostError {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use handbook_sdk::artifact::{ArtifactAcquisitionMode, ArtifactInputDocument};
+    use handbook_sdk::artifact::{
+        ArtifactAcquisitionMode, ArtifactInputDocument, ArtifactSdk, ArtifactSelector,
+        ArtifactValidateRequest,
+    };
     use handbook_sdk::contract_membrane::{
         artifact_operation_request, flow_resolve_operation_request,
         pipeline_capture_direct_operation_request, pipeline_capture_plan_operation_request,
         pipeline_catalog_list_operation_request, pipeline_catalog_read_operation_request,
-        pipeline_compile_operation_request, ApproverAdministrationRequestV1,
-        ArtifactOperationInputV1, AuthorCharterRequestV1, AuthorProjectContextRequestV1,
-        BootstrapFacadeOutcomeKindV1, BootstrapRequestV1, CatalogKindV1, CatalogPageSize,
-        CatalogReadOutcomeKindV1, CatalogReadRequestV1, CatalogReadResponseBodyV1, ContractLimits,
-        InvocationRequestV1, InvocationResponseKind, PipelineRouteResolveAndPersistRequestV1,
+        pipeline_compile_operation_request, pipeline_handoff_emit_operation_request,
+        pipeline_state_apply_operation_request, posture_transition_apply_request,
+        ApproverAdministrationRequestV1, ArtifactOperationInputV1, AuthorCharterRequestV1,
+        AuthorProjectContextRequestV1, BootstrapFacadeOutcomeKindV1, BootstrapRequestV1,
+        CatalogKindV1, CatalogPageSize, CatalogReadOutcomeKindV1, CatalogReadRequestV1,
+        CatalogReadResponseBodyV1, ContractLimits, InvocationRequestV1, InvocationResponseKind,
+        PipelineRouteResolveAndPersistRequestV1, PostureCanonicalBindingDtoV1,
+        PostureDimensionChangeDtoV1, PostureReferenceDtoV1, PostureTransitionApplyRequestDataV1,
         ProjectContextInputV1, RepositorySetupModeV1, RepositorySetupRequestV1, SemVer,
         TransportFailureKind, TypedCatalogCursor, UseCaseRequestV1, UtcTimestamp,
     };
+    use handbook_sdk::pipeline_route_api::PipelineStateMutation;
     use handbook_sdk::{SetupMode, SetupRequest};
     use serde_json::{json, Value};
-    use std::path::Path;
+    use std::collections::BTreeMap;
+    use std::path::{Path, PathBuf};
     use std::thread;
     use tempfile::tempdir;
 
@@ -447,6 +536,156 @@ mod tests {
             .into_iter()
             .map(|request| InvocationRequestV1::operation(request, &limits).unwrap())
             .collect()
+    }
+
+    fn mutation_invocation_requests() -> Vec<InvocationRequestV1> {
+        const HASH: &str =
+            "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+        let limits = ContractLimits::packet0();
+        let document =
+            |value| ArtifactInputDocument::new(serde_json::to_vec(&value).unwrap()).unwrap();
+        let kind_ref = "example.artifact-kind.registry-brief@1.0.0";
+        let instance_id = "registry_brief";
+        vec![
+            artifact_operation_request(
+                Some("tauri-intake"),
+                ArtifactOperationInputV1::IntakeRecordAppend {
+                    kind_ref: kind_ref.to_owned(),
+                    instance_id: instance_id.to_owned(),
+                    input: document(json!({
+                        "idempotency_key": "tauri_intake_key_0001",
+                        "acquisition_mode": "express",
+                        "expected_current_artifact_fingerprint": HASH,
+                        "coverage_submissions": []
+                    })),
+                },
+            )
+            .unwrap(),
+            artifact_operation_request(
+                Some("tauri-candidate"),
+                ArtifactOperationInputV1::CandidateAppend {
+                    kind_ref: kind_ref.to_owned(),
+                    instance_id: instance_id.to_owned(),
+                    input: document(json!({
+                        "idempotency_key": "tauri_candidate_key_0001",
+                        "intake_record_ref": ".handbook/state/artifacts/registry_brief/intake-records/intake_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef.json",
+                        "intake_record_fingerprint": HASH,
+                        "expected_candidate_fingerprint": HASH
+                    })),
+                },
+            )
+            .unwrap(),
+            artifact_operation_request(
+                Some("tauri-promote"),
+                ArtifactOperationInputV1::CandidatePromote {
+                    kind_ref: kind_ref.to_owned(),
+                    instance_id: instance_id.to_owned(),
+                    input: document(json!({
+                        "idempotency_key": "tauri_promotion_key_0001",
+                        "candidate_ref": ".handbook/state/artifacts/registry_brief/candidates/candidate_0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef.json",
+                        "candidate_fingerprint": HASH,
+                        "expected_current_artifact_fingerprint": HASH
+                    })),
+                },
+            )
+            .unwrap(),
+            pipeline_capture_direct_operation_request(
+                Some("tauri-capture"),
+                "pipeline.foundation_inputs",
+                "stage.10_feature_spec",
+                "tauri packet 5 capture",
+                "tauri_capture_key_0001",
+            )
+            .unwrap(),
+            pipeline_handoff_emit_operation_request(
+                Some("tauri-handoff"),
+                "pipeline.foundation_inputs",
+                "consumer.example",
+                "handbook",
+                "1.0.0",
+                "tauri_handoff_key_0001",
+            )
+            .unwrap(),
+            pipeline_state_apply_operation_request(
+                Some("tauri-state"),
+                "pipeline.foundation_inputs",
+                &PipelineStateMutation::RoutingVariable {
+                    variable: "has_charter".to_owned(),
+                    value: true,
+                },
+                0,
+                "tauri_state_key_0001",
+            )
+            .unwrap(),
+            posture_transition_apply_request(
+                Some("tauri-posture"),
+                "tauri_posture_key_0001",
+                PostureTransitionApplyRequestDataV1::new(
+                    HASH.to_owned(),
+                    PostureCanonicalBindingDtoV1::new(
+                        ".handbook/project/charter.yaml".to_owned(),
+                        HASH.to_owned(),
+                        HASH.to_owned(),
+                        1,
+                    )
+                    .unwrap(),
+                    PostureReferenceDtoV1::new(
+                        "recommendation.tauri-packet5".to_owned(),
+                        HASH.to_owned(),
+                    )
+                    .unwrap(),
+                    vec!["coverage.tauri-packet5".to_owned()],
+                    PostureDimensionChangeDtoV1::new(
+                        "dimension.tauri-packet5".to_owned(),
+                        0,
+                        "/posture/dimensions/0".to_owned(),
+                        None,
+                        0,
+                        1,
+                    )
+                    .unwrap(),
+                    "2030-01-01T00:00:00Z".to_owned(),
+                )
+                .unwrap(),
+            )
+            .unwrap(),
+        ]
+        .into_iter()
+        .map(|request| InvocationRequestV1::operation(request, &limits).unwrap())
+        .collect()
+    }
+
+    fn copy_tree(source: &Path, target: &Path) {
+        std::fs::create_dir_all(target).unwrap();
+        for entry in std::fs::read_dir(source).unwrap() {
+            let entry = entry.unwrap();
+            let target_path = target.join(entry.file_name());
+            if entry.path().is_dir() {
+                copy_tree(&entry.path(), &target_path);
+            } else {
+                std::fs::copy(entry.path(), target_path).unwrap();
+            }
+        }
+    }
+
+    fn repository_snapshot(root: &Path) -> BTreeMap<PathBuf, Vec<u8>> {
+        fn collect(root: &Path, current: &Path, snapshot: &mut BTreeMap<PathBuf, Vec<u8>>) {
+            for entry in std::fs::read_dir(current).unwrap() {
+                let entry = entry.unwrap();
+                let path = entry.path();
+                if path.is_dir() {
+                    collect(root, &path, snapshot);
+                } else {
+                    snapshot.insert(
+                        path.strip_prefix(root).unwrap().to_path_buf(),
+                        std::fs::read(path).unwrap(),
+                    );
+                }
+            }
+        }
+        let mut snapshot = BTreeMap::new();
+        collect(root, root, &mut snapshot);
+        snapshot
     }
 
     fn use_case_invocation_requests() -> Vec<InvocationRequestV1> {
@@ -738,6 +977,55 @@ mod tests {
         )
         .unwrap();
         let response = execute_invocation(&state.inner, mutation).unwrap();
+        assert_eq!(response.response_kind(), InvocationResponseKind::Operation);
+
+        let mut non_target = serde_json::to_value(invocation_request()).unwrap();
+        non_target["request"]["operation"]["ref"] = json!("pipeline.route.resolve@1.0.0");
+        assert!(serde_json::from_value::<InvocationRequestV1>(non_target).is_err());
+
+        assert_eq!(std::fs::read(&sentinel).unwrap(), b"unchanged");
+    }
+
+    #[test]
+    fn invocation_runs_all_seven_mutation_routes_off_main_thread_with_owner_parity() {
+        for request in mutation_invocation_requests() {
+            let direct_repo = tempdir().unwrap();
+            let tauri_repo = tempdir().unwrap();
+            let expected = HandbookSdkV1::open(direct_repo.path())
+                .invoke_tauri(&request, &ContractLimits::packet0())
+                .unwrap();
+            let state = state(
+                tauri_repo.path(),
+                "2029-01-01T00:00:00Z",
+                "2030-01-01T00:00:00Z",
+            );
+            let caller = thread::current().id();
+            let inner = Arc::clone(&state.inner);
+            let (worker, actual) = tauri::async_runtime::block_on(run_off_main_thread(move || {
+                let worker = thread::current().id();
+                execute_invocation(&inner, request).map(|response| (worker, response))
+            }))
+            .unwrap();
+
+            assert_ne!(caller, worker);
+            assert_eq!(actual.response_kind(), InvocationResponseKind::Operation);
+            assert_eq!(actual, expected);
+        }
+    }
+
+    #[test]
+    fn pre_commit_adapter_failure_is_re_admitted_and_performs_no_owner_write() {
+        let repo = tempdir().unwrap();
+        std::fs::write(repo.path().join("sentinel.txt"), b"unchanged").unwrap();
+        let before = repository_snapshot(repo.path());
+        let state = state(repo.path(), "2029-01-01T00:00:00Z", "2030-01-01T00:00:00Z");
+        let request = mutation_invocation_requests().remove(0);
+        let inner = Arc::clone(&state.inner);
+        let response = tauri::async_runtime::block_on(run_off_main_thread(move || {
+            execute_invocation_with_fault(&inner, request, InvocationFault::PreCommit)
+        }))
+        .unwrap();
+
         assert_eq!(
             response.response_kind(),
             InvocationResponseKind::TransportFailure
@@ -747,16 +1035,123 @@ mod tests {
             Some(TransportFailureKind::Adapter)
         );
         assert_eq!(
-            response.transport_failure_reason_code(&limits).unwrap(),
-            Some("transport.invocation_route_not_ready".to_owned())
+            response
+                .transport_failure_reason_code(&ContractLimits::packet0())
+                .unwrap()
+                .as_deref(),
+            Some("transport.invocation_construction_failed")
+        );
+        assert_eq!(repository_snapshot(repo.path()), before);
+    }
+
+    #[test]
+    fn post_commit_delivery_failure_returns_only_host_error_then_same_key_replays_without_writes() {
+        let repo = tempdir().unwrap();
+        copy_tree(
+            &Path::new(env!("CARGO_MANIFEST_DIR"))
+                .join("../engine/tests/fixtures/hcm_2_3_generic_custom_kind"),
+            repo.path(),
+        );
+        std::fs::write(
+            repo.path().join(".handbook/repository-identity.v1"),
+            "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+        )
+        .unwrap();
+        let current = ArtifactSdk::open(repo.path())
+            .validate(ArtifactValidateRequest {
+                selector: ArtifactSelector::new(
+                    "example.artifact-kind.registry-brief@1.0.0",
+                    "registry_brief",
+                ),
+            })
+            .unwrap()
+            .artifact_fingerprint;
+        let request = || {
+            let input = ArtifactInputDocument::new(
+                serde_json::to_vec(&json!({
+                    "idempotency_key": "tauri_delivery_uncertainty_key_0001",
+                    "acquisition_mode": "express",
+                    "expected_current_artifact_fingerprint": current,
+                    "coverage_submissions": [
+                        {
+                            "coverage_id": "registry_brief.title",
+                            "state": "supplied",
+                            "source_kind": "user_declaration",
+                            "value": "Delivery uncertainty",
+                            "specificity": "exact",
+                            "confidence": "high",
+                            "contradiction_refs": []
+                        },
+                        {
+                            "coverage_id": "registry_brief.summary",
+                            "state": "supplied",
+                            "source_kind": "user_declaration",
+                            "value": "Same-key recovery",
+                            "specificity": "concrete",
+                            "confidence": "high",
+                            "contradiction_refs": []
+                        }
+                    ]
+                }))
+                .unwrap(),
+            )
+            .unwrap();
+            InvocationRequestV1::operation(
+                artifact_operation_request(
+                    Some("tauri-delivery-uncertainty"),
+                    ArtifactOperationInputV1::IntakeRecordAppend {
+                        kind_ref: "example.artifact-kind.registry-brief@1.0.0".to_owned(),
+                        instance_id: "registry_brief".to_owned(),
+                        input,
+                    },
+                )
+                .unwrap(),
+                &ContractLimits::packet0(),
+            )
+            .unwrap()
+        };
+        let state = state(repo.path(), "2029-01-01T00:00:00Z", "2030-01-01T00:00:00Z");
+        let before = repository_snapshot(repo.path());
+        let inner = Arc::clone(&state.inner);
+        let fault_request = request();
+        let failure = tauri::async_runtime::block_on(run_off_main_thread(move || {
+            execute_invocation_with_fault(&inner, fault_request, InvocationFault::PostCommit)
+        }))
+        .unwrap_err();
+        assert_eq!(failure, HostError::ContractUnavailable);
+        let committed = repository_snapshot(repo.path());
+        assert_ne!(
+            committed, before,
+            "the owner commit must survive delivery loss"
         );
 
-        let mut non_target = serde_json::to_value(invocation_request()).unwrap();
-        non_target["request"]["operation"]["ref"] = json!("pipeline.route.resolve@1.0.0");
-        assert!(serde_json::from_value::<InvocationRequestV1>(non_target).is_err());
+        let recovered = execute_invocation(&state.inner, request()).unwrap();
+        let recovered_value = serde_json::to_value(&recovered).unwrap();
+        assert_eq!(
+            recovered_value["response"]["idempotency"]["state"],
+            "established"
+        );
+        assert_eq!(recovered_value["response"]["idempotency"]["replayed"], true);
+        assert_eq!(
+            recovered_value["response"]["idempotency"]["original_result_fingerprint"],
+            recovered_value["response"]["result_fingerprint"]
+        );
+        assert_eq!(
+            recovered_value["response"]["receipts"]
+                .as_array()
+                .unwrap()
+                .len(),
+            1
+        );
+        assert_eq!(repository_snapshot(repo.path()), committed);
 
-        assert_eq!(std::fs::read(&sentinel).unwrap(), b"unchanged");
-        assert!(!repo.path().join(".handbook").exists());
+        let replayed_again = execute_invocation(&state.inner, request()).unwrap();
+        assert_eq!(replayed_again, recovered);
+        assert_eq!(repository_snapshot(repo.path()), committed);
+        let wire = canonical_json_bytes(&recovered, &ContractLimits::packet0()).unwrap();
+        assert!(!String::from_utf8(wire)
+            .unwrap()
+            .contains("tauri_delivery_uncertainty_key_0001"));
     }
 
     #[test]

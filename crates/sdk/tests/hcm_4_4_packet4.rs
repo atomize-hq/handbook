@@ -312,6 +312,6 @@ fn use_cases_remain_outside_operation_inventory_owner_admission_and_discovery() 
                 .current_transports()
                 .contains(&OperationTransport::Tauri))
             .count(),
-        12
+        19
     );
 }

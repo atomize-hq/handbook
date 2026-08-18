@@ -4,8 +4,8 @@ mod pipeline_proof_corpus_support;
 use handbook_sdk::contract_membrane::{
     admit_operation_definition, canonical_json_bytes, operation_inventory, parse_canonical_json,
     AdmissionReason, ContractLimits, ContractValue, DiscoveryState, IdempotencyStateRef,
-    InvocationResponseV1, OperationAdmissionResult, OperationClass, OperationSchemaValidator,
-    OperationTransport, PipelineOperationSchemaValidator, TerminalStatus, UseCaseResponseV1,
+    InvocationResponseV1, OperationAdmissionResult, OperationSchemaValidator, OperationTransport,
+    PipelineOperationSchemaValidator, TerminalStatus, UseCaseResponseV1,
 };
 use handbook_sdk::pipeline_route_api::{
     PipelineResolveExecution, PipelineResolveExecutionFailure, PipelineRouteBasisPersistenceRefusal,
@@ -59,11 +59,8 @@ fn exactly_three_pipeline_operations_are_independently_admitted_and_discoverable
             .iter()
             .find(|definition| definition.operation().identity() == operation)
             .unwrap();
-        let expected: &[OperationTransport] = if definition.class() == OperationClass::ReadOnly {
-            &[OperationTransport::CliJson, OperationTransport::Tauri]
-        } else {
-            &[OperationTransport::CliJson]
-        };
+        let expected: &[OperationTransport] =
+            &[OperationTransport::CliJson, OperationTransport::Tauri];
         assert_eq!(row.current_transports(), expected);
         assert!(matches!(
             handbook_sdk::contract_membrane::admit_operation_definition(definition).unwrap(),
@@ -262,15 +259,8 @@ fn packet_seven_closes_exactly_four_pipeline_mutation_rows() {
             .unwrap();
         assert_eq!(row.admission_reason(), AdmissionReason::Admitted);
         assert_eq!(row.discovery(), DiscoveryState::Discoverable);
-        let definition = definitions
-            .iter()
-            .find(|definition| definition.operation().identity() == operation)
-            .unwrap();
-        let expected: &[OperationTransport] = if definition.class() == OperationClass::ReadOnly {
-            &[OperationTransport::CliJson, OperationTransport::Tauri]
-        } else {
-            &[OperationTransport::CliJson]
-        };
+        let expected: &[OperationTransport] =
+            &[OperationTransport::CliJson, OperationTransport::Tauri];
         assert_eq!(row.current_transports(), expected);
     }
 

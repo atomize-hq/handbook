@@ -805,7 +805,7 @@ impl CurrentTransportEvidence for PostureRustTransportEvidence {
     }
 
     fn current_transports(&self) -> &[OperationTransport] {
-        &[OperationTransport::RustSdk]
+        &[OperationTransport::RustSdk, OperationTransport::Tauri]
     }
 }
 
