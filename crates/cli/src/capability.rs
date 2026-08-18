@@ -1,12 +1,12 @@
 use crate::{exit_policy, shell_shared::discover_managed_repo_root};
 use clap::{Args, Subcommand, ValueEnum};
 use handbook_sdk::contract_membrane::{
-    canonical_json_bytes, parse_canonical_json, BootstrapFacadeOutcomeKindV1, CapabilityConsumer,
-    CapabilityConsumerError, CapabilityEntry, CatalogKindV1, CatalogPageSize,
+    canonical_json_bytes, parse_canonical_json, sha256_fingerprint, BootstrapFacadeOutcomeKindV1,
+    CapabilityConsumer, CapabilityConsumerError, CapabilityEntry, CatalogKindV1, CatalogPageSize,
     CatalogReadOutcomeKindV1, CatalogReadResponseBodyV1, ContractLimits, ExactBinding, ExactRef,
     Fingerprint, OperationClass, OperationTransport, RequestId, SemVer, TypedCatalogCursor,
 };
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::fs::File;
 use std::io::{self, Read, Write};
 use std::path::Path;
@@ -26,7 +26,7 @@ enum CapabilityCommand {
     CatalogRead(CatalogReadArgs),
     /// Read exact checked-in schema bytes selected by one manifest entry content fingerprint.
     SchemaRead(SchemaReadArgs),
-    /// Invoke one discovered read-only capability through its exact current binding.
+    /// Invoke one discovered capability through its exact current binding.
     Invoke(InvokeArgs),
 }
 
@@ -90,6 +90,18 @@ struct InvokeArgs {
     /// Read one bounded structured JSON body from a path or `-` for stdin.
     #[arg(long = "from-input", value_name = "path|-")]
     from_input: String,
+    /// Read one exact mutation authorization from a protected file.
+    #[arg(long = "mutation-authorization-from", value_name = "path")]
+    mutation_authorization_from: Option<String>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+struct MutationAuthorization {
+    capability_entry_fingerprint: Fingerprint,
+    operation: ExactBinding,
+    prepared_input_bytes_fingerprint: Fingerprint,
+    request_schema: ExactBinding,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -105,7 +117,8 @@ enum AdapterError {
     CapabilityEntryFingerprint,
     OperationUnavailable,
     OperationSelectionStale,
-    OperationClass,
+    MutationAuthorizationRequired,
+    MutationAuthorizationRejected,
     TransportUnavailable,
     InputUnavailable,
     InputRejected,
@@ -259,8 +272,23 @@ fn invoke(consumer: &CapabilityConsumer, args: InvokeArgs) -> ExitCode {
         Ok(value) => value,
         Err(error) => return emit_error(error),
     };
-    if capability.class() != OperationClass::ReadOnly {
-        return emit_error(AdapterError::OperationClass);
+    let operation = ExactBinding::new(operation_ref, definition_fingerprint);
+    if capability.operation() != &operation || capability.entry_fingerprint() != &entry_fingerprint
+    {
+        return emit_error(AdapterError::OperationSelectionStale);
+    }
+    if !capability
+        .declared_transports()
+        .contains(&OperationTransport::CliJson)
+        || !capability
+            .current_transports()
+            .contains(&OperationTransport::CliJson)
+    {
+        return emit_error(AdapterError::TransportUnavailable);
+    }
+    if capability.class() != OperationClass::ReadOnly && args.mutation_authorization_from.is_none()
+    {
+        return emit_error(AdapterError::MutationAuthorizationRequired);
     }
     if consumer.schema_bytes(capability.request_schema()).is_err() {
         return emit_error(AdapterError::SchemaUnavailable);
@@ -270,7 +298,35 @@ fn invoke(consumer: &CapabilityConsumer, args: InvokeArgs) -> ExitCode {
         Ok(value) => value,
         Err(error) => return emit_error(error),
     };
-    let operation = ExactBinding::new(operation_ref, definition_fingerprint);
+    if capability.class() != OperationClass::ReadOnly {
+        let authorization_path = args
+            .mutation_authorization_from
+            .as_deref()
+            .expect("non-read-only authorization presence was checked");
+        if authorization_path == "-" {
+            return emit_error(AdapterError::MutationAuthorizationRejected);
+        }
+        let authorization_bytes =
+            match read_bounded_input(authorization_path, limits.document_bytes()) {
+                Ok(value) => value,
+                Err(_) => return emit_error(AdapterError::MutationAuthorizationRejected),
+            };
+        let authorization =
+            match parse_canonical_json::<MutationAuthorization>(&authorization_bytes, &limits) {
+                Ok(value) => value,
+                Err(_) => return emit_error(AdapterError::MutationAuthorizationRejected),
+            };
+        let input_fingerprint = sha256_fingerprint(&raw_body);
+        if !mutation_authorization_matches(
+            &authorization,
+            &operation,
+            &entry_fingerprint,
+            capability.request_schema(),
+            &input_fingerprint,
+        ) {
+            return emit_error(AdapterError::MutationAuthorizationRejected);
+        }
+    }
     let response = match consumer.invoke(
         &operation,
         &entry_fingerprint,
@@ -283,6 +339,19 @@ fn invoke(consumer: &CapabilityConsumer, args: InvokeArgs) -> ExitCode {
     };
     let semantic_status = exit_policy::terminal(response.terminal_status());
     emit_json(&response, semantic_status)
+}
+
+fn mutation_authorization_matches(
+    authorization: &MutationAuthorization,
+    operation: &ExactBinding,
+    entry_fingerprint: &Fingerprint,
+    request_schema: &ExactBinding,
+    prepared_input_bytes_fingerprint: &Fingerprint,
+) -> bool {
+    authorization.operation == *operation
+        && authorization.capability_entry_fingerprint == *entry_fingerprint
+        && authorization.request_schema == *request_schema
+        && authorization.prepared_input_bytes_fingerprint == *prepared_input_bytes_fingerprint
 }
 
 fn discover_capability(
@@ -394,8 +463,11 @@ fn emit_error_to(writer: &mut dyn Write, error: AdapterError) -> ExitCode {
         AdapterError::OperationSelectionStale => {
             b"handbook capability: operation selection stale\n".as_slice()
         }
-        AdapterError::OperationClass => {
-            b"handbook capability: operation class rejected\n".as_slice()
+        AdapterError::MutationAuthorizationRequired => {
+            b"handbook capability: mutation authorization required\n".as_slice()
+        }
+        AdapterError::MutationAuthorizationRejected => {
+            b"handbook capability: mutation authorization rejected\n".as_slice()
         }
         AdapterError::TransportUnavailable => {
             b"handbook capability: transport unavailable\n".as_slice()
@@ -474,5 +546,78 @@ mod tests {
         let admitted =
             CatalogReadResponseV1::parse_and_admit(&bytes[..bytes.len() - 1], &limits).unwrap();
         assert_eq!(admitted.outcome_kind(), CatalogReadOutcomeKindV1::Blocked);
+    }
+
+    #[test]
+    fn mutation_authorization_binds_operation_entry_schema_and_exact_input_bytes() {
+        let operation = ExactBinding::new(
+            ExactRef::parse("example.operation@1.0.0").unwrap(),
+            sha256_fingerprint(b"definition"),
+        );
+        let entry = sha256_fingerprint(b"entry");
+        let request_schema = ExactBinding::new(
+            ExactRef::parse("example.request@1.0.0").unwrap(),
+            sha256_fingerprint(b"schema"),
+        );
+        let input = sha256_fingerprint(br#"{"value":"one"}"#);
+        let authorization = |operation, entry, request_schema, input| MutationAuthorization {
+            capability_entry_fingerprint: entry,
+            operation,
+            prepared_input_bytes_fingerprint: input,
+            request_schema,
+        };
+
+        assert!(mutation_authorization_matches(
+            &authorization(
+                operation.clone(),
+                entry.clone(),
+                request_schema.clone(),
+                input.clone()
+            ),
+            &operation,
+            &entry,
+            &request_schema,
+            &input,
+        ));
+        for mismatched in [
+            authorization(
+                ExactBinding::new(
+                    ExactRef::parse("example.changed@1.0.0").unwrap(),
+                    operation.fingerprint().clone(),
+                ),
+                entry.clone(),
+                request_schema.clone(),
+                input.clone(),
+            ),
+            authorization(
+                operation.clone(),
+                sha256_fingerprint(b"stale-entry"),
+                request_schema.clone(),
+                input.clone(),
+            ),
+            authorization(
+                operation.clone(),
+                entry.clone(),
+                ExactBinding::new(
+                    request_schema.reference().clone(),
+                    sha256_fingerprint(b"stale-schema"),
+                ),
+                input.clone(),
+            ),
+            authorization(
+                operation.clone(),
+                entry.clone(),
+                request_schema.clone(),
+                sha256_fingerprint(br#"{"value":"two"}"#),
+            ),
+        ] {
+            assert!(!mutation_authorization_matches(
+                &mismatched,
+                &operation,
+                &entry,
+                &request_schema,
+                &input,
+            ));
+        }
     }
 }

@@ -316,8 +316,11 @@ fn identity_transport_class_and_command_substitution_fail_before_owner_execution
             stale_entry,
             "handbook capability: operation selection stale\n",
         ),
-        (mutation, "handbook capability: operation class rejected\n"),
-        (posture, "handbook capability: operation class rejected\n"),
+        (
+            mutation,
+            "handbook capability: mutation authorization required\n",
+        ),
+        (posture, "handbook capability: transport unavailable\n"),
     ] {
         assert_adapter_failure(
             &run_in(root, &invoke_args(&capability, input, None), None),

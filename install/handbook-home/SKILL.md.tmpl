@@ -24,6 +24,10 @@ for required in "$handbook_bin" "$handbook_home/runtime-manifest.json"; do
     exit 1
   }
 done
+command -v python3 >/dev/null 2>&1 || {
+  echo "REFUSED: missing installed Handbook prerequisite." >&2
+  exit 1
+}
 umask 077
 run_dir="$(mktemp -d "${TMPDIR:-/tmp}/handbook-capability.XXXXXX")" || exit 1
 trap 'rm -rf "$run_dir"' EXIT
@@ -95,28 +99,87 @@ request_path="$run_dir/request.json"
 chmod 600 "$request_path"
 ```
 
-Write the admitted JSON object directly to that protected file without printing it. Keep raw keys, secrets, expected-basis values, and other sensitive fields out of logs, chat summaries, fixtures, command arguments, and responses. Do not print or echo the request body. Never invent or rewrite an idempotency key or expected-basis value.
+Write the admitted JSON object directly to that protected file without printing it. Preserve those exact prepared input bytes through authorization and invocation. Keep raw keys, secrets, expected-basis values, and other sensitive fields out of logs, chat summaries, fixtures, command arguments, and responses. Do not print or echo the request body. Never invent or rewrite an idempotency key or expected-basis value.
 
 Immediately before invocation, read the selected entry again through exact catalog pagination. Its operation binding, definition fingerprint, and `entry_fingerprint` must still match. Any change stops before invocation.
 
 ## Apply the class boundary
 
 - For `read_only`, invoke only after the closed request body is complete.
-- For any non-read-only class, first surface the exact discovered operation binding, class, request facts, idempotency kind, key pointer, and expected-basis pointers. Require the user's exact explicit authorization for that mutation and input. Authorization is not owner truth and is not proof that the installed adapter admits mutation; if the generic action does not admit it, stop. Never route around the adapter.
+- For any non-read-only class, first surface the exact discovered operation binding, class, non-sensitive request facts, idempotency kind, key pointer, expected-basis pointers, request-schema binding, and a SHA-256 fingerprint of the exact prepared input bytes. Do not surface the raw key or expected-basis values. Require the user's exact explicit authorization for that operation and prepared input. Authorization is not owner truth and is not proof that the installed adapter admits mutation; if the generic action does not admit it, stop. Never route around the adapter.
+
+For a non-read-only capability, compute the consent-binding input fingerprint without printing the body:
+
+```bash
+if ! prepared_input_bytes_fingerprint="$(python3 - "$request_path" 2>/dev/null <<'PY'
+import hashlib
+import sys
+
+with open(sys.argv[1], "rb") as request_file:
+    print("sha256:" + hashlib.sha256(request_file.read()).hexdigest())
+PY
+)"; then
+  echo "REFUSED: prepared input fingerprint unavailable." >&2
+  exit 1
+fi
+```
+
+Surface that fingerprint with the other required non-sensitive facts, then obtain the user's exact authorization before continuing.
 
 Never retry automatically, including after delivery uncertainty or an unknown post-commit result.
 
 ## Invoke once and preserve the terminal
 
-For an admitted read-only capability, invoke once using only retained discovery values and the bounded file:
+Build one generic invocation from only retained discovery values and the bounded request file:
 
 ```bash
-"$handbook_bin" capability invoke \
-  --operation-ref '<discovered-operation-ref>' \
-  --definition-fingerprint '<discovered-definition-fingerprint>' \
-  --capability-entry-fingerprint '<discovered-entry-fingerprint>' \
-  --from-input "$request_path" \
-  >"$run_dir/invocation.json"
+invoke_args=(
+  capability invoke
+  --operation-ref '<discovered-operation-ref>'
+  --definition-fingerprint '<discovered-definition-fingerprint>'
+  --capability-entry-fingerprint '<discovered-entry-fingerprint>'
+  --from-input "$request_path"
+)
+```
+
+For a non-read-only capability, only after the user gives that exact authorization, create one protected generic authorization document. Its `prepared_input_bytes_fingerprint` is SHA-256 over the exact transport input bytes and is only a consent-binding fact; it is distinct from the owner's canonical semantic request fingerprint and all schema-byte fingerprints. The authorization document contains no request body, raw key, or expected-basis value.
+
+```bash
+authorization_path="$run_dir/mutation-authorization.json"
+: >"$authorization_path"
+chmod 600 "$authorization_path"
+if ! python3 - \
+  "$authorization_path" \
+  '<discovered-operation-ref>' \
+  '<discovered-definition-fingerprint>' \
+  '<discovered-entry-fingerprint>' \
+  '<discovered-request-schema-ref>' \
+  '<discovered-request-schema-fingerprint>' \
+  "$prepared_input_bytes_fingerprint" 2>/dev/null <<'PY'
+import json
+import sys
+
+authorization_path, operation_ref, definition_fingerprint, entry_fingerprint, schema_ref, schema_fingerprint, prepared_input_bytes_fingerprint = sys.argv[1:]
+authorization = {
+    "capability_entry_fingerprint": entry_fingerprint,
+    "operation": {"fingerprint": definition_fingerprint, "ref": operation_ref},
+    "prepared_input_bytes_fingerprint": prepared_input_bytes_fingerprint,
+    "request_schema": {"fingerprint": schema_fingerprint, "ref": schema_ref},
+}
+with open(authorization_path, "w", encoding="utf-8", newline="") as authorization_file:
+    json.dump(authorization, authorization_file, ensure_ascii=True, separators=(",", ":"), sort_keys=True)
+PY
+then
+  echo "REFUSED: mutation authorization preparation failed." >&2
+  exit 1
+fi
+invoke_args+=(--mutation-authorization-from "$authorization_path")
+```
+
+Invoke the generic action exactly once, whether the selected class is read-only or authorized mutation:
+
+```bash
+"$handbook_bin" "${invoke_args[@]}" >"$run_dir/invocation.json"
 ```
 
 Admit the single stdout value against the exact shared response schema. The typed response is controlling even when the process exits nonzero. Present its exact status and matching data or problem collection, diagnostics, next actions, idempotency state, receipts, result and response fingerprints, correlation, and replay indicator. Do not translate, merge, or reclassify `ok`, `blocked`, `refused`, or `error`. Do not infer success from the process exit code, prose, changed files, empty problems, local observation, receipts alone, or any stderr text.
