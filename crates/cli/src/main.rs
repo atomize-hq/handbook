@@ -1,6 +1,7 @@
 mod approvers;
 mod artifact;
 mod author;
+mod capability;
 mod coverage;
 mod doctor;
 mod doctor_rendering;
@@ -76,6 +77,10 @@ enum Command {
     Approvers(ApproversArgs),
     /// Operate on repository-selected artifact kinds through the generic engine path.
     Artifact(artifact::ArtifactArgs),
+    #[command(
+        about = "Discover Handbook capabilities and schemas through an always-machine interface; global --json is redundant."
+    )]
+    Capability(capability::CapabilityArgs),
     /// Pipeline operator surface for route resolution, explicit stage compilation, explicit stage-output capture, and route-state operations.
     Pipeline(PipelineArgs),
     /// Generate a reduced-v1 packet.
@@ -93,6 +98,7 @@ impl Command {
             Command::Author(args) => author::run(args, machine_json),
             Command::Approvers(args) => approvers::run(args, machine_json),
             Command::Artifact(args) => artifact::run(args, machine_json),
+            Command::Capability(args) => capability::run(args),
             Command::Pipeline(args) => pipeline::run(args, machine_json),
             Command::Generate(args) => generate::run(args, machine_json),
             Command::Inspect(args) => inspect::run(args, machine_json),

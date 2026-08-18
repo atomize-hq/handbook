@@ -2011,8 +2011,8 @@ fn help_lists_setup_first() {
 
     assert_eq!(
         command_lines.len(),
-        8,
-        "expected eight command lines in help"
+        9,
+        "expected nine command lines in help"
     );
     assert!(
         command_lines[0].starts_with("setup "),
@@ -2031,20 +2031,24 @@ fn help_lists_setup_first() {
         "artifact should be fourth: {command_lines:?}"
     );
     assert!(
-        command_lines[4].starts_with("pipeline "),
-        "pipeline should be fifth: {command_lines:?}"
+        command_lines[4].starts_with("capability "),
+        "capability should be fifth: {command_lines:?}"
     );
     assert!(
-        command_lines[5].starts_with("generate "),
-        "generate should be sixth: {command_lines:?}"
+        command_lines[5].starts_with("pipeline "),
+        "pipeline should be sixth: {command_lines:?}"
     );
     assert!(
-        command_lines[6].starts_with("inspect "),
-        "inspect should be seventh: {command_lines:?}"
+        command_lines[6].starts_with("generate "),
+        "generate should be seventh: {command_lines:?}"
     );
     assert!(
-        command_lines[7].starts_with("doctor "),
-        "doctor should be eighth: {command_lines:?}"
+        command_lines[7].starts_with("inspect "),
+        "inspect should be eighth: {command_lines:?}"
+    );
+    assert!(
+        command_lines[8].starts_with("doctor "),
+        "doctor should be ninth: {command_lines:?}"
     );
 }
 
