@@ -32,7 +32,8 @@ The labels below describe architecture state, not lifecycle or authorization:
 | CLI adapter | Current | [`handbook-cli`](../../../crates/cli/) consumes owner/SDK typed results for all 36 supported nontrivial leaves and exposes exactly four generic capability actions over the SDK consumer seam. It owns only command-line acquisition/rendering/stream/exit concerns, emits the shared invocation envelope for `--json`, and preserves only the 19 established explicit legacy projections. |
 | Tauri adapter | Current | [`handbook-tauri`](../../../crates/tauri/) is a non-UI library with three versioned commands over SDK-owned bootstrap, catalog, and invocation DTOs. It owns host context, off-main-thread scheduling, bounded host failures, and IPC framing without CLI or owner-crate product dependencies. |
 | Installed Handbook skill | Current | The generated root skill uses only the generic CLI membrane to bootstrap, page discovery, retrieve exact schemas, acquire bounded input, and invoke. It carries no current operation inventory or product-specific ordinary route; the fixed Charter workflow remains a separate leaf skill. |
-| Contract/evidence/gate product owner and dock executor | Target/future | These product surfaces remain absent. Current HCM-5.1 authority selects a future purpose-named `handbook-contracts` semantic owner with outward SDK mapping and keeps the executor separate; authority preparation is not implementation. |
+| Contract definition, claim, and applicability owner | Current | HCM-5.1 Packet 1 establishes [`handbook-contracts`](../../../crates/contracts/) inward of SDK with owner-native exact definition, claim, applicability, fingerprint, and compatibility semantics. It has no durable repository or outward SDK surface yet. |
+| Contract lifecycle/evidence/gate owner completion and dock executor | Target/future | Lifecycle transitions, durable owner use cases, outward SDK mapping, evidence/verdict/gate semantics, and the separate executor remain absent pending their authorized packets and later slices. |
 | Publication, bridge, and Substrate adoption | External-unknown | No repository-only claim can prove their current external existence, deployment, or conformance. |
 
 The workspace membership and current crate edges are visible in
@@ -82,11 +83,13 @@ not authority for a future contract product owner to depend back on the SDK.
 
 The current [`HCM-5.1 authority`](slices/HCM-5.1/README.md) selects a
 purpose-named `handbook-contracts` owner with outward mapping into SDK types.
-The future owner may depend inward on exact Engine semantic/authority
-primitives, while SDK depends on and projects the owner. Packet-0 primitives
-remain at their consumer-facing placement; no neutral extraction is selected.
-The owner, Flow, pipeline, and Engine never depend back on SDK. This preserves
-owner independence without treating authority preparation as implementation.
+Packet 1 implements that owner-native definition/claim/applicability kernel at
+[`crates/contracts`](../../../crates/contracts/) without an SDK dependency. The
+owner may depend inward on exact Engine semantic/authority primitives when a
+later authorized packet requires them, while SDK will depend on and project the
+owner only after its outward-mapping packet. Packet-0 primitives remain at their
+consumer-facing placement; no neutral extraction is selected. The owner, Flow,
+pipeline, and Engine never depend back on SDK.
 
 ## Projection and adapter boundary
 

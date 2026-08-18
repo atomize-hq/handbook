@@ -8,8 +8,9 @@ verdict or gate evaluation, a dock executor, or another Phase-5 slice.
 
 ## Current admission state
 
-**HCM-5.1 authority is prepared; no HCM-5.1 packet is implemented by this
-document.**
+**HCM-5.1 authority is prepared. Packet 1 implements the selected owner-native
+definition/claim/applicability kernel; Packets 2–6 and slice closeout remain
+incomplete.**
 
 Phase 4 is exited. The completed
 [`HCM-4.5` authority](../HCM-4.5/README.md) records Packets 1–6, aggregate
@@ -17,9 +18,9 @@ verification and review, and its single slice closeout; the
 [`phase-and-slice map`](../../phase-and-slice-map.md) independently records the
 Phase-4 exit. Those facts satisfy the hard predecessor for HCM-5.1.
 
-Contract-owner placement is resolved here. Product execution remains
-inadmissible until the meta task reloads this authority, confirms the
-predecessor evidence is still current, and dispatches Packet 1 separately.
+Contract-owner placement is resolved here and implemented by Packet 1. Later
+product execution remains under the strict packet sequence and meta-task
+admission; this checkpoint does not select Packet 2 or close the slice.
 
 ## Outcome
 
@@ -88,9 +89,10 @@ adopted only for these bounded product decisions:
 - decisions HCM-0.5-D1 and HCM-0.5-D2 from the named closeout record.
 
 Historical status, proof walls, ledgers, orchestration records, and authority
-claims are not adopted. The current product contains no `handbook-contracts`
-crate, contract-definition owner, canonical contract evidence, verdict/gate
-engine, or dock executor.
+claims are not adopted. Packet 1 establishes the `handbook-contracts`
+definition/claim/applicability kernel. The current product still contains no
+contract lifecycle chain or durable owner repository, canonical contract
+evidence, verdict/gate engine, outward SDK mapping, or dock executor.
 
 ## Selected owner and dependency placement
 
