@@ -78,7 +78,7 @@ enum Command {
     /// Operate on repository-selected artifact kinds through the generic engine path.
     Artifact(artifact::ArtifactArgs),
     #[command(
-        about = "Discover Handbook capabilities and schemas through an always-machine interface; global --json is redundant."
+        about = "Discover and invoke Handbook capabilities through an always-machine interface; global --json is redundant."
     )]
     Capability(capability::CapabilityArgs),
     /// Pipeline operator surface for route resolution, explicit stage compilation, explicit stage-output capture, and route-state operations.

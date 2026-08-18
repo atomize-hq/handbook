@@ -41,25 +41,19 @@ fn assert_adapter_failure(output: &Output, expected: &str) {
 }
 
 #[test]
-fn capability_help_exposes_only_packet2_actions_and_requires_one() {
+fn capability_help_exposes_all_generic_actions_and_requires_one() {
     let root = tempfile::tempdir().unwrap();
     let help = run_in(root.path(), &["capability", "--help"]);
     assert!(help.status.success());
     let stdout = String::from_utf8(help.stdout).unwrap();
-    for action in ["bootstrap", "catalog-read", "schema-read"] {
+    for action in ["bootstrap", "catalog-read", "schema-read", "invoke"] {
         assert!(stdout.contains(action), "missing {action}: {stdout}");
     }
-    assert!(
-        !stdout.contains("invoke"),
-        "invoke must stay absent: {stdout}"
-    );
 
-    for args in [vec!["capability"], vec!["capability", "invoke"]] {
-        let output = run_in(root.path(), &args);
-        assert_eq!(output.status.code(), Some(2));
-        assert!(output.stdout.is_empty());
-        assert!(!output.stderr.is_empty());
-    }
+    let output = run_in(root.path(), &["capability"]);
+    assert_eq!(output.status.code(), Some(2));
+    assert!(output.stdout.is_empty());
+    assert!(!output.stderr.is_empty());
 }
 
 #[test]
