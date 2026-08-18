@@ -20,8 +20,7 @@ At this checkpoint:
   HCM-4.3 has completed its sequential packet implementation, aggregate
   review, and slice closeout; the bounded
   [`HCM-4.4 slice authority`](slices/HCM-4.4/README.md) has completed Packet
-  1–6 implementation and packet proof, while aggregate verification, review,
-  and slice closeout remain pending;
+  1–6 implementation, aggregate verification and review, and slice closeout;
 - the former orchestration skill under `.codex/skills/.disabled/` is inactive and is not authority for new work; and
 - the active thin router is routing guidance only and is not authority for product or slice work.
 
@@ -48,7 +47,7 @@ Use the source that owns the question:
 | Where is the active routing entry point? | [`.codex/skills/orchestrate-top-level-tasks/SKILL.md`](../../../.codex/skills/orchestrate-top-level-tasks/SKILL.md) operationalizes role-specific preparation and execution. User instructions and current authority supply permission and scope; the skill does not invent either. |
 | What is the completed HCM-4.2 outcome and evidence boundary? | [`slices/HCM-4.2/README.md`](slices/HCM-4.2/README.md) records the completed Packet 0–5 outcome, its single aggregate closeout, and links to the Packet 1–5 decision checkpoints. |
 | What is the completed HCM-4.3 outcome and packet boundary? | [`slices/HCM-4.3/README.md`](slices/HCM-4.3/README.md) records complete CLI JSON parity, the machine/human/diagnostic/exit contract, compatibility posture, ordered Packets 1–8, and the aggregate slice closeout. |
-| What is the current HCM-4.4 outcome and packet boundary? | [`slices/HCM-4.4/README.md`](slices/HCM-4.4/README.md) defines the bounded non-UI Tauri command facade, SDK DTO and dependency boundary, strict Packets 1–6, and aggregate acceptance. Packets 1–6 implementation and packet proof are complete; aggregate verification, review, and slice closeout remain pending. |
+| What is the completed HCM-4.4 outcome and packet boundary? | [`slices/HCM-4.4/README.md`](slices/HCM-4.4/README.md) records the bounded non-UI Tauri command facade, SDK DTO and dependency boundary, strict Packets 1–6, and the single aggregate slice closeout. |
 | Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. A roadmap entry plus an explicit execution request may authorize bounded preparation of that document, but product execution begins only after the resulting current slice authority is ready. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 

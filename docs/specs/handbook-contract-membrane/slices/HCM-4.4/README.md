@@ -8,8 +8,8 @@ semantic identity.
 
 ## Current implementation state
 
-**Packets 1–6 implementation and packet proof are complete. Aggregate
-verification, causal review, and slice closeout remain pending.**
+**Packets 1–6, the one aggregate verification, the aggregate causal review,
+and aggregate slice closeout are complete. HCM-4.4 is `SLICE_COMPLETE`.**
 
 The hard predecessor, HCM-4.3, is complete at `74cec53`. Its packet
 implementation completed through `f901231`; test-only remediations `920d217`
@@ -23,9 +23,23 @@ and extended the deterministic manifest to 120 roots. Packets 2–5 implemented
 the command crate and exact read-only, use-case, and mutation routes; Packet 6
 supplies the integrated packet proof and current protocol documentation.
 
-This checkpoint does not claim `SLICE_COMPLETE`. The meta task still owns the
-single aggregate verification, causal review, and slice closeout required after
-Packet 6.
+HCM-4.4 authority was prepared at `5f18ed4`. Packet implementation then
+completed sequentially through `3ae846c`, `1fc369a`, `d12cae8`, `2042b6f`,
+`083123f`, and `11d8d3a`. Aggregate verification on the final product state
+passed the focused SDK contract and HCM-4.4 suites, the feature-gated integrated
+schema/catalog proof, all 13 Tauri tests, all three CLI parity witnesses,
+deterministic schema regeneration, formatting, workspace check, strict Clippy,
+strict rustdoc, dependency inspection, and the no-subprocess, no-UI, and
+credential/path gates. The two pre-existing pipeline placeholder-golden
+mismatches remain outside this slice and were not changed.
+
+One independent aggregate causal review returned `APPROVE` with no P1–P4
+findings. All twelve slice acceptance conditions are satisfied on the final
+HCM-4.4 product state.
+
+This closeout satisfies HCM-4.5's default hard predecessor. It does not
+authorize or start HCM-4.5 or any later slice; those remain subject to their own
+current authority and explicit execution request.
 
 ## Outcome
 
@@ -447,9 +461,8 @@ HCM-4.4 does not authorize:
 
 ## Use and drift
 
-Use this document as the controlling HCM-4.4 outcome and packet boundary until
-aggregate slice closeout updates its status. Source and tests remain product
-truth. If implementation changes current product classification, capability
-transport evidence, dependency topology, or seam routing, update only the
-current HCM document that owns that truth. Do not use this authority to execute
-HCM-4.5 or any adjacent work.
+Use this document as the completed HCM-4.4 outcome and packet boundary. Source
+and tests remain product truth. If later authorized implementation changes
+current product classification, capability transport evidence, dependency
+topology, or seam routing, update only the current HCM document that owns that
+truth. Do not use this authority to execute HCM-4.5 or any adjacent work.

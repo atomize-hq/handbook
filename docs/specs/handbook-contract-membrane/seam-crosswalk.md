@@ -32,9 +32,8 @@ completion or schedule:
 - `HCM-4.2` identifies a completed boundary without reopening it.
 - `HCM-4.3` identifies the completed CLI-parity migration without reopening or
   authorizing it.
-- `HCM-4.4` identifies the implemented Tauri-facade packet boundary while its
-  aggregate verification, review, and slice closeout remain pending; the label
-  does not authorize a packet by itself.
+- `HCM-4.4` identifies the completed Tauri-facade migration without reopening
+  or authorizing it.
 - `Decision required in phase map` leaves the later owner deliberately
   unresolved.
 
