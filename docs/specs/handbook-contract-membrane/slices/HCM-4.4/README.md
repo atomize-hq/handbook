@@ -6,9 +6,10 @@ contracts and execution seams. It does not implement a packet, authorize
 HCM-4.5, create a Tauri application, or make Tauri command names a source of
 semantic identity.
 
-## Current admission state
+## Current implementation state
 
-**HCM-4.4 authority is prepared; implementation has not begun.**
+**Packets 1–6 implementation and packet proof are complete. Aggregate
+verification, causal review, and slice closeout remain pending.**
 
 The hard predecessor, HCM-4.3, is complete at `74cec53`. Its packet
 implementation completed through `f901231`; test-only remediations `920d217`
@@ -16,13 +17,15 @@ and `45cad19` aligned stale Engine assertions before the aggregate closeout.
 The current SDK Packet-8 inventory/schema proof passes 1/1 and the current CLI
 Packet-8 aggregate suite passes 7/7. The exact 62-row operation inventory, 19
 discoverable capabilities, 18 `cli_json` transports, one `rust_sdk` posture
-transport, six fixed SDK use cases, and 115-root schema manifest are therefore
-the implementation baseline for this slice.
+transport, six fixed SDK use cases, and 115-root schema manifest were the
+implementation baseline for this slice. Packet 1 added the five facade roots
+and extended the deterministic manifest to 120 roots. Packets 2–5 implemented
+the command crate and exact read-only, use-case, and mutation routes; Packet 6
+supplies the integrated packet proof and current protocol documentation.
 
-Product execution remains inadmissible until the meta task reloads this
-authority, confirms the predecessor and worktree are still current, and
-dispatches Packet 1 in a fresh top-level task. This authority preparation does
-not start Packet 1.
+This checkpoint does not claim `SLICE_COMPLETE`. The meta task still owns the
+single aggregate verification, causal review, and slice closeout required after
+Packet 6.
 
 ## Outcome
 
@@ -65,11 +68,11 @@ Current source and tests are product truth. This authority was selected from:
   HCM-4.3 Packet-8 proof; and
 - the workspace and crate manifests.
 
-No indexed Tauri execution flow exists because no adapter exists. The current
-operation model already declares `OperationTransport::Tauri`, and the
-bootstrap descriptor already knows that transport, but every current
-capability truthfully omits it from `current_transports`. That precursor shape
-does not count as implementation evidence.
+The tracked `handbook-tauri` library now provides the exact three-command
+adapter over the SDK facade. The operation model and production witness report
+`Tauri` only for the 19 proven routes: the 18 predecessor operations retain
+`cli_json`, posture retains `rust_sdk`, and the other 43 inventory rows remain
+transport-empty and omitted.
 
 Only these historical sections at
 `archive/handbook-contract-membrane-pre-clean-20260812` are adopted as bounded

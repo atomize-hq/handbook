@@ -5,10 +5,10 @@ use handbook_sdk::contract_membrane::{
     admit_operation_definition, canonical_json_bytes, operation_inventory, parse_canonical_json,
     posture_transition_apply_definition, posture_transition_apply_request, sha256_fingerprint,
     AdmissionReason, BoundedString, CatalogPageSize, ContractLimits, ContractValue, DiscoveryState,
-    ExactBinding, ExactRef, OperationAdmissionResult, OperationClass, OperationTransport,
-    OwnerVersionEntry, PostureCanonicalBindingDtoV1, PostureDimensionChangeDtoV1,
-    PostureReferenceDtoV1, PostureTransitionApplyRequestDataV1, ProductionCatalogRead,
-    ProductionWitness, SchemaManifestEntry, TerminalStatus, UtcTimestamp, WriteReceipt,
+    ExactBinding, ExactRef, OperationAdmissionResult, OperationTransport, OwnerVersionEntry,
+    PostureCanonicalBindingDtoV1, PostureDimensionChangeDtoV1, PostureReferenceDtoV1,
+    PostureTransitionApplyRequestDataV1, ProductionCatalogRead, ProductionWitness,
+    SchemaManifestEntry, TerminalStatus, UtcTimestamp, WriteReceipt,
 };
 use handbook_sdk::HandbookSdkV1;
 use serde_json::Value;

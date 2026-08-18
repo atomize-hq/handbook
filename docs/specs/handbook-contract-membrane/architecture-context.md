@@ -28,9 +28,10 @@ The labels below describe architecture state, not lifecycle or authorization:
 | Flow and pipeline domains | Current | [`handbook-flow`](../../../crates/flow/) and [`handbook-pipeline`](../../../crates/pipeline/) own their domain behavior while depending on the engine for shared semantic truth. |
 | Grounding adoption and deterministic projection/snapshot components | Precursor | Typed Flow and pipeline adapters exist, while projection and snapshot components remain private and no ordinary grounding consumer completes the seam. |
 | SDK composition | Current | [`handbook-sdk`](../../../crates/sdk/) composes owner crates into bounded, transport-free public Rust surfaces. |
-| Contract-membrane types, schemas, admission, and discovery | Current | HCM-4.2 provides the bounded kernel and exact 62-row inventory; HCM-4.3 extends the deterministic tree to 115 roots and the immutable production witness to 19 capabilities: one Rust-SDK posture operation and 18 owner-admitted `cli_json` operations. The six fixed CLI use cases remain outside ordinary admission and discovery. |
+| Contract-membrane types, schemas, admission, and discovery | Current | HCM-4.2 provides the bounded kernel and exact 62-row inventory; HCM-4.3 and HCM-4.4 extend the deterministic tree to 120 roots and the immutable production witness to 19 capabilities. The 18 predecessor operations expose `cli_json` and `tauri`, posture exposes `rust_sdk` and `tauri`, and the six fixed use cases remain outside ordinary admission and discovery. |
 | CLI adapter | Current | [`handbook-cli`](../../../crates/cli/) consumes owner/SDK typed results for all 36 supported nontrivial leaves, owns only command-line acquisition/rendering/stream/exit concerns, emits the shared invocation envelope for `--json`, and preserves only the 19 established explicit legacy projections. |
-| Contract/evidence/gate product owner, dock executor, and Tauri adapter | Target/future | These owner and adapter surfaces are absent; this topology does not authorize or design them. |
+| Tauri adapter | Current | [`handbook-tauri`](../../../crates/tauri/) is a non-UI library with three versioned commands over SDK-owned bootstrap, catalog, and invocation DTOs. It owns host context, off-main-thread scheduling, bounded host failures, and IPC framing without CLI or owner-crate product dependencies. |
+| Contract/evidence/gate product owner and dock executor | Target/future | These owner and executor surfaces are absent; this topology does not authorize or design them. |
 | Publication, bridge, and Substrate adoption | External-unknown | No repository-only claim can prove their current external existence, deployment, or conformance. |
 
 The workspace membership and current crate edges are visible in
@@ -51,7 +52,7 @@ stable Rust-facing surface. It must not reimplement semantic branches or become
 an alternate authority source. Otherwise direct owner calls and SDK calls can
 produce different truth for the same operation.
 
-CLI and future transport adapters consume SDK-facing surfaces. They must not add
+CLI and Tauri transport adapters consume SDK-facing surfaces. They must not add
 back-edges from semantic owners into presentation or transport crates. This keeps
 domain behavior usable without a specific interface and prevents transport
 release concerns from controlling semantic evolution.
@@ -59,7 +60,7 @@ release concerns from controlling semantic evolution.
 The current dependency direction is therefore:
 
 ```text
-engine <- flow / pipeline <- sdk <- cli or future transport adapters
+engine <- flow / pipeline <- sdk <- cli / tauri
 ```
 
 This is a semantic direction, not a requirement that every future type remain in

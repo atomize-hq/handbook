@@ -15,7 +15,7 @@ This document does not:
 - define a remaining schedule or choose a future owner;
 - declare a phase or slice complete;
 - select a Phase-3 boundary or establish Phase-3 exit evidence; or
-- establish HCM-4.3 aggregate slice closeout.
+- declare HCM-4.4 slice completion or aggregate closeout.
 
 The [`README`](README.md) remains the authority and navigation entry point.
 Execution-unit identity comes from the [`work-unit lifecycle`](work-unit-lifecycle.md), and verification and closeout rules come from the [`review and closeout policy`](review-and-closeout-policy.md).
@@ -41,7 +41,8 @@ These are product-state labels only. None is a lifecycle state, authorization, p
 | SDK and CLI composition | Implemented | The transport-free SDK and CLI compose current owner capabilities, including generic pipeline routes. Every supported nontrivial CLI leaf now has one typed ordinary-operation or fixed use-case source for human and machine rendering. |
 | HCM-4.2 shared DTO and JSON Schema membrane | Implemented | Packets 0–5 provide bounded contract types, canonical serialization and fingerprints, a deterministic 53-root Draft 2020-12 schema tree and manifest, the exact 62-row operation inventory and independent owner-admission boundary, immutable production bootstrap/catalog witnessing, one admitted Rust-SDK posture operation, and integrated proof. |
 | Complete CLI JSON parity | Implemented | HCM-4.3 Packets 1–8 provide one global `--json` invocation envelope, 36-leaf exact coverage, six fixed use cases, 18 `cli_json` ordinary operations, a deterministic 115-root schema/manifest tree, singular writable-stdout framing, shared terminal/exit mapping, physical write-failure handling, and bounded `--legacy-json` compatibility. Aggregate slice closeout remains a lifecycle decision, not a product-state label. |
-| Future contract/evidence/gate owner, dock executor, and Tauri | Absent/future | No current product owner or implementation establishes these capabilities. |
+| Tauri-ready command facade | Implemented | HCM-4.4 Packets 1–6 provide the non-UI `handbook-tauri` library, exact three-command registry, five new SDK facade roots, 120-root deterministic schema/manifest tree, host-managed repository context, all 19 current capability routes, and six fixed non-discoverable use cases. The 18 CLI operations expose exactly `[cli_json, tauri]`, posture exposes `[rust_sdk, tauri]`, and the other 43 inventory rows remain transport-empty and omitted. Aggregate slice verification, review, and closeout remain pending lifecycle work. |
+| Future contract/evidence/gate owner and dock executor | Absent/future | No current product owner or implementation establishes these capabilities. |
 | Current publication and Substrate adoption | External-unknown | Current repository evidence does not prove a present external publication, bridge, or Substrate seam; absence from the repository is not proof of external absence. |
 
 ## Phase-3 implementation and residual facts
@@ -221,7 +222,10 @@ Use these anchors without treating the list as an exhaustive file inventory:
   [`production_witness.rs`](../../../crates/sdk/src/contract_membrane/production_witness.rs),
   and [`contract_packet5_integrated_proof.rs`](../../../crates/sdk/tests/contract_packet5_integrated_proof.rs);
 - checked-in assets and schema-generation tests: the three Packet-1 anchors
-  above; and
+  above;
+- the non-UI Tauri adapter and integrated Packet-6 proof:
+  [`crates/tauri/src/lib.rs`](../../../crates/tauri/src/lib.rs) and
+  [`hcm_4_4_packet6.rs`](../../../crates/tauri/tests/hcm_4_4_packet6.rs); and
 - retained executable product fixtures: [`slices/`](slices/), as classified by the README.
 
 When source, tests, or product-consumed assets change a classification, update
