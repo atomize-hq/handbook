@@ -17,6 +17,7 @@ pub mod artifact_operations;
 pub mod artifact_registry;
 pub mod artifact_repository;
 pub mod author;
+mod authority_admission;
 pub mod baseline_validation;
 pub mod canonical_artifacts;
 mod canonical_paths;
@@ -107,6 +108,11 @@ pub use author::{
     CharterProjectClassification, CharterProjectConstraintsInput, CharterProjectInput,
     CharterRequiredness, CharterRolloutControls, CharterRuntimeEnvironment, CharterStructuredInput,
     CharterSurface, DEFAULT_EXCEPTION_RECORD_LOCATION,
+};
+pub use authority_admission::{
+    CredentialAuthorityAdmissionErrorKindV1, CredentialAuthorityAdmissionErrorV1,
+    CredentialAuthorityAdmissionRequestV1, CredentialAuthorityAdmissionServiceV1,
+    CredentialAuthorityAdmissionV1,
 };
 pub use baseline_validation::{
     baseline_artifact_validation, baseline_artifact_validation_for_path,

@@ -1332,11 +1332,14 @@ dependencies = [
 name = "handbook-contracts"
 version = "0.1.0"
 dependencies = [
+ "handbook-engine",
+ "p256",
  "semver",
  "serde",
  "serde_json",
  "serde_json_canonicalizer",
  "sha2",
+ "tempfile",
 ]
 
 [[package]]

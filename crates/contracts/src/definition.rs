@@ -129,6 +129,21 @@ impl ContractDefinitionV1 {
         &self.definition_fingerprint
     }
 
+    /// Returns the immutable authenticated definition author reference.
+    pub fn definition_author_ref(&self) -> &StableIdV1 {
+        &self.definition_author_ref
+    }
+
+    /// Returns the exact authority binding under which the author is admitted.
+    pub fn definition_authority(&self) -> &ExactBindingV1 {
+        &self.definition_authority
+    }
+
+    /// Returns the exact lifecycle policy selected by this definition.
+    pub fn lifecycle_policy(&self) -> &ExactBindingV1 {
+        &self.lifecycle_policy
+    }
+
     /// Returns true only for this definition's exact ref and fingerprint.
     pub fn matches_exact(&self, reference: &ExactRefV1, fingerprint: &FingerprintV1) -> bool {
         &self.contract_ref == reference && &self.definition_fingerprint == fingerprint

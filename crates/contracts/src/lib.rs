@@ -9,6 +9,9 @@ mod claim;
 mod compatibility;
 mod definition;
 mod identity;
+mod lifecycle;
+mod lifecycle_policy;
+mod lifecycle_preimage;
 
 pub use claim::{
     evaluate_applicability, ApplicabilityInputSourceV1, ApplicabilityOutcomeV1,
@@ -24,4 +27,16 @@ pub use definition::{
 };
 pub use identity::{
     ContractError, ContractIdV1, ExactBindingV1, ExactRefV1, FingerprintV1, VersionV1,
+};
+pub use lifecycle::{
+    current_lifecycle_head, evaluation_lifecycle_admission_basis_v1,
+    prepare_contract_definition_append, prepare_lifecycle_transition, AdmittedContractDefinitionV1,
+    ContractLifecycleErrorV1, ContractLifecycleTransitionInputV1, ContractLifecycleTransitionV1,
+    DraftGenesisV1, EvaluationLifecycleAdmissionBasisV1, LifecycleEvidenceKindV1, LifecycleHeadV1,
+    LifecycleReasonTextV1, LifecycleReasonV1, LifecycleStateV1, LifecycleSupportingEvidenceV1,
+    PreparedContractDefinitionAppendV1, PreparedContractLifecycleTransitionV1,
+};
+pub use lifecycle_policy::{
+    lifecycle_policy_binding_v1, lifecycle_policy_canonical_json_v1, ContractApprovalClassV1,
+    LIFECYCLE_POLICY_REF_V1,
 };
