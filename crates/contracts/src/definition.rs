@@ -1,5 +1,5 @@
 use crate::canonical::{canonical_bytes, canonical_fingerprint};
-use crate::claim::validate_claims;
+use crate::claim::{evaluation_policy_closure, validate_claims};
 use crate::{
     ContractClaimV1, ContractError, ContractIdV1, ExactBindingV1, ExactRefV1, FingerprintV1,
     GateEffectV1, MatcherBindingV1, MinimumVersionChangeV1, StableIdV1, VersionV1,
@@ -53,6 +53,12 @@ pub struct ContractDefinitionV1 {
     gate_policy: ExactBindingV1,
     extensions_policy: ExactBindingV1,
     definition_fingerprint: FingerprintV1,
+}
+
+pub(crate) struct DefinitionEvaluationClosureV1 {
+    pub(crate) freshness_policies: Vec<ExactBindingV1>,
+    pub(crate) stability_policies: Vec<ExactBindingV1>,
+    pub(crate) matcher_bindings: Vec<MatcherBindingV1>,
 }
 
 impl ContractDefinitionV1 {
@@ -142,6 +148,19 @@ impl ContractDefinitionV1 {
     /// Returns the exact lifecycle policy selected by this definition.
     pub fn lifecycle_policy(&self) -> &ExactBindingV1 {
         &self.lifecycle_policy
+    }
+
+    pub(crate) fn gate_policy(&self) -> &ExactBindingV1 {
+        &self.gate_policy
+    }
+
+    pub(crate) fn evaluation_closure(&self) -> DefinitionEvaluationClosureV1 {
+        let (freshness_policies, stability_policies) = evaluation_policy_closure(&self.claims);
+        DefinitionEvaluationClosureV1 {
+            freshness_policies,
+            stability_policies,
+            matcher_bindings: self.matcher_bindings.clone(),
+        }
     }
 
     /// Returns true only for this definition's exact ref and fingerprint.

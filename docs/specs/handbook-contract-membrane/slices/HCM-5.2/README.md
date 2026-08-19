@@ -9,8 +9,8 @@ or another Phase-5 slice.
 
 ## Current admission state
 
-**HCM-5.2 authority is prepared. No HCM-5.2 packet is implemented or
-dispatched.**
+**HCM-5.2 Packet 1 is implemented. The slice remains open; Packets 2–7 are
+unselected.**
 
 The hard predecessor is satisfied. The completed
 [`HCM-5.1` authority](../HCM-5.1/README.md) establishes the inward
@@ -23,9 +23,10 @@ review is `APPROVE` with no unresolved P1/P2, and its single slice closeout is
 complete through commits `b37a307`, `dd51ed8`, `cfd3d35`, `7925652`,
 `3bd2c41`, `149c7fd`, and `cc0588d`.
 
-HCM-5.2 product execution remains inadmissible until a fresh packet task proves
-its declared predecessor and scope immediately before edits. This authority
-does not dispatch Packet 1.
+Further HCM-5.2 product execution remains inadmissible until a fresh packet task
+proves its declared predecessor and scope immediately before edits. Packet 1
+adds only the owner-native identity/policy kernel and atomic read-only
+evaluation-run preparation fixed by its row below.
 
 ## Outcome
 

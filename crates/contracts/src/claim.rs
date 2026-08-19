@@ -578,6 +578,25 @@ impl<'de> Deserialize<'de> for ContractClaimV1 {
     }
 }
 
+pub(crate) fn evaluation_policy_closure(
+    claims: &[ContractClaimV1],
+) -> (Vec<ExactBindingV1>, Vec<ExactBindingV1>) {
+    let mut freshness = claims
+        .iter()
+        .map(|claim| claim.freshness_policy.clone())
+        .collect::<Vec<_>>();
+    let mut stability = claims
+        .iter()
+        .flat_map(|claim| claim.evidence_requirements.iter())
+        .map(|requirement| requirement.stability_policy.clone())
+        .collect::<Vec<_>>();
+    freshness.sort();
+    freshness.dedup();
+    stability.sort();
+    stability.dedup();
+    (freshness, stability)
+}
+
 /// The only owner-native applicability outcomes.
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "snake_case")]

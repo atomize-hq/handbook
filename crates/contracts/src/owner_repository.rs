@@ -2,9 +2,11 @@ use crate::canonical::{canonical_bytes, canonical_fingerprint};
 use crate::{
     current_lifecycle_head, evaluation_lifecycle_admission_basis_v1,
     prepare_lifecycle_transition as prepare_transition_kernel, AdmittedContractDefinitionV1,
-    ContractLifecycleErrorV1, ContractLifecycleTransitionInputV1, ContractLifecycleTransitionV1,
-    EvaluationLifecycleAdmissionBasisV1, ExactRefV1, FingerprintV1, LifecycleHeadV1,
-    LifecycleStateV1, PreparedContractDefinitionAppendV1,
+    ContractEvaluationRunV1, ContractLifecycleErrorV1, ContractLifecycleTransitionInputV1,
+    ContractLifecycleTransitionV1, EvaluationLifecycleAdmissionBasisV1, EvaluationPolicyKindV1,
+    EvaluationPolicyRegistryV1, ExactBindingV1, ExactRefV1, FingerprintV1, GatePolicyV1,
+    LifecycleHeadV1, LifecycleStateV1, OwnerCurrentnessObservationV1, PrepareEvaluationRunInputV1,
+    PreparedContractDefinitionAppendV1, SemanticTimeV1,
 };
 use handbook_engine::{
     CredentialAuthorityAdmissionRequestV1, CredentialAuthorityAdmissionV1,
@@ -477,6 +479,85 @@ impl ContractOwnerRepositoryV1 {
                 return Err(map_lifecycle(ContractLifecycleErrorV1::StaleHead));
             }
             evaluation_lifecycle_admission_basis_v1(&definition, &chain).map_err(map_lifecycle)
+        })
+    }
+
+    /// Atomically prepares one exact read-only evaluation run from the same
+    /// recovered definition and current lifecycle snapshot.
+    pub fn prepare_evaluation_run_v1(
+        &self,
+        input: PrepareEvaluationRunInputV1,
+        policy_registry: &EvaluationPolicyRegistryV1,
+    ) -> Result<ContractEvaluationRunV1, ContractOwnerRepositoryErrorV1> {
+        self.with_lock(|owner| {
+            owner.recover_locked()?;
+            owner.validate_inventory()?;
+            let (definition, chain, persisted_head) = owner.load_lifecycle_bundle(
+                input.contract().reference(),
+                input.contract().fingerprint(),
+            )?;
+            let current_head =
+                current_lifecycle_head(&definition, &chain).map_err(map_lifecycle)?;
+            if current_head != persisted_head
+                || current_head.lifecycle_fingerprint() != input.expected_lifecycle_fingerprint()
+            {
+                return Err(map_lifecycle(ContractLifecycleErrorV1::StaleHead));
+            }
+            let basis = evaluation_lifecycle_admission_basis_v1(&definition, &chain)
+                .map_err(map_lifecycle)?;
+            let definition = definition.definition();
+            let claims = definition.claims().to_vec();
+            let closure = definition.evaluation_closure();
+            if input.freshness_policies() != closure.freshness_policies
+                || input.stability_policies() != closure.stability_policies
+                || closure.matcher_bindings.as_slice() != std::slice::from_ref(input.matcher())
+            {
+                return Err(invalid("definition evaluation closure was substituted"));
+            }
+            require_policy_kind(
+                policy_registry,
+                input.freshness_policies(),
+                EvaluationPolicyKindV1::Freshness,
+            )?;
+            require_policy_kind(
+                policy_registry,
+                input.stability_policies(),
+                EvaluationPolicyKindV1::Stability,
+            )?;
+            let gate_policy = definition.gate_policy().clone();
+            if input.gate_policy() != &gate_policy {
+                return Err(invalid("definition gate policy was substituted"));
+            }
+            let registered_gate = policy_registry
+                .resolve_exact(&gate_policy)
+                .map_err(map_contract_input)?;
+            if registered_gate.kind() != EvaluationPolicyKindV1::Gate {
+                return Err(invalid("definition gate policy kind is not admitted"));
+            }
+            let gate: GatePolicyV1 = serde_json::from_slice(&registered_gate.canonical_json())
+                .map_err(|_| invalid("registered gate policy bytes are invalid"))?;
+            let local_closeout_policy = gate.local_closeout_policy().clone();
+            if input.local_closeout_policy() != &local_closeout_policy {
+                return Err(invalid("gate local-closeout policy was substituted"));
+            }
+            require_policy_kind(
+                policy_registry,
+                std::slice::from_ref(&local_closeout_policy),
+                EvaluationPolicyKindV1::LocalCloseout,
+            )?;
+            let owner_currentness = OwnerCurrentnessObservationV1::new(
+                SemanticTimeV1::owner_now().map_err(map_contract_input)?,
+                current_head.lifecycle_fingerprint().clone(),
+            );
+            ContractEvaluationRunV1::from_owner_snapshot(
+                definition.contract_ref().clone(),
+                definition.definition_fingerprint().clone(),
+                &basis,
+                input,
+                claims,
+                owner_currentness,
+            )
+            .map_err(map_contract_input)
         })
     }
 
@@ -2593,6 +2674,25 @@ fn fingerprint_hex(value: &FingerprintV1) -> &str {
         .strip_prefix("sha256:")
         .expect("fingerprint is normalized")
 }
+fn require_policy_kind(
+    registry: &EvaluationPolicyRegistryV1,
+    policies: &[ExactBindingV1],
+    expected: EvaluationPolicyKindV1,
+) -> Result<(), ContractOwnerRepositoryErrorV1> {
+    if policies.is_empty() {
+        return Err(invalid("evaluation policy closure is empty"));
+    }
+    for policy in policies {
+        let registered = registry.resolve_exact(policy).map_err(map_contract_input)?;
+        if registered.kind() != expected {
+            return Err(invalid("evaluation policy kind is not admitted"));
+        }
+    }
+    Ok(())
+}
+fn map_contract_input(_: crate::ContractError) -> ContractOwnerRepositoryErrorV1 {
+    invalid("evaluation run input or policy is not exactly admitted")
+}
 fn map_lifecycle(_: ContractLifecycleErrorV1) -> ContractOwnerRepositoryErrorV1 {
     repository_error(
         ContractOwnerRepositoryErrorKindV1::LifecycleRefused,
@@ -2630,6 +2730,9 @@ const fn repository_error(
     detail: &'static str,
 ) -> ContractOwnerRepositoryErrorV1 {
     ContractOwnerRepositoryErrorV1 { kind, detail }
+}
+const fn invalid(detail: &'static str) -> ContractOwnerRepositoryErrorV1 {
+    repository_error(ContractOwnerRepositoryErrorKindV1::InvalidRequest, detail)
 }
 const fn durability(detail: &'static str) -> ContractOwnerRepositoryErrorV1 {
     repository_error(

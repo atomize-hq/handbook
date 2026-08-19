@@ -8,6 +8,9 @@ mod canonical;
 mod claim;
 mod compatibility;
 mod definition;
+mod evaluation_identity;
+mod evaluation_policy;
+mod evaluation_run;
 mod identity;
 mod lifecycle;
 mod lifecycle_policy;
@@ -27,6 +30,12 @@ pub use compatibility::{DefinitionChangeV1, MinimumVersionChangeV1};
 pub use definition::{
     classify_definition_mutation, ContractDefinitionInputV1, ContractDefinitionV1, ContractKindV1,
     DefinitionMutationClassificationV1, CONTRACT_OWNER_SOURCE_REF_V1,
+};
+pub use evaluation_identity::*;
+pub use evaluation_policy::*;
+pub use evaluation_run::{
+    prepare_evaluation_run_v1, ContractEvaluationRunV1, EvaluationRunNonceV1,
+    PrepareEvaluationRunInputV1, CONTRACT_EVALUATION_RUN_SCHEMA_REF_V1,
 };
 pub use identity::{
     ContractError, ContractIdV1, ExactBindingV1, ExactRefV1, FingerprintV1, VersionV1,
