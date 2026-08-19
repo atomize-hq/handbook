@@ -44,6 +44,15 @@ impl EvidenceCandidateSourceErrorV1 {
     pub fn detail(&self) -> &str {
         self.detail
     }
+
+    #[cfg(feature = "test-support")]
+    #[doc(hidden)]
+    pub fn for_testing(kind: EvidenceCandidateSourceErrorKindV1) -> Self {
+        Self {
+            kind,
+            detail: "injected candidate-source failure",
+        }
+    }
 }
 
 impl fmt::Display for EvidenceCandidateSourceErrorV1 {

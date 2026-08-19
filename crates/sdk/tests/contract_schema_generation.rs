@@ -22,7 +22,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 135] = [
+const ROOTS: [(&str, &str); 157] = [
     (
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -112,6 +112,10 @@ const ROOTS: [(&str, &str); 135] = [
         "handbook.contract-applicability-outcome/1.0.0.schema.json",
     ),
     (
+        "handbook.contract-claim-verdict@1.0.0",
+        "handbook.contract-claim-verdict/1.0.0.schema.json",
+    ),
+    (
         "handbook.contract-claim@1.0.0",
         "handbook.contract-claim/1.0.0.schema.json",
     ),
@@ -122,6 +126,50 @@ const ROOTS: [(&str, &str); 135] = [
     (
         "handbook.contract-evaluation-lifecycle-basis@1.0.0",
         "handbook.contract-evaluation-lifecycle-basis/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-evaluation-run@1.0.0",
+        "handbook.contract-evaluation-run/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-evidence-admission-policy@1.0.0",
+        "handbook.contract-evidence-admission-policy/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-evidence-candidate@1.0.0",
+        "handbook.contract-evidence-candidate/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-evidence-freshness-policy@1.0.0",
+        "handbook.contract-evidence-freshness-policy/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-evidence-operation-details@1.0.0",
+        "handbook.contract-evidence-operation-details/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-evidence-record@1.0.0",
+        "handbook.contract-evidence-record/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-evidence-stability-policy@1.0.0",
+        "handbook.contract-evidence-stability-policy/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-gate-policy@1.0.0",
+        "handbook.contract-gate-policy/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-gate-result@1.0.0",
+        "handbook.contract-gate-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-local-closeout-policy@1.0.0",
+        "handbook.contract-local-closeout-policy/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-local-closeout-result@1.0.0",
+        "handbook.contract-local-closeout-result/1.0.0.schema.json",
     ),
     (
         "handbook.contract-lifecycle-policy@1.0.0",
@@ -280,12 +328,52 @@ const ROOTS: [(&str, &str); 135] = [
         "handbook.operation.contract-definition-read-result/1.0.0.schema.json",
     ),
     (
+        "handbook.operation.contract-evidence-append-request@1.0.0",
+        "handbook.operation.contract-evidence-append-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-evidence-append-result@1.0.0",
+        "handbook.operation.contract-evidence-append-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-evidence-list-request@1.0.0",
+        "handbook.operation.contract-evidence-list-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-evidence-list-result@1.0.0",
+        "handbook.operation.contract-evidence-list-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-evidence-read-request@1.0.0",
+        "handbook.operation.contract-evidence-read-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-evidence-read-result@1.0.0",
+        "handbook.operation.contract-evidence-read-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-gate-evaluate-request@1.0.0",
+        "handbook.operation.contract-gate-evaluate-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-gate-evaluate-result@1.0.0",
+        "handbook.operation.contract-gate-evaluate-result/1.0.0.schema.json",
+    ),
+    (
         "handbook.operation.contract-lifecycle-transition-request@1.0.0",
         "handbook.operation.contract-lifecycle-transition-request/1.0.0.schema.json",
     ),
     (
         "handbook.operation.contract-lifecycle-transition-result@1.0.0",
         "handbook.operation.contract-lifecycle-transition-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-verdict-evaluate-request@1.0.0",
+        "handbook.operation.contract-verdict-evaluate-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-verdict-evaluate-result@1.0.0",
+        "handbook.operation.contract-verdict-evaluate-result/1.0.0.schema.json",
     ),
     (
         "handbook.operation.flow-resolve-request@1.0.0",
@@ -659,7 +747,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 135);
+    assert_eq!(entries.len(), 157);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries
@@ -805,7 +893,7 @@ fn packet_three_constructor_instances_validate_against_every_new_root_shape() {
         }
         _ => panic!("expired catalog did not return a blocked restart"),
     }
-    assert_eq!(witness.capabilities().len(), 23);
+    assert_eq!(witness.capabilities().len(), 28);
 }
 
 #[test]
@@ -1200,6 +1288,7 @@ fn custom_wire_forms_are_exact_and_unfingerprinted_key_material_is_absent() {
             "handbook.operation.pipeline-state-apply-request@1.0.0",
             "handbook.operation.contract-definition-append-request@1.0.0",
             "handbook.operation.contract-lifecycle-transition-request@1.0.0",
+            "handbook.operation.contract-evidence-append-request@1.0.0",
         ]
         .contains(&exact_ref)
         {

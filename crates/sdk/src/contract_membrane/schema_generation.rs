@@ -10,6 +10,17 @@ use super::artifact_operation::{
     IntakeEvaluationResultV1, KindListResultV1, PromoteRequestV1, ReadResultV1, TargetRequestV1,
     ValidateResultV1, ValidationLayersV1,
 };
+use super::contract_evidence_operation::{
+    ContractClaimVerdictDtoV1, ContractEvaluationRunDtoV1, ContractEvidenceAdmissionPolicyDtoV1,
+    ContractEvidenceAppendResultV1, ContractEvidenceAppendWireV1, ContractEvidenceCandidateDtoV1,
+    ContractEvidenceFreshnessPolicyDtoV1, ContractEvidenceListRequestV1,
+    ContractEvidenceListResultV1, ContractEvidenceOperationDetailsDtoV1,
+    ContractEvidenceReadRequestV1, ContractEvidenceReadResultV1, ContractEvidenceRecordDtoV1,
+    ContractEvidenceStabilityPolicyDtoV1, ContractGateEvaluateRequestV1,
+    ContractGateEvaluateResultV1, ContractGatePolicyDtoV1, ContractGateResultDtoV1,
+    ContractLocalCloseoutPolicyDtoV1, ContractLocalCloseoutResultDtoV1,
+    ContractVerdictEvaluateRequestV1, ContractVerdictEvaluateResultV1,
+};
 use super::contract_operation::{AppendWireV1, TransitionWireV1};
 use super::flow_operation::{
     FlowArtifactPresenceV1, FlowBlockerCategoryV1, FlowBlockerV1, FlowBudgetByteDomainV1,
@@ -6743,7 +6754,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 135] = [
+const INVENTORY: [SchemaDescriptor; 157] = [
     descriptor::<ArtifactProblemDetailsV1>(
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -6836,6 +6847,10 @@ const INVENTORY: [SchemaDescriptor; 135] = [
         "handbook.contract-applicability-outcome@1.0.0",
         "handbook.contract-applicability-outcome/1.0.0.schema.json",
     ),
+    descriptor::<ContractClaimVerdictDtoV1>(
+        "handbook.contract-claim-verdict@1.0.0",
+        "handbook.contract-claim-verdict/1.0.0.schema.json",
+    ),
     descriptor::<ContractClaimDtoV1>(
         "handbook.contract-claim@1.0.0",
         "handbook.contract-claim/1.0.0.schema.json",
@@ -6848,6 +6863,42 @@ const INVENTORY: [SchemaDescriptor; 135] = [
         "handbook.contract-evaluation-lifecycle-basis@1.0.0",
         "handbook.contract-evaluation-lifecycle-basis/1.0.0.schema.json",
     ),
+    descriptor::<ContractEvaluationRunDtoV1>(
+        "handbook.contract-evaluation-run@1.0.0",
+        "handbook.contract-evaluation-run/1.0.0.schema.json",
+    ),
+    descriptor::<ContractEvidenceAdmissionPolicyDtoV1>(
+        "handbook.contract-evidence-admission-policy@1.0.0",
+        "handbook.contract-evidence-admission-policy/1.0.0.schema.json",
+    ),
+    descriptor::<ContractEvidenceCandidateDtoV1>(
+        "handbook.contract-evidence-candidate@1.0.0",
+        "handbook.contract-evidence-candidate/1.0.0.schema.json",
+    ),
+    descriptor::<ContractEvidenceFreshnessPolicyDtoV1>(
+        "handbook.contract-evidence-freshness-policy@1.0.0",
+        "handbook.contract-evidence-freshness-policy/1.0.0.schema.json",
+    ),
+    descriptor::<ContractEvidenceOperationDetailsDtoV1>(
+        "handbook.contract-evidence-operation-details@1.0.0",
+        "handbook.contract-evidence-operation-details/1.0.0.schema.json",
+    ),
+    descriptor::<ContractEvidenceRecordDtoV1>(
+        "handbook.contract-evidence-record@1.0.0",
+        "handbook.contract-evidence-record/1.0.0.schema.json",
+    ),
+    descriptor::<ContractEvidenceStabilityPolicyDtoV1>(
+        "handbook.contract-evidence-stability-policy@1.0.0",
+        "handbook.contract-evidence-stability-policy/1.0.0.schema.json",
+    ),
+    descriptor::<ContractGatePolicyDtoV1>(
+        "handbook.contract-gate-policy@1.0.0",
+        "handbook.contract-gate-policy/1.0.0.schema.json",
+    ),
+    descriptor::<ContractGateResultDtoV1>(
+        "handbook.contract-gate-result@1.0.0",
+        "handbook.contract-gate-result/1.0.0.schema.json",
+    ),
     descriptor::<ContractLifecyclePolicyDtoV1>(
         "handbook.contract-lifecycle-policy@1.0.0",
         "handbook.contract-lifecycle-policy/1.0.0.schema.json",
@@ -6855,6 +6906,14 @@ const INVENTORY: [SchemaDescriptor; 135] = [
     descriptor::<ContractLifecycleTransitionDtoV1>(
         "handbook.contract-lifecycle-transition@1.0.0",
         "handbook.contract-lifecycle-transition/1.0.0.schema.json",
+    ),
+    descriptor::<ContractLocalCloseoutPolicyDtoV1>(
+        "handbook.contract-local-closeout-policy@1.0.0",
+        "handbook.contract-local-closeout-policy/1.0.0.schema.json",
+    ),
+    descriptor::<ContractLocalCloseoutResultDtoV1>(
+        "handbook.contract-local-closeout-result@1.0.0",
+        "handbook.contract-local-closeout-result/1.0.0.schema.json",
     ),
     descriptor::<ContractOperationProblemDetailsV1>(
         "handbook.contract-operation-details@1.0.0",
@@ -7007,6 +7066,38 @@ const INVENTORY: [SchemaDescriptor; 135] = [
         "handbook.operation.contract-definition-read-result@1.0.0",
         "handbook.operation.contract-definition-read-result/1.0.0.schema.json",
     ),
+    descriptor::<ContractEvidenceAppendWireV1>(
+        "handbook.operation.contract-evidence-append-request@1.0.0",
+        "handbook.operation.contract-evidence-append-request/1.0.0.schema.json",
+    ),
+    descriptor::<ContractEvidenceAppendResultV1>(
+        "handbook.operation.contract-evidence-append-result@1.0.0",
+        "handbook.operation.contract-evidence-append-result/1.0.0.schema.json",
+    ),
+    descriptor::<ContractEvidenceListRequestV1>(
+        "handbook.operation.contract-evidence-list-request@1.0.0",
+        "handbook.operation.contract-evidence-list-request/1.0.0.schema.json",
+    ),
+    descriptor::<ContractEvidenceListResultV1>(
+        "handbook.operation.contract-evidence-list-result@1.0.0",
+        "handbook.operation.contract-evidence-list-result/1.0.0.schema.json",
+    ),
+    descriptor::<ContractEvidenceReadRequestV1>(
+        "handbook.operation.contract-evidence-read-request@1.0.0",
+        "handbook.operation.contract-evidence-read-request/1.0.0.schema.json",
+    ),
+    descriptor::<ContractEvidenceReadResultV1>(
+        "handbook.operation.contract-evidence-read-result@1.0.0",
+        "handbook.operation.contract-evidence-read-result/1.0.0.schema.json",
+    ),
+    descriptor::<ContractGateEvaluateRequestV1>(
+        "handbook.operation.contract-gate-evaluate-request@1.0.0",
+        "handbook.operation.contract-gate-evaluate-request/1.0.0.schema.json",
+    ),
+    descriptor::<ContractGateEvaluateResultV1>(
+        "handbook.operation.contract-gate-evaluate-result@1.0.0",
+        "handbook.operation.contract-gate-evaluate-result/1.0.0.schema.json",
+    ),
     descriptor::<TransitionWireV1>(
         "handbook.operation.contract-lifecycle-transition-request@1.0.0",
         "handbook.operation.contract-lifecycle-transition-request/1.0.0.schema.json",
@@ -7014,6 +7105,14 @@ const INVENTORY: [SchemaDescriptor; 135] = [
     descriptor::<ContractLifecycleTransitionResultV1>(
         "handbook.operation.contract-lifecycle-transition-result@1.0.0",
         "handbook.operation.contract-lifecycle-transition-result/1.0.0.schema.json",
+    ),
+    descriptor::<ContractVerdictEvaluateRequestV1>(
+        "handbook.operation.contract-verdict-evaluate-request@1.0.0",
+        "handbook.operation.contract-verdict-evaluate-request/1.0.0.schema.json",
+    ),
+    descriptor::<ContractVerdictEvaluateResultV1>(
+        "handbook.operation.contract-verdict-evaluate-result@1.0.0",
+        "handbook.operation.contract-verdict-evaluate-result/1.0.0.schema.json",
     ),
     descriptor::<FlowResolveRequestV1>(
         "handbook.operation.flow-resolve-request@1.0.0",
@@ -7512,8 +7611,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 135 {
-        return Err("schema inventory must contain exactly 135 entries".to_owned());
+    if INVENTORY.len() != 157 {
+        return Err("schema inventory must contain exactly 157 entries".to_owned());
     }
 
     let mut previous_ref = None;
@@ -7598,6 +7697,7 @@ fn validate_schema(
             | "handbook.operation.pipeline-handoff-emit-request@1.0.0"
             | "handbook.operation.pipeline-state-apply-request@1.0.0"
             | "handbook.operation.contract-definition-append-request@1.0.0"
+            | "handbook.operation.contract-evidence-append-request@1.0.0"
             | "handbook.operation.contract-lifecycle-transition-request@1.0.0"
     ) {
         validate_posture_request_raw_key_schema(value, descriptor.relative_path)

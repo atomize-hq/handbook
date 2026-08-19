@@ -177,6 +177,38 @@ impl HandbookSdkV1 {
         contract_membrane::execute_contract_operation(&self.repo_root, request)
     }
 
+    /// Executes one exact evidence/verdict/gate ordinary operation once.
+    pub fn execute_contract_evidence_operation(
+        &self,
+        request: &contract_membrane::OperationRequestV1,
+    ) -> Result<contract_membrane::OperationResponseV1, contract_membrane::ContractError> {
+        contract_membrane::execute_contract_evidence_operation(&self.repo_root, request)
+    }
+
+    /// Executes an evidence append or owner-derived evaluation with explicit runtime facts.
+    #[allow(clippy::too_many_arguments)]
+    pub fn execute_contract_evidence_operation_with_context<S, C>(
+        &self,
+        request: &contract_membrane::OperationRequestV1,
+        source: &mut S,
+        source_currentness: &mut C,
+        resolution_stack: &handbook_engine::ContextResolutionStackDefinition,
+        policy_registry: &handbook_contracts::EvaluationPolicyRegistryV1,
+    ) -> Result<contract_membrane::OperationResponseV1, contract_membrane::ContractError>
+    where
+        S: handbook_contracts::EvidenceCandidateSourceV1,
+        C: handbook_engine::SourceCurrentnessPortV1,
+    {
+        contract_membrane::execute_contract_evidence_operation_with_context(
+            &self.repo_root,
+            request,
+            source,
+            source_currentness,
+            resolution_stack,
+            policy_registry,
+        )
+    }
+
     /// Executes one exact Contracts mutation with an injected native authenticator.
     pub fn execute_contract_operation_with_authenticator<P>(
         &self,

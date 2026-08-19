@@ -97,7 +97,7 @@ fn inventory_discovery_use_case_omission_and_schema_roots_close_exactly() {
         .map(|row| row.operation_ref().as_str())
         .collect::<BTreeSet<_>>();
     assert_eq!(actual_discoverable, expected_discoverable);
-    assert_eq!(expected_discoverable.len(), 23);
+    assert_eq!(expected_discoverable.len(), 28);
 
     let route_resolve = rows
         .iter()

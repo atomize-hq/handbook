@@ -10,7 +10,7 @@ use super::{
 use std::collections::BTreeSet;
 
 const INVENTORY_DIGEST: &str =
-    "sha256:0beed3959b30cb80a8b260258556b21d012c0029babbc110dbe05025e18d3126";
+    "sha256:324096be7e1fbed481f2609b90f9f246f130bcdac6ef40820284e730e93b20d6";
 
 macro_rules! schema_asset {
     ($reference:literal, $path:literal) => {
@@ -19,7 +19,7 @@ macro_rules! schema_asset {
 }
 
 const SCHEMA_MANIFEST_BYTES: &[u8] = include_bytes!("../../schemas/manifest.json");
-const SCHEMA_ASSETS: [(&str, &[u8]); 135] = [
+const SCHEMA_ASSETS: [(&str, &[u8]); 157] = [
     schema_asset!(
         "handbook.artifact-operation-details@1.0.0",
         "../../schemas/2020-12/handbook.artifact-operation-details/1.0.0.schema.json"
@@ -109,6 +109,10 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 135] = [
         "../../schemas/2020-12/handbook.contract-applicability-outcome/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.contract-claim-verdict@1.0.0",
+        "../../schemas/2020-12/handbook.contract-claim-verdict/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.contract-claim@1.0.0",
         "../../schemas/2020-12/handbook.contract-claim/1.0.0.schema.json"
     ),
@@ -121,12 +125,56 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 135] = [
         "../../schemas/2020-12/handbook.contract-evaluation-lifecycle-basis/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.contract-evaluation-run@1.0.0",
+        "../../schemas/2020-12/handbook.contract-evaluation-run/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.contract-evidence-admission-policy@1.0.0",
+        "../../schemas/2020-12/handbook.contract-evidence-admission-policy/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.contract-evidence-candidate@1.0.0",
+        "../../schemas/2020-12/handbook.contract-evidence-candidate/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.contract-evidence-freshness-policy@1.0.0",
+        "../../schemas/2020-12/handbook.contract-evidence-freshness-policy/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.contract-evidence-operation-details@1.0.0",
+        "../../schemas/2020-12/handbook.contract-evidence-operation-details/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.contract-evidence-record@1.0.0",
+        "../../schemas/2020-12/handbook.contract-evidence-record/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.contract-evidence-stability-policy@1.0.0",
+        "../../schemas/2020-12/handbook.contract-evidence-stability-policy/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.contract-gate-policy@1.0.0",
+        "../../schemas/2020-12/handbook.contract-gate-policy/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.contract-gate-result@1.0.0",
+        "../../schemas/2020-12/handbook.contract-gate-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.contract-lifecycle-policy@1.0.0",
         "../../schemas/2020-12/handbook.contract-lifecycle-policy/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.contract-lifecycle-transition@1.0.0",
         "../../schemas/2020-12/handbook.contract-lifecycle-transition/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.contract-local-closeout-policy@1.0.0",
+        "../../schemas/2020-12/handbook.contract-local-closeout-policy/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.contract-local-closeout-result@1.0.0",
+        "../../schemas/2020-12/handbook.contract-local-closeout-result/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.contract-operation-details@1.0.0",
@@ -277,12 +325,52 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 135] = [
         "../../schemas/2020-12/handbook.operation.contract-definition-read-result/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.operation.contract-evidence-append-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.contract-evidence-append-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.contract-evidence-append-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.contract-evidence-append-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.contract-evidence-list-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.contract-evidence-list-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.contract-evidence-list-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.contract-evidence-list-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.contract-evidence-read-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.contract-evidence-read-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.contract-evidence-read-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.contract-evidence-read-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.contract-gate-evaluate-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.contract-gate-evaluate-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.contract-gate-evaluate-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.contract-gate-evaluate-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.operation.contract-lifecycle-transition-request@1.0.0",
         "../../schemas/2020-12/handbook.operation.contract-lifecycle-transition-request/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.operation.contract-lifecycle-transition-result@1.0.0",
         "../../schemas/2020-12/handbook.operation.contract-lifecycle-transition-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.contract-verdict-evaluate-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.contract-verdict-evaluate-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.contract-verdict-evaluate-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.contract-verdict-evaluate-result/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.operation.flow-resolve-request@1.0.0",
@@ -620,6 +708,8 @@ impl ProductionWitness {
         capabilities.extend(super::pipeline_operation::current_pipeline_capabilities()?);
         capabilities.push(super::posture::current_posture_capability()?);
         capabilities.extend(super::contract_operation::current_contract_capabilities()?);
+        capabilities
+            .extend(super::contract_evidence_operation::current_contract_evidence_capabilities()?);
         capabilities.sort_by(|left, right| {
             left.operation()
                 .reference()
@@ -848,7 +938,7 @@ fn verify_schema_assets(
         &ContractLimits::packet0(),
     )
     .map_err(|_| ProductionWitnessError::StaleManifest)?;
-    if manifest.len() != 135 || assets.len() != 135 || manifest.len() != assets.len() {
+    if manifest.len() != 157 || assets.len() != 157 || manifest.len() != assets.len() {
         return Err(ProductionWitnessError::ManifestCountMismatch);
     }
     let mut seen = BTreeSet::new();
@@ -899,7 +989,9 @@ fn verify_inventory() -> Result<(), ProductionWitnessError> {
                 .contains(&row.operation_ref().as_str());
             let is_flow = row.operation_ref().as_str() == super::flow_operation::FLOW_OPERATION_REF;
             let is_contract =
-                super::contract_operation::inventory_row_is_contract(row.operation_ref());
+                super::contract_operation::inventory_row_is_contract(row.operation_ref())
+                    || super::contract_evidence_operation::CONTRACT_EVIDENCE_OPERATION_REFS
+                        .contains(&row.operation_ref().as_str());
             let is_pipeline = [
                 "pipeline.catalog.list@1.0.0",
                 "pipeline.catalog.read@1.0.0",
@@ -1143,10 +1235,10 @@ mod tests {
         let witness =
             ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
                 .unwrap();
-        assert_eq!(witness.schema_manifest().len(), 135);
+        assert_eq!(witness.schema_manifest().len(), 157);
         assert_eq!(witness.owner_versions().len(), 4);
         assert_eq!(witness.profiles().len(), 3);
-        assert_eq!(witness.capabilities().len(), 23);
+        assert_eq!(witness.capabilities().len(), 28);
         let posture = witness
             .capabilities()
             .iter()
@@ -1194,7 +1286,7 @@ mod tests {
         }
         assert_eq!(
             witness.catalog_roots().operations().total_entries().get(),
-            23
+            28
         );
         assert_ne!(
             witness.descriptor().schema().fingerprint(),

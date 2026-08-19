@@ -26,7 +26,7 @@ const FACADE_ROOTS: [&str; 5] = [
     "handbook.use-case-request@1.0.0",
 ];
 
-const OPERATIONS: [&str; 23] = [
+const OPERATIONS: [&str; 28] = [
     "artifact.kind.list@1.0.0",
     "artifact.instance.list@1.0.0",
     "artifact.read@1.0.0",
@@ -50,6 +50,11 @@ const OPERATIONS: [&str; 23] = [
     "contract.definition.read@1.0.0",
     "contract.definition.append@1.0.0",
     "contract.lifecycle.transition@1.0.0",
+    "contract.evidence.list@1.0.0",
+    "contract.evidence.read@1.0.0",
+    "contract.evidence.append@1.0.0",
+    "contract.verdict.evaluate@1.0.0",
+    "contract.gate.evaluate@1.0.0",
 ];
 
 const USE_CASES: [&str; 6] = [
@@ -82,7 +87,7 @@ fn integrated_facade_surface_closes_exact_commands_contracts_routes_and_omission
         .iter()
         .map(|entry| entry.schema().reference().as_str())
         .collect::<BTreeSet<_>>();
-    assert_eq!(manifest_refs.len(), 135);
+    assert_eq!(manifest_refs.len(), 157);
     assert_eq!(
         manifest_refs
             .intersection(&FACADE_ROOTS.into_iter().collect())
@@ -149,7 +154,7 @@ fn integrated_facade_surface_closes_exact_commands_contracts_routes_and_omission
         rows.iter()
             .filter(|row| row.current_transports().is_empty())
             .count(),
-        39
+        34
     );
 
     let limits = ContractLimits::packet0();

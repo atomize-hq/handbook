@@ -14,6 +14,7 @@ mod evaluation_policy;
 mod evaluation_run;
 mod evidence_admission;
 mod evidence_candidate_source;
+pub mod evidence_operation_admission;
 mod gate_composition;
 mod identity;
 mod lifecycle;

@@ -364,7 +364,19 @@ impl ContractOwnerRepositoryV1 {
         if let Some(replay) = self.with_lock(|owner| {
             owner.recover_locked()?;
             owner.validate_inventory()?;
-            owner.replay_evidence(&key_fingerprint, &request_fingerprint)
+            if let Some(replay) = owner.replay_evidence(&key_fingerprint, &request_fingerprint)? {
+                return Ok(Some(replay));
+            }
+            if owner.load_evidence_ledgers()?.iter().any(|ledger| {
+                ledger.receipt.candidate == *candidate
+                    || ledger.receipt.request_fingerprint == request_fingerprint
+            }) {
+                return Err(repository_error(
+                    ContractOwnerRepositoryErrorKindV1::IdempotencyConflict,
+                    "evidence candidate or request is already bound",
+                ));
+            }
+            Ok(None)
         })? {
             return Ok(replay);
         }
@@ -1256,30 +1268,71 @@ fn evidence_key_fingerprint(key: &str) -> Result<FingerprintV1, ContractOwnerRep
     .map_err(|_| durability("evidence key identity failed"))
 }
 fn map_candidate_source(
-    _: crate::EvidenceCandidateSourceErrorV1,
+    error: crate::EvidenceCandidateSourceErrorV1,
 ) -> ContractOwnerRepositoryErrorV1 {
-    durability("evidence candidate source is unavailable or refused")
+    use crate::EvidenceCandidateSourceErrorKindV1 as K;
+    let kind = match error.kind() {
+        K::Missing => ContractOwnerRepositoryErrorKindV1::EvidenceCandidateMissing,
+        K::Malformed => ContractOwnerRepositoryErrorKindV1::InvalidRequest,
+        K::OverLimit => ContractOwnerRepositoryErrorKindV1::BoundExceeded,
+        K::CandidateSubstituted | K::InvalidRequest => {
+            ContractOwnerRepositoryErrorKindV1::RecordSubstituted
+        }
+        K::AuthorityAbsent
+        | K::AuthorityAmbiguous
+        | K::StaleAuthority
+        | K::AuthenticationRefused => ContractOwnerRepositoryErrorKindV1::EvidenceSourceRefused,
+        K::Unavailable => ContractOwnerRepositoryErrorKindV1::EvidenceSourceUnavailable,
+    };
+    repository_error(
+        kind,
+        "evidence candidate source refused the exact candidate",
+    )
 }
 fn map_candidate_admission(
     error: crate::EvidenceCandidateAdmissionErrorV1,
 ) -> ContractOwnerRepositoryErrorV1 {
     match error.kind() {
+        EvidenceCandidateAdmissionErrorKindV1::InvalidCandidate => repository_error(
+            ContractOwnerRepositoryErrorKindV1::EvidenceCandidateIneligible,
+            "evidence candidate is ineligible",
+        ),
+        EvidenceCandidateAdmissionErrorKindV1::CandidateMissing => repository_error(
+            ContractOwnerRepositoryErrorKindV1::EvidenceCandidateMissing,
+            "evidence candidate is missing",
+        ),
+        EvidenceCandidateAdmissionErrorKindV1::CandidateMalformed => {
+            invalid("evidence candidate is malformed")
+        }
         EvidenceCandidateAdmissionErrorKindV1::StaleLifecycle => repository_error(
             ContractOwnerRepositoryErrorKindV1::LifecycleRefused,
             "evidence lifecycle is stale",
         ),
-        EvidenceCandidateAdmissionErrorKindV1::SourceUnavailable => {
-            durability("evidence source is unavailable")
-        }
+        EvidenceCandidateAdmissionErrorKindV1::SourceUnavailable => repository_error(
+            ContractOwnerRepositoryErrorKindV1::EvidenceSourceUnavailable,
+            "evidence source is unavailable",
+        ),
         EvidenceCandidateAdmissionErrorKindV1::CandidateOverLimit => {
             bound("evidence candidate exceeds its bound")
         }
         EvidenceCandidateAdmissionErrorKindV1::CandidateSubstituted
-        | EvidenceCandidateAdmissionErrorKindV1::StaleSource
-        | EvidenceCandidateAdmissionErrorKindV1::SourceAuthorityRefused
         | EvidenceCandidateAdmissionErrorKindV1::PolicySubstituted => {
             substituted("evidence admission currentness or identity was substituted")
         }
-        _ => invalid("evidence candidate was not admitted"),
+        EvidenceCandidateAdmissionErrorKindV1::StaleSource
+        | EvidenceCandidateAdmissionErrorKindV1::SourceAuthorityRefused => repository_error(
+            ContractOwnerRepositoryErrorKindV1::EvidenceSourceRefused,
+            "evidence source authority is stale or refused",
+        ),
+        EvidenceCandidateAdmissionErrorKindV1::InsufficientResolution => repository_error(
+            ContractOwnerRepositoryErrorKindV1::EvidenceResolutionInsufficient,
+            "evidence candidate Resolution is insufficient",
+        ),
+        EvidenceCandidateAdmissionErrorKindV1::ClockIndeterminate => {
+            durability("evidence candidate time is indeterminate")
+        }
+        EvidenceCandidateAdmissionErrorKindV1::InternalInvariant => {
+            recovery("evidence candidate admission invariant failed")
+        }
     }
 }

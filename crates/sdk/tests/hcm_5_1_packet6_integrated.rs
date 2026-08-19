@@ -54,8 +54,8 @@ fn final_owner_to_sdk_and_generic_transport_proof_is_exact_and_fail_closed() {
 
     assert_eq!(definitions.len(), 4);
     assert_eq!(inventory.len(), 62);
-    assert_eq!(witness.capabilities().len(), 23);
-    assert_eq!(witness.schema_manifest().len(), 135);
+    assert_eq!(witness.capabilities().len(), 28);
+    assert_eq!(witness.schema_manifest().len(), 157);
     for ((operation_ref, class), definition) in OPERATIONS.iter().zip(&definitions) {
         assert_eq!(definition.operation().as_str(), *operation_ref);
         assert_eq!(definition.class(), *class);
@@ -563,7 +563,7 @@ fn prove_list_read_and_generic_consumers(root: &Path, contract: &ExactBinding) {
     let CatalogReadResponseBodyV1::CapabilityPage(page) = page.response() else {
         panic!("capability catalog returned a non-capability page");
     };
-    assert_eq!(page.root().total_entries().get(), 23);
+    assert_eq!(page.root().total_entries().get(), 28);
     let contract_operations = page
         .entries()
         .iter()
@@ -576,13 +576,11 @@ fn prove_list_read_and_generic_consumers(root: &Path, contract: &ExactBinding) {
         })
         .map(|entry| entry.operation().reference().as_str())
         .collect::<BTreeSet<_>>();
-    assert_eq!(
-        contract_operations,
-        OPERATIONS
-            .iter()
-            .map(|(operation_ref, _)| *operation_ref)
-            .collect()
-    );
+    let predecessor_operations = OPERATIONS
+        .iter()
+        .map(|(operation_ref, _)| *operation_ref)
+        .collect::<BTreeSet<_>>();
+    assert!(predecessor_operations.is_subset(&contract_operations));
 
     let capability = page
         .entries()

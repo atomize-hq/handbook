@@ -9,7 +9,7 @@ or another Phase-5 slice.
 
 ## Current admission state
 
-**HCM-5.2 Packets 1–5 are implemented. The slice remains open; Packets 6–7 are
+**HCM-5.2 Packets 1–6 are implemented. The slice remains open; Packet 7 is
 unselected.**
 
 The hard predecessor is satisfied. The completed
@@ -25,12 +25,16 @@ complete through commits `b37a307`, `dd51ed8`, `cfd3d35`, `7925652`,
 
 Further HCM-5.2 product execution remains inadmissible until a fresh packet task
 proves its declared predecessor and scope immediately before edits. Packets
-1–5 add the owner-native identity/policy kernel, atomic read-only evaluation-run
+1–6 add the owner-native identity/policy kernel, atomic read-only evaluation-run
 preparation, the sealed read-only candidate-source normalization boundary, the
 retained-root immutable-all canonical-evidence repository, pure closed claim-
 verdict evaluator, and pure content-addressed gate plus sibling local-closeout
-composition fixed by their rows below. They add no derived-result persistence,
-SDK surface, parent-promotion/posture behavior, or executor.
+composition fixed by their rows below. They also close the exact five reserved
+ordinary operations through owner admission, outward SDK mapping, the existing
+generic dispatch seam, 157 deterministic schema roots, and 28 capability
+witnesses without changing the 62-row inventory. They add no derived-result
+persistence, adapter-specific consumer route, Packet-7 integrated consumer
+proof, parent-promotion/posture behavior, or executor.
 
 ## Outcome
 
@@ -82,8 +86,8 @@ Current source and tests remain product truth. This authority is grounded in:
   [`seam crosswalk`](../../seam-crosswalk.md);
 - the completed [`HCM-5.1` authority](../HCM-5.1/README.md), its owner crate
   under `crates/contracts/`, and its final owner/SDK/generic-consumer tests;
-- the current exact 62-row inventory, deterministic 135-root manifest, and
-  immutable 23-capability production witness under
+- the exact 62-row inventory and the predecessor starting state of a
+  deterministic 135-root manifest and immutable 23-capability production witness under
   `crates/sdk/src/contract_membrane/` and `crates/sdk/schemas/`; and
 - current Engine Context Resolution, currentness, authority-admission, and
   repository-durability precedents.

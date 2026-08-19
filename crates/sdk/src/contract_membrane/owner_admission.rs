@@ -11,6 +11,9 @@ pub struct OwnerAdmissionToken {
 #[derive(Debug, Eq, PartialEq)]
 enum OwnerToken {
     Contracts(handbook_contracts::operation_admission::OwnerOperationAdmission),
+    ContractEvidence(
+        handbook_contracts::evidence_operation_admission::EvidenceOwnerOperationAdmission,
+    ),
     Engine(handbook_engine::operation_admission::OwnerOperationAdmission),
     Flow(handbook_flow::operation_admission::OwnerOperationAdmission),
     Pipeline(handbook_pipeline::operation_admission::OwnerOperationAdmission),
@@ -20,6 +23,7 @@ impl OwnerAdmissionToken {
     pub fn operation_ref(&self) -> &str {
         match &self.owner {
             OwnerToken::Contracts(token) => token.operation_ref(),
+            OwnerToken::ContractEvidence(token) => token.operation_ref(),
             OwnerToken::Engine(token) => token.operation_ref(),
             OwnerToken::Flow(token) => token.operation_ref(),
             OwnerToken::Pipeline(token) => token.operation_ref(),
@@ -29,6 +33,7 @@ impl OwnerAdmissionToken {
     pub fn definition_fingerprint(&self) -> &str {
         match &self.owner {
             OwnerToken::Contracts(token) => token.definition_fingerprint(),
+            OwnerToken::ContractEvidence(token) => token.definition_fingerprint(),
             OwnerToken::Engine(token) => token.definition_fingerprint(),
             OwnerToken::Flow(token) => token.definition_fingerprint(),
             OwnerToken::Pipeline(token) => token.definition_fingerprint(),
@@ -96,13 +101,23 @@ fn admit_contracts(
         write_set_fingerprint: parts.write_set_fingerprint.as_str(),
         required_capabilities_fingerprint: parts.required_capabilities_fingerprint.as_str(),
     };
-    handbook_contracts::operation_admission::admit_contract_operation(&claim)
-        .map(|owner| {
-            OperationAdmissionResult::Admitted(OwnerAdmissionToken {
-                owner: OwnerToken::Contracts(owner),
+    if super::CONTRACT_EVIDENCE_OPERATION_REFS.contains(&definition.operation().as_str()) {
+        handbook_contracts::evidence_operation_admission::admit_contract_evidence_operation(&claim)
+            .map(|owner| {
+                OperationAdmissionResult::Admitted(OwnerAdmissionToken {
+                    owner: OwnerToken::ContractEvidence(owner),
+                })
             })
-        })
-        .map_err(|_| ContractError::InvalidInvariant)
+            .map_err(|_| ContractError::InvalidInvariant)
+    } else {
+        handbook_contracts::operation_admission::admit_contract_operation(&claim)
+            .map(|owner| {
+                OperationAdmissionResult::Admitted(OwnerAdmissionToken {
+                    owner: OwnerToken::Contracts(owner),
+                })
+            })
+            .map_err(|_| ContractError::InvalidInvariant)
+    }
 }
 
 fn admit_engine(

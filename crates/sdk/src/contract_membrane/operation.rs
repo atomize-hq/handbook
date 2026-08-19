@@ -751,11 +751,11 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
         ("contract.definition.read", C, L, RO, OD),
         ("contract.definition.append", C, L, AP, OD),
         ("contract.lifecycle.transition", C, L, CW, OD),
-        ("contract.evidence.list", P, P5, RO, OD),
-        ("contract.evidence.read", P, P5, RO, OD),
-        ("contract.evidence.append", P, P5, AP, OD),
-        ("contract.verdict.evaluate", P, P5, RO, OD),
-        ("contract.gate.evaluate", P, P5, RO, OD),
+        ("contract.evidence.list", C, L, RO, OD),
+        ("contract.evidence.read", C, L, RO, OD),
+        ("contract.evidence.append", C, L, AP, OD),
+        ("contract.verdict.evaluate", C, L, RO, OD),
+        ("contract.gate.evaluate", C, L, RO, OD),
         ("dock.manifest.list", P, P5, RO, OD),
         ("dock.manifest.read", P, P5, RO, OD),
         ("dock.run", P, P5, AP, OD),
@@ -797,6 +797,11 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                         | "contract.definition.read"
                         | "contract.definition.append"
                         | "contract.lifecycle.transition"
+                        | "contract.evidence.list"
+                        | "contract.evidence.read"
+                        | "contract.evidence.append"
+                        | "contract.verdict.evaluate"
+                        | "contract.gate.evaluate"
                 );
                 OperationInventoryRow {
                     proof_ordinal: (index + 1) as u16,

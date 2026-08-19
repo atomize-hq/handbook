@@ -1967,6 +1967,10 @@ fn signed_repository_candidate_is_independently_normalized_into_owner_evidence()
         conflicting_key.unwrap_err().kind(),
         ContractOwnerRepositoryErrorKindV1::IdempotencyConflict
     );
+    assert_eq!(
+        append_currentness.calls, 9,
+        "key conflicts perform no external callbacks"
+    );
     let conflicting_candidate = owner.append_evidence_candidate_v1(
         &mut source,
         &mut append_currentness,
@@ -1978,6 +1982,10 @@ fn signed_repository_candidate_is_independently_normalized_into_owner_evidence()
     assert_eq!(
         conflicting_candidate.unwrap_err().kind(),
         ContractOwnerRepositoryErrorKindV1::IdempotencyConflict
+    );
+    assert_eq!(
+        append_currentness.calls, 9,
+        "candidate conflicts perform no external callbacks"
     );
     let persisted = all_persisted_bytes(repo.path());
     assert!(!persisted
@@ -2008,7 +2016,7 @@ fn signed_repository_candidate_is_independently_normalized_into_owner_evidence()
         .unwrap_err();
     assert_eq!(
         final_window_refusal.kind(),
-        ContractOwnerRepositoryErrorKindV1::RecordSubstituted
+        ContractOwnerRepositoryErrorKindV1::EvidenceSourceRefused
     );
     assert_eq!(final_window_currentness.calls, 3);
     assert_eq!(
@@ -2280,7 +2288,7 @@ fn signed_repository_candidate_is_independently_normalized_into_owner_evidence()
                     Ok(execution) => return execution,
                     Err(error)
                         if error.kind()
-                            == ContractOwnerRepositoryErrorKindV1::DurabilityUncertain =>
+                            == ContractOwnerRepositoryErrorKindV1::EvidenceSourceUnavailable =>
                     {
                         std::thread::yield_now();
                     }

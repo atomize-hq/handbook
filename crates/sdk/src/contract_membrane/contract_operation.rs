@@ -1027,6 +1027,15 @@ fn owner_problem(kind: ContractOwnerRepositoryErrorKindV1) -> ProblemProjection 
             ProblemCategory::Safety,
             RetryDirective::Never,
         ),
+        K::EvidenceCandidateMissing
+        | K::EvidenceCandidateIneligible
+        | K::EvidenceResolutionInsufficient
+        | K::EvidenceSourceRefused
+        | K::EvidenceSourceUnavailable => (
+            ContractProblemCauseV1::RecoveryAmbiguous,
+            ProblemCategory::Safety,
+            RetryDirective::Never,
+        ),
     };
     ProblemProjection {
         cause,

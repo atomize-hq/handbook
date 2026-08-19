@@ -122,17 +122,16 @@ fn four_contract_operations_have_exact_discovery_schema_owner_and_transport_pari
         assert_eq!(row.current_transports(), definition.declared_transports());
     }
 
-    assert_eq!(
-        capabilities
-            .keys()
-            .filter(|operation_ref| operation_ref.starts_with("contract."))
-            .copied()
-            .collect::<BTreeSet<_>>(),
-        OPERATIONS
-            .iter()
-            .map(|(operation_ref, _)| *operation_ref)
-            .collect()
-    );
+    let current_contract_operations = capabilities
+        .keys()
+        .filter(|operation_ref| operation_ref.starts_with("contract."))
+        .copied()
+        .collect::<BTreeSet<_>>();
+    let predecessor_operations = OPERATIONS
+        .iter()
+        .map(|(operation_ref, _)| *operation_ref)
+        .collect::<BTreeSet<_>>();
+    assert!(predecessor_operations.is_subset(&current_contract_operations));
 }
 
 #[test]

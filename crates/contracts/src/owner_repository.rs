@@ -38,6 +38,11 @@ static OWNER_PROCESS_LOCK: Mutex<()> = Mutex::new(());
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum ContractOwnerRepositoryErrorKindV1 {
     InvalidRequest,
+    EvidenceCandidateMissing,
+    EvidenceCandidateIneligible,
+    EvidenceResolutionInsufficient,
+    EvidenceSourceRefused,
+    EvidenceSourceUnavailable,
     UnsafeFilesystem,
     BoundExceeded,
     DurabilityUncertain,

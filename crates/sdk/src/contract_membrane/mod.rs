@@ -6,6 +6,7 @@ mod bootstrap_envelope;
 mod bounds;
 mod catalog;
 mod consumer;
+mod contract_evidence_operation;
 mod contract_operation;
 mod dto;
 mod envelope;
@@ -52,6 +53,26 @@ pub use bounds::{
 };
 pub use catalog::{CatalogCursor, CatalogPage, CatalogRoot};
 pub use consumer::{CapabilityConsumer, CapabilityConsumerError};
+pub use contract_evidence_operation::{
+    contract_evidence_append_operation_request, contract_evidence_list_operation_request,
+    contract_evidence_operation_definition, contract_evidence_operation_definitions,
+    contract_evidence_read_operation_request, contract_gate_evaluate_operation_request,
+    contract_verdict_evaluate_operation_request, execute_contract_evidence_operation,
+    execute_contract_evidence_operation_with_context, ContractClaimVerdictDtoV1,
+    ContractEvaluationRunDtoV1, ContractEvidenceAdmissionPolicyDtoV1,
+    ContractEvidenceAppendReceiptDtoV1, ContractEvidenceAppendRequestV1,
+    ContractEvidenceAppendResultV1, ContractEvidenceCandidateDtoV1,
+    ContractEvidenceFreshnessPolicyDtoV1, ContractEvidenceListEntryV1,
+    ContractEvidenceListRequestV1, ContractEvidenceListResultV1,
+    ContractEvidenceOperationDetailsDtoV1, ContractEvidenceOperationSchemaValidator,
+    ContractEvidenceProblemCauseV1, ContractEvidenceReadRequestV1, ContractEvidenceReadResultV1,
+    ContractEvidenceRecordDtoV1, ContractEvidenceRetentionV1, ContractEvidenceStabilityPolicyDtoV1,
+    ContractGateEvaluateRequestV1, ContractGateEvaluateResultV1, ContractGatePolicyDtoV1,
+    ContractGateResultDtoV1, ContractLocalCloseoutPolicyDtoV1, ContractLocalCloseoutResultDtoV1,
+    ContractRecordBindingDtoV1, ContractVerdictEvaluateRequestV1, ContractVerdictEvaluateResultV1,
+    CONTRACT_EVIDENCE_APPEND_REF, CONTRACT_EVIDENCE_LIST_REF, CONTRACT_EVIDENCE_OPERATION_REFS,
+    CONTRACT_EVIDENCE_READ_REF, CONTRACT_GATE_EVALUATE_REF, CONTRACT_VERDICT_EVALUATE_REF,
+};
 pub(crate) use contract_operation::execute_contract_operation;
 pub use contract_operation::{
     contract_definition_append_operation_request, contract_definition_list_operation_request,

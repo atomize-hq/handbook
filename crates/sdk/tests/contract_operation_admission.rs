@@ -61,6 +61,11 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
             "contract.definition.read",
             "contract.definition.append",
             "contract.lifecycle.transition",
+            "contract.evidence.list",
+            "contract.evidence.read",
+            "contract.evidence.append",
+            "contract.verdict.evaluate",
+            "contract.gate.evaluate",
         ]
     );
     assert!(rows.iter().all(|row| {
@@ -72,6 +77,11 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
             "contract.definition.read",
             "contract.definition.append",
             "contract.lifecycle.transition",
+            "contract.evidence.list",
+            "contract.evidence.read",
+            "contract.evidence.append",
+            "contract.verdict.evaluate",
+            "contract.gate.evaluate",
         ]
         .contains(&row.operation_id())
         {
@@ -116,13 +126,13 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
         rows.iter()
             .filter(|row| row.availability() == OperationAvailability::LivePrecursor)
             .count(),
-        30
+        35
     );
     assert_eq!(
         rows.iter()
             .filter(|row| row.availability() == OperationAvailability::Phase5Deferred)
             .count(),
-        8
+        3
     );
     assert_eq!(
         rows.iter()
@@ -159,7 +169,7 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
     let frozen_bytes = canonical_json_bytes(&frozen_tuples, &ContractLimits::packet0()).unwrap();
     assert_eq!(
         handbook_sdk::contract_membrane::sha256_fingerprint(&frozen_bytes).as_str(),
-        "sha256:0beed3959b30cb80a8b260258556b21d012c0029babbc110dbe05025e18d3126"
+        "sha256:324096be7e1fbed481f2609b90f9f246f130bcdac6ef40820284e730e93b20d6"
     );
 }
 

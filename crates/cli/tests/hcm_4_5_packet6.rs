@@ -160,12 +160,12 @@ fn four_generic_actions_page_the_complete_unchanged_contract_surface() {
         1
     );
     let manifest = bootstrap["response"]["schema_manifest"].as_array().unwrap();
-    assert_eq!(manifest.len(), 135);
+    assert_eq!(manifest.len(), 157);
 
     let capabilities = complete_catalog(&root, "capabilities", 2);
     let schemas = complete_catalog(&root, "schemas", 17);
-    assert_eq!(capabilities.len(), 23);
-    assert_eq!(schemas.len(), 135);
+    assert_eq!(capabilities.len(), 28);
+    assert_eq!(schemas.len(), 157);
     let manifest_bindings = manifest
         .iter()
         .map(|entry| {
@@ -192,13 +192,13 @@ fn four_generic_actions_page_the_complete_unchanged_contract_surface() {
         rows.iter()
             .filter(|row| row.admission_reason() == AdmissionReason::Admitted)
             .count(),
-        23
+        28
     );
     assert_eq!(
         rows.iter()
             .filter(|row| row.admission_reason() != AdmissionReason::Admitted)
             .count(),
-        39
+        34
     );
     assert!(rows
         .iter()
@@ -238,7 +238,7 @@ fn four_generic_actions_page_the_complete_unchanged_contract_surface() {
             .values()
             .filter(|transports| { transports.as_slice() == ["cli_json", "rust_sdk", "tauri"] })
             .count(),
-        4
+        9
     );
     assert!(FIXED_USE_CASES
         .iter()

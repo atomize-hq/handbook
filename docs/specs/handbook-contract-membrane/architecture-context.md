@@ -28,12 +28,12 @@ The labels below describe architecture state, not lifecycle or authorization:
 | Flow and pipeline domains | Current | [`handbook-flow`](../../../crates/flow/) and [`handbook-pipeline`](../../../crates/pipeline/) own their domain behavior while depending on the engine for shared semantic truth. |
 | Grounding adoption and deterministic projection/snapshot components | Precursor | Typed Flow and pipeline adapters exist, while projection and snapshot components remain private and no ordinary grounding consumer completes the seam. |
 | SDK composition | Current | [`handbook-sdk`](../../../crates/sdk/) composes owner crates into bounded, transport-free public Rust surfaces. |
-| Contract-membrane types, schemas, admission, and discovery | Current | HCM-4.2 provides the bounded kernel and exact 62-row inventory; subsequent slices extend the deterministic tree to 135 roots and the immutable production witness to 23 capabilities. The 18 predecessor operations expose `cli_json` and `tauri`, posture exposes `rust_sdk` and `tauri`, the four Contracts operations expose `rust_sdk`, `cli_json`, and `tauri`, and the six fixed use cases remain outside ordinary admission and discovery. |
+| Contract-membrane types, schemas, admission, and discovery | Current | HCM-4.2 provides the bounded kernel and exact 62-row inventory; subsequent slices extend the deterministic tree to 157 roots and the immutable production witness to 28 capabilities. The 18 predecessor operations expose `cli_json` and `tauri`, posture exposes `rust_sdk` and `tauri`, the nine Contracts operations expose `rust_sdk`, `cli_json`, and `tauri`, and the six fixed use cases remain outside ordinary admission and discovery. |
 | CLI adapter | Current | [`handbook-cli`](../../../crates/cli/) consumes owner/SDK typed results for all 36 supported nontrivial leaves and exposes exactly four generic capability actions over the SDK consumer seam. It owns only command-line acquisition/rendering/stream/exit concerns, emits the shared invocation envelope for `--json`, and preserves only the 19 established explicit legacy projections. |
 | Tauri adapter | Current | [`handbook-tauri`](../../../crates/tauri/) is a non-UI library with three versioned commands over SDK-owned bootstrap, catalog, and invocation DTOs. It owns host context, off-main-thread scheduling, bounded host failures, and IPC framing without CLI or owner-crate product dependencies. |
 | Installed Handbook skill | Current | The generated root skill uses only the generic CLI membrane to bootstrap, page discovery, retrieve exact schemas, acquire bounded input, and invoke. It carries no current operation inventory or product-specific ordinary route; the fixed Charter workflow remains a separate leaf skill. |
 | Contract definition, claim, applicability, lifecycle, durable use-case owner, outward SDK membrane, and generic consumers | Current | HCM-5.1 Packets 1–6 establish and integrate [`handbook-contracts`](../../../crates/contracts/) inward of SDK with owner-native exact definition, claim, applicability, fingerprint, compatibility, lifecycle-chain, current-head, evaluation-basis, and repository-bound durability semantics. Its fixed repository-relative store owns bounded current-only paging, exact immutable reads, admitted append/transition, replay, and fail-closed recovery. A bounded outward SDK projection closes exactly four operations within the 62-row inventory and the 23-capability/135-root witness while independently re-admitting owner evidence and preserving the sealed Engine authority seam; the existing generic Rust SDK, CLI, and Tauri consumers preserve that owner truth without a contract-specific branch, and the owner has no SDK or transport dependency. |
-| Evidence/gate owner completion and dock executor | Partial/future | HCM-5.2 Packets 1–4 implement the `handbook-contracts` identity/policy/run kernel, exact read-only candidate-source normalization through one sealed Engine `contract_evidence_source` admission plus generic source-currentness/Resolution observations, retained-root immutable-all canonical-evidence list/read/idempotent append with bounded atomic recovery, and pure closed claim-verdict evaluation over one complete stable root with exact accounting and current-authority rechecks. Verdict persistence, gate, local closeout, SDK operations, and the separate HCM-5.3 executor/runtime remain absent. |
+| Evidence/gate owner completion and dock executor | Implemented checkpoint; slice open | HCM-5.2 Packets 1–6 implement the `handbook-contracts` identity/policy/run kernel, exact read-only candidate-source normalization through one sealed Engine `contract_evidence_source` admission plus generic source-currentness/Resolution observations, retained-root immutable-all canonical-evidence list/read/idempotent append with bounded atomic recovery, pure closed claim-verdict evaluation, gate/local-closeout composition, and the exact five-operation outward SDK membrane. Verdicts and gate results remain non-persisted derived truth. Packet 7 generic CLI/Tauri integrated proof and the separate HCM-5.3 executor/runtime remain absent. |
 | Publication, bridge, and Substrate adoption | External-unknown | No repository-only claim can prove their current external existence, deployment, or conformance. |
 
 The workspace membership and current crate edges are visible in
@@ -101,7 +101,8 @@ and local-closeout owner, SDK maps five reserved operations outward, and a
 future executor supplies operational records plus untrusted candidates through
 an owner-side source boundary. Local closeout is a sibling derived result;
 parent promotion remains a later independent policy/mutation boundary. This is
-prepared authority, not implemented architecture.
+implemented owner and SDK architecture through Packet 6; Packet 7 consumer
+proof remains pending.
 
 ## Projection and adapter boundary
 
@@ -169,7 +170,7 @@ document does not select it.
 
 ## Gate and posture ownership
 
-The current HCM-5.2 authority defines a future gate result and separate local-
+The current HCM-5.2 implementation provides a gate result and separate local-
 closeout result without a parent-promotion field. Either may become an input to
 later posture or promotion evaluation, but gate ownership must not absorb
 posture aggregation, policy, recommendation, acknowledgement, hysteresis,

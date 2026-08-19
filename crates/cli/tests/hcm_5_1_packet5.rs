@@ -67,7 +67,7 @@ fn capabilities(root: &Path) -> BTreeMap<String, Value> {
     assert!(output.status.success());
     let document = machine_document(&output);
     assert_eq!(document["outcome_kind"], "page");
-    assert_eq!(document["response"]["root"]["total_entries"], 23);
+    assert_eq!(document["response"]["root"]["total_entries"], 28);
     document["response"]["entries"]
         .as_array()
         .unwrap()
