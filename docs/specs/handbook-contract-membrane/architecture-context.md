@@ -33,7 +33,7 @@ The labels below describe architecture state, not lifecycle or authorization:
 | Tauri adapter | Current | [`handbook-tauri`](../../../crates/tauri/) is a non-UI library with three versioned commands over SDK-owned bootstrap, catalog, and invocation DTOs. It owns host context, off-main-thread scheduling, bounded host failures, and IPC framing without CLI or owner-crate product dependencies. |
 | Installed Handbook skill | Current | The generated root skill uses only the generic CLI membrane to bootstrap, page discovery, retrieve exact schemas, acquire bounded input, and invoke. It carries no current operation inventory or product-specific ordinary route; the fixed Charter workflow remains a separate leaf skill. |
 | Contract definition, claim, applicability, lifecycle, durable use-case owner, outward SDK membrane, and generic consumers | Current | HCM-5.1 Packets 1–6 establish and integrate [`handbook-contracts`](../../../crates/contracts/) inward of SDK with owner-native exact definition, claim, applicability, fingerprint, compatibility, lifecycle-chain, current-head, evaluation-basis, and repository-bound durability semantics. Its fixed repository-relative store owns bounded current-only paging, exact immutable reads, admitted append/transition, replay, and fail-closed recovery. A bounded outward SDK projection closes exactly four operations within the 62-row inventory and the 23-capability/135-root witness while independently re-admitting owner evidence and preserving the sealed Engine authority seam; the existing generic Rust SDK, CLI, and Tauri consumers preserve that owner truth without a contract-specific branch, and the owner has no SDK or transport dependency. |
-| Evidence/gate owner completion and dock executor | Target/future | Evidence/verdict/gate semantics and the separate executor remain absent pending their later authorized slices. HCM-5.1 aggregate verification/review and closeout remain a lifecycle boundary rather than an architecture capability. |
+| Evidence/gate owner completion and dock executor | Target/future | The current [`HCM-5.2 authority`](slices/HCM-5.2/README.md) selects `handbook-contracts` for canonical evidence, verdict, gate, and separate local-closeout semantics, with parent promotion later; no HCM-5.2 packet is implemented. The separate HCM-5.3 executor/runtime remains unresolved and absent. |
 | Publication, bridge, and Substrate adoption | External-unknown | No repository-only claim can prove their current external existence, deployment, or conformance. |
 
 The workspace membership and current crate edges are visible in
@@ -94,6 +94,14 @@ and projects the owner through the exact four-operation outward membrane, while
 the generic CLI and Tauri consumers remain adapter-only. Packet-0
 primitives remain at their consumer-facing placement; no neutral extraction is
 selected. The owner, Flow, pipeline, and Engine never depend back on SDK.
+
+The current [`HCM-5.2 authority`](slices/HCM-5.2/README.md) preserves that
+placement: `handbook-contracts` remains the sole canonical evidence/verdict/gate
+and local-closeout owner, SDK maps five reserved operations outward, and a
+future executor supplies operational records plus untrusted candidates through
+an owner-side source boundary. Local closeout is a sibling derived result;
+parent promotion remains a later independent policy/mutation boundary. This is
+prepared authority, not implemented architecture.
 
 ## Projection and adapter boundary
 
@@ -161,10 +169,12 @@ document does not select it.
 
 ## Gate and posture ownership
 
-A future gate result may be an input to posture evaluation. Gate ownership must
-not absorb posture aggregation, policy, recommendation, acknowledgement,
-hysteresis, or transition authority. Gates answer their bounded evidence
-question; posture owners decide what those answers mean together.
+The current HCM-5.2 authority defines a future gate result and separate local-
+closeout result without a parent-promotion field. Either may become an input to
+later posture or promotion evaluation, but gate ownership must not absorb
+posture aggregation, policy, recommendation, acknowledgement, hysteresis,
+promotion, or transition authority. Gates answer their bounded evidence
+question; later posture/promotion owners decide what those answers mean.
 
 This separation prevents an evidence producer from silently becoming the policy
 engine and lets posture policy evolve without changing each gate implementation.

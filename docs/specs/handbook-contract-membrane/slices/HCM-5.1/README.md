@@ -8,13 +8,13 @@ verdict or gate evaluation, a dock executor, or another Phase-5 slice.
 
 ## Current admission state
 
-**HCM-5.1 authority is prepared. Packets 1–6 implement the selected owner-native
+**HCM-5.1 is complete. Packets 1–6 implement the selected owner-native
 definition/claim/applicability kernel, sealed Engine authority admission,
 immutable lifecycle chain, durable repository use cases, and
 active-after-independent-lock basis, plus the outward SDK membrane and exact
 four-operation closure, generic SDK/CLI/Tauri consumer proof, and final
-integrated product-state proof. Aggregate verification/review and slice
-closeout remain incomplete meta-task work.**
+integrated product-state proof. All 16 acceptance conditions, aggregate
+verification/review, and the single slice closeout are complete.**
 
 Phase 4 is exited. The completed
 [`HCM-4.5` authority](../HCM-4.5/README.md) records Packets 1–6, aggregate
@@ -24,9 +24,9 @@ Phase-4 exit. Those facts satisfy the hard predecessor for HCM-5.1.
 
 Contract-owner placement, the lifecycle authority seam, the durable owner
 repository, and the outward SDK operation membrane are resolved here and
-implemented by Packets 1–4. Packet 6 implementation evidence is complete under
-the strict packet sequence and meta-task admission; this checkpoint does not
-perform aggregate verification/review or close the slice.
+implemented by Packets 1–4. Packet 6 implementation evidence, aggregate
+verification/review, and closeout are complete under the strict packet sequence
+and meta-task admission.
 
 The Packet-6 integration proof at
 [`hcm_5_1_packet6_integrated.rs`](../../../../../crates/sdk/tests/hcm_5_1_packet6_integrated.rs)
@@ -572,17 +572,16 @@ meta task. Packet review applies when a material packet decision or measured
 risk warrants it under the current review policy. Packet completion never
 closes the slice.
 
-After Packet 6, and only after every acceptance condition is established on
-the final product state, the meta task performs one aggregate verification and
-one focused causal review using the P1–P4 rubric. Valid packet evidence may be
-reused; later-invalidated evidence must be rerun. Blocking P1/P2 findings are
-remediated and reviewed again within current authority or produce a genuine
-workflow stop. P3/P4 advisories remain non-blocking.
+After Packet 6 established every acceptance condition on the final product
+state, the meta task completed aggregate verification and one focused causal
+review using the P1–P4 rubric. The final integrated proof and deterministic
+schema check were green; the controlling verdict was `APPROVE` with no
+unresolved P1/P2. One HCM-5.1 aggregate closeout is recorded across commits
+`b37a307`, `dd51ed8`, `cfd3d35`, `7925652`, `3bd2c41`, `149c7fd`, and
+`cc0588d`.
 
-The meta task then records one HCM-5.1 aggregate closeout and separately
-evaluates HCM-5.2 admission. No packet creates a slice closeout, phase-exit
-claim, ledger, selector, proof wall, handoff, durable capsule, or mechanical
-closeout commit.
+That closeout completes HCM-5.1 only. It does not establish HCM-5.2 product
+behavior, Phase-5 exit, a dock, or a validator.
 
 ## Non-goals
 
@@ -609,5 +608,6 @@ surface, operation inventory, schema/capability witness, or current transport
 evidence, update the current document that owns that truth in the same bounded
 change.
 
-Do not use this authority to infer HCM-5.1 completion, begin HCM-5.2, or grant a
-dock, adapter, SDK, or transport semantic authority.
+Do not use the completed HCM-5.1 outcome to infer HCM-5.2 implementation or
+completion, begin HCM-5.3, or grant a dock, adapter, SDK, or transport semantic
+authority.

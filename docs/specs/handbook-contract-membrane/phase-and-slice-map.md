@@ -133,8 +133,9 @@ than CLI or Tauri command names. The six fixed SDK use cases remain deliberately
 outside ordinary discovery.
 
 This exit does not itself authorize Phase 5 or supply contract, evidence,
-verdict, gate, dock, or validator semantics. The separate HCM-5.1 authority now
-selects the contract owner and first slice boundary without changing this exit.
+verdict, gate, dock, or validator semantics. The separate HCM-5.1 authority and
+closeout establish the contract-owner predecessor; the separate HCM-5.2
+authority selects the next slice boundary without changing this exit.
 
 ## Phase 5 — contract membrane and docks
 
@@ -144,8 +145,8 @@ records plus untrusted candidates.
 
 | Slice | Program status | Concise outcome and boundary | Hard predecessor |
 | --- | --- | --- | --- |
-| [`HCM-5.1` — Contract lifecycle and claim model](slices/HCM-5.1/README.md) | Authorized | Establish exact versioned contract identity, immutable authority transitions, typed claims and applicability, and gate effects without encoding evaluation as lifecycle state. Packets 1–6 are implemented checkpoints: the purpose-named `handbook-contracts` owner, definition/claim/applicability kernel, sealed Engine authority admission, lifecycle chain, durable repository use cases, active-after-independent-lock basis, exact four-operation outward SDK membrane, generic SDK/CLI/Tauri consumer proof, and final `4 / 62 / 23 / 135` integrated product-state proof are current. Aggregate verification/review and slice closeout remain incomplete meta-task work. | Phase-4 exit, satisfied; owner placement selected by current slice authority |
-| `HCM-5.2` — Evidence, verdict, and gate engine | Planned | Admit immutable evidence, compute closed verdicts, enforce complete accounting and freshness, and keep local closeout separate from parent promotion. | Preceding slice closeout |
+| [`HCM-5.1` — Contract lifecycle and claim model](slices/HCM-5.1/README.md) | Implemented checkpoint; slice closeout complete | The purpose-named `handbook-contracts` owner, definition/claim/applicability kernel, sealed Engine authority admission, lifecycle chain, durable repository use cases, active-after-independent-lock basis, exact four-operation outward SDK membrane, generic SDK/CLI/Tauri consumer proof, and final `4 / 62 / 23 / 135` integrated proof are current. All six packets, 16 acceptance conditions, aggregate verification/review, and the single slice closeout are complete. | Phase-4 exit, satisfied |
+| [`HCM-5.2` — Evidence, verdict, and gate engine](slices/HCM-5.2/README.md) | Authorized | Extend `handbook-contracts` with protocol-neutral untrusted-candidate admission, immutable-all canonical evidence, closed verdict/accounting/currentness/freshness/Resolution semantics, exact gate/score composition, and a sibling local-closeout result while parent promotion remains later. Strict Packets 1–7 are prepared; none is implemented or dispatched. | HCM-5.1 slice closeout, satisfied |
 | `HCM-5.3` — Process dock protocol | Decision required | Define a bounded, default-deny executor protocol with exact bundle/runtime identity, timeouts, cleanup, and no partial evidence. The runtime and implementation choice remains unresolved; no bundled-Python choice is restored. | Contract/evidence interfaces from the preceding slices and an executor decision |
 | `HCM-5.4` — First real validator dock proof | Planned | Exercise one real offline validator through the dock into admitted evidence, verdict, and gate behavior without granting the validator or executor semantic authority. | Both evidence/gate and dock protocol closeout |
 
@@ -179,7 +180,7 @@ actual owner boundary. Unselected external consumers are not an exit failure.
 | Ordinary grounding SDK/JSON exposure and consumer placement | Future Phase-4 authority must choose the bounded public seam; future Phase-6 authority must separately choose any publication, bridge, and adopter |
 | Broader posture evaluation, recommendation, notification, acknowledgement, and hysteresis | Future posture authority must place this policy without transferring engine-owned mutation authority to a gate or adapter |
 | CLI operation-inventory expansion beyond the completed 62-row predecessor | HCM-4.3 does not expand the inventory for transport parity: its authority fixes the exact ordinary mappings and a closed six-entry SDK use-case registry. Any new semantic operation or use case requires later explicit authority, complete schemas, and independent owner admission where applicable. |
-| Gate-to-posture input and policy boundary | Future gate and posture authorities, preserving posture ownership |
+| Gate-to-posture input and policy boundary | HCM-5.2 fixes gate and local-closeout truth without posture/promotion fields; future posture/promotion authority must separately decide whether and how to consume those results |
 | Dock implementation and runtime | Future dock authority; current Rust schema use does not preselect the executor |
 | CLI/Tauri membrane routes and framing | HCM-4.3 owns current CLI parity and framing; HCM-4.4 separately owns the Tauri facade after HCM-4.3 closeout. |
 | Publication mechanism, exact versions, bridge, and external adopter | Future publication and consumer authorities with current external proof |
