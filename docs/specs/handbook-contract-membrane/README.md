@@ -25,14 +25,15 @@ At this checkpoint:
   Packets 1–6, aggregate verification and causal review, and its single slice
   closeout; the separate Phase-4 exit criteria are satisfied without
   authorizing Phase 5;
-- the bounded [`HCM-5.1 slice authority`](slices/HCM-5.1/README.md) now selects
+- the bounded [`HCM-5.1 slice authority`](slices/HCM-5.1/README.md) selects
   the purpose-named `handbook-contracts` owner, exact definition/lifecycle and
-  claim/applicability boundary, and strict Packets 1–6; Packets 1–5 now
+  claim/applicability boundary, and strict Packets 1–6; Packets 1–6 now
   implement the owner-native kernel, sealed Engine authority admission,
   lifecycle chain, durable owner repository/use cases, and
   evaluation-lifecycle basis, plus the outward SDK membrane and exact
-  four-operation closure and generic SDK/CLI/Tauri consumer proof, while Packet
-  6 and HCM-5.1 closeout remain incomplete;
+  four-operation closure, generic SDK/CLI/Tauri consumer proof, and final
+  integrated `4 / 62 / 23 / 135` product-state proof, while aggregate
+  verification/review and HCM-5.1 closeout remain incomplete;
 - the former orchestration skill under `.codex/skills/.disabled/` is inactive and is not authority for new work; and
 - the active thin router is routing guidance only and is not authority for product or slice work.
 
@@ -61,7 +62,7 @@ Use the source that owns the question:
 | What is the completed HCM-4.3 outcome and packet boundary? | [`slices/HCM-4.3/README.md`](slices/HCM-4.3/README.md) records complete CLI JSON parity, the machine/human/diagnostic/exit contract, compatibility posture, ordered Packets 1–8, and the aggregate slice closeout. |
 | What is the completed HCM-4.4 outcome and packet boundary? | [`slices/HCM-4.4/README.md`](slices/HCM-4.4/README.md) records the bounded non-UI Tauri command facade, SDK DTO and dependency boundary, strict Packets 1–6, and the single aggregate slice closeout. |
 | What is the completed HCM-4.5 outcome and packet boundary? | [`slices/HCM-4.5/README.md`](slices/HCM-4.5/README.md) records the capability-driven installed skill, generic discovery/schema/invocation consumer seam, strict Packets 1–6, corrected truthful future-uptake proof, and the single aggregate slice closeout. |
-| What is the authorized HCM-5.1 outcome and packet boundary? | [`slices/HCM-5.1/README.md`](slices/HCM-5.1/README.md) selects `handbook-contracts` as the inward semantic owner, fixes exact definition/claim/lifecycle and outward SDK boundaries, defines strict Packets 1–6, and records the Packet-1–5 implementation checkpoint without closing the slice. |
+| What is the authorized HCM-5.1 outcome and packet boundary? | [`slices/HCM-5.1/README.md`](slices/HCM-5.1/README.md) selects `handbook-contracts` as the inward semantic owner, fixes exact definition/claim/lifecycle and outward SDK boundaries, defines strict Packets 1–6, and records the Packet-1–6 implementation checkpoint without performing aggregate verification/review or closing the slice. |
 | Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. A roadmap entry plus an explicit execution request may authorize bounded preparation of that document, but product execution begins only after the resulting current slice authority is ready. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 

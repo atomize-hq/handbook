@@ -8,12 +8,13 @@ verdict or gate evaluation, a dock executor, or another Phase-5 slice.
 
 ## Current admission state
 
-**HCM-5.1 authority is prepared. Packets 1–5 implement the selected owner-native
+**HCM-5.1 authority is prepared. Packets 1–6 implement the selected owner-native
 definition/claim/applicability kernel, sealed Engine authority admission,
 immutable lifecycle chain, durable repository use cases, and
 active-after-independent-lock basis, plus the outward SDK membrane and exact
-four-operation closure and generic SDK/CLI/Tauri consumer proof; Packet 6 and
-slice closeout remain incomplete.**
+four-operation closure, generic SDK/CLI/Tauri consumer proof, and final
+integrated product-state proof. Aggregate verification/review and slice
+closeout remain incomplete meta-task work.**
 
 Phase 4 is exited. The completed
 [`HCM-4.5` authority](../HCM-4.5/README.md) records Packets 1–6, aggregate
@@ -23,9 +24,29 @@ Phase-4 exit. Those facts satisfy the hard predecessor for HCM-5.1.
 
 Contract-owner placement, the lifecycle authority seam, the durable owner
 repository, and the outward SDK operation membrane are resolved here and
-implemented by Packets 1–4. Later product execution remains under the strict
-packet sequence and meta-task admission; this checkpoint does not select
-Packet 6 or close the slice.
+implemented by Packets 1–4. Packet 6 implementation evidence is complete under
+the strict packet sequence and meta-task admission; this checkpoint does not
+perform aggregate verification/review or close the slice.
+
+The Packet-6 integration proof at
+[`hcm_5_1_packet6_integrated.rs`](../../../../../crates/sdk/tests/hcm_5_1_packet6_integrated.rs)
+asserts exactly four HCM-5.1 operations within the unchanged 62-row inventory,
+exactly 23 capabilities, exactly 135 manifest roots, and exact
+`rust_sdk`/`cli_json`/`tauri` transport evidence. It traverses owner-native
+definition/claim/applicability construction, two-credential sealed authority,
+append/replay/conflict, lifecycle compare-and-write through independent lock
+and active basis, durable list/read, outward SDK mapping, production witness,
+and generic transport dispatch. Focused predecessor suites continue to own the
+full refusal, recovery, concurrency, durability, and adapter-specific matrices.
+The unrelated pipeline tests
+`shared_proof_corpus_route_outputs_match_repo_owned_goldens` and
+`shared_proof_corpus_state_mutation_outputs_match_repo_owned_goldens` remain
+untouched; both still compare the current `{{REPO_ROOT}}` normalization with
+the checked-in `${repo_root}` placeholder. The bounded broad-workspace run was
+stopped after the known load-sensitive
+`actual_binary_resolves_reads_validates_and_purely_evaluates_the_custom_fixture`
+case stopped advancing, so the passing full direct owner suite remains the
+authoritative recovery/concurrency/durability result.
 
 ## Outcome
 
@@ -94,13 +115,14 @@ adopted only for these bounded product decisions:
 - decisions HCM-0.5-D1 and HCM-0.5-D2 from the named closeout record.
 
 Historical status, proof walls, ledgers, orchestration records, and authority
-claims are not adopted. Packets 1–5 establish the `handbook-contracts`
+claims are not adopted. Packets 1–6 establish the `handbook-contracts`
 definition/claim/applicability/lifecycle kernel, the narrow sealed Engine
 authority-admission seam, and a repository-bound durable owner with bounded
 current-only paging, exact read, admitted append/transition, immutable replay
 records, one exact chain-derived current head per definition, retained-root
 physical admission binding, exact-inventory fail-closed recovery, the exact
-four-operation outward SDK membrane, and generic SDK/CLI/Tauri consumer proof.
+four-operation outward SDK membrane, generic SDK/CLI/Tauri consumer proof, and
+the final deterministic integrated product-state proof.
 The current product still contains no canonical contract evidence, verdict/gate
 engine, or dock executor.
 

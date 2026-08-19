@@ -27,6 +27,12 @@ const CLI_JSON_OPERATIONS: [&str; 18] = [
     "pipeline.handoff.emit@1.0.0",
     "pipeline.state.apply@1.0.0",
 ];
+const CONTRACT_OPERATIONS: [&str; 4] = [
+    "contract.definition.list@1.0.0",
+    "contract.definition.read@1.0.0",
+    "contract.definition.append@1.0.0",
+    "contract.lifecycle.transition@1.0.0",
+];
 const USE_CASES: [&str; 6] = [
     "handbook.use-case.repository-setup@1.0.0",
     "handbook.use-case.repository-doctor@1.0.0",
@@ -62,7 +68,12 @@ fn inventory_discovery_use_case_omission_and_schema_roots_close_exactly() {
         62
     );
 
-    let expected_cli = CLI_JSON_OPERATIONS.into_iter().collect::<BTreeSet<_>>();
+    let predecessor_cli = CLI_JSON_OPERATIONS.into_iter().collect::<BTreeSet<_>>();
+    let expected_cli = predecessor_cli
+        .iter()
+        .copied()
+        .chain(CONTRACT_OPERATIONS)
+        .collect::<BTreeSet<_>>();
     let actual_cli = rows
         .iter()
         .filter(|row| {
@@ -72,9 +83,12 @@ fn inventory_discovery_use_case_omission_and_schema_roots_close_exactly() {
         .map(|row| row.operation_ref().as_str())
         .collect::<BTreeSet<_>>();
     assert_eq!(actual_cli, expected_cli);
+    assert_eq!(expected_cli.len(), 22);
+    assert!(predecessor_cli.is_subset(&actual_cli));
 
     let expected_discoverable = CLI_JSON_OPERATIONS
         .into_iter()
+        .chain(CONTRACT_OPERATIONS)
         .chain(["posture.transition.apply@1.0.0"])
         .collect::<BTreeSet<_>>();
     let actual_discoverable = rows
@@ -83,6 +97,7 @@ fn inventory_discovery_use_case_omission_and_schema_roots_close_exactly() {
         .map(|row| row.operation_ref().as_str())
         .collect::<BTreeSet<_>>();
     assert_eq!(actual_discoverable, expected_discoverable);
+    assert_eq!(expected_discoverable.len(), 23);
 
     let route_resolve = rows
         .iter()
