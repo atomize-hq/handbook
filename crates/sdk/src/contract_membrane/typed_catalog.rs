@@ -10,7 +10,7 @@ use std::cmp::Ordering;
 
 const API_MAJOR_V1: u64 = 1;
 const PAGE_SIZE_MAX: u64 = 128;
-const CATALOG_TOTAL_MAX: usize = 128;
+const CATALOG_TOTAL_MAX: usize = 256;
 const CATALOG_ENTRY_MAX_BYTES: usize = 65_536;
 const CURSOR_SCHEMA_REF: &str = "handbook.typed-catalog-cursor@1.0.0";
 const SORT_REF: &str = "handbook.catalog-sort.exact-ref-byte-order@1.0.0";

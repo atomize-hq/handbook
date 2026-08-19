@@ -135,7 +135,7 @@ impl<T: VerifyContract, const N: usize> VerifyContract for BoundedVec<T, N> {
         witness: &dyn ContractWitness,
         limits: &ContractLimits,
     ) -> Result<(), VerificationError> {
-        if N > 128 || self.as_slice().len() > limits.array_items() {
+        if (N > 128 && N != 256) || self.as_slice().len() > limits.array_items() {
             return Err(VerificationError::ContractInvariant);
         }
         verify_each(self.as_slice(), witness, limits)

@@ -10,6 +10,7 @@ use super::artifact_operation::{
     IntakeEvaluationResultV1, KindListResultV1, PromoteRequestV1, ReadResultV1, TargetRequestV1,
     ValidateResultV1, ValidationLayersV1,
 };
+use super::contract_operation::{AppendWireV1, TransitionWireV1};
 use super::flow_operation::{
     FlowArtifactPresenceV1, FlowBlockerCategoryV1, FlowBlockerV1, FlowBudgetByteDomainV1,
     FlowBudgetDispositionV1, FlowBudgetNextSafeActionV1, FlowBudgetOutcomeV1, FlowBudgetReasonV1,
@@ -1988,7 +1989,7 @@ impl_schema!(BootstrapResponseV1, "BootstrapResponseV1", |generator| {
             ),
             (
                 "schema_manifest",
-                generator.subschema_for::<BoundedVec<SchemaManifestEntry, 128>>(),
+                generator.subschema_for::<BoundedVec<SchemaManifestEntry, 256>>(),
             ),
             (
                 "response_fingerprint",
@@ -2048,7 +2049,7 @@ impl_schema!(BootstrapRefusalV1, "BootstrapRefusalV1", |generator| {
             ("errors", json_schema!({"type": "array", "maxItems": 0})),
             (
                 "schema_manifest",
-                generator.subschema_for::<BoundedVec<SchemaManifestEntry, 128>>(),
+                generator.subschema_for::<BoundedVec<SchemaManifestEntry, 256>>(),
             ),
             (
                 "response_fingerprint",
@@ -6742,7 +6743,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 120] = [
+const INVENTORY: [SchemaDescriptor; 135] = [
     descriptor::<ArtifactProblemDetailsV1>(
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -6830,6 +6831,34 @@ const INVENTORY: [SchemaDescriptor; 120] = [
     descriptor::<CatalogRoots>(
         "handbook.catalog-roots@1.0.0",
         "handbook.catalog-roots/1.0.0.schema.json",
+    ),
+    descriptor::<ContractApplicabilityOutcomeDtoV1>(
+        "handbook.contract-applicability-outcome@1.0.0",
+        "handbook.contract-applicability-outcome/1.0.0.schema.json",
+    ),
+    descriptor::<ContractClaimDtoV1>(
+        "handbook.contract-claim@1.0.0",
+        "handbook.contract-claim/1.0.0.schema.json",
+    ),
+    descriptor::<ContractDefinitionDtoV1>(
+        "handbook.contract-definition@1.0.0",
+        "handbook.contract-definition/1.0.0.schema.json",
+    ),
+    descriptor::<ContractEvaluationLifecycleBasisDtoV1>(
+        "handbook.contract-evaluation-lifecycle-basis@1.0.0",
+        "handbook.contract-evaluation-lifecycle-basis/1.0.0.schema.json",
+    ),
+    descriptor::<ContractLifecyclePolicyDtoV1>(
+        "handbook.contract-lifecycle-policy@1.0.0",
+        "handbook.contract-lifecycle-policy/1.0.0.schema.json",
+    ),
+    descriptor::<ContractLifecycleTransitionDtoV1>(
+        "handbook.contract-lifecycle-transition@1.0.0",
+        "handbook.contract-lifecycle-transition/1.0.0.schema.json",
+    ),
+    descriptor::<ContractOperationProblemDetailsV1>(
+        "handbook.contract-operation-details@1.0.0",
+        "handbook.contract-operation-details/1.0.0.schema.json",
     ),
     descriptor::<CorrelationRef>(
         "handbook.correlation-ref@1.0.0",
@@ -6953,6 +6982,38 @@ const INVENTORY: [SchemaDescriptor; 120] = [
     descriptor::<ValidateResultV1>(
         "handbook.operation.artifact-validate-result@1.0.0",
         "handbook.operation.artifact-validate-result/1.0.0.schema.json",
+    ),
+    descriptor::<AppendWireV1>(
+        "handbook.operation.contract-definition-append-request@1.0.0",
+        "handbook.operation.contract-definition-append-request/1.0.0.schema.json",
+    ),
+    descriptor::<ContractDefinitionAppendResultV1>(
+        "handbook.operation.contract-definition-append-result@1.0.0",
+        "handbook.operation.contract-definition-append-result/1.0.0.schema.json",
+    ),
+    descriptor::<ContractDefinitionListRequestV1>(
+        "handbook.operation.contract-definition-list-request@1.0.0",
+        "handbook.operation.contract-definition-list-request/1.0.0.schema.json",
+    ),
+    descriptor::<ContractDefinitionListResultV1>(
+        "handbook.operation.contract-definition-list-result@1.0.0",
+        "handbook.operation.contract-definition-list-result/1.0.0.schema.json",
+    ),
+    descriptor::<ContractDefinitionReadRequestV1>(
+        "handbook.operation.contract-definition-read-request@1.0.0",
+        "handbook.operation.contract-definition-read-request/1.0.0.schema.json",
+    ),
+    descriptor::<ContractDefinitionReadResultV1>(
+        "handbook.operation.contract-definition-read-result@1.0.0",
+        "handbook.operation.contract-definition-read-result/1.0.0.schema.json",
+    ),
+    descriptor::<TransitionWireV1>(
+        "handbook.operation.contract-lifecycle-transition-request@1.0.0",
+        "handbook.operation.contract-lifecycle-transition-request/1.0.0.schema.json",
+    ),
+    descriptor::<ContractLifecycleTransitionResultV1>(
+        "handbook.operation.contract-lifecycle-transition-result@1.0.0",
+        "handbook.operation.contract-lifecycle-transition-result/1.0.0.schema.json",
     ),
     descriptor::<FlowResolveRequestV1>(
         "handbook.operation.flow-resolve-request@1.0.0",
@@ -7451,8 +7512,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 120 {
-        return Err("schema inventory must contain exactly 120 entries".to_owned());
+    if INVENTORY.len() != 135 {
+        return Err("schema inventory must contain exactly 135 entries".to_owned());
     }
 
     let mut previous_ref = None;
@@ -7536,6 +7597,8 @@ fn validate_schema(
             | "handbook.operation.pipeline-capture-apply-request@1.0.0"
             | "handbook.operation.pipeline-handoff-emit-request@1.0.0"
             | "handbook.operation.pipeline-state-apply-request@1.0.0"
+            | "handbook.operation.contract-definition-append-request@1.0.0"
+            | "handbook.operation.contract-lifecycle-transition-request@1.0.0"
     ) {
         validate_posture_request_raw_key_schema(value, descriptor.relative_path)
     } else {

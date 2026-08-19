@@ -110,7 +110,7 @@ fn discover_complete(root: &Path, operation_ref: &str) -> DiscoveredCapability {
         entries.extend(page["response"]["entries"].as_array().unwrap().clone());
         cursor = page["response"]["next_cursor"].clone();
     }
-    assert_eq!(entries.len(), 19, "complete live capability catalog");
+    assert_eq!(entries.len(), 23, "complete live capability catalog");
     let entry = entries
         .iter()
         .find(|entry| entry["operation"]["ref"] == operation_ref)

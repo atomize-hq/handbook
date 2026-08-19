@@ -57,11 +57,30 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
             "pipeline.capture.apply",
             "pipeline.handoff.emit",
             "pipeline.state.apply",
+            "contract.definition.list",
+            "contract.definition.read",
+            "contract.definition.append",
+            "contract.lifecycle.transition",
         ]
     );
     assert!(rows.iter().all(|row| {
         if row.operation_id() == "posture.transition.apply" {
             row.current_transports() == [OperationTransport::RustSdk, OperationTransport::Tauri]
+                && row.discovery() == DiscoveryState::Discoverable
+        } else if [
+            "contract.definition.list",
+            "contract.definition.read",
+            "contract.definition.append",
+            "contract.lifecycle.transition",
+        ]
+        .contains(&row.operation_id())
+        {
+            row.current_transports()
+                == [
+                    OperationTransport::CliJson,
+                    OperationTransport::RustSdk,
+                    OperationTransport::Tauri,
+                ]
                 && row.discovery() == DiscoveryState::Discoverable
         } else if [
             "artifact.kind.list",
@@ -97,13 +116,13 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
         rows.iter()
             .filter(|row| row.availability() == OperationAvailability::LivePrecursor)
             .count(),
-        26
+        30
     );
     assert_eq!(
         rows.iter()
             .filter(|row| row.availability() == OperationAvailability::Phase5Deferred)
             .count(),
-        12
+        8
     );
     assert_eq!(
         rows.iter()
@@ -140,7 +159,7 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
     let frozen_bytes = canonical_json_bytes(&frozen_tuples, &ContractLimits::packet0()).unwrap();
     assert_eq!(
         handbook_sdk::contract_membrane::sha256_fingerprint(&frozen_bytes).as_str(),
-        "sha256:59a780b744ee5c58ffc14140ba9b28ffb5614c2c7551ad09aa0f61cea011ae7b"
+        "sha256:0beed3959b30cb80a8b260258556b21d012c0029babbc110dbe05025e18d3126"
     );
 }
 
@@ -926,11 +945,10 @@ fn semantic_owners_independently_refuse_current_incomplete_or_mismatched_claims(
     assert_eq!(
         admit_operation_definition(&definition_for(
             "contract.definition.list",
-            "future-handbook-contracts",
-            "0.0.0",
-        ))
-        .unwrap(),
-        OperationAdmissionResult::Omitted(AdmissionReason::OwnerDeferred)
+            "handbook-contracts",
+            "0.1.0",
+        )),
+        Err(ContractError::InvalidInvariant)
     );
 }
 
@@ -1030,6 +1048,7 @@ fn complete_definition_set() -> Vec<OperationDefinition> {
         .iter()
         .map(|row| {
             let (owner, version) = match row.owner() {
+                OperationOwner::Contracts => ("handbook-contracts", "0.1.0"),
                 OperationOwner::Engine => ("handbook-engine", "0.2.0"),
                 OperationOwner::Flow => ("handbook-flow", "0.1.1"),
                 OperationOwner::Pipeline => ("handbook-pipeline", "0.1.2"),

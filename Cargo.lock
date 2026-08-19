@@ -1389,6 +1389,7 @@ dependencies = [
 name = "handbook-sdk"
 version = "0.1.0"
 dependencies = [
+ "handbook-contracts",
  "handbook-engine",
  "handbook-flow",
  "handbook-pipeline",

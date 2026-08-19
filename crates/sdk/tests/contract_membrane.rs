@@ -42,7 +42,7 @@ fn bounded_primitives_enforce_hard_and_selected_limits() {
     let packet0 = ContractLimits::packet0();
     assert_eq!(packet0.document_bytes(), 1_048_576);
     assert_eq!(packet0.string_bytes(), 65_536);
-    assert_eq!(packet0.array_items(), 128);
+    assert_eq!(packet0.array_items(), 256);
     assert_eq!(packet0.object_members(), 128);
     assert_eq!(packet0.nesting_depth(), 32);
     assert_eq!(

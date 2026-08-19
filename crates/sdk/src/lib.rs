@@ -169,6 +169,30 @@ impl HandbookSdkV1 {
         contract_membrane::execute_pipeline_operation(&self.repo_root, request)
     }
 
+    /// Executes one exact Contracts ordinary operation once.
+    pub fn execute_contract_operation(
+        &self,
+        request: &contract_membrane::OperationRequestV1,
+    ) -> Result<contract_membrane::OperationResponseV1, contract_membrane::ContractError> {
+        contract_membrane::execute_contract_operation(&self.repo_root, request)
+    }
+
+    /// Executes one exact Contracts mutation with an injected native authenticator.
+    pub fn execute_contract_operation_with_authenticator<P>(
+        &self,
+        request: &contract_membrane::OperationRequestV1,
+        authenticator: &mut P,
+    ) -> Result<contract_membrane::OperationResponseV1, contract_membrane::ContractError>
+    where
+        P: handbook_engine::NativeAuthenticatorPortV1,
+    {
+        contract_membrane::execute_contract_operation_with_authenticator(
+            &self.repo_root,
+            request,
+            authenticator,
+        )
+    }
+
     /// Dispatches one admitted read-only ordinary invocation through its existing owner route.
     ///
     /// HCM-4.4 Packet 3 default-denies mutations and use cases as typed transport failures.

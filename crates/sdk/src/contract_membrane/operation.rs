@@ -12,6 +12,7 @@ use std::sync::OnceLock;
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum OperationOwner {
+    Contracts,
     Engine,
     Flow,
     Pipeline,
@@ -668,6 +669,7 @@ pub fn validate_complete_definition_set(
 
 fn expected_owner_binding(owner: OperationOwner) -> (&'static str, &'static str) {
     match owner {
+        OperationOwner::Contracts => ("handbook-contracts", "0.1.0"),
         OperationOwner::Engine => ("handbook-engine", "0.2.0"),
         OperationOwner::Flow => ("handbook-flow", "0.1.1"),
         OperationOwner::Pipeline => ("handbook-pipeline", "0.1.2"),
@@ -684,7 +686,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
     use OperationAvailability::{Absent as A, LivePrecursor as L, Phase5Deferred as P5};
     use OperationClass::{AppendOnly as AP, CompareAndWrite as CW, ReadOnly as RO};
     use OperationOwner::{
-        Engine as E, Flow as F, Phase5 as P, Pipeline as PL, SdkComposition as S,
+        Contracts as C, Engine as E, Flow as F, Phase5 as P, Pipeline as PL, SdkComposition as S,
     };
 
     #[allow(clippy::type_complexity)]
@@ -745,10 +747,10 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
         ("pipeline.capture.apply", PL, L, CW, IC),
         ("pipeline.handoff.emit", PL, L, AP, IC),
         ("pipeline.state.apply", PL, L, CW, IC),
-        ("contract.definition.list", P, P5, RO, OD),
-        ("contract.definition.read", P, P5, RO, OD),
-        ("contract.definition.append", P, P5, AP, OD),
-        ("contract.lifecycle.transition", P, P5, CW, OD),
+        ("contract.definition.list", C, L, RO, OD),
+        ("contract.definition.read", C, L, RO, OD),
+        ("contract.definition.append", C, L, AP, OD),
+        ("contract.lifecycle.transition", C, L, CW, OD),
         ("contract.evidence.list", P, P5, RO, OD),
         ("contract.evidence.read", P, P5, RO, OD),
         ("contract.evidence.append", P, P5, AP, OD),
@@ -789,6 +791,13 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                         | "artifact.candidate.append"
                         | "artifact.candidate.promote"
                 );
+                let is_contract_operation = matches!(
+                    operation_id,
+                    "contract.definition.list"
+                        | "contract.definition.read"
+                        | "contract.definition.append"
+                        | "contract.lifecycle.transition"
+                );
                 OperationInventoryRow {
                     proof_ordinal: (index + 1) as u16,
                     operation_id,
@@ -802,6 +811,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                         || is_flow_resolve
                         || is_pipeline_read
                         || is_pipeline_mutation_packet
+                        || is_contract_operation
                     {
                         AdmissionReason::Admitted
                     } else {
@@ -809,6 +819,12 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                     },
                     current_transports: if is_posture_apply {
                         &[OperationTransport::RustSdk, OperationTransport::Tauri]
+                    } else if is_contract_operation {
+                        &[
+                            OperationTransport::CliJson,
+                            OperationTransport::RustSdk,
+                            OperationTransport::Tauri,
+                        ]
                     } else if is_artifact_operation
                         || is_flow_resolve
                         || is_pipeline_read
@@ -823,6 +839,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                         || is_flow_resolve
                         || is_pipeline_read
                         || is_pipeline_mutation_packet
+                        || is_contract_operation
                     {
                         DiscoveryState::Discoverable
                     } else {

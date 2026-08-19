@@ -12,6 +12,8 @@ mod identity;
 mod lifecycle;
 mod lifecycle_policy;
 mod lifecycle_preimage;
+pub mod operation_admission;
+mod operation_claims;
 mod owner_repository;
 
 pub use claim::{

@@ -246,7 +246,11 @@ fn every_existing_catalog_kind_emits_its_exact_typed_page() {
         let document = machine_document(&output);
         assert_eq!(document["catalog_kind"], kind);
         assert_eq!(document["outcome_kind"], "page");
-        assert!(document["response"]["next_cursor"].is_null());
+        if kind == "schemas" {
+            assert!(!document["response"]["next_cursor"].is_null());
+        } else {
+            assert!(document["response"]["next_cursor"].is_null());
+        }
     }
 }
 

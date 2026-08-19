@@ -41,7 +41,7 @@ fn regeneration_manifest_and_production_catalogs_close_over_one_exact_set() {
         &ContractLimits::packet0(),
     )
     .unwrap();
-    assert_eq!(manifest.len(), 120);
+    assert_eq!(manifest.len(), 135);
 
     let mut refs = BTreeSet::new();
     let mut schema_paths = BTreeSet::new();
@@ -87,10 +87,10 @@ fn regeneration_manifest_and_production_catalogs_close_over_one_exact_set() {
     );
     assert_eq!(
         witness.catalog_roots().operations().total_entries().get(),
-        19
+        23
     );
     assert_eq!(witness.catalog_roots().profiles().total_entries().get(), 3);
-    assert_eq!(witness.capabilities().len(), 19);
+    assert_eq!(witness.capabilities().len(), 23);
     let posture = witness
         .capabilities()
         .iter()
@@ -188,7 +188,7 @@ fn identity_domains_and_raw_key_confinement_hold_across_the_live_seam() {
     };
     let cursor = schema_page
         .next_cursor()
-        .expect("the 120-entry catalog has a second page");
+        .expect("the 135-entry catalog has a second page");
     let receipt = WriteReceipt::new(
         bounded("packet.five.record"),
         binding("handbook.packet-five-record@1.0.0", b"packet-five-record"),
@@ -264,7 +264,14 @@ fn owner_native_evidence_inventory_and_adapter_direction_remain_independent() {
     let engine = handbook_engine::operation_admission::operation_owner_version_evidence();
     let flow = handbook_flow::operation_admission::operation_owner_version_evidence();
     let pipeline = handbook_pipeline::operation_admission::operation_owner_version_evidence();
+    let contracts = handbook_contracts::operation_admission::operation_owner_version_evidence();
     let expected = [
+        (
+            contracts.owner_crate,
+            contracts.owner_version,
+            contracts.owner_source_ref,
+            contracts.source_bytes,
+        ),
         (
             engine.owner_crate,
             engine.owner_version,
@@ -318,7 +325,7 @@ fn owner_native_evidence_inventory_and_adapter_direction_remain_independent() {
         .iter()
         .filter(|row| row.admission_reason() == AdmissionReason::Admitted)
         .collect::<Vec<_>>();
-    assert_eq!(admitted.len(), 19);
+    assert_eq!(admitted.len(), 23);
     let cli_json = [
         "artifact.kind.list@1.0.0",
         "artifact.instance.list@1.0.0",
@@ -341,7 +348,14 @@ fn owner_native_evidence_inventory_and_adapter_direction_remain_independent() {
     ];
     assert!(admitted.iter().all(|row| {
         row.discovery() == DiscoveryState::Discoverable
-            && if row.operation_ref().as_str() == "posture.transition.apply@1.0.0" {
+            && if row.operation_ref().as_str().starts_with("contract.") {
+                row.current_transports()
+                    == [
+                        OperationTransport::CliJson,
+                        OperationTransport::RustSdk,
+                        OperationTransport::Tauri,
+                    ]
+            } else if row.operation_ref().as_str() == "posture.transition.apply@1.0.0" {
                 row.current_transports() == [OperationTransport::RustSdk, OperationTransport::Tauri]
             } else {
                 let expected: &[OperationTransport] =

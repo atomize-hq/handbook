@@ -22,6 +22,7 @@ default = []
 contract-schema-generation = ["dep:schemars"]
 
 [dependencies]
+handbook-contracts = { path = "../contracts", version = "0.1.0" }
 handbook-engine = { path = "../engine", version = "0.2.0" }
 handbook-flow = { path = "../flow", version = "0.1.1" }
 handbook-pipeline = { path = "../pipeline", version = "0.1.2" }

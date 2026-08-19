@@ -1,4 +1,5 @@
 use super::artifact_operation::{ArtifactSchemaValidator, ARTIFACT_OPERATION_REFS};
+use super::contract_operation::{ContractOperationSchemaValidator, CONTRACT_OPERATION_REFS};
 use super::facade::SdkUseCaseRequest;
 use super::flow_operation::FLOW_OPERATION_REF;
 use super::pipeline_operation::{
@@ -7,13 +8,14 @@ use super::pipeline_operation::{
 };
 use super::posture::{PostureSchemaValidator, OPERATION_REF as POSTURE_OPERATION_REF};
 use super::{
-    artifact_operation_definition, canonical_json_bytes, execute_artifact_operation,
-    execute_flow_operation, execute_pipeline_operation, flow_resolve_operation_definition,
-    parse_canonical_json, pipeline_operation_definitions, posture_transition_apply_definition,
-    ContractError, ContractLimits, ContractValue, ExactBinding, InvocationRequestBodyV1,
-    InvocationRequestV1, InvocationResponseKind, InvocationResponseV1, OperationDefinition,
-    OperationRequestV1, OperationSchemaValidator, PipelineOperationSchemaValidator, RequestId,
-    TransportFailureKind, TransportFailureV1,
+    artifact_operation_definition, canonical_json_bytes, contract_operation_definition,
+    execute_artifact_operation, execute_contract_operation, execute_flow_operation,
+    execute_pipeline_operation, flow_resolve_operation_definition, parse_canonical_json,
+    pipeline_operation_definitions, posture_transition_apply_definition, ContractError,
+    ContractLimits, ContractValue, ExactBinding, InvocationRequestBodyV1, InvocationRequestV1,
+    InvocationResponseKind, InvocationResponseV1, OperationDefinition, OperationRequestV1,
+    OperationSchemaValidator, PipelineOperationSchemaValidator, RequestId, TransportFailureKind,
+    TransportFailureV1,
 };
 use super::{FlowResolveSchemaValidator, OperationTransport};
 use crate::HandbookSdkV1;
@@ -25,6 +27,7 @@ const ROUTE_NOT_READY: &str = "transport.invocation_route_not_ready";
 #[derive(Clone, Copy)]
 enum OperationRoute {
     Artifact,
+    Contracts,
     Flow,
     Pipeline,
     Posture,
@@ -40,6 +43,7 @@ impl OperationRoute {
     fn definition(self, operation_ref: &str) -> Result<OperationDefinition, ContractError> {
         match self {
             Self::Artifact => artifact_operation_definition(operation_ref),
+            Self::Contracts => contract_operation_definition(operation_ref),
             Self::Flow => flow_resolve_operation_definition(),
             Self::Pipeline => pipeline_operation_definitions()?
                 .into_iter()
@@ -52,6 +56,7 @@ impl OperationRoute {
     fn validator(self) -> &'static dyn OperationSchemaValidator {
         match self {
             Self::Artifact => &ArtifactSchemaValidator,
+            Self::Contracts => &ContractOperationSchemaValidator,
             Self::Flow => &FlowResolveSchemaValidator,
             Self::Pipeline => &PipelineOperationSchemaValidator,
             Self::Posture => &PostureSchemaValidator,
@@ -65,6 +70,7 @@ impl OperationRoute {
     ) -> Result<super::OperationResponseV1, ContractError> {
         match self {
             Self::Artifact => execute_artifact_operation(repo_root, request),
+            Self::Contracts => execute_contract_operation(repo_root, request),
             Self::Flow => execute_flow_operation(repo_root, request),
             Self::Pipeline => execute_pipeline_operation(repo_root, request),
             Self::Posture => {
@@ -355,6 +361,8 @@ fn resolve_operation_route(
 ) -> Result<Option<(OperationRoute, OperationDefinition)>, ContractError> {
     let route = if ARTIFACT_OPERATION_REFS.contains(&operation_ref) {
         OperationRoute::Artifact
+    } else if CONTRACT_OPERATION_REFS.contains(&operation_ref) {
+        OperationRoute::Contracts
     } else if operation_ref == FLOW_OPERATION_REF {
         OperationRoute::Flow
     } else if [

@@ -22,7 +22,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 120] = [
+const ROOTS: [(&str, &str); 135] = [
     (
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -106,6 +106,34 @@ const ROOTS: [(&str, &str); 120] = [
     (
         "handbook.catalog-roots@1.0.0",
         "handbook.catalog-roots/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-applicability-outcome@1.0.0",
+        "handbook.contract-applicability-outcome/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-claim@1.0.0",
+        "handbook.contract-claim/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-definition@1.0.0",
+        "handbook.contract-definition/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-evaluation-lifecycle-basis@1.0.0",
+        "handbook.contract-evaluation-lifecycle-basis/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-lifecycle-policy@1.0.0",
+        "handbook.contract-lifecycle-policy/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-lifecycle-transition@1.0.0",
+        "handbook.contract-lifecycle-transition/1.0.0.schema.json",
+    ),
+    (
+        "handbook.contract-operation-details@1.0.0",
+        "handbook.contract-operation-details/1.0.0.schema.json",
     ),
     (
         "handbook.correlation-ref@1.0.0",
@@ -226,6 +254,38 @@ const ROOTS: [(&str, &str); 120] = [
     (
         "handbook.operation.artifact-validate-result@1.0.0",
         "handbook.operation.artifact-validate-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-definition-append-request@1.0.0",
+        "handbook.operation.contract-definition-append-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-definition-append-result@1.0.0",
+        "handbook.operation.contract-definition-append-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-definition-list-request@1.0.0",
+        "handbook.operation.contract-definition-list-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-definition-list-result@1.0.0",
+        "handbook.operation.contract-definition-list-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-definition-read-request@1.0.0",
+        "handbook.operation.contract-definition-read-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-definition-read-result@1.0.0",
+        "handbook.operation.contract-definition-read-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-lifecycle-transition-request@1.0.0",
+        "handbook.operation.contract-lifecycle-transition-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.contract-lifecycle-transition-result@1.0.0",
+        "handbook.operation.contract-lifecycle-transition-result/1.0.0.schema.json",
     ),
     (
         "handbook.operation.flow-resolve-request@1.0.0",
@@ -599,7 +659,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 120);
+    assert_eq!(entries.len(), 135);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries
@@ -745,7 +805,7 @@ fn packet_three_constructor_instances_validate_against_every_new_root_shape() {
         }
         _ => panic!("expired catalog did not return a blocked restart"),
     }
-    assert_eq!(witness.capabilities().len(), 19);
+    assert_eq!(witness.capabilities().len(), 23);
 }
 
 #[test]
@@ -1138,6 +1198,8 @@ fn custom_wire_forms_are_exact_and_unfingerprinted_key_material_is_absent() {
             "handbook.operation.pipeline-capture-apply-request@1.0.0",
             "handbook.operation.pipeline-handoff-emit-request@1.0.0",
             "handbook.operation.pipeline-state-apply-request@1.0.0",
+            "handbook.operation.contract-definition-append-request@1.0.0",
+            "handbook.operation.contract-lifecycle-transition-request@1.0.0",
         ]
         .contains(&exact_ref)
         {

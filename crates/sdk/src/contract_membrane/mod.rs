@@ -6,6 +6,7 @@ mod bootstrap_envelope;
 mod bounds;
 mod catalog;
 mod consumer;
+mod contract_operation;
 mod dto;
 mod envelope;
 mod facade;
@@ -51,6 +52,24 @@ pub use bounds::{
 };
 pub use catalog::{CatalogCursor, CatalogPage, CatalogRoot};
 pub use consumer::{CapabilityConsumer, CapabilityConsumerError};
+pub(crate) use contract_operation::execute_contract_operation;
+pub use contract_operation::{
+    contract_definition_append_operation_request, contract_definition_list_operation_request,
+    contract_definition_read_operation_request, contract_lifecycle_transition_operation_request,
+    contract_operation_definition, contract_operation_definitions,
+    execute_contract_operation_with_authenticator, ContractApplicabilityOutcomeDtoV1,
+    ContractApprovalClassDtoV1, ContractClaimDtoV1, ContractDefinitionAppendRequestV1,
+    ContractDefinitionAppendResultV1, ContractDefinitionDtoV1, ContractDefinitionListEntryV1,
+    ContractDefinitionListRequestV1, ContractDefinitionListResultV1,
+    ContractDefinitionReadRequestV1, ContractDefinitionReadResultV1,
+    ContractEvaluationLifecycleBasisDtoV1, ContractLifecycleEvidenceDtoV1,
+    ContractLifecycleEvidenceKindDtoV1, ContractLifecycleHeadDtoV1, ContractLifecyclePolicyDtoV1,
+    ContractLifecycleReasonDtoV1, ContractLifecycleStateDtoV1, ContractLifecycleTransitionDtoV1,
+    ContractLifecycleTransitionInputDtoV1, ContractLifecycleTransitionRequestV1,
+    ContractLifecycleTransitionResultV1, ContractListRetentionV1, ContractMutationDispositionV1,
+    ContractOperationProblemDetailsV1, ContractOperationSchemaValidator, ContractProblemCauseV1,
+    CONTRACT_OPERATION_REFS,
+};
 pub use dto::{
     CorrelationRef, Diagnostic, DiagnosticSeverity, DraftVersion, NextAction, NextActionKind,
     Omission, OmissionReason, Problem, ProblemBinding, ProblemCategory, ProofEffect,

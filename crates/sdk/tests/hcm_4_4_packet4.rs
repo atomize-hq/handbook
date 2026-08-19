@@ -299,7 +299,7 @@ fn use_cases_remain_outside_operation_inventory_owner_admission_and_discovery() 
     let witness =
         ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
             .unwrap();
-    assert_eq!(witness.capabilities().len(), 19);
+    assert_eq!(witness.capabilities().len(), 23);
     for use_case_ref in use_case_refs {
         assert!(witness
             .capabilities()
@@ -312,6 +312,6 @@ fn use_cases_remain_outside_operation_inventory_owner_admission_and_discovery() 
                 .current_transports()
                 .contains(&OperationTransport::Tauri))
             .count(),
-        19
+        23
     );
 }

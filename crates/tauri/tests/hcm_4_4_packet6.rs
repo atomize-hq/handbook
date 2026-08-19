@@ -26,7 +26,7 @@ const FACADE_ROOTS: [&str; 5] = [
     "handbook.use-case-request@1.0.0",
 ];
 
-const OPERATIONS: [&str; 19] = [
+const OPERATIONS: [&str; 23] = [
     "artifact.kind.list@1.0.0",
     "artifact.instance.list@1.0.0",
     "artifact.read@1.0.0",
@@ -46,6 +46,10 @@ const OPERATIONS: [&str; 19] = [
     "pipeline.handoff.emit@1.0.0",
     "pipeline.state.apply@1.0.0",
     "posture.transition.apply@1.0.0",
+    "contract.definition.list@1.0.0",
+    "contract.definition.read@1.0.0",
+    "contract.definition.append@1.0.0",
+    "contract.lifecycle.transition@1.0.0",
 ];
 
 const USE_CASES: [&str; 6] = [
@@ -78,7 +82,7 @@ fn integrated_facade_surface_closes_exact_commands_contracts_routes_and_omission
         .iter()
         .map(|entry| entry.schema().reference().as_str())
         .collect::<BTreeSet<_>>();
-    assert_eq!(manifest_refs.len(), 120);
+    assert_eq!(manifest_refs.len(), 135);
     assert_eq!(
         manifest_refs
             .intersection(&FACADE_ROOTS.into_iter().collect())
@@ -115,7 +119,17 @@ fn integrated_facade_surface_closes_exact_commands_contracts_routes_and_omission
 
     for row in rows {
         let operation_ref = row.operation_ref().as_str();
-        if operation_ref == "posture.transition.apply@1.0.0" {
+        if expected_operations.contains(operation_ref) && operation_ref.starts_with("contract.") {
+            assert_eq!(
+                row.current_transports(),
+                &[
+                    OperationTransport::CliJson,
+                    OperationTransport::RustSdk,
+                    OperationTransport::Tauri,
+                ],
+                "{operation_ref}"
+            );
+        } else if operation_ref == "posture.transition.apply@1.0.0" {
             assert_eq!(
                 row.current_transports(),
                 &[OperationTransport::RustSdk, OperationTransport::Tauri]
@@ -135,7 +149,7 @@ fn integrated_facade_surface_closes_exact_commands_contracts_routes_and_omission
         rows.iter()
             .filter(|row| row.current_transports().is_empty())
             .count(),
-        43
+        39
     );
 
     let limits = ContractLimits::packet0();

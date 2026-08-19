@@ -193,7 +193,7 @@ fn production_discovery_adds_tauri_only_to_the_twelve_proven_read_only_rows() {
         .filter(|row| row.discovery() == DiscoveryState::Discoverable)
         .map(|row| row.operation_ref().as_str().to_owned())
         .collect::<BTreeSet<_>>();
-    assert_eq!(expected_tauri.len(), 19);
+    assert_eq!(expected_tauri.len(), 23);
     let actual_tauri = rows
         .iter()
         .filter(|row| {
@@ -207,8 +207,7 @@ fn production_discovery_adds_tauri_only_to_the_twelve_proven_read_only_rows() {
     let cli_rows = rows
         .iter()
         .filter(|row| {
-            row.current_transports()
-                .contains(&OperationTransport::CliJson)
+            row.current_transports() == [OperationTransport::CliJson, OperationTransport::Tauri]
         })
         .collect::<Vec<_>>();
     assert_eq!(cli_rows.len(), 18);
@@ -231,7 +230,7 @@ fn production_discovery_adds_tauri_only_to_the_twelve_proven_read_only_rows() {
         rows.iter()
             .filter(|row| row.discovery() == DiscoveryState::Discoverable)
             .count(),
-        19
+        23
     );
 
     let inventory_refs = rows

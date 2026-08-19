@@ -372,14 +372,13 @@ fn final_inventory_and_witness_have_exactly_nineteen_transport_vectors() {
         rows.iter()
             .filter(|row| row.discovery() == DiscoveryState::Discoverable)
             .count(),
-        19
+        23
     );
 
     let expected_cli_tauri = rows
         .iter()
         .filter(|row| {
-            row.current_transports()
-                .contains(&OperationTransport::CliJson)
+            row.current_transports() == [OperationTransport::CliJson, OperationTransport::Tauri]
         })
         .map(|row| row.operation_ref().as_str().to_owned())
         .collect::<BTreeSet<_>>();
@@ -408,13 +407,13 @@ fn final_inventory_and_witness_have_exactly_nineteen_transport_vectors() {
         rows.iter()
             .filter(|row| !row.current_transports().is_empty())
             .count(),
-        19
+        23
     );
     assert_eq!(
         rows.iter()
             .filter(|row| row.current_transports().is_empty())
             .count(),
-        43
+        39
     );
 
     let witness =
@@ -431,9 +430,16 @@ fn final_inventory_and_witness_have_exactly_nineteen_transport_vectors() {
             )
         })
         .collect::<Vec<_>>();
-    assert_eq!(witness_vectors.len(), 19);
+    assert_eq!(witness_vectors.len(), 23);
     assert!(witness_vectors.iter().all(|(operation_ref, transports)| {
-        if operation_ref == "posture.transition.apply@1.0.0" {
+        if operation_ref.starts_with("contract.") {
+            transports
+                == &[
+                    OperationTransport::CliJson,
+                    OperationTransport::RustSdk,
+                    OperationTransport::Tauri,
+                ]
+        } else if operation_ref == "posture.transition.apply@1.0.0" {
             transports == &[OperationTransport::RustSdk, OperationTransport::Tauri]
         } else {
             transports == &[OperationTransport::CliJson, OperationTransport::Tauri]

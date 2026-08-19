@@ -115,7 +115,7 @@ pub struct BootstrapResponseV1 {
     catalog_roots: CatalogRoots,
     first_capability_page: CapabilityCatalogPage,
     owner_versions: BoundedVec<super::OwnerVersionEntry, 128>,
-    schema_manifest: BoundedVec<SchemaManifestEntry, 128>,
+    schema_manifest: BoundedVec<SchemaManifestEntry, 256>,
     response_fingerprint: Fingerprint,
 }
 
@@ -128,7 +128,7 @@ impl BootstrapResponseV1 {
         catalog_roots: CatalogRoots,
         first_capability_page: CapabilityCatalogPage,
         owner_versions: BoundedVec<super::OwnerVersionEntry, 128>,
-        schema_manifest: BoundedVec<SchemaManifestEntry, 128>,
+        schema_manifest: BoundedVec<SchemaManifestEntry, 256>,
         limits: &ContractLimits,
     ) -> Result<Self, ContractError> {
         require_ref(&schema, "handbook.bootstrap-response@1.0.0")?;
@@ -220,7 +220,7 @@ impl<'de> Deserialize<'de> for BootstrapResponseV1 {
             catalog_roots: CatalogRoots,
             first_capability_page: CapabilityCatalogPage,
             owner_versions: BoundedVec<super::OwnerVersionEntry, 128>,
-            schema_manifest: BoundedVec<SchemaManifestEntry, 128>,
+            schema_manifest: BoundedVec<SchemaManifestEntry, 256>,
             response_fingerprint: Fingerprint,
         }
         let raw = Raw::deserialize(deserializer).map_err(sanitize_deserialize_error)?;
@@ -342,7 +342,7 @@ pub struct BootstrapRefusalV1 {
     blockers: BoundedVec<Problem, 128>,
     refusals: BoundedVec<Problem, 128>,
     errors: BoundedVec<Problem, 128>,
-    schema_manifest: BoundedVec<SchemaManifestEntry, 128>,
+    schema_manifest: BoundedVec<SchemaManifestEntry, 256>,
     response_fingerprint: Fingerprint,
 }
 
@@ -353,7 +353,7 @@ impl BootstrapRefusalV1 {
         bootstrap_descriptor: Option<ExactBinding>,
         reason: BootstrapRefusalReason,
         supported_api_versions: BoundedVec<SemVer, 16>,
-        schema_manifest: BoundedVec<SchemaManifestEntry, 128>,
+        schema_manifest: BoundedVec<SchemaManifestEntry, 256>,
         limits: &ContractLimits,
     ) -> Result<Self, ContractError> {
         require_ref(&schema, "handbook.bootstrap-refusal@1.0.0")?;
@@ -457,7 +457,7 @@ impl<'de> Deserialize<'de> for BootstrapRefusalV1 {
             blockers: BoundedVec<Problem, 128>,
             refusals: BoundedVec<Problem, 128>,
             errors: BoundedVec<Problem, 128>,
-            schema_manifest: BoundedVec<SchemaManifestEntry, 128>,
+            schema_manifest: BoundedVec<SchemaManifestEntry, 256>,
             response_fingerprint: Fingerprint,
         }
         let raw = Raw::deserialize(deserializer).map_err(sanitize_deserialize_error)?;
@@ -686,7 +686,7 @@ struct ResponsePreimage<'a> {
     catalog_roots: &'a CatalogRoots,
     first_capability_page: &'a CapabilityCatalogPage,
     owner_versions: &'a BoundedVec<super::OwnerVersionEntry, 128>,
-    schema_manifest: &'a BoundedVec<SchemaManifestEntry, 128>,
+    schema_manifest: &'a BoundedVec<SchemaManifestEntry, 256>,
 }
 
 #[derive(Serialize)]
@@ -700,7 +700,7 @@ struct RefusalPreimage<'a> {
     blockers: &'a BoundedVec<Problem, 128>,
     refusals: &'a BoundedVec<Problem, 128>,
     errors: &'a BoundedVec<Problem, 128>,
-    schema_manifest: &'a BoundedVec<SchemaManifestEntry, 128>,
+    schema_manifest: &'a BoundedVec<SchemaManifestEntry, 256>,
 }
 
 #[derive(Serialize)]

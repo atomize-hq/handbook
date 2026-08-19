@@ -9,6 +9,8 @@ use time::{Date, Month};
 
 const MAX_STRING_BYTES: usize = 65_536;
 const MAX_ITEMS: usize = 128;
+const MAX_MANIFEST_ITEMS: usize = 256;
+const MAX_DOCUMENT_ARRAY_ITEMS: usize = MAX_MANIFEST_ITEMS;
 const MAX_DOCUMENT_BYTES: usize = 1_048_576;
 // The measurement-only setup candidate can repeat each public path four times,
 // JSON escaping can double every path byte, and the remaining current setup
@@ -106,7 +108,7 @@ pub struct BoundedVec<T, const N: usize>(Vec<T>);
 
 impl<T, const N: usize> BoundedVec<T, N> {
     pub fn new(value: Vec<T>) -> Result<Self, ContractError> {
-        if N > MAX_ITEMS {
+        if N > MAX_ITEMS && N != MAX_MANIFEST_ITEMS {
             return Err(ContractError::LimitOutOfRange);
         }
         if value.len() > N {
@@ -142,7 +144,7 @@ impl<'de, T: Deserialize<'de>, const N: usize> Deserialize<'de> for BoundedVec<T
     where
         D: Deserializer<'de>,
     {
-        if N > MAX_ITEMS {
+        if N > MAX_ITEMS && N != MAX_MANIFEST_ITEMS {
             return Err(D::Error::custom(ContractError::LimitOutOfRange));
         }
 
@@ -409,7 +411,7 @@ impl ContractLimits {
             || string_bytes == 0
             || string_bytes > MAX_STRING_BYTES
             || array_items == 0
-            || array_items > MAX_ITEMS
+            || array_items > MAX_DOCUMENT_ARRAY_ITEMS
             || object_members == 0
             || object_members > MAX_ITEMS
             || nesting_depth == 0
@@ -430,7 +432,7 @@ impl ContractLimits {
         Self {
             document_bytes: MAX_DOCUMENT_BYTES,
             string_bytes: MAX_STRING_BYTES,
-            array_items: MAX_ITEMS,
+            array_items: MAX_DOCUMENT_ARRAY_ITEMS,
             object_members: MAX_ITEMS,
             nesting_depth: MAX_NESTING_DEPTH,
         }
