@@ -46,6 +46,7 @@ mod context_resolution;
 pub mod context_resolution_registry;
 pub mod definition_identity;
 pub mod environment_context_artifact;
+mod evidence_source_admission;
 pub mod freshness;
 pub mod instance_profile;
 pub mod operation_admission;
@@ -233,6 +234,13 @@ pub use environment_context_artifact::{
     CanonicalEnvironmentContext, CanonicalEnvironmentContextProjection,
     EnvironmentContextArtifactError, EnvironmentContextArtifactErrorKind, NamedEnvironment,
     ENVIRONMENT_CONTEXT_CANONICAL_PATH,
+};
+pub use evidence_source_admission::{
+    effective_resolution_minimum_v1, resolution_meets_minimum_v1,
+    EvidenceSourceAdmissionErrorKindV1, EvidenceSourceAdmissionErrorV1,
+    EvidenceSourceAdmissionRequestV1, EvidenceSourceAdmissionServiceV1, EvidenceSourceAdmissionV1,
+    ResolutionObservationV1, SourceCurrentnessObservationV1, SourceCurrentnessPortV1,
+    SourceCurrentnessRequestV1, CONTRACT_EVIDENCE_SOURCE_APPROVAL_CLASS_V1,
 };
 pub use freshness::{
     compute_freshness, FreshnessIssue, FreshnessIssueKind, FreshnessStatus, FreshnessTruth,

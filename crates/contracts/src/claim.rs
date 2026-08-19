@@ -345,6 +345,14 @@ impl EvidenceRequirementV1 {
             stability_policy,
         })
     }
+
+    pub(crate) fn evidence_kind(&self) -> &StableIdV1 {
+        &self.evidence_kind
+    }
+
+    pub(crate) fn cases(&self) -> &EvidenceCaseSelectionV1 {
+        &self.cases
+    }
 }
 
 impl<'de> Deserialize<'de> for EvidenceRequirementV1 {
@@ -404,6 +412,21 @@ impl ResolutionMinimumV1 {
             memory_horizon,
             validation_horizon,
         }
+    }
+
+    pub(crate) fn resolution_stack(&self) -> &ExactBindingV1 {
+        &self.resolution_stack
+    }
+
+    pub(crate) fn dimension_values(&self) -> [&StableIdV1; 6] {
+        [
+            &self.scope_horizon,
+            &self.detail_resolution,
+            &self.temporal_horizon,
+            &self.authority_horizon,
+            &self.memory_horizon,
+            &self.validation_horizon,
+        ]
     }
 }
 
@@ -533,6 +556,14 @@ impl ContractClaimV1 {
     /// Returns the ordered all-of evidence requirements.
     pub fn evidence_requirements(&self) -> &[EvidenceRequirementV1] {
         &self.evidence_requirements
+    }
+
+    pub(crate) fn freshness_policy(&self) -> &ExactBindingV1 {
+        &self.freshness_policy
+    }
+
+    pub(crate) fn minimum_resolution(&self) -> &ResolutionMinimumV1 {
+        &self.minimum_resolution
     }
 
     /// Returns the optional positive JSON-safe score weight.

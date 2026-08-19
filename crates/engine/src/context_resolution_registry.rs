@@ -341,6 +341,17 @@ impl ContextResolutionStackDefinition {
     pub fn definition_fingerprint(&self) -> &DefinitionFingerprint {
         &self.definition_fingerprint
     }
+    /// Resolves exact ranks for a complete dimension tuple without assigning
+    /// contract, lifecycle, evidence, or mutation semantics to the result.
+    #[rustfmt::skip]
+    pub fn dimension_ranks(&self, values: [&str; 6]) -> Option<[u8; 6]> {
+        let domains = [&self.dimension_domains.scope_horizon, &self.dimension_domains.detail_resolution, &self.dimension_domains.temporal_horizon, &self.dimension_domains.authority_horizon, &self.dimension_domains.memory_horizon, &self.dimension_domains.validation_horizon];
+        let mut ranks = [0; 6];
+        for (index, (domain, value_id)) in domains.into_iter().zip(values).enumerate() {
+            ranks[index] = domain.iter().find(|value| value.value_id == value_id)?.rank;
+        }
+        Some(ranks)
+    }
     pub fn load(
         repo: impl AsRef<Path>,
         path: &str,
@@ -362,12 +373,7 @@ impl ContextResolutionStackDefinition {
     #[rustfmt::skip]
     pub(crate) fn ranks(&self, level_id: &str, values: [&str; 6]) -> Option<[u8; 6]> {
         self.levels.iter().any(|level| level.level_id == level_id).then_some(())?;
-        let domains = [&self.dimension_domains.scope_horizon, &self.dimension_domains.detail_resolution, &self.dimension_domains.temporal_horizon, &self.dimension_domains.authority_horizon, &self.dimension_domains.memory_horizon, &self.dimension_domains.validation_horizon];
-        let mut ranks = [0; 6];
-        for (index, (domain, value_id)) in domains.into_iter().zip(values).enumerate() {
-            ranks[index] = domain.iter().find(|value| value.value_id == value_id)?.rank;
-        }
-        Some(ranks)
+        self.dimension_ranks(values)
     }
 }
 pub(crate) fn admitted_context_resolution_stack_exact_ref(

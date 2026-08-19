@@ -353,6 +353,10 @@ impl ContractOwnerRepositoryV1 {
         Ok(owner)
     }
 
+    pub(crate) fn retained_repository_root(&self) -> &RetainedRepositoryRootV1 {
+        &self.repository_root
+    }
+
     #[cfg(feature = "test-support")]
     #[doc(hidden)]
     pub fn with_fault_for_testing(mut self, fault: OwnerRepositoryFaultBoundaryV1) -> Self {
@@ -558,6 +562,92 @@ impl ContractOwnerRepositoryV1 {
                 owner_currentness,
             )
             .map_err(map_contract_input)
+        })
+    }
+
+    /// Independently re-admits a caller/source supplied Packet-1 run against
+    /// the current recovered owner definition, lifecycle, and exact policy
+    /// closure. It derives no evidence semantics and performs no write.
+    pub fn readmit_evaluation_run_v1(
+        &self,
+        run: &ContractEvaluationRunV1,
+        policy_registry: &EvaluationPolicyRegistryV1,
+    ) -> Result<LifecycleHeadV1, ContractOwnerRepositoryErrorV1> {
+        self.with_lock(|owner| {
+            owner.recover_locked()?;
+            owner.validate_inventory()?;
+            let contract = run.contract();
+            let (definition, chain, persisted_head) =
+                owner.load_lifecycle_bundle(contract.reference(), contract.fingerprint())?;
+            let current_head =
+                current_lifecycle_head(&definition, &chain).map_err(map_lifecycle)?;
+            if current_head != persisted_head
+                || current_head.lifecycle_fingerprint()
+                    != run.owner_currentness().lifecycle_head_fingerprint()
+            {
+                return Err(map_lifecycle(ContractLifecycleErrorV1::StaleHead));
+            }
+            let basis = evaluation_lifecycle_admission_basis_v1(&definition, &chain)
+                .map_err(map_lifecycle)?;
+            if run.evaluation_lifecycle_basis().reference() != basis.basis_ref()
+                || run.evaluation_lifecycle_basis().fingerprint() != basis.basis_fingerprint()
+            {
+                return Err(invalid("evaluation lifecycle basis was substituted"));
+            }
+            let definition = definition.definition();
+            if run.contract().reference() != definition.contract_ref()
+                || run.contract().fingerprint() != definition.definition_fingerprint()
+                || run.claims() != definition.claims()
+            {
+                return Err(invalid(
+                    "evaluation run definition or claims were substituted",
+                ));
+            }
+            let closure = definition.evaluation_closure();
+            if run.freshness_policies() != closure.freshness_policies
+                || run.stability_policies() != closure.stability_policies
+                || closure.matcher_bindings.as_slice() != std::slice::from_ref(run.matcher())
+            {
+                return Err(invalid("evaluation run policy closure was substituted"));
+            }
+            require_policy_kind(
+                policy_registry,
+                run.freshness_policies(),
+                EvaluationPolicyKindV1::Freshness,
+            )?;
+            require_policy_kind(
+                policy_registry,
+                run.stability_policies(),
+                EvaluationPolicyKindV1::Stability,
+            )?;
+            if run.gate_policy() != definition.gate_policy() {
+                return Err(invalid("evaluation run gate policy was substituted"));
+            }
+            let registered_gate = policy_registry
+                .resolve_exact(run.gate_policy())
+                .map_err(map_contract_input)?;
+            if registered_gate.kind() != EvaluationPolicyKindV1::Gate {
+                return Err(invalid("evaluation run gate policy kind is not admitted"));
+            }
+            let gate: GatePolicyV1 = serde_json::from_slice(&registered_gate.canonical_json())
+                .map_err(|_| invalid("registered gate policy bytes are invalid"))?;
+            if run.local_closeout_policy() != gate.local_closeout_policy() {
+                return Err(invalid(
+                    "evaluation run local-closeout policy was substituted",
+                ));
+            }
+            require_policy_kind(
+                policy_registry,
+                std::slice::from_ref(run.local_closeout_policy()),
+                EvaluationPolicyKindV1::LocalCloseout,
+            )?;
+            let bytes = run.canonical_json_bytes().map_err(map_contract_input)?;
+            let parsed: ContractEvaluationRunV1 = serde_json::from_slice(&bytes)
+                .map_err(|_| invalid("evaluation run canonical identity is invalid"))?;
+            if &parsed != run {
+                return Err(invalid("evaluation run canonical identity was substituted"));
+            }
+            Ok(current_head)
         })
     }
 

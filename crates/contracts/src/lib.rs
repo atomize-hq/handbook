@@ -11,6 +11,8 @@ mod definition;
 mod evaluation_identity;
 mod evaluation_policy;
 mod evaluation_run;
+mod evidence_admission;
+mod evidence_candidate_source;
 mod identity;
 mod lifecycle;
 mod lifecycle_policy;
@@ -36,6 +38,19 @@ pub use evaluation_policy::*;
 pub use evaluation_run::{
     prepare_evaluation_run_v1, ContractEvaluationRunV1, EvaluationRunNonceV1,
     PrepareEvaluationRunInputV1, CONTRACT_EVALUATION_RUN_SCHEMA_REF_V1,
+};
+pub use evidence_admission::{
+    admit_evidence_candidate_v1, EvidenceCandidateAdmissionErrorKindV1,
+    EvidenceCandidateAdmissionErrorV1,
+};
+#[cfg(feature = "test-support")]
+#[doc(hidden)]
+pub use evidence_candidate_source::{
+    seed_committed_candidate_observation_for_testing_v1, CandidateObservationFixtureV1,
+};
+pub use evidence_candidate_source::{
+    EvidenceCandidateSourceErrorKindV1, EvidenceCandidateSourceErrorV1, EvidenceCandidateSourceV1,
+    RepositoryEvidenceCandidateSourceV1, ResolvedEvidenceCandidateObservationV1,
 };
 pub use identity::{
     ContractError, ContractIdV1, ExactBindingV1, ExactRefV1, FingerprintV1, VersionV1,

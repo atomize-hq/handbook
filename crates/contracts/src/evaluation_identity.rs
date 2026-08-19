@@ -332,6 +332,17 @@ impl ResolutionEnvelopeV1 {
     pub fn scope_horizon(&self) -> &StableIdV1 {
         &self.scope_horizon
     }
+
+    pub(crate) fn dimension_values(&self) -> [&StableIdV1; 6] {
+        [
+            &self.scope_horizon,
+            &self.detail_resolution,
+            &self.temporal_horizon,
+            &self.authority_horizon,
+            &self.memory_horizon,
+            &self.validation_horizon,
+        ]
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -369,6 +380,24 @@ pub(crate) struct SourceCurrentnessObservationV1 {
     current_head: ContentAddressedBindingV1,
 }
 
+impl SourceCurrentnessObservationV1 {
+    pub(crate) fn new(
+        source: ContentAddressedBindingV1,
+        revision: String,
+        collected_at: SemanticTimeV1,
+        observed_at: SemanticTimeV1,
+        current_head: ContentAddressedBindingV1,
+    ) -> Self {
+        Self {
+            source,
+            revision,
+            collected_at,
+            observed_at,
+            current_head,
+        }
+    }
+}
+
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub(crate) struct EvidenceSourceAuthorityObservationV1 {
@@ -377,6 +406,24 @@ pub(crate) struct EvidenceSourceAuthorityObservationV1 {
     registry_state: ContentAddressedBindingV1,
     registry_head: ContentAddressedBindingV1,
     observed_at: SemanticTimeV1,
+}
+
+impl EvidenceSourceAuthorityObservationV1 {
+    pub(crate) fn new(
+        actor_ref: StableIdV1,
+        authority: ExactBindingV1,
+        registry_state: ContentAddressedBindingV1,
+        registry_head: ContentAddressedBindingV1,
+        observed_at: SemanticTimeV1,
+    ) -> Self {
+        Self {
+            actor_ref,
+            authority,
+            registry_state,
+            registry_head,
+            observed_at,
+        }
+    }
 }
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -458,6 +505,82 @@ impl EvidenceCandidateV1 {
     }
     pub fn canonical_json_bytes(&self) -> Result<Vec<u8>, ContractError> {
         canonical_bytes(self)
+    }
+
+    pub(crate) fn admission_body(&self) -> &EvidenceCandidateBodyV1 {
+        &self.body
+    }
+}
+
+impl EvidenceCandidateBodyV1 {
+    pub(crate) fn evaluation_run(&self) -> &ContentAddressedBindingV1 {
+        &self.evaluation_run
+    }
+    pub(crate) fn evaluation_lifecycle_basis(&self) -> &ContentAddressedBindingV1 {
+        &self.evaluation_lifecycle_basis
+    }
+    pub(crate) fn contract(&self) -> &ExactBindingV1 {
+        &self.contract
+    }
+    pub(crate) fn subject(&self) -> &EvaluationSubjectV1 {
+        &self.subject
+    }
+    pub(crate) fn case(&self) -> &EvaluationCaseV1 {
+        &self.case
+    }
+    pub(crate) fn observed_claim_ids(&self) -> &[StableIdV1] {
+        &self.observed_claim_ids
+    }
+    pub(crate) fn evidence_kind(&self) -> &StableIdV1 {
+        &self.evidence_kind
+    }
+    pub(crate) fn producer(&self) -> &ContentAddressedBindingV1 {
+        &self.producer
+    }
+    pub(crate) fn request_record(&self) -> &ContentAddressedBindingV1 {
+        &self.request_record
+    }
+    pub(crate) fn execution_record(&self) -> &ContentAddressedBindingV1 {
+        &self.execution_record
+    }
+    pub(crate) fn sources(&self) -> &[EvidenceSourceBindingV1] {
+        &self.sources
+    }
+    pub(crate) fn claim_partition(&self) -> &ClaimPartitionV1 {
+        &self.claim_partition
+    }
+    pub(crate) fn request_resolution(&self) -> &ResolutionEnvelopeV1 {
+        &self.request_resolution
+    }
+    pub(crate) fn actual_resolution(&self) -> &ResolutionEnvelopeV1 {
+        &self.actual_resolution
+    }
+    pub(crate) fn observed_at(&self) -> &SemanticTimeV1 {
+        &self.observed_at
+    }
+}
+
+impl EvidenceSourceBindingV1 {
+    pub(crate) fn source(&self) -> &ContentAddressedBindingV1 {
+        &self.source
+    }
+    pub(crate) fn revision(&self) -> &str {
+        &self.revision
+    }
+    pub(crate) fn collected_at(&self) -> &SemanticTimeV1 {
+        &self.collected_at
+    }
+}
+
+impl ClaimPartitionV1 {
+    pub(crate) fn observed(&self) -> &[StableIdV1] {
+        &self.observed
+    }
+    pub(crate) fn unobserved(&self) -> &[StableIdV1] {
+        &self.unobserved
+    }
+    pub(crate) fn excluded_ids(&self) -> impl Iterator<Item = &StableIdV1> {
+        self.excluded.iter().map(|entry| &entry.claim_id)
     }
 }
 
@@ -553,6 +676,39 @@ identity_record!(
         fingerprint_hex(fingerprint)
     )
 );
+
+pub(crate) struct AdmittedEvidenceWitnessV1(EvidenceRecordBodyV1);
+
+impl AdmittedEvidenceWitnessV1 {
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn new(
+        observation: EvidenceCandidateBodyV1,
+        effective_resolution: ResolutionEnvelopeV1,
+        admission_currentness: OwnerCurrentnessObservationV1,
+        source_currentness: Vec<SourceCurrentnessObservationV1>,
+        evidence_source_authority: EvidenceSourceAuthorityObservationV1,
+        admission_policy: ExactBindingV1,
+        freshness_policies: Vec<ExactBindingV1>,
+        stability_policies: Vec<ExactBindingV1>,
+        admitted_candidate: ContentAddressedBindingV1,
+    ) -> Self {
+        Self(EvidenceRecordBodyV1 {
+            observation,
+            effective_resolution,
+            admission_currentness,
+            source_currentness,
+            evidence_source_authority,
+            admission_policy,
+            freshness_policies,
+            stability_policies,
+            admitted_candidate,
+        })
+    }
+
+    pub(crate) fn into_record(self) -> Result<EvidenceRecordV1, ContractError> {
+        EvidenceRecordV1::from_body(self.0)
+    }
+}
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "snake_case")]

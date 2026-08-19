@@ -18,6 +18,12 @@ use handbook_engine::{
     CredentialAuthorityAdmissionRequestV1, CredentialAuthorityAdmissionServiceV1,
     NativeAuthenticatorPortErrorV1, NativeAuthenticatorPortV1, AUTHENTICATOR_RP_ID,
 };
+#[cfg(feature = "test-support")]
+use handbook_engine::{
+    ContextResolutionPolicyRegistry, ContextResolutionStackDefinition,
+    EvidenceSourceAdmissionErrorV1, SourceCurrentnessObservationV1, SourceCurrentnessPortV1,
+    SourceCurrentnessRequestV1,
+};
 use p256::ecdsa::{signature::Signer, Signature, SigningKey};
 use serde_json::json;
 use sha2::{Digest, Sha256};
@@ -1475,6 +1481,372 @@ fn evaluation_run_is_atomically_prepared_from_exact_current_owner_truth() {
     );
 }
 
+#[test]
+fn evaluation_run_is_rederived_by_the_owner_before_evidence_admission() {
+    let mut harness = Harness::new_with_independent_authority();
+    let freshness = EvidenceFreshnessPolicyV1::new(
+        EvidenceFreshnessPolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.0+readmit").unwrap(),
+            300,
+            true,
+            0,
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let gate = GatePolicyV1::new(
+        GatePolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-gate-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.1").unwrap(),
+            GatePolicyAlgorithmV1::ClosedAccounting,
+            None,
+            handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let mut policies = EvaluationPolicyRegistryV1::new().unwrap();
+    policies.register_freshness(freshness.clone()).unwrap();
+    policies.register_gate(gate.clone()).unwrap();
+    let definition = evaluation_definition(
+        &harness.registry_state_fingerprint,
+        freshness.binding().clone(),
+        gate.binding().clone(),
+    );
+    let contract_ref = definition.contract_ref().clone();
+    let definition_fingerprint = definition.definition_fingerprint().clone();
+    let draft = harness
+        .append(definition, "owner-readmit-append-0001")
+        .unwrap()
+        .lifecycle_head()
+        .clone();
+    let ready = harness.transition(
+        &contract_ref,
+        &definition_fingerprint,
+        ContractLifecycleTransitionInputV1 {
+            expected_lifecycle_fingerprint: draft.lifecycle_fingerprint().clone(),
+            from_state: LifecycleStateV1::Draft,
+            to_state: LifecycleStateV1::ReviewReady,
+            approval_class: ContractApprovalClassV1::DefinitionAuthor,
+            supporting_evidence: vec![LifecycleSupportingEvidenceV1::new(
+                LifecycleEvidenceKindV1::DefinitionValidation,
+                binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '1'),
+            )],
+            reason: LifecycleReasonV1::ReadyForReview,
+        },
+        "owner-readmit-ready-0001",
+    );
+    let locked = harness.transition(
+        &contract_ref,
+        &definition_fingerprint,
+        ContractLifecycleTransitionInputV1 {
+            expected_lifecycle_fingerprint: ready.lifecycle_head().lifecycle_fingerprint().clone(),
+            from_state: LifecycleStateV1::ReviewReady,
+            to_state: LifecycleStateV1::Locked,
+            approval_class: ContractApprovalClassV1::IndependentLock,
+            supporting_evidence: vec![LifecycleSupportingEvidenceV1::new(
+                LifecycleEvidenceKindV1::IndependentReview,
+                binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '2'),
+            )],
+            reason: LifecycleReasonV1::IndependentlyLocked,
+        },
+        "owner-readmit-lock-0001",
+    );
+    let active = harness.transition(
+        &contract_ref,
+        &definition_fingerprint,
+        ContractLifecycleTransitionInputV1 {
+            expected_lifecycle_fingerprint: locked.lifecycle_head().lifecycle_fingerprint().clone(),
+            from_state: LifecycleStateV1::Locked,
+            to_state: LifecycleStateV1::Active,
+            approval_class: ContractApprovalClassV1::Activation,
+            supporting_evidence: vec![
+                LifecycleSupportingEvidenceV1::new(
+                    LifecycleEvidenceKindV1::ApplicabilityClosure,
+                    binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '3'),
+                ),
+                LifecycleSupportingEvidenceV1::new(
+                    LifecycleEvidenceKindV1::MatcherClosure,
+                    binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '4'),
+                ),
+                LifecycleSupportingEvidenceV1::new(
+                    LifecycleEvidenceKindV1::PolicyClosure,
+                    binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '5'),
+                ),
+                LifecycleSupportingEvidenceV1::new(
+                    LifecycleEvidenceKindV1::CurrentnessClosure,
+                    binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '6'),
+                ),
+            ],
+            reason: LifecycleReasonV1::Activated,
+        },
+        "owner-readmit-active-0001",
+    );
+    let active_head = active.lifecycle_head().lifecycle_fingerprint().clone();
+    let run = harness
+        .owner
+        .prepare_evaluation_run_v1(
+            PrepareEvaluationRunInputV1::new(
+                ExactBindingV1::new(contract_ref.clone(), definition_fingerprint.clone()),
+                active_head.clone(),
+                evaluation_subject('7'),
+                vec![evaluation_case('8')],
+                evaluation_resolution(),
+                MatcherBindingV1::exact_fields_v1(),
+                vec![freshness.binding().clone()],
+                vec![handbook_contracts::evidence_stability_policy_binding_v1().unwrap()],
+                gate.binding().clone(),
+                handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+                EvaluationRunNonceV1::parse("owner-readmit-observation-0001").unwrap(),
+            )
+            .unwrap(),
+            &policies,
+        )
+        .unwrap();
+
+    assert_eq!(
+        harness
+            .owner
+            .readmit_evaluation_run_v1(&run, &policies)
+            .unwrap()
+            .lifecycle_fingerprint(),
+        &active_head
+    );
+}
+
+#[cfg(feature = "test-support")]
+#[test]
+fn signed_repository_candidate_is_independently_normalized_into_owner_evidence() {
+    use handbook_contracts::{
+        admit_evidence_candidate_v1, seed_committed_candidate_observation_for_testing_v1,
+        CandidateObservationFixtureV1, ContentAddressedBindingV1,
+        EvidenceCandidateAdmissionErrorKindV1, RepositoryEvidenceCandidateSourceV1,
+    };
+
+    let mut harness = Harness::new_with_evidence_source_authority();
+    let (stack, stack_binding) = evidence_resolution_stack();
+    let freshness = EvidenceFreshnessPolicyV1::new(
+        EvidenceFreshnessPolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.0+admission").unwrap(),
+            300,
+            true,
+            0,
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let gate = GatePolicyV1::new(
+        GatePolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-gate-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.2").unwrap(),
+            GatePolicyAlgorithmV1::ClosedAccounting,
+            None,
+            handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let mut policies = EvaluationPolicyRegistryV1::new().unwrap();
+    policies.register_freshness(freshness.clone()).unwrap();
+    policies.register_gate(gate.clone()).unwrap();
+    let definition = evidence_admission_definition(
+        &harness.registry_state_fingerprint,
+        freshness.binding().clone(),
+        gate.binding().clone(),
+        stack_binding,
+    );
+    let (contract_ref, definition_fingerprint, active_head) =
+        activate_definition(&mut harness, definition, "evidence-admission");
+    let resolution = evidence_resolution(&stack);
+    let run = harness
+        .owner
+        .prepare_evaluation_run_v1(
+            PrepareEvaluationRunInputV1::new(
+                ExactBindingV1::new(contract_ref, definition_fingerprint),
+                active_head,
+                evaluation_subject('7'),
+                vec![evaluation_case('8')],
+                resolution.clone(),
+                MatcherBindingV1::exact_fields_v1(),
+                vec![freshness.binding().clone()],
+                vec![handbook_contracts::evidence_stability_policy_binding_v1().unwrap()],
+                gate.binding().clone(),
+                handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+                EvaluationRunNonceV1::parse("evidence-admission-observation-0001").unwrap(),
+            )
+            .unwrap(),
+            &policies,
+        )
+        .unwrap();
+    let observed_at = run.owner_currentness().semantic_time_utc().as_str();
+    let producer = content_binding("producer/ref", '5');
+    let request = content_binding("request/ref", '6');
+    let execution = content_binding("execution/ref", '9');
+    let source_binding = content_binding("source/ref", 'a');
+    let candidate_body = json!({
+        "evaluation_run": {
+            "ref": run.evaluation_run_ref(),
+            "fingerprint": run.evaluation_run_fingerprint(),
+        },
+        "evaluation_lifecycle_basis": run.evaluation_lifecycle_basis(),
+        "contract": run.contract(),
+        "subject": run.subject(),
+        "case": &run.cases()[0],
+        "observed_claim_ids": ["schema.payload.valid"],
+        "evidence_kind": "handbook.evidence.schema-conformance",
+        "fact_schema": binding("handbook.fact.schema-conformance@1.0.0", 'b'),
+        "fact_payload": {"valid": true},
+        "observation": "satisfied",
+        "producer": producer,
+        "request_record": request,
+        "execution_record": execution,
+        "sources": [{
+            "source": source_binding,
+            "revision": "revision-1",
+            "collected_at": observed_at,
+        }],
+        "claim_partition": {
+            "observed": ["schema.payload.valid"],
+            "unobserved": [],
+            "excluded": [],
+        },
+        "request_resolution": resolution,
+        "actual_resolution": evidence_resolution(&stack),
+        "observed_at": observed_at,
+    });
+    let candidate_preimage = json!({
+        "schema_ref": handbook_contracts::EVIDENCE_CANDIDATE_SCHEMA_REF_V1,
+        "body": candidate_body,
+    });
+    let candidate_fingerprint = FingerprintV1::parse(&format!(
+        "sha256:{:x}",
+        Sha256::digest(serde_json_canonicalizer::to_vec(&candidate_preimage).unwrap())
+    ))
+    .unwrap();
+    let candidate_ref = format!(
+        "producer/candidate/{}",
+        candidate_fingerprint
+            .as_str()
+            .strip_prefix("sha256:")
+            .unwrap()
+    );
+    let candidate_value = json!({
+        "schema_ref": handbook_contracts::EVIDENCE_CANDIDATE_SCHEMA_REF_V1,
+        "body": candidate_preimage["body"].clone(),
+        "candidate_ref": candidate_ref,
+        "candidate_fingerprint": candidate_fingerprint,
+    });
+    let candidate_bytes = serde_json_canonicalizer::to_vec(&candidate_value).unwrap();
+    let candidate: ContentAddressedBindingV1 = handbook_contracts::ContentAddressedBindingV1::new(
+        candidate_value["candidate_ref"].as_str().unwrap(),
+        serde_json::from_value(candidate_value["candidate_fingerprint"].clone()).unwrap(),
+    )
+    .unwrap();
+    let fixture = CandidateObservationFixtureV1::new(
+        candidate.clone(),
+        candidate_bytes,
+        run.canonical_json_bytes().unwrap(),
+        serde_json::from_value(candidate_value["body"]["producer"].clone()).unwrap(),
+        serde_json::from_value(candidate_value["body"]["request_record"].clone()).unwrap(),
+        serde_json::from_value(candidate_value["body"]["execution_record"].clone()).unwrap(),
+        None,
+    )
+    .unwrap();
+    seed_committed_candidate_observation_for_testing_v1(harness.repo.path(), &fixture).unwrap();
+    let Harness {
+        repo,
+        owner,
+        service,
+        registry_state_fingerprint: _,
+    } = harness;
+    let mut source =
+        RepositoryEvidenceCandidateSourceV1::open(repo.path(), service.into_port()).unwrap();
+    let mut currentness = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at: observed_at.to_owned(),
+        calls: 0,
+        second_head_fingerprint: None,
+    };
+
+    let evidence = admit_evidence_candidate_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &candidate,
+    )
+    .unwrap();
+    let value: serde_json::Value =
+        serde_json::from_slice(&evidence.canonical_json_bytes().unwrap()).unwrap();
+    assert_eq!(
+        value["body"]["admitted_candidate"]["ref"],
+        candidate.reference()
+    );
+    assert_eq!(
+        value["body"]["evidence_source_authority"]["authority"]["ref"],
+        "handbook.authority.contract-evidence-source@1.0.0"
+    );
+    assert_ne!(
+        value["body"]["evidence_source_authority"]["authority"]["fingerprint"],
+        value["body"]["evidence_source_authority"]["registry_state"]["fingerprint"]
+    );
+    assert_eq!(currentness.calls, 2);
+    assert!(value.get("verdict").is_none());
+    assert!(value.get("gate").is_none());
+    assert!(value.get("credential").is_none());
+
+    let mut racing_currentness = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at: observed_at.to_owned(),
+        calls: 0,
+        second_head_fingerprint: Some(fp('d').as_str().to_owned()),
+    };
+    let refusal = admit_evidence_candidate_v1(
+        &owner,
+        &mut source,
+        &mut racing_currentness,
+        &stack,
+        &policies,
+        &candidate,
+    )
+    .unwrap_err();
+    assert_eq!(
+        refusal.kind(),
+        EvidenceCandidateAdmissionErrorKindV1::StaleSource
+    );
+    assert_eq!(racing_currentness.calls, 2);
+}
+
+#[cfg(feature = "test-support")]
+struct FixedSourceCurrentness {
+    head_ref: String,
+    head_fingerprint: String,
+    observed_at: String,
+    calls: usize,
+    second_head_fingerprint: Option<String>,
+}
+
+#[cfg(feature = "test-support")]
+impl SourceCurrentnessPortV1 for FixedSourceCurrentness {
+    fn observe_current(
+        &mut self,
+        request: &SourceCurrentnessRequestV1,
+    ) -> Result<SourceCurrentnessObservationV1, EvidenceSourceAdmissionErrorV1> {
+        self.calls += 1;
+        let fingerprint = self
+            .second_head_fingerprint
+            .as_deref()
+            .filter(|_| self.calls > 1)
+            .unwrap_or(&self.head_fingerprint);
+        SourceCurrentnessObservationV1::new(request, &self.head_ref, fingerprint, &self.observed_at)
+    }
+}
+
 fn only_transaction(repo: &Path) -> PathBuf {
     let root = repo.join(".handbook/state/contracts/v1/transactions");
     let mut entries = fs::read_dir(root)
@@ -1743,6 +2115,78 @@ impl Harness {
         }
     }
 
+    #[cfg(feature = "test-support")]
+    fn new_with_evidence_source_authority() -> Self {
+        let repo = tempfile::tempdir().unwrap();
+        let mut registry =
+            ApproverRegistryServiceV1::for_repository(repo.path(), TestAuthenticatorPort::new());
+        let bootstrap = ApproverAdminRequestV1::from_json_value(json!({
+            "schema_id":"handbook.approver-admin-request",
+            "schema_version":"1.0",
+            "operation":"bootstrap",
+            "operation_id":"hcm-5-2-evidence-source-bootstrap",
+            "repository_identity_fingerprint":REPOSITORY_IDENTITY,
+            "expected_registry_state_fingerprint":null,
+            "expected_transition_fingerprint":null,
+            "initial_charter_quorum":[
+                {
+                    "approval_class":"contract_definition_author",
+                    "authority_ref":AUTHOR_AUTHORITY_REF
+                },
+                {
+                    "approval_class":"contract_evidence_source",
+                    "authority_ref":"handbook.authority.contract-evidence-source@1.0.0"
+                }
+            ]
+        }))
+        .unwrap();
+        let bootstrapped = registry
+            .bootstrap_approver_registry(bootstrap)
+            .to_json_value()
+            .unwrap();
+        assert_eq!(bootstrapped["status"], "succeeded", "{bootstrapped:#}");
+        let add = ApproverAdminRequestV1::from_json_value(json!({
+            "schema_id":"handbook.approver-admin-request",
+            "schema_version":"1.0",
+            "operation":"add_credential",
+            "operation_id":"hcm-5-2-evidence-lifecycle-add",
+            "repository_identity_fingerprint":REPOSITORY_IDENTITY,
+            "expected_registry_state_fingerprint":bootstrapped["result_registry_state_fingerprint"],
+            "expected_transition_fingerprint":bootstrapped["transition_fingerprint"],
+            "approval_mappings":[
+                {
+                    "approval_class":"contract_activation",
+                    "authority_ref":"handbook.authority.contract-activation@1.0.0"
+                },
+                {
+                    "approval_class":"contract_independent_lock",
+                    "authority_ref":"handbook.authority.contract-independent-lock@1.0.0"
+                },
+                {
+                    "approval_class":"contract_lifecycle",
+                    "authority_ref":"handbook.authority.contract-lifecycle@1.0.0"
+                }
+            ]
+        }))
+        .unwrap();
+        let added = registry
+            .add_approver_credential(add)
+            .to_json_value()
+            .unwrap();
+        assert_eq!(added["status"], "succeeded", "{added:#}");
+        let observation = observe_committed_approver_registry(repo.path()).unwrap();
+        let registry_state_fingerprint = observation.state_fingerprint.clone();
+        drop(observation);
+        let service = CredentialAuthorityAdmissionServiceV1::new(repo.path(), registry.into_port());
+        let owner = ContractOwnerRepositoryV1::open(repo.path()).unwrap();
+        Self {
+            repo,
+            owner,
+            service,
+            registry_state_fingerprint,
+        }
+    }
+
     fn append(
         &mut self,
         definition: ContractDefinitionV1,
@@ -1777,6 +2221,88 @@ impl Harness {
             .unwrap()
             .unwrap()
     }
+}
+
+#[cfg(feature = "test-support")]
+fn activate_definition(
+    harness: &mut Harness,
+    definition: ContractDefinitionV1,
+    key_prefix: &str,
+) -> (ExactRefV1, FingerprintV1, FingerprintV1) {
+    let contract_ref = definition.contract_ref().clone();
+    let definition_fingerprint = definition.definition_fingerprint().clone();
+    let draft = harness
+        .append(definition, &format!("{key_prefix}-append"))
+        .unwrap()
+        .lifecycle_head()
+        .clone();
+    let ready = harness.transition(
+        &contract_ref,
+        &definition_fingerprint,
+        ContractLifecycleTransitionInputV1 {
+            expected_lifecycle_fingerprint: draft.lifecycle_fingerprint().clone(),
+            from_state: LifecycleStateV1::Draft,
+            to_state: LifecycleStateV1::ReviewReady,
+            approval_class: ContractApprovalClassV1::DefinitionAuthor,
+            supporting_evidence: vec![LifecycleSupportingEvidenceV1::new(
+                LifecycleEvidenceKindV1::DefinitionValidation,
+                binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '1'),
+            )],
+            reason: LifecycleReasonV1::ReadyForReview,
+        },
+        &format!("{key_prefix}-ready"),
+    );
+    let locked = harness.transition(
+        &contract_ref,
+        &definition_fingerprint,
+        ContractLifecycleTransitionInputV1 {
+            expected_lifecycle_fingerprint: ready.lifecycle_head().lifecycle_fingerprint().clone(),
+            from_state: LifecycleStateV1::ReviewReady,
+            to_state: LifecycleStateV1::Locked,
+            approval_class: ContractApprovalClassV1::IndependentLock,
+            supporting_evidence: vec![LifecycleSupportingEvidenceV1::new(
+                LifecycleEvidenceKindV1::IndependentReview,
+                binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '2'),
+            )],
+            reason: LifecycleReasonV1::IndependentlyLocked,
+        },
+        &format!("{key_prefix}-lock"),
+    );
+    let active = harness.transition(
+        &contract_ref,
+        &definition_fingerprint,
+        ContractLifecycleTransitionInputV1 {
+            expected_lifecycle_fingerprint: locked.lifecycle_head().lifecycle_fingerprint().clone(),
+            from_state: LifecycleStateV1::Locked,
+            to_state: LifecycleStateV1::Active,
+            approval_class: ContractApprovalClassV1::Activation,
+            supporting_evidence: vec![
+                LifecycleSupportingEvidenceV1::new(
+                    LifecycleEvidenceKindV1::ApplicabilityClosure,
+                    binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '3'),
+                ),
+                LifecycleSupportingEvidenceV1::new(
+                    LifecycleEvidenceKindV1::MatcherClosure,
+                    binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '4'),
+                ),
+                LifecycleSupportingEvidenceV1::new(
+                    LifecycleEvidenceKindV1::PolicyClosure,
+                    binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '5'),
+                ),
+                LifecycleSupportingEvidenceV1::new(
+                    LifecycleEvidenceKindV1::CurrentnessClosure,
+                    binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '6'),
+                ),
+            ],
+            reason: LifecycleReasonV1::Activated,
+        },
+        &format!("{key_prefix}-active"),
+    );
+    (
+        contract_ref,
+        definition_fingerprint,
+        active.lifecycle_head().lifecycle_fingerprint().clone(),
+    )
 }
 
 fn definition(registry_state_fingerprint: &str, version: &str) -> ContractDefinitionV1 {
@@ -1896,6 +2422,119 @@ fn evaluation_resolution() -> ResolutionEnvelopeV1 {
         id("resolution.memory.operation"),
         id("resolution.validation.observation-only"),
     )
+}
+
+#[cfg(feature = "test-support")]
+fn evidence_resolution_stack() -> (ContextResolutionStackDefinition, ExactBindingV1) {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../engine")
+        .canonicalize()
+        .unwrap();
+    let policies = ContextResolutionPolicyRegistry::load(
+        &root,
+        &[
+            "definitions/context-resolution-policies/handbook.mutation-matcher.core/1.0.0.yaml"
+                .to_owned(),
+            "definitions/context-resolution-policies/handbook.resolution-escalation.core/1.0.0.yaml"
+                .to_owned(),
+            "definitions/context-resolution-policies/handbook.memory-promotion.core/1.0.0.yaml"
+                .to_owned(),
+        ],
+    )
+    .unwrap();
+    let stack = ContextResolutionStackDefinition::load(
+        &root,
+        "definitions/context-resolution/handbook.context-resolution.shipped-root/1.0.0.yaml",
+        &policies,
+    )
+    .unwrap();
+    let binding = ExactBindingV1::new(
+        ExactRefV1::parse(stack.exact_ref().as_str()).unwrap(),
+        FingerprintV1::parse(stack.definition_fingerprint().as_str()).unwrap(),
+    );
+    (stack, binding)
+}
+
+#[cfg(feature = "test-support")]
+fn evidence_resolution(stack: &ContextResolutionStackDefinition) -> ResolutionEnvelopeV1 {
+    ResolutionEnvelopeV1::new(
+        ExactBindingV1::new(
+            ExactRefV1::parse(stack.exact_ref().as_str()).unwrap(),
+            FingerprintV1::parse(stack.definition_fingerprint().as_str()).unwrap(),
+        ),
+        id("resolution.scope.local-observation"),
+        id("resolution.detail.identifier-only"),
+        id("resolution.time.current-operation"),
+        id("resolution.authority.read-only"),
+        id("resolution.memory.operation"),
+        id("resolution.validation.observation-only"),
+    )
+}
+
+#[cfg(feature = "test-support")]
+fn evidence_admission_definition(
+    registry_state_fingerprint: &str,
+    freshness_policy: ExactBindingV1,
+    gate_policy: ExactBindingV1,
+    stack_binding: ExactBindingV1,
+) -> ContractDefinitionV1 {
+    ContractDefinitionV1::new(ContractDefinitionInputV1 {
+        definition_schema: binding("handbook.contract-definition@1.0.0", 'b'),
+        contract_id: ContractIdV1::parse("handbook.contract.evidence-admission-example").unwrap(),
+        contract_version: VersionV1::parse("1.0.0").unwrap(),
+        contract_kind: ContractKindV1::ClaimSet,
+        claims: vec![ContractClaimV1::new(ContractClaimInputV1 {
+            claim_id: id("schema.payload.valid"),
+            statement: "Payload conforms to its exact schema.".to_owned(),
+            subject_selector: selector("subject.kind", "artifact"),
+            case_selector: selector("case.kind", "positive"),
+            applicability_rule: ApplicabilityRuleV1::SubjectAndCaseMatch,
+            gate_effect: GateEffectV1::Required,
+            evidence_requirements: vec![EvidenceRequirementV1::new(
+                id("handbook.evidence.schema-conformance"),
+                EvidenceCardinalityV1::ExactlyOne,
+                EvidenceCaseSelectionV1::ClaimCaseSelector,
+                handbook_contracts::evidence_stability_policy_binding_v1().unwrap(),
+            )
+            .unwrap()],
+            freshness_policy,
+            minimum_resolution: ResolutionMinimumV1::new(
+                stack_binding,
+                id("resolution.scope.local-observation"),
+                id("resolution.detail.identifier-only"),
+                id("resolution.time.current-operation"),
+                id("resolution.authority.read-only"),
+                id("resolution.memory.operation"),
+                id("resolution.validation.observation-only"),
+            ),
+            score_weight: None,
+        })
+        .unwrap()],
+        definition_author_ref: StableIdV1::parse(&format!(
+            "credential.sha256-{:x}",
+            Sha256::digest([0x32; 32])
+        ))
+        .unwrap(),
+        definition_authority: ExactBindingV1::new(
+            ExactRefV1::parse(AUTHOR_AUTHORITY_REF).unwrap(),
+            FingerprintV1::parse(registry_state_fingerprint).unwrap(),
+        ),
+        lifecycle_policy: lifecycle_policy_binding_v1().unwrap(),
+        matcher_bindings: vec![MatcherBindingV1::exact_fields_v1()],
+        gate_policy,
+        extensions_policy: binding("handbook.contract-extensions.closed-v1@1.0.0", 'd'),
+    })
+    .unwrap()
+}
+
+#[cfg(feature = "test-support")]
+fn fp(hex: char) -> FingerprintV1 {
+    FingerprintV1::parse(&format!("sha256:{}", hex.to_string().repeat(64))).unwrap()
+}
+
+#[cfg(feature = "test-support")]
+fn content_binding(reference: &str, hex: char) -> handbook_contracts::ContentAddressedBindingV1 {
+    handbook_contracts::ContentAddressedBindingV1::new(reference, fp(hex)).unwrap()
 }
 
 fn claim() -> ContractClaimV1 {
