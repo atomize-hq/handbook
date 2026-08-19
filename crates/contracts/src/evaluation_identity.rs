@@ -878,6 +878,18 @@ identity_record!(
 );
 
 impl ClaimVerdictV1 {
+    pub(crate) fn evaluation_run(&self) -> &ContentAddressedBindingV1 {
+        &self.body.evaluation_run
+    }
+
+    pub(crate) fn evaluation_lifecycle_basis(&self) -> &ContentAddressedBindingV1 {
+        &self.body.evaluation_lifecycle_basis
+    }
+
+    pub(crate) fn contract(&self) -> &ExactBindingV1 {
+        &self.body.contract
+    }
+
     pub fn claim_id(&self) -> &StableIdV1 {
         &self.body.claim_id
     }
@@ -904,6 +916,10 @@ impl ClaimVerdictV1 {
 
     pub fn reason_codes(&self) -> impl ExactSizeIterator<Item = &StableIdV1> {
         self.body.reasons.iter().map(|reason| &reason.code)
+    }
+
+    pub(crate) fn evidence_source_authorities(&self) -> &[EvidenceSourceAuthorityObservationV1] {
+        &self.body.evidence_source_authority
     }
 }
 
@@ -1087,6 +1103,117 @@ identity_record!(
         fingerprint_hex(fingerprint)
     )
 );
+
+impl GateResultV1 {
+    pub fn decision(&self) -> GateDecisionV1 {
+        self.body.decision
+    }
+
+    pub fn score(&self) -> ScoreResultV1 {
+        self.body.score
+    }
+
+    pub fn blocker_codes(&self) -> impl ExactSizeIterator<Item = &StableIdV1> {
+        self.body.blockers.iter().map(|blocker| &blocker.code)
+    }
+
+    pub fn next_action_codes(&self) -> impl ExactSizeIterator<Item = &StableIdV1> {
+        self.body.next_actions.iter().map(|action| &action.code)
+    }
+
+    pub fn verdict_count(&self) -> usize {
+        self.body.verdicts.len()
+    }
+}
+
+impl LocalCloseoutResultV1 {
+    pub fn decision(&self) -> LocalCloseoutDecisionV1 {
+        self.body.decision
+    }
+
+    pub fn blocker_codes(&self) -> impl ExactSizeIterator<Item = &StableIdV1> {
+        self.body.blockers.iter().map(|blocker| &blocker.code)
+    }
+
+    pub fn next_action_codes(&self) -> impl ExactSizeIterator<Item = &StableIdV1> {
+        self.body.next_actions.iter().map(|action| &action.code)
+    }
+}
+
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn gate_result_from_composition_v1(
+    evaluation_run: ContentAddressedBindingV1,
+    evaluation_lifecycle_basis: ContentAddressedBindingV1,
+    evidence_repository_root: FingerprintV1,
+    gate_policy: ExactBindingV1,
+    evidence_source_authority: Vec<EvidenceSourceAuthorityObservationV1>,
+    verdicts: &[ClaimVerdictV1],
+    score: ScoreResultV1,
+    blockers: Vec<(StableIdV1, Vec<ContentAddressedBindingV1>)>,
+    next_actions: Vec<(StableIdV1, Vec<ContentAddressedBindingV1>)>,
+    decision: GateDecisionV1,
+) -> Result<GateResultV1, ContractError> {
+    GateResultV1::from_body(GateResultBodyV1 {
+        evaluation_run,
+        evaluation_lifecycle_basis,
+        evidence_repository_root,
+        gate_policy,
+        evidence_source_authority,
+        verdicts: verdicts
+            .iter()
+            .map(|verdict| {
+                Ok(ClaimVerdictBindingV1 {
+                    claim_id: verdict.claim_id().clone(),
+                    verdict: ContentAddressedBindingV1::new(
+                        verdict.record_ref(),
+                        verdict.record_fingerprint().clone(),
+                    )?,
+                })
+            })
+            .collect::<Result<Vec<_>, ContractError>>()?,
+        score,
+        blockers: blockers
+            .into_iter()
+            .map(|(code, related)| BlockerV1 { code, related })
+            .collect(),
+        next_actions: next_actions
+            .into_iter()
+            .map(|(code, related)| NextActionV1 { code, related })
+            .collect(),
+        decision,
+    })
+}
+
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn local_closeout_result_from_composition_v1(
+    evaluation_run: ContentAddressedBindingV1,
+    gate: ContentAddressedBindingV1,
+    local_closeout_policy: ExactBindingV1,
+    final_lifecycle_head: FingerprintV1,
+    source_currentness: Vec<SourceCurrentnessObservationV1>,
+    evidence_source_authority: Vec<EvidenceSourceAuthorityObservationV1>,
+    decision: LocalCloseoutDecisionV1,
+    blockers: Vec<(StableIdV1, Vec<ContentAddressedBindingV1>)>,
+    next_actions: Vec<(StableIdV1, Vec<ContentAddressedBindingV1>)>,
+) -> Result<LocalCloseoutResultV1, ContractError> {
+    LocalCloseoutResultV1::from_body(LocalCloseoutResultBodyV1 {
+        evaluation_run,
+        gate,
+        local_closeout_policy,
+        final_lifecycle_head,
+        source_currentness,
+        evidence_source_authority,
+        decision,
+        blockers: blockers
+            .into_iter()
+            .map(|(code, related)| BlockerV1 { code, related })
+            .collect(),
+        next_actions: next_actions
+            .into_iter()
+            .map(|(code, related)| NextActionV1 { code, related })
+            .collect(),
+    })
+}
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "snake_case")]

@@ -14,6 +14,7 @@ mod evaluation_policy;
 mod evaluation_run;
 mod evidence_admission;
 mod evidence_candidate_source;
+mod gate_composition;
 mod identity;
 mod lifecycle;
 mod lifecycle_policy;
@@ -56,6 +57,10 @@ pub use evidence_candidate_source::{
 pub use evidence_candidate_source::{
     EvidenceCandidateSourceErrorKindV1, EvidenceCandidateSourceErrorV1, EvidenceCandidateSourceV1,
     RepositoryEvidenceCandidateSourceV1, ResolvedEvidenceCandidateObservationV1,
+};
+pub use gate_composition::{
+    evaluate_gate_and_local_closeout_v1, GateEvaluationErrorKindV1, GateEvaluationErrorV1,
+    GateEvaluationV1,
 };
 pub use identity::{
     ContractError, ContractIdV1, ExactBindingV1, ExactRefV1, FingerprintV1, VersionV1,

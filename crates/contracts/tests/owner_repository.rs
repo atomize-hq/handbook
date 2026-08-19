@@ -33,7 +33,9 @@ use std::process::Command;
 use std::sync::{Arc, Barrier};
 
 #[cfg(feature = "test-support")]
-use handbook_contracts::OwnerRepositoryFaultBoundaryV1;
+use handbook_contracts::{
+    GateDecisionV1, LocalCloseoutDecisionV1, OwnerRepositoryFaultBoundaryV1, ScoreResultV1,
+};
 
 const REPOSITORY_IDENTITY: &str =
     "sha256:1111111111111111111111111111111111111111111111111111111111111111";
@@ -3351,6 +3353,503 @@ fn closed_claim_verdict_evaluator_enforces_all_declared_cases_and_tuple_stabilit
 }
 
 #[cfg(feature = "test-support")]
+#[test]
+fn gate_and_local_closeout_are_separate_pure_content_addressed_results() {
+    use handbook_contracts::{
+        evaluate_gate_and_local_closeout_v1, ClaimVerdictDecisionV1,
+        RepositoryEvidenceCandidateSourceV1,
+    };
+
+    let mut harness = Harness::new_with_evidence_source_authority();
+    let (stack, stack_binding) = evidence_resolution_stack();
+    let freshness = EvidenceFreshnessPolicyV1::new(
+        EvidenceFreshnessPolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.0+gate-separation").unwrap(),
+            300,
+            true,
+            0,
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let gate = GatePolicyV1::new(
+        GatePolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-gate-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.5").unwrap(),
+            GatePolicyAlgorithmV1::ClosedAccounting,
+            None,
+            handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let claim = verdict_claim(
+        "gate.not-applicable",
+        GateEffectV1::Required,
+        EvidenceCardinalityV1::ExactlyOne,
+        "gate.kind.not-applicable",
+        "negative",
+        freshness.binding().clone(),
+        stack_binding,
+    );
+    let definition = verdict_definition(
+        &harness.registry_state_fingerprint,
+        vec![claim],
+        gate.binding().clone(),
+    );
+    let (contract_ref, definition_fingerprint, active_head) =
+        activate_definition(&mut harness, definition, "gate-separation");
+    let mut policies = EvaluationPolicyRegistryV1::new().unwrap();
+    policies.register_freshness(freshness.clone()).unwrap();
+    policies.register_gate(gate.clone()).unwrap();
+    let run = harness
+        .owner
+        .prepare_evaluation_run_v1(
+            PrepareEvaluationRunInputV1::new(
+                ExactBindingV1::new(contract_ref, definition_fingerprint),
+                active_head,
+                evaluation_subject('7'),
+                vec![evaluation_case('8')],
+                evidence_resolution(&stack),
+                MatcherBindingV1::exact_fields_v1(),
+                vec![freshness.binding().clone()],
+                vec![handbook_contracts::evidence_stability_policy_binding_v1().unwrap()],
+                gate.binding().clone(),
+                handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+                EvaluationRunNonceV1::parse("gate-separation-observation-0001").unwrap(),
+            )
+            .unwrap(),
+            &policies,
+        )
+        .unwrap();
+    let observed_at = run
+        .owner_currentness()
+        .semantic_time_utc()
+        .as_str()
+        .to_owned();
+    let Harness {
+        repo,
+        owner,
+        service,
+        registry_state_fingerprint: _,
+    } = harness;
+    let mut source =
+        RepositoryEvidenceCandidateSourceV1::open(repo.path(), service.into_port()).unwrap();
+    let mut currentness = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at,
+        calls: 0,
+        second_head_fingerprint: None,
+        change_after_call: None,
+    };
+    let before = all_persisted_bytes(repo.path());
+
+    let evaluated = evaluate_gate_and_local_closeout_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+
+    assert_eq!(evaluated.verdicts().len(), 1);
+    assert_eq!(
+        evaluated.verdicts()[0].decision(),
+        ClaimVerdictDecisionV1::NotApplicable
+    );
+    assert_eq!(evaluated.gate_result().decision(), GateDecisionV1::Passed);
+    assert_eq!(evaluated.gate_result().score(), ScoreResultV1::NotComputed);
+    assert_eq!(
+        evaluated.local_closeout_result().decision(),
+        LocalCloseoutDecisionV1::Eligible
+    );
+    assert_ne!(
+        evaluated.gate_result().record_ref(),
+        evaluated.local_closeout_result().record_ref()
+    );
+    let projected = format!(
+        "{}{}",
+        String::from_utf8(evaluated.gate_result().canonical_json_bytes().unwrap()).unwrap(),
+        String::from_utf8(
+            evaluated
+                .local_closeout_result()
+                .canonical_json_bytes()
+                .unwrap()
+        )
+        .unwrap()
+    );
+    assert!(!projected.contains("promotion"));
+    assert!(!projected.contains("posture"));
+    assert_eq!(all_persisted_bytes(repo.path()), before);
+}
+
+#[cfg(feature = "test-support")]
+#[test]
+fn advisory_deficits_are_score_visible_and_exact_threshold_equality_passes() {
+    use handbook_contracts::{
+        evaluate_gate_and_local_closeout_v1, EvidenceObservationV1, ExactRationalThresholdV1,
+        RepositoryEvidenceCandidateSourceV1, ScoreResultV1,
+    };
+
+    let mut harness = Harness::new_with_evidence_source_authority();
+    let (stack, stack_binding) = evidence_resolution_stack();
+    let freshness = EvidenceFreshnessPolicyV1::new(
+        EvidenceFreshnessPolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.0+gate-score").unwrap(),
+            300,
+            true,
+            0,
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let gate = GatePolicyV1::new(
+        GatePolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-gate-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.6").unwrap(),
+            GatePolicyAlgorithmV1::ClosedAccounting,
+            Some(ExactRationalThresholdV1::new(1, 2).unwrap()),
+            handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let claims = [
+        (
+            "gate.pass",
+            GateEffectV1::Required,
+            "gate.kind.pass",
+            "positive",
+            Some(2),
+        ),
+        (
+            "gate.warning",
+            GateEffectV1::Advisory,
+            "gate.kind.warning",
+            "positive",
+            Some(1),
+        ),
+        (
+            "gate.not-observed",
+            GateEffectV1::Advisory,
+            "gate.kind.missing",
+            "positive",
+            Some(1),
+        ),
+        (
+            "gate.not-applicable",
+            GateEffectV1::Required,
+            "gate.kind.not-applicable",
+            "negative",
+            Some(9),
+        ),
+        (
+            "gate.omitted",
+            GateEffectV1::Advisory,
+            "gate.kind.omitted",
+            "positive",
+            None,
+        ),
+    ]
+    .into_iter()
+    .map(|(claim_id, effect, kind, expected_case, weight)| {
+        weighted_verdict_claim(
+            claim_id,
+            effect,
+            kind,
+            expected_case,
+            weight,
+            freshness.binding().clone(),
+            stack_binding.clone(),
+        )
+    })
+    .collect::<Vec<_>>();
+    let definition = verdict_definition(
+        &harness.registry_state_fingerprint,
+        claims,
+        gate.binding().clone(),
+    );
+    let (contract_ref, definition_fingerprint, active_head) =
+        activate_definition(&mut harness, definition, "gate-score-packet-five");
+    let mut policies = EvaluationPolicyRegistryV1::new().unwrap();
+    policies.register_freshness(freshness.clone()).unwrap();
+    policies.register_gate(gate.clone()).unwrap();
+    let run = harness
+        .owner
+        .prepare_evaluation_run_v1(
+            PrepareEvaluationRunInputV1::new(
+                ExactBindingV1::new(contract_ref, definition_fingerprint),
+                active_head,
+                evaluation_subject('7'),
+                vec![evaluation_case('8')],
+                evidence_resolution(&stack),
+                MatcherBindingV1::exact_fields_v1(),
+                vec![freshness.binding().clone()],
+                vec![handbook_contracts::evidence_stability_policy_binding_v1().unwrap()],
+                gate.binding().clone(),
+                handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+                EvaluationRunNonceV1::parse("gate-score-observation-0001").unwrap(),
+            )
+            .unwrap(),
+            &policies,
+        )
+        .unwrap();
+    let observed_at = run
+        .owner_currentness()
+        .semantic_time_utc()
+        .as_str()
+        .to_owned();
+    let Harness {
+        repo,
+        owner,
+        service,
+        registry_state_fingerprint: _,
+    } = harness;
+    let mut source =
+        RepositoryEvidenceCandidateSourceV1::open(repo.path(), service.into_port()).unwrap();
+    let mut currentness = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at,
+        calls: 0,
+        second_head_fingerprint: None,
+        change_after_call: None,
+    };
+    append_verdict_evidence(
+        repo.path(),
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+        "gate.pass",
+        "gate.kind.pass",
+        EvidenceObservationV1::Satisfied,
+        1,
+    );
+    append_verdict_evidence(
+        repo.path(),
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+        "gate.warning",
+        "gate.kind.warning",
+        EvidenceObservationV1::Violated,
+        2,
+    );
+
+    let evaluated = evaluate_gate_and_local_closeout_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    assert_eq!(evaluated.gate_result().decision(), GateDecisionV1::Passed);
+    assert_eq!(
+        evaluated.gate_result().score(),
+        ScoreResultV1::Computed {
+            passed_weight: 2,
+            total_weight: 4,
+        }
+    );
+    assert_eq!(
+        evaluated.local_closeout_result().decision(),
+        LocalCloseoutDecisionV1::Eligible
+    );
+}
+
+#[cfg(feature = "test-support")]
+#[test]
+fn gate_and_local_closeout_each_refuse_their_own_final_currentness_race() {
+    use handbook_contracts::{
+        evaluate_gate_and_local_closeout_v1, EvidenceObservationV1,
+        RepositoryEvidenceCandidateSourceV1, ScoreResultV1,
+    };
+
+    let mut harness = Harness::new_with_evidence_source_authority();
+    let (stack, stack_binding) = evidence_resolution_stack();
+    let freshness = EvidenceFreshnessPolicyV1::new(
+        EvidenceFreshnessPolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.0+gate-race").unwrap(),
+            300,
+            true,
+            0,
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let gate = GatePolicyV1::new(
+        GatePolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-gate-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.7").unwrap(),
+            GatePolicyAlgorithmV1::ClosedAccounting,
+            None,
+            handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let claim = weighted_verdict_claim(
+        "gate.race-pass",
+        GateEffectV1::Required,
+        "gate.kind.race-pass",
+        "positive",
+        Some(1),
+        freshness.binding().clone(),
+        stack_binding,
+    );
+    let definition = verdict_definition(
+        &harness.registry_state_fingerprint,
+        vec![claim],
+        gate.binding().clone(),
+    );
+    let (contract_ref, definition_fingerprint, active_head) =
+        activate_definition(&mut harness, definition, "gate-race-packet-five");
+    let mut policies = EvaluationPolicyRegistryV1::new().unwrap();
+    policies.register_freshness(freshness.clone()).unwrap();
+    policies.register_gate(gate.clone()).unwrap();
+    let run = harness
+        .owner
+        .prepare_evaluation_run_v1(
+            PrepareEvaluationRunInputV1::new(
+                ExactBindingV1::new(contract_ref, definition_fingerprint),
+                active_head,
+                evaluation_subject('7'),
+                vec![evaluation_case('8')],
+                evidence_resolution(&stack),
+                MatcherBindingV1::exact_fields_v1(),
+                vec![freshness.binding().clone()],
+                vec![handbook_contracts::evidence_stability_policy_binding_v1().unwrap()],
+                gate.binding().clone(),
+                handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+                EvaluationRunNonceV1::parse("gate-race-observation-0001").unwrap(),
+            )
+            .unwrap(),
+            &policies,
+        )
+        .unwrap();
+    let observed_at = run
+        .owner_currentness()
+        .semantic_time_utc()
+        .as_str()
+        .to_owned();
+    let Harness {
+        repo,
+        owner,
+        service,
+        registry_state_fingerprint: _,
+    } = harness;
+    let mut source =
+        RepositoryEvidenceCandidateSourceV1::open(repo.path(), service.into_port()).unwrap();
+    let mut admitted_currentness = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at: observed_at.clone(),
+        calls: 0,
+        second_head_fingerprint: None,
+        change_after_call: None,
+    };
+    append_verdict_evidence(
+        repo.path(),
+        &owner,
+        &mut source,
+        &mut admitted_currentness,
+        &stack,
+        &policies,
+        &run,
+        "gate.race-pass",
+        "gate.kind.race-pass",
+        EvidenceObservationV1::Satisfied,
+        1,
+    );
+
+    let mut gate_race = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at: observed_at.clone(),
+        calls: 0,
+        second_head_fingerprint: Some(fp('d').as_str().to_owned()),
+        change_after_call: Some(2),
+    };
+    let gate_blocked = evaluate_gate_and_local_closeout_v1(
+        &owner,
+        &mut source,
+        &mut gate_race,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    assert_eq!(
+        gate_blocked.gate_result().decision(),
+        GateDecisionV1::Blocked
+    );
+    assert_eq!(
+        gate_blocked.gate_result().score(),
+        ScoreResultV1::NotComputed
+    );
+    assert_eq!(
+        gate_blocked
+            .gate_result()
+            .blocker_codes()
+            .map(StableIdV1::as_str)
+            .collect::<Vec<_>>(),
+        vec![
+            "gate.blocked.currentness-changed",
+            "gate.blocked.global-integrity",
+            "gate.blocked.required-claim",
+        ]
+    );
+
+    let mut local_race = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at,
+        calls: 0,
+        second_head_fingerprint: Some(fp('d').as_str().to_owned()),
+        change_after_call: Some(4),
+    };
+    let local_blocked = evaluate_gate_and_local_closeout_v1(
+        &owner,
+        &mut source,
+        &mut local_race,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    assert_eq!(
+        local_blocked.gate_result().decision(),
+        GateDecisionV1::Passed
+    );
+    assert_eq!(
+        local_blocked.local_closeout_result().decision(),
+        LocalCloseoutDecisionV1::Blocked
+    );
+    assert_eq!(
+        local_blocked
+            .local_closeout_result()
+            .blocker_codes()
+            .map(StableIdV1::as_str)
+            .collect::<Vec<_>>(),
+        vec!["local-closeout.blocked.currentness-changed"]
+    );
+}
+
+#[cfg(feature = "test-support")]
 struct FixedSourceCurrentness {
     head_ref: String,
     head_fingerprint: String,
@@ -4194,6 +4693,47 @@ fn verdict_claim(
             id("resolution.validation.observation-only"),
         ),
         score_weight: None,
+    })
+    .unwrap()
+}
+
+#[cfg(feature = "test-support")]
+#[allow(clippy::too_many_arguments)]
+fn weighted_verdict_claim(
+    claim_id: &str,
+    gate_effect: GateEffectV1,
+    evidence_kind: &str,
+    expected_case: &str,
+    score_weight: Option<u64>,
+    freshness_policy: ExactBindingV1,
+    stack_binding: ExactBindingV1,
+) -> ContractClaimV1 {
+    ContractClaimV1::new(ContractClaimInputV1 {
+        claim_id: id(claim_id),
+        statement: format!("Weighted gate claim {claim_id}."),
+        subject_selector: selector("subject.kind", "artifact"),
+        case_selector: selector("case.kind", expected_case),
+        applicability_rule: ApplicabilityRuleV1::SubjectAndCaseMatch,
+        gate_effect,
+        evidence_requirements: vec![EvidenceRequirementV1::new(
+            id(evidence_kind),
+            EvidenceCardinalityV1::ExactlyOne,
+            EvidenceCaseSelectionV1::ClaimCaseSelector,
+            handbook_contracts::evidence_stability_policy_binding_v1().unwrap(),
+        )
+        .unwrap()],
+        freshness_policy,
+        minimum_resolution: ResolutionMinimumV1::new(
+            stack_binding,
+            id("resolution.scope.local-observation"),
+            id("resolution.detail.identifier-only"),
+            id("resolution.time.current-operation"),
+            id("resolution.authority.read-only"),
+            id("resolution.memory.operation"),
+            id("resolution.validation.observation-only"),
+        ),
+        score_weight: score_weight
+            .map(|value| handbook_contracts::ScoreWeightV1::new(value).unwrap()),
     })
     .unwrap()
 }

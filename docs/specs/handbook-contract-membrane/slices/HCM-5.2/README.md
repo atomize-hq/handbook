@@ -9,7 +9,7 @@ or another Phase-5 slice.
 
 ## Current admission state
 
-**HCM-5.2 Packets 1–4 are implemented. The slice remains open; Packets 5–7 are
+**HCM-5.2 Packets 1–5 are implemented. The slice remains open; Packets 6–7 are
 unselected.**
 
 The hard predecessor is satisfied. The completed
@@ -25,11 +25,12 @@ complete through commits `b37a307`, `dd51ed8`, `cfd3d35`, `7925652`,
 
 Further HCM-5.2 product execution remains inadmissible until a fresh packet task
 proves its declared predecessor and scope immediately before edits. Packets
-1–4 add the owner-native identity/policy kernel, atomic read-only evaluation-run
-preparation, the sealed read-only candidate-source normalization boundary, and
-the retained-root immutable-all canonical-evidence repository plus pure closed
-claim-verdict evaluator fixed by their rows below. They add no gate/local-
-closeout composition, verdict persistence, SDK surface, or executor.
+1–5 add the owner-native identity/policy kernel, atomic read-only evaluation-run
+preparation, the sealed read-only candidate-source normalization boundary, the
+retained-root immutable-all canonical-evidence repository, pure closed claim-
+verdict evaluator, and pure content-addressed gate plus sibling local-closeout
+composition fixed by their rows below. They add no derived-result persistence,
+SDK surface, parent-promotion/posture behavior, or executor.
 
 ## Outcome
 
