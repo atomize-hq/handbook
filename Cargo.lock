@@ -1316,6 +1316,7 @@ name = "handbook-cli"
 version = "0.1.0"
 dependencies = [
  "clap",
+ "handbook-contracts",
  "handbook-engine",
  "handbook-flow",
  "handbook-pipeline",
@@ -1409,6 +1410,7 @@ dependencies = [
 name = "handbook-tauri"
 version = "0.1.0"
 dependencies = [
+ "handbook-contracts",
  "handbook-sdk",
  "serde",
  "serde_json",

@@ -749,9 +749,16 @@ fn execute_append<P: NativeAuthenticatorPortV1>(
     let owner_definition = body.definition.owner_definition()?;
     let prepared = handbook_contracts::prepare_contract_definition_append(owner_definition)
         .map_err(|_| ContractError::InvalidInvariant)?;
+    let owner = match ContractOwnerRepositoryV1::open(repo_root) {
+        Ok(owner) => owner,
+        Err(error) => {
+            return owner_problem_response(request, definition, owner_problem(error.kind()), true)
+        }
+    };
     let mut bridge = AppendBridge {
         repo_root,
         port,
+        owner,
         prepared: Some(prepared),
         result: None,
     };
@@ -829,6 +836,7 @@ fn execute_transition<P: NativeAuthenticatorPortV1>(
     let mut bridge = TransitionBridge {
         repo_root,
         port,
+        owner,
         prepared: Some(prepared),
         result: None,
     };
@@ -880,6 +888,7 @@ fn execute_transition<P: NativeAuthenticatorPortV1>(
 struct AppendBridge<'a, P> {
     repo_root: &'a Path,
     port: &'a mut P,
+    owner: ContractOwnerRepositoryV1,
     prepared: Option<handbook_contracts::PreparedContractDefinitionAppendV1>,
     result: Option<Result<handbook_contracts::DefinitionAppendExecutionV1, BridgeError>>,
 }
@@ -888,12 +897,12 @@ impl<P: NativeAuthenticatorPortV1> IdempotencyKeyConsumerSealed for AppendBridge
         let key = std::str::from_utf8(bytes).expect("raw key admission validated UTF-8");
         let prepared = self.prepared.take().expect("one-shot key bridge");
         let authority_request = prepared.authority_request();
+        let owner = &self.owner;
         let mut service =
             CredentialAuthorityAdmissionServiceV1::new(self.repo_root, BorrowedPort(self.port));
         self.result = Some(
             match service.admit(authority_request, |admission| {
-                ContractOwnerRepositoryV1::open(self.repo_root)
-                    .and_then(|owner| owner.append_definition(prepared, admission, key))
+                owner.append_definition(prepared, admission, key)
             }) {
                 Ok(result) => result.map_err(|error| BridgeError::Owner(error.kind())),
                 Err(error) => Err(BridgeError::Authority(error.kind())),
@@ -907,6 +916,7 @@ impl<P: NativeAuthenticatorPortV1> IdempotencyKeyConsumer for AppendBridge<'_, P
 struct TransitionBridge<'a, P> {
     repo_root: &'a Path,
     port: &'a mut P,
+    owner: ContractOwnerRepositoryV1,
     prepared: Option<handbook_contracts::PreparedOwnerLifecycleTransitionV1>,
     result: Option<Result<handbook_contracts::LifecycleTransitionExecutionV1, BridgeError>>,
 }
@@ -915,12 +925,12 @@ impl<P: NativeAuthenticatorPortV1> IdempotencyKeyConsumerSealed for TransitionBr
         let key = std::str::from_utf8(bytes).expect("raw key admission validated UTF-8");
         let prepared = self.prepared.take().expect("one-shot key bridge");
         let authority_request = prepared.authority_request();
+        let owner = &self.owner;
         let mut service =
             CredentialAuthorityAdmissionServiceV1::new(self.repo_root, BorrowedPort(self.port));
         self.result = Some(
             match service.admit(authority_request, |admission| {
-                ContractOwnerRepositoryV1::open(self.repo_root)
-                    .and_then(|owner| owner.transition_lifecycle(prepared, admission, key))
+                owner.transition_lifecycle(prepared, admission, key)
             }) {
                 Ok(result) => result.map_err(|error| BridgeError::Owner(error.kind())),
                 Err(error) => Err(BridgeError::Authority(error.kind())),

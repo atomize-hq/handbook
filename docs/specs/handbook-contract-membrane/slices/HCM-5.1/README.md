@@ -8,11 +8,12 @@ verdict or gate evaluation, a dock executor, or another Phase-5 slice.
 
 ## Current admission state
 
-**HCM-5.1 authority is prepared. Packets 1–4 implement the selected owner-native
+**HCM-5.1 authority is prepared. Packets 1–5 implement the selected owner-native
 definition/claim/applicability kernel, sealed Engine authority admission,
 immutable lifecycle chain, durable repository use cases, and
 active-after-independent-lock basis, plus the outward SDK membrane and exact
-four-operation closure; Packets 5–6 and slice closeout remain incomplete.**
+four-operation closure and generic SDK/CLI/Tauri consumer proof; Packet 6 and
+slice closeout remain incomplete.**
 
 Phase 4 is exited. The completed
 [`HCM-4.5` authority](../HCM-4.5/README.md) records Packets 1–6, aggregate
@@ -24,7 +25,7 @@ Contract-owner placement, the lifecycle authority seam, the durable owner
 repository, and the outward SDK operation membrane are resolved here and
 implemented by Packets 1–4. Later product execution remains under the strict
 packet sequence and meta-task admission; this checkpoint does not select
-Packet 5 or close the slice.
+Packet 6 or close the slice.
 
 ## Outcome
 
@@ -93,14 +94,15 @@ adopted only for these bounded product decisions:
 - decisions HCM-0.5-D1 and HCM-0.5-D2 from the named closeout record.
 
 Historical status, proof walls, ledgers, orchestration records, and authority
-claims are not adopted. Packets 1–3 establish the `handbook-contracts`
+claims are not adopted. Packets 1–5 establish the `handbook-contracts`
 definition/claim/applicability/lifecycle kernel, the narrow sealed Engine
 authority-admission seam, and a repository-bound durable owner with bounded
 current-only paging, exact read, admitted append/transition, immutable replay
 records, one exact chain-derived current head per definition, retained-root
-physical admission binding, and exact-inventory fail-closed recovery. The current product
-still contains no canonical contract evidence, verdict/gate engine, outward SDK
-mapping, or dock executor.
+physical admission binding, exact-inventory fail-closed recovery, the exact
+four-operation outward SDK membrane, and generic SDK/CLI/Tauri consumer proof.
+The current product still contains no canonical contract evidence, verdict/gate
+engine, or dock executor.
 
 ## Selected owner and dependency placement
 
