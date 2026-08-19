@@ -1755,6 +1755,28 @@ fn signed_repository_candidate_is_independently_normalized_into_owner_evidence()
     )
     .unwrap();
     seed_committed_candidate_observation_for_testing_v1(harness.repo.path(), &fixture).unwrap();
+    let mut second_body = candidate_preimage["body"].clone();
+    second_body["request_record"] = json!(content_binding("request/second", 'd'));
+    second_body["execution_record"] = json!(content_binding("execution/second", 'e'));
+    second_body["fact_payload"] = json!({"valid": true, "sample": 2});
+    let second_candidate =
+        seed_evidence_candidate_body(harness.repo.path(), &run, second_body, None);
+    let mut third_body = candidate_preimage["body"].clone();
+    third_body["request_record"] = json!(content_binding("request/third", 'f'));
+    third_body["execution_record"] = json!(content_binding("execution/third", '1'));
+    third_body["fact_payload"] = json!({"valid": true, "sample": 3});
+    let third_candidate = seed_evidence_candidate_body(harness.repo.path(), &run, third_body, None);
+    let mut fourth_body = candidate_preimage["body"].clone();
+    fourth_body["request_record"] = json!(content_binding("request/fourth", '2'));
+    fourth_body["execution_record"] = json!(content_binding("execution/fourth", '3'));
+    fourth_body["fact_payload"] = json!({"valid": true, "sample": 4});
+    let fourth_candidate =
+        seed_evidence_candidate_body(harness.repo.path(), &run, fourth_body, None);
+    let mut fifth_body = candidate_preimage["body"].clone();
+    fifth_body["request_record"] = json!(content_binding("request/fifth", '4'));
+    fifth_body["execution_record"] = json!(content_binding("execution/fifth", '5'));
+    fifth_body["fact_payload"] = json!({"valid": true, "sample": 5});
+    let fifth_candidate = seed_evidence_candidate_body(harness.repo.path(), &run, fifth_body, None);
     let Harness {
         repo,
         owner,
@@ -1769,6 +1791,7 @@ fn signed_repository_candidate_is_independently_normalized_into_owner_evidence()
         observed_at: observed_at.to_owned(),
         calls: 0,
         second_head_fingerprint: None,
+        change_after_call: None,
     };
 
     let evidence = admit_evidence_candidate_v1(
@@ -1799,12 +1822,287 @@ fn signed_repository_candidate_is_independently_normalized_into_owner_evidence()
     assert!(value.get("gate").is_none());
     assert!(value.get("credential").is_none());
 
+    let mut append_currentness = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at: observed_at.to_owned(),
+        calls: 0,
+        second_head_fingerprint: None,
+        change_after_call: None,
+    };
+    let first = owner
+        .append_evidence_candidate_v1(
+            &mut source,
+            &mut append_currentness,
+            &stack,
+            &policies,
+            &candidate,
+            "evidence-append-key-0001",
+        )
+        .unwrap();
+    assert_eq!(first.disposition(), OwnerMutationDispositionV1::Committed);
+    assert_eq!(first.receipt().sequence(), 1);
+    assert_eq!(first.record().admitted_candidate(), &candidate);
+    assert_ne!(first.record().record_ref(), evidence.record_ref());
+    assert_eq!(append_currentness.calls, 3);
+
+    let second = owner
+        .append_evidence_candidate_v1(
+            &mut source,
+            &mut append_currentness,
+            &stack,
+            &policies,
+            &second_candidate,
+            "evidence-append-key-0002",
+        )
+        .unwrap();
+    assert_eq!(second.receipt().sequence(), 2);
+
+    let page = owner
+        .list_evidence(handbook_contracts::EvidenceListRequestV1::first(1).unwrap())
+        .unwrap();
+    assert_eq!(page.entries().len(), 1);
+    let old_cursor = page.next_cursor().unwrap().to_owned();
+    assert_eq!(page.entries()[0].sequence(), 1);
+    assert_eq!(
+        page.entries()[0].evidence_ref(),
+        first.record().record_ref()
+    );
+    let forged_future = forge_evidence_cursor(page.root(), 99, 1, 1);
+    assert_eq!(
+        owner
+            .list_evidence(
+                handbook_contracts::EvidenceListRequestV1::continue_from(
+                    1,
+                    page.root().clone(),
+                    forged_future,
+                )
+                .unwrap(),
+            )
+            .unwrap_err()
+            .kind(),
+        ContractOwnerRepositoryErrorKindV1::RecordSubstituted
+    );
+    let third = owner
+        .append_evidence_candidate_v1(
+            &mut source,
+            &mut append_currentness,
+            &stack,
+            &policies,
+            &third_candidate,
+            "evidence-append-key-0003",
+        )
+        .unwrap();
+    assert_eq!(third.receipt().sequence(), 3);
+    let old_second = owner
+        .list_evidence(
+            handbook_contracts::EvidenceListRequestV1::continue_from(
+                1,
+                page.root().clone(),
+                old_cursor,
+            )
+            .unwrap(),
+        )
+        .unwrap();
+    assert_eq!(old_second.root(), page.root());
+    assert_eq!(old_second.entries().len(), 1);
+    assert_eq!(old_second.entries()[0].sequence(), 2);
+    assert_eq!(
+        old_second.entries()[0].evidence_ref(),
+        second.record().record_ref()
+    );
+    assert!(old_second.next_cursor().is_none());
+    assert_eq!(
+        owner
+            .list_evidence(handbook_contracts::EvidenceListRequestV1::first(10).unwrap())
+            .unwrap()
+            .entries()
+            .len(),
+        3
+    );
+    let handbook_contracts::EvidenceReadOutcomeV1::Found(stored) = owner
+        .read_evidence(
+            first.record().record_ref(),
+            first.record().record_fingerprint(),
+        )
+        .unwrap()
+    else {
+        panic!("canonical evidence must be exactly readable");
+    };
+    assert_eq!(stored.record(), first.record());
+    assert_eq!(
+        stored.record_bytes(),
+        first.record().canonical_json_bytes().unwrap()
+    );
+
+    let replay = owner
+        .append_evidence_candidate_v1(
+            &mut source,
+            &mut append_currentness,
+            &stack,
+            &policies,
+            &candidate,
+            "evidence-append-key-0001",
+        )
+        .unwrap();
+    assert_eq!(replay.disposition(), OwnerMutationDispositionV1::Replayed);
+    assert_eq!(replay.receipt(), first.receipt());
+    assert_eq!(replay.record(), first.record());
+    assert_eq!(
+        append_currentness.calls, 9,
+        "durable replay performs no external callbacks"
+    );
+
+    let conflicting_key = owner.append_evidence_candidate_v1(
+        &mut source,
+        &mut append_currentness,
+        &stack,
+        &policies,
+        &content_binding("producer/candidate/conflict", 'd'),
+        "evidence-append-key-0001",
+    );
+    assert_eq!(
+        conflicting_key.unwrap_err().kind(),
+        ContractOwnerRepositoryErrorKindV1::IdempotencyConflict
+    );
+    let conflicting_candidate = owner.append_evidence_candidate_v1(
+        &mut source,
+        &mut append_currentness,
+        &stack,
+        &policies,
+        &candidate,
+        "evidence-append-key-0004",
+    );
+    assert_eq!(
+        conflicting_candidate.unwrap_err().kind(),
+        ContractOwnerRepositoryErrorKindV1::IdempotencyConflict
+    );
+    let persisted = all_persisted_bytes(repo.path());
+    assert!(!persisted
+        .windows("evidence-append-key-0001".len())
+        .any(|window| window == b"evidence-append-key-0001"));
+    let evidence_persisted =
+        all_persisted_bytes(&repo.path().join(".handbook/state/contracts/v1/evidence-v1"));
+    assert!(!String::from_utf8_lossy(&evidence_persisted).contains("claim_verdict"));
+    assert!(!String::from_utf8_lossy(&evidence_persisted).contains("local_closeout_result"));
+
+    let mut final_window_currentness = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at: observed_at.to_owned(),
+        calls: 0,
+        second_head_fingerprint: Some(fp('d').as_str().to_owned()),
+        change_after_call: Some(2),
+    };
+    let final_window_refusal = owner
+        .append_evidence_candidate_v1(
+            &mut source,
+            &mut final_window_currentness,
+            &stack,
+            &policies,
+            &fourth_candidate,
+            "evidence-append-key-final-window-0001",
+        )
+        .unwrap_err();
+    assert_eq!(
+        final_window_refusal.kind(),
+        ContractOwnerRepositoryErrorKindV1::RecordSubstituted
+    );
+    assert_eq!(final_window_currentness.calls, 3);
+    assert_eq!(
+        owner
+            .list_evidence(handbook_contracts::EvidenceListRequestV1::first(10).unwrap())
+            .unwrap()
+            .entries()
+            .len(),
+        3,
+        "a final-window source-head change must not write or return a receipt"
+    );
+
+    let lifecycle_head = fs::read_dir(repo.path().join(".handbook/state/contracts/v1/heads"))
+        .unwrap()
+        .next()
+        .unwrap()
+        .unwrap()
+        .path();
+    let lifecycle_head_bytes = fs::read(&lifecycle_head).unwrap();
+    let mut lifecycle_race = TamperingSourceCurrentness {
+        inner: FixedSourceCurrentness {
+            head_ref: "source/head".to_owned(),
+            head_fingerprint: fp('c').as_str().to_owned(),
+            observed_at: observed_at.to_owned(),
+            calls: 0,
+            second_head_fingerprint: None,
+            change_after_call: None,
+        },
+        target: lifecycle_head.clone(),
+    };
+    assert!(owner
+        .append_evidence_candidate_v1(
+            &mut source,
+            &mut lifecycle_race,
+            &stack,
+            &policies,
+            &fourth_candidate,
+            "evidence-append-key-lifecycle-race-0001",
+        )
+        .is_err());
+    fs::write(&lifecycle_head, lifecycle_head_bytes).unwrap();
+    assert_eq!(
+        owner
+            .list_evidence(handbook_contracts::EvidenceListRequestV1::first(10).unwrap())
+            .unwrap()
+            .entries()
+            .len(),
+        3
+    );
+
+    let authority_transition =
+        fs::read_dir(repo.path().join(".handbook/state/registry-transitions"))
+            .unwrap()
+            .next()
+            .unwrap()
+            .unwrap()
+            .path();
+    let authority_transition_bytes = fs::read(&authority_transition).unwrap();
+    let mut authority_race = TamperingSourceCurrentness {
+        inner: FixedSourceCurrentness {
+            head_ref: "source/head".to_owned(),
+            head_fingerprint: fp('c').as_str().to_owned(),
+            observed_at: observed_at.to_owned(),
+            calls: 0,
+            second_head_fingerprint: None,
+            change_after_call: None,
+        },
+        target: authority_transition.clone(),
+    };
+    assert!(owner
+        .append_evidence_candidate_v1(
+            &mut source,
+            &mut authority_race,
+            &stack,
+            &policies,
+            &fourth_candidate,
+            "evidence-append-key-authority-race-0001",
+        )
+        .is_err());
+    fs::write(&authority_transition, authority_transition_bytes).unwrap();
+    assert_eq!(
+        owner
+            .list_evidence(handbook_contracts::EvidenceListRequestV1::first(10).unwrap())
+            .unwrap()
+            .entries()
+            .len(),
+        3
+    );
+
     let mut racing_currentness = FixedSourceCurrentness {
         head_ref: "source/head".to_owned(),
         head_fingerprint: fp('c').as_str().to_owned(),
         observed_at: observed_at.to_owned(),
         calls: 0,
         second_head_fingerprint: Some(fp('d').as_str().to_owned()),
+        change_after_call: Some(1),
     };
     let refusal = admit_evidence_candidate_v1(
         &owner,
@@ -1820,6 +2118,234 @@ fn signed_repository_candidate_is_independently_normalized_into_owner_evidence()
         EvidenceCandidateAdmissionErrorKindV1::StaleSource
     );
     assert_eq!(racing_currentness.calls, 2);
+
+    for prefix in 0..=2 {
+        let copied = copy_repository(repo.path());
+        let committed = evidence_transaction_by_sequence(&copied, 3);
+        let pending = committed.with_file_name(
+            committed
+                .file_name()
+                .unwrap()
+                .to_str()
+                .unwrap()
+                .replace(".committed", ".pending"),
+        );
+        fs::rename(&committed, &pending).unwrap();
+        remove_installed_suffix(&copied, &pending, prefix);
+        let recovered = ContractOwnerRepositoryV1::open(&copied).unwrap();
+        assert_eq!(
+            recovered
+                .list_evidence(handbook_contracts::EvidenceListRequestV1::first(10).unwrap())
+                .unwrap()
+                .entries()
+                .len(),
+            3,
+            "marked evidence recovery failed at installed prefix {prefix}"
+        );
+    }
+
+    let copied = copy_repository(repo.path());
+    let committed = evidence_transaction_by_sequence(&copied, 3);
+    let pending = committed.with_file_name(
+        committed
+            .file_name()
+            .unwrap()
+            .to_str()
+            .unwrap()
+            .replace(".committed", ".pending"),
+    );
+    fs::rename(&committed, &pending).unwrap();
+    remove_installed_suffix(&copied, &pending, 0);
+    fs::remove_file(pending.join("commit-marker.json")).unwrap();
+    let recovered = ContractOwnerRepositoryV1::open(&copied).unwrap();
+    assert_eq!(
+        recovered
+            .list_evidence(handbook_contracts::EvidenceListRequestV1::first(10).unwrap())
+            .unwrap()
+            .entries()
+            .len(),
+        2,
+        "markerless evidence transaction must roll back exactly"
+    );
+
+    for retained_staged in 0..=2 {
+        let copied = copy_repository(repo.path());
+        let committed = evidence_transaction_by_sequence(&copied, 3);
+        let pending = committed.with_file_name(
+            committed
+                .file_name()
+                .unwrap()
+                .to_str()
+                .unwrap()
+                .replace(".committed", ".pending"),
+        );
+        fs::rename(&committed, &pending).unwrap();
+        remove_installed_suffix(&copied, &pending, 0);
+        fs::remove_file(pending.join("intent.json")).unwrap();
+        fs::remove_file(pending.join("commit-marker.json")).unwrap();
+        for staged in staged_paths(&pending).into_iter().skip(retained_staged) {
+            fs::remove_file(staged).unwrap();
+        }
+        let recovered = ContractOwnerRepositoryV1::open(&copied).unwrap();
+        assert_eq!(
+            recovered
+                .list_evidence(handbook_contracts::EvidenceListRequestV1::first(10).unwrap())
+                .unwrap()
+                .entries()
+                .len(),
+            2,
+            "unestablished evidence transaction did not roll back exactly"
+        );
+    }
+
+    for mutation in [
+        "duplicate",
+        "surplus",
+        "missing",
+        "malformed",
+        "quarantined",
+    ] {
+        let copied = copy_repository(repo.path());
+        let evidence_root = copied.join(".handbook/state/contracts/v1/evidence-v1");
+        let record = fs::read_dir(evidence_root.join("records"))
+            .unwrap()
+            .next()
+            .unwrap()
+            .unwrap()
+            .path();
+        match mutation {
+            "duplicate" => {
+                fs::copy(
+                    &record,
+                    evidence_root
+                        .join("records")
+                        .join(format!("{}.json", "f".repeat(64))),
+                )
+                .unwrap();
+            }
+            "surplus" => fs::write(evidence_root.join("surplus"), b"forbidden").unwrap(),
+            "missing" => fs::remove_file(record).unwrap(),
+            "malformed" => fs::write(record, b"not-json").unwrap(),
+            "quarantined" => {
+                fs::create_dir(evidence_root.join("records/quarantine")).unwrap();
+            }
+            _ => unreachable!(),
+        }
+        let refusal = ContractOwnerRepositoryV1::open(&copied).unwrap_err();
+        assert!(
+            !refusal.to_string().contains(&copied.display().to_string()),
+            "{mutation} inventory refusal leaked the repository path"
+        );
+    }
+
+    let owner = Arc::new(owner);
+    let barrier = Arc::new(Barrier::new(3));
+    let mut writers = Vec::new();
+    for (candidate, key, initial_counter) in [
+        (fourth_candidate, "evidence-concurrent-append-0004", 100_u32),
+        (fifth_candidate, "evidence-concurrent-append-0005", 200_u32),
+    ] {
+        let owner = Arc::clone(&owner);
+        let barrier = Arc::clone(&barrier);
+        let repo = repo.path().to_path_buf();
+        let stack = stack.clone();
+        let policies = policies.clone();
+        let observed_at = observed_at.to_owned();
+        writers.push(std::thread::spawn(move || {
+            let mut authenticator = TestAuthenticatorPort::new();
+            authenticator.author_assertions = initial_counter;
+            authenticator.authority_assertions = initial_counter;
+            let mut source =
+                RepositoryEvidenceCandidateSourceV1::open(&repo, authenticator).unwrap();
+            let mut currentness = FixedSourceCurrentness {
+                head_ref: "source/head".to_owned(),
+                head_fingerprint: fp('c').as_str().to_owned(),
+                observed_at,
+                calls: 0,
+                second_head_fingerprint: None,
+                change_after_call: None,
+            };
+            barrier.wait();
+            for _ in 0..100 {
+                match owner.append_evidence_candidate_v1(
+                    &mut source,
+                    &mut currentness,
+                    &stack,
+                    &policies,
+                    &candidate,
+                    key,
+                ) {
+                    Ok(execution) => return execution,
+                    Err(error)
+                        if error.kind()
+                            == ContractOwnerRepositoryErrorKindV1::DurabilityUncertain =>
+                    {
+                        std::thread::yield_now();
+                    }
+                    Err(error) => panic!("concurrent evidence append refused: {error}"),
+                }
+            }
+            panic!("concurrent evidence append did not pass transient source contention")
+        }));
+    }
+    barrier.wait();
+    let concurrent_snapshot = owner
+        .list_evidence(handbook_contracts::EvidenceListRequestV1::first(1).unwrap())
+        .unwrap();
+    let mut committed_sequences = writers
+        .into_iter()
+        .map(|writer| {
+            let execution = writer.join().unwrap();
+            assert_eq!(
+                execution.disposition(),
+                OwnerMutationDispositionV1::Committed
+            );
+            execution.receipt().sequence()
+        })
+        .collect::<Vec<_>>();
+    committed_sequences.sort_unstable();
+    assert_eq!(committed_sequences, vec![4, 5]);
+    let continued = owner
+        .list_evidence(
+            handbook_contracts::EvidenceListRequestV1::continue_from(
+                1,
+                concurrent_snapshot.root().clone(),
+                concurrent_snapshot.next_cursor().unwrap().to_owned(),
+            )
+            .unwrap(),
+        )
+        .unwrap();
+    assert_eq!(continued.root(), concurrent_snapshot.root());
+    assert_eq!(continued.entries().len(), 1);
+    let mut snapshot_count = 2;
+    let mut cursor = continued.next_cursor().map(str::to_owned);
+    while let Some(next) = cursor {
+        let page = owner
+            .list_evidence(
+                handbook_contracts::EvidenceListRequestV1::continue_from(
+                    1,
+                    concurrent_snapshot.root().clone(),
+                    next,
+                )
+                .unwrap(),
+            )
+            .unwrap();
+        assert_eq!(page.root(), concurrent_snapshot.root());
+        snapshot_count += page.entries().len();
+        cursor = page.next_cursor().map(str::to_owned);
+    }
+    assert!((3..=5).contains(&snapshot_count));
+    let fresh = owner
+        .list_evidence(handbook_contracts::EvidenceListRequestV1::first(10).unwrap())
+        .unwrap();
+    assert_eq!(
+        fresh
+            .entries()
+            .iter()
+            .map(|entry| entry.sequence())
+            .collect::<Vec<_>>(),
+        vec![1, 2, 3, 4, 5]
+    );
 }
 
 #[cfg(feature = "test-support")]
@@ -1829,6 +2355,7 @@ struct FixedSourceCurrentness {
     observed_at: String,
     calls: usize,
     second_head_fingerprint: Option<String>,
+    change_after_call: Option<usize>,
 }
 
 #[cfg(feature = "test-support")]
@@ -1841,10 +2368,75 @@ impl SourceCurrentnessPortV1 for FixedSourceCurrentness {
         let fingerprint = self
             .second_head_fingerprint
             .as_deref()
-            .filter(|_| self.calls > 1)
+            .filter(|_| self.calls > self.change_after_call.unwrap_or(1))
             .unwrap_or(&self.head_fingerprint);
         SourceCurrentnessObservationV1::new(request, &self.head_ref, fingerprint, &self.observed_at)
     }
+}
+
+#[cfg(feature = "test-support")]
+struct TamperingSourceCurrentness {
+    inner: FixedSourceCurrentness,
+    target: PathBuf,
+}
+
+#[cfg(feature = "test-support")]
+impl SourceCurrentnessPortV1 for TamperingSourceCurrentness {
+    fn observe_current(
+        &mut self,
+        request: &SourceCurrentnessRequestV1,
+    ) -> Result<SourceCurrentnessObservationV1, EvidenceSourceAdmissionErrorV1> {
+        if self.inner.calls == 2 {
+            fs::write(&self.target, b"substituted").unwrap();
+        }
+        self.inner.observe_current(request)
+    }
+}
+
+#[cfg(feature = "test-support")]
+fn seed_evidence_candidate_body(
+    repo: &Path,
+    run: &handbook_contracts::ContractEvaluationRunV1,
+    body: serde_json::Value,
+    producer_resolution_ceiling: Option<ResolutionEnvelopeV1>,
+) -> handbook_contracts::ContentAddressedBindingV1 {
+    let preimage = json!({
+        "schema_ref": handbook_contracts::EVIDENCE_CANDIDATE_SCHEMA_REF_V1,
+        "body": body,
+    });
+    let fingerprint = FingerprintV1::parse(&format!(
+        "sha256:{:x}",
+        Sha256::digest(serde_json_canonicalizer::to_vec(&preimage).unwrap())
+    ))
+    .unwrap();
+    let reference = format!(
+        "producer/candidate/{}",
+        fingerprint.as_str().strip_prefix("sha256:").unwrap()
+    );
+    let value = json!({
+        "schema_ref": handbook_contracts::EVIDENCE_CANDIDATE_SCHEMA_REF_V1,
+        "body": preimage["body"].clone(),
+        "candidate_ref": reference,
+        "candidate_fingerprint": fingerprint,
+    });
+    let candidate = handbook_contracts::ContentAddressedBindingV1::new(
+        value["candidate_ref"].as_str().unwrap(),
+        serde_json::from_value(value["candidate_fingerprint"].clone()).unwrap(),
+    )
+    .unwrap();
+    let fixture = handbook_contracts::CandidateObservationFixtureV1::new(
+        candidate.clone(),
+        serde_json_canonicalizer::to_vec(&value).unwrap(),
+        run.canonical_json_bytes().unwrap(),
+        serde_json::from_value(value["body"]["producer"].clone()).unwrap(),
+        serde_json::from_value(value["body"]["request_record"].clone()).unwrap(),
+        serde_json::from_value(value["body"]["execution_record"].clone()).unwrap(),
+        producer_resolution_ceiling,
+    )
+    .unwrap();
+    handbook_contracts::seed_committed_candidate_observation_for_testing_v1(repo, &fixture)
+        .unwrap();
+    candidate
 }
 
 fn only_transaction(repo: &Path) -> PathBuf {
@@ -2614,6 +3206,67 @@ fn copy_tree(source: &Path, target: &Path) {
             fs::copy(entry.path(), destination).unwrap();
         }
     }
+}
+
+#[cfg(feature = "test-support")]
+fn copy_repository(source: &Path) -> PathBuf {
+    let parent = tempfile::tempdir().unwrap().keep();
+    let repository = parent.join("repository");
+    copy_tree(source, &repository);
+    repository
+}
+
+#[cfg(feature = "test-support")]
+fn evidence_transaction_by_sequence(repo: &Path, sequence: u64) -> PathBuf {
+    fs::read_dir(repo.join(".handbook/state/contracts/v1/evidence-v1/transactions"))
+        .unwrap()
+        .map(|entry| entry.unwrap().path())
+        .find(|path| {
+            fs::read(path.join("01-ledger.json"))
+                .ok()
+                .and_then(|bytes| serde_json::from_slice::<serde_json::Value>(&bytes).ok())
+                .and_then(|value| value["receipt"]["sequence"].as_u64())
+                == Some(sequence)
+        })
+        .unwrap()
+}
+
+#[cfg(feature = "test-support")]
+fn forge_evidence_cursor(
+    root: &FingerprintV1,
+    snapshot_sequence: u64,
+    offset: usize,
+    page_size: usize,
+) -> String {
+    let preimage = json!({
+        "schema_ref": "handbook.contract-evidence-list-cursor@1.0.0",
+        "domain": "contract-evidence-list-cursor",
+        "root": root,
+        "snapshot_sequence": snapshot_sequence,
+        "offset": offset,
+        "page_size": page_size,
+    });
+    let cursor_fingerprint = FingerprintV1::parse(&format!(
+        "sha256:{:x}",
+        Sha256::digest(serde_json_canonicalizer::to_vec(&preimage).unwrap())
+    ))
+    .unwrap();
+    let cursor = json!({
+        "schema_ref": "handbook.contract-evidence-list-cursor@1.0.0",
+        "root": root,
+        "snapshot_sequence": snapshot_sequence,
+        "offset": offset,
+        "page_size": page_size,
+        "cursor_fingerprint": cursor_fingerprint,
+    });
+    let bytes = serde_json_canonicalizer::to_vec(&cursor).unwrap();
+    format!(
+        "hcm-evidence-v1.{}",
+        bytes
+            .iter()
+            .map(|byte| format!("{byte:02x}"))
+            .collect::<String>()
+    )
 }
 
 fn make_credential_response(key: &SigningKey, credential_id: &[u8]) -> Vec<u8> {

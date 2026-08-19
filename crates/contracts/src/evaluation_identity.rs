@@ -677,6 +677,43 @@ identity_record!(
     )
 );
 
+impl EvidenceRecordV1 {
+    pub fn evaluation_run(&self) -> &ContentAddressedBindingV1 {
+        &self.body.observation.evaluation_run
+    }
+
+    pub fn admitted_candidate(&self) -> &ContentAddressedBindingV1 {
+        &self.body.admitted_candidate
+    }
+}
+
+impl<'de> Deserialize<'de> for EvidenceRecordV1 {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        #[derive(Deserialize)]
+        #[serde(deny_unknown_fields)]
+        struct Raw {
+            schema_ref: String,
+            body: EvidenceRecordBodyV1,
+            evidence_ref: String,
+            evidence_fingerprint: FingerprintV1,
+        }
+        let raw = Raw::deserialize(deserializer)?;
+        if raw.schema_ref != EVIDENCE_RECORD_SCHEMA_REF_V1 {
+            return Err(D::Error::custom(ContractError::InvalidInvariant));
+        }
+        let expected = Self::from_body(raw.body).map_err(D::Error::custom)?;
+        if expected.evidence_ref != raw.evidence_ref
+            || expected.evidence_fingerprint != raw.evidence_fingerprint
+        {
+            return Err(D::Error::custom(ContractError::DerivedValueMismatch));
+        }
+        Ok(expected)
+    }
+}
+
 pub(crate) struct AdmittedEvidenceWitnessV1(EvidenceRecordBodyV1);
 
 impl AdmittedEvidenceWitnessV1 {

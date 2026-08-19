@@ -20,6 +20,12 @@ use std::fmt;
 use std::path::{Component, Path, PathBuf};
 use std::sync::Mutex;
 
+mod evidence_repository;
+pub use evidence_repository::{
+    EvidenceAppendExecutionV1, EvidenceAppendReceiptV1, EvidenceListEntryV1, EvidenceListPageV1,
+    EvidenceListRequestV1, EvidenceListRetentionV1, EvidenceReadOutcomeV1, StoredEvidenceRecordV1,
+};
+
 pub const CONTRACT_OWNER_REPOSITORY_RELATIVE_ROOT_V1: &str = ".handbook/state/contracts/v1";
 const LOCK_RELATIVE_PATH: &str = ".handbook/state/locks/contract-owner.lock";
 const MAX_PAGE_SIZE: usize = 100;
@@ -576,79 +582,87 @@ impl ContractOwnerRepositoryV1 {
         self.with_lock(|owner| {
             owner.recover_locked()?;
             owner.validate_inventory()?;
-            let contract = run.contract();
-            let (definition, chain, persisted_head) =
-                owner.load_lifecycle_bundle(contract.reference(), contract.fingerprint())?;
-            let current_head =
-                current_lifecycle_head(&definition, &chain).map_err(map_lifecycle)?;
-            if current_head != persisted_head
-                || current_head.lifecycle_fingerprint()
-                    != run.owner_currentness().lifecycle_head_fingerprint()
-            {
-                return Err(map_lifecycle(ContractLifecycleErrorV1::StaleHead));
-            }
-            let basis = evaluation_lifecycle_admission_basis_v1(&definition, &chain)
-                .map_err(map_lifecycle)?;
-            if run.evaluation_lifecycle_basis().reference() != basis.basis_ref()
-                || run.evaluation_lifecycle_basis().fingerprint() != basis.basis_fingerprint()
-            {
-                return Err(invalid("evaluation lifecycle basis was substituted"));
-            }
-            let definition = definition.definition();
-            if run.contract().reference() != definition.contract_ref()
-                || run.contract().fingerprint() != definition.definition_fingerprint()
-                || run.claims() != definition.claims()
-            {
-                return Err(invalid(
-                    "evaluation run definition or claims were substituted",
-                ));
-            }
-            let closure = definition.evaluation_closure();
-            if run.freshness_policies() != closure.freshness_policies
-                || run.stability_policies() != closure.stability_policies
-                || closure.matcher_bindings.as_slice() != std::slice::from_ref(run.matcher())
-            {
-                return Err(invalid("evaluation run policy closure was substituted"));
-            }
-            require_policy_kind(
-                policy_registry,
-                run.freshness_policies(),
-                EvaluationPolicyKindV1::Freshness,
-            )?;
-            require_policy_kind(
-                policy_registry,
-                run.stability_policies(),
-                EvaluationPolicyKindV1::Stability,
-            )?;
-            if run.gate_policy() != definition.gate_policy() {
-                return Err(invalid("evaluation run gate policy was substituted"));
-            }
-            let registered_gate = policy_registry
-                .resolve_exact(run.gate_policy())
-                .map_err(map_contract_input)?;
-            if registered_gate.kind() != EvaluationPolicyKindV1::Gate {
-                return Err(invalid("evaluation run gate policy kind is not admitted"));
-            }
-            let gate: GatePolicyV1 = serde_json::from_slice(&registered_gate.canonical_json())
-                .map_err(|_| invalid("registered gate policy bytes are invalid"))?;
-            if run.local_closeout_policy() != gate.local_closeout_policy() {
-                return Err(invalid(
-                    "evaluation run local-closeout policy was substituted",
-                ));
-            }
-            require_policy_kind(
-                policy_registry,
-                std::slice::from_ref(run.local_closeout_policy()),
-                EvaluationPolicyKindV1::LocalCloseout,
-            )?;
-            let bytes = run.canonical_json_bytes().map_err(map_contract_input)?;
-            let parsed: ContractEvaluationRunV1 = serde_json::from_slice(&bytes)
-                .map_err(|_| invalid("evaluation run canonical identity is invalid"))?;
-            if &parsed != run {
-                return Err(invalid("evaluation run canonical identity was substituted"));
-            }
-            Ok(current_head)
+            owner.readmit_evaluation_run_locked_v1(run, policy_registry)
         })
+    }
+
+    pub(crate) fn readmit_evaluation_run_locked_v1(
+        &self,
+        run: &ContractEvaluationRunV1,
+        policy_registry: &EvaluationPolicyRegistryV1,
+    ) -> Result<LifecycleHeadV1, ContractOwnerRepositoryErrorV1> {
+        let owner = self;
+        let contract = run.contract();
+        let (definition, chain, persisted_head) =
+            owner.load_lifecycle_bundle(contract.reference(), contract.fingerprint())?;
+        let current_head = current_lifecycle_head(&definition, &chain).map_err(map_lifecycle)?;
+        if current_head != persisted_head
+            || current_head.lifecycle_fingerprint()
+                != run.owner_currentness().lifecycle_head_fingerprint()
+        {
+            return Err(map_lifecycle(ContractLifecycleErrorV1::StaleHead));
+        }
+        let basis =
+            evaluation_lifecycle_admission_basis_v1(&definition, &chain).map_err(map_lifecycle)?;
+        if run.evaluation_lifecycle_basis().reference() != basis.basis_ref()
+            || run.evaluation_lifecycle_basis().fingerprint() != basis.basis_fingerprint()
+        {
+            return Err(invalid("evaluation lifecycle basis was substituted"));
+        }
+        let definition = definition.definition();
+        if run.contract().reference() != definition.contract_ref()
+            || run.contract().fingerprint() != definition.definition_fingerprint()
+            || run.claims() != definition.claims()
+        {
+            return Err(invalid(
+                "evaluation run definition or claims were substituted",
+            ));
+        }
+        let closure = definition.evaluation_closure();
+        if run.freshness_policies() != closure.freshness_policies
+            || run.stability_policies() != closure.stability_policies
+            || closure.matcher_bindings.as_slice() != std::slice::from_ref(run.matcher())
+        {
+            return Err(invalid("evaluation run policy closure was substituted"));
+        }
+        require_policy_kind(
+            policy_registry,
+            run.freshness_policies(),
+            EvaluationPolicyKindV1::Freshness,
+        )?;
+        require_policy_kind(
+            policy_registry,
+            run.stability_policies(),
+            EvaluationPolicyKindV1::Stability,
+        )?;
+        if run.gate_policy() != definition.gate_policy() {
+            return Err(invalid("evaluation run gate policy was substituted"));
+        }
+        let registered_gate = policy_registry
+            .resolve_exact(run.gate_policy())
+            .map_err(map_contract_input)?;
+        if registered_gate.kind() != EvaluationPolicyKindV1::Gate {
+            return Err(invalid("evaluation run gate policy kind is not admitted"));
+        }
+        let gate: GatePolicyV1 = serde_json::from_slice(&registered_gate.canonical_json())
+            .map_err(|_| invalid("registered gate policy bytes are invalid"))?;
+        if run.local_closeout_policy() != gate.local_closeout_policy() {
+            return Err(invalid(
+                "evaluation run local-closeout policy was substituted",
+            ));
+        }
+        require_policy_kind(
+            policy_registry,
+            std::slice::from_ref(run.local_closeout_policy()),
+            EvaluationPolicyKindV1::LocalCloseout,
+        )?;
+        let bytes = run.canonical_json_bytes().map_err(map_contract_input)?;
+        let parsed: ContractEvaluationRunV1 = serde_json::from_slice(&bytes)
+            .map_err(|_| invalid("evaluation run canonical identity is invalid"))?;
+        if &parsed != run {
+            return Err(invalid("evaluation run canonical identity was substituted"));
+        }
+        Ok(current_head)
     }
 
     pub fn prepare_lifecycle_transition(
@@ -1343,7 +1357,7 @@ impl ContractOwnerRepositoryV1 {
                 self.recover_pending(&transaction)?;
             }
         }
-        Ok(())
+        self.recover_evidence_locked()
     }
 
     fn preflight_pending(&self, pending: &Path) -> Result<(), ContractOwnerRepositoryErrorV1> {
@@ -1576,7 +1590,8 @@ impl ContractOwnerRepositoryV1 {
         self.require_inventory(&self.transitions_root(), &transitions)?;
         self.require_inventory(&self.heads_root(), &heads)?;
         self.require_inventory(&self.idempotency_root(), &ledgers)?;
-        self.validate_semantic_inventory()
+        self.validate_semantic_inventory()?;
+        self.validate_evidence_inventory()
     }
 
     fn validate_semantic_inventory(&self) -> Result<(), ContractOwnerRepositoryErrorV1> {
@@ -1732,7 +1747,7 @@ impl ContractOwnerRepositoryV1 {
                 .create_directories(relative)
                 .map_err(map_durability)?;
         }
-        Ok(())
+        self.ensure_evidence_layout()
     }
 
     fn with_lock<T>(

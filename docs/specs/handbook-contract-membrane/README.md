@@ -38,7 +38,7 @@ At this checkpoint:
 - the bounded [`HCM-5.2 slice authority`](slices/HCM-5.2/README.md) extends the
   same owner with exact immutable-evidence, closed-verdict, complete-accounting,
   gate, and separate local-closeout semantics plus strict Packets 1–7; Packets
-  1–2 are implemented, Packets 3–7 remain unselected, and HCM-5.3/HCM-5.4 and
+  1–3 are implemented, Packets 4–7 remain unselected, and HCM-5.3/HCM-5.4 and
   final Phase-5 exit remain unstarted;
 - the former orchestration skill under `.codex/skills/.disabled/` is inactive and is not authority for new work; and
 - the active thin router is routing guidance only and is not authority for product or slice work.
@@ -69,7 +69,7 @@ Use the source that owns the question:
 | What is the completed HCM-4.4 outcome and packet boundary? | [`slices/HCM-4.4/README.md`](slices/HCM-4.4/README.md) records the bounded non-UI Tauri command facade, SDK DTO and dependency boundary, strict Packets 1–6, and the single aggregate slice closeout. |
 | What is the completed HCM-4.5 outcome and packet boundary? | [`slices/HCM-4.5/README.md`](slices/HCM-4.5/README.md) records the capability-driven installed skill, generic discovery/schema/invocation consumer seam, strict Packets 1–6, corrected truthful future-uptake proof, and the single aggregate slice closeout. |
 | What is the completed HCM-5.1 outcome and packet boundary? | [`slices/HCM-5.1/README.md`](slices/HCM-5.1/README.md) selects `handbook-contracts` as the inward semantic owner, fixes exact definition/claim/lifecycle and outward SDK boundaries, defines strict Packets 1–6, and records their implementation plus aggregate verification/review and the single slice closeout. |
-| What is the authorized HCM-5.2 outcome and packet boundary? | [`slices/HCM-5.2/README.md`](slices/HCM-5.2/README.md) fixes canonical evidence admission, closed verdict/accounting/freshness/gate semantics, separate local closeout, the parent-promotion boundary, exact five-operation outward closure, and strict Packets 1–7. Packets 1–2 implement the owner-native identity/policy kernel, read-only run preparation, and sealed exact candidate-source normalization; Packets 3–7 remain unselected. |
+| What is the authorized HCM-5.2 outcome and packet boundary? | [`slices/HCM-5.2/README.md`](slices/HCM-5.2/README.md) fixes canonical evidence admission, closed verdict/accounting/freshness/gate semantics, separate local closeout, the parent-promotion boundary, exact five-operation outward closure, and strict Packets 1–7. Packets 1–3 implement the owner-native identity/policy kernel, read-only run preparation, sealed exact candidate-source normalization, and retained-root immutable-all canonical-evidence persistence; Packets 4–7 remain unselected. |
 | Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. A roadmap entry plus an explicit execution request may authorize bounded preparation of that document, but product execution begins only after the resulting current slice authority is ready. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 

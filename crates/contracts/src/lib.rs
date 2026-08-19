@@ -74,6 +74,8 @@ pub use owner_repository::{
     ContractOwnerRepositoryErrorKindV1, ContractOwnerRepositoryErrorV1, ContractOwnerRepositoryV1,
     DefinitionAppendExecutionV1, DefinitionListEntryV1, DefinitionListPageV1,
     DefinitionListRequestV1, DefinitionListRetentionV1, DefinitionReadOutcomeV1,
-    DefinitionRecordV1, LifecycleTransitionExecutionV1, OwnerMutationDispositionV1,
-    PreparedOwnerLifecycleTransitionV1, CONTRACT_OWNER_REPOSITORY_RELATIVE_ROOT_V1,
+    DefinitionRecordV1, EvidenceAppendExecutionV1, EvidenceAppendReceiptV1, EvidenceListEntryV1,
+    EvidenceListPageV1, EvidenceListRequestV1, EvidenceListRetentionV1, EvidenceReadOutcomeV1,
+    LifecycleTransitionExecutionV1, OwnerMutationDispositionV1, PreparedOwnerLifecycleTransitionV1,
+    StoredEvidenceRecordV1, CONTRACT_OWNER_REPOSITORY_RELATIVE_ROOT_V1,
 };

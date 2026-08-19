@@ -73,6 +73,129 @@ where
     S: EvidenceCandidateSourceV1,
     C: SourceCurrentnessPortV1,
 {
+    Ok(prepare_admitted_evidence_candidate_v1(
+        owner,
+        source,
+        source_currentness,
+        resolution_stack,
+        policy_registry,
+        candidate_binding,
+    )?
+    .record)
+}
+
+pub(crate) struct PreparedEvidenceAppendV1 {
+    record: EvidenceRecordV1,
+    run: ContractEvaluationRunV1,
+    candidate_jcs: Vec<u8>,
+    evaluation_run_jcs: Vec<u8>,
+    producer: ContentAddressedBindingV1,
+    request_record: ContentAddressedBindingV1,
+    execution_record: ContentAddressedBindingV1,
+    producer_resolution_ceiling: Option<ResolutionEnvelopeV1>,
+    observation: crate::evaluation_identity::EvidenceCandidateBodyV1,
+    initial_sources: Vec<AdmittedSourceCurrentness>,
+    admission_time: SemanticTimeV1,
+    authority: EvidenceAuthorityCheckpointV1,
+}
+
+impl PreparedEvidenceAppendV1 {
+    pub(crate) fn record(&self) -> &EvidenceRecordV1 {
+        &self.record
+    }
+
+    pub(crate) fn run(&self) -> &ContractEvaluationRunV1 {
+        &self.run
+    }
+
+    pub(crate) fn into_record(self) -> EvidenceRecordV1 {
+        self.record
+    }
+
+    pub(crate) fn recheck_source_currentness<C: SourceCurrentnessPortV1>(
+        &self,
+        port: &mut C,
+    ) -> Result<(), EvidenceCandidateAdmissionErrorV1> {
+        let final_sources = observe_sources(&self.observation, port, &self.admission_time)?;
+        if !same_source_heads(&self.initial_sources, &final_sources) {
+            return Err(refusal(
+                EvidenceCandidateAdmissionErrorKindV1::StaleSource,
+                "source registry head changed before evidence commit",
+            ));
+        }
+        Ok(())
+    }
+
+    pub(crate) fn validate_final_resolved(
+        &self,
+        resolved: &crate::ResolvedEvidenceCandidateObservationV1<'_>,
+    ) -> Result<(), EvidenceCandidateAdmissionErrorV1> {
+        if resolved.candidate_jcs() != self.candidate_jcs
+            || resolved.evaluation_run_jcs() != self.evaluation_run_jcs
+            || resolved.producer() != &self.producer
+            || resolved.request_record() != &self.request_record
+            || resolved.execution_record() != &self.execution_record
+            || resolved.producer_resolution_ceiling() != self.producer_resolution_ceiling.as_ref()
+            || !self.authority.matches(resolved.admission())
+        {
+            return Err(substituted(
+                "final candidate provenance or evidence-source authority changed",
+            ));
+        }
+        Ok(())
+    }
+}
+
+#[derive(Clone)]
+struct EvidenceAuthorityCheckpointV1 {
+    actor_ref: String,
+    authority_ref: String,
+    authority_fingerprint: String,
+    registry_state_ref: String,
+    registry_state_fingerprint: String,
+    registry_head_ref: String,
+    registry_head_fingerprint: String,
+    repository_identity_fingerprint: String,
+}
+
+impl EvidenceAuthorityCheckpointV1 {
+    fn from_admission(admission: &EvidenceSourceAdmissionV1<'_>) -> Self {
+        Self {
+            actor_ref: admission.actor_ref().to_owned(),
+            authority_ref: admission.authority_ref().to_owned(),
+            authority_fingerprint: admission.authority_fingerprint().to_owned(),
+            registry_state_ref: admission.registry_state_ref().to_owned(),
+            registry_state_fingerprint: admission.registry_state_fingerprint().to_owned(),
+            registry_head_ref: admission.registry_head_ref().to_owned(),
+            registry_head_fingerprint: admission.registry_head_fingerprint().to_owned(),
+            repository_identity_fingerprint: admission.repository_identity_fingerprint().to_owned(),
+        }
+    }
+
+    fn matches(&self, admission: &EvidenceSourceAdmissionV1<'_>) -> bool {
+        self.actor_ref == admission.actor_ref()
+            && self.authority_ref == admission.authority_ref()
+            && self.authority_fingerprint == admission.authority_fingerprint()
+            && self.registry_state_ref == admission.registry_state_ref()
+            && self.registry_state_fingerprint == admission.registry_state_fingerprint()
+            && self.registry_head_ref == admission.registry_head_ref()
+            && self.registry_head_fingerprint == admission.registry_head_fingerprint()
+            && self.repository_identity_fingerprint == admission.repository_identity_fingerprint()
+    }
+}
+
+pub(crate) fn prepare_admitted_evidence_candidate_v1<S, C>(
+    owner: &ContractOwnerRepositoryV1,
+    source: &mut S,
+    source_currentness: &mut C,
+    resolution_stack: &ContextResolutionStackDefinition,
+    policy_registry: &EvaluationPolicyRegistryV1,
+    candidate_binding: &ContentAddressedBindingV1,
+) -> Result<PreparedEvidenceAppendV1, EvidenceCandidateAdmissionErrorV1>
+where
+    S: EvidenceCandidateSourceV1,
+    C: SourceCurrentnessPortV1,
+{
     source
         .resolve_exact(candidate_binding, |resolved| {
             resolved
@@ -143,16 +266,16 @@ where
             )
             .map_err(|_| internal("candidate binding could not be retained"))?;
             let owner_currentness = crate::OwnerCurrentnessObservationV1::new(
-                admission_time,
+                admission_time.clone(),
                 final_lifecycle.lifecycle_fingerprint().clone(),
             );
-            AdmittedEvidenceWitnessV1::new(
+            let record = AdmittedEvidenceWitnessV1::new(
                 body.clone(),
                 effective_resolution,
                 owner_currentness,
                 initial_sources
-                    .into_iter()
-                    .map(|observed| observed.contract)
+                    .iter()
+                    .map(|observed| observed.contract.clone())
                     .collect(),
                 authority,
                 evidence_admission_policy_binding_v1()
@@ -162,7 +285,21 @@ where
                 admitted_candidate,
             )
             .into_record()
-            .map_err(|_| internal("admitted evidence witness was invalid"))
+            .map_err(|_| internal("admitted evidence witness was invalid"))?;
+            Ok(PreparedEvidenceAppendV1 {
+                record,
+                run,
+                candidate_jcs: resolved.candidate_jcs().to_vec(),
+                evaluation_run_jcs: resolved.evaluation_run_jcs().to_vec(),
+                producer: resolved.producer().clone(),
+                request_record: resolved.request_record().clone(),
+                execution_record: resolved.execution_record().clone(),
+                producer_resolution_ceiling: resolved.producer_resolution_ceiling().cloned(),
+                observation: body.clone(),
+                initial_sources,
+                admission_time,
+                authority: EvidenceAuthorityCheckpointV1::from_admission(resolved.admission()),
+            })
         })
         .map_err(map_source_error)?
 }
@@ -280,6 +417,7 @@ fn validate_candidate_closure(
     Ok(())
 }
 
+#[derive(Clone)]
 struct AdmittedSourceCurrentness {
     engine: SourceCurrentnessObservationV1,
     contract: ContractSourceCurrentnessObservationV1,
