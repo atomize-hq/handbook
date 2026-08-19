@@ -8,7 +8,7 @@ use crate::{
     ExactBindingV1, ExactRefV1, FingerprintV1, StableIdV1,
 };
 use handbook_engine::{CredentialAuthorityAdmissionRequestV1, CredentialAuthorityAdmissionV1};
-use serde::Serialize;
+use serde::{de::Error as _, Deserialize, Deserializer, Serialize};
 use std::collections::BTreeSet;
 use std::error::Error;
 use std::fmt;
@@ -66,7 +66,7 @@ impl From<ContractError> for ContractLifecycleErrorV1 {
     }
 }
 
-#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Serialize)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum LifecycleStateV1 {
     Draft,
@@ -93,7 +93,14 @@ impl LifecycleReasonTextV1 {
     }
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize)]
+impl<'de> Deserialize<'de> for LifecycleReasonTextV1 {
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = String::deserialize(deserializer)?;
+        Self::parse(&value).map_err(D::Error::custom)
+    }
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(tag = "kind", content = "detail", rename_all = "snake_case")]
 pub enum LifecycleReasonV1 {
     ReadyForReview,
@@ -106,7 +113,7 @@ pub enum LifecycleReasonV1 {
     ClosedAfterRetention,
 }
 
-#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Serialize)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum LifecycleEvidenceKindV1 {
     DefinitionValidation,
@@ -122,7 +129,8 @@ pub enum LifecycleEvidenceKindV1 {
     ReferenceSafety,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub struct LifecycleSupportingEvidenceV1 {
     kind: LifecycleEvidenceKindV1,
     binding: ExactBindingV1,
@@ -154,13 +162,46 @@ pub struct DraftGenesisV1 {
     lifecycle_fingerprint: FingerprintV1,
 }
 
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct DraftGenesisWireV1 {
+    schema_ref: String,
+    contract_ref: ExactRefV1,
+    definition_fingerprint: FingerprintV1,
+    lifecycle_policy_ref: ExactRefV1,
+    lifecycle_policy_fingerprint: FingerprintV1,
+    state: LifecycleStateV1,
+    prior_transition_ref: Option<String>,
+    lifecycle_fingerprint: FingerprintV1,
+}
+
+impl<'de> Deserialize<'de> for DraftGenesisV1 {
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let wire = DraftGenesisWireV1::deserialize(deserializer)?;
+        if wire.schema_ref != GENESIS_SCHEMA_REF {
+            return Err(D::Error::custom("draft genesis schema ref is not exact"));
+        }
+        Ok(Self {
+            schema_ref: GENESIS_SCHEMA_REF,
+            contract_ref: wire.contract_ref,
+            definition_fingerprint: wire.definition_fingerprint,
+            lifecycle_policy_ref: wire.lifecycle_policy_ref,
+            lifecycle_policy_fingerprint: wire.lifecycle_policy_fingerprint,
+            state: wire.state,
+            prior_transition_ref: wire.prior_transition_ref,
+            lifecycle_fingerprint: wire.lifecycle_fingerprint,
+        })
+    }
+}
+
 impl DraftGenesisV1 {
     pub fn lifecycle_fingerprint(&self) -> &FingerprintV1 {
         &self.lifecycle_fingerprint
     }
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
 pub(crate) struct ContractAuthorityAdmissionRecordV1 {
     repository_identity_fingerprint: FingerprintV1,
     registry_state_ref: String,
@@ -173,7 +214,7 @@ pub(crate) struct ContractAuthorityAdmissionRecordV1 {
     semantic_scope_fingerprint: FingerprintV1,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct AdmittedContractDefinitionV1 {
     definition: ContractDefinitionV1,
     genesis: DraftGenesisV1,
@@ -187,6 +228,56 @@ impl AdmittedContractDefinitionV1 {
 
     pub fn genesis(&self) -> &DraftGenesisV1 {
         &self.genesis
+    }
+
+    pub fn canonical_json_bytes(&self) -> Result<Vec<u8>, ContractLifecycleErrorV1> {
+        canonical_bytes(self).map_err(Into::into)
+    }
+
+    pub(crate) fn repository_identity_fingerprint(&self) -> &FingerprintV1 {
+        &self.author_admission.repository_identity_fingerprint
+    }
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct AdmittedContractDefinitionWireV1 {
+    definition: ContractDefinitionV1,
+    genesis: DraftGenesisV1,
+    author_admission: ContractAuthorityAdmissionRecordV1,
+}
+
+impl<'de> Deserialize<'de> for AdmittedContractDefinitionV1 {
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let wire = AdmittedContractDefinitionWireV1::deserialize(deserializer)?;
+        let expected_genesis = derive_genesis(&wire.definition).map_err(D::Error::custom)?;
+        let expected_scope = canonical_fingerprint(&DefinitionAppendScopePreimage {
+            schema_ref: "handbook.contract-definition-append-scope@1.0.0",
+            contract_ref: wire.definition.contract_ref(),
+            definition_fingerprint: wire.definition.definition_fingerprint(),
+            definition_author_ref: wire.definition.definition_author_ref(),
+            definition_authority: wire.definition.definition_authority(),
+            lifecycle_policy: wire.definition.lifecycle_policy(),
+            draft_genesis_fingerprint: expected_genesis.lifecycle_fingerprint(),
+        })
+        .map_err(D::Error::custom)?;
+        if wire.genesis != expected_genesis
+            || wire.author_admission.registry_state_fingerprint
+                != *wire.definition.definition_authority().fingerprint()
+            || wire.author_admission.semantic_scope_fingerprint != expected_scope
+            || !valid_authority_record_ref(&wire.author_admission.registry_state_ref)
+            || !valid_authority_record_ref(&wire.author_admission.registry_head_transition_ref)
+            || !valid_authority_record_ref(&wire.author_admission.credential_registration_ref)
+        {
+            return Err(D::Error::custom(
+                "persisted definition authority closure is invalid",
+            ));
+        }
+        Ok(Self {
+            definition: wire.definition,
+            genesis: wire.genesis,
+            author_admission: wire.author_admission,
+        })
     }
 }
 
@@ -263,7 +354,7 @@ pub fn prepare_contract_definition_append(
     })
 }
 
-#[derive(Clone, Debug, Eq, PartialEq)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct ContractLifecycleTransitionInputV1 {
     pub expected_lifecycle_fingerprint: FingerprintV1,
     pub from_state: LifecycleStateV1,
@@ -305,6 +396,11 @@ impl PreparedContractLifecycleTransitionV1 {
             admission.actor_ref(),
             admission.authority_ref(),
         )?;
+        if admission.repository_identity_fingerprint()
+            != self.definition.repository_identity_fingerprint().as_str()
+        {
+            return Err(ContractLifecycleErrorV1::InvalidAdmission);
+        }
         let actor_ref = StableIdV1::parse(admission.actor_ref())?;
         let authority_ref = ExactRefV1::parse(admission.authority_ref())?;
         let authority_admission = admission_record(&admission)?;
@@ -440,7 +536,86 @@ pub struct ContractLifecycleTransitionV1 {
     resulting_lifecycle_fingerprint: FingerprintV1,
 }
 
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct ContractLifecycleTransitionWireV1 {
+    schema_ref: String,
+    transition_ref: String,
+    transition_fingerprint: FingerprintV1,
+    contract_ref: ExactRefV1,
+    definition_fingerprint: FingerprintV1,
+    prior_transition_ref: Option<String>,
+    prior_lifecycle_fingerprint: FingerprintV1,
+    from_state: LifecycleStateV1,
+    to_state: LifecycleStateV1,
+    actor_ref: StableIdV1,
+    authority_ref: ExactRefV1,
+    approval_class: ContractApprovalClassV1,
+    authority_admission: ContractAuthorityAdmissionRecordV1,
+    transition_policy_ref: ExactRefV1,
+    transition_policy_fingerprint: FingerprintV1,
+    supporting_evidence: Vec<LifecycleSupportingEvidenceV1>,
+    reason: LifecycleReasonV1,
+    decision_time: String,
+    resulting_lifecycle_fingerprint: FingerprintV1,
+}
+
+impl<'de> Deserialize<'de> for ContractLifecycleTransitionV1 {
+    fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let wire = ContractLifecycleTransitionWireV1::deserialize(deserializer)?;
+        if wire.schema_ref != TRANSITION_ACTION_REF || !valid_decision_time(&wire.decision_time) {
+            return Err(D::Error::custom(
+                "persisted lifecycle transition envelope is invalid",
+            ));
+        }
+        for reference in [
+            wire.authority_admission.registry_state_ref.as_str(),
+            wire.authority_admission
+                .registry_head_transition_ref
+                .as_str(),
+            wire.authority_admission
+                .credential_registration_ref
+                .as_str(),
+        ] {
+            if !valid_authority_record_ref(reference) {
+                return Err(D::Error::custom(
+                    "persisted lifecycle authority record ref is invalid",
+                ));
+            }
+        }
+        Ok(Self {
+            schema_ref: TRANSITION_ACTION_REF,
+            transition_ref: wire.transition_ref,
+            transition_fingerprint: wire.transition_fingerprint,
+            contract_ref: wire.contract_ref,
+            definition_fingerprint: wire.definition_fingerprint,
+            prior_transition_ref: wire.prior_transition_ref,
+            prior_lifecycle_fingerprint: wire.prior_lifecycle_fingerprint,
+            from_state: wire.from_state,
+            to_state: wire.to_state,
+            actor_ref: wire.actor_ref,
+            authority_ref: wire.authority_ref,
+            approval_class: wire.approval_class,
+            authority_admission: wire.authority_admission,
+            transition_policy_ref: wire.transition_policy_ref,
+            transition_policy_fingerprint: wire.transition_policy_fingerprint,
+            supporting_evidence: wire.supporting_evidence,
+            reason: wire.reason,
+            decision_time: wire.decision_time,
+            resulting_lifecycle_fingerprint: wire.resulting_lifecycle_fingerprint,
+        })
+    }
+}
+
 impl ContractLifecycleTransitionV1 {
+    pub fn contract_ref(&self) -> &ExactRefV1 {
+        &self.contract_ref
+    }
+
+    pub fn definition_fingerprint(&self) -> &FingerprintV1 {
+        &self.definition_fingerprint
+    }
+
     pub fn transition_ref(&self) -> &str {
         &self.transition_ref
     }

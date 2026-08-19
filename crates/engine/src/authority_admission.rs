@@ -1,6 +1,6 @@
 use crate::approver_registry_observation::{
-    observe_committed_approver_registry_if_present_locked,
-    observe_committed_approver_registry_locked, ApproverRegistryObservationErrorKindV1,
+    observe_committed_approver_registry_if_present_retained_locked,
+    observe_committed_approver_registry_retained_locked, ApproverRegistryObservationErrorKindV1,
     ApproverRegistryObservationErrorV1, CommittedApproverCredentialV1,
     RetainedApproverRegistryObservationV1,
 };
@@ -8,7 +8,10 @@ use crate::charter_authenticator::{
     decode_and_verify_get_assertion_response, encode_get_assertion_request,
     AuthenticatorCredentialV1, NativeAuthenticatorPortErrorV1, NativeAuthenticatorPortV1,
 };
-use crate::charter_authority_workflow::RegistryAuthorityLocks;
+use crate::repository_durability::{
+    RepositoryDurabilityErrorKindV1, RepositoryExclusiveLockV1, RepositoryReadV1,
+    RetainedRepositoryRootV1,
+};
 use crate::{DefinitionFingerprint, ExactDefinitionRef};
 use serde::Serialize;
 use sha2::{Digest, Sha256};
@@ -130,7 +133,8 @@ pub struct CredentialAuthorityAdmissionV1<'authority> {
     subject_ref: String,
     semantic_scope_fingerprint: String,
     semantic_decision_time_utc: String,
-    _authority_lock: &'authority RegistryAuthorityLocks,
+    _authority_lock: &'authority RetainedAuthorityLocks,
+    repository_root: &'authority RetainedRepositoryRootV1,
 }
 
 impl CredentialAuthorityAdmissionV1<'_> {
@@ -193,12 +197,92 @@ impl CredentialAuthorityAdmissionV1<'_> {
     pub fn semantic_decision_time_utc(&self) -> &str {
         &self.semantic_decision_time_utc
     }
+
+    /// Requires an owner to operate on the same retained physical repository
+    /// root whose committed Engine authority is locked by this admission.
+    pub fn require_repository_root(
+        &self,
+        repository_root: &RetainedRepositoryRootV1,
+    ) -> Result<(), CredentialAuthorityAdmissionErrorV1> {
+        if self.repository_root.same_physical_root(repository_root) {
+            Ok(())
+        } else {
+            Err(refusal(
+                CredentialAuthorityAdmissionErrorKindV1::DurabilityViolation,
+                "owner repository root is not the admitted physical authority root",
+            ))
+        }
+    }
 }
 
 /// Engine-owned generic authority admission over the committed approver root.
 pub struct CredentialAuthorityAdmissionServiceV1<P> {
     repo_root: PathBuf,
     port: P,
+}
+
+struct RetainedAuthorityLocks {
+    promotion: RepositoryExclusiveLockV1,
+    registry: RepositoryExclusiveLockV1,
+}
+
+impl RetainedAuthorityLocks {
+    fn prepare(root: &RetainedRepositoryRootV1) -> Result<(), CredentialAuthorityAdmissionErrorV1> {
+        root.create_directories(".handbook/state/locks")
+            .map_err(|_| durability_violation())?;
+        for relative in [
+            ".handbook/state/locks/promotion.lock",
+            ".handbook/state/locks/registry.lock",
+        ] {
+            match root
+                .read_regular_bounded(relative, 0)
+                .map_err(|_| durability_violation())?
+            {
+                RepositoryReadV1::Found(_) => {}
+                RepositoryReadV1::Absent => match root.write_new_durable(relative, &[]) {
+                    Ok(()) => {}
+                    Err(error)
+                        if error.kind() == RepositoryDurabilityErrorKindV1::AlreadyExists =>
+                    {
+                        if !matches!(
+                            root.read_regular_bounded(relative, 0)
+                                .map_err(|_| durability_violation())?,
+                            RepositoryReadV1::Found(_)
+                        ) {
+                            return Err(durability_violation());
+                        }
+                    }
+                    Err(_) => return Err(durability_violation()),
+                },
+            }
+        }
+        Ok(())
+    }
+
+    fn acquire(
+        root: &RetainedRepositoryRootV1,
+    ) -> Result<Self, CredentialAuthorityAdmissionErrorV1> {
+        let promotion = root
+            .acquire_exclusive_lock(".handbook/state/locks/promotion.lock")
+            .map_err(|_| durability_violation())?;
+        let registry = root
+            .acquire_exclusive_lock(".handbook/state/locks/registry.lock")
+            .map_err(|_| durability_violation())?;
+        Ok(Self {
+            promotion,
+            registry,
+        })
+    }
+
+    fn release(self) -> Result<(), CredentialAuthorityAdmissionErrorV1> {
+        let registry = self.registry.release();
+        let promotion = self.promotion.release();
+        if registry.is_err() || promotion.is_err() {
+            Err(durability_violation())
+        } else {
+            Ok(())
+        }
+    }
 }
 
 impl<P: NativeAuthenticatorPortV1> CredentialAuthorityAdmissionServiceV1<P> {
@@ -221,15 +305,22 @@ impl<P: NativeAuthenticatorPortV1> CredentialAuthorityAdmissionServiceV1<P> {
         request: CredentialAuthorityAdmissionRequestV1,
         consume: impl for<'authority> FnOnce(CredentialAuthorityAdmissionV1<'authority>) -> R,
     ) -> Result<R, CredentialAuthorityAdmissionErrorV1> {
-        let locks = RegistryAuthorityLocks::acquire(&self.repo_root).map_err(|_| {
-            refusal(
-                CredentialAuthorityAdmissionErrorKindV1::DurabilityViolation,
-                "committed authority locks could not be acquired safely",
-            )
-        })?;
-        let authority = observe_committed_approver_registry_if_present_locked(&self.repo_root)
-            .map_err(map_initial_observation_error)?
-            .ok_or_else(authority_absent)?;
+        let repository_root =
+            RetainedRepositoryRootV1::open_exact(&self.repo_root).map_err(|_| {
+                refusal(
+                    CredentialAuthorityAdmissionErrorKindV1::DurabilityViolation,
+                    "repository authority root could not be retained safely",
+                )
+            })?;
+        RetainedAuthorityLocks::prepare(&repository_root)?;
+        let repository_tree = repository_root
+            .retain_authority_tree_guard(4096)
+            .map_err(|_| durability_violation())?;
+        let locks = RetainedAuthorityLocks::acquire(&repository_root)?;
+        let authority =
+            observe_committed_approver_registry_if_present_retained_locked(&repository_tree)
+                .map_err(map_initial_observation_error)?
+                .ok_or_else(authority_absent)?;
         let (credential, authority_ref) = resolve_exact_credential(&authority, &request)?;
         let credential = credential.clone();
 
@@ -301,7 +392,7 @@ impl<P: NativeAuthenticatorPortV1> CredentialAuthorityAdmissionServiceV1<P> {
             return Err(authentication_refused());
         }
 
-        let current = observe_committed_approver_registry_locked(&self.repo_root)
+        let current = observe_committed_approver_registry_retained_locked(&repository_tree)
             .map_err(map_recheck_observation_error)?;
         if !same_authority(&authority, &current)
             || current
@@ -322,6 +413,15 @@ impl<P: NativeAuthenticatorPortV1> CredentialAuthorityAdmissionServiceV1<P> {
                 .strip_prefix("sha256:")
                 .expect("observed credential hash is normalized")
         );
+        if !repository_root.path_still_names_same_physical_root(&self.repo_root) {
+            return Err(refusal(
+                CredentialAuthorityAdmissionErrorKindV1::DurabilityViolation,
+                "repository authority path changed during retained admission",
+            ));
+        }
+        repository_tree
+            .validate()
+            .map_err(|_| durability_violation())?;
         let admission = CredentialAuthorityAdmissionV1 {
             actor_ref,
             approval_class: request.approval_class,
@@ -340,8 +440,15 @@ impl<P: NativeAuthenticatorPortV1> CredentialAuthorityAdmissionServiceV1<P> {
             semantic_scope_fingerprint: request.semantic_scope_fingerprint.to_string(),
             semantic_decision_time_utc: current_semantic_utc()?,
             _authority_lock: &locks,
+            repository_root: &repository_root,
         };
-        Ok(consume(admission))
+        let result = consume(admission);
+        let tree_validation = repository_tree.validate();
+        let lock_release = locks.release();
+        if tree_validation.is_err() || lock_release.is_err() {
+            return Err(durability_violation());
+        }
+        Ok(result)
     }
 }
 

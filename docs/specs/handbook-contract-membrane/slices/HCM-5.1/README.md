@@ -8,10 +8,11 @@ verdict or gate evaluation, a dock executor, or another Phase-5 slice.
 
 ## Current admission state
 
-**HCM-5.1 authority is prepared. Packets 1–2 implement the selected owner-native
+**HCM-5.1 authority is prepared. Packets 1–3 implement the selected owner-native
 definition/claim/applicability kernel, sealed Engine authority admission,
-immutable lifecycle chain, and active-after-independent-lock basis; Packets
-3–6 and slice closeout remain incomplete.**
+immutable lifecycle chain, durable repository use cases, and
+active-after-independent-lock basis; Packets 4–6 and slice closeout remain
+incomplete.**
 
 Phase 4 is exited. The completed
 [`HCM-4.5` authority](../HCM-4.5/README.md) records Packets 1–6, aggregate
@@ -19,10 +20,10 @@ verification and review, and its single slice closeout; the
 [`phase-and-slice map`](../../phase-and-slice-map.md) independently records the
 Phase-4 exit. Those facts satisfy the hard predecessor for HCM-5.1.
 
-Contract-owner placement and the lifecycle authority seam are resolved here and
-implemented by Packets 1–2. Later product execution remains under the strict
-packet sequence and meta-task admission; this checkpoint does not select Packet
-3 or close the slice.
+Contract-owner placement, the lifecycle authority seam, and the durable owner
+repository are resolved here and implemented by Packets 1–3. Later product
+execution remains under the strict packet sequence and meta-task admission;
+this checkpoint does not select Packet 4 or close the slice.
 
 ## Outcome
 
@@ -91,10 +92,13 @@ adopted only for these bounded product decisions:
 - decisions HCM-0.5-D1 and HCM-0.5-D2 from the named closeout record.
 
 Historical status, proof walls, ledgers, orchestration records, and authority
-claims are not adopted. Packets 1–2 establish the `handbook-contracts`
-definition/claim/applicability/lifecycle kernel and the narrow sealed Engine
-authority-admission seam. The current product still contains no durable owner
-repository, canonical contract evidence, verdict/gate engine, outward SDK
+claims are not adopted. Packets 1–3 establish the `handbook-contracts`
+definition/claim/applicability/lifecycle kernel, the narrow sealed Engine
+authority-admission seam, and a repository-bound durable owner with bounded
+current-only paging, exact read, admitted append/transition, immutable replay
+records, one exact chain-derived current head per definition, retained-root
+physical admission binding, and exact-inventory fail-closed recovery. The current product
+still contains no canonical contract evidence, verdict/gate engine, outward SDK
 mapping, or dock executor.
 
 ## Selected owner and dependency placement

@@ -5,6 +5,7 @@ use crate::approver_registry_mutation::{
 };
 use crate::charter_authority_workflow::{read_registry_journal_file, RegistryAuthorityLocks};
 use crate::charter_lineage_store::{LineageRecordClassV1, TrustedLineageStoreV1};
+use crate::repository_durability::RetainedRepositoryTreeGuardV1;
 use crate::{parse_schema_json, DefinitionFingerprint, OwnerCausalDispositionV1};
 use base64::{engine::general_purpose::STANDARD as BASE64_STANDARD, Engine as _};
 use serde_json::Value;
@@ -129,6 +130,14 @@ pub(crate) fn observe_committed_approver_registry_locked(
     resolve_retained_registry_head(repo_root, head)
 }
 
+pub(crate) fn observe_committed_approver_registry_retained_locked(
+    repository_tree: &RetainedRepositoryTreeGuardV1<'_>,
+) -> Result<RetainedApproverRegistryObservationV1, ApproverRegistryObservationErrorV1> {
+    repository_tree
+        .with_stable_path(observe_committed_approver_registry_locked)
+        .map_err(|_| lineage_error("retained approver authority changed before recheck"))?
+}
+
 pub(crate) fn observe_committed_approver_registry_if_present_locked(
     repo_root: &Path,
 ) -> Result<Option<RetainedApproverRegistryObservationV1>, ApproverRegistryObservationErrorV1> {
@@ -136,6 +145,19 @@ pub(crate) fn observe_committed_approver_registry_if_present_locked(
         .map_err(|error| durability_with_cause(error.detail(), error.causal_disposition()))?
         .map(|head| resolve_retained_registry_head(repo_root, head))
         .transpose()
+}
+
+pub(crate) fn observe_committed_approver_registry_if_present_retained_locked(
+    repository_tree: &RetainedRepositoryTreeGuardV1<'_>,
+) -> Result<Option<RetainedApproverRegistryObservationV1>, ApproverRegistryObservationErrorV1> {
+    repository_tree
+        .with_stable_path(observe_committed_approver_registry_if_present_locked)
+        .map_err(|_| {
+            unsafe_error(
+                "retained repository path changed during approver observation",
+                OwnerCausalDispositionV1::ImplementationFailure,
+            )
+        })?
 }
 
 pub(crate) fn observe_committed_approver_registry_for_repository_preflight_locked(

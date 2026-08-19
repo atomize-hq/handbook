@@ -12,6 +12,9 @@ license = "MIT"
 name = "handbook_contracts"
 path = "src/lib.rs"
 
+[features]
+test-support = []
+
 [dependencies]
 handbook-engine = { path = "../engine" }
 semver = "1"

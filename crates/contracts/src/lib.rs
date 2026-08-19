@@ -12,6 +12,7 @@ mod identity;
 mod lifecycle;
 mod lifecycle_policy;
 mod lifecycle_preimage;
+mod owner_repository;
 
 pub use claim::{
     evaluate_applicability, ApplicabilityInputSourceV1, ApplicabilityOutcomeV1,
@@ -39,4 +40,14 @@ pub use lifecycle::{
 pub use lifecycle_policy::{
     lifecycle_policy_binding_v1, lifecycle_policy_canonical_json_v1, ContractApprovalClassV1,
     LIFECYCLE_POLICY_REF_V1,
+};
+#[cfg(feature = "test-support")]
+#[doc(hidden)]
+pub use owner_repository::OwnerRepositoryFaultBoundaryV1;
+pub use owner_repository::{
+    ContractOwnerRepositoryErrorKindV1, ContractOwnerRepositoryErrorV1, ContractOwnerRepositoryV1,
+    DefinitionAppendExecutionV1, DefinitionListEntryV1, DefinitionListPageV1,
+    DefinitionListRequestV1, DefinitionListRetentionV1, DefinitionReadOutcomeV1,
+    DefinitionRecordV1, LifecycleTransitionExecutionV1, OwnerMutationDispositionV1,
+    PreparedOwnerLifecycleTransitionV1, CONTRACT_OWNER_REPOSITORY_RELATIVE_ROOT_V1,
 };

@@ -2,7 +2,7 @@ use handbook_engine::{
     observe_committed_approver_registry, ApproverAdminRequestV1, ApproverRegistryServiceV1,
     CredentialAuthorityAdmissionErrorKindV1, CredentialAuthorityAdmissionRequestV1,
     CredentialAuthorityAdmissionServiceV1, NativeAuthenticatorPortErrorV1,
-    NativeAuthenticatorPortV1, AUTHENTICATOR_RP_ID,
+    NativeAuthenticatorPortV1, RetainedRepositoryRootV1, AUTHENTICATOR_RP_ID,
 };
 use p256::ecdsa::{signature::Signer, Signature, SigningKey};
 use serde_json::json;
@@ -164,6 +164,100 @@ fn sealed_admission_binds_authenticated_actor_and_exact_current_authority() {
 }
 
 #[test]
+fn sealed_admission_requires_the_same_physical_repository_root() {
+    let mapping = json!({
+        "approval_class":"contract_definition_author",
+        "authority_ref":"handbook.authority.contract-definition-author@1.0.0"
+    });
+    let (source, source_service) = bootstrap(vec![mapping], false);
+    let clone = tempfile::tempdir().unwrap();
+    copy_directory_tree(source.path(), clone.path());
+    let mut clone_service =
+        CredentialAuthorityAdmissionServiceV1::new(clone.path(), source_service.into_port());
+    let source_root = RetainedRepositoryRootV1::open_exact(source.path()).unwrap();
+    let clone_root = RetainedRepositoryRootV1::open_exact(clone.path()).unwrap();
+
+    let (same, substituted) = clone_service
+        .admit(request("contract_definition_author"), |admission| {
+            (
+                admission.require_repository_root(&clone_root),
+                admission.require_repository_root(&source_root),
+            )
+        })
+        .unwrap();
+
+    assert!(same.is_ok());
+    assert_eq!(
+        substituted.unwrap_err().kind(),
+        CredentialAuthorityAdmissionErrorKindV1::DurabilityViolation
+    );
+}
+
+#[test]
+fn retained_authority_tree_blocks_or_refuses_substitution_during_consume() {
+    let mapping = json!({
+        "approval_class":"contract_definition_author",
+        "authority_ref":"handbook.authority.contract-definition-author@1.0.0"
+    });
+    let (repo, mut service) = bootstrap(vec![mapping], false);
+    let state = repo.path().join(".handbook/state");
+    let authority = state.join("transactions/registry");
+    let substitute = state.join("substitute-authority");
+    let parked = state.join("parked-authority");
+    std::fs::create_dir(&substitute).unwrap();
+
+    let result = service.admit(request("contract_definition_author"), |_| {
+        #[cfg(windows)]
+        {
+            std::fs::rename(&authority, &parked).is_err()
+        }
+        #[cfg(unix)]
+        {
+            std::fs::rename(&authority, &parked).unwrap();
+            std::fs::rename(&substitute, &authority).unwrap();
+            std::fs::rename(&authority, &substitute).unwrap();
+            std::fs::rename(&parked, &authority).unwrap();
+            true
+        }
+    });
+
+    #[cfg(windows)]
+    assert!(result.unwrap());
+    #[cfg(unix)]
+    assert_eq!(
+        result.unwrap_err().kind(),
+        CredentialAuthorityAdmissionErrorKindV1::DurabilityViolation
+    );
+}
+
+#[test]
+fn retained_authority_tree_refuses_in_place_state_mutation_during_consume() {
+    let mapping = json!({
+        "approval_class":"contract_definition_author",
+        "authority_ref":"handbook.authority.contract-definition-author@1.0.0"
+    });
+    let (repo, mut service) = bootstrap(vec![mapping], false);
+    let observation = observe_committed_approver_registry(repo.path()).unwrap();
+    let state_path = repo
+        .path()
+        .join(".handbook/state")
+        .join(&observation.state_ref);
+    drop(observation);
+    let mut mutated = std::fs::read(&state_path).unwrap();
+    mutated[0] ^= 1;
+
+    let result = service.admit(request("contract_definition_author"), |_| {
+        std::fs::write(&state_path, &mutated).unwrap();
+        "must-not-be-received"
+    });
+
+    assert_eq!(
+        result.unwrap_err().kind(),
+        CredentialAuthorityAdmissionErrorKindV1::DurabilityViolation
+    );
+}
+
+#[test]
 fn missing_or_multiply_resolved_authority_refuses_before_authentication() {
     let first = json!({
         "approval_class":"contract_definition_author",
@@ -293,6 +387,19 @@ fn request_values_are_closed_and_cannot_supply_actor_or_authority() {
         &format!("sha256:{}", "A".repeat(64)),
     )
     .is_err());
+}
+
+fn copy_directory_tree(source: &std::path::Path, target: &std::path::Path) {
+    for entry in std::fs::read_dir(source).unwrap() {
+        let entry = entry.unwrap();
+        let destination = target.join(entry.file_name());
+        if entry.file_type().unwrap().is_dir() {
+            std::fs::create_dir(&destination).unwrap();
+            copy_directory_tree(&entry.path(), &destination);
+        } else {
+            std::fs::copy(entry.path(), destination).unwrap();
+        }
+    }
 }
 
 fn make_credential_response(key: &SigningKey, credential_id: &[u8]) -> Vec<u8> {

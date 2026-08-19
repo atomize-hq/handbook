@@ -62,6 +62,7 @@ mod project_posture;
 mod project_posture_tests;
 #[allow(dead_code)]
 mod projection;
+pub mod repository_durability;
 pub mod repository_invocation_identity;
 pub mod schema_registry;
 pub mod semantic_capability_registry;
@@ -272,6 +273,11 @@ pub use project_context_artifact::{
     project_context_source_fingerprint, render_project_context_markdown,
     serialize_canonical_project_context, CanonicalProjectContext, ProjectContextArtifactError,
     ProjectContextArtifactErrorKind,
+};
+pub use repository_durability::{
+    RepositoryDirectoryEntryKindV1, RepositoryDirectoryEntryV1, RepositoryDurabilityErrorKindV1,
+    RepositoryDurabilityErrorV1, RepositoryExclusiveLockV1, RepositoryReadV1,
+    RetainedRepositoryRootV1,
 };
 pub use repository_invocation_identity::{
     RepositoryIdentityAllocationErrorV1, RepositoryIdentityAllocationV1,
