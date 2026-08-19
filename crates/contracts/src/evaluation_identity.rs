@@ -396,6 +396,16 @@ impl SourceCurrentnessObservationV1 {
             current_head,
         }
     }
+
+    pub(crate) fn source(&self) -> &ContentAddressedBindingV1 {
+        &self.source
+    }
+    pub(crate) fn revision(&self) -> &str {
+        &self.revision
+    }
+    pub(crate) fn current_head(&self) -> &ContentAddressedBindingV1 {
+        &self.current_head
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -423,6 +433,14 @@ impl EvidenceSourceAuthorityObservationV1 {
             registry_head,
             observed_at,
         }
+    }
+
+    pub(crate) fn actor_ref(&self) -> &StableIdV1 {
+        &self.actor_ref
+    }
+
+    pub(crate) fn authority(&self) -> &ExactBindingV1 {
+        &self.authority
     }
 }
 
@@ -533,6 +551,9 @@ impl EvidenceCandidateBodyV1 {
     }
     pub(crate) fn evidence_kind(&self) -> &StableIdV1 {
         &self.evidence_kind
+    }
+    pub(crate) fn observation(&self) -> EvidenceObservationV1 {
+        self.observation
     }
     pub(crate) fn producer(&self) -> &ContentAddressedBindingV1 {
         &self.producer
@@ -684,6 +705,22 @@ impl EvidenceRecordV1 {
 
     pub fn admitted_candidate(&self) -> &ContentAddressedBindingV1 {
         &self.body.admitted_candidate
+    }
+
+    pub(crate) fn observation(&self) -> &EvidenceCandidateBodyV1 {
+        &self.body.observation
+    }
+
+    pub(crate) fn effective_resolution(&self) -> &ResolutionEnvelopeV1 {
+        &self.body.effective_resolution
+    }
+
+    pub(crate) fn source_currentness(&self) -> &[SourceCurrentnessObservationV1] {
+        &self.body.source_currentness
+    }
+
+    pub(crate) fn evidence_source_authority(&self) -> &EvidenceSourceAuthorityObservationV1 {
+        &self.body.evidence_source_authority
     }
 }
 
@@ -839,6 +876,84 @@ identity_record!(
         fingerprint_hex(fingerprint)
     )
 );
+
+impl ClaimVerdictV1 {
+    pub fn claim_id(&self) -> &StableIdV1 {
+        &self.body.claim_id
+    }
+
+    pub fn applicability(&self) -> ApplicabilityOutcomeV1 {
+        self.body.applicability
+    }
+
+    pub fn evidence_repository_root(&self) -> &FingerprintV1 {
+        &self.body.evidence_repository_root
+    }
+
+    pub fn supporting_evidence(&self) -> &[ContentAddressedBindingV1] {
+        &self.body.supporting_evidence
+    }
+
+    pub fn disqualifying_evidence(&self) -> &[ContentAddressedBindingV1] {
+        &self.body.disqualifying_evidence
+    }
+
+    pub fn decision(&self) -> ClaimVerdictDecisionV1 {
+        self.body.verdict
+    }
+
+    pub fn reason_codes(&self) -> impl ExactSizeIterator<Item = &StableIdV1> {
+        self.body.reasons.iter().map(|reason| &reason.code)
+    }
+}
+
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn claim_verdict_from_accounting_v1(
+    evaluation_run: ContentAddressedBindingV1,
+    evaluation_lifecycle_basis: ContentAddressedBindingV1,
+    contract: ExactBindingV1,
+    claim_id: StableIdV1,
+    applicability: ApplicabilityOutcomeV1,
+    evidence_repository_root: FingerprintV1,
+    supporting_evidence: Vec<ContentAddressedBindingV1>,
+    disqualifying_evidence: Vec<ContentAddressedBindingV1>,
+    freshness_policy: ExactBindingV1,
+    fresh: Vec<ContentAddressedBindingV1>,
+    stale: Vec<ContentAddressedBindingV1>,
+    requested_resolution: ResolutionEnvelopeV1,
+    resolution_eligible: Vec<ContentAddressedBindingV1>,
+    resolution_insufficient: Vec<ContentAddressedBindingV1>,
+    evidence_source_authority: Vec<EvidenceSourceAuthorityObservationV1>,
+    verdict: ClaimVerdictDecisionV1,
+    reasons: Vec<(StableIdV1, Vec<ContentAddressedBindingV1>)>,
+) -> Result<ClaimVerdictV1, ContractError> {
+    ClaimVerdictV1::from_body(ClaimVerdictBodyV1 {
+        evaluation_run,
+        evaluation_lifecycle_basis,
+        contract,
+        claim_id,
+        applicability,
+        evidence_repository_root,
+        supporting_evidence,
+        disqualifying_evidence,
+        freshness_accounting: FreshnessAccountingV1 {
+            policy: freshness_policy,
+            fresh,
+            stale,
+        },
+        resolution_accounting: ResolutionAccountingV1 {
+            requested: requested_resolution,
+            eligible: resolution_eligible,
+            insufficient: resolution_insufficient,
+        },
+        evidence_source_authority,
+        verdict,
+        reasons: reasons
+            .into_iter()
+            .map(|(code, related)| ReasonV1 { code, related })
+            .collect(),
+    })
+}
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "snake_case")]

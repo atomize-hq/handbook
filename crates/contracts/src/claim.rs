@@ -350,8 +350,16 @@ impl EvidenceRequirementV1 {
         &self.evidence_kind
     }
 
+    pub(crate) fn cardinality(&self) -> EvidenceCardinalityV1 {
+        self.cardinality
+    }
+
     pub(crate) fn cases(&self) -> &EvidenceCaseSelectionV1 {
         &self.cases
+    }
+
+    pub(crate) fn stability_policy(&self) -> &ExactBindingV1 {
+        &self.stability_policy
     }
 }
 

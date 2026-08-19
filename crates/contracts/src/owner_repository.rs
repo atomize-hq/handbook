@@ -25,6 +25,7 @@ pub use evidence_repository::{
     EvidenceAppendExecutionV1, EvidenceAppendReceiptV1, EvidenceListEntryV1, EvidenceListPageV1,
     EvidenceListRequestV1, EvidenceListRetentionV1, EvidenceReadOutcomeV1, StoredEvidenceRecordV1,
 };
+pub(crate) use evidence_repository::{EvidenceEvaluationEntryV1, EvidenceEvaluationSnapshotV1};
 
 pub const CONTRACT_OWNER_REPOSITORY_RELATIVE_ROOT_V1: &str = ".handbook/state/contracts/v1";
 const LOCK_RELATIVE_PATH: &str = ".handbook/state/locks/contract-owner.lock";

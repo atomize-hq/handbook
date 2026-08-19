@@ -116,6 +116,18 @@ pub enum EvidenceReadOutcomeV1 {
     Absent,
 }
 
+#[derive(Clone, Debug)]
+pub(crate) struct EvidenceEvaluationEntryV1 {
+    pub(crate) sequence: u64,
+    pub(crate) record: EvidenceRecordV1,
+}
+
+#[derive(Clone, Debug)]
+pub(crate) struct EvidenceEvaluationSnapshotV1 {
+    pub(crate) root: FingerprintV1,
+    pub(crate) entries: Vec<EvidenceEvaluationEntryV1>,
+}
+
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct EvidenceAppendReceiptV1 {
@@ -221,6 +233,38 @@ impl EvidenceAppendExecutionV1 {
 }
 
 impl ContractOwnerRepositoryV1 {
+    pub(crate) fn evidence_evaluation_snapshot_v1(
+        &self,
+    ) -> Result<EvidenceEvaluationSnapshotV1, ContractOwnerRepositoryErrorV1> {
+        self.with_lock(|owner| {
+            owner.recover_locked()?;
+            owner.validate_inventory()?;
+            let ledgers = owner.load_evidence_ledgers()?;
+            let snapshot_sequence = ledgers.last().map_or(0, |ledger| ledger.receipt.sequence);
+            let inventory = owner.evidence_entries(&ledgers, snapshot_sequence)?;
+            let root = evidence_list_root(snapshot_sequence, &inventory)?;
+            let entries = inventory
+                .iter()
+                .map(|entry| {
+                    let stored = owner.load_evidence_record(
+                        &owner.evidence_record_path(&entry.evidence_fingerprint),
+                    )?;
+                    if stored.record.record_ref() != entry.evidence_ref
+                        || stored.record.record_fingerprint() != &entry.evidence_fingerprint
+                        || stored.record.evaluation_run() != &entry.evaluation_run
+                    {
+                        return Err(recovery("evaluation snapshot entry is substituted"));
+                    }
+                    Ok(EvidenceEvaluationEntryV1 {
+                        sequence: entry.sequence,
+                        record: stored.record,
+                    })
+                })
+                .collect::<Result<Vec<_>, ContractOwnerRepositoryErrorV1>>()?;
+            Ok(EvidenceEvaluationSnapshotV1 { root, entries })
+        })
+    }
+
     pub fn list_evidence(
         &self,
         request: EvidenceListRequestV1,

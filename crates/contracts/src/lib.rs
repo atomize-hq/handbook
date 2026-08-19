@@ -6,6 +6,7 @@
 
 mod canonical;
 mod claim;
+mod claim_verdict;
 mod compatibility;
 mod definition;
 mod evaluation_identity;
@@ -27,6 +28,10 @@ pub use claim::{
     EvidenceCaseSelectionV1, EvidenceRequirementV1, GateEffectV1, MatcherBindingV1,
     MatcherInputCandidateV1, MatcherValueV1, ResolutionMinimumV1, ScoreWeightV1,
     SelectorCriterionV1, SelectorV1, StableIdV1,
+};
+pub use claim_verdict::{
+    evaluate_claim_verdicts_v1, ClaimVerdictEvaluationErrorKindV1, ClaimVerdictEvaluationErrorV1,
+    ClaimVerdictEvaluationV1,
 };
 pub use compatibility::{DefinitionChangeV1, MinimumVersionChangeV1};
 pub use definition::{

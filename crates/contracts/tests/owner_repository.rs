@@ -2349,6 +2349,1008 @@ fn signed_repository_candidate_is_independently_normalized_into_owner_evidence()
 }
 
 #[cfg(feature = "test-support")]
+#[test]
+fn closed_claim_verdict_evaluator_returns_not_observed_without_evidence() {
+    use handbook_contracts::{
+        evaluate_claim_verdicts_v1, ClaimVerdictDecisionV1, RepositoryEvidenceCandidateSourceV1,
+    };
+
+    let mut harness = Harness::new_with_evidence_source_authority();
+    let (stack, stack_binding) = evidence_resolution_stack();
+    let freshness = EvidenceFreshnessPolicyV1::new(
+        EvidenceFreshnessPolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.0+verdict-empty").unwrap(),
+            300,
+            true,
+            0,
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let gate = GatePolicyV1::new(
+        GatePolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-gate-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.3").unwrap(),
+            GatePolicyAlgorithmV1::ClosedAccounting,
+            None,
+            handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let mut policies = EvaluationPolicyRegistryV1::new().unwrap();
+    policies.register_freshness(freshness.clone()).unwrap();
+    policies.register_gate(gate.clone()).unwrap();
+    let definition = evidence_admission_definition(
+        &harness.registry_state_fingerprint,
+        freshness.binding().clone(),
+        gate.binding().clone(),
+        stack_binding,
+    );
+    let (contract_ref, definition_fingerprint, active_head) =
+        activate_definition(&mut harness, definition, "verdict-empty");
+    let run = harness
+        .owner
+        .prepare_evaluation_run_v1(
+            PrepareEvaluationRunInputV1::new(
+                ExactBindingV1::new(contract_ref, definition_fingerprint),
+                active_head,
+                evaluation_subject('7'),
+                vec![evaluation_case('8')],
+                evidence_resolution(&stack),
+                MatcherBindingV1::exact_fields_v1(),
+                vec![freshness.binding().clone()],
+                vec![handbook_contracts::evidence_stability_policy_binding_v1().unwrap()],
+                gate.binding().clone(),
+                handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+                EvaluationRunNonceV1::parse("verdict-empty-observation-0001").unwrap(),
+            )
+            .unwrap(),
+            &policies,
+        )
+        .unwrap();
+    let observed_at = run
+        .owner_currentness()
+        .semantic_time_utc()
+        .as_str()
+        .to_owned();
+    let Harness {
+        repo,
+        owner,
+        service,
+        registry_state_fingerprint: _,
+    } = harness;
+    let mut source =
+        RepositoryEvidenceCandidateSourceV1::open(repo.path(), service.into_port()).unwrap();
+    let mut currentness = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at,
+        calls: 0,
+        second_head_fingerprint: None,
+        change_after_call: None,
+    };
+
+    let evaluated = evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+
+    assert_eq!(evaluated.verdicts().len(), 1);
+    assert_eq!(
+        evaluated.verdicts()[0].decision(),
+        ClaimVerdictDecisionV1::NotObserved
+    );
+    assert_eq!(
+        evaluated.verdicts()[0].claim_id().as_str(),
+        "schema.payload.valid"
+    );
+
+    append_verdict_evidence(
+        repo.path(),
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+        "schema.payload.valid",
+        "handbook.evidence.schema-conformance",
+        handbook_contracts::EvidenceObservationV1::Satisfied,
+        31,
+    );
+
+    let active = owner
+        .current_lifecycle_head(run.contract().reference(), run.contract().fingerprint())
+        .unwrap();
+    let prepared = owner
+        .prepare_lifecycle_transition(
+            run.contract().reference(),
+            run.contract().fingerprint(),
+            ContractLifecycleTransitionInputV1 {
+                expected_lifecycle_fingerprint: active.lifecycle_fingerprint().clone(),
+                from_state: LifecycleStateV1::Active,
+                to_state: LifecycleStateV1::Deprecated,
+                approval_class: ContractApprovalClassV1::Lifecycle,
+                supporting_evidence: vec![LifecycleSupportingEvidenceV1::new(
+                    LifecycleEvidenceKindV1::NoReplacementRationale,
+                    binding("handbook.contract-lifecycle-evidence.owner@1.0.0", '9'),
+                )],
+                reason: LifecycleReasonV1::DeprecatedWithoutReplacement(
+                    LifecycleReasonTextV1::parse(
+                        "The exact evaluation basis is deliberately made stale for this test.",
+                    )
+                    .unwrap(),
+                ),
+            },
+        )
+        .unwrap();
+    let mut lifecycle_service =
+        CredentialAuthorityAdmissionServiceV1::new(repo.path(), source.into_port());
+    lifecycle_service
+        .admit(prepared.authority_request(), |admission| {
+            owner.transition_lifecycle(prepared, admission, "verdict-stale-basis-0001")
+        })
+        .unwrap()
+        .unwrap();
+    let mut source =
+        RepositoryEvidenceCandidateSourceV1::open(repo.path(), lifecycle_service.into_port())
+            .unwrap();
+    let stale_basis = evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    assert_eq!(
+        stale_basis.verdicts()[0].decision(),
+        ClaimVerdictDecisionV1::Blocked
+    );
+    assert_eq!(
+        stale_basis.verdicts()[0]
+            .reason_codes()
+            .map(StableIdV1::as_str)
+            .collect::<Vec<_>>(),
+        vec!["verdict.blocked.lifecycle-stale"]
+    );
+    assert_eq!(stale_basis.verdicts()[0].supporting_evidence().len(), 0);
+    assert_eq!(
+        stale_basis.verdicts()[0].disqualifying_evidence().len(),
+        1,
+        "stale lifecycle must retain every exact-run record as visible disqualified evidence"
+    );
+    assert_eq!(
+        serde_json::to_value(&stale_basis.verdicts()[0]).unwrap()["body"]
+            ["evidence_source_authority"]
+            .as_array()
+            .unwrap()
+            .len(),
+        1,
+        "stale lifecycle must still bind the current evidence-source authority head"
+    );
+}
+
+#[cfg(feature = "test-support")]
+#[test]
+fn closed_claim_verdict_evaluator_exhausts_vocabulary_and_fixed_precedence() {
+    use handbook_contracts::{
+        evaluate_claim_verdicts_v1, ClaimVerdictDecisionV1, EvidenceObservationV1,
+        RepositoryEvidenceCandidateSourceV1,
+    };
+
+    let mut harness = Harness::new_with_evidence_source_authority();
+    let (stack, stack_binding) = evidence_resolution_stack();
+    let freshness = EvidenceFreshnessPolicyV1::new(
+        EvidenceFreshnessPolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.0+verdict-matrix").unwrap(),
+            300,
+            true,
+            0,
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let gate = GatePolicyV1::new(
+        GatePolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-gate-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.4").unwrap(),
+            GatePolicyAlgorithmV1::ClosedAccounting,
+            None,
+            handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let claim_specs = [
+        (
+            "matrix.pass",
+            GateEffectV1::Required,
+            EvidenceCardinalityV1::ExactlyOne,
+            "matrix.kind.pass",
+            "positive",
+        ),
+        (
+            "matrix.fail",
+            GateEffectV1::HardFail,
+            EvidenceCardinalityV1::ExactlyOne,
+            "matrix.kind.fail",
+            "positive",
+        ),
+        (
+            "matrix.warning",
+            GateEffectV1::Advisory,
+            EvidenceCardinalityV1::ExactlyOne,
+            "matrix.kind.warning",
+            "positive",
+        ),
+        (
+            "matrix.not-observed",
+            GateEffectV1::Required,
+            EvidenceCardinalityV1::AtLeastOne,
+            "matrix.kind.missing",
+            "positive",
+        ),
+        (
+            "matrix.not-applicable",
+            GateEffectV1::Required,
+            EvidenceCardinalityV1::ExactlyOne,
+            "matrix.kind.not-applicable",
+            "negative",
+        ),
+        (
+            "matrix.flaky",
+            GateEffectV1::Required,
+            EvidenceCardinalityV1::AtLeastOne,
+            "matrix.kind.flaky",
+            "positive",
+        ),
+        (
+            "matrix.consistent",
+            GateEffectV1::Required,
+            EvidenceCardinalityV1::AtLeastOne,
+            "matrix.kind.consistent",
+            "positive",
+        ),
+        (
+            "matrix.blocked",
+            GateEffectV1::Required,
+            EvidenceCardinalityV1::ExactlyOne,
+            "matrix.kind.blocked",
+            "positive",
+        ),
+    ];
+    let claims = claim_specs
+        .iter()
+        .map(|(claim_id, effect, cardinality, kind, expected_case)| {
+            verdict_claim(
+                claim_id,
+                *effect,
+                *cardinality,
+                kind,
+                expected_case,
+                freshness.binding().clone(),
+                stack_binding.clone(),
+            )
+        })
+        .collect::<Vec<_>>();
+    let definition = verdict_definition(
+        &harness.registry_state_fingerprint,
+        claims,
+        gate.binding().clone(),
+    );
+    let (contract_ref, definition_fingerprint, active_head) =
+        activate_definition(&mut harness, definition, "verdict-matrix");
+    let mut policies = EvaluationPolicyRegistryV1::new().unwrap();
+    policies.register_freshness(freshness.clone()).unwrap();
+    policies.register_gate(gate.clone()).unwrap();
+    let run = harness
+        .owner
+        .prepare_evaluation_run_v1(
+            PrepareEvaluationRunInputV1::new(
+                ExactBindingV1::new(contract_ref, definition_fingerprint),
+                active_head,
+                evaluation_subject('7'),
+                vec![evaluation_case('8')],
+                evidence_resolution(&stack),
+                MatcherBindingV1::exact_fields_v1(),
+                vec![freshness.binding().clone()],
+                vec![handbook_contracts::evidence_stability_policy_binding_v1().unwrap()],
+                gate.binding().clone(),
+                handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+                EvaluationRunNonceV1::parse("verdict-matrix-observation-0001").unwrap(),
+            )
+            .unwrap(),
+            &policies,
+        )
+        .unwrap();
+    let observed_at = run
+        .owner_currentness()
+        .semantic_time_utc()
+        .as_str()
+        .to_owned();
+    let Harness {
+        repo,
+        owner,
+        service,
+        registry_state_fingerprint: _,
+    } = harness;
+    let mut source =
+        RepositoryEvidenceCandidateSourceV1::open(repo.path(), service.into_port()).unwrap();
+    let mut currentness = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at,
+        calls: 0,
+        second_head_fingerprint: None,
+        change_after_call: None,
+    };
+    let mut replay_candidate = None;
+    for (claim_id, kind, observation, sample) in [
+        (
+            "matrix.pass",
+            "matrix.kind.pass",
+            EvidenceObservationV1::Satisfied,
+            1,
+        ),
+        (
+            "matrix.fail",
+            "matrix.kind.fail",
+            EvidenceObservationV1::Violated,
+            2,
+        ),
+        (
+            "matrix.warning",
+            "matrix.kind.warning",
+            EvidenceObservationV1::Violated,
+            3,
+        ),
+        (
+            "matrix.flaky",
+            "matrix.kind.flaky",
+            EvidenceObservationV1::Satisfied,
+            4,
+        ),
+        (
+            "matrix.flaky",
+            "matrix.kind.flaky",
+            EvidenceObservationV1::Violated,
+            5,
+        ),
+        (
+            "matrix.consistent",
+            "matrix.kind.consistent",
+            EvidenceObservationV1::Satisfied,
+            6,
+        ),
+        (
+            "matrix.consistent",
+            "matrix.kind.consistent",
+            EvidenceObservationV1::Satisfied,
+            7,
+        ),
+        (
+            "matrix.blocked",
+            "matrix.kind.blocked",
+            EvidenceObservationV1::Satisfied,
+            8,
+        ),
+        (
+            "matrix.blocked",
+            "matrix.kind.blocked",
+            EvidenceObservationV1::Satisfied,
+            9,
+        ),
+    ] {
+        let candidate = append_verdict_evidence(
+            repo.path(),
+            &owner,
+            &mut source,
+            &mut currentness,
+            &stack,
+            &policies,
+            &run,
+            claim_id,
+            kind,
+            observation,
+            sample,
+        );
+        if sample == 1 {
+            replay_candidate = Some(candidate);
+        }
+    }
+    let replay = owner
+        .append_evidence_candidate_v1(
+            &mut source,
+            &mut currentness,
+            &stack,
+            &policies,
+            replay_candidate.as_ref().unwrap(),
+            "verdict-evidence-key-0001",
+        )
+        .unwrap();
+    assert_eq!(replay.disposition(), OwnerMutationDispositionV1::Replayed);
+    assert_eq!(
+        owner
+            .list_evidence(handbook_contracts::EvidenceListRequestV1::first(20).unwrap())
+            .unwrap()
+            .entries()
+            .len(),
+        9,
+        "exact append replay must not duplicate evaluator input"
+    );
+
+    let first = evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    let second = evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+
+    assert_eq!(first, second, "exact re-evaluation must be deterministic");
+    assert_eq!(first.verdicts().len(), claim_specs.len());
+    let decisions = first
+        .verdicts()
+        .iter()
+        .map(|verdict| (verdict.claim_id().as_str(), verdict.decision()))
+        .collect::<Vec<_>>();
+    assert_eq!(
+        decisions,
+        vec![
+            ("matrix.pass", ClaimVerdictDecisionV1::Pass),
+            ("matrix.fail", ClaimVerdictDecisionV1::Fail),
+            ("matrix.warning", ClaimVerdictDecisionV1::Warning),
+            ("matrix.not-observed", ClaimVerdictDecisionV1::NotObserved),
+            (
+                "matrix.not-applicable",
+                ClaimVerdictDecisionV1::NotApplicable
+            ),
+            ("matrix.flaky", ClaimVerdictDecisionV1::Flaky),
+            ("matrix.consistent", ClaimVerdictDecisionV1::Pass),
+            ("matrix.blocked", ClaimVerdictDecisionV1::Blocked),
+        ]
+    );
+    assert_eq!(
+        first.verdicts()[5]
+            .reason_codes()
+            .map(StableIdV1::as_str)
+            .collect::<Vec<_>>(),
+        vec!["verdict.flaky.outcome-consensus"]
+    );
+    assert_eq!(
+        first.verdicts()[7]
+            .reason_codes()
+            .map(StableIdV1::as_str)
+            .collect::<Vec<_>>(),
+        vec!["verdict.blocked.cardinality-surplus"]
+    );
+    assert_eq!(first.verdicts()[5].supporting_evidence().len(), 2);
+    assert_eq!(first.verdicts()[6].supporting_evidence().len(), 2);
+    assert_eq!(first.verdicts()[7].supporting_evidence().len(), 0);
+    assert_eq!(first.verdicts()[7].disqualifying_evidence().len(), 9);
+    for verdict in first.verdicts().iter().filter(|verdict| {
+        verdict.applicability() == handbook_contracts::ApplicabilityOutcomeV1::Applicable
+    }) {
+        assert_eq!(
+            verdict.supporting_evidence().len() + verdict.disqualifying_evidence().len(),
+            9,
+            "every exact-run record must remain in complete claim accounting"
+        );
+    }
+
+    let lifecycle_head = fs::read_dir(repo.path().join(".handbook/state/contracts/v1/heads"))
+        .unwrap()
+        .next()
+        .unwrap()
+        .unwrap()
+        .path();
+    let lifecycle_head_bytes = fs::read(&lifecycle_head).unwrap();
+    let mut lifecycle_race = TamperingSourceCurrentness {
+        inner: FixedSourceCurrentness {
+            head_ref: "source/head".to_owned(),
+            head_fingerprint: fp('c').as_str().to_owned(),
+            observed_at: currentness.observed_at.clone(),
+            calls: 0,
+            second_head_fingerprint: Some(fp('d').as_str().to_owned()),
+            change_after_call: Some(4),
+        },
+        target: lifecycle_head.clone(),
+    };
+    let lifecycle_changed = evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut lifecycle_race,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    fs::write(&lifecycle_head, &lifecycle_head_bytes).unwrap();
+    assert!(lifecycle_changed
+        .verdicts()
+        .iter()
+        .all(|verdict| verdict.decision() == ClaimVerdictDecisionV1::Blocked));
+    assert_eq!(
+        lifecycle_changed.verdicts()[0]
+            .reason_codes()
+            .next()
+            .map(StableIdV1::as_str),
+        Some("verdict.blocked.lifecycle-changed"),
+        "lifecycle re-admission must remain the first blocking phase even when source currentness also changes"
+    );
+
+    let mut late_lifecycle_race = ScheduledTamperingSourceCurrentness {
+        inner: FixedSourceCurrentness {
+            head_ref: "source/head".to_owned(),
+            head_fingerprint: fp('c').as_str().to_owned(),
+            observed_at: currentness.observed_at.clone(),
+            calls: 0,
+            second_head_fingerprint: None,
+            change_after_call: None,
+        },
+        target: lifecycle_head.clone(),
+        tamper_before_call: 9,
+        tampered: false,
+    };
+    let late_lifecycle_changed = evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut late_lifecycle_race,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    fs::write(&lifecycle_head, &lifecycle_head_bytes).unwrap();
+    assert!(late_lifecycle_race.tampered);
+    assert!(late_lifecycle_changed
+        .verdicts()
+        .iter()
+        .all(|verdict| verdict.decision() == ClaimVerdictDecisionV1::Blocked));
+    assert_eq!(
+        late_lifecycle_changed.verdicts()[0]
+            .reason_codes()
+            .next()
+            .map(StableIdV1::as_str),
+        Some("verdict.blocked.lifecycle-changed"),
+        "a lifecycle change during the final source scan must block before final verdict identity"
+    );
+
+    let late_corrupt_record = copy_repository(repo.path());
+    let late_owner = ContractOwnerRepositoryV1::open(&late_corrupt_record).unwrap();
+    let mut late_source = RepositoryEvidenceCandidateSourceV1::open(
+        &late_corrupt_record,
+        TestAuthenticatorPort::new(),
+    )
+    .unwrap();
+    fs::write(
+        first_file(&late_corrupt_record.join(".handbook/state/contracts/v1/evidence-v1/records")),
+        b"corrupt-after-owner-open",
+    )
+    .unwrap();
+    let mut late_currentness = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at: currentness.observed_at.clone(),
+        calls: 0,
+        second_head_fingerprint: None,
+        change_after_call: None,
+    };
+    assert_eq!(
+        evaluate_claim_verdicts_v1(
+            &late_owner,
+            &mut late_source,
+            &mut late_currentness,
+            &stack,
+            &policies,
+            &run,
+        )
+        .unwrap_err()
+        .kind(),
+        handbook_contracts::ClaimVerdictEvaluationErrorKindV1::RepositoryCorrupt
+    );
+
+    let missing_record = copy_repository(repo.path());
+    fs::remove_file(first_file(
+        &missing_record.join(".handbook/state/contracts/v1/evidence-v1/records"),
+    ))
+    .unwrap();
+    assert_corrupt_verdict_repository(
+        &missing_record,
+        &stack,
+        &policies,
+        &run,
+        &currentness.observed_at,
+    );
+    let surplus_record = copy_repository(repo.path());
+    fs::write(
+        surplus_record.join(".handbook/state/contracts/v1/evidence-v1/records/unknown.json"),
+        b"{}",
+    )
+    .unwrap();
+    assert_corrupt_verdict_repository(
+        &surplus_record,
+        &stack,
+        &policies,
+        &run,
+        &currentness.observed_at,
+    );
+    let duplicate_record = copy_repository(repo.path());
+    let records = duplicate_record.join(".handbook/state/contracts/v1/evidence-v1/records");
+    fs::copy(
+        first_file(&records),
+        records.join(format!("{}.json", "f".repeat(64))),
+    )
+    .unwrap();
+    assert_corrupt_verdict_repository(
+        &duplicate_record,
+        &stack,
+        &policies,
+        &run,
+        &currentness.observed_at,
+    );
+    let incomplete_inventory = copy_repository(repo.path());
+    fs::remove_file(first_file(
+        &incomplete_inventory.join(".handbook/state/contracts/v1/evidence-v1/idempotency"),
+    ))
+    .unwrap();
+    assert_corrupt_verdict_repository(
+        &incomplete_inventory,
+        &stack,
+        &policies,
+        &run,
+        &currentness.observed_at,
+    );
+    let corrupt_record = copy_repository(repo.path());
+    fs::write(
+        first_file(&corrupt_record.join(".handbook/state/contracts/v1/evidence-v1/records")),
+        b"corrupt",
+    )
+    .unwrap();
+    assert_corrupt_verdict_repository(
+        &corrupt_record,
+        &stack,
+        &policies,
+        &run,
+        &currentness.observed_at,
+    );
+
+    currentness.second_head_fingerprint = Some(fp('d').as_str().to_owned());
+    currentness.change_after_call = Some(currentness.calls);
+    let stale_source = evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    assert!(stale_source
+        .verdicts()
+        .iter()
+        .all(|verdict| verdict.decision() == ClaimVerdictDecisionV1::Blocked));
+    assert!(stale_source.verdicts()[0]
+        .reason_codes()
+        .any(|code| code.as_str() == "verdict.blocked.source-currentness"));
+
+    currentness.second_head_fingerprint = None;
+    currentness.change_after_call = None;
+    let observation = fs::read_dir(
+        repo.path()
+            .join(".handbook/state/contracts/v1/candidate-observations"),
+    )
+    .unwrap()
+    .map(|entry| entry.unwrap().path())
+    .min()
+    .unwrap();
+    fs::write(observation, b"corrupt-candidate-observation").unwrap();
+    let substituted_source = evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    assert!(substituted_source
+        .verdicts()
+        .iter()
+        .all(|verdict| verdict.decision() == ClaimVerdictDecisionV1::Blocked));
+    assert!(substituted_source.verdicts()[0]
+        .reason_codes()
+        .any(|code| code.as_str() == "verdict.blocked.candidate-malformed"));
+    assert_eq!(
+        substituted_source.verdicts()[0].supporting_evidence().len(),
+        0
+    );
+    assert_eq!(
+        substituted_source.verdicts()[0]
+            .disqualifying_evidence()
+            .len(),
+        9
+    );
+}
+
+#[cfg(feature = "test-support")]
+#[test]
+fn closed_claim_verdict_evaluator_enforces_all_declared_cases_and_tuple_stability() {
+    use handbook_contracts::{
+        evaluate_claim_verdicts_v1, ClaimVerdictDecisionV1, EvidenceObservationV1,
+        RepositoryEvidenceCandidateSourceV1,
+    };
+
+    let mut harness = Harness::new_with_evidence_source_authority();
+    let (stack, stack_binding) = evidence_resolution_stack();
+    let freshness = EvidenceFreshnessPolicyV1::new(
+        EvidenceFreshnessPolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.0+verdict-cases").unwrap(),
+            300,
+            true,
+            0,
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let gate = GatePolicyV1::new(
+        GatePolicyInputV1::new(
+            ContractIdV1::parse("handbook.contract-gate-policy.fixture").unwrap(),
+            VersionV1::parse("1.0.5").unwrap(),
+            GatePolicyAlgorithmV1::ClosedAccounting,
+            None,
+            handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+        )
+        .unwrap(),
+    )
+    .unwrap();
+    let cases = vec![
+        evaluation_case_named("case.first", '8', "positive"),
+        evaluation_case_named("case.second", '9', "positive"),
+    ];
+    let claim = ContractClaimV1::new(ContractClaimInputV1 {
+        claim_id: id("matrix.all-cases"),
+        statement: "Every declared case is directly observed.".to_owned(),
+        subject_selector: selector("subject.kind", "artifact"),
+        case_selector: selector("case.kind", "positive"),
+        applicability_rule: ApplicabilityRuleV1::SubjectAndCaseMatch,
+        gate_effect: GateEffectV1::Required,
+        evidence_requirements: vec![EvidenceRequirementV1::new(
+            id("matrix.kind.all-cases"),
+            EvidenceCardinalityV1::AllDeclaredCases,
+            EvidenceCaseSelectionV1::exact_cases(vec![id("case.first"), id("case.second")])
+                .unwrap(),
+            handbook_contracts::evidence_stability_policy_binding_v1().unwrap(),
+        )
+        .unwrap()],
+        freshness_policy: freshness.binding().clone(),
+        minimum_resolution: ResolutionMinimumV1::new(
+            stack_binding.clone(),
+            id("resolution.scope.local-observation"),
+            id("resolution.detail.identifier-only"),
+            id("resolution.time.current-operation"),
+            id("resolution.authority.read-only"),
+            id("resolution.memory.operation"),
+            id("resolution.validation.observation-only"),
+        ),
+        score_weight: None,
+    })
+    .unwrap();
+    let at_least_one = verdict_claim(
+        "matrix.at-least-cases",
+        GateEffectV1::Required,
+        EvidenceCardinalityV1::AtLeastOne,
+        "matrix.kind.at-least-cases",
+        "positive",
+        freshness.binding().clone(),
+        stack_binding,
+    );
+    let definition = verdict_definition(
+        &harness.registry_state_fingerprint,
+        vec![claim, at_least_one],
+        gate.binding().clone(),
+    );
+    let (contract_ref, definition_fingerprint, active_head) =
+        activate_definition(&mut harness, definition, "verdict-cases");
+    let mut policies = EvaluationPolicyRegistryV1::new().unwrap();
+    policies.register_freshness(freshness.clone()).unwrap();
+    policies.register_gate(gate.clone()).unwrap();
+    let run = harness
+        .owner
+        .prepare_evaluation_run_v1(
+            PrepareEvaluationRunInputV1::new(
+                ExactBindingV1::new(contract_ref, definition_fingerprint),
+                active_head,
+                evaluation_subject('7'),
+                cases,
+                evidence_resolution(&stack),
+                MatcherBindingV1::exact_fields_v1(),
+                vec![freshness.binding().clone()],
+                vec![handbook_contracts::evidence_stability_policy_binding_v1().unwrap()],
+                gate.binding().clone(),
+                handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+                EvaluationRunNonceV1::parse("verdict-cases-observation-0001").unwrap(),
+            )
+            .unwrap(),
+            &policies,
+        )
+        .unwrap();
+    let observed_at = run
+        .owner_currentness()
+        .semantic_time_utc()
+        .as_str()
+        .to_owned();
+    let Harness {
+        repo,
+        owner,
+        service,
+        registry_state_fingerprint: _,
+    } = harness;
+    let mut source =
+        RepositoryEvidenceCandidateSourceV1::open(repo.path(), service.into_port()).unwrap();
+    let mut currentness = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at,
+        calls: 0,
+        second_head_fingerprint: None,
+        change_after_call: None,
+    };
+    append_verdict_evidence_for_case(
+        repo.path(),
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+        "matrix.all-cases",
+        "matrix.kind.all-cases",
+        EvidenceObservationV1::Satisfied,
+        0,
+        21,
+    );
+    let missing_case = evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    assert_eq!(
+        missing_case.verdicts()[0].decision(),
+        ClaimVerdictDecisionV1::NotObserved
+    );
+    append_verdict_evidence_for_case(
+        repo.path(),
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+        "matrix.all-cases",
+        "matrix.kind.all-cases",
+        EvidenceObservationV1::Satisfied,
+        1,
+        22,
+    );
+    let complete = evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    assert_eq!(
+        complete.verdicts()[0].decision(),
+        ClaimVerdictDecisionV1::Pass
+    );
+    assert_eq!(complete.verdicts()[0].supporting_evidence().len(), 2);
+    append_verdict_evidence_for_case(
+        repo.path(),
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+        "matrix.all-cases",
+        "matrix.kind.all-cases",
+        EvidenceObservationV1::Violated,
+        1,
+        23,
+    );
+    let flaky = evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    assert_eq!(
+        flaky.verdicts()[0].decision(),
+        ClaimVerdictDecisionV1::Flaky
+    );
+    assert_eq!(flaky.verdicts()[0].supporting_evidence().len(), 3);
+
+    append_verdict_evidence_for_case(
+        repo.path(),
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+        "matrix.at-least-cases",
+        "matrix.kind.at-least-cases",
+        EvidenceObservationV1::Satisfied,
+        0,
+        24,
+    );
+    append_verdict_evidence_for_case(
+        repo.path(),
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+        "matrix.at-least-cases",
+        "matrix.kind.at-least-cases",
+        EvidenceObservationV1::Violated,
+        1,
+        25,
+    );
+    let stable_per_tuple = evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        &stack,
+        &policies,
+        &run,
+    )
+    .unwrap();
+    assert_eq!(
+        stable_per_tuple.verdicts()[1].decision(),
+        ClaimVerdictDecisionV1::Fail,
+        "opposite outcomes in distinct cases are stable tuples combined by all-of, not flaky repeats"
+    );
+    assert_eq!(
+        stable_per_tuple.verdicts()[1].supporting_evidence().len(),
+        2
+    );
+}
+
+#[cfg(feature = "test-support")]
 struct FixedSourceCurrentness {
     head_ref: String,
     head_fingerprint: String,
@@ -2378,6 +3380,28 @@ impl SourceCurrentnessPortV1 for FixedSourceCurrentness {
 struct TamperingSourceCurrentness {
     inner: FixedSourceCurrentness,
     target: PathBuf,
+}
+
+#[cfg(feature = "test-support")]
+struct ScheduledTamperingSourceCurrentness {
+    inner: FixedSourceCurrentness,
+    target: PathBuf,
+    tamper_before_call: usize,
+    tampered: bool,
+}
+
+#[cfg(feature = "test-support")]
+impl SourceCurrentnessPortV1 for ScheduledTamperingSourceCurrentness {
+    fn observe_current(
+        &mut self,
+        request: &SourceCurrentnessRequestV1,
+    ) -> Result<SourceCurrentnessObservationV1, EvidenceSourceAdmissionErrorV1> {
+        if !self.tampered && self.inner.calls == self.tamper_before_call {
+            fs::write(&self.target, b"substituted").unwrap();
+            self.tampered = true;
+        }
+        self.inner.observe_current(request)
+    }
 }
 
 #[cfg(feature = "test-support")]
@@ -3004,6 +4028,22 @@ fn evaluation_case(hex: char) -> EvaluationCaseV1 {
     .unwrap()
 }
 
+#[cfg(feature = "test-support")]
+fn evaluation_case_named(case_id: &str, hex: char, kind: &str) -> EvaluationCaseV1 {
+    let fingerprint =
+        FingerprintV1::parse(&format!("sha256:{}", hex.to_string().repeat(64))).unwrap();
+    EvaluationCaseV1::new(
+        id(case_id),
+        handbook_contracts::ContentAddressedBindingV1::new(
+            &format!("case.example/{}", &fingerprint.as_str()[7..]),
+            fingerprint,
+        )
+        .unwrap(),
+        vec![MatcherInputValueV1::new(id("case.kind"), kind).unwrap()],
+    )
+    .unwrap()
+}
+
 fn evaluation_resolution() -> ResolutionEnvelopeV1 {
     ResolutionEnvelopeV1::new(
         binding("handbook.context-resolution.shipped-root@1.0.0", '1'),
@@ -3120,6 +4160,185 @@ fn evidence_admission_definition(
 }
 
 #[cfg(feature = "test-support")]
+fn verdict_claim(
+    claim_id: &str,
+    gate_effect: GateEffectV1,
+    cardinality: EvidenceCardinalityV1,
+    evidence_kind: &str,
+    expected_case: &str,
+    freshness_policy: ExactBindingV1,
+    stack_binding: ExactBindingV1,
+) -> ContractClaimV1 {
+    ContractClaimV1::new(ContractClaimInputV1 {
+        claim_id: id(claim_id),
+        statement: format!("Verdict matrix claim {claim_id}."),
+        subject_selector: selector("subject.kind", "artifact"),
+        case_selector: selector("case.kind", expected_case),
+        applicability_rule: ApplicabilityRuleV1::SubjectAndCaseMatch,
+        gate_effect,
+        evidence_requirements: vec![EvidenceRequirementV1::new(
+            id(evidence_kind),
+            cardinality,
+            EvidenceCaseSelectionV1::ClaimCaseSelector,
+            handbook_contracts::evidence_stability_policy_binding_v1().unwrap(),
+        )
+        .unwrap()],
+        freshness_policy,
+        minimum_resolution: ResolutionMinimumV1::new(
+            stack_binding,
+            id("resolution.scope.local-observation"),
+            id("resolution.detail.identifier-only"),
+            id("resolution.time.current-operation"),
+            id("resolution.authority.read-only"),
+            id("resolution.memory.operation"),
+            id("resolution.validation.observation-only"),
+        ),
+        score_weight: None,
+    })
+    .unwrap()
+}
+
+#[cfg(feature = "test-support")]
+fn verdict_definition(
+    registry_state_fingerprint: &str,
+    claims: Vec<ContractClaimV1>,
+    gate_policy: ExactBindingV1,
+) -> ContractDefinitionV1 {
+    ContractDefinitionV1::new(ContractDefinitionInputV1 {
+        definition_schema: binding("handbook.contract-definition@1.0.0", 'b'),
+        contract_id: ContractIdV1::parse("handbook.contract.verdict-matrix").unwrap(),
+        contract_version: VersionV1::parse("1.0.0").unwrap(),
+        contract_kind: ContractKindV1::ClaimSet,
+        claims,
+        definition_author_ref: StableIdV1::parse(&format!(
+            "credential.sha256-{:x}",
+            Sha256::digest([0x32; 32])
+        ))
+        .unwrap(),
+        definition_authority: ExactBindingV1::new(
+            ExactRefV1::parse(AUTHOR_AUTHORITY_REF).unwrap(),
+            FingerprintV1::parse(registry_state_fingerprint).unwrap(),
+        ),
+        lifecycle_policy: lifecycle_policy_binding_v1().unwrap(),
+        matcher_bindings: vec![MatcherBindingV1::exact_fields_v1()],
+        gate_policy,
+        extensions_policy: binding("handbook.contract-extensions.closed-v1@1.0.0", 'd'),
+    })
+    .unwrap()
+}
+
+#[cfg(feature = "test-support")]
+#[allow(clippy::too_many_arguments)]
+fn append_verdict_evidence<P: NativeAuthenticatorPortV1, C: SourceCurrentnessPortV1>(
+    repo: &Path,
+    owner: &ContractOwnerRepositoryV1,
+    source: &mut handbook_contracts::RepositoryEvidenceCandidateSourceV1<P>,
+    currentness: &mut C,
+    stack: &ContextResolutionStackDefinition,
+    policies: &EvaluationPolicyRegistryV1,
+    run: &handbook_contracts::ContractEvaluationRunV1,
+    claim_id: &str,
+    evidence_kind: &str,
+    observation: handbook_contracts::EvidenceObservationV1,
+    sample: u8,
+) -> handbook_contracts::ContentAddressedBindingV1 {
+    append_verdict_evidence_for_case(
+        repo,
+        owner,
+        source,
+        currentness,
+        stack,
+        policies,
+        run,
+        claim_id,
+        evidence_kind,
+        observation,
+        0,
+        sample,
+    )
+}
+
+#[cfg(feature = "test-support")]
+#[allow(clippy::too_many_arguments)]
+fn append_verdict_evidence_for_case<P: NativeAuthenticatorPortV1, C: SourceCurrentnessPortV1>(
+    repo: &Path,
+    owner: &ContractOwnerRepositoryV1,
+    source: &mut handbook_contracts::RepositoryEvidenceCandidateSourceV1<P>,
+    currentness: &mut C,
+    stack: &ContextResolutionStackDefinition,
+    policies: &EvaluationPolicyRegistryV1,
+    run: &handbook_contracts::ContractEvaluationRunV1,
+    claim_id: &str,
+    evidence_kind: &str,
+    observation: handbook_contracts::EvidenceObservationV1,
+    case_index: usize,
+    sample: u8,
+) -> handbook_contracts::ContentAddressedBindingV1 {
+    let mut unobserved = run
+        .claims()
+        .iter()
+        .map(|claim| claim.claim_id().as_str())
+        .filter(|candidate| *candidate != claim_id)
+        .collect::<Vec<_>>();
+    unobserved.sort_unstable();
+    let hexes = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    let index = usize::from(sample) % hexes.len();
+    let producer = content_binding(&format!("producer/{sample}"), hexes[index]);
+    let request = content_binding(
+        &format!("request/{sample}"),
+        hexes[(index + 1) % hexes.len()],
+    );
+    let execution = content_binding(
+        &format!("execution/{sample}"),
+        hexes[(index + 2) % hexes.len()],
+    );
+    let observed_at = run.owner_currentness().semantic_time_utc().as_str();
+    let body = json!({
+        "evaluation_run": {
+            "ref": run.evaluation_run_ref(),
+            "fingerprint": run.evaluation_run_fingerprint(),
+        },
+        "evaluation_lifecycle_basis": run.evaluation_lifecycle_basis(),
+        "contract": run.contract(),
+        "subject": run.subject(),
+        "case": &run.cases()[case_index],
+        "observed_claim_ids": [claim_id],
+        "evidence_kind": evidence_kind,
+        "fact_schema": binding("handbook.fact.verdict-matrix@1.0.0", 'b'),
+        "fact_payload": {"sample": sample},
+        "observation": observation,
+        "producer": producer,
+        "request_record": request,
+        "execution_record": execution,
+        "sources": [{
+            "source": content_binding("source/ref", 'a'),
+            "revision": "revision-1",
+            "collected_at": observed_at,
+        }],
+        "claim_partition": {
+            "observed": [claim_id],
+            "unobserved": unobserved,
+            "excluded": [],
+        },
+        "request_resolution": evidence_resolution(stack),
+        "actual_resolution": evidence_resolution(stack),
+        "observed_at": observed_at,
+    });
+    let candidate = seed_evidence_candidate_body(repo, run, body, None);
+    owner
+        .append_evidence_candidate_v1(
+            source,
+            currentness,
+            stack,
+            policies,
+            &candidate,
+            &format!("verdict-evidence-key-{sample:04}"),
+        )
+        .unwrap();
+    candidate
+}
+
+#[cfg(feature = "test-support")]
 fn fp(hex: char) -> FingerprintV1 {
     FingerprintV1::parse(&format!("sha256:{}", hex.to_string().repeat(64))).unwrap()
 }
@@ -3214,6 +4433,63 @@ fn copy_repository(source: &Path) -> PathBuf {
     let repository = parent.join("repository");
     copy_tree(source, &repository);
     repository
+}
+
+#[cfg(feature = "test-support")]
+fn first_file(root: &Path) -> PathBuf {
+    fs::read_dir(root)
+        .unwrap()
+        .map(|entry| entry.unwrap().path())
+        .filter(|path| path.is_file())
+        .min()
+        .unwrap()
+}
+
+#[cfg(feature = "test-support")]
+fn assert_corrupt_verdict_repository(
+    repository: &Path,
+    stack: &ContextResolutionStackDefinition,
+    policies: &EvaluationPolicyRegistryV1,
+    run: &handbook_contracts::ContractEvaluationRunV1,
+    observed_at: &str,
+) {
+    let owner = match ContractOwnerRepositoryV1::open(repository) {
+        Ok(owner) => owner,
+        Err(error) => {
+            assert!(matches!(
+                error.kind(),
+                ContractOwnerRepositoryErrorKindV1::RecoveryAmbiguous
+                    | ContractOwnerRepositoryErrorKindV1::RecordSubstituted
+            ));
+            return;
+        }
+    };
+    let mut source = handbook_contracts::RepositoryEvidenceCandidateSourceV1::open(
+        repository,
+        TestAuthenticatorPort::new(),
+    )
+    .unwrap();
+    let mut currentness = FixedSourceCurrentness {
+        head_ref: "source/head".to_owned(),
+        head_fingerprint: fp('c').as_str().to_owned(),
+        observed_at: observed_at.to_owned(),
+        calls: 0,
+        second_head_fingerprint: None,
+        change_after_call: None,
+    };
+    let error = handbook_contracts::evaluate_claim_verdicts_v1(
+        &owner,
+        &mut source,
+        &mut currentness,
+        stack,
+        policies,
+        run,
+    )
+    .unwrap_err();
+    assert_eq!(
+        error.kind(),
+        handbook_contracts::ClaimVerdictEvaluationErrorKindV1::RepositoryCorrupt
+    );
 }
 
 #[cfg(feature = "test-support")]
