@@ -3,8 +3,8 @@ use crate::canonical::{canonical_bytes, canonical_fingerprint, fingerprint_hex, 
 use crate::manifest::{require_ref, valid_media_type, validate_strict_ids};
 use crate::{DockErrorV1, DockManifestV1, DockProtocolLimitsV1};
 use handbook_contracts::{
-    ContentAddressedBindingV1, EvaluationCaseV1, EvaluationSubjectV1, ExactBindingV1,
-    FingerprintV1, ResolutionEnvelopeV1, SemanticTimeV1, StableIdV1,
+    ContentAddressedBindingV1, EvaluationCaseV1, EvaluationSubjectV1, EvidenceObservationV1,
+    ExactBindingV1, FingerprintV1, ResolutionEnvelopeV1, SemanticTimeV1, StableIdV1,
 };
 use serde::de::Error as _;
 use serde::{Deserialize, Deserializer, Serialize};
@@ -87,6 +87,12 @@ impl DockEvaluationRunBindingV1 {
     }
     pub fn requested_resolution(&self) -> &ResolutionEnvelopeV1 {
         &self.requested_resolution
+    }
+    pub fn semantic_time_utc(&self) -> &SemanticTimeV1 {
+        &self.semantic_time_utc
+    }
+    pub fn lifecycle_head_fingerprint(&self) -> &FingerprintV1 {
+        &self.lifecycle_head_fingerprint
     }
 }
 
@@ -348,6 +354,12 @@ impl DockProcessRequestV1 {
     pub fn effective_limits(&self) -> &DockProtocolLimitsV1 {
         &self.effective_limits
     }
+    pub fn requested_evidence_kinds(&self) -> &[StableIdV1] {
+        &self.requested_evidence_kinds
+    }
+    pub fn inputs(&self) -> &[DockInlineJsonInputV1] {
+        &self.inputs
+    }
     pub fn binding(&self) -> Result<ContentAddressedBindingV1, DockErrorV1> {
         ContentAddressedBindingV1::new(&self.request_ref, self.request_fingerprint.clone())
             .map_err(|_| DockErrorV1::InvalidIdentity)
@@ -500,6 +512,7 @@ pub struct DockCandidateObservationV1 {
     payload_schema: ExactBindingV1,
     payload: Value,
     payload_fingerprint: FingerprintV1,
+    observation: EvidenceObservationV1,
 }
 impl DockCandidateObservationV1 {
     pub fn new(
@@ -508,6 +521,23 @@ impl DockCandidateObservationV1 {
         evidence_kind: StableIdV1,
         payload_schema: ExactBindingV1,
         payload: Value,
+    ) -> Result<Self, DockErrorV1> {
+        Self::new_with_observation(
+            claim_id,
+            case_id,
+            evidence_kind,
+            payload_schema,
+            payload,
+            EvidenceObservationV1::Satisfied,
+        )
+    }
+    pub fn new_with_observation(
+        claim_id: StableIdV1,
+        case_id: StableIdV1,
+        evidence_kind: StableIdV1,
+        payload_schema: ExactBindingV1,
+        payload: Value,
+        observation: EvidenceObservationV1,
     ) -> Result<Self, DockErrorV1> {
         if canonical_bytes(&payload)?.len() > MAX_CANDIDATE_BYTES {
             return Err(DockErrorV1::BoundExceeded);
@@ -520,6 +550,7 @@ impl DockCandidateObservationV1 {
             payload_schema,
             payload,
             payload_fingerprint,
+            observation,
         })
     }
     pub fn claim_id(&self) -> &StableIdV1 {
@@ -533,6 +564,12 @@ impl DockCandidateObservationV1 {
     }
     pub fn payload(&self) -> &Value {
         &self.payload
+    }
+    pub fn payload_schema(&self) -> &ExactBindingV1 {
+        &self.payload_schema
+    }
+    pub fn observation(&self) -> EvidenceObservationV1 {
+        self.observation
     }
 }
 impl<'de> Deserialize<'de> for DockCandidateObservationV1 {
@@ -549,15 +586,17 @@ impl<'de> Deserialize<'de> for DockCandidateObservationV1 {
             payload_schema: ExactBindingV1,
             payload: Value,
             payload_fingerprint: FingerprintV1,
+            observation: EvidenceObservationV1,
         }
         let raw = Raw::deserialize(deserializer)?;
         let supplied = raw.payload_fingerprint;
-        let value = Self::new(
+        let value = Self::new_with_observation(
             raw.claim_id,
             raw.case_id,
             raw.evidence_kind,
             raw.payload_schema,
             raw.payload,
+            raw.observation,
         )
         .map_err(D::Error::custom)?;
         if value.payload_fingerprint != supplied {
@@ -612,6 +651,15 @@ impl DockClaimPartitionV1 {
             .collect();
         let claims: BTreeSet<_> = claims.iter().collect();
         values == claims
+    }
+    pub fn observed(&self) -> &[StableIdV1] {
+        &self.observed
+    }
+    pub fn unobserved(&self) -> &[StableIdV1] {
+        &self.unobserved
+    }
+    pub fn typed_excluded(&self) -> &[StableIdV1] {
+        &self.typed_excluded
     }
 }
 
@@ -823,6 +871,24 @@ impl DockProcessResultV1 {
     }
     pub fn candidates(&self) -> &[DockCandidateObservationV1] {
         &self.candidates
+    }
+    pub fn request(&self) -> &ContentAddressedBindingV1 {
+        &self.request
+    }
+    pub fn manifest(&self) -> &ExactBindingV1 {
+        &self.manifest
+    }
+    pub fn implementation_bundle(&self) -> &ExactBindingV1 {
+        &self.implementation_bundle
+    }
+    pub fn evaluation_run(&self) -> &ContentAddressedBindingV1 {
+        &self.evaluation_run
+    }
+    pub fn claim_partition(&self) -> Option<&DockClaimPartitionV1> {
+        self.claim_partition.as_ref()
+    }
+    pub fn actual_resolution(&self) -> Option<&ResolutionEnvelopeV1> {
+        self.actual_resolution.as_ref()
     }
     pub fn result_ref(&self) -> &str {
         &self.result_ref
@@ -1255,6 +1321,40 @@ impl DockExecutionRecordV1 {
     }
     pub fn candidate_observation_count(&self) -> usize {
         self.candidate_observation_count
+    }
+    pub fn record_ref(&self) -> &str {
+        &self.record_ref
+    }
+    pub fn record_fingerprint(&self) -> &FingerprintV1 {
+        &self.record_fingerprint
+    }
+    pub fn binding(&self) -> Result<ContentAddressedBindingV1, DockErrorV1> {
+        ContentAddressedBindingV1::new(&self.record_ref, self.record_fingerprint.clone())
+            .map_err(|_| DockErrorV1::InvalidIdentity)
+    }
+    pub fn request(&self) -> &ContentAddressedBindingV1 {
+        &self.request
+    }
+    pub fn result(&self) -> Option<&ContentAddressedBindingV1> {
+        self.result.as_ref()
+    }
+    pub fn manifest(&self) -> &ExactBindingV1 {
+        &self.manifest
+    }
+    pub fn implementation_bundle(&self) -> &ExactBindingV1 {
+        &self.implementation_bundle
+    }
+    pub fn evaluation_run(&self) -> &ContentAddressedBindingV1 {
+        &self.evaluation_run
+    }
+    pub fn cleanup(&self) -> DockCleanupDispositionV1 {
+        self.cleanup
+    }
+    pub fn durability(&self) -> DockDurabilityDispositionV1 {
+        self.durability
+    }
+    pub fn candidate_observation_bundle_fingerprint(&self) -> &FingerprintV1 {
+        &self.candidate_observation_bundle_fingerprint
     }
     pub fn canonical_json_bytes(&self) -> Result<Vec<u8>, DockErrorV1> {
         canonical_bytes(self)

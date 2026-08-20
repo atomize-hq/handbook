@@ -1348,10 +1348,12 @@ name = "handbook-dock"
 version = "0.1.0"
 dependencies = [
  "handbook-contracts",
+ "handbook-engine",
  "serde",
  "serde_json",
  "serde_json_canonicalizer",
  "sha2",
+ "tempfile",
 ]
 
 [[package]]

@@ -9,11 +9,13 @@ mod canonical;
 mod manifest;
 mod protocol;
 mod registry;
+mod store;
 
 pub use bounds::*;
 pub use manifest::*;
 pub use protocol::*;
 pub use registry::*;
+pub use store::*;
 
 use std::error::Error;
 use std::fmt;

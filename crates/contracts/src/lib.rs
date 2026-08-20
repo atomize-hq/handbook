@@ -50,14 +50,15 @@ pub use evidence_admission::{
     admit_evidence_candidate_v1, EvidenceCandidateAdmissionErrorKindV1,
     EvidenceCandidateAdmissionErrorV1,
 };
+pub use evidence_candidate_source::{
+    resolve_repository_candidate_observation_v1, EvidenceCandidateSourceErrorKindV1,
+    EvidenceCandidateSourceErrorV1, EvidenceCandidateSourceV1, RepositoryEvidenceCandidateSourceV1,
+    ResolvedEvidenceCandidateObservationInputV1, ResolvedEvidenceCandidateObservationV1,
+};
 #[cfg(feature = "test-support")]
 #[doc(hidden)]
 pub use evidence_candidate_source::{
     seed_committed_candidate_observation_for_testing_v1, CandidateObservationFixtureV1,
-};
-pub use evidence_candidate_source::{
-    EvidenceCandidateSourceErrorKindV1, EvidenceCandidateSourceErrorV1, EvidenceCandidateSourceV1,
-    RepositoryEvidenceCandidateSourceV1, ResolvedEvidenceCandidateObservationV1,
 };
 pub use gate_composition::{
     evaluate_gate_and_local_closeout_v1, GateEvaluationErrorKindV1, GateEvaluationErrorV1,

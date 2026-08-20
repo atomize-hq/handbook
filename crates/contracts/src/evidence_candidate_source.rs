@@ -1,4 +1,4 @@
-use crate::{ContentAddressedBindingV1, FingerprintV1, ResolutionEnvelopeV1};
+use crate::{ContentAddressedBindingV1, EvidenceCandidateV1, FingerprintV1, ResolutionEnvelopeV1};
 use handbook_engine::{
     EvidenceSourceAdmissionErrorKindV1, EvidenceSourceAdmissionRequestV1,
     EvidenceSourceAdmissionServiceV1, EvidenceSourceAdmissionV1, NativeAuthenticatorPortV1,
@@ -45,6 +45,15 @@ impl EvidenceCandidateSourceErrorV1 {
         self.detail
     }
 
+    /// Constructs a bounded repository-adapter refusal without exposing raw
+    /// paths, credentials, or source-specific diagnostics.
+    pub fn repository_refusal(kind: EvidenceCandidateSourceErrorKindV1) -> Self {
+        Self {
+            kind,
+            detail: "repository evidence candidate source refused",
+        }
+    }
+
     #[cfg(feature = "test-support")]
     #[doc(hidden)]
     pub fn for_testing(kind: EvidenceCandidateSourceErrorKindV1) -> Self {
@@ -86,6 +95,16 @@ pub struct ResolvedEvidenceCandidateObservationV1<'authority> {
     admission: EvidenceSourceAdmissionV1<'authority>,
 }
 
+#[derive(Clone, Debug)]
+pub struct ResolvedEvidenceCandidateObservationInputV1 {
+    pub candidate_jcs: Vec<u8>,
+    pub evaluation_run_jcs: Vec<u8>,
+    pub producer: ContentAddressedBindingV1,
+    pub request_record: ContentAddressedBindingV1,
+    pub execution_record: ContentAddressedBindingV1,
+    pub producer_resolution_ceiling: Option<ResolutionEnvelopeV1>,
+}
+
 impl ResolvedEvidenceCandidateObservationV1<'_> {
     pub fn candidate_jcs(&self) -> &[u8] {
         &self.candidate_jcs
@@ -108,6 +127,70 @@ impl ResolvedEvidenceCandidateObservationV1<'_> {
     pub(crate) fn admission(&self) -> &EvidenceSourceAdmissionV1<'_> {
         &self.admission
     }
+}
+
+/// Seals a repository-owned observation behind the existing candidate-source
+/// admission. The retained root must equal the root authenticated by Engine;
+/// candidate identity and canonical bytes are recomputed before admission.
+pub fn resolve_repository_candidate_observation_v1<P, R>(
+    repository_root: &RetainedRepositoryRootV1,
+    admission: &mut EvidenceSourceAdmissionServiceV1<P>,
+    candidate: &ContentAddressedBindingV1,
+    input: ResolvedEvidenceCandidateObservationInputV1,
+    consume: impl for<'authority> FnOnce(ResolvedEvidenceCandidateObservationV1<'authority>) -> R,
+) -> Result<R, EvidenceCandidateSourceErrorV1>
+where
+    P: NativeAuthenticatorPortV1,
+{
+    let candidate_jcs = validate_embedded_jcs(
+        String::from_utf8(input.candidate_jcs)
+            .map_err(|_| malformed("candidate bytes are not UTF-8"))?,
+        MAX_CANDIDATE_BYTES,
+        "candidate bytes are malformed or over limit",
+    )?;
+    let evaluation_run_jcs = validate_embedded_jcs(
+        String::from_utf8(input.evaluation_run_jcs)
+            .map_err(|_| malformed("evaluation-run bytes are not UTF-8"))?,
+        MAX_RUN_BYTES,
+        "evaluation-run bytes are malformed or over limit",
+    )?;
+    let request = EvidenceSourceAdmissionRequestV1::new(
+        candidate.reference(),
+        candidate.fingerprint().as_str(),
+        input.producer.reference(),
+        input.producer.fingerprint().as_str(),
+        input.request_record.reference(),
+        input.request_record.fingerprint().as_str(),
+        input.execution_record.reference(),
+        input.execution_record.fingerprint().as_str(),
+    )
+    .map_err(map_admission_error)?;
+    admission
+        .admit(request, |source_admission| {
+            source_admission
+                .require_repository_root(repository_root)
+                .map_err(map_admission_error)?;
+            let parsed_candidate: EvidenceCandidateV1 = serde_json::from_slice(&candidate_jcs)
+                .map_err(|_| malformed("candidate bytes do not encode an exact candidate"))?;
+            if parsed_candidate.candidate_ref() != candidate.reference()
+                || parsed_candidate.candidate_fingerprint() != candidate.fingerprint()
+            {
+                return Err(refusal(
+                    EvidenceCandidateSourceErrorKindV1::CandidateSubstituted,
+                    "candidate bytes and requested binding disagree",
+                ));
+            }
+            Ok(consume(ResolvedEvidenceCandidateObservationV1 {
+                candidate_jcs,
+                evaluation_run_jcs,
+                producer: input.producer,
+                request_record: input.request_record,
+                execution_record: input.execution_record,
+                producer_resolution_ceiling: input.producer_resolution_ceiling,
+                admission: source_admission,
+            }))
+        })
+        .map_err(map_admission_error)?
 }
 
 pub trait EvidenceCandidateSourceV1 {
@@ -209,35 +292,20 @@ impl<P: NativeAuthenticatorPortV1> EvidenceCandidateSourceV1
             MAX_RUN_BYTES,
             "evaluation-run bytes are malformed or over limit",
         )?;
-        let request = EvidenceSourceAdmissionRequestV1::new(
-            candidate.reference(),
-            candidate.fingerprint().as_str(),
-            record.producer.reference(),
-            record.producer.fingerprint().as_str(),
-            record.request_record.reference(),
-            record.request_record.fingerprint().as_str(),
-            record.execution_record.reference(),
-            record.execution_record.fingerprint().as_str(),
+        resolve_repository_candidate_observation_v1(
+            &self.repository_root,
+            &mut self.admission,
+            candidate,
+            ResolvedEvidenceCandidateObservationInputV1 {
+                candidate_jcs,
+                evaluation_run_jcs,
+                producer: record.producer,
+                request_record: record.request_record,
+                execution_record: record.execution_record,
+                producer_resolution_ceiling: record.producer_resolution_ceiling,
+            },
+            consume,
         )
-        .map_err(map_admission_error)?;
-        let root = &self.repository_root;
-        self.admission
-            .admit(request, |admission| {
-                let same_root = admission.require_repository_root(root);
-                same_root.map(|()| {
-                    consume(ResolvedEvidenceCandidateObservationV1 {
-                        candidate_jcs,
-                        evaluation_run_jcs,
-                        producer: record.producer,
-                        request_record: record.request_record,
-                        execution_record: record.execution_record,
-                        producer_resolution_ceiling: record.producer_resolution_ceiling,
-                        admission,
-                    })
-                })
-            })
-            .map_err(map_admission_error)?
-            .map_err(map_admission_error)
     }
 }
 

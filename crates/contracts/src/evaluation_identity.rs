@@ -483,6 +483,43 @@ pub(crate) struct EvidenceSourceBindingV1 {
     collected_at: SemanticTimeV1,
 }
 
+#[derive(Clone, Debug)]
+pub struct EvidenceSourceBindingInputV1 {
+    pub source: ContentAddressedBindingV1,
+    pub revision: String,
+    pub collected_at: SemanticTimeV1,
+}
+
+#[derive(Clone, Debug)]
+pub struct EvidenceClaimExclusionInputV1 {
+    pub claim_id: StableIdV1,
+    pub kind: EvidenceExclusionKindV1,
+}
+
+#[derive(Clone, Debug)]
+pub struct EvidenceCandidateInputV1 {
+    pub evaluation_run: ContentAddressedBindingV1,
+    pub evaluation_lifecycle_basis: ContentAddressedBindingV1,
+    pub contract: ExactBindingV1,
+    pub subject: EvaluationSubjectV1,
+    pub case: EvaluationCaseV1,
+    pub observed_claim_ids: Vec<StableIdV1>,
+    pub evidence_kind: StableIdV1,
+    pub fact_schema: ExactBindingV1,
+    pub fact_payload: Value,
+    pub observation: EvidenceObservationV1,
+    pub producer: ContentAddressedBindingV1,
+    pub request_record: ContentAddressedBindingV1,
+    pub execution_record: ContentAddressedBindingV1,
+    pub sources: Vec<EvidenceSourceBindingInputV1>,
+    pub observed_claim_partition: Vec<StableIdV1>,
+    pub unobserved_claim_partition: Vec<StableIdV1>,
+    pub excluded_claim_partition: Vec<EvidenceClaimExclusionInputV1>,
+    pub request_resolution: ResolutionEnvelopeV1,
+    pub actual_resolution: ResolutionEnvelopeV1,
+    pub observed_at: SemanticTimeV1,
+}
+
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 pub(crate) struct EvidenceCandidateBodyV1 {
@@ -515,6 +552,67 @@ pub struct EvidenceCandidateV1 {
 }
 
 impl EvidenceCandidateV1 {
+    /// Materializes one untrusted, content-addressed candidate. This does not
+    /// admit or construct canonical evidence; owner admission remains a
+    /// separate `handbook-contracts` operation.
+    pub fn new(input: EvidenceCandidateInputV1) -> Result<Self, ContractError> {
+        let body = EvidenceCandidateBodyV1 {
+            evaluation_run: input.evaluation_run,
+            evaluation_lifecycle_basis: input.evaluation_lifecycle_basis,
+            contract: input.contract,
+            subject: input.subject,
+            case: input.case,
+            observed_claim_ids: input.observed_claim_ids,
+            evidence_kind: input.evidence_kind,
+            fact_schema: input.fact_schema,
+            fact_payload: input.fact_payload,
+            observation: input.observation,
+            producer: input.producer,
+            request_record: input.request_record,
+            execution_record: input.execution_record,
+            sources: input
+                .sources
+                .into_iter()
+                .map(|source| EvidenceSourceBindingV1 {
+                    source: source.source,
+                    revision: source.revision,
+                    collected_at: source.collected_at,
+                })
+                .collect(),
+            claim_partition: ClaimPartitionV1 {
+                observed: input.observed_claim_partition,
+                unobserved: input.unobserved_claim_partition,
+                excluded: input
+                    .excluded_claim_partition
+                    .into_iter()
+                    .map(|entry| ClaimExclusionV1 {
+                        claim_id: entry.claim_id,
+                        kind: entry.kind,
+                    })
+                    .collect(),
+            },
+            request_resolution: input.request_resolution,
+            actual_resolution: input.actual_resolution,
+            observed_at: input.observed_at,
+        };
+        validate_candidate_body(&body)?;
+        let candidate_fingerprint = canonical_fingerprint(&CandidatePreimage {
+            schema_ref: EVIDENCE_CANDIDATE_SCHEMA_REF_V1,
+            body: &body,
+        })?;
+        let candidate_ref = format!(
+            "{}#candidate/{}",
+            body.producer.reference(),
+            fingerprint_hex(&candidate_fingerprint)
+        );
+        Ok(Self {
+            schema_ref: EVIDENCE_CANDIDATE_SCHEMA_REF_V1,
+            body,
+            candidate_ref,
+            candidate_fingerprint,
+        })
+    }
+
     pub fn candidate_ref(&self) -> &str {
         &self.candidate_ref
     }
