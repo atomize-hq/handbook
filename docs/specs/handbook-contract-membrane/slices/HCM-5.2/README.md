@@ -9,8 +9,11 @@ or another Phase-5 slice.
 
 ## Current admission state
 
-**HCM-5.2 Packets 1–7 are implemented. The slice remains open awaiting the
-meta task's aggregate verification, causal review, and single closeout.**
+**HCM-5.2 is complete. Packets 1–7 implement the selected owner-native
+candidate/evidence/verdict/gate kernel, durable canonical-evidence repository,
+five-operation outward membrane, and unchanged generic SDK/CLI/Tauri consumer
+proof. All 17 acceptance conditions, aggregate verification/review, and the
+single slice closeout are complete.**
 
 The hard predecessor is satisfied. The completed
 [`HCM-5.1` authority](../HCM-5.1/README.md) establishes the inward
@@ -34,8 +37,10 @@ generic dispatch seam, 157 deterministic schema roots, and 28 capability
 witnesses without changing the 62-row inventory, and prove every operation
 through the Rust SDK plus unchanged generic CLI and Tauri consumers. They add no
 derived-result persistence, adapter-specific consumer route, parent-promotion/
-posture behavior, or executor. Packet completion does not satisfy the separate
-17-condition aggregate closeout owned by the meta task.
+posture behavior, or executor. The meta task rechecked all 17 acceptance
+conditions on the integrated state, reran the invalidated cross-layer and
+deterministic-schema checks, completed a focused causal review with no
+unresolved P1/P2, and recorded the single slice closeout.
 
 ## Outcome
 
@@ -813,6 +818,6 @@ and tests remain product truth. If authorized implementation changes an admitted
 surface, update the current document that owns that product truth in the same
 bounded change.
 
-Do not use this authority to infer HCM-5.2 implementation or completion, begin
-HCM-5.3/HCM-5.4, promote a parent, or grant semantic authority to a candidate
-producer, executor, SDK, transport, or installed skill.
+Do not use the completed HCM-5.2 outcome to infer HCM-5.3/HCM-5.4
+implementation or completion, promote a parent, or grant semantic authority to
+a candidate producer, executor, SDK, transport, or installed skill.
