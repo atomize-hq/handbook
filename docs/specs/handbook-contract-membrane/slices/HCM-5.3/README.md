@@ -6,12 +6,12 @@ protocol plus a first-party Rust host/executor that can later run the selected
 HCM-5.4 JSON Schema validator without moving contract, evidence, verdict, gate,
 lifecycle, closeout, or promotion truth out of `handbook-contracts`.
 
-It does not implement this slice, the JSON Schema validator, a production dock
-manifest or bundle, a product contract, or another Phase-5 slice.
+It does not authorize the JSON Schema validator, a production dock manifest or
+bundle, a product contract, another Phase-5 slice, or aggregate closeout.
 
 ## Current admission state
 
-**Authority is prepared; HCM-5.3 and all five packets remain unimplemented.**
+**Packets 1–5 are implemented; aggregate HCM-5.3 closeout remains pending.**
 
 The hard predecessors are satisfied. The completed
 [`HCM-5.1`](../HCM-5.1/README.md) and
@@ -19,13 +19,15 @@ The hard predecessors are satisfied. The completed
 `handbook-contracts` owner, exact active-after-independent-lock evaluation-run
 basis, protocol-neutral untrusted candidate boundary, immutable canonical
 evidence, closed verdict/gate/local-closeout truth, and the current exact
-product state of 62 operation rows, 28 capabilities, and 157 schema roots.
-HCM-5.2 also leaves production candidate observations absent until a later dock
-creates them.
+predecessor product state of 62 operation rows, 28 capabilities, and 157 schema
+roots. Packets 1–5 preserve those predecessor identities while implementing the
+exact three Dock capabilities and 11 roots for current `62 / 31 / 168` truth.
+Production manifest inventory remains exactly empty; process completion proof
+uses test-only native helpers.
 
-Product execution remains inadmissible until the meta task separately reloads
-this authority, confirms the predecessor evidence is still current, and
-dispatches Packet 1. This authority-preparation task does not dispatch it.
+The five packet commits return to the meta task. Only that task may run the
+aggregate acceptance audit, verification/review, and single slice closeout.
+HCM-5.4 authority is not prepared, and its validator is not implemented.
 
 ## Outcome and ownership
 
@@ -558,10 +560,12 @@ This document selects the handoff only.
 ## Use and drift
 
 Use this document as the current HCM-5.3 outcome and packet authority. Source
-and tests remain product truth. Until implementation, product counts remain
-62 / 28 / 157 and the production dock registry remains absent. If authorized
-implementation changes an admitted surface, update the current document that
-owns that truth in the same bounded change.
+and tests remain product truth. Packets 1–5 establish exact current counts of
+62 / 31 / 168 while the production dock registry remains exactly empty. The
+aggregate HCM-5.3 acceptance audit and slice closeout remain pending; HCM-5.4
+is unprepared and unimplemented. If later authorized implementation changes an
+admitted surface, update the current document that owns that truth in the same
+bounded change.
 
-Do not use prepared authority to infer that HCM-5.3, any packet, the validator,
-or Phase 5 is implemented or complete.
+Do not use packet implementation to infer aggregate HCM-5.3 closeout, validator
+implementation, HCM-5.4 authority, or Phase-5 completion.

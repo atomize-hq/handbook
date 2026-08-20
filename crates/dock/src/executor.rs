@@ -136,7 +136,21 @@ impl DockProcessExecutorV1 {
         &self,
         input: DockExecutionInputV1<'_>,
     ) -> Result<DockExecutionReceiptV1, DockExecutorErrorV1> {
-        self.execute_inner(input, None)
+        let idempotency_request_fingerprint = input.request.request_fingerprint().clone();
+        self.execute_inner(input, &idempotency_request_fingerprint, None)
+    }
+
+    /// Executes with a stable caller-owned idempotency request identity.
+    ///
+    /// The process request remains exact and fully bound. This separate replay
+    /// identity lets an outward request replay an already committed execution
+    /// after its owner has freshly re-established current semantic time.
+    pub fn execute_with_idempotency_request(
+        &self,
+        input: DockExecutionInputV1<'_>,
+        idempotency_request_fingerprint: &FingerprintV1,
+    ) -> Result<DockExecutionReceiptV1, DockExecutorErrorV1> {
+        self.execute_inner(input, idempotency_request_fingerprint, None)
     }
 
     #[cfg(feature = "test-support")]
@@ -145,12 +159,14 @@ impl DockProcessExecutorV1 {
         input: DockExecutionInputV1<'_>,
         fault: DockExecutorFaultV1,
     ) -> Result<DockExecutionReceiptV1, DockExecutorErrorV1> {
-        self.execute_inner(input, Some(fault))
+        let idempotency_request_fingerprint = input.request.request_fingerprint().clone();
+        self.execute_inner(input, &idempotency_request_fingerprint, Some(fault))
     }
 
     fn execute_inner(
         &self,
         input: DockExecutionInputV1<'_>,
+        idempotency_request_fingerprint: &FingerprintV1,
         #[cfg(feature = "test-support")] fault: Option<DockExecutorFaultV1>,
         #[cfg(not(feature = "test-support"))] _fault: Option<()>,
     ) -> Result<DockExecutionReceiptV1, DockExecutorErrorV1> {
@@ -179,7 +195,11 @@ impl DockProcessExecutorV1 {
         }
         let lease = match input
             .store
-            .begin_execution(&request, input.idempotency_key)
+            .begin_execution_with_idempotency_request(
+                &request,
+                input.idempotency_key,
+                idempotency_request_fingerprint,
+            )
             .map_err(map_store_error)?
         {
             DockExecutionStartV1::Replay(receipt) => return Ok(*receipt),

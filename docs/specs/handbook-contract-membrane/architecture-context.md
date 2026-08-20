@@ -28,13 +28,13 @@ The labels below describe architecture state, not lifecycle or authorization:
 | Flow and pipeline domains | Current | [`handbook-flow`](../../../crates/flow/) and [`handbook-pipeline`](../../../crates/pipeline/) own their domain behavior while depending on the engine for shared semantic truth. |
 | Grounding adoption and deterministic projection/snapshot components | Precursor | Typed Flow and pipeline adapters exist, while projection and snapshot components remain private and no ordinary grounding consumer completes the seam. |
 | SDK composition | Current | [`handbook-sdk`](../../../crates/sdk/) composes owner crates into bounded, transport-free public Rust surfaces. |
-| Contract-membrane types, schemas, admission, and discovery | Current | HCM-4.2 provides the bounded kernel and exact 62-row inventory; subsequent slices extend the deterministic tree to 157 roots and the immutable production witness to 28 capabilities. The 18 predecessor operations expose `cli_json` and `tauri`, posture exposes `rust_sdk` and `tauri`, the nine Contracts operations expose `rust_sdk`, `cli_json`, and `tauri`, and the six fixed use cases remain outside ordinary admission and discovery. |
+| Contract-membrane types, schemas, admission, and discovery | Current | HCM-4.2 provides the bounded kernel and exact 62-row inventory; subsequent slices extend the deterministic tree to 168 roots and the immutable production witness to 31 capabilities. The 18 predecessor operations expose `cli_json` and `tauri`, posture exposes `rust_sdk` and `tauri`, the nine Contracts and three Dock operations expose `rust_sdk`, `cli_json`, and `tauri`, and the six fixed use cases remain outside ordinary admission and discovery. |
 | CLI adapter | Current | [`handbook-cli`](../../../crates/cli/) consumes owner/SDK typed results for all 36 supported nontrivial leaves and exposes exactly four generic capability actions over the SDK consumer seam. It owns only command-line acquisition/rendering/stream/exit concerns, emits the shared invocation envelope for `--json`, and preserves only the 19 established explicit legacy projections. |
 | Tauri adapter | Current | [`handbook-tauri`](../../../crates/tauri/) is a non-UI library with three versioned commands over SDK-owned bootstrap, catalog, and invocation DTOs. It owns host context, off-main-thread scheduling, bounded host failures, and IPC framing without CLI or owner-crate product dependencies. |
 | Installed Handbook skill | Current | The generated root skill uses only the generic CLI membrane to bootstrap, page discovery, retrieve exact schemas, acquire bounded input, and invoke. It carries no current operation inventory or product-specific ordinary route; the fixed Charter workflow remains a separate leaf skill. |
 | Contract definition, claim, applicability, lifecycle, durable use-case owner, outward SDK membrane, and generic consumers | Current | HCM-5.1 Packets 1–6 establish and integrate [`handbook-contracts`](../../../crates/contracts/) inward of SDK with owner-native exact definition, claim, applicability, fingerprint, compatibility, lifecycle-chain, current-head, evaluation-basis, and repository-bound durability semantics. Its fixed repository-relative store owns bounded current-only paging, exact immutable reads, admitted append/transition, replay, and fail-closed recovery. A bounded outward SDK projection closes exactly four operations within the 62-row inventory and the 23-capability/135-root witness while independently re-admitting owner evidence and preserving the sealed Engine authority seam; the existing generic Rust SDK, CLI, and Tauri consumers preserve that owner truth without a contract-specific branch, and the owner has no SDK or transport dependency. |
 | Evidence/gate owner | Current | HCM-5.2 Packets 1–7 implement the `handbook-contracts` identity/policy/run kernel, exact read-only candidate-source normalization through one sealed Engine `contract_evidence_source` admission plus generic source-currentness/Resolution observations, retained-root immutable-all canonical-evidence list/read/idempotent append with bounded atomic recovery, pure closed claim-verdict evaluation, gate/local-closeout composition, the exact five-operation outward SDK membrane, and integrated proof through the unchanged generic SDK/CLI/Tauri consumers. Verdicts and gate results remain non-persisted derived truth. |
-| Process dock | Target/future | The current HCM-5.3 authority selects a purpose-named operational dock owner, language-neutral one-shot JSON protocol, portable first-party Rust executor, exact three-operation/11-root closure, and native-Rust HCM-5.4 handoff. None is implemented yet, and production manifest inventory remains empty. |
+| Process dock | Current | HCM-5.3 Packets 1–5 implement the purpose-named operational dock owner, language-neutral one-shot JSON protocol, portable first-party Rust executor, completed-only candidate source, exact three-operation/11-root closure, and unchanged generic consumers. Production manifest inventory remains exactly empty; aggregate HCM-5.3 closeout is pending, and the native-Rust HCM-5.4 validator remains unprepared and unimplemented. |
 | Publication, bridge, and Substrate adoption | External-unknown | No repository-only claim can prove their current external existence, deployment, or conformance. |
 
 The workspace membership and current crate edges are visible in
@@ -105,15 +105,15 @@ parent promotion remains a later independent policy/mutation boundary. This is
 implemented owner, SDK, and generic-consumer architecture through Packet 7;
 aggregate verification/review and the single HCM-5.2 closeout are complete.
 
-The current [`HCM-5.3 authority`](slices/HCM-5.3/README.md) now selects that
-future executor boundary without claiming implementation. A new
-`handbook-dock` operational crate will depend inward on Contracts and narrow
-generic Engine facilities, while SDK will project its three reserved operations
-outward. Dock execution records and completed candidates remain operational and
-untrusted; Contracts independently resolves them through its candidate-source
-port and remains the only canonical evidence/verdict/gate/local-closeout owner.
-The production manifest registry remains empty until HCM-5.4 installs the
-selected first-party validator.
+The current [`HCM-5.3 authority`](slices/HCM-5.3/README.md) is implemented
+through Packet 5. `handbook-dock` depends inward on Contracts and narrow generic
+Engine facilities, while SDK projects its three reserved operations outward
+through the existing generic consumers. Dock execution records and completed
+candidates remain operational and untrusted; Contracts independently resolves
+them through its candidate-source port and remains the only canonical
+evidence/verdict/gate/local-closeout owner. The production manifest registry is
+exactly empty. Aggregate HCM-5.3 closeout remains pending, and HCM-5.4 is not
+prepared or implemented.
 
 ## Projection and adapter boundary
 
@@ -177,10 +177,10 @@ between domains must be explicit and must preserve each domain's exact binding.
 The current engine and SDK tests use Rust `jsonschema` for exact Draft 2020-12
 schema responsibilities, including bounded local-ref closure and refusal of
 external retrieval. Historical Python validator choices are not current
-architecture. The prepared HCM-5.3 authority selects a language-neutral process
-JSON contract with a first-party Rust host, and fixes the HCM-5.4 reference
-validator as native Rust over those current practices. Product implementation
-remains absent.
+architecture. HCM-5.3 now implements the language-neutral process JSON contract
+with a first-party Rust host and fixes the HCM-5.4 reference-validator handoff
+as native Rust over those current practices. The validator itself remains
+unprepared and unimplemented.
 
 That first path is a repository-owned, offline, deterministic validator witness,
 not a general arbitrary-code service. Portable host claims are limited to exact

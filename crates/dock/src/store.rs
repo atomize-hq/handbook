@@ -84,6 +84,7 @@ pub struct DockStoreReceiptV1 {
     root: FingerprintV1,
     execution_record: DockExecutionRecordV1,
     candidates: Vec<ContentAddressedBindingV1>,
+    evaluation_run_jcs: Vec<u8>,
 }
 
 impl DockStoreReceiptV1 {
@@ -99,6 +100,9 @@ impl DockStoreReceiptV1 {
     pub fn candidates(&self) -> &[ContentAddressedBindingV1] {
         &self.candidates
     }
+    pub fn evaluation_run_jcs(&self) -> &[u8] {
+        &self.evaluation_run_jcs
+    }
 }
 
 #[cfg(feature = "test-support")]
@@ -113,10 +117,12 @@ pub enum DockStoreFaultBoundaryV1 {
 struct RootPreimage<'a> {
     schema_ref: &'static str,
     key_fingerprint: &'a FingerprintV1,
+    idempotency_request_fingerprint: &'a FingerprintV1,
     request: &'a ContentAddressedBindingV1,
     result: &'a Option<ContentAddressedBindingV1>,
     execution: &'a ContentAddressedBindingV1,
     candidates: &'a [ContentAddressedBindingV1],
+    evaluation_run_jcs: &'a str,
 }
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
@@ -137,10 +143,12 @@ struct StoredCandidateObservationV1 {
 struct ReplayLedgerV1 {
     schema_ref: String,
     key_fingerprint: FingerprintV1,
+    idempotency_request_fingerprint: FingerprintV1,
     request: ContentAddressedBindingV1,
     result: Option<ContentAddressedBindingV1>,
     execution: ContentAddressedBindingV1,
     candidates: Vec<ContentAddressedBindingV1>,
+    evaluation_run_jcs: String,
     root: FingerprintV1,
 }
 
@@ -158,10 +166,12 @@ struct OutputIntentV1 {
 struct StoreIntentV1 {
     schema_ref: String,
     key_fingerprint: FingerprintV1,
+    idempotency_request_fingerprint: FingerprintV1,
     request: ContentAddressedBindingV1,
     result: Option<ContentAddressedBindingV1>,
     execution: ContentAddressedBindingV1,
     candidates: Vec<ContentAddressedBindingV1>,
+    evaluation_run_jcs: String,
     root: FingerprintV1,
     outputs: Vec<OutputIntentV1>,
 }
@@ -200,6 +210,7 @@ pub(crate) struct DockExecutionLeaseV1<'store> {
     lock: Option<RepositoryExclusiveLockV1>,
     request: ContentAddressedBindingV1,
     key_fingerprint: FingerprintV1,
+    idempotency_request_fingerprint: FingerprintV1,
 }
 
 impl DockExecutionLeaseV1<'_> {
@@ -221,6 +232,7 @@ impl DockExecutionLeaseV1<'_> {
             execution,
             evaluation_run_jcs,
             self.key_fingerprint.clone(),
+            self.idempotency_request_fingerprint.clone(),
         )?;
         if self
             .store
@@ -297,10 +309,11 @@ impl DockOperationalStoreV1 {
         )
     }
 
-    pub(crate) fn begin_execution(
+    pub(crate) fn begin_execution_with_idempotency_request(
         &self,
         request: &DockProcessRequestV1,
         idempotency_key: &str,
+        idempotency_request_fingerprint: &FingerprintV1,
     ) -> Result<DockExecutionStartV1<'_>, DockStoreErrorV1> {
         validate_key(idempotency_key)?;
         let key_fingerprint = key_fingerprint(idempotency_key)?;
@@ -312,7 +325,7 @@ impl DockOperationalStoreV1 {
         self.recover_locked()?;
         self.validate_inventory_locked()?;
         if let Some(replay) = self.read_replay(&key_fingerprint)? {
-            if replay.request != request_binding {
+            if &replay.idempotency_request_fingerprint != idempotency_request_fingerprint {
                 return Err(conflict(
                     "idempotency key is bound to another exact request",
                 ));
@@ -326,6 +339,7 @@ impl DockOperationalStoreV1 {
             lock: Some(lock),
             request: request_binding,
             key_fingerprint,
+            idempotency_request_fingerprint: idempotency_request_fingerprint.clone(),
         }))
     }
 
@@ -420,6 +434,7 @@ impl DockOperationalStoreV1 {
             execution,
             evaluation_run_jcs,
             key_fingerprint,
+            request.request_fingerprint().clone(),
         )?;
         if self
             .read_optional(
@@ -461,6 +476,7 @@ impl DockOperationalStoreV1 {
         execution: &DockExecutionRecordV1,
         evaluation_run_jcs: &[u8],
         key_fingerprint: FingerprintV1,
+        idempotency_request_fingerprint: FingerprintV1,
     ) -> Result<PreparedTransaction, DockStoreErrorV1> {
         let request_binding = request.binding().map_err(map_dock_error)?;
         let result_binding = result
@@ -609,22 +625,27 @@ impl DockOperationalStoreV1 {
             }
         }
 
+        let evaluation_run_jcs = String::from_utf8(run_jcs).expect("validated run JSON is UTF-8");
         let root = canonical_fingerprint(&RootPreimage {
             schema_ref: REPLAY_SCHEMA,
             key_fingerprint: &key_fingerprint,
+            idempotency_request_fingerprint: &idempotency_request_fingerprint,
             request: &request_binding,
             result: &result_binding,
             execution: &execution_binding,
             candidates: &candidate_bindings,
+            evaluation_run_jcs: &evaluation_run_jcs,
         })
         .map_err(map_dock_error)?;
         let ledger = ReplayLedgerV1 {
             schema_ref: REPLAY_SCHEMA.to_owned(),
             key_fingerprint: key_fingerprint.clone(),
+            idempotency_request_fingerprint,
             request: request_binding,
             result: result_binding,
             execution: execution_binding,
             candidates: candidate_bindings,
+            evaluation_run_jcs,
             root,
         };
         validate_ledger(&ledger)?;
@@ -669,10 +690,12 @@ impl DockOperationalStoreV1 {
         let intent = StoreIntentV1 {
             schema_ref: INTENT_SCHEMA.to_owned(),
             key_fingerprint,
+            idempotency_request_fingerprint: ledger.idempotency_request_fingerprint.clone(),
             request: ledger.request.clone(),
             result: ledger.result.clone(),
             execution: ledger.execution.clone(),
             candidates: ledger.candidates.clone(),
+            evaluation_run_jcs: ledger.evaluation_run_jcs.clone(),
             root: ledger.root.clone(),
             outputs,
         };
@@ -931,6 +954,10 @@ impl DockOperationalStoreV1 {
         if execution.binding().map_err(map_dock_error)? != ledger.execution {
             return Err(substituted("replay execution binding is substituted"));
         }
+        validate_run_jcs(
+            ledger.evaluation_run_jcs.as_bytes(),
+            execution.evaluation_run(),
+        )?;
         for candidate in &ledger.candidates {
             let stored: StoredCandidateObservationV1 = parse_canonical(
                 &self.read_required(&candidate_path(candidate.fingerprint()), MAX_RECORD_BYTES)?,
@@ -945,6 +972,7 @@ impl DockOperationalStoreV1 {
             root: ledger.root,
             execution_record: execution,
             candidates: ledger.candidates,
+            evaluation_run_jcs: ledger.evaluation_run_jcs.into_bytes(),
         })
     }
 
@@ -1168,10 +1196,12 @@ fn validate_ledger(value: &ReplayLedgerV1) -> Result<(), DockStoreErrorV1> {
     let expected = canonical_fingerprint(&RootPreimage {
         schema_ref: REPLAY_SCHEMA,
         key_fingerprint: &value.key_fingerprint,
+        idempotency_request_fingerprint: &value.idempotency_request_fingerprint,
         request: &value.request,
         result: &value.result,
         execution: &value.execution,
         candidates: &value.candidates,
+        evaluation_run_jcs: &value.evaluation_run_jcs,
     })
     .map_err(map_dock_error)?;
     if value.root != expected {
@@ -1191,10 +1221,12 @@ fn validate_intent(value: &StoreIntentV1, transaction: &str) -> Result<(), DockS
     let ledger = ReplayLedgerV1 {
         schema_ref: REPLAY_SCHEMA.to_owned(),
         key_fingerprint: value.key_fingerprint.clone(),
+        idempotency_request_fingerprint: value.idempotency_request_fingerprint.clone(),
         request: value.request.clone(),
         result: value.result.clone(),
         execution: value.execution.clone(),
         candidates: value.candidates.clone(),
+        evaluation_run_jcs: value.evaluation_run_jcs.clone(),
         root: value.root.clone(),
     };
     validate_ledger(&ledger)?;

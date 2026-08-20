@@ -575,10 +575,14 @@ fn execute_run_with_runtime(
         Ok(process_request) => process_request,
         Err(cause) => return problem_response(request, definition, cause),
     };
+    let idempotency_request_fingerprint =
+        OwnerFingerprint::parse(request.request_fingerprint().as_str())
+            .map_err(|_| ContractError::InvalidInvariant)?;
     let mut bridge = DockRunBridge {
         store: context.store,
         resolved_bundle: context.resolved_bundle,
         request: &process_request,
+        idempotency_request_fingerprint: &idempotency_request_fingerprint,
         evaluation_run_jcs: admitted.canonical_json(),
         cancellation: context.cancellation,
         result: None,
@@ -591,13 +595,14 @@ fn execute_run_with_runtime(
         Err(error) => return problem_response(request, definition, executor_problem(error.kind())),
     };
     let replayed = receipt.disposition() == handbook_dock::DockStoreDispositionV1::Replayed;
+    let evaluation_run = receipt.execution_record().evaluation_run();
     let result = DockRunResultV1 {
         evaluation_run: ContractEvaluationRunDtoV1::new(
             record_binding(
-                admitted.run().evaluation_run_ref(),
-                admitted.run().evaluation_run_fingerprint().as_str(),
+                evaluation_run.reference(),
+                evaluation_run.fingerprint().as_str(),
             )?,
-            super::artifact_operation::to_contract_value(admitted.run())?,
+            parse_canonical_json(receipt.evaluation_run_jcs(), &ContractLimits::packet0())?,
         ),
         execution_record: DockExecutionRecordDtoV1::new(
             record_binding(
@@ -657,6 +662,7 @@ struct DockRunBridge<'a> {
     store: &'a handbook_dock::DockOperationalStoreV1,
     resolved_bundle: &'a handbook_dock::DockResolvedFirstPartyBundleV1,
     request: &'a handbook_dock::DockProcessRequestV1,
+    idempotency_request_fingerprint: &'a OwnerFingerprint,
     evaluation_run_jcs: &'a [u8],
     cancellation: &'a handbook_dock::DockCancellationV1,
     result:
@@ -666,16 +672,19 @@ struct DockRunBridge<'a> {
 impl super::IdempotencyKeyConsumerSealed for DockRunBridge<'_> {
     fn consume_owner_idempotency_key(&mut self, _pointer: &str, bytes: &[u8]) -> Fingerprint {
         let key = std::str::from_utf8(bytes).expect("raw key admission validated UTF-8");
-        self.result = Some(handbook_dock::DockProcessExecutorV1::new().execute(
-            handbook_dock::DockExecutionInputV1 {
-                store: self.store,
-                resolved_bundle: self.resolved_bundle,
-                request: self.request,
-                evaluation_run_jcs: self.evaluation_run_jcs,
-                idempotency_key: key,
-                cancellation: self.cancellation,
-            },
-        ));
+        self.result = Some(
+            handbook_dock::DockProcessExecutorV1::new().execute_with_idempotency_request(
+                handbook_dock::DockExecutionInputV1 {
+                    store: self.store,
+                    resolved_bundle: self.resolved_bundle,
+                    request: self.request,
+                    evaluation_run_jcs: self.evaluation_run_jcs,
+                    idempotency_key: key,
+                    cancellation: self.cancellation,
+                },
+                self.idempotency_request_fingerprint,
+            ),
+        );
         super::sha256_fingerprint(bytes)
     }
 }

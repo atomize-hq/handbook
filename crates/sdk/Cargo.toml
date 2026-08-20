@@ -17,9 +17,17 @@ name = "generate-contract-schemas"
 path = "src/bin/generate-contract-schemas.rs"
 required-features = ["contract-schema-generation"]
 
+[[bin]]
+name = "dock-sdk-test-helper"
+path = "../dock/test-support/native_helper.rs"
+required-features = ["dock-test-support"]
+test = false
+doc = false
+
 [features]
 default = []
 contract-schema-generation = ["dep:schemars"]
+dock-test-support = ["handbook-dock/test-support", "dep:serde_json_canonicalizer"]
 
 [dependencies]
 handbook-contracts = { path = "../contracts", version = "0.1.0" }
@@ -31,6 +39,7 @@ libc = "0.2"
 jsonschema = { version = "=0.47.0", default-features = false }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+serde_json_canonicalizer = { version = "0.3.2", optional = true }
 sha2 = "0.10"
 schemars = { version = "=1.2.2", optional = true }
 time = { version = "0.3", features = ["formatting", "macros"] }
