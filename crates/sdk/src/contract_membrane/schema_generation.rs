@@ -22,6 +22,12 @@ use super::contract_evidence_operation::{
     ContractVerdictEvaluateRequestV1, ContractVerdictEvaluateResultV1,
 };
 use super::contract_operation::{AppendWireV1, TransitionWireV1};
+use super::dock_operation::{
+    DockExecutionRecordDtoV1, DockManifestDtoV1, DockManifestListRequestV1,
+    DockManifestListResultV1, DockManifestReadRequestV1, DockManifestReadResultV1,
+    DockOperationDetailsDtoV1, DockProcessRequestDtoV1, DockProcessResultDtoV1, DockRunResultV1,
+    DockRunWireV1,
+};
 use super::flow_operation::{
     FlowArtifactPresenceV1, FlowBlockerCategoryV1, FlowBlockerV1, FlowBudgetByteDomainV1,
     FlowBudgetDispositionV1, FlowBudgetNextSafeActionV1, FlowBudgetOutcomeV1, FlowBudgetReasonV1,
@@ -6754,7 +6760,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 157] = [
+const INVENTORY: [SchemaDescriptor; 168] = [
     descriptor::<ArtifactProblemDetailsV1>(
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -6926,6 +6932,26 @@ const INVENTORY: [SchemaDescriptor; 157] = [
     descriptor::<Diagnostic>(
         "handbook.diagnostic@1.0.0",
         "handbook.diagnostic/1.0.0.schema.json",
+    ),
+    descriptor::<DockExecutionRecordDtoV1>(
+        "handbook.dock-execution-record@1.0.0",
+        "handbook.dock-execution-record/1.0.0.schema.json",
+    ),
+    descriptor::<DockManifestDtoV1>(
+        "handbook.dock-manifest@1.0.0",
+        "handbook.dock-manifest/1.0.0.schema.json",
+    ),
+    descriptor::<DockOperationDetailsDtoV1>(
+        "handbook.dock-operation-details@1.0.0",
+        "handbook.dock-operation-details/1.0.0.schema.json",
+    ),
+    descriptor::<DockProcessRequestDtoV1>(
+        "handbook.dock-process-request@1.0.0",
+        "handbook.dock-process-request/1.0.0.schema.json",
+    ),
+    descriptor::<DockProcessResultDtoV1>(
+        "handbook.dock-process-result@1.0.0",
+        "handbook.dock-process-result/1.0.0.schema.json",
     ),
     descriptor::<FlowProblemDetailsV1>(
         "handbook.flow-operation-details@1.0.0",
@@ -7113,6 +7139,30 @@ const INVENTORY: [SchemaDescriptor; 157] = [
     descriptor::<ContractVerdictEvaluateResultV1>(
         "handbook.operation.contract-verdict-evaluate-result@1.0.0",
         "handbook.operation.contract-verdict-evaluate-result/1.0.0.schema.json",
+    ),
+    descriptor::<DockManifestListRequestV1>(
+        "handbook.operation.dock-manifest-list-request@1.0.0",
+        "handbook.operation.dock-manifest-list-request/1.0.0.schema.json",
+    ),
+    descriptor::<DockManifestListResultV1>(
+        "handbook.operation.dock-manifest-list-result@1.0.0",
+        "handbook.operation.dock-manifest-list-result/1.0.0.schema.json",
+    ),
+    descriptor::<DockManifestReadRequestV1>(
+        "handbook.operation.dock-manifest-read-request@1.0.0",
+        "handbook.operation.dock-manifest-read-request/1.0.0.schema.json",
+    ),
+    descriptor::<DockManifestReadResultV1>(
+        "handbook.operation.dock-manifest-read-result@1.0.0",
+        "handbook.operation.dock-manifest-read-result/1.0.0.schema.json",
+    ),
+    descriptor::<DockRunWireV1>(
+        "handbook.operation.dock-run-request@1.0.0",
+        "handbook.operation.dock-run-request/1.0.0.schema.json",
+    ),
+    descriptor::<DockRunResultV1>(
+        "handbook.operation.dock-run-result@1.0.0",
+        "handbook.operation.dock-run-result/1.0.0.schema.json",
     ),
     descriptor::<FlowResolveRequestV1>(
         "handbook.operation.flow-resolve-request@1.0.0",
@@ -7611,8 +7661,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 157 {
-        return Err("schema inventory must contain exactly 157 entries".to_owned());
+    if INVENTORY.len() != 168 {
+        return Err("schema inventory must contain exactly 168 entries".to_owned());
     }
 
     let mut previous_ref = None;
@@ -7699,6 +7749,7 @@ fn validate_schema(
             | "handbook.operation.contract-definition-append-request@1.0.0"
             | "handbook.operation.contract-evidence-append-request@1.0.0"
             | "handbook.operation.contract-lifecycle-transition-request@1.0.0"
+            | "handbook.operation.dock-run-request@1.0.0"
     ) {
         validate_posture_request_raw_key_schema(value, descriptor.relative_path)
     } else {

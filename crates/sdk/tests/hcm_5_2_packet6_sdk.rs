@@ -127,18 +127,22 @@ fn packet_six_closes_exact_schema_and_capability_counts() {
     let witness =
         ProductionWitness::from_current(UtcTimestamp::parse("9999-12-31T23:59:59Z").unwrap())
             .unwrap();
-    assert_eq!(witness.schema_manifest().len(), 157);
-    assert_eq!(witness.capabilities().len(), 28);
+    assert_eq!(witness.schema_manifest().len(), 168);
+    assert_eq!(witness.capabilities().len(), 31);
 
     let roots = witness
         .schema_manifest()
         .iter()
         .map(|entry| entry.schema().reference().as_str())
         .collect::<BTreeSet<_>>();
-    assert_eq!(roots.len(), 157);
+    assert_eq!(roots.len(), 168);
     for expected in NEW_SCHEMA_ROOTS {
         assert!(roots.contains(expected), "missing schema root {expected}");
     }
+    assert_eq!(
+        roots.iter().filter(|root| !root.contains("dock")).count(),
+        157
+    );
 
     let capabilities = witness
         .capabilities()
@@ -148,6 +152,13 @@ fn packet_six_closes_exact_schema_and_capability_counts() {
     for (expected, _) in OPERATIONS {
         assert!(capabilities.contains(expected));
     }
+    assert_eq!(
+        capabilities
+            .iter()
+            .filter(|operation| !operation.starts_with("dock."))
+            .count(),
+        28
+    );
 }
 
 #[test]

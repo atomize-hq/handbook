@@ -10,7 +10,7 @@ use super::{
 use std::collections::BTreeSet;
 
 const INVENTORY_DIGEST: &str =
-    "sha256:324096be7e1fbed481f2609b90f9f246f130bcdac6ef40820284e730e93b20d6";
+    "sha256:9e2217c61a900a8fa6649c5b3f7d2a1577316da9efec897573ac85b6ab531f92";
 
 macro_rules! schema_asset {
     ($reference:literal, $path:literal) => {
@@ -19,7 +19,7 @@ macro_rules! schema_asset {
 }
 
 const SCHEMA_MANIFEST_BYTES: &[u8] = include_bytes!("../../schemas/manifest.json");
-const SCHEMA_ASSETS: [(&str, &[u8]); 157] = [
+const SCHEMA_ASSETS: [(&str, &[u8]); 168] = [
     schema_asset!(
         "handbook.artifact-operation-details@1.0.0",
         "../../schemas/2020-12/handbook.artifact-operation-details/1.0.0.schema.json"
@@ -187,6 +187,26 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 157] = [
     schema_asset!(
         "handbook.diagnostic@1.0.0",
         "../../schemas/2020-12/handbook.diagnostic/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.dock-execution-record@1.0.0",
+        "../../schemas/2020-12/handbook.dock-execution-record/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.dock-manifest@1.0.0",
+        "../../schemas/2020-12/handbook.dock-manifest/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.dock-operation-details@1.0.0",
+        "../../schemas/2020-12/handbook.dock-operation-details/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.dock-process-request@1.0.0",
+        "../../schemas/2020-12/handbook.dock-process-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.dock-process-result@1.0.0",
+        "../../schemas/2020-12/handbook.dock-process-result/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.flow-operation-details@1.0.0",
@@ -371,6 +391,30 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 157] = [
     schema_asset!(
         "handbook.operation.contract-verdict-evaluate-result@1.0.0",
         "../../schemas/2020-12/handbook.operation.contract-verdict-evaluate-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.dock-manifest-list-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.dock-manifest-list-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.dock-manifest-list-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.dock-manifest-list-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.dock-manifest-read-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.dock-manifest-read-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.dock-manifest-read-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.dock-manifest-read-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.dock-run-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.dock-run-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.dock-run-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.dock-run-result/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.operation.flow-resolve-request@1.0.0",
@@ -710,6 +754,7 @@ impl ProductionWitness {
         capabilities.extend(super::contract_operation::current_contract_capabilities()?);
         capabilities
             .extend(super::contract_evidence_operation::current_contract_evidence_capabilities()?);
+        capabilities.extend(super::dock_operation::current_dock_capabilities()?);
         capabilities.sort_by(|left, right| {
             left.operation()
                 .reference()
@@ -938,7 +983,7 @@ fn verify_schema_assets(
         &ContractLimits::packet0(),
     )
     .map_err(|_| ProductionWitnessError::StaleManifest)?;
-    if manifest.len() != 157 || assets.len() != 157 || manifest.len() != assets.len() {
+    if manifest.len() != 168 || assets.len() != 168 || manifest.len() != assets.len() {
         return Err(ProductionWitnessError::ManifestCountMismatch);
     }
     let mut seen = BTreeSet::new();
@@ -992,6 +1037,8 @@ fn verify_inventory() -> Result<(), ProductionWitnessError> {
                 super::contract_operation::inventory_row_is_contract(row.operation_ref())
                     || super::contract_evidence_operation::CONTRACT_EVIDENCE_OPERATION_REFS
                         .contains(&row.operation_ref().as_str());
+            let is_dock =
+                super::dock_operation::DOCK_OPERATION_REFS.contains(&row.operation_ref().as_str());
             let is_pipeline = [
                 "pipeline.catalog.list@1.0.0",
                 "pipeline.catalog.read@1.0.0",
@@ -1007,7 +1054,7 @@ fn verify_inventory() -> Result<(), ProductionWitnessError> {
                     || row.current_transports()
                         != [OperationTransport::RustSdk, OperationTransport::Tauri]
                     || row.discovery() != DiscoveryState::Discoverable
-            } else if is_contract {
+            } else if is_contract || is_dock {
                 row.admission_reason() != super::AdmissionReason::Admitted
                     || row.current_transports()
                         != [
@@ -1050,6 +1097,7 @@ fn verify_inventory() -> Result<(), ProductionWitnessError> {
 
 fn current_owner_entries() -> Result<Vec<OwnerVersionEntry>, ProductionWitnessError> {
     let contracts = handbook_contracts::operation_admission::operation_owner_version_evidence();
+    let dock = handbook_dock::operation_admission::operation_owner_version_evidence();
     let engine = handbook_engine::operation_admission::operation_owner_version_evidence();
     let flow = handbook_flow::operation_admission::operation_owner_version_evidence();
     let pipeline = handbook_pipeline::operation_admission::operation_owner_version_evidence();
@@ -1059,6 +1107,12 @@ fn current_owner_entries() -> Result<Vec<OwnerVersionEntry>, ProductionWitnessEr
             contracts.owner_version,
             contracts.owner_source_ref,
             contracts.source_bytes,
+        ),
+        (
+            dock.owner_crate,
+            dock.owner_version,
+            dock.owner_source_ref,
+            dock.source_bytes,
         ),
         (
             engine.owner_crate,
@@ -1123,6 +1177,7 @@ fn validate_owner_entries(entries: &[OwnerVersionEntry]) -> Result<(), Productio
             "0.1.0",
             "handbook.owner.contracts@0.1.0",
         ),
+        ("handbook-dock", "0.1.0", "handbook.owner.dock@0.1.0"),
         ("handbook-engine", "0.2.0", "handbook.owner.engine@0.2.0"),
         ("handbook-flow", "0.1.1", "handbook.owner.flow@0.1.1"),
         (
@@ -1235,10 +1290,10 @@ mod tests {
         let witness =
             ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
                 .unwrap();
-        assert_eq!(witness.schema_manifest().len(), 157);
-        assert_eq!(witness.owner_versions().len(), 4);
+        assert_eq!(witness.schema_manifest().len(), 168);
+        assert_eq!(witness.owner_versions().len(), 5);
         assert_eq!(witness.profiles().len(), 3);
-        assert_eq!(witness.capabilities().len(), 28);
+        assert_eq!(witness.capabilities().len(), 31);
         let posture = witness
             .capabilities()
             .iter()
@@ -1286,7 +1341,7 @@ mod tests {
         }
         assert_eq!(
             witness.catalog_roots().operations().total_entries().get(),
-            28
+            31
         );
         assert_ne!(
             witness.descriptor().schema().fingerprint(),

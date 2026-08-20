@@ -8,6 +8,7 @@ mod catalog;
 mod consumer;
 mod contract_evidence_operation;
 mod contract_operation;
+mod dock_operation;
 mod dto;
 mod envelope;
 mod facade;
@@ -91,6 +92,7 @@ pub use contract_operation::{
     ContractOperationProblemDetailsV1, ContractOperationSchemaValidator, ContractProblemCauseV1,
     CONTRACT_OPERATION_REFS,
 };
+pub use dock_operation::*;
 pub use dto::{
     CorrelationRef, Diagnostic, DiagnosticSeverity, DraftVersion, NextAction, NextActionKind,
     Omission, OmissionReason, Problem, ProblemBinding, ProblemCategory, ProofEffect,

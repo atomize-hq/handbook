@@ -66,6 +66,9 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
             "contract.evidence.append",
             "contract.verdict.evaluate",
             "contract.gate.evaluate",
+            "dock.manifest.list",
+            "dock.manifest.read",
+            "dock.run",
         ]
     );
     assert!(rows.iter().all(|row| {
@@ -82,6 +85,9 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
             "contract.evidence.append",
             "contract.verdict.evaluate",
             "contract.gate.evaluate",
+            "dock.manifest.list",
+            "dock.manifest.read",
+            "dock.run",
         ]
         .contains(&row.operation_id())
         {
@@ -126,19 +132,25 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
         rows.iter()
             .filter(|row| row.availability() == OperationAvailability::LivePrecursor)
             .count(),
-        35
+        38
     );
     assert_eq!(
         rows.iter()
             .filter(|row| row.availability() == OperationAvailability::Phase5Deferred)
             .count(),
-        3
+        0
     );
     assert_eq!(
         rows.iter()
             .filter(|row| row.owner() == OperationOwner::SdkComposition)
             .count(),
         7
+    );
+    assert_eq!(
+        rows.iter()
+            .filter(|row| row.owner() == OperationOwner::Dock)
+            .count(),
+        3
     );
     assert_eq!(
         rows.iter()
@@ -169,7 +181,7 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
     let frozen_bytes = canonical_json_bytes(&frozen_tuples, &ContractLimits::packet0()).unwrap();
     assert_eq!(
         handbook_sdk::contract_membrane::sha256_fingerprint(&frozen_bytes).as_str(),
-        "sha256:324096be7e1fbed481f2609b90f9f246f130bcdac6ef40820284e730e93b20d6"
+        "sha256:9e2217c61a900a8fa6649c5b3f7d2a1577316da9efec897573ac85b6ab531f92"
     );
 }
 
@@ -200,7 +212,7 @@ fn current_admission_reasons_preserve_owner_and_semantic_precedence() {
     );
     assert_eq!(
         row("dock.run").admission_reason(),
-        AdmissionReason::OwnerDeferred
+        AdmissionReason::Admitted
     );
 }
 
@@ -1059,6 +1071,7 @@ fn complete_definition_set() -> Vec<OperationDefinition> {
         .map(|row| {
             let (owner, version) = match row.owner() {
                 OperationOwner::Contracts => ("handbook-contracts", "0.1.0"),
+                OperationOwner::Dock => ("handbook-dock", "0.1.0"),
                 OperationOwner::Engine => ("handbook-engine", "0.2.0"),
                 OperationOwner::Flow => ("handbook-flow", "0.1.1"),
                 OperationOwner::Pipeline => ("handbook-pipeline", "0.1.2"),

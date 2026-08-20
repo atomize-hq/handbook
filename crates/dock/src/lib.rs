@@ -8,8 +8,11 @@ mod bounds;
 mod canonical;
 mod executor;
 mod manifest;
+pub mod operation_admission;
+mod operation_claims;
 mod protocol;
 mod registry;
+mod run_admission;
 mod store;
 
 pub use bounds::*;
@@ -17,6 +20,7 @@ pub use executor::*;
 pub use manifest::*;
 pub use protocol::*;
 pub use registry::*;
+pub use run_admission::*;
 pub use store::*;
 
 use std::error::Error;

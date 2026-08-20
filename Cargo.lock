@@ -1404,6 +1404,7 @@ name = "handbook-sdk"
 version = "0.1.0"
 dependencies = [
  "handbook-contracts",
+ "handbook-dock",
  "handbook-engine",
  "handbook-flow",
  "handbook-pipeline",

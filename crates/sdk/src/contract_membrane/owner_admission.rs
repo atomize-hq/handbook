@@ -14,6 +14,7 @@ enum OwnerToken {
     ContractEvidence(
         handbook_contracts::evidence_operation_admission::EvidenceOwnerOperationAdmission,
     ),
+    Dock(handbook_dock::operation_admission::OwnerOperationAdmission),
     Engine(handbook_engine::operation_admission::OwnerOperationAdmission),
     Flow(handbook_flow::operation_admission::OwnerOperationAdmission),
     Pipeline(handbook_pipeline::operation_admission::OwnerOperationAdmission),
@@ -24,6 +25,7 @@ impl OwnerAdmissionToken {
         match &self.owner {
             OwnerToken::Contracts(token) => token.operation_ref(),
             OwnerToken::ContractEvidence(token) => token.operation_ref(),
+            OwnerToken::Dock(token) => token.operation_ref(),
             OwnerToken::Engine(token) => token.operation_ref(),
             OwnerToken::Flow(token) => token.operation_ref(),
             OwnerToken::Pipeline(token) => token.operation_ref(),
@@ -34,6 +36,7 @@ impl OwnerAdmissionToken {
         match &self.owner {
             OwnerToken::Contracts(token) => token.definition_fingerprint(),
             OwnerToken::ContractEvidence(token) => token.definition_fingerprint(),
+            OwnerToken::Dock(token) => token.definition_fingerprint(),
             OwnerToken::Engine(token) => token.definition_fingerprint(),
             OwnerToken::Flow(token) => token.definition_fingerprint(),
             OwnerToken::Pipeline(token) => token.definition_fingerprint(),
@@ -59,6 +62,7 @@ pub fn admit_operation_definition(
     }
     match row.owner() {
         OperationOwner::Contracts => admit_contracts(definition),
+        OperationOwner::Dock => admit_dock(definition),
         OperationOwner::SdkComposition => Ok(OperationAdmissionResult::Omitted(
             AdmissionReason::IndependentOwnerAbsent,
         )),
@@ -69,6 +73,43 @@ pub fn admit_operation_definition(
         OperationOwner::Flow => admit_flow(definition),
         OperationOwner::Pipeline => admit_pipeline(definition),
     }
+}
+
+fn admit_dock(definition: &OperationDefinition) -> Result<OperationAdmissionResult, ContractError> {
+    require_owner(definition, "handbook-dock", "0.1.0")?;
+    let parts = ClaimParts::new(definition)?;
+    let claim = handbook_dock::operation_admission::OperationAdmissionClaim {
+        operation_ref: parts.operation_ref,
+        definition_fingerprint: parts.definition_fingerprint,
+        owner_crate: parts.owner_crate,
+        owner_version: parts.owner_version,
+        owner_source_ref: parts.owner_source_ref,
+        owner_source_fingerprint: parts.owner_source_fingerprint,
+        mutability: parts.mutability,
+        idempotency: parts.idempotency,
+        idempotency_fingerprint: parts.idempotency_fingerprint.as_str(),
+        definition_schema_ref: parts.definition_schema_ref,
+        definition_schema_fingerprint: parts.definition_schema_fingerprint,
+        request_schema_ref: parts.request_schema_ref,
+        request_schema_fingerprint: parts.request_schema_fingerprint,
+        result_schema_ref: parts.result_schema_ref,
+        result_schema_fingerprint: parts.result_schema_fingerprint,
+        blocker_schema_ref: parts.blocker_schema_ref,
+        blocker_schema_fingerprint: parts.blocker_schema_fingerprint,
+        refusal_schema_ref: parts.refusal_schema_ref,
+        refusal_schema_fingerprint: parts.refusal_schema_fingerprint,
+        error_schema_ref: parts.error_schema_ref,
+        error_schema_fingerprint: parts.error_schema_fingerprint,
+        write_set_fingerprint: parts.write_set_fingerprint.as_str(),
+        required_capabilities_fingerprint: parts.required_capabilities_fingerprint.as_str(),
+    };
+    handbook_dock::operation_admission::admit_dock_operation(&claim)
+        .map(|owner| {
+            OperationAdmissionResult::Admitted(OwnerAdmissionToken {
+                owner: OwnerToken::Dock(owner),
+            })
+        })
+        .map_err(|_| ContractError::InvalidInvariant)
 }
 
 fn admit_contracts(

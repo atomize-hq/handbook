@@ -13,6 +13,7 @@ use std::sync::OnceLock;
 #[serde(rename_all = "snake_case")]
 pub enum OperationOwner {
     Contracts,
+    Dock,
     Engine,
     Flow,
     Pipeline,
@@ -670,6 +671,7 @@ pub fn validate_complete_definition_set(
 fn expected_owner_binding(owner: OperationOwner) -> (&'static str, &'static str) {
     match owner {
         OperationOwner::Contracts => ("handbook-contracts", "0.1.0"),
+        OperationOwner::Dock => ("handbook-dock", "0.1.0"),
         OperationOwner::Engine => ("handbook-engine", "0.2.0"),
         OperationOwner::Flow => ("handbook-flow", "0.1.1"),
         OperationOwner::Pipeline => ("handbook-pipeline", "0.1.2"),
@@ -683,10 +685,10 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
         IncompleteClosure as IC, IndependentOwnerAbsent as IOA, OwnerDeferred as OD,
         SemanticMismatch as SM,
     };
-    use OperationAvailability::{Absent as A, LivePrecursor as L, Phase5Deferred as P5};
+    use OperationAvailability::{Absent as A, LivePrecursor as L};
     use OperationClass::{AppendOnly as AP, CompareAndWrite as CW, ReadOnly as RO};
     use OperationOwner::{
-        Contracts as C, Engine as E, Flow as F, Phase5 as P, Pipeline as PL, SdkComposition as S,
+        Contracts as C, Dock as D, Engine as E, Flow as F, Pipeline as PL, SdkComposition as S,
     };
 
     #[allow(clippy::type_complexity)]
@@ -756,9 +758,9 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
         ("contract.evidence.append", C, L, AP, OD),
         ("contract.verdict.evaluate", C, L, RO, OD),
         ("contract.gate.evaluate", C, L, RO, OD),
-        ("dock.manifest.list", P, P5, RO, OD),
-        ("dock.manifest.read", P, P5, RO, OD),
-        ("dock.run", P, P5, AP, OD),
+        ("dock.manifest.list", D, L, RO, OD),
+        ("dock.manifest.read", D, L, RO, OD),
+        ("dock.run", D, L, AP, OD),
     ];
 
     ROWS.into_iter()
@@ -803,6 +805,10 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                         | "contract.verdict.evaluate"
                         | "contract.gate.evaluate"
                 );
+                let is_dock_operation = matches!(
+                    operation_id,
+                    "dock.manifest.list" | "dock.manifest.read" | "dock.run"
+                );
                 OperationInventoryRow {
                     proof_ordinal: (index + 1) as u16,
                     operation_id,
@@ -817,6 +823,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                         || is_pipeline_read
                         || is_pipeline_mutation_packet
                         || is_contract_operation
+                        || is_dock_operation
                     {
                         AdmissionReason::Admitted
                     } else {
@@ -824,7 +831,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                     },
                     current_transports: if is_posture_apply {
                         &[OperationTransport::RustSdk, OperationTransport::Tauri]
-                    } else if is_contract_operation {
+                    } else if is_contract_operation || is_dock_operation {
                         &[
                             OperationTransport::CliJson,
                             OperationTransport::RustSdk,
@@ -845,6 +852,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                         || is_pipeline_read
                         || is_pipeline_mutation_packet
                         || is_contract_operation
+                        || is_dock_operation
                     {
                         DiscoveryState::Discoverable
                     } else {

@@ -185,6 +185,24 @@ impl HandbookSdkV1 {
         contract_membrane::execute_contract_evidence_operation(&self.repo_root, request)
     }
 
+    /// Executes one exact Dock manifest or run ordinary operation once.
+    pub fn execute_dock_operation(
+        &self,
+        request: &contract_membrane::OperationRequestV1,
+    ) -> Result<contract_membrane::OperationResponseV1, contract_membrane::ContractError> {
+        contract_membrane::execute_dock_operation(&self.repo_root, request)
+    }
+
+    /// Executes `dock.run` with owner-resolved runtime capabilities after
+    /// Contracts run preparation and independent Dock re-admission.
+    pub fn execute_dock_operation_with_runtime(
+        &self,
+        request: &contract_membrane::OperationRequestV1,
+        context: contract_membrane::DockRunExecutionContextV1<'_>,
+    ) -> Result<contract_membrane::OperationResponseV1, contract_membrane::ContractError> {
+        contract_membrane::execute_dock_operation_with_runtime(&self.repo_root, request, context)
+    }
+
     /// Executes an evidence append or owner-derived evaluation with explicit runtime facts.
     #[allow(clippy::too_many_arguments)]
     pub fn execute_contract_evidence_operation_with_context<S, C>(

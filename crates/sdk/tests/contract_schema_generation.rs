@@ -22,7 +22,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 157] = [
+const ROOTS: [(&str, &str); 168] = [
     (
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -651,6 +651,50 @@ const ROOTS: [(&str, &str); 157] = [
         "handbook.write-receipt@1.0.0",
         "handbook.write-receipt/1.0.0.schema.json",
     ),
+    (
+        "handbook.dock-execution-record@1.0.0",
+        "handbook.dock-execution-record/1.0.0.schema.json",
+    ),
+    (
+        "handbook.dock-manifest@1.0.0",
+        "handbook.dock-manifest/1.0.0.schema.json",
+    ),
+    (
+        "handbook.dock-operation-details@1.0.0",
+        "handbook.dock-operation-details/1.0.0.schema.json",
+    ),
+    (
+        "handbook.dock-process-request@1.0.0",
+        "handbook.dock-process-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.dock-process-result@1.0.0",
+        "handbook.dock-process-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.dock-manifest-list-request@1.0.0",
+        "handbook.operation.dock-manifest-list-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.dock-manifest-list-result@1.0.0",
+        "handbook.operation.dock-manifest-list-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.dock-manifest-read-request@1.0.0",
+        "handbook.operation.dock-manifest-read-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.dock-manifest-read-result@1.0.0",
+        "handbook.operation.dock-manifest-read-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.dock-run-request@1.0.0",
+        "handbook.operation.dock-run-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.dock-run-result@1.0.0",
+        "handbook.operation.dock-run-result/1.0.0.schema.json",
+    ),
 ];
 
 const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
@@ -747,7 +791,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 157);
+    assert_eq!(entries.len(), 168);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries
@@ -893,7 +937,7 @@ fn packet_three_constructor_instances_validate_against_every_new_root_shape() {
         }
         _ => panic!("expired catalog did not return a blocked restart"),
     }
-    assert_eq!(witness.capabilities().len(), 28);
+    assert_eq!(witness.capabilities().len(), 31);
 }
 
 #[test]
@@ -1289,6 +1333,7 @@ fn custom_wire_forms_are_exact_and_unfingerprinted_key_material_is_absent() {
             "handbook.operation.contract-definition-append-request@1.0.0",
             "handbook.operation.contract-lifecycle-transition-request@1.0.0",
             "handbook.operation.contract-evidence-append-request@1.0.0",
+            "handbook.operation.dock-run-request@1.0.0",
         ]
         .contains(&exact_ref)
         {
