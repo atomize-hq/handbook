@@ -2,6 +2,7 @@
 members = [
     "crates/cli",
     "crates/contracts",
+    "crates/dock",
     "crates/engine",
     "crates/pipeline",
     "crates/flow",
