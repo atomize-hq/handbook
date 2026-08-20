@@ -33,7 +33,8 @@ The labels below describe architecture state, not lifecycle or authorization:
 | Tauri adapter | Current | [`handbook-tauri`](../../../crates/tauri/) is a non-UI library with three versioned commands over SDK-owned bootstrap, catalog, and invocation DTOs. It owns host context, off-main-thread scheduling, bounded host failures, and IPC framing without CLI or owner-crate product dependencies. |
 | Installed Handbook skill | Current | The generated root skill uses only the generic CLI membrane to bootstrap, page discovery, retrieve exact schemas, acquire bounded input, and invoke. It carries no current operation inventory or product-specific ordinary route; the fixed Charter workflow remains a separate leaf skill. |
 | Contract definition, claim, applicability, lifecycle, durable use-case owner, outward SDK membrane, and generic consumers | Current | HCM-5.1 Packets 1–6 establish and integrate [`handbook-contracts`](../../../crates/contracts/) inward of SDK with owner-native exact definition, claim, applicability, fingerprint, compatibility, lifecycle-chain, current-head, evaluation-basis, and repository-bound durability semantics. Its fixed repository-relative store owns bounded current-only paging, exact immutable reads, admitted append/transition, replay, and fail-closed recovery. A bounded outward SDK projection closes exactly four operations within the 62-row inventory and the 23-capability/135-root witness while independently re-admitting owner evidence and preserving the sealed Engine authority seam; the existing generic Rust SDK, CLI, and Tauri consumers preserve that owner truth without a contract-specific branch, and the owner has no SDK or transport dependency. |
-| Evidence/gate owner completion and dock executor | Implemented checkpoint; slice closeout complete | HCM-5.2 Packets 1–7 implement the `handbook-contracts` identity/policy/run kernel, exact read-only candidate-source normalization through one sealed Engine `contract_evidence_source` admission plus generic source-currentness/Resolution observations, retained-root immutable-all canonical-evidence list/read/idempotent append with bounded atomic recovery, pure closed claim-verdict evaluation, gate/local-closeout composition, the exact five-operation outward SDK membrane, and integrated proof through the unchanged generic SDK/CLI/Tauri consumers. Verdicts and gate results remain non-persisted derived truth. All 17 acceptance conditions, aggregate verification/review, and the single slice closeout are complete; the separate HCM-5.3 executor/runtime remains absent. |
+| Evidence/gate owner | Current | HCM-5.2 Packets 1–7 implement the `handbook-contracts` identity/policy/run kernel, exact read-only candidate-source normalization through one sealed Engine `contract_evidence_source` admission plus generic source-currentness/Resolution observations, retained-root immutable-all canonical-evidence list/read/idempotent append with bounded atomic recovery, pure closed claim-verdict evaluation, gate/local-closeout composition, the exact five-operation outward SDK membrane, and integrated proof through the unchanged generic SDK/CLI/Tauri consumers. Verdicts and gate results remain non-persisted derived truth. |
+| Process dock | Target/future | The current HCM-5.3 authority selects a purpose-named operational dock owner, language-neutral one-shot JSON protocol, portable first-party Rust executor, exact three-operation/11-root closure, and native-Rust HCM-5.4 handoff. None is implemented yet, and production manifest inventory remains empty. |
 | Publication, bridge, and Substrate adoption | External-unknown | No repository-only claim can prove their current external existence, deployment, or conformance. |
 
 The workspace membership and current crate edges are visible in
@@ -104,6 +105,16 @@ parent promotion remains a later independent policy/mutation boundary. This is
 implemented owner, SDK, and generic-consumer architecture through Packet 7;
 aggregate verification/review and the single HCM-5.2 closeout are complete.
 
+The current [`HCM-5.3 authority`](slices/HCM-5.3/README.md) now selects that
+future executor boundary without claiming implementation. A new
+`handbook-dock` operational crate will depend inward on Contracts and narrow
+generic Engine facilities, while SDK will project its three reserved operations
+outward. Dock execution records and completed candidates remain operational and
+untrusted; Contracts independently resolves them through its candidate-source
+port and remains the only canonical evidence/verdict/gate/local-closeout owner.
+The production manifest registry remains empty until HCM-5.4 installs the
+selected first-party validator.
+
 ## Projection and adapter boundary
 
 Adapters may own concerns that exist because of the interface:
@@ -163,10 +174,21 @@ Conflating these domains can make a transport encoding appear to authorize an
 instance, or make a schema artifact appear to prove an owner result. Mapping
 between domains must be explicit and must preserve each domain's exact binding.
 
-The current engine uses Rust `jsonschema` for existing schema responsibilities.
-Historical bundled-Python validator choices are not current architecture.
-Future contract runtime or tooling remains a later authority decision; this
-document does not select it.
+The current engine and SDK tests use Rust `jsonschema` for exact Draft 2020-12
+schema responsibilities, including bounded local-ref closure and refusal of
+external retrieval. Historical Python validator choices are not current
+architecture. The prepared HCM-5.3 authority selects a language-neutral process
+JSON contract with a first-party Rust host, and fixes the HCM-5.4 reference
+validator as native Rust over those current practices. Product implementation
+remains absent.
+
+That first path is a repository-owned, offline, deterministic validator witness,
+not a general arbitrary-code service. Portable host claims are limited to exact
+bundle/executable verification, direct launch, cleared ambient environment,
+bounded JSON I/O and time, host-owned cancellation, cleanup accounting, and
+completed-only candidate release. Stronger filesystem, network, system-call,
+process-tree, CPU, memory, or third-party confinement is not current product or
+prepared first-path authority.
 
 ## Gate and posture ownership
 

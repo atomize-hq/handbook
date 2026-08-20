@@ -39,8 +39,13 @@ At this checkpoint:
   same owner with exact immutable-evidence, closed-verdict, complete-accounting,
   gate, and separate local-closeout semantics plus strict Packets 1–7; all seven
   packets, 17 acceptance conditions, aggregate verification/review, and the
-  single slice closeout are complete, while HCM-5.3/HCM-5.4 and final Phase-5
-  exit remain unstarted;
+  single slice closeout are complete;
+- the bounded [`HCM-5.3 slice authority`](slices/HCM-5.3/README.md) now selects
+  the language-neutral one-shot JSON process protocol, purpose-named Rust dock
+  owner/executor, evidence-matched first-party threat boundary, exact three-row
+  and 11-root closure, strict Packets 1–5, and the native-Rust HCM-5.4 validator
+  handoff; HCM-5.3 remains unimplemented at the current `62 / 28 / 157` product
+  state, and HCM-5.4 plus final Phase-5 exit remain unstarted;
 - the former orchestration skill under `.codex/skills/.disabled/` is inactive and is not authority for new work; and
 - the active thin router is routing guidance only and is not authority for product or slice work.
 
@@ -71,6 +76,7 @@ Use the source that owns the question:
 | What is the completed HCM-4.5 outcome and packet boundary? | [`slices/HCM-4.5/README.md`](slices/HCM-4.5/README.md) records the capability-driven installed skill, generic discovery/schema/invocation consumer seam, strict Packets 1–6, corrected truthful future-uptake proof, and the single aggregate slice closeout. |
 | What is the completed HCM-5.1 outcome and packet boundary? | [`slices/HCM-5.1/README.md`](slices/HCM-5.1/README.md) selects `handbook-contracts` as the inward semantic owner, fixes exact definition/claim/lifecycle and outward SDK boundaries, defines strict Packets 1–6, and records their implementation plus aggregate verification/review and the single slice closeout. |
 | What is the completed HCM-5.2 outcome and packet boundary? | [`slices/HCM-5.2/README.md`](slices/HCM-5.2/README.md) fixes canonical evidence admission, closed verdict/accounting/freshness/gate semantics, separate local closeout, the parent-promotion boundary, exact five-operation outward closure, and strict Packets 1–7. All seven packets implement the owner-native identity/policy kernel, read-only run preparation, sealed exact candidate-source normalization, retained-root immutable-all canonical-evidence persistence, pure verdict/gate/local-closeout composition, five-operation SDK/schema/witness closure, and generic SDK/CLI/Tauri proof at `62 / 28 / 157`; all 17 acceptance conditions, aggregate verification/review, and the single slice closeout are complete. |
+| What is the prepared HCM-5.3 outcome and packet boundary? | [`slices/HCM-5.3/README.md`](slices/HCM-5.3/README.md) selects the operational dock owner, versioned language-neutral process JSON, portable first-party Rust executor boundary, completed-only candidate handoff, exact three-operation/11-root closure, strict Packets 1–5, and the fixed native-Rust JSON Schema validator handoff. It is current authority only; no packet, product code, production dock manifest, validator, or `62 / 31 / 168` target state is implemented yet. |
 | Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. A roadmap entry plus an explicit execution request may authorize bounded preparation of that document, but product execution begins only after the resulting current slice authority is ready. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 
