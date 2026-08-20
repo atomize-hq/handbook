@@ -9,8 +9,8 @@ or another Phase-5 slice.
 
 ## Current admission state
 
-**HCM-5.2 Packets 1–6 are implemented. The slice remains open; Packet 7 is
-unselected.**
+**HCM-5.2 Packets 1–7 are implemented. The slice remains open awaiting the
+meta task's aggregate verification, causal review, and single closeout.**
 
 The hard predecessor is satisfied. The completed
 [`HCM-5.1` authority](../HCM-5.1/README.md) establishes the inward
@@ -23,18 +23,19 @@ review is `APPROVE` with no unresolved P1/P2, and its single slice closeout is
 complete through commits `b37a307`, `dd51ed8`, `cfd3d35`, `7925652`,
 `3bd2c41`, `149c7fd`, and `cc0588d`.
 
-Further HCM-5.2 product execution remains inadmissible until a fresh packet task
-proves its declared predecessor and scope immediately before edits. Packets
-1–6 add the owner-native identity/policy kernel, atomic read-only evaluation-run
+Further HCM-5.2 packet execution is complete. Packets 1–7 add the owner-native
+identity/policy kernel, atomic read-only evaluation-run
 preparation, the sealed read-only candidate-source normalization boundary, the
 retained-root immutable-all canonical-evidence repository, pure closed claim-
 verdict evaluator, and pure content-addressed gate plus sibling local-closeout
 composition fixed by their rows below. They also close the exact five reserved
 ordinary operations through owner admission, outward SDK mapping, the existing
 generic dispatch seam, 157 deterministic schema roots, and 28 capability
-witnesses without changing the 62-row inventory. They add no derived-result
-persistence, adapter-specific consumer route, Packet-7 integrated consumer
-proof, parent-promotion/posture behavior, or executor.
+witnesses without changing the 62-row inventory, and prove every operation
+through the Rust SDK plus unchanged generic CLI and Tauri consumers. They add no
+derived-result persistence, adapter-specific consumer route, parent-promotion/
+posture behavior, or executor. Packet completion does not satisfy the separate
+17-condition aggregate closeout owned by the meta task.
 
 ## Outcome
 

@@ -40,6 +40,8 @@ use handbook_contracts::{
 const REPOSITORY_IDENTITY: &str =
     "sha256:1111111111111111111111111111111111111111111111111111111111111111";
 const AUTHOR_AUTHORITY_REF: &str = "handbook.authority.contract-definition-author@1.0.0";
+#[cfg(feature = "test-support")]
+const NON_STALENESS_TEST_WINDOW_SECONDS: u64 = 3_600;
 
 #[test]
 fn owner_repository_uses_the_fixed_repository_relative_layout_and_empty_root() {
@@ -1252,7 +1254,7 @@ fn evaluation_run_is_atomically_prepared_from_exact_current_owner_truth() {
         EvidenceFreshnessPolicyInputV1::new(
             ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
             VersionV1::parse("1.0.0+exact").unwrap(),
-            300,
+            NON_STALENESS_TEST_WINDOW_SECONDS,
             true,
             0,
         )
@@ -1490,7 +1492,7 @@ fn evaluation_run_is_rederived_by_the_owner_before_evidence_admission() {
         EvidenceFreshnessPolicyInputV1::new(
             ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
             VersionV1::parse("1.0.0+readmit").unwrap(),
-            300,
+            NON_STALENESS_TEST_WINDOW_SECONDS,
             true,
             0,
         )
@@ -1632,7 +1634,7 @@ fn signed_repository_candidate_is_independently_normalized_into_owner_evidence()
         EvidenceFreshnessPolicyInputV1::new(
             ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
             VersionV1::parse("1.0.0+admission").unwrap(),
-            300,
+            NON_STALENESS_TEST_WINDOW_SECONDS,
             true,
             0,
         )
@@ -2371,7 +2373,7 @@ fn closed_claim_verdict_evaluator_returns_not_observed_without_evidence() {
         EvidenceFreshnessPolicyInputV1::new(
             ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
             VersionV1::parse("1.0.0+verdict-empty").unwrap(),
-            300,
+            NON_STALENESS_TEST_WINDOW_SECONDS,
             true,
             0,
         )
@@ -2563,7 +2565,7 @@ fn closed_claim_verdict_evaluator_exhausts_vocabulary_and_fixed_precedence() {
         EvidenceFreshnessPolicyInputV1::new(
             ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
             VersionV1::parse("1.0.0+verdict-matrix").unwrap(),
-            300,
+            NON_STALENESS_TEST_WINDOW_SECONDS,
             true,
             0,
         )
@@ -3118,7 +3120,7 @@ fn closed_claim_verdict_evaluator_enforces_all_declared_cases_and_tuple_stabilit
         EvidenceFreshnessPolicyInputV1::new(
             ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
             VersionV1::parse("1.0.0+verdict-cases").unwrap(),
-            300,
+            NON_STALENESS_TEST_WINDOW_SECONDS,
             true,
             0,
         )
@@ -3374,7 +3376,7 @@ fn gate_and_local_closeout_are_separate_pure_content_addressed_results() {
         EvidenceFreshnessPolicyInputV1::new(
             ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
             VersionV1::parse("1.0.0+gate-separation").unwrap(),
-            300,
+            NON_STALENESS_TEST_WINDOW_SECONDS,
             true,
             0,
         )
@@ -3509,7 +3511,7 @@ fn advisory_deficits_are_score_visible_and_exact_threshold_equality_passes() {
         EvidenceFreshnessPolicyInputV1::new(
             ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
             VersionV1::parse("1.0.0+gate-score").unwrap(),
-            300,
+            NON_STALENESS_TEST_WINDOW_SECONDS,
             true,
             0,
         )
@@ -3692,7 +3694,7 @@ fn gate_and_local_closeout_each_refuse_their_own_final_currentness_race() {
         EvidenceFreshnessPolicyInputV1::new(
             ContractIdV1::parse("handbook.contract-evidence-freshness-policy.fixture").unwrap(),
             VersionV1::parse("1.0.0+gate-race").unwrap(),
-            300,
+            NON_STALENESS_TEST_WINDOW_SECONDS,
             true,
             0,
         )
