@@ -6,12 +6,14 @@
 
 mod bounds;
 mod canonical;
+mod executor;
 mod manifest;
 mod protocol;
 mod registry;
 mod store;
 
 pub use bounds::*;
+pub use executor::*;
 pub use manifest::*;
 pub use protocol::*;
 pub use registry::*;

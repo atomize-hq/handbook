@@ -12,8 +12,8 @@ use handbook_contracts::{
 };
 use handbook_engine::{
     EvidenceSourceAdmissionServiceV1, NativeAuthenticatorPortV1, RepositoryDirectoryEntryKindV1,
-    RepositoryDurabilityErrorKindV1, RepositoryDurabilityErrorV1, RepositoryReadV1,
-    RetainedRepositoryRootV1,
+    RepositoryDurabilityErrorKindV1, RepositoryDurabilityErrorV1, RepositoryExclusiveLockV1,
+    RepositoryReadV1, RetainedRepositoryRootV1,
 };
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -190,6 +190,79 @@ pub struct DockOperationalStoreV1 {
     repository_root: RetainedRepositoryRootV1,
 }
 
+pub(crate) enum DockExecutionStartV1<'store> {
+    Replay(Box<DockStoreReceiptV1>),
+    Lease(DockExecutionLeaseV1<'store>),
+}
+
+pub(crate) struct DockExecutionLeaseV1<'store> {
+    store: &'store DockOperationalStoreV1,
+    lock: Option<RepositoryExclusiveLockV1>,
+    request: ContentAddressedBindingV1,
+    key_fingerprint: FingerprintV1,
+}
+
+impl DockExecutionLeaseV1<'_> {
+    pub(crate) fn commit(
+        mut self,
+        request: &DockProcessRequestV1,
+        result: Option<&DockProcessResultV1>,
+        execution: &DockExecutionRecordV1,
+        evaluation_run_jcs: &[u8],
+        #[cfg(feature = "test-support")] fault: Option<DockStoreFaultBoundaryV1>,
+        #[cfg(not(feature = "test-support"))] _fault: Option<()>,
+    ) -> Result<DockStoreReceiptV1, DockStoreErrorV1> {
+        if request.binding().map_err(map_dock_error)? != self.request {
+            return Err(conflict("execution lease request was substituted"));
+        }
+        let prepared = self.store.prepare_commit(
+            request,
+            result,
+            execution,
+            evaluation_run_jcs,
+            self.key_fingerprint.clone(),
+        )?;
+        if self
+            .store
+            .read_optional(
+                &request_path(request.request_fingerprint()),
+                MAX_RECORD_BYTES,
+            )?
+            .is_some()
+            || self
+                .store
+                .read_optional(
+                    &execution_path(execution.record_fingerprint()),
+                    MAX_RECORD_BYTES,
+                )?
+                .is_some()
+        {
+            return Err(conflict(
+                "request or execution identity is already committed",
+            ));
+        }
+        self.store.stage_transaction(&prepared)?;
+        #[cfg(feature = "test-support")]
+        if fault == Some(DockStoreFaultBoundaryV1::AfterIntent) {
+            return Err(durability("injected uncertainty after store intent"));
+        }
+        #[cfg(feature = "test-support")]
+        self.store.install_transaction(&prepared, fault)?;
+        #[cfg(not(feature = "test-support"))]
+        self.store.install_transaction(&prepared, _fault)?;
+        self.store.validate_inventory_locked()?;
+        let receipt = self
+            .store
+            .receipt_from_ledger(prepared.ledger, DockStoreDispositionV1::Committed)?;
+        self.lock
+            .take()
+            .expect("execution lease retains its lock")
+            .release()
+            .map_err(map_repository_error)?;
+        Ok(receipt)
+    }
+}
+
 impl DockOperationalStoreV1 {
     pub fn open(repo_root: impl AsRef<Path>) -> Result<Self, DockStoreErrorV1> {
         let repository_root =
@@ -222,6 +295,66 @@ impl DockOperationalStoreV1 {
             idempotency_key,
             None,
         )
+    }
+
+    pub(crate) fn begin_execution(
+        &self,
+        request: &DockProcessRequestV1,
+        idempotency_key: &str,
+    ) -> Result<DockExecutionStartV1<'_>, DockStoreErrorV1> {
+        validate_key(idempotency_key)?;
+        let key_fingerprint = key_fingerprint(idempotency_key)?;
+        let request_binding = request.binding().map_err(map_dock_error)?;
+        let lock = self
+            .repository_root
+            .acquire_exclusive_lock(LOCK_RELATIVE)
+            .map_err(map_repository_error)?;
+        self.recover_locked()?;
+        self.validate_inventory_locked()?;
+        if let Some(replay) = self.read_replay(&key_fingerprint)? {
+            if replay.request != request_binding {
+                return Err(conflict(
+                    "idempotency key is bound to another exact request",
+                ));
+            }
+            let receipt = self.receipt_from_ledger(replay, DockStoreDispositionV1::Replayed)?;
+            lock.release().map_err(map_repository_error)?;
+            return Ok(DockExecutionStartV1::Replay(Box::new(receipt)));
+        }
+        Ok(DockExecutionStartV1::Lease(DockExecutionLeaseV1 {
+            store: self,
+            lock: Some(lock),
+            request: request_binding,
+            key_fingerprint,
+        }))
+    }
+
+    /// Resolve an already committed exact key/request replay without launching again.
+    pub fn replay_for_request(
+        &self,
+        request: &DockProcessRequestV1,
+        idempotency_key: &str,
+    ) -> Result<Option<DockStoreReceiptV1>, DockStoreErrorV1> {
+        validate_key(idempotency_key)?;
+        let key_fingerprint = key_fingerprint(idempotency_key)?;
+        let lock = self
+            .repository_root
+            .acquire_exclusive_lock(LOCK_RELATIVE)
+            .map_err(map_repository_error)?;
+        self.recover_locked()?;
+        self.validate_inventory_locked()?;
+        let Some(replay) = self.read_replay(&key_fingerprint)? else {
+            lock.release().map_err(map_repository_error)?;
+            return Ok(None);
+        };
+        if replay.request != request.binding().map_err(map_dock_error)? {
+            return Err(conflict(
+                "idempotency key is bound to another exact request",
+            ));
+        }
+        let receipt = self.receipt_from_ledger(replay, DockStoreDispositionV1::Replayed)?;
+        lock.release().map_err(map_repository_error)?;
+        Ok(Some(receipt))
     }
 
     #[cfg(feature = "test-support")]
