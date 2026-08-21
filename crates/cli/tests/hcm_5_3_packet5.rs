@@ -211,7 +211,15 @@ fn generic_cli_discovers_and_invokes_the_three_dock_operations() {
         match operation_ref {
             "dock.manifest.list@1.0.0" => {
                 assert!(output.status.success());
-                assert_eq!(document["response"]["data"]["entries"], json!([]));
+                assert_eq!(
+                    document["response"]["data"]["entries"],
+                    json!([{
+                        "manifest": {
+                            "ref": "handbook.dock.json-schema@1.0.0",
+                            "fingerprint": "sha256:85ca3e4482b2316c654ee117f1ee2e496647734a8e187e36ad5bcae09d6cd893"
+                        }
+                    }])
+                );
             }
             "dock.manifest.read@1.0.0" => {
                 assert!(output.status.success());

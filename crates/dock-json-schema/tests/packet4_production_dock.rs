@@ -1,3 +1,5 @@
+#[path = "../package-support/production.rs"]
+mod production;
 #[path = "../../sdk/tests/packet5_support/mod.rs"]
 #[allow(dead_code)]
 mod sdk_support;
@@ -13,6 +15,7 @@ use handbook_dock::*;
 use serde_json::json;
 use std::fs;
 use std::path::Path;
+use std::sync::OnceLock;
 
 type PackageMutation = (&'static str, fn(&staging::StagedPackageV1));
 
@@ -43,13 +46,33 @@ fn production_manifest() -> DockManifestV1 {
 }
 
 fn stage_package(host_directory: &Path) -> staging::StagedPackageV1 {
+    let source_directory = tempfile::tempdir().unwrap();
+    let executable_path = source_directory.path().join(format!(
+        "handbook-dock-json-schema{}",
+        std::env::consts::EXE_SUFFIX
+    ));
+    fs::write(&executable_path, production_executable_bytes()).unwrap();
     staging::stage_native_package_v1(
-        Path::new(env!("CARGO_BIN_EXE_handbook-dock-json-schema")),
+        &executable_path,
         host_directory,
         env!("HANDBOOK_DOCK_JSON_SCHEMA_TARGET"),
         std::env::consts::EXE_SUFFIX,
     )
     .unwrap()
+}
+
+fn production_executable_bytes() -> &'static [u8] {
+    static EXECUTABLE: OnceLock<Vec<u8>> = OnceLock::new();
+    EXECUTABLE
+        .get_or_init(|| {
+            let target_directory = tempfile::tempdir().unwrap();
+            let workspace = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+            let package =
+                production::produce_current_package_v1(&workspace, target_directory.path())
+                    .unwrap();
+            fs::read(package.executable_path).unwrap()
+        })
+        .as_slice()
 }
 
 fn validation_content() -> serde_json::Value {
