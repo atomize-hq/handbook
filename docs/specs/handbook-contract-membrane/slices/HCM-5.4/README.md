@@ -13,8 +13,20 @@ publication, external adoption, parent promotion, posture mutation, or Phase 6.
 
 ## Current admission state
 
-**Authority is prepared. HCM-5.4 is unimplemented and Packet 1 has not been
-dispatched.**
+**Packets 1–3 are complete. Packet 4's product source is present, but its
+checkpoint is invalid for further packet admission and is superseded by the
+mandatory Packet 4R remediation below. A fresh Packet 5 attempt stopped before
+retaining changes. HCM-5.4 remains active, not slice-closed, and Phase 5 is not
+exited.**
+
+The completed checkpoints are Packet 1
+`a66862b267f5e6e72afaed39991bef5ff3d9e743`, Packet 2
+`9a620e064fb94e707c69349c586c47704de4e692`, and Packet 3
+`5097548ed4b1d5cb2f6e047228e69526de5a2001`. Packet 4 commit
+`583785aab141571e6231cf19016fe978cf2e1a65` added the one-entry production
+registry and ordinary run path, but its frozen same-target executable cannot be
+reproduced from an isolated clean build. Packet 5 therefore has no satisfied
+hard predecessor and may not be retried until Packet 4R completes.
 
 The hard predecessor is satisfied. HCM-5.3 is slice-closed at commit
 `5f3787706e383714c70978229e1c14dd767b26b6`. Its exact handoff fixes:
@@ -30,9 +42,14 @@ The hard predecessor is satisfied. HCM-5.3 is slice-closed at commit
 - current product truth of exactly 62 operations, 31 capabilities, 168 schema
   roots, and an empty production manifest registry.
 
-Product execution is admissible only from this authority in strict packet
-order. This preparation changes no product source, schema asset, fixture,
-manifest, bundle, operation, capability, or product-state classification.
+Product execution is admissible only from this amended authority in strict
+packet order. Current interim source truth is exactly 62 operation rows, 31
+capabilities, 168 checked-in schema roots, one embedded production manifest,
+and six fixed use cases. The Packet 1 generator can derive the two selected
+HCM-5.4 roots in test-only output, but their checked-in 170-root production
+closure remains Packet 6 work. The one embedded manifest is not an admissible
+package checkpoint until Packet 4R replaces its invalid frozen bytes and proves
+the exact repeated-build rule below.
 
 ## Outcome, owner, and dependency direction
 
@@ -203,6 +220,85 @@ the frozen package bytes or stop for a version/authority decision; runtime
 rederivation may not silently bless changed bytes behind the exact ref. Tests
 compare target-local exact bindings and may not normalize one target's digest
 into another target's truth.
+
+### Deterministic current-target package rule and Packet 4 supersession
+
+The Packet 4 failure is localized to the current MSVC final link. Two isolated
+clean builds of identical source without a reproducibility option had identical
+length and all executable bytes except the PE/COFF timestamp, its three debug-
+directory timestamp copies, and the RSDS PDB GUID. MSVC `link.exe` stamped wall-
+clock time and a fresh PDB identity into each executable. Staging and RFC-8785
+manifest derivation were deterministic over a given executable and did not
+cause the mismatch.
+
+Packet 4 also froze the 9,545,216-byte `CARGO_BIN_EXE_*` artifact produced for
+its integration test. That path is expressly a test-only staging seam and is
+compiled under Cargo's test graph/profile with dev dependencies enabled; it is
+not an exact normal-dependency production package profile.
+This did not create the varying timestamps/GUIDs, but it left the production
+compile input ambiguous and explains why a normal clean package build has a
+different length before byte comparison. Packet 4R must separate the production
+package producer from `CARGO_BIN_EXE_*`; direct native-process tests may retain
+that variable only for their existing test-only staging.
+
+For `x86_64-pc-windows-msvc`, the repository-controlled package producer must
+pass exact effective Rust linker argument `-C link-arg=/Brepro` to the final
+`handbook-dock-json-schema` binary link. The clean package build is the exact
+locked/offline package-and-binary selection represented by:
+
+```text
+cargo rustc --offline --locked -p handbook-dock-json-schema \
+  --bin handbook-dock-json-schema -- -C link-arg=/Brepro
+```
+
+The selected profile is the current workspace `dev` profile: unoptimized with
+`debug = 1`, with no `--release` or alternate `--profile` selection. Each proof
+invocation uses a fresh isolated `CARGO_TARGET_DIR`, the current source and
+`Cargo.lock`, no additional `RUSTFLAGS`, and the target reported by the crate
+build as `x86_64-pc-windows-msvc`. The build-time mechanism must be repository-
+owned and scoped to this native package; an operator's ambient shell flag is not
+package authority. A different Cargo profile, target, linker option, source
+byte, lockfile, or toolchain is a different build input.
+
+The locally proven toolchain was `rustc 1.89.0` / `cargo 1.89.0`, LLVM 20.1.7,
+and MSVC `link.exe` 14.43.34810.0. With `/Brepro`, two clean isolated builds
+produced identical 9,548,800-byte executables with diagnostic fingerprint
+`sha256:067d9d4386382ed1fc97f312336fc8a148bb135269679d4bb46c5058fe18d411`.
+The existing staging implementation then produced identical 2,594-byte
+canonical manifests with byte fingerprint
+`sha256:655bfc9badf8105dfa6993513fc56619254dad22be920915c4adc49c45c47279`,
+bundle fingerprint
+`sha256:3f01d34d15a7c3bd7a1887c3dfd4e16f1aa317ea4e50046726026aafa4b1d74f`,
+and manifest fingerprint
+`sha256:85ca3e4482b2316c654ee117f1ee2e496647734a8e187e36ad5bcae09d6cd893`.
+These values are causal experiment evidence, not authority to copy a
+placeholder or skip derivation from Packet 4R's final source.
+
+Packet 4R's repeated-build proof selects and freezes one final executable and
+manifest byte identity. Every later rebuild of that final same-source/current-
+target package must equal the frozen bytes, not merely equal another rebuild.
+A reproducible but different result after Packet 4R therefore stops for a new
+version/authority decision. No PE normalization, timestamp/GUID exclusion,
+selective hashing, signature stripping, post-link rewrite, or fuzzy comparison
+may establish equality; comparison covers the complete executable and complete
+canonical manifest byte streams.
+
+The crate version remains `0.1.0`; dock ref
+`handbook.dock.json-schema@1.0.0` and bundle ref
+`handbook.dock.bundle.json-schema-native@1.0.0` also remain exact. HCM-5.4 has
+not been released, published, externally adopted, or slice-closed, so this
+amendment may invalidate the development checkpoint and re-freeze its package
+without representing two released byte identities behind one semantic version.
+The old executable fingerprint
+`sha256:13b8f78780e540439c30c5e805111e1acce19895c4cce83b4d5563f77e5f09b9`,
+bundle fingerprint
+`sha256:fd12372df6a2006ee311a43d505ad32e0ecb7c3f5c9999b42a1152c7c6c77855`,
+and manifest fingerprint
+`sha256:8367b798dd56c2f374b7a5c321f86d2f69461529a254329b4bb46a6fb12a9296`
+are invalid superseded checkpoint material and may not admit Packet 5. Packet
+4R must atomically derive and freeze the final replacements. Evidence that the
+old package was released or externally consumed would invalidate this decision
+and require a new version/authority adjudication before product edits.
 
 This is a portable packaging rule, not publication. It does not require a
 checked-in executable, PE/import closure, AppContainer, Job Object, platform
@@ -634,13 +730,14 @@ Every packet must preserve:
 | **2 — exact offline Draft 2020-12 evaluator** | Implement the pure pinned-Rust local-closure prewalk, exact current allowlist/dialect/meta-validation/ref rules, in-memory registry, one-instance evaluation, normalized closed violations, ordering/coalescing, and refusal mapping. Add no process entrypoint, manifest, bundle resolver, or Contracts path. | Packet 1. | Exhaustive positive/negative/multi-document/refusal tests cover local pointers/refs, missing/remote/ambient/encoded/traversal/cyclic/deep refs, dialect/keyword/identifier/hook refusal, document/root/closure/instance substitution, meta failure, every reachable normalized code, deterministic order, over-limit no-partial behavior, and source/dependency gates. |
 | **3 — native one-shot process and package artifact** | Add the `handbook-dock-json-schema` binary over the exact language-neutral Dock request/result wire contract, one canonical stdin/stdout frame, closed child refusal reasons/diagnostics, empty fixed argv, and target-neutral staging of the single-file native bundle plus canonical manifest artifact. Production registry remains unchanged. | Packet 2. | Direct native-process tests prove exact completed conformant/nonconformant results, one candidate and complete partition, all child refusals, invalid/extra/noncanonical framing, no stdout side channel, cross-crate canonical repeatability, target entrypoint identity, and that normal binary source/dependencies contain no filesystem schema read, env/PATH, network, spawn, dynamic loading, Python, Handbook product crate, or OS-specific branch. |
 | **4 — first production manifest and ordinary Dock run** | Freeze the target package's exact manifest into the host, change the production registry from empty to that one current-target definition, add owner-resolved fixed-layout installed-manifest/bundle admission, and make the existing default SDK `dock.run` path resolve/execute it after Contracts run preparation. Preserve the explicit test runtime seam and all three operation identities/schemas. | Packet 3. | Dock/SDK tests prove list/read exact one-entry embedded truth, installed-manifest equality, absent/substituted/wrong-target/extra/symlink bundle refusal, current-run-before-body/manifest/spawn order, direct launch, exact replay, timeout/cancellation/process/protocol/cleanup/durability no-candidate paths, default SDK completion, no runtime rederivation, no local mapping disclosure, no caller path, and unchanged `62 / 31` operation/capability truth. |
-| **5 — exact contract-to-local-closeout proof** | Add the exact fixture family, establish its definition and independent-lock/active lifecycle, run conformant and nonconformant cases through the production validator, append Contracts-owned evidence, and recompute verdict, gate, and local closeout. Add no production contract/policy default or semantic branch. | Packet 4. | Focused Contracts/Dock/SDK integration proves the exact positive chain to `pass / passed / eligible`, negative chain to `fail / blocked / blocked`, immutable evidence and replay, current-head/source-authority/freshness/Resolution rechecks, refusal/timeout/fingerprint/under-resolution write-nothing behavior, complete accounting, and validator/Dock non-authority. |
+| **4R — deterministic package re-freeze** | Supersede only Packet 4's invalid package checkpoint. Make the current-target normal-dependency package build repository-controlled and independent of test-only `CARGO_BIN_EXE_*`, apply the exact `/Brepro` final-link rule, add a clean-build reproducibility guard, regenerate the production manifest from final executable bytes, and re-freeze those identical canonical bytes into the host. Preserve every Packet 1–4 public identity and runtime trust check. | Packets 1–3 and the invalid Packet 4 source checkpoint; Packet 5 remains blocked. | From two or more fresh isolated target directories, build identical current source and `Cargo.lock` with the selected `dev` package profile, require byte-identical whole executables, stage each with the production staging implementation, and require byte-identical canonical manifests. Recompute and check exact executable length/digest, one-file inventory, empty argv and its fingerprint, target, bundle fingerprint, and manifest fingerprint. Prove test-only `CARGO_BIN_EXE_*` cannot supply production frozen bytes. Run Packet 3 staging/process and Packet 4 Dock/SDK trust, admission, launch, replay, and default-path suites; prove unchanged `62 / 31 / 168 / 1 / 6` interim truth, no runtime trust weakening or new public semantics, all affected regressions, formatting/checks, focused P1–P4 review, and GitNexus change detection. Any mismatch stops without re-freezing. |
+| **5 — exact contract-to-local-closeout proof** | Add the exact fixture family, establish its definition and independent-lock/active lifecycle, run conformant and nonconformant cases through the production validator, append Contracts-owned evidence, and recompute verdict, gate, and local closeout. Add no production contract/policy default or semantic branch. | Packet 4R. | Focused Contracts/Dock/SDK integration proves the exact positive chain to `pass / passed / eligible`, negative chain to `fail / blocked / blocked`, immutable evidence and replay, current-head/source-authority/freshness/Resolution rechecks, refusal/timeout/fingerprint/under-resolution write-nothing behavior, complete accounting, and validator/Dock non-authority. |
 | **6 — generic consumers, integrated slice proof, and current truth** | Prove the existing Rust SDK, generic CLI, and generic Tauri consumers discover/read/invoke the one manifest and real path without new route; finalize the two schema assets, exact counts, package/source/security gates, and current product/navigation documentation. This is integration, not packet-level closeout. | Packet 5. | Run focused validator/Dock/Contracts/SDK/CLI/Tauri suites, deterministic schema regeneration/meta-validation/external-retrieval refusal, real packaged native proof, formatting, workspace check/test, strict Clippy/rustdoc, dependency/source/security/no-Python/no-OS-specific-drift/generic-consumer/Markdown-link gates, final `62 / 31 / 170 / 1` proof, and required GitNexus change detection. |
 
 The order is strictly sequential:
 
 ```text
-HCM-5.3 closeout -> P1 -> P2 -> P3 -> P4 -> P5 -> P6
+HCM-5.3 closeout -> P1 -> P2 -> P3 -> P4 (invalid) -> P4R -> P5 -> P6
 ```
 
 Each packet returns control to the meta task. No packet dispatches the next,
@@ -664,6 +761,11 @@ product edits.
 - Packet 4 may choose private resolver/helper factoring and exact error
   plumbing, not the fixed layout, one-entry registry, owner-before-launch order,
   target binding, existing operation identities, or no-caller-path rule.
+- Packet 4R may choose private repository tooling and test factoring, not the
+  normal-dependency `dev` package profile, separation from test-only
+  `CARGO_BIN_EXE_*`, `/Brepro` final-link requirement, locked/offline current-
+  package selection, two-clean-build byte proof, manifest closure, existing
+  semantic versions, or invalidation of Packet 4's old fingerprints.
 - Packet 5 may choose fixture file factoring and private setup helpers, not the
   exact contract/policy/claim/evidence identities, lifecycle chain, positive/
   negative outcomes, or Contracts-only semantic path.
@@ -727,7 +829,11 @@ HCM-5.4 completes only when all of these conditions hold:
    candidate; refusal emits none. No truncated/partial observation is exposed.
 8. The production registry contains exactly one exact current-target manifest,
    whose one-file native bundle, entrypoint, empty argv, target, limits, schema
-   bindings, and fingerprints are fully reverified before direct launch.
+   bindings, and fingerprints are fully reverified before direct launch. Before
+   the manifest is frozen, at least two isolated clean builds from identical
+   repository-controlled inputs produce byte-identical whole executables and
+   byte-identical staged canonical manifests under the exact current-target
+   deterministic package rule; any mismatch stops without replacement.
 9. Production bundle resolution uses only the fixed host-relative layout, with
    no caller path, environment/PATH/current-directory/home/repository search,
    shell, package manager, or mapping disclosure.
