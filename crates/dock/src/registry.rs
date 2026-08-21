@@ -93,17 +93,22 @@ pub enum DockManifestReadOutcomeV1 {
     Absent,
 }
 
-/// Immutable owner registry. The only production constructor is closed over an
-/// empty inventory until HCM-5.4 is separately authorized to install one.
-#[derive(Clone, Debug, Default)]
+/// Immutable owner registry closed over the host-embedded production truth.
+#[derive(Clone, Debug)]
 pub struct DockManifestRegistryV1 {
     manifests: Vec<DockManifestV1>,
+}
+
+impl Default for DockManifestRegistryV1 {
+    fn default() -> Self {
+        Self::production()
+    }
 }
 
 impl DockManifestRegistryV1 {
     pub fn production() -> Self {
         Self {
-            manifests: Vec::new(),
+            manifests: vec![production_manifest_v1()],
         }
     }
     pub fn production_len(&self) -> usize {
@@ -168,6 +173,18 @@ impl DockManifestRegistryV1 {
         }
         Ok(DockManifestReadOutcomeV1::Absent)
     }
+}
+
+/// Exact canonical manifest bytes frozen into this target's host build.
+pub fn production_manifest_bytes_v1() -> &'static [u8] {
+    include_bytes!(env!("HANDBOOK_DOCK_PRODUCTION_MANIFEST"))
+        .strip_suffix(b"\n")
+        .expect("the checked-in production manifest must end with one text newline")
+}
+
+pub(crate) fn production_manifest_v1() -> DockManifestV1 {
+    DockManifestV1::admit_canonical_json(production_manifest_bytes_v1())
+        .expect("the build-selected production manifest must be exact and canonical")
 }
 
 #[derive(Serialize)]

@@ -53,13 +53,65 @@ pub type DockExecutionReceiptV1 = DockStoreReceiptV1;
 /// An owner-resolved first-party bundle capability.
 ///
 /// Production code cannot construct this capability from a caller-supplied
-/// path. The empty production registry therefore admits no executable bundle.
+/// path or manifest. Only the host-relative embedded definition can mint it.
 pub struct DockResolvedFirstPartyBundleV1 {
     manifest: DockManifestV1,
     bundle_root: PathBuf,
 }
 
 impl DockResolvedFirstPartyBundleV1 {
+    pub fn resolve_production() -> Result<Self, DockProductionBundleErrorV1> {
+        let executable = std::env::current_exe().map_err(|_| production_unavailable())?;
+        let host_directory = executable.parent().ok_or_else(production_unavailable)?;
+        Self::resolve_from_host_directory(host_directory)
+    }
+
+    pub fn manifest(&self) -> &DockManifestV1 {
+        &self.manifest
+    }
+
+    #[cfg(feature = "test-support")]
+    pub fn resolve_from_host_directory_for_testing(
+        host_directory: impl AsRef<Path>,
+    ) -> Result<Self, DockProductionBundleErrorV1> {
+        Self::resolve_from_host_directory(host_directory.as_ref())
+    }
+
+    fn resolve_from_host_directory(
+        host_directory: &Path,
+    ) -> Result<Self, DockProductionBundleErrorV1> {
+        let manifest = crate::registry::production_manifest_v1();
+        if manifest.implementation_bundle().target().as_str() != host_target_tuple_v1() {
+            return Err(production_launch_refused());
+        }
+        let package_root = host_directory
+            .join("handbook-docks")
+            .join("handbook.dock.json-schema")
+            .join("1.0.0")
+            .join(host_target_tuple_v1());
+        let package_metadata =
+            fs::symlink_metadata(&package_root).map_err(|_| production_unavailable())?;
+        if !package_metadata.is_dir() || package_metadata.file_type().is_symlink() {
+            return Err(production_launch_refused());
+        }
+        let manifest_path = package_root.join("manifest.json");
+        let manifest_metadata =
+            fs::symlink_metadata(&manifest_path).map_err(|_| production_unavailable())?;
+        if !manifest_metadata.is_file() || manifest_metadata.file_type().is_symlink() {
+            return Err(production_launch_refused());
+        }
+        let installed_manifest = fs::read(&manifest_path).map_err(|_| production_unavailable())?;
+        if installed_manifest.as_slice() != crate::registry::production_manifest_bytes_v1() {
+            return Err(production_launch_refused());
+        }
+        let bundle_root = package_root.join("bundle");
+        verify_bundle(&manifest, &bundle_root).map_err(|_| production_launch_refused())?;
+        Ok(Self {
+            manifest,
+            bundle_root,
+        })
+    }
+
     #[cfg(feature = "test-support")]
     pub fn for_testing(
         manifest: DockManifestV1,
@@ -74,6 +126,50 @@ impl DockResolvedFirstPartyBundleV1 {
             manifest,
             bundle_root: bundle_root.as_ref().to_owned(),
         })
+    }
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum DockProductionBundleErrorKindV1 {
+    Unavailable,
+    LaunchRefused,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct DockProductionBundleErrorV1 {
+    kind: DockProductionBundleErrorKindV1,
+}
+
+impl DockProductionBundleErrorV1 {
+    pub fn kind(&self) -> DockProductionBundleErrorKindV1 {
+        self.kind
+    }
+}
+
+impl fmt::Display for DockProductionBundleErrorV1 {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.write_str(match self.kind {
+            DockProductionBundleErrorKindV1::Unavailable => {
+                "production Dock package is unavailable"
+            }
+            DockProductionBundleErrorKindV1::LaunchRefused => {
+                "production Dock package was launch-refused"
+            }
+        })
+    }
+}
+
+impl Error for DockProductionBundleErrorV1 {}
+
+fn production_unavailable() -> DockProductionBundleErrorV1 {
+    DockProductionBundleErrorV1 {
+        kind: DockProductionBundleErrorKindV1::Unavailable,
+    }
+}
+
+fn production_launch_refused() -> DockProductionBundleErrorV1 {
+    DockProductionBundleErrorV1 {
+        kind: DockProductionBundleErrorKindV1::LaunchRefused,
     }
 }
 

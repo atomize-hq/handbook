@@ -414,7 +414,13 @@ fn conformance_violation_pointer_and_deterministic_order_invariants_hold() {
 fn crate_has_no_product_back_edge_python_process_filesystem_network_or_os_branch() {
     let crate_root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
     let manifest = std::fs::read_to_string(crate_root.join("Cargo.toml")).unwrap();
-    let dependencies = manifest.split("[dependencies]").nth(1).unwrap();
+    let dependencies = manifest
+        .split("[dependencies]")
+        .nth(1)
+        .unwrap()
+        .split("[dev-dependencies]")
+        .next()
+        .unwrap();
     for forbidden in [
         "handbook-contracts",
         "handbook-dock =",

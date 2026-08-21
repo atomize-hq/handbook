@@ -535,7 +535,13 @@ fn normal_source_and_dependency_surface_has_no_ambient_or_product_back_edge() {
     let crate_root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
     let manifest = std::fs::read_to_string(crate_root.join("Cargo.toml")).unwrap();
     assert!(manifest.contains("jsonschema = { version = \"=0.47.0\", default-features = false }"));
-    let dependencies = manifest.split("[dependencies]").nth(1).unwrap();
+    let dependencies = manifest
+        .split("[dependencies]")
+        .nth(1)
+        .unwrap()
+        .split("[dev-dependencies]")
+        .next()
+        .unwrap();
     for forbidden in [
         "handbook-contracts",
         "handbook-dock =",

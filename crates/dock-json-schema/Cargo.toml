@@ -22,3 +22,11 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 serde_json_canonicalizer = "0.3.2"
 sha2 = "0.10"
+
+[dev-dependencies]
+handbook-contracts = { path = "../contracts", version = "0.1.0" }
+handbook-dock = { path = "../dock", version = "0.1.0", features = ["test-support"] }
+handbook-engine = { path = "../engine", version = "0.2.0", features = ["test-support"] }
+handbook-sdk = { path = "../sdk", version = "0.1.0" }
+p256 = { version = "0.13.2", default-features = false, features = ["ecdsa"] }
+tempfile = "3"

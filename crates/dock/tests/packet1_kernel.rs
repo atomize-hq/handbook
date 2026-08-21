@@ -490,10 +490,14 @@ fn production_registry_is_immutable_empty_and_list_read_are_bounded_exact_use_ca
     let page = registry
         .list(DockManifestListRequestV1::first(25).unwrap())
         .unwrap();
-    assert!(page.entries().is_empty());
+    assert_eq!(page.entries().len(), 1);
+    assert_eq!(
+        page.entries()[0].manifest_ref().as_str(),
+        "handbook.dock.json-schema@1.0.0"
+    );
     assert!(page.next_cursor().is_none());
     assert_eq!(page.retention(), DockManifestRetentionV1::ImmutableExact);
-    assert_eq!(registry.production_len(), 0);
+    assert_eq!(registry.production_len(), 1);
     assert_eq!(
         registry
             .read(

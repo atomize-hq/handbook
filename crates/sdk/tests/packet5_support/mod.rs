@@ -109,7 +109,10 @@ impl IntegratedDockFixture {
         let bundle = tempfile::tempdir().unwrap();
         let bin = bundle.path().join("bin");
         fs::create_dir(&bin).unwrap();
-        let helper = Path::new(env!("CARGO_BIN_EXE_dock-sdk-test-helper"));
+        let helper = Path::new(match option_env!("CARGO_BIN_EXE_dock-sdk-test-helper") {
+            Some(helper) => helper,
+            None => panic!("the explicit test-runtime fixture requires its helper executable"),
+        });
         let entry_name = helper.file_name().unwrap();
         let entry = bin.join(entry_name);
         fs::copy(helper, &entry).unwrap();
@@ -250,6 +253,107 @@ impl IntegratedDockFixture {
                 },
             )
             .unwrap()
+    }
+}
+
+#[allow(dead_code)]
+pub struct ProductionDockFixture {
+    owner: OwnerHarness,
+    policies: EvaluationPolicyRegistryV1,
+    evaluation: DockEvaluationPreparationDtoV1,
+}
+
+#[allow(dead_code)]
+impl ProductionDockFixture {
+    pub fn new() -> Self {
+        let mut owner = OwnerHarness::new();
+        let (stack, stack_binding) = evidence_resolution_stack();
+        let resolution = evidence_resolution(&stack);
+        let freshness = EvidenceFreshnessPolicyV1::new(
+            EvidenceFreshnessPolicyInputV1::new(
+                ContractIdV1::parse("handbook.contract-evidence-freshness-policy.packet-four")
+                    .unwrap(),
+                VersionV1::parse("1.0.0+packet4").unwrap(),
+                300,
+                true,
+                0,
+            )
+            .unwrap(),
+        )
+        .unwrap();
+        let gate = GatePolicyV1::new(
+            GatePolicyInputV1::new(
+                ContractIdV1::parse("handbook.contract-gate-policy.packet-four").unwrap(),
+                VersionV1::parse("1.0.0+packet4").unwrap(),
+                GatePolicyAlgorithmV1::ClosedAccounting,
+                None,
+                handbook_contracts::local_closeout_policy_binding_v1().unwrap(),
+            )
+            .unwrap(),
+        )
+        .unwrap();
+        let mut policies = EvaluationPolicyRegistryV1::new().unwrap();
+        policies.register_freshness(freshness.clone()).unwrap();
+        policies.register_gate(gate.clone()).unwrap();
+        let definition = production_evidence_definition(
+            &owner.registry_state_fingerprint,
+            freshness.binding().clone(),
+            gate.binding().clone(),
+            stack_binding,
+        );
+        let (contract, definition_fingerprint, active_head) =
+            activate_definition(&mut owner, definition);
+        let evaluation = DockEvaluationPreparationDtoV1::new(
+            outward_binding(&OwnerBinding::new(contract, definition_fingerprint)),
+            outward_fingerprint(&active_head),
+            contract_value(&evaluation_subject('7')),
+            BoundedVec::new(vec![contract_value(&production_evaluation_case('8'))]).unwrap(),
+            contract_value(&resolution),
+            contract_value(&MatcherBindingV1::exact_fields_v1()),
+            BoundedVec::new(vec![outward_binding(freshness.binding())]).unwrap(),
+            BoundedVec::new(vec![outward_binding(
+                &handbook_contracts::evidence_stability_policy_binding_v1().unwrap(),
+            )])
+            .unwrap(),
+            outward_binding(gate.binding()),
+            outward_binding(&handbook_contracts::local_closeout_policy_binding_v1().unwrap()),
+            BoundedString::new("packet-four-production-run".to_owned()).unwrap(),
+        );
+        Self {
+            owner,
+            policies,
+            evaluation,
+        }
+    }
+
+    pub fn request(
+        &self,
+        manifest: &DockManifestV1,
+        raw_key: &str,
+        content: serde_json::Value,
+    ) -> OperationRequestV1 {
+        let body = DockRunRequestV1::new(
+            outward_binding(&manifest.binding()),
+            self.evaluation.clone(),
+            BoundedVec::new(vec![BoundedString::new(EVIDENCE_KIND.to_owned()).unwrap()]).unwrap(),
+            BoundedVec::new(vec![DockInlineJsonInputDtoV1::new(
+                BoundedString::new("handbook.input.json-schema-validation".to_owned()).unwrap(),
+                BoundedString::new("application/json".to_owned()).unwrap(),
+                outward_binding(manifest.supported_inputs()[0].schema()),
+                contract_value(&content),
+            )])
+            .unwrap(),
+            outward_limits(manifest.limits()),
+        );
+        dock_run_operation_request(Some("packet-four-production"), raw_key, body).unwrap()
+    }
+
+    pub fn repository_path(&self) -> &Path {
+        self.owner.repo.path()
+    }
+
+    pub fn policies(&self) -> &EvaluationPolicyRegistryV1 {
+        &self.policies
     }
 }
 
@@ -503,6 +607,61 @@ fn evidence_definition(
     .unwrap()
 }
 
+fn production_evidence_definition(
+    registry_state_fingerprint: &str,
+    freshness_policy: OwnerBinding,
+    gate_policy: OwnerBinding,
+    stack_binding: OwnerBinding,
+) -> ContractDefinitionV1 {
+    ContractDefinitionV1::new(ContractDefinitionInputV1 {
+        definition_schema: owner_binding("handbook.contract-definition@1.0.0", 'b'),
+        contract_id: ContractIdV1::parse("handbook.contract.packet-four-production").unwrap(),
+        contract_version: VersionV1::parse("1.0.0").unwrap(),
+        contract_kind: ContractKindV1::ClaimSet,
+        claims: vec![ContractClaimV1::new(ContractClaimInputV1 {
+            claim_id: owner_id("payload.schema-conformant"),
+            statement: "Payload conforms to its exact schema.".to_owned(),
+            subject_selector: owner_selector("subject.kind", "artifact"),
+            case_selector: owner_selector("case.kind", "positive"),
+            applicability_rule: ApplicabilityRuleV1::SubjectAndCaseMatch,
+            gate_effect: GateEffectV1::Required,
+            evidence_requirements: vec![EvidenceRequirementV1::new(
+                owner_id(EVIDENCE_KIND),
+                EvidenceCardinalityV1::ExactlyOne,
+                EvidenceCaseSelectionV1::ClaimCaseSelector,
+                handbook_contracts::evidence_stability_policy_binding_v1().unwrap(),
+            )
+            .unwrap()],
+            freshness_policy,
+            minimum_resolution: ResolutionMinimumV1::new(
+                stack_binding,
+                owner_id("resolution.scope.local-observation"),
+                owner_id("resolution.detail.identifier-only"),
+                owner_id("resolution.time.current-operation"),
+                owner_id("resolution.authority.read-only"),
+                owner_id("resolution.memory.operation"),
+                owner_id("resolution.validation.observation-only"),
+            ),
+            score_weight: None,
+        })
+        .unwrap()],
+        definition_author_ref: StableIdV1::parse(&format!(
+            "credential.sha256-{:x}",
+            Sha256::digest([0x32; 32])
+        ))
+        .unwrap(),
+        definition_authority: OwnerBinding::new(
+            OwnerRef::parse(AUTHOR_AUTHORITY_REF).unwrap(),
+            OwnerFingerprint::parse(registry_state_fingerprint).unwrap(),
+        ),
+        lifecycle_policy: lifecycle_policy_binding_v1().unwrap(),
+        matcher_bindings: vec![MatcherBindingV1::exact_fields_v1()],
+        gate_policy,
+        extensions_policy: owner_binding("handbook.contract-extensions.closed-v1@1.0.0", 'd'),
+    })
+    .unwrap()
+}
+
 fn evaluation_subject(hex: char) -> EvaluationSubjectV1 {
     let fingerprint = owner_fp(hex);
     EvaluationSubjectV1::new(
@@ -520,6 +679,20 @@ fn evaluation_case(hex: char) -> EvaluationCaseV1 {
     let fingerprint = owner_fp(hex);
     EvaluationCaseV1::new(
         owner_id("case.positive"),
+        ContentAddressedBindingV1::new(
+            &format!("case.example/{}", &fingerprint.as_str()[7..]),
+            fingerprint,
+        )
+        .unwrap(),
+        vec![MatcherInputValueV1::new(owner_id("case.kind"), "positive").unwrap()],
+    )
+    .unwrap()
+}
+
+fn production_evaluation_case(hex: char) -> EvaluationCaseV1 {
+    let fingerprint = owner_fp(hex);
+    EvaluationCaseV1::new(
+        owner_id("case.schema-conformance"),
         ContentAddressedBindingV1::new(
             &format!("case.example/{}", &fingerprint.as_str()[7..]),
             fingerprint,

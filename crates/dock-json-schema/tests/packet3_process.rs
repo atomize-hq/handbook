@@ -527,8 +527,11 @@ fn staged_package_is_exact_single_member_target_bound_and_registry_neutral() {
     let registry =
         fs::read_to_string(Path::new(env!("CARGO_MANIFEST_DIR")).join("../dock/src/registry.rs"))
             .unwrap();
-    assert!(registry.contains("manifests: Vec::new()"));
-    assert!(!registry.contains(staging::DOCK_REF_V1));
+    assert!(registry.contains("manifests: vec![production_manifest_v1()]"));
+    assert_eq!(
+        manifest_bytes,
+        handbook_dock::production_manifest_bytes_v1()
+    );
 }
 
 #[test]

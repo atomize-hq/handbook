@@ -1360,11 +1360,17 @@ dependencies = [
 name = "handbook-dock-json-schema"
 version = "0.1.0"
 dependencies = [
+ "handbook-contracts",
+ "handbook-dock",
+ "handbook-engine",
+ "handbook-sdk",
  "jsonschema",
+ "p256",
  "serde",
  "serde_json",
  "serde_json_canonicalizer",
  "sha2",
+ "tempfile",
 ]
 
 [[package]]

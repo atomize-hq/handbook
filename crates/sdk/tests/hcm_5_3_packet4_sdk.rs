@@ -174,7 +174,15 @@ fn empty_production_manifest_use_cases_are_re_admitted_outward() {
         .unwrap(),
     )
     .unwrap();
-    assert_eq!(listed["entries"], serde_json::json!([]));
+    let entries = listed["entries"].as_array().unwrap();
+    assert_eq!(entries.len(), 1);
+    assert_eq!(
+        entries[0]["manifest"]["ref"],
+        "handbook.dock.json-schema@1.0.0"
+    );
+    let rendered = serde_json::to_string(&listed).unwrap();
+    assert!(!rendered.contains("handbook-docks"));
+    assert!(!rendered.contains(std::env::current_exe().unwrap().to_string_lossy().as_ref()));
     assert_eq!(listed["next_cursor"], Value::Null);
     assert_eq!(listed["retention"], "immutable_exact");
 
@@ -224,7 +232,8 @@ fn generic_capability_consumer_dispatches_dock_without_a_specific_adapter() {
         .unwrap();
     let bytes = canonical_json_bytes(&response, &ContractLimits::packet0()).unwrap();
     let rendered = String::from_utf8(bytes).unwrap();
-    assert!(rendered.contains("\"entries\":[]"));
+    assert!(rendered.contains("handbook.dock.json-schema@1.0.0"));
+    assert!(!rendered.contains("handbook-docks"));
     assert!(rendered.contains(DOCK_MANIFEST_LIST_REF));
 
     let consumer_source = include_str!("../src/contract_membrane/consumer.rs");
@@ -247,6 +256,26 @@ fn run_preparation_and_readmission_precede_process_body_and_executor_access() {
             run.find("prepare_current_run(").unwrap() < run.find("from_body(request)").unwrap()
         );
     }
+    assert!(
+        default_run.find("prepare_current_run(").unwrap()
+            < default_run.find("from_body(request)").unwrap()
+    );
+    assert!(
+        default_run.find("from_body(request)").unwrap()
+            < default_run
+                .find("DockManifestRegistryV1::production()")
+                .unwrap()
+    );
+    assert!(
+        default_run
+            .find("DockManifestRegistryV1::production()")
+            .unwrap()
+            < default_run.find("resolve_production()").unwrap()
+    );
+    assert!(
+        default_run.find("resolve_production()").unwrap()
+            < default_run.find("DockOperationalStoreV1::open").unwrap()
+    );
     assert!(
         runtime_run.find("prepare_current_run(").unwrap()
             < runtime_run.find("context.manifest.binding()").unwrap()

@@ -237,7 +237,12 @@ fn generic_rust_sdk_consumes_all_three_rows_and_production_run_stops_before_spaw
     let list = invoke(DOCK_MANIFEST_LIST_REF, &list_body, "packet-five-sdk-list");
     let list = serde_json::to_value(list).unwrap();
     assert_eq!(list["response"]["status"], "ok");
-    assert_eq!(list["response"]["data"]["entries"], json!([]));
+    let entries = list["response"]["data"]["entries"].as_array().unwrap();
+    assert_eq!(entries.len(), 1);
+    assert_eq!(
+        entries[0]["manifest"]["ref"],
+        "handbook.dock.json-schema@1.0.0"
+    );
 
     let absent = ContractRecordBindingDtoV1::new(
         "handbook.dock.absent@1.0.0",

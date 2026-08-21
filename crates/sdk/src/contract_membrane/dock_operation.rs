@@ -522,7 +522,7 @@ fn execute_run(
     definition: &OperationDefinition,
     policies: &EvaluationPolicyRegistryV1,
 ) -> Result<OperationResponseV1, ContractError> {
-    let _admitted = match prepare_current_run(repo_root, request, policies) {
+    let admitted = match prepare_current_run(repo_root, request, policies) {
         Ok(admitted) => admitted,
         Err(cause) => return problem_response(request, definition, cause),
     };
@@ -532,21 +532,57 @@ fn execute_run(
         .map_err(|_| ContractError::InvalidInvariant)?;
     let manifest_fingerprint = OwnerFingerprint::parse(body.manifest.fingerprint().as_str())
         .map_err(|_| ContractError::InvalidInvariant)?;
-    match handbook_dock::DockManifestRegistryV1::production()
+    let manifest = match handbook_dock::DockManifestRegistryV1::production()
         .read(&manifest_ref, &manifest_fingerprint)
         .map_err(|_| ContractError::InvalidInvariant)?
     {
-        handbook_dock::DockManifestReadOutcomeV1::Absent => problem_response(
+        handbook_dock::DockManifestReadOutcomeV1::Absent => {
+            return problem_response(
+                request,
+                definition,
+                DockOperationProblemCauseV1::ManifestUnavailable,
+            )
+        }
+        handbook_dock::DockManifestReadOutcomeV1::Found(manifest) => *manifest,
+    };
+    let resolved_bundle = match handbook_dock::DockResolvedFirstPartyBundleV1::resolve_production()
+    {
+        Ok(resolved) => resolved,
+        Err(error) => {
+            return problem_response(request, definition, production_bundle_problem(error.kind()))
+        }
+    };
+    if resolved_bundle.manifest() != &manifest {
+        return problem_response(
             request,
             definition,
-            DockOperationProblemCauseV1::ManifestUnavailable,
-        ),
-        handbook_dock::DockManifestReadOutcomeV1::Found(_) => problem_response(
-            request,
-            definition,
-            DockOperationProblemCauseV1::LaunchRefused,
-        ),
+            DockOperationProblemCauseV1::Substituted,
+        );
     }
+    let store = match handbook_dock::DockOperationalStoreV1::open(repo_root) {
+        Ok(store) => store,
+        Err(_) => {
+            return problem_response(
+                request,
+                definition,
+                DockOperationProblemCauseV1::LaunchRefused,
+            )
+        }
+    };
+    let cancellation = handbook_dock::DockCancellationV1::new();
+    execute_admitted_run(
+        request,
+        definition,
+        admitted,
+        body,
+        DockRunExecutionContextV1 {
+            policies,
+            manifest: &manifest,
+            resolved_bundle: &resolved_bundle,
+            store: &store,
+            cancellation: &cancellation,
+        },
+    )
 }
 
 fn execute_run_with_runtime(
@@ -560,7 +596,16 @@ fn execute_run_with_runtime(
         Err(cause) => return problem_response(request, definition, cause),
     };
     let body: DockRunRequestV1 = from_body(request)?;
+    execute_admitted_run(request, definition, admitted, body, context)
+}
 
+fn execute_admitted_run(
+    request: &OperationRequestV1,
+    definition: &OperationDefinition,
+    admitted: handbook_dock::DockAdmittedEvaluationRunV1,
+    body: DockRunRequestV1,
+    context: DockRunExecutionContextV1<'_>,
+) -> Result<OperationResponseV1, ContractError> {
     // The manifest, process inputs, limits, raw key, and executor are first
     // touched only after the exact current Contracts run is prepared and
     // independently re-admitted above.
@@ -622,6 +667,19 @@ fn execute_run_with_runtime(
         )?,
     };
     mutation_success_response(request, definition, scoped_key, replayed, &result)
+}
+
+fn production_bundle_problem(
+    kind: handbook_dock::DockProductionBundleErrorKindV1,
+) -> DockOperationProblemCauseV1 {
+    match kind {
+        handbook_dock::DockProductionBundleErrorKindV1::Unavailable => {
+            DockOperationProblemCauseV1::ManifestUnavailable
+        }
+        handbook_dock::DockProductionBundleErrorKindV1::LaunchRefused => {
+            DockOperationProblemCauseV1::LaunchRefused
+        }
+    }
 }
 
 fn prepare_current_run(

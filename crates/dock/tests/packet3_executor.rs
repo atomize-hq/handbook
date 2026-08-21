@@ -746,7 +746,6 @@ fn source_gates_prove_direct_launch_and_empty_production_registry() {
         "Command::new(\"sh\")",
         "Command::new(\"cmd\")",
         "powershell",
-        "current_exe",
         "PATH",
         "which::",
         "python",
@@ -757,5 +756,6 @@ fn source_gates_prove_direct_launch_and_empty_production_registry() {
             "forbidden source token {forbidden}"
         );
     }
-    assert_eq!(DockManifestRegistryV1::production().production_len(), 0);
+    assert!(source.contains("std::env::current_exe()"));
+    assert_eq!(DockManifestRegistryV1::production().production_len(), 1);
 }
