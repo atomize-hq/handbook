@@ -87,7 +87,14 @@ fn run_request(raw_key: &str) -> handbook_sdk::contract_membrane::OperationReque
         BoundedString::new("packet-five-tauri-run".to_owned()).unwrap(),
     );
     let body = DockRunRequestV1::new(
-        binding("handbook.dock.absent@1.0.0", 'a'),
+        ContractRecordBindingDtoV1::new(
+            "handbook.dock.json-schema@1.0.0",
+            Fingerprint::parse(
+                "sha256:85ca3e4482b2316c654ee117f1ee2e496647734a8e187e36ad5bcae09d6cd893",
+            )
+            .unwrap(),
+        )
+        .unwrap(),
         evaluation,
         BoundedVec::new(Vec::new()).unwrap(),
         BoundedVec::new(Vec::new()).unwrap(),
@@ -146,7 +153,7 @@ fn generic_tauri_facade_invokes_the_three_dock_operations_without_a_new_command(
             .as_array()
             .unwrap()
             .len(),
-        168
+        170
     );
 
     let catalog_request = CatalogReadRequestV1::new(
@@ -190,7 +197,16 @@ fn generic_tauri_facade_invokes_the_three_dock_operations_without_a_new_command(
         .unwrap(),
         dock_manifest_read_operation_request(
             Some("packet-five-tauri-read"),
-            DockManifestReadRequestV1::new(binding("handbook.dock.absent@1.0.0", 'a')),
+            DockManifestReadRequestV1::new(
+                ContractRecordBindingDtoV1::new(
+                    "handbook.dock.json-schema@1.0.0",
+                    Fingerprint::parse(
+                        "sha256:85ca3e4482b2316c654ee117f1ee2e496647734a8e187e36ad5bcae09d6cd893",
+                    )
+                    .unwrap(),
+                )
+                .unwrap(),
+            ),
         )
         .unwrap(),
         run_request(raw_key),
@@ -212,11 +228,25 @@ fn generic_tauri_facade_invokes_the_three_dock_operations_without_a_new_command(
         match operation_ref.as_str() {
             "dock.manifest.list@1.0.0" => {
                 assert_eq!(actual["response"]["status"], "ok");
-                assert_eq!(actual["response"]["data"]["entries"], json!([]));
+                assert_eq!(
+                    actual["response"]["data"]["entries"]
+                        .as_array()
+                        .unwrap()
+                        .len(),
+                    1
+                );
+                assert_eq!(
+                    actual["response"]["data"]["entries"][0]["manifest"]["ref"],
+                    "handbook.dock.json-schema@1.0.0"
+                );
             }
             "dock.manifest.read@1.0.0" => {
                 assert_eq!(actual["response"]["status"], "ok");
-                assert_eq!(actual["response"]["data"]["outcome"], "absent");
+                assert_eq!(actual["response"]["data"]["outcome"], "found");
+                assert_eq!(
+                    actual["response"]["data"]["manifest"]["document"]["dock_ref"],
+                    "handbook.dock.json-schema@1.0.0"
+                );
             }
             "dock.run@1.0.0" => {
                 assert_eq!(actual["response"]["status"], "refused");

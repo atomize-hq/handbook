@@ -111,7 +111,7 @@ fn generic_tauri_facade_invokes_all_five_evidence_operations_without_a_new_comma
             .as_array()
             .unwrap()
             .len(),
-        168
+        170
     );
 
     let catalog_request = CatalogReadRequestV1::new(

@@ -19,7 +19,7 @@ macro_rules! schema_asset {
 }
 
 const SCHEMA_MANIFEST_BYTES: &[u8] = include_bytes!("../../schemas/manifest.json");
-const SCHEMA_ASSETS: [(&str, &[u8]); 168] = [
+const SCHEMA_ASSETS: [(&str, &[u8]); 170] = [
     schema_asset!(
         "handbook.artifact-operation-details@1.0.0",
         "../../schemas/2020-12/handbook.artifact-operation-details/1.0.0.schema.json"
@@ -193,6 +193,10 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 168] = [
         "../../schemas/2020-12/handbook.dock-execution-record/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.dock-json-schema-validation-input@1.0.0",
+        "../../schemas/2020-12/handbook.dock-json-schema-validation-input/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.dock-manifest@1.0.0",
         "../../schemas/2020-12/handbook.dock-manifest/1.0.0.schema.json"
     ),
@@ -207,6 +211,10 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 168] = [
     schema_asset!(
         "handbook.dock-process-result@1.0.0",
         "../../schemas/2020-12/handbook.dock-process-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.fact.schema-conformance@1.0.0",
+        "../../schemas/2020-12/handbook.fact.schema-conformance/1.0.0.schema.json"
     ),
     schema_asset!(
         "handbook.flow-operation-details@1.0.0",
@@ -983,7 +991,7 @@ fn verify_schema_assets(
         &ContractLimits::packet0(),
     )
     .map_err(|_| ProductionWitnessError::StaleManifest)?;
-    if manifest.len() != 168 || assets.len() != 168 || manifest.len() != assets.len() {
+    if manifest.len() != 170 || assets.len() != 170 || manifest.len() != assets.len() {
         return Err(ProductionWitnessError::ManifestCountMismatch);
     }
     let mut seen = BTreeSet::new();
@@ -1290,7 +1298,7 @@ mod tests {
         let witness =
             ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
                 .unwrap();
-        assert_eq!(witness.schema_manifest().len(), 168);
+        assert_eq!(witness.schema_manifest().len(), 170);
         assert_eq!(witness.owner_versions().len(), 5);
         assert_eq!(witness.profiles().len(), 3);
         assert_eq!(witness.capabilities().len(), 31);

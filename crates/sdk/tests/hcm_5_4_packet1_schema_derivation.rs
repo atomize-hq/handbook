@@ -42,21 +42,13 @@ fn test_only_derivation_adds_exactly_two_independently_retrievable_roots() {
             .unwrap(),
     )
     .unwrap();
-    assert_eq!(checked_manifest.len(), 168);
-    let predecessor = checked_manifest
+    assert_eq!(checked_manifest.len(), 170);
+    let checked_refs = checked_manifest
         .iter()
         .map(|entry| entry["schema"]["ref"].as_str().unwrap().to_owned())
         .collect::<BTreeSet<_>>();
-    assert_eq!(predecessor.len(), 168);
-    assert!(predecessor
-        .iter()
-        .all(|reference| tree.contains_key(reference)));
-    let delta = tree
-        .keys()
-        .filter(|reference| !predecessor.contains(reference.as_str()))
-        .map(String::as_str)
-        .collect::<BTreeSet<_>>();
-    assert_eq!(delta, BTreeSet::from([VALIDATION_INPUT_REF, FACT_REF]));
+    assert_eq!(checked_refs.len(), 170);
+    assert_eq!(tree.keys().cloned().collect::<BTreeSet<_>>(), checked_refs);
 }
 
 #[test]

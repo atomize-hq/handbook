@@ -22,7 +22,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 168] = [
+const ROOTS: [(&str, &str); 170] = [
     (
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -656,6 +656,10 @@ const ROOTS: [(&str, &str); 168] = [
         "handbook.dock-execution-record/1.0.0.schema.json",
     ),
     (
+        "handbook.dock-json-schema-validation-input@1.0.0",
+        "handbook.dock-json-schema-validation-input/1.0.0.schema.json",
+    ),
+    (
         "handbook.dock-manifest@1.0.0",
         "handbook.dock-manifest/1.0.0.schema.json",
     ),
@@ -670,6 +674,10 @@ const ROOTS: [(&str, &str); 168] = [
     (
         "handbook.dock-process-result@1.0.0",
         "handbook.dock-process-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.fact.schema-conformance@1.0.0",
+        "handbook.fact.schema-conformance/1.0.0.schema.json",
     ),
     (
         "handbook.operation.dock-manifest-list-request@1.0.0",
@@ -791,7 +799,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 168);
+    assert_eq!(entries.len(), 170);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries

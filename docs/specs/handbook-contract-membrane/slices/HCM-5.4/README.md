@@ -13,20 +13,23 @@ publication, external adoption, parent promotion, posture mutation, or Phase 6.
 
 ## Current admission state
 
-**Packets 1–3 are complete. Packet 4's product source is present, but its
-checkpoint is invalid for further packet admission and is superseded by the
-mandatory Packet 4R remediation below. A fresh Packet 5 attempt stopped before
-retaining changes. HCM-5.4 remains active, not slice-closed, and Phase 5 is not
-exited.**
+**Packets 1–6 are implemented. Packet 4's invalid package checkpoint remains
+superseded by Packet 4R, Packet 5 proves the exact contract-owned semantic
+path, and Packet 6 finalizes the generic consumers and 170-root public truth.
+HCM-5.4 remains active pending aggregate closeout, is not slice-closed, and
+Phase 5 is not exited.**
 
 The completed checkpoints are Packet 1
 `a66862b267f5e6e72afaed39991bef5ff3d9e743`, Packet 2
 `9a620e064fb94e707c69349c586c47704de4e692`, and Packet 3
 `5097548ed4b1d5cb2f6e047228e69526de5a2001`. Packet 4 commit
 `583785aab141571e6231cf19016fe978cf2e1a65` added the one-entry production
-registry and ordinary run path, but its frozen same-target executable cannot be
-reproduced from an isolated clean build. Packet 5 therefore has no satisfied
-hard predecessor and may not be retried until Packet 4R completes.
+registry and ordinary run path, but its frozen same-target executable could not
+be reproduced from an isolated clean build. Packet 4R commit
+`00d82346db20418d8c51887023d8e825856cf5bc` supersedes that invalid package
+identity, and Packet 5 commit `cc45b11d67e2d3af8b192f64e346a55cce448369`
+proves the exact positive, negative, replay, currentness, Resolution, and
+non-authority paths through the re-frozen production validator.
 
 The hard predecessor is satisfied. HCM-5.3 is slice-closed at commit
 `5f3787706e383714c70978229e1c14dd767b26b6`. Its exact handoff fixes:
@@ -43,13 +46,12 @@ The hard predecessor is satisfied. HCM-5.3 is slice-closed at commit
   roots, and an empty production manifest registry.
 
 Product execution is admissible only from this amended authority in strict
-packet order. Current interim source truth is exactly 62 operation rows, 31
-capabilities, 168 checked-in schema roots, one embedded production manifest,
-and six fixed use cases. The Packet 1 generator can derive the two selected
-HCM-5.4 roots in test-only output, but their checked-in 170-root production
-closure remains Packet 6 work. The one embedded manifest is not an admissible
-package checkpoint until Packet 4R replaces its invalid frozen bytes and proves
-the exact repeated-build rule below.
+packet order. Current source truth is exactly 62 operation rows, 31
+capabilities, 170 checked-in schema roots, one embedded production manifest,
+and six fixed use cases. The deterministic production generator, exact-byte
+manifest, schema catalog, Rust SDK, generic CLI, and generic Tauri facade now
+include the two selected HCM-5.4 roots without a new route or semantic branch.
+Packet completion does not establish aggregate slice closeout or Phase-5 exit.
 
 ## Outcome, owner, and dependency direction
 

@@ -55,7 +55,7 @@ fn final_owner_to_sdk_and_generic_transport_proof_is_exact_and_fail_closed() {
     assert_eq!(definitions.len(), 4);
     assert_eq!(inventory.len(), 62);
     assert_eq!(witness.capabilities().len(), 31);
-    assert_eq!(witness.schema_manifest().len(), 168);
+    assert_eq!(witness.schema_manifest().len(), 170);
     for ((operation_ref, class), definition) in OPERATIONS.iter().zip(&definitions) {
         assert_eq!(definition.operation().as_str(), *operation_ref);
         assert_eq!(definition.class(), *class);

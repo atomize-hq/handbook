@@ -6831,6 +6831,7 @@ fn hcm_5_4_validation_input_schema() -> Schema {
             "instance",
         ],
     );
+    schema.insert("$schema".to_owned(), DIALECT.into());
     schema.insert(
         "$defs".to_owned(),
         json_schema!({
@@ -6906,6 +6907,7 @@ fn hcm_5_4_fact_schema() -> Schema {
             "violations",
         ],
     );
+    schema.insert("$schema".to_owned(), DIALECT.into());
     schema.insert(
         "$defs".to_owned(),
         json_schema!({
@@ -6984,20 +6986,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const HCM_5_4_PACKET_1_ROOTS: [SchemaDescriptor; 2] = [
-    exact_descriptor(
-        "handbook.dock-json-schema-validation-input@1.0.0",
-        "handbook.dock-json-schema-validation-input/1.0.0.schema.json",
-        hcm_5_4_validation_input_schema,
-    ),
-    exact_descriptor(
-        "handbook.fact.schema-conformance@1.0.0",
-        "handbook.fact.schema-conformance/1.0.0.schema.json",
-        hcm_5_4_fact_schema,
-    ),
-];
-
-const INVENTORY: [SchemaDescriptor; 168] = [
+const INVENTORY: [SchemaDescriptor; 170] = [
     descriptor::<ArtifactProblemDetailsV1>(
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -7174,6 +7163,11 @@ const INVENTORY: [SchemaDescriptor; 168] = [
         "handbook.dock-execution-record@1.0.0",
         "handbook.dock-execution-record/1.0.0.schema.json",
     ),
+    exact_descriptor(
+        "handbook.dock-json-schema-validation-input@1.0.0",
+        "handbook.dock-json-schema-validation-input/1.0.0.schema.json",
+        hcm_5_4_validation_input_schema,
+    ),
     descriptor::<DockManifestDtoV1>(
         "handbook.dock-manifest@1.0.0",
         "handbook.dock-manifest/1.0.0.schema.json",
@@ -7189,6 +7183,11 @@ const INVENTORY: [SchemaDescriptor; 168] = [
     descriptor::<DockProcessResultDtoV1>(
         "handbook.dock-process-result@1.0.0",
         "handbook.dock-process-result/1.0.0.schema.json",
+    ),
+    exact_descriptor(
+        "handbook.fact.schema-conformance@1.0.0",
+        "handbook.fact.schema-conformance/1.0.0.schema.json",
+        hcm_5_4_fact_schema,
     ),
     descriptor::<FlowProblemDetailsV1>(
         "handbook.flow-operation-details@1.0.0",
@@ -7898,8 +7897,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 168 {
-        return Err("schema inventory must contain exactly 168 entries".to_owned());
+    if INVENTORY.len() != 170 {
+        return Err("schema inventory must contain exactly 170 entries".to_owned());
     }
 
     let mut previous_ref = None;
@@ -7953,55 +7952,26 @@ fn generate_tree() -> Result<GeneratedTree, String> {
     Ok(GeneratedTree { schemas, manifest })
 }
 
-/// Derives the 168 predecessor roots plus only the two HCM-5.4 Packet 1 roots.
-///
-/// This additive surface exists for focused generation tests only. The normal
-/// generator, checked-in tree, production witness, operations, and capabilities
-/// remain at their HCM-5.3 values until their later authorized packet.
+/// Derives the current production schema tree keyed by exact ref for focused tests.
 #[doc(hidden)]
 pub fn derive_hcm_5_4_packet_1_schema_tree_for_test() -> Result<BTreeMap<String, Vec<u8>>, String> {
-    let predecessor = generate_tree()?;
+    let generated = generate_tree()?;
     let mut roots = BTreeMap::new();
     for descriptor in &INVENTORY {
-        let bytes = predecessor
+        let bytes = generated
             .schemas
             .get(descriptor.relative_path)
-            .ok_or_else(|| "predecessor schema tree is incomplete".to_owned())?
+            .ok_or_else(|| "generated schema tree is incomplete".to_owned())?
             .clone();
         if roots
             .insert(descriptor.exact_ref.to_owned(), bytes)
             .is_some()
         {
-            return Err("predecessor schema refs are duplicated".to_owned());
-        }
-    }
-
-    let limits = ContractLimits::packet0();
-    for descriptor in &HCM_5_4_PACKET_1_ROOTS {
-        let exact_ref = ExactRef::parse(descriptor.exact_ref)
-            .map_err(|_| "Packet 1 schema inventory contains an invalid exact ref".to_owned())?;
-        let identifier = format!(
-            "urn:handbook:schema:{}:{}",
-            exact_ref.identity(),
-            exact_ref.version()
-        );
-        let mut schema = (descriptor.generate)();
-        schema.insert("$schema".to_owned(), DIALECT.into());
-        schema.insert("$id".to_owned(), identifier.clone().into());
-        validate_schema(descriptor, &schema, &identifier)?;
-        let mut bytes = canonical_json_bytes(&schema, &limits)
-            .map_err(|_| "Packet 1 schema did not fit the canonical domain".to_owned())?;
-        bytes.push(b'\n');
-        validate_schema_bytes(&schema, &bytes, &limits)?;
-        if roots
-            .insert(descriptor.exact_ref.to_owned(), bytes)
-            .is_some()
-        {
-            return Err("Packet 1 schema root collides with a predecessor root".to_owned());
+            return Err("generated schema refs are duplicated".to_owned());
         }
     }
     if roots.len() != 170 {
-        return Err("Packet 1 test derivation must contain exactly 170 roots".to_owned());
+        return Err("current schema derivation must contain exactly 170 roots".to_owned());
     }
     Ok(roots)
 }

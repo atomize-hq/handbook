@@ -41,7 +41,7 @@ fn regeneration_manifest_and_production_catalogs_close_over_one_exact_set() {
         &ContractLimits::packet0(),
     )
     .unwrap();
-    assert_eq!(manifest.len(), 168);
+    assert_eq!(manifest.len(), 170);
 
     let mut refs = BTreeSet::new();
     let mut schema_paths = BTreeSet::new();

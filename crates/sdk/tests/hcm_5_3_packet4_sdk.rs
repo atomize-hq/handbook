@@ -301,7 +301,7 @@ fn production_witness_closes_the_exact_168_root_31_capability_inventory() {
     let witness =
         ProductionWitness::from_current(UtcTimestamp::parse("9999-12-31T23:59:59Z").unwrap())
             .unwrap();
-    assert_eq!(witness.schema_manifest().len(), 168);
+    assert_eq!(witness.schema_manifest().len(), 170);
     assert_eq!(witness.capabilities().len(), 31);
     assert!(witness
         .owner_versions()

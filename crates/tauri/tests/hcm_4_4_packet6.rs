@@ -90,7 +90,7 @@ fn integrated_facade_surface_closes_exact_commands_contracts_routes_and_omission
         .iter()
         .map(|entry| entry.schema().reference().as_str())
         .collect::<BTreeSet<_>>();
-    assert_eq!(manifest_refs.len(), 168);
+    assert_eq!(manifest_refs.len(), 170);
     assert_eq!(
         manifest_refs
             .intersection(&FACADE_ROOTS.into_iter().collect())

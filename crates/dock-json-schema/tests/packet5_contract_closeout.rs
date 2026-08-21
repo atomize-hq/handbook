@@ -375,7 +375,7 @@ fn packet5_preserves_the_exact_interim_public_inventory() {
             .unwrap();
     assert_eq!(operation_inventory().len(), 62);
     assert_eq!(witness.capabilities().len(), 31);
-    assert_eq!(witness.schema_manifest().len(), 168);
+    assert_eq!(witness.schema_manifest().len(), 170);
     assert_eq!(DockManifestRegistryV1::production().production_len(), 1);
 
     let fixed_use_cases = [

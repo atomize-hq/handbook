@@ -160,12 +160,12 @@ fn four_generic_actions_page_the_complete_unchanged_contract_surface() {
         1
     );
     let manifest = bootstrap["response"]["schema_manifest"].as_array().unwrap();
-    assert_eq!(manifest.len(), 168);
+    assert_eq!(manifest.len(), 170);
 
     let capabilities = complete_catalog(&root, "capabilities", 2);
     let schemas = complete_catalog(&root, "schemas", 17);
     assert_eq!(capabilities.len(), 31);
-    assert_eq!(schemas.len(), 168);
+    assert_eq!(schemas.len(), 170);
     let manifest_bindings = manifest
         .iter()
         .map(|entry| {
