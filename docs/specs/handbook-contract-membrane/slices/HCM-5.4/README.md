@@ -13,11 +13,11 @@ publication, external adoption, parent promotion, posture mutation, or Phase 6.
 
 ## Current admission state
 
-**Packets 1–6 are implemented. Packet 4's invalid package checkpoint remains
-superseded by Packet 4R, Packet 5 proves the exact contract-owned semantic
-path, and Packet 6 finalizes the generic consumers and 170-root public truth.
-HCM-5.4 remains active pending aggregate closeout, is not slice-closed, and
-Phase 5 is not exited.**
+**Packets 1–6 and the aggregate HCM-5.4 closeout are complete. Packet 4's
+invalid package checkpoint remains superseded by Packet 4R, Packet 5 proves
+the exact Contracts-owned semantic path, and Packet 6 finalizes the generic
+consumers and 170-root public truth. All 19 acceptance conditions are
+satisfied, HCM-5.4 is slice-closed, and Phase 5 is exited.**
 
 The completed checkpoints are Packet 1
 `a66862b267f5e6e72afaed39991bef5ff3d9e743`, Packet 2
@@ -51,7 +51,7 @@ capabilities, 170 checked-in schema roots, one embedded production manifest,
 and six fixed use cases. The deterministic production generator, exact-byte
 manifest, schema catalog, Rust SDK, generic CLI, and generic Tauri facade now
 include the two selected HCM-5.4 roots without a new route or semantic branch.
-Packet completion does not establish aggregate slice closeout or Phase-5 exit.
+The aggregate closeout and Phase-5 exit are recorded below.
 
 ## Outcome, owner, and dependency direction
 
@@ -287,10 +287,10 @@ canonical manifest byte streams.
 
 The crate version remains `0.1.0`; dock ref
 `handbook.dock.json-schema@1.0.0` and bundle ref
-`handbook.dock.bundle.json-schema-native@1.0.0` also remain exact. HCM-5.4 has
-not been released, published, externally adopted, or slice-closed, so this
-amendment may invalidate the development checkpoint and re-freeze its package
-without representing two released byte identities behind one semantic version.
+`handbook.dock.bundle.json-schema-native@1.0.0` also remain exact. HCM-5.4 had
+not been released, published, externally adopted, or slice-closed when Packet
+4R amended and re-froze the development checkpoint, so that amendment did not
+represent two released byte identities behind one semantic version.
 The old executable fingerprint
 `sha256:13b8f78780e540439c30c5e805111e1acce19895c4cce83b4d5563f77e5f09b9`,
 bundle fingerprint
@@ -899,12 +899,53 @@ phase-and-slice map to **Phase 5 exited** in the single aggregate closeout
 change. That exit does not authorize publication, a third-party dock, Phase 6,
 or an external-adoption claim.
 
+### Completed aggregate record
+
+The single aggregate closeout on 2026-08-21 rechecked all 19 conditions against
+the final integrated product and recorded `19 / 19` satisfied. The selected
+active contract drove the production Dock path through immutable
+Contracts-owned evidence, verdict, gate, and local closeout. Positive and
+negative fixtures reached exact `pass / passed / eligible` and
+`fail / blocked / blocked` truth, while every named failure boundary remained
+closed without a false candidate, canonical evidence record, or green result.
+
+The deterministic production identity remains executable length `9,548,800`,
+executable SHA-256
+`067d9d4386382ed1fc97f312336fc8a148bb135269679d4bb46c5058fe18d411`,
+bundle fingerprint
+`3f01d34d15a7c3bd7a1887c3dfd4e16f1aa317ea4e50046726026aafa4b1d74f`,
+and manifest fingerprint
+`85ca3e4482b2316c654ee117f1ee2e496647734a8e187e36ad5bcae09d6cd893`.
+Two isolated locked/offline builds reproduced the complete executable and
+staged-manifest bytes.
+
+Focused validator, Dock, Contracts, SDK, CLI, Tauri, package, schema,
+currentness, and failure-boundary verification passed. The exact integrated
+truth is `62 / 31 / 170 / 1` with six fixed use cases and unchanged generic
+consumers. Two predecessor count guards were corrected to the integrated tree:
+the non-`dock` root count is `158`, and the roots outside HCM-5.3's frozen
+11-root Dock list total `159`. The one aggregate P1–P4 causal review approved
+closeout with no P1 or P2 finding; predecessor-era test labels were advisory
+P4 wording only.
+
+The broader workspace test run exposed two unchanged, unrelated pipeline
+route-resolution proof-golden differences: both committed goldens retain
+`repo_root = ${repo_root}` while runtime normalization produces
+`repo_root = {{REPO_ROOT}}`. The focused reproduction fails only those two
+goldens, and their files have no HCM-5.4 diff. This limitation does not alter
+the passing HCM-5.4 causal surface or its closeout verdict.
+
+HCM-5.4 is slice-closed and **Phase 5 is exited**. This records repository
+truth only. It does not authorize publication, third-party Dock support,
+external adoption, hostile-code sandboxing, AppContainer or Job Objects,
+Windows-only public host behavior, stronger confinement, or Phase 6.
+
 ## Use and drift
 
-Use this document as the current HCM-5.4 outcome and packet authority. Source
-and tests remain product truth. During implementation, update current product,
-architecture, seam, roadmap, and navigation truth only when executable state
-actually changes.
+Use this document as the completed HCM-5.4 outcome, packet, slice-closeout, and
+Phase-5 exit authority. Source and tests remain product truth. Update current
+product, architecture, seam, roadmap, and navigation truth only when executable
+state actually changes under later explicit authority.
 
-Do not infer HCM-5.4 implementation, slice closeout, Phase-5 exit, publication,
-or Phase-6 authority from preparation of this document.
+Do not infer publication, external adoption, stronger confinement, or Phase-6
+authority from this closeout.

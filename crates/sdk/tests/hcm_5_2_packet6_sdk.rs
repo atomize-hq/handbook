@@ -141,7 +141,7 @@ fn packet_six_closes_exact_schema_and_capability_counts() {
     }
     assert_eq!(
         roots.iter().filter(|root| !root.contains("dock")).count(),
-        157
+        158
     );
 
     let capabilities = witness

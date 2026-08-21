@@ -178,7 +178,7 @@ fn generic_rust_sdk_consumes_all_three_rows_and_production_run_stops_before_spaw
             .iter()
             .filter(|entry| !dock_roots.contains(&entry.schema().reference().as_str()))
             .count(),
-        157
+        159
     );
     let fixed_use_cases = [
         "handbook.use-case.repository-setup@1.0.0",

@@ -148,12 +148,23 @@ records plus untrusted candidates.
 | [`HCM-5.1` — Contract lifecycle and claim model](slices/HCM-5.1/README.md) | Implemented checkpoint; slice closeout complete | The purpose-named `handbook-contracts` owner, definition/claim/applicability kernel, sealed Engine authority admission, lifecycle chain, durable repository use cases, active-after-independent-lock basis, exact four-operation outward SDK membrane, generic SDK/CLI/Tauri consumer proof, and final `4 / 62 / 23 / 135` integrated proof are current. All six packets, 16 acceptance conditions, aggregate verification/review, and the single slice closeout are complete. | Phase-4 exit, satisfied |
 | [`HCM-5.2` — Evidence, verdict, and gate engine](slices/HCM-5.2/README.md) | Implemented checkpoint; slice closeout complete | `handbook-contracts` owns protocol-neutral untrusted-candidate admission, immutable-all canonical evidence, closed verdict/accounting/currentness/freshness/Resolution semantics, exact gate/score composition, and a sibling local-closeout result while parent promotion remains later. Packets 1–5 establish the canonical identity/policy/run kernel, sealed exact read-only candidate-source normalization, retained-root durable canonical-evidence repository, pure closed claim-verdict evaluation, and gate/local-closeout composition. Packet 6 maps the five exact owner use cases through the SDK and closes the current `62 / 28 / 157` inventory, capability, and schema truth without an adapter-specific route. Packet 7 proves all five through the Rust SDK and unchanged generic CLI/Tauri consumers plus the integrated failure, secrecy, source-gate, and deterministic-count boundary. All 17 acceptance conditions, aggregate verification/review, and the single slice closeout are complete. | HCM-5.1 slice closeout, satisfied |
 | [`HCM-5.3` — Process dock protocol](slices/HCM-5.3/README.md) | Implemented checkpoint; slice closeout complete | The language-neutral one-shot bounded JSON process contract, purpose-named first-party Rust dock owner/executor, exact native bundle/launch identity, direct no-shell execution, evidence-matched portable controls, completed-only candidate handoff, three reserved operations, 11 new schema roots, and unchanged generic Rust SDK/CLI/Tauri consumers are current at exact `62 / 31 / 168` truth. Production manifest inventory remains exactly empty at that checkpoint. All five packets, all 16 acceptance conditions, aggregate verification/review, and the single HCM-5.3 closeout are complete. Current HCM-5.4 authority is recorded separately below. | HCM-5.2 slice closeout, satisfied |
-| [`HCM-5.4` — First real validator dock proof](slices/HCM-5.4/README.md) | Active; Packets 1–6 implemented; aggregate closeout pending | The selected `handbook.dock.json-schema@1.0.0` native-Rust validator uses the pinned offline Draft 2020-12 local closure, one reproducibly re-frozen current-target package, and the existing ordinary Dock/Contracts path. Packet 5 proves positive `pass / passed / eligible` and negative `fail / blocked / blocked` results without moving semantic authority; Packet 6 finalizes the two checked-in roots and unchanged generic SDK/CLI/Tauri consumers at exact `62 / 31 / 170 / 1` truth with six fixed use cases. HCM-5.4 closeout and Phase-5 exit remain incomplete pending the separate aggregate verification/review task. | HCM-5.3 slice closeout, satisfied; Packet 4R and Packet 5 satisfied for Packet 6 |
+| [`HCM-5.4` — First real validator dock proof](slices/HCM-5.4/README.md) | Implemented checkpoint; slice closeout complete | The selected `handbook.dock.json-schema@1.0.0` native-Rust validator uses the pinned offline Draft 2020-12 local closure, one reproducibly re-frozen current-target package, and the existing ordinary Dock/Contracts path. Packet 5 proves positive `pass / passed / eligible` and negative `fail / blocked / blocked` results without moving semantic authority; Packet 6 finalizes the two checked-in roots and unchanged generic SDK/CLI/Tauri consumers at exact `62 / 31 / 170 / 1` truth with six fixed use cases. All 19 acceptance conditions, aggregate verification/review, and the single slice closeout are complete. | HCM-5.3 slice closeout, satisfied |
 
 Phase 5 may exit only when an exact active contract drives a real selected-dock
 path through admitted evidence, verdict, and gate; missing, stale, malformed,
-substituted, under-resolved, timed-out, or cleanup-uncertain inputs fail closed;
-and the ordinary contract/dock use cases exist behind SDK types.
+substituted, under-resolved, timed-out, cancelled, failed, protocol-invalid,
+cleanup-uncertain, or durability-uncertain inputs fail closed; and the ordinary
+contract/dock use cases exist behind SDK types.
+
+### Phase-5 exit state
+
+**Phase 5 is exited.** One exact active contract drove the selected production
+Dock path; completed candidates crossed immutable Contracts-owned evidence,
+verdict, gate, and local closeout without moving semantic authority; all named
+failure classes failed closed; and ordinary contract/Dock use remains behind
+SDK types and unchanged generic consumers at exact `62 / 31 / 170 / 1` truth
+with six fixed use cases. This exit does not authorize publication, third-party
+Dock support, external adoption, stronger confinement, or later-phase work.
 
 ## Phase 6 — consumer adoption
 
