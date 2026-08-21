@@ -3,6 +3,7 @@ members = [
     "crates/cli",
     "crates/contracts",
     "crates/dock",
+    "crates/dock-json-schema",
     "crates/engine",
     "crates/pipeline",
     "crates/flow",

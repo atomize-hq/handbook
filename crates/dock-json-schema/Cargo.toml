@@ -1,0 +1,19 @@
+[package]
+name = "handbook-dock-json-schema"
+version = "0.1.0"
+edition = "2021"
+description = "Closed offline JSON Schema validator input and fact kernel for Handbook docks."
+repository = "https://github.com/atomize-hq/system.git"
+documentation = "https://docs.rs/handbook-dock-json-schema"
+homepage = "https://github.com/atomize-hq/system.git"
+license = "MIT"
+
+[lib]
+name = "handbook_dock_json_schema"
+path = "src/lib.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_json_canonicalizer = "0.3.2"
+sha2 = "0.10"

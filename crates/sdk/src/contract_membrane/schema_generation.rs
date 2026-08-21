@@ -6752,6 +6752,230 @@ impl_schema!(PipelineRecheckV1, "PipelineRecheckV1", |generator| {
     )
 });
 
+fn hcm_5_4_fingerprint_schema() -> Schema {
+    json_schema!({
+        "type": "string",
+        "minLength": 71,
+        "maxLength": 71,
+        "pattern": FINGERPRINT_PATTERN
+    })
+}
+
+fn hcm_5_4_logical_schema_path() -> Schema {
+    json_schema!({
+        "type": "string",
+        "minLength": 21,
+        "maxLength": 1024,
+        "allOf": [
+            {"pattern": "^definitions/schemas/[^/]+(/[^/]+){0,61}$"},
+            {"not": {"pattern": "(^|/)(\\.|\\.\\.)(/|$)"}},
+            {"not": {"pattern": "[\\\\:\\u0000-\\u001F\\u007F<>\"|?*]"}}
+        ]
+    })
+}
+
+fn hcm_5_4_exact_schema_binding() -> Schema {
+    closed_object(
+        vec![
+            (
+                "ref",
+                json_schema!({
+                    "type": "string",
+                    "minLength": 7,
+                    "maxLength": 511,
+                    "pattern": EXACT_REF_PATTERN
+                }),
+            ),
+            ("fingerprint", json_schema!({"$ref": "#/$defs/fingerprint"})),
+        ],
+        &["ref", "fingerprint"],
+    )
+}
+
+fn hcm_5_4_validation_input_schema() -> Schema {
+    let mut schema = closed_object(
+        vec![
+            (
+                "root_schema",
+                json_schema!({"$ref": "#/$defs/exact_schema_binding"}),
+            ),
+            (
+                "root_document",
+                json_schema!({"$ref": "#/$defs/logical_schema_path"}),
+            ),
+            (
+                "root_document_fingerprint",
+                json_schema!({"$ref": "#/$defs/fingerprint"}),
+            ),
+            (
+                "closure_fingerprint",
+                json_schema!({"$ref": "#/$defs/fingerprint"}),
+            ),
+            (
+                "documents",
+                json_schema!({
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 128,
+                    "items": {"$ref": "#/$defs/closure_member"}
+                }),
+            ),
+            ("instance", json_schema!({"$ref": "#/$defs/instance"})),
+        ],
+        &[
+            "root_schema",
+            "root_document",
+            "root_document_fingerprint",
+            "closure_fingerprint",
+            "documents",
+            "instance",
+        ],
+    );
+    schema.insert(
+        "$defs".to_owned(),
+        json_schema!({
+            "fingerprint": hcm_5_4_fingerprint_schema(),
+            "logical_schema_path": hcm_5_4_logical_schema_path(),
+            "exact_schema_binding": hcm_5_4_exact_schema_binding(),
+            "closure_member": closed_object(
+                vec![
+                    ("path", json_schema!({"$ref": "#/$defs/logical_schema_path"})),
+                    ("schema", Schema::from(true)),
+                    ("document_fingerprint", json_schema!({"$ref": "#/$defs/fingerprint"})),
+                ],
+                &["path", "schema", "document_fingerprint"],
+            ),
+            "instance": closed_object(
+                vec![
+                    ("value", Schema::from(true)),
+                    ("instance_fingerprint", json_schema!({"$ref": "#/$defs/fingerprint"})),
+                ],
+                &["value", "instance_fingerprint"],
+            ),
+        })
+        .into(),
+    );
+    schema
+}
+
+fn hcm_5_4_fact_schema() -> Schema {
+    let mut schema = closed_object(
+        vec![
+            (
+                "root_schema",
+                json_schema!({"$ref": "#/$defs/exact_schema_binding"}),
+            ),
+            (
+                "root_document",
+                json_schema!({"$ref": "#/$defs/logical_schema_path"}),
+            ),
+            (
+                "root_document_fingerprint",
+                json_schema!({"$ref": "#/$defs/fingerprint"}),
+            ),
+            (
+                "closure_fingerprint",
+                json_schema!({"$ref": "#/$defs/fingerprint"}),
+            ),
+            (
+                "instance_fingerprint",
+                json_schema!({"$ref": "#/$defs/fingerprint"}),
+            ),
+            (
+                "closure_document_count",
+                json_schema!({"type": "integer", "minimum": 1, "maximum": 128}),
+            ),
+            ("conformance", string_enum(&["conformant", "nonconformant"])),
+            (
+                "violations",
+                json_schema!({
+                    "type": "array",
+                    "maxItems": 128,
+                    "items": {"$ref": "#/$defs/violation"}
+                }),
+            ),
+        ],
+        &[
+            "root_schema",
+            "root_document",
+            "root_document_fingerprint",
+            "closure_fingerprint",
+            "instance_fingerprint",
+            "closure_document_count",
+            "conformance",
+            "violations",
+        ],
+    );
+    schema.insert(
+        "$defs".to_owned(),
+        json_schema!({
+            "fingerprint": hcm_5_4_fingerprint_schema(),
+            "logical_schema_path": hcm_5_4_logical_schema_path(),
+            "exact_schema_binding": hcm_5_4_exact_schema_binding(),
+            "json_pointer": {
+                "type": "string",
+                "maxLength": 1024,
+                "pattern": "^(|/([^~]|~[01])*)$"
+            },
+            "violation_code": string_enum(&[
+                "additional_items",
+                "additional_properties",
+                "any_of",
+                "const",
+                "contains",
+                "enum",
+                "exclusive_maximum",
+                "exclusive_minimum",
+                "false_schema",
+                "format",
+                "max_items",
+                "maximum",
+                "max_length",
+                "max_properties",
+                "min_items",
+                "minimum",
+                "min_length",
+                "min_properties",
+                "multiple_of",
+                "not",
+                "one_of_multiple_valid",
+                "one_of_not_valid",
+                "pattern",
+                "property_names",
+                "required",
+                "type",
+                "unevaluated_items",
+                "unevaluated_properties",
+                "unique_items",
+            ]),
+            "violation": closed_object(
+                vec![
+                    ("code", json_schema!({"$ref": "#/$defs/violation_code"})),
+                    ("instance_pointer", json_schema!({"$ref": "#/$defs/json_pointer"})),
+                    ("schema_document", json_schema!({"$ref": "#/$defs/logical_schema_path"})),
+                    ("schema_pointer", json_schema!({"$ref": "#/$defs/json_pointer"})),
+                ],
+                &["code", "instance_pointer", "schema_document", "schema_pointer"],
+            ),
+        })
+        .into(),
+    );
+    schema.insert(
+        "allOf".to_owned(),
+        serde_json::json!([
+            {
+                "if": {"properties": {"conformance": {"const": "conformant"}}},
+                "then": {"properties": {"violations": {"maxItems": 0}}}
+            },
+            {
+                "if": {"properties": {"conformance": {"const": "nonconformant"}}},
+                "then": {"properties": {"violations": {"minItems": 1, "maxItems": 128}}}
+            }
+        ]),
+    );
+    schema
+}
+
 const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
 
 struct SchemaDescriptor {
@@ -6759,6 +6983,19 @@ struct SchemaDescriptor {
     relative_path: &'static str,
     generate: fn() -> Schema,
 }
+
+const HCM_5_4_PACKET_1_ROOTS: [SchemaDescriptor; 2] = [
+    exact_descriptor(
+        "handbook.dock-json-schema-validation-input@1.0.0",
+        "handbook.dock-json-schema-validation-input/1.0.0.schema.json",
+        hcm_5_4_validation_input_schema,
+    ),
+    exact_descriptor(
+        "handbook.fact.schema-conformance@1.0.0",
+        "handbook.fact.schema-conformance/1.0.0.schema.json",
+        hcm_5_4_fact_schema,
+    ),
+];
 
 const INVENTORY: [SchemaDescriptor; 168] = [
     descriptor::<ArtifactProblemDetailsV1>(
@@ -7714,6 +7951,59 @@ fn generate_tree() -> Result<GeneratedTree, String> {
     manifest.push(b'\n');
 
     Ok(GeneratedTree { schemas, manifest })
+}
+
+/// Derives the 168 predecessor roots plus only the two HCM-5.4 Packet 1 roots.
+///
+/// This additive surface exists for focused generation tests only. The normal
+/// generator, checked-in tree, production witness, operations, and capabilities
+/// remain at their HCM-5.3 values until their later authorized packet.
+#[doc(hidden)]
+pub fn derive_hcm_5_4_packet_1_schema_tree_for_test() -> Result<BTreeMap<String, Vec<u8>>, String> {
+    let predecessor = generate_tree()?;
+    let mut roots = BTreeMap::new();
+    for descriptor in &INVENTORY {
+        let bytes = predecessor
+            .schemas
+            .get(descriptor.relative_path)
+            .ok_or_else(|| "predecessor schema tree is incomplete".to_owned())?
+            .clone();
+        if roots
+            .insert(descriptor.exact_ref.to_owned(), bytes)
+            .is_some()
+        {
+            return Err("predecessor schema refs are duplicated".to_owned());
+        }
+    }
+
+    let limits = ContractLimits::packet0();
+    for descriptor in &HCM_5_4_PACKET_1_ROOTS {
+        let exact_ref = ExactRef::parse(descriptor.exact_ref)
+            .map_err(|_| "Packet 1 schema inventory contains an invalid exact ref".to_owned())?;
+        let identifier = format!(
+            "urn:handbook:schema:{}:{}",
+            exact_ref.identity(),
+            exact_ref.version()
+        );
+        let mut schema = (descriptor.generate)();
+        schema.insert("$schema".to_owned(), DIALECT.into());
+        schema.insert("$id".to_owned(), identifier.clone().into());
+        validate_schema(descriptor, &schema, &identifier)?;
+        let mut bytes = canonical_json_bytes(&schema, &limits)
+            .map_err(|_| "Packet 1 schema did not fit the canonical domain".to_owned())?;
+        bytes.push(b'\n');
+        validate_schema_bytes(&schema, &bytes, &limits)?;
+        if roots
+            .insert(descriptor.exact_ref.to_owned(), bytes)
+            .is_some()
+        {
+            return Err("Packet 1 schema root collides with a predecessor root".to_owned());
+        }
+    }
+    if roots.len() != 170 {
+        return Err("Packet 1 test derivation must contain exactly 170 roots".to_owned());
+    }
+    Ok(roots)
 }
 
 fn validate_schema(
