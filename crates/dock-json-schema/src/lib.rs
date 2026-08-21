@@ -1,18 +1,20 @@
 //! Closed input and fact kernel for the native offline JSON Schema validator.
 //!
 //! This crate deliberately has no Handbook product-crate dependency. It owns
-//! only structural admission, canonical RFC-8785/SHA-256 bindings, and the
-//! normalized observation vocabulary. Evaluation and process framing are
-//! separate packets.
+//! only structural admission, canonical RFC-8785/SHA-256 bindings, exact
+//! offline Draft 2020-12 evaluation, and the normalized observation
+//! vocabulary. Process framing is a separate packet.
 
 mod bounds;
 mod canonical;
+mod evaluator;
 mod fact;
 mod identity;
 mod input;
 mod refusal;
 
 pub use bounds::ValidatorLimitsV1;
+pub use evaluator::evaluate_json_schema_v1;
 pub use fact::{ConformanceV1, NormalizedViolationV1, SchemaConformanceFactV1, ViolationCodeV1};
 pub use identity::{CanonicalFingerprintV1, ExactSchemaBindingV1, LogicalSchemaPathV1};
 pub use input::{JsonInstanceV1, JsonSchemaValidationInputV1, SchemaClosureMemberV1};

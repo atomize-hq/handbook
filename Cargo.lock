@@ -1360,6 +1360,7 @@ dependencies = [
 name = "handbook-dock-json-schema"
 version = "0.1.0"
 dependencies = [
+ "jsonschema",
  "serde",
  "serde_json",
  "serde_json_canonicalizer",
