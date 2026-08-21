@@ -46,8 +46,15 @@ At this checkpoint:
   and 11-root closure, strict Packets 1–5, and the native-Rust HCM-5.4 validator
   handoff; Packets 1–5 now implement and integrate that boundary at exact
   `62 / 31 / 168` product truth with an empty production manifest registry.
-  Aggregate HCM-5.3 verification/review and its single slice closeout remain a
-  separate meta-task decision; HCM-5.4 is unprepared and unimplemented;
+  Aggregate HCM-5.3 verification/review and its single slice closeout are
+  complete;
+- the bounded [`HCM-5.4 slice authority`](slices/HCM-5.4/README.md) fixes the
+  native-Rust `handbook.dock.json-schema@1.0.0` validator, exact two-root schema
+  delta, one-entry current-target production manifest/bundle packaging, closed
+  offline Draft 2020-12 observation/refusal contract, strict Packets 1–6, and
+  the real Contracts-owned evidence/verdict/gate/local-closeout proof. The
+  authority is prepared; no HCM-5.4 product packet is implemented or
+  dispatched, and Phase 5 is not exited;
 - the former orchestration skill under `.codex/skills/.disabled/` is inactive and is not authority for new work; and
 - the active thin router is routing guidance only and is not authority for product or slice work.
 
@@ -78,7 +85,8 @@ Use the source that owns the question:
 | What is the completed HCM-4.5 outcome and packet boundary? | [`slices/HCM-4.5/README.md`](slices/HCM-4.5/README.md) records the capability-driven installed skill, generic discovery/schema/invocation consumer seam, strict Packets 1–6, corrected truthful future-uptake proof, and the single aggregate slice closeout. |
 | What is the completed HCM-5.1 outcome and packet boundary? | [`slices/HCM-5.1/README.md`](slices/HCM-5.1/README.md) selects `handbook-contracts` as the inward semantic owner, fixes exact definition/claim/lifecycle and outward SDK boundaries, defines strict Packets 1–6, and records their implementation plus aggregate verification/review and the single slice closeout. |
 | What is the completed HCM-5.2 outcome and packet boundary? | [`slices/HCM-5.2/README.md`](slices/HCM-5.2/README.md) fixes canonical evidence admission, closed verdict/accounting/freshness/gate semantics, separate local closeout, the parent-promotion boundary, exact five-operation outward closure, and strict Packets 1–7. All seven packets implement the owner-native identity/policy kernel, read-only run preparation, sealed exact candidate-source normalization, retained-root immutable-all canonical-evidence persistence, pure verdict/gate/local-closeout composition, five-operation SDK/schema/witness closure, and generic SDK/CLI/Tauri proof at `62 / 28 / 157`; all 17 acceptance conditions, aggregate verification/review, and the single slice closeout are complete. |
-| What is the current HCM-5.3 outcome and packet boundary? | [`slices/HCM-5.3/README.md`](slices/HCM-5.3/README.md) selects the operational dock owner, versioned language-neutral process JSON, portable first-party Rust executor boundary, completed-only candidate handoff, exact three-operation/11-root closure, strict Packets 1–5, and the fixed native-Rust JSON Schema validator handoff. All five packets, all 16 acceptance conditions, aggregate verification/review, and the single slice closeout are complete at exact `62 / 31 / 168` product truth; the production manifest registry remains empty. HCM-5.4 is not prepared or implemented. |
+| What is the completed HCM-5.3 outcome and packet boundary? | [`slices/HCM-5.3/README.md`](slices/HCM-5.3/README.md) selects the operational dock owner, versioned language-neutral process JSON, portable first-party Rust executor boundary, completed-only candidate handoff, exact three-operation/11-root closure, strict Packets 1–5, and the fixed native-Rust JSON Schema validator handoff. All five packets, all 16 acceptance conditions, aggregate verification/review, and the single slice closeout are complete at exact `62 / 31 / 168` product truth; the production manifest registry remains empty at that checkpoint. Current HCM-5.4 authority is separate below. |
+| What is the current HCM-5.4 outcome and packet boundary? | [`slices/HCM-5.4/README.md`](slices/HCM-5.4/README.md) fixes the first production native-Rust JSON Schema validator, exact offline local-closure/fingerprint/observation/refusal semantics, one current-target manifest/bundle, two new schema roots with no operation or capability increase, the exact contract-to-local-closeout proof, strict Packets 1–6, aggregate closeout, and Phase-5 exit evidence. Its authority is prepared; product implementation and Packet 1 dispatch have not begun. |
 | Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. A roadmap entry plus an explicit execution request may authorize bounded preparation of that document, but product execution begins only after the resulting current slice authority is ready. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 
