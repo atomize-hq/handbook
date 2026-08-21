@@ -41,7 +41,7 @@ fn regeneration_manifest_and_production_catalogs_close_over_one_exact_set() {
         &ContractLimits::packet0(),
     )
     .unwrap();
-    assert_eq!(manifest.len(), 157);
+    assert_eq!(manifest.len(), 168);
 
     let mut refs = BTreeSet::new();
     let mut schema_paths = BTreeSet::new();
@@ -87,10 +87,10 @@ fn regeneration_manifest_and_production_catalogs_close_over_one_exact_set() {
     );
     assert_eq!(
         witness.catalog_roots().operations().total_entries().get(),
-        28
+        31
     );
     assert_eq!(witness.catalog_roots().profiles().total_entries().get(), 3);
-    assert_eq!(witness.capabilities().len(), 28);
+    assert_eq!(witness.capabilities().len(), 31);
     let posture = witness
         .capabilities()
         .iter()
@@ -265,12 +265,19 @@ fn owner_native_evidence_inventory_and_adapter_direction_remain_independent() {
     let flow = handbook_flow::operation_admission::operation_owner_version_evidence();
     let pipeline = handbook_pipeline::operation_admission::operation_owner_version_evidence();
     let contracts = handbook_contracts::operation_admission::operation_owner_version_evidence();
+    let dock = handbook_dock::operation_admission::operation_owner_version_evidence();
     let expected = [
         (
             contracts.owner_crate,
             contracts.owner_version,
             contracts.owner_source_ref,
             contracts.source_bytes,
+        ),
+        (
+            dock.owner_crate,
+            dock.owner_version,
+            dock.owner_source_ref,
+            dock.source_bytes,
         ),
         (
             engine.owner_crate,
@@ -325,7 +332,7 @@ fn owner_native_evidence_inventory_and_adapter_direction_remain_independent() {
         .iter()
         .filter(|row| row.admission_reason() == AdmissionReason::Admitted)
         .collect::<Vec<_>>();
-    assert_eq!(admitted.len(), 28);
+    assert_eq!(admitted.len(), 31);
     let cli_json = [
         "artifact.kind.list@1.0.0",
         "artifact.instance.list@1.0.0",
@@ -348,7 +355,9 @@ fn owner_native_evidence_inventory_and_adapter_direction_remain_independent() {
     ];
     assert!(admitted.iter().all(|row| {
         row.discovery() == DiscoveryState::Discoverable
-            && if row.operation_ref().as_str().starts_with("contract.") {
+            && if row.operation_ref().as_str().starts_with("contract.")
+                || row.operation_ref().as_str().starts_with("dock.")
+            {
                 row.current_transports()
                     == [
                         OperationTransport::CliJson,

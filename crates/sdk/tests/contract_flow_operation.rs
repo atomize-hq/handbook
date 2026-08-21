@@ -32,7 +32,7 @@ fn flow_resolve_definition_is_exact_independently_admitted_and_the_only_new_row(
             .iter()
             .filter(|row| row.admission_reason() == AdmissionReason::Admitted)
             .count(),
-        28
+        31
     );
 
     let witness =

@@ -49,7 +49,7 @@ fn consumer_closes_bootstrap_catalog_schema_and_read_only_invocation() {
     let BootstrapFacadeResponseBodyV1::Ok(response) = bootstrap.response() else {
         panic!("current bootstrap was refused");
     };
-    assert_eq!(response.first_capability_page().entries().len(), 28);
+    assert_eq!(response.first_capability_page().entries().len(), 31);
 
     let catalog = consumer
         .catalog_read(

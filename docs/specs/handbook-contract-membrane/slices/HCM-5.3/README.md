@@ -7,11 +7,11 @@ HCM-5.4 JSON Schema validator without moving contract, evidence, verdict, gate,
 lifecycle, closeout, or promotion truth out of `handbook-contracts`.
 
 It does not authorize the JSON Schema validator, a production dock manifest or
-bundle, a product contract, another Phase-5 slice, or aggregate closeout.
+bundle, a product contract, or another Phase-5 slice.
 
 ## Current admission state
 
-**Packets 1–5 are implemented; aggregate HCM-5.3 closeout remains pending.**
+**Packets 1–5 and the aggregate HCM-5.3 closeout are complete.**
 
 The hard predecessors are satisfied. The completed
 [`HCM-5.1`](../HCM-5.1/README.md) and
@@ -25,8 +25,8 @@ exact three Dock capabilities and 11 roots for current `62 / 31 / 168` truth.
 Production manifest inventory remains exactly empty; process completion proof
 uses test-only native helpers.
 
-The five packet commits return to the meta task. Only that task may run the
-aggregate acceptance audit, verification/review, and single slice closeout.
+The five packet commits returned to the meta task, which completed the aggregate
+acceptance audit, verification/review, and single slice closeout recorded below.
 HCM-5.4 authority is not prepared, and its validator is not implemented.
 
 ## Outcome and ownership
@@ -528,6 +528,28 @@ Only then may the meta task record one HCM-5.3 slice closeout and separately
 admit HCM-5.4 authority preparation. HCM-5.3 closeout does not install a
 validator, create canonical evidence, prove a real gate, or exit Phase 5.
 
+## Slice closeout
+
+HCM-5.3 closed on 2026-08-20 after all 16 acceptance conditions were rechecked
+against the integrated Packet-5 product. The aggregate verification reran the
+cross-packet owner, replay/currentness, process/store, schema/count, generic
+consumer, dependency/source/security, portability, documentation-link, and
+workspace gates. Stable outward replay identity and receipt projection preserve
+the original execution and evaluation-run receipt while Contracts prepares the
+current run before body, manifest, or spawn access. Only completed, clean,
+durably recorded runs expose candidates; Contracts remains the sole semantic
+authority; and the production manifest registry remains exactly empty.
+
+The single focused aggregate P1–P4 review found one P2 currentness defect:
+predecessor integration guards still asserted pre-HCM-5.3 capability and schema
+totals. The test-only repair updated those exact aggregate guards to current
+`62 / 31 / 168` truth and included the three Dock operations in generic
+transport expectations. Focused reruns and the required delta review found no
+remaining P1 or P2. No production behavior, operation, schema, dependency,
+manifest, or capability was added by closeout.
+
+This closeout does not prepare or implement HCM-5.4 and is not Phase-5 exit.
+
 ## Exact HCM-5.4 handoff
 
 HCM-5.4 receives, without reopening selection:
@@ -562,10 +584,10 @@ This document selects the handoff only.
 Use this document as the current HCM-5.3 outcome and packet authority. Source
 and tests remain product truth. Packets 1–5 establish exact current counts of
 62 / 31 / 168 while the production dock registry remains exactly empty. The
-aggregate HCM-5.3 acceptance audit and slice closeout remain pending; HCM-5.4
-is unprepared and unimplemented. If later authorized implementation changes an
-admitted surface, update the current document that owns that truth in the same
-bounded change.
+aggregate HCM-5.3 acceptance audit and single slice closeout are complete;
+HCM-5.4 is unprepared and unimplemented. If later authorized implementation
+changes an admitted surface, update the current document that owns that truth
+in the same bounded change.
 
-Do not use packet implementation to infer aggregate HCM-5.3 closeout, validator
-implementation, HCM-5.4 authority, or Phase-5 completion.
+Do not use HCM-5.3 closeout to infer validator implementation, HCM-5.4
+authority, or Phase-5 completion.

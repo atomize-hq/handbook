@@ -30,8 +30,8 @@ fn final_generic_sdk_proof_preserves_five_operations_and_exact_counts() {
         ProductionWitness::from_current(UtcTimestamp::parse("9999-12-31T23:59:59Z").unwrap())
             .unwrap();
     assert_eq!(operation_inventory().len(), 62);
-    assert_eq!(witness.capabilities().len(), 28);
-    assert_eq!(witness.schema_manifest().len(), 157);
+    assert_eq!(witness.capabilities().len(), 31);
+    assert_eq!(witness.schema_manifest().len(), 168);
     assert_eq!(
         witness
             .schema_manifest()
@@ -39,7 +39,7 @@ fn final_generic_sdk_proof_preserves_five_operations_and_exact_counts() {
             .map(|entry| entry.schema().reference().as_str())
             .collect::<BTreeSet<_>>()
             .len(),
-        157
+        168
     );
 
     let consumer = CapabilityConsumer::open(repo.path()).unwrap();
@@ -53,7 +53,7 @@ fn final_generic_sdk_proof_preserves_five_operations_and_exact_counts() {
     let CatalogReadResponseBodyV1::CapabilityPage(page) = catalog.response() else {
         panic!("capability catalog returned a non-capability page");
     };
-    assert_eq!(page.root().total_entries().get(), 28);
+    assert_eq!(page.root().total_entries().get(), 31);
     let capabilities = page
         .entries()
         .iter()

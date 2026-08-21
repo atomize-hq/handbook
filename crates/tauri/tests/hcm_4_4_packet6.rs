@@ -26,7 +26,7 @@ const FACADE_ROOTS: [&str; 5] = [
     "handbook.use-case-request@1.0.0",
 ];
 
-const OPERATIONS: [&str; 28] = [
+const OPERATIONS: [&str; 31] = [
     "artifact.kind.list@1.0.0",
     "artifact.instance.list@1.0.0",
     "artifact.read@1.0.0",
@@ -55,6 +55,9 @@ const OPERATIONS: [&str; 28] = [
     "contract.evidence.append@1.0.0",
     "contract.verdict.evaluate@1.0.0",
     "contract.gate.evaluate@1.0.0",
+    "dock.manifest.list@1.0.0",
+    "dock.manifest.read@1.0.0",
+    "dock.run@1.0.0",
 ];
 
 const USE_CASES: [&str; 6] = [
@@ -87,7 +90,7 @@ fn integrated_facade_surface_closes_exact_commands_contracts_routes_and_omission
         .iter()
         .map(|entry| entry.schema().reference().as_str())
         .collect::<BTreeSet<_>>();
-    assert_eq!(manifest_refs.len(), 157);
+    assert_eq!(manifest_refs.len(), 168);
     assert_eq!(
         manifest_refs
             .intersection(&FACADE_ROOTS.into_iter().collect())
@@ -124,7 +127,9 @@ fn integrated_facade_surface_closes_exact_commands_contracts_routes_and_omission
 
     for row in rows {
         let operation_ref = row.operation_ref().as_str();
-        if expected_operations.contains(operation_ref) && operation_ref.starts_with("contract.") {
+        if expected_operations.contains(operation_ref)
+            && (operation_ref.starts_with("contract.") || operation_ref.starts_with("dock."))
+        {
             assert_eq!(
                 row.current_transports(),
                 &[
@@ -154,7 +159,7 @@ fn integrated_facade_surface_closes_exact_commands_contracts_routes_and_omission
         rows.iter()
             .filter(|row| row.current_transports().is_empty())
             .count(),
-        34
+        31
     );
 
     let limits = ContractLimits::packet0();

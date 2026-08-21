@@ -111,7 +111,7 @@ fn generic_tauri_facade_invokes_all_five_evidence_operations_without_a_new_comma
             .as_array()
             .unwrap()
             .len(),
-        157
+        168
     );
 
     let catalog_request = CatalogReadRequestV1::new(
@@ -130,7 +130,7 @@ fn generic_tauri_facade_invokes_all_five_evidence_operations_without_a_new_comma
     let CatalogReadResponseBodyV1::CapabilityPage(page) = catalog.response() else {
         panic!("Tauri capability read returned a non-capability page");
     };
-    assert_eq!(page.root().total_entries().get(), 28);
+    assert_eq!(page.root().total_entries().get(), 31);
     let capabilities = page
         .entries()
         .iter()

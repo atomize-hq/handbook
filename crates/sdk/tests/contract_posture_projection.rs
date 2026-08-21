@@ -181,13 +181,13 @@ fn production_witness_retains_the_proven_rust_posture_capability() {
         rows.iter()
             .filter(|row| !row.current_transports().is_empty())
             .count(),
-        28
+        31
     );
 
     let witness =
         ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
             .unwrap();
-    assert_eq!(witness.capabilities().len(), 28);
+    assert_eq!(witness.capabilities().len(), 31);
     let capability = witness
         .capabilities()
         .iter()

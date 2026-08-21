@@ -193,7 +193,7 @@ fn production_discovery_adds_tauri_only_to_the_twelve_proven_read_only_rows() {
         .filter(|row| row.discovery() == DiscoveryState::Discoverable)
         .map(|row| row.operation_ref().as_str().to_owned())
         .collect::<BTreeSet<_>>();
-    assert_eq!(expected_tauri.len(), 28);
+    assert_eq!(expected_tauri.len(), 31);
     let actual_tauri = rows
         .iter()
         .filter(|row| {
@@ -230,7 +230,7 @@ fn production_discovery_adds_tauri_only_to_the_twelve_proven_read_only_rows() {
         rows.iter()
             .filter(|row| row.discovery() == DiscoveryState::Discoverable)
             .count(),
-        28
+        31
     );
 
     let inventory_refs = rows
