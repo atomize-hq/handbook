@@ -12,6 +12,10 @@ license = "MIT"
 name = "handbook_dock_json_schema"
 path = "src/lib.rs"
 
+[[bin]]
+name = "handbook-dock-json-schema"
+path = "src/main.rs"
+
 [dependencies]
 jsonschema = { version = "=0.47.0", default-features = false }
 serde = { version = "1", features = ["derive"] }

@@ -3,6 +3,7 @@
 use handbook_sdk::contract_membrane::schema_generation::derive_hcm_5_4_packet_1_schema_tree_for_test;
 use jsonschema::{Draft, Retrieve, Uri, Validator};
 use serde_json::{json, Value};
+use sha2::{Digest, Sha256};
 use std::collections::BTreeSet;
 use std::path::Path;
 
@@ -165,4 +166,33 @@ fn assert_local_refs_only(value: &Value) {
         }
         _ => {}
     }
+}
+
+#[test]
+fn packet3_wire_vectors_bind_the_exact_generated_input_and_fact_schema_bytes() {
+    let tree = derive_hcm_5_4_packet_1_schema_tree_for_test().unwrap();
+    let request: Value = serde_json::from_slice(include_bytes!(
+        "../../dock-json-schema/tests/vectors/process-request-v1.json"
+    ))
+    .unwrap();
+    let result: Value = serde_json::from_slice(include_bytes!(
+        "../../dock-json-schema/tests/vectors/process-result-v1.json"
+    ))
+    .unwrap();
+
+    let input_fingerprint = format!(
+        "sha256:{:x}",
+        Sha256::digest(tree.get(VALIDATION_INPUT_REF).unwrap())
+    );
+    let fact_fingerprint = format!("sha256:{:x}", Sha256::digest(tree.get(FACT_REF).unwrap()));
+    assert_eq!(request["inputs"][0]["schema"]["ref"], VALIDATION_INPUT_REF);
+    assert_eq!(
+        request["inputs"][0]["schema"]["fingerprint"],
+        input_fingerprint
+    );
+    assert_eq!(result["candidates"][0]["payload_schema"]["ref"], FACT_REF);
+    assert_eq!(
+        result["candidates"][0]["payload_schema"]["fingerprint"],
+        fact_fingerprint
+    );
 }
