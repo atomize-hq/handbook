@@ -1,0 +1,7 @@
+{
+  "policy_id": "handbook.contract-gate-policy.hcm-5-4-proof",
+  "policy_version": "1.0.0",
+  "algorithm": "closed_accounting",
+  "score_threshold": null,
+  "local_closeout_policy_ref": "handbook.contract-local-closeout-policy.gate-passed@1.0.0"
+}

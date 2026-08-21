@@ -1,0 +1,30 @@
+{
+  "contract_id": "handbook.contract.fixture.json-schema-dock-proof",
+  "contract_version": "1.0.0",
+  "contract_kind": "claim_set",
+  "claim": {
+    "claim_id": "payload.schema-conformant",
+    "statement": "The selected payload conforms to the exact local schema closure.",
+    "subject_selector": {
+      "artifact.kind": "json-document"
+    },
+    "case_selector": {
+      "validation.case": "primary"
+    },
+    "applicability_rule": "subject_and_case_match",
+    "gate_effect": "hard_fail",
+    "evidence_kind": "handbook.evidence.schema-conformance",
+    "evidence_cardinality": "exactly_one",
+    "evidence_case_selection": "claim_case_selector",
+    "stability_policy_ref": "handbook.contract-evidence-stability-policy.outcome-consensus@1.0.0",
+    "score_weight": null
+  },
+  "resolution_minimum": {
+    "scope_horizon": "resolution.scope.local-observation",
+    "detail_resolution": "resolution.detail.identifier-only",
+    "temporal_horizon": "resolution.time.current-operation",
+    "authority_horizon": "resolution.authority.read-only",
+    "memory_horizon": "resolution.memory.operation",
+    "validation_horizon": "resolution.validation.observation-only"
+  }
+}

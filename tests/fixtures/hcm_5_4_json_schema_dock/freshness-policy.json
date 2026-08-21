@@ -1,0 +1,7 @@
+{
+  "policy_id": "handbook.contract-evidence-freshness-policy.hcm-5-4-proof",
+  "policy_version": "1.0.0",
+  "max_observation_age_seconds": 300,
+  "require_exact_source_revision": true,
+  "future_skew_seconds": 0
+}
