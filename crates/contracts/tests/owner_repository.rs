@@ -40,7 +40,6 @@ use handbook_contracts::{
 const REPOSITORY_IDENTITY: &str =
     "sha256:1111111111111111111111111111111111111111111111111111111111111111";
 const AUTHOR_AUTHORITY_REF: &str = "handbook.authority.contract-definition-author@1.0.0";
-#[cfg(feature = "test-support")]
 const NON_STALENESS_TEST_WINDOW_SECONDS: u64 = 3_600;
 
 #[test]
