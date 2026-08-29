@@ -68,6 +68,7 @@ pub mod repository_invocation_identity;
 pub mod schema_registry;
 pub mod semantic_capability_registry;
 mod snapshot_grounding_owner;
+mod snapshot_grounding_repository;
 #[allow(dead_code)]
 mod snapshot_memory;
 pub mod stable_role_registry;
@@ -314,6 +315,14 @@ pub use snapshot_grounding_owner::{
     SnapshotProductionSourcesV1, SnapshotRepositoryBindingV1,
     SnapshotSourceAccountingDispositionV1, SnapshotSourceContractV1, SnapshotSourceCurrentnessV1,
     SnapshotSourceFamilyV1, SnapshotSourceReadFloorV1, SnapshotStreamIdentityV1,
+};
+#[cfg(any(test, feature = "test-support"))]
+pub use snapshot_grounding_repository::SnapshotRepositoryFaultPointV1;
+#[cfg(any(test, feature = "test-support"))]
+pub use snapshot_grounding_repository::{
+    SnapshotBoundaryCommitIntentV1, SnapshotPredecessorV1, SnapshotRecordRefV1,
+    SnapshotRepositoryCommitV1, SnapshotRepositoryErrorKindV1, SnapshotRepositoryErrorV1,
+    SnapshotRepositoryHeadV1, SnapshotRepositoryMaintenanceV1, SnapshotRepositoryV1,
 };
 pub use stable_role_registry::{StableRoleCategory, StableRoleDefinition, StableRoleRegistry};
 pub use vocabulary_registry::{VocabularyAbsorption, VocabularyDefinition, VocabularyResolution};

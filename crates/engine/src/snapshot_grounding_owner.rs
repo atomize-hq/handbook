@@ -1,3 +1,4 @@
+use crate::snapshot_grounding_repository::{SnapshotRepositoryErrorV1, SnapshotRepositoryV1};
 use crate::{
     parse_schema_json, DefinitionFingerprint, ExactDefinitionRef, RetainedRepositoryRootV1,
 };
@@ -580,6 +581,14 @@ pub struct SnapshotRepositoryBindingV1 {
 }
 
 impl SnapshotRepositoryBindingV1 {
+    #[allow(
+        dead_code,
+        reason = "Packet 2 installs the private repository seam before Packet 3 invokes it"
+    )]
+    pub(crate) fn retained_root(&self) -> &RetainedRepositoryRootV1 {
+        &self._retained_root
+    }
+
     pub fn state_root(&self) -> &'static str {
         REPOSITORY_STATE_ROOT
     }
@@ -777,6 +786,28 @@ impl SnapshotGroundingOwnerV1 {
             policy_fingerprint: binding.policy_fingerprint().to_owned(),
             fingerprint,
         }
+    }
+
+    #[cfg(any(test, feature = "test-support"))]
+    pub fn open_repository<'binding>(
+        &self,
+        binding: &'binding SnapshotRepositoryBindingV1,
+        stream: &SnapshotStreamIdentityV1,
+    ) -> Result<SnapshotRepositoryV1<'binding>, SnapshotRepositoryErrorV1> {
+        SnapshotRepositoryV1::open(*self, binding, stream)
+    }
+
+    #[cfg(not(any(test, feature = "test-support")))]
+    #[allow(
+        dead_code,
+        reason = "Packet 2 installs owner-open lifecycle before Packet 3 invokes capture"
+    )]
+    pub(crate) fn open_repository<'binding>(
+        &self,
+        binding: &'binding SnapshotRepositoryBindingV1,
+        stream: &SnapshotStreamIdentityV1,
+    ) -> Result<SnapshotRepositoryV1<'binding>, SnapshotRepositoryErrorV1> {
+        SnapshotRepositoryV1::open(*self, binding, stream)
     }
 
     #[allow(
