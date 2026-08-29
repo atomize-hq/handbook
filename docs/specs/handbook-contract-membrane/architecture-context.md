@@ -145,6 +145,15 @@ consumer; it does not synthesize missing authority. The private
 the typed grounding adapters are precursors until an authorized ordinary seam
 consumes them. Their existence alone does not prove adoption.
 
+The prepared [`HCM-4.6 authority`](slices/HCM-4.6/README.md) selects the target
+topology without changing that current-state classification: an explicit future
+session trigger calls one fixed transport-free SDK composition; a purpose-named
+Engine owner alone captures admitted sources, owns immutable repository and
+stream semantics, selects the applicable predecessor, computes delta and the
+Resolution-bounded grounding projection, and returns bounded accounting; Flow
+and pipeline consume that typed result; generic transports remain adapters.
+Automatic lifecycle triggering and the actual adopter remain Phase-6 work.
+
 ## Trust and validation boundaries
 
 Structural admission and semantic trust are different steps. Packet 0 can prove
@@ -178,10 +187,10 @@ between domains must be explicit and must preserve each domain's exact binding.
 The current engine and SDK tests use Rust `jsonschema` for exact Draft 2020-12
 schema responsibilities, including bounded local-ref closure and refusal of
 external retrieval. Historical Python validator choices are not current
-architecture. HCM-5.3 now implements the language-neutral process JSON contract
-with a first-party Rust host and fixes the HCM-5.4 reference-validator handoff
-as native Rust over those current practices. The validator itself remains
-unprepared and unimplemented.
+architecture. HCM-5.3 implements the language-neutral process JSON contract with
+a first-party Rust host. HCM-5.4 now implements and closes the native-Rust
+reference validator, its reproducibly packaged current-target manifest/bundle,
+and the real Contracts-owned semantic proof over those current practices.
 
 That first path is a repository-owned, offline, deterministic validator witness,
 not a general arbitrary-code service. Portable host claims are limited to exact

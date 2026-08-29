@@ -60,6 +60,12 @@ At this checkpoint:
   truth is `62 / 31 / 170 / 1` with six fixed use cases. All 19 acceptance
   conditions, aggregate verification/review, the single HCM-5.4 closeout, and
   Phase-5 exit are complete;
+- the follow-up [`HCM-4.6 slice authority`](slices/HCM-4.6/README.md) is now
+  prepared for the production Snapshot Memory/grounding owner, durable
+  repository, four reserved ordinary operations, and one fixed SDK session-
+  boundary composition. Implementation has not begun: the current product
+  remains precursor-only, the historical Phase-4 and Phase-5 exits remain
+  complete, and Phase-6 adopter selection remains separate;
 - the former orchestration skill under `.codex/skills/.disabled/` is inactive and is not authority for new work; and
 - the active thin router is routing guidance only and is not authority for product or slice work.
 
@@ -88,6 +94,7 @@ Use the source that owns the question:
 | What is the completed HCM-4.3 outcome and packet boundary? | [`slices/HCM-4.3/README.md`](slices/HCM-4.3/README.md) records complete CLI JSON parity, the machine/human/diagnostic/exit contract, compatibility posture, ordered Packets 1–8, and the aggregate slice closeout. |
 | What is the completed HCM-4.4 outcome and packet boundary? | [`slices/HCM-4.4/README.md`](slices/HCM-4.4/README.md) records the bounded non-UI Tauri command facade, SDK DTO and dependency boundary, strict Packets 1–6, and the single aggregate slice closeout. |
 | What is the completed HCM-4.5 outcome and packet boundary? | [`slices/HCM-4.5/README.md`](slices/HCM-4.5/README.md) records the capability-driven installed skill, generic discovery/schema/invocation consumer seam, strict Packets 1–6, corrected truthful future-uptake proof, and the single aggregate slice closeout. |
+| What is the prepared HCM-4.6 authority and implementation boundary? | [`slices/HCM-4.6/README.md`](slices/HCM-4.6/README.md) selects the production Engine snapshot-grounding owner, durable repository/lifecycle, five canonical source/currentness adapters with closed HCM-5 evidence slots, exact four-row and ten-root ordinary closure, one fixed SDK composition, strict Packets 1–6, and the separate Phase-6 adopter handoff. It authorizes no implementation by itself and records no product completion. |
 | What is the completed HCM-5.1 outcome and packet boundary? | [`slices/HCM-5.1/README.md`](slices/HCM-5.1/README.md) selects `handbook-contracts` as the inward semantic owner, fixes exact definition/claim/lifecycle and outward SDK boundaries, defines strict Packets 1–6, and records their implementation plus aggregate verification/review and the single slice closeout. |
 | What is the completed HCM-5.2 outcome and packet boundary? | [`slices/HCM-5.2/README.md`](slices/HCM-5.2/README.md) fixes canonical evidence admission, closed verdict/accounting/freshness/gate semantics, separate local closeout, the parent-promotion boundary, exact five-operation outward closure, and strict Packets 1–7. All seven packets implement the owner-native identity/policy kernel, read-only run preparation, sealed exact candidate-source normalization, retained-root immutable-all canonical-evidence persistence, pure verdict/gate/local-closeout composition, five-operation SDK/schema/witness closure, and generic SDK/CLI/Tauri proof at `62 / 28 / 157`; all 17 acceptance conditions, aggregate verification/review, and the single slice closeout are complete. |
 | What is the completed HCM-5.3 outcome and packet boundary? | [`slices/HCM-5.3/README.md`](slices/HCM-5.3/README.md) selects the operational dock owner, versioned language-neutral process JSON, portable first-party Rust executor boundary, completed-only candidate handoff, exact three-operation/11-root closure, strict Packets 1–5, and the fixed native-Rust JSON Schema validator handoff. All five packets, all 16 acceptance conditions, aggregate verification/review, and the single slice closeout are complete at exact `62 / 31 / 168` product truth; the production manifest registry remains empty at that checkpoint. Current HCM-5.4 authority is separate below. |
