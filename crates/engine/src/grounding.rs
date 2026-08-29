@@ -13,7 +13,8 @@ use std::path::Path;
 #[cfg(test)]
 use std::path::PathBuf;
 
-const SOURCE_DIRECTORY: [&str; 4] = [".handbook", "grounding", "hcm-3.5", "v1"];
+#[cfg(test)]
+const SOURCE_DIRECTORY: [&str; 0] = [];
 const CURRENT_SNAPSHOT_REF: &str = "handbook.grounding.snapshot.current@1.0.0";
 const DEFINITION_SCHEMA_ID: &str = "handbook.grounding-summary-definition";
 const DISCLOSURE_SCHEMA_ID: &str = "handbook.grounding-disclosure-policy";
@@ -47,6 +48,7 @@ impl ExactGroundingRef {
         })
     }
 
+    #[cfg(any(test, feature = "test-support"))]
     fn token(&self) -> String {
         format!("{}#{}", self.reference, self.fingerprint)
     }
@@ -402,15 +404,17 @@ struct CurrentnessSlot {
     captured_revision_fingerprint: String,
 }
 
+#[cfg(any(test, feature = "test-support"))]
+#[doc(hidden)]
 pub fn ground_resolution(
-    repo_root: &Path,
+    demonstrative_source_root: &Path,
     request: GroundingRequest,
 ) -> Result<GroundingOutcome, GroundingOperationError> {
-    if !repo_root.is_dir() {
+    if !demonstrative_source_root.is_dir() {
         return Err(GroundingOperationError);
     }
     let provenance = provenance_for(&request);
-    let result = resolve(repo_root, &request, provenance.clone());
+    let result = resolve(demonstrative_source_root, &request, provenance.clone());
     Ok(match result {
         Ok(grounded) => GroundingOutcome::Grounded(grounded),
         Err((kind, omissions)) => GroundingOutcome::Refused(GroundingRefusal {
@@ -421,6 +425,7 @@ pub fn ground_resolution(
     })
 }
 
+#[cfg_attr(not(any(test, feature = "test-support")), allow(dead_code))]
 fn resolve(
     repo_root: &Path,
     request: &GroundingRequest,
@@ -564,7 +569,7 @@ fn parse_json(bytes: &[u8]) -> Result<Value, (GroundingRefusalKind, Vec<Groundin
 }
 
 fn source_relative_path(name: &str) -> String {
-    format!("{}/{}", SOURCE_DIRECTORY.join("/"), name)
+    name.to_owned()
 }
 
 fn fingerprint(
@@ -864,6 +869,7 @@ fn omission(signal_id: &str, kind: &str, reason: &'static str) -> GroundingOmiss
     }
 }
 
+#[cfg(any(test, feature = "test-support"))]
 fn provenance_for(request: &GroundingRequest) -> GroundingProvenance {
     GroundingProvenance {
         snapshot: request.snapshot_ref.0.token(),
@@ -1219,8 +1225,8 @@ mod tests {
 
     #[test]
     fn tracked_p4_transition_source_replays_the_grounding_projection() {
-        let repo = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
-        let source_root = source_root(&repo);
+        let source_root = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("tests/fixtures/hcm_3_5_grounding/p4_transition");
         let definition: Value = serde_json::from_slice(
             &fs::read(source_root.join("definition.json")).expect("P4 definition source"),
         )
@@ -1266,7 +1272,7 @@ mod tests {
         .expect("disclosure ref");
 
         let grounded = resolve_with_authority(
-            &repo,
+            &source_root,
             &snapshot,
             &delta,
             &definition_ref,

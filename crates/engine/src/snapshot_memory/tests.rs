@@ -683,8 +683,7 @@ fn materializes_hcm_3_5_p4_transition_documents() {
         "evidence_availability": "unavailable",
     });
     let source_root = Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("../..")
-        .join(".handbook/grounding/hcm-3.5/v1");
+        .join("tests/fixtures/hcm_3_5_grounding/p4_transition");
     fs::create_dir_all(&source_root).expect("P4 source directory");
     for (name, value) in [
         ("snapshot-policy.json", policy_value),

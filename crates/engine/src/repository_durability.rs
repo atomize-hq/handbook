@@ -283,6 +283,26 @@ impl RetainedRepositoryRootV1 {
             && directory_identity(&other.root).is_ok_and(|identity| identity == other.identity)
     }
 
+    pub(crate) fn opaque_physical_root_fingerprint(&self) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(b"handbook.snapshot-physical-repository-root@1.0\0");
+        match self.identity {
+            #[cfg(unix)]
+            PhysicalDirectoryIdentity::Unix { device, inode } => {
+                hasher.update(b"unix\0");
+                hasher.update(device.to_be_bytes());
+                hasher.update(inode.to_be_bytes());
+            }
+            #[cfg(windows)]
+            PhysicalDirectoryIdentity::Windows { volume, file_id } => {
+                hasher.update(b"windows\0");
+                hasher.update(volume.to_be_bytes());
+                hasher.update(file_id);
+            }
+        }
+        format!("sha256:{:x}", hasher.finalize())
+    }
+
     pub(crate) fn path_still_names_same_physical_root(&self, path: &Path) -> bool {
         Self::open_exact(path).is_ok_and(|current| self.same_physical_root(&current))
     }

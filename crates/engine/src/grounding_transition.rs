@@ -8,7 +8,8 @@ use std::path::Path;
 #[cfg(test)]
 use std::path::PathBuf;
 
-const SOURCE_DIRECTORY: [&str; 4] = [".handbook", "grounding", "hcm-3.5", "v1"];
+#[cfg(test)]
+const SOURCE_DIRECTORY: [&str; 0] = [];
 const PRIOR_END_REF: &str = "handbook.hcm-3-5.transition-snapshot.prior-end@1.0.0";
 const SESSION_START_REF: &str = "handbook.hcm-3-5.transition-snapshot.session-start@1.0.0";
 const SESSION_END_REF: &str = "handbook.hcm-3-5.transition-snapshot.session-end@1.0.0";
@@ -69,6 +70,7 @@ struct GroundingProjectionDescriptor {
     evidence_availability: String,
 }
 
+#[cfg(test)]
 pub(crate) fn materialize_grounding_transition_refs(
     repo_root: &Path,
 ) -> Result<GroundingTransitionRefs, GroundingTransitionMaterializationError> {
@@ -199,7 +201,7 @@ fn exact_json_ref(
 }
 
 fn source_relative_path(name: &str) -> String {
-    format!("{}/{}", SOURCE_DIRECTORY.join("/"), name)
+    name.to_owned()
 }
 
 fn exact_token(
@@ -218,7 +220,8 @@ mod tests {
 
     #[test]
     fn materializes_the_p4_transition_refs_from_the_tracked_source_route() {
-        let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let root = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("tests/fixtures/hcm_3_5_grounding/p4_transition");
         let refs = materialize_grounding_transition_refs(&root).expect("P4 transition source");
 
         assert_eq!(
@@ -338,8 +341,7 @@ mod tests {
         let destination = source_root(repo.path());
         fs::create_dir_all(&destination).unwrap();
         let source = Path::new(env!("CARGO_MANIFEST_DIR"))
-            .join("../..")
-            .join(".handbook/grounding/hcm-3.5/v1");
+            .join("tests/fixtures/hcm_3_5_grounding/p4_transition");
         for name in [
             "snapshot-policy.json",
             "prior-capture.json",

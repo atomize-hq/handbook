@@ -67,6 +67,7 @@ pub mod repository_durability;
 pub mod repository_invocation_identity;
 pub mod schema_registry;
 pub mod semantic_capability_registry;
+mod snapshot_grounding_owner;
 #[allow(dead_code)]
 mod snapshot_memory;
 pub mod stable_role_registry;
@@ -305,6 +306,15 @@ pub use semantic_capability_registry::{
     SemanticBindingRule, SemanticCapabilityContract, SemanticCapabilityDefinition,
     SemanticCapabilityRegistry, SemanticValidationProfileDefinition,
 };
+pub use snapshot_grounding_owner::{
+    SnapshotAdapterFailureOutcomeV1, SnapshotAdapterFailureRuleV1, SnapshotBoundaryIdentityV1,
+    SnapshotBoundaryKindV1, SnapshotGroundingErrorClassV1, SnapshotGroundingErrorKindV1,
+    SnapshotGroundingKernelErrorKindV1, SnapshotGroundingKernelErrorV1,
+    SnapshotGroundingMutationEffectV1, SnapshotGroundingOwnerV1, SnapshotProductionSourceV1,
+    SnapshotProductionSourcesV1, SnapshotRepositoryBindingV1,
+    SnapshotSourceAccountingDispositionV1, SnapshotSourceContractV1, SnapshotSourceCurrentnessV1,
+    SnapshotSourceFamilyV1, SnapshotSourceReadFloorV1, SnapshotStreamIdentityV1,
+};
 pub use stable_role_registry::{StableRoleCategory, StableRoleDefinition, StableRoleRegistry};
 pub use vocabulary_registry::{VocabularyAbsorption, VocabularyDefinition, VocabularyResolution};
 
@@ -316,5 +326,5 @@ pub fn engine_contract_version() -> &'static str {
     workspace_contract_version()
 }
 pub mod grounding;
-#[allow(dead_code)]
+#[cfg(test)]
 mod grounding_transition;
