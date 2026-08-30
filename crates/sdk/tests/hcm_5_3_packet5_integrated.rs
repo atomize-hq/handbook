@@ -157,7 +157,7 @@ fn generic_rust_sdk_consumes_all_three_rows_and_production_run_stops_before_spaw
                 !DOCK_OPERATION_REFS.contains(&entry.operation().reference().as_str())
             })
             .count(),
-        28
+        32
     );
     let dock_roots = [
         "handbook.dock-manifest@1.0.0",
@@ -178,7 +178,7 @@ fn generic_rust_sdk_consumes_all_three_rows_and_production_run_stops_before_spaw
             .iter()
             .filter(|entry| !dock_roots.contains(&entry.schema().reference().as_str()))
             .count(),
-        159
+        169
     );
     let fixed_use_cases = [
         "handbook.use-case.repository-setup@1.0.0",

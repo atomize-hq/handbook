@@ -1,6 +1,7 @@
 # HCM-4.6 Production Snapshot Grounding Owner and Ordinary SDK Seam
 
-Status: **current slice authority; implementation has not begun**.
+Status: **current slice authority; Packets 1–6 are implemented; aggregate
+closeout remains pending**.
 
 This follow-up slice productionizes the existing HCM-3.3 through HCM-3.5
 projection, Snapshot Memory, grounding, Flow, and pipeline precursor boundary.
@@ -489,6 +490,14 @@ HCM-4.6 is complete only when all of the following are simultaneously true:
     Phase-4/Phase-5 closeout claims.
 
 ## Phase-6 adopter handoff and proof boundary
+
+The implemented Packet 6 boundary proves deterministic explicit invocation of
+the four admitted operations through the direct Rust SDK and unchanged generic
+CLI/Tauri consumers, and proves the fixed session-boundary use case through the
+direct Rust SDK and unchanged generic Tauri discriminator. The proof preserves
+terminal, currentness, omission/refusal, Resolution, replay, receipt,
+final-delta, handoff, and recovery truth. It does not select or implement an
+external adopter, automatic trigger, watcher, or session lifecycle host.
 
 HCM-4.6 hands Phase 6 one production-capable, transport-free SDK use case and
 four admitted ordinary operations. Its proof ends at deterministic explicit
