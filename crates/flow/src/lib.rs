@@ -6,6 +6,7 @@ pub mod grounded_packet;
 pub mod operation_admission;
 pub mod packet_result;
 pub mod resolver;
+mod session_grounding;
 
 pub use budget::{
     evaluate_budget, evaluate_budget_with_effective_bytes, BudgetByteDomain, BudgetDisposition,
@@ -24,6 +25,9 @@ pub use resolver::{
     resolve, resolve_with_contract, PacketSelection, PacketSelectionStatus, ResolveRequest,
     ResolverBlocker, ResolverBlockerCategory, ResolverNextSafeAction, ResolverRefusal,
     ResolverRefusalCategory, ResolverResult, ResolverSubjectRef, C04_RESULT_VERSION,
+};
+pub use session_grounding::{
+    adopt_session_grounding_outcome, AdoptedSessionGroundingV1, SessionGroundingFlowStatusV1,
 };
 
 pub fn flow_contract_version() -> &'static str {

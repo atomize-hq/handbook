@@ -140,7 +140,13 @@ pub(crate) fn dispatch_invocation(
     request: &InvocationRequestV1,
     limits: &ContractLimits,
 ) -> Result<InvocationResponseV1, ContractError> {
-    dispatch_invocation_with_presentation(repo_root, request, UseCasePresentation::RustSdk, limits)
+    dispatch_invocation_with_presentation(
+        repo_root,
+        request,
+        UseCasePresentation::RustSdk,
+        limits,
+        None,
+    )
 }
 
 pub(crate) fn dispatch_tauri_invocation(
@@ -148,7 +154,28 @@ pub(crate) fn dispatch_tauri_invocation(
     request: &InvocationRequestV1,
     limits: &ContractLimits,
 ) -> Result<InvocationResponseV1, ContractError> {
-    dispatch_invocation_with_presentation(repo_root, request, UseCasePresentation::Tauri, limits)
+    dispatch_invocation_with_presentation(
+        repo_root,
+        request,
+        UseCasePresentation::Tauri,
+        limits,
+        None,
+    )
+}
+
+pub(crate) fn dispatch_tauri_invocation_with_snapshot_source(
+    repo_root: &Path,
+    request: &InvocationRequestV1,
+    limits: &ContractLimits,
+    source_port: &mut dyn handbook_engine::SnapshotSourcePortV1,
+) -> Result<InvocationResponseV1, ContractError> {
+    dispatch_invocation_with_presentation(
+        repo_root,
+        request,
+        UseCasePresentation::Tauri,
+        limits,
+        Some(source_port),
+    )
 }
 
 fn dispatch_invocation_with_presentation(
@@ -156,6 +183,7 @@ fn dispatch_invocation_with_presentation(
     request: &InvocationRequestV1,
     presentation: UseCasePresentation,
     limits: &ContractLimits,
+    snapshot_source_port: Option<&mut dyn handbook_engine::SnapshotSourcePortV1>,
 ) -> Result<InvocationResponseV1, ContractError> {
     require_packet_limits(limits)?;
     readmit_request(request, limits)?;
@@ -172,6 +200,7 @@ fn dispatch_invocation_with_presentation(
             request.request().sdk_request(),
             presentation,
             limits,
+            snapshot_source_port,
         ),
     }
 }
@@ -293,6 +322,7 @@ fn dispatch_use_case(
     request: SdkUseCaseRequest,
     presentation: UseCasePresentation,
     limits: &ContractLimits,
+    snapshot_source_port: Option<&mut dyn handbook_engine::SnapshotSourcePortV1>,
 ) -> Result<InvocationResponseV1, ContractError> {
     let sdk = HandbookSdkV1::open(repo_root);
     match request {
@@ -320,6 +350,13 @@ fn dispatch_use_case(
         SdkUseCaseRequest::PipelineRouteResolveAndPersist(selector) => sdk
             .resolve_pipeline_use_case(&selector, limits)
             .and_then(|response| InvocationResponseV1::use_case(response, limits)),
+        SdkUseCaseRequest::SessionGroundingBoundary(request) => {
+            let Some(source_port) = snapshot_source_port else {
+                return default_denial(limits);
+            };
+            sdk.run_session_grounding_boundary_use_case_dyn(&request, source_port, limits)
+                .and_then(|response| InvocationResponseV1::use_case(response, limits))
+        }
     }
 }
 

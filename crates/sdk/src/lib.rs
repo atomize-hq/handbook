@@ -266,6 +266,21 @@ impl HandbookSdkV1 {
         contract_membrane::dispatch_tauri_invocation(&self.repo_root, request, limits)
     }
 
+    /// Dispatches the same generic Tauri invocation with a trusted snapshot-source port.
+    pub fn invoke_tauri_with_snapshot_source(
+        &self,
+        request: &contract_membrane::InvocationRequestV1,
+        limits: &contract_membrane::ContractLimits,
+        source_port: &mut dyn handbook_engine::SnapshotSourcePortV1,
+    ) -> Result<contract_membrane::InvocationResponseV1, contract_membrane::ContractError> {
+        contract_membrane::dispatch_tauri_invocation_with_snapshot_source(
+            &self.repo_root,
+            request,
+            limits,
+            source_port,
+        )
+    }
+
     /// Re-admits one LF-free invocation response against its exact originating request.
     pub fn readmit_invocation_response(
         &self,
@@ -293,6 +308,60 @@ impl HandbookSdkV1 {
         );
         contract_membrane::UseCaseResponseV1::pipeline_route_resolve_and_persist_execution(
             &execution, limits,
+        )
+    }
+
+    /// Captures one explicit session boundary once and composes its committed owner result.
+    pub fn run_session_grounding_boundary_use_case<P: handbook_engine::SnapshotSourcePortV1>(
+        &self,
+        request: &contract_membrane::SessionGroundingBoundaryRequestV1,
+        source_port: &mut P,
+        limits: &contract_membrane::ContractLimits,
+    ) -> Result<contract_membrane::UseCaseResponseV1, contract_membrane::ContractError> {
+        if limits != &contract_membrane::ContractLimits::packet0() {
+            return Err(contract_membrane::ContractError::LimitOutOfRange);
+        }
+        let execution = contract_membrane::execute_session_grounding_boundary(
+            &self.repo_root,
+            request,
+            source_port,
+        )?;
+        contract_membrane::UseCaseResponseV1::session_grounding_boundary_execution(
+            execution, limits,
+        )
+    }
+
+    fn run_session_grounding_boundary_use_case_dyn(
+        &self,
+        request: &contract_membrane::SessionGroundingBoundaryRequestV1,
+        source_port: &mut dyn handbook_engine::SnapshotSourcePortV1,
+        limits: &contract_membrane::ContractLimits,
+    ) -> Result<contract_membrane::UseCaseResponseV1, contract_membrane::ContractError> {
+        if limits != &contract_membrane::ContractLimits::packet0() {
+            return Err(contract_membrane::ContractError::LimitOutOfRange);
+        }
+        let execution = contract_membrane::execute_session_grounding_boundary_dyn(
+            &self.repo_root,
+            request,
+            source_port,
+        )?;
+        contract_membrane::UseCaseResponseV1::session_grounding_boundary_execution(
+            execution, limits,
+        )
+    }
+
+    /// Recomposes one already-committed owner result without invoking Engine capture.
+    pub fn recompose_session_grounding_boundary_use_case(
+        &self,
+        committed: handbook_engine::SnapshotCaptureOutcomeV1,
+        limits: &contract_membrane::ContractLimits,
+    ) -> Result<contract_membrane::UseCaseResponseV1, contract_membrane::ContractError> {
+        if limits != &contract_membrane::ContractLimits::packet0() {
+            return Err(contract_membrane::ContractError::LimitOutOfRange);
+        }
+        let execution = contract_membrane::recompose_session_grounding_boundary(committed)?;
+        contract_membrane::UseCaseResponseV1::session_grounding_boundary_execution(
+            execution, limits,
         )
     }
 }

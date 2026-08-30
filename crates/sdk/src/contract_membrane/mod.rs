@@ -26,6 +26,7 @@ mod response;
 #[doc(hidden)]
 pub mod schema_generation;
 mod serialization;
+mod session_grounding;
 mod typed_catalog;
 mod verification;
 
@@ -112,7 +113,8 @@ pub use facade::{
     CharterIntakeEnvelopeV1, CharterIntakeSourceKindV1, InvocationRequestBodyV1,
     InvocationRequestKindV1, InvocationRequestV1, PipelineRouteResolveAndPersistRequestV1,
     ProjectContextInputV1, RepositoryDoctorRequestV1, RepositorySetupRequestV1,
-    UseCaseRequestBodyV1, UseCaseRequestV1,
+    SessionGroundingBoundaryKindV1, SessionGroundingBoundaryRequestV1, UseCaseRequestBodyV1,
+    UseCaseRequestV1,
 };
 pub(crate) use flow_operation::execute_flow_operation;
 pub use flow_operation::{
@@ -146,7 +148,8 @@ pub use invocation::{
     TransportIoErrorV1, TransportPresentationViewV1, UseCaseCauseV1, UseCaseResponseV1,
 };
 pub(crate) use invocation_dispatch::{
-    dispatch_invocation, dispatch_tauri_invocation, readmit_invocation_response,
+    dispatch_invocation, dispatch_tauri_invocation, dispatch_tauri_invocation_with_snapshot_source,
+    readmit_invocation_response,
 };
 pub use operation::{
     operation_inventory, validate_complete_definition_set, validate_complete_operation_ref_set,
@@ -193,6 +196,16 @@ pub use response::{
 };
 pub use serialization::{
     canonical_fingerprint, canonical_json_bytes, parse_canonical_json, sha256_fingerprint,
+};
+pub(crate) use session_grounding::{
+    execute_session_grounding_boundary, execute_session_grounding_boundary_dyn,
+    recompose_session_grounding_boundary,
+};
+pub use session_grounding::{
+    SessionGroundingBoundaryDetailsV1, SessionGroundingBoundaryResultV1,
+    SessionGroundingBoundaryUseCaseOutcomeV1, SessionGroundingCompositionFailureV1,
+    SessionGroundingOwnerFailureV1, SessionGroundingPredecessorV1, SessionGroundingRecordV1,
+    SessionGroundingRecoveryActionV1, SessionGroundingTerminalV1,
 };
 pub use typed_catalog::{
     CatalogPageSize, CatalogReadError, ImmutableCatalog, TypedCatalogCursor, TypedCatalogEntry,

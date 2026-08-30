@@ -11,7 +11,7 @@ use handbook_sdk::contract_membrane::{
 use handbook_sdk::HandbookSdkV1;
 use serde::Serialize;
 use std::path::{Path, PathBuf};
-use std::sync::Arc;
+use std::sync::{Arc, Mutex};
 
 /// Supplies trusted UTC time from the host rather than from an IPC payload.
 pub trait TrustedClock: Send + Sync + 'static {
@@ -48,6 +48,7 @@ struct TrustedFacadeState {
     witness: ProductionWitness,
     limits: ContractLimits,
     clock: Arc<dyn TrustedClock>,
+    snapshot_source: Mutex<Option<Box<dyn handbook_engine::SnapshotSourcePortV1 + Send>>>,
 }
 
 impl FacadeState {
@@ -58,6 +59,35 @@ impl FacadeState {
         repository_root: impl AsRef<Path>,
         retention_until_utc: UtcTimestamp,
         clock: impl TrustedClock,
+    ) -> Result<Self, HostError> {
+        Self::open_inner(repository_root, retention_until_utc, clock, None)
+    }
+
+    /// Constructs trusted facade state with the fixed session-grounding source adapter enabled.
+    ///
+    /// The source adapter remains host-owned and is never accepted from or exposed to IPC.
+    pub fn open_with_snapshot_source<P>(
+        repository_root: impl AsRef<Path>,
+        retention_until_utc: UtcTimestamp,
+        clock: impl TrustedClock,
+        snapshot_source: P,
+    ) -> Result<Self, HostError>
+    where
+        P: handbook_engine::SnapshotSourcePortV1 + Send + 'static,
+    {
+        Self::open_inner(
+            repository_root,
+            retention_until_utc,
+            clock,
+            Some(Box::new(snapshot_source)),
+        )
+    }
+
+    fn open_inner(
+        repository_root: impl AsRef<Path>,
+        retention_until_utc: UtcTimestamp,
+        clock: impl TrustedClock,
+        snapshot_source: Option<Box<dyn handbook_engine::SnapshotSourcePortV1 + Send>>,
     ) -> Result<Self, HostError> {
         let repository_root =
             std::fs::canonicalize(repository_root).map_err(|_| HostError::RepositoryUnavailable)?;
@@ -75,6 +105,7 @@ impl FacadeState {
                 witness,
                 limits: ContractLimits::packet0(),
                 clock: Arc::new(clock),
+                snapshot_source: Mutex::new(snapshot_source),
             }),
         })
     }
@@ -252,10 +283,21 @@ fn execute_invocation_with_fault(
     if fault == InvocationFault::PreCommit {
         return pre_commit_transport_failure(&request, &state.limits);
     }
-    let response = state
-        ._sdk
-        .invoke_tauri(&request, &state.limits)
-        .map_err(contract_error)?;
+    let response = {
+        let mut snapshot_source = state
+            .snapshot_source
+            .lock()
+            .map_err(|_| HostError::RuntimeUnavailable)?;
+        match snapshot_source.as_deref_mut() {
+            Some(source) => {
+                state
+                    ._sdk
+                    .invoke_tauri_with_snapshot_source(&request, &state.limits, source)
+            }
+            None => state._sdk.invoke_tauri(&request, &state.limits),
+        }
+        .map_err(contract_error)?
+    };
     let response = readmit_invocation(state, &request, response)?;
     #[cfg(test)]
     if fault == InvocationFault::PostCommit {
@@ -351,6 +393,10 @@ fn contract_error(_: ContractError) -> HostError {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use handbook_engine::{
+        DefinitionFingerprint, SnapshotGroundingOwnerV1, SnapshotSlotObservationV1,
+        SnapshotSourceFamilyV1, SnapshotSourcePortErrorV1, SnapshotSourcePortV1,
+    };
     use handbook_sdk::artifact::{
         ArtifactAcquisitionMode, ArtifactInputDocument, ArtifactSdk, ArtifactSelector,
         ArtifactValidateRequest,
@@ -364,11 +410,14 @@ mod tests {
         ApproverAdministrationRequestV1, ArtifactOperationInputV1, AuthorCharterRequestV1,
         AuthorProjectContextRequestV1, BootstrapFacadeOutcomeKindV1, BootstrapRequestV1,
         CatalogKindV1, CatalogPageSize, CatalogReadOutcomeKindV1, CatalogReadRequestV1,
-        CatalogReadResponseBodyV1, ContractLimits, InvocationRequestV1, InvocationResponseKind,
-        PipelineRouteResolveAndPersistRequestV1, PostureCanonicalBindingDtoV1,
-        PostureDimensionChangeDtoV1, PostureReferenceDtoV1, PostureTransitionApplyRequestDataV1,
-        ProjectContextInputV1, RepositorySetupModeV1, RepositorySetupRequestV1, SemVer,
-        TransportFailureKind, TypedCatalogCursor, UseCaseRequestV1, UtcTimestamp,
+        CatalogReadResponseBodyV1, ContractLimits, ExactBinding, ExactRef, Fingerprint,
+        InvocationRequestV1, InvocationResponseKind, PipelineRouteResolveAndPersistRequestV1,
+        PostureCanonicalBindingDtoV1, PostureDimensionChangeDtoV1, PostureReferenceDtoV1,
+        PostureTransitionApplyRequestDataV1, ProjectContextInputV1, RepositorySetupModeV1,
+        RepositorySetupRequestV1, SemVer, SessionGroundingBoundaryKindV1,
+        SessionGroundingBoundaryRequestV1, SessionGroundingBoundaryUseCaseOutcomeV1,
+        SessionGroundingTerminalV1, TransportFailureKind, TypedCatalogCursor, UseCaseRequestV1,
+        UtcTimestamp,
     };
     use handbook_sdk::pipeline_route_api::PipelineStateMutation;
     use handbook_sdk::{SetupMode, SetupRequest};
@@ -385,6 +434,137 @@ mod tests {
         fn now_utc(&self) -> Option<UtcTimestamp> {
             Some(self.0.clone())
         }
+    }
+
+    struct CompleteSnapshotSource {
+        observations: BTreeMap<(SnapshotSourceFamilyV1, &'static str), SnapshotSlotObservationV1>,
+        values: BTreeMap<(SnapshotSourceFamilyV1, &'static str), Value>,
+    }
+
+    impl CompleteSnapshotSource {
+        fn new() -> Self {
+            let owner = SnapshotGroundingOwnerV1::new();
+            let mut observations = BTreeMap::new();
+            let mut values = BTreeMap::new();
+            for contract in owner.source_contracts() {
+                for &slot in contract.source_slots() {
+                    let reference = format!(
+                        "handbook.snapshot-observation.{}.{}@1.0.0",
+                        contract.family().as_str(),
+                        slot.replace('_', "-")
+                    );
+                    let value = json!({"ref": reference});
+                    observations.insert(
+                        (contract.family(), slot),
+                        SnapshotSlotObservationV1::retained(
+                            &reference,
+                            &DefinitionFingerprint::from_json_value(&value)
+                                .unwrap()
+                                .to_string(),
+                        )
+                        .unwrap(),
+                    );
+                    values.insert((contract.family(), slot), value);
+                }
+            }
+            observations.insert(
+                (SnapshotSourceFamilyV1::Git, "worktree"),
+                SnapshotSlotObservationV1::redacted(
+                    "handbook.snapshot-observation.git.worktree@1.0.0",
+                    &DefinitionFingerprint::from_json_value(&json!({"redacted": true}))
+                        .unwrap()
+                        .to_string(),
+                )
+                .unwrap(),
+            );
+            observations.insert(
+                (SnapshotSourceFamilyV1::Evidence, "dock_execution_candidate"),
+                SnapshotSlotObservationV1::omitted("absent_or_inapplicable"),
+            );
+            observations.insert(
+                (SnapshotSourceFamilyV1::Work, "handoff"),
+                SnapshotSlotObservationV1::inapplicable("policy_inapplicable"),
+            );
+            let decision = values
+                .get(&(SnapshotSourceFamilyV1::Evidence, "contracts_decision"))
+                .unwrap()
+                .clone();
+            observations.insert(
+                (SnapshotSourceFamilyV1::Evidence, "contracts_decision"),
+                SnapshotSlotObservationV1::derived(
+                    "handbook.snapshot-observation.evidence.contracts-decision@1.0.0",
+                    &DefinitionFingerprint::from_json_value(&decision)
+                        .unwrap()
+                        .to_string(),
+                )
+                .unwrap(),
+            );
+            let resolution = json!({
+                "resolution": {
+                    "stack_fingerprint": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+                    "stack_ref": "handbook.context-resolution-stack.packet-4-tauri@1.0.0",
+                    "values": ["task", "repository", "session", "bounded", "execution", "verified"]
+                }
+            });
+            observations.insert(
+                (
+                    SnapshotSourceFamilyV1::Handbook,
+                    "schema_artifact_resolution",
+                ),
+                SnapshotSlotObservationV1::retained(
+                    "handbook.snapshot-observation.handbook.schema-artifact-resolution@1.0.0",
+                    &DefinitionFingerprint::from_json_value(&resolution)
+                        .unwrap()
+                        .to_string(),
+                )
+                .unwrap(),
+            );
+            values.insert(
+                (
+                    SnapshotSourceFamilyV1::Handbook,
+                    "schema_artifact_resolution",
+                ),
+                resolution,
+            );
+            Self {
+                observations,
+                values,
+            }
+        }
+    }
+
+    impl SnapshotSourcePortV1 for CompleteSnapshotSource {
+        fn observe_slot(
+            &mut self,
+            family: SnapshotSourceFamilyV1,
+            slot: &'static str,
+        ) -> Result<SnapshotSlotObservationV1, SnapshotSourcePortErrorV1> {
+            self.observations
+                .get(&(family, slot))
+                .cloned()
+                .ok_or_else(SnapshotSourcePortErrorV1::missing)
+        }
+
+        fn read_bounded_slot(
+            &mut self,
+            family: SnapshotSourceFamilyV1,
+            slot: &'static str,
+        ) -> Result<Value, SnapshotSourcePortErrorV1> {
+            self.values
+                .get(&(family, slot))
+                .cloned()
+                .ok_or_else(SnapshotSourcePortErrorV1::missing)
+        }
+    }
+
+    fn session_workspace() -> ExactBinding {
+        ExactBinding::new(
+            ExactRef::parse("handbook.workspace.packet-4-tauri@1.0.0").unwrap(),
+            Fingerprint::parse(
+                "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+            )
+            .unwrap(),
+        )
     }
 
     fn state(repo_root: &Path, now: &str, retention: &str) -> FacadeState {
@@ -955,6 +1135,61 @@ mod tests {
                 assert_eq!(presentation["input_source"], "tauri");
             }
         }
+    }
+
+    #[test]
+    fn fixed_session_grounding_start_and_end_use_the_unchanged_generic_tauri_command() {
+        let repo = tempdir().unwrap();
+        let limits = ContractLimits::packet0();
+        let state = FacadeState::open_with_snapshot_source(
+            repo.path(),
+            UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap(),
+            FixedClock(UtcTimestamp::parse("2029-01-01T00:00:00Z").unwrap()),
+            CompleteSnapshotSource::new(),
+        )
+        .unwrap();
+
+        for (sequence, boundary, key, expected_terminal) in [
+            (
+                1,
+                SessionGroundingBoundaryKindV1::Start,
+                "tauri-session-start-key",
+                SessionGroundingTerminalV1::Started,
+            ),
+            (
+                2,
+                SessionGroundingBoundaryKindV1::End,
+                "tauri-session-end-key",
+                SessionGroundingTerminalV1::Finalized,
+            ),
+        ] {
+            let request = UseCaseRequestV1::session_grounding_boundary(
+                SessionGroundingBoundaryRequestV1::new(
+                    session_workspace(),
+                    "tauri-session-packet-4",
+                    boundary,
+                    key,
+                )
+                .unwrap(),
+                &limits,
+            )
+            .unwrap();
+            let request = InvocationRequestV1::use_case(request, &limits).unwrap();
+            let response = execute_invocation(&state.inner, request).unwrap();
+            assert_eq!(response.response_kind(), InvocationResponseKind::UseCase);
+            let Some(SessionGroundingBoundaryUseCaseOutcomeV1::Composed(result)) = response
+                .session_grounding_boundary_outcome(&limits)
+                .unwrap()
+            else {
+                panic!("generic Tauri invocation must compose session grounding")
+            };
+            assert_eq!(result.sequence(), sequence);
+            assert_eq!(result.terminal(), expected_terminal);
+            assert_eq!(result.flow_status(), expected_terminal);
+            assert_eq!(result.pipeline_status(), expected_terminal);
+        }
+
+        assert_eq!(COMMAND_IDS.len(), 3);
     }
 
     #[test]

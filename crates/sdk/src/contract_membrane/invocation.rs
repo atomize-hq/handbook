@@ -1,4 +1,11 @@
 use super::serialization::classify_contract_error_message;
+use super::session_grounding::{
+    SessionGroundingBoundaryDetailsV1, SessionGroundingBoundaryExecutionV1,
+    SessionGroundingBoundaryResultV1, SessionGroundingBoundaryUseCaseOutcomeV1,
+    SessionGroundingReceiptConditionV1, SESSION_GROUNDING_BOUNDARY_DETAILS_REF,
+    SESSION_GROUNDING_BOUNDARY_RESULT_REF, SESSION_GROUNDING_BOUNDARY_RULE_REF,
+    SESSION_GROUNDING_BOUNDARY_USE_CASE_REF, SESSION_GROUNDING_RECEIPT_RECORD_REF,
+};
 use super::{
     canonical_fingerprint, canonical_json_bytes, parse_canonical_json, sha256_fingerprint,
     BoundedString, BoundedVec, ContractError, ContractLimits, ContractValue, CorrelationRef,
@@ -2779,6 +2786,7 @@ enum UseCaseKind {
     AuthorProjectContext,
     ApproverAdministration,
     PipelineRouteResolveAndPersist,
+    SessionGroundingBoundary,
 }
 
 impl UseCaseKind {
@@ -2792,6 +2800,7 @@ impl UseCaseKind {
             "handbook.use-case.pipeline-route-resolve-and-persist@1.0.0" => {
                 Ok(Self::PipelineRouteResolveAndPersist)
             }
+            SESSION_GROUNDING_BOUNDARY_USE_CASE_REF => Ok(Self::SessionGroundingBoundary),
             _ => Err(ContractError::InvalidInvariant),
         }
     }
@@ -2808,6 +2817,7 @@ impl UseCaseKind {
             Self::PipelineRouteResolveAndPersist => {
                 "handbook.use-case.pipeline-route-resolve-and-persist-result@1.0.0"
             }
+            Self::SessionGroundingBoundary => SESSION_GROUNDING_BOUNDARY_RESULT_REF,
         }
     }
 
@@ -2821,6 +2831,7 @@ impl UseCaseKind {
             Self::PipelineRouteResolveAndPersist => {
                 "handbook.use-case.pipeline-route-resolve-and-persist@1.0.0"
             }
+            Self::SessionGroundingBoundary => SESSION_GROUNDING_BOUNDARY_USE_CASE_REF,
         }
     }
 
@@ -2854,6 +2865,9 @@ impl UseCaseKind {
             Self::PipelineRouteResolveAndPersist => {
                 let _: PipelineRouteResolveAndPersistResultV1 =
                     admit_contract_value(value, limits)?;
+            }
+            Self::SessionGroundingBoundary => {
+                let _: SessionGroundingBoundaryResultV1 = admit_contract_value(value, limits)?;
             }
         }
         Ok(())
@@ -2978,6 +2992,34 @@ impl UseCaseKind {
                 }
                 Ok(())
             }
+            Self::SessionGroundingBoundary
+                if problem.subject() == &binding(SESSION_GROUNDING_BOUNDARY_USE_CASE_REF)?
+                    && problem.details_schema()
+                        == &binding(SESSION_GROUNDING_BOUNDARY_DETAILS_REF)? =>
+            {
+                let details: SessionGroundingBoundaryDetailsV1 =
+                    admit_contract_value(problem.details(), limits)?;
+                let (status, category, retry) = session_grounding_problem_disposition(&details);
+                if problem.problem_id() != problem.code()
+                    || problem.category() != category
+                    || problem.retry() != retry
+                    || !problem.evidence().as_slice().is_empty()
+                    || (status == TerminalStatus::Blocked)
+                        != problem.recheck().is_some_and(|condition| {
+                            condition.condition_schema() == problem.details_schema()
+                                && condition.condition() == problem.details()
+                        })
+                    || (status == TerminalStatus::Refused)
+                        != problem.rule().is_some_and(|rule| {
+                            binding(SESSION_GROUNDING_BOUNDARY_RULE_REF)
+                                .is_ok_and(|expected| rule == &expected)
+                        })
+                    || (status == TerminalStatus::Error) != problem.correlation_ref().is_some()
+                {
+                    return Err(ContractError::InvalidInvariant);
+                }
+                Ok(())
+            }
             _ => Err(ContractError::InvalidInvariant),
         }
     }
@@ -2988,7 +3030,10 @@ impl UseCaseKind {
         next_actions: &BoundedVec<NextAction, 128>,
         limits: &ContractLimits,
     ) -> Result<(), ContractError> {
-        if self == Self::PipelineRouteResolveAndPersist {
+        if matches!(
+            self,
+            Self::PipelineRouteResolveAndPersist | Self::SessionGroundingBoundary
+        ) {
             return next_actions
                 .as_slice()
                 .is_empty()
@@ -3090,6 +3135,9 @@ impl UseCaseKind {
                 }
             }
             return Ok(());
+        }
+        if self == Self::SessionGroundingBoundary {
+            return admit_session_grounding_receipts(terminal, receipts, limits);
         }
         if self != Self::RepositorySetup {
             return Ok(());
@@ -3551,6 +3599,111 @@ pub struct UseCaseResponseV1 {
     next_actions: BoundedVec<NextAction, 128>,
     result_fingerprint: Fingerprint,
     response_fingerprint: Fingerprint,
+}
+
+fn session_grounding_receipt(
+    owner_receipt: &super::session_grounding::SessionGroundingRecordV1,
+    limits: &ContractLimits,
+) -> Result<WriteReceipt, ContractError> {
+    WriteReceipt::new(
+        bounded("snapshot_grounding_owner_receipt")?,
+        binding(SESSION_GROUNDING_RECEIPT_RECORD_REF)?,
+        bounded("snapshot_grounding_owner")?,
+        contract_value(
+            &SessionGroundingReceiptConditionV1::committed(owner_receipt),
+            limits,
+        )?,
+        bounded("snapshot_grounding_boundary_owner_commit")?,
+        limits,
+    )
+}
+
+fn session_grounding_problem_disposition(
+    details: &SessionGroundingBoundaryDetailsV1,
+) -> (TerminalStatus, ProblemCategory, RetryDirective) {
+    match details {
+        SessionGroundingBoundaryDetailsV1::CaptureCommittedCompositionFailed(_) => (
+            TerminalStatus::Error,
+            ProblemCategory::Implementation,
+            RetryDirective::Never,
+        ),
+        SessionGroundingBoundaryDetailsV1::Owner(failure) => match failure.error_class() {
+            "refusal" => (
+                TerminalStatus::Refused,
+                ProblemCategory::Precondition,
+                RetryDirective::AfterRequestChange,
+            ),
+            "conflict" => (
+                TerminalStatus::Refused,
+                ProblemCategory::Idempotency,
+                RetryDirective::AfterRequestChange,
+            ),
+            "unavailable" => (
+                TerminalStatus::Blocked,
+                ProblemCategory::Prerequisite,
+                RetryDirective::AfterRecheck,
+            ),
+            _ => (
+                TerminalStatus::Error,
+                ProblemCategory::Implementation,
+                RetryDirective::Never,
+            ),
+        },
+    }
+}
+
+fn session_grounding_problem_code(details: &SessionGroundingBoundaryDetailsV1) -> String {
+    match details {
+        SessionGroundingBoundaryDetailsV1::CaptureCommittedCompositionFailed(_) => {
+            "session_grounding_boundary.capture_committed_composition_failed".to_owned()
+        }
+        SessionGroundingBoundaryDetailsV1::Owner(failure) => {
+            format!("session_grounding_boundary.{}", failure.error_kind())
+        }
+    }
+}
+
+fn admit_session_grounding_receipts(
+    terminal: &TerminalFields<ContractValue>,
+    receipts: &BoundedVec<WriteReceipt, 128>,
+    limits: &ContractLimits,
+) -> Result<(), ContractError> {
+    let expected = if terminal.status() == TerminalStatus::Ok {
+        let result: SessionGroundingBoundaryResultV1 = admit_contract_value(
+            terminal.data().ok_or(ContractError::InvalidInvariant)?,
+            limits,
+        )?;
+        Some(result.receipt_record().clone())
+    } else {
+        let [problem] = terminal_problems(terminal) else {
+            return Err(ContractError::InvalidInvariant);
+        };
+        match admit_contract_value::<SessionGroundingBoundaryDetailsV1>(problem.details(), limits)?
+        {
+            SessionGroundingBoundaryDetailsV1::Owner(_) => None,
+            SessionGroundingBoundaryDetailsV1::CaptureCommittedCompositionFailed(details) => {
+                Some(details.receipt_record().clone())
+            }
+        }
+    };
+    match (expected, receipts.as_slice()) {
+        (None, []) => Ok(()),
+        (Some(expected), [receipt])
+            if receipt.record().reference().as_str() == SESSION_GROUNDING_RECEIPT_RECORD_REF
+                && receipt.record_kind().as_str() == "snapshot_grounding_owner_receipt"
+                && receipt.authority_class().as_str() == "snapshot_grounding_owner"
+                && receipt.atomic_group().as_str()
+                    == "snapshot_grounding_boundary_owner_commit" =>
+        {
+            let condition: SessionGroundingReceiptConditionV1 =
+                admit_contract_value(receipt.condition(), limits)?;
+            condition
+                .admits(&expected)
+                .then_some(())
+                .ok_or(ContractError::InvalidInvariant)
+        }
+        _ => Err(ContractError::InvalidInvariant),
+    }
 }
 
 fn repository_setup_receipts(
@@ -4138,6 +4291,134 @@ pub(crate) fn measure_repository_setup_invocation(
 }
 
 impl UseCaseResponseV1 {
+    pub(crate) fn session_grounding_boundary_execution(
+        execution: SessionGroundingBoundaryExecutionV1,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        match execution {
+            SessionGroundingBoundaryExecutionV1::Composed(inclusion) => {
+                let result = SessionGroundingBoundaryResultV1::from_inclusion(&inclusion)?;
+                let receipts = BoundedVec::new(vec![session_grounding_receipt(
+                    result.receipt_record(),
+                    limits,
+                )?])?;
+                Self::success(
+                    UseCaseKind::SessionGroundingBoundary,
+                    &result,
+                    receipts,
+                    empty_bounded()?,
+                    empty_bounded()?,
+                    limits,
+                )
+            }
+            SessionGroundingBoundaryExecutionV1::OwnerFailed(failure) => {
+                Self::session_grounding_problem(
+                    SessionGroundingBoundaryDetailsV1::Owner(failure),
+                    empty_bounded()?,
+                    limits,
+                )
+            }
+            SessionGroundingBoundaryExecutionV1::CaptureCommittedCompositionFailed {
+                committed,
+                details,
+            } => {
+                let expected_receipt = match &committed {
+                    handbook_engine::SnapshotCaptureOutcomeV1::Started(value) => {
+                        value.receipt_record()
+                    }
+                    handbook_engine::SnapshotCaptureOutcomeV1::Finalized(value) => {
+                        value.receipt_record()
+                    }
+                };
+                if details.receipt_record().exact_ref() != expected_receipt.exact_ref()
+                    || details.receipt_record().fingerprint().as_str()
+                        != expected_receipt.fingerprint()
+                {
+                    return Err(ContractError::InvalidInvariant);
+                }
+                let receipts = BoundedVec::new(vec![session_grounding_receipt(
+                    details.receipt_record(),
+                    limits,
+                )?])?;
+                Self::session_grounding_problem(
+                    SessionGroundingBoundaryDetailsV1::CaptureCommittedCompositionFailed(details),
+                    receipts,
+                    limits,
+                )
+            }
+        }
+    }
+
+    fn session_grounding_problem(
+        details: SessionGroundingBoundaryDetailsV1,
+        receipts: BoundedVec<WriteReceipt, 128>,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        let use_case = binding(SESSION_GROUNDING_BOUNDARY_USE_CASE_REF)?;
+        let result_schema = binding(SESSION_GROUNDING_BOUNDARY_RESULT_REF)?;
+        let details_schema = binding(SESSION_GROUNDING_BOUNDARY_DETAILS_REF)?;
+        let details_value = contract_value(&details, limits)?;
+        let (status, category, retry) = session_grounding_problem_disposition(&details);
+        let code = session_grounding_problem_code(&details);
+        let recheck = (status == TerminalStatus::Blocked)
+            .then(|| RecheckCondition::new(details_schema.clone(), details_value.clone(), limits))
+            .transpose()?;
+        let rule = (status == TerminalStatus::Refused)
+            .then(|| binding(SESSION_GROUNDING_BOUNDARY_RULE_REF))
+            .transpose()?;
+        let correlation_ref = (status == TerminalStatus::Error)
+            .then(|| setup_correlation_ref(&code))
+            .transpose()?;
+        let problem = Problem::new(
+            bounded(&code)?,
+            bounded(&code)?,
+            category,
+            use_case.clone(),
+            rule,
+            details_schema,
+            details_value,
+            empty_bounded()?,
+            retry,
+            recheck,
+            correlation_ref,
+            limits,
+        )?;
+        let terminal = match status {
+            TerminalStatus::Blocked => TerminalFields::new(
+                status,
+                None,
+                BoundedVec::new(vec![problem])?,
+                empty_bounded()?,
+                empty_bounded()?,
+            )?,
+            TerminalStatus::Refused => TerminalFields::new(
+                status,
+                None,
+                empty_bounded()?,
+                BoundedVec::new(vec![problem])?,
+                empty_bounded()?,
+            )?,
+            TerminalStatus::Error => TerminalFields::new(
+                status,
+                None,
+                empty_bounded()?,
+                empty_bounded()?,
+                BoundedVec::new(vec![problem])?,
+            )?,
+            TerminalStatus::Ok => return Err(ContractError::InvalidInvariant),
+        };
+        Self::from_parts(
+            binding(USE_CASE_RESPONSE_REF)?,
+            use_case,
+            result_schema,
+            terminal,
+            receipts,
+            empty_bounded()?,
+            empty_bounded()?,
+            limits,
+        )
+    }
+
     pub fn repository_setup(
         outcome: &SetupOutcome,
         limits: &ContractLimits,
@@ -5038,6 +5319,39 @@ impl UseCaseResponseV1 {
             admit_contract_value(problem.details(), limits)?;
         details.validate()?;
         Ok(Some(Err(pipeline_route_failure(&details)?)))
+    }
+
+    pub fn session_grounding_boundary_outcome(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<SessionGroundingBoundaryUseCaseOutcomeV1>, ContractError> {
+        if self.use_case.reference().as_str() != SESSION_GROUNDING_BOUNDARY_USE_CASE_REF {
+            return Ok(None);
+        }
+        if self.status() == TerminalStatus::Ok {
+            let result: SessionGroundingBoundaryResultV1 = admit_contract_value(
+                self.terminal
+                    .data()
+                    .ok_or(ContractError::InvalidInvariant)?,
+                limits,
+            )?;
+            return Ok(Some(SessionGroundingBoundaryUseCaseOutcomeV1::Composed(
+                Box::new(result),
+            )));
+        }
+        let [problem] = self.terminal_problems() else {
+            return Err(ContractError::InvalidInvariant);
+        };
+        let details: SessionGroundingBoundaryDetailsV1 =
+            admit_contract_value(problem.details(), limits)?;
+        Ok(Some(match details {
+            SessionGroundingBoundaryDetailsV1::Owner(failure) => {
+                SessionGroundingBoundaryUseCaseOutcomeV1::OwnerFailed(failure)
+            }
+            SessionGroundingBoundaryDetailsV1::CaptureCommittedCompositionFailed(details) => {
+                SessionGroundingBoundaryUseCaseOutcomeV1::CaptureCommittedCompositionFailed(details)
+            }
+        }))
     }
 
     pub fn repository_setup_outcome(
@@ -5960,6 +6274,18 @@ impl InvocationResponseV1 {
             }
             InvocationResponseBodyV1::UseCase(response) => response.status(),
             InvocationResponseBodyV1::TransportFailure(response) => response.status(),
+        }
+    }
+
+    pub fn session_grounding_boundary_outcome(
+        &self,
+        limits: &ContractLimits,
+    ) -> Result<Option<SessionGroundingBoundaryUseCaseOutcomeV1>, ContractError> {
+        match &self.response {
+            InvocationResponseBodyV1::UseCase(response) => {
+                response.session_grounding_boundary_outcome(limits)
+            }
+            _ => Ok(None),
         }
     }
 

@@ -22,6 +22,8 @@ const APPROVER_ADMINISTRATION_USE_CASE_REF: &str =
     "handbook.use-case.approver-administration@1.0.0";
 const PIPELINE_ROUTE_USE_CASE_REF: &str =
     "handbook.use-case.pipeline-route-resolve-and-persist@1.0.0";
+const SESSION_GROUNDING_BOUNDARY_USE_CASE_REF: &str =
+    "handbook.use-case.session-grounding-boundary@1.0.0";
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -565,6 +567,66 @@ impl PipelineRouteResolveAndPersistRequestV1 {
     }
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum SessionGroundingBoundaryKindV1 {
+    Start,
+    End,
+}
+
+#[derive(Clone, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct SessionGroundingBoundaryRequestV1 {
+    workspace: ExactBinding,
+    host_session_ref: BoundedString<256>,
+    boundary: SessionGroundingBoundaryKindV1,
+    idempotency_key: BoundedString<256>,
+}
+
+impl SessionGroundingBoundaryRequestV1 {
+    pub fn new(
+        workspace: ExactBinding,
+        host_session_ref: &str,
+        boundary: SessionGroundingBoundaryKindV1,
+        idempotency_key: &str,
+    ) -> Result<Self, ContractError> {
+        Ok(Self {
+            workspace,
+            host_session_ref: bounded(host_session_ref)?,
+            boundary,
+            idempotency_key: bounded(idempotency_key)?,
+        })
+    }
+
+    pub fn workspace(&self) -> &ExactBinding {
+        &self.workspace
+    }
+
+    pub fn host_session_ref(&self) -> &str {
+        self.host_session_ref.as_str()
+    }
+
+    pub fn boundary(&self) -> SessionGroundingBoundaryKindV1 {
+        self.boundary
+    }
+
+    pub(crate) fn idempotency_key(&self) -> &str {
+        self.idempotency_key.as_str()
+    }
+}
+
+impl std::fmt::Debug for SessionGroundingBoundaryRequestV1 {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("SessionGroundingBoundaryRequestV1")
+            .field("workspace", &self.workspace)
+            .field("host_session_ref", &self.host_session_ref)
+            .field("boundary", &self.boundary)
+            .field("idempotency_key", &"<redacted>")
+            .finish()
+    }
+}
+
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub enum UseCaseRequestBodyV1 {
     RepositorySetup(RepositorySetupRequestV1),
@@ -573,6 +635,7 @@ pub enum UseCaseRequestBodyV1 {
     AuthorProjectContext(AuthorProjectContextRequestV1),
     ApproverAdministration(ApproverAdministrationRequestV1),
     PipelineRouteResolveAndPersist(PipelineRouteResolveAndPersistRequestV1),
+    SessionGroundingBoundary(SessionGroundingBoundaryRequestV1),
 }
 
 pub(crate) enum SdkUseCaseRequest {
@@ -582,6 +645,7 @@ pub(crate) enum SdkUseCaseRequest {
     AuthorProjectContext(crate::ProjectContextCommandRequest),
     ApproverAdministration(crate::ApproverCommandRequest),
     PipelineRouteResolveAndPersist(String),
+    SessionGroundingBoundary(SessionGroundingBoundaryRequestV1),
 }
 
 impl UseCaseRequestBodyV1 {
@@ -593,6 +657,7 @@ impl UseCaseRequestBodyV1 {
             Self::AuthorProjectContext(_) => AUTHOR_PROJECT_CONTEXT_USE_CASE_REF,
             Self::ApproverAdministration(_) => APPROVER_ADMINISTRATION_USE_CASE_REF,
             Self::PipelineRouteResolveAndPersist(_) => PIPELINE_ROUTE_USE_CASE_REF,
+            Self::SessionGroundingBoundary(_) => SESSION_GROUNDING_BOUNDARY_USE_CASE_REF,
         }
     }
 
@@ -630,6 +695,9 @@ impl UseCaseRequestBodyV1 {
                 SdkUseCaseRequest::PipelineRouteResolveAndPersist(
                     request.selector.as_str().to_owned(),
                 )
+            }
+            Self::SessionGroundingBoundary(request) => {
+                SdkUseCaseRequest::SessionGroundingBoundary(request.clone())
             }
         }
     }
@@ -835,6 +903,7 @@ impl Serialize for UseCaseRequestBodyV1 {
             Self::AuthorProjectContext(value) => value.serialize(serializer),
             Self::ApproverAdministration(value) => value.serialize(serializer),
             Self::PipelineRouteResolveAndPersist(value) => value.serialize(serializer),
+            Self::SessionGroundingBoundary(value) => value.serialize(serializer),
         }
     }
 }
@@ -905,6 +974,16 @@ impl UseCaseRequestV1 {
         )
     }
 
+    pub fn session_grounding_boundary(
+        request: SessionGroundingBoundaryRequestV1,
+        limits: &ContractLimits,
+    ) -> Result<Self, ContractError> {
+        Self::from_body(
+            UseCaseRequestBodyV1::SessionGroundingBoundary(request),
+            limits,
+        )
+    }
+
     fn from_body(
         request: UseCaseRequestBodyV1,
         limits: &ContractLimits,
@@ -967,6 +1046,12 @@ impl UseCaseRequestV1 {
             PIPELINE_ROUTE_USE_CASE_REF => UseCaseRequestBodyV1::PipelineRouteResolveAndPersist(
                 parse_contract_value(&raw.request, limits)?,
             ),
+            SESSION_GROUNDING_BOUNDARY_USE_CASE_REF => {
+                UseCaseRequestBodyV1::SessionGroundingBoundary(parse_contract_value(
+                    &raw.request,
+                    limits,
+                )?)
+            }
             _ => return Err(ContractError::InvalidInvariant),
         };
         let value = Self::from_parts(raw.schema, raw.use_case, request, limits)?;

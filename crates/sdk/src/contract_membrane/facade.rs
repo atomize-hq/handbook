@@ -9,7 +9,8 @@ pub use request::{
     CharterInputEntryV1, CharterInputValueV1, CharterIntakeConsumerV1, CharterIntakeEnvelopeV1,
     CharterIntakeSourceKindV1, InvocationRequestBodyV1, InvocationRequestKindV1,
     InvocationRequestV1, PipelineRouteResolveAndPersistRequestV1, ProjectContextInputV1,
-    RepositoryDoctorRequestV1, RepositorySetupRequestV1, UseCaseRequestBodyV1, UseCaseRequestV1,
+    RepositoryDoctorRequestV1, RepositorySetupRequestV1, SessionGroundingBoundaryKindV1,
+    SessionGroundingBoundaryRequestV1, UseCaseRequestBodyV1, UseCaseRequestV1,
 };
 pub use response::{
     BootstrapFacadeOutcomeKindV1, BootstrapFacadeResponseBodyV1, BootstrapFacadeResponseV1,
