@@ -142,17 +142,19 @@ Projection has the same rule. A projection selects and bounds owner truth for a
 consumer; it does not synthesize missing authority. The private
 [`projection`](../../../crates/engine/src/projection/) and
 [`snapshot_memory`](../../../crates/engine/src/snapshot_memory/) components and
-the typed grounding adapters are precursors until an authorized ordinary seam
-consumes them. Their existence alone does not prove adoption.
+typed grounding adapters supplied precursor semantics; HCM-4.6 now consumes
+them through the production Engine owner and bounded ordinary seam. Their earlier
+existence alone did not prove that adoption.
 
-The prepared [`HCM-4.6 authority`](slices/HCM-4.6/README.md) selects the target
-topology without changing that current-state classification: an explicit future
-session trigger calls one fixed transport-free SDK composition; a purpose-named
-Engine owner alone captures admitted sources, owns immutable repository and
-stream semantics, selects the applicable predecessor, computes delta and the
-Resolution-bounded grounding projection, and returns bounded accounting; Flow
-and pipeline consume that typed result; generic transports remain adapters.
-Automatic lifecycle triggering and the actual adopter remain Phase-6 work.
+The completed [`HCM-4.6 authority`](slices/HCM-4.6/README.md) establishes that
+topology in current product source: a purpose-named Engine owner alone captures
+admitted sources, owns immutable repository and stream semantics, selects the
+applicable predecessor, computes compatible delta and the Resolution-bounded
+grounding projection, and returns bounded accounting. Flow and pipeline preserve
+that typed result, while the SDK exposes four admitted ordinary operations and
+one fixed transport-free session-boundary composition through unchanged generic
+consumers. Automatic lifecycle triggering and the actual adopter remain
+separately authorized Phase-6 work.
 
 ## Trust and validation boundaries
 
