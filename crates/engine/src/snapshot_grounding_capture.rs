@@ -292,6 +292,10 @@ struct SnapshotCommittedGroundingV1 {
     grounding_record: SnapshotCommittedRecordV1,
     receipt_record: SnapshotCommittedRecordV1,
     replayed: bool,
+    #[allow(
+        dead_code,
+        reason = "production commits are exposed only by the test-support seam"
+    )]
     repository_commit: SnapshotRepositoryCommitV1,
 }
 

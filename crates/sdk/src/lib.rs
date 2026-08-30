@@ -254,6 +254,21 @@ impl HandbookSdkV1 {
         contract_membrane::dispatch_invocation(&self.repo_root, request, limits)
     }
 
+    /// Dispatches one Rust SDK invocation with a trusted snapshot-source port.
+    pub fn invoke_with_snapshot_source(
+        &self,
+        request: &contract_membrane::InvocationRequestV1,
+        limits: &contract_membrane::ContractLimits,
+        source_port: &mut dyn handbook_engine::SnapshotSourcePortV1,
+    ) -> Result<contract_membrane::InvocationResponseV1, contract_membrane::ContractError> {
+        contract_membrane::dispatch_invocation_with_snapshot_source(
+            &self.repo_root,
+            request,
+            limits,
+            source_port,
+        )
+    }
+
     /// Dispatches one Tauri invocation with fixed transport-owned presentation facts.
     ///
     /// The Tauri presentation value never enters the request contract or ordinary capability

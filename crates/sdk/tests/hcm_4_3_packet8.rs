@@ -27,7 +27,7 @@ const CLI_JSON_OPERATIONS: [&str; 18] = [
     "pipeline.handoff.emit@1.0.0",
     "pipeline.state.apply@1.0.0",
 ];
-const CONTRACT_AND_DOCK_OPERATIONS: [&str; 12] = [
+const FULL_TRANSPORT_OPERATIONS: [&str; 16] = [
     "contract.definition.list@1.0.0",
     "contract.definition.read@1.0.0",
     "contract.definition.append@1.0.0",
@@ -40,16 +40,21 @@ const CONTRACT_AND_DOCK_OPERATIONS: [&str; 12] = [
     "dock.manifest.list@1.0.0",
     "dock.manifest.read@1.0.0",
     "dock.run@1.0.0",
+    "snapshot.capture@1.0.0",
+    "snapshot.read@1.0.0",
+    "snapshot.delta@1.0.0",
+    "snapshot.project@1.0.0",
 ];
-const USE_CASES: [&str; 6] = [
+const USE_CASES: [&str; 7] = [
     "handbook.use-case.repository-setup@1.0.0",
     "handbook.use-case.repository-doctor@1.0.0",
     "handbook.use-case.author-charter@1.0.0",
     "handbook.use-case.author-project-context@1.0.0",
     "handbook.use-case.approver-administration@1.0.0",
     "handbook.use-case.pipeline-route-resolve-and-persist@1.0.0",
+    "handbook.use-case.session-grounding-boundary@1.0.0",
 ];
-const USE_CASE_SCHEMAS: [&str; 12] = [
+const USE_CASE_SCHEMAS: [&str; 14] = [
     "handbook.use-case.repository-setup-result@1.0.0",
     "handbook.use-case.repository-setup-details@1.0.0",
     "handbook.use-case.repository-doctor-result@1.0.0",
@@ -62,6 +67,8 @@ const USE_CASE_SCHEMAS: [&str; 12] = [
     "handbook.use-case.approver-administration-details@1.0.0",
     "handbook.use-case.pipeline-route-resolve-and-persist-result@1.0.0",
     "handbook.use-case.pipeline-route-resolve-and-persist-details@1.0.0",
+    "handbook.use-case.session-grounding-boundary-result@1.0.0",
+    "handbook.use-case.session-grounding-boundary-details@1.0.0",
 ];
 
 #[test]
@@ -80,7 +87,7 @@ fn inventory_discovery_use_case_omission_and_schema_roots_close_exactly() {
     let expected_cli = predecessor_cli
         .iter()
         .copied()
-        .chain(CONTRACT_AND_DOCK_OPERATIONS)
+        .chain(FULL_TRANSPORT_OPERATIONS)
         .collect::<BTreeSet<_>>();
     let actual_cli = rows
         .iter()
@@ -91,12 +98,12 @@ fn inventory_discovery_use_case_omission_and_schema_roots_close_exactly() {
         .map(|row| row.operation_ref().as_str())
         .collect::<BTreeSet<_>>();
     assert_eq!(actual_cli, expected_cli);
-    assert_eq!(expected_cli.len(), 30);
+    assert_eq!(expected_cli.len(), 34);
     assert!(predecessor_cli.is_subset(&actual_cli));
 
     let expected_discoverable = CLI_JSON_OPERATIONS
         .into_iter()
-        .chain(CONTRACT_AND_DOCK_OPERATIONS)
+        .chain(FULL_TRANSPORT_OPERATIONS)
         .chain(["posture.transition.apply@1.0.0"])
         .collect::<BTreeSet<_>>();
     let actual_discoverable = rows
@@ -105,7 +112,7 @@ fn inventory_discovery_use_case_omission_and_schema_roots_close_exactly() {
         .map(|row| row.operation_ref().as_str())
         .collect::<BTreeSet<_>>();
     assert_eq!(actual_discoverable, expected_discoverable);
-    assert_eq!(expected_discoverable.len(), 31);
+    assert_eq!(expected_discoverable.len(), 35);
 
     let route_resolve = rows
         .iter()

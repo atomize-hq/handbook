@@ -372,7 +372,7 @@ fn final_inventory_and_witness_have_exact_current_transport_vectors() {
         rows.iter()
             .filter(|row| row.discovery() == DiscoveryState::Discoverable)
             .count(),
-        31
+        35
     );
 
     let expected_cli_tauri = rows
@@ -407,13 +407,13 @@ fn final_inventory_and_witness_have_exact_current_transport_vectors() {
         rows.iter()
             .filter(|row| !row.current_transports().is_empty())
             .count(),
-        31
+        35
     );
     assert_eq!(
         rows.iter()
             .filter(|row| row.current_transports().is_empty())
             .count(),
-        31
+        27
     );
 
     let witness =
@@ -430,9 +430,12 @@ fn final_inventory_and_witness_have_exact_current_transport_vectors() {
             )
         })
         .collect::<Vec<_>>();
-    assert_eq!(witness_vectors.len(), 31);
+    assert_eq!(witness_vectors.len(), 35);
     assert!(witness_vectors.iter().all(|(operation_ref, transports)| {
-        if operation_ref.starts_with("contract.") || operation_ref.starts_with("dock.") {
+        if operation_ref.starts_with("contract.")
+            || operation_ref.starts_with("dock.")
+            || operation_ref.starts_with("snapshot.")
+        {
             transports
                 == &[
                     OperationTransport::CliJson,

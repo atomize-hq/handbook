@@ -10,7 +10,7 @@ use super::{
 use std::collections::BTreeSet;
 
 const INVENTORY_DIGEST: &str =
-    "sha256:9e2217c61a900a8fa6649c5b3f7d2a1577316da9efec897573ac85b6ab531f92";
+    "sha256:349c4e79aefa79b42fbf4fdc194c9c6f95838b761e3dbb05393c731b50da01c7";
 
 macro_rules! schema_asset {
     ($reference:literal, $path:literal) => {
@@ -19,7 +19,7 @@ macro_rules! schema_asset {
 }
 
 const SCHEMA_MANIFEST_BYTES: &[u8] = include_bytes!("../../schemas/manifest.json");
-const SCHEMA_ASSETS: [(&str, &[u8]); 170] = [
+const SCHEMA_ASSETS: [(&str, &[u8]); 180] = [
     schema_asset!(
         "handbook.artifact-operation-details@1.0.0",
         "../../schemas/2020-12/handbook.artifact-operation-details/1.0.0.schema.json"
@@ -521,6 +521,38 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 170] = [
         "../../schemas/2020-12/handbook.operation.posture-transition-apply-result/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.operation.snapshot-capture-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.snapshot-capture-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.snapshot-capture-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.snapshot-capture-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.snapshot-delta-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.snapshot-delta-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.snapshot-delta-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.snapshot-delta-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.snapshot-project-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.snapshot-project-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.snapshot-project-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.snapshot-project-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.snapshot-read-request@1.0.0",
+        "../../schemas/2020-12/handbook.operation.snapshot-read-request/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.operation.snapshot-read-result@1.0.0",
+        "../../schemas/2020-12/handbook.operation.snapshot-read-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.owner-version-entry@1.0.0",
         "../../schemas/2020-12/handbook.owner-version-entry/1.0.0.schema.json"
     ),
@@ -697,6 +729,14 @@ const SCHEMA_ASSETS: [(&str, &[u8]); 170] = [
         "../../schemas/2020-12/handbook.use-case.repository-setup-result/1.0.0.schema.json"
     ),
     schema_asset!(
+        "handbook.use-case.session-grounding-boundary-details@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.session-grounding-boundary-details/1.0.0.schema.json"
+    ),
+    schema_asset!(
+        "handbook.use-case.session-grounding-boundary-result@1.0.0",
+        "../../schemas/2020-12/handbook.use-case.session-grounding-boundary-result/1.0.0.schema.json"
+    ),
+    schema_asset!(
         "handbook.write-receipt@1.0.0",
         "../../schemas/2020-12/handbook.write-receipt/1.0.0.schema.json"
     ),
@@ -763,6 +803,7 @@ impl ProductionWitness {
         capabilities
             .extend(super::contract_evidence_operation::current_contract_evidence_capabilities()?);
         capabilities.extend(super::dock_operation::current_dock_capabilities()?);
+        capabilities.extend(super::snapshot_operation::current_snapshot_capabilities()?);
         capabilities.sort_by(|left, right| {
             left.operation()
                 .reference()
@@ -991,7 +1032,7 @@ fn verify_schema_assets(
         &ContractLimits::packet0(),
     )
     .map_err(|_| ProductionWitnessError::StaleManifest)?;
-    if manifest.len() != 170 || assets.len() != 170 || manifest.len() != assets.len() {
+    if manifest.len() != 180 || assets.len() != 180 || manifest.len() != assets.len() {
         return Err(ProductionWitnessError::ManifestCountMismatch);
     }
     let mut seen = BTreeSet::new();
@@ -1057,12 +1098,14 @@ fn verify_inventory() -> Result<(), ProductionWitnessError> {
                 "pipeline.state.apply@1.0.0",
             ]
             .contains(&row.operation_ref().as_str());
+            let is_snapshot = super::snapshot_operation::SNAPSHOT_OPERATION_REFS
+                .contains(&row.operation_ref().as_str());
             if is_posture {
                 row.admission_reason() != super::AdmissionReason::Admitted
                     || row.current_transports()
                         != [OperationTransport::RustSdk, OperationTransport::Tauri]
                     || row.discovery() != DiscoveryState::Discoverable
-            } else if is_contract || is_dock {
+            } else if is_contract || is_dock || is_snapshot {
                 row.admission_reason() != super::AdmissionReason::Admitted
                     || row.current_transports()
                         != [
@@ -1298,10 +1341,10 @@ mod tests {
         let witness =
             ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
                 .unwrap();
-        assert_eq!(witness.schema_manifest().len(), 170);
+        assert_eq!(witness.schema_manifest().len(), 180);
         assert_eq!(witness.owner_versions().len(), 5);
         assert_eq!(witness.profiles().len(), 3);
-        assert_eq!(witness.capabilities().len(), 31);
+        assert_eq!(witness.capabilities().len(), 35);
         let posture = witness
             .capabilities()
             .iter()
@@ -1349,7 +1392,7 @@ mod tests {
         }
         assert_eq!(
             witness.catalog_roots().operations().total_entries().get(),
-            31
+            35
         );
         assert_ne!(
             witness.descriptor().schema().fingerprint(),

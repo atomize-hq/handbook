@@ -213,11 +213,25 @@ fn owner_failure_is_write_nothing_and_fixed_use_case_stays_out_of_discovery() {
         .capabilities()
         .iter()
         .all(|entry| entry.operation().reference().as_str() != USE_CASE_REF));
-    assert!(witness.schema_manifest().iter().all(|entry| !entry
-        .schema()
-        .reference()
-        .as_str()
-        .contains("session-grounding-boundary")));
+    let use_case_roots = witness
+        .schema_manifest()
+        .iter()
+        .filter(|entry| {
+            entry
+                .schema()
+                .reference()
+                .as_str()
+                .contains("session-grounding-boundary")
+        })
+        .map(|entry| entry.schema().reference().as_str())
+        .collect::<BTreeSet<_>>();
+    assert_eq!(
+        use_case_roots,
+        BTreeSet::from([
+            "handbook.use-case.session-grounding-boundary-details@1.0.0",
+            "handbook.use-case.session-grounding-boundary-result@1.0.0",
+        ])
+    );
 }
 
 struct CompletePort {

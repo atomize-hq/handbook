@@ -68,10 +68,12 @@ pub mod repository_invocation_identity;
 pub mod schema_registry;
 pub mod semantic_capability_registry;
 mod snapshot_grounding_capture;
+mod snapshot_grounding_operations;
 mod snapshot_grounding_owner;
 mod snapshot_grounding_repository;
 #[allow(dead_code)]
 mod snapshot_memory;
+pub mod snapshot_operation_admission;
 pub mod stable_role_registry;
 pub mod vocabulary_registry;
 
@@ -313,6 +315,11 @@ pub use snapshot_grounding_capture::{
     SnapshotCommittedRecordV1, SnapshotFinalGroundingV1, SnapshotSlotAccountingV1,
     SnapshotSlotObservationV1, SnapshotSourcePortErrorV1, SnapshotSourcePortV1,
     SnapshotStartedGroundingV1,
+};
+pub use snapshot_grounding_operations::{
+    SnapshotAccountingEntryV1, SnapshotDeltaProjectionV1, SnapshotDescriptorV1,
+    SnapshotOperationErrorV1, SnapshotPredecessorOutcomeV1, SnapshotProjectionV1,
+    SnapshotRecordBindingV1, SnapshotRequiredRecheckV1,
 };
 pub use snapshot_grounding_owner::{
     SnapshotAdapterFailureOutcomeV1, SnapshotAdapterFailureRuleV1, SnapshotBoundaryIdentityV1,

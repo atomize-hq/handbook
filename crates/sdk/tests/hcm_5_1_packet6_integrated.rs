@@ -54,8 +54,8 @@ fn final_owner_to_sdk_and_generic_transport_proof_is_exact_and_fail_closed() {
 
     assert_eq!(definitions.len(), 4);
     assert_eq!(inventory.len(), 62);
-    assert_eq!(witness.capabilities().len(), 31);
-    assert_eq!(witness.schema_manifest().len(), 170);
+    assert_eq!(witness.capabilities().len(), 35);
+    assert_eq!(witness.schema_manifest().len(), 180);
     for ((operation_ref, class), definition) in OPERATIONS.iter().zip(&definitions) {
         assert_eq!(definition.operation().as_str(), *operation_ref);
         assert_eq!(definition.class(), *class);
@@ -563,7 +563,7 @@ fn prove_list_read_and_generic_consumers(root: &Path, contract: &ExactBinding) {
     let CatalogReadResponseBodyV1::CapabilityPage(page) = page.response() else {
         panic!("capability catalog returned a non-capability page");
     };
-    assert_eq!(page.root().total_entries().get(), 31);
+    assert_eq!(page.root().total_entries().get(), 35);
     let contract_operations = page
         .entries()
         .iter()

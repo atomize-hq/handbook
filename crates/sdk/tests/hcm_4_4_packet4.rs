@@ -287,6 +287,7 @@ fn use_cases_remain_outside_operation_inventory_owner_admission_and_discovery() 
         "handbook.use-case.author-project-context@1.0.0",
         "handbook.use-case.approver-administration@1.0.0",
         "handbook.use-case.pipeline-route-resolve-and-persist@1.0.0",
+        "handbook.use-case.session-grounding-boundary@1.0.0",
     ];
     let rows = operation_inventory();
     assert_eq!(rows.len(), 62);
@@ -299,7 +300,7 @@ fn use_cases_remain_outside_operation_inventory_owner_admission_and_discovery() 
     let witness =
         ProductionWitness::from_current(UtcTimestamp::parse("2030-01-01T00:00:00Z").unwrap())
             .unwrap();
-    assert_eq!(witness.capabilities().len(), 31);
+    assert_eq!(witness.capabilities().len(), 35);
     for use_case_ref in use_case_refs {
         assert!(witness
             .capabilities()
@@ -312,6 +313,6 @@ fn use_cases_remain_outside_operation_inventory_owner_admission_and_discovery() 
                 .current_transports()
                 .contains(&OperationTransport::Tauri))
             .count(),
-        31
+        35
     );
 }

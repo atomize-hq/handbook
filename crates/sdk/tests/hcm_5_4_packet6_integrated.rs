@@ -21,8 +21,8 @@ fn packet6_closes_exact_public_truth_through_the_generic_rust_consumer() {
         ProductionWitness::from_current(UtcTimestamp::parse("9999-12-31T23:59:59Z").unwrap())
             .unwrap();
     assert_eq!(operation_inventory().len(), 62);
-    assert_eq!(witness.capabilities().len(), 31);
-    assert_eq!(witness.schema_manifest().len(), 170);
+    assert_eq!(witness.capabilities().len(), 35);
+    assert_eq!(witness.schema_manifest().len(), 180);
     assert_eq!(DockManifestRegistryV1::production().production_len(), 1);
 
     let schema_refs = witness
@@ -30,7 +30,7 @@ fn packet6_closes_exact_public_truth_through_the_generic_rust_consumer() {
         .iter()
         .map(|entry| entry.schema().reference().as_str())
         .collect::<BTreeSet<_>>();
-    assert_eq!(schema_refs.len(), 170);
+    assert_eq!(schema_refs.len(), 180);
     assert!(schema_refs.contains(VALIDATION_INPUT_REF));
     assert!(schema_refs.contains(FACT_REF));
 

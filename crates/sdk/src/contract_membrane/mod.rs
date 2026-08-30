@@ -27,6 +27,7 @@ mod response;
 pub mod schema_generation;
 mod serialization;
 mod session_grounding;
+mod snapshot_operation;
 mod typed_catalog;
 mod verification;
 
@@ -148,8 +149,8 @@ pub use invocation::{
     TransportIoErrorV1, TransportPresentationViewV1, UseCaseCauseV1, UseCaseResponseV1,
 };
 pub(crate) use invocation_dispatch::{
-    dispatch_invocation, dispatch_tauri_invocation, dispatch_tauri_invocation_with_snapshot_source,
-    readmit_invocation_response,
+    dispatch_invocation, dispatch_invocation_with_snapshot_source, dispatch_tauri_invocation,
+    dispatch_tauri_invocation_with_snapshot_source, readmit_invocation_response,
 };
 pub use operation::{
     operation_inventory, validate_complete_definition_set, validate_complete_operation_ref_set,
@@ -206,6 +207,12 @@ pub use session_grounding::{
     SessionGroundingBoundaryUseCaseOutcomeV1, SessionGroundingCompositionFailureV1,
     SessionGroundingOwnerFailureV1, SessionGroundingPredecessorV1, SessionGroundingRecordV1,
     SessionGroundingRecoveryActionV1, SessionGroundingTerminalV1,
+};
+pub(crate) use snapshot_operation::execute_snapshot_operation;
+pub use snapshot_operation::{
+    snapshot_operation_definition, snapshot_operation_definitions, SnapshotBoundaryBindingDtoV1,
+    SnapshotBoundaryDtoV1, SnapshotCaptureRequestDtoV1, SnapshotOperationSchemaValidator,
+    SnapshotTargetRequestDtoV1, SNAPSHOT_OPERATION_REFS,
 };
 pub use typed_catalog::{
     CatalogPageSize, CatalogReadError, ImmutableCatalog, TypedCatalogCursor, TypedCatalogEntry,

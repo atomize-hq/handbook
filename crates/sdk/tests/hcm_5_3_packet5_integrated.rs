@@ -146,8 +146,8 @@ fn generic_rust_sdk_consumes_all_three_rows_and_production_run_stops_before_spaw
         ProductionWitness::from_current(UtcTimestamp::parse("9999-12-31T23:59:59Z").unwrap())
             .unwrap();
     assert_eq!(operation_inventory().len(), 62);
-    assert_eq!(witness.capabilities().len(), 31);
-    assert_eq!(witness.schema_manifest().len(), 170);
+    assert_eq!(witness.capabilities().len(), 35);
+    assert_eq!(witness.schema_manifest().len(), 180);
     assert_eq!(DOCK_OPERATION_REFS.len(), 3);
     assert_eq!(
         witness

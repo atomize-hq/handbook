@@ -11,16 +11,17 @@ use super::pipeline_operation::{
     PIPELINE_HANDOFF_EMIT_REF, PIPELINE_LIST_REF, PIPELINE_READ_REF, PIPELINE_STATE_APPLY_REF,
 };
 use super::posture::{PostureSchemaValidator, OPERATION_REF as POSTURE_OPERATION_REF};
+use super::snapshot_operation::{SnapshotOperationSchemaValidator, SNAPSHOT_OPERATION_REFS};
 use super::{
     artifact_operation_definition, canonical_json_bytes, contract_evidence_operation_definition,
     contract_operation_definition, dock_operation_definition, execute_artifact_operation,
     execute_contract_evidence_operation, execute_contract_operation, execute_dock_operation,
-    execute_flow_operation, execute_pipeline_operation, flow_resolve_operation_definition,
-    parse_canonical_json, pipeline_operation_definitions, posture_transition_apply_definition,
-    ContractError, ContractLimits, ContractValue, ExactBinding, InvocationRequestBodyV1,
-    InvocationRequestV1, InvocationResponseKind, InvocationResponseV1, OperationDefinition,
-    OperationRequestV1, OperationSchemaValidator, PipelineOperationSchemaValidator, RequestId,
-    TransportFailureKind, TransportFailureV1,
+    execute_flow_operation, execute_pipeline_operation, execute_snapshot_operation,
+    flow_resolve_operation_definition, parse_canonical_json, pipeline_operation_definitions,
+    posture_transition_apply_definition, ContractError, ContractLimits, ContractValue,
+    ExactBinding, InvocationRequestBodyV1, InvocationRequestV1, InvocationResponseKind,
+    InvocationResponseV1, OperationDefinition, OperationRequestV1, OperationSchemaValidator,
+    PipelineOperationSchemaValidator, RequestId, TransportFailureKind, TransportFailureV1,
 };
 use super::{FlowResolveSchemaValidator, OperationTransport};
 use crate::HandbookSdkV1;
@@ -38,6 +39,7 @@ enum OperationRoute {
     Flow,
     Pipeline,
     Posture,
+    Snapshot,
 }
 
 #[derive(Clone, Copy)]
@@ -59,6 +61,7 @@ impl OperationRoute {
                 .find(|definition| definition.operation().as_str() == operation_ref)
                 .ok_or(ContractError::InvalidInvariant),
             Self::Posture => posture_transition_apply_definition(),
+            Self::Snapshot => super::snapshot_operation_definition(operation_ref),
         }
     }
 
@@ -71,6 +74,7 @@ impl OperationRoute {
             Self::Flow => &FlowResolveSchemaValidator,
             Self::Pipeline => &PipelineOperationSchemaValidator,
             Self::Posture => &PostureSchemaValidator,
+            Self::Snapshot => &SnapshotOperationSchemaValidator,
         }
     }
 
@@ -78,6 +82,7 @@ impl OperationRoute {
         self,
         repo_root: &Path,
         request: &OperationRequestV1,
+        snapshot_source_port: Option<&mut dyn handbook_engine::SnapshotSourcePortV1>,
     ) -> Result<super::OperationResponseV1, ContractError> {
         match self {
             Self::Artifact => execute_artifact_operation(repo_root, request),
@@ -89,6 +94,7 @@ impl OperationRoute {
             Self::Posture => {
                 HandbookSdkV1::open(repo_root).apply_posture_transition_operation(request)
             }
+            Self::Snapshot => execute_snapshot_operation(repo_root, request, snapshot_source_port),
         }
     }
 }
@@ -149,6 +155,21 @@ pub(crate) fn dispatch_invocation(
     )
 }
 
+pub(crate) fn dispatch_invocation_with_snapshot_source(
+    repo_root: &Path,
+    request: &InvocationRequestV1,
+    limits: &ContractLimits,
+    source_port: &mut dyn handbook_engine::SnapshotSourcePortV1,
+) -> Result<InvocationResponseV1, ContractError> {
+    dispatch_invocation_with_presentation(
+        repo_root,
+        request,
+        UseCasePresentation::RustSdk,
+        limits,
+        Some(source_port),
+    )
+}
+
 pub(crate) fn dispatch_tauri_invocation(
     repo_root: &Path,
     request: &InvocationRequestV1,
@@ -192,7 +213,7 @@ fn dispatch_invocation_with_presentation(
             let Some((route, _, operation)) = operation_route(request)? else {
                 return default_denial(limits);
             };
-            let response = route.execute(repo_root, operation)?;
+            let response = route.execute(repo_root, operation, snapshot_source_port)?;
             InvocationResponseV1::operation_response(response, limits)
         }
         InvocationRequestBodyV1::UseCase(request) => dispatch_use_case(
@@ -433,6 +454,8 @@ fn resolve_operation_route(
         OperationRoute::Pipeline
     } else if operation_ref == POSTURE_OPERATION_REF {
         OperationRoute::Posture
+    } else if SNAPSHOT_OPERATION_REFS.contains(&operation_ref) {
+        OperationRoute::Snapshot
     } else {
         return Ok(None);
     };

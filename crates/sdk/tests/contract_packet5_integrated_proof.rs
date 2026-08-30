@@ -41,7 +41,7 @@ fn regeneration_manifest_and_production_catalogs_close_over_one_exact_set() {
         &ContractLimits::packet0(),
     )
     .unwrap();
-    assert_eq!(manifest.len(), 170);
+    assert_eq!(manifest.len(), 180);
 
     let mut refs = BTreeSet::new();
     let mut schema_paths = BTreeSet::new();
@@ -87,10 +87,10 @@ fn regeneration_manifest_and_production_catalogs_close_over_one_exact_set() {
     );
     assert_eq!(
         witness.catalog_roots().operations().total_entries().get(),
-        31
+        35
     );
     assert_eq!(witness.catalog_roots().profiles().total_entries().get(), 3);
-    assert_eq!(witness.capabilities().len(), 31);
+    assert_eq!(witness.capabilities().len(), 35);
     let posture = witness
         .capabilities()
         .iter()
@@ -332,7 +332,7 @@ fn owner_native_evidence_inventory_and_adapter_direction_remain_independent() {
         .iter()
         .filter(|row| row.admission_reason() == AdmissionReason::Admitted)
         .collect::<Vec<_>>();
-    assert_eq!(admitted.len(), 31);
+    assert_eq!(admitted.len(), 35);
     let cli_json = [
         "artifact.kind.list@1.0.0",
         "artifact.instance.list@1.0.0",
@@ -357,6 +357,7 @@ fn owner_native_evidence_inventory_and_adapter_direction_remain_independent() {
         row.discovery() == DiscoveryState::Discoverable
             && if row.operation_ref().as_str().starts_with("contract.")
                 || row.operation_ref().as_str().starts_with("dock.")
+                || row.operation_ref().as_str().starts_with("snapshot.")
             {
                 row.current_transports()
                     == [
@@ -542,12 +543,7 @@ fn assert_adapter_sources_are_non_authoritative() {
     assert!(tauri_manifest.contains("path = \"src/lib.rs\""));
     assert!(tauri_root.join("src/lib.rs").is_file());
     assert!(tauri_manifest.contains("handbook-sdk = { path = \"../sdk\""));
-    for prohibited in [
-        "handbook-cli",
-        "handbook-engine",
-        "handbook-flow",
-        "handbook-pipeline",
-    ] {
+    for prohibited in ["handbook-cli", "handbook-flow", "handbook-pipeline"] {
         assert!(!tauri_manifest.contains(prohibited));
     }
     assert!(!sdk_manifest.to_ascii_lowercase().contains("tauri"));

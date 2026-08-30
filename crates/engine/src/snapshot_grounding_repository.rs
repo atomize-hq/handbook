@@ -272,6 +272,19 @@ pub(crate) enum SnapshotRepositoryCapturePlanV1 {
 }
 
 impl<'binding> SnapshotRepositoryV1<'binding> {
+    pub(crate) fn read_record_binding(
+        &self,
+        class: &str,
+        exact_ref: &str,
+        fingerprint: &str,
+    ) -> Result<Vec<u8>, SnapshotRepositoryErrorV1> {
+        self.read_record(&SnapshotRecordRefV1 {
+            class: class.to_owned(),
+            exact_ref: exact_ref.to_owned(),
+            fingerprint: fingerprint.to_owned(),
+        })
+    }
+
     pub(crate) fn open(
         owner: SnapshotGroundingOwnerV1,
         binding: &'binding SnapshotRepositoryBindingV1,

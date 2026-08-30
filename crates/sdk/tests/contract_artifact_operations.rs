@@ -48,7 +48,7 @@ fn ten_artifact_definitions_are_exact_independently_admitted_and_cli_only() {
         .iter()
         .filter(|row| row.admission_reason() == AdmissionReason::Admitted)
         .collect::<Vec<_>>();
-    assert_eq!(admitted.len(), 31);
+    assert_eq!(admitted.len(), 35);
     let posture = admitted
         .iter()
         .find(|row| row.operation_ref().as_str() == "posture.transition.apply@1.0.0")

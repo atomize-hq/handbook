@@ -33,7 +33,7 @@ fn validator(schema: &Value) -> Validator {
 #[test]
 fn test_only_derivation_adds_exactly_two_independently_retrievable_roots() {
     let tree = derive_hcm_5_4_packet_1_schema_tree_for_test().unwrap();
-    assert_eq!(tree.len(), 170);
+    assert_eq!(tree.len(), 180);
     assert!(tree.contains_key(VALIDATION_INPUT_REF));
     assert!(tree.contains_key(FACT_REF));
 
@@ -42,12 +42,12 @@ fn test_only_derivation_adds_exactly_two_independently_retrievable_roots() {
             .unwrap(),
     )
     .unwrap();
-    assert_eq!(checked_manifest.len(), 170);
+    assert_eq!(checked_manifest.len(), 180);
     let checked_refs = checked_manifest
         .iter()
         .map(|entry| entry["schema"]["ref"].as_str().unwrap().to_owned())
         .collect::<BTreeSet<_>>();
-    assert_eq!(checked_refs.len(), 170);
+    assert_eq!(checked_refs.len(), 180);
     assert_eq!(tree.keys().cloned().collect::<BTreeSet<_>>(), checked_refs);
 }
 

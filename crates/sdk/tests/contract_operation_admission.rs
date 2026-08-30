@@ -49,6 +49,10 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
             "artifact.candidate.append",
             "artifact.candidate.promote",
             "posture.transition.apply",
+            "snapshot.capture",
+            "snapshot.read",
+            "snapshot.delta",
+            "snapshot.project",
             "flow.resolve",
             "pipeline.catalog.list",
             "pipeline.catalog.read",
@@ -88,6 +92,10 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
             "dock.manifest.list",
             "dock.manifest.read",
             "dock.run",
+            "snapshot.capture",
+            "snapshot.read",
+            "snapshot.delta",
+            "snapshot.project",
         ]
         .contains(&row.operation_id())
         {
@@ -144,7 +152,7 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
         rows.iter()
             .filter(|row| row.owner() == OperationOwner::SdkComposition)
             .count(),
-        7
+        6
     );
     assert_eq!(
         rows.iter()
@@ -181,7 +189,7 @@ fn inventory_is_the_exact_contiguous_unique_sixty_two_row_set() {
     let frozen_bytes = canonical_json_bytes(&frozen_tuples, &ContractLimits::packet0()).unwrap();
     assert_eq!(
         handbook_sdk::contract_membrane::sha256_fingerprint(&frozen_bytes).as_str(),
-        "sha256:9e2217c61a900a8fa6649c5b3f7d2a1577316da9efec897573ac85b6ab531f92"
+        "sha256:349c4e79aefa79b42fbf4fdc194c9c6f95838b761e3dbb05393c731b50da01c7"
     );
 }
 

@@ -16,6 +16,7 @@ enum OwnerToken {
     ),
     Dock(handbook_dock::operation_admission::OwnerOperationAdmission),
     Engine(handbook_engine::operation_admission::OwnerOperationAdmission),
+    Snapshot(handbook_engine::snapshot_operation_admission::SnapshotOperationAdmission),
     Flow(handbook_flow::operation_admission::OwnerOperationAdmission),
     Pipeline(handbook_pipeline::operation_admission::OwnerOperationAdmission),
 }
@@ -27,6 +28,7 @@ impl OwnerAdmissionToken {
             OwnerToken::ContractEvidence(token) => token.operation_ref(),
             OwnerToken::Dock(token) => token.operation_ref(),
             OwnerToken::Engine(token) => token.operation_ref(),
+            OwnerToken::Snapshot(token) => token.operation_ref(),
             OwnerToken::Flow(token) => token.operation_ref(),
             OwnerToken::Pipeline(token) => token.operation_ref(),
         }
@@ -38,6 +40,7 @@ impl OwnerAdmissionToken {
             OwnerToken::ContractEvidence(token) => token.definition_fingerprint(),
             OwnerToken::Dock(token) => token.definition_fingerprint(),
             OwnerToken::Engine(token) => token.definition_fingerprint(),
+            OwnerToken::Snapshot(token) => token.definition_fingerprint(),
             OwnerToken::Flow(token) => token.definition_fingerprint(),
             OwnerToken::Pipeline(token) => token.definition_fingerprint(),
         }
@@ -191,7 +194,20 @@ fn admit_engine(
         write_set_fingerprint: parts.write_set_fingerprint.as_str(),
         required_capabilities_fingerprint: parts.required_capabilities_fingerprint.as_str(),
     };
-    match handbook_engine::operation_admission::admit_contract_operation(&claim) {
+    let result = if super::snapshot_operation::SNAPSHOT_OPERATION_REFS
+        .contains(&definition.operation().as_str())
+    {
+        return handbook_engine::snapshot_operation_admission::admit_snapshot_operation(&claim)
+            .map(|owner| {
+                OperationAdmissionResult::Admitted(OwnerAdmissionToken {
+                    owner: OwnerToken::Snapshot(owner),
+                })
+            })
+            .map_err(|_| ContractError::InvalidInvariant);
+    } else {
+        handbook_engine::operation_admission::admit_contract_operation(&claim)
+    };
+    match result {
         Ok(owner) => Ok(OperationAdmissionResult::Admitted(OwnerAdmissionToken {
             owner: OwnerToken::Engine(owner),
         })),

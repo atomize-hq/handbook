@@ -6978,6 +6978,300 @@ fn hcm_5_4_fact_schema() -> Schema {
     schema
 }
 
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SnapshotCaptureRequestSchemaV1 {
+    workspace: ExactBinding,
+    host_session_ref: BoundedString<1024>,
+    boundary: SnapshotBoundarySchemaV1,
+    idempotency_key: BoundedString<65536>,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(rename_all = "snake_case")]
+enum SnapshotBoundarySchemaV1 {
+    Start,
+    End,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SnapshotTargetRequestSchemaV1 {
+    workspace: ExactBinding,
+    expected_boundary: SnapshotExpectedBoundarySchemaV1,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SnapshotExpectedBoundarySchemaV1 {
+    exact_ref: BoundedString<1024>,
+    fingerprint: Fingerprint,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SnapshotRecordSchemaV1 {
+    class: BoundedString<64>,
+    exact_ref: BoundedString<1024>,
+    fingerprint: Fingerprint,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SnapshotAccountingSchemaV1 {
+    family: BoundedString<64>,
+    slot: BoundedString<128>,
+    disposition: BoundedString<64>,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SnapshotCaptureSuccessSchemaV1 {
+    outcome: SnapshotCaptureOutcomeSchemaV1,
+    sequence: SafeU64,
+    predecessor_outcome: SnapshotPredecessorOutcomeSchemaV1,
+    predecessor_boundary_ref: Option<BoundedString<1024>>,
+    boundary: SnapshotRecordSchemaV1,
+    accounting: SnapshotRecordSchemaV1,
+    delta: Option<SnapshotRecordSchemaV1>,
+    grounding: SnapshotRecordSchemaV1,
+    receipt: SnapshotRecordSchemaV1,
+    replayed: bool,
+    handoff_refs: BoundedVec<BoundedString<1024>, 128>,
+    currentness: SnapshotCurrentnessSchemaV1,
+    recovery_action: SnapshotSuccessRecoveryActionSchemaV1,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(rename_all = "snake_case")]
+enum SnapshotCaptureOutcomeSchemaV1 {
+    Started,
+    Finalized,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(rename_all = "snake_case")]
+enum SnapshotPredecessorOutcomeSchemaV1 {
+    NoApplicablePrior,
+    ApplicablePrior,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(rename_all = "snake_case")]
+enum SnapshotCurrentnessSchemaV1 {
+    OwnerDerivedCurrent,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(rename_all = "snake_case")]
+enum SnapshotSuccessRecoveryActionSchemaV1 {
+    None,
+    AcceptedIdempotentReplay,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(rename_all = "snake_case")]
+enum SnapshotProblemOutcomeSchemaV1 {
+    Refused,
+    Conflict,
+    Unavailable,
+    Error,
+    PostCommit,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(rename_all = "snake_case")]
+enum SnapshotMutationEffectSchemaV1 {
+    WriteNothing,
+    CommittedReceiptPreserved,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(rename_all = "snake_case")]
+enum SnapshotRecoveryActionSchemaV1 {
+    ChangeRequest,
+    RetryAfterRecheck,
+    ContactOperator,
+    ResolveCommittedReceipt,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SnapshotProblemSchemaV1 {
+    outcome: SnapshotProblemOutcomeSchemaV1,
+    operation_id: BoundedString<255>,
+    error_class: SnapshotProblemOutcomeSchemaV1,
+    error_kind: BoundedString<128>,
+    mutation_effect: SnapshotMutationEffectSchemaV1,
+    recovery_action: SnapshotRecoveryActionSchemaV1,
+    source_accounting: BoundedVec<SnapshotAccountingSchemaV1, 128>,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SnapshotDescriptorSchemaV1 {
+    boundary: SnapshotRecordSchemaV1,
+    boundary_kind: SnapshotBoundarySchemaV1,
+    sequence: SafeU64,
+    predecessor_outcome: BoundedString<64>,
+    accounting: SnapshotRecordSchemaV1,
+    delta: Option<SnapshotRecordSchemaV1>,
+    grounding: SnapshotRecordSchemaV1,
+    source_accounting: BoundedVec<SnapshotAccountingSchemaV1, 128>,
+    current: bool,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SnapshotReadSuccessSchemaV1 {
+    outcome: SnapshotReadOutcomeSchemaV1,
+    descriptor: Option<SnapshotDescriptorSchemaV1>,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(rename_all = "snake_case")]
+enum SnapshotReadOutcomeSchemaV1 {
+    Found,
+    Absent,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SnapshotDeltaSuccessSchemaV1 {
+    outcome: SnapshotReadOutcomeSchemaV1,
+    delta: Option<SnapshotRecordSchemaV1>,
+    before_ref: Option<BoundedString<1024>>,
+    before_fingerprint: Option<Fingerprint>,
+    before_sequence: Option<SafeU64>,
+    after_ref: Option<BoundedString<1024>>,
+    after_fingerprint: Option<Fingerprint>,
+    after_sequence: Option<SafeU64>,
+    pair_kind: Option<BoundedString<64>>,
+    changed: SafeU64,
+    unchanged: SafeU64,
+    current: bool,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SnapshotProjectionSuccessSchemaV1 {
+    outcome: SnapshotReadOutcomeSchemaV1,
+    grounding: Option<SnapshotRecordSchemaV1>,
+    capture_ref: Option<BoundedString<1024>>,
+    capture_fingerprint: Option<Fingerprint>,
+    definition: Option<ExactBinding>,
+    disclosure: Option<ExactBinding>,
+    lossiness: Option<BoundedString<64>>,
+    omissions: BoundedVec<SnapshotAccountingSchemaV1, 128>,
+    refusals: BoundedVec<SnapshotAccountingSchemaV1, 128>,
+    required_rechecks: BoundedVec<BoundedString<255>, 128>,
+    resolution_stack: Option<ExactBinding>,
+    resolution_values: BoundedVec<BoundedString<1024>, 128>,
+    handoff_refs: BoundedVec<BoundedString<1024>, 128>,
+    current: bool,
+}
+
+fn snapshot_result_schema<T: JsonSchema>(generator: &mut SchemaGenerator) -> Schema {
+    json_schema!({
+        "oneOf": [
+            generator.subschema_for::<T>(),
+            generator.subschema_for::<SnapshotProblemSchemaV1>()
+        ]
+    })
+}
+
+fn snapshot_capture_result_schema(generator: &mut SchemaGenerator) -> Schema {
+    snapshot_result_schema::<SnapshotCaptureSuccessSchemaV1>(generator)
+}
+
+fn snapshot_read_result_schema(generator: &mut SchemaGenerator) -> Schema {
+    snapshot_result_schema::<SnapshotReadSuccessSchemaV1>(generator)
+}
+
+fn snapshot_delta_result_schema(generator: &mut SchemaGenerator) -> Schema {
+    snapshot_result_schema::<SnapshotDeltaSuccessSchemaV1>(generator)
+}
+
+fn snapshot_projection_result_schema(generator: &mut SchemaGenerator) -> Schema {
+    snapshot_result_schema::<SnapshotProjectionSuccessSchemaV1>(generator)
+}
+
+struct SnapshotCaptureResultSchemaV1;
+impl_schema!(
+    SnapshotCaptureResultSchemaV1,
+    "SnapshotCaptureResultSchemaV1",
+    |generator| snapshot_capture_result_schema(generator)
+);
+
+struct SnapshotReadResultSchemaV1;
+impl_schema!(
+    SnapshotReadResultSchemaV1,
+    "SnapshotReadResultSchemaV1",
+    |generator| snapshot_read_result_schema(generator)
+);
+
+struct SnapshotDeltaResultSchemaV1;
+impl_schema!(
+    SnapshotDeltaResultSchemaV1,
+    "SnapshotDeltaResultSchemaV1",
+    |generator| snapshot_delta_result_schema(generator)
+);
+
+struct SnapshotProjectionResultSchemaV1;
+impl_schema!(
+    SnapshotProjectionResultSchemaV1,
+    "SnapshotProjectionResultSchemaV1",
+    |generator| snapshot_projection_result_schema(generator)
+);
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SessionGroundingBoundaryDetailsSchemaV1 {
+    failure: String,
+    error_class: Option<String>,
+    error_kind: Option<String>,
+    mutation_effect: Option<String>,
+    receipt: Option<SnapshotRecordSchemaV1>,
+    recovery_action: String,
+}
+
+#[allow(dead_code)]
+#[derive(JsonSchema)]
+#[schemars(deny_unknown_fields)]
+struct SessionGroundingBoundaryResultSchemaV1 {
+    terminal: String,
+    sequence: SafeU64,
+    boundary: SnapshotRecordSchemaV1,
+    accounting: SnapshotRecordSchemaV1,
+    delta: Option<SnapshotRecordSchemaV1>,
+    grounding: SnapshotRecordSchemaV1,
+    receipt: SnapshotRecordSchemaV1,
+    replayed: bool,
+    handoff_refs: Vec<String>,
+    recovery_action: String,
+}
+
 const DIALECT: &str = "https://json-schema.org/draft/2020-12/schema";
 
 struct SchemaDescriptor {
@@ -6986,7 +7280,7 @@ struct SchemaDescriptor {
     generate: fn() -> Schema,
 }
 
-const INVENTORY: [SchemaDescriptor; 170] = [
+const INVENTORY: [SchemaDescriptor; 180] = [
     descriptor::<ArtifactProblemDetailsV1>(
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -7497,6 +7791,38 @@ const INVENTORY: [SchemaDescriptor; 170] = [
         "handbook.operation.posture-transition-apply-result@1.0.0",
         "handbook.operation.posture-transition-apply-result/1.0.0.schema.json",
     ),
+    descriptor::<SnapshotCaptureRequestSchemaV1>(
+        "handbook.operation.snapshot-capture-request@1.0.0",
+        "handbook.operation.snapshot-capture-request/1.0.0.schema.json",
+    ),
+    descriptor::<SnapshotCaptureResultSchemaV1>(
+        "handbook.operation.snapshot-capture-result@1.0.0",
+        "handbook.operation.snapshot-capture-result/1.0.0.schema.json",
+    ),
+    descriptor::<SnapshotTargetRequestSchemaV1>(
+        "handbook.operation.snapshot-delta-request@1.0.0",
+        "handbook.operation.snapshot-delta-request/1.0.0.schema.json",
+    ),
+    descriptor::<SnapshotDeltaResultSchemaV1>(
+        "handbook.operation.snapshot-delta-result@1.0.0",
+        "handbook.operation.snapshot-delta-result/1.0.0.schema.json",
+    ),
+    descriptor::<SnapshotTargetRequestSchemaV1>(
+        "handbook.operation.snapshot-project-request@1.0.0",
+        "handbook.operation.snapshot-project-request/1.0.0.schema.json",
+    ),
+    descriptor::<SnapshotProjectionResultSchemaV1>(
+        "handbook.operation.snapshot-project-result@1.0.0",
+        "handbook.operation.snapshot-project-result/1.0.0.schema.json",
+    ),
+    descriptor::<SnapshotTargetRequestSchemaV1>(
+        "handbook.operation.snapshot-read-request@1.0.0",
+        "handbook.operation.snapshot-read-request/1.0.0.schema.json",
+    ),
+    descriptor::<SnapshotReadResultSchemaV1>(
+        "handbook.operation.snapshot-read-result@1.0.0",
+        "handbook.operation.snapshot-read-result/1.0.0.schema.json",
+    ),
     descriptor::<OwnerVersionEntry>(
         "handbook.owner-version-entry@1.0.0",
         "handbook.owner-version-entry/1.0.0.schema.json",
@@ -7672,6 +7998,14 @@ const INVENTORY: [SchemaDescriptor; 170] = [
     descriptor::<RepositorySetupResultV1>(
         "handbook.use-case.repository-setup-result@1.0.0",
         "handbook.use-case.repository-setup-result/1.0.0.schema.json",
+    ),
+    descriptor::<SessionGroundingBoundaryDetailsSchemaV1>(
+        "handbook.use-case.session-grounding-boundary-details@1.0.0",
+        "handbook.use-case.session-grounding-boundary-details/1.0.0.schema.json",
+    ),
+    descriptor::<SessionGroundingBoundaryResultSchemaV1>(
+        "handbook.use-case.session-grounding-boundary-result@1.0.0",
+        "handbook.use-case.session-grounding-boundary-result/1.0.0.schema.json",
     ),
     descriptor::<WriteReceipt>(
         "handbook.write-receipt@1.0.0",
@@ -7897,8 +8231,8 @@ pub fn run(mode: GenerationMode) -> Result<(), String> {
 }
 
 fn generate_tree() -> Result<GeneratedTree, String> {
-    if INVENTORY.len() != 170 {
-        return Err("schema inventory must contain exactly 170 entries".to_owned());
+    if INVENTORY.len() != 180 {
+        return Err("schema inventory must contain exactly 180 entries".to_owned());
     }
 
     let mut previous_ref = None;
@@ -7970,8 +8304,8 @@ pub fn derive_hcm_5_4_packet_1_schema_tree_for_test() -> Result<BTreeMap<String,
             return Err("generated schema refs are duplicated".to_owned());
         }
     }
-    if roots.len() != 170 {
-        return Err("current schema derivation must contain exactly 170 roots".to_owned());
+    if roots.len() != 180 {
+        return Err("current schema derivation must contain exactly 180 roots".to_owned());
     }
     Ok(roots)
 }
@@ -8010,6 +8344,7 @@ fn validate_schema(
             | "handbook.operation.contract-evidence-append-request@1.0.0"
             | "handbook.operation.contract-lifecycle-transition-request@1.0.0"
             | "handbook.operation.dock-run-request@1.0.0"
+            | "handbook.operation.snapshot-capture-request@1.0.0"
     ) {
         validate_posture_request_raw_key_schema(value, descriptor.relative_path)
     } else {

@@ -22,7 +22,7 @@ use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-const ROOTS: [(&str, &str); 170] = [
+const ROOTS: [(&str, &str); 180] = [
     (
         "handbook.artifact-operation-details@1.0.0",
         "handbook.artifact-operation-details/1.0.0.schema.json",
@@ -472,6 +472,38 @@ const ROOTS: [(&str, &str); 170] = [
         "handbook.operation.posture-transition-apply-result/1.0.0.schema.json",
     ),
     (
+        "handbook.operation.snapshot-capture-request@1.0.0",
+        "handbook.operation.snapshot-capture-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.snapshot-capture-result@1.0.0",
+        "handbook.operation.snapshot-capture-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.snapshot-delta-request@1.0.0",
+        "handbook.operation.snapshot-delta-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.snapshot-delta-result@1.0.0",
+        "handbook.operation.snapshot-delta-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.snapshot-project-request@1.0.0",
+        "handbook.operation.snapshot-project-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.snapshot-project-result@1.0.0",
+        "handbook.operation.snapshot-project-result/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.snapshot-read-request@1.0.0",
+        "handbook.operation.snapshot-read-request/1.0.0.schema.json",
+    ),
+    (
+        "handbook.operation.snapshot-read-result@1.0.0",
+        "handbook.operation.snapshot-read-result/1.0.0.schema.json",
+    ),
+    (
         "handbook.owner-version-entry@1.0.0",
         "handbook.owner-version-entry/1.0.0.schema.json",
     ),
@@ -648,6 +680,14 @@ const ROOTS: [(&str, &str); 170] = [
         "handbook.use-case.repository-setup-result/1.0.0.schema.json",
     ),
     (
+        "handbook.use-case.session-grounding-boundary-details@1.0.0",
+        "handbook.use-case.session-grounding-boundary-details/1.0.0.schema.json",
+    ),
+    (
+        "handbook.use-case.session-grounding-boundary-result@1.0.0",
+        "handbook.use-case.session-grounding-boundary-result/1.0.0.schema.json",
+    ),
+    (
         "handbook.write-receipt@1.0.0",
         "handbook.write-receipt/1.0.0.schema.json",
     ),
@@ -799,7 +839,7 @@ fn manifest_exactly_binds_sorted_refs_lengths_and_checked_in_bytes() {
     let entries =
         parse_canonical_json::<Vec<SchemaManifestEntry>>(without_lf, &ContractLimits::packet0())
             .unwrap();
-    assert_eq!(entries.len(), 170);
+    assert_eq!(entries.len(), 180);
 
     let mapping = ROOTS.into_iter().collect::<BTreeMap<_, _>>();
     let refs = entries
@@ -945,7 +985,7 @@ fn packet_three_constructor_instances_validate_against_every_new_root_shape() {
         }
         _ => panic!("expired catalog did not return a blocked restart"),
     }
-    assert_eq!(witness.capabilities().len(), 31);
+    assert_eq!(witness.capabilities().len(), 35);
 }
 
 #[test]
@@ -1342,6 +1382,7 @@ fn custom_wire_forms_are_exact_and_unfingerprinted_key_material_is_absent() {
             "handbook.operation.contract-lifecycle-transition-request@1.0.0",
             "handbook.operation.contract-evidence-append-request@1.0.0",
             "handbook.operation.dock-run-request@1.0.0",
+            "handbook.operation.snapshot-capture-request@1.0.0",
         ]
         .contains(&exact_ref)
         {

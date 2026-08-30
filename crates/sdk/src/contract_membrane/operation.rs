@@ -731,10 +731,10 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
         ("resolution.escalation.disposition.append", E, L, AP, IC),
         ("memory.promotion.request.append", E, L, AP, IC),
         ("memory.promotion.disposition.append", E, L, CW, IC),
-        ("snapshot.capture", S, A, AP, IOA),
+        ("snapshot.capture", E, A, AP, IC),
         ("snapshot.read", E, A, RO, IC),
         ("snapshot.delta", E, A, RO, IC),
-        ("snapshot.project", F, A, RO, IC),
+        ("snapshot.project", E, A, RO, IC),
         ("snapshot.verify_current", S, A, RO, IOA),
         ("snapshot.resolve_applicable", S, A, RO, IOA),
         ("repository.setup.plan", S, A, RO, IOA),
@@ -809,6 +809,10 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                     operation_id,
                     "dock.manifest.list" | "dock.manifest.read" | "dock.run"
                 );
+                let is_snapshot_operation = matches!(
+                    operation_id,
+                    "snapshot.capture" | "snapshot.read" | "snapshot.delta" | "snapshot.project"
+                );
                 OperationInventoryRow {
                     proof_ordinal: (index + 1) as u16,
                     operation_id,
@@ -824,6 +828,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                         || is_pipeline_mutation_packet
                         || is_contract_operation
                         || is_dock_operation
+                        || is_snapshot_operation
                     {
                         AdmissionReason::Admitted
                     } else {
@@ -831,7 +836,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                     },
                     current_transports: if is_posture_apply {
                         &[OperationTransport::RustSdk, OperationTransport::Tauri]
-                    } else if is_contract_operation || is_dock_operation {
+                    } else if is_contract_operation || is_dock_operation || is_snapshot_operation {
                         &[
                             OperationTransport::CliJson,
                             OperationTransport::RustSdk,
@@ -853,6 +858,7 @@ fn build_inventory() -> Vec<OperationInventoryRow> {
                         || is_pipeline_mutation_packet
                         || is_contract_operation
                         || is_dock_operation
+                        || is_snapshot_operation
                     {
                         DiscoveryState::Discoverable
                     } else {
