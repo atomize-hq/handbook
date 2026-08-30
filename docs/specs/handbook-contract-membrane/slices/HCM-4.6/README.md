@@ -1,7 +1,7 @@
 # HCM-4.6 Production Snapshot Grounding Owner and Ordinary SDK Seam
 
-Status: **current slice authority; Packets 1–6 are implemented; aggregate
-closeout remains pending**.
+Status: **implemented checkpoint; Packets 1–6 and the single aggregate
+closeout are complete**.
 
 This follow-up slice productionizes the existing HCM-3.3 through HCM-3.5
 projection, Snapshot Memory, grounding, Flow, and pipeline precursor boundary.
@@ -12,27 +12,23 @@ owners.
 
 ## Current product state and predecessor
 
-Current source contains real deterministic algorithms and typed precursor
-boundaries:
+Current source contains the completed production owner and its bounded outward
+seams:
 
-- Engine-private projection and Snapshot Memory modules implement bounded
-  projection, immutable records, exact predecessor selection, delta,
-  currentness, redaction, retention, and refusal rules;
-- `ground_resolution` binds those concepts through a fixed
-  `.handbook/grounding/hcm-3.5/v1` fixture layout;
-- Flow can adopt a typed grounding outcome and pipeline can include the bounded
-  shared resolution; and
-- focused projection, Snapshot Memory, grounding, Flow, and pipeline tests prove
-  those precursor semantics.
+- Engine owns bounded redacted capture, immutable durable records, exact
+  predecessor/sequence selection, compatible delta, Resolution-bounded
+  projection, currentness, retention, recovery, and refusal semantics;
+- five private adapters account the exact 15 source slots, while the HCM-3.5
+  fixture is test-only and cannot supply production identity or fallback truth;
+- Flow and pipeline preserve the typed Engine outcome without recomputation;
+- the SDK exposes exactly four admitted ordinary snapshot operations and one
+  fixed non-discoverable session-boundary composition; and
+- direct SDK plus unchanged generic CLI/Tauri proof closes deterministic truth
+  at `62 operations / 35 capabilities / 180 roots / 1 production manifest / 7
+  fixed use cases`.
 
-No non-test production caller currently completes that path.
-`ground_resolution`, `adopt_grounding_outcome`, and
-`include_grounded_shared_resolution` have no production caller; projection and
-Snapshot Memory remain private; the fixed repository layout contains
-demonstrative identities and repeated placeholder fingerprints; and there is no
-production source adapter, durable repository, admitted snapshot/grounding SDK
-schema, or ordinary session consumer. The relevant reserved inventory rows are
-still absent.
+No automatic session trigger or external adopter is selected. That remaining
+consumer decision belongs to a separately authorized Phase-6 slice.
 
 HCM-4.6 follows completed Phase 5 because its source adapters may observe the
 current Contracts, evidence, gate, local-closeout, Dock, and validator owners.
@@ -566,9 +562,8 @@ Preparation or implementation must stop if:
 
 ## Use and drift
 
-This file is the single current HCM-4.6 slice authority. Current product source
-and tests remain truth about what is implemented; until all packets and
-aggregate closeout complete, navigation must continue to describe the product
-as precursor-only. If a later implementation task finds a consequential
-conflict with this authority, it stops and remediates this file before changing
-product semantics.
+This file is the single current HCM-4.6 slice authority and completed checkpoint.
+Current product source and tests remain truth about what is implemented. If a
+later task finds a consequential conflict with this authority, it stops and
+remediates this file before changing product semantics. Phase-6 work still
+requires separate authority and a named external adopter.

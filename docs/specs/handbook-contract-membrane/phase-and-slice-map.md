@@ -117,7 +117,7 @@ and Packet-0 checkpoints remain chronology, not evidence for this exit.
 | [`HCM-4.3` — Complete CLI JSON parity](slices/HCM-4.3/README.md) | Implemented checkpoint; slice closeout complete | Packets 1–8 and one aggregate review closed all 36 supported nontrivial leaves/modes through 18 admitted `cli_json` ordinary operations or six fixed SDK use cases, with one schema-valid machine document, shared human and bounded legacy projections, stable diagnostics/exits, 115 schema roots, exact 62-row discovery continuity, and route-resolve correctly omitted from ordinary transport. | **Phase-3 exit and HCM-4.2 slice closeout are satisfied** |
 | [`HCM-4.4` — Tauri-ready command facade](slices/HCM-4.4/README.md) | Implemented checkpoint; slice closeout complete | Packets 1–6 and one aggregate review close three versioned non-UI Tauri commands over five new SDK contract roots and a host-managed repository context. The 120-root schema tree, exact 19 capabilities, and six fixed non-discoverable use cases close without a normal-operation CLI subprocess, command-name-derived identity, or frontend-owned semantics. | HCM-4.3 slice closeout, satisfied |
 | [`HCM-4.5` — Capability-driven Handbook skill](slices/HCM-4.5/README.md) | Implemented checkpoint; slice closeout complete | The installed root skill and four-action generic CLI membrane discover admitted ordinary capabilities, retrieve exact contracts and schemas, gather and validate structured bodies, invoke only through current transport evidence, and preserve typed owner outcome/mutation/replay truth without prompt-owned product logic. Six fixed use cases remain outside discovery. One aggregate verification and causal review completed the slice. | HCM-4.4 slice closeout, satisfied |
-| [`HCM-4.6` — Production snapshot grounding owner and ordinary SDK seam](slices/HCM-4.6/README.md) | Authorized; implementation not begun | Follow-up authority selects one Engine semantic/persistence owner, durable immutable snapshot repository and session-boundary lifecycle, bounded current adapters over Git/Handbook/work/session and completed HCM-5 truth, exactly four reserved ordinary rows, ten schema roots, and one fixed non-discoverable SDK composition. The product remains precursor-only and Phase-6 adopter selection is separate. | Phase-5 exit, satisfied |
+| [`HCM-4.6` — Production snapshot grounding owner and ordinary SDK seam](slices/HCM-4.6/README.md) | Implemented checkpoint; slice closeout complete | Packets 1–6 and one aggregate review establish the Engine semantic/persistence owner, durable immutable snapshot repository and session-boundary lifecycle, five bounded current adapters over 15 slots, exactly four reserved ordinary rows, ten schema roots, one fixed non-discoverable SDK composition, and unchanged generic SDK/CLI/Tauri proof at exact `62 / 35 / 180 / 1 / 7` truth. The other four reserved rows remain absent and Phase-6 adopter selection is separate. | Phase-5 exit, satisfied |
 
 Packet 0's chronology is recorded, not retroactively authorized by this map.
 Phase 4 may exit only when supported SDK, CLI, and Tauri-facing use cases share
@@ -138,9 +138,9 @@ verdict, gate, dock, or validator semantics. The separate HCM-5.1 authority and
 closeout establish the contract-owner predecessor; the separate HCM-5.2
 authority selects the next slice boundary without changing this exit.
 
-HCM-4.6 is a post-Phase-5 follow-up authority over residual precursor work. Its
-prepared status does not retroactively change the completed Phase-4 exit and
-does not report its selected product delta as implemented.
+HCM-4.6 is a completed post-Phase-5 follow-up over residual precursor work. Its
+implemented checkpoint does not retroactively change the completed Phase-4 or
+Phase-5 exit claims and does not select a Phase-6 adopter.
 
 ## Phase 5 — contract membrane and docks
 
@@ -193,7 +193,7 @@ actual owner boundary. Unselected external consumers are not an exit failure.
 
 | Decision | Where later authority must decide it |
 | --- | --- |
-| Ordinary grounding SDK/JSON exposure and consumer placement | HCM-4.6 now selects the bounded owner, repository, four-operation, and fixed SDK composition seam; implementation remains unbegun. Future Phase-6 authority must separately choose any publication, bridge, trigger host, and adopter. |
+| External grounding trigger/adopter placement | HCM-4.6 implements the bounded owner, repository, four-operation seam, fixed SDK composition, and unchanged generic repository consumers. Future Phase-6 authority must separately choose any publication, bridge, automatic trigger host, and real external adopter. |
 | Broader posture evaluation, recommendation, notification, acknowledgement, and hysteresis | Future posture authority must place this policy without transferring engine-owned mutation authority to a gate or adapter |
 | CLI operation-inventory expansion beyond the completed 62-row predecessor | HCM-4.3 does not expand the inventory for transport parity: its authority fixes the exact ordinary mappings and a closed six-entry SDK use-case registry. Any new semantic operation or use case requires later explicit authority, complete schemas, and independent owner admission where applicable. |
 | Gate-to-posture input and policy boundary | HCM-5.2 fixes gate and local-closeout truth without posture/promotion fields; future posture/promotion authority must separately decide whether and how to consume those results |
