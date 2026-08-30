@@ -100,10 +100,14 @@ The current [`HCM-5.2 authority`](slices/HCM-5.2/README.md) preserves that
 placement: `handbook-contracts` remains the sole canonical evidence/verdict/gate
 and local-closeout owner, SDK maps five reserved operations outward, and a
 future executor supplies operational records plus untrusted candidates through
-an owner-side source boundary. Local closeout is a sibling derived result;
-parent promotion remains a later independent policy/mutation boundary. This is
-implemented owner, SDK, and generic-consumer architecture through Packet 7;
-aggregate verification/review and the single HCM-5.2 closeout are complete.
+an owner-side source boundary. Local closeout is a sibling derived result. A
+future parent-readiness evaluation, if authorized, may consume that exact result
+but must remain a separate fail-closed, non-mutating derived result; local
+closeout cannot imply parent eligibility. The parent domain, subject-to-parent
+binding, policy, owner, and consumer remain unselected, and any actual parent
+mutation is another later authority boundary. This is implemented owner, SDK,
+and generic-consumer architecture through Packet 7; aggregate
+verification/review and the single HCM-5.2 closeout are complete.
 
 The current [`HCM-5.3 authority`](slices/HCM-5.3/README.md) remains the closed
 empty-production-registry checkpoint. HCM-5.4 extends it with one exact
@@ -202,14 +206,25 @@ completed-only candidate release. Stronger filesystem, network, system-call,
 process-tree, CPU, memory, or third-party confinement is not current product or
 prepared first-path authority.
 
-## Gate and posture ownership
+## Gate, dependency composition, and posture ownership
 
 The current HCM-5.2 implementation provides a gate result and separate local-
-closeout result without a parent-promotion field. Either may become an input to
-later posture or promotion evaluation, but gate ownership must not absorb
-posture aggregation, policy, recommendation, acknowledgement, hysteresis,
-promotion, or transition authority. Gates answer their bounded evidence
-question; later posture/promotion owners decide what those answers mean.
+closeout result without a parent-promotion field. Local closeout may become an
+input to a later dependency or workflow-composition owner that evaluates whether
+a selected parent is ready to advance. Such eligibility must be a separate,
+fail-closed, non-mutating derived result governed by its own parent binding,
+policy, and currentness checks; local closeout alone can never imply it. Current
+authority has not selected that parent domain, binding, owner, consumer, or
+policy, and it authorizes no parent mutation.
+
+Gate and local-closeout results may also become inputs to later posture policy,
+but gate ownership must not absorb dependency aggregation, posture aggregation,
+policy, recommendation, acknowledgement, hysteresis, promotion, or transition
+authority. Gates answer their bounded evidence question; later dependency,
+posture, or promotion owners decide what those answers mean. Any eventual
+parent-state mutation is separately authorized from eligibility evaluation and
+must retain its own authority, currentness, concurrency, durability, and replay
+boundary.
 
 This separation prevents an evidence producer from silently becoming the policy
 engine and lets posture policy evolve without changing each gate implementation.

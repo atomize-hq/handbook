@@ -88,8 +88,11 @@ atomic posture transition while rehoming the residual work to later owners.
 
 ### Reduced boundary and rehomed work
 
-- Gate-owned local-closeout and parent-promotion evaluation formerly associated
-  with the grounding slice moves to the later evidence/verdict/gate owner.
+- Gate-owned local-closeout evaluation formerly associated with the grounding
+  slice moved to the later evidence/verdict/gate owner and is now implemented
+  by HCM-5.2. Historical parent-promotion eligibility remains a separate future
+  dependency/workflow-composition boundary with no selected parent domain,
+  binding, policy, owner, or consumer.
 - Ordinary SDK/JSON exposure, publication, bridging, and Substrate adoption for
   grounding move to the appropriate Phase-4 and Phase-6 owners.
 - Multi-source posture evaluation, recommendations, notifications,
@@ -196,7 +199,8 @@ actual owner boundary. Unselected external consumers are not an exit failure.
 | External grounding trigger/adopter placement | HCM-4.6 implements the bounded owner, repository, four-operation seam, fixed SDK composition, and unchanged generic repository consumers. Future Phase-6 authority must separately choose any publication, bridge, automatic trigger host, and real external adopter. |
 | Broader posture evaluation, recommendation, notification, acknowledgement, and hysteresis | Future posture authority must place this policy without transferring engine-owned mutation authority to a gate or adapter |
 | CLI operation-inventory expansion beyond the completed 62-row predecessor | HCM-4.3 does not expand the inventory for transport parity: its authority fixes the exact ordinary mappings and a closed six-entry SDK use-case registry. Any new semantic operation or use case requires later explicit authority, complete schemas, and independent owner admission where applicable. |
-| Gate-to-posture input and policy boundary | HCM-5.2 fixes gate and local-closeout truth without posture/promotion fields; future posture/promotion authority must separately decide whether and how to consume those results |
+| Parent-promotion eligibility and dependency-composition boundary | HCM-5.2 fixes gate and local-closeout truth without a parent-promotion field or consumer. Future authority must first select the parent model, subject-to-parent binding, dependency/workflow owner, policy and currentness inputs, and consumer. Any selected eligibility result must be separate, fail closed, and remain non-mutating; local closeout alone cannot imply it, and actual parent mutation requires still-separate authority. |
+| Gate-to-posture input and policy boundary | HCM-5.2 fixes gate and local-closeout truth without posture fields; future posture authority must separately decide whether and how to consume those results without transferring posture policy or mutation authority to Contracts, SDK, or an adapter. |
 | Third-party dock admission and stronger host confinement | Later explicit authority after the HCM-5.3/HCM-5.4 repository-owned first-party path; neither prepared slice authorizes arbitrary-code execution or claims a general hostile-code boundary |
 | CLI/Tauri membrane routes and framing | HCM-4.3 owns current CLI parity and framing; HCM-4.4 separately owns the Tauri facade after HCM-4.3 closeout. |
 | Publication mechanism, exact versions, bridge, and external adopter | Future publication and consumer authorities with current external proof |

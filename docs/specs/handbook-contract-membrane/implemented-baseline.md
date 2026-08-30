@@ -66,9 +66,12 @@ The current grounding implementation is anchored in
 [`grounding.rs`](../../../crates/engine/src/grounding.rs),
 [`grounding_transition.rs`](../../../crates/engine/src/grounding_transition.rs),
 and [`hcm_3_5_grounding.rs`](../../../crates/engine/tests/hcm_3_5_grounding.rs).
-Packet 5 remains fail-closed precursor-only:
-`GroundingEvidence::local_closeout` and `parent_promotion` both report
-`Unavailable`; no future evidence/verdict/gate owner is inferred here.
+Packet 5 remains fail-closed precursor-only. The legacy-named
+`GroundingEvidence::local_closeout` and `parent_promotion` accessors are inert
+placeholders: both always report `Unavailable`, no current producer or consumer
+supplies meaning through them, and their presence does not establish a current
+parent-promotion implementation requirement. No future parent domain, binding,
+policy, owner, or consumer is inferred here.
 
 HCM-4.6 supersedes the precursor-only product classification with one production
 Engine owner, four ordinary operations, and one fixed SDK session-boundary
