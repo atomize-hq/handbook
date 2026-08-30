@@ -109,6 +109,8 @@ pub struct SnapshotBoundaryCommitIntentV1 {
     accounting_bytes: Vec<u8>,
     delta_bytes: Option<Vec<u8>>,
     grounding_bytes: Vec<u8>,
+    expected_sequence: Option<u64>,
+    expected_predecessor: Option<SnapshotPredecessorV1>,
 }
 
 impl SnapshotBoundaryCommitIntentV1 {
@@ -127,7 +129,19 @@ impl SnapshotBoundaryCommitIntentV1 {
             accounting_bytes,
             delta_bytes,
             grounding_bytes,
+            expected_sequence: None,
+            expected_predecessor: None,
         }
+    }
+
+    pub(crate) fn with_owner_plan(
+        mut self,
+        sequence: u64,
+        predecessor: SnapshotPredecessorV1,
+    ) -> Self {
+        self.expected_sequence = Some(sequence);
+        self.expected_predecessor = Some(predecessor);
+        self
     }
 }
 
@@ -247,6 +261,16 @@ pub struct SnapshotRepositoryV1<'binding> {
     active_holds: Vec<String>,
 }
 
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub(crate) enum SnapshotRepositoryCapturePlanV1 {
+    Replay(Box<SnapshotRepositoryCommitV1>),
+    Fresh {
+        sequence: u64,
+        predecessor: SnapshotPredecessorV1,
+        predecessor_grounding: Option<SnapshotRecordRefV1>,
+    },
+}
+
 impl<'binding> SnapshotRepositoryV1<'binding> {
     pub(crate) fn open(
         owner: SnapshotGroundingOwnerV1,
@@ -321,6 +345,56 @@ impl<'binding> SnapshotRepositoryV1<'binding> {
         Ok(bytes)
     }
 
+    pub(crate) fn plan_capture(
+        &self,
+        idempotency_key: &[u8],
+        host_session_ref: &str,
+        kind: SnapshotBoundaryKindV1,
+    ) -> Result<SnapshotRepositoryCapturePlanV1, SnapshotRepositoryErrorV1> {
+        if idempotency_key.is_empty()
+            || idempotency_key.len() > 256
+            || host_session_ref.is_empty()
+            || host_session_ref.len() > 256
+            || host_session_ref.chars().any(char::is_control)
+        {
+            return Err(malformed());
+        }
+        let root = self.binding.retained_root();
+        let _process_lock = acquire_process_lock()?;
+        let lock = acquire_stream_lock(root, &self.stream)?;
+        admit_repository_binding(root, self.binding)?;
+        recover_locked(root)?;
+        let history = load_history(root, &self.owner, self.binding, &self.stream)?;
+        let key_digest = idempotency_digest(idempotency_key);
+        let result =
+            if let Some(existing) = history.iter().find(|entry| entry.key_digest == key_digest) {
+                if existing.host_session_ref != host_session_ref || existing.kind()? != kind {
+                    Err(error(
+                        SnapshotRepositoryErrorKindV1::IdempotencyConflict,
+                        "snapshot idempotency digest is already bound to another boundary request",
+                    ))
+                } else {
+                    Ok(SnapshotRepositoryCapturePlanV1::Replay(Box::new(
+                        existing.commit(true),
+                    )))
+                }
+            } else {
+                let (sequence, predecessor, predecessor_grounding) =
+                    resolve_capture_plan(&history, host_session_ref, kind)?;
+                Ok(SnapshotRepositoryCapturePlanV1::Fresh {
+                    sequence,
+                    predecessor,
+                    predecessor_grounding,
+                })
+            };
+        let released = lock.release().map_err(map_durability);
+        match (result, released) {
+            (Ok(plan), Ok(())) => Ok(plan),
+            (Err(failure), Ok(())) => Err(failure),
+            (_, Err(failure)) => Err(failure),
+        }
+    }
+
     pub fn commit_boundary(
         &self,
         intent: SnapshotBoundaryCommitIntentV1,
@@ -386,6 +460,16 @@ impl<'binding> SnapshotRepositoryV1<'binding> {
         }
 
         let (sequence, predecessor) = resolve_next(&history, &intent)?;
+        if intent
+            .expected_sequence
+            .is_some_and(|expected| expected != sequence)
+            || intent
+                .expected_predecessor
+                .as_ref()
+                .is_some_and(|expected| expected != &predecessor)
+        {
+            return Err(sequence_conflict());
+        }
         let boundary_identity = self
             .owner
             .bind_boundary(
@@ -766,6 +850,34 @@ fn resolve_next(
             boundary_ref: head.boundary.exact_ref.clone(),
             boundary_fingerprint: head.boundary.fingerprint.clone(),
         },
+    ))
+}
+
+fn resolve_capture_plan(
+    history: &[JournalIntent],
+    host_session_ref: &str,
+    kind: SnapshotBoundaryKindV1,
+) -> Result<(u64, SnapshotPredecessorV1, Option<SnapshotRecordRefV1>), SnapshotRepositoryErrorV1> {
+    let Some(head) = history.last() else {
+        if kind != SnapshotBoundaryKindV1::Start {
+            return Err(sequence_conflict());
+        }
+        return Ok((1, SnapshotPredecessorV1::NoApplicablePrior, None));
+    };
+    match (head.kind()?, kind) {
+        (SnapshotBoundaryKindV1::Start, SnapshotBoundaryKindV1::End)
+            if head.host_session_ref == host_session_ref => {}
+        (SnapshotBoundaryKindV1::End, SnapshotBoundaryKindV1::Start) => {}
+        _ => return Err(sequence_conflict()),
+    }
+    let sequence = head.sequence.checked_add(1).ok_or_else(sequence_conflict)?;
+    Ok((
+        sequence,
+        SnapshotPredecessorV1::ApplicablePrior {
+            boundary_ref: head.boundary.exact_ref.clone(),
+            boundary_fingerprint: head.boundary.fingerprint.clone(),
+        },
+        Some(head.grounding.clone()),
     ))
 }
 

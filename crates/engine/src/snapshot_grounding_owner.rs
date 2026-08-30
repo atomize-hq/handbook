@@ -29,7 +29,7 @@ const GROUNDING_DEFINITION_SOURCE: &[u8] =
 const DISCLOSURE_POLICY_SOURCE: &[u8] =
     include_bytes!("snapshot_memory/production/disclosure-policy.json");
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum SnapshotSourceFamilyV1 {
     Evidence,
     Git,
@@ -176,11 +176,11 @@ trait SnapshotSourceAdapterV1 {
     const CONTRACT: SnapshotSourceContractV1;
 }
 
-struct EvidenceSnapshotSourceV1;
-struct GitSnapshotSourceV1;
-struct HandbookSnapshotSourceV1;
-struct SessionBoundarySourceV1;
-struct WorkSnapshotSourceV1;
+pub(crate) struct EvidenceSnapshotSourceV1;
+pub(crate) struct GitSnapshotSourceV1;
+pub(crate) struct HandbookSnapshotSourceV1;
+pub(crate) struct SessionBoundarySourceV1;
+pub(crate) struct WorkSnapshotSourceV1;
 
 const READ_FLOOR: SnapshotSourceReadFloorV1 =
     SnapshotSourceReadFloorV1::RedactOrOmitBeforePayloadRead;

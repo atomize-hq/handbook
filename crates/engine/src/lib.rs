@@ -67,6 +67,7 @@ pub mod repository_durability;
 pub mod repository_invocation_identity;
 pub mod schema_registry;
 pub mod semantic_capability_registry;
+mod snapshot_grounding_capture;
 mod snapshot_grounding_owner;
 mod snapshot_grounding_repository;
 #[allow(dead_code)]
@@ -306,6 +307,12 @@ pub use semantic_capability_registry::{
     AllowedInstanceCardinality, BindingCardinality, BindingEmptyPolicy, BindingJsonType,
     SemanticBindingRule, SemanticCapabilityContract, SemanticCapabilityDefinition,
     SemanticCapabilityRegistry, SemanticValidationProfileDefinition,
+};
+pub use snapshot_grounding_capture::{
+    SnapshotCaptureErrorV1, SnapshotCaptureOutcomeV1, SnapshotCaptureRequestV1,
+    SnapshotCommittedRecordV1, SnapshotFinalGroundingV1, SnapshotSlotAccountingV1,
+    SnapshotSlotObservationV1, SnapshotSourcePortErrorV1, SnapshotSourcePortV1,
+    SnapshotStartedGroundingV1,
 };
 pub use snapshot_grounding_owner::{
     SnapshotAdapterFailureOutcomeV1, SnapshotAdapterFailureRuleV1, SnapshotBoundaryIdentityV1,
