@@ -4,14 +4,14 @@
 
 This record fixes the product vocabulary, responsibility boundaries, numeric
 meaning, and discriminating scenarios for the Handbook Contract Membrane
-metric/evaluation/gate seam. It is a bounded semantic correction after Phase 5
-and before Phase-6 consumption. It is not implementation authority until a
-human approves it and a later task-level plan separately authorizes delivery.
+metric/evaluation/gate seam as a greenfield semantic decision. It is not
+implementation authority until a human approves it and later task-level
+planning separately authorizes delivery.
 
 Current source and the completed [HCM-5.1](slices/HCM-5.1/README.md) and
-[HCM-5.2](slices/HCM-5.2/README.md) authorities remain truth for V1. This
-record defines the intended replacement semantics; it does not patch V1 or
-authorize compatibility or migration work.
+[HCM-5.2](slices/HCM-5.2/README.md) authorities are evidence only for semantic
+ownership, dependency direction, and trust boundaries. Their current public
+shapes and computations neither constrain nor supply this model.
 
 ## Canonical model and vocabulary
 
@@ -40,7 +40,7 @@ in another row.
 | **Applicability result** | The Contracts-owned determination, made before evidence selection, that a claim is `applicable`, `not_applicable`, or `undetermined`, with an exact basis. `not_applicable` is positive semantic proof, not missing data. |
 | **Claim evaluation** | The complete result for exactly one expected claim in one evaluation context: its applicability result and, when applicable, an established finding or an indeterminate determination, plus the independent evidence-assessment dimensions and complete accounting. |
 | **Finding** | The semantic satisfaction result established by a claim evaluator: `satisfied`, `unsatisfied`, or a value on a claim-declared named grade/measurement scale. There is no universal partial-satisfaction scalar. |
-| **Metric definition** | An immutable, named and versioned configured algorithm definition over a declared population of compatible claim evaluations, with explicit input contract, scale, unit, aggregation, parameters, and missing/indeterminate-input policy. Applying it in an evaluation context is the invocation that produces a metric result. |
+| **Metric definition** | An immutable, named, versioned, and fully configured algorithm definition over a declared population of compatible claim evaluations, with explicit input contract, scale, unit, aggregation, parameters, and missing/indeterminate-input policy. Applying it in an evaluation context is the invocation that produces a metric result. |
 | **Metric result** | The exact output of one metric definition: `computed` with a value on its named scale, `not_applicable`, or `not_computable`, plus included/excluded inputs and a reproducible calculation trace. There is no unqualified “aggregate score.” |
 | **Gate policy** | An immutable semantic decision rule over direct claim-evaluation predicates and named metric-result predicates, including condition precedence and treatment of indeterminacy. |
 | **Semantic gate decision** | The non-mutating result `pass`, `fail`, `indeterminate`, or `not_applicable`, with every condition result and decisive reason. It answers the policy's bounded semantic question only. |
@@ -48,8 +48,8 @@ in another row.
 
 An **evaluation context** fixes one contract revision, subject snapshot,
 evaluation time, evidence-set identity, claim-evaluator versions, metric
-definitions, and gate-policy revision. Results that do not share that closure
-cannot be combined.
+definition identities and configurations, and gate-policy revision. Results
+that do not share that closure cannot be combined.
 
 Admission-time source validity is an immutable historical fact about the
 candidate-to-record transition. Evaluation-time currentness is recomputed for
@@ -81,15 +81,27 @@ duplicate submission never increase confidence by default.
 Every metric definition must state all of the following; omission makes the
 definition invalid rather than supplying a default:
 
-1. a stable metric name and algorithm version;
-2. the exact declared eligible-population rule and compatibility contract;
-3. the input and output scale, including bounds, direction, and permitted
-   operations;
-4. the quantity dimension and canonical unit where quantities are involved;
-5. the exact aggregation algorithm and parameters;
-6. handling for `not_applicable`, indeterminate, insufficient, stale,
+1. a stable metric name and version, plus the exact algorithm identity and
+   version;
+2. its complete configuration, including every parameter, coefficient, and
+   constant;
+3. the exact eligible-population rule and compatibility contract, including
+   the subject, context, evaluator, time, scale, and unit closure required of
+   every input;
+4. every input and output scale, its direction, permitted operations, and
+   bounds;
+5. the quantity dimension and canonical unit wherever a value or coefficient
+   is dimensioned;
+6. the exact aggregation algorithm and semantics;
+7. handling for `not_applicable`, indeterminate, insufficient, stale,
    conflicting, uncertain, missing, or incompatible inputs; and
-7. complete included/excluded-input and calculation accounting.
+8. complete included/excluded-input and calculation accounting, including
+   conversions, intermediate values, bound checks, and the reason for any
+   non-computed result.
+
+There is no universal unnamed aggregate, default metric, or concrete metric
+algorithm catalog selected by this record. A metric result always identifies
+the exact named, versioned, configured definition that produced it.
 
 Externally stable numeric values are exact. Finite decimals retain their exact
 coefficient and scale; ratios retain exact numerator and positive denominator;
@@ -100,42 +112,26 @@ unit, average an ordinal scale, or collapse a quantity to a unitless number.
 Exact conversions must be named, versioned, dimension-compatible, and visible
 in the trace.
 
-Public signed integer coefficients are bounded to
-`-9,007,199,254,740,991..=9,007,199,254,740,991`. Counts, normalized weights,
-nonnegative metric numerators/denominators, and their published sums are bounded
-to `0..=9,007,199,254,740,991`; a semantic domain that requires a positive
-value excludes zero. This is a deliberate cross-runtime interoperability
-domain: every public integer component is exactly representable by common
-binary64-backed consumers. An out-of-bound public input or result refuses
-instead of clamping, rounding, wrapping, or changing representation silently.
-Threshold comparison is exact and declares whether equality passes.
+Every metric algorithm must declare finite public and intermediate numeric
+bounds appropriate to its own semantics and representation. An out-of-bound
+input, intermediate, or result refuses instead of clamping, rounding, wrapping,
+or changing representation silently. Threshold comparison is exact and
+declares whether equality passes.
 
-A weight exists only as a parameter inside a particular named metric
-definition. It is not intrinsic to a claim and never means obligation,
-criticality, severity, confidence, producer trust, or gate effect. Relative
-rational or finite-decimal weights are normalized exactly to the smallest
-positive integer vector that preserves their ratios; zero or negative weights,
-normalization failure, or total-bound failure reject the metric definition.
+A weight or other coefficient exists only as a parameter inside one named
+metric definition. It is not intrinsic to a claim and never means obligation,
+criticality, severity, confidence, producer trust, or gate effect. The metric
+algorithm must declare each coefficient's meaning, dimension and unit,
+permitted sign and treatment of zero, relative or absolute interpretation,
+equivalence and normalization behavior, bounds, and role in aggregation. There
+is no universal coefficient domain or normalization rule across algorithms.
 
-The only weighted metric semantics defined and authorized by this record are
-the named **Weighted Binary Pass Rate** semantics below. No other weighted
-computation is implied or authorized; any future weighted metric requires a
-separate semantic decision. Its strictly positive weights are exact rationals
-or finite decimals. Its schema and algorithm identity/version representation
-remain for later planning:
-
-```text
-population  = the definition's exact claim population after proven N/A removal
-requirement = every remaining member has an established binary finding
-numerator   = sum(metric-local weight for satisfied population members)
-denominator = sum(metric-local weight for all population members)
-value       = numerator / denominator, exactly
-```
-
-It rejects graded or incompatible findings. A missing, indeterminate, stale,
-conflicting, or incomplete required input makes the result `not_computable`
-under its fixed missing-data policy; a legitimately empty all-not-applicable
-population makes it `not_applicable`. Neither case yields `1/1` or 100%.
+Only when an algorithm defines dimensionless, strictly positive, relative
+weights may exact rational or finite-decimal coefficients be normalized to a
+primitive positive-integer vector. That normalization is valid only when it
+preserves the algorithm's semantics and every declared public bound. Zero,
+negative, absolute, or dimensioned coefficients must never be silently
+coerced, discarded, or normalized under this rule.
 
 ## Responsibility map
 
@@ -145,7 +141,7 @@ population makes it `not_applicable`. Neither case yields `1/1` or 100%.
 | Docks and adapters | Protocol execution/framing, exact translation, preservation of source semantics and lexemes, candidate construction, and import diagnostics. | Canonical evidence, invented units or scale direction, silent normalization, claim meaning, applicability, metrics, or gates. |
 | Contracts evidence admission | Exact candidate/source/run/subject binding; authority and provenance validation; canonical normalization; unit/scale identity and permitted exact conversion; idempotent duplicate identity; immutable canonical evidence. | Claim satisfaction, criticality, cross-claim aggregation, gate outcome, or workflow action. |
 | Claim evaluation | Applicability; complete evidence selection/accounting; sufficiency, currentness, consistency, uncertainty treatment; semantic interpretation; and one finding or indeterminate determination per expected claim. | Cross-claim metric aggregation, global thresholds, gate precedence, enforcement, posture, promotion, or mutation. |
-| Contracts-owned named metric-definition authority | Canonical establishment, exact re-admission validation, and exact resolution of immutable named metric definitions; validation of exact name/version, the declared eligible-population rule and compatibility contract, input/output scales and units, algorithm identity, parameters, strictly positive exact weights and numeric bounds, aggregation semantics, and missing/indeterminate-input policy. | Evidence selection, finding interpretation or establishment, the actual evaluation-run population, metric computation, threshold/comparator application, gate decision, or downstream mutation. |
+| Contracts-owned named metric-definition authority | Canonical establishment, exact re-admission validation, and exact resolution of immutable named, versioned, configured metric definitions; validation of the eligible-population and compatibility rules, input/output scales and units, algorithm identity/version, parameters and coefficients under their algorithm-declared semantics and bounds, aggregation semantics, and missing/indeterminate-input policy. | Evidence selection, finding interpretation or establishment, the actual evaluation-run population, metric computation, threshold/comparator application, gate decision, or downstream mutation. |
 | Metric computation | Pure exact application of one exactly resolved named metric definition to compatible claim evaluations in one closed evaluation context, including derivation and accounting of the actual included/excluded population and calculation result. | Raw-source/evidence selection, applicability or finding changes, definition changes, gate threshold/comparator application, gate decision, or downstream disposition. |
 | Gate policy | Direct non-compensatory claim-evaluation predicates, named metric-result predicates, precedence, indeterminacy treatment, and the semantic gate decision. | Raw evidence interpretation, unit/scale conversion, changing metric semantics, canonical admission, or any workflow/posture/promotion mutation. |
 | Downstream consumers | Their own versioned mapping from the exact semantic decision to enforcement, posture, workflow, or promotion disposition; any separately authorized mutation with fresh authority/currentness checks. | Rewriting the gate decision, treating a metric as the decision, bypassing decisive provenance, or transferring mutation authority into Contracts, a dock, SDK, or transport. |
@@ -157,7 +153,7 @@ population makes it `not_applicable`. Neither case yields `1/1` or 100%.
   finding, sufficiency, currentness, consistency, or uncertainty dimensions. A
   named metric-result predicate is the separate policy construct over one exact
   metric result. A direct predicate is never encoded only as a large weight.
-- Metric results do not compensate for one another unless a future named gate
+- Metric results do not compensate for one another unless the exact named gate
   policy explicitly declares a compatible composite rule. There is no ambient
   averaging across metrics.
 - A gate decision is pure derived semantic truth. It persists or mutates no
@@ -196,9 +192,28 @@ population makes it `not_applicable`. Neither case yields `1/1` or 100%.
 Each scenario assumes exact identity/provenance and the stated immutable policy
 unless the row identifies their failure.
 
+One scenario uses the hypothetical metric definition
+`scenario.decimal-coefficient-seam@1` and algorithm
+`scenario.exact-relative-weighted-binary-ratio@1`. Its configured population is
+exactly three named claims after exclusion of any claim proved
+`not_applicable`; compatible inputs must be binary findings from the same
+closed evaluation context. Its output is an exact dimensionless rational in
+`0..=1`, higher is better; the algorithm divides the sum of coefficients for
+satisfied eligible inputs by the sum for all eligible inputs. Its configured
+coefficients are exact, dimensionless, strictly positive, relative finite
+decimals `0.25`, `1.50`, and `2.25`. For this definition, multiplication by a
+common positive factor is equivalent, primitive-positive-integer normalization
+is permitted, and the configured normalized components and every intermediate
+sum are bounded by `16`. Any eligible missing, indeterminate, stale,
+conflicting, uncertain, or incompatible input makes the result
+`not_computable`; an empty eligible population is `not_applicable`. Its trace
+accounts for every input, exclusion, coefficient, normalized value, sum, and
+exact division. This scenario-local definition tests seam semantics; it does
+not authorize a product metric catalog entry.
+
 | Scenario and discriminating inputs | Responsible layers | Expected semantic outcome | Invariant proved |
 | --- | --- | --- | --- |
-| **Hard failure with high aggregate.** One required security claim is established unsatisfied; Weighted Binary Pass Rate is `99/100`. The gate requires that claim satisfied and separately requires the metric at least `95/100`; direct failure is decisive. | Claim evaluator; metric; gate policy. | Metric remains `99/100`; the direct predicate fails; gate decision is `fail`. | A compensatory aggregate cannot override a direct predicate. |
+| **Hard failure with high aggregate.** One required security claim is established unsatisfied; a named, versioned, configured aggregate metric reports `99/100`. The gate requires that claim satisfied and separately requires that metric at least `95/100`; direct failure is decisive. | Claim evaluator; metric; gate policy. | Metric remains `99/100`; the direct predicate fails; gate decision is `fail`. | A compensatory aggregate cannot override a direct predicate. |
 | **Missing versus not applicable.** Claim A is applicable but has no admitted record; Claim B has a proved false applicability rule. The gate requires each applicable required claim determinate and treats an indeterminate direct predicate or dependent `not_computable` metric as `indeterminate` when no fail is established. | Applicability and claim evaluators; metric; gate. | A has insufficient coverage and no finding; its determination is indeterminate. B is `not_applicable`. The dependent metric is `not_computable`; gate is `indeterminate`, not pass. | Absence, omission, and N/A are distinct. |
 | **Stale evidence.** The only otherwise satisfying record exceeds its freshness policy at the explicit evaluation time. The gate requires the claim satisfied and treats an indeterminate direct predicate or dependent `not_computable` metric as `indeterminate`. | Claim evaluator; metric; gate. | Currentness is stale; no finding is established; claim determination is indeterminate; dependent metric is `not_computable`; gate is `indeterminate`. | Historical satisfaction is not current satisfaction. |
 | **Conflicting evidence.** Two eligible authorized records support opposite findings, no resolver is named, and the gate treats an indeterminate direct predicate or dependent `not_computable` metric as `indeterminate`. | Claim evaluator; metric; gate. | Consistency is conflicting; no finding is established; claim determination is indeterminate; dependent metric is `not_computable`; gate is `indeterminate`. | Neither adapter nor metric may cherry-pick. |
@@ -206,34 +221,13 @@ unless the row identifies their failure.
 | **Flaky observation.** Ten distinct eligible observations contain nine satisfied and one unsatisfied result; the claim declares unanimity as its stability resolver and declares no sampling model. | Claim evaluator. | Consistency is conflicting; no finding is established; claim determination is indeterminate; no generic “90% satisfied” value is produced. | Repetition needs a named sampling model before scalar aggregation. |
 | **Quantitative unit normalization.** Authorized observations report `1 s` and `1000 ms` for the same latency quantity, and admission permits one named exact conversion. | Admission; claim evaluator; metric. | Both normalize to the same exact canonical quantity and produce the same finding and metric value with source units retained in provenance. | Units are semantic and exact, not labels. |
 | **Graded external scale.** An imported grade is `1` on a versioned ordinal scale where lower is better; a named claim evaluator maps it to a declared grade. | Adapter; admission; claim evaluator; compatible metric. | Direction is honored from the exact scale definition; a binary metric rejects the grade; only a metric naming that scale/mapping may consume it. | External numbers do not imply direction, binary truth, or weights. |
-| **Decimal weights and exact bounds.** A Weighted Binary Pass Rate definition assigns exact relative weights `0.25`, `1.50`, `2.25` to findings satisfied, unsatisfied, satisfied. A single-condition gate requires that metric at least `5/8`, with equality included. | Metric-definition authority; metric computation; gate policy. | Definition weights normalize to `1, 6, 9`; calculation trace records numerator `10`, denominator `16`, and exact result `5/8`; the gate passes on equality. Any coefficient, normalized weight, numerator, denominator, or published sum above `9,007,199,254,740,991` refuses before use. | Weight meaning, computation, threshold, and bounds remain exact and separately owned. |
-| **All not applicable.** Every claim in the gate's governed population is proved `not_applicable`; the gate policy declares that positive proof for the complete population makes its question not applicable, and the downstream policy maps that decision to `no_effect`. | Applicability evaluator; metric; gate; downstream consumer. | Metric and gate are both `not_applicable`, never `pass`; downstream disposition is `no_effect`. | Empty populations do not pass vacuously. |
+| **Decimal relative coefficients.** The scenario-local `scenario.decimal-coefficient-seam@1` definition receives findings satisfied, unsatisfied, satisfied. A single-condition gate requires that exact metric result to be at least `5/8`, with equality included. | Metric-definition authority; metric computation; gate policy. | The permitted normalization produces `1, 6, 9`; the calculation trace records numerator `10`, denominator `16`, and exact result `10/16 = 5/8`; the gate passes on equality. | Coefficient meaning, conditional normalization, computation, bounds, and threshold remain exact and separately owned without selecting a catalog algorithm. |
+| **All not applicable.** Every claim in the gate's governed population is proved `not_applicable`; the named metric's definition declares an empty eligible population `not_applicable`; the gate policy declares that positive proof for the complete population makes its question not applicable; and the downstream policy maps that decision to `no_effect`. | Applicability evaluator; metric; gate; downstream consumer. | Metric and gate are both `not_applicable`, never `pass`; downstream disposition is `no_effect`. | Empty populations do not pass vacuously. |
 | **Degradation monotonicity.** A prior `pass` depends on one current satisfying record. At a later evaluation time the same subject snapshot, applicability, policy, and other eligible information are unchanged, but that record is now stale; the gate treats the resulting indeterminate direct predicate as `indeterminate`. | Claim evaluator; metric; gate. | No finding is established; the dependent metric is `not_computable`; the re-evaluated gate is `indeterminate`, not `pass`, and changed accounting identifies the stale record. | Loss of the sole eligible basis for pass cannot preserve or improve the gate decision. |
 | **Mixed population closure.** Candidate claim evaluations differ in subject snapshot, contract revision, evaluator version, or evaluation time. The gate requires the dependent metric computable and treats `not_computable` as `indeterminate`. | Metric computation; gate. | The metric is `not_computable` with every incompatible input accounted; the gate is `indeterminate`. | Metrics cannot span mixed semantics or ambient time. |
-| **Multiple named metrics.** A gate requires both a functional pass-rate threshold and a security-severity threshold. The first predicate passes and the second fails; failure is decisive. | Two metrics; gate policy. | Results remain separate; the security metric predicate is decisive and the gate is `fail`. No hidden cross-metric average exists. | One metric cannot silently compensate for another. |
+| **Multiple named metrics.** A gate requires both a named functional-metric threshold and a named security-metric threshold. The first predicate passes and the second fails; failure is decisive. | Two metrics; gate policy. | Results remain separate; the security metric predicate is decisive and the gate is `fail`. No hidden cross-metric average exists. | One metric cannot silently compensate for another. |
 | **Uncertain boundary.** A latency interval straddles the claim budget, no alternate evaluator is named, and the gate requires that claim satisfied while treating an indeterminate direct predicate as `indeterminate`. | Claim evaluator; dependent metric; gate. | Uncertainty is preserved; no finding is established; claim determination is indeterminate; dependent metric is `not_computable`; gate is `indeterminate`. | Midpoints or favorable endpoints cannot be selected silently. |
 | **Unauthorized source.** An otherwise well-formed candidate binds a source actor that lacks current authority for the stated subject and observation class. | Contracts evidence admission. | Admission refuses before claim evaluation and produces no canonical evidence record, finding, metric result, or gate decision. | Structural validity and adapter output cannot substitute for source authority. |
-
-## V1 reconciliation
-
-These names describe current implementation truth but are legacy at the new
-semantic seam:
-
-| V1 name | Reconciliation |
-| --- | --- |
-| `ContractClaimV1` (sometimes described conceptually as `ClaimDefinitionV1`) | Legacy claim shape. Its normative claim identity/evidence requirements remain relevant, but claim-attached gate effect and score weight do not survive as intrinsic claim properties. |
-| `EvidenceCandidateV1` | Remains an evidence candidate only; it is never admitted evidence. |
-| `EvidenceRecordV1` | Aligns with canonical evidence record, subject to the expanded observation/unit/scale semantics selected by later design. |
-| `ApplicabilityOutcomeV1::Blocked` | Legacy conflation. The canonical applicability term is `undetermined`; fail-closed gate/downstream behavior is decided separately. |
-| `ClaimVerdictV1` / `ClaimVerdictDecisionV1` | Legacy compound result. Canonical claim evaluation separates applicability, established finding versus indeterminate determination, and assessment dimensions. |
-| `GateEffectV1` | Legacy claim-attached policy. Non-compensatory claim predicates belong to a gate policy; criticality/severity remains separate. |
-| `ScoreWeightV1` | Legacy claim-attached parameter. Weights belong only to a particular named metric definition. |
-| `ScoreResultV1` | Legacy unnamed single-ratio result. It is not the universal aggregate. The replacement Weighted Binary Pass Rate has the semantics fixed above; this record does not claim byte or behavioral compatibility with the V1 deficit-counting seam. |
-| `GatePolicyV1`, `GateResultV1`, and `GateDecisionV1` | Legacy one-algorithm/two-decision seam. The canonical gate policy consumes direct predicates plus named metric results and emits the four-state semantic gate decision without mutation. |
-
-This reconciliation permits the intended replacement to supersede V1. It does
-not select a V1 patch, compatibility compiler, dual run, migration mechanism,
-or preserved wire/API shape.
 
 ## Settled versus deferred
 
@@ -243,11 +237,11 @@ purity and precedence, complete explanation/accounting requirement, and every
 scenario outcome above. Later work may not reopen those decisions merely by
 choosing a representation.
 
-Deliberately deferred to human-approved task-level planning are schema and Rust
-type shapes, API and operation shape, concrete algorithm catalog beyond the
-named Weighted Binary Pass Rate semantics, expression language, persistence
-layout, registry/versioning mechanics, V1 migration or compatibility, delivery
-packets, acceptance plan, and rollout. Also out of scope are external adopter
+Deliberately deferred to human-approved task-level planning are all concrete
+metric algorithms and catalog entries; schema, type, API, and operation shapes;
+expression language; persistence layout; registry and version-resolution
+mechanics; any cutover or temporary internal bridge; implementation packets;
+acceptance planning; and rollout. Also out of scope are external adopter
 selection, parent-promotion policy, posture algorithms, UI, a metric
 marketplace, and a universal confidence score.
 
