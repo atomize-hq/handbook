@@ -59,12 +59,17 @@ definition identities and configurations, and gate-policy revision. Results
 that do not share that closure cannot be combined.
 
 When posture influenced assurance selection, the evaluation context also fixes
-the Resolved Posture Snapshot fingerprint, Assurance Policy Selector identity
-and version, and Resolved Assurance Requirements identity. Those bindings must
-participate in evaluation fingerprinting, currentness, and canonical
-explanation. Metrics and gates consume the resolved requirements; they never
-reread or reinterpret mutable posture, reselect requirements, or change metric
-meaning. This is the cross-boundary invariant fixed with the
+the Resolved Posture Snapshot fingerprint; exact Assurance Policy Selector
+identity, version, semantic-content identity, and currentness; exact admitted
+policy-resolution basis identity and currentness; exact selected Assurance
+Policy identity, version, semantic-content identity, and currentness; and
+Resolved Assurance Requirements identity. The requirements identity
+transitively binds the admitted exception inputs, every other declared
+selection input, and complete selection accounting. Those bindings participate
+in evaluation fingerprinting, currentness, and canonical explanation. Metrics
+and gates consume the resolved requirements; they never reread or reinterpret
+mutable posture, reselect requirements, or change metric meaning. This is the
+cross-boundary invariant fixed with the
 [companion posture/assurance record](posture-assurance-policy-semantic-decision.md).
 
 Admission-time source validity is an immutable historical fact about the

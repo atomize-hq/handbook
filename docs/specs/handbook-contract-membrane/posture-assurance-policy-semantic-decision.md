@@ -36,13 +36,13 @@ Classification already names a different concept.
 | Term | Fixed meaning and ownership |
 | --- | --- |
 | **Project Classification** | The separately typed project-origin or change-context category `greenfield`, `brownfield`, `integration`, `modernization`, or `hardening`. Charter authoring may use it to suggest defaults, but the classification itself neither is nor computes posture. |
-| **Posture Level** | One value on the Charter's fixed `1-5` rubric, used as a persisted baseline or an explicit value for one Posture Dimension. A level has meaning only for its named dimension or for baseline inheritance; it is not a universal project strictness score. |
+| **Posture Level** | One value on the Charter's fixed `1-5` rubric, used as a persisted baseline or an explicit value for one Posture Dimension. The current authoring rubric labels levels 1–5 `Exploratory`, `Prototype`, `Product`, `Production`, and `Hardened`; those labels name numeric authoring levels, not posture types or a project-wide scalar. A level has meaning only for its named dimension or for baseline inheritance; it is not a universal project strictness score. |
 | **Posture Dimension** | One named, independent axis of engineering posture. The Charter currently has exactly nine ordered dimensions. A project's posture is the vector of their effective levels, not their maximum, minimum, average, or another ambient scalar. |
 | **Posture Scope** | The exact bounded subject and applicability boundary for which posture is being resolved, including every identity and currentness binding required to distinguish that subject from another domain, component, operation, or work context. The posture-resolution owner owns this binding and refuses absent, ambiguous, stale, or unsupported scope. |
 | **Resolved Posture Snapshot** | The posture-resolution owner's immutable, fingerprinted determination for one exact Posture Scope. It binds the exact Charter identity and revision, persisted baseline, effective value of every Posture Dimension, exact scope, resolution inputs, and currentness basis. It is the only posture form an Assurance Policy may consume. |
 | **Assurance Policy** | An immutable, named, versioned semantic rule that declares the exact Posture Scope it supports, the Posture Dimensions it consumes, and how a supported Resolved Posture Snapshot selects assurance requirements. The assurance-policy authority owns the rule; it does not own posture mutation, evidence admission, metric computation, gate truth, or enforcement. |
-| **Assurance Policy Selector** | The immutable, named, versioned selection rule that resolves exactly one applicable Assurance Policy or refuses. Its identity and version are distinct provenance even when packaged with the selected policy. |
-| **Resolved Assurance Requirements** | The immutable, fingerprinted output of applying one exact Assurance Policy to one Resolved Posture Snapshot. It binds exact named/versioned contract or claim-set references, evidence policies, Metric Definitions, Gate Policy, admitted exception requirements, complete selection accounting, and canonical explanation. Metrics and gates consume this result; they do not derive it. |
+| **Assurance Policy Selector** | The immutable, named, versioned selection rule that consumes one exact Resolved Posture Snapshot plus only its declared, admitted selection inputs and resolves exactly one applicable Assurance Policy or refuses. Its identity binds its canonical semantic content and currentness, independently of the exact admitted policy-resolution basis and selected policy even when they are packaged together. |
+| **Resolved Assurance Requirements** | The immutable, fingerprinted output of applying one exact Assurance Policy to one Resolved Posture Snapshot. Its identity transitively binds the snapshot; exact selector identity, version, semantic-content identity, and currentness; exact admitted policy-resolution basis and currentness; exact selected-policy identity, version, semantic-content identity, and currentness; every admitted exception input; every other declared selection input; and complete candidate accounting and canonical explanation. Its output binds exact named/versioned contract or claim-set references, evidence policies, Metric Definitions, Gate Policy, and admitted exception requirements. Metrics and gates consume this result; they do not derive it. |
 | **Metric Definition** | The immutable, named, versioned, fully configured algorithm definition owned by the companion record. Assurance selection may choose an exact definition reference; it MUST NOT change the definition's scale, unit, population, algorithm, parameters, missing-input policy, or numeric meaning. |
 | **Gate Policy** | The immutable semantic decision rule owned by the companion record. Assurance selection may choose an exact policy reference; gate evaluation remains a pure application of that resolved policy to compatible claim evaluations and metric results. |
 | **Enforcement Policy** | A separately owned, named, versioned rule that consumes an exact semantic gate decision, its Resolved Posture Snapshot, and the required evaluation provenance to determine an operational disposition. It cannot alter semantic gate truth or authorize posture mutation by implication. |
@@ -62,7 +62,9 @@ implemented:
   `testing_rigor`, `scalability_performance`, `reliability_operability`,
   `security_privacy`, `observability`, `dx_tooling_automation`, and
   `ux_polish_api_usability`. Project Classification is a separately typed field
-  with the five values named above.
+  with the five values named above. The current authoring rubric labels numeric
+  levels 1–5 `Exploratory`, `Prototype`, `Product`, `Production`, and
+  `Hardened`; these labels do not replace the effective dimension vector.
 - The private `ProjectPostureKernel` resolves each effective dimension from the
   persisted baseline and optional level override. It fingerprints the Charter
   authority and resolved vector, but it does not structurally resolve the
@@ -117,23 +119,42 @@ mapping.
 
 - Assurance-policy selection MUST occur before evidence selection, claim
   evaluation, metric computation, or gate evaluation for the run.
+- The Assurance Policy Selector MUST consume only the exact Resolved Posture
+  Snapshot and other exact, declared, admitted, and currentness-bound selection
+  inputs. Project Classification, mutable posture or Charter state, free-form
+  Charter prose, gate results, enforcement dispositions, and unbound ambient
+  state MUST NOT become implicit selector inputs.
 - The Assurance Policy Selector MUST resolve exactly one named, versioned,
   supported Assurance Policy or refuse. Missing, ambiguous, stale, substituted,
   or unsupported mapping MUST NOT fall back to a default policy.
+- The selector MUST bind and completely account for the exact admitted
+  policy-resolution basis it consulted, including every candidate or mapping
+  considered and that basis's currentness. Changed selector content, resolution
+  basis, selected-policy content, currentness, or another declared input MUST
+  change the resolved identity or refuse even when the output references would
+  otherwise look equivalent.
 - The selected Assurance Policy MUST resolve exact named/versioned contract or
   claim-set references, evidence policies, Metric Definitions, Gate Policy,
   admitted exception requirements, and a canonical explanation.
 - Resolved Assurance Requirements MUST completely account for selected,
-  excluded, inapplicable, and refused candidates. An omission MUST NOT become
-  an implicit requirement or relaxation.
+  excluded, inapplicable, ambiguous, and refused candidates. Their identity
+  MUST transitively bind the exact snapshot, selector, policy-resolution basis,
+  selected policy, admitted exception inputs, all other declared inputs, the
+  currentness of each currentness-bearing input, and that complete accounting.
+  An omission MUST NOT become an implicit requirement or relaxation.
 - Metrics and gates MUST consume the Resolved Assurance Requirements. They
   MUST NOT reread mutable posture, reinterpret levels or free-form text, select
   alternate requirements, or change the meaning of a Metric Definition.
 - When posture influences selection, the evaluation context, its fingerprint
   and currentness basis, and its canonical explanation MUST bind the Resolved
-  Posture Snapshot fingerprint, Assurance Policy Selector identity/version,
-  and Resolved Assurance Requirements identity. Replay without those exact
-  bindings MUST refuse.
+  Posture Snapshot fingerprint; exact Assurance Policy Selector identity,
+  version, semantic-content identity, and currentness; exact admitted
+  policy-resolution basis identity and currentness; exact selected Assurance
+  Policy identity, version, semantic-content identity, and currentness; and
+  Resolved Assurance Requirements identity. The requirements identity
+  transitively binds the admitted exception inputs, all other declared inputs,
+  and complete selection accounting. Replay without those exact bindings MUST
+  refuse.
 
 This is the cross-boundary invariant shared with the
 [metric/gate record](metric-gate-semantic-decision.md): **posture may select
@@ -143,8 +164,8 @@ metric or gate may reinterpret posture.**
 
 ### Trust invariants do not relax
 
-At every Posture Level, including Exploratory, the following remain
-non-relaxable:
+At every numeric Posture Level, including level 1 (`Exploratory` in the current
+authoring rubric), the following remain non-relaxable:
 
 - authority and provenance checks;
 - canonical admission and exact identity;
@@ -158,13 +179,33 @@ needed to establish the inputs, identities, policy, or truth of that selection.
 
 ### Exceptions are typed authority
 
+- Exception governance, typed-policy authority, exact record authorization,
+  record admission, and selection-time application are distinct semantic acts.
+- Canonical Charter governance MAY nominate an authorization policy, required
+  approval or issuer classes, process expectations, record location, and
+  minimum authoring fields. Those declarations are governance inputs only;
+  Charter prose, approver names, process metadata, record location, and minimum
+  fields do not themselves constitute an executable exception policy,
+  authorize a particular record, or admit an exception for selection.
+- A designated exception-policy authority MUST own the exact typed, named,
+  versioned policy that defines permitted issuers, scope, effects, record
+  requirements, and currentness. Each exact exception record MUST be separately
+  authorized under that policy and admitted through exact authority, identity,
+  scope, currentness, and policy-conformance checks.
 - Free-form shortcut, red-line, stance, domain-override, rationale, or other
   Charter prose MUST NOT execute as an exception.
 - Only an admitted, typed, named, versioned exception policy and its exact
   authorized exception record may affect requirement selection.
+- Assurance selection MAY apply only the admitted bounded effect. It MUST NOT
+  mint, approve, broaden, infer, or self-authorize an exception.
 - The selection explanation MUST identify every applied exception and its
   authority, scope, identity, currentness, and effect. A missing or invalid
   exception MUST fail closed rather than become an implicit waiver.
+
+One eventual component may host more than one of these responsibilities, but
+Charter governance nomination, typed-policy authority, exact record
+authorization, record admission, and selection-time application MUST remain
+semantically distinct and independently attributable.
 
 ## Bounded monotonicity and vector order
 
@@ -228,6 +269,7 @@ unmodified gate result.
 | Charter authoring and governance | Project authority authors and approvers own Project Classification, persisted baseline and dimension values, descriptive guidance, and authorized Charter changes. | Executable scope matching, assurance selection by prose, metric meaning, gate truth, or automatic posture mutation. |
 | Posture resolution | The posture-resolution owner resolves exact scope and produces the immutable Resolved Posture Snapshot from current admitted Charter authority. | Classification-based override, assurance-policy invention, evidence interpretation, gate truth, or transition approval. |
 | Assurance-policy authority | Establishes and resolves named/versioned selectors and Assurance Policies and produces Resolved Assurance Requirements with complete explanation. | Posture mutation, canonical evidence admission, metric reinterpretation, gate evaluation, or enforcement. |
+| Exception governance, authority, and admission | Charter governance owns non-executable nominations and process declarations. The designated exception-policy authority owns admitted exception semantics, permitted issuers, scope, effects, record requirements, and currentness; the exact record authority authorizes each record; and the exception-admission owner establishes authority, identity, scope, currentness, and policy conformance before selection may apply the bounded effect. | Treating Charter prose, approver names, process metadata, record location, or minimum fields as executable authority; allowing assurance selection to mint, approve, broaden, infer, or self-authorize an exception. |
 | Contract, evidence, and claim evaluation | The respective semantic owners admit exact contract/evidence authority and establish applicability and claim truth under the resolved requirements. | Rereading posture, changing the selected requirements, gate disposition, recommendation, or posture mutation. |
 | Metric computation and gate evaluation | The owners defined by the companion record purely apply exact Metric Definitions and Gate Policy inside the closed evaluation context. | Assurance reselection, mutable-posture interpretation, enforcement, recommendation, or mutation. |
 | Enforcement | A separately named Enforcement Policy owner maps preserved gate truth and exact context to an Enforcement Disposition. | Rewriting semantic gate truth or directly changing posture. |
@@ -245,15 +287,15 @@ the row names a failure.
 | **Mixed dimension levels without collapse.** A snapshot has a lower `speed_vs_quality` level, a higher `security_privacy` level, and distinct values for the other dimensions. A policy declares only those two dimensions relevant. | The snapshot retains all nine effective dimensions. Selection applies the two declared inputs independently; it does not use the vector's max, min, average, baseline label, or an invented project score. | Posture is a vector and policy declares its consumers. |
 | **Classification versus explicit posture.** A project is classified `greenfield`, while its persisted `security_privacy` posture is explicit and higher than an authoring suggestion for that classification. | The explicit posture controls. Classification may explain a suggestion but cannot lower, replace, or mutate the persisted value. | Classification and posture are distinct authorities. |
 | **PII adapter versus docs-only tool.** One exact scope binds a PII-handling adapter; another binds a docs-only tool. A third request says only “the project area” and could match either. | Each exact scope resolves independently under a supporting policy. The ambiguous request refuses before assurance selection; free-form domain text does not choose for it. | Scope is exact and fails closed. |
-| **Exploratory posture and trust.** An Exploratory scope would select a lighter admitted requirement set, but one candidate lacks authority provenance and another leaves expected claims unaccounted. | Selection or evaluation refuses. Exploratory posture cannot waive authority, provenance, canonical admission, complete accounting, determinism, or fail-closed behavior. | Trust invariants are non-relaxable. |
+| **Lighter assurance selection and trust.** A supported Resolved Posture Snapshot selects a lighter admitted requirement set, but one candidate lacks authority provenance and another leaves expected claims unaccounted. | Selection or evaluation refuses. A lighter requirement set cannot waive authority, provenance, canonical admission, complete accounting, determinism, or fail-closed behavior. | Trust invariants are non-relaxable at every numeric level. |
 | **Posture changes mid-run.** A run closes on snapshot `P_n`; an authorized transition creates `P_{n+1}` before the gate finishes. | The existing run remains bound to `P_n` and its resolved requirements. It does not reselect. A fresh run under `P_{n+1}` resolves a new snapshot and requirements; the two contexts cannot be combined. | Runs bind one immutable posture snapshot. |
 | **Failed gate feeds posture reasoning.** A gate returns `fail`, and a named observation policy admits that exact result. A recommendation policy proposes raising a relevant dimension. | The gate truth remains `fail`; the admitted observation and recommendation are non-mutating. Only a separately authorized Engine transition can create the next posture. | Feedback does not create a causal mutation shortcut. |
 | **Relevant-dimension monotonicity.** Within the same policy family/version and exact scope, all non-posture inputs and other dimensions are fixed while one declared relevant dimension increases. | The newly resolved requirements preserve or strengthen every prior requirement under the policy's declared strength relation; none is removed or weakened. | Monotonicity is bounded and dimension-relevant. |
 | **Incomparable posture vectors.** For the same policy and scope, vector A is higher in security while vector B is higher in operability, and both dimensions are relevant. | Neither vector is declared globally stricter. The exact policy resolves each independently without scalar collapse; any unsupported combination refuses. | A dimension vector has no global total order. |
 | **Missing policy mapping.** A valid snapshot and exact scope have no supported Assurance Policy mapping, or two selectors tie without deterministic precedence. | Selection refuses and produces no Resolved Assurance Requirements. It does not choose a default, nearest, lowest, or highest policy. | Missing or ambiguous mapping fails closed. |
-| **Different enforcement, same truth.** The same exact semantic gate decision and context are consumed by two different named/versioned Enforcement Policies. | The gate decision and explanation remain byte-for-byte semantic truth. The policies may produce different dispositions, each attributed to its own identity, without rewriting the gate. | Enforcement is separate from gate semantics. |
-| **Free-form shortcut and red line.** Charter text says a shortcut is allowed for a named area and a red line applies to another, but no admitted typed exception policy and record binds the exact scope. | Neither text executes or changes requirement selection. Selection follows the admitted policy or refuses if an exception is required. | Prose is not executable policy or exception authority. |
-| **Deterministic requirement replay.** The exact Charter identity/revision, scope, snapshot fingerprint, selector identity/version, policy, admitted exception inputs, and other selection inputs are replayed. | Replay produces the identical Resolved Assurance Requirements identity, references, accounting, and explanation. A changed or missing binding refuses rather than reproducing an apparently equivalent result. | Resolved requirements are exact, closed, and reproducible. |
+| **Different enforcement, same truth.** The same exact semantic gate decision and context are consumed by two different named/versioned Enforcement Policies. | The exact semantic gate decision and canonical explanation remain unchanged. The policies may produce different dispositions, each attributed to its own identity, without rewriting the gate. | Enforcement is separate from gate semantics. |
+| **Free-form shortcut and red line.** Charter text says a shortcut is allowed for a named area and a red line applies to another, but no admitted typed exception policy and record binds the exact scope. A second input is typed but was issued by an unauthorized actor; a third was synthesized or approved by the selector itself. | The prose and both invalid records refuse and do not change requirement selection. Only an exact record that was separately authorized and admitted under the exact exception policy may have its bounded effect applied. | Governance prose, typing alone, and selector self-authorization are not exception authority. |
+| **Deterministic requirement replay.** The exact Charter identity/revision, scope, snapshot fingerprint, selector identity/version/content/currentness, admitted policy-resolution basis/currentness, selected-policy identity/version/content/currentness, admitted exception inputs, and other declared inputs are replayed. A comparison case uses a different policy or resolution basis that yields apparently equivalent requirement references. | Exact replay produces the identical Resolved Assurance Requirements identity, references, accounting, and explanation. The comparison case has a distinct provenance-bound requirements identity or refuses; equivalent-looking references do not collapse different authority. Any changed or missing binding likewise changes identity or refuses. | Resolved requirements are exact, transitively closed, and reproducible. |
 
 ## Settled versus deferred
 
