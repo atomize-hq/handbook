@@ -44,8 +44,9 @@ in another row.
 | **Source observation** | A source provider's bounded account of what it observed, including source-native value, unit or scale, subject/snapshot identity, collection state, and provenance. It is not canonical evidence and cannot satisfy a claim by itself. |
 | **Evidence candidate** | A dock- or adapter-produced, evidence-shaped submission that binds one or more source observations to an intended evaluation context. It is untrusted input to admission. Do not call it an evidence record or shorten it to “evidence” where that would imply admission. |
 | **Canonical evidence record** | The immutable, content-addressed record produced only by Contracts-owned admission after exact identity, provenance, authority, subject, context, unit/scale, normalization, admission-time source validity, and duplicate checks. “Evidence record” means this admitted object. |
+| **Evidence Evaluation Policy** | An immutable, named, versioned Contracts-owned policy for exactly one declared claim-evaluation role: evidence eligibility/selection, sufficiency, freshness/currentness, consistency/stability, or uncertainty treatment. A selected contract, claim, or evidence requirement declares the roles and compatibility constraints it supports. A resolved-assurance selection may bind exact compatible policies to those roles; no policy is an umbrella override. |
 | **Applicability result** | The Contracts-owned determination, made before evidence selection, that a claim is `applicable`, `not_applicable`, or `undetermined`, with an exact basis. `not_applicable` is positive semantic proof, not missing data. |
-| **Claim evaluation** | The complete result for exactly one expected claim in one evaluation context: its applicability result and, when applicable, an established finding or an indeterminate determination, plus the independent evidence-assessment dimensions and complete accounting. |
+| **Claim evaluation** | The complete result for exactly one expected claim in one evaluation context: its applicability result and, when applicable, an established finding or an indeterminate determination, plus application of every exact compatible Evidence Evaluation Policy binding, the independent evidence-assessment dimensions, and complete accounting. |
 | **Finding** | The semantic satisfaction result established by a claim evaluator: `satisfied`, `unsatisfied`, or a value on a claim-declared named grade/measurement scale. There is no universal partial-satisfaction scalar. |
 | **Metric definition** | An immutable, named, versioned, and fully configured algorithm definition over a declared population of compatible claim evaluations, with explicit input contract, scale, unit, aggregation, parameters, and missing/indeterminate-input policy. Applying it in an evaluation context is the invocation that produces a metric result. |
 | **Metric result** | The exact output of one metric definition: `computed` with a value on its named scale, `not_applicable`, or `not_computable`, plus included/excluded inputs and a reproducible calculation trace. There is no unqualified “aggregate score.” |
@@ -55,8 +56,9 @@ in another row.
 
 An **evaluation context** fixes one contract revision, subject snapshot,
 evaluation time, evidence-set identity, claim-evaluator versions, metric
-definition identities and configurations, and gate-policy revision. Results
-that do not share that closure cannot be combined.
+definition identities and configurations, exact Evidence Evaluation Policy
+bindings, and gate-policy revision. Results that do not share that closure
+cannot be combined.
 
 When posture influenced assurance selection, the evaluation context also fixes
 the Resolved Posture Snapshot fingerprint; exact Assurance Policy Selector
@@ -71,6 +73,34 @@ and gates consume the resolved requirements; they never reread or reinterpret
 mutable posture, reselect requirements, or change metric meaning. This is the
 cross-boundary invariant fixed with the
 [companion posture/assurance record](posture-assurance-policy-semantic-decision.md).
+
+A posture-influenced evaluation context is admissible only as the exact and
+complete realization of one Resolved Assurance Requirements identity. That
+identity selects one exact contract revision and one complete contract-rooted
+expected-claim inventory. Any selected claim-set reference MUST be rooted in
+that same contract revision. The evaluation subject snapshot MUST satisfy the
+exact bound Posture Scope. The evaluation's contract revision, expected-claim
+inventory, Evidence Evaluation Policy bindings, Metric Definitions and full
+configurations, and Gate Policy MUST be exactly the selected outputs. Every
+selected requirement and every metric or gate dependency MUST be closed and
+completely accounted. An addition, omission, substitution, wrong-scope
+binding, incompatible multiplicity, or unresolved dependency MUST refuse
+before producing claim, metric, or semantic-gate truth; it MUST NOT become
+ordinary `not_applicable`, `not_computable`, or `indeterminate` truth.
+
+Requirements-to-context conformance and evaluation-context closure are
+preconditions to semantic evaluation. A contract, scope, expected-claim,
+evaluator-context, selected-policy, Metric Definition, or Gate Policy closure
+violation refuses and produces no claim evaluation, metric result, or semantic
+gate decision. `not_computable` and `indeterminate` apply only after a valid
+closed evaluation context has been established and the declared evidence or
+claim state prevents computation or decision. Proven `not_applicable` likewise
+remains available only inside a valid context under the positive-proof rules.
+
+Requirements spanning unrelated contract revisions require separate Resolved
+Assurance Requirements and evaluation contexts. Cross-context gate composition
+would require a separately defined semantic owner and remains deferred; it MUST
+NOT be inferred from plural references.
 
 Admission-time source validity is an immutable historical fact about the
 candidate-to-record transition. Evaluation-time currentness is recomputed for
@@ -154,6 +184,15 @@ preserves the algorithm's semantics and every declared public bound. Zero,
 negative, absolute, or dimensioned coefficients must never be silently
 coerced, discarded, or normalized under this rule.
 
+An Evidence Evaluation Policy may fill only a role declared by the selected
+contract, claim, or evidence requirement and only when its exact identity and
+semantics satisfy that role's compatibility constraints. It MUST NOT change canonical-admission
+authority, provenance, identity, or another non-relaxable trust invariant; the
+claim proposition, finding scale, direction, or unit; a Metric Definition; or
+Gate Policy meaning. Missing, incompatible, conflicting, substituted, or
+unaccounted policy bindings refuse rather than falling back, overriding claim
+semantics, or becoming an implicit relaxation.
+
 ## Responsibility map
 
 | Layer | Owns | Must not decide |
@@ -161,7 +200,8 @@ coerced, discarded, or normalized under this rule.
 | Validators and source providers | Bounded source-specific execution, source observation, source snapshot identity, native values/units/scales, and collection diagnostics. | Applicability, claim findings, canonical admission, metric weights/values, gate policy, or downstream action. |
 | Docks and adapters | Protocol execution/framing, exact translation, preservation of source semantics and lexemes, candidate construction, and import diagnostics. | Canonical evidence, invented units or scale direction, silent normalization, claim meaning, applicability, metrics, or gates. |
 | Contracts evidence admission | Exact candidate/source/run/subject binding; authority and provenance validation; canonical normalization; unit/scale identity and permitted exact conversion; idempotent duplicate identity; immutable canonical evidence. | Claim satisfaction, criticality, cross-claim aggregation, gate outcome, or workflow action. |
-| Claim evaluation | Applicability; complete evidence selection/accounting; sufficiency, currentness, consistency, uncertainty treatment; semantic interpretation; and one finding or indeterminate determination per expected claim. | Cross-claim metric aggregation, global thresholds, gate precedence, enforcement, posture, promotion, or mutation. |
+| Contracts-owned Evidence Evaluation Policy authority | Canonical establishment, exact re-admission validation, and exact resolution of immutable named/versioned role-specific policies; declared role and contract/claim compatibility; and the policy's bounded evidence-evaluation semantics. | Canonical-admission trust, claim proposition or finding-scale changes, assurance selection, metric or gate meaning, downstream disposition, or mutation. |
+| Claim evaluation | Applicability; exact application of the selected compatible Evidence Evaluation Policy bindings; complete evidence selection/accounting; sufficiency, currentness, consistency, uncertainty treatment; semantic interpretation; and one finding or indeterminate determination per expected claim. | Policy invention or fallback, cross-claim metric aggregation, global thresholds, gate precedence, enforcement, posture, promotion, or mutation. |
 | Contracts-owned named metric-definition authority | Canonical establishment, exact re-admission validation, and exact resolution of immutable named, versioned, configured metric definitions; validation of the eligible-population and compatibility rules, input/output scales and units, algorithm identity/version, parameters and coefficients under their algorithm-declared semantics and bounds, aggregation semantics, and missing/indeterminate-input policy. | Evidence selection, finding interpretation or establishment, the actual evaluation-run population, metric computation, threshold/comparator application, gate decision, or downstream mutation. |
 | Metric computation | Pure exact application of one exactly resolved named metric definition to compatible claim evaluations in one closed evaluation context, including derivation and accounting of the actual included/excluded population and calculation result. | Raw-source/evidence selection, applicability or finding changes, definition changes, gate threshold/comparator application, gate decision, or downstream disposition. |
 | Gate policy | Direct non-compensatory claim-evaluation predicates, named metric-result predicates, precedence, indeterminacy treatment, and the semantic gate decision. | Raw evidence interpretation, unit/scale conversion, changing metric semantics, canonical admission, or any workflow/posture/promotion mutation. |
@@ -245,18 +285,21 @@ not authorize a product metric catalog entry.
 | **Decimal relative coefficients.** The scenario-local `scenario.decimal-coefficient-seam@1` definition receives findings satisfied, unsatisfied, satisfied. A single-condition gate requires that exact metric result to be at least `5/8`, with equality included. | Metric-definition authority; metric computation; gate policy. | The permitted normalization produces `1, 6, 9`; the calculation trace records numerator `10`, denominator `16`, and exact result `10/16 = 5/8`; the gate passes on equality. | Coefficient meaning, conditional normalization, computation, bounds, and threshold remain exact and separately owned without selecting a catalog algorithm. |
 | **All not applicable.** Every claim in the gate's governed population is proved `not_applicable`; the named metric's definition declares an empty eligible population `not_applicable`; the gate policy declares that positive proof for the complete population makes its question not applicable; and the downstream policy maps that decision to `no_effect`. | Applicability evaluator; metric; gate; downstream consumer. | Metric and gate are both `not_applicable`, never `pass`; downstream disposition is `no_effect`. | Empty populations do not pass vacuously. |
 | **Degradation monotonicity.** A prior `pass` depends on one current satisfying record. At a later evaluation time the same subject snapshot, applicability, policy, and other eligible information are unchanged, but that record is now stale; the gate treats the resulting indeterminate direct predicate as `indeterminate`. | Claim evaluator; metric; gate. | No finding is established; the dependent metric is `not_computable`; the re-evaluated gate is `indeterminate`, not `pass`, and changed accounting identifies the stale record. | Loss of the sole eligible basis for pass cannot preserve or improve the gate decision. |
-| **Mixed population closure.** Candidate claim evaluations differ in subject snapshot, contract revision, evaluator version, or evaluation time. The gate requires the dependent metric computable and treats `not_computable` as `indeterminate`. | Metric computation; gate. | The metric is `not_computable` with every incompatible input accounted; the gate is `indeterminate`. | Metrics cannot span mixed semantics or ambient time. |
+| **Mixed population closure.** Candidate claim evaluations are presented as one metric population but differ in subject snapshot, contract revision, evaluator version, or evaluation time. | Evaluation-context admission; metric; gate. | The mixed closure refuses before metric or semantic-gate truth. It does not produce a `not_computable` metric or `indeterminate` gate. | Context substitution or construction failure is not a semantic result. |
 | **Multiple named metrics.** A gate requires both a named functional-metric threshold and a named security-metric threshold. The first predicate passes and the second fails; failure is decisive. | Two metrics; gate policy. | Results remain separate; the security metric predicate is decisive and the gate is `fail`. No hidden cross-metric average exists. | One metric cannot silently compensate for another. |
 | **Uncertain boundary.** A latency interval straddles the claim budget, no alternate evaluator is named, and the gate requires that claim satisfied while treating an indeterminate direct predicate as `indeterminate`. | Claim evaluator; dependent metric; gate. | Uncertainty is preserved; no finding is established; claim determination is indeterminate; dependent metric is `not_computable`; gate is `indeterminate`. | Midpoints or favorable endpoints cannot be selected silently. |
 | **Unauthorized source.** An otherwise well-formed candidate binds a source actor that lacks current authority for the stated subject and observation class. | Contracts evidence admission. | Admission refuses before claim evaluation and produces no canonical evidence record, finding, metric result, or gate decision. | Structural validity and adapter output cannot substitute for source authority. |
+| **Exact resolved-requirements realization.** One Resolved Assurance Requirements identity for scope `S` selects contract-rooted expected-claim inventory `C`, exact Evidence Evaluation Policy bindings `E`, configured Metric Definitions `M`, and Gate Policy `G`. The valid evaluation uses a subject snapshot inside `S`, one exact policy in each supported required role, and exactly `C/E/M/G`. Comparison cases use a subject outside `S`; substitute an incompatible policy; bind an exact policy to an unsupported role; supply conflicting bindings for one role; change a metric configuration; omit one selected claim; add an unselected claim; or let `G` depend on an unselected claim or metric. | Assurance selection; evaluation-context admission; claim evaluation; metrics; gate. | The exact valid closure may evaluate reproducibly. Every comparison refuses before claim, metric, or semantic-gate truth; none falls back or becomes ordinary `not_applicable`, `not_computable`, or `indeterminate`. | The evaluation context must exactly and completely realize one selected requirements identity. |
 
 ## Settled versus deferred
 
 This record settles the vocabulary and relationships, independent dimensions,
-exact measurement rules and bounds, weight ownership, responsibility map, gate
-purity and precedence, complete explanation/accounting requirement, and every
-scenario outcome above. Later work may not reopen those decisions merely by
-choosing a representation.
+exact measurement rules and bounds, weight ownership, Evidence Evaluation
+Policy roles and compatibility, the one-contract-rooted
+requirements-to-evaluation conformance rule, responsibility map, gate purity
+and precedence, complete explanation/accounting requirement, and every scenario
+outcome above. Later work may not reopen those decisions merely by choosing a
+representation.
 
 Deliberately deferred to human-approved task-level planning are all concrete
 metric algorithms and catalog entries; schema, type, API, and operation shapes;
