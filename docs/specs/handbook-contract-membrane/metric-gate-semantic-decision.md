@@ -13,6 +13,13 @@ Current source and the completed [HCM-5.1](slices/HCM-5.1/README.md) and
 ownership, dependency direction, and trust boundaries. Their current public
 shapes and computations neither constrain nor supply this model.
 
+The companion
+[posture and assurance-policy semantic decision](posture-assurance-policy-semantic-decision.md)
+owns the proposed upstream selection seam. When posture influences assurance
+selection, that record's exact snapshot and resolved-requirement provenance are
+part of this record's closed evaluation context; neither record is
+implementation authority.
+
 ## Canonical model and vocabulary
 
 The canonical semantic chain is:
@@ -50,6 +57,15 @@ An **evaluation context** fixes one contract revision, subject snapshot,
 evaluation time, evidence-set identity, claim-evaluator versions, metric
 definition identities and configurations, and gate-policy revision. Results
 that do not share that closure cannot be combined.
+
+When posture influenced assurance selection, the evaluation context also fixes
+the Resolved Posture Snapshot fingerprint, Assurance Policy Selector identity
+and version, and Resolved Assurance Requirements identity. Those bindings must
+participate in evaluation fingerprinting, currentness, and canonical
+explanation. Metrics and gates consume the resolved requirements; they never
+reread or reinterpret mutable posture, reselect requirements, or change metric
+meaning. This is the cross-boundary invariant fixed with the
+[companion posture/assurance record](posture-assurance-policy-semantic-decision.md).
 
 Admission-time source validity is an immutable historical fact about the
 candidate-to-record transition. Evaluation-time currentness is recomputed for
