@@ -141,9 +141,9 @@ only a current exact first-party implementation bundle may be admitted, but
 those controls are not a hostile-code confinement boundary. The first
 validator's implementation and dependency/source gates must prove it contains
 no network, arbitrary-file, process-spawn, executable-hook, or dynamic-loading
-path. Independently admitted third-party code and stronger host confinement
-require later explicit authority and may not weaken or silently reinterpret
-this v1 protocol.
+path. Arbitrary third-party executable admission and general hostile-code
+confinement are excluded from this selected path; they are not deferred
+successor requirements and may not be inferred from this v1 protocol.
 
 Abuse cases that must fail closed include manifest/bundle/entrypoint
 substitution; ambient lookup; shell interpolation; inherited-secret exposure;
@@ -408,8 +408,8 @@ Every packet must preserve:
     asserted.
 11. The three reserved rows and 11 new roots close through the existing exact
     membrane and unchanged generic consumers with final 62 / 31 / 168 truth.
-12. HCM-5.4 validator behavior and stronger future third-party confinement stay
-    outside this slice.
+12. HCM-5.4 validator behavior stays outside this slice. General hostile-code
+    confinement is excluded scope, not a planned successor requirement.
 
 ## Ordered minimal packet decomposition
 
