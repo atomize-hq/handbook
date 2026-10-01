@@ -95,12 +95,16 @@ The map preserves that qualified rule; this study does not amend approved chapte
 
 ## Review and next decision
 
-For this work, **a packet finishing returns to this control conversation and stops**.
+For this work, **the packet or slice that delivers an observable or notable change
+returns to this control conversation and stops**. Select and explain that boundary
+in the next increment's plan: a packet when it delivers an independently meaningful
+outcome, or the slice when its packets are preparatory steps toward one outcome.
 The user reviews its recap before any successor is planned or dispatched. Human
 semantic approval, an admitted slice, and an automated clean verdict cannot supply
-successor authorization. The existing auto-continuation route identified in F-18
-must be reconciled explicitly before product dispatch; this map does not amend the
-general lifecycle/prompts/router or admit a phase/slice.
+successor authorization. The general [lifecycle](work-unit-lifecycle.md#human-review-boundaries),
+prompts and router now enforce this rule under the user's 2026-10-01 instruction,
+replacing the auto-continuation route identified at the research baseline in F-18.
+This routing correction does not admit a phase/slice or authorize product work.
 
 After human review of this proposed map, select and plan **only the first bounded
 increment**, likely at the governance/definition foundation. Its plan must identify

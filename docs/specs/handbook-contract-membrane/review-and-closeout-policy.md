@@ -75,6 +75,21 @@ Packet-level verification and review remain bounded to the assigned packet. They
 
 When a packet completes, return control and its established evidence to the meta task. Do not perform slice closeout or manufacture durable review and closeout artifacts at the packet boundary.
 
+## Human review recap
+
+At the lifecycle's selected packet or slice human review boundary, the meta task returns to the persistent control conversation, presents a concise recap, and stops before successor planning or dispatch. An earlier observable or notable packet outcome also triggers this boundary. Technical review and a clean verdict do not replace the human's review of the delivered increment.
+
+The recap answers:
+
+- What changed, in ordinary English?
+- What concrete example demonstrates it?
+- What is correctly refused or prevented?
+- What verification and independent review support it, and what are their limits?
+- What remains unfinished or outside this increment?
+- What should come next, and why, as a recommendation only?
+
+State whether the changes are implemented, committed, or merged, with relevant commits when present. These are different states. Keep the recap short enough to discuss without reading the dense reference documents. Use existing plans, evidence, and conversational results; no recap file or additional technical review round is required merely for the human checkpoint.
+
 ## Whole-slice closeout
 
 At slice completion, check the complete authorized outcome and cross-packet integration once. Reuse valid packet evidence rather than replaying each packet's ceremony. Rerun only checks needed for aggregate or integration confidence, or evidence invalidated by later work.

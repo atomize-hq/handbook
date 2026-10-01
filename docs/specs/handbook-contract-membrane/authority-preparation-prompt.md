@@ -44,7 +44,8 @@ For `LEVEL: phase`:
 For `LEVEL: slice`:
 
 - Require a current phase or roadmap source that names the slice and its high-level outcome, plus an explicit user instruction to execute that slice or prepare its authority.
-- Define exactly one slice's outcome, scope, non-goals, predecessors and their current status, acceptance boundary, ordered packet decomposition, per-packet outcomes and dependencies, and any bounded just-in-time packet-preparation delegation. State that product execution remains inadmissible until every hard predecessor is proven complete.
+- Define exactly one slice's outcome, scope, non-goals, predecessors and their current status, acceptance boundary, ordered packet outcomes and dependencies, human review boundaries, and any bounded just-in-time packet-preparation delegation. State that product execution remains inadmissible until every hard predecessor is proven complete and the human has authorized the next increment's bounded plan.
+- Choose packet or slice review boundaries according to the lifecycle's observable-or-notable-change rule. Explain what each review increment delivers and why any preparatory packets do not yet deliver an independently meaningful outcome. Detail only the next increment's plan, including a concrete example, a meaningful refusal or failure, owner/interface/persistence boundaries, and verification; do not elaborate the entire backlog.
 - Adopt historical material only section by section and record any unresolved consequential decision at the narrowest level that must own it.
 - Do not implement product work, prepare an adjacent slice, or dispatch Packet 1. Return control to the meta task.
 
@@ -71,4 +72,4 @@ COMMIT: <commit hash | none>
 NEXT: <return to meta-task decision | exact resumption need>
 ```
 
-`AUTHORITY_READY` means the assigned authority level is current and committed when required; it does not mean the phase, slice, or any packet is implemented. `STOPPED` and `ADMISSION_FAILED` return the exact condition to meta adjudication and do not authorize the task to cross into another level.
+`AUTHORITY_READY` means the assigned authority level is current and committed when required; it does not mean the phase, slice, or any packet is implemented or that the human has approved the next increment's plan. `STOPPED` and `ADMISSION_FAILED` return the exact condition to meta adjudication and do not authorize the task to cross into another level.
