@@ -90,9 +90,12 @@ atomic posture transition while rehoming the residual work to later owners.
 
 - Gate-owned local-closeout evaluation formerly associated with the grounding
   slice moved to the later evidence/verdict/gate owner and is now implemented
-  by HCM-5.2. Historical parent-promotion eligibility remains a separate future
-  dependency/workflow-composition boundary with no selected parent domain,
-  binding, policy, owner, or consumer.
+  by HCM-5.2. No parent-eligibility result or consumer is implemented there. The
+  proposed [operational-reliance and work-progression decision](semantic-model/operational-reliance-and-actions.md#reliance-actions)
+  assigns greenfield semantic responsibility for local-closeout and parent
+  eligibility to Work Progression, without approving or scheduling physical
+  placement, a work hierarchy/state model, exact parent binding, concrete policy,
+  consumer, action/mutation path, or implementation slice.
 - Ordinary SDK/JSON exposure, publication, bridging, and Substrate adoption for
   grounding move to the appropriate Phase-4 and Phase-6 owners.
 - Multi-source posture evaluation, recommendations, notifications,
@@ -199,8 +202,8 @@ actual owner boundary. Unselected external consumers are not an exit failure.
 | External grounding trigger/adopter placement | HCM-4.6 implements the bounded owner, repository, four-operation seam, fixed SDK composition, and unchanged generic repository consumers. Future Phase-6 authority must separately choose any publication, bridge, automatic trigger host, and real external adopter. |
 | Broader posture evaluation, recommendation, notification, acknowledgement, and hysteresis | Future posture authority must place this policy without transferring engine-owned mutation authority to a gate or adapter |
 | CLI operation-inventory expansion beyond the completed 62-row predecessor | HCM-4.3 does not expand the inventory for transport parity: its authority fixes the exact ordinary mappings and a closed six-entry SDK use-case registry. Any new semantic operation or use case requires later explicit authority, complete schemas, and independent owner admission where applicable. |
-| Parent-promotion eligibility and dependency-composition boundary | HCM-5.2 fixes gate and local-closeout truth without a parent-promotion field or consumer. Future authority must first select the parent model, subject-to-parent binding, dependency/workflow owner, policy and currentness inputs, and consumer. Any selected eligibility result must be separate, fail closed, and remain non-mutating; local closeout alone cannot imply it, and actual parent mutation requires still-separate authority. |
-| Gate-to-posture input and policy boundary | HCM-5.2 fixes gate and local-closeout truth without posture fields; future posture authority must separately decide whether and how to consume those results without transferring posture policy or mutation authority to Contracts, SDK, or an adapter. |
+| Parent eligibility, work hierarchy/state, and dependency-composition realization | HCM-5.2 truthfully fixes gate and local-closeout results without a parent field or consumer. The proposed [operational-reliance and work-progression decision](semantic-model/operational-reliance-and-actions.md#reliance-actions) selects Work Progression as the greenfield semantic owner of local/parent eligibility and requires separate atomic Operational Reliance Determinations. Later human-approved authority must still select the physical component, work hierarchy/state model, exact parent/child/dependency binding, concrete policies/currentness inputs, consumers, action authorization/mutation mechanisms, implementation slice, and rollout. Local closeout cannot imply parent eligibility or mutation. |
+| Gate-to-posture observation, recommendation, reliance, and transition realization | HCM-5.2 fixes gate/local-closeout truth without posture fields. The proposed [posture and assurance-policy decision](semantic-model/assurance-and-evaluation-preparation.md#posture-assurance) fixes the forward-only semantic order through admitted observation/recommendation, transition-specific Operational Reliance, separate Action Intent/Authorization, and atomic Engine mutation. Later authority must still select concrete policies, algorithms, approvals, physical placement, schemas/APIs, host integration, implementation, and rollout without transferring gate or mutation authority to Contracts, SDK, or an adapter. |
 | Third-party dock admission and stronger host confinement | Later explicit authority after the HCM-5.3/HCM-5.4 repository-owned first-party path; neither prepared slice authorizes arbitrary-code execution or claims a general hostile-code boundary |
 | CLI/Tauri membrane routes and framing | HCM-4.3 owns current CLI parity and framing; HCM-4.4 separately owns the Tauri facade after HCM-4.3 closeout. |
 | Publication mechanism, exact versions, bridge, and external adopter | Future publication and consumer authorities with current external proof |

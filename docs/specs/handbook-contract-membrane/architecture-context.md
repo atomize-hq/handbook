@@ -35,6 +35,7 @@ The labels below describe architecture state, not lifecycle or authorization:
 | Contract definition, claim, applicability, lifecycle, durable use-case owner, outward SDK membrane, and generic consumers | Current | HCM-5.1 Packets 1–6 establish and integrate [`handbook-contracts`](../../../crates/contracts/) inward of SDK with owner-native exact definition, claim, applicability, fingerprint, compatibility, lifecycle-chain, current-head, evaluation-basis, and repository-bound durability semantics. Its fixed repository-relative store owns bounded current-only paging, exact immutable reads, admitted append/transition, replay, and fail-closed recovery. A bounded outward SDK projection closes exactly four operations within the 62-row inventory and the 23-capability/135-root witness while independently re-admitting owner evidence and preserving the sealed Engine authority seam; the existing generic Rust SDK, CLI, and Tauri consumers preserve that owner truth without a contract-specific branch, and the owner has no SDK or transport dependency. |
 | Evidence/gate owner | Current | HCM-5.2 Packets 1–7 implement the `handbook-contracts` identity/policy/run kernel, exact read-only candidate-source normalization through one sealed Engine `contract_evidence_source` admission plus generic source-currentness/Resolution observations, retained-root immutable-all canonical-evidence list/read/idempotent append with bounded atomic recovery, pure closed claim-verdict evaluation, gate/local-closeout composition, the exact five-operation outward SDK membrane, and integrated proof through the unchanged generic SDK/CLI/Tauri consumers. Verdicts and gate results remain non-persisted derived truth. |
 | Process dock | Current | HCM-5.3 Packets 1–5 implement the purpose-named operational dock owner, language-neutral one-shot JSON protocol, portable first-party Rust executor, completed-only candidate source, exact three-operation/11-root closure, and unchanged generic consumers. HCM-5.4 Packets 1–6 add the one reproducibly packaged native-Rust JSON Schema validator manifest, exact offline local-closure observation, two checked-in schema roots, and the real Contracts-owned semantic proof while preserving the same generic consumers and owner direction. Aggregate HCM-5.4 closeout is complete and Phase 5 is exited. |
+| Handbook Contract Membrane greenfield semantic decisions | Target/future | The [combined semantic package](semantic-model/README.md) and its four responsibility parts remain **PROPOSED**. Together they propose the six-category ontology, posture/assurance selection, Contracts-domain Evaluation Coordination, exact evaluation/evidence closure, authored-artifact relationships, metric/gate truth and explanation, and Work Progression/Operational Reliance/action boundaries. They do not alter current source ownership, approve implementation, select physical placement or concrete policies, or change a phase/slice status. |
 | Publication, bridge, and Substrate adoption | External-unknown | No repository-only claim can prove their current external existence, deployment, or conformance. |
 
 The workspace membership and current crate edges are visible in
@@ -100,14 +101,18 @@ The current [`HCM-5.2 authority`](slices/HCM-5.2/README.md) preserves that
 placement: `handbook-contracts` remains the sole canonical evidence/verdict/gate
 and local-closeout owner, SDK maps five reserved operations outward, and a
 future executor supplies operational records plus untrusted candidates through
-an owner-side source boundary. Local closeout is a sibling derived result. A
-future parent-readiness evaluation, if authorized, may consume that exact result
-but must remain a separate fail-closed, non-mutating derived result; local
-closeout cannot imply parent eligibility. The parent domain, subject-to-parent
-binding, policy, owner, and consumer remain unselected, and any actual parent
-mutation is another later authority boundary. This is implemented owner, SDK,
-and generic-consumer architecture through Packet 7; aggregate
-verification/review and the single HCM-5.2 closeout are complete.
+an owner-side source boundary. Local closeout is a sibling derived result. No
+parent-eligibility result, parent consumer, or parent mutation exists in HCM-5.2;
+local closeout cannot imply any of them. The proposed
+[operational-reliance and work-progression decision](semantic-model/operational-reliance-and-actions.md#reliance-actions)
+assigns the greenfield semantic responsibility for local-closeout and parent
+eligibility to Work Progression, with each as the eligibility facet of its own
+atomic Operational Reliance Determination. That proposal does not change HCM-5.2
+history or select the work hierarchy/state model, parent binding, concrete
+policy, physical component placement, consumer, action authorization, mutation,
+or implementation slice. This is implemented owner, SDK, and generic-consumer
+architecture through Packet 7; aggregate verification/review and the single
+HCM-5.2 closeout are complete.
 
 The current [`HCM-5.3 authority`](slices/HCM-5.3/README.md) remains the closed
 empty-production-registry checkpoint. HCM-5.4 extends it with one exact
@@ -209,22 +214,32 @@ prepared first-path authority.
 ## Gate, dependency composition, and posture ownership
 
 The current HCM-5.2 implementation provides a gate result and separate local-
-closeout result without a parent-promotion field. Local closeout may become an
-input to a later dependency or workflow-composition owner that evaluates whether
-a selected parent is ready to advance. Such eligibility must be a separate,
-fail-closed, non-mutating derived result governed by its own parent binding,
-policy, and currentness checks; local closeout alone can never imply it. Current
-authority has not selected that parent domain, binding, owner, consumer, or
-policy, and it authorizes no parent mutation.
+closeout result without a parent-promotion field, parent-eligibility result, or
+consumer. The proposed
+[operational-reliance and work-progression decision](semantic-model/operational-reliance-and-actions.md#reliance-actions)
+places greenfield semantic responsibility for local-closeout and parent
+eligibility in Work Progression. It requires separate action-specific bases and
+atomic Operational Reliance Determinations, with eligibility and disposition as
+inseparable facets; local closeout alone can never imply parent eligibility.
+The proposal deliberately leaves physical placement, the work hierarchy/state
+model, exact parent/child/dependency binding, concrete policies/currentness
+inputs, consumers, and implementation unselected. Current HCM-5.2 authority is
+unchanged and authorizes no parent mutation.
 
-Gate and local-closeout results may also become inputs to later posture policy,
-but gate ownership must not absorb dependency aggregation, posture aggregation,
-policy, recommendation, acknowledgement, hysteresis, promotion, or transition
-authority. Gates answer their bounded evidence question; later dependency,
-posture, or promotion owners decide what those answers mean. Any eventual
-parent-state mutation is separately authorized from eligibility evaluation and
-must retain its own authority, currentness, concurrency, durability, and replay
-boundary.
+Gate and local-closeout results may also become exact historical inputs to an
+admitted downstream Operational Reliance Policy, including a posture-transition
+policy, but gate ownership must not absorb dependency aggregation, posture
+aggregation, policy, recommendation, acknowledgement, hysteresis, promotion, or
+transition authority. Gates answer their bounded evidence question. One atomic
+Operational Reliance Determination decides present eligibility/disposition for
+an exact action question; a separately owned Action Intent, Action Authorization
+Binding or Refusal, Action Attempt, Action Terminal, and authoritative state-
+owner Mutation Receipt govern any effect. For posture specifically, the proposed
+[posture and assurance-policy decision](semantic-model/assurance-and-evaluation-preparation.md#posture-assurance)
+keeps the path forward-only: `P_n` to evaluation, observation/recommendation,
+transition-specific reliance, separate authorized mutation, and `P_{n+1}`.
+Neither proposal approves a concrete policy, host, schema, API, or mutation
+mechanism.
 
 This separation prevents an evidence producer from silently becoming the policy
 engine and lets posture policy evolve without changing each gate implementation.
