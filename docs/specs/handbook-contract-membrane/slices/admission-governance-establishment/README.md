@@ -1,7 +1,8 @@
 # Owner-native admission-governance establishment
 
-Status: **Packet 1 implementation authorized after a clean bounded causal review
-of this planning reconciliation; not yet implemented**.
+Status: **Packet 1 implemented locally; verification and causal review evidence
+below. Return to meta for the selected human review boundary; no successor work
+is authorized by completion**.
 Prepared 2026-10-01 against `e2c073430e4eb322cf469198947bae5136941799`.
 Reconciled 2026-10-02 against `601a080` for the caller-supplied ceiling and selected
 file-format boundary. The human authorized local planning updates and review,
@@ -12,6 +13,8 @@ the [coverage and landing map](../../coverage-and-landing-map.md). The persisten
 meta chat owns adjudication, verification of dispatch conditions, and the human recap.
 
 This document selects the bounded implementation choices for that authorization.
+The design and planned-check sections retain their preparation context; the
+Packet-1 evidence below records the delivered implementation.
 The September 30 semantic approval alone did not select them or authorize coding;
 they do not describe existing product behavior. The [lifecycle](../../work-unit-lifecycle.md)
 and [review policy](../../review-and-closeout-policy.md) control execution and stops.
@@ -411,6 +414,44 @@ this reconciliation and satisfied current prerequisites are required before
 implementation dispatch. Completion still returns to the Packet-1 human boundary.
 
 ## Exclusions and planning evidence limits
+
+### Packet-1 implementation evidence — 2026-10-02
+
+The separately named Contracts `project_admission_governance` owner and SDK
+`admission_governance` module implement the four selected typed methods. Required
+caller ceilings of 86,400 and 7,200 seconds retain their exact configuration,
+request, active and outcome identities after reopening. The Engine seam consumes
+a sealed prepared identity; a serialized locator restores resolution only.
+The fixed shipped rule descriptors have canonical fingerprint fixtures, including
+the exact existing freshness-policy schema and candidate ceiling criterion.
+
+The append-only root anchor records the original reservation/request. Its
+consumption is a separate exact append inside the activation transaction, closed
+with the outcome and active relation by the terminal record; the anchor is never
+reset to unused. All owner storage and its native lock are outside `.handbook/state`.
+The one-shot route retains one original terminal request, within the selected
+4,096-request ceiling, and refuses later creation attempts. Exact retained stage,
+intent, decision and installation prefixes determine recovery. Missing, corrupt,
+non-prefix or unsafe evidence remains unavailable; no replacement identity is
+allocated by any resolution method.
+
+Focused owner/rule, repository, process and SDK tests cover both caller ceilings,
+serialized refusals before reservation, immutable/key conflicts, all 18 durable
+fault/crash boundaries, competing creators and concurrent resolution, lost reply
+and consumer serialization, exact historical replay versus current resolution,
+physical-root substitution, hard-link and Windows reparse inventory, and bounds.
+The actual SDK refresh/reset preserves every retained governance byte. Engine
+identity/durability and SDK setup/reset regressions pass; touched crates compile
+and touched sources format cleanly. The unchanged generic catalog proof remains
+`62 / 35 / 180 / 7`. Unix-only link/root cases are present but were not executed
+on this Windows host. GitNexus impact/reindex tooling remains degraded/unavailable;
+source callers and the bounded diff supply the fallback inspection, not graph
+conformance evidence. The compact task result carries the controlling causal
+verdict and actual commit rather than a durable reviewer record.
+
+Establishment records advisory provenance and prior replacement terms. Ordinary
+policy admission, successor activation, added scopes, evaluation, work progression
+and generic setup success remain unavailable or outside this outcome.
 
 No product edits are part of this preparation. No adjacent slice, whole-roadmap
 decomposition, durable orchestration state or reviewer archive is selected. The

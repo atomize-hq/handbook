@@ -5,6 +5,9 @@ use crate::approver_registry_observation::{
 use crate::canonical_repo_support::{CanonicalWorkspace, RepoRelativeFileAccessError};
 use crate::charter_authority_workflow::RegistryAuthorityLocks;
 use crate::charter_lineage_store::{create_new_file, sync_directory};
+use crate::repository_durability::{
+    RepositoryDurabilityErrorV1, RepositoryReadV1, RetainedRepositoryRootV1,
+};
 use crate::OwnerCausalDispositionV1;
 use serde::{Deserialize, Deserializer, Serialize};
 use sha2::{Digest, Sha256};
@@ -77,6 +80,36 @@ pub struct RepositoryIdentityAllocationV1 {
 impl RepositoryIdentityAllocationV1 {
     pub fn repository_identity_fingerprint(&self) -> &str {
         &self.repository_identity_fingerprint
+    }
+}
+
+/// One sealed, freshly allocated identity for an explicitly reserved new root.
+/// It has no Clone or serialization contract: retaining the fingerprint permits
+/// exact recovery observation, but cannot restore fresh-creation authority.
+///
+/// ```compile_fail
+/// use handbook_engine::RepositoryInvocationIdentityServiceV1;
+/// let token = RepositoryInvocationIdentityServiceV1::new()
+///     .allocate_prepared_repository_identity().unwrap();
+/// let copied = token.clone();
+/// ```
+///
+/// ```compile_fail
+/// use handbook_engine::{RepositoryInvocationIdentityServiceV1, RetainedRepositoryRootV1};
+/// let service = RepositoryInvocationIdentityServiceV1::new();
+/// let token = service.allocate_prepared_repository_identity().unwrap();
+/// let root = RetainedRepositoryRootV1::open_exact("/reserved/repository").unwrap();
+/// let first = service.persist_prepared_repository_identity(&root, token);
+/// let second = service.persist_prepared_repository_identity(&root, token);
+/// ```
+#[derive(Debug)]
+pub struct PreparedRepositoryIdentityV1 {
+    allocation: RepositoryIdentityAllocationV1,
+}
+
+impl PreparedRepositoryIdentityV1 {
+    pub fn repository_identity_fingerprint(&self) -> &str {
+        self.allocation.repository_identity_fingerprint()
     }
 }
 
@@ -253,6 +286,68 @@ impl RepositoryInvocationIdentityV1 {
 pub struct RepositoryInvocationIdentityServiceV1;
 
 impl RepositoryInvocationIdentityServiceV1 {
+    /// Allocates a nonmutating, single-use proposal using the existing Engine
+    /// entropy and identity derivation. This grants no registration eligibility.
+    pub fn allocate_prepared_repository_identity(
+        &self,
+    ) -> Result<PreparedRepositoryIdentityV1, RepositoryIdentityAllocationErrorV1> {
+        self.allocate_repository_identity()
+            .map(|allocation| PreparedRepositoryIdentityV1 { allocation })
+    }
+
+    /// Consumes the original proposal and retains exactly its bytes. The owner
+    /// must already have exclusively reserved `.handbook` and hold its native
+    /// registration lock. This method creates no root or replacement identity,
+    /// and acquires no legacy registry lock or authority. An occupied temporary
+    /// path stays occupied for exact request recovery; it is never ordinary retry.
+    pub fn persist_prepared_repository_identity(
+        &self,
+        root: &RetainedRepositoryRootV1,
+        prepared: PreparedRepositoryIdentityV1,
+    ) -> Result<RepositoryIdentityInitializationV1, RepositoryDurabilityErrorV1> {
+        self.persist_prepared_repository_identity_with(root, prepared, |root, fingerprint| {
+            root.write_new_durable(REPOSITORY_IDENTITY_TEMP_REPO_PATH, fingerprint.as_bytes())?;
+            root.rename_noreplace_durable(
+                REPOSITORY_IDENTITY_TEMP_REPO_PATH,
+                REPOSITORY_IDENTITY_REPO_PATH,
+            )
+        })
+    }
+
+    fn persist_prepared_repository_identity_with<P>(
+        &self,
+        root: &RetainedRepositoryRootV1,
+        prepared: PreparedRepositoryIdentityV1,
+        persist_identity: P,
+    ) -> Result<RepositoryIdentityInitializationV1, RepositoryDurabilityErrorV1>
+    where
+        P: FnOnce(&RetainedRepositoryRootV1, &str) -> Result<(), RepositoryDurabilityErrorV1>,
+    {
+        // A link-free retained directory must exist; this seam never reserves it.
+        root.list_directory_bounded(".handbook", 4096)?;
+        for path in [
+            REPOSITORY_IDENTITY_REPO_PATH,
+            REPOSITORY_IDENTITY_TEMP_REPO_PATH,
+        ] {
+            if root.read_regular_bounded(path, 71)? != RepositoryReadV1::Absent {
+                return Err(RepositoryDurabilityErrorV1::prepared_identity_occupied());
+            }
+        }
+        let fingerprint = prepared.allocation.repository_identity_fingerprint;
+        persist_identity(root, &fingerprint)?;
+        if root
+            .read_regular_bounded(REPOSITORY_IDENTITY_REPO_PATH, 71)
+            .map_err(|_| RepositoryDurabilityErrorV1::prepared_identity_unverified())?
+            != RepositoryReadV1::Found(fingerprint.as_bytes().to_vec())
+        {
+            return Err(RepositoryDurabilityErrorV1::prepared_identity_unverified());
+        }
+        Ok(RepositoryIdentityInitializationV1 {
+            disposition: RepositoryIdentityInitializationDispositionV1::Created,
+            repository_identity_fingerprint: fingerprint,
+        })
+    }
+
     pub fn new() -> Self {
         Self
     }
@@ -1137,6 +1232,121 @@ mod tests {
 
     const VECTOR_REPOSITORY_IDENTITY: &str =
         "sha256:ee7147baa7ae6a6d858d9e253e503bc8c90c2ba23a5f1096b5717d1c3231e1db";
+
+    #[test]
+    fn prepared_identity_interruption_after_real_temp_write_keeps_original_exact_evidence() {
+        let repo = tempdir().unwrap();
+        let root = RetainedRepositoryRootV1::open_exact(repo.path()).unwrap();
+        root.create_directory_new_durable(".handbook").unwrap();
+        let service = RepositoryInvocationIdentityServiceV1::new();
+        let prepared = service.allocate_prepared_repository_identity().unwrap();
+        let expected = prepared.repository_identity_fingerprint().to_owned();
+        let error = service
+            .persist_prepared_repository_identity_with(&root, prepared, |root, identity| {
+                root.write_new_durable(REPOSITORY_IDENTITY_TEMP_REPO_PATH, identity.as_bytes())?;
+                Err(RepositoryDurabilityErrorV1::prepared_identity_unverified())
+            })
+            .unwrap_err();
+        assert_eq!(
+            error.kind(),
+            crate::RepositoryDurabilityErrorKindV1::DurabilityUncertain
+        );
+        drop(root);
+        let reopened = RetainedRepositoryRootV1::open_exact(repo.path()).unwrap();
+        assert_eq!(
+            reopened
+                .read_regular_bounded(REPOSITORY_IDENTITY_REPO_PATH, 71)
+                .unwrap(),
+            RepositoryReadV1::Absent
+        );
+        assert_eq!(
+            reopened
+                .read_regular_bounded(REPOSITORY_IDENTITY_TEMP_REPO_PATH, 71)
+                .unwrap(),
+            RepositoryReadV1::Found(expected.into_bytes())
+        );
+        let replacement = service.allocate_prepared_repository_identity().unwrap();
+        assert_eq!(
+            service
+                .persist_prepared_repository_identity(&reopened, replacement)
+                .unwrap_err()
+                .kind(),
+            crate::RepositoryDurabilityErrorKindV1::AlreadyExists
+        );
+    }
+
+    #[test]
+    fn prepared_identity_interruption_after_real_publication_stays_uncertain_and_exact() {
+        let repo = tempdir().unwrap();
+        let root = RetainedRepositoryRootV1::open_exact(repo.path()).unwrap();
+        root.create_directory_new_durable(".handbook").unwrap();
+        let service = RepositoryInvocationIdentityServiceV1::new();
+        let prepared = service.allocate_prepared_repository_identity().unwrap();
+        let expected = prepared.repository_identity_fingerprint().to_owned();
+        let error = service
+            .persist_prepared_repository_identity_with(&root, prepared, |root, identity| {
+                root.write_new_durable(REPOSITORY_IDENTITY_TEMP_REPO_PATH, identity.as_bytes())?;
+                root.rename_noreplace_durable(
+                    REPOSITORY_IDENTITY_TEMP_REPO_PATH,
+                    REPOSITORY_IDENTITY_REPO_PATH,
+                )?;
+                Err(RepositoryDurabilityErrorV1::prepared_identity_unverified())
+            })
+            .unwrap_err();
+        assert_eq!(
+            error.kind(),
+            crate::RepositoryDurabilityErrorKindV1::DurabilityUncertain
+        );
+        drop(root);
+        let reopened = RetainedRepositoryRootV1::open_exact(repo.path()).unwrap();
+        assert_eq!(
+            reopened
+                .read_regular_bounded(REPOSITORY_IDENTITY_REPO_PATH, 71)
+                .unwrap(),
+            RepositoryReadV1::Found(expected.into_bytes())
+        );
+        let replacement = service.allocate_prepared_repository_identity().unwrap();
+        assert_eq!(
+            service
+                .persist_prepared_repository_identity(&reopened, replacement)
+                .unwrap_err()
+                .kind(),
+            crate::RepositoryDurabilityErrorKindV1::AlreadyExists
+        );
+    }
+
+    #[test]
+    fn prepared_identity_post_publication_unsafe_read_is_uncertainty() {
+        let repo = tempdir().unwrap();
+        let root = RetainedRepositoryRootV1::open_exact(repo.path()).unwrap();
+        root.create_directory_new_durable(".handbook").unwrap();
+        let service = RepositoryInvocationIdentityServiceV1::new();
+        let prepared = service.allocate_prepared_repository_identity().unwrap();
+        let expected = prepared.repository_identity_fingerprint().to_owned();
+        let error = service
+            .persist_prepared_repository_identity_with(&root, prepared, |root, identity| {
+                root.write_new_durable(REPOSITORY_IDENTITY_TEMP_REPO_PATH, identity.as_bytes())?;
+                root.rename_noreplace_durable(
+                    REPOSITORY_IDENTITY_TEMP_REPO_PATH,
+                    REPOSITORY_IDENTITY_REPO_PATH,
+                )?;
+                fs::hard_link(
+                    repo.path().join(REPOSITORY_IDENTITY_REPO_PATH),
+                    repo.path().join("interference"),
+                )
+                .unwrap();
+                Ok(())
+            })
+            .unwrap_err();
+        assert_eq!(
+            error.kind(),
+            crate::RepositoryDurabilityErrorKindV1::DurabilityUncertain
+        );
+        assert_eq!(
+            fs::read(repo.path().join(REPOSITORY_IDENTITY_REPO_PATH)).unwrap(),
+            expected.as_bytes()
+        );
+    }
 
     #[test]
     fn reproduces_repository_identity_vector() {

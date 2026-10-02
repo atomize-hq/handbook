@@ -23,6 +23,7 @@ mod lifecycle_preimage;
 pub mod operation_admission;
 mod operation_claims;
 mod owner_repository;
+pub mod project_admission_governance;
 
 pub use claim::{
     evaluate_applicability, ApplicabilityInputSourceV1, ApplicabilityOutcomeV1,

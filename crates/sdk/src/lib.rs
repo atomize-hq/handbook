@@ -5,6 +5,7 @@
 
 use std::path::{Path, PathBuf};
 
+pub mod admission_governance;
 pub mod artifact;
 mod author;
 mod author_route_api;

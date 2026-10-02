@@ -42,6 +42,20 @@ pub struct RepositoryDurabilityErrorV1 {
 }
 
 impl RepositoryDurabilityErrorV1 {
+    pub(crate) fn prepared_identity_occupied() -> Self {
+        Self {
+            kind: RepositoryDurabilityErrorKindV1::AlreadyExists,
+            detail: "prepared repository identity path is already occupied",
+        }
+    }
+
+    pub(crate) fn prepared_identity_unverified() -> Self {
+        Self {
+            kind: RepositoryDurabilityErrorKindV1::DurabilityUncertain,
+            detail: "prepared repository identity publication could not be verified exactly",
+        }
+    }
+
     pub fn kind(&self) -> RepositoryDurabilityErrorKindV1 {
         self.kind
     }
@@ -232,6 +246,22 @@ impl RepositoryExclusiveLockV1 {
 }
 
 impl RetainedRepositoryRootV1 {
+    /// Opaque versioned binding to the retained physical root for admission
+    /// governance. Reopening the same root retains this value; copying its
+    /// files to another physical root does not. This proves root identity only,
+    /// not fresh-project eligibility or governance authority.
+    pub fn governance_physical_root_fingerprint_v1(
+        &self,
+    ) -> Result<String, RepositoryDurabilityErrorV1> {
+        self.require_stable_path_epoch()?;
+        let mut hasher = Sha256::new();
+        hasher.update(b"handbook.admission-governance-physical-repository-root@1.0\0");
+        hasher.update(self.opaque_physical_root_fingerprint().as_bytes());
+        let fingerprint = format!("sha256:{:x}", hasher.finalize());
+        self.require_stable_path_epoch()?;
+        Ok(fingerprint)
+    }
+
     /// Opens an absolute, lexically normalized, link-free repository root and
     /// retains its native physical identity for the lifetime of this guard.
     pub fn open_exact(repo_root: impl AsRef<Path>) -> Result<Self, RepositoryDurabilityErrorV1> {
