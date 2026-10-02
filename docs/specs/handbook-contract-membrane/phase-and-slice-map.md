@@ -177,6 +177,25 @@ SDK types and unchanged generic consumers at exact `62 / 31 / 170 / 1` truth
 with six fixed use cases. This exit does not authorize publication, third-party
 Dock support, external adoption, stronger confinement, or later-phase work.
 
+## First approved-semantics foundation increment
+
+After human review of the [coverage and landing map](coverage-and-landing-map.md),
+the human selected one bounded admission-governance establishment preparation.
+This descriptive placement is separate from numbered phases and does not reopen
+Phase-3/4/5 exits or HCM-4.6, replace the Phase-6 order, or turn the map's five
+provisional areas into phases or packets.
+
+| Slice | Program status | Concise outcome and boundary | Hard predecessor |
+| --- | --- | --- | --- |
+| [`admission-governance-establishment` — Owner-native admission-governance establishment](slices/admission-governance-establishment/README.md) | Planned; bounded authority prepared for human review, no implementation authorization | Propose one new local project's exact Contracts freshness-policy scope, native advisory establishment/committed activation, truthful refusal/recovery and exact resolution/replay through a typed Rust SDK consumer. One vertical Packet 1 ends at human review; ordinary policy admission, successor activation and existing-project enrollment are excluded. | Human authorization of the proposed next increment; live compatibility of cited identity/durability/owner/SDK foundations. Positive native registration is in-scope work, not an existing prerequisite claim. |
+
+The [slice authority](slices/admission-governance-establishment/README.md) owns the
+proposed concrete owner, rules, registration, retention, consumer and verification
+choices. Its source-backed route avoids Context Resolution's generic-artifact
+authority lifecycle; that separate correction is not an exercised hard predecessor
+and repository-wide lifecycle confinement is not claimed. Detailed successor
+planning and implementation remain subject to later human direction.
+
 ## Phase 6 — consumer adoption
 
 Repository evidence does not prove present publication, an operating bridge, or
