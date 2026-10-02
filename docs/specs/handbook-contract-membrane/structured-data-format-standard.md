@@ -135,10 +135,12 @@ documentation decision, and no universal JSON/YAML conversion test replaces owne
 
 ## Effect on the pending governance plan
 
-The [establishment plan](slices/admission-governance-establishment/README.md) remains
-unapproved for implementation and is unchanged by this audit. Its selected typed
-SDK setup path with owner-managed JSON configuration/activation records fits the
-proposed machine-managed default. Human projections remain compatible future work.
+The [establishment plan](slices/admission-governance-establishment/README.md) now
+records human authorization for Packet 1 after a clean causal review of its bounded
+planning reconciliation. Its selected typed SDK setup path with owner-managed JSON
+configuration/activation records fits the proposed machine-managed default.
+That slice-specific authorization does not adopt this standard's other proposed
+defaults. Human projections remain compatible future work.
 
 If direct YAML authoring of a governance candidate is wanted, select that input
 and its validation/normalization in a bounded plan revision; do not change the
@@ -146,7 +148,7 @@ activated storage format solely because the object is also a semantic policy.
 No file importer or renderer is added by adopting a format convention.
 
 The 24-hour ceiling discussed with the human is an example/test value for a
-caller-configurable parameter, not a required default. That clarification and any
-selected authoring/projection change should be reconciled in the plan before its
-implementation is approved. This standard neither activates governance nor
+required caller-supplied parameter, with no implicit default. The plan now carries
+that clarification and its verification requirements; no authoring/projection
+expansion is selected. This standard neither activates governance nor
 authorizes successor planning, migration, or product execution.

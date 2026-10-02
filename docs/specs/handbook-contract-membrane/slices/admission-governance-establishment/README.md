@@ -1,15 +1,19 @@
 # Owner-native admission-governance establishment
 
-Status: **planning authority prepared for human review; implementation not authorized**.
+Status: **Packet 1 implementation authorized after a clean bounded causal review
+of this planning reconciliation; not yet implemented**.
 Prepared 2026-10-01 against `e2c073430e4eb322cf469198947bae5136941799`.
+Reconciled 2026-10-02 against `601a080` for the caller-supplied ceiling and selected
+file-format boundary. The human authorized local planning updates and review,
+followed by top-level Packet-1 implementation dispatch once that review is clean.
 Descriptive slice identity: `admission-governance-establishment`; no phase number
 is assigned. The human authorized this first bounded preparation after reviewing
 the [coverage and landing map](../../coverage-and-landing-map.md). The persistent
-meta chat owns adjudication, presentation of this plan, and implementation approval.
+meta chat owns adjudication, verification of dispatch conditions, and the human recap.
 
-This document proposes concrete implementation choices for that approval. They
-are not choices made by the September 30 semantic approval, existing product
-behavior, or permission to start coding. The [lifecycle](../../work-unit-lifecycle.md)
+This document selects the bounded implementation choices for that authorization.
+The September 30 semantic approval alone did not select them or authorize coding;
+they do not describe existing product behavior. The [lifecycle](../../work-unit-lifecycle.md)
 and [review policy](../../review-and-closeout-policy.md) control execution and stops.
 
 ## Outcome and next increment
@@ -28,10 +32,12 @@ identity fingerprint, at a retained local repository root. Its only scope is
 `contracts.evidence-freshness-policy/root`. Configuration
 `project.admission.freshness@1.0.0` binds the proposed fixed Contracts rule
 `handbook.contracts.freshness-policy-admission@1.0.0` and limits candidate maximum
-observation age to 86,400 seconds. Exact source revision is required and allowed
-future skew is zero. These numeric requirements are a deliberately proposed
-bounded starting choice; human approval of this plan must accept or change them.
-They do not redefine the whole approved semantic model.
+observation age to a caller-supplied 86,400 seconds in this example only. The caller
+must supply a positive JSON-safe integer ceiling in seconds; there is no implicit
+24-hour default. Exact source revision is required and allowed future skew is zero,
+preserving the existing fixed domain floors. The ceiling constrains later policy
+admission; it is not a retention period or a timer that deletes governance records.
+These choices do not redefine the whole approved semantic model.
 
 The caller says: establish this exact configuration for P under the standalone
 advisory instruction and retain explicit local instruction as the basis for later
@@ -131,8 +137,10 @@ rule or relax those constraints. Changing the Handbook rule is outside this slic
 Contracts ships the exact canonical rule descriptor and validator for
 `handbook.contracts.freshness-policy-admission@1.0.0`. Its descriptor declares one
 candidate kind: the existing `EvidenceFreshnessPolicyV1` vocabulary/schema. The
-configuration may set a positive JSON-safe maximum-age ceiling; the proposed
-initial ceiling is 86,400 seconds. Exact source revision remains true and future
+configuration must contain a caller-supplied maximum-age ceiling in seconds,
+an integer greater than zero and no greater than `JSON_SAFE_INTEGER_MAX`.
+The request has no default ceiling: 86,400 is only an example/test value, and other
+values within that range are supported. Exact source revision remains true and future
 skew remains zero, matching the existing domain floor. Unknown fields, kinds,
 owners, rules, scope encodings, exceptions or authority modes refuse. The finite
 owner-rule binding set is exactly one entry, with no duplicate or omitted entry.
@@ -141,6 +149,13 @@ exception sources for this standalone initial configuration. That empty source
 population is explicit and exact, not a general waiver of later admission closure.
 The owner validates the descriptor/content against its shipped rule; accepting a
 reference or schema-valid JSON alone is insufficient.
+
+The supplied ceiling is part of immutable configuration content and the exact
+request identity. Required typed fields prevent omission at construction; any
+supported serialized request boundary also rejects omitted or invalid values,
+without substituting 86,400 or another fallback. Changing an activated ceiling
+requires a successor configuration and activation under later selected authority;
+no parameter-edit or successor operation is provided in this packet.
 
 This descriptor records requirements for a later candidate-admission consumer.
 Establishment does not invoke `EvaluationPolicyRegistryV1::register_freshness` or
@@ -158,6 +173,16 @@ project/scope, instruction, replacement terms and expected initial state. Reusin
 either configuration identity or idempotency key for different semantic content
 refuses. The active relation and outcome have distinct content identities. Paths,
 timestamps and advisory display names cannot select a configuration.
+
+This selected JSON representation follows the interface distinction in the
+[structured data format standard](../../structured-data-format-standard.md): the
+caller supplies typed SDK operation parameters, and the owner writes configuration,
+activation and recovery records as ordinary files. It preserves the explicit
+Contracts JSON choice and reuses inward canonicalization/durability mechanisms.
+This slice does not adopt the standard's other proposed defaults or migrate
+existing files. Human-facing Markdown or GUI projections remain compatible future
+bounded work derived from the exact owner source. No YAML importer, direct file
+authoring interface, dedicated renderer or second editable master is added here.
 
 The local instruction records exact instruction content/digest, local instruction
 mode, optional asserted principal/agent/delegation claims, accepted scope and the
@@ -324,6 +349,12 @@ checks below are **planned verification**, not tests run during authority prepar
 1. The P/C1 example works through the direct native owner and selected typed SDK;
    reopening resolves the same exact active project/scope/configuration/rule basis.
    Validation, advisory permission and confirmed commit are independently visible.
+   A separate fresh-project case with another valid ceiling (for example 7,200
+   seconds) persists, resolves and replays that supplied value and the same exact
+   identities after reopening; it is not rewritten to 86,400. Configuration and
+   request identities bind that value. Omitted values at a supported serialized
+   request boundary, zero, out-of-range and invalidly typed values refuse before
+   reservation; required Rust input fields expose no omission/default path.
 2. The owner-shipped Handbook rule cannot be selected/changed by request content.
    The finite Contracts rule and proposed concrete constraints validate mechanically;
    wrong scope, owner, unknown/duplicate/missing binding, floor relaxation,
@@ -331,7 +362,8 @@ checks below are **planned verification**, not tests run during authority prepar
 3. Initial eligibility uses the positive native registration; existing roots,
    added scopes, missing identity/anchor, consumed initial state and missing
    established governance cannot bootstrap. Root/identity substitution refuses.
-4. Immutable identity and idempotency conflicts refuse; terminal replay after
+4. Immutable identity and idempotency conflicts, including changed ceilings,
+   refuse; no supported operation edits an activated configuration. Terminal replay after
    reopen returns the original outcome and has no second activation. Refusal
    provenance never fills an unresolved project/configuration/rule with guesses.
 5. Competing same/different-key processes yield one activation or exact replay;
@@ -374,8 +406,9 @@ The implementation task may resolve local encoding/module/test organization
 within these choices just in time, using this authority and cited live sources.
 It may not change owner, scope, concrete rule requirements, authority mode,
 retention, consumer route or review boundary without returning to meta. Human
-approval of this next increment and satisfied current prerequisites are required
-before implementation dispatch.
+authorization of this next increment is recorded above; a clean causal review of
+this reconciliation and satisfied current prerequisites are required before
+implementation dispatch. Completion still returns to the Packet-1 human boundary.
 
 ## Exclusions and planning evidence limits
 
@@ -407,5 +440,7 @@ and [research limitations](../../../../research/hcm-coverage-landing-2026-10-01/
 informed the boundary; current sources and approved owning semantics control it.
 Local Markdown-link checks, documentation diff checks, pre-commit change-detection
 attempt and the controlling causal verdict are reported with the committed plan.
-`AUTHORITY_READY` will mean reviewed/committed planning only. Return to meta to
-present this proposed Packet-1 plan and stop for later human implementation approval.
+`AUTHORITY_READY` means reviewed/committed planning only. Return to meta to verify
+the clean review and prerequisites, then dispatch the already-authorized Packet 1.
+That authorization does not cross the completion recap-and-stop boundary or permit
+successor planning or execution.
