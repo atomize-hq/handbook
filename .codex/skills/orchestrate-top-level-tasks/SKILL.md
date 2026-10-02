@@ -24,6 +24,14 @@ Use the approved clean-room documents without restating their policy:
 - `docs/specs/handbook-contract-membrane/task-session-prompt.md`
 - `docs/specs/handbook-contract-membrane/meta-task-prompt.md`
 
+For work involving structured file formats, serialization, canonicalization, or
+human projections, read
+[the structured data format standard](../../../docs/specs/handbook-contract-membrane/structured-data-format-standard.md)
+and include it as a required source in the preparation or implementation capsule.
+Carry its stated approval status into the assignment; this routing reference does
+not approve proposed defaults or authorize migrations. Include audit excerpts and
+reusable-tool sources only when the assigned decision needs that evidence.
+
 Do not treat missing detailed authority as an automatic admission failure. A user-requested named slice with a current high-level outcome may enter slice preparation even while a hard predecessor is incomplete or its completion evidence is stale; that predecessor gates product execution after preparation. A phase shape with no slices requires explicit user approval before phase preparation. A separate packet file is not required when the slice names and bounds the packet, its predecessor is complete, and the slice delegates just-in-time preparation.
 
 ## Route by role

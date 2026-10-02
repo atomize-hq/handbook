@@ -1,3 +1,12 @@
+# Structured data format decisions
+
+Before planning, implementing, or reviewing changes to structured file formats,
+serialization, canonicalization, or human projections, read
+[the structured data format standard](docs/specs/handbook-contract-membrane/structured-data-format-standard.md).
+Respect its stated approval status and existing owner/versioned contracts; a
+reference here does not approve proposed defaults or authorize migrations.
+Consult the linked audit when historical intent or reusable tooling needs evidence.
+
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
