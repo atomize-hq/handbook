@@ -68,9 +68,9 @@ At this checkpoint:
   separate;
 - the first approved-semantics foundation has one descriptive
   [`admission-governance-establishment` planning authority](slices/admission-governance-establishment/README.md),
-  with one bounded owner/typed-SDK establishment outcome. The human authorized
-  Packet-1 implementation after a clean causal review of its planning reconciliation;
-  it remains unimplemented and assigns no new phase number;
+  with one bounded owner/typed-SDK establishment outcome implemented locally at
+  `aa793c1`. Its single Packet 1 and aggregate slice outcome are complete and await
+  human review; no successor work is authorized and no new phase number is assigned;
 - the former orchestration skill under `.codex/skills/.disabled/` is inactive and is not authority for new work; and
 - the active thin router is routing guidance only and is not authority for product or slice work.
 
@@ -113,7 +113,7 @@ Use the source that owns the question:
 | What is the completed HCM-5.3 outcome and packet boundary? | [`slices/HCM-5.3/README.md`](slices/HCM-5.3/README.md) selects the operational dock owner, versioned language-neutral process JSON, portable first-party Rust executor boundary, completed-only candidate handoff, exact three-operation/11-root closure, strict Packets 1–5, and the fixed native-Rust JSON Schema validator handoff. All five packets, all 16 acceptance conditions, aggregate verification/review, and the single slice closeout are complete at exact `62 / 31 / 168` product truth; the production manifest registry remains empty at that checkpoint. Current HCM-5.4 authority is separate below. |
 | What is the completed HCM-5.4 outcome and packet boundary? | [`slices/HCM-5.4/README.md`](slices/HCM-5.4/README.md) fixes the first production native-Rust JSON Schema validator, exact offline local-closure/fingerprint/observation/refusal semantics, one current-target manifest/bundle, two new schema roots with no operation or capability increase, the exact contract-to-local-closeout proof, strict Packets 1–6, aggregate closeout, and Phase-5 exit evidence. Packet 4R supersedes Packet 4's invalid package identity, Packet 5 proves the Contracts-owned semantic path, and Packet 6 finalizes the checked-in schema tree and unchanged generic consumers at exact `62 / 31 / 170 / 1` truth plus six fixed use cases. All 19 conditions, the single slice closeout, and Phase-5 exit are complete. |
 | Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. A roadmap entry plus an explicit execution request may authorize bounded preparation of that document, but product execution begins only after the resulting current slice authority is ready. |
-| What is the first bounded approved-semantics establishment plan? | [`slices/admission-governance-establishment/README.md`](slices/admission-governance-establishment/README.md) selects one newly registered local project, exact Contracts freshness-policy admission scope, native committed establishment/refusal/recovery and typed Rust SDK resolution/replay. Packet-1 implementation is human-authorized after a clean causal review of the planning reconciliation; policy admission and successor activation remain separate. |
+| What is the first bounded approved-semantics establishment outcome? | [`slices/admission-governance-establishment/README.md`](slices/admission-governance-establishment/README.md) records the completed local implementation at `aa793c1`: one newly registered local project, exact Contracts freshness-policy admission scope, native committed establishment/refusal/recovery and typed Rust SDK resolution/replay. The caller-supplied ceiling survives restart exactly. The single-packet slice is at human review; policy admission and successor activation remain separate. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 
 If prose about implemented behavior conflicts with the current source and tests, treat the discrepancy as documentation drift; do not use the prose to override the product.
