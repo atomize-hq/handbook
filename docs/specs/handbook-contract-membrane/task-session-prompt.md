@@ -4,6 +4,8 @@ Use this prompt to assign one authorized whole slice or one packet to a top-leve
 
 Copy the assignment block and task instructions into the task session, replacing each angle-bracketed placeholder. Keep entries short and human-readable.
 
+The meta orchestrator creates this session with `model: gpt-6.1-sol` and `thinking: xhigh`, under the lifecycle's [AI model selection](work-unit-lifecycle.md#ai-model-selection). The dispatch arguments set the model; this prompt does not change it. Meta-level adjudication remains with the Astra meta session while this task retains its assigned settings.
+
 ## Task context capsule
 
 ```text

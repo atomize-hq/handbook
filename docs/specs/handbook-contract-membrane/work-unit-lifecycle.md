@@ -2,7 +2,7 @@
 
 This document is the normative lifecycle vocabulary for Handbook contract-membrane work. Humans, the authority-preparation, task-session, and meta-task prompts, and the thin routing skill consume these rules to identify the authorized outcome, prepare missing authority at the correct level, divide it into execution units, and distinguish continuation from completion.
 
-It defines execution-unit identity and lifecycle boundaries only. It does not authorize a slice, prescribe a prompt or result format, or require an orchestration artifact.
+It defines execution-unit identity, lifecycle boundaries, and role-specific AI model selection. It does not authorize a slice, prescribe a prompt or result format, or require an orchestration artifact.
 
 ## Work units
 
@@ -11,6 +11,19 @@ It defines execution-unit identity and lifecycle boundaries only. It does not au
 - The **meta task** selects an execution mode and a human review boundary, and owns packet selection, adjudication, and continuation within the approved increment across task sessions.
 - A **task session** owns only its assigned whole slice or packet. It may work directly or delegate internally only to local subagents; it never dispatches or coordinates another user-visible top-level task.
 - A **packet task** may not claim authority over the rest of the slice.
+
+## AI model selection
+
+The user selected these settings on 2026-10-01 for HCM orchestration:
+
+| Role | Model | Reasoning effort |
+| --- | --- | --- |
+| Persistent meta orchestrator, including meta-level adjudication | `gpt-6-astra` | `high` |
+| Fresh top-level authority-preparation or implementation task, including phase, slice, and packet assignments | `gpt-6.1-sol` | `xhigh` |
+
+Apply the selected model and effort as actual task-tool arguments when creating a session. For `create_thread`, use `model` and `thinking`; writing the selection in a prompt does not set the session's model. Replacement sessions for the same role retain its selection. When directing or resuming an existing task, preserve or explicitly restore the selection for that task's role; meta-level adjudication occurs in the meta orchestrator and does not switch the child task to Astra.
+
+This is a repository orchestration policy, not a change to the user's global Codex defaults. It does not select separate models for internal collaboration subagents or ChatGPT Pro consultations. Internal subagents follow applicable instructions and their supported inheritance/override behavior. If the selected model or effort is unavailable, return the exact selection gap to meta control rather than silently substituting another setting. Model selection grants no product scope or permission to cross a human review boundary.
 
 ## Authority-preparation boundaries
 

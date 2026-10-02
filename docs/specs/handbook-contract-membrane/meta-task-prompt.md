@@ -2,6 +2,8 @@
 
 Use this prompt in a meta task that owns an HCM phase or slice request. The request may already have current slice authority or may require bounded phase-to-slice or slice-to-packet authority preparation first. This prompt operationalizes the [`Slice and Packet Work-Unit Lifecycle`](work-unit-lifecycle.md), [`Review and Closeout Policy`](review-and-closeout-policy.md), [`Authority-Preparation Prompt`](authority-preparation-prompt.md), and [`Task-Session Prompt`](task-session-prompt.md); those documents remain authoritative if this prompt is incomplete or ambiguous.
 
+Initialize this meta session with `model: gpt-6-astra` and `thinking: high`, following the lifecycle's [AI model selection](work-unit-lifecycle.md#ai-model-selection). These are session settings, not prompt instructions that change an already running model. Keep meta-level adjudication in this session. All fresh top-level preparation and implementation sessions use `model: gpt-6.1-sol` and `thinking: xhigh`.
+
 ## Assignment
 
 ```text
@@ -63,11 +65,11 @@ Before each dispatch, use `agent-using-agent-skills` to select the minimal route
 
 Use this same loop for authority-preparation and implementation tasks:
 
-1. Resolve the authorized project and environment. Call `create_thread` once for one fresh user-visible task. If creation returns a pending client identity, resolve the resulting task without creating a duplicate. Do not use `fork_thread`; the created task may delegate internally only to local subagents and may not create another top-level task.
+1. Resolve the authorized project and environment. Call `create_thread` once for one fresh user-visible task, explicitly passing `model: gpt-6.1-sol` and `thinking: xhigh` for either authority preparation or implementation. If creation returns a pending client identity, resolve the resulting task without creating a duplicate. Do not use `fork_thread`; the created task may delegate internally only to local subagents and may not create another top-level task.
 2. Keep the live host/task identity only in conversation. Use `wait_threads` as the only blocking monitor, with `timeoutMs: 600000` normally or `timeoutMs: 1200000` for a particularly large current unit. On timeout, carry forward the cursor and call `wait_threads` again. Never poll with `read_thread`, use a shorter polling interval, or exceed the twenty-minute ceiling.
 3. When non-replacing user direction interrupts a wait, apply it and immediately resume `wait_threads` for the same task with the latest cursor and existing timeout. Do not strand or duplicate the task.
-4. Only after `wait_threads` reports completion or attention, use `read_thread` with `turnLimit: 5` to inspect recent state. When current authority supplies one safe answer to requested friction, send it with `send_message_to_thread` and return to `wait_threads`.
-5. If a task exhausts context but can resume safely, create a fresh top-level task for the same planning level or implementation unit with a refreshed capsule and truthful current state. Never advance a level or packet to bypass unfinished work.
+4. Only after `wait_threads` reports completion or attention, use `read_thread` with `turnLimit: 5` to inspect recent state. When current authority supplies one safe answer to requested friction, adjudicate it here in Astra, then send the direction with `send_message_to_thread`, explicitly retaining the child's `model: gpt-6.1-sol` and `thinking: xhigh`, and return to `wait_threads`.
+5. If a task exhausts context but can resume safely, create a fresh top-level task for the same planning level or implementation unit with a refreshed capsule, truthful current state, `model: gpt-6.1-sol`, and `thinking: xhigh`. Never advance a level or packet to bypass unfinished work.
 
 Use bounded judgment instead of retry counters. Do not repeat an unchanged failed action; select an authority-supported correction or stop when none exists.
 

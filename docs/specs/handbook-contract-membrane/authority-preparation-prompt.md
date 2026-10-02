@@ -2,6 +2,8 @@
 
 Use this prompt to assign one bounded phase-to-slice or slice-to-packet authority-preparation task to a fresh top-level task session. It operationalizes the [`Slice and Packet Work-Unit Lifecycle`](work-unit-lifecycle.md) and [`Review and Closeout Policy`](review-and-closeout-policy.md). It prepares current authority; it does not implement product work or continue into another planning level.
 
+The meta orchestrator creates this session with `model: gpt-6.1-sol` and `thinking: xhigh`, under the lifecycle's [AI model selection](work-unit-lifecycle.md#ai-model-selection). The dispatch arguments set the model; this prompt does not change it.
+
 ## Context capsule
 
 ```text
