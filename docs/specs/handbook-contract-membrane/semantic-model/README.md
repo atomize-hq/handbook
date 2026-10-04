@@ -48,6 +48,14 @@ Human-review questions and clarification requests are tracked in the
 questions, accepted amendments awaiting audit, and completed bounded reviews;
 consolidation alone resolves none of them.
 
+The [governance defaults and delegated-operation amendment](amendments/governance-defaults-and-delegated-operation.md)
+is **Proposed for human semantic sign-off** under HR-007. It proposes independent
+complete-contract evaluation during deliberate governance deferral and identifies
+exact activation edits; the approved base provisions remain operative meanwhile.
+For subsequent planning, read applicable amendments from this entry point and
+carry their approval status into the work. Proposed wording is a decision input,
+not approved semantic or implementation authority.
+
 ## Read by responsibility
 
 | Part | Owns the proposed semantics of | Read first when asking |

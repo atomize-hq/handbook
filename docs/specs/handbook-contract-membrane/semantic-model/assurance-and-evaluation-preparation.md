@@ -527,6 +527,10 @@ any such choice or require a general IAM platform.
 <a id="evaluation-requirements"></a>
 ## Complete evaluation requirements from two sources
 
+Prospective change: the [proposed independent-evaluation rules](amendments/governance-defaults-and-delegated-operation.md#a3--assurance-and-evaluation-preparation)
+identify applicability and prerequisite changes in this part. They await human
+semantic sign-off; current rules remain operative.
+
 Every canonical evaluation MUST consume one complete, exactly identified
 **Evaluation Requirements** closure. This is a common semantic role, fulfilled
 by exactly one of two sources; it does not mandate another runtime record,

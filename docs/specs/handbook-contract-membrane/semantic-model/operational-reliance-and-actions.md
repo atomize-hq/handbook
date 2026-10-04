@@ -316,6 +316,10 @@ that uncertainty as a semantic input; missing formation truth is never
 <a id="governed-completion"></a>
 ### Independently governed completion
 
+Prospective change: the [proposed governance and delegation clarification](amendments/governance-defaults-and-delegated-operation.md#a5--operational-reliance-and-actions)
+identifies applicability, later-establishment and autonomous-operation changes in
+this part. It awaits human semantic sign-off; current rules remain operative.
+
 For an effect that discharges a project-governed completion, promotion, or
 release obligation, Work Progression's policy/lifecycle responsibility (for
 local and parent work) or the relevant action domain MUST independently

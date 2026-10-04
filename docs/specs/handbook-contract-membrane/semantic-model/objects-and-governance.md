@@ -17,6 +17,10 @@ Object categories, semantic ownership, policy admission, and authored-artifact r
 <a id="policy-admission"></a>
 ## Shared policy admission
 
+Prospective change: the [proposed governance amendment](amendments/governance-defaults-and-delegated-operation.md#activation-edits)
+identifies admission/default/delegation and deferred-establishment changes here.
+It awaits human semantic sign-off; current rules remain operative.
+
 This section owns the common definition/policy-admission rule for every chapter
 in this package. Domain sections retain their exact vocabulary, compatibility,
 selection, and use constraints. A particular exception record or action follows
@@ -180,6 +184,10 @@ the authority, cutover, history, and refusal semantics above do not.
 
 <a id="contract-permitted-use"></a>
 ## Contract permitted use and qualification
+
+Prospective change: the [proposed contract reconciliation](amendments/governance-defaults-and-delegated-operation.md#a2--objects-and-governance-contracts-and-repeated-ownership-rules)
+separates completeness, independent use and project qualification, with exact
+activation edits. It awaits human semantic sign-off; current rules remain operative.
 
 Every admitted contract revision MUST have one exact governed **Contract
 Permitted Use** value:

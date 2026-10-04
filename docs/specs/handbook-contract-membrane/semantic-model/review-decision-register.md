@@ -4,6 +4,8 @@
 
 Opened: 2026-09-25.
 
+**Current amendment: HR-007 — Proposed for human semantic sign-off.**
+
 This register accompanies the [approved semantic package](README.md). It records questions,
 clarification requests, and their eventual dispositions; it does not add normative
 rules, approve the package, or authorize implementation. The consolidation review
@@ -40,6 +42,24 @@ silently classify every question as either an approval blocker or an implementat
 detail. A useful review test is whether two implementers could follow the documents
 and make materially different authority or outcome decisions without realizing a
 choice was left open.
+
+## HR-007 — Governance defaults, delegated operation, and independent contracts
+
+**Status: Proposed for human semantic sign-off — 2026-10-03.**
+
+The user requested bounded reconciliation of replaceable shipped choices,
+initial human approval and delegated autonomy, later governance establishment
+on the same greenfield identity, and useful complete-contract evaluation while
+governance is deliberately deferred. The latest clarification supersedes the
+earlier research's unresolved admission/draft framing; it does not approve every
+resulting normative sentence or authorize product work.
+
+The [proposed amendment](amendments/governance-defaults-and-delegated-operation.md)
+records the workflow, source inventory, exact activation edits, acceptance
+scenarios, and material sign-off choices. The approved base provisions remain
+operative until explicit human sign-off. Eventual supersession is limited to
+the amendment's identified provisions; HR-001 through HR-006 and their approval
+history are preserved. Technical review or a local commit supplies no approval.
 
 ## HR-001 — Authority to establish policy-admission requirements
 

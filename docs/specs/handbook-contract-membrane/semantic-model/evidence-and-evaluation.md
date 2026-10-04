@@ -1344,6 +1344,10 @@ meaning.
 
 ### Responsibility map
 
+Prospective change: the [proposed evidence-dependency reconciliation](amendments/governance-defaults-and-delegated-operation.md#a4--evidence-and-evaluation-truth)
+identifies admission prerequisites and governance provenance changes in this part.
+It awaits human semantic sign-off; current rules remain operative.
+
 All definition and policy admissions in this part, including Prospective
 Applicability and Canonical Evidence Set Formation Policies, use the governing
 configuration, owner-rule basis, and active-at-decision boundary established by
