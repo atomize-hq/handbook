@@ -81,6 +81,11 @@ was human-approved and integrated on 2026-10-04 as semantic planning input.
 The [phase map](phase-and-slice-map.md#hr-007-semantic-landing--2026-10-04)
 records the bounded follow-up preparation boundary. Approval changes neither
 implemented capability nor completed slice history and authorizes no implementation.
+The subsequent [program reconciliation](coverage-and-landing-map.md#hr-007-reconciliation--2026-10-04)
+covers the full flow and adjacent consumer plans. It proposes
+[`scoped-governance-deferral`](phase-and-slice-map.md#hr-007-semantic-landing--2026-10-04)
+as the next shape for human review, before separate slice preparation; no successor
+implementation is authorized.
 
 ## Authority and navigation
 

@@ -466,8 +466,12 @@ Preserve existing Dock's native Rust `jsonschema`, offline Draft 2020-12 exact
 inline JSON/local-ref closure; no general hostile-code sandbox or tooling roster
 is selected. HCM-4.6 grounding remains implemented with external trigger/adopter
 and reservations separate. HCM-5.2 local closeout remains historical Contracts
-truth with no parent eligibility. Future work must preserve governing assessment
-selection before collection or no-collection commitment, exact-policy/scenario
+truth with no parent eligibility. Under the subsequently approved
+[HR-007 protocols](../../semantic-model/amendments/governance-defaults-and-delegated-operation.md#g5--independent-evaluation-and-governed-reliance),
+future prospectively governed assessment preserves governing selection before
+collection or no-collection commitment; supported retrospective acceptance instead
+requires new current qualification of exact earlier direct decision-seeking results.
+Both retain exact-policy/scenario
 empty/N/A meanings, and historical Engine Binding verification only for consumed
 roles binding one; an upstream refusal fabricates no Binding. HCM-6.1–6.5 and
 deferred posture/work/grounding/Dock choices remain separate compatibility boundaries.

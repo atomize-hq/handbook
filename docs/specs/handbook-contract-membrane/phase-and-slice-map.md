@@ -206,11 +206,23 @@ adaptive intake and recommendations; deterministic owners validate and commit
 requests through CLI/SDK. These are approved target semantics, not delivered APIs.
 
 The fresh-project slice above remains its exact completed historical outcome.
-Before another implementation increment, reconcile only the selected next outcome
-with HR-007 and current source, identify its prerequisites and human review
-boundary, and prepare one bounded plan. Existing-project first establishment and
-the independent local-check prerequisites need consideration; this note selects
-neither a successor slice nor detailed packets and does not alter Phase-6 order.
+The user subsequently authorized program-level planning reconciliation across
+the roadmap and adjacent documents. The [coverage map](coverage-and-landing-map.md#impact-and-dependency-coverage)
+records its breadth and the source-backed next outcome below. It remains proposed
+for human review, with no new phase number, detailed packets or implementation
+authorization and no change to Phase-6 order.
+
+| Proposed slice shape | Program status | Concise outcome and boundary | Dependency boundary |
+| --- | --- | --- | --- |
+| `scoped-governance-deferral` — Positive scoped deferral and current resolution | Planned shape for human review; no individual slice authority | One newly registered local project can retain human-approved deferral of the existing Contracts freshness-policy admission scope and resolve/replay its exact basis through typed SDK. No default activation, global exemption or independent evaluation is inferred; missing/corrupt/uncertain state fails closed. | Existing identity/durability, fresh-project owner and typed SDK are foundations. Review of this shape, separate slice preparation and human authorization of its implementation increment remain required. Deferral is work inside the slice, not a delivered prerequisite. |
+
+The [next-outcome boundary](coverage-and-landing-map.md#proposed-next-slice-shape-scoped-governance-deferral)
+owns the high-level example, refusal and observable acceptance conditions.
+Positive deferral precedes later first establishment on that identity and supplies
+one prerequisite for broader independent contract use. The latter still needs
+permitted use, conformance, complete requirements and supported operating authority.
+Later outcomes remain broad dependencies; this entry authorizes neither their
+decomposition nor successor dispatch.
 
 ## Phase 6 — consumer adoption
 
@@ -230,6 +242,12 @@ Phase 6 may exit only when each selected local consumer preserves SDK and owner
 truth, and each publication or external-adoption claim has current proof at its
 actual owner boundary. Unselected external consumers are not an exit failure.
 
+Selected consumer workflows must preserve HR-007's scoped applicability,
+qualification, original result provenance and adopted assessment protocols from
+their native owners. The [coverage reconciliation](coverage-and-landing-map.md#impact-and-dependency-coverage)
+records onboarding, feedback and adapter implications. It adds no universal
+SDK/CLI/Tauri parity requirement or skill-family pack/integration catalog.
+
 ## Primary unresolved decisions
 
 | Decision | Where later authority must decide it |
@@ -237,8 +255,8 @@ actual owner boundary. Unselected external consumers are not an exit failure.
 | External grounding trigger/adopter placement | HCM-4.6 implements the bounded owner, repository, four-operation seam, fixed SDK composition, and unchanged generic repository consumers. Future Phase-6 authority must separately choose any publication, bridge, automatic trigger host, and real external adopter. |
 | Broader posture evaluation, recommendation, notification, acknowledgement, and hysteresis | Future posture authority must place this policy without transferring engine-owned mutation authority to a gate or adapter |
 | CLI operation-inventory expansion beyond the completed 62-row predecessor | HCM-4.3 does not expand the inventory for transport parity: its authority fixes the exact ordinary mappings and a closed six-entry SDK use-case registry. Any new semantic operation or use case requires later explicit authority, complete schemas, and independent owner admission where applicable. |
-| Parent eligibility, work hierarchy/state, and dependency-composition realization | HCM-5.2 truthfully fixes gate and local-closeout results without a parent field or consumer. The proposed [operational-reliance and work-progression decision](semantic-model/operational-reliance-and-actions.md#reliance-actions) selects Work Progression as the greenfield semantic owner of local/parent eligibility and requires separate atomic Operational Reliance Determinations. Later human-approved authority must still select the physical component, work hierarchy/state model, exact parent/child/dependency binding, concrete policies/currentness inputs, consumers, action authorization/mutation mechanisms, implementation slice, and rollout. Local closeout cannot imply parent eligibility or mutation. |
-| Gate-to-posture observation, recommendation, reliance, and transition realization | HCM-5.2 fixes gate/local-closeout truth without posture fields. The proposed [posture and assurance-policy decision](semantic-model/assurance-and-evaluation-preparation.md#posture-assurance) fixes the forward-only semantic order through admitted observation/recommendation, transition-specific Operational Reliance, separate Action Intent/Authorization, and atomic Engine mutation. Later authority must still select concrete policies, algorithms, approvals, physical placement, schemas/APIs, host integration, implementation, and rollout without transferring gate or mutation authority to Contracts, SDK, or an adapter. |
+| Parent eligibility, work hierarchy/state, and dependency-composition realization | HCM-5.2 truthfully fixes gate and local-closeout results without a parent field or consumer. The approved [operational-reliance and work-progression semantics](semantic-model/operational-reliance-and-actions.md#reliance-actions) select Work Progression as the greenfield semantic owner of local/parent eligibility and require separate atomic Operational Reliance Determinations, with prospective assessment or adopted HR-007 current qualification of exact prior results. Later human-approved authority must still select the physical component, work hierarchy/state model, exact parent/child/dependency binding, concrete policies/currentness inputs, consumers, action authorization/mutation mechanisms, implementation slice, and rollout. Local closeout cannot imply parent eligibility or mutation. |
+| Gate-to-posture observation, recommendation, reliance, and transition realization | HCM-5.2 fixes gate/local-closeout truth without posture fields. The approved [posture and assurance-policy semantics](semantic-model/assurance-and-evaluation-preparation.md#posture-assurance) fix the forward-only semantic order through admitted observation/recommendation, transition-specific Operational Reliance, separate Action Intent/Authorization, and atomic Engine mutation. Initial skill-guided advice is a separate responsibility. Later authority must still select concrete policies, algorithms, approvals, physical placement, schemas/APIs, host integration, implementation, and rollout without transferring gate or mutation authority to Contracts, SDK, or an adapter. |
 | Additional Dock integrations with established tooling | Later explicit authority must select each integration's scope and observation-admission requirements beyond the HCM-5.3/HCM-5.4 repository-owned JSON Schema path; such adapters do not imply arbitrary third-party executable admission or a general hostile-code confinement program |
 | CLI/Tauri membrane routes and framing | HCM-4.3 owns current CLI parity and framing; HCM-4.4 separately owns the Tauri facade after HCM-4.3 closeout. |
 | Publication mechanism, exact versions, bridge, and external adopter | Future publication and consumer authorities with current external proof |

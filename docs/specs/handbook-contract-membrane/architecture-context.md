@@ -26,16 +26,16 @@ The labels below describe architecture state, not lifecycle or authorization:
 | --- | --- | --- |
 | Artifact, profile, registry, Context Resolution, and posture domains | Current | [`handbook-engine`](../../../crates/engine/) owns their semantic rules, authority checks, and durable mutations. |
 | Flow and pipeline domains | Current | [`handbook-flow`](../../../crates/flow/) and [`handbook-pipeline`](../../../crates/pipeline/) own their domain behavior while depending on the engine for shared semantic truth. |
-| Grounding adoption and deterministic projection/snapshot components | Precursor | Typed Flow and pipeline adapters exist, while projection and snapshot components remain private and no ordinary grounding consumer completes the seam. |
+| Grounding adoption and deterministic projection/snapshot components | Current | HCM-4.6 completes the production Engine snapshot-grounding owner, durable repository, four ordinary operations and one fixed SDK session composition over typed Flow/pipeline adapters. Automatic triggers and external adopter selection remain separate. |
 | SDK composition | Current | [`handbook-sdk`](../../../crates/sdk/) composes owner crates into bounded, transport-free public Rust surfaces. |
-| Contract-membrane types, schemas, admission, and discovery | Current | HCM-4.2 provides the bounded kernel and exact 62-row inventory; subsequent slices extend the deterministic tree to 170 roots and the immutable production witness to 31 capabilities. The 18 predecessor operations expose `cli_json` and `tauri`, posture exposes `rust_sdk` and `tauri`, the nine Contracts and three Dock operations expose `rust_sdk`, `cli_json`, and `tauri`, and the six fixed use cases remain outside ordinary admission and discovery. |
+| Contract-membrane types, schemas, admission, and discovery | Current | HCM-4.2 provides the bounded kernel and exact 62-row inventory; subsequent slices through HCM-4.6 extend the deterministic tree to 180 roots and the immutable production witness to 35 capabilities. The 18 predecessor operations expose `cli_json` and `tauri`, posture exposes `rust_sdk` and `tauri`, the nine Contracts, three Dock and four snapshot operations expose `rust_sdk`, `cli_json`, and `tauri`, and the seven fixed use cases remain outside ordinary admission and discovery. |
 | CLI adapter | Current | [`handbook-cli`](../../../crates/cli/) consumes owner/SDK typed results for all 36 supported nontrivial leaves and exposes exactly four generic capability actions over the SDK consumer seam. It owns only command-line acquisition/rendering/stream/exit concerns, emits the shared invocation envelope for `--json`, and preserves only the 19 established explicit legacy projections. |
 | Tauri adapter | Current | [`handbook-tauri`](../../../crates/tauri/) is a non-UI library with three versioned commands over SDK-owned bootstrap, catalog, and invocation DTOs. It owns host context, off-main-thread scheduling, bounded host failures, and IPC framing without CLI or owner-crate product dependencies. |
 | Installed Handbook skill | Current | The generated root skill uses only the generic CLI membrane to bootstrap, page discovery, retrieve exact schemas, acquire bounded input, and invoke. It carries no current operation inventory or product-specific ordinary route; the fixed Charter workflow remains a separate leaf skill. |
 | Contract definition, claim, applicability, lifecycle, durable use-case owner, outward SDK membrane, and generic consumers | Current | HCM-5.1 Packets 1–6 establish and integrate [`handbook-contracts`](../../../crates/contracts/) inward of SDK with owner-native exact definition, claim, applicability, fingerprint, compatibility, lifecycle-chain, current-head, evaluation-basis, and repository-bound durability semantics. Its fixed repository-relative store owns bounded current-only paging, exact immutable reads, admitted append/transition, replay, and fail-closed recovery. A bounded outward SDK projection closes exactly four operations within the 62-row inventory and the 23-capability/135-root witness while independently re-admitting owner evidence and preserving the sealed Engine authority seam; the existing generic Rust SDK, CLI, and Tauri consumers preserve that owner truth without a contract-specific branch, and the owner has no SDK or transport dependency. |
 | Evidence/gate owner | Current | HCM-5.2 Packets 1–7 implement the `handbook-contracts` identity/policy/run kernel, exact read-only candidate-source normalization through one sealed Engine `contract_evidence_source` admission plus generic source-currentness/Resolution observations, retained-root immutable-all canonical-evidence list/read/idempotent append with bounded atomic recovery, pure closed claim-verdict evaluation, gate/local-closeout composition, the exact five-operation outward SDK membrane, and integrated proof through the unchanged generic SDK/CLI/Tauri consumers. Verdicts and gate results remain non-persisted derived truth. |
 | Process dock | Current | HCM-5.3 Packets 1–5 implement the purpose-named operational dock owner, language-neutral one-shot JSON protocol, portable first-party Rust executor, completed-only candidate source, exact three-operation/11-root closure, and unchanged generic consumers. HCM-5.4 Packets 1–6 add the one reproducibly packaged native-Rust JSON Schema validator manifest, exact offline local-closure observation, two checked-in schema roots, and the real Contracts-owned semantic proof while preserving the same generic consumers and owner direction. Aggregate HCM-5.4 closeout is complete and Phase 5 is exited. |
-| Handbook Contract Membrane greenfield semantic decisions | Target/future | The [combined semantic package](semantic-model/README.md) and its four responsibility parts remain **PROPOSED**. Together they propose the six-category ontology, posture/assurance selection, Contracts-domain Evaluation Coordination, exact evaluation/evidence closure, authored-artifact relationships, metric/gate truth and explanation, and Work Progression/Operational Reliance/action boundaries. They do not alter current source ownership, approve implementation, select physical placement or concrete policies, or change a phase/slice status. |
+| Handbook Contract Membrane greenfield semantic decisions | Target/future | The [combined semantic package](semantic-model/README.md) was approved as planning input on 2026-09-30, with HR-007 approved/integrated on 2026-10-04. It fixes the six-category ontology, posture/assurance selection, Contracts-domain Evaluation Coordination, exact evaluation/evidence closure, authored relationships, metric/gate/explanation and Work Progression/reliance/action boundaries, including independent use and protocol-qualified prior results. Approval does not change source ownership, authorize implementation, select deferred physical placement or concrete policies, or change completed phase/slice history. |
 | Publication, bridge, and Substrate adoption | External-unknown | No repository-only claim can prove their current external existence, deployment, or conformance. |
 
 The workspace membership and current crate edges are visible in
@@ -103,11 +103,11 @@ and local-closeout owner, SDK maps five reserved operations outward, and a
 future executor supplies operational records plus untrusted candidates through
 an owner-side source boundary. Local closeout is a sibling derived result. No
 parent-eligibility result, parent consumer, or parent mutation exists in HCM-5.2;
-local closeout cannot imply any of them. The proposed
+local closeout cannot imply any of them. The approved
 [operational-reliance and work-progression decision](semantic-model/operational-reliance-and-actions.md#reliance-actions)
 assigns the greenfield semantic responsibility for local-closeout and parent
 eligibility to Work Progression, with each as the eligibility facet of its own
-atomic Operational Reliance Determination. That proposal does not change HCM-5.2
+atomic Operational Reliance Determination. That semantic approval does not change HCM-5.2
 history or select the work hierarchy/state model, parent binding, concrete
 policy, physical component placement, consumer, action authorization, mutation,
 or implementation slice. This is implemented owner, SDK, and generic-consumer
@@ -182,6 +182,16 @@ lifecycle state, persistence, and replay rather than trusting caller-supplied
 private records. This prevents a public caller from manufacturing the evidence
 that authorizes its own mutation.
 
+For approved HR-007 target workflows, intrinsic owner conformance, applicable
+project qualification, governing assignment and present-use reliance remain
+distinct. Positive deferral of an exact scope is native lifecycle truth; absent
+or damaged established state supplies no permissive fallback. Skill-guided LLM
+sessions propose content and invoke CLI/SDK; deterministic owners validate and
+commit supplied authorized requests. Native initialization does not conduct an
+LLM interview. Supported replacement of shipped choices preserves exact native
+identity, authority and safety mechanisms. The [program coverage map](coverage-and-landing-map.md#impact-and-dependency-coverage)
+records affected dependencies and the limits of current implementation.
+
 Three byte and identity domains must remain separate:
 
 1. **Instance canonicalization and fingerprints** identify concrete values and
@@ -215,13 +225,13 @@ prepared first-path authority.
 
 The current HCM-5.2 implementation provides a gate result and separate local-
 closeout result without a parent-promotion field, parent-eligibility result, or
-consumer. The proposed
+consumer. The approved
 [operational-reliance and work-progression decision](semantic-model/operational-reliance-and-actions.md#reliance-actions)
 places greenfield semantic responsibility for local-closeout and parent
 eligibility in Work Progression. It requires separate action-specific bases and
 atomic Operational Reliance Determinations, with eligibility and disposition as
 inseparable facets; local closeout alone can never imply parent eligibility.
-The proposal deliberately leaves physical placement, the work hierarchy/state
+The approved model deliberately leaves physical placement, the work hierarchy/state
 model, exact parent/child/dependency binding, concrete policies/currentness
 inputs, consumers, and implementation unselected. Current HCM-5.2 authority is
 unchanged and authorizes no parent mutation.
@@ -234,11 +244,11 @@ transition authority. Gates answer their bounded evidence question. One atomic
 Operational Reliance Determination decides present eligibility/disposition for
 an exact action question; a separately owned Action Intent, Action Authorization
 Binding or Refusal, Action Attempt, Action Terminal, and authoritative state-
-owner Mutation Receipt govern any effect. For posture specifically, the proposed
+owner Mutation Receipt govern any effect. For posture specifically, the approved
 [posture and assurance-policy decision](semantic-model/assurance-and-evaluation-preparation.md#posture-assurance)
 keeps the path forward-only: `P_n` to evaluation, observation/recommendation,
 transition-specific reliance, separate authorized mutation, and `P_{n+1}`.
-Neither proposal approves a concrete policy, host, schema, API, or mutation
+Neither semantic decision approves a concrete policy, host, schema, API, or mutation
 mechanism.
 
 This separation prevents an evidence producer from silently becoming the policy

@@ -38,6 +38,12 @@ remains narrow; the amendment's full independent-use path, later establishment,
 replaceable selections and retrospective qualification are not established as
 delivered by that slice. Adaptive skill-guided intake must remain distinct from
 native setup and deterministic owner operations when preparing subsequent work.
+The [program reconciliation](coverage-and-landing-map.md#current-source-constraints-on-the-next-outcome)
+records the current source constraints. Ordinary setup does not record positive
+deferral; Contracts has standalone credential-backed authority foundations without
+requiring a Charter, but lacks the new permitted-use/intent/applicability closure.
+The proposed [scoped-deferral shape](coverage-and-landing-map.md#proposed-next-slice-shape-scoped-governance-deferral)
+changes none of these product classifications.
 
 ## Verified domain baseline
 
