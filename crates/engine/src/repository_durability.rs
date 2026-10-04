@@ -42,6 +42,12 @@ pub struct RepositoryDurabilityErrorV1 {
 }
 
 impl RepositoryDurabilityErrorV1 {
+    pub(crate) fn initialization_refusal(
+        kind: RepositoryDurabilityErrorKindV1,
+        detail: &'static str,
+    ) -> Self {
+        Self { kind, detail }
+    }
     pub(crate) fn prepared_identity_occupied() -> Self {
         Self {
             kind: RepositoryDurabilityErrorKindV1::AlreadyExists,
@@ -220,6 +226,7 @@ struct DirectorySnapshot {
 /// A process/native exclusive lock held until this guard is dropped.
 pub struct RepositoryExclusiveLockV1 {
     file: Option<File>,
+    snapshot: RegularFileSnapshot,
     #[cfg(windows)]
     _parent_guards: Vec<File>,
 }
@@ -233,6 +240,116 @@ impl Drop for RepositoryExclusiveLockV1 {
 }
 
 impl RepositoryExclusiveLockV1 {
+    /// Verifies that the retained empty lock still names the exact regular file
+    /// at the retained-root path. No lock-content read is needed on Windows.
+    pub fn validate_at(
+        &self,
+        root: &RetainedRepositoryRootV1,
+        relative: &str,
+    ) -> Result<(), RepositoryDurabilityErrorV1> {
+        root.require_stable_path_epoch()?;
+        let relative = ValidatedRelativePath::parse(relative, false)?;
+        let retained = self
+            .file
+            .as_ref()
+            .ok_or_else(|| uncertain("repository lock was already released"))?;
+        let retained_snapshot = regular_file_snapshot(retained)?;
+        let current = root
+            .open_regular_optional(&relative, false)?
+            .ok_or_else(|| unsafe_fs("retained initialization lock is absent"))?;
+        let current_snapshot = regular_file_snapshot(&current)?;
+        if retained_snapshot != self.snapshot
+            || current_snapshot != self.snapshot
+            || retained_snapshot.length != 0
+            || current_snapshot.length != 0
+        {
+            return Err(unsafe_fs(
+                "retained initialization lock was substituted or modified",
+            ));
+        }
+        root.require_stable_path_epoch()
+    }
+
+    /// Confirms the selected initialization lock's file and parent durability
+    /// without replacing the identity/version captured at native acquisition.
+    pub(crate) fn confirm_initialization_durable_at(
+        &self,
+        root: &RetainedRepositoryRootV1,
+        relative: &str,
+    ) -> Result<(), RepositoryDurabilityErrorV1> {
+        self.validate_at(root, relative)?;
+        let path = ValidatedRelativePath::parse(relative, false)?;
+        self.file
+            .as_ref()
+            .ok_or_else(|| uncertain("repository lock was already released"))?
+            .sync_all()
+            .map_err(|_| uncertain("retained initialization lock flush failed"))?;
+        platform::sync_lock_parent(root, &path)?;
+        self.validate_at(root, relative)
+    }
+
+    /// Opaque exact native file/generation binding for an immutable lock record.
+    /// Native lock acquisition, metadata reads and fsync do not alter this value.
+    pub fn physical_fingerprint_v1(&self) -> Result<String, RepositoryDurabilityErrorV1> {
+        let file = self
+            .file
+            .as_ref()
+            .ok_or_else(|| uncertain("repository lock was already released"))?;
+        if regular_file_snapshot(file)? != self.snapshot || self.snapshot.length != 0 {
+            return Err(unsafe_fs("retained repository lock generation changed"));
+        }
+        let mut digest = Sha256::new();
+        digest.update(b"handbook.repository-native-lock-physical-generation@1.0\0");
+        match self.snapshot.identity {
+            #[cfg(unix)]
+            PhysicalFileIdentity::Unix {
+                device,
+                inode,
+                links,
+            } => {
+                digest.update(b"unix\0");
+                digest.update(device.to_be_bytes());
+                digest.update(inode.to_be_bytes());
+                digest.update(links.to_be_bytes());
+            }
+            #[cfg(windows)]
+            PhysicalFileIdentity::Windows {
+                volume,
+                file_id,
+                links,
+            } => {
+                digest.update(b"windows\0");
+                digest.update(volume.to_be_bytes());
+                digest.update(file_id);
+                digest.update(links.to_be_bytes());
+            }
+        }
+        match self.snapshot.version {
+            #[cfg(unix)]
+            NativeFileVersion::Unix {
+                modified_seconds,
+                modified_nanoseconds,
+                changed_seconds,
+                changed_nanoseconds,
+            } => {
+                digest.update(modified_seconds.to_be_bytes());
+                digest.update(modified_nanoseconds.to_be_bytes());
+                digest.update(changed_seconds.to_be_bytes());
+                digest.update(changed_nanoseconds.to_be_bytes());
+            }
+            #[cfg(windows)]
+            NativeFileVersion::Windows {
+                creation_time,
+                last_write_time,
+                change_time,
+            } => {
+                digest.update(creation_time.to_be_bytes());
+                digest.update(last_write_time.to_be_bytes());
+                digest.update(change_time.to_be_bytes());
+            }
+        }
+        Ok(format!("sha256:{:x}", digest.finalize()))
+    }
     /// Explicitly releases the native lock so a caller can refuse its receipt
     /// when release certainty is required. Drop remains a best-effort fallback.
     pub fn release(mut self) -> Result<(), RepositoryDurabilityErrorV1> {
@@ -246,6 +363,50 @@ impl RepositoryExclusiveLockV1 {
 }
 
 impl RetainedRepositoryRootV1 {
+    pub(crate) fn initialization_root_path(&self) -> &Path {
+        &self.root_path
+    }
+
+    pub(crate) fn initialization_regular_file_exists(
+        &self,
+        relative: &str,
+        limit: usize,
+    ) -> Result<bool, RepositoryDurabilityErrorV1> {
+        self.require_stable_path_epoch()?;
+        let relative = ValidatedRelativePath::parse(relative, false)?;
+        let Some(file) = self.open_regular_optional(&relative, false)? else {
+            return Ok(false);
+        };
+        if regular_file_snapshot(&file)?.length > limit as u64 {
+            return Err(bound("initialization record exceeds its byte bound"));
+        }
+        self.require_stable_path_epoch()?;
+        Ok(true)
+    }
+
+    pub(crate) fn initialization_handbook_exists(
+        &self,
+    ) -> Result<bool, RepositoryDurabilityErrorV1> {
+        self.require_stable_path_epoch()?;
+        let exists = match fs::symlink_metadata(self.root_path.join(".handbook")) {
+            Ok(metadata)
+                if metadata.is_dir()
+                    && !metadata.file_type().is_symlink()
+                    && !metadata_is_reparse(&metadata) =>
+            {
+                true
+            }
+            Ok(_) => {
+                return Err(unsafe_fs(
+                    "initialization root is not a link-free directory",
+                ))
+            }
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => false,
+            Err(_) => return Err(unsafe_fs("initialization root could not be inspected")),
+        };
+        self.require_stable_path_epoch()?;
+        Ok(exists)
+    }
     /// Opaque versioned binding to the retained physical root for admission
     /// governance. Reopening the same root retains this value; copying its
     /// files to another physical root does not. This proves root identity only,
@@ -731,7 +892,7 @@ impl RetainedRepositoryRootV1 {
     ) -> Result<RepositoryExclusiveLockV1, RepositoryDurabilityErrorV1> {
         let relative = ValidatedRelativePath::parse(relative, false)?;
         if self.open_regular_optional(&relative, true)?.is_none() {
-            match platform::write_new(self, &relative, &[]) {
+            match platform::write_new_lock(self, &relative) {
                 Ok(()) => {}
                 Err(error) if error.kind() == RepositoryDurabilityErrorKindV1::AlreadyExists => {}
                 Err(error) => return Err(error),
@@ -742,10 +903,12 @@ impl RetainedRepositoryRootV1 {
             .ok_or_else(|| not_found("lock file disappeared before acquisition"))?;
         file.lock()
             .map_err(|_| lock_unavailable("exclusive repository lock acquisition failed"))?;
+        let snapshot = regular_file_snapshot(&file)?;
         #[cfg(windows)]
         let parent_guards = self.pin_windows_parent(&relative)?;
         Ok(RepositoryExclusiveLockV1 {
             file: Some(file),
+            snapshot,
             #[cfg(windows)]
             _parent_guards: parent_guards,
         })
@@ -1634,6 +1797,22 @@ mod platform {
             .map_err(|_| uncertain("new repository directory parent flush failed"))
     }
 
+    pub(super) fn write_new_lock(
+        root: &RetainedRepositoryRootV1,
+        relative: &ValidatedRelativePath,
+    ) -> Result<(), RepositoryDurabilityErrorV1> {
+        write_new(root, relative, &[])
+    }
+
+    pub(super) fn sync_lock_parent(
+        root: &RetainedRepositoryRootV1,
+        relative: &ValidatedRelativePath,
+    ) -> Result<(), RepositoryDurabilityErrorV1> {
+        let (parent, _) = open_parent(root, relative)?;
+        rustix::fs::fsync(&parent)
+            .map_err(|_| uncertain("retained repository lock parent flush failed"))
+    }
+
     pub(super) fn write_new(
         root: &RetainedRepositoryRootV1,
         relative: &ValidatedRelativePath,
@@ -1806,6 +1985,49 @@ mod platform {
     const FILE_FLAG_BACKUP_SEMANTICS: u32 = 0x0200_0000;
     const FILE_FLAG_OPEN_REPARSE_POINT: u32 = 0x0020_0000;
     const FILE_FLAG_WRITE_THROUGH: u32 = 0x8000_0000;
+
+    pub(super) fn sync_lock_parent(
+        root: &RetainedRepositoryRootV1,
+        relative: &ValidatedRelativePath,
+    ) -> Result<(), RepositoryDurabilityErrorV1> {
+        let _guards = root.pin_windows_parent(relative)?;
+        sync_windows_directory(
+            root.absolute(relative)
+                .parent()
+                .ok_or_else(|| invalid_path("repository lock has no parent"))?,
+        )
+    }
+
+    pub(super) fn write_new_lock(
+        root: &RetainedRepositoryRootV1,
+        relative: &ValidatedRelativePath,
+    ) -> Result<(), RepositoryDurabilityErrorV1> {
+        let _guards = root.pin_windows_parent(relative)?;
+        let path = root.absolute(relative);
+        // Empty lock bootstrap permits competing writable handles while its
+        // creator flushes. The native lock serializes subsequent callers.
+        let file = match OpenOptions::new()
+            .read(true)
+            .write(true)
+            .create_new(true)
+            .share_mode(FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE)
+            .custom_flags(FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_WRITE_THROUGH)
+            .open(&path)
+        {
+            Ok(file) => file,
+            Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => {
+                return Err(already_exists("repository lock already exists"))
+            }
+            Err(_) => return Err(uncertain("Windows durable lock create-new failed")),
+        };
+        file.sync_all()
+            .map_err(|_| uncertain("Windows durable repository lock flush failed"))?;
+        regular_file_snapshot(&file)?;
+        sync_windows_directory(
+            path.parent()
+                .ok_or_else(|| invalid_path("repository lock has no parent"))?,
+        )
+    }
 
     pub(super) fn open_retained_directory(
         root: &RetainedRepositoryRootV1,

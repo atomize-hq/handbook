@@ -8,6 +8,7 @@ use crate::charter_lineage_store::{create_new_file, sync_directory};
 use crate::repository_durability::{
     RepositoryDurabilityErrorV1, RepositoryReadV1, RetainedRepositoryRootV1,
 };
+use crate::repository_initialization::RepositoryInitializationGuardV1;
 use crate::OwnerCausalDispositionV1;
 use serde::{Deserialize, Deserializer, Serialize};
 use sha2::{Digest, Sha256};
@@ -305,13 +306,36 @@ impl RepositoryInvocationIdentityServiceV1 {
         root: &RetainedRepositoryRootV1,
         prepared: PreparedRepositoryIdentityV1,
     ) -> Result<RepositoryIdentityInitializationV1, RepositoryDurabilityErrorV1> {
-        self.persist_prepared_repository_identity_with(root, prepared, |root, fingerprint| {
-            root.write_new_durable(REPOSITORY_IDENTITY_TEMP_REPO_PATH, fingerprint.as_bytes())?;
-            root.rename_noreplace_durable(
-                REPOSITORY_IDENTITY_TEMP_REPO_PATH,
-                REPOSITORY_IDENTITY_REPO_PATH,
-            )
-        })
+        // Preserve the original no-effect refusal for a missing reservation.
+        root.list_directory_bounded(".handbook", 4096)?;
+        let guard = RepositoryInitializationGuardV1::acquire(root.initialization_root_path())?;
+        if !root.same_physical_root(guard.root()) {
+            return Err(RepositoryDurabilityErrorV1::prepared_identity_unverified());
+        }
+        let initialized = self.persist_prepared_repository_identity_locked(&guard, prepared)?;
+        guard.release()?;
+        Ok(initialized)
+    }
+
+    /// Retains one proposal while the caller holds the shared root guard before
+    /// its native-owner lock. A pending native claim must name this exact token.
+    pub fn persist_prepared_repository_identity_locked(
+        &self,
+        guard: &RepositoryInitializationGuardV1,
+        prepared: PreparedRepositoryIdentityV1,
+    ) -> Result<RepositoryIdentityInitializationV1, RepositoryDurabilityErrorV1> {
+        guard.require_prepared_identity(prepared.repository_identity_fingerprint())?;
+        self.persist_prepared_repository_identity_with(
+            guard.root(),
+            prepared,
+            |root, fingerprint| {
+                root.write_new_durable(REPOSITORY_IDENTITY_TEMP_REPO_PATH, fingerprint.as_bytes())?;
+                root.rename_noreplace_durable(
+                    REPOSITORY_IDENTITY_TEMP_REPO_PATH,
+                    REPOSITORY_IDENTITY_REPO_PATH,
+                )
+            },
+        )
     }
 
     fn persist_prepared_repository_identity_with<P>(
@@ -469,6 +493,87 @@ impl RepositoryInvocationIdentityServiceV1 {
         F: FnOnce(&mut [u8]) -> Result<(), ()>,
         P: FnOnce(&Path, &str) -> Result<(), RepositoryIdentitySetupErrorV1>,
     {
+        let repo_root = std::path::absolute(repo_root).map_err(|_| {
+            setup_error(
+                RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
+                "repository root could not be resolved for initialization",
+            )
+        })?;
+        let guard = RepositoryInitializationGuardV1::acquire(&repo_root).map_err(|_| {
+            setup_error(
+                RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
+                "repository initialization guard could not be retained safely",
+            )
+        })?;
+        let initialization = self.initialize_for_setup_locked_with_persistence(
+            &repo_root,
+            &guard,
+            fill_entropy,
+            persist_identity,
+        )?;
+        guard.release().map_err(|_| {
+            let error = setup_error(
+                RepositoryIdentitySetupErrorKindV1::PersistenceFailed,
+                "repository initialization guard release was uncertain",
+            );
+            if initialization.disposition == RepositoryIdentityInitializationDispositionV1::Created
+            {
+                attach_verified_created_effect(
+                    &repo_root,
+                    &initialization.repository_identity_fingerprint,
+                    error,
+                )
+            } else {
+                error
+            }
+        })?;
+        Ok(initialization)
+    }
+
+    /// Ordinary setup retains the shared root guard across its complete plan
+    /// and application; this helper never recursively acquires that guard.
+    pub fn initialize_for_setup_locked(
+        &self,
+        repo_root: &Path,
+        guard: &RepositoryInitializationGuardV1,
+    ) -> Result<RepositoryIdentityInitializationV1, RepositoryIdentitySetupErrorV1> {
+        self.initialize_for_setup_locked_with_persistence(
+            repo_root,
+            guard,
+            |entropy| getrandom::fill(entropy).map_err(|_| ()),
+            persist_repository_identity,
+        )
+    }
+
+    fn initialize_for_setup_locked_with_persistence<F, P>(
+        &self,
+        repo_root: &Path,
+        guard: &RepositoryInitializationGuardV1,
+        fill_entropy: F,
+        persist_identity: P,
+    ) -> Result<RepositoryIdentityInitializationV1, RepositoryIdentitySetupErrorV1>
+    where
+        F: FnOnce(&mut [u8]) -> Result<(), ()>,
+        P: FnOnce(&Path, &str) -> Result<(), RepositoryIdentitySetupErrorV1>,
+    {
+        let absolute_root = std::path::absolute(repo_root).map_err(|_| {
+            setup_error(
+                RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
+                "repository root could not be resolved for locked initialization",
+            )
+        })?;
+        if guard.root().initialization_root_path() != absolute_root {
+            return Err(setup_error(
+                RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
+                "repository initialization guard names another root",
+            ));
+        }
+        guard.validate_ordinary_setup().map_err(|_| {
+            setup_error(
+                RepositoryIdentitySetupErrorKindV1::UnsafeIdentityState,
+                "native repository initialization closure is unresolved or unsafe",
+            )
+        })?;
         let _locks = RegistryAuthorityLocks::acquire(repo_root).map_err(|_| {
             setup_error(
                 RepositoryIdentitySetupErrorKindV1::AuthorityRecoveryBlocked,

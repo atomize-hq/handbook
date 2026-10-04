@@ -527,6 +527,13 @@ fn retained_governance_files(root: &Path) -> BTreeMap<String, Vec<u8>> {
         }
     }
     let mut result = BTreeMap::new();
+    for entry in fs::read_dir(root).unwrap() {
+        let entry = entry.unwrap();
+        let name = entry.file_name().into_string().unwrap();
+        if name.starts_with(".handbook-") {
+            collect(&entry.path(), &name, &mut result);
+        }
+    }
     for entry in fs::read_dir(root.join(".handbook")).unwrap() {
         let entry = entry.unwrap();
         let name = entry.file_name().into_string().unwrap();

@@ -64,6 +64,7 @@ mod project_posture_tests;
 #[allow(dead_code)]
 mod projection;
 pub mod repository_durability;
+pub mod repository_initialization;
 pub mod repository_invocation_identity;
 pub mod schema_registry;
 pub mod semantic_capability_registry;
@@ -291,6 +292,11 @@ pub use repository_durability::{
     RepositoryDirectoryEntryKindV1, RepositoryDirectoryEntryV1, RepositoryDurabilityErrorKindV1,
     RepositoryDurabilityErrorV1, RepositoryExclusiveLockV1, RepositoryReadV1,
     RetainedRepositoryRootV1,
+};
+pub use repository_initialization::{
+    RepositoryInitializationClaimV1, RepositoryInitializationDispositionV1,
+    RepositoryInitializationGuardV1, REPOSITORY_INITIALIZATION_CLAIM_PATH_V1,
+    REPOSITORY_INITIALIZATION_LOCK_PATH_V1, REPOSITORY_INITIALIZATION_RECEIPT_PATH_V1,
 };
 pub use repository_invocation_identity::{
     PreparedRepositoryIdentityV1, RepositoryIdentityAllocationErrorV1,

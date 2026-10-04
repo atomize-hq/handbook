@@ -15,6 +15,93 @@ use std::path::Path;
 use tempfile::tempdir;
 
 use crate::doctor::doctor_with_decisions;
+
+#[test]
+fn pending_native_reservation_refuses_init_refresh_and_reset_without_identity_substitution() {
+    for create_root in [false, true] {
+        let repo = tempdir().unwrap();
+        let retained = handbook_engine::RetainedRepositoryRootV1::open_exact(repo.path()).unwrap();
+        let identity = handbook_engine::RepositoryInvocationIdentityServiceV1::new()
+            .allocate_prepared_repository_identity()
+            .unwrap();
+        let claim = handbook_engine::RepositoryInitializationClaimV1::prepare(
+            repo.path(),
+            &retained,
+            "handbook-contracts.admission-deferral.v2",
+            &format!("sha256:{}", "1".repeat(64)),
+            identity.repository_identity_fingerprint(),
+        )
+        .unwrap();
+        let guard = handbook_engine::RepositoryInitializationGuardV1::acquire(repo.path()).unwrap();
+        guard.retain_native_claim(&claim).unwrap();
+        if create_root {
+            guard
+                .root()
+                .create_directory_new_durable(".handbook")
+                .unwrap();
+            guard
+                .root()
+                .create_directories(".handbook/state/runtime")
+                .unwrap();
+            guard
+                .root()
+                .write_new_durable(".handbook/state/runtime/sentinel", b"retained")
+                .unwrap();
+        }
+        guard.release().unwrap();
+        let request = SetupRequest {
+            mode: if create_root {
+                SetupMode::Refresh
+            } else {
+                SetupMode::Init
+            },
+            rewrite: false,
+            reset_state: create_root,
+        };
+        let result = crate::HandbookSdkV1::open(repo.path()).run_setup(&request);
+        assert_eq!(
+            result.unwrap_err().code(),
+            SetupErrorCode::RepositoryIdentityUnsafe
+        );
+        assert!(!repo.path().join(REPOSITORY_IDENTITY_REPO_PATH).exists());
+        if create_root {
+            assert_eq!(
+                fs::read(repo.path().join(".handbook/state/runtime/sentinel")).unwrap(),
+                b"retained"
+            );
+        } else {
+            assert!(!repo.path().join(".handbook").exists());
+        }
+    }
+}
+
+#[test]
+fn ordinary_setup_keeps_the_root_guard_until_plan_application() {
+    let repo = tempdir().unwrap();
+    let execution =
+        crate::setup::prepare_setup_execution(repo.path(), &SetupRequest::default()).unwrap();
+    let (started_tx, started_rx) = std::sync::mpsc::channel();
+    let (done_tx, done_rx) = std::sync::mpsc::channel();
+    let path = repo.path().to_owned();
+    let contender = std::thread::spawn(move || {
+        started_tx.send(()).unwrap();
+        let guard = handbook_engine::RepositoryInitializationGuardV1::acquire(path).unwrap();
+        done_tx.send(guard.require_fresh().is_err()).unwrap();
+    });
+    started_rx
+        .recv_timeout(std::time::Duration::from_secs(5))
+        .unwrap();
+    assert!(done_rx
+        .recv_timeout(std::time::Duration::from_millis(75))
+        .is_err());
+    let applied = apply_setup_execution(repo.path(), execution);
+    assert!(applied.result().is_ok());
+    assert!(done_rx
+        .recv_timeout(std::time::Duration::from_secs(5))
+        .unwrap());
+    contender.join().unwrap();
+}
+
 #[cfg(unix)]
 use handbook_engine::{
     resolve_profile_selection, shipped_root_artifact_instance_values, ArtifactInstanceRegistry,

@@ -1,6 +1,7 @@
 //! One native new-project establishment. No candidate admission or replacement API.
 //!
-//! Lock order: owner process mutex, retained native governance lock, then Engine
+//! Lock order: owner process mutex, Engine root initialization guard, retained
+//! native governance lock, then Engine
 //! prepared identity persistence (which takes no registry/Context Resolution lock).
 //! The immutable reservation anchor is never reset. Its consumption is an append
 //! in the same decided transaction as activation; usable truth requires terminal
@@ -8,12 +9,19 @@
 
 mod types;
 pub use types::*;
+mod deferral;
+mod deferral_types;
+pub use deferral::*;
+pub use deferral_types::*;
+mod scope;
+pub use scope::*;
 
 use crate::FingerprintV1;
 use handbook_engine::{
     PreparedRepositoryIdentityV1, RepositoryDirectoryEntryKindV1, RepositoryDurabilityErrorKindV1,
-    RepositoryInvocationIdentityServiceV1, RepositoryReadV1, RetainedRepositoryRootV1,
-    REPOSITORY_IDENTITY_REPO_PATH,
+    RepositoryInitializationClaimV1, RepositoryInitializationDispositionV1,
+    RepositoryInitializationGuardV1, RepositoryInvocationIdentityServiceV1, RepositoryReadV1,
+    RetainedRepositoryRootV1, REPOSITORY_IDENTITY_REPO_PATH,
 };
 use serde::{Deserialize, Serialize};
 use std::path::Path;
@@ -177,7 +185,15 @@ impl ProjectAdmissionGovernanceV1 {
             .list_directory_bounded("", 4096)
             .map_err(fs_refusal)?
             .iter()
-            .any(|e| e.name() == ".handbook")
+            .any(|e| {
+                matches!(
+                    e.name(),
+                    ".handbook"
+                        | ".handbook-initialization.v1.json"
+                        | ".handbook-initialization-receipt.v1.json"
+                        | DEFERRAL_NONCOMMIT_PATH_V2
+                )
+            })
         {
             return Err(refusal(
                 "initial_registration_unavailable",
@@ -232,23 +248,32 @@ impl ProjectAdmissionGovernanceV1 {
                 .lock()
                 .map_err(|_| refusal("lock_unavailable", "Owner process lock is unavailable"))?;
             let retained = exact_root(root.as_ref(), &locator.project)?;
-            // An AlreadyExists error is positive evidence this call did not reserve.
-            may_have_reserved = true;
-            match retained.create_directory_new_durable(".handbook") {
-                Ok(()) => {}
-                Err(error) if error.kind() == RepositoryDurabilityErrorKindV1::AlreadyExists => {
-                    return Ok(GovernanceExecutionV1::Refused {
-                        refusal: refusal(
-                            "initial_registration_unavailable",
-                            "An existing root cannot receive new-project registration",
-                        )
-                        .with_project(locator.project.clone()),
-                    })
+            let guard =
+                RepositoryInitializationGuardV1::acquire(root.as_ref()).map_err(fs_refusal)?;
+            guard.require_fresh().map_err(|error| {
+                if error.kind() == RepositoryDurabilityErrorKindV1::AlreadyExists {
+                    refusal(
+                        "initial_registration_unavailable",
+                        "An existing or reserved root cannot receive new-project registration",
+                    )
+                    .with_project(locator.project.clone())
+                } else {
+                    fs_refusal(error)
                 }
-                Err(error) => return Err(fs_refusal(error)),
-            }
+            })?;
+            let claim = initialization_claim_v1(root.as_ref(), &retained, &locator)?;
+            // Retain the reservation before any .handbook mutation. Neither a
+            // pending nor a noncommitted native reservation is ordinary retry.
+            may_have_reserved = true;
+            guard.retain_native_claim(&claim).map_err(fs_refusal)?;
+            // Once the claim exists, even a root-creation error requires exact
+            // resolution; it cannot report this reservation as a clean retry.
+            retained
+                .create_directory_new_durable(".handbook")
+                .map_err(fs_refusal)?;
             self.boundary(GovernanceFaultBoundaryV1::Reservation)?;
             let _native = retained.acquire_exclusive_lock(LOCK).map_err(fs_refusal)?;
+            _native.validate_at(&retained, LOCK).map_err(fs_refusal)?;
             retained
                 .write_new_durable(
                     GOVERNANCE_ANCHOR_PATH_V1,
@@ -257,7 +282,7 @@ impl ProjectAdmissionGovernanceV1 {
                 .map_err(fs_refusal)?;
             self.boundary(GovernanceFaultBoundaryV1::Anchor)?;
             RepositoryInvocationIdentityServiceV1::new()
-                .persist_prepared_repository_identity(&retained, identity)
+                .persist_prepared_repository_identity_locked(&guard, identity)
                 .map_err(fs_refusal)?;
             self.boundary(GovernanceFaultBoundaryV1::Identity)?;
             retained
@@ -267,6 +292,8 @@ impl ProjectAdmissionGovernanceV1 {
             write(&retained, "registration.json", &facts.registration)?;
             self.boundary(GovernanceFaultBoundaryV1::Registration)?;
             for (i, bytes) in facts.staged.iter().enumerate() {
+                guard.validate().map_err(fs_refusal)?;
+                _native.validate_at(&retained, LOCK).map_err(fs_refusal)?;
                 write(&retained, &format!("stage-{i}.json"), bytes)?;
                 self.boundary(GovernanceFaultBoundaryV1::Stage(i))?;
             }
@@ -274,6 +301,8 @@ impl ProjectAdmissionGovernanceV1 {
             self.boundary(GovernanceFaultBoundaryV1::Intent)?;
             // Compare exact positive unused registration, request and no predecessor
             // immediately before the decision. Every current fact must be a prefix.
+            guard.validate().map_err(fs_refusal)?;
+            _native.validate_at(&retained, LOCK).map_err(fs_refusal)?;
             let state = inspect(&retained, &locator, &facts)?;
             if !state.intent
                 || state.decision
@@ -288,10 +317,19 @@ impl ProjectAdmissionGovernanceV1 {
             }
             write(&retained, "decision.json", &facts.decision)?;
             self.boundary(GovernanceFaultBoundaryV1::Decision)?;
-            self.finish(&retained, &facts, 0)?;
+            self.finish(&retained, &guard, &_native, &facts, 0)?;
             inspect(&retained, &locator, &facts)?;
+            guard
+                .complete_native_claim(
+                    &claim,
+                    RepositoryInitializationDispositionV1::Committed,
+                    &path("terminal.json"),
+                    &facts.terminal,
+                )
+                .map_err(fs_refusal)?;
             self.boundary(GovernanceFaultBoundaryV1::Reply)?;
             _native.release().map_err(fs_refusal)?;
+            guard.release().map_err(fs_refusal)?;
             Ok(GovernanceExecutionV1::Committed {
                 outcome: facts.outcome,
                 delivery: GovernanceDeliveryV1::Original,
@@ -321,8 +359,12 @@ impl ProjectAdmissionGovernanceV1 {
                 .lock()
                 .map_err(|_| refusal("lock_unavailable", "Owner process lock is unavailable"))?;
             let retained = exact_root(root.as_ref(), &locator.project)?;
+            let guard =
+                RepositoryInitializationGuardV1::acquire(root.as_ref()).map_err(fs_refusal)?;
+            let claim = initialization_claim_v1(root.as_ref(), &retained, locator)?;
             require_existing_lock(&retained)?;
             let native = retained.acquire_exclusive_lock(LOCK).map_err(fs_refusal)?;
+            native.validate_at(&retained, LOCK).map_err(fs_refusal)?;
             let original_bytes = read(&retained, GOVERNANCE_ANCHOR_PATH_V1)?.ok_or_else(|| {
                 refusal(
                     "registration_missing",
@@ -341,22 +383,45 @@ impl ProjectAdmissionGovernanceV1 {
                     .with_project(original.project),
                 });
             }
+            let claimed = guard.observe_native_claim(&claim).map_err(fs_refusal)?;
             let facts = Facts::new(locator)?;
             let state = inspect(&retained, locator, &facts)?;
             if state.terminal {
+                if claimed {
+                    guard
+                        .complete_native_claim(
+                            &claim,
+                            RepositoryInitializationDispositionV1::Committed,
+                            &path("terminal.json"),
+                            &facts.terminal,
+                        )
+                        .map_err(fs_refusal)?;
+                }
                 native.release().map_err(fs_refusal)?;
+                guard.release().map_err(fs_refusal)?;
                 return Ok(GovernanceExecutionV1::Committed {
                     outcome: facts.outcome,
                     delivery: GovernanceDeliveryV1::Replay,
                 });
             }
             if state.decision {
-                self.finish(&retained, &facts, state.installed)?;
+                self.finish(&retained, &guard, &native, &facts, state.installed)?;
                 let verified = inspect(&retained, locator, &facts)?;
                 if !verified.terminal {
                     return Err(refusal("terminal_missing", "Commit has not closed"));
                 }
+                if claimed {
+                    guard
+                        .complete_native_claim(
+                            &claim,
+                            RepositoryInitializationDispositionV1::Committed,
+                            &path("terminal.json"),
+                            &facts.terminal,
+                        )
+                        .map_err(fs_refusal)?;
+                }
                 native.release().map_err(fs_refusal)?;
+                guard.release().map_err(fs_refusal)?;
                 return Ok(GovernanceExecutionV1::Committed {
                     outcome: facts.outcome,
                     delivery: GovernanceDeliveryV1::Replay,
@@ -365,13 +430,26 @@ impl ProjectAdmissionGovernanceV1 {
             // Only an exact verified predecision prefix with no installation can
             // close as noncommit. A consumed reservation cannot be reinitialized.
             if !state.not_committed {
+                guard.validate().map_err(fs_refusal)?;
+                native.validate_at(&retained, LOCK).map_err(fs_refusal)?;
                 retained
                     .create_directories(GOVERNANCE_STORAGE_PATH_V1)
                     .map_err(fs_refusal)?;
                 write(&retained, "not-committed.json", &facts.not_committed)?;
             }
             inspect(&retained, locator, &facts)?;
+            if claimed {
+                guard
+                    .complete_native_claim(
+                        &claim,
+                        RepositoryInitializationDispositionV1::NotCommitted,
+                        &path("not-committed.json"),
+                        &facts.not_committed,
+                    )
+                    .map_err(fs_refusal)?;
+            }
             native.release().map_err(fs_refusal)?;
+            guard.release().map_err(fs_refusal)?;
             Ok(GovernanceExecutionV1::NotCommitted {
                 outcome: facts.noncommit,
                 delivery: GovernanceDeliveryV1::Replay,
@@ -422,8 +500,13 @@ impl ProjectAdmissionGovernanceV1 {
                     refusal("lock_unavailable", "Owner process lock is unavailable")
                 })?;
                 let retained = exact_root(root.as_ref(), project)?;
+                let guard =
+                    RepositoryInitializationGuardV1::acquire(root.as_ref()).map_err(fs_refusal)?;
+                let claim = initialization_claim_v1(root.as_ref(), &retained, &locator)?;
+                let claimed = guard.observe_native_claim(&claim).map_err(fs_refusal)?;
                 require_existing_lock(&retained)?;
                 let native = retained.acquire_exclusive_lock(LOCK).map_err(fs_refusal)?;
+                native.validate_at(&retained, LOCK).map_err(fs_refusal)?;
                 let facts = Facts::new(&locator)?;
                 let state = inspect(&retained, &locator, &facts)?;
                 if !state.terminal {
@@ -431,6 +514,16 @@ impl ProjectAdmissionGovernanceV1 {
                         "active_unverifiable",
                         "Complete terminal governance is required",
                     ));
+                }
+                if claimed {
+                    guard
+                        .require_native_terminal(
+                            &claim,
+                            RepositoryInitializationDispositionV1::Committed,
+                            &path("terminal.json"),
+                            &facts.terminal,
+                        )
+                        .map_err(fs_refusal)?;
                 }
                 if let Some(expected) = expected {
                     if expected.configuration_fingerprint != facts.active.configuration_fingerprint
@@ -443,6 +536,7 @@ impl ProjectAdmissionGovernanceV1 {
                     }
                 }
                 native.release().map_err(fs_refusal)?;
+                guard.release().map_err(fs_refusal)?;
                 Ok(facts.active)
             }
             GovernanceExecutionV1::Refused { refusal } => Err(refusal),
@@ -459,16 +553,37 @@ impl ProjectAdmissionGovernanceV1 {
     fn finish(
         &self,
         retained: &RetainedRepositoryRootV1,
+        guard: &RepositoryInitializationGuardV1,
+        native: &handbook_engine::RepositoryExclusiveLockV1,
         facts: &Facts,
         installed: usize,
     ) -> Result<(), GovernanceRefusalV1> {
         for (i, target) in TARGETS.iter().enumerate().skip(installed) {
+            guard.validate().map_err(fs_refusal)?;
+            native.validate_at(retained, LOCK).map_err(fs_refusal)?;
             write(retained, target, &facts.staged[i])?;
             self.boundary(GovernanceFaultBoundaryV1::Installation(i))?;
         }
+        guard.validate().map_err(fs_refusal)?;
+        native.validate_at(retained, LOCK).map_err(fs_refusal)?;
         write(retained, "terminal.json", &facts.terminal)?;
         self.boundary(GovernanceFaultBoundaryV1::Terminal)
     }
+}
+
+fn initialization_claim_v1(
+    root: &Path,
+    retained: &RetainedRepositoryRootV1,
+    locator: &GovernanceRequestLocatorV1,
+) -> Result<RepositoryInitializationClaimV1, GovernanceRefusalV1> {
+    RepositoryInitializationClaimV1::prepare(
+        root,
+        retained,
+        "handbook-contracts.admission-establishment.v1",
+        locator.request_fingerprint.as_str(),
+        &locator.project.repository_identity_fingerprint,
+    )
+    .map_err(fs_refusal)
 }
 
 struct Facts {

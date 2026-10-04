@@ -18,9 +18,62 @@ pub use handbook_contracts::project_admission_governance::{
 };
 pub use handbook_contracts::{ExactBindingV1, ExactRefV1, FingerprintV1};
 
+pub use handbook_contracts::project_admission_governance::{
+    DeferralCommittedOutcomeV2, DeferralExecutionV2, DeferralNotCommittedOutcomeV2,
+    DeferralRequestInputV2, DeferralRequestLocatorV2, DeferredGovernanceBasisV2,
+    ExpectedDeferredBasisV2, ExpectedInitialStateV2, ExpectedProjectAdmissionBasisV2,
+    GovernanceRuleDescriptorV2, HumanApprovedInitialInstructionV2, InitialGovernanceChoiceV2,
+    PreparedAdmissionDeferralV2, ProjectAdmissionBindingV2, ProjectAdmissionScopeBasisV2,
+    ProjectBindingV2, ValidatedDeferralV2,
+};
+
 use crate::HandbookSdkV1;
 
 impl HandbookSdkV1 {
+    /// Prepares one exact human-approved advisory deferral without effects.
+    /// Serialize the locator before initialization; restoring it permits resolution only.
+    pub fn prepare_project_admission_deferral(
+        &self,
+        request: &DeferralRequestInputV2,
+    ) -> Result<PreparedAdmissionDeferralV2, GovernanceRefusalV1> {
+        handbook_contracts::project_admission_governance::ProjectAdmissionDeferralV2::new()
+            .prepare(&self.repo_root, request)
+    }
+
+    /// Consumes one sealed proposal. Deferral establishes no configuration or permission to evaluate.
+    pub fn initialize_project_admission_deferral(
+        &self,
+        prepared: PreparedAdmissionDeferralV2,
+    ) -> DeferralExecutionV2 {
+        handbook_contracts::project_admission_governance::ProjectAdmissionDeferralV2::new()
+            .initialize(&self.repo_root, prepared)
+    }
+
+    /// Resolves exactly the selected project contract and scope. This says nothing
+    /// about another required scope, qualification, operating delegation or action authority.
+    pub fn resolve_project_admission_scope(
+        &self,
+        project: &ProjectAdmissionBindingV2,
+        scope: &str,
+        expected: Option<&ExpectedProjectAdmissionBasisV2>,
+    ) -> Result<ProjectAdmissionScopeBasisV2, GovernanceRefusalV1> {
+        handbook_contracts::project_admission_governance::resolve_project_admission_scope(
+            &self.repo_root,
+            project,
+            scope,
+            expected,
+        )
+    }
+
+    /// Resolves the original request; terminal replay never restores an old current relation.
+    pub fn resolve_admission_deferral_request(
+        &self,
+        locator: &DeferralRequestLocatorV2,
+    ) -> DeferralExecutionV2 {
+        handbook_contracts::project_admission_governance::ProjectAdmissionDeferralV2::new()
+            .resolve_request(&self.repo_root, locator)
+    }
+
     /// Validates an explicit new-project instruction and prepares its exact identity.
     ///
     /// This method does not mutate the repository or grant initial eligibility.

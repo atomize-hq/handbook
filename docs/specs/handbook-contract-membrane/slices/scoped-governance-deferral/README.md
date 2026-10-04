@@ -1,11 +1,13 @@
 # Positive scoped governance deferral
 
-Status: **Current slice plan prepared for human authorization; unimplemented**.
+Status: **Packet 1 implemented; meta validation and human review pending**.
 Prepared 2026-10-04 against `a7e93f29fcb93ad21785f27ac395824659f6cf60` on
 `feat/handbook-contract-membrane-clean`. The human authorized this bounded
 slice-authority preparation and local documentation commit. That authorization
-does not authorize product edits. `AUTHORITY_READY` means this plan is ready,
-not that Packet 1 is approved or delivered.
+did not authorize product edits. The human subsequently authorized dispatch of
+the bounded Packet-1 implementation at plan commit `0b13576`, including its
+packet review boundary. This supersedes the prior awaiting-authorization status;
+it does not authorize later establishment or broader independent-use work.
 
 Descriptive slice identity: `scoped-governance-deferral`; no phase number is
 assigned. The [entry point](../../README.md), [program shape](../../coverage-and-landing-map.md#proposed-next-slice-shape-scoped-governance-deferral),
@@ -188,6 +190,24 @@ nor authenticated tamper resistance against total administrative rewriting/erasu
 Total loss of P's anchors remains unavailable, never recovery by a fresh identity.
 
 ## Initialization concurrency and truthful recovery
+
+Packet-1 just-in-time selections preserve the boundaries below. Engine retains
+strict canonical JSON claim/receipt bytes and a pinned physical lock identity
+with its native creation/write/change generation. The Engine claim envelope and
+v2 owner anchor retain the respective lock binding; portable locator/outcome
+identities remain separate. Its receipt names the exact Contracts terminal path
+and digest. An interrupted
+pre-root deferral closes only a verified prefix through the immutable root-level
+`.handbook-admission-deferral-noncommit.v2.json` owner witness, without recreating
+`.handbook`. V2 registration binds identity and root independently of the first
+request; the claim binds the separately digested complete request. Immutable
+request history includes the original relation snapshot, while live
+`scope-current.json` remains a separate selection. Terminal historical replay
+never repairs that live selection. Explicit version tags select v1 establishment
+or v2 scoped-choice current resolution. Post-acquisition file/parent durability
+confirmation belongs to the root initialization guard; existing generic runtime
+locks do not gain an extra flush on acquisition. These selections add no
+transition API.
 
 Reuse the Engine retained-root native-lock mechanism for a fixed project-root
 `.handbook-initialization.lock`, outside `.handbook` and `.handbook/state`, so it
@@ -382,3 +402,41 @@ GitNexus change detection. Stale/foreign index and Node warnings limit graph
 evidence; neither a whole-main critical branch report nor a clean causal verdict
 certifies this delta's product behavior. No Rust test, external check, deferral
 implementation or future establishment proof is claimed by this planning commit.
+
+## Packet-1 implementation evidence
+
+The native [deferral owner](../../../../../crates/contracts/src/project_admission_governance/deferral.rs),
+[Engine initialization guard](../../../../../crates/engine/src/repository_initialization.rs)
+and typed SDK methods implement the one initial deferred transition. A committed
+result reopens to the exact never-established basis and replays the original
+request separately from current relation selection. Pending, damaged, substituted
+and non-prefix evidence cannot supply a usable basis or reusable reservation.
+Owner storage, including empty directories, requires the exact published identity;
+an earlier exact temporary-identity prefix alone remains recoverable as noncommit.
+The retained pre-root noncommit witness freezes fresh and ordinary initialization
+after partial claim/receipt loss, including refusal to recreate a missing root lock.
+Engine checks that selected witness's presence without interpreting owner meaning.
+
+Focused Windows verification passed 31 new Contracts tests and 20 SDK deferral/v1
+tests. Error and subprocess-crash recovery cover 23 initialization boundaries;
+crash recovery also covers two noncommit-closure boundaries. Actual SDK contenders
+cover the paused claim,
+reservation and anchor windows. Real SDK refresh/reset preserves the claim,
+locks and governance history. Existing v1 admission-governance
+owner/repository/process tests, Engine
+identity/durability tests and 15 initialization tests, SDK setup tests and the scoped
+Contracts/Engine/SDK compile passed. Catalogs remain `62 / 35 / 180 / 7`.
+Windows junction/reparse, hard-link, root/lock replacement and native lock-generation
+cases executed. Unix-specific symlink and ancestor-epoch branches were inspected but
+not executed on this Windows host. No later establishment, qualification,
+evaluation/action authority, onboarding or installed-skill outcome is delivered.
+
+Additional shared-lock checks passed Dock store (6), Engine authority admission
+(10) and grounding (1). The broader Contracts owner suite returned 22 passed / 3
+failed / 1 ignored before the generic-flush restoration, then 24 / 1 / 1 after it;
+every failed target passed alone. The exact starting-revision baseline returned
+25 / 0 / 1. A temporary baseline Windows diagnostic reproduced an existing
+credential-admission preflight refusal when reading an already-held empty
+promotion lock (OS error 33), before authentication or owner effects. This is a
+mechanism consistent with the remaining cross-process failure; the specific
+suite failure is not attributed, and no clean broader-suite result is claimed.

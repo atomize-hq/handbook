@@ -9,6 +9,22 @@ const REPOSITORY_IDENTITY: &str =
     "sha256:ee7147baa7ae6a6d858d9e253e503bc8c90c2ba23a5f1096b5717d1c3231e1db";
 
 #[test]
+fn direct_identity_setup_refuses_an_unresolved_native_reservation_before_root_creation() {
+    let repo = tempfile::tempdir().unwrap();
+    std::fs::write(
+        repo.path().join(".handbook-initialization.v1.json"),
+        b"{\"damaged_native_claim\":true}",
+    )
+    .unwrap();
+    let result = RepositoryInvocationIdentityServiceV1::new().initialize_for_setup(repo.path());
+    assert!(
+        result.is_err(),
+        "an incomplete native claim cannot be ordinary setup"
+    );
+    assert!(!repo.path().join(".handbook").exists());
+}
+
+#[test]
 fn typed_operations_serialize_to_the_closed_product_domain() {
     let cases = [
         (

@@ -9,8 +9,8 @@ use crate::route_state::{
 use handbook_engine::{
     inspect_profile_repository, resolve_shipped_profile_decisions,
     RepositoryIdentityInitializationDispositionV1, RepositoryIdentitySetupEffectV1,
-    RepositoryIdentitySetupErrorKindV1, RepositoryInvocationIdentityServiceV1,
-    ResolvedProfileDecisions, ShippedProfileDecisionError,
+    RepositoryIdentitySetupErrorKindV1, RepositoryInitializationGuardV1,
+    RepositoryInvocationIdentityServiceV1, ResolvedProfileDecisions, ShippedProfileDecisionError,
 };
 use std::fs;
 use std::path::Path;
@@ -374,6 +374,7 @@ pub(crate) struct SetupExecutionPlan {
     plan: SetupPlan,
     status: RepositoryReadinessStatus,
     reset_plan: Option<RuntimeStateResetPlan>,
+    initialization_guard: Option<RepositoryInitializationGuardV1>,
 }
 
 #[derive(Debug, Default)]
@@ -481,10 +482,17 @@ pub(crate) fn prepare_setup_execution(
     repo_root: &Path,
     request: &SetupRequest,
 ) -> Result<SetupExecutionPlan, SetupError> {
+    let guard = acquire_setup_guard(repo_root)?;
     let root = inspect_root(repo_root)?;
     let (resolved_mode, root_action) = validate_root_and_request(root, request)?;
+    guard
+        .validate_ordinary_setup()
+        .map_err(|_| SetupError::from_code(SetupErrorCode::RepositoryIdentityUnsafe))?;
     let decisions = resolve_shipped_profile_decisions(repo_root).map_err(map_profile_error)?;
-    build_setup_execution_plan(repo_root, request, resolved_mode, root_action, &decisions)
+    let mut execution =
+        build_setup_execution_plan(repo_root, request, resolved_mode, root_action, &decisions)?;
+    execution.initialization_guard = Some(guard);
+    Ok(execution)
 }
 
 pub(crate) fn prospective_setup_execution(execution: &SetupExecutionPlan) -> SetupExecutionResult {
@@ -538,9 +546,16 @@ pub(crate) fn run_setup_with_effects_and_decisions(
 ) -> SetupExecutionResult {
     let repo_root = repo_root.as_ref();
     let execution = (|| {
+        let guard = acquire_setup_guard(repo_root)?;
         let root = inspect_root(repo_root)?;
         let (resolved_mode, root_action) = validate_root_and_request(root, request)?;
-        build_setup_execution_plan(repo_root, request, resolved_mode, root_action, decisions)
+        guard
+            .validate_ordinary_setup()
+            .map_err(|_| SetupError::from_code(SetupErrorCode::RepositoryIdentityUnsafe))?;
+        let mut execution =
+            build_setup_execution_plan(repo_root, request, resolved_mode, root_action, decisions)?;
+        execution.initialization_guard = Some(guard);
+        Ok(execution)
     })();
     match execution {
         Ok(execution) => apply_setup_execution(repo_root, execution),
@@ -660,6 +675,7 @@ fn build_setup_execution_plan(
             reset_paths,
         },
         reset_plan,
+        initialization_guard: None,
     })
 }
 
@@ -689,9 +705,38 @@ fn setup_action(artifact: &ProfileArtifactRow) -> SetupArtifactActionKind {
 
 pub(crate) fn apply_setup_execution(
     repo_root: &Path,
-    execution: SetupExecutionPlan,
+    mut execution: SetupExecutionPlan,
 ) -> SetupExecutionResult {
     let mut effects = SetupExecutionEffects::default();
+    let guard = match execution.initialization_guard.take() {
+        Some(guard) => guard,
+        None => match acquire_setup_guard(repo_root) {
+            Ok(guard) => guard,
+            Err(error) => return SetupExecutionResult::new(Err(error), effects),
+        },
+    };
+    if guard.validate_ordinary_setup().is_err() {
+        return SetupExecutionResult::new(
+            Err(SetupError::from_code(
+                SetupErrorCode::RepositoryIdentityUnsafe,
+            )),
+            effects,
+        );
+    }
+    // Detached test plans and any changed root must be rechecked under the
+    // retained guard before the first root/reset effect.
+    match (inspect_root(repo_root), execution.plan.root_action) {
+        (Ok(RootState::Missing), SetupRootAction::Create)
+        | (Ok(RootState::Directory), SetupRootAction::Preserve) => {}
+        _ => {
+            return SetupExecutionResult::new(
+                Err(SetupError::from_code(
+                    SetupErrorCode::CanonicalRootInspectFailed,
+                )),
+                effects,
+            )
+        }
+    }
     let may_reset_runtime_state = matches!(
         execution.status,
         RepositoryReadinessStatus::Ready | RepositoryReadinessStatus::ActionRequired
@@ -727,7 +772,9 @@ pub(crate) fn apply_setup_execution(
             }
         }
     }
-    match RepositoryInvocationIdentityServiceV1::new().initialize_for_setup(repo_root) {
+    match RepositoryInvocationIdentityServiceV1::new()
+        .initialize_for_setup_locked(repo_root, &guard)
+    {
         Ok(initialization) => {
             if initialization.disposition()
                 == RepositoryIdentityInitializationDispositionV1::Created
@@ -747,6 +794,14 @@ pub(crate) fn apply_setup_execution(
             return SetupExecutionResult::new(Err(map_repository_identity_error(error)), effects);
         }
     }
+    if guard.release().is_err() {
+        return SetupExecutionResult::new(
+            Err(SetupError::from_code(
+                SetupErrorCode::RepositoryIdentityPersistenceFailed,
+            )),
+            effects,
+        );
+    }
     SetupExecutionResult::new(
         Ok(SetupOutcome {
             plan: execution.plan,
@@ -755,6 +810,13 @@ pub(crate) fn apply_setup_execution(
         }),
         effects,
     )
+}
+
+fn acquire_setup_guard(repo_root: &Path) -> Result<RepositoryInitializationGuardV1, SetupError> {
+    let absolute_root = std::path::absolute(repo_root)
+        .map_err(|_| SetupError::from_code(SetupErrorCode::RepositoryIdentityUnsafe))?;
+    RepositoryInitializationGuardV1::acquire(absolute_root)
+        .map_err(|_| SetupError::from_code(SetupErrorCode::RepositoryIdentityUnsafe))
 }
 
 fn map_repository_identity_error(
