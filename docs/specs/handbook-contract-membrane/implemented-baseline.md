@@ -29,6 +29,16 @@ Execution-unit identity comes from the [`work-unit lifecycle`](work-unit-lifecyc
 
 These are product-state labels only. None is a lifecycle state, authorization, phase-exit verdict, or promise of future scope.
 
+## HR-007 semantic approval is not product delivery
+
+The [governance amendment](semantic-model/amendments/governance-defaults-and-delegated-operation.md)
+was approved on 2026-10-04. This documentation-only landing changes no product
+classification. The completed [fresh-project establishment slice](slices/admission-governance-establishment/README.md)
+remains narrow; the amendment's full independent-use path, later establishment,
+replaceable selections and retrospective qualification are not established as
+delivered by that slice. Adaptive skill-guided intake must remain distinct from
+native setup and deterministic owner operations when preparing subsequent work.
+
 ## Verified domain baseline
 
 | Domain | State | Current boundary |

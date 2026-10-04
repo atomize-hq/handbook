@@ -49,12 +49,14 @@ questions, accepted amendments awaiting audit, and completed bounded reviews;
 consolidation alone resolves none of them.
 
 The [governance defaults and delegated-operation amendment](amendments/governance-defaults-and-delegated-operation.md)
-is **Proposed for human semantic sign-off** under HR-007. It proposes independent
-complete-contract evaluation during deliberate governance deferral and identifies
-bounded current qualification of earlier direct decision-seeking results under
-explicitly adopted protocols, with safeguards for governance selected after results
-are known. Its exact activation edits remain prospective; approved base provisions
-remain operative meanwhile.
+was **approved on 2026-10-04** under HR-007 and its bounded activation edits are
+integrated below and in the four owning parts. It establishes independent complete-
+contract evaluation during deliberate deferral and bounded current qualification
+of earlier direct decision-seeking results under adopted protocols, with safeguards
+against result-fitting governance. G1–G6 references below name that amendment.
+The skill-guided agent conducts adaptive questions/options and submits structured
+inputs through CLI/SDK; native owners deterministically validate authority,
+requirements and state changes. Semantic approval does not claim implementation.
 For subsequent planning, read applicable amendments from this entry point and
 carry their approval status into the work. Proposed wording is a decision input,
 not approved semantic or implementation authority.
@@ -82,7 +84,7 @@ identity, currentness, and refusal boundary defined in the owning part; it is
 not permission to skip a stage or a declaration that every stage always occurs.
 
 ```text
-authored governance and independently admitted definitions
+owner-established complete definitions + exact governance applicability and required project qualification
   -> complete Evaluation Requirements from either:
        scoped posture and assurance selection, OR direct contract resolution
   -> prospective applicability / observation plan
@@ -90,13 +92,12 @@ authored governance and independently admitted definitions
   -> Engine evaluation authorization + capability facts for actual selections
   -> readiness and attempt disposition
   -> Prospective Evaluation Basis, if attemptable
-  -> resolve governing target/assessment relationship before commitment,
-       when this assessment is intended to discharge governed completion
+  -> resolve governing target/assessment relationship before commitment for the prospectively governed protocol under G5
   -> ordinary collection commitment, attempts/terminals, and sealed frontier
        OR complete-pruning commitment and sealed empty frontier in one owner outcome
   -> canonical evidence-set closure and final evaluation context
   -> immutable applicability / claim / metric / gate / explanation truth
-  -> resolve current governing-completion relationship and verify assessment coverage, when applicable
+  -> resolve current governing requirements/protocol and verify assessment coverage or qualify exact earlier results under G5, when applicable
   -> action-specific Operational Reliance Basis, if present use is requested
   -> one atomic Determination: eligibility + fixed disposition, or Refusal
   -> congruent Action Intent, only after eligible / allow
@@ -129,19 +130,23 @@ be admitted as a Posture Observation, support a separate recommendation, and
 then enter transition-specific reliance and the separate action chain. It cannot
 rewrite the evaluation's original posture or mutate posture by itself.
 
-An admitted contract is either **Diagnostic-only** or **Decision-seeking eligible**.
+An owner-established complete contract is either **Diagnostic-only** or **Decision-seeking eligible**.
 These describe allowed run intent, not quality, maturity, or project approval.
 Changing the value requires a newly admitted revision. Requirements may come
 directly from an exact contract or from project posture; both routes must close
 the complete rules before execution. A pass answers only that exact question.
 
-For governed completion, the responsible action owner independently identifies
-the actual project standard and target. Its required assessment must use a
-Decision-seeking eligible contract, posture-selected requirements, and a
-decision-seeking run. The governing relationship must resolve before collection
-or no-collection commitment, and its coverage remains required through any later
-completion commit. Even a passing diagnostic or direct run cannot replace it.
-The assessment is still separate from permission to act and actual completion.
+These run-intent values do not establish project qualification. Complete direct contracts may be evaluated during positive governance deferral under G4–G5.
+
+For governed completion, the action owner independently identifies the actual
+project standard, target and supported adopted assessment protocol. Mandatory
+positive roles require original Decision-seeking eligible/decision-seeking truth.
+A prospective protocol requires governing selection before collection or
+no-collection commitment and posture-selected requirements. An expressly adopted
+retrospective protocol may accept an exact earlier direct result through new
+current owner qualification under G5. Neither setup nor a pass supplies assignment
+or acceptance. Diagnostic results cannot substitute, and all required coverage,
+process conditions, separate authority and through-commit checks remain.
 
 Example: Diagnostic-only C1 checks response shape; its findings inform C2 and a
 later eligible C3. C3 still must be admitted and selected under the actual project
@@ -173,18 +178,18 @@ Details: [object roles](objects-and-governance.md#ontology) and
 
 ### 2. Establish policy-acceptance requirements before accepting a proposed policy
 
-Handbook supplies a fixed starting rule for project setup. Under that rule, a
-project establishes a versioned configuration of acceptance requirements and
-permission for replacing them. Each responsible domain checks proposed policies
-against the active configuration and its own rules. People and agents may write
-proposals; writing or saving one does not activate it. The checks use specified
-inputs and rules, not an AI's general judgment of organizational safety.
+Handbook supplies an exact starting establishment rule and owner conformance
+floors. People approve initial project/Charter/posture choices and delegated
+boundaries, choosing project governance now or deliberately deferring it. When
+selected, governance activates exact versioned qualification requirements and
+replacement authority. Supplied choices are recommendations or replaceable
+defaults, not automatic project policy. Agents can apply approved rules without
+repeated prompts when their authority and required facts resolve.
 
-Project-specific requirements must be supplied before dependent policies can be
-admitted; they do not appear automatically in a charter. Replacement uses previously
-established authority, so a new configuration cannot authorize itself. A permitted
-explicit local instruction may supply setup authority without a login or extra
-approval ceremony.
+Project qualification must be established before dependent governed uses succeed;
+intrinsic owner establishment of complete contract/evaluation definitions does
+not inherently need it. Drafting, validating, qualifying, assigning a governing
+role, and authorizing an action are separate. Replacement cannot authorize itself.
 
 **Example:** An agent proposes “Skip security tests for documentation-only changes.”
 Handbook checks the proposal against the established project requirements and
@@ -197,17 +202,18 @@ Details: [policy admission and project setup](objects-and-governance.md#policy-a
 ### 3. Decide what must be proved before checking whether tools can prove it
 
 Requirements may be selected from project settings or resolved directly from a
-particular accepted contract. Both routes need complete rules for that evaluation.
+particular owner-established complete contract. Both routes need complete rules for that evaluation.
 Project **posture** means scoped settings across separate dimensions, rather than
 one overall strictness score. **Assurance selection** uses those settings and
 accepted policies to choose the required proof. Tool capability is compared with
 that proof afterward; inability to obtain it cannot silently reduce requirements.
 
+Its independent check can produce real results while governance is deliberately deferred, with exact applicability provenance. It cannot satisfy a later governed obligation by relabeling the result.
+
 A **Diagnostic-only** contract permits diagnostic runs only. **Decision-seeking
 eligible** means the contract may be considered for a run intended to support a
 decision, not that it passed or was selected by the project. Changing this
-designation requires a newly accepted revision. Direct and diagnostic runs cannot
-replace the project-selected assessment required for governed completion.
+designation requires a newly accepted revision. Direct results can fill declared current roles only after independently adopted G5 qualification; diagnostic runs cannot fill the mandatory positive assessment role. Required prospective provenance cannot be supplied retrospectively.
 
 **Example:** An early contract checks response shape and passes. The project's
 completion standard also requires security checks. The early pass helps development
@@ -320,11 +326,7 @@ Details: [eligibility and disposition](operational-reliance-and-actions.md#relia
 
 The proposed **Work Progression** responsibility decides local and parent eligibility
 using exact work relationships and required results. It does not change task state
-or rewrite test truth. For governed completion, the action owner establishes the
-actual target and assessment relationship before collection or no-collection
-commitment; later use independently resolves the current relationship and verifies
-the required coverage. The required assessment uses a Decision-seeking
-eligible contract, project-selected requirements, and decision-seeking intent.
+or rewrite test truth. For governed completion the action owner independently resolves the actual target, requirements and adopted protocol. Prospective assessment resolves the governing relationship before collection/no-collection commitment; retrospective acceptance uses new current qualification of exact earlier results under G5. Mandatory roles retain original Decision-seeking eligible/decision-seeking provenance. Both routes require current complete coverage through commit and separate action authority.
 
 **Example:** A child task qualifies for closure. Its parent requires that child
 actually closed plus another child complete. The first child's eligibility satisfies

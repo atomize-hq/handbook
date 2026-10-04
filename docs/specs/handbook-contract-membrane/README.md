@@ -76,6 +76,12 @@ At this checkpoint:
 
 Do not infer current program completion or implementation authority from pre-reset plans or the roadmap. The phase-and-slice map supplies navigation and program status only; it does not prove completion or authorize implementation.
 
+The [HR-007 governance amendment](semantic-model/amendments/governance-defaults-and-delegated-operation.md)
+was human-approved and integrated on 2026-10-04 as semantic planning input.
+The [phase map](phase-and-slice-map.md#hr-007-semantic-landing--2026-10-04)
+records the bounded follow-up preparation boundary. Approval changes neither
+implemented capability nor completed slice history and authorizes no implementation.
+
 ## Authority and navigation
 
 Use the source that owns the question:

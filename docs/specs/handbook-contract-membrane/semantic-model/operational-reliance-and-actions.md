@@ -1,6 +1,6 @@
 # HCM semantic model — Operational reliance and actions
 
-**Status: PROPOSED**
+**Status: APPROVED as semantic input — package approval 2026-09-30; HR-007 integrated 2026-10-04**
 
 Part of the [combined semantic package](README.md). Its approval boundary and
 shared greenfield/current-product distinction apply throughout.
@@ -176,7 +176,7 @@ closeout or another operational effect. It MUST NOT recursively require a relian
 Determination based on the evaluation truth that it enables. Later operational
 use still follows this chapter's full reliance and action chain.
 
-Admission-governance initialization and successor activation follow the bounded
+Admission-governance first establishment at initialization or after positive deferral under G3 and successor activation follow the bounded
 governance lifecycle in
 [Shared policy admission](objects-and-governance.md#establishment-and-replacement-of-governing-admission-requirements).
 They do not require a fabricated historical evaluation or a project action policy
@@ -211,12 +211,14 @@ admitted by its responsible owner through
 and organizational rationale neither admit a policy nor authorize a particular
 action; the action chain below retains its own separate owner results.
 
-These admissions bind the governing configuration and owner-rule basis active at
+Required project qualifications bind the governing configuration and owner-rule basis active at
 the shared decision boundary. Replacing that configuration neither grants action
 authority nor changes historical results or existing policy identities. Current
 policy usability remains subject to the exact owner's and consumer's declared
 dependency/currentness rules; neither blanket revocation nor automatic successor-
 rule compliance follows from replacement.
+
+Intrinsic definition establishment alone cannot activate or assign these policies, authorize an effect, or supply missing governed-reliance inputs. G4's independent evaluation route is not an independent governed-action route.
 
 An Operational Reliance Policy MUST declare before result direction is used:
 
@@ -244,11 +246,44 @@ effect, effect scope, and every action parameter whose value can change
 eligibility under the admitted Operational Reliance Policy. The Basis and its
 Operational Reliance Determination MUST bind that exact action question.
 
-A policy MUST NOT be selected, replaced, or configured after inspecting a
-favorable result direction unless an already admitted higher-order selection
-rule predeclares that exact choice and completely accounts for every candidate.
-No Work Specification prose, transport branch, actor preference, or action
-request may create a policy or select a convenient one ambiently.
+Prior knowledge of results alone MUST NOT prohibit first governance establishment
+on a positively deferred scope. G3's fixed establishment rule, initial human
+approval and exact owner validation supply its authority; a favorable result
+supplies none. This is a bounded replacement of the existing unconditional ban
+on policy selection/configuration after favorable inspection absent a predeclared
+higher-order rule. Ordinary result-driven switching still refuses.
+
+Before activation, the responsible owners MUST close requirements from the actual
+obligation, approved Charter/posture and authoritative sources; the human approves
+the exact initial requirements, protocol, finite eligible populations and delegated
+boundaries under G2. Result knowledge and selection provenance MUST be retained.
+The rule MUST have an independently justified requirement and population basis
+that does not depend on obtaining a favorable outcome. Lowering requirements,
+altering target/scope, moving time cuts or excluding candidates because a known
+result fails is prohibited. Favorable inspection cannot itself justify any choice.
+
+Each consumed role's population MUST bind permitted owners/resolvers or justified
+exact references, kinds/intents, subject/target/scope/occurrence/time relations,
+currentness modes, cardinality/order/composition and deterministic inclusion and
+exclusion rules. Before qualification the owner MUST completely account for every
+matching result and required role: selected, excluded (with rule and reason),
+missing, duplicate, conflicting, unavailable and refused. Known relevant failures
+cannot be hidden outside an artificially narrowed boundary; unresolved completeness
+refuses. Exact references are allowed only with the same independent boundary
+justification and accounting, not as a hand-picked passing subset.
+
+Activation commits the standard, not shipment eligibility. A separate new
+determination applies it to results, whether favorable or unfavorable. No earlier
+higher-order rule is required solely to establish the first standard on an eligible
+deferred scope. After establishment, authorized policy replacement still uses
+the exact prior replacement terms and predecessor; new terms cannot authorize
+themselves. A later result-informed replacement or policy choice is supported
+only when prior authority expressly permits that process, owner validation applies
+the same independent-basis and complete-accounting safeguards, and it is not
+tailored to secure a pass. Otherwise retain the existing predeclared higher-order
+choice requirement/refusal. A higher-order rule also cannot substitute a
+non-governing standard. Material ambiguity in obligation, boundary or authority
+requires specific escalation, not an agent's unconstrained judgment or silent waiver.
 
 For every consumed Historical Semantic Result role, an Operational Reliance
 Policy MUST declare one exact finite eligible source-result boundary. The
@@ -270,6 +305,8 @@ matching that boundary and every required result role. Caller-selected subsets,
 favorable-result selection, current-head or nearest-version lookup, repository
 order, open-ended “all current results” queries, or unrecorded omission MUST
 refuse.
+
+A nominated-reference boundary still requires independent justification and complete accounting under G5; it cannot hide relevant known failures.
 
 An exact upstream refusal record MAY be consumed only when the policy declares
 that exact refusal kind as an accepted Historical Semantic Result role and the
@@ -316,10 +353,8 @@ that uncertainty as a semantic input; missing formation truth is never
 <a id="governed-completion"></a>
 ### Independently governed completion
 
-Prospective change: the [proposed governance and delegation clarification](amendments/governance-defaults-and-delegated-operation.md#a5--operational-reliance-and-actions)
-identifies applicability, later establishment, autonomous operation, supported
-current qualification of earlier results, and post-inspection selection safeguards
-in this part. It awaits human semantic sign-off; current rules remain operative.
+The [approved HR-007 amendment](amendments/governance-defaults-and-delegated-operation.md)
+was integrated on 2026-10-04. References to G1–G6 below name its approved rules.
 
 For an effect that discharges a project-governed completion, promotion, or
 release obligation, Work Progression's policy/lifecycle responsibility (for
@@ -330,14 +365,12 @@ semantic relationship, not a mandatory new runtime record or service. It binds:
 - exact project, Action Kind/effect, actual target and scope, and whether that
   effect discharges a governed obligation;
 - the applicable completion/reliance policy and exact governing selection basis;
-- the required Assurance Policy Selector, Posture Scope, and assurance-selection
-  basis for the mandatory assessment;
+- the complete actual requirements, adopted supported assessment protocol and role inventory, plus required Assurance Policy Selector, Posture Scope and assurance-selection basis where applicable, and current qualification basis for accepted earlier results under G5;
 - exact evaluation-subject-to-action-target relationship and required coverage;
 - authoritative work/parent/dependency boundary and currentness requirements.
 
 The authoritative work-state/structure owner supplies actual target and relation
-facts; Engine supplies posture; Contracts Assurance Selection supplies the
-requirements. The action domain must not reconstruct those owners' propositions.
+facts; Engine supplies required posture; Contracts Assurance Selection supplies current governing requirements through the applicable exact mapping, while direct requirement resolution and evaluation owners preserve the earlier result's own requirements and truth. The action domain owns G5's current qualification and cannot reconstruct those owners' propositions.
 Governing applicability/assignment follows its authorized owner definition and
 lifecycle boundary, independently of the submitted development result. Admission
 of a policy or contract into an available population is not governing assignment.
@@ -346,52 +379,101 @@ to every completion request. Concrete mappings remain for later planning, but
 missing, ambiguous, conflicting, or unverifiable governing relationships refuse
 the affected completion operation; absence is not exemption or development mode.
 
-A request for the required assessment MUST resolve this exact target/selection
-relationship before collection or no-collection commitment, as applicable,
-without needing a future completion Determination
-or Action Intent. At present reliance the action owner independently resolves
-the currently applicable relationship and verifies the historical assessment
-against it; a previous favorable result cannot choose today's finish line.
-Neither a caller's preferred contract, development label, unverified narrower
-scope, nor a higher-order policy selector may substitute a non-governing standard.
+Positive deliberate governance deferral under G3 permits the independent
+authoring/validation/evaluation uses in G5. It does not establish a governed
+completion standard or produce a governed-completion Determination. When
+governance is established, its authorized owner relationship determines whether
+requirements apply to this actual effect/target/scope; mere policy admission is
+not assignment. Required missing or uncertain relationships still refuse the
+affected completion operation. Independent historical results cannot be relabeled;
+only G5's separately adopted protocol and new current owner determination may
+accept an exact earlier result for declared current assessment roles.
 
-A positive governed-completion Determination MUST fill its mandatory assessment
-role with exact evaluation truth that has all of the following:
+Work Progression or the relevant action domain MUST independently resolve the
+actual project, effect, target, scope, governing assignment, complete applicable
+requirements and accepted assessment protocol. Authoritative work-state owners
+supply target/relations; Engine supplies any required posture; Contracts supplies
+exact requirements and historical truth. Admission is not assignment. A submitted
+result, available capability or favorable outcome MUST NOT select the standard.
 
-- a **Decision-seeking eligible** admitted contract revision;
-- `posture_selected` requirements formed under the applicable governing posture
-  and admitted assurance rules for the actual target/scope; and
-- `decision_seeking` Evaluation Use Intent, exact required coverage, and the
-  complete historical and present-use checks required by this chapter.
+An explicitly adopted, supported governing protocol MAY require prospectively
+governed assessment, or permit bounded retrospective acceptance of an exact
+earlier direct result for declared current assessment roles. These are owner
+protocol choices under exact qualification and activation authority, not a
+caller-created waiver, typed exception to a floor, or generic status-setter path.
+The mandatory positive assessment still requires a **Decision-seeking eligible**
+contract and original `decision_seeking` intent. Diagnostic results retain all
+existing role/direction restrictions and cannot fill that mandatory role.
 
-These conditions are necessary, not sufficient for `eligible / allow`. The exact
-completion policy still interprets the qualifying outcome and accounts for all
-required dependencies. Missing or incompatible required assessment provenance
-causes Reliance Refusal; a valid qualifying assessment with an unfavorable
-semantic outcome follows the policy's ordinary non-positive decision rules.
-Direct or diagnostic results cannot fill this mandatory role, even when their
-contract, rules, or outcome equal a later qualifying assessment. A posture-
-selected diagnostic pass remains diagnostic. A Diagnostic-only contract selected
-for diagnostic work remains useful but cannot satisfy the completion route.
+| Protocol | Required timing and provenance |
+| --- | --- |
+| Prospectively governed assessment | Resolve the exact actual target/selection relationship before collection or no-collection commitment. Use `posture_selected` requirements under the applicable governing posture and admitted assurance rules, with original decision-seeking intent. Current reliance independently verifies that relationship and coverage. A protocol requiring this route rejects an earlier direct result for that role, even if it passes. |
+| Bounded retrospective acceptance | First resolve current governing requirements and the expressly adopted acceptance protocol independently of the proposed results. Then the action-domain reliance/coverage responsibility qualifies exact earlier `direct_contract`, decision-seeking truth for named current roles, through a NEW present-use determination. No governing relationship before that earlier collection is asserted. Any collection-time approval or prospective provenance required for the role must actually exist; current approval cannot manufacture it. |
 
-Ordinary policy, typed exception, wrapper, child result, higher-order selection,
-or display label MUST NOT waive this contract/source/intent floor. Properly
-authorized exceptions may affect requirements within their existing bounded
-scope; they cannot change these provenance facts. Supplemental development and
-diagnostic results may serve declared roles but cannot substitute for the
-mandatory assessment. An exact diagnostic failure may support `eligible / allow`
-for a permitted remediation action; that is not completion of the original work.
+For retrospective acceptance, the owner MUST establish and bind in the new
+Operational Reliance Basis and atomic Determination:
 
-Governing applicability, actual target relation, required posture-selection basis,
-and assessment coverage MUST be verified at reliance and preserved through the
-completion commit boundary. They are mandatory dependencies, not optional policy
-switches. A change invalidating that relationship stops the affected reliance or
-action; form new owner results without rewriting history. Changed required
-evaluation content demands a fresh qualifying evaluation. A change only to the
-completion policy demands new reliance and a fresh evaluation only if its changed
-requirements or acceptance relation require one. An unrelated unused new contract
-revision does not invalidate all prior assessments. A still-applicable qualifying
-assessment need not be rerun for each completion request.
+- exact active governing configuration, qualified applicable policies, authorized
+  selection/assignment, actual obligation/target/scope and complete current
+  requirements, protocol and role inventory;
+- each exact owner-resolved earlier result, its original permitted use, source,
+  intent, subject/snapshot, observations, evidence closure, definitions, semantic
+  times, historical validity and Engine authorization provenance;
+- exact supported coverage of each current role by the selected contract revision,
+  requirement and evaluator/evidence/metric/gate definitions, subject/target and
+  scope relation. Matching names, copied passes or a general judgment of semantic
+  equivalence are insufficient. Only owner-supported exact identity/role relations
+  qualify; unsupported relations or changed required evaluation content need new
+  work, not an inferred equivalence mechanism;
+- every required present-currentness observation and process condition, including
+  collection-time conditions and the explicit historical Engine validity versus
+  continuing-current mode; and
+- the finite eligible result boundary and complete accounting under the adopted
+  protocol, including relevant failures and every required missing role. Additional
+  requirements cannot disappear because one accepted role passes; composition of
+  results is permitted only under exact declared owner rules.
+
+This qualification belongs to present reliance, not policy admission of a result.
+It may be carried by the existing Determination without a new record family.
+Governance activation and unchanged-contract project qualification are separate;
+neither qualifies R1 for a current role by itself. Qualification alone does not
+require a new contract revision; changed content or permitted use still does.
+Missing, stale, incompatible or unverifiable required formation facts cause
+Reliance Refusal. A valid qualifying result with an unfavorable outcome follows
+the declared non-positive outcome rules; acceptance does not mean a pass. A
+positive result for one role does not prove overall `eligible / allow`.
+
+Accepting R1 now answers a new governing question. A new governing assessment
+may consist of this current qualification plus other required role outcomes;
+it need not repeat original observations solely because governance was established.
+Forming a new evaluation occurrence remains different: changed source, intent or
+fixed evaluation inputs require its new Purpose and occurrence, with its own
+collection/complete-pruning and evidence closure. Earlier evidence cannot be
+copied into that closure. Existing admitted prior-fact roles remain bounded;
+general cross-occurrence evidence import and semantic-equivalence machinery stay
+deferred. New work is required for the earliest unsatisfied boundary: changed
+target, stale facts, missing coverage or required prospective provenance can
+require new verification, assessment or observations. Neither automatic reruns
+nor automatic zero reruns is promised.
+
+Governing applicability, actual target, required selection/qualification basis,
+coverage and protocol conditions MUST be verified at reliance and preserved
+through the completion commit boundary. An invalidating change stops the affected
+reliance/action and requires new owner results without rewriting history. Every
+operation discharging the same obligation remains subject to those checks.
+Separate congruent action authorization, attempt checks, authoritative commit
+truth and uncertainty/recovery rules remain unchanged.
+
+Ordinary policy, typed exception, wrapper, child result, higher-order selection
+or display label MUST NOT waive exact contract/intent, governing assignment,
+supported protocol, coverage, qualification or required process conditions.
+Properly authorized exceptions remain bounded by their existing owner rules;
+they cannot change historical provenance or fabricate collection-time authority.
+Supplemental development and diagnostic results may serve declared roles but
+cannot substitute for the mandatory assessment contrary to G5. An exact diagnostic
+failure may support a permitted remediation action; it is not completion of the
+original work. Still-applicable qualifying assessments need not be rerun for
+every completion request.
 
 Action authorization and attempt admission require the exact eligible
 Determination and congruent effect/target. The authoritative state owner MUST
@@ -540,8 +622,7 @@ parent eligibility. It owns:
   those decisions;
 - admission and resolution of Local Closeout Policies and Parent Eligibility
   Policies;
-- independently established governing-completion applicability, policy/assessment
-  selection and target coverage; action-specific policy selection and complete
+- independently established governing-completion applicability, actual requirements and adopted protocol, prospective selection or current qualification and complete target/assessment coverage under G5; action-specific policy selection and complete
   candidate accounting;
 - Operational Reliance Occurrence Identity and Basis formation;
 - Local Closeout and Parent Eligibility Operational Reliance Determinations,
@@ -576,10 +657,7 @@ universal enforcement owner.
 A valid [complete-pruning evaluation](evidence-and-evaluation.md#complete-pruning)
 may produce an exact assessment with no producer observations. Its presence does
 not itself imply a missing assessment, a pass, positive eligibility, or completion.
-The actual governing role still requires eligible contract, posture-selected
-requirements, decision-seeking intent, exact target/coverage, and all required
-currentness, followed by the governing policy's exact interpretation of the actual
-result. Direct or diagnostic provenance cannot fill that mandatory role. This rule
+The actual governing role still requires original Decision-seeking eligible/decision-seeking provenance, exact target/coverage and all required currentness under G5's adopted supported protocol, followed by exact outcome-policy interpretation. Required prospective posture-selected provenance remains mandatory under that protocol; only an expressly adopted retrospective protocol and new current owner qualification may accept an exact earlier direct result for declared roles. Diagnostic provenance cannot fill the mandatory positive role. This rule
 neither exempts empty collection from completion requirements nor universally
 forbids completion based on correctly established non-applicability. The existing
 all-not-applicable example retains `not_applicable / no_effect` under its named
@@ -815,6 +893,8 @@ account for possible prior application and establish duplicate-safe recovery.
 Recomputed eligibility, unchanged target appearance, timeout, lost
 acknowledgement, or transport failure does not establish non-commit.
 
+Initial human approval and routine delegated operation follow G2. Owner authorization for each operation may be automatic under approved boundaries; it is not inherently a new human approval request.
+
 ### Work Specification relationship
 
 A Work Specification remains the authored plan for one feature, slice,
@@ -896,7 +976,7 @@ existing Operational Reliance Basis for a new present decision:
 | Evaluation Authorization Binding becomes non-current under explicit `historical_validity_only`, while its exact historical resolution remains valid | The immutable result retains its historical authorization provenance. No Engine current-use conclusion is inferred, and this change alone does not alter the Determination. All other declared present-use dependencies and separate action authority still apply. |
 | Engine reports the exact historical Binding `historically_invalid`, unverifiable, unavailable, ambiguous, or substituted under either mode | Reliance formation refuses without rewriting the Historical Semantic Result. No Eligibility or Disposition facet is produced. |
 | The action policy declares `continuing_current` and Engine reports non-current, superseded, unverifiable, unavailable, ambiguous, or substituted | Reliance formation refuses because the required positive owner verification is absent. It never treats the authorization as current or reconstructs Engine truth. A fresh evaluation is required when the policy requires one. |
-| Governing completion selection, target coverage, or required assessment relationship changes | Preserve history; stop affected reliance/action when the relationship is invalid. New reliance is required; changed evaluation requirements or acceptance relation require a fresh qualifying assessment. These dependencies cannot be made historical-only by policy. |
+| Governing completion selection, target coverage, or required assessment relationship changes | Preserve history; stop affected reliance/action when the relationship is invalid. New reliance is required; changed requirements or acceptance relations require new current qualification or the specific new evaluation/observation work required by G5; unchanged old results qualify only under exact supported coverage/protocol rules. These dependencies cannot be made historical-only by policy. |
 | Work parent/child/dependency membership or relation changes | A prior Parent Eligibility Result remains history but cannot govern the changed closure. Form a new exact parent basis with complete accounting. |
 | Local work state or a required local result changes after Parent Eligibility closes | The parent result remains history. Present parent action stops at final recheck and requires a new parent reliance occurrence. |
 | Action Authorization Binding expires, is superseded, no longer matches the target/effect, or its advisory/verified authority source, claimed principal/delegation, authority mode, or required verification facts change before attempt or commit | The already closed Determination remains history; the attempt or mutation refuses. A new authorization decision is required, and new authority never retroactively changes the Determination. |
@@ -930,8 +1010,8 @@ receipt or inferring that an earlier successful action still governs the target.
 | Engine artifact/profile domain | Exact Work Specification and other artifact revisions, Artifact Subject Binding, artifact currentness, promotion, and lineage under the authored-artifact lifecycle. | Operational work completion, local/parent eligibility, action disposition, or action authority from artifact status or prose. |
 | Authoritative work-structure and work-state owner | Exact work identities, current state snapshots, parent/child/dependency relations, state currentness, concurrency, and committed successor state. | Contracts truth, Work Progression policy or eligibility, action authorization merely from state ownership, or mutation without exact authorization. |
 | Policy-definition and admission owners | Exact candidate population, deterministic Policy Admission Closure, typed vocabulary and conformance, relevant governance-source roles/scope/currentness, required separately authorized approvals or exceptions, non-relaxable invariant checks, admission/refusal, currentness, and supersession for each Action Kind, reliance, authorization, or recovery policy. | Treating candidate authorship, a bare link, rendered prose, an AI's unconstrained judgment, or a policy's own desired outcome as admission; converting authored text into runtime evidence or a waiver; or recursively letting a candidate admit its own admission rule. |
-| Work Progression | Independently established governing-completion applicability/selection and assessment coverage; work target and finite parent/dependency closure for its decisions; Local Closeout and Parent Eligibility policies; reliance occurrence, basis, atomic Determination with eligibility/disposition facets, currentness, and replay. | Contracts truth, evaluation authorization, Work Specification authorship, release/deployment policy, action authorization by implication, or mutation. |
-| Other downstream action domains | Their exact action-specific reliance policies, bases, atomic Determinations, currentness, and replay under the common floor. | A universal enforcement policy, another action domain's policy, Contracts truth, or Engine authority. |
+| Work Progression | Independently established governing-completion applicability/requirements and adopted protocol; prospective selection or current qualification of exact earlier results and complete assessment coverage under G5; work target and finite parent/dependency closure for its decisions; Local Closeout and Parent Eligibility policies; reliance occurrence, basis, atomic Determination with eligibility/disposition facets, currentness, and replay. | Contracts truth, evaluation authorization, Work Specification authorship, release/deployment policy, action authorization by implication, or mutation. |
+| Other downstream action domains | Their exact action-specific reliance policies, bases, atomic Determinations, currentness, and replay under the common floor and G5's governing requirements/protocol/current-qualification rules when applicable. | A universal enforcement policy, another action domain's policy, Contracts truth, or Engine authority. |
 | Action requester or origin owner | Exact Action Intent request content and durable request occurrence provenance. | Action Kind or target truth, eligibility, authorization, attempt, or effect merely because it requested one. |
 | Action authority owner | Exact authorization rule; declared advisory, owner-verified, or host-enforced authority mode and basis; exact provenance of claimed versus verified principal/delegation facts; Action Kind, target, expected state, bounded effect, Operational Reliance Determination binding, issuance time and lineage, refusal, Binding, currentness, supersession, and permitted-attempt rule. | Improving eligibility, rewriting a gate, treating Evaluation Authorization as action authorization, claiming authentication/delegation/enforcement not established by its exact inputs, mandating a general Handbook IAM implementation, or proving an attempt or effect. |
 | Action executor | Action Attempt Identity, attempt-admission checks from exact owner facts, exact authorized execution, one Action Terminal per attempt, delivery replay, failure, refusal after the attempt boundary, and effect/commit uncertainty. | Self-producing another owner's authorization/currentness, broadening the effect, or asserting committed state change without the state-owner receipt. |
@@ -950,12 +1030,12 @@ separate from any Engine action-authority or mutation responsibility.
 
 | Scenario and inputs | Expected semantic outcome | Invariant proved |
 | --- | --- | --- |
-| **Historical pass, current local closeout.** Gate `G1` passed for exact work snapshot `W1`. The independently resolved governing completion relationship accepts its Decision-seeking eligible contract, posture-selected requirements, decision-seeking intent, and exact required coverage; the current Local Closeout Policy accepts that provenance, `W1` remains the current target, all mandatory governing conditions and declared dependencies verify, and no other closeout predicate is missing. | Work Progression forms a new reliance occurrence and basis, produces one Determination with `eligible / allow` facets, and stops before action authority. `G1` remains an unchanged Historical Semantic Result. | Historical truth may support current consideration without becoming the action. |
+| **Historical pass, current local closeout.** Gate `G1` passed for exact work snapshot `W1`. The independently resolved governing completion relationship accepts its Decision-seeking eligible contract, protocol-compatible assessment provenance under G5, decision-seeking intent, and exact required coverage; the current Local Closeout Policy accepts that provenance, `W1` remains the current target, all mandatory governing conditions and declared dependencies verify, and no other closeout predicate is missing. | Work Progression forms a new reliance occurrence and basis, produces one Determination with `eligible / allow` facets, and stops before action authority. `G1` remains an unchanged Historical Semantic Result. | Historical truth may support current consideration without becoming the action. |
 | **Pass is insufficient under another policy.** The same `G1` is supplied to a Local Closeout Policy that also requires an exact unresolved dependency disposition. | If the dependency is a missing formation input, Reliance Refusal produces no Determination. If the policy admits an exact uncertain dependency state, the Determination has `indeterminate / hold` facets. `G1` does not fill the gap. | Gate pass is neither a universal closeout rule nor a missing-input default. |
 | **Failed gate enables remediation but blocks closeout.** Exact gate `G2` is `fail`. The Local Closeout Policy makes closeout ineligible, while a separately admitted remediation policy positively requires that failure. | The closeout Determination contains `ineligible / block`; the remediation Determination may contain `eligible / allow`. Neither changes `G2`. | Disposition is action-question-specific, not gate reinterpretation. |
 | **Pure advisory prioritization.** A policy forms an exact `eligible / allow` Determination whose action question is limited to a non-mutating prioritization recommendation, and no effectful Action Intent is requested. | The Determination is the terminal result. No priority state is mutated and no Action Authorization Binding, Action Attempt, Action Terminal, or Mutation Receipt exists. Any later authoritative priority change requires its own action chain. | A pure disposition or advisory result is non-mutating and need not recurse into action authorization. |
 | **Diagnostic result.** A diagnostic evaluation closes a valid failed gate. One policy permits that exact diagnostic role and direction to trigger remediation; the mandatory governed-completion role cannot accept it for positive closeout even if a policy attempts to permit it. | The remediation basis may form under its exact policy. Closeout reliance refuses for incompatible use intent. Permission for remediation, blocking, holding, or observation admission does not make the diagnostic result decision-seeking or permit a different positive action question. | Evaluation Use Intent acceptance is role-, direction-, and action-question-specific. |
-| **Ambient favorable-result selection.** A caller asks Work Progression to use “the latest passing gate” for a target without an exact nominated-reference or owner/repository/time-cut boundary. | Reliance formation refuses. Repository order, current-head lookup, result direction, or caller-selected subset cannot establish the finite source-result population. | Complete result accounting requires an exact eligible boundary before selection. |
+| **Ambient favorable-result selection.** A caller asks Work Progression to use “the latest passing gate” for a target without an exact nominated-reference or owner/repository/time-cut boundary. | Reliance formation refuses. Repository order, current-head lookup, result direction, or caller-selected subset cannot establish the finite source-result population. | Complete result accounting requires an exact eligible boundary before selection. First governance after results exist is allowed only under G5's independent standard, justified boundary and complete failure accounting, never by requesting the latest passing gate. |
 | **Historical-validity-only mode with later Engine changes.** A valid historical gate binds Evaluation Authorization `A1`. Engine later reports `A1` non-current while historical resolution remains `historically_valid`. In a comparison case, Engine reports historical resolution `historically_invalid` or `unverifiable`. | Under `historical_validity_only`, non-currentness alone does not alter the Determination. The historical-invalid or unverifiable comparison causes Reliance Refusal without rewriting the gate. | Historical validity and continuing-current authorization are separate Engine propositions. |
 | **Continuing Engine dependency declared.** A high-risk deployment policy expressly requires the evaluation binding to remain current at reliance time, and Engine reports it superseded. | The action domain preserves the historical result but cannot treat the binding as current. Reliance refuses, no Determination is produced, and a fresh evaluation is required under the policy. | Policy-conditional Engine verification is mandatory when declared and owner-produced. |
 | **Eligible but authorization refused.** Local closeout has an `eligible / allow` Determination, but the action-authorization owner refuses the exact actor, authority basis, effect, or scope. | The authorization owner produces one exact Action Authorization Refusal. No Action Authorization Binding, Action Attempt Identity, Action Terminal, mutation, or Mutation Receipt exists. The Determination remains immutable history. | Eligibility, authorization refusal, attempt provenance, and mutation truth are distinct propositions. |
@@ -983,13 +1063,20 @@ Additional governed-completion scenarios:
 
 | Case | Required result |
 | --- | --- |
-| An agent submits a direct pass from a Decision-seeking eligible contract as the required final assessment. | Reliance Refusal: eligible contract use does not supply posture-selection provenance or governing assignment. |
+| An agent submits a direct pass from a Decision-seeking eligible contract as the required final assessment. | An earlier direct pass alone causes Reliance Refusal. Under an expressly adopted retrospective protocol, new G5 qualification may accept the exact result for declared roles; required prospective provenance or unsupported/missing coverage refuses. Permitted use is not assignment. |
 | A fully ready posture-selected diagnostic run passes. | Valid historical truth; cannot fill the mandatory decision-seeking completion role. Remediation and other declared non-substituting uses remain separate. |
 | An agent creates a weak fresh contract, assigns a promising name, or selects a weaker admitted completion policy. | Qualification applies to fresh candidates too. Admission alone is not governing assignment; the action owner independently resolves the actual standard and scope. |
 | A required mapping is unavailable, or a caller narrows the target to a convenient child. | Missing governing applicability refuses; no exemption or direct fallback. A legitimate child result stays bounded and cannot discharge the parent's obligation. |
-| Complete-pruning result considered for governed completion. | An exact eligible-contract, posture-selected, decision-seeking assessment with actual governing coverage may be considered under the exact outcome policy; the existing all-N/A policy produces `not_applicable / no_effect`, not closeout. Direct/diagnostic or wrong-target substitution refuses. No empty-route result itself grants action authority or proves a mutation. |
-| Governing requirements change after a qualifying pass but before completion. | Old truth remains history. Stop when current coverage fails; obtain the newly required assessment and owner decisions. An unused new definition alone does not cause this. |
+| Complete-pruning result considered for governed completion. | An exact eligible-contract, protocol-qualified under G5, decision-seeking assessment with actual governing coverage may be considered under the exact outcome policy; the existing all-N/A policy produces `not_applicable / no_effect`, not closeout. Unqualified direct, diagnostic or wrong-target substitution refuses; no prospective provenance is fabricated. No empty-route result itself grants action authority or proves a mutation. |
+| Governing requirements change after a qualifying pass but before completion. | Old truth remains history. Stop when current coverage fails; obtain new qualification or specific newly required assessment/observation work under G5 and new owner decisions. An unused new definition alone does not cause this. |
 | The exact qualifying assessment and reliance exist and the action rule accepts an ordinary user instruction as advisory authority. | The effect may proceed with target and commit checks. No additional login, human confirmation, or fabricated authentication follows from this amendment. |
+| Current governing requirements select the exact unchanged eligible C@1/API question for T1; the adopted supported retrospective protocol permits earlier R1 with original direct/decision-seeking provenance. | Resolve current requirements/assignment independently, qualify applicable definitions/use, account for the entire eligible result population and all required roles, and form a new owner determination accepting R1 now for the API role if exact coverage/currentness/process conditions verify. R1 still reports no historical shipment assessment. Other roles, outcome policy, separate delegated action authority and commit checks remain. No new contract revision or repeated observations solely for governance establishment. |
+| The action target changed from evaluated T1 to T2, even though contract names and displayed pass are unchanged. | No automatic rebinding or semantic-equivalence inference. Refuse unsupported target coverage; obtain the supported new assessment/observations for T2 and fresh current owner decisions. R1 remains exact truth about T1. |
+| Target is unchanged, but a required current fact is stale, a shipment role lacks coverage, or a required identity is unavailable. | Refuse the affected formation boundary; identify new owner verification, assessment or collection needed. An accepted API role cannot hide missing security coverage. Do not manufacture evidence import, weaker requirements, automatic whole-suite reruns or automatic zero reruns. |
+| Shipment's adopted protocol requires governing selection/approval before collection and original posture-selected requirements; R1 was independent. | Preserve R1; refuse it for that required role. Form the prospectively governed decision-seeking evaluation with its own Purpose/occurrence and required new work. Current approval does not fabricate original governance or collection-time authority; unrelated observations are not automatically repeated. |
+| During first setup the user and agent already know Rpass and relevant Rfail; requirements/population are independently grounded in the actual obligation. | First establishment remains possible under G3 and initial human approval without an earlier higher-order rule. Bind exact justified finite boundaries, retain known-result/selection provenance and completely account for relevant failures, exclusions and missing roles. Activation supplies no eligibility; new current qualification applies the outcome rules to all required inputs. |
+| A setup/replacement proposal lowers a requirement, narrows scope, shifts the time cut or nominates only Rpass because Rfail would block shipment. | Refuse result-fitting selection, even if a human liked the pass or the candidate calls itself safe. A favorable result supplies no authority or independent requirement basis. An ordinary higher-order selector cannot substitute a non-governing standard or erase failure accounting. |
+| After establishment, an agent proposes a supported revision after inspecting results; prior approved terms explicitly delegate that revision process. | Validate prior authority and exact predecessor plus G5's independent requirement/population basis and complete accounting before activation. No repeat human prompt solely for an owner operation. A reserved change, missing prior authority or a successor claiming its own permission refuses/escalates; without the supported prior authorization retain the higher-order choice restriction. |
 
 ### Settled versus deferred
 
@@ -1006,11 +1093,7 @@ This record settles:
   and authorization congruence;
 - the common exact-result, current-policy, current-target, congruence,
   declared-currentness, and complete-accounting floor for present use;
-- independently established governing-completion applicability/selection and
-  target coverage, mandatory eligible-contract/posture-selected/decision-seeking
-  assessment, governing selection before collection or no-collection commitment,
-  exact outcome-policy treatment of complete-pruning results, and preservation
-  of governing conditions through commit;
+- independently established governing-completion applicability/requirements, actual target coverage, mandatory Decision-seeking eligible/decision-seeking assessment roles under the adopted supported protocol, prospective governing selection or new current qualification under G5, exact outcome-policy treatment of complete-pruning results, and governing conditions through commit;
 
 - finite exact eligible historical-result boundaries, diagnostic provenance by
   role/direction/action question, and refusal/replay behavior;

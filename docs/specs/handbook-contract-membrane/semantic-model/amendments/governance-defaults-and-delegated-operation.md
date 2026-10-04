@@ -1,26 +1,28 @@
 # Governance defaults, delegated operation, and independent contract use
 
-**Status: Proposed for human semantic sign-off.**
+**Status: APPROVED as semantic input to implementation planning — 2026-10-04.**
 
 Prepared 2026-10-03 against `f62b1f450cacc31057280723970dc95ad18ad664`.
 Revised 2026-10-03 above the preserved proposal baseline
 `bf27981ff059bfb970e2c851e980599daccccabc` for bounded present-use qualification.
-This is a bounded amendment to the [approved semantic package](../README.md),
-not implementation authority. The user approved this reconciliation work and
-its direction; the proposed normative rules and choices below still require
-human semantic sign-off. A clean automated review, local commit, or discovery
-pointer does not activate them. Until sign-off, the identified base provisions
-remain operative. Once approved, this amendment supersedes **only** the
-provisions identified in [Activation edits](#activation-edits), in the stated
-respects. All other approved meaning and completed delivery history remain.
+This bounded amendment was approved by the human on 2026-10-04, including the
+adaptive-interview and agent/native responsibility clarifications. It is semantic
+input to implementation planning, not implementation authority. The activation
+map below has been applied to the identified base provisions in this landing.
+Only those provisions are superseded in the stated respects; all other approved
+meaning and completed delivery history remain.
 
 ## Intent and ordinary workflow
 
 Handbook should help people choose governance, rather than permanently impose
 the supplied choices. A person approves project initiation, Charter/posture,
 initial governance if selected, and the boundaries within which agents may act.
-The agent uses repository evidence and those approved sources to recommend
-suitable starting requirements. Recommendations do not activate themselves.
+A skill-guided agent leads an adaptive initialization conversation using repository
+evidence. It asks focused questions about unresolved choices, presents options and
+tradeoffs, and refines Charter, posture, delegation and governance proposals with
+the user. Recommendations are part of that conversation, not a static substitute
+for it. The agent submits structured inputs through Handbook's CLI/SDK;
+recommendations do not activate themselves.
 Thereafter owner checks can apply approved rules automatically. Human
 intervention is for reserved product decisions, material ambiguity, or missing
 authority that approved sources cannot resolve.
@@ -69,7 +71,7 @@ or current hardcoding does not establish a permanent project requirement.
 References describe source at the preparation baseline; none selects a new
 preset, numerical default, or implementation technique.
 
-| Supplied behavior and evidence | Classification and proposed treatment | Actual selection constraint or unchanged mechanism |
+| Supplied behavior and evidence | Classification and approved treatment | Actual selection constraint or unchanged mechanism |
 | --- | --- | --- |
 | Shipped profile and three Context Resolution policy references: [profile request](../../../../../crates/engine/src/profile_decision.rs), `shipped_profile_request`; [profile resolver](../../../../../crates/engine/src/profile_selection.rs), `policy_refs` in `resolve_profile_selection`. | Selecting `handbook.profile.shipped-root@1.2.0` and the exact mutation/escalation/memory `*.core@1.0.0` trio is a supplied choice. Recommend supported starting selections; deliberately adopt them or supported replacements. | The request supplies built-ins and the resolver reconstructs the trio independently. Changing a filename or adding another definition cannot replace that selection. Preserve exact source-use accounting, dependency compatibility, content fingerprints, and deterministic resolution. |
 | [Shipped Context Resolution stack](../../../../../crates/engine/definitions/context-resolution/handbook.context-resolution.shipped-root/1.0.0.yaml): strategic/coordination/execution/operation levels and scope/detail/time/authority/memory/validation defaults. | Mixed: level names, dimension vocabulary/ranks, and their default combinations are replaceable supported operating definitions and recommendations. They are not automatically universal project authority. | Exact stack identity, supported coordinate interpretation, declared ordering, and request-within-envelope checks remain mechanisms. Replacing a vocabulary/order requires a compatible versioned definition and consumers, not arbitrary runtime values or silent reinterpretation. No new values or ranks are selected. |
@@ -110,9 +112,9 @@ end-to-end requirement is target semantics for a supported local path. GitNexus
 query/context was degraded (foreign index storage and failed search); this
 inventory relies on direct inspection and claims no graph verification.
 
-## Proposed rules
+## Approved rules
 
-All MUST/MAY statements in this document are proposed, pending sign-off.
+The human approved G1–G6 and the selected answers below on 2026-10-04. Implementation requires separately bounded planning and authorization.
 
 ### G1 — Choices, mechanics, and recommendations
 
@@ -130,12 +132,25 @@ engineering requirement set, credential provider, or numeric default. Project
 replacement cannot alter those floors. Mixed definitions MUST distinguish their
 supplied choices from the mechanics and owner boundaries needed to apply them.
 
-During user-facing initialization the agent MUST ground recommendations in
-available repository evidence and the proposed or approved Charter/posture,
-explain their reasons and unknowns, and expose the proposed requirements and
-delegated boundaries for human approval. Recommendation, human approval,
-owner validation/admission, governing assignment, and committed activation are
-distinct propositions even when presented in one review experience.
+During user-facing initialization, the skill-guided agent session MUST gather
+repository evidence, ask focused adaptive questions about unresolved choices,
+present options and tradeoffs, and refine its recommendations using the proposed
+or approved Charter/posture and the user's answers. It MUST explain reasons and
+unknowns and expose the proposed requirements and delegated boundaries for human
+approval. Recommendations do not replace the interview with static defaults. Recommendation, human approval, owner validation/admission, governing assignment, and committed activation are distinct propositions even when presented in one review experience.
+
+Responsibility descriptions MUST distinguish the skill-guided LLM session from
+Handbook's deterministic mechanisms. The agent gathers and interprets evidence,
+conducts the conversation, proposes structured content, and invokes CLI/SDK
+operations. The human resolves initial choices and approves the applicable
+boundaries. Native semantic owners deterministically validate supplied inputs,
+check exact authority and requirements, record owner outcomes and versioned state,
+and perform authorized activation or mutation. CLI/SDK calls carry requests; an
+LLM recommendation or a conversational approval claim does not itself establish
+canonical state or stronger authority. A native initialization operation does not
+implicitly invoke an LLM or conduct an interview. Any separately defined native
+recommendation policy retains its exact owner and inputs; it must not be conflated
+with the agent's initialization advice.
 
 ### G2 — Initial approval and delegated operation
 
@@ -191,11 +206,11 @@ independent evaluations or claim they met newly adopted obligations.
 
 ### G4 — Separate conformance, governance qualification, and assignment
 
-The smallest proposed reconciliation retains owner-controlled **admissibility**
+The approved reconciliation retains owner-controlled **admissibility**
 as the umbrella and separates its responsibilities. It MUST NOT become one
 combined completeness, qualification, assignment, or permission status:
 
-| Responsibility | Proposition and proposed boundary |
+| Responsibility | Proposition and approved boundary |
 | --- | --- |
 | Intrinsic owner validation and establishment | Does this exact contract/definition have complete supported semantics for its stated question? Owner-native validation establishes executable category-2 identity, conformance, compatible dependency closure, and Contract Permitted Use under exact versioned owner rules. It is not satisfied by schema syntax, authorship, self-attestation, or a bare link. It can succeed without project governance. |
 | Project governance qualification | Does this exact definition/use meet the admission/use-qualification requirements applicable to this project and scope? Where such requirements apply, the responsible owner produces the existing Policy Admission Closure under the exact active configuration and owner-rule basis. Missing or unsatisfied required governance refuses that dependent use; successful intrinsic validation cannot bypass it. |
@@ -413,12 +428,11 @@ adapter, pack mechanism, or phase/slice decomposition.
 
 ## Activation edits
 
-These are exact proposed replacement/additional rules for the affected passages.
-Location names and quoted starts refer to `bf27981ff059bfb970e2c851e980599daccccabc`
-(the base passages are unchanged from preparation). The prospective
-pointers added now do not apply these edits. On sign-off, activate the approved
-wording and remove/retarget pointers in the **same** semantic integration; leaving
-the old unconditional prerequisite operative would contradict this amendment.
+This is the applied activation map for the 2026-10-04 approval landing. Location
+names and quoted old wording refer to baseline `bf27981ff059bfb970e2c851e980599daccccabc`;
+the instructions below preserve the exact approved change scope and historical
+review basis. The owning chapters now carry these rules. They are not pending
+activation instructions or authority to repeat the edits.
 
 ### A1 — Objects and governance: shared admission
 
@@ -830,7 +844,7 @@ Retain the opening owner/non-mutation sentence and child/parent example.
 
 ## Acceptance scenarios
 
-These discriminate proposed semantics, not claims of executed product tests.
+These discriminate approved target semantics, not claims of executed product tests.
 
 | Scenario | Required outcome |
 | --- | --- |
@@ -852,18 +866,17 @@ These discriminate proposed semantics, not claims of executed product tests.
 | An admitted policy is unassigned, or a new Agent Skills pack is installed. | Neither fact makes it govern every operation or grants authority. Required assignment, owner qualification and activation remain separate. |
 | Governance changes after an independent or governed result closes. | Replay preserves its exact original basis and outcome. New current-use qualification/reliance is distinct; old direct results do not acquire posture-selected provenance. New evaluation occurrences keep separate evidence closures; qualification is not evidence import. |
 
-## Open decisions
+## Approved decisions and deferred implementation choices
 
-Human semantic sign-off must address these specific proposed answers. None is
-silently delegated to implementation or converted to authority by this draft.
+The human accepted the selected answers below on 2026-10-04, with adaptive initialization dialogue and explicit agent/native responsibilities. Alternatives are retained as decision history; concrete implementation choices remain deferred.
 
-| Decision | Proposed answer | Alternative and consequence |
+| Decision | Approved answer | Alternative and consequence |
 | --- | --- | --- |
-| Admission split and independent permitted-use reach | Approve G4's intrinsic establishment plus applicable project qualification; retain both permitted-use values for exact supported independent questions. `Decision-seeking eligible` permits intent, not governed reliance. | Restrict independent use to Diagnostic-only until governance exists. Simpler qualification boundary, but imposes a project-governance ceiling on otherwise complete direct decision questions. Rejecting all independent canonical evaluation fails the clarified workflow. |
-| Supported governed-assessment protocols | Approve G5's prospective route plus explicitly adopted bounded retrospective acceptance of exact earlier direct, decision-seeking results. Keep independent actual requirements, exact role/target coverage, currentness/process conditions, original truth, diagnostic exclusions and separate authority through commit. Owner qualification answers the new governing question; activation and passes do not. | Support only prospective posture-selected assessment. This deliberately rejects earlier direct results from mandatory roles even with unchanged exact coverage, and may require new observations. Allowing automatic grandfathering or generic equivalence instead would lose the proposed owner boundary and is not included. |
-| Governance selection after results are known | Approve G5's bounded first-establishment treatment under fixed owner rules and human initial approval, plus supported later processes expressly authorized by prior terms. Independently justify actual requirements and finite populations, retain known-result provenance and complete failure accounting, and separate activation from qualification. | Retain the unconditional favorable-inspection ban except for previously predeclared higher-order choices. That can prevent normal first setup after independent work. Removing all safeguards would allow standards/populations chosen to fit a pass and is not proposed. |
-| Governance applicability and later-establishment authority | Approve positive project/scope deferral, explicit owner applicability and first establishment on that same identity under G3. Initially approved instruction/delegation supports only the permitted independent checks; later initial governance is human-approved. | Treat missing configuration as deferral, or let recommendations activate. Easier setup but conflates damaged/uncertain state with permission and permits self-authorization; incompatible with the clarified intent and preserved authority boundaries. |
-| Replacement of mixed supplied definitions | Approve behavior-level classification and explicit supported replacement under G1, retaining owner floors and initially approved boundaries. | Freeze the current contents as permanent policy, or remove mechanisms with the choices. The former conflicts with user direction; the latter loses truthful interpretation/authority. Exact preset contents, owner criteria, providers, resource bounds, APIs and representation remain later bounded selections, not approved defaults here. |
+| Admission split and independent permitted-use reach | Accepted: G4's intrinsic establishment plus applicable project qualification; retain both permitted-use values for exact supported independent questions. `Decision-seeking eligible` permits intent, not governed reliance. | Restrict independent use to Diagnostic-only until governance exists. Simpler qualification boundary, but imposes a project-governance ceiling on otherwise complete direct decision questions. Rejecting all independent canonical evaluation fails the clarified workflow. |
+| Supported governed-assessment protocols | Accepted: G5's prospective route plus explicitly adopted bounded retrospective acceptance of exact earlier direct, decision-seeking results. Keep independent actual requirements, exact role/target coverage, currentness/process conditions, original truth, diagnostic exclusions and separate authority through commit. Owner qualification answers the new governing question; activation and passes do not. | Support only prospective posture-selected assessment. This deliberately rejects earlier direct results from mandatory roles even with unchanged exact coverage, and may require new observations. Allowing automatic grandfathering or generic equivalence instead would lose the proposed owner boundary and is not included. |
+| Governance selection after results are known | Accepted: G5's bounded first-establishment treatment under fixed owner rules and human initial approval, plus supported later processes expressly authorized by prior terms. Independently justify actual requirements and finite populations, retain known-result provenance and complete failure accounting, and separate activation from qualification. | Retain the unconditional favorable-inspection ban except for previously predeclared higher-order choices. That can prevent normal first setup after independent work. Removing all safeguards would allow standards/populations chosen to fit a pass and is not proposed. |
+| Governance applicability and later-establishment authority | Accepted: positive project/scope deferral, explicit owner applicability and first establishment on that same identity under G3. Initially approved instruction/delegation supports only the permitted independent checks; later initial governance is human-approved. | Treat missing configuration as deferral, or let recommendations activate. Easier setup but conflates damaged/uncertain state with permission and permits self-authorization; incompatible with the clarified intent and preserved authority boundaries. |
+| Replacement of mixed supplied definitions | Accepted: behavior-level classification and explicit supported replacement under G1, retaining owner floors and initially approved boundaries. | Freeze the current contents as permanent policy, or remove mechanisms with the choices. The former conflicts with user direction; the latter loses truthful interpretation/authority. Exact preset contents, owner criteria, providers, resource bounds, APIs and representation remain later bounded selections, not approved defaults here. |
 
 No policy engine, renderer/importer, IAM platform, preset catalog, pack system,
 adapter implementation, schema/format migration, or successor coding slice is

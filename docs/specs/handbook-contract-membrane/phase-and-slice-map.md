@@ -196,6 +196,22 @@ authority lifecycle; that separate correction is not an exercised hard predecess
 and repository-wide lifecycle confinement is not claimed. Detailed successor
 planning and implementation remain subject to later human direction.
 
+### HR-007 semantic landing — 2026-10-04
+
+The human approved and integrated the [governance amendment](semantic-model/amendments/governance-defaults-and-delegated-operation.md).
+Subsequent foundation preparation must use its intrinsic-establishment versus
+project-qualification split, positive deferral/later establishment, delegated
+operation, and protocol-qualified prior-result use. The skill-guided agent owns
+adaptive intake and recommendations; deterministic owners validate and commit
+requests through CLI/SDK. These are approved target semantics, not delivered APIs.
+
+The fresh-project slice above remains its exact completed historical outcome.
+Before another implementation increment, reconcile only the selected next outcome
+with HR-007 and current source, identify its prerequisites and human review
+boundary, and prepare one bounded plan. Existing-project first establishment and
+the independent local-check prerequisites need consideration; this note selects
+neither a successor slice nor detailed packets and does not alter Phase-6 order.
+
 ## Phase 6 — consumer adoption
 
 Repository evidence does not prove present publication, an operating bridge, or

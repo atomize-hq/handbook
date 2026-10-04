@@ -1,6 +1,6 @@
 # HCM semantic model — Objects and governance
 
-**Status: PROPOSED**
+**Status: APPROVED as semantic input — package approval 2026-09-30; HR-007 integrated 2026-10-04**
 
 Part of the [combined semantic package](README.md). Its approval boundary and
 shared greenfield/current-product distinction apply throughout.
@@ -17,26 +17,26 @@ Object categories, semantic ownership, policy admission, and authored-artifact r
 <a id="policy-admission"></a>
 ## Shared policy admission
 
-Prospective change: the [proposed governance amendment](amendments/governance-defaults-and-delegated-operation.md#activation-edits)
-identifies admission/default/delegation and deferred-establishment changes here.
-It awaits human semantic sign-off; current rules remain operative.
+The [approved HR-007 amendment](amendments/governance-defaults-and-delegated-operation.md)
+was integrated on 2026-10-04. References to G1–G6 below name its approved rules.
 
-This section owns the common definition/policy-admission rule for every chapter
-in this package. Domain sections retain their exact vocabulary, compatibility,
-selection, and use constraints. A particular exception record or action follows
-its own typed authorization and admission; it is not a policy candidate merely
-because an authored artifact references it.
+This section owns shared definition admissibility and project policy admission
+for every chapter. Intrinsic owner validation/establishment, applicable project
+governance qualification, and governing assignment are separate responsibilities
+under G4–G5 of the approved governance-defaults amendment. Domain owners retain
+their exact vocabulary, compatibility, selection, and use constraints. Exception
+records and actions retain their own typed authorization and admission.
 
-A user, agent, authored artifact, or another tool MAY author policy-candidate
-content. Candidate authorship supplies proposed content, provenance, and
-organizational judgment only. The responsible semantic owner MUST independently
-and deterministically produce a Policy Admission Closure before the candidate
-becomes an admitted category-2 definition or policy. The category-3 Closure
-closes admission or refusal of one exact candidate under one exact owner
-admission-rule version; it does not mandate separate Policy Admission Basis and
-Policy Admission Result runtime object types.
+A user, agent, artifact, or tool MAY author candidates. Before executable use,
+the responsible owner MUST establish complete supported semantics under its exact
+versioned owner rules. Independent contract/evaluation definitions may use the
+G4 route without project governance; this grants no project governance or action
+authority. When project qualification applies, the owner MUST independently and
+deterministically produce Policy Admission Closure under the exact active basis.
+One owner outcome may carry distinct conformance and qualification propositions;
+no separate Policy Admission Basis/Result runtime types are mandated.
 
-The Closure MUST bind:
+For required project qualification, the Policy Admission Closure MUST bind:
 
 - exact candidate content, governing project configuration version and semantic-
   content identity, exact applicable owner admission-rule version and semantic-
@@ -69,6 +69,63 @@ candidate population it decides. A candidate cannot select or recursively admit
 its own admission rule; a changed rule has its own successor rather than an
 unbounded self-admission chain.
 
+Shipped governance choices MUST be supplied defaults or recommendations whose
+project adoption and supported replacement are explicit. A name such as `core`
+MUST NOT independently make a choice mandatory. Interpreting a selected rule
+reliably remains mandatory: exact version/content identity, source attribution,
+typed conformance, compatibility, complete selection/accounting, scope,
+currentness, authority, preserved history, and truthful commit/replay.
+
+The fixed versioned Handbook establishment rule and owner conformance floors
+remain outside the candidate population they decide. They establish the mechanism
+and non-relaxable semantic constraints, not a permanently selected review process,
+engineering requirement set, credential provider, or numeric default. Project
+replacement cannot alter those floors. Mixed definitions MUST distinguish their
+supplied choices from the mechanics and owner boundaries needed to apply them.
+
+During user-facing initialization, the skill-guided agent session MUST gather
+repository evidence, ask focused adaptive questions about unresolved choices,
+present options and tradeoffs, and refine its recommendations using the proposed
+or approved Charter/posture and the user's answers. It MUST explain reasons and
+unknowns and expose the proposed requirements and delegated boundaries for human
+approval. Recommendations do not replace the interview with static defaults. Recommendation, human approval, owner validation/admission, governing assignment, and committed activation are distinct propositions even when presented in one review experience.
+
+Responsibility descriptions MUST distinguish the skill-guided LLM session from
+Handbook's deterministic mechanisms. The agent gathers and interprets evidence,
+conducts the conversation, proposes structured content, and invokes CLI/SDK
+operations. The human resolves initial choices and approves the applicable
+boundaries. Native semantic owners deterministically validate supplied inputs,
+check exact authority and requirements, record owner outcomes and versioned state,
+and perform authorized activation or mutation. CLI/SDK calls carry requests; an
+LLM recommendation or a conversational approval claim does not itself establish
+canonical state or stronger authority. A native initialization operation does not
+implicitly invoke an LLM or conduct an interview. Any separately defined native
+recommendation policy retains its exact owner and inputs; it must not be conflated
+with the agent's initialization advice.
+
+The human MUST approve project initiation, initial Charter/posture, deliberate
+governance deferral or initial governance choices, and the initial delegated
+operating boundaries. A configured agent MAY carry out those exact approved
+instructions; its configured role alone MUST NOT substitute for the human's
+initial decision. One coherent review may cover several owner outcomes; separate
+owners need not cause repeated human approval ceremonies.
+
+Afterward, owners MUST apply their exact authorization and validation checks
+for each operation. When the approved sources determine a permitted action
+within delegated scope, an agent MAY perform it autonomously without asking
+the human again solely because an owner operation occurs. This covers only
+supported operations whose prerequisites actually resolve. Correctable refusals
+MAY be repaired and retried within existing authority; no unfavorable result
+automatically grants an exception or broader authority.
+
+Escalate when a reserved product decision is reached, a material ambiguity cannot
+be resolved from approved sources, or authority is missing and no authorized
+resolution exists. Policy/Charter revision, replacement and authority expansion
+follow the prior approved terms; they are not universally reserved or universally
+delegated. New terms cannot authorize their own activation. Advisory instruction
+authority remains possible where the exact rule permits it, honestly labeled;
+no general IAM platform or credential provider is required by these semantics.
+
 ### Establishment and replacement of governing admission requirements
 
 Handbook MUST define an exact, versioned establishment rule for project admission
@@ -89,14 +146,39 @@ component, service, repository, or new authored artifact family.
 In the supported standalone advisory mode, the Handbook establishment rule
 permits an explicit local initialization instruction, including a configured
 agent acting under that instruction, to supply advisory establishment authority.
-Initialization MUST establish that initial setup applies to the exact project,
+First establishment MUST establish eligibility for the exact project and scope, either at initialization or later under G3,
 validate the exact configuration and owner-rule bindings, and record the accepted
 instruction and the project's replacement-authority basis. Missing, unreadable,
 or unverifiable governance in an established project MUST NOT authorize another
 initialization. Adding a scope in an established project MUST follow its existing
 governance rather than create another bootstrap route.
 
-Initialization and successor activation follow this bounded governance lifecycle,
+Initialization MUST record whether project admission governance for the exact
+scope was established or deliberately deferred under the approved instruction.
+Deferral MUST NOT silently activate an equivalent default governance configuration.
+Absence of a file MUST NOT prove deferral. Deferral, established governance,
+damaged/unreadable established state, and uncertain establishment are distinct.
+The governance responsibility MUST positively resolve the applicable state and
+scope from its authoritative lifecycle. Concrete representation remains deferred.
+
+For a project positively known to have deferred a scope and never established
+governance there, the same fixed Handbook establishment lifecycle MUST support
+first establishment later on its existing project identity. It MUST bind the exact
+identity/scope, current deferred basis, human-approved configuration and delegated
+terms, owner-rule validation, authority, and committed cutover. Concurrent or
+already-established state MUST prevent stale first establishment. It MUST NOT
+replace identity, rewrite content/history, infer approval from a recommendation,
+or treat an uncertain earlier effect as a clean opportunity to establish again.
+Adding a scope in a project with established governance follows its existing
+authority, not a second bootstrap. No implicit scope inheritance or
+priority is introduced.
+
+This is a greenfield lifecycle, not legacy-root discovery, backfill, migration,
+compatibility bridges, or dual behavior. Previously completed fresh-only work
+does not satisfy this additional requirement. Later establishment does not rewrite
+independent evaluations or claim they met newly adopted obligations.
+
+First establishment and successor activation follow this bounded governance lifecycle,
 not ordinary candidate admission or an action policy that depends on the
 configuration being established. Configuration validation, permission for the
 exact activation, and confirmation of committed active-state change MUST remain
@@ -104,9 +186,7 @@ separately attributable propositions; one owner outcome may carry them without
 requiring separate runtime record types. This lifecycle supplies no authority for
 evaluation, work progression, posture mutation, or other operational effects.
 
-Configuration versions MUST have exact immutable semantic identities. Every
-supported admission MUST resolve one unambiguous governing configuration and
-owner-rule basis for its exact project and scope. Missing, conflicting,
+Configuration versions MUST have exact immutable semantic identities. Every project-governed qualification MUST resolve one unambiguous governing configuration and owner-rule basis for its exact project and scope. Independent executable uses resolve applicability under G4 and cannot bypass applicable requirements. Missing, conflicting,
 unsupported, substituted, or unverifiable governance MUST refuse the affected
 operation. Candidate preference, directory proximity, repository order, mutable
 file contents, or a "latest" label MUST NOT select governing authority. No implicit
@@ -135,7 +215,7 @@ active version. An uncertain activation outcome MUST remain uncertain until
 authoritative state is resolved; timeout is not proof of non-commit or permission
 to repeat an effect that might already have committed.
 
-Each new Policy Admission Closure MUST finalize against the exact governing
+Each new required project qualification through Policy Admission Closure MUST finalize against the exact governing
 configuration and owner-rule basis active at its decision boundary. A change
 before finalization MUST refuse stale-basis finalization; a fresh decision may be
 requested under the newly resolved basis. Completed closures remain exact history
@@ -143,8 +223,10 @@ and may be replayed without becoming new admissions. Failure to establish the
 governing basis MUST preserve available decisive provenance without inventing an
 applicable version or admitting a policy.
 
+Intrinsic establishment and independent-use applicability checks retain their own exact owner basis and finalization/currentness boundaries under G4.
+
 Replacement MUST NOT rewrite earlier admission/refusal closures, explanations,
-or authority bases. It governs subsequent admissions but does not by itself
+or authority bases. It governs subsequent qualifications within its applicable scope but does not by itself
 re-admit, revoke, or establish successor-rule compliance for existing policies.
 Present usability remains subject to definition-owner and consumer currentness,
 compatibility, scope, and declared dependency rules. A required assessment under
@@ -181,15 +263,15 @@ the authority, cutover, history, and refusal semantics above do not.
 | C2 activates while a candidate is being checked under C1. | A C1 decision completed before cutover remains history; one not yet finalized refuses stale-basis finalization. A fresh C2 decision is distinct. Replaying a completed C1 decision or activation cannot restore C1. |
 | A policy admitted under C1 is considered after C2 replaces it. | Its C1 admission remains history, not proof of C2 compliance. Present use follows the exact owner's and consumer's dependency/currentness rules; replacement alone neither revokes nor re-admits it. |
 | Established governance is unreadable, or activation's commit is uncertain. | Missing state does not authorize reinitialization. An uncertain operation cannot report success or repeat a possibly committed effect before authoritative resolution. |
+| P explicitly deferred scope S and later requests its first establishment. | Resolve P/S's exact eligible deferred basis, obtain initial human approval, validate and commit under G3 without replacing P's identity; uncertain or previously established state cannot use this route. |
 
 <a id="contract-permitted-use"></a>
 ## Contract permitted use and qualification
 
-Prospective change: the [proposed contract reconciliation](amendments/governance-defaults-and-delegated-operation.md#a2--objects-and-governance-contracts-and-repeated-ownership-rules)
-separates completeness, independent use and project qualification, with exact
-activation edits. It awaits human semantic sign-off; current rules remain operative.
+The [approved HR-007 amendment](amendments/governance-defaults-and-delegated-operation.md)
+was integrated on 2026-10-04. References to G1–G6 below name its approved rules.
 
-Every admitted contract revision MUST have one exact governed **Contract
+Every admitted contract revision MUST have one exact owner-established **Contract
 Permitted Use** value:
 
 | Value | Permitted Evaluation Use Intent |
@@ -205,16 +287,14 @@ deployment environment, readiness, governing assignment, evaluation outcome,
 and completion authority. Both values require complete contract semantics for
 their own bounded questions. Neither warrants a softer meaning of `pass`.
 
-An author may propose a value; owner admission establishes it under the exact
-active project admission configuration and applicable Contracts admission rule
-defined by [shared policy admission](#policy-admission). Admission MUST establish
-supported explicit permitted use, complete candidate semantics, satisfaction of
-the applicable use-qualification requirements and declared governance inputs,
-and the authority and predecessor/currentness conditions required by the owner's
-native operation. Missing, ambiguous, unsupported, or unverifiable qualification
-basis, or unsatisfied required conditions, refuses admission. A candidate cannot
-select its own qualification requirements; a name, prompt, previous diagnostic
-pass, or requested run intent cannot supply missing qualification authority.
+An author may propose a value; Contracts owner validation establishes supported
+explicit permitted use and complete candidate semantics under the exact owner
+rules in shared admissibility. Applicable project qualification is separately
+established under G4 and the exact active configuration before dependent use.
+Missing, ambiguous, unsupported, unverifiable, or unsatisfied required owner or
+qualification conditions refuse that dependent operation. A candidate cannot
+select its own criteria; a name, prompt, previous pass, or requested intent
+cannot supply missing authority.
 
 Initial candidates and successor candidates requesting the same permitted use
 MUST satisfy the same applicable qualification requirements. Creating a fresh
@@ -230,9 +310,31 @@ No mandatory promotion sequence, previous diagnostic pass, separate approval
 artifact, recursively required validation contract, extra human confirmation,
 or identity service is introduced. A contract may start as Decision-seeking
 eligible or remain Diagnostic-only indefinitely under its applicable rules.
-Concrete qualification criteria remain project-specific and must be selected
-before the dependent admission can succeed; deterministic owner admission is
+Concrete owner conformance criteria and project-specific qualification criteria remain distinct; every applicable criterion must be selected and satisfied before its dependent use can succeed; deterministic owner admission is
 the base mechanism, not an open-ended judgment of organizational safety.
+
+**Contract Permitted Use** retains `Diagnostic-only` and `Decision-seeking eligible`
+and the existing intent compatibility table. Owner validation establishes this
+immutable run-intent property under exact supported owner criteria; applicable
+project qualification is separately checked for its proposed use. The property
+does not assert project approval, governing assignment, shipment permission,
+maturity, readiness, or a successful evaluation. Both values require complete
+semantics. Deliberately deferred governance alone MUST NOT make either value
+Draft, incomplete, or unevaluable. A genuine incomplete candidate may still be
+called a draft. Changing qualification alone does not rewrite permitted use or
+historical results. Concrete owner criteria and project criteria remain unselected.
+
+Results MUST preserve their real findings, measurements, and gate outcomes and
+separately communicate: intrinsic contract validity/completeness for the question;
+exact requirements source and intent; governance state/applicability for the
+project/scope at the checked boundary; exact qualification basis if applicable;
+and whether any governed obligation was actually assessed. A useful summary is
+“API compatibility: pass; requirements: direct contract C; project governance:
+deliberately deferred; shipment obligation: not assessed.” These are semantic
+facts, not a selected DTO, new combined status enum, renderer, or duplicate source.
+An applicable but unmet qualification refuses the dependent operation; it does
+not retroactively make an intrinsically complete contract incomplete. An unresolved
+required governance basis cannot be presented as “deferred” or “not applicable.”
 
 The [requirements and preparation boundary](assurance-and-evaluation-preparation.md#evaluation-requirements)
 preserves permitted use through both requirement sources and refuses an
@@ -302,8 +404,8 @@ The following terms are normative. Terms in separate rows are not synonyms.
 | **Semantic owner** | The bounded-context responsibility that alone establishes, rejects, verifies, or changes the exact proposition represented by an object. Storage, rendering, transport, or orchestration does not transfer this authority. |
 | **Canonical object** | An exact object whose semantic owner recognizes its identity and content as authoritative for one bounded proposition. Canonicality is owner- and proposition-scoped; it does not mean “stored in the generic artifact repository,” “currently applicable,” “globally trusted,” or “safe for every use.” |
 | **Authored canonical project artifact** | Human- or governance-authored project truth governed through the generic Artifact Kind / Artifact Instance lifecycle, including candidate formation, validation, promotion, exact revision, authorized mutation, and lineage. Only the six named families in this record have this status. |
-| **Canonical semantic definition or policy** | An immutable, named, versioned rule or vocabulary definition established by its semantic owner through its native lifecycle. Ordinary project policy candidates require Policy Admission Closure; governing admission configurations use the bounded establishment lifecycle in Shared policy admission, rooted in a Handbook-defined rule outside that candidate population. It defines how later inputs are resolved, admitted, evaluated, or interpreted; it is not a result of applying itself. |
-| **Policy Admission Closure** | The one immutable owner-produced canonical record that closes admission or refusal of one exact policy candidate under one exact owner admission-rule version. It binds exact candidate content; the governing project configuration version, applicable owner admission-rule version, their semantic-content identities, exact scope, and active-at-decision basis; typed vocabulary and conformance; finite candidate selection and accounting; every relevant exact governance-source revision with proposition role, scope, and historical, formation-only, or continuing-current dependency mode; any separately typed and authorized approval or exception source required by that rule; and all non-relaxable invariant checks. The name **Closure** is selected because one exact category-3 owner result closes both basis and outcome without mandating separate `Policy Admission Basis` and `Policy Admission Result` runtime object types. |
+| **Canonical semantic definition or policy** | An immutable, named, versioned rule or vocabulary definition established by its semantic owner through its native lifecycle. Independent contract/evaluation definitions require owner establishment under G4; applicable project qualification requires Policy Admission Closure. Governing configurations use the bounded establishment lifecycle. It defines how later inputs are resolved, admitted, evaluated, or interpreted; it is not a result of applying itself. |
+| **Policy Admission Closure** | The one immutable owner-produced canonical record that closes admission or refusal of one exact project-qualification candidate under one exact owner admission-rule version. It binds exact candidate content; the governing project configuration version, applicable owner admission-rule version, their semantic-content identities, exact scope, and active-at-decision basis; typed vocabulary and conformance; finite candidate selection and accounting; every relevant exact governance-source revision with proposition role, scope, and historical, formation-only, or continuing-current dependency mode; any separately typed and authorized approval or exception source required by that rule; and all non-relaxable invariant checks. The name **Closure** is selected because one exact category-3 owner result closes both basis and outcome without mandating separate `Policy Admission Basis` and `Policy Admission Result` runtime object types. Intrinsic validation and independent applicability may share this outcome but remain distinct propositions under G4; no fictitious configuration is bound when qualification is not applicable. |
 | **Owner-produced canonical record or result** | An immutable determination, closure, verification, admission, disposition, or receipt produced by applying one semantic owner's rules to exact inputs. It remains owned by that domain even when another domain consumes it. |
 | **Durable origin, attempt, or source provenance** | An immutable occurrence record of what an origin owner requested, attempted, observed, reported, applied, refused, or completed. It may be canonical for that bounded occurrence assertion while remaining untrusted or insufficient for a downstream semantic proposition. |
 | **Deterministic projection** | A purpose-, audience-, disclosure-, and definition-bound view of exact source truth. It may select, redact, collapse, render, or assemble while recording its source identities, omissions, lossiness, and output identity. It is authoritative only about that projection operation, not the source proposition. |
@@ -391,12 +493,7 @@ current private representation.
 - Shared canonicalization, fingerprint, exact-reference, repository-support,
   lineage, or pagination primitives MAY be reused across owners. Reusing a
   primitive MUST NOT merge repositories, lifecycle meanings, or authority.
-- All canonical definition and policy candidates follow the
-  [shared policy-admission rule](#policy-admission). Ordinary project candidates
-  require Policy Admission Closure; governing configurations instead follow that
-  section's bounded establishment/activation lifecycle under the fixed Handbook
-  rule. That base case is not an alternative admission path for ordinary policies.
-  Authorship and artifact promotion do not establish executable admission.
+- All canonical definition and policy candidates follow shared admissibility. Independent contract/evaluation definitions use owner establishment and applicability under G4. Applicable project qualification requires Policy Admission Closure; governing configurations use first establishment/activation under the fixed Handbook rule. Neither route admits a candidate's own rule or activates a policy by authorship.
 - An owner-produced record MUST remain immutable historical truth for its exact
   input closure. Currentness, supersession, or current-use eligibility is a
   separate owner observation or relationship; it MUST NOT rewrite the record.
@@ -436,14 +533,14 @@ decisions. It does not redefine their detailed fields or behavior.
 | Admission-governance establishment, activation, and refusal outcomes | Owner-produced canonical records or results | Project admission governance owns exact validation, authority basis, predecessor/cutover, and committed activation or refusal. These outcomes do not create a seventh authored artifact family or grant authority for unrelated effects. |
 | Project Authority / Charter; Project Context; Environment Context; Work Specification; Decision Record; Risk Record | Authored canonical project artifacts | Engine's artifact/profile domain owns generic kind, instance, lifecycle, revision, validation, promotion, mutation, and lineage semantics; project authors and authorized governance supply the content. |
 | Artifact Kind definitions; Artifact Instance Descriptors; profiles; renderer and projection definitions; Context Resolution definitions | Canonical semantic definitions or policies | Engine admits and resolves its system definitions. The descriptor defines an artifact instance; it is not itself that authored artifact. |
-| Contract revisions, including Contract Permitted Use; claim definitions and inventories; claim-set definitions; Evidence Evaluation Policies; Metric Definitions; Gate Policies | Canonical semantic definitions or policies | Contracts definition authorities own executable meaning, permitted-use qualification under the active admission rules, immutable revision identity, and exact resolution. |
+| Contract revisions, including Contract Permitted Use; claim definitions and inventories; claim-set definitions; Evidence Evaluation Policies; Metric Definitions; Gate Policies | Canonical semantic definitions or policies | Contracts definition authorities own executable meaning, owner-established permitted use and applicable project qualification under G4, immutable revision identity, and exact resolution. |
 | Assurance Policy Selector; Assurance Policies; policy mappings; typed exception policies | Canonical semantic definitions or policies | Contracts-domain assurance-governance definition authorities own admission and currentness of their executable definitions, mappings, and candidate inputs. Assurance Selection resolves and applies only those admitted inputs; it cannot admit or authorize its own inputs. |
 | Producer Semantic Capability definitions | Canonical semantic definitions or policies | A distinct Producer Capability Authority within the broader Contracts bounded context independently admits the semantic representational capability used for proof-plan compatibility. A producer or Dock cannot self-admit it. |
 | Dock or adapter operating-ceiling definitions and producer retry/partial-completion policies | Canonical semantic definitions or policies | The Dock or adapter owner establishes its bounded operating contract. That contract is not Engine authorization, Producer Semantic Capability, or host enforcement. |
 | Action Kind definitions; Operational Reliance, Local Closeout, Parent Eligibility, Action Authorization, posture-observation, posture-recommendation, workflow, recovery, release, or deployment policies | Canonical semantic definitions or policies | The responsible definition or downstream action domain owns each exact admitted definition. This record selects no universal enforcement owner and no policy becomes admitted merely because a user, agent, artifact, or transport authored it. |
 | Live, unclosed policy-candidate submission | Transient operational state | It is proposed content at an admission boundary. Candidate authorship or transport does not create a category-2 definition. |
 | Origin-closed policy-candidate submission occurrence | Durable origin, attempt, or source provenance | The user, agent, artifact, tool, or adapter origin owns the exact historical assertion that the candidate was submitted. It is not policy admission. |
-| Policy Admission Closure | Owner-produced canonical record or result | The exact definition/admission owner deterministically closes admission or refusal under the exact governing configuration and owner rule active at the shared decision boundary, with typed conformance, finite candidate accounting, relevant exact governance-source roles/scope/currentness, required typed approvals or exceptions, and non-relaxable invariant checks. It is one category-3 closure rather than a required pair of new runtime object types. |
+| Policy Admission Closure | Owner-produced canonical record or result | The exact definition/admission owner deterministically closes required project qualification or refusal under the exact governing configuration and owner rule active at the shared decision boundary, with typed conformance, finite candidate accounting, relevant exact governance-source roles/scope/currentness, required typed approvals or exceptions, and non-relaxable invariant checks. It is one category-3 closure rather than a required pair of new runtime object types. |
 | Private `ContextResolutionEnvelope`, Resolved Profile, exact stack, and Engine authority-admission lineage | Owner-produced canonical records | Engine owns private authority truth and exposes only bounded public projections or opaque resolvable references. |
 | Posture Scope; Resolved Posture Snapshot; posture-transition result and resulting authority state | Owner-produced canonical records or results | Engine posture responsibilities own scoped posture resolution and separately authorized mutation truth. |
 | Exact selection-basis closure; policy-resolution basis; Resolved Assurance Requirements | Owner-produced canonical records or results | Contracts-domain Assurance Selection closes the exact admitted candidate set and selection inputs, owns complete accounting, and produces the exact selection outcome. It does not establish governance admission or currentness for the definitions and mappings it consumes. |
@@ -524,7 +621,7 @@ responsibilities, not physical crates, modules, storage engines, or APIs.
 | Engine posture domain | Exact Posture Scope resolution, Resolved Posture Snapshot, snapshot verification, and separately authorized posture transition. | Assurance selection, evidence evaluation, gate truth, or transition authority inferred from a recommendation. |
 | Engine Context Resolution domain | Complete envelope admission, non-expansion, Evaluation Authorization issuance/refusal, private lineage, verification, historical validity, currentness, and supersession. | Requirements, producer capability, readiness, evidence adequacy, gate truth, host enforcement, or downstream action authority. |
 | Project admission governance | Establishment under the fixed Handbook rule; exact configuration/scope and owner-rule bindings; previously authorized successor activation; cutover, active-version relation, history, replay, and truthful authority provenance. Physical placement remains deferred. | Candidate self-authorization, implicit file activation, stale predecessor overwrite, history rewriting, fabricated authentication, or authority for unrelated operational effects. |
-| Definition and policy-admission owners | Exact candidate populations; resolving the active governing configuration and applicable owner-rule basis; deterministic Policy Admission Closures at the shared decision boundary; typed vocabulary/conformance; relevant exact governance-source proposition roles, scopes, and dependency/currentness modes; required typed/authorized approvals or exceptions; non-relaxable invariant checks; admission/refusal, currentness, and supersession. | Treating authorship, prompt/agent role, artifact promotion, bare links, open-ended AI safety judgment, or policy-favorable outcomes as admission; requiring every artifact family; turning authored text into runtime evidence/waiver; or letting a candidate recursively admit its own admission rule. |
+| Definition and policy-admission owners | Exact candidate populations; intrinsic owner establishment and independent-use applicability under G4; resolving the active governing configuration and owner-rule basis when project qualification applies; owner conformance outcomes and required project-qualification Policy Admission Closures at their exact decision boundaries; typed vocabulary/conformance; relevant exact governance-source proposition roles, scopes, and dependency/currentness modes; required typed/authorized approvals or exceptions; non-relaxable invariant checks; admission/refusal, currentness, and supersession. | Treating authorship, prompt/agent role, artifact promotion, bare links, open-ended AI safety judgment, or policy-favorable outcomes as admission; requiring every artifact family; turning authored text into runtime evidence/waiver; or letting a candidate recursively admit its own admission rule. |
 | Contracts-domain assurance governance and exception admission | Admission and currentness of Assurance Policy Selector, Assurance Policy, policy-mapping, candidate-policy, and typed exception-policy definitions through exact Policy Admission Closures; independently attributable admission of exact authorized exception records. | Posture resolution, closing the selection basis, selecting or applying requirements, allowing a selector to authorize its own inputs, evidence admission, or Engine authority. |
 | Contracts-domain Assurance Selection | Exact resolution of one selector and policy over an Engine-owned Resolved Posture Snapshot and other declared admitted inputs; closure of the exact selection basis; application of only admitted exception effects; policy-resolution basis; Resolved Assurance Requirements; complete candidate and selection accounting. | Definition, mapping, candidate-input, policy, or exception admission/currentness; policy or exception invention; exception authorization; posture resolution or mutation; Engine authorization; capability-driven relaxation; evidence admission; or gate reinterpretation. |
 | Contracts-domain direct requirement resolution | Complete direct-contract Evaluation Requirements over an exact admitted, usable contract, its permitted use, subject/scope, compatible definitions, dependencies, nomination/resolution provenance, and accounting. | Admitting its own inputs, inventing missing requirements, capability-driven relaxation, assigning the project completion standard, Engine authorization, or evidence truth. |
@@ -656,7 +753,7 @@ source and projection identities unless an owner explicitly binds it.
 | Scenario and inputs | Expected semantic outcome | Invariant proved |
 | --- | --- | --- |
 | **Promoted Charter and resolved posture.** A Charter revision is promoted through the project-artifact lifecycle. Engine resolves a Posture Scope and produces a Resolved Posture Snapshot. | The Charter remains an authored canonical artifact. The snapshot is a distinct Engine-produced canonical record binding that revision; it is not another Artifact Instance and cannot be edited or promoted as one. | Authored source and owner derivation have different identities and lifecycles. |
-| **User- or agent-authored policy candidate.** A Decision Record contains approved rationale and a user or agent submits candidate policy text stored beside project artifacts. The submission cites the record only by a Markdown link, omits exact proposition role/scope/currentness, and has no Policy Admission Closure. | The artifact and candidate may be governance provenance, but no Assurance, Metric, Gate, Operational Reliance, or Action Authorization policy exists for execution. The responsible owner must deterministically close admission or refusal against exact candidate content, typed rules, relevant exact governance revisions and dependency modes, required typed approvals/exceptions, finite candidate accounting, and non-relaxable invariants. | Candidate authorship and organizational judgment are permitted; artifact promotion, bare links, prompts, and agent roles do not substitute for executable owner admission. |
+| **User- or agent-authored policy candidate.** A Decision Record contains approved rationale and a user or agent submits candidate policy text stored beside project artifacts. The submission cites the record only by a Markdown link, omits exact proposition role/scope/currentness, and has no intrinsic owner establishment or required project-qualification Policy Admission Closure. | The artifact and candidate may be governance provenance, but no Assurance, Metric, Gate, Operational Reliance, or Action Authorization policy exists for execution. The responsible owner must deterministically close intrinsic establishment and applicable project qualification, or refuse, under G4 against exact candidate content, typed rules, relevant exact governance revisions and dependency modes, required typed approvals/exceptions, finite candidate accounting, and non-relaxable invariants. | Candidate authorship and organizational judgment are permitted; artifact promotion, bare links, prompts, and agent roles do not substitute for executable owner admission. |
 | **Selector receives an unadmitted exception.** An authorized actor authored an exact exception source, but the distinct exception-admission responsibility has not established policy conformance, scope, identity, and currentness. | Assurance Selection refuses the input and cannot admit, broaden, or self-authorize it. Only a separate admission record may supply a bounded effect. | Record authorization, admission, and selection-time application remain distinct. |
 | **Durable failed attempt.** A Dock retains an exact timeout terminal and the producer retains a partial source observation. | Both may be durable occurrence provenance and canonical for what their origin owners reported. Neither is an authored artifact, canonical evidence, readiness result, or gate truth. | Durability and bounded canonicality do not imply artifact status or downstream admission. |
 | **Self-described capability.** A producer manifest claims support for a role and a Dock ceiling permits the request, but no independent Producer Semantic Capability definition has been admitted. | Evaluation Coordination cannot treat the producer as semantically capable. The manifest and ceiling remain Dock/producer facts and cannot create the missing Contracts-domain capability authority. | Producer self-description and operating ceiling cannot substitute for admitted semantic capability. |
@@ -675,7 +772,7 @@ source and projection identities unless an owner explicitly binds it.
 This record settles:
 
 - the two exact Contract Permitted Use values, Contracts-owned qualification
-  under established admission rules, immutable revision changes, and distinction
+  under exact owner rules and applicable project qualification under G4, immutable revision changes, and distinction
   between a governing contract and a contract inspected as data;
 
 - the six-category ontology plus the subordinate representation distinction;
@@ -707,8 +804,7 @@ This record settles:
 - independent admission of Producer Semantic Capability from producer
   self-description, Dock ceiling, availability, actual reach, and host
   enforcement;
-- deterministic policy-candidate admission as one owner-produced Policy
-  Admission Closure without a mandatory Basis/Result pair, every-artifact
+- intrinsic owner establishment and applicable project qualification through one owner outcome, including Policy Admission Closure when required without a mandatory Basis/Result pair, every-artifact
   requirement, authored-text waiver, open-ended AI safety judgment, or recursive
   self-admission;
 - projection, assembly, representation, and canonical-explanation boundaries,
@@ -930,10 +1026,11 @@ No concrete validation contract, parser, or preview subsystem is selected.
 If validation findings are inserted into D's semantic content, the changed D
 is a new candidate; the prior result cannot silently validate that changed
 content. An owner admission closure may record the validation relationship
-without rewriting the inspected candidate. Unadmitted exploratory execution
-does not become canonical evaluation under the draft it explores.
+without rewriting the inspected candidate. Exploratory execution without owner-established complete contract/evaluation definitions does not become canonical evaluation. Independent complete-contract evaluation under G4–G5 is owner-established and is not exploratory execution under an unfinished draft.
 
 #### Policy candidates and governance sources
+
+Shared admissibility distinguishes intrinsic establishment, applicable project qualification, and governing assignment under G4; references do not perform any of them.
 
 Authored policy candidates MUST follow [shared policy admission](#policy-admission).
 The artifact's exact revision, relationship direction, declared role, scope,
@@ -1069,10 +1166,7 @@ selector, exception, or action was proposed, admitted, selected, or changed. It
 may also carry policy-candidate content or organizational judgment and may bind
 an already owner-recognized target through a Governance Source Reference. The
 target owner MUST independently establish the target's exact semantics and
-applicable admission or authorization. For a definition, policy, or selector
-candidate, that includes its Policy Admission Closure with exact source roles,
-scope, dependency/currentness modes, compatibility, required separately
-authorized approvals or exceptions, and supersession. A particular exception
+applicable admission or authorization. For a definition, policy, or selector candidate, that includes intrinsic owner establishment and, when applicable project qualification is required, its Policy Admission Closure under G4. Exact source roles, scope, dependency/currentness modes, compatibility, required separately authorized approvals or exceptions, and supersession remain owner checks; a Decision Record cannot substitute for them. A particular exception
 record or action instead follows its own separately typed authorization and
 admission boundaries; referencing it does not turn it into a policy candidate
 or substitute Policy Admission Closure for those owner results.
@@ -1259,7 +1353,7 @@ relation.
 | **Gate pass recorded by a later Work Specification.** Gate result `G1` closes for an occurrence whose Purpose bound `W1`. A later revision `W2` references `G1` and an action-domain closeout disposition. | `W2` records exact owner outcomes. It neither computed `G1` nor proves closeout from `pass`; `W2` cannot be rebound as an input to the completed occurrence. | Work Specification is a work plan and provenance consumer, not a result or action owner. |
 | **Authored completed label without disposition.** A Work Specification author marks an authored planning state `completed`, but no separately owned current-use or closeout result exists. | The artifact revision may be valid authored project truth, but no local closeout, parent eligibility, promotion, release, deployment, or other operational proposition is established. | Authored lifecycle language is not operational authority. |
 | **Decision predates target identity.** Decision Record revision `D1` supplies rationale for a proposed policy, but the policy owner has issued no policy or pre-admission candidate identity. Contracts later admits policy `Q1` and binds `D1` as source provenance. In a comparison case, `D1` names an exact owner-recognized candidate `Qc`, and admission later creates distinct policy identity `Q1`. | `D1` contains no Typed Semantic Reference to the not-yet-issued `Q1` and is not mutated when `Q1` forms. `Q1` may bind `D1` under its owner-produced source closure, and a later Decision Record revision may reference `Q1`. In the comparison case, the original reference remains to `Qc`; the owner's candidate-to-policy relation, not silent retargeting, connects `Qc` and `Q1`. | An authored artifact cannot mint a future owner result; target-owned provenance, candidate identity, and later artifact-authored reference are distinct relations. |
-| **Decision prose resembles policy.** An accepted Decision Record says all security failures block release, but the candidate supplies only a Markdown link, no exact target scope or finite candidate accounting, and no exact admission-rule closure. | The human decision and rationale remain canonical authored truth. No executable Gate or Operational Reliance Policy exists until the responsible owner deterministically produces a Policy Admission Closure that binds the exact candidate, relevant governance-source revision and role, scope, dependency modes, required approvals or exceptions, complete accounting, and non-relaxable checks. | Governance acceptance and a bare link do not perform semantic-policy admission or turn authored text into runtime evidence or a waiver. |
+| **Decision prose resembles policy.** An accepted Decision Record says all security failures block release, but the candidate supplies only a Markdown link, no exact target scope or finite candidate accounting, and no exact admission-rule closure. | The human decision and rationale remain canonical authored truth. No executable Gate or Operational Reliance Policy exists until the responsible owner establishes complete supported semantics and any required project qualification under G4; required Policy Admission Closure binds the exact candidate, relevant governance-source revision and role, scope, dependency modes, required approvals or exceptions, complete accounting, and non-relaxable checks. An independently usable Gate needs intrinsic owner establishment without fabricated project qualification; neither a Gate nor an Operational Reliance Policy activates or assigns itself. | Governance acceptance and a bare link do not perform semantic-policy admission or turn authored text into runtime evidence or a waiver. |
 | **Decision references admitted policy.** A later Decision Record revision cites exact admitted policy `Q1` and explains why it was chosen. `Q1` is later superseded by its owner. | The record's historical reference remains exact. It does not keep `Q1` current, supersede it itself, or update to the successor automatically. | A Governance Source Reference preserves rather than transfers target ownership/currentness. |
 | **Risk acceptance offered as waiver.** A Risk Record marks a security risk accepted and is submitted directly to Assurance Selection to omit the related claim. | Selection refuses the shortcut. Only a declared admitted policy input, or an independently authorized and admitted typed exception record with bounded effect, can influence requirements. | Risk governance status is not exception authority. |
 | **Authored Risk Record versus owner-produced risk fact.** Selector `S1` declares exact Risk Record revision `R1` in an authored-risk-classification role. Selector `S2` instead declares exact owner-produced risk fact `F1`, whose source closure cites `R1`. A caller supplies `F1` to `S1`, supplies `R1` to `S2`, or asks either selector to treat `R1`'s accepted status as a waiver. | Each substitution refuses. `S1` may interpret only the authored proposition declared for its role; `S2` may interpret only the independently owner-produced proposition of `F1`. `R1` does not become the owner of `F1`, and neither input creates an exception or prospective applicability proof. | Authored risk governance, owner-produced risk fact, assurance selection, typed exception authority, and prospective applicability are non-substitutable. |
@@ -1293,9 +1387,7 @@ This record settles:
 - Work Specification as a feature/slice/work plan that may reference, but cannot
   compute or own, evaluation, atomic reliance, authorization, terminal, receipt,
   or downstream mutation results;
-- user-, agent-, artifact-, and tool-authored policy candidates as permitted
-  governance inputs that require deterministic owner-side Policy Admission
-  Closure, exact relevant source roles/scope/dependency modes, complete
+- user-, agent-, artifact-, and tool-authored policy candidates as proposed inputs requiring intrinsic owner establishment and, when applicable, deterministic project-qualification Policy Admission Closure, exact relevant source roles/scope/dependency modes, complete
   selection/accounting, and mechanical invariant checks without bare-link proof,
   authored-text evidence/waiver conversion, open-ended AI judgment, or recursive
   self-admission;

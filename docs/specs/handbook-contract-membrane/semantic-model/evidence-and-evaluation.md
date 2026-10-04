@@ -1,6 +1,6 @@
 # HCM semantic model — Evidence and evaluation truth
 
-**Status: PROPOSED**
+**Status: APPROVED as semantic input — package approval 2026-09-30; HR-007 integrated 2026-10-04**
 
 Part of the [combined semantic package](README.md). Its approval boundary and
 shared greenfield/current-product distinction apply throughout.
@@ -710,6 +710,8 @@ truth requires a deliberately new evaluation and its own applicable occurrence-b
 collection or complete-pruning commitment/frontier and evidence closure. No
 cross-occurrence transfer or automatic reuse of an old-occurrence record is authorized.
 
+G5 permits new present-use qualification of an exact old result under a supported governing protocol. It creates no new evaluation truth and transfers no old-occurrence record into a new evidence closure.
+
 Claim evaluators MUST receive the one exact Canonical Evidence Set Closure from
 the final evaluation context. An Evidence Evaluation Policy may select eligible
 members from that already closed set and must account for every selected and
@@ -778,11 +780,13 @@ implementation passed the old execution's tests. The required selected plan
 determines which observations must be collected; unrelated development tests
 are not automatically required to repeat.
 
+A new current governing assessment under G5 may instead qualify exact existing results for declared roles. It is not a new posture-selected evaluation occurrence and does not adopt the earlier authorization, observations or evidence as its own collection. Original source/intent and all occurrence boundaries remain.
+
 Discriminating requirements-source cases:
 
 | Case | Required outcome |
 | --- | --- |
-| Exact eligible contract evaluated directly, then selected by posture with equal rules. | New source means new Purpose and occurrence; the prior pass and evidence cannot be relabeled or imported. |
+| Exact eligible contract evaluated directly, then selected by posture with equal rules. | New source means new Purpose and occurrence; the prior pass and evidence cannot be relabeled or imported. Separately, G5 current qualification may accept the unchanged earlier result for an exact role when expressly supported; it neither relabels nor imports that occurrence. |
 | A direct closure omits a contract-rooted claim, required evaluator/policy binding, or dependency. | Refuse formation; direct evaluation is not incomplete evaluation or unknown readiness. |
 | Permitted use changes with unchanged claims. | New admitted revision and new evaluation identity; earlier results retain their original permitted use and intent. |
 | V validates Diagnostic-only D as data. | V's admitted rules and permitted use govern that evaluation. Its bounded result does not admit D, widen D's use, or supply D's execution evidence. |
@@ -952,7 +956,7 @@ deliberately new occurrence.
 | --- | --- | --- |
 | Contracts-domain Evaluation Coordination | Evaluation Occurrence Identity allocation; Evaluation Content Fingerprint and Purpose formation including requirements source and contract permitted-use compatibility; exact Plan/Purpose congruence; readiness reformation boundary; occurrence commitment to one prospective basis; later launch permission/hold/refusal over exact owner checks, with complete recovery accounting; one exact Occurrence Collection Frontier from origin-owner terminals or the supported no-collection outcome establishing commitment and frontier together. | Engine issuance/currentness, prospective or final applicability truth, invention of origin or admission terminals, evidence admission/set membership, claim/metric/gate truth, or operational reliance. |
 | Contracts requirements resolvers | Assurance Selection produces posture-specific Resolved Assurance Requirements; direct requirement resolution produces complete direct-contract requirements. Both preserve exact contract permitted use and complete source provenance. | Self-admission, capability-driven requirement changes, reclassifying contracts, Engine authority, or governing-completion assignment. |
-| Contracts definition authorities | Deterministic Policy Admission Closure, immutable identity, compatibility, currentness, and historical resolution of Prospective Applicability Policies and Canonical Evidence Set Formation Policies, including exact relevant governance-source roles/scope/dependency modes and complete candidate accounting. | Treating authored candidate text or a bare link as admitted policy, recursively letting a candidate admit its own rule, or applying a policy to select a desired plan, set membership, applicability, claim, metric, or gate outcome. |
+| Contracts definition authorities | Owner establishment and applicable project qualification under G4, including required deterministic Policy Admission Closure, immutable identity, compatibility, currentness, and historical resolution of Prospective Applicability Policies and Canonical Evidence Set Formation Policies, including exact relevant governance-source roles/scope/dependency modes and complete candidate accounting. | Treating authored candidate text or a bare link as admitted policy, recursively letting a candidate admit its own rule, or applying a policy to select a desired plan, set membership, applicability, claim, metric, or gate outcome. |
 | Contracts applicability responsibility | Exact resolution and application of an already admitted Prospective Applicability Policy; Prospective Applicability Basis formation; final applicability; prospective/final congruence. | Policy self-admission, ambient or evidence-dependent plan pruning, producer selection, Engine authority, or requirement relaxation. |
 | Engine Context Resolution | Evaluation Authorization Binding issuance, private lineage, named verification observations, historical validity, currentness, and supersession. | Occurrence allocation, content fingerprints, applicability, plan adequacy, readiness, evidence membership, or replay reconstruction by Contracts. |
 | Producer Capability, Dock/adapter, prerequisite, retry, partial-completion, and availability owners | Their exact semantic definitions and checkpoint-current verification or occurrence facts under independently attributable authority. | Altering Producer Selection, assurance requirements, Engine authorization, readiness outcome, or evidence truth. |
@@ -1342,16 +1346,19 @@ Admission preserves every compatibility, numeric-meaning, and non-relaxable trus
 constraint in this chapter; policy authorship does not change claim or gate
 meaning.
 
+Owner establishment and applicable project qualification follow G4; independent use cannot relax the compatibility, numeric meaning, trust, accounting or closure requirements here.
+
 ### Responsibility map
 
-Prospective change: the [proposed evidence-dependency reconciliation](amendments/governance-defaults-and-delegated-operation.md#a4--evidence-and-evaluation-truth)
-identifies admission prerequisites and governance provenance changes in this part.
-It awaits human semantic sign-off; current rules remain operative.
+The [approved HR-007 amendment](amendments/governance-defaults-and-delegated-operation.md)
+was integrated on 2026-10-04. References to G1–G6 below name its approved rules.
 
-All definition and policy admissions in this part, including Prospective
-Applicability and Canonical Evidence Set Formation Policies, use the governing
-configuration, owner-rule basis, and active-at-decision boundary established by
-[shared policy admission](objects-and-governance.md#policy-admission). A successor
+All definitions and policies in this part, including Prospective Applicability
+and Canonical Evidence Set Formation Policies, require owner establishment under
+shared admissibility. Applicable project qualification uses its exact governing
+configuration, owner-rule basis, and active-at-decision boundary under G4.
+Independent complete-contract evaluation requires the same evidence/truth closure
+and preserves its exact governance applicability provenance under G5. A successor
 configuration does not rewrite earlier admissions, evidence membership,
 applicability, or evaluation truth, and does not substitute new policy definitions
 into a formed purpose or context. Historical admission, current usability, and
@@ -1371,7 +1378,7 @@ the exact owner and consumer dependency/currentness rules govern present use.
 | Contracts-owned named metric-definition authority | Canonical establishment, exact re-admission validation, and exact resolution of immutable named, versioned, configured metric definitions; validation of the eligible-population and compatibility rules, input/output scales and units, algorithm identity/version, parameters and coefficients under their algorithm-declared semantics and bounds, aggregation semantics, and missing/indeterminate-input policy. | Evidence selection, finding interpretation or establishment, the actual evaluation-run population, metric computation, threshold/comparator application, gate decision, or downstream mutation. |
 | Metric computation | Pure exact application of one exactly resolved named metric definition to compatible claim evaluations in one closed evaluation context, including derivation and accounting of the actual included/excluded population and calculation result. | Raw-source/evidence selection, applicability or finding changes, definition changes, gate threshold/comparator application, gate decision, or downstream disposition. |
 | Gate policy | Direct non-compensatory claim-evaluation predicates, named metric-result predicates, precedence, indeterminacy treatment, and the semantic gate decision. | Raw evidence interpretation, unit/scale conversion, changing metric semantics, canonical admission, or any workflow/posture/promotion mutation. |
-| Work Progression and other Operational Reliance owners | Resolve exact historical results and Evaluation Authorization Binding validity; apply one admitted action-specific Operational Reliance Policy with explicit `historical_validity_only` or `continuing_current` Engine dependency mode; close exact target/currentness/accounting within the mandatory governing-completion selection and assessment boundary where applicable; and produce one atomic Operational Reliance Determination with paired eligibility/disposition facets or a Reliance Refusal. Work Progression is the proposed semantic owner for local-closeout and parent eligibility. | Rewriting the semantic gate or canonical explanation, treating a metric as the decision, issuing action authority, mutating state, or silently selecting work hierarchy/state policy or physical placement. |
+| Work Progression and other Operational Reliance owners | Resolve exact historical results and Evaluation Authorization Binding validity; apply one admitted action-specific Operational Reliance Policy with explicit `historical_validity_only` or `continuing_current` Engine dependency mode; close exact target/currentness/accounting within G5's independently resolved governing requirements, adopted protocol, selection/qualification and complete assessment boundary where applicable; and produce one atomic Operational Reliance Determination with paired eligibility/disposition facets or a Reliance Refusal. Work Progression is the proposed semantic owner for local-closeout and parent eligibility. | Rewriting the semantic gate or canonical explanation, treating a metric as the decision, issuing action authority, mutating state, or silently selecting work hierarchy/state policy or physical placement. |
 | Action requester and action-authorization owner | The requester owns one exact Action Intent after `eligible / allow`. The exact action-authorization owner independently produces an Action Authorization Binding or Action Authorization Refusal with the declared advisory, verified, or host-enforced authority provenance and fresh conditions. | Treating Evaluation Authorization, a gate, `allow`, a prompt, ambient OS permissions, or artifact approval as independently authenticated identity, verified delegation, host-enforced permission, or a mandate for a general Handbook IAM platform. |
 | Action executor and authoritative state/effect owner | The executor owns one exact Action Attempt Identity and Action Terminal. The authoritative state/effect owner performs attempt- and commit-bound expected-state, effect, authorization, and declared currentness checks and alone issues the Mutation Receipt for a committed change. | Ordinary retry after uncertain commit, broadening the authorized effect, inferring commit from an executor report, or reporting mutation success without the authoritative receipt. |
 | SDK, CLI, Docks, hosts, and other transports | Preserve exact owner results and provenance, including policy-permitted prompt- or configured-role-supplied advisory claims. A real enforcing host may supply stronger independently verified facts. | Becoming a semantic owner by transport; fabricating authentication, delegation, or host enforcement; waiving target/currentness checks; or satisfying a policy that requires enforcement with advisory claims. |

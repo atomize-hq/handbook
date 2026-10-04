@@ -1,6 +1,6 @@
 # HCM semantic model — Assurance and evaluation preparation
 
-**Status: PROPOSED**
+**Status: APPROVED as semantic input — package approval 2026-09-30; HR-007 integrated 2026-10-04**
 
 Part of the [combined semantic package](README.md). Its approval boundary and
 shared greenfield/current-product distinction apply throughout.
@@ -232,13 +232,12 @@ Both sources close complete requirements before capability comparison.
 Assurance Policy Selectors, Assurance Policies, Evidence Evaluation Policies,
 Metric Definitions, Gate Policies, Enforcement/Operational Reliance Policies,
 posture-observation and recommendation policies, and exception-policy candidates
-MUST follow [shared policy admission](objects-and-governance.md#policy-admission).
+MUST follow [shared policy admission](objects-and-governance.md#policy-admission) with intrinsic establishment, applicability and required project qualification distinguished under G4.
 Assurance selection consumes those exact admitted definitions; it cannot admit
 its own inputs or convert organizational rationale into a waiver.
 
 The shared admission-governance lifecycle establishes the exact project
-configuration, owner-rule basis, activation cutover, and authority provenance for
-those admissions. Assurance governance applies its domain constraints under that
+configuration, owner-rule basis, activation cutover, and authority provenance for the qualifications required by applicable project governance. Assurance governance applies its domain constraints under that
 basis; Assurance Selection cannot initialize or replace governing admission rules.
 A successor configuration neither substitutes definitions into already resolved
 requirements nor automatically revokes their inputs. Required currentness and
@@ -443,7 +442,7 @@ explanation-density view.
 | --- | --- | --- |
 | Charter authoring and governance | Project authority authors and approvers own Project Classification, persisted baseline and dimension values, descriptive guidance, and authorized Charter changes. | Executable scope matching, assurance selection by prose, metric meaning, gate truth, or automatic posture mutation. |
 | Posture resolution | The posture-resolution owner resolves exact scope and produces the immutable Resolved Posture Snapshot from current admitted Charter authority. | Classification-based override, assurance-policy invention, evidence interpretation, gate truth, or transition approval. |
-| Policy-definition and admission owners | Accept user-, agent-, artifact-, and tool-authored candidates and deterministically produce a Policy Admission Closure or refusal against exact typed vocabulary, relevant governance revisions/proposition roles/scopes/dependency modes, finite accounting, required separately authorized approvals/exceptions, and non-relaxable invariants. The distinct Assurance Selection responsibility resolves admitted selectors/policies and produces Resolved Assurance Requirements with complete explanation. | Treating authorship, prompts, agent roles, artifact promotion, bare links, approval prose, or favorable outcomes as admission; demanding every artifact family; turning governance text into runtime evidence/waiver; recursive self-admission; posture mutation; or gate evaluation. |
+| Policy-definition and admission owners | Accept user-, agent-, artifact-, and tool-authored candidates and deterministically establish intrinsic conformance and, when applicable project qualification is required, produce Policy Admission Closure or refusal under G4 against exact typed vocabulary, relevant governance revisions/proposition roles/scopes/dependency modes, finite accounting, required separately authorized approvals/exceptions, and non-relaxable invariants. The distinct Assurance Selection responsibility resolves admitted selectors/policies and produces Resolved Assurance Requirements with complete explanation. | Treating authorship, prompts, agent roles, artifact promotion, bare links, approval prose, or favorable outcomes as admission; demanding every artifact family; turning governance text into runtime evidence/waiver; recursive self-admission; posture mutation; or gate evaluation. |
 | Engine Context Resolution authorization | Engine alone admits the exact full envelope, establishes request-within-envelope and non-expansion, issues the purpose-bounded Evaluation Authorization Binding, and verifies its lineage, authority/currentness, historical validity, and supersession. | Assurance-policy selection or relaxation, producer capability or readiness, evidence adequacy, gate truth, explanation density, enforcement, or posture transition. |
 | Contracts-domain Evaluation Coordination | The proposed Contracts-domain coordination responsibility compares already resolved requirements, exact Engine authorization, requested reach, and admitted producer/operating facts; owns readiness and Prospective Evaluation Basis formation; and determines whether the exact proof plan can proceed. Concrete crate, module, API, persistence, and transport placement remain deferred. | Granting Engine authority, selecting an easier policy, weakening requirements, establishing evidence or gate truth, or host enforcement by implication. |
 | Exception governance, authority, and admission | Charter governance owns non-executable nominations and process declarations. The designated exception-policy authority owns admitted exception semantics, permitted issuers, scope, effects, record requirements, and currentness; the exact record authority authorizes each record; and the exception-admission owner establishes authority, identity, scope, currentness, and policy conformance before selection may apply the bounded effect. | Treating Charter prose, approver names, process metadata, record location, or minimum fields as executable authority; allowing assurance selection to mint, approve, broaden, infer, or self-authorize an exception. |
@@ -527,9 +526,27 @@ any such choice or require a general IAM platform.
 <a id="evaluation-requirements"></a>
 ## Complete evaluation requirements from two sources
 
-Prospective change: the [proposed independent-evaluation rules](amendments/governance-defaults-and-delegated-operation.md#a3--assurance-and-evaluation-preparation)
-identify applicability and prerequisite changes in this part. They await human
-semantic sign-off; current rules remain operative.
+| Use | What is required, and why |
+| --- | --- |
+| Author, reference, inspect, validate completeness | Exact owner/content/role truth and the applicable authoring or validation rules. Project admission governance is not inherently required to write a contract, refer to it as data, or determine intrinsic completeness. Such references cannot claim governance qualification. |
+| Execute a complete direct contract and report its result | Owner-established contract and compatible full definitions; positive governance applicability resolution under G4; complete direct requirements; compatible intent; independent Engine authorization from approved operating authority; valid capability/readiness; exact collection, evidence, and truth closure. G4 requires a satisfiable supported local path under initial delegation without project admission governance; neither deferral nor the contract supplies execution authority. |
+| Establish/admit project governance policies and assign them | First-establishment or prior replacement authority, applicable configuration and owner-rule qualification, exact authorized assignment, scope and currentness. Drafting, validating, admitting, packaging, or discovering a policy does not activate or assign it. |
+| Select project posture assurance for a governed obligation | Actual scoped posture and qualified admitted selector/policy/exception inputs, governing relationship and complete selection. A Charter alone does not invent policy mappings; this governed route cannot fall back to independent evaluation when inputs are missing. |
+| Use results to discharge governed shipment/completion or authorize its effect | Applicable qualified policies, independently resolved actual target, governing requirements and supported assessment protocol; mandatory assessment qualification/coverage, present reliance, separate action authority and through-commit checks. An earlier direct result may fill declared current roles only through the new owner determination below; it supplies no exemption or authority. |
+
+`admitted` evaluation inputs mean exact owner-established, intrinsically complete
+definitions, with applicable project qualification satisfied under G4. Direct
+requirements may form while governance is positively deferred; no posture snapshot
+or assurance selector is fabricated. The common requirements closure MUST bind
+exact governance state/applicability and qualification when applicable, preserving
+them through Purpose, basis, final context, result, and explanation under G5.
+A damaged or uncertain established basis is not deferral. This route does not
+by itself satisfy mandatory governed completion or authorize an action. Current
+qualification of an earlier result follows the independently adopted G5 protocol;
+it changes neither this original requirements closure nor its occurrence.
+
+The [approved HR-007 amendment](amendments/governance-defaults-and-delegated-operation.md)
+was integrated on 2026-10-04. References to G1–G6 below name its approved rules.
 
 Every canonical evaluation MUST consume one complete, exactly identified
 **Evaluation Requirements** closure. This is a common semantic role, fulfilled
@@ -560,6 +577,8 @@ Required formation and truth-affecting boundary/time rules MUST be fixed at
 their existing declared stages, before favorable observations can influence
 their selection. An explicitly empty metric inventory is not unresolved metric
 selection. A claim-set reference cannot silently remove expected claims.
+
+G5's new current-use qualification has its own independently fixed governing requirements/protocol and finite result accounting; it does not select or revise the original run's requirements or truth-affecting rules after observations.
 
 For direct resolution the caller may nominate permitted contract/rule inputs;
 the Contracts owner establishes completeness and compatibility. Missing,
@@ -594,6 +613,8 @@ are valid. Attemptability retains the later readiness table. The final column
 applies only to the mandatory [governed-completion assessment](operational-reliance-and-actions.md#governed-completion),
 not every permitted downstream use:
 
+Completion-role acceptance is a later owner decision under G5, not formation compatibility or a change to original source/intent. Every diagnostic or incompatible row remains excluded from the mandatory positive role.
+
 | Contract permitted use | Requirements source | Requested intent | Formation compatibility | Mandatory completion assessment |
 | --- | --- | --- | --- | --- |
 | Diagnostic-only | `direct_contract` | `diagnostic` | Compatible; diagnostic readiness rules apply. | No. |
@@ -601,14 +622,13 @@ not every permitted downstream use:
 | Diagnostic-only | `posture_selected` | `diagnostic` | Compatible under an exact admitted mapping. | No. |
 | Diagnostic-only | `posture_selected` | `decision_seeking` | Refuse; selection cannot widen permitted use. | No. |
 | Decision-seeking eligible | `direct_contract` | `diagnostic` | Compatible; diagnostic readiness rules apply. | No. |
-| Decision-seeking eligible | `direct_contract` | `decision_seeking` | Compatible; ready may proceed, valid limited/unknown is held. | No. |
+| Decision-seeking eligible | `direct_contract` | `decision_seeking` | Compatible; ready may proceed, valid limited/unknown is held. | Potentially, only through an explicitly adopted supported retrospective protocol and new current owner qualification under G5, with actual governing requirements/coverage and all reliance/action checks. No automatic completion. |
 | Decision-seeking eligible | `posture_selected` | `diagnostic` | Compatible; diagnostic readiness rules apply. | No. |
-| Decision-seeking eligible | `posture_selected` | `decision_seeking` | Compatible; ready may proceed, valid limited/unknown is held. | Potentially, with actual governing selection, coverage, and all reliance/action checks. |
+| Decision-seeking eligible | `posture_selected` | `decision_seeking` | Compatible; ready may proceed, valid limited/unknown is held. | Potentially, with the actual prospectively resolved governing selection, coverage, adopted protocol and all reliance/action checks under G5. Source alone is insufficient. |
 
 A held or refused project-selected evaluation MUST NOT automatically fall back
 to direct evaluation, a narrower contract, or diagnostic intent under the same
-Purpose. A deliberately separate admissible development check may proceed but
-does not discharge the original obligation. Selecting a Diagnostic-only contract
+Purpose. A deliberately separate admissible development check may proceed but does not by itself discharge the original obligation. Only independently adopted G5 qualification can accept an exact earlier decision-seeking result for a declared role; a held/refused route cannot invent that protocol or replace required prospective provenance. Selecting a Diagnostic-only contract
 for a required completion assessment refuses that incompatible route; a valid
 diagnostic selection is not a completion exemption.
 
@@ -699,13 +719,16 @@ neither positive attemptability nor a positive limitation. Missing or invalid
 formation input is Readiness Refusal, never `unknown` or `known_limited`.
 
 Both requirements resolvers retain their separately attributable responsibilities
-from [complete evaluation requirements](#evaluation-requirements). A request for
-an assessment intended to discharge governed completion additionally resolves
-the actual governing target and assurance-selection relationship defined by the
-action domain before collection or no-collection commitment, as applicable.
-No future completion Determination or Action Intent is needed to form that
-assessment. An arbitrary posture-selected result
-does not by itself establish that governing relationship.
+from complete evaluation requirements. For the G5 prospectively governed route,
+a request intended to discharge governed completion resolves the actual governing
+target and assurance-selection relationship before collection or no-collection
+commitment. No future completion Determination or Action Intent is needed.
+An arbitrary posture-selected result does not establish governing assignment.
+For supported retrospective acceptance, the action domain instead resolves the
+current relationship, requirements and protocol before new current qualification;
+the earlier evaluation retains its original timing and source. Required prospective
+provenance cannot be fabricated. Missing governed inputs cannot select this route
+as a fallback.
 
 ### Semantic owner placement and identity
 
@@ -763,7 +786,7 @@ Every canonical definition or policy consumed by this chapter MUST follow
 particular, authored capability, retry, partial-completion, or readiness policy
 text cannot become admitted policy through prompt authority or a bare link.
 
-Their admission follows the shared active-at-decision rule. Configuration
+Their owner establishment and any applicable project qualification follow G4; required project qualification follows the shared active-at-decision rule. Configuration
 replacement does not rewrite an existing plan, Purpose, readiness result, or
 Prospective Evaluation Basis, and grants no Engine evaluation authority. Each
 consumer must apply the exact dependency/currentness rules for its bound inputs;
@@ -1101,7 +1124,7 @@ mechanism.
 | Enforcing host | Applies or refuses supported runtime restrictions and records exact Host Enforcement Facts and attempt effects. | Resolution semantics, assurance selection, readiness, evidence admission, gate interpretation, or invented enforcement. |
 | Producer | Performs one exact attempt and reports source observations and Actual Observed Reach with provenance. | Canonical evidence admission, readiness reclassification, claim adequacy, gate truth, or authority expansion. |
 | Contracts-domain evidence and evaluation subresponsibilities | Sibling subresponsibilities admit candidates, fix the evidence-set identity, close the final evaluation context with the exact Prospective Evaluation Basis and Engine verification, and own claim/metric/gate truth under the companion record. | Engine currentness or authorization issuance; producer capability or host enforcement; recomputing or reinterpreting coordination-owned readiness; or requirement relaxation. |
-| Work Progression and other Operational Reliance owners | Resolve exact historical results and Binding validity, select the explicit `historical_validity_only` or `continuing_current` mode, close target/currentness/accounting including mandatory governing-completion selection and assessment coverage where applicable, and produce one atomic Determination with paired eligibility/disposition facets. Work Progression is the proposed semantic owner for local and parent eligibility. | Rewriting historical truth, relabeling diagnostic provenance, treating readiness as a gate, issuing action authority, or mutating state. |
+| Work Progression and other Operational Reliance owners | Resolve exact historical results and Binding validity, select the explicit `historical_validity_only` or `continuing_current` mode, close target/currentness/accounting including independently resolved governing-completion requirements, adopted protocol, selection/qualification and complete assessment coverage under G5 where applicable, and produce one atomic Determination with paired eligibility/disposition facets. Work Progression is the proposed semantic owner for local and parent eligibility. | Rewriting historical truth, relabeling diagnostic provenance, treating readiness as a gate, issuing action authority, or mutating state. |
 | Action requester and action-authorization owner | The requester owns one exact Action Intent. The authorization owner independently produces an Action Authorization Binding or Refusal with exact advisory, verified, or host-enforced authority provenance and every declared fresh condition. | Treating Evaluation Authorization as action authorization, fabricating authentication/delegation/enforcement, improving reliance eligibility, or mandating a general Handbook IAM implementation. |
 | Action executor and authoritative state/effect owner | The executor owns one exact Action Attempt Identity and Terminal. The state/effect owner performs through-commit expected-state and authorization checks and alone issues the Mutation Receipt for a committed change. | Ordinary retry after uncertain commit, broadening the authorized effect, or reporting mutation success without the authoritative receipt. |
 | SDK, CLI, Tauri, skills, and other transports | Preserve and project exact owner results, correlation, presentation, interface-local failures, and prompt- or role-supplied advisory-authority claims with their provenance. | Semantic formation, owner verification, capability inference, authentication by assertion, task-wide enforcement, or truth reinterpretation. |
@@ -1144,8 +1167,7 @@ identities except where the row identifies a failure.
 This record settles the canonical vocabulary; complete pre-truth stage order;
 the common Evaluation Requirements role with posture-selected and Contracts-owned
 direct sources; immutable source and contract permitted-use provenance;
-contract/use compatibility before Purpose formation; permitted posture-selected
-diagnostics without completion substitution; the Contracts-domain Evaluation
+contract/use compatibility before Purpose formation; permitted posture-selected diagnostics without completion substitution and protocol-specific prospective assessment or current qualification under G5; the Contracts-domain Evaluation
 Coordination semantic owner placement;
 Observation Plan and Producer Selection closure; purpose, authorization,
 readiness, disposition, basis, and per-selection attempt identity/cardinality;

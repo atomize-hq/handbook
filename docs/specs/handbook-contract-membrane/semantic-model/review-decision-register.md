@@ -4,7 +4,7 @@
 
 Opened: 2026-09-25.
 
-**Current amendment: HR-007 — Proposed for human semantic sign-off.**
+**Current amendment: HR-007 — Approved and integrated as semantic input, 2026-10-04.**
 
 This register accompanies the [approved semantic package](README.md). It records questions,
 clarification requests, and their eventual dispositions; it does not add normative
@@ -45,32 +45,28 @@ choice was left open.
 
 ## HR-007 — Governance defaults, delegated operation, and independent contracts
 
-**Status: Proposed for human semantic sign-off — 2026-10-03.**
+**Status: Human-approved and integrated at semantic level — 2026-10-04.**
 
-The user requested bounded reconciliation of replaceable shipped choices,
-initial human approval and delegated autonomy, later governance establishment
-on the same greenfield identity, and useful complete-contract evaluation while
-governance is deliberately deferred. The latest clarification supersedes the
-earlier research's unresolved admission/draft framing; it does not approve every
-resulting normative sentence or authorize product work.
+The human approved the [amendment](amendments/governance-defaults-and-delegated-operation.md)
+after reviewing the original proposal (`bf27981`) and causal revision (`66ab8e4`),
+including two final clarifications: initialization is an adaptive skill-guided
+conversation with questions/options, and agent recommendations/CLI-SDK requests
+are distinct from deterministic native validation, authority and state changes.
 
-The 2026-10-03 revision direction also permits drafting bounded present-use
-qualification of earlier direct decision-seeking results, through supported
-governing protocols and a new owner determination. It reconciles the original
-source/timing floor and post-inspection policy-selection rule while retaining
-independent actual requirements, finite result/failure accounting, diagnostic
-restrictions, historical truth, separate action authority and through-commit checks.
-The source-floor choice in the earlier advisory consultation was an open product
-decision, not a violation of the then-approved base. This revised proposal still
-awaits final exact semantic sign-off; it neither reopens historical HR decisions
-nor changes their currently operative meaning.
+Approval accepts G1–G6: replaceable shipped choices; initial human approval and
+delegated autonomy; positive scoped deferral and later establishment on the same
+identity; independent complete-contract use; supported prospective assessment or
+bounded current qualification of earlier direct decision-seeking results; and
+independently justified requirements/populations with complete failure accounting
+when governance is established after results are known. The five selected answers
+in the amendment are resolved at semantic level. Concrete presets, criteria,
+providers, APIs and representation remain later bounded choices.
 
-The [proposed amendment](amendments/governance-defaults-and-delegated-operation.md)
-records the workflow, source inventory, exact activation edits, acceptance
-scenarios, and material sign-off choices. The approved base provisions remain
-operative until explicit human sign-off. Eventual supersession is limited to
-the amendment's identified provisions; HR-001 through HR-006 and their approval
-history are preserved. Technical review or a local commit supplies no approval.
+The amendment's exact activation map is integrated into the four owning chapters
+and entry point. It supersedes only those identified provisions; HR-001 through
+HR-006 remain historical decisions with their original approval evidence intact.
+User approval supplies this authority; automated review and commits do not.
+Implementation and successor slice planning require separate bounded authority.
 
 ## HR-001 — Authority to establish policy-admission requirements
 
