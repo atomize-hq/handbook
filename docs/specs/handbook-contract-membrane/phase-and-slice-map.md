@@ -209,18 +209,22 @@ The fresh-project slice above remains its exact completed historical outcome.
 The user subsequently authorized program-level planning reconciliation across
 the roadmap and adjacent documents. The [coverage map](coverage-and-landing-map.md#impact-and-dependency-coverage)
 records its breadth and the source-backed next outcome below. It remains proposed
-for human review, with no new phase number, detailed packets or implementation
-authorization and no change to Phase-6 order.
+for human review. The separately prepared slice plan below supplies its bounded
+Packet-1 plan, with no implementation authorization, new phase number or change
+to Phase-6 order.
 
 | Proposed slice shape | Program status | Concise outcome and boundary | Dependency boundary |
 | --- | --- | --- | --- |
-| `scoped-governance-deferral` — Positive scoped deferral and current resolution | Planned shape for human review; no individual slice authority | One newly registered local project can retain human-approved deferral of the existing Contracts freshness-policy admission scope and resolve/replay its exact basis through typed SDK. No default activation, global exemption or independent evaluation is inferred; missing/corrupt/uncertain state fails closed. | Existing identity/durability, fresh-project owner and typed SDK are foundations. Review of this shape, separate slice preparation and human authorization of its implementation increment remain required. Deferral is work inside the slice, not a delivered prerequisite. |
+| [`scoped-governance-deferral`](slices/scoped-governance-deferral/README.md) — Positive scoped deferral and current resolution | Slice plan prepared; Packet 1 awaits human authorization; unimplemented | One newly registered local project can retain human-approved deferral of the existing Contracts freshness-policy admission scope and resolve/replay its exact basis through typed SDK. No default activation, global exemption or independent evaluation is inferred; missing/corrupt/uncertain state fails closed. | Existing identity/durability, fresh-project owner and typed SDK are foundations. Human authorization of the bounded implementation increment and current prerequisite checks remain required. Deferral and narrow initialization coordination are work inside the slice, not delivered prerequisites. |
 
 The [next-outcome boundary](coverage-and-landing-map.md#proposed-next-slice-shape-scoped-governance-deferral)
 owns the high-level example, refusal and observable acceptance conditions.
-Positive deferral precedes later first establishment on that identity and supplies
-one prerequisite for broader independent contract use. The latter still needs
-permitted use, conformance, complete requirements and supported operating authority.
+For the selected defer-first journey, positive deferral supplies the basis consumed
+by later first establishment on that identity. Positive applicability resolution
+is the general prerequisite for dependent independent use: deferral, established
+non-applicability and satisfied applicable qualification are alternative G4 bases.
+Independent use still needs permitted use, conformance, complete requirements and
+supported operating authority.
 Later outcomes remain broad dependencies; this entry authorizes neither their
 decomposition nor successor dispatch.
 

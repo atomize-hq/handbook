@@ -83,9 +83,9 @@ records the bounded follow-up preparation boundary. Approval changes neither
 implemented capability nor completed slice history and authorizes no implementation.
 The subsequent [program reconciliation](coverage-and-landing-map.md#hr-007-reconciliation--2026-10-04)
 covers the full flow and adjacent consumer plans. It proposes
-[`scoped-governance-deferral`](phase-and-slice-map.md#hr-007-semantic-landing--2026-10-04)
-as the next shape for human review, before separate slice preparation; no successor
-implementation is authorized.
+[`scoped-governance-deferral`](slices/scoped-governance-deferral/README.md)
+as the next defer-first outcome. Its bounded slice plan is prepared for human
+authorization of Packet 1; no deferral or successor implementation is authorized.
 
 ## Authority and navigation
 

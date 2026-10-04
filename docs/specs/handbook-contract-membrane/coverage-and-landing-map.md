@@ -19,8 +19,9 @@ now controls the affected semantic dependencies below. The original research
 reports retain their dated comparison baseline; this bounded update supplies no
 new implementation evidence. The first fresh-project establishment increment has
 since landed, as recorded in the [phase map](phase-and-slice-map.md#first-approved-semantics-foundation-increment).
-The reconciliation below names one proposed successor shape for human review,
-with no packet or individual slice authority. It distinguishes adaptive skill-guided
+The reconciliation below names one proposed successor shape for human review;
+its separate [slice plan](slices/scoped-governance-deferral/README.md) now supplies
+the bounded next increment awaiting human authorization. It distinguishes adaptive skill-guided
 intake from native CLI/SDK owner validation, and independent conformance from
 applicable project qualification. No new phase or implementation is authorized here.
 
@@ -62,11 +63,13 @@ a typed Rust SDK consumer after restart. No default configuration activates.
 This is an observable governance-lifecycle outcome, not delivery of full independent
 contract evaluation or a universal applicability decision for every project scope.
 
-It precedes later first establishment because that operation needs a positive,
-current deferred basis on the same identity, which no current setup path records.
-It precedes the broader independent-use outcome because absence of governance files
-cannot supply its applicability provenance. Choosing later establishment first
-would leave the deliberate-deferral route missing; choosing full independent
+For the selected defer-first journey it supplies the positive current deferred
+basis consumed by later first establishment on the same identity, which no current
+setup path records. Positive applicability resolution is the general prerequisite
+for dependent independent use: deferral, established non-applicability and satisfied
+applicable qualification are alternative G4 bases. Absence of governance files
+supplies none of them. Separate delivery of deferral and later establishment is a
+planning choice, not an extra semantic requirement. Choosing full independent
 evaluation now would combine unresolved conformance, permitted use, operating
 authority and evaluation closure. The existing standalone credential-backed path
 shows useful native mechanisms; it does not justify bypassing them.
@@ -88,7 +91,8 @@ and asks to defer. Neither becomes a fresh deferred project. Missing, corrupt,
 substituted or uncertain required state refuses/retains uncertainty; inspection of
 content does not imply executable permission.
 
-Observable acceptance boundaries for subsequent slice preparation:
+The [prepared slice plan](slices/scoped-governance-deferral/README.md) makes these
+observable boundaries concrete without authorizing implementation:
 
 1. Exact human-approved project/scope instruction and advisory provenance are
    retained with a committed positive deferral; no configuration, project
@@ -116,28 +120,28 @@ owner outcomes. Preserve Contracts JSON and versioned identities; the
 [format standard](structured-data-format-standard.md) still awaits human review
 and supplies no migration approval. Retained owner history must survive state reset.
 The exact rule evolution, records/concurrency/recovery mechanics, APIs and scope
-representation belong to separate slice preparation, not this program shape. No
+representation are selected in the separate slice plan, not this program shape. No
 new ordinary capability, CLI/Tauri parity or universal governance service is selected.
 Later freshness configuration and evaluation age limits remain caller-supplied;
 86,400 seconds is an example, with no implicit 24-hour or other policy default.
 
 **Prerequisites:** HR-007 semantic approval and the inspected identity/durability,
 fresh-project owner and typed SDK mechanisms are complete foundations. Positive
-deferral registration/resolution is work inside this proposed slice. Human review
-of this program shape, separately prepared current slice authority and authorization
-of its next bounded implementation plan remain required. Full independent checks
+deferral registration/resolution is work inside this proposed slice. Current slice
+authority is now prepared; human authorization of its next bounded implementation
+plan and current prerequisite checks remain required. Full independent checks
 also need supported owner conformance/permitted use, every applicable qualification,
 initial operating authority/delegation, complete direct requirements and evaluation
 closure; those are incomplete and are not prerequisites for merely recording deferral.
 
 **Review boundary:** return the first observable committed deferral/resolution/refusal
-outcome to human review under the lifecycle; slice preparation must select packet
-or slice boundaries without hiding an earlier meaningful result. This planning
-landing returns to meta control and stops before that preparation or implementation.
+outcome to human review under the lifecycle. The slice plan selects one Packet-1
+boundary coincident with slice completion, without hiding an earlier meaningful
+result. Authority preparation returns to meta control before implementation.
 
 ### Later outcomes and dependencies
 
-Independent complete-contract use needs the deferral/applicability basis plus its
+Independent complete-contract use needs positive applicability resolution plus its
 owner conformance, permitted-use/intent, full definition/capability/operating-authority
 chain and exact evaluation closure. Existing-project first establishment needs the
 current eligible deferred basis and human-approved configuration under the fixed
@@ -228,7 +232,9 @@ Compatibility is architectural and scoped to stated requirements; runtime and
 external adoption remain unverified. The model imposes no V1 migration/dual-write
 obligation. Stale blanket grounding/Dock summaries and historical empty-registry
 checkpoints must not override current source or completed successor delivery.
-Preparation/Evidence's broad historical-Binding summaries also need to be read against
+The preparation summary now follows the
+[action owner's exact consumed-role rule](semantic-model/operational-reliance-and-actions.md#exact-current-use-and-engine-verification-rule).
+Remaining Evidence historical-Binding summaries also need to be read against
 the [action owner's exact consumed-role rule](semantic-model/operational-reliance-and-actions.md#exact-current-use-and-engine-verification-rule)
 and [guide decision 8](semantic-model/README.md#8-a-valid-past-result-does-not-automatically-qualify-for-use-today).
 The map preserves that qualified rule; this study does not amend approved chapters.
@@ -247,11 +253,11 @@ replacing the auto-continuation route identified at the research baseline in F-1
 This routing correction does not admit a phase/slice or authorize product work.
 
 The proposed [`scoped-governance-deferral` shape](#proposed-next-slice-shape-scoped-governance-deferral)
-is the next bounded outcome offered for human review after the completed first
-foundation increment and HR-007 approval. Prepare **only its next bounded increment**
-after that review and separate slice-preparation direction. Its plan must identify
-why it is next, existing prerequisites, required concrete choices, one explainable
-behavior and meaningful refusal, owner/interface/persistence boundaries and checks.
+is the next defer-first outcome after the completed first foundation increment
+and HR-007 approval. The separately prepared [slice plan](slices/scoped-governance-deferral/README.md)
+details **only its next bounded increment**, for human authorization before product
+edits: why it is next, prerequisites, concrete choices, explainable behavior and
+refusal, owner/interface/persistence boundaries and checks.
 Do not turn this study into a fully elaborated backlog. The original comparison did not implement product work; the later fresh-project
 establishment slice is recorded separately. This reconciliation adds no implementation.
 

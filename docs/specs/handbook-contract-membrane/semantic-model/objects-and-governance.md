@@ -376,24 +376,25 @@ Whether a future model discovers a genuinely different artifact role remains a
 new semantic decision rather than an alias inferred here.
 
 This record classifies but does not redefine the detailed semantics fixed by
-three exact companion proposals:
+three exact companion decisions:
 
-- the proposed
+- the approved
   [evaluation identity and evidence-closure decision](evidence-and-evaluation.md#identity-evidence)
   owns evaluation-occurrence identity, evidence-set formation and closure,
   prospective applicability, semantic times, and historical resolvability;
-- the proposed
+- the approved
   [authored-artifact and evaluation-relationship decision](objects-and-governance.md#authored-relationships)
   owns exact relationships among the six authored artifact families and owner
   definitions, records, results, and provenance; and
-- the proposed
+- the approved
   [operational-reliance and work-progression decision](operational-reliance-and-actions.md#reliance-actions)
   owns present-use reliance, atomic eligibility/disposition, local closeout,
   parent eligibility, action authorization, attempts, terminals, and mutation
   receipts.
 
-All remain `PROPOSED`. Their presence supplies exact companion references, not
-human approval, implementation authority, physical placement, or rollout.
+All are part of the [approved semantic package](README.md#approved-decision).
+That approval supplies planning input, not implementation authority, physical
+placement or rollout; these references do not expand its boundary.
 
 ### Canonical vocabulary
 

@@ -419,14 +419,18 @@ Disposition facets. It MUST NOT change the gate, replace `indeterminate` with
 `pass`, treat either facet as semantic evidence, or acquire action or posture-
 transition authority.
 
-Every present reliance universally resolves the exact Evaluation Authorization
-Binding and Engine-confirmed historical validity. The admitted policy MUST then
-select exactly one Engine continuing-status mode: `historical_validity_only` or
-`continuing_current`. Only `continuing_current` requires fresh positive Engine
-current verification at the reliance semantic time and any resulting policy-
-required fresh evaluation. Neither mode weakens mandatory current authorization
-at collection or final evaluation closure. A later effect always requires a
-fresh separate Action Authorization Binding and exact target/currentness checks.
+Under the action owner's [exact current-use and Engine-verification rule](operational-reliance-and-actions.md#exact-current-use-and-engine-verification-rule),
+a present reliance accepting a Historical Semantic Result whose exact closure
+binds an Evaluation Authorization Binding MUST resolve that exact Binding and
+Engine-confirmed historical validity. The admitted policy MUST select exactly
+one mode for that dependency: `historical_validity_only` or `continuing_current`.
+Only `continuing_current` requires fresh positive Engine current verification at
+the reliance semantic time and any resulting policy-required fresh evaluation.
+An upstream refusal without such a Binding does not acquire one for reliance;
+its declared input role still follows the owner's exact-result and complete-
+accounting rules. Neither mode weakens mandatory current authorization at
+collection or final evaluation closure. A later effect always requires a fresh
+separate Action Authorization Binding and exact target/currentness checks.
 
 The same gate truth may legitimately yield different atomic Determinations
 under different exact policies or action questions. Each Determination preserves
@@ -448,7 +452,7 @@ explanation-density view.
 | Exception governance, authority, and admission | Charter governance owns non-executable nominations and process declarations. The designated exception-policy authority owns admitted exception semantics, permitted issuers, scope, effects, record requirements, and currentness; the exact record authority authorizes each record; and the exception-admission owner establishes authority, identity, scope, currentness, and policy conformance before selection may apply the bounded effect. | Treating Charter prose, approver names, process metadata, record location, or minimum fields as executable authority; allowing assurance selection to mint, approve, broaden, infer, or self-authorize an exception. |
 | Contract, evidence-policy, evidence, and claim evaluation | The respective semantic owners admit exact contract and evidence authority, own compatible role-specific Evidence Evaluation Policy semantics, and establish applicability and claim truth under the resolved requirements. | Rereading posture, inventing or substituting policy bindings, changing the selected requirements or claim meaning, gate disposition, recommendation, or posture mutation. |
 | Metric computation and gate evaluation | The owners defined by the companion record purely apply exact Metric Definitions and Gate Policy inside the closed evaluation context. | Assurance reselection, mutable-posture interpretation, enforcement, recommendation, or mutation. |
-| Work Progression and other Operational Reliance owners | Apply one admitted action-specific policy to exact historical results, target/currentness observations, and complete accounting; universally resolve historical Evaluation Authorization Binding validity; select `historical_validity_only` or `continuing_current`; and produce one atomic Determination with paired eligibility/disposition facets or a Reliance Refusal. Work Progression is the proposed semantic owner for local-closeout and parent eligibility. | Rewriting gate truth or canonical explanation, issuing action authority, mutating state, or silently selecting work hierarchy/state policy or physical placement. |
+| Work Progression and other Operational Reliance owners | Apply one admitted action-specific policy to exact historical results, target/currentness observations, and complete accounting; for consumed results whose closure binds an Evaluation Authorization Binding, resolve its historical validity and select `historical_validity_only` or `continuing_current` under the [action owner's rule](operational-reliance-and-actions.md#exact-current-use-and-engine-verification-rule); and produce one atomic Determination with paired eligibility/disposition facets or a Reliance Refusal. Work Progression is the proposed semantic owner for local-closeout and parent eligibility. | Rewriting gate truth or canonical explanation, issuing action authority, mutating state, or silently selecting work hierarchy/state policy or physical placement. |
 | Posture observation | A separately owned admission boundary establishes immutable, provenance-bound observations from permitted sources. | Recommendation, reliance, approval, or mutation merely because an observation exists. |
 | Posture recommendation | A separately owned recommendation policy derives an explainable proposal from admitted observations. | Applying, approving, forming transition eligibility by itself, or implying a transition. |
 | Posture-transition reliance owner | Forms the exact transition-specific Operational Reliance Basis and one atomic Determination before transition intent, with exact expected posture target, bounded transition, currentness, policy, and accounting. | Treating recommendation as eligibility, issuing action authority, mutating posture, or changing historical gate truth. |
