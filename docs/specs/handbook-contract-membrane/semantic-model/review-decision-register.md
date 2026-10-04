@@ -54,6 +54,17 @@ governance is deliberately deferred. The latest clarification supersedes the
 earlier research's unresolved admission/draft framing; it does not approve every
 resulting normative sentence or authorize product work.
 
+The 2026-10-03 revision direction also permits drafting bounded present-use
+qualification of earlier direct decision-seeking results, through supported
+governing protocols and a new owner determination. It reconciles the original
+source/timing floor and post-inspection policy-selection rule while retaining
+independent actual requirements, finite result/failure accounting, diagnostic
+restrictions, historical truth, separate action authority and through-commit checks.
+The source-floor choice in the earlier advisory consultation was an open product
+decision, not a violation of the then-approved base. This revised proposal still
+awaits final exact semantic sign-off; it neither reopens historical HR decisions
+nor changes their currently operative meaning.
+
 The [proposed amendment](amendments/governance-defaults-and-delegated-operation.md)
 records the workflow, source inventory, exact activation edits, acceptance
 scenarios, and material sign-off choices. The approved base provisions remain

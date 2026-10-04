@@ -51,7 +51,10 @@ consolidation alone resolves none of them.
 The [governance defaults and delegated-operation amendment](amendments/governance-defaults-and-delegated-operation.md)
 is **Proposed for human semantic sign-off** under HR-007. It proposes independent
 complete-contract evaluation during deliberate governance deferral and identifies
-exact activation edits; the approved base provisions remain operative meanwhile.
+bounded current qualification of earlier direct decision-seeking results under
+explicitly adopted protocols, with safeguards for governance selected after results
+are known. Its exact activation edits remain prospective; approved base provisions
+remain operative meanwhile.
 For subsequent planning, read applicable amendments from this entry point and
 carry their approval status into the work. Proposed wording is a decision input,
 not approved semantic or implementation authority.
