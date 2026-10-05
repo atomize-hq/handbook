@@ -211,13 +211,16 @@ the roadmap and adjacent documents. The [coverage map](coverage-and-landing-map.
 records its breadth and the source-backed next outcome below. It remains proposed
 for human review. The scoped-deferral outcome below subsequently landed with
 meta closeout and human recap complete. The human then selected bounded preparation
-of later first establishment. Its separate plan awaits human implementation
-authorization, with no new phase number or change to Phase-6 order.
+of later first establishment. Its Packet 1 subsequently implemented the local
+owner/typed-SDK transition at `9f28f99`; the linked packet records evidence and
+limits. This bounded reconciliation does not certify Main's aggregate closeout
+and makes no change to phase numbering or Phase-6 order.
 
 | Foundation slice | Program status | Concise outcome and boundary | Dependency boundary |
 | --- | --- | --- | --- |
 | [`scoped-governance-deferral`](slices/scoped-governance-deferral/README.md) — Positive scoped deferral and current resolution | Implemented locally at `8b13505`; single-packet aggregate closeout, meta validation and human recap complete | One newly registered local project retains human-approved deferral of the existing Contracts freshness-policy admission scope and resolves/replays its exact basis through typed SDK. No default activation, global exemption or independent evaluation is inferred; missing/corrupt/uncertain state fails closed. | Existing identity/durability, fresh-project owner and typed SDK were foundations; scoped deferral and narrow initialization coordination landed inside the slice. The completed evidence carries an unattributed broader Windows-suite failure; focused targets passed. This is no successor authorization. |
-| [`deferred-governance-establishment`](slices/deferred-governance-establishment/README.md) — First governance on the same deferred project | Slice authority prepared; Packet 1 awaits human authorization; unimplemented | Establish one exact newly approved configuration/terms against current never-established D on P/S; retain original history/replay, exact current G, truthful concurrency/recovery and typed SDK results. | Completed positive deferral at `8b13505`, live exact D and original identity/claim closure, newly approved runtime content/terms, focused exercised-dependency evidence and human authorization of the bounded Packet-1 plan. Ordinary roots, replacement and independent-use closure are excluded. |
+| [`deferred-governance-establishment`](slices/deferred-governance-establishment/README.md) — First governance on the same deferred project | Packet 1 implemented locally at `9f28f99`; aggregate closeout is not certified by this reconciliation | Establish one exact newly approved configuration/terms against current never-established D on P/S; retain original history/replay, exact current G, truthful concurrency/recovery and typed SDK results. | Positive deferral at `8b13505` was the foundation; the packet source/evidence records the delivered D→G/v3 reader. Actual runtime G still needs approved configuration/terms and exact current D. Ordinary roots, replacement and independent-use closure remain excluded. |
+| [`independent-local-check`](slices/independent-local-check/README.md) — Complete independent offline JSON conformance | Slice plan prepared; Packet 1 awaits human implementation approval; unimplemented | Initial approved setup/terms, first complete native Contracts/Dock check, deliberately fresh repeat/permitted correction and out-of-bounds refusal. | Positive applicability and existing validator/owner foundations; missing initial authority and full closure are allocated inside this slice. [Packet 1](slices/independent-local-check/packet-1.md) proposes actual native initial setup/Engine authority. D→G and full Substrate adoption are not mandatory predecessors of current-D standalone use. |
 
 The [next-outcome boundary](coverage-and-landing-map.md#proposed-next-slice-shape-scoped-governance-deferral)
 owns the high-level example, refusal and observable acceptance conditions.
@@ -229,12 +232,14 @@ Independent use still needs permitted use, conformance, complete requirements an
 supported operating authority.
 The earlier authorization covered bounded later-establishment preparation.
 The human has subsequently authorized slice preparation for
-**`independent-local-check`**: one complete offline JSON payload/schema check
+[`independent-local-check`](slices/independent-local-check/README.md): one complete offline JSON payload/schema check
 through the typed SDK and native Contracts/Dock owners, under initial bounded
 delegation, including fresh repetition/permitted correction and meaningful
 out-of-bounds refusal. The [reviewed brief and subsequent human clarification](../../research/independent-local-check-and-initial-delegation-brief-2026-10-04.md)
-are required planning inputs. Prepare only this slice and detail its next useful
-increment; product execution still requires the resulting plan's human approval.
+are required planning inputs. The current plan outlines four separately reviewable
+packet outcomes and details only native initial setup/local Engine authority in
+[Packet 1](slices/independent-local-check/packet-1.md). Product execution still
+requires that bounded proposal's human approval.
 No runtime project bounds, assurance provider, or general profile system is selected
 by this preparation authorization. Other outcomes remain separately bounded.
 

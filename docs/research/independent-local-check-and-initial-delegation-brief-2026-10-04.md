@@ -2,6 +2,14 @@
 
 **Status: BRIEF_READY — provisional decision brief for human review, 2026-10-04.** Research and recommendations only; no implementation, formal slice/packet authority, `AUTHORITY_READY`, priority adoption, or approval of a policy alternative. `BRIEF_READY` means the research and causal review are complete, not that the proposed workflow is delivered.
 
+**Planning navigation, 2026-10-05:** the human subsequently authorized bounded
+[independent-local-check slice preparation](../specs/handbook-contract-membrane/slices/independent-local-check/README.md).
+That plan now outlines the complete journey and details only its next
+[Packet-1 proposal](../specs/handbook-contract-membrane/slices/independent-local-check/packet-1.md)
+for human implementation approval. The research and dated review below retain
+their original boundaries; they do not certify the new proposal or grant runtime
+authority. No independent local-check implementation is delivered by preparation.
+
 **Evidence baselines:** original draft at `65a3328972faf08d5cd08d09231a964955f845f4`; bounded source reconciliation at committed `9f28f99fbee7bb26a75d45e20d06e2783f1d19c5`. “Baseline” below retains the original pin. The exact `65a3328..9f28f99` delta has 15 files: governance transition/resolution and deferral integration, Engine durability, typed SDK, associated tests and the establishment slice. Original citations retain their pins; unchanged cited bodies were checked across that delta. The old SDK and Main-plan citations describe the predecessor only; current v3 guidance uses new pinned references below. No other owner completion is inferred from the landing. Main owns its slice and shared status integration.
 
 The prior `replaceable-defaults-and-delegated-operation-brief-2026-10-04.md` and the saved Pro consultation were read as advisory research and preserved unchanged. This committed brief requires neither untracked artifact to substantiate its claims. [Pro's conversation](https://chatgpt.com/c/6ac316aa-ac20-83e9-964a-9d3103c5a3e4) recommended a bounded adjustment; Pro read supplied exhibits and did not inspect the live repository or run tests. The revisions below reconcile that advice locally rather than adopting every recommendation as authority. Option B (profile/escalation replacement) remains separate unless this consumer proves a causal dependency. The broader replacement and Charter-approval intent remains approved in [G1–G2 and the amendment's source inventory][amendment]; it is not discarded or forced into this outcome.

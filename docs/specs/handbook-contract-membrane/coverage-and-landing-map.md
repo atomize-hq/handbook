@@ -23,8 +23,11 @@ The selected [scoped-deferral slice](slices/scoped-governance-deferral/README.md
 subsequently landed at `8b13505`; meta validation, its single aggregate closeout
 and the human recap are complete. The status reconciliation here records that
 evidence and its limits without rerunning closeout. The human then authorized
-bounded [later-establishment planning](slices/deferred-governance-establishment/README.md),
-whose one Packet-1 plan awaits human implementation authorization.
+bounded [later-establishment planning](slices/deferred-governance-establishment/README.md).
+Packet 1 subsequently implemented the local D→G transition/v3 reader at `9f28f99`;
+[its evidence](slices/deferred-governance-establishment/packet-1.md) records focused
+Windows passes and inherited limits. This update reconciles verifiable delivery,
+without certifying Main's aggregate closeout.
 The reconciliation distinguishes adaptive skill-guided
 intake from native CLI/SDK owner validation, and independent conformance from
 applicable project qualification. No new phase or implementation is authorized here.
@@ -36,7 +39,7 @@ approved owner chapters retain the rules; the dated research remains evidence.
 
 | Considered boundary | Planning implication after HR-007 | Preserved or deferred boundary |
 | --- | --- | --- |
-| Establishment and definition admission | Positive scoped deferral is implemented for one exact initial scope at `8b13505`; complete owner-established definitions need project qualification only where applicable. Fresh-project establishment and scoped deferral are partial foundations, not full admission governance. | Owner floors, exact identity, validation, active-at-decision qualification and prior-authorized replacement remain. Later establishment, ordinary policy admission and replacement are still undelivered. |
+| Establishment and definition admission | Positive scoped deferral is implemented at `8b13505`; same-project later first establishment and v3 current resolution are implemented at `9f28f99`. Complete owner-established definitions need project qualification only where applicable. These remain partial foundations. | Owner floors, exact identity, validation, active-at-decision qualification and prior-authorized replacement remain. Ordinary policy admission/qualification, independent-use closure and replacement remain undelivered. |
 | Charter, Project Context and onboarding | A skill-guided LLM inspects repository evidence, asks focused questions, presents options/tradeoffs, refines proposals and invokes CLI/SDK. The human approves initial project/Charter/posture, governance or exact deferral, and delegated boundaries. | Native owners validate supplied inputs and commit authorized state. Native initialization does not run an LLM. Authored context and recommendations are declared inputs, not capability, authority or canonical activation. The existing installed skill is a consumer foundation, not proof of this complete intake workflow. |
 | Supplied Engine and Contracts choices | Treat shipped profiles, operating definitions and review/credential choices as supported replaceable defaults or recommendations. Fixed native selection constraints must be inspected when selecting each replacement outcome. | Exact identity, compatibility, scope, source accounting, authority, non-expansion and truthful commit are mechanisms. Do not remove them or promise arbitrary replacements. Concrete criteria, presets/providers and compatible selection paths remain bounded later choices. |
 | Direct versus posture-selected preparation | Positive applicability resolution precedes dependent use. A complete independent contract can support either permitted-use value and compatible intent without being Draft solely for deferral. A governed route cannot fall back to direct/diagnostic use to evade qualification. | Full direct requirements, compatible intent, Purpose, independent Engine authorization, capability, readiness and owner currentness are still prerequisites. Setup/Doctor readiness and a bare deferral do not supply them. |
@@ -51,7 +54,12 @@ approved owner chapters retain the rules; the dated research remains evidence.
 
 Following the reviewed [independent local-check brief](../../research/independent-local-check-and-initial-delegation-brief-2026-10-04.md)
 at `fd2b7e3`, the human clarified role-based escalation and authorized preparation
-of the `independent-local-check` slice named in the [phase map](phase-and-slice-map.md).
+of the [`independent-local-check` slice](slices/independent-local-check/README.md)
+named in the [phase map](phase-and-slice-map.md). The current plan allocates the
+complete journey to four meaningful packet outcomes and details only
+[Packet 1](slices/independent-local-check/packet-1.md) for human implementation
+approval: native initial setup and local Engine authority after reopen, with
+wider/stale refusal. It delivers no complete check or routed escalation yet.
 An implementation agent may route an unresolved request to a project-level agent
 with additional context and prior delegated authority; human resolution is
 conditional under G2. A role or access to context alone grants no permission.
@@ -65,8 +73,20 @@ Track the selected increment's support and deferred host/profile/routing work in
 the slice and the relevant Phase-6 adoption/adapter scope. A general orchestration
 platform and complete Substrate adoption are not automatic local-check prerequisites.
 Preserve the broader replaceable-defaults outcome; bring it into the local-check
-scope only for a demonstrated dependency. These are planning constraints, not
-implementation or external-adoption evidence; dense owner semantics stay unchanged.
+scope only for a demonstrated dependency. The selected first proposal includes
+only the compatible Charter/profile and native authority work causally needed by
+initial local setup; general replacement remains separate.
+
+The slice records focused read-only Substrate inspection at `4ac8e869`: existing
+agent inventory/placement, dispatch/exact handles, prompt/session context,
+attributed inbox and host-session authority are reuse candidates. Several seams
+are crate-private and no Handbook adapter, actual agent-decision route or external
+adoption was tested. Packet 1 only returns exact refusal/unresolved context; the
+complete slice allocates caller-carried authorized decision submission, preserving
+project-agent resolution under prior terms and conditional human escalation.
+Automatic delivery, general role/context profiles and production Substrate adapter
+proof remain with [Phase 6](phase-and-slice-map.md#phase-6--consumer-adoption).
+These are planning constraints/source evidence; dense owner semantics stay unchanged.
 
 ### Current source constraints on the next outcome
 
@@ -84,7 +104,10 @@ The table above retains its dated `31e7746` inspection baseline. At `8b13505`,
 [versioned resolver](../../../crates/contracts/src/project_admission_governance/scope.rs)
 and typed SDK now provide positive initial deferral/current resolution/replay.
 The prior absence of that capability is superseded; current source still lacks
-existing-project D→G and full policy/evaluation closure. The completed
+full policy/evaluation closure. At `9f28f99`, the linked later-establishment packet
+implements existing-project D→G and authoritative v3 current resolution, including
+closed noncommit footprints that leave D current but prohibit v2-reader fallback.
+The completed
 [deferral evidence](slices/scoped-governance-deferral/README.md#packet-1-implementation-evidence)
 includes the broader Windows-suite limit. The new
 [slice authority](slices/deferred-governance-establishment/README.md#source-backed-boundaries)
@@ -193,8 +216,12 @@ The human selected bounded preparation of
 [`deferred-governance-establishment`](slices/deferred-governance-establishment/README.md):
 same P/S, exact current D, newly approved configuration/terms, durable cutover,
 original D replay versus current G, truthful recovery and typed SDK consumption.
-Its one Packet-1 plan is prepared and unimplemented, awaiting human authorization.
-This selects no independent-use or replacement outcome and no new phase number.
+Its Packet 1 is implemented locally at `9f28f99`, with source/evidence linked above;
+this does not certify its aggregate closeout. The separately requested
+[independent-local-check plan](slices/independent-local-check/README.md) now outlines
+the full local journey and proposes native initial setup/Engine authority as its
+next review increment. It remains unimplemented, awaiting human approval, and
+selects no broad replacement outcome or new phase number.
 Governed admission/assignment and assurance selection then support the selected
 assessment protocol; present qualification/reliance and separate actions require
 their exact target, complete populations and through-commit checks. Replacement,
@@ -302,10 +329,12 @@ This routing correction does not admit a phase/slice or authorize product work.
 
 The [`scoped-governance-deferral` shape](#proposed-next-slice-shape-scoped-governance-deferral)
 landed after the completed first foundation increment and HR-007 approval.
-The separately prepared [later-establishment plan](slices/deferred-governance-establishment/README.md)
-details **only its next bounded increment**, for human authorization before product
-edits: same-project D→G, prerequisites, exact approved content/terms, history/current
-resolution, owner/interface/persistence boundaries, refusal/recovery and checks.
+The [later-establishment packet](slices/deferred-governance-establishment/packet-1.md)
+now records its implemented bounded D→G outcome and evidence limits. The subsequent
+[independent-local-check plan](slices/independent-local-check/README.md) details
+**only its next bounded increment**, native initial setup/local Engine authority,
+for human implementation approval; full-check and host integration work remain
+outlined rather than silently authorized.
 Do not turn this study into a fully elaborated backlog. The original comparison did not implement product work; the later fresh-project
 establishment slice is recorded separately. This reconciliation adds no implementation.
 
