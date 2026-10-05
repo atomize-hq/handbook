@@ -19,9 +19,13 @@ now controls the affected semantic dependencies below. The original research
 reports retain their dated comparison baseline; this bounded update supplies no
 new implementation evidence. The first fresh-project establishment increment has
 since landed, as recorded in the [phase map](phase-and-slice-map.md#first-approved-semantics-foundation-increment).
-The reconciliation below names one proposed successor shape for human review;
-its separate [slice plan](slices/scoped-governance-deferral/README.md) now supplies
-the bounded next increment awaiting human authorization. It distinguishes adaptive skill-guided
+The selected [scoped-deferral slice](slices/scoped-governance-deferral/README.md)
+subsequently landed at `8b13505`; meta validation, its single aggregate closeout
+and the human recap are complete. The status reconciliation here records that
+evidence and its limits without rerunning closeout. The human then authorized
+bounded [later-establishment planning](slices/deferred-governance-establishment/README.md),
+whose one Packet-1 plan awaits human implementation authorization.
+The reconciliation distinguishes adaptive skill-guided
 intake from native CLI/SDK owner validation, and independent conformance from
 applicable project qualification. No new phase or implementation is authorized here.
 
@@ -32,7 +36,7 @@ approved owner chapters retain the rules; the dated research remains evidence.
 
 | Considered boundary | Planning implication after HR-007 | Preserved or deferred boundary |
 | --- | --- | --- |
-| Establishment and definition admission | Positive scoped deferral is a supported target state; complete owner-established definitions need project qualification only where applicable. The delivered fresh-project freshness configuration is a partial foundation, not full admission governance. | Owner floors, exact identity, validation, active-at-decision qualification and prior-authorized replacement remain. Deferral, later establishment, ordinary policy admission and replacement are still undelivered. |
+| Establishment and definition admission | Positive scoped deferral is implemented for one exact initial scope at `8b13505`; complete owner-established definitions need project qualification only where applicable. Fresh-project establishment and scoped deferral are partial foundations, not full admission governance. | Owner floors, exact identity, validation, active-at-decision qualification and prior-authorized replacement remain. Later establishment, ordinary policy admission and replacement are still undelivered. |
 | Charter, Project Context and onboarding | A skill-guided LLM inspects repository evidence, asks focused questions, presents options/tradeoffs, refines proposals and invokes CLI/SDK. The human approves initial project/Charter/posture, governance or exact deferral, and delegated boundaries. | Native owners validate supplied inputs and commit authorized state. Native initialization does not run an LLM. Authored context and recommendations are declared inputs, not capability, authority or canonical activation. The existing installed skill is a consumer foundation, not proof of this complete intake workflow. |
 | Supplied Engine and Contracts choices | Treat shipped profiles, operating definitions and review/credential choices as supported replaceable defaults or recommendations. Fixed native selection constraints must be inspected when selecting each replacement outcome. | Exact identity, compatibility, scope, source accounting, authority, non-expansion and truthful commit are mechanisms. Do not remove them or promise arbitrary replacements. Concrete criteria, presets/providers and compatible selection paths remain bounded later choices. |
 | Direct versus posture-selected preparation | Positive applicability resolution precedes dependent use. A complete independent contract can support either permitted-use value and compatible intent without being Draft solely for deferral. A governed route cannot fall back to direct/diagnostic use to evade qualification. | Full direct requirements, compatible intent, Purpose, independent Engine authorization, capability, readiness and owner currentness are still prerequisites. Setup/Doctor readiness and a bare deferral do not supply them. |
@@ -54,7 +58,22 @@ approved owner chapters retain the rules; the dated research remains evidence.
 | [Profile request](../../../crates/engine/src/profile_decision.rs), `shipped_profile_request`; [profile resolver](../../../crates/engine/src/profile_selection.rs), `policy_refs`; [Charter registry](../../../crates/engine/src/charter_definition_registry.rs); [Context Resolution](../../../crates/engine/src/context_resolution.rs), `load_authority_snapshot` | The shipped selection and exact subordinate bindings constrain supported replacements. Context Resolution requires its committed authority/registry/publication chain; init does not supply it. The known non-family generic-artifact authority mismatch becomes a dependency when a selected operating-authority route exercises it, not an automatic prerequisite for the separate deferral owner. |
 | [Charter method](../../../core/library/authoring/charter_authoring_method.md); [Project Context authoring](../../../crates/engine/src/author/project_context_core.rs) | Acquisition/validation and native lifecycle remain separate from approval/activation and from agent advice. Current required-class Charter approvals describe the shipped path; changing its repeated-approval choices requires supported owner work, while initial human approval remains. |
 
+The table above retains its dated `31e7746` inspection baseline. At `8b13505`,
+[deferral owner/types](../../../crates/contracts/src/project_admission_governance/deferral.rs),
+[versioned resolver](../../../crates/contracts/src/project_admission_governance/scope.rs)
+and typed SDK now provide positive initial deferral/current resolution/replay.
+The prior absence of that capability is superseded; current source still lacks
+existing-project D→G and full policy/evaluation closure. The completed
+[deferral evidence](slices/scoped-governance-deferral/README.md#packet-1-implementation-evidence)
+includes the broader Windows-suite limit. The new
+[slice authority](slices/deferred-governance-establishment/README.md#source-backed-boundaries)
+inspects the focused current transaction, history and consumer constraints.
+
 ### Proposed next slice shape: scoped governance deferral
+
+This heading retains the original shape's navigation anchor. The outcome below
+is now implemented at `8b13505`, with aggregate closeout and human recap complete;
+it is no longer awaiting dispatch. Its completed slice owns the evidence/limits.
 
 Name: **`scoped-governance-deferral`**. Outcome: for one newly registered local
 project, record human-approved deliberate deferral of the existing Contracts
@@ -91,8 +110,8 @@ and asks to defer. Neither becomes a fresh deferred project. Missing, corrupt,
 substituted or uncertain required state refuses/retains uncertainty; inspection of
 content does not imply executable permission.
 
-The [prepared slice plan](slices/scoped-governance-deferral/README.md) makes these
-observable boundaries concrete without authorizing implementation:
+The [completed slice](slices/scoped-governance-deferral/README.md) makes these
+observable boundaries concrete within its exact committed scope:
 
 1. Exact human-approved project/scope instruction and advisory provenance are
    retained with a committed positive deferral; no configuration, project
@@ -100,7 +119,8 @@ observable boundaries concrete without authorizing implementation:
 2. Native and typed SDK resolution/replay after restart preserve the same identity,
    scope and basis, distinguish current resolution from historical replay, and
    never infer deferral from absence. Established, deferred, refused/unavailable
-   and uncertain outcomes remain distinguishable without a selected combined enum.
+   and uncertain outcomes remain distinguishable through explicit typed results;
+   current scope state remains separate from request execution/delivery.
 3. Competing initialization, root/identity substitution, conflicting identity reuse,
    lost replies and interrupted persistence cannot report a false committed deferral
    or permit ordinary retry of an uncertain effect. Refresh/reset preserves retained
@@ -127,17 +147,18 @@ Later freshness configuration and evaluation age limits remain caller-supplied;
 
 **Prerequisites:** HR-007 semantic approval and the inspected identity/durability,
 fresh-project owner and typed SDK mechanisms are complete foundations. Positive
-deferral registration/resolution is work inside this proposed slice. Current slice
-authority is now prepared; human authorization of its next bounded implementation
-plan and current prerequisite checks remain required. Full independent checks
+deferral registration/resolution and its narrow initialization coordination landed
+inside this completed slice at `8b13505`. That completed authorization and closeout
+do not authorize later establishment or independent-use work. Full independent checks
 also need supported owner conformance/permitted use, every applicable qualification,
 initial operating authority/delegation, complete direct requirements and evaluation
 closure; those are incomplete and are not prerequisites for merely recording deferral.
 
 **Review boundary:** return the first observable committed deferral/resolution/refusal
-outcome to human review under the lifecycle. The slice plan selects one Packet-1
-boundary coincident with slice completion, without hiding an earlier meaningful
-result. Authority preparation returns to meta control before implementation.
+outcome to human review under the lifecycle. The selected Packet-1 boundary
+coincided with slice completion; meta closeout and the human recap are complete.
+The separately authorized later-establishment preparation returns to meta before
+product implementation.
 
 ### Later outcomes and dependencies
 
@@ -147,6 +168,12 @@ chain and exact evaluation closure. Existing-project first establishment needs t
 current eligible deferred basis and human-approved configuration under the fixed
 lifecycle. These are distinct follow-ups; neither is automatically authorized or
 globally ordered ahead of the other once its own dependencies resolve.
+The human selected bounded preparation of
+[`deferred-governance-establishment`](slices/deferred-governance-establishment/README.md):
+same P/S, exact current D, newly approved configuration/terms, durable cutover,
+original D replay versus current G, truthful recovery and typed SDK consumption.
+Its one Packet-1 plan is prepared and unimplemented, awaiting human authorization.
+This selects no independent-use or replacement outcome and no new phase number.
 Governed admission/assignment and assurance selection then support the selected
 assessment protocol; present qualification/reliance and separate actions require
 their exact target, complete populations and through-commit checks. Replacement,
@@ -171,7 +198,7 @@ capability groupings. They are not five implementation packets.
 
 | Area and outcome | Already covered foundations | Needs changing / missing | Dependencies and ownership |
 | --- | --- | --- | --- |
-| **Rules and contract definitions:** independently establish which rules are authoritative, admit candidates, and qualify a contract's permitted uses. | Six authored families; exact immutable definition bindings; inward owner dependencies and owner readmission; the completed fresh-project/exact freshness-scope governance establishment and typed SDK resolution. | **Change:** non-family Context Resolution authority content currently uses generic artifact publication; reconcile it with its native owner lifecycle when exercised. **Missing:** positive scoped deferral, later establishment on an existing identity, ordinary policy qualification/replacement, deterministic Policy Admission Closure, contract permitted use/qualification, and exact typed authored-input/result relationships. | Handbook supplies establishment rules; each semantic owner establishes conformance and applicable qualification; authored documents supply only declared inputs. Independent definitions do not inherently require project governance. Dependent requirements and result/action policies need their exact admitted definitions. Concrete criteria and broader physical placement remain decisions. [Objects](semantic-model/objects-and-governance.md); [R-01–R-14, R-18–R-26](../../research/hcm-coverage-landing-2026-10-01/rules-and-definitions.md#stable-obligations-and-dispositions). |
+| **Rules and contract definitions:** independently establish which rules are authoritative, admit candidates, and qualify a contract's permitted uses. | Six authored families; exact immutable definition bindings; inward owner dependencies and owner readmission; the completed fresh-project/exact freshness-scope governance establishment, positive initial scoped deferral at `8b13505` and typed SDK resolution/replay. | **Change:** non-family Context Resolution authority content currently uses generic artifact publication; reconcile it with its native owner lifecycle when exercised. **Missing:** later establishment on an existing identity, ordinary policy qualification/replacement, deterministic Policy Admission Closure, contract permitted use/qualification, and exact typed authored-input/result relationships. | Handbook supplies establishment rules; each semantic owner establishes conformance and applicable qualification; authored documents supply only declared inputs. Independent definitions do not inherently require project governance. Dependent requirements and result/action policies need their exact admitted definitions. Concrete criteria and broader physical placement remain decisions. [Objects](semantic-model/objects-and-governance.md); [R-01–R-14, R-18–R-26](../../research/hcm-coverage-landing-2026-10-01/rules-and-definitions.md#stable-obligations-and-dispositions). |
 | **Starting an evaluation:** close complete requirements, preserve diagnostic versus decision-seeking intent, and establish whether this exact plan may proceed. | Nine-dimension posture kernel; exact narrower run preparation; Engine Context Resolution authority; bounded Dock operating equality. Grounding is implemented separately. | **Change:** existing direct-run preparation lacks the complete new requirements closure. **Missing:** scoped posture/assurance selection, both requirements-source identities, permitted-use/intent compatibility, stable Observation Plan/Purpose/occurrence, purpose-bound Engine authorization, independently admitted capability, and Coordination readiness/disposition/basis. Setup/Doctor readiness is a different proposition. | Intrinsic owner establishment and applicable project qualification precede dependent use; positive deferral permits the supported independent route. Plan precedes Purpose and Engine issuance; capability is compared afterward. Contracts-domain Coordination compares and coordinates; Engine alone establishes its permission. For prospective governed assessment, the action domain resolves the governing relationship before collection commitment. HR-007 also permits new present-use qualification of exact earlier direct decision-seeking results under an adopted retrospective protocol; no future completion Intent is required for evaluation. [Preparation](semantic-model/assurance-and-evaluation-preparation.md); [S-01–S-36](../../research/hcm-coverage-landing-2026-10-01/starting-evaluations.md#stable-behavioral-claims), U-04 below. |
 | **Collection and evidence:** record real attempts and close exactly the evidence belonging to one evaluation. | Independent candidate admission; immutable per-record evidence and delivery replay; Dock operational outcomes/recovery; the actual Rust `jsonschema` observation path. | **Change:** run identity/currentness and live repository filtering cannot stand as occurrence-wide closure. **Missing:** owner occurrence allocation, immutable commitment, later-check/recovery lineage, complete attempt/admission terminals, sealed causal frontier, complete evidence-set formation, final context, and full historical reconstruction. Complete pruning needs its own positive proof and atomic commitment/empty-frontier outcome. | Preparation supplies exact attemptable basis and authorization; a pre-collection action-domain governing relationship is required by the prospective protocol, not fabricated for independent evaluation. Producer/Dock/host establish bounded origin facts, Coordination seals collection, Contracts independently admits evidence and closes set/context. Membership cannot be chosen for favorable results. [Identity and closure](semantic-model/evidence-and-evaluation.md#identity-evidence); [C-01–C-19](../../research/hcm-coverage-landing-2026-10-01/collection-and-evidence.md#behavioral-claims). |
 | **Results and explanations:** produce independent findings, named metrics, gate decisions and views of one recorded truth. | Exact integer/rational arithmetic, ordered claim accounting, non-compensatory blockers, pure gate computation and generic consumer transport. | **Change:** invalid context can currently become blocked truth; advisory obligation changes the verdict; score belongs to gate/claim weights and is skipped on blockers; gate has only passed/blocked. **Missing:** independent dimensions, admitted role policies, named metric definitions/results, configurable four-outcome gates, full canonical explanation, authorized concise/detail projections, retained exact result dependencies. | Consume one valid closed context/set and its complete selected definition inventory. Contracts owns applicability/finding/gate/explanation; metric admission and computation stay attributable. Projections preserve source meaning and separately authorized disclosure. Invalid closure refuses before truth; valid insufficiency is interpreted by the selected policies. [Results](semantic-model/evidence-and-evaluation.md#metric-gate); [T-01–T-22](../../research/hcm-coverage-landing-2026-10-01/results-and-explanations.md#behavioral-claims). |
@@ -252,12 +279,12 @@ prompts and router now enforce this rule under the user's 2026-10-01 instruction
 replacing the auto-continuation route identified at the research baseline in F-18.
 This routing correction does not admit a phase/slice or authorize product work.
 
-The proposed [`scoped-governance-deferral` shape](#proposed-next-slice-shape-scoped-governance-deferral)
-is the next defer-first outcome after the completed first foundation increment
-and HR-007 approval. The separately prepared [slice plan](slices/scoped-governance-deferral/README.md)
+The [`scoped-governance-deferral` shape](#proposed-next-slice-shape-scoped-governance-deferral)
+landed after the completed first foundation increment and HR-007 approval.
+The separately prepared [later-establishment plan](slices/deferred-governance-establishment/README.md)
 details **only its next bounded increment**, for human authorization before product
-edits: why it is next, prerequisites, concrete choices, explainable behavior and
-refusal, owner/interface/persistence boundaries and checks.
+edits: same-project D→G, prerequisites, exact approved content/terms, history/current
+resolution, owner/interface/persistence boundaries, refusal/recovery and checks.
 Do not turn this study into a fully elaborated backlog. The original comparison did not implement product work; the later fresh-project
 establishment slice is recorded separately. This reconciliation adds no implementation.
 

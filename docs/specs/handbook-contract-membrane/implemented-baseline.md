@@ -43,7 +43,14 @@ records the current source constraints. Ordinary setup does not record positive
 deferral; Contracts has standalone credential-backed authority foundations without
 requiring a Charter, but lacks the new permitted-use/intent/applicability closure.
 The proposed [scoped-deferral shape](coverage-and-landing-map.md#proposed-next-slice-shape-scoped-governance-deferral)
-changes none of these product classifications.
+subsequently landed as the bounded [deferral slice](slices/scoped-governance-deferral/README.md)
+at `8b13505`: native initial scoped deferral, exact current resolution/replay,
+retained history and typed SDK consumption are implemented. Ordinary setup still
+does not record deferral, and full independent-use closure remains absent.
+[Later first establishment](slices/deferred-governance-establishment/README.md)
+on that deferred identity is planned and unimplemented; preparation changes no
+product capability. The deferral slice records the broader Windows owner-suite
+limit rather than claiming a clean result.
 
 ## Verified domain baseline
 

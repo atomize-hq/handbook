@@ -1,6 +1,7 @@
 # Positive scoped governance deferral
 
-Status: **Packet 1 implemented; meta validation and human review pending**.
+Status: **single-packet slice implemented locally at `8b13505`; meta validation,
+aggregate closeout and human recap complete**.
 Prepared 2026-10-04 against `a7e93f29fcb93ad21785f27ac395824659f6cf60` on
 `feat/handbook-contract-membrane-clean`. The human authorized this bounded
 slice-authority preparation and local documentation commit. That authorization
@@ -8,6 +9,11 @@ did not authorize product edits. The human subsequently authorized dispatch of
 the bounded Packet-1 implementation at plan commit `0b13576`, including its
 packet review boundary. This supersedes the prior awaiting-authorization status;
 it does not authorize later establishment or broader independent-use work.
+Meta inspected the completed packet, committed scope and evidence, performed its
+single-packet aggregate closeout and returned the human recap. The human then
+authorized the bounded [later-establishment preparation](../deferred-governance-establishment/README.md).
+That new plan awaits implementation authorization; the original deferral outcome
+and its recorded verification limits remain unchanged.
 
 Descriptive slice identity: `scoped-governance-deferral`; no phase number is
 assigned. The [entry point](../../README.md), [program shape](../../coverage-and-landing-map.md#proposed-next-slice-shape-scoped-governance-deferral),
@@ -177,6 +183,9 @@ new establishment permission and races. No demonstrated duplicate transaction wo
 or unavoidable redesign currently justifies that expansion. If implementation
 finds that the selected retention/identity contract cannot support continuation,
 return the exact source-backed scope recommendation to human review before changing it.
+The separately prepared [D→G authority](../deferred-governance-establishment/README.md)
+now selects that later increment; it does not retroactively expand this completed
+deferral slice or claim a delivered transition API.
 
 Retain registration/claim, rule, instruction, deferral, outcome and recovery history
 for the lifetime of this local project identity; no pruning, relocation, export or

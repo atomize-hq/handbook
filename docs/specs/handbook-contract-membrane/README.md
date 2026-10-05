@@ -82,10 +82,16 @@ The [phase map](phase-and-slice-map.md#hr-007-semantic-landing--2026-10-04)
 records the bounded follow-up preparation boundary. Approval changes neither
 implemented capability nor completed slice history and authorizes no implementation.
 The subsequent [program reconciliation](coverage-and-landing-map.md#hr-007-reconciliation--2026-10-04)
-covers the full flow and adjacent consumer plans. It proposes
+covers the full flow and adjacent consumer plans. The
 [`scoped-governance-deferral`](slices/scoped-governance-deferral/README.md)
-as the next defer-first outcome. Its bounded slice plan is prepared for human
-authorization of Packet 1; no deferral or successor implementation is authorized.
+single-packet slice is implemented locally at `8b13505`; meta validation,
+aggregate closeout and the human recap are complete. It delivers positive scoped
+deferral/current resolution/replay, with the recorded Windows-suite evidence limit.
+The human subsequently authorized bounded preparation of
+[`deferred-governance-establishment`](slices/deferred-governance-establishment/README.md)
+for first establishment on that same deferred identity. Its Packet-1 plan awaits
+human authorization; later establishment and independent-use implementation remain
+undelivered and are not authorized by this preparation.
 
 ## Authority and navigation
 
@@ -125,6 +131,7 @@ Use the source that owns the question:
 | What is the completed HCM-5.4 outcome and packet boundary? | [`slices/HCM-5.4/README.md`](slices/HCM-5.4/README.md) fixes the first production native-Rust JSON Schema validator, exact offline local-closure/fingerprint/observation/refusal semantics, one current-target manifest/bundle, two new schema roots with no operation or capability increase, the exact contract-to-local-closeout proof, strict Packets 1–6, aggregate closeout, and Phase-5 exit evidence. Packet 4R supersedes Packet 4's invalid package identity, Packet 5 proves the Contracts-owned semantic path, and Packet 6 finalizes the checked-in schema tree and unchanged generic consumers at exact `62 / 31 / 170 / 1` truth plus six fixed use cases. All 19 conditions, the single slice closeout, and Phase-5 exit are complete. |
 | Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. A roadmap entry plus an explicit execution request may authorize bounded preparation of that document, but product execution begins only after the resulting current slice authority is ready. |
 | What is the first bounded approved-semantics establishment outcome? | [`slices/admission-governance-establishment/README.md`](slices/admission-governance-establishment/README.md) records the completed local implementation at `aa793c1`: one newly registered local project, exact Contracts freshness-policy admission scope, native committed establishment/refusal/recovery and typed Rust SDK resolution/replay. The caller-supplied ceiling survives restart exactly. The single-packet slice is at human review; policy admission and successor activation remain separate. |
+| What is the completed positive deferral outcome and the later-establishment plan? | [`scoped-governance-deferral`](slices/scoped-governance-deferral/README.md) records the completed local initial deferral at `8b13505`, including current/replay and evidence limits. [`deferred-governance-establishment`](slices/deferred-governance-establishment/README.md) selects one unimplemented same-project D→G owner/typed-SDK increment, with original D replay, exact current G, concurrency and recovery. Its bounded plan awaits human authorization. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 
 If prose about implemented behavior conflicts with the current source and tests, treat the discrepancy as documentation drift; do not use the prose to override the product.
