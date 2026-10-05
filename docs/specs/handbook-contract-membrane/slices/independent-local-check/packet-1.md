@@ -1,20 +1,21 @@
 # Packet 1 plan: native initial setup and local operating authority
 
-Status: **proposed next increment; awaiting human implementation approval**,
+Status: **local implementation complete; awaiting human Packet-1 review**,
 2026-10-05. This is Packet 1 of [independent-local-check](README.md), not a complete
 independent check. The selected human review boundary is this packet. Return after
 its setup/Engine outcome, verification, causal review and coherent local commit;
 do not continue into Contract establishment or evidence-source integration.
 
 The human's [local-advisory mode selection](../../semantic-model/amendments/approval-authority-and-assurance.md)
-is settled intent for this workflow; this packet's implementation plan still
-requires human approval. The [credential-status baseline](../../implemented-baseline.md#credential-verification-and-the-selected-local-route)
+is settled intent for this workflow. The human approved this bounded implementation
+plan on 2026-10-05; runtime project inputs still require their own initial approval.
+The [credential-status baseline](../../implemented-baseline.md#credential-verification-and-the-selected-local-route)
 records retained implemented mechanisms and incomplete/unproven device integration.
 
 ## Why this increment and what it demonstrates
 
-The real observer already exists. The initial consumer cannot currently obtain
-usable owner-backed setup/Engine authority: public Charter dispatch injects an
+The real observer already exists. Before this packet, the initial consumer could
+not obtain usable owner-backed setup/Engine authority: public Charter dispatch injects an
 unavailable authenticator, and `load_authority_snapshot` uses the private HCM-3.2
 non-family authority-artifact/publication tuple. An instruction parser or profile
 label would leave that obstruction intact. This packet must establish real native
@@ -166,6 +167,63 @@ the supported project population, invent runtime defaults or replace other owner
 rules. If compatibility needs more than the narrow closure above, return STOPPED
 with the exact needed extension and alternatives to meta.
 
+### Selected private engineering contract — 2026-10-05
+
+Use purpose-named Engine local Charter and operating-authority modules, with typed
+SDK preparation/execution/original-request recovery/current resolution. A distinct
+local profile closure pins the released shipped mechanics plus new
+`handbook.profile.native-local-charter@1.0.0`,
+`handbook.approval.native-local-initial-charter@1.0.0`,
+`handbook.intake.native-local-initial-charter@1.0.0`, and
+`handbook.lifecycle.native-local-initial-charter@1.0.0` definitions. It changes no shipped
+credential rule or released candidate fingerprint. Local candidate, validation,
+approval, promotion and lifecycle records have their own closed native lineage;
+canonical Charter YAML retains the existing schema, renderer and posture rubric.
+The common committed Charter reader recognizes that lineage; old amendment routes
+must refuse incompatible local authority rather than reinterpret it.
+
+New closed JSON records use the live duplicate-safe `parse_schema_json`, existing
+canonical JSON/`DefinitionFingerprint` machinery and retained-root durable file
+primitives. Bound each document to 1 MiB; bound instruction strings/collections at
+their native validators. Fingerprints bind domain/version and complete typed
+preimages; storage is canonical JSON without a trailing newline. Immutable request
+and owner output records precede exact current-head publication. Interrupted
+publication resumes only retained original intent; missing required retained state
+refuses. Initial replay is historical and never reinstalls a revoked head.
+
+Initialization claim/receipt and exact physical root bind the defer-first project.
+Contracts current applicability is resolved through v3 by SDK before Engine calls,
+with governance guards released first. The existing native Contracts deferral
+facts expose a pure prospective basis for the complete original request; its
+canonical document fingerprint is retained in the terms locator before effects
+and rederived when restoring that locator. This is a currentness expectation,
+not a second governance validator or a caller-supplied permission verdict. Engine
+compares the complete current relation under its initialization guard before
+initial terms effects and through consuming use. Engine uses initialization, promotion,
+registry, lifecycle and local-operating locks in that order, releasing in reverse
+and retaining required root/file generations through
+its consuming local checks. Local admission is an additive witness to the existing
+Context Resolution envelope, never a manufactured credential witness or generic
+artifact. Native horizon/rank and mutation-selector containment enforce bounded
+use; only local validation and explicitly bounded owner-write classes are supported.
+Reserved/delegated resolution classes and revocation principal are explicit supplied
+terms. Refusal returns original basis/reach and permitted resolver class; delivery
+of a delegated decision remains unimplemented in this packet.
+
+The additive owner modules are Engine `local_charter` and `local_authority`, and
+SDK `local_setup`. Local operating records bind
+`handbook.operating.local-initial@1.0.0`. Immutable local owner state is outside
+resettable `.handbook/state`; retained native lock footprints also prevent lost
+owner partitions from appearing fresh. The ordinary `local_initial_setup` SDK
+example reads supplied JSON, saves its complete locator before effects and exposes
+establish, recover, current, admit and revoke operations. It supplies no runtime
+approval or project defaults. Actual native admission refusals retain the complete
+candidate and exact source fingerprints. A refusal before guarded current terms
+resolve reports missing authority and certifies no portable resolver claim.
+Only fresh establishment can create the operating lock. History, current reads,
+revocation and original-request recovery cannot consume an unreached terms stage's
+eligibility by creating its missing lock.
+
 ## Work and acceptance
 
 Implement only this connected initial-authority outcome, in dependency order:
@@ -208,8 +266,9 @@ Likely implementation ownership is Engine's Charter intake/approval/promotion,
 definition/profile selection, Context Resolution and a focused local-authority
 module; typed SDK composition and focused Engine/SDK tests. Contracts changes
 are limited to genuinely necessary compilation or v3-consumer integration; its
-governance transaction/contracts remain unchanged. Product files are not edited
-by this preparation. Avoid spreading feature branches through unrelated modules.
+governance transaction/contracts remain unchanged. The implemented extension is
+the pure prospective-basis accessor for this exact composition. Avoid spreading
+feature branches through unrelated modules.
 
 ## Verification and review for implementation
 
@@ -252,3 +311,71 @@ selected native authority, assurance/compatibility and currentness evidence.
 P1 Critical/P2 Required block; fix and verify, then one fresh delta-focused review
 of material remediation. P3 Optional/P4 Nit are advisory. Return at the packet's
 human review boundary; meta alone owns later planning and aggregate closeout.
+
+## Packet-1 implementation evidence — 2026-10-05
+
+The typed setup path retains the complete recovery locator before effects, commits
+separate native D, Charter/posture and advisory operating outcomes, and resolves
+them after a real process restart. Actual Engine admission authorizes the supplied
+local validation horizon and owner-write reach; wider candidate paths/horizons,
+changed constraints, a different root/profile and stale current authority refuse.
+Guarded admission refusals retain the actual candidate and distinguish reserved,
+delegated-but-unimplemented and missing-authority resolution. Authorized revoke
+stops consuming use and fresh admission; original owner replay remains historical.
+Interrupted pending publication resumes only exact retained intent. Missing
+required owner state refuses rather than bootstrapping or reconstructing a final
+terminal. A never-reached terms stage stays eligible for separately explicit native
+preparation; SDK history/recovery cannot create its absent request or lock.
+
+Focused Windows verification, without unrelated Dock or whole-workspace suites:
+
+| Executed target | Passed / failed / ignored |
+| --- | --- |
+| Engine `local_charter`, `local_operating_terms` | 8 / 0 / 0; 2 / 0 / 0 |
+| Engine `hcm_2_4_charter_profile_compatibility`, `profile_selection` | 9 / 0 / 0; 20 / 0 / 0 |
+| Engine `repository_initialization`, `repository_invocation_identity`, `repository_durability` | 15 / 0 / 0; 7 / 0 / 0; 6 / 0 / 0 |
+| Engine `context_resolution_kernel` | 33 / 0 / 0 |
+| Engine `hcm_2_2_authority_workflow`, `hcm_2_2_charter`, `hcm_2_2_lifecycle_store` | 4 / 0 / 0; 3 / 0 / 0; 5 / 0 / 0 |
+| SDK `local_initial_setup` | 14 / 0 / 0, including one process-worker entry |
+| SDK `admission_deferral`, `admission_deferred_establishment` | 9 / 0 / 0; 10 / 0 / 0, each including one process-worker entry |
+| SDK library `setup::behavior_tests` | 12 / 0 / 0; 56 unrelated library tests filtered |
+
+These are 157 unique target entries; repeats during remediation are not added.
+The checked-in [ordinary consumer](../../../../../crates/sdk/examples/local_initial_setup.rs)
+was also built as a separate normal-dependency program with the existing lockfile
+and `--offline --locked`; its actual dependency graph contains no `test-support`
+feature. Supplied test inputs committed all three native owners with the exact
+expected/current D relation. Separate processes recovered the original outcomes
+and reopened current terms. Actual checks returned `Authorized`/`Allowed` within
+the supplied bounds and `NotAuthorized`/`Denied` beyond them. Native revoke
+committed; current resolution then refused. Original recovery retained the exact
+outcome and unchanged locator bytes without restoring current authority. This
+verifies the implementation with test inputs, not approval of a real user project.
+
+The existing credential tests use controlled signing fixtures and do not prove
+hardware acquisition. `cargo check -p handbook-engine -p handbook-contracts -p
+handbook-sdk`, exact changed-Rust `rustfmt --check` and staged whitespace checks
+pass. Early new-path runs exposed absent-parent handling on Windows and an exact
+producer fingerprint field mismatch; those failures were corrected and the named
+targets passed. The inherited broader Windows Contracts advisory of 24 passed,
+1 failed and 1 ignored (isolated failed row later passed, attribution unresolved)
+and unexecuted Unix limits remain unchanged; this packet does not clear them.
+
+The initial focused implementation review required two P2 fixes: complete native
+D-relation comparison at the SDK→Engine boundary, and no operating lock creation
+by history/current/recovery. The final native/SDK tests include substitution after
+positive v3 resolution and crash-before-terms eligibility, along with changed
+Charter historical replay and missing-partition common-reader refusal. The fresh
+delta review returned **APPROVE**: both original P2 findings are closed, with no
+remaining P1/P2 blockers or P3/P4 findings. Its optional lock-absence assertion
+was added and the discriminating substitution row passed again (1 / 0 / 0; 13
+filtered), without adding a new target entry. Review inspected source and the
+executed evidence; reviewers did not independently rerun suites.
+
+Required staged GitNexus `detect_changes` checks completed for exactly 24 files.
+The first mapped four incorrect symbols and reported CRITICAL risk across 300
+flows; that warning was surfaced. A later check mapped three unchanged modules
+and reported low risk with zero flows. Both emitted foreign-storage warnings.
+These inconsistent degraded results are not a reliable scope certificate. Direct
+owner/caller inspection, exact staged scope and focused tests control this packet;
+no index repair or reanalysis was done.

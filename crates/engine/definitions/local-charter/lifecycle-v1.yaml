@@ -1,0 +1,8 @@
+schema_id: handbook.native-local-charter-lifecycle-definition
+schema_version: '1.0'
+definition_ref: handbook.lifecycle.native-local-initial-charter@1.0.0
+approval_policy_ref: handbook.approval.native-local-initial-charter@1.0.0
+initial_state: current
+canonical_change: invalidate_operating_authority
+amendment: unsupported
+state_loss: refuse

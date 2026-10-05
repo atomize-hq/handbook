@@ -675,7 +675,53 @@ impl CharterAuthorityTransactionServiceV1 {
         &self,
     ) -> Result<Option<CommittedCharterAuthorityV1>, CharterPromotionErrorV1> {
         ensure_supported_platform()?;
+        if crate::local_charter::local_partition_present(&self.repo_root).map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                failure.to_string(),
+            )
+        })? {
+            let root = crate::RetainedRepositoryRootV1::open_exact(&self.repo_root).map_err(
+                |failure| {
+                    error(
+                        CharterPromotionErrorKindV1::UnsafeFilesystem,
+                        failure.detail(),
+                    )
+                },
+            )?;
+            crate::local_charter::require_local_read_locks(&root).map_err(|failure| {
+                error(
+                    CharterPromotionErrorKindV1::DurabilityViolation,
+                    failure.to_string(),
+                )
+            })?;
+        }
         let _locks = AuthorityLocks::acquire(&self.repo_root)?;
+        if crate::local_charter::local_partition_present(&self.repo_root).map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                failure.to_string(),
+            )
+        })? {
+            let root = crate::RetainedRepositoryRootV1::open_exact(&self.repo_root).map_err(
+                |failure| {
+                    error(
+                        CharterPromotionErrorKindV1::UnsafeFilesystem,
+                        failure.detail(),
+                    )
+                },
+            )?;
+            if let Some(local) = crate::local_charter::read_local_committed_retained(&root)
+                .map_err(|failure| {
+                    error(
+                        CharterPromotionErrorKindV1::DurabilityViolation,
+                        failure.to_string(),
+                    )
+                })?
+            {
+                return Ok(Some(local));
+            }
+        }
         self.recover_pending_locked()?;
         let Some(canonical_bytes) = read_current_canonical(&self.repo_root)? else {
             return Ok(None);
@@ -705,6 +751,14 @@ impl CharterAuthorityTransactionServiceV1 {
     ) -> Result<Option<AuthorityHeadV1>, CharterPromotionErrorV1> {
         ensure_supported_platform()?;
         let _locks = AuthorityLocks::acquire(&self.repo_root)?;
+        if crate::local_charter::local_partition_present(&self.repo_root).map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                failure.to_string(),
+            )
+        })? {
+            return Err(error(CharterPromotionErrorKindV1::Conflict, "local initial Charter selection does not authorize the credential-backed posture transition route"));
+        }
         self.recover_pending_locked()?;
         let Some(canonical_bytes) = read_current_canonical(&self.repo_root)? else {
             return Ok(None);
@@ -729,6 +783,14 @@ impl CharterAuthorityTransactionServiceV1 {
         &self,
     ) -> Result<RetainedAuthorityTransactionV1<'_>, CharterPromotionErrorV1> {
         ensure_supported_platform()?;
+        if crate::local_charter::local_partition_present(&self.repo_root).map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                failure.to_string(),
+            )
+        })? {
+            return Err(error(CharterPromotionErrorKindV1::Conflict, "local initial Charter selection does not authorize a credential-backed authority mutation"));
+        }
         let locks = AuthorityLocks::acquire(&self.repo_root)?;
         let mut recovery_public_effects = self.recover_pending_locked()?;
         let registry_approval_effects = recover_complete_registry_approval_authority_locked(
@@ -770,6 +832,31 @@ impl CharterAuthorityTransactionServiceV1 {
     fn read_committed_charter_locked(
         &self,
     ) -> Result<Option<CommittedCharterAuthorityV1>, CharterPromotionErrorV1> {
+        if crate::local_charter::local_partition_present(&self.repo_root).map_err(|failure| {
+            error(
+                CharterPromotionErrorKindV1::DurabilityViolation,
+                failure.to_string(),
+            )
+        })? {
+            let root = crate::RetainedRepositoryRootV1::open_exact(&self.repo_root).map_err(
+                |failure| {
+                    error(
+                        CharterPromotionErrorKindV1::UnsafeFilesystem,
+                        failure.detail(),
+                    )
+                },
+            )?;
+            if let Some(local) = crate::local_charter::read_local_committed_retained(&root)
+                .map_err(|failure| {
+                    error(
+                        CharterPromotionErrorKindV1::DurabilityViolation,
+                        failure.to_string(),
+                    )
+                })?
+            {
+                return Ok(Some(local));
+            }
+        }
         let Some(canonical_bytes) = read_current_canonical(&self.repo_root)? else {
             return Ok(None);
         };

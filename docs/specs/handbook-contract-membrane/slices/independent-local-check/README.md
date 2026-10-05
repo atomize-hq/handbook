@@ -1,11 +1,13 @@
 # Independent local JSON conformance check
 
-Status: **slice plan prepared for human review; unimplemented**, 2026-10-05.
+Status: **Packet 1 implemented, awaiting human review; complete slice unfinished**,
+2026-10-05. Packet 1 supplies native local setup and Engine envelope authority;
+its outcome returns to human review before any successor packet.
 Preparation was expressly requested after the intent clarification landing at
 `5da29f443ac78ef53eabb662cb0e455840077c46`, verified as the live baseline on
-`feat/handbook-contract-membrane-clean`. This plan authorizes no product edits,
-runtime project choices, external action, or successor dispatch. Implementation
-requires human approval of the next increment and proven hard predecessors.
+`feat/handbook-contract-membrane-clean`. The human subsequently approved only
+[Packet 1](packet-1.md)'s bounded product implementation. Runtime project choices,
+external action and successor dispatch retain their separate approval boundaries.
 No new phase number is assigned.
 
 Reconciled at `6a15ef68ab751383187d91e296bcf187dfda2dc1` with the human's
@@ -13,7 +15,8 @@ Reconciled at `6a15ef68ab751383187d91e296bcf187dfda2dc1` with the human's
 Local-advisory authority is selected for this complete workflow; hardware or
 authenticator acquisition is not a prerequisite. The
 [current credential status](../../implemented-baseline.md#credential-verification-and-the-selected-local-route)
-remains distinct from this unimplemented route. Earlier research assurance
+remains distinct from the bounded Packet-1 implementation and the unfinished
+complete workflow. Earlier research assurance
 alternatives are dated inputs, not unresolved selection for this plan.
 
 The [entry point](../../README.md), [phase map](../../phase-and-slice-map.md),

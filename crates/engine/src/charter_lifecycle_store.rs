@@ -330,7 +330,26 @@ impl CharterLifecycleStoreV1 {
         &self,
     ) -> Result<Option<CharterLifecycleAuthorityV1>, CharterLifecycleStoreErrorV1> {
         ensure_supported_platform()?;
+        if crate::local_charter::local_partition_present(&self.repo_root)
+            .map_err(|failure| durability(failure.to_string()))?
+        {
+            let root = crate::RetainedRepositoryRootV1::open_exact(&self.repo_root)
+                .map_err(|failure| durability(failure.detail()))?;
+            crate::local_charter::require_local_read_locks(&root)
+                .map_err(|failure| durability(failure.to_string()))?;
+        }
         let _lock = LifecycleLock::acquire(&self.repo_root)?;
+        if crate::local_charter::local_partition_present(&self.repo_root)
+            .map_err(|failure| durability(failure.to_string()))?
+        {
+            let root = crate::RetainedRepositoryRootV1::open_exact(&self.repo_root)
+                .map_err(|failure| durability(failure.detail()))?;
+            if let Some(local) = crate::local_charter::read_local_lifecycle_retained(&root)
+                .map_err(|failure| durability(failure.to_string()))?
+            {
+                return Ok(local.authority);
+            }
+        }
         self.recover_pending_locked()?;
         self.load_current_locked()
             .map(|authority| authority.map(CharterLifecycleAuthorityV1::from))
@@ -370,6 +389,17 @@ impl CharterLifecycleStoreV1 {
         &self,
     ) -> Result<RetainedLifecycleAuthorityV1, CharterLifecycleStoreErrorV1> {
         ensure_supported_platform()?;
+        if crate::local_charter::local_partition_present(&self.repo_root)
+            .map_err(|failure| durability(failure.to_string()))?
+        {
+            let root = crate::RetainedRepositoryRootV1::open_exact(&self.repo_root)
+                .map_err(|failure| durability(failure.detail()))?;
+            if let Some(local) = crate::local_charter::read_local_lifecycle_retained(&root)
+                .map_err(|failure| durability(failure.to_string()))?
+            {
+                return Ok(local);
+            }
+        }
         let Some(loaded) = self.load_current_locked()? else {
             return Ok(RetainedLifecycleAuthorityV1 {
                 canonical_bytes: None,
@@ -431,6 +461,11 @@ impl CharterLifecycleStoreV1 {
         intent: CharterLifecycleEventIntentV1,
     ) -> Result<CharterLifecycleEventCommitV1, CharterLifecycleStoreErrorV1> {
         ensure_supported_platform()?;
+        if crate::local_charter::local_partition_present(&self.repo_root)
+            .map_err(|failure| durability(failure.to_string()))?
+        {
+            return Err(error(CharterLifecycleStoreErrorKindV1::InvalidEvent, "local initial Charter lifecycle event delivery is unimplemented; the credential-backed rule cannot replace this selection"));
+        }
         let _lock = LifecycleLock::acquire(&self.repo_root)?;
         self.recover_pending_locked()?;
         let authority = self.load_current_locked()?.ok_or_else(|| {

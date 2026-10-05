@@ -913,6 +913,11 @@ impl CharterPromotionWorkflowServiceV1 {
         transitioned_at_utc: &str,
     ) -> Result<CharterPromotionWorkflowCommitV1, CharterPromotionWorkflowErrorV1> {
         validate_intent(&intent)?;
+        if crate::local_charter::local_partition_present(&self.repo_root)
+            .map_err(|failure| candidate_refused(failure.to_string()))?
+        {
+            return Err(candidate_refused("an existing local initial Charter selection cannot be amended or replaced under the credential-backed promotion rule"));
+        }
         let retained_transaction = self
             .transactions
             .begin_retained_authority()

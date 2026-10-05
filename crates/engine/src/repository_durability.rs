@@ -298,57 +298,7 @@ impl RepositoryExclusiveLockV1 {
         if regular_file_snapshot(file)? != self.snapshot || self.snapshot.length != 0 {
             return Err(unsafe_fs("retained repository lock generation changed"));
         }
-        let mut digest = Sha256::new();
-        digest.update(b"handbook.repository-native-lock-physical-generation@1.0\0");
-        match self.snapshot.identity {
-            #[cfg(unix)]
-            PhysicalFileIdentity::Unix {
-                device,
-                inode,
-                links,
-            } => {
-                digest.update(b"unix\0");
-                digest.update(device.to_be_bytes());
-                digest.update(inode.to_be_bytes());
-                digest.update(links.to_be_bytes());
-            }
-            #[cfg(windows)]
-            PhysicalFileIdentity::Windows {
-                volume,
-                file_id,
-                links,
-            } => {
-                digest.update(b"windows\0");
-                digest.update(volume.to_be_bytes());
-                digest.update(file_id);
-                digest.update(links.to_be_bytes());
-            }
-        }
-        match self.snapshot.version {
-            #[cfg(unix)]
-            NativeFileVersion::Unix {
-                modified_seconds,
-                modified_nanoseconds,
-                changed_seconds,
-                changed_nanoseconds,
-            } => {
-                digest.update(modified_seconds.to_be_bytes());
-                digest.update(modified_nanoseconds.to_be_bytes());
-                digest.update(changed_seconds.to_be_bytes());
-                digest.update(changed_nanoseconds.to_be_bytes());
-            }
-            #[cfg(windows)]
-            NativeFileVersion::Windows {
-                creation_time,
-                last_write_time,
-                change_time,
-            } => {
-                digest.update(creation_time.to_be_bytes());
-                digest.update(last_write_time.to_be_bytes());
-                digest.update(change_time.to_be_bytes());
-            }
-        }
-        Ok(format!("sha256:{:x}", digest.finalize()))
+        native_lock_physical_fingerprint_v1(&self.snapshot)
     }
     /// Explicitly releases the native lock so a caller can refuse its receipt
     /// when release certainty is required. Drop remains a best-effort fallback.
@@ -362,7 +312,93 @@ impl RepositoryExclusiveLockV1 {
     }
 }
 
+fn native_lock_physical_fingerprint_v1(
+    snapshot: &RegularFileSnapshot,
+) -> Result<String, RepositoryDurabilityErrorV1> {
+    if snapshot.length != 0 {
+        return Err(unsafe_fs("native lock is not empty"));
+    }
+    let mut digest = Sha256::new();
+    digest.update(b"handbook.repository-native-lock-physical-generation@1.0\0");
+    match snapshot.identity {
+        #[cfg(unix)]
+        PhysicalFileIdentity::Unix {
+            device,
+            inode,
+            links,
+        } => {
+            digest.update(b"unix\0");
+            digest.update(device.to_be_bytes());
+            digest.update(inode.to_be_bytes());
+            digest.update(links.to_be_bytes());
+        }
+        #[cfg(windows)]
+        PhysicalFileIdentity::Windows {
+            volume,
+            file_id,
+            links,
+        } => {
+            digest.update(b"windows\0");
+            digest.update(volume.to_be_bytes());
+            digest.update(file_id);
+            digest.update(links.to_be_bytes());
+        }
+    }
+    match snapshot.version {
+        #[cfg(unix)]
+        NativeFileVersion::Unix {
+            modified_seconds,
+            modified_nanoseconds,
+            changed_seconds,
+            changed_nanoseconds,
+        } => {
+            digest.update(modified_seconds.to_be_bytes());
+            digest.update(modified_nanoseconds.to_be_bytes());
+            digest.update(changed_seconds.to_be_bytes());
+            digest.update(changed_nanoseconds.to_be_bytes());
+        }
+        #[cfg(windows)]
+        NativeFileVersion::Windows {
+            creation_time,
+            last_write_time,
+            change_time,
+        } => {
+            digest.update(creation_time.to_be_bytes());
+            digest.update(last_write_time.to_be_bytes());
+            digest.update(change_time.to_be_bytes());
+        }
+    }
+    Ok(format!("sha256:{:x}", digest.finalize()))
+}
+
 impl RetainedRepositoryRootV1 {
+    /// Read-only physical binding for native initialization receipt consumers.
+    /// This intentionally takes no lock; the caller retains its owner guards.
+    pub(crate) fn initialization_lock_physical_fingerprint_v1(
+        &self,
+    ) -> Result<String, RepositoryDurabilityErrorV1> {
+        self.require_stable_path_epoch()?;
+        let relative = ValidatedRelativePath::parse(
+            crate::repository_initialization::REPOSITORY_INITIALIZATION_LOCK_PATH_V1,
+            false,
+        )?;
+        let file = self
+            .open_regular_optional(&relative, false)?
+            .ok_or_else(|| unsafe_fs("initialization lock is absent"))?;
+        let snapshot = regular_file_snapshot(&file)?;
+        let fingerprint = native_lock_physical_fingerprint_v1(&snapshot)?;
+        let current = self
+            .open_regular_optional(&relative, false)?
+            .ok_or_else(|| unsafe_fs("initialization lock disappeared"))?;
+        if regular_file_snapshot(&file)? != snapshot || regular_file_snapshot(&current)? != snapshot
+        {
+            return Err(unsafe_fs(
+                "initialization lock changed during retained observation",
+            ));
+        }
+        self.require_stable_path_epoch()?;
+        Ok(fingerprint)
+    }
     pub(crate) fn initialization_root_path(&self) -> &Path {
         &self.root_path
     }
@@ -406,6 +442,35 @@ impl RetainedRepositoryRootV1 {
         };
         self.require_stable_path_epoch()?;
         Ok(exists)
+    }
+
+    /// Local owner reads distinguish a never-created parent from unsafe parent
+    /// substitution. This performs no directory or lock creation.
+    pub(crate) fn read_local_owner_optional_bounded(
+        &self,
+        relative: &str,
+        maximum: usize,
+    ) -> Result<RepositoryReadV1, RepositoryDurabilityErrorV1> {
+        let path = ValidatedRelativePath::parse(relative, false)?;
+        let parts = path.as_str().split('/').collect::<Vec<_>>();
+        if parts.first() != Some(&".handbook") {
+            return self.read_regular_bounded(relative, maximum);
+        }
+        if !self.initialization_handbook_exists()? {
+            return Ok(RepositoryReadV1::Absent);
+        }
+        let mut parent = ".handbook".to_owned();
+        for part in parts.iter().skip(1).take(parts.len().saturating_sub(2)) {
+            let entries = self.list_directory_bounded(&parent, MAX_DIRECTORY_ENTRIES)?;
+            match entries.iter().find(|entry| entry.name() == *part) {
+                None => return Ok(RepositoryReadV1::Absent),
+                Some(entry) if entry.kind() == RepositoryDirectoryEntryKindV1::Directory => {}
+                Some(_) => return Err(unsafe_fs("local owner parent is not a native directory")),
+            }
+            parent.push('/');
+            parent.push_str(part);
+        }
+        self.read_regular_bounded(relative, maximum)
     }
     /// Opaque versioned binding to the retained physical root for admission
     /// governance. Reopening the same root retains this value; copying its
@@ -545,6 +610,32 @@ impl RetainedRepositoryRootV1 {
         self.require_stable_path_epoch()?;
         let (directories, files) =
             self.retain_selected_tree(RECURSIVE_ROOTS, EXACT_FILES, inventory_limit)?;
+        let guard = RetainedRepositoryTreeGuardV1 {
+            root: self,
+            directories,
+            files,
+        };
+        guard.validate()?;
+        Ok(guard)
+    }
+
+    /// Retain exactly the native local authority partitions and their physical
+    /// registration/current-Charter/current-governance dependencies through use.
+    pub(crate) fn retain_local_authority_tree_guard(
+        &self,
+    ) -> Result<RetainedRepositoryTreeGuardV1<'_>, RepositoryDurabilityErrorV1> {
+        self.require_stable_path_epoch()?;
+        let (directories, files) = self.retain_selected_tree(
+            &[".handbook/local-charter/v1", ".handbook/local-operating/v1"],
+            &[
+                ".handbook/project/charter.yaml",
+                ".handbook/admission-governance/v2/scope-current.json",
+                ".handbook/repository-identity.v1",
+                ".handbook-initialization.v1.json",
+                ".handbook-initialization-receipt.v1.json",
+            ],
+            1024,
+        )?;
         let guard = RetainedRepositoryTreeGuardV1 {
             root: self,
             directories,

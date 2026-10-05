@@ -45,6 +45,22 @@ impl PreparedAdmissionDeferralV2 {
     pub fn locator(&self) -> &DeferralRequestLocatorV2 {
         &self.locator
     }
+    /// Pure prospective identity for a composed owner request, not current
+    /// applicability. Execution and consuming use still require native resolution.
+    pub fn prospective_deferred_basis(
+        &self,
+    ) -> Result<DeferredGovernanceBasisV2, GovernanceRefusalV1> {
+        self.locator.prospective_deferred_basis()
+    }
+}
+impl DeferralRequestLocatorV2 {
+    /// Recomputes the exact initial relation through the existing deferral facts.
+    /// It grants no applicability, qualification, permission or currentness.
+    pub fn prospective_deferred_basis(
+        &self,
+    ) -> Result<DeferredGovernanceBasisV2, GovernanceRefusalV1> {
+        Ok(Facts::new(self)?.basis)
+    }
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]

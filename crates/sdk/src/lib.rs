@@ -16,6 +16,7 @@ mod decision_log;
 mod doctor;
 mod error;
 pub mod flow_api;
+pub mod local_setup;
 pub mod pipeline_route_api;
 mod profile_readiness;
 mod refusal;

@@ -307,6 +307,10 @@ fn artifact_decision(
     })
 }
 
+pub(crate) fn local_operating_profile_request() -> ProfileSelectionRequest {
+    shipped_profile_request()
+}
+
 fn shipped_profile_request() -> ProfileSelectionRequest {
     let schema_refs = [
         "handbook.schemas.artifacts.project-authority@1.0.0",

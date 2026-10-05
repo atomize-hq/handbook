@@ -696,7 +696,7 @@ impl ContextResolutionAuthorityUse {
 
 #[rustfmt::skip]
 #[derive(Clone, Debug)]
-pub struct ContextResolutionAuthorityAdmission { authority_use: ContextResolutionAuthorityUse, subject: ContextResolutionExactBinding, binding_fingerprint: String, authority: Arc<Value>, witness: Arc<CurrentAuthorityWitness> }
+pub struct ContextResolutionAuthorityAdmission { authority_use: ContextResolutionAuthorityUse, subject: ContextResolutionExactBinding, binding_fingerprint: String, authority: Arc<Value>, witness: Option<Arc<CurrentAuthorityWitness>>, local_witness: Option<crate::local_authority::LocalCurrentAuthorityWitnessV1> }
 
 impl ContextResolutionAuthorityAdmission {
     #[rustfmt::skip]
@@ -708,8 +708,12 @@ impl ContextResolutionAuthorityAdmission {
 
     #[rustfmt::skip]
     fn require_current(&self) -> Result<(), ContextResolutionKernelError> {
-        let expected = &self.witness.pending;
-        let authority = ArtifactRepositoryAuthorityGuardV1::acquire(&self.witness.repo_root)
+        if let Some(local) = &self.local_witness {
+            return local.with_current(|_| Ok(())).map_err(local_kernel_error);
+        }
+        let witness = self.witness.as_ref().ok_or_else(|| kernel_error!(ContextResolutionKernelErrorKind::AuthorityRefused, "native admission witness is absent"))?;
+        let expected = &witness.pending;
+        let authority = ArtifactRepositoryAuthorityGuardV1::acquire(&witness.repo_root)
             .map_err(|_| {
                 kernel_error!(
                     ContextResolutionKernelErrorKind::StaleAuthority,
@@ -730,10 +734,10 @@ impl ContextResolutionAuthorityAdmission {
             ));
         }
         let (committed, committed_intent) =
-            GenericArtifactLineageStoreV1::new(&self.witness.repo_root)
+            GenericArtifactLineageStoreV1::new(&witness.repo_root)
                 .read_committed_authoritative_with_intent_for_currentness(
                     CONTEXT_RESOLUTION_AUTHORITY_PATH,
-                    &self.witness.expected_outer_fingerprint,
+                    &witness.expected_outer_fingerprint,
                 )
                 .map_err(|_| {
                     kernel_error!(
@@ -742,7 +746,7 @@ impl ContextResolutionAuthorityAdmission {
                     )
                 })?;
         if DefinitionFingerprint::from_bytes(&committed).as_str()
-            != self.witness.expected_outer_fingerprint
+            != witness.expected_outer_fingerprint
         {
             return Err(kernel_error!(
                 ContextResolutionKernelErrorKind::StaleAuthority,
@@ -758,17 +762,17 @@ impl ContextResolutionAuthorityAdmission {
         let capsule = validate_capsule_value(&wrapper).map_err(|detail| {
             kernel_error!(ContextResolutionKernelErrorKind::StaleAuthority, detail)
         })?;
-        validate_capsule_repository_bindings(&self.witness.repo_root, &capsule).map_err(
+        validate_capsule_repository_bindings(&witness.repo_root, &capsule).map_err(
             |detail| kernel_error!(ContextResolutionKernelErrorKind::StaleAuthority, detail),
         )?;
         let publisher = publisher_authority_from_committed_intent(
             &committed_intent,
-            &self.witness.expected_outer_fingerprint,
+            &witness.expected_outer_fingerprint,
         )
         .map_err(|detail| {
             kernel_error!(ContextResolutionKernelErrorKind::StaleAuthority, detail)
         })?;
-        let registry = observe_committed_approver_registry_locked(&self.witness.repo_root)
+        let registry = observe_committed_approver_registry_locked(&witness.repo_root)
             .map_err(|_| {
                 kernel_error!(
                     ContextResolutionKernelErrorKind::StaleAuthority,
@@ -813,7 +817,7 @@ impl ContextResolutionAuthorityAdmission {
                 "context resolution authority admission is no longer current"
             ));
         }
-        verify_publisher_authority(&self.witness.repo_root, capsule, &self.witness.expected_outer_fingerprint, &publisher, true)
+        verify_publisher_authority(&witness.repo_root, capsule, &witness.expected_outer_fingerprint, &publisher, true)
             .map_err(|detail| kernel_error!(ContextResolutionKernelErrorKind::StaleAuthority, detail))?
             .ok_or_else(|| kernel_error!(ContextResolutionKernelErrorKind::StaleAuthority, "current publisher revalidation did not produce an operational witness"))?;
         Ok(())
@@ -894,7 +898,8 @@ impl ContextResolutionAuthorityAdmissionResolver {
             subject: subject.clone(),
             binding_fingerprint: current.pending.capsule.semantic_binding_fingerprint.clone(),
             authority: current.pending.capsule.binding.clone(),
-            witness: current.clone(),
+            witness: Some(current.clone()),
+            local_witness: None,
         }
         .require_current()?;
         if current.pending.capsule.outer_artifact_fingerprint
@@ -1013,7 +1018,8 @@ impl ContextResolutionAuthorityAdmissionResolver {
             subject: subject.clone(),
             binding_fingerprint: string_at!(&current_binding, "/binding_fingerprint", "authority binding fingerprint is unavailable").to_owned(),
             authority: current_binding,
-            witness: current,
+            witness: Some(current),
+            local_witness: None,
         };
         self.cache.insert(key, admission.clone());
         Ok(admission)
@@ -1714,6 +1720,126 @@ pub enum ContextResolutionMemoryDecision { Authorized, PromotionRequired }
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum ContextResolutionValidationDecision { Authorized, NotAuthorized }
 
+fn local_kernel_error(
+    error: crate::local_authority::LocalAuthorityRefusalV1,
+) -> ContextResolutionKernelError {
+    kernel_error!(
+        ContextResolutionKernelErrorKind::StaleAuthority,
+        format!("{}: {}", error.code, error.detail)
+    )
+}
+
+/// Called only while the local owner holds and validates its current guards.
+/// Reuses the native stack, selector and materialization mechanics; no old
+/// credential admission or generic authority artifact is manufactured.
+pub(crate) fn admit_local_envelope(
+    input: ContextResolutionEnvelopeInput,
+    witness: crate::local_authority::LocalCurrentAuthorityWitnessV1,
+) -> Result<ContextResolutionEnvelope, crate::local_authority::LocalAuthorityRefusalV1> {
+    use crate::local_authority::LocalDecisionClassV1;
+    let locator = witness.locator.clone();
+    let candidate = json!({"binding":input.candidate_binding(), "input": &input});
+    let mut choice = LocalDecisionClassV1::InputCorrection;
+    let result = (|| -> Result<ContextResolutionEnvelope, ContextResolutionKernelError> {
+        let profile = crate::local_authority::profile().map_err(local_kernel_error)?;
+        let stack = profile.context_resolution().clone();
+        validate_profile_stack!(&profile, &stack, &input)?;
+        validate_envelope_values!(&stack, &input)?;
+        let terms = &witness.locator.terms;
+        if input.parent.is_some()
+            || !input.escalation_triggers.is_empty()
+            || input.active_level_id != terms.ceiling.active_level_id
+        {
+            choice = LocalDecisionClassV1::HorizonExpansion;
+            return Err(kernel_error!(ContextResolutionKernelErrorKind::AuthorityRefused, "initial local envelope must use its exact approved level without a parent or escalation grant"));
+        }
+        validate_target!(&input.objective_ref)?;
+        if !terms
+            .allowed_input_paths
+            .iter()
+            .any(|path| selector_matches!(path, &input.objective_ref))
+        {
+            choice = LocalDecisionClassV1::PathExpansion;
+            return Err(kernel_error!(
+                ContextResolutionKernelErrorKind::AuthorityRefused,
+                "actual envelope subject is outside approved local input reach"
+            ));
+        }
+        let constraints = terms
+            .constraint_inputs
+            .iter()
+            .map(|binding| {
+                ContextResolutionExactBinding::new(&binding.reference, &binding.fingerprint)
+            })
+            .collect::<Result<Vec<_>, _>>()?;
+        if input.constraint_inputs != constraints {
+            return Err(kernel_error!(
+                ContextResolutionKernelErrorKind::AuthorityRefused,
+                "constraint population or content differs from exact operating terms"
+            ));
+        }
+        let ceiling = stack
+            .ranks(
+                &terms.ceiling.active_level_id,
+                terms.ceiling.dimensions.each_ref().map(String::as_str),
+            )
+            .ok_or_else(|| {
+                kernel_error!(
+                    ContextResolutionKernelErrorKind::StaleAuthority,
+                    "approved ceiling no longer resolves"
+                )
+            })?;
+        let requested = stack
+            .ranks(&input.active_level_id, input.dimensions.values())
+            .ok_or_else(|| {
+                kernel_error!(
+                    ContextResolutionKernelErrorKind::InvalidInput,
+                    "requested dimensions do not resolve"
+                )
+            })?;
+        if requested
+            .iter()
+            .zip(ceiling)
+            .any(|(requested, limit)| *requested > limit)
+        {
+            choice = LocalDecisionClassV1::HorizonExpansion;
+            return Err(kernel_error!(
+                ContextResolutionKernelErrorKind::ExpansionRefused,
+                "requested envelope exceeds one or more approved dimension ceilings"
+            ));
+        }
+        if input
+            .mutation_rules
+            .iter()
+            .filter(|rule| rule.effect == ContextResolutionMutationEffect::Allow)
+            .any(|rule| {
+                !terms
+                    .allowed_paths
+                    .iter()
+                    .any(|path| selector_contains!(path, &rule.selector))
+            })
+        {
+            choice = LocalDecisionClassV1::PathExpansion;
+            return Err(kernel_error!(
+                ContextResolutionKernelErrorKind::ExpansionRefused,
+                "requested owner-write selector exceeds approved local reach"
+            ));
+        }
+        let admission = ContextResolutionAuthorityAdmission {
+            authority_use: ContextResolutionAuthorityUse::RootCreation,
+            subject: input.candidate_binding.clone(),
+            binding_fingerprint: witness.locator.request_fingerprint.clone(),
+            authority: Arc::new(json!({"binding_fingerprint":witness.locator.request_fingerprint})),
+            witness: None,
+            local_witness: Some(witness),
+        };
+        materialize_envelope!(input, admission, stack, Vec::new())
+    })();
+    result.map_err(|error| {
+        crate::local_authority::admission_refusal(&locator, candidate, error, choice)
+    })
+}
+
 #[rustfmt::skip]
 #[derive(Clone, Debug, Serialize)]
 pub struct ContextResolutionEnvelopeInput { envelope_id: String, objective_ref: String, resolved_profile: ContextResolutionExactBinding, resolution_stack: ContextResolutionExactBinding, active_level_id: String, dimensions: ContextResolutionDimensions, parent: Option<ContextResolutionExactBinding>, constraint_inputs: Vec<ContextResolutionExactBinding>, mutation_rules: Vec<ContextResolutionMutationRule>, escalation_triggers: Vec<ContextResolutionExactBinding>, #[serde(skip)] candidate_binding: ContextResolutionExactBinding }
@@ -2025,7 +2151,19 @@ impl ContextResolutionEnvelope {
         target_kind: &str,
         target: &str,
     ) -> ContextResolutionMutationDecision {
+        if let Some(local) = &self.authority_admission.local_witness {
+            return local.with_current(|terms| {
+                if !terms.operation_classes.contains(&crate::local_authority::LocalOperationClassV1::OwnerWrite) {
+                    return Ok(ContextResolutionMutationDecision::Denied);
+                }
+                Ok(self.evaluate_mutation_values(target_kind, target))
+            }).unwrap_or(ContextResolutionMutationDecision::Indeterminate);
+        }
         if self.require_current().is_err() { return ContextResolutionMutationDecision::Indeterminate; }
+        self.evaluate_mutation_values(target_kind, target)
+    }
+
+    fn evaluate_mutation_values(&self, target_kind: &str, target: &str) -> ContextResolutionMutationDecision {
         if target_kind != "repository_path" || validate_target!(target).is_err() {
             return ContextResolutionMutationDecision::Indeterminate;
         }
@@ -2052,6 +2190,9 @@ impl ContextResolutionEnvelope {
         &self,
         requested_value: &str,
     ) -> Result<ContextResolutionMemoryDecision, ContextResolutionKernelError> {
+        if self.authority_admission.local_witness.is_some() {
+            return Err(kernel_error!(ContextResolutionKernelErrorKind::AuthorityRefused, "local initial operating terms support validation and bounded owner writes only"));
+        }
         self.require_current()?;
         let mut values = self.dimensions.values();
         values[4] = requested_value;
@@ -2073,7 +2214,19 @@ impl ContextResolutionEnvelope {
         &self,
         requested_value: &str,
     ) -> Result<ContextResolutionValidationDecision, ContextResolutionKernelError> {
+        if let Some(local) = &self.authority_admission.local_witness {
+            return local.with_current(|terms| {
+                if !terms.operation_classes.contains(&crate::local_authority::LocalOperationClassV1::LocalValidation) {
+                    return Err(crate::local_authority::refuse("operation_class", "local validation is not an approved operation class"));
+                }
+                self.authorize_validation_value(requested_value).map_err(|error| crate::local_authority::refuse("validation", error.detail()))
+            }).map_err(local_kernel_error);
+        }
         self.require_current()?;
+        self.authorize_validation_value(requested_value)
+    }
+
+    fn authorize_validation_value(&self, requested_value: &str) -> Result<ContextResolutionValidationDecision, ContextResolutionKernelError> {
         let mut values = self.dimensions.values();
         values[5] = requested_value;
         let requested = self.stack.ranks(&self.active_level_id, values).map(|ranks| ranks[5]).ok_or_else(|| {
@@ -2088,6 +2241,23 @@ impl ContextResolutionEnvelope {
         } else {
             ContextResolutionValidationDecision::NotAuthorized
         })
+    }
+
+    #[cfg(any(test, feature = "test-support"))]
+    pub fn authorize_local_validation_with_pause_for_test(
+        &self,
+        requested_value: &str,
+        pause: impl FnOnce(),
+    ) -> Result<ContextResolutionValidationDecision, ContextResolutionKernelError> {
+        let local = self.authority_admission.local_witness.as_ref().ok_or_else(|| kernel_error!(ContextResolutionKernelErrorKind::AuthorityRefused, "local test consumer requires native local authority"))?;
+        local.with_current(|terms| {
+            if !terms.operation_classes.contains(&crate::local_authority::LocalOperationClassV1::LocalValidation) {
+                return Err(crate::local_authority::refuse("operation_class", "local validation is not approved"));
+            }
+            let decision = self.authorize_validation_value(requested_value).map_err(|error| crate::local_authority::refuse("validation", error.detail()))?;
+            pause();
+            Ok(decision)
+        }).map_err(local_kernel_error)
     }
 
     pub fn missing_context_candidate(

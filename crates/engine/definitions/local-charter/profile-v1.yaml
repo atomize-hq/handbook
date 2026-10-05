@@ -1,0 +1,9 @@
+schema_id: handbook.native-local-charter-profile-definition
+schema_version: '1.0'
+definition_ref: handbook.profile.native-local-charter@1.0.0
+base_profile_ref: handbook.profile.shipped-root@1.2.0
+base_profile_definition_fingerprint: sha256:40c5fdb8a6ea42cf0f5f2c5cac8306ec7ad3a238c341653947f85abc93d72c40
+approval_policy_ref: handbook.approval.native-local-initial-charter@1.0.0
+intake_definition_ref: handbook.intake.native-local-initial-charter@1.0.0
+lifecycle_policy_ref: handbook.lifecycle.native-local-initial-charter@1.0.0
+default_replacement: forbidden
