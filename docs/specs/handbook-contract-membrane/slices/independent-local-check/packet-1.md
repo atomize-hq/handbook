@@ -6,6 +6,11 @@ independent check. The selected human review boundary is this packet. Return aft
 its setup/Engine outcome, verification, causal review and coherent local commit;
 do not continue into Contract establishment or evidence-source integration.
 
+The human's [local-advisory mode selection](../../semantic-model/amendments/approval-authority-and-assurance.md)
+is settled intent for this workflow; this packet's implementation plan still
+requires human approval. The [credential-status baseline](../../implemented-baseline.md#credential-verification-and-the-selected-local-route)
+records retained implemented mechanisms and incomplete/unproven device integration.
+
 ## Why this increment and what it demonstrates
 
 The real observer already exists. The initial consumer cannot currently obtain
@@ -32,30 +37,36 @@ It does not prove Evaluation Authorization for a formed Purpose, capability,
 Contracts lifecycle/source authority, a Dock attempt, evidence or result truth.
 Those responsibilities remain allocated to later packets in the slice.
 
-## Consequential proposal for human approval
+## Selected mode and bounded implementation proposal
 
-Recommend a **new, narrowly supported local-advisory initial-Charter and operating
-authority route**, explicitly selected by the human. Advisory means retained
+Build the human-selected **new, narrowly supported local-advisory initial-Charter
+and operating authority route**, after approval of this bounded plan. Advisory means retained
 human-approval and principal/delegation assertions accepted under that exact owner
 rule; it is not FIDO2, verified identity/delegation or host enforcement. The native
 rule cannot prove that a conversational assertion is true. It must preserve and
 label its source, approved-content fingerprint, rule identity and actual accepted
 owner outcome. The initial human decision precedes the native request.
 
-| Decision | Recommendation and reason | Alternative / consequence |
+| Decision | Selected implementation proposal | Compatibility and scope constraint |
 | --- | --- | --- |
-| Initial setup assurance | Support an explicit local-advisory initial approval rule for this bounded standalone route, preserving Charter validation, posture rubric, exact candidate/approval/promotion lineage and committed selection. | Keep only the current verified Charter rule and require a real caller-supplied authenticator path. This requires a revised next-increment plan/proof of that acquisition route; unavailable ports cannot select advisory automatically. |
-| Routine operating authority | Engine admits an exact retained initial instruction tied to P/root, committed Charter/posture and supported local envelope; repeated uses/reopen revalidate it without a new human decision or fabricated credentials. | Retain fresh UP/UV for each exercised operation; this is a valid deliberate assurance choice but does not deliver the proposed routine advisory path. |
+| Initial setup assurance | Support an explicit local-advisory initial approval rule for this bounded standalone route, preserving Charter validation, posture rubric, exact candidate/approval/promotion lineage and committed selection. | Retain the current credential-backed rule's meaning outside the new local selection. No acquisition prerequisite or unavailable-port fallback is added to the local workflow; until its native rule exists, existing rules still apply. |
+| Routine operating authority | Engine admits an exact retained initial instruction tied to P/root, committed Charter/posture and supported local envelope; repeated uses/reopen revalidate it without a new human decision or fabricated credentials. | Native authorization/currentness checks remain on every use. New approval requirement, decision authority, delivery, assurance and composition are separate; an operation with no new approval still needs resolved authority, and a configured role grants none. |
 | Compatible definitions | Add the minimum exact compatible local selection needed for the advisory approval/operating route; preserve the shipped stack/mutation/escalation/memory interpretation and posture rubric. | General arbitrary profile/default replacement is broader separate work. Reusing current hardcoded approval references with different meaning is prohibited. |
 | Authority origin | Use Engine-owned native local instruction/Charter lineage, with an additive supported envelope-admission route. Do not publish a seventh generic authored authority artifact to satisfy the private loader. | Reuse the old loader only after its non-family lifecycle mismatch is corrected under a separately approved bounded extension. Editing private fixture files is not an alternative. |
 
-Approval of this implementation proposal selects which product mode to build; it
-does not approve anyone's actual runtime project, Charter/posture, scope, paths,
-claims, assurance choices or terms. If the human selects a different material
-alternative, revise and review the bounded plan before product edits. No provider,
-credential quorum, governance ceiling or observation-age limit is invented here.
+The product mode is selected; approval of this proposal authorizes only its
+bounded implementation. It does not approve anyone's actual runtime project,
+Charter/posture, scope, paths, claims, review arrangement or terms. No provider,
+PIN/MFA/quorum design, governance ceiling or observation-age limit is invented here.
 The advisory route carries no claim of independent review. Existing verified
 routes retain their assurance/refusal contracts.
+
+Later Packet 2 must extend supported local authority through actual Contracts
+authoring/lifecycle and Dock evidence-source admission/revalidation; Packets 3–4
+must prove it through final truth, restart and fresh repeat/correction. Packet 1
+does not implement those paths. The retained credential machinery is a foundation
+for future selections, not a reason to require authenticator acquisition anywhere
+in this selected complete workflow. Hardware integration is outside this packet.
 
 The narrow Charter/profile change is causally required by this proposed initial
 path: `charter_intake.rs` and approval/promotion fix constitutional approval;
@@ -178,9 +189,11 @@ Acceptance requires all of the following:
   owner-write reach; wrong subject/root/constraint/profile/rule/Charter/terms or
   wider reach refuses. This is a native usable authorization outcome, not a label.
 - Initial choices are separately attributable and honestly advisory. Missing
-  selected verified authentication still refuses; no mode downgrade, fabricated
-  quorum/independence or role-based grant. Routine re-admission after restart needs
-  current owner checks, not a repeated human decision solely for that operation.
+  required approval/terms refuses; the selected local route needs no authenticator.
+  Existing credential-required requests still refuse missing authentication; no
+  automatic mode downgrade, fabricated quorum/independence or role-based grant.
+  Routine re-admission after restart needs current owner checks, not a repeated
+  human decision solely for that operation.
 - Replay/recovery preserves exact identity/history and never restores revoked
   current state. Interruption and concurrent setup/revoke/root change yield exact
   commit/refusal/uncertainty. Required state loss refuses, never reinitializes.

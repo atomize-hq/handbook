@@ -64,6 +64,17 @@ An implementation agent may route an unresolved request to a project-level agent
 with additional context and prior delegated authority; human resolution is
 conditional under G2. A role or access to context alone grants no permission.
 
+The subsequent [approval-authority/assurance clarification](semantic-model/amendments/approval-authority-and-assurance.md)
+records selected local-advisory intent for the complete workflow, with separate
+approval requirement, decision authority, delivery, identity assurance and
+composition. Packet 1 remains the bounded setup/Engine implementation proposal;
+later outlines carry local authority through Contracts lifecycle and every required
+evidence-source revalidation, restart and fresh repeat/correction without mandatory
+authenticator acquisition. The [credential baseline](implemented-baseline.md#credential-verification-and-the-selected-local-route)
+records actual implemented verification and incomplete/unproven device integration.
+Neither this selection nor an unavailable port bypasses current credential rules
+before the supported local route exists.
+
 Prioritize verified reuse of Substrate's agent/profile/context/routing facilities,
 with Handbook independently usable and its native owners retaining validation,
 authority and recorded outcomes. Agent profiles and host orchestration are distinct

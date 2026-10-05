@@ -52,6 +52,29 @@ on that deferred identity is planned and unimplemented; preparation changes no
 product capability. The deferral slice records the broader Windows owner-suite
 limit rather than claiming a clean result.
 
+## Credential verification and the selected local route
+
+Focused source inspection at `6a15ef68ab751383187d91e296bcf187dfda2dc1` on
+2026-10-05 distinguishes the implemented mechanism from device integration and
+the selected upcoming workflow. This section supersedes any inference that all
+credential code is unused, hardware integration is complete, or local advisory
+use is already supported across these paths. Historical checkpoints retain
+their original scope.
+
+| Boundary | Current implementation and evidence limit |
+| --- | --- |
+| Credential-verification mechanism — implemented, test-covered | Engine [authenticator code](../../../crates/engine/src/charter_authenticator.rs) encodes CTAP make-credential/get-assertion requests, strictly decodes responses and verifies ES256 assertions against the registered key, exact descriptor and RP hash. [Credential admission](../../../crates/engine/src/authority_admission.rs) binds action/subject/class/scope, repository identity and current registry/head, checks counters and consumes lifetime-sealed authority while its guards hold. [Transcript/security tests](../../../crates/engine/tests/hcm_2_2_authenticator_security.rs) and [admission tests](../../../crates/engine/tests/hcm_5_1_authority_admission.rs) cover this actual scope; their bodies were inspected, not rerun here. |
+| Shipped selected assurance — credential-backed, not proof of hardware provenance | The [constitutional approval policy](../../../crates/engine/definitions/approval-policies/handbook.approval.constitutional-candidate/1.0.0.yaml) selects `fido2-ctap2.1-native`, required user presence/verification, ES256, `attestation_policy: none` and forbidden fallback. Verification requires literal assertion flags `0x05`. These checks do not establish device/manufacturer provenance; “hardware-verified” overstates the policy's proof. |
+| End-to-end authenticator integration — incomplete/unproven | `NativeAuthenticatorPortV1` is caller-supplied. [Charter SDK default dispatch](../../../crates/sdk/src/charter_product.rs) supplies `UnavailableNativeAuthenticatorPortV1`; [Contract SDK default dispatch](../../../crates/sdk/src/contract_membrane/contract_operation.rs) supplies `UnavailableAuthenticator`, with a public supplied-port seam. Inspected trait implementations provide test/fixture signing, unavailable ports and a borrowing adapter; no production device transport was found. Success [Dock fixture ports](../../../crates/dock-json-schema/tests/packet5_support.rs) synthesize responses with test keys. This source/test coverage does not prove real device acquisition or external host integration. |
+| Current credential-dependent callers — live requirements | The [approver registry](../../../crates/engine/src/approver_registry_mutation.rs), [Charter approval](../../../crates/engine/src/charter_approval_workflow.rs) and [promotion](../../../crates/engine/src/charter_promotion_workflow.rs) retain their selected registry/approval lineage. Contract SDK append/transition bridges use credential admission; [Contracts lifecycle](../../../crates/contracts/src/lifecycle.rs) retains its selected distinct-author lock and active-basis checks. [Context Resolution](../../../crates/engine/src/context_resolution.rs) uses mapped assertions and current native authority. [Dock source resolution](../../../crates/dock/src/store.rs) uses [Engine evidence-source admission](../../../crates/engine/src/evidence_source_admission.rs), which invokes credential admission; [evidence append](../../../crates/contracts/src/owner_repository/evidence_repository.rs) and [verdict revalidation](../../../crates/contracts/src/claim_verdict.rs) can resolve sources repeatedly. This code is not all unused, and new checks can require multiple assertions. Contract list/read and the standalone validator do not thereby become credential-dependent operations. |
+| Selected local-advisory workflow — absent/upcoming | The human selected [local-advisory authority](semantic-model/amendments/approval-authority-and-assurance.md) for initial setup and the complete independent-local-check route. Its [slice/Packet-1 plan](slices/independent-local-check/README.md) awaits human implementation approval; no product implementation is delivered here. Later increments must carry local authority through Contracts lifecycle and repeated source admission without mandatory authenticator acquisition, preserving exact owner safeguards. Retained credential-backed behavior remains available at its actual supported scope, with no automatic fallback before a local rule exists. |
+
+No product tests, device/provider checks or external integration tests were
+executed for this documentation reconciliation. Exact append replay can deliver
+an old immutable effect without new admission; it is not fresh evaluation or
+proof of full historical-result delivery. Local mode needs actual native owner
+support, rather than reusing fixture authority or relabeling verified admissions.
+
 ## Verified domain baseline
 
 | Domain | State | Current boundary |

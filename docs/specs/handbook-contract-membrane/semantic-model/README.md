@@ -61,6 +61,13 @@ For subsequent planning, read applicable amendments from this entry point and
 carry their approval status into the work. Proposed wording is a decision input,
 not approved semantic or implementation authority.
 
+The [approval-authority and assurance clarification](amendments/approval-authority-and-assurance.md)
+records human-selected intent on 2026-10-05: separate approval requirement,
+decision authority, delivery, identity assurance and composition, with local-advisory
+authority for the complete independent-local-check workflow. Its implementation
+is unimplemented and awaits bounded plan approval; existing credential-required
+rules gain no automatic fallback. The dense owner chapters remain unchanged.
+
 ## Read by responsibility
 
 | Part | Owns the proposed semantics of | Read first when asking |

@@ -64,6 +64,12 @@ an owner operation. A reserved product choice or missing authority is escalated.
 
 These are target semantics. Current APIs do not yet deliver this whole workflow.
 
+The subsequent [approval-authority and assurance clarification](approval-authority-and-assurance.md)
+records the human's 2026-10-05 selection of local-advisory authority for the complete
+independent-local-check workflow and separates five approval dimensions. Read it
+with G1–G5 and the dated inventory below. The selected route is unimplemented;
+this planning clarification does not bypass current credential-required contracts.
+
 ## Bounded source inventory
 
 This inventory classifies behavior, not filenames. `core`, built-in packaging,

@@ -240,6 +240,13 @@ are required planning inputs. The current plan outlines four separately reviewab
 packet outcomes and details only native initial setup/local Engine authority in
 [Packet 1](slices/independent-local-check/packet-1.md). Product execution still
 requires that bounded proposal's human approval.
+The human has selected [local-advisory authority](semantic-model/amendments/approval-authority-and-assurance.md)
+for the complete workflow, including later Contracts lifecycle and repeated source
+admission/revalidation; hardware/authenticator acquisition is not a predecessor.
+The [credential baseline](implemented-baseline.md#credential-verification-and-the-selected-local-route)
+distinguishes retained verification mechanisms from unproven device integration
+and this unimplemented local route. Existing credential-required rules acquire
+no automatic fallback.
 No runtime project bounds, assurance provider, or general profile system is selected
 by this preparation authorization. Other outcomes remain separately bounded.
 

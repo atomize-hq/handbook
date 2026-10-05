@@ -8,6 +8,14 @@ runtime project choices, external action, or successor dispatch. Implementation
 requires human approval of the next increment and proven hard predecessors.
 No new phase number is assigned.
 
+Reconciled at `6a15ef68ab751383187d91e296bcf187dfda2dc1` with the human's
+2026-10-05 [approval-authority/assurance selection](../../semantic-model/amendments/approval-authority-and-assurance.md).
+Local-advisory authority is selected for this complete workflow; hardware or
+authenticator acquisition is not a prerequisite. The
+[current credential status](../../implemented-baseline.md#credential-verification-and-the-selected-local-route)
+remains distinct from this unimplemented route. Earlier research assurance
+alternatives are dated inputs, not unresolved selection for this plan.
+
 The [entry point](../../README.md), [phase map](../../phase-and-slice-map.md),
 [lifecycle](../../work-unit-lifecycle.md), [review policy](../../review-and-closeout-policy.md),
 and [architecture](../../architecture-context.md) control this slice. Adopt the
@@ -46,6 +54,11 @@ The schema and complete evaluation definitions must be independently justified
 from the need before inspecting outcomes. Test payloads and numerical policy
 values do not choose actual bounds or fit criteria to a pass.
 
+Initial choices still require human decisions. No new approval for a later
+operation means prior terms already permit it, with native currentness, scope and
+content checks. Delivery, decision authority, assurance and composition remain
+separate; a configured role or transport never grants permission.
+
 ## Outcome allocation and human checkpoints
 
 Use sequential packet execution. Each row delivers a separately assessable
@@ -54,10 +67,10 @@ Only [Packet 1](packet-1.md) is detailed now.
 
 | Packet | Useful outcome | Dependency and review boundary |
 | --- | --- | --- |
-| 1 — Native initial setup and local operating authority | On a supported fresh defer-first project, establish attributable initial Charter/posture and bounded local instruction through actual owners; reopen and obtain a native Engine envelope whose checks permit an in-bounds local validation request and refuse wider reach. | Existing deferral/identity/durability foundations plus human approval of Packet 1's proposed supported authority mode. Review this real setup/Engine outcome; it is not Contracts evidence authority or a complete check. |
-| 2 — Complete independently usable definitions and source authority | Contracts establishes the complete exact contract/dependencies, permitted use and responsible applicability for this question; native routine authority reaches its author/lifecycle and actual Dock evidence-source paths, including repeated source revalidation. Actual captured subject/source identities and currentness observation replace fixture values. | Packet 1 reviewed, then separately bounded plan approval. Preserve current review/credential rules until exact supported replacement is implemented; prove any selected independence. Review owner establishment and usable source authority, not an observer-only check. |
-| 3 — First complete real check | Contracts-domain Coordination forms direct requirements, Purpose/occurrence/plan, capability/readiness and attempt basis; Engine issues/validates exact authorization; the real native Dock produces observations; frontier, admissions, evidence-set and final context close before Contracts result/explanation. Historical delivery is supported for that closed result. | Packet 2 reviewed and this increment approved. Review actual positive and valid negative paths plus formation and operational refusals. A run nonce or fixture Resolution does not supply the missing closure. |
-| 4 — Fresh repeat, correction and bounded resolution | Reopen, retrieve exact historical truth, intentionally repeat or correct within prior terms, and refuse wider requests. A caller may deliver an authorized project-agent decision with additional context; native owners validate it against prior terms before any new effect. | Packet 3 reviewed and this increment approved. Review the full journey, complete refusal/resumption behavior and integrated recovery/currentness; perform the single aggregate slice closeout only when all conditions below hold. |
+| 1 — Native initial setup and local operating authority | On a supported fresh defer-first project, establish attributable initial local-advisory Charter/posture approval and bounded local instruction through actual owners; reopen and obtain a native Engine envelope whose checks permit an in-bounds local validation request and refuse wider reach. | Existing deferral/identity/durability foundations plus human approval of Packet 1's implementation plan for the selected local mode. Review this real setup/Engine outcome; it is not Contracts evidence authority or a complete check. |
+| 2 — Complete independently usable definitions and source authority | Contracts establishes the complete exact contract/dependencies, permitted use and responsible applicability; supported local-advisory authority reaches author/lifecycle and actual Dock evidence-source admission, including repeated revalidation. Actual captured subject/source identities and currentness observation replace fixture values. | Packet 1 reviewed, then separately bounded plan approval. Implement exact compatible local owner rules without mandatory authenticator acquisition; retain existing credential-backed meanings outside this selected route and prove actual selected review. Review owner establishment and usable source authority, not an observer-only check. |
+| 3 — First complete real check | Contracts-domain Coordination forms direct requirements, Purpose/occurrence/plan, capability/readiness and attempt basis; Engine issues/validates exact local authorization; the real native Dock produces observations; local source revalidation, frontier, admissions, evidence-set and final context close before Contracts result/explanation. Historical delivery is supported for that closed result. | Packet 2 reviewed and this increment approved. Prove the complete selected local route without an authenticator, including repeated source resolution; review actual positive and valid negative paths plus formation and operational refusals. A run nonce or fixture Resolution does not supply the missing closure. |
+| 4 — Fresh repeat, correction and bounded resolution | Reopen, retrieve exact historical truth, intentionally repeat or correct within prior local terms, and refuse wider requests. A caller may deliver an authorized project-agent decision with additional context; native owners validate it against prior terms before any new effect. | Packet 3 reviewed and this increment approved. Prove local authority across restart, fresh repetition/correction and all source revalidation without credential acquisition. Review complete refusal/resumption and integrated recovery/currentness; perform the single aggregate slice closeout only when all conditions below hold. |
 
 Later rows allocate necessary work inside this slice without fixing their types,
 policies or detailed implementation plans. They require a new bounded plan at
@@ -74,7 +87,7 @@ meaningful outcome appears, return at that checkpoint under the lifecycle.
 | Positive scoped deferral | [Completed slice](../scoped-governance-deferral/README.md), implementation `8b1350508920602eb70ffcc6844b0cc4fca3d610`. Fresh deferral must precede ordinary Setup on the selected fresh root. It grants no Charter, Engine, Contracts or action authority. |
 | Later first establishment and v3 reader | `9f28f99fbee7bb26a75d45e20d06e2783f1d19c5` is an ancestor of the live baseline. [Packet evidence](../deferred-governance-establishment/packet-1.md) and [SDK source](../../../../../crates/sdk/src/admission_governance.rs) implement D→G and four v3 methods. This preparation verifies source delivery, not Main's aggregate closeout. D→G is not a hard prerequisite for a current-D check. |
 | Initial setup/operating route | Current public Charter dispatch has unavailable authentication; Engine's Context Resolution loader requires a private non-family authority-artifact/publication tuple. These are missing usable-path work allocated to Packet 1, not preconditions that must be delivered elsewhere before this plan. |
-| Human approval | Preparation approval supplies no runtime payload, scope, Charter/posture, governance choice, assurance provider, review arrangement or numerical criterion. Approve each implementation increment first; approve actual initial runtime terms through adaptive intake before setup. |
+| Human approval | Local-advisory mode is selected intent; preparation approval supplies no runtime payload, scope, Charter/posture, governance choice, review arrangement or numerical criterion. Approve each implementation increment first; approve actual initial runtime terms through adaptive intake before setup. No provider or hardware integration is required by this selection. |
 
 Carry the inherited evidence limits: Main reports focused Windows targets passing
 in the D→G packet. They were inspected, not rerun here. The earlier broader
@@ -142,13 +155,17 @@ not make full host integration a prerequisite for standalone local use.
 
 1. Adaptive intake and initial human choices have separate exact owner outcomes;
    approved classes support in-bounds routine work without new human decisions
-   solely for owner operations. Actual selected credential acquisition remains
-   honest, including revalidation and restart. Recommendations never activate.
+   solely for owner operations. The complete selected local-advisory route requires
+   no authenticator acquisition from Charter setup through Contracts lifecycle,
+   evidence-source admission/revalidation, restart and fresh repeat/correction.
+   Retained credential routes remain honestly labeled. Recommendations never activate.
 2. Complete owner-established C/dependencies retain immutable permitted use;
-   current lifecycle/review rules hold until deliberately replaced by supported
-   versioned rules. No fabricated four-actor assurance or author-as-independent-
-   reviewer substitution. Independently justified requirements and complete
-   populations remain unchanged by a favorable result.
+   the local lifecycle/authority selection must actually be supported by compatible
+   versioned owner rules. Until it exists, current credential/review rules still
+   refuse unsupported use; they are not permanent requirements of the selected
+   workflow. Preserve actual selected review, with no fabricated four-actor
+   assurance or author-as-independent-reviewer substitution. Independently justified
+   requirements and complete populations remain unchanged by a favorable result.
 3. Each actually required definition/use has positive owner-resolved applicability.
    Use `resolve_project_admission_scope_v3` from the outset. A durable v3 footprint,
    including a closed positive NotCommitted attempt leaving D current, never
@@ -218,7 +235,8 @@ Use these exact focused sources in subsequent bounded preparation:
 General profile/Charter replacement, added governance scopes, complete G
 qualification, policy replacement and retrospective reliance/action owners,
 all transports, publication, arbitrary producers/dialects, IAM/provider platforms,
-general pruning/retry catalogs and universal storage systems are outside this
+hardware integration, PIN/MFA/quorum design, general pruning/retry catalogs and
+universal storage systems are outside this
 slice. A necessary narrow replacement is proposed only for an exercised blocker.
 An incompatible broader dependency requires exact escalation to meta, not silent
 scope expansion. Product verification will use focused owner/SDK and integrated
