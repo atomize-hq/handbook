@@ -47,6 +47,27 @@ approved owner chapters retain the rules; the dated research remains evidence.
 | Posture feedback | Initial LLM recommendations and future native posture recommendation mechanisms are separate. Historical results feed observation-specific reliance, admitted observation, recommendation, transition-specific reliance and separate Engine mutation in a later context. | The completed atomic Charter transition stays a foundation. Concrete feedback policies, algorithms, hosts, notification/acknowledgement/hysteresis and broader work-state realization remain deferred. |
 | SDK, CLI, installed skill, Tauri and Phase-6 consumers | Selected consumer contracts must carry owner applicability/qualification/protocol and refusal truth deliberately. Preserve bridge → publication → direct Substrate adoption → Tauri product → workflow adapters and their hard predecessors. | No universal transport parity or API per semantic object. Existing non-UI Tauri is not a GUI; external adoption/publication needs current external proof. Skill-family packs/adapters remain future context, with no promised catalog or integration. |
 
+### Local-check planning and host-integration carry-forward
+
+Following the reviewed [independent local-check brief](../../research/independent-local-check-and-initial-delegation-brief-2026-10-04.md)
+at `fd2b7e3`, the human clarified role-based escalation and authorized preparation
+of the `independent-local-check` slice named in the [phase map](phase-and-slice-map.md).
+An implementation agent may route an unresolved request to a project-level agent
+with additional context and prior delegated authority; human resolution is
+conditional under G2. A role or access to context alone grants no permission.
+
+Prioritize verified reuse of Substrate's agent/profile/context/routing facilities,
+with Handbook independently usable and its native owners retaining validation,
+authority and recorded outcomes. Agent profiles and host orchestration are distinct
+from Engine operating-profile/policy selection. Inspect the actual integration
+boundary during bounded planning rather than assume an existing capability.
+Track the selected increment's support and deferred host/profile/routing work in
+the slice and the relevant Phase-6 adoption/adapter scope. A general orchestration
+platform and complete Substrate adoption are not automatic local-check prerequisites.
+Preserve the broader replaceable-defaults outcome; bring it into the local-check
+scope only for a demonstrated dependency. These are planning constraints, not
+implementation or external-adoption evidence; dense owner semantics stay unchanged.
+
 ### Current source constraints on the next outcome
 
 | Inspected source and test anchors at `31e7746` | Delivered foundation and remaining constraint |

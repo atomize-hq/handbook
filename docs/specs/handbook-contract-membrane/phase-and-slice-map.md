@@ -227,15 +227,38 @@ is the general prerequisite for dependent independent use: deferral, established
 non-applicability and satisfied applicable qualification are alternative G4 bases.
 Independent use still needs permitted use, conformance, complete requirements and
 supported operating authority.
-The human authorized only the bounded later-establishment preparation now linked
-above. Other later outcomes remain broad dependencies; this entry authorizes no
-product implementation, adjacent planning or successor dispatch.
+The earlier authorization covered bounded later-establishment preparation.
+The human has subsequently authorized slice preparation for
+**`independent-local-check`**: one complete offline JSON payload/schema check
+through the typed SDK and native Contracts/Dock owners, under initial bounded
+delegation, including fresh repetition/permitted correction and meaningful
+out-of-bounds refusal. The [reviewed brief and subsequent human clarification](../../research/independent-local-check-and-initial-delegation-brief-2026-10-04.md)
+are required planning inputs. Prepare only this slice and detail its next useful
+increment; product execution still requires the resulting plan's human approval.
+No runtime project bounds, assurance provider, or general profile system is selected
+by this preparation authorization. Other outcomes remain separately bounded.
+
+Planning must carry forward agent-to-agent escalation under prior delegated
+authority, additional role-specific context, and conditional human escalation.
+Prioritize reuse of verified Substrate facilities while preserving standalone
+Handbook use and native owner authority. General agent-profile/routing delivery
+and full Substrate adoption are not automatic predecessors of the local check;
+identify any actual causal dependency and track deferred work explicitly. The
+[coverage entry](coverage-and-landing-map.md#local-check-planning-and-host-integration-carry-forward)
+connects this preparation to the later consumer-adoption work.
 
 ## Phase 6 — consumer adoption
 
 Repository evidence does not prove present publication, an operating bridge, or
 Substrate adoption. Each external claim requires current evidence from the
 responsible external owner or system.
+
+For agent-profile/context/routing integration, the human prioritizes Substrate
+reuse while retaining standalone Handbook operation. Agent profiles are distinct
+from Engine operating profiles and their selected policies; host routing does not
+grant native authority. Carry the [local-check clarification](../../research/independent-local-check-and-initial-delegation-brief-2026-10-04.md#subsequent-human-clarification-agent-escalation-and-substrate-integration)
+into the relevant adoption/adapter scope. This preference neither proves an
+external integration nor changes the hard predecessor order below.
 
 | Slice | Program status | Concise outcome and boundary | Hard predecessor |
 | --- | --- | --- | --- |
