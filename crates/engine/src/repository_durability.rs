@@ -857,13 +857,36 @@ impl RetainedRepositoryRootV1 {
         {
             return Err(invalid_path("exact replacement paths must be distinct"));
         }
+        self.displace_exact_durable(current.as_str(), expected_bytes, displaced.as_str())?;
+        platform::rename_noreplace_expected(self, &prepared, &current, None)
+    }
+
+    /// Durably moves one exact current file to a distinct no-replace displaced
+    /// path. Current is then absent. The caller must retain its owner locks and
+    /// exact decision/prepared evidence until publication and recovery are closed.
+    /// This step alone selects no replacement or recovery outcome.
+    pub fn displace_exact_durable(
+        &self,
+        current: &str,
+        expected_bytes: &[u8],
+        displaced: &str,
+    ) -> Result<(), RepositoryDurabilityErrorV1> {
+        if expected_bytes.len() > MAX_STRICT_READ_BYTES {
+            return Err(bound(
+                "expected current file exceeds the repository byte maximum",
+            ));
+        }
+        let current = ValidatedRelativePath::parse(current, false)?;
+        let displaced = ValidatedRelativePath::parse(displaced, false)?;
+        if current.as_str() == displaced.as_str() {
+            return Err(invalid_path("exact displacement paths must be distinct"));
+        }
         let mut retained_current = self
             .open_regular_optional(&current, false)?
             .ok_or_else(|| not_found("exact replacement current file is absent"))?;
         let current_snapshot = regular_file_snapshot(&retained_current)?;
         require_retained_bytes(&mut retained_current, expected_bytes)?;
-        platform::rename_noreplace_expected(self, &current, &displaced, Some(current_snapshot))?;
-        platform::rename_noreplace_expected(self, &prepared, &current, None)
+        platform::rename_noreplace_expected(self, &current, &displaced, Some(current_snapshot))
     }
 
     /// Removes exactly one retained regular, single-link file and flushes its parent.

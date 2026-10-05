@@ -15,6 +15,12 @@ pub use deferral::*;
 pub use deferral_types::*;
 mod scope;
 pub use scope::*;
+mod scope_v3;
+mod transition;
+mod transition_types;
+pub use scope_v3::*;
+pub use transition::*;
+pub use transition_types::*;
 
 use crate::FingerprintV1;
 use handbook_engine::{

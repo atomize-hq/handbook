@@ -1,12 +1,12 @@
 # First governance establishment after deliberate deferral
 
-Status: **slice authority prepared; Packet 1 awaits human authorization;
-unimplemented**. Prepared 2026-10-04 against
-`8b1350508920602eb70ffcc6844b0cc4fca3d610` on
-`feat/handbook-contract-membrane-clean`. The human authorized this bounded
-planning/review/local documentation commit after reviewing the recommendation
-to plan later first establishment. This is no approval of a runtime configuration,
-product implementation, or successor dispatch.
+Status: **Packet 1 implemented locally; at its human review boundary**. The human
+authorized the one-packet implementation after the reviewed plan at
+`65a3328972faf08d5cd08d09231a964955f845f4` on
+`feat/handbook-contract-membrane-clean`. The bounded implementation decisions and
+executed evidence are recorded in [Packet 1](packet-1.md). This task performs no
+aggregate slice closeout or successor dispatch. Runtime establishment still needs
+new approval of its exact configuration and terms.
 
 Descriptive slice identity: `deferred-governance-establishment`; no phase number
 is assigned. The [entry point](../../README.md),
@@ -102,8 +102,9 @@ setup readiness separately from governance success.
 
 ## Source-backed boundaries
 
-These focused bodies and tests were inspected during preparation; no Rust test
-or new runtime behavior is claimed by this document.
+These focused bodies and tests were inspected during preparation. The preparation
+claims below remain historical; [Packet 1](packet-1.md#verification-boundary)
+records the executed implementation evidence.
 
 | Current source / executable precedent | Constraint on this increment |
 | --- | --- |
@@ -305,7 +306,8 @@ Packet and slice acceptance:
    regressions. Native-equivalent results, unchanged catalogs and scope-to-use
    limits hold; no Context Resolution authority dependency is introduced.
 
-Implementation verification commands (planned, **not run in this preparation**):
+Preparation's verification command plan (executed implementation evidence is in
+[Packet 1](packet-1.md#verification-boundary)):
 
 ```text
 cargo test -p handbook-contracts --features test-support --test admission_governance --test admission_governance_repository --test admission_governance_process --test admission_deferral --test admission_deferral_repository --test admission_deferral_process
@@ -335,11 +337,12 @@ original identities/history, retry truth, consumer route or human review boundar
 If the sources cannot select one safe implementation within these constraints,
 return the exact consequential decision to meta before product edits or expansion.
 
-Preparation verification is documentation-only: prerequisite/source/test-body
+The original preparation verification was documentation-only: prerequisite/source/test-body
 inspection, local links/anchors, bounded Git diff and required GitNexus change
 detection. The graph is stale/foreign, with missing tables and Node-version/runtime
 warnings; queries supply no reliable execution-flow evidence. Do not repair the
 index here or use whole-main critical branch output to certify this bounded delta.
-`AUTHORITY_READY` means prepared, causally reviewed and locally committed, never
-implemented or approved for coding. Return to meta for the short human plan and
-authorization; do not dispatch the packet or any successor.
+`AUTHORITY_READY` meant prepared, causally reviewed and locally committed, without
+coding approval. The human subsequently authorized Packet 1. Its implementation
+returns to meta for the selected human recap and review boundary; no successor is
+dispatched here.

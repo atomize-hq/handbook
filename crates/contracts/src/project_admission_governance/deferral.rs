@@ -517,13 +517,21 @@ impl ProjectAdmissionDeferralV2 {
                     .with_project(original.project.refusal_project()),
                 });
             }
-            let state = inspect(root, native.as_ref().unwrap(), locator, &facts, false)?;
+            let state = inspect_records(
+                root,
+                Some(native.as_ref().unwrap()),
+                locator,
+                &facts,
+                false,
+                true,
+            )?;
             native
                 .as_ref()
                 .unwrap()
                 .validate_at(root, super::LOCK)
                 .map_err(fs_refusal)?;
             let outcome = if state.terminal {
+                super::transition::validate_original_replay(root, &facts.basis)?;
                 guard
                     .complete_native_claim(
                         &locator.initialization_claim,
@@ -821,7 +829,7 @@ struct State {
     noncommit: bool,
 }
 
-fn exact_guard(
+pub(super) fn exact_guard(
     path: &Path,
     project: &ProjectBindingV2,
 ) -> Result<RepositoryInitializationGuardV1, GovernanceRefusalV1> {
@@ -864,14 +872,21 @@ fn read_anchor(
     native: &handbook_engine::RepositoryExclusiveLockV1,
 ) -> Result<AnchorV2, GovernanceRefusalV1> {
     native.validate_at(root, super::LOCK).map_err(fs_refusal)?;
+    let anchor = read_anchor_record(root)?;
+    if anchor.governance_lock_fingerprint != native.physical_fingerprint_v1().map_err(fs_refusal)? {
+        return Err(refusal(
+            "governance_lock_substituted",
+            "Original physical governance lock binding differs",
+        ));
+    }
+    Ok(anchor)
+}
+fn read_anchor_record(root: &RetainedRepositoryRootV1) -> Result<AnchorV2, GovernanceRefusalV1> {
     let bytes = super::read(root, GOVERNANCE_ANCHOR_PATH_V2)?
         .ok_or_else(|| refusal("anchor_missing", "Original native anchor unavailable"))?;
     let anchor: AnchorV2 = decode_governance_json(&bytes)?;
     validate_deferral_locator(&anchor.locator)?;
-    if bytes != governance_canonical_bytes(&anchor)?
-        || anchor.governance_lock_fingerprint
-            != native.physical_fingerprint_v1().map_err(fs_refusal)?
-    {
+    if bytes != governance_canonical_bytes(&anchor)? {
         return Err(refusal(
             "governance_lock_substituted",
             "Original canonical anchor and physical governance lock binding must agree",
@@ -987,7 +1002,21 @@ fn inspect(
     facts: &Facts,
     require_current: bool,
 ) -> Result<State, GovernanceRefusalV1> {
-    if read_anchor(root, native)?.locator != *locator {
+    inspect_records(root, Some(native), locator, facts, require_current, false)
+}
+fn inspect_records(
+    root: &RetainedRepositoryRootV1,
+    native: Option<&handbook_engine::RepositoryExclusiveLockV1>,
+    locator: &DeferralRequestLocatorV2,
+    facts: &Facts,
+    require_current: bool,
+    supports_v3: bool,
+) -> Result<State, GovernanceRefusalV1> {
+    let anchor = match native {
+        Some(native) => read_anchor(root, native)?,
+        None => read_anchor_record(root)?,
+    };
+    if anchor.locator != *locator {
         return Err(refusal(
             "anchor_conflict",
             "Original anchor binds different exact request content",
@@ -1057,20 +1086,22 @@ fn inspect(
         }
         if !versions.is_empty() {
             root_names = root
-                .list_directory_bounded(GOVERNANCE_STORAGE_PATH_V2, 3)
+                .list_directory_bounded(GOVERNANCE_STORAGE_PATH_V2, if supports_v3 { 4 } else { 3 })
                 .map_err(fs_refusal)?;
         }
     }
     for entry in &root_names {
-        let expected_kind = if entry.name() == "requests" {
-            RepositoryDirectoryEntryKindV1::Directory
-        } else {
-            RepositoryDirectoryEntryKindV1::RegularFile
-        };
-        if !matches!(
+        let expected_kind =
+            if entry.name() == "requests" || (supports_v3 && entry.name() == "establishment-v3") {
+                RepositoryDirectoryEntryKindV1::Directory
+            } else {
+                RepositoryDirectoryEntryKindV1::RegularFile
+            };
+        if !(matches!(
             entry.name(),
             "registration.json" | "requests" | "scope-current.json"
-        ) || entry.kind() != expected_kind
+        ) || (supports_v3 && entry.name() == "establishment-v3"))
+            || entry.kind() != expected_kind
         {
             return Err(refusal(
                 "unknown_inventory",
@@ -1106,15 +1137,21 @@ fn inspect(
             .as_str()
             .strip_prefix("sha256:")
             .unwrap_or("invalid");
+        let transitions = if supports_v3 {
+            super::transition::selected_request_names(root)?
+        } else {
+            vec![]
+        };
         if requests.iter().any(|entry| {
-            entry.name() != name || entry.kind() != RepositoryDirectoryEntryKindV1::Directory
+            (entry.name() != name && !transitions.iter().any(|selected| selected == entry.name()))
+                || entry.kind() != RepositoryDirectoryEntryKindV1::Directory
         }) {
             return Err(refusal(
                 "unsupported_transition",
                 "Only the one original request transition is supported",
             ));
         }
-        if !requests.is_empty() {
+        if requests.iter().any(|entry| entry.name() == name) {
             names = root
                 .list_directory_bounded(&request_path(locator, ""), 32)
                 .map_err(fs_refusal)?;
@@ -1226,5 +1263,74 @@ fn inspect(
         live,
         terminal,
         noncommit: noncommit.is_some(),
+    })
+}
+
+/// Record-only preparation view; execution supplies the retained native lock and
+/// separately requires the exact Engine terminal receipt. No lock is created here.
+pub(super) struct OriginalDeferredSnapshot {
+    pub locator: DeferralRequestLocatorV2,
+    pub basis: DeferredGovernanceBasisV2,
+    pub current: Vec<u8>,
+    pub terminal: Vec<u8>,
+    pub terminal_path: String,
+}
+pub(super) fn original_deferred_snapshot(
+    root: &RetainedRepositoryRootV1,
+    project: &ProjectBindingV2,
+    native: Option<&handbook_engine::RepositoryExclusiveLockV1>,
+) -> Result<OriginalDeferredSnapshot, GovernanceRefusalV1> {
+    let anchor = match native {
+        Some(native) => read_anchor(root, native)?,
+        None => read_anchor_record(root)?,
+    };
+    if anchor.locator.project != *project {
+        return Err(refusal(
+            "project_substituted",
+            "Original registration differs",
+        ));
+    }
+    let facts = Facts::new(&anchor.locator)?;
+    let state = inspect_records(root, native, &anchor.locator, &facts, false, true)?;
+    if !state.terminal || !state.decision || state.noncommit {
+        return Err(refusal(
+            "deferred_predecessor_unavailable",
+            "Original D must be positively committed",
+        ));
+    }
+    // Native locks are inspected by metadata: reading a held Windows byte-range
+    // lock is not a supported way to establish its presence/generation.
+    if !root
+        .list_directory_bounded("", 4096)
+        .map_err(fs_refusal)?
+        .iter()
+        .any(|entry| {
+            entry.name() == handbook_engine::REPOSITORY_INITIALIZATION_LOCK_PATH_V1
+                && entry.kind() == RepositoryDirectoryEntryKindV1::RegularFile
+        })
+    {
+        return Err(refusal(
+            "original_lock_unavailable",
+            "Original root guard is absent",
+        ));
+    }
+    for path in [
+        handbook_engine::REPOSITORY_INITIALIZATION_CLAIM_PATH_V1,
+        handbook_engine::REPOSITORY_INITIALIZATION_RECEIPT_PATH_V1,
+    ] {
+        if super::read(root, path)?.is_none() {
+            return Err(refusal(
+                "original_claim_unavailable",
+                "Original claim, receipt and root guard must remain retained",
+            ));
+        }
+    }
+    let terminal_path = request_path(&anchor.locator, "terminal.json");
+    Ok(OriginalDeferredSnapshot {
+        locator: anchor.locator,
+        basis: facts.basis,
+        current: facts.staged[5].clone(),
+        terminal: facts.terminal,
+        terminal_path,
     })
 }

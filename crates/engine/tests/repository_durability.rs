@@ -143,3 +143,110 @@ fn exact_replace_requires_current_bytes_and_leaves_recoverable_displaced_state()
         RepositoryReadV1::Found(b"old".to_vec())
     );
 }
+
+#[test]
+fn exact_displacement_retains_the_actual_gap_until_prepared_publication() {
+    let repo = tempfile::tempdir().unwrap();
+    let root = RetainedRepositoryRootV1::open_exact(repo.path()).unwrap();
+    root.create_directories("state").unwrap();
+    root.write_new_durable("state/head", b"old").unwrap();
+    root.write_new_durable("state/prepared", b"new").unwrap();
+
+    assert_eq!(
+        root.displace_exact_durable("state/head", b"wrong", "state/displaced")
+            .unwrap_err()
+            .kind(),
+        RepositoryDurabilityErrorKindV1::CurrentValueMismatch
+    );
+    assert_eq!(
+        root.read_regular_bounded("state/head", 3).unwrap(),
+        RepositoryReadV1::Found(b"old".to_vec())
+    );
+    assert_eq!(
+        root.read_regular_bounded("state/displaced", 3).unwrap(),
+        RepositoryReadV1::Absent
+    );
+
+    root.displace_exact_durable("state/head", b"old", "state/displaced")
+        .unwrap();
+    let reopened = RetainedRepositoryRootV1::open_exact(repo.path()).unwrap();
+    assert_eq!(
+        reopened.read_regular_bounded("state/head", 3).unwrap(),
+        RepositoryReadV1::Absent
+    );
+    assert_eq!(
+        reopened.read_regular_bounded("state/prepared", 3).unwrap(),
+        RepositoryReadV1::Found(b"new".to_vec())
+    );
+    assert_eq!(
+        reopened.read_regular_bounded("state/displaced", 3).unwrap(),
+        RepositoryReadV1::Found(b"old".to_vec())
+    );
+    reopened
+        .rename_noreplace_durable("state/prepared", "state/head")
+        .unwrap();
+    assert_eq!(
+        reopened.read_regular_bounded("state/head", 3).unwrap(),
+        RepositoryReadV1::Found(b"new".to_vec())
+    );
+    assert_eq!(
+        reopened.read_regular_bounded("state/prepared", 3).unwrap(),
+        RepositoryReadV1::Absent
+    );
+    assert_eq!(
+        reopened.read_regular_bounded("state/displaced", 3).unwrap(),
+        RepositoryReadV1::Found(b"old".to_vec())
+    );
+}
+
+#[test]
+fn exact_displacement_and_replacement_refuse_aliases_and_hard_linked_current() {
+    let repo = tempfile::tempdir().unwrap();
+    let root = RetainedRepositoryRootV1::open_exact(repo.path()).unwrap();
+    root.create_directories("state").unwrap();
+    root.write_new_durable("state/head", b"old").unwrap();
+    root.write_new_durable("state/prepared", b"new").unwrap();
+
+    assert_eq!(
+        root.displace_exact_durable("state/head", b"old", "state/head")
+            .unwrap_err()
+            .kind(),
+        RepositoryDurabilityErrorKindV1::InvalidRelativePath
+    );
+    for (prepared, displaced) in [
+        ("state/head", "state/displaced"),
+        ("state/prepared", "state/head"),
+        ("state/prepared", "state/prepared"),
+    ] {
+        assert_eq!(
+            root.replace_exact_durable("state/head", b"old", prepared, displaced)
+                .unwrap_err()
+                .kind(),
+            RepositoryDurabilityErrorKindV1::InvalidRelativePath
+        );
+    }
+    assert_eq!(
+        root.read_regular_bounded("state/head", 3).unwrap(),
+        RepositoryReadV1::Found(b"old".to_vec())
+    );
+    std::fs::hard_link(
+        repo.path().join("state/head"),
+        repo.path().join("state/linked-head"),
+    )
+    .unwrap();
+    assert_eq!(
+        root.displace_exact_durable("state/head", b"old", "state/displaced")
+            .unwrap_err()
+            .kind(),
+        RepositoryDurabilityErrorKindV1::UnsafeFilesystem
+    );
+    assert_eq!(
+        std::fs::read(repo.path().join("state/head")).unwrap(),
+        b"old"
+    );
+    assert!(!repo.path().join("state/displaced").exists());
+    assert_eq!(
+        root.read_regular_bounded("state/prepared", 3).unwrap(),
+        RepositoryReadV1::Found(b"new".to_vec())
+    );
+}

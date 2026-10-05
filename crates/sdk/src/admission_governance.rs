@@ -1,4 +1,4 @@
-//! Exact native project admission governance for one newly registered project.
+//! Exact native project admission governance for supported registered projects.
 //!
 //! These typed methods preserve the Contracts owner's outcomes and identities.
 //! Establishment confirms validation, advisory permission and activation separately;
@@ -27,9 +27,68 @@ pub use handbook_contracts::project_admission_governance::{
     ProjectBindingV2, ValidatedDeferralV2,
 };
 
+pub use handbook_contracts::project_admission_governance::{
+    DeferredEstablishmentCommittedOutcomeV3, DeferredEstablishmentExecutionV3,
+    DeferredEstablishmentLocatorV3, DeferredEstablishmentNotCommittedOutcomeV3,
+    DeferredEstablishmentRequestV3, DeferredScopeBasisV3, EstablishedFromDeferredBasisV3,
+    ExpectedEstablishedFromDeferredBasisV3, ExpectedProjectAdmissionBasisV3,
+    HumanApprovedEstablishmentInstructionV3, PreparedDeferredGovernanceV3,
+    ProjectAdmissionBindingV3, ProjectAdmissionScopeBasisV3, ValidatedDeferredEstablishmentV3,
+};
+
 use crate::HandbookSdkV1;
 
 impl HandbookSdkV1 {
+    /// Prepares exact newly approved governance against this project's current
+    /// deferred basis without effects. Serialize the complete locator before
+    /// establishment; restoring it permits request resolution only.
+    pub fn prepare_deferred_project_admission_governance(
+        &self,
+        request: &DeferredEstablishmentRequestV3,
+    ) -> Result<PreparedDeferredGovernanceV3, GovernanceRefusalV1> {
+        handbook_contracts::project_admission_governance::ProjectAdmissionEstablishmentV3::new()
+            .prepare(&self.repo_root, request)
+    }
+
+    /// Establishes one exact configuration on the same deferred project.
+    /// Validation, accepted local advisory permission and committed cutover are
+    /// separate owner facts. Refusal, noncommit and uncertainty remain distinct.
+    pub fn establish_deferred_project_admission_governance(
+        &self,
+        prepared: PreparedDeferredGovernanceV3,
+    ) -> DeferredEstablishmentExecutionV3 {
+        handbook_contracts::project_admission_governance::ProjectAdmissionEstablishmentV3::new()
+            .establish(&self.repo_root, prepared)
+    }
+
+    /// Resolves the complete original establishment locator after a lost reply
+    /// or restart. Recovery finishes only its retained decision; historical replay
+    /// does not restore or repair current governance.
+    pub fn resolve_deferred_admission_governance_request(
+        &self,
+        locator: &DeferredEstablishmentLocatorV3,
+    ) -> DeferredEstablishmentExecutionV3 {
+        handbook_contracts::project_admission_governance::ProjectAdmissionEstablishmentV3::new()
+            .resolve_request(&self.repo_root, locator)
+    }
+
+    /// Resolves exact current governance with explicit project and basis tags.
+    /// Established v1, deferred v2 and established-from-deferred v3 retain distinct
+    /// bindings. This scope grants no qualification, evaluation or action authority.
+    pub fn resolve_project_admission_scope_v3(
+        &self,
+        project: &ProjectAdmissionBindingV3,
+        scope: &str,
+        expected: Option<&ExpectedProjectAdmissionBasisV3>,
+    ) -> Result<ProjectAdmissionScopeBasisV3, GovernanceRefusalV1> {
+        handbook_contracts::project_admission_governance::resolve_project_admission_scope_v3(
+            &self.repo_root,
+            project,
+            scope,
+            expected,
+        )
+    }
+
     /// Prepares one exact human-approved advisory deferral without effects.
     /// Serialize the locator before initialization; restoring it permits resolution only.
     pub fn prepare_project_admission_deferral(
