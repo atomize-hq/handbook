@@ -9,6 +9,8 @@ use crate::{
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 
+pub mod local_check;
+
 pub const LOCAL_OPERATING_RULE_V1: &str = "handbook.operating.local-initial@1.0.0";
 const BASE: &str = ".handbook/local-operating/v1";
 const HEAD: &str = ".handbook/local-operating/v1/current.json";
@@ -776,6 +778,12 @@ fn read_current(
     root: &RetainedRepositoryRootV1,
     locator: &LocalAuthorityLocatorV1,
 ) -> Result<LocalAuthorityOutcomeV1, LocalAuthorityRefusalV1> {
+    if root
+        .list_directory_bounded(local_check::LOCAL_CHECK_ROOT_V1, 128)
+        .is_ok()
+    {
+        return Err(refuse("successor_terms_selected", "local-check successor footprint requires its exact current-use path; initial terms remain history"));
+    }
     let outcome = read_history(root, locator)?;
     let head: Head = decode(&found(root, HEAD)?)?;
     if head.schema != LOCAL_OPERATING_RULE_V1
@@ -844,7 +852,8 @@ impl OperatingGuard {
         allow_initial_lock: bool,
     ) -> Result<Self, LocalAuthorityRefusalV1> {
         locator.validate()?;
-        let initialization = RepositoryInitializationGuardV1::acquire(repo).map_err(fs_error)?;
+        let initialization =
+            RepositoryInitializationGuardV1::acquire_existing_v1(repo).map_err(fs_error)?;
         local_charter::validate_binding_guarded(&initialization, &locator.charter.binding)?;
         let root = initialization.root();
         let operating_already_started = root
@@ -876,7 +885,17 @@ impl OperatingGuard {
                     "required owner lock state was lost; no reinitialization is permitted",
                 ));
             }
-            locks.push(root.acquire_exclusive_lock(path).map_err(fs_error)?);
+            locks.push(
+                if allow_initial_lock
+                    && !operating_started
+                    && path.ends_with("local-operating.lock")
+                {
+                    root.acquire_exclusive_lock(path).map_err(fs_error)?
+                } else {
+                    root.acquire_existing_exclusive_lock_v1(path)
+                        .map_err(fs_error)?
+                },
+            );
         }
         Ok(Self {
             locks,

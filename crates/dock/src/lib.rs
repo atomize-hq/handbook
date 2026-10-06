@@ -7,6 +7,7 @@
 mod bounds;
 mod canonical;
 mod executor;
+mod local_source;
 mod manifest;
 pub mod operation_admission;
 mod operation_claims;
@@ -17,6 +18,7 @@ mod store;
 
 pub use bounds::*;
 pub use executor::*;
+pub use local_source::*;
 pub use manifest::*;
 pub use protocol::*;
 pub use registry::*;

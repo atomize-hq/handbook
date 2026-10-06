@@ -20,10 +20,20 @@ mod identity;
 mod lifecycle;
 mod lifecycle_policy;
 mod lifecycle_preimage;
+mod local_contract;
+mod native_dock_source;
 pub mod operation_admission;
 mod operation_claims;
 mod owner_repository;
 pub mod project_admission_governance;
+
+pub use local_contract::*;
+pub use native_dock_source::NativeDockCandidateObservationV1;
+pub use owner_repository::{
+    LocalDefinitionRecordV2, LocalLifecycleHeadV2, LocalLifecycleTransitionInputV2,
+    LocalOwnerMutationReceiptV2, PreparedLocalDefinitionAppendV2,
+    PreparedLocalLifecycleTransitionV2, LOCAL_CONTRACT_OWNER_ROOT_V2,
+};
 
 pub use claim::{
     evaluate_applicability, ApplicabilityInputSourceV1, ApplicabilityOutcomeV1,
@@ -52,9 +62,10 @@ pub use evidence_admission::{
     EvidenceCandidateAdmissionErrorV1,
 };
 pub use evidence_candidate_source::{
-    resolve_repository_candidate_observation_v1, EvidenceCandidateSourceErrorKindV1,
-    EvidenceCandidateSourceErrorV1, EvidenceCandidateSourceV1, RepositoryEvidenceCandidateSourceV1,
-    ResolvedEvidenceCandidateObservationInputV1, ResolvedEvidenceCandidateObservationV1,
+    resolve_repository_candidate_observation_v1, resolve_repository_local_candidate_observation_v2,
+    EvidenceCandidateSourceErrorKindV1, EvidenceCandidateSourceErrorV1, EvidenceCandidateSourceV1,
+    RepositoryEvidenceCandidateSourceV1, ResolvedEvidenceCandidateObservationInputV1,
+    ResolvedEvidenceCandidateObservationV1,
 };
 #[cfg(feature = "test-support")]
 #[doc(hidden)]

@@ -7,7 +7,10 @@ use handbook_contracts::{
     SemanticTimeV1, StableIdV1, VersionV1,
 };
 use handbook_dock::*;
-use handbook_engine::{NativeAuthenticatorPortErrorV1, NativeAuthenticatorPortV1};
+use handbook_engine::{
+    NativeAuthenticatorPortErrorV1, NativeAuthenticatorPortV1, SourceCurrentnessPortV1,
+    SourceCurrentnessRequestV1,
+};
 use serde_json::json;
 use std::fs;
 use std::sync::{Arc, Barrier};
@@ -197,6 +200,118 @@ fn completed(
     })
     .unwrap();
     (request, result, record)
+}
+
+#[test]
+fn retained_input_observer_resolves_actual_content_after_reopen_and_refuses_expected_echo() {
+    let repo = tempfile::tempdir().unwrap();
+    let store = DockOperationalStoreV1::open(repo.path()).unwrap();
+    let (request, result, execution) = completed(
+        json!({"instance":{"order":17},"documents":[{"schema":{"type":"object"}}]}),
+        EvidenceObservationV1::Satisfied,
+    );
+    store
+        .commit(
+            &request,
+            Some(&result),
+            &execution,
+            &evaluation_run_jcs(&request),
+            "dock-captured-input-0001",
+        )
+        .unwrap();
+    drop(store);
+    let input = &request.inputs()[0];
+    let source_ref = format!("{}#input/{}", request.request_ref(), input.role().as_str());
+    let exact = SourceCurrentnessRequestV1::new(
+        &source_ref,
+        input.content_fingerprint().as_str(),
+        input.content_fingerprint().as_str(),
+    )
+    .unwrap();
+    let mut observer = DockCapturedInputCurrentnessV1::open(repo.path()).unwrap();
+    let observed = observer.observe_current(&exact).unwrap();
+    assert_eq!(observed.current_head_ref(), request.request_ref());
+    assert_eq!(
+        observed.current_head_fingerprint(),
+        request.request_fingerprint().as_str()
+    );
+    let substituted = SourceCurrentnessRequestV1::new(
+        &source_ref,
+        fingerprint('f').as_str(),
+        fingerprint('f').as_str(),
+    )
+    .unwrap();
+    assert!(observer.observe_current(&substituted).is_err());
+    let absent_role = SourceCurrentnessRequestV1::new(
+        &format!("{}#input/input.absent", request.request_ref()),
+        input.content_fingerprint().as_str(),
+        input.content_fingerprint().as_str(),
+    )
+    .unwrap();
+    assert!(observer.observe_current(&absent_role).is_err());
+}
+
+#[test]
+fn retained_input_observer_refuses_lost_lock_without_recreating_it() {
+    let repo = tempfile::tempdir().unwrap();
+    let store = DockOperationalStoreV1::open(repo.path()).unwrap();
+    let (request, result, execution) =
+        completed(json!({"order":17}), EvidenceObservationV1::Satisfied);
+    store
+        .commit(
+            &request,
+            Some(&result),
+            &execution,
+            &evaluation_run_jcs(&request),
+            "dock-lost-observer-lock-0001",
+        )
+        .unwrap();
+    drop(store);
+    let path = repo
+        .path()
+        .join(".handbook/state/locks/dock-operational-store.lock");
+    fs::remove_file(&path).unwrap();
+    assert!(DockCapturedInputCurrentnessV1::open(repo.path()).is_err());
+    assert!(!path.exists());
+}
+
+#[test]
+fn captured_subject_and_case_are_bound_to_full_input_and_actual_role() {
+    let request =
+        request_with_payload(json!({"instance":{"order":17},"documents":[{"schema":true}]}));
+    let input = &request.inputs()[0];
+    let subject = input.captured_evaluation_subject_v1().unwrap();
+    let case = input
+        .captured_evaluation_case_v1(stable_id("case.schema-conformance"))
+        .unwrap();
+    assert_eq!(subject.subject(), case.case_binding());
+    assert_ne!(
+        subject.subject().fingerprint(),
+        input.content_fingerprint(),
+        "captured identity includes the full actual input tuple"
+    );
+    assert_ne!(
+        input.content_fingerprint(),
+        request_with_payload(json!({"instance":{"order":17},"documents":[{"schema":false}]}))
+            .inputs()[0]
+            .content_fingerprint()
+    );
+    let changed_schema = DockInlineJsonInputV1::new(
+        input.role().clone(),
+        input.media_type(),
+        ExactBindingV1::new(input.schema().reference().clone(), fingerprint('f')),
+        input.content().clone(),
+    )
+    .unwrap();
+    assert_eq!(
+        input.content_fingerprint(),
+        changed_schema.content_fingerprint()
+    );
+    assert_ne!(
+        subject,
+        changed_schema.captured_evaluation_subject_v1().unwrap(),
+        "an exact schema fingerprint substitution changes the captured question"
+    );
 }
 
 #[test]

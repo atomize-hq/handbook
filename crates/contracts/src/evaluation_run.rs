@@ -15,6 +15,8 @@ const MAX_EVALUATION_POLICIES: usize = 128;
 
 /// Exact independently retrievable owner schema identity for evaluation runs.
 pub const CONTRACT_EVALUATION_RUN_SCHEMA_REF_V1: &str = "handbook.contract-evaluation-run@1.0.0";
+pub const LOCAL_SOURCE_SEAM_RUN_SCHEMA_REF_V2: &str =
+    "handbook.contract-local-source-seam-run@2.0.0";
 
 /// A bounded caller-selected nonce that distinguishes intentional observations
 /// without granting authority or selecting compatible identities.
@@ -369,9 +371,11 @@ impl<'de> Deserialize<'de> for ContractEvaluationRunV1 {
             evaluation_run_fingerprint: FingerprintV1,
         }
         let raw = Raw::deserialize(deserializer)?;
-        if raw.schema_ref != CONTRACT_EVALUATION_RUN_SCHEMA_REF_V1 {
-            return Err(D::Error::custom(ContractError::InvalidInvariant));
-        }
+        let schema_ref = match raw.schema_ref.as_str() {
+            CONTRACT_EVALUATION_RUN_SCHEMA_REF_V1 => CONTRACT_EVALUATION_RUN_SCHEMA_REF_V1,
+            LOCAL_SOURCE_SEAM_RUN_SCHEMA_REF_V2 => LOCAL_SOURCE_SEAM_RUN_SCHEMA_REF_V2,
+            _ => return Err(D::Error::custom(ContractError::InvalidInvariant)),
+        };
         let input = PrepareEvaluationRunInputV1::new(
             ExactBindingV1::new(raw.contract_ref.clone(), raw.definition_fingerprint.clone()),
             raw.owner_currentness.lifecycle_head_fingerprint().clone(),
@@ -387,6 +391,7 @@ impl<'de> Deserialize<'de> for ContractEvaluationRunV1 {
         )
         .map_err(D::Error::custom)?;
         let value = Self::from_prevalidated_parts(
+            schema_ref,
             raw.contract_ref,
             raw.definition_fingerprint,
             raw.evaluation_lifecycle_basis,
@@ -407,6 +412,7 @@ impl<'de> Deserialize<'de> for ContractEvaluationRunV1 {
 impl ContractEvaluationRunV1 {
     #[allow(clippy::too_many_arguments)]
     fn from_prevalidated_parts(
+        schema_ref: &'static str,
         contract_ref: ExactRefV1,
         definition_fingerprint: FingerprintV1,
         evaluation_lifecycle_basis: ContentAddressedBindingV1,
@@ -418,7 +424,7 @@ impl ContractEvaluationRunV1 {
             return Err(ContractError::Empty);
         }
         let preimage = EvaluationRunPreimage {
-            schema_ref: CONTRACT_EVALUATION_RUN_SCHEMA_REF_V1,
+            schema_ref,
             contract_ref: &contract_ref,
             definition_fingerprint: &definition_fingerprint,
             evaluation_lifecycle_basis: &evaluation_lifecycle_basis,
@@ -441,7 +447,7 @@ impl ContractEvaluationRunV1 {
             fingerprint_hex(&evaluation_run_fingerprint)
         );
         Ok(Self {
-            schema_ref: CONTRACT_EVALUATION_RUN_SCHEMA_REF_V1,
+            schema_ref,
             contract_ref,
             definition_fingerprint,
             evaluation_lifecycle_basis,
@@ -459,6 +465,25 @@ impl ContractEvaluationRunV1 {
             evaluation_run_ref,
             evaluation_run_fingerprint,
         })
+    }
+    pub fn is_local_source_seam_v2(&self) -> bool {
+        self.schema_ref == LOCAL_SOURCE_SEAM_RUN_SCHEMA_REF_V2
+    }
+    pub(crate) fn from_local_source_seam_v2(
+        input: PrepareEvaluationRunInputV1,
+        claims: Vec<ContractClaimV1>,
+        basis: ContentAddressedBindingV1,
+        currentness: OwnerCurrentnessObservationV1,
+    ) -> Result<Self, ContractError> {
+        Self::from_prevalidated_parts(
+            LOCAL_SOURCE_SEAM_RUN_SCHEMA_REF_V2,
+            input.contract.reference().clone(),
+            input.contract.fingerprint().clone(),
+            basis,
+            input,
+            claims,
+            currentness,
+        )
     }
 }
 

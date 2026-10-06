@@ -1,14 +1,15 @@
 # Independent local JSON conformance check
 
-Status: **Packet 1 delivered and human-reviewed; Packet 2 prepared, awaiting
-implementation approval; complete slice unfinished**, 2026-10-05.
+Status: **Packet 1 delivered and human-reviewed; Packet 2 implemented locally,
+verified and causally approved, awaiting human review;
+complete slice unfinished**, 2026-10-06.
 Packet 1 at `fccaf11` supplies native local setup and Engine envelope authority
 for current D. The human reviewed that boundary and requested the next plan.
 Preparation was expressly requested after the intent clarification landing at
 `5da29f443ac78ef53eabb662cb0e455840077c46`, verified as the live baseline on
 `feat/handbook-contract-membrane-clean`. The human subsequently approved only
 [Packet 1](packet-1.md)'s bounded product implementation and then preparation of
-[Packet 2](packet-2.md). Runtime project choices,
+[Packet 2](packet-2.md), then approved its bounded implementation. Runtime project choices,
 external action and successor dispatch retain their separate approval boundaries.
 No new phase number is assigned.
 
@@ -68,13 +69,14 @@ separate; a configured role or transport never grants permission.
 
 Use sequential packet execution. Each row delivers a separately assessable
 change and ends at human review; none is a license to execute the next row.
-[Packet 1](packet-1.md) retains its delivered plan/evidence; only the next increment,
-[Packet 2](packet-2.md), is detailed for implementation approval now.
+[Packet 1](packet-1.md) retains its delivered plan/evidence.
+[Packet 2](packet-2.md) is implemented and verified locally with causal APPROVE,
+and is awaiting human review.
 
 | Packet | Useful outcome | Dependency and review boundary |
 | --- | --- | --- |
 | 1 — Native initial setup and local operating authority | On a supported fresh defer-first project, establish attributable initial local-advisory Charter/posture approval and bounded local instruction through actual owners; reopen and obtain a native Engine envelope whose checks permit an in-bounds local validation request and refuse wider reach. | Existing deferral/identity/durability foundations plus human approval of Packet 1's implementation plan for the selected local mode. Review this real setup/Engine outcome; it is not Contracts evidence authority or a complete check. |
-| 2 — Complete independently usable definitions and source authority | Contracts establishes the complete exact contract/dependencies, immutable permitted use and responsible D/G applicability; supported local-advisory authority reaches author/lifecycle and actual Dock evidence-source admission, including repeated revalidation. Actual captured subject/source identities and currentness observation replace fixture values. | Packet 1 is reviewed; [Packet 2](packet-2.md) is prepared, awaiting separate bounded plan approval. Select minimum compatible local terms/rules without mandatory authenticator acquisition; retain credential-backed meanings and prove actual selected review. Review complete definitions and usable source authority, including fresh qualified G use and stale-D refusal. |
+| 2 — Complete independently usable definitions and source authority | Contracts establishes the complete exact contract/dependencies, immutable permitted use and responsible D/G applicability; supported local-advisory authority reaches author/lifecycle and actual Dock evidence-source admission, including repeated revalidation. Actual captured subject/source identities and currentness observation replace fixture values. | [Packet 2](packet-2.md) is implemented, verified and causally approved locally, awaiting human review. Review complete definitions and usable native source authority, including actual distinct review, fresh qualified G use and stale-D refusal. Credential-backed meanings remain unchanged. |
 | 3 — First complete real check | Contracts-domain Coordination forms direct requirements, Purpose/occurrence/plan, capability/readiness and attempt basis; Engine issues/validates exact local authorization; the real native Dock produces observations; local source revalidation, frontier, admissions, evidence-set and final context close before Contracts result/explanation. Historical delivery is supported for that closed result. | Packet 2 reviewed and this increment approved. Prove the complete selected local route without an authenticator, including repeated source resolution; review actual positive and valid negative paths plus formation and operational refusals. A run nonce or fixture Resolution does not supply the missing closure. |
 | 4 — Fresh repeat, correction and bounded resolution | Reopen, retrieve exact historical truth, intentionally repeat or correct within prior local terms, and refuse wider requests. A caller may deliver an authorized project-agent decision with additional context; native owners validate it against prior terms before any new effect. | Packet 3 reviewed and this increment approved. Prove local authority across restart, fresh repetition/correction and all source revalidation without credential acquisition. Review complete refusal/resumption and integrated recovery/currentness; perform the single aggregate slice closeout only when all conditions below hold. |
 
@@ -100,8 +102,8 @@ Carry the inherited evidence limits: Main reports focused Windows targets passin
 in the D→G packet. They were inspected, not rerun here. The earlier broader
 Windows Contracts owner suite was `24 passed / 1 failed / 1 ignored` against
 `25 / 0 / 1` baseline; isolated failures passed, and attribution remains open.
-Unix branches are inspected but unexecuted. Neither focused passes nor this
-documentation commit clears those limits. Main's aggregate D→G closeout is
+Unix branches are inspected but unexecuted. Packet 2's focused implementation
+evidence does not clear those limits. Main's aggregate D→G closeout is
 confirmed as supplied meta evidence, separately from these inherited test limits.
 
 ## Owner and host boundaries

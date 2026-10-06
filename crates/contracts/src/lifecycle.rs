@@ -661,6 +661,17 @@ pub struct LifecycleHeadV1 {
 }
 
 impl LifecycleHeadV1 {
+    pub(crate) fn from_local_v2(
+        state: LifecycleStateV1,
+        transition_ref: Option<String>,
+        lifecycle_fingerprint: FingerprintV1,
+    ) -> Self {
+        Self {
+            state,
+            transition_ref,
+            lifecycle_fingerprint,
+        }
+    }
     pub fn state(&self) -> LifecycleStateV1 {
         self.state
     }

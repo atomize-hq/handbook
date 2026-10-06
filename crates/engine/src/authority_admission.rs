@@ -559,7 +559,7 @@ fn valid_approval_class(value: &str) -> bool {
         && value.as_bytes()[0].is_ascii_lowercase()
 }
 
-fn current_semantic_utc() -> Result<String, CredentialAuthorityAdmissionErrorV1> {
+pub(crate) fn current_semantic_utc() -> Result<String, CredentialAuthorityAdmissionErrorV1> {
     let seconds = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .map_err(|_| {

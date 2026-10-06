@@ -101,10 +101,11 @@ The human then requested the bounded
 Its [independent-local-check / Packet 1](slices/independent-local-check/packet-1.md)
 is implemented at `fccaf11` and human-reviewed: native initial setup and local
 Engine authority for current D, with historical recovery and wider/stale refusal.
-The [independent-local-check / Packet 2 plan](slices/independent-local-check/packet-2.md)
-is prepared for complete independently usable definitions, responsible D/G
-applicability and local author/lifecycle/Dock source authority. It awaits human
-implementation approval; the complete four-packet slice remains unfinished.
+The human approved [independent-local-check / Packet 2](slices/independent-local-check/packet-2.md)
+for complete independently usable definitions, responsible D/G applicability and
+local author/lifecycle/Dock source authority. Its verified, causally approved local
+implementation is awaiting human review; the complete four-packet slice remains
+unfinished.
 Actual runtime choices retain their separate approval boundary.
 
 ## Authority and navigation
@@ -146,7 +147,7 @@ Use the source that owns the question:
 | Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. A roadmap entry plus an explicit execution request may authorize bounded preparation of that document, but product execution begins only after the resulting current slice authority is ready. |
 | What is the first bounded approved-semantics establishment outcome? | [`slices/admission-governance-establishment/README.md`](slices/admission-governance-establishment/README.md) records the completed local implementation at `aa793c1`: one newly registered local project, exact Contracts freshness-policy admission scope, native committed establishment/refusal/recovery and typed Rust SDK resolution/replay. The caller-supplied ceiling survives restart exactly. The single-packet slice is at human review; policy admission and successor activation remain separate. |
 | What is the completed positive deferral outcome and later-establishment implementation? | [`scoped-governance-deferral`](slices/scoped-governance-deferral/README.md) records completed local initial deferral at `8b13505`, including current/replay and evidence limits. [deferred-governance-establishment / Packet 1](slices/deferred-governance-establishment/packet-1.md) records same-project D→G at `9f28f99`, original D replay, authoritative v3 current resolution and focused recovery/concurrency evidence. Main has confirmed its aggregate validation/closeout and recap complete; inherited evidence limits remain. |
-| What is the independent-use plan and its next human review boundary? | [`independent-local-check`](slices/independent-local-check/README.md) retains four packets. [independent-local-check / Packet 1](slices/independent-local-check/packet-1.md) is delivered at `fccaf11` and human-reviewed. [independent-local-check / Packet 2](slices/independent-local-check/packet-2.md) prepares complete definitions and usable local source authority, awaiting human implementation approval. The complete check, repeat/correction and bounded decision submission remain later packets; Substrate adoption remains separate. |
+| What is the independent-use plan and its next human review boundary? | [`independent-local-check`](slices/independent-local-check/README.md) retains four packets. [independent-local-check / Packet 1](slices/independent-local-check/packet-1.md) is delivered at `fccaf11` and human-reviewed. [independent-local-check / Packet 2](slices/independent-local-check/packet-2.md) is implemented, verified and causally approved locally; complete definitions and usable native local source authority await human review. The complete check, repeat/correction and bounded decision submission remain later packets; Substrate adoption remains separate. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 
 If prose about implemented behavior conflicts with the current source and tests, treat the discrepancy as documentation drift; do not use the prose to override the product.

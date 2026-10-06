@@ -415,7 +415,15 @@ impl ContractOwnerRepositoryV1 {
                         .validate_final_resolved(&resolved)
                         .map_err(map_candidate_admission)?;
                     owner.readmit_evaluation_run_locked_v1(prepared.run(), policy_registry)?;
-                    owner.commit_evidence(prepared, candidate, request_fingerprint, key_fingerprint)
+                    owner.commit_evidence(
+                        prepared,
+                        candidate,
+                        request_fingerprint,
+                        key_fingerprint,
+                        &resolved,
+                        source_currentness,
+                        policy_registry,
+                    )
                 })
             })
             .map_err(map_candidate_source)?
@@ -534,13 +542,22 @@ impl ContractOwnerRepositoryV1 {
         Ok(())
     }
 
-    fn commit_evidence(
+    fn commit_evidence<C: SourceCurrentnessPortV1>(
         &self,
         prepared: PreparedEvidenceAppendV1,
         candidate: &ContentAddressedBindingV1,
         request_fingerprint: FingerprintV1,
         key_fingerprint: FingerprintV1,
+        resolved: &crate::ResolvedEvidenceCandidateObservationV1<'_>,
+        source_currentness: &mut C,
+        policy_registry: &EvaluationPolicyRegistryV1,
     ) -> Result<EvidenceAppendExecutionV1, ContractOwnerRepositoryErrorV1> {
+        if resolved.admission().is_local() {
+            prepared
+                .recheck_local_commit(source_currentness, policy_registry)
+                .map_err(map_candidate_admission)?;
+            resolved.validate_current().map_err(map_candidate_source)?;
+        }
         let ledgers = self.load_evidence_ledgers()?;
         if ledgers.iter().any(|ledger| {
             ledger.receipt.candidate == *candidate
@@ -622,6 +639,14 @@ impl ContractOwnerRepositoryV1 {
             &canonical_bytes(&intent).map_err(|_| durability("evidence intent encoding failed"))?,
         )?;
         self.maybe_fault(OwnerFaultBoundary::Intent)?;
+        if resolved.admission().is_local() {
+            // Stage/intent are recoverable. No committing marker is written
+            // after a changed native authority or immutable captured input.
+            prepared
+                .recheck_local_commit(source_currentness, policy_registry)
+                .map_err(map_candidate_admission)?;
+            resolved.validate_current().map_err(map_candidate_source)?;
+        }
         let marker = EvidenceCommitMarker::new(&intent)?;
         self.write_new_durable(
             &pending.join("commit-marker.json"),

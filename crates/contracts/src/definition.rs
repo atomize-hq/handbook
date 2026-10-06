@@ -62,6 +62,12 @@ pub(crate) struct DefinitionEvaluationClosureV1 {
 }
 
 impl ContractDefinitionV1 {
+    pub fn definition_schema_binding(&self) -> &ExactBindingV1 {
+        &self.definition_schema
+    }
+    pub fn extensions_policy_binding(&self) -> &ExactBindingV1 {
+        &self.extensions_policy
+    }
     /// Validates all closed definition fields and derives the exact ref and
     /// RFC-8785/SHA-256 semantic fingerprint.
     pub fn new(mut input: ContractDefinitionInputV1) -> Result<Self, ContractError> {

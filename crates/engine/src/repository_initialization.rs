@@ -218,6 +218,21 @@ impl fmt::Debug for RepositoryInitializationGuardV1 {
 }
 
 impl RepositoryInitializationGuardV1 {
+    /// Strict current/history acquisition never creates a lost native lock.
+    pub fn acquire_existing_v1(
+        repo_root: impl AsRef<Path>,
+    ) -> Result<Self, RepositoryDurabilityErrorV1> {
+        let root = RetainedRepositoryRootV1::open_exact(repo_root)?;
+        let lock =
+            root.acquire_existing_exclusive_lock_v1(REPOSITORY_INITIALIZATION_LOCK_PATH_V1)?;
+        let guard = Self {
+            root,
+            lock: Some(lock),
+        };
+        guard.validate()?;
+        Ok(guard)
+    }
+
     pub fn acquire(repo_root: impl AsRef<Path>) -> Result<Self, RepositoryDurabilityErrorV1> {
         let root = RetainedRepositoryRootV1::open_exact(repo_root)?;
         let claim_present = root.initialization_regular_file_exists(

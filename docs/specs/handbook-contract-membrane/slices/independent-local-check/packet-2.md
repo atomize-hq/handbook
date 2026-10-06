@@ -1,10 +1,11 @@
-# Packet 2 plan: complete local definitions and usable source authority
+# Packet 2: complete local definitions and usable source authority
 
-Status: **prepared; awaiting human implementation approval**, 2026-10-05.
+Status: **implemented locally; awaiting human review**, 2026-10-06.
 This is **independent-local-check / Packet 2**. The human reviewed the delivered
 [independent-local-check / Packet 1](packet-1.md) at `fccaf11` and requested this
-planning/status correction. That request authorizes documentation, review and a
-local commit; it does not authorize product implementation or runtime choices.
+planning/status correction. After reviewing this plan and the concrete order-JSON
+example, the human explicitly approved Packet 2 implementation, focused tests,
+causal review and a local commit. This supplies no actual runtime choices.
 The complete [slice](README.md) retains four separately reviewed packets.
 
 ## Outcome and checkpoint
@@ -227,7 +228,70 @@ Source authority grants no evaluation truth or host-enforcement proof.
 
 ## Work order and verification boundary
 
-After human implementation approval, resolve private names, additive schema/rule
+### Bounded implementation choices
+
+The additive Engine local-check rule uses a separate successor locator/head,
+binding the exact unrevoked original local terms and current Charter. Original
+V1 records/preimages remain intact; the initial current-use route refuses once
+the successor is selected. Terms explicitly select supported actions, stable
+author/reviewer participant references, input/write reach and the existing
+validation ceiling. Human approval binds their complete supplied content.
+
+Contracts' local definition and lifecycle have separate versioned identities,
+binding the reused intrinsic claim semantics, permitted use and complete finite
+dependency closure. An actual attributed review record is resolved by the owner;
+distinct role labels alone do not establish distinct participants. The local
+repository extension reuses its process/repository locks and durable mutation
+and recovery machinery. V1 credential and independent-lock records retain meaning.
+
+Fresh native v3 resolution and owner qualification produce a sealed local-use
+outcome. Engine receives an untrusted exact relation and complete finite
+governance-tree observation, independently compares them under native authority
+guards, and retains physical authority/governance generations through consumption.
+The observation cannot authorize Contracts qualification. Governance resolution
+finishes before Engine and Contracts consuming locks are acquired.
+
+Dock adds a read-only retained-input observer which derives actual content
+identities for every input role. Local candidate normalization uses an explicitly
+discriminated local authority observation and additive evidence identity; the
+credential route and its frozen bytes remain unchanged. Shared canonical source
+validation and the existing store remain controlling. Exact retained Dock source
+files stay pinned through callbacks and commit; current/history reads cannot
+create missing lock state or silently recover uncertain intent.
+
+The existing append and verdict callbacks require an owner-established run basis.
+An additive local `@2.0.0` source-seam run reuses that kernel with the actual
+reviewed local definition, active lifecycle, selected policies and captured
+subject/case. It preserves V1 credential records and supplies only the basis
+needed to exercise this packet's consumers. It establishes no Coordination,
+Purpose/occurrence/plan, formed Engine Evaluation Authorization or Packet-3
+evaluation closure. Actual consuming Resolution values must fit the exact
+shipped stack and supplied terms ceiling; the source does not clip them.
+
+The public local candidate normalizer requires the actual retained native Dock
+candidate at its fingerprint-derived path and the linked completed request,
+execution, result, replay, transaction intent and commit marker. Its sealed
+Engine checkpoint pins those exact files and the complete current local Contracts
+owner state through consumption. The established Dock candidate DTO is shared
+as data in Contracts with its V1 bytes unchanged; data alone grants no source
+authority. A custom source cannot substitute a favorable candidate for the
+operationally retained facts or bypass the reviewed input/schema closure.
+
+The public seam also binds every pinned proof/state path to the live Engine
+admission's declared input reach and requires the Contracts evidence write reach
+before reading owner or source proof. Engine independently checks each declared
+input path against the approved terms. Declared owner mutation roots require
+explicit coverage of their complete child subtree under the existing native
+selector rules; permission for a literal directory alone cannot authorize child
+records, ledgers or transaction files. A genuine checkpoint cannot supply omitted
+or wider authority. Replay selection reads only admitted pinned replay files,
+rather than enumerating unrelated source state outside that declaration.
+Each mandatory proof read checks checkpoint membership before opening that file.
+The Contracts definition/lifecycle consuming validator also requires both exact
+owner mutation roots before acquiring its owner lock, recovering or writing;
+Engine's selector comparison cannot supply a declaration omitted by the caller.
+
+The implementation resolves private names, additive schema/rule
 versions, closed DTO shapes and bounded helper factoring from these live owners.
 Record material choices before product edits and use mandatory symbol impact.
 Representation stays Contracts JSON, existing canonical YAML Charter, and new
@@ -262,8 +326,7 @@ Acceptance requires:
 | Compatibility and recovery | Old V1 credential/lifecycle/definition/evidence bytes and selected rules retain meaning. Exact local retries/recovery preserve original requests and partial owner outcomes; conflicting identities, lost required state and revoked-head replay fail closed. |
 | Honest packet result | Demonstrates complete definitions and usable native source authority through a normal dependency consumer; makes no Packet-3 Coordination/truth, full repeated-check/history, shipment, Work Progression, routed-agent or external enforcement claim. |
 
-Verification is implementation work, not performed by this planning task. Start
-from live Cargo target discovery and add focused local owner/SDK integration tests.
+Verification uses live Cargo target discovery and focused local owner/SDK integration tests.
 Use real native validator execution for the source seam; an existing run-basis test
 setup may isolate the seam if explicitly labeled as lacking Packet-3 closure.
 Never present a fixture-derived complete check as a supported independent consumer.
@@ -300,6 +363,97 @@ D→G closeout and prior packet evidence do not clear them.
 
 ## Focused source map and completion policy
 
+### Implementation verification and limits
+
+The focused Windows owner/kernel regressions passed: Engine authority admission
+`10 / 0`, Engine evidence-source admission `4 / 0`, read-only native checkpoint
+`2 / 0`, Contracts definition `7 / 0`, lifecycle `10 / 0`, evaluation policy
+`8 / 0`, owner repository `16 / 0 / 1 ignored`, and local definition kernel
+`6 / 0`. The four existing SDK regression targets above passed `32 / 0`.
+The new native successor authority tests passed `6 / 0`, including interrupted
+adoption recovery, exact lost/substituted locks, pinned generations and paused
+separate-process governance/revoke contention. The latest strict UTC and actual
+Resolution-ceiling discriminator rerun passed `1 / 0`.
+The new owner-subtree discriminator reproduced the reach gap before remediation,
+then passed `2 / 0`: literal-only and child-only selectors refuse, explicit whole
+subtree selectors pass, and exact input reads retain their existing meaning.
+The affected Contracts library checks passed `14 / 0`, source checks `3 / 0`,
+evaluation identity `4 / 0` and evaluation run `1 / 0`; Dock store checks passed
+`9 / 0`, including actual captures across all roles and strict read-only locks.
+The SDK local target initially returned `8 passed / 2 failed / 1 ignored`.
+The stale/G case passed its corrected isolated rerun (`1 / 0`); the zero-age
+policy constructor correctly refuses, and the native package setup retains an
+already staged exact package. The isolated native source case then passed both
+the earlier run and the updated optimized run (`1 / 0` each), including process
+reopen, repeated admission/append/verdict checks, actual native Violation with a
+same-checkpoint genuine control, forged Pass refusal, omitted read/write refusal,
+and a physically pinned input outside the approved selector. No whole-target
+green rerun is claimed. A separate native owner-subtree admission case passed
+`1 / 0` with literal-only/child-only refusals and exact/broad subtree controls.
+The actual owner-consumer omission case also passed `1 / 0`: definition append
+and lifecycle transition each refuse either missing mandatory root or both,
+despite entering native Engine admission. Native owner path/byte snapshots stay
+unchanged; correctly declared author and ReviewReady transitions then commit.
+
+The broader relevant Windows Contracts library owner suite again returned
+`24 passed / 1 failed / 1 ignored`. Its cross-process writer case then passed in
+isolation (`1 passed`, `25 filtered`). Attribution remains unresolved; this does
+not clear the inherited advisory. Unix remains inspected but unexecuted.
+
+The normal-dependency consumer is
+[local_contract_check.rs](../../../../../crates/sdk/examples/local_contract_check.rs).
+It accepts explicit supplied initial setup, successor terms, complete definition,
+review/lifecycle, captured validation content and request keys. The illustrative
+order definition is `handbook.contract.order-capture@2.0.0` with fingerprint
+`sha256:4f8f4a79430eda20ad95b3f3fc16775cdea303227b97d2201065b3ed95b42760`
+and closure fingerprint
+`sha256:6ae5e290291b8ae6fe357f12b16390e7cd35c59521a4981cadbf4e4fdf21a128`.
+The actual distinct selected reviewer inspected that exact definition and
+closure and supplied an advisory approval; the consumer retained that outcome
+and reached Active through native owner transitions. It did not infer review
+from an agent label or generate an approval.
+
+The supplied normal-dependency example produced one real native completed Dock
+candidate, reopened its source in a separate consumer process, admitted and
+appended local evidence and obtained a Pass through the existing verdict
+revalidation callback under D. After same-project establishment, fresh native v3
+qualification reported `qualified_freshness` under G; source reopen/admission and
+verdict revalidation again succeeded with a Pass. Byte hashes of all six retained
+D evidence, receipt, ledger and transaction files remained unchanged. This is the
+additive local source-seam proof described above, without Packet-3 evaluation
+closure. The normal dependency feature tree contains neither `test-support` nor
+`dock-test-support`.
+The final rebuilt consumer repeated G source resolution, admission and verdict
+with all declared-reach, subtree, membership-before-read and mandatory owner-root
+guards. It again returned Pass with those six D files byte-identical, within the
+unchanged supplied freshness window.
+
+The final fresh causal delta review returned **APPROVE**, with no unresolved
+P1/P2. Its preceding blocking reach findings were remediated and verified at the
+public source and actual owner consuming boundaries. This packet returns for
+human review after its coherent local commit; the four-packet slice stays
+unfinished and no successor planning or dispatch is authorized by that result.
+
+The ordinary debug example uses a bounded 8 MiB worker stack on this Windows host.
+Its large debug dispatch frame caused stack pressure after the first author effect
+committed; retry with the original retained key recovered the exact outcome.
+A small default-stack ordinary program independently reopened and read that
+committed definition. No owner state was reset and no speculative library boxing
+was introduced. This is an example-host constraint, not an adopted project limit.
+
+GitNexus impact was attempted for changed existing symbols. Its stale mixed index
+reported CRITICAL impact for the shared native DTO extraction; the warning was
+reported before proceeding, and its exact V1 wire shape remains unchanged.
+Sandboxed change detection failed with `spawnSync git EPERM`; the read-only
+escalated call succeeded and reported CRITICAL risk across 300 flows. Malformed
+symbol names and unrelated native mappings confirm the stale index limit. The
+warning was reported; direct exact staged scope and caller/consumer checks
+supplement that result without index repair.
+Repeated staged detection covered the expected 39 files and returned CRITICAL
+risk with inconsistent symbol/process counts and the same unrelated/malformed
+mappings. The direct staged audit found no research or probe files in the commit.
+All 239 local file links in the five changed status/authority documents resolve.
+
 | Boundary | Inspected live anchors and required consumers |
 | --- | --- |
 | D-only setup/terms boundary | [SDK local setup](../../../../../crates/sdk/src/local_setup.rs), prepare/establish/recover/`resolve_local_applicability`; [transition regression](../../../../../crates/sdk/tests/local_initial_setup.rs), `v3_noncommit_keeps_current_d_usable_then_establishment_refuses_stale_d_use`; [Engine terms](../../../../../crates/engine/src/local_authority.rs), `read_current`, `OperatingGuard`, `LocalCurrentAuthorityWitnessV1`; [local Charter](../../../../../crates/engine/src/local_charter.rs). |
@@ -308,12 +462,14 @@ D→G closeout and prior packet evidence do not clear them.
 | Sealed authority and actual sources | [credential admission](../../../../../crates/engine/src/authority_admission.rs), [evidence-source admission](../../../../../crates/engine/src/evidence_source_admission.rs); [Dock store](../../../../../crates/dock/src/store.rs), candidate derivation and `DockEvidenceCandidateSourceV1::resolve_exact`; [Contracts source](../../../../../crates/contracts/src/evidence_candidate_source.rs), sealed repository normalization. |
 | Required repeated consumers | [admission](../../../../../crates/contracts/src/evidence_admission.rs), source-currentness preparation/recheck; [append](../../../../../crates/contracts/src/owner_repository/evidence_repository.rs), initial/final resolution and consuming commit; [verdict](../../../../../crates/contracts/src/claim_verdict.rs), initial/final `revalidate_records` and `sources_are_current`. |
 
-This documentation preparation inspected source/test bodies and predecessor/meta
-evidence; it ran no product suites or runtime project setup. GitNexus query is
-42 commits stale with foreign storage and missing search tables, and symbol context
-cannot resolve the new local symbol; direct source/caller mapping controls this
-plan. No index repair is authorized. Required change detection, exact staged scope
-and local link/anchor checks precede the documentation commit.
+The earlier documentation preparation inspected source/test bodies and
+predecessor/meta evidence without product execution. The human then approved this
+bounded implementation. Its focused product verification and separate ordinary
+consumer are recorded below. GitNexus is 42 commits stale with foreign storage
+and missing search tables, and cannot resolve the new local symbols; direct
+source/caller mapping controls this increment. No index repair is authorized.
+Required change detection, exact staged scope and local link checks precede the
+local implementation commit.
 
 Use one fresh focused causal reviewer under the controlling policy. P1/P2 block;
 remediate/verify and obtain a fresh delta review when material. P3/P4 remain advisory.

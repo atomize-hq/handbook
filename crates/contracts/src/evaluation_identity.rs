@@ -23,6 +23,9 @@ const MAX_FACT_BYTES: usize = 256 * 1024;
 #[allow(dead_code)] // Packet 1 fixes the owner identity kernel before later sealed minting paths.
 trait IdentityBodyValidation {
     fn validate_identity_body(&self) -> Result<(), ContractError>;
+    fn selected_identity_schema(&self, established: &'static str) -> &'static str {
+        established
+    }
 }
 
 macro_rules! identity_record {
@@ -44,14 +47,15 @@ macro_rules! identity_record {
                     schema_ref: &'static str,
                     body: &'a $body,
                 }
+                let schema = body.selected_identity_schema($schema);
                 let fingerprint = canonical_fingerprint(&Preimage {
-                    schema_ref: $schema,
+                    schema_ref: schema,
                     body: &body,
                 })?;
                 let derive_ref = $derive_ref;
                 let reference = derive_ref(&body, &fingerprint);
                 Ok(Self {
-                    schema_ref: $schema,
+                    schema_ref: schema,
                     body,
                     $ref_field: reference,
                     $fp_field: fingerprint,
@@ -76,6 +80,10 @@ macro_rules! identity_record {
 pub struct SemanticTimeV1(String);
 
 impl SemanticTimeV1 {
+    /// Native whole-second UTC observation. Time alone supplies no authority.
+    pub fn owner_observation_now_v1() -> Result<Self, ContractError> {
+        Self::owner_now()
+    }
     pub fn parse(value: &str) -> Result<Self, ContractError> {
         if !valid_utc_second(value) {
             return Err(ContractError::InvalidInvariant);
@@ -410,12 +418,36 @@ impl SourceCurrentnessObservationV1 {
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
-pub(crate) struct EvidenceSourceAuthorityObservationV1 {
+pub(crate) struct CredentialEvidenceSourceAuthorityObservationV1 {
     actor_ref: StableIdV1,
     authority: ExactBindingV1,
     registry_state: ContentAddressedBindingV1,
     registry_head: ContentAddressedBindingV1,
     observed_at: SemanticTimeV1,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct LocalEvidenceSourceAuthorityObservationV2 {
+    schema_ref: String,
+    assurance: String,
+    actor_ref: String,
+    participant_ref: String,
+    authority_fingerprint: FingerprintV1,
+    locator_fingerprint: FingerprintV1,
+    native_basis: handbook_engine::local_authority::local_check::LocalCheckCurrentBasisV1,
+    definition: ExactBindingV1,
+    dependency_closure: FingerprintV1,
+    applicability: crate::LocalContractApplicabilityV2,
+    intent: crate::LocalContractUseIntentV2,
+    observed_at: SemanticTimeV1,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(untagged)]
+pub(crate) enum EvidenceSourceAuthorityObservationV1 {
+    Credential(CredentialEvidenceSourceAuthorityObservationV1),
+    Local(LocalEvidenceSourceAuthorityObservationV2),
 }
 
 impl EvidenceSourceAuthorityObservationV1 {
@@ -426,21 +458,75 @@ impl EvidenceSourceAuthorityObservationV1 {
         registry_head: ContentAddressedBindingV1,
         observed_at: SemanticTimeV1,
     ) -> Self {
-        Self {
+        Self::Credential(CredentialEvidenceSourceAuthorityObservationV1 {
             actor_ref,
             authority,
             registry_state,
             registry_head,
             observed_at,
+        })
+    }
+
+    pub(crate) fn is_local(&self) -> bool {
+        matches!(self, Self::Local(_))
+    }
+
+    pub(crate) fn local(
+        admission: &handbook_engine::local_authority::local_check::LocalCheckAdmissionV1<'_>,
+        definition: ExactBindingV1,
+        dependency_closure: FingerprintV1,
+        applicability: crate::LocalContractApplicabilityV2,
+        intent: crate::LocalContractUseIntentV2,
+        observed_at: SemanticTimeV1,
+    ) -> Result<Self, ContractError> {
+        Ok(Self::Local(LocalEvidenceSourceAuthorityObservationV2 {
+            schema_ref: "handbook.contracts.local-evidence-source-authority@2.0.0".into(),
+            assurance: "local_advisory".into(),
+            actor_ref: admission.request().actor_ref.clone(),
+            participant_ref: admission.request().participant_ref.clone(),
+            authority_fingerprint: FingerprintV1::parse(admission.authority_fingerprint())?,
+            locator_fingerprint: canonical_fingerprint(admission.locator())?,
+            native_basis: admission.current_basis().clone(),
+            definition,
+            dependency_closure,
+            applicability,
+            intent,
+            observed_at,
+        }))
+    }
+
+    fn validate(&self) -> Result<(), ContractError> {
+        if let Self::Local(value) = self {
+            if value.schema_ref != "handbook.contracts.local-evidence-source-authority@2.0.0"
+                || value.assurance != "local_advisory"
+                || value.actor_ref.is_empty()
+                || value.participant_ref.is_empty()
+                || value.actor_ref.len() > MAX_TEXT_BYTES
+                || value.participant_ref.len() > MAX_TEXT_BYTES
+            {
+                return Err(ContractError::InvalidInvariant);
+            }
         }
+        Ok(())
     }
 
-    pub(crate) fn actor_ref(&self) -> &StableIdV1 {
-        &self.actor_ref
-    }
-
-    pub(crate) fn authority(&self) -> &ExactBindingV1 {
-        &self.authority
+    pub(crate) fn same_authority_identity(&self, other: &Self) -> bool {
+        match (self, other) {
+            (Self::Credential(left), Self::Credential(right)) => {
+                left.actor_ref == right.actor_ref
+                    && left.authority.reference() == right.authority.reference()
+            }
+            (Self::Local(left), Self::Local(right)) => {
+                left.actor_ref == right.actor_ref
+                    && left.participant_ref == right.participant_ref
+                    && left.authority_fingerprint == right.authority_fingerprint
+                    && left.locator_fingerprint == right.locator_fingerprint
+                    && left.definition == right.definition
+                    && left.dependency_closure == right.dependency_closure
+                    && left.intent == right.intent
+            }
+            _ => false,
+        }
     }
 }
 
@@ -760,7 +846,15 @@ pub(crate) struct EvidenceRecordBodyV1 {
 }
 
 impl IdentityBodyValidation for EvidenceRecordBodyV1 {
+    fn selected_identity_schema(&self, established: &'static str) -> &'static str {
+        if self.evidence_source_authority.is_local() {
+            "handbook.contract-evidence-record@2.0.0"
+        } else {
+            established
+        }
+    }
     fn validate_identity_body(&self) -> Result<(), ContractError> {
+        self.evidence_source_authority.validate()?;
         validate_candidate_body(&self.observation)?;
         validate_source_currentness(&self.source_currentness)?;
         validate_ordered_unique(&self.freshness_policies)?;
@@ -773,7 +867,12 @@ impl IdentityBodyValidation for EvidenceRecordBodyV1 {
             return Err(ContractError::DerivedValueMismatch);
         }
         validate_candidate_ref(self.admitted_candidate.reference(), &candidate_fingerprint)?;
-        if self.admission_policy != crate::evidence_admission_policy_binding_v1()?
+        let expected_policy = if self.evidence_source_authority.is_local() {
+            crate::local_evidence_admission_policy_binding_v2()?
+        } else {
+            crate::evidence_admission_policy_binding_v1()?
+        };
+        if self.admission_policy != expected_policy
             || self.stability_policies.is_empty()
             || self.freshness_policies.is_empty()
         {
@@ -836,7 +935,11 @@ impl<'de> Deserialize<'de> for EvidenceRecordV1 {
             evidence_fingerprint: FingerprintV1,
         }
         let raw = Raw::deserialize(deserializer)?;
-        if raw.schema_ref != EVIDENCE_RECORD_SCHEMA_REF_V1 {
+        if raw.schema_ref
+            != raw
+                .body
+                .selected_identity_schema(EVIDENCE_RECORD_SCHEMA_REF_V1)
+        {
             return Err(D::Error::custom(ContractError::InvalidInvariant));
         }
         let expected = Self::from_body(raw.body).map_err(D::Error::custom)?;
@@ -936,6 +1039,17 @@ pub(crate) struct ClaimVerdictBodyV1 {
 }
 
 impl IdentityBodyValidation for ClaimVerdictBodyV1 {
+    fn selected_identity_schema(&self, established: &'static str) -> &'static str {
+        if self
+            .evidence_source_authority
+            .iter()
+            .any(EvidenceSourceAuthorityObservationV1::is_local)
+        {
+            "handbook.contract-claim-verdict@2.0.0"
+        } else {
+            established
+        }
+    }
     fn validate_identity_body(&self) -> Result<(), ContractError> {
         validate_bounded_unique(&self.supporting_evidence)?;
         validate_bounded_unique(&self.disqualifying_evidence)?;
@@ -1123,6 +1237,17 @@ pub(crate) struct GateResultBodyV1 {
 }
 
 impl IdentityBodyValidation for GateResultBodyV1 {
+    fn selected_identity_schema(&self, established: &'static str) -> &'static str {
+        if self
+            .evidence_source_authority
+            .iter()
+            .any(EvidenceSourceAuthorityObservationV1::is_local)
+        {
+            "handbook.contract-gate-result@2.0.0"
+        } else {
+            established
+        }
+    }
     fn validate_identity_body(&self) -> Result<(), ContractError> {
         validate_bounded_unique(&self.evidence_source_authority)?;
         validate_bounded_unique(&self.verdicts)?;
@@ -1174,6 +1299,17 @@ pub(crate) struct LocalCloseoutResultBodyV1 {
 }
 
 impl IdentityBodyValidation for LocalCloseoutResultBodyV1 {
+    fn selected_identity_schema(&self, established: &'static str) -> &'static str {
+        if self
+            .evidence_source_authority
+            .iter()
+            .any(EvidenceSourceAuthorityObservationV1::is_local)
+        {
+            "handbook.contract-local-closeout-result@2.0.0"
+        } else {
+            established
+        }
+    }
     fn validate_identity_body(&self) -> Result<(), ContractError> {
         validate_source_currentness(&self.source_currentness)?;
         validate_bounded_unique(&self.evidence_source_authority)?;
@@ -1595,6 +1731,28 @@ mod tests {
     };
 
     #[test]
+    fn credential_source_revalidation_preserves_actor_and_authority_ref_semantics() {
+        let original = source_authority();
+        let mut refreshed = original.clone();
+        let EvidenceSourceAuthorityObservationV1::Credential(ref mut value) = refreshed else {
+            panic!("credential fixture route");
+        };
+        value.authority =
+            ExactBindingV1::new(value.authority.reference().clone(), fingerprint('c'));
+        value.registry_head = content("registry/new-head", 'd');
+        assert!(original.same_authority_identity(&refreshed));
+        assert_ne!(
+            original, refreshed,
+            "repeated observations still compare current registry identity"
+        );
+        let EvidenceSourceAuthorityObservationV1::Credential(ref mut value) = refreshed else {
+            unreachable!();
+        };
+        value.actor_ref = id("actor.substituted");
+        assert!(!original.same_authority_identity(&refreshed));
+    }
+
+    #[test]
     fn candidate_identity_is_source_owned_but_semantically_content_addressed() {
         let body = candidate_body();
         let fingerprint = canonical_fingerprint(&CandidatePreimage {
@@ -1812,13 +1970,13 @@ mod tests {
     }
 
     fn source_authority() -> EvidenceSourceAuthorityObservationV1 {
-        EvidenceSourceAuthorityObservationV1 {
-            actor_ref: id("actor.one"),
-            authority: exact("handbook.authority.evidence-source@1.2.3"),
-            registry_state: content("registry/state", 'a'),
-            registry_head: content("registry/head", 'b'),
-            observed_at: time(),
-        }
+        EvidenceSourceAuthorityObservationV1::new(
+            id("actor.one"),
+            exact("handbook.authority.evidence-source@1.2.3"),
+            content("registry/state", 'a'),
+            content("registry/head", 'b'),
+            time(),
+        )
     }
 
     fn resolution() -> ResolutionEnvelopeV1 {

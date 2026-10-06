@@ -33,6 +33,15 @@ pub struct EvidenceSourceAdmissionErrorV1 {
 }
 
 impl EvidenceSourceAdmissionErrorV1 {
+    /// Bounded refusal for a read-only native source adapter. This does not
+    /// construct an admission or expose retained paths or authority state.
+    pub fn repository_observation_refusal_v1(kind: EvidenceSourceAdmissionErrorKindV1) -> Self {
+        Self {
+            kind,
+            detail: "native retained source observation refused",
+        }
+    }
+
     pub fn kind(&self) -> EvidenceSourceAdmissionErrorKindV1 {
         self.kind
     }

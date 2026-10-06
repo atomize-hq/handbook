@@ -21,11 +21,17 @@ use std::path::{Component, Path, PathBuf};
 use std::sync::Mutex;
 
 mod evidence_repository;
+mod local_repository;
 pub use evidence_repository::{
     EvidenceAppendExecutionV1, EvidenceAppendReceiptV1, EvidenceListEntryV1, EvidenceListPageV1,
     EvidenceListRequestV1, EvidenceListRetentionV1, EvidenceReadOutcomeV1, StoredEvidenceRecordV1,
 };
 pub(crate) use evidence_repository::{EvidenceEvaluationEntryV1, EvidenceEvaluationSnapshotV1};
+pub use local_repository::{
+    LocalDefinitionRecordV2, LocalLifecycleHeadV2, LocalLifecycleTransitionInputV2,
+    LocalOwnerMutationReceiptV2, PreparedLocalDefinitionAppendV2,
+    PreparedLocalLifecycleTransitionV2, LOCAL_CONTRACT_OWNER_ROOT_V2,
+};
 
 pub const CONTRACT_OWNER_REPOSITORY_RELATIVE_ROOT_V1: &str = ".handbook/state/contracts/v1";
 const LOCK_RELATIVE_PATH: &str = ".handbook/state/locks/contract-owner.lock";
@@ -166,7 +172,7 @@ impl DefinitionListPageV1 {
     }
 }
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+#[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum OwnerMutationDispositionV1 {
     Committed,
@@ -597,6 +603,9 @@ impl ContractOwnerRepositoryV1 {
         run: &ContractEvaluationRunV1,
         policy_registry: &EvaluationPolicyRegistryV1,
     ) -> Result<LifecycleHeadV1, ContractOwnerRepositoryErrorV1> {
+        if run.is_local_source_seam_v2() {
+            return self.readmit_local_source_seam_run_locked_v2(run, policy_registry);
+        }
         let owner = self;
         let contract = run.contract();
         let (definition, chain, persisted_head) =
@@ -1567,6 +1576,12 @@ impl ContractOwnerRepositoryV1 {
             }
             let intent = self.validate_transaction(&transaction)?;
             for output in intent.outputs {
+                if output
+                    .relative_ref
+                    .starts_with(LOCAL_CONTRACT_OWNER_ROOT_V2)
+                {
+                    continue;
+                }
                 if output.relative_ref.contains("/definitions/") {
                     if !definitions.insert(output.relative_ref) {
                         return Err(recovery(
@@ -1597,7 +1612,8 @@ impl ContractOwnerRepositoryV1 {
         self.require_inventory(&self.heads_root(), &heads)?;
         self.require_inventory(&self.idempotency_root(), &ledgers)?;
         self.validate_semantic_inventory()?;
-        self.validate_evidence_inventory()
+        self.validate_evidence_inventory()?;
+        self.validate_local_inventory()
     }
 
     fn validate_semantic_inventory(&self) -> Result<(), ContractOwnerRepositoryErrorV1> {
@@ -1668,6 +1684,19 @@ impl ContractOwnerRepositoryV1 {
         let historical_head_bytes =
             self.read_regular(&path.join(&intent.outputs[1].staged_name))?;
         let ledger_bytes = self.read_regular(&path.join(&intent.outputs[2].staged_name))?;
+        if matches!(
+            intent.operation.as_str(),
+            "contract.local-definition.append" | "contract.local-lifecycle.transition"
+        ) {
+            self.validate_local_transaction(
+                path,
+                &intent,
+                &primary_bytes,
+                &historical_head_bytes,
+                &ledger_bytes,
+            )?;
+            return Ok(intent);
+        }
         let historical_head: HeadRecord = parse_canonical(&historical_head_bytes)?;
         historical_head.validate_self()?;
         match intent.operation.as_str() {
@@ -1753,7 +1782,8 @@ impl ContractOwnerRepositoryV1 {
                 .create_directories(relative)
                 .map_err(map_durability)?;
         }
-        self.ensure_evidence_layout()
+        self.ensure_evidence_layout()?;
+        self.ensure_local_layout()
     }
 
     fn with_lock<T>(
@@ -1763,13 +1793,26 @@ impl ContractOwnerRepositoryV1 {
         let _process = OWNER_PROCESS_LOCK
             .lock()
             .map_err(|_| durability("process lock is uncertain"))?;
-        self.repository_root
-            .create_directories(".handbook/state/locks")
-            .map_err(map_durability)?;
-        let file = self
-            .repository_root
-            .acquire_exclusive_lock(LOCK_RELATIVE_PATH)
-            .map_err(map_durability)?;
+        // The initial owner namespace may have no parents yet. This probe only
+        // selects initialization versus an existing lock; all opens/writes below
+        // remain on the retained root and reject substituted ancestry.
+        let local_exists = self
+            .repo_root
+            .join(CONTRACT_OWNER_REPOSITORY_RELATIVE_ROOT_V1)
+            .try_exists()
+            .map_err(|_| unsafe_fs("owner namespace cannot be observed"))?;
+        let file = if local_exists {
+            self.repository_root
+                .acquire_existing_exclusive_lock_v1(LOCK_RELATIVE_PATH)
+                .map_err(map_durability)?
+        } else {
+            self.repository_root
+                .create_directories(".handbook/state/locks")
+                .map_err(map_durability)?;
+            self.repository_root
+                .acquire_exclusive_lock(LOCK_RELATIVE_PATH)
+                .map_err(map_durability)?
+        };
         let result = action(self);
         let release = file.release().map_err(map_durability);
         match (result, release) {
@@ -2224,6 +2267,12 @@ impl TransactionIntent {
         })
     }
     fn validate(&self) -> Result<(), ContractOwnerRepositoryErrorV1> {
+        if matches!(
+            self.operation.as_str(),
+            "contract.local-definition.append" | "contract.local-lifecycle.transition"
+        ) {
+            return local_repository::validate_local_intent_v2(self);
+        }
         if self.schema_ref != "handbook.contract-owner-transaction-intent@1.0.0"
             || !matches!(
                 self.operation.as_str(),

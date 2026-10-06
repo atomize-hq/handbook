@@ -158,6 +158,88 @@ pub(crate) struct RetainedRepositoryTreeGuardV1<'root> {
     files: Vec<RetainedTreeFile>,
 }
 
+/// Pins exactly the supplied immutable source files on the retained root.
+pub struct RepositoryExactFilesCheckpointV1<'root> {
+    inner: RetainedRepositoryTreeGuardV1<'root>,
+}
+
+impl RepositoryExactFilesCheckpointV1<'_> {
+    pub fn validate(&self) -> Result<(), RepositoryDurabilityErrorV1> {
+        self.inner.validate()
+    }
+    /// Metadata for binding actual pinned reads to a consuming admission.
+    /// These names alone supply no authority or currentness proof.
+    pub fn pinned_file_paths(&self) -> impl Iterator<Item = &str> {
+        self.inner.files.iter().map(|file| file.relative.as_str())
+    }
+    /// Requires each selected path to belong to this current native checkpoint
+    /// on the consuming root. The owning module still checks semantic content.
+    pub fn require_file_membership(
+        &self,
+        root: &RetainedRepositoryRootV1,
+        required: &[&str],
+    ) -> Result<(), RepositoryDurabilityErrorV1> {
+        self.validate()?;
+        if !self.inner.root.same_physical_root(root) {
+            return Err(unsafe_fs(
+                "source checkpoint belongs to another physical root",
+            ));
+        }
+        if required.is_empty() || required.len() > 256 {
+            return Err(bound(
+                "required source path set is outside checkpoint bounds",
+            ));
+        }
+        let mut observed = std::collections::BTreeSet::new();
+        for relative in required {
+            let path = ValidatedRelativePath::parse(relative, false)?;
+            if !observed.insert(path.as_str().to_owned())
+                || !self
+                    .inner
+                    .files
+                    .iter()
+                    .any(|file| file.relative == path.as_str())
+            {
+                return Err(unsafe_fs(
+                    "required native source file is not uniquely pinned",
+                ));
+            }
+        }
+        self.validate()
+    }
+    /// Requires these exact bytes to be one of this checkpoint's pinned native
+    /// files on the consuming root. Unrelated files cannot supply source proof.
+    pub fn require_exact_file(
+        &self,
+        root: &RetainedRepositoryRootV1,
+        relative: &str,
+        expected: &[u8],
+    ) -> Result<(), RepositoryDurabilityErrorV1> {
+        self.validate()?;
+        if !self.inner.root.same_physical_root(root) {
+            return Err(unsafe_fs(
+                "source checkpoint belongs to another physical root",
+            ));
+        }
+        let path = ValidatedRelativePath::parse(relative, false)?;
+        let retained = self
+            .inner
+            .files
+            .iter()
+            .find(|file| file.relative == path.as_str())
+            .ok_or_else(|| unsafe_fs("required native source file is not pinned"))?;
+        let expected_fingerprint: [u8; 32] = Sha256::digest(expected).into();
+        if retained.snapshot.length != expected.len() as u64
+            || retained.content_fingerprint != expected_fingerprint
+        {
+            return Err(unsafe_fs(
+                "pinned native source bytes differ from consuming content",
+            ));
+        }
+        self.validate()
+    }
+}
+
 impl RetainedRepositoryTreeGuardV1<'_> {
     pub(crate) fn validate(&self) -> Result<(), RepositoryDurabilityErrorV1> {
         self.root.require_stable_path_epoch()?;
@@ -372,6 +454,32 @@ fn native_lock_physical_fingerprint_v1(
 }
 
 impl RetainedRepositoryRootV1 {
+    /// Read-only lock identity observation. Callers retain their consuming owner
+    /// lock; this method neither acquires a second lock nor creates missing state.
+    pub fn existing_lock_physical_fingerprint_v1(
+        &self,
+        relative: &str,
+    ) -> Result<String, RepositoryDurabilityErrorV1> {
+        self.require_stable_path_epoch()?;
+        let relative = ValidatedRelativePath::parse(relative, false)?;
+        let file = self
+            .open_regular_optional(&relative, false)?
+            .ok_or_else(|| unsafe_fs("required existing lock is absent"))?;
+        let snapshot = regular_file_snapshot(&file)?;
+        let fingerprint = native_lock_physical_fingerprint_v1(&snapshot)?;
+        let current = self
+            .open_regular_optional(&relative, false)?
+            .ok_or_else(|| unsafe_fs("existing lock disappeared"))?;
+        if regular_file_snapshot(&file)? != snapshot || regular_file_snapshot(&current)? != snapshot
+        {
+            return Err(unsafe_fs(
+                "existing lock changed during retained observation",
+            ));
+        }
+        self.require_stable_path_epoch()?;
+        Ok(fingerprint)
+    }
+
     /// Read-only physical binding for native initialization receipt consumers.
     /// This intentionally takes no lock; the caller retains its owner guards.
     pub(crate) fn initialization_lock_physical_fingerprint_v1(
@@ -643,6 +751,80 @@ impl RetainedRepositoryRootV1 {
         };
         guard.validate()?;
         Ok(guard)
+    }
+
+    pub(crate) fn retain_local_check_authority_tree_guard(
+        &self,
+    ) -> Result<RetainedRepositoryTreeGuardV1<'_>, RepositoryDurabilityErrorV1> {
+        self.require_stable_path_epoch()?;
+        let (directories, files) = self.retain_selected_tree(
+            &[
+                ".handbook/local-charter/v1",
+                ".handbook/local-operating/v1",
+                ".handbook/local-operating/local-check-v1",
+                ".handbook/admission-governance/v2",
+            ],
+            &[
+                ".handbook/project/charter.yaml",
+                ".handbook/repository-identity.v1",
+                ".handbook-initialization.v1.json",
+                ".handbook-initialization-receipt.v1.json",
+            ],
+            4096,
+        )?;
+        let guard = RetainedRepositoryTreeGuardV1 {
+            root: self,
+            directories,
+            files,
+        };
+        guard.validate()?;
+        Ok(guard)
+    }
+
+    /// Read-only: creates no files, locks, or recovery state.
+    pub fn retain_exact_files_checkpoint_v1(
+        &self,
+        paths: &[&str],
+    ) -> Result<RepositoryExactFilesCheckpointV1<'_>, RepositoryDurabilityErrorV1> {
+        if paths.is_empty() || paths.len() > 256 || paths.windows(2).any(|p| p[0] >= p[1]) {
+            return Err(bound(
+                "source files must be nonempty, sorted, unique and bounded",
+            ));
+        }
+        self.require_stable_path_epoch()?;
+        let mut files = Vec::new();
+        let mut total = 0_u64;
+        for path in paths {
+            let relative = ValidatedRelativePath::parse(path, false)?;
+            let file = self
+                .open_regular_optional(&relative, false)?
+                .ok_or_else(|| not_found("required immutable source file is absent"))?;
+            let snapshot = regular_file_snapshot(&file)?;
+            total = total
+                .checked_add(snapshot.length)
+                .ok_or_else(|| bound("source byte population overflow"))?;
+            if total > MAX_RETAINED_TREE_BYTES {
+                return Err(bound(
+                    "source file population exceeds the retained byte bound",
+                ));
+            }
+            let content_fingerprint = retained_file_fingerprint(&file, snapshot.length)?;
+            files.push(RetainedTreeFile {
+                relative: relative.as_str().to_owned(),
+                file,
+                snapshot,
+                content_fingerprint,
+            });
+        }
+        let checkpoint = RepositoryExactFilesCheckpointV1 {
+            inner: RetainedRepositoryTreeGuardV1 {
+                root: self,
+                directories: Vec::new(),
+                files,
+            },
+        };
+        checkpoint.validate()?;
+        Ok(checkpoint)
     }
 
     fn retain_selected_tree(
@@ -1012,14 +1194,29 @@ impl RetainedRepositoryRootV1 {
                 Err(error) => return Err(error),
             }
         }
+        self.lock_existing(&relative)
+    }
+
+    /// Strict acquisition cannot recreate missing read/consumption lock state.
+    pub fn acquire_existing_exclusive_lock_v1(
+        &self,
+        relative: &str,
+    ) -> Result<RepositoryExclusiveLockV1, RepositoryDurabilityErrorV1> {
+        self.lock_existing(&ValidatedRelativePath::parse(relative, false)?)
+    }
+
+    fn lock_existing(
+        &self,
+        relative: &ValidatedRelativePath,
+    ) -> Result<RepositoryExclusiveLockV1, RepositoryDurabilityErrorV1> {
         let file = self
-            .open_regular_optional(&relative, true)?
+            .open_regular_optional(relative, true)?
             .ok_or_else(|| not_found("lock file disappeared before acquisition"))?;
         file.lock()
             .map_err(|_| lock_unavailable("exclusive repository lock acquisition failed"))?;
         let snapshot = regular_file_snapshot(&file)?;
         #[cfg(windows)]
-        let parent_guards = self.pin_windows_parent(&relative)?;
+        let parent_guards = self.pin_windows_parent(relative)?;
         Ok(RepositoryExclusiveLockV1 {
             file: Some(file),
             snapshot,

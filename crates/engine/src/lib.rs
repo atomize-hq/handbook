@@ -292,8 +292,8 @@ pub use project_context_artifact::{
 };
 pub use repository_durability::{
     RepositoryDirectoryEntryKindV1, RepositoryDirectoryEntryV1, RepositoryDurabilityErrorKindV1,
-    RepositoryDurabilityErrorV1, RepositoryExclusiveLockV1, RepositoryReadV1,
-    RetainedRepositoryRootV1,
+    RepositoryDurabilityErrorV1, RepositoryExactFilesCheckpointV1, RepositoryExclusiveLockV1,
+    RepositoryReadV1, RetainedRepositoryRootV1,
 };
 pub use repository_initialization::{
     RepositoryInitializationClaimV1, RepositoryInitializationDispositionV1,

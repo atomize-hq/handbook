@@ -8,12 +8,15 @@ use handbook_contracts::{
     EvidenceCandidateInputV1, EvidenceCandidateSourceErrorKindV1, EvidenceCandidateSourceErrorV1,
     EvidenceCandidateSourceV1, EvidenceCandidateV1, EvidenceClaimExclusionInputV1,
     EvidenceExclusionKindV1, EvidenceSourceBindingInputV1, ExactBindingV1, FingerprintV1,
+    NativeDockCandidateObservationV1 as StoredCandidateObservationV1,
     ResolvedEvidenceCandidateObservationInputV1, ResolvedEvidenceCandidateObservationV1,
 };
 use handbook_engine::{
+    EvidenceSourceAdmissionErrorKindV1, EvidenceSourceAdmissionErrorV1,
     EvidenceSourceAdmissionServiceV1, NativeAuthenticatorPortV1, RepositoryDirectoryEntryKindV1,
     RepositoryDurabilityErrorKindV1, RepositoryDurabilityErrorV1, RepositoryExclusiveLockV1,
-    RepositoryReadV1, RetainedRepositoryRootV1,
+    RepositoryReadV1, RetainedRepositoryRootV1, SourceCurrentnessObservationV1,
+    SourceCurrentnessPortV1, SourceCurrentnessRequestV1,
 };
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -127,19 +130,6 @@ struct RootPreimage<'a> {
 
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
-struct StoredCandidateObservationV1 {
-    schema_ref: String,
-    candidate: ContentAddressedBindingV1,
-    candidate_jcs: String,
-    evaluation_run_jcs: String,
-    producer: ContentAddressedBindingV1,
-    request_record: ContentAddressedBindingV1,
-    execution_record: ContentAddressedBindingV1,
-    producer_resolution_ceiling: Option<handbook_contracts::ResolutionEnvelopeV1>,
-}
-
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-#[serde(deny_unknown_fields)]
 struct ReplayLedgerV1 {
     schema_ref: String,
     key_fingerprint: FingerprintV1,
@@ -197,7 +187,13 @@ struct CandidateBodyBindingsV1 {
 }
 
 pub struct DockOperationalStoreV1 {
-    repository_root: RetainedRepositoryRootV1,
+    pub(crate) repository_root: RetainedRepositoryRootV1,
+}
+
+pub(crate) struct LocalCandidateStoreObservationV2 {
+    pub(crate) stored: StoredCandidateObservationV1,
+    pub(crate) request: DockProcessRequestV1,
+    pub(crate) exact_paths: Vec<String>,
 }
 
 pub(crate) enum DockExecutionStartV1<'store> {
@@ -276,6 +272,19 @@ impl DockExecutionLeaseV1<'_> {
 }
 
 impl DockOperationalStoreV1 {
+    pub(crate) fn open_read_only(repo_root: impl AsRef<Path>) -> Result<Self, DockStoreErrorV1> {
+        let repository_root =
+            RetainedRepositoryRootV1::open_exact(repo_root).map_err(map_repository_error)?;
+        let store = Self { repository_root };
+        let lock = store
+            .repository_root
+            .acquire_existing_exclusive_lock_v1(LOCK_RELATIVE)
+            .map_err(map_repository_error)?;
+        store.validate_inventory_locked()?;
+        lock.release().map_err(map_repository_error)?;
+        Ok(store)
+    }
+
     pub fn open(repo_root: impl AsRef<Path>) -> Result<Self, DockStoreErrorV1> {
         let repository_root =
             RetainedRepositoryRootV1::open_exact(repo_root).map_err(map_repository_error)?;
@@ -998,6 +1007,107 @@ impl DockOperationalStoreV1 {
         Ok(stored)
     }
 
+    pub(crate) fn read_local_candidate_v2(
+        &self,
+        candidate: &ContentAddressedBindingV1,
+    ) -> Result<LocalCandidateStoreObservationV2, DockStoreErrorV1> {
+        let lock = self
+            .repository_root
+            .acquire_existing_exclusive_lock_v1(LOCK_RELATIVE)
+            .map_err(map_repository_error)?;
+        self.validate_inventory_locked()?;
+        let candidate_relative = candidate_path(candidate.fingerprint());
+        let stored: StoredCandidateObservationV1 =
+            parse_canonical(&self.read_required(&candidate_relative, MAX_RECORD_BYTES)?)?;
+        validate_stored_candidate(&stored)?;
+        if &stored.candidate != candidate {
+            return Err(substituted("candidate observation binding is substituted"));
+        }
+        let mut ledgers = Vec::new();
+        for entry in self
+            .repository_root
+            .list_directory_bounded(REPLAYS, MAX_RECORDS)
+            .map_err(map_repository_error)?
+        {
+            let relative = format!("{REPLAYS}/{}", entry.name());
+            let ledger: ReplayLedgerV1 =
+                parse_canonical(&self.read_required(&relative, MAX_RECORD_BYTES)?)?;
+            validate_ledger(&ledger)?;
+            if ledger.candidates.contains(candidate) {
+                ledgers.push((ledger, relative));
+            }
+        }
+        if ledgers.len() != 1 {
+            return Err(ambiguous(
+                "candidate must have one exact completed native transaction",
+            ));
+        }
+        let (ledger, replay_relative) = ledgers.pop().unwrap();
+        let request_relative = request_path(ledger.request.fingerprint());
+        let request: DockProcessRequestV1 =
+            parse_canonical(&self.read_required(&request_relative, MAX_RECORD_BYTES)?)?;
+        let execution_relative = execution_path(ledger.execution.fingerprint());
+        let execution: DockExecutionRecordV1 =
+            parse_canonical(&self.read_required(&execution_relative, MAX_RECORD_BYTES)?)?;
+        let result_binding = ledger
+            .result
+            .as_ref()
+            .ok_or_else(|| substituted("candidate native result is absent"))?;
+        let result_relative = result_path(result_binding.fingerprint());
+        let result: DockProcessResultV1 =
+            parse_canonical(&self.read_required(&result_relative, MAX_RECORD_BYTES)?)?;
+        if request.binding().map_err(map_dock_error)? != ledger.request
+            || execution.binding().map_err(map_dock_error)? != ledger.execution
+            || result.binding().map_err(map_dock_error)? != *result_binding
+            || stored.request_record != ledger.request
+            || stored.execution_record != ledger.execution
+        {
+            return Err(substituted(
+                "candidate native request or execution closure is substituted",
+            ));
+        }
+        // Reuse the actual writer's closed derivation to check the retained
+        // candidate, input roles, full content and result against one another.
+        let expected = self.prepare_commit(
+            &request,
+            Some(&result),
+            &execution,
+            ledger.evaluation_run_jcs.as_bytes(),
+            ledger.key_fingerprint.clone(),
+            ledger.idempotency_request_fingerprint.clone(),
+        )?;
+        if expected.ledger != ledger
+            || expected
+                .records
+                .iter()
+                .find(|(path, _)| path == &candidate_relative)
+                .map(|(_, bytes)| bytes.as_slice())
+                != Some(canonical_bytes(&stored).map_err(map_dock_error)?.as_slice())
+        {
+            return Err(substituted(
+                "candidate is not the exact native completed input derivation",
+            ));
+        }
+        let transaction = transaction_root(&ledger.key_fingerprint);
+        let mut exact_paths = vec![
+            LOCK_RELATIVE.into(),
+            candidate_relative,
+            request_relative,
+            execution_relative,
+            result_relative,
+            replay_relative,
+            format!("{transaction}/intent.json"),
+            format!("{transaction}/committed.json"),
+        ];
+        exact_paths.sort();
+        lock.release().map_err(map_repository_error)?;
+        Ok(LocalCandidateStoreObservationV2 {
+            stored,
+            request,
+            exact_paths,
+        })
+    }
+
     fn read_optional(
         &self,
         relative: &str,
@@ -1016,6 +1126,90 @@ impl DockOperationalStoreV1 {
     fn read_required(&self, relative: &str, bound: usize) -> Result<Vec<u8>, DockStoreErrorV1> {
         self.read_optional(relative, bound)?
             .ok_or_else(|| ambiguous("required operational record is absent"))
+    }
+}
+
+/// Currentness of immutable native Dock captures. The expected source identity
+/// is checked against the retained request and actual role content each time.
+/// This reader neither initializes a missing store nor recovers pending writes.
+pub struct DockCapturedInputCurrentnessV1 {
+    store: DockOperationalStoreV1,
+}
+
+impl DockCapturedInputCurrentnessV1 {
+    pub fn open(repo_root: impl AsRef<Path>) -> Result<Self, DockStoreErrorV1> {
+        Ok(Self {
+            store: DockOperationalStoreV1::open_read_only(repo_root)?,
+        })
+    }
+}
+
+impl SourceCurrentnessPortV1 for DockCapturedInputCurrentnessV1 {
+    fn observe_current(
+        &mut self,
+        expected: &SourceCurrentnessRequestV1,
+    ) -> Result<SourceCurrentnessObservationV1, EvidenceSourceAdmissionErrorV1> {
+        let checked = (|| -> Result<SourceCurrentnessObservationV1, DockStoreErrorV1> {
+            let (request_ref, role) = expected
+                .source_ref()
+                .split_once("#input/")
+                .ok_or_else(|| invalid("source is not a native retained input"))?;
+            if role.is_empty() || role.contains('#') || role.contains('/') {
+                return Err(invalid("retained input role is malformed"));
+            }
+            let (_, hex) = request_ref
+                .rsplit_once("#request/")
+                .ok_or_else(|| invalid("retained request reference is malformed"))?;
+            if !is_hex(hex) {
+                return Err(invalid("retained request digest is malformed"));
+            }
+            let fingerprint = FingerprintV1::parse(&format!("sha256:{hex}"))
+                .map_err(|_| invalid("retained request fingerprint is malformed"))?;
+            let lock = self
+                .store
+                .repository_root
+                .acquire_existing_exclusive_lock_v1(LOCK_RELATIVE)
+                .map_err(map_repository_error)?;
+            self.store.validate_inventory_locked()?;
+            let bytes = self
+                .store
+                .read_required(&request_path(&fingerprint), MAX_RECORD_BYTES)?;
+            let request: DockProcessRequestV1 = parse_canonical(&bytes)?;
+            if request.request_ref() != request_ref || request.request_fingerprint() != &fingerprint
+            {
+                return Err(substituted("retained request identity is substituted"));
+            }
+            let input = request
+                .inputs()
+                .iter()
+                .find(|input| input.role().as_str() == role)
+                .ok_or_else(|| missing("retained input role is absent"))?;
+            let actual = canonical_fingerprint(input.content()).map_err(map_dock_error)?;
+            if &actual != input.content_fingerprint()
+                || actual.as_str() != expected.source_fingerprint()
+                || actual.as_str() != expected.revision()
+            {
+                return Err(substituted(
+                    "retained input content or revision is substituted",
+                ));
+            }
+            let observed_at = handbook_contracts::SemanticTimeV1::owner_observation_now_v1()
+                .map_err(|_| invalid("native source observation clock is unavailable"))?;
+            let result = SourceCurrentnessObservationV1::new(
+                expected,
+                request.request_ref(),
+                request.request_fingerprint().as_str(),
+                observed_at.as_str(),
+            )
+            .map_err(|_| invalid("retained source observation is invalid"))?;
+            lock.release().map_err(map_repository_error)?;
+            Ok(result)
+        })();
+        checked.map_err(|_| {
+            EvidenceSourceAdmissionErrorV1::repository_observation_refusal_v1(
+                EvidenceSourceAdmissionErrorKindV1::ResolutionRefused,
+            )
+        })
     }
 }
 
@@ -1398,7 +1592,7 @@ fn map_repository_error(error: RepositoryDurabilityErrorV1) -> DockStoreErrorV1 
     }
 }
 
-fn map_candidate_store_error(error: DockStoreErrorV1) -> EvidenceCandidateSourceErrorV1 {
+pub(crate) fn map_candidate_store_error(error: DockStoreErrorV1) -> EvidenceCandidateSourceErrorV1 {
     let kind = match error.kind {
         DockStoreErrorKindV1::BoundExceeded => EvidenceCandidateSourceErrorKindV1::OverLimit,
         DockStoreErrorKindV1::RecordSubstituted => {

@@ -2,6 +2,7 @@ use crate::evaluation_identity::{
     AdmittedEvidenceWitnessV1, EvidenceSourceAuthorityObservationV1,
     SourceCurrentnessObservationV1 as ContractSourceCurrentnessObservationV1,
 };
+use crate::evidence_candidate_source::EvidenceCandidateAuthorityV1;
 use crate::{
     evidence_admission_policy_binding_v1, ContentAddressedBindingV1, ContractEvaluationRunV1,
     ContractOwnerRepositoryV1, EvaluationPolicyKindV1, EvaluationPolicyRegistryV1,
@@ -11,8 +12,8 @@ use crate::{
 };
 use handbook_engine::{
     effective_resolution_minimum_v1, resolution_meets_minimum_v1, ContextResolutionStackDefinition,
-    EvidenceSourceAdmissionErrorKindV1, EvidenceSourceAdmissionV1, ResolutionObservationV1,
-    SourceCurrentnessObservationV1, SourceCurrentnessPortV1, SourceCurrentnessRequestV1,
+    EvidenceSourceAdmissionErrorKindV1, ResolutionObservationV1, SourceCurrentnessObservationV1,
+    SourceCurrentnessPortV1, SourceCurrentnessRequestV1,
 };
 use std::error::Error;
 use std::fmt;
@@ -116,7 +117,12 @@ impl PreparedEvidenceAppendV1 {
         &self,
         port: &mut C,
     ) -> Result<(), EvidenceCandidateAdmissionErrorV1> {
-        let final_sources = observe_sources(&self.observation, port, &self.admission_time)?;
+        let final_sources = observe_sources(
+            &self.observation,
+            port,
+            &self.admission_time,
+            self.authority.observation.is_local(),
+        )?;
         if !same_source_heads(&self.initial_sources, &final_sources) {
             return Err(refusal(
                 EvidenceCandidateAdmissionErrorKindV1::StaleSource,
@@ -144,43 +150,53 @@ impl PreparedEvidenceAppendV1 {
         }
         Ok(())
     }
+
+    pub(crate) fn recheck_local_commit<C: SourceCurrentnessPortV1>(
+        &self,
+        port: &mut C,
+        policy_registry: &EvaluationPolicyRegistryV1,
+    ) -> Result<(), EvidenceCandidateAdmissionErrorV1> {
+        self.recheck_source_currentness(port)?;
+        let current_time = SemanticTimeV1::owner_now()
+            .map_err(|_| clock("native local commit clock is unavailable"))?;
+        validate_freshness(&self.observation, &self.run, policy_registry, &current_time)
+    }
 }
 
 #[derive(Clone)]
 struct EvidenceAuthorityCheckpointV1 {
-    actor_ref: String,
-    authority_ref: String,
-    authority_fingerprint: String,
-    registry_state_ref: String,
-    registry_state_fingerprint: String,
-    registry_head_ref: String,
-    registry_head_fingerprint: String,
-    repository_identity_fingerprint: String,
+    observation: EvidenceSourceAuthorityObservationV1,
+    observed_at: SemanticTimeV1,
+    repository_identity_fingerprint: Option<String>,
 }
 
 impl EvidenceAuthorityCheckpointV1 {
-    fn from_admission(admission: &EvidenceSourceAdmissionV1<'_>) -> Self {
-        Self {
-            actor_ref: admission.actor_ref().to_owned(),
-            authority_ref: admission.authority_ref().to_owned(),
-            authority_fingerprint: admission.authority_fingerprint().to_owned(),
-            registry_state_ref: admission.registry_state_ref().to_owned(),
-            registry_state_fingerprint: admission.registry_state_fingerprint().to_owned(),
-            registry_head_ref: admission.registry_head_ref().to_owned(),
-            registry_head_fingerprint: admission.registry_head_fingerprint().to_owned(),
-            repository_identity_fingerprint: admission.repository_identity_fingerprint().to_owned(),
-        }
+    fn from_admission(
+        admission: &EvidenceCandidateAuthorityV1<'_>,
+        observed_at: SemanticTimeV1,
+    ) -> Result<Self, EvidenceCandidateAdmissionErrorV1> {
+        Ok(Self {
+            observation: authority_observation(admission, observed_at.clone())?,
+            observed_at,
+            repository_identity_fingerprint: match admission {
+                EvidenceCandidateAuthorityV1::Credential(value) => {
+                    Some(value.repository_identity_fingerprint().into())
+                }
+                EvidenceCandidateAuthorityV1::Local { .. } => None,
+            },
+        })
     }
 
-    fn matches(&self, admission: &EvidenceSourceAdmissionV1<'_>) -> bool {
-        self.actor_ref == admission.actor_ref()
-            && self.authority_ref == admission.authority_ref()
-            && self.authority_fingerprint == admission.authority_fingerprint()
-            && self.registry_state_ref == admission.registry_state_ref()
-            && self.registry_state_fingerprint == admission.registry_state_fingerprint()
-            && self.registry_head_ref == admission.registry_head_ref()
-            && self.registry_head_fingerprint == admission.registry_head_fingerprint()
-            && self.repository_identity_fingerprint == admission.repository_identity_fingerprint()
+    fn matches(&self, admission: &EvidenceCandidateAuthorityV1<'_>) -> bool {
+        let repository_identity = match admission {
+            EvidenceCandidateAuthorityV1::Credential(value) => {
+                Some(value.repository_identity_fingerprint())
+            }
+            EvidenceCandidateAuthorityV1::Local { .. } => None,
+        };
+        self.repository_identity_fingerprint.as_deref() == repository_identity
+            && authority_observation(admission, self.observed_at.clone())
+                .is_ok_and(|value| value == self.observation)
     }
 }
 
@@ -225,9 +241,15 @@ where
                     )
                 })?;
 
-            let admission_time = SemanticTimeV1::parse(resolved.admission().semantic_time_utc())
-                .map_err(|_| clock("owner semantic time is indeterminate"))?;
-            let initial_sources = observe_sources(body, source_currentness, &admission_time)?;
+            let mut admission_time =
+                SemanticTimeV1::parse(resolved.admission().semantic_time_utc())
+                    .map_err(|_| clock("owner semantic time is indeterminate"))?;
+            let initial_sources = observe_sources(
+                body,
+                source_currentness,
+                &admission_time,
+                resolved.admission().is_local(),
+            )?;
             validate_freshness(body, &run, policy_registry, &admission_time)?;
             let effective_resolution = validate_resolution(
                 body,
@@ -251,12 +273,23 @@ where
                     "evaluation lifecycle changed before evidence admission",
                 ));
             }
-            let final_sources = observe_sources(body, source_currentness, &admission_time)?;
+            let final_sources = observe_sources(
+                body,
+                source_currentness,
+                &admission_time,
+                resolved.admission().is_local(),
+            )?;
             if !same_source_heads(&initial_sources, &final_sources) {
                 return Err(refusal(
                     EvidenceCandidateAdmissionErrorKindV1::StaleSource,
                     "source registry head changed before evidence admission",
                 ));
+            }
+            if resolved.admission().is_local() {
+                admission_time = SemanticTimeV1::owner_now()
+                    .map_err(|_| clock("native local admission clock is unavailable"))?;
+                validate_freshness(body, &run, policy_registry, &admission_time)?;
+                resolved.validate_current().map_err(map_source_error)?;
             }
 
             let authority = authority_observation(resolved.admission(), admission_time.clone())?;
@@ -278,8 +311,12 @@ where
                     .map(|observed| observed.contract.clone())
                     .collect(),
                 authority,
-                evidence_admission_policy_binding_v1()
-                    .map_err(|_| internal("admission policy is unavailable"))?,
+                (if resolved.admission().is_local() {
+                    crate::local_evidence_admission_policy_binding_v2()
+                } else {
+                    evidence_admission_policy_binding_v1()
+                })
+                .map_err(|_| internal("admission policy is unavailable"))?,
                 run.freshness_policies().to_vec(),
                 run.stability_policies().to_vec(),
                 admitted_candidate,
@@ -297,8 +334,11 @@ where
                 producer_resolution_ceiling: resolved.producer_resolution_ceiling().cloned(),
                 observation: body.clone(),
                 initial_sources,
+                authority: EvidenceAuthorityCheckpointV1::from_admission(
+                    resolved.admission(),
+                    admission_time.clone(),
+                )?,
                 admission_time,
-                authority: EvidenceAuthorityCheckpointV1::from_admission(resolved.admission()),
             })
         })
         .map_err(map_source_error)?
@@ -427,6 +467,7 @@ fn observe_sources<C: SourceCurrentnessPortV1>(
     body: &crate::evaluation_identity::EvidenceCandidateBodyV1,
     port: &mut C,
     admission_time: &SemanticTimeV1,
+    local: bool,
 ) -> Result<Vec<AdmittedSourceCurrentness>, EvidenceCandidateAdmissionErrorV1> {
     body.sources()
         .iter()
@@ -440,7 +481,13 @@ fn observe_sources<C: SourceCurrentnessPortV1>(
             let observed = port.observe_current(&request).map_err(map_engine_error)?;
             let observed_at = SemanticTimeV1::parse(observed.observed_at_utc())
                 .map_err(|_| clock("source currentness time is indeterminate"))?;
-            require_not_future(&observed_at, admission_time)?;
+            let current_owner_time = if local {
+                SemanticTimeV1::owner_now()
+                    .map_err(|_| clock("native source observation clock is unavailable"))?
+            } else {
+                admission_time.clone()
+            };
+            require_not_future(&observed_at, &current_owner_time)?;
             let current_head = ContentAddressedBindingV1::new(
                 observed.current_head_ref(),
                 FingerprintV1::parse(observed.current_head_fingerprint())
@@ -591,7 +638,7 @@ fn resolution_observation(
     .map_err(map_engine_error)
 }
 
-fn engine_resolution_values(
+pub(crate) fn engine_resolution_values(
     values: [&StableIdV1; 6],
 ) -> Result<[String; 6], EvidenceCandidateAdmissionErrorV1> {
     const PREFIXES: [&str; 6] = [
@@ -640,10 +687,31 @@ fn contract_resolution_values(
         .map_err(|_| internal("effective Resolution is incomplete"))
 }
 
-fn authority_observation(
-    admission: &EvidenceSourceAdmissionV1<'_>,
+pub(crate) fn authority_observation(
+    authority: &EvidenceCandidateAuthorityV1<'_>,
     observed_at: SemanticTimeV1,
 ) -> Result<EvidenceSourceAuthorityObservationV1, EvidenceCandidateAdmissionErrorV1> {
+    let admission = match authority {
+        EvidenceCandidateAuthorityV1::Credential(admission) => admission,
+        EvidenceCandidateAuthorityV1::Local {
+            admission,
+            definition,
+            closure,
+            applicability,
+            intent,
+            ..
+        } => {
+            return EvidenceSourceAuthorityObservationV1::local(
+                admission,
+                definition.clone(),
+                closure.clone(),
+                applicability.clone(),
+                *intent,
+                observed_at,
+            )
+            .map_err(|_| substituted("local evidence authority observation is malformed"));
+        }
+    };
     Ok(EvidenceSourceAuthorityObservationV1::new(
         StableIdV1::parse(admission.actor_ref())
             .map_err(|_| substituted("authenticated actor reference is malformed"))?,

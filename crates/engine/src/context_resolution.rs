@@ -74,8 +74,30 @@ macro_rules! validate_target { ($target:expr) => {{ match validate_selector!($ta
 macro_rules! segment_matches { ($pattern:expr, $target:expr) => {{ let pattern=$pattern.as_bytes(); let target=$target.as_bytes(); let (mut p,mut t,mut star,mut mark)=(0usize,0usize,None,0usize); let mut matched=true; while t<target.len() { if p<pattern.len() && pattern[p]==target[t] {p+=1;t+=1;} else if p<pattern.len() && pattern[p]==b'*' {star=Some(p);p+=1;mark=t;} else if let Some(index)=star {p=index+1;mark+=1;t=mark;} else {matched=false;break;} } while p<pattern.len() && pattern[p]==b'*' {p+=1;} matched && p==pattern.len() }} }
 #[rustfmt::skip]
 macro_rules! selector_matches { ($selector:expr, $target:expr) => {{ let pattern=$selector.split('/').collect::<Vec<_>>(); let target=$target.split('/').collect::<Vec<_>>(); if pattern.last()==Some(&"**") { target.len()>=pattern.len()-1 && pattern[..pattern.len()-1].iter().zip(&target).all(|(p,t)| segment_matches!(p,t)) } else { pattern.len()==target.len() && pattern.iter().zip(target).all(|(p,t)| segment_matches!(p,t)) } }} }
+
+pub(crate) fn local_path_within_selector(
+    selector: &str,
+    target: &str,
+) -> Result<bool, ContextResolutionKernelError> {
+    validate_selector!(selector)?;
+    validate_target!(target)?;
+    Ok(selector_matches!(selector, target))
+}
 #[rustfmt::skip]
 macro_rules! selector_contains { ($parent:expr, $child:expr) => {{ let parent=$parent; let child=$child; if parent==child {true} else { let ps=parent.split('/').collect::<Vec<_>>(); let cs=child.split('/').collect::<Vec<_>>(); let pr=ps.last()==Some(&"**"); let cr=cs.last()==Some(&"**"); let pp=if pr {&ps[..ps.len()-1]} else {&ps[..]}; let cp=if cr {&cs[..cs.len()-1]} else {&cs[..]}; !((!pr && pp.len()!=cp.len()) || (pr && pp.len()>cp.len()) || (cr && !pr)) && pp.iter().zip(cp).all(|(p,c)| p==c || (!c.contains('*') && segment_matches!(p,c))) } }} }
+
+/// Owner mutation roots require approved coverage of every possible descendant.
+/// Literal input reads continue to use `local_path_within_selector`.
+pub(crate) fn local_owner_subtree_within_selector(
+    selector: &str,
+    root: &str,
+) -> Result<bool, ContextResolutionKernelError> {
+    validate_selector!(selector)?;
+    validate_target!(root)?;
+    let subtree = format!("{root}/**");
+    validate_selector!(subtree.as_str())?;
+    Ok(selector_contains!(selector, subtree.as_str()))
+}
 #[rustfmt::skip]
 macro_rules! semantic_memory_ref { ($reference:expr) => {{ let reference=$reference; (reference.starts_with("semantic-memory.") || reference.starts_with(".handbook/state/semantic-memory/")) && !reference.contains("..") && !reference.bytes().any(|byte| byte.is_ascii_control()) }} }
 #[rustfmt::skip]

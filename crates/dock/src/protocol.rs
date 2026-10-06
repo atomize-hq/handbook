@@ -4,7 +4,8 @@ use crate::manifest::{require_ref, valid_media_type, validate_strict_ids};
 use crate::{DockErrorV1, DockManifestV1, DockProtocolLimitsV1};
 use handbook_contracts::{
     ContentAddressedBindingV1, EvaluationCaseV1, EvaluationSubjectV1, EvidenceObservationV1,
-    ExactBindingV1, FingerprintV1, ResolutionEnvelopeV1, SemanticTimeV1, StableIdV1,
+    ExactBindingV1, FingerprintV1, MatcherInputValueV1, ResolutionEnvelopeV1, SemanticTimeV1,
+    StableIdV1,
 };
 use serde::de::Error as _;
 use serde::{Deserialize, Deserializer, Serialize};
@@ -176,6 +177,55 @@ impl DockInlineJsonInputV1 {
     }
     pub fn content_fingerprint(&self) -> &FingerprintV1 {
         &self.content_fingerprint
+    }
+
+    /// Bind the captured question to the complete inline input, including its
+    /// offline schema closure, and derive matcher facts from the declared role.
+    pub fn captured_evaluation_subject_v1(&self) -> Result<EvaluationSubjectV1, DockErrorV1> {
+        EvaluationSubjectV1::new(self.captured_binding()?, self.captured_matcher_inputs()?)
+            .map_err(|_| DockErrorV1::InvalidInvariant)
+    }
+
+    pub fn captured_evaluation_case_v1(
+        &self,
+        case_id: StableIdV1,
+    ) -> Result<EvaluationCaseV1, DockErrorV1> {
+        EvaluationCaseV1::new(
+            case_id,
+            self.captured_binding()?,
+            self.captured_matcher_inputs()?,
+        )
+        .map_err(|_| DockErrorV1::InvalidInvariant)
+    }
+
+    fn captured_binding(&self) -> Result<ContentAddressedBindingV1, DockErrorV1> {
+        let captured_fingerprint = canonical_fingerprint(self)?;
+        ContentAddressedBindingV1::new(
+            &format!(
+                "handbook.dock.captured-input@1.0.0#role/{}/{}",
+                self.role.as_str(),
+                fingerprint_hex(&captured_fingerprint)
+            ),
+            captured_fingerprint,
+        )
+        .map_err(|_| DockErrorV1::InvalidInvariant)
+    }
+
+    fn captured_matcher_inputs(&self) -> Result<Vec<MatcherInputValueV1>, DockErrorV1> {
+        [
+            ("dock.input.role", self.role.as_str()),
+            ("dock.input.media-type", self.media_type.as_str()),
+            ("dock.input.schema", self.schema.reference().as_str()),
+        ]
+        .into_iter()
+        .map(|(field, value)| {
+            MatcherInputValueV1::new(
+                StableIdV1::parse(field).map_err(|_| DockErrorV1::InvalidIdentity)?,
+                value,
+            )
+            .map_err(|_| DockErrorV1::InvalidInvariant)
+        })
+        .collect()
     }
 }
 

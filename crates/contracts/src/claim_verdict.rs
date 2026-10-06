@@ -8,9 +8,9 @@ use crate::{
     ContractClaimV1, ContractEvaluationRunV1, ContractOwnerRepositoryErrorKindV1,
     ContractOwnerRepositoryV1, EvaluationPolicyKindV1, EvaluationPolicyRegistryV1,
     EvidenceCandidateSourceErrorKindV1, EvidenceCandidateSourceV1, EvidenceCardinalityV1,
-    EvidenceCaseSelectionV1, EvidenceFreshnessPolicyV1, EvidenceObservationV1, ExactBindingV1,
-    ExactRefV1, FingerprintV1, GateEffectV1, MatcherInputCandidateV1, MatcherValueV1,
-    ResolutionEnvelopeV1, ResolutionMinimumV1, SemanticTimeV1, StableIdV1,
+    EvidenceCaseSelectionV1, EvidenceFreshnessPolicyV1, EvidenceObservationV1, FingerprintV1,
+    GateEffectV1, MatcherInputCandidateV1, MatcherValueV1, ResolutionEnvelopeV1,
+    ResolutionMinimumV1, SemanticTimeV1, StableIdV1,
 };
 use handbook_engine::{
     resolution_meets_minimum_v1, ContextResolutionStackDefinition, ResolutionObservationV1,
@@ -237,45 +237,31 @@ where
                 || resolved.producer() != body.producer()
                 || resolved.request_record() != body.request_record()
                 || resolved.execution_record() != body.execution_record()
-                || resolved.admission().actor_ref()
-                    != entry
-                        .record
-                        .evidence_source_authority()
-                        .actor_ref()
-                        .as_str()
-                || resolved.admission().authority_ref()
-                    != entry
-                        .record
-                        .evidence_source_authority()
-                        .authority()
-                        .reference()
-                        .as_str()
             {
                 return Err(reason_unchecked("verdict.blocked.evidence-substituted"));
             }
-            let authority = EvidenceSourceAuthorityObservationV1::new(
-                StableIdV1::parse(resolved.admission().actor_ref())
-                    .map_err(|_| reason_unchecked("verdict.blocked.authority-malformed"))?,
-                ExactBindingV1::new(
-                    ExactRefV1::parse(resolved.admission().authority_ref())
-                        .map_err(|_| reason_unchecked("verdict.blocked.authority-malformed"))?,
-                    FingerprintV1::parse(resolved.admission().authority_fingerprint())
-                        .map_err(|_| reason_unchecked("verdict.blocked.authority-malformed"))?,
-                ),
-                ContentAddressedBindingV1::new(
-                    resolved.admission().registry_state_ref(),
-                    FingerprintV1::parse(resolved.admission().registry_state_fingerprint())
-                        .map_err(|_| reason_unchecked("verdict.blocked.authority-malformed"))?,
-                )
-                .map_err(|_| reason_unchecked("verdict.blocked.authority-malformed"))?,
-                ContentAddressedBindingV1::new(
-                    resolved.admission().registry_head_ref(),
-                    FingerprintV1::parse(resolved.admission().registry_head_fingerprint())
-                        .map_err(|_| reason_unchecked("verdict.blocked.authority-malformed"))?,
-                )
-                .map_err(|_| reason_unchecked("verdict.blocked.authority-malformed"))?,
-                run.owner_currentness().semantic_time_utc().clone(),
-            );
+            // Local sources remain guarded while the actual retained source
+            // observer runs. A post-callback cache cannot supply this check.
+            if resolved.admission().is_local() {
+                if !sources_are_current(&entry.record, source_currentness) {
+                    return Err(reason_unchecked("verdict.blocked.source-currentness"));
+                }
+                resolved
+                    .validate_current()
+                    .map_err(|_| reason_unchecked("verdict.blocked.source-currentness"))?;
+            }
+            let observed_at = if resolved.admission().is_local() {
+                SemanticTimeV1::owner_observation_now_v1()
+                    .map_err(|_| reason_unchecked("verdict.blocked.authority-malformed"))?
+            } else {
+                run.owner_currentness().semantic_time_utc().clone()
+            };
+            let authority =
+                crate::evidence_admission::authority_observation(resolved.admission(), observed_at)
+                    .map_err(|_| reason_unchecked("verdict.blocked.authority-malformed"))?;
+            if !authority.same_authority_identity(entry.record.evidence_source_authority()) {
+                return Err(reason_unchecked("verdict.blocked.evidence-substituted"));
+            }
             Ok(authority)
         });
 
@@ -284,7 +270,10 @@ where
             Ok(Err(code)) => (None, Some(code)),
             Err(error) => (None, Some(source_error_reason(error.kind()))),
         };
-        if defect.is_none() && !sources_are_current(&entry.record, source_currentness) {
+        if defect.is_none()
+            && !entry.record.evidence_source_authority().is_local()
+            && !sources_are_current(&entry.record, source_currentness)
+        {
             defect = Some(reason_unchecked("verdict.blocked.source-currentness"));
         }
         if let Some(code) = defect.clone() {
@@ -831,10 +820,18 @@ fn validation_fingerprint(value: &RevalidationV1) -> Vec<(String, Option<String>
         .map(|record| {
             (
                 record.binding.reference().to_owned(),
-                record
-                    .authority
-                    .as_ref()
-                    .and_then(|authority| serde_json_canonicalizer::to_string(authority).ok()),
+                record.authority.as_ref().and_then(|authority| {
+                    if authority.is_local() {
+                        // Each native callback observes its own time. The
+                        // repeated check compares all authority and policy
+                        // fields while allowing time to advance normally.
+                        let mut identity = serde_json::to_value(authority).ok()?;
+                        identity.as_object_mut()?.remove("observed_at");
+                        serde_json_canonicalizer::to_string(&identity).ok()
+                    } else {
+                        serde_json_canonicalizer::to_string(authority).ok()
+                    }
+                }),
                 record.defect.as_ref().map(|code| code.as_str().to_owned()),
             )
         })
