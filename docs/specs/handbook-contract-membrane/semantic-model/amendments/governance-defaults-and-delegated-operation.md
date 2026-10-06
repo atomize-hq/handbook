@@ -67,8 +67,12 @@ These are target semantics. Current APIs do not yet deliver this whole workflow.
 The subsequent [approval-authority and assurance clarification](approval-authority-and-assurance.md)
 records the human's 2026-10-05 selection of local-advisory authority for the complete
 independent-local-check workflow and separates five approval dimensions. Read it
-with G1–G5 and the dated inventory below. The selected route is unimplemented;
-this planning clarification does not bypass current credential-required contracts.
+with G1–G5 and the dated inventory below. Current-status cross-reference,
+2026-10-06: [independent-local-check / Packets 1–2](../../slices/independent-local-check/README.md)
+deliver bounded native local setup, definitions/lifecycle and source authority.
+The complete workflow remains unfinished; [Packet 3](../../slices/independent-local-check/packet-3.md)
+is prepared for human implementation review. This does not bypass current
+credential-required contracts or update the dated source inventory below.
 
 ## Bounded source inventory
 

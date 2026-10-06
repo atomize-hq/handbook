@@ -65,8 +65,11 @@ The [approval-authority and assurance clarification](amendments/approval-authori
 records human-selected intent on 2026-10-05: separate approval requirement,
 decision authority, delivery, identity assurance and composition, with local-advisory
 authority for the complete independent-local-check workflow. Its implementation
-is unimplemented and awaits bounded plan approval; existing credential-required
-rules gain no automatic fallback. The dense owner chapters remain unchanged.
+now has a bounded delivered setup/definition/lifecycle/source route through
+[independent-local-check / Packets 1–2](../slices/independent-local-check/README.md).
+The complete evaluation workflow remains unimplemented; [Packet 3](../slices/independent-local-check/packet-3.md)
+is prepared for human implementation review. Existing credential-required rules
+gain no automatic fallback. The dense owner chapters remain unchanged.
 
 ## Read by responsibility
 

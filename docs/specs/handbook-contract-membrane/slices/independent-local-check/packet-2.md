@@ -1,12 +1,16 @@
 # Packet 2: complete local definitions and usable source authority
 
-Status: **implemented locally; awaiting human review**, 2026-10-06.
+Status: **delivered locally at `5bf0f3b`; meta validation/recap complete**, 2026-10-06.
 This is **independent-local-check / Packet 2**. The human reviewed the delivered
 [independent-local-check / Packet 1](packet-1.md) at `fccaf11` and requested this
 planning/status correction. After reviewing this plan and the concrete order-JSON
 example, the human explicitly approved Packet 2 implementation, focused tests,
 causal review and a local commit. This supplies no actual runtime choices.
 The complete [slice](README.md) retains four separately reviewed packets.
+The final fresh causal delta review APPROVED with no unresolved P1/P2; supplied
+meta evidence confirms PACKET_COMPLETE and validation/recap. The human reviewed
+the takeover recap and requested [Packet-3 planning/status updates](packet-3.md).
+This later direction authorizes preparation only, not Packet-3 implementation.
 
 ## Outcome and checkpoint
 
@@ -35,8 +39,9 @@ Stop at this packet's human review boundary after implementation, verification,
 causal review and commit. Packet 3 still owns complete direct requirements,
 Contracts-domain Coordination, Purpose/occurrence/plan, capability/readiness,
 formed Engine Evaluation Authorization, collection/frontier/evidence-set/final
-context and explained truth. Packet 4 owns complete fresh repetition/correction,
-historical result delivery and the minimal returned project-agent decision
+context and explained truth, with supported historical retrieval for that closed
+result. Packet 4 owns complete fresh repetition/correction, use of historical
+delivery in that workflow and the minimal returned project-agent decision
 submission. Exercising existing append/verdict revalidation consumers here proves
 the authority seam; it does not certify those later semantic closures.
 
