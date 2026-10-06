@@ -192,6 +192,12 @@ LLM interview. Supported replacement of shipped choices preserves exact native
 identity, authority and safety mechanisms. The [program coverage map](coverage-and-landing-map.md#impact-and-dependency-coverage)
 records affected dependencies and the limits of current implementation.
 
+For the new local-check capabilities, the [current delivery sequencing](phase-and-slice-map.md#current-delivery-sequencing)
+selects native Rust owners and usable typed SDK composition first. Product
+CLI/installed-skill/agent workflow delivery follows as separately bounded work;
+the eventual intake semantics above do not assert a delivered route. Existing
+generic consumers retain their established capabilities and ownership.
+
 Three byte and identity domains must remain separate:
 
 1. **Instance canonicalization and fingerprints** identify concrete values and

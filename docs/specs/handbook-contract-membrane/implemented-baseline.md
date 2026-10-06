@@ -57,6 +57,15 @@ unsupported. Main confirms its aggregate closeout/recap complete as supplied met
 evidence; no suite was rerun here. The deferral slice's broader Windows owner-suite
 limit remains recorded rather than cleared by focused passes.
 
+The [current delivery sequencing](phase-and-slice-map.md#current-delivery-sequencing)
+distinguishes current native/SDK work from later CLI/installed-skill/agent workflows
+for the new local-check capabilities. Packets 1–2 expose typed SDK routes; the
+ordinary [SDK example](../../../crates/sdk/examples/local_contract_check.rs) is
+consumer proof, not a new Handbook CLI command or installed adaptive-intake workflow.
+Packet 3 plans complete native SDK checking with usage/response/recovery docs;
+it is unimplemented. Delivered generic CLI, root skill and non-UI Tauri capability
+proof remains valid without establishing this new local-check route.
+
 ## Credential verification and the selected local route
 
 Focused source inspection at `6a15ef68ab751383187d91e296bcf187dfda2dc1` on

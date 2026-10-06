@@ -61,6 +61,38 @@ semantic authority -> projections -> SDK -> machine transports
                    -> publication and external consumers
 ```
 
+## Current delivery sequencing
+
+The human selected this delivery boundary on 2026-10-06: the current stage
+focuses on native semantic-owner Rust mechanisms and SDK features, refinements
+and usability. **SDK-first** includes the necessary Engine, Contracts and Dock
+implementation; semantic authority stays with those owners.
+
+[independent-local-check / Packet 3](slices/independent-local-check/packet-3.md)
+plans a **complete native SDK check**: typed preparation, execution/closure,
+recovery and historical reads, usable supplied inputs and structured owner
+outcomes, SDK usage/response/recovery documentation, and ordinary normal-dependency
+consumer examples/tests. It remains unimplemented pending human plan approval.
+Supplied attributable human approvals, actual required review, owner validation,
+authority and result explanation remain requirements of this stage.
+
+Product CLI routes, installed-skill workflow instructions, adaptive agent-led
+intake and a tested end-to-end agent-guided CLI/skill experience for these new
+capabilities are **later, separately bounded consumer-workflow work**, once the
+relevant native/SDK capability is sufficiently complete. The approved eventual
+intake/delegation semantics remain the target. Later human-directed preparation
+selects readiness, adopters and implementation; this is neither an undefined
+requirement to finish the entire SDK nor a new phase/packet allocation. Packet 4
+retains native/SDK repeat, correction and bounded caller-carried authorized
+project-agent decision submission; it does not inherit all deferred consumer work.
+The [coverage carry-forward](coverage-and-landing-map.md#local-check-planning-and-host-integration-carry-forward)
+tracks that work alongside the existing Phase-6 adoption boundaries and hard order.
+
+Delivered CLI, installed root skill, generic discovery and non-UI Tauri consumers,
+and historical phase/slice exits remain intact; they do not establish the new
+local-check route. Product skills here are distinct from the development and
+orchestration skills used to build Handbook; that engineering process continues.
+
 ## Prior-work orientation
 
 | Range | Program status | Orientation |
@@ -281,6 +313,10 @@ grant native authority. Carry the [local-check clarification](../../research/ind
 into the relevant adoption/adapter scope. This preference neither proves an
 external integration nor changes the hard predecessor order below.
 
+The [current delivery sequencing](#current-delivery-sequencing) keeps new local-check
+CLI/skill/agent workflow delivery separately bounded after sufficient native/SDK
+capability. No full Substrate integration prerequisite or Phase-6 reorder follows.
+
 | Slice | Program status | Concise outcome and boundary | Hard predecessor |
 | --- | --- | --- | --- |
 | `HCM-6.1` — Replaceable CLI bridge | Decision required | Establish an isolated version-bound JSON bridge at a real Substrate product seam without moving semantic authority into the adapter. The external adopter remains unselected. | Phase-5 exit and adopter decision |
@@ -311,6 +347,7 @@ SDK/CLI/Tauri parity requirement or skill-family pack/integration catalog.
 | Additional Dock integrations with established tooling | Later explicit authority must select each integration's scope and observation-admission requirements beyond the HCM-5.3/HCM-5.4 repository-owned JSON Schema path; such adapters do not imply arbitrary third-party executable admission or a general hostile-code confinement program |
 | CLI/Tauri membrane routes and framing | HCM-4.3 owns current CLI parity and framing; HCM-4.4 separately owns the Tauri facade after HCM-4.3 closeout. |
 | Publication mechanism, exact versions, bridge, and external adopter | Future publication and consumer authorities with current external proof |
+| CLI, installed-skill and agent workflows for new native/SDK capabilities | Later human-directed consumer-workflow preparation under [current delivery sequencing](#current-delivery-sequencing), with readiness/adopter decisions and scope still to be selected. The [carry-forward](coverage-and-landing-map.md#local-check-planning-and-host-integration-carry-forward) tracks local-check intake, response handling and routing; this is no default assignment to Packet 4 or new phase. |
 
 Use this map to route a future slice author to the proper predecessor and
 decision boundary. Then create separate, explicit slice authority before

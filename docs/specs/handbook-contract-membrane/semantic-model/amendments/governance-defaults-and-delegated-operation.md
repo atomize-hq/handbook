@@ -74,6 +74,12 @@ The complete workflow remains unfinished; [Packet 3](../../slices/independent-lo
 is prepared for human implementation review. This does not bypass current
 credential-required contracts or update the dated source inventory below.
 
+The 2026-10-06 [delivery-sequencing selection](../../phase-and-slice-map.md#current-delivery-sequencing)
+allocates new native/SDK capability and usability to the current stage, and product
+CLI/installed-skill/adaptive-agent workflow delivery to later bounded work. G1–G6's
+approved eventual experience remains intact; this note changes delivery allocation,
+not the approved rules or their dated activation history.
+
 ## Bounded source inventory
 
 This inventory classifies behavior, not filenames. `core`, built-in packaging,

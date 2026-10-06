@@ -21,6 +21,16 @@ Contracts admits evidence, closes the finite collection/accounting population,
 evidence set and final context, then publishes explained immutable truth that can
 be retrieved after process restart.
 
+This is a **complete native SDK check**, under the human's
+[current delivery sequencing](../../phase-and-slice-map.md#current-delivery-sequencing):
+native Rust mechanisms plus usable typed SDK preparation, execution/closure,
+recovery/history, usage and response/recovery documentation, and ordinary
+normal-dependency consumer examples/tests. Inputs carry supplied attributable human
+approvals and actual required review. No new Handbook CLI route, installed-skill
+workflow instructions, adaptive agent-led intake implementation or tested end-to-end
+agent-guided CLI/skill experience is delivered by this packet. Their later allocation
+preserves approved eventual intent without deferring owner checks or explanation.
+
 For illustration, supplied schema S requires `order_id` to be a string and
 `quantity` an integer at least 1. An independently justified, reviewed eligible C
 and complete dependencies precede observation. Captured
@@ -294,10 +304,23 @@ result. Locators carry recovery identity, not authority. Preparation must not la
 lost response uses the original locator, never a guessed rerun. SDK carries supplied
 inputs and exact owner results and may stop at refusals, but owns no completeness,
 readiness, permission, membership or truth decisions. Existing generic operation/
-schema/CLI/Tauri parity is not a new requirement; extend only the direct typed seam
-and its normal-dependency example. Human summary is a deterministic projection of
+schema/CLI/Tauri parity is not a new requirement; extend the direct typed seam,
+its normal-dependency consumer examples/tests and SDK documentation. The example's
+argument handling is ordinary SDK consumer proof, not a new Handbook CLI route.
+Human summary is a deterministic projection of
 canonical explanation, with exact source/intent/applicability and explicit bounded
 meaning; no UI, density catalog or second editable authority is selected.
+
+SDK usage documentation must identify required supplied inputs/approvals and actual
+review, operation order, structured owner outcomes and their provenance, and exact
+response/recovery handling. Explain held/refused outcomes, uncertainty and unavailable
+history with owner reasons and supported next operations; prose or an agent cannot
+invent an owner decision. Demonstrate lost-response recovery using the original
+locator without relaunch, and historical retrieval without new evaluation. Document
+deliberate new evaluation as distinct; Packet 4 retains the complete repeat/correction
+and bounded caller-carried authorized decision-submission workflow. SDK consumer
+examples/tests must exercise these response distinctions alongside positive and
+valid negative checks, using supplied approved inputs and genuine owner outcomes.
 
 Resolve v3 governance before acquiring consuming Engine/Contracts guards; no Setup,
 registry or generic Context Resolution call inside governance locks. Compose the
@@ -328,7 +351,7 @@ symbol edits and run repository-required impact analysis.
 | 2. Engine local evaluation module/terms compatibility and Dock capability observation seam | Independently issue and resolve exact Purpose/Plan/request authorization; wrong selection/role/reach/stack/subject/intent and copied issuance refuse. Native capability/ceiling/availability comparisons distinguish ready, valid limited/unknown hold and formation refusal. No credential fallback or assertion acquisition requirement on this route. |
 | 3. Native Dock full-route linkage, attempt intent/terminal and source admission | Ordinary native validator produces Pass and Violation with exact retained input identities. Prelaunch cancellation/refusal, timeout, process refusal and interrupted delivery are retained correctly; no relaunch on exact replay or unresolved effect. Source admission/append repeatedly revalidates native records and required declared read/write/subtree reach. |
 | 4. Contracts frontier, admission terminals, set, context, pure result/history | Complete deterministic membership and accounting close before final Engine verification/context. Mixed/open/extra/omitted/late/corrupt populations refuse; actual valid unfavorable and empty-evidence insufficiency remain semantic outcomes. One immutable context/result per occurrence; exact historical read survives reopen and later current-basis changes. |
-| 5. SDK typed orchestration, ordinary consumer and documentation | Separate normal-dependency program accepts supplied approved inputs, completes positive and negative checks, reads each exact historical result in another process and displays reasons/provenance. No test-support, private owner seeding, synthetic signing, nonce-as-occurrence, fixture currentness or test-only authority can prove this path. Update only directly affected product/authority documentation. |
+| 5. SDK typed orchestration, ordinary consumer and documentation | Typed preparation/execution/closure/recovery/history expose usable inputs and structured owner outcomes. Separate normal-dependency consumer examples/tests accept supplied approved inputs and actual required review, complete positive and negative checks, read exact history in another process and display reasons/provenance. SDK usage and response/recovery docs cover held/refused/uncertain/unavailable outcomes, original-locator recovery without relaunch and historical read versus new evaluation. No test-support, private owner seeding, synthetic signing, nonce-as-occurrence, fixture currentness or test-only authority can prove this path. Update only directly affected product/authority documentation; new CLI/installed-skill/agent workflow delivery remains later. |
 
 Required integrated discriminators:
 

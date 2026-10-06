@@ -59,7 +59,8 @@ Following the reviewed [independent local-check brief](../../research/independen
 at `fd2b7e3`, the human clarified role-based escalation and authorized preparation
 of the [`independent-local-check` slice](slices/independent-local-check/README.md)
 named in the [phase map](phase-and-slice-map.md). The current plan allocates the
-complete journey to four meaningful packet outcomes.
+native/SDK journey to four meaningful packet outcomes under the
+[current delivery sequencing](phase-and-slice-map.md#current-delivery-sequencing).
 [independent-local-check / Packet 1](slices/independent-local-check/packet-1.md)
 delivered native initial setup/current-D local Engine authority at `fccaf11`, with
 reopen and wider/stale refusal, and was human-reviewed.
@@ -72,9 +73,22 @@ completed evidence. The human reviewed the takeover recap and requested only
 [Packet 3](slices/independent-local-check/packet-3.md) planning/stale-status updates.
 Its first complete real-check plan is prepared for human implementation review;
 no complete check or routed escalation is delivered yet.
-An implementation agent may route an unresolved request to a project-level agent
-with additional context and prior delegated authority; human resolution is
+In the approved eventual experience, an implementation agent may route an
+unresolved request to a project-level agent with additional context and prior
+delegated authority; human resolution is
 conditional under G2. A role or access to context alone grants no permission.
+
+**Later consumer-workflow allocation:** CLI delivery, installed product-skill
+instructions, adaptive intake implementation and tested end-to-end agent guidance
+for the new local-check capabilities remain visibly deferred until their relevant
+native/SDK capability is sufficiently complete. Later human-directed preparation
+owns the concrete readiness/adopter decision, CLI/skill response and recovery
+handling, and workflow proof. No new phase/packet or detailed implementation plan
+is selected here, and none is assigned by default to Packet 4. Packet 3 instead
+owns SDK usage/response/recovery documentation and ordinary consumer examples/tests;
+Packet 4 retains native/SDK repeat/correction and bounded caller-carried authorized
+decision submission. The approved adaptive-intake and conditional-escalation intent
+remains traceable to HR-007, with host transport/automatic routing separately bounded.
 
 The subsequent [approval-authority/assurance clarification](semantic-model/amendments/approval-authority-and-assurance.md)
 records selected local-advisory intent for the complete workflow, with separate

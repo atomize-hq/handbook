@@ -78,3 +78,9 @@ are not selected or prerequisites here. The
 journey. Packets 1–2 retain delivered evidence; only
 [Packet 3](../../slices/independent-local-check/packet-3.md) is now detailed for human
 implementation-plan review. This cross-reference changes no approved owner rule.
+
+The human's 2026-10-06 [delivery-sequencing selection](../../phase-and-slice-map.md#current-delivery-sequencing)
+keeps this stage at native/SDK delivery with supplied attributable approvals and
+actual required review. New CLI/installed-skill/agent workflow delivery is later
+bounded work; the selected local-advisory authority and eventual delegation/intake
+semantics remain unchanged.

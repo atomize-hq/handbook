@@ -71,6 +71,12 @@ The complete evaluation workflow remains unimplemented; [Packet 3](../slices/ind
 is prepared for human implementation review. Existing credential-required rules
 gain no automatic fallback. The dense owner chapters remain unchanged.
 
+The human's 2026-10-06 [current delivery sequencing](../phase-and-slice-map.md#current-delivery-sequencing)
+accepts native/SDK capability and usability first, with supplied attributable approvals
+and actual required review. Product CLI/skill/agent workflow delivery for these new
+capabilities follows in later bounded work. This allocation preserves the approved
+adaptive-intake/delegation target; it changes no semantic rule or approval history.
+
 ## Read by responsibility
 
 | Part | Owns the proposed semantics of | Read first when asking |

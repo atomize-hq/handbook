@@ -112,6 +112,13 @@ implementation review; the complete four-packet slice remains unfinished and
 Packet-3 implementation is not authorized.
 Actual runtime choices retain their separate approval boundary.
 
+The human's 2026-10-06 [delivery-sequencing selection](phase-and-slice-map.md#current-delivery-sequencing)
+keeps the current stage focused on native owners and SDK features/refinement/usability.
+Packet 3 plans a complete native SDK check with usage and response/recovery docs
+and ordinary consumer proof. CLI routes, installed product-skill instructions and
+the agent-guided experience for these new capabilities remain later bounded work;
+the existing delivered consumers and our skill-based engineering process continue.
+
 ## Authority and navigation
 
 Use the source that owns the question:
@@ -124,6 +131,7 @@ Use the source that owns the question:
 | How should JSON, YAML, canonicalization and human views be distinguished going forward? | [`structured-data-format-standard.md`](structured-data-format-standard.md) proposes role-based defaults and named existing exceptions, backed by an archived/current-source audit and reusable-tool inventory. It awaits human review, preserves the explicit Contracts JSON choice, and authorizes no migration or product work. |
 | How do current producer and consumer seams route toward bounded migration owners? | [`seam-crosswalk.md`](seam-crosswalk.md) maps seams and migration ownership. It does not authorize work or establish schedule, status, or completion. |
 | What is the program roadmap status, order, and phase-exit state? | [`phase-and-slice-map.md`](phase-and-slice-map.md) owns roadmap status, ordering, hard predecessors, and exits. It does not authorize slice or packet execution. |
+| What does the current native/SDK stage deliver, and when do new CLI/skill/agent workflows follow? | The phase map's [current delivery sequencing](phase-and-slice-map.md#current-delivery-sequencing) owns the selected allocation; the [coverage carry-forward](coverage-and-landing-map.md#local-check-planning-and-host-integration-carry-forward) tracks later consumer-workflow work. |
 | What behavior is executable and checked? | Crate and repository tests, together with the 37 retained files under [`slices/HCM-2.2`](slices/HCM-2.2/), [`slices/HCM-2.3`](slices/HCM-2.3/), and [`slices/HCM-2.4`](slices/HCM-2.4/). These fixtures are product inputs and test evidence, not control-plane or work authorization. |
 | What is the current program-level authority boundary? | This file. It owns only post-reset authority classification and navigation. |
 | What are the execution units and their lifecycle boundaries? | [`work-unit-lifecycle.md`](work-unit-lifecycle.md) defines slice and packet identity, ownership, completion, human review at the packet or slice delivering an observable or notable change, and genuine workflow stops. |
