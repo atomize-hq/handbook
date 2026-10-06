@@ -4,11 +4,12 @@
 
 **Planning navigation, 2026-10-05:** the human subsequently authorized bounded
 [independent-local-check slice preparation](../specs/handbook-contract-membrane/slices/independent-local-check/README.md).
-That plan now outlines the complete journey and details only its next
-[Packet-1 proposal](../specs/handbook-contract-membrane/slices/independent-local-check/packet-1.md)
-for human implementation approval. The research and dated review below retain
-their original boundaries; they do not certify the new proposal or grant runtime
-authority. No independent local-check implementation is delivered by preparation.
+That plan retains four packets. [independent-local-check / Packet 1](../specs/handbook-contract-membrane/slices/independent-local-check/packet-1.md)
+is delivered at `fccaf11` and human-reviewed; only the next increment,
+[independent-local-check / Packet 2](../specs/handbook-contract-membrane/slices/independent-local-check/packet-2.md),
+is detailed for human implementation approval. The research and dated review below
+retain their original boundaries; they do not certify the new plan or grant
+runtime authority. The complete independent check remains unfinished.
 
 **Subsequent selection, 2026-10-05:** the human's
 [approval-authority/assurance clarification](../specs/handbook-contract-membrane/semantic-model/amendments/approval-authority-and-assurance.md)

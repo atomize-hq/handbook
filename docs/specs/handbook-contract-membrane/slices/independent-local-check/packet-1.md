@@ -1,10 +1,12 @@
 # Packet 1 plan: native initial setup and local operating authority
 
-Status: **local implementation complete; awaiting human Packet-1 review**,
+Status: **local implementation complete at `fccaf11`; human Packet-1 review complete**,
 2026-10-05. This is Packet 1 of [independent-local-check](README.md), not a complete
 independent check. The selected human review boundary is this packet. Return after
-its setup/Engine outcome, verification, causal review and coherent local commit;
-do not continue into Contract establishment or evidence-source integration.
+its setup/Engine outcome, verification, causal review and coherent local commit.
+That return and human review occurred; the separately requested [Packet 2 plan](packet-2.md)
+now awaits implementation approval for Contract establishment/source integration.
+The remaining text retains Packet 1's selected boundary and historical evidence.
 
 The human's [local-advisory mode selection](../../semantic-model/amendments/approval-authority-and-assurance.md)
 is settled intent for this workflow. The human approved this bounded implementation

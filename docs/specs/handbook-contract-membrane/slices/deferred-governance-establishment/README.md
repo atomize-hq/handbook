@@ -1,11 +1,13 @@
 # First governance establishment after deliberate deferral
 
-Status: **Packet 1 implemented locally; at its human review boundary**. The human
+Status: **single-packet slice implemented locally at `9f28f99`; Main-confirmed
+aggregate validation/closeout and human recap complete**. The human
 authorized the one-packet implementation after the reviewed plan at
 `65a3328972faf08d5cd08d09231a964955f845f4` on
 `feat/handbook-contract-membrane-clean`. The bounded implementation decisions and
-executed evidence are recorded in [Packet 1](packet-1.md). This task performs no
-aggregate slice closeout or successor dispatch. Runtime establishment still needs
+executed evidence are recorded in [Packet 1](packet-1.md). The later status
+confirmation is supplied meta evidence; this documentation reconciliation does
+not repeat product tests or aggregate closeout. Runtime establishment still needs
 new approval of its exact configuration and terms.
 
 Descriptive slice identity: `deferred-governance-establishment`; no phase number
@@ -76,7 +78,7 @@ track and its replacement brief remain provisional and outside this plan.
 | --- | --- |
 | Fresh-project v1 establishment | Implemented at `aa793c1`; completed [slice precedent](../admission-governance-establishment/README.md). Preserve its exact fresh-only rule, inputs, identities, stored bytes and outcomes. It does not already implement D→G. |
 | Approved HR-007 / roadmap reconciliation | `31e7746` / `a7e93f2`. Semantic approval supports this shape; neither approves coding or a particular later configuration. |
-| Positive scoped deferral | Plan `0b13576`, implementation `8b1350508920602eb70ffcc6844b0cc4fca3d610`. The supplied meta validation and single-packet aggregate closeout are complete and the human recap was delivered. Correct stale status; do not repeat that closeout. D→G is expressly undelivered. |
+| Positive scoped deferral | Plan `0b13576`, implementation `8b1350508920602eb70ffcc6844b0cc4fca3d610`. The supplied meta validation and single-packet aggregate closeout are complete and the human recap was delivered. This predecessor did not deliver D→G; deferred-governance-establishment / Packet 1 subsequently delivered it at `9f28f99`, with Main-confirmed aggregate closeout/recap. Do not repeat either closeout. |
 | Selected runtime basis and approval | At execution, owner verifies exact committed current never-established D, identity/root/registration, original initialization claim/receipt and complete lifecycle. The later exact configuration and terms need new human approval, honestly retained under the supported authority mode. |
 | Human plan authorization | Required for this Packet-1 increment and its review boundary after `AUTHORITY_READY`. Preparation and technical review cannot supply it. |
 | Exercised durability/setup dependencies | Before transition implementation, inspect and run the focused current owner/Engine/SDK tests below and establish the selected Windows contention baseline. Resolve any demonstrated failure affecting this route within its narrow owner mechanism before acceptance. |

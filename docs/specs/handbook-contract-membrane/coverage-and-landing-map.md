@@ -1,7 +1,9 @@
 # Approved semantics: proposed coverage and landing map
 
 Status: **proposed for human review**, prepared 2026-10-01; program reconciliation
-updated 2026-10-04 against `31e7746`. This is planning input, not
+updated 2026-10-04 against `31e7746`, with bounded current-status correction and
+independent-local-check / Packet 2 preparation on 2026-10-05 at `fccaf11`.
+This is planning input, not
 implementation authority, a new phase numbering scheme, or an amendment of
 completed slice outcomes. Product baseline: `b0e73fc54f28d80c3f8f58d37b939db41bbbf0e4`.
 
@@ -24,10 +26,11 @@ subsequently landed at `8b13505`; meta validation, its single aggregate closeout
 and the human recap are complete. The status reconciliation here records that
 evidence and its limits without rerunning closeout. The human then authorized
 bounded [later-establishment planning](slices/deferred-governance-establishment/README.md).
-Packet 1 subsequently implemented the local D→G transition/v3 reader at `9f28f99`;
+deferred-governance-establishment / Packet 1 implemented the local D→G transition/v3 reader at `9f28f99`;
 [its evidence](slices/deferred-governance-establishment/packet-1.md) records focused
-Windows passes and inherited limits. This update reconciles verifiable delivery,
-without certifying Main's aggregate closeout.
+Windows passes and inherited limits. Main has confirmed its aggregate validation/
+closeout and human recap complete; this supplied meta evidence is distinct from
+the dated source inspection and is not a product-suite rerun here.
 The reconciliation distinguishes adaptive skill-guided
 intake from native CLI/SDK owner validation, and independent conformance from
 applicable project qualification. No new phase or implementation is authorized here.
@@ -56,10 +59,15 @@ Following the reviewed [independent local-check brief](../../research/independen
 at `fd2b7e3`, the human clarified role-based escalation and authorized preparation
 of the [`independent-local-check` slice](slices/independent-local-check/README.md)
 named in the [phase map](phase-and-slice-map.md). The current plan allocates the
-complete journey to four meaningful packet outcomes and details only
-[Packet 1](slices/independent-local-check/packet-1.md) for human implementation
-approval: native initial setup and local Engine authority after reopen, with
-wider/stale refusal. It delivers no complete check or routed escalation yet.
+complete journey to four meaningful packet outcomes.
+[independent-local-check / Packet 1](slices/independent-local-check/packet-1.md)
+delivered native initial setup/current-D local Engine authority at `fccaf11`, with
+reopen and wider/stale refusal, and was human-reviewed. Only the next increment,
+[independent-local-check / Packet 2](slices/independent-local-check/packet-2.md), is
+now detailed for human implementation approval: complete definitions/dependencies,
+permitted use, responsible D/G applicability and local author/lifecycle/Dock source
+authority with real capture/revalidation. No complete check or routed escalation
+is delivered yet.
 An implementation agent may route an unresolved request to a project-level agent
 with additional context and prior delegated authority; human resolution is
 conditional under G2. A role or access to context alone grants no permission.
@@ -67,9 +75,10 @@ conditional under G2. A role or access to context alone grants no permission.
 The subsequent [approval-authority/assurance clarification](semantic-model/amendments/approval-authority-and-assurance.md)
 records selected local-advisory intent for the complete workflow, with separate
 approval requirement, decision authority, delivery, identity assurance and
-composition. Packet 1 remains the bounded setup/Engine implementation proposal;
-later outlines carry local authority through Contracts lifecycle and every required
-evidence-source revalidation, restart and fresh repeat/correction without mandatory
+composition. independent-local-check / Packet 1 supplies the delivered setup/Engine
+boundary. Packet 2 prepares local Contracts lifecycle and required source
+admission/revalidation; later outlines carry the complete check,
+restart and fresh repeat/correction without mandatory
 authenticator acquisition. The [credential baseline](implemented-baseline.md#credential-verification-and-the-selected-local-route)
 records actual implemented verification and incomplete/unproven device integration.
 Neither this selection nor an unavailable port bypasses current credential rules
@@ -84,15 +93,17 @@ Track the selected increment's support and deferred host/profile/routing work in
 the slice and the relevant Phase-6 adoption/adapter scope. A general orchestration
 platform and complete Substrate adoption are not automatic local-check prerequisites.
 Preserve the broader replaceable-defaults outcome; bring it into the local-check
-scope only for a demonstrated dependency. The selected first proposal includes
-only the compatible Charter/profile and native authority work causally needed by
-initial local setup; general replacement remains separate.
+scope only for a demonstrated dependency. The delivered first increment includes
+the compatible Charter/profile and native authority work causally needed by
+initial local setup. Packet 2 proposes only the minimum compatible local terms
+and owner rules required for complete definitions and source authority; general
+replacement remains separate.
 
 The slice records focused read-only Substrate inspection at `4ac8e869`: existing
 agent inventory/placement, dispatch/exact handles, prompt/session context,
 attributed inbox and host-session authority are reuse candidates. Several seams
 are crate-private and no Handbook adapter, actual agent-decision route or external
-adoption was tested. Packet 1 only returns exact refusal/unresolved context; the
+adoption was tested. independent-local-check / Packet 1 only returns exact refusal/unresolved context; the
 complete slice allocates caller-carried authorized decision submission, preserving
 project-agent resolution under prior terms and conditional human escalation.
 Automatic delivery, general role/context profiles and production Substrate adapter
@@ -138,8 +149,10 @@ This is an observable governance-lifecycle outcome, not delivery of full indepen
 contract evaluation or a universal applicability decision for every project scope.
 
 For the selected defer-first journey it supplies the positive current deferred
-basis consumed by later first establishment on the same identity, which no current
-setup path records. Positive applicability resolution is the general prerequisite
+basis consumed by later first establishment on the same identity. That transition
+is now delivered by deferred-governance-establishment / Packet 1 at `9f28f99`;
+the ordinary setup path still cannot infer deferral from initialization.
+Positive applicability resolution is the general prerequisite
 for dependent independent use: deferral, established non-applicability and satisfied
 applicable qualification are alternative G4 bases. Absence of governance files
 supplies none of them. Separate delivery of deferral and later establishment is a
@@ -227,12 +240,16 @@ The human selected bounded preparation of
 [`deferred-governance-establishment`](slices/deferred-governance-establishment/README.md):
 same P/S, exact current D, newly approved configuration/terms, durable cutover,
 original D replay versus current G, truthful recovery and typed SDK consumption.
-Its Packet 1 is implemented locally at `9f28f99`, with source/evidence linked above;
-this does not certify its aggregate closeout. The separately requested
+Its deferred-governance-establishment / Packet 1 is implemented locally at `9f28f99`,
+with source/evidence linked above; Main confirms aggregate closeout and recap
+complete as supplied meta evidence. The separately requested
 [independent-local-check plan](slices/independent-local-check/README.md) now outlines
-the full local journey and proposes native initial setup/Engine authority as its
-next review increment. It remains unimplemented, awaiting human approval, and
-selects no broad replacement outcome or new phase number.
+the full local journey. independent-local-check / Packet 1 delivered native initial
+setup/current-D Engine authority at `fccaf11` and was human-reviewed.
+[independent-local-check / Packet 2](slices/independent-local-check/packet-2.md)
+is prepared as the next review increment, awaiting implementation approval;
+the complete slice remains unfinished. It selects no broad replacement outcome
+or new phase number.
 Governed admission/assignment and assurance selection then support the selected
 assessment protocol; present qualification/reliance and separate actions require
 their exact target, complete populations and through-commit checks. Replacement,
@@ -257,7 +274,7 @@ capability groupings. They are not five implementation packets.
 
 | Area and outcome | Already covered foundations | Needs changing / missing | Dependencies and ownership |
 | --- | --- | --- | --- |
-| **Rules and contract definitions:** independently establish which rules are authoritative, admit candidates, and qualify a contract's permitted uses. | Six authored families; exact immutable definition bindings; inward owner dependencies and owner readmission; the completed fresh-project/exact freshness-scope governance establishment, positive initial scoped deferral at `8b13505` and typed SDK resolution/replay. | **Change:** non-family Context Resolution authority content currently uses generic artifact publication; reconcile it with its native owner lifecycle when exercised. **Missing:** later establishment on an existing identity, ordinary policy qualification/replacement, deterministic Policy Admission Closure, contract permitted use/qualification, and exact typed authored-input/result relationships. | Handbook supplies establishment rules; each semantic owner establishes conformance and applicable qualification; authored documents supply only declared inputs. Independent definitions do not inherently require project governance. Dependent requirements and result/action policies need their exact admitted definitions. Concrete criteria and broader physical placement remain decisions. [Objects](semantic-model/objects-and-governance.md); [R-01–R-14, R-18–R-26](../../research/hcm-coverage-landing-2026-10-01/rules-and-definitions.md#stable-obligations-and-dispositions). |
+| **Rules and contract definitions:** independently establish which rules are authoritative, admit candidates, and qualify a contract's permitted uses. | Six authored families; exact immutable definition bindings; inward owner dependencies and owner readmission; fresh-project/exact freshness-scope establishment, positive initial scoped deferral at `8b13505`, same-positive-deferred-identity first establishment/v3 resolution at `9f28f99`, and native initial current-D local Engine authority at `fccaf11`. | **Change:** the older non-family Context Resolution publication route remains; the additive native local route does not migrate it. **Missing:** ordinary-root governance enrollment, established policy replacement, broader ordinary qualification/Policy Admission Closure, contract permitted use/qualification, and exact typed authored-input/result relationships. independent-local-check / Packet 2 prepares only the local definition/use and exact freshness qualification closure; it is not delivered yet. | Handbook supplies establishment rules; each semantic owner establishes conformance and applicable qualification; authored documents supply only declared inputs. Independent definitions do not inherently require project governance. Dependent requirements and result/action policies need their exact admitted definitions. Concrete criteria beyond the bounded local plan and broader physical placement remain decisions. [Objects](semantic-model/objects-and-governance.md); [R-01–R-14, R-18–R-26](../../research/hcm-coverage-landing-2026-10-01/rules-and-definitions.md#stable-obligations-and-dispositions). |
 | **Starting an evaluation:** close complete requirements, preserve diagnostic versus decision-seeking intent, and establish whether this exact plan may proceed. | Nine-dimension posture kernel; exact narrower run preparation; Engine Context Resolution authority; bounded Dock operating equality. Grounding is implemented separately. | **Change:** existing direct-run preparation lacks the complete new requirements closure. **Missing:** scoped posture/assurance selection, both requirements-source identities, permitted-use/intent compatibility, stable Observation Plan/Purpose/occurrence, purpose-bound Engine authorization, independently admitted capability, and Coordination readiness/disposition/basis. Setup/Doctor readiness is a different proposition. | Intrinsic owner establishment and applicable project qualification precede dependent use; positive deferral permits the supported independent route. Plan precedes Purpose and Engine issuance; capability is compared afterward. Contracts-domain Coordination compares and coordinates; Engine alone establishes its permission. For prospective governed assessment, the action domain resolves the governing relationship before collection commitment. HR-007 also permits new present-use qualification of exact earlier direct decision-seeking results under an adopted retrospective protocol; no future completion Intent is required for evaluation. [Preparation](semantic-model/assurance-and-evaluation-preparation.md); [S-01–S-36](../../research/hcm-coverage-landing-2026-10-01/starting-evaluations.md#stable-behavioral-claims), U-04 below. |
 | **Collection and evidence:** record real attempts and close exactly the evidence belonging to one evaluation. | Independent candidate admission; immutable per-record evidence and delivery replay; Dock operational outcomes/recovery; the actual Rust `jsonschema` observation path. | **Change:** run identity/currentness and live repository filtering cannot stand as occurrence-wide closure. **Missing:** owner occurrence allocation, immutable commitment, later-check/recovery lineage, complete attempt/admission terminals, sealed causal frontier, complete evidence-set formation, final context, and full historical reconstruction. Complete pruning needs its own positive proof and atomic commitment/empty-frontier outcome. | Preparation supplies exact attemptable basis and authorization; a pre-collection action-domain governing relationship is required by the prospective protocol, not fabricated for independent evaluation. Producer/Dock/host establish bounded origin facts, Coordination seals collection, Contracts independently admits evidence and closes set/context. Membership cannot be chosen for favorable results. [Identity and closure](semantic-model/evidence-and-evaluation.md#identity-evidence); [C-01–C-19](../../research/hcm-coverage-landing-2026-10-01/collection-and-evidence.md#behavioral-claims). |
 | **Results and explanations:** produce independent findings, named metrics, gate decisions and views of one recorded truth. | Exact integer/rational arithmetic, ordered claim accounting, non-compensatory blockers, pure gate computation and generic consumer transport. | **Change:** invalid context can currently become blocked truth; advisory obligation changes the verdict; score belongs to gate/claim weights and is skipped on blockers; gate has only passed/blocked. **Missing:** independent dimensions, admitted role policies, named metric definitions/results, configurable four-outcome gates, full canonical explanation, authorized concise/detail projections, retained exact result dependencies. | Consume one valid closed context/set and its complete selected definition inventory. Contracts owns applicability/finding/gate/explanation; metric admission and computation stay attributable. Projections preserve source meaning and separately authorized disclosure. Invalid closure refuses before truth; valid insufficiency is interpreted by the selected policies. [Results](semantic-model/evidence-and-evaluation.md#metric-gate); [T-01–T-22](../../research/hcm-coverage-landing-2026-10-01/results-and-explanations.md#behavioral-claims). |
@@ -341,10 +358,12 @@ This routing correction does not admit a phase/slice or authorize product work.
 The [`scoped-governance-deferral` shape](#proposed-next-slice-shape-scoped-governance-deferral)
 landed after the completed first foundation increment and HR-007 approval.
 The [later-establishment packet](slices/deferred-governance-establishment/packet-1.md)
-now records its implemented bounded D→G outcome and evidence limits. The subsequent
+now records its implemented bounded D→G outcome and evidence limits; Main confirms
+aggregate closeout and recap complete. The subsequent
 [independent-local-check plan](slices/independent-local-check/README.md) details
-**only its next bounded increment**, native initial setup/local Engine authority,
-for human implementation approval; full-check and host integration work remain
+**only its next bounded increment**, independent-local-check / Packet 2's complete
+definitions and usable source authority, for human implementation approval after
+the reviewed Packet-1 delivery; full-check and host integration work remain
 outlined rather than silently authorized.
 Do not turn this study into a fully elaborated backlog. The original comparison did not implement product work; the later fresh-project
 establishment slice is recorded separately. This reconciliation adds no implementation.
