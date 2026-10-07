@@ -110,7 +110,12 @@ validation/recap. The human reviewed the takeover recap and requested
 reconciliation, then approved its bounded implementation, verification, focused
 review and local commit. Packet-3 implementation and selected native acceptance are
 verified, with final causal delta **APPROVE** and no unresolved P1/P2. Its human
-result checkpoint remains next. The complete four-packet slice is unfinished.
+result was meta-validated/recapped and human-reviewed/discussed after landing at
+`2b09faf`; the human now expressly requested bounded
+[Packet-4 reconciliation](slices/independent-local-check/packet-4.md).
+That detailed final repeat/correction/decision plan is prepared for meta/human
+implementation-plan review. It grants no product execution or runtime choices.
+The complete four-packet slice is unfinished.
 Actual runtime choices retain their separate approval boundary.
 
 The human's 2026-10-06 [delivery-sequencing selection](phase-and-slice-map.md#current-delivery-sequencing)

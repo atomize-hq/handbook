@@ -74,7 +74,9 @@ recovery and historical reads, usable supplied inputs and structured owner
 outcomes, SDK usage/response/recovery documentation, and ordinary normal-dependency
 consumer examples/tests. The human approved this bounded implementation;
 selected native acceptance is verified, with final causal delta **APPROVE** and no
-unresolved P1/P2.
+unresolved P1/P2. It landed at `2b09faf` and passed its human/meta result checkpoint.
+The human requested [Packet-4 reconciliation](slices/independent-local-check/packet-4.md);
+that final native/SDK increment is prepared for implementation-plan review only.
 Supplied attributable human approvals, actual required review, owner validation,
 authority and result explanation remain requirements of this stage.
 
@@ -255,7 +257,7 @@ Phase numbering and Phase-6 order remain unchanged.
 | --- | --- | --- | --- |
 | [`scoped-governance-deferral`](slices/scoped-governance-deferral/README.md) — Positive scoped deferral and current resolution | Implemented locally at `8b13505`; single-packet aggregate closeout, meta validation and human recap complete | One newly registered local project retains human-approved deferral of the existing Contracts freshness-policy admission scope and resolves/replays its exact basis through typed SDK. No default activation, global exemption or independent evaluation is inferred; missing/corrupt/uncertain state fails closed. | Existing identity/durability, fresh-project owner and typed SDK were foundations; scoped deferral and narrow initialization coordination landed inside the slice. The completed evidence carries an unattributed broader Windows-suite failure; focused targets passed. This is no successor authorization. |
 | [`deferred-governance-establishment`](slices/deferred-governance-establishment/README.md) — First governance on the same deferred project | deferred-governance-establishment / Packet 1 implemented locally at `9f28f99`; Main-confirmed aggregate validation/closeout and human recap complete | Establish one exact newly approved configuration/terms against current never-established D on P/S; retain original history/replay, exact current G, truthful concurrency/recovery and typed SDK results. | Positive deferral at `8b13505` was the foundation; the packet source/evidence records delivered D→G/v3 and inherited limits. Actual runtime G still needs approved configuration/terms and exact current D. Ordinary roots, replacement and independent-use closure remain excluded. |
-| [`independent-local-check`](slices/independent-local-check/README.md) — Complete independent offline JSON conformance | independent-local-check / Packet 1 delivered at `fccaf11` and human-reviewed; Packet 2 delivered at `5bf0f3b` with causal APPROVE and meta validation/recap complete; Packet 3 implemented with selected acceptance verified, final causal delta APPROVE with no unresolved P1/P2; slice unfinished | Native initial setup/local Engine authority and complete reviewed definitions/source authority support the verified Packet-3 complete native SDK check. Repeat/correction and bounded decision submission remain later. | [Packet 3](slices/independent-local-check/packet-3.md) builds on delivered Packet-2 definitions/source authority and existing owners/validator, with its own human result checkpoint. D→G supplies a fresh-G discriminator; choosing D use does not require G establishment. Full Substrate adoption remains separate. |
+| [`independent-local-check`](slices/independent-local-check/README.md) — Complete independent offline JSON conformance | Packets 1–3 delivered at `fccaf11`, `5bf0f3b`, `2b09faf` through their human/meta checkpoints; final Packet-3 causal delta APPROVE. Packet 4 prepared for implementation-plan review; slice unfinished | Native setup, reviewed definitions/source authority and complete check/history/recovery/one-attempt primitives are delivered. Complete repeat/correction usability and bounded decision consumption remain unimplemented. | [Packet 4](slices/independent-local-check/packet-4.md) builds only on delivered primitives; human implementation approval is required. Fresh supported G requires exact v3 qualification/non-applicability. Full Substrate adoption remains separate. Aggregate slice closeout follows the final outcome, with no extra packet. |
 
 The [next-outcome boundary](coverage-and-landing-map.md#proposed-next-slice-shape-scoped-governance-deferral)
 owns the high-level example, refusal and observable acceptance conditions.
@@ -282,8 +284,12 @@ meta validation/recap are complete. The human reviewed the takeover recap and
 requested [Packet 3](slices/independent-local-check/packet-3.md) planning and stale
 updates, then approved its bounded implementation, verification, focused review
 and local commit. Its first complete real check is implemented with selected acceptance verified
-and final causal delta **APPROVE**, with no unresolved P1/P2. Packet 4 stays a broad
-outcome awaiting the Packet-3 human result checkpoint and separate planning/approval.
+and final causal delta **APPROVE**, with no unresolved P1/P2, at `2b09faf`.
+Meta validated/recapped that completed result and the human reviewed/discussed it,
+then expressly requested [Packet-4 reconciliation](slices/independent-local-check/packet-4.md).
+That single detailed authority prepares the final repeat/correction/bounded decision
+increment for meta/human implementation-plan review; it authorizes no product work
+or aggregate slice closeout now.
 The human has selected [local-advisory authority](semantic-model/amendments/approval-authority-and-assurance.md)
 for the complete workflow, including later Contracts lifecycle and repeated source
 admission/revalidation; hardware/authenticator acquisition is not a predecessor.

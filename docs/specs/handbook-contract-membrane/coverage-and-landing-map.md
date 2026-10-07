@@ -2,9 +2,10 @@
 
 Status: **proposed for human review**, prepared 2026-10-01; program reconciliation
 updated 2026-10-04 against `31e7746`, with bounded current-status correction and
-independent-local-check / Packet 3 implementation and selected acceptance verified on
-2026-10-07. Final causal delta review returned **APPROVE**, with no unresolved P1/P2;
-its human result checkpoint remains next. The dated comparison baseline below is preserved.
+independent-local-check / Packet 3 delivered at `2b09faf` through its human/meta
+checkpoint on 2026-10-07. Final causal delta review returned **APPROVE**;
+[Packet 4](slices/independent-local-check/packet-4.md) is prepared for implementation-plan
+review, not implemented. The dated comparison baseline below is preserved.
 This is planning input, not
 implementation authority, a new phase numbering scheme, or an amendment of
 completed slice outcomes. Product baseline: `b0e73fc54f28d80c3f8f58d37b939db41bbbf0e4`.
@@ -75,8 +76,11 @@ completed evidence. The human reviewed the takeover recap and requested
 [Packet 3](slices/independent-local-check/packet-3.md) planning/stale-status updates.
 The human subsequently approved the bounded implementation, verification, focused
 review and local commit. Complete selected native acceptance is verified, with
-final causal delta **APPROVE** and no unresolved P1/P2; routed escalation is not
-delivered by this packet.
+final causal delta **APPROVE** and no unresolved P1/P2 at `2b09faf`; meta validation/
+recap and human review/discussion are complete. The human expressly requested
+[Packet-4 reconciliation](slices/independent-local-check/packet-4.md). Its final
+native/SDK repeat/correction and bounded InputCorrection decision plan is prepared
+for human implementation approval. Routed escalation is not delivered by Packet 3.
 In the approved eventual experience, an implementation agent may route an
 unresolved request to a project-level agent with additional context and prior
 delegated authority; human resolution is
@@ -90,8 +94,12 @@ owns the concrete readiness/adopter decision, CLI/skill response and recovery
 handling, and workflow proof. No new phase/packet or detailed implementation plan
 is selected here, and none is assigned by default to Packet 4. Packet 3 instead
 owns SDK usage/response/recovery documentation and ordinary consumer examples/tests;
-Packet 4 retains native/SDK repeat/correction and bounded caller-carried authorized
-decision submission. The approved adaptive-intake and conditional-escalation intent
+Packet 4 uses delivered recovery/history/equal-content occurrence and one-attempt
+primitives for native/SDK repeat/correction, adding bounded caller-carried authorized
+InputCorrection decision consumption and an explicit prior-approved decision-agent
+binding distinct from the executor. The packet owns that minimum participant
+boundary; host labels and existing one-agent terms supply no separate decider.
+The approved adaptive-intake and conditional-escalation intent
 remains traceable to HR-007, with host transport/automatic routing separately bounded.
 
 The subsequent [approval-authority/assurance clarification](semantic-model/amendments/approval-authority-and-assurance.md)
@@ -100,8 +108,8 @@ approval requirement, decision authority, delivery, identity assurance and
 composition. independent-local-check / Packet 1 supplies the delivered setup/Engine
 boundary. Packet 2 delivers local Contracts lifecycle and required source
 admission/revalidation. Packet 3 implements complete Coordination/authorization,
-collection/evidence/final-context truth and historical delivery; Packet 4 retains
-only broad fresh repeat/correction/resolution outcomes, without mandatory
+collection/evidence/final-context truth and historical delivery; Packet 4 details
+the complete fresh repeat/correction/resolution workflow, without mandatory
 authenticator acquisition. The [credential baseline](implemented-baseline.md#credential-verification-and-the-selected-local-route)
 records actual implemented verification and incomplete/unproven device integration.
 Neither this selection nor an unavailable port bypasses current credential rules
@@ -272,7 +280,10 @@ setup/current-D Engine authority at `fccaf11` and was human-reviewed.
 [independent-local-check / Packet 2](slices/independent-local-check/packet-2.md)
 is delivered at `5bf0f3b` with causal APPROVE and meta validation/recap complete.
 The human requested [Packet-3 planning](slices/independent-local-check/packet-3.md),
-then approved its bounded implementation. Selected acceptance is verified, with final causal delta **APPROVE** and no unresolved P1/P2; the complete slice remains unfinished.
+then approved its bounded implementation. Packet 3 landed at `2b09faf` with selected
+acceptance and final causal delta **APPROVE**; its human/meta checkpoint is complete.
+The human requested [Packet-4 reconciliation](slices/independent-local-check/packet-4.md);
+that final plan requires implementation approval and the complete slice remains unfinished.
 This selects no broad replacement outcome
 or new phase number.
 Governed admission/assignment and assurance selection then support the selected
@@ -386,12 +397,13 @@ The [later-establishment packet](slices/deferred-governance-establishment/packet
 now records its implemented bounded D→G outcome and evidence limits; Main confirms
 aggregate closeout and recap complete. The subsequent
 [independent-local-check plan](slices/independent-local-check/README.md) details
-**only its next bounded increment**, [independent-local-check / Packet 3](slices/independent-local-check/packet-3.md)'s
-first complete real check and supported closed-result history. Its bounded
-implementation and selected acceptance are verified, with final causal delta
-**APPROVE** and no unresolved P1/P2.
-Packet 4 remains broad and awaits the human Packet-3 result checkpoint;
-host integration remains separately bounded.
+**only its next bounded increment**, [independent-local-check / Packet 4](slices/independent-local-check/packet-4.md)'s
+complete repeat/correction and bounded caller-carried decision workflow.
+[Packet 3](slices/independent-local-check/packet-3.md)'s first complete real check,
+closed-result history and recovery/occurrence primitives are delivered at `2b09faf`,
+with selected acceptance, final causal delta **APPROVE** and completed human/meta
+checkpoint. Packet 4 is prepared for implementation-plan review, not product execution
+or slice closeout; host integration remains separately bounded.
 Do not turn this study into a fully elaborated backlog. The original comparison did not implement product work; the later fresh-project
 establishment slice and current local-check packets are recorded separately.
 

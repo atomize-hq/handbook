@@ -1,8 +1,8 @@
 # Packet 3: first complete real local check
 
-Status: **implementation and selected acceptance verified; final causal delta
-APPROVE with no unresolved P1/P2; human result checkpoint next**, 2026-10-07.
-This is **independent-local-check / Packet 3**, the next increment of the
+Status: **delivered at `2b09faf`; selected acceptance verified; final causal delta
+APPROVE; human/meta result checkpoint complete**, 2026-10-07.
+This is **independent-local-check / Packet 3**, a completed increment of the
 [four-packet slice](README.md). The human reviewed the takeover recap and expressly
 requested Packet-3 planning and stale-status updates. Packet 2 at `5bf0f3b` returned
 PACKET_COMPLETE, received meta validation/recap and a final fresh delta **APPROVE**
@@ -10,6 +10,14 @@ with no unresolved P1/P2. That supplied meta evidence permits this preparation;
 no further Packet-2 review ceremony is required. The human subsequently approved
 this bounded implementation. Actual runtime project choices retain their separate
 approval boundary; implementation approval supplies none of those choices.
+Replacement runtime diagnosis/remediation completed the originally interrupted
+assignment and returned PACKET_COMPLETE. Its final delta reviewer returned APPROVE
+with no P1–P4, preserving the earlier source-integrity approval for its unchanged
+subject. Meta validated/recapped the result; the human reviewed/discussed it and
+expressly requested the separate [Packet-4 reconciliation](packet-4.md). The original
+task's STOPPED is not the final packet status. This status correction reuses supplied
+completed evidence and current source inspection, not a full independent audit or
+runtime rerun. The original bounded plan and evidence below retain their scope.
 
 ## Outcome, example and human checkpoint
 
@@ -51,12 +59,11 @@ remote reference, wrong package or unavailable required restriction refuses at i
 actual operational boundary. Nonconformance is a valid unfavorable semantic answer;
 authority and integrity failures are not that answer.
 
-Implement only after the human approves this bounded plan and all hard predecessors
-are proven complete. Stop after Packet-3 implementation, proportionate verification,
-causal review and local commit for the human's result recap. This independently
-useful first complete check is its own checkpoint. Packet 4 remains its existing
-broad repeat/correction/resolution outcome; no successor implementation or detailed
-Packet-4 planning is delegated here.
+The human approved this bounded plan and its implementation has completed through
+the selected human/meta checkpoint. This independently useful first complete check
+does not close the slice. The later expressly requested [Packet-4 plan](packet-4.md)
+owns repeat/correction/resolution detail; the original Packet-3 assignment did not
+delegate successor planning or implementation.
 
 ## Controlling inputs and predecessor truth
 
