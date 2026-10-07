@@ -17,6 +17,7 @@ const MAX_EVALUATION_POLICIES: usize = 128;
 pub const CONTRACT_EVALUATION_RUN_SCHEMA_REF_V1: &str = "handbook.contract-evaluation-run@1.0.0";
 pub const LOCAL_SOURCE_SEAM_RUN_SCHEMA_REF_V2: &str =
     "handbook.contract-local-source-seam-run@2.0.0";
+pub const LOCAL_EVALUATION_RUN_SCHEMA_REF_V3: &str = "handbook.contract-local-evaluation-run@3.0.0";
 
 /// A bounded caller-selected nonce that distinguishes intentional observations
 /// without granting authority or selecting compatible identities.
@@ -374,6 +375,7 @@ impl<'de> Deserialize<'de> for ContractEvaluationRunV1 {
         let schema_ref = match raw.schema_ref.as_str() {
             CONTRACT_EVALUATION_RUN_SCHEMA_REF_V1 => CONTRACT_EVALUATION_RUN_SCHEMA_REF_V1,
             LOCAL_SOURCE_SEAM_RUN_SCHEMA_REF_V2 => LOCAL_SOURCE_SEAM_RUN_SCHEMA_REF_V2,
+            LOCAL_EVALUATION_RUN_SCHEMA_REF_V3 => LOCAL_EVALUATION_RUN_SCHEMA_REF_V3,
             _ => return Err(D::Error::custom(ContractError::InvalidInvariant)),
         };
         let input = PrepareEvaluationRunInputV1::new(
@@ -468,6 +470,25 @@ impl ContractEvaluationRunV1 {
     }
     pub fn is_local_source_seam_v2(&self) -> bool {
         self.schema_ref == LOCAL_SOURCE_SEAM_RUN_SCHEMA_REF_V2
+    }
+    pub fn is_local_evaluation_v3(&self) -> bool {
+        self.schema_ref == LOCAL_EVALUATION_RUN_SCHEMA_REF_V3
+    }
+    pub(crate) fn from_local_evaluation_v3(
+        input: PrepareEvaluationRunInputV1,
+        claims: Vec<ContractClaimV1>,
+        basis: ContentAddressedBindingV1,
+        currentness: OwnerCurrentnessObservationV1,
+    ) -> Result<Self, ContractError> {
+        Self::from_prevalidated_parts(
+            LOCAL_EVALUATION_RUN_SCHEMA_REF_V3,
+            input.contract.reference().clone(),
+            input.contract.fingerprint().clone(),
+            basis,
+            input,
+            claims,
+            currentness,
+        )
     }
     pub(crate) fn from_local_source_seam_v2(
         input: PrepareEvaluationRunInputV1,

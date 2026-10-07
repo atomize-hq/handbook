@@ -21,6 +21,9 @@ mod lifecycle;
 mod lifecycle_policy;
 mod lifecycle_preimage;
 mod local_contract;
+mod local_evaluation;
+mod local_evaluation_definition;
+mod local_evaluation_native;
 mod native_dock_source;
 pub mod operation_admission;
 mod operation_claims;
@@ -28,11 +31,19 @@ mod owner_repository;
 pub mod project_admission_governance;
 
 pub use local_contract::*;
+pub use local_evaluation::*;
+pub use local_evaluation_definition::*;
+pub use local_evaluation_native::*;
 pub use native_dock_source::NativeDockCandidateObservationV1;
 pub use owner_repository::{
     LocalDefinitionRecordV2, LocalLifecycleHeadV2, LocalLifecycleTransitionInputV2,
     LocalOwnerMutationReceiptV2, PreparedLocalDefinitionAppendV2,
     PreparedLocalLifecycleTransitionV2, LOCAL_CONTRACT_OWNER_ROOT_V2,
+};
+pub use owner_repository::{
+    LocalDefinitionRecordV3, LocalLifecycleHeadV3, LocalLifecycleTransitionInputV3,
+    LocalOwnerMutationReceiptV3, PreparedLocalDefinitionAppendV3,
+    PreparedLocalLifecycleTransitionV3, LOCAL_CONTRACT_OWNER_ROOT_V3,
 };
 
 pub use claim::{
@@ -56,6 +67,7 @@ pub use evaluation_policy::*;
 pub use evaluation_run::{
     prepare_evaluation_run_v1, ContractEvaluationRunV1, EvaluationRunNonceV1,
     PrepareEvaluationRunInputV1, CONTRACT_EVALUATION_RUN_SCHEMA_REF_V1,
+    LOCAL_EVALUATION_RUN_SCHEMA_REF_V3,
 };
 pub use evidence_admission::{
     admit_evidence_candidate_v1, EvidenceCandidateAdmissionErrorKindV1,

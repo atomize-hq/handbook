@@ -275,6 +275,69 @@ impl LocalCheckAdmissionV1<'_> {
     pub fn observed_at_utc(&self) -> &str {
         &self.observed_at_utc
     }
+    /// Complete native Contracts inventory reads are an additive v3 action
+    /// declaration. V1/V2 action input paths retain their literal semantics.
+    pub fn require_owner_input_subtree_v3(
+        &self,
+        root: &str,
+    ) -> Result<(), LocalAuthorityRefusalV1> {
+        self.require_full_definition_action_v3()?;
+        if root != ".handbook/state/contracts"
+            || !self.request.input_paths.iter().any(|path| path == root)
+            || !self.terms().allowed_input_paths.iter().any(|selector| {
+                crate::context_resolution::local_owner_subtree_within_selector(selector, root)
+                    .unwrap_or(false)
+            })
+        {
+            return Err(refuse("definition_read_subtree","v3 definition inventory needs literal root declaration and explicit complete approved read subtree"));
+        }
+        self.validate_current()
+    }
+    pub fn require_input_path_v3(&self, path: &str) -> Result<(), LocalAuthorityRefusalV1> {
+        self.require_full_definition_action_v3()?;
+        let literal = self
+            .request
+            .input_paths
+            .iter()
+            .any(|declared| declared == path);
+        let owned = path.starts_with(".handbook/state/contracts/")
+            && self
+                .require_owner_input_subtree_v3(".handbook/state/contracts")
+                .is_ok();
+        if (!literal && !owned)
+            || !self.terms().allowed_input_paths.iter().any(|selector| {
+                crate::context_resolution::local_path_within_selector(selector, path)
+                    .unwrap_or(false)
+            })
+        {
+            return Err(refuse(
+                "definition_read_path",
+                "actual v3 definition proof read exceeds exact declaration or approved terms",
+            ));
+        }
+        self.validate_current()
+    }
+    fn require_full_definition_action_v3(&self) -> Result<(), LocalAuthorityRefusalV1> {
+        if !matches!(
+            (self.request.action, self.request.action_ref.as_str()),
+            (
+                LocalCheckActionV1::DefinitionAuthor,
+                "handbook.contract-local-definition-append@3.0.0"
+            ) | (
+                LocalCheckActionV1::Review,
+                "handbook.contract-local-review@3.0.0"
+            ) | (
+                LocalCheckActionV1::Lifecycle,
+                "handbook.contract-local-lifecycle-transition@3.0.0"
+            )
+        ) {
+            return Err(refuse(
+                "definition_action",
+                "complete Contracts read declarations apply only to exact v3 definition actions",
+            ));
+        }
+        Ok(())
+    }
     pub fn require_repository_root(
         &self,
         root: &RetainedRepositoryRootV1,
@@ -821,6 +884,26 @@ fn check_current(
     }
     require_basis(root, basis)?;
     Ok(outcome)
+}
+
+// The additive full-evaluation owner uses these checks under the same native
+// OperatingGuard. It must not recursively reacquire that guard through a public
+// local-check action or manufacture an old action as evaluation permission.
+pub(super) fn evaluation_predecessor_current(
+    root: &RetainedRepositoryRootV1,
+    locator: &LocalCheckLocatorV1,
+    basis: &LocalCheckCurrentBasisV1,
+) -> Result<LocalCheckAuthorityOutcomeV1, LocalAuthorityRefusalV1> {
+    locator.validate()?;
+    check_current(root, locator, basis)
+}
+
+pub(super) fn evaluation_predecessor_history(
+    root: &RetainedRepositoryRootV1,
+    locator: &LocalCheckLocatorV1,
+) -> Result<LocalCheckAuthorityOutcomeV1, LocalAuthorityRefusalV1> {
+    locator.validate()?;
+    check_history(root, locator)
 }
 fn require_basis(
     root: &RetainedRepositoryRootV1,

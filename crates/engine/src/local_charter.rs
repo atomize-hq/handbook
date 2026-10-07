@@ -17,15 +17,19 @@ use crate::repository_initialization::{
     REPOSITORY_INITIALIZATION_LOCK_PATH_V1, REPOSITORY_INITIALIZATION_RECEIPT_PATH_V1,
 };
 use crate::{
-    parse_definition_yaml, parse_schema_json, resolve_shipped_profile_decisions,
-    CharterIntakeEnvelope, CharterLifecycleState, DefinitionFingerprint,
-    REPOSITORY_IDENTITY_REPO_PATH,
+    parse_definition_yaml, parse_schema_json, CharterIntakeEnvelope, CharterLifecycleState,
+    DefinitionFingerprint, REPOSITORY_IDENTITY_REPO_PATH,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use sha2::{Digest, Sha256};
 use std::fmt;
 use std::path::Path;
+use std::sync::OnceLock;
+
+#[cfg(test)]
+#[path = "local_charter/fixed_profile_tests.rs"]
+mod fixed_profile_tests;
 
 pub const LOCAL_CHARTER_ROOT_V1: &str = ".handbook/local-charter/v1";
 const INTENT: &str = ".handbook/local-charter/v1/initial-intent.json";
@@ -265,7 +269,7 @@ struct LocalMaterial {
 }
 
 fn evaluate(
-    repo: &Path,
+    _repo: &Path,
     request: &NativeLocalCharterRequestV1,
 ) -> Result<(Vec<u8>, LocalCharterProfileBindingV1, Value), LocalAuthorityRefusalV1> {
     let approval = &request.human_approval;
@@ -291,16 +295,11 @@ fn evaluate(
     {
         return Err(refuse("unsupported_local_charter_request", "this local rule supports fresh initial Charter creation without waivers; amendment is unimplemented"));
     }
-    let decisions = resolve_shipped_profile_decisions(repo).map_err(|_| {
-        refuse(
-            "incompatible_definition_closure",
-            "the exact compatible shipped base cannot be resolved",
-        )
-    })?;
-    let profile = local_profile(&decisions)?;
+    let decisions = fixed_charter_decisions()?;
+    let profile = local_profile(decisions)?;
     // Reuse shipped coverage/schema/posture computation, but publish no old
     // candidate or approval identity: local records select their own rule.
-    let evaluated = evaluate_charter_intake(&decisions, request.intake.clone(), None)
+    let evaluated = evaluate_charter_intake(decisions, request.intake.clone(), None)
         .map_err(|e| refuse("charter_intake_refused", e.detail()))?;
     let canonical = evaluated.normalized_content;
     let fp = DefinitionFingerprint::from_bytes(&canonical).to_string();
@@ -316,6 +315,39 @@ fn evaluate(
         .map_err(|_| refuse("invalid_posture", "the exact native posture rubric refused"))?;
     let validation = json!({"coverage_results":evaluated.intake.coverage_results,"field_sources":evaluated.candidate_subject.field_sources,"posture_kernel_fingerprint":posture.kernel_fingerprint,"posture_replay_plan":posture.replay_plan});
     Ok((canonical, profile, validation))
+}
+
+fn fixed_charter_decisions(
+) -> Result<&'static crate::ResolvedProfileDecisions, LocalAuthorityRefusalV1> {
+    static DECISIONS: OnceLock<Result<crate::ResolvedProfileDecisions, LocalAuthorityRefusalV1>> =
+        OnceLock::new();
+    DECISIONS
+        .get_or_init(resolve_fixed_charter_decisions)
+        .as_ref()
+        .map_err(Clone::clone)
+}
+
+fn resolve_fixed_charter_decisions(
+) -> Result<crate::ResolvedProfileDecisions, LocalAuthorityRefusalV1> {
+    let result = (|| {
+        let request = crate::profile_decision::local_operating_profile_request();
+        crate::local_authority::require_fixed_builtin_profile_request(&request).map_err(|_| ())?;
+        let profile =
+            crate::resolve_profile_selection(Path::new(env!("CARGO_MANIFEST_DIR")), request)
+                .map_err(|_| ())?;
+        crate::local_authority::require_fixed_builtin_profile(&profile).map_err(|_| ())?;
+        let decisions = crate::ResolvedProfileDecisions::from_profile(&profile).map_err(|_| ())?;
+        crate::load_shipped_charter_definition_registry()
+            .and_then(|registry| registry.validate_selected_decisions(&decisions))
+            .map_err(|_| ())?;
+        Ok::<_, ()>(decisions)
+    })();
+    result.map_err(|_| {
+        refuse(
+            "incompatible_definition_closure",
+            "the exact compatible shipped base cannot be resolved",
+        )
+    })
 }
 
 fn local_profile(
@@ -662,6 +694,32 @@ pub(crate) fn resolve_current_retained(
     }
     validate_binding_retained(root, &locator.binding)?;
     Ok(outcome)
+}
+
+/// The additive evaluation owner resolves original Charter history without
+/// reinterpreting later selection/currentness or reacquiring native owner locks.
+pub(crate) fn local_evaluation_historical_dependencies(
+    root: &RetainedRepositoryRootV1,
+    locator: &LocalCharterLocatorV1,
+) -> Result<Vec<String>, LocalAuthorityRefusalV1> {
+    resolve_history(root, locator)?;
+    let expected = material(root, locator)?;
+    let mut paths = expected
+        .records
+        .into_iter()
+        .map(|(path, _)| path)
+        .collect::<Vec<_>>();
+    paths.extend([
+        INTENT.to_owned(),
+        COMMITTED.to_owned(),
+        REPOSITORY_IDENTITY_REPO_PATH.to_owned(),
+        REPOSITORY_INITIALIZATION_CLAIM_PATH_V1.to_owned(),
+        REPOSITORY_INITIALIZATION_RECEIPT_PATH_V1.to_owned(),
+        native_terminal(root, &locator.binding)?.0,
+    ]);
+    paths.sort();
+    paths.dedup();
+    Ok(paths)
 }
 
 /// Common readers hold their native locks already. No nested lock is taken.

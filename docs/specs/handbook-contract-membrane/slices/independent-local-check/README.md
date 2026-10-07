@@ -1,8 +1,8 @@
 # Independent local JSON conformance check
 
 Status: **Packets 1–2 delivered through their human/meta checkpoints;
-Packet 3 prepared for human implementation-plan review;
-complete slice unfinished**, 2026-10-06.
+Packet 3 implemented with selected acceptance verified, final causal delta APPROVE;
+complete slice unfinished**, 2026-10-07.
 Packet 1 at `fccaf11` supplies native local setup and Engine envelope authority
 for current D. The human reviewed that boundary and requested the next plan.
 Preparation was expressly requested after the intent clarification landing at
@@ -12,8 +12,9 @@ Preparation was expressly requested after the intent clarification landing at
 [Packet 2](packet-2.md), then approved its bounded implementation. Packet 2 at
 `5bf0f3b` returned PACKET_COMPLETE, was meta-validated/recapped and received a final
 fresh causal delta APPROVE with no unresolved P1/P2. The human reviewed the takeover
-recap and requested [Packet 3](packet-3.md) planning and stale-status updates; that
-supplied meta evidence requires no second Packet-2 review ceremony. Runtime project choices,
+recap and requested [Packet 3](packet-3.md) planning and stale-status updates, then
+approved its bounded implementation, verification, focused review and local commit.
+That supplied meta evidence requires no second Packet-2 review ceremony. Runtime project choices,
 external action and successor dispatch retain their separate approval boundaries.
 No new phase number is assigned.
 
@@ -86,17 +87,18 @@ Use sequential packet execution. Each row delivers a separately assessable
 change and ends at human review; none is a license to execute the next row.
 [Packet 1](packet-1.md) retains its delivered plan/evidence.
 [Packet 2](packet-2.md) is delivered at `5bf0f3b` with causal APPROVE and completed
-meta validation/recap. [Packet 3](packet-3.md) details only the next increment for
-human implementation-plan review; its complete check remains unimplemented.
+meta validation/recap. [Packet 3](packet-3.md) implements the human-approved next
+increment; its selected native acceptance is verified, with final causal delta
+**APPROVE** and no unresolved P1/P2. Its human result checkpoint remains next.
 
 | Packet | Useful outcome | Dependency and review boundary |
 | --- | --- | --- |
 | 1 — Native initial setup and local operating authority | On a supported fresh defer-first project, establish attributable initial local-advisory Charter/posture approval and bounded local instruction through actual owners; reopen and obtain a native Engine envelope whose checks permit an in-bounds local validation request and refuse wider reach. | Existing deferral/identity/durability foundations plus human approval of Packet 1's implementation plan for the selected local mode. Review this real setup/Engine outcome; it is not Contracts evidence authority or a complete check. |
 | 2 — Complete independently usable definitions and source authority | Contracts establishes the complete exact contract/dependencies, immutable permitted use and responsible D/G applicability; supported local-advisory authority reaches author/lifecycle and actual Dock evidence-source admission, including repeated revalidation. Actual captured subject/source identities and currentness observation replace fixture values. | [Packet 2](packet-2.md) is delivered with verification, causal APPROVE and meta validation/recap complete. The human now directs successor planning. Credential-backed meanings remain unchanged; source-seam Pass is not complete-check truth. |
-| 3 — First complete native SDK check | Contracts-domain Coordination forms direct requirements, Purpose/occurrence/plan, capability/readiness and attempt basis; Engine issues/validates exact local authorization; the real native Dock produces observations; local source revalidation, frontier, admissions, evidence-set and final context close before Contracts result/explanation. Typed SDK preparation/execution/closure/recovery/history, usable inputs/outcomes, usage/response/recovery docs and ordinary consumer examples/tests deliver this boundary. | [Packet 3](packet-3.md) is prepared for human implementation-plan review after Packet-2 recap. Implementation requires approval of this increment. Prove the complete selected local route without an authenticator, positive and valid negative paths, formation/operational refusals and exact historical retrieval. A run nonce or fixture Resolution does not supply the missing closure. New CLI/installed-skill/agent workflow delivery remains separately deferred. |
+| 3 — First complete native SDK check | Contracts-domain Coordination forms direct requirements, Purpose/occurrence/plan, capability/readiness and attempt basis; Engine issues/validates exact local authorization; the real native Dock produces observations; local source revalidation, frontier, admissions, evidence-set and final context close before Contracts result/explanation. Typed SDK preparation/execution/closure/recovery/history, usable inputs/outcomes, usage/response/recovery docs and ordinary consumer examples/tests deliver this boundary. | [Packet 3](packet-3.md) implements the complete selected local route without an authenticator, with verified current positive and valid negative paths, formation/operational refusals and exact historical retrieval. Final causal delta review returned APPROVE with no unresolved P1/P2. Return this result at its human checkpoint. New CLI/installed-skill/agent workflow delivery remains separately deferred. |
 | 4 — Fresh repeat, correction and bounded resolution | Reopen, retrieve exact historical truth, intentionally repeat or correct within prior local terms, and refuse wider requests. A caller may deliver an authorized project-agent decision with additional context; native owners validate it against prior terms before any new effect. | Packet 3 reviewed and this increment approved. Prove local authority across restart, fresh repetition/correction and all source revalidation without credential acquisition. Review complete refusal/resumption and integrated recovery/currentness; perform the single aggregate slice closeout only when all conditions below hold. |
 
-Packet 3 now has its bounded detailed proposal; Packet 4 retains only its broad
+Packet 3 now has its approved bounded implementation plan; Packet 4 retains only its broad
 outcome and requires separate planning after Packet-3 result review. Packet 3 owns
 the historical-delivery prerequisite for its closed result; Packet 4 uses it in the
 complete repeat/correction/resolution workflow. There is no blanket just-in-time

@@ -60,6 +60,32 @@ pub struct DockResolvedFirstPartyBundleV1 {
 }
 
 impl DockResolvedFirstPartyBundleV1 {
+    pub(crate) fn capture_verified_files_v1(
+        &self,
+    ) -> Result<Vec<(String, Vec<u8>)>, DockExecutorErrorV1> {
+        verify_bundle(&self.manifest, &self.bundle_root)?;
+        let mut files = Vec::new();
+        for definition in self.manifest.implementation_bundle().files() {
+            let path = self.bundle_root.join(
+                definition
+                    .path()
+                    .as_str()
+                    .replace('/', std::path::MAIN_SEPARATOR_STR),
+            );
+            let bytes =
+                fs::read(path).map_err(|_| admission("verified package capture unavailable"))?;
+            if bytes.len() as u64 != definition.length()
+                || FingerprintV1::parse(&format!("sha256:{:x}", Sha256::digest(&bytes)))
+                    .map_err(|_| invariant("package capture fingerprint failed"))?
+                    != *definition.sha256()
+            {
+                return Err(admission("verified package changed during capture"));
+            }
+            files.push((definition.path().as_str().to_owned(), bytes));
+        }
+        verify_bundle(&self.manifest, &self.bundle_root)?;
+        Ok(files)
+    }
     pub fn resolve_production() -> Result<Self, DockProductionBundleErrorV1> {
         let executable = std::env::current_exe().map_err(|_| production_unavailable())?;
         let host_directory = executable.parent().ok_or_else(production_unavailable)?;
@@ -233,7 +259,7 @@ impl DockProcessExecutorV1 {
         input: DockExecutionInputV1<'_>,
     ) -> Result<DockExecutionReceiptV1, DockExecutorErrorV1> {
         let idempotency_request_fingerprint = input.request.request_fingerprint().clone();
-        self.execute_inner(input, &idempotency_request_fingerprint, None)
+        self.execute_inner(input, &idempotency_request_fingerprint, false, None)
     }
 
     /// Executes with a stable caller-owned idempotency request identity.
@@ -246,7 +272,7 @@ impl DockProcessExecutorV1 {
         input: DockExecutionInputV1<'_>,
         idempotency_request_fingerprint: &FingerprintV1,
     ) -> Result<DockExecutionReceiptV1, DockExecutorErrorV1> {
-        self.execute_inner(input, idempotency_request_fingerprint, None)
+        self.execute_inner(input, idempotency_request_fingerprint, false, None)
     }
 
     #[cfg(feature = "test-support")]
@@ -256,13 +282,22 @@ impl DockProcessExecutorV1 {
         fault: DockExecutorFaultV1,
     ) -> Result<DockExecutionReceiptV1, DockExecutorErrorV1> {
         let idempotency_request_fingerprint = input.request.request_fingerprint().clone();
-        self.execute_inner(input, &idempotency_request_fingerprint, Some(fault))
+        self.execute_inner(input, &idempotency_request_fingerprint, false, Some(fault))
+    }
+
+    pub(crate) fn execute_local_evaluation_v3(
+        &self,
+        input: DockExecutionInputV1<'_>,
+    ) -> Result<DockExecutionReceiptV1, DockExecutorErrorV1> {
+        let fingerprint = input.request.request_fingerprint().clone();
+        self.execute_inner(input, &fingerprint, true, None)
     }
 
     fn execute_inner(
         &self,
         input: DockExecutionInputV1<'_>,
         idempotency_request_fingerprint: &FingerprintV1,
+        existing_lock_only: bool,
         #[cfg(feature = "test-support")] fault: Option<DockExecutorFaultV1>,
         #[cfg(not(feature = "test-support"))] _fault: Option<()>,
     ) -> Result<DockExecutionReceiptV1, DockExecutorErrorV1> {
@@ -289,15 +324,22 @@ impl DockProcessExecutorV1 {
                 "exact manifest, request, bundle, or target was substituted",
             ));
         }
-        let lease = match input
-            .store
-            .begin_execution_with_idempotency_request(
+        let started = if existing_lock_only {
+            input
+                .store
+                .begin_existing_execution_with_idempotency_request_v3(
+                    &request,
+                    input.idempotency_key,
+                    idempotency_request_fingerprint,
+                )
+        } else {
+            input.store.begin_execution_with_idempotency_request(
                 &request,
                 input.idempotency_key,
                 idempotency_request_fingerprint,
             )
-            .map_err(map_store_error)?
-        {
+        };
+        let lease = match started.map_err(map_store_error)? {
             DockExecutionStartV1::Replay(receipt) => return Ok(*receipt),
             DockExecutionStartV1::Lease(lease) => lease,
         };

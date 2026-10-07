@@ -1,13 +1,15 @@
 # Packet 3: first complete real local check
 
-Status: **prepared for human implementation-plan review; unimplemented**, 2026-10-06.
+Status: **implementation and selected acceptance verified; final causal delta
+APPROVE with no unresolved P1/P2; human result checkpoint next**, 2026-10-07.
 This is **independent-local-check / Packet 3**, the next increment of the
 [four-packet slice](README.md). The human reviewed the takeover recap and expressly
 requested Packet-3 planning and stale-status updates. Packet 2 at `5bf0f3b` returned
 PACKET_COMPLETE, received meta validation/recap and a final fresh delta **APPROVE**
 with no unresolved P1/P2. That supplied meta evidence permits this preparation;
-no further Packet-2 review ceremony is required. This document authorizes neither
-product implementation nor actual runtime project choices.
+no further Packet-2 review ceremony is required. The human subsequently approved
+this bounded implementation. Actual runtime project choices retain their separate
+approval boundary; implementation approval supplies none of those choices.
 
 ## Outcome, example and human checkpoint
 
@@ -89,7 +91,7 @@ the failed case passed isolated but attribution remains unresolved. SDK correcti
 isolated reruns are not a whole-target green run. Unix branches are unexecuted.
 The ordinary Packet-2 debug example needs an 8 MiB worker stack; this is a host
 constraint, not an adopted project limit. These are product-evidence limits, not
-reasons to rerun runtime suites for this documentation preparation.
+reasons to clear inherited limits from unrelated focused passes.
 
 Adopt only the slice-named sections of the [dated brief](../../../../research/independent-local-check-and-initial-delegation-brief-2026-10-04.md):
 operation/change/proof map, authority/acquisition, snapshot/refusal/history, landed
@@ -99,7 +101,7 @@ sufficient; no new external research/adoption or host routing is required.
 
 ## Selected minimal owner and API boundaries
 
-The following are proposed engineering selections for this increment. Private
+The following are the bounded engineering selections approved for this increment. Private
 names, exact additive version strings and bounded helper factoring may be resolved
 from these owners before product edits; material choices need focused causal review.
 They may not remove acceptance or widen the selected workflow. No service or
@@ -341,6 +343,49 @@ here prove Packet-3 identity, not delivery of Packet-4's complete consumer workf
 
 ## Ordered implementation work and acceptance
 
+### Bounded implementation selections — 2026-10-06
+
+The human approved Packet 3 in the persistent meta session and requested its
+implementation. That authorization supersedes this file's prepared/unimplemented
+admission wording for this increment only; it supplies no runtime project choices.
+The following engineering selections preserve the approved outcome:
+
+- Add a separately reviewed local full-check definition/dependency version and
+  a focused Contracts evaluation module. Its canonical evidence, admission
+  terminals and closed result live in one additive JSON evaluation namespace
+  under the existing Contracts retained root and consuming lock. The existing
+  v1/v2 definitions, generic evidence/verdict APIs and source-seam results keep
+  their formats and meaning. Reuse only fitting intrinsic/pure validation helpers.
+- Retain a checked owner allocation ordinal in the exact Purpose intent.
+  Every retained reservation participates in allocation; interruption cannot
+  cause reuse. Request keys recover requests rather than identify occurrences.
+- Add separate Engine evaluation terms and issuance/checkpoint/history records,
+  adopted under the supported live predecessor. Engine-neutral typed Purpose,
+  Plan and complete envelope inputs carry the untrusted request. Only Engine's
+  retained issuance and live guarded verification establish authorization.
+- Extend Dock with native capability and full-route source recognition plus a
+  sibling attempt namespace under its existing retained root/lock. Retain the
+  exact one-attempt intent before effect; release the reservation lock before
+  calling the existing executor. Original retained terminal recovery never
+  relaunches; an intent without a proven terminal remains uncertain.
+- Keep the V1 process wire/preimages unchanged. Use a separately discriminated
+  full-route run projection with exact occurrence/basis/selection linkage.
+  Owner-recognized native source proof establishes facts; copied DTOs do not.
+  Before Dock reserves or executes, Engine's sealed admission compares the actual
+  run's exact stack and six dimension IDs with its authorized Plan selection.
+  The supported native mapping is owner-controlled; unknown or altered IDs
+  refuse. A caller-supplied translation cannot establish reach equality.
+- Carry an explicit caller-supplied supported retention horizon through all
+  three owners. Require complete declared owner-subtree mutation reach and
+  proof-input read membership before each consumer's effects or proof reads.
+  Resolve v3 governance before Engine guards and Contracts consuming locks;
+  final Engine verification consumes the already-fixed evidence-set identity.
+
+These selections add no new artifact family, global journey lock, migration,
+retry platform, product CLI route or Packet-4 workflow. Focused review of these
+selections precedes symbol edits; implementation acceptance remains the complete
+ordered work and integrated discriminators below.
+
 These are dependent steps inside **one Packet-3 outcome**, not new packets or
 permission to cross its checkpoint. Record bounded engineering decisions before
 symbol edits and run repository-required impact analysis.
@@ -366,7 +411,7 @@ Required integrated discriminators:
 | Durability/history | Crash at allocation, commitment, Dock output/admission, frontier/set and result commit: recover original retained intent/outcome only, distinguish not committed/committed/uncertain, and never publish false success. Lost response replay is exact. Missing/substituted locks refuse without creation. Historical result bytes/identities stay unchanged after D→G/revoke; lost retained dependency reports unavailable exact replay. |
 | Compatibility | Retained credential V1, Packet-1 and Packet-2 definitions/terms/evidence/source-seam bytes and semantics remain exact. A changed full-check definition/dependency requires new actual review; no upgrade, automatic runtime selection or author-as-reviewer substitution. |
 
-## Verification for implementation and this preparation
+## Verification
 
 Discover live target names before execution. Add focused owner/SDK targets for the
 new route and select regression callers from actual impact; the existing anchors
@@ -402,12 +447,53 @@ review outcomes or actual user-project decisions. Carry the inherited suite/Unix
 debug-stack limits honestly. No unrelated reproducibility, device or full-workspace
 suite is selected absent a concrete affected dependency.
 
-This documentation-only preparation checks source/acceptance traceability,
+The original documentation-only preparation checked source/acceptance traceability,
 predecessor/status truth, changed-document local links/anchors, whitespace/exact
-diff and GitNexus change detection. No runtime suite is rerun or Packet-3 behavior
-claimed. GitNexus query/context is degraded: foreign storage, missing Protocol/
+diff and GitNexus change detection; it ran no runtime suite or Packet-3 behavior.
+Selected implementation acceptance is verified. The prior source-integrity causal
+review remains **APPROVE** for its unchanged subject; the final cache, Windows
+listing and test-isolation delta review also returned **APPROVE**, with no P1–P4
+findings. GitNexus
+query/context is degraded: foreign storage, missing Protocol/
 Category tables, stale index and unresolved new local symbols. Direct source,
 caller and diff inspection supplements it; no incidental index repair is authorized.
+
+The separate normal-dependency consumer completed the original illustrative
+reviewed definition with its unchanged 3,600-second freshness criterion. Captured
+`amount: -1` closed current **Fail**, with the actual `/amount` minimum violation,
+in 272.4 seconds (observation age 211 seconds); `amount: 125` closed current
+**Pass** in 328.8 seconds (age 258 seconds). Separate processes reproduced each
+exact retained result. One favorable caller script initially still referenced
+the unfavorable input and correctly produced another current Fail; that result
+and its exact history were preserved before correcting the caller. Earlier
+immutable Pass and stale Indeterminate results were preserved rather than
+rewritten. These values demonstrate supplied test choices, not product defaults
+or approval of any runtime project criterion.
+
+Focused native evidence covers warmed package/request/candidate/terminal source
+substitution refusals and restored-source closure with one execution, genuine
+timeout with empty Indeterminate accounting, insufficient available reach held
+without attempt, 13 separate-process checkpoints, four D-to-G refusals, a fresh
+supported same-project G Pass, and four revocation refusals with exact D/G history
+and no historical relaunch. The first retained suffix failed after its physical
+lock probes changed the lock's native generation, correctly masking G with an
+operating-lock refusal. The destructive matrix now uses its own owner-created
+fixture; the focused G/revocation continuation passed in 514.4 seconds with its
+governing generation explicitly unchanged. No physical-generation check was
+relaxed, and the original failed fixture and outcomes remain preserved.
+
+Only package-owned embedded profile resolution is reused; supplied content and
+native authority/source observations remain fresh. Windows directory listing uses
+no-follow native file handles for single-link identity checks. The original-root
+read-only authority operation improved from 9.022 to 0.553 seconds with identical
+fingerprints, and listing improved from 0.618 to 0.00447 seconds with identical
+entries. Eight Windows filesystem and three SDK lock/head discriminators passed,
+including a helpers-unavailable control. Inherited broader regression limits
+remain: the capability-count anchor had 36 passes and one failure; the Windows
+owner run had 24 passes, one failure and one ignored case, with that failing case
+passing in isolation but attribution unresolved. Unix was not executed, and the
+debug consumer's 8 MiB stack requirement remains. No whole-workspace green claim
+or additional host enforcement follows from the focused acceptance.
 
 ## Focused live source map and completion boundary
 
@@ -429,11 +515,13 @@ implementation and actual runtime choices. If permitted sources cannot support a
 safe selected boundary during implementation, return the exact question to meta;
 do not silently widen it.
 
-No product code/schema/fixture edits occur in this preparation. No runtime project
-setup, Packet-4 details, general posture/assurance/pruning/metric platform,
+The original preparation made no product code/schema/fixture edits. The human
+subsequently approved the bounded Packet-3 implementation above. No runtime project
+choice, Packet-4 details, general posture/assurance/pruning/metric platform,
 Work Progression, present reliance/actions, automatic agent routing, full Substrate
 adoption, publication or new phase is selected. Those obligations remain in the
 [existing coverage carry-forward](../../coverage-and-landing-map.md#local-check-planning-and-host-integration-carry-forward)
 and [Phase 6](../../phase-and-slice-map.md#phase-6--consumer-adoption).
-Return AUTHORITY_READY to meta for the human's Packet-3 plan review. It grants no
-implementation permission or slice completion.
+After complete acceptance, focused causal review and a coherent local commit,
+return PACKET_COMPLETE to meta for the human's result recap. This grants no
+successor execution or slice completion.

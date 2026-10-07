@@ -21,12 +21,15 @@ use std::path::{Component, Path, PathBuf};
 use std::sync::Mutex;
 
 mod evidence_repository;
+mod full_definition_repository;
+mod local_evaluation_repository;
 mod local_repository;
 pub use evidence_repository::{
     EvidenceAppendExecutionV1, EvidenceAppendReceiptV1, EvidenceListEntryV1, EvidenceListPageV1,
     EvidenceListRequestV1, EvidenceListRetentionV1, EvidenceReadOutcomeV1, StoredEvidenceRecordV1,
 };
 pub(crate) use evidence_repository::{EvidenceEvaluationEntryV1, EvidenceEvaluationSnapshotV1};
+pub use full_definition_repository::*;
 pub use local_repository::{
     LocalDefinitionRecordV2, LocalLifecycleHeadV2, LocalLifecycleTransitionInputV2,
     LocalOwnerMutationReceiptV2, PreparedLocalDefinitionAppendV2,
@@ -1448,7 +1451,10 @@ impl ContractOwnerRepositoryV1 {
             parse_canonical::<CommitMarker>(&self.read_regular(&marker_path)?)?
         } else {
             let prefix = self.installed_prefix(&intent)?;
-            if prefix == 0 {
+            if prefix == 0
+                && !(intent.operation == local_evaluation_repository::EVALUATION_OPERATION
+                    && intent.expected_head_bytes_fingerprint.is_none())
+            {
                 self.remove_pending(pending)?;
                 return Ok(());
             }
@@ -1579,6 +1585,12 @@ impl ContractOwnerRepositoryV1 {
                 if output
                     .relative_ref
                     .starts_with(LOCAL_CONTRACT_OWNER_ROOT_V2)
+                    || output
+                        .relative_ref
+                        .starts_with(LOCAL_CONTRACT_OWNER_ROOT_V3)
+                    || output
+                        .relative_ref
+                        .starts_with(crate::LOCAL_EVALUATION_OWNER_ROOT_V3)
                 {
                     continue;
                 }
@@ -1613,7 +1625,9 @@ impl ContractOwnerRepositoryV1 {
         self.require_inventory(&self.idempotency_root(), &ledgers)?;
         self.validate_semantic_inventory()?;
         self.validate_evidence_inventory()?;
-        self.validate_local_inventory()
+        self.validate_local_inventory()?;
+        self.validate_full_definition_inventory()?;
+        self.validate_evaluation_inventory()
     }
 
     fn validate_semantic_inventory(&self) -> Result<(), ContractOwnerRepositoryErrorV1> {
@@ -1684,6 +1698,29 @@ impl ContractOwnerRepositoryV1 {
         let historical_head_bytes =
             self.read_regular(&path.join(&intent.outputs[1].staged_name))?;
         let ledger_bytes = self.read_regular(&path.join(&intent.outputs[2].staged_name))?;
+        if intent.operation == local_evaluation_repository::EVALUATION_OPERATION {
+            self.validate_evaluation_transaction(
+                path,
+                &intent,
+                &primary_bytes,
+                &historical_head_bytes,
+                &ledger_bytes,
+            )?;
+            return Ok(intent);
+        }
+        if matches!(
+            intent.operation.as_str(),
+            "contract.full-definition.append" | "contract.full-lifecycle.transition"
+        ) {
+            self.validate_full_definition_transaction(
+                path,
+                &intent,
+                &primary_bytes,
+                &historical_head_bytes,
+                &ledger_bytes,
+            )?;
+            return Ok(intent);
+        }
         if matches!(
             intent.operation.as_str(),
             "contract.local-definition.append" | "contract.local-lifecycle.transition"
@@ -2267,6 +2304,15 @@ impl TransactionIntent {
         })
     }
     fn validate(&self) -> Result<(), ContractOwnerRepositoryErrorV1> {
+        if self.operation == local_evaluation_repository::EVALUATION_OPERATION {
+            return local_evaluation_repository::validate_evaluation_intent(self);
+        }
+        if matches!(
+            self.operation.as_str(),
+            "contract.full-definition.append" | "contract.full-lifecycle.transition"
+        ) {
+            return full_definition_repository::validate_local_intent_v3(self);
+        }
         if matches!(
             self.operation.as_str(),
             "contract.local-definition.append" | "contract.local-lifecycle.transition"

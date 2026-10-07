@@ -10,6 +10,16 @@ use serde_json::Value;
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Component, Path};
 
+#[cfg(test)]
+thread_local! {
+    static VALIDATOR_BUILDS: std::cell::Cell<usize> = const { std::cell::Cell::new(0) };
+}
+
+#[cfg(test)]
+pub(crate) fn take_validator_build_count() -> usize {
+    VALIDATOR_BUILDS.with(|count| count.replace(0))
+}
+
 const DRAFT_2020_12: &str = "https://json-schema.org/draft/2020-12/schema";
 const SCHEMA_MEDIA_TYPE: &str = "application/schema+json";
 const MAX_CLOSURE_DOCUMENTS: usize = 128;
@@ -2761,6 +2771,8 @@ fn build_validator(
     root_document_ref: &str,
     documents: &BTreeMap<String, LoadedSchemaDocument>,
 ) -> Result<Validator, RegistryLoadError> {
+    #[cfg(test)]
+    VALIDATOR_BUILDS.with(|count| count.set(count.get() + 1));
     let mut registry_builder = jsonschema::Registry::new().draft(Draft::Draft202012);
     for document in documents.values() {
         let validator_value = validator_document_value(document)?;

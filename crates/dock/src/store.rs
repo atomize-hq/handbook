@@ -272,6 +272,79 @@ impl DockExecutionLeaseV1<'_> {
 }
 
 impl DockOperationalStoreV1 {
+    pub(crate) fn begin_existing_execution_with_idempotency_request_v3(
+        &self,
+        request: &DockProcessRequestV1,
+        key: &str,
+        fingerprint: &FingerprintV1,
+    ) -> Result<DockExecutionStartV1<'_>, DockStoreErrorV1> {
+        validate_key(key)?;
+        let key_fingerprint = key_fingerprint(key)?;
+        let request_binding = request.binding().map_err(map_dock_error)?;
+        let lock = self
+            .repository_root
+            .acquire_existing_exclusive_lock_v1(LOCK_RELATIVE)
+            .map_err(map_repository_error)?;
+        self.recover_locked()?;
+        self.validate_inventory_locked()?;
+        if let Some(replay) = self.read_replay(&key_fingerprint)? {
+            if &replay.idempotency_request_fingerprint != fingerprint {
+                return Err(conflict(
+                    "local attempt key is bound to another exact request",
+                ));
+            }
+            let receipt = self.receipt_from_ledger(replay, DockStoreDispositionV1::Replayed)?;
+            lock.release().map_err(map_repository_error)?;
+            return Ok(DockExecutionStartV1::Replay(Box::new(receipt)));
+        }
+        Ok(DockExecutionStartV1::Lease(DockExecutionLeaseV1 {
+            store: self,
+            lock: Some(lock),
+            request: request_binding,
+            key_fingerprint,
+            idempotency_request_fingerprint: fingerprint.clone(),
+        }))
+    }
+    /// Packet-3 exact recovery; unlike initialization it never creates a missing lock.
+    pub(crate) fn replay_existing_for_request_v3(
+        &self,
+        request: &DockProcessRequestV1,
+        key: &str,
+        recover: bool,
+    ) -> Result<Option<DockStoreReceiptV1>, DockStoreErrorV1> {
+        validate_key(key)?;
+        let key = key_fingerprint(key)?;
+        let lock = self
+            .repository_root
+            .acquire_existing_exclusive_lock_v1(LOCK_RELATIVE)
+            .map_err(map_repository_error)?;
+        if recover {
+            self.recover_locked()?;
+        }
+        self.validate_inventory_locked()?;
+        let result = self
+            .read_replay(&key)?
+            .map(|ledger| {
+                if ledger.request != request.binding().map_err(map_dock_error)? {
+                    return Err(conflict("exact local attempt request was substituted"));
+                }
+                self.receipt_from_ledger(ledger, DockStoreDispositionV1::Replayed)
+            })
+            .transpose()?;
+        lock.release().map_err(map_repository_error)?;
+        Ok(result)
+    }
+
+    pub(crate) fn open_existing_for_recovery_v3(
+        repo_root: impl AsRef<Path>,
+    ) -> Result<Self, DockStoreErrorV1> {
+        let repository_root =
+            RetainedRepositoryRootV1::open_exact(repo_root).map_err(map_repository_error)?;
+        repository_root
+            .existing_lock_physical_fingerprint_v1(LOCK_RELATIVE)
+            .map_err(map_repository_error)?;
+        Ok(Self { repository_root })
+    }
     pub(crate) fn open_read_only(repo_root: impl AsRef<Path>) -> Result<Self, DockStoreErrorV1> {
         let repository_root =
             RetainedRepositoryRootV1::open_exact(repo_root).map_err(map_repository_error)?;

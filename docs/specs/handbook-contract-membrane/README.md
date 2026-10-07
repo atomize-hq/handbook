@@ -107,14 +107,15 @@ local author/lifecycle/Dock source authority. Its local implementation at `5bf0f
 returned PACKET_COMPLETE with final fresh causal APPROVE and completed meta
 validation/recap. The human reviewed the takeover recap and requested
 [Packet 3](slices/independent-local-check/packet-3.md) planning and stale-status
-reconciliation. That bounded first-complete-check plan is prepared for human
-implementation review; the complete four-packet slice remains unfinished and
-Packet-3 implementation is not authorized.
+reconciliation, then approved its bounded implementation, verification, focused
+review and local commit. Packet-3 implementation and selected native acceptance are
+verified, with final causal delta **APPROVE** and no unresolved P1/P2. Its human
+result checkpoint remains next. The complete four-packet slice is unfinished.
 Actual runtime choices retain their separate approval boundary.
 
 The human's 2026-10-06 [delivery-sequencing selection](phase-and-slice-map.md#current-delivery-sequencing)
 keeps the current stage focused on native owners and SDK features/refinement/usability.
-Packet 3 plans a complete native SDK check with usage and response/recovery docs
+Packet 3 implements a complete native SDK check with usage and response/recovery docs
 and ordinary consumer proof. CLI routes, installed product-skill instructions and
 the agent-guided experience for these new capabilities remain later bounded work;
 the existing delivered consumers and our skill-based engineering process continue.
@@ -159,7 +160,7 @@ Use the source that owns the question:
 | Where does future slice-specific intent belong? | In a clearly identified current document under `slices/<slice-id>/`, separate from retained fixtures. A roadmap entry plus an explicit execution request may authorize bounded preparation of that document, but product execution begins only after the resulting current slice authority is ready. |
 | What is the first bounded approved-semantics establishment outcome? | [`slices/admission-governance-establishment/README.md`](slices/admission-governance-establishment/README.md) records the completed local implementation at `aa793c1`: one newly registered local project, exact Contracts freshness-policy admission scope, native committed establishment/refusal/recovery and typed Rust SDK resolution/replay. The caller-supplied ceiling survives restart exactly. The single-packet slice is at human review; policy admission and successor activation remain separate. |
 | What is the completed positive deferral outcome and later-establishment implementation? | [`scoped-governance-deferral`](slices/scoped-governance-deferral/README.md) records completed local initial deferral at `8b13505`, including current/replay and evidence limits. [deferred-governance-establishment / Packet 1](slices/deferred-governance-establishment/packet-1.md) records same-project D→G at `9f28f99`, original D replay, authoritative v3 current resolution and focused recovery/concurrency evidence. Main has confirmed its aggregate validation/closeout and recap complete; inherited evidence limits remain. |
-| What is the independent-use plan and its next human review boundary? | [`independent-local-check`](slices/independent-local-check/README.md) retains four packets. [independent-local-check / Packet 1](slices/independent-local-check/packet-1.md) is delivered at `fccaf11` and human-reviewed. [independent-local-check / Packet 2](slices/independent-local-check/packet-2.md) is delivered at `5bf0f3b` with causal APPROVE and meta validation/recap complete. [Packet 3](slices/independent-local-check/packet-3.md) details the first complete real check and historical delivery for human implementation review. Its implementation and Packet 4's broad repeat/correction/decision-submission outcome remain unfinished; Substrate adoption remains separate. |
+| What is the independent-use plan and its next human review boundary? | [`independent-local-check`](slices/independent-local-check/README.md) retains four packets. [independent-local-check / Packet 1](slices/independent-local-check/packet-1.md) is delivered at `fccaf11` and human-reviewed. [independent-local-check / Packet 2](slices/independent-local-check/packet-2.md) is delivered at `5bf0f3b` with causal APPROVE and meta validation/recap complete. [Packet 3](slices/independent-local-check/packet-3.md) implements the first complete real check and historical delivery with verified selected acceptance, final causal delta APPROVE and no unresolved P1/P2. Its delivered result awaits the human checkpoint. Return its delivered result to the human checkpoint before Packet 4's broad repeat/correction/decision-submission outcome. Substrate adoption remains separate. |
 | Where is architecture rationale? | [`docs/ideas/handbook-contract-membrane-architecture-memo.md`](../../ideas/handbook-contract-membrane-architecture-memo.md) and related idea documents provide design lineage only. They do not authorize implementation or establish current completion. |
 
 If prose about implemented behavior conflicts with the current source and tests, treat the discrepancy as documentation drift; do not use the prose to override the product.

@@ -2404,11 +2404,16 @@ mod platform {
                 ));
             }
             let kind = if metadata.is_file() {
-                if !crate::canonical_repo_support::path_has_single_link(&entry.path()) {
-                    return Err(unsafe_fs(
-                        "repository directory contains a hard-linked regular file",
-                    ));
-                }
+                // Query the exact no-follow child handle under the retained
+                // directory guards. The same native identity check used by
+                // retained reads rejects aliases, reparses and non-files.
+                let child = OpenOptions::new()
+                    .read(true)
+                    .share_mode(FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE)
+                    .custom_flags(FILE_FLAG_OPEN_REPARSE_POINT)
+                    .open(entry.path())
+                    .map_err(|_| unsafe_fs("Windows directory child retained open failed"))?;
+                regular_file_identity(&child)?;
                 RepositoryDirectoryEntryKindV1::RegularFile
             } else if metadata.is_dir() {
                 RepositoryDirectoryEntryKindV1::Directory
@@ -2654,6 +2659,112 @@ mod platform {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[cfg(windows)]
+    #[test]
+    fn windows_listing_native_children_are_sorted_and_bounded() {
+        let repository = tempfile::tempdir().unwrap();
+        let entries = repository.path().join("entries");
+        fs::create_dir(&entries).unwrap();
+        fs::create_dir(entries.join("middle")).unwrap();
+        fs::write(entries.join("z-last"), b"last").unwrap();
+        fs::write(entries.join("a-first"), b"first").unwrap();
+        let root = RetainedRepositoryRootV1::open_exact(repository.path()).unwrap();
+
+        let listed = root.list_directory_bounded("entries", 3).unwrap();
+        assert_eq!(
+            listed
+                .iter()
+                .map(|entry| (entry.name(), entry.kind()))
+                .collect::<Vec<_>>(),
+            vec![
+                ("a-first", RepositoryDirectoryEntryKindV1::RegularFile),
+                ("middle", RepositoryDirectoryEntryKindV1::Directory),
+                ("z-last", RepositoryDirectoryEntryKindV1::RegularFile),
+            ]
+        );
+        assert_eq!(
+            root.list_directory_bounded("entries", 2)
+                .unwrap_err()
+                .kind(),
+            RepositoryDurabilityErrorKindV1::BoundExceeded
+        );
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn windows_listing_refuses_hard_links_and_observes_restoration() {
+        let repository = tempfile::tempdir().unwrap();
+        let entries = repository.path().join("entries");
+        fs::create_dir(&entries).unwrap();
+        let original = entries.join("record");
+        let alias = repository.path().join("alias");
+        fs::write(&original, b"original").unwrap();
+        fs::hard_link(&original, &alias).unwrap();
+        let root = RetainedRepositoryRootV1::open_exact(repository.path()).unwrap();
+        assert_eq!(
+            root.list_directory_bounded("entries", 16)
+                .unwrap_err()
+                .kind(),
+            RepositoryDurabilityErrorKindV1::UnsafeFilesystem
+        );
+        fs::remove_file(alias).unwrap();
+        assert_eq!(root.list_directory_bounded("entries", 16).unwrap().len(), 1);
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn windows_listing_refuses_file_and_directory_reparse_links() {
+        let repository = tempfile::tempdir().unwrap();
+        let entries = repository.path().join("entries");
+        fs::create_dir(&entries).unwrap();
+        let target = repository.path().join("target-file");
+        fs::write(&target, b"target").unwrap();
+        let link = entries.join("link");
+        std::os::windows::fs::symlink_file(&target, &link).unwrap();
+        let root = RetainedRepositoryRootV1::open_exact(repository.path()).unwrap();
+        assert_eq!(
+            root.list_directory_bounded("entries", 16)
+                .unwrap_err()
+                .kind(),
+            RepositoryDurabilityErrorKindV1::UnsafeFilesystem
+        );
+        fs::remove_file(&link).unwrap();
+        let target = repository.path().join("target-directory");
+        fs::create_dir(&target).unwrap();
+        std::os::windows::fs::symlink_dir(&target, &link).unwrap();
+        assert_eq!(
+            root.list_directory_bounded("entries", 16)
+                .unwrap_err()
+                .kind(),
+            RepositoryDurabilityErrorKindV1::UnsafeFilesystem
+        );
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn windows_listing_refuses_read_sharing_denial_and_observes_restoration() {
+        use std::os::windows::fs::OpenOptionsExt;
+        let repository = tempfile::tempdir().unwrap();
+        let entries = repository.path().join("entries");
+        fs::create_dir(&entries).unwrap();
+        let record = entries.join("record");
+        fs::write(&record, b"original").unwrap();
+        let root = RetainedRepositoryRootV1::open_exact(repository.path()).unwrap();
+        let denied = OpenOptions::new()
+            .read(true)
+            .share_mode(0)
+            .open(&record)
+            .unwrap();
+        assert_eq!(
+            root.list_directory_bounded("entries", 16)
+                .unwrap_err()
+                .kind(),
+            RepositoryDurabilityErrorKindV1::UnsafeFilesystem
+        );
+        drop(denied);
+        assert_eq!(root.list_directory_bounded("entries", 16).unwrap().len(), 1);
+    }
 
     #[cfg(unix)]
     #[test]

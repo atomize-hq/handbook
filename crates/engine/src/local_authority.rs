@@ -8,8 +8,13 @@ use crate::{
 };
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
+use std::sync::OnceLock;
 
 pub mod local_check;
+pub mod local_evaluation;
+
+#[cfg(test)]
+mod fixed_profile_tests;
 
 pub const LOCAL_OPERATING_RULE_V1: &str = "handbook.operating.local-initial@1.0.0";
 const BASE: &str = ".handbook/local-operating/v1";
@@ -953,7 +958,68 @@ pub fn resolved_local_operating_profile(
     .map_err(|_| refuse("profile", "exact shipped mechanics could not resolve"))
 }
 pub(crate) fn profile() -> Result<crate::ResolvedInstanceProfile, LocalAuthorityRefusalV1> {
-    resolved_local_operating_profile()
+    static PROFILE: OnceLock<Result<crate::ResolvedInstanceProfile, LocalAuthorityRefusalV1>> =
+        OnceLock::new();
+    PROFILE
+        .get_or_init(resolve_fixed_operating_profile)
+        .as_ref()
+        .cloned()
+        .map_err(Clone::clone)
+}
+
+fn resolve_fixed_operating_profile(
+) -> Result<crate::ResolvedInstanceProfile, LocalAuthorityRefusalV1> {
+    let request = crate::profile_decision::local_operating_profile_request();
+    require_fixed_builtin_profile_request(&request)?;
+    let selected = crate::resolve_profile_selection(Path::new(env!("CARGO_MANIFEST_DIR")), request)
+        .map_err(|_| refuse("profile", "exact shipped mechanics could not resolve"))?;
+    require_fixed_builtin_profile(&selected)?;
+    Ok(selected)
+}
+
+// Only this package-owned closure may be retained for the process lifetime.
+// No repository bytes, supplied content or authority observations enter it.
+pub(crate) fn require_fixed_builtin_profile_request(
+    request: &crate::ProfileSelectionRequest,
+) -> Result<(), LocalAuthorityRefusalV1> {
+    use crate::DefinitionSource;
+    if request.selected_profile_ref.as_str() != "handbook.profile.shipped-root@1.2.0"
+        || request.allowed_schema_roots != ["definitions/schemas"]
+        || [
+            &request.profile_sources,
+            &request.stable_role_registry_sources,
+            &request.schema_entry_sources,
+            &request.artifact_kind_sources,
+            &request.semantic_capability_sources,
+            &request.semantic_validator_sources,
+            &request.project_condition_sources,
+            &request.vocabulary_sources,
+            &request.context_resolution_sources,
+            &request.context_resolution_policy_sources,
+            &request.intake_definition_sources,
+        ]
+        .into_iter()
+        .flatten()
+        .any(|binding| !matches!(&binding.source, DefinitionSource::BuiltIn(reference) if reference == &binding.definition_ref))
+    {
+        return Err(refuse("profile", "exact shipped mechanics could not resolve"));
+    }
+    Ok(())
+}
+
+pub(crate) fn require_fixed_builtin_profile(
+    profile: &crate::ResolvedInstanceProfile,
+) -> Result<(), LocalAuthorityRefusalV1> {
+    if profile.exact_ref().as_str() != "handbook.profile.shipped-root@1.2.0"
+        || profile.selected_profile_definition_fingerprint().as_str()
+            != "sha256:40c5fdb8a6ea42cf0f5f2c5cac8306ec7ad3a238c341653947f85abc93d72c40"
+    {
+        return Err(refuse(
+            "profile",
+            "exact shipped mechanics could not resolve",
+        ));
+    }
+    Ok(())
 }
 fn exact(
     binding: &LocalBindingV1,
