@@ -1,28 +1,38 @@
 # Packet 1: register and resolve native open work
 
-Status: **prepared for human plan authorization; unimplemented**, 2026-10-08.
+Status: **conditional next plan; unimplemented; authority/recovery choices and
+composition-successor compatibility gate pending**, reconciled 2026-10-08 at
+`2740e04`. This supersedes the initial-only recommendation at `6aba084`.
 This is the sole packet of [work-item-state-foundation](README.md). The slice
 owns the outcome, exclusions and eight acceptance conditions; this document
 details only its next implementation increment.
 
 ## Observable behavior and review boundary
 
-Given one positively registered local project whose original initial authority
-remains current over its original positive deferred basis, explicit prior-approved
-work-store reach, and a valid exact item
+Under the proposed rule, given one positively current local-check project in D
+or established-from-D G, newly activated exact human-approved work-registration
+terms with sufficient effect/read/write reach, and a valid exact item
 request, a normal SDK caller creates one owner-confirmed `open` item. It retains
 the original request locator before execution. Current resolution after restart
 returns that exact item/snapshot; original-request resolution returns the same
 registration outcome. A registration receipt proves creation, not work completion.
 
-Creation is supported **before local-check successor adoption or D→G**. The
-existing initial witness rejects both successor footprints and a changed admission
-basis. A project which has already completed local-check setup cannot register
-through this route. Do not expand or reinterpret its successor terms to repair
-that limitation. Existing item/history reads remain separate owner-state reads
-after such changes; they confer no new creation permission.
+The activation API and consuming work permission are **missing product mechanisms**
+proposed here, not existing local-check support. [The three next-plan gates](../../coverage-and-landing-map.md#next-plan-selection-gates)
+require human selection of activation/population and commit/recovery, and completed
+composition/kinds successor preparation before execution. Plan approval then
+authorizes this bounded implementation; it supplies no actual project's terms.
+The original initial witness still refuses successor footprints and changed
+governance. Work permission must be newly established by the selected fixed rule,
+not inferred from local-check classes or a Context Resolution envelope.
 
-For example, before local-check adoption on P, the item key
+D→G invalidates an earlier bound/prepared D basis. Proposed explicit human
+activation of compatible work terms on current G permits new registration there;
+old requests keep their original authority and cannot substitute the new grant.
+Existing item/history reads remain separate owner-state reads. A D-only route is
+a viable narrower alternative only with a human-accepted G creation limitation.
+
+For example, a current local-check project P activates exact work terms, then the item key
 `inspect-session-renewal`, a descriptive label and a
 bounded work question select the package-supported explicit leaf composition.
 No contract, review result, child, prerequisite or completion standard is invented.
@@ -48,9 +58,11 @@ and [structured-data standard](../../structured-data-format-standard.md).
 General defaults remain PROPOSED; Contracts JSON and existing versioned identities
 are fixed. This packet explicitly chooses additive owner-managed JSON only.
 
-| Inspected source at `2ce0871` | What may be reused; what it does not supply |
+| Inspected source through `2740e04` | What may be reused; what it does not supply |
 | --- | --- |
 | [Engine initial operating authority](../../../../../crates/engine/src/local_authority.rs), `LocalOperatingTermsV1`, `OperatingGuard`, `LocalCurrentAuthorityWitnessV1::with_current` | Exact initial local-advisory terms, current native locks, root/Charter history and bounded OwnerWrite reach. The held witness is crate-private; source reuse inside Engine is possible. Generic `OwnerWrite` and paths do not grant local/parent completion or reinterpret `LocalCheckTermsV1`. |
+| [Successor admission](../../../../../crates/engine/src/local_authority/local_check.rs), `with_admission`, `require_predecessor`, `check_current`, `require_basis`; [SDK basis observation](../../../../../crates/sdk/src/local_check.rs), `observe_local_check_basis` | Held callbacks and original/current lineage, revocation, Charter/lock generations and exact relation/tree validation are reusable. SDK supports fresh D/established-from-D G observation outside those guards. Neither supplies work permission; a narrow native work-rule activation and consuming path must be added. |
+| [Evaluation/correction authority](../../../../../crates/engine/src/local_authority/local_evaluation.rs), [correction](../../../../../crates/engine/src/local_authority/local_evaluation/correction.rs) | Human-approved domain terms, immutable InputCorrection delegation, exact decisions and original recovery are precedents. They cannot establish/replace a work grant or appoint its decider. No dependency on evaluation/correction heads unless actually governing this operation. |
 | [Engine Context Resolution](../../../../../crates/engine/src/context_resolution.rs), `ContextResolutionEnvelope::evaluate_mutation` | Its local branch checks current initial terms and path constraints, but the call returns after the current guard releases. Calling it once before a write is insufficient through-commit authority. Do not introduce generic-artifact authority loading or use a serialized envelope as permission. |
 | [Engine durability](../../../../../crates/engine/src/repository_durability.rs) and [tests](../../../../../crates/engine/tests/repository_durability.rs) | Retained physical root, bounded regular reads/inventory, existing native locks, exact/no-replace durable installation and explicit uncertainty. These primitives do not choose a work transaction or prove its new recovery path. |
 | [Engine initialization](../../../../../crates/engine/src/repository_initialization.rs), [identity](../../../../../crates/engine/src/repository_invocation_identity.rs) | Existing-project guard and exact retained initialization claim/identity. Registration must use existing truth; ordinary identity allocation/setup cannot repair missing registration or identify a new project during recovery. |
@@ -77,27 +89,49 @@ of a same-project bounded leaf in `open`. It binds the supported composition,
 record/identity version, no-relations/no-completion boundary, accepted local
 advisory authority mode, request equality and exact commit/recovery requirements.
 An untrusted request cannot replace the rule, append executable hooks, choose
-another state machine or introduce a kind. Establish this descriptor through
+another state machine or introduce an unsupported kind. Establish this descriptor through
 native fixed conformance, retaining its exact content/binding with each creation;
 it assigns no governance and needs no separate kind registry.
 
-Creation needs the actual prior human-approved initial terms and current native
-authority over the original deferred basis, before local-check adoption or D→G,
-not a new prompt merely because the work owner performs a check. The initial
-witness's successor-footprint and admission-currentness refusals remain controlling.
-The exact approved reach must include `.handbook/work-state/v1/` and its required
-input/lock paths, and the supported bounded registration effect. Existing terms
-that omit that reach refuse. No term replacement, fallback, delegation expansion
-or local-check grant interpretation is implemented. Actual runtime terms must be
-supplied through the existing setup path; plan approval supplies none.
+**Proposed authority boundary, pending human selection:** Engine local authority
+owns a fixed versioned work-registration establishment rule outside candidate
+terms. It permits the original claimed human principal to approve exact bounded
+terms against positive current initial/check lineage, current Charter and fresh
+supported D/G applicability. Native establishment validates that rule and exact
+approval/content, current project/root and compatible reach, then durably activates
+the grant with original-request recovery. Candidate agent permission cannot
+authorize this activation. Advisory attribution remains advisory; no independent
+authentication or host enforcement is claimed.
 
-Use the Engine-native held current-authority mechanism while the work owner
+Terms bind original principal/agent/instruction/source, exact registration effect/
+composition scope, current lineage/governance, read/full-owner-subtree reach,
+reservation, revocation principal and retention. Activation must positively
+establish the new owner stream under exact initialized project truth; absent,
+damaged, reset or pending state cannot masquerade as never established. Reach for
+the new store must be explicitly approved under this new rule, never injected into
+old identities. Revocation is supported for the declared principal. Proposed human
+re-establishment on G requires exact prior work-grant identity, current G basis and
+recovery of pending activation; no generic replacement/delegation or post-revocation
+restoration is included. Revoked work grants refuse new use.
+
+SDK composes prepare/activate/resolve/recover work terms and routine registration;
+Engine owns native permission. Resolve governance outside consuming locks through
+the supported SDK/Contracts basis path and validate exact relation/tree inward.
+Keep Engine free of Contracts/SDK dependencies. Routine registration under the
+activated grant needs no additional prompt solely for work-owner admission.
+Neither old initial terms nor local-check/evaluation/correction/CR action classes
+are a fallback. Activation's own exact predecessor/intent/decision/terminal and
+revocation recovery must preserve current versus historical authority; it cannot
+resume an old activation using the candidate grant as establishment permission.
+
+Use the Engine-native successor-aware held current-authority mechanism while the work owner
 validates and commits. A narrow internal consuming callback/admission may be added
 for this registration when needed; it must bind the exact project/root, item/key,
 composition, request digest, declared write targets and current authority basis.
 It is lifetime-sealed, cannot be serialized/reconstructed by SDK, and permits no
 other work operation. Hold and validate the existing initialization/operating
-guards and declared authority dependencies through creation, then the work owner's
+guards, newly activated work terms and declared authority dependencies through
+terminal publication, then the work owner's
 native lock in one consistent order. Do not acquire operating locks from inside
 a held work lock or claim that a preflight mutation decision protects the commit.
 
@@ -122,12 +156,18 @@ Use the established 4,096-byte bound for each descriptive/provenance string and
 external references or open-ended user JSON are needed in this first shape.
 
 Store retained owner truth under `.handbook/work-state/v1/`, including its native
-lock, exact immutable item-registration record and request-addressed transaction
+lock, positive owner-establishment identity, exact immutable item-registration record and request-addressed transaction
 history. The initial snapshot is version 1, `open`; it binds item/project,
 composition descriptor and admitted request. Exact item/request content conflicts
 refuse. A separate latest-head selector is unnecessary when the sole supported
 item state is its immutable initial state. Each item's exact committed registration
 is its current state source; this does not advertise edits or successor selection.
+
+Item identity scheme is independent of codec/release/composition version. A later
+composition or capability cannot reinterpret retained leaf meaning. Apply the
+[successor compatibility gate](README.md#composition-and-kinds-successor-compatibility-gate)
+before freezing descriptor/schema shape. Later relation/definition revisions need
+selected owner operations; no editable state setter or automatic rebinding.
 
 No unbounded list operation is exposed. Validate one declared owner inventory
 within explicit Engine-compatible file/count/byte bounds; refuse overflow or
@@ -137,31 +177,87 @@ validation. Canonical JSON has no trailing newline; semantic fingerprints bind
 domain-separated canonical values and byte fingerprints bind retained exact bytes.
 No existing owner fingerprint or framing is rewritten.
 
-Select a decided-prefix transaction using the existing durable primitives:
-retain the exact request and intent before effect installation, prove expected
-absence, decide one exact snapshot/receipt, install it without replacement, then
-close a matching terminal. Only a complete owner-verified terminal plus its exact
-installed snapshot permits a committed response or current item fact. A receipt
-names **registration**, not `local_closeout`, and separately binds the exact native
-permission and initial state. No in-place replacement or new-key retry may occupy
-the item after an uncertain request. File layout details may be settled in scope;
-the truthful boundaries and same-identity recovery may not.
+## Durable prefix and authority-transition contract
 
-Original request resolution is history/replay and creates no new effect. Recovery
-may finish the same decided registration or positively resolve noncommit under
-the retained original request and supported recovery rule; any remaining permission
-needed for a not-yet-applied effect must still be current. A possible application
-without exact terminal proof stays uncertain until that recovery resolves it.
-Lost acknowledgement is not noncommit. Current resolution must never repair a
-missing project identity, owner lock or committed record by allocating or treating
-the store as new. Preserve original creation authority snapshots/history so later
-revocation or reset can block new creation without relabeling an old receipt as
-present permission. Runtime reset may destroy operating state, not this work store;
-that loss must not turn existing items into missing/new work.
+This entire contract is **recommended, pending human selection**. Preserve the
+terminal-plus-snapshot public boundary: native no-replace durable publication of
+one exact registration terminal is the **semantic commit point**. It binds the
+retained snapshot/registration receipt, request, item/project, original authority
+and admitted effect. Exact snapshot and complete committed terminal are both
+necessary for current `open` truth. Intent, decision or installed snapshot alone
+creates only a reservation/pending candidate. A decision is not irrevocable commit.
+Never expose candidate bytes as current state or report a pending item as absent.
+A receipt proves registration, never `local_closeout`.
+
+Retain exact accepted request/intent first; reserve item and request; prove expected
+absence; retain the exact decided snapshot/receipt and original authority closure;
+install the immutable candidate without replacement; revalidate original live
+admission and publish its terminal while native authority/work guards remain held.
+New-effect recovery uses those original checks. No gap between returned Allowed
+and later publication is permitted. Lost/uncertain terminal write is resolved by
+exact proof of installation under the original admitted path, not by publishing
+another terminal using another grant. Missing authorization proof stays uncertain/
+unverifiable. Physical file layout may not change these public semantics.
+
+| Retained durable prefix | Original authority unchanged/current | Successor adoption/supersession | D→G changes bound basis | Original authority revoked | Runtime-state reset |
+| --- | --- | --- | --- | --- | --- |
+| No accepted request/intent, positively complete owner inventory | Report unaccepted/absent request, not replayed noncommit. New attempt needs current permission. | No old request to resume; use newly activated current terms. | New G activation required. | No new creation. | No creation from lost operating state. |
+| Accepted intent, or decision/reservation, no committed terminal or installed candidate | Same original key may continue with live original permission, or prove noncommit. | No substituted successor permission; prove noncommit or uncertainty. | No publication under stale D; prove noncommit or uncertainty. | No publication; prove noncommit or uncertainty. | Retained historical recovery may prove noncommit; no publication with recreated locks. |
+| Exact installed snapshot/receipt, no committed terminal | **Pending, not `open`.** Publishing terminal is a new effect requiring original current authority. Exact proof can instead close noncommit. | Pending snapshot; no historical-proof shortcut. Noncommit proof or uncertainty. | Same: no commit via new G grant. | Same: no post-revocation commit. | Same: no commit via replacement operating state. |
+| Exact committed terminal plus matching snapshot/receipt and original proof closure | Current immutable `open` fact or exact committed replay. No second effect. | Historical proof/current item read; no permission restored. | Same committed fact; new creation needs current G terms. | Same committed fact; authority is historical only. | Same fact only through new retained read dependencies, not operating locks. |
+| Missing/corrupt/conflicting/partial required evidence, or possible terminal publication with no exact proof | Integrity refusal or commit uncertainty; no manufactured absence or success. | Same; retain reservations. | Same. | Same. | Same; loss is not noncommit. |
+
+The supersession column includes initial-to-check adoption for the alternative
+initial route and any selected work-authority successor; the recommended route
+already starts on current local-check state. Infer no new operation from that
+column. Replaying exact old committed proof is **historical-proof finalization**,
+not new registration. Completing an absent terminal is a new effect and cannot
+use that historical rule. If terminal installation may have happened but cannot
+be proven, missing files do not establish noncommit.
+
+**Reservation and noncommit proof:** reserve only this request/item against
+conflicting/new-key registration or future mutation. Unrelated items and exact
+committed history remain usable; capacity overflow may refuse new admission
+without truncating old recovery. Noncommit needs retained original intent,
+positive initialized owner identity, correct root/work-lock generation, complete
+bounded inventory of every possible publication target, proof that no committed
+terminal was published, and exact pending candidates with no conflicting effect.
+Require positive retained proof that terminal publication was never attempted or
+that a native attempted installation positively did not apply. Persist the exact
+publication-attempt checkpoint before invoking installation. If that checkpoint
+exists with no provable result, absent terminal bytes alone cannot close noncommit;
+retain uncertainty even if a later grant is current. Missing/damaged attempt
+history cannot masquerade as a never-attempted prefix.
+Under the owner lock durably close a matching original-key noncommit before
+releasing its reservation. This narrowly selected historical recovery effect is
+neither work creation nor authority restoration. Retain candidate/decision bytes
+as history; later requests cannot overwrite them. Uncertain reservations cannot
+be cleared by timeout, absence fallback, grant replacement or a new key.
+
+**Read dependencies versus live authorization:** retain exact initialized project/
+physical-root and positive owner-establishment identities, owner lock generation,
+request/intent/decision/terminal/snapshot/receipt, descriptor bytes, original
+authority/approval/provenance and original admitted dependencies needed for
+historical verification. New read-only work resolution and historical recovery
+must use retained dependencies outside `.handbook/state`, without creating
+operating guards or consulting live Charter/terms as a condition of past truth.
+Missing retained proof yields attributed unavailable/unverifiable history, never
+fresh setup. New creation still needs current Charter/governance/unrevoked terms
+and original operating guards. Reset may remove those live dependencies and block
+new writes; it cannot allocate replacement identity, recreate an old lock as proof
+or reinterpret retained work. Existing history APIs do not prove this new path.
+
+Activation needs the analogous explicit terminal-publication boundary, exact
+pending reservation, same-original establishment rule for unapplied activation,
+and noncommit/uncertainty handling. A candidate work grant never finalizes its own
+missing activation terminal. Historical committed grant replay never reactivates
+it. This is unit 1's selected-rule acceptance, not a general authority-lifecycle
+service or permission for CR binding management.
 
 ## Typed SDK responses and next steps
 
-Expose typed prepare/register, resolve-current-item, resolve-original-request,
+Expose typed work-term prepare/activate/resolve/recover/revoke and work
+prepare/register, resolve-current-item, resolve-original-request,
 recover-original-request and inspect-completion-support operations on
 `HandbookSdkV1`. A sealed native prepared value is distinct from its portable
 locator; callers retain the locator before invocation. Stable semantic keys are
@@ -174,6 +270,7 @@ distinct from correlation/delivery. Callers need no private path knowledge.
 | Positively not committed | Native recovery establishes that this request did not apply. A fresh request requires currently valid authority and must retain the old result/history. |
 | Uncertain | Retain the original locator and use exact request recovery. Do not assert absent/open/closed success or retry a possibly applied registration under a new key. |
 | Current `open` snapshot | Exact owner-established item state at this read. It implies neither operating permission nor eligibility. Missing/corrupt dependencies refuse instead of returning an empty item. |
+| Pending registration / reserved item | No public `open` fact or permission; recover the original request. A candidate without terminal cannot appear as absent or committed. |
 | Historical registration outcome | Original creation fact and authority provenance only. It restores no revoked/current operating terms. |
 | Unsupported completion / not assessed | No governing completion decision is formed and no eligibility/disposition exists. A close/parent action is unavailable. This is a capability/preformation refusal, not `ineligible / block`, `indeterminate / hold`, `not_applicable / no_effect`, or a persisted reliance occurrence. |
 
@@ -188,7 +285,7 @@ no positive eligibility implementation or reliance-refusal history protocol.
 Keep the increment within one native state owner and one SDK facade. Add the
 owner module/export and focused native tests; add the facade/export, one real SDK
 integration test and concise usage/response/recovery documentation alongside the
-existing SDK guidance. Other owners may receive only the narrow held-admission
+existing SDK guidance. Other owners may receive only the narrow work-rule activation/currentness and held-admission
 reuse necessary for this path; preserve their existing bytes and behavior. No
 workspace/crate/catalog/schema-generation expansion is selected.
 
@@ -210,14 +307,19 @@ git diff --check
 
 Verify real normal-dependency registration/reopen/current/history and receipt;
 same-key replay/conflict and duplicate item; unsupported kind/relation/state;
-insufficient/revoked/substituted authority; local-check successor-footprint and
-D→G refusal, with existing item/current/history reads still preserving original
-work truth after those changes; actual operating guards held across
-creation; exact missing/corrupt history refusal; concurrent creators/readers;
-lost replies and interrupted prefixes before/after decision, install and terminal;
+insufficient/revoked/substituted authority; positive new human activation on
+post-local-check D and established-from-D G, refusal with local-check terms alone,
+D→G invalidation and new explicit G activation without old-request substitution;
+actual guards held across terminal publication; exact missing/corrupt history
+refusal; concurrent creators/readers; every prefix × transition in the matrix,
+including lost replies before/after intent, decision, snapshot and terminal;
 same-identity recovery without repeat effect; current open truth after refresh/reset
 with new creation refused when required operating state is lost; root/lock
-substitution, bounds/codec refusals and unchanged legacy result behavior.
+substitution, positive owner bootstrap versus lost state, peak transaction capacity
+(including candidates and terminal/noncommit closure), reservation release only
+on exact proof, prepared successor composition compatibility, bounds/codec refusals
+and unchanged legacy result behavior. Pause registration/activation against real
+revocation and D→G transitions to prove serialization and stale refusal.
 
 Use deterministic test-only interruption points around real native writes and
 process-level concurrency where it measures the lock/commit contract. They cannot

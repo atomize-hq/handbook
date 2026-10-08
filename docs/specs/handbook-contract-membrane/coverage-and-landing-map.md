@@ -7,7 +7,8 @@ acceptance and focused causal review are complete; meta checked all eleven slice
 conditions and cross-packet integration, returned aggregate **APPROVE** with no
 P1–P4 findings, and completed the single slice closeout and human recap. Bounded
 successor readiness and authorized Work Progression semantic integration were
-reconciled on 2026-10-08. These are supplied meta results,
+reconciled on 2026-10-08. Joint near-term planning below is reconciled against
+`2740e04`; its consequential recommendations await human selection. These are supplied meta results,
 not product verification rerun by this documentation task. The dated comparison
 baseline below is preserved.
 This is planning input, not
@@ -204,37 +205,136 @@ explicit scoped governance, operation-specific prerequisite timing, exact bindin
 and preserved history. They do not select storage, lifecycle operations or a
 first SDK workflow. No further generic study was required for the semantic integration.
 
-After the integration recap, the human authorized preparation of one useful
-Work Progression native/SDK outcome and normal causal review, permitting local
-subagents while fresh top-level sessions remain restricted. The resulting
-[`work-item-state-foundation` slice authority](slices/work-item-state-foundation/README.md)
-selects the smallest state-owner checkpoint: exact `open` leaf registration,
-current/history/recovery and a separate unsupported/not-assessed completion
-boundary through the typed SDK. Its [single Packet-1 plan](slices/work-item-state-foundation/packet-1.md)
-awaits human implementation approval. This advances the authoritative target
-foundation for separate eligibility; it does not deliver positive eligibility,
-governed completion, parent closure or any close effect.
-The source-supported creation route is initial-stage only: original initial
-authority must remain current before local-check successor adoption or D→G.
-Successor projects are refused; existing item truth/history remains separately
-resolvable, and no universal runtime-work ordering is selected.
+The foundation prepared at `6aba084` was unimplemented and initial-authority-only.
+The saved Pro consultation of that plan identifies two P2 **planning** corrections:
+useful registration after local-check
+adoption, and recovery across authority transitions. This reconciliation supersedes
+that route as the recommended next plan; it does not rewrite the consultation or
+claim a new permission exists. Optional local provenance is the intentionally
+untracked `docs/research/work-item-state-foundation-pro-consult-2026-10-08/guidance.md`;
+the corrections are fully stated here and do not depend on shipping that file.
+The [conditional foundation](slices/work-item-state-foundation/README.md)
+and [Packet 1](slices/work-item-state-foundation/packet-1.md) detail only that next
+increment, with exact pending selection gates.
 
-| Candidate | Readiness and useful next outcome | Unresolved decisions and preparation boundary |
-| --- | --- | --- |
-| Work Progression native/SDK realization | Semantic integration is complete. The authorized [first state-foundation preparation](slices/work-item-state-foundation/README.md) selects registration/current/history/recovery and explicit unsupported completion as one native/SDK packet, awaiting human implementation approval. Packet 4 supplies evaluation/history/decision foundations, not governed completion, parent eligibility or action receipts. | The first cut selects an Engine state owner, one explicit versioned leaf composition, initially `open`, prior-authorized bounded registration, owner-managed JSON identity/storage/recovery and a typed SDK path. Positive Work Progression placement/policies, governing applicability/assignment, populations/coverage/protocol, close authorization/effects and successor lifecycle remain deferred, as do kinds, relations, multi-parent/external reach and adapters. None is silently inferred from the first item or a direct pass. |
-| Context Resolution native authority lifecycle | The [reviewed proposed brief](../../research/context-resolution-native-authority-lifecycle-design-2026-10-06.md) is committed at `70019b7`; its core legacy publication files remain unchanged. A bounded decision/reconciliation task can confirm the delta and proposed first native establishment/current-resolution/recovery/history outcome. | Human selects compatibility/adoption strategy and whether later adoption belongs in the outcome; credential-preserving first route versus a separately supported local-advisory rule; exact capsule/YAML publication with separate native JSON records versus a versioned codec/path and compatibility contract. The brief recommends the former options; none is selected. True historical verification requires retained original dependencies because the existing historical publisher still consults live bindings. |
-| Broader native decision-permission declaration/administration | Candidate bounded discovery/design when this is the desired next capability. Packet 4's one upfront human-approved InputCorrection binding and caller-carried decisions are a precedent, not general administration. | Select supported decision subjects/classes, constraints/reservations/escalation, rule/grant representation and native owner, initial establishment and prior-authorized replacement/revocation/agent-delegation paths, exact currentness/provenance and first SDK workflow. Agent-authorized grant establishment/replacement requires prior authority and native validation; a new grant cannot authorize itself. |
+### Joint authority and recovery reconciliation
 
-No hard dependency order between these candidates is established. Each later
-preparation must inspect its actual prerequisites and overlap: Context Resolution
-shares Engine envelope/path helpers, local currentness, retained-root and lock
-behavior; Work Progression and permission administration may share governance and
-delegation responsibilities. Reconcile those boundaries against landed source
-without assuming one broad authority platform is required first. Human selection
-of the next unit and authorization of its bounded implementation plan remain
-separate. No Packet 5, phase number, migration or external adoption is selected;
-the structured-data standard's general defaults remain **PROPOSED**, Contracts
+The human requested joint reconciliation and near-term preparation, rather than
+fitting the result into one old slice. The Work Progression amendment is selected
+semantic input; the foundation is prepared/unimplemented; the
+[latest Context Resolution investigation](../../research/context-resolution-local-advisory-extension-investigation-2026-10-08.md)
+at `2740e04` is reviewed proposed research. The earlier `70019b7` credential-preserving
+design remains dated evidence, including its unselected legacy-adoption option A.
+Neither a clean research review nor this document adopts those proposals.
+
+| Source at `2740e04` | Consequence for the two plans |
+| --- | --- |
+| [Initial authority](../../../crates/engine/src/local_authority.rs), `read_current`, `with_current` | Original currentness refuses successor footprints and changed governance relation. Preserve this refusal; initial witnesses cannot be revived to register work or manage bindings. |
+| [Local-check authority](../../../crates/engine/src/local_authority/local_check.rs), `with_admission`, `require_predecessor`, `check_current`, `require_basis` | Reuse held callbacks, original unrevoked lineage, current Charter, successor/revocation/lock generations and exact governance tree. Its four action classes grant neither work registration nor binding management. |
+| [SDK basis observation](../../../crates/sdk/src/local_check.rs), `observe_local_check_basis` | D and established-from-D G can be freshly resolved outside held Engine locks, then checked inward. This is feasibility evidence for both populations, not their work/Context Resolution permission. Engine gains no Contracts dependency. |
+| [Context Resolution](../../../crates/engine/src/context_resolution.rs), `admit_local_envelope`, `evaluate_mutation` | Initial RootCreation already exists. A returned Allowed decision releases its guard; each effect owner needs live admission through its commit. Root-envelope use does not authorize binding management or work registration. |
+| [Evaluation/correction authority](../../../crates/engine/src/local_authority/local_evaluation.rs), [correction](../../../crates/engine/src/local_authority/local_evaluation/correction.rs) | Purpose-bound evaluation and immutable InputCorrection delegation are reusable patterns, not broader grants or supported grant replacement. Include their heads only if they actually govern the new operation. |
+| [Durability](../../../crates/engine/src/repository_durability.rs), [reset](../../../crates/sdk/src/route_state.rs) | Retained root and atomic primitives exist. Reset targets `.handbook/state`; current history APIs still acquire operating locks there. New retained work reads/recovery must prove their own dependencies outside that state. |
+
+**Smallest shared prerequisite:** a source-grounded contract for operation-specific
+activation, held currentness and exact original-request recovery. Both outcomes need
+those mechanisms, but no evidence requires a separately delivered shared authority
+platform, common grant, or CR-first implementation. Recommend narrow Engine reuse
+inside each useful owner/SDK increment. Cross-owner lock order and dependency
+pinning must be reconciled before each implementation; do not add general IAM as a
+predecessor. Operational use, work registration, binding-management decisions and
+grant administration remain distinct permissions.
+
+### Proposed near-term sequence and landing checkpoints
+
+The human's accepted delivery direction puts kinds/composition flexibility in
+immediate Work Progression delivery. The following **proposed** order gives it an
+explicit successor, with hierarchy, eligibility and closing near-term outcomes.
+These are outcome units, not new phase/packet identities or execution permission.
+Each independently meaningful landing returns for human review before continuation.
+Only unit 1 is fully detailed. Unit 2's compatibility boundary below must be
+prepared and human-selected **before unit 1 implementation**.
+
+| Order / outcome | Actual dependency and landing checkpoint |
+| --- | --- |
+| 1. Corrected work-state foundation | After the next-plan decisions below and unit-2 compatibility preparation: expressly activated registration permission on current local-check D/G, exact `open` leaf registration/current/history/recovery and unsupported completion through SDK. Checkpoint: a continuing project registers work under new terms; local-check permission alone refuses. This is a foundation, not the delivered flexible governed work capability. |
+| 2. Configurable compositions and optional immutable kinds | Depends on exact work identity/history from 1. Deliver supported composition selection, reusable immutable kind versions, vocabulary/level choice and explicit retained-item evolution. Checkpoint: callers select two supported compositions without a universal taxonomy; old items keep exact bindings and unsupported variants/rebinding refuse. Definition/admission placement and the bounded semantic menu must be selected before 1; no arbitrary hooks or generic Artifact Kind reuse. |
+| 3. Native local Context Resolution root binding | Recommended after the first flexibility landing; this is a sequencing choice, not a hard dependency on 1/2. Requires its own human selections and bounded preparation below. Deliver reusable root-only use, explicit management/use establishment, currentness, history/recovery and selected replacement/revocation. Checkpoint: reopen and use B1, refuse unpermitted B2 management. Work authority cannot substitute. |
+| 4. Hierarchy and typed prerequisite facts | Depends on 1/2's identity/composition participation. Deliver same-project one-parent relations, authoritative revisions and coherent finite cuts, start/close/both roles, distinct grouping/reference/order, and structural/closure-cycle refusal. Checkpoint: Feature → Phase → Slice → Task branching plus one shared cross-branch prerequisite preserves one identity and rejects a closure deadlock. This alone grants no start/close effect or eligibility. |
+| 5. Positive leaf eligibility | Depends on work/composition facts and selected governing assignment, assessment protocol, complete exact roles/coverage/populations and current qualification. Relation-dependent questions additionally require 4; relation-free leaf eligibility need not wait for every hierarchy capability or CR. Checkpoint: a declared result population produces atomic eligibility/disposition; a direct pass alone or missing required coverage cannot. Physical Work Progression placement remains downstream of Engine and Contracts. |
+| 6. Separately authorized leaf closing | Depends on 5 and its congruent current basis; select action authority/attempt/terminal/receipt and state-owner guarded commit. Checkpoint: eligible work closes only with its own current permission and receipt; a changed basis or eligibility alone cannot commit. |
+| 7. Parent eligibility | Depends on 4, independently resolved parent requirements and exact child roles. Depends on 6 when those roles require actual child closed state/receipts; a role consuming eligibility means only eligibility. Checkpoint: exact finite child cut plus parent's own integration assessment; adding a required child invalidates the old current-use basis. |
+| 8. Parent closing | Depends on 7 and the parent's separate action authority/guarded effect path from 6. Checkpoint: parent receipt proves its own commit; child receipts or parent eligibility alone do not close it. |
+
+Relations and leaf eligibility have the narrower dependencies stated above; the
+table is a recommended serial delivery path, not an invented total semantic order.
+If the human prioritizes leaf eligibility earlier, only its actual relation-free
+prerequisites apply. CLI, installed product skills, host integration and adapters
+follow later bounded native/SDK maturity decisions. Phase 6 remains
+**6.1 → 6.2 → 6.3 → 6.4 → 6.5**. Independent Contracts use requires neither work
+registration nor kinds. Multi-parent/external reach, general permission management,
+reopen/removal and legacy migration are outside these initial outcomes.
+
+### Next-plan selection gates
+
+**Pending human selection, not adopted by reconciliation:**
+
+1. **Registration activation/population.** Recommend a fixed versioned Engine rule
+   allowing the original claimed human principal to approve and natively activate
+   exact work-registration terms on positively current local-check D or
+   established-from-D G. Terms bind original initial/check/Charter lineage, current
+   governance basis, actor, effect, exact reach, reservation and retention. The
+   rule, outside the candidate terms, authorizes establishment; the new grant
+   cannot authorize itself. Routine registrations then use that grant without
+   repeated human approval. D→G invalidates the old prepared/bound basis; a new
+   explicit human activation on current G is proposed, with retained predecessor,
+   no old-term reinterpretation and no substitution during old-request recovery.
+   Alternative: D-only post-check registration, accepting a disclosed G limitation;
+   initial-only is smaller but strands continuing projects. General delegated grant
+   replacement is larger and is not a foundation prerequisite.
+2. **Publication/recovery.** Recommend retaining terminal-plus-snapshot as the
+   public semantic commit boundary: exact durable terminal publication under live
+   original authority commits; intent/decision/snapshot alone are pending evidence.
+   Snapshot-without-terminal completion is a **new effect**, not historical proof.
+   After authority changes, exact recovery can establish noncommit and release the
+   item/request reservation only with complete native proof; otherwise uncertainty
+   remains and blocks conflicting reuse. Exact committed proof remains history
+   despite revocation/reset. Alternative: snapshot installation is irrevocable
+   commit and later terminal is historical proof; that requires a different public
+   receipt/current-state contract. [Packet-1's matrix](slices/work-item-state-foundation/packet-1.md#durable-prefix-and-authority-transition-contract)
+   is conditional on the recommended choice, rather than leaving it to layout.
+3. **Composition/kinds compatibility before foundation.** Recommend an Engine
+   work-definition boundary for a finite supported declarative menu, optional
+   immutable whole-composition kinds and explicit per-item composition, with no
+   programmable transitions. Retain item identity scheme separately from codec/
+   release version; adding release capability cannot reinterpret old bindings.
+   Alternative: equivalent whole-composition reuse without a separately named
+   registry, or a distinct inward definition owner. The [prepared compatibility gate](slices/work-item-state-foundation/README.md#composition-and-kinds-successor-compatibility-gate)
+   recommends planning contract-output and implementation requirements-input leaves,
+   bounded display vocabulary, fixed descriptor admission and no first-successor
+   rebinding of retained leaves. Select that menu/placement/evolution contract before
+   execution; those proposed concrete variants are not adopted by preparation.
+
+For unit 3, recommend the latest CR proposal's fixed human management/use
+establishment rule on current compatible local-check D/G, root-only use, human
+grant establishment and agent narrow binding replacement only if expressly
+delegated. Human-only replacement is a simpler alternative; broader grant/reach
+administration remains separate. Select exact eligibility/activation/reach and
+management-versus-use terms, and additive versioned owner-managed local JSON with
+legacy credential bytes/rules unchanged and ambiguous same-stream footprints
+refused. The credential-preserving native lifecycle/legacy-adoption alternative
+addresses a different population and requires a separately selected cutover.
+CR representation, compatibility and authority remain **proposed**; the earlier
+option A is not selected. Later detailed preparation must settle its own public
+commit/recovery point and retained historical dependencies rather than borrowing
+work-registration permission or promising the old historical publisher is fixed.
+
+The structured-data standard's general defaults remain **PROPOSED**, Contracts
 JSON is fixed, and existing owner/versioned contracts control representation.
+Foundation JSON is a boundary-specific prepared selection, not a migration or
+blanket adoption. This documentation pack is ready for human decisions; product
+execution additionally requires those decisions, completed compatibility
+preparation, satisfied prerequisites and authorization of the next bounded plan.
 
 ### Current source constraints on the next outcome
 

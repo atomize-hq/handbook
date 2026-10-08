@@ -65,10 +65,14 @@ The [approval-authority and assurance clarification](amendments/approval-authori
 records human-selected intent on 2026-10-05: separate approval requirement,
 decision authority, delivery, identity assurance and composition, with local-advisory
 authority for the complete independent-local-check workflow. Its implementation
-now has a bounded delivered setup/definition/lifecycle/source route through
-[independent-local-check / Packets 1–2](../slices/independent-local-check/README.md).
-The complete evaluation workflow remains unimplemented; [Packet 3](../slices/independent-local-check/packet-3.md)
-is prepared for human implementation review. Existing credential-required rules
+now has a delivered four-packet native/SDK route through
+[independent-local-check](../slices/independent-local-check/README.md): setup at
+`fccaf11`, definitions/lifecycle/source at `5bf0f3b`, complete evaluation/history
+at `2b09faf`, and repeat/correction/decision workflow at `be7d040`. Its all-eleven-
+condition aggregate APPROVE, single closeout and human recap are complete, reconciled
+at `fd519fb`; supplied delivery evidence retains its platform limits and is not
+rerun here. Broader universal evaluation/permission support remains unimplemented.
+Existing credential-required rules
 gain no automatic fallback. The dense owner chapters remain unchanged.
 
 The human's 2026-10-06 [current delivery sequencing](../phase-and-slice-map.md#current-delivery-sequencing)
@@ -86,9 +90,14 @@ grouping, contract input/output/result roles, explicit scoped governance,
 operation-specific timing and preserved exact bindings/history. Its
 [decision-register entry](review-decision-register.md#work-progression--kinds-relations-and-governed-completion)
 distinguishes those selections from the four retained proposed research reports.
-Concrete owners, lifecycle operations, policies, coverage/protocol, storage and
-the first SDK workflow remain unselected. Integration claims no product delivery
-and authorizes no successor preparation or execution.
+Concrete positive eligibility/action owners, policies, coverage/protocol and
+lifecycle realization remain unselected. Subsequent separately authorized
+[foundation preparation](../slices/work-item-state-foundation/README.md) is
+unimplemented and now conditional on human activation/recovery choices and
+composition/kinds successor compatibility preparation. The [joint near-term map](../coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints)
+provides immediate flexibility and explicit hierarchy/eligibility/closing outcomes.
+These are planning states, not an amendment of semantic approval or evidence of
+product delivery; implementation still requires the next bounded plan's approval.
 
 ## Read by responsibility
 

@@ -106,6 +106,21 @@ project-agent decision submission; it does not inherit all deferred consumer wor
 The [coverage carry-forward](coverage-and-landing-map.md#local-check-planning-and-host-integration-carry-forward)
 tracks that work alongside the existing Phase-6 adoption boundaries and hard order.
 
+On 2026-10-08 the human requested joint Work Progression / Context Resolution
+reconciliation and accepted immediate kinds/composition flexibility, with explicit
+near-term hierarchy, eligibility and closing outcomes. The [proposed sequence](coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints)
+is: corrected work-state foundation → configurable compositions/optional kinds →
+native local CR root binding → hierarchy/prerequisite facts → leaf eligibility →
+leaf closing → parent eligibility → parent closing. CR's position is a delivery
+recommendation, not a hard predecessor for Work Progression; relation-free leaf
+eligibility has the narrower dependency stated in the map. Each meaningful landing
+has its own human checkpoint. No dates, new phase, or implementation authorization
+are assigned. The [foundation's next plan](slices/work-item-state-foundation/packet-1.md)
+is conditional on exact activation/recovery selection and composition/kinds
+successor preparation **before foundation implementation**. The latest CR research
+remains proposed; its own authority/compatibility choices precede detailed execution
+preparation. A shared currentness/recovery seam establishes no shared grant.
+
 Delivered CLI, installed root skill, generic discovery and non-UI Tauri consumers,
 and historical phase/slice exits remain intact; they do not establish the new
 local-check route. Product skills here are distinct from the development and
@@ -313,11 +328,14 @@ and four proposed research sources. After the integration recap, the human
 authorized bounded native/SDK preparation and normal causal review through local
 subagents when fresh top-level sessions remain restricted. The descriptive
 [`work-item-state-foundation` slice](slices/work-item-state-foundation/README.md)
-now prepares exact `open` leaf registration, current/history/recovery and explicit
-unsupported completion through the SDK. Its [single Packet 1](slices/work-item-state-foundation/packet-1.md)
-awaits human approval; positive eligibility and completion effects are excluded.
-Creation uses current original initial authority before local-check successor
-adoption or D→G; successor projects are refused by this first route.
+now conditionally prepares exact `open` leaf registration, current/history/recovery
+and explicit unsupported completion through the SDK. Its [single Packet 1](slices/work-item-state-foundation/packet-1.md)
+requires [human activation/recovery selection](coverage-and-landing-map.md#next-plan-selection-gates),
+composition/kinds successor compatibility preparation and human implementation
+approval; positive eligibility and completion effects remain outside the slice.
+The proposed explicit work-registration activation on current local-check D/G
+supersedes the earlier initial-only recommendation. This API does not exist yet;
+local-check permission cannot be reinterpreted as work permission.
 No successor implementation, new phase or local-check Packet 5 is authorized.
 The human has selected [local-advisory authority](semantic-model/amendments/approval-authority-and-assurance.md)
 for the complete workflow, including later Contracts lifecycle and repeated source
