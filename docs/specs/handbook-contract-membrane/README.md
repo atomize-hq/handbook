@@ -134,6 +134,18 @@ selects no physical owners, lifecycle operations, concrete policies or first SDK
 workflow. Its human recap precedes separately authorized native/SDK preparation;
 the completed local-check slice and Phase-6 order remain unchanged.
 
+After that recap, the human authorized bounded native/SDK preparation with normal
+causal review, permitting local subagents while fresh top-level sessions remain
+restricted. The resulting [`work-item-state-foundation` authority](slices/work-item-state-foundation/README.md)
+selects one small first state-owner/SDK outcome: register exact `open` leaf work,
+resolve current/history/recovery, and report completion as unsupported/not assessed.
+Its [single Packet-1 plan](slices/work-item-state-foundation/packet-1.md) awaits human
+implementation authorization. It delivers no positive Work Progression eligibility,
+governed completion, parent decision or close effect; those remain separately bounded.
+The first creation route requires current original initial authority before
+local-check successor adoption or D→G; it does not register new work on an already
+completed-local-check project through those old terms.
+
 The human's 2026-10-06 [delivery-sequencing selection](phase-and-slice-map.md#current-delivery-sequencing)
 keeps the current stage focused on native owners and SDK features/refinement/usability.
 Packet 3 implements a complete native SDK check with usage and response/recovery docs
@@ -164,7 +176,8 @@ Use the source that owns the question:
 | Who owns canonical objects, policy admission, and authored-artifact relationships? | [`Objects and governance`](semantic-model/objects-and-governance.md) owns the proposed categories, shared admission rule, and exact artifact/reference boundaries. |
 | What proof is required and may an evaluation proceed? | [`Assurance and evaluation preparation`](semantic-model/assurance-and-evaluation-preparation.md) keeps posture/assurance selection separate from Engine authorization, capability, and readiness. |
 | What fixes the exact evidence population and the meaning of evaluation truth? | [`Evidence and evaluation truth`](semantic-model/evidence-and-evaluation.md) owns occurrence/evidence closure, claim/metric/gate semantics, explanation, and replay. |
-| May a result support present work progression or an action, and did an effect commit? | [`Operational reliance and actions`](semantic-model/operational-reliance-and-actions.md) owns the Work Progression boundary, atomic eligibility/disposition, separate action authorization and receipt requirements. The human-selected [kinds and relations amendment](semantic-model/amendments/work-progression-kinds-and-relations.md) supplements that boundary; concrete owner placement, state/operations, policies and native/SDK realization remain deferred. |
+| May a result support present work progression or an action, and did an effect commit? | [`Operational reliance and actions`](semantic-model/operational-reliance-and-actions.md) owns the Work Progression boundary, atomic eligibility/disposition, separate action authorization and receipt requirements. The human-selected [kinds and relations amendment](semantic-model/amendments/work-progression-kinds-and-relations.md) supplements that boundary; positive eligibility/completion owner placement, policies, lifecycle effects and native/SDK realization remain deferred. The bounded registration-state preparation is separate below. |
+| What is the first prepared Work Progression native/SDK increment? | [`work-item-state-foundation`](slices/work-item-state-foundation/README.md) selects a registration-only Engine state owner and typed SDK path, exact history/recovery and unsupported-completion disclosure. Its [Packet 1](slices/work-item-state-foundation/packet-1.md) awaits human implementation approval; positive eligibility and completion effects remain outside this slice. |
 | How is missing phase or slice authority prepared at the correct level? | [`authority-preparation-prompt.md`](authority-preparation-prompt.md) defines separate phase-to-slice and slice-to-packet top-level planning tasks. Each returns to the meta task before the next level. |
 | How is one authorized slice or packet assigned to a top-level task session? | [`task-session-prompt.md`](task-session-prompt.md) provides the copy/paste-ready assignment prompt and compact result presentation. |
 | How does a meta task prepare and continue requested HCM work? | [`meta-task-prompt.md`](meta-task-prompt.md) routes authority preparation, human approval of the next bounded plan, whole-slice or sequential packet execution within that increment, and recap-and-stop at its human review boundary. |

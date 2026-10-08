@@ -204,13 +204,24 @@ explicit scoped governance, operation-specific prerequisite timing, exact bindin
 and preserved history. They do not select storage, lifecycle operations or a
 first SDK workflow. No further generic study was required for the semantic integration.
 
-After the integration recap, the recommended next task is separately authorized
-preparation of one useful Work Progression native/SDK outcome. This integration
-does not prepare that slice or resolve the choices listed below.
+After the integration recap, the human authorized preparation of one useful
+Work Progression native/SDK outcome and normal causal review, permitting local
+subagents while fresh top-level sessions remain restricted. The resulting
+[`work-item-state-foundation` slice authority](slices/work-item-state-foundation/README.md)
+selects the smallest state-owner checkpoint: exact `open` leaf registration,
+current/history/recovery and a separate unsupported/not-assessed completion
+boundary through the typed SDK. Its [single Packet-1 plan](slices/work-item-state-foundation/packet-1.md)
+awaits human implementation approval. This advances the authoritative target
+foundation for separate eligibility; it does not deliver positive eligibility,
+governed completion, parent closure or any close effect.
+The source-supported creation route is initial-stage only: original initial
+authority must remain current before local-check successor adoption or D→G.
+Successor projects are refused; existing item truth/history remains separately
+resolvable, and no universal runtime-work ordering is selected.
 
 | Candidate | Readiness and useful next outcome | Unresolved decisions and preparation boundary |
 | --- | --- | --- |
-| Work Progression native/SDK realization | Semantic integration is complete; after its human recap and separate preparation authorization, prepare one useful owner/SDK outcome for authoritative work state and separate progression eligibility. Packet 4 supplies evaluation/history/decision foundations, not governed completion, parent eligibility or action receipts. | Bounded native/SDK preparation must select physical work-state/structure, definition, applicability and action responsibilities; registry versus equivalent reuse; concrete states/operations and reopen/cancel/removal semantics; exact policies, populations, coverage and assessment protocol; identity/resolver, persistence/concurrency/recovery/retention; SDK composition and first workflow. Resolve decisions only at the level needing them; multi-parent/external relations and adapters stay deferred. |
+| Work Progression native/SDK realization | Semantic integration is complete. The authorized [first state-foundation preparation](slices/work-item-state-foundation/README.md) selects registration/current/history/recovery and explicit unsupported completion as one native/SDK packet, awaiting human implementation approval. Packet 4 supplies evaluation/history/decision foundations, not governed completion, parent eligibility or action receipts. | The first cut selects an Engine state owner, one explicit versioned leaf composition, initially `open`, prior-authorized bounded registration, owner-managed JSON identity/storage/recovery and a typed SDK path. Positive Work Progression placement/policies, governing applicability/assignment, populations/coverage/protocol, close authorization/effects and successor lifecycle remain deferred, as do kinds, relations, multi-parent/external reach and adapters. None is silently inferred from the first item or a direct pass. |
 | Context Resolution native authority lifecycle | The [reviewed proposed brief](../../research/context-resolution-native-authority-lifecycle-design-2026-10-06.md) is committed at `70019b7`; its core legacy publication files remain unchanged. A bounded decision/reconciliation task can confirm the delta and proposed first native establishment/current-resolution/recovery/history outcome. | Human selects compatibility/adoption strategy and whether later adoption belongs in the outcome; credential-preserving first route versus a separately supported local-advisory rule; exact capsule/YAML publication with separate native JSON records versus a versioned codec/path and compatibility contract. The brief recommends the former options; none is selected. True historical verification requires retained original dependencies because the existing historical publisher still consults live bindings. |
 | Broader native decision-permission declaration/administration | Candidate bounded discovery/design when this is the desired next capability. Packet 4's one upfront human-approved InputCorrection binding and caller-carried decisions are a precedent, not general administration. | Select supported decision subjects/classes, constraints/reservations/escalation, rule/grant representation and native owner, initial establishment and prior-authorized replacement/revocation/agent-delegation paths, exact currentness/provenance and first SDK workflow. Agent-authorized grant establishment/replacement requires prior authority and native validation; a new grant cannot authorize itself. |
 

@@ -309,8 +309,16 @@ Work Progression semantic integration;
 the [readiness comparison](coverage-and-landing-map.md#successor-readiness-after-independent-local-check)
 records the completed bounded document landing of its
 [human-selected amendment](semantic-model/amendments/work-progression-kinds-and-relations.md)
-and four proposed research sources. The integration recap precedes separately
-authorized native/SDK preparation; no successor implementation is authorized.
+and four proposed research sources. After the integration recap, the human
+authorized bounded native/SDK preparation and normal causal review through local
+subagents when fresh top-level sessions remain restricted. The descriptive
+[`work-item-state-foundation` slice](slices/work-item-state-foundation/README.md)
+now prepares exact `open` leaf registration, current/history/recovery and explicit
+unsupported completion through the SDK. Its [single Packet 1](slices/work-item-state-foundation/packet-1.md)
+awaits human approval; positive eligibility and completion effects are excluded.
+Creation uses current original initial authority before local-check successor
+adoption or D→G; successor projects are refused by this first route.
+No successor implementation, new phase or local-check Packet 5 is authorized.
 The human has selected [local-advisory authority](semantic-model/amendments/approval-authority-and-assurance.md)
 for the complete workflow, including later Contracts lifecycle and repeated source
 admission/revalidation; hardware/authenticator acquisition is not a predecessor.
