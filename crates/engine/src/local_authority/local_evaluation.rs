@@ -6,6 +6,8 @@ use crate::repository_durability::{
     RepositoryExactFilesCheckpointV1, RetainedRepositoryTreeGuardV1,
 };
 
+pub mod correction;
+
 pub const LOCAL_EVALUATION_RULE_V1: &str = "handbook.operating.local-evaluation@1.0.0";
 pub const LOCAL_EVALUATION_ROOT_V1: &str = ".handbook/local-operating/local-evaluation-v1";
 pub const LOCAL_EVALUATION_PURPOSE_SCHEMA_V1: &str = "handbook.local-evaluation-purpose@1.0.0";
@@ -494,6 +496,12 @@ pub struct LocalEvaluationTermsAdmissionV1<'a> {
     authority_fingerprint: String,
 }
 impl LocalEvaluationTermsAdmissionV1<'_> {
+    /// Routine changed-input correction needs the explicit unreserved class in
+    /// both prior terms. A distinct decider is optional for an unresolved choice.
+    pub fn require_input_correction(&self) -> Result<(), LocalAuthorityRefusalV1> {
+        self.validate_current()?;
+        correction::require_input_correction_class(self.locator)
+    }
     pub fn terms(&self) -> &LocalEvaluationTermsV1 {
         &self.locator.terms
     }

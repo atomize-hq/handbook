@@ -7,6 +7,9 @@ use handbook_engine::local_authority::local_evaluation::*;
 use serde_json::json;
 use std::collections::BTreeMap;
 
+mod followup;
+use followup::FormationFollowup;
+
 pub(super) const EVALUATION_OPERATION: &str = "contract.local-evaluation.transition";
 const DOMAIN: &str = "handbook.contract-local-evaluation-state@3.0.0";
 const ORIGINAL_EVALUATION_LOCK_PATHS: [&str; 7] = [
@@ -206,6 +209,16 @@ impl ContractOwnerRepositoryV1 {
         prepared: PreparedLocalEvaluationV3,
         admission: &LocalEvaluationTermsAdmissionV1<'_>,
     ) -> Result<LocalEvaluationSnapshotV3, ContractOwnerRepositoryErrorV1> {
+        self.form_local_evaluation_with_followup_v3(prepared, admission, None, None)
+    }
+
+    fn form_local_evaluation_with_followup_v3(
+        &self,
+        prepared: PreparedLocalEvaluationV3,
+        admission: &LocalEvaluationTermsAdmissionV1<'_>,
+        followup: Option<FormationFollowup>,
+        decision: Option<&correction::LocalInputCorrectionAdmissionV1<'_>>,
+    ) -> Result<LocalEvaluationSnapshotV3, ContractOwnerRepositoryErrorV1> {
         admission
             .require_repository_root(&self.repository_root)
             .map_err(|_| invalid("formation authority belongs to another root"))?;
@@ -232,6 +245,14 @@ impl ContractOwnerRepositoryV1 {
                 "formation permission or owner D/G basis is not exact",
             ));
         }
+        if followup
+            .as_ref()
+            .is_some_and(|f| f.input.action == LocalEvaluationFollowupActionV1::CorrectedInput)
+        {
+            admission.require_input_correction().map_err(|_| {
+                invalid("InputCorrection is reserved or not delegated under exact prior terms")
+            })?;
+        }
         for path in prepared.local_use.required_state_paths() {
             admission
                 .require_input_path(path)
@@ -240,6 +261,16 @@ impl ContractOwnerRepositoryV1 {
         self.with_existing_full_definition_lock(|owner| {
             owner.recover_locked()?;
             owner.validate_inventory()?;
+            if let Some(decision) = decision {
+                decision.validate_current().map_err(|_| invalid("exact correction decision changed before owner comparison"))?;
+                for dependency in decision.dependency_sources() {
+                    admission.require_input_path(&dependency.relative_path).map_err(|_| invalid(
+                        "correction decision proof read was not declared"))?;
+                    if owner.read_regular(&owner.repo_root.join(&dependency.relative_path))? != dependency.canonical_record_bytes {
+                        return Err(substituted("correction decision dependency substituted before formation"));
+                    }
+                }
+            }
             let formation_key = prepared.input.request_key.clone();
             let formation_request_fingerprint = prepared.request_fingerprint.clone();
             let key = eval_key(&formation_key)?;
@@ -250,7 +281,38 @@ impl ContractOwnerRepositoryV1 {
                         "formation key conflicts with original exact request",
                     ));
                 }
+                let retained = owner.eval_lineage_locked(&ledger.locator)?;
+                let retained_lineage = retained.as_ref().map(|l| canonical_fingerprint(
+                    &(l.action, &l.original, &l.original_capture, &l.capture, &l.decision_provenance)))
+                    .transpose().map_err(map_contract_input)?;
+                let proposed_lineage = followup.as_ref().map(|f| canonical_fingerprint(
+                    &(f.input.action, &f.input.original, &f.input.original_capture, &f.input.capture, &f.decision_provenance)))
+                    .transpose().map_err(map_contract_input)?;
+                if retained_lineage != proposed_lineage {
+                    return Err(repository_error(ContractOwnerRepositoryErrorKindV1::IdempotencyConflict,
+                        "formation key conflicts with original exact followup lineage"));
+                }
                 return owner.eval_current(&ledger.locator);
+            }
+            if let Some(followup) = &followup {
+                let original = owner.validate_followup_original_locked(&followup.input)?;
+                if let Some(decision) = decision {
+                    let mut rejected = followup.input.input.clone();
+                    rejected.subject = original.original_input.subject.clone();
+                    rejected.case = original.original_input.case.clone();
+                    if decision.candidate().original_state_identity.reference != original.identity.reference()
+                        || decision.candidate().original_state_identity.fingerprint != original.identity.fingerprint().as_str()
+                        || decision.candidate().original_state_path != eval_ref("records", original.identity.fingerprint())
+                        || decision.candidate().original_state_bytes_fingerprint != canonical_fingerprint(&original).map_err(map_contract_input)?.as_str()
+                        || decision.candidate().rejected_candidate_fingerprint != canonical_fingerprint(&rejected)
+                        .map_err(map_contract_input)?.as_str()
+                        || decision.candidate().rejected_candidate != serde_json::to_value(&rejected).map_err(|_| invalid("rejected candidate cannot be represented"))? {
+                        return Err(substituted("retained decision refused candidate differs from exact original inconsistency"));
+                    }
+                }
+                if followup.input.input != prepared.input {
+                    return Err(invalid("sealed followup differs from exact prospective formation"));
+                }
             }
             let (definition, head) = owner.full_local_bundle(&prepared.input.contract)?;
             if definition.definition() != prepared.local_use.definition()
@@ -415,6 +477,7 @@ impl ContractOwnerRepositoryV1 {
                 identity: identified(DOMAIN, &()).map_err(map_contract_input)?,
             };
             state.identity = state_identity(&state)?;
+            let lineage = followup.as_ref().map(|f| owner.form_followup_lineage_locked(f, &state, admission)).transpose()?;
             admission
                 .validate_current()
                 .map_err(|_| invalid("formation authority changed before allocation intent"))?;
@@ -424,7 +487,12 @@ impl ContractOwnerRepositoryV1 {
                 &formation_request_fingerprint,
                 &key,
                 &formation_key,
+                lineage.as_ref(),
                 || {
+                    if let Some(decision) = decision {
+                        decision.validate_current().map_err(|_| invalid(
+                            "exact correction decision changed before formation commit"))?;
+                    }
                     admission
                         .validate_current()
                         .map_err(|_| invalid("formation authority changed before commit"))
@@ -1301,6 +1369,11 @@ impl ContractOwnerRepositoryV1 {
                 );
                 paths.push(LOCK_RELATIVE_PATH.into());
                 paths.extend(owner.eval_immutable_history_paths(&next.locator)?);
+                let lineage = owner.eval_lineage_locked(&next.locator)?;
+                if let Some(lineage) = &lineage {
+                    paths.push(eval_ref("lineage", next.locator.occurrence.fingerprint()));
+                    paths.extend(lineage.dependencies.iter().map(|d| d.path.clone()));
+                }
                 for path in ORIGINAL_EVALUATION_LOCK_PATHS {
                     admission.require_input_path(path).map_err(|_| {
                         invalid("final closure omitted original native lock proof reach")
@@ -1335,6 +1408,16 @@ impl ContractOwnerRepositoryV1 {
                             "required historical dependency is already unavailable",
                         ));
                     };
+                    if lineage.as_ref().is_some_and(|lineage| {
+                        lineage.dependencies.iter().any(|dependency| {
+                            dependency.path == path
+                                && dependency.bytes_fingerprint != bytes_fingerprint
+                        })
+                    }) {
+                        return Err(substituted(
+                            "retained correction dependency changed before result closure",
+                        ));
+                    }
                     dependencies.push(LocalEvaluationRetentionDependencyV3 {
                         owner: if path.contains("/dock/")
                             || path == ".handbook/state/locks/dock-operational-store.lock"
@@ -1375,15 +1458,23 @@ impl ContractOwnerRepositoryV1 {
                 "{}:{}:{operation_key}",
                 locator.request_key, previous.sequence
             ))?;
-            owner.commit_eval_state(Some(&previous), next, &request, &key, operation_key, || {
-                admission.validate_current().map_err(|_| {
-                    invalid("evaluation authorization changed before consuming commit")
-                })?;
-                if let Some(origin) = origin {
-                    origin.validate_current().map_err(map_contract_input)?;
-                }
-                Ok(())
-            })
+            owner.commit_eval_state(
+                Some(&previous),
+                next,
+                &request,
+                &key,
+                operation_key,
+                None,
+                || {
+                    admission.validate_current().map_err(|_| {
+                        invalid("evaluation authorization changed before consuming commit")
+                    })?;
+                    if let Some(origin) = origin {
+                        origin.validate_current().map_err(map_contract_input)?;
+                    }
+                    Ok(())
+                },
+            )
         })
     }
     fn commit_eval_state(
@@ -1393,6 +1484,7 @@ impl ContractOwnerRepositoryV1 {
         request: &FingerprintV1,
         key: &FingerprintV1,
         operation_key: &str,
+        lineage: Option<&LocalEvaluationLineageV1>,
         check: impl FnOnce() -> Result<(), ContractOwnerRepositoryErrorV1>,
     ) -> Result<LocalEvaluationSnapshotV3, ContractOwnerRepositoryErrorV1> {
         self.ensure_evaluation_layout()?;
@@ -1404,12 +1496,12 @@ impl ContractOwnerRepositoryV1 {
             locator: state.locator.clone(),
             record: state.identity.clone(),
         };
-        let bytes = [
+        let mut bytes = vec![
             canonical_bytes(&state).map_err(map_contract_input)?,
             canonical_bytes(&state.identity).map_err(map_contract_input)?,
             canonical_bytes(&ledger).map_err(map_contract_input)?,
         ];
-        let outputs = vec![
+        let mut outputs = vec![
             StagedOutput::new(
                 "00-transition.json",
                 &eval_ref("records", state.identity.fingerprint()),
@@ -1422,6 +1514,20 @@ impl ContractOwnerRepositoryV1 {
             )?,
             StagedOutput::new("02-ledger.json", &eval_ref("idempotency", key), &bytes[2])?,
         ];
+        if let Some(lineage) = lineage {
+            if state.sequence != 0 || lineage.evaluation != state.locator {
+                return Err(invalid(
+                    "lineage must commit with its exact initial occurrence",
+                ));
+            }
+            lineage.validate_identity().map_err(map_contract_input)?;
+            bytes.push(lineage.canonical_json_bytes().map_err(map_contract_input)?);
+            outputs.push(StagedOutput::new(
+                "03-lineage.json",
+                &eval_ref("lineage", state.locator.occurrence.fingerprint()),
+                &bytes[3],
+            )?);
+        }
         let id = canonical_fingerprint(&TransactionIdPreimage {
             schema_ref: "handbook.contract-owner-transaction-identity@1.0.0",
             operation: EVALUATION_OPERATION,
@@ -1627,6 +1733,9 @@ impl ContractOwnerRepositoryV1 {
                 output.push(self.relative_path(&entry)?);
             }
             output.push(intent.outputs[2].relative_ref.clone());
+            if intent.outputs.len() == 4 {
+                output.push(intent.outputs[3].relative_ref.clone());
+            }
         }
         Ok(output)
     }
@@ -1665,7 +1774,7 @@ impl ContractOwnerRepositoryV1 {
         Ok(maximum)
     }
     pub(super) fn ensure_evaluation_layout(&self) -> Result<(), ContractOwnerRepositoryErrorV1> {
-        for suffix in ["", "/records", "/heads", "/idempotency"] {
+        for suffix in ["", "/records", "/heads", "/idempotency", "/lineage"] {
             self.repository_root
                 .create_directories(&format!("{LOCAL_EVALUATION_OWNER_ROOT_V3}{suffix}"))
                 .map_err(map_durability)?;
@@ -1675,7 +1784,13 @@ impl ContractOwnerRepositoryV1 {
     pub(super) fn validate_evaluation_inventory(
         &self,
     ) -> Result<(), ContractOwnerRepositoryErrorV1> {
-        let mut classes = [BTreeSet::new(), BTreeSet::new(), BTreeSet::new()];
+        self.validate_correction_candidate_inventory()?;
+        let mut classes = [
+            BTreeSet::new(),
+            BTreeSet::new(),
+            BTreeSet::new(),
+            BTreeSet::new(),
+        ];
         for path in self.read_dir_bounded(&self.transactions_root(), MAX_RECORDS)? {
             let intent: TransactionIntent =
                 parse_canonical(&self.read_regular(&path.join("intent.json"))?)?;
@@ -1696,7 +1811,20 @@ impl ContractOwnerRepositoryV1 {
             }
             return Ok(());
         }
-        for (class, expected) in ["records", "heads", "idempotency"].iter().zip(classes) {
+        for (class, expected) in ["records", "heads", "idempotency", "lineage"]
+            .iter()
+            .zip(classes)
+        {
+            if *class == "lineage"
+                && expected.is_empty()
+                && !self.exists(
+                    &self
+                        .repo_root
+                        .join(format!("{LOCAL_EVALUATION_OWNER_ROOT_V3}/{class}")),
+                )?
+            {
+                continue;
+            }
             self.require_inventory(
                 &self
                     .repo_root
@@ -1746,6 +1874,23 @@ impl ContractOwnerRepositoryV1 {
             return Err(recovery(
                 "evaluation transaction does not close exact state/head/ledger",
             ));
+        }
+        if intent.outputs.len() == 4 {
+            let lineage = LocalEvaluationLineageV1::from_json_bytes(
+                &self.read_regular(&path.join("03-lineage.json"))?,
+            )
+            .map_err(map_contract_input)?;
+            lineage.validate_identity().map_err(map_contract_input)?;
+            if state.sequence != 0
+                || lineage.evaluation != state.locator
+                || intent.outputs[3].relative_ref
+                    != eval_ref("lineage", state.locator.occurrence.fingerprint())
+            {
+                return Err(recovery(
+                    "lineage transaction does not close exact original and new occurrence",
+                ));
+            }
+            self.validate_lineage_state_locked(&lineage, &state)?;
         }
         for output in &intent.outputs {
             let staged = self.read_regular(&path.join(&output.staged_name))?;
@@ -2336,9 +2481,25 @@ pub(super) fn validate_evaluation_intent(
 ) -> Result<(), ContractOwnerRepositoryErrorV1> {
     if intent.schema_ref != "handbook.contract-owner-transaction-intent@1.0.0"
         || intent.operation != EVALUATION_OPERATION
-        || intent.outputs.len() != 3
+        || !matches!(intent.outputs.len(), 3 | 4)
     {
         return Err(recovery("evaluation intent closed shape invalid"));
+    }
+    if let Some(out) = intent.outputs.get(3) {
+        validate_relative(&out.relative_ref)?;
+        validate_staged(&out.staged_name)?;
+        let prefix = format!("{LOCAL_EVALUATION_OWNER_ROOT_V3}/lineage/");
+        let fp = out
+            .relative_ref
+            .strip_prefix(&prefix)
+            .and_then(|s| s.strip_suffix(".json"))
+            .ok_or_else(|| recovery("lineage output escapes owner namespace"))?;
+        if out.staged_name != "03-lineage.json"
+            || intent.expected_head_bytes_fingerprint.is_some()
+            || FingerprintV1::parse(&format!("sha256:{fp}")).is_err()
+        {
+            return Err(recovery("lineage must accompany original formation intent"));
+        }
     }
     for (out, (name, class)) in intent.outputs.iter().zip([
         ("00-transition.json", "records"),

@@ -105,7 +105,7 @@ Interpret the structured owner result before rendering a summary:
 
 | Owner outcome | Meaning | Supported response |
 | --- | --- | --- |
-| Decision-seeking held readiness | Valid owner facts establish a limitation or leave a required capability/availability comparison unknown. No attemptable basis or launch is supplied. | Preserve the reasons and unchanged requirements; use supported new formation after resolving the limitation or unknown. |
+| Decision-seeking held readiness | Valid owner facts establish a limitation or leave a required capability/availability comparison unknown. No attemptable basis or launch is supplied. | Preserve earlier readiness observations. Before collection commitment, reassess only unchanged Purpose, Plan, input and issuance under live authority. Changed bindings require a new occurrence. |
 | Formation or authorization refusal | A required input, applicability, exact identity, intent, scope, permission or currentness condition failed. | Preserve its stage, owner, code and available provenance. Repair only within prior terms; wider or reserved choices need their actual authority. |
 | Completed conformant observation | The real validator completed and reported conformance. | Report `pass` only after the complete Contracts truth chain closes. |
 | Completed nonconformant observation | The real validator completed and reported actual violations. | Preserve violation paths and reasons. A closed `fail` is a valid unfavorable answer. |
@@ -129,8 +129,121 @@ A locator identifies recovery; it grants no permission. Losing an execution
 response is a delivery problem, not a reason to create another attempt. Exact
 recovery returns the original owner outcome and time or its honest unresolved
 state. Deliberately requesting a new evaluation allocates a new owner occurrence,
-even when its content equals an earlier one. The complete repeat/correction and
-authorized decision-submission workflow is outside this increment.
+even when its content equals an earlier one. Select the intended operation explicitly:
+
+| Caller choice | Required binding and effect |
+| --- | --- |
+| Read history | Retrieve the retained result and its original dependencies and times. No new currentness assessment, allocation or launch. |
+| Recover a response | Supply the original exact formation, issuance, decision or attempt locator. Owner-proven absence, committed delivery and uncertainty are distinct. |
+| Deliberately repeat | Supply a new formation key and the same exact capture and reviewed criteria. Owners resolve fresh applicability and allocate a new occurrence, Purpose and independent issuance. |
+| Correct captured input | Supply the exact closed prior result and a consistent new subject/case/input binding with a new formation key. Contracts retains additive lineage with formation and preserves the old result. Criteria and dependencies remain exact. |
+| Continue before commitment | Reassess the original fixed bindings only if the native owner accepts live facts. After commitment the capability basis and one-attempt sequence remain fixed. |
+| Carry an unresolved correction decision | Retain the actual rejected candidate through the owners, then submit the designated decider's response against the exact request head. Only an exact authorized approval can be consumed. |
+
+Routine permitted input corrections proceed directly through owner checks. An
+unresolved choice can use the prior-approved `InputCorrection` delegation without
+another human approval. Correcting input does not permit changing the schema,
+claim, permitted use, policy, freshness horizon, source or declared reach. Such a
+change needs its separately justified and actually reviewed exact revision.
+
+The bounded initial delegation names an explicit decision agent and the existing
+executor. The decision agent may differ from the executor. The prior terms' human
+principal approves that exact immutable binding with an attributable approval
+source. The user can approve and provision it before an unresolved request;
+native adoption follows establishment of the exact evaluation predecessors.
+The grant adds no path, operation class, criterion, executor or authority horizon.
+Only one immutable binding is supported per evaluation authority; correction
+decision authority supplies no permission to appoint or replace a decider.
+
+The native request reproduces an actual Contracts preformation inconsistency:
+the candidate still names the old capture while the proposed correction names
+consistent new content. An arbitrary unresolved DTO or claimed refusal supplies
+no owner identity. A retained request binds the old exact result, rejected candidate,
+missing condition, fixed prospective formation, delegated class and current D/G
+basis. The submitter can carry the decision while remaining distinct from both
+the deciding actor and the consuming executor.
+
+Approval retains acceptance of only that exact correction and fixed downstream
+formation key; fresh Engine admission and Contracts conformance checks remain
+required. Denial closes the request without allocation, issuance or launch.
+Clarification retains the exact missing information and leaves the request
+unresolved. A later submission must bind the current head. Silence and timeout
+permit no effect. Exact submission replay returns its original durable record
+and time as history; conflicting keys or stale concurrent heads refuse.
+
+An accepted decision selects at most one correction occurrence. If a response is
+lost, recover the original decision or Contracts formation request. A new key
+cannot conceal an uncertain attempt or create a second consumed correction. D/G
+changes and revocation block stale fresh use while leaving old records readable;
+a pending D decision cannot be relabeled G. Compatible immutable delegation can
+serve a newly retained G request under its own fresh applicable basis.
+
+Local advisory attribution records supplied actor, approval, decision source and
+scope claims. It proves neither authenticated identity nor verified delegation,
+nor who physically submitted a response. Possessing another agent's locators or
+terms supplies no grant. Reserved choices, missing authority without supported
+resolution and unresolved material ambiguity preserve an exact escalation need.
+
+Use `LocalEvaluationFollowupInputV1` with an explicit `FreshRepeat` or
+`CorrectedInput` action, original `LocalEvaluationResultLocatorV3`, complete exact
+`original_capture` and `capture`, and the consistent new
+`LocalEvaluationPrepareInputV3`. Captures are the serialized
+`DockInlineJsonInputV1`, including its content fingerprint and offline schema
+closure. `prepare_local_evaluation_followup` validates these bindings without
+allocation; save its `request_locator()` and then call
+`form_local_evaluation_followup`. `read_local_evaluation_lineage` reads the
+additive relationship. Original V3 snapshots and results retain their existing
+canonical preimages.
+
+For an unresolved choice, use the following explicit SDK operations:
+
+```rust,ignore
+let prepared = sdk.prepare_local_input_correction_delegation(
+    &initial, &authority, supplied_exact_human_approved_binding)?;
+let grant = prepared.locator().clone(); // Save before adoption.
+let adopted = sdk.adopt_local_input_correction_delegation(&authority, prepared);
+// Inspect disposition/outcome/refusal before using the retained binding.
+let candidate = sdk.retain_local_input_correction_candidate(
+    &initial, &authority, &prepared_followup, actual_rejected_candidate)?;
+let request_locator = supplied_request.locator(&adopted.outcome.unwrap().delegation_fingerprint)?;
+let request = sdk.retain_local_input_correction_request(
+    &initial, &authority, &grant, &supplied_request)?;
+let decision_locator = supplied_submission.locator(&request_locator)?;
+let decision = sdk.submit_local_input_correction_decision(
+    &initial, &authority, &grant, &request_locator, &supplied_submission)?;
+// Only an accepted Approve may reach this consuming operation.
+let formed = sdk.form_approved_local_input_correction(
+    &initial, &authority, &grant, &request_locator, &decision_locator, prepared_followup)?;
+```
+
+Save request and submission locators before the owner mutation. Recover their
+original records with `recover_local_input_correction_delegation`,
+`recover_local_input_correction_request` and
+`recover_local_input_correction_decision`. The immutable request record has its
+initial head; after clarification, the next submission uses the retained
+clarification's `decision_fingerprint` as its expected head. The accepted
+formation still needs a separate issuance and the complete existing owner
+execution and final-closure sequence.
+
+When delegation adoption retains an uncertain intent, call
+`resume_local_input_correction_delegation` with its original saved locator. This
+completes only that existing exact intent; absent intent requires explicit new
+preparation under current eligibility. After revocation, recover an already
+formed correction with `recover_local_evaluation_request` or
+`recover_local_evaluation` and inspect its lineage. Historical recovery remains
+available and grants no fresh use.
+
+The ordinary example exposes `repeat`, `correct`, `lineage`,
+`adopt-correction-delegation`, `correction-candidate`, `request-correction`,
+`submit-correction`, `consume-correction` and their recovery commands. All
+authority, captures, requests and decisions arrive as supplied files. New
+followup files use their bounded canonical JSON codec; new Engine records use
+bounded duplicate-safe closed decoding. These argument names demonstrate a Rust
+SDK consumer and add no installed Handbook CLI route, routing or LLM call.
+
+The example's history responses place the additive lineage and decision
+provenance beside the exact unchanged V3 result. If lineage resolution is
+unavailable, its separate owner refusal does not replace the stored result.
 
 Retrying `close` after the result was committed delivers that same retained
 snapshot only for the exact original issuance and request. It performs no new

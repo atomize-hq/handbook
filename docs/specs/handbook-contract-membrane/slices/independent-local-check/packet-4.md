@@ -1,13 +1,17 @@
 # Packet 4: fresh repeat, correction and bounded resolution
 
-Status: **prepared for meta/human implementation-plan review; not implemented**,
+Status: **implemented; selected acceptance verified; focused causal APPROVE**,
 2026-10-07. This is the final increment of the [four-packet slice](README.md).
 The human reviewed/discussed the landed Packet-3 result with Meta Main and expressly
 requested this bounded reconciliation. That authorizes planning, source verification
 and a local documentation commit, not Packet-4 product execution or runtime choices.
 The human subsequently endorsed the authority/delegation clarifications below,
 including upfront configuration and explicit later permission-administration work.
-Implementation requires human approval of this plan and proven hard predecessors.
+After reviewing the reconciled plan and the clarification at `526dc5e`, the human
+expressly said, “Ok proceed with dispatching the packet 4 implementation top level
+task session.” This authorizes this exact implementation, verification, focused
+review and local commit. Packets 1–3 are landed predecessors. It supplies no actual
+runtime principal, grant, capture, review or numerical policy.
 
 ## Outcome and human checkpoint
 
@@ -332,6 +336,34 @@ authority. No refusal authorizes scope expansion or its own new terms.
 
 ## Ordered work and acceptance
 
+### Bounded implementation selections — 2026-10-07
+
+- Contracts' explicit `FreshRepeat` and `CorrectedInput` followups validate the
+  exact closed original, complete captures and unchanged reviewed criteria. An
+  optional fourth formation output commits additive lineage under the existing
+  allocator/transaction lock; historical three-output intents and all V3
+  snapshot/result preimages keep their contracts. New canonical JSON inputs and
+  records reuse the existing bounded duplicate-safe codecs and owner limits.
+- Engine owns the bounded `input-correction-v1` subnamespace beside evaluation
+  terms. Its immutable human-approved selection preserves the executor and
+  evaluation `current.json`; exact request heads serialize clarification and
+  approve/deny decisions. Original locators distinguish absent intent, pending
+  uncertainty and retained delivery. Resumption cannot create an absent adoption.
+- Contracts reproduces the actual old-subject/new-capture inconsistency before
+  acquiring the consuming Engine guard. Its retained source includes the rejected
+  and prospective candidates, both captures and an exact native original closed
+  state witness. Engine independently recognizes and pins that source; DTO shape
+  and caller context alone establish no request identity.
+- Fresh v3 applicability precedes consuming guards. Sealed Engine permission and
+  explicit authority/source pins remain held through Contracts' exact comparison
+  and atomic lineage/formation commit. Immutable consumed grant/request/decision
+  dependencies enter retention; mutable current-selection observations remain
+  live checks rather than immutable historical dependencies.
+- The typed SDK composes these operations in a separate followup module and keeps
+  original recovery/history and open-state reassessment explicit. The ordinary
+  supplied-file example demonstrates those APIs without adding a product CLI,
+  host routing, criterion selection or authority resolver.
+
 These are dependent implementation steps inside one Packet-4 outcome. Routine
 private factoring, exact additive type/version names and helper placement may be
 selected from current owners before edits; they must preserve this boundary.
@@ -410,5 +442,106 @@ This preparation verifies current source/test claims, discriminator coverage,
 changed-doc local links/anchors, whitespace/exact scope and GitNexus change detection,
 then uses one fresh focused causal planning reviewer. P1 Critical/P2 Required block
 and require remediation/verification/fresh delta review; P3 Optional/Consider and
-P4 Nit are advisory. After the coherent documentation commit, return AUTHORITY_READY
-to meta for human review of this implementation plan. No implementation is authorized.
+P4 Nit are advisory. The planning checkpoint returned AUTHORITY_READY after its
+coherent documentation commit. The subsequent human authorization above now permits
+this exact Packet-4 implementation. Return PACKET_COMPLETE after its acceptance,
+verification, focused causal review and coherent local commit; meta owns aggregate
+slice closeout and the human result checkpoint.
+
+## Implementation and focused evidence — 2026-10-07
+
+The [Contracts followup types](../../../../../crates/contracts/src/local_evaluation_followup.rs)
+and [repository seam](../../../../../crates/contracts/src/owner_repository/local_evaluation_repository/followup.rs)
+add exact closed-result/capture validation, routine repeat/correction, native
+rejected-candidate retention and atomic lineage. The existing occurrence allocator,
+three-output historical transactions and V3 snapshot/result bytes retain their
+contracts. Exact committed formation recovery compares the stored followup and
+decision provenance before any fresh admission; a conflicting mode/key refuses.
+Equal-content repetition retains its semantic Purpose content fingerprint while
+allocating a distinct occurrence, full Purpose identity and issuance.
+
+The [Engine correction module](../../../../../crates/engine/src/local_authority/local_evaluation/correction.rs)
+adopts one immutable upfront human-approved decider binding, retains attributed
+request/approve/deny/clarify heads and supplies lifetime-sealed consuming permission.
+The approved decider is explicitly named; it may equal the executor when the
+separate binding is actually approved. The native proof exercises distinct actors
+and wrong-actor refusal. The executor role never supplies a decider by inference.
+Principal self-approval of delegation remains refused. Clarification predecessor
+records, grant/request/decision records and the actual original closed-state source
+are pinned and rechecked. The evaluated terms and `current.json` remain unchanged.
+
+The [SDK workflow](../../../../../crates/sdk/src/local_evaluation/workflow.rs),
+[usage documentation](../../../../../crates/sdk/docs/local-evaluation.md) and
+[ordinary supplied-file example](../../../../../crates/sdk/examples/local_evaluation.rs)
+expose explicit fresh actions and original-key recovery. Lineage/provenance is
+returned beside the unchanged result; an unavailable lineage never replaces stored
+truth. Fresh applicability is resolved before the consuming guard. Engine admission
+remains held through Contracts' source/currentness comparison and transaction commit.
+
+Focused checks on the current source:
+
+| Check | Observed outcome |
+| --- | --- |
+| `cargo test --locked --offline -p handbook-engine --lib local_authority::local_evaluation --target-dir target/packet4-engine-tests` | 17 passed / 0 failed / 0 ignored: 12 existing and 5 correction tests; final compilation 8.65 s, runtime 0.66 s. |
+| `cargo test --locked --offline -p handbook-contracts --lib local_evaluation_followup::tests --target-dir target/packet4-engine-tests` | 2 passed / 0 failed / 0 ignored; compilation 40.39 s, runtime 0.01 s. |
+| `cargo test --locked --offline -p handbook-contracts --test local_evaluation_owner --target-dir target/packet4-engine-tests` | 3 passed / 0 failed / 0 ignored; compilation 14.17 s, runtime 0.09 s. |
+| `cargo test --locked --offline -p handbook-sdk --test local_evaluation --target-dir target/packet4-engine-tests -- --test-threads=1` | 1 passed / 0 failed / 1 ignored fixture-export helper; compilation 64 s, runtime 11.70 s. |
+| `cargo check --locked --offline -p handbook-engine -p handbook-contracts -p handbook-dock -p handbook-sdk --target-dir target/packet4-engine-tests` | Passed on the final source; 8.27 s. |
+| Native correction acceptance, release/locked/offline | Three selected tests passed across the runs below: routine correction/repeat with exact old history; distinct-decider decisions, head races, request/decision/formation interruption, D→G and revocation; interrupted upfront grant adoption with absent/uncertain/original-key recovery. |
+| Ordinary separate-process SDK consumer, locked/offline normal-dependency build | 54 process phases, all exit 0; routine correction 12, approved correction 13 and equal-input repeat 14 each closed with current Pass. Original Fail 9 and Pass 11 histories match exactly; all 162 original immutable native files have unchanged byte hashes. |
+| Exact changed Rust files / local documentation links | `rustfmt --check` on all 13 changed Rust files and `git diff --check` passed; 299 local links/anchors resolved across six documents. |
+
+The ordinary consumer excludes `test-support` and `dock-test-support`, retains its
+exact dependency lock, and uses the installed producer/manifest bytes and actual
+reviewed Packet-3 definition unchanged. Its first actual command at 01:37:50 UTC
+through completion at 02:08:37 UTC took 1,847.242 s (1,747.656 s recorded command
+time). At completion the three producer observations were 1,791.513, 1,175.513 and
+636.513 s old, each within the unchanged 3,600 s criterion. Routine, approved and
+repeat final closure took 88.203, 96.860 and 118.640 s respectively. Native stages,
+CPU activity and durable timestamps advanced throughout; no stalled/uncertain
+attempt was relaunched to obtain a new result.
+
+The native command `cargo test --release --locked --offline -p handbook-sdk --test
+local_evaluation_native correction_acceptance:: -- --test-threads=1 --nocapture`
+passed the distinct-decider/interrupted-correction test, with one failed routine
+proof assertion as described below (1 passed / 1 failed / 0 ignored; 1,209.85 s).
+The final command used the same target/filter plus
+`--skip correction_acceptance::native_packet4_upfront_distinct_decider_and_interrupted_single_correction`
+and the same single-thread/nocapture flags: 2 passed / 0 failed / 0 ignored;
+17.67 s compilation and 633.80 s runtime. The accepted distinct-decider test body
+is byte-identical to the final source; all production and example source hashes
+are unchanged. These establish three selected native passes without reclassifying
+the earlier mixed run.
+
+A fresh focused causal reviewer returned **APPROVE** on this exact 19-file Packet-4
+subject and evidence, with no P1 Critical, P2 Required, P3 Optional/Consider or P4 Nit
+findings. The review confirmed Contracts' unchanged V3/history contracts and atomic
+lineage, exact approved actor/source/head binding, sealed current decision
+consumption, and recovery/fresh-action distinctions. It covers packet acceptance;
+meta retains aggregate slice closeout and the human checkpoint.
+
+The native setup failure uncovered a new inventory probe below an absent evaluation
+parent; checking the parent first restored read-only absence. The predecessor-pin
+regression uncovered the retained checkpoint's sorted/unique-path requirement;
+path sorting/deduplication now follows all exact expected-byte comparisons. Both
+were remediated within this packet. Older interrupted debug/release fixtures are
+preserved as uncounted evidence; none is a claimed pass or a relaunch of an uncertain
+attempt. The temporary executor/decider inequality was removed after checking the
+approved “may be distinct” rule; the distinct acceptance case remains exercised.
+The mixed native run passed the distinct-decider test and failed the routine test's
+incorrect assertion that equal-content Purpose fingerprints must differ. The
+proof assertion now requires equal semantic content and distinct occurrence/full
+identity/issuance; production source did not change. Its final selected rerun is
+reported separately rather than claiming the mixed run had zero failures.
+
+The inherited capability-count `36 passed / 1 failed`, broader Windows owner-suite
+`24 passed / 1 failed / 1 ignored` (isolated failure passed, attribution unresolved),
+unexecuted Unix and debug consumer 8 MiB stack limits remain. GitNexus impacts
+returned UNKNOWN/absent new symbols against the stale/foreign degraded graph;
+direct owner/caller/source inspection supplies the bounded supplement. Staged
+change detection saw exactly 19 Packet-4 files with no indexed symbol overlap;
+that is not a clean-tree assertion. The required comparison against `main`
+reported CRITICAL for the complete 1,156-file branch, 678 indexed symbols and
+300 flows, including earlier HCM work. It does not isolate this packet's risk.
+No new index or migration was selected. Packet completion remains separate from meta's
+aggregate slice acceptance, closeout and human result checkpoint.

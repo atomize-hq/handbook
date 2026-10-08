@@ -23,6 +23,7 @@ mod lifecycle_preimage;
 mod local_contract;
 mod local_evaluation;
 mod local_evaluation_definition;
+mod local_evaluation_followup;
 mod local_evaluation_native;
 mod native_dock_source;
 pub mod operation_admission;
@@ -33,6 +34,7 @@ pub mod project_admission_governance;
 pub use local_contract::*;
 pub use local_evaluation::*;
 pub use local_evaluation_definition::*;
+pub use local_evaluation_followup::*;
 pub use local_evaluation_native::*;
 pub use native_dock_source::NativeDockCandidateObservationV1;
 pub use owner_repository::{

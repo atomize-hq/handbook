@@ -1389,7 +1389,11 @@ impl ContractOwnerRepositoryV1 {
                 let name = file_name(&entry)?;
                 if !matches!(
                     name.as_str(),
-                    "00-definition.json" | "00-transition.json" | "01-head.json" | "02-ledger.json"
+                    "00-definition.json"
+                        | "00-transition.json"
+                        | "01-head.json"
+                        | "02-ledger.json"
+                        | "03-lineage.json"
                 ) {
                     return Err(recovery("unestablished transaction has an unknown entry"));
                 }
@@ -1427,7 +1431,11 @@ impl ContractOwnerRepositoryV1 {
                 let name = file_name(&entry)?;
                 if !matches!(
                     name.as_str(),
-                    "00-definition.json" | "00-transition.json" | "01-head.json" | "02-ledger.json"
+                    "00-definition.json"
+                        | "00-transition.json"
+                        | "01-head.json"
+                        | "02-ledger.json"
+                        | "03-lineage.json"
                 ) {
                     return Err(recovery("unestablished transaction has an unknown entry"));
                 }

@@ -14,6 +14,9 @@ use handbook_engine::local_authority::local_evaluation::NativeLocalEvaluationAut
 use handbook_engine::local_authority::LocalAuthorityRefusalV1;
 use handbook_engine::ContextResolutionStackDefinition;
 
+mod workflow;
+pub use workflow::*;
+
 pub use handbook_contracts::{
     LocalContractDefinitionInputV3, LocalContractDefinitionV3, LocalContractUseV3,
     LocalDefinitionDependenciesV3, LocalDefinitionRecordV3, LocalEvaluationGateV3,

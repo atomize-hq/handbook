@@ -2563,3 +2563,6 @@ fn native_governance_and_revocation_use_untouched_operating_generation() {
 
 #[path = "local_evaluation_native/owner_acceptance.rs"]
 mod owner_acceptance;
+
+#[path = "local_evaluation_native/correction_acceptance.rs"]
+mod correction_acceptance;

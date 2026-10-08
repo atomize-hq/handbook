@@ -134,6 +134,100 @@ fn run() -> Result<(), String> {
         "terms-history" if args.len() == 3 => {
             print_json(&sdk.read_local_evaluation_terms_history(&decode_file(&args[2])?))
         }
+        "adopt-correction-delegation" if args.len() == 6 => {
+            let initial = initial(&args[2])?;
+            let authority = decode_file(&args[3])?;
+            let prepared = sdk
+                .prepare_local_input_correction_delegation(
+                    &initial,
+                    &authority,
+                    LocalInputCorrectionDelegationV1::from_json_bytes(&read(&args[4])?)
+                        .map_err(debug)?,
+                )
+                .map_err(debug)?;
+            save_new(
+                Path::new(&args[5]),
+                &prepared.locator().canonical_json_bytes().map_err(debug)?,
+            )?;
+            print_json(&sdk.adopt_local_input_correction_delegation(&authority, prepared))
+        }
+        "recover-correction-delegation" if args.len() == 4 => {
+            print_json(&sdk.recover_local_input_correction_delegation(
+                &decode_file(&args[2])?,
+                &correction_delegation(&args[3])?,
+            ))
+        }
+        "resume-correction-delegation" if args.len() == 4 => {
+            print_json(&sdk.resume_local_input_correction_delegation(
+                &decode_file(&args[2])?,
+                &correction_delegation(&args[3])?,
+            ))
+        }
+        "request-correction" if args.len() == 7 => {
+            let initial = initial(&args[2])?;
+            let authority = decode_file(&args[3])?;
+            let delegation = correction_delegation(&args[4])?;
+            let input =
+                LocalInputCorrectionRequestV1::from_json_bytes(&read(&args[5])?).map_err(debug)?;
+            let adopted = sdk
+                .recover_local_input_correction_delegation(&authority, &delegation)
+                .outcome
+                .ok_or_else(|| "exact adopted delegation is unavailable".to_owned())?;
+            let original = input
+                .locator(&adopted.delegation_fingerprint)
+                .map_err(debug)?;
+            save_new(
+                Path::new(&args[6]),
+                &original.canonical_json_bytes().map_err(debug)?,
+            )?;
+            print_json(
+                &sdk.retain_local_input_correction_request(
+                    &initial,
+                    &authority,
+                    &delegation,
+                    &input,
+                )
+                .map_err(debug)?,
+            )
+        }
+        "submit-correction" if args.len() == 8 => {
+            let initial = initial(&args[2])?;
+            let authority = decode_file(&args[3])?;
+            let delegation = correction_delegation(&args[4])?;
+            let request = correction_request(&args[5])?;
+            let submission = LocalInputCorrectionSubmissionV1::from_json_bytes(&read(&args[6])?)
+                .map_err(debug)?;
+            let original = submission.locator(&request).map_err(debug)?;
+            save_new(
+                Path::new(&args[7]),
+                &original.canonical_json_bytes().map_err(debug)?,
+            )?;
+            print_json(
+                &sdk.submit_local_input_correction_decision(
+                    &initial,
+                    &authority,
+                    &delegation,
+                    &request,
+                    &submission,
+                )
+                .map_err(debug)?,
+            )
+        }
+        "recover-correction-request" if args.len() == 5 => {
+            print_json(&sdk.recover_local_input_correction_request(
+                &decode_file(&args[2])?,
+                &correction_delegation(&args[3])?,
+                &correction_request(&args[4])?,
+            ))
+        }
+        "recover-correction-decision" if args.len() == 6 => {
+            print_json(&sdk.recover_local_input_correction_decision(
+                &decode_file(&args[2])?,
+                &correction_delegation(&args[3])?,
+                &correction_request(&args[4])?,
+                &correction_decision(&args[5])?,
+            ))
+        }
         "issue" if args.len() == 5 => {
             let authority = decode_file(&args[2])?;
             let request = LocalEvaluationAuthorizationRequestV1::from_json_bytes(&read(&args[3])?)
@@ -257,6 +351,84 @@ fn run() -> Result<(), String> {
             )?;
             print_json(&formed)
         }
+        "repeat" | "correct" if args.len() == 7 => {
+            let initial = initial(&args[2])?;
+            let authority = decode_file(&args[3])?;
+            let input = followup_input(&args[4])?;
+            let action = if args[0] == "repeat" {
+                LocalEvaluationFollowupActionV1::FreshRepeat
+            } else {
+                LocalEvaluationFollowupActionV1::CorrectedInput
+            };
+            if input.action != action {
+                return Err("supplied followup action differs from explicit caller choice".into());
+            }
+            let prepared = sdk
+                .prepare_local_evaluation_followup(&initial, &authority, input)
+                .map_err(debug)?;
+            save_new(
+                Path::new(&args[6]),
+                &serde_json::to_vec(&prepared.request_locator()).map_err(debug)?,
+            )?;
+            let formed = sdk
+                .form_local_evaluation_followup(&authority, prepared)
+                .map_err(debug)?;
+            save_new(
+                Path::new(&args[5]),
+                &serde_json::to_vec(&formed.locator).map_err(debug)?,
+            )?;
+            print_json(&formed)
+        }
+        "lineage" if args.len() == 3 => print_json(
+            &sdk.read_local_evaluation_lineage(&decode_file(&args[2])?)
+                .map_err(debug)?,
+        ),
+        "correction-candidate" if args.len() == 7 => {
+            let initial = initial(&args[2])?;
+            let authority = decode_file(&args[3])?;
+            let prepared = sdk
+                .prepare_local_evaluation_followup(&initial, &authority, followup_input(&args[4])?)
+                .map_err(debug)?;
+            let source = sdk
+                .retain_local_input_correction_candidate(
+                    &initial,
+                    &authority,
+                    &prepared,
+                    decode_file(&args[5])?,
+                )
+                .map_err(debug)?;
+            save_new(
+                Path::new(&args[6]),
+                &source.canonical_json_bytes().map_err(debug)?,
+            )?;
+            print_json(&source)
+        }
+        "consume-correction" if args.len() == 10 => {
+            let initial = initial(&args[2])?;
+            let authority = decode_file(&args[3])?;
+            let prepared = sdk
+                .prepare_local_evaluation_followup(&initial, &authority, followup_input(&args[7])?)
+                .map_err(debug)?;
+            save_new(
+                Path::new(&args[9]),
+                &serde_json::to_vec(&prepared.request_locator()).map_err(debug)?,
+            )?;
+            let formed = sdk
+                .form_approved_local_input_correction(
+                    &initial,
+                    &authority,
+                    &correction_delegation(&args[4])?,
+                    &correction_request(&args[5])?,
+                    &correction_decision(&args[6])?,
+                    prepared,
+                )
+                .map_err(debug)?;
+            save_new(
+                Path::new(&args[8]),
+                &serde_json::to_vec(&formed.locator).map_err(debug)?,
+            )?;
+            print_json(&formed)
+        }
         "capability" if args.len() == 6 => print_json(
             &sdk.observe_local_evaluation_capability(
                 &initial(&args[2])?,
@@ -307,20 +479,18 @@ fn run() -> Result<(), String> {
                 .map_err(debug)?,
         ),
         "history" if args.len() == 3 => {
+            let original = decode_file(&args[2])?;
             let history = sdk
-                .read_local_evaluation_history(&decode_file(&args[2])?)
+                .read_local_evaluation_history(&original)
                 .map_err(debug)?;
-            print_json(
-                &serde_json::json!({"history":history,"summary":history.result.human_summary()}),
-            )
+            print_history(&sdk, &original, history)
         }
         "result-history" if args.len() == 3 => {
+            let original: LocalEvaluationResultLocatorV3 = decode_file(&args[2])?;
             let history = sdk
-                .read_local_evaluation_result_history(&decode_file(&args[2])?)
+                .read_local_evaluation_result_history(&original)
                 .map_err(debug)?;
-            print_json(
-                &serde_json::json!({"history":history,"summary":history.result.human_summary()}),
-            )
+            print_history(&sdk, &original.evaluation, history)
         }
         "recover-attempt" if args.len() == 4 => print_json(
             &sdk.recover_local_evaluation_attempt(&decode_file(&args[2])?, &decode_file(&args[3])?)
@@ -460,6 +630,21 @@ fn process_request(
     .map_err(debug)
 }
 
+fn print_history(
+    sdk: &HandbookSdkV1,
+    original: &LocalEvaluationLocatorV3,
+    history: LocalEvaluationHistoryV3,
+) -> Result<(), String> {
+    let (lineage, lineage_refusal) = match sdk.read_local_evaluation_lineage(original) {
+        Ok(lineage) => (lineage, None),
+        Err(error) => (None, Some(debug(error))),
+    };
+    print_json(
+        &serde_json::json!({"history":history,"summary":history.result.human_summary(),
+        "lineage":lineage,"lineage_refusal":lineage_refusal}),
+    )
+}
+
 #[derive(serde::Deserialize)]
 #[serde(deny_unknown_fields)]
 struct SuppliedQuestion {
@@ -490,11 +675,32 @@ fn usage() -> String {
         "recover-request REQUEST_RECOVERY | recover/history OCCURRENCE | recover-attempt ATTEMPT DOCK_REACH\n",
         "recover-authorization/resume-authorization/authorization-history AUTHORITY ORIGINAL REACH\n",
         "revoke-evaluation AUTHORITY PRINCIPAL REACH | result-history RESULT_RECOVERY\n",
-        "recover-terms/terms-history AUTHORITY"
+        "recover-terms/terms-history AUTHORITY",
+        "\nrepeat/correct INITIAL AUTHORITY FOLLOWUP OCCURRENCE_RECOVERY REQUEST_RECOVERY | lineage OCCURRENCE\n",
+        "adopt-correction-delegation INITIAL AUTHORITY APPROVED_DELEGATION RECOVERY\n",
+        "recover-correction-delegation/resume-correction-delegation AUTHORITY DELEGATION\n",
+        "correction-candidate INITIAL AUTHORITY FOLLOWUP REJECTED_CANDIDATE SOURCE_OUTPUT\n",
+        "request-correction INITIAL AUTHORITY DELEGATION REQUEST_INPUT RECOVERY\n",
+        "submit-correction INITIAL AUTHORITY DELEGATION REQUEST SUBMISSION RECOVERY\n",
+        "recover-correction-request AUTHORITY DELEGATION REQUEST\n",
+        "recover-correction-decision AUTHORITY DELEGATION REQUEST DECISION\n",
+        "consume-correction INITIAL AUTHORITY DELEGATION REQUEST DECISION FOLLOWUP OCCURRENCE_RECOVERY REQUEST_RECOVERY"
     ).into()
 }
 fn initial(path: &str) -> Result<LocalInitialSetupLocatorV1, String> {
     LocalInitialSetupLocatorV1::from_json_bytes(&read(path)?).map_err(debug)
+}
+fn followup_input(path: &str) -> Result<LocalEvaluationFollowupInputV1, String> {
+    LocalEvaluationFollowupInputV1::from_json_bytes(&read(path)?).map_err(debug)
+}
+fn correction_delegation(path: &str) -> Result<LocalInputCorrectionDelegationLocatorV1, String> {
+    LocalInputCorrectionDelegationLocatorV1::from_json_bytes(&read(path)?).map_err(debug)
+}
+fn correction_request(path: &str) -> Result<LocalInputCorrectionRequestLocatorV1, String> {
+    LocalInputCorrectionRequestLocatorV1::from_json_bytes(&read(path)?).map_err(debug)
+}
+fn correction_decision(path: &str) -> Result<LocalInputCorrectionDecisionLocatorV1, String> {
+    LocalInputCorrectionDecisionLocatorV1::from_json_bytes(&read(path)?).map_err(debug)
 }
 fn check(path: &str) -> Result<LocalCheckLocatorV1, String> {
     LocalCheckLocatorV1::from_json_bytes(&read(path)?).map_err(debug)
