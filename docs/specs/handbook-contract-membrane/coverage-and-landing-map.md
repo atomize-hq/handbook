@@ -6,7 +6,8 @@ independent-local-check / Packets 1–4 delivered through `be7d040`. Packet-4 se
 acceptance and focused causal review are complete; meta checked all eleven slice
 conditions and cross-packet integration, returned aggregate **APPROVE** with no
 P1–P4 findings, and completed the single slice closeout and human recap. Bounded
-successor readiness was reconciled on 2026-10-08. These are supplied meta results,
+successor readiness and authorized Work Progression semantic integration were
+reconciled on 2026-10-08. These are supplied meta results,
 not product verification rerun by this documentation task. The dated comparison
 baseline below is preserved.
 This is planning input, not
@@ -184,29 +185,32 @@ new CLI, installed product skills and host-agent experiences follow separately
 after the relevant SDK capability matures. Phase 6 retains bridge 6.1 → publication
 6.2 → direct Substrate adoption 6.3 → Tauri product 6.4 → adapters 6.5.
 
-**Recommend the smallest next bounded task: Work Progression semantic integration.**
-The reviewed standalone amendment at
-`semantic-model/amendments/work-progression-kinds-and-relations.md` consolidates
-human-selected directions but remains untracked, uncommitted and unregistered.
-Register its status in the semantic entry points/decision references, reconcile
-only directly affected deferred-choice wording, preserve supporting research and
-commit the bounded document set. Its four linked research reports are also
-untracked; that landing must retain the required sources durably or deliberately
-resolve their references. This comparison neither lands those files nor treats
-their proposed research examples as selected policies. The amendment's clean
-focused review and 18 resolved local links cover its standalone consolidation,
-not the future integration or product capability.
+**Work Progression semantic integration is complete at the document boundary.**
+The human authorized this bounded task after the readiness comparison. The
+[amendment](semantic-model/amendments/work-progression-kinds-and-relations.md) is
+registered in the [semantic entry point](semantic-model/README.md) and
+[decision register](semantic-model/review-decision-register.md#work-progression--kinds-relations-and-governed-completion);
+directly affected hierarchy deferrals now distinguish selected semantics from
+unselected realization. Its four linked research reports are retained durably as
+proposed, dated evidence. Their examples and recommendations are not blanket
+selected policy. The earlier clean standalone review and 18 resolved local links
+remain evidence for that earlier subject; this integration receives its own
+focused verification/review and supplies no product capability.
 
 The selected semantic directions include optional immutable kinds with explicit
 composition, configurable levels, initial one-parent same-project containment,
 multiple typed prerequisites and separate grouping, distinct contract roles,
 explicit scoped governance, operation-specific prerequisite timing, exact bindings
 and preserved history. They do not select storage, lifecycle operations or a
-first SDK workflow. No further generic study is a prerequisite to document landing.
+first SDK workflow. No further generic study was required for the semantic integration.
+
+After the integration recap, the recommended next task is separately authorized
+preparation of one useful Work Progression native/SDK outcome. This integration
+does not prepare that slice or resolve the choices listed below.
 
 | Candidate | Readiness and useful next outcome | Unresolved decisions and preparation boundary |
 | --- | --- | --- |
-| Work Progression native/SDK realization | After semantic integration and its recap, prepare one useful owner/SDK outcome for authoritative work state and separate progression eligibility. Packet 4 supplies evaluation/history/decision foundations, not governed completion, parent eligibility or action receipts. | Bounded native/SDK preparation must select physical work-state/structure, definition, applicability and action responsibilities; registry versus equivalent reuse; concrete states/operations and reopen/cancel/removal semantics; exact policies, populations, coverage and assessment protocol; identity/resolver, persistence/concurrency/recovery/retention; SDK composition and first workflow. Resolve decisions only at the level needing them; multi-parent/external relations and adapters stay deferred. |
+| Work Progression native/SDK realization | Semantic integration is complete; after its human recap and separate preparation authorization, prepare one useful owner/SDK outcome for authoritative work state and separate progression eligibility. Packet 4 supplies evaluation/history/decision foundations, not governed completion, parent eligibility or action receipts. | Bounded native/SDK preparation must select physical work-state/structure, definition, applicability and action responsibilities; registry versus equivalent reuse; concrete states/operations and reopen/cancel/removal semantics; exact policies, populations, coverage and assessment protocol; identity/resolver, persistence/concurrency/recovery/retention; SDK composition and first workflow. Resolve decisions only at the level needing them; multi-parent/external relations and adapters stay deferred. |
 | Context Resolution native authority lifecycle | The [reviewed proposed brief](../../research/context-resolution-native-authority-lifecycle-design-2026-10-06.md) is committed at `70019b7`; its core legacy publication files remain unchanged. A bounded decision/reconciliation task can confirm the delta and proposed first native establishment/current-resolution/recovery/history outcome. | Human selects compatibility/adoption strategy and whether later adoption belongs in the outcome; credential-preserving first route versus a separately supported local-advisory rule; exact capsule/YAML publication with separate native JSON records versus a versioned codec/path and compatibility contract. The brief recommends the former options; none is selected. True historical verification requires retained original dependencies because the existing historical publisher still consults live bindings. |
 | Broader native decision-permission declaration/administration | Candidate bounded discovery/design when this is the desired next capability. Packet 4's one upfront human-approved InputCorrection binding and caller-carried decisions are a precedent, not general administration. | Select supported decision subjects/classes, constraints/reservations/escalation, rule/grant representation and native owner, initial establishment and prior-authorized replacement/revocation/agent-delegation paths, exact currentness/provenance and first SDK workflow. Agent-authorized grant establishment/replacement requires prior authority and native validation; a new grant cannot authorize itself. |
 
@@ -490,8 +494,9 @@ with selected acceptance, final causal delta **APPROVE** and completed human/met
 checkpoint. Packet 4 landed at `be7d040` with selected acceptance and focused causal
 **APPROVE**; meta aggregate validation/review, single slice closeout and human recap
 are complete. The human authorized bounded successor planning; the
-[readiness comparison](#successor-readiness-after-independent-local-check) recommends
-the next document landing and preserves unresolved implementation choices. Host
+[readiness comparison](#successor-readiness-after-independent-local-check) records
+the authorized Work Progression semantic landing and preserves unresolved native/SDK
+preparation and implementation choices. Host
 integration remains separately bounded.
 Do not turn this study into a fully elaborated backlog. The original comparison did not implement product work; the later fresh-project
 establishment slice and current local-check packets are recorded separately.

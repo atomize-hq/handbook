@@ -6,6 +6,9 @@ Opened: 2026-09-25.
 
 **Current amendment: HR-007 — Approved and integrated as semantic input, 2026-10-04.**
 
+**Subsequent Work Progression directions: human-selected 2026-10-07; bounded
+semantic integration authorized and recorded 2026-10-08.** No new HR number is assigned.
+
 This register accompanies the [approved semantic package](README.md). It records questions,
 clarification requests, and their eventual dispositions; it does not add normative
 rules, approve the package, or authorize implementation. The consolidation review
@@ -67,6 +70,44 @@ and entry point. It supersedes only those identified provisions; HR-001 through
 HR-006 remain historical decisions with their original approval evidence intact.
 User approval supplies this authority; automated review and commits do not.
 Implementation and successor slice planning require separate bounded authority.
+
+## Work Progression — Kinds, relations and governed completion
+
+**Status: Human-selected semantic directions integrated as planning input —
+2026-10-08.**
+
+After discussing the four research studies, the human selected the directions
+recorded in the [amendment](amendments/work-progression-kinds-and-relations.md)
+on 2026-10-07 and subsequently authorized this bounded semantic integration.
+The amendment's standalone technical review did not supply human approval;
+neither integration nor retaining the studies selects every research example.
+
+The selections are optional immutable versioned kinds with explicit composition;
+configurable names/levels; initial same-project containment with at most one
+parent and multiple children; multiple typed prerequisites with operation-specific
+timing; separate grouping/order/reference meanings; exact contract-output,
+requirements-input and assessment-result roles; explicitly authorized scoped
+governance and supported cumulative obligations; and exact bindings, currentness,
+finite accounting and preserved history. Work-state truth, Work Progression
+eligibility, Contracts assessment, Engine authority and action/commit truth retain
+their separate owners. A Work Specification remains a plan. Candidate availability
+can precede review; governed completion waits for actual required review.
+
+**Where integrated:** The semantic and program entry points link the amendment;
+the owning chapters' directly affected deferrals recognize its selected relation
+boundary. The [successor-readiness comparison](../coverage-and-landing-map.md#successor-readiness-after-independent-local-check)
+records this document landing separately from future native/SDK work. The four
+research reports linked by the amendment are retained as proposed, dated evidence.
+HR-001 through HR-007 and completed slice history retain their original authority.
+
+**Remaining choices:** Physical work-state/structure, definition, applicability
+and action owners; registry versus equivalent reuse; concrete lifecycle states,
+operations and reopen/cancel/removal semantics; exact policies, eligible populations,
+coverage and assessment protocols; identity/resolver, storage, concurrency,
+recovery and retention; and the first usable SDK workflow. Multi-parent/external
+relations and adapters remain later. No format, schema, first implementation slice,
+new packet or Phase-6 reorder is selected. Native/SDK preparation and implementation
+require their separate bounded authorization after the integration recap.
 
 ## HR-001 — Authority to establish policy-admission requirements
 

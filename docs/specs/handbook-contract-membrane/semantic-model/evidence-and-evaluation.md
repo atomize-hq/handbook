@@ -1072,8 +1072,11 @@ parent eligibility, explicit `historical_validity_only` versus
 `continuing_current` present-use modes, action authorization, attempts,
 terminals, receipts, and mutation boundaries. Historical resolvability and
 replay grant none of them. Work Progression is only the proposed semantic owner
-of local/parent eligibility; physical placement, work hierarchy/state model,
-concrete policies, and implementation remain deferred.
+of local/parent eligibility. The human-selected
+[Work Progression amendment](amendments/work-progression-kinds-and-relations.md)
+supplements that boundary with initial composition and relation semantics.
+Physical placement, concrete work-state/operation model, policies and implementation
+remain deferred; no assessment result becomes work state or action authority.
 
 Also deferred to later human-approved task-level planning are concrete schemas,
 Rust types, APIs, identity allocation algorithms, timestamps or logical-clock
@@ -1534,9 +1537,9 @@ metric algorithms and catalog entries; schema, type, API, and operation shapes;
 expression language; persistence layout; registry and version-resolution
 mechanics; any cutover or temporary internal bridge; implementation packets;
 acceptance planning; and rollout. Also out of scope are external adopter
-selection, concrete local-closeout or parent-promotion policy, work hierarchy
-and state model, posture algorithms, UI, a metric marketplace, and a universal
-confidence score.
+selection, concrete local-closeout or parent-promotion policy, concrete work-state
+and relation realization, posture algorithms, UI, a metric marketplace, and a
+universal confidence score.
 
 The proposed
 [evaluation authorization, capability, and readiness decision](assurance-and-evaluation-preparation.md#evaluation-preparation)
@@ -1547,9 +1550,12 @@ supersession/escalation semantics. The proposed
 [operational-reliance and work-progression decision](operational-reliance-and-actions.md#reliance-actions)
 owns the common present-use rule, atomic eligibility/disposition determination,
 separate action chain, and Work Progression semantic responsibility for local-
-closeout and parent eligibility. Concrete physical placement, work hierarchy and
-state model, admitted policies, schemas, storage, transport, host/Substrate
-mechanism, mutations, implementation, and delivery slices remain deferred. The
+closeout and parent eligibility. The human-selected
+[Work Progression amendment](amendments/work-progression-kinds-and-relations.md)
+supplies initial composition and relation semantics. Concrete physical placement,
+work-state/operation model and relation realization, admitted policies, schemas,
+storage, transport, host/Substrate mechanism, mutations, implementation, and
+delivery slices remain deferred. The
 proposal does not silently approve any of them or require a general identity,
 credential, authentication, delegation, capability-token, secrets, PKI, RBAC,
 or ABAC platform.

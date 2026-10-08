@@ -5,6 +5,11 @@
 Part of the [combined semantic package](README.md). Its approval boundary and
 shared greenfield/current-product distinction apply throughout.
 
+The human-selected [Work Progression kinds and relations amendment](amendments/work-progression-kinds-and-relations.md)
+supplements this part with the initial semantic composition, containment,
+prerequisite, contract-role and scoped-governance rules. Its integration selects
+no physical owner, concrete work-state lifecycle, policy content or implementation.
+
 This part owns present-use reliance, Work Progression, and the boundaries between eligibility, action authorization, execution, and committed mutation. A shared file does not collapse those semantic owners.
 
 ## Reading map
@@ -58,7 +63,8 @@ its own separately authorized action path.
 This record settles the common present-use vocabulary and the exact Work
 Progression ownership needed for local closeout and parent eligibility. It does
 not select any concrete closeout, parent, release, deployment, or posture
-policy; thresholds; work hierarchy; state machine; or mutation.
+policy; thresholds; concrete realization of the amendment's selected hierarchy
+and relations; work-state machine; or mutation.
 
 ### Canonical vocabulary
 
@@ -1137,8 +1143,10 @@ This record settles:
 
 Deliberately deferred are all concrete Local Closeout, Parent Eligibility,
 release, deployment, remediation, posture-observation, or other action-policy
-content; thresholds; selected result populations; work hierarchy and dependency
-model; work-state or parent-state machine; actor and approver rules; concrete
+content; thresholds; selected result populations; concrete realization of the
+[selected work composition and relation rules](amendments/work-progression-kinds-and-relations.md#selected-kinds-and-hierarchy);
+work-state or parent-state machine and operations, reopen/cancel/removal
+consequences; actor and approver rules; concrete
 authorization mechanism; mutation effects; persistence and retention policy;
 and the physical placement of Work Progression, action authority, or state
 ownership. No concrete parent promotion, release, deployment, or posture

@@ -509,7 +509,8 @@ policy mappings and requirement sets; thresholds; schema shapes; Rust types or
 APIs; storage and registry mechanics; expression languages; migrations;
 feature flags; slice or packet decomposition; rollout; and implementation
 sequence. This record also does not select concrete policy candidates or
-mappings, a work hierarchy or state model, physical component placement,
+mappings, concrete work-state and relation realization, physical component
+placement,
 observation or recommendation algorithms, acknowledgement or hysteresis model,
 UI, publication, or external adopter.
 
@@ -522,10 +523,15 @@ separation, diagnostics, and retry/cache/supersession/escalation semantics. The
 proposed [operational-reliance and work-progression decision](operational-reliance-and-actions.md#reliance-actions)
 owns the common present-use rule, action chain, and Work Progression semantic
 responsibility for local-closeout and parent eligibility. Concrete physical
-placement, work hierarchy/state model, policy contents, transition mechanisms,
+placement, concrete work-state and relation realization, policy contents,
+transition mechanisms,
 APIs, schemas, storage, transport, host/Substrate integration, implementation,
 and delivery slices remain deferred. These proposals do not silently approve
 any such choice or require a general IAM platform.
+
+The human-selected [Work Progression amendment](amendments/work-progression-kinds-and-relations.md)
+now supplies the initial kind/composition, hierarchy and prerequisite semantics;
+the concrete state/operation model and realization remain later choices.
 
 <a id="evaluation-requirements"></a>
 ## Complete evaluation requirements from two sources
@@ -1201,5 +1207,7 @@ policy content, publication, and external adopter or Substrate selection remain
 owned elsewhere or deferred. The proposed
 [operational-reliance and work-progression decision](operational-reliance-and-actions.md#reliance-actions)
 owns detailed present-use and action-chain semantics and proposes Work
-Progression as local/parent eligibility owner; physical placement, work hierarchy
-and state model, concrete policies, and implementation remain deferred.
+Progression as local/parent eligibility owner. The human-selected
+[Work Progression amendment](amendments/work-progression-kinds-and-relations.md)
+supplies initial composition and relation semantics; physical placement, concrete
+work-state/operation model, policies and implementation remain deferred.

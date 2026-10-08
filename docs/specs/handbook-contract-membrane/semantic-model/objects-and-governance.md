@@ -1413,6 +1413,11 @@ fixes exact artifact relationships to those objects; it does not approve that
 proposal, select physical placement, define the work hierarchy or state model,
 choose policy content, or authorize implementation or mutation.
 
+The subsequently human-selected [Work Progression amendment](amendments/work-progression-kinds-and-relations.md)
+supplies optional kind/explicit-composition and initial relation semantics.
+Kinds remain semantic definitions rather than another authored family. Concrete
+work-state lifecycle, physical placement and realization remain deferred.
+
 The settled explanation principles are one canonical owner truth, a concise
 default human explanation, requested drill-down to the highest available and
 authorized detail, independent disclosure authority, and no reevaluation from

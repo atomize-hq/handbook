@@ -77,6 +77,19 @@ and actual required review. Product CLI/skill/agent workflow delivery for these 
 capabilities follows in later bounded work. This allocation preserves the approved
 adaptive-intake/delegation target; it changes no semantic rule or approval history.
 
+The [Work Progression kinds, relations and governed-completion amendment](amendments/work-progression-kinds-and-relations.md)
+records human-selected semantic directions from 2026-10-07 and is integrated under
+the human's bounded authorization on 2026-10-08. It supplements the owning parts
+with optional immutable kinds and explicit composition, configurable levels,
+initial one-parent same-project containment, typed prerequisites and separate
+grouping, contract input/output/result roles, explicit scoped governance,
+operation-specific timing and preserved exact bindings/history. Its
+[decision-register entry](review-decision-register.md#work-progression--kinds-relations-and-governed-completion)
+distinguishes those selections from the four retained proposed research reports.
+Concrete owners, lifecycle operations, policies, coverage/protocol, storage and
+the first SDK workflow remain unselected. Integration claims no product delivery
+and authorizes no successor preparation or execution.
+
 ## Read by responsibility
 
 | Part | Owns the proposed semantics of | Read first when asking |
@@ -349,7 +362,8 @@ actually closed plus another child complete. The first child's eligibility satis
 neither condition by itself. Even after local closure, the parent's own requirements
 must still be checked.
 
-Details: [governed completion and Work Progression](operational-reliance-and-actions.md#governed-completion).
+Details: [governed completion and Work Progression](operational-reliance-and-actions.md#governed-completion)
+and the selected [kinds, relations and completion amendment](amendments/work-progression-kinds-and-relations.md).
 
 ### 11. Authorizing an action need not require a new login or approval service
 
@@ -419,8 +433,11 @@ the following remain unselected:
   metrics, thresholds, algorithms, producer choices, and result populations.
   Dependent admissions and completion operations cannot succeed without their
   required exact qualification and governing relationships.
-- Work hierarchy and dependency model, work/parent state machines, physical
-  ownership placement, mutation effects, and concrete authorization mechanisms.
+- Concrete realization of the [selected work composition and relation rules](amendments/work-progression-kinds-and-relations.md#selected-kinds-and-hierarchy),
+  work/parent state machines and operations, reopen/cancel/removal consequences,
+  physical ownership placement, mutation effects, and concrete authorization
+  mechanisms. Initial containment cardinality and prerequisite timing are selected
+  semantic constraints; multi-parent and external relations remain later choices.
 - Schemas, fields, types, APIs, operation names, storage and repositories,
   registries/resolvers, identity-allocation and clock technology, retention
   durations, caches, retry counts, timeouts, and transport encodings.

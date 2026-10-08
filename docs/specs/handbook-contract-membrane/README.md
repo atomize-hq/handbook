@@ -125,6 +125,15 @@ planning; the [coverage recommendation](coverage-and-landing-map.md#successor-re
 distinguishes semantic-document readiness from implementation readiness.
 Actual runtime choices retain their separate approval boundary.
 
+The human then authorized **Work Progression semantic integration**. The
+[selected amendment](semantic-model/amendments/work-progression-kinds-and-relations.md)
+is now registered in the [semantic entry point](semantic-model/README.md) and
+[decision register](semantic-model/review-decision-register.md#work-progression--kinds-relations-and-governed-completion),
+with its four proposed research sources retained. This bounded document landing
+selects no physical owners, lifecycle operations, concrete policies or first SDK
+workflow. Its human recap precedes separately authorized native/SDK preparation;
+the completed local-check slice and Phase-6 order remain unchanged.
+
 The human's 2026-10-06 [delivery-sequencing selection](phase-and-slice-map.md#current-delivery-sequencing)
 keeps the current stage focused on native owners and SDK features/refinement/usability.
 Packet 3 implements a complete native SDK check with usage and response/recovery docs
@@ -155,7 +164,7 @@ Use the source that owns the question:
 | Who owns canonical objects, policy admission, and authored-artifact relationships? | [`Objects and governance`](semantic-model/objects-and-governance.md) owns the proposed categories, shared admission rule, and exact artifact/reference boundaries. |
 | What proof is required and may an evaluation proceed? | [`Assurance and evaluation preparation`](semantic-model/assurance-and-evaluation-preparation.md) keeps posture/assurance selection separate from Engine authorization, capability, and readiness. |
 | What fixes the exact evidence population and the meaning of evaluation truth? | [`Evidence and evaluation truth`](semantic-model/evidence-and-evaluation.md) owns occurrence/evidence closure, claim/metric/gate semantics, explanation, and replay. |
-| May a result support present work progression or an action, and did an effect commit? | [`Operational reliance and actions`](semantic-model/operational-reliance-and-actions.md) owns the proposed Work Progression boundary, atomic eligibility/disposition, separate action authorization, and receipt requirements; concrete placement, work models, policies, and implementation remain deferred. |
+| May a result support present work progression or an action, and did an effect commit? | [`Operational reliance and actions`](semantic-model/operational-reliance-and-actions.md) owns the Work Progression boundary, atomic eligibility/disposition, separate action authorization and receipt requirements. The human-selected [kinds and relations amendment](semantic-model/amendments/work-progression-kinds-and-relations.md) supplements that boundary; concrete owner placement, state/operations, policies and native/SDK realization remain deferred. |
 | How is missing phase or slice authority prepared at the correct level? | [`authority-preparation-prompt.md`](authority-preparation-prompt.md) defines separate phase-to-slice and slice-to-packet top-level planning tasks. Each returns to the meta task before the next level. |
 | How is one authorized slice or packet assigned to a top-level task session? | [`task-session-prompt.md`](task-session-prompt.md) provides the copy/paste-ready assignment prompt and compact result presentation. |
 | How does a meta task prepare and continue requested HCM work? | [`meta-task-prompt.md`](meta-task-prompt.md) routes authority preparation, human approval of the next bounded plan, whole-slice or sequential packet execution within that increment, and recap-and-stop at its human review boundary. |
