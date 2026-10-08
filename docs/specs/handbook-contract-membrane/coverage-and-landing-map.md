@@ -99,6 +99,11 @@ primitives for native/SDK repeat/correction, adding bounded caller-carried autho
 InputCorrection decision consumption and an explicit prior-approved decision-agent
 binding distinct from the executor. The packet owns that minimum participant
 boundary; host labels and existing one-agent terms supply no separate decider.
+Its [authority clarification](slices/independent-local-check/packet-4.md#authority-establishment-and-decision-responsibilities)
+owns upfront grant configuration, native adoption order, routine correction without
+repeated approval, and the distinction between deciding and appointing deciders.
+The human-approved immutable binding is Packet 4's initial establishment path,
+not Handbook's universal authority model or a permanent human-only delegation rule.
 The approved adaptive-intake and conditional-escalation intent
 remains traceable to HR-007, with host transport/automatic routing separately bounded.
 
@@ -140,6 +145,27 @@ project-agent resolution under prior terms and conditional human escalation.
 Automatic delivery, general role/context profiles and production Substrate adapter
 proof remain with [Phase 6](phase-and-slice-map.md#phase-6--consumer-adoption).
 These are planning constraints/source evidence; dense owner semantics stay unchanged.
+
+### Declaration and administration of decision permissions
+
+Track this broader **native authority design** as explicit later work. Its intended
+outcome is users predefining which supported decisions agents can make, under what
+constraints/reservations and escalation, with native authority validation and
+retained approval provenance. Decision rules, delegation grants/operating terms
+and exact actual decision records have distinct responsibilities; that distinction
+does not require separate files or configuration roots. General rule/grant
+representation, owner placement beyond selected boundaries, supported
+administration/replacement and agent-authorized delegation paths remain to be
+selected. Later support requires explicit prior authority; deciding a correction
+does not grant authority to appoint its decider, and no new grant authorizes itself.
+
+The [roadmap decision boundary](phase-and-slice-map.md#primary-unresolved-decisions)
+assigns no invented phase or packet. Native permission administration is separate
+from external host/consumer discovery, agent context, routing and LLM calls; it is
+not automatically Phase-6 host work. Neither later responsibility is a prerequisite
+for Packet 4's bounded initial binding and caller-carried correction decisions.
+Initial human approval and subsequent supported delegated operation retain
+[G2](semantic-model/amendments/governance-defaults-and-delegated-operation.md#g2--initial-approval-and-delegated-operation).
 
 ### Current source constraints on the next outcome
 

@@ -5,6 +5,8 @@ Status: **prepared for meta/human implementation-plan review; not implemented**,
 The human reviewed/discussed the landed Packet-3 result with Meta Main and expressly
 requested this bounded reconciliation. That authorizes planning, source verification
 and a local documentation commit, not Packet-4 product execution or runtime choices.
+The human subsequently endorsed the authority/delegation clarifications below,
+including upfront configuration and explicit later permission-administration work.
 Implementation requires human approval of this plan and proven hard predecessors.
 
 ## Outcome and human checkpoint
@@ -153,6 +155,55 @@ An intentionally independent new check must be labeled as such and preserve that
 unresolved history. A closed result is retrieval/delivery only. Changed capture,
 requirements, applicability or Purpose always requires new formation and issuance.
 
+### Authority establishment and decision responsibilities
+
+Packet 4's one human-approved immutable `InputCorrection` decision-agent binding
+is its supported **initial authority-establishment path**. Initial project and
+delegation choices remain human-approved under [G2](../../semantic-model/amendments/governance-defaults-and-delegated-operation.md#g2--initial-approval-and-delegated-operation).
+This bounded path does not define Handbook's universal authority model or reserve
+every future delegation decision permanently to the human. Subsequent supported
+correction decisions use the existing delegation, with human escalation only for
+reserved choices, unresolved material ambiguity or missing authority without a
+supported resolution.
+
+Authority to decide a correction does not authorize appointing new deciders.
+Agent-authorized creation, replacement or administration of delegation bindings
+is separately scoped later support. It requires explicit prior authority and
+native owner validation; no new authority may authorize itself. Packet 4 retains
+one immutable binding per evaluation authority and supports no replacement.
+
+Keep these conceptual responsibilities distinct:
+
+| Responsibility | Meaning |
+| --- | --- |
+| Decision rules | Which choices require a new decision/approval, under which conditions, and when escalation is required. |
+| Delegation grant / operating terms | Who may decide what, within which scope and constraints, with exact approval provenance. |
+| Decision record | One exact actual decision and outcome under the applicable rules and grant. |
+
+This distinction mandates no separate files, records or configuration roots for
+the three concepts. The native owner selects their concrete representation in
+bounded implementation, preserving this packet's selected additive boundary and
+existing versioned contracts. No universal policy schema or general resolver is
+selected. Initial `LocalOperatingTermsV1` and `LocalCheckTermsV1` already carry
+`reserved_decisions` and `delegated_decisions`; an enum/list entry is not evidence
+that every decision class has a positive implemented workflow. The reconciliation
+and source anchors above distinguish those partial foundations from the absent
+distinct-decider adoption and decision-consumption path.
+
+Users can approve and provision the correction decision-agent binding **before
+any unresolved request**, as part of the coherent initial configuration/approval
+experience. Native adoption still requires the established evaluation root/terms
+and exact current predecessor chain described below. Upfront human approval is
+not out-of-order owner mutation; it must match the exact binding actually adopted.
+No artificial refusal or pending correction is required to establish the grant.
+Already permitted routine corrections proceed directly under owner checks, without
+mandatory decider or human ceremony. If a correction choice genuinely needs the
+designated decision agent, use that prior binding without another human approval.
+
+Broader [declaration and administration of decision permissions](../../coverage-and-landing-map.md#declaration-and-administration-of-decision-permissions)
+remains explicit later native design work, separately tracked from external host
+discovery, agent context, routing and LLM calls. Neither is a new Packet-4 prerequisite.
+
 ### Minimum caller-carried decision path
 
 Select **InputCorrection only** for positive decision consumption in this packet.
@@ -168,9 +219,10 @@ decision agent may be distinct from the executor; acceptance must exercise that
 distinct case. This is one explicit participant binding, not a general actor map,
 agent-profile platform, IAM or host routing.
 
-Native adoption requires supplied attributable **human approval of that exact
-binding** by the principal named in the live prior terms, plus current predecessor
-validation. It is a supported additive owner rule to record the previously absent
+For this initial establishment path, native adoption requires supplied attributable
+**human approval of that exact binding** by the principal named in the live prior
+terms, plus current predecessor validation. It is a supported additive owner rule
+to record the previously absent
 participant selection, not an interpretation of free-text delegation or a change
 to old terms/bytes. Require InputCorrection already explicitly delegated through
 applicable prior terms and not reserved. The binding adds no operation/decision
@@ -290,7 +342,7 @@ to meta before product edits rather than silently widening scope.
 | Step / likely boundary | Acceptance and focused proof |
 | --- | --- |
 | 1. Contracts correction preparation/lineage and SDK explicit actions | Closed prior result/capture resolves exactly; new correction/repeat preserves old bytes and independently justified definition. Same key replays, conflict refuses, fresh equal-content request gets new occurrence/issuance. Original uncertain response uses recovery. |
-| 2. Engine exact approved decision delegation, retained InputCorrection request/decision and sealed consuming admission | Actual human approval adopts one compatible explicit decision-agent binding while preserving the executor. Deciding actor/delegated class and exact source/content/current head are checked. Approve/deny/clarification differ; invalid, reserved, missing or stale authority produces no dependent effect. Interrupted adoption/decision and conflicting/concurrent submissions recover or refuse truthfully. |
+| 2. Engine exact approved decision delegation, retained InputCorrection request/decision and sealed consuming admission | Actual initial human approval adopts one compatible immutable decision-agent binding while preserving the executor, after native predecessors exist and without requiring an unresolved request. Deciding actor/delegated class and exact source/content/current head are checked. Approve/deny/clarification differ; invalid, reserved, missing or stale authority produces no dependent effect. Interrupted adoption/decision and conflicting/concurrent submissions recover or refuse truthfully. |
 | 3. Integrated native correction/decision consumption and open-state continuation | Accepted correction forms at most one new occurrence under fresh v3 basis and all original execution/source/finalization checks. Unchanged precommit continuation retains original Purpose/issuance; committed basis and uncertain one-attempt behavior stay fixed. |
 | 4. SDK documentation and ordinary separate-process consumer proof | Usable supplied inputs, exact locators, discriminated outcomes and supported next operations demonstrate history/recovery/repeat/correction/decision distinctions. Example uses normal dependencies and actual required independent review; no test authority or host routing supplies permission. |
 
@@ -301,6 +353,7 @@ its delivered primitives as new work:
 | --- | --- |
 | Old Fail and stale Indeterminate, then permitted correction/fresh repeat | Old canonical results/violations/times remain byte-identical. New capture is exact; new occurrence/issuance/time are retained and full truth closes under unchanged reviewed criteria. Equal-content repetition still has distinct occurrence/Purpose/issuance. |
 | Reopen, original-key recovery and deliberate new key | Recover formation, decision, issuance and attempt delivery without launch/allocation. Proven absent intent differs from uncertain effect. A conflicting key refuses. Closed-result delivery does not refresh currentness or authorize new use. |
+| Upfront grant and routine permitted correction | Approve/provision the binding before any unresolved request; native adoption succeeds only after exact evaluation predecessors exist. Missing predecessors or mismatched approval refuse without out-of-order mutation. No fabricated refusal/pending request is needed. A routine permitted correction proceeds directly; a genuinely unresolved delegated choice uses the prior binding without new human approval. Correction decision authority does not permit binding creation/replacement/administration. |
 | Distinct execution and decision agents; approve/deny/clarification, identity/content conflicts and concurrent heads | Human-approved binding names a project decision agent distinct from the original executor; the executor carries its decision without becoming the decider. Missing/self-approved/altered binding, wrong deciding actor or attempted executor substitution refuses. Only current exact authorized approval can be consumed. Denial closes without effect; clarification stays unresolved. Wrong source/class/request/basis/capture and duplicate-conflicting decisions refuse. At most one dependent correction allocates across crash/replay. |
 | Live precommit continuation versus changed input/frozen basis | Reassessment under unchanged original binding is permitted only if native facts resolve; immutable inadequate reach remains held. Changed capture forms new truth. After commitment no replacement basis, second attempt or copied old evidence can proceed. |
 | D→G and revocation between delegation adoption, request, decision and consumption | Old D delegation/request/decision/result remains historical. Stale prepared D cannot consume under G. Fresh supported same-project G requires current compatible delegation and actual positive non-applicability or satisfied qualification for every required use; over-ceiling/unsupported required Q refuses. Revocation blocks fresh decision/use without rewriting history. No v2 fallback, including closed v3 NotCommitted leaving D current. |
@@ -312,6 +365,9 @@ general delegation or policy replacement, retry/pruning catalog, credential devi
 Work Progression, reliance/action permission, schema migration, publication or phase
 is selected. Deferred consumer work remains in the [coverage carry-forward](../../coverage-and-landing-map.md#local-check-planning-and-host-integration-carry-forward)
 and [Phase 6](../../phase-and-slice-map.md#phase-6--consumer-adoption).
+Broader native permission declaration/administration retains its separate
+[later decision boundary](../../phase-and-slice-map.md#primary-unresolved-decisions);
+it is not assigned by default to host routing or Phase 6.
 
 ## Verification and final slice integration
 

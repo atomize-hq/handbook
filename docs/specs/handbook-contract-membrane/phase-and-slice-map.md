@@ -80,6 +80,14 @@ that final native/SDK increment is prepared for implementation-plan review only.
 Supplied attributable human approvals, actual required review, owner validation,
 authority and result explanation remain requirements of this stage.
 
+Packet 4's [authority clarification](slices/independent-local-check/packet-4.md#authority-establishment-and-decision-responsibilities)
+selects one human-approved immutable correction-decider binding as its initial
+establishment path, with upfront approval/provisioning before any unresolved request
+and native adoption after required predecessors exist. Later supported corrections
+use that delegation. Broader
+native permission declaration/administration remains a separate unresolved design
+boundary below, not a universal human-only rule or a new Packet-4 predecessor.
+
 Product CLI routes, installed-skill workflow instructions, adaptive agent-led
 intake and a tested end-to-end agent-guided CLI/skill experience for these new
 capabilities are **later, separately bounded consumer-workflow work**, once the
@@ -358,6 +366,7 @@ SDK/CLI/Tauri parity requirement or skill-family pack/integration catalog.
 | CLI/Tauri membrane routes and framing | HCM-4.3 owns current CLI parity and framing; HCM-4.4 separately owns the Tauri facade after HCM-4.3 closeout. |
 | Publication mechanism, exact versions, bridge, and external adopter | Future publication and consumer authorities with current external proof |
 | CLI, installed-skill and agent workflows for new native/SDK capabilities | Later human-directed consumer-workflow preparation under [current delivery sequencing](#current-delivery-sequencing), with readiness/adopter decisions and scope still to be selected. The [carry-forward](coverage-and-landing-map.md#local-check-planning-and-host-integration-carry-forward) tracks local-check intake, response handling and routing; this is no default assignment to Packet 4 or new phase. |
+| Declaration and administration of decision permissions | Later native authority design must let users predefine which supported decisions agents may make, under which constraints/reservations and escalation, with native validation and retained approval provenance. General decision-rule/grant representation, owner placement beyond selected boundaries, supported administration/replacement and agent-authorized delegation paths remain to be selected in bounded authority. The [coverage carry-forward](coverage-and-landing-map.md#declaration-and-administration-of-decision-permissions) separates this from external host discovery/context/routing/LLM calls. No phase/packet is assigned, and neither later responsibility is a Packet-4 prerequisite. |
 
 Use this map to route a future slice author to the proper predecessor and
 decision boundary. Then create separate, explicit slice authority before

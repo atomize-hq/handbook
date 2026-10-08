@@ -198,6 +198,18 @@ CLI/installed-skill/agent workflow delivery follows as separately bounded work;
 the eventual intake semantics above do not assert a delivered route. Existing
 generic consumers retain their established capabilities and ownership.
 
+Decision rules, delegation grants/operating terms and actual decision records
+have distinct conceptual responsibilities, without mandating separate files,
+records or configuration roots. Native owners choose concrete representation
+within bounded authority and validate exact scope, currentness and provenance.
+Packet 4's [selected initial correction-decider binding](slices/independent-local-check/packet-4.md#authority-establishment-and-decision-responsibilities)
+does not define a universal authority model: deciding a correction does not grant
+authority to appoint deciders, and no new authority authorizes itself. Broader
+[permission declaration/administration](coverage-and-landing-map.md#declaration-and-administration-of-decision-permissions)
+remains later native design, distinct from external host discovery, agent context,
+routing and LLM calls. This distinction selects no general resolver, policy schema
+or IAM platform and makes neither later responsibility a Packet-4 prerequisite.
+
 Three byte and identity domains must remain separate:
 
 1. **Instance canonicalization and fingerprints** identify concrete values and

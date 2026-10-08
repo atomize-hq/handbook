@@ -48,6 +48,18 @@ Packet-3 plan at `2b09faf`, with selected acceptance verified, final causal delt
 **APPROVE** and completed human/meta checkpoint. The human requested the bounded
 [Packet-4 plan](slices/independent-local-check/packet-4.md); its missing workflow
 additions remain unimplemented and require human implementation-plan approval.
+
+Initial [operating terms](../../../crates/engine/src/local_authority.rs) and
+[local-check terms](../../../crates/engine/src/local_authority/local_check.rs) already
+contain `reserved_decisions` / `delegated_decisions`. These partial foundations
+do not implement a positive workflow for every enum class or a separate evaluation
+decider: [evaluation terms](../../../crates/engine/src/local_authority/local_evaluation.rs)
+have no decision-class/distinct-decider fields. Packet 4's one initial human-approved
+immutable `InputCorrection` binding and positive decision consumption remain
+planned. Broader [permission declaration/administration](coverage-and-landing-map.md#declaration-and-administration-of-decision-permissions)
+is **absent/future**, with general representation and administration paths unselected;
+it is separate from later host routing and is no Packet-4 prerequisite.
+
 The proposed [scoped-deferral shape](coverage-and-landing-map.md#proposed-next-slice-shape-scoped-governance-deferral)
 subsequently landed as the bounded [deferral slice](slices/scoped-governance-deferral/README.md)
 at `8b13505`: native initial scoped deferral, exact current resolution/replay,

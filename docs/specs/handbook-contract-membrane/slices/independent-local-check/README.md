@@ -87,6 +87,13 @@ operation means prior terms already permit it, with native currentness, scope an
 content checks. Delivery, decision authority, assurance and composition remain
 separate; a configured role or transport never grants permission.
 
+Packet 4's [authority clarification](packet-4.md#authority-establishment-and-decision-responsibilities)
+allows upfront human approval/provisioning of its one immutable correction-decider
+binding without a pending request; actual adoption waits for native predecessors.
+That is this packet's initial establishment path, not a universal human-only
+delegation rule. Already permitted corrections need no new decision ceremony;
+appointing or administering deciders is separate authority and later design work.
+
 ## Outcome allocation and human checkpoints
 
 Use sequential packet execution. Each row delivers a separately assessable

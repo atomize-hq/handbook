@@ -68,10 +68,11 @@ The subsequent [approval-authority and assurance clarification](approval-authori
 records the human's 2026-10-05 selection of local-advisory authority for the complete
 independent-local-check workflow and separates five approval dimensions. Read it
 with G1–G5 and the dated inventory below. Current-status cross-reference,
-2026-10-06: [independent-local-check / Packets 1–2](../../slices/independent-local-check/README.md)
-deliver bounded native local setup, definitions/lifecycle and source authority.
-The complete workflow remains unfinished; [Packet 3](../../slices/independent-local-check/packet-3.md)
-is prepared for human implementation review. This does not bypass current
+2026-10-07: [independent-local-check / Packets 1–3](../../slices/independent-local-check/README.md)
+deliver bounded native local setup, definitions/lifecycle/source authority and
+complete check/history through their human/meta checkpoints. The complete workflow
+remains unfinished; [Packet 4](../../slices/independent-local-check/packet-4.md)
+is prepared for implementation-plan review. This does not bypass current
 credential-required contracts or update the dated source inventory below.
 
 The 2026-10-06 [delivery-sequencing selection](../../phase-and-slice-map.md#current-delivery-sequencing)
