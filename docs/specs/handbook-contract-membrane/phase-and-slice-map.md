@@ -78,7 +78,11 @@ unresolved P1/P2. It landed at `2b09faf` and passed its human/meta result checkp
 The human requested [Packet-4 reconciliation](slices/independent-local-check/packet-4.md)
 and approved its exact implementation after the clarification at `526dc5e`.
 The final native/SDK increment is implemented and selected acceptance is verified,
-with focused causal **APPROVE** and no P1–P4 findings. Meta retains aggregate slice closeout and the human result checkpoint.
+at `be7d040`, with focused causal **APPROVE** and no P1–P4 findings. Meta checked
+all eleven slice conditions and cross-packet integration, returned aggregate
+**APPROVE** with no P1–P4 findings, and completed slice closeout and the human recap.
+The four-packet native/SDK slice is complete; these are supplied meta results,
+not verification rerun by this documentation reconciliation.
 Supplied attributable human approvals, actual required review, owner validation,
 authority and result explanation remain requirements of this stage.
 
@@ -267,7 +271,7 @@ Phase numbering and Phase-6 order remain unchanged.
 | --- | --- | --- | --- |
 | [`scoped-governance-deferral`](slices/scoped-governance-deferral/README.md) — Positive scoped deferral and current resolution | Implemented locally at `8b13505`; single-packet aggregate closeout, meta validation and human recap complete | One newly registered local project retains human-approved deferral of the existing Contracts freshness-policy admission scope and resolves/replays its exact basis through typed SDK. No default activation, global exemption or independent evaluation is inferred; missing/corrupt/uncertain state fails closed. | Existing identity/durability, fresh-project owner and typed SDK were foundations; scoped deferral and narrow initialization coordination landed inside the slice. The completed evidence carries an unattributed broader Windows-suite failure; focused targets passed. This is no successor authorization. |
 | [`deferred-governance-establishment`](slices/deferred-governance-establishment/README.md) — First governance on the same deferred project | deferred-governance-establishment / Packet 1 implemented locally at `9f28f99`; Main-confirmed aggregate validation/closeout and human recap complete | Establish one exact newly approved configuration/terms against current never-established D on P/S; retain original history/replay, exact current G, truthful concurrency/recovery and typed SDK results. | Positive deferral at `8b13505` was the foundation; the packet source/evidence records delivered D→G/v3 and inherited limits. Actual runtime G still needs approved configuration/terms and exact current D. Ordinary roots, replacement and independent-use closure remain excluded. |
-| [`independent-local-check`](slices/independent-local-check/README.md) — Complete independent offline JSON conformance | Packets 1–3 delivered at `fccaf11`, `5bf0f3b`, `2b09faf` through their human/meta checkpoints; final Packet-3 causal delta APPROVE. Packet 4 implemented and selected acceptance verified; focused causal APPROVE with no P1–P4; aggregate slice closeout remains with meta | Native setup, reviewed definitions/source authority and complete check/history/recovery/one-attempt primitives are delivered. Packet 4 adds explicit repeat/correction lineage and bounded prior-approved decision consumption. | [Packet 4](slices/independent-local-check/packet-4.md) builds on delivered primitives. Fresh supported G requires exact v3 qualification/non-applicability. Full Substrate adoption remains separate. Meta owns aggregate slice closeout and the human result checkpoint, with no extra packet. |
+| [`independent-local-check`](slices/independent-local-check/README.md) — Complete independent offline JSON conformance | Packets 1–4 delivered at `fccaf11`, `5bf0f3b`, `2b09faf`, `be7d040`; all eleven slice conditions and cross-packet integration checked; Packet-4 and aggregate causal APPROVE with no P1–P4; single slice closeout and human recap complete | Native setup, reviewed definitions/source authority, complete check/history/recovery, explicit repeat/correction lineage and bounded prior-approved decision consumption are delivered. | Fresh supported G requires exact v3 qualification/non-applicability. Supplied meta closeout evidence retains inherited verification limits. Full Substrate adoption and new CLI/skill/agent workflows remain separate; no extra packet or successor implementation is authorized. |
 
 The [next-outcome boundary](coverage-and-landing-map.md#proposed-next-slice-shape-scoped-governance-deferral)
 owns the high-level example, refusal and observable acceptance conditions.
@@ -298,14 +302,17 @@ and final causal delta **APPROVE**, with no unresolved P1/P2, at `2b09faf`.
 Meta validated/recapped that completed result and the human reviewed/discussed it,
 then expressly requested [Packet-4 reconciliation](slices/independent-local-check/packet-4.md).
 That single detailed authority prepares the final repeat/correction/bounded decision
-increment for meta/human implementation-plan review; it authorizes no product work
-or aggregate slice closeout now.
+increment which the human subsequently authorized after `526dc5e`. Packet 4 landed
+at `be7d040`; meta aggregate validation/review, the single slice closeout and human
+recap are complete. The human has now authorized bounded successor planning only;
+the [readiness comparison](coverage-and-landing-map.md#successor-readiness-after-independent-local-check)
+recommends semantic integration before separately selected native/SDK preparation.
 The human has selected [local-advisory authority](semantic-model/amendments/approval-authority-and-assurance.md)
 for the complete workflow, including later Contracts lifecycle and repeated source
 admission/revalidation; hardware/authenticator acquisition is not a predecessor.
 The [credential baseline](implemented-baseline.md#credential-verification-and-the-selected-local-route)
 distinguishes retained verification mechanisms from unproven device integration
-and the delivered initial local route versus unfinished complete workflow.
+and the completed bounded native/SDK workflow versus later consumer delivery.
 Existing credential-required rules acquire
 no automatic fallback.
 No runtime project bounds, assurance provider, or general profile system is selected

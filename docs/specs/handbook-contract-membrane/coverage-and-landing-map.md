@@ -2,10 +2,13 @@
 
 Status: **proposed for human review**, prepared 2026-10-01; program reconciliation
 updated 2026-10-04 against `31e7746`, with bounded current-status correction and
-independent-local-check / Packet 3 delivered at `2b09faf` through its human/meta
-checkpoint on 2026-10-07. Final causal delta review returned **APPROVE**;
-[Packet 4](slices/independent-local-check/packet-4.md) is prepared for implementation-plan
-review, not implemented. The dated comparison baseline below is preserved.
+independent-local-check / Packets 1–4 delivered through `be7d040`. Packet-4 selected
+acceptance and focused causal review are complete; meta checked all eleven slice
+conditions and cross-packet integration, returned aggregate **APPROVE** with no
+P1–P4 findings, and completed the single slice closeout and human recap. Bounded
+successor readiness was reconciled on 2026-10-08. These are supplied meta results,
+not product verification rerun by this documentation task. The dated comparison
+baseline below is preserved.
 This is planning input, not
 implementation authority, a new phase numbering scheme, or an amendment of
 completed slice outcomes. Product baseline: `b0e73fc54f28d80c3f8f58d37b939db41bbbf0e4`.
@@ -78,9 +81,12 @@ The human subsequently approved the bounded implementation, verification, focuse
 review and local commit. Complete selected native acceptance is verified, with
 final causal delta **APPROVE** and no unresolved P1/P2 at `2b09faf`; meta validation/
 recap and human review/discussion are complete. The human expressly requested
-[Packet-4 reconciliation](slices/independent-local-check/packet-4.md). Its final
-native/SDK repeat/correction and bounded InputCorrection decision plan is prepared
-for human implementation approval. Routed escalation is not delivered by Packet 3.
+[Packet-4 reconciliation](slices/independent-local-check/packet-4.md), then approved
+its exact implementation after `526dc5e`. Its native/SDK repeat/correction and
+bounded InputCorrection decision workflow landed at `be7d040` with selected
+acceptance and focused causal **APPROVE**, no P1–P4 findings. The complete slice's
+meta aggregate review/closeout and human recap are complete; the human authorized
+bounded successor planning. Automatic routed escalation remains later consumer work.
 In the approved eventual experience, an implementation agent may route an
 unresolved request to a project-level agent with additional context and prior
 delegated authority; human resolution is
@@ -113,8 +119,8 @@ approval requirement, decision authority, delivery, identity assurance and
 composition. independent-local-check / Packet 1 supplies the delivered setup/Engine
 boundary. Packet 2 delivers local Contracts lifecycle and required source
 admission/revalidation. Packet 3 implements complete Coordination/authorization,
-collection/evidence/final-context truth and historical delivery; Packet 4 details
-the complete fresh repeat/correction/resolution workflow, without mandatory
+collection/evidence/final-context truth and historical delivery; Packet 4 delivers
+the complete bounded fresh repeat/correction/resolution workflow, without mandatory
 authenticator acquisition. The [credential baseline](implemented-baseline.md#credential-verification-and-the-selected-local-route)
 records actual implemented verification and incomplete/unproven device integration.
 Neither this selection nor an unavailable port bypasses current credential rules
@@ -140,7 +146,7 @@ agent inventory/placement, dispatch/exact handles, prompt/session context,
 attributed inbox and host-session authority are reuse candidates. Several seams
 are crate-private and no Handbook adapter, actual agent-decision route or external
 adoption was tested. independent-local-check / Packet 1 only returns exact refusal/unresolved context; the
-complete slice allocates caller-carried authorized decision submission, preserving
+completed slice delivers caller-carried authorized decision submission, preserving
 project-agent resolution under prior terms and conditional human escalation.
 Automatic delivery, general role/context profiles and production Substrate adapter
 proof remain with [Phase 6](phase-and-slice-map.md#phase-6--consumer-adoption).
@@ -166,6 +172,54 @@ not automatically Phase-6 host work. Neither later responsibility is a prerequis
 for Packet 4's bounded initial binding and caller-carried correction decisions.
 Initial human approval and subsequent supported delegated operation retain
 [G2](semantic-model/amendments/governance-defaults-and-delegated-operation.md#g2--initial-approval-and-delegated-operation).
+
+### Successor readiness after independent-local-check
+
+The human authorized this bounded comparison after the completed slice's recap.
+Read-only consultations with **Meta Side - Work Progression** and **Meta Side -
+Context Resolution** confirmed the readiness below against `be7d040`. This is
+outcome-level planning input, not slice authority, packet decomposition or an
+implementation selection. Native owners and usable SDK capability remain first;
+new CLI, installed product skills and host-agent experiences follow separately
+after the relevant SDK capability matures. Phase 6 retains bridge 6.1 → publication
+6.2 → direct Substrate adoption 6.3 → Tauri product 6.4 → adapters 6.5.
+
+**Recommend the smallest next bounded task: Work Progression semantic integration.**
+The reviewed standalone amendment at
+`semantic-model/amendments/work-progression-kinds-and-relations.md` consolidates
+human-selected directions but remains untracked, uncommitted and unregistered.
+Register its status in the semantic entry points/decision references, reconcile
+only directly affected deferred-choice wording, preserve supporting research and
+commit the bounded document set. Its four linked research reports are also
+untracked; that landing must retain the required sources durably or deliberately
+resolve their references. This comparison neither lands those files nor treats
+their proposed research examples as selected policies. The amendment's clean
+focused review and 18 resolved local links cover its standalone consolidation,
+not the future integration or product capability.
+
+The selected semantic directions include optional immutable kinds with explicit
+composition, configurable levels, initial one-parent same-project containment,
+multiple typed prerequisites and separate grouping, distinct contract roles,
+explicit scoped governance, operation-specific prerequisite timing, exact bindings
+and preserved history. They do not select storage, lifecycle operations or a
+first SDK workflow. No further generic study is a prerequisite to document landing.
+
+| Candidate | Readiness and useful next outcome | Unresolved decisions and preparation boundary |
+| --- | --- | --- |
+| Work Progression native/SDK realization | After semantic integration and its recap, prepare one useful owner/SDK outcome for authoritative work state and separate progression eligibility. Packet 4 supplies evaluation/history/decision foundations, not governed completion, parent eligibility or action receipts. | Bounded native/SDK preparation must select physical work-state/structure, definition, applicability and action responsibilities; registry versus equivalent reuse; concrete states/operations and reopen/cancel/removal semantics; exact policies, populations, coverage and assessment protocol; identity/resolver, persistence/concurrency/recovery/retention; SDK composition and first workflow. Resolve decisions only at the level needing them; multi-parent/external relations and adapters stay deferred. |
+| Context Resolution native authority lifecycle | The [reviewed proposed brief](../../research/context-resolution-native-authority-lifecycle-design-2026-10-06.md) is committed at `70019b7`; its core legacy publication files remain unchanged. A bounded decision/reconciliation task can confirm the delta and proposed first native establishment/current-resolution/recovery/history outcome. | Human selects compatibility/adoption strategy and whether later adoption belongs in the outcome; credential-preserving first route versus a separately supported local-advisory rule; exact capsule/YAML publication with separate native JSON records versus a versioned codec/path and compatibility contract. The brief recommends the former options; none is selected. True historical verification requires retained original dependencies because the existing historical publisher still consults live bindings. |
+| Broader native decision-permission declaration/administration | Candidate bounded discovery/design when this is the desired next capability. Packet 4's one upfront human-approved InputCorrection binding and caller-carried decisions are a precedent, not general administration. | Select supported decision subjects/classes, constraints/reservations/escalation, rule/grant representation and native owner, initial establishment and prior-authorized replacement/revocation/agent-delegation paths, exact currentness/provenance and first SDK workflow. Agent-authorized grant establishment/replacement requires prior authority and native validation; a new grant cannot authorize itself. |
+
+No hard dependency order between these candidates is established. Each later
+preparation must inspect its actual prerequisites and overlap: Context Resolution
+shares Engine envelope/path helpers, local currentness, retained-root and lock
+behavior; Work Progression and permission administration may share governance and
+delegation responsibilities. Reconcile those boundaries against landed source
+without assuming one broad authority platform is required first. Human selection
+of the next unit and authorization of its bounded implementation plan remain
+separate. No Packet 5, phase number, migration or external adoption is selected;
+the structured-data standard's general defaults remain **PROPOSED**, Contracts
+JSON is fixed, and existing owner/versioned contracts control representation.
 
 ### Current source constraints on the next outcome
 
@@ -309,7 +363,11 @@ The human requested [Packet-3 planning](slices/independent-local-check/packet-3.
 then approved its bounded implementation. Packet 3 landed at `2b09faf` with selected
 acceptance and final causal delta **APPROVE**; its human/meta checkpoint is complete.
 The human requested [Packet-4 reconciliation](slices/independent-local-check/packet-4.md);
-that final plan requires implementation approval and the complete slice remains unfinished.
+then approved implementation after `526dc5e`. Packet 4 is delivered at `be7d040`,
+with selected acceptance and focused causal **APPROVE**; aggregate slice
+validation/review, the single closeout and human recap are complete. Bounded
+successor planning is now authorized, with [readiness and decisions](#successor-readiness-after-independent-local-check)
+kept separate from successor implementation.
 This selects no broad replacement outcome
 or new phase number.
 Governed admission/assignment and assurance selection then support the selected
@@ -423,13 +481,18 @@ The [later-establishment packet](slices/deferred-governance-establishment/packet
 now records its implemented bounded D→G outcome and evidence limits; Main confirms
 aggregate closeout and recap complete. The subsequent
 [independent-local-check plan](slices/independent-local-check/README.md) details
-**only its next bounded increment**, [independent-local-check / Packet 4](slices/independent-local-check/packet-4.md)'s
-complete repeat/correction and bounded caller-carried decision workflow.
+the completed four-packet native/SDK stage, including
+[independent-local-check / Packet 4](slices/independent-local-check/packet-4.md)'s
+complete bounded repeat/correction and caller-carried decision workflow.
 [Packet 3](slices/independent-local-check/packet-3.md)'s first complete real check,
 closed-result history and recovery/occurrence primitives are delivered at `2b09faf`,
 with selected acceptance, final causal delta **APPROVE** and completed human/meta
-checkpoint. Packet 4 is prepared for implementation-plan review, not product execution
-or slice closeout; host integration remains separately bounded.
+checkpoint. Packet 4 landed at `be7d040` with selected acceptance and focused causal
+**APPROVE**; meta aggregate validation/review, single slice closeout and human recap
+are complete. The human authorized bounded successor planning; the
+[readiness comparison](#successor-readiness-after-independent-local-check) recommends
+the next document landing and preserves unresolved implementation choices. Host
+integration remains separately bounded.
 Do not turn this study into a fully elaborated backlog. The original comparison did not implement product work; the later fresh-project
 establishment slice and current local-check packets are recorded separately.
 

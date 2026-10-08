@@ -1,7 +1,8 @@
 # Packet 4: fresh repeat, correction and bounded resolution
 
-Status: **implemented; selected acceptance verified; focused causal APPROVE**,
-2026-10-07. This is the final increment of the [four-packet slice](README.md).
+Status: **implemented at `be7d040`; selected acceptance verified; focused causal
+APPROVE; meta aggregate closeout and human recap complete**, reconciled 2026-10-08.
+This is the final increment of the [four-packet slice](README.md).
 The human reviewed/discussed the landed Packet-3 result with Meta Main and expressly
 requested this bounded reconciliation. That authorizes planning, source verification
 and a local documentation commit, not Packet-4 product execution or runtime choices.
@@ -518,7 +519,7 @@ subject and evidence, with no P1 Critical, P2 Required, P3 Optional/Consider or 
 findings. The review confirmed Contracts' unchanged V3/history contracts and atomic
 lineage, exact approved actor/source/head binding, sealed current decision
 consumption, and recovery/fresh-action distinctions. It covers packet acceptance;
-meta retains aggregate slice closeout and the human checkpoint.
+the separately completed meta aggregate outcome is recorded below.
 
 The native setup failure uncovered a new inventory probe below an absent evaluation
 parent; checking the parent first restored read-only absence. The predecessor-pin
@@ -543,5 +544,22 @@ change detection saw exactly 19 Packet-4 files with no indexed symbol overlap;
 that is not a clean-tree assertion. The required comparison against `main`
 reported CRITICAL for the complete 1,156-file branch, 678 indexed symbols and
 300 flows, including earlier HCM work. It does not isolate this packet's risk.
-No new index or migration was selected. Packet completion remains separate from meta's
-aggregate slice acceptance, closeout and human result checkpoint.
+No new index or migration was selected. Packet completion remains separate from
+meta's aggregate slice acceptance, closeout and human result checkpoint.
+
+## Meta aggregate status — 2026-10-08
+
+The packet task returned PACKET_COMPLETE at `be7d040` for the 19-file subject.
+Meta subsequently mapped all eleven slice conditions, checked cross-packet
+integration, and obtained aggregate **APPROVE** with no P1–P4 findings. The single
+slice closeout and human recap are complete, and the human authorized bounded
+successor planning. This records supplied meta evidence; this documentation task
+did not rerun product verification or repeat aggregate review.
+
+The final native proof uses the corrected test-source hash in
+`target/packet4-sdk-proof/native-final-completion.json`; the older
+`final-proof-source-hashes.json` predates that assertion correction. Production
+hashes were unchanged. Final selected native passes and the earlier mixed failure
+retain the distinct meanings reported above. Inherited evidence limits remain;
+the [slice closeout](README.md#aggregate-slice-closeout--2026-10-08) does not
+authorize successor implementation or actual runtime choices.

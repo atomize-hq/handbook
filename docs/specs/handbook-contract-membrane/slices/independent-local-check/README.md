@@ -1,8 +1,8 @@
 # Independent local JSON conformance check
 
-Status: **Packets 1–3 delivered through their human/meta checkpoints;
-Packet 4 implemented and verified with focused causal APPROVE; aggregate slice closeout pending**,
-2026-10-07.
+Status: **Packets 1–4 delivered; all eleven slice conditions satisfied;
+aggregate causal APPROVE, single slice closeout and human recap complete**,
+2026-10-08.
 Packet 1 at `fccaf11` supplies native local setup and Engine envelope authority
 for current D. The human reviewed that boundary and requested the next plan.
 Preparation was expressly requested after the intent clarification landing at
@@ -21,8 +21,11 @@ it and expressly requested [Packet-4 reconciliation](packet-4.md). The original
 Packet-3 task's STOPPED is not the final packet status. After reviewing the plan
 and the authority/upfront-delegation clarification at `526dc5e`, the human expressly
 authorized dispatch of this exact Packet-4 implementation, verification, focused
-review and local commit. Packet 4 is implemented and selected acceptance verified,
-with focused causal **APPROVE** and no P1–P4 findings; meta owns aggregate slice closeout.
+review and local commit. Packet 4 landed at `be7d040` with selected acceptance
+verified and focused causal **APPROVE** with no P1–P4 findings. Meta's aggregate
+validation/review and single slice closeout are complete, with aggregate **APPROVE**
+and no P1–P4 findings; the human received the recap and authorized bounded successor
+planning. This is supplied meta evidence, not a product-suite rerun here.
 That supplied meta evidence requires no second Packet-2 review ceremony. Runtime project choices,
 external action and successor dispatch retain their separate approval boundaries.
 No new phase number is assigned.
@@ -32,8 +35,8 @@ Reconciled at `6a15ef68ab751383187d91e296bcf187dfda2dc1` with the human's
 Local-advisory authority is selected for this complete workflow; hardware or
 authenticator acquisition is not a prerequisite. The
 [current credential status](../../implemented-baseline.md#credential-verification-and-the-selected-local-route)
-remains distinct from the bounded Packet-1 implementation and the unfinished
-complete workflow. Earlier research assurance
+remains distinct from the completed bounded native/SDK workflow and later consumer
+delivery. Earlier research assurance
 alternatives are dated inputs, not unresolved selection for this plan.
 
 The [entry point](../../README.md), [phase map](../../phase-and-slice-map.md),
@@ -105,15 +108,15 @@ change and ends at human review; none is a license to execute the next row.
 [Packet 2](packet-2.md) is delivered at `5bf0f3b` with causal APPROVE and completed
 meta validation/recap. [Packet 3](packet-3.md) is delivered at `2b09faf`, with selected
 native acceptance, final causal delta **APPROVE** and its human/meta checkpoint
-complete. [Packet 4](packet-4.md) is the single detailed authority for the next
-increment; the human has now approved its bounded implementation.
+complete. [Packet 4](packet-4.md) is delivered at `be7d040`, with focused causal
+**APPROVE** and its final human/meta checkpoint complete.
 
 | Packet | Useful outcome | Dependency and review boundary |
 | --- | --- | --- |
 | 1 — Native initial setup and local operating authority | On a supported fresh defer-first project, establish attributable initial local-advisory Charter/posture approval and bounded local instruction through actual owners; reopen and obtain a native Engine envelope whose checks permit an in-bounds local validation request and refuse wider reach. | Existing deferral/identity/durability foundations plus human approval of Packet 1's implementation plan for the selected local mode. Review this real setup/Engine outcome; it is not Contracts evidence authority or a complete check. |
 | 2 — Complete independently usable definitions and source authority | Contracts establishes the complete exact contract/dependencies, immutable permitted use and responsible D/G applicability; supported local-advisory authority reaches author/lifecycle and actual Dock evidence-source admission, including repeated revalidation. Actual captured subject/source identities and currentness observation replace fixture values. | [Packet 2](packet-2.md) is delivered with verification, causal APPROVE and meta validation/recap complete. The human now directs successor planning. Credential-backed meanings remain unchanged; source-seam Pass is not complete-check truth. |
 | 3 — First complete native SDK check | Contracts-domain Coordination forms direct requirements, Purpose/occurrence/plan, capability/readiness and attempt basis; Engine issues/validates exact local authorization; the real native Dock produces observations; local source revalidation, frontier, admissions, evidence-set and final context close before Contracts result/explanation. Typed SDK preparation/execution/closure/recovery/history, usable inputs/outcomes, usage/response/recovery docs and ordinary consumer examples/tests deliver this boundary. | [Packet 3](packet-3.md) at `2b09faf` delivers the complete selected local route without an authenticator, with verified current positive/valid negative paths, formation/operational refusals and exact historical retrieval. Final causal delta APPROVE and human/meta checkpoint complete. New CLI/installed-skill/agent workflow delivery remains separately deferred. |
-| 4 — Fresh repeat, correction and bounded resolution | Reuse delivered history/recovery/occurrence primitives for deliberate repeat and caller-supplied corrected capture. Add bounded native InputCorrection decision consumption under exact prior delegated terms, preserving approve/deny/clarification and truthful refusal. | [Packet 4](packet-4.md) details only this final increment. Packet 3 is reviewed; Packet-4 implementation and selected acceptance are verified with focused causal **APPROVE** and no P1–P4 findings, covering restart, new correction/repeat, exact decision consumption and currentness/source checks. Meta performs the single aggregate slice closeout only after this packet and all slice conditions are complete. |
+| 4 — Fresh repeat, correction and bounded resolution | Reuse delivered history/recovery/occurrence primitives for deliberate repeat and caller-supplied corrected capture. Add bounded native InputCorrection decision consumption under exact prior delegated terms, preserving approve/deny/clarification and truthful refusal. | [Packet 4](packet-4.md) at `be7d040` is implemented and selected acceptance verified with focused causal **APPROVE** and no P1–P4 findings, covering restart, new correction/repeat, exact decision consumption and currentness/source checks. Meta has checked all eleven slice conditions and cross-packet integration, completed aggregate review/closeout, and presented the human recap. |
 
 Packet 3 owns the delivered historical-result, equal-content fresh occurrence,
 authorization recovery/resume and one-attempt primitives. Packet 4 uses them in the
@@ -265,6 +268,31 @@ CLI/skill/agent experience remains tracked under the delivery allocation above.
     human escalation are supported through the bounded caller-carried typed
     request/decision interface. Packet 4 owns that native/SDK submission boundary;
     installed agent workflow and automatic routing remain later consumer work.
+
+## Aggregate slice closeout — 2026-10-08
+
+Meta checked all eleven acceptance conditions and the integrated native/SDK journey:
+attributable setup and reviewed exact definitions; current D/G applicability;
+complete real check and closed accounting; original recovery/history; fresh
+repeat/correction; and exact delegated decision consumption or truthful refusal.
+Unchanged Packet-1–3 evidence was reused. One focused aggregate causal reviewer
+returned **APPROVE**, with no P1 Critical, P2 Required, P3 Optional/Consider or P4 Nit
+findings. The single slice closeout and human recap are complete.
+
+[Packet 4's evidence](packet-4.md#implementation-and-focused-evidence--2026-10-07)
+records the selected checks, final corrected native proof, normal-dependency
+54-phase consumer and unchanged 162 historical files. The earlier mixed native
+run remains a reported failure; the final rerun plus unchanged accepted
+distinct-decider case supplies the three selected native passes. Inherited
+capability/Windows-suite, Unix, debug-stack and degraded GitNexus limits remain.
+This documentation update records supplied meta closeout; it ran no product suite.
+
+The human authorized bounded successor planning after the recap. The
+[readiness recommendation](../../coverage-and-landing-map.md#successor-readiness-after-independent-local-check)
+is planning input only. New CLI/installed-skill/agent workflow delivery, broader
+permission administration, Work Progression and Context Resolution lifecycle work
+retain separate choices and implementation authorization. No extra packet or
+phase number is assigned.
 
 ## Selected boundaries and evidence map
 
