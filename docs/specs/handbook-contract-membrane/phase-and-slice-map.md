@@ -156,11 +156,15 @@ atomic posture transition while rehoming the residual work to later owners.
 - Gate-owned local-closeout evaluation formerly associated with the grounding
   slice moved to the later evidence/verdict/gate owner and is now implemented
   by HCM-5.2. No parent-eligibility result or consumer is implemented there. The
-  proposed [operational-reliance and work-progression decision](semantic-model/operational-reliance-and-actions.md#reliance-actions)
+  approved [operational-reliance and work-progression decision](semantic-model/operational-reliance-and-actions.md#reliance-actions)
   assigns greenfield semantic responsibility for local-closeout and parent
   eligibility to Work Progression, without approving or scheduling physical
-  placement, a work hierarchy/state model, exact parent binding, concrete policy,
-  consumer, action/mutation path, or implementation slice.
+  placement, concrete state/operations, exact parent binding, concrete policy,
+  consumer or action/mutation path. The later selected [kinds and relations amendment](semantic-model/amendments/work-progression-kinds-and-relations.md)
+  supplies composition and initial hierarchy/prerequisite semantics. The
+  conditional [work-state foundation](slices/work-item-state-foundation/README.md)
+  and [joint sequence](coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints)
+  prepare implementation outcomes; they await human choices and execution authorization.
 - Ordinary SDK/JSON exposure, publication, bridging, and Substrate adoption for
   grounding move to the appropriate Phase-4 and Phase-6 owners.
 - Multi-source posture evaluation, recommendations, notifications,

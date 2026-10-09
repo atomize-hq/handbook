@@ -129,10 +129,10 @@ validates and commits. A narrow internal consuming callback/admission may be add
 for this registration when needed; it must bind the exact project/root, item/key,
 composition, request digest, declared write targets and current authority basis.
 It is lifetime-sealed, cannot be serialized/reconstructed by SDK, and permits no
-other work operation. Hold and validate the existing initialization/operating
-guards, newly activated work terms and declared authority dependencies through
-terminal publication, then the work owner's
-native lock in one consistent order. Do not acquire operating locks from inside
+other work operation. Acquire the existing initialization/operating guards and
+declared authority dependencies, then the work owner's native lock, in one
+consistent order. Hold the guards/lock and validate the newly activated work terms
+and exact dependencies through terminal publication. Do not acquire operating locks from inside
 a held work lock or claim that a preflight mutation decision protects the commit.
 
 Retain the accepted instruction/source, claimed principal/agent/delegation and
@@ -148,7 +148,7 @@ for this creation effect.
 
 Use separate bounded caller-supplied item and request keys (ASCII tokens, at most
 128 bytes). Derive item identity from the exact native project identity, owner/
-version domain and item key; display names and request delivery do not allocate
+identity-scheme domain and item key; display names and request delivery do not allocate
 identity. A request binds its item, supported explicit composition, bounded label
 and work question, expected initial absence and original authority locator/basis.
 Use the established 4,096-byte bound for each descriptive/provenance string and

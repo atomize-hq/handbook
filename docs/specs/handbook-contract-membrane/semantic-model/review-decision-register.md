@@ -497,18 +497,26 @@ staggered selections, fixed-input replacement, and sealed-frontier refusal.
 
 ## Non-blocking current-context follow-up
 
-Comprehensive audit P3-05 identifies stale grounding and inventory summaries in
+Comprehensive audit P3-05 identified stale grounding and inventory summaries in
 architecture-context.md compared with its later HCM-4.6 section and the implemented
 baseline. It also recommends scoping the seam-crosswalk Dock-absence phrase to the
-HCM-5.2 slice boundary. The prose conflict is verified; code, exports, and manifest
-checks are still needed before updating current-product claims. Reconcile or visibly
-qualify these summaries before using them as implementation-planning premises.
+HCM-5.2 slice boundary. This was a verified prose conflict at that audit's dated
+baseline, requiring source/export/manifest corroboration before relying on the
+summaries as implementation-planning premises.
 This does not reopen completed phases or make historical counts future requirements.
 
-**Current disposition:** The guide visibly qualifies those legacy summaries as
-unverified current-product claims. Source/export/manifest reconciliation remains
-a separate prerequisite to relying on them for implementation planning; it is not
-an unresolved HR semantic choice. This review makes no new runtime inventory claim.
+**Current disposition — 2026-10-08:** The current [architecture context](../architecture-context.md)
+and [seam crosswalk](../seam-crosswalk.md) already identify implemented HCM-4.6
+grounding and HCM-5.3/HCM-5.4 Dock execution, consistently with the
+[implemented baseline](../implemented-baseline.md). Inspection of the
+[Engine exports](../../../../crates/engine/src/lib.rs),
+[SDK consumer exports](../../../../crates/sdk/src/lib.rs),
+[schema manifest](../../../../crates/sdk/schemas/manifest.json) and
+[production Dock manifest](../../../../crates/dock/production-manifests/x86_64-pc-windows-msvc/manifest.json)
+corroborates those bounded capabilities. The named summary conflict is resolved;
+it is neither an outstanding planning prerequisite nor an unresolved HR semantic
+choice. This document review does not recertify runtime behavior, inventory counts,
+package reproducibility, platform coverage or external adoption.
 
 The [2026-09-27 comprehensive audit](../../../research/hcm-semantic-final-comprehensive-pro-audit-2026-09-27.md)
 and its source hashes, prompt, proposed explanation wording, and local reconciliation

@@ -35,7 +35,7 @@ The labels below describe architecture state, not lifecycle or authorization:
 | Contract definition, claim, applicability, lifecycle, durable use-case owner, outward SDK membrane, and generic consumers | Current | HCM-5.1 Packets 1–6 establish and integrate [`handbook-contracts`](../../../crates/contracts/) inward of SDK with owner-native exact definition, claim, applicability, fingerprint, compatibility, lifecycle-chain, current-head, evaluation-basis, and repository-bound durability semantics. Its fixed repository-relative store owns bounded current-only paging, exact immutable reads, admitted append/transition, replay, and fail-closed recovery. A bounded outward SDK projection closes exactly four operations within the 62-row inventory and the 23-capability/135-root witness while independently re-admitting owner evidence and preserving the sealed Engine authority seam; the existing generic Rust SDK, CLI, and Tauri consumers preserve that owner truth without a contract-specific branch, and the owner has no SDK or transport dependency. |
 | Evidence/gate owner | Current | HCM-5.2 Packets 1–7 implement the `handbook-contracts` identity/policy/run kernel, exact read-only candidate-source normalization through one sealed Engine `contract_evidence_source` admission plus generic source-currentness/Resolution observations, retained-root immutable-all canonical-evidence list/read/idempotent append with bounded atomic recovery, pure closed claim-verdict evaluation, gate/local-closeout composition, the exact five-operation outward SDK membrane, and integrated proof through the unchanged generic SDK/CLI/Tauri consumers. Verdicts and gate results remain non-persisted derived truth. |
 | Process dock | Current | HCM-5.3 Packets 1–5 implement the purpose-named operational dock owner, language-neutral one-shot JSON protocol, portable first-party Rust executor, completed-only candidate source, exact three-operation/11-root closure, and unchanged generic consumers. HCM-5.4 Packets 1–6 add the one reproducibly packaged native-Rust JSON Schema validator manifest, exact offline local-closure observation, two checked-in schema roots, and the real Contracts-owned semantic proof while preserving the same generic consumers and owner direction. Aggregate HCM-5.4 closeout is complete and Phase 5 is exited. |
-| Handbook Contract Membrane greenfield semantic decisions | Target/future | The [combined semantic package](semantic-model/README.md) was approved as planning input on 2026-09-30, with HR-007 approved/integrated on 2026-10-04. It fixes the six-category ontology, posture/assurance selection, Contracts-domain Evaluation Coordination, exact evaluation/evidence closure, authored relationships, metric/gate/explanation and Work Progression/reliance/action boundaries, including independent use and protocol-qualified prior results. Approval does not change source ownership, authorize implementation, select deferred physical placement or concrete policies, or change completed phase/slice history. |
+| Handbook Contract Membrane greenfield semantic decisions | Target/future | The [combined semantic package](semantic-model/README.md) was approved as planning input on 2026-09-30, with HR-007 approved/integrated on 2026-10-04 and the [Work Progression kinds/relations amendment](semantic-model/amendments/work-progression-kinds-and-relations.md) selected on 2026-10-07 and integrated on 2026-10-08. It fixes the six-category ontology, posture/assurance selection, Contracts-domain Evaluation Coordination, exact evaluation/evidence closure, authored relationships, metric/gate/explanation and Work Progression/reliance/action boundaries, including independent use and protocol-qualified prior results. Work Progression now also has selected optional kinds/explicit composition, configurable levels, initial same-project one-parent containment, typed prerequisites and explicit scoped obligations. Approval does not change source ownership, authorize implementation, select deferred physical placement or concrete policies, or change completed phase/slice history. |
 | Publication, bridge, and Substrate adoption | External-unknown | No repository-only claim can prove their current external existence, deployment, or conformance. |
 
 The workspace membership and current crate edges are visible in
@@ -108,9 +108,12 @@ local closeout cannot imply any of them. The approved
 assigns the greenfield semantic responsibility for local-closeout and parent
 eligibility to Work Progression, with each as the eligibility facet of its own
 atomic Operational Reliance Determination. That semantic approval does not change HCM-5.2
-history or select the work hierarchy/state model, parent binding, concrete
-policy, physical component placement, consumer, action authorization, mutation,
-or implementation slice. This is implemented owner, SDK, and generic-consumer
+history. The later [Work Progression amendment](semantic-model/amendments/work-progression-kinds-and-relations.md)
+selects composition and initial hierarchy/prerequisite semantics; concrete state,
+relation bindings, policy, physical placement, consumers and action/mutation
+realization remain later implementation choices. The conditional [work-state foundation](slices/work-item-state-foundation/README.md)
+prepares the first owner/SDK cut but remains unimplemented and awaits human
+selection and execution authorization. This is implemented HCM-5.2 owner, SDK, and generic-consumer
 architecture through Packet 7; aggregate verification/review and the single
 HCM-5.2 closeout are complete.
 
@@ -249,9 +252,14 @@ places greenfield semantic responsibility for local-closeout and parent
 eligibility in Work Progression. It requires separate action-specific bases and
 atomic Operational Reliance Determinations, with eligibility and disposition as
 inseparable facets; local closeout alone can never imply parent eligibility.
-The approved model deliberately leaves physical placement, the work hierarchy/state
-model, exact parent/child/dependency binding, concrete policies/currentness
-inputs, consumers, and implementation unselected. Current HCM-5.2 authority is
+The selected [Work Progression amendment](semantic-model/amendments/work-progression-kinds-and-relations.md)
+fixes optional kinds/explicit compositions, configurable levels, initial same-project
+one-parent containment, typed prerequisite roles and explicit scoped obligations.
+Concrete state/operation and relation realization, exact bindings, physical
+eligibility/action placement, policies/currentness inputs and consumers remain
+later choices. The conditional [foundation plan](slices/work-item-state-foundation/README.md)
+and [joint sequence](coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints)
+prepare bounded outcomes without implementing or authorizing them. Current HCM-5.2 authority is
 unchanged and authorizes no parent mutation.
 
 Gate and local-closeout results may also become exact historical inputs to an

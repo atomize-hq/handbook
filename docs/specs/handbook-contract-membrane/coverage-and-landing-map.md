@@ -18,7 +18,10 @@ completed slice outcomes. Product baseline: `b0e73fc54f28d80c3f8f58d37b939db41bb
 The comparison supports retaining the inward owner architecture while extending
 and correcting behavior. Existing exact identities, durable evidence, native JSON
 Schema integration, grounding, and atomic Charter mutation are useful foundations.
-They do not establish the approved evaluation lifecycle or present-use/action chain.
+At the dated comparison baseline they did not establish the approved evaluation
+lifecycle or present-use/action chain. The later completed local-check slice now
+delivers its bounded native/SDK evaluation workflow; broader semantic realization
+and the Work Progression present-use/action chain remain undelivered.
 The [approved package](semantic-model/README.md#approved-decision) fixes semantics;
 the [phase map](phase-and-slice-map.md) continues to own program order and status.
 
@@ -50,7 +53,7 @@ approved owner chapters retain the rules; the dated research remains evidence.
 
 | Considered boundary | Planning implication after HR-007 | Preserved or deferred boundary |
 | --- | --- | --- |
-| Establishment and definition admission | Positive scoped deferral is implemented at `8b13505`; same-project later first establishment and v3 current resolution are implemented at `9f28f99`. Complete owner-established definitions need project qualification only where applicable. These remain partial foundations. | Owner floors, exact identity, validation, active-at-decision qualification and prior-authorized replacement remain. Packet 2 at `5bf0f3b` delivers the bounded local definition/permitted-use and exact freshness qualification/source route. Broader ordinary policy admission/qualification, full independent-use closure and replacement remain undelivered. |
+| Establishment and definition admission | Positive scoped deferral is implemented at `8b13505`; same-project later first establishment and v3 current resolution are implemented at `9f28f99`. Complete owner-established definitions need project qualification only where applicable. These remain partial foundations. | Owner floors, exact identity, validation, active-at-decision qualification and prior-authorized replacement remain. Packet 2 at `5bf0f3b` delivers the bounded local definition/permitted-use and exact freshness qualification/source route. Broader ordinary policy admission/qualification, independent-use paths beyond the completed bounded local route, and replacement remain undelivered. |
 | Charter, Project Context and onboarding | A skill-guided LLM inspects repository evidence, asks focused questions, presents options/tradeoffs, refines proposals and invokes CLI/SDK. The human approves initial project/Charter/posture, governance or exact deferral, and delegated boundaries. | Native owners validate supplied inputs and commit authorized state. Native initialization does not run an LLM. Authored context and recommendations are declared inputs, not capability, authority or canonical activation. The existing installed skill is a consumer foundation, not proof of this complete intake workflow. |
 | Supplied Engine and Contracts choices | Treat shipped profiles, operating definitions and review/credential choices as supported replaceable defaults or recommendations. Fixed native selection constraints must be inspected when selecting each replacement outcome. | Exact identity, compatibility, scope, source accounting, authority, non-expansion and truthful commit are mechanisms. Do not remove them or promise arbitrary replacements. Concrete criteria, presets/providers and compatible selection paths remain bounded later choices. |
 | Direct versus posture-selected preparation | Positive applicability resolution precedes dependent use. A complete independent contract can support either permitted-use value and compatible intent without being Draft solely for deferral. A governed route cannot fall back to direct/diagnostic use to evade qualification. | Full direct requirements, compatible intent, Purpose, independent Engine authorization, capability, readiness and owner currentness are still prerequisites. Setup/Doctor readiness and a bare deferral do not supply them. |
@@ -258,7 +261,7 @@ prepared and human-selected **before unit 1 implementation**.
 | Order / outcome | Actual dependency and landing checkpoint |
 | --- | --- |
 | 1. Corrected work-state foundation | After the next-plan decisions below and unit-2 compatibility preparation: expressly activated registration permission on current local-check D/G, exact `open` leaf registration/current/history/recovery and unsupported completion through SDK. Checkpoint: a continuing project registers work under new terms; local-check permission alone refuses. This is a foundation, not the delivered flexible governed work capability. |
-| 2. Configurable compositions and optional immutable kinds | Depends on exact work identity/history from 1. Deliver supported composition selection, reusable immutable kind versions, vocabulary/level choice and explicit retained-item evolution. Checkpoint: callers select two supported compositions without a universal taxonomy; old items keep exact bindings and unsupported variants/rebinding refuse. Definition/admission placement and the bounded semantic menu must be selected before 1; no arbitrary hooks or generic Artifact Kind reuse. |
+| 2. Configurable compositions and optional immutable kinds | Depends on exact work identity/history from 1. Deliver supported composition selection, reusable immutable kind versions and vocabulary/level choice for new registrations, preserving exact retained-item bindings. Authorized evolution/rebinding is a separate later choice. Checkpoint: callers select two supported compositions without a universal taxonomy; old items keep exact bindings and unsupported variants/rebinding refuse. Definition/admission placement and the bounded semantic menu must be selected before 1; no arbitrary hooks or generic Artifact Kind reuse. |
 | 3. Native local Context Resolution root binding | Recommended after the first flexibility landing; this is a sequencing choice, not a hard dependency on 1/2. Requires its own human selections and bounded preparation below. Deliver reusable root-only use, explicit management/use establishment, currentness, history/recovery and selected replacement/revocation. Checkpoint: reopen and use B1, refuse unpermitted B2 management. Work authority cannot substitute. |
 | 4. Hierarchy and typed prerequisite facts | Depends on 1/2's identity/composition participation. Deliver same-project one-parent relations, authoritative revisions and coherent finite cuts, start/close/both roles, distinct grouping/reference/order, and structural/closure-cycle refusal. Checkpoint: Feature → Phase → Slice → Task branching plus one shared cross-branch prerequisite preserves one identity and rejects a closure deadlock. This alone grants no start/close effect or eligibility. |
 | 5. Positive leaf eligibility | Depends on work/composition facts and selected governing assignment, assessment protocol, complete exact roles/coverage/populations and current qualification. Relation-dependent questions additionally require 4; relation-free leaf eligibility need not wait for every hierarchy capability or CR. Checkpoint: a declared result population produces atomic eligibility/disposition; a direct pass alone or missing required coverage cannot. Physical Work Progression placement remains downstream of Engine and Contracts. |
@@ -351,8 +354,9 @@ The table above retains its dated `31e7746` inspection baseline. At `8b13505`,
 [deferral owner/types](../../../crates/contracts/src/project_admission_governance/deferral.rs),
 [versioned resolver](../../../crates/contracts/src/project_admission_governance/scope.rs)
 and typed SDK now provide positive initial deferral/current resolution/replay.
-The prior absence of that capability is superseded; current source still lacks
-full policy/evaluation closure. At `9f28f99`, the linked later-establishment packet
+The prior absence of that capability is superseded. The [completed local-check slice](slices/independent-local-check/README.md)
+now supplies its selected evaluation closure; broader policy/evaluation realization
+outside that bounded route remains undelivered. At `9f28f99`, the linked later-establishment packet
 implements existing-project D→G and authoritative v3 current resolution, including
 closed noncommit footprints that leave D current but prohibit v2-reader fallback.
 The completed
@@ -446,7 +450,10 @@ inside this completed slice at `8b13505`. That completed authorization and close
 do not authorize later establishment or independent-use work. Full independent checks
 also need supported owner conformance/permitted use, every applicable qualification,
 initial operating authority/delegation, complete direct requirements and evaluation
-closure; those are incomplete and are not prerequisites for merely recording deferral.
+closure. Those were incomplete at the scoped-deferral checkpoint and were not
+prerequisites for merely recording deferral. The later completed local-check slice
+supplies them for its bounded native/SDK route, without delivering every broader
+independent-use or policy workflow.
 
 **Review boundary:** return the first observable committed deferral/resolution/refusal
 outcome to human review under the lifecycle. The selected Packet-1 boundary
@@ -504,6 +511,16 @@ The [research index](../../research/hcm-coverage-landing-2026-10-01/README.md)
 provides the source hierarchy, complete subsection/scenario dispositions, stable
 claim IDs, evidence paths and limitations. The five areas below are provisional
 capability groupings. They are not five implementation packets.
+
+The table retains the `b0e73fc` comparison with bounded governance/Packet-2
+overlays. Its evaluation-lifecycle gaps describe the broader approved model;
+they must not be read as current absence of the selected local-check route.
+Packets 3–4 at `2b09faf` and `be7d040` deliver bounded requirements/Purpose/basis,
+Coordination, collection/evidence/final-context, closed-result history/recovery and
+repeat/correction. [Current local-check status and limits](slices/independent-local-check/README.md)
+and the [implemented baseline](implemented-baseline.md) control those present
+product claims. Named metrics/configurable four-outcome gates and Work Progression
+eligibility/action realization remain separate gaps.
 
 ## Coverage and responsibility
 

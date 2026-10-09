@@ -422,11 +422,12 @@ Progression owner does not rewrite that history. Completed phase and slice
 status, the inward dependency direction, and the distinct future external
 adopter boundary remain unchanged.
 
-The register separately tracks stale summaries in `architecture-context.md` and
-an overbroad Dock-absence phrase in `seam-crosswalk.md`. Those summaries are not
-a verified inventory of the current implementation. Reconcile them against source,
-exports, and manifests before using them as planning premises. This semantic review
-does not establish runtime conformance or reopen completed slices.
+The register retains the historical grounding/inventory and Dock-summary follow-up.
+The current [architecture context](../architecture-context.md) and
+[seam crosswalk](../seam-crosswalk.md) now describe implemented HCM-4.6 grounding
+and the HCM-5.3/HCM-5.4 Dock path. The [updated disposition](review-decision-register.md#non-blocking-current-context-follow-up)
+records bounded source/export/manifest corroboration, without a runtime inventory
+recertification or reopening completed slices.
 
 No V1 shape, legacy name or alias, migration, compatibility bridge, dual-write,
 or dual behavior is selected. `Work Specification` remains the canonical

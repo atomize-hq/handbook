@@ -1,9 +1,10 @@
 # Approval requirement, authority, delivery, and assurance
 
 **Status: human-provided intent selected — 2026-10-05; bounded local setup and
-definition/lifecycle/source route and complete check/history delivered through
-Packets 1–3; complete workflow unfinished (current-status cross-reference,
-2026-10-07).** This focused clarification of
+definition/lifecycle/source route, complete check/history and bounded repeat/correction
+workflow delivered through Packets 1–4 at `be7d040`; supplied aggregate APPROVE,
+single closeout and human recap complete (current-status cross-reference,
+2026-10-08).** This focused clarification of
 [G1–G5](governance-defaults-and-delegated-operation.md#approved-rules) records the
 user's selected local workflow. It supplies planning input, not runtime authority,
 an implementation authorization, or a global policy default. The four owner
@@ -42,7 +43,11 @@ This route requires explicit supported native rules and compatible selections
 at the exercised owners. [Packets 1–3](../../slices/independent-local-check/README.md)
 deliver the bounded setup/definition/lifecycle/source route and complete check/history
 through their human/meta checkpoints. [Packet 4](../../slices/independent-local-check/packet-4.md)
-is prepared for implementation-plan review; the complete workflow remains unfinished.
+delivers bounded fresh repeat/correction/resolution and caller-carried authorized
+decisions. Meta checked all eleven slice conditions and cross-packet integration;
+aggregate APPROVE, the single closeout and human recap are supplied completed
+evidence, not product verification rerun by this status correction. This does not
+deliver the later CLI/installed-skill/agent workflow or remove recorded evidence limits.
 Current credential-backed
 contracts retain their actual requirements until the bounded local route exists;
 an unavailable port cannot downgrade them automatically. Preserve their code and
@@ -77,9 +82,8 @@ A local PIN is an optional future direction. PIN design, MFA, device/provider
 integration, messaging APIs, team quorum and a generalized approval framework
 are not selected or prerequisites here. The
 [slice](../../slices/independent-local-check/README.md) outlines the complete local
-journey. Packets 1–3 retain delivered evidence; only
-[Packet 4](../../slices/independent-local-check/packet-4.md) is now detailed for human
-implementation-plan review. This cross-reference changes no approved owner rule.
+journey. Packets 1–4 retain their delivered bounded native/SDK evidence and
+completed meta/human checkpoints. This cross-reference changes no approved owner rule.
 
 The human's 2026-10-06 [delivery-sequencing selection](../../phase-and-slice-map.md#current-delivery-sequencing)
 keeps this stage at native/SDK delivery with supplied attributable approvals and
