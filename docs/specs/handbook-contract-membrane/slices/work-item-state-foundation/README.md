@@ -1,7 +1,7 @@
 # Native work-item state foundation
 
-Status: **Packet 1 implemented and verified; fresh causal review APPROVE;
-meta aggregate acceptance and Packet-1 human recap pending**.
+Status: **slice complete; Packet 1 implemented and verified; fresh causal review
+APPROVE; meta aggregate acceptance/closeout and human recap complete**.
 Selections recorded 2026-10-08 against `227c958e1630acef923aae97c6ed88752a32d184` on
 `feat/handbook-contract-membrane-clean`.
 
@@ -24,6 +24,14 @@ composition/kinds compatibility decisions below. It authorizes Packet-1
 implementation, verification, fresh causal review and one local coherent commit,
 ending at the Packet-1 human review boundary. Actual runtime project terms must
 still be explicitly established.
+
+Implementation is `cbfbf7629a0642b8cb08aefea36fa556009d9274`, directly after
+selection recording `cb00b9da351095c5cb17c8bc4e754f908b0565d0`. Supplied meta evidence
+confirms all eight acceptance conditions and integration, aggregate completion
+and the human recap. The human reviewed that result and then requested bounded
+[composition/kinds successor preparation](../work-compositions-and-kinds/README.md).
+This status correction verifies lineage and uses the [packet's delivered evidence](packet-1.md#implementation-work-and-verification);
+it does not rerun product suites or perform another predecessor closeout.
 
 The [program shape](../../coverage-and-landing-map.md#successor-readiness-after-independent-local-check),
 [entry point](../../README.md), [lifecycle](../../work-unit-lifecycle.md),
@@ -156,8 +164,9 @@ supported declarative menu, optional immutable whole-composition kinds and expli
 per-item compositions. Kinds add no arbitrary semantics or programmable
 transitions. The fixed ordinary foundation leaf is retained; its representation
 must preserve the compatibility contract here. No concrete kind taxonomy or
-completion policy is selected. This gate is satisfied as planning input; it does
-not claim product compatibility tests have already run.
+completion policy is selected. This gate was satisfied as planning input before
+execution; Packet 1 subsequently verified its foundation invariants, as recorded
+in the packet's delivered evidence. Future variant/kind support remains absent.
 
 **Selected first successor menu:** retain the ordinary leaf
 descriptor and add two immutable declarative variants below. Kind names are illustrative

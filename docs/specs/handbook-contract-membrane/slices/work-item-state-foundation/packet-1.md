@@ -1,7 +1,7 @@
 # Packet 1: register and resolve native open work
 
-Status: **Packet 1 implemented and verified; fresh causal review APPROVE;
-meta aggregate acceptance and Packet-1 human recap pending**. Selections recorded
+Status: **Packet 1 complete, implemented and verified; fresh causal review APPROVE;
+meta aggregate acceptance/closeout and human recap complete**. Selections recorded
 2026-10-08 against `227c958`. This supersedes the initial-only recommendation at `6aba084`.
 This is the sole packet of [work-item-state-foundation](README.md). The slice
 owns the outcome, exclusions and eight acceptance conditions; this document

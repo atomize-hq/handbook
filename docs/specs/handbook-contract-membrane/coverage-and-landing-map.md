@@ -10,8 +10,11 @@ successor readiness and authorized Work Progression semantic integration were
 reconciled on 2026-10-08. Joint near-term planning below is reconciled against
 `2740e04`; the human subsequently selected all three foundation/compatibility
 recommendations and authorized complete Packet-1 implementation after clean
-selection review. Implementation remains not started; remaining roadmap choices
-are proposed where unselected, and CR's separate choices remain unselected.
+selection review. Foundation implementation at `cbfbf76`, supplied meta aggregate
+acceptance/closeout and the human recap are complete. The human then requested
+bounded composition/kinds preparation; its new authority recommendations await
+selection and execution remains unauthorized. Remaining roadmap choices are
+proposed where unselected, and CR's separate choices remain unselected.
 These are supplied meta results,
 not product verification rerun by this documentation task. The dated comparison
 baseline below is preserved.
@@ -222,14 +225,20 @@ untracked `docs/research/work-item-state-foundation-pro-consult-2026-10-08/guida
 the corrections are fully stated here and do not depend on shipping that file.
 The [selected foundation](slices/work-item-state-foundation/README.md)
 and [Packet 1](slices/work-item-state-foundation/packet-1.md) detail only that next
-increment. Its three selection gates below are now human-approved; implementation
-is authorized after clean selection review and remains not started.
+increment. Its three selection gates below are human-approved; implementation is
+complete at `cbfbf76`, directly after selection recording `cb00b9d`. Supplied meta
+evidence confirms all eight conditions, integration, aggregate completion/closeout
+and the human recap. The human then requested bounded
+[configurable composition/kinds preparation](slices/work-compositions-and-kinds/README.md),
+whose [first increment](slices/work-compositions-and-kinds/packet-1.md) awaits exact
+menu-registration authority selection and human plan authorization. No product
+suite rerun or new predecessor closeout is claimed by this status reconciliation.
 
 ### Joint authority and recovery reconciliation
 
 The human requested joint reconciliation and near-term preparation, rather than
 fitting the result into one old slice. The Work Progression amendment is selected
-semantic input; the foundation is prepared/unimplemented; the
+semantic input; at that earlier reconciliation the foundation was prepared/unimplemented; the
 [latest Context Resolution investigation](../../research/context-resolution-local-advisory-extension-investigation-2026-10-08.md)
 at `2740e04` is reviewed proposed research. The earlier `70019b7` credential-preserving
 design remains dated evidence, including its unselected legacy-adoption option A.
@@ -260,7 +269,9 @@ immediate Work Progression delivery. The following **proposed** order gives it a
 explicit successor, with hierarchy, eligibility and closing near-term outcomes.
 These are outcome units, not new phase/packet identities or execution permission.
 Each independently meaningful landing returns for human review before continuation.
-Only unit 1 is fully detailed. Unit 2's compatibility boundary below is now
+Unit 1 is complete. Unit 2's [slice preparation](slices/work-compositions-and-kinds/README.md)
+now details only its first review increment, with new authority choices proposed.
+Unit 2's compatibility boundary below was
 prepared and human-selected **before unit 1 implementation**. The human approved
 unit 1's complete Packet-1 plan, with execution following recording and clean review of these selections;
 unit 2 implementation follows separately after unit 1's human checkpoint. That
@@ -268,8 +279,8 @@ approval does not select the remainder of this proposed serial order.
 
 | Order / outcome | Actual dependency and landing checkpoint |
 | --- | --- |
-| 1. Corrected work-state foundation | Next-plan selections and unit-2 compatibility preparation are approved; complete Packet-1 implementation is authorized after clean selection review and separate fresh dispatch. Deliver expressly activated registration permission on current local-check D/G, exact `open` leaf registration/current/history/recovery and unsupported completion through SDK. Checkpoint: a continuing project registers work under new terms; local-check permission alone refuses. Implementation remains not started. |
-| 2. Configurable compositions and optional immutable kinds | Depends on exact work identity/history from 1 and separate implementation authorization after its human review. Engine definition/composition placement, the ordinary/planning-output/requirements-input menu and no first-successor rebinding are selected compatibility input for 1. Deliver supported composition selection, reusable immutable kind versions and vocabulary/level choice for new registrations, preserving exact retained-item bindings. Checkpoint: callers select two supported compositions without a universal taxonomy; old items keep exact bindings and unsupported variants/rebinding refuse. No arbitrary hooks or generic Artifact Kind reuse. |
+| 1. Corrected work-state foundation | Complete at `cbfbf76`; supplied meta aggregate acceptance/closeout and human recap are complete. Delivers expressly activated registration permission on current local-check D/G, exact `open` leaf registration/current/history/recovery and unsupported completion through SDK. Checkpoint reviewed: a continuing project registers work under new terms; local-check permission alone refuses. |
+| 2. [Configurable compositions and optional immutable kinds](slices/work-compositions-and-kinds/README.md) | Foundation prerequisite and human recap are complete; bounded preparation was expressly requested. Engine definition/composition placement, the ordinary/planning-output/requirements-input menu and no first-successor rebinding are selected compatibility input. Proposed packet cut: explicit composition selection first, immutable kinds second, each with human review. Menu-registration and kind-establishment authority need exact human selection; implementation remains unauthorized. Checkpoint: callers choose two supported declarations; old items keep exact bindings and unsupported variants/rebinding refuse. No arbitrary hooks or generic Artifact Kind reuse. |
 | 3. Native local Context Resolution root binding | Recommended after the first flexibility landing; this is a sequencing choice, not a hard dependency on 1/2. Requires its own human selections and bounded preparation below. Deliver reusable root-only use, explicit management/use establishment, currentness, history/recovery and selected replacement/revocation. Checkpoint: reopen and use B1, refuse unpermitted B2 management. Work authority cannot substitute. |
 | 4. Hierarchy and typed prerequisite facts | Depends on 1/2's identity/composition participation. Deliver same-project one-parent relations, authoritative revisions and coherent finite cuts, start/close/both roles, distinct grouping/reference/order, and structural/closure-cycle refusal. Checkpoint: Feature → Phase → Slice → Task branching plus one shared cross-branch prerequisite preserves one identity and rejects a closure deadlock. This alone grants no start/close effect or eligibility. |
 | 5. Positive leaf eligibility | Depends on work/composition facts and selected governing assignment, assessment protocol, complete exact roles/coverage/populations and current qualification. Relation-dependent questions additionally require 4; relation-free leaf eligibility need not wait for every hierarchy capability or CR. Checkpoint: a declared result population produces atomic eligibility/disposition; a direct pass alone or missing required coverage cannot. Physical Work Progression placement remains downstream of Engine and Contracts. |
@@ -355,11 +366,12 @@ JSON is fixed, and existing owner/versioned contracts control representation.
 Foundation JSON remains a boundary-specific selection, not a migration or
 blanket adoption. Foundation authority/recovery and compatibility preparation are
 selected, its complete bounded implementation plan is human-authorized and its
-native predecessors have completed evidence. After clean selection review, meta
-may dispatch that implementation separately. Actual source admission and each
-runtime project's required authority still apply; implementation is not started.
-Later flexibility execution and the other proposed outcomes retain their own
-human checkpoints and bounded authorization.
+native predecessors have completed evidence. That implementation and its meta
+aggregate acceptance/closeout and human recap are complete at `cbfbf76` as recorded
+above. Actual runtime authority remains separately required. The requested
+flexibility preparation now owns its exact pending choices and first increment;
+flexibility execution and the other proposed outcomes retain their own human
+checkpoints and bounded authorization. No later serial order is approved here.
 
 ### Current source constraints on the next outcome
 
