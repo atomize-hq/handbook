@@ -25,7 +25,14 @@ sources are retained with their proposed status. The completed
 [independent-local-check slice](../../slices/independent-local-check/README.md)
 through `be7d040` and its meta closeout remain intact. No new phase, packet or
 amendment register number is assigned. Native/SDK preparation and execution
-require separate bounded authorization after the integration recap.
+require separate bounded authorization after the integration recap. Subsequent
+[foundation authority](../../slices/work-item-state-foundation/README.md) now
+records that authorization for complete Packet-1 implementation and human-selected
+Engine work-state/definition placement, D/G registration authority, exact terminal
+publication/recovery and prepared successor compatibility. Implementation remains
+not started; future flexibility execution follows separately after its human
+checkpoint. These bounded realization choices do not change this amendment's
+semantic approval or select CR's distinct choices.
 
 ## Responsibilities retained
 
@@ -35,7 +42,7 @@ components. Co-location may be chosen later without merging their propositions.
 | Responsibility | Truth it establishes |
 | --- | --- |
 | Authoritative work-state/structure owner | Item identity, exact composition bindings, state, relations and coherent finite cuts; authorized changes and committed successor state/receipts. |
-| Relevant definition/admission owners | Supported composition and kind meaning, immutable versions, compatibility and applicable qualification; establishment does not assign governance. Kind-definition placement remains unselected. |
+| Relevant definition/admission owners | Supported composition and kind meaning, immutable versions, compatibility and applicable qualification; establishment does not assign governance. The subsequent foundation compatibility contract selects an Engine-owned work-definition/composition boundary; kind implementation remains separately bounded. |
 | Work Progression | Independently resolved governing completion, exact target/relation and result accounting, local/parent policies, current qualification under G5, pure eligibility/disposition, refusal and replay. |
 | Contracts responsibilities | Exact complete definitions and requirements, assessment occurrence, evidence/claim/metric/gate truth; assessment does not establish work state. |
 | Engine responsibilities | Applicable posture and independent operating/evaluation authority, exact historical validity and declared current verification. |
@@ -272,8 +279,9 @@ effects. Loss disclosure does not authorize a lossy mutation. Pack installation
 grants no admission, activation, delegation or governing assignment under G6.
 Mappings are selected individually; no universal adapter compatibility is promised.
 
-Later bounded planning still selects physical work/definition/applicability/action
-owner placement; registry versus equivalent reuse; concrete states, operations,
+Outside the subsequent [foundation selections](../../slices/work-item-state-foundation/README.md),
+later bounded planning still selects physical applicability/action
+owner placement and further work/definition realization; concrete states, operations,
 reopen/cancel and removal consequences; exact policies, eligible populations,
 compatibility/coverage mappings and assessment protocols; identity/resolver,
 persistence, concurrency, recovery and retention mechanisms; schemas, serialization,
@@ -286,7 +294,9 @@ skills and adapters follow later. Existing roadmap order remains intact. The
 **PROPOSED general defaults**, with **Contracts JSON fixed** and existing
 owner/versioned contracts controlling. This amendment selects no new format,
 schema, layout, migration or implementation sequence. Subsequent planning and
-execution require their own authorization.
+execution require their own authorization. The complete foundation Packet-1
+authorization and selected future ordinary/planning-output/requirements-input
+compatibility menu are recorded in their owning plan, not granted by this amendment.
 
 ## Sources and evidence
 

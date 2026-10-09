@@ -1,8 +1,8 @@
 # Native work-item state foundation
 
-Status: **conditional bounded plan reconciled; unimplemented; consequential
-choices and Packet-1 execution authorization pending**. Reconciled 2026-10-08
-against `2740e042d1e161b8e80fb84435d0775eda4bc5d4` on
+Status: **human-selected bounded plan; compatibility preparation selected;
+complete Packet-1 implementation authorized; implementation not started**.
+Selections recorded 2026-10-08 against `227c958e1630acef923aae97c6ed88752a32d184` on
 `feat/handbook-contract-membrane-clean`.
 
 Descriptive slice identity: `work-item-state-foundation`; no phase number or
@@ -11,13 +11,19 @@ integration recap, the human requested dispatch of the first bounded native/SDK
 preparation and the normal causal review process, permitting local subagents
 while fresh top-level sessions remain restricted. This authorizes preparation,
 source verification, review and a local documentation commit. It supplies no
-product execution permission or actual runtime instruction, actor or grant.
+product execution permission or actual runtime instruction, actor or grant by itself.
 
 The human subsequently requested joint Work Progression / Context Resolution
 reconciliation and near-term planning. This updates the prepared `6aba084` plan;
-it does not adopt proposed product choices. The [joint sequence and decision gates](../../coverage-and-landing-map.md#joint-authority-and-recovery-reconciliation)
-own that combined planning boundary. Recommendations below are conditional on
-human selection and the composition/kinds compatibility gate before implementation.
+it did not by itself adopt proposed product choices. The [joint sequence and decision gates](../../coverage-and-landing-map.md#joint-authority-and-recovery-reconciliation)
+own that combined planning boundary. The human then approved all three
+recommendations and the complete bounded Packet-1 plan, directing a fresh
+selection-recording task first and a separate fresh implementation task after its
+clean review. That approval selects the authority, publication/recovery and
+composition/kinds compatibility decisions below. It authorizes Packet-1
+implementation, verification, fresh causal review and one local coherent commit,
+ending at the Packet-1 human review boundary. This document task performs no
+implementation; actual runtime project terms must still be explicitly established.
 
 The [program shape](../../coverage-and-landing-map.md#successor-readiness-after-independent-local-check),
 [entry point](../../README.md), [lifecycle](../../work-unit-lifecycle.md),
@@ -37,25 +43,25 @@ registered; each operation concerns exactly one item. An explicit supported
 composition establishes the item's meaning, while its display label supplies no
 taxonomy or authority.
 
-The **recommended new route** serves positively current local-check projects in
-D or established-from-D G through newly and exactly activated work-registration
+The **human-selected route** serves positively current local-check projects in
+`DeferredV2` D or `EstablishedFromDeferredV3` G through newly and exactly activated work-registration
 terms. No such activation API exists today. A fixed operation-specific native rule
 must authorize original-human establishment, independently of the proposed grant;
 the SDK supplies the approved content and Engine validates/activates it. The old
-initial-only proposal is retained as a smaller alternative for human choice, not
-the current recommendation. Existing initial/currentness refusals remain intact.
+initial-only proposal is superseded and is not an implementation alternative.
+Existing initial/currentness refusals remain intact.
 Local-check action classes, evaluation permission, InputCorrection delegation and
 Context Resolution root use/management supply no work-registration authority.
 
-Under this recommendation a D→G transition invalidates the old bound/prepared
+Under this selection a D→G transition invalidates the old bound/prepared
 basis. New work on current G needs explicit human activation of exact compatible
 work terms there, preserving the prior work-authority lineage. That supported
-re-establishment is part of the proposed rule; general agent grant replacement or
+re-establishment is part of the selected rule; general agent grant replacement or
 automatic carry-forward is excluded. The new grant cannot complete an old request
 under substituted authority. Item/history reads and historical recovery are
-separate from live permission. The D/G recommendation is source-backed feasibility,
-not implemented support or human adoption; a D-only alternative needs an expressly
-accepted continuing-G limitation before execution.
+separate from live permission. Both D and established-from-D G are selected;
+source-backed feasibility does not claim implemented support. D-only is not the
+authorized cut.
 
 The caller can inspect the item's completion support separately. The result says
 that governed local-closeout eligibility is **unsupported / not assessed**, and
@@ -77,7 +83,7 @@ reliance population, current qualification or completion effects. Building all
 those boundaries with registration would make the first landing substantially
 larger and conceal an independently meaningful state-owner checkpoint.
 
-**Conditional example:** a positively current local-check project has newly
+**Authorized implementation example:** a positively current local-check project has newly
 activated exact human-approved work-registration terms. A routine SDK caller registers
 `inspect-session-renewal`, displayed as “Investigate session renewal,” with a
 bounded work question. The receipt confirms creation of the exact `open` item.
@@ -99,17 +105,17 @@ project, or erase an uncertain prior registration.
 | --- | --- |
 | Physical state/structure owner | A purpose-named `handbook-engine::work_state` module owns item identity, admitted composition, immutable initial state, registration execution and receipts, current resolution and history. Engine already supplies repository identity, retained-root durability and guarded local operating authority. This bounded placement adds no Engine dependency on Contracts or SDK. |
 | Work Progression placement | Positive Work Progression remains downstream and unimplemented. Future reliance must consume work-state facts and Contracts truth; putting that consumer inside Engine would create an Engine-to-Contracts dependency reversal. This slice selects only an explicit unsupported-completion boundary, not a policy or eligibility owner implementation. |
-| Definition/composition | Retain one immutable versioned explicit leaf composition in this packet: initially `open`, no operational relations or supported completion transition. Descriptor conformance is owner-established, not governing assignment. Prepare the immediate configurable-composition/optional-kind successor before implementing this representation; do not treat fixed leaf support as the final menu. |
-| Authority and creation effect — proposed, pending human selection | Add narrowly scoped human establishment/activation of work-registration terms on current local-check D/G and live consuming admission over exact actor/effect/reach. Preserve existing initial and local-check identities/refusals; their permissions cannot be reinterpreted. D→G requires new explicitly activated compatible work terms on current G, with exact predecessor. No general grant administration or root-binding prerequisite. |
+| Definition/composition | Retain one immutable versioned explicit leaf composition in this packet: initially `open`, no operational relations or supported completion transition. Descriptor conformance is owner-established, not governing assignment. The immediate Engine-owned configurable-composition/optional-kind compatibility contract below is prepared and human-selected; carry it into Packet-1 acceptance without implementing the successor menu or registry. |
+| Authority and creation effect — human-selected | Add narrowly scoped human establishment/activation of work-registration terms on current local-check D/G and live consuming admission over exact actor/effect/reach. Preserve existing initial and local-check identities/refusals; their permissions cannot be reinterpreted. D→G requires new explicitly activated compatible work terms on current G, with exact predecessor. No general grant administration or root-binding prerequisite. |
 | First lifecycle | Register, resolve current item, resolve original request, and recover that same registration. The only work state is `open`; no start/close/reopen/cancel/archive/delete/edit/rebind operation or direct state setter is supported. A registration receipt proves creation, never successful completion. |
-| Identity and storage | Retain exact project/root, bounded item/request keys and owner-derived item identity. Separate identity-scheme, composition and codec/release versions. Prepared additive JSON store `.handbook/work-state/v1/` remains outside reset-managed state. Proposed terminal-publication commit and exact prefix recovery are specified in Packet 1; no database, migration or editable master. |
+| Identity and storage | Retain exact project/root, bounded item/request keys and owner-derived item identity. Separate identity-scheme, composition and codec/release versions. Selected additive JSON store `.handbook/work-state/v1/` remains outside reset-managed state. Selected terminal-publication commit and exact prefix recovery are specified in Packet 1; no database, migration or editable master. |
 | Governance/applicability | Registration discharges no governed completion obligation. It establishes no exemption or governing standard. The existing positive Contracts scope basis retains its original limited meaning. Completion applicability, policy qualification/assignment and assessment protocol are unsupported here, so completion consideration cannot form a Determination. |
 | SDK | Add typed methods to the existing `HandbookSdkV1` facade; keep owner truth inward of SDK. Public request, locator, snapshot, receipt, refusal and uncertainty are distinct types. No generic catalog, ordinary operation-inventory or CLI/Tauri/installed-skill expansion. |
 
-Retained owner/SDK/composition/storage decisions are bounded preparation selections;
-the revised authority and semantic commit/recovery rules are **proposed for human
-selection**, not just-in-time implementation choices. These are for human review of the first plan,
-not claims that the source already implements them. The [Packet-1 authority](packet-1.md)
+Owner/SDK/composition/storage decisions and the revised authority and semantic
+commit/recovery rules are **human-selected bounded implementation input**.
+The three consequential selections are settled, rather than just-in-time choices
+for the implementation agent; none claims existing product support. The [Packet-1 authority](packet-1.md)
 details the next increment only. Existing vocabulary roles/absorptions, Flow
 packet selection and Pipeline routing are not equivalent operational composition
 or work-state registries. Reuse their terminology or serializers only where their
@@ -131,39 +137,41 @@ dependencies. Historical byte domains stay unchanged.
 | Selected Work Progression semantics | Integrated at `2ce0871`; the [amendment](../../semantic-model/amendments/work-progression-kinds-and-relations.md) is current semantic input. It does not authorize this implementation. |
 | Native initial setup and independent local check | The [completed four-packet slice](../independent-local-check/README.md) through `be7d040` has supplied meta aggregate APPROVE, closeout and human recap. Its setup/identity, operating-authority and owner-history foundations are reusable. Its product suites are not rerun or reclosed by this preparation. |
 | Current source mechanisms | [Engine local operating authority](../../../../../crates/engine/src/local_authority.rs), [retained durability](../../../../../crates/engine/src/repository_durability.rs), [initialization](../../../../../crates/engine/src/repository_initialization.rs), [definition identity/codecs](../../../../../crates/engine/src/definition_identity.rs), and [typed setup](../../../../../crates/sdk/src/local_setup.rs) exist at preparation HEAD. Packet 1 must prove the new consuming path and held authorization, rather than count those sources as new behavior tests. |
-| Authority and recovery product choices | **Pending human selection.** Select the exact activation population/rule/re-establishment boundary and the terminal-publication/recovery contract in [the next-plan gates](../../coverage-and-landing-map.md#next-plan-selection-gates). The current source supports reuse patterns, not an existing registration activation API. |
-| Composition/kinds successor compatibility | **Compatibility proposal prepared below; exact menu/placement/evolution choices pending human selection before foundation execution.** Select these and incorporate the resulting compatibility cases into Packet-1 acceptance before product edits; later flexibility implementation remains separately authorized. |
-| Implementation authorization | **Unsatisfied.** Meta must present the bounded Packet-1 plan, its choices and packet review boundary for human authorization before dispatching product work. Current source and every actual runtime project's required prior terms must separately resolve at execution. |
+| Authority and recovery product choices | **Human-selected.** The exact D/G establishment/re-establishment rule and terminal-publication/prefix-recovery contract in [the next-plan gates](../../coverage-and-landing-map.md#next-plan-selection-gates) are approved. Current source supports reuse patterns, not an existing registration activation API. |
+| Composition/kinds successor compatibility | **Prepared and human-selected pre-execution gate satisfied.** Engine placement, finite menu and no-first-successor-rebinding are selected below; [concrete compatibility acceptance](packet-1.md#selected-successor-compatibility-acceptance) is incorporated into Packet 1. Its implementation must verify these cases. Future variants and registry implementation remain separately authorized after the foundation checkpoint. |
+| Implementation authorization | **Human-authorized for all of Packet 1**, after clean review of this selection-recording change and separate fresh meta dispatch. Stop at the Packet-1 human review boundary. Current source and every actual runtime project's required prior terms must separately resolve at execution. |
 
 No broad native permission platform, Context Resolution authority migration,
 Substrate integration, publication or adapter is a hard predecessor for this cut.
-The proposed local route adds explicit work terms using existing native successor
+The selected local route adds explicit work terms using existing native successor
 patterns, not generic authored-artifact promotion of a Context Resolution capsule.
 If that activation/recovery seam cannot remain bounded, return its exact missing
 dependency to meta before product edits; do not silently expand into general IAM.
 
 ## Composition and kinds successor compatibility gate
 
-Before foundation implementation, obtain human selection of the prepared
-immediate successor's definition/admission placement and finite supported menu.
-Recommend an Engine work-definition boundary with optional immutable whole-
-composition kinds and explicit compositions; equivalent reuse without a separate
-registry or another inward definition owner are viable alternatives. No concrete
-kind taxonomy, policy or lifecycle is selected here.
+**Prepared and human-selected before foundation execution.** The immediate
+successor uses an Engine-owned work-definition/composition boundary, a finite
+supported declarative menu, optional immutable whole-composition kinds and explicit
+per-item compositions. Kinds add no arbitrary semantics or programmable
+transitions. The fixed ordinary foundation leaf is retained; its representation
+must preserve the compatibility contract here. No concrete kind taxonomy or
+completion policy is selected. This gate is satisfied as planning input; it does
+not claim product compatibility tests have already run.
 
-**Recommended first successor menu, pending selection:** retain the ordinary leaf
-descriptor and add two immutable declarative variants below. Kind names are proposed
+**Selected first successor menu:** retain the ordinary leaf
+descriptor and add two immutable declarative variants below. Kind names are illustrative
 aliases for entire exact compositions, not a universal taxonomy. The first flexibility
 outcome supports registering new items under these choices; existing leaf items stay
 unchanged and rebinding is explicitly unsupported. An authorized revision path is a
 larger alternative, requiring its own predecessor/change authority and history.
 
-| Proposed variant | Supported declaration and refusal boundary |
+| Selected future variant | Supported declaration and refusal boundary |
 | --- | --- |
 | Planning contract-output leaf | `open` leaf with a bounded required-output question. Before issuance it contains no guessed exact future contract reference. Later eligibility must independently resolve the actual owner-established complete output and this work's own completion requirements. |
 | Implementation requirements-input leaf | `open` leaf with an exact versioned Contracts definition locator declared as requirements input. This binding asserts the requested role, not qualification, assessment or governing assignment. Contracts resolves its truth; Work Progression later admits supported target coverage. |
 
-For both, recommend the foundation's same-project/leaf/no-close support, no live
+For both, select the foundation's same-project/leaf/no-close support, no live
 relations, bounded caller-selected display vocabulary/level token (128 bytes) and
 label (4,096 bytes), and closed typed role fields rather than arbitrary user JSON.
 Foundation stores neither variant yet. The selected immutable kind binds exactly
@@ -176,20 +184,23 @@ eligibility outcome; this first menu does not pretend to implement them.
 
 Engine's work-definition boundary establishes descriptor conformance and exact
 identity; it does not verify Contracts truth or assign governance. SDK presents
-typed choice and owner refusal. Recommend fixed owner-supported descriptor
+typed choice and owner refusal. Select fixed owner-supported descriptor
 admission initially, without user-programmable rules or direct file editing.
-Successor kind establishment must use expressly selected definition authority;
-registration authority cannot establish new primitive semantics. Placement in a
-separate inward definition owner, equivalent reuse without a named registry, or a
-different bounded first menu remain explicit alternatives for human selection.
+Successor kind establishment must use its own expressly selected definition authority;
+registration authority cannot establish kinds or new primitive semantics.
+Engine placement and this first menu are selected; exact future kind-establishment
+terms and its operation are successor implementation preparation, not missing
+foundation authority.
 Relation participation is declared capability, not fabricated live relations.
 
-Foundation compatibility acceptance then proves: item identity is stable across
+The [concrete Packet-1 acceptance](packet-1.md#selected-successor-compatibility-acceptance)
+must prove: item identity is stable across
 codec/release changes; old descriptor bytes and historical meaning survive;
 unknown future composition fields refuse rather than disappear; enabling a later
-capability cannot silently reinterpret/rebind the old item; a new immutable kind
-cannot introduce behavior outside the supported menu. Use paper examples now and
-real owner/SDK tests during foundation execution. The later flexibility landing
+capability cannot silently reinterpret/rebind the old item; unsupported kind or
+descriptor requests cannot introduce behavior outside the supported menu. The
+Packet-1 paper cases fix these expectations now; real owner/SDK tests verify the
+foundation invariants during execution without adding future support. The later flexibility landing
 must demonstrate two chosen variants and exact retained-item behavior. This gate
 prepares extension compatibility, not an entire successor packet or permission
 to implement it before the foundation's human recap.
@@ -198,7 +209,7 @@ to implement it before the foundation's human recap.
 
 | Packet | Bounded outcome | Dependency | Human review |
 | --- | --- | --- | --- |
-| 1 — native registration and usable SDK | Committed `open` item, exact current/history/recovery, supported-composition and authority refusals, and explicit unsupported completion inspection through an ordinary SDK consumer. | Predecessors above and human approval of this concrete plan. | **Packet boundary.** The state and registration receipt are independently meaningful, so return the implementation result and stop. This one-packet outcome is also the slice's complete acceptance boundary. |
+| 1 — native registration and usable SDK | Committed `open` item, exact current/history/recovery, supported-composition and authority refusals, and explicit unsupported completion inspection through an ordinary SDK consumer. | Selected pre-execution gates above; human approval recorded; clean selection review before separate implementation dispatch. | **Packet boundary.** The state and registration receipt are independently meaningful, so return the implementation result and stop. This one-packet outcome is also the slice's complete acceptance boundary. |
 
 There are no hidden preparatory packets or future packets inside this slice.
 Packet 1 may settle local type/function names, module split, canonical descriptor
@@ -217,6 +228,9 @@ second mechanical commit or durable dispatch/review record is required.
 1. Native registration admits only the exact supported leaf composition, same
    positively registered project/root, bounded identity/content and initially
    `open` state; names alone create no operational meaning or completion claim.
+   The [selected compatibility cases](packet-1.md#selected-successor-compatibility-acceptance)
+   preserve independent identity-scheme versions, exact descriptor bytes/bindings
+   and refusal of future roles/kinds/rebinding before their separate support.
 2. Newly activated current work-registration authority and its declared reach are
    held through terminal publication. Existing local-check permission alone,
    unactivated/self-authorizing terms, stale D→G basis, missing,

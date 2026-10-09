@@ -1,16 +1,16 @@
 # Packet 1: register and resolve native open work
 
-Status: **conditional next plan; unimplemented; authority/recovery choices and
-composition-successor compatibility gate pending**, reconciled 2026-10-08 at
-`2740e04`. This supersedes the initial-only recommendation at `6aba084`.
+Status: **human-selected complete Packet-1 plan; compatibility preparation gate
+satisfied; implementation authorized and not started**. Selections recorded
+2026-10-08 against `227c958`. This supersedes the initial-only recommendation at `6aba084`.
 This is the sole packet of [work-item-state-foundation](README.md). The slice
 owns the outcome, exclusions and eight acceptance conditions; this document
 details only its next implementation increment.
 
 ## Observable behavior and review boundary
 
-Under the proposed rule, given one positively current local-check project in D
-or established-from-D G, newly activated exact human-approved work-registration
+Under the selected rule, given one positively current local-check project in
+`DeferredV2` D or `EstablishedFromDeferredV3` G, newly activated exact human-approved work-registration
 terms with sufficient effect/read/write reach, and a valid exact item
 request, a normal SDK caller creates one owner-confirmed `open` item. It retains
 the original request locator before execution. Current resolution after restart
@@ -18,19 +18,23 @@ returns that exact item/snapshot; original-request resolution returns the same
 registration outcome. A registration receipt proves creation, not work completion.
 
 The activation API and consuming work permission are **missing product mechanisms**
-proposed here, not existing local-check support. [The three next-plan gates](../../coverage-and-landing-map.md#next-plan-selection-gates)
-require human selection of activation/population and commit/recovery, and completed
-composition/kinds successor preparation before execution. Plan approval then
-authorizes this bounded implementation; it supplies no actual project's terms.
+selected for implementation here, not existing local-check support. [The three next-plan gates](../../coverage-and-landing-map.md#next-plan-selection-gates)
+are prepared and human-selected, including the successor compatibility contract
+incorporated [below](#selected-successor-compatibility-acceptance). The human approved
+all three recommendations and all of Packet 1, directing selection recording and
+clean review first, then a separate fresh top-level implementation task. That
+authorization covers explicit registration authority, durable open items/receipts,
+current/history/recovery, typed SDK delivery, verification, fresh causal review and
+one local coherent commit. It supplies no actual project's terms.
 The original initial witness still refuses successor footprints and changed
 governance. Work permission must be newly established by the selected fixed rule,
 not inferred from local-check classes or a Context Resolution envelope.
 
-D→G invalidates an earlier bound/prepared D basis. Proposed explicit human
+D→G invalidates an earlier bound/prepared D basis. Selected explicit human
 activation of compatible work terms on current G permits new registration there;
 old requests keep their original authority and cannot substitute the new grant.
-Existing item/history reads remain separate owner-state reads. A D-only route is
-a viable narrower alternative only with a human-accepted G creation limitation.
+Existing item/history reads remain separate owner-state reads. D-only and
+initial-only routes are not the selected implementation cut.
 
 For example, a current local-check project P activates exact work terms, then the item key
 `inspect-session-renewal`, a descriptive label and a
@@ -45,6 +49,10 @@ The human checkpoint is **Packet 1**. Registration/current/history plus its
 authority and completion refusals are a meaningful native/SDK capability. Return
 to meta after verification, focused causal review and the local coherent commit;
 do not elaborate or implement positive eligibility, close effects or hierarchy.
+Configurable compositions/kinds implementation follows separately after that
+human checkpoint; this packet prepares compatibility but adds neither future
+variant nor registry. Context Resolution's distinct management/use/representation
+choices are not selected by this approval.
 
 ## Required sources and present product truth
 
@@ -93,7 +101,7 @@ another state machine or introduce an unsupported kind. Establish this descripto
 native fixed conformance, retaining its exact content/binding with each creation;
 it assigns no governance and needs no separate kind registry.
 
-**Proposed authority boundary, pending human selection:** Engine local authority
+**Human-selected authority boundary:** Engine local authority
 owns a fixed versioned work-registration establishment rule outside candidate
 terms. It permits the original claimed human principal to approve exact bounded
 terms against positive current initial/check lineage, current Charter and fresh
@@ -109,7 +117,7 @@ reservation, revocation principal and retention. Activation must positively
 establish the new owner stream under exact initialized project truth; absent,
 damaged, reset or pending state cannot masquerade as never established. Reach for
 the new store must be explicitly approved under this new rule, never injected into
-old identities. Revocation is supported for the declared principal. Proposed human
+old identities. Revocation is supported for the declared principal. Selected human
 re-establishment on G requires exact prior work-grant identity, current G basis and
 recovery of pending activation; no generic replacement/delegation or post-revocation
 restoration is included. Revoked work grants refuse new use.
@@ -177,9 +185,38 @@ validation. Canonical JSON has no trailing newline; semantic fingerprints bind
 domain-separated canonical values and byte fingerprints bind retained exact bytes.
 No existing owner fingerprint or framing is rewritten.
 
+## Selected successor compatibility acceptance
+
+The [slice compatibility contract](README.md#composition-and-kinds-successor-compatibility-gate)
+is prepared and human-selected before this implementation: Engine-owned
+work-definition/composition, finite declarative support, optional immutable
+whole-composition kinds plus explicit per-item compositions, bounded display
+vocabulary and fixed owner descriptor conformance. The immediate future menu
+retains the ordinary leaf and adds planning contract-output and implementation
+exact requirements-input leaves. Kind-definition authority is distinct from item
+registration; Contracts truth and governing assignment remain separately owned.
+No future variant, kind registry, programmable transition or rebinding operation
+is implemented in Packet 1.
+
+These paper cases fix the concrete foundation acceptance and future obligations:
+
+| Case | Packet-1 owner/SDK acceptance | Separately authorized flexibility obligation |
+| --- | --- | --- |
+| Retained ordinary leaf L across codec/release change | Derive identity solely from exact project, owner/identity-scheme domain and item key; changing codec/release/composition version cannot be an identity input. Retain exact admitted descriptor bytes/binding and resolve/recover L with the same identity, `open` meaning and unsupported completion. Verify codec round-trip and historical binding retention. | Enabling a new menu/version leaves L's identity, descriptor and historical meaning unchanged. |
+| New planning leaf P with required-output question | A request adding an output role or guessed future contract locator refuses as unsupported before an effect; unknown future fields cannot disappear during decoding. The ordinary bounded work question grants no output-role semantics. | Admit the selected bounded output question with no guessed future exact reference; later eligibility resolves actual complete owner-established output and P's own requirements. |
+| New implementation leaf I with exact requirements input | A request adding a requirements role or contract locator refuses as unsupported before an effect; registration cannot assert Contracts truth, qualification or governing assignment. | Admit the exact versioned Contracts definition locator in its supported role; resolve truth and governing assignment independently. |
+| Kind K, variation or rebind of L | Kind binding, arbitrary role/state-machine fields, undeclared overrides and changed composition under L's existing key refuse. Display names introduce no semantics. Verify no silent default upgrade or reinterpretation on current/history/recovery. | K identifies one exact immutable supported whole composition; equivalent explicit composition remains valid. Bounded level/vocabulary token (128 bytes) and label (4,096 bytes) cannot add primitive semantics. Existing items cannot rebind in this first successor. |
+
+Exercise the foundation invariants through real owner and normal SDK paths,
+including request/record unknown-field refusal and exact history after reopen and
+reset. Future positive-role/kind behavior is a successor obligation, not a
+foundation test target or remaining compatibility-planning blocker. Local canonical
+descriptor bytes and type/layout choices may be settled from these selected
+invariants under the slice's bounded just-in-time delegation.
+
 ## Durable prefix and authority-transition contract
 
-This entire contract is **recommended, pending human selection**. Preserve the
+This entire contract is **human-selected for Packet 1**. Preserve the
 terminal-plus-snapshot public boundary: native no-replace durable publication of
 one exact registration terminal is the **semantic commit point**. It binds the
 retained snapshot/registration receipt, request, item/project, original authority
@@ -207,9 +244,10 @@ unverifiable. Physical file layout may not change these public semantics.
 | Exact committed terminal plus matching snapshot/receipt and original proof closure | Current immutable `open` fact or exact committed replay. No second effect. | Historical proof/current item read; no permission restored. | Same committed fact; new creation needs current G terms. | Same committed fact; authority is historical only. | Same fact only through new retained read dependencies, not operating locks. |
 | Missing/corrupt/conflicting/partial required evidence, or possible terminal publication with no exact proof | Integrity refusal or commit uncertainty; no manufactured absence or success. | Same; retain reservations. | Same. | Same. | Same; loss is not noncommit. |
 
-The supersession column includes initial-to-check adoption for the alternative
-initial route and any selected work-authority successor; the recommended route
-already starts on current local-check state. Infer no new operation from that
+The supersession column covers work-authority successor/currentness changes;
+the selected route already starts on current local-check state. Initial-to-check
+adoption is an inherited initial-witness refusal, not an alternative registration
+route. Infer no new operation from that
 column. Replaying exact old committed proof is **historical-proof finalization**,
 not new registration. Completing an absent terminal is a new effect and cannot
 use that historical rule. If terminal installation may have happened but cannot
@@ -317,7 +355,7 @@ same-identity recovery without repeat effect; current open truth after refresh/r
 with new creation refused when required operating state is lost; root/lock
 substitution, positive owner bootstrap versus lost state, peak transaction capacity
 (including candidates and terminal/noncommit closure), reservation release only
-on exact proof, prepared successor composition compatibility, bounds/codec refusals
+on exact proof, [selected successor compatibility acceptance](#selected-successor-compatibility-acceptance), bounds/codec refusals
 and unchanged legacy result behavior. Pause registration/activation against real
 revocation and D→G transitions to prove serialization and stale refusal.
 

@@ -111,9 +111,11 @@ atomic Operational Reliance Determination. That semantic approval does not chang
 history. The later [Work Progression amendment](semantic-model/amendments/work-progression-kinds-and-relations.md)
 selects composition and initial hierarchy/prerequisite semantics; concrete state,
 relation bindings, policy, physical placement, consumers and action/mutation
-realization remain later implementation choices. The conditional [work-state foundation](slices/work-item-state-foundation/README.md)
-prepares the first owner/SDK cut but remains unimplemented and awaits human
-selection and execution authorization. This is implemented HCM-5.2 owner, SDK, and generic-consumer
+realization remain later implementation choices outside the first cut. The selected [work-state foundation](slices/work-item-state-foundation/README.md)
+records Engine state/definition placement, D/G registration authority, terminal
+publication/recovery and compatibility preparation. Complete Packet-1 implementation
+is human-authorized after clean selection review and remains not started.
+This is implemented HCM-5.2 owner, SDK, and generic-consumer
 architecture through Packet 7; aggregate verification/review and the single
 HCM-5.2 closeout are complete.
 
@@ -257,9 +259,10 @@ fixes optional kinds/explicit compositions, configurable levels, initial same-pr
 one-parent containment, typed prerequisite roles and explicit scoped obligations.
 Concrete state/operation and relation realization, exact bindings, physical
 eligibility/action placement, policies/currentness inputs and consumers remain
-later choices. The conditional [foundation plan](slices/work-item-state-foundation/README.md)
+later choices outside the first cut. The selected [foundation plan](slices/work-item-state-foundation/README.md)
 and [joint sequence](coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints)
-prepare bounded outcomes without implementing or authorizing them. Current HCM-5.2 authority is
+record the human-authorized, unimplemented first state/SDK cut and selected
+successor compatibility, with later outcomes still separately bounded. Current HCM-5.2 authority is
 unchanged and authorizes no parent mutation.
 
 Gate and local-closeout results may also become exact historical inputs to an

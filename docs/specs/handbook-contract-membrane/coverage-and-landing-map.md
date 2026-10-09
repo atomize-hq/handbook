@@ -8,7 +8,11 @@ conditions and cross-packet integration, returned aggregate **APPROVE** with no
 P1–P4 findings, and completed the single slice closeout and human recap. Bounded
 successor readiness and authorized Work Progression semantic integration were
 reconciled on 2026-10-08. Joint near-term planning below is reconciled against
-`2740e04`; its consequential recommendations await human selection. These are supplied meta results,
+`2740e04`; the human subsequently selected all three foundation/compatibility
+recommendations and authorized complete Packet-1 implementation after clean
+selection review. Implementation remains not started; remaining roadmap choices
+are proposed where unselected, and CR's separate choices remain unselected.
+These are supplied meta results,
 not product verification rerun by this documentation task. The dated comparison
 baseline below is preserved.
 This is planning input, not
@@ -216,9 +220,10 @@ that route as the recommended next plan; it does not rewrite the consultation or
 claim a new permission exists. Optional local provenance is the intentionally
 untracked `docs/research/work-item-state-foundation-pro-consult-2026-10-08/guidance.md`;
 the corrections are fully stated here and do not depend on shipping that file.
-The [conditional foundation](slices/work-item-state-foundation/README.md)
+The [selected foundation](slices/work-item-state-foundation/README.md)
 and [Packet 1](slices/work-item-state-foundation/packet-1.md) detail only that next
-increment, with exact pending selection gates.
+increment. Its three selection gates below are now human-approved; implementation
+is authorized after clean selection review and remains not started.
 
 ### Joint authority and recovery reconciliation
 
@@ -255,13 +260,16 @@ immediate Work Progression delivery. The following **proposed** order gives it a
 explicit successor, with hierarchy, eligibility and closing near-term outcomes.
 These are outcome units, not new phase/packet identities or execution permission.
 Each independently meaningful landing returns for human review before continuation.
-Only unit 1 is fully detailed. Unit 2's compatibility boundary below must be
-prepared and human-selected **before unit 1 implementation**.
+Only unit 1 is fully detailed. Unit 2's compatibility boundary below is now
+prepared and human-selected **before unit 1 implementation**. The human approved
+unit 1's complete Packet-1 plan, with execution following recording and clean review of these selections;
+unit 2 implementation follows separately after unit 1's human checkpoint. That
+approval does not select the remainder of this proposed serial order.
 
 | Order / outcome | Actual dependency and landing checkpoint |
 | --- | --- |
-| 1. Corrected work-state foundation | After the next-plan decisions below and unit-2 compatibility preparation: expressly activated registration permission on current local-check D/G, exact `open` leaf registration/current/history/recovery and unsupported completion through SDK. Checkpoint: a continuing project registers work under new terms; local-check permission alone refuses. This is a foundation, not the delivered flexible governed work capability. |
-| 2. Configurable compositions and optional immutable kinds | Depends on exact work identity/history from 1. Deliver supported composition selection, reusable immutable kind versions and vocabulary/level choice for new registrations, preserving exact retained-item bindings. Authorized evolution/rebinding is a separate later choice. Checkpoint: callers select two supported compositions without a universal taxonomy; old items keep exact bindings and unsupported variants/rebinding refuse. Definition/admission placement and the bounded semantic menu must be selected before 1; no arbitrary hooks or generic Artifact Kind reuse. |
+| 1. Corrected work-state foundation | Next-plan selections and unit-2 compatibility preparation are approved; complete Packet-1 implementation is authorized after clean selection review and separate fresh dispatch. Deliver expressly activated registration permission on current local-check D/G, exact `open` leaf registration/current/history/recovery and unsupported completion through SDK. Checkpoint: a continuing project registers work under new terms; local-check permission alone refuses. Implementation remains not started. |
+| 2. Configurable compositions and optional immutable kinds | Depends on exact work identity/history from 1 and separate implementation authorization after its human review. Engine definition/composition placement, the ordinary/planning-output/requirements-input menu and no first-successor rebinding are selected compatibility input for 1. Deliver supported composition selection, reusable immutable kind versions and vocabulary/level choice for new registrations, preserving exact retained-item bindings. Checkpoint: callers select two supported compositions without a universal taxonomy; old items keep exact bindings and unsupported variants/rebinding refuse. No arbitrary hooks or generic Artifact Kind reuse. |
 | 3. Native local Context Resolution root binding | Recommended after the first flexibility landing; this is a sequencing choice, not a hard dependency on 1/2. Requires its own human selections and bounded preparation below. Deliver reusable root-only use, explicit management/use establishment, currentness, history/recovery and selected replacement/revocation. Checkpoint: reopen and use B1, refuse unpermitted B2 management. Work authority cannot substitute. |
 | 4. Hierarchy and typed prerequisite facts | Depends on 1/2's identity/composition participation. Deliver same-project one-parent relations, authoritative revisions and coherent finite cuts, start/close/both roles, distinct grouping/reference/order, and structural/closure-cycle refusal. Checkpoint: Feature → Phase → Slice → Task branching plus one shared cross-branch prerequisite preserves one identity and rejects a closure deadlock. This alone grants no start/close effect or eligibility. |
 | 5. Positive leaf eligibility | Depends on work/composition facts and selected governing assignment, assessment protocol, complete exact roles/coverage/populations and current qualification. Relation-dependent questions additionally require 4; relation-free leaf eligibility need not wait for every hierarchy capability or CR. Checkpoint: a declared result population produces atomic eligibility/disposition; a direct pass alone or missing required coverage cannot. Physical Work Progression placement remains downstream of Engine and Contracts. |
@@ -280,45 +288,55 @@ reopen/removal and legacy migration are outside these initial outcomes.
 
 ### Next-plan selection gates
 
-**Pending human selection, not adopted by reconciliation:**
+**Human-selected on 2026-10-08:** after the bounded plan recommended all three
+choices and complete Packet-1 implementation, the human approved it and directed
+a fresh task to record selections, then a separate fresh implementation task
+after the recording returns review-clean. The approval covers all of Packet 1,
+verification, fresh causal review and one local coherent commit; execution ends
+at its human review boundary. It grants no actual runtime project's terms.
 
-1. **Registration activation/population.** Recommend a fixed versioned Engine rule
-   allowing the original claimed human principal to approve and natively activate
-   exact work-registration terms on positively current local-check D or
-   established-from-D G. Terms bind original initial/check/Charter lineage, current
+1. **Registration activation/population — selected.** A fixed versioned Engine rule
+   allows the original claimed human principal to approve and natively activate
+   exact work-registration terms on positively current local-check `DeferredV2` D or
+   `EstablishedFromDeferredV3` G. Terms bind original initial/check/Charter lineage, current
    governance basis, actor, effect, exact reach, reservation and retention. The
    rule, outside the candidate terms, authorizes establishment; the new grant
    cannot authorize itself. Routine registrations then use that grant without
    repeated human approval. D→G invalidates the old prepared/bound basis; a new
-   explicit human activation on current G is proposed, with retained predecessor,
+   explicit compatible human activation on current G is required, with exact retained predecessor,
    no old-term reinterpretation and no substitution during old-request recovery.
-   Alternative: D-only post-check registration, accepting a disclosed G limitation;
-   initial-only is smaller but strands continuing projects. General delegated grant
-   replacement is larger and is not a foundation prerequisite.
-2. **Publication/recovery.** Recommend retaining terminal-plus-snapshot as the
+   D-only and initial-only alternatives are not selected. General delegated grant
+   replacement, automatic carry-forward and old local-check/evaluation/correction/
+   CR root-use permission are excluded as registration authority.
+2. **Publication/recovery — selected.** Retain terminal-plus-snapshot as the
    public semantic commit boundary: exact durable terminal publication under live
    original authority commits; intent/decision/snapshot alone are pending evidence.
    Snapshot-without-terminal completion is a **new effect**, not historical proof.
    After authority changes, exact recovery can establish noncommit and release the
    item/request reservation only with complete native proof; otherwise uncertainty
-   remains and blocks conflicting reuse. Exact committed proof remains history
-   despite revocation/reset. Alternative: snapshot installation is irrevocable
-   commit and later terminal is historical proof; that requires a different public
-   receipt/current-state contract. [Packet-1's matrix](slices/work-item-state-foundation/packet-1.md#durable-prefix-and-authority-transition-contract)
-   is conditional on the recommended choice, rather than leaving it to layout.
-3. **Composition/kinds compatibility before foundation.** Recommend an Engine
+   remains and blocks conflicting reuse. Positive noncommit proof includes retained
+   publication-attempt evidence; absent terminal bytes alone never prove an
+   attempted publication did not apply. Exact committed proof and retained
+   reads/recovery remain independent of reset-managed operating state. No blind
+   new-key retry or substituted grant can resolve uncertainty. Snapshot-installation
+   commit is not selected. [Packet-1's complete prefix/transition matrix](slices/work-item-state-foundation/packet-1.md#durable-prefix-and-authority-transition-contract)
+   governs successor/D→G/revocation/reset; analogous activation recovery is required.
+3. **Composition/kinds compatibility before foundation — prepared and selected.** Select an Engine-owned
    work-definition boundary for a finite supported declarative menu, optional
    immutable whole-composition kinds and explicit per-item composition, with no
    programmable transitions. Retain item identity scheme separately from codec/
    release version; adding release capability cannot reinterpret old bindings.
-   Alternative: equivalent whole-composition reuse without a separately named
-   registry, or a distinct inward definition owner. The [prepared compatibility gate](slices/work-item-state-foundation/README.md#composition-and-kinds-successor-compatibility-gate)
-   recommends planning contract-output and implementation requirements-input leaves,
-   bounded display vocabulary, fixed descriptor admission and no first-successor
-   rebinding of retained leaves. Select that menu/placement/evolution contract before
-   execution; those proposed concrete variants are not adopted by preparation.
+   The [selected compatibility gate](slices/work-item-state-foundation/README.md#composition-and-kinds-successor-compatibility-gate)
+   retains the ordinary leaf and selects immediate-successor planning contract-output
+   and implementation exact requirements-input leaves, bounded display vocabulary,
+   fixed owner-supported descriptor conformance and no first-successor rebinding.
+   Kind-definition authority remains distinct from item registration; Contracts truth
+   and governing assignment stay separate. [Concrete Packet-1 compatibility acceptance](slices/work-item-state-foundation/packet-1.md#selected-successor-compatibility-acceptance)
+   carries these choices into execution. This satisfies the pre-execution planning
+   gate; future variants and registry implementation are outside Packet 1.
 
-For unit 3, recommend the latest CR proposal's fixed human management/use
+**Unit 3 remains unselected.** This approval does not select CR's management/use,
+representation or compatibility choices. Recommend the latest CR proposal's fixed human management/use
 establishment rule on current compatible local-check D/G, root-only use, human
 grant establishment and agent narrow binding replacement only if expressly
 delegated. Human-only replacement is a simpler alternative; broader grant/reach
@@ -334,10 +352,14 @@ work-registration permission or promising the old historical publisher is fixed.
 
 The structured-data standard's general defaults remain **PROPOSED**, Contracts
 JSON is fixed, and existing owner/versioned contracts control representation.
-Foundation JSON is a boundary-specific prepared selection, not a migration or
-blanket adoption. This documentation pack is ready for human decisions; product
-execution additionally requires those decisions, completed compatibility
-preparation, satisfied prerequisites and authorization of the next bounded plan.
+Foundation JSON remains a boundary-specific selection, not a migration or
+blanket adoption. Foundation authority/recovery and compatibility preparation are
+selected, its complete bounded implementation plan is human-authorized and its
+native predecessors have completed evidence. After clean selection review, meta
+may dispatch that implementation separately. Actual source admission and each
+runtime project's required authority still apply; implementation is not started.
+Later flexibility execution and the other proposed outcomes retain their own
+human checkpoints and bounded authorization.
 
 ### Current source constraints on the next outcome
 

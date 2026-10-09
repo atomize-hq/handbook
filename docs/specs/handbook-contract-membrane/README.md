@@ -139,19 +139,24 @@ causal review, permitting local subagents while fresh top-level sessions remain
 restricted. The resulting [`work-item-state-foundation` authority](slices/work-item-state-foundation/README.md)
 prepares one small first state-owner/SDK outcome: register exact `open` leaf work,
 resolve current/history/recovery, and report completion as unsupported/not assessed.
-Its [single Packet-1 plan](slices/work-item-state-foundation/packet-1.md) is now
-conditional on the [joint reconciliation's exact human choices](coverage-and-landing-map.md#next-plan-selection-gates),
-composition/kinds successor preparation and human implementation authorization.
+The human subsequently approved all three [joint reconciliation recommendations](coverage-and-landing-map.md#next-plan-selection-gates)
+and its complete [single Packet-1 plan](slices/work-item-state-foundation/packet-1.md),
+directing selection recording with clean review before a separate fresh implementation
+task. Authority/recovery and composition/kinds compatibility preparation are
+selected; Packet-1 implementation, verification, fresh review and local commit
+are authorized, ending at its human review boundary. Implementation is not started.
 It delivers no positive Work Progression eligibility,
 governed completion, parent decision or close effect; those remain separately bounded.
-The initial-only recommendation at `6aba084` is superseded by proposed explicit
+The initial-only recommendation at `6aba084` is superseded by selected explicit
 work-registration activation on current local-check D/G. This mechanism does not
 exist yet; neither old local-check permission nor a Context Resolution root binding
 authorizes registration. The [joint near-term sequence](coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints)
 puts configurable compositions/optional kinds immediately after foundation, with
-compatibility prepared before it, followed by separately meaningful Context
-Resolution, hierarchy, eligibility and closing outcomes. Their proposals and
-implementation gates remain explicit. The latest [CR investigation](../../research/context-resolution-local-advisory-extension-investigation-2026-10-08.md)
+compatibility prepared and selected before it, followed by separately meaningful
+Context Resolution, hierarchy, eligibility and closing outcomes. Flexibility
+implementation follows separately after the Packet-1 human checkpoint; the other
+ordering and implementation gates remain proposed where unselected. This approval
+does not select CR's management/use/representation choices. The latest [CR investigation](../../research/context-resolution-local-advisory-extension-investigation-2026-10-08.md)
 is reviewed proposed evidence; root use, binding management and work registration
 remain distinct permissions. No broad authority platform or CR-first dependency
 is inferred. Native/SDK delivery and Phase-6 order remain unchanged.
@@ -187,8 +192,8 @@ Use the source that owns the question:
 | What proof is required and may an evaluation proceed? | [`Assurance and evaluation preparation`](semantic-model/assurance-and-evaluation-preparation.md) keeps posture/assurance selection separate from Engine authorization, capability, and readiness. |
 | What fixes the exact evidence population and the meaning of evaluation truth? | [`Evidence and evaluation truth`](semantic-model/evidence-and-evaluation.md) owns occurrence/evidence closure, claim/metric/gate semantics, explanation, and replay. |
 | May a result support present work progression or an action, and did an effect commit? | [`Operational reliance and actions`](semantic-model/operational-reliance-and-actions.md) owns the Work Progression boundary, atomic eligibility/disposition, separate action authorization and receipt requirements. The human-selected [kinds and relations amendment](semantic-model/amendments/work-progression-kinds-and-relations.md) supplements it; positive eligibility/completion remain unimplemented with explicit near-term outcomes in the [joint sequence](coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints). |
-| What is the first prepared Work Progression native/SDK increment? | [`work-item-state-foundation`](slices/work-item-state-foundation/README.md) retains registration-only Engine state and typed SDK preparation, exact history/recovery and unsupported-completion disclosure. Revised activation/publication recommendations and successor compatibility require human selection before [Packet 1](slices/work-item-state-foundation/packet-1.md) implementation approval. |
-| How do Work Progression and Context Resolution proceed together? | The [joint reconciliation](coverage-and-landing-map.md#joint-authority-and-recovery-reconciliation) owns current source seams, distinct permission boundaries, proposed order/checkpoints and pending choices. It adopts no research proposal or general permission platform. |
+| What is the first selected Work Progression native/SDK increment? | [`work-item-state-foundation`](slices/work-item-state-foundation/README.md) selects registration-only Engine state and typed SDK delivery, exact history/recovery and unsupported completion. D/G activation, terminal publication and successor compatibility are human-selected; complete [Packet 1](slices/work-item-state-foundation/packet-1.md) implementation is authorized after clean selection review and remains not started. |
+| How do Work Progression and Context Resolution proceed together? | The [joint reconciliation](coverage-and-landing-map.md#joint-authority-and-recovery-reconciliation) owns current source seams, distinct permission boundaries, selected foundation/compatibility gates and the proposed remaining order/checkpoints. CR choices remain unselected; no general permission platform is adopted. |
 | How is missing phase or slice authority prepared at the correct level? | [`authority-preparation-prompt.md`](authority-preparation-prompt.md) defines separate phase-to-slice and slice-to-packet top-level planning tasks. Each returns to the meta task before the next level. |
 | How is one authorized slice or packet assigned to a top-level task session? | [`task-session-prompt.md`](task-session-prompt.md) provides the copy/paste-ready assignment prompt and compact result presentation. |
 | How does a meta task prepare and continue requested HCM work? | [`meta-task-prompt.md`](meta-task-prompt.md) routes authority preparation, human approval of the next bounded plan, whole-slice or sequential packet execution within that increment, and recap-and-stop at its human review boundary. |

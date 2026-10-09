@@ -114,10 +114,13 @@ native local CR root binding → hierarchy/prerequisite facts → leaf eligibili
 leaf closing → parent eligibility → parent closing. CR's position is a delivery
 recommendation, not a hard predecessor for Work Progression; relation-free leaf
 eligibility has the narrower dependency stated in the map. Each meaningful landing
-has its own human checkpoint. No dates, new phase, or implementation authorization
-are assigned. The [foundation's next plan](slices/work-item-state-foundation/packet-1.md)
-is conditional on exact activation/recovery selection and composition/kinds
-successor preparation **before foundation implementation**. The latest CR research
+has its own human checkpoint. No dates or new phase are assigned. The human later
+approved all three foundation recommendations and the complete [Packet-1 plan](slices/work-item-state-foundation/packet-1.md):
+exact D/G activation/recovery and composition/kinds compatibility are prepared and
+selected **before foundation implementation**. Packet-1 implementation is authorized
+after clean selection review and separate fresh dispatch, remains not started,
+and stops for human review. Flexibility implementation follows separately after
+that checkpoint; remaining broad ordering is proposed where unselected. The latest CR research
 remains proposed; its own authority/compatibility choices precede detailed execution
 preparation. A shared currentness/recovery seam establishes no shared grant.
 
@@ -162,9 +165,12 @@ atomic posture transition while rehoming the residual work to later owners.
   placement, concrete state/operations, exact parent binding, concrete policy,
   consumer or action/mutation path. The later selected [kinds and relations amendment](semantic-model/amendments/work-progression-kinds-and-relations.md)
   supplies composition and initial hierarchy/prerequisite semantics. The
-  conditional [work-state foundation](slices/work-item-state-foundation/README.md)
+  selected, unimplemented [work-state foundation](slices/work-item-state-foundation/README.md)
   and [joint sequence](coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints)
-  prepare implementation outcomes; they await human choices and execution authorization.
+  record the approved foundation/compatibility choices and complete Packet-1
+  implementation authorization after clean selection review. Implementation remains
+  not started; adjacent outcomes need separate execution authorization and CR's
+  distinct choices remain unselected.
 - Ordinary SDK/JSON exposure, publication, bridging, and Substrate adoption for
   grounding move to the appropriate Phase-4 and Phase-6 owners.
 - Multi-source posture evaluation, recommendations, notifications,
@@ -332,15 +338,18 @@ and four proposed research sources. After the integration recap, the human
 authorized bounded native/SDK preparation and normal causal review through local
 subagents when fresh top-level sessions remain restricted. The descriptive
 [`work-item-state-foundation` slice](slices/work-item-state-foundation/README.md)
-now conditionally prepares exact `open` leaf registration, current/history/recovery
+now selects exact `open` leaf registration, current/history/recovery
 and explicit unsupported completion through the SDK. Its [single Packet 1](slices/work-item-state-foundation/packet-1.md)
-requires [human activation/recovery selection](coverage-and-landing-map.md#next-plan-selection-gates),
-composition/kinds successor compatibility preparation and human implementation
-approval; positive eligibility and completion effects remain outside the slice.
-The proposed explicit work-registration activation on current local-check D/G
+has [human-approved activation/recovery and compatibility selections](coverage-and-landing-map.md#next-plan-selection-gates)
+and complete bounded implementation authorization after clean selection review
+and separate fresh dispatch. Implementation remains not started; its result stops
+at Packet-1 human review. Positive eligibility and completion effects remain outside the slice.
+The selected explicit work-registration activation on current local-check D/G
 supersedes the earlier initial-only recommendation. This API does not exist yet;
 local-check permission cannot be reinterpreted as work permission.
-No successor implementation, new phase or local-check Packet 5 is authorized.
+Flexibility implementation follows separately after that checkpoint; no adjacent
+implementation, new phase or local-check Packet 5 is authorized. CR's separate
+management/use/representation choices remain unselected.
 The human has selected [local-advisory authority](semantic-model/amendments/approval-authority-and-assurance.md)
 for the complete workflow, including later Contracts lifecycle and repeated source
 admission/revalidation; hardware/authenticator acquisition is not a predecessor.

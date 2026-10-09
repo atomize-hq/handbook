@@ -100,14 +100,24 @@ records this document landing separately from future native/SDK work. The four
 research reports linked by the amendment are retained as proposed, dated evidence.
 HR-001 through HR-007 and completed slice history retain their original authority.
 
-**Remaining choices:** Physical work-state/structure, definition, applicability
-and action owners; registry versus equivalent reuse; concrete lifecycle states,
+**Subsequent bounded realization:** The [foundation plan](../slices/work-item-state-foundation/README.md)
+now records human-selected Engine work-state/definition placement, explicit D/G
+work-registration activation, exact publication/recovery and prepared successor
+compatibility. The human authorized all of Packet 1, with execution following clean
+selection review and separate fresh dispatch; implementation is not started and ends at its human
+review boundary. Immediate flexibility implementation follows separately after
+that checkpoint. CR choices remain unselected.
+
+**Remaining choices outside that foundation:** Physical applicability
+and action owners, further work/definition realization; concrete lifecycle states,
 operations and reopen/cancel/removal semantics; exact policies, eligible populations,
 coverage and assessment protocols; identity/resolver, storage, concurrency,
-recovery and retention; and the first usable SDK workflow. Multi-parent/external
-relations and adapters remain later. No format, schema, first implementation slice,
-new packet or Phase-6 reorder is selected. Native/SDK preparation and implementation
-require their separate bounded authorization after the integration recap.
+recovery and retention beyond the selected first SDK workflow. Multi-parent/external
+relations and adapters remain later. The semantic integration itself selected no
+format, schema or first implementation slice; the subsequent foundation owns its
+additive JSON and bounded native/SDK selections. No new phase, local-check Packet 5
+or Phase-6 reorder is selected. Further preparation and implementation require
+their separate bounded authorization.
 
 ## HR-001 — Authority to establish policy-admission requirements
 
