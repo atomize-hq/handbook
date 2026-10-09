@@ -1,9 +1,14 @@
 # Work compositions and kinds — Packet 1: unified explicit-composition registration
 
-Status: **revised next-increment plan; unified direction selected; recommendation A
-requires exact human selection and plan authorization before product edits** —
-2026-10-09. Part of [one slice](README.md); no implementation or permission to
+Status: **recommendation A implemented and verified at this local Packet-1
+checkpoint; human recap next** — 2026-10-09. Part of [one slice](README.md); no permission to
 establish/use kinds. Supersedes the parallel-stream Packet-1 proposal.
+
+The human approved this complete plan at `277674e2` after the practical workflow
+and exact Contracts-definition clarification. Selection is recorded in the
+[slice](README.md). The implementation task verified the
+expected branch/HEAD and clean tracked tree before product edits. No further
+plan approval is required for Packet 1.
 
 ## Observable behavior and checkpoint
 
@@ -46,10 +51,11 @@ independently meaningful outcome triggers the lifecycle's earlier checkpoint.
 
 Foundation and its semantic compatibility cases are complete
 [predecessors](README.md#predecessor-evidence-and-source-constraints). Before product
-edits, meta must obtain selection of
-[recommendation A](README.md#proposed-authorization-lifecycle), authorize this plan
-and prove dispatch prerequisites. **One registration model is selected, not a
-pending alternative.** The following A details are proposed, not runtime permission.
+edits, the implementation task records the already approved
+[recommendation A](README.md#selected-authorization-lifecycle) and plan and confirms
+dispatch prerequisites. **One registration model is selected, not a
+pending alternative.** The following A details are selected implementation
+authority, not runtime project permission.
 
 Terms bind project/root, original initial/check/Charter lineage, current supported
 D/G basis, original claimed human/check agent, approval/source/instruction/
@@ -58,7 +64,7 @@ read/write reach, reserved decisions, revocation principal and retained history.
 The fixed external rule authorizes establishment/change; candidates cannot
 authorize themselves. Principal/delegation/approval remain local advisory claims.
 
-Proposed closed scope has at most one clause per permitted menu descriptor:
+Selected closed scope has at most one clause per permitted menu descriptor:
 
 | Clause | Human-supplied permission and owner ceiling |
 | --- | --- |
@@ -86,7 +92,7 @@ Accepted administrative intent reserves the single head and suspends predecessor
 use. Candidate and competing administration are unusable. Proven original-key
 noncommit releases the reservation; predecessor use resumes only with original
 currentness/unrevoked proof. Uncertainty keeps suspension. This availability
-consequence is part of A for human selection; retained item/history reads stay
+consequence is part of the human-selected A; retained item/history reads stay
 available with complete proof.
 
 ## Meaningful refusals
@@ -273,19 +279,19 @@ locks/identity as proof. No bulk cancellation/transfer/store reset is implied.
    change, P/I reopen/current/history/lost-reply recovery and clear refusal steps,
    without fault helpers/private file knowledge.
 
-Likely product paths after authorization: Engine work-state types/store/transactions
-and narrow held authority seam; SDK facade/example/usage; focused owner/SDK
-retention/durability/integrity targets. No Contracts semantic rewrite. Reuse Engine
+Delivered implementation: Engine work-state types/scope/transactions use the
+existing store and held authority seam; SDK facade/example/usage and focused
+owner/SDK retention/durability/integrity targets exercise the selected boundary.
+No Contracts semantic rewrite. Reuse Engine
 duplicate-safe complete JSON/canonical identity and retained-root primitives;
 no inward SDK dependency. Require the format standard with PROPOSED general
 defaults, fixed Contracts JSON and existing identities.
 
-Dependent steps: finalize typed scope/lifecycle contracts; implement native menu
-and immutable successor admission/persistence/recovery; connect single SDK surface
-and usage; verify acceptance and review the outcome. These steps authorize no
-product work during preparation or another packet.
+The typed scope/lifecycle, native menu, immutable successor admission and original
+recovery, single SDK surface and usage are implemented. These results authorize
+no other packet; the local checkpoint returns for the human recap.
 
-Proportionate implementation command plan, **not run by this documentation task**:
+Focused implementation checks:
 
 ```text
 cargo test -p handbook-engine --test work_state
@@ -296,6 +302,23 @@ cargo check -p handbook-engine -p handbook-sdk
 cargo check -p handbook-sdk --example work_state
 git diff --check
 ```
+
+Actual verification: Engine codecs 5/5; plain SDK workflow 10/10 plus the final
+added closed-codec test 1/1; optimized durability 11 passed with two intentionally
+ignored process-child entrypoints, integrity 9/9, and the freshly rebuilt final
+pending-administration/noncommit-key test 1/1. The final retained target passed
+3/3 across 14 real physical roots freshly emitted by the untouched original
+writer; golden bytes and occupied original records stayed exact. A separate
+default-feature consumer passed 21 saved-locator process invocations with normal
+dependencies and no fault helpers. Engine/SDK and example checks, scoped formatting,
+local Markdown links and diff checks passed. Windows was exercised; Unix and a
+full-workspace replay were not. Plain SDK tests used a command-local 32 MiB stack;
+the example uses 8 MiB. The optimized four-thread durability run took 959.54 seconds,
+so the inherited P3 scan-cost advisory remains. GitNexus change detection was
+attempted: the stale index does not map this delta; its CRITICAL branch-versus-main
+result covers inherited scope, with direct-source review used for this packet.
+One fresh focused causal review returned **APPROVE**, with no unresolved P1/P2
+and no new P3/P4 findings; the inherited scan-cost advisory is non-blocking.
 
 Extend focused targets or add narrow new targets; run ordinary consumer with normal
 dependencies/default features separately from fault helpers. Report actual Windows/

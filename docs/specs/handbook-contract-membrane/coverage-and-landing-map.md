@@ -232,9 +232,11 @@ evidence confirms all eight conditions, integration, aggregate completion/closeo
 and the human recap. The human then requested bounded
 [configurable composition/kinds preparation](slices/work-compositions-and-kinds/README.md),
 whose [first increment](slices/work-compositions-and-kinds/packet-1.md) now uses the
-human-selected unified registration model. Proposed scope/lifecycle details require
-exact human selection and plan authorization. No product
-suite rerun or new predecessor closeout is claimed by this status reconciliation.
+human-selected unified registration model. The human selected recommendation A
+and approved all of the reviewed Packet-1 plan at `277674e2`; it is implemented
+and verified at this local checkpoint, returning for its human recap.
+Recommendation B remains unselected. No unrelated suite rerun or new predecessor
+closeout is claimed by this status reconciliation.
 
 ### Joint authority and recovery reconciliation
 
@@ -273,7 +275,8 @@ These are outcome units, not new phase/packet identities or execution permission
 Each independently meaningful landing returns for human review before continuation.
 Unit 1 is complete. Unit 2's [slice preparation](slices/work-compositions-and-kinds/README.md)
 now details only its first review increment under the selected unified registration
-direction, with bounded lifecycle details and kind-definition authority proposed.
+direction and human-selected recommendation A, with Packet-1 implementation
+authorized. Kind-definition recommendation B remains proposed and unselected.
 Unit 2's compatibility boundary below was
 prepared and human-selected **before unit 1 implementation**. The human approved
 unit 1's complete Packet-1 plan, with execution following recording and clean review of these selections;
@@ -283,7 +286,7 @@ approval does not select the remainder of this proposed serial order.
 | Order / outcome | Actual dependency and landing checkpoint |
 | --- | --- |
 | 1. Corrected work-state foundation | Complete at `cbfbf76`; supplied meta aggregate acceptance/closeout and human recap are complete. Delivers expressly activated registration permission on current local-check D/G, exact `open` leaf registration/current/history/recovery and unsupported completion through SDK. Checkpoint reviewed: a continuing project registers work under new terms; local-check permission alone refuses. |
-| 2. [Configurable compositions and optional immutable kinds](slices/work-compositions-and-kinds/README.md) | Foundation and recap complete. Human-selected: Engine placement, ordinary/planning-output/requirements-input menu, no item rebinding, one composition-aware registration authority and separate kind definition. Reassessed first packet delivers one typed registration path and proposed exact-scope establishment/change/D→G/revocation/recovery; immutable kinds follow separately. Lifecycle details and later kind rule need selection; execution unauthorized. Checkpoint: a continuing ordinary-only project explicitly authorizes P/I, prior scope never widens implicitly, retained items/requests remain exact. No permanent legacy API, parallel stream, special version upgrade or storage redesign. |
+| 2. [Configurable compositions and optional immutable kinds](slices/work-compositions-and-kinds/README.md) | Foundation and recap complete. Human-selected: Engine placement, ordinary/planning-output/requirements-input menu, no item rebinding, one composition-aware registration authority and separate kind definition. First packet delivers one typed registration path and human-selected exact-scope establishment/change/D→G/revocation/recovery, implemented and verified at this local checkpoint under the reviewed `277674e2` plan; human recap is next. Immutable kinds follow separately; recommendation B and kind preparation remain unselected and unauthorized. Checkpoint: a continuing ordinary-only project explicitly authorizes P/I, prior scope never widens implicitly, retained items/requests remain exact. No permanent legacy API, parallel stream, special version upgrade or storage redesign. |
 | 3. Native local Context Resolution root binding | Recommended after the first flexibility landing; this is a sequencing choice, not a hard dependency on 1/2. Requires its own human selections and bounded preparation below. Deliver reusable root-only use, explicit management/use establishment, currentness, history/recovery and selected replacement/revocation. Checkpoint: reopen and use B1, refuse unpermitted B2 management. Work authority cannot substitute. |
 | 4. Hierarchy and typed prerequisite facts | Depends on 1/2's identity/composition participation. Deliver same-project one-parent relations, authoritative revisions and coherent finite cuts, start/close/both roles, distinct grouping/reference/order, and structural/closure-cycle refusal. Checkpoint: Feature → Phase → Slice → Task branching plus one shared cross-branch prerequisite preserves one identity and rejects a closure deadlock. This alone grants no start/close effect or eligibility. |
 | 5. Positive leaf eligibility | Depends on work/composition facts and selected governing assignment, assessment protocol, complete exact roles/coverage/populations and current qualification. Relation-dependent questions additionally require 4; relation-free leaf eligibility need not wait for every hierarchy capability or CR. Checkpoint: a declared result population produces atomic eligibility/disposition; a direct pass alone or missing required coverage cannot. Physical Work Progression placement remains downstream of Engine and Contracts. |

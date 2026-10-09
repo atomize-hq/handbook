@@ -1,4 +1,5 @@
 //! Native retained-owner loss and proof closure through live publication.
+#[allow(dead_code)]
 mod work_state_support;
 use handbook_engine::work_state::{
     NativeWorkStateV1, WorkWriteBoundaryV1, WORK_STATE_FULL_OWNER_REACH_V1,
@@ -7,6 +8,7 @@ use handbook_sdk::work_state::*;
 use handbook_sdk::HandbookSdkV1;
 use std::fs;
 use tempfile::tempdir;
+use work_state_support::ordinary_scope;
 
 fn prepared_activation() -> (
     tempfile::TempDir,
@@ -44,7 +46,7 @@ fn prepared_activation() -> (
         human_approval_asserted: true,
         approved_content_fingerprint: String::new(),
         effect: "register_open_leaf".into(),
-        composition: WorkCompositionV1::ordinary_leaf(),
+        scope: ordinary_scope(),
         owner_read_reach: WORK_STATE_FULL_OWNER_REACH_V1.into(),
         owner_write_reach: WORK_STATE_FULL_OWNER_REACH_V1.into(),
         reserved_decisions: vec![
@@ -57,7 +59,7 @@ fn prepared_activation() -> (
     };
     terms.approved_content_fingerprint = terms.fingerprint_approved_content().unwrap();
     let p = s
-        .prepare_work_registration_terms(&i, &c, terms, None)
+        .prepare_work_registration_terms(&i, &c, terms, WorkTermsTransitionV1::Initial)
         .unwrap();
     (d, s, i, p)
 }
@@ -81,6 +83,7 @@ fn input(g: &WorkGrantLocatorV1) -> WorkRegistrationInputV1 {
         actor: g.terms.agent.clone(),
         expected_state: "absent".into(),
         composition: WorkCompositionV1::ordinary_leaf(),
+        display_level: None,
     }
 }
 #[test]
@@ -313,7 +316,12 @@ fn lost_whole_activation_transaction_never_restores_grant_or_owner_absence() {
         replacement.approved_content_fingerprint =
             replacement.fingerprint_approved_content().unwrap();
         assert!(s
-            .prepare_work_registration_terms(&i, &original.check, replacement, None)
+            .prepare_work_registration_terms(
+                &i,
+                &original.check,
+                replacement,
+                WorkTermsTransitionV1::Initial
+            )
             .is_err());
         assert!(!lost.exists(), "lost activation was reconstructed");
         assert!(!d
@@ -401,8 +409,12 @@ fn actual_early_bootstrap_interruption_stays_uncertain_without_identity_or_lock_
     let mut replacement = original.terms.clone();
     replacement.request_key = "replacement-bootstrap".into();
     replacement.approved_content_fingerprint = replacement.fingerprint_approved_content().unwrap();
-    if let Ok(prepared) = s.prepare_work_registration_terms(&i, &original.check, replacement, None)
-    {
+    if let Ok(prepared) = s.prepare_work_registration_terms(
+        &i,
+        &original.check,
+        replacement,
+        WorkTermsTransitionV1::Initial,
+    ) {
         let attempted = s.activate_work_registration_terms(prepared);
         assert!(
             matches!(
@@ -633,7 +645,12 @@ fn staged_original_registration_and_activation_retry_report_uncertain_after_acce
         .resolve_current_work_registration_terms(&initial, &original)
         .is_err());
     let repeated = sdk
-        .prepare_work_registration_terms(&initial, &original.check, original.terms.clone(), None)
+        .prepare_work_registration_terms(
+            &initial,
+            &original.check,
+            original.terms.clone(),
+            WorkTermsTransitionV1::Initial,
+        )
         .unwrap();
     assert_eq!(repeated.locator(), &original);
     let retry = NativeWorkStateV1::activate_with_boundary_for_test(d.path(), repeated, |at| {

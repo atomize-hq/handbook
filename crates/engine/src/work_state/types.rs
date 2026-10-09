@@ -22,15 +22,32 @@ impl WorkDescriptorV1 {
             completion_support: "unsupported_not_assessed".into(),
         }
     }
+    pub fn planning_output() -> Self {
+        Self {
+            reference: PLANNING_OUTPUT_COMPOSITION_V1.into(),
+            role_schema: vec!["required_contract_output_question@1.0.0".into()],
+            ..Self::ordinary_leaf()
+        }
+    }
+    pub fn requirements_input() -> Self {
+        Self {
+            reference: REQUIREMENTS_INPUT_COMPOSITION_V1.into(),
+            role_schema: vec!["exact_requirements_definition@1.0.0".into()],
+            ..Self::ordinary_leaf()
+        }
+    }
     pub fn canonical_json_bytes(&self) -> Result<Vec<u8>, LocalAuthorityRefusalV1> {
         self.validate()?;
         encode(self)
     }
-    fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
-        if self != &Self::ordinary_leaf() {
+    pub(super) fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
+        if self != &Self::ordinary_leaf()
+            && self != &Self::planning_output()
+            && self != &Self::requirements_input()
+        {
             Err(refuse(
                 "unsupported_work_composition",
-                "only exact fixed ordinary open leaf composition is supported",
+                "exact fixed ordinary/planning-output/requirements-input open leaf descriptor required",
             ))
         } else {
             Ok(())
@@ -42,12 +59,31 @@ impl WorkDescriptorV1 {
 pub struct WorkCompositionV1 {
     pub descriptor: WorkDescriptorV1,
     pub kind: Option<crate::local_authority::LocalBindingV1>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub role: Option<WorkRoleValueV1>,
 }
 impl WorkCompositionV1 {
     pub fn ordinary_leaf() -> Self {
         Self {
             descriptor: WorkDescriptorV1::ordinary_leaf(),
             kind: None,
+            role: None,
+        }
+    }
+    pub fn planning_output(question: impl Into<String>) -> Self {
+        Self {
+            descriptor: WorkDescriptorV1::planning_output(),
+            kind: None,
+            role: Some(WorkRoleValueV1::PlanningOutput {
+                question: question.into(),
+            }),
+        }
+    }
+    pub fn requirements_input(definition: WorkRequirementsDefinitionV1) -> Self {
+        Self {
+            descriptor: WorkDescriptorV1::requirements_input(),
+            kind: None,
+            role: Some(WorkRoleValueV1::RequirementsInput { definition }),
         }
     }
     fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
@@ -57,6 +93,25 @@ impl WorkCompositionV1 {
                 "unsupported_work_kind",
                 "kind bindings require separately supported definition authority",
             ));
+        }
+        match (&self.descriptor, &self.role) {
+            (d, None) if d == &WorkDescriptorV1::ordinary_leaf() => {}
+            (d, Some(WorkRoleValueV1::PlanningOutput { question }))
+                if d == &WorkDescriptorV1::planning_output() =>
+            {
+                text(question)?
+            }
+            (d, Some(WorkRoleValueV1::RequirementsInput { definition }))
+                if d == &WorkDescriptorV1::requirements_input() =>
+            {
+                definition.validate()?
+            }
+            _ => {
+                return Err(refuse(
+                    "work_role_values",
+                    "exact descriptor and complete matching role value required",
+                ))
+            }
         }
         Ok(())
     }
@@ -78,7 +133,9 @@ pub struct WorkRegistrationTermsV1 {
     pub human_approval_asserted: bool,
     pub approved_content_fingerprint: String,
     pub effect: String,
-    pub composition: WorkCompositionV1,
+    /// Schema dispatch retains the original singleton wire field exactly.
+    #[serde(rename = "composition")]
+    pub scope: WorkRegistrationScopeV1,
     pub owner_write_reach: String,
     pub owner_read_reach: String,
     pub reserved_decisions: Vec<String>,
@@ -114,7 +171,7 @@ impl WorkRegistrationTermsV1 {
         ] {
             text(v)?;
         }
-        self.composition.validate()?;
+        self.scope.validate()?;
         if self.rule_ref != WORK_REGISTRATION_RULE_V1
             || self.mode != "local_advisory"
             || self.effect != "register_open_leaf"
@@ -137,8 +194,10 @@ impl WorkRegistrationTermsV1 {
 pub struct WorkGrantLocatorV1 {
     pub check: LocalCheckLocatorV1,
     pub basis: LocalCheckCurrentBasisV1,
-    /// Exactly one predecessor, allowed only for explicit compatible D→G.
+    /// Exactly one expected predecessor for scope change or unchanged-scope D→G.
     pub predecessor_grant_fingerprint: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub change: Option<WorkAuthorityChangeV1>,
     pub terms: WorkRegistrationTermsV1,
     pub fingerprint: String,
 }
@@ -155,6 +214,21 @@ impl WorkGrantLocatorV1 {
     pub(crate) fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
         self.check.canonical_json_bytes()?;
         self.terms.validate()?;
+        if self.change == Some(WorkAuthorityChangeV1::Initial)
+            && self.predecessor_grant_fingerprint.is_some()
+            || matches!(
+                self.change,
+                Some(
+                    WorkAuthorityChangeV1::ScopeChange
+                        | WorkAuthorityChangeV1::EstablishFromDeferred
+                )
+            ) && self.predecessor_grant_fingerprint.is_none()
+        {
+            return Err(refuse(
+                "work_change_binding",
+                "explicit change and expected predecessor differ",
+            ));
+        }
         if self.terms.principal != self.check.predecessor.terms.principal
             || self.terms.agent != self.check.terms.agent
             || self.fingerprint != self.identity()?
@@ -167,6 +241,18 @@ impl WorkGrantLocatorV1 {
         Ok(())
     }
     pub(crate) fn identity(&self) -> Result<String, LocalAuthorityRefusalV1> {
+        if let Some(change) = self.change {
+            return fp(
+                "handbook.work-registration-grant@2.0.0",
+                &(
+                    &self.check,
+                    &self.basis,
+                    &self.predecessor_grant_fingerprint,
+                    &self.terms,
+                    change,
+                ),
+            );
+        }
         fp(
             WORK_REGISTRATION_RULE_V1,
             &(
@@ -213,6 +299,8 @@ pub struct WorkRegistrationInputV1 {
     pub actor: String,
     pub expected_state: String,
     pub composition: WorkCompositionV1,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub display_level: Option<String>,
 }
 impl WorkRegistrationInputV1 {
     pub fn canonical_json_bytes(&self) -> Result<Vec<u8>, LocalAuthorityRefusalV1> {
@@ -231,6 +319,9 @@ impl WorkRegistrationInputV1 {
             text(v)?;
         }
         self.composition.validate()?;
+        if let Some(level) = &self.display_level {
+            token(level)?;
+        }
         if self.expected_state != "absent" {
             return Err(refuse(
                 "unsupported_work_effect",
@@ -262,8 +353,8 @@ impl WorkRequestLocatorV1 {
     pub(crate) fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
         self.grant.validate()?;
         self.input.validate()?;
+        self.grant.terms.scope.permits(&self.input)?;
         if self.input.actor != self.grant.terms.agent
-            || self.input.composition != self.grant.terms.composition
             || self.item_identity
                 != work_item_identity_v1(self.grant.project(), &self.input.item_key)?
             || self.fingerprint != self.identity()?
@@ -306,6 +397,10 @@ pub struct WorkSnapshotV1 {
     pub item_key: String,
     pub label: String,
     pub question: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub display_level: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub role: Option<WorkRoleValueV1>,
     pub state: String,
     pub descriptor: WorkDescriptorV1,
     pub descriptor_bytes: Vec<u8>,

@@ -1,8 +1,10 @@
 //! Immutable same-project open leaf registration. Retained history is distinct
 //! from current operating permission; terminal publication is the commit point.
+mod scope;
 mod store;
 mod transaction;
 mod types;
+pub use scope::*;
 pub use transaction::{NativeWorkStateV1, WorkWriteBoundaryV1};
 pub use types::*;
 

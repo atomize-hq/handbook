@@ -25,11 +25,14 @@ fn main() {
 fn run() -> Result<(), String> {
     let args = std::env::args().skip(1).collect::<Vec<_>>();
     if args.len() < 3 {
-        return Err("usage: work_state activate ROOT INITIAL CHECK TERMS SAVE [PREDECESSOR] | register ROOT INITIAL GRANT INPUT SAVE | current ROOT GRANT ITEM_KEY | current-terms ROOT INITIAL GRANT | terms-history/recover-terms ROOT GRANT | history/recover/completion ROOT REQUEST | revoke ROOT GRANT KEY PRINCIPAL SOURCE INSTRUCTION SAVE | revoke-history/recover-revoke ROOT REVOCATION".into());
+        return Err("usage: work_state activate ROOT INITIAL CHECK TERMS SAVE | change-scope/establish-from-deferred ROOT INITIAL CHECK TERMS SAVE PREDECESSOR | register ROOT INITIAL GRANT INPUT SAVE | current ROOT GRANT ITEM_KEY | current-terms ROOT INITIAL GRANT | terms-history/recover-terms ROOT GRANT | history/recover/completion ROOT REQUEST | revoke ROOT GRANT KEY PRINCIPAL SOURCE INSTRUCTION SAVE | revoke-history/recover-revoke ROOT REVOCATION".into());
     }
     let sdk = HandbookSdkV1::open(&args[1]);
     match args[0].as_str() {
-        "activate" if args.len() == 6 || args.len() == 7 => {
+        "activate" | "change-scope" | "establish-from-deferred"
+            if (args[0] == "activate" && args.len() == 6)
+                || (args[0] != "activate" && args.len() == 7) =>
+        {
             let initial =
                 LocalInitialSetupLocatorV1::from_json_bytes(&read(&args[2])?).map_err(debug)?;
             let check = LocalCheckLocatorV1::from_json_bytes(&read(&args[3])?).map_err(debug)?;
@@ -40,8 +43,15 @@ fn run() -> Result<(), String> {
             } else {
                 None
             };
+            let transition = match args[0].as_str() {
+                "change-scope" => WorkTermsTransitionV1::ScopeChange(predecessor.as_ref().unwrap()),
+                "establish-from-deferred" => {
+                    WorkTermsTransitionV1::EstablishFromDeferred(predecessor.as_ref().unwrap())
+                }
+                _ => WorkTermsTransitionV1::Initial,
+            };
             let prepared = sdk
-                .prepare_work_registration_terms(&initial, &check, terms, predecessor.as_ref())
+                .prepare_work_registration_terms(&initial, &check, terms, transition)
                 .map_err(debug)?;
             save_new(
                 Path::new(&args[5]),

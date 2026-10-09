@@ -6,28 +6,33 @@ use crate::HandbookSdkV1;
 pub use handbook_engine::local_authority::LocalAuthorityRefusalV1;
 use handbook_engine::work_state::NativeWorkStateV1;
 pub use handbook_engine::work_state::{
-    work_item_identity_v1, PreparedWorkGrantV1, PreparedWorkRegistrationV1,
-    WorkCompletionSupportV1, WorkCompositionV1, WorkCurrentItemV1, WorkDescriptorV1,
-    WorkDispositionV1, WorkExecutionV1, WorkGrantLocatorV1, WorkGrantV1, WorkRegistrationInputV1,
-    WorkRegistrationReceiptV1, WorkRegistrationTermsV1, WorkRequestLocatorV1,
-    WorkRevocationReceiptV1, WorkRevokeLocatorV1, WorkSnapshotV1, ORDINARY_LEAF_COMPOSITION_V1,
-    WORK_IDENTITY_SCHEME_V1, WORK_REGISTRATION_RULE_V1, WORK_STATE_FULL_OWNER_REACH_V1,
+    work_item_identity_v1, PreparedWorkGrantV1, PreparedWorkRegistrationV1, WorkAuthorityChangeV1,
+    WorkCompletionSupportV1, WorkCompositionClauseV1, WorkCompositionV1, WorkCurrentItemV1,
+    WorkDefinitionFamilyV1, WorkDescriptorV1, WorkDispositionV1, WorkExecutionV1,
+    WorkExplicitScopeV1, WorkGrantLocatorV1, WorkGrantV1, WorkRegistrationInputV1,
+    WorkRegistrationReceiptV1, WorkRegistrationScopeV1, WorkRegistrationTermsV1,
+    WorkRequestLocatorV1, WorkRequirementsDefinitionV1, WorkRevocationReceiptV1,
+    WorkRevokeLocatorV1, WorkRolePermissionV1, WorkRoleValueV1, WorkSnapshotV1,
+    WorkTermsTransitionV1, ORDINARY_LEAF_COMPOSITION_V1, PLANNING_OUTPUT_COMPOSITION_V1,
+    REQUIREMENTS_INPUT_COMPOSITION_V1, WORK_EXPLICIT_SCOPE_V1, WORK_IDENTITY_SCHEME_V1,
+    WORK_REGISTRATION_RULE_V1, WORK_STATE_FULL_OWNER_REACH_V1,
 };
 
 impl HandbookSdkV1 {
     /// Prepares exact supplied human-approved terms under the fixed Engine
     /// establishment rule. Existing local-check terms alone supply no work grant.
-    /// The explicit predecessor is supported only for compatible D to G terms.
+    /// Select initial establishment, an exact same-basis scope successor, or
+    /// unchanged-scope D to G re-establishment. Each requires supplied approval.
     pub fn prepare_work_registration_terms(
         &self,
         initial: &LocalInitialSetupLocatorV1,
         check: &LocalCheckLocatorV1,
         terms: WorkRegistrationTermsV1,
-        predecessor: Option<&WorkGrantLocatorV1>,
+        transition: WorkTermsTransitionV1<'_>,
     ) -> Result<PreparedWorkGrantV1, LocalAuthorityRefusalV1> {
         require_initial(initial, check)?;
         let basis = self.observe_local_check_basis(initial)?;
-        NativeWorkStateV1::prepare_terms(&self.repo_root, check, basis, terms, predecessor)
+        NativeWorkStateV1::prepare_terms(&self.repo_root, check, basis, terms, transition)
     }
 
     /// Retain `prepared.locator()` before invocation. Activation's native
@@ -165,6 +170,52 @@ impl HandbookSdkV1 {
         locator: &WorkRequestLocatorV1,
     ) -> Result<WorkCompletionSupportV1, LocalAuthorityRefusalV1> {
         NativeWorkStateV1::completion_support(&self.repo_root, locator)
+    }
+}
+
+/// Copies one exact intrinsic Contracts definition. This declaration does not
+/// resolve source availability, qualification, governance or assessment.
+pub fn work_requirements_definition_from_intrinsic_v1(
+    definition: &handbook_contracts::ContractDefinitionV1,
+) -> WorkRequirementsDefinitionV1 {
+    let family = WorkDefinitionFamilyV1::IntrinsicV1;
+    WorkRequirementsDefinitionV1 {
+        owner: "handbook-contracts".into(),
+        family,
+        schema_ref: family.schema_ref().into(),
+        reference: definition.contract_ref().as_str().into(),
+        fingerprint: definition.definition_fingerprint().as_str().into(),
+    }
+}
+
+/// Copies the complete local V2 definition binding, including its dependencies.
+/// The embedded intrinsic fingerprint is not the complete definition identity.
+pub fn work_requirements_definition_from_local_v2(
+    definition: &handbook_contracts::LocalContractDefinitionV2,
+) -> WorkRequirementsDefinitionV1 {
+    requirements_definition_from_binding(
+        WorkDefinitionFamilyV1::CompleteLocalV2,
+        definition.binding(),
+    )
+}
+
+/// Copies the full local V3 definition binding, including evaluation dependencies.
+pub fn work_requirements_definition_from_full_local_v3(
+    definition: &handbook_contracts::LocalContractDefinitionV3,
+) -> WorkRequirementsDefinitionV1 {
+    requirements_definition_from_binding(WorkDefinitionFamilyV1::FullLocalV3, definition.binding())
+}
+
+fn requirements_definition_from_binding(
+    family: WorkDefinitionFamilyV1,
+    binding: handbook_contracts::ExactBindingV1,
+) -> WorkRequirementsDefinitionV1 {
+    WorkRequirementsDefinitionV1 {
+        owner: "handbook-contracts".into(),
+        family,
+        schema_ref: family.schema_ref().into(),
+        reference: binding.reference().as_str().into(),
+        fingerprint: binding.fingerprint().as_str().into(),
     }
 }
 

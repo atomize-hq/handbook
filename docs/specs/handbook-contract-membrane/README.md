@@ -154,10 +154,13 @@ The human selected one composition-aware registration authority for this greenfi
 project, superseding the parallel-stream preparation at `b7e0a48`. Its
 [first packet plan](slices/work-compositions-and-kinds/packet-1.md) now details
 unified ordinary/planning-output/requirements-input registration, exact approved
-scope and a proposed bounded human scope-change lifecycle. Lifecycle details need
-human selection and plan authorization; kind-definition authority remains separate
+scope and a bounded human scope-change lifecycle. The human selected
+recommendation A and approved the complete reviewed Packet-1 plan at `277674e2`;
+Packet 1 is implemented and verified at this local checkpoint; its human recap
+is next. Kind-definition recommendation B remains unselected
 and is a later choice. Retained truth/recovery is preserved without permanent old
-APIs or a special V1-to-menu upgrade. This preparation grants no product execution authority.
+APIs or a special V1-to-menu upgrade. Packet 1 ends at its human recap; no kind
+preparation or implementation is authorized.
 It delivers no positive Work Progression eligibility,
 governed completion, parent decision or close effect; those remain separately bounded.
 The initial-only recommendation at `6aba084` is superseded by selected explicit

@@ -6,7 +6,112 @@ use handbook_engine::{
 use handbook_sdk::admission_governance::DeferralRequestInputV2;
 use handbook_sdk::local_check::*;
 use handbook_sdk::local_setup::*;
+use handbook_sdk::work_state::*;
 use handbook_sdk::HandbookSdkV1;
+
+pub fn ordinary_scope() -> WorkRegistrationScopeV1 {
+    WorkRegistrationScopeV1::explicit(vec![WorkCompositionClauseV1 {
+        descriptor: WorkDescriptorV1::ordinary_leaf(),
+        label_max_bytes: 4096,
+        work_question_max_bytes: 4096,
+        allow_omitted_display_level: true,
+        display_levels: vec![],
+        role_permission: WorkRolePermissionV1::Ordinary {},
+    }])
+}
+
+pub fn menu_scope(definition: WorkRequirementsDefinitionV1) -> WorkRegistrationScopeV1 {
+    WorkRegistrationScopeV1::explicit(vec![
+        WorkCompositionClauseV1 {
+            descriptor: WorkDescriptorV1::ordinary_leaf(),
+            label_max_bytes: 128,
+            work_question_max_bytes: 256,
+            allow_omitted_display_level: true,
+            display_levels: vec!["task".into()],
+            role_permission: WorkRolePermissionV1::Ordinary {},
+        },
+        WorkCompositionClauseV1 {
+            descriptor: WorkDescriptorV1::planning_output(),
+            label_max_bytes: 128,
+            work_question_max_bytes: 256,
+            allow_omitted_display_level: false,
+            display_levels: vec!["planning".into()],
+            role_permission: WorkRolePermissionV1::PlanningOutput {
+                question_max_bytes: 256,
+            },
+        },
+        WorkCompositionClauseV1 {
+            descriptor: WorkDescriptorV1::requirements_input(),
+            label_max_bytes: 128,
+            work_question_max_bytes: 256,
+            allow_omitted_display_level: false,
+            display_levels: vec!["implementation".into()],
+            role_permission: WorkRolePermissionV1::RequirementsInput {
+                definitions: vec![definition],
+            },
+        },
+    ])
+}
+
+/// Owner-built exact definition; no lifecycle, source publication or qualification.
+pub fn supplied_intrinsic_definition(version: &str) -> handbook_contracts::ContractDefinitionV1 {
+    use handbook_contracts::*;
+    let binding = |reference: &str| {
+        ExactBindingV1::new(
+            ExactRefV1::parse(reference).unwrap(),
+            FingerprintV1::parse(&format!("sha256:{}", "a".repeat(64))).unwrap(),
+        )
+    };
+    let id = |value: &str| StableIdV1::parse(value).unwrap();
+    let selector = |field: &str, expected: &str| {
+        SelectorV1::new(
+            MatcherBindingV1::exact_fields_v1(),
+            vec![SelectorCriterionV1::new(id(field), expected).unwrap()],
+        )
+        .unwrap()
+    };
+    let claim = ContractClaimV1::new(ContractClaimInputV1 {
+        claim_id: id("session.renewal.valid"),
+        statement: "Session renewal satisfies the exact requirement.".into(),
+        subject_selector: selector("subject.kind", "session"),
+        case_selector: selector("case.kind", "renewal"),
+        applicability_rule: ApplicabilityRuleV1::SubjectAndCaseMatch,
+        gate_effect: GateEffectV1::Required,
+        evidence_requirements: vec![EvidenceRequirementV1::new(
+            id("handbook.evidence.schema-conformance"),
+            EvidenceCardinalityV1::ExactlyOne,
+            EvidenceCaseSelectionV1::ClaimCaseSelector,
+            binding("handbook.stability.exact@1.0.0"),
+        )
+        .unwrap()],
+        freshness_policy: binding("handbook.freshness.exact-revision@1.0.0"),
+        minimum_resolution: ResolutionMinimumV1::new(
+            binding("handbook.context-resolution.shipped-root@1.0.0"),
+            id("resolution.scope.local-observation"),
+            id("resolution.detail.identifier-only"),
+            id("resolution.time.current-operation"),
+            id("resolution.authority.read-only"),
+            id("resolution.memory.operation"),
+            id("resolution.validation.observation-only"),
+        ),
+        score_weight: None,
+    })
+    .unwrap();
+    ContractDefinitionV1::new(ContractDefinitionInputV1 {
+        definition_schema: binding("handbook.contract-definition@1.0.0"),
+        contract_id: ContractIdV1::parse("handbook.contract.session-renewal").unwrap(),
+        contract_version: VersionV1::parse(version).unwrap(),
+        contract_kind: ContractKindV1::ClaimSet,
+        claims: vec![claim],
+        definition_author_ref: id("user.definition-author"),
+        definition_authority: binding("handbook.authority.contract-author@1.0.0"),
+        lifecycle_policy: binding("handbook.contract-lifecycle-policy.independent-lock@1.0.0"),
+        matcher_bindings: vec![MatcherBindingV1::exact_fields_v1()],
+        gate_policy: binding("handbook.contract-gate-policy.closed-v1@1.0.0"),
+        extensions_policy: binding("handbook.contract-extensions.closed-v1@1.0.0"),
+    })
+    .unwrap()
+}
 const CHARTER: &[u8] = include_bytes!("../../../../docs/specs/handbook-contract-membrane/slices/HCM-2.2/contracts/canonical-charter-boundary-v1.1.yaml");
 pub fn supplied_initial_request() -> LocalInitialSetupRequestV1 {
     let content = handbook_engine::parse_definition_yaml(CHARTER).unwrap();

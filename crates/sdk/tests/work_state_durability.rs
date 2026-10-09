@@ -17,7 +17,7 @@ use std::{
     time::{Duration, Instant},
 };
 use tempfile::tempdir;
-use work_state_support::{establish_initial, supplied_successor_terms};
+use work_state_support::{establish_initial, menu_scope, ordinary_scope, supplied_successor_terms};
 
 fn setup(sdk: &HandbookSdkV1) -> (LocalInitialSetupLocatorV1, LocalCheckLocatorV1) {
     let initial = establish_initial(sdk);
@@ -51,7 +51,7 @@ fn terms(check: &LocalCheckLocatorV1, key: &str) -> WorkRegistrationTermsV1 {
         human_approval_asserted: true,
         approved_content_fingerprint: String::new(),
         effect: "register_open_leaf".into(),
-        composition: WorkCompositionV1::ordinary_leaf(),
+        scope: ordinary_scope(),
         owner_write_reach: WORK_STATE_FULL_OWNER_REACH_V1.into(),
         owner_read_reach: WORK_STATE_FULL_OWNER_REACH_V1.into(),
         reserved_decisions: vec![
@@ -73,7 +73,15 @@ fn activate(
     prior: Option<&WorkGrantLocatorV1>,
 ) -> WorkGrantLocatorV1 {
     let p = sdk
-        .prepare_work_registration_terms(initial, check, terms(check, key), prior)
+        .prepare_work_registration_terms(
+            initial,
+            check,
+            terms(check, key),
+            prior.map_or(
+                WorkTermsTransitionV1::Initial,
+                WorkTermsTransitionV1::EstablishFromDeferred,
+            ),
+        )
         .unwrap();
     let l = p.locator().clone();
     let e = sdk.activate_work_registration_terms(p);
@@ -89,6 +97,7 @@ fn input(grant: &WorkGrantLocatorV1, key: &str, item: &str) -> WorkRegistrationI
         actor: grant.terms.agent.clone(),
         expected_state: "absent".into(),
         composition: WorkCompositionV1::ordinary_leaf(),
+        display_level: None,
     }
 }
 fn govern(sdk: &HandbookSdkV1, initial: &LocalInitialSetupLocatorV1) {
@@ -288,7 +297,7 @@ fn activation_and_revocation_have_the_same_terminal_and_original_recovery_bounda
                             &initial,
                             &check,
                             terms(&check, "activation"),
-                            None,
+                            WorkTermsTransitionV1::Initial,
                         )
                         .unwrap();
                     let grant = p.locator().clone();
@@ -630,7 +639,12 @@ fn native_work_child() {
     };
     if mode == "activate" {
         let p = sdk
-            .prepare_work_registration_terms(&initial, &check, terms(&check, "grant"), None)
+            .prepare_work_registration_terms(
+                &initial,
+                &check,
+                terms(&check, "grant"),
+                WorkTermsTransitionV1::Initial,
+            )
             .unwrap();
         let grant = p.locator().clone();
         let e = NativeWorkStateV1::activate_with_boundary_for_test(repo, p, &mut pause);
@@ -725,7 +739,10 @@ fn explicit_g_first_activation_and_interrupted_compatible_g_reestablishment_reco
                     &initial,
                     &check,
                     terms(&check, "grant-G"),
-                    d.as_ref(),
+                    d.as_ref().map_or(
+                        WorkTermsTransitionV1::Initial,
+                        WorkTermsTransitionV1::EstablishFromDeferred,
+                    ),
                 )
                 .unwrap();
             let original = p.locator().clone();
@@ -748,6 +765,467 @@ fn explicit_g_first_activation_and_interrupted_compatible_g_reestablishment_reco
                 sdk.resolve_current_work_registration_terms(&initial, &original)
                     .unwrap();
             }
+        }
+    }
+}
+
+fn menu_terms(check: &LocalCheckLocatorV1, key: &str) -> WorkRegistrationTermsV1 {
+    let mut value = terms(check, key);
+    value.scope = menu_scope(work_requirements_definition_from_intrinsic_v1(
+        &work_state_support::supplied_intrinsic_definition("1.0.0"),
+    ));
+    value.approved_content_fingerprint = value.fingerprint_approved_content().unwrap();
+    value
+}
+
+fn activate_menu(
+    sdk: &HandbookSdkV1,
+    initial: &LocalInitialSetupLocatorV1,
+    check: &LocalCheckLocatorV1,
+) -> WorkGrantLocatorV1 {
+    let prepared = sdk
+        .prepare_work_registration_terms(
+            initial,
+            check,
+            menu_terms(check, "menu"),
+            WorkTermsTransitionV1::Initial,
+        )
+        .unwrap();
+    let original = prepared.locator().clone();
+    let execution = sdk.activate_work_registration_terms(prepared);
+    assert_eq!(
+        execution.disposition,
+        WorkDispositionV1::Committed,
+        "{execution:?}"
+    );
+    original
+}
+
+fn role_input(grant: &WorkGrantLocatorV1, planning: bool, key: &str) -> WorkRegistrationInputV1 {
+    let mut value = input(grant, key, key);
+    if planning {
+        value.display_level = Some("planning".into());
+        value.composition =
+            WorkCompositionV1::planning_output("What exact requirement should renewal satisfy?");
+    } else {
+        value.display_level = Some("implementation".into());
+        value.composition =
+            WorkCompositionV1::requirements_input(work_requirements_definition_from_intrinsic_v1(
+                &work_state_support::supplied_intrinsic_definition("1.0.0"),
+            ));
+    }
+    value
+}
+
+#[test]
+fn planning_and_requirements_prefixes_never_borrow_successor_or_transition_authority() {
+    for planning in [false, true] {
+        for at in [B::Intent, B::Snapshot, B::PublicationAttempt, B::Terminal] {
+            for transition in 0..4 {
+                let dir = tempdir().unwrap();
+                let sdk = HandbookSdkV1::open(dir.path());
+                let (initial, check) = setup(&sdk);
+                let grant = activate_menu(&sdk, &initial, &check);
+                let prepared = sdk
+                    .prepare_work_registration(
+                        &initial,
+                        &grant,
+                        role_input(&grant, planning, "original-role"),
+                    )
+                    .unwrap();
+                let original = prepared.locator().clone();
+                NativeWorkStateV1::register_with_boundary_for_test(dir.path(), prepared, fault(at));
+                match transition {
+                    0 => {
+                        // Exact overlap still cannot supply an old request's authority.
+                        let prepared = sdk
+                            .prepare_work_registration_terms(
+                                &initial,
+                                &check,
+                                menu_terms(&check, "overlap-successor"),
+                                WorkTermsTransitionV1::ScopeChange(&grant),
+                            )
+                            .unwrap();
+                        assert_eq!(
+                            sdk.activate_work_registration_terms(prepared).disposition,
+                            WorkDispositionV1::Committed
+                        );
+                    }
+                    1 => revoke(&sdk, &grant),
+                    2 => govern(&sdk, &initial),
+                    _ => reset(&sdk),
+                }
+                let recovered = sdk.recover_work_registration_request(&original);
+                let expected = if at == B::Terminal {
+                    WorkDispositionV1::Replayed
+                } else if at == B::PublicationAttempt {
+                    WorkDispositionV1::Uncertain
+                } else {
+                    WorkDispositionV1::NonCommitted
+                };
+                assert_eq!(
+                    recovered.disposition, expected,
+                    "planning={planning} {at:?} transition={transition}: {recovered:?}"
+                );
+                if at == B::Terminal {
+                    let receipt = recovered.outcome.unwrap();
+                    assert_eq!(receipt.snapshot.role, original.input.composition.role);
+                    assert_eq!(receipt.snapshot.display_level, original.input.display_level);
+                }
+            }
+        }
+    }
+}
+
+#[test]
+fn pending_scope_administration_suspends_use_and_original_noncommit_controls_release() {
+    for at in [B::Intent, B::Decision, B::Snapshot, B::PublicationAttempt] {
+        for lost_basis in [false, true] {
+            let dir = tempdir().unwrap();
+            let sdk = HandbookSdkV1::open(dir.path());
+            let (initial, check) = setup(&sdk);
+            let grant = activate_menu(&sdk, &initial, &check);
+            let prepared = sdk
+                .prepare_work_registration_terms(
+                    &initial,
+                    &check,
+                    terms(&check, "narrowing"),
+                    WorkTermsTransitionV1::ScopeChange(&grant),
+                )
+                .unwrap();
+            let original = prepared.locator().clone();
+            NativeWorkStateV1::activate_with_boundary_for_test(dir.path(), prepared, fault(at));
+            assert!(sdk
+                .resolve_current_work_registration_terms(&initial, &grant)
+                .is_err());
+            assert!(sdk
+                .prepare_work_registration(
+                    &initial,
+                    &original,
+                    role_input(&original, true, "candidate-use")
+                )
+                .is_err());
+            assert!(sdk
+                .prepare_work_registration_terms(
+                    &initial,
+                    &check,
+                    terms(&check, "competing"),
+                    WorkTermsTransitionV1::ScopeChange(&grant)
+                )
+                .is_err());
+            if lost_basis {
+                govern(&sdk, &initial);
+            }
+            let execution = NativeWorkStateV1::recover_terms_with_boundary_for_test(
+                dir.path(),
+                &original,
+                fault(B::Snapshot),
+            );
+            let expected = if at == B::PublicationAttempt {
+                WorkDispositionV1::Uncertain
+            } else {
+                WorkDispositionV1::NonCommitted
+            };
+            assert_eq!(
+                execution.disposition, expected,
+                "{at:?} lost={lost_basis}: {execution:?}"
+            );
+            assert_eq!(
+                sdk.resolve_current_work_registration_terms(&initial, &grant)
+                    .is_ok(),
+                !lost_basis && at != B::PublicationAttempt
+            );
+            assert_eq!(
+                sdk.resolve_work_registration_terms_request(&original)
+                    .disposition,
+                expected
+            );
+            if !lost_basis && expected == WorkDispositionV1::NonCommitted {
+                let changed = menu_terms(&check, "narrowing");
+                match sdk.prepare_work_registration_terms(
+                    &initial,
+                    &check,
+                    changed,
+                    WorkTermsTransitionV1::ScopeChange(&grant),
+                ) {
+                    Err(_) => {}
+                    Ok(prepared) => assert_eq!(
+                        sdk.activate_work_registration_terms(prepared).disposition,
+                        WorkDispositionV1::Refused
+                    ),
+                }
+                assert_eq!(
+                    sdk.recover_work_registration_terms_request(&original)
+                        .disposition,
+                    WorkDispositionV1::NonCommitted
+                );
+            }
+        }
+    }
+}
+
+fn role_child(repo: &Path, mode: &str, planning: bool, pause: bool) -> std::process::Child {
+    Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "native_role_child", "--ignored", "--nocapture"])
+        .env("ROLE_REPO", repo)
+        .env("ROLE_MODE", mode)
+        .env("ROLE_PLANNING", if planning { "yes" } else { "no" })
+        .env("ROLE_PAUSE", if pause { "yes" } else { "no" })
+        .env("RUST_MIN_STACK", "33554432")
+        .stdout(Stdio::null())
+        .spawn()
+        .unwrap()
+}
+
+#[test]
+fn real_process_scope_change_and_role_registration_serialize_in_both_orders() {
+    for planning in [false, true] {
+        for change_first in [false, true] {
+            let dir = tempdir().unwrap();
+            let sdk = HandbookSdkV1::open(dir.path());
+            let (initial, check) = setup(&sdk);
+            let grant = activate_menu(&sdk, &initial, &check);
+            for (name, bytes) in [
+                ("initial.role.json", initial.canonical_json_bytes().unwrap()),
+                ("check.role.json", check.canonical_json_bytes().unwrap()),
+                ("grant.role.json", grant.canonical_json_bytes().unwrap()),
+            ] {
+                fs::write(dir.path().join(name), bytes).unwrap();
+            }
+            let (first_mode, second_mode) = if change_first {
+                ("change", "register")
+            } else {
+                ("register", "change")
+            };
+            let mut first = role_child(dir.path(), first_mode, planning, true);
+            wait_file(&dir.path().join("role.ready"));
+            let mut second = role_child(dir.path(), second_mode, planning, false);
+            std::thread::sleep(Duration::from_millis(150));
+            assert!(
+                second.try_wait().unwrap().is_none(),
+                "competing process bypassed native held authority"
+            );
+            fs::write(dir.path().join("role.release"), []).unwrap();
+            assert!(first.wait().unwrap().success());
+            assert!(second.wait().unwrap().success());
+            let result = fs::read_to_string(dir.path().join("register.role.result")).unwrap();
+            assert_eq!(result, if change_first { "refused" } else { "committed" });
+            assert!(sdk
+                .resolve_current_work_registration_terms(&initial, &grant)
+                .is_err());
+            assert!(
+                matches!(sdk.resolve_current_work_item(&grant, "serialized-role").unwrap(),
+                WorkCurrentItemV1::Open(_) if !change_first)
+                    || matches!(
+                        sdk.resolve_current_work_item(&grant, "serialized-role")
+                            .unwrap(),
+                        WorkCurrentItemV1::Absent
+                    ) && change_first
+            );
+        }
+    }
+}
+
+#[test]
+#[ignore]
+fn native_role_child() {
+    let repo = std::env::var("ROLE_REPO").unwrap();
+    let repo = Path::new(&repo);
+    let sdk = HandbookSdkV1::open(repo);
+    let initial = LocalInitialSetupLocatorV1::from_json_bytes(
+        &fs::read(repo.join("initial.role.json")).unwrap(),
+    )
+    .unwrap();
+    let check =
+        LocalCheckLocatorV1::from_json_bytes(&fs::read(repo.join("check.role.json")).unwrap())
+            .unwrap();
+    let grant =
+        WorkGrantLocatorV1::from_json_bytes(&fs::read(repo.join("grant.role.json")).unwrap())
+            .unwrap();
+    let pause = std::env::var("ROLE_PAUSE").unwrap() == "yes";
+    let mut boundary = |at| {
+        if pause && at == B::Snapshot {
+            fs::write(repo.join("role.ready"), []).unwrap();
+            wait_file(&repo.join("role.release"));
+        }
+        Ok(())
+    };
+    if std::env::var("ROLE_MODE").unwrap() == "change" {
+        let prepared = sdk
+            .prepare_work_registration_terms(
+                &initial,
+                &check,
+                terms(&check, "serialized-narrowing"),
+                WorkTermsTransitionV1::ScopeChange(&grant),
+            )
+            .unwrap();
+        let execution =
+            NativeWorkStateV1::activate_with_boundary_for_test(repo, prepared, &mut boundary);
+        assert_eq!(
+            execution.disposition,
+            WorkDispositionV1::Committed,
+            "{execution:?}"
+        );
+    } else {
+        let planning = std::env::var("ROLE_PLANNING").unwrap() == "yes";
+        let prepared = sdk.prepare_work_registration(
+            &initial,
+            &grant,
+            role_input(&grant, planning, "serialized-role"),
+        );
+        let result = match prepared {
+            Err(_) => "refused",
+            Ok(prepared) => {
+                let original = prepared.locator().canonical_json_bytes().unwrap();
+                fs::write(repo.join("request.role.json"), original).unwrap();
+                let execution = NativeWorkStateV1::register_with_boundary_for_test(
+                    repo,
+                    prepared,
+                    &mut boundary,
+                );
+                assert_eq!(
+                    execution.disposition,
+                    WorkDispositionV1::Committed,
+                    "{execution:?}"
+                );
+                "committed"
+            }
+        };
+        fs::write(repo.join("register.role.result"), result).unwrap();
+    }
+}
+
+#[test]
+fn zero_free_slots_close_accepted_item_and_authority_without_reusing_history_slots() {
+    for authority_last in [false, true] {
+        let dir = tempdir().unwrap();
+        let sdk = HandbookSdkV1::open(dir.path());
+        let (initial, check) = setup(&sdk);
+        let first = activate_menu(&sdk, &initial, &check); // slot 1
+        let prepared = sdk
+            .prepare_work_registration_terms(
+                &initial,
+                &check,
+                menu_terms(&check, "revision"),
+                WorkTermsTransitionV1::ScopeChange(&first),
+            )
+            .unwrap();
+        let grant = prepared.locator().clone(); // slot 2
+        assert_eq!(
+            sdk.activate_work_registration_terms(prepared).disposition,
+            WorkDispositionV1::Committed
+        );
+        let pending_item = if authority_last {
+            None
+        } else {
+            let prepared = sdk
+                .prepare_work_registration(
+                    &initial,
+                    &grant,
+                    role_input(&grant, true, "pending-last-item"),
+                )
+                .unwrap();
+            let original = prepared.locator().clone(); // slot 3
+            NativeWorkStateV1::register_with_boundary_for_test(
+                dir.path(),
+                prepared,
+                fault(B::Snapshot),
+            );
+            Some(original)
+        };
+        let count = if authority_last { 29 } else { 27 };
+        let mut retained = None;
+        for index in 0..count {
+            let key = format!("capacity-{index}");
+            let prepared = sdk
+                .prepare_work_registration(
+                    &initial,
+                    &grant,
+                    role_input(&grant, index % 2 == 0, &key),
+                )
+                .unwrap();
+            let original = prepared.locator().clone();
+            assert_eq!(
+                sdk.register_work_item(prepared).disposition,
+                WorkDispositionV1::Committed
+            );
+            retained = Some(original);
+        }
+        let prepared = sdk
+            .prepare_work_registration_terms(
+                &initial,
+                &check,
+                menu_terms(&check, "capacity-administration"),
+                WorkTermsTransitionV1::ScopeChange(&grant),
+            )
+            .unwrap();
+        let administration = prepared.locator().clone(); // slot 31 or 32
+        NativeWorkStateV1::activate_with_boundary_for_test(
+            dir.path(),
+            prepared,
+            fault(B::Snapshot),
+        );
+        let current = if authority_last {
+            let recovered = sdk.recover_work_registration_terms_request(&administration);
+            assert_eq!(
+                recovered.disposition,
+                WorkDispositionV1::Committed,
+                "{recovered:?}"
+            );
+            administration.clone()
+        } else {
+            let recovered = NativeWorkStateV1::recover_terms_with_boundary_for_test(
+                dir.path(),
+                &administration,
+                fault(B::Snapshot),
+            );
+            assert_eq!(
+                recovered.disposition,
+                WorkDispositionV1::NonCommitted,
+                "{recovered:?}"
+            );
+            let prepared = sdk
+                .prepare_work_registration(&initial, &grant, role_input(&grant, false, "last-slot"))
+                .unwrap();
+            assert_eq!(
+                sdk.register_work_item(prepared).disposition,
+                WorkDispositionV1::Committed
+            ); // slot 32
+            let recovered = sdk.recover_work_registration_request(pending_item.as_ref().unwrap());
+            assert_eq!(
+                recovered.disposition,
+                WorkDispositionV1::Committed,
+                "{recovered:?}"
+            );
+            grant.clone()
+        };
+        let overflow = sdk
+            .prepare_work_registration(
+                &initial,
+                &current,
+                role_input(&current, false, "overflow-role"),
+            )
+            .unwrap();
+        assert_eq!(
+            sdk.register_work_item(overflow).disposition,
+            WorkDispositionV1::Refused
+        );
+        let original = retained.unwrap();
+        assert_eq!(
+            sdk.recover_work_registration_request(&original).disposition,
+            WorkDispositionV1::Replayed
+        );
+        assert_eq!(
+            sdk.resolve_work_registration_terms_request(&first)
+                .disposition,
+            WorkDispositionV1::Replayed
+        );
+        if !authority_last {
+            assert_eq!(
+                sdk.resolve_work_registration_terms_request(&administration)
+                    .disposition,
+                WorkDispositionV1::NonCommitted
+            );
         }
     }
 }

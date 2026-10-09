@@ -102,12 +102,21 @@ fn output(op: &Operation) -> Result<Output, LocalAuthorityRefusalV1> {
             let descriptor = locator.input.composition.descriptor.clone();
             let descriptor_bytes = descriptor.canonical_json_bytes()?;
             let snapshot = WorkSnapshotV1 {
-                version: "1".into(),
+                version: if locator.input.composition.role.is_some()
+                    || locator.input.display_level.is_some()
+                {
+                    "2"
+                } else {
+                    "1"
+                }
+                .into(),
                 project_identity: locator.grant.project().into(),
                 item_identity: locator.item_identity.clone(),
                 item_key: locator.input.item_key.clone(),
                 label: locator.input.label.clone(),
                 question: locator.input.question.clone(),
+                display_level: locator.input.display_level.clone(),
+                role: locator.input.composition.role.clone(),
                 state: "open".into(),
                 descriptor,
                 descriptor_fingerprint: crate::DefinitionFingerprint::from_bytes(&descriptor_bytes)
@@ -292,13 +301,131 @@ fn scan(lock: &WorkLock<'_>) -> Result<(Inventory, Vec<Parsed>), LocalAuthorityR
             if !rows.iter().any(|prior|prior.committed&&matches!(&prior.intent.operation,Operation::Grant(g) if &g.fingerprint==identity)){return Err(refuse("work_grant_history_missing","exact original committed activation proof required for retained dependent history"));}
         }
     }
+    validate_authority_history(&rows)?;
     tree.validate().map_err(fs_error)?;
     metadata.validate().map_err(fs_error)?;
     lock.validate()?;
     Ok((inventory, rows))
 }
+// Validate the closed chain using retained historical proof, independently of
+// today's operating basis. No newest-file selection or union of prior scopes.
+fn validate_authority_history(rows: &[Parsed]) -> Result<(), LocalAuthorityRefusalV1> {
+    let grants = rows
+        .iter()
+        .filter(|r| r.committed && matches!(r.output, Output::Grant(_)))
+        .collect::<Vec<_>>();
+    let roots = grants
+        .iter()
+        .filter(|r| {
+            r.intent
+                .operation
+                .grant()
+                .predecessor_grant_fingerprint
+                .is_none()
+        })
+        .collect::<Vec<_>>();
+    if !grants.is_empty() && roots.len() != 1 {
+        return Err(refuse(
+            "work_authority_chain",
+            "exactly one committed authority lineage required",
+        ));
+    }
+    let mut visited = 0;
+    let mut head = roots.first().map(|r| r.intent.operation.grant());
+    while let Some(old) = head {
+        visited += 1;
+        let next = grants
+            .iter()
+            .filter(|r| {
+                r.intent
+                    .operation
+                    .grant()
+                    .predecessor_grant_fingerprint
+                    .as_ref()
+                    == Some(&old.fingerprint)
+            })
+            .collect::<Vec<_>>();
+        if next.len() > 1 || visited > grants.len() {
+            return Err(refuse(
+                "work_authority_chain",
+                "branched or cyclic authority is unsupported",
+            ));
+        }
+        if let Some(row) = next.first() {
+            if rows.iter().any(|r| {
+                r.committed
+                    && matches!(&r.intent.operation, Operation::Revoke(v) if v.grant == *old)
+            }) {
+                return Err(refuse(
+                    "work_authority_chain",
+                    "committed revocation cannot have a successor or restoration",
+                ));
+            }
+            let new = row.intent.operation.grant();
+            successor_compatible(
+                new,
+                old,
+                row.intent.authority.relation_kind()?.as_str(),
+                &relation_kind(&old.basis, rows, old)?,
+            )?;
+            head = Some(new);
+        } else {
+            break;
+        }
+    }
+    if visited != grants.len() {
+        return Err(refuse(
+            "work_authority_chain",
+            "detached committed authority history",
+        ));
+    }
+    let pending = rows
+        .iter()
+        .filter(|r| {
+            !r.committed && !r.noncommit && matches!(r.output, Output::Grant(_) | Output::Revoke(_))
+        })
+        .collect::<Vec<_>>();
+    if pending.len() > 1 {
+        return Err(refuse(
+            "work_administration_reserved",
+            "one unresolved authority operation required",
+        ));
+    }
+    if let Some(row) = pending.first() {
+        match (&row.intent.operation, head) {
+            (Operation::Grant(g), None) if g.predecessor_grant_fingerprint.is_none() => {}
+            (Operation::Grant(g), Some(old)) => {
+                successor_compatible(
+                    g,
+                    old,
+                    row.intent.authority.relation_kind()?.as_str(),
+                    &relation_kind(&old.basis, rows, old)?,
+                )?;
+            }
+            (Operation::Revoke(v), Some(old)) if v.grant == *old => {}
+            _ => {
+                return Err(refuse(
+                    "work_authority_chain",
+                    "pending administration must name the exact latest predecessor",
+                ))
+            }
+        }
+        if let Some(old) = head {
+            if rows.iter().any(|r| {
+                r.committed
+                    && matches!(&r.intent.operation, Operation::Revoke(v) if v.grant == *old)
+            }) {
+                return Err(refuse(
+                    "work_authority_chain",
+                    "revoked head cannot be restored",
+                ));
+            }
+        }
+    }
+    Ok(())
+}
 fn reservation(op: &Operation, rows: &[Parsed]) -> Result<(), LocalAuthorityRefusalV1> {
-    for row in rows.iter().filter(|r| !r.noncommit) {
+    for row in rows {
         if row.intent.operation.name() == op.name() {
             if row.intent.operation != *op {
                 return Err(refuse(
@@ -306,6 +433,11 @@ fn reservation(op: &Operation, rows: &[Parsed]) -> Result<(), LocalAuthorityRefu
                     "original request key content differs",
                 ));
             }
+            continue;
+        }
+        // Positive noncommit releases the item/head reservation, never the
+        // immutable request key or its original content.
+        if row.noncommit {
             continue;
         }
         match (op, &row.intent.operation) {
@@ -320,6 +452,15 @@ fn reservation(op: &Operation, rows: &[Parsed]) -> Result<(), LocalAuthorityRefu
                     "work_grant_reserved",
                     "recover pending original activation before another grant",
                 ))
+            }
+            (
+                Operation::Grant(_) | Operation::Revoke(_),
+                Operation::Grant(_) | Operation::Revoke(_),
+            ) if !row.committed => {
+                return Err(refuse(
+                    "work_administration_reserved",
+                    "recover original pending authority operation before competing administration",
+                ));
             }
             (Operation::Revoke(v), Operation::Revoke(old))
                 if v.grant.fingerprint == old.grant.fingerprint =>
@@ -367,68 +508,79 @@ fn current_grant<'a>(
     }
     Ok(selected)
 }
+fn fixed_terms_equal(a: &WorkRegistrationTermsV1, b: &WorkRegistrationTermsV1) -> bool {
+    a.rule_ref == b.rule_ref
+        && a.mode == b.mode
+        && a.principal == b.principal
+        && a.agent == b.agent
+        && a.delegation == b.delegation
+        && a.effect == b.effect
+        && a.owner_write_reach == b.owner_write_reach
+        && a.owner_read_reach == b.owner_read_reach
+        && a.reserved_decisions == b.reserved_decisions
+        && a.revocation_principal == b.revocation_principal
+        && a.retention == b.retention
+}
+fn successor_compatible(
+    grant: &WorkGrantLocatorV1,
+    old: &WorkGrantLocatorV1,
+    new_kind: &str,
+    old_kind: &str,
+) -> Result<(), LocalAuthorityRefusalV1> {
+    if grant.predecessor_grant_fingerprint.as_ref() != Some(&old.fingerprint)
+        || grant.check != old.check
+        || !fixed_terms_equal(&old.terms, &grant.terms)
+    {
+        return Err(refuse(
+            "work_successor_binding",
+            "exact predecessor, original lineage and fixed authority terms required",
+        ));
+    }
+    match grant.change {
+        Some(WorkAuthorityChangeV1::ScopeChange) if old.basis == grant.basis && old_kind == new_kind => Ok(()),
+        Some(WorkAuthorityChangeV1::EstablishFromDeferred) | None
+            if old.basis != grant.basis && old_kind == "deferred" && new_kind == "established_from_deferred"
+                && old.terms.scope.equivalent(&grant.terms.scope) => Ok(()),
+        _ => Err(refuse("work_reestablishment", "same-basis explicit scope change or unchanged-scope explicit D-to-G required; no combined change/restoration")),
+    }
+}
 fn activation_compatible(
     grant: &WorkGrantLocatorV1,
     rows: &[Parsed],
     kind: &str,
 ) -> Result<(), LocalAuthorityRefusalV1> {
-    let grants = rows
-        .iter()
-        .filter_map(|r| match &r.output {
-            Output::Grant(g) if r.committed && g.locator.fingerprint != grant.fingerprint => {
-                Some(g)
-            }
-            _ => None,
-        })
-        .collect::<Vec<_>>();
     match &grant.predecessor_grant_fingerprint {
-        None if grants.is_empty() => Ok(()),
-        Some(previous) if grants.len() == 1 => {
-            let old = grants[0];
-            current_grant(&old.locator, rows)?;
-            // Same request itself must not be seen as its own superseder while
-            // continuation is being checked; caller removes this original row.
-            let a = &old.locator.terms;
-            let b = &grant.terms;
-            if previous != &old.locator.fingerprint
-                || old.locator.predecessor_grant_fingerprint.is_some()
-                || old.locator.check != grant.check
-                || kind != "established_from_deferred"
-                || relation_kind(&old.locator.basis, rows, &old.locator)? != "deferred"
-                || old.locator.basis == grant.basis
-                || (
-                    a.principal.as_str(),
-                    a.agent.as_str(),
-                    &a.composition,
-                    a.effect.as_str(),
-                    a.owner_write_reach.as_str(),
-                    a.owner_read_reach.as_str(),
-                    &a.reserved_decisions,
-                    a.revocation_principal.as_str(),
-                    a.retention.as_str(),
-                ) != (
-                    b.principal.as_str(),
-                    b.agent.as_str(),
-                    &b.composition,
-                    b.effect.as_str(),
-                    b.owner_write_reach.as_str(),
-                    b.owner_read_reach.as_str(),
-                    &b.reserved_decisions,
-                    b.revocation_principal.as_str(),
-                    b.retention.as_str(),
-                )
-            {
-                return Err(refuse("work_reestablishment","only compatible explicit original-human D-to-G activation with exact predecessor is supported"));
-            }
+        None if !rows
+            .iter()
+            .any(|r| r.committed && matches!(r.output, Output::Grant(_)))
+            && matches!(grant.change, Some(WorkAuthorityChangeV1::Initial) | None) =>
+        {
             Ok(())
+        }
+        Some(previous) => {
+            let old = rows
+                .iter()
+                .find_map(|r| match &r.output {
+                    Output::Grant(g) if r.committed && &g.locator.fingerprint == previous => {
+                        Some(&g.locator)
+                    }
+                    _ => None,
+                })
+                .ok_or_else(|| {
+                    refuse(
+                        "work_prior_grant_missing",
+                        "exact committed predecessor required",
+                    )
+                })?;
+            current_grant(old, rows)?;
+            successor_compatible(grant, old, kind, &relation_kind(&old.basis, rows, old)?)
         }
         _ => Err(refuse(
             "work_replacement_unsupported",
-            "general replacement/restoration or missing predecessor is unsupported",
+            "initial authority already exists; explicit latest predecessor required",
         )),
     }
-}
-// The retained proof reports the native scope relation's actual fixed tag.
+} // The retained proof reports the native scope relation's actual fixed tag.
 fn relation_kind(
     _basis: &LocalCheckCurrentBasisV1,
     rows: &[Parsed],
@@ -465,13 +617,24 @@ impl NativeWorkStateV1 {
         check: &LocalCheckLocatorV1,
         basis: LocalCheckCurrentBasisV1,
         terms: WorkRegistrationTermsV1,
-        predecessor: Option<&WorkGrantLocatorV1>,
+        transition: WorkTermsTransitionV1<'_>,
     ) -> Result<PreparedWorkGrantV1, LocalAuthorityRefusalV1> {
+        if !matches!(terms.scope, WorkRegistrationScopeV1::Explicit(_)) {
+            return Err(refuse("work_explicit_scope_required", "new human approval must supply finite explicit scope; retained singleton is decoding only"));
+        }
+        let (change, predecessor) = match transition {
+            WorkTermsTransitionV1::Initial => (WorkAuthorityChangeV1::Initial, None),
+            WorkTermsTransitionV1::ScopeChange(g) => (WorkAuthorityChangeV1::ScopeChange, Some(g)),
+            WorkTermsTransitionV1::EstablishFromDeferred(g) => {
+                (WorkAuthorityChangeV1::EstablishFromDeferred, Some(g))
+            }
+        };
         let mut locator = WorkGrantLocatorV1 {
             check: check.clone(),
             basis,
             terms,
             predecessor_grant_fingerprint: predecessor.map(|g| g.fingerprint.clone()),
+            change: Some(change),
             fingerprint: String::new(),
         };
         locator.fingerprint = locator.identity()?;
@@ -492,6 +655,17 @@ impl NativeWorkStateV1 {
                             "work_prior_grant_missing",
                             "prior work grant requires retained owner truth",
                         ));
+                    }
+                    if store::optional(held.root(), ".handbook-work-state-bootstrap.v1.json")?
+                        .is_some()
+                        || held
+                            .root()
+                            .list_directory_bounded(".handbook", 4096)
+                            .map_err(fs_error)?
+                            .iter()
+                            .any(|e| matches!(e.name(), "work-state" | "work-state-bootstrap"))
+                    {
+                        return Err(refuse("work_bootstrap_reserved", "positive prior bootstrap/owner footprint requires original recovery; never fresh establishment"));
                     }
                 }
             }
@@ -737,6 +911,20 @@ impl NativeWorkStateV1 {
     }
     #[cfg(any(test, feature = "test-support"))]
     #[doc(hidden)]
+    pub fn recover_terms_with_boundary_for_test(
+        repo: impl AsRef<Path>,
+        locator: &WorkGrantLocatorV1,
+        mut boundary: impl FnMut(WorkWriteBoundaryV1) -> Result<(), LocalAuthorityRefusalV1>,
+    ) -> WorkExecutionV1<WorkGrantV1> {
+        project_grant(execute(
+            repo.as_ref(),
+            Operation::Grant(locator.clone()),
+            true,
+            &mut boundary,
+        ))
+    }
+    #[cfg(any(test, feature = "test-support"))]
+    #[doc(hidden)]
     pub fn revoke_with_boundary_for_test(
         repo: impl AsRef<Path>,
         locator: &WorkRevokeLocatorV1,
@@ -794,6 +982,33 @@ fn execute(
         Ok(v) => v.is_some(),
         Err(e) => return WorkExecutionV1::error(WorkDispositionV1::Uncertain, e),
     };
+    if recover && !existed {
+        // Recovery cannot accept a new request. An unpublished owner bootstrap
+        // may continue only from its exact already-retained original locator.
+        match store::optional(&root, ".handbook-work-state-bootstrap.v1.json") {
+            Ok(Some(bytes)) if matches!(&op, Operation::Grant(g) if encode(g).is_ok_and(|v| v == bytes)) =>
+                {}
+            Ok(None) => {
+                return WorkExecutionV1::error(
+                    WorkDispositionV1::Refused,
+                    refuse(
+                        "work_owner_unestablished",
+                        "recovery requires positive original acceptance/bootstrap proof",
+                    ),
+                )
+            }
+            Ok(Some(_)) => {
+                return WorkExecutionV1::error(
+                    WorkDispositionV1::Uncertain,
+                    refuse(
+                        "work_bootstrap_reserved",
+                        "bootstrap belongs to exact original request",
+                    ),
+                )
+            }
+            Err(e) => return WorkExecutionV1::error(WorkDispositionV1::Uncertain, e),
+        }
+    }
     drop(root);
     if existed {
         let history = resolve(repo, op.clone());
@@ -802,6 +1017,7 @@ fn execute(
             WorkDispositionV1::Replayed
                 | WorkDispositionV1::NonCommitted
                 | WorkDispositionV1::Uncertain
+                | WorkDispositionV1::Refused
         ) {
             return history;
         }
@@ -925,6 +1141,14 @@ fn execute(
                     authority: held.capture_proof()?,
                 };
                 encode(&v)?;
+                // Every retained/derived record must fit before accepting the
+                // original reservation, including fingerprint framing overhead.
+                let candidate = decision(&v)?;
+                encode(&candidate)?;
+                encode(&candidate.output)?;
+                encode(&terminal(&candidate)?)?;
+                publication(&v)?;
+                noncommit(&v)?;
                 held.validate_current()?;
                 lock.validate()?;
                 lock.reserve_intent(&name, &encode(&v)?, &effects)?;
