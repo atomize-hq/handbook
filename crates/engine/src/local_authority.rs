@@ -12,6 +12,7 @@ use std::sync::OnceLock;
 
 pub mod local_check;
 pub mod local_evaluation;
+pub(crate) mod work_registration;
 
 #[cfg(test)]
 mod fixed_profile_tests;

@@ -905,6 +905,25 @@ pub(super) fn evaluation_predecessor_history(
     locator.validate()?;
     check_history(root, locator)
 }
+
+// The work owner has its own fixed establishment rule and permission. These
+// crate-private checks reuse the native lineage/currentness mechanics without
+// manufacturing one of the four local-check action classes as work permission.
+pub(super) fn work_registration_current(
+    root: &RetainedRepositoryRootV1,
+    locator: &LocalCheckLocatorV1,
+    basis: &LocalCheckCurrentBasisV1,
+) -> Result<LocalCheckAuthorityOutcomeV1, LocalAuthorityRefusalV1> {
+    locator.validate()?;
+    check_current(root, locator, basis)
+}
+
+pub(super) fn work_registration_expected_outcome(
+    locator: &LocalCheckLocatorV1,
+) -> Result<LocalCheckAuthorityOutcomeV1, LocalAuthorityRefusalV1> {
+    locator.validate()?;
+    expected_outcome(locator)
+}
 fn require_basis(
     root: &RetainedRepositoryRootV1,
     basis: &LocalCheckCurrentBasisV1,

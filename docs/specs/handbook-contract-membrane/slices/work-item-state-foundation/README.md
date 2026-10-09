@@ -1,7 +1,7 @@
 # Native work-item state foundation
 
-Status: **human-selected bounded plan; compatibility preparation selected;
-complete Packet-1 implementation authorized; implementation not started**.
+Status: **Packet 1 implemented and verified; fresh causal review APPROVE;
+meta aggregate acceptance and Packet-1 human recap pending**.
 Selections recorded 2026-10-08 against `227c958e1630acef923aae97c6ed88752a32d184` on
 `feat/handbook-contract-membrane-clean`.
 
@@ -22,8 +22,8 @@ selection-recording task first and a separate fresh implementation task after it
 clean review. That approval selects the authority, publication/recovery and
 composition/kinds compatibility decisions below. It authorizes Packet-1
 implementation, verification, fresh causal review and one local coherent commit,
-ending at the Packet-1 human review boundary. This document task performs no
-implementation; actual runtime project terms must still be explicitly established.
+ending at the Packet-1 human review boundary. Actual runtime project terms must
+still be explicitly established.
 
 The [program shape](../../coverage-and-landing-map.md#successor-readiness-after-independent-local-check),
 [entry point](../../README.md), [lifecycle](../../work-unit-lifecycle.md),
@@ -45,9 +45,9 @@ taxonomy or authority.
 
 The **human-selected route** serves positively current local-check projects in
 `DeferredV2` D or `EstablishedFromDeferredV3` G through newly and exactly activated work-registration
-terms. No such activation API exists today. A fixed operation-specific native rule
-must authorize original-human establishment, independently of the proposed grant;
-the SDK supplies the approved content and Engine validates/activates it. The old
+terms. A fixed operation-specific native rule authorizes original-human
+establishment, independently of the proposed grant; the SDK supplies the approved
+content and Engine validates/activates it. The old
 initial-only proposal is superseded and is not an implementation alternative.
 Existing initial/currentness refusals remain intact.
 Local-check action classes, evaluation permission, InputCorrection delegation and
@@ -60,7 +60,7 @@ re-establishment is part of the selected rule; general agent grant replacement o
 automatic carry-forward is excluded. The new grant cannot complete an old request
 under substituted authority. Item/history reads and historical recovery are
 separate from live permission. Both D and established-from-D G are selected;
-source-backed feasibility does not claim implemented support. D-only is not the
+Both routes are implemented and verified in Packet 1. D-only is not the
 authorized cut.
 
 The caller can inspect the item's completion support separately. The result says

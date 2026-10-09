@@ -781,6 +781,25 @@ impl RetainedRepositoryRootV1 {
         Ok(guard)
     }
 
+    /// Pins the additive work owner's versioned history and ancestor directories.
+    /// The held native owner lock validates its own identity and generation;
+    /// rereading that locked file through a second handle is unsafe on Windows.
+    /// No operating state or current authority is a historical dependency.
+    pub(crate) fn retain_work_history_tree_guard_v1(
+        &self,
+    ) -> Result<RetainedRepositoryTreeGuardV1<'_>, RepositoryDurabilityErrorV1> {
+        self.require_stable_path_epoch()?;
+        let (directories, files) =
+            self.retain_selected_tree(&[".handbook/work-state/v1"], &[], 4096)?;
+        let guard = RetainedRepositoryTreeGuardV1 {
+            root: self,
+            directories,
+            files,
+        };
+        guard.validate()?;
+        Ok(guard)
+    }
+
     /// Read-only: creates no files, locks, or recovery state.
     pub fn retain_exact_files_checkpoint_v1(
         &self,

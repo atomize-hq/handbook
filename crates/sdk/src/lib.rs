@@ -19,6 +19,7 @@ pub mod flow_api;
 pub mod local_check;
 pub mod local_evaluation;
 pub mod local_setup;
+pub mod work_state;
 pub mod pipeline_route_api;
 mod profile_readiness;
 mod refusal;

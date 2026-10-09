@@ -1,7 +1,7 @@
 # Packet 1: register and resolve native open work
 
-Status: **human-selected complete Packet-1 plan; compatibility preparation gate
-satisfied; implementation authorized and not started**. Selections recorded
+Status: **Packet 1 implemented and verified; fresh causal review APPROVE;
+meta aggregate acceptance and Packet-1 human recap pending**. Selections recorded
 2026-10-08 against `227c958`. This supersedes the initial-only recommendation at `6aba084`.
 This is the sole packet of [work-item-state-foundation](README.md). The slice
 owns the outcome, exclusions and eight acceptance conditions; this document
@@ -17,8 +17,8 @@ the original request locator before execution. Current resolution after restart
 returns that exact item/snapshot; original-request resolution returns the same
 registration outcome. A registration receipt proves creation, not work completion.
 
-The activation API and consuming work permission are **missing product mechanisms**
-selected for implementation here, not existing local-check support. [The three next-plan gates](../../coverage-and-landing-map.md#next-plan-selection-gates)
+The activation API and consuming work permission are **new product mechanisms**
+implemented in this packet, separate from existing local-check support. [The three next-plan gates](../../coverage-and-landing-map.md#next-plan-selection-gates)
 are prepared and human-selected, including the successor compatibility contract
 incorporated [below](#selected-successor-compatibility-acceptance). The human approved
 all three recommendations and all of Packet 1, directing selection recording and
@@ -334,7 +334,7 @@ with bounded direct caller/source inspection without repairing the index here.
 Run required detect_changes before commit; distinguish this packet's actual delta
 from the broad branch-versus-main result.
 
-Planned focused commands (new test targets are proposed, not existing tests):
+Focused command plan:
 
 ```text
 cargo test -p handbook-engine --test work_state
@@ -366,6 +366,28 @@ Existing durability/initial-authority tests are precedent; rerun focused existin
 targets only if their touched path or a demonstrated regression requires it. Do
 not rerun/reclose independent-local-check or claim a full-workspace green result.
 Report Windows/Unix coverage and all actual limits separately.
+
+Delivered verification on Windows: Engine type/codec tests passed 3/3; the six
+ordinary SDK tests passed in a standalone default-feature consumer without
+`test-support`, and separate example processes verified activation, registration,
+current/history/recovery, replay, completion refusal and revocation. Engine/SDK
+checking and diff checks passed. Native durability tests passed 7/7, including
+the real child-process paths; their child entry is intentionally ignored when
+listed as a standalone test. Integrity tests passed 9/9, including whole
+transaction loss, fixed expected-entry manifest loss/reset and actual early and
+resumed-acceptance interruptions. These two fault targets used
+`--config 'profile.test.opt-level=1'` and four test threads; no build configuration
+is committed. The ordinary example uses an 8 MiB debug worker stack. Unix and
+full-workspace verification remain unclaimed.
+
+Fresh causal review required positive expected-entry retention and truthful
+uncertainty before early native writes, then identified the same classification
+gap in resumed acceptance. Both were remediated and verified; the final fresh
+delta verdict is **APPROVE** with no unresolved P1/P2. Repeated debug scan cost is
+an unfixed P3 advisory. GitNexus impact/navigation remains degraded by its stale
+foreign index; bounded caller/source inspection supplied scope evidence. The
+staged check covers only this packet's 22 files; the critical branch-versus-main
+comparison covers the inherited broad branch and is not this packet's delta.
 
 After these checks, one fresh focused causal reviewer evaluates the exact bounded
 change and evidence under the [P1–P4 policy](../../review-and-closeout-policy.md#finding-priority-and-disposition).

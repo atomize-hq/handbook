@@ -51,6 +51,7 @@ pub mod freshness;
 pub mod instance_profile;
 pub mod local_authority;
 pub mod local_charter;
+pub mod work_state;
 pub mod operation_admission;
 mod owner_facts;
 mod posture_transition_facade;

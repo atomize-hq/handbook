@@ -722,6 +722,72 @@ pub(crate) fn local_evaluation_historical_dependencies(
     Ok(paths)
 }
 
+/// Exact self-contained original Charter closure for the new work owner. This
+/// validates its original selected local rule from retained bytes, without
+/// consulting a live Charter selection or requiring runtime operating locks.
+pub(crate) fn work_registration_historical_bytes(
+    locator: &LocalCharterLocatorV1,
+) -> Result<Vec<(String, Vec<u8>)>, LocalAuthorityRefusalV1> {
+    let (canonical, profile, validation) = evaluate(Path::new(""), &locator.request)?;
+    if profile != locator.profile_binding
+        || DefinitionFingerprint::from_bytes(&canonical).as_str() != locator.canonical_fingerprint
+        || fingerprint(
+            &json!({"schema_id":"handbook.native-local-charter-request","schema_version":"1.0","binding":locator.binding,"request":locator.request,"profile_binding":profile}),
+        )? != locator.request_fingerprint
+    {
+        return Err(refuse(
+            "work_charter_history",
+            "original exact Charter request, profile or canonical binding changed",
+        ));
+    }
+    let common = json!({"request_fingerprint":locator.request_fingerprint,"canonical_fingerprint":locator.canonical_fingerprint,"profile_binding":locator.profile_binding});
+    let mut records = vec![
+        record(
+            "intake",
+            &json!({"schema_id":"handbook.native-local-charter-intake","schema_version":"1.0","binding":common,"intake_definition_ref":INTAKE_REF,"envelope":locator.request.intake}),
+        )?,
+        record(
+            "candidate",
+            &json!({"schema_id":"handbook.native-local-charter-candidate","schema_version":"1.0","binding":common,"target_instance_id":"project_authority","basis":null,"approval_policy_ref":APPROVAL_REF}),
+        )?,
+        record(
+            "validation",
+            &json!({"schema_id":"handbook.native-local-charter-validation","schema_version":"1.0","binding":common,"native_validation":validation}),
+        )?,
+        record(
+            "approval",
+            &json!({"schema_id":"handbook.native-local-charter-approval","schema_version":"1.0","binding":common,"rule_ref":APPROVAL_REF,"assurance":"local_advisory","approval":locator.request.human_approval}),
+        )?,
+    ];
+    let lineage = records.iter().map(|(reference, bytes)| json!({"reference":reference,"document_fingerprint":DefinitionFingerprint::from_bytes(bytes).to_string()})).collect::<Vec<_>>();
+    let promotion = record(
+        "promotion",
+        &json!({"schema_id":"handbook.native-local-charter-promotion","schema_version":"1.0","binding":common,"predecessor":null,"canonical_path":CANONICAL,"lineage":lineage,"decision":"approved_advisory"}),
+    )?;
+    let promotion_ref = promotion.0.clone();
+    records.push(promotion);
+    let state_fingerprint = fingerprint(
+        &json!({"lifecycle_policy_ref":LIFECYCLE_REF,"canonical_fingerprint":locator.canonical_fingerprint,"state":"current","active_observations":[]}),
+    )?;
+    let lifecycle = record(
+        "lifecycle",
+        &json!({"schema_id":"handbook.native-local-charter-lifecycle","schema_version":"1.0","binding":common,"lifecycle_policy_ref":LIFECYCLE_REF,"promotion_ref":promotion_ref,"state":"current","state_fingerprint":state_fingerprint,"active_observations":[]}),
+    )?;
+    let lifecycle_transition_ref = lifecycle.0.clone();
+    records.push(lifecycle);
+    let head = encode(
+        &json!({"schema_id":"handbook.native-local-charter-head","schema_version":"1.0","request_fingerprint":locator.request_fingerprint,"canonical_fingerprint":locator.canonical_fingerprint,"promotion_ref":promotion_ref,"lifecycle_transition_ref":lifecycle_transition_ref,"profile_binding":locator.profile_binding}),
+    )?;
+    records.extend([
+        (INTENT.into(), encode(&LocalIntentV1 { schema_id: "handbook.native-local-charter-intent".into(), schema_version: "1.0".into(), locator: locator.clone() })?),
+        (COMMITTED.into(), encode(&json!({"schema_id":"handbook.native-local-charter-commit","schema_version":"1.0","request_fingerprint":locator.request_fingerprint,"head_document_fingerprint":DefinitionFingerprint::from_bytes(&head).to_string()}))?),
+        (HEAD.into(), head),
+        (CANONICAL.into(), canonical),
+    ]);
+    records.sort_by(|a, b| a.0.cmp(&b.0));
+    Ok(records)
+}
+
 /// Common readers hold their native locks already. No nested lock is taken.
 pub(crate) fn read_local_committed_retained(
     root: &RetainedRepositoryRootV1,

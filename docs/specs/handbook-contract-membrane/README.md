@@ -144,12 +144,14 @@ and its complete [single Packet-1 plan](slices/work-item-state-foundation/packet
 directing selection recording with clean review before a separate fresh implementation
 task. Authority/recovery and composition/kinds compatibility preparation are
 selected; Packet-1 implementation, verification, fresh review and local commit
-are authorized, ending at its human review boundary. Implementation is not started.
+are authorized, ending at its human review boundary. Packet 1 is implemented,
+verified and approved by fresh causal review; meta aggregate acceptance and the
+human recap remain pending.
 It delivers no positive Work Progression eligibility,
 governed completion, parent decision or close effect; those remain separately bounded.
 The initial-only recommendation at `6aba084` is superseded by selected explicit
-work-registration activation on current local-check D/G. This mechanism does not
-exist yet; neither old local-check permission nor a Context Resolution root binding
+work-registration activation on current local-check D/G. Neither old local-check
+permission nor a Context Resolution root binding
 authorizes registration. The [joint near-term sequence](coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints)
 puts configurable compositions/optional kinds immediately after foundation, with
 compatibility prepared and selected before it, followed by separately meaningful
@@ -192,7 +194,7 @@ Use the source that owns the question:
 | What proof is required and may an evaluation proceed? | [`Assurance and evaluation preparation`](semantic-model/assurance-and-evaluation-preparation.md) keeps posture/assurance selection separate from Engine authorization, capability, and readiness. |
 | What fixes the exact evidence population and the meaning of evaluation truth? | [`Evidence and evaluation truth`](semantic-model/evidence-and-evaluation.md) owns occurrence/evidence closure, claim/metric/gate semantics, explanation, and replay. |
 | May a result support present work progression or an action, and did an effect commit? | [`Operational reliance and actions`](semantic-model/operational-reliance-and-actions.md) owns the Work Progression boundary, atomic eligibility/disposition, separate action authorization and receipt requirements. The human-selected [kinds and relations amendment](semantic-model/amendments/work-progression-kinds-and-relations.md) supplements it; positive eligibility/completion remain unimplemented with explicit near-term outcomes in the [joint sequence](coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints). |
-| What is the first selected Work Progression native/SDK increment? | [`work-item-state-foundation`](slices/work-item-state-foundation/README.md) selects registration-only Engine state and typed SDK delivery, exact history/recovery and unsupported completion. D/G activation, terminal publication and successor compatibility are human-selected; complete [Packet 1](slices/work-item-state-foundation/packet-1.md) implementation is authorized after clean selection review and remains not started. |
+| What is the first selected Work Progression native/SDK increment? | [`work-item-state-foundation`](slices/work-item-state-foundation/README.md) supplies registration-only Engine state and typed SDK delivery, exact history/recovery and unsupported completion. D/G activation, terminal publication and successor compatibility are human-selected; [Packet 1](slices/work-item-state-foundation/packet-1.md) is implemented, verified and causally approved, awaiting meta aggregate acceptance and the human recap. |
 | How do Work Progression and Context Resolution proceed together? | The [joint reconciliation](coverage-and-landing-map.md#joint-authority-and-recovery-reconciliation) owns current source seams, distinct permission boundaries, selected foundation/compatibility gates and the proposed remaining order/checkpoints. CR choices remain unselected; no general permission platform is adopted. |
 | How is missing phase or slice authority prepared at the correct level? | [`authority-preparation-prompt.md`](authority-preparation-prompt.md) defines separate phase-to-slice and slice-to-packet top-level planning tasks. Each returns to the meta task before the next level. |
 | How is one authorized slice or packet assigned to a top-level task session? | [`task-session-prompt.md`](task-session-prompt.md) provides the copy/paste-ready assignment prompt and compact result presentation. |
