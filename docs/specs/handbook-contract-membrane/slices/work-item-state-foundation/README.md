@@ -33,6 +33,17 @@ and the human recap. The human reviewed that result and then requested bounded
 This status correction verifies lineage and uses the [packet's delivered evidence](packet-1.md#implementation-work-and-verification);
 it does not rerun product suites or perform another predecessor closeout.
 
+For that successor, the human has now selected **one composition-aware registration
+authority model for greenfield development**, superseding the parallel-stream
+proposal. This leaves foundation's delivered behavior/evidence intact. Old public
+API shapes and disposable fixtures need no permanent compatibility promise;
+retained ordinary grant scope, items, receipt bytes and unresolved original requests
+still require exact verification/recovery. The successor's
+[minimum compatibility contract](../work-compositions-and-kinds/README.md#development-compatibility-and-retained-truth)
+and [proposed lifecycle](../work-compositions-and-kinds/README.md#proposed-authorization-lifecycle)
+own that revision. Scope-change details require human selection; this note supplies
+no grant widening, state deletion or product execution authority.
+
 The [program shape](../../coverage-and-landing-map.md#successor-readiness-after-independent-local-check),
 [entry point](../../README.md), [lifecycle](../../work-unit-lifecycle.md),
 [review policy](../../review-and-closeout-policy.md) and

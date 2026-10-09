@@ -120,8 +120,11 @@ exact D/G activation/recovery and composition/kinds compatibility are prepared a
 selected **before foundation implementation**. Packet 1 is complete at `cbfbf76`;
 supplied meta aggregate acceptance/closeout and the human recap are complete.
 The human then requested bounded [flexibility preparation](slices/work-compositions-and-kinds/README.md).
-Its authority recommendations and [first increment plan](slices/work-compositions-and-kinds/packet-1.md)
-need human selection/authorization before execution; remaining broad ordering is
+The human selected one composition-aware registration model for greenfield
+development, replacing the parallel-stream proposal. Bounded scope/lifecycle
+recommendations and the [first increment plan](slices/work-compositions-and-kinds/packet-1.md)
+need exact selection/authorization before execution; the separate kind rule is a
+later choice. Remaining broad ordering is
 proposed where unselected. The latest CR research
 remains proposed; its own authority/compatibility choices precede detailed execution
 preparation. A shared currentness/recovery seam establishes no shared grant.
@@ -352,9 +355,11 @@ The selected explicit work-registration activation on current local-check D/G
 supersedes the earlier initial-only recommendation. The API is implemented;
 local-check permission cannot be reinterpreted as work permission.
 The human requested the bounded [flexibility slice preparation](slices/work-compositions-and-kinds/README.md)
-after that checkpoint. It outlines explicit compositions then optional kinds,
-details only Packet 1 and leaves two authority recommendations for exact human
-selection. Flexibility implementation remains unauthorized; no adjacent
+after that checkpoint, then selected one composition-aware registration authority.
+The revised Packet 1 combines the finite explicit menu with exact scope and a
+proposed bounded human scope-change lifecycle; optional kinds remain a later
+independently reviewed outcome. Lifecycle details and the separate kind rule need
+exact human selection; unified registration is settled. Flexibility implementation remains unauthorized; no adjacent
 implementation, new phase or local-check Packet 5 is authorized. CR's separate
 management/use/representation choices remain unselected.
 The human has selected [local-advisory authority](semantic-model/amendments/approval-authority-and-assurance.md)

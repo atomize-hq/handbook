@@ -1,225 +1,291 @@
-# Work compositions and kinds — Packet 1: explicit composition selection
+# Work compositions and kinds — Packet 1: unified explicit-composition registration
 
-Status: **next review-increment plan prepared; menu-registration authority
-recommendation awaits human selection and plan authorization** — 2026-10-09.
-This is part of [one slice](README.md), not product implementation or permission
-to establish/use kinds. It details only the next human review increment.
+Status: **revised next-increment plan; unified direction selected; recommendation A
+requires exact human selection and plan authorization before product edits** —
+2026-10-09. Part of [one slice](README.md); no implementation or permission to
+establish/use kinds. Supersedes the parallel-stream Packet-1 proposal.
 
 ## Observable behavior and checkpoint
 
-Why next: foundation provides exact retained `open` item truth and separate
-registration authority. The human selected immediate composition flexibility;
-this packet adds the two selected declarations without bundling future relations,
-assessment or completion. The human reviews this meaningful **packet outcome**
-before kind delivery is prepared or dispatched.
+Why next: foundation delivers retained `open` work and original authority/recovery.
+The selected flexibility lets a human approve a useful menu through **one
+registration authority**, including a continuing ordinary-only development project.
+Deliver the two declarations and bounded permission lifecycle together; no
+relations, assessment or closing.
 
-**Example under the proposed additive authority choice:** an existing local-check
-project retains ordinary item L and its V1 grant. The original claimed human
-explicitly activates menu-registration terms permitting the three exact supported
-descriptors and their bounded typed parameters. A routine SDK caller registers P,
-level token `planning`, label “Plan session renewal,” with required-output question
-“What exact requirements must session renewal satisfy?” P has no future contract
-locator. The caller separately obtains an issued definition from Contracts and
-registers I, token `implementation`, label “Implement session renewal,” with that
-definition's exact versioned locator as requirements input. Both are `open`;
-P has not delivered an output and I has not been assessed. Reopening resolves
-both declarations, while L's original descriptor bytes/receipt remain exact.
-Changing either token to `task` or `phase` grants no structural or completion effect.
+**Continuing-project example under recommendation A:** Q has current ordinary-only
+R0 and retained ordinary item L. New support recognizes P/I; R0 still refuses them.
+The original claimed human approves successor R1 against R0, on the same D/G
+basis, permitting three exact descriptors, label/work-question/output-question
+maxima of 4,096 bytes, omitted level or tokens `task`, `planning`, `implementation`,
+and one exact Contracts C@1 definition with owner-family tag and full fingerprint.
+R1 changes no item. A caller uses the same typed prepare/register path to create
+P, token `planning`, label “Plan session renewal,” required-output question “What
+exact requirements must session renewal satisfy?” P has no guessed contract
+locator. It separately creates I, token `implementation`, exact C@1 as requirements
+input. Both are `open`, completion `unsupported / not assessed`. Reopen resolves
+both; L retains exact original descriptor/request bytes, identity and receipt.
 
-**Meaningful refusal:** using L's V1 ordinary grant to register P refuses before
-an effect even when the new binary recognizes P's descriptor. A guessed future
-locator on P, a result locator in I's definition role, an unknown role, kind binding,
-extra hook/parent, changed descriptor under L's item key or requested close also
-refuses. A well-formed I definition declaration with unavailable Contracts truth
-does not become a false truth/qualification assertion: registration records only
-the declaration, and later truth/eligibility resolution must handle unavailability.
+**Fresh-project example:** on positively current supported D or G, first establish
+R0 permitting ordinary and planning-output only. One SDK path registers either;
+requirements-input refuses until an explicit successor permits its exact descriptor
+and definition locator. No legacy enrollment or special upgrade is needed.
 
-## Admission and proposed permission contract
+**Change example:** R2 removes planning permission; it blocks new P registrations
+without removing P. Pending R1 requests cannot complete using R2 even if values
+still fit. After D→G, explicitly re-establish the latest unrevoked head on G with
+unchanged scope; any scope change is a separate human operation. Old requests keep
+their basis and original-key recovery.
 
-Complete foundation and the selected semantic compatibility cases are hard
-predecessors, with [evidence already supplied](README.md#predecessor-evidence-and-source-constraints).
-Before execution meta must obtain the exact [decision 1](README.md#exact-decisions-for-human-selection)
-and human authorization of this plan. The following contract describes the
-**recommended separate menu-registration stream**, conditional on that selection.
-If the alternative successor is selected, revise and review this packet's
-authority/recovery contract before dispatch; do not implement it under this plan.
+The human checkpoint is **Packet 1**: native authority, registration/current/
+history/recovery and usable SDK. Return verification/review and coherent local
+commit for the recap and stop before kind planning/delivery. An earlier delivered
+independently meaningful outcome triggers the lifecycle's earlier checkpoint.
 
-- A new fixed, versioned Engine operation-specific establishment rule permits only
-  the original claimed human to activate exact menu-registration terms on positively
-  current local-check `DeferredV2` D or `EstablishedFromDeferredV3` G. The candidate
-  terms cannot authorize themselves. Local advisory approval/provenance stays
-  labeled claimed; this adds no independent authentication claim.
-- Terms bind original project/root, initial/check/Charter lineage, current D/G basis,
-  principal/agent, explicit instruction/delegation/approval source, approved content
-  fingerprint, register-open-leaf effect, fixed full-owner read/write reach,
-  a finite caller-approved subset of exact menu descriptors and parameter bounds,
-  reserved decisions, revocation principal and retained-original-history rule.
-  No implicit “all present or future compositions” or wildcard grants.
-- One first activation per menu stream and at most one exact compatible D→G
-  re-establishment are supported. Current G first activation is valid. D→G invalidates
-  prepared D effects; G activation requires the exact menu predecessor, same
-  actor/effect/reach/menu/bounds/reservations/retention and a fresh explicit human
-  instruction. A V1 grant is not that predecessor. Same-basis replacement, menu
-  widening, restoration after revocation and general delegation administration refuse.
-- The V1 stream and its existing exact ordinary permission continue under their
-  own currentness rules. New menu permission does not supersede, reinterpret or
-  recover a V1 grant/request. Revoking either stream acts only on its exact grant;
-  common check/Charter/governance currentness still affects every dependent stream.
-- Routine registration validates exact actor, supported descriptor membership,
-  role values/bounds, project/root and expected absence under the selected live
-  grant. Hold original native authority/tree/work guards through terminal
-  publication. Old local-check/evaluation/correction/CR permissions cannot substitute.
+## Admission and exact scope contract
 
-The fixed rule, its terms and the separately activated menu grant establish
-operating authority only. Descriptor admission establishes conformance only.
-Contracts truth, governing assignment and eventual Work Progression eligibility
-remain separate. Kind establishment remains unsupported in this packet.
+Foundation and its semantic compatibility cases are complete
+[predecessors](README.md#predecessor-evidence-and-source-constraints). Before product
+edits, meta must obtain selection of
+[recommendation A](README.md#proposed-authorization-lifecycle), authorize this plan
+and prove dispatch prerequisites. **One registration model is selected, not a
+pending alternative.** The following A details are proposed, not runtime permission.
+
+Terms bind project/root, original initial/check/Charter lineage, current supported
+D/G basis, original claimed human/check agent, approval/source/instruction/
+delegation/approved-content fingerprint, `register_open_leaf`, fixed full-owner
+read/write reach, reserved decisions, revocation principal and retained history.
+The fixed external rule authorizes establishment/change; candidates cannot
+authorize themselves. Principal/delegation/approval remain local advisory claims.
+
+Proposed closed scope has at most one clause per permitted menu descriptor:
+
+| Clause | Human-supplied permission and owner ceiling |
+| --- | --- |
+| Composition | Exact supported descriptor, role schema and compatibility binding from the three-entry menu. No all-menu/all-future default. |
+| Common text | Explicit positive maximum UTF-8 byte lengths for label and work question, each at most 4,096; nonblank owner validation still applies. |
+| Display level | Explicit permission for omission and/or a finite exact token list. Each token meets existing ASCII token syntax and 128-byte ceiling. No inferred taxonomy or permission for every bounded token. |
+| Planning output | Positive question maximum at most 4,096 bytes; exactly one nonblank question; no locator/fulfilment assertion. |
+| Requirements input | Nonempty finite permitted-locator list: fixed Contracts owner, supported definition family/schema version, exact contract reference/version and exact full definition fingerprint. Recognizing a family permits no other definitions. |
+
+Require nonempty composition scope. Reject duplicate/unknown or irrelevant clauses,
+unsupported versions, token/locator wildcards and impossible maxima. Finite lists
+and nested records fit 1 MiB complete terms/request; overflow refuses without
+clipping. All fields are approved content; example values are not defaults.
+Match exact descriptor and every common/role parameter inward of SDK, under live
+native authority through terminal publication.
+
+Human-approved same-basis successors can add/remove clauses and widen/narrow
+parameters; principal/agent, lineage, effect, reach, assurance, reservations,
+revocation and retention stay fixed. Exact expected predecessor prevents races;
+no union with older grants. D→G preserves entire latest scope/fixed fields with
+fresh explicit approval. Reinstatement after committed revocation, reassignment,
+general delegation and combined scope-change/D→G refuse next.
+
+Accepted administrative intent reserves the single head and suspends predecessor
+use. Candidate and competing administration are unusable. Proven original-key
+noncommit releases the reservation; predecessor use resumes only with original
+currentness/unrevoked proof. Uncertainty keeps suspension. This availability
+consequence is part of A for human selection; retained item/history reads stay
+available with complete proof.
+
+## Meaningful refusals
+
+- Ordinary-only R0 cannot register P/I, add a level or borrow newly recognized
+  semantics. Unactivated/self-authorizing terms, wrong actor/project, insufficient
+  reach, changed approved content and stale/revoked basis refuse.
+- Permission for C@1 refuses C@2, different full fingerprint, latest alias or
+  result locator. A semantic component fingerprint cannot replace a complete local
+  definition fingerprint. Unapproved token, even below 128 bytes, or a value above
+  approved maximum refuses.
+- P refuses guessed output locators; I asserts no assessment, qualification,
+  governance or coverage. A permitted well-shaped declaration with unavailable
+  Contracts truth records only the declaration; later resolution handles absence
+  without inferring successful assessment.
+- Unknown fields/roles/hooks, relations, kinds, changed descriptor under L's key,
+  close and unsupported schema versions refuse without discarded meaning.
+- Candidate/predecessor after accepted administration, competing/stale predecessor,
+  combined D→G widening or revoked-grant restoration cannot supply permission.
+  No second stream or grant substitution repairs these refusals.
 
 ## Owner and typed interface boundary
 
-Engine's `work_state` owner remains responsible for conformance, item identity,
-exact descriptor/role-value bindings, requests, durable receipts and current/history/
-recovery. SDK extends `HandbookSdkV1` with typed menu terms and registration methods
-following the existing prepare/save-locator/invoke/resolve/recover pattern. Keep
-V1 types, codecs and methods as exact historical contracts; use additive types
-and explicitly versioned envelopes for the new shape. Public names/module split
-can be settled just in time; no new generic operation catalog is needed.
+Engine `work_state` owns conformance, scope matching, immutable authority lineage,
+work/request identity, persistence, current/history/recovery and unsupported
+completion. Extend only the narrow held
+[local-authority seam](../../../../../crates/engine/src/local_authority/work_registration.rs)
+needed for original-human scope changes. Acquire initial/operating/tree guards
+before shared work lock, in one consistent order for authority and item effects;
+hold declared dependencies through terminal. SDK observation or a returned Allowed
+value outside those guards is insufficient.
 
-The supported shape is a closed discriminated choice:
+SDK revises the public typed surface on `HandbookSdkV1` to one terms lifecycle and
+one composition-aware `prepare_work_registration` / `register_work_item` path.
+Names are illustrative until implementation; no `register_menu_*` or legacy
+operating alternatives. Types distinguish initial establishment, same-basis change
+and unchanged-scope D→G using exact predecessor/basis. Expose saved locators/native
+outcomes for terms, work and revocation. Current grant resolution differs from
+historical request resolution. Prepared native values stay sealed; locators supply
+identity, not permission.
 
-| Choice | Descriptor/schema and item fields |
+The registration input is a closed discriminated choice:
+
+| Choice | Immutable descriptor and parameters |
 | --- | --- |
-| Ordinary | Exact retained `WorkDescriptorV1::ordinary_leaf()` descriptor bytes; no role fields. New display metadata does not alter this descriptor. |
-| Planning output | Fixed owner-supported versioned descriptor with one required-contract-output role, exactly one nonblank bounded output question (4,096 bytes), no output reference or result. No role completion/fulfilment claim. |
-| Requirements input | Fixed owner-supported versioned descriptor with one exact-requirements-input role and exactly one closed definition locator. No assessment result or target-coverage assertion. |
+| Ordinary | Exact retained `WorkDescriptorV1::ordinary_leaf()` bytes, no role values. Display/text values do not change its meaning. |
+| Planning output | Fixed versioned descriptor and exactly one required-contract-output question; no reference/result. |
+| Requirements input | Fixed versioned descriptor and exactly one exact-requirements-input definition locator; no result/coverage assertion. |
 
-Every descriptor fixes initial `open`, empty relation support, completion
-`unsupported_not_assessed`, exact role schema and compatibility version. Per-item
-values occupy only the schema's declared fields. A separate display level token
-may be omitted or caller-chosen within the existing 128-byte ASCII token contract;
-label and ordinary work question retain 4,096-byte text bounds. No default taxonomy
-is applied to historical or omitted values. Item/request keys keep the existing
-128-byte contract and each complete serialized record/request stays within 1 MiB.
-Unknown fields/roles, duplicate keys, trailing documents, excess values, unsupported
-version, mutable aliases and mismatched descriptor/schema refuse; do not discard them.
+Every descriptor fixes initial `open`, empty relations, completion
+`unsupported_not_assessed`, role schema and compatibility version. Same-project
+leaves only. Omitted level remains omitted; historical items gain no token/taxonomy.
+Item/request keys retain 128-byte token syntax; texts have 4,096-byte ceilings and
+possibly smaller approved maxima. Duplicate/unknown fields, trailing documents,
+excess values and mismatched descriptor/schema refuse.
 
-**Exact Contracts locator:** use an Engine-owned neutral typed declaration carrying
-the fixed Contracts owner attribution, definition schema/family version, exact
-contract reference/version and exact definition fingerprint. It carries no
-filesystem path or “latest” selector. Distinguish the existing intrinsic V1,
-complete local V2 and full local V3 definition families as closed supported tags;
-future families/versions refuse until expressly supported. SDK copies the exact
-owner-produced fields; Engine validates this declaration's shape and binding
-syntax without depending on Contracts or claiming the referenced source exists.
-The selected role is a declaration, so even an intrinsic-family binding supplies
-no completeness or permitted-use promise.
-
+Engine's neutral definition locator uses closed tags for intrinsic V1, complete
+local V2 and full local V3 Contracts definitions; future families refuse. It names
+fixed owner, family/schema, exact reference/version and full fingerprint, no path
+or latest selector. SDK copies owner-produced fields; Engine validates shape,
+binding syntax and permission, not source existence/completeness.
 [Contracts identity](../../../../../crates/contracts/src/identity.rs),
-[definition](../../../../../crates/contracts/src/definition.rs),
+[intrinsic definition](../../../../../crates/contracts/src/definition.rs),
 [local V2](../../../../../crates/contracts/src/local_contract.rs) and
 [full V3](../../../../../crates/contracts/src/local_evaluation_definition.rs)
-control those fields. V2/V3 `binding()` returns the whole definition fingerprint,
-which differs from the embedded semantic V1 definition fingerprint. A semantic
-component fingerprint cannot stand in for a full-definition binding. Contracts
-`read_local_definition_v3` in [its repository](../../../../../crates/contracts/src/owner_repository/full_definition_repository.rs)
-resolves its truth; Engine does not reconstruct that closure, qualify the
-definition or impose a work-registration prerequisite on independent Contracts use.
-Fingerprint syntax/owner-family attribution is not proof of resolution. Future
-Work Progression must separately admit exact supported target coverage.
+own those identities. V2/V3 `binding()` fingerprints the whole definition, distinct
+from embedded semantic V1. Contracts resolves truth; later Work Progression admits
+qualification/governance/coverage. No inward Contracts/SDK dependency or work
+prerequisite for independent Contracts use.
 
-## Identity, persistence and recovery obligations
+## Persistence and minimum retained-state compatibility
 
-Preserve `WORK_IDENTITY_SCHEME_V1` and `work_item_identity_v1(project, item_key)`
-unchanged. Codec, release, descriptor, role value, level token, kind and delivery
-key cannot become item-identity inputs. A new item always receives one immutable
-initial snapshot and registration receipt with exact request/grant/basis, descriptor
-bytes and fingerprint, typed role values, display metadata and initial state.
-No descriptor/default upgrade or mutation of an existing item is supported.
+Preserve `WORK_IDENTITY_SCHEME_V1` and `work_item_identity_v1(project, item_key)`:
+codec/release/descriptor/level/role/kind/delivery are not item-identity inputs.
+New initial snapshot/receipt binds exact request/grant revision/basis, descriptor
+bytes/fingerprint, role values/display and `open`. No old item edit/rebind/deletion.
 
-The proposed storage extension uses the **existing retained owner and shared work
-lock**, positive reservation inventory and finite transaction budget. Add explicitly
-versioned new transaction/request/snapshot records; dispatch decoding by exact
-supported schema and preserve every old record byte/fingerprint. Extend admitted
-row names/handlers narrowly as needed. Do not add an undeclared sibling directory,
-change owner/root/lock identity or rewrite V1 slots/history to make the menu fit.
-Both permission streams and every item share one authoritative expected inventory;
-same item/request conflicts and pending reservations are checked across supported
-record versions. An older binary may refuse new record schemas; it must never
-silently project them to ordinary work. Forward legacy reads in the new owner are
-required; backwards mixed-store operation is not promised.
+Use existing retained owner/root/shared lock and positive expected inventory.
+Add closed versioned records/schema dispatch narrowly; preserve old V1 bytes and
+fingerprint domains. An original ordinary grant retains singleton scope with
+display omitted through the same admission/lifecycle. Retained readers/recovery
+are minimum compatibility, not permanent APIs or a separate permission population.
+Schema-specific original-request decoding preserves equality/proof before shared
+lifecycle checks; it never manufactures new permission.
 
-The combined store stays at **32 retained transactions and 128 MiB**, including
-activation, re-establishment, revocation, item, candidate and noncommit history.
-There is no new budget per stream or format version. Preserve 1 MiB record bounds
-and bounded complete inventory, including peak staging/write prefixes. New-effect
-capacity refusal preserves exact old reads/recovery and reservations; no truncation,
-garbage collection, capacity increase, new database or storage migration is selected.
-Kind transactions in the later packet must account against this same bounded budget.
-The P3 repeated debug scan cost remains advisory; make no throughput claim or
-unrequested optimization project.
+Inventory/conflicts span all retained schemas. Authority has one unbranched
+expected-predecessor chain/reservation; item/request keys reserve across old/new
+records. Extend admitted names explicitly, without blind sibling directories,
+rewritten slots/history, newest-file scans or legacy permission heads. Older
+binaries may refuse new schemas; backwards mixed-store writes are not promised.
+Disposable fixtures/API call sites may change; retained-state tests use unchanged
+original bytes. Removing decoders/store would lose historical verification/recovery
+and is unauthorized, as [the slice explains](README.md#development-compatibility-and-retained-truth).
 
-Use the foundation's [terminal/prefix contract](../work-item-state-foundation/packet-1.md#durable-prefix-and-authority-transition-contract)
-for menu activation, compatible re-establishment, revocation and registration:
+Budget stays **32 transactions / 128 MiB**, including initial terms, every scope
+revision/D→G/revocation, item, candidate/noncommit history and later kind operations.
+Slots are not reused. One initial grant, two scope successors and one revocation
+consume four slots before items/other history. Preserve 1 MiB record and peak
+staging/inventory bounds. Overflow refuses new admission while preserving old
+reads/recovery and closure of accepted transactions; closing an accepted original
+transaction must not require a fresh slot. No capacity increase, per-schema budget,
+garbage collection, database or migration tool. P3 repeated debug scan cost remains
+advisory; no throughput claim or optimization project.
 
-| Proof/prefix | Required observable result |
+## Original-request recovery and transitions
+
+The [foundation prefix contract](../work-item-state-foundation/packet-1.md#durable-prefix-and-authority-transition-contract)
+governs every new effect. Retain exact acceptance/reservation and publication-
+attempt evidence before writes. Commit requires exact no-replace terminal plus
+matching grant or snapshot/receipt and original proof. Decision/candidate alone
+supplies no usable permission/current `open` truth.
+
+| Retained proof | Required result and action |
 | --- | --- |
-| Positive complete inventory, no accepted original request | Unaccepted/absent request, with no replayed noncommit or creation permission. Absence must cover both streams/record versions. |
-| Accepted intent/reservation, decision or snapshot without terminal | Pending. New terminal publication requires the exact original live establishment/registration rule and basis. No old snapshot becomes `open` by enabling new support. |
-| Exact terminal plus matching snapshot/receipt and original authority proof | Committed/replayed exact original effect. Current item reads and historical outcome resolution remain separate from present permission. |
-| D→G, revocation, successor/currentness loss or reset before publication | Never substitute a menu/V1/G grant. Exact recovery proves noncommit only from retained complete positive proof; otherwise uncertainty keeps reservations. |
-| Missing/corrupt/substituted inventory, owner/root/lock, request or publication-attempt proof | Integrity refusal or uncertainty; never inferred absence, restored permission, recreated identity or blind new-key retry. |
+| Complete positive inventory, no accepted original request | Unaccepted/absent request; no creation permission/noncommit replay. Recovery never starts a new request. |
+| Accepted intent/decision/candidate without terminal, original authority unchanged | Pending. Original-key publication only with original usable head or original fixed establishment/change/revocation rule, current original basis and held guards. Candidate never authorizes activation. |
+| Accepted successor/revocation, D→G, currentness loss or reset before item publication | No candidate/successor/G substitution. Prove original commit/noncommit or retain uncertainty and item/request reservations. Scope narrowing/removal changes future permission, not retained items. |
+| Pending authority operation | Reserves/suspends head. Continue only original operation/rule/basis/predecessor, excluding its own reservation from its own continuation checks. Other administration/use refuses until commit/noncommit. |
+| Exact committed terminal and matching records/proof | Replay original outcome without second effect, reactivation or restored permission. Current item truth is separate from live authority. |
+| Positive noncommit proof | Complete retained inventory, original owner/root/lock, and positive proof publication never attempted or did not install permit durable original-key noncommit before reservation release. Keep all history. |
+| Possible publication or corrupt/substituted/missing proof | Integrity refusal/uncertainty. Absent terminal bytes alone never prove noncommit. Retain reservation; no timeout/reset/replacement grant/new-key retry. |
 
-Persist exact accepted intent and publication-attempt checkpoint before their
-native writes. Candidate grant cannot finalize its own activation. Missing terminal
-bytes do not prove a possible attempt failed; historical-proof finalization requires
-exact original committed proof. Noncommit release requires retained proof the
-terminal was never attempted or positively did not install, with complete positive
-inventory and original owner/root/lock, before durable original-key noncommit.
-Keep uncertain reservations local to affected identities; capacity can still block
-new admission. Do not silently widen a grant while recovering another effect.
+Same-basis pending scope-change noncommit can restore predecessor usability only
+under its exact still-current unrevoked proof. After D→G/revocation it stays
+unusable. Committed successor never substitutes for old requests even with full
+scope overlap. Registration committed before serialized change keeps its receipt;
+an earlier accepted change blocks predecessor publication. Test both lock orderings.
 
-Retained reads/history/recovery must verify original dependencies outside
-`.handbook/state`. Runtime reset or later current governance cannot erase past work
-or become a condition for its historical truth; lost live operating state blocks
-new effects. Retain exact original initial/check/Charter/D/G proof, instruction/
-approval/delegation/claimed assurance, original grant, intent, descriptor, role values,
-snapshot/receipt and terminal/publication evidence. Locks and physical-root proof
-cannot be reconstructed as a repair for missing committed history.
+Retained read/history/recovery dependencies outside `.handbook/state` verify exact
+initial/check/Charter/D/G closure, approval/instruction/delegation/advisory claims,
+grant/request/descriptor/values and publication evidence. Reset may block effects
+through lost operating state, but cannot erase past truth or recreate physical
+locks/identity as proof. No bulk cancellation/transfer/store reset is implied.
+
+## SDK workflow and response guidance
+
+1. Observe current supported basis and prepare supplied approved terms for initial
+   establishment or exact predecessor successor. Save original locator before
+   activation/change; resolve native outcome. Pending candidates are unusable.
+2. Prepare ordinary/P/I against exact usable grant, save original locator, then
+   invoke the common registration operation.
+3. Reopen to resolve current item separately from historical outcome. Recover lost
+   reply with saved original locator without a newer grant. Save revocation locators
+   before invoking in the same way.
+
+| Response | Caller meaning and next step |
+| --- | --- |
+| Committed/replayed with receipt | Save locator/receipt. Work establishes `open` only; authority replay is history only. Resolve current permission before new effects. |
+| Refused before effect | Correct supported input under current permission or seek explicit scope change. Changed content needs new request key and cannot overwrite committed/reserved item or authority history. |
+| Pending | No usable grant or `open` candidate. Recover original request; administrative reservation suspends dependent effects. |
+| Positively noncommitted | Keep history; fresh effect needs current permission. Administrative suspension lifts only with unchanged current predecessor proof. |
+| Uncertain | Keep/recover original locator; no absent/open/closed assertion or new-key retry. Reservations stay. |
+| Unaccepted | Positive proof of no acceptance; no creation permission/noncommit replay. |
+| Current item/historical outcome | Exact owner fact, no permission/eligibility/completion. Missing retained proof refuses instead of empty success. |
+| Completion unsupported/not assessed | No Determination, eligibility/disposition or close effect. Kinds/relations/closing unsupported. |
 
 ## Acceptance and verification
 
-1. Ordinary, planning-output and requirements-input forms exercise the selected
-   typed menu through real native/SDK paths, with display token limits, no invented
-   output locator and exact full versus intrinsic definition bindings distinguished.
-   Every response reports registration only and unsupported/not-assessed completion.
-2. A separately activated proposed menu grant permits only its exact approved
-   descriptor subset/bounds; V1-only permission, unactivated/self-authorizing terms,
-   insufficient reach, stale/substituted/revoked basis and unknown schema refuse.
-   First activation on D and G and exact own-stream D→G re-establishment are proven;
-   general replacement and cross-stream predecessor/recovery refuse.
-3. Existing L retains identical item identity, descriptor bytes/binding, request
-   bytes and receipt through menu enablement, reopen, D→G, revocation and actual
-   reset. New requests conflicting with L or any old/new pending key refuse.
-   Old codec fixtures are not regenerated to fit new semantics.
-4. Real interruption/process tests prove original guards through terminal and
-   each new effect's prefixes under authority transitions. Complete mixed-version
-   inventory, transaction/attempt loss, root/lock substitution, concurrency and
-   32-transaction/128 MiB/1 MiB overflow preserve refusal/noncommit/uncertainty and
-   old recovery. Zero remaining capacity is tested with retained grant/history rows.
-5. A standalone normal-dependency SDK consumer saves exact new locators before
-   invocation, registers P/I, reopens, resolves current/history, recovers lost replies,
-   demonstrates old-grant/unsupported-role/close refusals and reports clear next
-   steps for committed, refused, pending, noncommitted and uncertain outcomes.
+1. Real native/normal SDK paths establish terms initially on D/G and register
+   ordinary/P/I through one path. Exact token/text/locator scope and unsupported
+   roles/relations/hooks/close refuse; no output locator or assessment assertion.
+2. Ordinary-only scope never widens on recognition. Human-approved same-basis
+   successors add/remove/widen/narrow clauses, retain immutable history and at most
+   one usable head. Candidate/self-authorized, competing/stale predecessor and
+   unrelated permissions refuse. Both retained foundation/new-format predecessors
+   use the same lifecycle without special upgrade.
+3. Pending administration suspends predecessor; positive noncommit restores it
+   only if otherwise current; uncertainty keeps suspension. Revocation blocks new
+   effects, no reinstatement/fallback. D→G after multiple revisions requires latest
+   predecessor/unchanged scope; no old request borrows successor/G permission.
+4. Retained L, grants/receipts/request locators and unresolved foundation prefixes
+   preserve exact bytes/identity/scope/outcomes through support, changes, reopen,
+   D→G/revocation/reset. Cross-schema conflicts and corrupt history fail closed.
+   Prove pending continuation with still-live original singleton authority and
+   noncommit/uncertainty after its loss, without permanent old public APIs.
+5. Deterministic interruption and real process serialization test new scope/P/I
+   prefixes against change/revocation/D→G/reset. No candidate truth, grant unions,
+   double heads or guard gaps. Missing attempt/inventory/root/lock proof refuses
+   or stays uncertain with exact original-key recovery.
+6. Combined 32-transaction/128 MiB/1 MiB/peak bounds preserve reads/recovery. Zero
+   free slots including authority/candidate/noncommit rows still permits closure
+   of accepted originals. No slot reuse or automatic expansion; report scan cost.
+7. Ordinary default-feature consumer saves locators, demonstrates initial/scope
+   change, P/I reopen/current/history/lost-reply recovery and clear refusal steps,
+   without fault helpers/private file knowledge.
 
-Likely product paths after authorization: the Engine work-state module/types/
-store/transactions and narrow held authority seam; SDK work-state facade, example
-and usage; focused owner/SDK compatibility, durability and integrity tests. No
-Contracts semantics or source-family rewrite is needed for the neutral declaration.
-Use existing Engine codecs/retained-root primitives; introduce no SDK-private
-inward dependency. The structured-data standard is a required source with
-PROPOSED general defaults and fixed Contracts JSON, never migration authority.
+Likely product paths after authorization: Engine work-state types/store/transactions
+and narrow held authority seam; SDK facade/example/usage; focused owner/SDK
+retention/durability/integrity targets. No Contracts semantic rewrite. Reuse Engine
+duplicate-safe complete JSON/canonical identity and retained-root primitives;
+no inward SDK dependency. Require the format standard with PROPOSED general
+defaults, fixed Contracts JSON and existing identities.
 
-Implementation verification plan (not run by this documentation task):
+Dependent steps: finalize typed scope/lifecycle contracts; implement native menu
+and immutable successor admission/persistence/recovery; connect single SDK surface
+and usage; verify acceptance and review the outcome. These steps authorize no
+product work during preparation or another packet.
+
+Proportionate implementation command plan, **not run by this documentation task**:
 
 ```text
 cargo test -p handbook-engine --test work_state
@@ -231,18 +297,16 @@ cargo check -p handbook-sdk --example work_state
 git diff --check
 ```
 
-Extend the existing focused targets or add narrowly named targets for this menu;
-run default-feature ordinary consumer proof separately so fault-test authority
-helpers cannot supply its behavior. Report actual Windows/Unix and consumer stack
-limits. Rerun earlier targets only where the changed path invalidates evidence;
-do not reclose foundation/local-check or claim whole-workspace green.
-Before source-symbol edits run upstream GitNexus impact and report callers,
-processes and risk; warn on HIGH/CRITICAL. Attempt required detect_changes before
-commit and distinguish actual delta from inherited branch-versus-main scope.
-Known stale/foreign index and failed FTS require bounded direct-source fallback,
-not an index-repair project.
+Extend focused targets or add narrow new targets; run ordinary consumer with normal
+dependencies/default features separately from fault helpers. Report actual Windows/
+Unix/debug stack limits. Rerun earlier targets only if changed paths invalidate
+evidence; no foundation/local-check reclose or full-workspace claim. Before source
+symbol edits run upstream GitNexus impact, report callers/processes/risk and warn
+on HIGH/CRITICAL. Attempt detect_changes before commit, distinguish this delta from
+inherited branch-versus-main scope, use bounded direct-source fallback for known
+stale/foreign index/failed FTS and do not repair the index here.
 
-After proportional verification and one focused causal review, commit the
-authorized packet coherently and return its result to meta for the human recap
-and stop. Kind establishment/use and adjacent outcome preparation remain outside
-this increment, even if all tests pass.
+Verify, use one fresh causal reviewer, fix P1/P2 with fresh delta review after
+material remediation and report P3/P4 advisories. Commit one coherent authorized
+packet locally; return to meta for human recap and stop. Kinds and adjacent outcome
+preparation remain outside this increment.

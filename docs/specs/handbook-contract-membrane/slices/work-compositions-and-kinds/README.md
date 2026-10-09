@@ -1,184 +1,227 @@
 # Configurable work compositions and optional immutable kinds
 
-Status: **bounded slice preparation complete for review; two consequential
-authority choices remain proposed; no product execution authorized** — 2026-10-09.
+Status: **unified registration direction human-selected; revised bounded
+preparation ready for review; lifecycle details proposed; no product execution
+authorized** — 2026-10-09.
 
 Descriptive slice identity: `work-compositions-and-kinds`. This owns exactly
 [near-term outcome 2](../../coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints).
-After reviewing the completed foundation recap, the human selected “then authorize
-preparation of configurable compositions and optional immutable kinds” and requested
-dispatch of this fresh top-level preparation. That authorizes source-backed planning,
-verification, focused causal review and one local documentation commit. It does
-not select the new authority recommendations below or authorize implementation.
-The [lifecycle](../../work-unit-lifecycle.md), [review policy](../../review-and-closeout-policy.md)
-and [preparation prompt](../../authority-preparation-prompt.md) control this task.
+After the completed foundation recap, the human authorized this slice's
+preparation, then rejected the parallel permission streams proposed at
+`b7e0a48c788ca4d42cef326c8206cf1170356073` and selected **one composition-aware
+registration authority model for a greenfield project**. This revision supersedes
+that proposal. Authorization covers planning, verification, focused causal review
+and one local documentation commit; it supplies no product implementation or
+actual runtime project's terms. The [lifecycle](../../work-unit-lifecycle.md),
+[review policy](../../review-and-closeout-policy.md) and
+[preparation prompt](../../authority-preparation-prompt.md) control this task.
 
 ## Outcome and selected boundary
 
-A typed Rust SDK caller can choose from an Engine-owned finite declarative menu
-for **new** same-project `open` leaf registrations: the retained ordinary leaf,
-a planning contract-output leaf, or an implementation requirements-input leaf.
-Caller-selected display vocabulary/level and labels create no hierarchy or
-completion meaning. Optional reusable immutable kind versions bind the entire
-exact supported descriptor, role schema and parameter bounds, lifecycle support
-and compatibility version. An equivalent explicit per-item composition remains
-available. A kind supplies neither a new primitive nor operating permission.
+A typed Rust SDK caller chooses an Engine-supported composition for a new
+same-project `open` leaf. **Ordinary, planning-output and requirements-input use
+one registration path and one permission model.** Human-approved terms identify
+the exact permitted compositions and parameter scope. Release recognition of a
+new composition never expands an existing grant; active permission expansion
+requires explicit authorization. Existing items and receipts keep their exact
+meaning. Kind-definition authority stays separate from work-registration authority.
 
 These are carried-forward **human selections**, not reopened recommendations:
 
 | Selected input | Consequence here |
 | --- | --- |
-| [Foundation compatibility gate](../work-item-state-foundation/README.md#composition-and-kinds-successor-compatibility-gate) and [packet cases](../work-item-state-foundation/packet-1.md#selected-successor-compatibility-acceptance) | Retain the ordinary descriptor; add only planning-output and exact requirements-input leaves. Same project, initial `open`, no live relations and completion `unsupported / not assessed`. Vocabulary/level token is bounded to 128 bytes; label to 4,096 bytes. |
-| Planning required-output role | Declare a bounded output question before issuance. Do not invent a future exact Contracts locator. Actual owner-established complete output and this item's own completion requirements are later independent eligibility facts. |
-| Implementation requirements-input role | Carry an exact versioned Contracts definition locator in a closed typed role. Declaration establishes no Contracts truth, qualification, assessment, governing assignment or target coverage. |
-| Whole-composition kind and explicit equivalent | The exact descriptor/schema/lifecycle/compatibility binding is immutable. Per-item values vary only in its declared supported fields and bounds. Unsupported overrides need a different supported composition/version; unknown roles, assessment-result inputs and arbitrary hooks refuse. |
-| Engine / Contracts / Work Progression ownership | Engine admits conformance and exact work-definition identity. Contracts resolves its own definitions/truth. Work Progression later admits coverage and governing completion. No Engine dependency on Contracts/SDK and no generic Artifact Kind reuse. |
-| Historical compatibility | Keep the existing item identity scheme, exact historical descriptor bytes, bindings, request identities and receipts. Release capability cannot reinterpret, upgrade or rebind old items. |
+| [Foundation menu](../work-item-state-foundation/README.md#composition-and-kinds-successor-compatibility-gate) and [compatibility cases](../work-item-state-foundation/packet-1.md#selected-successor-compatibility-acceptance) | Ordinary open leaf; planning-output leaf with a bounded required-output question; requirements-input leaf with an exact versioned Contracts definition locator. Same project, initial `open`, no live relations, completion `unsupported / not assessed`. Display token at most 128 bytes; label at most 4,096 bytes. |
+| Planning required-output role | Declare the question before issuance, with no guessed future contract locator. Actual owner-established complete output and the planning item's own completion requirements are later independent eligibility facts. |
+| Exact requirements-input role | Declare one exact versioned definition, with no claim of source availability, qualification, assessment, governing assignment or target coverage. |
+| Optional whole-composition kind and explicit equivalent | An immutable version binds the exact supported descriptor, role schema and parameter bounds, lifecycle and compatibility version. It adds no primitive or permission. Per-item values vary only within declared bounds; unknown roles, assessment-result inputs, relations and arbitrary hooks refuse. |
+| Owner separation | Engine admits composition conformance and work identity; Contracts resolves its definitions/truth; Work Progression later admits coverage and governing completion. No Engine dependency on Contracts/SDK and no generic Artifact Kind reuse. |
+| Authority and history | No silent scope widening, item reinterpretation, rebinding or substituted original-request authority. Definition/current-default changes cannot rewrite retained truth. |
 
 The [selected amendment](../../semantic-model/amendments/work-progression-kinds-and-relations.md),
 [decision register](../../semantic-model/review-decision-register.md#work-progression--kinds-relations-and-governed-completion)
 and [Work Progression ownership](../../semantic-model/operational-reliance-and-actions.md#work-progression-ownership)
-remain controlling. Their broader relation/assessment semantics are not product
-support in this slice. Independent Contracts authoring/evaluation still needs
-neither work registration nor kinds. Phase-6 order remains unchanged.
+remain semantic input. Their wider relation/assessment semantics are not support
+in this slice. Independent Contracts use needs neither work registration nor kinds.
 
 ## Predecessor evidence and source constraints
 
-Foundation is implemented at `cbfbf7629a0642b8cb08aefea36fa556009d9274`, the direct
-child of selection recording `cb00b9da351095c5cb17c8bc4e754f908b0565d0`, on
+Foundation is implemented at `cbfbf7629a0642b8cb08aefea36fa556009d9274`, after
+selection recording `cb00b9da351095c5cb17c8bc4e754f908b0565d0`, on
 `feat/handbook-contract-membrane-clean`. Supplied meta evidence confirms all eight
-acceptance conditions, cross-packet integration, aggregate completion and the
-human recap. The human then requested this successor preparation. This task
-verified commit lineage and inspected focused source/tests; it did not rerun or
-reclose foundation or independent-local-check.
+conditions, integration, aggregate closeout and the reviewed human recap. This
+preparation checked lineage and focused source/tests; it does not rerun or reclose
+foundation or independent-local-check. Starting HEAD is `b7e0a48`.
 
-Inherited foundation evidence: Engine 3/3, normal-dependency SDK consumer 6/6,
-durability 7/7 and integrity 9/9, compilation/diff checks passed; final fresh causal
-review APPROVE with no unresolved P1/P2. Repeated debug scan cost is P3 advisory.
-Windows was exercised; Unix and full-workspace verification remain unclaimed.
+Inherited foundation evidence: Engine 3/3, ordinary SDK consumer 6/6, durability
+7/7 and integrity 9/9; compilation/diff checks passed; final fresh causal APPROVE
+with no unresolved P1/P2. Debug scan cost remains P3 advisory. Windows was
+exercised; Unix/full-workspace verification remains unclaimed.
 
-| Current product truth at that commit | Planning consequence |
+| Current source evidence | Constraint, not authority to freeze the design |
 | --- | --- |
-| [Engine types](../../../../../crates/engine/src/work_state/types.rs), `WorkRegistrationTermsV1`, `WorkRequestLocatorV1` | V1 grants permit one exact ordinary composition; request composition must equal it. Merely accepting a new descriptor in a decoder would widen existing authority. |
-| [Transactions](../../../../../crates/engine/src/work_state/transaction.rs), `activation_compatible` | Only initial activation or one exact compatible D→G predecessor is supported. Same-basis menu expansion and general replacement are absent. D→G cannot change composition. |
-| [Store](../../../../../crates/engine/src/work_state/store.rs), `inventory`, `CAPACITY` | Positive closed inventory, one retained owner/lock, 32 retained transactions **including grants, candidates and noncommit history**, and 128 MiB. The parent presently admits only `work.lock` and `v1`; adding a sibling directory blindly would break reads. |
-| [SDK facade](../../../../../crates/sdk/src/work_state.rs) and [usage](../../../../../crates/sdk/docs/work-state.md) | Typed preparation, saved original locators, native invocation and separate current/history/recovery responses exist. No kind-establishment operation exists. |
-| [Definition codecs](../../../../../crates/engine/src/definition_identity.rs) | Duplicate-safe complete JSON parsing and canonical JSON identity exist inward of SDK. Preserve the byte domains and closed versioned contracts. |
+| [Engine types](../../../../../crates/engine/src/work_state/types.rs), `WorkRegistrationTermsV1`, `WorkRequestLocatorV1` | Foundation permission names one exact ordinary composition. Decoder recognition cannot expand it. The current API shape can be replaced in greenfield development. |
+| [Transactions](../../../../../crates/engine/src/work_state/transaction.rs), `activation_compatible`, `current_grant` | Only initial activation and one exact compatible D→G predecessor exist. Same-basis scope change is new work; reserved `terms_change` does not implement it. Pending successor/revocation already blocks dependent new effects. |
+| [Held authority seam](../../../../../crates/engine/src/local_authority/work_registration.rs) | Holds original native operating/tree guards, captures exact historical proof, and supplies no work permission by itself. SDK observation alone is not through-commit authority. |
+| [Store](../../../../../crates/engine/src/work_state/store.rs), `inventory`, `CAPACITY` | One retained owner/lock and positive inventory; 32 transactions including authority/candidate/noncommit history, 128 MiB, 1 MiB records. Parent currently permits only `work.lock` and `v1`; new schemas/layout need closed admitted inventory. |
+| [SDK facade](../../../../../crates/sdk/src/work_state.rs), [usage](../../../../../crates/sdk/docs/work-state.md), [owner tests](../../../../../crates/engine/tests/work_state.rs), [SDK tests](../../../../../crates/sdk/tests/work_state.rs) | Typed prepare/save-original-locator/invoke/current/history/recover exists. No positive menu, kind or scope-change operation is delivered. |
 
-Product execution is inadmissible until the exact pending choices that govern an
-increment are selected, its plan is human-authorized, and hard predecessors are
-proven complete at dispatch. The foundation predecessor is complete; stale status
-prose is corrected narrowly by this preparation. No CR root binding, broad IAM,
-storage migration or performance project is a predecessor.
+Foundation is complete. Execution requires selection of proposed details
+applicable to the increment, approval of its bounded plan and live proof of
+prerequisites at dispatch. No CR-first dependency, generic IAM, migration platform
+or storage redesign is introduced.
 
-## Exact decisions for human selection
+## Development compatibility and retained truth
 
-The existing sources select menu meaning and owner placement, but explicitly
-leave kind-definition authority to this preparation. They also provide no
-same-basis operation for expanding a V1 registration grant. A reserved human
-`terms_change` decision is not an implemented replacement operation. The
-following recommendations are **PROPOSED**, requiring selection at meta before
-the affected product work. An automated verdict cannot approve them.
+**Development compatibility:** old SDK method/type shapes and development
+fixtures do not automatically require permanent support. The greenfield public
+surface may be revised to one typed composition-aware interface, and disposable
+test setup may be updated. There is no promise of old-source compilation,
+backwards mixed-binary writes, permanent legacy API or production migration tool.
+Updating fixtures must not erase tests of retained historical bytes.
 
-1. **How is permission for new menu registrations established, including in a
-   project with an existing foundation grant?** Recommend a separate, versioned,
-   fixed Engine menu-registration rule/terms stream, explicitly activated by the
-   original claimed human on positively current local-check D or established-from-D
-   G. Human-approved terms name a finite subset of the supported exact descriptors
-   and their permitted parameter bounds. V1 grants retain only their original
-   ordinary behavior; both streams share item uniqueness, inventory and locking.
-   Each stream preserves exact compatible D→G re-establishment with its own
-   predecessor; no stream can finish the other's old request. This serves existing
-   projects without editing their grants. Alternative: an expressly authorized
-   one-time V1→menu grant successor with its own change/compatibility and recovery
-   contract. That adds replacement authority and invalidation semantics absent
-   today; it is larger than the recommended additive cut. “Upgrade the decoder”
-   or requiring a replacement project is not a safe alternative.
-2. **Who may establish an immutable kind version, by which operation and prior
-   authority?** Recommend a separate fixed Engine definition-establishment rule:
-   the original claimed human approves **one exact kind version/content** on
-   current local-check D/G; a typed prepare/establish operation durably binds that
-   approval and its original basis. No standing agent kind-writing grant is minted.
-   The reusable definition remains historical owner truth after the basis changes;
-   using it for new work still requires current registration permission. Alternative:
-   explicit human activation of a separately bounded reusable agent
-   kind-establishment grant. That needs its own permitted version/content reach,
-   revocation/currentness and recovery contract. The fixed per-version rule is
-   smaller and preserves the selected separation from registration. Work-registration,
-   local-check definition-author, filesystem or pack permission cannot substitute.
+**Authority and historical truth:** greenfield does not authorize deleting
+retained owner state. The minimum actual obligation is to read and verify retained
+items/receipts, exact grants/terms and every accepted unresolved request with its
+original bytes, fingerprints, basis, reservations and publication proof. Preserve
+the item identity scheme across release/codec/composition versions. Keep bounded
+schema-specific decoding and original-request recovery where needed for that
+retained population; do not expose a second operating permission stream.
 
-Decision 1 gates [Packet 1](packet-1.md). Decision 2 gates Packet 2; it does not
-block the independent explicit-composition behavior if Packet 1 is separately
-approved. The preparation returns `STOPPED` for these exact selections rather
-than presenting either recommendation as current authority. No other unresolved
-product decision is delegated silently to implementation.
+Within unified admission, a retained foundation grant has only its original
+singleton ordinary scope and existing text bounds, **no display-level field or new
+roles**. Its original basis/currentness still governs use. It can authorize only
+ordinary parameters already permitted; recognition of new types grants nothing
+further. A normal explicit scope-change operation may name it as exact predecessor,
+like any other retained head. This is the same lifecycle, not a V1-to-menu upgrade.
+
+Dropping old record decoders would make retained items/receipts unverifiable and
+unresolved requests unrecoverable; resetting the store would destroy history and
+reservations; rewriting old grants would corrupt approved scope and original
+request identities. None is authorized. If implementation proposes abandoning
+any retained population, it must identify that exact loss and obtain separate
+human authorization first. No abandonment is recommended here.
+
+## Unified owner and permission boundaries
+
+Engine `work_state` remains the work-definition/conformance, registration,
+authority-history and persistence owner. Its fixed operation-specific human
+establishment/change rule sits outside candidate terms. The narrow local-authority
+seam supplies held current initial/check/Charter/D/G proof; work admission checks
+the selected active grant, composition and parameters under those guards through
+terminal publication. SDK forwards typed inputs and attributed native outcomes;
+it neither mints authority nor verifies Contracts truth.
+
+There is one registration authority lineage per existing supported project/check
+identity, at most one current usable head, one expected-predecessor contract and
+one registration request path. Record versions distinguish historical evidence;
+they do not select parallel permission populations. Fixed menu admission establishes
+conformance, not operating permission. Local-check, evaluation, correction, CR,
+filesystem or pack permission cannot substitute. Advisory approval/principal/
+delegation remain labeled claims; no authentication or host enforcement is added.
+
+## Proposed authorization lifecycle
+
+The unified direction is **selected**. The following **recommendation A** is a
+new bounded lifecycle/scope contract for human selection before Packet 1. Include
+explicit same-basis scope changes next so an existing ordinary-only project can
+authorize P/I without another stream.
+
+| Lifecycle step | Proposed bounded contract |
+| --- | --- |
+| Initial establishment | Original claimed human approves exact terms on positively current local-check `DeferredV2` D or `EstablishedFromDeferredV3` G. Positive complete owner/history proves no prior committed head or unresolved establishment. Bind project/root, original initial/check/Charter lineage, current basis, original principal/check agent, source/instruction/delegation, approved-content fingerprint, register-open-leaf effect, fixed full-owner reach, reserved decisions, revocation principal and retained-history rule. Candidate terms cannot authorize themselves. |
+| Exact scope | Nonempty finite subset of the three exact descriptor/schema/compatibility bindings. Human-supplied text maxima within owner ceilings; explicit omission permission and/or finite display-token set; bounded planning question; finite set of exact requirements definition locators. No latest/family wildcard, arbitrary predicates, implicit defaults or future-menu reach. Complete closed terms/request at most 1 MiB. Packet 1 details the clauses. |
+| Explicit scope change | Original claimed human uses the fixed external change rule, fresh approval/instruction and exact expected current committed predecessor. Create immutable successor on the same current D/G basis. Permit only composition additions/removals and parameter widening/narrowing; principal/agent, lineage, effect, reach, assurance, reservations, revocation and retention stay fixed. Even narrowing is explicit. No in-place edits, agent administration, branching or grant unions. Commit makes successor sole usable head; prior terms remain exact history. |
+| Pending change or revocation | Accepted intent reserves the head and conservatively suspends predecessor use for new effects. Candidates unusable; competing administration refuses. Exact positive noncommit releases administrative reservation and permits unchanged predecessor again only if its original basis is still current and unrevoked. Uncertainty keeps suspension. This availability tradeoff needs human selection. |
+| Revocation | Declared original principal submits exact head and source/instruction. New terminal publication requires original live basis and guards, as in foundation; committed revocation is retained historical proof. Accepted revocation suspends new use; committed revocation permits no new registrations. Reinstatement is unsupported next; never fall back to an earlier grant. Lost/stale live authority already blocks effects. |
+| D→G | Old D permission/preparations become stale. Explicit original-human re-establishment on current G names exact retained latest unrevoked predecessor and preserves entire scope/fixed fields. It may follow multiple scope revisions; no special version upgrade. Combining scope change with D→G refuses: re-establish unchanged scope, then separately authorize a scope change on G. No automatic carry-forward. |
+| Pending registration after change | Never retarget to successor, G or newly matching scope, even if permission overlaps. A missing terminal can continue only while exact original grant remains usable head on original live basis. Otherwise original recovery proves committed history, positive noncommit or uncertainty, retaining conflicting item/request reservations. No bulk cancellation or rewrite. |
+| Authority-operation recovery | Original establishment/change/revocation rule, exact request/predecessor and original basis govern continuation; no candidate/substituted grant completes activation. Exact committed proof replays history without reactivation. Terminal/prefix and noncommit rules apply to authority and registration alike. |
+
+The [foundation terminal/prefix contract](../work-item-state-foundation/packet-1.md#durable-prefix-and-authority-transition-contract)
+controls commit, original-proof replay and noncommit. Snapshot/grant candidate
+without terminal is pending. Historical resolution must not require present
+operating permission or reset-managed state for past truth. Missing publication-
+attempt evidence cannot become absence/noncommit.
+
+**Human checkpoint for A:** select this exact scoped lifecycle, including finite
+locator/token clauses, same-basis human-only successors, pending suspension,
+unchanged-scope D→G and no reinstatement. These consequential details are
+recommendations, not implications of selecting one model. If revised, update and
+review the affected Packet-1 plan before execution. Actual project terms remain
+separately approved/supplied at runtime.
+
+## Kind-definition authority recommendation
+
+The human selected separation from registration, but not the establishment rule.
+**Recommendation B:** original claimed human approves each exact immutable kind
+version/content through a separate fixed Engine definition-establishment operation
+on current supported D/G. A kind remains retained definition truth after its basis
+changes; new registration still needs current composition/parameter permission.
+Kind conformance cannot widen permission or supply primitives.
+
+Per-version approval is the smaller, reviewable cut; it adds a human decision for
+every version. A reusable bounded kind-establishment grant reduces repeated human
+work but needs exact version/content reach, currentness, revocation and recovery
+choices. Neither is selected here. B affects later kind delivery only and does not
+block independently prepared explicit-composition Packet 1.
 
 ## Packet outline and human checkpoints
 
-| Packet | Bounded outcome and dependency | Human review boundary |
-| --- | --- | --- |
-| 1 — explicit composition selection | New ordinary/planning-output/requirements-input registrations and bounded display level through native owner and ordinary SDK; exact old-item retention. Requires complete foundation, selection of decision 1 and approval of [the next plan](packet-1.md). Kind creation/use remains unsupported. | **Packet boundary:** two new meaningful declarations and their separate explicit permission can be assessed independently. Return the concrete result and stop. |
-| 2 — optional immutable whole-composition kinds | Reusable exact kind versions, equivalent explicit composition, definition establishment/use separation and retained exact binding on new items. Depends on Packet-1 human review and selection of decision 2 plus separately authorized bounded preparation/plan. | **Packet boundary:** durable reusable definitions and kind-backed registration are independently meaningful. Stop for human review; this is the final slice outcome. |
+Reassess the cut around a complete usable registration lifecycle rather than an
+additive menu stream. Authority, conformance and SDK/persistence steps inside
+Packet 1 depend on each other; they are not hidden preparatory packets. Two
+independently meaningful outcomes remain:
 
-Only Packet 1 is detailed. There are no hidden preparatory packets or authority
-to continue directly into Packet 2. Later packet details are not delegated for
-execution by this document. Ordinary local names, module split and tagged record
-layout can be resolved from selected contracts just in time after plan approval;
-authority population, coexistence/replacement and kind-establishment permission
-cannot. Material refinements require focused causal review. Missing consequential
-authority returns to meta before product edits.
+| Packet | Outcome and dependency | Human review boundary |
+| --- | --- | --- |
+| 1 — unified explicit-composition registration | One authority lineage and typed path for ordinary/P/I; exact scope and bounded scope change/D→G/revocation/recovery; retained foundation truth. Requires complete foundation, selection of A and approval of [next plan](packet-1.md). Kinds unsupported. | **Packet:** a continuing project explicitly authorizes and registers P/I while old grants cannot widen and old items stay exact. Stop for recap. A separately delivered earlier meaningful authority outcome triggers the lifecycle's earlier checkpoint. |
+| 2 — optional immutable whole-composition kinds | Exact reusable versions and equivalent explicit meaning; separate establishment and unchanged registration authorization. Depends on Packet-1 human review, selection of B and separately authorized bounded preparation/plan. | **Packet:** reusable definitions/kind-backed work are meaningful; stop for review. Final slice acceptance occurs here. |
+
+Only the next increment is detailed. No authority to continue into Packet 2 or
+prepare adjacent outcomes is delegated. Local names/module split/tagged record
+layout may be resolved just in time; authority scope, lifecycle, history loss and
+kind establishment cannot be silently selected.
 
 ## Complete slice acceptance
 
-1. New registrations expose precisely the selected finite menu and bounded
-   display vocabulary/level; unknown roles/hooks/relations/transitions refuse.
-   All items remain same-project `open` leaves with unsupported/not-assessed
-   completion. Output questions and exact requirements declarations are distinct.
-2. A kind version binds the exact whole supported descriptor, role schema and
-   allowed parameter bounds, lifecycle and compatibility version. Establishing it
-   changes no primitive behavior and requires separately selected definition
-   authority. Same reference/version with different content refuses. No latest
-   alias, default upgrade or mutable kind definition supplies operational truth.
-3. With equal role values and display choices, explicit and kind-backed forms
-   establish equal supported meaning. Their request/provenance bytes can differ;
-   retain the exact admitted form, kind reference/fingerprint and descriptor bytes.
-   Overrides, incomplete/mismatched kind closure or uncommitted definitions refuse.
-4. Registration authority independently permits the exact requested choice and
-   parameter bounds through terminal publication. Kind conformance, candidate
-   approval, old grants and independent Contracts permissions cannot supply it.
-   Supported D/G activation and exact compatible predecessor rules are preserved.
-5. Current/history/recovery retain old ordinary identity, descriptor bytes,
-   original bindings and receipts exactly after enabling the menu/kinds, reopening,
-   D→G, revocation and runtime reset. No existing item changes or rebinds; conflicting
-   keys refuse across every record/authority version.
-6. Exact native terminal plus snapshot/receipt and original proof is the semantic
-   commit boundary for every new effect. Pending definitions/items supply no usable
-   truth; uncertain publication cannot become absence, success or replacement
-   permission. Historical proof/recovery does not substitute new authority.
-7. Closed versioned owner-managed records preserve existing JSON byte/identity
-   contracts and complete positive inventory. The 32-transaction/128 MiB limits
-   apply to the combined retained owner population, including kind operations
-   when added. Overflow refuses without truncation or destruction of old recovery.
-8. A normal-dependency Rust SDK consumer exercises the complete explicit and
-   kind-backed routes with public typed inputs and saved locators, meaningful
-   refusals and response/recovery guidance. Owner tests prove compatibility,
-   interruption/integrity and authority through actual native paths.
+1. Precisely the ordinary/P/I menu and bounded display vocabulary through one
+   route; same-project `open` leaves, no relations or positive completion. Unsupported
+   roles/hooks/transitions refuse without discarded fields.
+2. Exact approved scope controls parameters through commit; menu recognition,
+   kind conformance and unrelated grants never expand it. Selected lifecycle yields
+   at most one usable head with exact predecessor history.
+3. Kinds bind complete supported descriptor/schema/bounds/lifecycle/compatibility
+   under separate selected definition authority. Conflicting same-version content,
+   latest aliases, uncommitted kinds and overrides refuse. Equal explicit/kind
+   values have equal meaning while retaining admitted form/provenance.
+4. Retained ordinary items, grant scope, descriptor/request bytes, identities,
+   receipts and unresolved requests survive support, reopen, scope changes, D→G,
+   revocation/reset without reinterpretation or substituted recovery.
+5. Exact native terminal plus matching snapshot/receipt/original authority is
+   commit. Pending candidates supply no truth/permission; uncertainty retains
+   reservations; positive noncommit requires complete proof.
+6. One closed retained owner/inventory/lock and combined 32-transaction/128 MiB
+   budget including authority, kinds, candidates/noncommit history. Overflow preserves
+   old reads/recovery; no truncation, per-version budget or storage redesign.
+7. Normal-dependency SDK consumers prove actual paths, saved original locators,
+   clear response guidance and meaningful refusals. Focused tests prove retention,
+   integrity and through-commit authority; report actual evidence/platform limits.
 
-The first increment's acceptance is [Packet 1](packet-1.md#acceptance-and-verification).
-Meta performs one aggregate slice check only after the final authorized packet;
-this preparation records no new completion claim or closeout.
+Packet-1 acceptance is [here](packet-1.md#acceptance-and-verification). Meta checks
+complete slice/integration once after final authorized packet; preparation supplies
+no product completion claim or new predecessor closeout.
 
 ## Non-goals and format boundary
 
-Hierarchy/prerequisites/grouping, eligibility, governing assignment, qualification,
-assessment-result roles/coverage, completion/closing, rebinding/edit/reopen/removal,
-CR binding, generic IAM/taxonomy design, CLI/Tauri/host/installed product skills,
-adapters, broad roadmap redesign and approval of later serial ordering are excluded.
+Hierarchy, eligibility, closing, CR binding, item edits/rebinding/reopen/removal,
+assessment-result roles, general IAM/agent grant administration, CLI/Tauri/host
+integration, production migration tooling, permanent legacy APIs, parallel
+registration streams, V1-to-menu upgrade systems and storage/performance redesign
+are excluded. Phase-6 order and adjacent planning remain unchanged.
 
 The [structured-data standard](../../structured-data-format-standard.md) retains
-**PROPOSED general defaults**, **Contracts JSON fixed**, and existing owner/versioned
-contracts controlling. New typed owner-operation records should extend the selected
-work owner's JSON/retained-root contract with explicit new schema/fingerprint
-domains; that is the bounded plan recommendation, not a format migration.
-No YAML importer, direct file authoring or editable human-view master is introduced.
-Linked research remains proposed and is not adopted wholesale.
+**PROPOSED general defaults**, **Contracts JSON fixed**, and existing versioned
+owner contracts controlling. Recommend closed owner-managed JSON with explicit
+new schema/fingerprint domains, preserving retained old byte domains. Typed
+operations are the authoring surface; no YAML importer, direct file editor, second
+editable human-view master or broad format migration is selected.

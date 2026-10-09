@@ -7,6 +7,15 @@ This is the sole packet of [work-item-state-foundation](README.md). The slice
 owns the outcome, exclusions and eight acceptance conditions; this document
 details only its next implementation increment.
 
+Successor clarification — 2026-10-09: the human selected
+[unified composition-aware registration](../work-compositions-and-kinds/README.md#unified-owner-and-permission-boundaries)
+for greenfield development. The delivered V1 cut below is evidence, not a mandate
+for parallel permission streams, permanent old APIs or a special version upgrade.
+Its approved singleton scope and retained items/receipts/pending requests remain
+exact under the successor's minimum historical-read/recovery contract. Proposed
+human scope changes are separately selected/authorized in that successor plan;
+no change to foundation's delivered truth or completed verification is claimed.
+
 ## Observable behavior and review boundary
 
 Under the selected rule, given one positively current local-check project in
