@@ -17,6 +17,7 @@ use std::path::Path;
     deny_unknown_fields
 )]
 enum Operation {
+    Kind(WorkKindLocatorV1),
     Grant(WorkGrantLocatorV1),
     Item(WorkRequestLocatorV1),
     Revoke(WorkRevokeLocatorV1),
@@ -24,6 +25,7 @@ enum Operation {
 impl Operation {
     fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
         match self {
+            Self::Kind(v) => v.validate(),
             Self::Grant(v) => v.validate(),
             Self::Item(v) => v.validate(),
             Self::Revoke(v) => v.validate(),
@@ -31,13 +33,49 @@ impl Operation {
     }
     fn grant(&self) -> &WorkGrantLocatorV1 {
         match self {
+            Self::Kind(_) => {
+                unreachable!("grant access is restricted to grant administration rows")
+            }
             Self::Grant(v) => v,
             Self::Item(v) => &v.grant,
             Self::Revoke(v) => &v.grant,
         }
     }
+    fn check(&self) -> &LocalCheckLocatorV1 {
+        match self {
+            Self::Kind(v) => &v.check,
+            _ => &self.grant().check,
+        }
+    }
+    fn basis(&self) -> &LocalCheckCurrentBasisV1 {
+        match self {
+            Self::Kind(v) => &v.basis,
+            _ => &self.grant().basis,
+        }
+    }
+    fn project(&self) -> &str {
+        match self {
+            Self::Kind(v) => v.project(),
+            _ => self.grant().project(),
+        }
+    }
+    fn bootstrap(&self) -> Option<store::BootstrapOrigin> {
+        match self {
+            Self::Kind(v) => Some(store::BootstrapOrigin::Kind(v.clone())),
+            Self::Grant(v) => Some(store::BootstrapOrigin::Grant(v.clone())),
+            _ => None,
+        }
+    }
+    fn schema(&self) -> &'static str {
+        match self {
+            Self::Kind(_) => "handbook.work-intent@2.0.0",
+            Self::Item(v) if !v.input.composition.retained() => "handbook.work-intent@2.0.0",
+            _ => "handbook.work-intent@1.0.0",
+        }
+    }
     fn name(&self) -> String {
         match self {
+            Self::Kind(v) => format!("kind-{}", v.approval.request_key),
             Self::Grant(v) => format!("grant-{}", v.terms.request_key),
             Self::Item(v) => format!("item-{}", v.input.request_key),
             Self::Revoke(v) => format!("revoke-{}", v.request_key),
@@ -52,6 +90,7 @@ impl Operation {
     deny_unknown_fields
 )]
 enum Output {
+    Kind(WorkKindReceiptV1),
     Grant(WorkGrantV1),
     Item(WorkRegistrationReceiptV1),
     Revoke(WorkRevocationReceiptV1),
@@ -93,18 +132,24 @@ struct Parsed {
 
 fn output(op: &Operation) -> Result<Output, LocalAuthorityRefusalV1> {
     Ok(match op {
+        Operation::Kind(locator) => Output::Kind(WorkKindReceiptV1::from_locator(locator)?),
         Operation::Grant(locator) => Output::Grant(WorkGrantV1 {
             locator: locator.clone(),
             assurance: "local_advisory_claims".into(),
             establishment_rule: WORK_REGISTRATION_RULE_V1.into(),
         }),
         Operation::Item(locator) => {
-            let descriptor = locator.input.composition.descriptor.clone();
+            let effective = locator.effective_input()?;
+            let composition = effective
+                .composition
+                .explicit_composition()
+                .ok_or_else(|| codec("expanded composition"))?;
+            let descriptor = composition.descriptor.clone();
             let descriptor_bytes = descriptor.canonical_json_bytes()?;
             let snapshot = WorkSnapshotV1 {
-                version: if locator.input.composition.role.is_some()
-                    || locator.input.display_level.is_some()
-                {
+                version: if !locator.input.composition.retained() {
+                    "3"
+                } else if composition.role.is_some() || locator.input.display_level.is_some() {
                     "2"
                 } else {
                     "1"
@@ -116,7 +161,8 @@ fn output(op: &Operation) -> Result<Output, LocalAuthorityRefusalV1> {
                 label: locator.input.label.clone(),
                 question: locator.input.question.clone(),
                 display_level: locator.input.display_level.clone(),
-                role: locator.input.composition.role.clone(),
+                role: composition.role.clone(),
+                admitted_kind: locator.input.composition.submitted_kind().cloned(),
                 state: "open".into(),
                 descriptor,
                 descriptor_fingerprint: crate::DefinitionFingerprint::from_bytes(&descriptor_bytes)
@@ -125,7 +171,11 @@ fn output(op: &Operation) -> Result<Output, LocalAuthorityRefusalV1> {
                 registration_request_fingerprint: locator.fingerprint.clone(),
             };
             let receipt_fingerprint = fp(
-                "handbook.work-registration-receipt@1.0.0",
+                if locator.input.composition.retained() {
+                    "handbook.work-registration-receipt@1.0.0"
+                } else {
+                    "handbook.work-registration-receipt@2.0.0"
+                },
                 &(
                     locator,
                     &snapshot,
@@ -149,25 +199,34 @@ fn output(op: &Operation) -> Result<Output, LocalAuthorityRefusalV1> {
 }
 fn decision(intent: &Intent) -> Result<Decision, LocalAuthorityRefusalV1> {
     Ok(Decision {
-        intent_fingerprint: fp("handbook.work-intent@1.0.0", intent)?,
+        intent_fingerprint: fp(intent.operation.schema(), intent)?,
         output: output(&intent.operation)?,
     })
 }
 fn terminal(d: &Decision) -> Result<Terminal, LocalAuthorityRefusalV1> {
     Ok(Terminal {
-        decision_fingerprint: fp("handbook.work-decision@1.0.0", d)?,
+        decision_fingerprint: fp(
+            match &d.output {
+                Output::Kind(_) => "handbook.work-decision@2.0.0",
+                Output::Item(v) if !v.locator.input.composition.retained() => {
+                    "handbook.work-decision@2.0.0"
+                }
+                _ => "handbook.work-decision@1.0.0",
+            },
+            d,
+        )?,
         effect: "committed".into(),
     })
 }
 fn publication(intent: &Intent) -> Result<Vec<u8>, LocalAuthorityRefusalV1> {
     encode(&Publication {
-        intent_fingerprint: fp("handbook.work-intent@1.0.0", intent)?,
+        intent_fingerprint: fp(intent.operation.schema(), intent)?,
         target: "terminal.json".into(),
     })
 }
 fn noncommit(intent: &Intent) -> Result<Vec<u8>, LocalAuthorityRefusalV1> {
     encode(&Publication {
-        intent_fingerprint: fp("handbook.work-intent@1.0.0", intent)?,
+        intent_fingerprint: fp(intent.operation.schema(), intent)?,
         target: "positively_not_committed".into(),
     })
 }
@@ -185,12 +244,12 @@ fn parsed(
     })?)?;
     intent.operation.validate()?;
     let staging = name.starts_with("accept-");
-    if intent.schema != "handbook.work-intent@1.0.0"
+    if intent.schema != intent.operation.schema()
         || name.strip_prefix("accept-").unwrap_or(name) != intent.operation.name()
         || intent.owner_identity != lock.owner.identity
-        || intent.operation.grant().project() != lock.owner.project
-        || intent.authority.locator() != &intent.operation.grant().check
-        || intent.authority.current_basis() != &intent.operation.grant().basis
+        || intent.operation.project() != lock.owner.project
+        || intent.authority.locator() != intent.operation.check()
+        || intent.authority.current_basis() != intent.operation.basis()
     {
         return Err(refuse(
             "work_original_proof",
@@ -202,10 +261,9 @@ fn parsed(
         &intent.authority,
     )?;
     if !proofs.contains(&proof_identity) {
-        intent.authority.validate_historical(
-            &intent.operation.grant().check,
-            &intent.operation.grant().basis,
-        )?;
+        intent
+            .authority
+            .validate_historical(intent.operation.check(), intent.operation.basis())?;
         proofs.insert(proof_identity);
     }
     let d = decision(&intent)?;
@@ -293,12 +351,29 @@ fn scan(lock: &WorkLock<'_>) -> Result<(Inventory, Vec<Parsed>), LocalAuthorityR
     }
     for row in &rows {
         let required_grant = match &row.intent.operation {
+            Operation::Kind(_) => None,
             Operation::Item(v) => Some(&v.grant.fingerprint),
             Operation::Revoke(v) => Some(&v.grant.fingerprint),
             Operation::Grant(v) => v.predecessor_grant_fingerprint.as_ref(),
         };
         if let Some(identity) = required_grant {
             if !rows.iter().any(|prior|prior.committed&&matches!(&prior.intent.operation,Operation::Grant(g) if &g.fingerprint==identity)){return Err(refuse("work_grant_history_missing","exact original committed activation proof required for retained dependent history"));}
+        }
+        if let Operation::Item(v) = &row.intent.operation {
+            if let Some(provenance) = &v.kind_provenance {
+                if !rows.iter().any(|prior| prior.committed && matches!(&prior.output, Output::Kind(receipt) if receipt == &provenance.establishment)) {
+                    return Err(refuse("work_kind_history_missing", "exact committed kind definition/establishment/terminal dependency required"));
+                }
+            }
+        }
+    }
+    for (index, row) in rows.iter().enumerate() {
+        if !row.noncommit {
+            if let Operation::Kind(kind) = &row.intent.operation {
+                if rows[..index].iter().any(|prior| !prior.noncommit && matches!(&prior.intent.operation, Operation::Kind(v) if v.binding.reference == kind.binding.reference)) {
+                    return Err(refuse("work_kind_version_conflict", "one exact committed or reserved kind version required"));
+                }
+            }
         }
     }
     validate_authority_history(&rows)?;
@@ -441,6 +516,11 @@ fn reservation(op: &Operation, rows: &[Parsed]) -> Result<(), LocalAuthorityRefu
             continue;
         }
         match (op, &row.intent.operation) {
+            (Operation::Kind(v), Operation::Kind(old))
+                if v.binding.reference == old.binding.reference =>
+            {
+                return Err(refuse("work_kind_version_reserved", "exact kind version belongs to its original request; reuse committed binding or recover original"));
+            }
             (Operation::Item(v), Operation::Item(old)) if v.item_identity == old.item_identity => {
                 return Err(refuse(
                     "work_item_reserved",
@@ -507,6 +587,62 @@ fn current_grant<'a>(
         ));
     }
     Ok(selected)
+}
+fn kind_row<'a>(
+    binding: &WorkKindBindingV1,
+    rows: &'a [Parsed],
+) -> Result<Option<&'a Parsed>, LocalAuthorityRefusalV1> {
+    binding.validate()?;
+    let row = rows.iter().find(|row| !row.noncommit && matches!(&row.output, Output::Kind(receipt) if receipt.binding.reference == binding.reference));
+    if let Some(row) = row {
+        if !matches!(&row.output, Output::Kind(receipt) if &receipt.binding == binding) {
+            return Err(refuse(
+                "work_kind_content_mismatch",
+                "exact retained project/name/version/full-content binding required",
+            ));
+        }
+    }
+    Ok(row)
+}
+fn committed_kind<'a>(
+    binding: &WorkKindBindingV1,
+    rows: &'a [Parsed],
+) -> Result<&'a WorkKindReceiptV1, LocalAuthorityRefusalV1> {
+    match kind_row(binding, rows)? {
+        Some(row) if row.committed => match &row.output {
+            Output::Kind(receipt) => Ok(receipt),
+            _ => unreachable!(),
+        },
+        _ => Err(refuse(
+            "work_kind_uncommitted",
+            "only exact retained terminal-backed definition can expand new work",
+        )),
+    }
+}
+fn validate_kind_dependency(
+    locator: &WorkRequestLocatorV1,
+    rows: &[Parsed],
+) -> Result<(), LocalAuthorityRefusalV1> {
+    locator.validate()?;
+    if let Some(provenance) = &locator.kind_provenance {
+        if committed_kind(&provenance.establishment.binding, rows)? != &provenance.establishment {
+            return Err(refuse(
+                "work_kind_provenance",
+                "original establishment receipt and retained dependency differ",
+            ));
+        }
+    }
+    Ok(())
+}
+fn preflight(intent: &Intent) -> Result<(), LocalAuthorityRefusalV1> {
+    encode(intent)?;
+    let candidate = decision(intent)?;
+    encode(&candidate)?;
+    encode(&candidate.output)?;
+    encode(&terminal(&candidate)?)?;
+    publication(intent)?;
+    noncommit(intent)?;
+    Ok(())
 }
 fn fixed_terms_equal(a: &WorkRegistrationTermsV1, b: &WorkRegistrationTermsV1) -> bool {
     a.rule_ref == b.rule_ref
@@ -612,6 +748,147 @@ pub enum WorkWriteBoundaryV1 {
 }
 pub struct NativeWorkStateV1;
 impl NativeWorkStateV1 {
+    pub fn prepare_kind(
+        repo: impl AsRef<Path>,
+        check: &LocalCheckLocatorV1,
+        basis: LocalCheckCurrentBasisV1,
+        definition: WorkKindDefinitionV1,
+        approval: WorkKindApprovalV1,
+    ) -> Result<PreparedWorkKindV1, LocalAuthorityRefusalV1> {
+        let project = check
+            .predecessor
+            .charter
+            .binding
+            .initialization_claim
+            .proposed_repository_identity();
+        let binding = definition.binding(project)?;
+        let mut locator = WorkKindLocatorV1 {
+            check: check.clone(),
+            basis,
+            definition,
+            approval,
+            binding,
+            fingerprint: String::new(),
+        };
+        locator.fingerprint = locator.identity()?;
+        locator.validate()?;
+        with_work_registration_current(repo, check, &locator.basis, |held| {
+            let operation = Operation::Kind(locator.clone());
+            let owner_identity =
+                store::owner_identity(&store::BootstrapOrigin::Kind(locator.clone()))?;
+            preflight(&Intent {
+                schema: operation.schema().into(),
+                owner_identity,
+                operation: operation.clone(),
+                authority: held.capture_proof()?,
+            })?;
+            if store::optional(held.root(), ".handbook-work-state.v1.json")?.is_some() {
+                let lock = store::open(held.root())?;
+                let (_, rows) = scan(&lock)?;
+                reservation(&operation, &rows)?;
+            } else if store::optional(held.root(), ".handbook-work-state-bootstrap.v1.json")?
+                .is_some()
+                || held
+                    .root()
+                    .list_directory_bounded(".handbook", 4096)
+                    .map_err(fs_error)?
+                    .iter()
+                    .any(|e| matches!(e.name(), "work-state" | "work-state-bootstrap"))
+            {
+                return Err(refuse(
+                    "work_bootstrap_reserved",
+                    "positive original owner/bootstrap footprint requires original recovery",
+                ));
+            }
+            Ok(())
+        })?;
+        Ok(PreparedWorkKindV1 { locator })
+    }
+    pub fn establish_kind(
+        repo: impl AsRef<Path>,
+        prepared: PreparedWorkKindV1,
+    ) -> WorkExecutionV1<WorkKindReceiptV1> {
+        project_kind(execute(
+            repo.as_ref(),
+            Operation::Kind(prepared.locator),
+            false,
+            &mut |_| Ok(()),
+        ))
+    }
+    pub fn resolve_kind_request(
+        repo: impl AsRef<Path>,
+        locator: &WorkKindLocatorV1,
+    ) -> WorkExecutionV1<WorkKindReceiptV1> {
+        project_kind(resolve(repo.as_ref(), Operation::Kind(locator.clone())))
+    }
+    pub fn recover_kind_request(
+        repo: impl AsRef<Path>,
+        locator: &WorkKindLocatorV1,
+    ) -> WorkExecutionV1<WorkKindReceiptV1> {
+        project_kind(execute(
+            repo.as_ref(),
+            Operation::Kind(locator.clone()),
+            true,
+            &mut |_| Ok(()),
+        ))
+    }
+    pub fn current_kind(
+        repo: impl AsRef<Path>,
+        binding: &WorkKindBindingV1,
+    ) -> Result<WorkCurrentKindV1, LocalAuthorityRefusalV1> {
+        binding.validate()?;
+        let root = RetainedRepositoryRootV1::open_exact(repo).map_err(fs_error)?;
+        let lock = store::open(&root)?;
+        if lock.owner.project != binding.project_identity {
+            return Err(refuse(
+                "work_kind_project",
+                "exact retained same-project kind required",
+            ));
+        }
+        let (_, rows) = scan(&lock)?;
+        let result = match kind_row(binding, &rows)? {
+            None => WorkCurrentKindV1::Absent,
+            Some(row) => match &row.output {
+                Output::Kind(receipt) if row.committed => {
+                    WorkCurrentKindV1::Committed(receipt.clone())
+                }
+                Output::Kind(receipt) => WorkCurrentKindV1::Pending {
+                    original_request: receipt.locator.clone(),
+                },
+                _ => unreachable!(),
+            },
+        };
+        lock.validate()?;
+        Ok(result)
+    }
+    #[cfg(any(test, feature = "test-support"))]
+    #[doc(hidden)]
+    pub fn establish_kind_with_boundary_for_test(
+        repo: impl AsRef<Path>,
+        prepared: PreparedWorkKindV1,
+        mut boundary: impl FnMut(WorkWriteBoundaryV1) -> Result<(), LocalAuthorityRefusalV1>,
+    ) -> WorkExecutionV1<WorkKindReceiptV1> {
+        project_kind(execute(
+            repo.as_ref(),
+            Operation::Kind(prepared.locator),
+            false,
+            &mut boundary,
+        ))
+    }
+    #[cfg(any(test, feature = "test-support"))]
+    #[doc(hidden)]
+    pub fn recover_kind_with_boundary_for_test(
+        repo: impl AsRef<Path>,
+        locator: &WorkKindLocatorV1,
+        mut boundary: impl FnMut(WorkWriteBoundaryV1) -> Result<(), LocalAuthorityRefusalV1>,
+    ) -> WorkExecutionV1<WorkKindReceiptV1> {
+        project_kind(execute(
+            repo.as_ref(),
+            Operation::Kind(locator.clone()),
+            true,
+            &mut boundary,
+        ))
+    }
     pub fn prepare_terms(
         repo: impl AsRef<Path>,
         check: &LocalCheckLocatorV1,
@@ -733,13 +1010,26 @@ impl NativeWorkStateV1 {
             grant: grant.clone(),
             item_identity: work_item_identity_v1(grant.project(), &input.item_key)?,
             input,
+            kind_provenance: None,
             fingerprint: String::new(),
         };
-        locator.fingerprint = locator.identity()?;
-        locator.validate()?;
         let root = RetainedRepositoryRootV1::open_exact(repo).map_err(fs_error)?;
         let lock = store::open(&root)?;
         let (_, rows) = scan(&lock)?;
+        if let Some(binding) = locator.input.composition.submitted_kind() {
+            let receipt = committed_kind(binding, &rows)?;
+            locator.kind_provenance = Some(WorkKindProvenanceV1 {
+                establishment: receipt.clone(),
+                expanded: WorkCompositionV1 {
+                    descriptor: receipt.definition.template.descriptor.clone(),
+                    kind: None,
+                    role: locator.input.composition.role().cloned(),
+                },
+            });
+        }
+        locator.fingerprint = locator.identity()?;
+        locator.validate()?;
+        current_grant(grant, &rows)?;
         reservation(&Operation::Item(locator.clone()), &rows)?;
         Ok(PreparedWorkRegistrationV1 { locator })
     }
@@ -986,8 +1276,10 @@ fn execute(
         // Recovery cannot accept a new request. An unpublished owner bootstrap
         // may continue only from its exact already-retained original locator.
         match store::optional(&root, ".handbook-work-state-bootstrap.v1.json") {
-            Ok(Some(bytes)) if matches!(&op, Operation::Grant(g) if encode(g).is_ok_and(|v| v == bytes)) =>
-                {}
+            Ok(Some(bytes))
+                if op
+                    .bootstrap()
+                    .is_some_and(|origin| encode(&origin).is_ok_and(|v| v == bytes)) => {}
             Ok(None) => {
                 return WorkExecutionV1::error(
                     WorkDispositionV1::Refused,
@@ -1024,7 +1316,7 @@ fn execute(
         if recover && history.disposition == WorkDispositionV1::Unaccepted {
             return history;
         }
-    } else if !matches!(op, Operation::Grant(_)) {
+    } else if op.bootstrap().is_none() {
         return WorkExecutionV1::error(
             WorkDispositionV1::Refused,
             refuse(
@@ -1033,17 +1325,18 @@ fn execute(
             ),
         );
     }
-    let grant = op.grant().clone();
+    let check = op.check().clone();
+    let basis = op.basis().clone();
     let effects = std::cell::Cell::new(false);
     let boundary = std::cell::RefCell::new(boundary);
     let notify = |stage| boundary.borrow_mut()(stage);
     let result = with_work_registration_establishment(
         repo,
-        &grant.check,
-        &grant.basis,
+        &check,
+        &basis,
         |root| {
-            if matches!(op, Operation::Grant(_)) {
-                drop(store::establish(root, &grant, &effects, &mut |stage| {
+            if let Some(origin) = op.bootstrap() {
+                drop(store::establish(root, &origin, &effects, &mut |stage| {
                     notify(stage)
                 })?);
             }
@@ -1092,6 +1385,7 @@ fn execute(
             // establishment/revocation checks, but invalidates every other request.
             rows.retain(|r| r.intent.operation != op);
             match &op {
+                Operation::Kind(v) => v.validate()?,
                 Operation::Grant(g) => activation_compatible(
                     g,
                     &rows,
@@ -1099,6 +1393,7 @@ fn execute(
                 )?,
                 Operation::Item(v) => {
                     current_grant(&v.grant, &rows)?;
+                    validate_kind_dependency(v, &rows)?;
                 }
                 Operation::Revoke(v) => {
                     current_grant(&v.grant, &rows)?;
@@ -1135,7 +1430,7 @@ fn execute(
                 }
                 notify(WorkWriteBoundaryV1::BeforeIntent)?;
                 let v = Intent {
-                    schema: "handbook.work-intent@1.0.0".into(),
+                    schema: op.schema().into(),
                     owner_identity: lock.owner.identity.clone(),
                     operation: op.clone(),
                     authority: held.capture_proof()?,
@@ -1196,8 +1491,24 @@ fn execute(
             notify(WorkWriteBoundaryV1::Snapshot)?;
             held.validate_current()?;
             lock.validate()?;
-            let (current_inventory, current) = scan(&lock)?;
+            let (current_inventory, mut current) = scan(&lock)?;
             reservation(&op, &current)?;
+            current.retain(|row| row.intent.operation != op);
+            match &op {
+                Operation::Kind(v) => v.validate()?,
+                Operation::Item(v) => {
+                    current_grant(&v.grant, &current)?;
+                    validate_kind_dependency(v, &current)?;
+                }
+                Operation::Grant(v) => activation_compatible(
+                    v,
+                    &current,
+                    held.capture_proof()?.relation_kind()?.as_str(),
+                )?,
+                Operation::Revoke(v) => {
+                    current_grant(&v.grant, &current)?;
+                }
+            }
             let manifest_paths = current_inventory
                 .manifest_paths
                 .iter()
@@ -1321,6 +1632,16 @@ fn project_grant(v: WorkExecutionV1<Output>) -> WorkExecutionV1<WorkGrantV1> {
         refusal: v.refusal,
         outcome: v.outcome.and_then(|o| match o {
             Output::Grant(g) => Some(g),
+            _ => None,
+        }),
+    }
+}
+fn project_kind(v: WorkExecutionV1<Output>) -> WorkExecutionV1<WorkKindReceiptV1> {
+    WorkExecutionV1 {
+        disposition: v.disposition,
+        refusal: v.refusal,
+        outcome: v.outcome.and_then(|output| match output {
+            Output::Kind(receipt) => Some(receipt),
             _ => None,
         }),
     }

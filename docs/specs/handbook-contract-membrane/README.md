@@ -162,9 +162,11 @@ recap are complete. The human selected a separate near-term
 without interrupting current bounded compositions/kinds work. After reviewing/
 discussing Packet 1, the human selected kind-definition recommendation B,
 **per-version approval**, and authorized bounded [Packet-2 preparation](slices/work-compositions-and-kinds/packet-2.md).
-The concrete optional immutable whole-composition kind plan is prepared for human
-review before implementation; no Packet-2 product execution or runtime project
-terms are approved. Retained truth/recovery is preserved without permanent old
+The human subsequently approved the complete reviewed plan at `d7ff969`, including
+implementation, verification, focused causal review and a coherent local commit.
+Packet-2 implementation and selected acceptance are verified, with focused causal
+**APPROVE** and no unresolved P1/P2. Runtime project terms remain separately supplied and approved.
+Retained truth/recovery is preserved without permanent old
 APIs or a special V1-to-menu upgrade. The slice remains incomplete until its final
 authorized packet and aggregate acceptance are satisfied.
 It delivers no positive Work Progression eligibility,
@@ -176,7 +178,7 @@ authorizes registration. The [joint near-term sequence](coverage-and-landing-map
 puts configurable compositions/optional kinds immediately after foundation, with
 compatibility prepared and selected before it, followed by separately meaningful
 Context Resolution, hierarchy, eligibility and closing outcomes. Flexibility
-implementation now awaits the Packet-2 concrete-plan human checkpoint; the other
+implementation is authorized within the complete Packet-2 plan; the other
 ordering and implementation gates remain proposed where unselected. This approval
 does not select CR's management/use/representation choices. The latest [CR investigation](../../research/context-resolution-local-advisory-extension-investigation-2026-10-08.md)
 is reviewed proposed evidence; root use, binding management and work registration

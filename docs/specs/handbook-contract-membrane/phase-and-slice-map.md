@@ -127,7 +127,9 @@ are human-approved at `277674e2`; Packet 1 is implemented and verified at
 `7129b5c`, with meta validation/human recap and subsequent discussion complete.
 The human selected per-version kind approval B and authorized bounded
 [Packet-2 planning](slices/work-compositions-and-kinds/packet-2.md); its concrete
-plan awaits human approval before implementation. Remaining broad ordering is
+plan at `d7ff969` is now human-approved for implementation, verification, focused
+causal review and one coherent local commit. Packet-2 implementation and
+selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2. Remaining broad ordering is
 proposed where unselected. The latest CR research
 remains proposed; its own authority/compatibility choices precede detailed execution
 preparation. A shared currentness/recovery seam establishes no shared grant.
@@ -178,7 +180,9 @@ atomic posture transition while rehoming the residual work to later owners.
   record the approved foundation/compatibility choices and complete Packet-1
   implementation at `cbfbf76` with supplied meta aggregate completion and human
   recap. [Composition/kinds preparation](slices/work-compositions-and-kinds/README.md)
-  is bounded planning with pending authority choices; adjacent outcomes need separate execution authorization and CR's
+  has completed Packet 1 and human approval of the complete Packet-2 plan at
+  `d7ff969`; Packet-2 implementation and selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2. Adjacent outcomes
+  need separate execution authorization and CR's
   distinct choices remain unselected.
 - Ordinary SDK/JSON exposure, publication, bridging, and Substrate adoption for
   grounding move to the appropriate Phase-4 and Phase-6 owners.
@@ -366,8 +370,10 @@ Packet-1 plan at `277674e2`; it is implemented and verified at `7129b5c`,
 with meta validation and human recap complete. After reviewing/discussing that
 outcome, the human selected the separate per-version kind-approval rule B and
 authorized bounded [Packet-2 preparation](slices/work-compositions-and-kinds/packet-2.md).
-Its concrete native/SDK immutable-kind plan is prepared for human review before
-implementation. The slice remains incomplete; no Packet-2 product execution or adjacent
+The human subsequently approved its complete reviewed native/SDK plan at `d7ff969`
+for implementation, verification, focused causal review and one coherent local
+commit. Packet-2 implementation and selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2; final aggregate
+slice integration and the human recap remain with meta. No adjacent
 implementation, new phase or local-check Packet 5 is authorized. CR's separate
 management/use/representation choices remain unselected.
 The human has selected [local-advisory authority](semantic-model/amendments/approval-authority-and-assurance.md)

@@ -25,10 +25,38 @@ fn main() {
 fn run() -> Result<(), String> {
     let args = std::env::args().skip(1).collect::<Vec<_>>();
     if args.len() < 3 {
-        return Err("usage: work_state activate ROOT INITIAL CHECK TERMS SAVE | change-scope/establish-from-deferred ROOT INITIAL CHECK TERMS SAVE PREDECESSOR | register ROOT INITIAL GRANT INPUT SAVE | current ROOT GRANT ITEM_KEY | current-terms ROOT INITIAL GRANT | terms-history/recover-terms ROOT GRANT | history/recover/completion ROOT REQUEST | revoke ROOT GRANT KEY PRINCIPAL SOURCE INSTRUCTION SAVE | revoke-history/recover-revoke ROOT REVOCATION".into());
+        return Err("usage: work_state establish-kind ROOT INITIAL CHECK DEFINITION APPROVAL SAVE | current-kind ROOT BINDING | kind-history/recover-kind ROOT KIND_REQUEST | activate ROOT INITIAL CHECK TERMS SAVE | change-scope/establish-from-deferred ROOT INITIAL CHECK TERMS SAVE PREDECESSOR | register ROOT INITIAL GRANT INPUT SAVE | current ROOT GRANT ITEM_KEY | current-terms ROOT INITIAL GRANT | terms-history/recover-terms ROOT GRANT | history/recover/completion ROOT REQUEST | revoke ROOT GRANT KEY PRINCIPAL SOURCE INSTRUCTION SAVE | revoke-history/recover-revoke ROOT REVOCATION".into());
     }
     let sdk = HandbookSdkV1::open(&args[1]);
     match args[0].as_str() {
+        "establish-kind" if args.len() == 7 => {
+            let initial =
+                LocalInitialSetupLocatorV1::from_json_bytes(&read(&args[2])?).map_err(debug)?;
+            let check = LocalCheckLocatorV1::from_json_bytes(&read(&args[3])?).map_err(debug)?;
+            let definition =
+                WorkKindDefinitionV1::from_json_bytes(&read(&args[4])?).map_err(debug)?;
+            let approval = WorkKindApprovalV1::from_json_bytes(&read(&args[5])?).map_err(debug)?;
+            let prepared = sdk
+                .prepare_work_kind_establishment(&initial, &check, definition, approval)
+                .map_err(debug)?;
+            save_new(
+                Path::new(&args[6]),
+                &prepared.locator().canonical_json_bytes().map_err(debug)?,
+            )?;
+            print_json(&sdk.establish_work_kind(prepared))
+        }
+        "current-kind" if args.len() == 3 => {
+            let binding = WorkKindBindingV1::from_json_bytes(&read(&args[2])?).map_err(debug)?;
+            print_json(&sdk.resolve_work_kind(&binding).map_err(debug)?)
+        }
+        "kind-history" | "recover-kind" if args.len() == 3 => {
+            let original = WorkKindLocatorV1::from_json_bytes(&read(&args[2])?).map_err(debug)?;
+            print_json(&if args[0] == "kind-history" {
+                sdk.resolve_work_kind_request(&original)
+            } else {
+                sdk.recover_work_kind_request(&original)
+            })
+        }
         "activate" | "change-scope" | "establish-from-deferred"
             if (args[0] == "activate" && args.len() == 6)
                 || (args[0] != "activate" && args.len() == 7) =>

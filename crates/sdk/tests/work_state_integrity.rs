@@ -82,7 +82,7 @@ fn input(g: &WorkGrantLocatorV1) -> WorkRegistrationInputV1 {
         question: "Question".into(),
         actor: g.terms.agent.clone(),
         expected_state: "absent".into(),
-        composition: WorkCompositionV1::ordinary_leaf(),
+        composition: WorkCompositionV1::ordinary_leaf().into(),
         display_level: None,
     }
 }

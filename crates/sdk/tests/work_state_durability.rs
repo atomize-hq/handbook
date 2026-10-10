@@ -96,7 +96,7 @@ fn input(grant: &WorkGrantLocatorV1, key: &str, item: &str) -> WorkRegistrationI
         question: "Exact bounded work question".into(),
         actor: grant.terms.agent.clone(),
         expected_state: "absent".into(),
-        composition: WorkCompositionV1::ordinary_leaf(),
+        composition: WorkCompositionV1::ordinary_leaf().into(),
         display_level: None,
     }
 }
@@ -806,13 +806,15 @@ fn role_input(grant: &WorkGrantLocatorV1, planning: bool, key: &str) -> WorkRegi
     if planning {
         value.display_level = Some("planning".into());
         value.composition =
-            WorkCompositionV1::planning_output("What exact requirement should renewal satisfy?");
+            WorkCompositionV1::planning_output("What exact requirement should renewal satisfy?")
+                .into();
     } else {
         value.display_level = Some("implementation".into());
         value.composition =
             WorkCompositionV1::requirements_input(work_requirements_definition_from_intrinsic_v1(
                 &work_state_support::supplied_intrinsic_definition("1.0.0"),
-            ));
+            ))
+            .into();
     }
     value
 }
@@ -869,7 +871,10 @@ fn planning_and_requirements_prefixes_never_borrow_successor_or_transition_autho
                 );
                 if at == B::Terminal {
                     let receipt = recovered.outcome.unwrap();
-                    assert_eq!(receipt.snapshot.role, original.input.composition.role);
+                    assert_eq!(
+                        receipt.snapshot.role,
+                        original.input.composition.role().cloned()
+                    );
                     assert_eq!(receipt.snapshot.display_level, original.input.display_level);
                 }
             }

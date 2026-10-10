@@ -1,10 +1,14 @@
 //! Immutable same-project open leaf registration. Retained history is distinct
 //! from current operating permission; terminal publication is the commit point.
+mod kind;
 mod scope;
 mod store;
+mod submitted;
 mod transaction;
 mod types;
+pub use kind::*;
 pub use scope::*;
+pub use submitted::*;
 pub use transaction::{NativeWorkStateV1, WorkWriteBoundaryV1};
 pub use types::*;
 
@@ -36,8 +40,9 @@ fn decode<T: for<'de> Deserialize<'de>>(bytes: &[u8]) -> Result<T, LocalAuthorit
     serde_json::from_value(crate::parse_schema_json(bytes).map_err(codec)?).map_err(codec)
 }
 fn fp<T: Serialize>(domain: &str, v: &T) -> Result<String, LocalAuthorityRefusalV1> {
+    let content = serde_json::to_value(v).map_err(codec)?;
     Ok(crate::DefinitionFingerprint::from_bytes(&encode(
-        &serde_json::json!({"domain":domain,"content":v}),
+        &serde_json::json!({"domain":domain,"content":content}),
     )?)
     .to_string())
 }

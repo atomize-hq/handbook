@@ -1,4 +1,4 @@
-# Register and recover native open work
+# Establish composition definitions and register native open work
 
 The [`work_state` SDK surface](../src/work_state.rs) registers ordinary,
 planning-output and requirements-input leaves through one typed operation in an
@@ -39,8 +39,10 @@ Contract locator. Requirements-input declares an exact separately defined Contra
 definition, with no assertion of availability, qualification, governance, coverage
 or assessment. Each choice establishes a same-project `open` leaf. Optional
 `display_level` values are finite approved ASCII tokens and add no hierarchy;
-omission is retained as omission. Kind bindings, unknown role fields, relations,
-overridden descriptors and requested completed/closed states refuse.
+omission is retained as omission. Convert an explicit composition into the submitted
+form with `.into()`. An exact committed kind uses `WorkCompositionInputV1::kind`.
+Unknown role fields, relations, overridden descriptors and requested completed/closed
+states refuse.
 
 `WorkRegistrationScopeV1::explicit(clauses)` requires a nonempty finite set of
 `WorkCompositionClauseV1` values, at most one per exact supported descriptor.
@@ -65,7 +67,7 @@ let clause = WorkCompositionClauseV1 {
 };
 supplied_work_terms.scope = WorkRegistrationScopeV1::explicit(vec![clause]);
 // Obtain explicit human approval of the exact terms and bind its approved content.
-supplied_item.composition = WorkCompositionV1::requirements_input(definition);
+supplied_item.composition = WorkCompositionV1::requirements_input(definition).into();
 supplied_item.display_level = Some("implementation".into());
 ```
 
@@ -76,15 +78,120 @@ reference, family/schema and full definition fingerprint. V2/V3 use `binding()`;
 their embedded intrinsic fingerprint identifies different content. Engine checks
 declaration shape and permission without resolving Contracts truth. A well-shaped
 permitted declaration can be registered when source truth is unavailable.
+
+An optional project-local kind fixes one whole supported composition and its finite
+parameter bounds. `WorkKindDefinitionV1` contains `WORK_KIND_DEFINITION_SCHEMA_V1`,
+an exact dotted name/canonical version such as `q.work-kind.requirements@1.0.0`, and
+one complete `WorkCompositionClauseV1` template. Its full content fingerprint includes
+the reference, descriptor and every bound. There is no default, latest alias,
+inheritance, override, implicit upgrade, or reusable kind-administration grant.
+Approval of each exact version is a separate fixed Engine operation under
+`WORK_KIND_ESTABLISHMENT_RULE_V1` by the original claimed human and current check
+agent. Both actor claims remain local advisory attribution.
+
+Supply actual approval of the complete definition and operation claims, including
+`check_request_fingerprint: check.request_fingerprint.clone()` and the exact
+`basis: sdk.observe_local_check_basis(&initial)?`. The approval's
+`fingerprint_approved_content(&definition)` binds that native lineage, request,
+human/agent, instruction/delegation/source, fixed effect
+`establish_immutable_work_kind`, full read/write reach and
+`retain_original_history`. Obtain approval of this exact content before preparing;
+neither the SDK's fresh observation nor a previous version's approval substitutes
+for it. Preparation seals supplied meaning without creating a definition.
+The kind may be established before any registration grant:
+
+```rust,ignore
+let definition = work_requirements_definition_from_intrinsic_v1(&owner_definition);
+let content = WorkKindDefinitionV1 {
+    schema_ref: WORK_KIND_DEFINITION_SCHEMA_V1.into(),
+    reference: "q.work-kind.requirements@1.0.0".into(),
+    template: WorkCompositionClauseV1 {
+        descriptor: WorkDescriptorV1::requirements_input(),
+        label_max_bytes: 128,
+        work_question_max_bytes: 256,
+        allow_omitted_display_level: false,
+        display_levels: vec!["implementation".into()],
+        role_permission: WorkRolePermissionV1::RequirementsInput {
+            definitions: vec![definition.clone()],
+        },
+    },
+};
+// The original human separately approves content and exact supplied operation claims.
+let prepared = sdk.prepare_work_kind_establishment(
+    &initial, &check, content, supplied_kind_approval)?;
+let original_kind = prepared.locator().clone();
+save_new(original_kind.canonical_json_bytes()?); // Before invocation.
+let establishment = sdk.establish_work_kind(prepared);
+let kind = establishment.outcome.ok_or("definition was not committed")?;
+let current_kind = sdk.resolve_work_kind(&kind.binding)?;
+
+// Establish independent current work terms using the ordinary approval workflow.
+supplied_item.composition = WorkCompositionInputV1::kind(
+    kind.binding.clone(),
+    Some(WorkRoleValueV1::RequirementsInput { definition }),
+);
+supplied_item.display_level = Some("implementation".into());
+let prepared = sdk.prepare_work_registration(&initial, &grant, supplied_item)?;
+let original_item = prepared.locator().clone();
+save_new(original_item.canonical_json_bytes()?); // Before invocation.
+let registration = sdk.register_work_item(prepared);
+
+let reopened = HandbookSdkV1::open(project_root);
+let retained_kind = reopened.resolve_work_kind(&kind.binding)?;
+let kind_history = reopened.resolve_work_kind_request(&original_kind);
+let kind_recovery = reopened.recover_work_kind_request(&original_kind);
+let item_recovery = reopened.recover_work_registration_request(&original_item);
+```
+
+These values are examples of supplied bounds, never defaults. A planning kind fixes
+the planning descriptor and output-question maximum; its matching role value is
+`Some(WorkRoleValueV1::PlanningOutput { question })`, without a future Contract
+locator. An ordinary kind takes `None`. Requirements-input passes an exact separate
+Contracts definition copied with the helper above; neither establishment nor work
+registration assesses that definition's truth or creates it.
+
+Every item must fit both retained kind bounds and its exact current registration
+scope. A committed planning kind cannot authorize work under an ordinary-only grant,
+and a 300-byte planning value refuses under a 256-byte grant even when its kind
+permits 512 bytes. A narrower kind can also refuse values permitted by the grant.
+The effective descriptor/role match equivalent explicit input, while submitted form,
+binding, provenance and request/receipt fingerprints remain distinct. The snapshot
+exposes `admitted_kind` alongside its effective composition. Item identity remains
+project/item-key based. K2 never changes K1 or an existing item's exact expansion.
+
+Only `WorkCurrentKindV1::Committed(receipt)` proves a usable definition.
+`Pending { original_request }` retains the original version reservation and cannot
+be registered. Positive `Absent` requires complete retained owner proof; damaged
+dependencies refuse. An exact original establishment request replays its receipt.
+A different request for a committed version refuses, even with equal content;
+resolve and reuse the existing binding. Different content under the same version
+conflicts. Positive original noncommit alone releases a never-committed version
+reservation, while its request key and history stay immutable. A fresh attempt then
+needs separately supplied approval and a new key. Pending/uncertain recovery must
+keep the original locator; never use a new-key retry to claim absence or success.
+
+Kind definitions remain retained truth after scope change, work-grant revocation,
+D→G or supported runtime reset. New effects still need current native authority;
+new items separately need their current usable work grant. A D kind can be reused
+on G with an independently re-established unchanged-scope G grant. Pending D
+establishment cannot borrow G or a successor grant. Independent definition operations
+do not suspend valid work; accepted grant administration does. The same retained
+owner, lock, positive manifest and combined lifetime budget hold both operations.
+
 The closed JSON codecs reject duplicate keys, unknown fields and trailing data.
 ASCII item/request/display tokens are at most 128 bytes; descriptive and provenance strings
 are at most 4,096 bytes; a complete record/request is at most 1 MiB. The retained
 inventory supports at most 32 transactions and 128 MiB in total, including
 candidates and noncommit history. Capacity refusal truncates or replaces nothing;
 existing exact recovery and closure of accepted original transactions remain
-available even at zero free slots. Initial terms, every scope revision/D→G,
-revocation, item and candidate/noncommit history consume the same global budget;
+available even at zero free slots. Initial terms, every scope revision/D→G, kind
+definition/approval/provenance, revocation, item and candidate/noncommit history
+consume the same global budget;
 slots are never reused.
+One initial grant and one kind leave at most 30 fresh item slots. At saturation,
+fresh kinds and revocation also refuse; reads/replay and already accepted original
+closure need no fresh slot. This outcome does not increase capacity or promise
+sustained-use latency.
 The owner retains a positive expected inventory before accepting each transaction.
 A missing transaction directory or damaged inventory proof therefore yields an
 integrity refusal or uncertain recovery, never invented item absence or permission
@@ -97,7 +204,7 @@ original meaning during current/history/recovery reads.
 
 | Native response | Meaning and next step |
 | --- | --- |
-| `Committed` / `Replayed` with receipt | One exact item is registered `open`; replay creates nothing. Save its original locator and inspect current state separately. |
+| `Committed` / `Replayed` with receipt | One exact definition is retained or one item is registered `open`; replay creates nothing. Save its original locator and inspect current truth separately. Definition truth supplies no work permission. |
 | `Refused` or preparation error | Named input, authority, currentness or integrity condition failed. Changed content needs a new key under valid authority and cannot overwrite an existing item. |
 | `NonCommitted` | The owner positively proved no terminal commit. Preserve this history; a fresh effect still requires current permission. Administrative suspension lifts only if the unchanged predecessor remains current and unrevoked. |
 | `Uncertain` | Retain the original locator and recover it. Do not retry under another key or claim absent/open success. |
@@ -149,6 +256,14 @@ save complete locators using create-new before invocation. `current`, `history`,
 `recover`, `terms-history`, `recover-terms`, `revoke-history`, `recover-revoke` and
 `completion` reopen and use those exact locators. The example is a Rust consumer;
 it adds no installed Handbook CLI route.
+
+Commands `establish-kind ROOT INITIAL CHECK DEFINITION APPROVAL SAVE`,
+`current-kind ROOT BINDING`, `kind-history ROOT KIND_REQUEST` and
+`recover-kind ROOT KIND_REQUEST` perform the same definition workflow with supplied
+portable files. `establish-kind` saves its complete original locator using
+create-new before invocation. `register` accepts either explicit or exact kind form.
+All commands print attributed native responses, so callers must inspect disposition,
+outcome and refusal. No direct authoring of owner files is needed.
 
 The example uses an 8 MiB worker stack for the inherited initial/check native
 path in debug builds. Its ordinary dependency proof and the native interruption

@@ -14,6 +14,80 @@ const INVENTORY_BYTES: usize = 128 * 1024 * 1024;
 const SLOT_SCHEMA: &str = "handbook.work-state-reservation-slot@1.0.0";
 const ROOT_INVENTORY_ENTRIES: usize = 4 * CAPACITY + 1;
 
+/// Historical grant origins retain their exact raw representation. Only the new
+/// kind origin has a closed, purpose-specific discriminant and owner schema.
+#[derive(Clone, Debug, PartialEq)]
+pub(super) enum BootstrapOrigin {
+    Grant(WorkGrantLocatorV1),
+    Kind(WorkKindLocatorV1),
+}
+#[derive(Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct KindOrigin {
+    schema_ref: String,
+    kind: WorkKindLocatorV1,
+}
+impl Serialize for BootstrapOrigin {
+    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        match self {
+            Self::Grant(g) => g.serialize(serializer),
+            Self::Kind(kind) => KindOrigin {
+                schema_ref: "handbook.work-state-bootstrap-kind@2.0.0".into(),
+                kind: kind.clone(),
+            }
+            .serialize(serializer),
+        }
+    }
+}
+impl<'de> Deserialize<'de> for BootstrapOrigin {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let value = serde_json::Value::deserialize(deserializer)?;
+        if value
+            .as_object()
+            .is_some_and(|o| o.contains_key("schema_ref"))
+        {
+            let origin: KindOrigin =
+                serde_json::from_value(value).map_err(serde::de::Error::custom)?;
+            if origin.schema_ref != "handbook.work-state-bootstrap-kind@2.0.0" {
+                return Err(serde::de::Error::custom("unknown bootstrap origin"));
+            }
+            Ok(Self::Kind(origin.kind))
+        } else {
+            serde_json::from_value(value)
+                .map(Self::Grant)
+                .map_err(serde::de::Error::custom)
+        }
+    }
+}
+impl BootstrapOrigin {
+    fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
+        match self {
+            Self::Grant(v) => v.validate(),
+            Self::Kind(v) => v.validate(),
+        }
+    }
+    fn check(&self) -> &crate::local_authority::local_check::LocalCheckLocatorV1 {
+        match self {
+            Self::Grant(v) => &v.check,
+            Self::Kind(v) => &v.check,
+        }
+    }
+    fn project(&self) -> &str {
+        self.check()
+            .predecessor
+            .charter
+            .binding
+            .initialization_claim
+            .proposed_repository_identity()
+    }
+    fn schema(&self) -> &'static str {
+        match self {
+            Self::Grant(_) => "handbook.work-state-owner@1.0.0",
+            Self::Kind(_) => "handbook.work-state-owner@2.0.0",
+        }
+    }
+}
+
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(deny_unknown_fields)]
 struct SlotEntry {
@@ -91,7 +165,7 @@ pub(super) struct Owner {
     pub project: String,
     physical: String,
     initialization: crate::RepositoryInitializationClaimV1,
-    bootstrap: WorkGrantLocatorV1,
+    bootstrap: BootstrapOrigin,
     lock_fingerprint: String,
     pub identity: String,
 }
@@ -156,6 +230,8 @@ impl WorkLock<'_> {
         let mut bytes = manifest
             .bytes
             .checked_add(required(self.root, OWNER)?.len())
+            .and_then(|bytes| bytes.checked_add(required(self.root, ANCHOR).ok()?.len()))
+            .and_then(|bytes| bytes.checked_add(required(self.root, BOOT).ok()?.len()))
             .ok_or_else(|| codec("overflow"))?;
         if bytes > INVENTORY_BYTES {
             return Err(refuse(
@@ -465,7 +541,7 @@ pub(super) struct Inventory {
 }
 fn valid_transaction_name(v: &str) -> bool {
     let v = v.strip_prefix("accept-").unwrap_or(v);
-    ["grant-", "item-", "revoke-"]
+    ["grant-", "item-", "revoke-", "kind-"]
         .iter()
         .any(|p| v.strip_prefix(p).is_some_and(|s| token(s).is_ok()))
 }
@@ -476,7 +552,7 @@ pub(super) fn open<'a>(
     let owner: Owner = decode(&required(root, ANCHOR)?)?;
     owner.initialization.validate().map_err(fs_error)?;
     owner.bootstrap.validate()?;
-    if owner.schema != "handbook.work-state-owner@1.0.0"
+    if owner.schema != owner.bootstrap.schema()
         || owner.project != owner.bootstrap.project()
         || owner.physical != owner.initialization.physical_root_fingerprint()
         || owner.identity != owner_identity(&owner.bootstrap)?
@@ -494,15 +570,13 @@ pub(super) fn open<'a>(
     result.validate()?;
     Ok(result)
 }
-pub(super) fn owner_identity(
-    grant: &WorkGrantLocatorV1,
-) -> Result<String, LocalAuthorityRefusalV1> {
+pub(super) fn owner_identity(origin: &BootstrapOrigin) -> Result<String, LocalAuthorityRefusalV1> {
     fp(
         "handbook.work-state-owner-identity@1.0.0",
         &(
-            grant.project(),
-            grant
-                .check
+            origin.project(),
+            origin
+                .check()
                 .predecessor
                 .charter
                 .binding
@@ -516,14 +590,35 @@ pub(super) fn owner_identity(
 // external bootstrap intent reserves the original activation across every prefix.
 pub(super) fn establish<'a>(
     root: &'a RetainedRepositoryRootV1,
-    grant: &WorkGrantLocatorV1,
+    origin: &BootstrapOrigin,
     mutation_attempted: &Cell<bool>,
     boundary: &mut dyn FnMut(super::WorkWriteBoundaryV1) -> Result<(), LocalAuthorityRefusalV1>,
 ) -> Result<WorkLock<'a>, LocalAuthorityRefusalV1> {
     if optional(root, ANCHOR)?.is_some() {
         return open(root);
     }
-    let boot = encode(grant)?;
+    origin.validate()?;
+    let boot = encode(origin)?;
+    // Check complete bootstrap/owner preimages before retaining the first
+    // external reservation. Native lock fingerprints have this fixed length.
+    let candidate = Owner {
+        schema: origin.schema().into(),
+        project: origin.project().into(),
+        physical: root
+            .governance_physical_root_fingerprint_v1()
+            .map_err(fs_error)?,
+        initialization: origin
+            .check()
+            .predecessor
+            .charter
+            .binding
+            .initialization_claim
+            .clone(),
+        bootstrap: origin.clone(),
+        lock_fingerprint: format!("sha256:{}", "0".repeat(64)),
+        identity: owner_identity(origin)?,
+    };
+    encode(&candidate)?;
     match optional(root, BOOT)? {
         Some(b) if b == boot => {
             if root
@@ -569,21 +664,8 @@ pub(super) fn establish<'a>(
     }
     .map_err(fs_error)?;
     let owner = Owner {
-        schema: "handbook.work-state-owner@1.0.0".into(),
-        project: grant.project().into(),
-        physical: root
-            .governance_physical_root_fingerprint_v1()
-            .map_err(fs_error)?,
-        initialization: grant
-            .check
-            .predecessor
-            .charter
-            .binding
-            .initialization_claim
-            .clone(),
-        bootstrap: grant.clone(),
         lock_fingerprint: retained.physical_fingerprint_v1().map_err(fs_error)?,
-        identity: owner_identity(grant)?,
+        ..candidate
     };
     for index in 0..CAPACITY {
         let path = format!("{STAGE}/v1/{}", slot_name(index));

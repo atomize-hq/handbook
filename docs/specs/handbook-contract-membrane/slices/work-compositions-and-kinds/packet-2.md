@@ -1,13 +1,15 @@
 # Work compositions and kinds — Packet 2: optional immutable whole-composition kinds
 
-Status: **bounded authority preparation; human-selected recommendation B;
-concrete implementation plan awaits human approval** — 2026-10-09.
-Part of [one slice](README.md). This document authorizes no product edits and
-supplies no runtime project approval or work-registration permission.
+Status: **human-approved complete Packet-2 plan at `d7ff969`; native/SDK
+implemented and selected acceptance verified; focused causal APPROVE; no unresolved P1/P2** — 2026-10-09.
+Part of [one slice](README.md). The human authorized this complete reviewed plan,
+implementation, verification, focused causal review and one coherent local commit.
+This supplies no runtime project approval or work-registration permission.
 
 After reviewing/discussing Packet 1, the human selected **per-version approval**
 and authorized this bounded planning: prepare the concrete plan for review before
-implementation. B means the original claimed human separately approves each exact
+implementation. The human subsequently approved the complete plan at `d7ff969`.
+B means the original claimed human separately approves each exact
 immutable kind version/content on supported current D/G. It does not establish a
 reusable kind-administration grant or reopen selected Packet-1 recommendation A.
 
@@ -374,7 +376,8 @@ item rebinding, kind defaults/aliases/revocation, generic Artifact Kind reuse,
 arbitrary hooks, broad IAM/authentication, CLI/Tauri/host delivery, capacity redesign,
 adjacent planning, push/merge and durable orchestration archives are excluded.
 No consequential decision remains unresolved within the selected B boundary;
-approval of this concrete plan is still required before implementation.
+the human approved this concrete plan at `d7ff969`. Runtime approval remains
+separate for each exact kind version/content and work grant.
 
 Verify, obtain one focused causal reviewer, remediate P1 Critical/P2 Required and
 re-review material remediation; report P3 Optional/Consider and P4 Nit without
@@ -382,3 +385,58 @@ turning advisories into gates. Make one coherent local authorized product commit
 when implemented, return `PACKET_COMPLETE` to meta with evidence and the final
 packet checkpoint, and stop. Only meta performs eventual aggregate slice checks
 and recap; a clean verdict does not grant runtime approval or successor authority.
+
+## Packet-2 implementation checkpoint — 2026-10-09
+
+The authorized native/SDK implementation and all eight selected acceptance
+conditions are verified. A separate default-feature
+SDK consumer established a requirements kind before any work grant, saved its
+original locator, established the independent first grant, and registered both
+kind-backed and equivalent explicit requirements items. Effective descriptor/role
+meaning matched while admitted provenance and request/receipt fingerprints stayed
+distinct. Reopen, exact definition/item reads, saved-locator recovery and
+`unsupported / not_assessed` completion passed. A 129-byte label refused against
+the supplied 128-byte kind bound; scope tests also prove a narrower grant refuses
+values within a wider kind. K2 does not reinterpret K1 or its items.
+
+New submitted composition JSON has a closed `form` discriminant. Historical raw
+explicit forms keep deterministic decoding and original preimages. New item
+intent/receipt domains and snapshot version distinguish new provenance; the item
+identity scheme and raw grant-origin bootstrap bytes remain unchanged. Kind-first
+bootstrap has its own closed origin within the same retained owner/lock/manifest.
+The shared fingerprint helper now propagates typed serialization refusal: an
+explicit descriptor carrying a kind override cannot panic or silently drop it.
+Valid canonical preimages remain exact.
+
+Focused Windows verification establishes Engine owner/codecs **5/5 +
+2/2**, SDK workflows **11/11 + 7/7**, existing durability **11/11 parent tests**
+(1,068.42s), and integrity **9/9 + 8/8**. New kind durability passed **10/10 parent
+tests** through the complete run and focused corrections/additions, including the
+final saturation rerun (303.41s). Reused green matrices were unaffected by the
+bookkeeping corrections or fallible handling of invalid serialization. Real process death passed all **23**
+definition/item kill boundaries, and real processes passed both serialized orders
+for version/bootstrap and item/authority competition. Ignored subprocess entry
+points are invoked by those parent tests and are not standalone passing tests.
+
+Retention passed **4/4**, explicitly including both physical tests over **14
+foundation + 14 Packet-1** stores captured with untouched original writers before
+production edits (395.40s). All 28 original inventories matched before correcting
+the caller's Windows root spelling; no recapture or lock regeneration occurred.
+Final golden byte/identity tests also passed after the fingerprint error fix.
+The normal consumer used only default SDK/Engine features and the example's 8 MiB
+worker stack (build about 80s; workflow 76.77s). Engine/SDK and example compilation,
+focused formatting and diff checks pass. Native tests used command-local 16–32 MiB
+stacks and the optimized test profile; Unix/full-workspace execution and sustained
+latency are unclaimed. Initial revocation is exercised before check adoption;
+the existing native owner does not support revoking initial terms after adoption.
+Check revocation/reset tests preserve exact committed kind/item history.
+
+GitNexus upstream attempts could not resolve these symbols in its stale index;
+staged change detection found the expected 27 files without indexed hunk coverage.
+Comparison with `main` reports inherited branch-wide critical impact, not reliable
+Packet-2 coverage. The approved direct-source fallback covers the actual owner,
+SDK and recovery call paths. One focused causal reviewer returned **APPROVE**, with
+no unresolved P1/P2 and no new P3/P4 findings.
+The inherited P3 scan-cost advisory and separately selected
+capacity/performance follow-up remain; no storage or capacity redesign is included.
+This packet checkpoint leaves aggregate slice integration and human recap to meta.

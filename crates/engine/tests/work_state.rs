@@ -9,7 +9,7 @@ fn input() -> WorkRegistrationInputV1 {
         question: "Why does this session expire?".into(),
         actor: "agent".into(),
         expected_state: "absent".into(),
-        composition: WorkCompositionV1::ordinary_leaf(),
+        composition: WorkCompositionV1::ordinary_leaf().into(),
         display_level: None,
     }
 }
@@ -30,6 +30,8 @@ fn identity_and_exact_descriptor_do_not_depend_on_codec_release_or_delivery() {
         WorkRegistrationInputV1::from_json_bytes(&initial)
             .unwrap()
             .composition
+            .explicit_composition()
+            .unwrap()
             .descriptor
             .canonical_json_bytes()
             .unwrap(),
@@ -52,22 +54,32 @@ fn future_roles_kinds_relations_state_and_unknown_fields_refuse_without_silent_p
         );
     }
     let mut v = original.clone();
-    v.composition.descriptor.role_schema = vec!["requirements_input".into()];
+    v.composition.explicit_mut().unwrap().descriptor.role_schema =
+        vec!["requirements_input".into()];
     assert!(v.canonical_json_bytes().is_err());
     v = original.clone();
-    v.composition.descriptor.relation_support = vec!["parent".into()];
+    v.composition
+        .explicit_mut()
+        .unwrap()
+        .descriptor
+        .relation_support = vec!["parent".into()];
     assert!(v.canonical_json_bytes().is_err());
     v = original.clone();
     v.expected_state = "open".into();
     assert!(v.canonical_json_bytes().is_err());
     v = original.clone();
-    v.composition.kind = Some(handbook_engine::local_authority::LocalBindingV1 {
-        reference: "kind@1".into(),
-        fingerprint: "test".into(),
-    });
+    v.composition.explicit_mut().unwrap().kind =
+        Some(handbook_engine::local_authority::LocalBindingV1 {
+            reference: "kind@1".into(),
+            fingerprint: "test".into(),
+        });
     assert!(v.canonical_json_bytes().is_err());
     v = original;
-    v.composition.descriptor.compatibility_version = "2".into();
+    v.composition
+        .explicit_mut()
+        .unwrap()
+        .descriptor
+        .compatibility_version = "2".into();
     assert!(v.canonical_json_bytes().is_err());
 }
 #[test]
@@ -110,7 +122,7 @@ fn declarations_are_closed_and_do_not_assert_contract_truth() {
         WorkDefinitionFamilyV1::FullLocalV3,
     ] {
         let mut value = input();
-        value.composition = WorkCompositionV1::requirements_input(definition(family));
+        value.composition = WorkCompositionV1::requirements_input(definition(family)).into();
         value.display_level = Some("implementation".into());
         let bytes = value.canonical_json_bytes().unwrap();
         assert_eq!(
@@ -138,7 +150,8 @@ fn declarations_are_closed_and_do_not_assert_contract_truth() {
         );
     }
     let mut value = input();
-    value.composition = WorkCompositionV1::planning_output("What exact requirements are needed?");
+    value.composition =
+        WorkCompositionV1::planning_output("What exact requirements are needed?").into();
     let bytes = value.canonical_json_bytes().unwrap();
     assert_eq!(
         WorkRegistrationInputV1::from_json_bytes(&bytes).unwrap(),
@@ -148,9 +161,9 @@ fn declarations_are_closed_and_do_not_assert_contract_truth() {
     wire["composition"]["role"]["definition"] =
         json!(definition(WorkDefinitionFamilyV1::IntrinsicV1));
     assert!(WorkRegistrationInputV1::from_json_bytes(&serde_json::to_vec(&wire).unwrap()).is_err());
-    value.composition.role = None;
+    value.composition.explicit_mut().unwrap().role = None;
     assert!(value.canonical_json_bytes().is_err());
-    value.composition = WorkCompositionV1::planning_output("Ã©".repeat(2049));
+    value.composition = WorkCompositionV1::planning_output("Ã©".repeat(2049)).into();
     assert!(value.canonical_json_bytes().is_err());
 }
 

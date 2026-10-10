@@ -55,7 +55,8 @@ fn menu_input(grant: &WorkGrantLocatorV1, role: usize, key: &str) -> WorkRegistr
         1 => {
             value.display_level = Some("planning".into());
             value.composition =
-                WorkCompositionV1::planning_output("What exact requirements must renewal satisfy?");
+                WorkCompositionV1::planning_output("What exact requirements must renewal satisfy?")
+                    .into();
         }
         2 => {
             value.display_level = Some("implementation".into());
@@ -63,7 +64,8 @@ fn menu_input(grant: &WorkGrantLocatorV1, role: usize, key: &str) -> WorkRegistr
                 work_requirements_definition_from_intrinsic_v1(
                     &work_state_support::supplied_intrinsic_definition("1.0.0"),
                 ),
-            );
+            )
+            .into();
         }
         _ => unreachable!(),
     }
@@ -138,7 +140,7 @@ fn one_sdk_path_first_establishes_all_three_compositions_on_d_and_g() {
             );
             let receipt = execution.outcome.unwrap();
             assert_eq!(receipt.locator, original);
-            assert_eq!(receipt.snapshot.role, value.composition.role);
+            assert_eq!(receipt.snapshot.role, value.composition.role().cloned());
             assert_eq!(receipt.snapshot.display_level, value.display_level);
             assert_eq!(receipt.snapshot.state, "open");
             assert_eq!(
@@ -251,37 +253,37 @@ fn exact_scope_successors_refuse_implicit_expansion_and_unapproved_parameters() 
             1 => request.question = "x".repeat(257),
             2 => request.display_level = Some("bounded-but-unapproved".into()),
             3 => request.display_level = None,
-            4 => request.composition = WorkCompositionV1::planning_output("x".repeat(257)),
+            4 => request.composition = WorkCompositionV1::planning_output("x".repeat(257)).into(),
             5 => {
                 if let Some(WorkRoleValueV1::RequirementsInput { definition }) =
-                    &mut request.composition.role
+                    &mut request.composition.explicit_mut().unwrap().role
                 {
                     definition.reference = definition.reference.replace("1.0.0", "2.0.0");
                 }
             }
             6 => {
                 if let Some(WorkRoleValueV1::RequirementsInput { definition }) =
-                    &mut request.composition.role
+                    &mut request.composition.explicit_mut().unwrap().role
                 {
                     definition.fingerprint = format!("sha256:{}", "b".repeat(64));
                 }
             }
             7 => {
                 if let Some(WorkRoleValueV1::RequirementsInput { definition }) =
-                    &mut request.composition.role
+                    &mut request.composition.explicit_mut().unwrap().role
                 {
                     definition.reference = "handbook.contract.session-renewal@latest".into();
                 }
             }
             8 => {
                 if let Some(WorkRoleValueV1::RequirementsInput { definition }) =
-                    &mut request.composition.role
+                    &mut request.composition.explicit_mut().unwrap().role
                 {
                     definition.family = WorkDefinitionFamilyV1::FullLocalV3;
                     definition.schema_ref = definition.family.schema_ref().into();
                 }
             }
-            _ => request.composition.role = None,
+            _ => request.composition.explicit_mut().unwrap().role = None,
         }
         assert!(
             sdk.prepare_work_registration(&initial, &menu, request)
@@ -672,7 +674,7 @@ fn input(grant: &WorkGrantLocatorV1, request: &str, item: &str) -> WorkRegistrat
         question: "Why does this local session lose its renewal token?".into(),
         actor: grant.terms.agent.clone(),
         expected_state: "absent".into(),
-        composition: WorkCompositionV1::ordinary_leaf(),
+        composition: WorkCompositionV1::ordinary_leaf().into(),
         display_level: None,
     }
 }
@@ -1021,22 +1023,33 @@ fn future_roles_kinds_overrides_states_and_conflicting_keys_refuse_without_rebin
         let mut request = input(&grant, change, change);
         match change {
             "kind" => {
-                request.composition.kind = Some(LocalBindingV1 {
+                request.composition.explicit_mut().unwrap().kind = Some(LocalBindingV1 {
                     reference: "handbook.work-kind.future@1.0.0".into(),
                     fingerprint: format!("sha256:{}", "a".repeat(64)),
                 })
             }
             "roles" => request
                 .composition
+                .explicit_mut()
+                .unwrap()
                 .descriptor
                 .role_schema
                 .push("requirements_input".into()),
             "relations" => request
                 .composition
+                .explicit_mut()
+                .unwrap()
                 .descriptor
                 .relation_support
                 .push("prerequisite".into()),
-            "version" => request.composition.descriptor.compatibility_version = "2".into(),
+            "version" => {
+                request
+                    .composition
+                    .explicit_mut()
+                    .unwrap()
+                    .descriptor
+                    .compatibility_version = "2".into()
+            }
             _ => request.expected_state = "completed".into(),
         }
         assert!(

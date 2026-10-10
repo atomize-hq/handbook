@@ -19,7 +19,9 @@ meta validation and the human recap are complete. The human reviewed the capacit
 limitations and selected near-term follow-up tracking without interrupting the
 current compositions/kinds direction. After Packet-1 review/discussion the human
 selected per-version approval B and authorized bounded [Packet-2 planning](slices/work-compositions-and-kinds/packet-2.md);
-the concrete plan awaits human approval before implementation.
+the complete reviewed plan at `d7ff969` is now human-approved for implementation,
+verification, focused causal review and one coherent local commit. Packet-2
+implementation and selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2.
 Remaining roadmap choices are
 proposed where unselected, and CR's separate choices remain unselected.
 These are supplied meta results,
@@ -242,7 +244,8 @@ human-selected unified registration model. The human selected recommendation A
 and approved all of the reviewed Packet-1 plan at `277674e2`; it is implemented
 and verified at `7129b5c`; meta validation and the human recap are complete.
 The human subsequently selected per-version kind approval B and authorized bounded
-Packet-2 planning; its concrete plan awaits human implementation approval.
+Packet-2 planning, then approved its complete reviewed implementation plan at
+`d7ff969`. Packet-2 implementation and selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2.
 No unrelated suite rerun or new predecessor
 closeout is claimed by this status reconciliation.
 
@@ -285,8 +288,9 @@ Unit 1 is complete. Unit 2's [slice preparation](slices/work-compositions-and-ki
 now details its final review increment under the selected unified registration
 direction and human-selected recommendation A, with Packet 1 implemented at
 `7129b5c` and its human recap reviewed/discussed. Kind-definition recommendation B
-is human-selected; [Packet 2](slices/work-compositions-and-kinds/packet-2.md) is prepared for human plan review,
-with implementation unauthorized until that approval.
+is human-selected; the complete [Packet-2 plan](slices/work-compositions-and-kinds/packet-2.md)
+at `d7ff969` is human-approved. Implementation and selected acceptance are
+verified; focused causal review returned APPROVE with no unresolved P1/P2.
 Unit 2's compatibility boundary below was
 prepared and human-selected **before unit 1 implementation**. The human approved
 unit 1's complete Packet-1 plan, with execution following recording and clean review of these selections;
@@ -296,7 +300,7 @@ approval does not select the remainder of this proposed serial order.
 | Order / outcome | Actual dependency and landing checkpoint |
 | --- | --- |
 | 1. Corrected work-state foundation | Complete at `cbfbf76`; supplied meta aggregate acceptance/closeout and human recap are complete. Delivers expressly activated registration permission on current local-check D/G, exact `open` leaf registration/current/history/recovery and unsupported completion through SDK. Checkpoint reviewed: a continuing project registers work under new terms; local-check permission alone refuses. |
-| 2. [Configurable compositions and optional immutable kinds](slices/work-compositions-and-kinds/README.md) | Foundation and recap complete. Human-selected: Engine placement, ordinary/planning-output/requirements-input menu, no item rebinding, one composition-aware registration authority and separate kind definition. First packet delivers one typed registration path and human-selected exact-scope establishment/change/D→G/revocation/recovery, implemented and verified at `7129b5c` under the reviewed `277674e2` plan; meta validation/human recap and subsequent discussion are complete. The human selected per-version approval B and authorized bounded [Packet-2 planning](slices/work-compositions-and-kinds/packet-2.md); the concrete immutable-kind/SDK plan awaits human approval before implementation. Checkpoints: Packet 1 authorizes P/I without implicit widening; Packet 2 reuses exact committed kind versions with equal explicit meaning and separate current work permission. Retained items/requests remain exact. No permanent legacy API, parallel stream, special version upgrade or storage redesign. The human selected a separate [near-term capacity/performance follow-up](#work-state-capacity-and-performance-follow-up) without making it a predecessor of this outcome. |
+| 2. [Configurable compositions and optional immutable kinds](slices/work-compositions-and-kinds/README.md) | Foundation and recap complete. Human-selected: Engine placement, ordinary/planning-output/requirements-input menu, no item rebinding, one composition-aware registration authority and separate kind definition. First packet delivers one typed registration path and human-selected exact-scope establishment/change/D→G/revocation/recovery, implemented and verified at `7129b5c` under the reviewed `277674e2` plan; meta validation/human recap and subsequent discussion are complete. The human selected per-version approval B, authorized bounded planning, then approved the complete [Packet-2 immutable-kind/SDK plan](slices/work-compositions-and-kinds/packet-2.md) at `d7ff969` for implementation, verification, causal review and local commit. Implementation and selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2; final slice integration and the human recap remain with meta. Checkpoints: Packet 1 authorizes P/I without implicit widening; Packet 2 reuses exact committed kind versions with equal explicit meaning and separate current work permission. Retained items/requests remain exact. No permanent legacy API, parallel stream, special version upgrade or storage redesign. The human selected a separate [near-term capacity/performance follow-up](#work-state-capacity-and-performance-follow-up) without making it a predecessor of this outcome. |
 | 3. Native local Context Resolution root binding | Recommended after the first flexibility landing; this is a sequencing choice, not a hard dependency on 1/2. Requires its own human selections and bounded preparation below. Deliver reusable root-only use, explicit management/use establishment, currentness, history/recovery and selected replacement/revocation. Checkpoint: reopen and use B1, refuse unpermitted B2 management. Work authority cannot substitute. |
 | 4. Hierarchy and typed prerequisite facts | Depends on 1/2's identity/composition participation. Deliver same-project one-parent relations, authoritative revisions and coherent finite cuts, start/close/both roles, distinct grouping/reference/order, and structural/closure-cycle refusal. Checkpoint: Feature → Phase → Slice → Task branching plus one shared cross-branch prerequisite preserves one identity and rejects a closure deadlock. This alone grants no start/close effect or eligibility. |
 | 5. Positive leaf eligibility | Depends on work/composition facts and selected governing assignment, assessment protocol, complete exact roles/coverage/populations and current qualification. Relation-dependent questions additionally require 4; relation-free leaf eligibility need not wait for every hierarchy capability or CR. Checkpoint: a declared result population produces atomic eligibility/disposition; a direct pass alone or missing required coverage cannot. Physical Work Progression placement remains downstream of Engine and Contracts. |
@@ -328,10 +332,10 @@ The [current store](../../../crates/engine/src/work_state/store.rs) has a lifeti
 budget of **32 retained transactions / 128 MiB per project-local work-state store**,
 with 1 MiB record/request bounds. Item registration, initial permission, scope
 changes, D→G, revocation and accepted pending/noncommitted history share the
-budget; planned Packet-2 kinds share these same limits. Slots are never reused.
-One initial permission alone leaves at most 31
-item registrations. At saturation, fresh authority operations including revocation
-refuse as well as fresh items. Existing reads/replay and closure of already
+budget; Packet-2 definitions and provenance share these same limits. Slots are never reused.
+One initial permission alone leaves at most 31 item registrations; one grant and
+one kind leave at most 30. At saturation, fresh authority operations including revocation
+refuse as well as fresh items and kinds. Existing reads/replay and closure of already
 accepted transactions retain their normal supported checks. The
 [packet boundary](slices/work-compositions-and-kinds/packet-1.md) deliberately
 preserved these limits; they are implementation constraints, not intended project
@@ -438,8 +442,10 @@ aggregate acceptance/closeout and human recap are complete at `cbfbf76` as recor
 above. Actual runtime authority remains separately required. The requested
 flexibility authority owns the selected unified direction/lifecycle and completed
 Packet 1 at `7129b5c`, plus human-selected per-version kind approval B and the
-prepared Packet-2 plan. Packet-2 execution and the other proposed outcomes retain
-their own human plan checkpoints and bounded authorization. No later serial order
+human-approved complete Packet-2 plan at `d7ff969`. Packet-2 implementation and
+selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2; its final packet checkpoint and meta aggregate
+integration/human recap remain. The other proposed outcomes retain their own
+human plan checkpoints and bounded authorization. No later serial order
 is approved here.
 
 ### Current source constraints on the next outcome

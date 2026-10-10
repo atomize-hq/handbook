@@ -86,7 +86,7 @@ impl WorkCompositionV1 {
             role: Some(WorkRoleValueV1::RequirementsInput { definition }),
         }
     }
-    fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
+    pub(super) fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
         self.descriptor.validate()?;
         if self.kind.is_some() {
             return Err(refuse(
@@ -298,7 +298,7 @@ pub struct WorkRegistrationInputV1 {
     pub question: String,
     pub actor: String,
     pub expected_state: String,
-    pub composition: WorkCompositionV1,
+    pub composition: WorkCompositionInputV1,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub display_level: Option<String>,
 }
@@ -337,6 +337,8 @@ impl WorkRegistrationInputV1 {
 pub struct WorkRequestLocatorV1 {
     pub grant: WorkGrantLocatorV1,
     pub input: WorkRegistrationInputV1,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub kind_provenance: Option<WorkKindProvenanceV1>,
     pub item_identity: String,
     pub fingerprint: String,
 }
@@ -353,7 +355,7 @@ impl WorkRequestLocatorV1 {
     pub(crate) fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
         self.grant.validate()?;
         self.input.validate()?;
-        self.grant.terms.scope.permits(&self.input)?;
+        self.grant.terms.scope.permits(&self.effective_input()?)?;
         if self.input.actor != self.grant.terms.agent
             || self.item_identity
                 != work_item_identity_v1(self.grant.project(), &self.input.item_key)?
@@ -367,10 +369,65 @@ impl WorkRequestLocatorV1 {
         Ok(())
     }
     pub(crate) fn identity(&self) -> Result<String, LocalAuthorityRefusalV1> {
+        if !self.input.composition.retained() || self.kind_provenance.is_some() {
+            return fp(
+                "handbook.work-registration-request@2.0.0",
+                &(
+                    &self.grant,
+                    &self.input,
+                    &self.item_identity,
+                    &self.kind_provenance,
+                ),
+            );
+        }
         fp(
             "handbook.work-registration-request@1.0.0",
             &(&self.grant, &self.input, &self.item_identity),
         )
+    }
+    pub(crate) fn effective_input(
+        &self,
+    ) -> Result<WorkRegistrationInputV1, LocalAuthorityRefusalV1> {
+        let mut input = self.input.clone();
+        match (&input.composition, &self.kind_provenance) {
+            (WorkCompositionInputV1::Kind { binding, role }, Some(provenance)) => {
+                provenance.establishment.canonical_json_bytes()?;
+                let definition = &provenance.establishment.definition;
+                let expanded = WorkCompositionV1 {
+                    descriptor: definition.template.descriptor.clone(),
+                    kind: None,
+                    role: role.clone(),
+                };
+                expanded.validate()?;
+                if binding != &provenance.establishment.binding
+                    || binding.project_identity != self.grant.project()
+                    || provenance.expanded != expanded
+                {
+                    return Err(refuse(
+                        "work_kind_provenance",
+                        "exact same-project committed kind and expansion required",
+                    ));
+                }
+                input.composition = expanded.into();
+                if !definition.template.permits(&input) {
+                    return Err(refuse(
+                        "work_kind_bounds",
+                        "expanded values exceed exact retained kind bounds",
+                    ));
+                }
+            }
+            (
+                WorkCompositionInputV1::Explicit(_) | WorkCompositionInputV1::RetainedExplicit(_),
+                None,
+            ) => {}
+            _ => {
+                return Err(refuse(
+                    "work_kind_provenance",
+                    "submitted form and complete exact kind dependency differ",
+                ))
+            }
+        }
+        Ok(input)
     }
 }
 /// Identity has no codec, release, descriptor or delivery input.
@@ -401,6 +458,8 @@ pub struct WorkSnapshotV1 {
     pub display_level: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub role: Option<WorkRoleValueV1>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub admitted_kind: Option<WorkKindBindingV1>,
     pub state: String,
     pub descriptor: WorkDescriptorV1,
     pub descriptor_bytes: Vec<u8>,

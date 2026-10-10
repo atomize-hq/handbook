@@ -104,7 +104,7 @@ pub struct WorkCompositionClauseV1 {
     pub role_permission: WorkRolePermissionV1,
 }
 impl WorkCompositionClauseV1 {
-    fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
+    pub(super) fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
         self.descriptor.validate()?;
         maximum(self.label_max_bytes)?;
         maximum(self.work_question_max_bytes)?;
@@ -150,15 +150,18 @@ impl WorkCompositionClauseV1 {
         }
         Ok(())
     }
-    fn permits(&self, input: &WorkRegistrationInputV1) -> bool {
-        self.descriptor == input.composition.descriptor
+    pub(super) fn permits(&self, input: &WorkRegistrationInputV1) -> bool {
+        let Some(composition) = input.composition.explicit_composition() else {
+            return false;
+        };
+        self.descriptor == composition.descriptor
             && input.label.len() <= self.label_max_bytes as usize
             && input.question.len() <= self.work_question_max_bytes as usize
             && match &input.display_level {
                 None => self.allow_omitted_display_level,
                 Some(v) => self.display_levels.contains(v),
             }
-            && match (&self.role_permission, &input.composition.role) {
+            && match (&self.role_permission, &composition.role) {
                 (WorkRolePermissionV1::Ordinary {}, None) => true,
                 (
                     WorkRolePermissionV1::PlanningOutput { question_max_bytes },
@@ -235,7 +238,9 @@ impl WorkRegistrationScopeV1 {
     ) -> Result<(), LocalAuthorityRefusalV1> {
         self.validate()?;
         let allowed = match self {
-            Self::RetainedOrdinary(v) => input.composition == *v && input.display_level.is_none(),
+            Self::RetainedOrdinary(v) => {
+                input.composition.explicit_composition() == Some(v) && input.display_level.is_none()
+            }
             Self::Explicit(v) => v.clauses.iter().any(|c| c.permits(input)),
         };
         if allowed {

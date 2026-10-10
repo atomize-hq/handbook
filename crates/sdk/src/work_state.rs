@@ -1,24 +1,79 @@
-//! Typed native work registration. Locators identify original requests and grant
-//! no operating permission. Retain each locator before invoking an effect.
+//! Typed native work definitions and registration. Locators identify original
+//! requests and grant no operating permission. Retain them before invoking effects.
 use crate::local_check::LocalCheckLocatorV1;
 use crate::local_setup::LocalInitialSetupLocatorV1;
 use crate::HandbookSdkV1;
 pub use handbook_engine::local_authority::LocalAuthorityRefusalV1;
 use handbook_engine::work_state::NativeWorkStateV1;
 pub use handbook_engine::work_state::{
-    work_item_identity_v1, PreparedWorkGrantV1, PreparedWorkRegistrationV1, WorkAuthorityChangeV1,
-    WorkCompletionSupportV1, WorkCompositionClauseV1, WorkCompositionV1, WorkCurrentItemV1,
+    work_item_identity_v1, PreparedWorkGrantV1, PreparedWorkKindV1, PreparedWorkRegistrationV1,
+    WorkAuthorityChangeV1, WorkCompletionSupportV1, WorkCompositionClauseV1,
+    WorkCompositionInputV1, WorkCompositionV1, WorkCurrentItemV1, WorkCurrentKindV1,
     WorkDefinitionFamilyV1, WorkDescriptorV1, WorkDispositionV1, WorkExecutionV1,
-    WorkExplicitScopeV1, WorkGrantLocatorV1, WorkGrantV1, WorkRegistrationInputV1,
-    WorkRegistrationReceiptV1, WorkRegistrationScopeV1, WorkRegistrationTermsV1,
-    WorkRequestLocatorV1, WorkRequirementsDefinitionV1, WorkRevocationReceiptV1,
-    WorkRevokeLocatorV1, WorkRolePermissionV1, WorkRoleValueV1, WorkSnapshotV1,
-    WorkTermsTransitionV1, ORDINARY_LEAF_COMPOSITION_V1, PLANNING_OUTPUT_COMPOSITION_V1,
-    REQUIREMENTS_INPUT_COMPOSITION_V1, WORK_EXPLICIT_SCOPE_V1, WORK_IDENTITY_SCHEME_V1,
-    WORK_REGISTRATION_RULE_V1, WORK_STATE_FULL_OWNER_REACH_V1,
+    WorkExplicitScopeV1, WorkGrantLocatorV1, WorkGrantV1, WorkKindApprovalV1, WorkKindBindingV1,
+    WorkKindDefinitionV1, WorkKindLocatorV1, WorkKindProvenanceV1, WorkKindReceiptV1,
+    WorkRegistrationInputV1, WorkRegistrationReceiptV1, WorkRegistrationScopeV1,
+    WorkRegistrationTermsV1, WorkRequestLocatorV1, WorkRequirementsDefinitionV1,
+    WorkRevocationReceiptV1, WorkRevokeLocatorV1, WorkRolePermissionV1, WorkRoleValueV1,
+    WorkSnapshotV1, WorkTermsTransitionV1, ORDINARY_LEAF_COMPOSITION_V1,
+    PLANNING_OUTPUT_COMPOSITION_V1, REQUIREMENTS_INPUT_COMPOSITION_V1, WORK_EXPLICIT_SCOPE_V1,
+    WORK_IDENTITY_SCHEME_V1, WORK_KIND_BINDING_SCHEMA_V1, WORK_KIND_DEFINITION_SCHEMA_V1,
+    WORK_KIND_ESTABLISHMENT_RULE_V1, WORK_REGISTRATION_RULE_V1, WORK_STATE_FULL_OWNER_REACH_V1,
 };
 
 impl HandbookSdkV1 {
+    /// Prepares the original human's approval of one exact immutable definition.
+    /// Supply the observed native basis and check fingerprint in that approval;
+    /// they are validated inward, never replaced by this observation. Definition
+    /// establishment needs no work grant and supplies no work permission.
+    pub fn prepare_work_kind_establishment(
+        &self,
+        initial: &LocalInitialSetupLocatorV1,
+        check: &LocalCheckLocatorV1,
+        definition: WorkKindDefinitionV1,
+        approval: WorkKindApprovalV1,
+    ) -> Result<PreparedWorkKindV1, LocalAuthorityRefusalV1> {
+        require_initial(initial, check)?;
+        let basis = self.observe_local_check_basis(initial)?;
+        NativeWorkStateV1::prepare_kind(&self.repo_root, check, basis, definition, approval)
+    }
+
+    /// Save `prepared.locator()` first. A candidate is never a committed kind;
+    /// inspect the returned disposition, outcome and refusal before using it.
+    pub fn establish_work_kind(
+        &self,
+        prepared: PreparedWorkKindV1,
+    ) -> WorkExecutionV1<WorkKindReceiptV1> {
+        NativeWorkStateV1::establish_kind(&self.repo_root, prepared)
+    }
+
+    /// Reads original definition-establishment truth without live permission.
+    pub fn resolve_work_kind_request(
+        &self,
+        locator: &WorkKindLocatorV1,
+    ) -> WorkExecutionV1<WorkKindReceiptV1> {
+        NativeWorkStateV1::resolve_kind_request(&self.repo_root, locator)
+    }
+
+    /// Recovers only the saved original basis, approval and version reservation.
+    /// A successor basis or fresh request key never repairs uncertain history.
+    pub fn recover_work_kind_request(
+        &self,
+        locator: &WorkKindLocatorV1,
+    ) -> WorkExecutionV1<WorkKindReceiptV1> {
+        NativeWorkStateV1::recover_kind_request(&self.repo_root, locator)
+    }
+
+    /// Resolves an exact same-project definition independently of work permission.
+    /// Pending definitions cannot be used. Missing proof refuses rather than
+    /// substituting another version or inferring absence.
+    pub fn resolve_work_kind(
+        &self,
+        binding: &WorkKindBindingV1,
+    ) -> Result<WorkCurrentKindV1, LocalAuthorityRefusalV1> {
+        NativeWorkStateV1::current_kind(&self.repo_root, binding)
+    }
+
     /// Prepares exact supplied human-approved terms under the fixed Engine
     /// establishment rule. Existing local-check terms alone supply no work grant.
     /// Select initial establishment, an exact same-basis scope successor, or
