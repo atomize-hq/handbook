@@ -164,11 +164,14 @@ discussing Packet 1, the human selected kind-definition recommendation B,
 **per-version approval**, and authorized bounded [Packet-2 preparation](slices/work-compositions-and-kinds/packet-2.md).
 The human subsequently approved the complete reviewed plan at `d7ff969`, including
 implementation, verification, focused causal review and a coherent local commit.
-Packet-2 implementation and selected acceptance are verified, with focused causal
-**APPROVE** and no unresolved P1/P2. Runtime project terms remain separately supplied and approved.
+Packet 2 is complete at `ae1af38`, with selected acceptance verified and final
+focused causal **APPROVE**, no unresolved P1/P2 and no new P3/P4. The
+[slice status](slices/work-compositions-and-kinds/README.md) records supplied meta
+validation of all seven conditions and integration, aggregate closeout and accepted
+human recap. Both packets and the slice are complete; no Packet 3 remains.
+Runtime project terms remain separately supplied and approved.
 Retained truth/recovery is preserved without permanent old
-APIs or a special V1-to-menu upgrade. The slice remains incomplete until its final
-authorized packet and aggregate acceptance are satisfied.
+APIs or a special V1-to-menu upgrade.
 It delivers no positive Work Progression eligibility,
 governed completion, parent decision or close effect; those remain separately bounded.
 The initial-only recommendation at `6aba084` is superseded by selected explicit
@@ -177,9 +180,10 @@ permission nor a Context Resolution root binding
 authorizes registration. The [joint near-term sequence](coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints)
 puts configurable compositions/optional kinds immediately after foundation, with
 compatibility prepared and selected before it, followed by separately meaningful
-Context Resolution, hierarchy, eligibility and closing outcomes. Flexibility
-implementation is authorized within the complete Packet-2 plan; the other
-ordering and implementation gates remain proposed where unselected. This approval
+Context Resolution, hierarchy, eligibility and closing outcomes. The
+[current priorities](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
+recommend the selected capacity/performance research follow-up next; broader
+ordering and implementation gates remain proposed where unselected. Prior approval
 does not select CR's management/use/representation choices. The latest [CR investigation](../../research/context-resolution-local-advisory-extension-investigation-2026-10-08.md)
 is reviewed proposed evidence; root use, binding management and work registration
 remain distinct permissions. No broad authority platform or CR-first dependency
@@ -187,7 +191,7 @@ is inferred. Native/SDK delivery and Phase-6 order remain unchanged.
 
 The human's 2026-10-06 [delivery-sequencing selection](phase-and-slice-map.md#current-delivery-sequencing)
 keeps the current stage focused on native owners and SDK features/refinement/usability.
-Packet 3 implements a complete native SDK check with usage and response/recovery docs
+Completed independent-local-check / Packet 3 implements a complete native SDK check with usage and response/recovery docs
 and ordinary consumer proof. CLI routes, installed product-skill instructions and
 the agent-guided experience for these new capabilities remain later bounded work;
 the existing delivered consumers and our skill-based engineering process continue.
@@ -217,7 +221,7 @@ Use the source that owns the question:
 | What fixes the exact evidence population and the meaning of evaluation truth? | [`Evidence and evaluation truth`](semantic-model/evidence-and-evaluation.md) owns occurrence/evidence closure, claim/metric/gate semantics, explanation, and replay. |
 | May a result support present work progression or an action, and did an effect commit? | [`Operational reliance and actions`](semantic-model/operational-reliance-and-actions.md) owns the Work Progression boundary, atomic eligibility/disposition, separate action authorization and receipt requirements. The human-selected [kinds and relations amendment](semantic-model/amendments/work-progression-kinds-and-relations.md) supplements it; positive eligibility/completion remain unimplemented with explicit near-term outcomes in the [joint sequence](coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints). |
 | What is the first selected Work Progression native/SDK increment? | [`work-item-state-foundation`](slices/work-item-state-foundation/README.md) supplies registration-only Engine state and typed SDK delivery, exact history/recovery and unsupported completion. D/G activation, terminal publication and successor compatibility are human-selected; [Packet 1](slices/work-item-state-foundation/packet-1.md) and supplied meta aggregate acceptance/closeout and human recap are complete at `cbfbf76`. |
-| Where is configurable composition/optional-kind preparation? | [`work-compositions-and-kinds`](slices/work-compositions-and-kinds/README.md) carries the selected finite menu and unified composition-aware registration model into a reassessed packet outline. Only [Packet 1](slices/work-compositions-and-kinds/packet-1.md) is detailed. Its bounded scope/lifecycle details and the later separate kind-definition rule remain proposed; execution needs exact selection and human plan authorization. Retained truth/recovery is distinct from development API compatibility. |
+| Where is configurable composition/optional-kind delivery recorded? | [`work-compositions-and-kinds`](slices/work-compositions-and-kinds/README.md) records both completed packets, the selected unified composition-aware registration lifecycle and separate per-version kind approval, supplied meta aggregate closeout and accepted human recap. The [implemented baseline](implemented-baseline.md) owns product capability; [current priorities](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout) route remaining work. Retained truth/recovery is distinct from development API compatibility. |
 | How do Work Progression and Context Resolution proceed together? | The [joint reconciliation](coverage-and-landing-map.md#joint-authority-and-recovery-reconciliation) owns current source seams, distinct permission boundaries, selected foundation/compatibility gates and the proposed remaining order/checkpoints. CR choices remain unselected; no general permission platform is adopted. |
 | How is missing phase or slice authority prepared at the correct level? | [`authority-preparation-prompt.md`](authority-preparation-prompt.md) defines separate phase-to-slice and slice-to-packet top-level planning tasks. Each returns to the meta task before the next level. |
 | How is one authorized slice or packet assigned to a top-level task session? | [`task-session-prompt.md`](task-session-prompt.md) provides the copy/paste-ready assignment prompt and compact result presentation. |

@@ -1,17 +1,22 @@
 # Configurable work compositions and optional immutable kinds
 
-Status: **Packet 1 recommendation A implemented and verified at `7129b5c`;
-meta validation/human recap and subsequent discussion complete; recommendation B
-human-selected; complete Packet-2 plan approved at `d7ff969`; implementation and
-selected acceptance verified; focused causal APPROVE; no unresolved P1/P2** — 2026-10-09.
+Status: **slice complete locally; Packet 1 at `7129b5c` and Packet 2 at
+`ae1af38`; all seven slice conditions and cross-packet integration validated by
+meta; aggregate validation/closeout and human recap/review complete** — 2026-10-09.
 
 The human selected per-version approval B and authorized bounded
 [Packet-2 preparation](packet-2.md), with review of the concrete plan before
 implementation. The human subsequently approved the complete reviewed plan at
 `d7ff969`, including implementation, verification, focused causal review and one
-coherent local commit. This authorizes optional immutable whole-composition kinds
-and their usable native/SDK workflow, supplying no runtime project approval or
-slice completion. Final slice integration and the human recap remain with meta.
+coherent local commit. Packet 2 delivered optional immutable whole-composition
+kinds and their usable native/SDK workflow at `ae1af38`, with final focused causal
+**APPROVE**, no unresolved P1 Critical/P2 Required and no new P3/P4 findings.
+Meta independently inspected the final result, source and acceptance integration,
+validated all seven slice conditions using valid combined Packet-1/2 evidence,
+and completed the aggregate closeout and human recap. The human accepted the
+result. This is supplied meta evidence, not a new verification or closeout run.
+Both packets are complete; no Packet 3 remains. Commits are local/unpushed;
+runtime project terms and kind approvals remain separately required.
 
 After reviewing the capacity limitations, the human selected a separate near-term
 [capacity/performance research follow-up](../../coverage-and-landing-map.md#work-state-capacity-and-performance-follow-up)
@@ -209,12 +214,11 @@ independently meaningful outcomes remain:
 | Packet | Outcome and dependency | Human review boundary |
 | --- | --- | --- |
 | 1 — unified explicit-composition registration | One authority lineage and typed path for ordinary/P/I; exact scope and bounded scope change/D→G/revocation/recovery; retained foundation truth. Requires complete foundation, selection of A and approval of [next plan](packet-1.md). Kinds unsupported. | **Packet:** a continuing project explicitly authorizes and registers P/I while old grants cannot widen and old items stay exact. Stop for recap. A separately delivered earlier meaningful authority outcome triggers the lifecycle's earlier checkpoint. |
-| 2 — optional immutable whole-composition kinds | Exact reusable versions and equivalent explicit meaning; separate establishment and unchanged registration authorization. Packet-1 review is complete, B is human-selected and the complete [detailed plan](packet-2.md) is approved at `d7ff969`. Implementation and selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2. | **Packet:** reusable definitions/kind-backed work are meaningful; return for review. Meta checks final slice acceptance/integration here and recaps once. |
+| 2 — optional immutable whole-composition kinds | Complete at `ae1af38` under the human-approved [detailed plan](packet-2.md) at `d7ff969`: exact reusable versions and equivalent explicit meaning, separate establishment and unchanged registration authorization. Selected acceptance is verified; final focused causal APPROVE with no unresolved P1/P2 and no new P3/P4. | **Packet:** reusable definitions/kind-backed work were reviewed; supplied meta final slice acceptance/integration, aggregate closeout and human recap/review are complete. |
 
-Only the next increment, Packet 2, is now detailed and approved for execution.
-Adjacent preparation remains outside this increment. Local names/module
-split/tagged record layout may be resolved within the reviewed contract; authority
-scope, lifecycle, history loss and kind establishment cannot be silently changed.
+Both declared packets and their human checkpoints are complete. Adjacent
+preparation and implementation require their own bounded authorization; this
+slice supplies no successor execution unit.
 
 ## Complete slice acceptance
 
@@ -241,9 +245,9 @@ scope, lifecycle, history loss and kind establishment cannot be silently changed
    clear response guidance and meaningful refusals. Focused tests prove retention,
    integrity and through-commit authority; report actual evidence/platform limits.
 
-Packet-1 acceptance is [here](packet-1.md#acceptance-and-verification). Meta checks
-complete slice/integration once after final authorized packet; preparation supplies
-no product completion claim or new predecessor closeout.
+Packet-1 acceptance is [here](packet-1.md#acceptance-and-verification). The supplied
+meta completion above records the single completed slice/integration check;
+the packet evidence retains its actual verification and platform limits.
 Packet-2 acceptance is [here](packet-2.md#ordered-implementation-and-acceptance).
 
 ## Non-goals and format boundary

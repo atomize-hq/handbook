@@ -19,9 +19,11 @@ meta validation and the human recap are complete. The human reviewed the capacit
 limitations and selected near-term follow-up tracking without interrupting the
 current compositions/kinds direction. After Packet-1 review/discussion the human
 selected per-version approval B and authorized bounded [Packet-2 planning](slices/work-compositions-and-kinds/packet-2.md);
-the complete reviewed plan at `d7ff969` is now human-approved for implementation,
-verification, focused causal review and one coherent local commit. Packet-2
-implementation and selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2.
+the approved plan at `d7ff969` is implemented at `ae1af38`. The
+[slice status](slices/work-compositions-and-kinds/README.md) records completed
+Packet-2 acceptance/review, supplied meta aggregate validation/closeout and accepted
+human recap. The [current priorities](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
+recommend the selected capacity/performance investigation next.
 Remaining roadmap choices are
 proposed where unselected, and CR's separate choices remain unselected.
 These are supplied meta results,
@@ -245,7 +247,9 @@ and approved all of the reviewed Packet-1 plan at `277674e2`; it is implemented
 and verified at `7129b5c`; meta validation and the human recap are complete.
 The human subsequently selected per-version kind approval B and authorized bounded
 Packet-2 planning, then approved its complete reviewed implementation plan at
-`d7ff969`. Packet-2 implementation and selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2.
+`d7ff969`. Packet 2 is complete at `ae1af38`; the [slice status](slices/work-compositions-and-kinds/README.md)
+records final focused causal APPROVE, supplied meta validation of all seven slice
+conditions/integration, aggregate closeout and accepted human recap.
 No unrelated suite rerun or new predecessor
 closeout is claimed by this status reconciliation.
 
@@ -284,13 +288,11 @@ immediate Work Progression delivery. The following **proposed** order gives it a
 explicit successor, with hierarchy, eligibility and closing near-term outcomes.
 These are outcome units, not new phase/packet identities or execution permission.
 Each independently meaningful landing returns for human review before continuation.
-Unit 1 is complete. Unit 2's [slice preparation](slices/work-compositions-and-kinds/README.md)
-now details its final review increment under the selected unified registration
-direction and human-selected recommendation A, with Packet 1 implemented at
-`7129b5c` and its human recap reviewed/discussed. Kind-definition recommendation B
-is human-selected; the complete [Packet-2 plan](slices/work-compositions-and-kinds/packet-2.md)
-at `d7ff969` is human-approved. Implementation and selected acceptance are
-verified; focused causal review returned APPROVE with no unresolved P1/P2.
+Units 1 and 2 are complete. Unit 2's [slice status](slices/work-compositions-and-kinds/README.md)
+records both packets at `7129b5c` / `ae1af38`, supplied meta aggregate closeout and
+accepted human recap under selected registration lifecycle A and per-version
+kind approval B. The [phase map's current priorities](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
+recommend capacity/performance research next at the arrived checkpoint.
 Unit 2's compatibility boundary below was
 prepared and human-selected **before unit 1 implementation**. The human approved
 unit 1's complete Packet-1 plan, with execution following recording and clean review of these selections;
@@ -300,7 +302,7 @@ approval does not select the remainder of this proposed serial order.
 | Order / outcome | Actual dependency and landing checkpoint |
 | --- | --- |
 | 1. Corrected work-state foundation | Complete at `cbfbf76`; supplied meta aggregate acceptance/closeout and human recap are complete. Delivers expressly activated registration permission on current local-check D/G, exact `open` leaf registration/current/history/recovery and unsupported completion through SDK. Checkpoint reviewed: a continuing project registers work under new terms; local-check permission alone refuses. |
-| 2. [Configurable compositions and optional immutable kinds](slices/work-compositions-and-kinds/README.md) | Foundation and recap complete. Human-selected: Engine placement, ordinary/planning-output/requirements-input menu, no item rebinding, one composition-aware registration authority and separate kind definition. First packet delivers one typed registration path and human-selected exact-scope establishment/change/D→G/revocation/recovery, implemented and verified at `7129b5c` under the reviewed `277674e2` plan; meta validation/human recap and subsequent discussion are complete. The human selected per-version approval B, authorized bounded planning, then approved the complete [Packet-2 immutable-kind/SDK plan](slices/work-compositions-and-kinds/packet-2.md) at `d7ff969` for implementation, verification, causal review and local commit. Implementation and selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2; final slice integration and the human recap remain with meta. Checkpoints: Packet 1 authorizes P/I without implicit widening; Packet 2 reuses exact committed kind versions with equal explicit meaning and separate current work permission. Retained items/requests remain exact. No permanent legacy API, parallel stream, special version upgrade or storage redesign. The human selected a separate [near-term capacity/performance follow-up](#work-state-capacity-and-performance-follow-up) without making it a predecessor of this outcome. |
+| 2. [Configurable compositions and optional immutable kinds](slices/work-compositions-and-kinds/README.md) | Foundation and recap complete. Human-selected: Engine placement, ordinary/planning-output/requirements-input menu, no item rebinding, one composition-aware registration authority and separate kind definition. First packet delivers one typed registration path and human-selected exact-scope establishment/change/D→G/revocation/recovery, implemented and verified at `7129b5c` under the reviewed `277674e2` plan; meta validation/human recap and subsequent discussion are complete. The human selected per-version approval B, authorized bounded planning, then approved the complete [Packet-2 immutable-kind/SDK plan](slices/work-compositions-and-kinds/packet-2.md) at `d7ff969` for implementation, verification, causal review and local commit. Packet 2 is complete at `ae1af38`; the linked slice status records supplied meta aggregate validation/closeout and accepted human recap. Checkpoints: Packet 1 authorizes P/I without implicit widening; Packet 2 reuses exact committed kind versions with equal explicit meaning and separate current work permission. Retained items/requests remain exact. No permanent legacy API, parallel stream, special version upgrade or storage redesign. The human selected a separate [near-term capacity/performance follow-up](#work-state-capacity-and-performance-follow-up) without making it a predecessor of this outcome. |
 | 3. Native local Context Resolution root binding | Recommended after the first flexibility landing; this is a sequencing choice, not a hard dependency on 1/2. Requires its own human selections and bounded preparation below. Deliver reusable root-only use, explicit management/use establishment, currentness, history/recovery and selected replacement/revocation. Checkpoint: reopen and use B1, refuse unpermitted B2 management. Work authority cannot substitute. |
 | 4. Hierarchy and typed prerequisite facts | Depends on 1/2's identity/composition participation. Deliver same-project one-parent relations, authoritative revisions and coherent finite cuts, start/close/both roles, distinct grouping/reference/order, and structural/closure-cycle refusal. Checkpoint: Feature → Phase → Slice → Task branching plus one shared cross-branch prerequisite preserves one identity and rejects a closure deadlock. This alone grants no start/close effect or eligibility. |
 | 5. Positive leaf eligibility | Depends on work/composition facts and selected governing assignment, assessment protocol, complete exact roles/coverage/populations and current qualification. Relation-dependent questions additionally require 4; relation-free leaf eligibility need not wait for every hierarchy capability or CR. Checkpoint: a declared result population produces atomic eligibility/disposition; a direct pass alone or missing required coverage cannot. Physical Work Progression placement remains downstream of Engine and Contracts. |
@@ -325,7 +327,8 @@ storage redesign into that work. Track capacity and performance as a needed
 near-term research and design follow-up. Recommended scheduling checkpoint:
 revisit after the compositions/kinds outcome, before committing the next broader
 Work Progression increment; address practical capacity before sustained project
-use. This is a follow-up priority, not a new hard predecessor for current bounded
+use. That checkpoint has arrived with the accepted slice closeout. This is a
+follow-up priority, not a new hard predecessor for current bounded
 work, a selected storage solution, or authorization to execute future packets.
 
 The [current store](../../../crates/engine/src/work_state/store.rs) has a lifetime
@@ -361,12 +364,43 @@ The later investigation should establish:
 - preservation of exact identity, original authority, immutable history,
   noncommit/uncertainty proofs, concurrency and recovery across the selected design.
 
-Research should return options, tradeoffs, a recommended bounded implementation
-increment and acceptance/verification targets for human review. This greenfield
+**Recommended next-task scope:** investigate the existing native/SDK store against
+representative lifetimes and growing retained histories, including saturation,
+accepted-original closure and revocation availability. Establish workload and
+latency/resource targets, measure the relevant operation costs separately, and
+compare scalable bounded operation and recovery/history tradeoffs. Return a short
+source-backed options report, a candidate direction and acceptance/verification
+targets for human selection. Do not implement or prepare detailed successor packets.
+This greenfield
 project does not presume production migration tooling or permanent legacy APIs;
 actual retained truth still requires an explicit treatment. Raising the constant,
 reclaiming history, adopting a database or splitting budgets is not selected by
 this entry. Native/SDK delivery and Phase-6 order remain unchanged.
+
+### Remaining-work audit after compositions and kinds
+
+The [baseline](implemented-baseline.md) owns delivered capability and precursor
+classifications; the [slice status](slices/work-compositions-and-kinds/README.md)
+owns completed Packet-1/2 and supplied meta closeout evidence. The audit found no
+semantic mismatch within that selected boundary. Bounded declarations are not
+proof of governing completion, and Engine work-state/definition ownership does
+not implement the approved downstream Work Progression eligibility owner.
+These remaining gaps are outside the completed slice, rather than another packet:
+
+| Remaining outcome / decision | Source-backed dependency and boundary |
+| --- | --- |
+| Practical work-state capacity and authority availability | The selected [follow-up](#work-state-capacity-and-performance-follow-up) addresses the shared lifetime budget and revocation at exhaustion before sustained use. The inherited inventory-scan P3 remains optional; no per-operation benchmark or storage choice is established. |
+| Reusable local CR root binding | The [2026-10-08 investigation](../../research/context-resolution-local-advisory-extension-investigation-2026-10-08.md#smallest-useful-next-outcome-and-decisions) is reviewed **proposed research**. Existing initial root-envelope admission works only under its still-current initial authority; it does not supply reusable successor-state binding. Management/use establishment, replacement/delegation, revocation and additive representation/legacy compatibility remain human selections. Exact current lineage, held scope/currentness through effect, retained dependencies, lock order and original recovery are actual prerequisites. Work registration is no substitute; CR-first is preferred sequence only. |
+| Hierarchy and typed prerequisites | The [selected amendment](semantic-model/amendments/work-progression-kinds-and-relations.md#selected-kinds-and-hierarchy) constrains same-project one-parent containment, typed start/close/both relations and separate grouping/reference/order. Delivered [work descriptors](../../../crates/engine/src/work_state/types.rs) support no relations. Concrete operations/revisions, coherent finite cuts/currentness, structural and closure-cycle refusal remain to be selected; relation facts alone establish no permission, eligibility or effect. |
+| Governing completion and local/parent eligibility | [Work Progression](semantic-model/operational-reliance-and-actions.md#work-progression-ownership) must independently establish exact governing target/scope/assignment and adopted assessment protocol, complete roles/coverage/result populations including relevant failures, current qualification and atomic eligibility/disposition or refusal. Planning-output questions, definition locators, kinds and direct passes supply none by themselves. Prospective assessment needs governing selection before collection commitment; retrospective use needs supported [G5](semantic-model/amendments/governance-defaults-and-delegated-operation.md#g5--independent-evaluation-and-governed-reliance) qualification without invented provenance. Relation-dependent eligibility needs authoritative relations; relation-free leaf eligibility need not wait for CR/full hierarchy. Parent questions also need their own requirements/integration assessment and exact finite child propositions. |
+| Separately authorized leaf/parent closing | Eligibility precedes congruent Action Intent, separate authorization, attempt/terminal and state-owner guarded commit/receipt under [action semantics](semantic-model/operational-reliance-and-actions.md#reliance-actions). Parent eligibility depends on child closing only when the selected role requires actual closed state/receipts; child eligibility is a different proposition. No closing, reopen/cancel/removal or general permission administration is delivered by registration/kinds. |
+| Later consumers and nearby tracked gaps | [Consumer carry-forward](#local-check-planning-and-host-integration-carry-forward) retains bounded CLI/installed-skill intake, response/recovery and host context/routing/adopter choices after relevant native/SDK readiness. [Permission administration](#declaration-and-administration-of-decision-permissions) is a distinct native design gap, not automatically host work. Broader qualification/policy replacement, scoped posture/assurance preparation, named metrics/four-outcome gates and explanation/projections remain in [coverage](#coverage-and-responsibility); posture feedback, grounding triggers, Dock/adapters and external publication/adoption remain in [future fit](#landing-order-and-future-fit). They are not blanket predecessors of Work Progression or absent versions of the completed local-check route. |
+
+The [phase map](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
+owns the recommended current order and exact next direction. This audit selects
+no policy, physical eligibility/action placement, CR proposal, storage design or
+new execution unit; the structured-format standard remains proposed except for
+its fixed Contracts JSON input and existing owner/versioned contracts.
 
 ### Next-plan selection gates
 
@@ -443,8 +477,9 @@ above. Actual runtime authority remains separately required. The requested
 flexibility authority owns the selected unified direction/lifecycle and completed
 Packet 1 at `7129b5c`, plus human-selected per-version kind approval B and the
 human-approved complete Packet-2 plan at `d7ff969`. Packet-2 implementation and
-selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2; its final packet checkpoint and meta aggregate
-integration/human recap remain. The other proposed outcomes retain their own
+selected acceptance are verified at `ae1af38`; the linked slice records completed
+final packet and meta aggregate integration/closeout and accepted human recap.
+The other proposed outcomes retain their own
 human plan checkpoints and bounded authorization. No later serial order
 is approved here.
 

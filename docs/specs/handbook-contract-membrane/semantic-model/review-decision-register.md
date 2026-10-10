@@ -100,19 +100,20 @@ records this document landing separately from future native/SDK work. The four
 research reports linked by the amendment are retained as proposed, dated evidence.
 HR-001 through HR-007 and completed slice history retain their original authority.
 
-**Subsequent bounded realization:** The [foundation plan](../slices/work-item-state-foundation/README.md)
-now records human-selected Engine work-state/definition placement, explicit D/G
-work-registration activation, exact publication/recovery and prepared successor
-compatibility. The human authorized all of Packet 1, with execution following clean
-selection review and separate fresh dispatch; implementation is not started and ends at its human
-review boundary. Immediate flexibility implementation follows separately after
-that checkpoint. CR choices remain unselected.
+**Subsequent bounded realization:** The [implemented baseline](../implemented-baseline.md)
+records Engine work-state/definition placement, explicit D/G registration authority,
+exact publication/recovery and delivered bounded compositions/immutable kinds.
+The [foundation](../slices/work-item-state-foundation/README.md) and
+[compositions/kinds slice](../slices/work-compositions-and-kinds/README.md) have
+completed their packets, supplied meta aggregate closeout and human review.
+Positive Work Progression eligibility/effects remain undelivered, and CR choices
+remain unselected. These realization/status updates do not amend selected semantics.
 
-**Remaining choices outside that foundation:** Physical applicability
+**Remaining choices outside those delivered boundaries:** Physical applicability
 and action owners, further work/definition realization; concrete lifecycle states,
 operations and reopen/cancel/removal semantics; exact policies, eligible populations,
 coverage and assessment protocols; identity/resolver, storage, concurrency,
-recovery and retention beyond the selected first SDK workflow. Multi-parent/external
+recovery and retention beyond the delivered bounded Engine/SDK workflows. Multi-parent/external
 relations and adapters remain later. The semantic integration itself selected no
 format, schema or first implementation slice; the subsequent foundation owns its
 additive JSON and bounded native/SDK selections. No new phase, local-check Packet 5

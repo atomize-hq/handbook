@@ -26,13 +26,13 @@ sources are retained with their proposed status. The completed
 through `be7d040` and its meta closeout remain intact. No new phase, packet or
 amendment register number is assigned. Native/SDK preparation and execution
 require separate bounded authorization after the integration recap. Subsequent
-[foundation authority](../../slices/work-item-state-foundation/README.md) now
-records that authorization for complete Packet-1 implementation and human-selected
-Engine work-state/definition placement, D/G registration authority, exact terminal
-publication/recovery and prepared successor compatibility. Implementation remains
-not started; future flexibility execution follows separately after its human
-checkpoint. These bounded realization choices do not change this amendment's
-semantic approval or select CR's distinct choices.
+[foundation](../../slices/work-item-state-foundation/README.md) and
+[compositions/kinds](../../slices/work-compositions-and-kinds/README.md) delivery
+is complete, including supplied meta aggregate closeout and human review. The
+[implemented baseline](../../implemented-baseline.md) owns the bounded Engine
+state/definition, D/G authority and typed SDK capability claims. These are
+precursors to positive Work Progression eligibility/effects; they do not change
+this amendment's semantic approval or select CR's distinct choices.
 
 ## Responsibilities retained
 
@@ -42,7 +42,7 @@ components. Co-location may be chosen later without merging their propositions.
 | Responsibility | Truth it establishes |
 | --- | --- |
 | Authoritative work-state/structure owner | Item identity, exact composition bindings, state, relations and coherent finite cuts; authorized changes and committed successor state/receipts. |
-| Relevant definition/admission owners | Supported composition and kind meaning, immutable versions, compatibility and applicable qualification; establishment does not assign governance. The subsequent foundation compatibility contract selects an Engine-owned work-definition/composition boundary; kind implementation remains separately bounded. |
+| Relevant definition/admission owners | Supported composition and kind meaning, immutable versions, compatibility and applicable qualification; establishment does not assign governance. Subsequent bounded Engine composition/kind delivery is recorded in the [implemented baseline](../../implemented-baseline.md); it does not establish broader qualification or governing completion. |
 | Work Progression | Independently resolved governing completion, exact target/relation and result accounting, local/parent policies, current qualification under G5, pure eligibility/disposition, refusal and replay. |
 | Contracts responsibilities | Exact complete definitions and requirements, assessment occurrence, evidence/claim/metric/gate truth; assessment does not establish work state. |
 | Engine responsibilities | Applicable posture and independent operating/evaluation authority, exact historical validity and declared current verification. |
@@ -286,7 +286,10 @@ reopen/cancel and removal consequences; exact policies, eligible populations,
 compatibility/coverage mappings and assessment protocols; identity/resolver,
 persistence, concurrency, recovery and retention mechanisms; schemas, serialization,
 API/SDK composition, authoring/import and human views; consumer realization,
-adapter families and slice/packet allocation. Examples settle none of these.
+adapter families and slice/packet allocation. Subsequent bounded Engine/SDK
+selections are owned by the [completed compositions/kinds authority](../../slices/work-compositions-and-kinds/README.md)
+and [implemented baseline](../../implemented-baseline.md), rather than remaining
+open for that delivered population. Examples settle none of the other choices.
 
 Native owners and usable SDK capability remain first; new CLI, installed product
 skills and adapters follow later. Existing roadmap order remains intact. The
@@ -294,9 +297,9 @@ skills and adapters follow later. Existing roadmap order remains intact. The
 **PROPOSED general defaults**, with **Contracts JSON fixed** and existing
 owner/versioned contracts controlling. This amendment selects no new format,
 schema, layout, migration or implementation sequence. Subsequent planning and
-execution require their own authorization. The complete foundation Packet-1
-authorization and selected future ordinary/planning-output/requirements-input
-compatibility menu are recorded in their owning plan, not granted by this amendment.
+execution require their own authorization. The delivered foundation and bounded
+ordinary/planning-output/requirements-input composition/kind contracts are recorded
+by those owning plans, not granted by this amendment.
 
 ## Sources and evidence
 

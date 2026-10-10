@@ -68,7 +68,7 @@ This planning checks source/lineage and reuses that evidence; it does not rerun
 product suites or reclose a predecessor. Implementation additionally requires
 human approval of this exact bounded plan and verification of the live checkout.
 
-| Current source | Implementation consequence |
+| Pre-Packet-2 source at the approved planning checkpoint | Implementation consequence selected by this plan |
 | --- | --- |
 | [Types](../../../../../crates/engine/src/work_state/types.rs), [scope](../../../../../crates/engine/src/work_state/scope.rs) | `WorkCompositionV1` currently refuses every kind; three exact descriptors and `WorkCompositionClauseV1` already supply closed role/bounds validation. Extend that semantic owner, not generic Artifact Kinds. Retained singleton grants remain ordinary-only. |
 | [Transactions](../../../../../crates/engine/src/work_state/transaction.rs) | `Operation::grant()` assumes every effect has a registration grant; `output`, `parsed`, `scan`, `reservation`, `execute` and `close_noncommit` form the existing publication/recovery seam. Separate definition admission needs its own original check/basis route while reusing these durability rules. |
@@ -439,4 +439,7 @@ SDK and recovery call paths. One focused causal reviewer returned **APPROVE**, w
 no unresolved P1/P2 and no new P3/P4 findings.
 The inherited P3 scan-cost advisory and separately selected
 capacity/performance follow-up remain; no storage or capacity redesign is included.
-This packet checkpoint leaves aggregate slice integration and human recap to meta.
+The subsequent supplied meta result is recorded by the [slice status](README.md):
+all seven slice conditions and cross-packet integration, aggregate validation/
+closeout and human recap/review are complete. That does not expand this packet's
+verification claims or authorize a successor.

@@ -127,9 +127,12 @@ are human-approved at `277674e2`; Packet 1 is implemented and verified at
 `7129b5c`, with meta validation/human recap and subsequent discussion complete.
 The human selected per-version kind approval B and authorized bounded
 [Packet-2 planning](slices/work-compositions-and-kinds/packet-2.md); its concrete
-plan at `d7ff969` is now human-approved for implementation, verification, focused
-causal review and one coherent local commit. Packet-2 implementation and
-selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2. Remaining broad ordering is
+plan at `d7ff969` was human-approved. Packet 2 is complete at `ae1af38`, with
+selected acceptance verified and final focused causal APPROVE. The
+[slice status](slices/work-compositions-and-kinds/README.md) records supplied meta
+aggregate validation of all seven conditions/integration, closeout and accepted
+human recap. Both packets and the slice are complete; no Packet 3 remains.
+Remaining broad ordering is
 proposed where unselected. The latest CR research
 remains proposed; its own authority/compatibility choices precede detailed execution
 preparation. A shared currentness/recovery seam establishes no shared grant.
@@ -180,8 +183,8 @@ atomic posture transition while rehoming the residual work to later owners.
   record the approved foundation/compatibility choices and complete Packet-1
   implementation at `cbfbf76` with supplied meta aggregate completion and human
   recap. [Composition/kinds preparation](slices/work-compositions-and-kinds/README.md)
-  has completed Packet 1 and human approval of the complete Packet-2 plan at
-  `d7ff969`; Packet-2 implementation and selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2. Adjacent outcomes
+  is complete through Packet 2 at `ae1af38`, including supplied meta aggregate
+  closeout and human review as recorded by its slice status. Adjacent outcomes
   need separate execution authorization and CR's
   distinct choices remain unselected.
 - Ordinary SDK/JSON exposure, publication, bridging, and Substrate adoption for
@@ -372,8 +375,8 @@ outcome, the human selected the separate per-version kind-approval rule B and
 authorized bounded [Packet-2 preparation](slices/work-compositions-and-kinds/packet-2.md).
 The human subsequently approved its complete reviewed native/SDK plan at `d7ff969`
 for implementation, verification, focused causal review and one coherent local
-commit. Packet-2 implementation and selected acceptance are verified; focused causal review returned APPROVE with no unresolved P1/P2; final aggregate
-slice integration and the human recap remain with meta. No adjacent
+commit. Packet 2 landed at `ae1af38`; the linked slice records completed
+aggregate validation/closeout and accepted human recap. No adjacent
 implementation, new phase or local-check Packet 5 is authorized. CR's separate
 management/use/representation choices remain unselected.
 The human has selected [local-advisory authority](semantic-model/amendments/approval-authority-and-assurance.md)
@@ -406,12 +409,36 @@ an inherited scan-cost advisory, without a routine operation-latency benchmark.
 These constraints do not become a new predecessor for current bounded work.
 
 The [coverage/control-map follow-up](coverage-and-landing-map.md#work-state-capacity-and-performance-follow-up)
-owns the research questions and intended outcome. The recommended research
-checkpoint is compositions/kinds completion, before committing the next broader Work Progression
-increment; practical capacity must be addressed before sustained project use.
+owns the research questions and intended outcome. The compositions/kinds
+completion checkpoint has arrived. Recommend research next, before committing
+the next broader Work Progression increment; practical capacity must be addressed
+before sustained project use.
 Research and deliberate design selection precede a separately approved bounded
 implementation. No storage design, capacity increase, new phase/slice identity or
 future packet execution is selected here; existing delivery order remains intact.
+
+### Priorities after compositions and kinds closeout
+
+The 2026-10-09 documentation audit reconciles completed delivery against the
+[remaining semantic gaps](coverage-and-landing-map.md#remaining-work-audit-after-compositions-and-kinds).
+It found no semantic mismatch within the selected registration/kinds
+boundary. The following is a recommended near-term order, not successor authority
+or a new set of execution units:
+
+| Priority / next action | Rationale, dependencies and unresolved selection |
+| --- | --- |
+| 1. **Research:** work-state capacity/performance | The human-selected revisit checkpoint has arrived; a tiny shared lifetime budget also blocks fresh revocation. Commission the [bounded investigation](coverage-and-landing-map.md#work-state-capacity-and-performance-follow-up) next. Return workload/latency targets, measured growth/recovery costs and options with tradeoffs for human design selection. No storage solution or implementation is selected. |
+| 2. **Authority preparation after human selections:** native local CR root binding | Reusable successor-state binding remains useful and proposed. Select management/use establishment, narrow delegated versus human-only replacement, revocation and additive representation/legacy compatibility. Its actual dependencies are exact current lineage/scope, held currentness through effect and original recovery; this position is preferred delivery order, not a Work Progression predecessor. |
+| 3. **Authority preparation:** hierarchy/typed prerequisite facts | Builds on delivered item/composition identity. Select concrete relation operations/revisions, coherent finite cuts/currentness and cycle refusal under the approved same-project one-parent semantics. Relations alone supply no eligibility or effect. |
+| 4. **Authority preparation, then separately approved implementation:** leaf eligibility → leaf closing | Select governing completion assignment/protocol, exact roles/coverage/populations and current qualification. Relation-dependent questions need relation facts; relation-free eligibility needs neither CR nor all hierarchy. Closing additionally needs congruent eligibility, separate action authority and state-owner guarded commit/receipt. |
+| 5. **Authority preparation, then separately approved implementation:** parent eligibility → parent closing | Needs finite relations and the parent's independently resolved requirements/integration assessment. Depends on leaf closing only for roles requiring actual closed state/receipts. Parent closing needs its own permission and guarded effect. |
+| Later. **Consumer authority preparation:** CLI/installed-skill/host adoption | Choose a bounded workflow and adopter after sufficient relevant native/SDK capability; no requirement to finish the entire SDK. Keep Phase-6 hard order and current external proof requirements. |
+
+The exact next human direction is whether to commission the bounded capacity/
+performance investigation. It should produce a short source-backed comparison
+and candidate direction with acceptance targets for human selection, without
+product edits, detailed successor packets or presumptive history deletion.
+CR product choices and subsequent implementation approval remain separate.
 
 ## Phase 6 — consumer adoption
 
@@ -455,7 +482,7 @@ SDK/CLI/Tauri parity requirement or skill-family pack/integration catalog.
 | External grounding trigger/adopter placement | HCM-4.6 implements the bounded owner, repository, four-operation seam, fixed SDK composition, and unchanged generic repository consumers. Future Phase-6 authority must separately choose any publication, bridge, automatic trigger host, and real external adopter. |
 | Broader posture evaluation, recommendation, notification, acknowledgement, and hysteresis | Future posture authority must place this policy without transferring engine-owned mutation authority to a gate or adapter |
 | CLI operation-inventory expansion beyond the completed 62-row predecessor | HCM-4.3 does not expand the inventory for transport parity: its authority fixes the exact ordinary mappings and a closed six-entry SDK use-case registry. Any new semantic operation or use case requires later explicit authority, complete schemas, and independent owner admission where applicable. |
-| Parent eligibility, work hierarchy/state, and dependency-composition realization | HCM-5.2 truthfully fixes gate and local-closeout results without a parent field or consumer. The approved [operational-reliance semantics](semantic-model/operational-reliance-and-actions.md#reliance-actions) retain Work Progression as local/parent eligibility owner and separate atomic Determinations, with prospective assessment or adopted HR-007 current qualification. The human-selected [kinds and relations amendment](semantic-model/amendments/work-progression-kinds-and-relations.md) fixes optional kinds/explicit composition, configurable levels, initial same-project one-parent containment, typed prerequisites and explicit scoped governance. Later bounded authority still selects physical owners; concrete states/operations, reopen/cancel/removal; exact policies, populations, coverage/protocol and bindings; identity/storage/concurrency/recovery/retention; action mechanisms and first SDK workflow, implementation slice and rollout. Multi-parent/external relations and adapters remain later. Local eligibility cannot imply parent eligibility or mutation. |
+| Parent eligibility, work hierarchy/state, and dependency-composition realization | HCM-5.2 truthfully fixes gate and local-closeout results without a parent field or consumer. The approved [operational-reliance semantics](semantic-model/operational-reliance-and-actions.md#reliance-actions) retain Work Progression as local/parent eligibility owner and separate atomic Determinations, with prospective assessment or adopted HR-007 current qualification. The human-selected [kinds and relations amendment](semantic-model/amendments/work-progression-kinds-and-relations.md) fixes optional kinds/explicit composition, configurable levels, initial same-project one-parent containment, typed prerequisites and explicit scoped governance. Engine open-leaf state/composition/kind ownership, its exact identity/history and typed SDK route are delivered as recorded by the [baseline](implemented-baseline.md). Beyond that boundary, later authority still selects physical eligibility/action owners, concrete relation/state operations and reopen/cancel/removal; exact policies, populations, governing assignment/coverage/protocol and current-use bindings; extended storage/concurrency/recovery/retention and action/SDK workflows. The [capacity follow-up](coverage-and-landing-map.md#work-state-capacity-and-performance-follow-up) is selected research tracking, not a storage choice. Multi-parent/external relations and adapters remain later. Local eligibility cannot imply parent eligibility or mutation. |
 | Gate-to-posture observation, recommendation, reliance, and transition realization | HCM-5.2 fixes gate/local-closeout truth without posture fields. The approved [posture and assurance-policy semantics](semantic-model/assurance-and-evaluation-preparation.md#posture-assurance) fix the forward-only semantic order through admitted observation/recommendation, transition-specific Operational Reliance, separate Action Intent/Authorization, and atomic Engine mutation. Initial skill-guided advice is a separate responsibility. Later authority must still select concrete policies, algorithms, approvals, physical placement, schemas/APIs, host integration, implementation, and rollout without transferring gate or mutation authority to Contracts, SDK, or an adapter. |
 | Additional Dock integrations with established tooling | Later explicit authority must select each integration's scope and observation-admission requirements beyond the HCM-5.3/HCM-5.4 repository-owned JSON Schema path; such adapters do not imply arbitrary third-party executable admission or a general hostile-code confinement program |
 | CLI/Tauri membrane routes and framing | HCM-4.3 owns current CLI parity and framing; HCM-4.4 separately owns the Tauri facade after HCM-4.3 closeout. |

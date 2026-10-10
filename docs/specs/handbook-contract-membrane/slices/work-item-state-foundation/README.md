@@ -40,9 +40,11 @@ API shapes and disposable fixtures need no permanent compatibility promise;
 retained ordinary grant scope, items, receipt bytes and unresolved original requests
 still require exact verification/recovery. The successor's
 [minimum compatibility contract](../work-compositions-and-kinds/README.md#development-compatibility-and-retained-truth)
-and [proposed lifecycle](../work-compositions-and-kinds/README.md#proposed-authorization-lifecycle)
-own that revision. Scope-change details require human selection; this note supplies
-no grant widening, state deletion or product execution authority.
+and [selected lifecycle](../work-compositions-and-kinds/README.md#selected-authorization-lifecycle)
+own that revision. The successor's human-selected scope-change lifecycle and
+separate per-version kinds are delivered; its [slice status](../work-compositions-and-kinds/README.md)
+records completed closeout/review. This note supplies no runtime grant widening,
+state deletion or successor execution authority.
 
 The [program shape](../../coverage-and-landing-map.md#successor-readiness-after-independent-local-check),
 [entry point](../../README.md), [lifecycle](../../work-unit-lifecycle.md),
@@ -293,9 +295,10 @@ The immediate separately bounded sequence includes positive local/parent
 eligibility, governed completion standard establishment and
 assignment, exact assessment/result populations and supported current qualification,
 separate close Intent/Authorization/Attempt/Terminal/Receipt and through-commit
-completion checks. Optional kinds, additional supported compositions/roles and
-vocabulary selection are the immediate flexibility successor, with its compatibility
-prepared before this execution. Hierarchy, typed prerequisites/timing/cycle closure
+completion checks. The [completed flexibility successor](../work-compositions-and-kinds/README.md)
+delivers the selected ordinary/planning-output/requirements-input menu, optional
+kinds and bounded display vocabulary, with compatibility prepared before foundation.
+Additional roles remain outside that menu. Hierarchy, typed prerequisites/timing/cycle closure
 and grouping have the explicit next relation outcome; candidate/result bindings
 belong with selected roles/eligibility. Edits, general rebinding, reopen/cancel/removal
 and agent grant administration remain separately unselected. First support

@@ -91,17 +91,17 @@ operation-specific timing and preserved exact bindings/history. Its
 [decision-register entry](review-decision-register.md#work-progression--kinds-relations-and-governed-completion)
 distinguishes those selections from the four retained proposed research reports.
 Concrete positive eligibility/action owners, policies, coverage/protocol and
-lifecycle realization remain unselected. Subsequent separately authorized
-[foundation preparation](../slices/work-item-state-foundation/README.md) is
-unimplemented, with its three activation/recovery and composition/kinds compatibility
-recommendations human-selected. The complete Packet-1 implementation is authorized
-after clean selection review and separate fresh dispatch, ending at Packet-1 human
-review. The [joint near-term map](../coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints)
-provides immediate flexibility and explicit hierarchy/eligibility/closing outcomes.
-These are planning states, not an amendment of semantic approval or evidence of
-product delivery. Future flexibility implementation follows separately after that
-checkpoint; CR choices and hierarchy/eligibility/closing implementation retain
-their own bounded authorization.
+lifecycle realization remain unselected outside the delivered boundary. The
+[implemented baseline](../implemented-baseline.md) records the separately
+authorized Engine state/composition/kind and typed SDK mechanisms. Foundation and
+the [two-packet flexibility slice](../slices/work-compositions-and-kinds/README.md)
+are complete, including supplied meta aggregate closeout and human review.
+They remain precursors to positive Work Progression eligibility and effects.
+The [joint near-term map](../coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints)
+and [remaining-work priorities](../phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
+distinguish delivered flexibility from unimplemented hierarchy/eligibility/closing
+and proposed CR choices. Delivery status does not amend semantic approval or
+authorize those successors.
 
 ## Read by responsibility
 
@@ -440,10 +440,10 @@ greenfield artifact family; `FeatureSpec` is not a seventh family.
 ## Explicitly deferred
 
 Each chapter retains its detailed settled/deferred boundary. The semantic package
-leaves the following to bounded owning plans. Subsequent selections for the first
-work-state/SDK cut and future composition compatibility are recorded in the
-[foundation authority](../slices/work-item-state-foundation/README.md); outside
-those selections, these choices remain open:
+leaves the following to bounded owning plans. The [implemented baseline](../implemented-baseline.md)
+and completed [compositions/kinds authority](../slices/work-compositions-and-kinds/README.md)
+own subsequent bounded state/definition/SDK selections; outside that delivered
+boundary, these choices remain open:
 
 - Concrete policies, selectors, mappings, requirement sets, contract-use qualification
   criteria, governing project/effect/target mappings, exception and actor rules,

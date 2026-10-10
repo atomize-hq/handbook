@@ -1,7 +1,7 @@
 # Work compositions and kinds — Packet 1: unified explicit-composition registration
 
-Status: **recommendation A implemented and verified at this local Packet-1
-checkpoint; human recap next** — 2026-10-09. Part of [one slice](README.md); no permission to
+Status: **recommendation A implemented and verified at `7129b5c`; meta validation,
+human recap/review and subsequent discussion complete** — 2026-10-09. Part of [one slice](README.md); no permission to
 establish/use kinds. Supersedes the parallel-stream Packet-1 proposal.
 
 The human approved this complete plan at `277674e2` after the practical workflow
@@ -289,7 +289,8 @@ defaults, fixed Contracts JSON and existing identities.
 
 The typed scope/lifecycle, native menu, immutable successor admission and original
 recovery, single SDK surface and usage are implemented. These results authorize
-no other packet; the local checkpoint returns for the human recap.
+no other packet. The subsequent meta validation and human recap/review are
+complete; the [slice status](README.md) owns final combined completion.
 
 Focused implementation checks:
 
