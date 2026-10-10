@@ -1,7 +1,20 @@
 # Configurable work compositions and optional immutable kinds
 
-Status: **Packet 1 recommendation A implemented and verified at its local
-checkpoint; human recap next; recommendation B remains unselected** — 2026-10-09.
+Status: **Packet 1 recommendation A implemented and verified at `7129b5c`;
+meta validation/human recap and subsequent discussion complete; recommendation B
+human-selected; Packet-2 plan prepared for human review** — 2026-10-09.
+
+The human selected per-version approval B and authorized bounded
+[Packet-2 preparation](packet-2.md), with review of the concrete plan before
+implementation. This checkpoint prepares optional immutable whole-composition
+kinds and their usable native/SDK workflow; it is not Packet-2 implementation
+approval, runtime project approval or slice completion.
+
+After reviewing the capacity limitations, the human selected a separate near-term
+[capacity/performance research follow-up](../../coverage-and-landing-map.md#work-state-capacity-and-performance-follow-up)
+while keeping the current compositions/kinds direction moving within its bounds.
+This adds no storage redesign to this slice. B's selection is the separate
+subsequent kind-definition decision recorded below.
 
 After reviewing the revised plan at `277674e2`, practical workflows and the exact
 separately defined Contracts requirements-input reference, the human approved
@@ -9,9 +22,10 @@ recommendation A and all of Packet 1: “ok. approved. Lets proceed with
 implementation”. This selects finite token/locator scope, human-only same-basis
 successors, pending suspension, unchanged-scope D→G and no reinstatement.
 The authorization includes implementation, verification, focused causal review
-and one coherent local commit. Packet 1 ends at its human recap; kind-definition
-recommendation B and Packet 2 remain unselected and unauthorized. Runtime project
-terms still require their own explicit supplied human approval.
+and one coherent local commit. Packet 1 ended at its completed human recap; after
+review/discussion the human selected B and authorized Packet-2 planning only.
+Runtime project terms and each exact kind version/content still require their
+own explicit supplied human approval.
 
 Descriptive slice identity: `work-compositions-and-kinds`. This owns exactly
 [near-term outcome 2](../../coverage-and-landing-map.md#proposed-near-term-sequence-and-landing-checkpoints).
@@ -162,20 +176,24 @@ explicit selections, not implications of selecting one model. If revised, update
 review the affected Packet-1 plan before execution. Actual project terms remain
 separately approved/supplied at runtime.
 
-## Kind-definition authority recommendation
+<a id="kind-definition-authority-recommendation"></a>
 
-The human selected separation from registration, but not the establishment rule.
-**Recommendation B:** original claimed human approves each exact immutable kind
+## Selected kind-definition authority
+
+The human selected separation from registration and subsequently selected
+**recommendation B, per-version approval**: original claimed human approves each exact immutable kind
 version/content through a separate fixed Engine definition-establishment operation
 on current supported D/G. A kind remains retained definition truth after its basis
 changes; new registration still needs current composition/parameter permission.
 Kind conformance cannot widen permission or supply primitives.
 
-Per-version approval is the smaller, reviewable cut; it adds a human decision for
-every version. A reusable bounded kind-establishment grant reduces repeated human
-work but needs exact version/content reach, currentness, revocation and recovery
-choices. Neither is selected here. B affects later kind delivery only and does not
-block independently prepared explicit-composition Packet 1.
+Per-version approval adds a separate human decision for every version. No reusable
+kind-establishment grant is selected. The [concrete Packet-2 plan](packet-2.md)
+details exact definition/binding/parameter identity, kind-first owner bootstrap,
+retained definition truth, equivalent explicit meaning and unchanged registration
+permission, with typed SDK read/resolve/recovery and acceptance/fault coverage.
+It awaits human plan approval before implementation. B's selection and technical
+review supply no actual runtime approval of a kind or work grant.
 
 ## Packet outline and human checkpoints
 
@@ -187,12 +205,12 @@ independently meaningful outcomes remain:
 | Packet | Outcome and dependency | Human review boundary |
 | --- | --- | --- |
 | 1 — unified explicit-composition registration | One authority lineage and typed path for ordinary/P/I; exact scope and bounded scope change/D→G/revocation/recovery; retained foundation truth. Requires complete foundation, selection of A and approval of [next plan](packet-1.md). Kinds unsupported. | **Packet:** a continuing project explicitly authorizes and registers P/I while old grants cannot widen and old items stay exact. Stop for recap. A separately delivered earlier meaningful authority outcome triggers the lifecycle's earlier checkpoint. |
-| 2 — optional immutable whole-composition kinds | Exact reusable versions and equivalent explicit meaning; separate establishment and unchanged registration authorization. Depends on Packet-1 human review, selection of B and separately authorized bounded preparation/plan. | **Packet:** reusable definitions/kind-backed work are meaningful; stop for review. Final slice acceptance occurs here. |
+| 2 — optional immutable whole-composition kinds | Exact reusable versions and equivalent explicit meaning; separate establishment and unchanged registration authorization. Packet-1 review is complete, B is human-selected and bounded preparation is authorized. [Detailed plan](packet-2.md) awaits human implementation approval. | **Packet:** reusable definitions/kind-backed work are meaningful; return for review. Meta checks final slice acceptance/integration here and recaps once. |
 
-Only the next increment is detailed. No authority to continue into Packet 2 or
-prepare adjacent outcomes is delegated. Local names/module split/tagged record
-layout may be resolved just in time; authority scope, lifecycle, history loss and
-kind establishment cannot be silently selected.
+Only the next increment, Packet 2, is now detailed. No product execution or
+adjacent preparation is delegated by this planning checkpoint. Local names/module
+split/tagged record layout may be resolved within the reviewed contract; authority
+scope, lifecycle, history loss and kind establishment cannot be silently changed.
 
 ## Complete slice acceptance
 
@@ -222,6 +240,7 @@ kind establishment cannot be silently selected.
 Packet-1 acceptance is [here](packet-1.md#acceptance-and-verification). Meta checks
 complete slice/integration once after final authorized packet; preparation supplies
 no product completion claim or new predecessor closeout.
+Packet-2 acceptance is [here](packet-2.md#ordered-implementation-and-acceptance).
 
 ## Non-goals and format boundary
 

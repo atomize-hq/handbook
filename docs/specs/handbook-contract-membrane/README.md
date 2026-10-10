@@ -156,11 +156,17 @@ project, superseding the parallel-stream preparation at `b7e0a48`. Its
 unified ordinary/planning-output/requirements-input registration, exact approved
 scope and a bounded human scope-change lifecycle. The human selected
 recommendation A and approved the complete reviewed Packet-1 plan at `277674e2`;
-Packet 1 is implemented and verified at this local checkpoint; its human recap
-is next. Kind-definition recommendation B remains unselected
-and is a later choice. Retained truth/recovery is preserved without permanent old
-APIs or a special V1-to-menu upgrade. Packet 1 ends at its human recap; no kind
-preparation or implementation is authorized.
+Packet 1 is implemented and verified at `7129b5c`; meta validation and its human
+recap are complete. The human selected a separate near-term
+[capacity/performance follow-up](coverage-and-landing-map.md#work-state-capacity-and-performance-follow-up)
+without interrupting current bounded compositions/kinds work. After reviewing/
+discussing Packet 1, the human selected kind-definition recommendation B,
+**per-version approval**, and authorized bounded [Packet-2 preparation](slices/work-compositions-and-kinds/packet-2.md).
+The concrete optional immutable whole-composition kind plan is prepared for human
+review before implementation; no Packet-2 product execution or runtime project
+terms are approved. Retained truth/recovery is preserved without permanent old
+APIs or a special V1-to-menu upgrade. The slice remains incomplete until its final
+authorized packet and aggregate acceptance are satisfied.
 It delivers no positive Work Progression eligibility,
 governed completion, parent decision or close effect; those remain separately bounded.
 The initial-only recommendation at `6aba084` is superseded by selected explicit
@@ -170,7 +176,7 @@ authorizes registration. The [joint near-term sequence](coverage-and-landing-map
 puts configurable compositions/optional kinds immediately after foundation, with
 compatibility prepared and selected before it, followed by separately meaningful
 Context Resolution, hierarchy, eligibility and closing outcomes. Flexibility
-implementation follows separately after the Packet-1 human checkpoint; the other
+implementation now awaits the Packet-2 concrete-plan human checkpoint; the other
 ordering and implementation gates remain proposed where unselected. This approval
 does not select CR's management/use/representation choices. The latest [CR investigation](../../research/context-resolution-local-advisory-extension-investigation-2026-10-08.md)
 is reviewed proposed evidence; root use, binding management and work registration

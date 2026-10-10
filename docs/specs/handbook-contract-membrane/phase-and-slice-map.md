@@ -123,9 +123,11 @@ The human then requested bounded [flexibility preparation](slices/work-compositi
 The human selected one composition-aware registration model for greenfield
 development, replacing the parallel-stream proposal. Bounded scope/lifecycle
 recommendation A and the [first increment plan](slices/work-compositions-and-kinds/packet-1.md)
-are human-approved at `277674e2`; Packet 1 is implemented and verified at this
-local checkpoint, returning for its human recap. The separate kind recommendation B remains unselected and is a
-later choice. Remaining broad ordering is
+are human-approved at `277674e2`; Packet 1 is implemented and verified at
+`7129b5c`, with meta validation/human recap and subsequent discussion complete.
+The human selected per-version kind approval B and authorized bounded
+[Packet-2 planning](slices/work-compositions-and-kinds/packet-2.md); its concrete
+plan awaits human approval before implementation. Remaining broad ordering is
 proposed where unselected. The latest CR research
 remains proposed; its own authority/compatibility choices precede detailed execution
 preparation. A shared currentness/recovery seam establishes no shared grant.
@@ -360,9 +362,12 @@ after that checkpoint, then selected one composition-aware registration authorit
 The revised Packet 1 combines the finite explicit menu with exact scope and a
 human-selected bounded scope-change lifecycle; optional kinds remain a later
 independently reviewed outcome. The human approved recommendation A and the full
-Packet-1 plan at `277674e2`; it is implemented and verified at this local checkpoint,
-with human recap next. The separate kind rule
-remains unselected; no adjacent
+Packet-1 plan at `277674e2`; it is implemented and verified at `7129b5c`,
+with meta validation and human recap complete. After reviewing/discussing that
+outcome, the human selected the separate per-version kind-approval rule B and
+authorized bounded [Packet-2 preparation](slices/work-compositions-and-kinds/packet-2.md).
+Its concrete native/SDK immutable-kind plan is prepared for human review before
+implementation. The slice remains incomplete; no Packet-2 product execution or adjacent
 implementation, new phase or local-check Packet 5 is authorized. CR's separate
 management/use/representation choices remain unselected.
 The human has selected [local-advisory authority](semantic-model/amendments/approval-authority-and-assurance.md)
@@ -384,6 +389,23 @@ and full Substrate adoption are not automatic predecessors of the local check;
 identify any actual causal dependency and track deferred work explicitly. The
 [coverage entry](coverage-and-landing-map.md#local-check-planning-and-host-integration-carry-forward)
 connects this preparation to the later consumer-adoption work.
+
+### Near-term work-state capacity and performance follow-up
+
+On 2026-10-09 the human selected follow-up tracking while keeping the current
+compositions/kinds direction moving. The existing project-local store has a
+32-transaction lifetime budget shared by items and authority/history operations;
+fresh revocation also refuses at capacity. Repeated full-inventory checks have
+an inherited scan-cost advisory, without a routine operation-latency benchmark.
+These constraints do not become a new predecessor for current bounded work.
+
+The [coverage/control-map follow-up](coverage-and-landing-map.md#work-state-capacity-and-performance-follow-up)
+owns the research questions and intended outcome. The recommended research
+checkpoint is compositions/kinds completion, before committing the next broader Work Progression
+increment; practical capacity must be addressed before sustained project use.
+Research and deliberate design selection precede a separately approved bounded
+implementation. No storage design, capacity increase, new phase/slice identity or
+future packet execution is selected here; existing delivery order remains intact.
 
 ## Phase 6 — consumer adoption
 
