@@ -292,7 +292,10 @@ Units 1 and 2 are complete. Unit 2's [slice status](slices/work-compositions-and
 records both packets at `7129b5c` / `ae1af38`, supplied meta aggregate closeout and
 accepted human recap under selected registration lifecycle A and per-version
 kind approval B. The [phase map's current priorities](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
-recommend capacity/performance research next at the arrived checkpoint.
+place human capacity/performance design selection next at the arrived checkpoint.
+The human commissioned that bounded investigation on 2026-10-10; its
+[report](../../research/work-state-capacity-and-performance-investigation-2026-10-10.md)
+records measured baseline costs and proposed design choices for human selection.
 Unit 2's compatibility boundary below was
 prepared and human-selected **before unit 1 implementation**. The human approved
 unit 1's complete Packet-1 plan, with execution following recording and clean review of these selections;
@@ -348,10 +351,12 @@ The [transaction path](../../../crates/engine/src/work_state/transaction.rs)
 repeatedly scans retained inventory/history. The reported Windows durability-suite
 time of about 16 minutes covers many fault/recovery scenarios and is not an
 operation-latency benchmark. The inherited P3 scan-cost advisory remains distinct
-from this human-selected product-capacity follow-up; no new correctness failure
-or benchmark result is claimed here.
+from this human-selected product-capacity follow-up. The commissioned
+[investigation](../../research/work-state-capacity-and-performance-investigation-2026-10-10.md)
+now records per-operation Windows measurements; it establishes no new correctness
+failure or implemented scalable backend.
 
-The later investigation should establish:
+The commissioned investigation addresses:
 
 - representative project lifetimes, work-item and authority-operation volumes,
   growth patterns, and measurable latency/resource targets;
@@ -364,18 +369,15 @@ The later investigation should establish:
 - preservation of exact identity, original authority, immutable history,
   noncommit/uncertainty proofs, concurrency and recovery across the selected design.
 
-**Recommended next-task scope:** investigate the existing native/SDK store against
-representative lifetimes and growing retained histories, including saturation,
-accepted-original closure and revocation availability. Establish workload and
-latency/resource targets, measure the relevant operation costs separately, and
-compare scalable bounded operation and recovery/history tradeoffs. Return a short
-source-backed options report, a candidate direction and acceptance/verification
-targets for human selection. Do not implement or prepare detailed successor packets.
-This greenfield
+**Next human decision:** review the measured baseline and the report's **PROPOSED**
+workload/latency/resource envelope, storage comparison, conditional segmented-history
+candidate, saturation promise, integrity/detection boundary and retained-store
+treatment. A separately authorized bounded plan follows selection; no detailed
+successor packets or implementation are approved by this entry. This greenfield
 project does not presume production migration tooling or permanent legacy APIs;
 actual retained truth still requires an explicit treatment. Raising the constant,
-reclaiming history, adopting a database or splitting budgets is not selected by
-this entry. Native/SDK delivery and Phase-6 order remain unchanged.
+reclaiming history, adopting a database or splitting budgets is not selected here.
+Native/SDK delivery and Phase-6 order remain unchanged.
 
 ### Remaining-work audit after compositions and kinds
 
@@ -389,7 +391,7 @@ These remaining gaps are outside the completed slice, rather than another packet
 
 | Remaining outcome / decision | Source-backed dependency and boundary |
 | --- | --- |
-| Practical work-state capacity and authority availability | The selected [follow-up](#work-state-capacity-and-performance-follow-up) addresses the shared lifetime budget and revocation at exhaustion before sustained use. The inherited inventory-scan P3 remains optional; no per-operation benchmark or storage choice is established. |
+| Practical work-state capacity and authority availability | The selected [follow-up](#work-state-capacity-and-performance-follow-up) addresses the shared lifetime budget and revocation at exhaustion before sustained use. The [2026-10-10 investigation](../../research/work-state-capacity-and-performance-investigation-2026-10-10.md) measures the current native/SDK baseline and proposes choices; its storage direction and targets remain unselected. The inherited inventory-scan P3 remains optional; research completion is not delivery of practical capacity. |
 | Reusable local CR root binding | The [2026-10-08 investigation](../../research/context-resolution-local-advisory-extension-investigation-2026-10-08.md#smallest-useful-next-outcome-and-decisions) is reviewed **proposed research**. Existing initial root-envelope admission works only under its still-current initial authority; it does not supply reusable successor-state binding. Management/use establishment, replacement/delegation, revocation and additive representation/legacy compatibility remain human selections. Exact current lineage, held scope/currentness through effect, retained dependencies, lock order and original recovery are actual prerequisites. Work registration is no substitute; CR-first is preferred sequence only. |
 | Hierarchy and typed prerequisites | The [selected amendment](semantic-model/amendments/work-progression-kinds-and-relations.md#selected-kinds-and-hierarchy) constrains same-project one-parent containment, typed start/close/both relations and separate grouping/reference/order. Delivered [work descriptors](../../../crates/engine/src/work_state/types.rs) support no relations. Concrete operations/revisions, coherent finite cuts/currentness, structural and closure-cycle refusal remain to be selected; relation facts alone establish no permission, eligibility or effect. |
 | Governing completion and local/parent eligibility | [Work Progression](semantic-model/operational-reliance-and-actions.md#work-progression-ownership) must independently establish exact governing target/scope/assignment and adopted assessment protocol, complete roles/coverage/result populations including relevant failures, current qualification and atomic eligibility/disposition or refusal. Planning-output questions, definition locators, kinds and direct passes supply none by themselves. Prospective assessment needs governing selection before collection commitment; retrospective use needs supported [G5](semantic-model/amendments/governance-defaults-and-delegated-operation.md#g5--independent-evaluation-and-governed-reliance) qualification without invented provenance. Relation-dependent eligibility needs authoritative relations; relation-free leaf eligibility need not wait for CR/full hierarchy. Parent questions also need their own requirements/integration assessment and exact finite child propositions. |

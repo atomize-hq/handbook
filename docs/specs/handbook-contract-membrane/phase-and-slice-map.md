@@ -405,17 +405,21 @@ On 2026-10-09 the human selected follow-up tracking while keeping the current
 compositions/kinds direction moving. The existing project-local store has a
 32-transaction lifetime budget shared by items and authority/history operations;
 fresh revocation also refuses at capacity. Repeated full-inventory checks have
-an inherited scan-cost advisory, without a routine operation-latency benchmark.
+an inherited scan-cost advisory. The commissioned
+[2026-10-10 investigation](../../research/work-state-capacity-and-performance-investigation-2026-10-10.md)
+now supplies a routine operation-latency baseline, with explicit sampling and
+feature/platform limits.
 These constraints do not become a new predecessor for current bounded work.
 
 The [coverage/control-map follow-up](coverage-and-landing-map.md#work-state-capacity-and-performance-follow-up)
 owns the research questions and intended outcome. The compositions/kinds
-completion checkpoint has arrived. Recommend research next, before committing
+completion checkpoint has arrived, and the human commissioned its bounded research
+on 2026-10-10. Review the report's proposed direction and envelope before committing
 the next broader Work Progression increment; practical capacity must be addressed
-before sustained project use.
-Research and deliberate design selection precede a separately approved bounded
-implementation. No storage design, capacity increase, new phase/slice identity or
-future packet execution is selected here; existing delivery order remains intact.
+before sustained project use. Deliberate human design selection precedes a separately
+approved bounded plan and implementation. No storage design, capacity increase,
+new phase/slice identity or future packet execution is selected here; existing
+delivery order remains intact.
 
 ### Priorities after compositions and kinds closeout
 
@@ -427,18 +431,19 @@ or a new set of execution units:
 
 | Priority / next action | Rationale, dependencies and unresolved selection |
 | --- | --- |
-| 1. **Research:** work-state capacity/performance | The human-selected revisit checkpoint has arrived; a tiny shared lifetime budget also blocks fresh revocation. Commission the [bounded investigation](coverage-and-landing-map.md#work-state-capacity-and-performance-follow-up) next. Return workload/latency targets, measured growth/recovery costs and options with tradeoffs for human design selection. No storage solution or implementation is selected. |
+| 1. **Human design selection:** work-state capacity/performance | The commissioned [bounded investigation](../../research/work-state-capacity-and-performance-investigation-2026-10-10.md) supplies measured baseline growth/recovery costs, proposed workload/latency/resource targets and a conditional candidate comparison. Select the envelope, storage direction, protected administration/closure promise, integrity/detection boundary and retained-store treatment; then separately authorize bounded planning. No storage solution or implementation is selected. |
 | 2. **Authority preparation after human selections:** native local CR root binding | Reusable successor-state binding remains useful and proposed. Select management/use establishment, narrow delegated versus human-only replacement, revocation and additive representation/legacy compatibility. Its actual dependencies are exact current lineage/scope, held currentness through effect and original recovery; this position is preferred delivery order, not a Work Progression predecessor. |
 | 3. **Authority preparation:** hierarchy/typed prerequisite facts | Builds on delivered item/composition identity. Select concrete relation operations/revisions, coherent finite cuts/currentness and cycle refusal under the approved same-project one-parent semantics. Relations alone supply no eligibility or effect. |
 | 4. **Authority preparation, then separately approved implementation:** leaf eligibility → leaf closing | Select governing completion assignment/protocol, exact roles/coverage/populations and current qualification. Relation-dependent questions need relation facts; relation-free eligibility needs neither CR nor all hierarchy. Closing additionally needs congruent eligibility, separate action authority and state-owner guarded commit/receipt. |
 | 5. **Authority preparation, then separately approved implementation:** parent eligibility → parent closing | Needs finite relations and the parent's independently resolved requirements/integration assessment. Depends on leaf closing only for roles requiring actual closed state/receipts. Parent closing needs its own permission and guarded effect. |
 | Later. **Consumer authority preparation:** CLI/installed-skill/host adoption | Choose a bounded workflow and adopter after sufficient relevant native/SDK capability; no requirement to finish the entire SDK. Keep Phase-6 hard order and current external proof requirements. |
 
-The exact next human direction is whether to commission the bounded capacity/
-performance investigation. It should produce a short source-backed comparison
-and candidate direction with acceptance targets for human selection, without
-product edits, detailed successor packets or presumptive history deletion.
-CR product choices and subsequent implementation approval remain separate.
+The exact next human direction is selection among the capacity/performance
+report's proposed choices, including its proof conditions and acceptance targets.
+Research supplies evidence without product edits, detailed successor packets or
+presumptive history deletion. Concrete bounded planning needs separate
+authorization after selection. CR product choices and subsequent implementation
+approval remain separate.
 
 ## Phase 6 — consumer adoption
 
