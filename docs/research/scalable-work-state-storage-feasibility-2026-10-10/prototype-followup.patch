@@ -1,0 +1,153 @@
+--- a/prototypes.py
++++ b/prototypes.py
+@@ -162,0 +163 @@
++    stream_audit = False
+@@ -170,0 +172 @@
++        self.cached_ordinary, self.cached_admin = 0, 0
+@@ -208 +210,3 @@
+-            if len(self.records) != head["count"] or self.cache_hash != head["cache"]:
++            last_chain = self.records[head["count"]]["chain"] if head["count"] in self.records else ZERO
++            if (len(self.records), self.cache_hash, last_chain, self.cached_ordinary, self.cached_admin) != (
++                    head["count"], head["cache"], head["chain"], head["ordinary"], head["admin"]):
+@@ -216,0 +221,2 @@
++        self.cached_ordinary += row["kind"] == "accepted"
++        self.cached_admin += row["kind"] == "admin"
+@@ -220 +226,8 @@
+-            with (self.root / "records" / locator[0]).open("rb") as stream:
++            record_path = self.root / "records" / locator[0]
++            if self.segmented and self.stream_audit and objects is not None:
++                if record_path not in objects["frames"]:
++                    objects["frames"][record_path] = objects["stack"].enter_context(record_path.open("rb"))
++                context = contextlib.nullcontext(objects["frames"][record_path])
++            else:
++                context = record_path.open("rb")
++            with context as stream:
+@@ -249,0 +263 @@
++        self.cached_ordinary, self.cached_admin = 0, 0
+@@ -253,2 +267,3 @@
+-        objects, audited_original_ids = {}, set()
+-        with self.index_path.with_suffix(".rebuilt").open("wb") as index:
++        objects, audited_original_ids = {"frames": {}}, set()
++        with contextlib.ExitStack() as stack, self.index_path.with_suffix(".rebuilt").open("wb") as index:
++            objects["stack"] = stack
+@@ -309,0 +325,2 @@
++            if record["target"] != target:
++                raise Refusal("selected target disagreement")
+@@ -457 +474 @@
+-                CREATE TABLE current(target TEXT PRIMARY KEY, seq INTEGER NOT NULL REFERENCES records(seq));
++                CREATE TABLE current(target TEXT PRIMARY KEY, seq INTEGER NOT NULL REFERENCES records(seq), proof TEXT NOT NULL);
+@@ -459 +476 @@
+-                    chain TEXT NOT NULL, ordinary INTEGER NOT NULL, admin INTEGER NOT NULL);
++                    chain TEXT NOT NULL, ordinary INTEGER NOT NULL, admin INTEGER NOT NULL, proof TEXT NOT NULL);
+@@ -464 +481 @@
+-            self.db.execute("INSERT INTO head VALUES(1,0,?,0,0)", (ZERO,))
++            self.db.execute("INSERT INTO head VALUES(1,0,?,0,0,?)", (ZERO, digest(encoded(["research-head", 0, ZERO, 0, 0]))))
+@@ -470 +487 @@
+-        result = self.db.execute("SELECT count,chain,ordinary,admin FROM head WHERE id=1").fetchone()
++        result = self.db.execute("SELECT count,chain,ordinary,admin,proof FROM head WHERE id=1").fetchone()
+@@ -473 +490,3 @@
+-        return dict(zip(("count", "chain", "ordinary", "admin"), result))
++        if digest(encoded(["research-head", *result[:4]])) != result[4]:
++            raise Refusal("head checksum disagreement")
++        return dict(zip(("count", "chain", "ordinary", "admin"), result[:4]))
+@@ -481 +500,4 @@
+-        return self.verified(json.loads(result[0]), result[1], result[2], result[3])
++        header = self.verified(json.loads(result[0]), result[1], result[2], result[3])
++        if header["seq"] != seq:
++            raise Refusal("selected row sequence disagreement")
++        return header
+@@ -488 +510 @@
+-                current = self.db.execute("SELECT seq FROM current WHERE target=?", (target,)).fetchone()
++                current = self.db.execute("SELECT seq,proof FROM current WHERE target=?", (target,)).fetchone()
+@@ -490,0 +513,2 @@
++                if digest(encoded(["research-current", target, current[0]])) != current[1]:
++                    raise Refusal("current pointer checksum disagreement")
+@@ -491,0 +516,2 @@
++                if record["target"] != target:
++                    raise Refusal("selected target disagreement")
+@@ -508 +534,3 @@
+-        current = self.db.execute("SELECT seq FROM current WHERE target=?", (target,)).fetchone()
++        current = self.db.execute("SELECT seq,proof FROM current WHERE target=?", (target,)).fetchone()
++        if current and digest(encoded(["research-current", target, current[0]])) != current[1]:
++            raise Refusal("current pointer checksum disagreement")
+@@ -520,3 +548,5 @@
+-        self.db.execute("INSERT INTO current VALUES(?,?) ON CONFLICT(target) DO UPDATE SET seq=excluded.seq",
+-                        (target, header["seq"]))
+-        self.db.execute("UPDATE head SET count=?,chain=?,ordinary=?,admin=? WHERE id=1",
++        self.db.execute("INSERT INTO current VALUES(?,?,?) ON CONFLICT(target) DO UPDATE SET seq=excluded.seq,proof=excluded.proof",
++                        (target, header["seq"], digest(encoded(["research-current", target, header["seq"]]))))
++        ordinary = head["ordinary"] + (kind == "accepted")
++        admin = head["admin"] + (kind == "admin")
++        self.db.execute("UPDATE head SET count=?,chain=?,ordinary=?,admin=?,proof=? WHERE id=1",
+@@ -524 +554,2 @@
+-                         head["admin"] + (kind == "admin")))
++                         head["admin"] + (kind == "admin"),
++                         digest(encoded(["research-head", header["seq"], chain, ordinary, admin]))))
+@@ -578 +609,6 @@
+-                if dict(self.db.execute("SELECT target,seq FROM current")) != derived_current:
++                current = {}
++                for target, seq, proof in self.db.execute("SELECT target,seq,proof FROM current"):
++                    if digest(encoded(["research-current", target, seq])) != proof:
++                        raise Refusal("current pointer checksum disagreement")
++                    current[target] = seq
++                if current != derived_current:
+@@ -683,0 +720 @@
++    report["script_sha256"] = digest(Path(__file__).read_bytes())
+@@ -685,0 +723,25 @@
++
++
++def existing_audit(args, blob, dependency):
++    root = Path(args.root).resolve()
++    scratch = Path(args.scratch).resolve()
++    if args.backend != "B_segments" or root.parent != scratch or root.name != f"B_segments-{args.count}-base":
++        raise Refusal("follow-up restricted to this task's named B scratch cohort")
++    store = SegmentedStore(root, blob, dependency, admin_limit=200000)
++    count = store.head["count"]
++    measurements = {"streamed_full_history_audit": timed(store.audit, 3)}
++    store.close()
++    (root / "index.jsonl").unlink()
++    rebuilt = [None]
++    measurements["streamed_missing_index_rebuild"] = timed(
++        lambda: rebuilt.__setitem__(0, SegmentedStore(root, blob, dependency, admin_limit=200000)))
++    assert rebuilt[0].head["count"] == count
++    assert rebuilt[0].lookup("item-0")["kind"] == "terminal"
++    rebuilt[0].close()
++    report = dict(backend="B_segments", variant="one-open-per-segment-audit",
++                  initial_count=args.count, actual_count=count, stream_audit=SegmentedStore.stream_audit,
++                  measurements=measurements, script_sha256=digest(Path(__file__).read_bytes()),
++                  original_sha256=digest(blob), dependency_sha256=digest(dependency),
++                  changes="Only audit/rebuild frame-handle reuse; existing cohort has 48 timed effects +24 contended effects")
++    Path(args.output).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
++    print("streamed audit verified", args.count, count)
+@@ -758,0 +821,20 @@
++            for coherent in (False, True):
++                store = fresh("pointer-" + str(coherent))
++                store.execute("a", "accepted", "a")
++                store.execute("closed-a", "terminal", "a")
++                if coherent:
++                    store.db.execute("UPDATE current SET seq=1,proof=? WHERE target='a'",
++                                     (digest(encoded(["research-current", "a", 1])),))
++                    assert store.lookup("a")["kind"] == "accepted"
++                    checks.append("coherent-pointer-plus-local-checksum-rewrite-not-detected-by-point-lookup")
++                    action = store.audit
++                else:
++                    store.db.execute("UPDATE current SET seq=1 WHERE target='a'")
++                    action = lambda: store.lookup("a")
++                try:
++                    action()
++                    raise AssertionError("current pointer damage admitted")
++                except Refusal:
++                    checks.append("coherent-pointer-rewrite-detected-by-history-audit" if coherent else
++                                  "pointer-only-rollback-detected-by-selected-checksum")
++                store.close()
+@@ -898 +980 @@
+-    parser.add_argument("mode", choices=("benchmark", "faults", "crash", "contention"))
++    parser.add_argument("mode", choices=("benchmark", "faults", "crash", "contention", "audit-existing"))
+@@ -909,0 +992 @@
++    parser.add_argument("--stream-audit", action="store_true")
+@@ -912,0 +996,2 @@
++    if args.stream_audit:
++        SegmentedStore.stream_audit = True
+@@ -922,0 +1008,2 @@
++    elif args.mode == "audit-existing":
++        existing_audit(args, blob, dependency)

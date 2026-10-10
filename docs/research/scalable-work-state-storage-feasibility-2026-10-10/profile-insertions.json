@@ -1,0 +1,482 @@
+[
+  {
+    "file": "crates/engine/src/work_state/kind.rs",
+    "line": 39,
+    "function": "fingerprint"
+  },
+  {
+    "file": "crates/engine/src/work_state/kind.rs",
+    "line": 59,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/work_state/kind.rs",
+    "line": 68,
+    "function": "fingerprint"
+  },
+  {
+    "file": "crates/engine/src/work_state/kind.rs",
+    "line": 72,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/kind.rs",
+    "line": 107,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/work_state/kind.rs",
+    "line": 116,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/kind.rs",
+    "line": 166,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/work_state/kind.rs",
+    "line": 215,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/work_state/kind.rs",
+    "line": 244,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/kind.rs",
+    "line": 309,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/work_state/mod.rs",
+    "line": 27,
+    "function": "encode"
+  },
+  {
+    "file": "crates/engine/src/work_state/mod.rs",
+    "line": 36,
+    "function": "decode"
+  },
+  {
+    "file": "crates/engine/src/work_state/mod.rs",
+    "line": 42,
+    "function": "fp"
+  },
+  {
+    "file": "crates/engine/src/work_state/scope.rs",
+    "line": 37,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/scope.rs",
+    "line": 107,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/scope.rs",
+    "line": 210,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/store.rs",
+    "line": 63,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/store.rs",
+    "line": 178,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/store.rs",
+    "line": 197,
+    "function": "inventory"
+  },
+  {
+    "file": "crates/engine/src/work_state/store.rs",
+    "line": 348,
+    "function": "manifest"
+  },
+  {
+    "file": "crates/engine/src/work_state/store.rs",
+    "line": 438,
+    "function": "reserve_intent"
+  },
+  {
+    "file": "crates/engine/src/work_state/store.rs",
+    "line": 549,
+    "function": "open"
+  },
+  {
+    "file": "crates/engine/src/work_state/store.rs",
+    "line": 692,
+    "function": "optional"
+  },
+  {
+    "file": "crates/engine/src/work_state/store.rs",
+    "line": 704,
+    "function": "required"
+  },
+  {
+    "file": "crates/engine/src/work_state/store.rs",
+    "line": 715,
+    "function": "write_exact"
+  },
+  {
+    "file": "crates/engine/src/work_state/submitted.rs",
+    "line": 113,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/transaction.rs",
+    "line": 26,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/transaction.rs",
+    "line": 133,
+    "function": "output"
+  },
+  {
+    "file": "crates/engine/src/work_state/transaction.rs",
+    "line": 200,
+    "function": "decision"
+  },
+  {
+    "file": "crates/engine/src/work_state/transaction.rs",
+    "line": 206,
+    "function": "terminal"
+  },
+  {
+    "file": "crates/engine/src/work_state/transaction.rs",
+    "line": 221,
+    "function": "publication"
+  },
+  {
+    "file": "crates/engine/src/work_state/transaction.rs",
+    "line": 227,
+    "function": "noncommit"
+  },
+  {
+    "file": "crates/engine/src/work_state/transaction.rs",
+    "line": 233,
+    "function": "parsed"
+  },
+  {
+    "file": "crates/engine/src/work_state/transaction.rs",
+    "line": 321,
+    "function": "scan"
+  },
+  {
+    "file": "crates/engine/src/work_state/transaction.rs",
+    "line": 387,
+    "function": "validate_authority_history"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 39,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 43,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 89,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 153,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 162,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 205,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 214,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 306,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 315,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 346,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 355,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 522,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/work_state/types.rs",
+    "line": 543,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 167,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 244,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 788,
+    "function": "retain_work_history_tree_guard_v1"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 804,
+    "function": "retain_exact_files_checkpoint_v1"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 849,
+    "function": "retain_selected_tree"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1004,
+    "function": "require_stable_path_epoch"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1033,
+    "function": "read_regular_bounded"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1063,
+    "function": "list_directory_bounded"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1093,
+    "function": "write_new_durable"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1106,
+    "function": "rename_noreplace_durable"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1131,
+    "function": "replace_exact_durable"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1220,
+    "function": "acquire_existing_exclusive_lock_v1"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1227,
+    "function": "lock_existing"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1247,
+    "function": "open_regular_optional"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1261,
+    "function": "pin_windows_parent"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1387,
+    "function": "regular_file_snapshot"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1635,
+    "function": "windows_handle_info"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1829,
+    "function": "open_windows_directory_guard"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1980,
+    "function": "open_retained_directory"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 1995,
+    "function": "open_regular_optional"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 2024,
+    "function": "list_directory"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 2362,
+    "function": "open_retained_directory"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 2370,
+    "function": "open_regular_optional"
+  },
+  {
+    "file": "crates/engine/src/repository_durability.rs",
+    "line": 2395,
+    "function": "list_directory"
+  },
+  {
+    "file": "crates/engine/src/definition_identity.rs",
+    "line": 214,
+    "function": "from_bytes"
+  },
+  {
+    "file": "crates/engine/src/definition_identity.rs",
+    "line": 325,
+    "function": "parse_schema_json"
+  },
+  {
+    "file": "crates/engine/src/definition_identity.rs",
+    "line": 333,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/local_authority/work_registration.rs",
+    "line": 41,
+    "function": "validate_current"
+  },
+  {
+    "file": "crates/engine/src/local_authority/work_registration.rs",
+    "line": 57,
+    "function": "capture_proof"
+  },
+  {
+    "file": "crates/engine/src/local_authority/work_registration.rs",
+    "line": 125,
+    "function": "with_work_registration_current"
+  },
+  {
+    "file": "crates/engine/src/local_authority/work_registration.rs",
+    "line": 156,
+    "function": "with_work_registration_establishment"
+  },
+  {
+    "file": "crates/engine/src/local_authority/work_registration.rs",
+    "line": 239,
+    "function": "validate_historical"
+  },
+  {
+    "file": "crates/engine/src/local_authority/work_registration.rs",
+    "line": 501,
+    "function": "validate_shape"
+  },
+  {
+    "file": "crates/engine/src/local_authority/local_check.rs",
+    "line": 57,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/local_authority/local_check.rs",
+    "line": 66,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/local_authority/local_check.rs",
+    "line": 161,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/local_authority/local_check.rs",
+    "line": 170,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/local_authority/local_check.rs",
+    "line": 363,
+    "function": "validate_current"
+  },
+  {
+    "file": "crates/engine/src/local_authority/local_check.rs",
+    "line": 912,
+    "function": "work_registration_current"
+  },
+  {
+    "file": "crates/engine/src/local_authority.rs",
+    "line": 90,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/local_authority.rs",
+    "line": 94,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/local_authority.rs",
+    "line": 208,
+    "function": "canonical_json_bytes"
+  },
+  {
+    "file": "crates/engine/src/local_authority.rs",
+    "line": 217,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/local_authority.rs",
+    "line": 915,
+    "function": "validate"
+  },
+  {
+    "file": "crates/engine/src/local_authority.rs",
+    "line": 1106,
+    "function": "encode"
+  },
+  {
+    "file": "crates/engine/src/local_authority.rs",
+    "line": 1114,
+    "function": "decode"
+  },
+  {
+    "file": "crates/engine/src/local_authority.rs",
+    "line": 1120,
+    "function": "fingerprint"
+  },
+  {
+    "file": "crates/engine/src/local_authority.rs",
+    "line": 1138,
+    "function": "write_exact"
+  }
+]

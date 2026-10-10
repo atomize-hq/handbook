@@ -1,0 +1,9 @@
+{
+  "variant": "base C without selected-current-row checksum",
+  "script_sha256": "409c93567a2b0be9c5c4892653d10fda209ad1e65917b1f18b8dc097055eadb6",
+  "experiment": "modeled SQL current-pointer rollback after an accepted original and committed terminal",
+  "observed_selected_state": "accepted",
+  "correct_history_state": "terminal",
+  "global_semantic_audit": "current map/history disagreement",
+  "not_native_owner": true
+}

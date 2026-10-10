@@ -1,0 +1,22 @@
+{
+  "source_head": "889d9b24f0d3be33169c14951d4336dd86ee03e2",
+  "branch": "feat/handbook-contract-membrane-clean",
+  "platform": "Windows 11 x64 10.0.26200, NTFS C: NVMe SSD",
+  "cpu": "Intel Core i9-12900KF,16 physical cores,24 logical processors",
+  "physical_memory_bytes": 137237602304,
+  "rustc": "1.89.0 (29483883e 2025-08-04), MSVC x64, LLVM20.1.7",
+  "cargo": "1.89.0 (c24e10642 2025-06-23)",
+  "native_profile": "release opt-level3, no LTO, jobs2,32MiB worker stack, Engine test-support",
+  "native_instrumentation": "96 function entries in external baseline git archive; checked-in recipe and insertion manifest",
+  "native_control": "3 enabled reads alternating3 disabled-span controls per cohort/size;1 enabled effect",
+  "native_complete_run": {"exit_code": 0, "observations": 31, "summary_groups": 11},
+  "cpu_counter": "Windows GetProcessTimes user+kernel CPU; observed15.625ms resolution",
+  "wpr_attempt": {"profile": "CPU.Verbose.File", "error": "0xc5585011", "recording_after_attempt": false},
+  "cache": "warm OS caches after population; each native API reopens owner; no OS cache eviction/new-process native timing",
+  "authority_sensitivity": "shared D history vs two distinct exact D/G proof populations at16; no near-limit proof cohort",
+  "payload_sensitivity": "native questions alternate27/256 UTF-8 bytes; not a controlled size-only coefficient",
+  "native_dependency_lock": "exact prior accepted research harness Cargo.lock, copied into external archive native harness",
+  "production_working_tree_sources_modified": false,
+  "performance_runs": "native first, then prototypes; no benchmark builds/runs overlapped",
+  "gitnexus": "CLI1.6.12; query missing Protocol/Category tables, index66 commits stale; impact targets unknown; direct-source fallback"
+}

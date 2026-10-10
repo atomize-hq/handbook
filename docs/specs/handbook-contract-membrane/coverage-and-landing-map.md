@@ -356,6 +356,13 @@ from this human-selected product-capacity follow-up. The commissioned
 now records per-operation Windows measurements; it establishes no new correctness
 failure or implemented scalable backend.
 
+The human-authorized [scalable-storage feasibility investigation](../../research/scalable-work-state-storage-feasibility-2026-10-10.md)
+adds isolated native profiling, explicit integrity assumptions/counterexamples,
+and comparable indexed-file, segmented-history and transactional-database probes.
+It distinguishes selected-dependency verification from next-operation detection
+of unrelated history damage. Research completion selects neither a replacement
+owner nor a changed integrity/detection boundary.
+
 The commissioned investigation addresses:
 
 - representative project lifetimes, work-item and authority-operation volumes,
@@ -369,10 +376,12 @@ The commissioned investigation addresses:
 - preservation of exact identity, original authority, immutable history,
   noncommit/uncertainty proofs, concurrency and recovery across the selected design.
 
-**Next human decision:** review the measured baseline and the report's **PROPOSED**
-workload/latency/resource envelope, storage comparison, conditional segmented-history
-candidate, saturation promise, integrity/detection boundary and retained-store
-treatment. A separately authorized bounded plan follows selection; no detailed
+**Next human decision:** review the baseline and the newer feasibility report's
+**PROPOSED** workload/resource envelope, measured mechanism comparison, conditional
+preference, saturation promise, integrity/detection boundary and retained-store
+treatment. The earlier segmented-history recommendation remains historical
+proposed evidence, not a selected architecture. A separately authorized bounded
+plan follows selection; no detailed
 successor packets or implementation are approved by this entry. This greenfield
 project does not presume production migration tooling or permanent legacy APIs;
 actual retained truth still requires an explicit treatment. Raising the constant,

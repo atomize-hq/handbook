@@ -1,0 +1,178 @@
+[
+  {
+    "backend": "A_files",
+    "experiment": "real abrupt child os._exit",
+    "kind": "accepted",
+    "stage": "after_data",
+    "caller_result": "missing reply; uncertain until original request recovery",
+    "outcome": "noncommitted head; orphan/tail refuses fresh publication; original recovery omitted"
+  },
+  {
+    "backend": "A_files",
+    "experiment": "real abrupt child os._exit",
+    "kind": "accepted",
+    "stage": "after_commit",
+    "caller_result": "missing reply; uncertain until original request recovery",
+    "outcome": "committed; original-key replay after absent reply"
+  },
+  {
+    "backend": "A_files",
+    "experiment": "real abrupt child os._exit",
+    "kind": "terminal",
+    "stage": "after_data",
+    "caller_result": "missing reply; uncertain until original request recovery",
+    "outcome": "noncommitted head; orphan/tail refuses fresh publication; original recovery omitted"
+  },
+  {
+    "backend": "A_files",
+    "experiment": "real abrupt child os._exit",
+    "kind": "terminal",
+    "stage": "after_commit",
+    "caller_result": "missing reply; uncertain until original request recovery",
+    "outcome": "committed; original-key replay after absent reply"
+  },
+  {
+    "backend": "A_files",
+    "experiment": "modeled deliberate file/SQL damage and logical limits",
+    "checks": [
+      "accepted-original-before-terminal",
+      "same-key-missing-reply-replay",
+      "changed-exact-request-replay-refused",
+      "ordinary saturation",
+      "missing accepted",
+      "protected-admin-at-ordinary-saturation-and-explicit-admin-exhaustion",
+      "closure-after-both-logical-budgets-full-no-reinstatement",
+      "stale-index-rebuilt",
+      "missing-index-rebuilt",
+      "missing-head-fails-closed",
+      "original-damage-detected-by-selected-lookup",
+      "dependency-damage-detected-by-selected-lookup",
+      "unrelated-damage-not-detected-by-selected-lookup",
+      "unrelated-damage-detected-by-audit",
+      "truncation-damage-detected-by-selected-lookup"
+    ],
+    "limits": {
+      "ordinary": 2,
+      "admin": 2
+    },
+    "uncertainty": "No injected physical I/O failure or power loss"
+  },
+  {
+    "backend": "B_segments",
+    "experiment": "real abrupt child os._exit",
+    "kind": "accepted",
+    "stage": "after_data",
+    "caller_result": "missing reply; uncertain until original request recovery",
+    "outcome": "noncommitted head; orphan/tail refuses fresh publication; original recovery omitted"
+  },
+  {
+    "backend": "B_segments",
+    "experiment": "real abrupt child os._exit",
+    "kind": "accepted",
+    "stage": "after_commit",
+    "caller_result": "missing reply; uncertain until original request recovery",
+    "outcome": "committed; original-key replay after absent reply"
+  },
+  {
+    "backend": "B_segments",
+    "experiment": "real abrupt child os._exit",
+    "kind": "terminal",
+    "stage": "after_data",
+    "caller_result": "missing reply; uncertain until original request recovery",
+    "outcome": "noncommitted head; orphan/tail refuses fresh publication; original recovery omitted"
+  },
+  {
+    "backend": "B_segments",
+    "experiment": "real abrupt child os._exit",
+    "kind": "terminal",
+    "stage": "after_commit",
+    "caller_result": "missing reply; uncertain until original request recovery",
+    "outcome": "committed; original-key replay after absent reply"
+  },
+  {
+    "backend": "B_segments",
+    "experiment": "modeled deliberate file/SQL damage and logical limits",
+    "checks": [
+      "accepted-original-before-terminal",
+      "same-key-missing-reply-replay",
+      "changed-exact-request-replay-refused",
+      "ordinary saturation",
+      "missing accepted",
+      "protected-admin-at-ordinary-saturation-and-explicit-admin-exhaustion",
+      "closure-after-both-logical-budgets-full-no-reinstatement",
+      "stale-index-rebuilt",
+      "missing-index-rebuilt",
+      "missing-head-fails-closed",
+      "original-damage-detected-by-selected-lookup",
+      "dependency-damage-detected-by-selected-lookup",
+      "unrelated-damage-not-detected-by-selected-lookup",
+      "unrelated-damage-detected-by-audit",
+      "truncation-damage-detected-by-selected-lookup",
+      "missing-segment-selected-refusal"
+    ],
+    "limits": {
+      "ordinary": 2,
+      "admin": 2
+    },
+    "uncertainty": "No injected physical I/O failure or power loss"
+  },
+  {
+    "backend": "C_sqlite",
+    "experiment": "real abrupt child os._exit",
+    "kind": "accepted",
+    "stage": "after_data",
+    "caller_result": "missing reply; uncertain until original request recovery",
+    "outcome": "noncommitted SQL transaction rolled back on reopen"
+  },
+  {
+    "backend": "C_sqlite",
+    "experiment": "real abrupt child os._exit",
+    "kind": "accepted",
+    "stage": "after_commit",
+    "caller_result": "missing reply; uncertain until original request recovery",
+    "outcome": "committed; original-key replay after absent reply"
+  },
+  {
+    "backend": "C_sqlite",
+    "experiment": "real abrupt child os._exit",
+    "kind": "terminal",
+    "stage": "after_data",
+    "caller_result": "missing reply; uncertain until original request recovery",
+    "outcome": "noncommitted SQL transaction rolled back on reopen"
+  },
+  {
+    "backend": "C_sqlite",
+    "experiment": "real abrupt child os._exit",
+    "kind": "terminal",
+    "stage": "after_commit",
+    "caller_result": "missing reply; uncertain until original request recovery",
+    "outcome": "committed; original-key replay after absent reply"
+  },
+  {
+    "backend": "C_sqlite",
+    "experiment": "modeled deliberate file/SQL damage and logical limits",
+    "checks": [
+      "accepted-original-before-terminal",
+      "same-key-missing-reply-replay",
+      "changed-exact-request-replay-refused",
+      "ordinary saturation",
+      "missing accepted",
+      "protected-admin-at-ordinary-saturation-and-explicit-admin-exhaustion",
+      "closure-after-both-logical-budgets-full-no-reinstatement",
+      "missing-head-fails-closed",
+      "pointer-only-rollback-detected-by-selected-checksum",
+      "coherent-pointer-plus-local-checksum-rewrite-not-detected-by-point-lookup",
+      "coherent-pointer-rewrite-detected-by-history-audit",
+      "original-damage-detected-by-selected-lookup",
+      "dependency-damage-detected-by-selected-lookup",
+      "unrelated-damage-not-detected-by-selected-lookup",
+      "unrelated-damage-detected-by-audit",
+      "truncation-damage-detected-by-selected-lookup"
+    ],
+    "limits": {
+      "ordinary": 2,
+      "admin": 2
+    },
+    "uncertainty": "No injected physical I/O failure or power loss"
+  }
+]

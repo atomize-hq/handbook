@@ -1,0 +1,35 @@
+{
+  "backend": "B_segments",
+  "variant": "one-open-per-segment-audit",
+  "initial_count": 10000,
+  "actual_count": 10072,
+  "stream_audit": true,
+  "measurements": {
+    "streamed_full_history_audit": {
+      "n": 3,
+      "median_ms": 405.7492,
+      "p95_ms": 427.059,
+      "min_ms": 400.4678,
+      "max_ms": 427.059,
+      "samples_ms": [
+        405.7492,
+        400.4678,
+        427.059
+      ]
+    },
+    "streamed_missing_index_rebuild": {
+      "n": 1,
+      "median_ms": 490.2259,
+      "p95_ms": 490.2259,
+      "min_ms": 490.2259,
+      "max_ms": 490.2259,
+      "samples_ms": [
+        490.2259
+      ]
+    }
+  },
+  "script_sha256": "e476c9302ea62dabbb4d3a74da8dc07ee623d639d75fe3eaf26e88dc3b394f54",
+  "original_sha256": "694f225633afa7d0273843d4fda17eda3a783ee566854a797f42def6a4c6fdab",
+  "dependency_sha256": "5ed165b278f768e3f32e8932a49c6933243d39fa060860fa636f5d2ce698b397",
+  "changes": "Only audit/rebuild frame-handle reuse; existing cohort has 48 timed effects +24 contended effects"
+}

@@ -1,0 +1,21 @@
+{
+  "base_script_sha256": "409c93567a2b0be9c5c4892653d10fda209ad1e65917b1f18b8dc097055eadb6",
+  "followup_script_sha256": "e476c9302ea62dabbb4d3a74da8dc07ee623d639d75fe3eaf26e88dc3b394f54",
+  "base_source_recipe": "Copy current prototypes.py under the patch's relative path and run git -c core.autocrlf=false apply --unidiff-zero --reverse prototype-followup.patch in an isolated scratch directory; verify base_script_sha256. This exact command was verified byte-exact; syntax valid. The config override avoids Windows CRLF conversion. If another tool converts line endings, normalize CRLF to LF before verifying the base hash. Never normalize fixture bytes.",
+  "base_results": "prototype-{A_files,B_segments,C_sqlite}-{10000,100000}.json and matching -contention.json; prototype-faults.json",
+  "followup_results": "prototype-B_segments-{10000,100000}-streamed.json; prototype-C_sqlite-{10000,100000}-checksum.json and matching -checksum-contention.json; prototype-faults-followup.json",
+  "fixtures": {
+    "native-authority.json": {
+      "bytes": 193307,
+      "sha256": "5ed165b278f768e3f32e8932a49c6933243d39fa060860fa636f5d2ce698b397"
+    },
+    "native-intent.json": {
+      "bytes": 209731,
+      "sha256": "694f225633afa7d0273843d4fda17eda3a783ee566854a797f42def6a4c6fdab"
+    },
+    "native-terminal.json": {
+      "bytes": 119,
+      "sha256": "4aad77ccf0e9e21caebce5ea6b4e0b527b0b44b5790eebf60040f0825dff1b66"
+    }
+  }
+}

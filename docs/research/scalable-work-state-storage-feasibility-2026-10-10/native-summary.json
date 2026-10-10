@@ -1,0 +1,3103 @@
+{
+  "source_rows": 31,
+  "groups": [
+    {
+      "cohort": "shared",
+      "history": 8,
+      "operation": "current_item",
+      "instrumented": false,
+      "n": 3,
+      "wall_median_ms": 380.3997,
+      "wall_min_ms": 373.5163,
+      "wall_max_ms": 386.6773,
+      "cpu_median_ms": 375.0,
+      "symbols": []
+    },
+    {
+      "cohort": "shared",
+      "history": 8,
+      "operation": "current_item",
+      "instrumented": true,
+      "n": 3,
+      "wall_median_ms": 390.4625,
+      "wall_min_ms": 380.4727,
+      "wall_max_ms": 394.1766,
+      "cpu_median_ms": 390.625,
+      "symbols": [
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:214:from_bytes",
+          "calls": 257,
+          "inclusive_wall_ms": 4.0662,
+          "exclusive_wall_ms": 4.0662,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:325:parse_schema_json",
+          "calls": 49,
+          "inclusive_wall_ms": 2.8486999999999996,
+          "exclusive_wall_ms": 2.8486999999999996,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:333:canonical_json_bytes",
+          "calls": 398,
+          "inclusive_wall_ms": 77.04160000000005,
+          "exclusive_wall_ms": 77.04160000000005,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 78.125
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1106:encode",
+          "calls": 116,
+          "inclusive_wall_ms": 12.584800000000001,
+          "exclusive_wall_ms": 1.8280999999999998,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1114:decode",
+          "calls": 5,
+          "inclusive_wall_ms": 0.1109,
+          "exclusive_wall_ms": 0.047,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1120:fingerprint",
+          "calls": 75,
+          "inclusive_wall_ms": 8.094800000000001,
+          "exclusive_wall_ms": 0.8668000000000005,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:217:validate",
+          "calls": 12,
+          "inclusive_wall_ms": 11.4612,
+          "exclusive_wall_ms": 0.4931000000000003,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:94:validate",
+          "calls": 24,
+          "inclusive_wall_ms": 11.370800000000001,
+          "exclusive_wall_ms": 10.324600000000002,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:161:canonical_json_bytes",
+          "calls": 11,
+          "inclusive_wall_ms": 22.2292,
+          "exclusive_wall_ms": 0.009300000000000308,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:170:validate",
+          "calls": 12,
+          "inclusive_wall_ms": 21.263199999999998,
+          "exclusive_wall_ms": 0.12889999999999913,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:66:validate",
+          "calls": 12,
+          "inclusive_wall_ms": 6.2627,
+          "exclusive_wall_ms": 0.1593999999999997,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:239:validate_historical",
+          "calls": 1,
+          "inclusive_wall_ms": 12.5727,
+          "exclusive_wall_ms": 3.528299999999998,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:501:validate_shape",
+          "calls": 1,
+          "inclusive_wall_ms": 3.2258999999999998,
+          "exclusive_wall_ms": 0.04820000000000091,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1004:require_stable_path_epoch",
+          "calls": 322,
+          "inclusive_wall_ms": 9.307100000000004,
+          "exclusive_wall_ms": 1.7313000000000047,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1033:read_regular_bounded",
+          "calls": 162,
+          "inclusive_wall_ms": 28.11629999999999,
+          "exclusive_wall_ms": 3.752,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1063:list_directory_bounded",
+          "calls": 350,
+          "inclusive_wall_ms": 165.28570000000002,
+          "exclusive_wall_ms": 0.31450000000000106,
+          "inclusive_cpu_ms": 171.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1220:acquire_existing_exclusive_lock_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 0.24919999999999998,
+          "exclusive_wall_ms": 0.0014999999999999736,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1227:lock_existing",
+          "calls": 1,
+          "inclusive_wall_ms": 0.2477,
+          "exclusive_wall_ms": 0.004699999999999982,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1247:open_regular_optional",
+          "calls": 419,
+          "inclusive_wall_ms": 61.463099999999976,
+          "exclusive_wall_ms": 0.1726000000000001,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1261:pin_windows_parent",
+          "calls": 803,
+          "inclusive_wall_ms": 75.16490000000003,
+          "exclusive_wall_ms": 9.840800000000009,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1387:regular_file_snapshot",
+          "calls": 1842,
+          "inclusive_wall_ms": 13.443499999999943,
+          "exclusive_wall_ms": 6.701099999999991,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1635:windows_handle_info",
+          "calls": 12850,
+          "inclusive_wall_ms": 46.446199999999635,
+          "exclusive_wall_ms": 46.446199999999635,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 46.875
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:167:validate",
+          "calls": 2,
+          "inclusive_wall_ms": 0.658,
+          "exclusive_wall_ms": 0.0009999999999999454,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1829:open_windows_directory_guard",
+          "calls": 4016,
+          "inclusive_wall_ms": 52.03410000000034,
+          "exclusive_wall_ms": 52.03410000000034,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 46.875
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2362:open_retained_directory",
+          "calls": 33,
+          "inclusive_wall_ms": 4.249299999999999,
+          "exclusive_wall_ms": 0.3551000000000001,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2370:open_regular_optional",
+          "calls": 419,
+          "inclusive_wall_ms": 61.288500000000006,
+          "exclusive_wall_ms": 11.256999999999998,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2395:list_directory",
+          "calls": 350,
+          "inclusive_wall_ms": 164.9782,
+          "exclusive_wall_ms": 122.78719999999996,
+          "inclusive_cpu_ms": 171.875,
+          "exclusive_cpu_ms": 125.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:244:validate",
+          "calls": 4,
+          "inclusive_wall_ms": 43.06830000000001,
+          "exclusive_wall_ms": 7.289200000000027,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:788:retain_work_history_tree_guard_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 43.7117,
+          "exclusive_wall_ms": 0.001599999999996271,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:804:retain_exact_files_checkpoint_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 0.5855,
+          "exclusive_wall_ms": 0.03980000000000006,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:849:retain_selected_tree",
+          "calls": 1,
+          "inclusive_wall_ms": 23.2488,
+          "exclusive_wall_ms": 1.9858999999999867,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:27:encode",
+          "calls": 234,
+          "inclusive_wall_ms": 68.815,
+          "exclusive_wall_ms": 6.643600000000003,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:36:decode",
+          "calls": 41,
+          "inclusive_wall_ms": 3.3758999999999997,
+          "exclusive_wall_ms": 1.0078,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:42:fp",
+          "calls": 83,
+          "inclusive_wall_ms": 66.9466,
+          "exclusive_wall_ms": 7.8823,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/work_state/scope.rs:107:validate",
+          "calls": 17,
+          "inclusive_wall_ms": 0.020499999999999994,
+          "exclusive_wall_ms": 0.012400000000000003,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/scope.rs:210:validate",
+          "calls": 17,
+          "inclusive_wall_ms": 0.2255,
+          "exclusive_wall_ms": 0.0146,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:178:validate",
+          "calls": 7,
+          "inclusive_wall_ms": 16.5084,
+          "exclusive_wall_ms": 0.10820000000000052,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:197:inventory",
+          "calls": 1,
+          "inclusive_wall_ms": 201.3527,
+          "exclusive_wall_ms": 0.18480000000005248,
+          "inclusive_cpu_ms": 203.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:348:manifest",
+          "calls": 1,
+          "inclusive_wall_ms": 77.8228,
+          "exclusive_wall_ms": 0.11489999999997735,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:549:open",
+          "calls": 1,
+          "inclusive_wall_ms": 6.164700000000001,
+          "exclusive_wall_ms": 0.010600000000000165,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:63:validate",
+          "calls": 1,
+          "inclusive_wall_ms": 2.428,
+          "exclusive_wall_ms": 0.000700000000000145,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:692:optional",
+          "calls": 162,
+          "inclusive_wall_ms": 193.0023,
+          "exclusive_wall_ms": 2.8438,
+          "inclusive_cpu_ms": 187.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:704:required",
+          "calls": 98,
+          "inclusive_wall_ms": 145.3728,
+          "exclusive_wall_ms": 0.045299999999999105,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/submitted.rs:113:validate",
+          "calls": 7,
+          "inclusive_wall_ms": 0.010299999999999998,
+          "exclusive_wall_ms": 0.0034000000000000002,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:133:output",
+          "calls": 8,
+          "inclusive_wall_ms": 3.2321000000000004,
+          "exclusive_wall_ms": 0.21090000000000003,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:200:decision",
+          "calls": 8,
+          "inclusive_wall_ms": 17.5272,
+          "exclusive_wall_ms": 0.20890000000000097,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:206:terminal",
+          "calls": 8,
+          "inclusive_wall_ms": 3.3712,
+          "exclusive_wall_ms": 0.08810000000000001,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:221:publication",
+          "calls": 8,
+          "inclusive_wall_ms": 14.383399999999998,
+          "exclusive_wall_ms": 0.2141000000000004,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:227:noncommit",
+          "calls": 8,
+          "inclusive_wall_ms": 14.6099,
+          "exclusive_wall_ms": 0.35399999999999965,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:233:parsed",
+          "calls": 8,
+          "inclusive_wall_ms": 105.66999999999999,
+          "exclusive_wall_ms": 0.4883999999999915,
+          "inclusive_cpu_ms": 109.375,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:26:validate",
+          "calls": 8,
+          "inclusive_wall_ms": 22.4085,
+          "exclusive_wall_ms": 0.004999999999999449,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:321:scan",
+          "calls": 1,
+          "inclusive_wall_ms": 378.2177,
+          "exclusive_wall_ms": 0.6235000000000355,
+          "inclusive_cpu_ms": 390.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:387:validate_authority_history",
+          "calls": 1,
+          "inclusive_wall_ms": 0.001,
+          "exclusive_wall_ms": 0.001,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:162:validate",
+          "calls": 10,
+          "inclusive_wall_ms": 0.754,
+          "exclusive_wall_ms": 0.0729,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:214:validate",
+          "calls": 10,
+          "inclusive_wall_ms": 24.6524,
+          "exclusive_wall_ms": 0.10500000000000043,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:315:validate",
+          "calls": 7,
+          "inclusive_wall_ms": 0.09670000000000001,
+          "exclusive_wall_ms": 0.006700000000000006,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:355:validate",
+          "calls": 7,
+          "inclusive_wall_ms": 19.6589,
+          "exclusive_wall_ms": 0.08760000000000234,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:39:canonical_json_bytes",
+          "calls": 7,
+          "inclusive_wall_ms": 0.0481,
+          "exclusive_wall_ms": 0.005599999999999997,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:43:validate",
+          "calls": 31,
+          "inclusive_wall_ms": 0.0136,
+          "exclusive_wall_ms": 0.0136,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:89:validate",
+          "calls": 7,
+          "inclusive_wall_ms": 0.0069,
+          "exclusive_wall_ms": 0.0044,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        }
+      ]
+    },
+    {
+      "cohort": "shared",
+      "history": 16,
+      "operation": "current_item",
+      "instrumented": false,
+      "n": 3,
+      "wall_median_ms": 662.4593,
+      "wall_min_ms": 653.6001,
+      "wall_max_ms": 671.6919,
+      "cpu_median_ms": 656.25,
+      "symbols": []
+    },
+    {
+      "cohort": "shared",
+      "history": 16,
+      "operation": "current_item",
+      "instrumented": true,
+      "n": 3,
+      "wall_median_ms": 660.9583,
+      "wall_min_ms": 659.3004999999999,
+      "wall_max_ms": 693.2627,
+      "cpu_median_ms": 671.875,
+      "symbols": [
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:214:from_bytes",
+          "calls": 401,
+          "inclusive_wall_ms": 7.745299999999997,
+          "exclusive_wall_ms": 7.745299999999997,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:325:parse_schema_json",
+          "calls": 57,
+          "inclusive_wall_ms": 4.9484,
+          "exclusive_wall_ms": 4.9484,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:333:canonical_json_bytes",
+          "calls": 654,
+          "inclusive_wall_ms": 136.9625000000002,
+          "exclusive_wall_ms": 136.9625000000002,
+          "inclusive_cpu_ms": 140.625,
+          "exclusive_cpu_ms": 140.625
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1106:encode",
+          "calls": 188,
+          "inclusive_wall_ms": 18.962300000000006,
+          "exclusive_wall_ms": 2.897799999999999,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1114:decode",
+          "calls": 5,
+          "inclusive_wall_ms": 0.1069,
+          "exclusive_wall_ms": 0.043699999999999996,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1120:fingerprint",
+          "calls": 123,
+          "inclusive_wall_ms": 12.912699999999997,
+          "exclusive_wall_ms": 1.4038,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:217:validate",
+          "calls": 20,
+          "inclusive_wall_ms": 18.8129,
+          "exclusive_wall_ms": 0.8604,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:94:validate",
+          "calls": 40,
+          "inclusive_wall_ms": 18.544599999999996,
+          "exclusive_wall_ms": 16.836900000000004,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 31.25
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:161:canonical_json_bytes",
+          "calls": 19,
+          "inclusive_wall_ms": 37.808800000000005,
+          "exclusive_wall_ms": 0.01580000000000026,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:170:validate",
+          "calls": 20,
+          "inclusive_wall_ms": 34.80970000000001,
+          "exclusive_wall_ms": 0.20569999999999933,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:66:validate",
+          "calls": 20,
+          "inclusive_wall_ms": 10.2631,
+          "exclusive_wall_ms": 0.26220000000000016,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:239:validate_historical",
+          "calls": 1,
+          "inclusive_wall_ms": 12.6212,
+          "exclusive_wall_ms": 3.5100000000000016,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:501:validate_shape",
+          "calls": 1,
+          "inclusive_wall_ms": 3.1916,
+          "exclusive_wall_ms": 0.04899999999999993,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1004:require_stable_path_epoch",
+          "calls": 402,
+          "inclusive_wall_ms": 11.401100000000008,
+          "exclusive_wall_ms": 2.1149000000000022,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1033:read_regular_bounded",
+          "calls": 202,
+          "inclusive_wall_ms": 36.80719999999998,
+          "exclusive_wall_ms": 5.6217,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1063:list_directory_bounded",
+          "calls": 486,
+          "inclusive_wall_ms": 299.4118000000002,
+          "exclusive_wall_ms": 0.42690000000000383,
+          "inclusive_cpu_ms": 296.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1220:acquire_existing_exclusive_lock_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 0.2577,
+          "exclusive_wall_ms": 0.0014000000000000679,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1227:lock_existing",
+          "calls": 1,
+          "inclusive_wall_ms": 0.2562,
+          "exclusive_wall_ms": 0.0041999999999999815,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1247:open_regular_optional",
+          "calls": 603,
+          "inclusive_wall_ms": 89.86910000000005,
+          "exclusive_wall_ms": 0.24200000000000027,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1261:pin_windows_parent",
+          "calls": 1147,
+          "inclusive_wall_ms": 109.30620000000003,
+          "exclusive_wall_ms": 14.16450000000002,
+          "inclusive_cpu_ms": 93.75,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1387:regular_file_snapshot",
+          "calls": 2850,
+          "inclusive_wall_ms": 20.59840000000019,
+          "exclusive_wall_ms": 10.158299999999839,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1635:windows_handle_info",
+          "calls": 20122,
+          "inclusive_wall_ms": 72.42470000000735,
+          "exclusive_wall_ms": 72.42470000000735,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 78.125
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:167:validate",
+          "calls": 2,
+          "inclusive_wall_ms": 0.6557999999999999,
+          "exclusive_wall_ms": 0.0010999999999999899,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1829:open_windows_directory_guard",
+          "calls": 5896,
+          "inclusive_wall_ms": 74.76089999999967,
+          "exclusive_wall_ms": 74.76089999999967,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 46.875
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2362:open_retained_directory",
+          "calls": 57,
+          "inclusive_wall_ms": 7.458700000000001,
+          "exclusive_wall_ms": 0.6613999999999998,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2370:open_regular_optional",
+          "calls": 603,
+          "inclusive_wall_ms": 89.62709999999996,
+          "exclusive_wall_ms": 16.531599999999994,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2395:list_directory",
+          "calls": 486,
+          "inclusive_wall_ms": 298.9874000000002,
+          "exclusive_wall_ms": 233.87280000000013,
+          "inclusive_cpu_ms": 296.875,
+          "exclusive_cpu_ms": 250.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:244:validate",
+          "calls": 4,
+          "inclusive_wall_ms": 69.58500000000001,
+          "exclusive_wall_ms": 13.234599999999997,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:788:retain_work_history_tree_guard_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 72.0904,
+          "exclusive_wall_ms": 0.0016999999999853799,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:804:retain_exact_files_checkpoint_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 0.5902000000000001,
+          "exclusive_wall_ms": 0.04389999999999994,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:849:retain_selected_tree",
+          "calls": 1,
+          "inclusive_wall_ms": 37.674800000000005,
+          "exclusive_wall_ms": 3.6314999999999102,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:27:encode",
+          "calls": 410,
+          "inclusive_wall_ms": 127.40219999999995,
+          "exclusive_wall_ms": 12.005200000000002,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:36:decode",
+          "calls": 49,
+          "inclusive_wall_ms": 6.2318,
+          "exclusive_wall_ms": 1.7578000000000005,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:42:fp",
+          "calls": 163,
+          "inclusive_wall_ms": 130.85590000000008,
+          "exclusive_wall_ms": 15.431899999999995,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/work_state/scope.rs:107:validate",
+          "calls": 33,
+          "inclusive_wall_ms": 0.036899999999999995,
+          "exclusive_wall_ms": 0.023300000000000005,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/scope.rs:210:validate",
+          "calls": 33,
+          "inclusive_wall_ms": 0.4351999999999999,
+          "exclusive_wall_ms": 0.026499999999999996,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:178:validate",
+          "calls": 7,
+          "inclusive_wall_ms": 16.244099999999996,
+          "exclusive_wall_ms": 0.10999999999999943,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:197:inventory",
+          "calls": 1,
+          "inclusive_wall_ms": 344.6309,
+          "exclusive_wall_ms": 0.2925999999999931,
+          "inclusive_cpu_ms": 343.75,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:348:manifest",
+          "calls": 1,
+          "inclusive_wall_ms": 78.8132,
+          "exclusive_wall_ms": 0.12119999999998754,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:549:open",
+          "calls": 1,
+          "inclusive_wall_ms": 5.8956,
+          "exclusive_wall_ms": 0.011100000000000776,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:63:validate",
+          "calls": 1,
+          "inclusive_wall_ms": 2.4413,
+          "exclusive_wall_ms": 0.0006999999999997009,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:692:optional",
+          "calls": 202,
+          "inclusive_wall_ms": 332.1257000000001,
+          "exclusive_wall_ms": 3.6913000000000045,
+          "inclusive_cpu_ms": 328.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:704:required",
+          "calls": 138,
+          "inclusive_wall_ms": 284.40559999999994,
+          "exclusive_wall_ms": 0.06289999999999919,
+          "inclusive_cpu_ms": 265.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/submitted.rs:113:validate",
+          "calls": 15,
+          "inclusive_wall_ms": 0.022000000000000002,
+          "exclusive_wall_ms": 0.0072000000000000015,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:133:output",
+          "calls": 16,
+          "inclusive_wall_ms": 6.7146,
+          "exclusive_wall_ms": 0.42339999999999994,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:200:decision",
+          "calls": 16,
+          "inclusive_wall_ms": 35.092299999999994,
+          "exclusive_wall_ms": 0.4341999999999999,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:206:terminal",
+          "calls": 16,
+          "inclusive_wall_ms": 6.801699999999999,
+          "exclusive_wall_ms": 0.17669999999999997,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:221:publication",
+          "calls": 16,
+          "inclusive_wall_ms": 28.078200000000002,
+          "exclusive_wall_ms": 0.42330000000000023,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:227:noncommit",
+          "calls": 16,
+          "inclusive_wall_ms": 27.9172,
+          "exclusive_wall_ms": 0.42690000000000006,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:233:parsed",
+          "calls": 16,
+          "inclusive_wall_ms": 194.5491,
+          "exclusive_wall_ms": 0.5274999999999874,
+          "inclusive_cpu_ms": 203.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:26:validate",
+          "calls": 16,
+          "inclusive_wall_ms": 44.7749,
+          "exclusive_wall_ms": 0.009700000000001818,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:321:scan",
+          "calls": 1,
+          "inclusive_wall_ms": 648.4086,
+          "exclusive_wall_ms": 1.051200000000108,
+          "inclusive_cpu_ms": 640.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:387:validate_authority_history",
+          "calls": 1,
+          "inclusive_wall_ms": 0.002,
+          "exclusive_wall_ms": 0.002,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:162:validate",
+          "calls": 18,
+          "inclusive_wall_ms": 1.341,
+          "exclusive_wall_ms": 0.12859999999999996,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:214:validate",
+          "calls": 18,
+          "inclusive_wall_ms": 43.68540000000001,
+          "exclusive_wall_ms": 0.18680000000000208,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:315:validate",
+          "calls": 15,
+          "inclusive_wall_ms": 0.2057,
+          "exclusive_wall_ms": 0.014399999999999996,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:355:validate",
+          "calls": 15,
+          "inclusive_wall_ms": 42.11769999999999,
+          "exclusive_wall_ms": 0.19089999999999918,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:39:canonical_json_bytes",
+          "calls": 15,
+          "inclusive_wall_ms": 0.10040000000000002,
+          "exclusive_wall_ms": 0.011499999999999998,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:43:validate",
+          "calls": 63,
+          "inclusive_wall_ms": 0.025700000000000018,
+          "exclusive_wall_ms": 0.025700000000000018,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:89:validate",
+          "calls": 15,
+          "inclusive_wall_ms": 0.0148,
+          "exclusive_wall_ms": 0.009199999999999998,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        }
+      ]
+    },
+    {
+      "cohort": "shared",
+      "history": 31,
+      "operation": "current_item",
+      "instrumented": false,
+      "n": 3,
+      "wall_median_ms": 1280.4317,
+      "wall_min_ms": 1277.3229,
+      "wall_max_ms": 1324.2782,
+      "cpu_median_ms": 1265.625,
+      "symbols": []
+    },
+    {
+      "cohort": "shared",
+      "history": 31,
+      "operation": "current_item",
+      "instrumented": true,
+      "n": 3,
+      "wall_median_ms": 1294.7292,
+      "wall_min_ms": 1292.7584,
+      "wall_max_ms": 1296.5491,
+      "cpu_median_ms": 1296.875,
+      "symbols": [
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:214:from_bytes",
+          "calls": 671,
+          "inclusive_wall_ms": 14.96310000000002,
+          "exclusive_wall_ms": 14.96310000000002,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:325:parse_schema_json",
+          "calls": 72,
+          "inclusive_wall_ms": 9.087999999999997,
+          "exclusive_wall_ms": 9.087999999999997,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 31.25
+        },
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:333:canonical_json_bytes",
+          "calls": 1134,
+          "inclusive_wall_ms": 256.97459999999995,
+          "exclusive_wall_ms": 256.97459999999995,
+          "inclusive_cpu_ms": 250.0,
+          "exclusive_cpu_ms": 250.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1106:encode",
+          "calls": 323,
+          "inclusive_wall_ms": 31.837699999999987,
+          "exclusive_wall_ms": 4.903800000000001,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1114:decode",
+          "calls": 5,
+          "inclusive_wall_ms": 0.106,
+          "exclusive_wall_ms": 0.04429999999999999,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1120:fingerprint",
+          "calls": 213,
+          "inclusive_wall_ms": 22.619899999999998,
+          "exclusive_wall_ms": 2.4940999999999995,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:217:validate",
+          "calls": 35,
+          "inclusive_wall_ms": 33.226600000000005,
+          "exclusive_wall_ms": 1.4910999999999985,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:94:validate",
+          "calls": 70,
+          "inclusive_wall_ms": 33.3449,
+          "exclusive_wall_ms": 30.29780000000001,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 31.25
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:161:canonical_json_bytes",
+          "calls": 34,
+          "inclusive_wall_ms": 68.61540000000001,
+          "exclusive_wall_ms": 0.027699999999998948,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:170:validate",
+          "calls": 35,
+          "inclusive_wall_ms": 61.9944,
+          "exclusive_wall_ms": 0.3757999999999997,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:66:validate",
+          "calls": 35,
+          "inclusive_wall_ms": 18.582399999999996,
+          "exclusive_wall_ms": 0.4850000000000002,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:239:validate_historical",
+          "calls": 1,
+          "inclusive_wall_ms": 12.969899999999999,
+          "exclusive_wall_ms": 3.5396999999999963,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:501:validate_shape",
+          "calls": 1,
+          "inclusive_wall_ms": 3.3405,
+          "exclusive_wall_ms": 0.05080000000000018,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1004:require_stable_path_epoch",
+          "calls": 552,
+          "inclusive_wall_ms": 15.71060000000003,
+          "exclusive_wall_ms": 2.8598000000000052,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1033:read_regular_bounded",
+          "calls": 277,
+          "inclusive_wall_ms": 53.19399999999996,
+          "exclusive_wall_ms": 8.0044,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1063:list_directory_bounded",
+          "calls": 741,
+          "inclusive_wall_ms": 652.8492999999997,
+          "exclusive_wall_ms": 0.6908999999999992,
+          "inclusive_cpu_ms": 609.375,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1220:acquire_existing_exclusive_lock_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 0.24640000000000004,
+          "exclusive_wall_ms": 0.0013999999999999846,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1227:lock_existing",
+          "calls": 1,
+          "inclusive_wall_ms": 0.245,
+          "exclusive_wall_ms": 0.004499999999999976,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1247:open_regular_optional",
+          "calls": 948,
+          "inclusive_wall_ms": 144.46349999999998,
+          "exclusive_wall_ms": 0.3849999999999989,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1261:pin_windows_parent",
+          "calls": 1792,
+          "inclusive_wall_ms": 175.069,
+          "exclusive_wall_ms": 22.106700000000007,
+          "inclusive_cpu_ms": 156.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1387:regular_file_snapshot",
+          "calls": 4740,
+          "inclusive_wall_ms": 34.683700000000144,
+          "exclusive_wall_ms": 17.186199999999385,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 46.875
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1635:windows_handle_info",
+          "calls": 35482,
+          "inclusive_wall_ms": 128.64630000001378,
+          "exclusive_wall_ms": 128.64630000001378,
+          "inclusive_cpu_ms": 109.375,
+          "exclusive_cpu_ms": 109.375
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:167:validate",
+          "calls": 2,
+          "inclusive_wall_ms": 0.6449,
+          "exclusive_wall_ms": 0.0010000000000000564,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1829:open_windows_directory_guard",
+          "calls": 9421,
+          "inclusive_wall_ms": 119.01539999999979,
+          "exclusive_wall_ms": 119.01539999999979,
+          "inclusive_cpu_ms": 93.75,
+          "exclusive_cpu_ms": 93.75
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2362:open_retained_directory",
+          "calls": 102,
+          "inclusive_wall_ms": 13.480900000000002,
+          "exclusive_wall_ms": 1.2256,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2370:open_regular_optional",
+          "calls": 948,
+          "inclusive_wall_ms": 144.08720000000008,
+          "exclusive_wall_ms": 26.442999999999998,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2395:list_directory",
+          "calls": 741,
+          "inclusive_wall_ms": 652.1577999999997,
+          "exclusive_wall_ms": 536.8375000000002,
+          "inclusive_cpu_ms": 609.375,
+          "exclusive_cpu_ms": 515.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:244:validate",
+          "calls": 4,
+          "inclusive_wall_ms": 120.1981,
+          "exclusive_wall_ms": 24.27080000000038,
+          "inclusive_cpu_ms": 109.375,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:788:retain_work_history_tree_guard_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 126.59980000000002,
+          "exclusive_wall_ms": 0.0016999999999853799,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:804:retain_exact_files_checkpoint_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 0.5815,
+          "exclusive_wall_ms": 0.0401999999999999,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:849:retain_selected_tree",
+          "calls": 1,
+          "inclusive_wall_ms": 66.8912,
+          "exclusive_wall_ms": 6.815400000000153,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:27:encode",
+          "calls": 740,
+          "inclusive_wall_ms": 245.3347000000001,
+          "exclusive_wall_ms": 22.912000000000017,
+          "inclusive_cpu_ms": 250.0,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:36:decode",
+          "calls": 64,
+          "inclusive_wall_ms": 11.889199999999999,
+          "exclusive_wall_ms": 3.2759000000000005,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:42:fp",
+          "calls": 313,
+          "inclusive_wall_ms": 257.8322999999999,
+          "exclusive_wall_ms": 30.856900000000003,
+          "inclusive_cpu_ms": 265.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/work_state/scope.rs:107:validate",
+          "calls": 63,
+          "inclusive_wall_ms": 0.0719,
+          "exclusive_wall_ms": 0.04570000000000003,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/scope.rs:210:validate",
+          "calls": 63,
+          "inclusive_wall_ms": 0.8403000000000003,
+          "exclusive_wall_ms": 0.05159999999999999,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:178:validate",
+          "calls": 7,
+          "inclusive_wall_ms": 16.0898,
+          "exclusive_wall_ms": 0.11239999999999917,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:197:inventory",
+          "calls": 1,
+          "inclusive_wall_ms": 715.9187999999999,
+          "exclusive_wall_ms": 0.5262000000000171,
+          "inclusive_cpu_ms": 703.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:348:manifest",
+          "calls": 1,
+          "inclusive_wall_ms": 77.6634,
+          "exclusive_wall_ms": 0.12929999999997221,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:549:open",
+          "calls": 1,
+          "inclusive_wall_ms": 5.6508,
+          "exclusive_wall_ms": 0.011200000000000543,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:63:validate",
+          "calls": 1,
+          "inclusive_wall_ms": 2.4267999999999996,
+          "exclusive_wall_ms": 0.0006999999999997009,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:692:optional",
+          "calls": 277,
+          "inclusive_wall_ms": 694.5777000000002,
+          "exclusive_wall_ms": 5.250499999999997,
+          "inclusive_cpu_ms": 687.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:704:required",
+          "calls": 213,
+          "inclusive_wall_ms": 647.2248999999998,
+          "exclusive_wall_ms": 0.10229999999999934,
+          "inclusive_cpu_ms": 609.375,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/submitted.rs:113:validate",
+          "calls": 30,
+          "inclusive_wall_ms": 0.0438,
+          "exclusive_wall_ms": 0.013800000000000002,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:133:output",
+          "calls": 31,
+          "inclusive_wall_ms": 13.886300000000002,
+          "exclusive_wall_ms": 0.847,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:200:decision",
+          "calls": 31,
+          "inclusive_wall_ms": 68.65990000000001,
+          "exclusive_wall_ms": 0.8330999999999982,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:206:terminal",
+          "calls": 31,
+          "inclusive_wall_ms": 13.349,
+          "exclusive_wall_ms": 0.3574999999999998,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:221:publication",
+          "calls": 31,
+          "inclusive_wall_ms": 55.298,
+          "exclusive_wall_ms": 0.8542000000000007,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:227:noncommit",
+          "calls": 31,
+          "inclusive_wall_ms": 55.474100000000014,
+          "exclusive_wall_ms": 0.8423999999999998,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:233:parsed",
+          "calls": 31,
+          "inclusive_wall_ms": 370.2770999999999,
+          "exclusive_wall_ms": 1.0395999999999965,
+          "inclusive_cpu_ms": 375.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:26:validate",
+          "calls": 31,
+          "inclusive_wall_ms": 88.7132,
+          "exclusive_wall_ms": 0.01959999999999873,
+          "inclusive_cpu_ms": 109.375,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:321:scan",
+          "calls": 1,
+          "inclusive_wall_ms": 1280.1588,
+          "exclusive_wall_ms": 2.001600000000053,
+          "inclusive_cpu_ms": 1281.25,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:387:validate_authority_history",
+          "calls": 1,
+          "inclusive_wall_ms": 0.0012,
+          "exclusive_wall_ms": 0.0012,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:162:validate",
+          "calls": 33,
+          "inclusive_wall_ms": 2.5586999999999995,
+          "exclusive_wall_ms": 0.23579999999999987,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:214:validate",
+          "calls": 33,
+          "inclusive_wall_ms": 83.1713,
+          "exclusive_wall_ms": 0.3567000000000009,
+          "inclusive_cpu_ms": 93.75,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:315:validate",
+          "calls": 30,
+          "inclusive_wall_ms": 0.4302,
+          "exclusive_wall_ms": 0.03019999999999999,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:355:validate",
+          "calls": 30,
+          "inclusive_wall_ms": 85.9611,
+          "exclusive_wall_ms": 0.3901999999999992,
+          "inclusive_cpu_ms": 93.75,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:39:canonical_json_bytes",
+          "calls": 30,
+          "inclusive_wall_ms": 0.20660000000000003,
+          "exclusive_wall_ms": 0.023999999999999994,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:43:validate",
+          "calls": 123,
+          "inclusive_wall_ms": 0.05120000000000003,
+          "exclusive_wall_ms": 0.05120000000000003,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:89:validate",
+          "calls": 30,
+          "inclusive_wall_ms": 0.03030000000000001,
+          "exclusive_wall_ms": 0.0186,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        }
+      ]
+    },
+    {
+      "cohort": "shared",
+      "history": 31,
+      "operation": "registration_effect",
+      "instrumented": true,
+      "n": 1,
+      "wall_median_ms": 7516.3853,
+      "wall_min_ms": 7516.3853,
+      "wall_max_ms": 7516.3853,
+      "cpu_median_ms": 7359.375,
+      "symbols": [
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:214:from_bytes",
+          "calls": 4792,
+          "inclusive_wall_ms": 68.31240000000011,
+          "exclusive_wall_ms": 68.31240000000011,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 78.125
+        },
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:325:parse_schema_json",
+          "calls": 524,
+          "inclusive_wall_ms": 56.646799999999956,
+          "exclusive_wall_ms": 56.646799999999956,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 31.25
+        },
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:333:canonical_json_bytes",
+          "calls": 6398,
+          "inclusive_wall_ms": 1165.9325000000033,
+          "exclusive_wall_ms": 1165.9325000000033,
+          "inclusive_cpu_ms": 1109.375,
+          "exclusive_cpu_ms": 1109.375
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1106:encode",
+          "calls": 1492,
+          "inclusive_wall_ms": 159.64230000000018,
+          "exclusive_wall_ms": 24.544200000000057,
+          "inclusive_cpu_ms": 140.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1114:decode",
+          "calls": 55,
+          "inclusive_wall_ms": 1.7305999999999995,
+          "exclusive_wall_ms": 0.7150999999999997,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1120:fingerprint",
+          "calls": 966,
+          "inclusive_wall_ms": 107.22550000000005,
+          "exclusive_wall_ms": 11.488700000000012,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 31.25
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:217:validate",
+          "calls": 154,
+          "inclusive_wall_ms": 151.1574,
+          "exclusive_wall_ms": 6.5112,
+          "inclusive_cpu_ms": 140.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:915:validate",
+          "calls": 10,
+          "inclusive_wall_ms": 10.3169,
+          "exclusive_wall_ms": 0.3964000000000001,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:94:validate",
+          "calls": 307,
+          "inclusive_wall_ms": 151.88400000000001,
+          "exclusive_wall_ms": 138.02050000000006,
+          "inclusive_cpu_ms": 156.25,
+          "exclusive_cpu_ms": 125.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:161:canonical_json_bytes",
+          "calls": 138,
+          "inclusive_wall_ms": 285.7325999999999,
+          "exclusive_wall_ms": 0.12170000000000547,
+          "inclusive_cpu_ms": 265.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:170:validate",
+          "calls": 153,
+          "inclusive_wall_ms": 279.6883,
+          "exclusive_wall_ms": 1.6614999999999958,
+          "inclusive_cpu_ms": 265.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:66:validate",
+          "calls": 153,
+          "inclusive_wall_ms": 83.14719999999997,
+          "exclusive_wall_ms": 2.0856999999999997,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:912:work_registration_current",
+          "calls": 10,
+          "inclusive_wall_ms": 818.0473000000001,
+          "exclusive_wall_ms": 168.84700000000035,
+          "inclusive_cpu_ms": 750.0,
+          "exclusive_cpu_ms": 203.125
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:156:with_work_registration_establishment",
+          "calls": 1,
+          "inclusive_wall_ms": 6210.2776,
+          "exclusive_wall_ms": 11.363399999999274,
+          "inclusive_cpu_ms": 6046.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:239:validate_historical",
+          "calls": 5,
+          "inclusive_wall_ms": 64.6299,
+          "exclusive_wall_ms": 17.81879999999998,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:41:validate_current",
+          "calls": 8,
+          "inclusive_wall_ms": 744.4966999999999,
+          "exclusive_wall_ms": 0.08429999999999893,
+          "inclusive_cpu_ms": 687.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:501:validate_shape",
+          "calls": 6,
+          "inclusive_wall_ms": 20.2385,
+          "exclusive_wall_ms": 0.3017999999999996,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:57:capture_proof",
+          "calls": 1,
+          "inclusive_wall_ms": 295.61969999999997,
+          "exclusive_wall_ms": 21.08819999999986,
+          "inclusive_cpu_ms": 234.375,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1004:require_stable_path_epoch",
+          "calls": 4458,
+          "inclusive_wall_ms": 131.11710000000008,
+          "exclusive_wall_ms": 23.939299999999214,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1033:read_regular_bounded",
+          "calls": 2039,
+          "inclusive_wall_ms": 402.2036,
+          "exclusive_wall_ms": 59.06069999999997,
+          "inclusive_cpu_ms": 390.625,
+          "exclusive_cpu_ms": 109.375
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1063:list_directory_bounded",
+          "calls": 5527,
+          "inclusive_wall_ms": 3889.3610000000012,
+          "exclusive_wall_ms": 5.3301999999999365,
+          "inclusive_cpu_ms": 3796.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1093:write_new_durable",
+          "calls": 6,
+          "inclusive_wall_ms": 10.375700000000002,
+          "exclusive_wall_ms": 9.5389,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1106:rename_noreplace_durable",
+          "calls": 2,
+          "inclusive_wall_ms": 3.9572000000000003,
+          "exclusive_wall_ms": 2.6882,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1131:replace_exact_durable",
+          "calls": 1,
+          "inclusive_wall_ms": 7.4587,
+          "exclusive_wall_ms": 2.0505000000000004,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1220:acquire_existing_exclusive_lock_v1",
+          "calls": 7,
+          "inclusive_wall_ms": 1.8097,
+          "exclusive_wall_ms": 0.007600000000000107,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1227:lock_existing",
+          "calls": 7,
+          "inclusive_wall_ms": 1.8020999999999998,
+          "exclusive_wall_ms": 0.026799999999999935,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1247:open_regular_optional",
+          "calls": 6195,
+          "inclusive_wall_ms": 960.8899999999956,
+          "exclusive_wall_ms": 2.6182999999999534,
+          "inclusive_cpu_ms": 937.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1261:pin_windows_parent",
+          "calls": 12328,
+          "inclusive_wall_ms": 1209.6739999999927,
+          "exclusive_wall_ms": 152.03279999999998,
+          "inclusive_cpu_ms": 1187.5,
+          "exclusive_cpu_ms": 171.875
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1387:regular_file_snapshot",
+          "calls": 30129,
+          "inclusive_wall_ms": 221.7013999999991,
+          "exclusive_wall_ms": 110.32320000000767,
+          "inclusive_cpu_ms": 218.75,
+          "exclusive_cpu_ms": 125.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1635:windows_handle_info",
+          "calls": 226498,
+          "inclusive_wall_ms": 827.6499999994634,
+          "exclusive_wall_ms": 827.6499999994634,
+          "inclusive_cpu_ms": 968.75,
+          "exclusive_cpu_ms": 968.75
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:167:validate",
+          "calls": 14,
+          "inclusive_wall_ms": 169.7112,
+          "exclusive_wall_ms": 0.0071999999999942665,
+          "inclusive_cpu_ms": 156.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1829:open_windows_directory_guard",
+          "calls": 65491,
+          "inclusive_wall_ms": 854.5471999998715,
+          "exclusive_wall_ms": 854.5471999998715,
+          "inclusive_cpu_ms": 625.0,
+          "exclusive_cpu_ms": 625.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2362:open_retained_directory",
+          "calls": 574,
+          "inclusive_wall_ms": 74.54040000000002,
+          "exclusive_wall_ms": 6.7024000000000195,
+          "inclusive_cpu_ms": 93.75,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2370:open_regular_optional",
+          "calls": 6203,
+          "inclusive_wall_ms": 963.6701999999987,
+          "exclusive_wall_ms": 184.18409999999946,
+          "inclusive_cpu_ms": 937.5,
+          "exclusive_cpu_ms": 171.875
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2395:list_directory",
+          "calls": 5527,
+          "inclusive_wall_ms": 3884.03080000001,
+          "exclusive_wall_ms": 3093.4801000000016,
+          "inclusive_cpu_ms": 3796.875,
+          "exclusive_cpu_ms": 3093.75
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:244:validate",
+          "calls": 31,
+          "inclusive_wall_ms": 759.7606,
+          "exclusive_wall_ms": 144.33010000000036,
+          "inclusive_cpu_ms": 734.375,
+          "exclusive_cpu_ms": 125.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:788:retain_work_history_tree_guard_v1",
+          "calls": 4,
+          "inclusive_wall_ms": 542.3426999999999,
+          "exclusive_wall_ms": 0.00719999999998322,
+          "inclusive_cpu_ms": 546.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:804:retain_exact_files_checkpoint_v1",
+          "calls": 6,
+          "inclusive_wall_ms": 105.2534,
+          "exclusive_wall_ms": 6.873299999999847,
+          "inclusive_cpu_ms": 93.75,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:849:retain_selected_tree",
+          "calls": 5,
+          "inclusive_wall_ms": 311.7491,
+          "exclusive_wall_ms": 29.18090000000037,
+          "inclusive_cpu_ms": 312.5,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:27:encode",
+          "calls": 3173,
+          "inclusive_wall_ms": 1016.6447000000036,
+          "exclusive_wall_ms": 95.14389999999985,
+          "inclusive_cpu_ms": 1015.625,
+          "exclusive_cpu_ms": 93.75
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:36:decode",
+          "calls": 320,
+          "inclusive_wall_ms": 48.895800000000015,
+          "exclusive_wall_ms": 14.209900000000001,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:42:fp",
+          "calls": 1279,
+          "inclusive_wall_ms": 1058.2934000000012,
+          "exclusive_wall_ms": 126.11719999999994,
+          "inclusive_cpu_ms": 1093.75,
+          "exclusive_cpu_ms": 156.25
+        },
+        {
+          "symbol": "crates/engine/src/work_state/scope.rs:107:validate",
+          "calls": 258,
+          "inclusive_wall_ms": 0.30080000000000084,
+          "exclusive_wall_ms": 0.19109999999999996,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/scope.rs:210:validate",
+          "calls": 258,
+          "inclusive_wall_ms": 3.512299999999996,
+          "exclusive_wall_ms": 0.23020000000000018,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:178:validate",
+          "calls": 34,
+          "inclusive_wall_ms": 79.79169999999999,
+          "exclusive_wall_ms": 0.5785000000000005,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:197:inventory",
+          "calls": 5,
+          "inclusive_wall_ms": 3715.1600000000003,
+          "exclusive_wall_ms": 2.7836000000003196,
+          "inclusive_cpu_ms": 3687.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:348:manifest",
+          "calls": 6,
+          "inclusive_wall_ms": 479.01140000000004,
+          "exclusive_wall_ms": 0.8733999999999327,
+          "inclusive_cpu_ms": 484.375,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:438:reserve_intent",
+          "calls": 1,
+          "inclusive_wall_ms": 805.6304,
+          "exclusive_wall_ms": 0.05169999999998254,
+          "inclusive_cpu_ms": 796.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:549:open",
+          "calls": 2,
+          "inclusive_wall_ms": 11.7589,
+          "exclusive_wall_ms": 0.022800000000000153,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:63:validate",
+          "calls": 2,
+          "inclusive_wall_ms": 4.8846,
+          "exclusive_wall_ms": 0.0017999999999993577,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:692:optional",
+          "calls": 1491,
+          "inclusive_wall_ms": 3700.4563999999987,
+          "exclusive_wall_ms": 29.709000000000014,
+          "inclusive_cpu_ms": 3734.375,
+          "exclusive_cpu_ms": 31.25
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:704:required",
+          "calls": 1100,
+          "inclusive_wall_ms": 3382.4733000000056,
+          "exclusive_wall_ms": 0.6473999999999894,
+          "inclusive_cpu_ms": 3421.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:715:write_exact",
+          "calls": 5,
+          "inclusive_wall_ms": 29.7763,
+          "exclusive_wall_ms": 0.007699999999998042,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/submitted.rs:113:validate",
+          "calls": 126,
+          "inclusive_wall_ms": 0.19140000000000018,
+          "exclusive_wall_ms": 0.06260000000000002,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:133:output",
+          "calls": 128,
+          "inclusive_wall_ms": 57.801700000000004,
+          "exclusive_wall_ms": 3.551000000000002,
+          "inclusive_cpu_ms": 93.75,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:200:decision",
+          "calls": 128,
+          "inclusive_wall_ms": 289.26760000000013,
+          "exclusive_wall_ms": 3.4625999999999992,
+          "inclusive_cpu_ms": 296.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:206:terminal",
+          "calls": 128,
+          "inclusive_wall_ms": 56.144400000000026,
+          "exclusive_wall_ms": 1.485899999999999,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:221:publication",
+          "calls": 128,
+          "inclusive_wall_ms": 230.57329999999996,
+          "exclusive_wall_ms": 3.4476000000000013,
+          "inclusive_cpu_ms": 171.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:227:noncommit",
+          "calls": 127,
+          "inclusive_wall_ms": 226.4155999999999,
+          "exclusive_wall_ms": 3.3899000000000012,
+          "inclusive_cpu_ms": 265.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:233:parsed",
+          "calls": 126,
+          "inclusive_wall_ms": 1519.6571000000006,
+          "exclusive_wall_ms": 4.2690000000000055,
+          "inclusive_cpu_ms": 1500.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:26:validate",
+          "calls": 128,
+          "inclusive_wall_ms": 372.9303999999999,
+          "exclusive_wall_ms": 0.0821999999999985,
+          "inclusive_cpu_ms": 375.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:321:scan",
+          "calls": 4,
+          "inclusive_wall_ms": 5334.0113,
+          "exclusive_wall_ms": 9.056299999999737,
+          "inclusive_cpu_ms": 5296.875,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:387:validate_authority_history",
+          "calls": 4,
+          "inclusive_wall_ms": 0.005999999999999999,
+          "exclusive_wall_ms": 0.005999999999999999,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:162:validate",
+          "calls": 132,
+          "inclusive_wall_ms": 10.2764,
+          "exclusive_wall_ms": 0.9822000000000002,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:214:validate",
+          "calls": 132,
+          "inclusive_wall_ms": 331.6456000000002,
+          "exclusive_wall_ms": 1.4357999999999977,
+          "inclusive_cpu_ms": 312.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:315:validate",
+          "calls": 126,
+          "inclusive_wall_ms": 1.9312000000000018,
+          "exclusive_wall_ms": 0.1423,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:355:validate",
+          "calls": 126,
+          "inclusive_wall_ms": 367.8472999999999,
+          "exclusive_wall_ms": 1.6335000000000002,
+          "inclusive_cpu_ms": 343.75,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:39:canonical_json_bytes",
+          "calls": 124,
+          "inclusive_wall_ms": 0.9242000000000005,
+          "exclusive_wall_ms": 0.11089999999999992,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:43:validate",
+          "calls": 508,
+          "inclusive_wall_ms": 0.21800000000000022,
+          "exclusive_wall_ms": 0.21800000000000022,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:89:validate",
+          "calls": 126,
+          "inclusive_wall_ms": 0.12880000000000005,
+          "exclusive_wall_ms": 0.07850000000000014,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        }
+      ]
+    },
+    {
+      "cohort": "shared",
+      "history": 32,
+      "operation": "current_item",
+      "instrumented": false,
+      "n": 3,
+      "wall_median_ms": 1328.7565,
+      "wall_min_ms": 1321.9196,
+      "wall_max_ms": 1337.5492,
+      "cpu_median_ms": 1312.5,
+      "symbols": []
+    },
+    {
+      "cohort": "shared",
+      "history": 32,
+      "operation": "current_item",
+      "instrumented": true,
+      "n": 3,
+      "wall_median_ms": 1353.2984999999999,
+      "wall_min_ms": 1348.0783999999999,
+      "wall_max_ms": 1358.8854000000001,
+      "cpu_median_ms": 1328.125,
+      "symbols": [
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:214:from_bytes",
+          "calls": 689,
+          "inclusive_wall_ms": 15.477500000000024,
+          "exclusive_wall_ms": 15.477500000000024,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:325:parse_schema_json",
+          "calls": 73,
+          "inclusive_wall_ms": 9.1989,
+          "exclusive_wall_ms": 9.1989,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:333:canonical_json_bytes",
+          "calls": 1166,
+          "inclusive_wall_ms": 263.71720000000005,
+          "exclusive_wall_ms": 263.71720000000005,
+          "inclusive_cpu_ms": 250.0,
+          "exclusive_cpu_ms": 250.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1106:encode",
+          "calls": 332,
+          "inclusive_wall_ms": 33.00260000000002,
+          "exclusive_wall_ms": 5.148900000000002,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1114:decode",
+          "calls": 5,
+          "inclusive_wall_ms": 0.11130000000000001,
+          "exclusive_wall_ms": 0.047599999999999996,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1120:fingerprint",
+          "calls": 219,
+          "inclusive_wall_ms": 23.38199999999998,
+          "exclusive_wall_ms": 2.4978,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:217:validate",
+          "calls": 36,
+          "inclusive_wall_ms": 34.06819999999999,
+          "exclusive_wall_ms": 1.4875000000000007,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:94:validate",
+          "calls": 72,
+          "inclusive_wall_ms": 33.885999999999996,
+          "exclusive_wall_ms": 30.726399999999995,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:161:canonical_json_bytes",
+          "calls": 35,
+          "inclusive_wall_ms": 70.55420000000002,
+          "exclusive_wall_ms": 0.028500000000000858,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:170:validate",
+          "calls": 36,
+          "inclusive_wall_ms": 63.51,
+          "exclusive_wall_ms": 0.38390000000000013,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:66:validate",
+          "calls": 36,
+          "inclusive_wall_ms": 18.8842,
+          "exclusive_wall_ms": 0.48430000000000023,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:239:validate_historical",
+          "calls": 1,
+          "inclusive_wall_ms": 13.3008,
+          "exclusive_wall_ms": 3.6386999999999965,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:501:validate_shape",
+          "calls": 1,
+          "inclusive_wall_ms": 3.469,
+          "exclusive_wall_ms": 0.052199999999999136,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1004:require_stable_path_epoch",
+          "calls": 562,
+          "inclusive_wall_ms": 16.38650000000003,
+          "exclusive_wall_ms": 2.9928000000000003,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1033:read_regular_bounded",
+          "calls": 282,
+          "inclusive_wall_ms": 55.88930000000003,
+          "exclusive_wall_ms": 8.458199999999998,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1063:list_directory_bounded",
+          "calls": 758,
+          "inclusive_wall_ms": 694.779599999999,
+          "exclusive_wall_ms": 0.7341999999999961,
+          "inclusive_cpu_ms": 687.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1220:acquire_existing_exclusive_lock_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 0.2569,
+          "exclusive_wall_ms": 0.0015000000000000568,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1227:lock_existing",
+          "calls": 1,
+          "inclusive_wall_ms": 0.25539999999999996,
+          "exclusive_wall_ms": 0.0050000000000000044,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1247:open_regular_optional",
+          "calls": 971,
+          "inclusive_wall_ms": 149.87609999999984,
+          "exclusive_wall_ms": 0.39729999999999804,
+          "inclusive_cpu_ms": 171.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1261:pin_windows_parent",
+          "calls": 1835,
+          "inclusive_wall_ms": 182.30340000000015,
+          "exclusive_wall_ms": 22.921200000000013,
+          "inclusive_cpu_ms": 171.875,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1387:regular_file_snapshot",
+          "calls": 4866,
+          "inclusive_wall_ms": 35.42599999999982,
+          "exclusive_wall_ms": 17.603899999999364,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1635:windows_handle_info",
+          "calls": 36586,
+          "inclusive_wall_ms": 133.59309999999257,
+          "exclusive_wall_ms": 133.59309999999257,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 125.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:167:validate",
+          "calls": 2,
+          "inclusive_wall_ms": 0.6419,
+          "exclusive_wall_ms": 0.0009000000000000119,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1829:open_windows_directory_guard",
+          "calls": 9656,
+          "inclusive_wall_ms": 124.5983000000011,
+          "exclusive_wall_ms": 124.5983000000011,
+          "inclusive_cpu_ms": 140.625,
+          "exclusive_cpu_ms": 140.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2362:open_retained_directory",
+          "calls": 105,
+          "inclusive_wall_ms": 13.8303,
+          "exclusive_wall_ms": 1.2704999999999995,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2370:open_regular_optional",
+          "calls": 971,
+          "inclusive_wall_ms": 149.47880000000006,
+          "exclusive_wall_ms": 27.484899999999968,
+          "inclusive_cpu_ms": 156.25,
+          "exclusive_cpu_ms": 31.25
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2395:list_directory",
+          "calls": 758,
+          "inclusive_wall_ms": 694.0322000000004,
+          "exclusive_wall_ms": 572.661,
+          "inclusive_cpu_ms": 687.5,
+          "exclusive_cpu_ms": 593.75
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:244:validate",
+          "calls": 4,
+          "inclusive_wall_ms": 124.4621,
+          "exclusive_wall_ms": 25.31710000000027,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:788:retain_work_history_tree_guard_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 129.9836,
+          "exclusive_wall_ms": 0.0017000000000280124,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:804:retain_exact_files_checkpoint_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 0.5842,
+          "exclusive_wall_ms": 0.04190000000000005,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:849:retain_selected_tree",
+          "calls": 1,
+          "inclusive_wall_ms": 67.9861,
+          "exclusive_wall_ms": 7.018199999999872,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:27:encode",
+          "calls": 762,
+          "inclusive_wall_ms": 250.18369999999948,
+          "exclusive_wall_ms": 23.16149999999999,
+          "inclusive_cpu_ms": 218.75,
+          "exclusive_cpu_ms": 31.25
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:36:decode",
+          "calls": 65,
+          "inclusive_wall_ms": 12.1524,
+          "exclusive_wall_ms": 3.4474999999999993,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:42:fp",
+          "calls": 323,
+          "inclusive_wall_ms": 262.8308999999999,
+          "exclusive_wall_ms": 31.339999999999982,
+          "inclusive_cpu_ms": 281.25,
+          "exclusive_cpu_ms": 62.5
+        },
+        {
+          "symbol": "crates/engine/src/work_state/scope.rs:107:validate",
+          "calls": 65,
+          "inclusive_wall_ms": 0.07339999999999998,
+          "exclusive_wall_ms": 0.045700000000000005,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/scope.rs:210:validate",
+          "calls": 65,
+          "inclusive_wall_ms": 0.8600000000000004,
+          "exclusive_wall_ms": 0.05319999999999998,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:178:validate",
+          "calls": 7,
+          "inclusive_wall_ms": 16.6222,
+          "exclusive_wall_ms": 0.11509999999999954,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:197:inventory",
+          "calls": 1,
+          "inclusive_wall_ms": 760.7096,
+          "exclusive_wall_ms": 0.5782000000008338,
+          "inclusive_cpu_ms": 750.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:348:manifest",
+          "calls": 1,
+          "inclusive_wall_ms": 80.87370000000001,
+          "exclusive_wall_ms": 0.1402000000000072,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:549:open",
+          "calls": 1,
+          "inclusive_wall_ms": 5.9403,
+          "exclusive_wall_ms": 0.010800000000000587,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:63:validate",
+          "calls": 1,
+          "inclusive_wall_ms": 2.4895,
+          "exclusive_wall_ms": 0.000700000000000145,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:692:optional",
+          "calls": 282,
+          "inclusive_wall_ms": 737.9732000000002,
+          "exclusive_wall_ms": 5.544200000000001,
+          "inclusive_cpu_ms": 750.0,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:704:required",
+          "calls": 218,
+          "inclusive_wall_ms": 687.8846999999997,
+          "exclusive_wall_ms": 0.10550000000000098,
+          "inclusive_cpu_ms": 703.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/submitted.rs:113:validate",
+          "calls": 31,
+          "inclusive_wall_ms": 0.04630000000000001,
+          "exclusive_wall_ms": 0.014400000000000003,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:133:output",
+          "calls": 32,
+          "inclusive_wall_ms": 13.950700000000001,
+          "exclusive_wall_ms": 0.8533,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:200:decision",
+          "calls": 32,
+          "inclusive_wall_ms": 70.87529999999998,
+          "exclusive_wall_ms": 0.8640000000000008,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:206:terminal",
+          "calls": 32,
+          "inclusive_wall_ms": 13.6865,
+          "exclusive_wall_ms": 0.35900000000000015,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:221:publication",
+          "calls": 32,
+          "inclusive_wall_ms": 56.872899999999994,
+          "exclusive_wall_ms": 0.8588000000000007,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:227:noncommit",
+          "calls": 32,
+          "inclusive_wall_ms": 56.51260000000001,
+          "exclusive_wall_ms": 0.8567999999999993,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:233:parsed",
+          "calls": 32,
+          "inclusive_wall_ms": 381.62279999999987,
+          "exclusive_wall_ms": 1.0618999999999836,
+          "inclusive_cpu_ms": 375.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:26:validate",
+          "calls": 32,
+          "inclusive_wall_ms": 91.27730000000001,
+          "exclusive_wall_ms": 0.020200000000001772,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:321:scan",
+          "calls": 1,
+          "inclusive_wall_ms": 1340.6355999999998,
+          "exclusive_wall_ms": 2.0415999999997894,
+          "inclusive_cpu_ms": 1312.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:387:validate_authority_history",
+          "calls": 1,
+          "inclusive_wall_ms": 0.0013,
+          "exclusive_wall_ms": 0.0013,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:162:validate",
+          "calls": 34,
+          "inclusive_wall_ms": 2.5852,
+          "exclusive_wall_ms": 0.2436000000000001,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:214:validate",
+          "calls": 34,
+          "inclusive_wall_ms": 83.8197,
+          "exclusive_wall_ms": 0.3641000000000014,
+          "inclusive_cpu_ms": 62.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:315:validate",
+          "calls": 31,
+          "inclusive_wall_ms": 0.43750000000000006,
+          "exclusive_wall_ms": 0.030600000000000016,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:355:validate",
+          "calls": 31,
+          "inclusive_wall_ms": 88.38509999999998,
+          "exclusive_wall_ms": 0.3949000000000016,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:39:canonical_json_bytes",
+          "calls": 31,
+          "inclusive_wall_ms": 0.21599999999999997,
+          "exclusive_wall_ms": 0.025000000000000005,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:43:validate",
+          "calls": 127,
+          "inclusive_wall_ms": 0.053200000000000025,
+          "exclusive_wall_ms": 0.053200000000000025,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:89:validate",
+          "calls": 31,
+          "inclusive_wall_ms": 0.03190000000000001,
+          "exclusive_wall_ms": 0.019699999999999995,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        }
+      ]
+    },
+    {
+      "cohort": "distinct",
+      "history": 16,
+      "operation": "current_item",
+      "instrumented": false,
+      "n": 3,
+      "wall_median_ms": 685.5310999999999,
+      "wall_min_ms": 674.1672,
+      "wall_max_ms": 686.0473999999999,
+      "cpu_median_ms": 671.875,
+      "symbols": []
+    },
+    {
+      "cohort": "distinct",
+      "history": 16,
+      "operation": "current_item",
+      "instrumented": true,
+      "n": 3,
+      "wall_median_ms": 689.9159999999999,
+      "wall_min_ms": 680.3399,
+      "wall_max_ms": 693.7764,
+      "cpu_median_ms": 687.5,
+      "symbols": [
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:214:from_bytes",
+          "calls": 517,
+          "inclusive_wall_ms": 9.0995,
+          "exclusive_wall_ms": 9.0995,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:325:parse_schema_json",
+          "calls": 67,
+          "inclusive_wall_ms": 5.6629,
+          "exclusive_wall_ms": 5.6629,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/definition_identity.rs:333:canonical_json_bytes",
+          "calls": 712,
+          "inclusive_wall_ms": 151.58450000000013,
+          "exclusive_wall_ms": 151.58450000000013,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 125.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1106:encode",
+          "calls": 214,
+          "inclusive_wall_ms": 23.5466,
+          "exclusive_wall_ms": 3.4415999999999998,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1114:decode",
+          "calls": 10,
+          "inclusive_wall_ms": 0.214,
+          "exclusive_wall_ms": 0.0883,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:1120:fingerprint",
+          "calls": 138,
+          "inclusive_wall_ms": 14.827300000000008,
+          "exclusive_wall_ms": 1.6126000000000003,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:217:validate",
+          "calls": 22,
+          "inclusive_wall_ms": 20.9443,
+          "exclusive_wall_ms": 0.9091999999999996,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority.rs:94:validate",
+          "calls": 44,
+          "inclusive_wall_ms": 20.750400000000003,
+          "exclusive_wall_ms": 18.8397,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:161:canonical_json_bytes",
+          "calls": 20,
+          "inclusive_wall_ms": 40.393399999999986,
+          "exclusive_wall_ms": 0.016499999999999515,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:170:validate",
+          "calls": 22,
+          "inclusive_wall_ms": 38.949799999999996,
+          "exclusive_wall_ms": 0.23309999999999964,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/local_check.rs:66:validate",
+          "calls": 22,
+          "inclusive_wall_ms": 11.5295,
+          "exclusive_wall_ms": 0.2895,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:239:validate_historical",
+          "calls": 2,
+          "inclusive_wall_ms": 25.8648,
+          "exclusive_wall_ms": 7.014499999999993,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/local_authority/work_registration.rs:501:validate_shape",
+          "calls": 2,
+          "inclusive_wall_ms": 6.7638,
+          "exclusive_wall_ms": 0.12840000000000185,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1004:require_stable_path_epoch",
+          "calls": 402,
+          "inclusive_wall_ms": 11.800400000000005,
+          "exclusive_wall_ms": 2.142300000000002,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1033:read_regular_bounded",
+          "calls": 202,
+          "inclusive_wall_ms": 36.79450000000001,
+          "exclusive_wall_ms": 4.9841000000000015,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1063:list_directory_bounded",
+          "calls": 486,
+          "inclusive_wall_ms": 300.29329999999993,
+          "exclusive_wall_ms": 0.4567000000000013,
+          "inclusive_cpu_ms": 328.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1220:acquire_existing_exclusive_lock_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 0.256,
+          "exclusive_wall_ms": 0.0015000000000000013,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1227:lock_existing",
+          "calls": 1,
+          "inclusive_wall_ms": 0.2545,
+          "exclusive_wall_ms": 0.0050000000000000044,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1247:open_regular_optional",
+          "calls": 603,
+          "inclusive_wall_ms": 89.37530000000001,
+          "exclusive_wall_ms": 0.23989999999999978,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1261:pin_windows_parent",
+          "calls": 1147,
+          "inclusive_wall_ms": 109.3288000000002,
+          "exclusive_wall_ms": 14.01310000000002,
+          "inclusive_cpu_ms": 140.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1387:regular_file_snapshot",
+          "calls": 2850,
+          "inclusive_wall_ms": 20.76029999999987,
+          "exclusive_wall_ms": 10.291499999999813,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1635:windows_handle_info",
+          "calls": 20122,
+          "inclusive_wall_ms": 72.36850000001027,
+          "exclusive_wall_ms": 72.36850000001027,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 125.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:167:validate",
+          "calls": 2,
+          "inclusive_wall_ms": 0.6376999999999999,
+          "exclusive_wall_ms": 0.0008999999999999564,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:1829:open_windows_directory_guard",
+          "calls": 5896,
+          "inclusive_wall_ms": 75.45789999999906,
+          "exclusive_wall_ms": 75.45789999999906,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 46.875
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2362:open_retained_directory",
+          "calls": 57,
+          "inclusive_wall_ms": 7.385600000000001,
+          "exclusive_wall_ms": 0.6654,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2370:open_regular_optional",
+          "calls": 603,
+          "inclusive_wall_ms": 89.13440000000004,
+          "exclusive_wall_ms": 16.39070000000001,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:2395:list_directory",
+          "calls": 486,
+          "inclusive_wall_ms": 299.8416999999999,
+          "exclusive_wall_ms": 234.6031,
+          "inclusive_cpu_ms": 328.125,
+          "exclusive_cpu_ms": 265.625
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:244:validate",
+          "calls": 4,
+          "inclusive_wall_ms": 69.6175,
+          "exclusive_wall_ms": 14.005200000000052,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:788:retain_work_history_tree_guard_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 73.3419,
+          "exclusive_wall_ms": 0.0016999999999995907,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:804:retain_exact_files_checkpoint_v1",
+          "calls": 1,
+          "inclusive_wall_ms": 0.5747,
+          "exclusive_wall_ms": 0.04090000000000005,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/repository_durability.rs:849:retain_selected_tree",
+          "calls": 1,
+          "inclusive_wall_ms": 38.558299999999996,
+          "exclusive_wall_ms": 3.974499999999928,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:27:encode",
+          "calls": 404,
+          "inclusive_wall_ms": 135.00909999999996,
+          "exclusive_wall_ms": 12.363299999999997,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:36:decode",
+          "calls": 49,
+          "inclusive_wall_ms": 6.495500000000001,
+          "exclusive_wall_ms": 1.8397999999999999,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/mod.rs:42:fp",
+          "calls": 160,
+          "inclusive_wall_ms": 139.5605999999999,
+          "exclusive_wall_ms": 15.996200000000002,
+          "inclusive_cpu_ms": 125.0,
+          "exclusive_cpu_ms": 15.625
+        },
+        {
+          "symbol": "crates/engine/src/work_state/scope.rs:107:validate",
+          "calls": 32,
+          "inclusive_wall_ms": 0.03710000000000001,
+          "exclusive_wall_ms": 0.0227,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/scope.rs:210:validate",
+          "calls": 32,
+          "inclusive_wall_ms": 0.4240000000000001,
+          "exclusive_wall_ms": 0.02669999999999999,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:178:validate",
+          "calls": 7,
+          "inclusive_wall_ms": 16.0955,
+          "exclusive_wall_ms": 0.11129999999999907,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:197:inventory",
+          "calls": 1,
+          "inclusive_wall_ms": 346.3436,
+          "exclusive_wall_ms": 0.2959999999998786,
+          "inclusive_cpu_ms": 343.75,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:348:manifest",
+          "calls": 1,
+          "inclusive_wall_ms": 78.8721,
+          "exclusive_wall_ms": 0.12040000000004625,
+          "inclusive_cpu_ms": 78.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:549:open",
+          "calls": 1,
+          "inclusive_wall_ms": 5.5775,
+          "exclusive_wall_ms": 0.011199999999999655,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:63:validate",
+          "calls": 1,
+          "inclusive_wall_ms": 2.3725,
+          "exclusive_wall_ms": 0.000700000000000145,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:692:optional",
+          "calls": 202,
+          "inclusive_wall_ms": 333.5680000000001,
+          "exclusive_wall_ms": 3.7223000000000006,
+          "inclusive_cpu_ms": 328.125,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/store.rs:704:required",
+          "calls": 138,
+          "inclusive_wall_ms": 284.94249999999977,
+          "exclusive_wall_ms": 0.06510000000000118,
+          "inclusive_cpu_ms": 281.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/submitted.rs:113:validate",
+          "calls": 14,
+          "inclusive_wall_ms": 0.020700000000000003,
+          "exclusive_wall_ms": 0.006600000000000002,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:133:output",
+          "calls": 16,
+          "inclusive_wall_ms": 6.3624,
+          "exclusive_wall_ms": 0.41470000000000007,
+          "inclusive_cpu_ms": 15.625,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:200:decision",
+          "calls": 16,
+          "inclusive_wall_ms": 37.418800000000005,
+          "exclusive_wall_ms": 0.46299999999999986,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:206:terminal",
+          "calls": 16,
+          "inclusive_wall_ms": 6.7235,
+          "exclusive_wall_ms": 0.1751000000000002,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:221:publication",
+          "calls": 16,
+          "inclusive_wall_ms": 30.4752,
+          "exclusive_wall_ms": 0.443300000000002,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:227:noncommit",
+          "calls": 16,
+          "inclusive_wall_ms": 30.199500000000008,
+          "exclusive_wall_ms": 0.4542999999999986,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:233:parsed",
+          "calls": 16,
+          "inclusive_wall_ms": 219.38689999999997,
+          "exclusive_wall_ms": 0.5600000000000094,
+          "inclusive_cpu_ms": 218.75,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:26:validate",
+          "calls": 16,
+          "inclusive_wall_ms": 45.5937,
+          "exclusive_wall_ms": 0.01049999999999951,
+          "inclusive_cpu_ms": 46.875,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:321:scan",
+          "calls": 1,
+          "inclusive_wall_ms": 678.0943000000001,
+          "exclusive_wall_ms": 1.0330000000000155,
+          "inclusive_cpu_ms": 687.5,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/transaction.rs:387:validate_authority_history",
+          "calls": 1,
+          "inclusive_wall_ms": 0.0577,
+          "exclusive_wall_ms": 0.030400000000000003,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:162:validate",
+          "calls": 18,
+          "inclusive_wall_ms": 1.3977,
+          "exclusive_wall_ms": 0.12980000000000005,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:214:validate",
+          "calls": 18,
+          "inclusive_wall_ms": 44.509199999999986,
+          "exclusive_wall_ms": 0.18960000000000132,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:315:validate",
+          "calls": 14,
+          "inclusive_wall_ms": 0.19760000000000003,
+          "exclusive_wall_ms": 0.013500000000000002,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:355:validate",
+          "calls": 14,
+          "inclusive_wall_ms": 40.3458,
+          "exclusive_wall_ms": 0.17779999999999907,
+          "inclusive_cpu_ms": 31.25,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:39:canonical_json_bytes",
+          "calls": 14,
+          "inclusive_wall_ms": 0.10450000000000001,
+          "exclusive_wall_ms": 0.0121,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:43:validate",
+          "calls": 60,
+          "inclusive_wall_ms": 0.026100000000000022,
+          "exclusive_wall_ms": 0.026100000000000022,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        },
+        {
+          "symbol": "crates/engine/src/work_state/types.rs:89:validate",
+          "calls": 14,
+          "inclusive_wall_ms": 0.014100000000000001,
+          "exclusive_wall_ms": 0.008700000000000001,
+          "inclusive_cpu_ms": 0.0,
+          "exclusive_cpu_ms": 0.0
+        }
+      ]
+    }
+  ]
+}

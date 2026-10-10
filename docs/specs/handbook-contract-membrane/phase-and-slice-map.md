@@ -409,6 +409,10 @@ an inherited scan-cost advisory. The commissioned
 [2026-10-10 investigation](../../research/work-state-capacity-and-performance-investigation-2026-10-10.md)
 now supplies a routine operation-latency baseline, with explicit sampling and
 feature/platform limits.
+The subsequent human-authorized [scalable-storage feasibility investigation](../../research/scalable-work-state-storage-feasibility-2026-10-10.md)
+adds native cost attribution, integrity/detection feasibility and comparable
+storage probes; architecture, detection-policy changes and implementation remain
+proposed. The earlier segmented-history recommendation is not a selected backend.
 These constraints do not become a new predecessor for current bounded work.
 
 The [coverage/control-map follow-up](coverage-and-landing-map.md#work-state-capacity-and-performance-follow-up)
@@ -431,7 +435,7 @@ or a new set of execution units:
 
 | Priority / next action | Rationale, dependencies and unresolved selection |
 | --- | --- |
-| 1. **Human design selection:** work-state capacity/performance | The commissioned [bounded investigation](../../research/work-state-capacity-and-performance-investigation-2026-10-10.md) supplies measured baseline growth/recovery costs, proposed workload/latency/resource targets and a conditional candidate comparison. Select the envelope, storage direction, protected administration/closure promise, integrity/detection boundary and retained-store treatment; then separately authorize bounded planning. No storage solution or implementation is selected. |
+| 1. **Human design selection:** work-state capacity/performance | The commissioned [baseline investigation](../../research/work-state-capacity-and-performance-investigation-2026-10-10.md) and subsequent [storage feasibility investigation](../../research/scalable-work-state-storage-feasibility-2026-10-10.md) supply native profiling, measured storage probes and explicit integrity tradeoffs. Select the envelope, storage direction, protected administration/closure promise, detection scope/timing and retained-store treatment; then separately authorize bounded planning. No storage solution, changed integrity policy or implementation is selected. |
 | 2. **Authority preparation after human selections:** native local CR root binding | Reusable successor-state binding remains useful and proposed. Select management/use establishment, narrow delegated versus human-only replacement, revocation and additive representation/legacy compatibility. Its actual dependencies are exact current lineage/scope, held currentness through effect and original recovery; this position is preferred delivery order, not a Work Progression predecessor. |
 | 3. **Authority preparation:** hierarchy/typed prerequisite facts | Builds on delivered item/composition identity. Select concrete relation operations/revisions, coherent finite cuts/currentness and cycle refusal under the approved same-project one-parent semantics. Relations alone supply no eligibility or effect. |
 | 4. **Authority preparation, then separately approved implementation:** leaf eligibility → leaf closing | Select governing completion assignment/protocol, exact roles/coverage/populations and current qualification. Relation-dependent questions need relation facts; relation-free eligibility needs neither CR nor all hierarchy. Closing additionally needs congruent eligibility, separate action authority and state-owner guarded commit/receipt. |
