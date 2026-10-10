@@ -1,0 +1,1 @@
+{"direct":"Ok(Found([101, 120, 97, 99, 116]))","event":"direct_read_departure","guarded":"Err(RepositoryDurabilityErrorV1 { kind: UnsafeFilesystem, detail: \"retained Windows regular file is unsafe\" })"}

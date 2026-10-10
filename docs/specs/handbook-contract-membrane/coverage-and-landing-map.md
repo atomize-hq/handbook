@@ -23,7 +23,8 @@ the approved plan at `d7ff969` is implemented at `ae1af38`. The
 [slice status](slices/work-compositions-and-kinds/README.md) records completed
 Packet-2 acceptance/review, supplied meta aggregate validation/closeout and accepted
 human recap. The [current priorities](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
-recommend the selected capacity/performance investigation next.
+now place human review/design selection next after completed baseline, storage
+feasibility and [native optimization/capacity research](../../research/work-state-native-optimization-investigation-2026-10-10.md).
 Remaining roadmap choices are
 proposed where unselected, and CR's separate choices remain unselected.
 These are supplied meta results,
@@ -376,11 +377,21 @@ The commissioned investigation addresses:
 - preservation of exact identity, original authority, immutable history,
   noncommit/uncertainty proofs, concurrency and recovery across the selected design.
 
-**Next human decision:** review the baseline and the newer feasibility report's
-**PROPOSED** workload/resource envelope, measured mechanism comparison, conditional
-preference, saturation promise, integrity/detection boundary and retained-store
-treatment. The earlier segmented-history recommendation remains historical
-proposed evidence, not a selected architecture. A separately authorized bounded
+The subsequent human-authorized [native optimization investigation and capacity
+proposal](../../research/work-state-native-optimization-investigation-2026-10-10.md)
+tests isolated unchanged-policy candidates against the real owner/SDK baseline,
+separately labels detection-policy departures, and proposes the next native
+capacity outcome. Its product experiments remain isolated; this is completed
+research and proposed direction, not delivered capacity. The technical assessment
+precedes a separate recommendation incorporating the user's file preference.
+
+**Next human decision:** review that bounded proposal alongside the baseline and
+feasibility evidence. Select the operation-local verification/complete-audit
+boundary, population/closure/resource budgets, decision-bearing index/current-control
+publication and retained-store treatment, and protected administration/closure
+accounting. The indexed individual-file recommendation is conditional and
+**PROPOSED**; SQLite remains a challenger, and the earlier segmented-history
+recommendation remains historical proposed evidence. A separately authorized bounded
 plan follows selection; no detailed
 successor packets or implementation are approved by this entry. This greenfield
 project does not presume production migration tooling or permanent legacy APIs;
@@ -400,7 +411,7 @@ These remaining gaps are outside the completed slice, rather than another packet
 
 | Remaining outcome / decision | Source-backed dependency and boundary |
 | --- | --- |
-| Practical work-state capacity and authority availability | The selected [follow-up](#work-state-capacity-and-performance-follow-up) addresses the shared lifetime budget and revocation at exhaustion before sustained use. The [2026-10-10 investigation](../../research/work-state-capacity-and-performance-investigation-2026-10-10.md) measures the current native/SDK baseline and proposes choices; its storage direction and targets remain unselected. The inherited inventory-scan P3 remains optional; research completion is not delivery of practical capacity. |
+| Practical work-state capacity and authority availability | The selected [follow-up](#work-state-capacity-and-performance-follow-up) addresses the shared lifetime budget and revocation at exhaustion before sustained use. Baseline/storage research and the [native optimization investigation/proposal](../../research/work-state-native-optimization-investigation-2026-10-10.md) are completed research. Its conditional file recommendation, detection boundary, budgets and representation/publication choices remain proposed for human review. Native delivery still has the same 32-slot limits; the inherited inventory-scan P3 remains optional. Research completion is not delivery of practical capacity. |
 | Reusable local CR root binding | The [2026-10-08 investigation](../../research/context-resolution-local-advisory-extension-investigation-2026-10-08.md#smallest-useful-next-outcome-and-decisions) is reviewed **proposed research**. Existing initial root-envelope admission works only under its still-current initial authority; it does not supply reusable successor-state binding. Management/use establishment, replacement/delegation, revocation and additive representation/legacy compatibility remain human selections. Exact current lineage, held scope/currentness through effect, retained dependencies, lock order and original recovery are actual prerequisites. Work registration is no substitute; CR-first is preferred sequence only. |
 | Hierarchy and typed prerequisites | The [selected amendment](semantic-model/amendments/work-progression-kinds-and-relations.md#selected-kinds-and-hierarchy) constrains same-project one-parent containment, typed start/close/both relations and separate grouping/reference/order. Delivered [work descriptors](../../../crates/engine/src/work_state/types.rs) support no relations. Concrete operations/revisions, coherent finite cuts/currentness, structural and closure-cycle refusal remain to be selected; relation facts alone establish no permission, eligibility or effect. |
 | Governing completion and local/parent eligibility | [Work Progression](semantic-model/operational-reliance-and-actions.md#work-progression-ownership) must independently establish exact governing target/scope/assignment and adopted assessment protocol, complete roles/coverage/result populations including relevant failures, current qualification and atomic eligibility/disposition or refusal. Planning-output questions, definition locators, kinds and direct passes supply none by themselves. Prospective assessment needs governing selection before collection commitment; retrospective use needs supported [G5](semantic-model/amendments/governance-defaults-and-delegated-operation.md#g5--independent-evaluation-and-governed-reliance) qualification without invented provenance. Relation-dependent eligibility needs authoritative relations; relation-free leaf eligibility need not wait for CR/full hierarchy. Parent questions also need their own requirements/integration assessment and exact finite child propositions. |

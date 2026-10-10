@@ -415,6 +415,15 @@ storage probes; architecture, detection-policy changes and implementation remain
 proposed. The earlier segmented-history recommendation is not a selected backend.
 These constraints do not become a new predecessor for current bounded work.
 
+The subsequent authorized [native optimization investigation and capacity
+proposal](../../research/work-state-native-optimization-investigation-2026-10-10.md)
+completes isolated owner/SDK experiments and separates unchanged-policy results
+from the direct-read detection departure. It proposes one native indexed-file
+capacity outcome, subject to human detection, budget, index/publication and
+protected-administration selections. Technical comparison does not establish an
+equivalent-native backend winner; the file recommendation separately incorporates
+the user's preference. Research completion leaves product behavior and caps unchanged.
+
 The [coverage/control-map follow-up](coverage-and-landing-map.md#work-state-capacity-and-performance-follow-up)
 owns the research questions and intended outcome. The compositions/kinds
 completion checkpoint has arrived, and the human commissioned its bounded research
@@ -435,15 +444,15 @@ or a new set of execution units:
 
 | Priority / next action | Rationale, dependencies and unresolved selection |
 | --- | --- |
-| 1. **Human design selection:** work-state capacity/performance | The commissioned [baseline investigation](../../research/work-state-capacity-and-performance-investigation-2026-10-10.md) and subsequent [storage feasibility investigation](../../research/scalable-work-state-storage-feasibility-2026-10-10.md) supply native profiling, measured storage probes and explicit integrity tradeoffs. Select the envelope, storage direction, protected administration/closure promise, detection scope/timing and retained-store treatment; then separately authorize bounded planning. No storage solution, changed integrity policy or implementation is selected. |
+| 1. **Human review and design selection:** work-state capacity/performance | Completed baseline/storage research and the [native optimization investigation/proposal](../../research/work-state-native-optimization-investigation-2026-10-10.md) supply measured native candidates and explicit integrity tradeoffs. Review the conditional indexed-file outcome; select the detection/audit boundary, population/closure/resource envelope, decision-bearing index/current-control publication and retained-store treatment, and protected administration/closure promise; then separately authorize bounded planning. No production optimization, storage solution, changed integrity policy or capacity increase is selected. |
 | 2. **Authority preparation after human selections:** native local CR root binding | Reusable successor-state binding remains useful and proposed. Select management/use establishment, narrow delegated versus human-only replacement, revocation and additive representation/legacy compatibility. Its actual dependencies are exact current lineage/scope, held currentness through effect and original recovery; this position is preferred delivery order, not a Work Progression predecessor. |
 | 3. **Authority preparation:** hierarchy/typed prerequisite facts | Builds on delivered item/composition identity. Select concrete relation operations/revisions, coherent finite cuts/currentness and cycle refusal under the approved same-project one-parent semantics. Relations alone supply no eligibility or effect. |
 | 4. **Authority preparation, then separately approved implementation:** leaf eligibility → leaf closing | Select governing completion assignment/protocol, exact roles/coverage/populations and current qualification. Relation-dependent questions need relation facts; relation-free eligibility needs neither CR nor all hierarchy. Closing additionally needs congruent eligibility, separate action authority and state-owner guarded commit/receipt. |
 | 5. **Authority preparation, then separately approved implementation:** parent eligibility → parent closing | Needs finite relations and the parent's independently resolved requirements/integration assessment. Depends on leaf closing only for roles requiring actual closed state/receipts. Parent closing needs its own permission and guarded effect. |
 | Later. **Consumer authority preparation:** CLI/installed-skill/host adoption | Choose a bounded workflow and adopter after sufficient relevant native/SDK capability; no requirement to finish the entire SDK. Keep Phase-6 hard order and current external proof requirements. |
 
-The exact next human direction is selection among the capacity/performance
-report's proposed choices, including its proof conditions and acceptance targets.
+The exact next human direction is review of the native optimization/capacity
+proposal and selection among its proposed choices, proof conditions and targets.
 Research supplies evidence without product edits, detailed successor packets or
 presumptive history deletion. Concrete bounded planning needs separate
 authorization after selection. CR product choices and subsequent implementation

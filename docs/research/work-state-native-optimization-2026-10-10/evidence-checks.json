@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "observations": 641,
+  "groups": 199,
+  "matched_effect_variants": 5,
+  "current_read_control_groups": 84,
+  "binary_sha256": "12a63e46560f91a569f03f7ef44e7b5bbc5b55823fccbd16cf2d6a6d30f51c5f",
+  "patch_sha256": "6a03ee9b78255d1a1c7e3b4f72c6ea79604b13b83ca7ea8f9ef631e857e186dd"
+}

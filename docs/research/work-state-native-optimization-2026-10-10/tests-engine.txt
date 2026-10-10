@@ -1,0 +1,33 @@
+   Compiling handbook-engine v0.2.0 (C:\Users\spmcc\.codex\worktrees\work-state-native-optimization\handbook\crates\engine)
+    Finished `release` profile [optimized] target(s) in 1m 33s
+     Running tests\repository_durability.rs (C:/Users/spmcc/AppData/Local/Temp/hcm-native-opt-target\release\deps\repository_durability-4b2164dbc36bfc4d.exe)
+
+running 6 tests
+test exact_displacement_and_replacement_refuse_aliases_and_hard_linked_current ... ok
+test exact_displacement_retains_the_actual_gap_until_prepared_publication ... ok
+test exact_replace_requires_current_bytes_and_leaves_recoverable_displaced_state ... ok
+test retained_root_creates_and_holds_an_exclusive_lock ... ok
+test retained_root_performs_bounded_create_read_list_rename_and_remove ... ok
+test retained_root_refuses_escaping_absolute_and_link_paths ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests\work_kind.rs (C:/Users/spmcc/AppData/Local/Temp/hcm-native-opt-target\release\deps\work_kind-2589ae2102e07cf0.exe)
+
+running 2 tests
+test definition_fixes_supported_descriptor_and_complete_role_bounds ... ok
+test whole_definition_identity_is_exact_closed_and_bounded ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
+
+     Running tests\work_state.rs (C:/Users/spmcc/AppData/Local/Temp/hcm-native-opt-target\release\deps\work_state-550122d1ad4ee4e0.exe)
+
+running 5 tests
+test approved_scope_is_finite_complete_and_rejects_irrelevant_or_duplicate_clauses ... ok
+test complete_bounded_duplicate_safe_json_and_closed_nested_shapes ... ok
+test declarations_are_closed_and_do_not_assert_contract_truth ... ok
+test future_roles_kinds_relations_state_and_unknown_fields_refuse_without_silent_projection ... ok
+test identity_and_exact_descriptor_do_not_depend_on_codec_release_or_delivery ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

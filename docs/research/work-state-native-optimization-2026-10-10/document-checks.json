@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "report_local_links": [
+    "work-state-native-optimization-2026-10-10/README.md",
+    "work-state-native-optimization-2026-10-10/probes.jsonl",
+    "scalable-work-state-storage-feasibility-2026-10-10.md",
+    "work-state-capacity-and-performance-investigation-2026-10-10.md",
+    "file-backed-graph-pro-consults-2026-10-10/architecture-prompt.md",
+    "file-backed-graph-pro-consults-2026-10-10/architecture-answer.md",
+    "file-backed-graph-pro-consults-2026-10-10/history-answer.md",
+    "work-state-native-optimization-2026-10-10/verify.ps1",
+    "work-state-native-optimization-2026-10-10/test-summary.json",
+    "work-state-native-optimization-2026-10-10/gitnexus-impact-final.json",
+    "work-state-native-optimization-2026-10-10/check_evidence.py",
+    "../specs/handbook-contract-membrane/coverage-and-landing-map.md#work-state-capacity-and-performance-follow-up",
+    "../specs/handbook-contract-membrane/phase-and-slice-map.md#near-term-work-state-capacity-and-performance-follow-up"
+  ],
+  "primary_product_diff": "empty",
+  "patch_applies_to_primary_baseline": true,
+  "python_sources_compile": true,
+  "json_artifacts_parse": true,
+  "report_sha256_at_check": "724a5bd3e8bffd43b999b4058044b4ca987285ae26fe8a8df70168cd4640207a"
+}

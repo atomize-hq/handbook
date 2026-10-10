@@ -1,0 +1,19 @@
+Changes: 50 files, 77 symbols
+Affected processes: 0
+Risk level: low
+
+Changed symbols:
+  Section File-backed graph consultations → docs/research/file-backed-graph-pro-consults-2026-10-10/README.md
+  Section Consultations and evidence → docs/research/file-backed-graph-pro-consults-2026-10-10/README.md
+  Section Architecture result and local verification → docs/research/file-backed-graph-pro-consults-2026-10-10/README.md
+  Section Historical result and coverage limits → docs/research/file-backed-graph-pro-consults-2026-10-10/README.md
+  Section Architecture consultation: captured answer → docs/research/file-backed-graph-pro-consults-2026-10-10/architecture-answer.md
+  Section Review file-backed work-state graph direction → docs/research/file-backed-graph-pro-consults-2026-10-10/architecture-answer.md
+  Section Recommendation: **ADJUST** → docs/research/file-backed-graph-pro-consults-2026-10-10/architecture-answer.md
+  Section 1. What I inspected—and what this review does not establish → docs/research/file-backed-graph-pro-consults-2026-10-10/architecture-answer.md
+  Section 2. What is actually making the native implementation expensive? → docs/research/file-backed-graph-pro-consults-2026-10-10/architecture-answer.md
+  Section 2.1 The measured problem is repeated guarded traversal, not demonstrated slow storage media → docs/research/file-backed-graph-pro-consults-2026-10-10/architecture-answer.md
+... and 67 more
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Detect Changes (1.6.12)

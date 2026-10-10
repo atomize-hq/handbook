@@ -1,0 +1,45 @@
+{
+  "baseline": "8013948ebd3fbef6725f5d72f3d29120f7617009",
+  "build": "release defaults, jobs 2, opt-level 3, no LTO",
+  "stack_bytes": 33554432,
+  "conditions": "serialized native runs; warm OS cache after population; each owner API reopens retained root; no cache eviction",
+  "host": {
+    "os": "Microsoft Windows 11 Home",
+    "os_version": "10.0.26200",
+    "cpu": "12th Gen Intel(R) Core(TM) i9-12900KF",
+    "physical_cores": 16,
+    "logical_processors": 24,
+    "physical_memory_bytes": 137237602304,
+    "filesystem": "NTFS",
+    "source": "Get-CimInstance Win32_OperatingSystem, Win32_ComputerSystem, Win32_Processor; Get-Volume C"
+  },
+  "commands": [
+    {
+      "command": [
+        "rustc",
+        "--version"
+      ],
+      "stdout": "rustc 1.89.0 (29483883e 2025-08-04)\n"
+    },
+    {
+      "command": [
+        "cargo",
+        "--version"
+      ],
+      "stdout": "cargo 1.89.0 (c24e10642 2025-06-23)\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--stat",
+        "889d9b24f0d3be33169c14951d4336dd86ee03e2",
+        "HEAD",
+        "--",
+        "crates",
+        "Cargo.lock"
+      ],
+      "stdout": ""
+    }
+  ]
+}

@@ -1,0 +1,618 @@
+diff --git a/crates/engine/src/definition_identity.rs b/crates/engine/src/definition_identity.rs
+--- a/crates/engine/src/definition_identity.rs
++++ b/crates/engine/src/definition_identity.rs
+@@ -331,6 +331,8 @@
+ }
+ 
+ pub(crate) fn canonical_json_bytes(value: &Value) -> Result<Vec<u8>, RegistryLoadError> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/definition_identity.rs:333:canonical_json_bytes");
++
+     serde_json_canonicalizer::to_vec(value).map_err(|_| {
+         RegistryLoadError::new(
+             RegistryLoadErrorKind::SyntaxError,
+diff --git a/crates/engine/src/lib.rs b/crates/engine/src/lib.rs
+--- a/crates/engine/src/lib.rs
++++ b/crates/engine/src/lib.rs
+@@ -361,3 +361,6 @@
+ pub mod grounding;
+ #[cfg(test)]
+ mod grounding_transition;
++
++#[allow(unsafe_code)]
++pub mod research_profile;
+diff --git a/crates/engine/src/local_authority/work_registration.rs b/crates/engine/src/local_authority/work_registration.rs
+--- a/crates/engine/src/local_authority/work_registration.rs
++++ b/crates/engine/src/local_authority/work_registration.rs
+@@ -39,6 +39,8 @@
+     }
+ 
+     pub(crate) fn validate_current(&self) -> Result<(), LocalAuthorityRefusalV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/local_authority/work_registration.rs:41:validate_current");
++
+         self.tree.validate().map_err(fs_error)?;
+         self.guard.validate()?;
+         let current =
+@@ -160,6 +162,8 @@
+     establish_under_guard: impl FnOnce(&RetainedRepositoryRootV1) -> Result<(), LocalAuthorityRefusalV1>,
+     consume: impl FnOnce(&WorkRegistrationCurrentV1<'_>) -> Result<T, LocalAuthorityRefusalV1>,
+ ) -> Result<T, LocalAuthorityRefusalV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/local_authority/work_registration.rs:156:with_work_registration_establishment");
++
+     let guard = OperatingGuard::acquire(repo.as_ref(), &locator.predecessor, false)?;
+     let before = local_check::work_registration_current(guard.root(), locator, basis)?;
+     guard.validate()?;
+diff --git a/crates/engine/src/repository_durability.rs b/crates/engine/src/repository_durability.rs
+--- a/crates/engine/src/repository_durability.rs
++++ b/crates/engine/src/repository_durability.rs
+@@ -127,6 +127,8 @@
+     ancestor_epochs: Vec<RetainedDirectoryEpoch>,
+     #[cfg(windows)]
+     _ancestor_guards: Vec<File>,
++    #[cfg(windows)]
++    _research_parents: std::sync::Mutex<std::collections::BTreeMap<PathBuf, File>>,
+ }
+ 
+ #[cfg(unix)]
+@@ -634,6 +636,7 @@
+                 identity,
+                 root_path,
+                 _ancestor_guards: guards,
++                _research_parents: std::sync::Mutex::new(std::collections::BTreeMap::new()),
+             })
+         }
+ 
+@@ -1035,6 +1038,8 @@
+         relative: &str,
+         byte_limit: usize,
+     ) -> Result<RepositoryReadV1, RepositoryDurabilityErrorV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/repository_durability.rs:1036:read_regular_bounded");
++
+         if byte_limit > MAX_STRICT_READ_BYTES {
+             return Err(bound("strict read limit exceeds the repository maximum"));
+         }
+@@ -1055,6 +1060,7 @@
+         if before != after {
+             return Err(unsafe_fs("regular file changed during retained read"));
+         }
++        crate::research_profile::count_path("read", relative.as_str(), bytes.len() as u64);
+         Ok(RepositoryReadV1::Found(bytes))
+     }
+ 
+@@ -1065,13 +1071,17 @@
+         relative: &str,
+         entry_limit: usize,
+     ) -> Result<Vec<RepositoryDirectoryEntryV1>, RepositoryDurabilityErrorV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/repository_durability.rs:1067:list_directory_bounded");
++
+         if entry_limit > MAX_DIRECTORY_ENTRIES {
+             return Err(bound(
+                 "directory entry limit exceeds the repository maximum",
+             ));
+         }
+         let relative = ValidatedRelativePath::parse(relative, true)?;
+-        platform::list_directory(self, &relative, entry_limit)
++        let result = platform::list_directory(self, &relative, entry_limit);
++        if let Ok(entries) = &result { crate::research_profile::count_path("list", relative.as_str(), entries.len() as u64); }
++        result
+     }
+ 
+     /// Creates every absent directory component, flushing each created parent.
+@@ -1262,6 +1272,8 @@
+         &self,
+         relative: &ValidatedRelativePath,
+     ) -> Result<Vec<File>, RepositoryDurabilityErrorV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/repository_durability.rs:1267:pin_windows_parent");
++
+         require_root_unchanged(self)?;
+         let mut guards = Vec::new();
+         let mut current = self.root_path.clone();
+@@ -1271,7 +1283,20 @@
+                 return Err(invalid_path("repository path is not normalized"));
+             };
+             current.push(component);
+-            guards.push(open_windows_directory(&current)?);
++            let mode = std::env::var("HCM_RESEARCH_VARIANT").unwrap_or_default();
++            let relative_parent = current.strip_prefix(&self.root_path).map_err(|_| unsafe_fs("research parent outside root"))?;
++            let eligible = matches!(relative_parent.to_str(), Some(".handbook") | Some(".handbook\\work-state") | Some(".handbook\\work-state\\v1"));
++            if eligible && (mode == "binding" || mode.starts_with("combined")) {
++                let mut parents = self._research_parents.lock().map_err(|_| unsafe_fs("research parent cache poisoned"))?;
++                if !parents.contains_key(&current) {
++                    parents.insert(current.clone(), open_windows_directory(&current)?);
++                }
++                let retained = parents.get(&current).unwrap();
++                directory_identity(retained)?; // fresh directory/reparse/delete-pending check
++                guards.push(retained.try_clone().map_err(|_| unsafe_fs("research held-parent duplicate failed"))?);
++            } else {
++                guards.push(open_windows_directory(&current)?);
++            }
+         }
+         require_root_unchanged(self)?;
+         Ok(guards)
+@@ -1635,6 +1660,8 @@
+ fn windows_handle_info(
+     file: &File,
+ ) -> Result<(PhysicalDirectoryIdentity, u32, bool, bool), RepositoryDurabilityErrorV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/repository_durability.rs:1654:windows_handle_info");
++
+     use std::ffi::c_void;
+     use std::mem::size_of;
+     use std::os::windows::io::AsRawHandle;
+@@ -1827,6 +1854,8 @@
+ 
+ #[cfg(windows)]
+ fn open_windows_directory_guard(path: &Path) -> Result<File, RepositoryDurabilityErrorV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/repository_durability.rs:1848:open_windows_directory_guard");
++
+     use std::os::windows::fs::OpenOptionsExt;
+     const FILE_SHARE_READ: u32 = 0x0000_0001;
+     const FILE_SHARE_WRITE: u32 = 0x0000_0002;
+diff --git a/crates/engine/src/work_state/store.rs b/crates/engine/src/work_state/store.rs
+--- a/crates/engine/src/work_state/store.rs
++++ b/crates/engine/src/work_state/store.rs
+@@ -173,14 +173,15 @@
+     pub root: &'a RetainedRepositoryRootV1,
+     lock: RepositoryExclusiveLockV1,
+     pub owner: Owner,
++    _research_owner_bytes: Option<(Vec<u8>, Vec<u8>)>,
+ }
+ impl WorkLock<'_> {
+     pub fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
+         self.lock.validate_at(self.root, LOCK).map_err(fs_error)?;
+         if self.lock.physical_fingerprint_v1().map_err(fs_error)? != self.owner.lock_fingerprint
+-            || required(self.root, OWNER)? != encode(&self.owner)?
+-            || required(self.root, ANCHOR)? != encode(&self.owner)?
+-            || required(self.root, BOOT)? != encode(&self.owner.bootstrap)?
++            || required(self.root, OWNER)? != self._research_owner_bytes.as_ref().map(|v| v.0.clone()).map_or_else(|| encode(&self.owner), Ok)?
++            || required(self.root, ANCHOR)? != self._research_owner_bytes.as_ref().map(|v| v.0.clone()).map_or_else(|| encode(&self.owner), Ok)?
++            || required(self.root, BOOT)? != self._research_owner_bytes.as_ref().map(|v| v.1.clone()).map_or_else(|| encode(&self.owner.bootstrap), Ok)?
+             || self
+                 .root
+                 .governance_physical_root_fingerprint_v1()
+@@ -195,6 +196,8 @@
+         Ok(())
+     }
+     pub fn inventory(&self) -> Result<Inventory, LocalAuthorityRefusalV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/work_state/store.rs:198:inventory");
++
+         self.validate()?;
+         let parent = self
+             .root
+@@ -346,6 +349,8 @@
+     // reservation but before its directory exists. Normal inventory refuses
+     // that prefix rather than treating the missing declared effect as absence.
+     fn manifest(&self) -> Result<Manifest, LocalAuthorityRefusalV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/work_state/store.rs:349:manifest");
++
+         self.validate()?;
+         let mut slots = Vec::with_capacity(CAPACITY);
+         let mut paths = Vec::new();
+@@ -566,7 +571,11 @@
+     let lock = root
+         .acquire_existing_exclusive_lock_v1(LOCK)
+         .map_err(fs_error)?;
+-    let result = WorkLock { root, lock, owner };
++    let mode = std::env::var("HCM_RESEARCH_VARIANT").unwrap_or_default();
++    let _research_owner_bytes = if mode == "owner" || mode.starts_with("combined") {
++        Some((encode(&owner)?, encode(&owner.bootstrap)?))
++    } else { None };
++    let result = WorkLock { root, lock, owner, _research_owner_bytes };
+     result.validate()?;
+     Ok(result)
+ }
+@@ -705,7 +714,16 @@
+     root: &RetainedRepositoryRootV1,
+     p: &str,
+ ) -> Result<Vec<u8>, LocalAuthorityRefusalV1> {
+-    optional(root, p)?.ok_or_else(|| {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/work_state/store.rs:709:required");
++
++    let mode = std::env::var("HCM_RESEARCH_VARIANT").unwrap_or_default();
++    let observed = if mode.contains("direct") {
++        match root.read_regular_bounded(p, MAX).map_err(fs_error)? {
++            RepositoryReadV1::Absent => None,
++            RepositoryReadV1::Found(v) => Some(v),
++        }
++    } else { optional(root, p)? };
++    observed.ok_or_else(|| {
+         refuse(
+             "work_proof_missing",
+             "required retained proof missing; loss is not absence",
+diff --git a/crates/engine/src/work_state/transaction.rs b/crates/engine/src/work_state/transaction.rs
+--- a/crates/engine/src/work_state/transaction.rs
++++ b/crates/engine/src/work_state/transaction.rs
+@@ -128,6 +128,20 @@
+     noncommit: bool,
+     attempted: bool,
+     staging: bool,
++}
++
++// Research-only control: successful pure derivations are keyed by the complete
++// retained intent bytes, never by a pathname, metadata or a hash alone. The
++// cache exists only for one execute operation. Each scan still obtains and
++// checks the current physical inventory and every durable-prefix record.
++struct PureIntentSemantics {
++    intent: Intent,
++    output: Output,
++    expected: [(&'static str, Vec<u8>); 7],
++}
++#[derive(Default)]
++struct SemanticCache {
++    intents: BTreeMap<Vec<u8>, std::rc::Rc<PureIntentSemantics>>,
+ }
+ 
+ fn output(op: &Operation) -> Result<Output, LocalAuthorityRefusalV1> {
+@@ -236,13 +250,36 @@
+     files: &BTreeMap<String, Vec<u8>>,
+     proofs: &mut std::collections::BTreeSet<String>,
+ ) -> Result<Parsed, LocalAuthorityRefusalV1> {
+-    let intent: Intent = decode(files.get("intent.json").ok_or_else(|| {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/work_state/transaction.rs:247:parsed");
++
++    parsed_reusing(lock, name, files, proofs, None)
++}
++fn parsed_reusing(
++    lock: &WorkLock<'_>,
++    name: &str,
++    files: &BTreeMap<String, Vec<u8>>,
++    proofs: &mut std::collections::BTreeSet<String>,
++    cache: Option<&mut SemanticCache>,
++) -> Result<Parsed, LocalAuthorityRefusalV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/work_state/transaction.rs:255:parsed_reusing");
++
++    let intent_bytes = files.get("intent.json").ok_or_else(|| {
+         refuse(
+             "work_partial_inventory",
+             "transaction lacks original intent",
+         )
+-    })?)?;
+-    intent.operation.validate()?;
++    })?;
++    let reused = cache
++        .as_deref()
++        .and_then(|cache| cache.intents.get(intent_bytes))
++        .cloned();
++    let intent: Intent = match &reused {
++        Some(semantic) => semantic.intent.clone(),
++        None => decode(intent_bytes)?,
++    };
++    if reused.is_none() {
++        intent.operation.validate()?;
++    }
+     let staging = name.starts_with("accept-");
+     if intent.schema != intent.operation.schema()
+         || name.strip_prefix("accept-").unwrap_or(name) != intent.operation.name()
+@@ -256,19 +293,26 @@
+             "exact original owner/request/authority closure required",
+         ));
+     }
+-    let proof_identity = fp(
+-        "handbook.work-retained-proof-bytes@1.0.0",
+-        &intent.authority,
+-    )?;
+-    if !proofs.contains(&proof_identity) {
+-        intent
+-            .authority
+-            .validate_historical(intent.operation.check(), intent.operation.basis())?;
+-        proofs.insert(proof_identity);
+-    }
+-    let d = decision(&intent)?;
+-    let t = terminal(&d)?;
+-    let checkpoint = publication(&intent)?;
++    let mut derived = if reused.is_none() {
++        let proof_identity = fp(
++            "handbook.work-retained-proof-bytes@1.0.0",
++            &intent.authority,
++        )?;
++        if !proofs.contains(&proof_identity) {
++            // This validation consults only the contained historical owner
++            // proof, not current filesystem state or permission.
++            intent
++                .authority
++                .validate_historical(intent.operation.check(), intent.operation.basis())?;
++            proofs.insert(proof_identity);
++        }
++        let d = decision(&intent)?;
++        let t = terminal(&d)?;
++        let checkpoint = publication(&intent)?;
++        Some((d, t, checkpoint))
++    } else {
++        None
++    };
+     let attempted = files.contains_key("attempted.json");
+     let never = files.contains_key("not-attempted.json");
+     if attempted == never && !(staging && files.len() == 1) {
+@@ -277,16 +321,26 @@
+             "missing/conflicting publication checkpoint is uncertainty, never proof of noncommit",
+         ));
+     }
+-    for (file, expected) in [
+-        ("not-attempted.json", checkpoint.clone()),
+-        ("attempted.json", checkpoint),
+-        ("decision.json", encode(&d)?),
+-        ("snapshot.json", encode(&d.output)?),
+-        ("terminal.pending", encode(&t)?),
+-        ("terminal.json", encode(&t)?),
+-        ("noncommit.json", noncommit(&intent)?),
+-    ] {
+-        if files.get(file).is_some_and(|v| v != &expected) {
++    let expected_owned = if let Some((d, t, checkpoint)) = &mut derived {
++        Some([
++            ("not-attempted.json", checkpoint.clone()),
++            ("attempted.json", std::mem::take(checkpoint)),
++            ("decision.json", encode(d)?),
++            ("snapshot.json", encode(&d.output)?),
++            ("terminal.pending", encode(t)?),
++            ("terminal.json", encode(t)?),
++            ("noncommit.json", noncommit(&intent)?),
++        ])
++    } else {
++        None
++    };
++    let expected = reused
++        .as_ref()
++        .map(|semantic| &semantic.expected)
++        .or(expected_owned.as_ref())
++        .expect("successful derivation or exact-byte reuse");
++    for (file, expected) in expected {
++        if files.get(*file).is_some_and(|v| v != expected) {
+             return Err(refuse(
+                 "work_history_integrity",
+                 "exact retained decision/snapshot/receipt/terminal/checkpoint bytes changed",
+@@ -309,9 +363,26 @@
+             "unsupported/partial/conflicting durable prefix",
+         ));
+     }
++    let output = match reused {
++        Some(semantic) => semantic.output.clone(),
++        None => {
++            let output = derived.expect("uncached derivation").0.output;
++            if let Some(cache) = cache {
++                cache.intents.insert(
++                    intent_bytes.clone(),
++                    std::rc::Rc::new(PureIntentSemantics {
++                        intent: intent.clone(),
++                        output: output.clone(),
++                        expected: expected_owned.expect("uncached expected records"),
++                    }),
++                );
++            }
++            output
++        }
++    };
+     Ok(Parsed {
+         intent,
+-        output: d.output,
++        output,
+         committed,
+         noncommit: nc,
+         attempted,
+@@ -319,6 +390,16 @@
+     })
+ }
+ fn scan(lock: &WorkLock<'_>) -> Result<(Inventory, Vec<Parsed>), LocalAuthorityRefusalV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/work_state/transaction.rs:388:scan");
++
++    scan_reusing(lock, None)
++}
++fn scan_reusing(
++    lock: &WorkLock<'_>,
++    mut cache: Option<&mut SemanticCache>,
++) -> Result<(Inventory, Vec<Parsed>), LocalAuthorityRefusalV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/work_state/transaction.rs:391:scan_reusing");
++
+     let tree = lock
+         .root
+         .retain_work_history_tree_guard_v1()
+@@ -334,8 +415,12 @@
+     let mut rows = Vec::new();
+     let mut proofs = std::collections::BTreeSet::new();
+     for (name, files) in &inventory.transactions {
+-        rows.push(parsed(lock, name, files, &mut proofs)?);
+-    }
++        rows.push(match cache.as_deref_mut() {
++            Some(cache) => parsed_reusing(lock, name, files, &mut proofs, Some(cache))?,
++            None => parsed(lock, name, files, &mut proofs)?,
++        });
++    }
++    let research_relations = crate::research_profile::Span::enter("pairwise_and_lineage_checks");
+     // Both an acceptance candidate and a visible request for the same key are
+     // conflicting proof. Never choose whichever appears newer.
+     for (i, row) in rows.iter().enumerate() {
+@@ -377,6 +462,7 @@
+         }
+     }
+     validate_authority_history(&rows)?;
++    drop(research_relations);
+     tree.validate().map_err(fs_error)?;
+     metadata.validate().map_err(fs_error)?;
+     lock.validate()?;
+@@ -385,6 +471,8 @@
+ // Validate the closed chain using retained historical proof, independently of
+ // today's operating basis. No newest-file selection or union of prior scopes.
+ fn validate_authority_history(rows: &[Parsed]) -> Result<(), LocalAuthorityRefusalV1> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/work_state/transaction.rs:463:validate_authority_history");
++
+     let grants = rows
+         .iter()
+         .filter(|r| r.committed && matches!(r.output, Output::Grant(_)))
+@@ -1259,6 +1347,8 @@
+     recover: bool,
+     boundary: &mut dyn FnMut(WorkWriteBoundaryV1) -> Result<(), LocalAuthorityRefusalV1>,
+ ) -> WorkExecutionV1<Output> {
++    let _research_span = crate::research_profile::Span::enter("crates/engine/src/work_state/transaction.rs:1332:execute");
++
+     if let Err(e) = op.validate() {
+         return WorkExecutionV1::error(WorkDispositionV1::Refused, e);
+     }
+@@ -1330,6 +1420,10 @@
+     let effects = std::cell::Cell::new(false);
+     let boundary = std::cell::RefCell::new(boundary);
+     let notify = |stage| boundary.borrow_mut()(stage);
++    let mut semantic_cache = match std::env::var("HCM_RESEARCH_VARIANT").as_deref() {
++        Ok("semantic" | "combined" | "combined-direct") => Some(SemanticCache::default()),
++        _ => None,
++    };
+     let result = with_work_registration_establishment(
+         repo,
+         &check,
+@@ -1344,7 +1438,7 @@
+         },
+         |held| {
+             let lock = store::open(held.root())?;
+-            let (inventory, mut rows) = scan(&lock)?;
++            let (inventory, mut rows) = scan_reusing(&lock, semantic_cache.as_mut())?;
+             reservation(&op, &rows)?;
+             let mut paths = inventory
+                 .transactions
+@@ -1408,7 +1502,7 @@
+                 .or_else(|| inventory.transactions.get(&format!("accept-{name}")));
+             let stage_name = format!("accept-{name}");
+             let intent = if let Some(files) = found {
+-                let p = parsed(
++                let p = parsed_reusing(
+                     &lock,
+                     if inventory.transactions.contains_key(&name) {
+                         &name
+@@ -1417,6 +1511,7 @@
+                     },
+                     files,
+                     &mut std::collections::BTreeSet::new(),
++                    semantic_cache.as_mut(),
+                 )?;
+                 p.intent
+             } else {
+@@ -1491,7 +1586,8 @@
+             notify(WorkWriteBoundaryV1::Snapshot)?;
+             held.validate_current()?;
+             lock.validate()?;
+-            let (current_inventory, mut current) = scan(&lock)?;
++            let (current_inventory, mut current) =
++                scan_reusing(&lock, semantic_cache.as_mut())?;
+             reservation(&op, &current)?;
+             current.retain(|row| row.intent.operation != op);
+             match &op {
+@@ -1538,7 +1634,7 @@
+                 )
+                 .map_err(fs_error)?;
+             notify(WorkWriteBoundaryV1::Terminal)?;
+-            let (_, verified) = scan(&lock)?;
++            let (_, verified) = scan_reusing(&lock, semantic_cache.as_mut())?;
+             let proof = verified
+                 .into_iter()
+                 .find(|r| r.intent.operation == op && r.committed)
+diff --git a/crates/engine/src/research_profile.rs b/crates/engine/src/research_profile.rs
+new file mode 100644
+--- /dev/null
++++ b/crates/engine/src/research_profile.rs
+@@ -0,0 +1,111 @@
++//! Research-only, no persistent telemetry. Based on preceding native profile.
++use std::{cell::RefCell, collections::BTreeMap, sync::atomic::{AtomicBool, Ordering}, time::Instant};
++use serde_json::{json, Value};
++static ACTIVE: AtomicBool = AtomicBool::new(false);
++#[derive(Default)]
++struct Stat { calls: u64, wall: f64, own_wall: f64, cpu: f64, own_cpu: f64 }
++struct Frame { child_wall: f64, child_cpu: f64 }
++thread_local! {
++    static STACK: RefCell<Vec<Frame>> = const { RefCell::new(Vec::new()) };
++    static STATS: RefCell<BTreeMap<&'static str, Stat>> = RefCell::new(BTreeMap::new());
++    static PATHS: RefCell<BTreeMap<(String,String), (u64,u64)>> = RefCell::new(BTreeMap::new());
++}
++#[repr(C)]
++#[derive(Default)]
++struct FileTime { low: u32, high: u32 }
++#[link(name="kernel32")]
++extern "system" {
++    fn GetCurrentProcess() -> *mut std::ffi::c_void;
++    fn GetProcessTimes(h: *mut std::ffi::c_void, c: *mut FileTime, e: *mut FileTime, k: *mut FileTime, u: *mut FileTime) -> i32;
++    fn GetProcessHandleCount(h: *mut std::ffi::c_void, count: *mut u32) -> i32;
++}
++pub fn handles() -> u32 {
++    let mut count=0;
++    unsafe { assert_ne!(GetProcessHandleCount(GetCurrentProcess(), &mut count), 0); }
++    count
++}
++pub fn cpu_ms() -> f64 {
++    let (mut c, mut e, mut k, mut u) = (FileTime::default(), FileTime::default(), FileTime::default(), FileTime::default());
++    unsafe { assert_ne!(GetProcessTimes(GetCurrentProcess(), &mut c, &mut e, &mut k, &mut u), 0); }
++    (((k.high as u64) << 32 | k.low as u64) + ((u.high as u64) << 32 | u.low as u64)) as f64 / 10000.0
++}
++pub struct Span(Option<(&'static str, Instant, f64)>);
++impl Span {
++    pub fn enter(name: &'static str) -> Self {
++        if !ACTIVE.load(Ordering::Relaxed) { return Self(None); }
++        let start=Instant::now(); let cpu=cpu_ms();
++        STACK.with(|s| s.borrow_mut().push(Frame {child_wall:0.0,child_cpu:0.0}));
++        Self(Some((name,start,cpu)))
++    }
++}
++impl Drop for Span {
++    fn drop(&mut self) {
++        if let Some((name,start,cpu))=self.0 {
++            let elapsed=start.elapsed().as_secs_f64()*1000.0; let used=cpu_ms()-cpu;
++            let frame=STACK.with(|s| { let mut stack=s.borrow_mut(); let frame=stack.pop().unwrap();
++                if let Some(parent)=stack.last_mut() {parent.child_wall+=elapsed;parent.child_cpu+=used;} frame });
++            STATS.with(|s| {let mut map=s.borrow_mut();let v=map.entry(name).or_default();
++                v.calls+=1;v.wall+=elapsed;v.cpu+=used;v.own_wall+=elapsed-frame.child_wall;v.own_cpu+=used-frame.child_cpu;});
++        }
++    }
++}
++pub fn count_path(kind: &str,path: &str,n:u64) {
++    if ACTIVE.load(Ordering::Relaxed) {
++        PATHS.with(|s| {let mut map=s.borrow_mut();let v=map.entry((kind.into(),path.into())).or_default();v.0+=1;v.1+=n;});
++    }
++}
++pub fn begin() {
++    STATS.with(|s| s.borrow_mut().clear());PATHS.with(|s| s.borrow_mut().clear());ACTIVE.store(true,Ordering::Relaxed);
++}
++pub fn finish() -> Value {
++    ACTIVE.store(false,Ordering::Relaxed);
++    let spans=STATS.with(|s| json!(s.borrow().iter().map(|(name,v)| json!({"symbol":name,"calls":v.calls,
++        "inclusive_wall_ms":v.wall,"exclusive_wall_ms":v.own_wall,
++        "inclusive_cpu_ms":v.cpu,"exclusive_cpu_ms":v.own_cpu})).collect::<Vec<_>>()));
++    let paths=PATHS.with(|s| json!(s.borrow().iter().map(|((kind,path),(calls,n))|
++        json!({"kind":kind,"path":path,"calls":calls,"units":n})).collect::<Vec<_>>()));
++    json!({"spans":spans,"paths":paths})
++}
++pub fn probe_optional(repo: &std::path::Path, path: &str) -> Result<crate::RepositoryReadV1, crate::RepositoryDurabilityErrorV1> {
++    crate::RetainedRepositoryRootV1::open_exact(repo)?.read_local_owner_optional_bounded(path,1024)
++}
++pub fn probe_direct(repo: &std::path::Path, path: &str) -> Result<crate::RepositoryReadV1, crate::RepositoryDurabilityErrorV1> {
++    crate::RetainedRepositoryRootV1::open_exact(repo)?.read_regular_bounded(path,1024)
++}
++#[cfg(test)]
++mod tests {
++    use super::*;
++    #[test]
++    fn research_parent_binding_keeps_fresh_leaf_bytes_and_releases_on_drop() {
++        fn assert_send_sync<T: Send + Sync>() {}
++        assert_send_sync::<crate::RetainedRepositoryRootV1>();
++        let dir=tempfile::tempdir().unwrap();
++        let parent=dir.path().join(".handbook/work-state/v1");std::fs::create_dir_all(&parent).unwrap();
++        std::fs::write(parent.join("value.json"),b"first").unwrap();
++        let root=crate::RetainedRepositoryRootV1::open_exact(dir.path()).unwrap();
++        assert_eq!(root.read_regular_bounded(".handbook/work-state/v1/value.json",10).unwrap(),crate::RepositoryReadV1::Found(b"first".to_vec()));
++        std::fs::write(parent.join("value.json"),b"other").unwrap();
++        assert_eq!(root.read_regular_bounded(".handbook/work-state/v1/value.json",10).unwrap(),crate::RepositoryReadV1::Found(b"other".to_vec()));
++        assert!(std::fs::rename(&parent,dir.path().join("moved")).is_err());
++        drop(root);
++        std::fs::rename(&parent,dir.path().join("moved")).unwrap();
++    }
++    #[test]
++    fn research_bootstrap_absence_remains_distinct_from_substitution() {
++        let dir=tempfile::tempdir().unwrap();
++        assert_eq!(probe_optional(dir.path(),".handbook/work-state/v1/value.json").unwrap(),crate::RepositoryReadV1::Absent);
++        std::fs::create_dir_all(dir.path().join(".handbook")).unwrap();
++        std::fs::write(dir.path().join(".handbook/work-state"),b"not a directory").unwrap();
++        assert!(probe_optional(dir.path(),".handbook/work-state/v1/value.json").is_err());
++    }
++    #[test]
++    fn research_held_parent_rejects_new_hardlink_on_each_inventory() {
++        let dir=tempfile::tempdir().unwrap();let parent=dir.path().join(".handbook/work-state/v1");std::fs::create_dir_all(&parent).unwrap();
++        std::fs::write(parent.join("value.json"),b"first").unwrap();
++        let root=crate::RetainedRepositoryRootV1::open_exact(dir.path()).unwrap();
++        assert_eq!(root.list_directory_bounded(".handbook/work-state/v1",10).unwrap().len(),1);
++        std::fs::hard_link(parent.join("value.json"),dir.path().join("alias")).unwrap();
++        assert!(root.list_directory_bounded(".handbook/work-state/v1",10).is_err());
++        assert!(root.read_regular_bounded(".handbook/work-state/v1/value.json",10).is_err());
++    }
++}

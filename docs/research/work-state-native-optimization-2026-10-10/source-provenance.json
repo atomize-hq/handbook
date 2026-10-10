@@ -1,0 +1,55 @@
+{
+  "baseline": "8013948ebd3fbef6725f5d72f3d29120f7617009",
+  "patch_sha256": "6a03ee9b78255d1a1c7e3b4f72c6ea79604b13b83ca7ea8f9ef631e857e186dd",
+  "sources": [
+    {
+      "path": "crates/engine/src/definition_identity.rs",
+      "sha256_raw": "4d2ba3eca5d79e1438288f6855e52e0bf201a094e06e8fe486890b01b342d66c",
+      "sha256_lf": "f5e39e51972da3eb149941b7cfa19b71add1bc5c6c1f0c6080b55765669be655"
+    },
+    {
+      "path": "crates/engine/src/lib.rs",
+      "sha256_raw": "f7e0dd2fe1d3f4e880fbbb6b0422cbfe4427c469cdf52a73f749d010ca597eb0",
+      "sha256_lf": "49b43495e3ab34d8f4cbcf6c6dd67d3715ef1bfd907ba86c32c7ec61544bf5ed"
+    },
+    {
+      "path": "crates/engine/src/local_authority/work_registration.rs",
+      "sha256_raw": "3c0ec493e8e0b5caa2951bd2baf75e97c438ef081861cc8728c79532d9e6f82e",
+      "sha256_lf": "f03948c119dcd8376e90088971ebe1233ff3f3aa3dacb110aa0e4ecfca7280f7"
+    },
+    {
+      "path": "crates/engine/src/repository_durability.rs",
+      "sha256_raw": "f01f3311b01d21f4d907310991ba102373708e21c5f1017989e578f1bb648172",
+      "sha256_lf": "04c64eba8558b1550fb403debafea4aee8e9b7528bb1361ada7d62f8deca22ec"
+    },
+    {
+      "path": "crates/engine/src/work_state/store.rs",
+      "sha256_raw": "5eebb3ac215e714800709ab194a23ac398646b4ee12bbefdd9133bd0bb4cb49f",
+      "sha256_lf": "29f65357eeb434ce6d8c8b5a6e196991ac1ad7dcbd9350a02e9d3bcefb6bf866"
+    },
+    {
+      "path": "crates/engine/src/work_state/transaction.rs",
+      "sha256_raw": "a1c81c989461620a12436f5aad8467168b074681045eb67d2765fa43e629d3ec",
+      "sha256_lf": "bc4702af37d96631348286e1ff0190db1726b8246ba2e7ab30d4e52193a35285"
+    },
+    {
+      "path": "crates/engine/src/research_profile.rs",
+      "sha256_raw": "db30af4a6e65e0ed9e60b0f8f7e5cd0eb8ddff66e1468e0dd433cd85540ec617",
+      "sha256_lf": "db30af4a6e65e0ed9e60b0f8f7e5cd0eb8ddff66e1468e0dd433cd85540ec617"
+    }
+  ],
+  "harness": [
+    {
+      "path": "Cargo.toml",
+      "sha256": "9a44b692c96badc016174cc91d7204976689ea048499f364438a44ecf532fe63"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "531c8b39d57ddfdd70c717de91b0346c0fdb0961e3a8b4f35b40e6cd8dceef92"
+    },
+    {
+      "path": "src/main.rs",
+      "sha256": "50396287d0e8b55790c641f32476ca7eab8c38af04a9365fa6607398c4a39b56"
+    }
+  ]
+}

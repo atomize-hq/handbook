@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Users\\spmcc\\AppData\\Local\\Temp\\hcm-native-opt-target\\release\\work-state-capacity-research.exe",
+    "reads"
+  ],
+  "exit": 0,
+  "wall_s": 1067.8997666835785,
+  "exe_sha256": "12a63e46560f91a569f03f7ef44e7b5bbc5b55823fccbd16cf2d6a6d30f51c5f",
+  "sampled_peak_private_bytes": 123781120,
+  "os_peak_working_set_bytes": 144396288,
+  "resource_sample_interval_ms": 200,
+  "includes_population": true
+}

@@ -1,0 +1,11 @@
+   Compiling handbook-engine v0.2.0 (C:\Users\spmcc\.codex\worktrees\work-state-native-optimization\handbook\crates\engine)
+    Finished `release` profile [optimized] target(s) in 1m 31s
+     Running unittests src\lib.rs (C:/Users/spmcc/AppData/Local/Temp/hcm-native-opt-target\release\deps\handbook_engine-e4cc1223e8913016.exe)
+
+running 3 tests
+test research_profile::tests::research_bootstrap_absence_remains_distinct_from_substitution ... ok
+test research_profile::tests::research_held_parent_rejects_new_hardlink_on_each_inventory ... ok
+test research_profile::tests::research_parent_binding_keeps_fresh_leaf_bytes_and_releases_on_drop ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 285 filtered out; finished in 0.02s
+
