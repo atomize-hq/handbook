@@ -257,8 +257,12 @@ fn original_physical_roots_survive_unified_successors_recovery_governance_revoca
             collision.request_key = "cross-schema-collision".into();
             collision.item_key = receipt.snapshot.item_key.clone();
             assert!(sdk
-                .prepare_work_registration(&initial, &head, collision)
-                .is_err());
+                .register_work_item(
+                    sdk.prepare_work_registration(&initial, &head, collision)
+                        .unwrap()
+                )
+                .outcome
+                .is_none());
         }
         if scenario.ends_with("governance") {
             govern(&sdk, &initial);
@@ -382,8 +386,13 @@ fn original_physical_roots_survive_unified_successors_recovery_governance_revoca
             let mut blind = request.input.clone();
             blind.request_key = "blind-replacement-refuses".into();
             assert!(reopened
-                .prepare_work_registration(&initial, &head, blind)
-                .is_err());
+                .register_work_item(
+                    reopened
+                        .prepare_work_registration(&initial, &head, blind)
+                        .unwrap()
+                )
+                .outcome
+                .is_none());
         }
         assert_original_records(&root, &original);
     }
@@ -463,8 +472,12 @@ fn original_packet1_physical_roots_survive_kinds_support_and_original_recovery()
                 collision.request_key =
                     format!("cross-packet-collision-{}", receipt.snapshot.item_key);
                 assert!(sdk
-                    .prepare_work_registration(&initial, &head, collision)
-                    .is_err());
+                    .register_work_item(
+                        sdk.prepare_work_registration(&initial, &head, collision)
+                            .unwrap()
+                    )
+                    .outcome
+                    .is_none());
             }
         }
         if scenario.ends_with("governance") {
@@ -600,8 +613,13 @@ fn original_packet1_physical_roots_survive_kinds_support_and_original_recovery()
             let mut blind = request.input.clone();
             blind.request_key = "packet1-blind-replacement-refuses".into();
             assert!(reopened
-                .prepare_work_registration(&initial, &head, blind)
-                .is_err());
+                .register_work_item(
+                    reopened
+                        .prepare_work_registration(&initial, &head, blind)
+                        .unwrap()
+                )
+                .outcome
+                .is_none());
         }
         assert_original_records(&root, &original);
     }

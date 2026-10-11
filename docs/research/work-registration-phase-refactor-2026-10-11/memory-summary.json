@@ -1,0 +1,1126 @@
+{
+  "pristine_cells": [
+    {
+      "cohort": "explicit",
+      "history": 8,
+      "baseline": {
+        "sampled_peak_private_bytes": {
+          "min": 30769152,
+          "median": 34572288.0,
+          "max": 40685568,
+          "samples": [
+            40685568,
+            30769152,
+            37163008,
+            31809536,
+            37511168,
+            31981568
+          ]
+        },
+        "os_peak_working_set_bytes": {
+          "min": 43294720,
+          "median": 47544320.0,
+          "max": 51392512,
+          "samples": [
+            51392512,
+            43417600,
+            49643520,
+            45445120,
+            51339264,
+            43294720
+          ]
+        },
+        "sampled_peak_process_handles": {
+          "min": 326,
+          "median": 337.5,
+          "max": 350,
+          "samples": [
+            350,
+            326,
+            349,
+            326,
+            350,
+            326
+          ]
+        },
+        "handles_before": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        },
+        "handles_after": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        }
+      },
+      "refactor": {
+        "sampled_peak_private_bytes": {
+          "min": 32911360,
+          "median": 37595136.0,
+          "max": 39763968,
+          "samples": [
+            39763968,
+            35045376,
+            38162432,
+            37027840,
+            38211584,
+            32911360
+          ]
+        },
+        "os_peak_working_set_bytes": {
+          "min": 45256704,
+          "median": 49838080.0,
+          "max": 53903360,
+          "samples": [
+            53903360,
+            45428736,
+            51609600,
+            48066560,
+            53190656,
+            45256704
+          ]
+        },
+        "sampled_peak_process_handles": {
+          "min": 327,
+          "median": 338.0,
+          "max": 351,
+          "samples": [
+            350,
+            327,
+            351,
+            327,
+            349,
+            327
+          ]
+        },
+        "handles_before": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        },
+        "handles_after": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        }
+      }
+    },
+    {
+      "cohort": "explicit",
+      "history": 16,
+      "baseline": {
+        "sampled_peak_private_bytes": {
+          "min": 47202304,
+          "median": 56922112.0,
+          "max": 65052672,
+          "samples": [
+            47362048,
+            63787008,
+            47202304,
+            62595072,
+            51249152,
+            65052672
+          ]
+        },
+        "os_peak_working_set_bytes": {
+          "min": 58834944,
+          "median": 68274176.0,
+          "max": 76120064,
+          "samples": [
+            59506688,
+            74977280,
+            58834944,
+            73539584,
+            63008768,
+            76120064
+          ]
+        },
+        "sampled_peak_process_handles": {
+          "min": 430,
+          "median": 442.0,
+          "max": 455,
+          "samples": [
+            430,
+            455,
+            430,
+            454,
+            430,
+            455
+          ]
+        },
+        "handles_before": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        },
+        "handles_after": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        }
+      },
+      "refactor": {
+        "sampled_peak_private_bytes": {
+          "min": 51048448,
+          "median": 62926848.0,
+          "max": 75337728,
+          "samples": [
+            51224576,
+            72474624,
+            51048448,
+            64794624,
+            61059072,
+            75337728
+          ]
+        },
+        "os_peak_working_set_bytes": {
+          "min": 65781760,
+          "median": 76120064.0,
+          "max": 85204992,
+          "samples": [
+            65900544,
+            82489344,
+            65781760,
+            80658432,
+            71581696,
+            85204992
+          ]
+        },
+        "sampled_peak_process_handles": {
+          "min": 430,
+          "median": 442.0,
+          "max": 456,
+          "samples": [
+            430,
+            456,
+            430,
+            454,
+            430,
+            455
+          ]
+        },
+        "handles_before": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        },
+        "handles_after": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        }
+      }
+    },
+    {
+      "cohort": "explicit",
+      "history": 31,
+      "baseline": {
+        "sampled_peak_private_bytes": {
+          "min": 76664832,
+          "median": 95256576.0,
+          "max": 114028544,
+          "samples": [
+            76664832,
+            107458560,
+            77406208,
+            106795008,
+            83718144,
+            114028544
+          ]
+        },
+        "os_peak_working_set_bytes": {
+          "min": 88084480,
+          "median": 106223616.0,
+          "max": 124588032,
+          "samples": [
+            88158208,
+            118394880,
+            88084480,
+            117526528,
+            94920704,
+            124588032
+          ]
+        },
+        "sampled_peak_process_handles": {
+          "min": 625,
+          "median": 637.5,
+          "max": 650,
+          "samples": [
+            625,
+            649,
+            626,
+            650,
+            626,
+            649
+          ]
+        },
+        "handles_before": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        },
+        "handles_after": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        }
+      },
+      "refactor": {
+        "sampled_peak_private_bytes": {
+          "min": 84066304,
+          "median": 109201408.0,
+          "max": 134316032,
+          "samples": [
+            92786688,
+            115970048,
+            84066304,
+            124162048,
+            102432768,
+            134316032
+          ]
+        },
+        "os_peak_working_set_bytes": {
+          "min": 103292928,
+          "median": 123729920.0,
+          "max": 144228352,
+          "samples": [
+            103292928,
+            136151040,
+            103514112,
+            134250496,
+            113209344,
+            144228352
+          ]
+        },
+        "sampled_peak_process_handles": {
+          "min": 625,
+          "median": 637.5,
+          "max": 650,
+          "samples": [
+            625,
+            650,
+            625,
+            650,
+            626,
+            649
+          ]
+        },
+        "handles_before": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        },
+        "handles_after": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        }
+      }
+    },
+    {
+      "cohort": "kind",
+      "history": 8,
+      "baseline": {
+        "sampled_peak_private_bytes": {
+          "min": 33861632,
+          "median": 38062080.0,
+          "max": 42999808,
+          "samples": [
+            35061760,
+            42999808,
+            33861632,
+            37384192,
+            41533440,
+            38739968
+          ]
+        },
+        "os_peak_working_set_bytes": {
+          "min": 45867008,
+          "median": 51316736.0,
+          "max": 54247424,
+          "samples": [
+            47124480,
+            54247424,
+            45867008,
+            51171328,
+            53297152,
+            51462144
+          ]
+        },
+        "sampled_peak_process_handles": {
+          "min": 325,
+          "median": 337.0,
+          "max": 350,
+          "samples": [
+            326,
+            350,
+            325,
+            348,
+            326,
+            350
+          ]
+        },
+        "handles_before": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        },
+        "handles_after": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        }
+      },
+      "refactor": {
+        "sampled_peak_private_bytes": {
+          "min": 35397632,
+          "median": 40775680.0,
+          "max": 42782720,
+          "samples": [
+            35917824,
+            42233856,
+            35397632,
+            42459136,
+            42782720,
+            39317504
+          ]
+        },
+        "os_peak_working_set_bytes": {
+          "min": 48156672,
+          "median": 53364736.0,
+          "max": 57077760,
+          "samples": [
+            49737728,
+            57077760,
+            48156672,
+            53215232,
+            56926208,
+            53514240
+          ]
+        },
+        "sampled_peak_process_handles": {
+          "min": 326,
+          "median": 338.5,
+          "max": 350,
+          "samples": [
+            326,
+            350,
+            327,
+            350,
+            326,
+            350
+          ]
+        },
+        "handles_before": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        },
+        "handles_after": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        }
+      }
+    },
+    {
+      "cohort": "kind",
+      "history": 16,
+      "baseline": {
+        "sampled_peak_private_bytes": {
+          "min": 53981184,
+          "median": 67692544.0,
+          "max": 70160384,
+          "samples": [
+            56029184,
+            70160384,
+            53981184,
+            67440640,
+            69521408,
+            67944448
+          ]
+        },
+        "os_peak_working_set_bytes": {
+          "min": 65060864,
+          "median": 78854144.0,
+          "max": 81358848,
+          "samples": [
+            66232320,
+            81358848,
+            65060864,
+            78647296,
+            80551936,
+            79060992
+          ]
+        },
+        "sampled_peak_process_handles": {
+          "min": 430,
+          "median": 442.5,
+          "max": 454,
+          "samples": [
+            431,
+            454,
+            430,
+            454,
+            430,
+            454
+          ]
+        },
+        "handles_before": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        },
+        "handles_after": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        }
+      },
+      "refactor": {
+        "sampled_peak_private_bytes": {
+          "min": 63524864,
+          "median": 74483712.0,
+          "max": 81948672,
+          "samples": [
+            64974848,
+            80809984,
+            63524864,
+            70819840,
+            81948672,
+            78147584
+          ]
+        },
+        "os_peak_working_set_bytes": {
+          "min": 73560064,
+          "median": 87715840.0,
+          "max": 91541504,
+          "samples": [
+            74858496,
+            90562560,
+            73560064,
+            86736896,
+            91541504,
+            88694784
+          ]
+        },
+        "sampled_peak_process_handles": {
+          "min": 431,
+          "median": 442.5,
+          "max": 455,
+          "samples": [
+            431,
+            455,
+            431,
+            454,
+            431,
+            454
+          ]
+        },
+        "handles_before": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        },
+        "handles_after": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        }
+      }
+    },
+    {
+      "cohort": "kind",
+      "history": 31,
+      "baseline": {
+        "sampled_peak_private_bytes": {
+          "min": 90812416,
+          "median": 119306240.0,
+          "max": 122359808,
+          "samples": [
+            92282880,
+            122359808,
+            90812416,
+            118218752,
+            121085952,
+            120393728
+          ]
+        },
+        "os_peak_working_set_bytes": {
+          "min": 101158912,
+          "median": 130007040.0,
+          "max": 132444160,
+          "samples": [
+            102801408,
+            132444160,
+            101158912,
+            128999424,
+            131719168,
+            131014656
+          ]
+        },
+        "sampled_peak_process_handles": {
+          "min": 625,
+          "median": 637.5,
+          "max": 649,
+          "samples": [
+            626,
+            649,
+            625,
+            649,
+            625,
+            649
+          ]
+        },
+        "handles_before": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        },
+        "handles_after": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        }
+      },
+      "refactor": {
+        "sampled_peak_private_bytes": {
+          "min": 102699008,
+          "median": 141858816.0,
+          "max": 146386944,
+          "samples": [
+            102699008,
+            143982592,
+            110608384,
+            139735040,
+            146386944,
+            144105472
+          ]
+        },
+        "os_peak_working_set_bytes": {
+          "min": 120479744,
+          "median": 151312384.0,
+          "max": 156311552,
+          "samples": [
+            121819136,
+            153350144,
+            120479744,
+            149274624,
+            156311552,
+            153907200
+          ]
+        },
+        "sampled_peak_process_handles": {
+          "min": 625,
+          "median": 638.0,
+          "max": 650,
+          "samples": [
+            625,
+            650,
+            626,
+            650,
+            626,
+            650
+          ]
+        },
+        "handles_before": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        },
+        "handles_after": {
+          "min": 57,
+          "median": 57.0,
+          "max": 57,
+          "samples": [
+            57,
+            57,
+            57,
+            57,
+            57,
+            57
+          ]
+        }
+      }
+    }
+  ],
+  "attribution_handle_samples": [
+    {
+      "cohort": "explicit",
+      "history": 8,
+      "variant": "baseline",
+      "instrumented": true,
+      "before": 57,
+      "boundary_sample_max": 221,
+      "after": 57,
+      "sampled_peak_process_handles": 326,
+      "sampled_peak_private_bytes": 30568448,
+      "os_peak_working_set_bytes": 50810880
+    },
+    {
+      "cohort": "explicit",
+      "history": 8,
+      "variant": "refactor",
+      "instrumented": true,
+      "before": 57,
+      "boundary_sample_max": 221,
+      "after": 57,
+      "sampled_peak_process_handles": 327,
+      "sampled_peak_private_bytes": 33796096,
+      "os_peak_working_set_bytes": 52109312
+    },
+    {
+      "cohort": "explicit",
+      "history": 8,
+      "variant": "refactor",
+      "instrumented": false,
+      "before": 57,
+      "boundary_sample_max": 221,
+      "after": 57,
+      "sampled_peak_process_handles": 326,
+      "sampled_peak_private_bytes": 33886208,
+      "os_peak_working_set_bytes": 45686784
+    },
+    {
+      "cohort": "explicit",
+      "history": 8,
+      "variant": "baseline",
+      "instrumented": false,
+      "before": 57,
+      "boundary_sample_max": 221,
+      "after": 57,
+      "sampled_peak_process_handles": 324,
+      "sampled_peak_private_bytes": 31993856,
+      "os_peak_working_set_bytes": 43356160
+    },
+    {
+      "cohort": "kind",
+      "history": 8,
+      "variant": "refactor",
+      "instrumented": false,
+      "before": 57,
+      "boundary_sample_max": 221,
+      "after": 57,
+      "sampled_peak_process_handles": 327,
+      "sampled_peak_private_bytes": 37326848,
+      "os_peak_working_set_bytes": 49594368
+    },
+    {
+      "cohort": "kind",
+      "history": 8,
+      "variant": "baseline",
+      "instrumented": false,
+      "before": 57,
+      "boundary_sample_max": 221,
+      "after": 57,
+      "sampled_peak_process_handles": 326,
+      "sampled_peak_private_bytes": 34566144,
+      "os_peak_working_set_bytes": 46968832
+    },
+    {
+      "cohort": "kind",
+      "history": 8,
+      "variant": "baseline",
+      "instrumented": true,
+      "before": 57,
+      "boundary_sample_max": 221,
+      "after": 57,
+      "sampled_peak_process_handles": 327,
+      "sampled_peak_private_bytes": 36052992,
+      "os_peak_working_set_bytes": 47628288
+    },
+    {
+      "cohort": "kind",
+      "history": 8,
+      "variant": "refactor",
+      "instrumented": true,
+      "before": 57,
+      "boundary_sample_max": 221,
+      "after": 57,
+      "sampled_peak_process_handles": 327,
+      "sampled_peak_private_bytes": 35573760,
+      "os_peak_working_set_bytes": 49995776
+    },
+    {
+      "cohort": "explicit",
+      "history": 16,
+      "variant": "baseline",
+      "instrumented": true,
+      "before": 57,
+      "boundary_sample_max": 269,
+      "after": 57,
+      "sampled_peak_process_handles": 431,
+      "sampled_peak_private_bytes": 47353856,
+      "os_peak_working_set_bytes": 59711488
+    },
+    {
+      "cohort": "explicit",
+      "history": 16,
+      "variant": "refactor",
+      "instrumented": true,
+      "before": 57,
+      "boundary_sample_max": 269,
+      "after": 57,
+      "sampled_peak_process_handles": 431,
+      "sampled_peak_private_bytes": 51445760,
+      "os_peak_working_set_bytes": 66625536
+    },
+    {
+      "cohort": "explicit",
+      "history": 16,
+      "variant": "refactor",
+      "instrumented": false,
+      "before": 57,
+      "boundary_sample_max": 269,
+      "after": 57,
+      "sampled_peak_process_handles": 430,
+      "sampled_peak_private_bytes": 55459840,
+      "os_peak_working_set_bytes": 65855488
+    },
+    {
+      "cohort": "explicit",
+      "history": 16,
+      "variant": "baseline",
+      "instrumented": false,
+      "before": 57,
+      "boundary_sample_max": 269,
+      "after": 57,
+      "sampled_peak_process_handles": 430,
+      "sampled_peak_private_bytes": 46391296,
+      "os_peak_working_set_bytes": 59342848
+    },
+    {
+      "cohort": "kind",
+      "history": 16,
+      "variant": "refactor",
+      "instrumented": false,
+      "before": 57,
+      "boundary_sample_max": 269,
+      "after": 57,
+      "sampled_peak_process_handles": 430,
+      "sampled_peak_private_bytes": 65245184,
+      "os_peak_working_set_bytes": 75120640
+    },
+    {
+      "cohort": "kind",
+      "history": 16,
+      "variant": "baseline",
+      "instrumented": false,
+      "before": 57,
+      "boundary_sample_max": 269,
+      "after": 57,
+      "sampled_peak_process_handles": 430,
+      "sampled_peak_private_bytes": 55062528,
+      "os_peak_working_set_bytes": 66539520
+    },
+    {
+      "cohort": "kind",
+      "history": 16,
+      "variant": "baseline",
+      "instrumented": true,
+      "before": 57,
+      "boundary_sample_max": 269,
+      "after": 57,
+      "sampled_peak_process_handles": 431,
+      "sampled_peak_private_bytes": 54042624,
+      "os_peak_working_set_bytes": 66797568
+    },
+    {
+      "cohort": "kind",
+      "history": 16,
+      "variant": "refactor",
+      "instrumented": true,
+      "before": 57,
+      "boundary_sample_max": 269,
+      "after": 57,
+      "sampled_peak_process_handles": 430,
+      "sampled_peak_private_bytes": 65388544,
+      "os_peak_working_set_bytes": 75522048
+    },
+    {
+      "cohort": "explicit",
+      "history": 31,
+      "variant": "baseline",
+      "instrumented": true,
+      "before": 57,
+      "boundary_sample_max": 359,
+      "after": 57,
+      "sampled_peak_process_handles": 626,
+      "sampled_peak_private_bytes": 77770752,
+      "os_peak_working_set_bytes": 89665536
+    },
+    {
+      "cohort": "explicit",
+      "history": 31,
+      "variant": "refactor",
+      "instrumented": true,
+      "before": 57,
+      "boundary_sample_max": 359,
+      "after": 57,
+      "sampled_peak_process_handles": 626,
+      "sampled_peak_private_bytes": 92508160,
+      "os_peak_working_set_bytes": 104153088
+    },
+    {
+      "cohort": "explicit",
+      "history": 31,
+      "variant": "refactor",
+      "instrumented": false,
+      "before": 57,
+      "boundary_sample_max": 359,
+      "after": 57,
+      "sampled_peak_process_handles": 626,
+      "sampled_peak_private_bytes": 92758016,
+      "os_peak_working_set_bytes": 103337984
+    },
+    {
+      "cohort": "explicit",
+      "history": 31,
+      "variant": "baseline",
+      "instrumented": false,
+      "before": 57,
+      "boundary_sample_max": 359,
+      "after": 57,
+      "sampled_peak_process_handles": 626,
+      "sampled_peak_private_bytes": 77922304,
+      "os_peak_working_set_bytes": 88465408
+    },
+    {
+      "cohort": "kind",
+      "history": 31,
+      "variant": "refactor",
+      "instrumented": false,
+      "before": 57,
+      "boundary_sample_max": 359,
+      "after": 57,
+      "sampled_peak_process_handles": 626,
+      "sampled_peak_private_bytes": 111718400,
+      "os_peak_working_set_bytes": 121946112
+    },
+    {
+      "cohort": "kind",
+      "history": 31,
+      "variant": "baseline",
+      "instrumented": false,
+      "before": 57,
+      "boundary_sample_max": 359,
+      "after": 57,
+      "sampled_peak_process_handles": 626,
+      "sampled_peak_private_bytes": 92434432,
+      "os_peak_working_set_bytes": 102965248
+    },
+    {
+      "cohort": "kind",
+      "history": 31,
+      "variant": "baseline",
+      "instrumented": true,
+      "before": 57,
+      "boundary_sample_max": 359,
+      "after": 57,
+      "sampled_peak_process_handles": 626,
+      "sampled_peak_private_bytes": 93827072,
+      "os_peak_working_set_bytes": 104275968
+    },
+    {
+      "cohort": "kind",
+      "history": 31,
+      "variant": "refactor",
+      "instrumented": true,
+      "before": 57,
+      "boundary_sample_max": 359,
+      "after": 57,
+      "sampled_peak_process_handles": 626,
+      "sampled_peak_private_bytes": 101928960,
+      "os_peak_working_set_bytes": 122138624
+    }
+  ],
+  "private_and_handle_sampling_interval_ms": 100,
+  "working_set_peak_is_os_reported": true,
+  "polling_and_boundary_handle_maxima_are_sampled_not_exact_peaks": true,
+  "cache_gauge_excludes_decoded_intent_output_rc_and_allocator": true
+}

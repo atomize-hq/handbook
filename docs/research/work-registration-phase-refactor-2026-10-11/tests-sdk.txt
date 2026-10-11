@@ -1,0 +1,51 @@
+   Compiling handbook-sdk v0.1.0 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\sdk)
+    Finished `release` profile [optimized] target(s) in 2.95s
+     Running tests\work_kind.rs (target\release\deps\work_kind-2572cb1022f4f21d.exe)
+
+running 7 tests
+test closed_kind_codecs_refuse_unknown_incomplete_and_overridden_compositions ... ok
+test current_g_grant_reuses_d_kind_and_runtime_reset_retains_both_originals ... ok
+test exact_kind_establishment_is_independent_on_d_and_g_in_both_bootstrap_orders ... ok
+test export_default_feature_kind_consumer_inputs ... ok
+test kind_and_current_scope_intersect_and_revocation_does_not_change_definition_truth ... ok
+test ordinary_planning_requirements_meaning_matches_explicit_but_retains_exact_kind_provenance ... ok
+test original_human_exact_content_and_immutable_version_are_not_reusable_permission ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 174.73s
+
+     Running tests\work_kind_durability.rs (target\release\deps\work_kind_durability-6bd54febcc3bdf0a.exe)
+
+running 11 tests
+test combined_saturation_closes_accepted_definition_and_kind_item_without_fresh_slots ... ok
+test definition_every_publication_prefix_preserves_original_basis_after_governance_check_revocation_and_reset ... ok
+test kind_item_every_publication_prefix_never_borrows_successor_or_transition_authority ... ok
+test native_initial_revocation_before_check_adoption_blocks_kind_and_work_bootstrap ... ok
+test native_kind_child ... ignored
+test pending_definition_is_local_but_pending_registration_administration_suspends_work ... ok
+test positive_noncommit_releases_only_version_and_never_original_request_content ... ok
+test real_process_death_preserves_definition_and_kind_item_publication_truth ... ok
+
+thread 'native_kind_child' panicked at crates\sdk\tests\work_kind_durability.rs:970:25:
+assertion `left == right` failed: WorkExecutionV1 { disposition: Refused, outcome: None, refusal: Some(LocalAuthorityRefusalV1 { code: "work_grant_revoked_or_superseded", detail: "revocation or explicit successor makes original grant unavailable for new effects", unresolved_request: None }) }
+  left: Refused
+ right: Committed
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test real_process_kind_item_serializes_scope_change_revocation_and_governance_in_both_orders ... FAILED
+test real_process_pending_new_version_does_not_suspend_committed_kind_read_or_item_use ... ok
+test real_process_same_version_and_grant_kind_bootstrap_races_have_one_owner_and_exact_version ... ok
+
+failures:
+
+---- real_process_kind_item_serializes_scope_change_revocation_and_governance_in_both_orders stdout ----
+
+thread 'real_process_kind_item_serializes_scope_change_revocation_and_governance_in_both_orders' panicked at crates\sdk\tests\work_kind_durability.rs:816:17:
+assertion failed: second.wait().unwrap().success()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    real_process_kind_item_serializes_scope_change_revocation_and_governance_in_both_orders
+
+test result: FAILED. 9 passed; 1 failed; 1 ignored; 0 measured; 0 filtered out; finished in 923.90s
+
+error: test failed, to rerun pass `-p handbook-sdk --test work_kind_durability`

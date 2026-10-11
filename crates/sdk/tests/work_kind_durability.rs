@@ -326,9 +326,13 @@ fn pending_definition_is_local_but_pending_registration_administration_suspends_
         .unwrap();
     let administration = prepared.locator().clone();
     NativeWorkStateV1::activate_with_boundary_for_test(dir.path(), prepared, fault(B::Snapshot));
-    assert!(sdk
+    let bound_suspended = sdk
         .prepare_work_registration(&initial, &grant, input(&grant, &first, "suspended-work"))
-        .is_err());
+        .unwrap();
+    assert_eq!(
+        sdk.register_work_item(bound_suspended).disposition,
+        WorkDispositionV1::Refused
+    );
     // Definition establishment is independent even while registration head administration is pending.
     let third = establish_kind(&sdk, &initial, &check, "kind-3", "project.kind.leaf@3.0.0");
     assert!(matches!(
@@ -946,30 +950,27 @@ fn native_kind_child() {
                 let binding: WorkKindBindingV1 =
                     serde_json::from_slice(&fs::read(repo.join("binding.kind-test.json")).unwrap())
                         .unwrap();
-                match sdk.prepare_work_registration(
-                    &initial,
-                    &grant,
-                    input(&grant, &binding, "child-item"),
-                ) {
-                    Err(_) => "refused",
-                    Ok(prepared) => {
-                        fs::write(
-                            repo.join("item.original.json"),
-                            prepared.locator().canonical_json_bytes().unwrap(),
-                        )
-                        .unwrap();
-                        let execution = NativeWorkStateV1::register_with_boundary_for_test(
-                            repo,
-                            prepared,
-                            &mut boundary,
-                        );
-                        assert_eq!(
-                            execution.disposition,
-                            WorkDispositionV1::Committed,
-                            "{execution:?}"
-                        );
-                        "committed"
-                    }
+                let prepared = sdk
+                    .prepare_work_registration(
+                        &initial,
+                        &grant,
+                        input(&grant, &binding, "child-item"),
+                    )
+                    .unwrap();
+                fs::write(
+                    repo.join("item.original.json"),
+                    prepared.locator().canonical_json_bytes().unwrap(),
+                )
+                .unwrap();
+                let execution = NativeWorkStateV1::register_with_boundary_for_test(
+                    repo,
+                    prepared,
+                    &mut boundary,
+                );
+                match execution.disposition {
+                    WorkDispositionV1::Committed => "committed",
+                    WorkDispositionV1::Refused => "refused",
+                    _ => panic!("{execution:?}"),
                 }
             }
             "change" => {

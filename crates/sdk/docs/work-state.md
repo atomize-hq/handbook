@@ -32,6 +32,27 @@ let recovery = sdk.recover_work_registration_request(&original);
 let support = sdk.inspect_work_completion_support(&original)?;
 ```
 
+`prepare_work_registration` binds the supplied original grant, submitted form,
+effective composition and complete portable locator. Save that locator before
+invoking the prepared value. Explicit preparation uses only supplied values;
+kind preparation verifies the exact committed immutable definition and its
+approval/provenance in one complete retained-history read. Neither reserves an
+item or slot, holds a guard during caller delay, nor promises current grant
+usability, item absence, capacity or eventual commit. Invalid setup/check
+congruence, malformed input, actor and declared-scope mismatches still fail
+binding. Current applicability, grant usability, conflicts and capacity are
+invocation concerns, including when already unavailable at binding. An explicit
+request can therefore bind against an unavailable repository path; invocation
+must still verify its exact current native project and owner.
+
+For example, bind and save an original on R1, then revoke R1. A fresh invocation
+refuses. Binding another otherwise valid request on the supplied R1 can still
+succeed, but it grants no permission to invoke. If the exact saved original
+committed before revocation, invocation/recovery replays its original receipt
+without another effect. `resolve_current_work_registration_terms` remains a
+separate live observation callers can request for early diagnostics; it reserves
+nothing and does not promise a later invocation will succeed.
+
 Use separate stable item and request keys. Choose `WorkCompositionV1::ordinary_leaf()`,
 `planning_output(question)` or `requirements_input(definition)`. Planning declares
 one bounded required-output question before issuance; it contains no guessed future
@@ -150,8 +171,9 @@ locator. An ordinary kind takes `None`. Requirements-input passes an exact separ
 Contracts definition copied with the helper above; neither establishment nor work
 registration assesses that definition's truth or creates it.
 
-Every item must fit both retained kind bounds and its exact current registration
-scope. A committed planning kind cannot authorize work under an ordinary-only grant,
+Every item binds within both retained kind bounds and its supplied grant's declared
+scope; fresh invocation additionally requires that exact grant to be current and
+usable. A committed planning kind cannot authorize work under an ordinary-only grant,
 and a 300-byte planning value refuses under a 256-byte grant even when its kind
 permits 512 bytes. A narrower kind can also refuse values permitted by the grant.
 The effective descriptor/role match equivalent explicit input, while submitted form,
@@ -205,7 +227,8 @@ original meaning during current/history/recovery reads.
 | Native response | Meaning and next step |
 | --- | --- |
 | `Committed` / `Replayed` with receipt | One exact definition is retained or one item is registered `open`; replay creates nothing. Save its original locator and inspect current truth separately. Definition truth supplies no work permission. |
-| `Refused` or preparation error | Named input, authority, currentness or integrity condition failed. Changed content needs a new key under valid authority and cannot overwrite an existing item. |
+| Preparation error | Supplied input, congruence, declared scope, locator bounds or exact retained kind proof failed binding. No request was accepted. |
+| `Refused` | Named input, authority, currentness, conflict, capacity or integrity condition failed invocation. Changed content needs a new key under valid authority and cannot overwrite an existing item. |
 | `NonCommitted` | The owner positively proved no terminal commit. Preserve this history; a fresh effect still requires current permission. Administrative suspension lifts only if the unchanged predecessor remains current and unrevoked. |
 | `Uncertain` | Retain the original locator and recover it. Do not retry under another key or claim absent/open success. |
 | `Pending` | Only retained candidates/reservations exist. A snapshot without its terminal is pending. Accepted authority change/revocation suspends predecessor use; the candidate supplies no permission. Recover the original request. |
@@ -214,9 +237,11 @@ original meaning during current/history/recovery reads.
 | Current `Absent` | Positive owner inventory proves this item absent. Missing/corrupt owner proof refuses instead. |
 | Completion `unsupported` / `not_assessed` | No eligibility, disposition, Determination or close effect is formed. A registration receipt proves creation only. |
 
-Current/new-effect preparation observes Contracts D/G applicability outside
-native consuming locks; Engine validates the exact basis while holding its
-original live guards through durable terminal publication. For an explicit
+Current-terms resolution and authority/kind-establishment preparation observe
+Contracts D/G applicability outside native consuming locks. Item preparation
+instead binds the supplied original basis; fresh invocation validates current
+authority while holding its original live guards through durable terminal
+publication. For an explicit
 same-basis scope successor use `WorkTermsTransitionV1::ScopeChange(&latest_grant)`
 with fresh original-human approval. Only composition/parameter scope changes;
 actor/agent, original lineage, effect, reach, assurance, reservations, revocation
@@ -224,7 +249,8 @@ principal and retention remain fixed. Even narrowing requires an immutable
 successor. Acceptance suspends predecessor use and rejects competing administration.
 Commit establishes one usable head; historical grants are never unioned.
 
-D to G makes old D preparations stale. Use
+D to G makes the original D authority unusable for fresh invocation; pure item
+binding can still retain its exact original D locator. Use
 `WorkTermsTransitionV1::EstablishFromDeferred(&latest_grant)` with fresh approval
 of the unchanged exact scope/fixed fields, including after multiple revisions.
 Change scope separately after re-establishment. Committed revocation has no

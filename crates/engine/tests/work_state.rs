@@ -14,6 +14,53 @@ fn input() -> WorkRegistrationInputV1 {
     }
 }
 #[test]
+fn retained_explicit_binding_uses_supplied_exact_basis_and_original_bytes_without_native_reads() {
+    let bytes = include_bytes!("../../sdk/tests/fixtures/work_state_v1/committed-request.json");
+    let original = WorkRequestLocatorV1::from_json_bytes(bytes).unwrap();
+    let directory = tempfile::tempdir().unwrap();
+    let missing_root = directory.path().join("not-established");
+    let prepared = NativeWorkStateV1::prepare_registration(
+        &missing_root,
+        &original.grant,
+        &original.grant.basis,
+        original.input.clone(),
+    )
+    .unwrap();
+    assert_eq!(prepared.locator(), &original);
+    assert_eq!(prepared.locator().canonical_json_bytes().unwrap(), bytes);
+    assert!(!missing_root.exists());
+    let mut different = original.grant.basis.clone();
+    different.governance_tree_fingerprint = format!("sha256:{}", "b".repeat(64));
+    let error = NativeWorkStateV1::prepare_registration(
+        &missing_root,
+        &original.grant,
+        &different,
+        original.input.clone(),
+    )
+    .err()
+    .unwrap();
+    assert_eq!(error.code, "work_basis_stale");
+    different.governance_tree_fingerprint = "malformed".into();
+    assert!(NativeWorkStateV1::prepare_registration(
+        &missing_root,
+        &original.grant,
+        &different,
+        original.input.clone(),
+    )
+    .is_err());
+    let mut actor = original.input.clone();
+    actor.actor = "other-agent".into();
+    assert!(NativeWorkStateV1::prepare_registration(
+        &missing_root,
+        &original.grant,
+        &original.grant.basis,
+        actor
+    )
+    .is_err());
+    assert!(!missing_root.exists());
+}
+
+#[test]
 fn identity_and_exact_descriptor_do_not_depend_on_codec_release_or_delivery() {
     let one = work_item_identity_v1("project", "item").unwrap();
     assert_eq!(one, work_item_identity_v1("project", "item").unwrap());

@@ -1,0 +1,7 @@
+{
+  "inventory_started_utc": "2026-10-11T18:54:21.5645745Z",
+  "inventory_completed_utc": "2026-10-11T18:54:21.6957367Z",
+  "known_native_build_test_population_measurement_workers": [],
+  "all_measurements_complete": true,
+  "concurrent_workload_policy": "serial native measurements; root prose/evidence reads only"
+}

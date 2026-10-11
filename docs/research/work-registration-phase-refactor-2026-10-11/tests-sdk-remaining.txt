@@ -1,0 +1,31 @@
+   Compiling handbook-sdk v0.1.0 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\sdk)
+    Finished `release` profile [optimized] target(s) in 8.79s
+     Running tests\work_kind_integrity.rs (target\release\deps\work_kind_integrity-2a05c90a5dade454.exe)
+
+running 10 tests
+test committed_kind_item_cannot_recover_without_exact_original_definition_proof ... ok
+test complete_derived_definition_records_refuse_before_owner_bootstrap ... ok
+test complete_derived_item_records_refuse_before_positive_reservation ... ok
+test definition_dependency_substitution_before_kind_item_terminal_cannot_publish ... ok
+test early_kind_and_kind_item_acceptance_keeps_original_positive_reservations ... ok
+test k2_and_scope_revocation_preserve_k1_definition_and_original_kind_item_receipt ... ok
+test kind_first_bootstrap_interruption_never_repairs_owner_or_mints_a_dummy_grant ... ok
+test lost_kind_owner_dependencies_never_rebootstrap_or_supply_absence ... ok
+test lost_whole_kind_transaction_and_corrupt_exact_definition_fail_closed ... ok
+test repeated_kind_history_reads_reject_in_place_and_substituted_original_definition_records ... FAILED
+
+failures:
+
+---- repeated_kind_history_reads_reject_in_place_and_substituted_original_definition_records stdout ----
+
+thread 'repeated_kind_history_reads_reject_in_place_and_substituted_original_definition_records' panicked at crates\sdk\tests\work_kind_integrity.rs:434:30:
+existing exact kind field
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    repeated_kind_history_reads_reject_in_place_and_substituted_original_definition_records
+
+test result: FAILED. 9 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 337.71s
+
+error: test failed, to rerun pass `-p handbook-sdk --test work_kind_integrity`

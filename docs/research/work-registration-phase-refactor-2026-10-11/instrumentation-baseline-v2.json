@@ -1,0 +1,262 @@
+{
+  "inserts": [
+    {
+      "file": "work_state/transaction.rs",
+      "name": "output",
+      "label": "work_state/transaction.rs:output"
+    },
+    {
+      "file": "work_state/transaction.rs",
+      "name": "decision",
+      "label": "work_state/transaction.rs:decision"
+    },
+    {
+      "file": "work_state/transaction.rs",
+      "name": "terminal",
+      "label": "work_state/transaction.rs:terminal"
+    },
+    {
+      "file": "work_state/transaction.rs",
+      "name": "publication",
+      "label": "work_state/transaction.rs:publication"
+    },
+    {
+      "file": "work_state/transaction.rs",
+      "name": "noncommit",
+      "label": "work_state/transaction.rs:noncommit"
+    },
+    {
+      "file": "work_state/transaction.rs",
+      "name": "parsed",
+      "label": "work_state/transaction.rs:parsed"
+    },
+    {
+      "file": "work_state/transaction.rs",
+      "name": "scan",
+      "label": "work_scan"
+    },
+    {
+      "file": "work_state/transaction.rs",
+      "name": "validate_authority_history",
+      "label": "work_state/transaction.rs:validate_authority_history"
+    },
+    {
+      "file": "work_state/transaction.rs",
+      "name": "current_grant",
+      "label": "work_state/transaction.rs:current_grant"
+    },
+    {
+      "file": "work_state/transaction.rs",
+      "name": "preflight",
+      "label": "work_state/transaction.rs:preflight"
+    },
+    {
+      "file": "work_state/transaction.rs",
+      "name": "execute",
+      "label": "work_state/transaction.rs:execute"
+    },
+    {
+      "file": "work_state/store.rs",
+      "name": "inventory",
+      "label": "work_state/store.rs:inventory"
+    },
+    {
+      "file": "work_state/store.rs",
+      "name": "manifest",
+      "label": "work_state/store.rs:manifest"
+    },
+    {
+      "file": "work_state/store.rs",
+      "name": "open",
+      "label": "work_state/store.rs:open"
+    },
+    {
+      "file": "work_state/store.rs",
+      "name": "required",
+      "label": "work_state/store.rs:required"
+    },
+    {
+      "file": "work_state/mod.rs",
+      "name": "encode",
+      "label": "work_state/mod.rs:encode"
+    },
+    {
+      "file": "work_state/scope.rs",
+      "name": "permits",
+      "label": "work_state/scope.rs:permits:153"
+    },
+    {
+      "file": "work_state/scope.rs",
+      "name": "permits",
+      "label": "work_state/scope.rs:permits:235"
+    },
+    {
+      "file": "local_authority/work_registration.rs",
+      "name": "validate_current",
+      "label": "local_authority/work_registration.rs:validate_current"
+    },
+    {
+      "file": "local_authority/work_registration.rs",
+      "name": "capture_proof",
+      "label": "local_authority/work_registration.rs:capture_proof"
+    },
+    {
+      "file": "local_authority/work_registration.rs",
+      "name": "with_work_registration_current",
+      "label": "local_authority/work_registration.rs:with_work_registration_current"
+    },
+    {
+      "file": "local_authority/work_registration.rs",
+      "name": "with_work_registration_establishment",
+      "label": "local_authority/work_registration.rs:with_work_registration_establishment"
+    },
+    {
+      "file": "local_authority/work_registration.rs",
+      "name": "validate_historical",
+      "label": "local_authority/work_registration.rs:validate_historical"
+    },
+    {
+      "file": "local_authority/local_check.rs",
+      "name": "work_registration_current",
+      "label": "local_authority/local_check.rs:work_registration_current"
+    },
+    {
+      "file": "local_authority.rs",
+      "name": "acquire",
+      "label": "local_authority.rs:acquire"
+    },
+    {
+      "file": "repository_durability.rs",
+      "name": "read_regular_bounded",
+      "label": "repository_durability.rs:read_regular_bounded"
+    },
+    {
+      "file": "repository_durability.rs",
+      "name": "list_directory_bounded",
+      "label": "repository_durability.rs:list_directory_bounded"
+    },
+    {
+      "file": "repository_durability.rs",
+      "name": "acquire_existing_exclusive_lock_v1",
+      "label": "repository_durability.rs:acquire_existing_exclusive_lock_v1"
+    },
+    {
+      "file": "repository_durability.rs",
+      "name": "lock_existing",
+      "label": "repository_durability.rs:lock_existing"
+    },
+    {
+      "file": "repository_durability.rs",
+      "name": "pin_windows_parent",
+      "label": "repository_durability.rs:pin_windows_parent"
+    },
+    {
+      "file": "repository_durability.rs",
+      "name": "windows_handle_info",
+      "label": "repository_durability.rs:windows_handle_info"
+    },
+    {
+      "file": "repository_durability.rs",
+      "name": "open_windows_directory_guard",
+      "label": "repository_durability.rs:open_windows_directory_guard"
+    },
+    {
+      "file": "definition_identity.rs",
+      "name": "canonical_json_bytes",
+      "label": "definition_identity.rs:canonical_json_bytes"
+    }
+  ],
+  "sources": [
+    {
+      "file": "work_state/transaction.rs",
+      "before_sha256": "e14b373d967ace5770bbf94d262df30fbbd53dbfd954d91b466de8985464a4c8",
+      "after_sha256": "ec373c2afad3aea6247510d6d4ce959c3492804e0960a3a0d36d41a7f49784cc"
+    },
+    {
+      "file": "work_state/store.rs",
+      "before_sha256": "ee820edc3fe25fc4f6ddd25c0ef08bd132e95e013246576adfa180f180d1ce02",
+      "after_sha256": "9bdc90dcfb8e3888dc9c62851b85210567d2de1887f891c008e33838d5929331"
+    },
+    {
+      "file": "work_state/mod.rs",
+      "before_sha256": "f4e2d1c546553247c5e006bdad39f61cb80d0f91ba1e530ff6cb76b9d1240933",
+      "after_sha256": "1c1d11f69ae7e88fbf03d6d58079d06e5d32694bb39efe8bafb05431d66f7356"
+    },
+    {
+      "file": "work_state/scope.rs",
+      "before_sha256": "56fed0297161933ba928bddbc4123229c6b0e3373c687dcd5d9446717ccfeee5",
+      "after_sha256": "b1b0a0c56ee575423959091fee4109b2a392eb9c275737776cc1ee41a8128b36"
+    },
+    {
+      "file": "local_authority/work_registration.rs",
+      "before_sha256": "61e0570f45456a9a12e6e8eb122e004908210135b01695ae701de7d22cfc7ce4",
+      "after_sha256": "cef2f13fb62a9410ea322a1644c4258f810e9b5042b3cdd20148a8dbc5e4b1a8"
+    },
+    {
+      "file": "local_authority/local_check.rs",
+      "before_sha256": "45ac2d9b9f471fdc54c818c4b04c716b80182b98d4b6e66d31b9a46d8493a271",
+      "after_sha256": "b526d3e24072ab55d6fdcb5ee3519f49efbbc8b3725603d1002de50f4d2bceaa"
+    },
+    {
+      "file": "local_authority.rs",
+      "before_sha256": "55f8832b06ee5051669e447878570cf6fa457341f926dafda24256175a067ffe",
+      "after_sha256": "9d03d02bb1885b37f99367f74ea4657474c4537995455049194c90a5b38c577e"
+    },
+    {
+      "file": "repository_durability.rs",
+      "before_sha256": "9a079fecb9b40fe08c542df5c73bcb809ae99c3ded282f201f711460ccb7fdb9",
+      "after_sha256": "fd92564d79bea712dfc06b85d8032ba6404ecaa133d474cafc3e2e458488ffc5"
+    },
+    {
+      "file": "definition_identity.rs",
+      "before_sha256": "a16c94af111664622eddf62feae9c4cad6defbd85fc743f55b6f11164108718e",
+      "after_sha256": "6d9d4e595508de83be1b80b93874d3c33f6420532ffa90f2ca478c0f37c3a306"
+    }
+  ],
+  "exact_matched_sources": {
+    "crates/engine/src/work_state/transaction.rs": {
+      "pristine_sha256": "e14b373d967ace5770bbf94d262df30fbbd53dbfd954d91b466de8985464a4c8",
+      "instrumented_sha256": "ec373c2afad3aea6247510d6d4ce959c3492804e0960a3a0d36d41a7f49784cc"
+    },
+    "crates/engine/src/work_state/store.rs": {
+      "pristine_sha256": "ee820edc3fe25fc4f6ddd25c0ef08bd132e95e013246576adfa180f180d1ce02",
+      "instrumented_sha256": "9bdc90dcfb8e3888dc9c62851b85210567d2de1887f891c008e33838d5929331"
+    },
+    "crates/engine/src/work_state/mod.rs": {
+      "pristine_sha256": "f4e2d1c546553247c5e006bdad39f61cb80d0f91ba1e530ff6cb76b9d1240933",
+      "instrumented_sha256": "1c1d11f69ae7e88fbf03d6d58079d06e5d32694bb39efe8bafb05431d66f7356"
+    },
+    "crates/engine/src/work_state/scope.rs": {
+      "pristine_sha256": "56fed0297161933ba928bddbc4123229c6b0e3373c687dcd5d9446717ccfeee5",
+      "instrumented_sha256": "b1b0a0c56ee575423959091fee4109b2a392eb9c275737776cc1ee41a8128b36"
+    },
+    "crates/engine/src/local_authority/work_registration.rs": {
+      "pristine_sha256": "61e0570f45456a9a12e6e8eb122e004908210135b01695ae701de7d22cfc7ce4",
+      "instrumented_sha256": "cef2f13fb62a9410ea322a1644c4258f810e9b5042b3cdd20148a8dbc5e4b1a8"
+    },
+    "crates/engine/src/local_authority/local_check.rs": {
+      "pristine_sha256": "45ac2d9b9f471fdc54c818c4b04c716b80182b98d4b6e66d31b9a46d8493a271",
+      "instrumented_sha256": "b526d3e24072ab55d6fdcb5ee3519f49efbbc8b3725603d1002de50f4d2bceaa"
+    },
+    "crates/engine/src/local_authority.rs": {
+      "pristine_sha256": "55f8832b06ee5051669e447878570cf6fa457341f926dafda24256175a067ffe",
+      "instrumented_sha256": "9d03d02bb1885b37f99367f74ea4657474c4537995455049194c90a5b38c577e"
+    },
+    "crates/engine/src/repository_durability.rs": {
+      "pristine_sha256": "9a079fecb9b40fe08c542df5c73bcb809ae99c3ded282f201f711460ccb7fdb9",
+      "instrumented_sha256": "fd92564d79bea712dfc06b85d8032ba6404ecaa133d474cafc3e2e458488ffc5"
+    },
+    "crates/engine/src/definition_identity.rs": {
+      "pristine_sha256": "a16c94af111664622eddf62feae9c4cad6defbd85fc743f55b6f11164108718e",
+      "instrumented_sha256": "6d9d4e595508de83be1b80b93874d3c33f6420532ffa90f2ca478c0f37c3a306"
+    },
+    "crates/engine/src/lib.rs": {
+      "pristine_sha256": "d56db79ac8adfc7fb0e3832fd96d3438aabe0ccb794416fbec0a05999275d812",
+      "instrumented_sha256": "f7e0dd2fe1d3f4e880fbbb6b0422cbfe4427c469cdf52a73f749d010ca597eb0"
+    },
+    "crates/engine/src/research_profile.rs": {
+      "pristine_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "instrumented_sha256": "1f66591b0e302d2d2b5785636ade9b7fc5856370b61833e9d462ccd4acc299e9"
+    }
+  }
+}

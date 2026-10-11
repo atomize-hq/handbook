@@ -1,0 +1,914 @@
+[
+  {
+    "variant": "baseline",
+    "operations": 48,
+    "process_handles_before": 57,
+    "process_handles_after": 57,
+    "private_after_first_last_min_max_bytes": [
+      15859712,
+      18096128,
+      14213120,
+      21880832
+    ],
+    "working_after_first_last_min_max_bytes": [
+      25120768,
+      28094464,
+      24338432,
+      30015488
+    ],
+    "sampled_process_peak_private_bytes": 61419520,
+    "os_peak_working_set_bytes": 72155136,
+    "sampled_process_peak_handles": 509,
+    "handle_sampling_interval_ms": 100,
+    "handle_peak_is_sampled_not_exact": true,
+    "controlled_delay_ms": 200,
+    "observed_lock_wait_ms": 3404.9798,
+    "race_wall_ms": 4356.1925,
+    "race_process_cpu_ms_includes_both_threads": 4218.75,
+    "race_child_only_thread_local_wait_spans": [
+      {
+        "calls": 1,
+        "exclusive_cpu_ms": 3171.875,
+        "exclusive_wall_ms": 3404.9798,
+        "inclusive_cpu_ms": 3171.875,
+        "inclusive_wall_ms": 3404.9798,
+        "observation": 0,
+        "symbol": "lock_wait"
+      }
+    ],
+    "race_child_acquired_lock_held_paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 943954,
+        "held_wall_ms": 943.954
+      }
+    ],
+    "race_wait_path": ".handbook/work-state/work.lock",
+    "race_wait_path_owner_evidence": "work_state/store.rs LOCK constant and WorkLock::open exclusive acquisition; child has one acquisition/wait",
+    "race_parent_guard_lifetime_not_separately_profiled": true,
+    "resource_artifact_entries_peak": 0,
+    "resource_artifact_raw_key_expected_buffer_bytes_peak": 0,
+    "cache_gauge_excludes_decoded_intent_output_rc_allocator": true,
+    "fixed_initial_history": 9,
+    "fixed_final_history": 23,
+    "fixed_history_private_initial_sequence_bytes": [
+      15859712,
+      15351808,
+      14692352,
+      14581760,
+      14393344,
+      15056896
+    ],
+    "fixed_history_private_final_sequence_bytes": [
+      18620416,
+      17076224,
+      17620992,
+      17924096,
+      17559552,
+      18255872,
+      17379328,
+      19570688,
+      18501632,
+      19415040,
+      17903616,
+      18096128
+    ],
+    "fixed_history_tail_strictly_monotonic_increase": false,
+    "deliberate_history_growth_between_fixed_tails": true,
+    "phases": {
+      "committed_replay": {
+        "repetitions": 6,
+        "dispositions": {
+          "replayed": 6
+        },
+        "handles_before": [
+          57,
+          57,
+          57,
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57,
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          15859712,
+          15351808,
+          14692352,
+          14581760,
+          14393344,
+          15056896
+        ],
+        "working_after_bytes": [
+          25120768,
+          25092096,
+          24338432,
+          25059328,
+          24625152,
+          25411584
+        ]
+      },
+      "injected-BeforeIntent": {
+        "repetitions": 3,
+        "dispositions": {
+          "refused": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          14213120,
+          14934016,
+          16027648
+        ],
+        "working_after_bytes": [
+          25333760,
+          25673728,
+          26943488
+        ]
+      },
+      "injected-Intent": {
+        "repetitions": 3,
+        "dispositions": {
+          "uncertain": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          14295040,
+          16203776,
+          15028224
+        ],
+        "working_after_bytes": [
+          25497600,
+          26968064,
+          26447872
+        ]
+      },
+      "injected-PublicationAttempt": {
+        "repetitions": 3,
+        "dispositions": {
+          "uncertain": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          15532032,
+          16076800,
+          16769024
+        ],
+        "working_after_bytes": [
+          25985024,
+          26980352,
+          27328512
+        ]
+      },
+      "injected-Reply": {
+        "repetitions": 3,
+        "dispositions": {
+          "uncertain": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          16969728,
+          16240640,
+          17563648
+        ],
+        "working_after_bytes": [
+          27131904,
+          27676672,
+          28307456
+        ]
+      },
+      "injected-Snapshot": {
+        "repetitions": 3,
+        "dispositions": {
+          "uncertain": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          14807040,
+          14622720,
+          16130048
+        ],
+        "working_after_bytes": [
+          26005504,
+          26144768,
+          26984448
+        ]
+      },
+      "recover-BeforeIntent": {
+        "repetitions": 3,
+        "dispositions": {
+          "unaccepted": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          16175104,
+          14704640,
+          15634432
+        ],
+        "working_after_bytes": [
+          26251264,
+          26112000,
+          26476544
+        ]
+      },
+      "recover-Intent": {
+        "repetitions": 3,
+        "dispositions": {
+          "committed": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          20762624,
+          21082112,
+          21880832
+        ],
+        "working_after_bytes": [
+          28606464,
+          29335552,
+          30015488
+        ]
+      },
+      "recover-PublicationAttempt": {
+        "repetitions": 3,
+        "dispositions": {
+          "uncertain": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          15474688,
+          17317888,
+          15863808
+        ],
+        "working_after_bytes": [
+          26148864,
+          26836992,
+          27156480
+        ]
+      },
+      "recover-Reply": {
+        "repetitions": 3,
+        "dispositions": {
+          "replayed": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          15241216,
+          15757312,
+          17649664
+        ],
+        "working_after_bytes": [
+          26710016,
+          26992640,
+          28512256
+        ]
+      },
+      "recover-Snapshot": {
+        "repetitions": 3,
+        "dispositions": {
+          "committed": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          18350080,
+          19722240,
+          20451328
+        ],
+        "working_after_bytes": [
+          28172288,
+          29388800,
+          29605888
+        ]
+      },
+      "revoked_fresh_invocation": {
+        "repetitions": 6,
+        "dispositions": {
+          "refused": 6
+        },
+        "handles_before": [
+          57,
+          57,
+          57,
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57,
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          18620416,
+          17620992,
+          17559552,
+          17379328,
+          18501632,
+          17903616
+        ],
+        "working_after_bytes": [
+          29458432,
+          28631040,
+          28729344,
+          28409856,
+          28942336,
+          28696576
+        ]
+      },
+      "revoked_original_replay": {
+        "repetitions": 6,
+        "dispositions": {
+          "replayed": 6
+        },
+        "handles_before": [
+          57,
+          57,
+          57,
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57,
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          17076224,
+          17924096,
+          18255872,
+          19570688,
+          19415040,
+          18096128
+        ],
+        "working_after_bytes": [
+          28561408,
+          28954624,
+          29302784,
+          29646848,
+          29949952,
+          28094464
+        ]
+      }
+    }
+  },
+  {
+    "variant": "refactor",
+    "operations": 48,
+    "process_handles_before": 57,
+    "process_handles_after": 57,
+    "private_after_first_last_min_max_bytes": [
+      16146432,
+      45477888,
+      13705216,
+      50032640
+    ],
+    "working_after_first_last_min_max_bytes": [
+      24911872,
+      55476224,
+      24911872,
+      60669952
+    ],
+    "sampled_process_peak_private_bytes": 66985984,
+    "os_peak_working_set_bytes": 82608128,
+    "sampled_process_peak_handles": 508,
+    "handle_sampling_interval_ms": 100,
+    "handle_peak_is_sampled_not_exact": true,
+    "controlled_delay_ms": 200,
+    "observed_lock_wait_ms": 3528.2715,
+    "race_wall_ms": 4561.0163,
+    "race_process_cpu_ms_includes_both_threads": 4437.5,
+    "race_child_only_thread_local_wait_spans": [
+      {
+        "calls": 1,
+        "exclusive_cpu_ms": 3281.25,
+        "exclusive_wall_ms": 3528.2715,
+        "inclusive_cpu_ms": 3281.25,
+        "inclusive_wall_ms": 3528.2715,
+        "observation": 0,
+        "symbol": "lock_wait"
+      }
+    ],
+    "race_child_acquired_lock_held_paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 1023392,
+        "held_wall_ms": 1023.392
+      }
+    ],
+    "race_wait_path": ".handbook/work-state/work.lock",
+    "race_wait_path_owner_evidence": "work_state/store.rs LOCK constant and WorkLock::open exclusive acquisition; child has one acquisition/wait",
+    "race_parent_guard_lifetime_not_separately_profiled": true,
+    "resource_artifact_entries_peak": 23,
+    "resource_artifact_raw_key_expected_buffer_bytes_peak": 5721696,
+    "cache_gauge_excludes_decoded_intent_output_rc_allocator": true,
+    "fixed_initial_history": 9,
+    "fixed_final_history": 23,
+    "fixed_history_private_initial_sequence_bytes": [
+      16146432,
+      15372288,
+      16089088,
+      15446016,
+      16023552,
+      14893056
+    ],
+    "fixed_history_private_final_sequence_bytes": [
+      45580288,
+      18083840,
+      44015616,
+      43356160,
+      45277184,
+      44584960,
+      44613632,
+      19832832,
+      45494272,
+      45494272,
+      18837504,
+      45477888
+    ],
+    "fixed_history_tail_strictly_monotonic_increase": false,
+    "deliberate_history_growth_between_fixed_tails": true,
+    "phases": {
+      "committed_replay": {
+        "repetitions": 6,
+        "dispositions": {
+          "replayed": 6
+        },
+        "handles_before": [
+          57,
+          57,
+          57,
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57,
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          16146432,
+          15372288,
+          16089088,
+          15446016,
+          16023552,
+          14893056
+        ],
+        "working_after_bytes": [
+          24911872,
+          25313280,
+          25231360,
+          25272320,
+          25755648,
+          25395200
+        ]
+      },
+      "injected-BeforeIntent": {
+        "repetitions": 3,
+        "dispositions": {
+          "refused": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          13705216,
+          15171584,
+          19750912
+        ],
+        "working_after_bytes": [
+          24969216,
+          26324992,
+          27594752
+        ]
+      },
+      "injected-Intent": {
+        "repetitions": 3,
+        "dispositions": {
+          "uncertain": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          16539648,
+          19857408,
+          19337216
+        ],
+        "working_after_bytes": [
+          25862144,
+          27082752,
+          27881472
+        ]
+      },
+      "injected-PublicationAttempt": {
+        "repetitions": 3,
+        "dispositions": {
+          "uncertain": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          16211968,
+          16568320,
+          18358272
+        ],
+        "working_after_bytes": [
+          25882624,
+          27295744,
+          28684288
+        ]
+      },
+      "injected-Reply": {
+        "repetitions": 3,
+        "dispositions": {
+          "uncertain": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          16687104,
+          17145856,
+          50032640
+        ],
+        "working_after_bytes": [
+          27119616,
+          28061696,
+          60669952
+        ]
+      },
+      "injected-Snapshot": {
+        "repetitions": 3,
+        "dispositions": {
+          "uncertain": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          14426112,
+          15970304,
+          17084416
+        ],
+        "working_after_bytes": [
+          25698304,
+          26787840,
+          27267072
+        ]
+      },
+      "recover-BeforeIntent": {
+        "repetitions": 3,
+        "dispositions": {
+          "unaccepted": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          15228928,
+          14925824,
+          19288064
+        ],
+        "working_after_bytes": [
+          25718784,
+          26267648,
+          28471296
+        ]
+      },
+      "recover-Intent": {
+        "repetitions": 3,
+        "dispositions": {
+          "committed": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          20516864,
+          18100224,
+          20271104
+        ],
+        "working_after_bytes": [
+          28643328,
+          28823552,
+          29577216
+        ]
+      },
+      "recover-PublicationAttempt": {
+        "repetitions": 3,
+        "dispositions": {
+          "uncertain": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          17973248,
+          17584128,
+          41418752
+        ],
+        "working_after_bytes": [
+          27062272,
+          27582464,
+          51937280
+        ]
+      },
+      "recover-Reply": {
+        "repetitions": 3,
+        "dispositions": {
+          "replayed": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          19554304,
+          17813504,
+          16936960
+        ],
+        "working_after_bytes": [
+          28086272,
+          28786688,
+          28303360
+        ]
+      },
+      "recover-Snapshot": {
+        "repetitions": 3,
+        "dispositions": {
+          "committed": 3
+        },
+        "handles_before": [
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          21721088,
+          22650880,
+          20975616
+        ],
+        "working_after_bytes": [
+          29360128,
+          29573120,
+          30121984
+        ]
+      },
+      "revoked_fresh_invocation": {
+        "repetitions": 6,
+        "dispositions": {
+          "refused": 6
+        },
+        "handles_before": [
+          57,
+          57,
+          57,
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57,
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          45580288,
+          44015616,
+          45277184,
+          44613632,
+          45494272,
+          18837504
+        ],
+        "working_after_bytes": [
+          56680448,
+          54411264,
+          56160256,
+          55848960,
+          55631872,
+          29057024
+        ]
+      },
+      "revoked_original_replay": {
+        "repetitions": 6,
+        "dispositions": {
+          "replayed": 6
+        },
+        "handles_before": [
+          57,
+          57,
+          57,
+          57,
+          57,
+          57
+        ],
+        "handles_after": [
+          57,
+          57,
+          57,
+          57,
+          57,
+          57
+        ],
+        "private_after_bytes": [
+          18083840,
+          43356160,
+          44584960,
+          19832832,
+          45494272,
+          45477888
+        ],
+        "working_after_bytes": [
+          28758016,
+          54620160,
+          55771136,
+          29794304,
+          56238080,
+          55476224
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,34 @@
+   Compiling handbook-flow v0.1.1 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\flow)
+   Compiling handbook-contracts v0.1.0 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\contracts)
+   Compiling handbook-pipeline v0.1.2 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\pipeline)
+   Compiling handbook-dock v0.1.0 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\dock)
+   Compiling handbook-sdk v0.1.0 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\sdk)
+    Finished `release` profile [optimized] target(s) in 1m 07s
+     Running tests\work_kind.rs (target\release\deps\work_kind-2572cb1022f4f21d.exe)
+
+running 7 tests
+test closed_kind_codecs_refuse_unknown_incomplete_and_overridden_compositions ... ok
+test current_g_grant_reuses_d_kind_and_runtime_reset_retains_both_originals ... ok
+test exact_kind_establishment_is_independent_on_d_and_g_in_both_bootstrap_orders ... FAILED
+test export_default_feature_kind_consumer_inputs ... ok
+test kind_and_current_scope_intersect_and_revocation_does_not_change_definition_truth ... ok
+test ordinary_planning_requirements_meaning_matches_explicit_but_retains_exact_kind_provenance ... ok
+test original_human_exact_content_and_immutable_version_are_not_reusable_permission ... ok
+
+failures:
+
+---- exact_kind_establishment_is_independent_on_d_and_g_in_both_bootstrap_orders stdout ----
+
+thread 'exact_kind_establishment_is_independent_on_d_and_g_in_both_bootstrap_orders' panicked at crates\sdk\tests\work_kind.rs:305:17:
+assertion failed: sdk.prepare_work_registration(&initial, prospective.locator(),
+        input(prospective.locator(), "kind-does-not-permit-work", 1,
+            Some(&kind.binding))).is_err()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    exact_kind_establishment_is_independent_on_d_and_g_in_both_bootstrap_orders
+
+test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 141.79s
+
+error: test failed, to rerun pass `-p handbook-sdk --test work_kind`

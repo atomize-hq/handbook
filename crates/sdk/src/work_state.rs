@@ -127,8 +127,11 @@ impl HandbookSdkV1 {
         NativeWorkStateV1::resolve_current_terms(&self.repo_root, locator, &basis)
     }
 
-    /// Prepares one same-project absent to open leaf registration. The portable
-    /// locator is available before invocation; the native prepared value is sealed.
+    /// Binds one same-project absent to open leaf and its original recovery locator.
+    /// Explicit input uses supplied values only; kind input verifies its exact
+    /// retained committed definition. Preparation reserves nothing and promises
+    /// no current grant usability, item absence, capacity or eventual commit.
+    /// Save the complete portable `locator()` before invocation.
     pub fn prepare_work_registration(
         &self,
         initial: &LocalInitialSetupLocatorV1,
@@ -136,12 +139,13 @@ impl HandbookSdkV1 {
         input: WorkRegistrationInputV1,
     ) -> Result<PreparedWorkRegistrationV1, LocalAuthorityRefusalV1> {
         require_initial(initial, &grant.check)?;
-        let basis = self.observe_local_check_basis(initial)?;
-        NativeWorkStateV1::prepare_registration(&self.repo_root, grant, &basis, input)
+        NativeWorkStateV1::prepare_registration(&self.repo_root, grant, &grant.basis, input)
     }
 
-    /// Invokes the owner once. Inspect disposition, outcome and refusal; an
-    /// uncertain response requires original-key recovery, never a blind new key.
+    /// Checks current authority, conflicts and capacity and invokes the owner.
+    /// An exact committed original replays even after its grant becomes unusable.
+    /// Inspect disposition, outcome and refusal; an uncertain response requires
+    /// original-key recovery, never a blind new key.
     pub fn register_work_item(
         &self,
         prepared: PreparedWorkRegistrationV1,

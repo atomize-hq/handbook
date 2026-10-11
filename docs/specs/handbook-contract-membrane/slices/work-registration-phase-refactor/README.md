@@ -1,14 +1,43 @@
 # Work-registration phase refactor
 
-Status: **bounded slice planning complete; recommended next increment proposed
-for human review** — 2026-10-11. Preparation, verification, independent causal
-review and a local documentation commit are authorized. Product execution is
-not authorized. `AUTHORITY_READY` means ready for that human review, not selected,
-implemented or proof of runtime authority.
+Status: **Packet 1 implemented, verified and reviewed; meta aggregate closeout and
+human recap pending** — 2026-10-11.
+After reviewing the audit, complete plan, removal counts and Pro plan follow-up,
+the human requested the implementation session name and then directed:
+`ok the session is ready: "Implement work-registration phase refactor and duplication removal."`
+That subsequent human selection authorizes the complete reviewed Packet 1,
+including its preparation guarantee and deferred-error semantics, verification,
+measurement, focused causal review and one coherent local implementation commit.
+It supersedes the plan's earlier pre-approval status. Pro advice supplies no
+authority. Packet completion returns to meta for aggregate closeout and human
+recap; successor work remains separately bounded.
+
+The implementation binds explicit requests using supplied values only and kind
+requests using one exact committed-kind scan. Item invocation uses the existing
+current-authority seam, retains I1–I4 and reuses only successful pure derivations
+keyed by complete original Intent bytes. Live authorization, physical reads,
+prefix classification and exact original recovery remain fresh.
+
+The [focused verification](../../../../research/work-registration-phase-refactor-2026-10-11/verification.md)
+records 80 unique passing checks and the normal-dependency SDK example. Three
+ignored process helpers ran through their parents; two historical physical-root
+fixtures remain unavailable. The [native evidence](../../../../research/work-registration-phase-refactor-2026-10-11/README.md)
+retains matched builds, raw observations, corrections and resource checks. All
+36 accepted warm Windows main pairs improved; median paired workflow reductions
+across explicit/kind histories 8, 16 and 31 were 33.51–39.80%, including locator
+saving. Invocation remains four scans, five inventories, six manifests and eight
+native current checks. Reuse increases peak private memory: history-31 medians
+were 90.84→104.14 MiB explicit and 113.78→135.29 MiB kind. This is an invocation-local
+retention tradeoff, not a changed 128 MiB store limit or an absolute heap-release
+claim. Detailed attribution, repeated-call cleanup and platform limits are in
+the evidence. Aggregate closeout and the human result recap remain with meta.
+The focused causal review approved the bounded implementation and evidence with
+no unresolved P1/P2 and no P3/P4 advisories. One coherent local implementation
+commit carries this result; no successor execution is selected here.
 
 ## Recommended selection and review increment
 
-Select **binding-first preparation, current authorization at invocation, and
+Selected: **binding-first preparation, current authorization at invocation, and
 exact original historical recovery**, delivered as one Packet 1. Preparation
 binds submitted/effective meaning and the complete portable original locator;
 success promises neither a usable grant, item absence, reserved capacity nor
@@ -18,11 +47,11 @@ truth using one existing full scan. Invocation keeps its four history observatio
 initially, removes redundant successful pure derivations, and routes Item through
 the existing non-bootstrap consuming seam.
 
-This is an observable API/error-timing change requiring approval of this complete
-plan. The human requested its preparation after reviewing the
+This is the observable API/error-timing change covered by the subsequent complete
+plan authorization above. The human first requested its preparation after reviewing the
 [duplication audit](../../../../research/work-registration-duplication-audit-2026-10-11.md)
-and the focused Pro consultation. That request does not approve implementation
-or every semantic detail. Pro's ADJUST advice supports bounded planning and is
+and the focused Pro consultation. That earlier preparation request alone did not
+approve implementation. Pro's ADJUST advice supported bounded planning and is
 not authority or source verification; its retained untracked
 `docs/research/work-registration-approach-pro-consult-2026-10-11/{README.md,answer.md}`
 supplies the advisory/reconciliation context, not an execution dependency.
@@ -61,13 +90,13 @@ Hard product predecessors are complete in the live branch:
 | Work-item foundation | `cbfbf7629a0642b8cb08aefea36fa556009d9274`; [slice](../work-item-state-foundation/README.md) records eight conditions, meta aggregate closeout and human recap complete. [Packet 1's prefix/transition contract](../work-item-state-foundation/packet-1.md#durable-prefix-and-authority-transition-contract) remains controlling. |
 | Unified compositions/authority lifecycle | Packet 1 `7129b5c`; [completed slice](../work-compositions-and-kinds/README.md) and [Packet 1](../work-compositions-and-kinds/packet-1.md) own exact scope, successor, pending suspension, revocation and unchanged-scope D→G. |
 | Per-version kinds | Packet 2 `ae1af38`; [Packet 2](../work-compositions-and-kinds/packet-2.md) owns immutable exact kind approval/provenance and bootstrap. Slice/meta closeout and accepted human recap are complete. |
-| Duplication investigation | Reviewed completed audit at `a82f3b285b30337f93d7ac9eca84dc4882fd8629`; new preparation/seam savings are unmeasured. |
+| Duplication investigation | Reviewed completed audit at `a82f3b285b30337f93d7ac9eca84dc4882fd8629`; preparation/seam savings were unmeasured at that planning checkpoint. Packet-1 results are linked above. |
 
 These are recorded predecessor results, not new suite reruns. Planning source
 checkpoint is `a82f3b2`, branch `feat/handbook-contract-membrane-clean`; product
 source/Cargo equals the retained experiment baseline `8013948`. Execution must
-verify live predecessor ancestry/source and obtain human approval of this next
-increment. Actual current project grant and kind approval remain runtime inputs.
+verify live predecessor ancestry/source. Human approval of this next increment is
+recorded above; actual current project grant and kind approval remain runtime inputs.
 
 Engine owns work meaning, conformance, exact identities, authority history and
 commit/recovery. Native local authority owns the held original D/G/check/Charter

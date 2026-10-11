@@ -1,0 +1,10 @@
+   Compiling handbook-engine v0.2.0 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\engine)
+    Finished `release` profile [optimized] target(s) in 49.55s
+     Running unittests src\lib.rs (target\release\deps\handbook_engine-e4cc1223e8913016.exe)
+
+running 2 tests
+test work_state::transaction::artifact_tests::derived_item_output_preserves_original_retained_receipt_bytes ... ok
+test work_state::types::binding_tests::supplied_binding_preserves_original_retained_request_bytes ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 285 filtered out; finished in 0.06s
+

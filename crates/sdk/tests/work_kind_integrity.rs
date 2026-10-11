@@ -41,6 +41,70 @@ fn complete_derived_definition_records_refuse_before_owner_bootstrap() {
 }
 
 #[test]
+fn complete_derived_item_records_refuse_before_positive_reservation() {
+    let directory = tempdir().unwrap();
+    let sdk = HandbookSdkV1::open(directory.path());
+    let (initial, check) = setup(&sdk);
+    let mut content = definition("project.kind.item-bound@1.0.0");
+    content.template.display_levels = (0..3750)
+        .map(|index| format!("level-{index:05}-{}", "x".repeat(116)))
+        .collect();
+    let kind = sdk
+        .prepare_work_kind_establishment(
+            &initial,
+            &check,
+            content.clone(),
+            approval(&sdk, &initial, &check, &content, "large-committed-kind"),
+        )
+        .unwrap();
+    let binding = kind.locator().binding.clone();
+    assert_eq!(
+        sdk.establish_work_kind(kind).disposition,
+        WorkDispositionV1::Committed
+    );
+    let grant = activate(&sdk, &initial, &check, "grant", None);
+    let prepared = sdk
+        .prepare_work_registration(
+            &initial,
+            &grant,
+            input(&grant, &binding, "oversized-derived-item"),
+        )
+        .unwrap();
+    let original = prepared.locator().clone();
+    let locator_bytes = original.canonical_json_bytes().unwrap();
+    assert!(locator_bytes.len() <= 1024 * 1024);
+    let store = directory.path().join(".handbook/work-state/v1");
+    let manifest_before = fs::read(directory.path().join(".handbook-work-state.v1.json")).unwrap();
+    let slots_before: Vec<_> = (0..32)
+        .map(|index| fs::read(store.join(format!("slot-{index:02}.json"))).unwrap())
+        .collect();
+    let execution = sdk.register_work_item(prepared);
+    assert_eq!(
+        execution.disposition,
+        WorkDispositionV1::Refused,
+        "{execution:?}"
+    );
+    assert_eq!(execution.refusal.as_ref().unwrap().code, "work_codec");
+    assert_eq!(
+        sdk.resolve_work_registration_request(&original).disposition,
+        WorkDispositionV1::Unaccepted
+    );
+    assert!(!store.join("item-oversized-derived-item").exists());
+    assert!(!store.join("accept-item-oversized-derived-item").exists());
+    assert_eq!(
+        fs::read(directory.path().join(".handbook-work-state.v1.json")).unwrap(),
+        manifest_before
+    );
+    for (index, before) in slots_before.iter().enumerate() {
+        assert_eq!(
+            &fs::read(store.join(format!("slot-{index:02}.json"))).unwrap(),
+            before,
+            "positive slot {index} changed before complete-record bounds"
+        );
+    }
+}
+
+#[test]
 fn kind_first_bootstrap_interruption_never_repairs_owner_or_mints_a_dummy_grant() {
     let dir = tempdir().unwrap();
     let sdk = HandbookSdkV1::open(dir.path());
@@ -192,9 +256,18 @@ fn early_kind_and_kind_item_acceptance_keeps_original_positive_reservations() {
                 assert_eq!(fs::read(slot).unwrap(), retained);
                 let mut replacement = input(&grant, &binding, "replacement-item");
                 replacement.item_key = "original-item".into();
-                assert!(sdk
-                    .prepare_work_registration(&initial, &grant, replacement)
-                    .is_err());
+                let binding = sdk.prepare_work_registration(&initial, &grant, replacement);
+                if matches!(at, B::StagedIntent | B::AcceptanceReady) {
+                    assert_eq!(
+                        sdk.register_work_item(binding.unwrap()).disposition,
+                        WorkDispositionV1::Refused
+                    );
+                } else {
+                    assert!(
+                        binding.is_err(),
+                        "partial positive inventory must not supply kind provenance"
+                    );
+                }
             }
         }
     }
@@ -317,6 +390,94 @@ fn lost_whole_kind_transaction_and_corrupt_exact_definition_fail_closed() {
                 approval(&sdk, &initial, &check, &content, "replacement")
             )
             .is_err());
+    }
+}
+
+#[test]
+fn repeated_kind_history_reads_reject_in_place_and_substituted_original_definition_records() {
+    for (boundary, record, pointer) in [
+        (
+            B::BeforeIntent,
+            "intent.json",
+            "/operation/locator/definition/template/label_max_bytes",
+        ),
+        (B::Snapshot, "intent.json", "/authority/schema_ref"),
+        (
+            B::Snapshot,
+            "snapshot.json",
+            "/value/definition/template/label_max_bytes",
+        ),
+        (B::Terminal, "terminal.json", "/effect"),
+    ] {
+        for substitute in [false, true] {
+            let dir = tempdir().unwrap();
+            let sdk = HandbookSdkV1::open(dir.path());
+            let (initial, check) = setup(&sdk);
+            let binding = establish_kind(&sdk, &initial, &check, "kind", "project.kind.leaf@1.0.0");
+            let grant = activate(&sdk, &initial, &check, "grant", None);
+            let prepared = sdk
+                .prepare_work_registration(&initial, &grant, input(&grant, &binding, "item"))
+                .unwrap();
+            let original = prepared.locator().clone();
+            let mut changed = false;
+            let execution = NativeWorkStateV1::register_with_boundary_for_test(
+                dir.path(),
+                prepared,
+                |at| {
+                    if at == boundary {
+                        let path = dir
+                            .path()
+                            .join(".handbook/work-state/v1/kind-kind")
+                            .join(record);
+                        let mut value: serde_json::Value =
+                            serde_json::from_slice(&fs::read(&path).unwrap()).unwrap();
+                        let target = value
+                            .pointer_mut(pointer)
+                            .unwrap_or_else(|| {
+                                panic!(
+                                    "missing exact kind field: {boundary:?} {record} {pointer} substitution={substitute}"
+                                )
+                            });
+                        *target = if pointer.ends_with("label_max_bytes") {
+                            serde_json::json!(1)
+                        } else {
+                            serde_json::json!("changed-exact-kind-record")
+                        };
+                        if substitute {
+                            changed = fs::rename(&path, path.with_extension("replaced")).is_ok();
+                            if changed {
+                                let _ = fs::write(&path, serde_json::to_vec(&value).unwrap());
+                            }
+                        } else {
+                            changed = fs::write(&path, serde_json::to_vec(&value).unwrap()).is_ok();
+                        }
+                    }
+                    Ok(())
+                },
+            );
+            if changed {
+                assert!(
+                    execution.outcome.is_none(),
+                    "{boundary:?} {record} substitution={substitute}: {execution:?}"
+                );
+                if boundary != B::Terminal {
+                    assert!(!dir
+                        .path()
+                        .join(".handbook/work-state/v1/item-item/terminal.json")
+                        .exists());
+                }
+                assert_eq!(
+                    sdk.recover_work_registration_request(&original).disposition,
+                    WorkDispositionV1::Uncertain
+                );
+            } else {
+                assert_eq!(
+                    execution.disposition,
+                    WorkDispositionV1::Committed,
+                    "retained handle denied kind mutation: {boundary:?} {record}: {execution:?}"
+                );
+            }
+        }
     }
 }
 
@@ -444,9 +605,13 @@ fn k2_and_scope_revocation_preserve_k1_definition_and_original_kind_item_receipt
         sdk.resolve_work_kind(&third).unwrap(),
         WorkCurrentKindV1::Committed(_)
     ));
-    assert!(sdk
+    let bound_revoked = sdk
         .prepare_work_registration(&initial, &grant, input(&grant, &binding, "revoked-use"))
-        .is_err());
+        .unwrap();
+    assert_eq!(
+        sdk.register_work_item(bound_revoked).disposition,
+        WorkDispositionV1::Refused
+    );
     reset(&sdk);
     let reopened = HandbookSdkV1::open(dir.path());
     assert!(matches!(

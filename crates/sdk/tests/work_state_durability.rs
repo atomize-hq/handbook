@@ -258,12 +258,16 @@ fn registration_every_prefix_crosses_original_successor_governance_revocation_an
             }
             if attempted {
                 assert!(sdk
-                    .prepare_work_registration(
-                        &initial,
-                        &grant,
-                        input(&grant, "blind-retry", "item")
+                    .register_work_item(
+                        sdk.prepare_work_registration(
+                            &initial,
+                            &grant,
+                            input(&grant, "blind-retry", "item")
+                        )
+                        .unwrap()
                     )
-                    .is_err());
+                    .outcome
+                    .is_none());
                 assert!(matches!(
                     sdk.resolve_current_work_item(&grant, "item").unwrap(),
                     WorkCurrentItemV1::Pending { .. }
@@ -358,12 +362,16 @@ fn activation_and_revocation_have_the_same_terminal_and_original_recovery_bounda
                     && expected != WorkDispositionV1::Replayed
                 {
                     assert!(sdk
-                        .prepare_work_registration(
-                            &initial,
-                            &grant,
-                            input(&grant, "self-authorization", "leaf")
+                        .register_work_item(
+                            sdk.prepare_work_registration(
+                                &initial,
+                                &grant,
+                                input(&grant, "self-authorization", "leaf")
+                            )
+                            .unwrap()
                         )
-                        .is_err());
+                        .outcome
+                        .is_none());
                 }
             }
         }
@@ -415,8 +423,12 @@ fn missing_attempt_history_corrupt_exact_records_and_substituted_root_lock_never
             assert!(current.is_err());
         }
         assert!(sdk
-            .prepare_work_registration(&initial, &grant, input(&grant, "new", "item"))
-            .is_err());
+            .register_work_item(
+                sdk.prepare_work_registration(&initial, &grant, input(&grant, "new", "item"))
+                    .unwrap()
+            )
+            .outcome
+            .is_none());
     }
     let dir = tempdir().unwrap();
     let sdk = HandbookSdkV1::open(dir.path());
@@ -612,12 +624,16 @@ fn native_work_child() {
         match mode.as_str() {
             "work-revoke" => revoke(&sdk, &grant),
             "duplicate-creator" => assert!(sdk
-                .prepare_work_registration(
-                    &initial,
-                    &grant,
-                    input(&grant, "duplicate-request", "child-item")
+                .register_work_item(
+                    sdk.prepare_work_registration(
+                        &initial,
+                        &grant,
+                        input(&grant, "duplicate-request", "child-item")
+                    )
+                    .unwrap()
                 )
-                .is_err()),
+                .outcome
+                .is_none()),
             _ => assert!(matches!(
                 sdk.resolve_current_work_item(&grant, "child-item").unwrap(),
                 WorkCurrentItemV1::Open(_)
@@ -903,6 +919,24 @@ fn pending_scope_administration_suspends_use_and_original_noncommit_controls_rel
             assert!(sdk
                 .resolve_current_work_registration_terms(&initial, &grant)
                 .is_err());
+            let bound_suspended = sdk
+                .prepare_work_registration(
+                    &initial,
+                    &grant,
+                    role_input(&grant, true, "bound-suspended"),
+                )
+                .unwrap();
+            let suspended_original = bound_suspended.locator().clone();
+            assert_eq!(suspended_original.grant, grant);
+            assert_eq!(
+                sdk.register_work_item(bound_suspended).disposition,
+                WorkDispositionV1::Refused
+            );
+            assert_eq!(
+                sdk.resolve_work_registration_request(&suspended_original)
+                    .disposition,
+                WorkDispositionV1::Unaccepted
+            );
             assert!(sdk
                 .prepare_work_registration(
                     &initial,
@@ -1073,28 +1107,21 @@ fn native_role_child() {
         );
     } else {
         let planning = std::env::var("ROLE_PLANNING").unwrap() == "yes";
-        let prepared = sdk.prepare_work_registration(
-            &initial,
-            &grant,
-            role_input(&grant, planning, "serialized-role"),
-        );
-        let result = match prepared {
-            Err(_) => "refused",
-            Ok(prepared) => {
-                let original = prepared.locator().canonical_json_bytes().unwrap();
-                fs::write(repo.join("request.role.json"), original).unwrap();
-                let execution = NativeWorkStateV1::register_with_boundary_for_test(
-                    repo,
-                    prepared,
-                    &mut boundary,
-                );
-                assert_eq!(
-                    execution.disposition,
-                    WorkDispositionV1::Committed,
-                    "{execution:?}"
-                );
-                "committed"
-            }
+        let prepared = sdk
+            .prepare_work_registration(
+                &initial,
+                &grant,
+                role_input(&grant, planning, "serialized-role"),
+            )
+            .unwrap();
+        let original = prepared.locator().canonical_json_bytes().unwrap();
+        fs::write(repo.join("request.role.json"), original).unwrap();
+        let execution =
+            NativeWorkStateV1::register_with_boundary_for_test(repo, prepared, &mut boundary);
+        let result = match execution.disposition {
+            WorkDispositionV1::Committed => "committed",
+            WorkDispositionV1::Refused => "refused",
+            _ => panic!("{execution:?}"),
         };
         fs::write(repo.join("register.role.result"), result).unwrap();
     }

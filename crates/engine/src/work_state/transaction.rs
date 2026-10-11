@@ -1,13 +1,15 @@
 use super::store::{self, Inventory, WorkLock};
+use super::types::WorkRequestBinding;
 use super::*;
 use crate::local_authority::local_check::{LocalCheckCurrentBasisV1, LocalCheckLocatorV1};
 use crate::local_authority::work_registration::{
     with_work_registration_current, with_work_registration_establishment,
-    WorkRegistrationAuthorityProofV1,
+    WorkRegistrationAuthorityProofV1, WorkRegistrationCurrentV1,
 };
 use crate::RetainedRepositoryRootV1;
 use std::collections::BTreeMap;
 use std::path::Path;
+use std::rc::Rc;
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 #[serde(
@@ -130,6 +132,100 @@ struct Parsed {
     staging: bool,
 }
 
+// Pure successful derivations only. No status, inventory, physical handles or
+// current permission is retained here. Exact intent bytes are the cache key;
+// path/owner/project bindings and every present record are checked on each scan.
+struct ExpectedRecords {
+    intent: Intent,
+    output: Output,
+    decision: Vec<u8>,
+    snapshot: Vec<u8>,
+    terminal: Vec<u8>,
+    publication: Vec<u8>,
+    noncommit: Vec<u8>,
+}
+#[derive(Default)]
+struct Artifacts {
+    records: BTreeMap<Vec<u8>, Rc<ExpectedRecords>>,
+}
+impl Artifacts {
+    fn expected(
+        &mut self,
+        lock: &WorkLock<'_>,
+        name: &str,
+        bytes: &[u8],
+        proofs: &mut std::collections::BTreeSet<Vec<u8>>,
+    ) -> Result<Rc<ExpectedRecords>, LocalAuthorityRefusalV1> {
+        if let Some(value) = self.records.get(bytes) {
+            validate_original_context(lock, name, &value.intent)?;
+            return Ok(Rc::clone(value));
+        }
+        let intent: Intent = decode(bytes)?;
+        let item = if let Operation::Item(locator) = &intent.operation {
+            Some(locator.validated()?)
+        } else {
+            intent.operation.validate()?;
+            None
+        };
+        validate_original_context(lock, name, &intent)?;
+        // The proof itself contains its exact check and basis; equality above
+        // ensures the same complete historical validation inputs on every hit.
+        let proof_bytes = encode(&intent.authority)?;
+        if !proofs.contains(&proof_bytes) {
+            intent
+                .authority
+                .validate_historical(intent.operation.check(), intent.operation.basis())?;
+            proofs.insert(proof_bytes);
+        }
+        let d = Decision {
+            intent_fingerprint: fp(intent.operation.schema(), &intent)?,
+            output: if let Some(item) = item {
+                item_output(&item)?
+            } else {
+                output(&intent.operation)?
+            },
+        };
+        let value = ExpectedRecords {
+            publication: encode(&Publication {
+                intent_fingerprint: d.intent_fingerprint.clone(),
+                target: "terminal.json".into(),
+            })?,
+            noncommit: encode(&Publication {
+                intent_fingerprint: d.intent_fingerprint.clone(),
+                target: "positively_not_committed".into(),
+            })?,
+            intent,
+            snapshot: encode(&d.output)?,
+            terminal: encode(&terminal(&d)?)?,
+            decision: encode(&d)?,
+            output: d.output,
+        };
+        // Complete all bounds before making even the pure artifact reusable.
+        let value = Rc::new(value);
+        self.records.insert(bytes.to_vec(), Rc::clone(&value));
+        Ok(value)
+    }
+}
+fn validate_original_context(
+    lock: &WorkLock<'_>,
+    name: &str,
+    intent: &Intent,
+) -> Result<(), LocalAuthorityRefusalV1> {
+    if intent.schema != intent.operation.schema()
+        || name.strip_prefix("accept-").unwrap_or(name) != intent.operation.name()
+        || intent.owner_identity != lock.owner.identity
+        || intent.operation.project() != lock.owner.project
+        || intent.authority.locator() != intent.operation.check()
+        || intent.authority.current_basis() != intent.operation.basis()
+    {
+        return Err(refuse(
+            "work_original_proof",
+            "exact original owner/request/authority closure required",
+        ));
+    }
+    Ok(())
+}
+
 fn output(op: &Operation) -> Result<Output, LocalAuthorityRefusalV1> {
     Ok(match op {
         Operation::Kind(locator) => Output::Kind(WorkKindReceiptV1::from_locator(locator)?),
@@ -138,64 +234,88 @@ fn output(op: &Operation) -> Result<Output, LocalAuthorityRefusalV1> {
             assurance: "local_advisory_claims".into(),
             establishment_rule: WORK_REGISTRATION_RULE_V1.into(),
         }),
-        Operation::Item(locator) => {
-            let effective = locator.effective_input()?;
-            let composition = effective
-                .composition
-                .explicit_composition()
-                .ok_or_else(|| codec("expanded composition"))?;
-            let descriptor = composition.descriptor.clone();
-            let descriptor_bytes = descriptor.canonical_json_bytes()?;
-            let snapshot = WorkSnapshotV1 {
-                version: if !locator.input.composition.retained() {
-                    "3"
-                } else if composition.role.is_some() || locator.input.display_level.is_some() {
-                    "2"
-                } else {
-                    "1"
-                }
-                .into(),
-                project_identity: locator.grant.project().into(),
-                item_identity: locator.item_identity.clone(),
-                item_key: locator.input.item_key.clone(),
-                label: locator.input.label.clone(),
-                question: locator.input.question.clone(),
-                display_level: locator.input.display_level.clone(),
-                role: composition.role.clone(),
-                admitted_kind: locator.input.composition.submitted_kind().cloned(),
-                state: "open".into(),
-                descriptor,
-                descriptor_fingerprint: crate::DefinitionFingerprint::from_bytes(&descriptor_bytes)
-                    .to_string(),
-                descriptor_bytes,
-                registration_request_fingerprint: locator.fingerprint.clone(),
-            };
-            let receipt_fingerprint = fp(
-                if locator.input.composition.retained() {
-                    "handbook.work-registration-receipt@1.0.0"
-                } else {
-                    "handbook.work-registration-receipt@2.0.0"
-                },
-                &(
-                    locator,
-                    &snapshot,
-                    "register_open_leaf",
-                    "local_advisory_claims",
-                ),
-            )?;
-            Output::Item(WorkRegistrationReceiptV1 {
-                locator: locator.clone(),
-                snapshot,
-                effect: "register_open_leaf".into(),
-                assurance: "local_advisory_claims".into(),
-                receipt_fingerprint,
-            })
-        }
+        Operation::Item(locator) => item_output(&locator.validated()?)?,
         Operation::Revoke(locator) => Output::Revoke(WorkRevocationReceiptV1 {
             locator: locator.clone(),
             effect: "revoke_work_registration".into(),
         }),
     })
+}
+fn item_output(
+    item: &super::types::ValidatedWorkRequest<'_>,
+) -> Result<Output, LocalAuthorityRefusalV1> {
+    let locator = item.locator();
+    let composition = item
+        .effective_input()
+        .composition
+        .explicit_composition()
+        .ok_or_else(|| codec("expanded composition"))?;
+    let descriptor = composition.descriptor.clone();
+    let descriptor_bytes = descriptor.canonical_json_bytes()?;
+    let snapshot = WorkSnapshotV1 {
+        version: if !locator.input.composition.retained() {
+            "3"
+        } else if composition.role.is_some() || locator.input.display_level.is_some() {
+            "2"
+        } else {
+            "1"
+        }
+        .into(),
+        project_identity: locator.grant.project().into(),
+        item_identity: locator.item_identity.clone(),
+        item_key: locator.input.item_key.clone(),
+        label: locator.input.label.clone(),
+        question: locator.input.question.clone(),
+        display_level: locator.input.display_level.clone(),
+        role: composition.role.clone(),
+        admitted_kind: locator.input.composition.submitted_kind().cloned(),
+        state: "open".into(),
+        descriptor,
+        descriptor_fingerprint: crate::DefinitionFingerprint::from_bytes(&descriptor_bytes)
+            .to_string(),
+        descriptor_bytes,
+        registration_request_fingerprint: locator.fingerprint.clone(),
+    };
+    let receipt_fingerprint = fp(
+        if locator.input.composition.retained() {
+            "handbook.work-registration-receipt@1.0.0"
+        } else {
+            "handbook.work-registration-receipt@2.0.0"
+        },
+        &(
+            locator,
+            &snapshot,
+            "register_open_leaf",
+            "local_advisory_claims",
+        ),
+    )?;
+    Ok(Output::Item(WorkRegistrationReceiptV1 {
+        locator: locator.clone(),
+        snapshot,
+        effect: "register_open_leaf".into(),
+        assurance: "local_advisory_claims".into(),
+        receipt_fingerprint,
+    }))
+}
+
+#[cfg(test)]
+mod artifact_tests {
+    use super::*;
+
+    #[test]
+    fn derived_item_output_preserves_original_retained_receipt_bytes() {
+        let original = WorkRequestLocatorV1::from_json_bytes(include_bytes!(
+            "../../../sdk/tests/fixtures/work_state_v1/committed-request.json"
+        ))
+        .unwrap();
+        let Output::Item(receipt) = item_output(&original.validated().unwrap()).unwrap() else {
+            panic!("Item derivation must produce its receipt");
+        };
+        assert_eq!(
+            encode(&receipt).unwrap(),
+            include_bytes!("../../../sdk/tests/fixtures/work_state_v1/receipt.json")
+        );
+    }
 }
 fn decision(intent: &Intent) -> Result<Decision, LocalAuthorityRefusalV1> {
     Ok(Decision {
@@ -234,41 +354,22 @@ fn parsed(
     lock: &WorkLock<'_>,
     name: &str,
     files: &BTreeMap<String, Vec<u8>>,
-    proofs: &mut std::collections::BTreeSet<String>,
+    artifacts: &mut Artifacts,
+    proofs: &mut std::collections::BTreeSet<Vec<u8>>,
 ) -> Result<Parsed, LocalAuthorityRefusalV1> {
-    let intent: Intent = decode(files.get("intent.json").ok_or_else(|| {
-        refuse(
-            "work_partial_inventory",
-            "transaction lacks original intent",
-        )
-    })?)?;
-    intent.operation.validate()?;
-    let staging = name.starts_with("accept-");
-    if intent.schema != intent.operation.schema()
-        || name.strip_prefix("accept-").unwrap_or(name) != intent.operation.name()
-        || intent.owner_identity != lock.owner.identity
-        || intent.operation.project() != lock.owner.project
-        || intent.authority.locator() != intent.operation.check()
-        || intent.authority.current_basis() != intent.operation.basis()
-    {
-        return Err(refuse(
-            "work_original_proof",
-            "exact original owner/request/authority closure required",
-        ));
-    }
-    let proof_identity = fp(
-        "handbook.work-retained-proof-bytes@1.0.0",
-        &intent.authority,
+    let expected = artifacts.expected(
+        lock,
+        name,
+        files.get("intent.json").ok_or_else(|| {
+            refuse(
+                "work_partial_inventory",
+                "transaction lacks original intent",
+            )
+        })?,
+        proofs,
     )?;
-    if !proofs.contains(&proof_identity) {
-        intent
-            .authority
-            .validate_historical(intent.operation.check(), intent.operation.basis())?;
-        proofs.insert(proof_identity);
-    }
-    let d = decision(&intent)?;
-    let t = terminal(&d)?;
-    let checkpoint = publication(&intent)?;
+    let intent = &expected.intent;
+    let staging = name.starts_with("accept-");
     let attempted = files.contains_key("attempted.json");
     let never = files.contains_key("not-attempted.json");
     if attempted == never && !(staging && files.len() == 1) {
@@ -278,15 +379,15 @@ fn parsed(
         ));
     }
     for (file, expected) in [
-        ("not-attempted.json", checkpoint.clone()),
-        ("attempted.json", checkpoint),
-        ("decision.json", encode(&d)?),
-        ("snapshot.json", encode(&d.output)?),
-        ("terminal.pending", encode(&t)?),
-        ("terminal.json", encode(&t)?),
-        ("noncommit.json", noncommit(&intent)?),
+        ("not-attempted.json", &expected.publication),
+        ("attempted.json", &expected.publication),
+        ("decision.json", &expected.decision),
+        ("snapshot.json", &expected.snapshot),
+        ("terminal.pending", &expected.terminal),
+        ("terminal.json", &expected.terminal),
+        ("noncommit.json", &expected.noncommit),
     ] {
-        if files.get(file).is_some_and(|v| v != &expected) {
+        if files.get(file).is_some_and(|v| v != expected) {
             return Err(refuse(
                 "work_history_integrity",
                 "exact retained decision/snapshot/receipt/terminal/checkpoint bytes changed",
@@ -310,8 +411,8 @@ fn parsed(
         ));
     }
     Ok(Parsed {
-        intent,
-        output: d.output,
+        intent: intent.clone(),
+        output: expected.output.clone(),
         committed,
         noncommit: nc,
         attempted,
@@ -319,6 +420,12 @@ fn parsed(
     })
 }
 fn scan(lock: &WorkLock<'_>) -> Result<(Inventory, Vec<Parsed>), LocalAuthorityRefusalV1> {
+    scan_with_artifacts(lock, &mut Artifacts::default())
+}
+fn scan_with_artifacts(
+    lock: &WorkLock<'_>,
+    artifacts: &mut Artifacts,
+) -> Result<(Inventory, Vec<Parsed>), LocalAuthorityRefusalV1> {
     let tree = lock
         .root
         .retain_work_history_tree_guard_v1()
@@ -331,10 +438,19 @@ fn scan(lock: &WorkLock<'_>) -> Result<(Inventory, Vec<Parsed>), LocalAuthorityR
         ])
         .map_err(fs_error)?;
     let inventory = lock.inventory()?;
+    // Keep no prior version of an intent and no artifact for a disappeared row.
+    // This limits storage to the admitted current history within this lock scope.
+    artifacts.records.retain(|bytes, _| {
+        inventory.transactions.values().any(|files| {
+            files
+                .get("intent.json")
+                .is_some_and(|current| current == bytes)
+        })
+    });
     let mut rows = Vec::new();
     let mut proofs = std::collections::BTreeSet::new();
     for (name, files) in &inventory.transactions {
-        rows.push(parsed(lock, name, files, &mut proofs)?);
+        rows.push(parsed(lock, name, files, artifacts, &mut proofs)?);
     }
     // Both an acceptance candidate and a visible request for the same key are
     // conflicting proof. Never choose whichever appears newer.
@@ -620,10 +736,10 @@ fn committed_kind<'a>(
     }
 }
 fn validate_kind_dependency(
-    locator: &WorkRequestLocatorV1,
+    request: &super::types::ValidatedWorkRequest<'_>,
     rows: &[Parsed],
 ) -> Result<(), LocalAuthorityRefusalV1> {
-    locator.validate()?;
+    let locator = request.locator();
     if let Some(provenance) = &locator.kind_provenance {
         if committed_kind(&provenance.establishment.binding, rows)? != &provenance.establishment {
             return Err(refuse(
@@ -999,39 +1115,39 @@ impl NativeWorkStateV1 {
             Ok(out)
         })
     }
+    /// Binds exact submitted meaning and a complete original recovery locator.
+    /// Explicit input is pure; kind input reads one retained committed closure.
+    /// Current authority, conflicts and capacity are checked at invocation.
     pub fn prepare_registration(
         repo: impl AsRef<Path>,
         grant: &WorkGrantLocatorV1,
         basis: &LocalCheckCurrentBasisV1,
         input: WorkRegistrationInputV1,
     ) -> Result<PreparedWorkRegistrationV1, LocalAuthorityRefusalV1> {
-        Self::resolve_current_terms(repo.as_ref(), grant, basis)?;
-        let mut locator = WorkRequestLocatorV1 {
-            grant: grant.clone(),
-            item_identity: work_item_identity_v1(grant.project(), &input.item_key)?,
-            input,
-            kind_provenance: None,
-            fingerprint: String::new(),
-        };
-        let root = RetainedRepositoryRootV1::open_exact(repo).map_err(fs_error)?;
-        let lock = store::open(&root)?;
-        let (_, rows) = scan(&lock)?;
-        if let Some(binding) = locator.input.composition.submitted_kind() {
+        let bound = WorkRequestBinding::new(grant, basis, input)?;
+        let mut kind_provenance = None;
+        if let Some(binding) = bound.submitted_kind() {
+            if binding.project_identity != bound.project() {
+                return Err(refuse(
+                    "work_kind_provenance",
+                    "exact same-project committed kind and expansion required",
+                ));
+            }
+            let root = RetainedRepositoryRootV1::open_exact(repo).map_err(fs_error)?;
+            let lock = store::open(&root)?;
+            let (_, rows) = scan(&lock)?;
             let receipt = committed_kind(binding, &rows)?;
-            locator.kind_provenance = Some(WorkKindProvenanceV1 {
+            kind_provenance = Some(WorkKindProvenanceV1 {
                 establishment: receipt.clone(),
                 expanded: WorkCompositionV1 {
                     descriptor: receipt.definition.template.descriptor.clone(),
                     kind: None,
-                    role: locator.input.composition.role().cloned(),
+                    role: bound.role().cloned(),
                 },
             });
+            lock.validate()?;
         }
-        locator.fingerprint = locator.identity()?;
-        locator.validate()?;
-        current_grant(grant, &rows)?;
-        reservation(&Operation::Item(locator.clone()), &rows)?;
-        Ok(PreparedWorkRegistrationV1 { locator })
+        bound.finish(kind_provenance)
     }
     pub fn register(
         repo: impl AsRef<Path>,
@@ -1259,9 +1375,18 @@ fn execute(
     recover: bool,
     boundary: &mut dyn FnMut(WorkWriteBoundaryV1) -> Result<(), LocalAuthorityRefusalV1>,
 ) -> WorkExecutionV1<Output> {
-    if let Err(e) = op.validate() {
-        return WorkExecutionV1::error(WorkDispositionV1::Refused, e);
-    }
+    let item = match &op {
+        Operation::Item(locator) => match locator.validated() {
+            Ok(value) => Some(value),
+            Err(e) => return WorkExecutionV1::error(WorkDispositionV1::Refused, e),
+        },
+        _ => {
+            if let Err(e) = op.validate() {
+                return WorkExecutionV1::error(WorkDispositionV1::Refused, e);
+            }
+            None
+        }
+    };
     // Exact committed/noncommit history has priority over current permission.
     // An absent owner is eligible only for original live grant establishment.
     let root = match RetainedRepositoryRootV1::open_exact(repo) {
@@ -1330,232 +1455,243 @@ fn execute(
     let effects = std::cell::Cell::new(false);
     let boundary = std::cell::RefCell::new(boundary);
     let notify = |stage| boundary.borrow_mut()(stage);
-    let result = with_work_registration_establishment(
-        repo,
-        &check,
-        &basis,
-        |root| {
-            if let Some(origin) = op.bootstrap() {
-                drop(store::establish(root, &origin, &effects, &mut |stage| {
-                    notify(stage)
-                })?);
+    let consume = |held: &WorkRegistrationCurrentV1<'_>| {
+        let lock = store::open(held.root())?;
+        // I1 has already released its work lock. Only the held invocation's
+        // I2–I4 observations share pure successful artifacts.
+        let mut artifacts = Artifacts::default();
+        let (inventory, mut rows) = scan_with_artifacts(&lock, &mut artifacts)?;
+        reservation(&op, &rows)?;
+        let mut paths = inventory
+            .transactions
+            .iter()
+            .filter(|(name, _)| name.strip_prefix("accept-").unwrap_or(name) != op.name())
+            .flat_map(|(name, files)| {
+                files
+                    .keys()
+                    .map(move |file| format!("{WORK_STATE_ROOT_V1}/{name}/{file}"))
+            })
+            .chain([
+                ".handbook-work-state.v1.json".into(),
+                ".handbook-work-state-bootstrap.v1.json".into(),
+                format!("{WORK_STATE_ROOT_V1}/owner.json"),
+            ])
+            .collect::<Vec<_>>();
+        paths.sort();
+        paths.dedup();
+        let references = paths.iter().map(String::as_str).collect::<Vec<_>>();
+        // Pin immutable original work grant/lineage and retained owner proof;
+        // a work-lock alone does not prove those bytes remained exact.
+        let work_proof = held
+            .root()
+            .retain_exact_files_checkpoint_v1(&references)
+            .map_err(fs_error)?;
+        if let Some(row) = rows.iter().find(|r| r.intent.operation == op) {
+            if row.committed {
+                return Ok(row.output.clone());
             }
-            Ok(())
-        },
-        |held| {
-            let lock = store::open(held.root())?;
-            let (inventory, mut rows) = scan(&lock)?;
-            reservation(&op, &rows)?;
-            let mut paths = inventory
-                .transactions
-                .iter()
-                .filter(|(name, _)| name.strip_prefix("accept-").unwrap_or(name) != op.name())
-                .flat_map(|(name, files)| {
-                    files
-                        .keys()
-                        .map(move |file| format!("{WORK_STATE_ROOT_V1}/{name}/{file}"))
-                })
-                .chain([
-                    ".handbook-work-state.v1.json".into(),
-                    ".handbook-work-state-bootstrap.v1.json".into(),
-                    format!("{WORK_STATE_ROOT_V1}/owner.json"),
-                ])
-                .collect::<Vec<_>>();
-            paths.sort();
-            paths.dedup();
-            let references = paths.iter().map(String::as_str).collect::<Vec<_>>();
-            // Pin immutable original work grant/lineage and retained owner proof;
-            // a work-lock alone does not prove those bytes remained exact.
-            let work_proof = held
-                .root()
-                .retain_exact_files_checkpoint_v1(&references)
-                .map_err(fs_error)?;
-            if let Some(row) = rows.iter().find(|r| r.intent.operation == op) {
-                if row.committed {
-                    return Ok(row.output.clone());
-                }
-                if row.noncommit {
-                    return Err(refuse(
-                        "work_request_noncommit",
-                        "original request is durably not committed",
-                    ));
-                }
+            if row.noncommit {
+                return Err(refuse(
+                    "work_request_noncommit",
+                    "original request is durably not committed",
+                ));
             }
-            // Original pending activation/revocation cannot invalidate its own
-            // establishment/revocation checks, but invalidates every other request.
-            rows.retain(|r| r.intent.operation != op);
-            match &op {
-                Operation::Kind(v) => v.validate()?,
-                Operation::Grant(g) => activation_compatible(
-                    g,
-                    &rows,
-                    held.capture_proof()?.relation_kind()?.as_str(),
-                )?,
-                Operation::Item(v) => {
-                    current_grant(&v.grant, &rows)?;
-                    validate_kind_dependency(v, &rows)?;
-                }
-                Operation::Revoke(v) => {
-                    current_grant(&v.grant, &rows)?;
-                }
+        }
+        // Original pending activation/revocation cannot invalidate its own
+        // establishment/revocation checks, but invalidates every other request.
+        rows.retain(|r| r.intent.operation != op);
+        match &op {
+            Operation::Kind(v) => v.validate()?,
+            Operation::Grant(g) => {
+                activation_compatible(g, &rows, held.capture_proof()?.relation_kind()?.as_str())?
             }
-            let name = op.name();
-            let base = format!("{WORK_STATE_ROOT_V1}/{name}");
-            let stage = format!("{WORK_STATE_ROOT_V1}/accept-{name}");
-            let found = inventory
-                .transactions
-                .get(&name)
-                .or_else(|| inventory.transactions.get(&format!("accept-{name}")));
-            let stage_name = format!("accept-{name}");
-            let intent = if let Some(files) = found {
-                let p = parsed(
-                    &lock,
-                    if inventory.transactions.contains_key(&name) {
-                        &name
-                    } else {
-                        &stage_name
-                    },
-                    files,
-                    &mut std::collections::BTreeSet::new(),
-                )?;
-                p.intent
-            } else {
-                if inventory.transactions.len() >= store::CAPACITY
-                    || inventory.bytes + 8 * MAX > 128 * 1024 * 1024
-                {
-                    return Err(refuse(
-                        "work_capacity",
-                        "reserve complete peak transaction and closure capacity before acceptance",
-                    ));
-                }
-                notify(WorkWriteBoundaryV1::BeforeIntent)?;
-                let v = Intent {
-                    schema: op.schema().into(),
-                    owner_identity: lock.owner.identity.clone(),
-                    operation: op.clone(),
-                    authority: held.capture_proof()?,
-                };
-                encode(&v)?;
-                // Every retained/derived record must fit before accepting the
-                // original reservation, including fingerprint framing overhead.
-                let candidate = decision(&v)?;
-                encode(&candidate)?;
-                encode(&candidate.output)?;
-                encode(&terminal(&candidate)?)?;
-                publication(&v)?;
-                noncommit(&v)?;
-                held.validate_current()?;
-                lock.validate()?;
-                lock.reserve_intent(&name, &encode(&v)?, &effects)?;
-                notify(WorkWriteBoundaryV1::Reservation)?;
-                // Failure can follow mkdir application but precede its durable reply.
-                effects.set(true);
-                held.root()
-                    .create_directory_new_durable(&stage)
-                    .map_err(fs_error)?;
-                notify(WorkWriteBoundaryV1::AcceptanceCandidate)?;
-                store::write_exact(held.root(), &format!("{stage}/intent.json"), &encode(&v)?)?;
-                notify(WorkWriteBoundaryV1::StagedIntent)?;
-                v
-            };
-            // Stage publication atomically accepts intent plus positive never-attempted
-            // checkpoint. Partial staging is reserved and only exact original resume.
-            // A resumed acceptance may apply a checkpoint or rename before a
-            // native durability error. Preserve uncertainty for that prefix too.
-            effects.set(true);
-            if !inventory.transactions.contains_key(&name) {
-                store::write_exact(
-                    held.root(),
-                    &format!("{stage}/not-attempted.json"),
-                    &publication(&intent)?,
-                )?;
-                notify(WorkWriteBoundaryV1::AcceptanceReady)?;
-                held.root()
-                    .rename_directory_noreplace_durable(&stage, &base)
-                    .map_err(fs_error)?;
+            Operation::Item(v) => {
+                current_grant(&v.grant, &rows)?;
+                validate_kind_dependency(item.as_ref().expect("validated Item input"), &rows)?;
             }
-            notify(WorkWriteBoundaryV1::Intent)?;
-            let d = decision(&intent)?;
-            store::write_exact(held.root(), &format!("{base}/decision.json"), &encode(&d)?)?;
-            notify(WorkWriteBoundaryV1::Decision)?;
-            store::write_exact(
-                held.root(),
-                &format!("{base}/snapshot.json"),
-                &encode(&d.output)?,
-            )?;
-            store::write_exact(
-                held.root(),
-                &format!("{base}/terminal.pending"),
-                &encode(&terminal(&d)?)?,
-            )?;
-            notify(WorkWriteBoundaryV1::Snapshot)?;
-            held.validate_current()?;
-            lock.validate()?;
-            let (current_inventory, mut current) = scan(&lock)?;
-            reservation(&op, &current)?;
-            current.retain(|row| row.intent.operation != op);
-            match &op {
-                Operation::Kind(v) => v.validate()?,
-                Operation::Item(v) => {
-                    current_grant(&v.grant, &current)?;
-                    validate_kind_dependency(v, &current)?;
-                }
-                Operation::Grant(v) => activation_compatible(
-                    v,
-                    &current,
-                    held.capture_proof()?.relation_kind()?.as_str(),
-                )?,
-                Operation::Revoke(v) => {
-                    current_grant(&v.grant, &current)?;
-                }
+            Operation::Revoke(v) => {
+                current_grant(&v.grant, &rows)?;
             }
-            let manifest_paths = current_inventory
-                .manifest_paths
-                .iter()
-                .map(String::as_str)
-                .collect::<Vec<_>>();
-            let manifest_proof = held
-                .root()
-                .retain_exact_files_checkpoint_v1(&manifest_paths)
-                .map_err(fs_error)?;
-            // Persist publication attempt BEFORE invoking the native no-replace
-            // installation. Never create a missing checkpoint by absence fallback.
-            held.root()
-                .rename_noreplace_durable(
-                    &format!("{base}/not-attempted.json"),
-                    &format!("{base}/attempted.json"),
-                )
-                .map_err(fs_error)?;
-            notify(WorkWriteBoundaryV1::PublicationAttempt)?;
-            held.validate_current()?;
-            lock.validate()?;
-            work_proof.validate().map_err(fs_error)?;
-            manifest_proof.validate().map_err(fs_error)?;
-            held.root()
-                .rename_noreplace_durable(
-                    &format!("{base}/terminal.pending"),
-                    &format!("{base}/terminal.json"),
-                )
-                .map_err(fs_error)?;
-            notify(WorkWriteBoundaryV1::Terminal)?;
-            let (_, verified) = scan(&lock)?;
-            let proof = verified
-                .into_iter()
-                .find(|r| r.intent.operation == op && r.committed)
-                .ok_or_else(|| {
+        }
+        let name = op.name();
+        let base = format!("{WORK_STATE_ROOT_V1}/{name}");
+        let stage = format!("{WORK_STATE_ROOT_V1}/accept-{name}");
+        let found = inventory
+            .transactions
+            .get(&name)
+            .or_else(|| inventory.transactions.get(&format!("accept-{name}")));
+        let stage_name = format!("accept-{name}");
+        let expected = if let Some(files) = found {
+            artifacts.expected(
+                &lock,
+                if inventory.transactions.contains_key(&name) {
+                    &name
+                } else {
+                    &stage_name
+                },
+                files.get("intent.json").ok_or_else(|| {
                     refuse(
-                        "work_terminal_unproven",
-                        "exact publication proof unavailable",
+                        "work_partial_inventory",
+                        "transaction lacks original intent",
                     )
-                })?;
+                })?,
+                &mut std::collections::BTreeSet::new(),
+            )?
+        } else {
+            if inventory.transactions.len() >= store::CAPACITY
+                || inventory.bytes + 8 * MAX > 128 * 1024 * 1024
+            {
+                return Err(refuse(
+                    "work_capacity",
+                    "reserve complete peak transaction and closure capacity before acceptance",
+                ));
+            }
+            notify(WorkWriteBoundaryV1::BeforeIntent)?;
+            let v = Intent {
+                schema: op.schema().into(),
+                owner_identity: lock.owner.identity.clone(),
+                operation: op.clone(),
+                authority: held.capture_proof()?,
+            };
+            // Every retained/derived record must fit before accepting the
+            // original reservation, including fingerprint framing overhead.
+            let intent_bytes = encode(&v)?;
+            let expected = artifacts.expected(
+                &lock,
+                &name,
+                &intent_bytes,
+                &mut std::collections::BTreeSet::new(),
+            )?;
             held.validate_current()?;
             lock.validate()?;
-            work_proof.validate().map_err(fs_error)?;
-            manifest_proof.validate().map_err(fs_error)?;
-            notify(WorkWriteBoundaryV1::Reply)?;
-            Ok(proof.output)
-        },
-    );
+            lock.reserve_intent(&name, &intent_bytes, &effects)?;
+            notify(WorkWriteBoundaryV1::Reservation)?;
+            // Failure can follow mkdir application but precede its durable reply.
+            effects.set(true);
+            held.root()
+                .create_directory_new_durable(&stage)
+                .map_err(fs_error)?;
+            notify(WorkWriteBoundaryV1::AcceptanceCandidate)?;
+            store::write_exact(held.root(), &format!("{stage}/intent.json"), &intent_bytes)?;
+            notify(WorkWriteBoundaryV1::StagedIntent)?;
+            expected
+        };
+        // Stage publication atomically accepts intent plus positive never-attempted
+        // checkpoint. Partial staging is reserved and only exact original resume.
+        // A resumed acceptance may apply a checkpoint or rename before a
+        // native durability error. Preserve uncertainty for that prefix too.
+        effects.set(true);
+        if !inventory.transactions.contains_key(&name) {
+            store::write_exact(
+                held.root(),
+                &format!("{stage}/not-attempted.json"),
+                &expected.publication,
+            )?;
+            notify(WorkWriteBoundaryV1::AcceptanceReady)?;
+            held.root()
+                .rename_directory_noreplace_durable(&stage, &base)
+                .map_err(fs_error)?;
+        }
+        notify(WorkWriteBoundaryV1::Intent)?;
+        store::write_exact(
+            held.root(),
+            &format!("{base}/decision.json"),
+            &expected.decision,
+        )?;
+        notify(WorkWriteBoundaryV1::Decision)?;
+        store::write_exact(
+            held.root(),
+            &format!("{base}/snapshot.json"),
+            &expected.snapshot,
+        )?;
+        store::write_exact(
+            held.root(),
+            &format!("{base}/terminal.pending"),
+            &expected.terminal,
+        )?;
+        notify(WorkWriteBoundaryV1::Snapshot)?;
+        held.validate_current()?;
+        lock.validate()?;
+        let (current_inventory, mut current) = scan_with_artifacts(&lock, &mut artifacts)?;
+        reservation(&op, &current)?;
+        current.retain(|row| row.intent.operation != op);
+        match &op {
+            Operation::Kind(v) => v.validate()?,
+            Operation::Item(v) => {
+                current_grant(&v.grant, &current)?;
+                validate_kind_dependency(item.as_ref().expect("validated Item input"), &current)?;
+            }
+            Operation::Grant(v) => {
+                activation_compatible(v, &current, held.capture_proof()?.relation_kind()?.as_str())?
+            }
+            Operation::Revoke(v) => {
+                current_grant(&v.grant, &current)?;
+            }
+        }
+        let manifest_paths = current_inventory
+            .manifest_paths
+            .iter()
+            .map(String::as_str)
+            .collect::<Vec<_>>();
+        let manifest_proof = held
+            .root()
+            .retain_exact_files_checkpoint_v1(&manifest_paths)
+            .map_err(fs_error)?;
+        // Persist publication attempt BEFORE invoking the native no-replace
+        // installation. Never create a missing checkpoint by absence fallback.
+        held.root()
+            .rename_noreplace_durable(
+                &format!("{base}/not-attempted.json"),
+                &format!("{base}/attempted.json"),
+            )
+            .map_err(fs_error)?;
+        notify(WorkWriteBoundaryV1::PublicationAttempt)?;
+        held.validate_current()?;
+        lock.validate()?;
+        work_proof.validate().map_err(fs_error)?;
+        manifest_proof.validate().map_err(fs_error)?;
+        held.root()
+            .rename_noreplace_durable(
+                &format!("{base}/terminal.pending"),
+                &format!("{base}/terminal.json"),
+            )
+            .map_err(fs_error)?;
+        notify(WorkWriteBoundaryV1::Terminal)?;
+        let (_, verified) = scan_with_artifacts(&lock, &mut artifacts)?;
+        let proof = verified
+            .into_iter()
+            .find(|r| r.intent.operation == op && r.committed)
+            .ok_or_else(|| {
+                refuse(
+                    "work_terminal_unproven",
+                    "exact publication proof unavailable",
+                )
+            })?;
+        held.validate_current()?;
+        lock.validate()?;
+        work_proof.validate().map_err(fs_error)?;
+        manifest_proof.validate().map_err(fs_error)?;
+        notify(WorkWriteBoundaryV1::Reply)?;
+        Ok(proof.output)
+    };
+    let result = if matches!(&op, Operation::Item(_)) {
+        with_work_registration_current(repo, &check, &basis, consume)
+    } else {
+        with_work_registration_establishment(
+            repo,
+            &check,
+            &basis,
+            |root| {
+                if let Some(origin) = op.bootstrap() {
+                    drop(store::establish(root, &origin, &effects, &mut |stage| {
+                        notify(stage)
+                    })?);
+                }
+                Ok(())
+            },
+            consume,
+        )
+    };
     match result {
         Ok(v) => WorkExecutionV1::success(WorkDispositionV1::Committed, Some(v)),
         Err(e) if recover && existed => close_noncommit(repo, &op, e),

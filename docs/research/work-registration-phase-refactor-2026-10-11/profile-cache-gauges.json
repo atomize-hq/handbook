@@ -1,0 +1,221 @@
+[
+  {
+    "cohort": "explicit",
+    "history": 8,
+    "variant": "baseline",
+    "phase": "preparation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 8,
+    "variant": "baseline",
+    "phase": "invocation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 8,
+    "variant": "refactor",
+    "phase": "preparation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 8,
+    "variant": "refactor",
+    "phase": "invocation",
+    "gauges": {
+      "artifact_buffer_bytes_peak": 2238034,
+      "artifact_entries_peak": 9
+    },
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "kind",
+    "history": 8,
+    "variant": "baseline",
+    "phase": "preparation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "kind",
+    "history": 8,
+    "variant": "baseline",
+    "phase": "invocation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "kind",
+    "history": 8,
+    "variant": "refactor",
+    "phase": "preparation",
+    "gauges": {
+      "artifact_buffer_bytes_peak": 2299072,
+      "artifact_entries_peak": 8
+    },
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "kind",
+    "history": 8,
+    "variant": "refactor",
+    "phase": "invocation",
+    "gauges": {
+      "artifact_buffer_bytes_peak": 2600869,
+      "artifact_entries_peak": 9
+    },
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 16,
+    "variant": "baseline",
+    "phase": "preparation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 16,
+    "variant": "baseline",
+    "phase": "invocation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 16,
+    "variant": "refactor",
+    "phase": "preparation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 16,
+    "variant": "refactor",
+    "phase": "invocation",
+    "gauges": {
+      "artifact_buffer_bytes_peak": 4231666,
+      "artifact_entries_peak": 17
+    },
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "kind",
+    "history": 16,
+    "variant": "baseline",
+    "phase": "preparation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "kind",
+    "history": 16,
+    "variant": "baseline",
+    "phase": "invocation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "kind",
+    "history": 16,
+    "variant": "refactor",
+    "phase": "preparation",
+    "gauges": {
+      "artifact_buffer_bytes_peak": 4713064,
+      "artifact_entries_peak": 16
+    },
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "kind",
+    "history": 16,
+    "variant": "refactor",
+    "phase": "invocation",
+    "gauges": {
+      "artifact_buffer_bytes_peak": 5014861,
+      "artifact_entries_peak": 17
+    },
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 31,
+    "variant": "baseline",
+    "phase": "preparation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 31,
+    "variant": "baseline",
+    "phase": "invocation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 31,
+    "variant": "refactor",
+    "phase": "preparation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 31,
+    "variant": "refactor",
+    "phase": "invocation",
+    "gauges": {
+      "artifact_buffer_bytes_peak": 7969726,
+      "artifact_entries_peak": 32
+    },
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "kind",
+    "history": 31,
+    "variant": "baseline",
+    "phase": "preparation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "kind",
+    "history": 31,
+    "variant": "baseline",
+    "phase": "invocation",
+    "gauges": {},
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "kind",
+    "history": 31,
+    "variant": "refactor",
+    "phase": "preparation",
+    "gauges": {
+      "artifact_buffer_bytes_peak": 9239299,
+      "artifact_entries_peak": 31
+    },
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  },
+  {
+    "cohort": "kind",
+    "history": 31,
+    "variant": "refactor",
+    "phase": "invocation",
+    "gauges": {
+      "artifact_buffer_bytes_peak": 9541096,
+      "artifact_entries_peak": 32
+    },
+    "gauge_excludes_decoded_intent_output_rc_allocator": true
+  }
+]

@@ -23,7 +23,7 @@ the approved plan at `d7ff969` is implemented at `ae1af38`. The
 [slice status](slices/work-compositions-and-kinds/README.md) records completed
 Packet-2 acceptance/review, supplied meta aggregate validation/closeout and accepted
 human recap. The [current priorities](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
-now place human review of the prepared
+now place human result review of the implemented
 [work-registration phase-refactor plan](slices/work-registration-phase-refactor/README.md)
 next, with separate capacity/design selection still pending after completed
 baseline, storage feasibility and
@@ -396,18 +396,23 @@ and recommends binding-first preparation with authoritative invocation before
 larger storage work. After reviewing that audit and focused Pro advice, the human
 requested bounded preparation of
 [work-registration-phase-refactor](slices/work-registration-phase-refactor/README.md).
-That one-packet plan is now prepared for human review: binding-first explicit/
+The human subsequently authorized the complete reviewed one-packet plan: binding-first explicit/
 exact-kind preparation, current invocation authority, successful pure derivation
 reuse and Item-only non-bootstrap consumption, preserving original recovery and
-I1–I4 initially. The preparation guarantee/deferred-error change and product
-execution remain proposed. Combined convenience and shared parent-handle reuse
-are excluded; existing product behavior is unchanged.
-The measured preserved-policy reuse still leaves substantial whole-history cost.
+I1–I4 initially. The selected preparation guarantee/deferred-error change is
+included in authorized implementation, verification, measurement, focused review
+and one local commit. Packet 1 is implemented, verified and approved by focused
+review with no unresolved P1/P2 or P3/P4 advisories, in one coherent local commit.
+Its [evidence](../../research/work-registration-phase-refactor-2026-10-11/README.md)
+records 80 focused passes, all 36 warm native main pairs faster and 33.51–39.80%
+median paired workflow reductions across six cells, with higher invocation-local
+peak private memory. Four fresh invocation scans remain substantial cost. Meta
+owns aggregate closeout and the human recap. Combined convenience and shared
+parent-handle reuse are excluded.
 
-**Next human decision:** approve or revise the complete reviewed
+**Next human review:** the verified and reviewed Packet-1 result under the
 [registration phase-refactor plan](slices/work-registration-phase-refactor/README.md),
-including its binding guarantee/deferred-error boundary, before implementation.
-Preparation authorization does not select those semantics or authorize execution.
+including its changed workflow, refusal/recovery behavior and new measurements.
 Separately review the bounded capacity proposal alongside baseline/feasibility
 evidence and select the operation-local verification/complete-audit
 boundary, population/closure/resource budgets, decision-bearing index/current-control

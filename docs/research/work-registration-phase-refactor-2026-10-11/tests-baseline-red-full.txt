@@ -1,0 +1,151 @@
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.45
+   Compiling version_check v0.9.5
+   Compiling typenum v1.19.0
+   Compiling syn v2.0.117
+   Compiling generic-array v0.14.7
+   Compiling zeroize v1.9.0
+   Compiling subtle v2.6.1
+   Compiling synstructure v0.13.2
+   Compiling stable_deref_trait v1.2.1
+   Compiling autocfg v1.5.0
+   Compiling zerofrom-derive v0.1.7
+   Compiling yoke-derive v0.8.2
+   Compiling num-traits v0.2.19
+   Compiling zerofrom v0.1.8
+   Compiling zerovec-derive v0.11.3
+   Compiling yoke v0.8.3
+   Compiling const-oid v0.9.6
+   Compiling serde_core v1.0.228
+   Compiling zerovec v0.11.6
+   Compiling displaydoc v0.2.6
+   Compiling cfg-if v1.0.4
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling serde v1.0.228
+   Compiling smallvec v1.15.1
+   Compiling memchr v2.8.0
+   Compiling digest v0.10.7
+   Compiling serde_derive v1.0.228
+   Compiling rand_core v0.6.4
+   Compiling tinystr v0.8.3
+   Compiling litemap v0.8.2
+   Compiling writeable v0.6.3
+   Compiling zmij v1.0.21
+   Compiling icu_locale_core v2.2.0
+   Compiling num-integer v0.1.46
+   Compiling zerotrie v0.2.4
+   Compiling potential_utf v0.1.5
+   Compiling icu_properties_data v2.2.0
+   Compiling windows-link v0.2.1
+   Compiling regex-syntax v0.8.10
+   Compiling icu_normalizer_data v2.2.0
+   Compiling utf8_iter v1.0.4
+   Compiling icu_collections v2.2.0
+   Compiling icu_provider v2.2.0
+   Compiling ff v0.13.1
+   Compiling aho-corasick v1.1.4
+   Compiling der v0.7.10
+   Compiling ref-cast v1.0.25
+   Compiling windows_x86_64_msvc v0.53.1
+   Compiling zerocopy v0.8.54
+   Compiling getrandom v0.3.4
+   Compiling itoa v1.0.18
+   Compiling serde_json v1.0.149
+   Compiling base16ct v0.2.0
+   Compiling parking_lot_core v0.9.12
+   Compiling equivalent v1.0.2
+   Compiling sec1 v0.7.3
+   Compiling regex-automata v0.4.14
+   Compiling group v0.13.0
+   Compiling num-bigint v0.4.8
+   Compiling crypto-bigint v0.5.5
+   Compiling ref-cast-impl v1.0.25
+   Compiling ahash v0.8.12
+   Compiling scopeguard v1.2.0
+   Compiling thiserror v2.0.18
+   Compiling once_cell v1.21.4
+   Compiling lock_api v0.4.14
+   Compiling elliptic-curve v0.13.8
+   Compiling num-rational v0.4.2
+   Compiling icu_normalizer v2.2.0
+   Compiling icu_properties v2.2.0
+   Compiling num-iter v0.1.46
+   Compiling hmac v0.12.1
+   Compiling num-complex v0.4.6
+   Compiling thiserror-impl v2.0.18
+   Compiling borrow-or-share v0.2.4
+   Compiling bit-vec v0.8.0
+   Compiling foldhash v0.2.0
+   Compiling getrandom v0.4.2
+   Compiling unicode-general-category v1.1.0
+   Compiling allocator-api2 v0.2.21
+   Compiling hashbrown v0.17.1
+   Compiling bit-set v0.8.0
+   Compiling fluent-uri v0.4.1
+   Compiling num v0.4.3
+   Compiling rfc6979 v0.4.0
+   Compiling parking_lot v0.12.5
+   Compiling windows-targets v0.53.5
+   Compiling idna_adapter v1.2.2
+   Compiling regex v1.12.3
+   Compiling signature v2.2.0
+   Compiling percent-encoding v2.3.2
+   Compiling lazy_static v1.5.0
+   Compiling vsimd v0.8.0
+   Compiling outref v0.5.2
+   Compiling hashbrown v0.16.1
+   Compiling cpufeatures v0.2.17
+   Compiling micromap v0.3.0
+   Compiling arraydeque v0.5.1
+   Compiling saphyr-parser-bw v0.0.611
+   Compiling referencing v0.47.0
+   Compiling sha2 v0.10.9
+   Compiling indexmap v2.13.1
+   Compiling uuid-simd v0.8.0
+   Compiling fraction v0.15.4
+   Compiling ecdsa v0.16.9
+   Compiling idna v1.1.0
+   Compiling windows-sys v0.60.2
+   Compiling fancy-regex v0.18.0
+   Compiling primeorder v0.13.6
+   Compiling jsonschema-regex v0.47.0
+   Compiling windows-sys v0.61.2
+   Compiling email_address v0.2.9
+   Compiling bytecount v0.6.9
+   Compiling base64 v0.22.1
+   Compiling ryu-js v1.0.3
+   Compiling fastrand v2.4.1
+   Compiling num-cmp v0.1.0
+   Compiling unsafe-libyaml-norway v0.2.15
+   Compiling data-encoding v2.11.0
+   Compiling jsonschema v0.47.0
+   Compiling serde_yaml_bw v2.5.4
+   Compiling tempfile v3.27.0
+   Compiling serde_json_canonicalizer v0.3.2
+   Compiling p256 v0.13.2
+   Compiling file-id v0.2.3
+   Compiling semver v1.0.28
+   Compiling handbook-engine v0.2.0 (C:\Users\spmcc\AppData\Local\Temp\handbook-work-registration-red-83cf572595b14f4bb6df20a6ec5251ce\source\crates\engine)
+    Finished `release` profile [optimized] target(s) in 2m 49s
+     Running tests\work_state.rs (C:\Users\spmcc\AppData\Local\Temp\handbook-work-registration-red-83cf572595b14f4bb6df20a6ec5251ce\target\release\deps\work_state-550122d1ad4ee4e0.exe)
+
+running 1 test
+test retained_explicit_binding_uses_supplied_exact_basis_and_original_bytes_without_native_reads ... FAILED
+
+failures:
+
+---- retained_explicit_binding_uses_supplied_exact_basis_and_original_bytes_without_native_reads stdout ----
+
+thread 'retained_explicit_binding_uses_supplied_exact_basis_and_original_bytes_without_native_reads' panicked at crates\engine\tests\work_state.rs:28:6:
+called `Result::unwrap()` on an `Err` value: LocalAuthorityRefusalV1 { code: "retained_state", detail: "repository root ancestor metadata admission failed", unresolved_request: None }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    retained_explicit_binding_uses_supplied_exact_basis_and_original_bytes_without_native_reads
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.05s
+
+error: test failed, to rerun pass `-p handbook-engine --test work_state`

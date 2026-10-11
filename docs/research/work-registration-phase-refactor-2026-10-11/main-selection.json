@@ -1,0 +1,20 @@
+{
+  "reason": "First baseline overlapped a still-finishing environment/start-inventory snapshot; no build/test/population overlap. Both original pair observations excluded.",
+  "authorization": "Root approved bounded fresh independent replacement with original baseline-first order.",
+  "original_series": "pristine-measurements-original.jsonl",
+  "excluded_pair": "diagnostic-excluded-pair.jsonl",
+  "accepted_series": "pristine-measurements.jsonl",
+  "accepted_observations": 72,
+  "actual_total_pristine_observations": 74,
+  "replacement_population": "replaced-population.jsonl",
+  "replacement_parity": "replaced-byte-parity.json",
+  "replacement_measurements": "replaced-measurements.jsonl",
+  "replacement_quiescent_start": "replacement-quiescent-start.json",
+  "actual_late_order": [
+    "baseline",
+    "refactor"
+  ],
+  "replacement_follows_original_series": true,
+  "resource_roots": "Original measured sample0 explicit/history8 diagnostic roots; not replacement roots.",
+  "impact": "New top-level research-only helper is UNKNOWN/unindexed; source context calls existing run, parity, verify_sources without product edits."
+}

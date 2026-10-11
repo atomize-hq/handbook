@@ -1,0 +1,13 @@
+   Compiling work-state-capacity-research v0.1.0 (C:\Users\spmcc\AppData\Local\Temp\hcm-wr-phase-baseline-20261011\docs\research\work-registration-phase-refactor-2026-10-11\native)
+warning: variable does not need to be mutable
+   --> src\main.rs:112:81
+    |
+112 |     if on {begin();}let invoke_start=Instant::now();let invoke_cpu=cpu_ms();let mut max_handles=handles();
+    |                                                                                 ----^^^^^^^^^^^
+    |                                                                                 |
+    |                                                                                 help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: `work-state-capacity-research` (bin "work-state-capacity-research") generated 1 warning (run `cargo fix --bin "work-state-capacity-research"` to apply 1 suggestion)
+    Finished `release` profile [optimized] target(s) in 20.95s

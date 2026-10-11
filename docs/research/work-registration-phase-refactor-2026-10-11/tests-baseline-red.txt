@@ -1,0 +1,29 @@
+{"baseline":"8e5c6f21077a508d40cd0661bd1946d04a132281","source":"C:\\Users\\spmcc\\AppData\\Local\\Temp\\handbook-work-registration-red-83cf572595b14f4bb6df20a6ec5251ce\\source","target":"C:\\Users\\spmcc\\AppData\\Local\\Temp\\handbook-work-registration-red-83cf572595b14f4bb6df20a6ec5251ce\\target","test_source_sha256":"cad837458559a9eda660b1e110213a186614314d0a6953fa69b3557b0958eed3","product_transaction_sha256":"e14b373d967ace5770bbf94d262df30fbbd53dbfd954d91b466de8985464a4c8","exit_code":101,"expected_red":true,"log":"C:\\Users\\spmcc\\AppData\\Local\\Temp\\handbook-work-registration-red-83cf572595b14f4bb6df20a6ec5251ce\\red-output.log"}
+   Compiling serde_yaml_bw v2.5.4
+   Compiling tempfile v3.27.0
+   Compiling serde_json_canonicalizer v0.3.2
+   Compiling p256 v0.13.2
+   Compiling file-id v0.2.3
+   Compiling semver v1.0.28
+   Compiling handbook-engine v0.2.0 (C:\Users\spmcc\AppData\Local\Temp\handbook-work-registration-red-83cf572595b14f4bb6df20a6ec5251ce\source\crates\engine)
+    Finished `release` profile [optimized] target(s) in 2m 49s
+     Running tests\work_state.rs (C:\Users\spmcc\AppData\Local\Temp\handbook-work-registration-red-83cf572595b14f4bb6df20a6ec5251ce\target\release\deps\work_state-550122d1ad4ee4e0.exe)
+
+running 1 test
+test retained_explicit_binding_uses_supplied_exact_basis_and_original_bytes_without_native_reads ... FAILED
+
+failures:
+
+---- retained_explicit_binding_uses_supplied_exact_basis_and_original_bytes_without_native_reads stdout ----
+
+thread 'retained_explicit_binding_uses_supplied_exact_basis_and_original_bytes_without_native_reads' panicked at crates\engine\tests\work_state.rs:28:6:
+called `Result::unwrap()` on an `Err` value: LocalAuthorityRefusalV1 { code: "retained_state", detail: "repository root ancestor metadata admission failed", unresolved_request: None }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    retained_explicit_binding_uses_supplied_exact_basis_and_original_bytes_without_native_reads
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.05s
+
+error: test failed, to rerun pass `-p handbook-engine --test work_state`

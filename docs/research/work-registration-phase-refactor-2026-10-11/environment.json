@@ -1,0 +1,34 @@
+{
+  "captured_at_utc": "2026-10-11T18:24:17.7551587Z",
+  "os": {
+    "Caption": "Microsoft Windows 11 Home",
+    "Version": "10.0.26200",
+    "BuildNumber": "26200",
+    "TotalVisibleMemorySize": 134021096
+  },
+  "cpu": {
+    "Name": "12th Gen Intel(R) Core(TM) i9-12900KF",
+    "NumberOfCores": 16,
+    "NumberOfLogicalProcessors": 24
+  },
+  "volume": {
+    "FileSystem": "NTFS",
+    "Size": 1999478190080,
+    "SizeRemaining": 286791565312
+  },
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\r\nbinary: rustc\r\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\r\ncommit-date: 2025-08-04\r\nhost: x86_64-pc-windows-msvc\r\nrelease: 1.89.0\r\nLLVM version: 20.1.7",
+  "cargo": "cargo 1.89.0 (c24e10642 2025-06-23)",
+  "python": "Python 3.11.9",
+  "power_scheme": "Power Scheme GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c  (High performance)",
+  "allowlisted_build_environment": {
+    "RUSTFLAGS": null,
+    "CARGO_ENCODED_RUSTFLAGS": null,
+    "RUSTUP_TOOLCHAIN": null,
+    "CARGO_BUILD_TARGET": null,
+    "CARGO_PROFILE_RELEASE_OPT_LEVEL": null
+  },
+  "build": "locked/offline release defaults, two jobs, MSVC; same standalone driver and dependency lock",
+  "stacks": "32 MiB main worker and controlled-race child",
+  "cache": "warm Windows native stores after untimed public-owner population; no eviction",
+  "timed_workloads": "one process and one workflow at a time; all population/builds/tests paused or complete"
+}

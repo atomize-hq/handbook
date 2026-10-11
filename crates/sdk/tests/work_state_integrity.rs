@@ -158,6 +158,224 @@ fn item_history_requires_actual_original_work_activation_terminal_and_strict_rec
     }
 }
 #[test]
+fn repeated_history_observations_reject_changed_intent_proof_and_terminal_bytes() {
+    for (boundary, relative, pointer) in [
+        (
+            WorkWriteBoundaryV1::BeforeIntent,
+            "grant-work/intent.json",
+            "/operation/locator/terms/instruction",
+        ),
+        (
+            WorkWriteBoundaryV1::BeforeIntent,
+            "grant-work/intent.json",
+            "/authority/schema_ref",
+        ),
+        (
+            WorkWriteBoundaryV1::Snapshot,
+            "grant-work/terminal.json",
+            "/effect",
+        ),
+        (
+            WorkWriteBoundaryV1::Snapshot,
+            "item-request/intent.json",
+            "/operation/locator/input/label",
+        ),
+        (
+            WorkWriteBoundaryV1::Snapshot,
+            "item-request/intent.json",
+            "/authority/schema_ref",
+        ),
+        (
+            WorkWriteBoundaryV1::Terminal,
+            "item-request/terminal.json",
+            "/effect",
+        ),
+    ] {
+        for substitute in [false, true] {
+            let (dir, sdk, initial, grant) = fixture();
+            let prepared = sdk
+                .prepare_work_registration(&initial, &grant, input(&grant))
+                .unwrap();
+            let original = prepared.locator().clone();
+            let mut changed = false;
+            let execution =
+                NativeWorkStateV1::register_with_boundary_for_test(dir.path(), prepared, |at| {
+                    if at == boundary {
+                        let path = dir.path().join(".handbook/work-state/v1").join(relative);
+                        let mut value: serde_json::Value =
+                            serde_json::from_slice(&fs::read(&path).unwrap()).unwrap();
+                        let target = value.pointer_mut(pointer).expect("existing retained field");
+                        *target = serde_json::json!("changed-exact-record");
+                        if substitute {
+                            changed = fs::rename(&path, path.with_extension("replaced")).is_ok();
+                            if changed {
+                                let _ = fs::write(&path, serde_json::to_vec(&value).unwrap());
+                            }
+                        } else {
+                            changed = fs::write(&path, serde_json::to_vec(&value).unwrap()).is_ok();
+                        }
+                    }
+                    Ok(())
+                });
+            if changed {
+                assert!(
+                    execution.outcome.is_none(),
+                    "{boundary:?} {relative} substitution={substitute}: {execution:?}"
+                );
+                if boundary != WorkWriteBoundaryV1::Terminal {
+                    assert!(!dir
+                        .path()
+                        .join(".handbook/work-state/v1/item-request/terminal.json")
+                        .exists());
+                }
+                assert_eq!(
+                    sdk.recover_work_registration_request(&original).disposition,
+                    WorkDispositionV1::Uncertain
+                );
+            } else {
+                assert_eq!(
+                    execution.disposition,
+                    WorkDispositionV1::Committed,
+                    "retained handle denied mutation: {boundary:?} {relative}: {execution:?}"
+                );
+                assert_eq!(
+                    sdk.recover_work_registration_request(&original).disposition,
+                    WorkDispositionV1::Replayed
+                );
+            }
+        }
+    }
+}
+
+#[test]
+fn item_current_seam_preserves_fresh_physical_checks_through_capture_attempt_and_reply() {
+    for (boundary, relative, action) in [
+        (
+            WorkWriteBoundaryV1::BeforeIntent,
+            ".handbook/local-operating/v1/unknown-sibling.json",
+            "unknown",
+        ),
+        (
+            WorkWriteBoundaryV1::Snapshot,
+            ".handbook/work-state/v1/unknown-sibling.json",
+            "unknown",
+        ),
+        (
+            WorkWriteBoundaryV1::Snapshot,
+            ".handbook-work-state.v1.json",
+            "erase",
+        ),
+        (
+            WorkWriteBoundaryV1::Snapshot,
+            ".handbook/work-state/v1/slot-00.json",
+            "erase",
+        ),
+        (
+            WorkWriteBoundaryV1::PublicationAttempt,
+            ".handbook-work-state.v1.json",
+            "corrupt",
+        ),
+        (
+            WorkWriteBoundaryV1::PublicationAttempt,
+            ".handbook/work-state/v1/slot-00.json",
+            "corrupt",
+        ),
+        (
+            WorkWriteBoundaryV1::Snapshot,
+            ".handbook/work-state/work.lock",
+            "replace",
+        ),
+        (
+            WorkWriteBoundaryV1::Snapshot,
+            ".handbook/state/locks/local-operating.lock",
+            "replace",
+        ),
+        (
+            WorkWriteBoundaryV1::Snapshot,
+            ".handbook-initialization.lock",
+            "replace",
+        ),
+        (
+            WorkWriteBoundaryV1::Terminal,
+            ".handbook/work-state/v1/owner.json",
+            "corrupt",
+        ),
+        (
+            WorkWriteBoundaryV1::Reply,
+            ".handbook/project/charter.yaml",
+            "corrupt",
+        ),
+    ] {
+        let (directory, sdk, initial, grant) = fixture();
+        let prepared = sdk
+            .prepare_work_registration(&initial, &grant, input(&grant))
+            .unwrap();
+        let original = prepared.locator().clone();
+        let path = directory.path().join(relative);
+        let before = if action == "unknown" {
+            None
+        } else {
+            Some(fs::read(&path).unwrap())
+        };
+        let mut changed = false;
+        let execution =
+            NativeWorkStateV1::register_with_boundary_for_test(directory.path(), prepared, |at| {
+                if at == boundary {
+                    changed = match action {
+                        "erase" => fs::remove_file(&path).is_ok(),
+                        "replace" => {
+                            let moved = fs::rename(&path, path.with_extension("replaced")).is_ok();
+                            if moved {
+                                let _ = fs::write(&path, []);
+                            }
+                            moved
+                        }
+                        _ => fs::write(&path, b"unexpected current physical bytes").is_ok(),
+                    };
+                }
+                Ok(())
+            });
+        if changed {
+            assert!(
+                execution.outcome.is_none(),
+                "{boundary:?} {relative}: {execution:?}"
+            );
+            if !matches!(
+                boundary,
+                WorkWriteBoundaryV1::Terminal | WorkWriteBoundaryV1::Reply
+            ) {
+                assert!(!directory
+                    .path()
+                    .join(".handbook/work-state/v1/item-request/terminal.json")
+                    .exists());
+                assert!(sdk
+                    .recover_work_registration_request(&original)
+                    .outcome
+                    .is_none());
+            } else {
+                assert!(directory
+                    .path()
+                    .join(".handbook/work-state/v1/item-request/terminal.json")
+                    .exists());
+                // Repair only the test's in-place damage to show that a terminal
+                // installed before final validation/reply failure is still commit.
+                fs::write(&path, before.as_ref().unwrap()).unwrap();
+                assert_eq!(
+                    sdk.recover_work_registration_request(&original).disposition,
+                    WorkDispositionV1::Replayed
+                );
+            }
+        } else {
+            assert_eq!(
+                execution.disposition,
+                WorkDispositionV1::Committed,
+                "retained handle denied physical mutation: {boundary:?} {relative}: {execution:?}"
+            );
+        }
+    }
+}
+
+#[test]
 fn native_lock_and_activation_dependency_substitution_at_snapshot_cannot_publish() {
     for file in [
         ".handbook/work-state/work.lock",
@@ -257,11 +475,13 @@ fn lost_whole_item_transaction_is_unverifiable_never_absent_or_replaceable() {
         assert!(recovery.outcome.is_none());
         let mut replacement = input(&g);
         replacement.request_key = "replacement-request".into();
-        assert!(s
+        let bound = s
             .prepare_work_registration(&i, &g, replacement.clone())
-            .is_err());
+            .unwrap();
+        assert!(s.register_work_item(bound).outcome.is_none());
         replacement.item_key = "unrelated-new-item".into();
-        assert!(s.prepare_work_registration(&i, &g, replacement).is_err());
+        let bound = s.prepare_work_registration(&i, &g, replacement).unwrap();
+        assert!(s.register_work_item(bound).outcome.is_none());
         assert!(!lost.exists(), "lost original transaction was recreated");
         assert!(!d
             .path()
@@ -308,9 +528,10 @@ fn lost_whole_activation_transaction_never_restores_grant_or_owner_absence() {
             "{recovery:?}"
         );
         assert!(recovery.outcome.is_none());
-        assert!(s
+        let bound = s
             .prepare_work_registration(&i, &original, input(&original))
-            .is_err());
+            .unwrap();
+        assert!(s.register_work_item(bound).outcome.is_none());
         let mut replacement = original.terms.clone();
         replacement.request_key = "replacement-grant".into();
         replacement.approved_content_fingerprint =
@@ -361,7 +582,8 @@ fn missing_or_erased_expected_slot_cannot_hide_committed_history() {
         );
         let mut replacement = input(&g);
         replacement.request_key = "new-key".into();
-        assert!(s.prepare_work_registration(&i, &g, replacement).is_err());
+        let bound = s.prepare_work_registration(&i, &g, replacement).unwrap();
+        assert!(s.register_work_item(bound).outcome.is_none());
     }
 }
 
@@ -495,9 +717,10 @@ fn actual_early_acceptance_interruptions_keep_positive_reservation_and_truthful_
         assert!(recovery.outcome.is_none());
         let mut replacement = input(&grant);
         replacement.request_key = "new-key-after-early-interruption".into();
-        assert!(s
+        let bound = s
             .prepare_work_registration(&i, &grant, replacement)
-            .is_err());
+            .unwrap();
+        assert!(s.register_work_item(bound).outcome.is_none());
         assert_eq!(
             fs::read(&slot_path).unwrap(),
             slot_before,

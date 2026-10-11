@@ -96,6 +96,8 @@ fn run() -> Result<(), String> {
             let prepared = sdk
                 .prepare_work_registration(&initial, &grant, input)
                 .map_err(debug)?;
+            // Binding reserves nothing and does not promise current permission.
+            // Save the complete original before invocation can accept a slot.
             save_new(
                 Path::new(&args[5]),
                 &prepared.locator().canonical_json_bytes().map_err(debug)?,

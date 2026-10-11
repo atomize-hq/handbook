@@ -1,0 +1,8 @@
+{
+  "gitnexus_impact": [
+    {"target": "summarize_resources", "direction": "upstream", "risk": "UNKNOWN", "reason": "New unindexed research script; no existing indexed symbol. Top-level source reads resource JSON and writes derived JSON/Markdown only."},
+    {"target": "final_tables", "direction": "upstream", "risk": "UNKNOWN", "reason": "New unindexed research script; no existing indexed symbol. Top-level source reads retained summary/control/profile data and writes Markdown only."}
+  ],
+  "direct_scope": "research derived summaries only; no native execution, product source, fixture, proof, input, or observation mutation",
+  "parent_notified_before_edit": true
+}

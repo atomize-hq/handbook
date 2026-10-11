@@ -302,7 +302,7 @@ fn exact_kind_establishment_is_independent_on_d_and_g_in_both_bootstrap_orders()
                         WorkTermsTransitionV1::Initial,
                     )
                     .unwrap();
-                assert!(sdk
+                let bound_prospective = sdk
                     .prepare_work_registration(
                         &initial,
                         prospective.locator(),
@@ -310,10 +310,14 @@ fn exact_kind_establishment_is_independent_on_d_and_g_in_both_bootstrap_orders()
                             prospective.locator(),
                             "kind-does-not-permit-work",
                             1,
-                            Some(&kind.binding)
-                        )
+                            Some(&kind.binding),
+                        ),
                     )
-                    .is_err());
+                    .unwrap();
+                assert_eq!(
+                    sdk.register_work_item(bound_prospective).disposition,
+                    WorkDispositionV1::Refused
+                );
                 let grant = activate(
                     &sdk,
                     &initial,
@@ -660,6 +664,16 @@ fn kind_and_current_scope_intersect_and_revocation_does_not_change_definition_tr
     assert!(sdk
         .prepare_work_registration(&initial, &grant, request)
         .is_err());
+    let bound_k1 = sdk
+        .prepare_work_registration(
+            &initial,
+            &grant,
+            input(&grant, "bound-k1-before-k2", 1, Some(&kind.binding)),
+        )
+        .unwrap();
+    let saved_k1 =
+        WorkRequestLocatorV1::from_json_bytes(&bound_k1.locator().canonical_json_bytes().unwrap())
+            .unwrap();
     let mut narrow = definition(1, "2.0.0");
     narrow.template.label_max_bytes = 16;
     let k2 = establish(&sdk, &initial, &check, "narrow-kind", narrow);
@@ -670,6 +684,14 @@ fn kind_and_current_scope_intersect_and_revocation_does_not_change_definition_tr
             input(&grant, "kind-limit", 1, Some(&k2.binding))
         )
         .is_err());
+    let k1_execution = sdk.register_work_item(bound_k1);
+    assert_eq!(k1_execution.disposition, WorkDispositionV1::Committed);
+    let k1_receipt = k1_execution.outcome.unwrap();
+    assert_eq!(k1_receipt.locator, saved_k1);
+    assert_eq!(
+        k1_receipt.snapshot.admitted_kind.as_ref(),
+        Some(&kind.binding)
+    );
     let original = register(
         &sdk,
         &initial,
@@ -689,13 +711,17 @@ fn kind_and_current_scope_intersect_and_revocation_does_not_change_definition_tr
         sdk.revoke_work_registration_terms(&revocation).disposition,
         WorkDispositionV1::Committed
     );
-    assert!(sdk
+    let bound_revoked = sdk
         .prepare_work_registration(
             &initial,
             &grant,
-            input(&grant, "revoked", 1, Some(&kind.binding))
+            input(&grant, "revoked", 1, Some(&kind.binding)),
         )
-        .is_err());
+        .unwrap();
+    assert_eq!(
+        sdk.register_work_item(bound_revoked).disposition,
+        WorkDispositionV1::Refused
+    );
     establish(
         &sdk,
         &initial,
@@ -713,6 +739,10 @@ fn kind_and_current_scope_intersect_and_revocation_does_not_change_definition_tr
             .unwrap(),
         original
     );
+    let rebound = sdk
+        .prepare_work_registration(&initial, &grant, k1_receipt.locator.input.clone())
+        .unwrap();
+    assert_eq!(sdk.register_work_item(rebound).outcome.unwrap(), k1_receipt);
 }
 
 #[test]
@@ -810,13 +840,17 @@ fn current_g_grant_reuses_d_kind_and_runtime_reset_retains_both_originals() {
             .unwrap(),
         item
     );
-    assert!(reopened
+    let bound_reset = reopened
         .prepare_work_registration(
             &initial,
             &g,
-            input(&g, "after-reset", 1, item.snapshot.admitted_kind.as_ref())
+            input(&g, "after-reset", 1, item.snapshot.admitted_kind.as_ref()),
         )
-        .is_err());
+        .unwrap();
+    assert_eq!(
+        reopened.register_work_item(bound_reset).disposition,
+        WorkDispositionV1::Refused
+    );
     let fresh = definition(1, "3.0.0");
     let mut original_approval = kind.locator.approval.clone();
     original_approval.request_key = "after-reset-kind".into();

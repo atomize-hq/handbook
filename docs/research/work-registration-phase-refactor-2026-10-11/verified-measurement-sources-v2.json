@@ -1,0 +1,41 @@
+{
+  "shared_driver_sha256": "7d1e157c8f9cb5a120215fab65b8f585dd43a41514e339d6206d099e82f0cb52",
+  "primary_matches_refactor_measured_sources": {
+    "crates/engine/src/work_state/kind.rs": "e003fcfb6db1b1dee2b825258c4e74d6a95db95fe6fd194509b8048f0289f257",
+    "crates/engine/src/work_state/mod.rs": "f4e2d1c546553247c5e006bdad39f61cb80d0f91ba1e530ff6cb76b9d1240933",
+    "crates/engine/src/work_state/scope.rs": "56fed0297161933ba928bddbc4123229c6b0e3373c687dcd5d9446717ccfeee5",
+    "crates/engine/src/work_state/store.rs": "ee820edc3fe25fc4f6ddd25c0ef08bd132e95e013246576adfa180f180d1ce02",
+    "crates/engine/src/work_state/submitted.rs": "5b1961544f2df35e732ff592e228c0a2972d04357783ea2d83767406a0579a77",
+    "crates/engine/src/work_state/transaction.rs": "0c981fe98d969db000569f738f0daf57d3e533edd1d268f2ad60ffb32b30a66d",
+    "crates/engine/src/work_state/types.rs": "4e81f69706c1586288420a7f83c38af535c6c702dc5f23c5fbac9cc0dfff8115",
+    "crates/engine/src/lib.rs": "d56db79ac8adfc7fb0e3832fd96d3438aabe0ccb794416fbec0a05999275d812",
+    "crates/engine/src/local_authority.rs": "55f8832b06ee5051669e447878570cf6fa457341f926dafda24256175a067ffe",
+    "crates/engine/src/local_authority/work_registration.rs": "8f1c9a8d25b215e3f974a39d5c258e685c53f1ba8e28e52bcf5228314b05dd9c",
+    "crates/engine/src/local_authority/local_check.rs": "45ac2d9b9f471fdc54c818c4b04c716b80182b98d4b6e66d31b9a46d8493a271",
+    "crates/engine/src/repository_durability.rs": "9a079fecb9b40fe08c542df5c73bcb809ae99c3ded282f201f711460ccb7fdb9",
+    "crates/engine/src/definition_identity.rs": "a16c94af111664622eddf62feae9c4cad6defbd85fc743f55b6f11164108718e",
+    "crates/sdk/src/work_state.rs": "d99c6bbcad2aa0b821ae3ace0cb17c7d0b8f875dacc7dbc7f16d205805e07ad6",
+    "crates/sdk/tests/work_kind_support/mod.rs": "e41c682295b9b00ce3432063f7ee39eff218373ee3e27a50a92b66e10ebd87a9",
+    "crates/sdk/tests/work_state_support/mod.rs": "7982c5cbb1f6165ae64dfbafc75a414a40276d5e78050874ff3f91a592df5d4b",
+    "Cargo.toml": "5a86cd427612942deab9135c9d02f6a81684607ea4f0aebc89e86f61da93bd72",
+    "Cargo.lock": "4a063ad43c60cbd41e24991c92e9f603a6d2fe856bc79da1648b3d030d5c56e8"
+  },
+  "binaries": {
+    "pristine-baseline-v2": {
+      "path": "C:\\Users\\spmcc\\AppData\\Local\\Temp\\hcm-wr-phase-binaries-20261011\\pristine-baseline-v2.exe",
+      "sha256": "2a9c9812b48b78bf9f5ac7165987c25b0e521138fc0e166ea46988a5396f7c4e"
+    },
+    "pristine-refactor-v2": {
+      "path": "C:\\Users\\spmcc\\AppData\\Local\\Temp\\hcm-wr-phase-binaries-20261011\\pristine-refactor-v2.exe",
+      "sha256": "815d0058683fa5be5692c9ccb6518305481e9df8cb857490523721aba94f1287"
+    },
+    "profile-baseline-v2": {
+      "path": "C:\\Users\\spmcc\\AppData\\Local\\Temp\\hcm-wr-phase-binaries-20261011\\profile-baseline-v2.exe",
+      "sha256": "e9fa23191379b43744994dbbd7080fc132d85f59947175339ebe1544927986b8"
+    },
+    "profile-refactor-v2": {
+      "path": "C:\\Users\\spmcc\\AppData\\Local\\Temp\\hcm-wr-phase-binaries-20261011\\profile-refactor-v2.exe",
+      "sha256": "fddc67a92cf264be54c3ed436941bae1d414069a7ff738cbd5e20adc915d7ae3"
+    }
+  }
+}

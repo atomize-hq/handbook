@@ -1,0 +1,66 @@
+    Finished `release` profile [optimized] target(s) in 0.35s
+     Running tests\work_state.rs (target\release\deps\work_state-3e4cfb01dc2e3d5e.exe)
+
+running 13 tests
+test closed_scope_and_role_codecs_reject_unselected_fields_and_complete_record_overflow ... ok
+test d_to_g_requires_explicit_predecessor_and_never_substitutes_old_request_authority ... ok
+test exact_scope_successors_refuse_implicit_expansion_and_unapproved_parameters ... ok
+test explicit_binding_retains_the_original_before_any_root_or_owner_observation ... ok
+test export_supplied_ordinary_work_consumer_inputs ... ok
+test future_roles_kinds_overrides_states_and_conflicting_keys_refuse_without_rebinding ... ok
+test independently_bound_same_item_requests_have_one_commit_and_no_cached_absence ... ok
+test latest_scope_after_multiple_revisions_is_the_only_unchanged_d_to_g_subject ... ok
+test local_check_alone_unapproved_substitute_and_insufficient_reach_supply_no_work_permission ... ok
+test one_sdk_path_first_establishes_all_three_compositions_on_d_and_g ... ok
+test registration_reopen_receipt_history_and_completion_have_distinct_meaning ... ok
+test requirements_helpers_copy_the_full_owner_binding_for_each_supported_family ... ok
+test revocation_and_actual_sdk_reset_preserve_exact_work_history_without_permission ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 193.76s
+
+     Running tests\work_state_durability.rs (target\release\deps\work_state_durability-c2b256d483118b37.exe)
+
+running 13 tests
+test activation_and_revocation_have_the_same_terminal_and_original_recovery_boundary ... ok
+test bounded_peak_inventory_preserves_old_recovery_and_request_reservations_are_local ... ok
+test explicit_g_first_activation_and_interrupted_compatible_g_reestablishment_recover_original_rule ... ok
+test missing_attempt_history_corrupt_exact_records_and_substituted_root_lock_never_prove_absence ... ok
+test native_process_serialization_holds_original_guards_through_registration_and_activation_terminal ... ok
+test native_role_child ... ignored
+test native_work_child ... ignored
+test pending_scope_administration_suspends_use_and_original_noncommit_controls_release ... ok
+test planning_and_requirements_prefixes_never_borrow_successor_or_transition_authority ... ok
+test real_process_death_preserves_pending_attempt_uncertainty_and_committed_terminal_proof ... ok
+test real_process_scope_change_and_role_registration_serialize_in_both_orders ... ok
+test registration_every_prefix_crosses_original_successor_governance_revocation_and_reset ... ok
+test zero_free_slots_close_accepted_item_and_authority_without_reusing_history_slots ... ok
+
+test result: ok. 11 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 1989.24s
+
+     Running tests\work_state_integrity.rs (target\release\deps\work_state_integrity-d127cbdb92136124.exe)
+
+running 11 tests
+test actual_early_acceptance_interruptions_keep_positive_reservation_and_truthful_uncertainty ... ok
+test actual_early_bootstrap_interruption_stays_uncertain_without_identity_or_lock_repair ... ok
+test item_current_seam_preserves_fresh_physical_checks_through_capture_attempt_and_reply ... ok
+test item_history_requires_actual_original_work_activation_terminal_and_strict_record_fields ... ok
+test lost_whole_activation_transaction_never_restores_grant_or_owner_absence ... ok
+test lost_whole_item_transaction_is_unverifiable_never_absent_or_replaceable ... ok
+test missing_or_erased_expected_slot_cannot_hide_committed_history ... ok
+test native_lock_and_activation_dependency_substitution_at_snapshot_cannot_publish ... ok
+test positive_owner_establishment_cannot_rebootstrap_lost_anchor_manifest_or_lock ... ok
+test repeated_history_observations_reject_changed_intent_proof_and_terminal_bytes ... ok
+test staged_original_registration_and_activation_retry_report_uncertain_after_acceptance_write ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 236.57s
+
+     Running tests\work_state_retained.rs (target\release\deps\work_state_retained-64cc1428bf83a41f.exe)
+
+running 4 tests
+test original_foundation_json_and_identity_domains_round_trip_exactly ... ok
+test original_packet1_physical_roots_survive_kinds_support_and_original_recovery ... ignored, requires physical roots emitted by the untouched Packet-1 writer
+test original_physical_roots_survive_unified_successors_recovery_governance_revocation_and_reset ... ignored, requires original physical roots captured before unified product edits
+test original_receipt_fingerprint_retains_its_exact_snapshot_preimage ... ok
+
+test result: ok. 2 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 0.05s
+

@@ -1,0 +1,18 @@
+{
+  "revision": "add-process-handle-peak-before-measurement",
+  "measurement_started": false,
+  "files": ["run_pairs.py", "summarize_memory.py", "summarize_resources.py", "README.md"],
+  "impact_target": "Function:docs/research/work-registration-phase-refactor-2026-10-11/run_pairs.py:run",
+  "impact_direction": "upstream",
+  "impact_result": "UNKNOWN: target not found in the primary repository index",
+  "source_review_callers": ["run_pairs.populate.job", "run_pairs.measure", "run_pairs.attribution", "run_resources"],
+  "sampling_interval_ms": 100,
+  "native_api": "GetProcessHandleCount",
+  "collected_field": "sampled_peak_process_handles",
+  "successful_query_count_field": "successful_handle_samples",
+  "timed_guard": "A measurement or resource run with no successful handle samples fails collection.",
+  "reporting": "Absolute min/median/max and samples per pristine cell; attribution polling peaks alongside boundary maxima; same-process resource polling peak alongside repeated before/after release checks.",
+  "limit": "Sampled maximum can miss brief transients and is not an exact peak. Failed queries after process exit are skipped.",
+  "existing_population": "The running untimed population interpreter retains its previously loaded sampler. All timed runners are launched after this revision and use the updated sampler.",
+  "product_or_binary_change": false
+}

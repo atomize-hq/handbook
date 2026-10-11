@@ -221,9 +221,13 @@ fn exact_scope_successors_refuse_implicit_expansion_and_unapproved_parameters() 
         )
         .unwrap();
     let candidate = prepared.locator().clone();
-    assert!(sdk
+    let bound_candidate = sdk
         .prepare_work_registration(&initial, &candidate, menu_input(&candidate, 1, "candidate"))
-        .is_err());
+        .unwrap();
+    assert_eq!(
+        sdk.register_work_item(bound_candidate).disposition,
+        WorkDispositionV1::Refused
+    );
     let execution = sdk.activate_work_registration_terms(prepared);
     assert_eq!(
         execution.disposition,
@@ -333,6 +337,18 @@ fn exact_scope_successors_refuse_implicit_expansion_and_unapproved_parameters() 
     );
     assert_eq!(
         sdk.register_work_item(old_preparation).disposition,
+        WorkDispositionV1::Refused
+    );
+    let bound_after_narrowing = sdk
+        .prepare_work_registration(
+            &initial,
+            &menu,
+            menu_input(&menu, 1, "bound-after-narrowing"),
+        )
+        .unwrap();
+    assert_eq!(bound_after_narrowing.locator().grant, menu);
+    assert_eq!(
+        sdk.register_work_item(bound_after_narrowing).disposition,
         WorkDispositionV1::Refused
     );
     assert!(sdk
@@ -795,9 +811,19 @@ fn local_check_alone_unapproved_substitute_and_insufficient_reach_supply_no_work
         )
         .unwrap();
     let grant = candidate.locator().clone();
-    assert!(sdk
+    let bound = sdk
         .prepare_work_registration(&initial, &grant, input(&grant, "denied", "denied"))
-        .is_err());
+        .unwrap();
+    let original = bound.locator().clone();
+    assert_eq!(
+        sdk.register_work_item(bound).disposition,
+        WorkDispositionV1::Refused
+    );
+    assert_eq!(
+        sdk.resolve_work_registration_request(&original).disposition,
+        WorkDispositionV1::Uncertain
+    );
+    assert!(!dir.path().join(".handbook/work-state").exists());
     for change in ["unapproved", "agent-principal", "wider-reach"] {
         let mut terms = supplied_terms(&check, change);
         match change {
@@ -913,9 +939,21 @@ fn d_to_g_requires_explicit_predecessor_and_never_substitutes_old_request_author
         sdk.resolve_work_registration_terms_request(&d).disposition,
         WorkDispositionV1::Replayed
     );
-    assert!(sdk
+    let after_transition = sdk
         .prepare_work_registration(&initial, &d, input(&d, "still-D", "still-D"))
-        .is_err());
+        .unwrap();
+    assert_eq!(after_transition.locator().grant, d);
+    assert_eq!(
+        sdk.register_work_item(after_transition).disposition,
+        WorkDispositionV1::Refused
+    );
+    let rebound_committed = sdk
+        .prepare_work_registration(&initial, &d, old.locator.input.clone())
+        .unwrap();
+    assert_eq!(
+        sdk.register_work_item(rebound_committed).outcome.unwrap(),
+        old
+    );
 }
 
 #[test]
@@ -926,6 +964,14 @@ fn revocation_and_actual_sdk_reset_preserve_exact_work_history_without_permissio
         let (initial, check) = setup(&sdk);
         let grant = activate(&sdk, &initial, &check, "work-history", None);
         let receipt = register(&sdk, &initial, &grant, "retained-request", "retained-item");
+        let before_authority_loss = sdk
+            .prepare_work_registration(
+                &initial,
+                &grant,
+                input(&grant, "bound-before-loss", "before-loss-item"),
+            )
+            .unwrap();
+        let saved_before_loss = before_authority_loss.locator().clone();
         if reset {
             let result = sdk
                 .run_setup(&SetupRequest {
@@ -965,6 +1011,18 @@ fn revocation_and_actual_sdk_reset_preserve_exact_work_history_without_permissio
         let reopened = HandbookSdkV1::open(dir.path());
         assert_eq!(
             reopened
+                .register_work_item(before_authority_loss)
+                .disposition,
+            WorkDispositionV1::Refused
+        );
+        assert_eq!(
+            reopened
+                .resolve_work_registration_request(&saved_before_loss)
+                .disposition,
+            WorkDispositionV1::Unaccepted
+        );
+        assert_eq!(
+            reopened
                 .resolve_current_work_item(&grant, "retained-item")
                 .unwrap(),
             WorkCurrentItemV1::Open(receipt.snapshot.clone())
@@ -992,9 +1050,30 @@ fn revocation_and_actual_sdk_reset_preserve_exact_work_history_without_permissio
         assert!(reopened
             .resolve_current_work_registration_terms(&initial, &grant)
             .is_err());
-        assert!(reopened
+        let bound = reopened
             .prepare_work_registration(&initial, &grant, input(&grant, "new-write", "new-item"))
-            .is_err());
+            .unwrap();
+        let original = bound.locator().clone();
+        assert_eq!(
+            reopened.register_work_item(bound).disposition,
+            WorkDispositionV1::Refused
+        );
+        assert_eq!(
+            reopened
+                .resolve_work_registration_request(&original)
+                .disposition,
+            WorkDispositionV1::Unaccepted
+        );
+        let rebound_committed = reopened
+            .prepare_work_registration(&initial, &grant, receipt.locator.input.clone())
+            .unwrap();
+        assert_eq!(
+            reopened
+                .register_work_item(rebound_committed)
+                .outcome
+                .unwrap(),
+            receipt
+        );
     }
 }
 
@@ -1060,12 +1139,20 @@ fn future_roles_kinds_overrides_states_and_conflicting_keys_refuse_without_rebin
     }
     let mut conflicting = receipt.locator.input.clone();
     conflicting.label = "Changed label under same request".into();
-    assert!(sdk
+    let same_key = sdk
         .prepare_work_registration(&initial, &grant, conflicting)
-        .is_err());
-    assert!(sdk
-        .prepare_work_registration(&initial, &grant, input(&grant, "new-key", "stable-item"),)
-        .is_err());
+        .unwrap();
+    assert_eq!(
+        sdk.register_work_item(same_key).disposition,
+        WorkDispositionV1::Refused
+    );
+    let same_item = sdk
+        .prepare_work_registration(&initial, &grant, input(&grant, "new-key", "stable-item"))
+        .unwrap();
+    assert_eq!(
+        sdk.register_work_item(same_item).disposition,
+        WorkDispositionV1::Refused
+    );
     let original_bytes = receipt.locator.canonical_json_bytes().unwrap();
     let restored = WorkRequestLocatorV1::from_json_bytes(&original_bytes).unwrap();
     assert_eq!(
@@ -1078,6 +1165,89 @@ fn future_roles_kinds_overrides_states_and_conflicting_keys_refuse_without_rebin
         sdk.resolve_current_work_item(&grant, "stable-item")
             .unwrap(),
         WorkCurrentItemV1::Open(receipt.snapshot)
+    );
+}
+
+#[test]
+fn independently_bound_same_item_requests_have_one_commit_and_no_cached_absence() {
+    let directory = tempdir().unwrap();
+    let sdk = HandbookSdkV1::open(directory.path());
+    let (initial, check) = setup(&sdk);
+    let grant = activate(&sdk, &initial, &check, "same-item-grant", None);
+    let first = sdk
+        .prepare_work_registration(
+            &initial,
+            &grant,
+            input(&grant, "first-original", "same-item"),
+        )
+        .unwrap();
+    let second = sdk
+        .prepare_work_registration(
+            &initial,
+            &grant,
+            input(&grant, "second-original", "same-item"),
+        )
+        .unwrap();
+    let saved_second = second.locator().clone();
+    let first_receipt = sdk.register_work_item(first).outcome.unwrap();
+    assert_eq!(
+        sdk.register_work_item(second).disposition,
+        WorkDispositionV1::Refused
+    );
+    assert_eq!(
+        sdk.resolve_work_registration_request(&saved_second)
+            .disposition,
+        WorkDispositionV1::Unaccepted
+    );
+    assert_eq!(
+        sdk.recover_work_registration_request(&first_receipt.locator)
+            .outcome
+            .unwrap(),
+        first_receipt
+    );
+    assert!(!directory
+        .path()
+        .join(".handbook/work-state/v1/item-second-original")
+        .exists());
+}
+
+#[test]
+fn explicit_binding_retains_the_original_before_any_root_or_owner_observation() {
+    let source = tempdir().unwrap();
+    let sdk = HandbookSdkV1::open(source.path());
+    let (initial, check) = setup(&sdk);
+    let grant = activate(&sdk, &initial, &check, "source-grant", None);
+    let request = input(&grant, "portable-original", "portable-item");
+    let expected = sdk
+        .prepare_work_registration(&initial, &grant, request.clone())
+        .unwrap();
+    let bytes = expected.locator().canonical_json_bytes().unwrap();
+    let wrong_root = tempdir().unwrap();
+    let missing_root = wrong_root.path().join("not-created");
+    for root in [wrong_root.path(), missing_root.as_path()] {
+        let elsewhere = HandbookSdkV1::open(root);
+        let bound = elsewhere
+            .prepare_work_registration(&initial, &grant, request.clone())
+            .unwrap();
+        assert_eq!(bound.locator().canonical_json_bytes().unwrap(), bytes);
+        let original = WorkRequestLocatorV1::from_json_bytes(&bytes).unwrap();
+        assert_eq!(
+            elsewhere.register_work_item(bound).disposition,
+            WorkDispositionV1::Refused
+        );
+        assert_eq!(
+            elsewhere
+                .recover_work_registration_request(&original)
+                .disposition,
+            WorkDispositionV1::Refused
+        );
+        assert!(!root.join(".handbook/work-state").exists());
+        assert!(!root.join(".handbook-work-state-bootstrap.v1.json").exists());
+    }
+    assert!(!missing_root.exists());
+    assert_eq!(
+        sdk.register_work_item(expected).disposition,
+        WorkDispositionV1::Committed
     );
 }
 

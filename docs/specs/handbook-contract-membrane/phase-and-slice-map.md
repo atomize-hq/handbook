@@ -440,13 +440,21 @@ fresh invocation scans and narrower pure reconstruction/acquisition candidates.
 The human reviewed its binding-first preparation/authoritative invocation
 recommendation and focused Pro advice, then requested bounded slice preparation.
 The [work-registration-phase-refactor plan](slices/work-registration-phase-refactor/README.md)
-is now prepared for human review with one independently meaningful Packet 1:
+now has human authorization for one independently meaningful Packet 1:
 exact binding/deferred errors, pure reconstruction reuse and Item-only current
 consumption, retaining original recovery and I1–I4 initially. This is a descriptive
-slice, not a numbered HCM phase. Human approval of the complete plan precedes
-product execution. Planning completion leaves the separate whole-history
-capacity/detection problem unsolved; neither product change nor capacity/index/
-trust choices are approved or implemented.
+slice, not a numbered HCM phase. The human's later instruction to start the ready
+implementation session selected the complete plan, including deferred errors,
+verification, measurement, focused review and one local commit. Packet 1 is
+implemented, verified and approved by focused review with no unresolved P1/P2 or
+P3/P4 advisories, in one coherent local commit. Its
+[evidence](../../research/work-registration-phase-refactor-2026-10-11/README.md)
+records 80 focused passes and all 36 warm native main pairs faster, with
+33.51–39.80% median paired workflow reductions across six cells and higher
+invocation-local peak private memory. It returns to meta for aggregate closeout
+and the human recap. The
+separate whole-history capacity/detection problem remains unsolved; capacity/index/
+trust choices remain unapproved and unimplemented.
 
 ### Priorities after compositions and kinds closeout
 
@@ -458,7 +466,7 @@ or a new set of execution units:
 
 | Priority / next action | Rationale, dependencies and unresolved selection |
 | --- | --- |
-| 1. **Human review of prepared plan:** work-registration phase refactor; separate capacity design selection | The human requested bounded preparation after reviewing the duplication audit/Pro advice. The [one-packet plan](slices/work-registration-phase-refactor/README.md) recommends binding-first preparation, authoritative invocation, pure reuse and the Item consuming seam; approve its changed guarantee/deferred errors and complete increment before implementation. Capacity remains separate: review the conditional indexed-file outcome and select detection/audit, population/closure/resources, index/current-control publication, retained-store treatment and protected administration/closure before separately authorizing capacity planning. No product optimization, storage solution, changed integrity policy or capacity increase is selected. |
+| 1. **Human result review:** work-registration phase refactor; separate capacity design selection | The human authorized the complete reviewed [one-packet plan](slices/work-registration-phase-refactor/README.md). Binding-first preparation/deferred errors, authoritative invocation, pure reuse and the Item consuming seam are implemented, verified and approved by focused review in one coherent local commit. Meta owns aggregate closeout and the human recap. Capacity remains separate: select detection/audit, population/closure/resources, index/current-control publication, retained-store treatment and protected administration/closure before separately authorizing capacity planning. No storage solution, changed integrity policy or capacity increase is selected. |
 | 2. **Authority preparation after human selections:** native local CR root binding | Reusable successor-state binding remains useful and proposed. Select management/use establishment, narrow delegated versus human-only replacement, revocation and additive representation/legacy compatibility. Its actual dependencies are exact current lineage/scope, held currentness through effect and original recovery; this position is preferred delivery order, not a Work Progression predecessor. |
 | 3. **Authority preparation:** hierarchy/typed prerequisite facts | Builds on delivered item/composition identity. Select concrete relation operations/revisions, coherent finite cuts/currentness and cycle refusal under the approved same-project one-parent semantics. Relations alone supply no eligibility or effect. |
 | 4. **Authority preparation, then separately approved implementation:** leaf eligibility → leaf closing | Select governing completion assignment/protocol, exact roles/coverage/populations and current qualification. Relation-dependent questions need relation facts; relation-free eligibility needs neither CR nor all hierarchy. Closing additionally needs congruent eligibility, separate action authority and state-owner guarded commit/receipt. |

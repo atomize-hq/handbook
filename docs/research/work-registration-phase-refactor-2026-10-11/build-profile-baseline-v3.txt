@@ -1,0 +1,20 @@
+   Compiling handbook-engine v0.2.0 (C:\Users\spmcc\AppData\Local\Temp\hcm-wr-phase-profile-baseline-20261011\crates\engine)
+warning: field `name` is never read
+ --> C:\Users\spmcc\AppData\Local\Temp\hcm-wr-phase-profile-baseline-20261011\crates\engine\src\research_profile.rs:5:30
+  |
+5 | #[derive(Debug)]struct Frame{name:&'static str,child_wall:f64,child_cpu:f64,observation:usize}
+  |                        ----- ^^^^
+  |                        |
+  |                        field in this struct
+  |
+  = note: `Frame` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+  = note: `#[warn(dead_code)]` on by default
+
+   Compiling handbook-flow v0.1.1 (C:\Users\spmcc\AppData\Local\Temp\hcm-wr-phase-profile-baseline-20261011\crates\flow)
+   Compiling handbook-contracts v0.1.0 (C:\Users\spmcc\AppData\Local\Temp\hcm-wr-phase-profile-baseline-20261011\crates\contracts)
+   Compiling handbook-dock v0.1.0 (C:\Users\spmcc\AppData\Local\Temp\hcm-wr-phase-profile-baseline-20261011\crates\dock)
+   Compiling handbook-pipeline v0.1.2 (C:\Users\spmcc\AppData\Local\Temp\hcm-wr-phase-profile-baseline-20261011\crates\pipeline)
+   Compiling handbook-sdk v0.1.0 (C:\Users\spmcc\AppData\Local\Temp\hcm-wr-phase-profile-baseline-20261011\crates\sdk)
+warning: `handbook-engine` (lib) generated 1 warning
+   Compiling work-state-capacity-research v0.1.0 (C:\Users\spmcc\AppData\Local\Temp\hcm-wr-phase-profile-baseline-20261011\docs\research\work-registration-phase-refactor-2026-10-11\native)
+    Finished `release` profile [optimized] target(s) in 3m 48s

@@ -353,14 +353,32 @@ impl WorkRequestLocatorV1 {
         Ok(v)
     }
     pub(crate) fn validate(&self) -> Result<(), LocalAuthorityRefusalV1> {
+        self.validated().map(|_| ())
+    }
+    pub(super) fn validated(&self) -> Result<ValidatedWorkRequest<'_>, LocalAuthorityRefusalV1> {
         self.grant.validate()?;
         self.input.validate()?;
-        self.grant.terms.scope.permits(&self.effective_input()?)?;
-        if self.input.actor != self.grant.terms.agent
-            || self.item_identity
-                != work_item_identity_v1(self.grant.project(), &self.input.item_key)?
+        let effective_input = self.effective_input()?;
+        self.require_effective_binding(&effective_input)?;
+        if self.item_identity != work_item_identity_v1(self.grant.project(), &self.input.item_key)?
             || self.fingerprint != self.identity()?
         {
+            return Err(refuse(
+                "work_request_binding",
+                "exact actor/composition/project/item/request binding required",
+            ));
+        }
+        Ok(ValidatedWorkRequest {
+            locator: self,
+            effective_input,
+        })
+    }
+    fn require_effective_binding(
+        &self,
+        effective_input: &WorkRegistrationInputV1,
+    ) -> Result<(), LocalAuthorityRefusalV1> {
+        self.grant.terms.scope.permits(effective_input)?;
+        if self.input.actor != self.grant.terms.agent {
             return Err(refuse(
                 "work_request_binding",
                 "exact actor/composition/project/item/request binding required",
@@ -428,6 +446,114 @@ impl WorkRequestLocatorV1 {
             }
         }
         Ok(input)
+    }
+}
+
+/// Successful pure meaning tied to this exact immutable complete locator.
+/// It retains no current permission, status, physical observation or guard.
+pub(super) struct ValidatedWorkRequest<'a> {
+    locator: &'a WorkRequestLocatorV1,
+    effective_input: WorkRegistrationInputV1,
+}
+impl ValidatedWorkRequest<'_> {
+    pub(super) fn locator(&self) -> &WorkRequestLocatorV1 {
+        self.locator
+    }
+    pub(super) fn effective_input(&self) -> &WorkRegistrationInputV1 {
+        &self.effective_input
+    }
+}
+
+/// Supplied values validated before the optional retained-kind observation.
+/// Private ownership prevents the already checked inputs from being changed.
+pub(super) struct WorkRequestBinding {
+    grant: WorkGrantLocatorV1,
+    input: WorkRegistrationInputV1,
+    item_identity: String,
+}
+
+#[cfg(test)]
+mod binding_tests {
+    use super::*;
+
+    #[test]
+    fn supplied_binding_preserves_original_retained_request_bytes() {
+        let bytes =
+            include_bytes!("../../../sdk/tests/fixtures/work_state_v1/committed-request.json");
+        let original = WorkRequestLocatorV1::from_json_bytes(bytes).unwrap();
+        let prepared = WorkRequestBinding::new(
+            &original.grant,
+            &original.grant.basis,
+            original.input.clone(),
+        )
+        .unwrap()
+        .finish(None)
+        .unwrap();
+        assert_eq!(prepared.locator().canonical_json_bytes().unwrap(), bytes);
+
+        let mut input = original.input;
+        input.actor = "different-agent".into();
+        let binding =
+            WorkRequestBinding::new(&original.grant, &original.grant.basis, input).unwrap();
+        assert_eq!(
+            binding.finish(None).unwrap_err().code,
+            "work_request_binding"
+        );
+    }
+}
+impl WorkRequestBinding {
+    pub(super) fn new(
+        grant: &WorkGrantLocatorV1,
+        basis: &LocalCheckCurrentBasisV1,
+        input: WorkRegistrationInputV1,
+    ) -> Result<Self, LocalAuthorityRefusalV1> {
+        grant.validate()?;
+        for fingerprint in [
+            &grant.basis.relation_fingerprint,
+            &grant.basis.governance_tree_fingerprint,
+        ] {
+            crate::DefinitionFingerprint::parse(fingerprint)
+                .map_err(|_| refuse("fingerprint", "exact fingerprint required"))?;
+        }
+        if basis != &grant.basis {
+            return Err(refuse(
+                "work_basis_stale",
+                "explicit new G activation required; no automatic carry-forward",
+            ));
+        }
+        input.validate()?;
+        let item_identity = work_item_identity_v1(grant.project(), &input.item_key)?;
+        Ok(Self {
+            grant: grant.clone(),
+            input,
+            item_identity,
+        })
+    }
+    pub(super) fn submitted_kind(&self) -> Option<&WorkKindBindingV1> {
+        self.input.composition.submitted_kind()
+    }
+    pub(super) fn role(&self) -> Option<&WorkRoleValueV1> {
+        self.input.composition.role()
+    }
+    pub(super) fn project(&self) -> &str {
+        self.grant.project()
+    }
+    pub(super) fn finish(
+        self,
+        kind_provenance: Option<WorkKindProvenanceV1>,
+    ) -> Result<PreparedWorkRegistrationV1, LocalAuthorityRefusalV1> {
+        let mut locator = WorkRequestLocatorV1 {
+            grant: self.grant,
+            input: self.input,
+            kind_provenance,
+            item_identity: self.item_identity,
+            fingerprint: String::new(),
+        };
+        let effective_input = locator.effective_input()?;
+        locator.require_effective_binding(&effective_input)?;
+        locator.fingerprint = locator.identity()?;
+        encode(&locator)?;
+        Ok(PreparedWorkRegistrationV1 { locator })
     }
 }
 /// Identity has no codec, release, descriptor or delivery input.

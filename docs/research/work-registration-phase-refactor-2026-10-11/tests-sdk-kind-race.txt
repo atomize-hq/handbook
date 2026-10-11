@@ -1,0 +1,14 @@
+   Compiling handbook-engine v0.2.0 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\engine)
+   Compiling handbook-contracts v0.1.0 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\contracts)
+   Compiling handbook-flow v0.1.1 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\flow)
+   Compiling handbook-pipeline v0.1.2 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\pipeline)
+   Compiling handbook-dock v0.1.0 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\dock)
+   Compiling handbook-sdk v0.1.0 (C:\Users\spmcc\Documents\__Project_Code\handbook\crates\sdk)
+    Finished `release` profile [optimized] target(s) in 1m 43s
+     Running tests\work_kind_durability.rs (target\release\deps\work_kind_durability-6bd54febcc3bdf0a.exe)
+
+running 1 test
+test real_process_kind_item_serializes_scope_change_revocation_and_governance_in_both_orders ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 10 filtered out; finished in 72.81s
+

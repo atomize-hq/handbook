@@ -1,0 +1,1151 @@
+[
+  {
+    "cohort": "explicit",
+    "history": 8,
+    "variant": "baseline",
+    "phase": "preparation",
+    "paths": [
+      {
+        "calls": 4,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 965730,
+        "held_wall_ms": 965.73
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/admission-governance.lock",
+        "units": 27793,
+        "held_wall_ms": 27.793
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 840954,
+        "held_wall_ms": 840.954
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 839887,
+        "held_wall_ms": 839.887
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 843023,
+        "held_wall_ms": 843.023
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 841993,
+        "held_wall_ms": 841.993
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 924774,
+        "held_wall_ms": 924.774
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 8,
+    "variant": "baseline",
+    "phase": "invocation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 2754037,
+        "held_wall_ms": 2754.037
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 2743809,
+        "held_wall_ms": 2743.809
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 2742629,
+        "held_wall_ms": 2742.629
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 2746089,
+        "held_wall_ms": 2746.089
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 2744893,
+        "held_wall_ms": 2744.893
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 2752324,
+        "held_wall_ms": 2752.324
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 8,
+    "variant": "refactor",
+    "phase": "preparation",
+    "paths": [],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 8,
+    "variant": "refactor",
+    "phase": "invocation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 2422344,
+        "held_wall_ms": 2422.344
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 2411676,
+        "held_wall_ms": 2411.676
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 2410583,
+        "held_wall_ms": 2410.583
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 2413886,
+        "held_wall_ms": 2413.886
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 2412843,
+        "held_wall_ms": 2412.843
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 2505565,
+        "held_wall_ms": 2505.565
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "kind",
+    "history": 8,
+    "variant": "baseline",
+    "phase": "preparation",
+    "paths": [
+      {
+        "calls": 4,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 1043948,
+        "held_wall_ms": 1043.948
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/admission-governance.lock",
+        "units": 27866,
+        "held_wall_ms": 27.866
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 919494,
+        "held_wall_ms": 919.494
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 918462,
+        "held_wall_ms": 918.462
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 921647,
+        "held_wall_ms": 921.647
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 920582,
+        "held_wall_ms": 920.582
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 1075651,
+        "held_wall_ms": 1075.651
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "kind",
+    "history": 8,
+    "variant": "baseline",
+    "phase": "invocation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 2966550,
+        "held_wall_ms": 2966.55
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 2956772,
+        "held_wall_ms": 2956.772
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 2955762,
+        "held_wall_ms": 2955.762
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 2958809,
+        "held_wall_ms": 2958.809
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 2957782,
+        "held_wall_ms": 2957.782
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 3033316,
+        "held_wall_ms": 3033.316
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "kind",
+    "history": 8,
+    "variant": "refactor",
+    "phase": "preparation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 431069,
+        "held_wall_ms": 431.069
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "kind",
+    "history": 8,
+    "variant": "refactor",
+    "phase": "invocation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 2501691,
+        "held_wall_ms": 2501.691
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 2490793,
+        "held_wall_ms": 2490.793
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 2489469,
+        "held_wall_ms": 2489.469
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 2493046,
+        "held_wall_ms": 2493.046
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 2491937,
+        "held_wall_ms": 2491.937
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 2647605,
+        "held_wall_ms": 2647.605
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 16,
+    "variant": "baseline",
+    "phase": "preparation",
+    "paths": [
+      {
+        "calls": 4,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 1285352,
+        "held_wall_ms": 1285.352
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/admission-governance.lock",
+        "units": 29357,
+        "held_wall_ms": 29.357
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 1157042,
+        "held_wall_ms": 1157.042
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 1155978,
+        "held_wall_ms": 1155.978
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 1159226,
+        "held_wall_ms": 1159.226
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 1158117,
+        "held_wall_ms": 1158.117
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 1509886,
+        "held_wall_ms": 1509.886
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 16,
+    "variant": "baseline",
+    "phase": "invocation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 3857639,
+        "held_wall_ms": 3857.639
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 3847384,
+        "held_wall_ms": 3847.384
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 3846357,
+        "held_wall_ms": 3846.357
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 3849503,
+        "held_wall_ms": 3849.503
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 3848417,
+        "held_wall_ms": 3848.417
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 4174381,
+        "held_wall_ms": 4174.381
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 16,
+    "variant": "refactor",
+    "phase": "preparation",
+    "paths": [],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 16,
+    "variant": "refactor",
+    "phase": "invocation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 3370863,
+        "held_wall_ms": 3370.863
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 3360386,
+        "held_wall_ms": 3360.386
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 3359376,
+        "held_wall_ms": 3359.376
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 3362500,
+        "held_wall_ms": 3362.5
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 3361420,
+        "held_wall_ms": 3361.42
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 3721477,
+        "held_wall_ms": 3721.477
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "kind",
+    "history": 16,
+    "variant": "baseline",
+    "phase": "preparation",
+    "paths": [
+      {
+        "calls": 4,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 1432019,
+        "held_wall_ms": 1432.019
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/admission-governance.lock",
+        "units": 28405,
+        "held_wall_ms": 28.405
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 1303067,
+        "held_wall_ms": 1303.067
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 1302073,
+        "held_wall_ms": 1302.073
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 1305116,
+        "held_wall_ms": 1305.116
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 1304087,
+        "held_wall_ms": 1304.087
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 1850150,
+        "held_wall_ms": 1850.15
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "kind",
+    "history": 16,
+    "variant": "baseline",
+    "phase": "invocation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 4350305,
+        "held_wall_ms": 4350.305
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 4340002,
+        "held_wall_ms": 4340.002
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 4339004,
+        "held_wall_ms": 4339.004
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 4342146,
+        "held_wall_ms": 4342.146
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 4341024,
+        "held_wall_ms": 4341.024
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 4834331,
+        "held_wall_ms": 4834.331
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "kind",
+    "history": 16,
+    "variant": "refactor",
+    "phase": "preparation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 748986,
+        "held_wall_ms": 748.986
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "kind",
+    "history": 16,
+    "variant": "refactor",
+    "phase": "invocation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 3339550,
+        "held_wall_ms": 3339.55
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 3328161,
+        "held_wall_ms": 3328.161
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 3327073,
+        "held_wall_ms": 3327.073
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 3330374,
+        "held_wall_ms": 3330.374
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 3329295,
+        "held_wall_ms": 3329.295
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 3782557,
+        "held_wall_ms": 3782.557
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 31,
+    "variant": "baseline",
+    "phase": "preparation",
+    "paths": [
+      {
+        "calls": 4,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 1927055,
+        "held_wall_ms": 1927.055
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/admission-governance.lock",
+        "units": 27670,
+        "held_wall_ms": 27.67
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 1801955,
+        "held_wall_ms": 1801.955
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 1800956,
+        "held_wall_ms": 1800.956
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 1804025,
+        "held_wall_ms": 1804.025
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 1802979,
+        "held_wall_ms": 1802.979
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 2846231,
+        "held_wall_ms": 2846.231
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 31,
+    "variant": "baseline",
+    "phase": "invocation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 6242123,
+        "held_wall_ms": 6242.123
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 6231701,
+        "held_wall_ms": 6231.701
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 6230611,
+        "held_wall_ms": 6230.611
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 6233784,
+        "held_wall_ms": 6233.784
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 6232772,
+        "held_wall_ms": 6232.772
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 7181467,
+        "held_wall_ms": 7181.467
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 31,
+    "variant": "refactor",
+    "phase": "preparation",
+    "paths": [],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "explicit",
+    "history": 31,
+    "variant": "refactor",
+    "phase": "invocation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 5298683,
+        "held_wall_ms": 5298.683
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 5286282,
+        "held_wall_ms": 5286.282
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 5284326,
+        "held_wall_ms": 5284.326
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 5288913,
+        "held_wall_ms": 5288.913
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 5287534,
+        "held_wall_ms": 5287.534
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 6240556,
+        "held_wall_ms": 6240.556
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "kind",
+    "history": 31,
+    "variant": "baseline",
+    "phase": "preparation",
+    "paths": [
+      {
+        "calls": 4,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 2284505,
+        "held_wall_ms": 2284.505
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/admission-governance.lock",
+        "units": 28771,
+        "held_wall_ms": 28.771
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 2156625,
+        "held_wall_ms": 2156.625
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 2155618,
+        "held_wall_ms": 2155.618
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 2158877,
+        "held_wall_ms": 2158.877
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 2157698,
+        "held_wall_ms": 2157.698
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 3464876,
+        "held_wall_ms": 3464.876
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "kind",
+    "history": 31,
+    "variant": "baseline",
+    "phase": "invocation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 7407889,
+        "held_wall_ms": 7407.889
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 7397981,
+        "held_wall_ms": 7397.981
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 7396900,
+        "held_wall_ms": 7396.9
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 7400074,
+        "held_wall_ms": 7400.074
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 7399052,
+        "held_wall_ms": 7399.052
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 8686693,
+        "held_wall_ms": 8686.693
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "kind",
+    "history": 31,
+    "variant": "refactor",
+    "phase": "preparation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 1480939,
+        "held_wall_ms": 1480.939
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  },
+  {
+    "cohort": "kind",
+    "history": 31,
+    "variant": "refactor",
+    "phase": "invocation",
+    "paths": [
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook-initialization.lock",
+        "units": 5557625,
+        "held_wall_ms": 5557.625
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/lifecycle.lock",
+        "units": 5546688,
+        "held_wall_ms": 5546.688
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/local-operating.lock",
+        "units": 5545635,
+        "held_wall_ms": 5545.635
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/promotion.lock",
+        "units": 5548761,
+        "held_wall_ms": 5548.761
+      },
+      {
+        "calls": 1,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/state/locks/registry.lock",
+        "units": 5547705,
+        "held_wall_ms": 5547.705
+      },
+      {
+        "calls": 2,
+        "kind": "lock_held_us",
+        "observation": 0,
+        "path": ".handbook/work-state/work.lock",
+        "units": 6685391,
+        "held_wall_ms": 6685.391
+      }
+    ],
+    "overlapping_guards_are_not_additive_removable_cost": true
+  }
+]

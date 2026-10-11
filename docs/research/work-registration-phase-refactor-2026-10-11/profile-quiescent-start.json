@@ -1,0 +1,9 @@
+{
+  "captured_at_utc": "2026-10-11T18:42:49.4989544Z",
+  "known_research_build_test_population_workers": [],
+  "profile_revision": "v3 matching explicit-release observer",
+  "driver": "same pristine v2 and profile v3 bytes",
+  "fixtures": "all attribution pairs pass pre-invocation parity; first enabled baseline retains history8",
+  "no_build_test_population_during_timings": true,
+  "inventory_completed_at_utc": "2026-10-11T18:42:49.6816884Z"
+}

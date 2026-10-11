@@ -1,0 +1,21 @@
+{
+  "baseline": "8e5c6f21077a508d40cd0661bd1946d04a132281",
+  "primary": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook",
+  "target": "C:\\Users\\spmcc\\AppData\\Local\\Temp\\hcm-wr-phase-profile-refactor-20261011",
+  "copies": {
+    "crates/engine/src/local_authority/work_registration.rs": "8f1c9a8d25b215e3f974a39d5c258e685c53f1ba8e28e52bcf5228314b05dd9c",
+    "crates/engine/src/work_state/transaction.rs": "0c981fe98d969db000569f738f0daf57d3e533edd1d268f2ad60ffb32b30a66d",
+    "crates/engine/src/work_state/types.rs": "4e81f69706c1586288420a7f83c38af535c6c702dc5f23c5fbac9cc0dfff8115",
+    "crates/engine/tests/work_state.rs": "cad837458559a9eda660b1e110213a186614314d0a6953fa69b3557b0958eed3",
+    "crates/sdk/docs/work-state.md": "9edfa86f66c625016f7476a136198a7c7b7b64fbeb9b41e05900ff7f431bc7d1",
+    "crates/sdk/examples/work_state.rs": "818c79392b85a8b733cc16b27d6b165313ca972a99cbfe239a33574e2be02bf0",
+    "crates/sdk/src/work_state.rs": "d99c6bbcad2aa0b821ae3ace0cb17c7d0b8f875dacc7dbc7f16d205805e07ad6",
+    "crates/sdk/tests/work_kind.rs": "64b64160db71851163e59c20a26c728afd12a95cf4905335c568b4e944b59583",
+    "crates/sdk/tests/work_kind_durability.rs": "8ff71a74d848a57f6aa4d20cc69f84f88f64802893db8e3a2834960c4e83997a",
+    "crates/sdk/tests/work_kind_integrity.rs": "1411d020137aab87dd84dd9805f38e1bef1d26c23dd8d96e0d82cfe6caba8e88",
+    "crates/sdk/tests/work_state.rs": "b6b5baa71f5e54b24a140ca3ce85f1b5e94558ed864a8f07db83c967814ddfa8",
+    "crates/sdk/tests/work_state_durability.rs": "a2ee93ba3e721e20a03b7dce2d4a96e69d42243c78cfef592308eef2c31cbef0",
+    "crates/sdk/tests/work_state_integrity.rs": "c594ac1ddc598a19b65f36618e245fa2e92750a87410c2d46627fb08a6d4a9bb",
+    "crates/sdk/tests/work_state_retained.rs": "2e6e8525eec2826ff2d9ed1e8a02fe663ac1df3c34f09d0243572dc4b3028fff"
+  }
+}

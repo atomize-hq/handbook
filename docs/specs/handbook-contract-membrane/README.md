@@ -182,14 +182,22 @@ puts configurable compositions/optional kinds immediately after foundation, with
 compatibility prepared and selected before it, followed by separately meaningful
 Context Resolution, hierarchy, eligibility and closing outcomes. The
 [current priorities](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
-now put human review of the bounded
+now put human result review of the bounded
 [`work-registration-phase-refactor` plan](slices/work-registration-phase-refactor/README.md)
-next. The human reviewed the completed duplication audit and focused Pro advice,
-then requested this slice's preparation. Planning is complete; the recommendation
-is binding-first preparation, authoritative invocation, pure derivation reuse and
-an Item-only non-bootstrap seam in one packet. Its changed preparation guarantees
-and deferred errors require human approval of the complete plan before product
-execution. No implementation is authorized or delivered. The separate
+next after its authorized Packet-1 implementation. The human reviewed the completed duplication audit and focused Pro advice,
+requested this slice's preparation, then authorized the complete reviewed Packet 1
+by directing the ready implementation session to start. The selected binding-first
+preparation, authoritative invocation, pure derivation reuse and Item-only current
+seam include the changed preparation guarantee and deferred errors. Implementation,
+verification, measurement, focused review and one local commit are authorized;
+Packet 1 is implemented with 80 focused passes and comparative warm native
+evidence: all 36 main pairs improved, with 33.51–39.80% median paired workflow
+reductions across six cells. Invocation-local reuse increases peak private memory;
+the [evidence](../../research/work-registration-phase-refactor-2026-10-11/README.md)
+reports that tradeoff, cleanup and unavailable checks. Focused review approved
+with no unresolved P1/P2 or P3/P4 advisories. One coherent local implementation
+commit carries Packet 1; aggregate closeout and human recap remain owned by meta.
+The separate
 capacity/performance follow-up remains visible and unresolved; broader
 ordering and implementation gates remain proposed where unselected. Prior approval
 does not select CR's management/use/representation choices. The latest [CR investigation](../../research/context-resolution-local-advisory-extension-investigation-2026-10-08.md)

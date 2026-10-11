@@ -112,7 +112,6 @@ impl WorkRegistrationCurrentV1<'_> {
             directories: directories.into_iter().collect(),
             files,
         };
-        proof.validate_shape()?;
         proof.validate_historical(self.locator, self.basis)?;
         self.validate_current()?;
         Ok(proof)
