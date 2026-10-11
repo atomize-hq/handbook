@@ -182,9 +182,9 @@ puts configurable compositions/optional kinds immediately after foundation, with
 compatibility prepared and selected before it, followed by separately meaningful
 Context Resolution, hierarchy, eligibility and closing outcomes. The
 [current priorities](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
-now put human result review of the bounded
+now put human review of the remaining invocation-cost investigation after the completed
 [`work-registration-phase-refactor` plan](slices/work-registration-phase-refactor/README.md)
-next after its authorized Packet-1 implementation. The human reviewed the completed duplication audit and focused Pro advice,
+result. The human reviewed the completed duplication audit and focused Pro advice,
 requested this slice's preparation, then authorized the complete reviewed Packet 1
 by directing the ready implementation session to start. The selected binding-first
 preparation, authoritative invocation, pure derivation reuse and Item-only current
@@ -196,7 +196,12 @@ reductions across six cells. Invocation-local reuse increases peak private memor
 the [evidence](../../research/work-registration-phase-refactor-2026-10-11/README.md)
 reports that tradeoff, cleanup and unavailable checks. Focused review approved
 with no unresolved P1/P2 or P3/P4 advisories. One coherent local implementation
-commit carries Packet 1; aggregate closeout and human recap remain owned by meta.
+commit `83fc8b6` carries Packet 1; supplied meta evidence confirms aggregate
+closeout and the human recap complete and human-reviewed. The human then
+authorized the separate
+[remaining invocation-cost investigation](../../research/work-registration-invocation-cost-investigation-2026-10-11.md),
+which recommends a bounded observation/choreography preparation boundary without
+selecting a successor plan or changed detection/replay guarantees.
 The separate
 capacity/performance follow-up remains visible and unresolved; broader
 ordering and implementation gates remain proposed where unselected. Prior approval

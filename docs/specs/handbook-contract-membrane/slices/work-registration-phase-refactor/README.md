@@ -1,7 +1,7 @@
 # Work-registration phase refactor
 
-Status: **Packet 1 implemented, verified and reviewed; meta aggregate closeout and
-human recap pending** — 2026-10-11.
+Status: **Packet 1 and the one-packet slice complete; meta aggregate closeout and
+human recap complete and human-reviewed** — 2026-10-11.
 After reviewing the audit, complete plan, removal counts and Pro plan follow-up,
 the human requested the implementation session name and then directed:
 `ok the session is ready: "Implement work-registration phase refactor and duplication removal."`
@@ -9,8 +9,11 @@ That subsequent human selection authorizes the complete reviewed Packet 1,
 including its preparation guarantee and deferred-error semantics, verification,
 measurement, focused causal review and one coherent local implementation commit.
 It supersedes the plan's earlier pre-approval status. Pro advice supplies no
-authority. Packet completion returns to meta for aggregate closeout and human
-recap; successor work remains separately bounded.
+authority. Supplied meta evidence confirms aggregate closeout and the human
+recap complete after the local implementation commit `83fc8b6`; the human reviewed
+that result and authorized the separate
+[remaining invocation-cost investigation](../../../../research/work-registration-invocation-cost-investigation-2026-10-11.md).
+That research selects no successor plan or product change.
 
 The implementation binds explicit requests using supplied values only and kind
 requests using one exact committed-kind scan. Item invocation uses the existing
@@ -30,7 +33,8 @@ native current checks. Reuse increases peak private memory: history-31 medians
 were 90.84→104.14 MiB explicit and 113.78→135.29 MiB kind. This is an invocation-local
 retention tradeoff, not a changed 128 MiB store limit or an absolute heap-release
 claim. Detailed attribution, repeated-call cleanup and platform limits are in
-the evidence. Aggregate closeout and the human result recap remain with meta.
+the evidence. Supplied meta evidence confirms aggregate closeout and the human
+result recap complete; this status correction does not rerun product verification.
 The focused causal review approved the bounded implementation and evidence with
 no unresolved P1/P2 and no P3/P4 advisories. One coherent local implementation
 commit carries this result; no successor execution is selected here.

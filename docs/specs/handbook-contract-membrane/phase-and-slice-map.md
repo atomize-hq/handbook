@@ -451,8 +451,13 @@ P3/P4 advisories, in one coherent local commit. Its
 [evidence](../../research/work-registration-phase-refactor-2026-10-11/README.md)
 records 80 focused passes and all 36 warm native main pairs faster, with
 33.51–39.80% median paired workflow reductions across six cells and higher
-invocation-local peak private memory. It returns to meta for aggregate closeout
-and the human recap. The
+invocation-local peak private memory. Supplied meta evidence confirms aggregate
+closeout and the human recap complete and human-reviewed at `83fc8b6`. The human
+then authorized the separate
+[remaining invocation-cost investigation](../../research/work-registration-invocation-cost-investigation-2026-10-11.md),
+which recommends bounded observation/choreography preparation while leaving
+replay contention and physical detection choices explicit. It selects no
+successor plan or implementation. The
 separate whole-history capacity/detection problem remains unsolved; capacity/index/
 trust choices remain unapproved and unimplemented.
 
@@ -466,17 +471,18 @@ or a new set of execution units:
 
 | Priority / next action | Rationale, dependencies and unresolved selection |
 | --- | --- |
-| 1. **Human result review:** work-registration phase refactor; separate capacity design selection | The human authorized the complete reviewed [one-packet plan](slices/work-registration-phase-refactor/README.md). Binding-first preparation/deferred errors, authoritative invocation, pure reuse and the Item consuming seam are implemented, verified and approved by focused review in one coherent local commit. Meta owns aggregate closeout and the human recap. Capacity remains separate: select detection/audit, population/closure/resources, index/current-control publication, retained-store treatment and protected administration/closure before separately authorizing capacity planning. No storage solution, changed integrity policy or capacity increase is selected. |
+| 1. **Human research review:** remaining invocation costs; separate capacity design selection | The [phase-refactor slice](slices/work-registration-phase-refactor/README.md) is complete at `83fc8b6`, including supplied meta aggregate closeout and human-reviewed recap. The human authorized the separate [invocation-cost investigation](../../research/work-registration-invocation-cost-investigation-2026-10-11.md). Review its trustworthy-history observation/choreography recommendation before separately authorizing bounded successor preparation; replay contention and detection boundaries remain explicit selections. Capacity remains separate: select detection/audit, population/closure/resources, index/current-control publication, retained-store treatment and protected administration/closure before separately authorizing capacity planning. No storage solution, changed integrity policy or capacity increase is selected. |
 | 2. **Authority preparation after human selections:** native local CR root binding | Reusable successor-state binding remains useful and proposed. Select management/use establishment, narrow delegated versus human-only replacement, revocation and additive representation/legacy compatibility. Its actual dependencies are exact current lineage/scope, held currentness through effect and original recovery; this position is preferred delivery order, not a Work Progression predecessor. |
 | 3. **Authority preparation:** hierarchy/typed prerequisite facts | Builds on delivered item/composition identity. Select concrete relation operations/revisions, coherent finite cuts/currentness and cycle refusal under the approved same-project one-parent semantics. Relations alone supply no eligibility or effect. |
 | 4. **Authority preparation, then separately approved implementation:** leaf eligibility → leaf closing | Select governing completion assignment/protocol, exact roles/coverage/populations and current qualification. Relation-dependent questions need relation facts; relation-free eligibility needs neither CR nor all hierarchy. Closing additionally needs congruent eligibility, separate action authority and state-owner guarded commit/receipt. |
 | 5. **Authority preparation, then separately approved implementation:** parent eligibility → parent closing | Needs finite relations and the parent's independently resolved requirements/integration assessment. Depends on leaf closing only for roles requiring actual closed state/receipts. Parent closing needs its own permission and guarded effect. |
 | Later. **Consumer authority preparation:** CLI/installed-skill/host adoption | Choose a bounded workflow and adopter after sufficient relevant native/SDK capability; no requirement to finish the entire SDK. Keep Phase-6 hard order and current external proof requirements. |
 
-The next human boundary is approval or revision of the complete reviewed
-registration phase-refactor plan, including preparation guarantees/deferred errors.
-Its planning is complete under the human's bounded request; implementation is
-unapproved. The separate native optimization/capacity proposal still needs its
+The next human boundary is review of the remaining invocation-cost research and
+selection of its recommended successor preparation boundary, if desired. The
+phase-refactor implementation and supplied meta closeout/recap are complete and
+human-reviewed. This investigation does not authorize a successor implementation
+plan or product change. The separate native optimization/capacity proposal still needs its
 design selections and separately authorized preparation. Research and this plan
 supply no capacity delivery or presumptive history deletion. CR product choices
 and subsequent implementation approval remain separate.

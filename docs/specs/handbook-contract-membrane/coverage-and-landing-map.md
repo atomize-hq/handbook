@@ -23,9 +23,9 @@ the approved plan at `d7ff969` is implemented at `ae1af38`. The
 [slice status](slices/work-compositions-and-kinds/README.md) records completed
 Packet-2 acceptance/review, supplied meta aggregate validation/closeout and accepted
 human recap. The [current priorities](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
-now place human result review of the implemented
+now place human review of remaining invocation-cost research after the completed
 [work-registration phase-refactor plan](slices/work-registration-phase-refactor/README.md)
-next, with separate capacity/design selection still pending after completed
+result, with separate capacity/design selection still pending after completed
 baseline, storage feasibility and
 [native optimization/capacity research](../../research/work-state-native-optimization-investigation-2026-10-10.md).
 Remaining roadmap choices are
@@ -406,13 +406,20 @@ review with no unresolved P1/P2 or P3/P4 advisories, in one coherent local commi
 Its [evidence](../../research/work-registration-phase-refactor-2026-10-11/README.md)
 records 80 focused passes, all 36 warm native main pairs faster and 33.51–39.80%
 median paired workflow reductions across six cells, with higher invocation-local
-peak private memory. Four fresh invocation scans remain substantial cost. Meta
-owns aggregate closeout and the human recap. Combined convenience and shared
+peak private memory. Four fresh invocation scans remain substantial cost. Supplied
+meta evidence confirms aggregate closeout and the human recap complete and
+human-reviewed at `83fc8b6`. Combined convenience and shared
 parent-handle reuse are excluded.
 
-**Next human review:** the verified and reviewed Packet-1 result under the
-[registration phase-refactor plan](slices/work-registration-phase-refactor/README.md),
-including its changed workflow, refusal/recovery behavior and new measurements.
+The human subsequently authorized the bounded
+[remaining invocation-cost investigation](../../research/work-registration-invocation-cost-investigation-2026-10-11.md).
+It identifies trustworthy-history traversal as the main cost, distinguishes fresh
+facts from pure reuse, and recommends separately bounded observation/choreography
+preparation. Native-first replay contention and grouped physical detection are
+explicit selection questions, not equivalent-policy changes already approved.
+
+**Next human review:** that research and its recommended planning boundary;
+no successor plan or implementation is selected by the investigation.
 Separately review the bounded capacity proposal alongside baseline/feasibility
 evidence and select the operation-local verification/complete-audit
 boundary, population/closure/resource budgets, decision-bearing index/current-control
