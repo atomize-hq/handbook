@@ -431,16 +431,22 @@ on 2026-10-10. Review the report's proposed direction and envelope before commit
 the next broader Work Progression increment; practical capacity must be addressed
 before sustained project use. Deliberate human design selection precedes a separately
 approved bounded plan and implementation. No storage design, capacity increase,
-new phase/slice identity or future packet execution is selected here; existing
+numbered phase or capacity slice/future packet execution is selected here; existing
 delivery order remains intact.
 
 The human-requested [registration duplication/operation-design audit](../../research/work-registration-duplication-audit-2026-10-11.md)
 adds completed source-backed research/preparation: two preparation scans, four
 fresh invocation scans and narrower pure reconstruction/acquisition candidates.
-Review its binding-first preparation/authoritative invocation recommendation and
-early-error tradeoff before a bounded production phase refactor. That refactor
-would still leave the separate whole-history capacity/detection problem; neither
-the operation change nor capacity/index/trust choices are approved or implemented.
+The human reviewed its binding-first preparation/authoritative invocation
+recommendation and focused Pro advice, then requested bounded slice preparation.
+The [work-registration-phase-refactor plan](slices/work-registration-phase-refactor/README.md)
+is now prepared for human review with one independently meaningful Packet 1:
+exact binding/deferred errors, pure reconstruction reuse and Item-only current
+consumption, retaining original recovery and I1–I4 initially. This is a descriptive
+slice, not a numbered HCM phase. Human approval of the complete plan precedes
+product execution. Planning completion leaves the separate whole-history
+capacity/detection problem unsolved; neither product change nor capacity/index/
+trust choices are approved or implemented.
 
 ### Priorities after compositions and kinds closeout
 
@@ -452,20 +458,20 @@ or a new set of execution units:
 
 | Priority / next action | Rationale, dependencies and unresolved selection |
 | --- | --- |
-| 1. **Human review and design selection:** work-state capacity/performance | Completed baseline/storage research and the [native optimization investigation/proposal](../../research/work-state-native-optimization-investigation-2026-10-10.md) supply measured native candidates and explicit integrity tradeoffs. Review the conditional indexed-file outcome; select the detection/audit boundary, population/closure/resource envelope, decision-bearing index/current-control publication and retained-store treatment, and protected administration/closure promise; then separately authorize bounded planning. No production optimization, storage solution, changed integrity policy or capacity increase is selected. |
+| 1. **Human review of prepared plan:** work-registration phase refactor; separate capacity design selection | The human requested bounded preparation after reviewing the duplication audit/Pro advice. The [one-packet plan](slices/work-registration-phase-refactor/README.md) recommends binding-first preparation, authoritative invocation, pure reuse and the Item consuming seam; approve its changed guarantee/deferred errors and complete increment before implementation. Capacity remains separate: review the conditional indexed-file outcome and select detection/audit, population/closure/resources, index/current-control publication, retained-store treatment and protected administration/closure before separately authorizing capacity planning. No product optimization, storage solution, changed integrity policy or capacity increase is selected. |
 | 2. **Authority preparation after human selections:** native local CR root binding | Reusable successor-state binding remains useful and proposed. Select management/use establishment, narrow delegated versus human-only replacement, revocation and additive representation/legacy compatibility. Its actual dependencies are exact current lineage/scope, held currentness through effect and original recovery; this position is preferred delivery order, not a Work Progression predecessor. |
 | 3. **Authority preparation:** hierarchy/typed prerequisite facts | Builds on delivered item/composition identity. Select concrete relation operations/revisions, coherent finite cuts/currentness and cycle refusal under the approved same-project one-parent semantics. Relations alone supply no eligibility or effect. |
 | 4. **Authority preparation, then separately approved implementation:** leaf eligibility → leaf closing | Select governing completion assignment/protocol, exact roles/coverage/populations and current qualification. Relation-dependent questions need relation facts; relation-free eligibility needs neither CR nor all hierarchy. Closing additionally needs congruent eligibility, separate action authority and state-owner guarded commit/receipt. |
 | 5. **Authority preparation, then separately approved implementation:** parent eligibility → parent closing | Needs finite relations and the parent's independently resolved requirements/integration assessment. Depends on leaf closing only for roles requiring actual closed state/receipts. Parent closing needs its own permission and guarded effect. |
 | Later. **Consumer authority preparation:** CLI/installed-skill/host adoption | Choose a bounded workflow and adopter after sufficient relevant native/SDK capability; no requirement to finish the entire SDK. Keep Phase-6 hard order and current external proof requirements. |
 
-The exact next human direction is review of the registration operation-design
-recommendation and the native optimization/capacity proposal, including selection
-of preparation guarantees and the proposed capacity choices, proof conditions and targets.
-Research supplies evidence without product edits, detailed successor packets or
-presumptive history deletion. Concrete bounded planning needs separate
-authorization after selection. CR product choices and subsequent implementation
-approval remain separate.
+The next human boundary is approval or revision of the complete reviewed
+registration phase-refactor plan, including preparation guarantees/deferred errors.
+Its planning is complete under the human's bounded request; implementation is
+unapproved. The separate native optimization/capacity proposal still needs its
+design selections and separately authorized preparation. Research and this plan
+supply no capacity delivery or presumptive history deletion. CR product choices
+and subsequent implementation approval remain separate.
 
 ## Phase 6 — consumer adoption
 

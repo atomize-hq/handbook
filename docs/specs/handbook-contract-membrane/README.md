@@ -182,7 +182,15 @@ puts configurable compositions/optional kinds immediately after foundation, with
 compatibility prepared and selected before it, followed by separately meaningful
 Context Resolution, hierarchy, eligibility and closing outcomes. The
 [current priorities](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
-recommend the selected capacity/performance research follow-up next; broader
+now put human review of the bounded
+[`work-registration-phase-refactor` plan](slices/work-registration-phase-refactor/README.md)
+next. The human reviewed the completed duplication audit and focused Pro advice,
+then requested this slice's preparation. Planning is complete; the recommendation
+is binding-first preparation, authoritative invocation, pure derivation reuse and
+an Item-only non-bootstrap seam in one packet. Its changed preparation guarantees
+and deferred errors require human approval of the complete plan before product
+execution. No implementation is authorized or delivered. The separate
+capacity/performance follow-up remains visible and unresolved; broader
 ordering and implementation gates remain proposed where unselected. Prior approval
 does not select CR's management/use/representation choices. The latest [CR investigation](../../research/context-resolution-local-advisory-extension-investigation-2026-10-08.md)
 is reviewed proposed evidence; root use, binding management and work registration

@@ -23,8 +23,11 @@ the approved plan at `d7ff969` is implemented at `ae1af38`. The
 [slice status](slices/work-compositions-and-kinds/README.md) records completed
 Packet-2 acceptance/review, supplied meta aggregate validation/closeout and accepted
 human recap. The [current priorities](phase-and-slice-map.md#priorities-after-compositions-and-kinds-closeout)
-now place human review/design selection next after completed baseline, storage
-feasibility and [native optimization/capacity research](../../research/work-state-native-optimization-investigation-2026-10-10.md).
+now place human review of the prepared
+[work-registration phase-refactor plan](slices/work-registration-phase-refactor/README.md)
+next, with separate capacity/design selection still pending after completed
+baseline, storage feasibility and
+[native optimization/capacity research](../../research/work-state-native-optimization-investigation-2026-10-10.md).
 Remaining roadmap choices are
 proposed where unselected, and CR's separate choices remain unselected.
 These are supplied meta results,
@@ -390,20 +393,30 @@ audit](../../research/work-registration-duplication-audit-2026-10-11.md) is comp
 research/preparation. It traces two preparation scans and four invocation scans,
 separates fresh permission/absence evidence from repeated pure reconstruction,
 and recommends binding-first preparation with authoritative invocation before
-larger storage work. Its preparation guarantee/early-error change, combined-call
-choice and production refactor remain proposed; existing behavior is unchanged.
+larger storage work. After reviewing that audit and focused Pro advice, the human
+requested bounded preparation of
+[work-registration-phase-refactor](slices/work-registration-phase-refactor/README.md).
+That one-packet plan is now prepared for human review: binding-first explicit/
+exact-kind preparation, current invocation authority, successful pure derivation
+reuse and Item-only non-bootstrap consumption, preserving original recovery and
+I1–I4 initially. The preparation guarantee/deferred-error change and product
+execution remain proposed. Combined convenience and shared parent-handle reuse
+are excluded; existing product behavior is unchanged.
 The measured preserved-policy reuse still leaves substantial whole-history cost.
 
-**Next human decision:** review the operation-design recommendation and bounded
-capacity proposal alongside the baseline and feasibility evidence. Select the
-preparation guarantee/early-error boundary, then the operation-local verification/complete-audit
+**Next human decision:** approve or revise the complete reviewed
+[registration phase-refactor plan](slices/work-registration-phase-refactor/README.md),
+including its binding guarantee/deferred-error boundary, before implementation.
+Preparation authorization does not select those semantics or authorize execution.
+Separately review the bounded capacity proposal alongside baseline/feasibility
+evidence and select the operation-local verification/complete-audit
 boundary, population/closure/resource budgets, decision-bearing index/current-control
 publication and retained-store treatment, and protected administration/closure
 accounting. The indexed individual-file recommendation is conditional and
 **PROPOSED**; SQLite remains a challenger, and the earlier segmented-history
 recommendation remains historical proposed evidence. A separately authorized bounded
-plan follows selection; no detailed
-successor packets or implementation are approved by this entry. This greenfield
+capacity plan follows its selections; no capacity successor packets or
+implementation are approved by this entry. This greenfield
 project does not presume production migration tooling or permanent legacy APIs;
 actual retained truth still requires an explicit treatment. Raising the constant,
 reclaiming history, adopting a database or splitting budgets is not selected here.
