@@ -434,6 +434,14 @@ approved bounded plan and implementation. No storage design, capacity increase,
 new phase/slice identity or future packet execution is selected here; existing
 delivery order remains intact.
 
+The human-requested [registration duplication/operation-design audit](../../research/work-registration-duplication-audit-2026-10-11.md)
+adds completed source-backed research/preparation: two preparation scans, four
+fresh invocation scans and narrower pure reconstruction/acquisition candidates.
+Review its binding-first preparation/authoritative invocation recommendation and
+early-error tradeoff before a bounded production phase refactor. That refactor
+would still leave the separate whole-history capacity/detection problem; neither
+the operation change nor capacity/index/trust choices are approved or implemented.
+
 ### Priorities after compositions and kinds closeout
 
 The 2026-10-09 documentation audit reconciles completed delivery against the
@@ -451,8 +459,9 @@ or a new set of execution units:
 | 5. **Authority preparation, then separately approved implementation:** parent eligibility → parent closing | Needs finite relations and the parent's independently resolved requirements/integration assessment. Depends on leaf closing only for roles requiring actual closed state/receipts. Parent closing needs its own permission and guarded effect. |
 | Later. **Consumer authority preparation:** CLI/installed-skill/host adoption | Choose a bounded workflow and adopter after sufficient relevant native/SDK capability; no requirement to finish the entire SDK. Keep Phase-6 hard order and current external proof requirements. |
 
-The exact next human direction is review of the native optimization/capacity
-proposal and selection among its proposed choices, proof conditions and targets.
+The exact next human direction is review of the registration operation-design
+recommendation and the native optimization/capacity proposal, including selection
+of preparation guarantees and the proposed capacity choices, proof conditions and targets.
 Research supplies evidence without product edits, detailed successor packets or
 presumptive history deletion. Concrete bounded planning needs separate
 authorization after selection. CR product choices and subsequent implementation

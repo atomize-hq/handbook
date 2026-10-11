@@ -385,8 +385,18 @@ capacity outcome. Its product experiments remain isolated; this is completed
 research and proposed direction, not delivered capacity. The technical assessment
 precedes a separate recommendation incorporating the user's file preference.
 
-**Next human decision:** review that bounded proposal alongside the baseline and
-feasibility evidence. Select the operation-local verification/complete-audit
+The subsequent human-requested [work-registration duplication and operation-design
+audit](../../research/work-registration-duplication-audit-2026-10-11.md) is completed
+research/preparation. It traces two preparation scans and four invocation scans,
+separates fresh permission/absence evidence from repeated pure reconstruction,
+and recommends binding-first preparation with authoritative invocation before
+larger storage work. Its preparation guarantee/early-error change, combined-call
+choice and production refactor remain proposed; existing behavior is unchanged.
+The measured preserved-policy reuse still leaves substantial whole-history cost.
+
+**Next human decision:** review the operation-design recommendation and bounded
+capacity proposal alongside the baseline and feasibility evidence. Select the
+preparation guarantee/early-error boundary, then the operation-local verification/complete-audit
 boundary, population/closure/resource budgets, decision-bearing index/current-control
 publication and retained-store treatment, and protected administration/closure
 accounting. The indexed individual-file recommendation is conditional and
