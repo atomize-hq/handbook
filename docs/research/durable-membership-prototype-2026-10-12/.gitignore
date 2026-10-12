@@ -1,0 +1,7 @@
+/target/
+/runs/
+*.pyc
+__pycache__/
+/evidence/*/samples.jsonl
+/evidence/*/checks.jsonl
+/evidence/summary/summary.json

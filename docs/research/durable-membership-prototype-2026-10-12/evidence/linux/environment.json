@@ -1,0 +1,107 @@
+{
+  "/proc/version": "Linux version 6.18.40.1-microsoft-standard-WSL2 (root@71c659030f6c) (gcc (GCC) 13.2.0, GNU ld (GNU Binutils) 2.41) #1 SMP PREEMPT_DYNAMIC Fri Jul 31 22:12:15 UTC 2026",
+  "/sys/class/dmi/id/product_name": {
+    "unavailable": "[Errno 2] No such file or directory: '/sys/class/dmi/id/product_name'"
+  },
+  "/sys/class/dmi/id/sys_vendor": {
+    "unavailable": "[Errno 2] No such file or directory: '/sys/class/dmi/id/sys_vendor'"
+  },
+  "arguments": {
+    "binary": "target/release/membership-prototype",
+    "output": "evidence/linux",
+    "samples": 30,
+    "sections": "measure,concurrency,faults,validation",
+    "seed": 20261012,
+    "sizes": "1000,10000,100000",
+    "timeout": 180,
+    "variants": "chunk,disk",
+    "work": "runs/linux-final"
+  },
+  "binary": "/home/spenser/membership-prototype-20261012/target/release/membership-prototype",
+  "binary_sha256": "0651b6907789198ea850d177ffb56f2fa151954cb15c0edbbbda02c4d6fb0a6c",
+  "cache_control": "No OS cache eviction. Fresh processes reopen; OS cache is uncontrolled and usually warmed by initialization/prior samples.",
+  "cargo": {
+    "command": [
+      "cargo",
+      "-V"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "cargo 1.89.0 (c24e10642 2025-06-23)"
+  },
+  "disk_usage_before": {
+    "free": 546165551104,
+    "total": 1081101176832,
+    "used": 479943270400
+  },
+  "fault_model": "Injected IO/flush failures and exit(86) checkpoints; external process termination during preparation. These preserve OS cache and are not hardware power loss or a persistence simulator.",
+  "filesystem": {
+    "command": [
+      "stat",
+      "-f",
+      "-c",
+      "%T",
+      "/home/spenser/membership-prototype-20261012/runs/linux-final"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "ext2/ext3"
+  },
+  "format": "durable-membership-experiment-environment-v1",
+  "logical_cpus": 24,
+  "machine": "x86_64",
+  "mount": {
+    "command": [
+      "findmnt",
+      "-T",
+      "/home/spenser/membership-prototype-20261012/runs/linux-final",
+      "-o",
+      "SOURCE,FSTYPE,TARGET,OPTIONS",
+      "-J"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\n   \"filesystems\": [\n      {\n         \"source\": \"/dev/sdd\",\n         \"fstype\": \"ext4\",\n         \"target\": \"/\",\n         \"options\": \"rw,relatime,discard,errors=remount-ro,data=ordered\"\n      }\n   ]\n}"
+  },
+  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "release": "6.18.40.1-microsoft-standard-WSL2",
+  "rustc": {
+    "command": [
+      "rustc",
+      "-Vv"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-unknown-linux-gnu\nrelease: 1.89.0\nLLVM version: 20.1.7"
+  },
+  "seed": 20261012,
+  "source_sha256_at_run_start": {
+    "Cargo.lock": "fd8e90a18ab7183997650bb6e9122370eecd39991c3753404183f878f88101bf",
+    "Cargo.toml": "f3fe793f7b564fde3a02eb2963af24e550ae6c7c005936bd691f80f137003b97",
+    "scripts/run.py": "94d42fc4dc9a0e0cf5cf67732d21bef6c94051270437c7a4edc4bb318bb0966f",
+    "scripts/summarize.py": "73fd19751529582b6285f65756ecb76043198981cea9e104cd60cc9bbbeb7d6f",
+    "src/chunk.rs": "4ed38342cf88d8fedafaeecd0dd6b5eaca28f7bac7e12e644ef4c02e7764a18b",
+    "src/disk.rs": "55971c15d5692a3112561892612f76702e59e4b58981b7016a9d2b7b381d1200",
+    "src/main.rs": "1ed8e9cd48b17e29e726143f4ee23706d6a026a265c24b80edcd5a29bf7ddc67"
+  },
+  "system": "Linux",
+  "unmeasured": [
+    "physical IO",
+    "OS syscall counts",
+    "allocation counts",
+    "power-cut durability"
+  ],
+  "utc_started": "2026-10-12T17:05:59Z",
+  "version": "#1 SMP PREEMPT_DYNAMIC Fri Jul 31 22:12:15 UTC 2026",
+  "virtualization": {
+    "command": [
+      "systemd-detect-virt"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "wsl"
+  },
+  "work": "/home/spenser/membership-prototype-20261012/runs/linux-final"
+}

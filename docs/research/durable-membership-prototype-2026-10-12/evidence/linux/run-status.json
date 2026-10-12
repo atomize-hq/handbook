@@ -1,0 +1,23 @@
+{
+  "complete": true,
+  "disk_usage_after": {
+    "free": 545616207872,
+    "total": 1081101176832,
+    "used": 480492613632
+  },
+  "failures": 0,
+  "full_harness_complete": true,
+  "observations": 24,
+  "passes": 5912,
+  "sections": [
+    "measure",
+    "concurrency",
+    "faults",
+    "validation"
+  ],
+  "skips": 0,
+  "variants": [
+    "chunk",
+    "disk"
+  ]
+}

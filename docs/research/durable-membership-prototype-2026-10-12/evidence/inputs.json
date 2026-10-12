@@ -1,0 +1,2958 @@
+{
+  "inputs": [
+    {
+      "sha256": "721b1b3901526d645711befee7e35f3662d5f1b78784647fe30f3c17c91802f6",
+      "path": "AGENTS.md",
+      "bytes": 3434
+    },
+    {
+      "sha256": "8f1c9a8d25b215e3f974a39d5c258e685c53f1ba8e28e52bcf5228314b05dd9c",
+      "path": "crates/engine/src/local_authority/work_registration.rs",
+      "bytes": 23922
+    },
+    {
+      "sha256": "9a079fecb9b40fe08c542df5c73bcb809ae99c3ded282f201f711460ccb7fdb9",
+      "path": "crates/engine/src/repository_durability.rs",
+      "bytes": 110321
+    },
+    {
+      "sha256": "f4e2d1c546553247c5e006bdad39f61cb80d0f91ba1e530ff6cb76b9d1240933",
+      "path": "crates/engine/src/work_state/mod.rs",
+      "bytes": 2903
+    },
+    {
+      "sha256": "ee820edc3fe25fc4f6ddd25c0ef08bd132e95e013246576adfa180f180d1ce02",
+      "path": "crates/engine/src/work_state/store.rs",
+      "bytes": 26925
+    },
+    {
+      "sha256": "0c981fe98d969db000569f738f0daf57d3e533edd1d268f2ad60ffb32b30a66d",
+      "path": "crates/engine/src/work_state/transaction.rs",
+      "bytes": 67314
+    },
+    {
+      "sha256": "4e81f69706c1586288420a7f83c38af535c6c702dc5f23c5fbac9cc0dfff8115",
+      "path": "crates/engine/src/work_state/types.rs",
+      "bytes": 24338
+    },
+    {
+      "sha256": "a2ee93ba3e721e20a03b7dce2d4a96e69d42243c78cfef592308eef2c31cbef0",
+      "path": "crates/sdk/tests/work_state_durability.rs",
+      "bytes": 47799
+    },
+    {
+      "sha256": "c594ac1ddc598a19b65f36618e245fa2e92750a87410c2d46627fb08a6d4a9bb",
+      "path": "crates/sdk/tests/work_state_integrity.rs",
+      "bytes": 33848
+    },
+    {
+      "sha256": "b6b5baa71f5e54b24a140ca3ce85f1b5e94558ed864a8f07db83c967814ddfa8",
+      "path": "crates/sdk/tests/work_state.rs",
+      "bytes": 47239
+    },
+    {
+      "sha256": "48eaea2bc45bd4ea99019bde999372390915cf6a694d80fa9f7b73c9712df495",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\component-reuse-review.md",
+      "bytes": 25856
+    },
+    {
+      "sha256": "f4fe04eb112810f54cd7927eeff8b5fb16c85f5bb72f8b9ab41864b2bd84c7d2",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\local-evidence.md",
+      "bytes": 19936
+    },
+    {
+      "sha256": "7e7abc1fb9221973126ef0d7f06288263d634e5815156fe0a618a0082ba1133b",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\openraft-d-engine-review.md",
+      "bytes": 22269
+    },
+    {
+      "sha256": "23c2c7651d76e12cbbaeaf6147267ea4ff671c79f259397d300d971f1dd9902d",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\primary-sources.md",
+      "bytes": 40130
+    },
+    {
+      "sha256": "3523f781cc638a2f30ebb543843dd5a16d88ab3bb8afece85f7eb21fd228f9d3",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\pro-answer.md",
+      "bytes": 59442
+    },
+    {
+      "sha256": "b79db2a8254badc580f521f0ed7b1cfcd561afcb88df5485d8237919c0149f41",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\pro-citations.md",
+      "bytes": 8820
+    },
+    {
+      "sha256": "07da41295a7128980dbe0779f41a6e315b0601ef29640a4937aa229bc401781f",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\pro-conversation.md",
+      "bytes": 4460
+    },
+    {
+      "sha256": "c01d876b8e6381f18400a7a3caf69088b4548b5e9ee8d882c4d805adcc88c544",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\pro-inline-prompt.txt",
+      "bytes": 842
+    },
+    {
+      "sha256": "cb1e405a6e65e9ddde8852731ee3a4c456287a3da95a8cd2db8f78e0c2de813a",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\pro-prompt.txt",
+      "bytes": 14782
+    },
+    {
+      "sha256": "5bf4ca2b9d9ce0b25d14eb98300835a335248ac364c37abd6fcfc1b1d4044872",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\pro-scanned-sources.txt",
+      "bytes": 25710
+    },
+    {
+      "sha256": "09fb44c4bbbec3bbb05edc9d45c3f22e8f28c57a145cd4d4abd47cb0b0fc26c3",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\pro-scope-update.txt",
+      "bytes": 16337
+    },
+    {
+      "sha256": "629e03f151082d02eb644c1d27a885dedb1bca1175dca0ddde04325d03739bfc",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\README.md",
+      "bytes": 51467
+    },
+    {
+      "sha256": "5dbe40a99d0e9b78a35aecb6c30822dc9a5662d12232c21855de671b5fce6561",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\research-active.jpg",
+      "bytes": 102086
+    },
+    {
+      "sha256": "8b75912085e4546659a5ba68956f0a3c09441170a920f700740ec2d10118ed2e",
+      "path": "docs/research/durable-membership-lookup-2026-10-11\\research-complete.jpg",
+      "bytes": 124912
+    },
+    {
+      "sha256": "a4eaa619b1b734abdd34c086fa49af573963ac2e43d9608c33d4ac3355844034",
+      "path": "docs/research/work-registration-invocation-cost-investigation-2026-10-11.md",
+      "bytes": 38346
+    },
+    {
+      "sha256": "384fc59420833612cbccd479e2879d7729584ece700cfcbf43f5a5fa3fd0da0b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\attribution-correction.json",
+      "bytes": 20244
+    },
+    {
+      "sha256": "94edccf5b60748ea6783b3fe5fa623d290922590f908042a773c5444bda6f96d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\attribution-measurements.jsonl",
+      "bytes": 2107344
+    },
+    {
+      "sha256": "6c2dd2fcaee17f79ee9245e305f855c5b86d930eaadd26a4bf7915116d208c45",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\attribution-off-byte-parity.json",
+      "bytes": 225887
+    },
+    {
+      "sha256": "8d87e483e06dede8e0a5be5a32ede705d36ad333de0dd3778641c433a706965e",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\attribution-off-population.jsonl",
+      "bytes": 9340
+    },
+    {
+      "sha256": "2a8e7393c0f2393225d58aff7e48d9599ad9b5f2899c1b6cedb8ed2039f2d8d8",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\attribution-onx-byte-parity.json",
+      "bytes": 225887
+    },
+    {
+      "sha256": "fcc99122785b815b39e9112cc27354b2b2dec4c04fb461ebbaa8b24548b64ccd",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\attribution-onx-population.jsonl",
+      "bytes": 9345
+    },
+    {
+      "sha256": "7612294230d8cd9ddd1f21261f80e2ee7bb0cf3314aefeba762d8c4b12703d81",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\baseline-red.ps1",
+      "bytes": 2356
+    },
+    {
+      "sha256": "ecc69679adc9c63fc0288ce073977d13f32858a832c1ad9c32d14b83c9365eea",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build_driver.py",
+      "bytes": 2249
+    },
+    {
+      "sha256": "f2d3d4b5d80d2141069214dc05c396369e5ce40168c2224d395811b266856ec0",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-pristine-baseline-v2.json",
+      "bytes": 3771
+    },
+    {
+      "sha256": "e3f1fa78b63e226acca1cedf29a0aada68a0ddf1de9dea0d6d2ab7b8ddd0f8ac",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-pristine-baseline-v2.txt",
+      "bytes": 964
+    },
+    {
+      "sha256": "7b65374e6a56e4fb09592756b42ade424a91ac753a178a81db50ff7e11b54e42",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-pristine-baseline.json",
+      "bytes": 3768
+    },
+    {
+      "sha256": "19ffdd1523d9cb3b79760c97744abdf2f610090db7f7856b6bc6650606b1e931",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-pristine-baseline.txt",
+      "bytes": 964
+    },
+    {
+      "sha256": "8890452243e47ecaad736467949a3e79fac8f3d02e2d9d17d32fdc6ed9d2c215",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-pristine-refactor-v2.json",
+      "bytes": 3771
+    },
+    {
+      "sha256": "bd58283df161e7e67b8df8f1e50d96174b3d49511ed1dc153baf8276a356061f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-pristine-refactor-v2.txt",
+      "bytes": 964
+    },
+    {
+      "sha256": "95f6c50a7e4ba47136dbab34e854c8c6582dcdceb9517d414e5653f37b3fca83",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-pristine-refactor.json",
+      "bytes": 3768
+    },
+    {
+      "sha256": "ab9bc90792a433fe7d060d318345c68a73bea962c3182dd99bd54e42d4d320ba",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-pristine-refactor.txt",
+      "bytes": 5926
+    },
+    {
+      "sha256": "c79606dc085061e260b44c3388cc3eb8720b926dbef9ad81604e117f2bb83564",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-baseline-debug.json",
+      "bytes": 3938
+    },
+    {
+      "sha256": "ee930c94a096e52bc0bae02670d45b2fe81aaba02fe70bf644af7ca3a054a72d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-baseline-debug.txt",
+      "bytes": 1596
+    },
+    {
+      "sha256": "6f50cc331848266e63d2fd97afb7955f5425441fa1d02b7f2463593de9254de4",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-baseline-v2.json",
+      "bytes": 3935
+    },
+    {
+      "sha256": "740b825a0690bbb9a6e75f70a00b3ba49cb2c559af00b4770b6d8105ed845093",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-baseline-v2.txt",
+      "bytes": 252
+    },
+    {
+      "sha256": "1c12f45c4c0f282e222ccb8b692248ed5ae2fbb13be602d496c8cd7c9e7d6a40",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-baseline-v3.json",
+      "bytes": 3935
+    },
+    {
+      "sha256": "4de8050c6d80c566250257affc987b3ffc06159beead2823b5dbd5a2d482d6a4",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-baseline-v3.txt",
+      "bytes": 1596
+    },
+    {
+      "sha256": "ce587cfc6cbe2d7fc64e1a0686d4dd229ded17eadb188544df93b4800e2cfde0",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-baseline.json",
+      "bytes": 3932
+    },
+    {
+      "sha256": "ae6b39a53aa5151aa28416a0b5b51fc9a31866b62266904d1add5a1d30763df9",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-baseline.txt",
+      "bytes": 998
+    },
+    {
+      "sha256": "45f3bd944f16110affb73adefa6ef8774bf9619dc3748ed2f6c2df6df55b937d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-refactor-v2.json",
+      "bytes": 3934
+    },
+    {
+      "sha256": "d16ea5f0af559ee962a20f84f4b10c8ef3084e0dcb3b94928afcd421aa71fed1",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-refactor-v2.txt",
+      "bytes": 252
+    },
+    {
+      "sha256": "0316a629182fe2aa5d71a6ced552079363fa6ea7dec78f260d031b09e4bfc984",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-refactor-v3.json",
+      "bytes": 3935
+    },
+    {
+      "sha256": "bef8228b75ae1ef0025a90544388110ef4f3999f7636e714ff173c357dddce41",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-refactor-v3.txt",
+      "bytes": 1596
+    },
+    {
+      "sha256": "378ae41882097c10503ae8b1342a801613db7f8e6e9261f19179e82d46741be2",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-refactor.json",
+      "bytes": 3931
+    },
+    {
+      "sha256": "26ec441166999f5ea93a00ffec58815155ca20349811b5a11ca68718033eb446",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\build-profile-refactor.txt",
+      "bytes": 998
+    },
+    {
+      "sha256": "2d0a1ecb19113458ba11f1f3f6b8af5596d0084bf3b04ef176414652efb124aa",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\capture_environment.ps1",
+      "bytes": 1426
+    },
+    {
+      "sha256": "cf40bbdc4e123933fbd4d23e8dd59204e849fb63879b481ca21e29f295164aac",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\collect_impacts.py",
+      "bytes": 3894
+    },
+    {
+      "sha256": "733b9b5466f0e98df597b978a206619b7c31b7bbebe8928bafbec0ccd4dfcd3e",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\control-tables.md",
+      "bytes": 945
+    },
+    {
+      "sha256": "654c8d8b82ca07bda61874f378932d67cfa3640eacf235cac7c57153b0c5e754",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\controls-byte-parity.json",
+      "bytes": 214378
+    },
+    {
+      "sha256": "9e69f689d55ed226972f9e80b5498cafe732d6f26d4aba7edee8e71ba339435b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\controls-measurements.jsonl",
+      "bytes": 13142
+    },
+    {
+      "sha256": "6c56b1b7562b6b15d0922091811994b8daca0e027322525b0f7ae8c4c5318867",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\controls-population.jsonl",
+      "bytes": 9044
+    },
+    {
+      "sha256": "aeb40ad6c304b6d3bf7c1965a9a85255f483f014083f96498c48755b9ee052b1",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\diagnostic-excluded-pair.jsonl",
+      "bytes": 2221
+    },
+    {
+      "sha256": "4d1d5dde8139e6e7baa1f50be819a9913fe1f310c1b402307ec0cf93b609a22c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\diagnostic-profile-debug.stderr.txt",
+      "bytes": 379
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\diagnostic-profile-debug.stdout.jsonl",
+      "bytes": 0
+    },
+    {
+      "sha256": "4d1d5dde8139e6e7baa1f50be819a9913fe1f310c1b402307ec0cf93b609a22c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\diagnostic-profile-v2.stderr.txt",
+      "bytes": 379
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\diagnostic-profile-v2.stdout.jsonl",
+      "bytes": 0
+    },
+    {
+      "sha256": "4fcc5364bd2d36ab041fee3bf81156624db217b6b96faeb757acda92f07040f0",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\environment-first-window.json",
+      "bytes": 1461
+    },
+    {
+      "sha256": "c79cdceb75d609ffaf7ce08b78d31021e1f8cbfeb9a6bd6cbee99390d85cb6fe",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\environment-population.json",
+      "bytes": 1461
+    },
+    {
+      "sha256": "38ba23df0a8f558996c737680f2efaa83a89296530e8f4734688a2e610541b69",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\environment.json",
+      "bytes": 1461
+    },
+    {
+      "sha256": "145061b5912f613cbe5ee509271bedf7bffbb63c0c2823931aae755aaf3b547f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\evidence-sha256.json",
+      "bytes": 104377
+    },
+    {
+      "sha256": "94d8365baa4b9303d7300ed1e28be4ddc9acf4f9e9cf27590b2cfdc68ded5ad4",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\final_tables.py",
+      "bytes": 6112
+    },
+    {
+      "sha256": "26033d091b4d0b5287b13690fb906daa7362d209a07976cbbc7614c4f9d30b2f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\final-summary-revision.json",
+      "bytes": 673
+    },
+    {
+      "sha256": "da6e3e3455069dd86b3364790bc392f3bd571b754217449322b4dff0e66e4e65",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\fix_profile_release.py",
+      "bytes": 1169
+    },
+    {
+      "sha256": "6d273d69f18640b68129b4cc6a34aaed7337d980a64b23ac88b76fb61674f221",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\instrument.py",
+      "bytes": 7080
+    },
+    {
+      "sha256": "29318a749826e38e3377f2a1a7911e0b7208090cc4a7eff588c01c2e77fdc54d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\instrumentation-baseline-v2.json",
+      "bytes": 9975
+    },
+    {
+      "sha256": "0ea3aa36dd82306016688d9b6b842e44111511012237ffcb9f27e48380d176a8",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\instrumentation-baseline-v2.patch",
+      "bytes": 780712
+    },
+    {
+      "sha256": "f610f35e2beb1c097ea9ae90f76efc69b6ad50c4156d33417b3251a74e50b0ed",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\instrumentation-baseline.json",
+      "bytes": 9975
+    },
+    {
+      "sha256": "6633fff67328b248e31aa26033f91de9f808f6167f494638985c39b29ddc1e2a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\instrumentation-baseline.patch",
+      "bytes": 780937
+    },
+    {
+      "sha256": "9696356e1e0747392fbc84642ee45f70827b980f4b9903b2d8792a37396c1ef9",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\instrumentation-gitnexus-impact.json",
+      "bytes": 2026246
+    },
+    {
+      "sha256": "399abebe0fb82d29759389ae843469dc77c09a149580ea04abc78e1619df731b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\instrumentation-overhead-tables.md",
+      "bytes": 1186
+    },
+    {
+      "sha256": "559127ba079d8b1826461a35ab8af76d23ef89ac22f1dd7adb2cffe5b74a46f9",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\instrumentation-refactor-v2.json",
+      "bytes": 10274
+    },
+    {
+      "sha256": "f8d8441720890cf37d99b556ee5c826332515b14a5995ec684d0f558d49b088e",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\instrumentation-refactor-v2.patch",
+      "bytes": 790401
+    },
+    {
+      "sha256": "057f469b08695273d8d937c043c91405f443e3066a8538f37b0818bced386e43",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\instrumentation-refactor.json",
+      "bytes": 10274
+    },
+    {
+      "sha256": "eb0b2129980694d94176de86d7ed337d05d82b8a4aebceb8b5c8feb436ab3559",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\instrumentation-refactor.patch",
+      "bytes": 790626
+    },
+    {
+      "sha256": "3f611468c1105448120477c0b9c5883f9d90d2b87e476c8a3c5b655d7a08b963",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\main-selection.json",
+      "bytes": 1156
+    },
+    {
+      "sha256": "06a0f34d71fc79c2218f9419ccf5ecca86812a40193e6acd47ed75a4ad78aef3",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\memory-summary.json",
+      "bytes": 25996
+    },
+    {
+      "sha256": "a6fdff5ec4c105c0234581341def2f34db19387a4e41b460606b50f80e7b6292",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\memory-tables.md",
+      "bytes": 818
+    },
+    {
+      "sha256": "0a61263826c836bad8827182391c65034e56d3dd575b1e1d139f5e735797c493",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\metrics_balance.rs",
+      "bytes": 303
+    },
+    {
+      "sha256": "47f6c06ca84e05e39591b49e6d96a12a16116382fabac5f3107782627469b84f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\metrics.rs",
+      "bytes": 5175
+    },
+    {
+      "sha256": "7d1e157c8f9cb5a120215fab65b8f585dd43a41514e339d6206d099e82f0cb52",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\native_main.rs",
+      "bytes": 18018
+    },
+    {
+      "sha256": "001cbbe697d2cb919e6d20799169f154de0a208d2335c17cf504cdbaccb5beb2",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\pause_population.py",
+      "bytes": 831
+    },
+    {
+      "sha256": "22ba1ae101f1b89ed1f8a0b4c23ecae15103781cd817dfb905f8293deb3bb43c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\performance-detail-tables.md",
+      "bytes": 1916
+    },
+    {
+      "sha256": "699225f749270e73ca263fa272e8b01b9ef1ac17fbaa06e26b4a5787c88e0ece",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\performance-tables.md",
+      "bytes": 843
+    },
+    {
+      "sha256": "06e228594a4a5b9bdb2d8734f45ef4d25bc662448fd3c4af6ca0c509f5d0fc3d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\prepare_driver.py",
+      "bytes": 954
+    },
+    {
+      "sha256": "7cac4dbfab09e92513aa9c52b8ad7f6087334912c6f2aa5414a68cf0672affa2",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\pristine-byte-parity.json",
+      "bytes": 1607920
+    },
+    {
+      "sha256": "2f9f6895c20ad0fa5552bcf70df8bc20fc7b0aa5d0f58533ed2e16a0ce6c3a73",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\pristine-interim-summary.json",
+      "bytes": 41490
+    },
+    {
+      "sha256": "196b170bf28de38d288b531ab2e941b97edf29c29bcea4892f48a78eac6dc0c2",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\pristine-measurements-original.jsonl",
+      "bytes": 79310
+    },
+    {
+      "sha256": "d8cd618c40eb13764cb36f83d9a755d45873af272ed19ae877719b066716f2ab",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\pristine-measurements.jsonl",
+      "bytes": 82442
+    },
+    {
+      "sha256": "4b1ec48c07294520d957ef467b601b44077d313b2e7186af9c2142c8900551fe",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\pristine-population.jsonl",
+      "bytes": 54959
+    },
+    {
+      "sha256": "609e5da7d48f4e58a76f99b60ebe8109d0850308ea26d940c42b09fed77c4b1c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\profile_tables.py",
+      "bytes": 7094
+    },
+    {
+      "sha256": "a67189ab4da2b88f1062be75559c5290bf43df1c29f5f186f26ad2f04c2ad784",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\profile-cache-gauges.json",
+      "bytes": 5445
+    },
+    {
+      "sha256": "c9bf61594eea006f3a30275b21f73e6b5619465ef8914ec53b9a9e0396e54994",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\profile-held-history-tables.md",
+      "bytes": 1800
+    },
+    {
+      "sha256": "cacd388cb4f68dd9bea518b689e3ea3484a694a0226f1f516dad4d6cfae0ec49",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\profile-lock-held.json",
+      "bytes": 30050
+    },
+    {
+      "sha256": "3f8b11a3ba106c2ad54011bbccafaeb4a840228d5b8413395030921af734e9a5",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\profile-observations.json",
+      "bytes": 584247
+    },
+    {
+      "sha256": "351cf36d5ab78cba0f3456a59e9d4b9dca98bb73ecd5f0fd1b8bb998f38bf3c3",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\profile-owner-spans.json",
+      "bytes": 124359
+    },
+    {
+      "sha256": "813252862ee0101e74bc2ff5c1d673ca408fb8aec4120e0a49be2b5c41531609",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\profile-quiescent-start.json",
+      "bytes": 455
+    },
+    {
+      "sha256": "90a90709cffc8ccfa50f24c19717b99cb828c579f2c58355294c10b6061c2df4",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\profile-tables.md",
+      "bytes": 13141
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\inspect-attribution-onx-explicit-08-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "f2d8536e822d1dca0631e5b321dee1f9e1f2f8da4ef63ca2c544760968e1157e",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\inspect-attribution-onx-explicit-08-00-baseline-0.stdout.jsonl",
+      "bytes": 484
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\inspect-pristine-explicit-16-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "09f8b9249fd51e41ebf5db7b51cb8ff5f005924200bacbd60e2041ea9dedb19d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\inspect-pristine-explicit-16-00-baseline-0.stdout.jsonl",
+      "bytes": 478
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\inspect-pristine-explicit-16-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "4b2d5fc32b487d0f2629cff523f7bc2c6baaa63402174c57b4288dd29c414ee5",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\inspect-pristine-explicit-16-00-refactor-0.stdout.jsonl",
+      "bytes": 478
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\inspect-pristine-kind-16-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "9599ed1f708cad9bcc3a10c1f3daf6d7d435b595d552c454ffe28e94aebb61a5",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\inspect-pristine-kind-16-00-baseline-0.stdout.jsonl",
+      "bytes": 470
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\inspect-pristine-kind-16-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "f31d96009be7f22995181bed53d276c9d42fa115ae74791b78f70c79a0aa5bcd",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\inspect-pristine-kind-16-00-refactor-0.stdout.jsonl",
+      "bytes": 470
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-explicit-08-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "2392aa54cbb3a15a5898be3437f1d3e476396b38333dfc9575c241004faf0a7b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-explicit-08-00-baseline-off.stdout.jsonl",
+      "bytes": 591
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-explicit-08-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "376974a2d3059b55a875af8c74298e15dfa0b96dad1a1727abe32aeb96d9cc86",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-explicit-08-00-refactor-off.stdout.jsonl",
+      "bytes": 588
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-explicit-16-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "84782794a6f6ae2939c9f15ac6fefd614e8361a8fbe98c82a7598517cf6460f0",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-explicit-16-00-baseline-off.stdout.jsonl",
+      "bytes": 598
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-explicit-16-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "78cf68e24f344546d1b4975b9488601f4157a12fae472409704a78870562ddcb",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-explicit-16-00-refactor-off.stdout.jsonl",
+      "bytes": 579
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-explicit-31-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "521afe8de7fbe684dc541036f0dd8e7d702c5d2a4b72a43b3e4a0411d0528eab",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-explicit-31-00-baseline-off.stdout.jsonl",
+      "bytes": 602
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-explicit-31-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "c5b0895b8964e80e81ebedd1f63a1f08bd583ab8372f565bca65c9423a222069",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-explicit-31-00-refactor-off.stdout.jsonl",
+      "bytes": 579
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-kind-08-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "8c1933614c9c7e08b6967ba725fb0eb45243ef4eaa3c2de63a07d52be0023a5c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-kind-08-00-baseline-off.stdout.jsonl",
+      "bytes": 591
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-kind-08-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "f60f6f3caf897847f6cc7e25cb9f5278e39e9b1ef80dee0525709cb14ae7f71a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-kind-08-00-refactor-off.stdout.jsonl",
+      "bytes": 581
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-kind-16-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "fd83556a3dae51266a15c74679732ec62e2fb62f16fbc5d29549c4c16047b2af",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-kind-16-00-baseline-off.stdout.jsonl",
+      "bytes": 586
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-kind-16-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "62b4d6f4e7357c904935e47f009d88919adadd989c027cc4b74a2cf161503beb",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-kind-16-00-refactor-off.stdout.jsonl",
+      "bytes": 572
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-kind-31-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "1bbf3f950519113efa277e2523aef76be28e9c7da013c22cd49f7dc29036bf0b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-kind-31-00-baseline-off.stdout.jsonl",
+      "bytes": 584
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-kind-31-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "dee99f54edab85d6c29ab9108157b40e028293c868107d3db81f241453e90c27",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-off-kind-31-00-refactor-off.stdout.jsonl",
+      "bytes": 585
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-explicit-08-00-baseline-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "55f0617c4aa4a624a7dbab1d28cf2dbf612957dadc778b2ac52932bf1eba1fc8",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-explicit-08-00-baseline-on.stdout.jsonl",
+      "bytes": 126992
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-explicit-08-00-refactor-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "2520d74f917eb89b8c9b33dc060d5e83d660cc322b5cf3ad4babfa1f53f67352",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-explicit-08-00-refactor-on.stdout.jsonl",
+      "bytes": 83122
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-explicit-16-00-baseline-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "e1716c0baea119eef370f5ca8e982edbf747c012b5aab088e944c625ebcb3b31",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-explicit-16-00-baseline-on.stdout.jsonl",
+      "bytes": 171269
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-explicit-16-00-refactor-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "3bbfd66d466187be9b81fb2c6f7608ce83a762fbaec1c88e49451b47afc818ad",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-explicit-16-00-refactor-on.stdout.jsonl",
+      "bytes": 114453
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-explicit-31-00-baseline-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "14a08057d491cbf7d2697905041fd9c40975fd9a3ed9c8896c0dbecb8e61dc0a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-explicit-31-00-baseline-on.stdout.jsonl",
+      "bytes": 253747
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-explicit-31-00-refactor-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "a161f1a8ccab48acf73d9b96df0df2d003f1f0f177f23907263c0148428fdfc5",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-explicit-31-00-refactor-on.stdout.jsonl",
+      "bytes": 173463
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-kind-08-00-baseline-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "f160952bae142a92f3e14ab41daffa747405e83016a28276e291441e6566cd34",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-kind-08-00-baseline-on.stdout.jsonl",
+      "bytes": 126990
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-kind-08-00-refactor-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "1ae39740027d26b06991384d7a4a4653c2ffdc8d03179ddccad9ccbbb7689663",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-kind-08-00-refactor-on.stdout.jsonl",
+      "bytes": 100016
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-kind-16-00-baseline-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "b9132461bd935a33d787fe522c6b93c30b348488c0e0cfd72762eda605871d96",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-kind-16-00-baseline-on.stdout.jsonl",
+      "bytes": 171176
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-kind-16-00-refactor-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "af208ad269ad8b50b1805660deabfd24f18f47c83315cfce89838a496f83eb37",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-kind-16-00-refactor-on.stdout.jsonl",
+      "bytes": 137975
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-kind-31-00-baseline-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "317e9c28099583be9bf89d6ffae3331c7b4a97dbdef98fd82c551566a4ebeacd",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-kind-31-00-baseline-on.stdout.jsonl",
+      "bytes": 253715
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-kind-31-00-refactor-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "c3cf6059b8773116b6896ed43382e0c3d37113afb0f0f2c17dc526d8f3ca3d4d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-attribution-onx-kind-31-00-refactor-on.stdout.jsonl",
+      "bytes": 208637
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-explicit-16-06-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "b62c932667d52456905463531a9ac6dd763d4029555124bc01c94db4ff81235b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-explicit-16-06-baseline-off.stdout.jsonl",
+      "bytes": 597
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-explicit-16-06-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "1a99b8222ced7c7a80ab72cd405ac171ada4069fb9e27b7526391393e0f8c902",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-explicit-16-06-refactor-off.stdout.jsonl",
+      "bytes": 571
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-explicit-16-07-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "3d5441237bb2a2f65e1802f7a32ae63198d52f7aacb1653c478ae81f92d24092",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-explicit-16-07-baseline-off.stdout.jsonl",
+      "bytes": 592
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-explicit-16-07-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "202e0ca91115137b8e4c2334cdfe2390d77e3e4c6d882f69fb068bb58e8ba00a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-explicit-16-07-refactor-off.stdout.jsonl",
+      "bytes": 571
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-06-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "442ee8bb1a669637a57c4f09139a3f3fbfa2c94314b87a3191c5140293628ced",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-06-baseline-off.stdout.jsonl",
+      "bytes": 577
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-06-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "e6d724f584a90ead5445114ee94ab9c89d90bdcc33dd155823c66ecf610ac692",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-06-refactor-off.stdout.jsonl",
+      "bytes": 564
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-07-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "3b5682168d69518ee8a4b79b212f986bc0d032286828827f7d06b80b56c71292",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-07-baseline-off.stdout.jsonl",
+      "bytes": 569
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-07-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "e894ff07b999a3d3e4dd3bfebc20b12d860843612d5225b32b66ab0a08b9f5be",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-07-refactor-off.stdout.jsonl",
+      "bytes": 574
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-08-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "45227cef68735d292b34879379f22cddbb4abbf16275c93eedc915668107f607",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-08-baseline-off.stdout.jsonl",
+      "bytes": 572
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-08-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "09b291e02ef1978d6c7bc0e22385c20e009625ffbed0a99ccb77306948eb7802",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-08-refactor-off.stdout.jsonl",
+      "bytes": 563
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-09-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "6fd244fbbffbcbd94b0ecb447a94ba38a1f2c43cf0179cfe72d2c709c8ad5512",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-09-baseline-off.stdout.jsonl",
+      "bytes": 583
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-09-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "53dd1eb4026a844221a635f4ed94a76dd3de31b031a7255ac4eae631f55c5d96",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-controls-kind-16-09-refactor-off.stdout.jsonl",
+      "bytes": 573
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ffdde4af51cf8011b4740294b6ddcd3f823f53ae0958ca6e015b02b0d5990c5e",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-00-baseline-off.stdout.jsonl",
+      "bytes": 582
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "3dad7af65214ccc263257c4d9ddf2f9c9c1566eda3211855f4c5a49e37936327",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-00-refactor-off.stdout.jsonl",
+      "bytes": 589
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-01-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "cadb3c99528810eb9fdd3369b62a35aba0137dae7baa4234b4cedb7674edadb1",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-01-baseline-off.stdout.jsonl",
+      "bytes": 591
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-01-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "40eb823b761c01df62c57923ad1e09a6eee0abf9bc7ab8991b39230ae2dfdf5d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-01-refactor-off.stdout.jsonl",
+      "bytes": 570
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-02-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "d7eafda0f88c226e2d0d2d28a89c33ad7a6fa0969844b86eaad17bf815a995c7",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-02-baseline-off.stdout.jsonl",
+      "bytes": 584
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-02-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "c4db2482168e81a54fc94c510375dbe5dde467a5b5b357e1051a8cd5824737fe",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-02-refactor-off.stdout.jsonl",
+      "bytes": 568
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-03-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "d85578416480d89b14eb182091389fb442a52e0c1e529f4ebd9fd1f3174094b7",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-03-baseline-off.stdout.jsonl",
+      "bytes": 584
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-03-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "1a7561d1f3549adb83754c56dfff98521ce1252c2ba83dcbae45ab9892d5c75c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-03-refactor-off.stdout.jsonl",
+      "bytes": 580
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-04-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "d5cc9c1d6f3a27e8063d02bb5f2ef3d25df5e9c66df1f89e1500c974899d247e",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-04-baseline-off.stdout.jsonl",
+      "bytes": 583
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-04-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "7056f0ef5b1d825b6e48c09ac0287df328013d0173ae98c0918c66c2c5b4430b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-04-refactor-off.stdout.jsonl",
+      "bytes": 571
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-05-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "a82a20974509f60eed27a255412b9acd016dcb172ce74a81d8d784a019602093",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-05-baseline-off.stdout.jsonl",
+      "bytes": 571
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-05-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "c24373ce20bfdb1b166acee0cb036a43f1612439d75e014dc59acecad43a2f8f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-08-05-refactor-off.stdout.jsonl",
+      "bytes": 581
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "f8319f7c9a5c7f2cbef79d045352717537e5724b2566278691188b9df1e3c44f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-00-baseline-off.stdout.jsonl",
+      "bytes": 576
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "d109e6ac59b01b97e0bae34afe128ff7a44adb5e344d6475d64a695d681e2425",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-00-refactor-off.stdout.jsonl",
+      "bytes": 591
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-01-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "251cce8fb64342fae94a70f88d7d7229a4fa8dfd37d0c17a53d2ae811bb595f9",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-01-baseline-off.stdout.jsonl",
+      "bytes": 594
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-01-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "bfd770a721ea68066bb9c182a78ed4f96060dd3352e23550a9be257b7d5151fc",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-01-refactor-off.stdout.jsonl",
+      "bytes": 591
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-02-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ea9435cc7c6674b374bfd86a03aad8bf3ef450e04b59fb01738d380d5d6ff566",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-02-baseline-off.stdout.jsonl",
+      "bytes": 573
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-02-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "11813e8364f3a3799710a8598f87d23b0a9095c2a8a692a0f50aa494201272c4",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-02-refactor-off.stdout.jsonl",
+      "bytes": 580
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-03-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "62fb39ef57e7d38827655f14568888104b5e8ce33fc1e6c7fe2d6a4f4b69ae5f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-03-baseline-off.stdout.jsonl",
+      "bytes": 584
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-03-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "4fead0b54fee10285b03bb0b01f19655db5a25f075da1b88b9252547eeb53e93",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-03-refactor-off.stdout.jsonl",
+      "bytes": 581
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-04-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "4f4469af9e50f539563d224d0252d246a9294305cba4e775a78325218005dd98",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-04-baseline-off.stdout.jsonl",
+      "bytes": 573
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-04-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "1dfdf75a4f7fc0b92a41ab4bc41feee2f4d3efc211e673febf40df2bedcb6de5",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-04-refactor-off.stdout.jsonl",
+      "bytes": 599
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-05-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "3524c32bab3e99cba5d7072210f23117243143b4e4d50c900d8240f0091cc8d7",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-05-baseline-off.stdout.jsonl",
+      "bytes": 582
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-05-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "7db7c996169226497c3c8f45a6012af6b356fcdbbc0e752e6d46c5ade5357456",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-16-05-refactor-off.stdout.jsonl",
+      "bytes": 579
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "cdbbc29733fd722822c7a88231498fc2aa0f92537c31776bd020b39bb3d5d833",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-00-baseline-off.stdout.jsonl",
+      "bytes": 577
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ac6c8e87ff17a974c7f3a51fee917804093deb2c13bd6a7174a0393ff1a92b9c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-00-refactor-off.stdout.jsonl",
+      "bytes": 571
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-01-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "09a8f01a352ba5c6e897eedbc3cb625dfc9fe451e0c4651e280c6b1ab3ac807b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-01-baseline-off.stdout.jsonl",
+      "bytes": 577
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-01-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "750f24ba451132b861ae30ddeb5c947de201338b3d530ac8e1acbfaf93ec7d5b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-01-refactor-off.stdout.jsonl",
+      "bytes": 571
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-02-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "05d6ca7b3e0a11179c189987f41b8b3daea10ac3fbe88c3a5d129456b7845468",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-02-baseline-off.stdout.jsonl",
+      "bytes": 595
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-02-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "0470c043bf8334ed39268fdd5fc043e2be63682337eaa2eba2bd7573e06e2f78",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-02-refactor-off.stdout.jsonl",
+      "bytes": 589
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-03-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "a81b99085e1ba21a432aeac0e599c334335f7868c4cb0a22a7d3804092fb0f6c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-03-baseline-off.stdout.jsonl",
+      "bytes": 585
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-03-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "a666b29f5ecd4b90841e827cc40774b8eb22285c83880e7e500f9b19004ca47a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-03-refactor-off.stdout.jsonl",
+      "bytes": 582
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-04-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "d644fea9d26e9151f18e3700cdcc45a10d36535b40d1f2e73eac8344088c71f3",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-04-baseline-off.stdout.jsonl",
+      "bytes": 585
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-04-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "2a228f9b105dcf88e73ccb47790bb0be12aac72f104600378544d64db9e78555",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-04-refactor-off.stdout.jsonl",
+      "bytes": 571
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-05-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "03731e0f3334d99b4d36ccd25e979b4303f1e2fe57bc4d9ef47e11d793c1dcd5",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-05-baseline-off.stdout.jsonl",
+      "bytes": 603
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-05-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "eb500d45094fa86d303d05cd103a158d2ed1d89865caebe78d4b8d705f0e866e",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-explicit-31-05-refactor-off.stdout.jsonl",
+      "bytes": 572
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ccad46725faad686bf17727ad3f9f0853429e020ad18408280726633a0856b3b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-00-baseline-off.stdout.jsonl",
+      "bytes": 576
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "fd99d9d12a2ff5b4b79d23cefc9b50bc2d4ab108163b96a002f135bc138050a3",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-00-refactor-off.stdout.jsonl",
+      "bytes": 583
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-01-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "e3c22b0f6c101ac40b935ea96ab8119d90ad5e5d1cc80ae5882643514e5346ba",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-01-baseline-off.stdout.jsonl",
+      "bytes": 585
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-01-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "123ad269a2c9b90a6fc3a99413592d99c7a7191bce2238b251c64245c888ad1a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-01-refactor-off.stdout.jsonl",
+      "bytes": 603
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-02-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "21447090fc003a72bd42ff541722ae3ed6f42fff793a03dc480afe8ac8a5fc89",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-02-baseline-off.stdout.jsonl",
+      "bytes": 575
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-02-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "b41556c25c319d11d52a26af732d10aa05e46e6402043ec8c0c53a1eefe93e46",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-02-refactor-off.stdout.jsonl",
+      "bytes": 575
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-03-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "9851b14f271d1824b48ea5a9af5e1f593f1713d2233ed58e3dd32e0af52b4441",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-03-baseline-off.stdout.jsonl",
+      "bytes": 576
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-03-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "0ace5ef45c94e82a10a95b405eb98f4bae3da3d3165019fab840aa0da3ff01d7",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-03-refactor-off.stdout.jsonl",
+      "bytes": 592
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-04-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "6ff370d8ae7e2b4289016921b794d2945a8bdd224a166957d95f80db2a895b66",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-04-baseline-off.stdout.jsonl",
+      "bytes": 584
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-04-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ee18cca94e1095d958228dac3fe478dee31c261479882aa46973dd810d1480d4",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-04-refactor-off.stdout.jsonl",
+      "bytes": 574
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-05-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "76d441c54cb78cd38e8e119d8afd950c2d6ad17a00876fee4948f61e6e6165da",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-05-baseline-off.stdout.jsonl",
+      "bytes": 576
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-05-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "78f3caff27147634777bd8032be9f4525d697d9a756c983bb254d683b0a69e09",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-08-05-refactor-off.stdout.jsonl",
+      "bytes": 575
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "94e5a7a2afbcf387f9478cae95c796cbd5be63932d8eae339692aceb73237d25",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-00-baseline-off.stdout.jsonl",
+      "bytes": 576
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "7f74dbfe220564cc17b78eb23eb2830088670344c577568eab48167dd5bd9072",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-00-refactor-off.stdout.jsonl",
+      "bytes": 583
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-01-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "f0b3c6e9d120e9a468a0e1f007beebb9575b23576e279763760e1df143279510",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-01-baseline-off.stdout.jsonl",
+      "bytes": 566
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-01-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "71b70a30cf83d8c77bd6a627b1aae83e59d022be0e38a159a1cc168e8654ca24",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-01-refactor-off.stdout.jsonl",
+      "bytes": 570
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-02-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "d325d550afce2fd34946d515f0ecf1c82fc916e5a57375eab7cfea08b7c734f5",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-02-baseline-off.stdout.jsonl",
+      "bytes": 574
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-02-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ead5151449ae83c3041c15ac70e5613876343c19cabe07ed1032f8c3d0532d75",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-02-refactor-off.stdout.jsonl",
+      "bytes": 564
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-03-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "db490c6ef9c96c5c5cff1384fccbd581205054dc3a1a9e50038298c240d5c58a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-03-baseline-off.stdout.jsonl",
+      "bytes": 566
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-03-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "5db5c383a4885964a8efa6498c9d750af4e5abd10cd248a6a65174239d337f42",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-03-refactor-off.stdout.jsonl",
+      "bytes": 581
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-04-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "499700fff88a1a35b057e313c4578582d49913ca38a88f18f4c308f28a6dcd9a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-04-baseline-off.stdout.jsonl",
+      "bytes": 569
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-04-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "da1fb20d3a8329c989fd0f8047f3221c0fe6493794a638b42f861011bf674c19",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-04-refactor-off.stdout.jsonl",
+      "bytes": 582
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-05-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "19414d4f869e031d946caac1c45f5f79e5157d8baa8054c8c7911bb367d126ac",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-05-baseline-off.stdout.jsonl",
+      "bytes": 577
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-05-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ff188acf6ebddb95ad781113d3fdbd91541cb20dd40c87a913cfcebd19e36564",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-16-05-refactor-off.stdout.jsonl",
+      "bytes": 584
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "35b62cc64e10437f410ef401758898501a51aecca5031fb9fa2b5a15957c97fb",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-00-baseline-off.stdout.jsonl",
+      "bytes": 594
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "61311e58209ede482c920ce0b49c5cbd315bccd5ab34739af655828dade7fac2",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-00-refactor-off.stdout.jsonl",
+      "bytes": 565
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-01-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "a0541d3dff7cae69526a0314e1c0755d48a028ca959f30082f2a204708e41f7c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-01-baseline-off.stdout.jsonl",
+      "bytes": 590
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-01-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "7fbae516915a9ce1a9f472dda38ded5b1b064e5af71f36e155df1fb7e5df841f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-01-refactor-off.stdout.jsonl",
+      "bytes": 570
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-02-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "bb41e80d1a0610a1b31bf82cd32152ccfa67e703637dcee5326ffa575610d986",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-02-baseline-off.stdout.jsonl",
+      "bytes": 569
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-02-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "76179490110cc7599c31ef04e1feeaa7245021047f12b017f3dc9af5550c8889",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-02-refactor-off.stdout.jsonl",
+      "bytes": 577
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-03-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "2e4c4553ec7f0634e39650960bfaf9df8ae639140896f2ac47c81ad7e107b8f2",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-03-baseline-off.stdout.jsonl",
+      "bytes": 567
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-03-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "c15db5e226bd03f62036a32d2ea4c6ec472823a21071025c7ed1fc3b5a010b52",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-03-refactor-off.stdout.jsonl",
+      "bytes": 575
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-04-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "fcc4c448b8c3f55b14b265e9f1f88f48bd62cbe5df25e3ebb3f4adf6dda3954d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-04-baseline-off.stdout.jsonl",
+      "bytes": 595
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-04-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "40b181d6f97522e29664b2577b605678a6847d7b1bfa07d4c6be982a81ff6571",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-04-refactor-off.stdout.jsonl",
+      "bytes": 568
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-05-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "16d9e9f86b8d041c4fa193f66d6513b3f11a310b2948750a1e9bfa1ed8c567f8",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-05-baseline-off.stdout.jsonl",
+      "bytes": 578
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-05-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "25b82e92411cc8ee689837f72b490427521e08311e0915f419443150a290b781",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-pristine-kind-31-05-refactor-off.stdout.jsonl",
+      "bytes": 583
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-replaced-explicit-08-00-baseline-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "7755ffb70e3fa5464b7e071afc0d3ac77a7e21723bcdf14208309fa29ca6a2b7",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-replaced-explicit-08-00-baseline-off.stdout.jsonl",
+      "bytes": 572
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-replaced-explicit-08-00-refactor-off.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "42cf1affbede199255568fd2c0107e82cfca6e49b9c447623aadc001d08fee02",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\measure-replaced-explicit-08-00-refactor-off.stdout.jsonl",
+      "bytes": 589
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-explicit-08-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "09c30f0c6f61ed256d2218fbbfc0cb507c2c00d6a1755f6863758894223ac70f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-explicit-08-00-baseline-0.stdout.jsonl",
+      "bytes": 330
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-explicit-08-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "31a0bcbf1ac3480e0b767a8a9eda8e9ca502f6428cd21aa3ce7574f4fa1b6c8c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-explicit-08-00-refactor-0.stdout.jsonl",
+      "bytes": 330
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-explicit-16-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "36138b350a4017b1e3a6e35479235b68204eeaac3ff31f4b04299ac5b99afc32",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-explicit-16-00-baseline-0.stdout.jsonl",
+      "bytes": 331
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-explicit-16-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "3c6d292d805cfc05436df75abdafcfa324d28269a0c094b70245f18f38a85c48",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-explicit-16-00-refactor-0.stdout.jsonl",
+      "bytes": 331
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-explicit-31-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "056d558d72ee8977aa7aadcba0bdc616257181d3cd85ec0de9d34410a494a219",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-explicit-31-00-baseline-0.stdout.jsonl",
+      "bytes": 331
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-explicit-31-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "c19560d31e5d19e11281125a4d7cb1d5006f54c291622799cdecab9720498da7",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-explicit-31-00-refactor-0.stdout.jsonl",
+      "bytes": 331
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-kind-08-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ceae5ca540c26a8596a7a0134345b8d7f632ddb56aa085f96b3a0cf141ba6f91",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-kind-08-00-baseline-0.stdout.jsonl",
+      "bytes": 322
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-kind-08-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "bfc645d17d67137eb40d5a9cb50cce1bd6f87ee4768123dbdca161d9b8780620",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-kind-08-00-refactor-0.stdout.jsonl",
+      "bytes": 322
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-kind-16-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ab64493b7fc3c6e0e7be78a8d8e6437cc82ca9632895b9d78546aab27a225ce9",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-kind-16-00-baseline-0.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-kind-16-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "fa90352c9a08a2e7bc8b1ceb1ee056141b978930c9cfc7e8b46a9d38654006da",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-kind-16-00-refactor-0.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-kind-31-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "b2764c3ec21ddd0892856346f11ad2a8f8c092eac09926819e7748b68ed60419",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-kind-31-00-baseline-0.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-kind-31-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "5a6a7ce5b94ff7fa41259ab9994bfed2b798dbb1f5d30ac2c64d205c78c9730a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-off-kind-31-00-refactor-0.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-explicit-08-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ea30597b3e341311605ece90ad9df5b1ffa9e2049d55c91a39b1fc0c9ce1b5d2",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-explicit-08-00-baseline-0.stdout.jsonl",
+      "bytes": 330
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-explicit-08-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "cb5d9514505a07d9ae3881763dc657e3eba64eae4b48f7cf80d1fb05265619a0",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-explicit-08-00-refactor-0.stdout.jsonl",
+      "bytes": 330
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-explicit-16-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "60cae94c7dad372d017315bb9dfc4b2bfa50835c1388a728e39e4c9f9a526518",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-explicit-16-00-baseline-0.stdout.jsonl",
+      "bytes": 331
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-explicit-16-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "a48f8c3fc297abbe7729b7a63261bfdfa42bd8f002c25310aa525cec4bec4ed7",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-explicit-16-00-refactor-0.stdout.jsonl",
+      "bytes": 331
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-explicit-31-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "4d4cdecd97f99cbc9467c189de431954291e68dcf67594c92cd761cab62264fe",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-explicit-31-00-baseline-0.stdout.jsonl",
+      "bytes": 331
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-explicit-31-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "e93d5ba2f62a9ce6230077afc3ab64dd7b714514361187498b28256fd4b1cbad",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-explicit-31-00-refactor-0.stdout.jsonl",
+      "bytes": 331
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-kind-08-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "50f93d5b7717f8bc52969077a88593b5158b66dc24aeec8f985ca506e6dfaa4c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-kind-08-00-baseline-0.stdout.jsonl",
+      "bytes": 322
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-kind-08-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "afe50ee366cd1ef0a26db1aad8530e3d195ae31484ace76a48a8f1cad9ea09e9",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-kind-08-00-refactor-0.stdout.jsonl",
+      "bytes": 322
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-kind-16-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "5b4c5286a2efcc4c008e4901a7bb9554386e0731c0afadcca8d7541767ed2c9c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-kind-16-00-baseline-0.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-kind-16-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "096a197617bf84047301a68cdb9c0571f4b35183544332ca1771d1c1ac9707ec",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-kind-16-00-refactor-0.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-kind-31-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "0d797c571848a5f40d7a81a57fe34f2d66b1883ab4b32cd329b3c3b726e2e53f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-kind-31-00-baseline-0.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-kind-31-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "a657cb6861969ec05851a1b7e83788cf46d9bfc1c154376f71d1a5b8548210c7",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-attribution-onx-kind-31-00-refactor-0.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-explicit-16-06-baseline-6.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "8f4eee0e573f730de060f0cf0b1fb5d6fd469234ed5f0a2ea03d1cc99a5718f6",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-explicit-16-06-baseline-6.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-explicit-16-06-refactor-6.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "c5a28dc88bdddd40f40ba4731847b6795dee795f5f5e8991f52c4ee2e6622ce5",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-explicit-16-06-refactor-6.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-explicit-16-07-baseline-7.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "b453a4f1f358517d9f80c5d9e2a3bee3b19521c9df1a4a7a691fce9fba332635",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-explicit-16-07-baseline-7.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-explicit-16-07-refactor-7.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "f1b1df679f5dd7ea58dfa74c0c764ea33504e5a2fa1053dae5360b882cea01ff",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-explicit-16-07-refactor-7.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-06-baseline-6.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "f04eccde54f8dd313328514fb330b54b67d1a9e620d560fb8543ea0a6f881ec9",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-06-baseline-6.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-06-refactor-6.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "f6101f4543d1512b731860c72d9c4a2c177b41f03de5e43824bd1d653af91dc8",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-06-refactor-6.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-07-baseline-7.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "62bb295a5e04d3fc3c7754e73e6996d638c8e97015c6c13b7f9810542f510b06",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-07-baseline-7.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-07-refactor-7.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ca05a613eb4a020136d55155f68b485a1a4a235fefd2595aab3054fffc344928",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-07-refactor-7.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-08-baseline-8.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "e9a2b5537f60a624673ed28df62bd8b0e5e9f8573742d87b2a48cbb38897e184",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-08-baseline-8.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-08-refactor-8.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "2c4416f72768ebb5fde698be0f9276f44d361bb917473c91e45d58c9146a5cb9",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-08-refactor-8.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-09-baseline-9.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "83a53177ab9a8a2f3a9a961564458d348838dc02b578eccc742a440d867d8921",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-09-baseline-9.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-09-refactor-9.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "55dc226ba9783811725eb73bc4b1801ef9b9404d37b7e02a4b3908e988bfba94",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-controls-kind-16-09-refactor-9.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-01-baseline-1.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "90f49c882b0ef329d441244d492dd3215e986939f568e5ff1d97375074badd0e",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-01-baseline-1.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-01-refactor-1.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "c73075a919212752bdcb26a11243367d6ec3592827deee657252d2e8ce8a5d1f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-01-refactor-1.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-02-baseline-2.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "99f6b708be1a186be1b26d98683a81a7d342a34a04e8e46876a51390e5af7ad5",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-02-baseline-2.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-02-refactor-2.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "6239d37b237cc5ced262a6758b245039d1cb611b8b045b42e13f4093c02af8f6",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-02-refactor-2.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-03-baseline-3.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "42ac8711750b5f38bedb9c6612c3ae6e1f4e395f091ee44e7fa621f4935b349d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-03-baseline-3.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-03-refactor-3.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "66f6321f490992b7e20f5cad23dba209c27120dccbe1f946ca115eedff58d8fa",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-03-refactor-3.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-04-baseline-4.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "cd8d66db2f619b04409cfad915e607fa39a035ffa5a4d53d7f17e8810a92e9d8",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-04-baseline-4.stdout.jsonl",
+      "bytes": 322
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-04-refactor-4.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "9022112a5f3bf2bdc7f7d6ed5c20c2eab7638d8d25e8bd234f892373c18e0e30",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-04-refactor-4.stdout.jsonl",
+      "bytes": 322
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-05-baseline-5.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "55557f23e3e0788f56fe1d3349c20e798c35676adbd9626378a3a84cf37b6dee",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-05-baseline-5.stdout.jsonl",
+      "bytes": 322
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-05-refactor-5.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "4f88b50f4b8bf9d473e5c707de3801a0ccb041986397692b67593ef3dde772de",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-08-05-refactor-5.stdout.jsonl",
+      "bytes": 322
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-01-baseline-1.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ba34a599f0dcc2d48ed5cbb8579023ea49b25af346dee619e15986150539d785",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-01-baseline-1.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-01-refactor-1.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "cbf4867f6f069b345ae7fc832fdcab79332935066d96f77ca48381f867143c73",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-01-refactor-1.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-02-baseline-2.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "919be1f06317009c78144ce0773986dc45d45b28c0ef49c28832777ccff4fefc",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-02-baseline-2.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-02-refactor-2.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "c6cfa633b878e12a5d4d0e5c356c539b0ec3b31d3aaa9c36f26054d43e155d84",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-02-refactor-2.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-03-baseline-3.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "0a732234654fefa379a4b26641e81f82143433dbf928d95dfcaebbf66ece13ec",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-03-baseline-3.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-03-refactor-3.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "574b9a7d3711fffd0ab6967e249de6c7b501181a02723fa147f49dd6ce15cd3c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-03-refactor-3.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-04-baseline-4.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "87a7fd87a276ec6bdffd26a7b205d37300b6d1ddd48df9a750314e822f71ffed",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-04-baseline-4.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-04-refactor-4.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "6f0a0221235392874f2679e5551e0f321cc871e3f75c3dfc8ad95a2be6959eec",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-04-refactor-4.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-05-baseline-5.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "4ea9a610ae50860071b942da7d930e8cdcda9af1b7e99c9c6e2b9c165ca1f5fc",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-05-baseline-5.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-05-refactor-5.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "40cc49a9d3644b6f0264799a83c28332e88bd03a9aee915ad7aeda8a3b7be34a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-16-05-refactor-5.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "94d3c261509c40c2c2a82ea983e4f5d6befa6b29bfc771d4317dbbf4bb539e51",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-00-baseline-0.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "42a801e9df2184af2563edf2179f3fe730547f355faf25b4e51b92a99ad28bba",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-00-refactor-0.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-01-baseline-1.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "f790ff0f967635d382094e6477d27f5d0dadcfdf014383c8c1e4450680b32540",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-01-baseline-1.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-01-refactor-1.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "50df70214e99d09ac297b5dad6f0aa9f4957824a63d99ae062851a34d99d48a0",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-01-refactor-1.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-02-baseline-2.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "480e654027885ee041dcb53fef6cd1008245eedf4a134e44d5517baa180bc61d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-02-baseline-2.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-02-refactor-2.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "9ff4b19aa487862f3988591d8ed9cb9ac4968b072c97f60e2c4e0e4cba14c6cf",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-02-refactor-2.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-03-baseline-3.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "2065be31e37231ac63372a101a0026a7809f9686ea1be850076a151530e8da5c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-03-baseline-3.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-03-refactor-3.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "c16ca0674adf02d6405ebad42a8309b68a42d4dd596db2015a488924622b1d5f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-03-refactor-3.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-04-baseline-4.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "18942fcbaa394e258d05cd13f09a59db3a7802442b0214f4a3353e35935bc9e8",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-04-baseline-4.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-04-refactor-4.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "6c8ca8d92957d1e26204e851b464f0aca148a718149037aec25dcfa643189efe",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-04-refactor-4.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-05-baseline-5.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "219556bd28fac02cbddae6718af3877541796aab5f83232c1339fa0b57f5c089",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-05-baseline-5.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-05-refactor-5.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "53243b5e90b76da9c3a080b3d2532734438940c0c3bcd2e61ac10b8f65d24086",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-explicit-31-05-refactor-5.stdout.jsonl",
+      "bytes": 324
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-01-baseline-1.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "0cc080c7b5af0135c548d068ae41cd23055dc9b7f78a5a5e66b7b383122132ff",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-01-baseline-1.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-01-refactor-1.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "89964bb20b8eba735f130c11525ae53c14ac79c6bf79e832c83c03928264d078",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-01-refactor-1.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-02-baseline-2.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "44d15e7448dd67b66ba9e2b655800131a632f56edcbaac1a025be49b3ba88000",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-02-baseline-2.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-02-refactor-2.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ff9ab346a8bf90774797654f6a54f98fdee9d8dd43c6eddae75c530780add285",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-02-refactor-2.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-03-baseline-3.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "23f9841f1281fc36d9fde71180744c937fd4af707b6cd5c5256a0fe85d9f79ab",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-03-baseline-3.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-03-refactor-3.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "8ec0aa020d773d7f30ee1389feffa3e06270740e780dfc83c787728c65e88414",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-03-refactor-3.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-04-baseline-4.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "e570377f65b6929a0118acb32e26797aaabca62fd4e46a3f54659393fd134bb1",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-04-baseline-4.stdout.jsonl",
+      "bytes": 314
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-04-refactor-4.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "c24f0b5119fff62c37f7ff7e96d9a2636b1da7fca5ab6710e9b8a89bbf385266",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-04-refactor-4.stdout.jsonl",
+      "bytes": 314
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-05-baseline-5.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "4c936694b8e956ffd58165c39068deda47594a8ee0a4a2f9b35720e1efacb552",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-05-baseline-5.stdout.jsonl",
+      "bytes": 314
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-05-refactor-5.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "fd557770605999e2742ab142c7570f178e18631ef3283cc07df14464042285f1",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-08-05-refactor-5.stdout.jsonl",
+      "bytes": 314
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-01-baseline-1.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "954910901dae74cf665f5e17316b80b6442a59d395cda9d3046803bc1205fcfe",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-01-baseline-1.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-01-refactor-1.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "d24660e0347d5667110f6cb0be4f2f5ea7ed603dd4b6923f2fca7ae20371e863",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-01-refactor-1.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-02-baseline-2.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "a08d01f4a00823c93de2a77f727bed598ced2e7e44ae3b0de8fff9772e435273",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-02-baseline-2.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-02-refactor-2.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ac95ecbd3b132eb320dbaba339a99104975cde66ccc5b3cf3aa01ef04a8b6253",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-02-refactor-2.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-03-baseline-3.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "1f3b760d0a88b8915ef3a3d32ac561be995fa770a1fa92daf963369e689add5e",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-03-baseline-3.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-03-refactor-3.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "080d301b326c2fef436508559ff6d29b7bd5549ffed7f4b1cd7b83fecc046127",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-03-refactor-3.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-04-baseline-4.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "4691239643f12569ceada1a6627be57f1fad28bee38ce382234c13781f95b2f3",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-04-baseline-4.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-04-refactor-4.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "26d51908da00fed8ed1e9ab7af1264cb977f1daa5e7ab8809dcf9f40ee6e5751",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-04-refactor-4.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-05-baseline-5.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "d0005167d7cb99bdaaa53b0a151549b236f57308fecaf9812df90f12ee7343e9",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-05-baseline-5.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-05-refactor-5.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "5b5239ae7fc599fc22495d20c44c1485ea7dc4f41c6504ed1c21edc03bb48c4c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-16-05-refactor-5.stdout.jsonl",
+      "bytes": 315
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "4b7da8eb11592cae3fbfb5d6184e5350fce9200654ff8e59e9f25ead504ba71b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-00-baseline-0.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "19ae5fca94ebe80fda71ed0c63f6f473c9f8cc24dc2b032d476300fd73afac60",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-00-refactor-0.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-01-baseline-1.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "2512dad055b54c93253f0cdeb042f8ec9dfcb5ba6b6de567748d950bc4e1750d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-01-baseline-1.stdout.jsonl",
+      "bytes": 317
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-01-refactor-1.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "f18388130103fd2356a88e339f2fb641217907f8c3f2b24ad82603358a19f21b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-01-refactor-1.stdout.jsonl",
+      "bytes": 317
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-02-baseline-2.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "8b6d32d7ecf2a97bc98d6f4ee44e117323ef078ef9ea52fd7c6daa2288dab00f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-02-baseline-2.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-02-refactor-2.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "0f1829a37885b5bbce41b1fd31dfef91daa9f41ae85b92d8b681304b61d7aff7",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-02-refactor-2.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-03-baseline-3.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "7b2739804bea22220cad317625516d0ac4f3c2fca1e5cb0f5ec8d15f18b5dd86",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-03-baseline-3.stdout.jsonl",
+      "bytes": 317
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-03-refactor-3.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "312bd6e761361253166432b7f351b62d422b3002963c12a131fba4b9f10f7035",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-03-refactor-3.stdout.jsonl",
+      "bytes": 317
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-04-baseline-4.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "ad245549b3f3f1460b1896ab6db6a21de48e647dfc8e9d218d5f56130dad0481",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-04-baseline-4.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-04-refactor-4.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "b445af823979dede39169750a8e9c923034193590848e670b4c6e0a75d0a6269",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-04-refactor-4.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-05-baseline-5.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "04b751f1a8dc6a5adf9ef69a70fa8b31ffbf74643211d794c6f2156180c8285e",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-05-baseline-5.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-05-refactor-5.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "be7530686df22a29672f2f0b48ce2f02f0947075aacb24b1265323bf8e700f32",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-pristine-kind-31-05-refactor-5.stdout.jsonl",
+      "bytes": 316
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-replaced-explicit-08-00-baseline-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "aa96c0f03409e09337c5f0c3555ead9d6efb6a19c889d6f8cbe723444118925a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-replaced-explicit-08-00-baseline-0.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-replaced-explicit-08-00-refactor-0.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "2c2fe42f886ec50e727ed1494f4e06da65da34c2f7d7ff903b699b216cfc589c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\populate-replaced-explicit-08-00-refactor-0.stdout.jsonl",
+      "bytes": 323
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\resources-pristine-explicit-08-00-baseline-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "804c52c2ab30e304d4662499d10e2f0978f14aee32704679189548fc21a93cdd",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\resources-pristine-explicit-08-00-baseline-on.stdout.jsonl",
+      "bytes": 698319
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\resources-pristine-explicit-08-00-refactor-on.stderr.txt",
+      "bytes": 0
+    },
+    {
+      "sha256": "fd80239c7ed7ca312af3013f24fc0f70a24664eb98044212baaad330a7a8b1d6",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\raw\\resources-pristine-explicit-08-00-refactor-on.stdout.jsonl",
+      "bytes": 667895
+    },
+    {
+      "sha256": "81bcc968459fd2fc595c53b24a7094ba6294fbfb17a46fc1512ac5630300e4d9",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\README.md",
+      "bytes": 23328
+    },
+    {
+      "sha256": "33d8053c627bcc9c689050143621fba7af4bdacd49d24b937f344a8c71686430",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\replace_diagnostic.py",
+      "bytes": 4862
+    },
+    {
+      "sha256": "5559f34a00bba3f95eb0f2a7e076f9acacf3496c30d11e31da5be64b20cdc199",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\replaced-byte-parity.json",
+      "bytes": 29233
+    },
+    {
+      "sha256": "c2f92cb3874a4d4cb2b3a509f02bf4d1a3386b95f6ee9ca25010818ed5d6cbbb",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\replaced-measurements.jsonl",
+      "bytes": 2631
+    },
+    {
+      "sha256": "46bc4b34fbec3af1b08927e274a4425050f6096d3cea42aac44894e105a8217f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\replaced-population.jsonl",
+      "bytes": 1672
+    },
+    {
+      "sha256": "38ba23df0a8f558996c737680f2efaa83a89296530e8f4734688a2e610541b69",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\replacement-environment.json",
+      "bytes": 1461
+    },
+    {
+      "sha256": "02eff514c6cc4d8718444460341ab05bbf84422dc9c9334ca6e1cb90d3495d88",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\replacement-quiescent-start.json",
+      "bytes": 477
+    },
+    {
+      "sha256": "a78b72e5e5a735497387e7d09e968943df208b0dfa53a84ff29aa4627500f55c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\resource-measurements.jsonl",
+      "bytes": 1515175
+    },
+    {
+      "sha256": "aab5555b7194ff78cb4271ead99a30d8053b89762eb32f65bc0d84336db2160d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\resource-summary.json",
+      "bytes": 19627
+    },
+    {
+      "sha256": "9db323bae4430877c2de724ae1f8995f4af14bd9b1550726ef0c09b182051296",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\resource-tables.md",
+      "bytes": 1237
+    },
+    {
+      "sha256": "c4f36980ab13352216fe8a9c189e83138c9212d05a6d6a092a7821600caef9d2",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\retain_build.py",
+      "bytes": 874
+    },
+    {
+      "sha256": "5fd5473edb797f4bdfc97e3890daeebfad869b9f1ae3325854d105562a99d5d8",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\retain_profile.py",
+      "bytes": 1618
+    },
+    {
+      "sha256": "bb232129a386cb88439164f449055e938eae48db374d30b07957338edabbb3d5",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\run_pairs.py",
+      "bytes": 7312
+    },
+    {
+      "sha256": "d6275396f8e2e7307bffe768c2fea67bf2af01fbe482b9b7f5789d4c0dae91e8",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\run_resources.py",
+      "bytes": 1103
+    },
+    {
+      "sha256": "cc4a4e4fed4f8523a7648b74bb7c08ffee5b531b8e5361a20eb5f3a155cc527f",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\sampler-revision.json",
+      "bytes": 1379
+    },
+    {
+      "sha256": "086e5718c9e507a81e2187e9213426157bfcd2e029ac27633570e76882f004de",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\snapshot_source.py",
+      "bytes": 1280
+    },
+    {
+      "sha256": "fa0cdf5a18a165c8ab5dd2c75bfa94355de80a1685797e6c5a9883cd89a8ca6d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\source-snapshot-refactor.json",
+      "bytes": 1843
+    },
+    {
+      "sha256": "e29cd49c7069258ada88af15c350b48771dd2da2058c7e0ac5b5532a8cd1485a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\summarize_memory.py",
+      "bytes": 3045
+    },
+    {
+      "sha256": "f2b8cdf52b8ae2e7c5e16283e0debdba1f5f451ca39dc0c6c6a3af8eb57e1c1d",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\summarize_resources.py",
+      "bytes": 6846
+    },
+    {
+      "sha256": "2e88217be230dc36a3358a14b0fbafa8dd5f4959e22c6ef0f99d6c847f849f34",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\summarize.py",
+      "bytes": 9969
+    },
+    {
+      "sha256": "1df337da7b75f6be2f4f2b3bad5212baf92094fd4e81a97798857299bbde912b",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\summary.json",
+      "bytes": 3836469
+    },
+    {
+      "sha256": "4f8566584f1f4af608947ddc67e597ecff36c165617566b21cc3950da94c16cb",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\tests-baseline-red-full.txt",
+      "bytes": 5559
+    },
+    {
+      "sha256": "4e91a7d734d5e1f3fac6ec8f70bc4b7d504cb6d690133387adbc7a7775754d4c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\tests-baseline-red.txt",
+      "bytes": 2217
+    },
+    {
+      "sha256": "42c673fb4f20e24142c2c7578bcbb1a5be49922664389c74189973ba30989cb9",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\tests-engine-units.txt",
+      "bytes": 602
+    },
+    {
+      "sha256": "0e1d2154c47d4c04717df59b17fb3431381a68051fe0673b449695615e1c3c4e",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\tests-sdk-final-targets.txt",
+      "bytes": 4765
+    },
+    {
+      "sha256": "7fc10f7c96de8b54f761d4cc42c4ad8cecaa49aa19daabd0c67c8568da890363",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\tests-sdk-initial.txt",
+      "bytes": 2077
+    },
+    {
+      "sha256": "3d2b187fddc60753a7dd12b060af9a916af4afa6a9096544e7feb71c050c3a3e",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\tests-sdk-kind-mutation.txt",
+      "bytes": 484
+    },
+    {
+      "sha256": "a913684c2a53ec60aa284ec4cbd2bca6340d4513b78c169f891b7ad0b7256c27",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\tests-sdk-kind-race.txt",
+      "bytes": 1000
+    },
+    {
+      "sha256": "a394201e106f0f0146992ecb81dc653e75101a9e7fdb75fc58eaa3c315f882e5",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\tests-sdk-remaining.txt",
+      "bytes": 1831
+    },
+    {
+      "sha256": "ef951c63253e54402b1cfdbea22884e8be1d5274bc98ec654791f93cbaaa4fd0",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\tests-sdk.txt",
+      "bytes": 3314
+    },
+    {
+      "sha256": "b476647d95dbe675f8809e63a9ecf72a78133962ae236d6d9040009178df86a7",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\timing-window-end.json",
+      "bytes": 325
+    },
+    {
+      "sha256": "1215f6c8863e4c5df1e05f9493480afd5c4be747920b6ebaf80c81e4bec2e88c",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\timing-window-start.json",
+      "bytes": 599
+    },
+    {
+      "sha256": "4dc4b24309ba3963fbf293bcc5c91449623e103f61daeba5a644f07aa2fc465a",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\verification.md",
+      "bytes": 11083
+    },
+    {
+      "sha256": "a2a22972aa23eb4d2d3cf4d155d79e9866fa0dd647328b1b62519e6215c8c6a9",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\verified-measurement-sources-v2.json",
+      "bytes": 3152
+    },
+    {
+      "sha256": "7ba20228decc615cd249bab2956f2e3454338431cc7c53c9dcdce58c85e6b276",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\verified-measurement-sources.json",
+      "bytes": 3261
+    },
+    {
+      "sha256": "41046faa49df459aa89168544cf15ba8f2288a2c6aa828a6602a28485d091701",
+      "path": "docs/research/work-registration-phase-refactor-2026-10-11\\verify_sources.py",
+      "bytes": 1885
+    },
+    {
+      "sha256": "d7ea46c75018ad3aa9ebdfdc49b9f8c3390e9560afa4d34fd1d9f8853cf57333",
+      "path": "docs/specs/handbook-contract-membrane/coverage-and-landing-map.md",
+      "bytes": 87658
+    },
+    {
+      "sha256": "0696e1e0b011405aa3e8dc367cf7a1823c86cd0d701aa48c9e2b4e5ab20cb7f2",
+      "path": "docs/specs/handbook-contract-membrane/phase-and-slice-map.md",
+      "bytes": 53027
+    },
+    {
+      "sha256": "90e686f6115b0a27cf0c0c9a8c53ed1a8987ccb649a6baa0400400155db42c3b",
+      "path": "docs/specs/handbook-contract-membrane/README.md",
+      "bytes": 34162
+    },
+    {
+      "sha256": "cc79738ff5119cb71b935da48271a5928f4a58f066340a519ef45e9c1a9d3fb8",
+      "path": "docs/specs/handbook-contract-membrane/review-and-closeout-policy.md",
+      "bytes": 9975
+    },
+    {
+      "sha256": "aebbbf7a72ade68581f40960765f705cb31642e0e0a0fee6974ae8f4892f055b",
+      "path": "docs/specs/handbook-contract-membrane/slices/work-item-state-foundation/packet-1.md",
+      "bytes": 34910
+    },
+    {
+      "sha256": "91cac9a737343b67582abdc666216f40d2c6d312d6d4b8aea84ae255d68f3dce",
+      "path": "docs/specs/handbook-contract-membrane/slices/work-registration-phase-refactor/README.md",
+      "bytes": 40216
+    },
+    {
+      "sha256": "48f4c4fbaaed3bbe5a65f9405d4aa68e32f924860f4e65252cf6aa092ff1b481",
+      "path": "docs/specs/handbook-contract-membrane/structured-data-format-standard.md",
+      "bytes": 11051
+    },
+    {
+      "sha256": "d3b06641b2cffee296fded06d0fbd0b0faef34a2c5ad207e8954006ac529d6f8",
+      "path": "docs/specs/handbook-contract-membrane/task-session-prompt.md",
+      "bytes": 12341
+    },
+    {
+      "sha256": "9c65fa06bf16af32eed89d48f0c0a261669a16ceb8c37bf8bc53cb31e16075ce",
+      "path": "docs/specs/handbook-contract-membrane/work-unit-lifecycle.md",
+      "bytes": 17690
+    }
+  ],
+  "branch": "feat/handbook-contract-membrane-clean",
+  "head": "b08ea31a7f33c1e194d04b18fdf2353259e9a067",
+  "product_phase_refactor": "83fc8b6ac005a02ee4a1f5aa607dca2b654c47b0",
+  "date": "2026-10-12"
+}

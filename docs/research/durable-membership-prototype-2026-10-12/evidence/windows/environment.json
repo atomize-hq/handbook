@@ -1,0 +1,89 @@
+{
+  "arguments": {
+    "binary": "docs/research/durable-membership-prototype-2026-10-12/target/release/membership-prototype.exe",
+    "output": "docs/research/durable-membership-prototype-2026-10-12/evidence/windows",
+    "samples": 30,
+    "sections": "measure,concurrency,faults,validation",
+    "seed": 20261012,
+    "sizes": "1000,10000,100000",
+    "timeout": 180,
+    "variants": "chunk,disk",
+    "work": "docs/research/durable-membership-prototype-2026-10-12/runs/windows-final"
+  },
+  "binary": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\durable-membership-prototype-2026-10-12\\target\\release\\membership-prototype.exe",
+  "binary_sha256": "959eabfe2cdc2d422d57e40d161d052565df105187fccadca9713be4a3f5ec2a",
+  "cache_control": "No OS cache eviction. Fresh processes reopen; OS cache is uncontrolled and usually warmed by initialization/prior samples.",
+  "cargo": {
+    "command": [
+      "cargo",
+      "-V"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "cargo 1.89.0 (c24e10642 2025-06-23)"
+  },
+  "disk_usage_before": {
+    "free": 284484993024,
+    "total": 1999478190080,
+    "used": 1714993197056
+  },
+  "fault_model": "Injected IO/flush failures and exit(86) checkpoints; external process termination during preparation. These preserve OS cache and are not hardware power loss or a persistence simulator.",
+  "format": "durable-membership-experiment-environment-v1",
+  "logical_cpus": 24,
+  "machine": "AMD64",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "release": "10",
+  "rustc": {
+    "command": [
+      "rustc",
+      "-Vv"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-pc-windows-msvc\nrelease: 1.89.0\nLLVM version: 20.1.7"
+  },
+  "seed": 20261012,
+  "source_sha256_at_run_start": {
+    "Cargo.lock": "fd8e90a18ab7183997650bb6e9122370eecd39991c3753404183f878f88101bf",
+    "Cargo.toml": "f3fe793f7b564fde3a02eb2963af24e550ae6c7c005936bd691f80f137003b97",
+    "scripts\\run.py": "06de33a35f41588a524fa2862267629643c554a46e2278d06a46abe8311e4204",
+    "scripts\\summarize.py": "73fd19751529582b6285f65756ecb76043198981cea9e104cd60cc9bbbeb7d6f",
+    "src\\chunk.rs": "4ed38342cf88d8fedafaeecd0dd6b5eaca28f7bac7e12e644ef4c02e7764a18b",
+    "src\\disk.rs": "55971c15d5692a3112561892612f76702e59e4b58981b7016a9d2b7b381d1200",
+    "src\\main.rs": "1ed8e9cd48b17e29e726143f4ee23706d6a026a265c24b80edcd5a29bf7ddc67"
+  },
+  "storage": {
+    "command": [
+      "powershell",
+      "-NoProfile",
+      "-Command",
+      "Get-PhysicalDisk | Select-Object FriendlyName,MediaType,BusType,Size | ConvertTo-Json -Compress"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "[{\"FriendlyName\":\"T-FORCE TM8FP7002T\",\"MediaType\":\"SSD\",\"BusType\":\"NVMe\",\"Size\":2000398934016},{\"FriendlyName\":\"ST6000NM0044\",\"MediaType\":\"HDD\",\"BusType\":\"SATA\",\"Size\":6001175126016}]"
+  },
+  "system": "Windows",
+  "unmeasured": [
+    "physical IO",
+    "OS syscall counts",
+    "allocation counts",
+    "power-cut durability"
+  ],
+  "utc_started": "2026-10-12T16:58:13Z",
+  "version": "10.0.26200",
+  "volume": {
+    "command": [
+      "powershell",
+      "-NoProfile",
+      "-Command",
+      "Get-Volume -DriveLetter 'C' | Select-Object DriveLetter,FileSystem,FileSystemLabel,DriveType,AllocationUnitSize | ConvertTo-Json -Compress"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"DriveLetter\":\"C\",\"FileSystem\":\"NTFS\",\"FileSystemLabel\":\"\",\"DriveType\":\"Fixed\",\"AllocationUnitSize\":4096}"
+  },
+  "work": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\durable-membership-prototype-2026-10-12\\runs\\windows-final"
+}
