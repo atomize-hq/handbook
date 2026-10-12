@@ -13,7 +13,7 @@ use std::sync::{Arc, Mutex};
 
 const CHUNK: usize = 64;
 const FORMAT: &str = "chunkmap64-v1";
-const MAX_OBJECT_BYTES: usize = 128 * 1024;
+const MAX_OBJECT_BYTES: usize = crate::MAX_OBJECT;
 const MAX_KEY_BYTES: usize = 1024;
 const MAX_VALUE_BYTES: usize = 1024;
 const MAX_DEPTH: usize = 64;

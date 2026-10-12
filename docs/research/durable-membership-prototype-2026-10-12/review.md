@@ -1,5 +1,10 @@
 # Independent causal review
 
+This records the predecessor's review at `c7f54e63`. Follow-up transaction code
+and evidence have a separate causal review in
+[transaction-comparison.md](transaction-comparison.md); this verdict is not reused
+as approval of that changed subject.
+
 One independent read-only reviewer inspected the bounded experiment, native raw
 evidence, source/reuse accounting and causal comparison. Initial verdict was
 BLOCKED on two P2 publication sequencing defects; no other P1/P2 finding was made.

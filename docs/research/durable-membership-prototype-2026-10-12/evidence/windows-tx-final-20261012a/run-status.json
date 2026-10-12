@@ -1,0 +1,25 @@
+{
+  "baseline_selected": false,
+  "complete": false,
+  "evidence_run_id": "windows-tx-final-20261012a",
+  "failures": 4,
+  "full_harness_complete": false,
+  "observations": 6,
+  "passes": 2442,
+  "sections": [
+    "selected",
+    "api",
+    "domain",
+    "snapshots",
+    "semantics",
+    "tx-faults",
+    "concurrency",
+    "faults",
+    "validation"
+  ],
+  "skips": 0,
+  "variants": [
+    "chunk",
+    "disk"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "complete": true,
+  "failures": 0,
+  "full_harness_complete": false,
+  "observations": 0,
+  "passes": 116,
+  "sections": [
+    "review-publication-repair"
+  ],
+  "skips": 0,
+  "variants": [
+    "chunk",
+    "disk"
+  ]
+}

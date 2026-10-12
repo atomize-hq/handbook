@@ -1,5 +1,10 @@
 # Evidence and verification provenance
 
+This page records **predecessor** runs. Current transaction-source run IDs,
+native binaries, selected regression reproductions and final qualification are
+reported separately in [transaction-comparison.md](transaction-comparison.md).
+All raw predecessor files retain their original hashes/version meaning.
+
 All results are from the isolated experiment; none qualifies Handbook production
 behavior. Main raw responses/assertions are retained losslessly as
 `samples.jsonl.gz` / `checks.jsonl.gz`. `scripts/pack_evidence.py` uses deterministic

@@ -10,7 +10,8 @@ use std::collections::HashSet;
 
 const LEAF_CAPACITY: usize = 64;
 const FANOUT: usize = 32;
-const MAX_OBJECT_BYTES: usize = 128 * 1024;
+const MAX_OBJECT_BYTES: usize = crate::MAX_OBJECT;
+const MAX_BATCH_PAIRS: usize = 256;
 const MAX_KEY_BYTES: usize = 1024;
 const MAX_VALUE_BYTES: usize = 1024;
 const MAX_HEIGHT: u8 = 63; // A root-to-leaf path has at most 64 objects.
@@ -126,7 +127,7 @@ fn read_node(store: &mut Objects, id: &str, expected: Option<&Bounds>) -> Result
     }
     let bytes = store.read(id)?;
     if bytes.len() > MAX_OBJECT_BYTES {
-        return Err("disk node exceeds 128 KiB".into());
+        return Err("disk node exceeds common object byte limit".into());
     }
     // from_slice consumes exactly one JSON document. Derive rejects duplicate
     // named fields; tests below also cover duplicate tag/field and trailing data.
@@ -142,7 +143,7 @@ fn write_node(store: &mut Objects, node: Node) -> Result<Written> {
     let b = bounds(&node)?;
     let bytes = serde_json::to_vec(&node)?;
     if bytes.len() > MAX_OBJECT_BYTES {
-        return Err("disk node exceeds 128 KiB".into());
+        return Err("disk node exceeds common object byte limit".into());
     }
     let id = store.write(&bytes)?;
     Ok(Written {
@@ -195,7 +196,7 @@ fn write_leaves(store: &mut Objects, pairs: Vec<(String, Vec<u8>)>) -> Result<Ve
         }
     }
     // Bulk input can exceed two pages even when every individual pair is valid.
-    // Runtime changed leaves are at most one old page plus one bounded pair.
+    // Runtime batches may combine one old page with up to 256 bounded pairs.
     let split = pairs.len() / 2;
     if split == 0 {
         return Err("disk pair cannot fit within page limits".into());
@@ -317,6 +318,116 @@ fn put_path(
             write_branch(store, height, children)
         }
     }
+}
+
+// All updates are sorted, unique and validated before entering this traversal.
+// Routing uses the original children's maxima, so disjoint subsets can be
+// applied independently and then combined into one final parent write. Objects
+// are still installed by the common protocol while its writer lock is held.
+fn put_batch_path(
+    store: &mut Objects,
+    id: &str,
+    expected: Option<&Bounds>,
+    updates: &[(String, Vec<u8>)],
+    depth: usize,
+) -> Result<Vec<Written>> {
+    if depth >= usize::from(MAX_HEIGHT) + 1 {
+        return Err("disk batch update path exceeds depth limit".into());
+    }
+    let node = read_node(store, id, expected)?;
+    let original = bounds(&node)?;
+    let unchanged = Written {
+        child: Child {
+            id: id.to_owned(),
+            min: original.min,
+            max: original.max,
+        },
+        height: original.height,
+    };
+    match node {
+        Node::Leaf { mut pairs } => {
+            let mut changed = false;
+            for (key, value) in updates {
+                match pairs.binary_search_by(|(existing, _)| existing.cmp(key)) {
+                    Ok(position) if pairs[position].1 == *value => {}
+                    Ok(position) => {
+                        pairs[position].1 = value.clone();
+                        changed = true;
+                    }
+                    Err(position) => {
+                        pairs.insert(position, (key.clone(), value.clone()));
+                        changed = true;
+                    }
+                }
+            }
+            if changed {
+                write_leaves(store, pairs)
+            } else {
+                Ok(vec![unchanged])
+            }
+        }
+        Node::Branch { height, children } => {
+            let mut final_children = Vec::with_capacity(children.len());
+            let mut offset = 0;
+            let mut changed = false;
+            for (position, child) in children.iter().enumerate() {
+                let end = if position + 1 == children.len() {
+                    updates.len()
+                } else {
+                    offset + updates[offset..].partition_point(|(key, _)| key <= &child.max)
+                };
+                if end == offset {
+                    final_children.push(child.clone());
+                    continue;
+                }
+                let replacement = put_batch_path(
+                    store,
+                    &child.id,
+                    Some(&expected_child(child, height - 1)),
+                    &updates[offset..end],
+                    depth + 1,
+                )?;
+                changed |= replacement.len() != 1 || replacement[0].child.id != child.id;
+                final_children.extend(replacement.into_iter().map(|entry| entry.child));
+                offset = end;
+            }
+            if changed {
+                write_branch(store, height, final_children)
+            } else {
+                Ok(vec![unchanged])
+            }
+        }
+    }
+}
+
+// A bounded update can split several sibling paths at once. Build only final
+// upper levels, balancing groups to avoid a one-child branch (33 => 17 + 16).
+fn finish_batch_root(store: &mut Objects, mut pages: Vec<Written>) -> Result<Id> {
+    while pages.len() > 1 {
+        let height = pages[0]
+            .height
+            .checked_add(1)
+            .ok_or("disk batch height overflow")?;
+        if height > MAX_HEIGHT {
+            return Err("disk batch exceeds height limit".into());
+        }
+        let groups = pages.len().div_ceil(FANOUT);
+        let width = pages.len() / groups;
+        let extra = pages.len() % groups;
+        let mut next = Vec::with_capacity(groups);
+        let mut offset = 0;
+        for group in 0..groups {
+            let count = width + usize::from(group < extra);
+            let children = pages[offset..offset + count]
+                .iter()
+                .map(|page| page.child.clone())
+                .collect();
+            next.extend(write_branch(store, height, children)?);
+            offset += count;
+        }
+        pages = next;
+    }
+    Ok(pages.remove(0).child.id)
 }
 
 impl DiskIndex {
@@ -442,6 +553,38 @@ impl DiskIndex {
             }
         };
         // On any error above the previous root remains selected by this index.
+        self.root = Some(root);
+        Ok(())
+    }
+
+    /// Apply at most 256 unique buffered updates as one immutable proposal.
+    /// Each affected old path is traversed once and each final changed node is
+    /// written once, including any required splits. The common owner must still
+    /// validate/publish this root under its native lock. Error leaves this index's
+    /// root unchanged, but installed unreachable objects may remain (no GC).
+    pub fn put_batch(
+        &mut self,
+        store: &mut Objects,
+        mut pairs: Vec<(String, Vec<u8>)>,
+    ) -> Result<()> {
+        if pairs.len() > MAX_BATCH_PAIRS {
+            return Err("disk batch exceeds 256 pair bound".into());
+        }
+        for (key, value) in &pairs {
+            validate_pair(key, value)?;
+        }
+        pairs.sort_unstable_by(|a, b| a.0.cmp(&b.0));
+        if pairs.windows(2).any(|pair| pair[0].0 == pair[1].0) {
+            return Err("duplicate disk batch key; resolve in application buffer".into());
+        }
+        if pairs.is_empty() {
+            return Ok(());
+        }
+        let pages = match &self.root {
+            Some(id) => put_batch_path(store, id, None, &pairs, 0)?,
+            None => write_leaves(store, pairs)?,
+        };
+        let root = finish_batch_root(store, pages)?;
         self.root = Some(root);
         Ok(())
     }
@@ -631,5 +774,196 @@ mod tests {
             .put(&mut store, "b".into(), vec![0; MAX_VALUE_BYTES + 1])
             .is_err());
         assert_eq!(before, tree.persist(&mut store).unwrap());
+    }
+
+    // Grouped batches exercise the adapter's proposal atomicity. Publishing ROOT
+    // and process locking belong to the common transaction harness.
+    #[test]
+    fn batch_model_reopen_and_stable_snapshot() {
+        let mut store = store();
+        let mut tree = DiskIndex::bulk(&mut store, vec![]).unwrap();
+        let mut model = BTreeMap::new();
+        let mut seed = 19u64;
+        for round in 0..80u64 {
+            let mut batch = BTreeMap::new();
+            for j in 0..64u64 {
+                seed = seed.wrapping_mul(6364136223846793005).wrapping_add(1);
+                batch.insert(format!("k{:05}", seed % 4096), vec![round as u8, j as u8]);
+            }
+            let mut old_snapshot = tree.clone();
+            let old_model = model.clone();
+            // Deliberately reverse input: the adapter owns sorting, while
+            // duplicate keys must already have been resolved by the overlay.
+            tree.put_batch(&mut store, batch.clone().into_iter().rev().collect())
+                .unwrap();
+            for (key, value) in batch {
+                assert_eq!(
+                    old_snapshot.get(&mut store, &key).unwrap(),
+                    old_model.get(&key).cloned()
+                );
+                assert_eq!(tree.get(&mut store, &key).unwrap(), Some(value.clone()));
+                model.insert(key, value);
+            }
+            if round % 10 == 0 {
+                let root = tree.persist(&mut store).unwrap();
+                tree = DiskIndex::open(&mut store, root).unwrap();
+                assert_eq!(tree.audit(&mut store).unwrap(), model.len());
+            }
+        }
+        for (key, value) in &model {
+            assert_eq!(tree.get(&mut store, key).unwrap(), Some(value.clone()));
+        }
+        let before = tree.persist(&mut store).unwrap();
+        store.metrics = crate::Metrics::default();
+        tree.put_batch(
+            &mut store,
+            model
+                .iter()
+                .take(256)
+                .map(|(k, v)| (k.clone(), v.clone()))
+                .collect(),
+        )
+        .unwrap();
+        tree.put_batch(&mut store, vec![]).unwrap();
+        assert_eq!(before, tree.persist(&mut store).unwrap());
+        assert_eq!(store.metrics.nodes_written, 0);
+    }
+
+    #[test]
+    fn batch_coalesces_shared_paths_against_sequential_put() {
+        let initial: Vec<_> = (0..4096)
+            .map(|i| (format!("k{i:05}"), vec![0; 96]))
+            .collect();
+        let updates: Vec<_> = (0..64).map(|i| (format!("k{i:05}"), vec![1; 96])).collect();
+        let mut batch_store = store();
+        let mut sequential_store = store();
+        let mut batched = DiskIndex::bulk(&mut batch_store, initial.clone()).unwrap();
+        let mut sequential = DiskIndex::bulk(&mut sequential_store, initial).unwrap();
+        batch_store.metrics = crate::Metrics::default();
+        sequential_store.metrics = crate::Metrics::default();
+        batched
+            .put_batch(&mut batch_store, updates.clone())
+            .unwrap();
+        for (key, value) in &updates {
+            sequential
+                .put(&mut sequential_store, key.clone(), value.clone())
+                .unwrap();
+        }
+        assert_eq!(
+            batched.persist(&mut batch_store).unwrap(),
+            sequential.persist(&mut sequential_store).unwrap()
+        );
+        assert_eq!(batch_store.metrics.nodes_written, 3);
+        assert_eq!(sequential_store.metrics.nodes_written, 64 * 3);
+        assert!(batch_store.metrics.bytes_written < sequential_store.metrics.bytes_written);
+        eprintln!(
+            "disk batch64 vs sequential64: nodes {}/{}, bytes {}/{}",
+            batch_store.metrics.nodes_written,
+            sequential_store.metrics.nodes_written,
+            batch_store.metrics.bytes_written,
+            sequential_store.metrics.bytes_written
+        );
+        assert_eq!(batched.audit(&mut batch_store).unwrap(), 4096);
+    }
+
+    #[test]
+    fn batch_splits_leaf_branch_and_root_then_reopens() {
+        let mut store = store();
+        let initial: Vec<_> = (0..2048)
+            .map(|i| (format!("k{:06}", i * 2), vec![0]))
+            .collect();
+        let mut tree = DiskIndex::bulk(&mut store, initial).unwrap();
+        let mut snapshot = tree.clone();
+        // Eight insertions in each of 32 full leaves expand the full root.
+        let updates: Vec<_> = (0..32)
+            .flat_map(|leaf| {
+                (0..8).map(move |j| (format!("k{:06}", leaf * 128 + j * 2 + 1), vec![255; 1024]))
+            })
+            .collect();
+        tree.put_batch(&mut store, updates.clone()).unwrap();
+        let root = tree.persist(&mut store).unwrap();
+        tree = DiskIndex::open(&mut store, root).unwrap();
+        assert_eq!(tree.audit(&mut store).unwrap(), 2304);
+        assert_eq!(snapshot.audit(&mut store).unwrap(), 2048);
+        for (key, value) in updates {
+            assert_eq!(snapshot.get(&mut store, &key).unwrap(), None);
+            assert_eq!(tree.get(&mut store, &key).unwrap(), Some(value));
+        }
+    }
+
+    #[test]
+    fn batch_maximal_json_expansion_reopens_and_preserves_snapshot() {
+        let mut store = store();
+        let initial: Vec<_> = (0..64)
+            .map(|i| (format!("{i:04}{}", "\u{0001}".repeat(1020)), vec![0]))
+            .collect();
+        let mut tree = DiskIndex::bulk(&mut store, initial.clone()).unwrap();
+        let mut snapshot = tree.clone();
+        let updates: Vec<_> = initial
+            .into_iter()
+            .rev()
+            .map(|(k, _)| (k, vec![255; 1024]))
+            .collect();
+        tree.put_batch(&mut store, updates.clone()).unwrap();
+        let root = tree.persist(&mut store).unwrap();
+        tree = DiskIndex::open(&mut store, root).unwrap();
+        assert_eq!(tree.audit(&mut store).unwrap(), 64);
+        for (key, value) in updates {
+            assert_eq!(key.len(), MAX_KEY_BYTES);
+            assert_eq!(tree.get(&mut store, &key).unwrap(), Some(value));
+            assert_eq!(snapshot.get(&mut store, &key).unwrap(), Some(vec![0]));
+        }
+    }
+
+    #[test]
+    fn batch_rejects_invalid_duplicate_and_oversized_input_without_writes() {
+        let mut store = store();
+        let mut tree = DiskIndex::bulk(&mut store, vec![("a".into(), vec![1])]).unwrap();
+        let root = tree.persist(&mut store).unwrap();
+        store.metrics = crate::Metrics::default();
+        for batch in [
+            vec![("a".into(), vec![2]), ("b".into(), vec![0; 1025])],
+            vec![("a".into(), vec![2]), ("a".into(), vec![3])],
+            (0..257).map(|i| (format!("k{i}"), vec![1])).collect(),
+        ] {
+            assert!(tree.put_batch(&mut store, batch).is_err());
+            assert_eq!(tree.persist(&mut store).unwrap(), root);
+            assert_eq!(tree.get(&mut store, "a").unwrap(), Some(vec![1]));
+        }
+        assert_eq!(store.metrics.nodes_written, 0);
+    }
+
+    #[test]
+    fn batch_write_failure_keeps_original_root_with_unreachable_proposal() {
+        let mut store = store();
+        let initial: Vec<_> = (0..128).map(|i| (format!("k{i:05}"), vec![0])).collect();
+        let mut tree = DiskIndex::bulk(&mut store, initial.clone()).unwrap();
+        let root = tree.persist(&mut store).unwrap();
+        let mut right = initial[64..].to_vec();
+        right[0].1 = vec![9];
+        let bytes = serde_json::to_vec(&Node::Leaf { pairs: right }).unwrap();
+        let mut frame = crate::MAGIC.to_vec();
+        frame.extend_from_slice(&(bytes.len() as u32).to_le_bytes());
+        frame.extend_from_slice(&bytes);
+        let failed_id = crate::hash(&frame);
+        let shard = store.base.join("objects").join(&failed_id[..2]);
+        std::fs::create_dir_all(&shard).unwrap();
+        // create_new for the second changed leaf must fail, after the first leaf
+        // has installed an object. No environment-global fault races are needed.
+        let collision = shard.join(format!("stage-{}-{}", std::process::id(), store.serial + 2));
+        std::fs::write(&collision, b"preexisting stage").unwrap();
+        store.metrics = crate::Metrics::default();
+        assert!(tree
+            .put_batch(
+                &mut store,
+                vec![("k00000".into(), vec![8]), ("k00064".into(), vec![9])]
+            )
+            .is_err());
+        assert_eq!(store.metrics.nodes_written, 1);
+        assert_eq!(tree.persist(&mut store).unwrap(), root);
+        let mut reopened = DiskIndex::open(&mut store, root).unwrap();
+        assert_eq!(reopened.audit(&mut store).unwrap(), 128);
+        assert_eq!(reopened.get(&mut store, "k00000").unwrap(), Some(vec![0]));
+        assert_eq!(reopened.get(&mut store, "k00064").unwrap(), Some(vec![0]));
     }
 }

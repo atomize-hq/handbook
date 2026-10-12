@@ -1,0 +1,314 @@
+{
+  "archive_sha256": "39bf0518aa6636bdbcdbecb62642ef00d4f5505d211b20e686edbe885d5025b7",
+  "archive_bytes": 14063,
+  "files": {
+    "src/db.rs": {
+      "url": "https://raw.githubusercontent.com/surrealdb/echodb/17b41ae82f3deba4b7d3034b0c2206a688c29f35/src/db.rs",
+      "raw_sha256": "29984e7c5191370b9a8e1ce6a8d9149c01960b711d5a038b68d2e34828c4a2bc",
+      "raw_bytes": 6866,
+      "packaged_sha256": "29984e7c5191370b9a8e1ce6a8d9149c01960b711d5a038b68d2e34828c4a2bc",
+      "packaged_bytes": 6866,
+      "equal": true,
+      "lines": 252
+    },
+    "src/tx.rs": {
+      "url": "https://raw.githubusercontent.com/surrealdb/echodb/17b41ae82f3deba4b7d3034b0c2206a688c29f35/src/tx.rs",
+      "raw_sha256": "5d5cdf5d73f3198ebde7f3026ecc8ce69cba34d7f816253795386a279997bed1",
+      "raw_bytes": 7588,
+      "packaged_sha256": "5d5cdf5d73f3198ebde7f3026ecc8ce69cba34d7f816253795386a279997bed1",
+      "packaged_bytes": 7588,
+      "equal": true,
+      "lines": 304
+    },
+    "src/err.rs": {
+      "url": "https://raw.githubusercontent.com/surrealdb/echodb/17b41ae82f3deba4b7d3034b0c2206a688c29f35/src/err.rs",
+      "raw_sha256": "e2ccada423a09ffaf706232c233bd73a971618fd931c4790c274cbecebf7c7cb",
+      "raw_bytes": 1050,
+      "packaged_sha256": "e2ccada423a09ffaf706232c233bd73a971618fd931c4790c274cbecebf7c7cb",
+      "packaged_bytes": 1050,
+      "equal": true,
+      "lines": 36
+    },
+    "Cargo.toml": {
+      "url": "https://raw.githubusercontent.com/surrealdb/echodb/17b41ae82f3deba4b7d3034b0c2206a688c29f35/Cargo.toml",
+      "raw_sha256": "526a38c1427f318f44ec4a48e205f6a64c8417dd239ef1094c662355095496f3",
+      "raw_bytes": 732,
+      "packaged_sha256": "e87e2547b15027010904bd0dd4e29d286742857144549129933f801b65672159",
+      "packaged_bytes": 1447,
+      "equal": false,
+      "lines": 28
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/surrealdb/echodb/17b41ae82f3deba4b7d3034b0c2206a688c29f35/LICENSE",
+      "raw_sha256": "2165441a9b0e6246a670d9e6219b3f47acd6443afe55a5931288795ecfeb4629",
+      "raw_bytes": 11341,
+      "packaged_sha256": "2165441a9b0e6246a670d9e6219b3f47acd6443afe55a5931288795ecfeb4629",
+      "packaged_bytes": 11341,
+      "equal": true,
+      "lines": 201
+    },
+    "src/lib.rs": {
+      "url": "https://raw.githubusercontent.com/surrealdb/echodb/17b41ae82f3deba4b7d3034b0c2206a688c29f35/src/lib.rs",
+      "raw_sha256": "76b244eeb778ee5d650643f965bf7b35b7a5d915635c40d065c372a1969d1cdd",
+      "raw_bytes": 793,
+      "packaged_sha256": "76b244eeb778ee5d650643f965bf7b35b7a5d915635c40d065c372a1969d1cdd",
+      "packaged_bytes": 793,
+      "equal": true,
+      "lines": 29
+    },
+    "src/kv.rs": {
+      "url": "https://raw.githubusercontent.com/surrealdb/echodb/17b41ae82f3deba4b7d3034b0c2206a688c29f35/src/kv.rs",
+      "raw_sha256": "060a9726954259411a4431ea6864b3ace4235cd44cfc65406d8405d330d710c9",
+      "raw_bytes": 638,
+      "packaged_sha256": "060a9726954259411a4431ea6864b3ace4235cd44cfc65406d8405d330d710c9",
+      "packaged_bytes": 638,
+      "equal": true,
+      "lines": 17
+    }
+  },
+  "vcs_info": {
+    "git": {
+      "sha1": "17b41ae82f3deba4b7d3034b0c2206a688c29f35"
+    },
+    "path_in_vcs": ""
+  },
+  "package_notice_files": [
+    "echodb-0.8.0/LICENSE"
+  ],
+  "cargo_toml_orig_sha256": "526a38c1427f318f44ec4a48e205f6a64c8417dd239ef1094c662355095496f3",
+  "cargo_toml_orig_equals_pinned": true,
+  "vcs_info_sha256": "7fd0668290a15ca32d8165d815c1fda8a5647ed3b473b0093d2fc95ad968bb5a",
+  "upstream_line_counts": {
+    "src/db.rs": {
+      "total": {
+        "physical": 252,
+        "code": 201,
+        "comment_only": 35,
+        "blank": 16
+      },
+      "outside_test_section": {
+        "physical": 68,
+        "code": 43,
+        "comment_only": 19,
+        "blank": 6
+      },
+      "test_section": {
+        "physical": 184,
+        "code": 158,
+        "comment_only": 16,
+        "blank": 10
+      },
+      "test_start_line": 69
+    },
+    "src/err.rs": {
+      "total": {
+        "physical": 36,
+        "code": 14,
+        "comment_only": 15,
+        "blank": 7
+      },
+      "outside_test_section": {
+        "physical": 36,
+        "code": 14,
+        "comment_only": 15,
+        "blank": 7
+      },
+      "test_section": {
+        "physical": 0,
+        "code": 0,
+        "comment_only": 0,
+        "blank": 0
+      },
+      "test_start_line": null
+    },
+    "src/kv.rs": {
+      "total": {
+        "physical": 17,
+        "code": 2,
+        "comment_only": 13,
+        "blank": 2
+      },
+      "outside_test_section": {
+        "physical": 0,
+        "code": 0,
+        "comment_only": 0,
+        "blank": 0
+      },
+      "test_section": {
+        "physical": 17,
+        "code": 2,
+        "comment_only": 13,
+        "blank": 2
+      },
+      "test_start_line": 1
+    },
+    "src/lib.rs": {
+      "total": {
+        "physical": 29,
+        "code": 12,
+        "comment_only": 13,
+        "blank": 4
+      },
+      "outside_test_section": {
+        "physical": 29,
+        "code": 12,
+        "comment_only": 13,
+        "blank": 4
+      },
+      "test_section": {
+        "physical": 0,
+        "code": 0,
+        "comment_only": 0,
+        "blank": 0
+      },
+      "test_start_line": null
+    },
+    "src/tx.rs": {
+      "total": {
+        "physical": 304,
+        "code": 209,
+        "comment_only": 79,
+        "blank": 16
+      },
+      "outside_test_section": {
+        "physical": 304,
+        "code": 209,
+        "comment_only": 79,
+        "blank": 16
+      },
+      "test_section": {
+        "physical": 0,
+        "code": 0,
+        "comment_only": 0,
+        "blank": 0
+      },
+      "test_start_line": null
+    }
+  },
+  "local_source_snapshot": {
+    "src/transaction.rs": {
+      "sha256": "8e9bfddb832fa0be198dba794b9a0ee1035da8b3a4f33231ed593220ed6ab13d",
+      "bytes": 14838,
+      "line_counts": {
+        "total": {
+          "physical": 402,
+          "code": 365,
+          "comment_only": 17,
+          "blank": 20
+        },
+        "outside_test_section": {
+          "physical": 280,
+          "code": 248,
+          "comment_only": 16,
+          "blank": 16
+        },
+        "test_section": {
+          "physical": 122,
+          "code": 117,
+          "comment_only": 1,
+          "blank": 4
+        },
+        "test_start_line": 281
+      },
+      "unit_test_declarations": 3
+    },
+    "src/main.rs": {
+      "sha256": "6281c170c5f4d083627a2a8ac894438dfdf4ef74af853532dd60b4a5914143b8",
+      "bytes": 35255,
+      "line_counts": {
+        "total": {
+          "physical": 1021,
+          "code": 976,
+          "comment_only": 21,
+          "blank": 24
+        },
+        "outside_test_section": {
+          "physical": 1021,
+          "code": 976,
+          "comment_only": 21,
+          "blank": 24
+        },
+        "test_section": {
+          "physical": 0,
+          "code": 0,
+          "comment_only": 0,
+          "blank": 0
+        },
+        "test_start_line": null
+      },
+      "unit_test_declarations": 0
+    },
+    "src/chunk.rs": {
+      "sha256": "2fcf8c7f25598985a9d0129779a9558d0e0b225c6201fd3261bc770d52565650",
+      "bytes": 18573,
+      "line_counts": {
+        "total": {
+          "physical": 534,
+          "code": 487,
+          "comment_only": 24,
+          "blank": 23
+        },
+        "outside_test_section": {
+          "physical": 345,
+          "code": 304,
+          "comment_only": 23,
+          "blank": 18
+        },
+        "test_section": {
+          "physical": 189,
+          "code": 183,
+          "comment_only": 1,
+          "blank": 5
+        },
+        "test_start_line": 346
+      },
+      "unit_test_declarations": 4
+    },
+    "src/disk.rs": {
+      "sha256": "c8661a21f87ec20a6e7979f1e04bb721da59ab1eeb4707f18914e74ebb03f944",
+      "bytes": 37107,
+      "line_counts": {
+        "total": {
+          "physical": 969,
+          "code": 882,
+          "comment_only": 49,
+          "blank": 38
+        },
+        "outside_test_section": {
+          "physical": 637,
+          "code": 570,
+          "comment_only": 41,
+          "blank": 26
+        },
+        "test_section": {
+          "physical": 332,
+          "code": 312,
+          "comment_only": 8,
+          "blank": 12
+        },
+        "test_start_line": 638
+      },
+      "unit_test_declarations": 11
+    }
+  },
+  "schema": "handbook-experimental-source-provenance-v1",
+  "component": "EchoDB",
+  "version": "0.8.0",
+  "revision": "17b41ae82f3deba4b7d3034b0c2206a688c29f35",
+  "inspected_date": "2026-10-12",
+  "captured_utc": "2026-10-12T18:56:14.647266+00:00",
+  "archive_url": "https://crates.io/api/v1/crates/echodb/0.8.0/download",
+  "source_reuse": {
+    "copied_source_lines": 0,
+    "adapted_source_lines": 0,
+    "echo_dependency": false,
+    "classification": "interface/lifecycle/test-pattern inspiration; new application implementation"
+  },
+  "copyright_notice": "Copyright © SurrealDB Ltd",
+  "notice_scope": "The downloaded package contains LICENSE and source-header copyright/license notices; no separate NOTICE/COPYING file was present.",
+  "line_count_method": "UTF-8 splitlines; code means nonblank lines not beginning with // after leading whitespace. Inline comments remain code. Only a cfg(test) mod tests section is counted as an inline test section; upstream kv.rs is wholly test-only via lib.rs.",
+  "local_source_snapshot_captured_utc": "2026-10-12T19:04:47.095579+00:00",
+  "local_source_snapshot_stage": "final frozen code after causal P2 terminal replay/read-only guard repair",
+  "handbook_failure_semantics": "Each commit attempt clears publication_possible. A failed attempt returns typed CommitFailure with Publication::NotPublished or Publication::Indeterminate. The CLI reads this typed result; prior attempts cannot contaminate this attempt classification. Earlier successful publication remains real and cannot be canceled.",
+  "handbook_replay_guard_semantics": "CLI read_only modifier applies only to generic tx. Terminal request replay retains coordinated publication repair through a writable transaction. The API rejects read-only commit with replay=true as typed NotPublished; normal read-only commit closes with Unchanged."
+}

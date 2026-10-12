@@ -1,0 +1,20 @@
+{
+  "candidate_binary_sha256": {
+    "Linux": "c24a65aeb7f670314e5a79d520cc58fc246f09150c01dd6a17eb0451d379bef6",
+    "Windows": "43ee032cab106677c51f25467c8513ae897c616754132ddee5171152b315c997"
+  },
+  "candidate_environment_references": [
+    "../windows-tx-final-20261012c/environment.json",
+    "../linux-tx-final-20261012b/environment.json"
+  ],
+  "format": "durable-membership-replay-candidate-source-v1",
+  "provenance": "Reconstructed after repair by reversing only the replay dispatch condition, read-only replay guard and associated test block. Every byte hash exactly matches both original candidate run manifests. Unchanged adapters/Cargo files match too. This is the superseded reviewed candidate, not final source or approval.",
+  "source_sha256": {
+    "Cargo.lock": "fd8e90a18ab7183997650bb6e9122370eecd39991c3753404183f878f88101bf",
+    "Cargo.toml": "f3fe793f7b564fde3a02eb2963af24e550ae6c7c005936bd691f80f137003b97",
+    "src/chunk.rs": "2fcf8c7f25598985a9d0129779a9558d0e0b225c6201fd3261bc770d52565650",
+    "src/disk.rs": "c8661a21f87ec20a6e7979f1e04bb721da59ab1eeb4707f18914e74ebb03f944",
+    "src/main.rs": "f629dfa0c7016bf0b7d8216bac4aa24ada2e97018b9fce1aa433a319b320455d",
+    "src/transaction.rs": "a8340f8da27752b95abc6a12ceafed598ff1626e6816349872fe92c7995f547d"
+  }
+}

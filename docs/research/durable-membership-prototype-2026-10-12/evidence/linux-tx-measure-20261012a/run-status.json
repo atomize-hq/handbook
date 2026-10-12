@@ -1,0 +1,21 @@
+{
+  "cohort_trials": 3,
+  "complete": true,
+  "evidence_run_id": "linux-tx-measure-evidence-20261012a",
+  "failures": 0,
+  "full_harness_complete": false,
+  "observations": 1488,
+  "passes": 6870,
+  "samples": 30,
+  "sizes": [
+    1000,
+    10000,
+    100000
+  ],
+  "skips": 0,
+  "summary_groups": 96,
+  "variants": [
+    "chunk",
+    "disk"
+  ]
+}

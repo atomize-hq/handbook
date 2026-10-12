@@ -1,0 +1,25 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.09s
+     Running unittests src/main.rs (target/debug/deps/membership_prototype-07e3cc5af814ea66)
+
+running 18 tests
+test disk::tests::invalid_bulk_and_bounds_do_not_replace_root ... ok
+test disk::tests::batch_rejects_invalid_duplicate_and_oversized_input_without_writes ... ok
+test disk::tests::selected_path_and_audit_reject_false_bounds ... ok
+test disk::tests::batch_write_failure_keeps_original_root_with_unreachable_proposal ... ok
+test chunk::tests::rejects_unbalanced_subtree_and_bad_input_without_mutation ... ok
+test disk::tests::reject_closed_schema_duplicates_order_and_trailing_data ... ok
+test chunk::tests::rejects_malformed_shapes_order_bounds_heights_and_missing_nodes ... ok
+test chunk::tests::randomized_model_roundtrips_and_snapshot_mutation ... ok
+test transaction::tests::reused_store_reports_this_attempts_prepublication_failure ... ok
+test transaction::tests::snapshot_overlay_atomic_commit_and_closed_lifecycle ... ok
+test transaction::tests::explicit_root_conflict_cancel_drop_and_input_failure_preserve_membership ... ok
+test chunk::tests::incremental_codec_reuses_pinned_nodes_and_retains_old_root ... ok
+test disk::tests::batch_splits_leaf_branch_and_root_then_reopens ... ok
+test disk::tests::batch_coalesces_shared_paths_against_sequential_put ... ok
+test disk::tests::batch_maximal_json_expansion_reopens_and_preserves_snapshot ... ok
+test disk::tests::bulk_multiple_levels_and_byte_splits ... ok
+test disk::tests::batch_model_reopen_and_stable_snapshot ... ok
+test disk::tests::model_random_updates_reopen_and_snapshot ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 11.83s
+

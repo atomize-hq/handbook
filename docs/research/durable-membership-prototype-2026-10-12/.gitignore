@@ -5,3 +5,4 @@ __pycache__/
 /evidence/*/samples.jsonl
 /evidence/*/checks.jsonl
 /evidence/summary/summary.json
+/evidence/*/summary.json

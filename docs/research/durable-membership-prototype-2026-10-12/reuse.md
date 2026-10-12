@@ -56,7 +56,7 @@ Reopening eagerly reads and reconstructs **every** selected-root node before
 lookup; warm `get` performs no object reads. The constructor is unsafe, so all
 descendants, strict key ordering, complete subtree bounds, pair counts, height,
 size and relaxed balance (height difference at most **two**) are validated before
-each call. JSON objects reject unknown and repeated fields, use at most 128 KiB
+each call. JSON objects reject unknown and repeated fields, use at most 1 MiB
 per node, have at most 64 pairs, and obey depth 64 / eager-node budget 1,000,000.
 Keys and values are bounded separately. These are experimental contracts.
 

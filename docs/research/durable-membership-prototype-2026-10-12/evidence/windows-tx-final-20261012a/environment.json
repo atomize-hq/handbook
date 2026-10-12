@@ -1,0 +1,96 @@
+{
+  "arguments": {
+    "baseline_selected": false,
+    "binary": "docs/research/durable-membership-prototype-2026-10-12/target/release/membership-prototype.exe",
+    "output": "docs/research/durable-membership-prototype-2026-10-12/evidence/windows-tx-final-20261012a",
+    "sections": "selected,api,domain,snapshots,semantics,tx-faults,concurrency,faults,validation",
+    "seed": 20261012,
+    "timeout": 180,
+    "variants": "chunk,disk",
+    "work": "C:/Users/spmcc/AppData/Local/Temp/membership-tx-final-20261012a"
+  },
+  "binary": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\durable-membership-prototype-2026-10-12\\target\\release\\membership-prototype.exe",
+  "binary_sha256": "94e2d614f3bf0abb0ba6aff669dac3c867c8b3e07755e602e84a2ee3fb79e574",
+  "cache_control": "No OS cache eviction. Fresh processes reopen; OS cache is uncontrolled and usually warmed by initialization/prior samples.",
+  "cargo": {
+    "command": [
+      "cargo",
+      "-V"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "cargo 1.89.0 (c24e10642 2025-06-23)"
+  },
+  "disk_usage_before": {
+    "free": 278664118272,
+    "total": 1999478190080,
+    "used": 1720814071808
+  },
+  "evidence_run_id": "windows-tx-final-20261012a",
+  "experiment": "final-source shared transaction interface native checks",
+  "fault_model": "Injected IO/flush failures and exit(86) checkpoints; external process termination during preparation. These preserve OS cache and are not hardware power loss or a persistence simulator.",
+  "format": "durable-membership-experiment-environment-v1",
+  "logical_cpus": 24,
+  "machine": "AMD64",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "processor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "release": "10",
+  "rustc": {
+    "command": [
+      "rustc",
+      "-Vv"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-pc-windows-msvc\nrelease: 1.89.0\nLLVM version: 20.1.7"
+  },
+  "seed": 20261012,
+  "source_sha256_at_run_start": {
+    "Cargo.lock": "fd8e90a18ab7183997650bb6e9122370eecd39991c3753404183f878f88101bf",
+    "Cargo.toml": "f3fe793f7b564fde3a02eb2963af24e550ae6c7c005936bd691f80f137003b97",
+    "scripts\\agent_growth.py": "6b7c6fa3bc87ce0f4123eea5db2373e0b0abfc6fe99d045b241806b90105c598",
+    "scripts\\pack_evidence.py": "0488cb94cf41a52aca3937090256d519bcbb855f21cf1fd0dc3539c5370bdd77",
+    "scripts\\review_regression.py": "ced32ecf301d6ff6519a3192c7a487ee4121a4492a744f2e858f9e03a80161cd",
+    "scripts\\run.py": "94d42fc4dc9a0e0cf5cf67732d21bef6c94051270437c7a4edc4bb318bb0966f",
+    "scripts\\summarize.py": "b73b0b90617b09979ad9104151bbf75c37597498fda91a30beedafca4e90d59b",
+    "scripts\\transaction_measure.py": "bebd697d25e165298f3b67bb0db1426e3a15d935f15507109293cc4d12d43b58",
+    "scripts\\transaction_tests.py": "9dd41239474afada16bb7b3b06c613e2ab26d818f805ea265ba69f275316c492",
+    "src\\chunk.rs": "2fcf8c7f25598985a9d0129779a9558d0e0b225c6201fd3261bc770d52565650",
+    "src\\disk.rs": "c8661a21f87ec20a6e7979f1e04bb721da59ab1eeb4707f18914e74ebb03f944",
+    "src\\main.rs": "78e77dc40cb304715d2b7cf233465c5acf45f94b00087b44a1d51b6313969afe",
+    "src\\transaction.rs": "eae851a2d2d109ce4ee1ee72bc375bc7a87dd0688c0b1892ab1cc5b2f9ccd85f"
+  },
+  "storage": {
+    "command": [
+      "powershell",
+      "-NoProfile",
+      "-Command",
+      "Get-PhysicalDisk | Select-Object FriendlyName,MediaType,BusType,Size | ConvertTo-Json -Compress"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "[{\"FriendlyName\":\"T-FORCE TM8FP7002T\",\"MediaType\":\"SSD\",\"BusType\":\"NVMe\",\"Size\":2000398934016},{\"FriendlyName\":\"ST6000NM0044\",\"MediaType\":\"HDD\",\"BusType\":\"SATA\",\"Size\":6001175126016}]"
+  },
+  "system": "Windows",
+  "unmeasured": [
+    "physical IO",
+    "OS syscall counts",
+    "allocation counts",
+    "power-cut durability"
+  ],
+  "utc_started": "2026-10-12T18:53:02Z",
+  "version": "10.0.26200",
+  "volume": {
+    "command": [
+      "powershell",
+      "-NoProfile",
+      "-Command",
+      "Get-Volume -DriveLetter 'C' | Select-Object DriveLetter,FileSystem,FileSystemLabel,DriveType,AllocationUnitSize | ConvertTo-Json -Compress"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\"DriveLetter\":\"C\",\"FileSystem\":\"NTFS\",\"FileSystemLabel\":\"\",\"DriveType\":\"Fixed\",\"AllocationUnitSize\":4096}"
+  },
+  "work": "C:\\Users\\spmcc\\AppData\\Local\\Temp\\membership-tx-final-20261012a"
+}

@@ -1,6 +1,7 @@
 //! Non-production experiment. See ../contract.md for the tested threat bounds.
 mod chunk;
 mod disk;
+mod transaction;
 
 use fs2::FileExt;
 use serde::{Deserialize, Serialize};
@@ -16,7 +17,9 @@ use std::{
 
 pub type Id = String;
 pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
-const MAX_OBJECT: usize = 128 * 1024;
+// 64 maximal escaped keys and byte-array values fit below 657 KiB. Both
+// adapters use this same bound; node capacity/key/value domains are unchanged.
+const MAX_OBJECT: usize = 1024 * 1024;
 const MAGIC: &[u8] = b"HMP1";
 
 #[derive(Default, Serialize)]
@@ -40,6 +43,9 @@ pub struct Metrics {
     reused_objects: u64,
     name_boundaries: u64,
     replay_repairs: u64,
+    preparation_ns: u64,
+    buffered_pairs: u64,
+    logical_bytes: u64,
 }
 
 fn hash(bytes: &[u8]) -> Id {
@@ -168,6 +174,9 @@ pub struct Objects {
     guard_list: bool,
     dirty_dirs: BTreeSet<PathBuf>,
     serial: u64,
+    // Conservative classification: set immediately before attempting replacement.
+    // Errors from that point cannot establish nonpublication or permit rollback.
+    publication_possible: bool,
 }
 
 impl Objects {
@@ -185,6 +194,7 @@ impl Objects {
             guard_list: false,
             dirty_dirs: BTreeSet::new(),
             serial: 0,
+            publication_possible: false,
         })
     }
     fn guard(&mut self, path: &Path) -> Result<()> {
@@ -411,6 +421,7 @@ fn publish(o: &mut Objects, root: &Root, expected: Option<&Id>) -> Result<Id> {
     } else if o.base.join("ROOT").exists() {
         return Err("initial root already exists".into());
     }
+    o.publication_possible = true;
     replace(&stage, &o.base.join("ROOT"), expected.is_some())?;
     checkpoint("root_replace")?;
     sync_publication(o)?;
@@ -475,6 +486,31 @@ impl Index {
             Self::Disk(x) => x.persist(o),
         }
     }
+    fn put_batch(
+        &mut self,
+        o: &mut Objects,
+        pairs: Vec<(String, Vec<u8>)>,
+        coalesce: bool,
+    ) -> Result<()> {
+        if coalesce {
+            match self {
+                Self::Disk(x) => return x.put_batch(o, pairs),
+                Self::Chunk(_) => {
+                    for (k, v) in pairs {
+                        self.put(o, k, v)?;
+                    }
+                    return Ok(());
+                }
+            }
+        }
+        // Comparable final-source intermediate-persistence baseline. Only the
+        // final root is published. All intermediate objects remain under no GC.
+        for (k, v) in pairs {
+            self.put(o, k, v)?;
+            self.persist(o)?;
+        }
+        Ok(())
+    }
     fn audit(&mut self, o: &mut Objects) -> Result<usize> {
         match self {
             Self::Chunk(x) => x.audit(o),
@@ -505,7 +541,7 @@ struct Authority {
     scope: bool,
 }
 fn get_json<T: serde::de::DeserializeOwned>(
-    idx: &mut Index,
+    idx: &mut transaction::Transaction,
     o: &mut Objects,
     k: &str,
 ) -> Result<Option<T>> {
@@ -514,7 +550,11 @@ fn get_json<T: serde::de::DeserializeOwned>(
         .transpose()
 }
 
-fn apply_request(idx: &mut Index, o: &mut Objects, c: &Value) -> Result<(Value, bool)> {
+fn apply_request(
+    idx: &mut transaction::Transaction,
+    o: &mut Objects,
+    c: &Value,
+) -> Result<(Value, bool)> {
     let req = Request {
         request: field(c, "request")?,
         item: field(c, "item")?,
@@ -587,8 +627,8 @@ fn apply_request(idx: &mut Index, o: &mut Objects, c: &Value) -> Result<(Value, 
         state: state.into(),
         outcome: outcome.clone(),
     };
-    idx.put(o, key, serde_json::to_vec(&rec)?)?;
-    idx.put(o, item_key, serde_json::to_vec(&req.request)?)?;
+    idx.put(key, serde_json::to_vec(&rec)?)?;
+    idx.put(item_key, serde_json::to_vec(&req.request)?)?;
     Ok((
         json!({"status":match state {"terminal"=>"committed","attempted"=>"uncertain",x=>x},"outcome":outcome}),
         true,
@@ -672,16 +712,15 @@ fn execute(o: &mut Objects, v: &str, c: &Value) -> Result<Value> {
         o.metrics.lock_hold_ns = held.elapsed().as_nanos() as u64;
         return Ok(json!({"status":"initialized","seq":0,"n":n}));
     }
-    let marker = o.read_record(&o.base.join("OWNER"), 256)?;
-    if marker != owner.as_bytes() {
-        return Err("native root identity changed".into());
-    }
+    let db = transaction::Database::open(o, v)?;
     let opening = Instant::now();
-    let (mut root, mut expected) = load_root(o, v, &owner)?;
-    if root.lock != lock_id {
-        return Err("native established lock identity changed".into());
-    }
-    let mut idx = Index::open(o, v, root.node.clone())?;
+    let mut tx = db.begin(
+        o,
+        !["lookup", "hold", "snapshot", "audit"].contains(&op)
+            && !(op == "tx" && c["read_only"] == true),
+    )?;
+    let root = tx.root.clone();
+    let idx = &mut tx.index;
     let open_ns = opening.elapsed().as_nanos() as u64;
     if ["lookup", "hold", "snapshot", "audit"].contains(&op) {
         if op == "snapshot" {
@@ -699,12 +738,26 @@ fn execute(o: &mut Objects, v: &str, c: &Value) -> Result<Value> {
                 if !plain(&shard.path())?.is_dir() {
                     return Err("invalid object namespace entry".into());
                 }
+                let shard_name = shard.file_name().to_string_lossy().to_string();
+                if shard_name.len() != 2
+                    || !shard_name
+                        .bytes()
+                        .all(|x| x.is_ascii_digit() || (b'a'..=b'f').contains(&x))
+                {
+                    return Err("invalid object shard name".into());
+                }
                 o.metrics.lists += 1;
                 for entry in fs::read_dir(shard.path())? {
                     let entry = entry?;
                     o.metrics.listed_entries += 1;
                     let id = entry.file_name().to_string_lossy().to_string();
+                    if !plain(&entry.path())?.is_file() {
+                        return Err("invalid object namespace file".into());
+                    }
                     if valid_id(&id) {
+                        if &id[..2] != shard_name || entry.path() != o.path(&id)? {
+                            return Err("object shard/name correspondence mismatch".into());
+                        }
                         o.read(&id)?;
                         objects += 1;
                     } else if !id.starts_with("stage-") {
@@ -742,47 +795,96 @@ fn execute(o: &mut Objects, v: &str, c: &Value) -> Result<Value> {
             json!({"values":values,"seq":root.seq,"core_ns":core.elapsed().as_nanos() as u64,"open_ns":open_ns,"repeat":repeats}),
         );
     }
-    if !["run", "authority", "put"].contains(&op) {
+    if !["run", "authority", "put", "tx"].contains(&op) {
         return Err("unknown command".into());
     }
-    // Preparation snapshot retained without the writer lock, including eager A cost.
-    ready(c)?;
-    let wait = Instant::now();
-    lock.lock_exclusive()?;
-    o.metrics.lock_wait_ns = wait.elapsed().as_nanos() as u64;
-    let held = Instant::now();
-    // Native root and lock must still refer to the retained objects under coordination.
-    o.guard(&o.base.clone())?;
-    if identity(&directory(&o.base)?)? != owner || identity(&File::open(&lock_path)?)? != lock_id {
-        return Err("native root/lock identity changed".into());
+    // Actual reads/checks/serialization/buffer construction precede ready.
+    // Explicit revalidation of this pure CLI command is outside the lock.
+    let mut attempts = 0u64;
+    loop {
+        let preparing = Instant::now();
+        let mut result = prepare(&mut tx, o, c)?;
+        let (pairs, bytes) = tx.buffered();
+        if o.instrument {
+            o.metrics.preparation_ns += preparing.elapsed().as_nanos() as u64;
+            o.metrics.buffered_pairs += pairs;
+            o.metrics.logical_bytes += bytes;
+        }
+        if attempts == 0 {
+            ready(c)?;
+        }
+        if op == "tx" {
+            if let Some(keys) = c["after_keys"].as_array() {
+                if keys.len() > 4096 {
+                    return Err("after_keys limit".into());
+                }
+                for key in keys {
+                    let value = tx.get(o, key.as_str().ok_or("after key required")?)?;
+                    result["values"].as_array_mut().unwrap().push(json!(
+                        value.map(|x| String::from_utf8_lossy(&x).into_owned())
+                    ));
+                }
+            }
+            if result["status"] == "cancelled" {
+                return Ok(result);
+            }
+            match c["end"].as_str().unwrap_or("commit") {
+                "cancel" => {
+                    tx.cancel()?;
+                    result["status"] = json!("cancelled");
+                    return Ok(result);
+                }
+                "drop" => {
+                    result["status"] = json!("dropped");
+                    return Ok(result);
+                }
+                "commit" => {}
+                _ => return Err("unknown transaction end".into()),
+            }
+        }
+        let replay = result["status"] == "replay";
+        match tx.commit(&db, o, c["coalesce"].as_bool().unwrap_or(true), replay)? {
+            transaction::Commit::Conflict(seq) => {
+                if op == "tx" || c["retry"].as_bool() == Some(false) || attempts >= 64 {
+                    result["status"] = json!("conflict");
+                    result["seq"] = json!(seq);
+                    result["publication"] = json!("not_published");
+                    return Ok(result);
+                }
+                attempts += 1;
+                tx = db.begin(o, true)?;
+            }
+            transaction::Commit::Published(seq) | transaction::Commit::Unchanged(seq) => {
+                result["seq"] = json!(seq);
+                result["revalidations"] = json!(attempts);
+                if op == "tx" && c["read_only"] == true {
+                    result["status"] = json!("snapshot");
+                }
+                checkpoint("before_reply")?;
+                return Ok(result);
+            }
+        }
     }
-    let (current, current_id) = load_root(o, v, &owner)?;
-    if current.lock != lock_id {
-        return Err("native selected lock identity changed".into());
-    }
-    if current_id != expected {
-        o.metrics.retries += 1;
-        root = current;
-        expected = current_id;
-        idx = Index::open(o, v, root.node.clone())?;
-    }
-    let (mut result, changed) = match op {
-        "run" => apply_request(&mut idx, o, c)?,
+}
+
+/// Pure preparation against the application snapshot and logical overlay.
+fn prepare(tx: &mut transaction::Transaction, o: &mut Objects, c: &Value) -> Result<Value> {
+    match c["op"].as_str().unwrap() {
+        "run" => Ok(apply_request(tx, o, c)?.0),
         "authority" => {
-            let auth: Authority = get_json(&mut idx, o, "a:current")?.ok_or("authority missing")?;
+            let auth: Authority = get_json(tx, o, "a:current")?.ok_or("authority missing")?;
             let epoch = c["epoch"].as_u64().ok_or("epoch required")?;
             if epoch <= auth.epoch {
                 return Err("authority epoch must increase".into());
             }
-            idx.put(
-                o,
+            tx.put(
                 "a:current".into(),
                 serde_json::to_vec(&Authority {
                     epoch,
                     scope: c["scope"].as_bool().ok_or("scope required")?,
                 })?,
             )?;
-            (json!({"status":"authority_changed"}), true)
+            Ok(json!({"status":"authority_changed"}))
         }
         "put" => {
             let pairs = c["pairs"].as_array().ok_or("pairs required")?;
@@ -790,44 +892,60 @@ fn execute(o: &mut Objects, v: &str, c: &Value) -> Result<Value> {
                 return Err("batch pair limit".into());
             }
             for pair in pairs {
-                let k = pair[0].as_str().ok_or("key required")?;
-                let value = pair[1].as_str().ok_or("string value required")?;
-                if !k.starts_with("u:") {
-                    return Err("benchmark put may only touch unrelated keys".into());
-                }
-                idx.put(o, k.into(), value.as_bytes().to_vec())?;
+                prepare_pair(tx, pair)?;
             }
-            (json!({"status":"committed","pairs":pairs.len()}), true)
+            Ok(json!({"status":"committed", "pairs":pairs.len()}))
+        }
+        "tx" => {
+            let actions = c["actions"].as_array().ok_or("actions required")?;
+            if actions.len() > 4096 {
+                return Err("action limit".into());
+            }
+            let mut values = Vec::new();
+            let mut cancelled = false;
+            for action in actions {
+                match action["op"].as_str().ok_or("action op required")? {
+                    "get" => values.push(
+                        tx.get(o, &field(action, "key")?)?
+                            .map(|x| String::from_utf8_lossy(&x).into_owned()),
+                    ),
+                    "put" => {
+                        prepare_pair(tx, &json!([field(action, "key")?, field(action, "value")?]))?
+                    }
+                    "put_if" => {
+                        let key = field(action, "key")?;
+                        if !key.starts_with("u:") {
+                            return Err("transaction CLI may only write unrelated keys".into());
+                        }
+                        let expected = match action.get("expected").ok_or("expected required")? {
+                            Value::Null => None,
+                            Value::String(x) => Some(x.as_bytes().to_vec()),
+                            _ => return Err("expected must be string or null".into()),
+                        };
+                        tx.put_if(o, key, field(action, "value")?.into_bytes(), expected)?;
+                    }
+                    "cancel" => {
+                        tx.cancel()?;
+                        cancelled = true;
+                    }
+                    _ => return Err("unknown transaction action".into()),
+                }
+            }
+            Ok(
+                json!({"status":if cancelled {"cancelled"} else {"committed"}, "values":values, "seq":tx.root.seq}),
+            )
         }
         _ => unreachable!(),
-    };
-    if changed {
-        let next = Root {
-            format: 1,
-            variant: v.into(),
-            seq: root.seq.checked_add(1).ok_or("sequence overflow")?,
-            node: idx.persist(o)?,
-            parent: Some(hash_frame(&serde_json::to_vec(&root)?)),
-            owner,
-            lock: lock_id,
-        };
-        publish(o, &next, Some(&expected))?;
-        root = next;
-    } else if result["status"].as_str() == Some("replay") {
-        // ROOT may be selected after an interrupted rename but not yet flushed.
-        // Re-establish its publication boundary under the retained writer lock
-        // before acknowledging the retained terminal outcome.
-        sync_publication(o)?;
-        if o.instrument {
-            o.metrics.replay_repairs += 1;
-        }
-        checkpoint("replay_sync")?;
     }
-    result["seq"] = json!(root.seq);
-    o.metrics.lock_hold_ns = held.elapsed().as_nanos() as u64;
-    fs2::FileExt::unlock(&lock)?;
-    checkpoint("before_reply")?;
-    Ok(result)
+}
+
+fn prepare_pair(tx: &mut transaction::Transaction, pair: &Value) -> Result<()> {
+    let key = pair[0].as_str().ok_or("key required")?;
+    let value = pair[1].as_str().ok_or("string value required")?;
+    if !key.starts_with("u:") {
+        return Err("benchmark put may only touch unrelated keys".into());
+    }
+    tx.put(key.into(), value.as_bytes().to_vec())
 }
 
 fn peak_rss() -> Option<u64> {
@@ -866,12 +984,12 @@ fn main() {
     let args: Vec<String> = std::env::args().collect();
     let mut input = String::new();
     let read = std::io::stdin()
-        .take(1024 * 1024 + 1)
+        .take(4 * 1024 * 1024 + 1)
         .read_to_string(&mut input);
-    if args.len() != 3 || read.is_err() || input.len() > 1024 * 1024 {
+    if args.len() != 3 || read.is_err() || input.len() > 4 * 1024 * 1024 {
         println!(
             "{}",
-            json!({"ok":false,"error":"usage: membership-prototype STORE chunk|disk; JSON stdin <=1MiB"})
+            json!({"ok":false,"error":"usage: membership-prototype STORE chunk|disk; JSON stdin <=4MiB"})
         );
         return;
     }
@@ -887,7 +1005,14 @@ fn main() {
         .and_then(|c| execute(&mut o, &args[2], &c));
     let mut out = match res {
         Ok(r) => json!({"ok":true,"result":r}),
-        Err(e) => json!({"ok":false,"error":e.to_string()}),
+        Err(e) => {
+            let possible = e
+                .downcast_ref::<transaction::CommitFailure>()
+                .map_or(o.publication_possible, |failure| {
+                    failure.publication == transaction::Publication::Indeterminate
+                });
+            json!({"ok":false,"error":e.to_string(),"publication":if possible {"indeterminate"} else {"not_published"}})
+        }
     };
     out["metrics"] = serde_json::to_value(&o.metrics).unwrap();
     out["elapsed_ns"] = json!(started.elapsed().as_nanos() as u64);

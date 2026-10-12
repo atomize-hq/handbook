@@ -1,5 +1,10 @@
 # Experimental contract, 2026-10-12
 
+The bounded transaction follow-up extends this contract as specified in
+[transaction-contract.md](transaction-contract.md). Final-code comparison and
+evidence are in [transaction-comparison.md](transaction-comparison.md); predecessor
+measurements retain their original version and do not establish the new interface.
+
 Authorized two-way experiment only. No production format, capacity, owner, backend,
 dependency, or migration selection. The structured-data standard remains proposed;
 existing Contracts JSON and owner/version contracts are unchanged.
@@ -36,11 +41,12 @@ existing Contracts JSON and owner/version contracts are unchanged.
 ## Formats and bounds
 
 Harness messages and evidence use JSON. Experiment nodes use compact closed JSON
-inside a checksum envelope, at most 128 KiB per object, at most 64 pairs per leaf/
+inside a checksum envelope, at most 1 MiB per object (follow-up; predecessor 128 KiB), at most 64 pairs per leaf/
 chunk, disk internal fanout 32, depth at most 64, eager decode node budget 1,000,000.
 Durable IDs are SHA-256 of exact object bytes; live allocation addresses are only
 ephemeral codec memoization keys and must be pinned while memoized.
-Keys and values share the same domains between variants. Request strings are exact
+Keys and values share the same 1,024-byte domains between variants. CLI input is
+bounded to 4 MiB to admit 256 maximal escaped pairs. Request strings are exact
 UTF-8 bytes with explicit bounded length. Original equality covers the decoded
 request/item/content/proof tuple, not raw CLI JSON spelling or preparation controls.
 Authority is a scoped epoch/proof model,

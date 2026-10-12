@@ -1,5 +1,11 @@
 # Bounded durable membership comparison
 
+This is the **predecessor** comparison at `c7f54e63`. Its raw evidence and source
+versions remain unchanged. The current transaction interface, enlarged shared
+object bound and disk batch coalescing require the fresh comparison in
+[transaction-comparison.md](transaction-comparison.md). Statements below about
+disk's immediate per-key persistence describe that predecessor, not final code.
+
 The unmodified immutable-chunkmap package is reusable for the ordered map,
 balancing, snapshots and copy-on-write algorithms. Its public structural APIs
 also support incremental durable encoding without serializing the whole map.

@@ -1,0 +1,114 @@
+{
+  "/proc/version": "Linux version 6.18.40.1-microsoft-standard-WSL2 (root@71c659030f6c) (gcc (GCC) 13.2.0, GNU ld (GNU Binutils) 2.41) #1 SMP PREEMPT_DYNAMIC Fri Jul 31 22:12:15 UTC 2026",
+  "/sys/class/dmi/id/product_name": {
+    "unavailable": "[Errno 2] No such file or directory: '/sys/class/dmi/id/product_name'"
+  },
+  "/sys/class/dmi/id/sys_vendor": {
+    "unavailable": "[Errno 2] No such file or directory: '/sys/class/dmi/id/sys_vendor'"
+  },
+  "arguments": {
+    "binary": "runs/tx-final-bin-c/membership-prototype",
+    "output": "runs/linux-tx-growth-evidence-20261012a",
+    "samples": 30,
+    "sections": "measure,concurrency,faults,validation",
+    "seed": 20261012,
+    "sizes": "1000,10000,100000",
+    "timeout": 180,
+    "variants": "chunk,disk",
+    "work": "runs/linux-tx-growth-data-20261012a"
+  },
+  "binary": "/home/spenser/membership-prototype-20261012/runs/tx-final-bin-c/membership-prototype",
+  "binary_sha256": "bfedfc910322a98329f68f1478b4fe0fb12f5056b3b05a6ef196cb04eb6146b2",
+  "cache_control": "No OS cache eviction. Fresh processes reopen; OS cache is uncontrolled and usually warmed by initialization/prior samples.",
+  "cargo": {
+    "command": [
+      "cargo",
+      "-V"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "cargo 1.89.0 (c24e10642 2025-06-23)"
+  },
+  "disk_usage_before": {
+    "free": 544523026432,
+    "total": 1081101176832,
+    "used": 481585795072
+  },
+  "fault_model": "Injected IO/flush failures and exit(86) checkpoints; external process termination during preparation. These preserve OS cache and are not hardware power loss or a persistence simulator.",
+  "filesystem": {
+    "command": [
+      "stat",
+      "-f",
+      "-c",
+      "%T",
+      "/home/spenser/membership-prototype-20261012/runs/linux-tx-growth-data-20261012a"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "ext2/ext3"
+  },
+  "format": "durable-membership-experiment-environment-v1",
+  "logical_cpus": 24,
+  "machine": "x86_64",
+  "mount": {
+    "command": [
+      "findmnt",
+      "-T",
+      "/home/spenser/membership-prototype-20261012/runs/linux-tx-growth-data-20261012a",
+      "-o",
+      "SOURCE,FSTYPE,TARGET,OPTIONS",
+      "-J"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "{\n   \"filesystems\": [\n      {\n         \"source\": \"/dev/sdd\",\n         \"fstype\": \"ext4\",\n         \"target\": \"/\",\n         \"options\": \"rw,relatime,discard,errors=remount-ro,data=ordered\"\n      }\n   ]\n}"
+  },
+  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]",
+  "release": "6.18.40.1-microsoft-standard-WSL2",
+  "rustc": {
+    "command": [
+      "rustc",
+      "-Vv"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-unknown-linux-gnu\nrelease: 1.89.0\nLLVM version: 20.1.7"
+  },
+  "seed": 20261012,
+  "source_sha256_at_run_start": {
+    "Cargo.lock": "fd8e90a18ab7183997650bb6e9122370eecd39991c3753404183f878f88101bf",
+    "Cargo.toml": "f3fe793f7b564fde3a02eb2963af24e550ae6c7c005936bd691f80f137003b97",
+    "scripts/agent_growth.py": "6b7c6fa3bc87ce0f4123eea5db2373e0b0abfc6fe99d045b241806b90105c598",
+    "scripts/pack_evidence.py": "0488cb94cf41a52aca3937090256d519bcbb855f21cf1fd0dc3539c5370bdd77",
+    "scripts/review_regression.py": "ced32ecf301d6ff6519a3192c7a487ee4121a4492a744f2e858f9e03a80161cd",
+    "scripts/run.py": "94d42fc4dc9a0e0cf5cf67732d21bef6c94051270437c7a4edc4bb318bb0966f",
+    "scripts/summarize.py": "b73b0b90617b09979ad9104151bbf75c37597498fda91a30beedafca4e90d59b",
+    "scripts/transaction_measure.py": "58e1c5acb93ce4a3c5d7a80e022c6200e746dd7813bbd289ff70a7470f2b0938",
+    "scripts/transaction_races.py": "76d3020cb1f2205ee83a1f14830edbbaa92a97e72b4da8c2b5d0a5feea876810",
+    "scripts/transaction_tests.py": "74111fb0c6ba1f6f171cb32abe4bac1e5928ce94894141df6ac624780b20428a",
+    "src/chunk.rs": "2fcf8c7f25598985a9d0129779a9558d0e0b225c6201fd3261bc770d52565650",
+    "src/disk.rs": "c8661a21f87ec20a6e7979f1e04bb721da59ab1eeb4707f18914e74ebb03f944",
+    "src/main.rs": "6281c170c5f4d083627a2a8ac894438dfdf4ef74af853532dd60b4a5914143b8",
+    "src/transaction.rs": "8e9bfddb832fa0be198dba794b9a0ee1035da8b3a4f33231ed593220ed6ab13d"
+  },
+  "system": "Linux",
+  "unmeasured": [
+    "physical IO",
+    "OS syscall counts",
+    "allocation counts",
+    "power-cut durability"
+  ],
+  "utc_started": "2026-10-12T19:33:37Z",
+  "version": "#1 SMP PREEMPT_DYNAMIC Fri Jul 31 22:12:15 UTC 2026",
+  "virtualization": {
+    "command": [
+      "systemd-detect-virt"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "wsl"
+  },
+  "work": "/home/spenser/membership-prototype-20261012/runs/linux-tx-growth-data-20261012a"
+}

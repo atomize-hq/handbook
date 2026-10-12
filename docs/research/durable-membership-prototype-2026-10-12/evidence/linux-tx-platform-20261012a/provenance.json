@@ -1,0 +1,12 @@
+{
+  "format": "durable-membership-native-mount-capture-v1",
+  "date": "2026-10-12",
+  "distribution": "existing Ubuntu-24.04 WSL2",
+  "working_directory": "/home/spenser/membership-prototype-20261012",
+  "commands": [
+    ["findmnt", "-T", "/home/spenser/membership-prototype-20261012", "-J", "-o", "TARGET,SOURCE,FSTYPE,OPTIONS"],
+    ["uname", "-a"]
+  ],
+  "outputs": ["findmnt.json", "uname.txt"],
+  "note": "Captured while final Linux growth ran. Native stores under this /home path use the captured ext4 root mount, not /mnt/c. This does not qualify host/VHDX/device power-loss persistence or bare-metal performance. Metadata assembled after capture."
+}

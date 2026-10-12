@@ -1,0 +1,34 @@
+Changes: 1694 files, 28293 symbols
+Affected processes: 296
+Risk level: critical
+
+Changed symbols:
+  Symbol Structured data format decisions → AGENTS.md
+  Symbol GitNexus — Code Intelligence → AGENTS.md
+  Symbol Always Do → AGENTS.md
+  Symbol Never Do → AGENTS.md
+  Symbol Resources → AGENTS.md
+  Symbol GitNexus — Code Intelligence → CLAUDE.md
+  Symbol Always Do → CLAUDE.md
+  Symbol Never Do → CLAUDE.md
+  Symbol Resources → CLAUDE.md
+  Symbol Handbook → README.md
+  Symbol Read this first → README.md
+  Symbol Current authority posture → README.md
+  Symbol Where things live now → README.md
+  Symbol Handbook Docs → docs/README.md
+  Symbol Active docs → docs/README.md
+... and 28278 more
+
+Affected execution flows:
+  • Prepare → LocalBindingV1 (4 steps) — changed: LocalBindingV1, prepare, selected, validate_terms_predecessor
+  • Run → Reference (5 steps) — changed: run, emit_approver_invocation, emit_invalid_request, approver_administration_outcome, reference
+  • Run → As_str (5 steps) — changed: run, emit_approver_invocation, emit_invalid_request, as_str, approver_administration_outcome
+  • Run → Packet0 (5 steps) — changed: run, emit_approver_invocation, emit_invalid_request, render_invocation, packet0
+  • Run → Emit_to (5 steps) — changed: run, emit_approver_invocation, emit_invalid_request, emit_stdout, emit_to
+  • Run → Failure (5 steps) — changed: run, emit_approver_invocation, emit_invalid_request, emit_stdout
+  • Run → Terminal_status (4 steps) — changed: run, emit_approver_invocation, emit_invalid_request, terminal_status
+  • Run → Path_is_dir_or_file (4 steps) — changed: run
+  • Run → Document_bytes (6 steps) — changed: run, emit_transport_failure, canonical_json_bytes, from_body, document_bytes, transport_failure
+  • Run → TransportFailureDetailsV1 (5 steps) — changed: run, emit_transport_failure, adapter_error, adapter_error_with_presentation, TransportFailureDetailsV1
+... and 286 more

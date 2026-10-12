@@ -1,0 +1,26 @@
+Changes: 96 files, 51 symbols
+Affected processes: 3
+Risk level: medium
+
+Changed symbols:
+  Symbol Durable membership prototype comparison → docs/research/durable-membership-prototype-2026-10-12/README.md
+  Symbol Reproduce on Windows → docs/research/durable-membership-prototype-2026-10-12/README.md
+  Symbol Drive a case → docs/research/durable-membership-prototype-2026-10-12/README.md
+  Symbol Bounded durable membership comparison → docs/research/durable-membership-prototype-2026-10-12/comparison.md
+  Symbol Experimental contract, 2026-10-12 → docs/research/durable-membership-prototype-2026-10-12/contract.md
+  Symbol Executable obligations → docs/research/durable-membership-prototype-2026-10-12/contract.md
+  Symbol Formats and bounds → docs/research/durable-membership-prototype-2026-10-12/contract.md
+  Symbol Evidence boundary → docs/research/durable-membership-prototype-2026-10-12/contract.md
+  Symbol Platform and fault boundary → docs/research/durable-membership-prototype-2026-10-12/platforms.md
+  Symbol Fault matrix and interpretation → docs/research/durable-membership-prototype-2026-10-12/platforms.md
+  Symbol Immutable-chunkmap reuse accounting → docs/research/durable-membership-prototype-2026-10-12/reuse.md
+  Symbol Independent causal review → docs/research/durable-membership-prototype-2026-10-12/review.md
+  Symbol MAX_KEY_BYTES → docs/research/durable-membership-prototype-2026-10-12/src/chunk.rs
+  Symbol DiskIndex → docs/research/durable-membership-prototype-2026-10-12/src/disk.rs
+  Symbol read_node → docs/research/durable-membership-prototype-2026-10-12/src/disk.rs
+... and 36 more
+
+Affected execution flows:
+  • Execute → Plain (4 steps) — changed: guard, execute
+  • Execute → Valid_id (4 steps) — changed: valid_id, execute
+  • Execute → Open (3 steps) — changed: execute

@@ -4,6 +4,16 @@ Non-production experiment authorized on 2026-10-12. See [comparison.md](comparis
 for the result, [contract.md](contract.md) for modeled obligations, and
 [reuse.md](reuse.md) for pinned source/license/reuse accounting.
 
+The authorized follow-up adds the shared application transaction interface over
+both adapters, repairs the unequal admitted domain and audit shard blind spot,
+and evaluates real disk batch coalescing. Current results/reproduction are in
+[transaction-comparison.md](transaction-comparison.md), API rules in
+[transaction-contract.md](transaction-contract.md), and EchoDB accounting in
+[transaction-reuse.md](transaction-reuse.md). Final native run versions and all
+transaction test/measurement commands are in
+[transaction-verification.md](transaction-verification.md). All predecessor evidence remains
+versioned separately; no production backend choice or migration is made.
+
 This directory is an independent Cargo workspace. It does not import Handbook
 production crates or alter their dependencies, contracts, or 32-slot capacity.
 Both variants use the same semantic/publication/object layer. `chunk` reuses
@@ -61,6 +71,17 @@ Changed original content/proof/item refuses. `reserve`, `accept`, and `attempt`
 exercise prefixes; attempted without terminal stays uncertain. `put` accepts
 only unrelated `u:` keys for structure measurements. `snapshot` exposes the
 selected root; `audit` validates its reachable tree and every named object.
+
+`tx` accepts an `actions` array of `get`, buffered `put`, `put_if` (string/null
+`expected`) and `cancel`. `read_only:true` retains a snapshot; `end:"cancel"` or
+`end:"drop"` discards updates; otherwise commit returns committed or explicit
+whole-root conflict. The application must re-begin/revalidate a conflicting tx.
+`coalesce:false` measures sequential intermediate persistence under one final
+publication. Read values are raw strings. Example:
+
+```json
+{"op":"tx","actions":[{"op":"put_if","key":"u:example","expected":null,"value":"one"},{"op":"get","key":"u:example"},{"op":"put","key":"u:pair","value":"two"}]}
+```
 
 `PROTO_FAULT` selects abrupt exit(86) at a publication checkpoint. `PROTO_FAIL`
 selects an injected error, including `short_write`. The harness enumerates these

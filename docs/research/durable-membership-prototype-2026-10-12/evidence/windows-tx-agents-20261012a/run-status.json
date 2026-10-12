@@ -1,0 +1,21 @@
+{
+  "all_concurrent_rss_available": true,
+  "complete": true,
+  "failures": 0,
+  "full_harness_complete": false,
+  "observations": 24,
+  "passes": 642,
+  "processes": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "size": 100000,
+  "skips": 0,
+  "trials": 3,
+  "variants": [
+    "chunk",
+    "disk"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "baseline_selected": false,
+  "complete": true,
+  "evidence_run_id": "linux-tx-final-20261012a",
+  "failures": 0,
+  "full_harness_complete": false,
+  "observations": 6,
+  "passes": 2464,
+  "sections": [
+    "selected",
+    "api",
+    "domain",
+    "snapshots",
+    "semantics",
+    "tx-faults",
+    "concurrency",
+    "faults",
+    "validation"
+  ],
+  "skips": 0,
+  "variants": [
+    "chunk",
+    "disk"
+  ]
+}

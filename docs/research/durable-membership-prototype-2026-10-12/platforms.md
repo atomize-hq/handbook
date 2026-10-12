@@ -1,6 +1,14 @@
 # Platform and fault boundary
 
-Both variants use the same `src/main.rs` implementation and exact checkpoints.
+Both variants use the same `src/main.rs` and `src/transaction.rs` implementation
+and exact checkpoints. Transaction preparation holds no writer lock. Commit
+validates native owner/lock, exact expected root and recorded point dependencies
+before mutation. Whole-root mismatch is a known nonpublication conflict; failed
+object/root staging is known prepublication failure. Starting the root replacement
+attempt conservatively makes later errors indeterminate, even if a particular
+native error and subsequent observation show the old root. Cancel/drop never
+repairs or rolls back a possible publication. Exact terminal replay still repairs
+the selected-root boundary before acknowledgement.
 The selected threat model is cooperating local processes on an established
 private experiment directory. Native directory and lock identities are retained
 and compared; replacing or deleting their positive evidence refuses. Metadata
@@ -54,6 +62,9 @@ unqualified physical persistence boundary.
 | torn/missing/checksum-invalid root, missing/corrupt selected node | Explicit refusal; no survivor choice or membership rebuild | On-disk corruption/loss |
 | lost OWNER/LOCK/object namespace or replaced LOCK | Explicit refusal; no recreated native proof | On-disk identity/loss |
 | corrupt unrelated named object | Exact lookup may succeed; explicit broad audit fails | Experimental detection boundary, not production selection |
+| valid ID placed in the wrong shard, including a corrupt duplicate of a canonical object | Broad audit checks shard/name and the actual enumerated regular-file boundary and refuses | Selected P3 repair; canonical selected membership itself remains intact |
+| buffered transaction cancel/drop/conditional failure | No selected change or object staging; closed transaction refuses reuse | Native transaction API and lifecycle tests |
+| stale prepared root | Explicit conflict; generic transaction closes; caller re-begins/revalidates, without loss or silent callback rerun | Native 1/2/4/8 process transaction cohorts |
 | held snapshot reader while another publishes | Reader retains old root, later reader sees new state; no reclamation | Two OS processes |
 | held ROOT handle | Windows handle excluding delete sharing blocks replacement and returns error; Unix open descriptor retains old root while path changes | Native open-handle behavior |
 | coherent all-local old-root restoration | Accepted old root hides later history; no local external freshness witness | Explicit excluded threat demonstration |
@@ -72,6 +83,18 @@ encoding and narrow cfg boundaries are preparation, not native support evidence.
 Before a production selection: run the same harness on native macOS/APFS;
 qualify rename/share modes, directory persistence, F_FULLFSYNC/device semantics,
 kill/reboot recovery, reader lifetime and any eventual reclamation.
+
+The follow-up's executable `scripts/transaction_tests.py` uses the Unix held-ROOT
+descriptor route on macOS, while Rust separates native identity/rename/sync at
+small cfg boundaries. `transaction_measure.py --cohort-trials 0` can run ordinary
+APFS measurements. Its existing overlap RSS helper is Linux/Windows-specific;
+macOS reports unavailable RSS rather than fabricating a measurement. Environment
+capture likewise records unavailable Linux-only inventory commands. This is a
+concrete harness target, not native macOS proof. Qualify APFS directory fsync
+errors, F_FULLFSYNC/device ordering, rename with open handles, process lock death,
+owner/lock loss, old-descriptor/new-path readers, exact replay repair, injected
+short writes and each publication boundary on that runner. No OS/service was
+installed or reconfigured for this experiment.
 
 The independent review found two sequencing defects in the first measured common
 layer. The final code includes the reused shard in every proposal's name boundary

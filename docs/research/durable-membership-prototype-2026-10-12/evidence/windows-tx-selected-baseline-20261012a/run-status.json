@@ -1,0 +1,17 @@
+{
+  "baseline_selected": true,
+  "complete": true,
+  "evidence_run_id": "windows-tx-selected-baseline-20261012a",
+  "failures": 0,
+  "full_harness_complete": false,
+  "observations": 2,
+  "passes": 17,
+  "sections": [
+    "selected"
+  ],
+  "skips": 0,
+  "variants": [
+    "chunk",
+    "disk"
+  ]
+}
