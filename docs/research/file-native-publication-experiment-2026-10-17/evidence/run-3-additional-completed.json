@@ -1,0 +1,6 @@
+{
+  "slow_small_configurations": 4,
+  "combined_import_move_cases": 2,
+  "allowance_bytes": 33554432,
+  "measurement_condition": "ran alongside one large-tier initialization; host/cache not isolated"
+}

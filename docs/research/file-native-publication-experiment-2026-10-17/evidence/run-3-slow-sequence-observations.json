@@ -1,0 +1,166 @@
+[
+  {
+    "mode": "A",
+    "policy": "slot",
+    "slow_documents": 64,
+    "small_sequence_length": 3,
+    "completions": [
+      {
+        "request": "slow-64",
+        "initial_refusal": false,
+        "accepted_engine_wall_ns": 707409300,
+        "driver_observed_completion_upper_ns": 899622800,
+        "lock_wait_ns": 87900,
+        "lock_hold_ns": 706808900
+      },
+      {
+        "request": "small-0",
+        "initial_refusal": false,
+        "accepted_engine_wall_ns": 867152200,
+        "driver_observed_completion_upper_ns": 874707700,
+        "lock_wait_ns": 806774700,
+        "lock_hold_ns": 60059400
+      },
+      {
+        "request": "small-1",
+        "initial_refusal": false,
+        "accepted_engine_wall_ns": 719747500,
+        "driver_observed_completion_upper_ns": 851958200,
+        "lock_wait_ns": 660332000,
+        "lock_hold_ns": 59090400
+      },
+      {
+        "request": "small-2",
+        "initial_refusal": false,
+        "accepted_engine_wall_ns": 761344100,
+        "driver_observed_completion_upper_ns": 829075700,
+        "lock_wait_ns": 698634700,
+        "lock_hold_ns": 62396000
+      }
+    ],
+    "fairness_claim": "bounded observed completion only; lock is not FIFO"
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "slow_documents": 64,
+    "small_sequence_length": 3,
+    "completions": [
+      {
+        "request": "slow-64",
+        "initial_refusal": true,
+        "accepted_engine_wall_ns": 254414900,
+        "driver_observed_completion_upper_ns": 543099700,
+        "lock_wait_ns": 90100,
+        "lock_hold_ns": 218950000
+      },
+      {
+        "request": "small-0",
+        "initial_refusal": false,
+        "accepted_engine_wall_ns": 71025800,
+        "driver_observed_completion_upper_ns": 518388200,
+        "lock_wait_ns": 131800,
+        "lock_hold_ns": 29887700
+      },
+      {
+        "request": "small-1",
+        "initial_refusal": true,
+        "accepted_engine_wall_ns": 57999000,
+        "driver_observed_completion_upper_ns": 560489600,
+        "lock_wait_ns": 94200,
+        "lock_hold_ns": 26405600
+      },
+      {
+        "request": "small-2",
+        "initial_refusal": false,
+        "accepted_engine_wall_ns": 68207100,
+        "driver_observed_completion_upper_ns": 537791900,
+        "lock_wait_ns": 96100,
+        "lock_hold_ns": 24348900
+      }
+    ],
+    "fairness_claim": "bounded observed completion only; lock is not FIFO"
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "slow_documents": 64,
+    "small_sequence_length": 3,
+    "completions": [
+      {
+        "request": "slow-64",
+        "initial_refusal": false,
+        "accepted_engine_wall_ns": 395602900,
+        "driver_observed_completion_upper_ns": 969402000,
+        "lock_wait_ns": 98100,
+        "lock_hold_ns": 394988600
+      },
+      {
+        "request": "small-0",
+        "initial_refusal": false,
+        "accepted_engine_wall_ns": 749494600,
+        "driver_observed_completion_upper_ns": 944433600,
+        "lock_wait_ns": 557335700,
+        "lock_hold_ns": 191825600
+      },
+      {
+        "request": "small-1",
+        "initial_refusal": false,
+        "accepted_engine_wall_ns": 534587300,
+        "driver_observed_completion_upper_ns": 921735100,
+        "lock_wait_ns": 348833600,
+        "lock_hold_ns": 185415000
+      },
+      {
+        "request": "small-2",
+        "initial_refusal": false,
+        "accepted_engine_wall_ns": 892205500,
+        "driver_observed_completion_upper_ns": 899174500,
+        "lock_wait_ns": 704410700,
+        "lock_hold_ns": 187455300
+      }
+    ],
+    "fairness_claim": "bounded observed completion only; lock is not FIFO"
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "slow_documents": 64,
+    "small_sequence_length": 3,
+    "completions": [
+      {
+        "request": "slow-64",
+        "initial_refusal": true,
+        "accepted_engine_wall_ns": 191002400,
+        "driver_observed_completion_upper_ns": 696050900,
+        "lock_wait_ns": 113300,
+        "lock_hold_ns": 26368700
+      },
+      {
+        "request": "small-0",
+        "initial_refusal": false,
+        "accepted_engine_wall_ns": 291059400,
+        "driver_observed_completion_upper_ns": 670832600,
+        "lock_wait_ns": 101500,
+        "lock_hold_ns": 42846300
+      },
+      {
+        "request": "small-1",
+        "initial_refusal": true,
+        "accepted_engine_wall_ns": 175153900,
+        "driver_observed_completion_upper_ns": 829855200,
+        "lock_wait_ns": 95700,
+        "lock_hold_ns": 26152100
+      },
+      {
+        "request": "small-2",
+        "initial_refusal": true,
+        "accepted_engine_wall_ns": 171198800,
+        "driver_observed_completion_upper_ns": 985118800,
+        "lock_wait_ns": 113500,
+        "lock_hold_ns": 24549600
+      }
+    ],
+    "fairness_claim": "bounded observed completion only; lock is not FIFO"
+  }
+]

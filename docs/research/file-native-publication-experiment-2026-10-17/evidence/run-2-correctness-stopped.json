@@ -1,0 +1,5 @@
+{
+  "type": "AssertionError",
+  "error": "{'seq': 1448, 'command': {'action': 'prepare', 'root': 'C:\\\\file-native-experiment-20261017-v2\\\\correctness\\\\A-research-15', 'mode': 'A', 'request': {'request': 'same-id', 'base': None, 'ops': [{'kind': 'edit', 'id': 'd000004', 'text': '\\nSAME\\n'}]}}, 'env': {}, 'exit': 2, 'external_wall_ns': 40332400, 'output': {'error': 'Access is denied. (os error 5)', 'metrics': {'bytes_read': 15798, 'bytes_written': 4102, 'copies': 0, 'created_directories': 0, 'directory_syncs': 0, 'file_syncs': 1, 'ns': {'read': 753800, 'sync': 432600, 'write': 302600}, 'opens': 6, 'replacements': 0, 'unsupported_directory_syncs': 3}, 'peak_memory_bytes': 4440064, 'result': None, 'status': 'error', 'wall_ns': 2387700}, 'stderr': ''}",
+  "epoch": 1792252928.7577176
+}

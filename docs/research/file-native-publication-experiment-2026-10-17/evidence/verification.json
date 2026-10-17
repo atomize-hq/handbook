@@ -1,0 +1,19 @@
+{
+  "status": "verified",
+  "raw_artifacts": 8,
+  "raw_json_lines": 14847,
+  "fault_phase_counts": {
+    "must-not-select": 174,
+    "visible-uncertain": 6,
+    "must-retain": 51,
+    "partial-retry": 2
+  },
+  "completed_growth_configurations": 10,
+  "censored_large_configurations": 2,
+  "allocated_file_bytes": 10325539176,
+  "free_bytes": 247240355840,
+  "native_binary_sha256": "1b9a6caef1113d0c6bb62c52189feb2126bdb531c407b728cd6b3c36b0d9e584",
+  "verifier_sha256": "e238680f12df062edefcecc500353b479946dff27a1c176077f039a7fcac635a",
+  "scope": "new experiment directory only; no indexed GitNexus coverage inferred",
+  "limits": "artifact consistency and recorded logical assertions; not native Linux, UI, OS crash, GC or a new performance rerun"
+}

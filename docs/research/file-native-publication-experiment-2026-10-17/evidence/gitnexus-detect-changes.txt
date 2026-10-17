@@ -1,0 +1,4 @@
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Detect Changes (1.6.12)
+Diff touched 60 file(s) but no indexed symbols overlap those hunks — not a clean tree.

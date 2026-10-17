@@ -1,0 +1,1262 @@
+[
+  {
+    "mode": "A",
+    "checkpoint": "payload-before-write",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "payload-before-write",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "payload-before-write",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "file-write",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "file-write",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "file-write",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "file-sync",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "file-sync",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "file-sync",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "payload-installed",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "payload-installed",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "payload-installed",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "directory-create",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "directory-create",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "directory-create",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "state-installed",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "state-installed",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "state-installed",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "copy-write",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "copy-write",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "copy-write",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "copy-sync",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "copy-sync",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "copy-sync",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "closure-before-verify",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "closure-before-verify",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "closure-before-verify",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "closure-verified",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "closure-verified",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "closure-verified",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "closure-sealed",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "closure-sealed",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "closure-sealed",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "candidate-ready",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "candidate-ready",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "candidate-ready",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "lock-acquired",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "lock-acquired",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "lock-acquired",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "predecessor-established",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "predecessor-established",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "predecessor-established",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "before-dedup",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "before-dedup",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "before-dedup",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "after-dedup",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "after-dedup",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "after-dedup",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "expected-checked",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "expected-checked",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "expected-checked",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "publication-installed",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "publication-installed",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "publication-installed",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "selector-staged",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "selector-staged",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "selector-staged",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "selector-visible",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "selector-visible",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "selection-uncertain",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "selector-visible",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "selection-boundary",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "selection-boundary",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "published/reply-pending",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "selection-boundary",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "receipt-before",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "receipt-before",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "published/reply-pending",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "receipt-before",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "receipt-written",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "receipt-written",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "published/reply-pending",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "receipt-written",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "reply",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "reply",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "published/reply-pending",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "reply",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "view-file-replaced",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "view-file-replaced",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "published/view-pending",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "view-file-replaced",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "view-first-document",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "view-first-document",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "published/view-pending",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "view-first-document",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "view-before-complete",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "view-before-complete",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "published/view-pending",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "view-before-complete",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "payload-before-write",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "payload-before-write",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "payload-before-write",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "file-write",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "file-write",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "file-write",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "file-sync",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "file-sync",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "file-sync",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "payload-installed",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "payload-installed",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "payload-installed",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "directory-create",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "directory-create",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "directory-create",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "state-installed",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "state-installed",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "state-installed",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "copy-write",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "copy-write",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "copy-write",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "copy-sync",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "copy-sync",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "copy-sync",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "closure-before-verify",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "closure-before-verify",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "closure-before-verify",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "closure-verified",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "closure-verified",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "closure-verified",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "closure-sealed",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "closure-sealed",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "closure-sealed",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "candidate-ready",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "candidate-ready",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "candidate-ready",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "lock-acquired",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "lock-acquired",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "lock-acquired",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "predecessor-established",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "predecessor-established",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "predecessor-established",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "before-dedup",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "before-dedup",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "before-dedup",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "after-dedup",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "after-dedup",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "after-dedup",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "expected-checked",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "expected-checked",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "expected-checked",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "publication-installed",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "publication-installed",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "publication-installed",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "selector-staged",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "selector-staged",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "selector-staged",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "selector-visible",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "selector-visible",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "selection-uncertain",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "selector-visible",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "selection-boundary",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "selection-boundary",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "published/reply-pending",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "selection-boundary",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "receipt-before",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "receipt-before",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "published/reply-pending",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "receipt-before",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "receipt-written",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "receipt-written",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "published/reply-pending",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "receipt-written",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "reply",
+    "fault": "exit",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "reply",
+    "fault": "error",
+    "selected_at_reopen": true,
+    "reported_status": "published/reply-pending",
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "reply",
+    "fault": "kill",
+    "selected_at_reopen": true,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "generation-installed",
+    "fault": "exit",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "generation-installed",
+    "fault": "error",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "generation-installed",
+    "fault": "kill",
+    "selected_at_reopen": false,
+    "reported_status": null,
+    "oracle": "pass-process-fault"
+  },
+  {
+    "mode": "A",
+    "checkpoint": "payload-partial-write",
+    "fault": "partial-reported-error",
+    "oracle": "pass-retry"
+  },
+  {
+    "mode": "B",
+    "checkpoint": "payload-partial-write",
+    "fault": "partial-reported-error",
+    "oracle": "pass-retry"
+  }
+]

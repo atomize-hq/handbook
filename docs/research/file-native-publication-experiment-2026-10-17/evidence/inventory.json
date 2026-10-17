@@ -1,0 +1,164 @@
+{
+  "runs": [
+    {
+      "root": "C:\\file-native-experiment-20261017",
+      "files": 177835,
+      "directories": 38694,
+      "logical_bytes": 2171962409,
+      "allocated_file_bytes": 2286562296,
+      "buckets": {
+        "other": {
+          "files": 1941,
+          "bytes": 8764455,
+          "allocated_bytes": 8788568
+        },
+        "copies": {
+          "files": 1709,
+          "bytes": 17165208,
+          "allocated_bytes": 19242688
+        },
+        "attempts": {
+          "files": 20713,
+          "bytes": 246082308,
+          "allocated_bytes": 287210664
+        },
+        "originals": {
+          "files": 21374,
+          "bytes": 252024754,
+          "allocated_bytes": 262873792
+        },
+        "publications": {
+          "files": 1739,
+          "bytes": 3226478,
+          "allocated_bytes": 7581696
+        },
+        "receipts": {
+          "files": 1702,
+          "bytes": 614326,
+          "allocated_bytes": 674616
+        },
+        "view": {
+          "files": 6097,
+          "bytes": 77837897,
+          "allocated_bytes": 82114912
+        },
+        "generations": {
+          "files": 122560,
+          "bytes": 1566246983,
+          "allocated_bytes": 1618075360
+        }
+      }
+    },
+    {
+      "root": "C:\\file-native-experiment-20261017-v2",
+      "files": 14412,
+      "directories": 6897,
+      "logical_bytes": 156047821,
+      "allocated_file_bytes": 181916272,
+      "buckets": {
+        "other": {
+          "files": 413,
+          "bytes": 2231883,
+          "allocated_bytes": 2240640
+        },
+        "copies": {
+          "files": 585,
+          "bytes": 7268220,
+          "allocated_bytes": 8110080
+        },
+        "attempts": {
+          "files": 10860,
+          "bytes": 128738538,
+          "allocated_bytes": 149693224
+        },
+        "originals": {
+          "files": 1005,
+          "bytes": 8448636,
+          "allocated_bytes": 10114824
+        },
+        "publications": {
+          "files": 452,
+          "bytes": 720876,
+          "allocated_bytes": 1851392
+        },
+        "receipts": {
+          "files": 452,
+          "bytes": 122008,
+          "allocated_bytes": 123064
+        },
+        "view": {
+          "files": 645,
+          "bytes": 8517660,
+          "allocated_bytes": 9783048
+        }
+      }
+    },
+    {
+      "root": "C:\\file-native-experiment-20261017-v3",
+      "files": 596897,
+      "directories": 272754,
+      "logical_bytes": 7593945147,
+      "allocated_file_bytes": 7753390192,
+      "buckets": {
+        "other": {
+          "files": 4559,
+          "bytes": 18873916,
+          "allocated_bytes": 18923944
+        },
+        "copies": {
+          "files": 1810,
+          "bytes": 21669538,
+          "allocated_bytes": 23933424
+        },
+        "attempts": {
+          "files": 87764,
+          "bytes": 1273769943,
+          "allocated_bytes": 1338003208
+        },
+        "originals": {
+          "files": 233702,
+          "bytes": 2923091608,
+          "allocated_bytes": 2936357648
+        },
+        "publications": {
+          "files": 3065,
+          "bytes": 8886145,
+          "allocated_bytes": 16486400
+        },
+        "receipts": {
+          "files": 3000,
+          "bytes": 1375793,
+          "allocated_bytes": 1468976
+        },
+        "view": {
+          "files": 21461,
+          "bytes": 265973783,
+          "allocated_bytes": 273467784
+        },
+        "generations": {
+          "files": 241536,
+          "bytes": 3080304421,
+          "allocated_bytes": 3144748808
+        }
+      }
+    }
+  ],
+  "build": {
+    "files": 377,
+    "directories": 98,
+    "logical_bytes": 103326500,
+    "allocated_file_bytes": 103670416,
+    "buckets": {
+      "other": {
+        "files": 377,
+        "bytes": 103326500,
+        "allocated_bytes": 103670416
+      }
+    }
+  },
+  "total_allocated_file_bytes": 10325539176,
+  "file_allocation_method": "Windows FileStandardInfo.AllocationSize; excludes MFT and directory index allocation",
+  "disk_free_at_inventory": 247240355840,
+  "cap_bytes": 68719476736,
+  "reserve_bytes": 171798691840
+}

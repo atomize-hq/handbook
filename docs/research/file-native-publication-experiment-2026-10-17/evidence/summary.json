@@ -1,0 +1,20 @@
+{
+  "current_race_count": 120,
+  "current_fault_count": 233,
+  "supplement": {
+    "semantic_race_observations": 480,
+    "copies": 2,
+    "validation_checks": 9
+  },
+  "additional": {
+    "slow_small_configurations": 4,
+    "combined_import_move_cases": 2,
+    "allowance_bytes": 33554432,
+    "measurement_condition": "ran alongside one large-tier initialization; host/cache not isolated"
+  },
+  "growth_configurations_observed": 12,
+  "growth_configurations_complete": 10,
+  "native_linux": "unmet: configured host refused authentication; no WSL substitution",
+  "explorer": "unmet: UI helper observed Explorer but input failed to navigate to fixture; not counted as successful exercise",
+  "gate3": "not entered: required native/platform evidence incomplete; no integrated external backend, no COW/DB comparison claimed"
+}

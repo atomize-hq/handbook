@@ -1,0 +1,7 @@
+{
+  "repetitions_per_configuration": 30,
+  "race_configurations": 4,
+  "status": "local-process-suite-passed",
+  "native_linux": "unmet",
+  "ordinary_browsers": "separate-observation-required"
+}

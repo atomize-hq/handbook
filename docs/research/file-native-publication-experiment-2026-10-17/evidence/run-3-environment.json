@@ -1,0 +1,16 @@
+{
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "executable": "C:\\file-native-experiment-20261017-build\\release\\file-native-publication-experiment.exe",
+  "exe_sha256": "1b9a6caef1113d0c6bb62c52189feb2126bdb531c407b728cd6b3c36b0d9e584",
+  "started_epoch": 1792252990.1249974,
+  "deadline_epoch": 1792255680,
+  "cap_bytes": 68719476736,
+  "reserve_bytes": 171798691840,
+  "disk_before": {
+    "total": 1999478190080,
+    "used": 1742837878784,
+    "free": 256640311296
+  },
+  "seed": 20261017
+}

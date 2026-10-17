@@ -1,0 +1,362 @@
+[
+  {
+    "count": 1000,
+    "mode": "A",
+    "consumer": "project",
+    "policy": "slot",
+    "selected_publications": 20,
+    "inventory": {
+      "files": 2480,
+      "directories": 1245,
+      "logical_bytes": 38609463,
+      "allocated_file_bytes": 38609463,
+      "buckets": {
+        "other": {
+          "files": 5,
+          "bytes": 896,
+          "allocated_bytes": 896
+        },
+        "attempts": {
+          "files": 280,
+          "bytes": 11275808,
+          "allocated_bytes": 11275808
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14379522,
+          "allocated_bytes": 14379522
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 89254,
+          "allocated_bytes": 89254
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21958,
+          "allocated_bytes": 21958
+        },
+        "view": {
+          "files": 1003,
+          "bytes": 12842025,
+          "allocated_bytes": 12842025
+        }
+      }
+    }
+  },
+  {
+    "count": 1000,
+    "mode": "A",
+    "consumer": "project",
+    "policy": "speculative",
+    "selected_publications": 20,
+    "inventory": {
+      "files": 2665,
+      "directories": 1293,
+      "logical_bytes": 45364027,
+      "allocated_file_bytes": 45364027,
+      "buckets": {
+        "other": {
+          "files": 22,
+          "bytes": 1112,
+          "allocated_bytes": 1112
+        },
+        "attempts": {
+          "files": 448,
+          "bytes": 18030156,
+          "allocated_bytes": 18030156
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14379522,
+          "allocated_bytes": 14379522
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 89254,
+          "allocated_bytes": 89254
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21958,
+          "allocated_bytes": 21958
+        },
+        "view": {
+          "files": 1003,
+          "bytes": 12842025,
+          "allocated_bytes": 12842025
+        }
+      }
+    }
+  },
+  {
+    "count": 1000,
+    "mode": "A",
+    "consumer": "research",
+    "policy": "slot",
+    "selected_publications": 20,
+    "inventory": {
+      "files": 2480,
+      "directories": 1245,
+      "logical_bytes": 38597490,
+      "allocated_file_bytes": 38597490,
+      "buckets": {
+        "other": {
+          "files": 5,
+          "bytes": 897,
+          "allocated_bytes": 897
+        },
+        "attempts": {
+          "files": 280,
+          "bytes": 11265348,
+          "allocated_bytes": 11265348
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14379522,
+          "allocated_bytes": 14379522
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 89254,
+          "allocated_bytes": 89254
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21958,
+          "allocated_bytes": 21958
+        },
+        "view": {
+          "files": 1003,
+          "bytes": 12840511,
+          "allocated_bytes": 12840511
+        }
+      }
+    }
+  },
+  {
+    "count": 1000,
+    "mode": "A",
+    "consumer": "research",
+    "policy": "speculative",
+    "selected_publications": 20,
+    "inventory": {
+      "files": 2665,
+      "directories": 1293,
+      "logical_bytes": 45345782,
+      "allocated_file_bytes": 45345782,
+      "buckets": {
+        "other": {
+          "files": 22,
+          "bytes": 1113,
+          "allocated_bytes": 1113
+        },
+        "attempts": {
+          "files": 448,
+          "bytes": 18013424,
+          "allocated_bytes": 18013424
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14379522,
+          "allocated_bytes": 14379522
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 89254,
+          "allocated_bytes": 89254
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21958,
+          "allocated_bytes": 21958
+        },
+        "view": {
+          "files": 1003,
+          "bytes": 12840511,
+          "allocated_bytes": 12840511
+        }
+      }
+    }
+  },
+  {
+    "count": 1000,
+    "mode": "B",
+    "consumer": "project",
+    "policy": "slot",
+    "selected_publications": 20,
+    "inventory": {
+      "files": 21316,
+      "directories": 1300,
+      "logical_bytes": 283008346,
+      "allocated_file_bytes": 283008346,
+      "buckets": {
+        "other": {
+          "files": 4,
+          "bytes": 604,
+          "allocated_bytes": 604
+        },
+        "attempts": {
+          "files": 40,
+          "bytes": 9374807,
+          "allocated_bytes": 9374807
+        },
+        "generations": {
+          "files": 20080,
+          "bytes": 259142392,
+          "allocated_bytes": 259142392
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14379522,
+          "allocated_bytes": 14379522
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 89062,
+          "allocated_bytes": 89062
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21959,
+          "allocated_bytes": 21959
+        }
+      }
+    }
+  },
+  {
+    "count": 1000,
+    "mode": "B",
+    "consumer": "project",
+    "policy": "speculative",
+    "selected_publications": 20,
+    "inventory": {
+      "files": 33405,
+      "directories": 1384,
+      "logical_bytes": 444108352,
+      "allocated_file_bytes": 444108352,
+      "buckets": {
+        "other": {
+          "files": 21,
+          "bytes": 820,
+          "allocated_bytes": 820
+        },
+        "attempts": {
+          "files": 64,
+          "bytes": 14988134,
+          "allocated_bytes": 14988134
+        },
+        "generations": {
+          "files": 32128,
+          "bytes": 414628864,
+          "allocated_bytes": 414628864
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14379522,
+          "allocated_bytes": 14379522
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 89054,
+          "allocated_bytes": 89054
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21958,
+          "allocated_bytes": 21958
+        }
+      }
+    }
+  },
+  {
+    "count": 1000,
+    "mode": "B",
+    "consumer": "research",
+    "policy": "slot",
+    "selected_publications": 20,
+    "inventory": {
+      "files": 21316,
+      "directories": 1300,
+      "logical_bytes": 282987359,
+      "allocated_file_bytes": 282987359,
+      "buckets": {
+        "other": {
+          "files": 4,
+          "bytes": 605,
+          "allocated_bytes": 605
+        },
+        "attempts": {
+          "files": 40,
+          "bytes": 9364317,
+          "allocated_bytes": 9364317
+        },
+        "generations": {
+          "files": 20080,
+          "bytes": 259131912,
+          "allocated_bytes": 259131912
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14379522,
+          "allocated_bytes": 14379522
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 89046,
+          "allocated_bytes": 89046
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21957,
+          "allocated_bytes": 21957
+        }
+      }
+    }
+  },
+  {
+    "count": 1000,
+    "mode": "B",
+    "consumer": "research",
+    "policy": "speculative",
+    "selected_publications": 20,
+    "inventory": {
+      "files": 33405,
+      "directories": 1384,
+      "logical_bytes": 444074817,
+      "allocated_file_bytes": 444074817,
+      "buckets": {
+        "other": {
+          "files": 21,
+          "bytes": 821,
+          "allocated_bytes": 821
+        },
+        "attempts": {
+          "files": 64,
+          "bytes": 14971366,
+          "allocated_bytes": 14971366
+        },
+        "generations": {
+          "files": 32128,
+          "bytes": 414612096,
+          "allocated_bytes": 414612096
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14379522,
+          "allocated_bytes": 14379522
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 89054,
+          "allocated_bytes": 89054
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21958,
+          "allocated_bytes": 21958
+        }
+      }
+    }
+  }
+]

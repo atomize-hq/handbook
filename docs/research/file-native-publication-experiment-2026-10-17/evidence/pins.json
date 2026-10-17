@@ -1,0 +1,22 @@
+{
+  "source_base_commit": "b6b3aed9beb3f5c832d2cd10978e71fdce68fdcf",
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-pc-windows-msvc\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "cargo": "cargo 1.89.0 (c24e10642 2025-06-23)\n",
+  "binary": "C:\\file-native-experiment-20261017-build\\release\\file-native-publication-experiment.exe",
+  "binary_sha256": "1b9a6caef1113d0c6bb62c52189feb2126bdb531c407b728cd6b3c36b0d9e584",
+  "source_sha256": {
+    "additional.py": "fdfd8293b8c6b6890603768cd0cf40d5875ab7fcf82cfde2f04e1baf52145e30",
+    "cap-guard.ps1": "43a7037480d8d829ee0af5088296bc8abcf1d03d8cc34b95ea72ba737e090986",
+    "Cargo.lock": "bb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998",
+    "Cargo.toml": "e78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0",
+    "run.py": "bca1c5f07b9ac57715d432c047de5441c6cedefd97c611c07b694d821383395d",
+    "src\\io.rs": "026972d7d3af2dce198c5fe9a67abde237e1e8320233637acc1e320a2eff47c4",
+    "src\\main.rs": "52f2142ee85f2749108ddd9003ae6343f23c7059080c3ddc37dd01355caa6f03",
+    "src\\model.rs": "b1602ca5d86c65a66a66de2df897f00c7481d84f90bda25b3baab8c4d52ff514",
+    "summarize.py": "a52d5d4f906ed00624fcd9614f482664a1885d678897d87176107dd0403a7bfa",
+    "supplement.py": "807f57435048befb70c6d3fbddd052061addb25bfb6504268ced4c76b95b769f"
+  },
+  "controlling_proposal_sha256": "3ee9c14339f8c134a1f1937119d76f4911e46534d6d8f7858d0c1d64b8bc94ee",
+  "format_standard_sha256": "48f4c4fbaaed3bbe5a65f9405d4aa68e32f924860f4e65252cf6aa092ff1b481",
+  "recorded_epoch": 1792255748.7204201
+}

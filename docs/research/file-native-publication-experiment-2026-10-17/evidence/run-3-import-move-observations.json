@@ -1,0 +1,26 @@
+[
+  {
+    "mode": "A",
+    "stable_id": "d000002",
+    "captured_sha256": "076b087f161fb9bfc4b9362bec39cfcb249c231f91b362414fdf0b3c0570765a",
+    "captured_base": {
+      "publication": "publication-57132-1792254764164406000-14",
+      "digest": "2e090c2442f57bdc7d943906ef9b6f83db040864f0ad7439e42e3ae0d3c7b500"
+    },
+    "selected_path": "docs/item-aux--caf------moved--d000002.json",
+    "later_editor_edit_and_move": "remained private",
+    "old_and_new_retained_packet": "verified"
+  },
+  {
+    "mode": "B",
+    "stable_id": "d000002",
+    "captured_sha256": "076b087f161fb9bfc4b9362bec39cfcb249c231f91b362414fdf0b3c0570765a",
+    "captured_base": {
+      "publication": "publication-46308-1792254764398008200-14",
+      "digest": "1a6430207716c1fd8d41cc66cc01b6a31ac6a5ed296248942cd894fcbaf2f1d6"
+    },
+    "selected_path": "docs/item-aux--caf------moved--d000002.json",
+    "later_editor_edit_and_move": "remained private",
+    "old_and_new_retained_packet": "verified"
+  }
+]

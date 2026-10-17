@@ -1,0 +1,18 @@
+[
+  {
+    "mode": "A",
+    "observation": "A/B mixed mutable copy",
+    "copy": {
+      "copied": 15,
+      "fixed_path": "C:\\file-native-experiment-20261017-v3\\supplement-copy\\A-1792253377927182600\\view"
+    }
+  },
+  {
+    "mode": "B",
+    "observation": "A/A coherent retained generation",
+    "copy": {
+      "copied": 16,
+      "fixed_path": "C:\\file-native-experiment-20261017-v3\\supplement-copy\\B-1792253378206664900\\generations\\generation-54356-1792253378247099600-13"
+    }
+  }
+]

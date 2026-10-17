@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-17",
+  "native_windows": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "filesystem": "NTFS",
+    "volume": "C:",
+    "toolchain_host": "x86_64-pc-windows-msvc",
+    "compiler": "rustc 1.89.0 (29483883e 2025-08-04)",
+    "cargo": "1.89.0 (c24e10642 2025-06-23)",
+    "directory_sync": "explicitly unsupported by this helper; no nested-name crash/power-loss claim",
+    "qualification": "native process exits, external kills, reported errors, file sync, MoveFileExW WRITE_THROUGH, no-delete-sharing selector handles"
+  },
+  "linux_candidate": {
+    "discovery": "existing SSH configuration alias spenser-linux-codex",
+    "configured_key_probe": "Load key: invalid format; Permission denied (publickey,password)",
+    "temporary_normalized_key_probe": "key loaded after line-ending/final-LF normalization, but host still returned Permission denied (publickey,password)",
+    "credential_preservation": "original untouched; temporary copy used the original access control and was removed",
+    "remote_uname_findmnt": "not reached; native OS and ext4 not established",
+    "wsl": "Ubuntu-24.04, Ubuntu-22.04 and docker-desktop discovered; not used as native Linux substitutes",
+    "qualification": "unmet"
+  },
+  "explorer": {
+    "skill": "computer-use:computer-use",
+    "helper": "node_repl @oai/sky",
+    "observed_window": "10 - File Explorer",
+    "observed_window_id": 592000,
+    "observed_address": "C:\\Program Files (x86)\\Windows Kits\\10",
+    "attempted_fixture_address": "C:\\file-native-experiment-20261017\\correctness\\B-project-00",
+    "actions": "activate, observe address focus, type/Return, set value, reobserve and focus/type retry",
+    "verification": "address/title remained at the original directory; screenshot did not establish fixture browsing",
+    "qualification": "unmet; no successful ordinary Explorer exercise claimed"
+  },
+  "storage": {
+    "allocation_helper": "GetFileInformationByHandleEx FileStandardInfo.AllocationSize for regular files",
+    "allocation_limit": "MFT and directory-index allocation not attributed by file allocation totals",
+    "compression_observation": "compact /q reported that new files in the initial run root would not be compressed",
+    "storage_deduplication": "uncontrolled and unqualified",
+    "privileged_volume_probe": "fsutil fsinfo ntfsinfo C: returned Access is denied; no elevation or reconfiguration"
+  },
+  "measurement_scope": {
+    "cache": "fresh process is not a controlled cold device",
+    "host": "active desktop; cap guard, inventory and small additional probes are not an isolated-host benchmark",
+    "os_process_samples": "large-process-samples.jsonl contains sampled working set/peak and OS transfer counters; transfer counters are not physical disk traffic",
+    "macos": "APFS/Finder/native naming/open-handle/directory sync/full-flush follow-on unperformed"
+  }
+}

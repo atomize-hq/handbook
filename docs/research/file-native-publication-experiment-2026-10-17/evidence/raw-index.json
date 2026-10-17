@@ -1,0 +1,74 @@
+[
+  {
+    "source": "C:\\file-native-experiment-20261017\\correctness-raw.jsonl",
+    "artifact": "run-1-correctness-raw.jsonl.gz",
+    "uncompressed_sha256": "cdfd4dc395c1f1e5a5d2c40802c0a926bc62e68c7a946489d77ce768f01b1027",
+    "uncompressed_bytes": 7198548,
+    "lines": 4709,
+    "compressed_bytes": 657316,
+    "qualification": "superseded / failed development run"
+  },
+  {
+    "source": "C:\\file-native-experiment-20261017\\growth-raw.jsonl",
+    "artifact": "run-1-growth-raw.jsonl.gz",
+    "uncompressed_sha256": "eb33577f92b92a8037989a1ed6dd7c5105ac2391334bbe260ce945c82b450edd",
+    "uncompressed_bytes": 1235217,
+    "lines": 240,
+    "compressed_bytes": 87443,
+    "qualification": "superseded / failed development run"
+  },
+  {
+    "source": "C:\\file-native-experiment-20261017-v2\\correctness-raw.jsonl",
+    "artifact": "run-2-correctness-raw.jsonl.gz",
+    "uncompressed_sha256": "49c1379e643bbb739b2e29aeae760cdb12dc7cdc476f2c4998ac8a0cf7cc7085",
+    "uncompressed_bytes": 2186551,
+    "lines": 1448,
+    "compressed_bytes": 216031,
+    "qualification": "superseded / failed development run"
+  },
+  {
+    "source": "C:\\file-native-experiment-20261017-v3\\additional-raw.jsonl",
+    "artifact": "run-3-additional-raw.jsonl.gz",
+    "uncompressed_sha256": "8c3a8b24ad217201c038fcffb4dfa630d328b964c323b3278e5763b9162b076a",
+    "uncompressed_bytes": 105344,
+    "lines": 37,
+    "compressed_bytes": 9545,
+    "qualification": "current corrected run"
+  },
+  {
+    "source": "C:\\file-native-experiment-20261017-v3\\correctness-raw.jsonl",
+    "artifact": "run-3-correctness-raw.jsonl.gz",
+    "uncompressed_sha256": "8781717e5e4eb4563cf58d36c524d0a77a10d9a307e2dca93a5b34fa568c47cf",
+    "uncompressed_bytes": 8115587,
+    "lines": 5114,
+    "compressed_bytes": 697607,
+    "qualification": "current corrected run"
+  },
+  {
+    "source": "C:\\file-native-experiment-20261017-v3\\growth-raw.jsonl",
+    "artifact": "run-3-growth-raw.jsonl.gz",
+    "uncompressed_sha256": "bfc467973b3dcdfe0eca3f7301547b04d2587e0159991bc37011d146f3816c10",
+    "uncompressed_bytes": 5252546,
+    "lines": 274,
+    "compressed_bytes": 386241,
+    "qualification": "current corrected run"
+  },
+  {
+    "source": "C:\\file-native-experiment-20261017-v3\\large-process-samples.jsonl",
+    "artifact": "run-3-large-process-samples.jsonl.gz",
+    "uncompressed_sha256": "4e445260b59adbceb2604116b5cc49166a8d070580dd9dd6ba5f2162822508a2",
+    "uncompressed_bytes": 2341,
+    "lines": 8,
+    "compressed_bytes": 610,
+    "qualification": "current corrected run"
+  },
+  {
+    "source": "C:\\file-native-experiment-20261017-v3\\supplement-raw.jsonl",
+    "artifact": "run-3-supplement-raw.jsonl.gz",
+    "uncompressed_sha256": "6f2def58eb14c128247e1a7f71bc97808f921d8b14c3ec202ec4a6cc7f28c369",
+    "uncompressed_bytes": 4538406,
+    "lines": 3017,
+    "compressed_bytes": 469098,
+    "qualification": "current corrected run"
+  }
+]

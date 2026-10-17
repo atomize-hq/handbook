@@ -1,0 +1,3362 @@
+[
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 0,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 0,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 0,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 0,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 1,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 1,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 1,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 1,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 2,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 2,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 2,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 2,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 3,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 3,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 3,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 3,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 4,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 4,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 4,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 4,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 5,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 5,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 5,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 5,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 6,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 6,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 6,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 6,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 7,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 7,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 7,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 7,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 8,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 8,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 8,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 8,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 9,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 9,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 9,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 9,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 10,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 10,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 10,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 10,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 11,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 11,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 11,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 11,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 12,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 12,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 12,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 12,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 13,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 13,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 13,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 13,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 14,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 14,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 14,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 14,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 15,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 15,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 15,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 15,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 16,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 16,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 16,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 16,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 17,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 17,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 17,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 17,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 18,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 18,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 18,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 18,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 19,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 19,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 19,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 19,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 20,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 20,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 20,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 20,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 21,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 21,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 21,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 21,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 22,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 22,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 22,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 22,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 23,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 23,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 23,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 23,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 24,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 24,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 24,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 24,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 25,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 25,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 25,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 25,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 26,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 26,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 26,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 26,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 27,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 27,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 27,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 27,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 28,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 28,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 28,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 28,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 29,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 29,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 29,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 29,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 0,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 0,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 0,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 0,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 1,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 1,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 1,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 1,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 2,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 2,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 2,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 2,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 3,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 3,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 3,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 3,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 4,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 4,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 4,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 4,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 5,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 5,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 5,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 5,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 6,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 6,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 6,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 6,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 7,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 7,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 7,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 7,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 8,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 8,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 8,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 8,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 9,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 9,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 9,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 9,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 10,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 10,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 10,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 10,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 11,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 11,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 11,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 11,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 12,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 12,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 12,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 12,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 13,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 13,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 13,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 13,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 14,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 14,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 14,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 14,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 15,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 15,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 15,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 15,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 16,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 16,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 16,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 16,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 17,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 17,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 17,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 17,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 18,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 18,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 18,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 18,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 19,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 19,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 19,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 19,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 20,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 20,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 20,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 20,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 21,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 21,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 21,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 21,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 22,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 22,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 22,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 22,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 23,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 23,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 23,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 23,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 24,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 24,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 24,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 24,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 25,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 25,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 25,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 25,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 26,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 26,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 26,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 26,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 27,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 27,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 27,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 27,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 28,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 28,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 28,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 28,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 29,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 29,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 29,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 29,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 0,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 0,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 0,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 0,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 1,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 1,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 1,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 1,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 2,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 2,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 2,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 2,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 3,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 3,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 3,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 3,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 4,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 4,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 4,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 4,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 5,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 5,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 5,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 5,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 6,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 6,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 6,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 6,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 7,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 7,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 7,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 7,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 8,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 8,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 8,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 8,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 9,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 9,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 9,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 9,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 10,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 10,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 10,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 10,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 11,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 11,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 11,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 11,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 12,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 12,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 12,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 12,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 13,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 13,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 13,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 13,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 14,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 14,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 14,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 14,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 15,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 15,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 15,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 15,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 16,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 16,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 16,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 16,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 17,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 17,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 17,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 17,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 18,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 18,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 18,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 18,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 19,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 19,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 19,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 19,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 20,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 20,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 20,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 20,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 21,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 21,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 21,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 21,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 22,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 22,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 22,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 22,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 23,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 23,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 23,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 23,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 24,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 24,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 24,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 24,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 25,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 25,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 25,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 25,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 26,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 26,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 26,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 26,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 27,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 27,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 27,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 27,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 28,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 28,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 28,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 28,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 29,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 29,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 29,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 29,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 0,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 0,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 0,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 0,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 1,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 1,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 1,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 1,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 2,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 2,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 2,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 2,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 3,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 3,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 3,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 3,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 4,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 4,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 4,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 4,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 5,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 5,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 5,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 5,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 6,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 6,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 6,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 6,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 7,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 7,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 7,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 7,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 8,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 8,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 8,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 8,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 9,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 9,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 9,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 9,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 10,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 10,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 10,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 10,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 11,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 11,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 11,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 11,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 12,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 12,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 12,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 12,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 13,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 13,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 13,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 13,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 14,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 14,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 14,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 14,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 15,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 15,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 15,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 15,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 16,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 16,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 16,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 16,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 17,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 17,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 17,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 17,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 18,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 18,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 18,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 18,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 19,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 19,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 19,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 19,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 20,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 20,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 20,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 20,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 21,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 21,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 21,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 21,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 22,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 22,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 22,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 22,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 23,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 23,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 23,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 23,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 24,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 24,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 24,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 24,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 25,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 25,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 25,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 25,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 26,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 26,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 26,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 26,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 27,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 27,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 27,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 27,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 28,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 28,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 28,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 28,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 29,
+    "case": "delete-add-edge",
+    "explicit_revalidation": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 29,
+    "case": "unique",
+    "explicit_revalidation": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 29,
+    "case": "budget",
+    "explicit_revalidation": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 29,
+    "case": "rename-edge",
+    "explicit_revalidation": "accepted-stable-reference"
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "count": 10000,
+    "mode": "A",
+    "consumer": "project",
+    "policy": "slot",
+    "selected_publications": 10,
+    "inventory": {
+      "files": 70177,
+      "directories": 10162,
+      "logical_bytes": 961085635,
+      "allocated_file_bytes": 963771384,
+      "buckets": {
+        "other": {
+          "files": 5,
+          "bytes": 898,
+          "allocated_bytes": 912
+        },
+        "attempts": {
+          "files": 50070,
+          "bytes": 703747733,
+          "allocated_bytes": 705806336
+        },
+        "originals": {
+          "files": 10079,
+          "bytes": 128025622,
+          "allocated_bytes": 128344064
+        },
+        "publications": {
+          "files": 10,
+          "bytes": 639240,
+          "allocated_bytes": 663552
+        },
+        "receipts": {
+          "files": 10,
+          "bytes": 153531,
+          "allocated_bytes": 157800
+        },
+        "view": {
+          "files": 10003,
+          "bytes": 128518611,
+          "allocated_bytes": 128798720
+        }
+      }
+    }
+  },
+  {
+    "count": 10000,
+    "mode": "B",
+    "consumer": "project",
+    "policy": "slot",
+    "selected_publications": 10,
+    "inventory": {
+      "files": 110163,
+      "directories": 10156,
+      "logical_bytes": 1478043470,
+      "allocated_file_bytes": 1480411856,
+      "buckets": {
+        "other": {
+          "files": 4,
+          "bytes": 604,
+          "allocated_bytes": 616
+        },
+        "attempts": {
+          "files": 20,
+          "bytes": 52970478,
+          "allocated_bytes": 53018624
+        },
+        "generations": {
+          "files": 100040,
+          "bytes": 1296254095,
+          "allocated_bytes": 1298227200
+        },
+        "originals": {
+          "files": 10079,
+          "bytes": 128025622,
+          "allocated_bytes": 128344064
+        },
+        "publications": {
+          "files": 10,
+          "bytes": 639140,
+          "allocated_bytes": 663552
+        },
+        "receipts": {
+          "files": 10,
+          "bytes": 153531,
+          "allocated_bytes": 157800
+        }
+      }
+    }
+  }
+]

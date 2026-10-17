@@ -1,0 +1,3153 @@
+[
+  {
+    "tier": 1000,
+    "mode": "A",
+    "consumer": "project",
+    "policy": "slot",
+    "accepted_publications": 19,
+    "refused_attempts": 0,
+    "accepted_request_wall_ms": [
+      102.8716,
+      146.1955,
+      688.3341,
+      84.9117,
+      163.4949,
+      88.2069,
+      355.6431,
+      166.2811,
+      255.4575,
+      92.9602,
+      182.0895,
+      521.8645,
+      686.974,
+      428.1884,
+      601.5557,
+      341.4902,
+      258.765,
+      711.2907,
+      794.6094
+    ],
+    "median_ms": 258.765,
+    "p95_ms": null,
+    "estimator": "nearest-rank; p95 suppressed below 20 samples; heterogeneous batches are not one latency distribution",
+    "max_lock_wait_ms": 708.0986,
+    "max_lock_hold_ms": 709.1797,
+    "attempt_bytes_read": 119112196,
+    "attempt_bytes_written": 49024646,
+    "peak_process_memory_bytes": 10493952,
+    "busy_attempt_wall_ms": [],
+    "initialization_ms": [
+      9842.3154
+    ],
+    "initialization_timeout": false,
+    "attempt_log_incomplete": false,
+    "serial": [
+      {
+        "request": "serial-1",
+        "wall_ms": 102.8716,
+        "metrics": {
+          "bytes_read": 2426510,
+          "bytes_written": 781933,
+          "copies": 12,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 26,
+          "ns": {
+            "copy": 2749600,
+            "destination-verification": 4845900,
+            "gate-validation": 161200,
+            "lock-hold": 102245100,
+            "lock-wait": 94000,
+            "preparation-inclusive": 52236300,
+            "read": 35570400,
+            "replace": 3836800,
+            "selection-inclusive": 5794700,
+            "semantic-validation": 223200,
+            "sync": 15291500,
+            "view-refresh-inclusive": 41579700,
+            "write": 2574600
+          },
+          "opens": 77,
+          "replacements": 9,
+          "unsupported_directory_syncs": 75
+        }
+      },
+      {
+        "request": "serial-8",
+        "wall_ms": 146.1955,
+        "metrics": {
+          "bytes_read": 2570933,
+          "bytes_written": 866778,
+          "copies": 19,
+          "created_directories": 14,
+          "directory_syncs": 0,
+          "file_syncs": 40,
+          "ns": {
+            "copy": 3902900,
+            "destination-verification": 7023400,
+            "gate-validation": 157900,
+            "lock-hold": 145486700,
+            "lock-wait": 78400,
+            "preparation-inclusive": 84211200,
+            "read": 67104400,
+            "replace": 6486800,
+            "selection-inclusive": 5581600,
+            "semantic-validation": 211100,
+            "sync": 22852700,
+            "view-refresh-inclusive": 52316500,
+            "write": 3981700
+          },
+          "opens": 129,
+          "replacements": 23,
+          "unsupported_directory_syncs": 138
+        }
+      },
+      {
+        "request": "serial-64",
+        "wall_ms": 688.3341,
+        "metrics": {
+          "bytes_read": 7450031,
+          "bytes_written": 3486941,
+          "copies": 75,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 152,
+          "ns": {
+            "copy": 17169900,
+            "destination-verification": 6933000,
+            "gate-validation": 155800,
+            "lock-hold": 686634600,
+            "lock-wait": 80500,
+            "preparation-inclusive": 427003300,
+            "read": 437055800,
+            "replace": 38187400,
+            "selection-inclusive": 6296500,
+            "semantic-validation": 205200,
+            "sync": 85610800,
+            "view-refresh-inclusive": 250890500,
+            "write": 13989800
+          },
+          "opens": 523,
+          "replacements": 135,
+          "unsupported_directory_syncs": 642
+        }
+      }
+    ],
+    "refusals": [],
+    "inventory": {
+      "files": 2500,
+      "directories": 1305,
+      "logical_bytes": 44419577,
+      "allocated_file_bytes": 46277872,
+      "buckets": {
+        "other": {
+          "files": 5,
+          "bytes": 896,
+          "allocated_bytes": 912
+        },
+        "attempts": {
+          "files": 300,
+          "bytes": 16225102,
+          "allocated_bytes": 17104896
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14772712,
+          "allocated_bytes": 15388672
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 360288,
+          "allocated_bytes": 409600
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21959,
+          "allocated_bytes": 29024
+        },
+        "view": {
+          "files": 1003,
+          "bytes": 13038620,
+          "allocated_bytes": 13344768
+        }
+      }
+    },
+    "installed_generations": 0,
+    "retained_selected_publications": 20,
+    "unselected_generation_count": 0,
+    "current_readable": "view"
+  },
+  {
+    "tier": 1000,
+    "mode": "A",
+    "consumer": "project",
+    "policy": "speculative",
+    "accepted_publications": 19,
+    "refused_attempts": 12,
+    "accepted_request_wall_ms": [
+      90.4779,
+      138.4879,
+      573.9102,
+      110.1975,
+      75.0459,
+      105.7899,
+      77.1329,
+      77.9394,
+      77.5329,
+      129.5117,
+      78.2192,
+      77.6775,
+      76.4148,
+      76.2465,
+      78.3563,
+      77.324,
+      81.2808,
+      281.4511,
+      92.8957
+    ],
+    "median_ms": 78.3563,
+    "p95_ms": null,
+    "estimator": "nearest-rank; p95 suppressed below 20 samples; heterogeneous batches are not one latency distribution",
+    "max_lock_wait_ms": 64.6629,
+    "max_lock_hold_ms": 261.3105,
+    "attempt_bytes_read": 143610712,
+    "attempt_bytes_written": 58939767,
+    "peak_process_memory_bytes": 10084352,
+    "busy_attempt_wall_ms": [],
+    "initialization_ms": [
+      7159.4148
+    ],
+    "initialization_timeout": false,
+    "attempt_log_incomplete": false,
+    "serial": [
+      {
+        "request": "serial-1",
+        "wall_ms": 90.4779,
+        "metrics": {
+          "bytes_read": 2426510,
+          "bytes_written": 781933,
+          "copies": 12,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 26,
+          "ns": {
+            "copy": 2737700,
+            "destination-verification": 4076100,
+            "gate-validation": 164700,
+            "lock-hold": 49223700,
+            "lock-wait": 111300,
+            "preparation-inclusive": 39883100,
+            "read": 22422000,
+            "replace": 3677000,
+            "selection-inclusive": 5423100,
+            "semantic-validation": 193200,
+            "sync": 15142900,
+            "view-refresh-inclusive": 41529900,
+            "write": 2522900
+          },
+          "opens": 77,
+          "replacements": 9,
+          "unsupported_directory_syncs": 75
+        }
+      },
+      {
+        "request": "serial-8",
+        "wall_ms": 138.4879,
+        "metrics": {
+          "bytes_read": 2570933,
+          "bytes_written": 866778,
+          "copies": 19,
+          "created_directories": 14,
+          "directory_syncs": 0,
+          "file_syncs": 40,
+          "ns": {
+            "copy": 4105900,
+            "destination-verification": 6156400,
+            "gate-validation": 156600,
+            "lock-hold": 60267400,
+            "lock-wait": 95100,
+            "preparation-inclusive": 76995500,
+            "read": 56492800,
+            "replace": 7054400,
+            "selection-inclusive": 6702500,
+            "semantic-validation": 207300,
+            "sync": 22757800,
+            "view-refresh-inclusive": 51383400,
+            "write": 4155600
+          },
+          "opens": 129,
+          "replacements": 23,
+          "unsupported_directory_syncs": 138
+        }
+      },
+      {
+        "request": "serial-64",
+        "wall_ms": 573.9102,
+        "metrics": {
+          "bytes_read": 7450031,
+          "bytes_written": 3486941,
+          "copies": 75,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 152,
+          "ns": {
+            "copy": 16509800,
+            "destination-verification": 10498500,
+            "gate-validation": 274900,
+            "lock-hold": 261310500,
+            "lock-wait": 114500,
+            "preparation-inclusive": 310412700,
+            "read": 323431800,
+            "replace": 32414200,
+            "selection-inclusive": 6425300,
+            "semantic-validation": 209200,
+            "sync": 93327200,
+            "view-refresh-inclusive": 253044500,
+            "write": 13665900
+          },
+          "opens": 523,
+          "replacements": 135,
+          "unsupported_directory_syncs": 642
+        }
+      }
+    ],
+    "refusals": [
+      {
+        "request": "wave-2-0",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 2120126,
+          "bytes_written": 829582,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 2091800,
+            "destination-verification": 7078600,
+            "lock-hold": 1813600,
+            "lock-wait": 53422100,
+            "preparation-inclusive": 58528400,
+            "read": 25706000,
+            "semantic-validation": 283400,
+            "sync": 10048400,
+            "write": 1622100
+          },
+          "opens": 64,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-4-0",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1843409,
+          "bytes_written": 829593,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 7083900,
+            "destination-verification": 13224800,
+            "lock-hold": 1526100,
+            "lock-wait": 46318300,
+            "preparation-inclusive": 68192700,
+            "read": 26620600,
+            "semantic-validation": 240100,
+            "sync": 12442400,
+            "write": 1711000
+          },
+          "opens": 68,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-4-1",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1843409,
+          "bytes_written": 829593,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 2452700,
+            "destination-verification": 12500300,
+            "lock-hold": 2116500,
+            "lock-wait": 44611600,
+            "preparation-inclusive": 63593100,
+            "read": 21599600,
+            "semantic-validation": 222600,
+            "sync": 17891600,
+            "write": 1884200
+          },
+          "opens": 68,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-4-2",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1843385,
+          "bytes_written": 829581,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 2166800,
+            "destination-verification": 10608500,
+            "lock-hold": 1793100,
+            "lock-wait": 53075700,
+            "preparation-inclusive": 60128300,
+            "read": 19146800,
+            "semantic-validation": 220800,
+            "sync": 16744500,
+            "write": 1942200
+          },
+          "opens": 68,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-1",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1855801,
+          "bytes_written": 829605,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 3922300,
+            "destination-verification": 5390000,
+            "lock-hold": 1450200,
+            "lock-wait": 59791200,
+            "preparation-inclusive": 80722100,
+            "read": 20542400,
+            "semantic-validation": 286200,
+            "sync": 20152000,
+            "write": 2891000
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-2",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1855777,
+          "bytes_written": 829593,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 3946000,
+            "destination-verification": 7759300,
+            "lock-hold": 1580100,
+            "lock-wait": 57004000,
+            "preparation-inclusive": 76167500,
+            "read": 15382900,
+            "semantic-validation": 242900,
+            "sync": 19743800,
+            "write": 2817000
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-3",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1855777,
+          "bytes_written": 829593,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 5929300,
+            "destination-verification": 6881800,
+            "lock-hold": 1498300,
+            "lock-wait": 56313000,
+            "preparation-inclusive": 77448700,
+            "read": 20693400,
+            "semantic-validation": 280100,
+            "sync": 19428700,
+            "write": 2214000
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-4",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1855753,
+          "bytes_written": 829581,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 3089000,
+            "destination-verification": 10229300,
+            "lock-hold": 1978400,
+            "lock-wait": 48767500,
+            "preparation-inclusive": 71159700,
+            "read": 24929100,
+            "semantic-validation": 460900,
+            "sync": 21907600,
+            "write": 2752400
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-5",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1855753,
+          "bytes_written": 829581,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 4431600,
+            "destination-verification": 5040500,
+            "lock-hold": 1897400,
+            "lock-wait": 51787000,
+            "preparation-inclusive": 68269300,
+            "read": 12509000,
+            "semantic-validation": 271700,
+            "sync": 20807400,
+            "write": 3177300
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-6",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1855753,
+          "bytes_written": 829581,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 3404400,
+            "destination-verification": 5363700,
+            "lock-hold": 1542000,
+            "lock-wait": 50232600,
+            "preparation-inclusive": 70238800,
+            "read": 20605500,
+            "semantic-validation": 264700,
+            "sync": 20958800,
+            "write": 2054200
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-7",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1880329,
+          "bytes_written": 841869,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 2750400,
+            "destination-verification": 4834800,
+            "lock-hold": 1942900,
+            "lock-wait": 64662900,
+            "preparation-inclusive": 64280200,
+            "read": 20921700,
+            "semantic-validation": 220700,
+            "sync": 21306500,
+            "write": 1812000
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "slow",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 3824367,
+          "bytes_written": 1811278,
+          "copies": 9,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 80,
+          "ns": {
+            "copy": 2000500,
+            "destination-verification": 5188000,
+            "lock-hold": 2213900,
+            "lock-wait": 92800,
+            "preparation-inclusive": 320959600,
+            "read": 204367000,
+            "semantic-validation": 188200,
+            "sync": 45181100,
+            "write": 11673900
+          },
+          "opens": 281,
+          "replacements": 64,
+          "unsupported_directory_syncs": 360
+        }
+      }
+    ],
+    "inventory": {
+      "files": 2697,
+      "directories": 1389,
+      "logical_bytes": 54334979,
+      "allocated_file_bytes": 56755688,
+      "buckets": {
+        "other": {
+          "files": 22,
+          "bytes": 1112,
+          "allocated_bytes": 1160
+        },
+        "attempts": {
+          "files": 480,
+          "bytes": 26140297,
+          "allocated_bytes": 27582464
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14772712,
+          "allocated_bytes": 15388672
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 360280,
+          "allocated_bytes": 409600
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21958,
+          "allocated_bytes": 29024
+        },
+        "view": {
+          "files": 1003,
+          "bytes": 13038620,
+          "allocated_bytes": 13344768
+        }
+      }
+    },
+    "installed_generations": 0,
+    "retained_selected_publications": 20,
+    "unselected_generation_count": 0,
+    "current_readable": "view"
+  },
+  {
+    "tier": 1000,
+    "mode": "A",
+    "consumer": "research",
+    "policy": "slot",
+    "accepted_publications": 19,
+    "refused_attempts": 0,
+    "accepted_request_wall_ms": [
+      91.3037,
+      148.5469,
+      657.5327,
+      84.8609,
+      170.2909,
+      92.5579,
+      348.2041,
+      261.3326,
+      175.7947,
+      88.186,
+      255.8433,
+      333.9813,
+      168.5795,
+      684.0938,
+      595.0117,
+      414.4252,
+      503.0181,
+      678.4734,
+      765.8512
+    ],
+    "median_ms": 261.3326,
+    "p95_ms": null,
+    "estimator": "nearest-rank; p95 suppressed below 20 samples; heterogeneous batches are not one latency distribution",
+    "max_lock_wait_ms": 675.2501,
+    "max_lock_hold_ms": 676.4791,
+    "attempt_bytes_read": 119068086,
+    "attempt_bytes_written": 48983344,
+    "peak_process_memory_bytes": 10301440,
+    "busy_attempt_wall_ms": [],
+    "initialization_ms": [
+      9477.9734
+    ],
+    "initialization_timeout": false,
+    "attempt_log_incomplete": false,
+    "serial": [
+      {
+        "request": "serial-1",
+        "wall_ms": 91.3037,
+        "metrics": {
+          "bytes_read": 2424390,
+          "bytes_written": 779871,
+          "copies": 12,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 26,
+          "ns": {
+            "copy": 2569400,
+            "destination-verification": 4657600,
+            "gate-validation": 158700,
+            "lock-hold": 90498500,
+            "lock-wait": 100500,
+            "preparation-inclusive": 38862100,
+            "read": 20475100,
+            "replace": 3571200,
+            "selection-inclusive": 5908800,
+            "semantic-validation": 219500,
+            "sync": 19006000,
+            "view-refresh-inclusive": 42930600,
+            "write": 2930200
+          },
+          "opens": 77,
+          "replacements": 9,
+          "unsupported_directory_syncs": 75
+        }
+      },
+      {
+        "request": "serial-8",
+        "wall_ms": 148.5469,
+        "metrics": {
+          "bytes_read": 2568813,
+          "bytes_written": 864716,
+          "copies": 19,
+          "created_directories": 14,
+          "directory_syncs": 0,
+          "file_syncs": 40,
+          "ns": {
+            "copy": 4371500,
+            "destination-verification": 8354300,
+            "gate-validation": 194900,
+            "lock-hold": 147814900,
+            "lock-wait": 81900,
+            "preparation-inclusive": 83243700,
+            "read": 59362300,
+            "replace": 6469800,
+            "selection-inclusive": 5729500,
+            "semantic-validation": 209800,
+            "sync": 28433100,
+            "view-refresh-inclusive": 56091300,
+            "write": 4561800
+          },
+          "opens": 129,
+          "replacements": 23,
+          "unsupported_directory_syncs": 138
+        }
+      },
+      {
+        "request": "serial-64",
+        "wall_ms": 657.5327,
+        "metrics": {
+          "bytes_read": 7447911,
+          "bytes_written": 3484879,
+          "copies": 75,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 152,
+          "ns": {
+            "copy": 16715000,
+            "destination-verification": 4861500,
+            "gate-validation": 178600,
+            "lock-hold": 655704800,
+            "lock-wait": 83300,
+            "preparation-inclusive": 398048700,
+            "read": 397601600,
+            "replace": 31895600,
+            "selection-inclusive": 6541200,
+            "semantic-validation": 205800,
+            "sync": 97041200,
+            "view-refresh-inclusive": 248768100,
+            "write": 13596900
+          },
+          "opens": 523,
+          "replacements": 135,
+          "unsupported_directory_syncs": 642
+        }
+      }
+    ],
+    "refusals": [],
+    "inventory": {
+      "files": 2500,
+      "directories": 1305,
+      "logical_bytes": 44407062,
+      "allocated_file_bytes": 46273752,
+      "buckets": {
+        "other": {
+          "files": 5,
+          "bytes": 897,
+          "allocated_bytes": 912
+        },
+        "attempts": {
+          "files": 300,
+          "bytes": 16214127,
+          "allocated_bytes": 17104896
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14772712,
+          "allocated_bytes": 15388672
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 360264,
+          "allocated_bytes": 409600
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21956,
+          "allocated_bytes": 29000
+        },
+        "view": {
+          "files": 1003,
+          "bytes": 13037106,
+          "allocated_bytes": 13340672
+        }
+      }
+    },
+    "installed_generations": 0,
+    "retained_selected_publications": 20,
+    "unselected_generation_count": 0,
+    "current_readable": "view"
+  },
+  {
+    "tier": 1000,
+    "mode": "A",
+    "consumer": "research",
+    "policy": "speculative",
+    "accepted_publications": 19,
+    "refused_attempts": 12,
+    "accepted_request_wall_ms": [
+      82.0681,
+      109.5419,
+      519.7781,
+      102.8113,
+      75.6269,
+      93.1689,
+      82.4484,
+      81.6033,
+      76.1603,
+      120.0631,
+      76.0689,
+      75.3321,
+      75.6988,
+      75.8887,
+      78.6638,
+      75.7718,
+      87.3453,
+      291.3594,
+      79.7219
+    ],
+    "median_ms": 81.6033,
+    "p95_ms": null,
+    "estimator": "nearest-rank; p95 suppressed below 20 samples; heterogeneous batches are not one latency distribution",
+    "max_lock_wait_ms": 60.254,
+    "max_lock_hold_ms": 249.9374,
+    "attempt_bytes_read": 143560736,
+    "attempt_bytes_written": 58891948,
+    "peak_process_memory_bytes": 10145792,
+    "busy_attempt_wall_ms": [],
+    "initialization_ms": [
+      7208.8747
+    ],
+    "initialization_timeout": false,
+    "attempt_log_incomplete": false,
+    "serial": [
+      {
+        "request": "serial-1",
+        "wall_ms": 82.0681,
+        "metrics": {
+          "bytes_read": 2424390,
+          "bytes_written": 779871,
+          "copies": 12,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 26,
+          "ns": {
+            "copy": 2428200,
+            "destination-verification": 5197200,
+            "gate-validation": 186900,
+            "lock-hold": 48437700,
+            "lock-wait": 98400,
+            "preparation-inclusive": 32545200,
+            "read": 16993900,
+            "replace": 2849000,
+            "selection-inclusive": 5581300,
+            "semantic-validation": 220100,
+            "sync": 14809500,
+            "view-refresh-inclusive": 40769100,
+            "write": 2619300
+          },
+          "opens": 77,
+          "replacements": 9,
+          "unsupported_directory_syncs": 75
+        }
+      },
+      {
+        "request": "serial-8",
+        "wall_ms": 109.5419,
+        "metrics": {
+          "bytes_read": 2568813,
+          "bytes_written": 864716,
+          "copies": 19,
+          "created_directories": 14,
+          "directory_syncs": 0,
+          "file_syncs": 40,
+          "ns": {
+            "copy": 4027500,
+            "destination-verification": 4208700,
+            "gate-validation": 191900,
+            "lock-hold": 56750400,
+            "lock-wait": 92600,
+            "preparation-inclusive": 51665700,
+            "read": 34225300,
+            "replace": 5361600,
+            "selection-inclusive": 5488600,
+            "semantic-validation": 247400,
+            "sync": 21569800,
+            "view-refresh-inclusive": 49315300,
+            "write": 3626300
+          },
+          "opens": 129,
+          "replacements": 23,
+          "unsupported_directory_syncs": 138
+        }
+      },
+      {
+        "request": "serial-64",
+        "wall_ms": 519.7781,
+        "metrics": {
+          "bytes_read": 7447911,
+          "bytes_written": 3484879,
+          "copies": 75,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 152,
+          "ns": {
+            "copy": 17921300,
+            "destination-verification": 7222100,
+            "gate-validation": 161300,
+            "lock-hold": 248948200,
+            "lock-wait": 95900,
+            "preparation-inclusive": 268865200,
+            "read": 289630200,
+            "replace": 29382200,
+            "selection-inclusive": 5801600,
+            "semantic-validation": 228400,
+            "sync": 79658500,
+            "view-refresh-inclusive": 241272000,
+            "write": 12783900
+          },
+          "opens": 523,
+          "replacements": 135,
+          "unsupported_directory_syncs": 642
+        }
+      }
+    ],
+    "refusals": [
+      {
+        "request": "wave-2-0",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 2119578,
+          "bytes_written": 829034,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 1929600,
+            "destination-verification": 7734000,
+            "lock-hold": 1725300,
+            "lock-wait": 48269800,
+            "preparation-inclusive": 58441500,
+            "read": 21554300,
+            "semantic-validation": 205400,
+            "sync": 8979400,
+            "write": 1468100
+          },
+          "opens": 64,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-4-0",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1842861,
+          "bytes_written": 829045,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 2227300,
+            "destination-verification": 6929800,
+            "lock-hold": 1380700,
+            "lock-wait": 45516600,
+            "preparation-inclusive": 54826000,
+            "read": 19076300,
+            "semantic-validation": 224600,
+            "sync": 11804100,
+            "write": 1669500
+          },
+          "opens": 68,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-4-1",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1842861,
+          "bytes_written": 829045,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 2694100,
+            "destination-verification": 6539600,
+            "lock-hold": 1736900,
+            "lock-wait": 48505200,
+            "preparation-inclusive": 53808600,
+            "read": 17271400,
+            "semantic-validation": 218700,
+            "sync": 13321800,
+            "write": 1681000
+          },
+          "opens": 68,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-4-2",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1842837,
+          "bytes_written": 829033,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 2222400,
+            "destination-verification": 8414500,
+            "lock-hold": 1769800,
+            "lock-wait": 44426100,
+            "preparation-inclusive": 50157800,
+            "read": 20625300,
+            "semantic-validation": 233000,
+            "sync": 12047600,
+            "write": 1435600
+          },
+          "opens": 68,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-0",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1855253,
+          "bytes_written": 829057,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 3998900,
+            "destination-verification": 5261600,
+            "lock-hold": 1467300,
+            "lock-wait": 53515500,
+            "preparation-inclusive": 78349600,
+            "read": 19462600,
+            "semantic-validation": 242900,
+            "sync": 23344900,
+            "write": 3004700
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-1",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1855253,
+          "bytes_written": 829057,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 4310900,
+            "destination-verification": 3443800,
+            "lock-hold": 1503700,
+            "lock-wait": 55561200,
+            "preparation-inclusive": 79387800,
+            "read": 19592600,
+            "semantic-validation": 262200,
+            "sync": 23839700,
+            "write": 3184600
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-2",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1855229,
+          "bytes_written": 829045,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 3454700,
+            "destination-verification": 4062900,
+            "lock-hold": 1542300,
+            "lock-wait": 48957100,
+            "preparation-inclusive": 76206000,
+            "read": 12492900,
+            "semantic-validation": 222200,
+            "sync": 23899900,
+            "write": 2776400
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-3",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1855229,
+          "bytes_written": 829045,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 3296900,
+            "destination-verification": 3611600,
+            "lock-hold": 1789400,
+            "lock-wait": 59504600,
+            "preparation-inclusive": 76300500,
+            "read": 17843700,
+            "semantic-validation": 423400,
+            "sync": 28178200,
+            "write": 2850000
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-5",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1855205,
+          "bytes_written": 829033,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 5249400,
+            "destination-verification": 3558600,
+            "lock-hold": 1937100,
+            "lock-wait": 52426000,
+            "preparation-inclusive": 72275600,
+            "read": 16402500,
+            "semantic-validation": 281000,
+            "sync": 25100800,
+            "write": 2373100
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-6",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1855205,
+          "bytes_written": 829029,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 4772400,
+            "destination-verification": 5706400,
+            "lock-hold": 1838700,
+            "lock-wait": 60254000,
+            "preparation-inclusive": 66830000,
+            "read": 15814400,
+            "semantic-validation": 271500,
+            "sync": 26022600,
+            "write": 2150600
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "wave-8-7",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 1879781,
+          "bytes_written": 841321,
+          "copies": 9,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 17,
+          "ns": {
+            "copy": 3873300,
+            "destination-verification": 3847900,
+            "lock-hold": 1940500,
+            "lock-wait": 45444000,
+            "preparation-inclusive": 66710100,
+            "read": 18675000,
+            "semantic-validation": 393100,
+            "sync": 20599000,
+            "write": 2939600
+          },
+          "opens": 76,
+          "replacements": 1,
+          "unsupported_directory_syncs": 45
+        }
+      },
+      {
+        "request": "slow",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 3823819,
+          "bytes_written": 1810730,
+          "copies": 9,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 80,
+          "ns": {
+            "copy": 2589800,
+            "destination-verification": 5360400,
+            "lock-hold": 2442000,
+            "lock-wait": 97000,
+            "preparation-inclusive": 287469300,
+            "read": 178798400,
+            "semantic-validation": 252200,
+            "sync": 41610500,
+            "write": 11976000
+          },
+          "opens": 281,
+          "replacements": 64,
+          "unsupported_directory_syncs": 360
+        }
+      }
+    ],
+    "inventory": {
+      "files": 2697,
+      "directories": 1389,
+      "logical_bytes": 54315926,
+      "allocated_file_bytes": 56751592,
+      "buckets": {
+        "other": {
+          "files": 22,
+          "bytes": 1113,
+          "allocated_bytes": 1160
+        },
+        "attempts": {
+          "files": 480,
+          "bytes": 26122757,
+          "allocated_bytes": 27582464
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14772712,
+          "allocated_bytes": 15388672
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 360280,
+          "allocated_bytes": 409600
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21958,
+          "allocated_bytes": 29024
+        },
+        "view": {
+          "files": 1003,
+          "bytes": 13037106,
+          "allocated_bytes": 13340672
+        }
+      }
+    },
+    "installed_generations": 0,
+    "retained_selected_publications": 20,
+    "unselected_generation_count": 0,
+    "current_readable": "view"
+  },
+  {
+    "tier": 1000,
+    "mode": "B",
+    "consumer": "project",
+    "policy": "slot",
+    "accepted_publications": 19,
+    "refused_attempts": 0,
+    "accepted_request_wall_ms": [
+      1124.2779,
+      1144.5186,
+      1393.5278,
+      1138.7792,
+      2247.769,
+      1113.7037,
+      5547.1595,
+      3760.211,
+      2241.8322,
+      1444.5491,
+      7227.9979,
+      8429.6512,
+      4846.3985,
+      3684.1233,
+      9716.7989,
+      2566.7453,
+      5990.4371,
+      1559.8347,
+      2667.8814
+    ],
+    "median_ms": 2566.7453,
+    "p95_ms": null,
+    "estimator": "nearest-rank; p95 suppressed below 20 samples; heterogeneous batches are not one latency distribution",
+    "max_lock_wait_ms": 8422.6753,
+    "max_lock_hold_ms": 1783.7457,
+    "attempt_bytes_read": 830573270,
+    "attempt_bytes_written": 287288418,
+    "peak_process_memory_bytes": 9748480,
+    "busy_attempt_wall_ms": [],
+    "initialization_ms": [
+      5283.3493
+    ],
+    "initialization_timeout": false,
+    "attempt_log_incomplete": false,
+    "serial": [
+      {
+        "request": "serial-1",
+        "wall_ms": 1124.2779,
+        "metrics": {
+          "bytes_read": 39620177,
+          "bytes_written": 13429140,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1011,
+          "ns": {
+            "copy": 244157700,
+            "destination-verification": 110830800,
+            "gate-validation": 200500,
+            "lock-hold": 1123565300,
+            "lock-wait": 106700,
+            "preparation-inclusive": 993230600,
+            "read": 82598300,
+            "replace": 678300,
+            "selection-inclusive": 127915500,
+            "semantic-validation": 202600,
+            "sync": 516854400,
+            "write": 2724800
+          },
+          "opens": 4038,
+          "replacements": 3,
+          "unsupported_directory_syncs": 2038
+        }
+      },
+      {
+        "request": "serial-8",
+        "wall_ms": 1144.5186,
+        "metrics": {
+          "bytes_read": 39638741,
+          "bytes_written": 13472851,
+          "copies": 1000,
+          "created_directories": 14,
+          "directory_syncs": 0,
+          "file_syncs": 1018,
+          "ns": {
+            "copy": 242504200,
+            "destination-verification": 117231600,
+            "gate-validation": 156200,
+            "lock-hold": 1143763200,
+            "lock-wait": 84800,
+            "preparation-inclusive": 1009881500,
+            "read": 96375100,
+            "replace": 906800,
+            "selection-inclusive": 131471000,
+            "semantic-validation": 205500,
+            "sync": 514251200,
+            "write": 3897600
+          },
+          "opens": 4061,
+          "replacements": 10,
+          "unsupported_directory_syncs": 2073
+        }
+      },
+      {
+        "request": "serial-64",
+        "wall_ms": 1393.5278,
+        "metrics": {
+          "bytes_read": 41837659,
+          "bytes_written": 15163032,
+          "copies": 1000,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 1074,
+          "ns": {
+            "copy": 245711600,
+            "destination-verification": 114296000,
+            "gate-validation": 151800,
+            "lock-hold": 1391840500,
+            "lock-wait": 79200,
+            "preparation-inclusive": 1263159300,
+            "read": 270576200,
+            "replace": 888500,
+            "selection-inclusive": 126949300,
+            "semantic-validation": 202200,
+            "sync": 539991200,
+            "write": 13402300
+          },
+          "opens": 4230,
+          "replacements": 66,
+          "unsupported_directory_syncs": 2353
+        }
+      }
+    ],
+    "refusals": [],
+    "inventory": {
+      "files": 21316,
+      "directories": 1300,
+      "logical_bytes": 287285714,
+      "allocated_file_bytes": 293020616,
+      "buckets": {
+        "other": {
+          "files": 4,
+          "bytes": 604,
+          "allocated_bytes": 616
+        },
+        "attempts": {
+          "files": 40,
+          "bytes": 9645844,
+          "allocated_bytes": 9719808
+        },
+        "generations": {
+          "files": 20080,
+          "bytes": 262484507,
+          "allocated_bytes": 267472896
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14772712,
+          "allocated_bytes": 15388672
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 360088,
+          "allocated_bytes": 409600
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21959,
+          "allocated_bytes": 29024
+        }
+      }
+    },
+    "installed_generations": 20,
+    "retained_selected_publications": 20,
+    "unselected_generation_count": 0,
+    "current_readable": "generations/generation-53752-1792253540281390800-2",
+    "unselected_generation_logical_bytes": 0
+  },
+  {
+    "tier": 1000,
+    "mode": "B",
+    "consumer": "project",
+    "policy": "speculative",
+    "accepted_publications": 19,
+    "refused_attempts": 12,
+    "accepted_request_wall_ms": [
+      1137.0912,
+      1146.2729,
+      1551.3137,
+      1506.1131,
+      1104.6153,
+      2167.4204,
+      1148.5368,
+      1104.1021,
+      1113.6299,
+      3384.8172,
+      1151.2081,
+      1302.1326,
+      1153.8785,
+      1199.7621,
+      1102.7871,
+      1111.3638,
+      1120.0057,
+      1129.0719,
+      1300.5542
+    ],
+    "median_ms": 1148.5368,
+    "p95_ms": null,
+    "estimator": "nearest-rank; p95 suppressed below 20 samples; heterogeneous batches are not one latency distribution",
+    "max_lock_wait_ms": 149.3672,
+    "max_lock_hold_ms": 147.528,
+    "attempt_bytes_read": 1158302059,
+    "attempt_bytes_written": 450747359,
+    "peak_process_memory_bytes": 9883648,
+    "busy_attempt_wall_ms": [],
+    "initialization_ms": [
+      4811.5413
+    ],
+    "initialization_timeout": false,
+    "attempt_log_incomplete": false,
+    "serial": [
+      {
+        "request": "serial-1",
+        "wall_ms": 1137.0912,
+        "metrics": {
+          "bytes_read": 39620177,
+          "bytes_written": 13429140,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1011,
+          "ns": {
+            "copy": 254835000,
+            "destination-verification": 113089300,
+            "gate-validation": 174600,
+            "lock-hold": 133141700,
+            "lock-wait": 124500,
+            "preparation-inclusive": 1002501100,
+            "read": 90537000,
+            "replace": 737600,
+            "selection-inclusive": 131437900,
+            "semantic-validation": 206300,
+            "sync": 505736700,
+            "write": 2402300
+          },
+          "opens": 4038,
+          "replacements": 3,
+          "unsupported_directory_syncs": 2038
+        }
+      },
+      {
+        "request": "serial-8",
+        "wall_ms": 1146.2729,
+        "metrics": {
+          "bytes_read": 39638741,
+          "bytes_written": 13472851,
+          "copies": 1000,
+          "created_directories": 14,
+          "directory_syncs": 0,
+          "file_syncs": 1018,
+          "ns": {
+            "copy": 242576100,
+            "destination-verification": 111114100,
+            "gate-validation": 160000,
+            "lock-hold": 130402900,
+            "lock-wait": 124200,
+            "preparation-inclusive": 1014521600,
+            "read": 92519700,
+            "replace": 764300,
+            "selection-inclusive": 128674500,
+            "semantic-validation": 203200,
+            "sync": 519696900,
+            "write": 3871700
+          },
+          "opens": 4061,
+          "replacements": 10,
+          "unsupported_directory_syncs": 2073
+        }
+      },
+      {
+        "request": "serial-64",
+        "wall_ms": 1551.3137,
+        "metrics": {
+          "bytes_read": 41837659,
+          "bytes_written": 15163032,
+          "copies": 1000,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 1074,
+          "ns": {
+            "copy": 246183000,
+            "destination-verification": 118299200,
+            "gate-validation": 156600,
+            "lock-hold": 134149600,
+            "lock-wait": 98500,
+            "preparation-inclusive": 1414914300,
+            "read": 266348500,
+            "replace": 810700,
+            "selection-inclusive": 132806200,
+            "semantic-validation": 237000,
+            "sync": 700573500,
+            "write": 13110700
+          },
+          "opens": 4230,
+          "replacements": 66,
+          "unsupported_directory_syncs": 2353
+        }
+      }
+    ],
+    "refusals": [
+      {
+        "request": "wave-2-0",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27388395,
+          "bytes_written": 13624833,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 268757200,
+            "destination-verification": 124165900,
+            "lock-hold": 2609900,
+            "lock-wait": 129127000,
+            "preparation-inclusive": 1378343600,
+            "read": 54555000,
+            "semantic-validation": 231600,
+            "sync": 826121900,
+            "write": 1860100
+          },
+          "opens": 3037,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-4-0",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27111686,
+          "bytes_written": 13624868,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 325730900,
+            "destination-verification": 133658100,
+            "lock-hold": 1393000,
+            "lock-wait": 137838400,
+            "preparation-inclusive": 2039683300,
+            "read": 58632400,
+            "semantic-validation": 255500,
+            "sync": 1360877000,
+            "write": 1880100
+          },
+          "opens": 3041,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-4-1",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27111686,
+          "bytes_written": 13624868,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 304989900,
+            "destination-verification": 132681200,
+            "lock-hold": 1662000,
+            "lock-wait": 139142100,
+            "preparation-inclusive": 2037360500,
+            "read": 55367100,
+            "semantic-validation": 220200,
+            "sync": 1381564400,
+            "write": 2071000
+          },
+          "opens": 3041,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-4-3",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27111662,
+          "bytes_written": 13624856,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 295590300,
+            "destination-verification": 141805500,
+            "lock-hold": 3191600,
+            "lock-wait": 132284100,
+            "preparation-inclusive": 2033351700,
+            "read": 55520500,
+            "semantic-validation": 212300,
+            "sync": 1403443500,
+            "write": 2234500
+          },
+          "opens": 3041,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-1",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27124094,
+          "bytes_written": 13624928,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 455888200,
+            "destination-verification": 198292900,
+            "lock-hold": 1442800,
+            "lock-wait": 149367200,
+            "preparation-inclusive": 3249250000,
+            "read": 76433700,
+            "semantic-validation": 299100,
+            "sync": 2218716300,
+            "write": 3008500
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-2",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27124070,
+          "bytes_written": 13624916,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 453691500,
+            "destination-verification": 225664600,
+            "lock-hold": 1536600,
+            "lock-wait": 142531900,
+            "preparation-inclusive": 3247426600,
+            "read": 90865700,
+            "semantic-validation": 265500,
+            "sync": 2222032500,
+            "write": 2534700
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-3",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27124070,
+          "bytes_written": 13624916,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 463045800,
+            "destination-verification": 212688100,
+            "lock-hold": 2457000,
+            "lock-wait": 133297100,
+            "preparation-inclusive": 3245461900,
+            "read": 80128000,
+            "semantic-validation": 425300,
+            "sync": 2211852900,
+            "write": 2620400
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-4",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27124046,
+          "bytes_written": 13624904,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 456093400,
+            "destination-verification": 223001500,
+            "lock-hold": 1600800,
+            "lock-wait": 139087200,
+            "preparation-inclusive": 3240810000,
+            "read": 88446900,
+            "semantic-validation": 236900,
+            "sync": 2211876800,
+            "write": 2289800
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-5",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27124046,
+          "bytes_written": 13624904,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 444085000,
+            "destination-verification": 186592900,
+            "lock-hold": 1468500,
+            "lock-wait": 144863500,
+            "preparation-inclusive": 3240078300,
+            "read": 73673200,
+            "semantic-validation": 266700,
+            "sync": 2193679100,
+            "write": 2359800
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-6",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27124046,
+          "bytes_written": 13624904,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 443140000,
+            "destination-verification": 212422400,
+            "lock-hold": 1544200,
+            "lock-wait": 141855000,
+            "preparation-inclusive": 3236362400,
+            "read": 80900800,
+            "semantic-validation": 301400,
+            "sync": 2231694600,
+            "write": 2795000
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-7",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27148622,
+          "bytes_written": 13637192,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 457655600,
+            "destination-verification": 220825700,
+            "lock-hold": 1502000,
+            "lock-wait": 147067500,
+            "preparation-inclusive": 3234736500,
+            "read": 95032900,
+            "semantic-validation": 244900,
+            "sync": 2224244200,
+            "write": 1786000
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "slow",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 29093476,
+          "bytes_written": 14607089,
+          "copies": 1000,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 1071,
+          "ns": {
+            "copy": 258049900,
+            "destination-verification": 117662600,
+            "lock-hold": 2559900,
+            "lock-wait": 109900,
+            "preparation-inclusive": 1427050800,
+            "read": 229988500,
+            "semantic-validation": 200600,
+            "sync": 660950900,
+            "write": 12388500
+          },
+          "opens": 3254,
+          "replacements": 64,
+          "unsupported_directory_syncs": 2345
+        }
+      }
+    ],
+    "inventory": {
+      "files": 33405,
+      "directories": 1384,
+      "logical_bytes": 450744872,
+      "allocated_file_bytes": 459920576,
+      "buckets": {
+        "other": {
+          "files": 21,
+          "bytes": 820,
+          "allocated_bytes": 864
+        },
+        "attempts": {
+          "files": 64,
+          "bytes": 15259183,
+          "allocated_bytes": 15380480
+        },
+        "generations": {
+          "files": 32128,
+          "bytes": 420330119,
+          "allocated_bytes": 428711936
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14772712,
+          "allocated_bytes": 15388672
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 360080,
+          "allocated_bytes": 409600
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21958,
+          "allocated_bytes": 29024
+        }
+      }
+    },
+    "installed_generations": 32,
+    "retained_selected_publications": 20,
+    "unselected_generation_count": 12,
+    "current_readable": "generations/generation-25484-1792253583991056200-1",
+    "unselected_generation_logical_bytes": 157846128
+  },
+  {
+    "tier": 1000,
+    "mode": "B",
+    "consumer": "research",
+    "policy": "slot",
+    "accepted_publications": 19,
+    "refused_attempts": 0,
+    "accepted_request_wall_ms": [
+      1123.7987,
+      1157.504,
+      1372.318,
+      1147.9378,
+      2299.5806,
+      1124.8093,
+      4483.7111,
+      3373.6144,
+      2244.5466,
+      1141.5233,
+      5712.7778,
+      2266.3091,
+      4540.7578,
+      6850.8098,
+      3389.3674,
+      8001.0659,
+      9126.5949,
+      1509.2699,
+      2706.5824
+    ],
+    "median_ms": 2299.5806,
+    "p95_ms": null,
+    "estimator": "nearest-rank; p95 suppressed below 20 samples; heterogeneous batches are not one latency distribution",
+    "max_lock_wait_ms": 7998.5615,
+    "max_lock_hold_ms": 1507.1621,
+    "attempt_bytes_read": 830509978,
+    "attempt_bytes_written": 287267459,
+    "peak_process_memory_bytes": 10010624,
+    "busy_attempt_wall_ms": [],
+    "initialization_ms": [
+      5151.2053
+    ],
+    "initialization_timeout": false,
+    "attempt_log_incomplete": false,
+    "serial": [
+      {
+        "request": "serial-1",
+        "wall_ms": 1123.7987,
+        "metrics": {
+          "bytes_read": 39617091,
+          "bytes_written": 13428092,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1011,
+          "ns": {
+            "copy": 247234900,
+            "destination-verification": 111680200,
+            "gate-validation": 161500,
+            "lock-hold": 1122904400,
+            "lock-wait": 101900,
+            "preparation-inclusive": 996152300,
+            "read": 80422100,
+            "replace": 1096700,
+            "selection-inclusive": 124078000,
+            "semantic-validation": 201100,
+            "sync": 517020900,
+            "write": 2750600
+          },
+          "opens": 4038,
+          "replacements": 3,
+          "unsupported_directory_syncs": 2038
+        }
+      },
+      {
+        "request": "serial-8",
+        "wall_ms": 1157.504,
+        "metrics": {
+          "bytes_read": 39635655,
+          "bytes_written": 13471803,
+          "copies": 1000,
+          "created_directories": 14,
+          "directory_syncs": 0,
+          "file_syncs": 1018,
+          "ns": {
+            "copy": 256794600,
+            "destination-verification": 110892500,
+            "gate-validation": 154200,
+            "lock-hold": 1156725500,
+            "lock-wait": 125900,
+            "preparation-inclusive": 1022256200,
+            "read": 89862500,
+            "replace": 5395100,
+            "selection-inclusive": 131472500,
+            "semantic-validation": 208000,
+            "sync": 517908200,
+            "write": 3563100
+          },
+          "opens": 4061,
+          "replacements": 10,
+          "unsupported_directory_syncs": 2073
+        }
+      },
+      {
+        "request": "serial-64",
+        "wall_ms": 1372.318,
+        "metrics": {
+          "bytes_read": 41834573,
+          "bytes_written": 15161984,
+          "copies": 1000,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 1074,
+          "ns": {
+            "copy": 241952300,
+            "destination-verification": 110197700,
+            "gate-validation": 157800,
+            "lock-hold": 1370595200,
+            "lock-wait": 82400,
+            "preparation-inclusive": 1243645100,
+            "read": 251706300,
+            "replace": 803800,
+            "selection-inclusive": 124855300,
+            "semantic-validation": 195500,
+            "sync": 546795800,
+            "write": 12634800
+          },
+          "opens": 4230,
+          "replacements": 66,
+          "unsupported_directory_syncs": 2353
+        }
+      }
+    ],
+    "refusals": [],
+    "inventory": {
+      "files": 21316,
+      "directories": 1300,
+      "logical_bytes": 287264755,
+      "allocated_file_bytes": 292914120,
+      "buckets": {
+        "other": {
+          "files": 4,
+          "bytes": 605,
+          "allocated_bytes": 616
+        },
+        "attempts": {
+          "files": 40,
+          "bytes": 9635364,
+          "allocated_bytes": 9719808
+        },
+        "generations": {
+          "files": 20080,
+          "bytes": 262474027,
+          "allocated_bytes": 267366400
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14772712,
+          "allocated_bytes": 15388672
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 360088,
+          "allocated_bytes": 409600
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21959,
+          "allocated_bytes": 29024
+        }
+      }
+    },
+    "installed_generations": 20,
+    "retained_selected_publications": 20,
+    "unselected_generation_count": 0,
+    "current_readable": "generations/generation-51440-1792253627023127800-2",
+    "unselected_generation_logical_bytes": 0
+  },
+  {
+    "tier": 1000,
+    "mode": "B",
+    "consumer": "research",
+    "policy": "speculative",
+    "accepted_publications": 19,
+    "refused_attempts": 12,
+    "accepted_request_wall_ms": [
+      1145.9745,
+      1132.1099,
+      1389.1395,
+      1299.6754,
+      1131.3182,
+      2213.5518,
+      1115.5199,
+      1147.3373,
+      1177.6706,
+      4019.6325,
+      1741.3903,
+      1350.9613,
+      1178.561,
+      1236.9644,
+      1201.1398,
+      1171.186,
+      1178.9156,
+      1185.7868,
+      1356.6078
+    ],
+    "median_ms": 1185.7868,
+    "p95_ms": null,
+    "estimator": "nearest-rank; p95 suppressed below 20 samples; heterogeneous batches are not one latency distribution",
+    "max_lock_wait_ms": 325.0764,
+    "max_lock_hold_ms": 295.5133,
+    "attempt_bytes_read": 1158214335,
+    "attempt_bytes_written": 450713820,
+    "peak_process_memory_bytes": 9646080,
+    "busy_attempt_wall_ms": [],
+    "initialization_ms": [
+      4842.6383
+    ],
+    "initialization_timeout": false,
+    "attempt_log_incomplete": false,
+    "serial": [
+      {
+        "request": "serial-1",
+        "wall_ms": 1145.9745,
+        "metrics": {
+          "bytes_read": 39617091,
+          "bytes_written": 13428092,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1011,
+          "ns": {
+            "copy": 260359400,
+            "destination-verification": 112903900,
+            "gate-validation": 162400,
+            "lock-hold": 130220600,
+            "lock-wait": 112400,
+            "preparation-inclusive": 1014596200,
+            "read": 77646200,
+            "replace": 818500,
+            "selection-inclusive": 128541600,
+            "semantic-validation": 227800,
+            "sync": 515361900,
+            "write": 2671700
+          },
+          "opens": 4038,
+          "replacements": 3,
+          "unsupported_directory_syncs": 2038
+        }
+      },
+      {
+        "request": "serial-8",
+        "wall_ms": 1132.1099,
+        "metrics": {
+          "bytes_read": 39635655,
+          "bytes_written": 13471803,
+          "copies": 1000,
+          "created_directories": 14,
+          "directory_syncs": 0,
+          "file_syncs": 1018,
+          "ns": {
+            "copy": 244670000,
+            "destination-verification": 113991500,
+            "gate-validation": 162800,
+            "lock-hold": 130127000,
+            "lock-wait": 127700,
+            "preparation-inclusive": 1000700800,
+            "read": 86014400,
+            "replace": 661800,
+            "selection-inclusive": 128382600,
+            "semantic-validation": 216600,
+            "sync": 514243500,
+            "write": 3685700
+          },
+          "opens": 4061,
+          "replacements": 10,
+          "unsupported_directory_syncs": 2073
+        }
+      },
+      {
+        "request": "serial-64",
+        "wall_ms": 1389.1395,
+        "metrics": {
+          "bytes_read": 41834573,
+          "bytes_written": 15161984,
+          "copies": 1000,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 1074,
+          "ns": {
+            "copy": 248923600,
+            "destination-verification": 114232700,
+            "gate-validation": 199300,
+            "lock-hold": 134168600,
+            "lock-wait": 102900,
+            "preparation-inclusive": 1252759100,
+            "read": 235669300,
+            "replace": 1348700,
+            "selection-inclusive": 129864300,
+            "semantic-validation": 209100,
+            "sync": 561305000,
+            "write": 12765400
+          },
+          "opens": 4230,
+          "replacements": 66,
+          "unsupported_directory_syncs": 2353
+        }
+      }
+    ],
+    "refusals": [
+      {
+        "request": "wave-2-0",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27386357,
+          "bytes_written": 13623785,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 257881000,
+            "destination-verification": 129064400,
+            "lock-hold": 3132400,
+            "lock-wait": 138089200,
+            "preparation-inclusive": 1162297300,
+            "read": 56431900,
+            "semantic-validation": 210900,
+            "sync": 631828000,
+            "write": 1791000
+          },
+          "opens": 3037,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-4-0",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27109648,
+          "bytes_written": 13623820,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 324394300,
+            "destination-verification": 139300900,
+            "lock-hold": 3440100,
+            "lock-wait": 136144500,
+            "preparation-inclusive": 2082937000,
+            "read": 65296700,
+            "semantic-validation": 234400,
+            "sync": 1385720500,
+            "write": 2195400
+          },
+          "opens": 3041,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-4-1",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27109648,
+          "bytes_written": 13623820,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 339579500,
+            "destination-verification": 132904100,
+            "lock-hold": 1385900,
+            "lock-wait": 143715200,
+            "preparation-inclusive": 2081171700,
+            "read": 58763900,
+            "semantic-validation": 233700,
+            "sync": 1383247100,
+            "write": 2623500
+          },
+          "opens": 3041,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-4-2",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27109624,
+          "bytes_written": 13623808,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 323116200,
+            "destination-verification": 144811600,
+            "lock-hold": 1868900,
+            "lock-wait": 140719600,
+            "preparation-inclusive": 2079999900,
+            "read": 56242800,
+            "semantic-validation": 205200,
+            "sync": 1395796800,
+            "write": 1875100
+          },
+          "opens": 3041,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-0",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27122056,
+          "bytes_written": 13623880,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 617481800,
+            "destination-verification": 295176100,
+            "lock-hold": 3197300,
+            "lock-wait": 309405600,
+            "preparation-inclusive": 3730863000,
+            "read": 109833800,
+            "semantic-validation": 233600,
+            "sync": 2363473400,
+            "write": 12935700
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-1",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27122056,
+          "bytes_written": 13623880,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 617159300,
+            "destination-verification": 268752900,
+            "lock-hold": 5018600,
+            "lock-wait": 293988200,
+            "preparation-inclusive": 3728640700,
+            "read": 109083600,
+            "semantic-validation": 251100,
+            "sync": 2384750900,
+            "write": 3809700
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-2",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27122032,
+          "bytes_written": 13623868,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 589244500,
+            "destination-verification": 313783500,
+            "lock-hold": 4121900,
+            "lock-wait": 325076400,
+            "preparation-inclusive": 3726409300,
+            "read": 119637000,
+            "semantic-validation": 431500,
+            "sync": 2398574800,
+            "write": 3165400
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-4",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27122008,
+          "bytes_written": 13623856,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 594762900,
+            "destination-verification": 268176900,
+            "lock-hold": 4361700,
+            "lock-wait": 299414300,
+            "preparation-inclusive": 3721899000,
+            "read": 109470500,
+            "semantic-validation": 267900,
+            "sync": 2408627400,
+            "write": 3823900
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-5",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27122008,
+          "bytes_written": 13623852,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 589582900,
+            "destination-verification": 268579700,
+            "lock-hold": 3347900,
+            "lock-wait": 320068300,
+            "preparation-inclusive": 3717762200,
+            "read": 112589900,
+            "semantic-validation": 445900,
+            "sync": 2375909200,
+            "write": 3507200
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-6",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27122008,
+          "bytes_written": 13623856,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 607958000,
+            "destination-verification": 292880500,
+            "lock-hold": 3560400,
+            "lock-wait": 304450500,
+            "preparation-inclusive": 3715864800,
+            "read": 106602400,
+            "semantic-validation": 274900,
+            "sync": 2390246100,
+            "write": 8417200
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "wave-8-7",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 27146584,
+          "bytes_written": 13636144,
+          "copies": 1000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 1008,
+          "ns": {
+            "copy": 606509300,
+            "destination-verification": 286353900,
+            "lock-hold": 2959400,
+            "lock-wait": 314759800,
+            "preparation-inclusive": 3712120800,
+            "read": 109926800,
+            "semantic-validation": 259800,
+            "sync": 2391838100,
+            "write": 8319400
+          },
+          "opens": 3049,
+          "replacements": 1,
+          "unsupported_directory_syncs": 2030
+        }
+      },
+      {
+        "request": "slow",
+        "error": "conflict:expected-publication",
+        "metrics": {
+          "bytes_read": 29091438,
+          "bytes_written": 14606041,
+          "copies": 1000,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 1071,
+          "ns": {
+            "copy": 281322400,
+            "destination-verification": 129555500,
+            "lock-hold": 2935500,
+            "lock-wait": 109900,
+            "preparation-inclusive": 1484755900,
+            "read": 214330500,
+            "semantic-validation": 215100,
+            "sync": 682568700,
+            "write": 13439800
+          },
+          "opens": 3254,
+          "replacements": 64,
+          "unsupported_directory_syncs": 2345
+        }
+      }
+    ],
+    "inventory": {
+      "files": 33405,
+      "directories": 1384,
+      "logical_bytes": 450711333,
+      "allocated_file_bytes": 459789504,
+      "buckets": {
+        "other": {
+          "files": 21,
+          "bytes": 821,
+          "allocated_bytes": 864
+        },
+        "attempts": {
+          "files": 64,
+          "bytes": 15242411,
+          "allocated_bytes": 15380480
+        },
+        "generations": {
+          "files": 32128,
+          "bytes": 420313351,
+          "allocated_bytes": 428580864
+        },
+        "originals": {
+          "files": 1152,
+          "bytes": 14772712,
+          "allocated_bytes": 15388672
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 360080,
+          "allocated_bytes": 409600
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 21958,
+          "allocated_bytes": 29024
+        }
+      }
+    },
+    "installed_generations": 32,
+    "retained_selected_publications": 20,
+    "unselected_generation_count": 12,
+    "current_readable": "generations/generation-54888-1792253676124861300-1",
+    "unselected_generation_logical_bytes": 157839840
+  },
+  {
+    "tier": 10000,
+    "mode": "A",
+    "consumer": "project",
+    "policy": "slot",
+    "accepted_publications": 9,
+    "refused_attempts": 1,
+    "accepted_request_wall_ms": [
+      6267.4387,
+      5914.6613,
+      6443.032,
+      5892.9932,
+      11864.5616,
+      5572.1415,
+      17238.661,
+      11471.9625,
+      5963.4595
+    ],
+    "median_ms": 6267.4387,
+    "p95_ms": null,
+    "estimator": "nearest-rank; p95 suppressed below 20 samples; heterogeneous batches are not one latency distribution",
+    "max_lock_wait_ms": 11472.1671,
+    "max_lock_hold_ms": 6439.7611,
+    "attempt_bytes_read": 1913680183,
+    "attempt_bytes_written": 974049945,
+    "peak_process_memory_bytes": 39862272,
+    "busy_attempt_wall_ms": [
+      15005.2066
+    ],
+    "initialization_ms": [
+      110084.7672
+    ],
+    "initialization_timeout": false,
+    "attempt_log_incomplete": false,
+    "serial": [
+      {
+        "request": "serial-1",
+        "wall_ms": 6267.4387,
+        "metrics": {
+          "bytes_read": 150682014,
+          "bytes_written": 71548899,
+          "copies": 5004,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 5018,
+          "ns": {
+            "copy": 1644649800,
+            "destination-verification": 621175300,
+            "gate-validation": 2437900,
+            "lock-hold": 6265252800,
+            "lock-wait": 155200,
+            "preparation-inclusive": 5901512400,
+            "read": 200767400,
+            "replace": 3709500,
+            "selection-inclusive": 25146200,
+            "semantic-validation": 2793600,
+            "sync": 2855045500,
+            "view-refresh-inclusive": 324588300,
+            "write": 5115100
+          },
+          "opens": 15053,
+          "replacements": 9,
+          "unsupported_directory_syncs": 10059
+        }
+      },
+      {
+        "request": "serial-8",
+        "wall_ms": 5914.6613,
+        "metrics": {
+          "bytes_read": 150214429,
+          "bytes_written": 71633741,
+          "copies": 5011,
+          "created_directories": 14,
+          "directory_syncs": 0,
+          "file_syncs": 5032,
+          "ns": {
+            "copy": 1439177500,
+            "destination-verification": 656287600,
+            "gate-validation": 2645000,
+            "lock-hold": 5912040500,
+            "lock-wait": 123300,
+            "preparation-inclusive": 5576050100,
+            "read": 257994600,
+            "replace": 9980200,
+            "selection-inclusive": 25843300,
+            "semantic-validation": 2701800,
+            "sync": 2780843900,
+            "view-refresh-inclusive": 297074800,
+            "write": 6852300
+          },
+          "opens": 15105,
+          "replacements": 23,
+          "unsupported_directory_syncs": 10122
+        }
+      },
+      {
+        "request": "serial-64",
+        "wall_ms": 6443.032,
+        "metrics": {
+          "bytes_read": 155094821,
+          "bytes_written": 74254553,
+          "copies": 5067,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 5144,
+          "ns": {
+            "copy": 1384286200,
+            "destination-verification": 656957800,
+            "gate-validation": 2475700,
+            "lock-hold": 6439761100,
+            "lock-wait": 120900,
+            "preparation-inclusive": 5790109700,
+            "read": 716723100,
+            "replace": 40007400,
+            "selection-inclusive": 25203900,
+            "semantic-validation": 2772100,
+            "sync": 2816316000,
+            "view-refresh-inclusive": 611242400,
+            "write": 16317000
+          },
+          "opens": 15499,
+          "replacements": 135,
+          "unsupported_directory_syncs": 10626
+        }
+      }
+    ],
+    "refusals": [
+      {
+        "request": "wave-4-1",
+        "error": "busy:lock-timeout:The process cannot access the file because another process has locked a portion of the file. (os error 33)",
+        "metrics": {
+          "bytes_read": 633198,
+          "bytes_written": 0,
+          "copies": 0,
+          "created_directories": 0,
+          "directory_syncs": 0,
+          "file_syncs": 0,
+          "ns": {
+            "read": 455400
+          },
+          "opens": 7,
+          "replacements": 0,
+          "unsupported_directory_syncs": 0
+        }
+      }
+    ],
+    "inventory": {
+      "files": 70177,
+      "directories": 10162,
+      "logical_bytes": 961085635,
+      "allocated_file_bytes": 963771384,
+      "buckets": {
+        "other": {
+          "files": 5,
+          "bytes": 898,
+          "allocated_bytes": 912
+        },
+        "attempts": {
+          "files": 50070,
+          "bytes": 703747733,
+          "allocated_bytes": 705806336
+        },
+        "originals": {
+          "files": 10079,
+          "bytes": 128025622,
+          "allocated_bytes": 128344064
+        },
+        "publications": {
+          "files": 10,
+          "bytes": 639240,
+          "allocated_bytes": 663552
+        },
+        "receipts": {
+          "files": 10,
+          "bytes": 153531,
+          "allocated_bytes": 157800
+        },
+        "view": {
+          "files": 10003,
+          "bytes": 128518611,
+          "allocated_bytes": 128798720
+        }
+      }
+    },
+    "installed_generations": 0,
+    "retained_selected_publications": 10,
+    "unselected_generation_count": 0,
+    "current_readable": "view"
+  },
+  {
+    "tier": 10000,
+    "mode": "B",
+    "consumer": "project",
+    "policy": "slot",
+    "accepted_publications": 9,
+    "refused_attempts": 2,
+    "accepted_request_wall_ms": [
+      13171.0754,
+      12863.8889,
+      13327.6142,
+      12914.3493,
+      26644.5012,
+      13639.9813,
+      27683.6566,
+      13095.5496,
+      12840.1005
+    ],
+    "median_ms": 13171.0754,
+    "p95_ms": null,
+    "estimator": "nearest-rank; p95 suppressed below 20 samples; heterogeneous batches are not one latency distribution",
+    "max_lock_wait_ms": 13636.986,
+    "max_lock_hold_ms": 14043.9604,
+    "attempt_bytes_read": 4116835177,
+    "attempt_bytes_written": 1478044754,
+    "peak_process_memory_bytes": 44826624,
+    "busy_attempt_wall_ms": [
+      15004.0348,
+      15004.2607
+    ],
+    "initialization_ms": [
+      63169.9362
+    ],
+    "initialization_timeout": false,
+    "attempt_log_incomplete": false,
+    "serial": [
+      {
+        "request": "serial-1",
+        "wall_ms": 13171.0754,
+        "metrics": {
+          "bytes_read": 396707959,
+          "bytes_written": 134746970,
+          "copies": 10000,
+          "created_directories": 7,
+          "directory_syncs": 0,
+          "file_syncs": 10011,
+          "ns": {
+            "copy": 3381535400,
+            "destination-verification": 1284419000,
+            "gate-validation": 2658600,
+            "lock-hold": 13165374800,
+            "lock-wait": 125800,
+            "preparation-inclusive": 11738559800,
+            "read": 741698000,
+            "replace": 823700,
+            "selection-inclusive": 1418971300,
+            "semantic-validation": 2649900,
+            "sync": 5588993200,
+            "write": 4497800
+          },
+          "opens": 40038,
+          "replacements": 3,
+          "unsupported_directory_syncs": 20038
+        }
+      },
+      {
+        "request": "serial-8",
+        "wall_ms": 12863.8889,
+        "metrics": {
+          "bytes_read": 396114515,
+          "bytes_written": 134790678,
+          "copies": 10000,
+          "created_directories": 14,
+          "directory_syncs": 0,
+          "file_syncs": 10018,
+          "ns": {
+            "copy": 3249585700,
+            "destination-verification": 1158357600,
+            "gate-validation": 2805100,
+            "lock-hold": 12861631800,
+            "lock-wait": 132100,
+            "preparation-inclusive": 11423713300,
+            "read": 707066400,
+            "replace": 1241600,
+            "selection-inclusive": 1410746900,
+            "semantic-validation": 2815700,
+            "sync": 5576677700,
+            "write": 7715500
+          },
+          "opens": 40061,
+          "replacements": 10,
+          "unsupported_directory_syncs": 20073
+        }
+      },
+      {
+        "request": "serial-64",
+        "wall_ms": 13327.6142,
+        "metrics": {
+          "bytes_read": 398313429,
+          "bytes_written": 136480859,
+          "copies": 10000,
+          "created_directories": 70,
+          "directory_syncs": 0,
+          "file_syncs": 10074,
+          "ns": {
+            "copy": 3337455600,
+            "destination-verification": 1143611600,
+            "gate-validation": 2455700,
+            "lock-hold": 13324585500,
+            "lock-wait": 90300,
+            "preparation-inclusive": 11970889600,
+            "read": 957790500,
+            "replace": 715800,
+            "selection-inclusive": 1345484200,
+            "semantic-validation": 2763700,
+            "sync": 5671218900,
+            "write": 15494900
+          },
+          "opens": 40230,
+          "replacements": 66,
+          "unsupported_directory_syncs": 20353
+        }
+      }
+    ],
+    "refusals": [
+      {
+        "request": "wave-4-2",
+        "error": "busy:lock-timeout:The process cannot access the file because another process has locked a portion of the file. (os error 33)",
+        "metrics": {
+          "bytes_read": 633138,
+          "bytes_written": 0,
+          "copies": 0,
+          "created_directories": 0,
+          "directory_syncs": 0,
+          "file_syncs": 0,
+          "ns": {
+            "read": 427000
+          },
+          "opens": 7,
+          "replacements": 0,
+          "unsupported_directory_syncs": 0
+        }
+      },
+      {
+        "request": "wave-4-3",
+        "error": "busy:lock-timeout:The process cannot access the file because another process has locked a portion of the file. (os error 33)",
+        "metrics": {
+          "bytes_read": 633138,
+          "bytes_written": 0,
+          "copies": 0,
+          "created_directories": 0,
+          "directory_syncs": 0,
+          "file_syncs": 0,
+          "ns": {
+            "read": 372500
+          },
+          "opens": 7,
+          "replacements": 0,
+          "unsupported_directory_syncs": 0
+        }
+      }
+    ],
+    "inventory": {
+      "files": 110163,
+      "directories": 10156,
+      "logical_bytes": 1478043470,
+      "allocated_file_bytes": 1480411856,
+      "buckets": {
+        "other": {
+          "files": 4,
+          "bytes": 604,
+          "allocated_bytes": 616
+        },
+        "attempts": {
+          "files": 20,
+          "bytes": 52970478,
+          "allocated_bytes": 53018624
+        },
+        "generations": {
+          "files": 100040,
+          "bytes": 1296254095,
+          "allocated_bytes": 1298227200
+        },
+        "originals": {
+          "files": 10079,
+          "bytes": 128025622,
+          "allocated_bytes": 128344064
+        },
+        "publications": {
+          "files": 10,
+          "bytes": 639140,
+          "allocated_bytes": 663552
+        },
+        "receipts": {
+          "files": 10,
+          "bytes": 153531,
+          "allocated_bytes": 157800
+        }
+      }
+    },
+    "installed_generations": 10,
+    "retained_selected_publications": 10,
+    "unselected_generation_count": 0,
+    "current_readable": "generations/generation-45232-1792254239046390200-2",
+    "unselected_generation_logical_bytes": 0
+  },
+  {
+    "tier": 100000,
+    "mode": "A",
+    "consumer": "project",
+    "policy": "slot",
+    "accepted_publications": 0,
+    "refused_attempts": 0,
+    "accepted_request_wall_ms": [],
+    "median_ms": null,
+    "p95_ms": null,
+    "estimator": "nearest-rank; p95 suppressed below 20 samples; heterogeneous batches are not one latency distribution",
+    "max_lock_wait_ms": 0.0,
+    "max_lock_hold_ms": 0.0,
+    "attempt_bytes_read": 0,
+    "attempt_bytes_written": 0,
+    "peak_process_memory_bytes": null,
+    "busy_attempt_wall_ms": [],
+    "initialization_ms": [],
+    "initialization_timeout": true,
+    "attempt_log_incomplete": false,
+    "serial": [],
+    "refusals": [],
+    "inventory": {
+      "files": 95587,
+      "directories": 95585,
+      "logical_bytes": 1213653454,
+      "allocated_file_bytes": 1213653464,
+      "buckets": {
+        "other": {
+          "files": 3,
+          "bytes": 462,
+          "allocated_bytes": 472
+        },
+        "originals": {
+          "files": 95584,
+          "bytes": 1213652992,
+          "allocated_bytes": 1213652992
+        }
+      }
+    },
+    "installed_generations": 0,
+    "incomplete": "[Errno 2] No such file or directory: 'C:\\\\file-native-experiment-20261017-v3\\\\growth\\\\100000-A-project-slot\\\\SELECTED.json'",
+    "pending_installed_generations": 0
+  },
+  {
+    "tier": 100000,
+    "mode": "B",
+    "consumer": "project",
+    "policy": "slot",
+    "accepted_publications": 0,
+    "refused_attempts": 0,
+    "accepted_request_wall_ms": [],
+    "median_ms": null,
+    "p95_ms": null,
+    "estimator": "nearest-rank; p95 suppressed below 20 samples; heterogeneous batches are not one latency distribution",
+    "max_lock_wait_ms": 0.0,
+    "max_lock_hold_ms": 0.0,
+    "attempt_bytes_read": 0,
+    "attempt_bytes_written": 0,
+    "peak_process_memory_bytes": null,
+    "busy_attempt_wall_ms": [],
+    "initialization_ms": [],
+    "initialization_timeout": true,
+    "attempt_log_incomplete": false,
+    "serial": [],
+    "refusals": [],
+    "inventory": {
+      "files": 94142,
+      "directories": 94140,
+      "logical_bytes": 1195286990,
+      "allocated_file_bytes": 1195287000,
+      "buckets": {
+        "other": {
+          "files": 3,
+          "bytes": 462,
+          "allocated_bytes": 472
+        },
+        "originals": {
+          "files": 94139,
+          "bytes": 1195286528,
+          "allocated_bytes": 1195286528
+        }
+      }
+    },
+    "installed_generations": 0,
+    "incomplete": "[Errno 2] No such file or directory: 'C:\\\\file-native-experiment-20261017-v3\\\\growth\\\\100000-B-project-slot\\\\SELECTED.json'",
+    "pending_installed_generations": 0
+  }
+]
