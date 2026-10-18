@@ -142,6 +142,14 @@ the first 5000-source packet refusal and Windows long-path failure are retained.
 This is an experimental private format iteration, not an approved format default
 or migration. The original baseline and control retain their separate contracts.
 
+Internal reservation recovery identifies the exact accepted allocating attempt,
+without applying a losing preparation's intent as a lookup filter. Two eligible
+preparations can share a request ID before either selects; accepting one must not
+poison unrelated admission or prevent fencing the other. Only the exact accepted
+attempt transfers charge, and its intent/owner binding must agree. Public request
+retries/selects still refuse a different intent. The paired A/B regression covers
+this ordering and verifies exact accepted outcomes after losing-work collection.
+
 Final history recipe amendment, before the final history lane: metadata selects
 ID `i % 16` at `i % 5 == 2`, with label suffix `(i / 80) % 2`. Each ID is revisited
 after 80 selections, so its value now toggles on every metadata visit. The pilot's

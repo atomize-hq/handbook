@@ -121,3 +121,14 @@ cannot reconstruct an unobserved GC response. Explicit post-retirement proof mod
 still authenticates every receipt/result/index/intent and final full state, but
 lists the exact header-transition row numbers unavailable due to authenticated
 retirement markers. The pre-retirement proof retains all transition checks.
+
+Prospective paired-intent recovery correction (before reproducer/build): allow
+one <=900-second A/B old-core reproduction on Windows, then a separate corrected
+build/tests and <=900-second paired-preparation/supplement/replay regression on
+Windows. Permit one <=1800-second affected followup each on native Linux/macOS
+and WSL, including build/tests, the same focused cases and evidence export. The
+WSL followup must fit the existing reporting reserve. Existing native windows
+and all long-history/document observations retain their original pins/caps. No
+running binary is replaced. The correction only changes internal reservation
+transfer/abandon identity lookup for a losing different-intent preparation; public
+same-ID/different-intent publication must remain refused. No format is changed.

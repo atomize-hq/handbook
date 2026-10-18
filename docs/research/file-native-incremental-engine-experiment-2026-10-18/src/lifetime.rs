@@ -49,10 +49,11 @@ pub fn transfer(root:&Path,attempt:&str,m:&mut Metrics)->Result<()>{
 pub fn recover_transfers(store:&Store,m:&mut Metrics)->Result<()>{
     let all=reservations(&store.root,m)?;
     for (attempt,r) in all{
-        if let Some(found)=store.accepted(&r.request,Some(&r.intent),m)?{
+        if let Some(found)=store.accepted(&r.request,None,m)?{
             // A different attempt accepting the same request does not transfer
             // this attempt's private allocations. Keep those charged.
             if found.attempt==attempt{
+                if found.intent!=r.intent{return Err("integrity:allocation-transfer-intent".into());}
                 let p=store.member(&found.selected,m)?;
                 if p.allocation_owner.attempt!=attempt||p.allocation_owner.conservative_bytes<r.bytes||!p.allocation_owner.includes_intermediates_and_stages{
                     return Err("integrity:allocation-transfer-binding".into());
@@ -100,7 +101,7 @@ pub fn run(store:&Store,v:&Value,m:&mut Metrics)->Result<Value>{
         let attempt=v["attempt"].as_str().ok_or("attempt")?;
         if !crate::model::safe_id(attempt){return Err("refused:attempt".into());}
         let mut all=reservations(root,m)?;let r=all.get_mut(attempt).ok_or("refused:no-reservation")?;
-        if store.accepted(&r.request,Some(&r.intent),m)?.is_some_and(|a|a.attempt==attempt){return Err("refused:selected-attempt".into());}
+        if store.accepted(&r.request,None,m)?.is_some_and(|a|a.attempt==attempt){return Err("refused:selected-attempt".into());}
         io::atomic(&root.join(format!("abandoned/{attempt}")),b"fenced",m)?;io::checkpoint("abandonment-fenced")?;
         r.state="abandoned".into();write_reservations(root,&all,m)?;drop(gate);
         return Ok(json!({"status":"abandoned-charged-until-gc"}));
