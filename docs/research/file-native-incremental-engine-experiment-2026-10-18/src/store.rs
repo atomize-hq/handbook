@@ -66,6 +66,7 @@ impl Store{
 }
 impl Store{
     pub fn open(root:&Path,m:&mut Metrics)->Result<Self>{
+        m.store_root=Some(root.into());
         let config:StoreConfig=serde_json::from_slice(&io::read_bounded(&root.join("STORE.json"),65536,m)?)?;
         if config.version!=1||!["A","B"].contains(&config.mode.as_str())||!["project","research"].contains(&config.consumer.as_str()){
             return Err("integrity:store-version-kind".into());
@@ -73,6 +74,7 @@ impl Store{
         Ok(Self{root:root.into(),config})
     }
     pub fn lock(&self,m:&mut Metrics)->Result<LockGuard>{
+        m.store_root=Some(self.root.clone());
         let t=Instant::now();let f=OpenOptions::new().create(true).truncate(false).read(true).write(true).open(self.root.join("writer.lock"))?;
         loop{match f.try_lock_exclusive(){
             Ok(())=>break,Err(e)=>{
@@ -96,11 +98,13 @@ impl Store{
         Ok(f)
     }
     fn selected(&self,m:&mut Metrics)->Result<Option<Selector>>{
+        m.store_root=Some(self.root.clone());
         let p=self.root.join("SELECTED.json");
         if !p.exists(){return Ok(None);}
         Ok(Some(serde_json::from_slice(&io::read_bounded(&p,65536,m)?)?))
     }
     pub fn publication(&self,s:&Selector,m:&mut Metrics)->Result<Publication>{
+        m.store_root=Some(self.root.clone());
         if !model::safe_id(&s.publication)||!objects::valid_hash(&s.digest){return Err("integrity:selector".into());}
         let p:Publication=serde_json::from_slice(&io::checked(&self.root.join(format!("publications/{}.json",s.publication)),&s.digest,m)?)?;
         if p.version!=1||p.store_id!=self.config.store_id||p.id!=s.publication||p.graph.version!=1{return Err("integrity:publication-version-binding".into());}
@@ -387,6 +391,7 @@ impl Store{
             "manifest_digest":manifest,"selection_unchanged":true}))
     }
     pub fn init(root:&Path,mode:&str,consumer:&str,n:usize,fallback:bool,m:&mut Metrics)->Result<Value>{
+        m.store_root=Some(root.into());
         if root.exists()||!["A","B"].contains(&mode)||!["project","research"].contains(&consumer)||n<10||n>100_000{return Err("refused:init-arguments-existing".into());}
         io::mkdir(root,m)?;
         let config=StoreConfig{version:1,store_id:io::unique("store"),mode:mode.into(),consumer:consumer.into(),fallback};

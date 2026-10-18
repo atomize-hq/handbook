@@ -33,7 +33,7 @@ pub fn decode<T:DeserializeOwned>(b:&[u8],o:&mut Objects)->Result<T>{
         Ok(serde_json::from_slice(&o.read(id)?)?)
     }else{Ok(serde_json::from_slice(b)?)}
 }
-pub fn object_store<'a>(root:&Path,m:&'a mut Metrics)->Objects<'a>{Objects{base:root.into(),metrics:m}}
+pub fn object_store<'a>(root:&Path,m:&'a mut Metrics)->Objects<'a>{m.store_root=Some(root.into());Objects{base:root.into(),metrics:m}}
 pub fn point<T:DeserializeOwned>(o:&mut Objects,root:&Option<Id>,key:&str)->Result<Option<T>>{
     DiskIndex::open(o,root.clone())?.get(o,key)?.filter(|b|!b.is_empty()).map(|b|decode(&b,o)).transpose()
 }

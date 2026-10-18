@@ -6,6 +6,8 @@ static SEQ: AtomicU64 = AtomicU64::new(0);
 #[derive(Default, Serialize)]
 pub struct Metrics {
     #[serde(skip)]
+    pub store_root:Option<std::path::PathBuf>,
+    #[serde(skip)]
     pub lock_hold_counter:std::sync::Arc<std::sync::atomic::AtomicU64>,
     pub page_reads:u64, pub unique_pages:std::collections::BTreeSet<String>,
     pub documents_visited:u64, pub edges_visited:u64, pub index_updates:u64,
@@ -23,6 +25,7 @@ pub struct Metrics {
 }
 impl Metrics {
     fn record_bytes(&mut self,path:&Path,n:u64,write:bool){
+        let path=self.store_root.as_ref().and_then(|root|path.strip_prefix(root).ok()).unwrap_or(path);
         let has=|name:&str|path.components().any(|c|c.as_os_str()==name);
         let field=if has("objects"){
             if write{&mut self.bytes_metadata_written}else{&mut self.bytes_metadata_read}

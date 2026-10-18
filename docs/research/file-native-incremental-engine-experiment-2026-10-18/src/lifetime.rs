@@ -187,7 +187,7 @@ fn collect(store:&Store,m:&mut Metrics)->Result<Value>{
     let mut paths=vec![];for name in ["objects","originals","derived"]{files(&root.join(name),&mut paths)?;}
     let mut removed=0;let mut bytes=0;
     for path in paths{
-        let is_object=path.components().any(|c|c.as_os_str()=="objects");
+        let is_object=path.starts_with(root.join("objects"));
         let retained=if is_object{keep.contains(path.file_name().unwrap().to_string_lossy().as_ref())}else{keep_files.contains(&path)};
         if !retained{bytes+=remove_checked(root,&path,m)?;removed+=1;io::checkpoint("reclaim-file")?;}
     }

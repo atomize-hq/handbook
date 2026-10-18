@@ -4,6 +4,7 @@ use serde::Deserialize;
 use std::{io::{Read,Write},path::PathBuf,time::Instant,fs::OpenOptions};
 pub fn run(v:Value,m:&mut Metrics,consumer:Option<&str>)->Result<Value>{
     let root=PathBuf::from(v["root"].as_str().ok_or("root")?);let action=v["action"].as_str().ok_or("action")?;
+    m.store_root=Some(root.clone());
     if action=="differential"{return crate::differential::run(&root,v["count"].as_u64().ok_or("count")? as usize,v["seed"].as_u64().ok_or("seed")?,m);}
     if action=="init"{
         return Store::init(&root,v["mode"].as_str().unwrap_or("A"),consumer.or(v["consumer"].as_str()).unwrap_or("project"),
@@ -115,7 +116,7 @@ fn history(store:&Store,v:&Value,m:&mut Metrics)->Result<Value>{
             _=>vec![]
         };
         let request=Request{request:format!("history-{i:06}"),base:Some(selected.clone()),ops,packet:false};
-        let t=Instant::now();let mut per=Metrics::default();let out=store.publish(request,&mut per)?;
+        let t=Instant::now();let mut per=Metrics::default();per.store_root=Some(store.root.clone());let out=store.publish(request,&mut per)?;
         if out["status"]!="published"||out["result"]["outcome"]!="accepted"{return Err(format!("history:uncompleted-boundary:{out}").into());}
         selected=serde_json::from_value(out["selected"].clone())?;
         per.finish();
