@@ -1,0 +1,7 @@
+{
+  "upstream_report_commit": "7e1bfb9d32c006fec56d4f9af4e360134d4f78b3",
+  "original_helper_sha256": "b49022ad16e291b67ee4686006597f475675d954b5b0bcfbb3349c19744f421d",
+  "portable_helper_sha256": "a03f51e7a45b7c3bb35a6c80cfb574deb9c881b95a4184cf3f875b586942b407",
+  "change": "Restore Path.as_posix() for physical copied filenames after scoped native-folder import overwrote the prior local portability correction. Native raw/source artifacts unchanged; full portable verification passed after restoration.",
+  "initial_local_verifier": "failed at physical filename separator check after preceding source/response verification"
+}

@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "lanes": {
+    "evidence\\accounting-5a65a21": {
+      "events": 181,
+      "censors": 0
+    },
+    "evidence\\audit-7e00d22": {
+      "events": 42,
+      "censors": 0
+    },
+    "evidence\\corrected": {
+      "events": 570,
+      "censors": 0
+    },
+    "evidence\\deep": {
+      "events": 120,
+      "censors": 0
+    },
+    "evidence\\development": {
+      "events": 117,
+      "censors": 0
+    },
+    "evidence\\primary": {
+      "events": 602,
+      "censors": 0
+    },
+    "evidence\\replay-7ac70f9": {
+      "events": 610,
+      "censors": 0
+    },
+    "evidence\\walk": {
+      "events": 4,
+      "censors": 0
+    }
+  },
+  "session_archives": 23,
+  "git_source_archives": 8,
+  "qualification": "Archive/response/source/session/binary-hash association verification; physical executable bytes remain on Mac and their recorded hash is not a reproducible-build claim."
+}
