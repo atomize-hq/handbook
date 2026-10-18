@@ -54,7 +54,7 @@ class Driver:
         parsed=None;error=None
         try:parsed=json.loads(out)
         except Exception as ex:error=str(ex)
-        row={'input':v,'environment':env or {},'elapsed_ns':elapsed,'exit':proc.returncode,'censored':censored,
+        row={'input':v,'environment':env or {},'elapsed_ns':elapsed,'process_id':proc.pid,'exit':proc.returncode,'censored':censored,
           'controller_start_ns':start,'controller_end_ns':start+elapsed,
           'stdout_b64':base64.b64encode(out).decode(),'stdout_sha256':sha(out),'stdout_bytes':len(out),
           'stderr_b64':base64.b64encode(err).decode(),'parse_error':error,'output':parsed,
