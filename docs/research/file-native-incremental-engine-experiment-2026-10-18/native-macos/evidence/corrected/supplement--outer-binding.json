@@ -1,0 +1,10 @@
+{
+  "executable_sha256": "858e596e75b17c6e409fc40dea5492f1e858d79105547e6542db26de56e6ed97",
+  "source_archive_sha256": "a485785cac0ab941a11af233611f2b2abab215e2203bae422083da38d614b3f7",
+  "cap_seconds": 180,
+  "core_pin": "a1108c634cb8362aca50e1a6228766802b96f087",
+  "helper_sha256": "8b1065cda56fa39ddaa1a29bca96f5f353d07a8c9e632bf8b9a690a4cd6ec951",
+  "launcher_sha256": "8562f20290b67a28551a1451d4b80a96eeb9d2a506a115bfb72d25beae18d3fb",
+  "original_final_deadline": 1792358324.418587,
+  "binding_origin": "Postrun binding to exact corrected helper, launcher receipts and unchanged original final deadline; raw session/events unchanged"
+}

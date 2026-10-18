@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "pin": "a1108c634cb8362aca50e1a6228766802b96f087",
+  "events": 570,
+  "censors": 0,
+  "namespace_default_fixed": true,
+  "selected_originals_before": 16,
+  "selected_originals_after_collect": 16,
+  "byte_role_conservation_responses": 534,
+  "semantic_configurations": 4,
+  "publication_faults": 23,
+  "supplement": {
+    "review_findings": "regressions passed",
+    "actual_retired_source_reclaimed": true,
+    "restoration": {
+      "digest": "00177f63b44d5797a694596935d764f74e9efd376d9e129bdbf8b68247b7c3d4",
+      "publication": "publication-19822-1792353524604413000-10"
+    },
+    "reader_overlap": true,
+    "stable_divergence_backups": 1,
+    "quota_slots": 8,
+    "additional_boundaries": 8,
+    "fallback": true
+  },
+  "adversarial": {
+    "passed": [
+      "forged-version",
+      "forged-store_id",
+      "forged-graph",
+      "forged-changes",
+      "forged-removed",
+      "indirect-point-audit-gc",
+      "missing-and-corrupt-graph",
+      "missing-and-corrupt-history",
+      "missing-and-corrupt-result"
+    ],
+    "large_header_indirection": true
+  },
+  "no_smoke_rerun": true,
+  "original_final_deadline_preserved": true,
+  "epoch": 1792353685.7567239
+}

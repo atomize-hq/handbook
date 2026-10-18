@@ -1,0 +1,21 @@
+{
+  "epoch": 1792353920.9304152,
+  "base": "a1108c634cb8362aca50e1a6228766802b96f087",
+  "core_files_byte_verified": 53,
+  "tracked_changes_before_stage": [],
+  "only_allowed_new_namespace": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos/",
+  "shared_head": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+  "shared_status": "clean; read only",
+  "common_remote_observed_head": "a933cd66e4dc6298fc3c1f5622913e6b00f3a393",
+  "common_remote_is_direct_child_of_tested_pin": true,
+  "common_remote_followup": "Five harness/report files changed; no repin or execution of newer helpers",
+  "gitnexus": {
+    "scope": "all",
+    "repo": "/private/tmp/file-native-incremental-macos-20261018/corrected-checkout",
+    "status": "UNKNOWN",
+    "error": "Repository not found",
+    "manual_scope": "New report artifacts and watchdog/export CLIs only; no Rust/library/pinned harness edits. Graph risk unknown, not zero.",
+    "staged_status": "UNKNOWN: same repository-not-found error for staged scope"
+  },
+  "coordinator_final_confirmation": "No change to a1108c6 affected-core scope; later resident workload/oracle changes remain separate and require no further Mac rerun."
+}

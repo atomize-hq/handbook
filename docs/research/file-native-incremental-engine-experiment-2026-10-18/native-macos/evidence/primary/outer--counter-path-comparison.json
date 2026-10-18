@@ -1,0 +1,52 @@
+{
+  "core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+  "observations": [
+    {
+      "label": "primary-results-container",
+      "input": {
+        "action": "init",
+        "root": "/private/tmp/file-native-incremental-macos-20261018/final-lane/results/checks/A-project/disposable/store",
+        "mode": "A",
+        "consumer": "project",
+        "count": 16
+      },
+      "bytes": {
+        "bytes_control_read": 0,
+        "bytes_control_written": 0,
+        "bytes_metadata_read": 1734040,
+        "bytes_metadata_written": 14862,
+        "bytes_payload_read": 0,
+        "bytes_payload_written": 0,
+        "bytes_read": 2201691,
+        "bytes_result_read": 467651,
+        "bytes_result_written": 325223,
+        "bytes_written": 340085
+      },
+      "exe_sha256": "4c597e2415bcb47379ac0c07dea6d850e2532a6969cf7583be4a41bf49a6e29b"
+    },
+    {
+      "label": "path-neutral-deep-control",
+      "input": {
+        "action": "init",
+        "root": "/private/tmp/file-native-incremental-macos-20261018/final-lane/deep-cases/checkpoint-built/disposable/store",
+        "mode": "A",
+        "consumer": "project",
+        "count": 16
+      },
+      "bytes": {
+        "bytes_control_read": 6873,
+        "bytes_control_written": 15523,
+        "bytes_metadata_read": 1734040,
+        "bytes_metadata_written": 14862,
+        "bytes_payload_read": 460778,
+        "bytes_payload_written": 309226,
+        "bytes_read": 2201691,
+        "bytes_result_read": 0,
+        "bytes_result_written": 474,
+        "bytes_written": 340085
+      },
+      "exe_sha256": "4c597e2415bcb47379ac0c07dea6d850e2532a6969cf7583be4a41bf49a6e29b"
+    }
+  ],
+  "qualification": "Existing observations only. Primary payload/control/result role bins invalid; total and objects metadata counters remain valid. Companion bins use path-neutral roots. No engine patch or broad rerun."
+}

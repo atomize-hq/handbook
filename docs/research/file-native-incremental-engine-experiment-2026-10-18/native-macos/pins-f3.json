@@ -1,0 +1,64 @@
+{
+  "core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+  "companion_pin": "f2c45c16886ae3c1c89d1084e43b05133383c087",
+  "capsule_files": 49,
+  "capsule_pin_file_sha256": "f9b2b3de1df50a8fc809b1946dd30baafd481a9c3f0ec565dc233b62a2641f44",
+  "rust_source_set_sha256": "54698893f040961c98e3afb3917c883af7add72820d542fb6577b18a702d33cd",
+  "rust_files": {
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/src/main.rs": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/src/main.rs": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/io.rs": "9ba206a4ddf86993702aca2b0dbcdc120d510e2a5b43f71ef0c789e30703c47e",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/backend.rs": "fac529f6d41ee08eb693aa9ec3dc4d3777d16919156268b15b37c7222272b90b",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/disk.rs": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/main.rs": "8cd6800fb18e1c5f26738f648589287a3d8fb2a217b0f4bd4d6dc17310083d57",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/lifecycle.rs": "30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/model.rs": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs": "cc0787312ed7363b42165138b64deffc2951a63856d92b7863642ced9c7aed56",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs": "9e47637a2d213f1d1abdbc559ae680d4f2410bc50e30624d3dd41f83133d7454",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs": "b68a60aa0da945f6f89190c19f296162b47e2ffa508eef1129cf2d8fc7a85307",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs": "419f65b13a45d1e0dace7c7fbb78c3e28c0b84946813175edba919492aad97d5",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs": "a29532e10e35f0658d611e4c683b29986b0b0c75084b8ab5c8df16331eeadc61",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs": "3690dc014a6b9c464d88f9b8022257d1a8231cc7450f766f33782edab61298b1",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs": "0fc51fcf86ade965effcadc9e76446c18fef3726a0ae706086895576feb7f538",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs": "0c194c2412b8f818e529efc2f1350b35e578d0ac8cc93d76fa83983bedf6d79a"
+  },
+  "binaries": {
+    "file-native-incremental": {
+      "path": "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/file-native-incremental",
+      "sha256": "4c597e2415bcb47379ac0c07dea6d850e2532a6969cf7583be4a41bf49a6e29b",
+      "bytes": 1814096,
+      "file": "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/file-native-incremental: Mach-O 64-bit executable arm64"
+    },
+    "project-consumer": {
+      "path": "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/project-consumer",
+      "sha256": "260b90da0fe28fa3f0bdc43a14eb457bad62095c91882fa8793f60f6a753c528",
+      "bytes": 1814096,
+      "file": "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/project-consumer: Mach-O 64-bit executable arm64"
+    },
+    "research-consumer": {
+      "path": "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/research-consumer",
+      "sha256": "91814c43a495bbf18fdda383df4c9bab6c3516b43e1b643d1d737ca8f5338222",
+      "bytes": 1814096,
+      "file": "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/research-consumer: Mach-O 64-bit executable arm64"
+    }
+  },
+  "helper_sources": {
+    "companion_pin": "f2c45c16886ae3c1c89d1084e43b05133383c087",
+    "core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+    "files": {
+      "deep_cases.py": {
+        "sha256": "ae6f436c7f61b53e4d3e076dd2be14c67ba992190d6cd0145302f537af967427",
+        "git_blob": "97a9739b265a45e59ef51198c36c016814163fdc"
+      },
+      "walk_cases.py": {
+        "sha256": "c210aff628398bd2e2ffe04c024816808ccea8d6226397f70308013d3122414b",
+        "git_blob": "12d0c2b41bde0fa7666628928435c46ba6fa7a29"
+      }
+    }
+  }
+}

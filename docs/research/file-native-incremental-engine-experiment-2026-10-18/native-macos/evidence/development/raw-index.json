@@ -1,0 +1,10 @@
+[
+  {
+    "file": "checks--events.jsonl.gz",
+    "source": "checks/events.jsonl",
+    "records": 117,
+    "bytes": 445943,
+    "sha256": "eaa5aa6d61c0def2e90ee41bf18bf7510c51049bac270dda8024c197a94476ad",
+    "compressed_sha256": "aad48f5aed279bd3eaa15824722939347fa0a86a438897bbb56da7eb6becb2a7"
+  }
+]

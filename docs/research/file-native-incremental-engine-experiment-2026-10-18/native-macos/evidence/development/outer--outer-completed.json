@@ -1,0 +1,11 @@
+{
+  "status": "stopped",
+  "epoch": 1792351017.67933,
+  "resources": {
+    "epoch": 1792351017.705795,
+    "files": 1881,
+    "logical_bytes": 271637637,
+    "allocated_file_bytes": 246099968,
+    "free_bytes": 35319726080
+  }
+}

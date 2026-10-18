@@ -1,0 +1,93 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "uname",
+        "-a"
+      ],
+      "exit": 0,
+      "stdout": "Darwin Mac 25.6.0 Darwin Kernel Version 25.6.0: Sat Jul 11 15:25:34 PDT 2026; root:xnu-12377.161.13~4/RELEASE_ARM64_T6020 arm64\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "sw_vers"
+      ],
+      "exit": 0,
+      "stdout": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.1\nBuildVersion:\t\t25G76\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "mount"
+      ],
+      "exit": 0,
+      "stdout": "/dev/disk3s1s1 on / (apfs, sealed, local, read-only, journaled)\ndevfs on /dev (devfs, local, nobrowse)\n/dev/disk3s6 on /System/Volumes/VM (apfs, local, noexec, journaled, noatime, nobrowse)\n/dev/disk3s2 on /System/Volumes/Preboot (apfs, local, journaled, nobrowse)\n/dev/disk3s4 on /System/Volumes/Update (apfs, local, journaled, nobrowse)\n/dev/disk1s2 on /System/Volumes/xarts (apfs, local, noexec, journaled, noatime, nobrowse)\n/dev/disk1s1 on /System/Volumes/iSCPreboot (apfs, local, journaled, nobrowse)\n/dev/disk1s3 on /System/Volumes/Hardware (apfs, local, journaled, nobrowse)\n/dev/disk3s5 on /System/Volumes/Data (apfs, local, journaled, nobrowse, protect, root data)\nmap auto_home on /System/Volumes/Data/home (autofs, automounted, nobrowse)\n/dev/disk5s1 on /Library/Developer/CoreSimulator/Cryptex/Images/bundle/SimRuntimeBundle-E454BFD1-ED2E-438B-9566-D2AFD9F25697 (apfs, local, nodev, nosuid, read-only, journaled, noatime, nobrowse)\n/dev/disk7s1 on /Library/Developer/CoreSimulator/Volumes/iOS_22G86 (apfs, sealed, local, nodev, nosuid, read-only, journaled, noatime, nobrowse)\n/dev/disk2s1 on /System/Volumes/Update/SFR/mnt1 (apfs, local, journaled, nobrowse)\n/dev/disk9s1 on /Library/Developer/CoreSimulator/Volumes/iOS_23F77 (apfs, sealed, local, nodev, nosuid, read-only, journaled, noatime, nobrowse)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "df",
+        "-k",
+        "/private/tmp/file-native-incremental-macos-20261018"
+      ],
+      "exit": 0,
+      "stdout": "Filesystem   1024-blocks      Used Available Capacity  iused     ifree %iused  Mounted on\n/dev/disk3s5   971350180 897401704  34708360    97% 15259361 347083600    4%   /System/Volumes/Data\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "rustc",
+        "-vV"
+      ],
+      "exit": 0,
+      "stdout": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cargo",
+        "-V"
+      ],
+      "exit": 0,
+      "stdout": "cargo 1.89.0 (c24e10642 2025-06-23)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/bin/bash",
+        "--version"
+      ],
+      "exit": 0,
+      "stdout": "GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)\nCopyright (C) 2007 Free Software Foundation, Inc.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "python3",
+        "-VV"
+      ],
+      "exit": 0,
+      "stdout": "Python 3.11.9 (main, May 21 2025, 12:40:01) [Clang 16.0.0 (clang-1600.0.26.6)]\n",
+      "stderr": ""
+    }
+  ],
+  "python": "3.11.9 (main, May 21 2025, 12:40:01) [Clang 16.0.0 (clang-1600.0.26.6)]",
+  "machine": "arm64",
+  "case_sensitive": false,
+  "normalization_sensitive": false,
+  "hard_link_same_inode": true,
+  "sync_probes": [
+    {
+      "path": "/private/tmp/file-native-incremental-macos-20261018/fs-probe/Case",
+      "fsync": "success",
+      "darwin_f_fullfsync_return": 0
+    },
+    {
+      "path": "/private/tmp/file-native-incremental-macos-20261018/fs-probe",
+      "fsync": "success",
+      "darwin_f_fullfsync_return": 0
+    }
+  ],
+  "power_loss_qualified": false
+}

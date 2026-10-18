@@ -1,0 +1,8 @@
+{
+  "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+  "affected_checks": true,
+  "smoke_n": 1000,
+  "consumers": 2,
+  "shell_copies": 3,
+  "finished": 1792352389.87844
+}

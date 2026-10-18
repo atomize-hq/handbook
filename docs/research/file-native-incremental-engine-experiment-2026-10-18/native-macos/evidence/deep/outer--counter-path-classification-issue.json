@@ -1,0 +1,29 @@
+{
+  "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+  "source": "src/io.rs Metrics::record_bytes",
+  "trigger": "Common run_lane.py sets --base <root>/results; record_bytes treats any ancestor component named results as result evidence before payload/control classification.",
+  "observed_input": {
+    "action": "init",
+    "root": "/private/tmp/file-native-incremental-macos-20261018/final-lane/results/checks/A-project/disposable/store",
+    "mode": "A",
+    "consumer": "project",
+    "count": 16
+  },
+  "observed_byte_counters": {
+    "bytes_control_read": 0,
+    "bytes_control_written": 0,
+    "bytes_metadata_read": 1734040,
+    "bytes_metadata_written": 14862,
+    "bytes_payload_read": 0,
+    "bytes_payload_written": 0,
+    "bytes_read": 2201691,
+    "bytes_result_read": 467651,
+    "bytes_result_written": 325223,
+    "bytes_written": 340085
+  },
+  "raw_log": "/private/tmp/file-native-incremental-macos-20261018/final-lane/results/checks/events.jsonl",
+  "raw_line": 1,
+  "impact": "Payload/control/result role counters are misclassified under this runner path; total and objects metadata counters, correctness outcomes and raw timings remain separately observable.",
+  "local_engine_change": false,
+  "epoch": 1792352341.364125
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "file": "base--events.jsonl.gz",
+    "source": "events.jsonl",
+    "records": 120,
+    "bytes": 424644,
+    "sha256": "049b24c2e08cfa3d3eabee4caddddf65ded06d383814d46d71df4af799db6817",
+    "compressed_sha256": "adf738977a7e75bf9a429467f0093d58ab9788ef6f871adcb75108ee27937f3e"
+  }
+]

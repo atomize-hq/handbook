@@ -1,0 +1,22 @@
+[
+  {
+    "mode": "A",
+    "shell": "bash",
+    "copied_manifest": "8b2d9ebd89ea055ccb75f41126b2e8e03e04d5bb12c1569232c934d2da7e9d32",
+    "paused_successor": false,
+    "bound_selected": {
+      "digest": "af41cb45c8c22b125eb67c3ce6d5e67208afb77d6346e3a72f97404787d1a893",
+      "publication": "publication-16280-1792352561878977000-10"
+    }
+  },
+  {
+    "mode": "B",
+    "shell": "bash",
+    "copied_manifest": "7d47226b0537efb105ab29ac7c2e46abaa111aeb250efee944366585cb55c9b5",
+    "paused_successor": true,
+    "bound_selected": {
+      "digest": "82c757e954ce5ebe42a6c0f2c3ef7f60693f8b44ff6ccfbe64435e6bf30ee0f6",
+      "publication": "publication-16301-1792352563276371000-42"
+    }
+  }
+]

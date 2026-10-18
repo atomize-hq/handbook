@@ -1,0 +1,14 @@
+{
+  "companion_pin": "f2c45c16886ae3c1c89d1084e43b05133383c087",
+  "core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+  "files": {
+    "deep_cases.py": {
+      "sha256": "ae6f436c7f61b53e4d3e076dd2be14c67ba992190d6cd0145302f537af967427",
+      "git_blob": "97a9739b265a45e59ef51198c36c016814163fdc"
+    },
+    "walk_cases.py": {
+      "sha256": "c210aff628398bd2e2ffe04c024816808ccea8d6226397f70308013d3122414b",
+      "git_blob": "12d0c2b41bde0fa7666628928435c46ba6fa7a29"
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "lane": "development-fb73e75",
+  "pin": "fb73e75bb9893a4d897ecd28eb5615f6cc2a45d2",
+  "events": 117,
+  "censors": 0,
+  "exit_counts": {
+    "0": 97,
+    "2": 20
+  },
+  "action_counts": {
+    "init": 3,
+    "lifecycle": 42,
+    "audit": 8,
+    "publish": 32,
+    "dump": 2,
+    "prepare": 6,
+    "select": 6,
+    "checkpoint": 2,
+    "resolve": 4,
+    "cancel": 4,
+    "packet": 2,
+    "refresh": 2,
+    "point": 2,
+    "view-audit": 2
+  },
+  "sessions": [
+    {
+      "path": "checks/events.jsonl",
+      "source_archive_sha256": "16934e271ec03b88c559d8207e547e651bf4ee831189ab517afcc7cae28f50b4",
+      "exe_sha256": "92ff199951dc8979612bba01a64dc742bbd3fd3f6349fd7078ccc9b6b14c9f44",
+      "cap_seconds": 180
+    }
+  ],
+  "raw_archives": 1,
+  "source_files": 47,
+  "outer_artifacts": [
+    {
+      "file": "outer--binary-pins.json",
+      "sha256": "91162a8d5ddc3aa9cfc7e263e1177fda7f261057439603400b57c3fbf51fb616",
+      "bytes": 712
+    },
+    {
+      "file": "outer--build.stderr",
+      "sha256": "fd358f9b562922fe8e866558245623ff33c77b65a5ada18d914b9b8050a445c2",
+      "bytes": 2370
+    },
+    {
+      "file": "outer--build.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--development-allocation.json",
+      "sha256": "4ba28bf7e2c848ab2a3f3ddcfd6f864b2ad05b765ab7afa3cc8a83a737d792e7",
+      "bytes": 622
+    },
+    {
+      "file": "outer--development-capsule_adapter.py",
+      "sha256": "8f9f65afe806abe2535a45abb7824c6dd6dd0d36c6b565094e1598982eb7ca3a",
+      "bytes": 1785
+    },
+    {
+      "file": "outer--development-hold.json",
+      "sha256": "b739f28cf59a9bf1eb6828751b4a2a6b21ddfb865dbb09b96e06f291541c495e",
+      "bytes": 250
+    },
+    {
+      "file": "outer--development-outer.py",
+      "sha256": "8e9bdd7e0dd8cc98a7362392996484dc31dd465f7bd0060e3a60742c233998c1",
+      "bytes": 4395
+    },
+    {
+      "file": "outer--development-summary.json",
+      "sha256": "bdec878bf206d5d0ad4fdde1cea089fb72267b90a42f9f4eaf797e7b11671ae0",
+      "bytes": 336
+    },
+    {
+      "file": "outer--development-wrapper-pins.json",
+      "sha256": "1967b48cbf03e979b1514c34c9d9d8581289818225e97484973ef67736ab6444",
+      "bytes": 382
+    },
+    {
+      "file": "outer--environment.json",
+      "sha256": "31283775385e4d04cd0301647cc3ba27e9c2579e0585e4c22019316ee8235526",
+      "bytes": 3791
+    },
+    {
+      "file": "outer--native.stderr",
+      "sha256": "14c9bc5efe4417991f5420ea239c61039600c6c2e92b1acebb03413c60450828",
+      "bytes": 2453
+    },
+    {
+      "file": "outer--native.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--outer-completed.json",
+      "sha256": "5aaf77411da54a343fbe514da025d24187467035c674c79de41fb09aa7fe3a55",
+      "bytes": 229
+    },
+    {
+      "file": "outer--outer-console.log",
+      "sha256": "af9f1c10a1e481e24a05f13c4db6c98175eb0201a1366a2ded36e74d7f253463",
+      "bytes": 2926
+    },
+    {
+      "file": "outer--outer-events.jsonl",
+      "sha256": "af9f1c10a1e481e24a05f13c4db6c98175eb0201a1366a2ded36e74d7f253463",
+      "bytes": 2926
+    },
+    {
+      "file": "outer--resource-events.jsonl",
+      "sha256": "90435ec39cbb60d32b89c49f6b336cb780c406e1f60d6d456981e87bd21f631f",
+      "bytes": 1052
+    },
+    {
+      "file": "outer--source-capsule.tar",
+      "sha256": "52f7ff86c4c100b23ec219704d0f56d8077e6609a57a6d2c120406a33361b9eb",
+      "bytes": 419840
+    },
+    {
+      "file": "outer--source-pins.json",
+      "sha256": "8aaea472492f162cc7b4e5ab96285b223f41608828e8f5245b814719aa306758",
+      "bytes": 11674
+    },
+    {
+      "file": "outer--test.stderr",
+      "sha256": "8d1ef14e94325a8dae73fe8511153372d03f140e7e7c7f7b04f3fbc87a097fa0",
+      "bytes": 3078
+    },
+    {
+      "file": "outer--test.stdout",
+      "sha256": "6aaf1cf5f49916cf0638b064556aa6dee2be8979c5a9231057884fca3d7c68e3",
+      "bytes": 706
+    }
+  ],
+  "status": "lossless-response-source-session-association-passed",
+  "qualification": "Events are process responses, not independent test trials. Expected injected exits/refusals are not automatically failures. Native completion and each required result are evaluated separately."
+}

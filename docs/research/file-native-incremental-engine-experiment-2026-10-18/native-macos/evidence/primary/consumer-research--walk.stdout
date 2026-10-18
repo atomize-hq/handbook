@@ -1,0 +1,21 @@
+# File-native collection
+
+Read SELECTED.json once and verify its publication digest. The publication binds exact immutable state. B: retain generations/<attempt>/ once and read NAVIGATION.md. A: view/NAVIGATION.md may mix/lag; VIEW.json names completed state and PENDING.json records unfinished work. Ordinary edits are not automatically admitted.
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/NAVIGATION.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/docs/item-attachments-d000009/evidence/deep/source.txt
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/docs/item-con-d000003.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/docs/item-overview-d000000.yaml
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/docs/item-case-d000006.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/docs/item-case-d000007.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/docs/item-requirement---d000001.yaml
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/docs/item-con--d000004.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/docs/item-aux--d000005.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/docs/item-decision-caf--d000002.json
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/MANIFEST.json
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/packet/provenance.json
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/packet/context.md
+# Exact retained packet
+
+Sources are in docs/. Ordered inputs, exact paths, hashes, omissions and recipe are in packet/provenance.json.
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/consumer-research/store/attempts/attempt-15623-1792352387948151000-0/packet/docs/item-decision-caf--d000002.json:  "id": "d000002", "exact_number": 1.00, "text": "café α"
+verified 12 exact copied files; manifest 76ba44a253d50c7f2705a7576dd12ada53efd47e3ebf8a3e7ad301e4f8fc927a

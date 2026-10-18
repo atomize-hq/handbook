@@ -1,0 +1,10 @@
+{
+  "pin": "fb73e75bb9893a4d897ecd28eb5615f6cc2a45d2",
+  "build": "passed",
+  "cargo_tests_passed": 2,
+  "native_events": 117,
+  "native_censors": 0,
+  "native_complete": false,
+  "reason": "Coordinator superseded the common instrumentation pin and requested a hold before final measurements.",
+  "classification": "development only"
+}

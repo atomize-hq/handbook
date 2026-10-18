@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "/private/tmp/file-native-incremental-macos-20261018/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/run_lane.py",
+    "--root",
+    "/private/tmp/file-native-incremental-macos-20261018/final-lane",
+    "--source",
+    "/private/tmp/file-native-incremental-macos-20261018/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+    "--pin",
+    "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+    "--cap-gib",
+    "5",
+    "--reserve-gib",
+    "20"
+  ],
+  "exit": 0,
+  "censored": false,
+  "reason": null,
+  "after": {
+    "epoch": 1792352391.424464,
+    "logical_bytes": 724175017,
+    "allocated_file_bytes": 712282112,
+    "files": 21736,
+    "free_bytes": 34845196288
+  },
+  "epoch": 1792352391.425646
+}

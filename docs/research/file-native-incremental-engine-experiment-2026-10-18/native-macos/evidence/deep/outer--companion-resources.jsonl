@@ -1,0 +1,17 @@
+{"label": "deep-cases", "epoch": 1792352524.788241, "files": 21746, "logical_bytes": 724195538, "allocated_file_bytes": 712318976, "free_bytes": 34848337920}
+{"label": "deep-cases", "epoch": 1792352527.12824, "files": 21874, "logical_bytes": 724852451, "allocated_file_bytes": 713236480, "free_bytes": 34847674368}
+{"label": "deep-cases", "epoch": 1792352529.465941, "files": 21994, "logical_bytes": 725224373, "allocated_file_bytes": 713920512, "free_bytes": 34846846976}
+{"label": "deep-cases", "epoch": 1792352531.798207, "files": 22120, "logical_bytes": 725750449, "allocated_file_bytes": 714780672, "free_bytes": 34845896704}
+{"label": "deep-cases", "epoch": 1792352534.1486762, "files": 22238, "logical_bytes": 726124286, "allocated_file_bytes": 715415552, "free_bytes": 34845147136}
+{"label": "deep-cases", "epoch": 1792352536.4820852, "files": 22356, "logical_bytes": 726625479, "allocated_file_bytes": 716210176, "free_bytes": 34844262400}
+{"label": "deep-cases", "epoch": 1792352538.8203561, "files": 22470, "logical_bytes": 727021038, "allocated_file_bytes": 716836864, "free_bytes": 34843348992}
+{"label": "deep-cases", "epoch": 1792352541.1666229, "files": 22581, "logical_bytes": 727384628, "allocated_file_bytes": 717455360, "free_bytes": 34842636288}
+{"label": "deep-cases", "epoch": 1792352543.501385, "files": 22696, "logical_bytes": 727851939, "allocated_file_bytes": 718241792, "free_bytes": 34841726976}
+{"label": "deep-cases", "epoch": 1792352545.83951, "files": 22820, "logical_bytes": 728286366, "allocated_file_bytes": 718925824, "free_bytes": 34840952832}
+{"label": "deep-cases", "epoch": 1792352548.193423, "files": 22943, "logical_bytes": 728651023, "allocated_file_bytes": 719646720, "free_bytes": 34840145920}
+{"label": "deep-cases", "epoch": 1792352550.548268, "files": 23054, "logical_bytes": 729025266, "allocated_file_bytes": 720265216, "free_bytes": 34839437312}
+{"label": "deep-cases", "epoch": 1792352552.90157, "files": 23171, "logical_bytes": 729413720, "allocated_file_bytes": 720969728, "free_bytes": 34838581248}
+{"label": "deep-cases", "epoch": 1792352555.24796, "files": 23285, "logical_bytes": 729852817, "allocated_file_bytes": 721620992, "free_bytes": 34837770240}
+{"label": "deep-cases", "epoch": 1792352557.613722, "files": 23399, "logical_bytes": 730299773, "allocated_file_bytes": 722317312, "free_bytes": 34837041152}
+{"label": "walk-cases", "epoch": 1792352560.30929, "files": 23482, "logical_bytes": 730505320, "allocated_file_bytes": 722800640, "free_bytes": 34836205568}
+{"label": "walk-cases", "epoch": 1792352562.664555, "files": 23634, "logical_bytes": 731573016, "allocated_file_bytes": 724135936, "free_bytes": 34834952192}

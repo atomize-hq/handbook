@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "/private/tmp/file-native-incremental-macos-20261018/capsule_adapter.py", line 38, in <module>
+    runpy.run_path(sys.argv[0],run_name='__main__')
+  File "<frozen runpy>", line 291, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/private/tmp/file-native-incremental-macos-20261018/source/docs/research/file-native-incremental-engine-experiment-2026-10-18/native.py", line 18, in <module>
+    d=Driver(ns.exe,base/'checks',7200);rows=[exercise(d,m,c) for m in ['A','B'] for c in ['project','research']];rows.extend(faults(d))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/file-native-incremental-macos-20261018/source/docs/research/file-native-incremental-engine-experiment-2026-10-18/native.py", line 18, in <listcomp>
+    d=Driver(ns.exe,base/'checks',7200);rows=[exercise(d,m,c) for m in ['A','B'] for c in ['project','research']];rows.extend(faults(d))
+                                              ^^^^^^^^^^^^^^^
+  File "/private/tmp/file-native-incremental-macos-20261018/source/docs/research/file-native-incremental-engine-experiment-2026-10-18/checks.py", line 16, in exercise
+    initial=first['selected'];call('lifecycle',operation='setup')
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/file-native-incremental-macos-20261018/source/docs/research/file-native-incremental-engine-experiment-2026-10-18/checks.py", line 14, in call
+    return d.call(dict(action=action,root=r,**kw),allow=allow,env=env)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/file-native-incremental-macos-20261018/capsule_adapter.py", line 34, in call
+    return super().call(v,min(cap,maximum),env,allow)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/file-native-incremental-macos-20261018/source/docs/research/file-native-incremental-engine-experiment-2026-10-18/controller.py", line 29, in call
+    self.guard();start=time.perf_counter_ns()
+    ^^^^^^^^^^^^
+  File "/private/tmp/file-native-incremental-macos-20261018/capsule_adapter.py", line 29, in guard
+    if (ROOT/'stop.json').exists():raise RuntimeError('outer-stop-requested')
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: outer-stop-requested

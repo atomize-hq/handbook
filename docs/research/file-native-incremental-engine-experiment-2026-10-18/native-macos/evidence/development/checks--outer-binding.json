@@ -1,0 +1,9 @@
+{
+  "pin": "fb73e75bb9893a4d897ecd28eb5615f6cc2a45d2",
+  "adapter_sha256": "8f9f65afe806abe2535a45abb7824c6dd6dd0d36c6b565094e1598982eb7ca3a",
+  "allocation_sha256": "4ba28bf7e2c848ab2a3f3ddcfd6f864b2ad05b765ab7afa3cc8a83a737d792e7",
+  "executable_sha256": "92ff199951dc8979612bba01a64dc742bbd3fd3f6349fd7078ccc9b6b14c9f44",
+  "source_archive_sha256": "16934e271ec03b88c559d8207e547e651bf4ee831189ab517afcc7cae28f50b4",
+  "cap_seconds": 180,
+  "scope": "Caps tightened, source and assertions unchanged; outer root watchdog active"
+}

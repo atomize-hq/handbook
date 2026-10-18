@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "json_files": 128,
+  "python_files_syntax_checked": 25,
+  "portable_archive_verification": "portable-verification.json",
+  "qualification": "Artifact syntax and source/session transport checks; no new engine test run.",
+  "exact_source_whitespace_exemptions": [
+    {
+      "path": "helpers/walk_cases.py",
+      "sha256": "c210aff628398bd2e2ffe04c024816808ccea8d6226397f70308013d3122414b",
+      "reason": "Exact f2c45c1 companion source has 32 CRLF lines; preserved rather than normalized. Git diff --check flags CRLF as trailing whitespace."
+    }
+  ]
+}

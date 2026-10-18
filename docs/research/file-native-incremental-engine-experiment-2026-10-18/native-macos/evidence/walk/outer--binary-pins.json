@@ -1,0 +1,20 @@
+{
+  "file-native-incremental": {
+    "path": "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/file-native-incremental",
+    "sha256": "4c597e2415bcb47379ac0c07dea6d850e2532a6969cf7583be4a41bf49a6e29b",
+    "bytes": 1814096,
+    "file": "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/file-native-incremental: Mach-O 64-bit executable arm64"
+  },
+  "project-consumer": {
+    "path": "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/project-consumer",
+    "sha256": "260b90da0fe28fa3f0bdc43a14eb457bad62095c91882fa8793f60f6a753c528",
+    "bytes": 1814096,
+    "file": "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/project-consumer: Mach-O 64-bit executable arm64"
+  },
+  "research-consumer": {
+    "path": "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/research-consumer",
+    "sha256": "91814c43a495bbf18fdda383df4c9bab6c3516b43e1b643d1d737ca8f5338222",
+    "bytes": 1814096,
+    "file": "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/research-consumer: Mach-O 64-bit executable arm64"
+  }
+}

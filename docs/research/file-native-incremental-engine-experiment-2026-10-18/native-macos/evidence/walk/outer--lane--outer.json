@@ -1,0 +1,55 @@
+{
+  "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+  "prospective_work_seconds": 6300,
+  "report_reserve_seconds": 900,
+  "rows": [
+    {
+      "name": "test",
+      "argv": [
+        "cargo",
+        "test",
+        "--locked",
+        "--workspace",
+        "--target-dir",
+        "/private/tmp/file-native-incremental-macos-20261018/final-lane/build"
+      ],
+      "exit": 0,
+      "censored": false,
+      "reason": null,
+      "seconds": 8.062778207939118
+    },
+    {
+      "name": "build",
+      "argv": [
+        "cargo",
+        "build",
+        "--release",
+        "--locked",
+        "--workspace",
+        "--target-dir",
+        "/private/tmp/file-native-incremental-macos-20261018/final-lane/build"
+      ],
+      "exit": 0,
+      "censored": false,
+      "reason": null,
+      "seconds": 8.16153712477535
+    },
+    {
+      "name": "native",
+      "argv": [
+        "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+        "/private/tmp/file-native-incremental-macos-20261018/final-lane/adapter.py",
+        "--exe",
+        "/private/tmp/file-native-incremental-macos-20261018/final-lane/build/release/file-native-incremental",
+        "--base",
+        "/private/tmp/file-native-incremental-macos-20261018/final-lane/results",
+        "--pin",
+        "f3e942f6a2e84ff33fd6ea860caed49ad650f86f"
+      ],
+      "exit": 0,
+      "censored": false,
+      "reason": null,
+      "seconds": 248.93124333303422
+    }
+  ]
+}
