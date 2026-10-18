@@ -1,0 +1,14 @@
+{"label": "test", "epoch": 1792360447.490377, "files": 54830, "logical_bytes": 1685805680, "allocated_file_bytes": 1682927616, "free_bytes": 33625124864}
+{"label": "test", "epoch": 1792360450.817657, "files": 55025, "logical_bytes": 1730954192, "allocated_file_bytes": 1728684032, "free_bytes": 33598296064}
+{"label": "test", "epoch": 1792360453.7873821, "files": 55453, "logical_bytes": 1800707412, "allocated_file_bytes": 1791455232, "free_bytes": 33521733632}
+{"label": "build", "epoch": 1792360457.711311, "files": 56046, "logical_bytes": 1899479075, "allocated_file_bytes": 1869234176, "free_bytes": 33466572800}
+{"label": "build", "epoch": 1792360460.638056, "files": 56176, "logical_bytes": 1934558150, "allocated_file_bytes": 1904721920, "free_bytes": 33431920640}
+{"label": "build", "epoch": 1792360463.883819, "files": 56186, "logical_bytes": 1938094525, "allocated_file_bytes": 1908285440, "free_bytes": 33428246528}
+{"label": "strict", "epoch": 1792360467.6223931, "files": 56230, "logical_bytes": 1957631915, "allocated_file_bytes": 1927942144, "free_bytes": 33418248192}
+{"label": "strict", "epoch": 1792360470.490443, "files": 56376, "logical_bytes": 1959241838, "allocated_file_bytes": 1929629696, "free_bytes": 33416523776}
+{"label": "strict", "epoch": 1792360473.3417978, "files": 56536, "logical_bytes": 1959831655, "allocated_file_bytes": 1930702848, "free_bytes": 33415151616}
+{"label": "strict", "epoch": 1792360476.1902452, "files": 56735, "logical_bytes": 1961030138, "allocated_file_bytes": 1932304384, "free_bytes": 33413582848}
+{"label": "strict", "epoch": 1792360479.047256, "files": 56863, "logical_bytes": 1962146715, "allocated_file_bytes": 1933631488, "free_bytes": 33411887104}
+{"label": "strict", "epoch": 1792360481.9123578, "files": 57009, "logical_bytes": 1962962919, "allocated_file_bytes": 1934794752, "free_bytes": 33410715648}
+{"label": "strict", "epoch": 1792360484.7764668, "files": 57333, "logical_bytes": 1964764635, "allocated_file_bytes": 1937301504, "free_bytes": 33407889408}
+{"label": "strict", "epoch": 1792360487.6477911, "files": 57465, "logical_bytes": 1966310425, "allocated_file_bytes": 1938878464, "free_bytes": 33406103552}

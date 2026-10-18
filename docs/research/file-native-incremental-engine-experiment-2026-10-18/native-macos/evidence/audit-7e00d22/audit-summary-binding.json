@@ -1,0 +1,7 @@
+{
+  "file": "strict--audit-evidence.json",
+  "source": "/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/audit-evidence.json",
+  "sha256": "e40a7b0bf85710a1e8815407e86b5ff60b05dce1d045e3480d552f89178105fb",
+  "bytes": 6625,
+  "qualification": "Exact summary from unchanged strict audit helper; raw Driver events are separately source/session/executable-bound."
+}

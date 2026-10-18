@@ -1,0 +1,35 @@
+{
+  "preserved": [
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-10969-1792350998278108000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-14145-1792352131508793000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-19048-1792353435235413000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-32986-1792356332996193000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-62919-1792360454299601000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    }
+  ],
+  "qualification": "Four predecessor bounds fixtures plus this locked test fixture; all preserved."
+}

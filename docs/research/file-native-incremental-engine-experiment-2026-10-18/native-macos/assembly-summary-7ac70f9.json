@@ -1,0 +1,22 @@
+{
+  "final_tested_source_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+  "final_native_events": 610,
+  "final_native_censors": 0,
+  "final_exit_counts": {
+    "0": 504,
+    "2": 70,
+    "86": 36
+  },
+  "source_files": 60,
+  "prior_a1108c6_events": 570,
+  "prior_f3_events": 726,
+  "development_events": 117,
+  "all_retained_events": 2023,
+  "all_retained_censors": 0,
+  "no_native_1k_rerun": true,
+  "no_native_history_rerun": true,
+  "unperformed_requested_checks": [],
+  "original_deadline_preserved": true,
+  "report_only_parent": "c09a709a9830a8337282bab4980e881574d0074c",
+  "epoch": 1792356616.051303
+}
