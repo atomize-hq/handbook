@@ -16,7 +16,7 @@ def measurement(row):
 
 def run(root):
     report={}
-    for name in ['codec-windows-v1','matrix-common-pin','post-matrix','codec-common-pin','windows-final-extra','history-common-pin']:
+    for name in ['codec-windows-v1','matrix-common-pin','post-matrix','document-calibration-final','codec-common-pin','windows-final-extra','history-common-pin']:
         path=root/name/'events.jsonl'
         if not path.exists():continue
         rows=events(path);picked=[]

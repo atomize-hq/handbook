@@ -15,9 +15,9 @@ def point(tree,h,key):
         h=next((child for child,lo,hi in node[2] if lo<=key<=hi),None)
     return None
 
-def run(matrix):
+def run(matrix,tiers=(1000,10000,100000)):
     rows=[]
-    for n in [1000,10000,100000]:
+    for n in tiers:
         root=matrix/f'n{n}/disposable/store';selected=json.loads((root/'SELECTED.json').read_bytes());found={};chain=0
         while selected:
             chain+=1;assert chain<=1000
@@ -41,5 +41,5 @@ def run(matrix):
     return rows
 
 if __name__=='__main__':
-    a=argparse.ArgumentParser();a.add_argument('--matrix',required=True);a.add_argument('--output',required=True);ns=a.parse_args()
-    Path(ns.output).write_text(json.dumps(run(Path(ns.matrix)),indent=2))
+    a=argparse.ArgumentParser();a.add_argument('--matrix',required=True);a.add_argument('--output',required=True);a.add_argument('--tiers',nargs='+',type=int,default=[1000,10000,100000]);ns=a.parse_args()
+    Path(ns.output).write_text(json.dumps(run(Path(ns.matrix),ns.tiers),indent=2))

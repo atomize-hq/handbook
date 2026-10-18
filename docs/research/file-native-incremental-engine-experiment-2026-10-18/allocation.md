@@ -65,3 +65,12 @@ which inflates a single real reservation's allowance to the declared 32 GiB cap,
 checks refusal with one reservation, restores exact registry bytes and reclaims.
 It does not allocate 32 GiB. Both small verification additions use the reporting
 reserve; no original case cap/censor or large-tier deadline is extended.
+
+Prospective matched-depth calibration amendment (before launch): the reused
+post-matrix N10k root includes earlier contention/incoming-build publications,
+whereas achieved N100k genuine batches have H=2/3/4 including initialization.
+Allow <=900 seconds total for fresh final-core A N1k/10k initialization, identical
+4 KiB genuine 1/8/64 source imports at H=2/3/4, separate refresh and full audit.
+This small calibration uses the reporting reserve and does not rerun 100k or
+replace its censored original initialization. It repairs the history-depth match
+for the final document-size comparison; preserve both reused-root observations.
