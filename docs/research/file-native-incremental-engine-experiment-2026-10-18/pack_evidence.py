@@ -15,7 +15,7 @@ def typed(a,b):
 
 def export(source,destination):
     source=Path(source);destination=Path(destination);destination.mkdir(parents=True,exist_ok=False);rows=[];events=0
-    names={'events.jsonl','session.json','session-source.zip','completed.json','environment.json','outer.json','finished.json','checks.json','history.json','matrix.json','summary.json','stage1.json','differential.json','supplement.json','adversarial.json','deep-cases.json','walk-cases.json','adapter.py','deep_cases.py','walk_cases.py','namespace_cases.py','namespace-cases.json','replay-lifetime.json','replay-probe.json','oracle-probe.json','post-matrix.json','steps.json','linux_replay_lane.py'}
+    names={'events.jsonl','session.json','session-source.zip','completed.json','environment.json','outer.json','finished.json','checks.json','history.json','matrix.json','summary.json','stage1.json','differential.json','supplement.json','adversarial.json','deep-cases.json','walk-cases.json','adapter.py','deep_cases.py','walk_cases.py','namespace_cases.py','namespace-cases.json','replay-lifetime.json','replay-probe.json','oracle-probe.json','post-matrix.json','steps.json','linux_replay_lane.py','quota-bytes.json'}
     def put(path,relative):
         nonlocal events
         b=path.read_bytes();entry={'path':relative.as_posix(),'bytes':len(b),'sha256':sha(b)}

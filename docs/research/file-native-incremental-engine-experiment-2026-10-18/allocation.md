@@ -52,3 +52,16 @@ summed. Report total/unique pages, physical/tombstone keys, visited documents/
 edges, touched paths, index updates, payload/metadata/control/result bytes,
 namespace operations, sync/unsupported-sync counts, actual file bytes and quota.
 Sparse observations are not percentiles or causal cross-host rankings.
+
+Prospective final evidence amendment (21:30 UTC, before launch): after the serial
+measurement/native lanes, allow <=900 seconds total for final-core 1/2/4/8-process
+contention on the already owned N10k A root, with fresh request IDs. Preserve the
+original F3 contention trace. This targeted repeat records simultaneous reserved
+bytes and a deterministic snapshot of newly created preparation files at the
+controlled barrier; its request latency includes that census/archive pause and
+cleanup/retry work. It is not a replacement uncontrolled throughput benchmark.
+Allow <=900 seconds for the synthetic pessimistic byte-ceiling A/B boundary,
+which inflates a single real reservation's allowance to the declared 32 GiB cap,
+checks refusal with one reservation, restores exact registry bytes and reclaims.
+It does not allocate 32 GiB. Both small verification additions use the reporting
+reserve; no original case cap/censor or large-tier deadline is extended.
