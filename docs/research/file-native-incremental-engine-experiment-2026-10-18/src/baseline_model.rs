@@ -71,6 +71,7 @@ pub fn put_original(root:&Path,d:&mut Doc,bytes:&[u8],m:&mut Metrics)->Result<()
         format!("originals/{}/{}-{name}",&d.digest[..2],d.digest)
     }else{format!("originals/{}/{name}",d.digest)};
     let path=root.join(&d.original);
+    m.replay_files.insert(d.original.clone(),d.digest.clone());
     if path.exists(){io::checked(&path,&d.digest,m)?;}else{
         io::checkpoint("payload-before-write")?;io::mkdir(path.parent().unwrap(),m)?;
         let stage=path.with_file_name(io::unique("payload-stage"));

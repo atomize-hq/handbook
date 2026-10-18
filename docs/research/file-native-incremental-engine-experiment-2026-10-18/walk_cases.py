@@ -1,5 +1,5 @@
 """Ordinary selected-once copy under a concurrent successor; shell controls."""
-import argparse,json,os,subprocess,sys,time
+import argparse,json,os,shutil,subprocess,sys,time
 from pathlib import Path
 from controller import Driver
 from checks import req,op,result
@@ -12,7 +12,7 @@ def run(d,source,shell):
         dest=d.base/mode/'copied';ready=d.base/(mode+'-ready');release=d.base/(mode+'-release')
         env=os.environ.copy()
         if mode=='B':env.update(WALK_READY=str(ready),WALK_RELEASE=str(release))
-        cmd=(['powershell','-NoProfile','-ExecutionPolicy','Bypass','-File',str(source/'walkthrough.ps1'),'-Root',r,'-Destination',str(dest),'-Python',sys.executable]
+        cmd=([shutil.which('pwsh') or 'powershell','-NoProfile','-ExecutionPolicy','Bypass','-File',str(source/'walkthrough.ps1'),'-Root',r,'-Destination',str(dest),'-Python',sys.executable]
              if shell=='powershell' else ['bash',str(source/'walkthrough.sh'),r,str(dest)])
         with (d.base/(mode+'.stdout')).open('wb') as stdout,(d.base/(mode+'.stderr')).open('wb') as stderr:
             p=subprocess.Popen(cmd,env=env,stdout=stdout,stderr=stderr)
@@ -24,7 +24,7 @@ def run(d,source,shell):
                 assert newer!=initial and retained.endswith(json.loads((root/f"publications/{initial['publication']}.json").read_bytes())['attempt'])
                 release.write_text('release')
             assert p.wait(timeout=180)==0
-        rows.append({'mode':mode,'shell':shell,'copied_manifest':__import__('hashlib').sha256((dest/'MANIFEST.json').read_bytes()).hexdigest(),'paused_successor':mode=='B','bound_selected':initial})
+        rows.append({'mode':mode,'shell':shell,'argv':cmd,'copied_manifest':__import__('hashlib').sha256((dest/'MANIFEST.json').read_bytes()).hexdigest(),'paused_successor':mode=='B','bound_selected':initial})
     return rows
 
 if __name__=='__main__':

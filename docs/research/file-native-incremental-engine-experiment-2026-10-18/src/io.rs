@@ -8,6 +8,10 @@ pub struct Metrics {
     #[serde(skip)]
     pub store_root:Option<std::path::PathBuf>,
     #[serde(skip)]
+    pub replay_objects:std::collections::BTreeSet<String>,
+    #[serde(skip)]
+    pub replay_files:BTreeMap<String,String>,
+    #[serde(skip)]
     pub lock_hold_counter:std::sync::Arc<std::sync::atomic::AtomicU64>,
     pub page_reads:u64, pub unique_pages:std::collections::BTreeSet<String>,
     pub documents_visited:u64, pub edges_visited:u64, pub index_updates:u64,

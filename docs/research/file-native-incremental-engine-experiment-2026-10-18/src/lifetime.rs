@@ -150,6 +150,7 @@ fn collect(store:&Store,m:&mut Metrics)->Result<Value>{
     if let Some(changes)=crate::projection::pending_changes(store,m)?{
         let mut o=objects::object_store(root,m);keep.extend(objects::reachable(&mut o,&changes)?);
     }
+    let mut keep_files=BTreeSet::new();
     let all=reservations(root,m)?;
     let mut abandoned=vec![];
     for (attempt,r) in &all{
@@ -159,8 +160,16 @@ fn collect(store:&Store,m:&mut Metrics)->Result<Value>{
         let bytes=io::read(&path,m)?;
         if r.candidate_digest.as_deref()!=Some(io::digest(&bytes).as_str()){return Err("integrity:sealed-candidate-digest".into());}
         let c:Candidate=serde_json::from_slice(&bytes)?;
-        if c.attempt!=*attempt||c.intent!=r.intent||c.request.request!=r.request||c.expected!=r.base||!["publication","packet"].contains(&c.purpose.as_str()){
+        if c.version!=2||c.attempt!=*attempt||c.intent!=r.intent||c.request.request!=r.request||c.expected!=r.base||!["publication","packet"].contains(&c.purpose.as_str()){
             return Err("integrity:sealed-candidate-binding".into());
+        }
+        {
+            let mut o=objects::object_store(root,m);
+            for id in &c.replay_objects{o.read(id)?;keep.insert(id.clone());}
+        }
+        for (path,hash) in &c.replay_files{
+            if !(path.starts_with("originals/")||path.starts_with("derived/"))||Path::new(path).components().any(|p|!matches!(p,std::path::Component::Normal(_))){return Err("integrity:replay-file-path".into());}
+            io::checked(&root.join(path),hash,m)?;keep_files.insert(root.join(path));
         }
         contents.push((c.graph.clone(),c.projection.clone()));
         if let Some(base)=&c.expected{
@@ -175,7 +184,6 @@ fn collect(store:&Store,m:&mut Metrics)->Result<Value>{
         keep.extend(objects::reachable(&mut o,&c.changes)?);
         if let Some(cp)=&c.checkpoint{keep.extend(objects::reachable(&mut o,&cp.membership)?);keep.extend(objects::reachable(&mut o,&cp.outcomes)?);}
     }
-    let mut keep_files=BTreeSet::new();
     for (g,projection) in contents{
         let mut o=objects::object_store(root,m);
         keep.extend(objects::reachable(&mut o,&g.tree)?);keep.extend(objects::reachable(&mut o,&projection)?);

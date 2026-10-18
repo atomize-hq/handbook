@@ -25,6 +25,7 @@ pub struct Candidate{
     pub graph:GraphRoot,pub projection:Option<Id>,pub changes:Option<Id>,pub changed:Vec<String>,pub removed:Vec<String>,
     pub generation_manifest:Option<Id>,pub checkpoint:Option<Checkpoint>,
     pub packet_ref:Option<PacketRef>,
+    pub replay_objects:Vec<Id>,pub replay_files:BTreeMap<String,Id>,
 }
 #[derive(Clone,Serialize,Deserialize,PartialEq,Eq)]
 #[serde(deny_unknown_fields)]
@@ -202,10 +203,10 @@ impl Store{
         let allowance=head.publication.graph.count.checked_mul(per_document).ok_or("quota:overflow")?
             +64*1024*1024+r.ops.iter().map(|o|o.text.len() as u64*64).sum::<u64>();
         lifetime::reserve(&self.root,&attempt,lifetime::Reservation{request:r.request.clone(),intent:intent.clone(),base:Some(head.selected.clone()),bytes:allowance,state:"preparing".into(),used:0,candidate_digest:None},m)?;
-        m.quota_limit=Some(allowance);m.quota_spent=0;
+        m.quota_limit=Some(allowance);m.quota_spent=0;m.replay_objects.clear();m.replay_files.clear();
         m.elapsed("lock-hold",hold);drop(guard);io::checkpoint("allocation")?;
-        let c=self.compute(&head,r,intent,attempt,m)?;
-        self.save_candidate(&c,m)?;let _guard=self.lock(m)?;lifetime::mark_sealed(&self.root,&c.attempt,m)?;
+        let mut c=self.compute(&head,r,intent,attempt,m)?;
+        self.save_candidate(&mut c,m)?;let _guard=self.lock(m)?;lifetime::mark_sealed(&self.root,&c.attempt,m)?;
         m.elapsed("preparation-inclusive",t);Ok(Preparation::Ready(Prepared{candidate:c}))
     }
     fn compute(&self,head:&Snapshot,r:Request,intent:String,attempt:String,m:&mut Metrics)->Result<Candidate>{
@@ -223,8 +224,8 @@ impl Store{
         let changes=objects::update(&mut o,&head.publication.changes,changes)?;
         drop(o);
         let removed=delta.old.iter().filter_map(|(id,h)|h.as_ref().filter(|old|delta.final_docs[id].as_ref().is_none_or(|n|n.doc.path!=old.doc.path)).map(|h|h.doc.path.clone())).collect();
-        let mut c=Candidate{purpose:"publication".into(),version:1,store_id:self.config.store_id.clone(),attempt,expected:Some(head.selected.clone()),request:r,intent,
-            graph:delta.graph,projection,changes,changed:delta.changed.into_iter().collect(),removed,generation_manifest:None,checkpoint:None,packet_ref:None};
+        let mut c=Candidate{purpose:"publication".into(),version:2,store_id:self.config.store_id.clone(),attempt,expected:Some(head.selected.clone()),request:r,intent,
+            graph:delta.graph,projection,changes,changed:delta.changed.into_iter().collect(),removed,generation_manifest:None,checkpoint:None,packet_ref:None,replay_objects:vec![],replay_files:BTreeMap::new()};
         if c.request.packet{
             c.projection=projection::packet(self,&c.graph,&c.projection,&c.attempt,m)?;
             c.packet_ref=Some(PacketRef{attempt:c.attempt.clone(),manifest:io::digest(&io::read(&self.root.join(format!("attempts/{}/packet/MANIFEST.json",c.attempt)),m)?),graph_digest:io::digest(&io::json(&c.graph)?)});
@@ -236,7 +237,8 @@ impl Store{
         if self.config.mode=="B"{c.generation_manifest=Some(projection::generation(self,&c,m)?);}
         Ok(c)
     }
-    fn save_candidate(&self,c:&Candidate,m:&mut Metrics)->Result<()>{
+    fn save_candidate(&self,c:&mut Candidate,m:&mut Metrics)->Result<()>{
+        c.replay_objects=m.replay_objects.iter().cloned().collect();c.replay_files=m.replay_files.clone();
         io::write_new(&self.root.join(format!("attempts/{}/candidate.json",c.attempt)),&io::json(c)?,m)?;
         io::checkpoint("candidate-ready")
     }
@@ -305,16 +307,17 @@ impl Store{
             let expected_packet=PacketRef{attempt:c.attempt.clone(),manifest:io::digest(&io::read(&self.root.join(format!("attempts/{}/packet/MANIFEST.json",c.attempt)),m)?),graph_digest:io::digest(&io::json(&d.graph)?)};
             if c.packet_ref.as_ref()!=Some(&expected_packet){return Err("integrity:packet-ref-replay".into());}
         }
+        if c.replay_objects!=m.replay_objects.iter().cloned().collect::<Vec<_>>()||c.replay_files!=m.replay_files{return Err("integrity:candidate-replay-dependencies".into());}
         m.verify_only=false;
         m.elapsed("incremental-replay",replay_start);
         let out=self.select_locked(c,m);m.elapsed("lock-hold",t);drop(guard);out
     }
     fn check_candidate(&self,c:&Candidate,m:&mut Metrics)->Result<()>{
-        if c.purpose!="publication"||c.version!=1||c.store_id!=self.config.store_id||!model::safe_id(&c.attempt)||io::digest(&io::json(&c.request)?)!=c.intent{return Err("integrity:candidate-version-intent".into());}
+        if c.purpose!="publication"||c.version!=2||c.store_id!=self.config.store_id||!model::safe_id(&c.attempt)||io::digest(&io::json(&c.request)?)!=c.intent{return Err("integrity:candidate-version-intent".into());}
         if self.root.join(format!("abandoned/{}",c.attempt)).exists(){return Err("refused:abandoned".into());}
         let all=lifetime::reservations(&self.root,m)?;let r=all.get(&c.attempt).ok_or("refused:unreserved")?;
         if r.request!=c.request.request||r.intent!=c.intent||r.base!=c.expected||r.state!="sealed"||r.candidate_digest.as_deref()!=Some(io::digest(&io::read(&self.root.join(format!("attempts/{}/candidate.json",c.attempt)),m)?).as_str()){return Err("integrity:reservation-binding-or-unsealed".into());}
-        m.quota_limit=Some(r.bytes);m.quota_spent=0;self.refuse_cancel(&c.request.request,m)
+        m.quota_limit=Some(r.bytes);m.quota_spent=0;m.replay_objects.clear();m.replay_files.clear();self.refuse_cancel(&c.request.request,m)
     }
     pub fn select_prepared(&self,p:Prepared,m:&mut Metrics)->Result<Value>{
         let _guard=self.lock(m)?;let t=Instant::now();
@@ -380,13 +383,13 @@ impl Store{
         let intent=io::digest(&io::json(&request)?);
         let allowance=p.graph.count.checked_mul(160_000).ok_or("quota:overflow")?+64*1024*1024;
         lifetime::reserve(&self.root,&attempt,lifetime::Reservation{request:request.request.clone(),intent:intent.clone(),base:Some(selected.clone()),bytes:allowance,state:"preparing".into(),used:0,candidate_digest:None},m)?;
-        m.quota_limit=Some(allowance);m.quota_spent=0;
+        m.quota_limit=Some(allowance);m.quota_spent=0;m.replay_objects.clear();m.replay_files.clear();
         let projection=projection::packet(self,&p.graph,&p.projection,&attempt,m)?;
         let manifest=io::digest(&io::read(&self.root.join(format!("attempts/{attempt}/packet/MANIFEST.json")),m)?);
         let packet_ref=PacketRef{attempt:attempt.clone(),manifest:manifest.clone(),graph_digest:io::digest(&io::json(&p.graph)?)};
-        let c=Candidate{purpose:"packet".into(),version:1,store_id:self.config.store_id.clone(),attempt:attempt.clone(),expected:Some(selected.clone()),request,intent,
-            graph:p.graph,projection,changes:None,changed:vec![],removed:vec![],generation_manifest:None,checkpoint:None,packet_ref:Some(packet_ref)};
-        self.save_candidate(&c,m)?;lifetime::mark_sealed(&self.root,&attempt,m)?;
+        let mut c=Candidate{purpose:"packet".into(),version:2,store_id:self.config.store_id.clone(),attempt:attempt.clone(),expected:Some(selected.clone()),request,intent,
+            graph:p.graph,projection,changes:None,changed:vec![],removed:vec![],generation_manifest:None,checkpoint:None,packet_ref:Some(packet_ref),replay_objects:vec![],replay_files:BTreeMap::new()};
+        self.save_candidate(&mut c,m)?;lifetime::mark_sealed(&self.root,&attempt,m)?;
         Ok(json!({"path":format!("attempts/{attempt}/packet"),"candidate":format!("attempts/{attempt}/candidate.json"),"selected":selected,
             "manifest_digest":manifest,"selection_unchanged":true}))
     }
@@ -401,15 +404,15 @@ impl Store{
         let attempt=io::unique("attempt");let request=Request{request:"initial".into(),base:None,ops:vec![],packet:false};let intent=io::digest(&io::json(&request)?);
         let allowance=n as u64*300_000+64*1024*1024;
         lifetime::reserve(root,&attempt,lifetime::Reservation{request:"initial".into(),intent:intent.clone(),base:None,bytes:allowance,state:"preparing".into(),used:0,candidate_digest:None},m)?;
-        m.quota_limit=Some(allowance);m.quota_spent=0;
+        m.quota_limit=Some(allowance);m.quota_spent=0;m.replay_objects.clear();m.replay_files.clear();
         let s=model::fixture(root,consumer,n,m)?;let mut o=objects::object_store(root,m);
         let graph=graph::build(&mut o,&s,fallback)?;io::checkpoint("semantic-root")?;
         let projection=projection::full(root,&mut o,&graph)?;
         io::checkpoint("projection-root")?;drop(o);
-        let mut c=Candidate{purpose:"publication".into(),version:1,store_id:store.config.store_id.clone(),attempt,expected:None,request,intent,graph,projection,changes:None,
-            changed:s.docs.keys().cloned().collect(),removed:vec![],generation_manifest:None,checkpoint:None,packet_ref:None};
+        let mut c=Candidate{purpose:"publication".into(),version:2,store_id:store.config.store_id.clone(),attempt,expected:None,request,intent,graph,projection,changes:None,
+            changed:s.docs.keys().cloned().collect(),removed:vec![],generation_manifest:None,checkpoint:None,packet_ref:None,replay_objects:vec![],replay_files:BTreeMap::new()};
         if mode=="B"{c.generation_manifest=Some(projection::generation(&store,&c,m)?);}
-        store.save_candidate(&c,m)?;lifetime::mark_sealed(root,&c.attempt,m)?;store.select_locked(c,m)
+        store.save_candidate(&mut c,m)?;lifetime::mark_sealed(root,&c.attempt,m)?;store.select_locked(c,m)
     }
     pub fn checkpoint(&self,id:&str,m:&mut Metrics)->Result<Value>{
         let _guard=self.lock(m)?;self.predecessor_established(m)?;
@@ -419,7 +422,7 @@ impl Store{
         if let Some(found)=self.accepted(id,Some(&intent),m)?{return self.result(&found,m);}
         let attempt=io::unique("checkpoint");let allowance=256*1024*1024;
         lifetime::reserve(&self.root,&attempt,lifetime::Reservation{request:id.into(),intent:intent.clone(),base:Some(head.selected.clone()),bytes:allowance,state:"preparing".into(),used:0,candidate_digest:None},m)?;
-        m.quota_limit=Some(allowance);m.quota_spent=0;
+        m.quota_limit=Some(allowance);m.quota_spent=0;m.replay_objects.clear();m.replay_files.clear();
         let mut members=BTreeMap::new();let mut outcomes=BTreeMap::new();let mut next=head.publication.predecessor.clone();let mut count=0;
         while let Some(s)=next{
             count+=1;if count>200_000{return Err("refused:reference-walker-cap".into());}
@@ -434,12 +437,12 @@ impl Store{
         }
         let membership=objects::bulk(&mut o,members)?;let outcomes=objects::bulk(&mut o,outcomes)?;
         io::checkpoint("checkpoint-built")?;io::checkpoint("checkpoint-verified")?;drop(o);
-        let mut c=Candidate{purpose:"publication".into(),version:1,store_id:self.config.store_id.clone(),attempt,expected:Some(head.selected.clone()),request,intent,
+        let mut c=Candidate{purpose:"publication".into(),version:2,store_id:self.config.store_id.clone(),attempt,expected:Some(head.selected.clone()),request,intent,
             graph:head.publication.graph.clone(),projection:head.publication.projection.clone(),changes:head.publication.changes.clone(),
             changed:vec![],removed:vec![],generation_manifest:head.publication.generation_manifest.clone(),
-            checkpoint:Some(Checkpoint{source:head.selected,coverage:count,version:1,membership,outcomes}),packet_ref:head.publication.packet_ref.clone()};
+            checkpoint:Some(Checkpoint{source:head.selected,coverage:count,version:1,membership,outcomes}),packet_ref:head.publication.packet_ref.clone(),replay_objects:vec![],replay_files:BTreeMap::new()};
         if self.config.mode=="B"{c.generation_manifest=Some(projection::generation(self,&c,m)?);}
-        self.save_candidate(&c,m)?;lifetime::mark_sealed(&self.root,&c.attempt,m)?;self.select_locked(c,m)
+        self.save_candidate(&mut c,m)?;lifetime::mark_sealed(&self.root,&c.attempt,m)?;self.select_locked(c,m)
     }
     pub fn cancel(&self,id:&str,m:&mut Metrics)->Result<Value>{
         let _guard=self.lock(m)?;self.predecessor_established(m)?;

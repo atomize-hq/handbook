@@ -15,6 +15,7 @@ impl Objects<'_>{
     pub fn write(&mut self,b:&[u8])->Result<Id>{
         if b.len()>crate::MAX_OBJECT{return Err("object-cap".into());}
         let id=io::digest(b);let dest=self.base.join("objects").join(&id[..2]).join(&id);
+        self.metrics.replay_objects.insert(id.clone());
         if dest.exists(){self.read(&id)?;return Ok(id);}
         io::mkdir(dest.parent().unwrap(),self.metrics)?;
         let stage=dest.with_file_name(io::unique("object-stage"));

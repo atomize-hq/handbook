@@ -17,6 +17,7 @@ struct Action{path:String,prior:Option<FileSpec>,desired:Option<FileSpec>}
 struct Plan{version:u32,id:String,target:Watermark,prior:Option<Watermark>,full:bool,extras:BTreeSet<String>,actions:Vec<Action>}
 fn derived(root:&Path,bytes:&[u8],m:&mut Metrics)->Result<FileSpec>{
     let digest=io::digest(bytes);let source=format!("derived/{}/{}",&digest[..2],digest);let path=root.join(&source);
+    m.replay_files.insert(source.clone(),digest.clone());
     if path.exists(){io::checked(&path,&digest,m)?;}
     else{
         let stage=path.with_file_name(io::unique("derived-stage"));

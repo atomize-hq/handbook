@@ -156,3 +156,13 @@ hostile namespace, freshness-after-coherent-rollback or physical-device flush
 qualification follows. WSL additionally retains its Windows-host/VHDX stack.
 Fresh process is not device-cold; cross-machine observations do not isolate an
 operating-system cause. Both A and B remain available research contracts.
+
+The final private Candidate record is version 2. It records the exact sets of
+intermediate COW objects and immutable source/derived files emitted by deterministic
+replay, including reused objects and overwritten intermediate imports. Eligible
+candidate collection verifies and retains these dependencies. Reopened selection
+recomputes and compares the sets, so a resealed altered list cannot authorize a
+transition. Publication and selected-store versions remain 1; accepted retries
+resolve through the permanent hint/outcome before reading reclaimed candidates.
+Unselected version-1 candidates from earlier capsules are refused conservatively.
+The pre-correction GC/reopen failure and corrected A/B regressions are retained.
