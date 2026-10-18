@@ -53,3 +53,44 @@ deadline to the guest watchdog. Two waiting controllers were replaced before any
 work ran; their cancellation receipts are preserved. The guest 6 GiB guard covers
 all owned incremental source/build/runtime roots, so local+6 GiB admission is a
 conservative combined bound, not an extra uncounted guest allocation.
+
+Subsequent read-only review separated accepted evidence from retireable private
+candidate/graph contents in the proof. Exact requests are independently derived
+and hashed against selected intents. Strict pre-GC proof retains all transition
+checks. Explicit post-retirement mode validates selector markers, still checks
+every accepted result/index/intent and final full state, and lists unavailable
+retired header transitions. Fresh H82 adversarial fixtures proved candidate
+independence, rejected altered requests/results, and distinguished legitimate
+retired graph removal. Proof export/restore precedes any long-history retirement.
+
+Review also rejected a generic telemetry join that could attribute a concurrent
+writer's CPU to a read-only/deduplicated reply. Fallback now accepts only exact
+writer-producing dispositions/selected IDs; explicit PID, executable hash, call
+window and OS lifetime checks remain. Synthetic attribution fixtures are separate
+from actual engine events. Missing samples remain unavailable.
+
+A final static review found the paired-intent reservation recovery blocker:
+preparing two different intents for one ID before either selects could poison
+unrelated recovery and prevent abandonment after the winner selected. Windows
+A/B reproduction confirmed it. The reviewed correction uses acceptance without
+the losing intent for internal accounting, transfers only the exact accepted
+attempt with matching intent/owner, and preserves public intent mismatch refusal.
+Windows/Linux/Mac each passed 181 focused responses and locked tests. WSL remains
+queued. Ordinary history/document measurements keep their earlier pins.
+
+Final proof/admission bounds use the original serial prerequisite's file creation
+time, conservatively preceding the reporting lane start. Replaced waiting queues
+are preserved as unexecuted setup history. The focused WSL accounting export is
+qualified separately: periodic monitoring covers engine work, completed export
+has final footprint/free-space checks, and a host timeout leaves guest export
+completion unconfirmed until inspected. Final process quiescence and combined
+resources still require actual post-run evidence.
+
+The report review distinguishes the main 7ac Windows measurement build from the
+later 5a accounting build, each with its separate source receipt. Saved history
+reproduction paths now share one disposable-store value; this does not modify
+the already loaded long-running harness or remove its original setup refusal.
+The evidence inventory's immediate byte/membership round trip passed. Linux
+census review qualified per-path block totals (possible hardlink repeats) and its
+explicit engine/Python process filter; it does not claim universal supervisor
+detection. Completed controller records remain separate termination evidence.
