@@ -59,7 +59,7 @@ for indexpath in sorted(root.rglob('raw-index.json')):
             assert files=={name:v['sha256'] for name,v in pins['files'].items()}
         tar_count+=1
     expected=load(lane/'verification.json');assert expected['events']==count and expected['censors']==censors
-    counts[lane.relative_to(root).as_posix()]=dict(events=count,censors=censors)
-safe([path.relative_to(root).as_posix() for path in root.rglob('*') if path.is_file() and '__pycache__' not in path.parts])
+    counts[str(lane.relative_to(root))]=dict(events=count,censors=censors)
+safe([str(path.relative_to(root)) for path in root.rglob('*') if path.is_file() and '__pycache__' not in path.parts])
 print(json.dumps(dict(status='passed',lanes=counts,session_archives=zip_count,git_source_archives=tar_count,
     qualification='Archive/response/source/session/binary-hash association verification; physical executable bytes remain on Mac and their recorded hash is not a reproducible-build claim.'),indent=2))

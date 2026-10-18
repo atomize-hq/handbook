@@ -1,0 +1,23 @@
+{
+  "summaries": [
+    {
+      "file": "paired-intents--paired-intents.json",
+      "source": "/private/tmp/file-native-incremental-macos-20261018/accounting-lane/paired-intents/paired-intents.json",
+      "sha256": "5512a0ee5b0bb9876ce6d36764f2f8ee92128eb44b6c68385c575610d3b5ff65",
+      "bytes": 839
+    },
+    {
+      "file": "supplement--supplement.json",
+      "source": "/private/tmp/file-native-incremental-macos-20261018/accounting-lane/supplement/supplement.json",
+      "sha256": "f01ccf83002b95934559eaad2ed6549ffa5ba9033338b7aaa47d4f42e4fbe541",
+      "bytes": 386
+    },
+    {
+      "file": "replay-lifetime--replay-lifetime.json",
+      "source": "/private/tmp/file-native-incremental-macos-20261018/accounting-lane/replay-lifetime/replay-lifetime.json",
+      "sha256": "3c60a631e655a55dbf760dbabe4a5d423efaf0d43487691115a2a55a91a47c7f",
+      "bytes": 458
+    }
+  ],
+  "qualification": "Exact unchanged focused helper summaries; raw Driver records remain separately source/session/executable-bound."
+}

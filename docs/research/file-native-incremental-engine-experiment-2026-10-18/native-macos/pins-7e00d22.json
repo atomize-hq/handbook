@@ -1,0 +1,28 @@
+{
+  "final_tested_source_pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+  "current_lane": "N128 A/B strict negative-evidence audit only",
+  "source_files": 70,
+  "source_pins": "evidence/audit-7e00d22/outer--source-pins.json",
+  "binaries": {
+    "file-native-incremental": {
+      "path": "/private/tmp/file-native-incremental-macos-20261018/audit-lane/build/release/file-native-incremental",
+      "bytes": 1832080,
+      "sha256": "9991bd5640feb12fd4dbf5245cd61874d935f2f0a151e68b11a52a5a35856de6"
+    },
+    "project-consumer": {
+      "path": "/private/tmp/file-native-incremental-macos-20261018/audit-lane/build/release/project-consumer",
+      "bytes": 1832080,
+      "sha256": "77b9786e938f4d066baecfa4b7afc4ee507ded934e8e54cca9374ea19bad5ae1"
+    },
+    "research-consumer": {
+      "path": "/private/tmp/file-native-incremental-macos-20261018/audit-lane/build/release/research-consumer",
+      "bytes": 1832080,
+      "sha256": "1378caadd494d85e4c2712cfb06dcd6a3a3f9b0991d4331d16b958612cedc43a"
+    }
+  },
+  "prior_replay_pins": "pins-7ac70f9.json",
+  "prior_affected_pins": "pins-a1108c6.json",
+  "prior_smoke_pins": "pins-f3.json",
+  "report_only_parent": "fe6e01e287bb6d4592059b1a6a9170789ab1c631",
+  "qualification": "Current strict audit observations are source-bound to 7e00d22. Earlier measurements retain their own pins. The report-only branch does not transplant the independently tested core."
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "mode": "A",
+    "unrelated_preparation_and_selection_succeeded": true,
+    "losing_intent_refused": true,
+    "loser_fenced_and_collected": true,
+    "original_acceptance_exact": true,
+    "reservations": {},
+    "collection": {
+      "accepted_evidence_preserved": true,
+      "files": 4,
+      "logical_bytes": 9916,
+      "status": "collected"
+    }
+  },
+  {
+    "mode": "B",
+    "unrelated_preparation_and_selection_succeeded": true,
+    "losing_intent_refused": true,
+    "loser_fenced_and_collected": true,
+    "original_acceptance_exact": true,
+    "reservations": {},
+    "collection": {
+      "accepted_evidence_preserved": true,
+      "files": 40,
+      "logical_bytes": 172529,
+      "status": "collected"
+    }
+  }
+]

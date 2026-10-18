@@ -1,0 +1,16 @@
+[
+  {
+    "mode": "A",
+    "large_eligible_reopen_after_gc": true,
+    "intermediate_payload_and_packet_reopen_after_gc": true,
+    "forged_dependency_list_refused": true,
+    "abandoned_intermediate_sources_reclaimed": true
+  },
+  {
+    "mode": "B",
+    "large_eligible_reopen_after_gc": true,
+    "intermediate_payload_and_packet_reopen_after_gc": true,
+    "forged_dependency_list_refused": true,
+    "abandoned_intermediate_sources_reclaimed": true
+  }
+]

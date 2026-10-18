@@ -1,0 +1,107 @@
+{
+  "status": "passed",
+  "pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+  "source_files": 85,
+  "locked_rust_tests": 2,
+  "release_build": "passed",
+  "counts": {
+    "paired-intents": 32,
+    "replay-lifetime": 40,
+    "supplement": 109
+  },
+  "events": 181,
+  "censors": 0,
+  "exit_counts": {
+    "0": 149,
+    "2": 19,
+    "86": 13
+  },
+  "counts_derived_from_actual_driver_records": true,
+  "byte_role_conservation_json_responses": 168,
+  "paired_intents": {
+    "expect_poisoned": false,
+    "rows": [
+      {
+        "mode": "A",
+        "unrelated_preparation_and_selection_succeeded": true,
+        "losing_intent_refused": true,
+        "loser_fenced_and_collected": true,
+        "original_acceptance_exact": true,
+        "reservations": {},
+        "collection": {
+          "accepted_evidence_preserved": true,
+          "files": 4,
+          "logical_bytes": 9916,
+          "status": "collected"
+        }
+      },
+      {
+        "mode": "B",
+        "unrelated_preparation_and_selection_succeeded": true,
+        "losing_intent_refused": true,
+        "loser_fenced_and_collected": true,
+        "original_acceptance_exact": true,
+        "reservations": {},
+        "collection": {
+          "accepted_evidence_preserved": true,
+          "files": 40,
+          "logical_bytes": 172529,
+          "status": "collected"
+        }
+      }
+    ]
+  },
+  "public_different_intent_refusals": 4,
+  "supplement": {
+    "review_findings": "regressions passed",
+    "actual_retired_source_reclaimed": true,
+    "restoration": {
+      "digest": "74bbed60b7fd713a574c42cd3128e26d3f716fb64e73a4a4716455a8d662c026",
+      "publication": "publication-36781-1792365842548087000-10"
+    },
+    "reader_overlap": true,
+    "stable_divergence_backups": 1,
+    "quota_slots": 8,
+    "additional_boundaries": 8,
+    "fallback": true
+  },
+  "replay_N": 512,
+  "replay": [
+    {
+      "mode": "A",
+      "large_eligible_reopen_after_gc": true,
+      "intermediate_payload_and_packet_reopen_after_gc": true,
+      "forged_dependency_list_refused": true,
+      "abandoned_intermediate_sources_reclaimed": true
+    },
+    {
+      "mode": "B",
+      "large_eligible_reopen_after_gc": true,
+      "intermediate_payload_and_packet_reopen_after_gc": true,
+      "forged_dependency_list_refused": true,
+      "abandoned_intermediate_sources_reclaimed": true
+    }
+  ],
+  "command_seconds": {
+    "build": 13.155729055404663,
+    "tests": 9.353859901428223,
+    "paired-intents": 6.098014831542969,
+    "supplement": 9.185752868652344,
+    "replay-lifetime": 105.77055025100708
+  },
+  "combined_case_seconds": 123.1597580909729,
+  "combined_case_cap_seconds": 900,
+  "absolute_execution_deadline_epoch": 1792367170.0,
+  "reporting_reserve_seconds": 300,
+  "explicit_start_epoch": 1792365670.0,
+  "explicit_total_deadline_epoch": 1792367470.0,
+  "explicit_total_cap_seconds": 1800,
+  "elapsed_seconds": 339.32598090171814,
+  "execution_remaining_seconds": 1160.6740190982819,
+  "total_remaining_seconds": 1460.6740190982819,
+  "unperformed_requested_checks": [],
+  "original_windows_reset": false,
+  "broad_workloads_run": false,
+  "successor_dispatch": false,
+  "epoch": 1792366009.325981
+}

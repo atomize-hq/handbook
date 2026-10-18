@@ -1,0 +1,12 @@
+{
+  "executable_sha256": "051c6dd72b7ebf6d7309a121cb374942fe71dc2ea526c0e3c05f8fb38c1447f6",
+  "source_archive_sha256": "96b3429f03870e92b6390273d6a3ed83231008febdb3ceb3d64d8d34bb710f13",
+  "launcher_sha256": "8f85355cf5666f03020b4c3ed81036c9ef764fda5451bc779bb03e580895b463",
+  "allocation_sha256": "73c862ba29bf6b4167d8cdc8c9a29be3812ab83186d8b9f99d132ca4b3f43ceb",
+  "cap_seconds": 180,
+  "absolute_execution_deadline_epoch": 1792367170.0,
+  "combined_case_deadline_epoch": 1792366733.284348,
+  "explicit_total_deadline_epoch": 1792367470.0,
+  "wrapper_runs_sha256": "8470326d9bae537e37f1fadf711bff5dcabe7f41a5ceb078fa4d82bbe278f565",
+  "binding_origin": "Postrun association to actual retained native launcher and prospectively frozen absolute cutoff/allocation; original Driver event/session bytes unchanged"
+}

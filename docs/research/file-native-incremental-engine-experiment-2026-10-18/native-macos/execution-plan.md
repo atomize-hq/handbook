@@ -87,3 +87,20 @@ Build/test caps are 300 seconds each, strict suite <=900, ordinary calls <=180.
 All three commands passed; export/report/hash/commit/push share the 1800 cap.
 No broad smoke/matrix/history or other original suite is reopened. Preserve all
 predecessor evidence and append only native-macos report/evidence artifacts.
+
+
+## One paired-intent accounting followup
+
+The coordinator explicitly authorized only the concrete 5a65a21 affected followup.
+The new 1800-second outer window starts at first tool time 23:21:10 UTC and ends
+23:51:10 UTC. A native wrapper is passed --deadline-epoch 1792367170, the absolute
+start+1500 execution cutoff at 23:46:10 UTC, reserving 300 seconds for reporting.
+Locked release build/tests use a distinct target and <=300 seconds each. One
+shared case phase <=900 seconds covers paired_intents.py default strict A/B,
+supplement.py causal recovery/quota, and replay_lifetime.py A/B N512. The inner
+paired helper receives the stricter shared phase deadline. The whole-owned-root
+guard includes the incremental root, conservative isolated Git DB and all bounds
+temporary fixtures. Source excludes only prior report/evidence transport; the
+initial fuller snapshot is preserved and never executed. No source/format edits,
+broad matrix, Windows history change, prior-window reset or successor dispatch.
+All raw observations and prior reports remain source-qualified and preserved.
