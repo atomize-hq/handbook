@@ -1,0 +1,89 @@
+{
+  "status": "passed",
+  "pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+  "source_files": 60,
+  "counts": {
+    "adversarial": 42,
+    "checks": 414,
+    "namespace": 5,
+    "replay": 40,
+    "supplement": 109
+  },
+  "events": 610,
+  "censors": 0,
+  "exit_counts": {
+    "0": 504,
+    "2": 70,
+    "86": 36
+  },
+  "byte_role_conservation_json_responses": 574,
+  "replay_N": 512,
+  "replay_modes": [
+    {
+      "mode": "A",
+      "large_eligible_reopen_after_gc": true,
+      "intermediate_payload_and_packet_reopen_after_gc": true,
+      "forged_dependency_list_refused": true,
+      "abandoned_intermediate_sources_reclaimed": true
+    },
+    {
+      "mode": "B",
+      "large_eligible_reopen_after_gc": true,
+      "intermediate_payload_and_packet_reopen_after_gc": true,
+      "forged_dependency_list_refused": true,
+      "abandoned_intermediate_sources_reclaimed": true
+    }
+  ],
+  "semantic_configurations": 4,
+  "publication_boundaries": 23,
+  "supplement": {
+    "review_findings": "regressions passed",
+    "actual_retired_source_reclaimed": true,
+    "restoration": {
+      "digest": "7d0fe1b9fdfc6381219bea0ab1b13152dba79dc9ab90472e9e288da91ae3c0da",
+      "publication": "publication-34445-1792356530681725000-10"
+    },
+    "reader_overlap": true,
+    "stable_divergence_backups": 1,
+    "quota_slots": 8,
+    "additional_boundaries": 8,
+    "fallback": true
+  },
+  "adversarial_groups": [
+    "forged-version",
+    "forged-store_id",
+    "forged-graph",
+    "forged-changes",
+    "forged-removed",
+    "indirect-point-audit-gc",
+    "missing-and-corrupt-graph",
+    "missing-and-corrupt-history",
+    "missing-and-corrupt-result"
+  ],
+  "namespace": {
+    "expected_prior_bug": false,
+    "selected_sources_before": 16,
+    "selected_sources_remaining": 16,
+    "initial_byte_counters": {
+      "bytes_control_read": 18763,
+      "bytes_control_written": 21468,
+      "bytes_metadata_read": 1734040,
+      "bytes_metadata_written": 14862,
+      "bytes_payload_read": 460778,
+      "bytes_payload_written": 309226,
+      "bytes_read": 2213581,
+      "bytes_result_read": 0,
+      "bytes_result_written": 474,
+      "bytes_written": 346030
+    }
+  },
+  "build_and_locked_tests": "passed: two Rust tests",
+  "unperformed": [],
+  "no_smoke_or_history_rerun": true,
+  "original_start_epoch": 1792352024.418587,
+  "elapsed_original_seconds": 4580.745225191116,
+  "remaining_original_work_seconds": 1719.2547748088837,
+  "remaining_original_total_seconds": 2619.2547748088837,
+  "deadline_reset": false,
+  "epoch": 1792356605.1638122
+}

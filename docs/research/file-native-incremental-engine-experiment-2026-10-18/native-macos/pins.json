@@ -1,25 +1,26 @@
 {
-  "final_affected_pin": "a1108c634cb8362aca50e1a6228766802b96f087",
-  "capsule_files": 53,
-  "final_affected_source_pins": "evidence/corrected/outer--source-pins.json",
+  "final_tested_source_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+  "source_files": 60,
+  "source_pins": "evidence/replay-7ac70f9/outer--source-pins.json",
   "binaries": {
     "file-native-incremental": {
-      "path": "/private/tmp/file-native-incremental-macos-20261018/corrected-lane/build/release/file-native-incremental",
-      "bytes": 1814048,
-      "sha256": "858e596e75b17c6e409fc40dea5492f1e858d79105547e6542db26de56e6ed97"
+      "path": "/private/tmp/file-native-incremental-macos-20261018/replay-lane/build/release/file-native-incremental",
+      "bytes": 1832080,
+      "sha256": "9f6d4c54939e2dfbf23d05e19cecf91d355ce75b276c0b961576e3a4fcedaf61"
     },
     "project-consumer": {
-      "path": "/private/tmp/file-native-incremental-macos-20261018/corrected-lane/build/release/project-consumer",
-      "bytes": 1814048,
-      "sha256": "e342c456d74b4073ed5c52d208c422eca99a1a5b2e9fa439589b57bc17767bb4"
+      "path": "/private/tmp/file-native-incremental-macos-20261018/replay-lane/build/release/project-consumer",
+      "bytes": 1832080,
+      "sha256": "ca3f6b717ffa5be82bf98961ff4ff16fedcb277070387a163d53bdbd645e0ecd"
     },
     "research-consumer": {
-      "path": "/private/tmp/file-native-incremental-macos-20261018/corrected-lane/build/release/research-consumer",
-      "bytes": 1814048,
-      "sha256": "aea6d7c0d3696342f2956fa76578d13175132a9d6d6a0cabff63030ea57f292b"
+      "path": "/private/tmp/file-native-incremental-macos-20261018/replay-lane/build/release/research-consumer",
+      "bytes": 1832080,
+      "sha256": "6fdd73d8503da6a9790ec4d15e5720c9967206b8648c47039d1b240d7c2515a1"
     }
   },
-  "earlier_smoke_and_companion_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
-  "earlier_pins": "pins-f3.json",
-  "qualification": "Each evidence lane keeps its own exact source/session/executable association. No observation is transferred to another executable."
+  "prior_affected_pins": "pins-a1108c6.json",
+  "prior_smoke_pins": "pins-f3.json",
+  "report_only_parent": "c09a709a9830a8337282bab4980e881574d0074c",
+  "qualification": "Report follow-up contains only native-macos artifacts. Tested core comes from the separate exact 7ac70f9 source capsule, not the older core inherited by this result branch."
 }

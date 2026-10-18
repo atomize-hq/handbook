@@ -1,0 +1,18 @@
+{
+  "epoch": 1792356649.04708,
+  "tested_source_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+  "source_files_verified": 60,
+  "source_worktree_status": "clean",
+  "report_only_parent": "c09a709a9830a8337282bab4980e881574d0074c",
+  "only_allowed_namespace": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos",
+  "inherited_result_branch_core": "Unchanged a1108c6; not relabeled as new tested core",
+  "shared_head": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+  "shared_status": "clean, read only",
+  "core_symbol_edits": false,
+  "gitnexus": {
+    "scope": "staged",
+    "status": "UNKNOWN",
+    "error": "Repository not found: isolated worktree unregistered",
+    "manual_scope": "No core edits; new report evidence/helpers and cover/pin/plan updates only"
+  }
+}
