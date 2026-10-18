@@ -1,0 +1,40 @@
+{
+  "source": "/home/spenser/file-native-incremental-linux-recipe",
+  "lossless_bytes_verified": true,
+  "json_types_verified": true,
+  "events": 6,
+  "files": [
+    {
+      "path": "oracle-probe/events.jsonl",
+      "bytes": 37121,
+      "sha256": "3fdfcc20ab2f0e0bf1915ded597d711e3aad6b51c918cd734b55194c55fbeecd",
+      "archive": "oracle-probe/events.jsonl.gz",
+      "archive_bytes": 11916,
+      "archive_sha256": "72f6a5941785cbdda14a3321ed10e4e5f1d6a289d63980156be1a449440b819a"
+    },
+    {
+      "path": "oracle-probe/oracle-probe.json",
+      "bytes": 2096,
+      "sha256": "143f9ee6f64a8f15f11a659ddb31d23f0effa895f61521cd8ea65f72bcf5e570",
+      "archive": "oracle-probe/oracle-probe.json.gz",
+      "archive_bytes": 297,
+      "archive_sha256": "eed28d64e61a403273ab0123829ad5b39fd2fa89077c649a523b6bedd2231617"
+    },
+    {
+      "path": "oracle-probe/session-source.zip",
+      "bytes": 142227,
+      "sha256": "a626a1724bdf4d66defdd62da429b4af027ceb4863045f8d309ed3215df49653",
+      "archive": "oracle-probe/session-source.zip.gz",
+      "archive_bytes": 139416,
+      "archive_sha256": "8429f4a185ac7b0ad940077ce513239b8ef9a732da292112aa2e76e86a5a6499"
+    },
+    {
+      "path": "oracle-probe/session.json",
+      "bytes": 5622,
+      "sha256": "bf9275db8d9f4fd30fa4f1a4b6e703a1ae425ef2dcfdc535e8915a7cf0ce32ca",
+      "archive": "oracle-probe/session.json.gz",
+      "archive_bytes": 2946,
+      "archive_sha256": "2dd888d0be912d06d134b05e471986947cd9dd2cbf8ee950ee940946a95d375c"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "source": "/home/spenser/file-native-incremental-replay-probe",
+  "lossless_bytes_verified": true,
+  "json_types_verified": true,
+  "events": 5,
+  "files": [
+    {
+      "path": "events.jsonl",
+      "bytes": 63165,
+      "sha256": "57c3f09863433b7683979f6f04dd86725f12058f42121d1dcd33ca5eccca137a",
+      "archive": "events.jsonl.gz",
+      "archive_bytes": 19729,
+      "archive_sha256": "68ff6800dc895c2c53d2299a099c369d722632268f91807e01e842d2ec171eaf"
+    },
+    {
+      "path": "replay-probe.json",
+      "bytes": 2011,
+      "sha256": "db7dc7abc6cdb7699f9f7afaead0b3ede3de4eaf63b771cae2c0bdb9f4f89cab",
+      "archive": "replay-probe.json.gz",
+      "archive_bytes": 958,
+      "archive_sha256": "a57f6bba3329c0627ced22628af761bae8a75af17df2999614f3855f18f8141a"
+    },
+    {
+      "path": "session-source.zip",
+      "bytes": 144274,
+      "sha256": "ee0f9956b6ffcc04b35201569fe4bf52f179fc95b8e8ccfa739f4fe1538a5d48",
+      "archive": "session-source.zip.gz",
+      "archive_bytes": 141425,
+      "archive_sha256": "f903b26a99313eceef2fe3a730cb02c2f232e68ddb6b031d85d741b9f5fd4eab"
+    },
+    {
+      "path": "session.json",
+      "bytes": 5713,
+      "sha256": "63b9b6be9500299c6e6b83abd12bb357d609393d7ccf551b5e99842c00e8804c",
+      "archive": "session.json.gz",
+      "archive_bytes": 2989,
+      "archive_sha256": "c11dec08e017576525cb87adc92c700c20fd74c491ce849bb00269a35753ae18"
+    }
+  ]
+}

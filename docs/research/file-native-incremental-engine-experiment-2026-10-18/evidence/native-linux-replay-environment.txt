@@ -1,0 +1,7 @@
+40cf20889d09b401987365f9c6255a0d97f344960385c62a29758f0f274dcd15  /home/spenser/file-native-incremental-linux-replay-final/build/release/file-native-incremental
+b4540d7c929745a22bce628cfb256ec993892d6ffdda76f6b93c64aa197ea2cf  /home/spenser/capsule-7ac70f9.tar
+Linux spenser-linux 6.16.8-1-MANJARO #1 SMP PREEMPT_DYNAMIC Fri, 19 Sep 2025 16:09:36 +0000 x86_64 GNU/Linux
+TARGET SOURCE         FSTYPE OPTIONS
+/      /dev/nvme0n1p2 ext4   rw,noatime
+Filesystem        1B-blocks         Used    Available Use% Mounted on
+/dev/nvme0n1p2 983038173184 662568890368 270458228736  72% /

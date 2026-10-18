@@ -1,0 +1,40 @@
+{
+  "source": "/home/spenser/file-native-incremental-linux-rootfix/oracle-probe",
+  "lossless_bytes_verified": true,
+  "json_types_verified": true,
+  "events": 6,
+  "files": [
+    {
+      "path": "events.jsonl",
+      "bytes": 37088,
+      "sha256": "9874185729dce1498a5a9b9bef6439564b373a88db8ce4c724f048afee0a0a00",
+      "archive": "events.jsonl.gz",
+      "archive_bytes": 11573,
+      "archive_sha256": "5696a2ef37163ea9e1a0cb3a3ccecc8a9fcd052ea2d907558a9c26983bc13f5d"
+    },
+    {
+      "path": "oracle-probe.json",
+      "bytes": 2072,
+      "sha256": "ec0414032befdf9e292d7a1e6fd3caf19b093251f94d0e29f89215901f77cdc5",
+      "archive": "oracle-probe.json.gz",
+      "archive_bytes": 273,
+      "archive_sha256": "224b8dd9930ca6eee00a4970f22a543bf2ca8bdd72d211ab85b79d7a81f1a684"
+    },
+    {
+      "path": "session-source.zip",
+      "bytes": 136142,
+      "sha256": "a485785cac0ab941a11af233611f2b2abab215e2203bae422083da38d614b3f7",
+      "archive": "session-source.zip.gz",
+      "archive_bytes": 133412,
+      "archive_sha256": "721933d3c6e6a529150ec9ef12fe1564ae3b0055cf19ce06a9641c2d12eca4be"
+    },
+    {
+      "path": "session.json",
+      "bytes": 5350,
+      "sha256": "ead377fe7b86705fcee88399f12cd1c508cde108ad4910d84db983fabe2cc1a5",
+      "archive": "session.json.gz",
+      "archive_bytes": 2791,
+      "archive_sha256": "48e0b05f68c627aa5f049dee2b6e8cf276e921e77dc908389b8db5452bf92b51"
+    }
+  ]
+}

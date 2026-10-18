@@ -1,0 +1,40 @@
+{
+  "source": "/home/spenser/file-native-incremental-linux-final-20261018/namespace-before",
+  "lossless_bytes_verified": true,
+  "json_types_verified": true,
+  "events": 5,
+  "files": [
+    {
+      "path": "events.jsonl",
+      "bytes": 31858,
+      "sha256": "90eb17359d28a37ec5726973d2b7084f71955b463412b7caae83c154db04bbdb",
+      "archive": "events.jsonl.gz",
+      "archive_bytes": 9634,
+      "archive_sha256": "22e5e7f10219e7a1a8d6a76a91dcecc937034561a60dee5446974de607f730ff"
+    },
+    {
+      "path": "namespace-cases.json",
+      "bytes": 444,
+      "sha256": "26ff13a39c99025b5e1e846fbd2c7824bcb91929339f747eb301988c8c6f238d",
+      "archive": "namespace-cases.json.gz",
+      "archive_bytes": 189,
+      "archive_sha256": "52356937798938e58307502fec154fb03cefab99042684dd9101fb4adaf67aee"
+    },
+    {
+      "path": "session-source.zip",
+      "bytes": 130798,
+      "sha256": "72a8b6591ea68f82d5e101f609b86b2d9128ce8cec3d96c9e52035e274d05e34",
+      "archive": "session-source.zip.gz",
+      "archive_bytes": 128346,
+      "archive_sha256": "5388ac89c5509d57271c91b8ade3282ef3545ed7d3ae7471a07a80afc6dbd141"
+    },
+    {
+      "path": "session.json",
+      "bytes": 4993,
+      "sha256": "1fe0114fa5e617cf4ebf4192e3e225a4474769684fa2a30ad5d57bbcfc63c89f",
+      "archive": "session.json.gz",
+      "archive_bytes": 2608,
+      "archive_sha256": "6503cf7c597c79e2a14ef2a1bed2059518b522acf1a6eb06404d1a0db1cfdd44"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+[
+  {
+    "root": "C:\\file-native-incremental-20261018\\linux-recipe-proof-restored",
+    "selected": {
+      "publication": "publication-3278545-1792353888292509347-952",
+      "digest": "67bcdfb6206f5b489327857e7bb9f6d981ee58b9a690f53c1a570356ffe5a9e9"
+    },
+    "documents": 16,
+    "projection_files": 35,
+    "independent_navigation_render_verified": true,
+    "exact_sources_verified": true,
+    "B_file_hardlink_independence_verified": false,
+    "readable_declared_current": false,
+    "readable_missing": 35,
+    "readable_edited": 0,
+    "readable_extra": 0,
+    "seconds": 0.10999999998603016
+  }
+]

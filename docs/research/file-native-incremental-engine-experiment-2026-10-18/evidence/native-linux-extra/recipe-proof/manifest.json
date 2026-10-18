@@ -1,0 +1,47 @@
+{
+  "kind": "selected-history-proof-not-full-backup",
+  "selected": {
+    "publication": "publication-3278545-1792353888292509347-952",
+    "digest": "67bcdfb6206f5b489327857e7bb9f6d981ee58b9a690f53c1a570356ffe5a9e9"
+  },
+  "verification": {
+    "publications": 83,
+    "ledger_boundaries": 82,
+    "membership": {
+      "pages": 3,
+      "leaves": 2,
+      "branches": 1,
+      "physical": 82,
+      "tombstones": 0,
+      "height": 1,
+      "occupancy": [
+        32,
+        50
+      ]
+    },
+    "outcomes": {
+      "pages": 3,
+      "leaves": 2,
+      "branches": 1,
+      "physical": 82,
+      "tombstones": 0,
+      "height": 1,
+      "occupancy": [
+        39,
+        43
+      ]
+    },
+    "independent_full_walker": true,
+    "independent_recipe_and_all_indexes": true
+  },
+  "publications": 83,
+  "files": 417,
+  "raw_file_bytes": 1033631,
+  "chunks": [
+    {
+      "path": "part-000.jsonl.gz",
+      "bytes": 218116,
+      "sha256": "e6324fdc35081ff0f7187c788009ed3761d90b6768ab0c9003dc28706658052a"
+    }
+  ]
+}
