@@ -7,21 +7,21 @@ def events(path):
     return [json.loads(line) for line in b.splitlines()]
 def measurement(row):
     out=row.get('output') or {};m=out.get('metrics',{});ns=m.get('ns',{})
-    return {'process_ms':row['elapsed_ns']/1e6,'engine_ms':out.get('wall_ns',0)/1e6,'exit':row['exit'],'censored':row['censored'],
+    return {'controller_ms':row['elapsed_ns']/1e6,'engine_ms':out['wall_ns']/1e6 if 'wall_ns' in out else None,'peak_memory_bytes':out.get('peak_memory_bytes'),'exit':row['exit'],'censored':row['censored'],
         'disposition':out.get('result',{}).get('status') if isinstance(out.get('result'),dict) else None,
         **{k:m.get(k) for k in ['documents_visited','edges_visited','page_reads','index_updates','touched_paths','bytes_metadata_read','bytes_metadata_written','bytes_payload_read','bytes_payload_written','bytes_control_read','bytes_control_written','bytes_result_read','bytes_result_written','bytes_read','bytes_written','copies','file_syncs','directory_syncs','unsupported_directory_syncs','namespace_ops']},
         'unique_pages':len(m['unique_pages']) if 'unique_pages' in m else None,
-        **{k+'_ms':ns.get(k,0)/1e6 for k in ['graph-transition-inclusive','projection-prepare-inclusive','preparation-inclusive','selection-inclusive','lock-wait','lock-hold','view-refresh-inclusive']}}
+        **{k+'_ms':ns[k]/1e6 if k in ns else None for k in ['graph-transition-inclusive','projection-prepare-inclusive','preparation-inclusive','selection-inclusive','lock-wait','lock-hold','A-completion-inclusive']}}
 
 def run(root):
     report={}
-    for name in ['codec-windows-v1','matrix-common-pin','codec-common-pin','windows-final-extra','history-common-pin']:
+    for name in ['codec-windows-v1','matrix-common-pin','post-matrix','codec-common-pin','windows-final-extra','history-common-pin']:
         path=root/name/'events.jsonl'
         if not path.exists():continue
         rows=events(path);picked=[]
         for i,row in enumerate(rows,1):
             v=row['input'];action=v['action'];request=v.get('request',{}).get('request')
-            if action in ['init','history','packet','checkpoint','refresh','validation-trace'] or action=='publish' and (request or '').startswith(('update-','change-','B-one','one-in-','incoming-5000','combined-')):
+            if action in ['init','history','packet','checkpoint','refresh','validation-trace'] or action=='publish' and (request or '').startswith(('update-','genuine-','change-','B-one','one-in-','incoming-5000','combined-')):
                 picked.append({'raw_line':i,'action':action,'root':v['root'],'request':request,'n':v.get('count'),**measurement(row)})
         report[name]={'events':len(rows),'censors':sum(v['censored'] for v in rows),'observations':picked}
     path=root/'history-common-pin/store/expected-ledger.jsonl'
