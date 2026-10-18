@@ -3,7 +3,7 @@ from controller import Driver
 from checks import result,req,expect_error
 from verify_store import verify_history
 a=argparse.ArgumentParser();a.add_argument('--exe',required=True);a.add_argument('--base',required=True);a.add_argument('--max-depth',type=int,default=100000);ns=a.parse_args()
-d=Driver(ns.exe,ns.base,14400);root=str(d.base/'store');rows=[]
+d=Driver(ns.exe,ns.base,13500);root=str(d.base/'store');rows=[]
 d.call(dict(action='init',root=root,mode='A',consumer='project',count=16))
 start=0
 for depth in [1000,10000,100000]:
@@ -43,4 +43,10 @@ if start and time.monotonic()<d.end-120:
     assert d.call(dict(action='resolve',root=root,request_id='deep-lost-reply'))['result']==original
     expect_error(d.call(dict(action='publish',root=root,request=req('deep-lost-reply',[],packet=True)),allow=True),'intent-mismatch')
     rows.append({'lost_reply_original_exit':86,'later_real_successors':1000,'original_outcome_retained':True,'full_verification':verify_history(root)})
+    (d.base/'history.json').write_text(json.dumps(rows,indent=2))
+    d.call(dict(action='lifecycle',root=root,operation='setup'))
+    collection=d.call(dict(action='lifecycle',root=root,operation='collect'),cap=900,allow=True)
+    rows.append({'bounded_long_history_collection':collection})
+    assert d.call(dict(action='resolve',root=root,request_id='history-000001'))['result']==first['result']
+    assert d.call(dict(action='resolve',root=root,request_id='deep-lost-reply'))['result']==original
 (d.base/'history.json').write_text(json.dumps(rows,indent=2))
