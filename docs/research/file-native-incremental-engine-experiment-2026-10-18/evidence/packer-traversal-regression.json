@@ -1,0 +1,9 @@
+{
+  "paths": [
+    "B-n10000/events.jsonl",
+    "n1000/events.jsonl"
+  ],
+  "run_directories_retained": true,
+  "stores_and_builds_pruned": true,
+  "no_engine_calls": true
+}

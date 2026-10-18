@@ -32,7 +32,7 @@ def export(source,destination):
     def visit(path):
         for child in sorted(path.iterdir()):
             if child.is_dir():
-                if child.name in {'store','build','target','.git','__pycache__','disposable','fallback'} or child.name.startswith(('B-n','n100','json-','compact-')):continue
+                if child.name in {'store','build','target','.git','__pycache__','disposable','fallback'} or child.name.startswith('build-') or (child/'STORE.json').is_file():continue
                 visit(child)
             elif child.name in names or child.name in {'audit-evidence.json','audit_lane.py','calibration.json','contention.json','exact-closure-5000.zip','cancelled-before-work.json'} or child.name.endswith('-budget.json') or (child.name.startswith('pending-') and child.suffix in {'.json','.zip'}) or child.suffix in {'.stdout','.stderr'}:put(child,child.relative_to(source))
     visit(source)
