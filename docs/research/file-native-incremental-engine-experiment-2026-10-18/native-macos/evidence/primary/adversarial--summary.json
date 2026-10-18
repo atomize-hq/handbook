@@ -1,0 +1,14 @@
+{
+  "passed": [
+    "forged-version",
+    "forged-store_id",
+    "forged-graph",
+    "forged-changes",
+    "forged-removed",
+    "indirect-point-audit-gc",
+    "missing-and-corrupt-graph",
+    "missing-and-corrupt-history",
+    "missing-and-corrupt-result"
+  ],
+  "large_header_indirection": true
+}

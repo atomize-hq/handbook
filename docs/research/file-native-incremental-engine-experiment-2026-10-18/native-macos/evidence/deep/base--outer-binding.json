@@ -1,0 +1,10 @@
+{
+  "executable_sha256": "4c597e2415bcb47379ac0c07dea6d850e2532a6969cf7583be4a41bf49a6e29b",
+  "source_archive_sha256": "72a8b6591ea68f82d5e101f609b86b2d9128ce8cec3d96c9e52035e274d05e34",
+  "cap_seconds": 180,
+  "core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+  "companion_pin": "f2c45c16886ae3c1c89d1084e43b05133383c087",
+  "helper_sha256": "ae6f436c7f61b53e4d3e076dd2be14c67ba992190d6cd0145302f537af967427",
+  "launcher_sha256": "89c0f5438ebf4df74e546a13d436ab96d2114cd20b6c0bce1a66577708376335",
+  "binding_origin": "Postrun association of retained companion source and actual launch receipt; original session and events unchanged"
+}

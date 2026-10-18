@@ -1,0 +1,13 @@
+{
+  "review_findings": "regressions passed",
+  "actual_retired_source_reclaimed": true,
+  "restoration": {
+    "digest": "ade72c9550348016cc578094b938361f76b32789ba31c8a58111e804f4854cfc",
+    "publication": "publication-14937-1792352220943292000-10"
+  },
+  "reader_overlap": true,
+  "stable_divergence_backups": 1,
+  "quota_slots": 8,
+  "additional_boundaries": 8,
+  "fallback": true
+}

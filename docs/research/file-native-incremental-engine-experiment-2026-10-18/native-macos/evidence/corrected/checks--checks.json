@@ -1,0 +1,199 @@
+[
+  {
+    "mode": "A",
+    "consumer": "project",
+    "initial": {
+      "digest": "9bca0bdc08add1df240dbef61b3bee2df12fbc712eaf5f406b5607d6edd56feb",
+      "publication": "publication-19170-1792353448767497000-42"
+    },
+    "status": "passed"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "initial": {
+      "digest": "e0539a4ef61226a4680875f51d5e793bbf42ab6b886c8104d0f8e8d56a3ff690",
+      "publication": "publication-19239-1792353454219484000-42"
+    },
+    "status": "passed"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "initial": {
+      "digest": "5385491863b0bc675aa7e421e64de3425499587e73b89eac88be4342007671c5",
+      "publication": "publication-19306-1792353459955830000-42"
+    },
+    "status": "passed"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "initial": {
+      "digest": "718755456e9ed0609fff45e780db50e4376fad7b869cabcaf5f2e2c459ea04f3",
+      "publication": "publication-19369-1792353468131840000-42"
+    },
+    "status": "passed"
+  },
+  {
+    "boundary": "reservation-durable",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "allocation",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "semantic-root",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "projection-root",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "candidate-ready",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "seal",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "expected-checked",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "selection-budget",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "membership-root",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "outcome-root",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "result-installed",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "publication-installed",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "attempt-hint",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "selector-staged",
+    "before_selection": true,
+    "completed_boundary": false,
+    "recovered_outcome": "absent-as-of",
+    "original_exit": 86
+  },
+  {
+    "boundary": "selector-visible",
+    "before_selection": false,
+    "completed_boundary": false,
+    "recovered_outcome": "accepted",
+    "original_exit": 86
+  },
+  {
+    "boundary": "selection-boundary",
+    "before_selection": false,
+    "completed_boundary": true,
+    "recovered_outcome": "accepted",
+    "original_exit": 86
+  },
+  {
+    "boundary": "accounting-transfer",
+    "before_selection": false,
+    "completed_boundary": true,
+    "recovered_outcome": "accepted",
+    "original_exit": 86
+  },
+  {
+    "boundary": "accounting-release",
+    "before_selection": false,
+    "completed_boundary": true,
+    "recovered_outcome": "accepted",
+    "original_exit": 86
+  },
+  {
+    "boundary": "refresh-plan",
+    "before_selection": false,
+    "completed_boundary": true,
+    "recovered_outcome": "accepted",
+    "original_exit": 86
+  },
+  {
+    "boundary": "refresh-file",
+    "before_selection": false,
+    "completed_boundary": true,
+    "recovered_outcome": "accepted",
+    "original_exit": 86
+  },
+  {
+    "boundary": "refresh-before-complete",
+    "before_selection": false,
+    "completed_boundary": true,
+    "recovered_outcome": "accepted",
+    "original_exit": 86
+  },
+  {
+    "boundary": "refresh-complete",
+    "before_selection": false,
+    "completed_boundary": true,
+    "recovered_outcome": "accepted",
+    "original_exit": 86
+  },
+  {
+    "boundary": "reply",
+    "before_selection": false,
+    "completed_boundary": true,
+    "recovered_outcome": "accepted",
+    "original_exit": 86
+  }
+]

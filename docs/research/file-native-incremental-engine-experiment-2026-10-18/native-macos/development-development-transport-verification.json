@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "source_tar_members": 59,
+  "source_files": 47,
+  "portable_members": true,
+  "wrapper_binding": true,
+  "original_allocation_binding": true
+}

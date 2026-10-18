@@ -1,0 +1,18 @@
+{
+  "pin": "a1108c634cb8362aca50e1a6228766802b96f087",
+  "original_final_allocation_sha256": "570befff76e2184b3d3eb8acbf246ad0e070592b398f7c6a952f8d3d765d8402",
+  "unchanged_execution_deadline_epoch": 1792358324.418587,
+  "unchanged_total_deadline_epoch": 1792359224.418587,
+  "prospective_affected_only": true,
+  "commands": [
+    "cargo test --locked --workspace",
+    "cargo build --release --locked --workspace",
+    "namespace_cases.py (default fixed)",
+    "checks.py --faults",
+    "supplement.py",
+    "adversarial.py"
+  ],
+  "new_target": "/private/tmp/file-native-incremental-macos-20261018/corrected-lane/build",
+  "no_smoke_rerun": true,
+  "epoch": 1792353381.423522
+}

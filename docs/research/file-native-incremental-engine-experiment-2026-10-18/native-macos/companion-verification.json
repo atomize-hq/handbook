@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+  "companion_pin": "f2c45c16886ae3c1c89d1084e43b05133383c087",
+  "checkpoint_boundary_cases": 16,
+  "waiting_cancel_and_holder_exit_recovered": true,
+  "ordinary_copies": 2,
+  "paused_B_old_path_and_manifest_verified": true,
+  "source_unchanged": true
+}

@@ -1,0 +1,38 @@
+# File-native collection
+
+Read SELECTED.json once and verify its publication digest. The publication binds exact immutable state. B: retain generations/<attempt>/ once and read NAVIGATION.md. A: view/NAVIGATION.md may mix/lag; VIEW.json names completed state and PENDING.json records unfinished work. Ordinary edits are not automatically admitted.
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000008.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000009.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000002.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000012.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000006.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000007.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000003.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000013.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000004.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000014.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000000.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000010.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000001.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000011.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000005.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/navigation/d000015.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/NAVIGATION.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/docs/item-attachments-d000009/evidence/deep/source.txt
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/docs/item---d000008.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/docs/item-con-d000003.md
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/docs/item-overview-d000000.yaml
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/docs/item-research-source-11-d000011.yaml
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/docs/item-research-source-10-d000010.yaml
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/docs/item-research-source-12-d000012.json
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/docs/item-case-d000006.md
+# Collection navigation
+
+Exact authored sources are in docs/. Read navigation/ in stable ID order for titles, kinds, source paths and typed local/external relationships. Use ordinary listing, text search, copying and SHA-256 tools.
+
+[Overview](navigation/d000000.md) | [Packet](packet/context.md) | [Ordered provenance](packet/provenance.json)
+
+Readable files do not grant edit/import authority. A may mix or lag; B requires one positively selected retained generation path.
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/docs/item-research-source-12-d000012.json:  "id": "d000012", "exact_number": 1.00, "text": "café α"
+/private/tmp/file-native-incremental-macos-20261018/final-lane/results/B-copy/store/generations/attempt-15644-1792352388569804000-1/docs/item-decision-caf--d000002.json:  "id": "d000002", "exact_number": 1.00, "text": "café α"
+verified 35 exact copied files; manifest dda63b8d8d20ba8319bc1497d4b3ce691026db13c0bfa4028e357a22af17f500

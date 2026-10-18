@@ -1,0 +1,8 @@
+{
+  "executable_sha256": "260b90da0fe28fa3f0bdc43a14eb457bad62095c91882fa8793f60f6a753c528",
+  "source_archive_sha256": "72a8b6591ea68f82d5e101f609b86b2d9128ce8cec3d96c9e52035e274d05e34",
+  "adapter_sha256": "a616e564cf2295041ed50bbaf87b84e687ea41c33e8ad454399ab7c247652e62",
+  "allocation_sha256": "570befff76e2184b3d3eb8acbf246ad0e070592b398f7c6a952f8d3d765d8402",
+  "cap_seconds": 180,
+  "binding_origin": "Derived from retained unmodified common run_lane adapter and prospective outer allocation; original session JSON is unchanged"
+}

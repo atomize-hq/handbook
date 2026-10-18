@@ -1,0 +1,17 @@
+{
+  "file-native-incremental": {
+    "path": "/private/tmp/file-native-incremental-macos-20261018/target/release/file-native-incremental",
+    "sha256": "92ff199951dc8979612bba01a64dc742bbd3fd3f6349fd7078ccc9b6b14c9f44",
+    "bytes": 1797632
+  },
+  "project-consumer": {
+    "path": "/private/tmp/file-native-incremental-macos-20261018/target/release/project-consumer",
+    "sha256": "a24dc1b31c7b6ae57e1e120fb58a4894dab5ad878690d1e8f29f45dab43e576a",
+    "bytes": 1797616
+  },
+  "research-consumer": {
+    "path": "/private/tmp/file-native-incremental-macos-20261018/target/release/research-consumer",
+    "sha256": "04d06d861ce2a3b1709bd453d10bf1d7d0a13255c9de0a8f97cf3687b8c93fd4",
+    "bytes": 1797616
+  }
+}

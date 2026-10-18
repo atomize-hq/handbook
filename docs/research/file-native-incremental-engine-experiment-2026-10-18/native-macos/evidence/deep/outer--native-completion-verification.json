@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+  "named_cases": 4,
+  "publication_fault_boundaries": 23,
+  "must_not_select": 14,
+  "completed_boundary_must_retain": 8,
+  "visible_uncertain": 1,
+  "supplement": {
+    "review_findings": "regressions passed",
+    "actual_retired_source_reclaimed": true,
+    "restoration": {
+      "digest": "ade72c9550348016cc578094b938361f76b32789ba31c8a58111e804f4854cfc",
+      "publication": "publication-14937-1792352220943292000-10"
+    },
+    "reader_overlap": true,
+    "stable_divergence_backups": 1,
+    "quota_slots": 8,
+    "additional_boundaries": 8,
+    "fallback": true
+  },
+  "supplement_injected_process_exits": 13,
+  "adversarial_cases": [
+    "forged-version",
+    "forged-store_id",
+    "forged-graph",
+    "forged-changes",
+    "forged-removed",
+    "indirect-point-audit-gc",
+    "missing-and-corrupt-graph",
+    "missing-and-corrupt-history",
+    "missing-and-corrupt-result"
+  ],
+  "smoke_initializations": 2,
+  "smoke_updates": 4,
+  "smoke_refreshes": 3,
+  "independent_consumer_cases": 2,
+  "ordinary_copies": 3,
+  "native_events": 602,
+  "native_censors": 0,
+  "qualification": "Named/group counts are not assertion counts or independent statistical trials. No large growth/history measurements are allocated."
+}

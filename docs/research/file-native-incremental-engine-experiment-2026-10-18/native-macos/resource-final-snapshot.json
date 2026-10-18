@@ -1,0 +1,47 @@
+{
+  "epoch": 1792353921.668242,
+  "roots": [
+    {
+      "path": "/private/tmp/file-native-incremental-macos-20261018",
+      "files": 33751,
+      "logical_bytes": 1129495432,
+      "allocated_file_bytes": 1114988544
+    },
+    {
+      "path": "/private/tmp/file-native-prerequisite-macos-20261018-source/.git",
+      "files": 320,
+      "logical_bytes": 31550347,
+      "allocated_file_bytes": 32526336
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-19048-1792353435235413000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-14145-1792352131508793000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-10969-1792350998278108000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    }
+  ],
+  "total_logical_bytes": 1161048926,
+  "total_allocated_file_bytes": 1147527168,
+  "logical_cap_bytes": 6442450944,
+  "free_bytes": 34444439552,
+  "required_free_bytes": 21474836480,
+  "original_final_execution_deadline_epoch": 1792358324.418587,
+  "original_final_total_deadline_epoch": 1792359224.418587,
+  "seconds_since_original_final_start": 1897.249655008316,
+  "remaining_execution_seconds": 4402.750344991684,
+  "remaining_total_seconds": 5302.750344991684,
+  "deadline_reset": false,
+  "qualification": "Whole owned root includes all development/F3/corrected source/worktrees/builds/runtime/evidence/report copies. Conservatively adds the entire shared isolated transport Git database, including predecessor objects, plus the three tiny unchanged-unit fixtures. Snapshot precedes this receipt and small commit metadata; over 4 GiB headroom remains. All roots preserved."
+}

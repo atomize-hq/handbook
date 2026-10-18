@@ -1,0 +1,17 @@
+{
+  "expected_prior_bug": false,
+  "selected_sources_before": 16,
+  "selected_sources_remaining": 16,
+  "initial_byte_counters": {
+    "bytes_control_read": 6873,
+    "bytes_control_written": 15523,
+    "bytes_metadata_read": 1734040,
+    "bytes_metadata_written": 14862,
+    "bytes_payload_read": 460778,
+    "bytes_payload_written": 309226,
+    "bytes_read": 2201691,
+    "bytes_result_read": 0,
+    "bytes_result_written": 474,
+    "bytes_written": 340085
+  }
+}

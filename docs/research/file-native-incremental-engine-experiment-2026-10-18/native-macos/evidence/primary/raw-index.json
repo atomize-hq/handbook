@@ -1,0 +1,58 @@
+[
+  {
+    "file": "B-copy--events.jsonl.gz",
+    "source": "B-copy/events.jsonl",
+    "records": 1,
+    "bytes": 6313,
+    "sha256": "aee55fc2aad188c55ee6a7a022944af717c4685c660d36489f627037310de6ea",
+    "compressed_sha256": "3bab21bcd06e01141f291096a7cf7772e57a949936a8d57a092ebcab964084ab"
+  },
+  {
+    "file": "adversarial--events.jsonl.gz",
+    "source": "adversarial/events.jsonl",
+    "records": 42,
+    "bytes": 164435,
+    "sha256": "01d1fbed87f9bb5980af0fd58480399302d508b32797a9e8542ec7e0a53e59e3",
+    "compressed_sha256": "17929356444b9c0ec97025c02ea389ed4599747e0a4c1388204fda58dfc1f337"
+  },
+  {
+    "file": "checks--events.jsonl.gz",
+    "source": "checks/events.jsonl",
+    "records": 414,
+    "bytes": 1613445,
+    "sha256": "4940afd02556485573282fb3bd516a58a4033ff12e40b996286425cf9ed8b488",
+    "compressed_sha256": "efe3c8783c7187b0477f910cd3de62a6509e34ecf0e2473d2f979c82b4ed67d0"
+  },
+  {
+    "file": "consumer-project--events.jsonl.gz",
+    "source": "consumer-project/events.jsonl",
+    "records": 4,
+    "bytes": 18044,
+    "sha256": "6616115065be25d8cbbeab462743f81bedea25130aad4f74d546b7e4d32b4b33",
+    "compressed_sha256": "0dd3badd07b6237a2e7ebbe9547c7ad47da5562d75d5e6d010a5a1cacad49dd4"
+  },
+  {
+    "file": "consumer-research--events.jsonl.gz",
+    "source": "consumer-research/events.jsonl",
+    "records": 4,
+    "bytes": 18045,
+    "sha256": "ae3fcaf2654ae2d4bff40302b256ace50456f0df3b5750c583a47554fbde399f",
+    "compressed_sha256": "34f40c01e0c3160907d7c3878aae01289e69c9e10cdeca5a5abeb4c51bbc81a2"
+  },
+  {
+    "file": "smoke--events.jsonl.gz",
+    "source": "smoke/events.jsonl",
+    "records": 28,
+    "bytes": 631937,
+    "sha256": "774bdf5e794cedfb228aea09dd87f687a1803f658eebf76efb253a49b6cae8d1",
+    "compressed_sha256": "0a3fcb93adee997943ca2c8bb82a8501173b05e37bbecccbb1b7fa6ebe44d6e3"
+  },
+  {
+    "file": "supplement--events.jsonl.gz",
+    "source": "supplement/events.jsonl",
+    "records": 109,
+    "bytes": 429152,
+    "sha256": "3e0a78be3db1b8542e2cd784800ecab95822b73efbfd15e3fc3a21962f1d699f",
+    "compressed_sha256": "23c42c1baf439774c1d8eeac46b120ffa0d9a50cd931a54aeb1938920a7ef1eb"
+  }
+]

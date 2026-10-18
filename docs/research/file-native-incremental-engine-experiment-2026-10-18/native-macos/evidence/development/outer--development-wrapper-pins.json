@@ -1,0 +1,14 @@
+{
+  "outer.py": {
+    "sha256": "8e9bdd7e0dd8cc98a7362392996484dc31dd465f7bd0060e3a60742c233998c1",
+    "bytes": 4395
+  },
+  "capsule_adapter.py": {
+    "sha256": "8f9f65afe806abe2535a45abb7824c6dd6dd0d36c6b565094e1598982eb7ca3a",
+    "bytes": 1785
+  },
+  "allocation.json": {
+    "sha256": "4ba28bf7e2c848ab2a3f3ddcfd6f864b2ad05b765ab7afa3cc8a83a737d792e7",
+    "bytes": 622
+  }
+}

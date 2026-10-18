@@ -1,0 +1,53 @@
+   Compiling version_check v0.9.5
+   Compiling proc-macro2 v1.0.107
+   Compiling libc v0.2.191
+   Compiling typenum v1.20.1
+   Compiling unicode-ident v1.0.27
+   Compiling quote v1.0.47
+   Compiling serde_core v1.0.228
+   Compiling serde v1.0.228
+   Compiling serde_json v1.0.145
+   Compiling itoa v1.0.18
+   Compiling ryu v1.0.23
+   Compiling cfg-if v1.0.5
+   Compiling memchr v2.8.3
+   Compiling generic-array v0.14.7
+   Compiling syn v2.0.119
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling digest v0.10.7
+   Compiling cpufeatures v0.2.17
+   Compiling fs2 v0.4.3
+   Compiling sha2 v0.10.9
+   Compiling serde_derive v1.0.228
+   Compiling file-native-incremental v0.1.0 (/private/tmp/file-native-incremental-macos-20261018/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18)
+warning: unused import: `Metrics`
+ --> src/graph.rs:2:23
+  |
+2 | use crate::{io::{self,Metrics,Result},objects::{self,Id,Objects},model::{self,Doc,Edge,Op,State}};
+  |                       ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `self`
+ --> src/store.rs:6:38
+  |
+6 | use std::{collections::BTreeMap,fs::{self,File,OpenOptions},path::{Path,PathBuf},time::{Instant,Duration}};
+  |                                      ^^^^
+
+warning: unused imports: `PathBuf` and `fs`
+ --> src/projection.rs:5:44
+  |
+5 | use std::{collections::{BTreeMap,BTreeSet},fs,path::{Path,PathBuf},time::Instant};
+  |                                            ^^             ^^^^^^^
+
+warning: unused import: `Publication`
+ --> src/lifetime.rs:2:79
+  |
+2 | use crate::{io::{self,Metrics,Result},model::Selector,store::{Store,Candidate,Publication},objects};
+  |                                                                               ^^^^^^^^^^^
+
+warning: `file-native-incremental` (lib) generated 4 warnings (run `cargo fix --lib -p file-native-incremental` to apply 4 suggestions)
+   Compiling research-consumer v0.1.0 (/private/tmp/file-native-incremental-macos-20261018/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research)
+   Compiling project-consumer v0.1.0 (/private/tmp/file-native-incremental-macos-20261018/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project)
+    Finished `release` profile [optimized] target(s) in 7.17s

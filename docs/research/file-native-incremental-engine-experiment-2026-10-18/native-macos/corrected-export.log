@@ -1,0 +1,176 @@
+{
+  "lane": "corrected-a1108c6-affected",
+  "pin": "a1108c634cb8362aca50e1a6228766802b96f087",
+  "events": 570,
+  "censors": 0,
+  "exit_counts": {
+    "0": 466,
+    "2": 68,
+    "86": 36
+  },
+  "action_counts": {
+    "init": 31,
+    "lifecycle": 153,
+    "prepare": 30,
+    "select": 25,
+    "publish": 121,
+    "inspect": 32,
+    "point": 10,
+    "audit": 46,
+    "resolve": 60,
+    "dump": 7,
+    "checkpoint": 8,
+    "cancel": 9,
+    "packet": 5,
+    "refresh": 6,
+    "view-audit": 3,
+    "resume": 24
+  },
+  "sessions": [
+    {
+      "path": "adversarial/events.jsonl",
+      "source_archive_sha256": "a485785cac0ab941a11af233611f2b2abab215e2203bae422083da38d614b3f7",
+      "exe_sha256": "858e596e75b17c6e409fc40dea5492f1e858d79105547e6542db26de56e6ed97",
+      "cap_seconds": 180
+    },
+    {
+      "path": "checks/events.jsonl",
+      "source_archive_sha256": "a485785cac0ab941a11af233611f2b2abab215e2203bae422083da38d614b3f7",
+      "exe_sha256": "858e596e75b17c6e409fc40dea5492f1e858d79105547e6542db26de56e6ed97",
+      "cap_seconds": 180
+    },
+    {
+      "path": "namespace/events.jsonl",
+      "source_archive_sha256": "a485785cac0ab941a11af233611f2b2abab215e2203bae422083da38d614b3f7",
+      "exe_sha256": "858e596e75b17c6e409fc40dea5492f1e858d79105547e6542db26de56e6ed97",
+      "cap_seconds": 180
+    },
+    {
+      "path": "supplement/events.jsonl",
+      "source_archive_sha256": "a485785cac0ab941a11af233611f2b2abab215e2203bae422083da38d614b3f7",
+      "exe_sha256": "858e596e75b17c6e409fc40dea5492f1e858d79105547e6542db26de56e6ed97",
+      "cap_seconds": 180
+    }
+  ],
+  "raw_archives": 4,
+  "source_files": 53,
+  "outer_artifacts": [
+    {
+      "file": "outer--adversarial.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--adversarial.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--affected-launcher.py",
+      "sha256": "8562f20290b67a28551a1451d4b80a96eeb9d2a506a115bfb72d25beae18d3fb",
+      "bytes": 3692
+    },
+    {
+      "file": "outer--affected-plan.json",
+      "sha256": "937f9dad3cf2eefa57dfc2ef0ee4a0255b5f8653891931bcf931bde93929861e",
+      "bytes": 681
+    },
+    {
+      "file": "outer--affected-verification.json",
+      "sha256": "fc6b7d7152f532fd8f852bf4bee70713b327ff6a19491f72106df02f3c640358",
+      "bytes": 1199
+    },
+    {
+      "file": "outer--binary-pins.json",
+      "sha256": "eec3d2bb61f80c1a789dba2d3b45bb81717b5ea347d06eef466aa63348f93aae",
+      "bytes": 754
+    },
+    {
+      "file": "outer--build.stderr",
+      "sha256": "eb97b5f03a690f98b9cc0a53295a8a3961779efcd94ca1ca60a2ccafc94ed718",
+      "bytes": 2400
+    },
+    {
+      "file": "outer--build.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--checks.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--checks.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--console.log",
+      "sha256": "f4a9548a0c6c116a886bc57f6347a522b6ae955072262b3fabdd28de4fcaeb89",
+      "bytes": 4554
+    },
+    {
+      "file": "outer--finished.json",
+      "sha256": "6c16d4ac9afa9978bcd56925304c56aaf54ba18dcd2c014cd6fcdcc011efeb15",
+      "bytes": 344
+    },
+    {
+      "file": "outer--namespace.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--namespace.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--resources.jsonl",
+      "sha256": "7233d3b954273e9f01cdbf385ebdb9e5bd084dd3195fa99b6599c56ccc012fe9",
+      "bytes": 7212
+    },
+    {
+      "file": "outer--runs.jsonl",
+      "sha256": "f4a9548a0c6c116a886bc57f6347a522b6ae955072262b3fabdd28de4fcaeb89",
+      "bytes": 4554
+    },
+    {
+      "file": "outer--source-capsule.tar",
+      "sha256": "6d88c892828ee8415784add34fc8215b274e06514b21367747d93f52138af186",
+      "bytes": 460800
+    },
+    {
+      "file": "outer--source-pins.json",
+      "sha256": "b1f1f4065fac19ed0d5814b16af83ee299554948223ba1be905361ce1d397173",
+      "bytes": 13133
+    },
+    {
+      "file": "outer--supplement.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--supplement.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--test.stderr",
+      "sha256": "1e0185bc3f7cbbb02af108e7bc60ca46dbf98dfa5c5ec322e25a3a09ef98f8a9",
+      "bytes": 3164
+    },
+    {
+      "file": "outer--test.stdout",
+      "sha256": "dfe8f74d4e9b85951a5fb26177d14a0790d1834e947919d50a2ab403bb6fc29c",
+      "bytes": 706
+    },
+    {
+      "file": "outer--unit-temporary-roots.json",
+      "sha256": "f217832c1f62bb2d841b1e776492b976603653fc48a6a02930fada724e4b2924",
+      "bytes": 838
+    }
+  ],
+  "status": "lossless-response-source-session-association-passed",
+  "qualification": "Events are process responses, not independent test trials. Expected injected exits/refusals are not automatically failures. Native completion and each required result are evaluated separately."
+}

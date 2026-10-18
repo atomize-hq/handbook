@@ -1,0 +1,187 @@
+{
+  "validation": [
+    {
+      "requested": 1,
+      "full_reference_ms": 6.275708,
+      "complete_incremental_preparation_ms": 159.599583,
+      "full_documents_visited": 1000,
+      "incremental_documents_visited": 2,
+      "incremental_edges_visited": 0,
+      "metadata_read": 230947,
+      "metadata_written": 45442,
+      "scope": "reference includes full load+semantic validation; incremental includes graph/projection persistence, reservation and sealing; explicit comparison audit excluded from these clocks"
+    },
+    {
+      "requested": 8,
+      "full_reference_ms": 3.443667,
+      "complete_incremental_preparation_ms": 962.644542,
+      "full_documents_visited": 1000,
+      "incremental_documents_visited": 16,
+      "incremental_edges_visited": 0,
+      "metadata_read": 1323293,
+      "metadata_written": 224517,
+      "scope": "reference includes full load+semantic validation; incremental includes graph/projection persistence, reservation and sealing; explicit comparison audit excluded from these clocks"
+    },
+    {
+      "requested": 64,
+      "full_reference_ms": 4.29675,
+      "complete_incremental_preparation_ms": 1299.4965,
+      "full_documents_visited": 1000,
+      "incremental_documents_visited": 129,
+      "incremental_edges_visited": 1,
+      "metadata_read": 9409293,
+      "metadata_written": 405357,
+      "scope": "reference includes full load+semantic validation; incremental includes graph/projection persistence, reservation and sealing; explicit comparison audit excluded from these clocks"
+    }
+  ],
+  "publication_and_refresh": [
+    {
+      "requested": 1,
+      "actual_changed": 1,
+      "accepted_publication_ms": 1054.203667,
+      "explicit_refresh_ms": 137.959167,
+      "touched_paths": 1,
+      "copies": 1
+    },
+    {
+      "requested": 8,
+      "actual_changed": 8,
+      "accepted_publication_ms": 1968.606916,
+      "explicit_refresh_ms": 454.74975,
+      "touched_paths": 7,
+      "copies": 7
+    },
+    {
+      "requested": 64,
+      "actual_changed": 64,
+      "accepted_publication_ms": 2000.510417,
+      "explicit_refresh_ms": 972.354084,
+      "touched_paths": 56,
+      "copies": 56
+    }
+  ],
+  "storage": [
+    {
+      "n": 1000,
+      "storage_trees": {
+        "graph": {
+          "pages": 33,
+          "leaves": 32,
+          "branches": 1,
+          "physical": 2008,
+          "tombstones": 0,
+          "height": 1,
+          "occupancy": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            24
+          ]
+        },
+        "projection": {
+          "pages": 33,
+          "leaves": 32,
+          "branches": 1,
+          "physical": 2003,
+          "tombstones": 0,
+          "height": 1,
+          "occupancy": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            64,
+            19
+          ]
+        },
+        "membership": {
+          "pages": 1,
+          "leaves": 1,
+          "branches": 0,
+          "physical": 3,
+          "tombstones": 0,
+          "height": 0,
+          "occupancy": [
+            3
+          ]
+        },
+        "outcomes": {
+          "pages": 1,
+          "leaves": 1,
+          "branches": 0,
+          "physical": 3,
+          "tombstones": 0,
+          "height": 0,
+          "occupancy": [
+            3
+          ]
+        },
+        "changes": {
+          "pages": 1,
+          "leaves": 1,
+          "branches": 0,
+          "physical": 64,
+          "tombstones": 0,
+          "height": 0,
+          "occupancy": [
+            64
+          ]
+        }
+      }
+    }
+  ]
+}

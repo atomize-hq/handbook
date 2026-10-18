@@ -1,0 +1,17 @@
+{
+  "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+  "start_epoch": 1792352024.418587,
+  "execution_deadline_epoch": 1792358324.418587,
+  "total_deadline_epoch": 1792359224.418587,
+  "reporting_reserve_seconds": 900,
+  "logical_cap_bytes": 6442450944,
+  "reserve_bytes": 21474836480,
+  "scope_root": "/private/tmp/file-native-incremental-macos-20261018",
+  "lane_root": "/private/tmp/file-native-incremental-macos-20261018/final-lane",
+  "source": "/private/tmp/file-native-incremental-macos-20261018/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+  "common_lane_cap_gib": 5,
+  "prospective_amendment": "Coordinator authorized one corrected final lane before launch; superseded development is separate and preserved. Whole-root guard includes development, final source/worktree/build/runtime/evidence.",
+  "build_and_test_caps_seconds": 600,
+  "ordinary_call_cap_seconds": 180,
+  "smoke_call_cap_seconds": 600
+}
