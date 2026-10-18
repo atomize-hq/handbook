@@ -1,0 +1,20 @@
+{
+  "cpu": {
+    "Name": "12th Gen Intel(R) Core(TM) i9-12900KF",
+    "NumberOfCores": 16,
+    "NumberOfLogicalProcessors": 24
+  },
+  "memory": {
+    "TotalPhysicalMemory": 137237602304
+  },
+  "os": {
+    "Caption": "Microsoft Windows 11 Home",
+    "Version": "10.0.26200",
+    "BuildNumber": "26200"
+  },
+  "volume": {
+    "FileSystem": "NTFS",
+    "Size": 1999478190080,
+    "FreeSpace": 262649483264
+  }
+}

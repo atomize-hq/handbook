@@ -1,0 +1,14 @@
+{
+  "recorded_utc": "2026-10-18T04:04:48.201998+00:00",
+  "change": "After both measured schedulers exited, preserve exact stdout before malformed-response or timeout refusal",
+  "old_controller_sha256": "9d15999f1b2655c564aa3560c1f5b8566a47387bd1b64eea5792035447913fb1",
+  "old_controller_archive": "harness-before-wsl-large-budget.zip",
+  "new_controller_sha256": "c635af9d496de2d3fe424ae48f284c45a71c0702f9653b43dba82231a8a93439",
+  "rust_and_native_binaries": "unchanged",
+  "measurement_qualification": "Both original WSL large-A censored events were retained with output=null; exact historical stdout bytes were not captured. No missing measured event from a parsing failure is known. Original observations remain unchanged. Recovery/probes use the capture-capable controller and separate sessions.",
+  "synthetic_checks": {
+    "windows": "C:/file-native-followup-20261017/capture-check-v4",
+    "wsl": "/home/spenser/file-native-followup-20261017/data/capture-check-v4-rerun",
+    "wsl_failed_setup": "/home/spenser/file-native-followup-20261017/data/capture-check-v4: rustc absent from non-login PATH; no probe executable or native event; retained"
+  }
+}

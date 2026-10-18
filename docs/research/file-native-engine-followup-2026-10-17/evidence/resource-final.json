@@ -1,0 +1,35 @@
+{
+  "recorded_utc": "2026-10-18T04:31:12.833934+00:00",
+  "ledger": {
+    "windows": {
+      "allocated_file_bytes": 26106631192,
+      "epoch": 1792297805.8579435
+    },
+    "wsl": {
+      "allocated_file_bytes": 23588069376,
+      "epoch": 1792297855.612369
+    }
+  },
+  "runtime_and_build_allocated_file_bytes": 49694700568,
+  "repository_artifact_inventory": {
+    "files": 422,
+    "directories": 16,
+    "logical_bytes": 25930234,
+    "allocated_file_bytes": 26701368,
+    "hardlink_aliases_not_recounted": 0,
+    "buckets": {
+      "other": {
+        "files": 422,
+        "bytes": 25930234,
+        "allocated_bytes": 26701368
+      }
+    }
+  },
+  "combined_including_artifact_bytes": 49721401936,
+  "cap_bytes": 51539607552,
+  "host_free_bytes": 226805932032,
+  "guest_free_bytes": 518509047808,
+  "reserve_bytes": 171798691840,
+  "status": "within-declared-file-allocation-and-free-space-guards",
+  "qualification": "Final artifact inventory precedes this small resource JSON and later textual GitNexus/staging records. Directory/MFT allocation excluded; NTFS pathname sums can overcount hardlinks. Guest files and host VHDX are not summed as independent physical use."
+}

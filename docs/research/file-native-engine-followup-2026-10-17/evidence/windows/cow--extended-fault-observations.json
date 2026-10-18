@@ -1,0 +1,254 @@
+[
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 1,
+    "fault": "exit",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 1,
+    "fault": "error",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 1,
+    "fault": "kill",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 8,
+    "fault": "exit",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 8,
+    "fault": "error",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 8,
+    "fault": "kill",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 16,
+    "fault": "exit",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 16,
+    "fault": "error",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 16,
+    "fault": "kill",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-derived-written",
+    "nth": 1,
+    "fault": "exit",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-derived-written",
+    "nth": 1,
+    "fault": "error",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-derived-written",
+    "nth": 1,
+    "fault": "kill",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-derived-written",
+    "nth": 2,
+    "fault": "exit",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-derived-written",
+    "nth": 2,
+    "fault": "error",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-derived-written",
+    "nth": 2,
+    "fault": "kill",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "cow-object-installed",
+    "nth": 1,
+    "fault": "exit",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "A",
+    "hook": "cow-object-installed",
+    "nth": 1,
+    "fault": "error",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "A",
+    "hook": "cow-object-installed",
+    "nth": 1,
+    "fault": "kill",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "A",
+    "hook": "cow-root-prepared",
+    "nth": 1,
+    "fault": "exit",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "A",
+    "hook": "cow-root-prepared",
+    "nth": 1,
+    "fault": "error",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "A",
+    "hook": "cow-root-prepared",
+    "nth": 1,
+    "fault": "kill",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 1,
+    "fault": "exit",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 1,
+    "fault": "error",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 1,
+    "fault": "kill",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 8,
+    "fault": "exit",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 8,
+    "fault": "error",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 8,
+    "fault": "kill",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 16,
+    "fault": "exit",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 16,
+    "fault": "error",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 16,
+    "fault": "kill",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "cow-object-installed",
+    "nth": 1,
+    "fault": "exit",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "cow-object-installed",
+    "nth": 1,
+    "fault": "error",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "cow-object-installed",
+    "nth": 1,
+    "fault": "kill",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "cow-root-prepared",
+    "nth": 1,
+    "fault": "exit",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "cow-root-prepared",
+    "nth": 1,
+    "fault": "error",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "cow-root-prepared",
+    "nth": 1,
+    "fault": "kill",
+    "oracle": "must-not-select"
+  }
+]

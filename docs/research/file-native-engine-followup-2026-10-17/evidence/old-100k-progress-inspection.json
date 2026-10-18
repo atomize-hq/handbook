@@ -1,0 +1,18 @@
+{
+  "epoch": 1792275029.6688578,
+  "observation": "read-only directory counts; not authority selection inference",
+  "roots": [
+    {
+      "root": "C:\\file-native-experiment-20261017-v3\\growth\\100000-A-project-slot",
+      "original_directories": 95584,
+      "attempt_directory_exists": false,
+      "selector_exists": false
+    },
+    {
+      "root": "C:\\file-native-experiment-20261017-v3\\growth\\100000-B-project-slot",
+      "original_directories": 94139,
+      "attempt_directory_exists": false,
+      "selector_exists": false
+    }
+  ]
+}

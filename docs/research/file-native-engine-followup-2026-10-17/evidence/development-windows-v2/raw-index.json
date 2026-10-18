@@ -1,0 +1,50 @@
+[
+  {
+    "file": "cow--correctness-raw.jsonl.gz",
+    "source": "cow/correctness-raw.jsonl",
+    "records": 2198,
+    "bytes": 5298819,
+    "sha256": "f537f116b5640d336b533ee422f184bdacdf3d8abc49ce66da46adb5841a47a1",
+    "compressed_sha256": "8714f9672066948f49219442d6020e7823543d449b2a5ff4badc51a9092ae1c9"
+  },
+  {
+    "file": "execution.jsonl.gz",
+    "source": "execution.jsonl",
+    "records": 3,
+    "bytes": 1572,
+    "sha256": "18b04e6fe47ff8bc5f8efce1b28d85d646e8c42072088387595c6994c9a03bfa",
+    "compressed_sha256": "daf2c02766d3912660ee411d525c77316896289e471eeda2c7e77239db01d69d"
+  },
+  {
+    "file": "manifest--contention-raw.jsonl.gz",
+    "source": "manifest/contention-raw.jsonl",
+    "records": 118,
+    "bytes": 340034,
+    "sha256": "e7aa8f43bf8cfb34ea86dfa69f577e4443212fe5f75a96591aefe4aa2eac0224",
+    "compressed_sha256": "6a13bbc737a65986ee45a0f461be96cdf8757b9ce53979a9e3be8ba50fe1fc02"
+  },
+  {
+    "file": "manifest--growth-raw.jsonl.gz",
+    "source": "manifest/growth-raw.jsonl",
+    "records": 110,
+    "bytes": 428053,
+    "sha256": "f7f2a724fe55ad19b0f9d600d4c9ac6b4255c18f301bfe136796ee5113511322",
+    "compressed_sha256": "1349fd53fe3b6dc9bdac29a83f28b88ffb679e568f5a2694d04652b1bf4aba3d"
+  },
+  {
+    "file": "manifest--navigation-raw.jsonl.gz",
+    "source": "manifest/navigation-raw.jsonl",
+    "records": 4,
+    "bytes": 9946,
+    "sha256": "2f107a772130979b04cee637bbb54560dcb6d9c4e28c6db020438bfa06be1825",
+    "compressed_sha256": "39afb17027b93bd4330501a1a9bc6943f9c3a0356586feeec7d69515b83646a7"
+  },
+  {
+    "file": "manifest--regressions-raw.jsonl.gz",
+    "source": "manifest/regressions-raw.jsonl",
+    "records": 156,
+    "bytes": 479799,
+    "sha256": "90118d73342164d412bae9b7eb9162a31fca0c384aaaa639aeb845b93c55a63c",
+    "compressed_sha256": "040dd928b1d084c825349de40f1f821af159eb8cc5b6ff9fe9f079cf10b93220"
+  }
+]

@@ -1,0 +1,151 @@
+{
+  "decision_epoch": 1792283220.0357625,
+  "decision_utc": "2026-10-18T00:27:00.035771+00:00",
+  "before_any_wsl_large_root": true,
+  "reason": "Observed 10k A initialization ~189s and B complete-directory commits ~63-66s project beyond prior 1800/600s large ceilings at 100k. Allow bounded scaling margin before launch; no weaker work or guarantees.",
+  "old_caps_seconds": {
+    "large_init": 1800,
+    "publish": 600
+  },
+  "future_wsl_100k_caps_seconds": {
+    "large_init": 2400,
+    "publish": 900
+  },
+  "unchanged": {
+    "file_allocation_cap_bytes": 51539607552,
+    "host_reserve_bytes": 171798691840,
+    "max_workers": 8,
+    "history_tiers": [
+      20,
+      10,
+      3
+    ],
+    "rust_core": "v4 unchanged"
+  },
+  "archive": "harness-before-wsl-large-budget.zip",
+  "archive_sha256": "9ddf5883641b7097e82ba39d45bacae69680d6cfd763ea3084fc60f4bf5940bf",
+  "source_hashes": {
+    "experiment.py": "9d15999f1b2655c564aa3560c1f5b8566a47387bd1b64eea5792035447913fb1",
+    "baseline_harness.py": "b43a16a9669ab8b222875ca6369fab0cd9ab3bb11aeb309628ad19e2a3649336",
+    "workloads.py": "1badc6a6fb68380009d722ce72b73be47ec02fc561c2a79fe33ed3835fca011b",
+    "regressions.py": "71afa67c3cd502aaa47d103a663859eea87f36091448e19b79efd338d57bd72b",
+    "terminal_copy.py": "578271c0067545e0196385c2880ae31a2dbe962fc22b0c08550fa3d2be87e11f"
+  },
+  "profile_raw": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth-raw.jsonl",
+  "profile_raw_prefix_bytes": 867536,
+  "profile_raw_prefix_sha256": "6623c6e95956cdc6ff3af61e6b0aedf588c18b5a878ef57faa5db06780c9e8ef",
+  "profile": [
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-A-project",
+      "action": "init",
+      "request": null,
+      "engine_ms": 188728.816708,
+      "directory_syncs": 110321,
+      "file_syncs": 25017
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-A-project",
+      "action": "publish",
+      "request": "commit-1-packet-False",
+      "engine_ms": 383.846676,
+      "directory_syncs": 55,
+      "file_syncs": 18
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-A-project",
+      "action": "publish",
+      "request": "commit-8-packet-False",
+      "engine_ms": 624.366038,
+      "directory_syncs": 125,
+      "file_syncs": 32
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-A-project",
+      "action": "publish",
+      "request": "commit-64-packet-False",
+      "engine_ms": 2574.811539,
+      "directory_syncs": 685,
+      "file_syncs": 144
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-A-project",
+      "action": "publish",
+      "request": "commit-1-packet-True",
+      "engine_ms": 32093.007916,
+      "directory_syncs": 10061,
+      "file_syncs": 5019
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-A-project",
+      "action": "publish",
+      "request": "commit-8-packet-True",
+      "engine_ms": 31995.843309,
+      "directory_syncs": 10131,
+      "file_syncs": 5033
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-A-project",
+      "action": "publish",
+      "request": "commit-64-packet-True",
+      "engine_ms": 34746.867638,
+      "directory_syncs": 10691,
+      "file_syncs": 5145
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-B-project",
+      "action": "init",
+      "request": null,
+      "engine_ms": 70048.109834,
+      "directory_syncs": 80299,
+      "file_syncs": 20011
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-B-project",
+      "action": "publish",
+      "request": "commit-1-packet-False",
+      "engine_ms": 62992.424427,
+      "directory_syncs": 20040,
+      "file_syncs": 10012
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-B-project",
+      "action": "publish",
+      "request": "commit-8-packet-False",
+      "engine_ms": 64017.472398,
+      "directory_syncs": 20082,
+      "file_syncs": 10019
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-B-project",
+      "action": "publish",
+      "request": "commit-64-packet-False",
+      "engine_ms": 64221.825576,
+      "directory_syncs": 20418,
+      "file_syncs": 10075
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-B-project",
+      "action": "publish",
+      "request": "commit-1-packet-True",
+      "engine_ms": 64692.434509,
+      "directory_syncs": 20040,
+      "file_syncs": 10012
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-B-project",
+      "action": "publish",
+      "request": "commit-8-packet-True",
+      "engine_ms": 63032.147883,
+      "directory_syncs": 20082,
+      "file_syncs": 10019
+    },
+    {
+      "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/10000-B-project",
+      "action": "publish",
+      "request": "commit-64-packet-True",
+      "engine_ms": 66377.518592,
+      "directory_syncs": 20418,
+      "file_syncs": 10075
+    }
+  ]
+}

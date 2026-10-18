@@ -1,0 +1,30 @@
+[
+  {
+    "policy": "slot",
+    "result": {
+      "changed": [],
+      "outcome": "accepted",
+      "publication": "publication-54204-1792272468964853200-3",
+      "removed": [
+        "docs/item-research-source-10-d000010.yaml"
+      ],
+      "request": "once-delete",
+      "state_digest": "917238d8a2f99be30acefbbbf1afd959c58effe1579242ae7749c9626b1e77e3"
+    },
+    "late_signal": "does not cancel accepted request"
+  },
+  {
+    "policy": "speculative",
+    "result": {
+      "changed": [],
+      "outcome": "accepted",
+      "publication": "publication-56324-1792272469337536000-3",
+      "removed": [
+        "docs/item-research-source-10-d000010.yaml"
+      ],
+      "request": "once-delete",
+      "state_digest": "917238d8a2f99be30acefbbbf1afd959c58effe1579242ae7749c9626b1e77e3"
+    },
+    "late_signal": "does not cancel accepted request"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "recorded_utc": "2026-10-18T04:30:21.966051+00:00",
+  "platform": "wsl",
+  "ledger": {
+    "windows": {
+      "allocated_file_bytes": 26106631192,
+      "epoch": 1792297805.8579435
+    },
+    "wsl": {
+      "allocated_file_bytes": 23588069376,
+      "epoch": 1792297855.612369
+    }
+  },
+  "guest_free_bytes": 518509047808,
+  "windows_host_free_bytes": 226814853120,
+  "qualification": "ext4 allocated file bytes deduplicate device/inode aliases; directory allocation excluded; guest bytes are not added to host VHDX physical bytes"
+}

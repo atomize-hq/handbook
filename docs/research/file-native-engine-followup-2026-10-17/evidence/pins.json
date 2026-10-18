@@ -1,0 +1,189 @@
+{
+  "epoch": 1792297465.869367,
+  "platform": "Windows-10-10.0.26200-SP0",
+  "sources": {
+    "src/backend.rs": {
+      "bytes": 6213,
+      "sha256": "79b6220819a0d9d059a41078c6323e8b83d23452025f8b35ca52a83f3d3bfd6c"
+    },
+    "src/disk.rs": {
+      "bytes": 24532,
+      "sha256": "1ed496b1b1ea5138053128521fcc609a6aaa6f00828c8d75ff604aa4002afdd2"
+    },
+    "src/io.rs": {
+      "bytes": 9320,
+      "sha256": "fd7453986251426947b28f16fb6497c3fc501a52c867b682e1db04db976e774a"
+    },
+    "src/lifecycle.rs": {
+      "bytes": 7735,
+      "sha256": "30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4"
+    },
+    "src/main.rs": {
+      "bytes": 33528,
+      "sha256": "8cd6800fb18e1c5f26738f648589287a3d8fb2a217b0f4bd4d6dc17310083d57"
+    },
+    "src/model.rs": {
+      "bytes": 8505,
+      "sha256": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10"
+    },
+    "Cargo.toml": {
+      "bytes": 439,
+      "sha256": "e78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0"
+    },
+    "Cargo.lock": {
+      "bytes": 8140,
+      "sha256": "bb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998"
+    }
+  },
+  "windows_binary": {
+    "path": "C:\\file-native-followup-20261017-build-final-v4\\release\\file-native-publication-experiment.exe",
+    "sha256": "73c7e44974ecd0905f3a1a1792445947d5430bec31719350c192dae753a0d1d6"
+  },
+  "windows_rust": {
+    "command": [
+      "rustc",
+      "-Vv"
+    ],
+    "exit": 0,
+    "stdout": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-pc-windows-msvc\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+    "stderr": ""
+  },
+  "windows_cargo": {
+    "command": [
+      "cargo",
+      "-V"
+    ],
+    "exit": 0,
+    "stdout": "cargo 1.89.0 (c24e10642 2025-06-23)\n",
+    "stderr": ""
+  },
+  "linux": {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "--",
+      "bash",
+      "-lc",
+      "uname -a; cat /etc/os-release; findmnt -T /home/spenser/file-native-followup-20261017; df -B1 /home; rustc -Vv; cargo -V; sha256sum /home/spenser/file-native-followup-20261017/build-final-v4/release/file-native-publication-experiment; cd /home/spenser/file-native-followup-20261017/source-final-v4; sha256sum src/*.rs Cargo.*"
+    ],
+    "exit": 0,
+    "stdout": "Linux SpensersDesktop 6.18.54.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 19:13:07 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\nPRETTY_NAME=\"Ubuntu 24.04.3 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.3 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\nTARGET SOURCE   FSTYPE OPTIONS\n/      /dev/sdd ext4   rw,relatime,discard,errors=remount-ro,data=ordered\nFilesystem         1B-blocks         Used    Available Use% Mounted on\n/dev/sdd       1081101176832 507585957888 518522863616  50% /\nrustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-unknown-linux-gnu\nrelease: 1.89.0\nLLVM version: 20.1.7\ncargo 1.89.0 (c24e10642 2025-06-23)\n707578cf2df77a070ce810d0d5d47ffddd209a2fc69dc9ef14a8420594aa3fec  /home/spenser/file-native-followup-20261017/build-final-v4/release/file-native-publication-experiment\n79b6220819a0d9d059a41078c6323e8b83d23452025f8b35ca52a83f3d3bfd6c  src/backend.rs\n1ed496b1b1ea5138053128521fcc609a6aaa6f00828c8d75ff604aa4002afdd2  src/disk.rs\nfd7453986251426947b28f16fb6497c3fc501a52c867b682e1db04db976e774a  src/io.rs\n30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4  src/lifecycle.rs\n8cd6800fb18e1c5f26738f648589287a3d8fb2a217b0f4bd4d6dc17310083d57  src/main.rs\na4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10  src/model.rs\nbb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998  Cargo.lock\ne78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0  Cargo.toml\n",
+    "stderr": ""
+  },
+  "cache": "OS/device caches uncontrolled; no device-cold claim",
+  "harness": {
+    "account.py": {
+      "bytes": 3266,
+      "sha256": "9d284283f2f9467ec4d96daf3f6f45823f960e6e5e39176e87e0d3b2d48bb707"
+    },
+    "backend_checks.py": {
+      "bytes": 3322,
+      "sha256": "efb7e6b2df27c7f35cad3ee36120ef38984ad60ae3e351a0339cd0a248a6f9e5"
+    },
+    "baseline_harness.py": {
+      "bytes": 33147,
+      "sha256": "b43a16a9669ab8b222875ca6369fab0cd9ab3bb11aeb309628ad19e2a3649336"
+    },
+    "budget_amendment.py": {
+      "bytes": 3168,
+      "sha256": "5439d1344ca274f9d6ff4eaabba4b08966e80a3ce2ee85f3aacd1e2bc6d8ef88"
+    },
+    "cap_diagnosis.py": {
+      "bytes": 1421,
+      "sha256": "e8af61a5dac202800ecc93a46e302b4e3beaafb1363e0083809f92414921fc37"
+    },
+    "capture_checks.py": {
+      "bytes": 3147,
+      "sha256": "e217fd0e4b35c6584f96a74523d57f0ed98b3d6733495fdfe4cb0d87ab852604"
+    },
+    "continue_selected.py": {
+      "bytes": 5149,
+      "sha256": "d0fe429f612b4c8267743ba1cfee76fac738571d694a6d5a57c7b21199dee40d"
+    },
+    "execute.py": {
+      "bytes": 2210,
+      "sha256": "2cb6c482324e09c4eb533a091bc057633aa7b1f885d11aaaac39d66cf9afdcb2"
+    },
+    "experiment.py": {
+      "bytes": 18763,
+      "sha256": "c635af9d496de2d3fe424ae48f284c45a71c0702f9653b43dba82231a8a93439"
+    },
+    "extend.py": {
+      "bytes": 9267,
+      "sha256": "748559b76976df533a45c803e154e9f48aba6d535224e27bab1d95cfd1b6e559"
+    },
+    "indirect_gc.py": {
+      "bytes": 2639,
+      "sha256": "d381506d523ab8a00b038096e1da1e39ebbd50d92313b164fa2156f1de7a676e"
+    },
+    "monitor.py": {
+      "bytes": 1234,
+      "sha256": "19883c42bafad8cd83f9bd45ba2dab9d3623802ae1816b78ebcca81f12644574"
+    },
+    "profile.py": {
+      "bytes": 1401,
+      "sha256": "e91c80aceefa384ee1e4d76c7a3f42f600321e0d0ec3061331d20698e4188930"
+    },
+    "regressions.py": {
+      "bytes": 710,
+      "sha256": "71afa67c3cd502aaa47d103a663859eea87f36091448e19b79efd338d57bd72b"
+    },
+    "reporting_checks.py": {
+      "bytes": 6080,
+      "sha256": "987c4aa8d1b5f4836bc5679077409e436f02f37647b72375e14a839ec9d9686a"
+    },
+    "restoration.py": {
+      "bytes": 3518,
+      "sha256": "45c40ca0ed6282592a517a70ca894c94abe17b8c35e5782684b96c1153ed0330"
+    },
+    "retained_probe.py": {
+      "bytes": 3069,
+      "sha256": "eefd0b9bd0fbb3ff9e9ed948889956f7a16f686dd3c2f9ddaaf394e158d801ab"
+    },
+    "storage_account.py": {
+      "bytes": 3815,
+      "sha256": "a5a196e3581485aad5cbe090b8b74e4ed2437a69b61f4789f02c5c871ee86048"
+    },
+    "tables.py": {
+      "bytes": 13342,
+      "sha256": "8cf0d55988e653dd2b111b619b8e38144e5f1f4ca78addf989dbbea199ee9202"
+    },
+    "terminal_copy.py": {
+      "bytes": 1399,
+      "sha256": "578271c0067545e0196385c2880ae31a2dbe962fc22b0c08550fa3d2be87e11f"
+    },
+    "workloads.py": {
+      "bytes": 11054,
+      "sha256": "9212aa2976c6dc3771ae3b7eef7d6244e60a4ee6df1c63867834d00b3b09f3a9"
+    }
+  },
+  "windows_python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "wsl_python": {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "--",
+      "python3",
+      "--version"
+    ],
+    "exit": 0,
+    "stdout": "Python 3.12.3\n",
+    "stderr": ""
+  },
+  "terminal_helpers": {
+    "walkthrough.ps1": {
+      "bytes": 2113,
+      "sha256": "00bd42fa7c34549007f6518eb657e6d83a49ca719753bec93cd40a2a4dbc4f3c"
+    },
+    "walkthrough.sh": {
+      "bytes": 1403,
+      "sha256": "5225b4046ff7f8c760c309479ff5682b15b86f41549c6a1e803614cb2d828803"
+    }
+  },
+  "linux_binary": {
+    "path": "/home/spenser/file-native-followup-20261017/build-final-v4/release/file-native-publication-experiment",
+    "sha256": "707578cf2df77a070ce810d0d5d47ffddd209a2fc69dc9ef14a8420594aa3fec"
+  }
+}

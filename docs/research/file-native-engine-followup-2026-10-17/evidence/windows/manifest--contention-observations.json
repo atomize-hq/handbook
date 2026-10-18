@@ -1,0 +1,2940 @@
+[
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 1,
+    "request": "wave-1-0",
+    "complete_controller_ns": 594743100,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-54192-1792273438035168600-66",
+      "removed": [],
+      "request": "wave-1-0",
+      "state_digest": "3fd9aa92dbcf13486e75cecedc88f973fa8348749473296ddcab51e9aa82d1f9"
+    },
+    "attempt_walls": [
+      588955100
+    ],
+    "waits": [
+      78700
+    ],
+    "holds": [
+      588388000
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 2,
+    "request": "wave-2-0",
+    "complete_controller_ns": 542208700,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-58516-1792273438605137100-66",
+      "removed": [],
+      "request": "wave-2-0",
+      "state_digest": "aa7140452606b5e534e7181619ee0de2ac6339c4f84e6248abe3c323ca08d055"
+    },
+    "attempt_walls": [
+      536354900
+    ],
+    "waits": [
+      94400
+    ],
+    "holds": [
+      535647400
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 2,
+    "request": "wave-2-1",
+    "complete_controller_ns": 593876600,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000101"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-52232-1792273438844989500-3",
+      "removed": [],
+      "request": "wave-2-1",
+      "state_digest": "0a38b056b86cb81c8af3f72fff08f52173fe7548a7686a6d97f4b46c4386685d"
+    },
+    "attempt_walls": [
+      588321200
+    ],
+    "waits": [
+      533972400
+    ],
+    "holds": [
+      53870100
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 4,
+    "request": "wave-4-0",
+    "complete_controller_ns": 555452100,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-49748-1792273439219103000-66",
+      "removed": [],
+      "request": "wave-4-0",
+      "state_digest": "f72b754fa7d6779f82f7eaa3206b5805870edb0b2984fca058f1accffbeda534"
+    },
+    "attempt_walls": [
+      549554800
+    ],
+    "waits": [
+      82400
+    ],
+    "holds": [
+      548689700
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 4,
+    "request": "wave-4-1",
+    "complete_controller_ns": 609685100,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000101"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-61528-1792273439457601500-3",
+      "removed": [],
+      "request": "wave-4-1",
+      "state_digest": "e0184aefa71d5e26a5218785561745d3e04c70b7ef72d29a7d1744d56a158af9"
+    },
+    "attempt_walls": [
+      604188300
+    ],
+    "waits": [
+      547449900
+    ],
+    "holds": [
+      55928600
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 4,
+    "request": "wave-4-2",
+    "complete_controller_ns": 722593500,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000102"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-60468-1792273439572582200-3",
+      "removed": [],
+      "request": "wave-4-2",
+      "state_digest": "5a0f8bb2c6e17bfc90904c99b946b95c77c86a4e00ea5ffd97a73a2fd320ec2c"
+    },
+    "attempt_walls": [
+      716965600
+    ],
+    "waits": [
+      661868100
+    ],
+    "holds": [
+      54527000
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 4,
+    "request": "wave-4-3",
+    "complete_controller_ns": 665461700,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000103"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-14252-1792273439517560400-3",
+      "removed": [],
+      "request": "wave-4-3",
+      "state_digest": "7879c5269448fff99d9e94e00e14ba4e6ff15e98279eee28a47f36278d56454d"
+    },
+    "attempt_walls": [
+      660051700
+    ],
+    "waits": [
+      600877700
+    ],
+    "holds": [
+      58639300
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-0",
+    "complete_controller_ns": 547645300,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-61120-1792273439930162700-66",
+      "removed": [],
+      "request": "wave-8-0",
+      "state_digest": "b733af42040bea32941cc83243c545ed6874d421611ae130f1654f81ab7cda55"
+    },
+    "attempt_walls": [
+      541642800
+    ],
+    "waits": [
+      121300
+    ],
+    "holds": [
+      540149900
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-1",
+    "complete_controller_ns": 663900800,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000101"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-15424-1792273440232654300-3",
+      "removed": [],
+      "request": "wave-8-1",
+      "state_digest": "15366d75df5df177a3a707ed37f13053d8a8c0589bb67673c94ee834ce052288"
+    },
+    "attempt_walls": [
+      658156700
+    ],
+    "waits": [
+      593504600
+    ],
+    "holds": [
+      63881600
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-2",
+    "complete_controller_ns": 826820700,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000102"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-56788-1792273440407219100-3",
+      "removed": [],
+      "request": "wave-8-2",
+      "state_digest": "cad2d9cc498aeae96c93da79bfd805c7e0e3aff0c79208f9cb45361d2071d79e"
+    },
+    "attempt_walls": [
+      821334100
+    ],
+    "waits": [
+      766107100
+    ],
+    "holds": [
+      54481600
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-3",
+    "complete_controller_ns": 768559900,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000103"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-21412-1792273440349641400-3",
+      "removed": [],
+      "request": "wave-8-3",
+      "state_digest": "b9f489394b0b17336f19ff3f2e4239232c51d2763c0940a1a639987afd9fe8d1"
+    },
+    "attempt_walls": [
+      763107800
+    ],
+    "waits": [
+      710037600
+    ],
+    "holds": [
+      52335400
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-4",
+    "complete_controller_ns": 591872400,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000104"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-46384-1792273440175075100-3",
+      "removed": [],
+      "request": "wave-8-4",
+      "state_digest": "93e00cc8d29b69e3d64df5474286c97a9b6d74e6f78dc3753edee1588560a633"
+    },
+    "attempt_walls": [
+      586298700
+    ],
+    "waits": [
+      532609900
+    ],
+    "holds": [
+      52916800
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-5",
+    "complete_controller_ns": 710216200,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000105"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-62516-1792273440296826600-3",
+      "removed": [],
+      "request": "wave-8-5",
+      "state_digest": "b892e398daebb3e916cd50584ec9a981c450d70a4ff123ff88d7d453ab749ba6"
+    },
+    "attempt_walls": [
+      704812500
+    ],
+    "waits": [
+      649507100
+    ],
+    "holds": [
+      54593000
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-6",
+    "complete_controller_ns": 880120200,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000106"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-53284-1792273440462548400-3",
+      "removed": [],
+      "request": "wave-8-6",
+      "state_digest": "ece2d6ef05c99a1ea4973019f874b993e8ddc83ef71dad87f4a087010d1bc3a6"
+    },
+    "attempt_walls": [
+      874538000
+    ],
+    "waits": [
+      812271900
+    ],
+    "holds": [
+      61539800
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-7",
+    "complete_controller_ns": 946330000,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000107"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-56748-1792273440525039500-3",
+      "removed": [],
+      "request": "wave-8-7",
+      "state_digest": "6c82fad95253749d3a93b02544c9238fda7a62d2cd1e0010a4ba107d6a4c5c91"
+    },
+    "attempt_walls": [
+      940425900
+    ],
+    "waits": [
+      872509900
+    ],
+    "holds": [
+      67175400
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "slot",
+    "cancellation": "wait then durable fence",
+    "busy_wait_ns": 80929800,
+    "holder_death": "lock released",
+    "inventory": {
+      "files": 825,
+      "directories": 345,
+      "logical_bytes": 10296604,
+      "allocated_file_bytes": 12578776,
+      "hardlink_aliases_not_recounted": 0,
+      "buckets": {
+        "other": {
+          "files": 9,
+          "bytes": 956,
+          "allocated_bytes": 984
+        },
+        "attempts": {
+          "files": 255,
+          "bytes": 3828961,
+          "allocated_bytes": 4661248
+        },
+        "originals": {
+          "files": 396,
+          "bytes": 4748088,
+          "allocated_bytes": 5840896
+        },
+        "publications": {
+          "files": 17,
+          "bytes": 76968,
+          "allocated_bytes": 122880
+        },
+        "receipts": {
+          "files": 17,
+          "bytes": 9926,
+          "allocated_bytes": 23552
+        },
+        "view": {
+          "files": 131,
+          "bytes": 1631705,
+          "allocated_bytes": 1929216
+        }
+      }
+    }
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 1,
+    "request": "wave-1-0",
+    "complete_controller_ns": 533735600,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-62868-1792273442125747500-66",
+      "removed": [],
+      "request": "wave-1-0",
+      "state_digest": "3fd9aa92dbcf13486e75cecedc88f973fa8348749473296ddcab51e9aa82d1f9"
+    },
+    "attempt_walls": [
+      527679000
+    ],
+    "waits": [
+      75800
+    ],
+    "holds": [
+      254245800
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 2,
+    "request": "wave-2-0",
+    "complete_controller_ns": 681004800,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-53936-1792273442795129300-2",
+      "removed": [],
+      "request": "wave-2-0",
+      "state_digest": "0a38b056b86cb81c8af3f72fff08f52173fe7548a7686a6d97f4b46c4386685d"
+    },
+    "attempt_walls": [
+      357698800,
+      310055200
+    ],
+    "waits": [
+      22575000,
+      103700
+    ],
+    "holds": [
+      1272000,
+      267470500
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 2,
+    "request": "wave-2-1",
+    "complete_controller_ns": 359625000,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000101"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-57748-1792273442717573300-3",
+      "removed": [],
+      "request": "wave-2-1",
+      "state_digest": "c440e90a8ba2f103e9b0d288c38dd0c0793a03fee05a514906ff845ada6f7dfd"
+    },
+    "attempt_walls": [
+      354040800
+    ],
+    "waits": [
+      97200
+    ],
+    "holds": [
+      26807500
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 4,
+    "request": "wave-4-0",
+    "complete_controller_ns": 623607100,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-8620-1792273443403320400-66",
+      "removed": [],
+      "request": "wave-4-0",
+      "state_digest": "f72b754fa7d6779f82f7eaa3206b5805870edb0b2984fca058f1accffbeda534"
+    },
+    "attempt_walls": [
+      617516400
+    ],
+    "waits": [
+      76400
+    ],
+    "holds": [
+      285640900
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 4,
+    "request": "wave-4-1",
+    "complete_controller_ns": 707338200,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000101"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-54924-1792273443739608100-2",
+      "removed": [],
+      "request": "wave-4-1",
+      "state_digest": "e0184aefa71d5e26a5218785561745d3e04c70b7ef72d29a7d1744d56a158af9"
+    },
+    "attempt_walls": [
+      623866000,
+      69952000
+    ],
+    "waits": [
+      291037200,
+      115900
+    ],
+    "holds": [
+      1382300,
+      35418900
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 4,
+    "request": "wave-4-2",
+    "complete_controller_ns": 791092400,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000102"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-43176-1792273443831546700-2",
+      "removed": [],
+      "request": "wave-4-2",
+      "state_digest": "b1f72946a9c0042a21d9a80b2bc84baf9de79c3dbdb0340b62f21df21ca2c01f"
+    },
+    "attempt_walls": [
+      618993200,
+      74035300
+    ],
+    "waits": [
+      289592500,
+      124800
+    ],
+    "holds": [
+      1392500,
+      29405400
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 4,
+    "request": "wave-4-3",
+    "complete_controller_ns": 864412300,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000103"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-50996-1792273443905200600-2",
+      "removed": [],
+      "request": "wave-4-3",
+      "state_digest": "5a0f8bb2c6e17bfc90904c99b946b95c77c86a4e00ea5ffd97a73a2fd320ec2c"
+    },
+    "attempt_walls": [
+      614114400,
+      66926500
+    ],
+    "waits": [
+      286016900,
+      104100
+    ],
+    "holds": [
+      1420900,
+      31973600
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-0",
+    "complete_controller_ns": 639554100,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-12008-1792273444322772400-2",
+      "removed": [],
+      "request": "wave-8-0",
+      "state_digest": "c0e54a133b9f83f47ec73a8e81ca565d1f0b637fa1644e36818ee2591033fcb0"
+    },
+    "attempt_walls": [
+      315165600,
+      296189400
+    ],
+    "waits": [
+      26714600,
+      86400
+    ],
+    "holds": [
+      1465800,
+      255773500
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-1",
+    "complete_controller_ns": 705223200,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000101"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-49580-1792273444620215400-2",
+      "removed": [],
+      "request": "wave-8-1",
+      "state_digest": "de665865158f4c2e3f90f27986288594726593ccac98ac591919fd6b7051f3f6"
+    },
+    "attempt_walls": [
+      325386100,
+      60992700
+    ],
+    "waits": [
+      42260800,
+      81800
+    ],
+    "holds": [
+      1428100,
+      26622100
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-2",
+    "complete_controller_ns": 775358100,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000102"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-46760-1792273444694968500-2",
+      "removed": [],
+      "request": "wave-8-2",
+      "state_digest": "8b2a0b154053d55d8db51bbc7a3430e43dd458d1dee2ea79de817e1a3f5d654a"
+    },
+    "attempt_walls": [
+      325603900,
+      64957900
+    ],
+    "waits": [
+      44843300,
+      86600
+    ],
+    "holds": [
+      1420900,
+      24356600
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-3",
+    "complete_controller_ns": 844535000,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000103"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-63292-1792273444766819400-2",
+      "removed": [],
+      "request": "wave-8-3",
+      "state_digest": "defb52ddd354bc45f72f9086a041a95d3bf6b3c3883b41a44557f436e44e9c82"
+    },
+    "attempt_walls": [
+      317571300,
+      63894200
+    ],
+    "waits": [
+      39697900,
+      82000
+    ],
+    "holds": [
+      1419400,
+      24071800
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-4",
+    "complete_controller_ns": 906141700,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000104"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-51172-1792273444830304600-2",
+      "removed": [],
+      "request": "wave-8-4",
+      "state_digest": "b535eb32452f7eed58c0f147faa284507aae90f0b3cfd93ba3d29387a08f1f29"
+    },
+    "attempt_walls": [
+      307602500,
+      56645200
+    ],
+    "waits": [
+      35240500,
+      85600
+    ],
+    "holds": [
+      1585900,
+      24778400
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-5",
+    "complete_controller_ns": 965631400,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000105"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-52772-1792273444894475500-2",
+      "removed": [],
+      "request": "wave-8-5",
+      "state_digest": "ef8cf012aad7cc67ecd51e71500a6fc81da98d1ec2be68f2f4d6b9d187b0e9c8"
+    },
+    "attempt_walls": [
+      306724100,
+      56464900
+    ],
+    "waits": [
+      37737300,
+      94500
+    ],
+    "holds": [
+      1394400,
+      24809600
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-6",
+    "complete_controller_ns": 1036602000,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000106"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-51140-1792273444967595400-2",
+      "removed": [],
+      "request": "wave-8-6",
+      "state_digest": "6c82fad95253749d3a93b02544c9238fda7a62d2cd1e0010a4ba107d6a4c5c91"
+    },
+    "attempt_walls": [
+      298192700,
+      66575000
+    ],
+    "waits": [
+      29223600,
+      78200
+    ],
+    "holds": [
+      1582500,
+      25728100
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-7",
+    "complete_controller_ns": 297060200,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000107"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-47800-1792273444229177600-3",
+      "removed": [],
+      "request": "wave-8-7",
+      "state_digest": "47c2ddd9e17a7e8e2b14451d74770fda9e7e489eac373740e8e5f8da63913053"
+    },
+    "attempt_walls": [
+      289426700
+    ],
+    "waits": [
+      220300
+    ],
+    "holds": [
+      29148300
+    ]
+  },
+  {
+    "mode": "A",
+    "policy": "speculative",
+    "cancellation": "wait then durable fence",
+    "busy_wait_ns": 81186700,
+    "holder_death": "lock released",
+    "inventory": {
+      "files": 1009,
+      "directories": 422,
+      "logical_bytes": 12766901,
+      "allocated_file_bytes": 15614184,
+      "hardlink_aliases_not_recounted": 0,
+      "buckets": {
+        "other": {
+          "files": 28,
+          "bytes": 1189,
+          "allocated_bytes": 1256
+        },
+        "attempts": {
+          "files": 420,
+          "bytes": 6299052,
+          "allocated_bytes": 7696384
+        },
+        "originals": {
+          "files": 396,
+          "bytes": 4748088,
+          "allocated_bytes": 5840896
+        },
+        "publications": {
+          "files": 17,
+          "bytes": 76944,
+          "allocated_bytes": 122880
+        },
+        "receipts": {
+          "files": 17,
+          "bytes": 9923,
+          "allocated_bytes": 23552
+        },
+        "view": {
+          "files": 131,
+          "bytes": 1631705,
+          "allocated_bytes": 1929216
+        }
+      }
+    }
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 1,
+    "request": "wave-1-0",
+    "complete_controller_ns": 371437500,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-62024-1792273446344128500-66",
+      "removed": [],
+      "request": "wave-1-0",
+      "state_digest": "3fd9aa92dbcf13486e75cecedc88f973fa8348749473296ddcab51e9aa82d1f9"
+    },
+    "attempt_walls": [
+      365554400
+    ],
+    "waits": [
+      82200
+    ],
+    "holds": [
+      364949400
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 2,
+    "request": "wave-2-0",
+    "complete_controller_ns": 406153800,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-57792-1792273446746983100-66",
+      "removed": [],
+      "request": "wave-2-0",
+      "state_digest": "aa7140452606b5e534e7181619ee0de2ac6339c4f84e6248abe3c323ca08d055"
+    },
+    "attempt_walls": [
+      400521800
+    ],
+    "waits": [
+      91700
+    ],
+    "holds": [
+      399812200
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 2,
+    "request": "wave-2-1",
+    "complete_controller_ns": 572466500,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000101"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-30476-1792273446922720500-3",
+      "removed": [],
+      "request": "wave-2-1",
+      "state_digest": "0a38b056b86cb81c8af3f72fff08f52173fe7548a7686a6d97f4b46c4386685d"
+    },
+    "attempt_walls": [
+      566248800
+    ],
+    "waits": [
+      398444100
+    ],
+    "holds": [
+      167351200
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 4,
+    "request": "wave-4-0",
+    "complete_controller_ns": 412759700,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-54104-1792273447339192100-66",
+      "removed": [],
+      "request": "wave-4-0",
+      "state_digest": "f72b754fa7d6779f82f7eaa3206b5805870edb0b2984fca058f1accffbeda534"
+    },
+    "attempt_walls": [
+      406434800
+    ],
+    "waits": [
+      97900
+    ],
+    "holds": [
+      405485200
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 4,
+    "request": "wave-4-1",
+    "complete_controller_ns": 755041900,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000101"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-61868-1792273447683786500-3",
+      "removed": [],
+      "request": "wave-4-1",
+      "state_digest": "7879c5269448fff99d9e94e00e14ba4e6ff15e98279eee28a47f36278d56454d"
+    },
+    "attempt_walls": [
+      748183900
+    ],
+    "waits": [
+      584529200
+    ],
+    "holds": [
+      162972900
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 4,
+    "request": "wave-4-2",
+    "complete_controller_ns": 934209000,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000102"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-39704-1792273447865186400-3",
+      "removed": [],
+      "request": "wave-4-2",
+      "state_digest": "5a0f8bb2c6e17bfc90904c99b946b95c77c86a4e00ea5ffd97a73a2fd320ec2c"
+    },
+    "attempt_walls": [
+      928305700
+    ],
+    "waits": [
+      746894700
+    ],
+    "holds": [
+      180921700
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 4,
+    "request": "wave-4-3",
+    "complete_controller_ns": 585079400,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000103"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-56764-1792273447518658100-3",
+      "removed": [],
+      "request": "wave-4-3",
+      "state_digest": "9f14ac6bf83d59dbf71f49678261113d963a2c2b7d1d401f6cac4dde304f3556"
+    },
+    "attempt_walls": [
+      579675200
+    ],
+    "waits": [
+      400726200
+    ],
+    "holds": [
+      178456900
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-0",
+    "complete_controller_ns": 452775600,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-45088-1792273448320138400-66",
+      "removed": [],
+      "request": "wave-8-0",
+      "state_digest": "b733af42040bea32941cc83243c545ed6874d421611ae130f1654f81ab7cda55"
+    },
+    "attempt_walls": [
+      446674300
+    ],
+    "waits": [
+      99300
+    ],
+    "holds": [
+      445413000
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-1",
+    "complete_controller_ns": 623078300,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000101"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-63176-1792273448492605200-3",
+      "removed": [],
+      "request": "wave-8-1",
+      "state_digest": "d3fd4a3d70bae48529c94405236fd74ebea052fa26bb7d04518896da486191fd"
+    },
+    "attempt_walls": [
+      617256400
+    ],
+    "waits": [
+      443503400
+    ],
+    "holds": [
+      172880700
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-2",
+    "complete_controller_ns": 803230300,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000102"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-46736-1792273448674684600-3",
+      "removed": [],
+      "request": "wave-8-2",
+      "state_digest": "1b2e8ebbe1656388c7bcfd438c414a18a8f3917c1e1e0d972dc2b0fec6a877fe"
+    },
+    "attempt_walls": [
+      796978500
+    ],
+    "waits": [
+      614879800
+    ],
+    "holds": [
+      181318300
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-3",
+    "complete_controller_ns": 1333530300,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000103"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-62364-1792273449207604200-3",
+      "removed": [],
+      "request": "wave-8-3",
+      "state_digest": "cad2d9cc498aeae96c93da79bfd805c7e0e3aff0c79208f9cb45361d2071d79e"
+    },
+    "attempt_walls": [
+      1327677100
+    ],
+    "waits": [
+      1150195300
+    ],
+    "holds": [
+      176704800
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-4",
+    "complete_controller_ns": 973854900,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000104"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-54128-1792273448849687200-3",
+      "removed": [],
+      "request": "wave-8-4",
+      "state_digest": "58d449aa01e8357982d0186eec6032e69658fce47719240cfec7c4f593a20a2b"
+    },
+    "attempt_walls": [
+      968167400
+    ],
+    "waits": [
+      792449700
+    ],
+    "holds": [
+      174953500
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-5",
+    "complete_controller_ns": 1151615400,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000105"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-39100-1792273449030883300-3",
+      "removed": [],
+      "request": "wave-8-5",
+      "state_digest": "aac1f9cf148fc91ba919eedf90194f0ea0f5c188b66d3716c0928dba5f578961"
+    },
+    "attempt_walls": [
+      1146023900
+    ],
+    "waits": [
+      966506200
+    ],
+    "holds": [
+      178750500
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-6",
+    "complete_controller_ns": 1498516900,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000106"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-56584-1792273449379894900-3",
+      "removed": [],
+      "request": "wave-8-6",
+      "state_digest": "ece2d6ef05c99a1ea4973019f874b993e8ddc83ef71dad87f4a087010d1bc3a6"
+    },
+    "attempt_walls": [
+      1492734500
+    ],
+    "waits": [
+      1319915500
+    ],
+    "holds": [
+      172036800
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "width": 8,
+    "request": "wave-8-7",
+    "complete_controller_ns": 1676454500,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000107"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-30864-1792273449560334800-3",
+      "removed": [],
+      "request": "wave-8-7",
+      "state_digest": "6c82fad95253749d3a93b02544c9238fda7a62d2cd1e0010a4ba107d6a4c5c91"
+    },
+    "attempt_walls": [
+      1670744200
+    ],
+    "waits": [
+      1489945300
+    ],
+    "holds": [
+      180064000
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "slot",
+    "cancellation": "wait then durable fence",
+    "busy_wait_ns": 82258100,
+    "holder_death": "lock released",
+    "inventory": {
+      "files": 2716,
+      "directories": 340,
+      "logical_bytes": 33894523,
+      "allocated_file_bytes": 39673520,
+      "hardlink_aliases_not_recounted": 0,
+      "buckets": {
+        "other": {
+          "files": 8,
+          "bytes": 666,
+          "allocated_bytes": 688
+        },
+        "attempts": {
+          "files": 34,
+          "bytes": 1075794,
+          "allocated_bytes": 1146880
+        },
+        "generations": {
+          "files": 2244,
+          "bytes": 27983251,
+          "allocated_bytes": 32538624
+        },
+        "originals": {
+          "files": 396,
+          "bytes": 4748088,
+          "allocated_bytes": 5840896
+        },
+        "publications": {
+          "files": 17,
+          "bytes": 76798,
+          "allocated_bytes": 122880
+        },
+        "receipts": {
+          "files": 17,
+          "bytes": 9926,
+          "allocated_bytes": 23552
+        }
+      }
+    }
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 1,
+    "request": "wave-1-0",
+    "complete_controller_ns": 420854300,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-50316-1792273451447181100-66",
+      "removed": [],
+      "request": "wave-1-0",
+      "state_digest": "3fd9aa92dbcf13486e75cecedc88f973fa8348749473296ddcab51e9aa82d1f9"
+    },
+    "attempt_walls": [
+      414236000
+    ],
+    "waits": [
+      84200
+    ],
+    "holds": [
+      22243700
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 2,
+    "request": "wave-2-0",
+    "complete_controller_ns": 640448600,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-22300-1792273452088634000-2",
+      "removed": [],
+      "request": "wave-2-0",
+      "state_digest": "0a38b056b86cb81c8af3f72fff08f52173fe7548a7686a6d97f4b46c4386685d"
+    },
+    "attempt_walls": [
+      442052900,
+      185327700
+    ],
+    "waits": [
+      23591500,
+      97800
+    ],
+    "holds": [
+      2866700,
+      23216900
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 2,
+    "request": "wave-2-1",
+    "complete_controller_ns": 442739100,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000101"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-58132-1792273451893132500-3",
+      "removed": [],
+      "request": "wave-2-1",
+      "state_digest": "c440e90a8ba2f103e9b0d288c38dd0c0793a03fee05a514906ff845ada6f7dfd"
+    },
+    "attempt_walls": [
+      436937700
+    ],
+    "waits": [
+      82000
+    ],
+    "holds": [
+      24335000
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 4,
+    "request": "wave-4-0",
+    "complete_controller_ns": 681797500,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-46720-1792273452773552300-2",
+      "removed": [],
+      "request": "wave-4-0",
+      "state_digest": "9f14ac6bf83d59dbf71f49678261113d963a2c2b7d1d401f6cac4dde304f3556"
+    },
+    "attempt_walls": [
+      499237100,
+      165133100
+    ],
+    "waits": [
+      24526700,
+      82300
+    ],
+    "holds": [
+      1960100,
+      23108600
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 4,
+    "request": "wave-4-1",
+    "complete_controller_ns": 846685300,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000101"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-62704-1792273452940774000-2",
+      "removed": [],
+      "request": "wave-4-1",
+      "state_digest": "7879c5269448fff99d9e94e00e14ba4e6ff15e98279eee28a47f36278d56454d"
+    },
+    "attempt_walls": [
+      501263200,
+      160246700
+    ],
+    "waits": [
+      30378700,
+      84100
+    ],
+    "holds": [
+      1264900,
+      23603100
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 4,
+    "request": "wave-4-2",
+    "complete_controller_ns": 1024807400,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000102"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-43188-1792273453121268600-2",
+      "removed": [],
+      "request": "wave-4-2",
+      "state_digest": "5a0f8bb2c6e17bfc90904c99b946b95c77c86a4e00ea5ffd97a73a2fd320ec2c"
+    },
+    "attempt_walls": [
+      496672800,
+      173299400
+    ],
+    "waits": [
+      27829200,
+      81300
+    ],
+    "holds": [
+      1417500,
+      23471600
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 4,
+    "request": "wave-4-3",
+    "complete_controller_ns": 495261400,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000103"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-55444-1792273452592851800-3",
+      "removed": [],
+      "request": "wave-4-3",
+      "state_digest": "9e4cb2cbef9e5b621a9b94dbe5c3467490cf278d6396062dbd85e235d7a0cf66"
+    },
+    "attempt_walls": [
+      488613100
+    ],
+    "waits": [
+      132200
+    ],
+    "holds": [
+      23477100
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-0",
+    "complete_controller_ns": 807856100,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000000",
+        "d000001",
+        "d000002",
+        "d000003",
+        "d000004",
+        "d000005",
+        "d000006",
+        "d000007",
+        "d000008",
+        "d000009",
+        "d000010",
+        "d000011",
+        "d000012",
+        "d000013",
+        "d000014",
+        "d000015",
+        "d000016",
+        "d000017",
+        "d000018",
+        "d000019",
+        "d000020",
+        "d000021",
+        "d000022",
+        "d000023",
+        "d000024",
+        "d000025",
+        "d000026",
+        "d000027",
+        "d000028",
+        "d000029",
+        "d000030",
+        "d000031",
+        "d000032",
+        "d000033",
+        "d000034",
+        "d000035",
+        "d000036",
+        "d000037",
+        "d000038",
+        "d000039",
+        "d000040",
+        "d000041",
+        "d000042",
+        "d000043",
+        "d000044",
+        "d000045",
+        "d000046",
+        "d000047",
+        "d000048",
+        "d000049",
+        "d000050",
+        "d000051",
+        "d000052",
+        "d000053",
+        "d000054",
+        "d000055",
+        "d000056",
+        "d000057",
+        "d000058",
+        "d000059",
+        "d000060",
+        "d000061",
+        "d000062",
+        "d000063"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-62880-1792273453930918800-2",
+      "removed": [],
+      "request": "wave-8-0",
+      "state_digest": "2562ee027e504f90a09b3dc452ca3042cf8dbd759aaf5bee3fb288ffef488cde"
+    },
+    "attempt_walls": [
+      620971100,
+      170159800
+    ],
+    "waits": [
+      32236000,
+      87300
+    ],
+    "holds": [
+      1418300,
+      23281800
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-1",
+    "complete_controller_ns": 978220800,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000101"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-48980-1792273454103047400-2",
+      "removed": [],
+      "request": "wave-8-1",
+      "state_digest": "da8ed291915245a35339c51ead1630f36b8423750aed2247239795ba7793f1d4"
+    },
+    "attempt_walls": [
+      611654000,
+      164360000
+    ],
+    "waits": [
+      22829300,
+      82500
+    ],
+    "holds": [
+      3155000,
+      23225300
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-2",
+    "complete_controller_ns": 1147606400,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000102"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-54316-1792273454274847700-2",
+      "removed": [],
+      "request": "wave-8-2",
+      "state_digest": "07f861ed3751fc6e116d6ff7951fdc2825b28577c8a5a49d3a21ca8efe02d11e"
+    },
+    "attempt_walls": [
+      620296400,
+      163691300
+    ],
+    "waits": [
+      34640900,
+      81500
+    ],
+    "holds": [
+      1367600,
+      23033500
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-3",
+    "complete_controller_ns": 1310607000,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000103"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-54288-1792273454440956600-2",
+      "removed": [],
+      "request": "wave-8-3",
+      "state_digest": "9a576c193f29243eab89394da952622842a89f586eb74dc758f4cd84db7be558"
+    },
+    "attempt_walls": [
+      607934100,
+      158279000
+    ],
+    "waits": [
+      25279800,
+      86000
+    ],
+    "holds": [
+      1150100,
+      23180800
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-4",
+    "complete_controller_ns": 1479649700,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000104"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-55752-1792273454612529000-2",
+      "removed": [],
+      "request": "wave-8-4",
+      "state_digest": "cad2d9cc498aeae96c93da79bfd805c7e0e3aff0c79208f9cb45361d2071d79e"
+    },
+    "attempt_walls": [
+      611998300,
+      164123500
+    ],
+    "waits": [
+      32137800,
+      116000
+    ],
+    "holds": [
+      1088600,
+      23198700
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-5",
+    "complete_controller_ns": 603664100,
+    "attempts": 1,
+    "retries": 0,
+    "request_result": {
+      "changed": [
+        "d000105"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-41432-1792273453739239800-3",
+      "removed": [],
+      "request": "wave-8-5",
+      "state_digest": "7845579814bcbed2f756e9648f0f8260eb7dc9c612dcbc11998c42a51e284824"
+    },
+    "attempt_walls": [
+      596315400
+    ],
+    "waits": [
+      83800
+    ],
+    "holds": [
+      23699800
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-6",
+    "complete_controller_ns": 1643566900,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000106"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-26448-1792273454782087100-2",
+      "removed": [],
+      "request": "wave-8-6",
+      "state_digest": "ece2d6ef05c99a1ea4973019f874b993e8ddc83ef71dad87f4a087010d1bc3a6"
+    },
+    "attempt_walls": [
+      601673400,
+      162338300
+    ],
+    "waits": [
+      29221400,
+      99700
+    ],
+    "holds": [
+      1437100,
+      23366300
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "width": 8,
+    "request": "wave-8-7",
+    "complete_controller_ns": 1812323000,
+    "attempts": 2,
+    "retries": 1,
+    "request_result": {
+      "changed": [
+        "d000107"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-44940-1792273454954580100-2",
+      "removed": [],
+      "request": "wave-8-7",
+      "state_digest": "6c82fad95253749d3a93b02544c9238fda7a62d2cd1e0010a4ba107d6a4c5c91"
+    },
+    "attempt_walls": [
+      596653200,
+      165364700
+    ],
+    "waits": [
+      26850200,
+      89400
+    ],
+    "holds": [
+      1477600,
+      23439100
+    ]
+  },
+  {
+    "mode": "B",
+    "policy": "speculative",
+    "cancellation": "wait then durable fence",
+    "busy_wait_ns": 81507000,
+    "holder_death": "lock released",
+    "inventory": {
+      "files": 4209,
+      "directories": 417,
+      "logical_bytes": 52697032,
+      "allocated_file_bytes": 61636544,
+      "hardlink_aliases_not_recounted": 0,
+      "buckets": {
+        "other": {
+          "files": 27,
+          "bytes": 899,
+          "allocated_bytes": 960
+        },
+        "attempts": {
+          "files": 56,
+          "bytes": 1774748,
+          "allocated_bytes": 1892352
+        },
+        "generations": {
+          "files": 3696,
+          "bytes": 46086600,
+          "allocated_bytes": 53755904
+        },
+        "originals": {
+          "files": 396,
+          "bytes": 4748088,
+          "allocated_bytes": 5840896
+        },
+        "publications": {
+          "files": 17,
+          "bytes": 76774,
+          "allocated_bytes": 122880
+        },
+        "receipts": {
+          "files": 17,
+          "bytes": 9923,
+          "allocated_bytes": 23552
+        }
+      }
+    }
+  }
+]

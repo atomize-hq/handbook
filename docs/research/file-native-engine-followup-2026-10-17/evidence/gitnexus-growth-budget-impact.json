@@ -1,0 +1,11 @@
+{
+  "command": "node .gitnexus/run.cjs impact growth --direction upstream --repo handbook",
+  "exit_code": 1,
+  "tool_version": "GitNexus 1.6.12",
+  "error": "Target 'growth' not found",
+  "direction": "upstream",
+  "impactedCount": null,
+  "risk": "UNKNOWN",
+  "runtime_warning": "Node v22.15.0 is below the package's ^22.18.0 or >=24.11.0 requirement",
+  "manual_scope": "experiment.py imports workloads.growth for its growth dispatch; execute.py invokes that CLI in the isolated research directory. No production imports or callers were found. The amendment changes only future 100k WSL init/publication ceilings, not the Rust executable, corpus, closure/sync work, or data-allocation limits."
+}

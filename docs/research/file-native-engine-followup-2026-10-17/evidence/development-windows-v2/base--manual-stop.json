@@ -1,0 +1,6 @@
+{
+  "reason": "Pause measured lane before large tiers to require positive historical selection; data preserved",
+  "epoch": 1792272682.0972147,
+  "launcher_pid": 61716,
+  "driver_pid": 48932
+}

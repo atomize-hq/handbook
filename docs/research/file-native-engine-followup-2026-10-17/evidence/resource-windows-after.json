@@ -1,0 +1,45 @@
+{
+  "recorded_utc": "2026-10-18T04:30:05.858943+00:00",
+  "platform": "windows",
+  "ledger": {
+    "windows": {
+      "allocated_file_bytes": 26106631192,
+      "epoch": 1792297805.8579435
+    },
+    "wsl": {
+      "allocated_file_bytes": 23440896000,
+      "epoch": 1792297327.5927167
+    }
+  },
+  "repository_artifact": {
+    "files": 403,
+    "directories": 16,
+    "logical_bytes": 25070715,
+    "allocated_file_bytes": 25795608,
+    "hardlink_aliases_not_recounted": 0,
+    "buckets": {
+      "other": {
+        "files": 403,
+        "bytes": 25070715,
+        "allocated_bytes": 25795608
+      }
+    }
+  },
+  "host_free_bytes": 226853670912,
+  "vhdx_logical_length": 550705823744,
+  "vhdx_parent_inventory": {
+    "files": 2,
+    "directories": 0,
+    "logical_bytes": 550705860951,
+    "allocated_file_bytes": 550705864704,
+    "hardlink_aliases_not_recounted": 0,
+    "buckets": {
+      "other": {
+        "files": 2,
+        "bytes": 550705860951,
+        "allocated_bytes": 550705864704
+      }
+    }
+  },
+  "qualification": "Runtime/build allocation uses NTFS pathname sums; artifact inventory includes local generated caches conservatively. Directory/MFT allocation excluded. Host VHDX bytes are contextual, not added to guest files as independent physical use. Final combined ledger follows the WSL update."
+}

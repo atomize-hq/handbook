@@ -1,0 +1,41 @@
+{
+  "point": "selected path success despite unrelated page damage",
+  "audit_error": "integrity-digest:C:\\file-native-followup-20261017\\windows-final-v3\\cow-extra\\page-damage\\objects\\dc\\dc0f33ad9fdfad2a052885567b1434c4f7b20238c5fc4c486eb89626529f005a",
+  "damaged_page": "dc0f33ad9fdfad2a052885567b1434c4f7b20238c5fc4c486eb89626529f005a",
+  "selected": {
+    "publication": "publication-51404-1792272806093640500-133",
+    "digest": "48f3d923c23496dc27fd540d52a46fa1e715db5fcb67dfa09b6d3304ab28e96e"
+  },
+  "retirement": [
+    {
+      "mode": "A",
+      "retirement": {
+        "attempt": "attempt-22940-1792272755897369200-128",
+        "outcome_preserved": true,
+        "selected": {
+          "digest": "9f69fd1b2ee3790de8fe1dc1b89a27b33dbfa023b48a5a2f5bb6a01e8418097a",
+          "publication": "publication-22940-1792272755933320300-133"
+        },
+        "status": "retired"
+      },
+      "state_removed": true,
+      "closure_remaining_files": 0,
+      "remaining_actual_pages": 5
+    },
+    {
+      "mode": "B",
+      "retirement": {
+        "attempt": "attempt-57712-1792272757478828600-128",
+        "outcome_preserved": true,
+        "selected": {
+          "digest": "bb18f16631228482eaed6551c18fb5fba95775ec2f2cb06b58f629e99c958c93",
+          "publication": "publication-57712-1792272757659964600-133"
+        },
+        "status": "retired"
+      },
+      "state_removed": true,
+      "closure_remaining_files": 0,
+      "remaining_actual_pages": 5
+    }
+  ]
+}

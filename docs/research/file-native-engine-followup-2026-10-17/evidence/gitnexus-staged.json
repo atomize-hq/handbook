@@ -1,0 +1,15 @@
+{
+  "command": [
+    "node",
+    ".gitnexus/run.cjs",
+    "detect-changes",
+    "--scope",
+    "staged",
+    "--repo",
+    "handbook"
+  ],
+  "exit": 0,
+  "elapsed_ns": 2361460800,
+  "stdout": "Diff touched 399 file(s) but no indexed symbols overlap those hunks \u2014 not a clean tree.\n",
+  "stderr": ".../node_modules/gitnexus                | \u2009WARN\u2009 Unsupported engine: wanted: {\"node\":\"^22.18.0 || >=24.11.0\"} (current: {\"node\":\"v22.15.0\",\"pnpm\":\"10.15.1\"})\n\n  GitNexus Detect Changes (1.6.12)\n"
+}

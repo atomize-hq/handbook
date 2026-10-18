@@ -1,0 +1,9 @@
+{
+  "writers": 8,
+  "stable_inode": true,
+  "short_retry": true,
+  "nested_mkdir_retry": true,
+  "preexisting_parent_sync": 0,
+  "corruption_refused": "integrity-digest:C:\\file-native-followup-20261017\\final-windows-manifest\\io\\probe/nested/content",
+  "saved_sha256": "588114af8100c1d75f515a26cb3ac4edec5037ba273814d80cbe7002b6b42fb1"
+}

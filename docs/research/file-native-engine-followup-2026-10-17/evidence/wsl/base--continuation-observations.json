@@ -1,0 +1,86 @@
+[
+  {
+    "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/100000-A-project",
+    "backend": "manifest",
+    "session": 1792296187565975087,
+    "helper_sha256": "d0fe429f612b4c8267743ba1cfee76fac738571d694a6d5a57c7b21199dee40d",
+    "before": {
+      "digest": "3023a7e17dec9e40d95093fc691e21dbbe7e4982677066a3234d823d6f31a970",
+      "publication": "publication-12086-1792285870039010260-100002"
+    },
+    "selected_publications_before": 1,
+    "caps_seconds": {
+      "resume": 900,
+      "publish": 900,
+      "packet": 600
+    },
+    "qualification": "post-cap continuation of positive selected authority; original censored init preserved; no unselected candidate promoted",
+    "additional_file_reserve": {
+      "bytes": 895389696,
+      "missing_view_payload": 535183360,
+      "divergent_backup": 0,
+      "other_view_backup_bound": 4096,
+      "two_full_metadata": 96083968,
+      "two_full_packets": 129900544,
+      "other_margin": 134217728
+    },
+    "view_recovery_engine_ms": 460350.294388,
+    "status": "selected continuation complete",
+    "selected_publications_after": 3,
+    "after": {
+      "digest": "328f48c41123bd32137194c0904076724326bc5180845d67ea26c82acd6d3dde",
+      "publication": "publication-3247-1792296753253735176-66"
+    },
+    "view_status": {
+      "completed": 100000,
+      "exact_state": "attempts/attempt-3247-1792296721053656318-64/state.json",
+      "retained_packet": "attempts/attempt-3247-1792296721053656318-64/retained-packet",
+      "status": "complete",
+      "target_publication": "publication-3247-1792296753253735176-66",
+      "total": 100000
+    },
+    "continuation_controller_ns": 619285959504
+  },
+  {
+    "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/growth/100000-A-project",
+    "backend": "cow",
+    "session": 1792296790610202680,
+    "helper_sha256": "d0fe429f612b4c8267743ba1cfee76fac738571d694a6d5a57c7b21199dee40d",
+    "before": {
+      "digest": "2379e431e898d959bd52915273d16c2b678d6fb573992d681da92f4458e4f6ae",
+      "publication": "publication-38895-1792291716468709720-101618"
+    },
+    "selected_publications_before": 1,
+    "caps_seconds": {
+      "resume": 900,
+      "publish": 900,
+      "packet": 600
+    },
+    "qualification": "post-cap continuation of positive selected authority; original censored init preserved; no unselected candidate promoted",
+    "additional_file_reserve": {
+      "bytes": 1084141568,
+      "missing_view_payload": 562987008,
+      "divergent_backup": 0,
+      "other_view_backup_bound": 4096,
+      "two_full_metadata": 257032192,
+      "two_full_packets": 129900544,
+      "other_margin": 134217728
+    },
+    "view_recovery_engine_ms": 442286.336113,
+    "status": "selected continuation complete",
+    "selected_publications_after": 3,
+    "after": {
+      "digest": "4202d4b9e3b34219fd094aa95f9b6fbb10725098cb1b4ef01fd61646f93f02da",
+      "publication": "publication-5758-1792297292488438397-71"
+    },
+    "view_status": {
+      "completed": 100000,
+      "exact_state": "attempts/attempt-5758-1792297284475000476-64/state.json",
+      "retained_packet": "attempts/attempt-5758-1792297284475000476-64/retained-packet",
+      "status": "complete",
+      "target_publication": "publication-5758-1792297292488438397-71",
+      "total": 100000
+    },
+    "continuation_controller_ns": 555247130462
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "file": "cow--regressions-raw.jsonl.gz",
+    "source": "cow/regressions-raw.jsonl",
+    "records": 210,
+    "bytes": 694358,
+    "sha256": "ccf9de33d58447e85817ca47d26d229cd39b6554112dd72445d5c0dd84703261",
+    "compressed_sha256": "5ab672a14fa4b9266fefb15f1a9f08f85a563a8f9803410ef682f1cba64e308f"
+  },
+  {
+    "file": "cow-extra--backend-checks-raw.jsonl.gz",
+    "source": "cow-extra/backend-checks-raw.jsonl",
+    "records": 3,
+    "bytes": 6687,
+    "sha256": "e9c01b760d63b066f2ad156f56dc435b4114543bd03779cd272e67436b26239c",
+    "compressed_sha256": "6a2c6a705e87e31652d5b68e21669a1d6a9134aed3bd5d859bb7ff8ad4debb7b"
+  },
+  {
+    "file": "cow-retention-readers--reader-lifecycle-raw.jsonl.gz",
+    "source": "cow-retention-readers/reader-lifecycle-raw.jsonl",
+    "records": 56,
+    "bytes": 94810,
+    "sha256": "cba1d420d682eaabaf1a1e0a7aaa9021b8bf469e27a3daaa0ac1009a4331870c",
+    "compressed_sha256": "264ec2e2402df542f0c3be1fe90373a0ba63d946d8704e381c808e758867490e"
+  },
+  {
+    "file": "manifest--regressions-raw.jsonl.gz",
+    "source": "manifest/regressions-raw.jsonl",
+    "records": 162,
+    "bytes": 492286,
+    "sha256": "be7b9226f2c8f803cd6b82e5a809f482c154eb953bed04cfef7e19040eb1b389",
+    "compressed_sha256": "43600f844c8ad4958af3cf220809ebad5c3111c0923dd641589e4a0a75e85478"
+  }
+]

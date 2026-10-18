@@ -1,0 +1,125 @@
+{
+  "epoch": 1792273141.5874524,
+  "platform": "Windows-10-10.0.26200-SP0",
+  "sources": {
+    "src/backend.rs": {
+      "bytes": 6213,
+      "sha256": "79b6220819a0d9d059a41078c6323e8b83d23452025f8b35ca52a83f3d3bfd6c"
+    },
+    "src/disk.rs": {
+      "bytes": 24532,
+      "sha256": "1ed496b1b1ea5138053128521fcc609a6aaa6f00828c8d75ff604aa4002afdd2"
+    },
+    "src/io.rs": {
+      "bytes": 9320,
+      "sha256": "fd7453986251426947b28f16fb6497c3fc501a52c867b682e1db04db976e774a"
+    },
+    "src/lifecycle.rs": {
+      "bytes": 7735,
+      "sha256": "30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4"
+    },
+    "src/main.rs": {
+      "bytes": 31910,
+      "sha256": "7733a4ebb80e653e16a49882db76081eaaf1359aa4125fe7de6dfac0b8e3b2ba"
+    },
+    "src/model.rs": {
+      "bytes": 8505,
+      "sha256": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10"
+    },
+    "Cargo.toml": {
+      "bytes": 439,
+      "sha256": "e78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0"
+    },
+    "Cargo.lock": {
+      "bytes": 8140,
+      "sha256": "bb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998"
+    }
+  },
+  "windows_binary": {
+    "path": "C:\\file-native-followup-20261017-build-final-v3\\release\\file-native-publication-experiment.exe",
+    "sha256": "cfb2b1fdd6abeb48931be2a37da97620a3ee8f978d2ce3fa41e620d09af746dc"
+  },
+  "windows_rust": {
+    "command": [
+      "rustc",
+      "-Vv"
+    ],
+    "exit": 0,
+    "stdout": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-pc-windows-msvc\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+    "stderr": ""
+  },
+  "windows_cargo": {
+    "command": [
+      "cargo",
+      "-V"
+    ],
+    "exit": 0,
+    "stdout": "cargo 1.89.0 (c24e10642 2025-06-23)\n",
+    "stderr": ""
+  },
+  "linux": {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "--",
+      "bash",
+      "-lc",
+      "uname -a; cat /etc/os-release; findmnt -T /home/spenser/file-native-followup-20261017; df -B1 /home; rustc -Vv; cargo -V; sha256sum /home/spenser/file-native-followup-20261017/build-final-v3/release/file-native-publication-experiment; cd /home/spenser/file-native-followup-20261017/source; sha256sum src/*.rs Cargo.*"
+    ],
+    "exit": 0,
+    "stdout": "Linux SpensersDesktop 6.18.54.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 19:13:07 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\nPRETTY_NAME=\"Ubuntu 24.04.3 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.3 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\nTARGET SOURCE   FSTYPE OPTIONS\n/      /dev/sdd ext4   rw,relatime,discard,errors=remount-ro,data=ordered\nFilesystem         1B-blocks         Used    Available Use% Mounted on\n/dev/sdd       1081101176832 484639793152 541469028352  48% /\nrustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-unknown-linux-gnu\nrelease: 1.89.0\nLLVM version: 20.1.7\ncargo 1.89.0 (c24e10642 2025-06-23)\naf685d6863306258f0388ea4a11bc6ebbca3adff660cd42ce4f512d8dd30e684  /home/spenser/file-native-followup-20261017/build-final-v3/release/file-native-publication-experiment\n79b6220819a0d9d059a41078c6323e8b83d23452025f8b35ca52a83f3d3bfd6c  src/backend.rs\n1ed496b1b1ea5138053128521fcc609a6aaa6f00828c8d75ff604aa4002afdd2  src/disk.rs\nfd7453986251426947b28f16fb6497c3fc501a52c867b682e1db04db976e774a  src/io.rs\n30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4  src/lifecycle.rs\n7733a4ebb80e653e16a49882db76081eaaf1359aa4125fe7de6dfac0b8e3b2ba  src/main.rs\na4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10  src/model.rs\nbb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998  Cargo.lock\ne78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0  Cargo.toml\n",
+    "stderr": ""
+  },
+  "cache": "OS/device caches uncontrolled; no device-cold claim",
+  "harness": {
+    "account.py": {
+      "bytes": 1737,
+      "sha256": "4dc506b86d7ba0b80ba6ffe01c81a74bdc3b7569f4ae8bce96c0560731f06848"
+    },
+    "backend_checks.py": {
+      "bytes": 1798,
+      "sha256": "a78c06cace8bfa3c8e88ceb0b9d9a2fd1c740986e9af1270f215db7ace2afd26"
+    },
+    "baseline_harness.py": {
+      "bytes": 33147,
+      "sha256": "b43a16a9669ab8b222875ca6369fab0cd9ab3bb11aeb309628ad19e2a3649336"
+    },
+    "execute.py": {
+      "bytes": 2076,
+      "sha256": "f5ec9079093f163e91802bdf65401fdc8fab32689d66648c4a0481c03be7646c"
+    },
+    "experiment.py": {
+      "bytes": 17848,
+      "sha256": "5e92fd767cd4e2b5a6f3229b3d5691c127e791840cb03198855b9ef57b8f8653"
+    },
+    "extend.py": {
+      "bytes": 9267,
+      "sha256": "748559b76976df533a45c803e154e9f48aba6d535224e27bab1d95cfd1b6e559"
+    },
+    "monitor.py": {
+      "bytes": 1195,
+      "sha256": "e45f67164b5aa26475ef072b4df7571cfc0a72ae3f3374a65053e55fb453e23e"
+    },
+    "profile.py": {
+      "bytes": 1401,
+      "sha256": "e91c80aceefa384ee1e4d76c7a3f42f600321e0d0ec3061331d20698e4188930"
+    },
+    "regressions.py": {
+      "bytes": 710,
+      "sha256": "71afa67c3cd502aaa47d103a663859eea87f36091448e19b79efd338d57bd72b"
+    },
+    "tables.py": {
+      "bytes": 4007,
+      "sha256": "e028204caa5c3d72bf9e56bc7b33c3ce28cf1f694f90680b7dcb12767c1d474c"
+    },
+    "terminal_copy.py": {
+      "bytes": 1399,
+      "sha256": "578271c0067545e0196385c2880ae31a2dbe962fc22b0c08550fa3d2be87e11f"
+    },
+    "workloads.py": {
+      "bytes": 10699,
+      "sha256": "1badc6a6fb68380009d722ce72b73be47ec02fc561c2a79fe33ed3835fca011b"
+    }
+  }
+}

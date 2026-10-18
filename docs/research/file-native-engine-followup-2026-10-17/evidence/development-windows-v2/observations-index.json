@@ -1,0 +1,21 @@
+[
+  "base--manual-stop.json",
+  "manifest--contention-observations.json",
+  "manifest--damaged-view-observations.json",
+  "manifest--duplicate-delete-observations.json",
+  "manifest--extended-fault-observations.json",
+  "manifest--growth-observations.json",
+  "manifest--io-observations.json",
+  "manifest--regressions-completed.json",
+  "manifest--retention-observations.json",
+  "cow--correctness-completed.json",
+  "cow--damaged-view-observations.json",
+  "cow--duplicate-delete-observations.json",
+  "cow--extended-fault-observations.json",
+  "cow--fault-observations.json",
+  "cow--io-observations.json",
+  "cow--race-observations.json",
+  "cow--retention-observations.json",
+  "cow--semantic-observations.json",
+  "cow--special-observations.json"
+]

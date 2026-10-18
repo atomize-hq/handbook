@@ -1,0 +1,384 @@
+[
+  {
+    "count": 1000,
+    "mode": "A",
+    "backend": "cow",
+    "selected_generations": 20,
+    "inventory": {
+      "files": 2433,
+      "directories": 396,
+      "logical_bytes": 31028778,
+      "allocated_file_bytes": 32694272,
+      "hardlink_aliases_not_recounted": 0,
+      "buckets": {
+        "other": {
+          "files": 7,
+          "bytes": 1150,
+          "allocated_bytes": 20480
+        },
+        "objects": {
+          "files": 55,
+          "bytes": 2814796,
+          "allocated_bytes": 2920448
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 93135,
+          "allocated_bytes": 139264
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 22202,
+          "allocated_bytes": 94208
+        },
+        "originals": {
+          "files": 1159,
+          "bytes": 14412887,
+          "allocated_bytes": 15056896
+        },
+        "view": {
+          "files": 1003,
+          "bytes": 12795741,
+          "allocated_bytes": 13066240
+        },
+        "packets": {
+          "files": 13,
+          "bytes": 163118,
+          "allocated_bytes": 208896
+        },
+        "attempts": {
+          "files": 156,
+          "bytes": 725749,
+          "allocated_bytes": 1187840
+        }
+      }
+    },
+    "post_init_controller_ns": 6937982695
+  },
+  {
+    "count": 1000,
+    "mode": "A",
+    "consumer": "research",
+    "backend": "cow",
+    "selected_generations": 20,
+    "inventory": {
+      "files": 2762,
+      "directories": 417,
+      "logical_bytes": 35409902,
+      "allocated_file_bytes": 38354944,
+      "hardlink_aliases_not_recounted": 0,
+      "buckets": {
+        "other": {
+          "files": 6,
+          "bytes": 893,
+          "allocated_bytes": 16384
+        },
+        "objects": {
+          "files": 55,
+          "bytes": 2797980,
+          "allocated_bytes": 2920448
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 144739,
+          "allocated_bytes": 188416
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 26306,
+          "allocated_bytes": 94208
+        },
+        "originals": {
+          "files": 1439,
+          "bytes": 17690839,
+          "allocated_bytes": 19464192
+        },
+        "view": {
+          "files": 1003,
+          "bytes": 12845932,
+          "allocated_bytes": 13107200
+        },
+        "attempts": {
+          "files": 219,
+          "bytes": 1903213,
+          "allocated_bytes": 2564096
+        }
+      }
+    }
+  },
+  {
+    "count": 1000,
+    "mode": "B",
+    "backend": "cow",
+    "selected_generations": 20,
+    "inventory": {
+      "files": 21393,
+      "directories": 455,
+      "logical_bytes": 275976422,
+      "allocated_file_bytes": 281747456,
+      "hardlink_aliases_not_recounted": 0,
+      "buckets": {
+        "other": {
+          "files": 6,
+          "bytes": 861,
+          "allocated_bytes": 16384
+        },
+        "objects": {
+          "files": 55,
+          "bytes": 2814796,
+          "allocated_bytes": 2920448
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 92935,
+          "allocated_bytes": 139264
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 22202,
+          "allocated_bytes": 94208
+        },
+        "originals": {
+          "files": 1159,
+          "bytes": 14412887,
+          "allocated_bytes": 15056896
+        },
+        "generations": {
+          "files": 20080,
+          "bytes": 258408395,
+          "allocated_bytes": 263118848
+        },
+        "packets": {
+          "files": 13,
+          "bytes": 163118,
+          "allocated_bytes": 208896
+        },
+        "attempts": {
+          "files": 40,
+          "bytes": 61228,
+          "allocated_bytes": 192512
+        }
+      }
+    },
+    "post_init_controller_ns": 33519117871
+  },
+  {
+    "count": 1000,
+    "mode": "B",
+    "consumer": "research",
+    "backend": "cow",
+    "selected_generations": 20,
+    "inventory": {
+      "files": 21659,
+      "directories": 448,
+      "logical_bytes": 279504977,
+      "allocated_file_bytes": 286232576,
+      "hardlink_aliases_not_recounted": 0,
+      "buckets": {
+        "other": {
+          "files": 5,
+          "bytes": 604,
+          "allocated_bytes": 12288
+        },
+        "objects": {
+          "files": 55,
+          "bytes": 2797980,
+          "allocated_bytes": 2920448
+        },
+        "publications": {
+          "files": 20,
+          "bytes": 144539,
+          "allocated_bytes": 188416
+        },
+        "receipts": {
+          "files": 20,
+          "bytes": 26306,
+          "allocated_bytes": 94208
+        },
+        "originals": {
+          "files": 1439,
+          "bytes": 17690839,
+          "allocated_bytes": 19464192
+        },
+        "generations": {
+          "files": 20080,
+          "bytes": 258741017,
+          "allocated_bytes": 263327744
+        },
+        "attempts": {
+          "files": 40,
+          "bytes": 103692,
+          "allocated_bytes": 225280
+        }
+      }
+    }
+  },
+  {
+    "count": 10000,
+    "mode": "A",
+    "backend": "cow",
+    "selected_generations": 10,
+    "inventory": {
+      "files": 45445,
+      "directories": 455,
+      "logical_bytes": 597866592,
+      "allocated_file_bytes": 600264704,
+      "hardlink_aliases_not_recounted": 0,
+      "buckets": {
+        "other": {
+          "files": 7,
+          "bytes": 1152,
+          "allocated_bytes": 20480
+        },
+        "objects": {
+          "files": 197,
+          "bytes": 15502090,
+          "allocated_bytes": 15728640
+        },
+        "publications": {
+          "files": 10,
+          "bytes": 383386,
+          "allocated_bytes": 405504
+        },
+        "receipts": {
+          "files": 10,
+          "bytes": 154664,
+          "allocated_bytes": 188416
+        },
+        "originals": {
+          "files": 10149,
+          "bytes": 128649092,
+          "allocated_bytes": 129253376
+        },
+        "view": {
+          "files": 10003,
+          "bytes": 128276219,
+          "allocated_bytes": 128544768
+        },
+        "packets": {
+          "files": 5005,
+          "bytes": 64943516,
+          "allocated_bytes": 65216512
+        },
+        "attempts": {
+          "files": 20064,
+          "bytes": 259956473,
+          "allocated_bytes": 260907008
+        }
+      }
+    },
+    "post_init_controller_ns": 110762769735
+  },
+  {
+    "count": 10000,
+    "mode": "B",
+    "backend": "cow",
+    "selected_generations": 10,
+    "inventory": {
+      "files": 115437,
+      "directories": 474,
+      "logical_bytes": 1504421054,
+      "allocated_file_bytes": 1507594240,
+      "hardlink_aliases_not_recounted": 0,
+      "buckets": {
+        "other": {
+          "files": 6,
+          "bytes": 864,
+          "allocated_bytes": 16384
+        },
+        "objects": {
+          "files": 197,
+          "bytes": 15502090,
+          "allocated_bytes": 15728640
+        },
+        "publications": {
+          "files": 10,
+          "bytes": 383324,
+          "allocated_bytes": 405504
+        },
+        "receipts": {
+          "files": 10,
+          "bytes": 154669,
+          "allocated_bytes": 188416
+        },
+        "originals": {
+          "files": 10149,
+          "bytes": 128649092,
+          "allocated_bytes": 129253376
+        },
+        "generations": {
+          "files": 100040,
+          "bytes": 1294602780,
+          "allocated_bytes": 1296539648
+        },
+        "packets": {
+          "files": 5005,
+          "bytes": 64943516,
+          "allocated_bytes": 65216512
+        },
+        "attempts": {
+          "files": 20,
+          "bytes": 184719,
+          "allocated_bytes": 245760
+        }
+      }
+    },
+    "post_init_controller_ns": 638537844303
+  },
+  {
+    "count": 100000,
+    "mode": "B",
+    "backend": "cow",
+    "selected_generations": 3,
+    "inventory": {
+      "files": 406726,
+      "directories": 546,
+      "logical_bytes": 5345833435,
+      "allocated_file_bytes": 5347176448,
+      "hardlink_aliases_not_recounted": 0,
+      "buckets": {
+        "other": {
+          "files": 6,
+          "bytes": 866,
+          "allocated_bytes": 16384
+        },
+        "objects": {
+          "files": 1626,
+          "bytes": 128834466,
+          "allocated_bytes": 129298432
+        },
+        "publications": {
+          "files": 3,
+          "bytes": 3416862,
+          "allocated_bytes": 3424256
+        },
+        "receipts": {
+          "files": 3,
+          "bytes": 1501707,
+          "allocated_bytes": 1511424
+        },
+        "originals": {
+          "files": 100065,
+          "bytes": 1270543823,
+          "allocated_bytes": 1270808576
+        },
+        "generations": {
+          "files": 300012,
+          "bytes": 3875080952,
+          "allocated_bytes": 3875373056
+        },
+        "packets": {
+          "files": 5005,
+          "bytes": 64941050,
+          "allocated_bytes": 65212416
+        },
+        "attempts": {
+          "files": 6,
+          "bytes": 1513709,
+          "allocated_bytes": 1531904
+        }
+      }
+    },
+    "post_init_controller_ns": 1370536006760
+  }
+]

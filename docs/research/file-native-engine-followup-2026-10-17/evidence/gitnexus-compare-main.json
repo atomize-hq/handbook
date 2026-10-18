@@ -1,0 +1,17 @@
+{
+  "command": [
+    "node",
+    ".gitnexus/run.cjs",
+    "detect-changes",
+    "--scope",
+    "compare",
+    "--base-ref",
+    "main",
+    "--repo",
+    "handbook"
+  ],
+  "exit": 0,
+  "elapsed_ns": 7676936000,
+  "stdout": "LISTING CAPPED: the changed-symbol list was capped, so it does not name every changed symbol. The counts and risk level still cover all of them.\n\nChanges: 2518 files, 28207 symbols\nAffected processes: 296\nRisk level: critical\n\nChanged symbols:\n  Section Structured data format decisions \u2192 AGENTS.md\n  Section GitNexus \u2014 Code Intelligence \u2192 AGENTS.md\n  Section Always Do \u2192 AGENTS.md\n  Section Never Do \u2192 AGENTS.md\n  Section Resources \u2192 AGENTS.md\n  Section GitNexus \u2014 Code Intelligence \u2192 CLAUDE.md\n  Section Always Do \u2192 CLAUDE.md\n  Section Never Do \u2192 CLAUDE.md\n  Section Resources \u2192 CLAUDE.md\n  Section Handbook \u2192 README.md\n  Section Read this first \u2192 README.md\n  Section Current authority posture \u2192 README.md\n  Section Where things live now \u2192 README.md\n  Section Charter Authoring Method \u2192 core/library/authoring/charter_authoring_method.md\n  Section Charter Intake Envelope Directive \u2192 core/library/charter/charter_inputs_directive.md\n... and 28192 more\n\nAffected execution flows:\n  \u2022 Run \u2192 Current_utc (4 steps) \u2014 changed: catalog_read, run, catalog_read, current_utc\n  \u2022 Run \u2192 Reference (5 steps) \u2014 changed: run, emit_invalid_request, emit_approver_invocation, reference, approver_administration_outcome\n  \u2022 Run \u2192 As_str (5 steps) \u2014 changed: run, emit_invalid_request, emit_approver_invocation, as_str, approver_administration_outcome\n  \u2022 Run \u2192 Packet0 (5 steps) \u2014 changed: run, emit_invalid_request, render_invocation, emit_approver_invocation, packet0\n  \u2022 Run \u2192 Emit_to (5 steps) \u2014 changed: run, emit_invalid_request, emit_stdout, emit_to, emit_approver_invocation\n  \u2022 Run \u2192 Failure (5 steps) \u2014 changed: run, emit_invalid_request, emit_stdout, emit_approver_invocation\n  \u2022 Run \u2192 Terminal_status (4 steps) \u2014 changed: run, emit_invalid_request, emit_approver_invocation, terminal_status\n  \u2022 Run \u2192 Path_is_dir_or_file (4 steps) \u2014 changed: run\n  \u2022 Run \u2192 Document_bytes (6 steps) \u2014 changed: run, emit_transport_failure, document_bytes, from_body, transport_failure, canonical_json_bytes\n  \u2022 Run \u2192 TransportFailureDetailsV1 (5 steps) \u2014 changed: run, emit_transport_failure, TransportFailureDetailsV1, adapter_error, adapter_error_with_presentation\n... and 286 more\n",
+  "stderr": ".../node_modules/gitnexus                | \u2009WARN\u2009 Unsupported engine: wanted: {\"node\":\"^22.18.0 || >=24.11.0\"} (current: {\"node\":\"v22.15.0\",\"pnpm\":\"10.15.1\"})\n\n  GitNexus Detect Changes (1.6.12)\n"
+}

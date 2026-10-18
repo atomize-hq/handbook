@@ -1,0 +1,47 @@
+{
+  "qualification": "Derived from observed request endpoints, including pure retries; 60s planned aggregate budget was not separately enforced by a watchdog",
+  "observation_budget_ms": 60000,
+  "all_observed_within_budget": true,
+  "lanes": [
+    {
+      "platform": "windows",
+      "backend": "manifest",
+      "source": "C:\\file-native-followup-20261017\\windows-final-v4\\manifest\\contention-observations.json",
+      "source_sha256": "551a42c1060ec9b0cd81c47e4276a082c7ca964ffe0be71810d9665da8f1b7b5",
+      "requests": 60,
+      "max_request_ms": 1812.323,
+      "max_attempts": 2,
+      "total_retries": 22
+    },
+    {
+      "platform": "windows",
+      "backend": "cow",
+      "source": "C:\\file-native-followup-20261017\\windows-final-v4\\cow\\contention-observations.json",
+      "source_sha256": "f5818466560bca6851bb09f27ee5de446198a0a99a14058b3153831e0d821281",
+      "requests": 60,
+      "max_request_ms": 1904.6032,
+      "max_attempts": 2,
+      "total_retries": 22
+    },
+    {
+      "platform": "wsl",
+      "backend": "manifest",
+      "source": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/contention-observations.json",
+      "source_sha256": "ec255225760cb08945a51e5bda714bdd6046486faaa754df46d2bf785b067ecb",
+      "requests": 60,
+      "max_request_ms": 2957.778184,
+      "max_attempts": 2,
+      "total_retries": 22
+    },
+    {
+      "platform": "wsl",
+      "backend": "cow",
+      "source": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/contention-observations.json",
+      "source_sha256": "e51054625a9dfd2943ee825567c77d9a827f144116672fcf83f2610fa58a6dec",
+      "requests": 60,
+      "max_request_ms": 2950.173632,
+      "max_attempts": 2,
+      "total_retries": 22
+    }
+  ]
+}

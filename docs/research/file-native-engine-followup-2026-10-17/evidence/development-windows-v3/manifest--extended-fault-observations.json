@@ -1,0 +1,128 @@
+[
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 1,
+    "fault": "exit",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 1,
+    "fault": "error",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 1,
+    "fault": "kill",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 8,
+    "fault": "exit",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 8,
+    "fault": "error",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 8,
+    "fault": "kill",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 16,
+    "fault": "exit",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 16,
+    "fault": "error",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "A",
+    "hook": "view-copy-write",
+    "nth": 16,
+    "fault": "kill",
+    "oracle": "must-retain"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 1,
+    "fault": "exit",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 1,
+    "fault": "error",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 1,
+    "fault": "kill",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 8,
+    "fault": "exit",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 8,
+    "fault": "error",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 8,
+    "fault": "kill",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 16,
+    "fault": "exit",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 16,
+    "fault": "error",
+    "oracle": "must-not-select"
+  },
+  {
+    "mode": "B",
+    "hook": "generation-copy-write",
+    "nth": 16,
+    "fault": "kill",
+    "oracle": "must-not-select"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "mode": "A",
+    "helper_sha256": "d381506d523ab8a00b038096e1da1e39ebbd50d92313b164fa2156f1de7a676e",
+    "old_indirect_object": "e0c84c94d8857c0ee52ae4380e0e41997eb39555d35c0f399ed4aa9f23dfc4cb",
+    "current_indirect_object": "f5a5fb5169b97f607a97790e0601291e4be0d8ca310a997ad7e5b6dc9176d11c",
+    "both_protected_before_retirement": true,
+    "obsolete_indirect_object_actually_reclaimed": true,
+    "current_indirect_object_survived": true,
+    "original_accepted_outcome_retained": {
+      "changed": [
+        "d000004"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-46336-1792281962367001400-4",
+      "removed": [
+        "docs/item-con--d000004.md"
+      ],
+      "request": "long-metadata",
+      "state_digest": "bfb325e734843fee808a88eabb5cf876e8f48eac0423b78a62f17ec4d5e765ab"
+    }
+  },
+  {
+    "mode": "B",
+    "helper_sha256": "d381506d523ab8a00b038096e1da1e39ebbd50d92313b164fa2156f1de7a676e",
+    "old_indirect_object": "e0c84c94d8857c0ee52ae4380e0e41997eb39555d35c0f399ed4aa9f23dfc4cb",
+    "current_indirect_object": "f5a5fb5169b97f607a97790e0601291e4be0d8ca310a997ad7e5b6dc9176d11c",
+    "both_protected_before_retirement": true,
+    "obsolete_indirect_object_actually_reclaimed": true,
+    "current_indirect_object_survived": true,
+    "original_accepted_outcome_retained": {
+      "changed": [
+        "d000004"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-56688-1792281962746695800-4",
+      "removed": [
+        "docs/item-con--d000004.md"
+      ],
+      "request": "long-metadata",
+      "state_digest": "bfb325e734843fee808a88eabb5cf876e8f48eac0423b78a62f17ec4d5e765ab"
+    }
+  }
+]

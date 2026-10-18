@@ -1,0 +1,44 @@
+{
+  "independent_store_elapsed_ns": 611361657,
+  "cross_store_vector": {
+    "project": {
+      "publication": "publication-7633-1792272397998955160-3",
+      "digest": "4e18f7280ce9353ec21ddd83dd26713ad505fcf65890aec63e2316f70068eeb4"
+    },
+    "research": {
+      "publication": "publication-7637-1792272397359873255-3",
+      "digest": "ae2e0430125202891b64d59cb018a8b3b23990971b49805a9b7975948b4dc296"
+    }
+  },
+  "per_open_alias_control": {
+    "first": "6d8c3ee666d50b62b035568846c43a2725938f8afca091964f74ac5d16472cea",
+    "second": "f98a823dca6b6ef2eb544b0b1965bf334cf8af7ba8bb0793d85a6bb1d3f1e4f2",
+    "fixed_path": "/home/spenser/file-native-followup-20261017/data/correctness-manifest-dev/special/project/generations/generation-7666-1792272398169543311-3"
+  },
+  "missing_payload": "integrity-read:/home/spenser/file-native-followup-20261017/data/correctness-manifest-dev/damage/payload/originals/57/57cb37815517806140ddc9244b4bdb60b185b23f9bc5465c0ba25c7ff47e8812-item-requirement---d000001.yaml:No such file or directory (os error 2)",
+  "missing_state": "integrity-read:/home/spenser/file-native-followup-20261017/data/correctness-manifest-dev/damage/state/attempts/attempt-7672-1792272399998506379-12/state.json:No such file or directory (os error 2)",
+  "missing_publication": "integrity-read:/home/spenser/file-native-followup-20261017/data/correctness-manifest-dev/damage/publication/publications/publication-7676-1792272401276091998-14.json:No such file or directory (os error 2)",
+  "missing_selector": "integrity:missing-selected-authority",
+  "corrupt_state": "integrity-digest:/home/spenser/file-native-followup-20261017/data/correctness-manifest-dev/damage/corrupt/attempts/attempt-7684-1792272402713224407-12/state.json",
+  "duplicate_key": {
+    "error": "duplicate-key:action at line 1 column 28",
+    "metrics": {
+      "bytes_metadata_read": 0,
+      "bytes_metadata_written": 0,
+      "bytes_read": 0,
+      "bytes_written": 0,
+      "copies": 0,
+      "created_directories": 0,
+      "directory_syncs": 0,
+      "file_syncs": 0,
+      "ns": {},
+      "opens": 0,
+      "replacements": 0,
+      "unsupported_directory_syncs": 0
+    },
+    "peak_memory_bytes": 2744320,
+    "result": null,
+    "status": "error",
+    "wall_ns": 20226
+  }
+}

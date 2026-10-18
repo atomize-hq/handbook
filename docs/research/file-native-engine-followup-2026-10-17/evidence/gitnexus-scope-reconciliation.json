@@ -1,0 +1,9 @@
+{
+  "baseline_head": "2cec91857fb49139ecdeeef4d723b4ce40940ed3",
+  "default_branch": "main",
+  "pre_existing_committed_branch_difference_files": 2119,
+  "new_staged_research_files": 399,
+  "combined_main_comparison_files": 2518,
+  "scopes_disjoint": true,
+  "qualification": "The critical main comparison includes the pre-existing branch history. Staged new research has no indexed symbol overlap; coverage remains UNKNOWN, not zero risk. No production file is staged."
+}

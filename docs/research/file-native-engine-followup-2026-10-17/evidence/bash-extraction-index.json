@@ -1,0 +1,73 @@
+{
+  "helper_sha256": "5225b4046ff7f8c760c309479ff5682b15b86f41549c6a1e803614cb2d828803",
+  "rows": [
+    {
+      "backend": "manifest",
+      "mode": "A",
+      "command": [
+        "wsl",
+        "-d",
+        "Ubuntu-24.04",
+        "--",
+        "bash",
+        "/home/spenser/file-native-followup-20261017/source-final-v4/walkthrough.sh",
+        "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/navigation/A",
+        "/home/spenser/file-native-followup-20261017/data/bash-final-v4-manifest-A"
+      ],
+      "exit": 0,
+      "transcript": "bash-final-v4-manifest-A.txt",
+      "sha256": "fc683dd2f1cae18e3aa0e59b85a804260a3d47ea9b9aa8e1b1563fdf9c4bbd9b"
+    },
+    {
+      "backend": "manifest",
+      "mode": "B",
+      "command": [
+        "wsl",
+        "-d",
+        "Ubuntu-24.04",
+        "--",
+        "bash",
+        "/home/spenser/file-native-followup-20261017/source-final-v4/walkthrough.sh",
+        "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/navigation/B",
+        "/home/spenser/file-native-followup-20261017/data/bash-final-v4-manifest-B"
+      ],
+      "exit": 0,
+      "transcript": "bash-final-v4-manifest-B.txt",
+      "sha256": "e8f6a26bc9c93dc0a2dc36432ed69c060fc09e280dfd23036af935f106763d5f"
+    },
+    {
+      "backend": "cow",
+      "mode": "A",
+      "command": [
+        "wsl",
+        "-d",
+        "Ubuntu-24.04",
+        "--",
+        "bash",
+        "/home/spenser/file-native-followup-20261017/source-final-v4/walkthrough.sh",
+        "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/A",
+        "/home/spenser/file-native-followup-20261017/data/bash-final-v4-cow-A"
+      ],
+      "exit": 0,
+      "transcript": "bash-final-v4-cow-A.txt",
+      "sha256": "b247900291b3c93a515be6f8b3ebb96471697ae8555760c8a7e005df5d6162e4"
+    },
+    {
+      "backend": "cow",
+      "mode": "B",
+      "command": [
+        "wsl",
+        "-d",
+        "Ubuntu-24.04",
+        "--",
+        "bash",
+        "/home/spenser/file-native-followup-20261017/source-final-v4/walkthrough.sh",
+        "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B",
+        "/home/spenser/file-native-followup-20261017/data/bash-final-v4-cow-B"
+      ],
+      "exit": 0,
+      "transcript": "bash-final-v4-cow-B.txt",
+      "sha256": "67bdaff4fd10aa6ea6b6b2cbc1ce636483b2fe9e934e45bc12520cad00aa60ac"
+    }
+  ]
+}

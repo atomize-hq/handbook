@@ -1,0 +1,24 @@
+[
+  {
+    "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/growth/100000-A-project",
+    "backend": "manifest",
+    "session": 1792297341083345805,
+    "helper_sha256": "eefd0b9bd0fbb3ff9e9ed948889956f7a16f686dd3c2f9ddaaf394e158d801ab",
+    "status": "retained assembly/lookup probes completed",
+    "selected_publications": 3,
+    "bindings": 2,
+    "new_lookup_samples": 12,
+    "qualification": "separate post-cap probes; original censored publication remains censored; no candidate promoted"
+  },
+  {
+    "root": "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/growth/100000-A-project",
+    "backend": "cow",
+    "session": 1792297383517463628,
+    "helper_sha256": "eefd0b9bd0fbb3ff9e9ed948889956f7a16f686dd3c2f9ddaaf394e158d801ab",
+    "status": "retained assembly/lookup probes completed",
+    "selected_publications": 3,
+    "bindings": 2,
+    "new_lookup_samples": 12,
+    "qualification": "separate post-cap probes; original censored publication remains censored; no candidate promoted"
+  }
+]

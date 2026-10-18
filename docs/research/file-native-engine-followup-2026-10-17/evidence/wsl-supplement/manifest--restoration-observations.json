@@ -1,0 +1,64 @@
+[
+  {
+    "mode": "A",
+    "backend": "manifest",
+    "helper_sha256": "45c40ca0ed6282592a517a70ca894c94abe17b8c35e5782684b96c1153ed0330",
+    "restored_equal_state_digest": "9019f3825b2f4c64123315d536f46e156097ab2535dca4f2b5dd69aaa0d08444",
+    "distinct_publications": [
+      {
+        "publication": "publication-6447-1792297418033659329-3",
+        "digest": "6e83a7856d5024a2655b28004fedace700c8c7c734be7e4c8390d7cc12435cab"
+      },
+      {
+        "publication": "publication-6456-1792297418244907082-2",
+        "digest": "abf23ec75f10e0d4f373877aa5ac6427df1a5f24fd124625ea2d6146d1c25b06"
+      }
+    ],
+    "second_accepted_outcome_retained": {
+      "changed": [
+        "d000004"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-6454-1792297418166885730-3",
+      "removed": [],
+      "request": "second-accepted",
+      "state_digest": "9aa93e959e0451efe1f67bea927d6575b0062e43e70958797ecba856c0d77a8d"
+    },
+    "retired_first_snapshot": true,
+    "restored_current_snapshot_survived": true,
+    "cow_root_reused": false,
+    "deleted_old_state_file": true,
+    "explicit_abandonment": "state reclaimed; later selection refused"
+  },
+  {
+    "mode": "B",
+    "backend": "manifest",
+    "helper_sha256": "45c40ca0ed6282592a517a70ca894c94abe17b8c35e5782684b96c1153ed0330",
+    "restored_equal_state_digest": "9019f3825b2f4c64123315d536f46e156097ab2535dca4f2b5dd69aaa0d08444",
+    "distinct_publications": [
+      {
+        "publication": "publication-6490-1792297418578166082-3",
+        "digest": "3b7c5c83c7e322d9c4f89e8cea2b1d9f5099d684e62f91e6a55fef8230cbccb7"
+      },
+      {
+        "publication": "publication-6498-1792297418773152402-2",
+        "digest": "9d8e8a6774a798c8adfb1c74963c3f9e07899f7e3be335ec661af02faa8fd77e"
+      }
+    ],
+    "second_accepted_outcome_retained": {
+      "changed": [
+        "d000004"
+      ],
+      "outcome": "accepted",
+      "publication": "publication-6496-1792297418709330713-3",
+      "removed": [],
+      "request": "second-accepted",
+      "state_digest": "9aa93e959e0451efe1f67bea927d6575b0062e43e70958797ecba856c0d77a8d"
+    },
+    "retired_first_snapshot": true,
+    "restored_current_snapshot_survived": true,
+    "cow_root_reused": false,
+    "deleted_old_state_file": true,
+    "explicit_abandonment": "state reclaimed; later selection refused"
+  }
+]

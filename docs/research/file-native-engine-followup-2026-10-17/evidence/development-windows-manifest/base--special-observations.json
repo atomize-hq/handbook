@@ -1,0 +1,149 @@
+{
+  "independent_store_elapsed_ns": 203798200,
+  "cross_store_vector": {
+    "project": {
+      "publication": "publication-55172-1792272200669401200-3",
+      "digest": "a7eeeea36913c12fbd4669842977ed7aed0a500b3e779d5ba92ac2afe82e2ac3"
+    },
+    "research": {
+      "publication": "publication-38432-1792272200450837200-3",
+      "digest": "e57fcf1343dd3315c3f1895c966df395d79f1e2c950ed7898e45b98d27f2e8c3"
+    }
+  },
+  "per_open_alias_control": {
+    "first": "6d8c3ee666d50b62b035568846c43a2725938f8afca091964f74ac5d16472cea",
+    "second": "f98a823dca6b6ef2eb544b0b1965bf334cf8af7ba8bb0793d85a6bb1d3f1e4f2",
+    "fixed_path": "C:\\file-native-followup-20261017\\final-windows-manifest\\special\\project\\generations\\generation-50780-1792272200868999500-3"
+  },
+  "missing_payload": "integrity-read:C:\\file-native-followup-20261017\\final-windows-manifest\\damage\\payload\\originals/57/57cb37815517806140ddc9244b4bdb60b185b23f9bc5465c0ba25c7ff47e8812-item-requirement---d000001.yaml:The system cannot find the file specified. (os error 2)",
+  "missing_state": "integrity-read:C:\\file-native-followup-20261017\\final-windows-manifest\\damage\\state\\attempts/attempt-35948-1792272201441040600-12/state.json:The system cannot find the file specified. (os error 2)",
+  "missing_publication": "integrity-read:C:\\file-native-followup-20261017\\final-windows-manifest\\damage\\publication\\publications/publication-556-1792272201798724000-14.json:The system cannot find the file specified. (os error 2)",
+  "missing_selector": "integrity:missing-selected-authority",
+  "corrupt_state": "integrity-digest:C:\\file-native-followup-20261017\\final-windows-manifest\\damage\\corrupt\\attempts/attempt-29576-1792272202240204900-12/state.json",
+  "duplicate_key": {
+    "error": "duplicate-key:action at line 1 column 28",
+    "metrics": {
+      "bytes_metadata_read": 0,
+      "bytes_metadata_written": 0,
+      "bytes_read": 0,
+      "bytes_written": 0,
+      "copies": 0,
+      "created_directories": 0,
+      "directory_syncs": 0,
+      "file_syncs": 0,
+      "ns": {},
+      "opens": 0,
+      "replacements": 0,
+      "unsupported_directory_syncs": 0
+    },
+    "peak_memory_bytes": 4198400,
+    "result": null,
+    "status": "error",
+    "wall_ns": 69200
+  },
+  "windows_no_delete_share": {
+    "blocked": {
+      "error": null,
+      "metrics": {
+        "bytes_metadata_read": 11632,
+        "bytes_metadata_written": 5816,
+        "bytes_read": 585824,
+        "bytes_written": 199431,
+        "copies": 12,
+        "created_directories": 7,
+        "directory_syncs": 0,
+        "file_syncs": 22,
+        "ns": {
+          "copy": 4608600,
+          "destination-verification": 2173500,
+          "directory-create": 1179600,
+          "gate-validation": 1600,
+          "lock-hold": 20806800,
+          "lock-wait": 89400,
+          "materialization-inclusive": 67187900,
+          "metadata-build": 72400,
+          "namespace-enumeration": 681400,
+          "navigation-render": 8300,
+          "preparation-inclusive": 106232100,
+          "read": 12986900,
+          "semantic-validation": 6000,
+          "sync": 95631900,
+          "write": 2024500
+        },
+        "opens": 89,
+        "replacements": 1,
+        "unsupported_directory_syncs": 58
+      },
+      "peak_memory_bytes": 4956160,
+      "result": {
+        "delivery_error": "Access is denied. (os error 5)",
+        "proposed_publication": {
+          "digest": "07e9a96bb6fa8ff2a1c08eacce3845cd65958a7ed7a0fdd6499f85ceb279f046",
+          "publication": "publication-58672-1792272202509377900-3"
+        },
+        "resolve_request": "held-handle",
+        "result": null,
+        "status": "selection-uncertain"
+      },
+      "status": "ok",
+      "wall_ns": 127868800
+    },
+    "retry": {
+      "error": null,
+      "metrics": {
+        "bytes_metadata_read": 11632,
+        "bytes_metadata_written": 5816,
+        "bytes_read": 585824,
+        "bytes_written": 195551,
+        "copies": 12,
+        "created_directories": 6,
+        "directory_syncs": 0,
+        "file_syncs": 22,
+        "ns": {
+          "copy": 4654100,
+          "destination-verification": 2117400,
+          "directory-create": 887100,
+          "gate-validation": 1500,
+          "lock-hold": 33317800,
+          "lock-wait": 89400,
+          "materialization-inclusive": 72061600,
+          "metadata-build": 66900,
+          "namespace-enumeration": 690000,
+          "navigation-render": 8700,
+          "preparation-inclusive": 104927600,
+          "read": 17488600,
+          "replace": 5489700,
+          "selection-inclusive": 23314200,
+          "semantic-validation": 3400,
+          "sync": 99716600,
+          "write": 2043800
+        },
+        "opens": 89,
+        "replacements": 2,
+        "unsupported_directory_syncs": 57
+      },
+      "peak_memory_bytes": 4976640,
+      "result": {
+        "readable": "generations/generation-53356-1792272202530454500-1",
+        "result": {
+          "changed": [
+            "d000000"
+          ],
+          "outcome": "accepted",
+          "publication": "publication-53356-1792272202640750100-2",
+          "removed": [],
+          "request": "held-handle",
+          "state_digest": "8bfbb9755901cef594bd3b7ac3bb1867655b711ec5cfd65b6f41ab0c4cc3ad4b"
+        },
+        "selected": {
+          "digest": "8c62664b32aafe669a9d0d4af740d4aa767873f9c7545773bbc95c37a33b1a97",
+          "publication": "publication-53356-1792272202640750100-2"
+        },
+        "status": "published",
+        "view_error": null
+      },
+      "status": "ok",
+      "wall_ns": 138924100
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "epoch": 1792272190.9854784,
+  "platform": "Windows-10-10.0.26200-SP0",
+  "sources": {
+    "src/backend.rs": {
+      "bytes": 6213,
+      "sha256": "79b6220819a0d9d059a41078c6323e8b83d23452025f8b35ca52a83f3d3bfd6c"
+    },
+    "src/disk.rs": {
+      "bytes": 24532,
+      "sha256": "1ed496b1b1ea5138053128521fcc609a6aaa6f00828c8d75ff604aa4002afdd2"
+    },
+    "src/io.rs": {
+      "bytes": 9320,
+      "sha256": "fd7453986251426947b28f16fb6497c3fc501a52c867b682e1db04db976e774a"
+    },
+    "src/lifecycle.rs": {
+      "bytes": 7726,
+      "sha256": "1f5e04c722185c00b56bae40da916fb56a28c5442264d00913b17ecc93ae4161"
+    },
+    "src/main.rs": {
+      "bytes": 31472,
+      "sha256": "abb61c453f2e029548cf304672c7aa629ba4186b8c4cae66c8c96a7abefda731"
+    },
+    "src/model.rs": {
+      "bytes": 8505,
+      "sha256": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10"
+    },
+    "Cargo.toml": {
+      "bytes": 439,
+      "sha256": "e78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0"
+    },
+    "Cargo.lock": {
+      "bytes": 8140,
+      "sha256": "bb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998"
+    }
+  },
+  "windows_binary": {
+    "path": "C:\\file-native-followup-20261017-build-final-v2\\release\\file-native-publication-experiment.exe",
+    "sha256": "b65d51fc9f64cd69fbf038b35b694f41878e760c9fae9b61ca48c4f6cc9b2b8b"
+  },
+  "windows_rust": {
+    "command": [
+      "rustc",
+      "-Vv"
+    ],
+    "exit": 0,
+    "stdout": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-pc-windows-msvc\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+    "stderr": ""
+  },
+  "windows_cargo": {
+    "command": [
+      "cargo",
+      "-V"
+    ],
+    "exit": 0,
+    "stdout": "cargo 1.89.0 (c24e10642 2025-06-23)\n",
+    "stderr": ""
+  },
+  "linux": {
+    "command": [
+      "wsl",
+      "-d",
+      "Ubuntu-24.04",
+      "--",
+      "bash",
+      "-lc",
+      "uname -a; cat /etc/os-release; findmnt -T /home/spenser/file-native-followup-20261017; df -B1 /home; rustc -Vv; cargo -V; sha256sum /home/spenser/file-native-followup-20261017/build-final-v2/release/file-native-publication-experiment; cd /home/spenser/file-native-followup-20261017/source; sha256sum src/*.rs Cargo.*"
+    ],
+    "exit": 0,
+    "stdout": "Linux SpensersDesktop 6.18.54.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 19:13:07 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\nPRETTY_NAME=\"Ubuntu 24.04.3 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.3 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\nTARGET SOURCE   FSTYPE OPTIONS\n/      /dev/sdd ext4   rw,relatime,discard,errors=remount-ro,data=ordered\nFilesystem         1B-blocks         Used    Available Use% Mounted on\n/dev/sdd       1081101176832 484083175424 542025646080  48% /\nrustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-unknown-linux-gnu\nrelease: 1.89.0\nLLVM version: 20.1.7\ncargo 1.89.0 (c24e10642 2025-06-23)\nde561c17a61968d4bbdfc9202d6e86cc702f0b7ab3b568c696efd3fa52f739e8  /home/spenser/file-native-followup-20261017/build-final-v2/release/file-native-publication-experiment\n79b6220819a0d9d059a41078c6323e8b83d23452025f8b35ca52a83f3d3bfd6c  src/backend.rs\n1ed496b1b1ea5138053128521fcc609a6aaa6f00828c8d75ff604aa4002afdd2  src/disk.rs\nfd7453986251426947b28f16fb6497c3fc501a52c867b682e1db04db976e774a  src/io.rs\n1f5e04c722185c00b56bae40da916fb56a28c5442264d00913b17ecc93ae4161  src/lifecycle.rs\nabb61c453f2e029548cf304672c7aa629ba4186b8c4cae66c8c96a7abefda731  src/main.rs\na4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10  src/model.rs\nbb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998  Cargo.lock\ne78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0  Cargo.toml\n",
+    "stderr": ""
+  },
+  "cache": "OS/device caches uncontrolled; no device-cold claim"
+}

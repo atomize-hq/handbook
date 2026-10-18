@@ -1,0 +1,17 @@
+[
+  "manifest--damaged-view-observations.json",
+  "manifest--duplicate-delete-observations.json",
+  "manifest--extended-fault-observations.json",
+  "manifest--io-observations.json",
+  "manifest--orphan-read-observations.json",
+  "manifest--regressions-completed.json",
+  "manifest--retention-observations.json",
+  "cow--damaged-view-observations.json",
+  "cow--duplicate-delete-observations.json",
+  "cow--extended-fault-observations.json",
+  "cow--io-observations.json",
+  "cow--orphan-read-observations.json",
+  "cow--regressions-completed.json",
+  "cow--retention-observations.json",
+  "cow-extra--backend-observations.json"
+]

@@ -1,0 +1,10 @@
+{
+  "files": {
+    "experiment.py": "5e92fd767cd4e2b5a6f3229b3d5691c127e791840cb03198855b9ef57b8f8653",
+    "baseline_harness.py": "b43a16a9669ab8b222875ca6369fab0cd9ab3bb11aeb309628ad19e2a3649336",
+    "workloads.py": "1badc6a6fb68380009d722ce72b73be47ec02fc561c2a79fe33ed3835fca011b",
+    "regressions.py": "71afa67c3cd502aaa47d103a663859eea87f36091448e19b79efd338d57bd72b",
+    "terminal_copy.py": "578271c0067545e0196385c2880ae31a2dbe962fc22b0c08550fa3d2be87e11f"
+  },
+  "sha256": "9620fb4aa0bed2262ac9c06455c2cefa686edd09efdf34fff9ff0b80d2b65817"
+}

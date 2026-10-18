@@ -1,0 +1,10 @@
+{
+  "binary": "cfb2b1fdd6abeb48931be2a37da97620a3ee8f978d2ce3fa41e620d09af746dc",
+  "root": "C:/file-native-followup-20261017/derived-view-gap-v3/fixture",
+  "external_edit": "view/NAVIGATION.md",
+  "bytes": "Unadmitted navigation edit.",
+  "view_audit_edited": [],
+  "view_audit_missing": [],
+  "preserved_after_resume": false,
+  "status": "development failure; corrected in v4"
+}

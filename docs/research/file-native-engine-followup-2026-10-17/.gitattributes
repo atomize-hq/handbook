@@ -1,0 +1,5 @@
+# This experiment records exact source and raw-evidence byte hashes.
+* -text
+# Exact terminal captures include authored trailing spaces/CRLF and terminal EOFs.
+evidence/bash-final-v4-*.txt -whitespace
+evidence/powershell-*.txt -whitespace

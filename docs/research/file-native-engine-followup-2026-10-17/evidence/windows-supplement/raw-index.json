@@ -1,0 +1,26 @@
+[
+  {
+    "file": "cow--restoration-raw.jsonl.gz",
+    "source": "cow/restoration-raw.jsonl",
+    "records": 42,
+    "bytes": 96414,
+    "sha256": "ea606b1e09f528f90e0d9c338daefbfa5825e86e66cd3a96fa9395f34e2f82b4",
+    "compressed_sha256": "ff6637e32b22b78c248820c92c12de1a346ab978579d2619335e6c0db694183e"
+  },
+  {
+    "file": "cow-extra--indirect-gc-raw.jsonl.gz",
+    "source": "cow-extra/indirect-gc-raw.jsonl",
+    "records": 24,
+    "bytes": 76910,
+    "sha256": "17cb90921c6fd6981dcbe6c47bc13d08f446aaa3e28ae057aae951401029f68b",
+    "compressed_sha256": "850e25e57d014ed1d2758e0a3eb85b3840e57469b7a21df47c0bf52821a0acc3"
+  },
+  {
+    "file": "manifest--restoration-raw.jsonl.gz",
+    "source": "manifest/restoration-raw.jsonl",
+    "records": 42,
+    "bytes": 96477,
+    "sha256": "8a597dde224e03d693c7319bcb08cd3192419e3ffeabf6ab4cf2392fe5e05b70",
+    "compressed_sha256": "dea940f0c604c46588b762f9cf830bcca93e7390c29be639dce99314e103d47d"
+  }
+]

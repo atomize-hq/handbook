@@ -1,0 +1,11 @@
+{
+  "selected": {
+    "publication": "publication-7933-1792272425194740784-18",
+    "digest": "b883121e60d8ffb6f8c5308159ee04fd5d8f5f899e60e20b96be56b8c4d53a5c"
+  },
+  "preserved": [
+    "/home/spenser/file-native-followup-20261017/data/correctness-manifest-dev/damaged-view/divergence/preserved-7939-1792272425797050532-1/docs/item-overview-d000000.yaml"
+  ],
+  "rebuild": "render-only",
+  "cross_depth": "integrity:link-escape"
+}

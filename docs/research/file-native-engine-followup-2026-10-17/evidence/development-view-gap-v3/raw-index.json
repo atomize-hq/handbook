@@ -1,0 +1,10 @@
+[
+  {
+    "file": "proof-raw.jsonl.gz",
+    "source": "proof-raw.jsonl",
+    "records": 3,
+    "bytes": 5277,
+    "sha256": "fdf795adc399d1a739bedf693d6f2e9d2fad01eae9b28a6c8528144fb78a3ec0",
+    "compressed_sha256": "6e8e9a7125f0cdab4b21507582aeb0db58e45c0b1fb8943f18ed7d5495da4683"
+  }
+]

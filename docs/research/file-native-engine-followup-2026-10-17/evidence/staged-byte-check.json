@@ -1,0 +1,2430 @@
+{
+  "status": "all-staged-files-byte-exact-and-scope-confined",
+  "head": "2cec91857fb49139ecdeeef4d723b4ce40940ed3",
+  "branch": "feat/handbook-contract-membrane-clean",
+  "checked_files": 403,
+  "total_bytes": 25581992,
+  "all_paths_new_under": "docs/research/file-native-engine-followup-2026-10-17/",
+  "terminal_walkthroughs": 8,
+  "qualification": "This manifest excludes its own subsequently staged bytes; a final terminal check includes this file. All entries are additions, and raw captures retain their exact bytes.",
+  "files": [
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/.gitattributes",
+      "bytes": 239,
+      "sha256": "55b4be93464d86eaa62825791523cd0945880f9ffeb1a3319341ae82b887a3a2",
+      "git_blob": "e2bd0ba406d382e6624cdf3363e5bdd8a2d029a8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/.gitignore",
+      "bytes": 21,
+      "sha256": "16dc2ecd1d62e57662b982e8741c8a5c81fed2660ab82660ff1d04d6ae845814",
+      "git_blob": "46670befc3f397e3b870020bf4b3f77ce171b27b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/Cargo.lock",
+      "bytes": 8140,
+      "sha256": "bb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998",
+      "git_blob": "5c637aa036cb28b10c2732a77bcd6685ecdd688c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/Cargo.toml",
+      "bytes": 439,
+      "sha256": "e78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0",
+      "git_blob": "5cda810b7706f025056577620bf400a23922100f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/README.md",
+      "bytes": 9544,
+      "sha256": "bbf4de3c0e6e9258f7ca17e89082345e8fa6b7ec0c6ba5ff39dc015fed066e59",
+      "git_blob": "86fa77aff03c681439a5800c6167a34ca4ec7141"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/account.py",
+      "bytes": 3266,
+      "sha256": "9d284283f2f9467ec4d96daf3f6f45823f960e6e5e39176e87e0d3b2d48bb707",
+      "git_blob": "af40e45bfec24b859d32af723b1e8d130d28e716"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/allocation.md",
+      "bytes": 8313,
+      "sha256": "299809df0ec86438999a62775b9e762a6c26593f8b8144ecc172cc8d7316dc4f",
+      "git_blob": "06b78b4a0fc57c5ee54a0efaa5f993a3f1eebe9d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/backend_checks.py",
+      "bytes": 3322,
+      "sha256": "efb7e6b2df27c7f35cad3ee36120ef38984ad60ae3e351a0339cd0a248a6f9e5",
+      "git_blob": "561d8a5aef196439236be95bdfb8359b173d05b6"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/baseline_harness.py",
+      "bytes": 33147,
+      "sha256": "b43a16a9669ab8b222875ca6369fab0cd9ab3bb11aeb309628ad19e2a3649336",
+      "git_blob": "8c6de2716627abb534349f596dd0999d46dd192c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/budget_amendment.py",
+      "bytes": 3168,
+      "sha256": "5439d1344ca274f9d6ff4eaabba4b08966e80a3ce2ee85f3aacd1e2bc6d8ef88",
+      "git_blob": "68fc52a75508dc0bba1715317ac7012a442df050"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/cap_diagnosis.py",
+      "bytes": 1421,
+      "sha256": "e8af61a5dac202800ecc93a46e302b4e3beaafb1363e0083809f92414921fc37",
+      "git_blob": "7311ecc75800ee8639c524c78a1beac0dee7f97d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/capture_checks.py",
+      "bytes": 3147,
+      "sha256": "e217fd0e4b35c6584f96a74523d57f0ed98b3d6733495fdfe4cb0d87ab852604",
+      "git_blob": "5270406bae66774e41588cd6ee70fe6708511b60"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/collect.py",
+      "bytes": 4927,
+      "sha256": "ccef8ae06b56164224c5482f847ee8f175e21caff7bb3dc8a14e700a26e5dd6f",
+      "git_blob": "96d6059b78cdc1161b1077bd1eb606e33dd39b90"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/comparison.md",
+      "bytes": 25863,
+      "sha256": "3bdf4409f818ec7079c143fc2457132bffe982c1c0af50112e852b42fdd4aa8c",
+      "git_blob": "c7d95ea62d90673ec38c2cb521d12e375f2dafa3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/continue_selected.py",
+      "bytes": 5149,
+      "sha256": "d0fe429f612b4c8267743ba1cfee76fac738571d694a6d5a57c7b21199dee40d",
+      "git_blob": "b72973fcba57d1504baf00646d87c2f4dbb8a33f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/amplification-table.md",
+      "bytes": 5137,
+      "sha256": "d1e2fc7e760855a56c7990f120e5b067e787b9136caf03099a80691435f97ed2",
+      "git_blob": "98dea3057ebfa5a5ef5b2c67dbeae755b1a59d6a"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/bash-extraction-index.json",
+      "bytes": 2495,
+      "sha256": "370c3fc61436f7720f8f818c4a643daf640cafdb2caaf96e45d5523780ce1d41",
+      "git_blob": "f546e39c95b149c97bfa34c56cea07ba1d279947"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/bash-final-v4-cow-A.txt",
+      "bytes": 9153,
+      "sha256": "b247900291b3c93a515be6f8b3ebb96471697ae8555760c8a7e005df5d6162e4",
+      "git_blob": "8fe124f7fa16a84fbeee28953fce67b9309c6f84"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/bash-final-v4-cow-B.txt",
+      "bytes": 9812,
+      "sha256": "67bdaff4fd10aa6ea6b6b2cbc1ce636483b2fe9e934e45bc12520cad00aa60ac",
+      "git_blob": "03d67f93bc19d7eac6abbf611d29c63143194dc6"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/bash-final-v4-manifest-A.txt",
+      "bytes": 9179,
+      "sha256": "fc683dd2f1cae18e3aa0e59b85a804260a3d47ea9b9aa8e1b1563fdf9c4bbd9b",
+      "git_blob": "c7267c4955d1581b62d991c44b62adc7bcc278fb"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/bash-final-v4-manifest-B.txt",
+      "bytes": 9838,
+      "sha256": "e8f6a26bc9c93dc0a2dc36432ed69c060fc09e280dfd23036af935f106763d5f",
+      "git_blob": "509f7bcb3180917ff46883f194bf66088be3243e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/batch-table.md",
+      "bytes": 12538,
+      "sha256": "3ddef62a2252b44c68c72f0cbc89eb91f4d692012cadd9758a6de9aa53b758ea",
+      "git_blob": "82d7494ad8158effd0b1537746f2b8342b47d0b0"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/capture-amendment.json",
+      "bytes": 1178,
+      "sha256": "5463ea644d41a8e70d208c56b1b249db5fc49d456549beac7ed665e90fe057f1",
+      "git_blob": "12a452957ce7327da047f676a6b645460305fc75"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/contention-budget-observations.json",
+      "bytes": 1812,
+      "sha256": "97231ddab2786aa89ad35139428f68545b87c7dddf5f44e1e0a34738d41abbef",
+      "git_blob": "717201d379599fc78a31cec8bcc60f96fefd03fe"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/contention-table.md",
+      "bytes": 6726,
+      "sha256": "5f9b29b6bb6d49f6c171243cd20b43409bd4b2514cfb610b824ff39c6ae10623",
+      "git_blob": "4c4498d22ede2e6cf4f3c8093191dbea585f6549"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-windows/accounting.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-windows/base--capture-observations.json",
+      "bytes": 1659,
+      "sha256": "38b09c4acce03f1f5b0116b937fd9be137fd6d6066958394af179dfa2618a2ee",
+      "git_blob": "6d1d8830f4c63255835d5aa7b852357a5b8e7d27"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-windows/base--harness-session-1792296166208971800.json",
+      "bytes": 564,
+      "sha256": "dd105fed09da8f6c97ea86555e92a0b0a624f91e9843332b2ac3bcfdf3273c72",
+      "git_blob": "b5015706e2ff63a7b005f786d5e72c1507a6cb21"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-windows/capture-check-raw.jsonl.gz",
+      "bytes": 960,
+      "sha256": "76a05e4e5de8df1b02ffe863dff73dc646840f4602bdd1a0a5aea77434e11bdc",
+      "git_blob": "1c6990a144ec8560da351312801928d34bd4b634"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-windows/observations-index.json",
+      "bytes": 96,
+      "sha256": "18ca7a31912fdf492e2d9cf27ddd482f7f2c2749aeeb369a84d9fcb1dc936297",
+      "git_blob": "21ba54d67edac99b8d0fa947e59a9daf2c93bea0"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-windows/operations.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-windows/points.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-windows/raw-index.json",
+      "bytes": 316,
+      "sha256": "de7e286a5dd636161f803b4958b0bbc86f80b9cb0a81bf89d4c2a1a926a84a6b",
+      "git_blob": "cf60700bb52a22efcdbb4447a32fd8105bbcafd5"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-windows/synthetic-probe.rs",
+      "bytes": 672,
+      "sha256": "89427d39890884c4293b648fcebcdf9299317aa275f50372b4631929858b8881",
+      "git_blob": "d5df866d85275f887e1f3a24584be91786ea4828"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-wsl/accounting.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-wsl/base--capture-observations.json",
+      "bytes": 1655,
+      "sha256": "ee0f7a3387b6495a3963c9b62735a41eb761f056b8128196dbca67f03a7038fd",
+      "git_blob": "01355350feb081b9038731924a37c57a9eb209ca"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-wsl/base--harness-session-1792296175763816752.json",
+      "bytes": 554,
+      "sha256": "a4b6bceba85d134d9dd92a3c05081c7b95c37257bd7ee38a7401e905c4742cfd",
+      "git_blob": "2e8541af2eab82a4143a9726060c2b1c21755fbd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-wsl/capture-check-raw.jsonl.gz",
+      "bytes": 975,
+      "sha256": "051a64edabf8c71dbcbf4013a2f77b2431e7b6d95f117b4539a203d1481774fc",
+      "git_blob": "fbdcc1ac90770d5848cee3c0d8ac9399b401cf51"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-wsl/observations-index.json",
+      "bytes": 92,
+      "sha256": "45c4a0563fd900c43a8e6ad0e94ca1a36e6f71619ef5f83b8349ebc527330737",
+      "git_blob": "f974e60744e9e70321e6fc5629480fda6759773d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-wsl/operations.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-wsl/points.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-wsl/raw-index.json",
+      "bytes": 306,
+      "sha256": "4a1189e899457ad2266d63d2d913da6c603d25bbf2b3f982a9aade9b1ae47053",
+      "git_blob": "04fae6f6fa5525ed44757f4cd49b3053cee32096"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/controller-capture-wsl/synthetic-probe.rs",
+      "bytes": 672,
+      "sha256": "89427d39890884c4293b648fcebcdf9299317aa275f50372b4631929858b8881",
+      "git_blob": "d5df866d85275f887e1f3a24584be91786ea4828"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/derived-view-gap-v3.json",
+      "bytes": 390,
+      "sha256": "6382af57b901946ea61c3861d5a0361300fabcd23fa429db816090081fe9c726",
+      "git_blob": "38a20a199a0b74fa45eb129a15d3b55098c2f1d4"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-view-gap-v3/accounting.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-view-gap-v3/base--harness-session-1792273197130913900.json",
+      "bytes": 564,
+      "sha256": "a2aa855c33310cf6baa75f6e1e4cf4cf7e070349a32df8d5eeb0efee9671d18b",
+      "git_blob": "a2d32fa92e53bf1e944e87a896a8af826ed5d95c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-view-gap-v3/observations-index.json",
+      "bytes": 58,
+      "sha256": "207c47b454515629ea37cff7cd61d20c354e765b6673f64d6f7c6238a6cdea8c",
+      "git_blob": "f06fe1f398a9bb40944da937c42970a7acfc291d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-view-gap-v3/operations.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-view-gap-v3/points.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-view-gap-v3/proof-raw.jsonl.gz",
+      "bytes": 1555,
+      "sha256": "6e8e9a7125f0cdab4b21507582aeb0db58e45c0b1fb8943f18ed7d5495da4683",
+      "git_blob": "e1da5dde940d9c1ed809574c8bf61592e4f6dcb8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-view-gap-v3/raw-index.json",
+      "bytes": 300,
+      "sha256": "062af0446cf489139c88f782ffffe9ae36c3c4d7b0c76a193231763ec94a8d31",
+      "git_blob": "5280e70416da95aaa8ea2a0956af760db7674b8b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/accounting.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/base--correctness-completed.json",
+      "bytes": 93,
+      "sha256": "e2262090f84fc2aca0521fe7dea3981261500304d3cfc383639d9ff8fb9e0074",
+      "git_blob": "6609b6dc12e7508cb1deda6fa0158e3d0f8ba3d9"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/base--damaged-view-observations.json",
+      "bytes": 433,
+      "sha256": "cf616f4978ad80b5baeb742a37f543cc8476868d13b282f188625aac0e816531",
+      "git_blob": "ad11580e3710dd8ca9389524d1410b3bc6600490"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/base--duplicate-delete-observations.json",
+      "bytes": 886,
+      "sha256": "ff5b255cbc4473ffc6fd302c162a9c588a219dcad15abce6f4cf6f14f3bb3310",
+      "git_blob": "e7a87097246488c4f652e8fc01daaf09f85341a2"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/base--extended-fault-observations.json",
+      "bytes": 4011,
+      "sha256": "f8e11f0ac077819b201ac525a3dbeba22fe042e6848503d5f2dc20ef5ee75d54",
+      "git_blob": "ffce517bfaa03dff55456297d2a30e0c66ca11b6"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/base--fault-observations.json",
+      "bytes": 53661,
+      "sha256": "21075f9e78fb660429470596bbf06c0c0695c2f2af740ab93512bfeb97415bed",
+      "git_blob": "e63f4bc765a9a3976d37fe9430d2ef25dc54111b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/base--io-observations.json",
+      "bytes": 350,
+      "sha256": "07c63a003f5c07e43d654c1867aba32c95d8aa0b2c4f76226cb5e5c7f67ae8f0",
+      "git_blob": "192dc4c17af4d9b5df045c8e4f5a648fde0b423a"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/base--race-observations.json",
+      "bytes": 5855,
+      "sha256": "5120450a42b28e161cf83e8f054a5acbedc1862af390bd737aedbfad5c405b3d",
+      "git_blob": "555b7cf0edd786afdeaf2fe2f53da6ed67b70af3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/base--retention-observations.json",
+      "bytes": 7901,
+      "sha256": "5828d865ffa3b5519dccfff7bdd2b01ee759c48a5c7d3eb7d1e5d88e7ee69a7e",
+      "git_blob": "1a0ffce5f640bab84c6b49de102f87f03cc2097b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/base--semantic-observations.json",
+      "bytes": 6413,
+      "sha256": "40ce0405026ff06029c6de0f2fdaddd094e1b49d18df3653ad7c795169f57c34",
+      "git_blob": "6b3442d75edcf07bcd13479c7da3a9e6807a29d8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/base--special-observations.json",
+      "bytes": 5740,
+      "sha256": "58b7901da31b7777cbd35eae64e9aed01140799e6c162fdff0c313bec030d1b2",
+      "git_blob": "131d4ec80ffe624b7cce96b14ef7459c130fe990"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/correctness-raw.jsonl.gz",
+      "bytes": 384230,
+      "sha256": "a1351f771d0b96ba4151d0b745b8744609f4a62fded4447aabf2a1f9799aa0d0",
+      "git_blob": "ae6632884ce36cf03f0cbbb13078c9c095a98411"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/observations-index.json",
+      "bytes": 400,
+      "sha256": "330539c5a53b2dec1979a420af613cc791889831b941e82c8d77d6490cf85850",
+      "git_blob": "2f4487b9563c2b1f4e2106351c87e7923e7b0a0e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/operations.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/points.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-cow/raw-index.json",
+      "bytes": 318,
+      "sha256": "59f45d6f657f86078e05ba52c901861690d66c73e1d85165a53b1ac2804a16b2",
+      "git_blob": "f0b10ddd9a2f1a2de13ed213f10d6a3e29dec458"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/accounting.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/base--correctness-completed.json",
+      "bytes": 98,
+      "sha256": "1754f5eb7691de7a7044aa4ddd9994d3f42299d9face3ab9f7ddecfb0d343c68",
+      "git_blob": "e164562894135bd48237e7e4cc15fefd7fa81712"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/base--damaged-view-observations.json",
+      "bytes": 434,
+      "sha256": "977087a2d2bdb9610954738a8c3593b70e235e8cca76cc98f6ce7925483df318",
+      "git_blob": "6efd2eb65eee82436df091604ef650843e2ed8a8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/base--duplicate-delete-observations.json",
+      "bytes": 886,
+      "sha256": "0e04ac393cc0abf6668b8362bc7d5432701505cbccb1069374ea8b7aab6736bc",
+      "git_blob": "922946dfb99eb9b2568963b4d5ebea3c904d8e6b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/base--fault-observations.json",
+      "bytes": 53661,
+      "sha256": "21075f9e78fb660429470596bbf06c0c0695c2f2af740ab93512bfeb97415bed",
+      "git_blob": "e63f4bc765a9a3976d37fe9430d2ef25dc54111b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/base--io-observations.json",
+      "bytes": 351,
+      "sha256": "32d0ea3dcdaefe1979585f1bb39ef8b6bb69cf048281ee672e47d57f7ea0dab6",
+      "git_blob": "417d34e8f31e0d28411f9ea964b7b3925681f648"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/base--race-observations.json",
+      "bytes": 5867,
+      "sha256": "707e3dad1116c09e1d2cfd0425cb0cfc8da86ddc3c45f439ac34b6055db985ff",
+      "git_blob": "74a89a6a4cea92fc0d20f455b862cebfaa0bcaed"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/base--retention-observations.json",
+      "bytes": 7910,
+      "sha256": "db9abd9038c9398801f7c343a2fb03474ef7a0f7999a738ef865beef8d56bab1",
+      "git_blob": "6f7f662a82226f9f357567bb65d46732e8baf271"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/base--semantic-observations.json",
+      "bytes": 6413,
+      "sha256": "40ce0405026ff06029c6de0f2fdaddd094e1b49d18df3653ad7c795169f57c34",
+      "git_blob": "6b3442d75edcf07bcd13479c7da3a9e6807a29d8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/base--special-observations.json",
+      "bytes": 5744,
+      "sha256": "64fdd8c814a5ffafeace0ce2ae56702c3c33d63a43b8602987686b4eef22b9d7",
+      "git_blob": "7fe9831f1db68d9fe8c19be343ec90dbdbc5fe2a"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/correctness-raw.jsonl.gz",
+      "bytes": 353204,
+      "sha256": "fcc5866bd65f6b669ebbef9d32b838d6898a22e7c065197fe12e35ffe4993bfc",
+      "git_blob": "10003ac7adc3420fbd23f724e03ebb962d24b39e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/observations-index.json",
+      "bytes": 355,
+      "sha256": "3495101714e09ce88439278fd47602dee0aa61b5054e26a9891eadb68f8d4947",
+      "git_blob": "bdbb8072e56421195ebb6ee925f90e999975c1a9"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/operations.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/points.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-manifest/raw-index.json",
+      "bytes": 318,
+      "sha256": "54005bf658d81b3eb5c16365a35f1a63bdfacf8033dcea457189e8646595b25d",
+      "git_blob": "4bc7ec291013a6cda45fc3c17bde8f17124b54fc"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/accounting.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/base--manual-stop.json",
+      "bytes": 197,
+      "sha256": "6a611619419e237d0cd32794c27384342f71380c016a61411f9268bcd9e391a4",
+      "git_blob": "558827c9f9ecccf0bd28b630c136e6511afa05ba"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/cow--correctness-completed.json",
+      "bytes": 93,
+      "sha256": "e2262090f84fc2aca0521fe7dea3981261500304d3cfc383639d9ff8fb9e0074",
+      "git_blob": "6609b6dc12e7508cb1deda6fa0158e3d0f8ba3d9"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/cow--correctness-raw.jsonl.gz",
+      "bytes": 384235,
+      "sha256": "8714f9672066948f49219442d6020e7823543d449b2a5ff4badc51a9092ae1c9",
+      "git_blob": "55cf53ffc62ce01a0f0192a002e1ca7d145e3811"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/cow--damaged-view-observations.json",
+      "bytes": 433,
+      "sha256": "cf616f4978ad80b5baeb742a37f543cc8476868d13b282f188625aac0e816531",
+      "git_blob": "ad11580e3710dd8ca9389524d1410b3bc6600490"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/cow--duplicate-delete-observations.json",
+      "bytes": 886,
+      "sha256": "ff5b255cbc4473ffc6fd302c162a9c588a219dcad15abce6f4cf6f14f3bb3310",
+      "git_blob": "e7a87097246488c4f652e8fc01daaf09f85341a2"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/cow--extended-fault-observations.json",
+      "bytes": 4011,
+      "sha256": "f8e11f0ac077819b201ac525a3dbeba22fe042e6848503d5f2dc20ef5ee75d54",
+      "git_blob": "ffce517bfaa03dff55456297d2a30e0c66ca11b6"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/cow--fault-observations.json",
+      "bytes": 53661,
+      "sha256": "21075f9e78fb660429470596bbf06c0c0695c2f2af740ab93512bfeb97415bed",
+      "git_blob": "e63f4bc765a9a3976d37fe9430d2ef25dc54111b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/cow--io-observations.json",
+      "bytes": 350,
+      "sha256": "07c63a003f5c07e43d654c1867aba32c95d8aa0b2c4f76226cb5e5c7f67ae8f0",
+      "git_blob": "192dc4c17af4d9b5df045c8e4f5a648fde0b423a"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/cow--race-observations.json",
+      "bytes": 5855,
+      "sha256": "5120450a42b28e161cf83e8f054a5acbedc1862af390bd737aedbfad5c405b3d",
+      "git_blob": "555b7cf0edd786afdeaf2fe2f53da6ed67b70af3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/cow--retention-observations.json",
+      "bytes": 7901,
+      "sha256": "5828d865ffa3b5519dccfff7bdd2b01ee759c48a5c7d3eb7d1e5d88e7ee69a7e",
+      "git_blob": "1a0ffce5f640bab84c6b49de102f87f03cc2097b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/cow--semantic-observations.json",
+      "bytes": 6413,
+      "sha256": "40ce0405026ff06029c6de0f2fdaddd094e1b49d18df3653ad7c795169f57c34",
+      "git_blob": "6b3442d75edcf07bcd13479c7da3a9e6807a29d8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/cow--special-observations.json",
+      "bytes": 5740,
+      "sha256": "58b7901da31b7777cbd35eae64e9aed01140799e6c162fdff0c313bec030d1b2",
+      "git_blob": "131d4ec80ffe624b7cce96b14ef7459c130fe990"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/execution.jsonl.gz",
+      "bytes": 398,
+      "sha256": "daf2c02766d3912660ee411d525c77316896289e471eeda2c7e77239db01d69d",
+      "git_blob": "9d701a75035ec0ee4ff9abc350ee965575673e3a"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/manifest--contention-observations.json",
+      "bytes": 63538,
+      "sha256": "f0be7194f05e1bea67809e4571e91913ec5968aafa983e0a9e29b78785807d9c",
+      "git_blob": "3b6f2adc8028155295c004d20383c6284a435b8d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/manifest--contention-raw.jsonl.gz",
+      "bytes": 33912,
+      "sha256": "6a13bbc737a65986ee45a0f461be96cdf8757b9ce53979a9e3be8ba50fe1fc02",
+      "git_blob": "73d6426bdda1d1e853470d3fdf242e62c607ea31"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/manifest--damaged-view-observations.json",
+      "bytes": 438,
+      "sha256": "79ac2727c1bd591786f34e5c3d4a5565badb161a7efad41c713c2e63b556fb0e",
+      "git_blob": "781f9f5ccec00711ad2b8721518b54715acd8801"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/manifest--duplicate-delete-observations.json",
+      "bytes": 886,
+      "sha256": "d70d225cb76382afe83fd466c8cbe09713e379fa02eb6e78c1b9c783a5d2ba29",
+      "git_blob": "2794457695645d9bc1332fcce28f26e18b2924e8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/manifest--extended-fault-observations.json",
+      "bytes": 2393,
+      "sha256": "8de640eebe081174576f8c7b526b5353e72fd813ad344b350c6c30d2bc34f3fa",
+      "git_blob": "caad35b385f523cdc3370d63984e33d0c65147fb"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/manifest--growth-observations.json",
+      "bytes": 4751,
+      "sha256": "6a0bae676951da4495d815864355c89446e92f5c364bcc9759cbbc6c202cbf1f",
+      "git_blob": "c27621c3bba61af5fffc84be3962c0a8d4b6714d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/manifest--growth-raw.jsonl.gz",
+      "bytes": 48722,
+      "sha256": "1349fd53fe3b6dc9bdac29a83f28b88ffb679e568f5a2694d04652b1bf4aba3d",
+      "git_blob": "4d1c52a72ad590af4490f46bf55c3d16b1abbe68"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/manifest--io-observations.json",
+      "bytes": 355,
+      "sha256": "0b9d03c38cf944bd63d09c29765d7b7fd2f11cab1d0fb38f8577328c32a32f29",
+      "git_blob": "43f502e2eb832822d3dc8a5a6ac2e3f418589831"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/manifest--navigation-raw.jsonl.gz",
+      "bytes": 2220,
+      "sha256": "39afb17027b93bd4330501a1a9bc6943f9c3a0356586feeec7d69515b83646a7",
+      "git_blob": "a3b715eebd4f0efd8d495588bdfe9a923d0d1e29"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/manifest--regressions-completed.json",
+      "bytes": 142,
+      "sha256": "65c2982d3e64c988e1f5939982c8ce2647ec9bf108b4def77f8b9e32fe9ee27c",
+      "git_blob": "0f90e9392b0dfc8e062e21560f94b1480104f166"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/manifest--regressions-raw.jsonl.gz",
+      "bytes": 29993,
+      "sha256": "040dd928b1d084c825349de40f1f821af159eb8cc5b6ff9fe9f079cf10b93220",
+      "git_blob": "622f64f9fde4539126c1f8ebce49a1c9e31a85a9"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/manifest--retention-observations.json",
+      "bytes": 7913,
+      "sha256": "29e2e2e8d990a4d542396a99a08103f2c919a2a7cdf25d1be4ac4edc1c59e2b3",
+      "git_blob": "da8a2ab89207f1bd5bed447f3be86d6c2fbde8f8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/observations-index.json",
+      "bytes": 776,
+      "sha256": "03b293a78d18dabb26001e7a5a27a6579be283f1d777fdcf429b35ee83882147",
+      "git_blob": "1ebc136362cdd85a7defa11d280a1291acd0a87c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/operations.json",
+      "bytes": 99556,
+      "sha256": "d2b8ba27ec451a5de0d409e11d94a1b15a4544842b5c0e70fd2369e959870699",
+      "git_blob": "3ff7a387d5336ed8abf21be14c3e639446c737a6"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/points.json",
+      "bytes": 16111,
+      "sha256": "58f938746d325291eb7e97502e57c26cd5090f6837a337e8129c6ceef7355327",
+      "git_blob": "f212f818b16cad554c62c260d8a5b4eadc21a072"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v2/raw-index.json",
+      "bytes": 1924,
+      "sha256": "f28a562acbb7513489ddc9edd2051309d17ac6c108121313e039eb9b74037111",
+      "git_blob": "5d7e37c2660271292f8c0de1df7c65264ff9cb52"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/accounting.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/cow--damaged-view-observations.json",
+      "bytes": 433,
+      "sha256": "141b41db2f2d95b3c87e35e6593888773dd39c38eb3ae06bdb55399b7354f7f5",
+      "git_blob": "57a2ad33f2851a59969d4584af3afd6c28de35f7"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/cow--duplicate-delete-observations.json",
+      "bytes": 886,
+      "sha256": "55e7531c118b9da13a8fa62ded6a3cb1bd038aa0991fb28dda7aa74c423891f9",
+      "git_blob": "14d4a9485ca80a2a54a9b3e8fec9e8c1aa829dd4"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/cow--extended-fault-observations.json",
+      "bytes": 4011,
+      "sha256": "f8e11f0ac077819b201ac525a3dbeba22fe042e6848503d5f2dc20ef5ee75d54",
+      "git_blob": "ffce517bfaa03dff55456297d2a30e0c66ca11b6"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/cow--io-observations.json",
+      "bytes": 350,
+      "sha256": "27074e7593d0ab665ef2799d0168565c0f75bd0f017a4c987b8048dc5e680271",
+      "git_blob": "878fda0e00f6bbf5c0ae8915bf9d2d8f6ceccf29"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/cow--orphan-read-observations.json",
+      "bytes": 237,
+      "sha256": "90e62b61a610f5abc991d9627cc12d58bb475ac7961b2829ba3f82e7e17e0e42",
+      "git_blob": "cb17101ce453cd9a54ea8ddfe801c0b64275b679"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/cow--regressions-completed.json",
+      "bytes": 137,
+      "sha256": "8770ad3c303adb152b20cdab95fd887005fa896e0d060cdd99eacac67f5fb347",
+      "git_blob": "c97e78b30b03425838f15bf6937ac36127f28856"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/cow--regressions-raw.jsonl.gz",
+      "bytes": 40216,
+      "sha256": "5ab672a14fa4b9266fefb15f1a9f08f85a563a8f9803410ef682f1cba64e308f",
+      "git_blob": "5a54bbf981dfcd0fd1b67c230b6b8f0f40044a0e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/cow--retention-observations.json",
+      "bytes": 8393,
+      "sha256": "403af35d0cedca17c7649a13658ccd96f4299940877608e7d8c4b4dfc6800801",
+      "git_blob": "9ea05842b8efaab58997413fe0e62754a96465ea"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/cow-extra--backend-checks-raw.jsonl.gz",
+      "bytes": 1988,
+      "sha256": "6a2c6a705e87e31652d5b68e21669a1d6a9134aed3bd5d859bb7ff8ad4debb7b",
+      "git_blob": "9bca22ec1065a9f057f50ea2bd32793261521665"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/cow-extra--backend-observations.json",
+      "bytes": 1526,
+      "sha256": "6c8b4b831dd23e8cb8b664e89802b9eb2de22a327ea5a88cefcda8e7a8c248c1",
+      "git_blob": "7b7a214ff849bb8b6cb2e4418fb27b2993ff3833"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/cow-retention-readers--reader-lifecycle-raw.jsonl.gz",
+      "bytes": 9018,
+      "sha256": "264ec2e2402df542f0c3be1fe90373a0ba63d946d8704e381c808e758867490e",
+      "git_blob": "3450224b36104721eb28583ce1215d1192de5759"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/manifest--damaged-view-observations.json",
+      "bytes": 438,
+      "sha256": "8c875424ae75cb79423c37661bc17bdd606a7bc6c6b04ec3fdb210f5e97369a5",
+      "git_blob": "a7c2e59bec68e4835859a2884e64b6dc20053fe3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/manifest--duplicate-delete-observations.json",
+      "bytes": 886,
+      "sha256": "996f4ba0237d9e325cf3919683bf5a63f0077e4ed98508b36836e64045647606",
+      "git_blob": "eef646edea8e8f5c683ab44d82f7525c0c433e92"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/manifest--extended-fault-observations.json",
+      "bytes": 2393,
+      "sha256": "8de640eebe081174576f8c7b526b5353e72fd813ad344b350c6c30d2bc34f3fa",
+      "git_blob": "caad35b385f523cdc3370d63984e33d0c65147fb"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/manifest--io-observations.json",
+      "bytes": 355,
+      "sha256": "0025bae76c1063799bd0f089ef35ba505262ad25152aa7ca71424c27803002d6",
+      "git_blob": "f1b2a6f073b39f522ef8c1defd359e637ffd612f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/manifest--orphan-read-observations.json",
+      "bytes": 237,
+      "sha256": "0fb128abcd0d74663af242a5d774d8a9c70740aaf14fb68fd96220d62189805a",
+      "git_blob": "a151b31a449ee25613963296fce79ad663644d8e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/manifest--regressions-completed.json",
+      "bytes": 142,
+      "sha256": "7f5459abd5baff8c7e1a973aa70ad442221bc134d8f115fe0c4d691eb8813a73",
+      "git_blob": "003b2005b85ed44963100556943374f49390116d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/manifest--regressions-raw.jsonl.gz",
+      "bytes": 30658,
+      "sha256": "43600f844c8ad4958af3cf220809ebad5c3111c0923dd641589e4a0a75e85478",
+      "git_blob": "6f2b44b7cb86627386be3ad148b4ebc6804457a3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/manifest--retention-observations.json",
+      "bytes": 8051,
+      "sha256": "68c4365e40ada96583d4ad20a5daa43c3531b4d403e5f4ec2ec56e52c45823a5",
+      "git_blob": "e28d92e210d087da19b4de773d53d3d64ff91d50"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/observations-index.json",
+      "bytes": 647,
+      "sha256": "17632c0d24c4005e22f81926ac65858060653e9a2f16904f4d8570f1db4d63c5",
+      "git_blob": "3fed45079678a4d7f9213147ac62251b7c2a1165"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/operations.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/points.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-windows-v3/raw-index.json",
+      "bytes": 1353,
+      "sha256": "3836d24b189e00922782af7c431fe3dfa089e543ff925afe0b64516cff0e1c29",
+      "git_blob": "7be7b7b19fa0eed02f79979cc36c030cdfeabe52"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/accounting.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/base--correctness-completed.json",
+      "bytes": 124,
+      "sha256": "8c9e66726b532af9cc3aa6547a944fe85717310f66be0e1276425f6d1a15e356",
+      "git_blob": "9a9b7a2fe872cb2bc679cd2dc0fe218a507d81fb"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/base--damaged-view-observations.json",
+      "bytes": 424,
+      "sha256": "a4f4843587673cfbcd380ef9b39009fc42a7bfe367752791b04a8bec9ea80a1d",
+      "git_blob": "0262ba8e09815ffdbcf94e9ebb19b73c66b379c9"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/base--duplicate-delete-observations.json",
+      "bytes": 854,
+      "sha256": "7debf026c894a3ba37ef8c5eba509e993b5473a7e2e433aab449b310a506cbf3",
+      "git_blob": "9e4a7570471223796ef4bd8f45eec441faa43ff3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/base--extended-fault-observations.json",
+      "bytes": 3893,
+      "sha256": "adefbcd30146b2b11de35329f05b1069c2a5a0161fafc0840440f30ae17440bd",
+      "git_blob": "6e7fe857a36e34ca02db114a6eeced03b4c5b5a0"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/base--fault-observations.json",
+      "bytes": 51568,
+      "sha256": "2a6033a399e6895c941af0964170d9c761374871012a69d7df79289e46540678",
+      "git_blob": "f305757f016b5d2f2403cda3fe2c7e347307369f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/base--io-observations.json",
+      "bytes": 348,
+      "sha256": "938345de23d5679a40c323742459308266ce890d99806831bca2019bc4a06bf7",
+      "git_blob": "91fa4e3727938ef1dbaa6134bd992c5738f8818c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/base--orphan-read-observations.json",
+      "bytes": 225,
+      "sha256": "bd3042bde7b075bbc2e74f80fa53ea78bdd7f6aff351dcb280cea1c17260000b",
+      "git_blob": "cad083ab643d06c2557fb57d1775881f75cfb2eb"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/base--race-observations.json",
+      "bytes": 5769,
+      "sha256": "de9d702c625cdc6b3e8fb38f0608994e445d9091de0fec019689598db52ab8fb",
+      "git_blob": "1458d13e72d04df877de19ec1d71b5674b465e24"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/base--retention-observations.json",
+      "bytes": 8026,
+      "sha256": "33cc48be56a5e1a0292ea62182d958f77ae1eb569f3ed14a168a15b1dcbe5979",
+      "git_blob": "4beb6846db7e687165c1b0a0e2b32f116ad5168a"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/base--semantic-observations.json",
+      "bytes": 6075,
+      "sha256": "d571172a7a694f944f54437ff75d1e64aafee456121a87c99c8033a6cd01a3d2",
+      "git_blob": "68909320a42f5b8aa2af511423c5f763705def32"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/base--special-observations.json",
+      "bytes": 2234,
+      "sha256": "f217a21786ae19dcd074f066cbbaca2a25f65427ae19cdcb506f5175eaa3de04",
+      "git_blob": "6c3483f012fe7ea32602fba0d46fe075b997abbf"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/correctness-raw.jsonl.gz",
+      "bytes": 414766,
+      "sha256": "705074aed99e12df48dbd2cca4351674f40132997b6b700fc61ba59b3058997b",
+      "git_blob": "d66d92ba3cde188e53fc80c1a9177f83cc2a571e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/observations-index.json",
+      "bytes": 429,
+      "sha256": "952b97eff0fff0e02f66c968dbc9dc28823f9e2bd1904dcc9fdd18f1bf816b62",
+      "git_blob": "ad848333e43f47f050eda8dba39a16f4dbc0da00"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/operations.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/points.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-cow-v3/raw-index.json",
+      "bytes": 308,
+      "sha256": "73c172b589cc816a26aa3655a25cd9884fb7f10c6292019a5e2fc746b3b572fd",
+      "git_blob": "a6807cf6daf2683aec4d92ee8cd29cba90b79c2d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/accounting.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/base--correctness-completed.json",
+      "bytes": 129,
+      "sha256": "e285fb4931c588357051dd2be450d8fd263866949698a3dcedbd222e92ff27f0",
+      "git_blob": "67ec8ab1390405b36a18940a547afdc624aa3a9e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/base--damaged-view-observations.json",
+      "bytes": 432,
+      "sha256": "ba7fe808804c09d8306e78222eecd8a97d8d2aee65e1ae6f0fa132c238ce2023",
+      "git_blob": "c48da497d1bf08fb94bc578f6e141d0704b7a6a6"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/base--fault-observations.json",
+      "bytes": 51568,
+      "sha256": "2a6033a399e6895c941af0964170d9c761374871012a69d7df79289e46540678",
+      "git_blob": "f305757f016b5d2f2403cda3fe2c7e347307369f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/base--io-observations.json",
+      "bytes": 356,
+      "sha256": "c7c0a76f4abdc0f4a912bfb5024a80bcfa411bc486abe0f388e0458c2376fc52",
+      "git_blob": "5a0172cd59bc5940df52f77758763bb70a1a70a5"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/base--race-observations.json",
+      "bytes": 5865,
+      "sha256": "9078d331d6792208e23cd3feb5d76512e7fb3753ad3d1e60ba5a73b5870d258b",
+      "git_blob": "328953c6c9a31669254c646ca26da518e8107c31"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/base--retention-observations.json",
+      "bytes": 7560,
+      "sha256": "04db700e7461c6fc4e2f9b7773384f41aa664babcbaba4fe37eb3ac92ebda75a",
+      "git_blob": "f23124451a935310c346fef37d453b19a522b325"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/base--semantic-observations.json",
+      "bytes": 6075,
+      "sha256": "d571172a7a694f944f54437ff75d1e64aafee456121a87c99c8033a6cd01a3d2",
+      "git_blob": "68909320a42f5b8aa2af511423c5f763705def32"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/base--special-observations.json",
+      "bytes": 2273,
+      "sha256": "81a80c0faf1404b4fb93db38f8d7953dfa90632ee7d64353909a0b9a683d71d6",
+      "git_blob": "9645904b152f9ad5d72049a39809481601db0127"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/correctness-raw.jsonl.gz",
+      "bytes": 354539,
+      "sha256": "ce44bda1693cad3d46d1c13cc9a8f4bd687a0a45b18c2b0a84243ff721ba69b2",
+      "git_blob": "95fab7374151b09b3f4a3987f069aba760b7eab3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/observations-index.json",
+      "bytes": 298,
+      "sha256": "052120d358101ba48f9bc164df93fe6b5f02bc28911e32ffc4c08bc91e7c46c0",
+      "git_blob": "7d4e1e29596faa62ae823bd097d28f1c13958755"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/operations.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/points.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/development-wsl-manifest/raw-index.json",
+      "bytes": 308,
+      "sha256": "75829afac3da2e313cb7d3d0a503018bc2b2f4127c08712b01bf14489f6fa1e2",
+      "git_blob": "d83dd1845cfb5daf7e5986e0fc45458adabee645"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/gitnexus-capture-impact.txt",
+      "bytes": 373,
+      "sha256": "95ecc02c77c793f2ace89e0a6ce6fe903c0dedc9f570a518517d275b6a129c1d",
+      "git_blob": "8ad7c4941436427ce16de9c7a31b7ce677b39ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/gitnexus-compare-main.json",
+      "bytes": 2915,
+      "sha256": "29c9079e64a4f26dd454e65c67c2d7781526c0b840ffa54794a2110e7d1fa2e7",
+      "git_blob": "67457a0d821bb60db742f53d9bd9de374300e7fd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/gitnexus-growth-budget-impact.json",
+      "bytes": 699,
+      "sha256": "862e1679a919c3fcfc75ec82e6ee9f006a6336e6b4036fee3fea586c67346faf",
+      "git_blob": "0af31da8275dfe418c0dfc1e952780b2138fb0cd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/gitnexus-impact-exact.txt",
+      "bytes": 5078,
+      "sha256": "064308cabb6bf91cbf0c02d22165dcb55ea05fea22fdc80889e1501c0e5a72e8",
+      "git_blob": "691585ee987c47bd5e10615e0edfe3aa15f06319"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/gitnexus-impact.txt",
+      "bytes": 33469,
+      "sha256": "31975312876af8eaa37b67b4caf854b18773b7a9b74cbddee245c640ebe4366e",
+      "git_blob": "ae6f97dc14d425f07a910cc38986912696927c8d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/gitnexus-scope-reconciliation.json",
+      "bytes": 481,
+      "sha256": "7ac00c165ea07d4dcd5f6cea245628b292f246a7b5c02996aadea94d20212f82",
+      "git_blob": "e1f73e61e0ef5b4fee8cb7d7893b097c73b98024"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/gitnexus-staged-final.json",
+      "bytes": 542,
+      "sha256": "dba677e9029387561b9909f5c5665e8faafab2fdfa0199728303b7729f61cb7e",
+      "git_blob": "b60a4fd112fc5b1f8ba482d5bbff08637d794620"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/gitnexus-staged.json",
+      "bytes": 542,
+      "sha256": "2087fd9d3bfa3d6eaec6109be9b555f0ca24acf74b2914f2892e8f3a7989a883",
+      "git_blob": "0198756427062bddfbd07e808649495c0d36e40b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/growth-status-table.md",
+      "bytes": 2062,
+      "sha256": "db304bc476444000da28508c275f1c0976df5d7732f3a5d11255b1abcff996ce",
+      "git_blob": "39a96ecb6c53228fa87af908eb0dc49be3a8d2d6"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/harness-before-wsl-large-budget.json",
+      "bytes": 5523,
+      "sha256": "ef7956dd0ed0c7ae1212b0b3e5d135f57d9e34c83ccd554f60a8f11b2056b3a2",
+      "git_blob": "fec8f0017b10778513b4a8e947613058176ee630"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/harness-before-wsl-large-budget.zip",
+      "bytes": 20873,
+      "sha256": "9ddf5883641b7097e82ba39d45bacae69680d6cfd763ea3084fc60f4bf5940bf",
+      "git_blob": "cc9d1db00ef9f13edd4dc66e3bd678d8f34fa366"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/host-before.json",
+      "bytes": 86,
+      "sha256": "143a66984297c8c0c62d5138639c6f61a21764545f6745366961446f6879fd3d",
+      "git_blob": "c77f87eba0483f078288eda4c0a39a45b35edc60"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/lookup-table.md",
+      "bytes": 5797,
+      "sha256": "26221f760c34a185a7e917e2a33be82997c330cd396bc90d709b50a673496015",
+      "git_blob": "a413cb0e3bd884ca223e91f3b77a941720120c2d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/old-100k-progress-inspection.json",
+      "bytes": 567,
+      "sha256": "b6ddb5d0e7b294f50972b7565fccba00f2e79152764726c27d9309a65f9ec65c",
+      "git_blob": "c7b207a7e12aa35ca74602ccbe7e1f34a0d0b303"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/operation-table.md",
+      "bytes": 3309,
+      "sha256": "92f9eabcd39cfde9a0779faceed5f22cbb0c63285ffea9e143389b949d70b76a",
+      "git_blob": "b4cab3d2f949834dd0705de834e6547b3c2ecc2d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/pins-development-v2.json",
+      "bytes": 4370,
+      "sha256": "ef9c69cc89a15acf8ee7fef9bb4206aa9f03420053c0787f17993ba32f253377",
+      "git_blob": "b8d794c343eeae44f55ec8784fd6578b8e352140"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/pins-development-v3.json",
+      "bytes": 6042,
+      "sha256": "559aa12278dd1c1dc68329a840e9b55abef77721c013d792e7a04beadb02a3e7",
+      "git_blob": "0b61a61e41eb3f2a37165e4f61975cb04a4d6456"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/pins.json",
+      "bytes": 8190,
+      "sha256": "22f00efb6ff1f4a5662b49676f43bde1dbf740a9fd550dd0c9a836038462440c",
+      "git_blob": "2c8bdfcabfb3ddd597bb3e892048f9a324a29244"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/platform.json",
+      "bytes": 429,
+      "sha256": "de32ac897fe23b2f4ff06f3bdc52125cab820512575595c3290ea8f8b30dfc4a",
+      "git_blob": "2e5e5a4948572fddead8c181d32daed42589efa5"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/powershell-final-v4-cow-A.txt",
+      "bytes": 5874,
+      "sha256": "fd11df15a9aa71bdf772971cf409a9153802e56bb44c74bc14f04a533569a0f0",
+      "git_blob": "385a2c1519a211ef70d9bff6ea9a66cce0554350"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/powershell-final-v4-cow-B.txt",
+      "bytes": 5863,
+      "sha256": "33d37d716c2de16a14e81002ba916119d50cca0c05e6a15f43a344609fbd5429",
+      "git_blob": "95c88668bb74b1ccf74ce981a557466057775072"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/powershell-final-v4-manifest-A.txt",
+      "bytes": 5870,
+      "sha256": "02109b573ce4d9f5711eb966ef2e34528f75fc556b6ee0ad436056110f3a951c",
+      "git_blob": "3fa978b100dff38d256c4c001ef00fb61a49e73e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/powershell-final-v4-manifest-B.txt",
+      "bytes": 5859,
+      "sha256": "597e7d47753709162f69dbd61a9a7bbc22937dc272b0b5b458526560eec7129c",
+      "git_blob": "d63923f0de0f3548ac231c51087fb9621518427e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/powershell-walkthrough-A.txt",
+      "bytes": 5862,
+      "sha256": "59767eee620c88bb49526195d6b3c879bd5f937db1cadef794d10cc0ac9d8680",
+      "git_blob": "0f65dffc06bd3dd48e0618e511ee4d1e42b19116"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/powershell-walkthrough-B.txt",
+      "bytes": 5851,
+      "sha256": "dfed32d3a16cb33733d3c67d069dccd0ee7318647eb3888360b7b28f4dbfbc14",
+      "git_blob": "aa4ed55739c14f4a021a56700c9d4a9064de384b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/process-latency-table.md",
+      "bytes": 8657,
+      "sha256": "f65867c79310eee5854072e1645c1688edfc19a60ad30717fc6c6415fbdb4819",
+      "git_blob": "eecb632fa9ae3cdc8419182650f849f637ba7ac4"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/process-lookup-table.md",
+      "bytes": 4352,
+      "sha256": "8efb7a376d6968ff895817de91fb97036d57158366a90bd6d6bc79a14cb8e2b6",
+      "git_blob": "04c9361003db46b6c83be4c22c9498221e0829ea"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/profile.jsonl",
+      "bytes": 256428,
+      "sha256": "18e356b308a24f68c5d414249ef84347d02998635ed53a2ca14d5715ec027301",
+      "git_blob": "65b034b1fa8d4f109282dc790bc950ea1433de61"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/resource-final.json",
+      "bytes": 1217,
+      "sha256": "7a92b8db5bfb8357fbf804672901f0ff90794a76f2081dd22295bb087c91d329",
+      "git_blob": "b895ce14e56b43a008f79cb60a7cc9601098b4a9"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/resource-windows-after.json",
+      "bytes": 1368,
+      "sha256": "5471b5795ef53b4ab8689f9673619d93c46f02a271e3d5db773a01f70085262d",
+      "git_blob": "2b86f92937e2cb8575d6a9bf5618bf13d136e7e7"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/resource-wsl-after.json",
+      "bytes": 539,
+      "sha256": "05480b82d531732b428cd593eb095cc288e17fc48c1c3a936cb17db17aa58eca",
+      "git_blob": "a97aba2f912d626874a47930ba4487dacba09a2e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/source-development-v3.zip",
+      "bytes": 29519,
+      "sha256": "9fdd337f2a9eb87d41ed9d4d47cbef539717a08a392d7f937b1f3ad04079a5ec",
+      "git_blob": "b616cd2f7d2613c6f46eb8616d2d1d08c682e47c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/storage-table.md",
+      "bytes": 4311,
+      "sha256": "7d953e983b14835893299ec07363a414fcfb6ad3a49a06798760cb31e1b43d36",
+      "git_blob": "98349d8a83e04a110f4b61132cbeb34655f749fc"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/table-shape-check.json",
+      "bytes": 751,
+      "sha256": "05a653e08c2dda0c2f7d074baf547ee1011bd1d86cfc329aec77e0f3af6e7793",
+      "git_blob": "1d4a3d296cd03be3b4e8fb045af5462d6510976e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/verification.json",
+      "bytes": 7072,
+      "sha256": "8a1810db3218cf87de0b0f20cd34a1cd07e412ddc6373e6b11a8962b5bb488b2",
+      "git_blob": "baefd528faa04f6f0b2166b89fe38c38ec7ca5e8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/vhdx-allocation-before-growth.json",
+      "bytes": 287,
+      "sha256": "1822dca943f7878e6e881524ddb882fb16a95d4eddc799795f9c96ff3f06583c",
+      "git_blob": "31ef31e8f1f9f5ec635eec101e1d07fcabe8293e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/vhdx-before.json",
+      "bytes": 139,
+      "sha256": "282a107786c8b6a445768c68ef29461160b91c81ca9d11cff7909f326edd942d",
+      "git_blob": "83fef461ef35300da68258f0f20762ba17ce153e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-100k-B-verification-process.jsonl",
+      "bytes": 624,
+      "sha256": "a4972dc1ced0438d469bda07e7d33f34d7bc6708a9e90d68044129f3ecd81ca3",
+      "git_blob": "1e332e165c71b80b828e5abc86b609a3679eca02"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/accounting.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/cow--harness-session-1792281962147066200.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/cow--restoration-observations.json",
+      "bytes": 2401,
+      "sha256": "1f1f056699ed96e9c33e264e044a9b7f4fec974598a013ccb25a551e2fa644fa",
+      "git_blob": "f6f1c93d9b1d707cf4366304800fb5d25e2e5366"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/cow--restoration-raw.jsonl.gz",
+      "bytes": 8196,
+      "sha256": "ff6637e32b22b78c248820c92c12de1a346ab978579d2619335e6c0db694183e",
+      "git_blob": "b89be4e0370eb37368c7711c041dadc44b3952ad"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/cow-extra--harness-session-1792281962144989200.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/cow-extra--indirect-gc-observations.json",
+      "bytes": 1715,
+      "sha256": "6fb12fa5d005b37a422ec784228392cd750adf7f314d3f1d224a38179f9923bd",
+      "git_blob": "8ac52ddf86ad3579342d234aac5ef07e989db822"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/cow-extra--indirect-gc-raw.jsonl.gz",
+      "bytes": 6094,
+      "sha256": "850e25e57d014ed1d2758e0a3eb85b3840e57469b7a21df47c0bf52821a0acc3",
+      "git_blob": "5cb167411fa08a579a002fbd2fd7fa742c593193"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/manifest--harness-session-1792281962147066200.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/manifest--restoration-observations.json",
+      "bytes": 2413,
+      "sha256": "8c3026de44b11e80435b38ce0d2827704dc026feee4f127ce7794e51461bd1b7",
+      "git_blob": "bf0c25bb0130945e13b0afe1b919094131b6d8c0"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/manifest--restoration-raw.jsonl.gz",
+      "bytes": 8134,
+      "sha256": "dea940f0c604c46588b762f9cf830bcca93e7390c29be639dce99314e103d47d",
+      "git_blob": "ffd427c54270871e2660cde5c5033f929b213406"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/observations-index.json",
+      "bytes": 306,
+      "sha256": "e6fe2ff2822576c87949f2412960e9a77ba298c2d9a3fcdb9605bcd8ed7edcea",
+      "git_blob": "c366263db1bf44197f40a361da1254bf7bff95fa"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/operations.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/points.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows-supplement/raw-index.json",
+      "bytes": 981,
+      "sha256": "846c159f1a47c2406f34bd87267b42632a15b194da51f3fdb9cf2c9046ba425f",
+      "git_blob": "1ec4120025e578a120b74a663e43d28af137e84b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/accounting.json",
+      "bytes": 358083,
+      "sha256": "62491f11669e8e7b876f02a75c3f54e32a06ef660e5680de9c7abe8d37cf9144",
+      "git_blob": "b74e272af9c9b3ba852f8839a5c3c475495a62f4"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/base--execution-completed.json",
+      "bytes": 73,
+      "sha256": "3db4b17d7cdde28df696f7ff74a08be67461e20d760834d4680944f462ee9a31",
+      "git_blob": "67daabc7096ce53a930cda19fc96701cbdd64211"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/base--retained-probe-observations.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "git_blob": "60b0742537a340e24cd759907e52a344943fb386"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--contention-observations.json",
+      "bytes": 64008,
+      "sha256": "f5818466560bca6851bb09f27ee5de446198a0a99a14058b3153831e0d821281",
+      "git_blob": "b6373a9ce6ead5bfcb3a4a9f79136be28af8bac8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--contention-raw.jsonl.gz",
+      "bytes": 35281,
+      "sha256": "93d84b72f02177639bac65da996229e90708bc3f25330bb1503ea048e90139c0",
+      "git_blob": "ca39ff83897122b271b257b853a6f607a09aec70"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--damaged-view-observations.json",
+      "bytes": 739,
+      "sha256": "d3e7b5e4733f967d9f9ec20ef58007706ef03a7936496f449cb15c6fa0a82cdd",
+      "git_blob": "e301b022434d6aff76c23680b419cf3447fe259f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--duplicate-delete-observations.json",
+      "bytes": 886,
+      "sha256": "3da3ed5b681320e2ecaacb5cb9d973a6c9e4aae969b701933203ba67643af8c2",
+      "git_blob": "3bca34f5816961831150c37ec1c4849f81120f58"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--extended-fault-observations.json",
+      "bytes": 4805,
+      "sha256": "3313c0dc01d3ce3db2f5abdb5fab31b43a26570f09d4b3ef5a2240b6e66d08f5",
+      "git_blob": "7f0b0bfc37b785e6b5b1074d83b2f9c6f2ca35fd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--growth-observations.json",
+      "bytes": 10842,
+      "sha256": "dfce612a58f7de186f2ee154972489ecc5ea5dcfd381c048a80d6fc9681c3e69",
+      "git_blob": "5604cd086d359ec30bff6fa321ed77f701cc1524"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--growth-raw.jsonl.gz",
+      "bytes": 1081201,
+      "sha256": "ecad11e79423e4a62eb5733f52d27fa2054d7dbf2526d6b1609c40ee7175f198",
+      "git_blob": "453d23e7f3beec969d738c267237e8c3a7094442"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--harness-session-1792273353714013900.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--harness-session-1792273457510894100.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--harness-session-1792273476967975600.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--harness-session-1792273685173253600.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--harness-session-1792273774620344700.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--harness-session-1792274407731001000.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--harness-session-1792274643331685000.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--harness-session-1792278700859000600.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--harness-session-1792280254929768700.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--io-observations.json",
+      "bytes": 350,
+      "sha256": "63bb850f1843ea0e2917d0236770741935a9a945009fbb4e43f49d642af8d155",
+      "git_blob": "f1bf53ac849486ebfa709c78143cd52016400a75"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--navigation-raw.jsonl.gz",
+      "bytes": 2298,
+      "sha256": "e4ad11d32844ba18e7319c73bba49f219f46546fc8bc50cf9fa64677f40ebcfb",
+      "git_blob": "656fefc2aad54edd37e0136960f55ac6fb2db64e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--orphan-read-observations.json",
+      "bytes": 237,
+      "sha256": "5133380b6d84c84f3b31c42e0d17112417266357428b6272b688e70b1669c477",
+      "git_blob": "08767c75f7bcb1a3ee54f63c7099ee7268529b66"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--regressions-completed.json",
+      "bytes": 137,
+      "sha256": "6d904600fc9f6cc5ef17ccdf6deb1b9000fc540089c6680f65f74e222e4b3954",
+      "git_blob": "eeb7195bc11848aba7ef8d3c3205f39a0c6493a7"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--regressions-raw.jsonl.gz",
+      "bytes": 45678,
+      "sha256": "c92c4ee62d494ef642e9dde54d4742a24afb0ede5676873110aef30245d62c44",
+      "git_blob": "660c9c43fc2de667aa05abde3581dab81a91e813"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow--retention-observations.json",
+      "bytes": 9544,
+      "sha256": "35ccd7cd72be61ec86196dad61bc5c27f8a01817b0f787d0453c30497aba8787",
+      "git_blob": "c173d4c30b56c9491b46ee3e9ac4fa066edc8f36"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow-extra--backend-checks-raw.jsonl.gz",
+      "bytes": 29669,
+      "sha256": "9ab759f277db7d579d9ab4c633d401df1b8342e668fcd0796f07cf3c04c27d53",
+      "git_blob": "9ea2ffd2883e7b837cccd8b0cdec262f20ae186b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow-extra--backend-observations.json",
+      "bytes": 2795,
+      "sha256": "2b7e65a8dcfcda83cc75b9b927eefe0d59e846b42c52bee244e7d91f1d67c3a5",
+      "git_blob": "0970a1b7fc0d406ee40fafda2e87e8a9026485c9"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/cow-extra--harness-session-1792281948324302700.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/execution.jsonl.gz",
+      "bytes": 682,
+      "sha256": "3cab961ef130a243052ba665ad348c143cf757b44931af31d62d029134ee8982",
+      "git_blob": "3de5295e4defc7023ece4c1f71f5cd29c9df0479"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--contention-observations.json",
+      "bytes": 63521,
+      "sha256": "551a42c1060ec9b0cd81c47e4276a082c7ca964ffe0be71810d9665da8f1b7b5",
+      "git_blob": "a039578a81f8892ecda8a96fabeb4254b1d40ff1"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--contention-raw.jsonl.gz",
+      "bytes": 34496,
+      "sha256": "a2e55701525cf686179e7c75a138bf77a947c176f1118501a3fa7f0688e346a9",
+      "git_blob": "f3c74627f50cd4e19728a0badf0df7b6b1f1d3a3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--damaged-view-observations.json",
+      "bytes": 754,
+      "sha256": "55926dea6a9f16c6088e188c4f66dd57747ca1d11a4098c9b1d0c9574305503f",
+      "git_blob": "8b32b348277bc80bb91c541a1a4308531dc1c0ff"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--duplicate-delete-observations.json",
+      "bytes": 886,
+      "sha256": "16bc83f6c4f2f1d2bca510d24b717ec89059f3fa7d2cd706e526863277c416ed",
+      "git_blob": "a3a4b11e981fe95ec553b9ac41f8ec1a7d69429b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--extended-fault-observations.json",
+      "bytes": 3187,
+      "sha256": "812f35ba5341f6362ad777f03356143b7b17e12b15ebc0ba802c38ae285467d5",
+      "git_blob": "f780972094eb0a6731ae3711a7dfa7ba1f419e49"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--growth-observations.json",
+      "bytes": 9884,
+      "sha256": "23428a495f94fc4c8e1e37a68f23ffdf9f59b854f4a63ee231f336eafd0d4c90",
+      "git_blob": "65905a075c73fd4bd167d7a37f2bbcd499ef9c8b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--growth-raw.jsonl.gz",
+      "bytes": 1079889,
+      "sha256": "8c33093608a8c64412b5488faa0888a02db6d0db269888e4940dc4a05be0313b",
+      "git_blob": "faf02727ebca5b6de3cc2172630fb72ac467052c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--harness-session-1792273334305536800.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--harness-session-1792273436475331800.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--harness-session-1792273456043003000.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--harness-session-1792273477662449900.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--harness-session-1792273562545375000.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--harness-session-1792273905928207600.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--harness-session-1792274123092200200.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--harness-session-1792274941511539600.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--harness-session-1792276563421407800.json",
+      "bytes": 564,
+      "sha256": "a90b9f1baded356ca379812b36e0a47bf46ab14aa74835a616164cf2ae36d918",
+      "git_blob": "04b69e6685ece1caaa539afd7f5d4de5f0c82e5f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--io-observations.json",
+      "bytes": 355,
+      "sha256": "b136f0c839638f9bc423ec710cfb7bdd7e41f35a912657f6b7e5e9e7f11c30d9",
+      "git_blob": "74cd9a20771ba864de189a67f25740f2586cf3f5"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--navigation-raw.jsonl.gz",
+      "bytes": 2304,
+      "sha256": "b734ea3860f7bd426a84eac7c522bd4efe823d3dc4f52f579fa8cf8e2128ddf7",
+      "git_blob": "ac48fa5e4622cd6298de57defc14d13795302747"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--orphan-read-observations.json",
+      "bytes": 237,
+      "sha256": "eff1eeacf07aedfb37637eedfe0db3bca5dd6cb88babb2098fc22b82efda4be6",
+      "git_blob": "08a63ae63dff99a54cc7a16f05da6cdbb2b63ea3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--regressions-completed.json",
+      "bytes": 142,
+      "sha256": "01c62c6a5834a8220bb56e64c7b8baf3c9aa1aa3080516b0d75b0cf2d85b64e2",
+      "git_blob": "a49db05d022cf84f5762502f0a967e2667b33301"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--regressions-raw.jsonl.gz",
+      "bytes": 36344,
+      "sha256": "90e6fb1b14156a2a89d0906489d17b59304111c6eaf680661528a768ad98b233",
+      "git_blob": "a41c4284d9feb8de2841b5f7e86e85ebb6474b7c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/manifest--retention-observations.json",
+      "bytes": 9205,
+      "sha256": "dc1152cbffc9c14a89255eca18f2504ad08fe9945f24e4488d07b3e721f6e82c",
+      "git_blob": "421120afb0b2bd79c986c5cea50b932b1d248581"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/namespace-progress-cow-10000-A-1792274407651524300.jsonl.gz",
+      "bytes": 997,
+      "sha256": "4f00eae4f5574d026cc1d9451d201d100be4b04ae8ce5066009d45ad42fc1522",
+      "git_blob": "319effb6ad01b004bb8e6506ff9dd081c871de05"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/namespace-progress-cow-10000-B-1792274643254506200.jsonl.gz",
+      "bytes": 1281,
+      "sha256": "4107ab26fc0ec959419fc1fdd49ddc284eaafe020e747fa4307c5168a2ee195a",
+      "git_blob": "ffeb7845b87c0f2561d86d3a22c61fa40453d350"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/namespace-progress-cow-100000-A-1792278700770093800.jsonl.gz",
+      "bytes": 3250,
+      "sha256": "534ba927fa0ca580298012f08a18f2493a54665898991f9fe8248f36d700106b",
+      "git_blob": "55fe5a48fba5953fc5f2445025d89f32494eb201"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/namespace-progress-cow-100000-B-1792280254845224900.jsonl.gz",
+      "bytes": 3469,
+      "sha256": "36a3d822d1175ca3609125d39a7d9bf9f4edb0d7f9b813b7ea574be733bceb15",
+      "git_blob": "0ba87c1245519f6007aa1314d0f989c2cdd4c39e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/namespace-progress-manifest-10000-A-1792273905851854000.jsonl.gz",
+      "bytes": 934,
+      "sha256": "760aaa97d9c414b9600f291825a566ffdf5e325485558e09c6a6d01f4f6cbed6",
+      "git_blob": "a870a3be66c42b3232782cfdb8573d6dc6054408"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/namespace-progress-manifest-10000-B-1792274123011533800.jsonl.gz",
+      "bytes": 1226,
+      "sha256": "f413d18ede73c283efb3265a2827c5245155379671dab2b397ec7bd97a28f673",
+      "git_blob": "43bc26ac161def7f1ac1b65331c9981e69ad0f23"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/namespace-progress-manifest-100000-A-1792274941437997400.jsonl.gz",
+      "bytes": 3413,
+      "sha256": "df27c8f146928594463e9008c1d3c0bbd46480b307c68beb1a4d520f6d678df1",
+      "git_blob": "db6f1256d0fea2049539f55d1e66d510ea3dcea2"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/namespace-progress-manifest-100000-B-1792276563345648900.jsonl.gz",
+      "bytes": 4339,
+      "sha256": "c3b731745b83ee89932a950e89ca195b3a4aa03b8748c69f0540287b0682a630",
+      "git_blob": "673b6f812f5205233d3ac51c55f077f0b65b6de5"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/observations-index.json",
+      "bytes": 1930,
+      "sha256": "afe82a840a5ab90a2ce19eb1369bbc380d82ef95772eb0e4a74604c1799fcbc3",
+      "git_blob": "4011d0e96a7347bc6c11342708e1afcbf46e49c3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/operations.json",
+      "bytes": 309441,
+      "sha256": "eff2d2660c51113547bcfa1d8ad24995d659389bd71ea514c86ba17bf49976d4",
+      "git_blob": "aebcd3780c9a54a55cd4045942f77673e64f6a87"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/points.json",
+      "bytes": 115751,
+      "sha256": "f87a308b8cfa91733e8c554b83b7c4d51b576fb46485ae1d961022f5d1b99368",
+      "git_blob": "dd63720f8e46b104969ca55512501d428922442c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/windows/raw-index.json",
+      "bytes": 6290,
+      "sha256": "4da4e123340c4ee650e48b806955e4fbfaaf9003ef6a551a8e4ab2c8105196f0",
+      "git_blob": "eb00fe826a7e95a923eab6c590367a27589c428a"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/accounting.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/cow--harness-session-1792297419291799879.json",
+      "bytes": 554,
+      "sha256": "a4b6bceba85d134d9dd92a3c05081c7b95c37257bd7ee38a7401e905c4742cfd",
+      "git_blob": "2e8541af2eab82a4143a9726060c2b1c21755fbd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/cow--restoration-observations.json",
+      "bytes": 2331,
+      "sha256": "66d4416f363ec0b20cd9828d8e8a1d504f0654d96fd7543752dc84419052cc5c",
+      "git_blob": "a727499b3eab8229ea6df7a11596e1ef1c2f5a44"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/cow--restoration-raw.jsonl.gz",
+      "bytes": 29023,
+      "sha256": "a09c857d58c3fb7fb121d5402035f4fbba0809c902c3875a5b0c3c3aee9d691e",
+      "git_blob": "d2b467685ef52e127e90001d66a9f27918051729"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/cow-extra--harness-session-1792297419781572225.json",
+      "bytes": 554,
+      "sha256": "a4b6bceba85d134d9dd92a3c05081c7b95c37257bd7ee38a7401e905c4742cfd",
+      "git_blob": "2e8541af2eab82a4143a9726060c2b1c21755fbd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/cow-extra--indirect-gc-observations.json",
+      "bytes": 1669,
+      "sha256": "4d33c94686ad4b91433c331a875f77f99e129be010e1efeddaff2cfbd61f9034",
+      "git_blob": "1cce307c7d0a7dba5e8e286279f2bda4869a4694"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/cow-extra--indirect-gc-raw.jsonl.gz",
+      "bytes": 18452,
+      "sha256": "03b7b25236e98628062e8e1493a9c45be8be51b1578a1ab7cf99037252de02f2",
+      "git_blob": "c85f28d6296c415b92f9b63fd7560cb8578061e9"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/manifest--harness-session-1792297417767509571.json",
+      "bytes": 554,
+      "sha256": "a4b6bceba85d134d9dd92a3c05081c7b95c37257bd7ee38a7401e905c4742cfd",
+      "git_blob": "2e8541af2eab82a4143a9726060c2b1c21755fbd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/manifest--restoration-observations.json",
+      "bytes": 2343,
+      "sha256": "194c34b862c61b5451160ea935c607b879b02579173a9babcec804af9dabc52f",
+      "git_blob": "a33536de2f7f52749a4b4368be0c4f3a5fc76303"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/manifest--restoration-raw.jsonl.gz",
+      "bytes": 29459,
+      "sha256": "f13f03dd92c39dda588bf2ec476a51bc969ebd3a3dc3ce9e7e8c58fe8542266c",
+      "git_blob": "266a44cb46b06401f473d0d0f114c50eac308d9b"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/observations-index.json",
+      "bytes": 298,
+      "sha256": "239c94f1e16d6c3d18fd7e0f25b9ed71981704173996e378187e5e1c6fc16b79",
+      "git_blob": "ae38566272d4860ad85a1322080154bb0e252dbd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/operations.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/points.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "git_blob": "fe51488c7066f6687ef680d6bfaa4f7768ef205c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl-supplement/raw-index.json",
+      "bytes": 958,
+      "sha256": "03313a2f9fe6de5c893db9a8eb81a7c6c381d29f2962305aa58eb686ccc3be96",
+      "git_blob": "d54e44b3ba10dc1836f277f575c676399d8f3d37"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/accounting.json",
+      "bytes": 346999,
+      "sha256": "556e3a9aa66e47218a6e3aaa7d69d2ad4e70868827697ee75911c27a1c6810c6",
+      "git_blob": "6136a8dd2cdf4787fddfbdf6081e85a9573ba74f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/base--continuation-observations.json",
+      "bytes": 3387,
+      "sha256": "ca1735556ed9258407dab17f42fece3596ab791994f1ff2668a6631ab2276631",
+      "git_blob": "43e676db50f9be6091c1174cd444b4d6c9b3dd1d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/base--execution-completed.json",
+      "bytes": 418,
+      "sha256": "fe9587721edf0a8e880fed946f9dacb7878d092f23fc76b344a0491485d8b7f7",
+      "git_blob": "26c614fec7f79c0d3df20ac570df831e15e7466c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/base--failed-phases.json",
+      "bytes": 308,
+      "sha256": "bba52a574363d4cce555f788d6ff8cadb1417215c19e22641194d9b420800a76",
+      "git_blob": "9447b0af439a34d38d03aed697dad1493a1757f3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/base--retained-probe-observations.json",
+      "bytes": 1053,
+      "sha256": "6ca19049e37336ce93dd3ed03d9e7002c28f4da64461e5b7de4707c942fbd64a",
+      "git_blob": "2a502e57cf97e003ec8ecd9303816f9c896f7956"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--cap-diagnosis-observations.json",
+      "bytes": 5003979,
+      "sha256": "7d98222395cfb0e41b868333e9afd823752648a2ce768f1ce661b5595941a3c5",
+      "git_blob": "d9e4a4bc1053bbba4d8a98c39106b655c982a4d7"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--cap-diagnosis-raw.jsonl.gz",
+      "bytes": 1444451,
+      "sha256": "97607c2912d4ece7a496b69cc62ca21337331e053d3c080281eef8b191431951",
+      "git_blob": "b7faca0c53033df454a0f226a5829140983e6793"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--contention-observations.json",
+      "bytes": 61026,
+      "sha256": "e51054625a9dfd2943ee825567c77d9a827f144116672fcf83f2610fa58a6dec",
+      "git_blob": "7c928d73fbbc707749b35781be6abe6d7079d053"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--contention-raw.jsonl.gz",
+      "bytes": 37254,
+      "sha256": "abe821ba8aaf68bef9a987fdd349b208a5462e23288b23fbb8ee3c985e27bc70",
+      "git_blob": "141033760c509ac780c06fd538cca8dfc6ee4d5d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--continuation-observations.json",
+      "bytes": 1691,
+      "sha256": "dff52131604f670bc3d93d45912466c438dfcd42d06cdc049d56c940e36db252",
+      "git_blob": "335b86bcc0218fe7e017b90984b53da7f8c2f7dc"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--damaged-view-observations.json",
+      "bytes": 736,
+      "sha256": "1e3230143f76f9681c868696fef93cc6faaa7184d2da48ab7e3ab7d215d6f7fc",
+      "git_blob": "e0f0a4a3151660085ef0e7767a79f0dbb082f03a"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--duplicate-delete-observations.json",
+      "bytes": 854,
+      "sha256": "78db4cce829ed62950f0afe9adeef072447228947aefd23fdbb151eddb4ac633",
+      "git_blob": "dd0649bafdb0a52014aa04e9ce11b5f9eb4fec2a"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--extended-fault-observations.json",
+      "bytes": 4645,
+      "sha256": "dae01537b07464669f77735242fd7062c85fc4149b15dc2b6eb4f766c0689acd",
+      "git_blob": "c1b7413f8c05d1698f63e5d295d0e8815496133e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--growth-observations.json",
+      "bytes": 9059,
+      "sha256": "4af7f494f651835e74824f8adeb6176307d61516fb76d9ba41480408c39e8aee",
+      "git_blob": "6c85924b34fa1c0ecf8010a038983dce3dffb0bf"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--growth-raw.jsonl.gz",
+      "bytes": 2575130,
+      "sha256": "0c5cf3d8997f5e4ec2cd5108bacc057a995c5e421fd7b663d798f052aaf531cd",
+      "git_blob": "0b6c4dfb2e481602a23a56d1289913fdf3020608"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--growth-stopped.json",
+      "bytes": 1928,
+      "sha256": "bac42dc8b4e9cf647d6ff67c43d7d2ff2ed73fca64ae1f8a530c485d67c81d53",
+      "git_blob": "a5ce513f98d0feba827f060663a84fc535228c41"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--harness-session-1792273363850770411.json",
+      "bytes": 554,
+      "sha256": "200cfa17aba6dc5eb7c6d8299fe324ad80a1341c7dbc3c1c428e0437a607a8a5",
+      "git_blob": "34810c21b68092bf65382c7aab21c0239efb6ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--harness-session-1792282077337336893.json",
+      "bytes": 554,
+      "sha256": "200cfa17aba6dc5eb7c6d8299fe324ad80a1341c7dbc3c1c428e0437a607a8a5",
+      "git_blob": "34810c21b68092bf65382c7aab21c0239efb6ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--harness-session-1792282103070130478.json",
+      "bytes": 554,
+      "sha256": "200cfa17aba6dc5eb7c6d8299fe324ad80a1341c7dbc3c1c428e0437a607a8a5",
+      "git_blob": "34810c21b68092bf65382c7aab21c0239efb6ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--harness-session-1792282214782130271.json",
+      "bytes": 554,
+      "sha256": "200cfa17aba6dc5eb7c6d8299fe324ad80a1341c7dbc3c1c428e0437a607a8a5",
+      "git_blob": "34810c21b68092bf65382c7aab21c0239efb6ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--harness-session-1792282264085003447.json",
+      "bytes": 554,
+      "sha256": "200cfa17aba6dc5eb7c6d8299fe324ad80a1341c7dbc3c1c428e0437a607a8a5",
+      "git_blob": "34810c21b68092bf65382c7aab21c0239efb6ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--harness-session-1792283344251813071.json",
+      "bytes": 554,
+      "sha256": "254370d3976d7a4730add4efb39759a2856326cb9f9607ccb72bffb12ab6fa44",
+      "git_blob": "d0cc18f1b8d53a4d3d8e7a64c41b84bf24bcce84"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--harness-session-1792283552821921481.json",
+      "bytes": 554,
+      "sha256": "254370d3976d7a4730add4efb39759a2856326cb9f9607ccb72bffb12ab6fa44",
+      "git_blob": "d0cc18f1b8d53a4d3d8e7a64c41b84bf24bcce84"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--harness-session-1792290072351412850.json",
+      "bytes": 554,
+      "sha256": "254370d3976d7a4730add4efb39759a2856326cb9f9607ccb72bffb12ab6fa44",
+      "git_blob": "d0cc18f1b8d53a4d3d8e7a64c41b84bf24bcce84"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--harness-session-1792292394083724149.json",
+      "bytes": 554,
+      "sha256": "254370d3976d7a4730add4efb39759a2856326cb9f9607ccb72bffb12ab6fa44",
+      "git_blob": "d0cc18f1b8d53a4d3d8e7a64c41b84bf24bcce84"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--harness-session-1792296180115062380.json",
+      "bytes": 554,
+      "sha256": "a4b6bceba85d134d9dd92a3c05081c7b95c37257bd7ee38a7401e905c4742cfd",
+      "git_blob": "2e8541af2eab82a4143a9726060c2b1c21755fbd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--harness-session-1792296790610202680.json",
+      "bytes": 554,
+      "sha256": "a4b6bceba85d134d9dd92a3c05081c7b95c37257bd7ee38a7401e905c4742cfd",
+      "git_blob": "2e8541af2eab82a4143a9726060c2b1c21755fbd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--harness-session-1792297383517463628.json",
+      "bytes": 554,
+      "sha256": "a4b6bceba85d134d9dd92a3c05081c7b95c37257bd7ee38a7401e905c4742cfd",
+      "git_blob": "2e8541af2eab82a4143a9726060c2b1c21755fbd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--io-observations.json",
+      "bytes": 348,
+      "sha256": "4d22e5b6835667e70c34e24e09c62576ef73f9c487dc98484338d5c525c7eee6",
+      "git_blob": "af74d011f8af8d2bf04edffe53df608bb19f7f5e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--navigation-raw.jsonl.gz",
+      "bytes": 2399,
+      "sha256": "077b1c1595901d5673789ce2040fe8b6f95b8a39ee9f714adfa06ce725d5f373",
+      "git_blob": "6d59f269540564a067c5eaad4beb06fd75e55af7"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--orphan-read-observations.json",
+      "bytes": 225,
+      "sha256": "1b344983b7eba23f36e9094fe4347492efa2ed9b3ddb889915e05e3736bde401",
+      "git_blob": "8dab1b29967497537816aa6ad54e3993722696d0"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--regressions-completed.json",
+      "bytes": 132,
+      "sha256": "4e9c22fa959464595fe728e5d91bade14ece88ef1d2586bc3024482206f64b08",
+      "git_blob": "c83467a032deb44f6af30ed7e0448c4c1c98d979"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--regressions-raw.jsonl.gz",
+      "bytes": 49454,
+      "sha256": "647d0079d709f6e441a2251249fbe3c9cfe2b3ced110ca389c4a744e390cdab0",
+      "git_blob": "8460e38b7d98881f974959fce5c6e5b4a1c25353"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow--retention-observations.json",
+      "bytes": 9161,
+      "sha256": "6374f0fa50d973a796d3e66184bfb7111dde7f8fea7c8e29232953b4d7d9a2eb",
+      "git_blob": "50248ae646a491e9b0d34d288d2450a3c0c605f3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow-extra--backend-checks-raw.jsonl.gz",
+      "bytes": 70045,
+      "sha256": "f0edfa6ecc239f5e18c26233cb3d0723fe49502ff20f8152ab1ff48bc2ead55b",
+      "git_blob": "eba3d5dd10f3870e72e7a003fa9ab0a6fd4430df"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow-extra--backend-observations.json",
+      "bytes": 2742,
+      "sha256": "bd093285b05582844a70f1fbce2a35ea79612eb6b97a7ec96f4e324248a7569f",
+      "git_blob": "263bb8461de94da4046f2666efaf7bc9a87f8da2"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/cow-extra--harness-session-1792297409000052304.json",
+      "bytes": 554,
+      "sha256": "a4b6bceba85d134d9dd92a3c05081c7b95c37257bd7ee38a7401e905c4742cfd",
+      "git_blob": "2e8541af2eab82a4143a9726060c2b1c21755fbd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/execution.jsonl.gz",
+      "bytes": 626,
+      "sha256": "7c39a7d500032f3a6509a3dfb8bbeaedfd8181241ca6e4391bef847628212177",
+      "git_blob": "177c7219f0e19c814cf7832ee66d15ba005da66d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--cap-diagnosis-observations.json",
+      "bytes": 5003981,
+      "sha256": "fc2221c42e17ba036dcb9a3573d34fbe72448426af50b6584f1b923b7a09e372",
+      "git_blob": "31d6ccdfa6c86ad697bfd0ac2b63b0c4bb497ea1"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--cap-diagnosis-raw.jsonl.gz",
+      "bytes": 673428,
+      "sha256": "473056ca392cfd942011c18819966785041b202d0ed3667e27a805e40372b27b",
+      "git_blob": "761d76e055423e367af95e089e2aae486c6c1f90"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--contention-observations.json",
+      "bytes": 60470,
+      "sha256": "ec255225760cb08945a51e5bda714bdd6046486faaa754df46d2bf785b067ecb",
+      "git_blob": "bd7ac2bf4579ae67e576352da6995ab8ed0c8f46"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--contention-raw.jsonl.gz",
+      "bytes": 36130,
+      "sha256": "8b271e9a3c95182725a7ff382cab96cc89c16c287370cdffc871280895893014",
+      "git_blob": "63d504a2396f9bdbde84952f2cdb215020b7ef1f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--continuation-observations.json",
+      "bytes": 1699,
+      "sha256": "b6a598dc65426547a910472c103034e83a9d71df7144da96cd04612671fcee4e",
+      "git_blob": "3150799cf230c4a05835233457695d2af7cbda02"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--damaged-view-observations.json",
+      "bytes": 747,
+      "sha256": "422ecd9b2b6fc4ee6fc4998539fd01528a4b6821858862b7137c410bc23d71b5",
+      "git_blob": "49fd8117a4fa8c6fcf8e0e776cf64d69f97157ed"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--duplicate-delete-observations.json",
+      "bytes": 854,
+      "sha256": "a3505923212b448264e1da7c8eba0a06ef413969f8b2964c5264338e040a51a2",
+      "git_blob": "757d01b7da0f9187807c43f17cdd727f516b74ce"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--extended-fault-observations.json",
+      "bytes": 3111,
+      "sha256": "e12adf2392dac1e5984f7db836420d31f6bd08e705a819ae2f65dc5afd0843ae",
+      "git_blob": "f1243e9b65a4a4b2e4925c679e7e6d6cfb6d8623"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--growth-observations.json",
+      "bytes": 8260,
+      "sha256": "4b1fff1793efce4fe8e2c5cde00b34d48901fa1a4815f7b969f28d6c5bda924c",
+      "git_blob": "a636d0ca13be4b57566cf5da06d8b8ddee8ecbc9"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--growth-raw.jsonl.gz",
+      "bytes": 2574114,
+      "sha256": "c98ec6ab295fc206546dda7ffffe91758b042007267a3abb59ce5e7ad7646562",
+      "git_blob": "11b6b56c217ee8ef8ce349c688beb6b856ce40d0"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--growth-stopped.json",
+      "bytes": 1939,
+      "sha256": "c075dc5a9a20d7f88ba048ce5855ef07cb9197e6389a050efbc0501c633a0cf3",
+      "git_blob": "161354250caa46b15c4c330f6d0e9206f7e2fcf2"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--harness-session-1792273340803933802.json",
+      "bytes": 554,
+      "sha256": "200cfa17aba6dc5eb7c6d8299fe324ad80a1341c7dbc3c1c428e0437a607a8a5",
+      "git_blob": "34810c21b68092bf65382c7aab21c0239efb6ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--harness-session-1792282053247356049.json",
+      "bytes": 554,
+      "sha256": "200cfa17aba6dc5eb7c6d8299fe324ad80a1341c7dbc3c1c428e0437a607a8a5",
+      "git_blob": "34810c21b68092bf65382c7aab21c0239efb6ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--harness-session-1792282076641008001.json",
+      "bytes": 554,
+      "sha256": "200cfa17aba6dc5eb7c6d8299fe324ad80a1341c7dbc3c1c428e0437a607a8a5",
+      "git_blob": "34810c21b68092bf65382c7aab21c0239efb6ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--harness-session-1792282103832876979.json",
+      "bytes": 554,
+      "sha256": "200cfa17aba6dc5eb7c6d8299fe324ad80a1341c7dbc3c1c428e0437a607a8a5",
+      "git_blob": "34810c21b68092bf65382c7aab21c0239efb6ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--harness-session-1792282137737675129.json",
+      "bytes": 554,
+      "sha256": "200cfa17aba6dc5eb7c6d8299fe324ad80a1341c7dbc3c1c428e0437a607a8a5",
+      "git_blob": "34810c21b68092bf65382c7aab21c0239efb6ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--harness-session-1792282344674725144.json",
+      "bytes": 554,
+      "sha256": "200cfa17aba6dc5eb7c6d8299fe324ad80a1341c7dbc3c1c428e0437a607a8a5",
+      "git_blob": "34810c21b68092bf65382c7aab21c0239efb6ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--harness-session-1792282667726286759.json",
+      "bytes": 554,
+      "sha256": "200cfa17aba6dc5eb7c6d8299fe324ad80a1341c7dbc3c1c428e0437a607a8a5",
+      "git_blob": "34810c21b68092bf65382c7aab21c0239efb6ce8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--harness-session-1792284241744393182.json",
+      "bytes": 554,
+      "sha256": "254370d3976d7a4730add4efb39759a2856326cb9f9607ccb72bffb12ab6fa44",
+      "git_blob": "d0cc18f1b8d53a4d3d8e7a64c41b84bf24bcce84"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--harness-session-1792286562752044188.json",
+      "bytes": 554,
+      "sha256": "254370d3976d7a4730add4efb39759a2856326cb9f9607ccb72bffb12ab6fa44",
+      "git_blob": "d0cc18f1b8d53a4d3d8e7a64c41b84bf24bcce84"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--harness-session-1792286715670436740.json",
+      "bytes": 554,
+      "sha256": "254370d3976d7a4730add4efb39759a2856326cb9f9607ccb72bffb12ab6fa44",
+      "git_blob": "d0cc18f1b8d53a4d3d8e7a64c41b84bf24bcce84"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--harness-session-1792296187565975087.json",
+      "bytes": 554,
+      "sha256": "a4b6bceba85d134d9dd92a3c05081c7b95c37257bd7ee38a7401e905c4742cfd",
+      "git_blob": "2e8541af2eab82a4143a9726060c2b1c21755fbd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--harness-session-1792297341083345805.json",
+      "bytes": 554,
+      "sha256": "a4b6bceba85d134d9dd92a3c05081c7b95c37257bd7ee38a7401e905c4742cfd",
+      "git_blob": "2e8541af2eab82a4143a9726060c2b1c21755fbd"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--io-observations.json",
+      "bytes": 353,
+      "sha256": "2b437e52b0de9cd7313a6f15441632388abcf396fb942eeda96df5fe0f9e16f4",
+      "git_blob": "1a5ae414c2d9282316933aa19c95c59fdd5797b2"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--navigation-raw.jsonl.gz",
+      "bytes": 2372,
+      "sha256": "13a2470105abbb59a6a5fd3cfbf5de3501fd482d5cc09fb79407f43d6554e6ac",
+      "git_blob": "a376fc9a4dd23d6ca58d7d2b9c240f70b5316358"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--orphan-read-observations.json",
+      "bytes": 225,
+      "sha256": "362c3f0c4d16c38389f1fb9704ba2d5881929b3c5b60b58cc1f89a48041c58b8",
+      "git_blob": "fcef43df3cea869061168fe60cec34962ff02c09"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--regressions-completed.json",
+      "bytes": 137,
+      "sha256": "3b0be9c2a6a8714334c4eb8bfb7ecec1b9e79e66bfcc32521f97253b59ed482c",
+      "git_blob": "22a6f21add7f1aee59befcbc5d5323155795a713"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--regressions-raw.jsonl.gz",
+      "bytes": 39208,
+      "sha256": "5f890808a571bbc69a260959cc4cf828dcc8470a980b6cc5d59d63d0694903ba",
+      "git_blob": "6ddedc0f0fe5f24cf33bb5fae1be46a6f631d7a4"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/manifest--retention-observations.json",
+      "bytes": 8825,
+      "sha256": "4b33210e51ad90f1351bceeab913fa004aef534ef17a9e9e59f6f3020863ce65",
+      "git_blob": "d313600d4b9d309bf741f66bf2a595b7676462a6"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/namespace-progress-cow-10000-A-1792283344220887959.jsonl.gz",
+      "bytes": 1058,
+      "sha256": "1388ad4e095bb127695deb2d08ba4d8d41a1c5fe69f3c0a3638c855f59f5206d",
+      "git_blob": "a7f2cb98f45846e6bdfed336e63d85e7200678a2"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/namespace-progress-cow-10000-B-1792283552791514315.jsonl.gz",
+      "bytes": 2446,
+      "sha256": "aa0f5a4ab3d2f4db5ed7e19a4eada3eb4c27365004727bf98ceedf17bac54478",
+      "git_blob": "2f1cb50d9de57d7f4a90254d2f2f08203e3735d9"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/namespace-progress-cow-100000-A-1792290072312948225.jsonl.gz",
+      "bytes": 4960,
+      "sha256": "f33db8bef5f30abad18c8897fb072281b8ddf871ea657ac2d464b1a22844d4b8",
+      "git_blob": "4f00872d1485ee303097e8df7157efd8106b8098"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/namespace-progress-cow-100000-B-1792292394052457955.jsonl.gz",
+      "bytes": 7914,
+      "sha256": "e9695773a0af69fe0f57322354a045d210b61be3a554edebfbc6b3941bb5d0e3",
+      "git_blob": "7953aa420ae0a059c1effc9d1cfbcd4106f8c0df"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/namespace-progress-manifest-10000-A-1792282344643496163.jsonl.gz",
+      "bytes": 1252,
+      "sha256": "f7fc41d908eca543108ef4dbf60a63dfac566489962c7db33e6a73f4f5fc0b89",
+      "git_blob": "7e30a7e994e6f7b0ad148ba1d2f67ea8907ebcd9"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/namespace-progress-manifest-10000-B-1792282667697713726.jsonl.gz",
+      "bytes": 2327,
+      "sha256": "420ba22845e3579d25037c065483f847d6f62c49bc69151be70597bbbec47a0c",
+      "git_blob": "7bcb578deb6775e4c69f0d4c5e4db61617a302af"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/namespace-progress-manifest-100000-A-1792284241714263159.jsonl.gz",
+      "bytes": 4939,
+      "sha256": "f23ca004921b25fcddcc2b511f789fb99122a049520511fbb71accfa76d9ede5",
+      "git_blob": "4bd2f9d5e3ab07d2fb28d2f0695726fb650f87c8"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/namespace-progress-manifest-100000-B-1792286562710527953.jsonl.gz",
+      "bytes": 7757,
+      "sha256": "3d1846974b4ab262e3250271261650ce1b523b6a698096c8acdf0d9af931af05",
+      "git_blob": "8002d8159e4035cec030ebb62d786f99eb304745"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/observations-index.json",
+      "bytes": 2522,
+      "sha256": "00787475d3a5f87ff1dc866d7718e55ef54be23f80b2e4ea2adbf30646f4f0bf",
+      "git_blob": "92592e5760178dad84f9f7527fc06f58eca59472"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/operations.json",
+      "bytes": 307846,
+      "sha256": "e7766bc5c28cbcc9cb80b3f7bec2b9bdecc627b54c926ac38b0b3767fd0bb094",
+      "git_blob": "3a11b51f8ceb87757d6bd9e705b20ca6eff56b6c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/points.json",
+      "bytes": 114100,
+      "sha256": "c4b34382bcbdfad4bd3fa2485c35a42ecdeeec6386ab65f0aee3a8878b6626ec",
+      "git_blob": "b4f65fb8695bc5d4196e49c91f5950344481324d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/evidence/wsl/raw-index.json",
+      "bytes": 6788,
+      "sha256": "b8e50c44019eda818344bf8990c09dd628c25dc7ff1be6cf378a680b190295c6",
+      "git_blob": "57cbe6ef8cc892ce749594cdc8e78908e4ec24f3"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/execute.py",
+      "bytes": 2210,
+      "sha256": "2cb6c482324e09c4eb533a091bc057633aa7b1f885d11aaaac39d66cf9afdcb2",
+      "git_blob": "950b90fa3f36d0e57c56863ce17ccd03a99e2514"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/execution-notes.md",
+      "bytes": 9490,
+      "sha256": "f0983242b9bc08ada68ff49002b8ecc8cccddcb57a2bf19bfd5f52569f4a8731",
+      "git_blob": "f54138f4f200be1df4bce479286d38a3d6d4d39e"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/experiment.py",
+      "bytes": 18763,
+      "sha256": "c635af9d496de2d3fe424ae48f284c45a71c0702f9653b43dba82231a8a93439",
+      "git_blob": "87762d72b72ca0c6d2f48b69c2786b9dbf382964"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/extend.py",
+      "bytes": 9267,
+      "sha256": "748559b76976df533a45c803e154e9f48aba6d535224e27bab1d95cfd1b6e559",
+      "git_blob": "c7e306df6b58e0fac923c6858fd676524852bb7c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/indirect_gc.py",
+      "bytes": 2639,
+      "sha256": "d381506d523ab8a00b038096e1da1e39ebbd50d92313b164fa2156f1de7a676e",
+      "git_blob": "7a513ba7c257c118c3361f65f5d958e69e9087ae"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/monitor.py",
+      "bytes": 1234,
+      "sha256": "19883c42bafad8cd83f9bd45ba2dab9d3623802ae1816b78ebcca81f12644574",
+      "git_blob": "5b3a3f9833babcb396a4d0e6074f98a70ec327f1"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/pin.py",
+      "bytes": 2114,
+      "sha256": "4ff882a15ab6e9474ea60f48eba4f2beaf25c6a9af35a5fea0f19293737fe77a",
+      "git_blob": "920bb0aa0a17d62e8a9c60106024c229582c69bc"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/profile.py",
+      "bytes": 1401,
+      "sha256": "e91c80aceefa384ee1e4d76c7a3f42f600321e0d0ec3061331d20698e4188930",
+      "git_blob": "4b957f2685ba07de33e744c38b34bc2b0054d957"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/protocol.md",
+      "bytes": 10584,
+      "sha256": "f89353c00894e4ed5b429c49e11e36647bd2f3a11af3c318cd4b027a5501c471",
+      "git_blob": "23789fdd9a68e75c814232e9dd392c973f2ff495"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/regressions.py",
+      "bytes": 710,
+      "sha256": "71afa67c3cd502aaa47d103a663859eea87f36091448e19b79efd338d57bd72b",
+      "git_blob": "6e5f63d0a19385990b55bb19b699f9d0148b6689"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/reporting_checks.py",
+      "bytes": 6080,
+      "sha256": "987c4aa8d1b5f4836bc5679077409e436f02f37647b72375e14a839ec9d9686a",
+      "git_blob": "7ca88f93231c34542dd029e94f41f77661702adb"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/restoration.py",
+      "bytes": 3518,
+      "sha256": "45c40ca0ed6282592a517a70ca894c94abe17b8c35e5782684b96c1153ed0330",
+      "git_blob": "64e3f2d9df3b698db007758c44ca2f50ca7725ec"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/retained_probe.py",
+      "bytes": 3069,
+      "sha256": "eefd0b9bd0fbb3ff9e9ed948889956f7a16f686dd3c2f9ddaaf394e158d801ab",
+      "git_blob": "ebf063d0ff08bf19d0e47b8de0429f555c6b0c3f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/review.md",
+      "bytes": 6881,
+      "sha256": "a6dc4ed84117ba47ac2c5844a1d2dae11378b40e06ca26b660cab885dc2bce4f",
+      "git_blob": "46fd396d060f89cfc2496c22871efee13d2265e1"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/src/backend.rs",
+      "bytes": 6213,
+      "sha256": "79b6220819a0d9d059a41078c6323e8b83d23452025f8b35ca52a83f3d3bfd6c",
+      "git_blob": "07bd80612f9f928e7fd0bff260b209bb0bbdbe4f"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/src/disk.rs",
+      "bytes": 24532,
+      "sha256": "1ed496b1b1ea5138053128521fcc609a6aaa6f00828c8d75ff604aa4002afdd2",
+      "git_blob": "125463637231bcbf6a9ccfb7fb583f7c730cafa9"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/src/io.rs",
+      "bytes": 9320,
+      "sha256": "fd7453986251426947b28f16fb6497c3fc501a52c867b682e1db04db976e774a",
+      "git_blob": "2f3fd7c0e159c81766265fe27a16080383e2eefa"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/src/lifecycle.rs",
+      "bytes": 7735,
+      "sha256": "30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4",
+      "git_blob": "eeda2efbcd75f20a949049149a1ce108a5108583"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/src/main.rs",
+      "bytes": 33528,
+      "sha256": "8cd6800fb18e1c5f26738f648589287a3d8fb2a217b0f4bd4d6dc17310083d57",
+      "git_blob": "b241e8712d8429ee514783a18e966da8b77d7e6a"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/src/model.rs",
+      "bytes": 8505,
+      "sha256": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10",
+      "git_blob": "5ad068d7de96c0a37441dcf07abe85918ca56457"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/storage_account.py",
+      "bytes": 3815,
+      "sha256": "a5a196e3581485aad5cbe090b8b74e4ed2437a69b61f4789f02c5c871ee86048",
+      "git_blob": "5027d9705dfbbe97239f29256637923d7d0a3c7c"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/tables.py",
+      "bytes": 13342,
+      "sha256": "8cf0d55988e653dd2b111b619b8e38144e5f1f4ca78addf989dbbea199ee9202",
+      "git_blob": "14915d8654ef1748632d0c387d954b040fd60908"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/terminal_copy.py",
+      "bytes": 1399,
+      "sha256": "578271c0067545e0196385c2880ae31a2dbe962fc22b0c08550fa3d2be87e11f",
+      "git_blob": "f62fe675c22bdfd65a3aad3fced5cf018b7d79ae"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/verification.md",
+      "bytes": 11860,
+      "sha256": "7805211d68e338c318ac740249e43f935cf8130e032087dfb7f843fcd89a8047",
+      "git_blob": "5fc2f7f7197a8e661b1e5f4efd72f39cca4b3271"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/verify_evidence.py",
+      "bytes": 10471,
+      "sha256": "48624d5bdc3d33870308d1c18899cd8202468deb130d9bca702344bbf60381b3",
+      "git_blob": "b9bd6b08dcd6c20174b24a0f632930ad566c9eea"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/walkthrough.ps1",
+      "bytes": 2113,
+      "sha256": "00bd42fa7c34549007f6518eb657e6d83a49ca719753bec93cd40a2a4dbc4f3c",
+      "git_blob": "80a9586ca5a3283831b40939a26332cbf39ce42d"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/walkthrough.sh",
+      "bytes": 1403,
+      "sha256": "5225b4046ff7f8c760c309479ff5682b15b86f41549c6a1e803614cb2d828803",
+      "git_blob": "253cf191cc374df24bebcb83bdd7e58830a3af07"
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/workloads.py",
+      "bytes": 11054,
+      "sha256": "9212aa2976c6dc3771ae3b7eef7d6244e60a4ee6df1c63867834d00b3b09f3a9",
+      "git_blob": "ae0683a4110cef3c16e1a981c7285a52f4690cba"
+    }
+  ]
+}

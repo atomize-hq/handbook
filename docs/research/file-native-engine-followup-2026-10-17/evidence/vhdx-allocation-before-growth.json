@@ -1,0 +1,14 @@
+{
+  "files": 2,
+  "directories": 0,
+  "logical_bytes": 550705860951,
+  "allocated_file_bytes": 550705864704,
+  "hardlink_aliases_not_recounted": 0,
+  "buckets": {
+    "other": {
+      "files": 2,
+      "bytes": 550705860951,
+      "allocated_bytes": 550705864704
+    }
+  }
+}

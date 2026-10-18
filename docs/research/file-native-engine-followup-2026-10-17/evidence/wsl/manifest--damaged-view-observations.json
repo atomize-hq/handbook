@@ -1,0 +1,13 @@
+{
+  "selected": {
+    "publication": "publication-985-1792273349411021216-18",
+    "digest": "a44d48973cce11b3a722317bd3861d7df3968630c0d010c79377914543b61cb2"
+  },
+  "preserved": [
+    "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/damaged-view/divergence/preserved-derived-993-1792273349539568048-1/NAVIGATION.md",
+    "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/damaged-view/divergence/preserved-derived-991-1792273349530249096-4/NAVIGATION.md",
+    "/home/spenser/file-native-followup-20261017/data/wsl-final-v4/manifest/damaged-view/divergence/preserved-991-1792273349516243446-1/docs/item-overview-d000000.yaml"
+  ],
+  "rebuild": "render-only",
+  "cross_depth": "integrity:link-escape"
+}

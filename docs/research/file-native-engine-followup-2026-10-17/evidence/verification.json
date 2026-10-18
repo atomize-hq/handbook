@@ -1,0 +1,258 @@
+{
+  "status": "archive-and-pin-consistency-passed",
+  "logs": 61,
+  "records": 16147,
+  "distinct_raw_contents": 60,
+  "records_in_distinct_raw_contents": 13949,
+  "count_qualification": "Archive record totals include duplicate archives; distinct-content totals deduplicate whole identical files only, not cross-file events or test cases. Synthetic transport events are counted separately from real-engine native events.",
+  "final_native_events_associated": 2350,
+  "synthetic_transport_events_associated": 8,
+  "lossless_stdout_events_checked": 161,
+  "helper_observations_associated": 22,
+  "verified": [
+    {
+      "file": "controller-capture-windows/capture-check-raw.jsonl.gz",
+      "records": 4
+    },
+    {
+      "file": "controller-capture-wsl/capture-check-raw.jsonl.gz",
+      "records": 4
+    },
+    {
+      "file": "development-view-gap-v3/proof-raw.jsonl.gz",
+      "records": 3
+    },
+    {
+      "file": "development-windows-cow/correctness-raw.jsonl.gz",
+      "records": 2198
+    },
+    {
+      "file": "development-windows-manifest/correctness-raw.jsonl.gz",
+      "records": 2078
+    },
+    {
+      "file": "development-windows-v2/cow--correctness-raw.jsonl.gz",
+      "records": 2198
+    },
+    {
+      "file": "development-windows-v2/execution.jsonl.gz",
+      "records": 3
+    },
+    {
+      "file": "development-windows-v2/manifest--contention-raw.jsonl.gz",
+      "records": 118
+    },
+    {
+      "file": "development-windows-v2/manifest--growth-raw.jsonl.gz",
+      "records": 110
+    },
+    {
+      "file": "development-windows-v2/manifest--navigation-raw.jsonl.gz",
+      "records": 4
+    },
+    {
+      "file": "development-windows-v2/manifest--regressions-raw.jsonl.gz",
+      "records": 156
+    },
+    {
+      "file": "development-windows-v3/cow--regressions-raw.jsonl.gz",
+      "records": 210
+    },
+    {
+      "file": "development-windows-v3/cow-extra--backend-checks-raw.jsonl.gz",
+      "records": 3
+    },
+    {
+      "file": "development-windows-v3/cow-retention-readers--reader-lifecycle-raw.jsonl.gz",
+      "records": 56
+    },
+    {
+      "file": "development-windows-v3/manifest--regressions-raw.jsonl.gz",
+      "records": 162
+    },
+    {
+      "file": "development-wsl-cow-v3/correctness-raw.jsonl.gz",
+      "records": 2205
+    },
+    {
+      "file": "development-wsl-manifest/correctness-raw.jsonl.gz",
+      "records": 2060
+    },
+    {
+      "file": "windows/cow--contention-raw.jsonl.gz",
+      "records": 118
+    },
+    {
+      "file": "windows/cow--growth-raw.jsonl.gz",
+      "records": 192
+    },
+    {
+      "file": "windows/cow--navigation-raw.jsonl.gz",
+      "records": 4
+    },
+    {
+      "file": "windows/cow--regressions-raw.jsonl.gz",
+      "records": 237
+    },
+    {
+      "file": "windows/cow-extra--backend-checks-raw.jsonl.gz",
+      "records": 5
+    },
+    {
+      "file": "windows/execution.jsonl.gz",
+      "records": 16
+    },
+    {
+      "file": "windows/manifest--contention-raw.jsonl.gz",
+      "records": 118
+    },
+    {
+      "file": "windows/manifest--growth-raw.jsonl.gz",
+      "records": 192
+    },
+    {
+      "file": "windows/manifest--navigation-raw.jsonl.gz",
+      "records": 4
+    },
+    {
+      "file": "windows/manifest--regressions-raw.jsonl.gz",
+      "records": 189
+    },
+    {
+      "file": "windows/namespace-progress-cow-10000-A-1792274407651524300.jsonl.gz",
+      "records": 24
+    },
+    {
+      "file": "windows/namespace-progress-cow-10000-B-1792274643254506200.jsonl.gz",
+      "records": 30
+    },
+    {
+      "file": "windows/namespace-progress-cow-100000-A-1792278700770093800.jsonl.gz",
+      "records": 153
+    },
+    {
+      "file": "windows/namespace-progress-cow-100000-B-1792280254845224900.jsonl.gz",
+      "records": 160
+    },
+    {
+      "file": "windows/namespace-progress-manifest-10000-A-1792273905851854000.jsonl.gz",
+      "records": 22
+    },
+    {
+      "file": "windows/namespace-progress-manifest-10000-B-1792274123011533800.jsonl.gz",
+      "records": 29
+    },
+    {
+      "file": "windows/namespace-progress-manifest-100000-A-1792274941437997400.jsonl.gz",
+      "records": 160
+    },
+    {
+      "file": "windows/namespace-progress-manifest-100000-B-1792276563345648900.jsonl.gz",
+      "records": 208
+    },
+    {
+      "file": "windows-supplement/cow--restoration-raw.jsonl.gz",
+      "records": 42
+    },
+    {
+      "file": "windows-supplement/cow-extra--indirect-gc-raw.jsonl.gz",
+      "records": 24
+    },
+    {
+      "file": "windows-supplement/manifest--restoration-raw.jsonl.gz",
+      "records": 42
+    },
+    {
+      "file": "wsl/cow--cap-diagnosis-raw.jsonl.gz",
+      "records": 2
+    },
+    {
+      "file": "wsl/cow--contention-raw.jsonl.gz",
+      "records": 118
+    },
+    {
+      "file": "wsl/cow--growth-raw.jsonl.gz",
+      "records": 195
+    },
+    {
+      "file": "wsl/cow--navigation-raw.jsonl.gz",
+      "records": 4
+    },
+    {
+      "file": "wsl/cow--regressions-raw.jsonl.gz",
+      "records": 240
+    },
+    {
+      "file": "wsl/cow-extra--backend-checks-raw.jsonl.gz",
+      "records": 5
+    },
+    {
+      "file": "wsl/execution.jsonl.gz",
+      "records": 16
+    },
+    {
+      "file": "wsl/manifest--cap-diagnosis-raw.jsonl.gz",
+      "records": 2
+    },
+    {
+      "file": "wsl/manifest--contention-raw.jsonl.gz",
+      "records": 118
+    },
+    {
+      "file": "wsl/manifest--growth-raw.jsonl.gz",
+      "records": 195
+    },
+    {
+      "file": "wsl/manifest--navigation-raw.jsonl.gz",
+      "records": 4
+    },
+    {
+      "file": "wsl/manifest--regressions-raw.jsonl.gz",
+      "records": 192
+    },
+    {
+      "file": "wsl/namespace-progress-cow-10000-A-1792283344220887959.jsonl.gz",
+      "records": 22
+    },
+    {
+      "file": "wsl/namespace-progress-cow-10000-B-1792283552791514315.jsonl.gz",
+      "records": 72
+    },
+    {
+      "file": "wsl/namespace-progress-cow-100000-A-1792290072312948225.jsonl.gz",
+      "records": 241
+    },
+    {
+      "file": "wsl/namespace-progress-cow-100000-B-1792292394052457955.jsonl.gz",
+      "records": 368
+    },
+    {
+      "file": "wsl/namespace-progress-manifest-10000-A-1792282344643496163.jsonl.gz",
+      "records": 33
+    },
+    {
+      "file": "wsl/namespace-progress-manifest-10000-B-1792282667697713726.jsonl.gz",
+      "records": 70
+    },
+    {
+      "file": "wsl/namespace-progress-manifest-100000-A-1792284241714263159.jsonl.gz",
+      "records": 240
+    },
+    {
+      "file": "wsl/namespace-progress-manifest-100000-B-1792286562710527953.jsonl.gz",
+      "records": 361
+    },
+    {
+      "file": "wsl-supplement/cow--restoration-raw.jsonl.gz",
+      "records": 42
+    },
+    {
+      "file": "wsl-supplement/cow-extra--indirect-gc-raw.jsonl.gz",
+      "records": 24
+    },
+    {
+      "file": "wsl-supplement/manifest--restoration-raw.jsonl.gz",
+      "records": 42
+    }
+  ]
+}

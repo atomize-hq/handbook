@@ -1,0 +1,43 @@
+{
+  "qualification": "synthetic transport probe; no real engine correctness or latency claim",
+  "helper_sha256": "e217fd0e4b35c6584f96a74523d57f0ed98b3d6733495fdfe4cb0d87ab852604",
+  "probe_source_sha256": "89427d39890884c4293b648fcebcdf9299317aa275f50372b4631929858b8881",
+  "probe_binary_sha256": "fa473fb794177b8069d7c9217dfe68b80ac6bcc73c603b814192eacf4d056c34",
+  "compile_command": [
+    "rustc",
+    "--edition=2021",
+    "C:\\file-native-followup-20261017\\capture-check-v4\\synthetic-probe.rs",
+    "-o",
+    "C:\\file-native-followup-20261017\\capture-check-v4\\synthetic-probe.exe"
+  ],
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "session": 1792296166208971800,
+  "checks": [
+    {
+      "scenario": "valid-json",
+      "result": "normal response preserved"
+    },
+    {
+      "scenario": "partial-json",
+      "result": "lossless event retained before refusal",
+      "censored": true,
+      "stdout_bytes": 10,
+      "stdout_sha256": "29c4ee76f0ca251d68310ac4b2467307746fbab53504dbd80417aee62b6a6bad"
+    },
+    {
+      "scenario": "invalid-utf8",
+      "result": "lossless event retained before refusal",
+      "censored": false,
+      "stdout_bytes": 2,
+      "stdout_sha256": "6c19b79bbdc9e463cabbc0a02b3c7f1a814c141ff2f9990061b623b1faf4d90e"
+    },
+    {
+      "scenario": "empty-success",
+      "result": "lossless event retained before refusal",
+      "censored": false,
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

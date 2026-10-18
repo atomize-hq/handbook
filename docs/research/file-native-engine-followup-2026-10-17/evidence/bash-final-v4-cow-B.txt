@@ -1,0 +1,226 @@
+total 52
+drwxr-xr-x  8 spenser inboxgreen 4096 Oct 18 00:08 .
+drwxr-xr-x  4 spenser inboxgreen 4096 Oct 18 00:08 ..
+-rw-r--r--  1 spenser inboxgreen    5 Oct 18 00:08 COPY-READY
+-rw-r--r--  1 spenser inboxgreen    2 Oct 18 00:08 COPY-RELEASE
+-rw-r--r--  1 spenser inboxgreen  404 Oct 18 00:08 README.md
+-rw-r--r--  1 spenser inboxgreen  141 Oct 18 00:08 SELECTED.json
+-rw-r--r--  1 spenser inboxgreen   59 Oct 18 00:08 STORE.json
+drwxr-xr-x  4 spenser inboxgreen 4096 Oct 18 00:08 attempts
+drwxr-xr-x  4 spenser inboxgreen 4096 Oct 18 00:08 generations
+drwxr-xr-x  4 spenser inboxgreen 4096 Oct 18 00:08 objects
+drwxr-xr-x 20 spenser inboxgreen 4096 Oct 18 00:08 originals
+-rw-r--r--  1 spenser inboxgreen    0 Oct 18 00:08 preparation.lock
+drwxr-xr-x  2 spenser inboxgreen 4096 Oct 18 00:08 publications
+drwxr-xr-x  2 spenser inboxgreen 4096 Oct 18 00:08 receipts
+-rw-r--r--  1 spenser inboxgreen    0 Oct 18 00:08 writer.lock
+# File-native collection
+
+SELECTED.json is the sole publication authority. Follow its publication record and candidate. B: open the retained generation path once, then NAVIGATION.md. A: view/NAVIGATION.md may be mixed or stale; VIEW-STATUS.json names its target and immutable state/retained packet route. Edits are not automatically admitted. Never infer selection from highest directory number or time.
+# research collection
+
+Start with [overview](docs/item-overview-d000000.yaml). Stable IDs survive title changes.
+
+Exact files retain authored bytes. YAML/JSON are sources; NAVIGATION contains typed relationships. External unavailable sources are permitted; local missing targets are errors.
+
+[Saved packet](packet/context.md) · [ordered provenance](packet/provenance.json)
+
+## d000000
+
+Overview — [overview](docs/item-overview-d000000.yaml)
+
+- requires: [d000001](docs/item-requirement---d000001.yaml)
+- attachment: [d000009](docs/item-attachments-d000009/evidence/deep/source.txt)
+## d000001
+
+Requirement α — [requirement](docs/item-requirement---d000001.yaml)
+
+- cites: [d000002](docs/item-decision-caf--d000002.json)
+## d000002
+
+Decision café — [exact-json](docs/item-decision-caf--d000002.json)
+
+- cites: https://unavailable.invalid/source (external; availability not promised)
+## d000003
+
+CON — [note-quote](docs/item-con-d000003.md)
+
+## d000004
+
+con. — [note-quote](docs/item-con--d000004.md)
+
+## d000005
+
+AUX  — [note-quote](docs/item-aux--d000005.md)
+
+## d000006
+
+Case — [note-quote](docs/item-case-d000006.md)
+
+## d000007
+
+case — [note-quote](docs/item-case-d000007.md)
+
+## d000008
+
+é — [note-quote](docs/item---d000008.md)
+
+## d000009
+
+é — [attachment](docs/item-attachments-d000009/evidence/deep/source.txt)
+
+## d000010
+
+research source 10 — [overview](docs/item-research-source-10-d000010.yaml)
+
+## d000011
+
+research source 11 — [requirement](docs/item-research-source-11-d000011.yaml)
+
+## d000012
+
+research source 12 — [exact-json](docs/item-research-source-12-d000012.json)
+
+## d000013
+
+research source 13 — [note-quote](docs/item-research-source-13-d000013.md)
+
+## d000014
+
+research source 14 — [note-quote](docs/item-research-source-14-d000014.md)
+
+## d000015
+
+research source 15 — [note-quote](docs/item-research-source-15-d000015.md)
+
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-requirement---d000001.yaml
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-overview-d000000.yaml
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-research-source-11-d000011.yaml
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-case-d000006.md
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-research-source-14-d000014.md
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-research-source-15-d000015.md
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-research-source-12-d000012.json
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-attachments-d000009/evidence/deep/source.txt
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item---d000008.md
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-research-source-13-d000013.md
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-aux--d000005.md
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-con--d000004.md
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-case-d000007.md
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-research-source-10-d000010.yaml
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-decision-caf--d000002.json
+/home/spenser/file-native-followup-20261017/data/wsl-final-v4/cow/navigation/B/generations/generation-1483-1792282103714670983-3/docs/item-con-d000003.md
+id: d000000
+title: "Overview"
+consumer: research
+# Relationships and exact paths: ../NAVIGATION.md
+Evidence d000000: a reusable source preserves exact captured text.
+Evidence d000000: a reusable source preserves exact captured text.
+# Case
+
+Stable identity: d000006. Collection: research.
+See ../NAVIGATION.md for exact relationships.
+# research source 14
+
+Stable identity: d000014. Collection: research.
+See ../NAVIGATION.md for exact relationships.
+# research source 15
+
+Stable identity: d000015. Collection: research.
+See ../NAVIGATION.md for exact relationships.
+# é
+
+Stable identity: d000008. Collection: research.
+See ../NAVIGATION.md for exact relationships.
+# research source 13
+
+Stable identity: d000013. Collection: research.
+See ../NAVIGATION.md for exact relationships.
+# AUX 
+
+Stable identity: d000005. Collection: research.
+See ../NAVIGATION.md for exact relationships.
+# con.
+
+Stable identity: d000004. Collection: research.
+See ../NAVIGATION.md for exact relationships.
+# case
+
+Stable identity: d000007. Collection: research.
+See ../NAVIGATION.md for exact relationships.
+# CON
+
+Stable identity: d000003. Collection: research.
+See ../NAVIGATION.md for exact relationships.
+# é
+
+Stable identity: d000009. Collection: research.
+See ../../../../NAVIGATION.md for exact relationships.
+EXTRACTION VERIFIED 19 files /home/spenser/file-native-followup-20261017/data/bash-final-v4-cow-B
+{
+  "errors": [],
+  "inputs": [
+    {
+      "bytes": 4108,
+      "id": "d000000",
+      "path": "../docs/item-overview-d000000.yaml",
+      "revision": "d2d47d3571a6587135cf983f9900f312ad68880ff02320bc7472baebaac584d4",
+      "sha256": "d2d47d3571a6587135cf983f9900f312ad68880ff02320bc7472baebaac584d4"
+    },
+    {
+      "bytes": 4108,
+      "id": "d000001",
+      "path": "../docs/item-requirement---d000001.yaml",
+      "revision": "fce2c884a5641d415627f1e842d6bce0e8ecf326d54cdf2c63cd714d6030488c",
+      "sha256": "fce2c884a5641d415627f1e842d6bce0e8ecf326d54cdf2c63cd714d6030488c"
+    },
+    {
+      "bytes": 4096,
+      "id": "d000002",
+      "path": "../docs/item-decision-caf--d000002.json",
+      "revision": "fb62599a81b1cc1f15af9ff1412bc26ca5bf27331ba36eb7cbb5cbcda82a8869",
+      "sha256": "fb62599a81b1cc1f15af9ff1412bc26ca5bf27331ba36eb7cbb5cbcda82a8869"
+    },
+    {
+      "bytes": 4096,
+      "id": "d000003",
+      "path": "../docs/item-con-d000003.md",
+      "revision": "f479bd214cbb690a62fa0e0eaa89c73bb636e15564789bc048a199924b6c2b60",
+      "sha256": "f479bd214cbb690a62fa0e0eaa89c73bb636e15564789bc048a199924b6c2b60"
+    },
+    {
+      "bytes": 4096,
+      "id": "d000004",
+      "path": "../docs/item-con--d000004.md",
+      "revision": "db2cf20a2d19d5886c4bc19bdcb3476134b0b97bde3d128ead5dff7d1a78bde6",
+      "sha256": "db2cf20a2d19d5886c4bc19bdcb3476134b0b97bde3d128ead5dff7d1a78bde6"
+    },
+    {
+      "bytes": 4096,
+      "id": "d000005",
+      "path": "../docs/item-aux--d000005.md",
+      "revision": "ab89bda1c77e0a6d80601b7622e17cedf13b44ba36a440ff7a21c08320edd22d",
+      "sha256": "ab89bda1c77e0a6d80601b7622e17cedf13b44ba36a440ff7a21c08320edd22d"
+    },
+    {
+      "bytes": 4096,
+      "id": "d000006",
+      "path": "../docs/item-case-d000006.md",
+      "revision": "ba75f28f2e689242102ab12840589ce846f59ecdd954803d5d7499faa992528d",
+      "sha256": "ba75f28f2e689242102ab12840589ce846f59ecdd954803d5d7499faa992528d"
+    },
+    {
+      "bytes": 16384,
+      "id": "d000007",
+      "path": "../docs/item-case-d000007.md",
+      "revision": "6b5ff835d2d10aa3cc4bb76a4d0d07d2b838ad179eba06c2fdc47960ea08a4f1",
+      "sha256": "6b5ff835d2d10aa3cc4bb76a4d0d07d2b838ad179eba06c2fdc47960ea08a4f1"
+    }
+  ],
+  "omissions": [
+    "documents beyond first eight omitted from assembled output; required local dependencies retained"
+  ],
+  "output_sha256": "413515429dd85496857f36b5ae73440cb9f27c1e9a3efa8cbd3e92b5128b9ef5",
+  "recipe": "ordered-first-eight-v1",
+  "renderer": "exact-concat-v1",
+  "requested": true
+}

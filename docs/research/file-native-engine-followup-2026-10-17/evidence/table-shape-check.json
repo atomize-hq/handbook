@@ -1,0 +1,47 @@
+[
+  {
+    "file": "amplification-table.md",
+    "rows": 40,
+    "columns": 11
+  },
+  {
+    "file": "batch-table.md",
+    "rows": 112,
+    "columns": 11
+  },
+  {
+    "file": "contention-table.md",
+    "rows": 64,
+    "columns": 13
+  },
+  {
+    "file": "growth-status-table.md",
+    "rows": 24,
+    "columns": 8
+  },
+  {
+    "file": "lookup-table.md",
+    "rows": 48,
+    "columns": 10
+  },
+  {
+    "file": "operation-table.md",
+    "rows": 24,
+    "columns": 9
+  },
+  {
+    "file": "process-latency-table.md",
+    "rows": 86,
+    "columns": 8
+  },
+  {
+    "file": "process-lookup-table.md",
+    "rows": 48,
+    "columns": 8
+  },
+  {
+    "file": "storage-table.md",
+    "rows": 32,
+    "columns": 12
+  }
+]

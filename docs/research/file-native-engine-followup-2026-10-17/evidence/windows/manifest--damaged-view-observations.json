@@ -1,0 +1,13 @@
+{
+  "selected": {
+    "publication": "publication-44876-1792273340441442900-18",
+    "digest": "4f4de254d642217fe589706559a12f094ec688a1bd4c5d04d756e856625770d1"
+  },
+  "preserved": [
+    "C:\\file-native-followup-20261017\\windows-final-v4\\manifest\\damaged-view\\divergence\\preserved-53468-1792273340602313100-1\\docs\\item-overview-d000000.yaml",
+    "C:\\file-native-followup-20261017\\windows-final-v4\\manifest\\damaged-view\\divergence\\preserved-derived-53468-1792273340616249200-4\\NAVIGATION.md",
+    "C:\\file-native-followup-20261017\\windows-final-v4\\manifest\\damaged-view\\divergence\\preserved-derived-61632-1792273340640244900-1\\NAVIGATION.md"
+  ],
+  "rebuild": "render-only",
+  "cross_depth": "integrity:link-escape"
+}

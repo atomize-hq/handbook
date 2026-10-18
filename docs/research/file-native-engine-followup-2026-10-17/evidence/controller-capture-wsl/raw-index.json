@@ -1,0 +1,10 @@
+[
+  {
+    "file": "capture-check-raw.jsonl.gz",
+    "source": "capture-check-raw.jsonl",
+    "records": 4,
+    "bytes": 3178,
+    "sha256": "5ed2b43cf358f9349e5d7d6aff1873ae57ad7a35447fd375d65450def5e3db2b",
+    "compressed_sha256": "051a64edabf8c71dbcbf4013a2f77b2431e7b6d95f117b4539a203d1481774fc"
+  }
+]

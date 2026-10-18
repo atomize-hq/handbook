@@ -1,0 +1,66 @@
+{
+  "helper_sha256": "efb7e6b2df27c7f35cad3ee36120ef38984ad60ae3e351a0339cd0a248a6f9e5",
+  "point": "selected path success despite unrelated page damage",
+  "audit_error": "integrity-digest:C:\\file-native-followup-20261017\\windows-final-v4\\cow-extra\\page-damage\\objects\\dc\\dc0f33ad9fdfad2a052885567b1434c4f7b20238c5fc4c486eb89626529f005a",
+  "damaged_page": "dc0f33ad9fdfad2a052885567b1434c4f7b20238c5fc4c486eb89626529f005a",
+  "selected": {
+    "publication": "publication-47640-1792281949272419500-133",
+    "digest": "1dedc430c271d54265c16adeeccf652ae28f8f236e137209565c53d6c7170f79"
+  },
+  "large_indirect_points": [
+    {
+      "root": "C:\\file-native-followup-20261017\\windows-final-v4\\cow\\growth\\100000-A-project",
+      "selected": {
+        "publication": "publication-62996-1792280130065208800-71",
+        "digest": "ef8d0c46daf659509cedcd5eca2714a07aad72257dd5e52ab0fdaf9833d28f14"
+      },
+      "actual_indirect_object": "5d70edacf63dc42b52677157879d342f5469cb714b620b7d7856b689b855e403",
+      "constituents": 5000,
+      "point_metadata_read": 380586,
+      "qualification": "functional large-value path check; ordinary-key timing table remains separate"
+    },
+    {
+      "root": "C:\\file-native-followup-20261017\\windows-final-v4\\cow\\growth\\100000-B-project",
+      "selected": {
+        "publication": "publication-61488-1792281735173863900-71",
+        "digest": "281abb3bad82b3aa0168d3341982138960183871ef329b6b29a43c5aa15b14a0"
+      },
+      "actual_indirect_object": "5d70edacf63dc42b52677157879d342f5469cb714b620b7d7856b689b855e403",
+      "constituents": 5000,
+      "point_metadata_read": 380586,
+      "qualification": "functional large-value path check; ordinary-key timing table remains separate"
+    }
+  ],
+  "retirement": [
+    {
+      "mode": "A",
+      "retirement": {
+        "attempt": "attempt-31060-1792273354443066300-128",
+        "outcome_preserved": true,
+        "selected": {
+          "digest": "39119341449deadb9937c58d3b7b419314e2f004ce0487dda7198b4953c2ba9a",
+          "publication": "publication-31060-1792273354481469700-133"
+        },
+        "status": "retired"
+      },
+      "state_removed": true,
+      "closure_remaining_files": 0,
+      "remaining_actual_pages": 5
+    },
+    {
+      "mode": "B",
+      "retirement": {
+        "attempt": "attempt-55116-1792273356193098600-128",
+        "outcome_preserved": true,
+        "selected": {
+          "digest": "eecf8f37596b54462f3f241b803e02dd09ccd10f30d59b4dc9f8970f7201b436",
+          "publication": "publication-55116-1792273356389008600-133"
+        },
+        "status": "retired"
+      },
+      "state_removed": true,
+      "closure_remaining_files": 0,
+      "remaining_actual_pages": 5
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "phase": "growth",
+    "backend": "manifest",
+    "extra": [
+      "--tiers",
+      "100000",
+      "--modes",
+      "A"
+    ],
+    "exit": 1
+  },
+  {
+    "phase": "growth",
+    "backend": "cow",
+    "extra": [
+      "--tiers",
+      "100000",
+      "--modes",
+      "A"
+    ],
+    "exit": 1
+  }
+]
