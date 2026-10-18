@@ -1,0 +1,10 @@
+[
+  {
+    "file": "strict--events.jsonl.gz",
+    "source": "strict/events.jsonl",
+    "records": 42,
+    "bytes": 210870,
+    "sha256": "b1d8f449f88fc047982755956590b45a112bb695e170ef7bff25eb7a9603be7f",
+    "compressed_sha256": "b5a9254e1492b7841aea403e5d62a5f6511865fefb47b8d09775a7c989f12941"
+  }
+]

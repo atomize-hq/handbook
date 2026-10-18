@@ -72,3 +72,18 @@ then checks.py --faults, supplement.py, adversarial.py and namespace_cases.py.
 All seven commands passed within the existing window. No N1k/history rerun.
 Append report artifacts to the previous Mac result branch by ordinary fast-forward
 push; do not transplant newer core into the report-only result commit.
+
+
+## Explicit audit-only correction followup
+
+The prospective audit amendment in exact 7e00d22 allocation.md authorizes a new
+<=1800-second native correction cap including locked build/tests and export,
+without reopening or resetting any original measurement window. The correction
+clock starts at the first tool-time observation, 2026-10-18 21:53:07 UTC, and
+ends at 22:23:07 UTC. allocation-audit-correction.json froze this before build.
+A fresh exact 70-file capsule, audit-lane/build and strict disposable N128 A/B
+fixtures run locked workspace tests, release build and audit_evidence.py --strict.
+Build/test caps are 300 seconds each, strict suite <=900, ordinary calls <=180.
+All three commands passed; export/report/hash/commit/push share the 1800 cap.
+No broad smoke/matrix/history or other original suite is reopened. Preserve all
+predecessor evidence and append only native-macos report/evidence artifacts.

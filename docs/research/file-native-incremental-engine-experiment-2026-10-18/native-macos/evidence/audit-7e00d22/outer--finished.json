@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+  "epoch": 1792360489.660033,
+  "resources": {
+    "epoch": 1792360490.5188448,
+    "files": 57619,
+    "logical_bytes": 1966752539,
+    "allocated_file_bytes": 1939853312,
+    "free_bytes": 33404952576
+  },
+  "completed": [
+    "test",
+    "build",
+    "strict"
+  ],
+  "unperformed": [],
+  "explicit_correction_start_epoch": 1792360387.0,
+  "explicit_correction_deadline_epoch": 1792362187.0,
+  "original_native_window_reopened": false
+}

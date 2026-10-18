@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "json_files": 183,
+  "python_files_syntax_checked": 35,
+  "source_files_verified": 70,
+  "summary_binding_verified": true,
+  "portable_verification": "portable-verification-audit.json",
+  "no_additional_engine_calls": true
+}

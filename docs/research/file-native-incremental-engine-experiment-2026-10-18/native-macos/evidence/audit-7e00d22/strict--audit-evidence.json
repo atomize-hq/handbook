@@ -1,0 +1,145 @@
+{
+  "strict": true,
+  "diagnostic_start_ns": 3048917962049541,
+  "diagnostic_end_ns": 3048940668661041,
+  "cases": [
+    {
+      "mode": "A",
+      "case": "projection-child",
+      "status": "error",
+      "error": "integrity-read:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/A/disposable/store/objects/c4/c4386d78095140b732b70e9cad0e769e987f7b003a108c3229416538bcb0fcf9:No such file or directory (os error 2)",
+      "recreated": false
+    },
+    {
+      "mode": "A",
+      "case": "navigation-source",
+      "status": "error",
+      "error": "integrity-read:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/A/disposable/store/derived/ca/ca2b1fccb7db65c637638e9535dafe7194de773a69e0adf885dad8f3a96dc8a7:No such file or directory (os error 2)",
+      "recreated": false
+    },
+    {
+      "mode": "A",
+      "case": "projection-root",
+      "status": "error",
+      "error": "integrity-read:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/A/disposable/store/objects/41/41496cbf45991dfb857bc9b860796e5c8d3abe6ae1fc649154d03425db564108:No such file or directory (os error 2)",
+      "recreated": false
+    },
+    {
+      "mode": "A",
+      "case": "navigation/d000003.md",
+      "damage": "missing",
+      "status": "error",
+      "error": "integrity-read:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/A/disposable/store/derived/ca/ca2b1fccb7db65c637638e9535dafe7194de773a69e0adf885dad8f3a96dc8a7:No such file or directory (os error 2)",
+      "recreated": false
+    },
+    {
+      "mode": "A",
+      "case": "navigation/d000003.md",
+      "damage": "corrupt",
+      "status": "error",
+      "error": "integrity-digest:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/A/disposable/store/derived/ca/ca2b1fccb7db65c637638e9535dafe7194de773a69e0adf885dad8f3a96dc8a7",
+      "recreated": false
+    },
+    {
+      "mode": "A",
+      "case": "packet/context.md",
+      "damage": "missing",
+      "status": "error",
+      "error": "integrity-read:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/A/disposable/store/derived/bd/bd18e32ec7af1893bc1e894a4e9bb14de50827056ffebb1d409b2a8e5661b147:No such file or directory (os error 2)",
+      "recreated": false
+    },
+    {
+      "mode": "A",
+      "case": "packet/context.md",
+      "damage": "corrupt",
+      "status": "error",
+      "error": "integrity-digest:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/A/disposable/store/derived/bd/bd18e32ec7af1893bc1e894a4e9bb14de50827056ffebb1d409b2a8e5661b147",
+      "recreated": false
+    },
+    {
+      "mode": "A",
+      "case": "packet/provenance.json",
+      "damage": "missing",
+      "status": "error",
+      "error": "integrity-read:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/A/disposable/store/derived/a4/a45ff0519c2f29bc63552591824309c94048aab7dd0da9422be5c3c064a0437a:No such file or directory (os error 2)",
+      "recreated": false
+    },
+    {
+      "mode": "A",
+      "case": "packet/provenance.json",
+      "damage": "corrupt",
+      "status": "error",
+      "error": "integrity-digest:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/A/disposable/store/derived/a4/a45ff0519c2f29bc63552591824309c94048aab7dd0da9422be5c3c064a0437a",
+      "recreated": false
+    },
+    {
+      "mode": "B",
+      "case": "projection-child",
+      "status": "error",
+      "error": "integrity-read:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/B/disposable/store/objects/c4/c4386d78095140b732b70e9cad0e769e987f7b003a108c3229416538bcb0fcf9:No such file or directory (os error 2)",
+      "recreated": false
+    },
+    {
+      "mode": "B",
+      "case": "navigation-source",
+      "status": "error",
+      "error": "integrity-read:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/B/disposable/store/derived/ca/ca2b1fccb7db65c637638e9535dafe7194de773a69e0adf885dad8f3a96dc8a7:No such file or directory (os error 2)",
+      "recreated": false
+    },
+    {
+      "mode": "B",
+      "case": "projection-root",
+      "status": "error",
+      "error": "integrity-read:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/B/disposable/store/objects/41/41496cbf45991dfb857bc9b860796e5c8d3abe6ae1fc649154d03425db564108:No such file or directory (os error 2)",
+      "recreated": false
+    },
+    {
+      "mode": "B",
+      "case": "navigation/d000003.md",
+      "damage": "missing",
+      "status": "error",
+      "error": "integrity-read:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/B/disposable/store/derived/ca/ca2b1fccb7db65c637638e9535dafe7194de773a69e0adf885dad8f3a96dc8a7:No such file or directory (os error 2)",
+      "recreated": false
+    },
+    {
+      "mode": "B",
+      "case": "navigation/d000003.md",
+      "damage": "corrupt",
+      "status": "error",
+      "error": "integrity-digest:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/B/disposable/store/derived/ca/ca2b1fccb7db65c637638e9535dafe7194de773a69e0adf885dad8f3a96dc8a7",
+      "recreated": false
+    },
+    {
+      "mode": "B",
+      "case": "packet/context.md",
+      "damage": "missing",
+      "status": "error",
+      "error": "integrity-read:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/B/disposable/store/derived/bd/bd18e32ec7af1893bc1e894a4e9bb14de50827056ffebb1d409b2a8e5661b147:No such file or directory (os error 2)",
+      "recreated": false
+    },
+    {
+      "mode": "B",
+      "case": "packet/context.md",
+      "damage": "corrupt",
+      "status": "error",
+      "error": "integrity-digest:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/B/disposable/store/derived/bd/bd18e32ec7af1893bc1e894a4e9bb14de50827056ffebb1d409b2a8e5661b147",
+      "recreated": false
+    },
+    {
+      "mode": "B",
+      "case": "packet/provenance.json",
+      "damage": "missing",
+      "status": "error",
+      "error": "integrity-read:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/B/disposable/store/derived/a4/a45ff0519c2f29bc63552591824309c94048aab7dd0da9422be5c3c064a0437a:No such file or directory (os error 2)",
+      "recreated": false
+    },
+    {
+      "mode": "B",
+      "case": "packet/provenance.json",
+      "damage": "corrupt",
+      "status": "error",
+      "error": "integrity-digest:/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict/B/disposable/store/derived/a4/a45ff0519c2f29bc63552591824309c94048aab7dd0da9422be5c3c064a0437a",
+      "recreated": false
+    }
+  ]
+}

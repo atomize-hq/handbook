@@ -1,68 +1,75 @@
-# Native macOS replay-retention correction — October 18, 2026
+# Native macOS strict audit correction — October 18, 2026
 
-**Final tested source pin: `7ac70f93cce14ecd3d935852801f034c122000d8`.** The targeted A/B N512 replay-lifetime regression, locked workspace tests/release build and all four requested follow-up suites passed. This lane records **610 uncensored engine responses**: 504 exit 0, 70 expected refusals exit 2 and 36 injected process exits 86. Every requested check was performed. Counts describe process responses, not independent trials or assertion counts.
+**Current tested source pin: `7e00d22b470c1eed476127d2f585789036e79cf3`.** Locked workspace tests (two Rust tests), release build and `audit_evidence.py --strict` passed on fresh **N128 A/B** fixtures. All **18 negative-evidence cases** returned errors without recreating missing evidence or repairing corrupt evidence. After each exact restoration, the subsequent audit succeeded. The lane contains **42 uncensored responses**: 24 exit 0 and 18 expected refusal exit 2. No requested check was left unperformed.
 
-Native executable SHA-256: `9f6d4c54939e2dfbf23d05e19cecf91d355ce75b276c0b961576e3a4fcedaf61`. All **60 capsule files** are exact Git-pinned bytes. The source snapshot excludes only previously committed `native-macos/` report transport; the initial full 362-file snapshot remains preserved separately and was not executed. No engine or pinned harness source was edited on Mac.
+Executable SHA-256: `9991bd5640feb12fd4dbf5245cd61874d935f2f0a151e68b11a52a5a35856de6`. All **70 capsule files** match exact Git bytes. Only prior `native-macos/` report transport was excluded from the executed source capsule; no pinned engine/harness bytes were edited on Mac. Full source/session snapshots, raw Driver events, stdout/stderr byte bindings, wrapper logs and source/executable hashes are retained in [evidence/audit-7e00d22](evidence/audit-7e00d22/verification.json).
 
-## Reached correction proof
+## Reached audit result
 
-| Suite | Events | Observed result |
+| Damaged selected evidence | Negative cases across A/B | Result |
 | --- | ---: | --- |
-| replay_lifetime.py | 40 | A/B, N512; eligible 256-label preparation reopens after collection; intermediate import payloads and packet reopen after collection; resealed tampered replay-object list refused; abandoned intermediate sources reclaimed |
-| checks.py --faults | 414 | Four A/B × project/research configurations and 23 publication boundaries passed |
-| supplement.py | 109 | Retention, reclamation, restoration, reader overlap, packet/history, divergence, quota, cancellation and other causal regressions passed |
-| adversarial.py | 42 | Nine grouped forged/missing/corrupt/indirection cases passed |
-| namespace_cases.py, default fixed | 5 | Ancestor `objects/results` root retains all 16 selected originals; original hashes/audit checked |
-| Total | **610** | **Zero native censors** |
+| Projection child object missing | 2 | Error; object remains absent |
+| Derived navigation source missing | 2 | Error; source remains absent |
+| Projection root object missing | 2 | Error; root remains absent |
+| Requested-packet navigation source missing/corrupt | 4 | Error; original bytes not recreated |
+| Requested packet context source missing/corrupt | 4 | Error; original bytes not recreated |
+| Requested packet provenance source missing/corrupt | 4 | Error; original bytes not recreated |
+| Total | **18** | **18/18 refused without repair** |
 
-Both Rust tests passed. The release workspace build also built project/research consumers; no new separately linked consumer execution is claimed on this pin. Four unused-import warnings remain in the exact compiler logs. [replay-verification.json](replay-verification.json) records the assertions, reached summaries, counts and original-clock status. All **574 JSON responses** conserve total read/written bytes across payload/control/metadata/result roles. The other 36 responses are injected process exits without JSON.
+All 18 audits after exact byte restoration passed. The remaining six successful responses initialize/setup the A/B fixtures and publish their requested packets. All **42 JSON responses** conserve total read/written bytes across payload/control/metadata/result roles. These are process-response/case counts, not independent statistical trials. [audit-verification.json](audit-verification.json) records each named case/error, restore success count, exact timing and caps.
 
-## Fault boundary and version distinction
+The strict suite took **22.880 seconds** under its 900-second cap. Locked tests took 9.442 seconds and release build 9.187 seconds, each under 300 seconds. Compiler warnings are retained unchanged. Consumer binaries were built; no new standalone consumer run is claimed.
 
-The reproduced defect concerned an eligible, unselected preparation: collection retained final graph/projection roots but could remove intermediate COW objects and overwritten import payloads needed by deterministic replay when the candidate was reopened. The supplied correction records exact replay object/file dependency sets in private Candidate v2, retains them during collection, and recomputes/compares them during read-only selection. The new regression observes successful reopen after GC and refusal of resealed tampered dependency lists in both A and B, then checks abandoned-source reclamation.
+## Defect and correction boundary
 
-Old unselected Candidate v1 fixtures are intentionally refused by this experiment's versioned private contract. Publication and store remain v1; accepted retry still resolves before candidate parsing. Fresh new-pin bases were used; this is not a production migration or a claim that old unselected fixtures can resume. The structured format standard remains proposed, existing owner/versioned contracts control, and no production format migration is authorized.
+The supplied 7ac reproducer showed that full audit could render its reference projection before reading selected child/navigation evidence, recreating absent evidence and concealing damage. Missing/corrupt requested-packet selected sources also lacked the required independent negative checks. The corrected core preflights selected projection/source evidence before rendering the full oracle. This audit-only correction does not change ordinary publication/history behavior or on-disk formats. The native strict regression proves the named missing/corrupt cases on the corrected pin. Mac did not rerun the old 7ac before-probe; the coordinator's Windows reproduction remains separate provenance.
 
-## Earlier evidence remains intact
+No broad smoke/matrix, history, replay-lifetime, fault suite or production-file run was added in this correction followup. Earlier positive audits on 7ac do not establish the negative-evidence property tested here. Earlier observations remain qualified by their exact source pin; they are not relabeled as new-core measurements.
 
-| Source version | Retained responses | Interpretation |
+## Separate clock and finite caps
+
+The prospectively recorded audit amendment in the pinned allocation.md authorizes this **new explicit <=1,800-second correction followup**, including locked build/tests and export. It does **not** reopen or reset the original native measurement window, which had already closed.
+
+- Correction start: **2026-10-18 21:53:07 UTC** / epoch `1792360387` (first tool-time observation).
+- Total correction deadline: **2026-10-18 22:23:07 UTC** / epoch `1792362187`.
+- Locked tests/build: <=300 seconds each; strict N128 A/B suite <=900 seconds; each unchanged Driver call <=180 seconds.
+- At postrun verification: 121.279 seconds elapsed and 1678.721 seconds remained. Export/report/commit/push continue within that same deadline; later receipts record their actual elapsed time.
+- Whole owned allocation remains <=6 GiB, with >=20 GiB volume free reserve. The process wrapper checks the whole root and keeps a 512 MiB allocation margin; only its own process group can be stopped on a limit. No limit fired.
+
+[allocation-audit-correction.json](allocation-audit-correction.json) was frozen before build and binds the authority allocation Git blob plus the unchanged original allocation hash. Actual argv/cwd/caps/start/end/exit and log hashes are in evidence/audit-7e00d22/outer--runs.jsonl. Resource snapshots include all prior and current source/worktrees/build/runtime/evidence/report, the conservative isolated transport Git database and all five tiny bounds-unit fixtures. No cleanup was performed.
+
+## Version-qualified prior evidence
+
+| Source/lane | Retained responses | Qualification |
 | --- | ---: | --- |
-| 7ac70f9, current targeted lane | **610** | Replay-retention regression plus requested affected suites; no N1k smoke/history rerun |
-| a1108c6 affected lane | 570 | Earlier ancestor-name collection/byte-role correction proof |
-| F3 main and companions | 726 | Earlier bounded smoke, consumers, five ordinary copies and deep interruption controls |
+| 7e00d22 current strict audit | **42** | N128 A/B negative evidence only |
+| 7ac70f9 replay correction | 610 | N512 replay retention plus affected suites; [historical report](7ac70f9-replay-report.md) |
+| a1108c6 affected lane | 570 | Ancestor-name collection/byte-role correction; [historical report](a1108c6-affected-report.md) |
+| F3 main/companions | 726 | Earlier 1k smoke, consumer/copy and interruption controls; [historical snapshot](f3-bounded-path-report.md) |
 | fb73e75 development | 117 | Partial pre-smoke run stopped on the common-pin hold |
 
-All six retained evidence lanes contain **2,023 responses**, with zero censors. These versions are kept separate; their counts are not one new-pin benchmark. Earlier raw evidence, archives, hashes and reports are unchanged. [The a1108c6 report](a1108c6-affected-report.md) and [the F3 snapshot](f3-bounded-path-report.md) preserve their historical interpretation; this README controls the final tested pin.
+All seven evidence lanes preserve **2,065 responses**, zero censors, under their own source/session/executable bindings. The earlier raw evidence is byte-identical to its predecessor report commit. This aggregate is an inventory, not one new-pin benchmark.
 
-F3's collector had the real ancestor-`objects` bug and its primary byte-role split is invalid under ancestor `results`. Its raw values remain unchanged. F3 total bytes, objects metadata counters and measured times remain separately qualified. Path-neutral F3 companions provide small valid role observations; they do not replace 1k values. [performance.md](performance.md), smoke-traces.json and smoke-operations.json remain **F3-only**. There is no corrected N1k speedup or history claim. Full-reference and incremental-preparation clocks differ in scope, inclusive clocks overlap, fresh process is not device-cold, and no p95 or causal OS ranking follows. Holder interruption was exit 86, not a claimed SIGKILL/reboot/power cut.
+F3 primary payload/control/result byte-role bins remain invalid under its ancestor `results`; raw values are unchanged, total bytes/objects metadata/times remain separately qualified. F3's real ancestor-`objects` GC bug is not recast as unsupported path policy. Path-neutral companion role observations do not replace 1k values. performance.md and smoke JSON remain F3-only; no later-pin speedup, history, p95, device-cold or cross-host ranking claim follows. Holder interruption remains exit 86, not SIGKILL/reboot/power loss. The `/proc` memory helper remains null on Mac. Existing experimental owner/versioned contracts and the proposed status of the structured format standard remain unchanged; no production migration is authorized.
 
-## Original clock, caps and preserved roots
+## Preserved paths and report transport
 
-The existing allocation is unchanged: 105 minutes of work plus 15 minutes of reporting from the original final start. At the replay plan snapshot, 71.17 minutes had elapsed, 33.83 work minutes remained and 48.83 total minutes remained. At postrun verification, 76.35 minutes had elapsed, 28.65 work minutes and 43.65 total minutes remained. **No deadline was reset.** Exact epochs and later packaging snapshots are retained.
+- Whole root: `/private/tmp/file-native-incremental-macos-20261018`
+- New source worktree: `/private/tmp/file-native-incremental-macos-20261018/audit-checkout` at 7e00d22
+- Executed capsule: `/private/tmp/file-native-incremental-macos-20261018/source-audit-core/docs/research/file-native-incremental-engine-experiment-2026-10-18`
+- Build: `/private/tmp/file-native-incremental-macos-20261018/audit-lane/build`
+- Disposable strict runtime: `/private/tmp/file-native-incremental-macos-20261018/audit-lane/strict`
+- Local logs/pins: `/private/tmp/file-native-incremental-macos-20261018/evidence-audit`
+- Result checkout: `/private/tmp/file-native-incremental-macos-20261018/corrected-checkout`
 
-Locked test/build caps are 600 seconds each, replay suite 900 seconds, checks/supplement 600 seconds each, adversarial 300 seconds and namespace 180 seconds. Every engine call retains the unchanged Driver's 180-second cap. The outer wrapper additionally enforces the original execution cutoff, whole-owned-root <=6 GiB guard with 512 MiB margin and >=20 GiB free-space floor. It kills only its own launched process group on a limit. No cap or deadline fired.
+Every predecessor root is preserved. The shared Mac checkout remains read-only and clean at 379af4eda9b95ee82be9d3afcfdcdca2d6d132f9. Environment remains native Darwin 25.6.0/macOS 26.6.1 arm64, APFS, Rust/Cargo 1.89.0, Python 3.11.9 and Bash 3.2. Earlier fsync/F_FULLFSYNC/link evidence remains labeled with its original sampled version; no new power-loss qualification is inferred.
 
-- Preserved whole root: `/private/tmp/file-native-incremental-macos-20261018`
-- Exact new source worktree: `/private/tmp/file-native-incremental-macos-20261018/replay-checkout` at 7ac70f9
-- Executed source capsule: `/private/tmp/file-native-incremental-macos-20261018/source-replay-core/docs/research/file-native-incremental-engine-experiment-2026-10-18`
-- Separate build: `/private/tmp/file-native-incremental-macos-20261018/replay-lane/build`
-- Fresh runtimes: `replay-lane/replay`, `checks`, `supplement`, `adversarial`, `namespace` beneath the owned root
-- Local logs/pins: `/private/tmp/file-native-incremental-macos-20261018/evidence-replay`
-- Report checkout: `/private/tmp/file-native-incremental-macos-20261018/corrected-checkout`
-- Initial full transport: `source-replay` and `replay-full-transport` beneath the owned root; preserved and never executed
+The report-only follow-up is parented to `fe6e01e287bb6d4592059b1a6a9170789ab1c631` on the existing Mac report branch. It changes only `native-macos/` artifacts and does not transplant newer engine files into that branch. The tested core is independently pinned at 7e00d22 in the fresh source capsule and archives. [helpers/launch_audit.py](helpers/launch_audit.py) preserves the actual finite launcher; [helpers/verify_audit_run.py](helpers/verify_audit_run.py) verifies reached cases without another engine call. Reproduction uses a fresh exact capsule/target/base and `audit_evidence.py --exe <binary> --base <fresh-base> --strict`; never rerun into retained roots.
 
-All earlier source/build/runtime/evidence/worktree roots remain preserved. The four tiny bounds-unit temporary roots are enumerated in unit-temporary-roots-replay.json. No cleanup was performed. The shared Mac checkout stays read-only, clean at 379af4eda9b95ee82be9d3afcfdcdca2d6d132f9. Native environment remains Darwin 25.6.0/macOS 26.6.1 arm64, APFS, Rust/Cargo 1.89.0, Python 3.11.9 and Bash 3.2. Earlier fsync/F_FULLFSYNC/link probes and F3 disassembly remain version-labeled evidence, not newly sampled corrected disassembly. Peak-memory telemetry is null on Mac because the unchanged helper reads `/proc`. No power-cut or reboot persistence is established.
-
-## Report transport and reproduction
-
-This is a **report-only follow-up to Mac result `c09a709a9830a8337282bab4980e881574d0074c`**. Its inherited repository core is not relabeled as the tested 7ac70f9 core. New-pin executable/source bytes come from the separate exact source snapshot and source/session archives. This preserves the existing result branch through an ordinary fast-forward push without introducing engine changes into the report commit. The coordinator can consolidate the scoped report with its newer common core separately.
-
-[helpers/launch_replay.py](helpers/launch_replay.py) preserves the actual bounded launcher. [replay-plan.json](replay-plan.json) binds it prospectively to the original allocation. Actual argv/cwd/caps/start/end/exit/log hashes are in evidence/replay-7ac70f9/outer--runs.jsonl. Use a fresh exact-pin capsule and fresh paths; never rerun into retained roots. Commands are locked workspace test/release build, replay_lifetime.py first, then checks.py --faults, supplement.py, adversarial.py and namespace_cases.py. The unchanged collector exports raw Driver events/session source ZIPs/source TAR, byte-level stdout/stderr associations, source Git/SHA-256 pins, executable hashes and wrapper logs. A separately copied replay summary is bound by its exact hash in replay-summary-binding.json. Full runtime corpora and executable/build bytes stay on Mac.
-
-After exact-byte Git materialization:
+Portable verification after exact-byte Git materialization:
 
 ```bash
 python3 helpers/verify_export.py .
 ```
 
-The portable verifier checks raw archive hashes/counts, stdout/stderr byte bindings, JSON type/parse association, session source ZIP bytes and source TAR bytes against per-lane pins and executable-hash associations. Physical binaries were rehashed locally; no reproducible-build claim is made. Local `.gitattributes` preserves exact bytes, including the earlier pinned CRLF companion helper. Artifact names remain portable and collision-checked. GitNexus cannot map this unregistered isolated report checkout; its coverage is unknown. Manual scope/source/index checks accompany the report. No PR, force push, production merge/deploy, outward message, new chat, subagent or Pro consultation was performed.
+The verifier checks raw gzip hashes/counts, stdout/stderr hashes/lengths, JSON type/parse association, source/session ZIP/TAR bytes against per-lane pins and executable-hash associations. The separately copied strict summary is hash-bound in audit-summary-binding.json. Physical binaries stay on Mac and were rehashed locally; no reproducible-build claim is made. Local `.gitattributes` preserves bytes, including earlier exact CRLF helper/log evidence. Names remain portable/collision-checked. GitNexus cannot map this unregistered isolated report checkout; coverage is unknown and manual staged path/index/source proof is recorded. No PR, force push, shared-checkout mutation or production change occurred.
