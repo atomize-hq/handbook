@@ -3,9 +3,9 @@ from controller import Driver
 from checks import result,req,expect_error
 from verify_store import verify_history
 a=argparse.ArgumentParser();a.add_argument('--exe',required=True);a.add_argument('--base',required=True);a.add_argument('--max-depth',type=int,default=100000);ns=a.parse_args()
-d=Driver(ns.exe,ns.base,13500);root=str(d.base/'disposable/store');rows=[]
+d=Driver(ns.exe,ns.base,13500);store=d.base/'disposable/store';root=str(store);rows=[]
 d.call(dict(action='init',root=root,mode='A',consumer='project',count=16))
-(d.base/'store/INITIAL-ORACLE.json').write_text(json.dumps(result(d.call(dict(action='dump',root=root)))['state'],indent=2))
+(store/'INITIAL-ORACLE.json').write_text(json.dumps(result(d.call(dict(action='dump',root=root)))['state'],indent=2))
 start=0
 for depth in [1000,10000,100000]:
     if depth>ns.max_depth:break
@@ -16,9 +16,9 @@ for depth in [1000,10000,100000]:
     if not observation or observation['status']!='ok':break
     for i in [1,depth//2,depth]:
         d.call(dict(action='resolve',root=root,request_id=f'history-{i:06}'))
-    first=json.loads((d.base/'store/expected-ledger.jsonl').open().readline())
-    p=json.loads((d.base/f"store/publications/{first['selected']['publication']}.json").read_bytes())
-    c=json.loads((d.base/f"store/attempts/{p['attempt']}/candidate.json").read_bytes())
+    first=json.loads((store/'expected-ledger.jsonl').open().readline())
+    p=json.loads((store/f"publications/{first['selected']['publication']}.json").read_bytes())
+    c=json.loads((store/f"attempts/{p['attempt']}/candidate.json").read_bytes())
     retry=d.call(dict(action='publish',root=root,request=c['request']))
     assert retry['result']['result']==first['result']
     assert d.call(dict(action='cancel',root=root,request_id='history-000001'))['result']==first['result']
