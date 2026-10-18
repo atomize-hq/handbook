@@ -1,0 +1,11 @@
+{
+  "unselected": {
+    "publication": "publication-89674-1792337410750791000-3",
+    "digest": "88a790c097847023b1631dbca8427a556423ba9a9095df48446d67937161f8f0"
+  },
+  "refused": [
+    "point",
+    "packet",
+    "pin"
+  ]
+}

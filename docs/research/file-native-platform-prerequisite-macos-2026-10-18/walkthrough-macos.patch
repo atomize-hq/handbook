@@ -1,0 +1,14 @@
+diff --git a/private/tmp/file-native-prerequisite-macos-20261018-source/docs/research/file-native-engine-followup-2026-10-17/walkthrough.sh b/private/tmp/file-native-prerequisite-macos-20261018-source/docs/research/file-native-platform-prerequisite-macos-2026-10-18/walkthrough-macos.sh
+index 253cf19..74c9e53 100644
+--- a/private/tmp/file-native-prerequisite-macos-20261018-source/docs/research/file-native-engine-followup-2026-10-17/walkthrough.sh
++++ b/private/tmp/file-native-prerequisite-macos-20261018-source/docs/research/file-native-platform-prerequisite-macos-2026-10-18/walkthrough-macos.sh
+@@ -5,7 +5,8 @@ destination=$2
+ ls -la "$store"
+ cat "$store/README.md"
+ # Standard-library JSON parsing only; this does not import or invoke the engine.
+-mapfile -t binding < <(python3 - "$store" <<'PY'
++binding=()
++while IFS= read -r binding_line; do binding+=("$binding_line"); done < <(python3 - "$store" <<'PY'
+ import json,pathlib,sys,hashlib
+ r=pathlib.Path(sys.argv[1]);s=json.loads((r/'SELECTED.json').read_bytes());b=(r/'publications'/(s['publication']+'.json')).read_bytes();assert hashlib.sha256(b).hexdigest()==s['digest'];p=json.loads(b);packet=r/p['candidate']['closure'];print(packet);print(p['candidate']['manifest_digest']);print(r/'view' if p['candidate']['mode']=='A' else packet)
+ PY

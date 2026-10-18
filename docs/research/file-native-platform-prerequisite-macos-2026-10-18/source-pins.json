@@ -1,0 +1,170 @@
+{
+  "AGENTS.md": {
+    "sha256": "721b1b3901526d645711befee7e35f3662d5f1b78784647fe30f3c17c91802f6",
+    "git_blob": "2f015f855c46180822be43aaec696a827df71c76"
+  },
+  "docs/specs/handbook-contract-membrane/structured-data-format-standard.md": {
+    "sha256": "48f4c4fbaaed3bbe5a65f9405d4aa68e32f924860f4e65252cf6aa092ff1b481",
+    "git_blob": "505c5de613a36c1365433f06311eeac3846d351b"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/storage_account.py": {
+    "sha256": "a5a196e3581485aad5cbe090b8b74e4ed2437a69b61f4789f02c5c871ee86048",
+    "git_blob": "5027d9705dfbbe97239f29256637923d7d0a3c7c"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/pin.py": {
+    "sha256": "4ff882a15ab6e9474ea60f48eba4f2beaf25c6a9af35a5fea0f19293737fe77a",
+    "git_blob": "920bb0aa0a17d62e8a9c60106024c229582c69bc"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/cap_diagnosis.py": {
+    "sha256": "e8af61a5dac202800ecc93a46e302b4e3beaafb1363e0083809f92414921fc37",
+    "git_blob": "7311ecc75800ee8639c524c78a1beac0dee7f97d"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/terminal_copy.py": {
+    "sha256": "578271c0067545e0196385c2880ae31a2dbe962fc22b0c08550fa3d2be87e11f",
+    "git_blob": "f62fe675c22bdfd65a3aad3fced5cf018b7d79ae"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/Cargo.toml": {
+    "sha256": "e78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0",
+    "git_blob": "5cda810b7706f025056577620bf400a23922100f"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/collect.py": {
+    "sha256": "ccef8ae06b56164224c5482f847ee8f175e21caff7bb3dc8a14e700a26e5dd6f",
+    "git_blob": "96d6059b78cdc1161b1077bd1eb606e33dd39b90"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/allocation.md": {
+    "sha256": "299809df0ec86438999a62775b9e762a6c26593f8b8144ecc172cc8d7316dc4f",
+    "git_blob": "06b78b4a0fc57c5ee54a0efaa5f993a3f1eebe9d"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/comparison.md": {
+    "sha256": "3bdf4409f818ec7079c143fc2457132bffe982c1c0af50112e852b42fdd4aa8c",
+    "git_blob": "c7d95ea62d90673ec38c2cb521d12e375f2dafa3"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/monitor.py": {
+    "sha256": "19883c42bafad8cd83f9bd45ba2dab9d3623802ae1816b78ebcca81f12644574",
+    "git_blob": "5b3a3f9833babcb396a4d0e6074f98a70ec327f1"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/execution-notes.md": {
+    "sha256": "f0983242b9bc08ada68ff49002b8ecc8cccddcb57a2bf19bfd5f52569f4a8731",
+    "git_blob": "f54138f4f200be1df4bce479286d38a3d6d4d39e"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/indirect_gc.py": {
+    "sha256": "d381506d523ab8a00b038096e1da1e39ebbd50d92313b164fa2156f1de7a676e",
+    "git_blob": "7a513ba7c257c118c3361f65f5d958e69e9087ae"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/verify_evidence.py": {
+    "sha256": "48624d5bdc3d33870308d1c18899cd8202468deb130d9bca702344bbf60381b3",
+    "git_blob": "b9bd6b08dcd6c20174b24a0f632930ad566c9eea"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/extend.py": {
+    "sha256": "748559b76976df533a45c803e154e9f48aba6d535224e27bab1d95cfd1b6e559",
+    "git_blob": "c7e306df6b58e0fac923c6858fd676524852bb7c"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/workloads.py": {
+    "sha256": "9212aa2976c6dc3771ae3b7eef7d6244e60a4ee6df1c63867834d00b3b09f3a9",
+    "git_blob": "ae0683a4110cef3c16e1a981c7285a52f4690cba"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/capture_checks.py": {
+    "sha256": "e217fd0e4b35c6584f96a74523d57f0ed98b3d6733495fdfe4cb0d87ab852604",
+    "git_blob": "5270406bae66774e41588cd6ee70fe6708511b60"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/profile.py": {
+    "sha256": "e91c80aceefa384ee1e4d76c7a3f42f600321e0d0ec3061331d20698e4188930",
+    "git_blob": "4b957f2685ba07de33e744c38b34bc2b0054d957"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/execute.py": {
+    "sha256": "2cb6c482324e09c4eb533a091bc057633aa7b1f885d11aaaac39d66cf9afdcb2",
+    "git_blob": "950b90fa3f36d0e57c56863ce17ccd03a99e2514"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/Cargo.lock": {
+    "sha256": "bb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998",
+    "git_blob": "5c637aa036cb28b10c2732a77bcd6685ecdd688c"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/continue_selected.py": {
+    "sha256": "d0fe429f612b4c8267743ba1cfee76fac738571d694a6d5a57c7b21199dee40d",
+    "git_blob": "b72973fcba57d1504baf00646d87c2f4dbb8a33f"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/budget_amendment.py": {
+    "sha256": "5439d1344ca274f9d6ff4eaabba4b08966e80a3ce2ee85f3aacd1e2bc6d8ef88",
+    "git_blob": "68fc52a75508dc0bba1715317ac7012a442df050"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/README.md": {
+    "sha256": "bbf4de3c0e6e9258f7ca17e89082345e8fa6b7ec0c6ba5ff39dc015fed066e59",
+    "git_blob": "86fa77aff03c681439a5800c6167a34ca4ec7141"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/experiment.py": {
+    "sha256": "c635af9d496de2d3fe424ae48f284c45a71c0702f9653b43dba82231a8a93439",
+    "git_blob": "87762d72b72ca0c6d2f48b69c2786b9dbf382964"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/baseline_harness.py": {
+    "sha256": "b43a16a9669ab8b222875ca6369fab0cd9ab3bb11aeb309628ad19e2a3649336",
+    "git_blob": "8c6de2716627abb534349f596dd0999d46dd192c"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/verification.md": {
+    "sha256": "7805211d68e338c318ac740249e43f935cf8130e032087dfb7f843fcd89a8047",
+    "git_blob": "5fc2f7f7197a8e661b1e5f4efd72f39cca4b3271"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/regressions.py": {
+    "sha256": "71afa67c3cd502aaa47d103a663859eea87f36091448e19b79efd338d57bd72b",
+    "git_blob": "6e5f63d0a19385990b55bb19b699f9d0148b6689"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/backend_checks.py": {
+    "sha256": "efb7e6b2df27c7f35cad3ee36120ef38984ad60ae3e351a0339cd0a248a6f9e5",
+    "git_blob": "561d8a5aef196439236be95bdfb8359b173d05b6"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/tables.py": {
+    "sha256": "8cf0d55988e653dd2b111b619b8e38144e5f1f4ca78addf989dbbea199ee9202",
+    "git_blob": "14915d8654ef1748632d0c387d954b040fd60908"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/review.md": {
+    "sha256": "a6dc4ed84117ba47ac2c5844a1d2dae11378b40e06ca26b660cab885dc2bce4f",
+    "git_blob": "46fd396d060f89cfc2496c22871efee13d2265e1"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/walkthrough.sh": {
+    "sha256": "5225b4046ff7f8c760c309479ff5682b15b86f41549c6a1e803614cb2d828803",
+    "git_blob": "253cf191cc374df24bebcb83bdd7e58830a3af07"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/retained_probe.py": {
+    "sha256": "eefd0b9bd0fbb3ff9e9ed948889956f7a16f686dd3c2f9ddaaf394e158d801ab",
+    "git_blob": "ebf063d0ff08bf19d0e47b8de0429f555c6b0c3f"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/account.py": {
+    "sha256": "9d284283f2f9467ec4d96daf3f6f45823f960e6e5e39176e87e0d3b2d48bb707",
+    "git_blob": "af40e45bfec24b859d32af723b1e8d130d28e716"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/protocol.md": {
+    "sha256": "f89353c00894e4ed5b429c49e11e36647bd2f3a11af3c318cd4b027a5501c471",
+    "git_blob": "23789fdd9a68e75c814232e9dd392c973f2ff495"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/restoration.py": {
+    "sha256": "45c40ca0ed6282592a517a70ca894c94abe17b8c35e5782684b96c1153ed0330",
+    "git_blob": "64e3f2d9df3b698db007758c44ca2f50ca7725ec"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/reporting_checks.py": {
+    "sha256": "987c4aa8d1b5f4836bc5679077409e436f02f37647b72375e14a839ec9d9686a",
+    "git_blob": "7ca88f93231c34542dd029e94f41f77661702adb"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/src/io.rs": {
+    "sha256": "fd7453986251426947b28f16fb6497c3fc501a52c867b682e1db04db976e774a",
+    "git_blob": "2f3fd7c0e159c81766265fe27a16080383e2eefa"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/src/backend.rs": {
+    "sha256": "79b6220819a0d9d059a41078c6323e8b83d23452025f8b35ca52a83f3d3bfd6c",
+    "git_blob": "07bd80612f9f928e7fd0bff260b209bb0bbdbe4f"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/src/disk.rs": {
+    "sha256": "1ed496b1b1ea5138053128521fcc609a6aaa6f00828c8d75ff604aa4002afdd2",
+    "git_blob": "125463637231bcbf6a9ccfb7fb583f7c730cafa9"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/src/main.rs": {
+    "sha256": "8cd6800fb18e1c5f26738f648589287a3d8fb2a217b0f4bd4d6dc17310083d57",
+    "git_blob": "b241e8712d8429ee514783a18e966da8b77d7e6a"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/src/lifecycle.rs": {
+    "sha256": "30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4",
+    "git_blob": "eeda2efbcd75f20a949049149a1ce108a5108583"
+  },
+  "docs/research/file-native-engine-followup-2026-10-17/src/model.rs": {
+    "sha256": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10",
+    "git_blob": "5ad068d7de96c0a37441dcf07abe85918ca56457"
+  }
+}

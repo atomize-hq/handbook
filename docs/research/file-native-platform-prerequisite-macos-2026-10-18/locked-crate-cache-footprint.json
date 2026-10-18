@@ -1,0 +1,22 @@
+{
+  "crate": "libc 0.2.191",
+  "reason": "only locked crate missing from preexisting shared Cargo cache",
+  "qualification": "Full archive/unpacked footprint conservatively recorded separately from owned roots; no broad toolchain install",
+  "rows": [
+    {
+      "path": "/Users/spensermcconnell/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/libc-0.2.191.crate",
+      "files": 1,
+      "logical_bytes": 855401,
+      "allocated_file_bytes": 856064,
+      "archive_sha256": "65cd87c9a6d60536580b316ad985726104730a5151c99845f2490428ef91240a"
+    },
+    {
+      "path": "/Users/spensermcconnell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.191",
+      "files": 453,
+      "logical_bytes": 4599658,
+      "allocated_file_bytes": 5935104,
+      "archive_sha256": null
+    }
+  ],
+  "total_allocated_file_bytes": 6791168
+}

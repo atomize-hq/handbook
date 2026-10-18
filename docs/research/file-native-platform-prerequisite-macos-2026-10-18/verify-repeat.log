@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "native_events": 5311,
+  "synthetic_events": 4,
+  "native_censored_events": 0,
+  "native_process_rusage_available": 5311,
+  "phase_event_counts": {
+    "controller-capture": 4,
+    "v1/cow/backend-checks": 3,
+    "v1/cow/contention": 118,
+    "v1/cow/correctness": 2232,
+    "v1/cow/growth-A": 22,
+    "v1/cow/growth-B": 22,
+    "v1/cow/indirect-gc": 24,
+    "v1/cow/navigation": 4,
+    "v1/cow/regressions": 240,
+    "v1/cow/restoration": 42,
+    "v1/cow/supplement": 10,
+    "v1/manifest/contention": 118,
+    "v1/manifest/correctness": 2184,
+    "v1/manifest/growth-A": 22,
+    "v1/manifest/growth-B": 22,
+    "v1/manifest/navigation": 4,
+    "v1/manifest/regressions": 192,
+    "v1/manifest/restoration": 42,
+    "v1/manifest/supplement": 10
+  },
+  "phase_oracle_files": [
+    "v1--manifest--regressions--extended-fault-observations.json",
+    "v1--manifest--correctness--fault-observations.json",
+    "v1--cow--correctness--extended-fault-observations.json",
+    "v1--cow--correctness--fault-observations.json",
+    "v1--manifest--correctness--extended-fault-observations.json",
+    "v1--cow--regressions--extended-fault-observations.json"
+  ],
+  "qualification": "Export integrity/source/session/response interpretation checks; not independent engine test cases or hardware persistence proof"
+}

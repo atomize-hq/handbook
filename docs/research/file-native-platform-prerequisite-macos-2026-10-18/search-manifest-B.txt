@@ -1,0 +1,27 @@
+3:Start with [overview](docs/item-overview-d000000.yaml). Stable IDs survive title changes.
+9:## d000000
+11:Overview — [overview](docs/item-overview-d000000.yaml)
+13:- requires: [d000001](docs/item-requirement---d000001.yaml)
+14:- attachment: [d000009](docs/item-attachments-d000009/evidence/deep/source.txt)
+15:## d000001
+17:Requirement α — [requirement](docs/item-requirement---d000001.yaml)
+19:- cites: [d000002](docs/item-decision-caf--d000002.json)
+20:## d000002
+22:Decision café — [exact-json](docs/item-decision-caf--d000002.json)
+24:- cites: https://unavailable.invalid/source (external; availability not promised)
+25:## d000003
+27:CON — [note-quote](docs/item-con-d000003.md)
+29:## d000004
+31:con. — [note-quote](docs/item-con--d000004.md)
+33:## d000005
+35:AUX  — [note-quote](docs/item-aux--d000005.md)
+37:## d000006
+39:Case — [note-quote](docs/item-case-d000006.md)
+41:## d000007
+43:case — [note-quote](docs/item-case-d000007.md)
+45:## d000008
+47:é — [note-quote](docs/item---d000008.md)
+49:## d000009
+51:é — [attachment](docs/item-attachments-d000009/evidence/deep/source.txt)
+55:research source 10 — [overview](docs/item-research-source-10-d000010.yaml)
+59:research source 11 — [requirement](docs/item-research-source-11-d000011.yaml)

@@ -1,0 +1,38 @@
+[
+  {
+    "command": "hostname",
+    "exit": 0,
+    "stdout": "Mac\n",
+    "stderr": ""
+  },
+  {
+    "command": "command -v bash python3 cargo rustc ls cat find head cp",
+    "exit": 0,
+    "stdout": "/bin/bash\n/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3\n/Users/spensermcconnell/.cargo/bin/cargo\n/Users/spensermcconnell/.cargo/bin/rustc\n/bin/ls\n/bin/cat\n/usr/bin/find\n/usr/bin/head\n/bin/cp\n",
+    "stderr": ""
+  },
+  {
+    "command": "xcrun --show-sdk-version",
+    "exit": 0,
+    "stdout": "26.5\n",
+    "stderr": "2026-10-18 11:12:25.991 xcodebuild[71915:147083477]  DVTFilePathFSEvents: Failed to start fs event stream.\n2026-10-18 11:12:26.449 xcodebuild[71915:147083476] [MT] DVTDeveloperPaths: Failed to get length of DARWIN_USER_CACHE_DIR from confstr(3), error = Error Domain=NSPOSIXErrorDomain Code=5 \"Input/output error\". Using NSCachesDirectory instead.\n"
+  },
+  {
+    "command": "sysctl -n hw.model hw.memsize hw.ncpu",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "sysctl: sysctl fmt -1 1024 1: Operation not permitted\n"
+  },
+  {
+    "command": "git status --porcelain",
+    "exit": 0,
+    "stdout": "?? docs/research/file-native-platform-prerequisite-macos-2026-10-18/\n",
+    "stderr": ""
+  },
+  {
+    "command": "git rev-parse HEAD",
+    "exit": 0,
+    "stdout": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9\n",
+    "stderr": ""
+  }
+]

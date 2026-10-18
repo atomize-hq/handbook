@@ -1,0 +1,98 @@
+{
+  "phase": "growth",
+  "backend": "manifest",
+  "mode": "A",
+  "status": "passed",
+  "epoch": 1792338021.676511,
+  "resource": {
+    "epoch": 1792338024.667795,
+    "free_bytes": 37486256128,
+    "allocated_file_bytes": 1322622976,
+    "roots": {
+      "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+        "files": 3140,
+        "directories": 706,
+        "logical_bytes": 115932531,
+        "allocated_file_bytes": 123531264,
+        "hardlink_aliases_not_recounted": 0,
+        "buckets": {
+          "other": {
+            "files": 3137,
+            "bytes": 89721607,
+            "allocated_bytes": 97214464
+          },
+          "objects": {
+            "files": 3,
+            "bytes": 26210924,
+            "allocated_bytes": 26316800
+          }
+        }
+      },
+      "/private/tmp/file-native-prerequisite-macos-20261018": {
+        "files": 98421,
+        "directories": 44052,
+        "logical_bytes": 1037916589,
+        "allocated_file_bytes": 1199091712,
+        "hardlink_aliases_not_recounted": 5,
+        "buckets": {
+          "other": {
+            "files": 11325,
+            "bytes": 94512000,
+            "allocated_bytes": 119730176
+          },
+          "receipts": {
+            "files": 1896,
+            "bytes": 718888,
+            "allocated_bytes": 7778304
+          },
+          "publications": {
+            "files": 2068,
+            "bytes": 4228556,
+            "allocated_bytes": 9506816
+          },
+          "originals": {
+            "files": 18750,
+            "bytes": 196292580,
+            "allocated_bytes": 218984448
+          },
+          "view": {
+            "files": 8348,
+            "bytes": 99638411,
+            "allocated_bytes": 111190016
+          },
+          "attempts": {
+            "files": 22385,
+            "bytes": 235472370,
+            "allocated_bytes": 277663744
+          },
+          "generations": {
+            "files": 31320,
+            "bytes": 368990490,
+            "allocated_bytes": 412880896
+          },
+          "packets": {
+            "files": 130,
+            "bytes": 1616903,
+            "allocated_bytes": 1757184
+          },
+          "divergence": {
+            "files": 577,
+            "bytes": 6920392,
+            "allocated_bytes": 7524352
+          },
+          "copies": {
+            "files": 408,
+            "bytes": 4877128,
+            "allocated_bytes": 5382144
+          },
+          "objects": {
+            "files": 1214,
+            "bytes": 24648871,
+            "allocated_bytes": 26693632
+          }
+        }
+      }
+    },
+    "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+  }
+}

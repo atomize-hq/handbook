@@ -1,0 +1,21 @@
+{
+  "start_epoch": 1792335835.045125,
+  "launch_deadline_epoch": 1792338835.045125,
+  "report_deadline_epoch": 1792339435.045125,
+  "cap_bytes": 6442450944,
+  "reserve_bytes": 21474836480,
+  "max_workers": 8,
+  "small_invocation_seconds": 120,
+  "growth_invocation_seconds": 300,
+  "owned_roots": [
+    "/private/tmp/file-native-prerequisite-macos-20261018-source",
+    "/private/tmp/file-native-prerequisite-macos-20261018"
+  ],
+  "runtime": "/private/tmp/file-native-prerequisite-macos-20261018",
+  "source": "/private/tmp/file-native-prerequisite-macos-20261018-source",
+  "baseline": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+  "correctness": "both backends full correctness plus separate final boundary regression, restoration, indirect and page damage; terminal extraction; serial 1k smoke only",
+  "delete": "only pinned lifecycle helpers in newly owned disposable subroots; no cleanup of other roots",
+  "optional_10k": "not allocated initially; require cost and disk review",
+  "report_reserve_seconds": 600
+}

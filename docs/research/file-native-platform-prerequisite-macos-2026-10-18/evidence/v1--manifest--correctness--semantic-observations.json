@@ -1,0 +1,338 @@
+[
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 0,
+    "case": "delete-edge",
+    "result": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 0,
+    "case": "unique",
+    "result": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 0,
+    "case": "budget",
+    "result": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 0,
+    "case": "rename-edge",
+    "result": "accepted"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 1,
+    "case": "delete-edge",
+    "result": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 1,
+    "case": "unique",
+    "result": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 1,
+    "case": "budget",
+    "result": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 1,
+    "case": "rename-edge",
+    "result": "accepted"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 2,
+    "case": "delete-edge",
+    "result": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 2,
+    "case": "unique",
+    "result": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 2,
+    "case": "budget",
+    "result": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "project",
+    "trial": 2,
+    "case": "rename-edge",
+    "result": "accepted"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 0,
+    "case": "delete-edge",
+    "result": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 0,
+    "case": "unique",
+    "result": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 0,
+    "case": "budget",
+    "result": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 0,
+    "case": "rename-edge",
+    "result": "accepted"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 1,
+    "case": "delete-edge",
+    "result": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 1,
+    "case": "unique",
+    "result": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 1,
+    "case": "budget",
+    "result": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 1,
+    "case": "rename-edge",
+    "result": "accepted"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 2,
+    "case": "delete-edge",
+    "result": "semantic:local-reference"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 2,
+    "case": "unique",
+    "result": "semantic:unique"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 2,
+    "case": "budget",
+    "result": "semantic:budget"
+  },
+  {
+    "mode": "A",
+    "consumer": "research",
+    "trial": 2,
+    "case": "rename-edge",
+    "result": "accepted"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 0,
+    "case": "delete-edge",
+    "result": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 0,
+    "case": "unique",
+    "result": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 0,
+    "case": "budget",
+    "result": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 0,
+    "case": "rename-edge",
+    "result": "accepted"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 1,
+    "case": "delete-edge",
+    "result": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 1,
+    "case": "unique",
+    "result": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 1,
+    "case": "budget",
+    "result": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 1,
+    "case": "rename-edge",
+    "result": "accepted"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 2,
+    "case": "delete-edge",
+    "result": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 2,
+    "case": "unique",
+    "result": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 2,
+    "case": "budget",
+    "result": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "project",
+    "trial": 2,
+    "case": "rename-edge",
+    "result": "accepted"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 0,
+    "case": "delete-edge",
+    "result": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 0,
+    "case": "unique",
+    "result": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 0,
+    "case": "budget",
+    "result": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 0,
+    "case": "rename-edge",
+    "result": "accepted"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 1,
+    "case": "delete-edge",
+    "result": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 1,
+    "case": "unique",
+    "result": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 1,
+    "case": "budget",
+    "result": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 1,
+    "case": "rename-edge",
+    "result": "accepted"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 2,
+    "case": "delete-edge",
+    "result": "semantic:local-reference"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 2,
+    "case": "unique",
+    "result": "semantic:unique"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 2,
+    "case": "budget",
+    "result": "semantic:budget"
+  },
+  {
+    "mode": "B",
+    "consumer": "research",
+    "trial": 2,
+    "case": "rename-edge",
+    "result": "accepted"
+  }
+]

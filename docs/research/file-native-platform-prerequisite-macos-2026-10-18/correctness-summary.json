@@ -1,0 +1,90 @@
+[
+  {
+    "backend": "manifest",
+    "phase": "correctness",
+    "completed": true,
+    "raw_events": 2184,
+    "race_rows": 12,
+    "semantic_rows": 48,
+    "fault_rows": 233,
+    "extended-fault_rows": 25,
+    "retention_rows": 2,
+    "duplicate-delete_rows": 2,
+    "io": {
+      "writers": 8,
+      "stable_inode": true,
+      "short_retry": true,
+      "nested_mkdir_retry": true,
+      "preexisting_parent_sync": 6,
+      "corruption_refused": "integrity-digest:/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/correctness/io/probe/nested/content",
+      "saved_sha256": "588114af8100c1d75f515a26cb3ac4edec5037ba273814d80cbe7002b6b42fb1"
+    },
+    "phase_oracles": {
+      "must-not-select": 174,
+      "visible-uncertain": 6,
+      "must-retain": 51
+    }
+  },
+  {
+    "backend": "manifest",
+    "phase": "regressions",
+    "completed": true,
+    "raw_events": 192,
+    "extended-fault_rows": 25,
+    "retention_rows": 2,
+    "duplicate-delete_rows": 2,
+    "io": {
+      "writers": 8,
+      "stable_inode": true,
+      "short_retry": true,
+      "nested_mkdir_retry": true,
+      "preexisting_parent_sync": 6,
+      "corruption_refused": "integrity-digest:/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/regressions/io/probe/nested/content",
+      "saved_sha256": "588114af8100c1d75f515a26cb3ac4edec5037ba273814d80cbe7002b6b42fb1"
+    }
+  },
+  {
+    "backend": "cow",
+    "phase": "correctness",
+    "completed": true,
+    "raw_events": 2232,
+    "race_rows": 12,
+    "semantic_rows": 48,
+    "fault_rows": 233,
+    "extended-fault_rows": 37,
+    "retention_rows": 2,
+    "duplicate-delete_rows": 2,
+    "io": {
+      "writers": 8,
+      "stable_inode": true,
+      "short_retry": true,
+      "nested_mkdir_retry": true,
+      "preexisting_parent_sync": 6,
+      "corruption_refused": "integrity-digest:/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/correctness/io/probe/nested/content",
+      "saved_sha256": "588114af8100c1d75f515a26cb3ac4edec5037ba273814d80cbe7002b6b42fb1"
+    },
+    "phase_oracles": {
+      "must-not-select": 174,
+      "visible-uncertain": 6,
+      "must-retain": 51
+    }
+  },
+  {
+    "backend": "cow",
+    "phase": "regressions",
+    "completed": true,
+    "raw_events": 240,
+    "extended-fault_rows": 37,
+    "retention_rows": 2,
+    "duplicate-delete_rows": 2,
+    "io": {
+      "writers": 8,
+      "stable_inode": true,
+      "short_retry": true,
+      "nested_mkdir_retry": true,
+      "preexisting_parent_sync": 6,
+      "corruption_refused": "integrity-digest:/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/regressions/io/probe/nested/content",
+      "saved_sha256": "588114af8100c1d75f515a26cb3ac4edec5037ba273814d80cbe7002b6b42fb1"
+    }
+  }
+]

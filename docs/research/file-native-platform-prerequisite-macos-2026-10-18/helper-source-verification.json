@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "backend": "manifest",
+      "phase": "restoration",
+      "rows": 2,
+      "sha256": "45c40ca0ed6282592a517a70ca894c94abe17b8c35e5782684b96c1153ed0330"
+    },
+    {
+      "backend": "manifest",
+      "phase": "supplement",
+      "rows": 1,
+      "sha256": "b394c49e13b0da50f962774e83d8fff2e4cace3c7fc18ac2f1332ccea903792f"
+    },
+    {
+      "backend": "cow",
+      "phase": "restoration",
+      "rows": 2,
+      "sha256": "45c40ca0ed6282592a517a70ca894c94abe17b8c35e5782684b96c1153ed0330"
+    },
+    {
+      "backend": "cow",
+      "phase": "supplement",
+      "rows": 1,
+      "sha256": "b394c49e13b0da50f962774e83d8fff2e4cace3c7fc18ac2f1332ccea903792f"
+    },
+    {
+      "backend": "cow",
+      "phase": "indirect-gc",
+      "rows": 2,
+      "sha256": "d381506d523ab8a00b038096e1da1e39ebbd50d92313b164fa2156f1de7a676e"
+    },
+    {
+      "backend": "cow",
+      "phase": "backend-checks",
+      "rows": 1,
+      "sha256": "efb7e6b2df27c7f35cad3ee36120ef38984ad60ae3e351a0339cd0a248a6f9e5"
+    }
+  ],
+  "terminal_extractions": 4,
+  "original_bash_refusal": 1,
+  "epoch": 1792338582.599152
+}

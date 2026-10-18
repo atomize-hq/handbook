@@ -1,0 +1,44 @@
+ Downloading crates ...
+  Downloaded libc v0.2.191
+   Compiling version_check v0.9.5
+   Compiling proc-macro2 v1.0.107
+   Compiling libc v0.2.191
+   Compiling unicode-ident v1.0.27
+   Compiling quote v1.0.47
+   Compiling typenum v1.20.1
+   Compiling serde_core v1.0.228
+   Compiling serde_json v1.0.145
+   Compiling serde v1.0.228
+   Compiling cfg-if v1.0.5
+   Compiling ryu v1.0.23
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.3
+   Compiling generic-array v0.14.7
+   Compiling cpufeatures v0.2.17
+   Compiling fs2 v0.4.3
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling syn v2.0.119
+   Compiling serde_derive v1.0.228
+   Compiling file-native-publication-experiment v0.1.0 (/private/tmp/file-native-prerequisite-macos-20261018-source/docs/research/file-native-engine-followup-2026-10-17)
+warning: function `put_path` is never used
+   --> src/disk.rs:253:4
+    |
+253 | fn put_path(
+    |    ^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: method `put` is never used
+   --> src/disk.rs:521:12
+    |
+433 | impl DiskIndex {
+    | -------------- method in this implementation
+...
+521 |     pub fn put(&mut self, store: &mut Objects, key: String, value: Vec<u8>) -> Result<()> {
+    |            ^^^
+
+warning: `file-native-publication-experiment` (bin "file-native-publication-experiment") generated 2 warnings
+    Finished `release` profile [optimized] target(s) in 8.83s

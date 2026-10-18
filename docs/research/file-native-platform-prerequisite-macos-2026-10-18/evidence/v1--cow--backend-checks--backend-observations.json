@@ -1,0 +1,12 @@
+{
+  "helper_sha256": "efb7e6b2df27c7f35cad3ee36120ef38984ad60ae3e351a0339cd0a248a6f9e5",
+  "point": "selected path success despite unrelated page damage",
+  "audit_error": "integrity-digest:/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/backend-checks/page-damage/objects/dc/dc0f33ad9fdfad2a052885567b1434c4f7b20238c5fc4c486eb89626529f005a",
+  "damaged_page": "dc0f33ad9fdfad2a052885567b1434c4f7b20238c5fc4c486eb89626529f005a",
+  "selected": {
+    "publication": "publication-90465-1792337603946823000-133",
+    "digest": "2bd53ae6e9282e13db3c1ed949eea29bb76be5fa222be50437ea9455bd1874c1"
+  },
+  "large_indirect_points": [],
+  "retirement": []
+}

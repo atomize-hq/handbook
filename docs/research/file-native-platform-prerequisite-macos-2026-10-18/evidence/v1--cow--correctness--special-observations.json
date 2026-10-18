@@ -1,0 +1,44 @@
+{
+  "independent_store_elapsed_ns": 292918375,
+  "cross_store_vector": {
+    "project": {
+      "publication": "publication-87952-1792337161474610000-4",
+      "digest": "39b1010c7805edbac30d3a20fa71040c9c82b4e0daa54a3d2b4277a90f14ccce"
+    },
+    "research": {
+      "publication": "publication-87954-1792337161140512000-4",
+      "digest": "94486c27ed8d55a0c7588aa362707161bc11fd714dd56bd4b3e345d60b2ceeac"
+    }
+  },
+  "per_open_alias_control": {
+    "first": "6d8c3ee666d50b62b035568846c43a2725938f8afca091964f74ac5d16472cea",
+    "second": "f98a823dca6b6ef2eb544b0b1965bf334cf8af7ba8bb0793d85a6bb1d3f1e4f2",
+    "fixed_path": "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/correctness/special/project/generations/generation-87959-1792337163904438000-3"
+  },
+  "missing_payload": "integrity-read:/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/correctness/damage/payload/originals/57/57cb37815517806140ddc9244b4bdb60b185b23f9bc5465c0ba25c7ff47e8812-item-requirement---d000001.yaml:No such file or directory (os error 2)",
+  "missing_state": "integrity-read:/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/correctness/damage/state/attempts/attempt-87963-1792337164905211000-12/state.json:No such file or directory (os error 2)",
+  "missing_publication": "integrity-read:/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/correctness/damage/publication/publications/publication-87965-1792337165686531000-15.json:No such file or directory (os error 2)",
+  "missing_selector": "integrity:missing-selected-authority",
+  "corrupt_state": "integrity-digest:/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/correctness/damage/corrupt/attempts/attempt-87969-1792337166565039000-12/state.json",
+  "duplicate_key": {
+    "error": "duplicate-key:action at line 1 column 28",
+    "metrics": {
+      "bytes_metadata_read": 0,
+      "bytes_metadata_written": 0,
+      "bytes_read": 0,
+      "bytes_written": 0,
+      "copies": 0,
+      "created_directories": 0,
+      "directory_syncs": 0,
+      "file_syncs": 0,
+      "ns": {},
+      "opens": 0,
+      "replacements": 0,
+      "unsupported_directory_syncs": 0
+    },
+    "peak_memory_bytes": null,
+    "result": null,
+    "status": "error",
+    "wall_ns": 43167
+  }
+}

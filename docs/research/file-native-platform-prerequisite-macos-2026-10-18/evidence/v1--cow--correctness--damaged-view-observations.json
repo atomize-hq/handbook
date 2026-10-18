@@ -1,0 +1,13 @@
+{
+  "selected": {
+    "publication": "publication-88073-1792337188701644000-19",
+    "digest": "3e1c541bf80745c6dce0aee912e774dd0db8d7501d216e6fd32bc411ef615f85"
+  },
+  "preserved": [
+    "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/correctness/damaged-view/divergence/preserved-derived-88077-1792337189102248000-4/NAVIGATION.md",
+    "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/correctness/damaged-view/divergence/preserved-88077-1792337189056157000-1/docs/item-overview-d000000.yaml",
+    "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/correctness/damaged-view/divergence/preserved-derived-88078-1792337189138659000-1/NAVIGATION.md"
+  ],
+  "rebuild": "render-only",
+  "cross_depth": "integrity:link-escape"
+}

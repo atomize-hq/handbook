@@ -1,0 +1,10 @@
+{
+  "baseline": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+  "source_pins_sha256": "b2ee864bd5325c22b5ef6bcac39213197b27f3fe4cc13d5acb2df67d4c3a725e",
+  "path": "/private/tmp/file-native-prerequisite-macos-20261018/build/release/file-native-publication-experiment",
+  "sha256": "37ac4fe7f6e84da07a16d46c9905b16266295df955d5928637f4924b7fdf3dcc",
+  "bytes": 1313968,
+  "file": "/private/tmp/file-native-prerequisite-macos-20261018/build/release/file-native-publication-experiment: Mach-O 64-bit executable arm64\n",
+  "command": "CARGO_TARGET_DIR=/private/tmp/file-native-prerequisite-macos-20261018/build cargo build --release --locked --manifest-path docs/research/file-native-engine-followup-2026-10-17/Cargo.toml",
+  "source_changes": false
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "mode": "A",
+    "root": "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/navigation/A",
+    "selected": {
+      "publication": "publication-90477-1792337611872237000-18",
+      "digest": "557eab65f7b4739d37fc8edd72fa54e54fd24a01492e96704a67e84142e4f908"
+    },
+    "readable": "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/navigation/A/view",
+    "packet": "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/navigation/A/attempts/attempt-90477-1792337611728656000-16/retained-packet",
+    "copy": "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/extracted/A",
+    "manifest_digest": "8d122b4439ff854c0568a0d0d8c4b87d5cb0592b243c09f62595433b575f4222",
+    "closure_files": 12,
+    "grammar": "fixture Markdown links and explicit NAVIGATION locators",
+    "suspended_copy": {
+      "selected": {
+        "publication": "publication-90477-1792337611872237000-18",
+        "digest": "557eab65f7b4739d37fc8edd72fa54e54fd24a01492e96704a67e84142e4f908"
+      },
+      "fixed_path": "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/navigation/A/view",
+      "files": 19,
+      "first": "45c2dd8d4b24bea4716bb09a80de408190f0a1d92319dd0bfb341f6e66d96b27",
+      "second": "fce2c884a5641d415627f1e842d6bce0e8ecf326d54cdf2c63cd714d6030488c"
+    },
+    "copy_observation": "mixed mutable"
+  },
+  {
+    "mode": "B",
+    "root": "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/navigation/B",
+    "selected": {
+      "publication": "publication-90485-1792337613126742000-18",
+      "digest": "6941a7edbc50be3b1ac5bca1195da87c1b5e5af9cc229bc8a39051a0d8500d7d"
+    },
+    "readable": "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/navigation/B/generations/generation-90485-1792337612920603000-17",
+    "packet": "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/navigation/B/generations/generation-90485-1792337612920603000-17",
+    "copy": "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/extracted/B",
+    "manifest_digest": "28dbf6669d6cd723b1f8f0bb50e5c44adcc4bc2383b3249eafeb0f4b763d3cb0",
+    "closure_files": 19,
+    "grammar": "fixture Markdown links and explicit NAVIGATION locators",
+    "suspended_copy": {
+      "selected": {
+        "publication": "publication-90485-1792337613126742000-18",
+        "digest": "6941a7edbc50be3b1ac5bca1195da87c1b5e5af9cc229bc8a39051a0d8500d7d"
+      },
+      "fixed_path": "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/navigation/B/generations/generation-90485-1792337612920603000-17",
+      "files": 20,
+      "first": "45c2dd8d4b24bea4716bb09a80de408190f0a1d92319dd0bfb341f6e66d96b27",
+      "second": "fd83a0ea4dd771ce2fe8528787d8fe87748db00c63cd1e9a63792d8180980f28"
+    },
+    "copy_observation": "fixed coherent"
+  }
+]

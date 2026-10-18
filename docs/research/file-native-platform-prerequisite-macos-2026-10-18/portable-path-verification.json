@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "paths_checked": 229,
+  "normalization": "NFC then casefold",
+  "collisions": [],
+  "local_attributes": "* -text",
+  "qualification": "Final report namespace; native probes remain in runtime/JSON; gzip stores byte streams without pathname members."
+}

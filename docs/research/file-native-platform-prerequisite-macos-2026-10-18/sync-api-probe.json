@@ -1,0 +1,19 @@
+{
+  "calls": [
+    {
+      "path": "/private/tmp/file-native-prerequisite-macos-20261018/native-filesystem-probe/Case",
+      "operation": "fcntl F_FULLFSYNC (Darwin constant 51)",
+      "return_value": 0,
+      "elapsed_ns": 3101625
+    },
+    {
+      "path": "/private/tmp/file-native-prerequisite-macos-20261018/native-filesystem-probe",
+      "operation": "fcntl F_FULLFSYNC (Darwin constant 51)",
+      "return_value": 0,
+      "elapsed_ns": 3939291
+    }
+  ],
+  "rust_1_89_source": "https://github.com/rust-lang/rust/blob/1.89.0/library/std/src/sys/fs/unix.rs#L1129-L1139",
+  "rust_implementation": "Apple File::sync_all routes to fcntl(F_FULLFSYNC); other Unix routes to fsync. Native binary disassembly checked separately. Python initial fsync probe is separate.",
+  "qualification": "successful calls and process interruption only; no device/OS power-loss qualification"
+}

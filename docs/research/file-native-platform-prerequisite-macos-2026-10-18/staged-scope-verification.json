@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "baseline": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+  "branch": "codex/file-native-macos-prerequisite-20261018",
+  "staged_files": 230,
+  "all_paths_in_new_namespace": true,
+  "no_core_changes": true,
+  "gitnexus": "UNKNOWN / isolated repository unavailable",
+  "whitespace_check": "passed for authored files; byte-exact logs/stdout/stderr/diff-patch excepted",
+  "excluded_untracked_bytecode": [
+    "docs/research/file-native-platform-prerequisite-macos-2026-10-18/__pycache__/native_runner.cpython-311.pyc"
+  ],
+  "counts_include_this_receipt": true
+}

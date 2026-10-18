@@ -1,0 +1,22 @@
+{
+  "docs/research/durable-membership-prototype-2026-10-12/transaction-contract.md": {
+    "sha256": "63e24a70a2ac7b273912a0e9b40bffbcef59ce248f48d232dc4a0d8e59725355",
+    "git_blob": "0c0c67040b2c143f1bd92d30ac227b034ec8141b"
+  },
+  "docs/research/durable-membership-prototype-2026-10-12/transaction-verification.md": {
+    "sha256": "3570185fe120912dfde7784b33be42dcc235f3cf80502d7969302233c9ba19d1",
+    "git_blob": "e33656754e845df02a453b821870de359cbcfa2f"
+  },
+  "docs/research/durable-membership-prototype-2026-10-12/transaction-review.md": {
+    "sha256": "1f04575b379bbe8745e477ab7eabbdf42ac41d554320851d777cf9e10c366fb1",
+    "git_blob": "98a19f538448b4e79b153447ff8396700c16db21"
+  },
+  "docs/research/durable-membership-prototype-2026-10-12/src/disk.rs": {
+    "sha256": "c8661a21f87ec20a6e7979f1e04bb721da59ab1eeb4707f18914e74ebb03f944",
+    "git_blob": "09f8b3feaec96d5d828c1fe40a3de0af3be750a0"
+  },
+  "docs/research/durable-membership-prototype-2026-10-12/src/transaction.rs": {
+    "sha256": "8e9bfddb832fa0be198dba794b9a0ee1035da8b3a4f33231ed593220ed6ab13d",
+    "git_blob": "6cb13a5334fd9e972da00a57f34a0c9dff49e0d8"
+  }
+}

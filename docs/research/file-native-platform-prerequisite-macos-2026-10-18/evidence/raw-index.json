@@ -1,0 +1,154 @@
+[
+  {
+    "source": "controller-capture/capture-check-raw.jsonl",
+    "file": "controller-capture--capture-check-raw.jsonl.gz",
+    "records": 4,
+    "bytes": 4405,
+    "sha256": "bbafe9081994a5890fef9d2ad1562c1823029e9cfe6599cfad7a9aec6a24e58a",
+    "compressed_sha256": "4126d13dd32a59a168d38cb869816b56d7616a7be50e29496fe67b56e0ba7762"
+  },
+  {
+    "source": "v1/cow/backend-checks/backend-checks-raw.jsonl",
+    "file": "v1--cow--backend-checks--backend-checks-raw.jsonl.gz",
+    "records": 3,
+    "bytes": 13692,
+    "sha256": "1f1a839d24c1c93f4050314fe14241e1a126b437a2c8596b3cb075a2f85b6b86",
+    "compressed_sha256": "f7457b1964349f4643ff6708109af146b9d8dd4a4047fc73948d24e0930f8db1"
+  },
+  {
+    "source": "v1/cow/contention/contention-raw.jsonl",
+    "file": "v1--cow--contention--contention-raw.jsonl.gz",
+    "records": 118,
+    "bytes": 634932,
+    "sha256": "0d5a063dd6383bb6e3fe2742dcd983c5dba24ccd2b6ec27949fbc3d137bf1cad",
+    "compressed_sha256": "c6e9c73b7ba2672376f095ee49de65f170d53302eeec247f2bfea5472e7c081a"
+  },
+  {
+    "source": "v1/cow/correctness/correctness-raw.jsonl",
+    "file": "v1--cow--correctness--correctness-raw.jsonl.gz",
+    "records": 2232,
+    "bytes": 10430030,
+    "sha256": "c5604b97cc2cffa8e7af9268878f16949eaf2b50fb76a8f297502e3f92e58f62",
+    "compressed_sha256": "265bdbf7ccf76bdc15971ef02f6fbaf3d8347a10663bd5bedf3b0f0e002800e5"
+  },
+  {
+    "source": "v1/cow/growth-A/growth-raw.jsonl",
+    "file": "v1--cow--growth-A--growth-raw.jsonl.gz",
+    "records": 22,
+    "bytes": 164376,
+    "sha256": "703f16a55838205bc133d378fabb4e771b75051800755f4a5deb8235ec7ab0f4",
+    "compressed_sha256": "552cc6c6db77dbad17e2256e4fcd065655f572808d2aa5a68b56774feea7c771"
+  },
+  {
+    "source": "v1/cow/growth-B/growth-raw.jsonl",
+    "file": "v1--cow--growth-B--growth-raw.jsonl.gz",
+    "records": 22,
+    "bytes": 164606,
+    "sha256": "4ae3615bd3ba95137a748b86986dc7a2d30b55e646e60649a3b2a1ffaab84841",
+    "compressed_sha256": "dbe9a903496c10678c251d7e74212d673b0a0c2029e8b0c4b454893448b286ea"
+  },
+  {
+    "source": "v1/cow/indirect-gc/indirect-gc-raw.jsonl",
+    "file": "v1--cow--indirect-gc--indirect-gc-raw.jsonl.gz",
+    "records": 24,
+    "bytes": 137690,
+    "sha256": "56ffe906272ae47717f8513b00358f53c37b1ea8035a6ac934966eeb0e5685d1",
+    "compressed_sha256": "532050c12c7dfb77b0daebd5f331f34a057b8da9d5b35ce331879bbf7e349a37"
+  },
+  {
+    "source": "v1/cow/navigation/navigation-raw.jsonl",
+    "file": "v1--cow--navigation--navigation-raw.jsonl.gz",
+    "records": 4,
+    "bytes": 19477,
+    "sha256": "0507023897f84a5ffc025e2a1cabf4956e036dca3720da985d5822d4873c6d97",
+    "compressed_sha256": "246f6865b9ede13e0ca44bf6a0e867bdffd0fd450918d427a9dfcb6c3eaaf1a6"
+  },
+  {
+    "source": "v1/cow/regressions/regressions-raw.jsonl",
+    "file": "v1--cow--regressions--regressions-raw.jsonl.gz",
+    "records": 240,
+    "bytes": 1430916,
+    "sha256": "9617a169d07ddbae6cf72bc24ccf1f2d2fe838193c0ce0a50835047150babeff",
+    "compressed_sha256": "d320e79dfab5abf540ab7376c82b74e1d0fdcb7d09033ff3755d80615866ab4c"
+  },
+  {
+    "source": "v1/cow/restoration/restoration-raw.jsonl",
+    "file": "v1--cow--restoration--restoration-raw.jsonl.gz",
+    "records": 42,
+    "bytes": 189667,
+    "sha256": "4247c1d8b2a23eb0982f8ef11f2ed0ce63ec4678ca66df0139b27fda95b9ef8b",
+    "compressed_sha256": "40eeccf857833302c193e827b9cdbdf612360a7c3843e491944cccc20393566a"
+  },
+  {
+    "source": "v1/cow/supplement/supplement-raw.jsonl",
+    "file": "v1--cow--supplement--supplement-raw.jsonl.gz",
+    "records": 10,
+    "bytes": 28079,
+    "sha256": "4d2338695378bbccc25e5d8af6da1663e84b05272a563a4e4637fcf772e739fc",
+    "compressed_sha256": "3d357152b4181655abc0ba643291cef4039be00a819907d222656f5a9842af21"
+  },
+  {
+    "source": "v1/manifest/contention/contention-raw.jsonl",
+    "file": "v1--manifest--contention--contention-raw.jsonl.gz",
+    "records": 118,
+    "bytes": 633063,
+    "sha256": "dc9d414b556605795f9cb26b6571288f0be8970f9cecb4ac111fe1bfebf11db5",
+    "compressed_sha256": "9d550f0d4d91f964e23f8ea27105c93e7cb0b6ca6dda3c1ecc1bf668ce2cd385"
+  },
+  {
+    "source": "v1/manifest/correctness/correctness-raw.jsonl",
+    "file": "v1--manifest--correctness--correctness-raw.jsonl.gz",
+    "records": 2184,
+    "bytes": 10008482,
+    "sha256": "3c5036dbcdfeff848d66f69d78a7a585c2eec0b7cd0662553b2a2bb5a6be8c9b",
+    "compressed_sha256": "6d2e1dacf7e62cf6d896dddb3cd67ed65a8fd667ef2d8c863eb79443d3c67761"
+  },
+  {
+    "source": "v1/manifest/growth-A/growth-raw.jsonl",
+    "file": "v1--manifest--growth-A--growth-raw.jsonl.gz",
+    "records": 22,
+    "bytes": 164303,
+    "sha256": "1c160b78636f409c75c4df41aafb1a4a08f95cac9570b45532c5cdd09b51fa58",
+    "compressed_sha256": "f55f5dee4eb8fedffa3aa61fd43b8362be4de586e7b4ef75957273204bf290b9"
+  },
+  {
+    "source": "v1/manifest/growth-B/growth-raw.jsonl",
+    "file": "v1--manifest--growth-B--growth-raw.jsonl.gz",
+    "records": 22,
+    "bytes": 164752,
+    "sha256": "8a68d1697df7520b58af729e73e07affd7c468b0780b80171fe26663688bc314",
+    "compressed_sha256": "db6ec2b4c8bf7da1f79587230cac67bcc0f17dac61e59a587d5269bd2172a824"
+  },
+  {
+    "source": "v1/manifest/navigation/navigation-raw.jsonl",
+    "file": "v1--manifest--navigation--navigation-raw.jsonl.gz",
+    "records": 4,
+    "bytes": 19400,
+    "sha256": "84b7d70ad9e49e99e49934dafd54c0b67c6d4344e742019911e67fc5dd91ef62",
+    "compressed_sha256": "a61aa5da8bb7b2191821441b7f2521be66db83a048eb54f9e03c2c956bdd6ed9"
+  },
+  {
+    "source": "v1/manifest/regressions/regressions-raw.jsonl",
+    "file": "v1--manifest--regressions--regressions-raw.jsonl.gz",
+    "records": 192,
+    "bytes": 1078467,
+    "sha256": "58b83c39c43aa2f0cb36d7adb89ec13907e46aaadcb81987fafdb988f24142f5",
+    "compressed_sha256": "cf6d74b38779b137da5ef539a13c928fe666a5aae244fcdf58ffcd9b76d711bb"
+  },
+  {
+    "source": "v1/manifest/restoration/restoration-raw.jsonl",
+    "file": "v1--manifest--restoration--restoration-raw.jsonl.gz",
+    "records": 42,
+    "bytes": 189673,
+    "sha256": "78c023c322d3f5681f12d03d9679734e923b7a6b01a436ee097fe3de3cc20c39",
+    "compressed_sha256": "2fe980f7b58cfe7a907c9934834fac5394babb3a92459cfca2b1fcb1f94c499a"
+  },
+  {
+    "source": "v1/manifest/supplement/supplement-raw.jsonl",
+    "file": "v1--manifest--supplement--supplement-raw.jsonl.gz",
+    "records": 10,
+    "bytes": 28082,
+    "sha256": "71d2b2ca8e5d68be740e07190c678b37c395e0515e173667f8b11a5d714ebfa0",
+    "compressed_sha256": "c311416582123e8f8702e0a005edd27eebe55fb212f949caedda4735b13c9ee0"
+  }
+]

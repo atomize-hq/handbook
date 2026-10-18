@@ -1,0 +1,96 @@
+{
+  "epoch": 1792338813.98487,
+  "free_bytes": 37199011840,
+  "allocated_file_bytes": 1586573312,
+  "roots": {
+    "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+      "files": 3462,
+      "directories": 817,
+      "logical_bytes": 123615399,
+      "allocated_file_bytes": 132091904,
+      "hardlink_aliases_not_recounted": 0,
+      "buckets": {
+        "other": {
+          "files": 3317,
+          "bytes": 93893430,
+          "allocated_bytes": 101834752
+        },
+        "objects": {
+          "files": 145,
+          "bytes": 29721969,
+          "allocated_bytes": 30257152
+        }
+      }
+    },
+    "/private/tmp/file-native-prerequisite-macos-20261018": {
+      "files": 117674,
+      "directories": 45272,
+      "logical_bytes": 1287605743,
+      "allocated_file_bytes": 1454481408,
+      "hardlink_aliases_not_recounted": 5,
+      "buckets": {
+        "other": {
+          "files": 11546,
+          "bytes": 95853531,
+          "allocated_bytes": 121552896
+        },
+        "receipts": {
+          "files": 1921,
+          "bytes": 777510,
+          "allocated_bytes": 7917568
+        },
+        "publications": {
+          "files": 2095,
+          "bytes": 4456183,
+          "allocated_bytes": 9789440
+        },
+        "originals": {
+          "files": 22254,
+          "bytes": 239981964,
+          "allocated_bytes": 264458240
+        },
+        "packets": {
+          "files": 208,
+          "bytes": 2590916,
+          "allocated_bytes": 2899968
+        },
+        "attempts": {
+          "files": 22581,
+          "bytes": 240544074,
+          "allocated_bytes": 283127808
+        },
+        "generations": {
+          "files": 45376,
+          "bytes": 550109152,
+          "allocated_bytes": 596307968
+        },
+        "view": {
+          "files": 9427,
+          "bytes": 113290145,
+          "allocated_bytes": 125136896
+        },
+        "divergence": {
+          "files": 583,
+          "bytes": 6920544,
+          "allocated_bytes": 7548928
+        },
+        "copies": {
+          "files": 408,
+          "bytes": 4877128,
+          "allocated_bytes": 5382144
+        },
+        "objects": {
+          "files": 1275,
+          "bytes": 28204596,
+          "allocated_bytes": 30359552
+        }
+      }
+    }
+  },
+  "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting",
+  "conservative_total_including_locked_crate_cache": 1593364480,
+  "cap_bytes": 6442450944,
+  "reserve_bytes": 21474836480,
+  "elapsed_seconds": 2978.9399042129517,
+  "qualification": "Snapshot before commit; this JSON and later small report/Git metadata follow the inventory. All native lanes have exited. Shared-volume free-space change is not attributed solely to this run."
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "command": "uname -a",
+    "exit": 0,
+    "output": "Darwin Mac 25.6.0 Darwin Kernel Version 25.6.0: Sat Jul 11 15:25:34 PDT 2026; root:xnu-12377.161.13~4/RELEASE_ARM64_T6020 arm64\n"
+  },
+  {
+    "command": "sw_vers",
+    "exit": 0,
+    "output": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.1\nBuildVersion:\t\t25G76\n"
+  },
+  {
+    "command": "mount",
+    "exit": 0,
+    "output": "/dev/disk3s1s1 on / (apfs, sealed, local, read-only, journaled)\ndevfs on /dev (devfs, local, nobrowse)\n/dev/disk3s6 on /System/Volumes/VM (apfs, local, noexec, journaled, noatime, nobrowse)\n/dev/disk3s2 on /System/Volumes/Preboot (apfs, local, journaled, nobrowse)\n/dev/disk3s4 on /System/Volumes/Update (apfs, local, journaled, nobrowse)\n/dev/disk1s2 on /System/Volumes/xarts (apfs, local, noexec, journaled, noatime, nobrowse)\n/dev/disk1s1 on /System/Volumes/iSCPreboot (apfs, local, journaled, nobrowse)\n/dev/disk1s3 on /System/Volumes/Hardware (apfs, local, journaled, nobrowse)\n/dev/disk3s5 on /System/Volumes/Data (apfs, local, journaled, nobrowse, protect, root data)\nmap auto_home on /System/Volumes/Data/home (autofs, automounted, nobrowse)\n/dev/disk5s1 on /Library/Developer/CoreSimulator/Cryptex/Images/bundle/SimRuntimeBundle-E454BFD1-ED2E-438B-9566-D2AFD9F25697 (apfs, local, nodev, nosuid, read-only, journaled, noatime, nobrowse)\n/dev/disk7s1 on /Library/Developer/CoreSimulator/Volumes/iOS_22G86 (apfs, sealed, local, nodev, nosuid, read-only, journaled, noatime, nobrowse)\n/dev/disk2s1 on /System/Volumes/Update/SFR/mnt1 (apfs, local, journaled, nobrowse)\n/dev/disk9s1 on /Library/Developer/CoreSimulator/Volumes/iOS_23F77 (apfs, sealed, local, nodev, nosuid, read-only, journaled, noatime, nobrowse)\n"
+  },
+  {
+    "command": "df -k . /private/tmp",
+    "exit": 0,
+    "output": "Filesystem   1024-blocks      Used Available Capacity  iused     ifree %iused  Mounted on\n/dev/disk3s5   971350180 893221836  43084036    96% 14819223 430840360    3%   /System/Volumes/Data\n/dev/disk3s5   971350180 893221836  43084036    96% 14819223 430840360    3%   /System/Volumes/Data\n"
+  },
+  {
+    "command": "/bin/bash --version",
+    "exit": 0,
+    "output": "GNU bash, version 3.2.57(1)-release (arm64-apple-darwin25)\nCopyright (C) 2007 Free Software Foundation, Inc.\n"
+  },
+  {
+    "command": "rustc -vV",
+    "exit": 0,
+    "output": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: aarch64-apple-darwin\nrelease: 1.89.0\nLLVM version: 20.1.7\n"
+  },
+  {
+    "command": "cargo -V",
+    "exit": 0,
+    "output": "cargo 1.89.0 (c24e10642 2025-06-23)\n"
+  },
+  {
+    "command": "python3 -VV",
+    "exit": 0,
+    "output": "Python 3.11.9 (main, May 21 2025, 12:40:01) [Clang 16.0.0 (clang-1600.0.26.6)]\n"
+  },
+  {
+    "command": "git rev-parse HEAD origin/codex/file-native-baseline-379af4e",
+    "exit": 0,
+    "output": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9\n379af4eda9b95ee82be9d3afcfdcdca2d6d132f9\n"
+  },
+  {
+    "command": "git status --short",
+    "exit": 0,
+    "output": "?? docs/research/file-native-platform-prerequisite-macos-2026-10-18/\n"
+  },
+  {
+    "command": "diskutil info /System/Volumes/Data",
+    "exit": 1,
+    "output": "Unable to run because unable to use the DiskManagement framework.\nCommon reasons include, but are not limited to, the DiskArbitration\nframework being unavailable due to being booted in single-user mode.\n"
+  }
+]

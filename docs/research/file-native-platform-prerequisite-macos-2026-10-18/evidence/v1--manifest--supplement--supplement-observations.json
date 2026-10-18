@@ -1,0 +1,42 @@
+{
+  "helper_sha256": "b394c49e13b0da50f962774e83d8fff2e4cace3c7fc18ac2f1332ccea903792f",
+  "cases": [
+    {
+      "case": "edited-packet-outputs",
+      "backend": "manifest",
+      "selection_unchanged": true,
+      "interruption_after_preservation": true,
+      "missing_navigation_rebuilt": true,
+      "preserved_sha256": {
+        "packet/context.md": "9fc2b689c3608e0ebd9cb9cedb6c6918b53139fd31f592a0e941561a3effe442",
+        "packet/provenance.json": "0c9f25f5a095d7bd46db776c138f15f5d68d5d318f5ce773c81f25ff9973939c"
+      }
+    },
+    {
+      "case": "corrupt-nonretired-prior",
+      "backend": "manifest",
+      "old": {
+        "publication": "publication-1885-1792338289233972000-18",
+        "digest": "5b608080d684b29b1c960acf944e1a595fcbf5ae0d6e6d1cf97fc7ab674b2544"
+      },
+      "current": {
+        "publication": "publication-1893-1792338293068767000-3",
+        "digest": "048de1d711f0ce69e5ab33fa2a214b40ee8fcb6886d6a1bcaaf83fb3f5f4a66c"
+      },
+      "error": "integrity-digest:/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/supplement/corrupt-nonretired-prior/attempts/attempt-1885-1792338289088694000-16/state.json",
+      "authority_not_repaired": true,
+      "view_unchanged": true,
+      "original_outcome": {
+        "changed": [
+          "d000000"
+        ],
+        "outcome": "accepted",
+        "publication": "publication-1893-1792338293068767000-3",
+        "removed": [],
+        "request": "accepted-before-view",
+        "state_digest": "13aa83dc6ec8d2c7a17807ce5224c08656523d9169de8547240a5b5d13667cb0"
+      }
+    }
+  ],
+  "status": "passed"
+}

@@ -1,0 +1,38 @@
+{
+  "wrapper_sha256": "3507290f7e36770d4486a64a0182ad7368580fe65d0deb5cb69d694b66c935d8",
+  "allocation_sha256": "cc70d703d24cfedce30e5002950b68acac342e477111333667c415af6554cb6f",
+  "baseline": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+  "source_pin_sha256": "b2ee864bd5325c22b5ef6bcac39213197b27f3fe4cc13d5acb2df67d4c3a725e",
+  "source_files": {
+    "storage_account.py": "a5a196e3581485aad5cbe090b8b74e4ed2437a69b61f4789f02c5c871ee86048",
+    "pin.py": "4ff882a15ab6e9474ea60f48eba4f2beaf25c6a9af35a5fea0f19293737fe77a",
+    "cap_diagnosis.py": "e8af61a5dac202800ecc93a46e302b4e3beaafb1363e0083809f92414921fc37",
+    "terminal_copy.py": "578271c0067545e0196385c2880ae31a2dbe962fc22b0c08550fa3d2be87e11f",
+    "collect.py": "ccef8ae06b56164224c5482f847ee8f175e21caff7bb3dc8a14e700a26e5dd6f",
+    "monitor.py": "19883c42bafad8cd83f9bd45ba2dab9d3623802ae1816b78ebcca81f12644574",
+    "indirect_gc.py": "d381506d523ab8a00b038096e1da1e39ebbd50d92313b164fa2156f1de7a676e",
+    "verify_evidence.py": "48624d5bdc3d33870308d1c18899cd8202468deb130d9bca702344bbf60381b3",
+    "extend.py": "748559b76976df533a45c803e154e9f48aba6d535224e27bab1d95cfd1b6e559",
+    "workloads.py": "9212aa2976c6dc3771ae3b7eef7d6244e60a4ee6df1c63867834d00b3b09f3a9",
+    "capture_checks.py": "e217fd0e4b35c6584f96a74523d57f0ed98b3d6733495fdfe4cb0d87ab852604",
+    "profile.py": "e91c80aceefa384ee1e4d76c7a3f42f600321e0d0ec3061331d20698e4188930",
+    "execute.py": "2cb6c482324e09c4eb533a091bc057633aa7b1f885d11aaaac39d66cf9afdcb2",
+    "continue_selected.py": "d0fe429f612b4c8267743ba1cfee76fac738571d694a6d5a57c7b21199dee40d",
+    "budget_amendment.py": "5439d1344ca274f9d6ff4eaabba4b08966e80a3ce2ee85f3aacd1e2bc6d8ef88",
+    "experiment.py": "c635af9d496de2d3fe424ae48f284c45a71c0702f9653b43dba82231a8a93439",
+    "baseline_harness.py": "b43a16a9669ab8b222875ca6369fab0cd9ab3bb11aeb309628ad19e2a3649336",
+    "regressions.py": "71afa67c3cd502aaa47d103a663859eea87f36091448e19b79efd338d57bd72b",
+    "backend_checks.py": "efb7e6b2df27c7f35cad3ee36120ef38984ad60ae3e351a0339cd0a248a6f9e5",
+    "tables.py": "8cf0d55988e653dd2b111b619b8e38144e5f1f4ca78addf989dbbea199ee9202",
+    "retained_probe.py": "eefd0b9bd0fbb3ff9e9ed948889956f7a16f686dd3c2f9ddaaf394e158d801ab",
+    "account.py": "9d284283f2f9467ec4d96daf3f6f45823f960e6e5e39176e87e0d3b2d48bb707",
+    "restoration.py": "45c40ca0ed6282592a517a70ca894c94abe17b8c35e5782684b96c1153ed0330",
+    "reporting_checks.py": "987c4aa8d1b5f4836bc5679077409e436f02f37647b72375e14a839ec9d9686a"
+  },
+  "binary_sha256": "3796fdd75dc3919ecb174f619d0ab938477fc608df2ee7a5d3f94625f73225b1",
+  "caps": {
+    "small": 120,
+    "growth": 300
+  },
+  "original_harness_sha256": "9f601c6546d6432999f926450756e50dce61517f82bcf86ef99e62fafe613b56"
+}

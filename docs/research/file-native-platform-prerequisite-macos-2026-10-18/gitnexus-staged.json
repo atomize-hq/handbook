@@ -1,0 +1,11 @@
+{
+  "tool": "detect_changes",
+  "request": {
+    "repo": "/private/tmp/file-native-prerequisite-macos-20261018-source",
+    "scope": "staged"
+  },
+  "isError": true,
+  "error": "Repository \"/private/tmp/file-native-prerequisite-macos-20261018-source\" not found",
+  "coverage": "UNKNOWN",
+  "note": "Material error preserved; unrelated available-repository listing omitted. Manual staged namespace/source/caller review is required and recorded."
+}

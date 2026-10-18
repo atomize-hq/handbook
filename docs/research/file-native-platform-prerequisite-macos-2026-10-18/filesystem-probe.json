@@ -1,0 +1,14 @@
+{
+  "case_sensitive": false,
+  "unicode_normalization_sensitive": false,
+  "names": [
+    "link",
+    "caf\u00e9",
+    "Case"
+  ],
+  "same_inode": true,
+  "directory_fsync": "succeeded",
+  "file_fsync": "succeeded",
+  "fullfsync": "not invoked; not claimed",
+  "free_bytes": 44118478848
+}

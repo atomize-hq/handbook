@@ -1,0 +1,18 @@
+[
+  {
+    "existing": "Case",
+    "attempted": "case",
+    "errno": 17,
+    "exclusive_creation": "refused",
+    "existing_bytes_preserved": true,
+    "inode_preserved": true
+  },
+  {
+    "existing": "café",
+    "attempted": "café",
+    "errno": 17,
+    "exclusive_creation": "refused",
+    "existing_bytes_preserved": true,
+    "inode_preserved": true
+  }
+]

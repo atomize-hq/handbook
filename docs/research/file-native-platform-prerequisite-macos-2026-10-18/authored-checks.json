@@ -1,0 +1,812 @@
+{
+  "status": "passed",
+  "files_checked": 161,
+  "checks": [
+    {
+      "file": "README.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "additional-inventory.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "allocation.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "authored-check-preflight.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "binary-pin.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "collect_native.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "correctness-summary.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "environment.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/controller-capture--capture-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/controller-capture--harness-session-1792336185155698000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/controller-capture--native-session-1792336185155698000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/raw-index.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--backend-checks--backend-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--backend-checks--harness-session-1792337600338587000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--backend-checks--harness-session-1792337600344454000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--backend-checks--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--backend-checks--native-session-1792337600338587000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--backend-checks--native-session-1792337600344454000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--contention--contention-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--contention--harness-session-1792337805344662000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--contention--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--contention--native-session-1792337805344662000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--correctness-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--damaged-view-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--duplicate-delete-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--extended-fault-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--fault-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--harness-session-1792336549549017000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--io-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--native-session-1792336549549017000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--orphan-read-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--race-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--retention-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--semantic-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--correctness--special-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--growth-A--growth-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--growth-A--harness-session-1792338027847336000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--growth-A--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--growth-A--native-session-1792338027847336000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--growth-B--growth-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--growth-B--harness-session-1792338181709863000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--growth-B--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--growth-B--native-session-1792338181709863000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--indirect-gc--harness-session-1792337589976125000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--indirect-gc--harness-session-1792337589981925000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--indirect-gc--indirect-gc-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--indirect-gc--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--indirect-gc--native-session-1792337589976125000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--indirect-gc--native-session-1792337589981925000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--navigation--harness-session-1792337618906142000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--navigation--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--navigation--native-session-1792337618906142000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--navigation--navigation-paths.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--regressions--damaged-view-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--regressions--duplicate-delete-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--regressions--extended-fault-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--regressions--harness-session-1792337415359691000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--regressions--harness-session-1792337415366395000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--regressions--io-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--regressions--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--regressions--native-session-1792337415359691000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--regressions--native-session-1792337415366395000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--regressions--orphan-read-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--regressions--regressions-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--regressions--retention-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--restoration--harness-session-1792337578078721000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--restoration--harness-session-1792337578084977000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--restoration--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--restoration--native-session-1792337578078721000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--restoration--native-session-1792337578084977000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--restoration--restoration-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--supplement--harness-session-1792338293195523000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--supplement--native-session-1792338293195523000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--cow--supplement--supplement-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--contention--contention-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--contention--harness-session-1792337626157784000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--contention--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--contention--native-session-1792337626157784000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--correctness-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--damaged-view-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--duplicate-delete-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--extended-fault-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--fault-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--harness-session-1792336008360185000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--io-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--native-session-1792336008360185000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--orphan-read-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--race-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--retention-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--semantic-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--correctness--special-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--growth-A--growth-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--growth-A--harness-session-1792337976289043000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--growth-A--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--growth-A--native-session-1792337976289043000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--growth-B--growth-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--growth-B--harness-session-1792338084745099000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--growth-B--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--growth-B--native-session-1792338084745099000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--navigation--harness-session-1792337611359041000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--navigation--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--navigation--native-session-1792337611359041000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--navigation--navigation-paths.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--regressions--damaged-view-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--regressions--duplicate-delete-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--regressions--extended-fault-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--regressions--harness-session-1792337310570919000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--regressions--harness-session-1792337310580345000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--regressions--io-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--regressions--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--regressions--native-session-1792337310570919000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--regressions--native-session-1792337310580345000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--regressions--orphan-read-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--regressions--regressions-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--regressions--retention-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--restoration--harness-session-1792337566176908000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--restoration--harness-session-1792337566182844000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--restoration--native-phase-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--restoration--native-session-1792337566176908000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--restoration--native-session-1792337566182844000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--restoration--restoration-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--supplement--harness-session-1792338284533758000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--supplement--native-session-1792338284533758000.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence/v1--manifest--supplement--supplement-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "evidence-verification.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "execution-plan.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "extract_native.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "filesystem-probe.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "gitnexus-pre-edit.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "harness-boundary-review.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "helper-source-verification.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "locked-crate-cache-footprint.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "native-name-collisions.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "native_runner.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "operations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "performance.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "phase-summary.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "pins.md",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "points.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "portable-path-verification.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "postprocess-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "postprocess-raw.jsonl",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "postprocess.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "prior-provenance-pins.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "resource-checks.jsonl",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "schedule-completed.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "schedule-raw.jsonl",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "schedule.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "setup-transport-receipts.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "smoke-stores.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "source-blob-verification.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "source-pins.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "source-set-pin.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "summarize_native.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "supplement.py",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "sync-api-probe.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "terminal-extraction-observations.json",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "walkthrough-macos.sh",
+      "exit": 1,
+      "output": ""
+    },
+    {
+      "file": "walkthrough-portability.json",
+      "exit": 1,
+      "output": ""
+    }
+  ],
+  "byte_exact_capture_exceptions": "Captured .log/.stdout/.stderr and diff .patch preserve source/terminal whitespace exactly; no trimming or reserialization."
+}

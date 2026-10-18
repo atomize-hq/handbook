@@ -1,0 +1,59 @@
+{
+  "backend": "manifest",
+  "mode": "A",
+  "count": 1000,
+  "selected_publications": 7,
+  "initial": {
+    "publication": "publication-96797-1792337994392918000-1002",
+    "digest": "309e236962a345b372d0306d3c5b2898747093329497561088ece1cada3de979"
+  },
+  "current": {
+    "digest": "64823c2ddb0742a23cb9c7542067d3b252a2cf5271737bd671e3772083d7d723",
+    "publication": "publication-96919-1792338016867018000-66"
+  },
+  "inventory": {
+    "files": 2274,
+    "directories": 313,
+    "logical_bytes": 31601241,
+    "allocated_file_bytes": 32780288,
+    "hardlink_aliases_not_recounted": 0,
+    "buckets": {
+      "other": {
+        "files": 7,
+        "bytes": 1370,
+        "allocated_bytes": 20480
+      },
+      "receipts": {
+        "files": 7,
+        "bytes": 18911,
+        "allocated_bytes": 40960
+      },
+      "publications": {
+        "files": 7,
+        "bytes": 72711,
+        "allocated_bytes": 86016
+      },
+      "originals": {
+        "files": 1146,
+        "bytes": 14358320,
+        "allocated_bytes": 14950400
+      },
+      "packets": {
+        "files": 26,
+        "bytes": 324671,
+        "allocated_bytes": 380928
+      },
+      "view": {
+        "files": 1003,
+        "bytes": 12844426,
+        "allocated_bytes": 13111296
+      },
+      "attempts": {
+        "files": 78,
+        "bytes": 3980832,
+        "allocated_bytes": 4190208
+      }
+    }
+  },
+  "status": "passed"
+}

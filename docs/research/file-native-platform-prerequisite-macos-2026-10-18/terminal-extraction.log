@@ -1,0 +1,128 @@
+[
+  {
+    "case": "original-bash32",
+    "command": [
+      "/bin/bash",
+      "/private/tmp/file-native-prerequisite-macos-20261018-source/docs/research/file-native-engine-followup-2026-10-17/walkthrough.sh",
+      "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/navigation/A",
+      "/private/tmp/file-native-prerequisite-macos-20261018/terminal-extraction/manifest/A"
+    ],
+    "exit": 127,
+    "helper_sha256": "9a413002a22f85003259489f83b054e79fc3cfa97eed7bfd91d29294724516ec",
+    "walkthrough_sha256": "5225b4046ff7f8c760c309479ff5682b15b86f41549c6a1e803614cb2d828803",
+    "expected_portability_refusal": true,
+    "engine_calls": 0
+  },
+  {
+    "case": "adapted-extraction",
+    "backend": "manifest",
+    "mode": "A",
+    "command": [
+      "/bin/bash",
+      "/private/tmp/file-native-prerequisite-macos-20261018-source/docs/research/file-native-platform-prerequisite-macos-2026-10-18/walkthrough-macos.sh",
+      "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/navigation/A",
+      "/private/tmp/file-native-prerequisite-macos-20261018/terminal-extraction/manifest/A"
+    ],
+    "helper_sha256": "9a413002a22f85003259489f83b054e79fc3cfa97eed7bfd91d29294724516ec",
+    "walkthrough_sha256": "0a06859e67ef550912482f12bb8ac59ca2f78f30bfa699ff5dcecd1a9257cf5f",
+    "exit": 0,
+    "selected": {
+      "publication": "publication-90484-1792337612428679000-4",
+      "digest": "c981117d51f7fcd7dd327718552242111ceb1fede47b7df46e78163b27acff18"
+    },
+    "closure": "attempts/attempt-90484-1792337612271338000-2/retained-packet",
+    "manifest_digest": "197b1c64b23601190b468f959de3210a673ad4a18dafbca3d90a58c10b7ad037",
+    "manifest_files": 12,
+    "copied_path": "/private/tmp/file-native-prerequisite-macos-20261018/terminal-extraction/manifest/A",
+    "ordered_inputs": 8,
+    "engine_calls": 0,
+    "source_json_100_crlf_unicode": true,
+    "deep_attachment": true,
+    "relative_closure": true,
+    "b_generation_file_link_count_one": null
+  },
+  {
+    "case": "adapted-extraction",
+    "backend": "manifest",
+    "mode": "B",
+    "command": [
+      "/bin/bash",
+      "/private/tmp/file-native-prerequisite-macos-20261018-source/docs/research/file-native-platform-prerequisite-macos-2026-10-18/walkthrough-macos.sh",
+      "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/manifest/navigation/navigation/B",
+      "/private/tmp/file-native-prerequisite-macos-20261018/terminal-extraction/manifest/B"
+    ],
+    "helper_sha256": "9a413002a22f85003259489f83b054e79fc3cfa97eed7bfd91d29294724516ec",
+    "walkthrough_sha256": "0a06859e67ef550912482f12bb8ac59ca2f78f30bfa699ff5dcecd1a9257cf5f",
+    "exit": 0,
+    "selected": {
+      "publication": "publication-90489-1792337613413020000-4",
+      "digest": "2c558cf6c369c2cf57a6037097762c81e1e1cb5f300fdf861f67fbb4411ed291"
+    },
+    "closure": "generations/generation-90489-1792337613242185000-3",
+    "manifest_digest": "9f84e5cbe78f9693bd791b50bfc4ffce0db90b388598ea3887750cf7b7fbc8bf",
+    "manifest_files": 19,
+    "copied_path": "/private/tmp/file-native-prerequisite-macos-20261018/terminal-extraction/manifest/B",
+    "ordered_inputs": 8,
+    "engine_calls": 0,
+    "source_json_100_crlf_unicode": true,
+    "deep_attachment": true,
+    "relative_closure": true,
+    "b_generation_file_link_count_one": true
+  },
+  {
+    "case": "adapted-extraction",
+    "backend": "cow",
+    "mode": "A",
+    "command": [
+      "/bin/bash",
+      "/private/tmp/file-native-prerequisite-macos-20261018-source/docs/research/file-native-platform-prerequisite-macos-2026-10-18/walkthrough-macos.sh",
+      "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/navigation/navigation/A",
+      "/private/tmp/file-native-prerequisite-macos-20261018/terminal-extraction/cow/A"
+    ],
+    "helper_sha256": "9a413002a22f85003259489f83b054e79fc3cfa97eed7bfd91d29294724516ec",
+    "walkthrough_sha256": "0a06859e67ef550912482f12bb8ac59ca2f78f30bfa699ff5dcecd1a9257cf5f",
+    "exit": 0,
+    "selected": {
+      "publication": "publication-90673-1792337619880110000-5",
+      "digest": "a5ace9e2e557b91ca7b9392495f213422ab8939735665a7547ed50c58e17acd1"
+    },
+    "closure": "attempts/attempt-90673-1792337619743172000-2/retained-packet",
+    "manifest_digest": "197b1c64b23601190b468f959de3210a673ad4a18dafbca3d90a58c10b7ad037",
+    "manifest_files": 12,
+    "copied_path": "/private/tmp/file-native-prerequisite-macos-20261018/terminal-extraction/cow/A",
+    "ordered_inputs": 8,
+    "engine_calls": 0,
+    "source_json_100_crlf_unicode": true,
+    "deep_attachment": true,
+    "relative_closure": true,
+    "b_generation_file_link_count_one": null
+  },
+  {
+    "case": "adapted-extraction",
+    "backend": "cow",
+    "mode": "B",
+    "command": [
+      "/bin/bash",
+      "/private/tmp/file-native-prerequisite-macos-20261018-source/docs/research/file-native-platform-prerequisite-macos-2026-10-18/walkthrough-macos.sh",
+      "/private/tmp/file-native-prerequisite-macos-20261018/data/v1/cow/navigation/navigation/B",
+      "/private/tmp/file-native-prerequisite-macos-20261018/terminal-extraction/cow/B"
+    ],
+    "helper_sha256": "9a413002a22f85003259489f83b054e79fc3cfa97eed7bfd91d29294724516ec",
+    "walkthrough_sha256": "0a06859e67ef550912482f12bb8ac59ca2f78f30bfa699ff5dcecd1a9257cf5f",
+    "exit": 0,
+    "selected": {
+      "publication": "publication-90678-1792337620838960000-5",
+      "digest": "92c3b1465b86d372b56b84b717946ece07a8345f0a48d99f79a3f3c26f18f7b3"
+    },
+    "closure": "generations/generation-90678-1792337620654230000-3",
+    "manifest_digest": "9f84e5cbe78f9693bd791b50bfc4ffce0db90b388598ea3887750cf7b7fbc8bf",
+    "manifest_files": 19,
+    "copied_path": "/private/tmp/file-native-prerequisite-macos-20261018/terminal-extraction/cow/B",
+    "ordered_inputs": 8,
+    "engine_calls": 0,
+    "source_json_100_crlf_unicode": true,
+    "deep_attachment": true,
+    "relative_closure": true,
+    "b_generation_file_link_count_one": true
+  }
+]

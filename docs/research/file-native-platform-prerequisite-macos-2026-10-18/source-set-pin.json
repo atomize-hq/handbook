@@ -1,0 +1,12 @@
+{
+  "files": {
+    "docs/research/file-native-engine-followup-2026-10-17/src/io.rs": "fd7453986251426947b28f16fb6497c3fc501a52c867b682e1db04db976e774a",
+    "docs/research/file-native-engine-followup-2026-10-17/src/backend.rs": "79b6220819a0d9d059a41078c6323e8b83d23452025f8b35ca52a83f3d3bfd6c",
+    "docs/research/file-native-engine-followup-2026-10-17/src/disk.rs": "1ed496b1b1ea5138053128521fcc609a6aaa6f00828c8d75ff604aa4002afdd2",
+    "docs/research/file-native-engine-followup-2026-10-17/src/main.rs": "8cd6800fb18e1c5f26738f648589287a3d8fb2a217b0f4bd4d6dc17310083d57",
+    "docs/research/file-native-engine-followup-2026-10-17/src/lifecycle.rs": "30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4",
+    "docs/research/file-native-engine-followup-2026-10-17/src/model.rs": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10"
+  },
+  "sha256": "00070f46e4a48927cb92acc1a1e7efd424b8f709651695b8f4e0f7159b5eed60",
+  "preimage": "json.dumps(files,sort_keys=True).encode()"
+}

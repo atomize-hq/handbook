@@ -1,0 +1,1581 @@
+[
+  {
+    "path": "data/v1/cow/backend-checks/native-phase-completed.json",
+    "phase": "backend-checks",
+    "backend": "cow",
+    "mode": null,
+    "status": "passed",
+    "epoch": 1792337606.500271,
+    "resource": {
+      "epoch": 1792337608.872606,
+      "free_bytes": 38197334016,
+      "allocated_file_bytes": 1020317696,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3135,
+          "directories": 706,
+          "logical_bytes": 115832976,
+          "allocated_file_bytes": 123457536,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3132,
+              "bytes": 89622052,
+              "allocated_bytes": 97140736
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 77708,
+          "directories": 40282,
+          "logical_bytes": 779499188,
+          "allocated_file_bytes": 896860160,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 10709,
+              "bytes": 91289982,
+              "allocated_bytes": 114909184
+            },
+            "receipts": {
+              "files": 1745,
+              "bytes": 617607,
+              "allocated_bytes": 7147520
+            },
+            "publications": {
+              "files": 1917,
+              "bytes": 3527293,
+              "allocated_bytes": 8404992
+            },
+            "originals": {
+              "files": 14364,
+              "bytes": 143310484,
+              "allocated_bytes": 156635136
+            },
+            "view": {
+              "files": 6783,
+              "bytes": 79863415,
+              "allocated_bytes": 89927680
+            },
+            "attempts": {
+              "files": 20709,
+              "bytes": 210268378,
+              "allocated_bytes": 247087104
+            },
+            "generations": {
+              "files": 19360,
+              "bytes": 220035152,
+              "allocated_bytes": 239431680
+            },
+            "divergence": {
+              "files": 577,
+              "bytes": 6920392,
+              "allocated_bytes": 7524352
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "packets": {
+              "files": 104,
+              "bytes": 1292232,
+              "allocated_bytes": 1376256
+            },
+            "objects": {
+              "files": 1032,
+              "bytes": 17497125,
+              "allocated_bytes": 19034112
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/cow/contention/native-phase-completed.json",
+    "phase": "contention",
+    "backend": "cow",
+    "mode": null,
+    "status": "passed",
+    "epoch": 1792337970.234729,
+    "resource": {
+      "epoch": 1792337973.2295291,
+      "free_bytes": 37522477056,
+      "allocated_file_bytes": 1289580544,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3139,
+          "directories": 706,
+          "logical_bytes": 115925088,
+          "allocated_file_bytes": 123523072,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3136,
+              "bytes": 89714164,
+              "allocated_bytes": 97206272
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 96120,
+          "directories": 43736,
+          "logical_bytes": 1006141805,
+          "allocated_file_bytes": 1166057472,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 11291,
+              "bytes": 94337087,
+              "allocated_bytes": 119455744
+            },
+            "receipts": {
+              "files": 1889,
+              "bytes": 699977,
+              "allocated_bytes": 7737344
+            },
+            "publications": {
+              "files": 2061,
+              "bytes": 4155845,
+              "allocated_bytes": 9420800
+            },
+            "originals": {
+              "files": 17604,
+              "bytes": 181934260,
+              "allocated_bytes": 204034048
+            },
+            "view": {
+              "files": 7345,
+              "bytes": 86793985,
+              "allocated_bytes": 98078720
+            },
+            "attempts": {
+              "files": 22307,
+              "bytes": 231491538,
+              "allocated_bytes": 273473536
+            },
+            "generations": {
+              "files": 31320,
+              "bytes": 368990490,
+              "allocated_bytes": 412880896
+            },
+            "divergence": {
+              "files": 577,
+              "bytes": 6920392,
+              "allocated_bytes": 7524352
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "packets": {
+              "files": 104,
+              "bytes": 1292232,
+              "allocated_bytes": 1376256
+            },
+            "objects": {
+              "files": 1214,
+              "bytes": 24648871,
+              "allocated_bytes": 26693632
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/cow/correctness/native-phase-completed.json",
+    "phase": "correctness",
+    "backend": "cow",
+    "mode": null,
+    "status": "passed",
+    "epoch": 1792337305.699519,
+    "resource": {
+      "epoch": 1792337308.293331,
+      "free_bytes": 38317895680,
+      "allocated_file_bytes": 907067392,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3128,
+          "directories": 706,
+          "logical_bytes": 115736927,
+          "allocated_file_bytes": 123314176,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3125,
+              "bytes": 89526003,
+              "allocated_bytes": 96997376
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 67814,
+          "directories": 34710,
+          "logical_bytes": 684918023,
+          "allocated_file_bytes": 783753216,
+          "hardlink_aliases_not_recounted": 3,
+          "buckets": {
+            "other": {
+              "files": 9181,
+              "bytes": 83229397,
+              "allocated_bytes": 102473728
+            },
+            "receipts": {
+              "files": 1594,
+              "bytes": 543910,
+              "allocated_bytes": 6529024
+            },
+            "publications": {
+              "files": 1744,
+              "bytes": 3028896,
+              "allocated_bytes": 7405568
+            },
+            "originals": {
+              "files": 11516,
+              "bytes": 114534120,
+              "allocated_bytes": 123863040
+            },
+            "divergence": {
+              "files": 354,
+              "bytes": 4210962,
+              "allocated_bytes": 4620288
+            },
+            "view": {
+              "files": 5682,
+              "bytes": 67615308,
+              "allocated_bytes": 74981376
+            },
+            "attempts": {
+              "files": 19014,
+              "bytes": 193184956,
+              "allocated_bytes": 226213888
+            },
+            "generations": {
+              "files": 17344,
+              "bytes": 197997280,
+              "allocated_bytes": 215130112
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "packets": {
+              "files": 52,
+              "bytes": 646116,
+              "allocated_bytes": 688128
+            },
+            "objects": {
+              "files": 925,
+              "bytes": 15049950,
+              "allocated_bytes": 16465920
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/cow/growth-A/native-phase-completed.json",
+    "phase": "growth",
+    "backend": "cow",
+    "mode": "A",
+    "status": "passed",
+    "epoch": 1792338078.7091131,
+    "resource": {
+      "epoch": 1792338081.643702,
+      "free_bytes": 37451075584,
+      "allocated_file_bytes": 1354190848,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3141,
+          "directories": 706,
+          "logical_bytes": 115941684,
+          "allocated_file_bytes": 123531264,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3138,
+              "bytes": 89730760,
+              "allocated_bytes": 97214464
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 100751,
+          "directories": 44397,
+          "logical_bytes": 1068158208,
+          "allocated_file_bytes": 1230659584,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 11359,
+              "bytes": 94687312,
+              "allocated_bytes": 120004608
+            },
+            "receipts": {
+              "files": 1903,
+              "bytes": 737799,
+              "allocated_bytes": 7819264
+            },
+            "publications": {
+              "files": 2075,
+              "bytes": 4301267,
+              "allocated_bytes": 9592832
+            },
+            "originals": {
+              "files": 19896,
+              "bytes": 210650900,
+              "allocated_bytes": 233934848
+            },
+            "view": {
+              "files": 9351,
+              "bytes": 112482837,
+              "allocated_bytes": 124301312
+            },
+            "attempts": {
+              "files": 22463,
+              "bytes": 236171224,
+              "allocated_bytes": 278585344
+            },
+            "generations": {
+              "files": 31320,
+              "bytes": 368990490,
+              "allocated_bytes": 412880896
+            },
+            "packets": {
+              "files": 156,
+              "bytes": 1941574,
+              "allocated_bytes": 2138112
+            },
+            "divergence": {
+              "files": 577,
+              "bytes": 6920392,
+              "allocated_bytes": 7524352
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "objects": {
+              "files": 1243,
+              "bytes": 26397285,
+              "allocated_bytes": 28495872
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/cow/growth-B/native-phase-completed.json",
+    "phase": "growth",
+    "backend": "cow",
+    "mode": "B",
+    "status": "passed",
+    "epoch": 1792338280.927706,
+    "resource": {
+      "epoch": 1792338284.140254,
+      "free_bytes": 37210705920,
+      "allocated_file_bytes": 1574387712,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3144,
+          "directories": 706,
+          "logical_bytes": 115972876,
+          "allocated_file_bytes": 123600896,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3141,
+              "bytes": 89761952,
+              "allocated_bytes": 97284096
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 117302,
+          "directories": 45072,
+          "logical_bytes": 1284299216,
+          "allocated_file_bytes": 1450786816,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 11425,
+              "bytes": 95037711,
+              "allocated_bytes": 120545280
+            },
+            "receipts": {
+              "files": 1917,
+              "bytes": 775618,
+              "allocated_bytes": 7901184
+            },
+            "publications": {
+              "files": 2089,
+              "bytes": 4446527,
+              "allocated_bytes": 9764864
+            },
+            "originals": {
+              "files": 22188,
+              "bytes": 239367540,
+              "allocated_bytes": 263835648
+            },
+            "packets": {
+              "files": 208,
+              "bytes": 2590916,
+              "allocated_bytes": 2899968
+            },
+            "attempts": {
+              "files": 22491,
+              "bytes": 239545696,
+              "allocated_bytes": 282025984
+            },
+            "generations": {
+              "files": 45376,
+              "bytes": 550109152,
+              "allocated_bytes": 596307968
+            },
+            "view": {
+              "files": 9351,
+              "bytes": 112482837,
+              "allocated_bytes": 124301312
+            },
+            "divergence": {
+              "files": 577,
+              "bytes": 6920392,
+              "allocated_bytes": 7524352
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "objects": {
+              "files": 1272,
+              "bytes": 28145699,
+              "allocated_bytes": 30298112
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/cow/indirect-gc/native-phase-completed.json",
+    "phase": "indirect-gc",
+    "backend": "cow",
+    "mode": null,
+    "status": "passed",
+    "epoch": 1792337595.39439,
+    "resource": {
+      "epoch": 1792337597.8200479,
+      "free_bytes": 38197235712,
+      "allocated_file_bytes": 1016766464,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3134,
+          "directories": 706,
+          "logical_bytes": 115827190,
+          "allocated_file_bytes": 123453440,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3131,
+              "bytes": 89616266,
+              "allocated_bytes": 97136640
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 77425,
+          "directories": 40162,
+          "logical_bytes": 776010934,
+          "allocated_file_bytes": 893313024,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 10693,
+              "bytes": 91184795,
+              "allocated_bytes": 114769920
+            },
+            "receipts": {
+              "files": 1744,
+              "bytes": 615452,
+              "allocated_bytes": 7143424
+            },
+            "publications": {
+              "files": 1916,
+              "bytes": 3521862,
+              "allocated_bytes": 8396800
+            },
+            "originals": {
+              "files": 14236,
+              "bytes": 141741716,
+              "allocated_bytes": 155066368
+            },
+            "view": {
+              "files": 6783,
+              "bytes": 79863415,
+              "allocated_bytes": 89927680
+            },
+            "attempts": {
+              "files": 20707,
+              "bytes": 210265605,
+              "allocated_bytes": 247078912
+            },
+            "generations": {
+              "files": 19228,
+              "bytes": 218390864,
+              "allocated_bytes": 237780992
+            },
+            "divergence": {
+              "files": 577,
+              "bytes": 6920392,
+              "allocated_bytes": 7524352
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "packets": {
+              "files": 104,
+              "bytes": 1292232,
+              "allocated_bytes": 1376256
+            },
+            "objects": {
+              "files": 1029,
+              "bytes": 17337473,
+              "allocated_bytes": 18866176
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/cow/navigation/native-phase-completed.json",
+    "phase": "navigation",
+    "backend": "cow",
+    "mode": null,
+    "status": "passed",
+    "epoch": 1792337620.875138,
+    "resource": {
+      "epoch": 1792337623.475713,
+      "free_bytes": 38191022080,
+      "allocated_file_bytes": 1025044480,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3137,
+          "directories": 706,
+          "logical_bytes": 115838178,
+          "allocated_file_bytes": 123457536,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3134,
+              "bytes": 89627254,
+              "allocated_bytes": 97140736
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 78178,
+          "directories": 40506,
+          "logical_bytes": 783744539,
+          "allocated_file_bytes": 901586944,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 10901,
+              "bytes": 92896079,
+              "allocated_bytes": 116727808
+            },
+            "receipts": {
+              "files": 1753,
+              "bytes": 620575,
+              "allocated_bytes": 7180288
+            },
+            "publications": {
+              "files": 1925,
+              "bytes": 3540829,
+              "allocated_bytes": 8437760
+            },
+            "originals": {
+              "files": 14436,
+              "bytes": 143949556,
+              "allocated_bytes": 157306880
+            },
+            "view": {
+              "files": 6821,
+              "bytes": 80267165,
+              "allocated_bytes": 90361856
+            },
+            "attempts": {
+              "files": 20777,
+              "bytes": 210954150,
+              "allocated_bytes": 247873536
+            },
+            "generations": {
+              "files": 19440,
+              "bytes": 220850788,
+              "allocated_bytes": 240300032
+            },
+            "divergence": {
+              "files": 577,
+              "bytes": 6920392,
+              "allocated_bytes": 7524352
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "packets": {
+              "files": 104,
+              "bytes": 1292232,
+              "allocated_bytes": 1376256
+            },
+            "objects": {
+              "files": 1036,
+              "bytes": 17575645,
+              "allocated_bytes": 19116032
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/cow/regressions/native-phase-completed.json",
+    "phase": "regressions",
+    "backend": "cow",
+    "mode": null,
+    "status": "passed",
+    "epoch": 1792337561.2064471,
+    "resource": {
+      "epoch": 1792337563.713432,
+      "free_bytes": 38205042688,
+      "allocated_file_bytes": 1010659328,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3131,
+          "directories": 706,
+          "logical_bytes": 115814833,
+          "allocated_file_bytes": 123453440,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3128,
+              "bytes": 89603909,
+              "allocated_bytes": 97136640
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 76724,
+          "directories": 39784,
+          "logical_bytes": 770829257,
+          "allocated_file_bytes": 887205888,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 10509,
+              "bytes": 90616798,
+              "allocated_bytes": 113811456
+            },
+            "receipts": {
+              "files": 1722,
+              "bytes": 608412,
+              "allocated_bytes": 7053312
+            },
+            "publications": {
+              "files": 1894,
+              "bytes": 3459212,
+              "allocated_bytes": 8282112
+            },
+            "originals": {
+              "files": 14130,
+              "bytes": 140791096,
+              "allocated_bytes": 154075136
+            },
+            "divergence": {
+              "files": 576,
+              "bytes": 6916296,
+              "allocated_bytes": 7520256
+            },
+            "view": {
+              "files": 6726,
+              "bytes": 79300888,
+              "allocated_bytes": 89333760
+            },
+            "attempts": {
+              "files": 20570,
+              "bytes": 209032566,
+              "allocated_bytes": 245624832
+            },
+            "generations": {
+              "files": 19068,
+              "bytes": 216802488,
+              "allocated_bytes": 236101632
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "packets": {
+              "files": 104,
+              "bytes": 1292232,
+              "allocated_bytes": 1376256
+            },
+            "objects": {
+              "files": 1017,
+              "bytes": 17132141,
+              "allocated_bytes": 18644992
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/cow/restoration/native-phase-completed.json",
+    "phase": "restoration",
+    "backend": "cow",
+    "mode": null,
+    "status": "passed",
+    "epoch": 1792337584.968058,
+    "resource": {
+      "epoch": 1792337587.4480908,
+      "free_bytes": 38198906880,
+      "allocated_file_bytes": 1015197696,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3133,
+          "directories": 706,
+          "logical_bytes": 115823080,
+          "allocated_file_bytes": 123453440,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3130,
+              "bytes": 89612156,
+              "allocated_bytes": 97136640
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 77238,
+          "directories": 40056,
+          "logical_bytes": 774729838,
+          "allocated_file_bytes": 891744256,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 10645,
+              "bytes": 91031015,
+              "allocated_bytes": 114466816
+            },
+            "receipts": {
+              "files": 1738,
+              "bytes": 613400,
+              "allocated_bytes": 7118848
+            },
+            "publications": {
+              "files": 1910,
+              "bytes": 3502120,
+              "allocated_bytes": 8364032
+            },
+            "originals": {
+              "files": 14202,
+              "bytes": 141430396,
+              "allocated_bytes": 154746880
+            },
+            "view": {
+              "files": 6764,
+              "bytes": 79704650,
+              "allocated_bytes": 89759744
+            },
+            "attempts": {
+              "files": 20680,
+              "bytes": 210086588,
+              "allocated_bytes": 246845440
+            },
+            "generations": {
+              "files": 19188,
+              "bytes": 218026122,
+              "allocated_bytes": 237395968
+            },
+            "divergence": {
+              "files": 576,
+              "bytes": 6916296,
+              "allocated_bytes": 7520256
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "packets": {
+              "files": 104,
+              "bytes": 1292232,
+              "allocated_bytes": 1376256
+            },
+            "objects": {
+              "files": 1023,
+              "bytes": 17249891,
+              "allocated_bytes": 18767872
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/manifest/contention/native-phase-completed.json",
+    "phase": "contention",
+    "backend": "manifest",
+    "mode": null,
+    "status": "passed",
+    "epoch": 1792337799.445871,
+    "resource": {
+      "epoch": 1792337802.4650939,
+      "free_bytes": 37667885056,
+      "allocated_file_bytes": 1156071424,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3138,
+          "directories": 706,
+          "logical_bytes": 115882705,
+          "allocated_file_bytes": 123457536,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3135,
+              "bytes": 89671781,
+              "allocated_bytes": 97140736
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 87060,
+          "directories": 42036,
+          "logical_bytes": 894094819,
+          "allocated_file_bytes": 1032613888,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 11096,
+              "bytes": 93614023,
+              "allocated_bytes": 118091776
+            },
+            "receipts": {
+              "files": 1821,
+              "bytes": 660276,
+              "allocated_bytes": 7458816
+            },
+            "publications": {
+              "files": 1993,
+              "bytes": 3848337,
+              "allocated_bytes": 8929280
+            },
+            "originals": {
+              "files": 16020,
+              "bytes": 162941908,
+              "allocated_bytes": 180670464
+            },
+            "view": {
+              "files": 7083,
+              "bytes": 83530575,
+              "allocated_bytes": 94220288
+            },
+            "attempts": {
+              "files": 21542,
+              "bytes": 223913664,
+              "allocated_bytes": 263254016
+            },
+            "generations": {
+              "files": 25380,
+              "bytes": 294920639,
+              "allocated_bytes": 326590464
+            },
+            "divergence": {
+              "files": 577,
+              "bytes": 6920392,
+              "allocated_bytes": 7524352
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "packets": {
+              "files": 104,
+              "bytes": 1292232,
+              "allocated_bytes": 1376256
+            },
+            "objects": {
+              "files": 1036,
+              "bytes": 17575645,
+              "allocated_bytes": 19116032
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/manifest/correctness/native-phase-completed.json",
+    "phase": "correctness",
+    "backend": "manifest",
+    "mode": null,
+    "status": "passed",
+    "epoch": 1792336546.977663,
+    "resource": {
+      "epoch": 1792336548.06607,
+      "free_bytes": 39179026432,
+      "allocated_file_bytes": 531439616,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3119,
+          "directories": 706,
+          "logical_bytes": 115471623,
+          "allocated_file_bytes": 123068416,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3116,
+              "bytes": 89260699,
+              "allocated_bytes": 96751616
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 33027,
+          "directories": 16426,
+          "logical_bytes": 361116555,
+          "allocated_file_bytes": 408371200,
+          "hardlink_aliases_not_recounted": 2,
+          "buckets": {
+            "other": {
+              "files": 4668,
+              "bytes": 69106310,
+              "allocated_bytes": 79486976
+            },
+            "receipts": {
+              "files": 785,
+              "bytes": 266279,
+              "allocated_bytes": 3215360
+            },
+            "publications": {
+              "files": 860,
+              "bytes": 1477716,
+              "allocated_bytes": 3629056
+            },
+            "originals": {
+              "files": 5566,
+              "bytes": 55446648,
+              "allocated_bytes": 59719680
+            },
+            "divergence": {
+              "files": 177,
+              "bytes": 2105481,
+              "allocated_bytes": 2310144
+            },
+            "view": {
+              "files": 2784,
+              "bytes": 33200736,
+              "allocated_bytes": 36667392
+            },
+            "attempts": {
+              "files": 9405,
+              "bytes": 98977930,
+              "allocated_bytes": 114216960
+            },
+            "generations": {
+              "files": 8552,
+              "bytes": 97773833,
+              "allocated_bytes": 106090496
+            },
+            "copies": {
+              "files": 204,
+              "bytes": 2438564,
+              "allocated_bytes": 2691072
+            },
+            "packets": {
+              "files": 26,
+              "bytes": 323058,
+              "allocated_bytes": 344064
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/manifest/growth-A/native-phase-completed.json",
+    "phase": "growth",
+    "backend": "manifest",
+    "mode": "A",
+    "status": "passed",
+    "epoch": 1792338021.676511,
+    "resource": {
+      "epoch": 1792338024.667795,
+      "free_bytes": 37486256128,
+      "allocated_file_bytes": 1322622976,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3140,
+          "directories": 706,
+          "logical_bytes": 115932531,
+          "allocated_file_bytes": 123531264,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3137,
+              "bytes": 89721607,
+              "allocated_bytes": 97214464
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 98421,
+          "directories": 44052,
+          "logical_bytes": 1037916589,
+          "allocated_file_bytes": 1199091712,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 11325,
+              "bytes": 94512000,
+              "allocated_bytes": 119730176
+            },
+            "receipts": {
+              "files": 1896,
+              "bytes": 718888,
+              "allocated_bytes": 7778304
+            },
+            "publications": {
+              "files": 2068,
+              "bytes": 4228556,
+              "allocated_bytes": 9506816
+            },
+            "originals": {
+              "files": 18750,
+              "bytes": 196292580,
+              "allocated_bytes": 218984448
+            },
+            "view": {
+              "files": 8348,
+              "bytes": 99638411,
+              "allocated_bytes": 111190016
+            },
+            "attempts": {
+              "files": 22385,
+              "bytes": 235472370,
+              "allocated_bytes": 277663744
+            },
+            "generations": {
+              "files": 31320,
+              "bytes": 368990490,
+              "allocated_bytes": 412880896
+            },
+            "packets": {
+              "files": 130,
+              "bytes": 1616903,
+              "allocated_bytes": 1757184
+            },
+            "divergence": {
+              "files": 577,
+              "bytes": 6920392,
+              "allocated_bytes": 7524352
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "objects": {
+              "files": 1214,
+              "bytes": 24648871,
+              "allocated_bytes": 26693632
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/manifest/growth-B/native-phase-completed.json",
+    "phase": "growth",
+    "backend": "manifest",
+    "mode": "B",
+    "status": "passed",
+    "epoch": 1792338175.218936,
+    "resource": {
+      "epoch": 1792338178.44556,
+      "free_bytes": 37335031808,
+      "allocated_file_bytes": 1465057280,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3143,
+          "directories": 706,
+          "logical_bytes": 115957046,
+          "allocated_file_bytes": 123600896,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3140,
+              "bytes": 89746122,
+              "allocated_bytes": 97284096
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 109012,
+          "directories": 44720,
+          "logical_bytes": 1176995425,
+          "allocated_file_bytes": 1341456384,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 11392,
+              "bytes": 94862423,
+              "allocated_bytes": 120274944
+            },
+            "receipts": {
+              "files": 1910,
+              "bytes": 756710,
+              "allocated_bytes": 7860224
+            },
+            "publications": {
+              "files": 2082,
+              "bytes": 4373908,
+              "allocated_bytes": 9678848
+            },
+            "originals": {
+              "files": 21042,
+              "bytes": 225009220,
+              "allocated_bytes": 248885248
+            },
+            "packets": {
+              "files": 182,
+              "bytes": 2266245,
+              "allocated_bytes": 2519040
+            },
+            "attempts": {
+              "files": 22477,
+              "bytes": 239499456,
+              "allocated_bytes": 281939968
+            },
+            "generations": {
+              "files": 38348,
+              "bytes": 459549821,
+              "allocated_bytes": 504594432
+            },
+            "view": {
+              "files": 9351,
+              "bytes": 112482837,
+              "allocated_bytes": 124301312
+            },
+            "divergence": {
+              "files": 577,
+              "bytes": 6920392,
+              "allocated_bytes": 7524352
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "objects": {
+              "files": 1243,
+              "bytes": 26397285,
+              "allocated_bytes": 28495872
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/manifest/navigation/native-phase-completed.json",
+    "phase": "navigation",
+    "backend": "manifest",
+    "mode": null,
+    "status": "passed",
+    "epoch": 1792337613.453394,
+    "resource": {
+      "epoch": 1792337615.991542,
+      "free_bytes": 38194786304,
+      "allocated_file_bytes": 1022648320,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3136,
+          "directories": 706,
+          "logical_bytes": 115835441,
+          "allocated_file_bytes": 123457536,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3133,
+              "bytes": 89624517,
+              "allocated_bytes": 97140736
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 77941,
+          "directories": 40391,
+          "logical_bytes": 781597494,
+          "allocated_file_bytes": 899190784,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 10805,
+              "bytes": 92092957,
+              "allocated_bytes": 115818496
+            },
+            "receipts": {
+              "files": 1749,
+              "bytes": 619091,
+              "allocated_bytes": 7163904
+            },
+            "publications": {
+              "files": 1921,
+              "bytes": 3534061,
+              "allocated_bytes": 8421376
+            },
+            "originals": {
+              "files": 14400,
+              "bytes": 143630020,
+              "allocated_bytes": 156971008
+            },
+            "view": {
+              "files": 6802,
+              "bytes": 80065290,
+              "allocated_bytes": 90144768
+            },
+            "attempts": {
+              "files": 20743,
+              "bytes": 210626228,
+              "allocated_bytes": 247488512
+            },
+            "generations": {
+              "files": 19400,
+              "bytes": 220442970,
+              "allocated_bytes": 239865856
+            },
+            "divergence": {
+              "files": 577,
+              "bytes": 6920392,
+              "allocated_bytes": 7524352
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "packets": {
+              "files": 104,
+              "bytes": 1292232,
+              "allocated_bytes": 1376256
+            },
+            "objects": {
+              "files": 1032,
+              "bytes": 17497125,
+              "allocated_bytes": 19034112
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/manifest/regressions/native-phase-completed.json",
+    "phase": "regressions",
+    "backend": "manifest",
+    "mode": null,
+    "status": "passed",
+    "epoch": 1792337410.787679,
+    "resource": {
+      "epoch": 1792337413.0816078,
+      "free_bytes": 38267187200,
+      "allocated_file_bytes": 951984128,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3130,
+          "directories": 706,
+          "logical_bytes": 115769194,
+          "allocated_file_bytes": 123387904,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3127,
+              "bytes": 89558270,
+              "allocated_bytes": 97071104
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 71669,
+          "directories": 36844,
+          "logical_bytes": 722293605,
+          "allocated_file_bytes": 828596224,
+          "hardlink_aliases_not_recounted": 4,
+          "buckets": {
+            "other": {
+              "files": 9786,
+              "bytes": 86708584,
+              "allocated_bytes": 107970560
+            },
+            "receipts": {
+              "files": 1646,
+              "bytes": 570491,
+              "allocated_bytes": 6742016
+            },
+            "publications": {
+              "files": 1807,
+              "bytes": 3207334,
+              "allocated_bytes": 7770112
+            },
+            "originals": {
+              "files": 12631,
+              "bytes": 125842196,
+              "allocated_bytes": 136757248
+            },
+            "divergence": {
+              "files": 465,
+              "bytes": 5563629,
+              "allocated_bytes": 6070272
+            },
+            "view": {
+              "files": 6147,
+              "bytes": 72851180,
+              "allocated_bytes": 81334272
+            },
+            "attempts": {
+              "files": 19690,
+              "bytes": 200478862,
+              "allocated_bytes": 234930176
+            },
+            "generations": {
+              "files": 18086,
+              "bytes": 206175077,
+              "allocated_bytes": 224141312
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "packets": {
+              "files": 78,
+              "bytes": 969174,
+              "allocated_bytes": 1032192
+            },
+            "objects": {
+              "files": 925,
+              "bytes": 15049950,
+              "allocated_bytes": 16465920
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  },
+  {
+    "path": "data/v1/manifest/restoration/native-phase-completed.json",
+    "phase": "restoration",
+    "backend": "manifest",
+    "mode": null,
+    "status": "passed",
+    "epoch": 1792337573.026269,
+    "resource": {
+      "epoch": 1792337575.532445,
+      "free_bytes": 38201511936,
+      "allocated_file_bytes": 1012879360,
+      "roots": {
+        "/private/tmp/file-native-prerequisite-macos-20261018-source": {
+          "files": 3132,
+          "directories": 706,
+          "logical_bytes": 115818947,
+          "allocated_file_bytes": 123453440,
+          "hardlink_aliases_not_recounted": 0,
+          "buckets": {
+            "other": {
+              "files": 3129,
+              "bytes": 89608023,
+              "allocated_bytes": 97136640
+            },
+            "objects": {
+              "files": 3,
+              "bytes": 26210924,
+              "allocated_bytes": 26316800
+            }
+          }
+        },
+        "/private/tmp/file-native-prerequisite-macos-20261018": {
+          "files": 76978,
+          "directories": 39915,
+          "logical_bytes": 772742981,
+          "allocated_file_bytes": 889425920,
+          "hardlink_aliases_not_recounted": 5,
+          "buckets": {
+            "other": {
+              "files": 10577,
+              "bytes": 90823769,
+              "allocated_bytes": 114139136
+            },
+            "receipts": {
+              "files": 1730,
+              "bytes": 610906,
+              "allocated_bytes": 7086080
+            },
+            "publications": {
+              "files": 1902,
+              "bytes": 3480666,
+              "allocated_bytes": 8323072
+            },
+            "originals": {
+              "files": 14166,
+              "bytes": 141110746,
+              "allocated_bytes": 154411008
+            },
+            "view": {
+              "files": 6745,
+              "bytes": 79502769,
+              "allocated_bytes": 89546752
+            },
+            "attempts": {
+              "files": 20625,
+              "bytes": 209582023,
+              "allocated_bytes": 246247424
+            },
+            "generations": {
+              "files": 19128,
+              "bytes": 217414305,
+              "allocated_bytes": 236748800
+            },
+            "divergence": {
+              "files": 576,
+              "bytes": 6916296,
+              "allocated_bytes": 7520256
+            },
+            "copies": {
+              "files": 408,
+              "bytes": 4877128,
+              "allocated_bytes": 5382144
+            },
+            "packets": {
+              "files": 104,
+              "bytes": 1292232,
+              "allocated_bytes": 1376256
+            },
+            "objects": {
+              "files": 1017,
+              "bytes": 17132141,
+              "allocated_bytes": 18644992
+            }
+          }
+        }
+      },
+      "accounting": "st_blocks*512, device/inode deduplicated within each root; file allocation excludes directories and APFS shared-extent accounting"
+    }
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "qualification": "Transcribed exact material fields from GitNexus tool receipts in this chat; UNKNOWN is not zero impact.",
+  "index": {
+    "name": "handbook",
+    "path": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook",
+    "indexedAt": "2026-07-19T12:56:00.614Z",
+    "lastCommit": "e6513bfb1d2c1f21eddeba5f1eda7f3114769f36",
+    "commitsBehindActiveCheckout": 160
+  },
+  "impact_request": {
+    "repo": "handbook",
+    "target": "Driver",
+    "direction": "upstream",
+    "file_path": "docs/research/file-native-engine-followup-2026-10-17/experiment.py",
+    "maxDepth": 2
+  },
+  "impact_response": {
+    "error": "Target 'Driver' not found",
+    "target": {
+      "name": "Driver"
+    },
+    "direction": "upstream",
+    "impactedCount": 0,
+    "risk": "UNKNOWN"
+  },
+  "query_relevant_processes": [],
+  "manual_review": "harness-boundary-review.md"
+}

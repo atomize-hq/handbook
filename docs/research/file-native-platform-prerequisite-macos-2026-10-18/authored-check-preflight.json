@@ -1,0 +1,4 @@
+{
+  "observation": "New-file no-index whitespace check returned exit 1 with empty stdout/stderr. git diff --no-index implies difference exit status; this was a checker interpretation error, not a whitespace or engine failure.",
+  "correction": "Accept 0/1 only when stdout and stderr are empty; reject whitespace diagnostics and other exit codes."
+}

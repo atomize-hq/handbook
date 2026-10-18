@@ -1,0 +1,15 @@
+{
+  "original_sha256": "5225b4046ff7f8c760c309479ff5682b15b86f41549c6a1e803614cb2d828803",
+  "native_sha256": "0a06859e67ef550912482f12bb8ac59ca2f78f30bfa699ff5dcecd1a9257cf5f",
+  "change": "Replace Bash >=4 mapfile with Bash 3.2 while-read array capture in same process. Exact binding, closure, copy and digest assertions unchanged.",
+  "dependencies": [
+    "/bin/bash 3.2",
+    "ls",
+    "cat",
+    "find with -maxdepth and -exec",
+    "head",
+    "cp -r",
+    "python3 standard library json pathlib hashlib"
+  ],
+  "engine_invocations_during_extraction": 0
+}
