@@ -1,6 +1,6 @@
 import argparse,json,time
 from controller import Driver
-from checks import result,req
+from checks import result,req,expect_error
 from verify_store import verify_history
 a=argparse.ArgumentParser();a.add_argument('--exe',required=True);a.add_argument('--base',required=True);a.add_argument('--max-depth',type=int,default=100000);ns=a.parse_args()
 d=Driver(ns.exe,ns.base,14400);root=str(d.base/'store');rows=[]
@@ -30,8 +30,17 @@ for depth in [1000,10000,100000]:
     d.call(dict(action='audit',root=root),cap=900)
     start=depth
 # Checkpoint and refresh are separate from append timings.
-if start:
+if start and time.monotonic()<d.end-120:
     d.call(dict(action='checkpoint',root=root,request_id='history-checkpoint'),cap=900,env={'EXP_DEFER_REFRESH':'1'})
     d.call(dict(action='refresh',root=root),cap=900)
     rows.append({'after_checkpoint':verify_history(root)})
+    victim=req('deep-lost-reply',[])
+    d.call(dict(action='publish',root=root,request=victim),env={'EXP_EXIT':'reply','EXP_DEFER_REFRESH':'1'},allow=True)
+    event=json.loads(d.events.read_bytes().splitlines()[-1]);assert event['exit']==86
+    original=d.call(dict(action='resolve',root=root,request_id='deep-lost-reply'))['result'];assert original['outcome']=='accepted'
+    for i in range(1000):
+        d.call(dict(action='publish',root=root,request=req(f'after-lost-{i:04}',[])),env={'EXP_DEFER_REFRESH':'1'})
+    assert d.call(dict(action='resolve',root=root,request_id='deep-lost-reply'))['result']==original
+    expect_error(d.call(dict(action='publish',root=root,request=req('deep-lost-reply',[],packet=True)),allow=True),'intent-mismatch')
+    rows.append({'lost_reply_original_exit':86,'later_real_successors':1000,'original_outcome_retained':True,'full_verification':verify_history(root)})
 (d.base/'history.json').write_text(json.dumps(rows,indent=2))
