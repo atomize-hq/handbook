@@ -1,0 +1,7 @@
+{
+  "file": "replay--replay-lifetime.json",
+  "source": "/private/tmp/file-native-incremental-macos-20261018/replay-lane/replay/replay-lifetime.json",
+  "sha256": "3c60a631e655a55dbf760dbabe4a5d423efaf0d43487691115a2a55a91a47c7f",
+  "bytes": 458,
+  "qualification": "Exact summary from unchanged replay helper; all underlying Driver responses remain in the source/session-bound raw archive."
+}

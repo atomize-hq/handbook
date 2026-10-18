@@ -1,0 +1,26 @@
+{
+  "pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+  "source_files": 60,
+  "original_allocation_sha256": "570befff76e2184b3d3eb8acbf246ad0e070592b398f7c6a952f8d3d765d8402",
+  "original_start_epoch": 1792352024.418587,
+  "unchanged_execution_deadline_epoch": 1792358324.418587,
+  "unchanged_total_deadline_epoch": 1792359224.418587,
+  "elapsed_original_seconds": 4270.030061006546,
+  "remaining_work_seconds": 2029.969938993454,
+  "remaining_total_seconds": 2929.969938993454,
+  "reporting_reserve_seconds": 900,
+  "priority": [
+    "locked workspace test",
+    "locked release workspace build",
+    "replay_lifetime.py A/B N512",
+    "checks.py --faults",
+    "supplement.py",
+    "adversarial.py",
+    "namespace_cases.py default fixed"
+  ],
+  "no_smoke_rerun": true,
+  "source": "/private/tmp/file-native-incremental-macos-20261018/source-replay-core/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+  "new_target": "/private/tmp/file-native-incremental-macos-20261018/replay-lane/build",
+  "epoch": 1792356294.448648,
+  "source_selection": "Exclude only prior native-macos report transport; initial full362-file snapshot preserved separately, never executed"
+}

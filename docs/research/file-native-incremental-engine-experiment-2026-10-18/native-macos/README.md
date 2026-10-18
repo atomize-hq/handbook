@@ -1,78 +1,68 @@
-# Native macOS incremental engine result — October 18, 2026
+# Native macOS replay-retention correction — October 18, 2026
 
-**The requested affected proof passed on corrected pin `a1108c634cb8362aca50e1a6228766802b96f087`.** Locked workspace tests (two Rust tests), release build, default fixed namespace regression, checks with faults, causal supplement and adversarial suite passed. There were **570 uncensored engine responses**: 466 exit 0, 68 expected refusal exit 2 and 36 injected process exits 86. These are response counts, not independent trials or assertion counts.
+**Final tested source pin: `7ac70f93cce14ecd3d935852801f034c122000d8`.** The targeted A/B N512 replay-lifetime regression, locked workspace tests/release build and all four requested follow-up suites passed. This lane records **610 uncensored engine responses**: 504 exit 0, 70 expected refusals exit 2 and 36 injected process exits 86. Every requested check was performed. Counts describe process responses, not independent trials or assertion counts.
 
-The corrected executable SHA-256 is `858e596e75b17c6e409fc40dea5492f1e858d79105547e6542db26de56e6ed97`. All 53 capsule source files match the exact common Git pin; no Rust or pinned harness source was edited on Mac. This report-only commit is parented directly to a1108c6 and limited to `native-macos/`.
+Native executable SHA-256: `9f6d4c54939e2dfbf23d05e19cecf91d355ce75b276c0b961576e3a4fcedaf61`. All **60 capsule files** are exact Git-pinned bytes. The source snapshot excludes only previously committed `native-macos/` report transport; the initial full 362-file snapshot remains preserved separately and was not executed. No engine or pinned harness source was edited on Mac.
 
-## Final affected proof
+## Reached correction proof
 
-| Suite | Events | Result |
+| Suite | Events | Observed result |
 | --- | ---: | --- |
-| Namespace regression, default fixed mode | 5 | Store under ancestor `objects/results/disposable/store`; all 16 selected originals retained after collection; original hashes and audit verified |
-| Checks with faults | 414 | Four A/B × project/research configurations; 23 publication exit boundaries |
-| Causal supplement | 109 | Reader overlap, reclamation, restoration, divergence, packet/history, sealed roots, orphan cleanup, quota, checkpoint/pin/cancel/abandon/GC and fallback regressions passed |
-| Adversarial | 42 | Nine grouped forged/missing/corrupt/indirection cases passed |
-| Total | **570** | **Zero native censors** |
+| replay_lifetime.py | 40 | A/B, N512; eligible 256-label preparation reopens after collection; intermediate import payloads and packet reopen after collection; resealed tampered replay-object list refused; abandoned intermediate sources reclaimed |
+| checks.py --faults | 414 | Four A/B × project/research configurations and 23 publication boundaries passed |
+| supplement.py | 109 | Retention, reclamation, restoration, reader overlap, packet/history, divergence, quota, cancellation and other causal regressions passed |
+| adversarial.py | 42 | Nine grouped forged/missing/corrupt/indirection cases passed |
+| namespace_cases.py, default fixed | 5 | Ancestor `objects/results` root retains all 16 selected originals; original hashes/audit checked |
+| Total | **610** | **Zero native censors** |
 
-The phase oracle retains the 14 must-not-select, one visible/incomplete uncertain and eight completed-boundary must-retain distinctions; original outcomes are checked beneath successors. Expected failures and injected exits remain visible in the lossless raw data. [affected-verification.json](affected-verification.json) and [the corrected evidence lane](evidence/corrected/verification.json) retain summaries and exact command/session/source bindings. Build warnings are retained, including four unused-import warnings; the locked tests and release build exited 0.
+Both Rust tests passed. The release workspace build also built project/research consumers; no new separately linked consumer execution is claimed on this pin. Four unused-import warnings remain in the exact compiler logs. [replay-verification.json](replay-verification.json) records the assertions, reached summaries, counts and original-clock status. All **574 JSON responses** conserve total read/written bytes across payload/control/metadata/result roles. The other 36 responses are injected process exits without JSON.
 
-The namespace init wrote 340,085 total bytes: 309,226 payload, 15,523 control, 14,862 metadata and 474 result bytes. Initial reads were 2,201,691 bytes: 460,778 payload, 6,873 control, 1,734,040 metadata and zero result. All **534 JSON responses** in the corrected lane conserve read/written role totals; the remaining 36 responses are injected exits without JSON. The payload category follows the experiment's file-role policy and includes derived/view/packet files, not only authored documents.
+## Fault boundary and version distinction
 
-## Why the pin changed
+The reproduced defect concerned an eligible, unselected preparation: collection retained final graph/projection roots but could remove intermediate COW objects and overwritten import payloads needed by deterministic replay when the candidate was reopened. The supplied correction records exact replay object/file dependency sets in private Candidate v2, retains them during collection, and recomputes/compares them during read-only selection. The new regression observes successful reopen after GC and refusal of resealed tampered dependency lists in both A and B, then checks abandoned-source reclamation.
 
-F3 (`f3e942f6a2e84ff33fd6ea860caed49ad650f86f`) has two ancestor-component classification defects. Its byte instrumentation searches any ancestor `results` and assigns ordinary payload/control work to the result role. Its collector searches any ancestor `objects`, which can delete selected originals in a legitimate store root. The coordinator reproduced the lifetime failure on Linux. This is a real root-relative classification bug, not an unsupported-path policy. Mac did not run the F3 `--expect-bug` destructive reproduction.
+Old unselected Candidate v1 fixtures are intentionally refused by this experiment's versioned private contract. Publication and store remain v1; accepted retry still resolves before candidate parsing. Fresh new-pin bases were used; this is not a production migration or a claim that old unselected fixtures can resume. The structured format standard remains proposed, existing owner/versioned contracts control, and no production format migration is authorized.
 
-The supplied a1108c6 corrects collection classification relative to the store and binds byte classification to a skipped `Metrics.store_root`. No graph/history/projection contract change is claimed. The native default fixed regression under both ancestor components passed. This closes the requested affected proof; it does not retroactively repair F3 measurements.
+## Earlier evidence remains intact
 
-## Retained earlier observations
-
-| Version/lane | Events | Interpretation |
+| Source version | Retained responses | Interpretation |
 | --- | ---: | --- |
-| F3 primary capsule | 602 | Completed small/fault/supplement/adversarial, one A/B 1k smoke pair, separately linked consumer runs and three Bash copies |
-| F3 deep companion | 120 | 16 checkpoint-specific exits, waiting cancellation and holder-exit recovery |
-| F3 walk companion | 4 | Two ordinary A/B copies; B binds an old generation while a real successor selects |
-| F3 bounded total | **726** | 604 exit 0, 69 refusal exit 2, 53 injected exit 86; zero censors |
-| fb73e75 development | 117 | Partial run stopped on the common-pin hold before smoke; excluded from final measurements |
+| 7ac70f9, current targeted lane | **610** | Replay-retention regression plus requested affected suites; no N1k smoke/history rerun |
+| a1108c6 affected lane | 570 | Earlier ancestor-name collection/byte-role correction proof |
+| F3 main and companions | 726 | Earlier bounded smoke, consumers, five ordinary copies and deep interruption controls |
+| fb73e75 development | 117 | Partial pre-smoke run stopped on the common-pin hold |
 
-All five evidence lanes retain **1,413 responses** with zero censors. Never combine them as one corrected executable run. F3 companions use separately pinned helpers from f2c45c16886ae3c1c89d1084e43b05133383c087 and the unchanged F3 binary. Five ordinary shell copies succeeded across F3 primary/companions. Holder interruption was `EXP_EXIT=lock-acquired` / exit 86, not SIGKILL, reboot or power loss.
+All six retained evidence lanes contain **2,023 responses**, with zero censors. These versions are kept separate; their counts are not one new-pin benchmark. Earlier raw evidence, archives, hashes and reports are unchanged. [The a1108c6 report](a1108c6-affected-report.md) and [the F3 snapshot](f3-bounded-path-report.md) preserve their historical interpretation; this README controls the final tested pin.
 
-F3 primary byte-role payload/control/result bins are invalid because its runner places stores beneath `results`. Raw values remain unchanged; total bytes, objects metadata bytes, correctness outcomes and times remain available with that qualification. Path-neutral F3 companion roles are valid small observations, not replacements for 1k values. The first 16-document init comparison is preserved in [counter-path-comparison.json](counter-path-comparison.json).
+F3's collector had the real ancestor-`objects` bug and its primary byte-role split is invalid under ancestor `results`. Its raw values remain unchanged. F3 total bytes, objects metadata counters and measured times remain separately qualified. Path-neutral F3 companions provide small valid role observations; they do not replace 1k values. [performance.md](performance.md), smoke-traces.json and smoke-operations.json remain **F3-only**. There is no corrected N1k speedup or history claim. Full-reference and incremental-preparation clocks differ in scope, inclusive clocks overlap, fresh process is not device-cold, and no p95 or causal OS ranking follows. Holder interruption was exit 86, not a claimed SIGKILL/reboot/power cut.
 
-[performance.md](performance.md), [smoke-traces.json](smoke-traces.json) and [smoke-operations.json](smoke-operations.json) are explicitly **F3-only**. Requested A batches 1/8/64 actually changed 1/7/56 IDs because overlapping imports reused bytes. Full-reference load plus semantic validation and complete incremental preparation have different scopes; their ratio is not end-to-end speedup. Publication and explicit A-refresh clocks remain separate. B copied 2,003 files in each complete generation. Inclusive timers overlap. There is no p95, device-cold or causal OS ranking claim. A can lag/mix until explicit refresh; B keeps complete independent readable generations; both experimental contracts remain open.
+## Original clock, caps and preserved roots
 
-No corrected 1k smoke, consumer/copy, 10k/100k growth, large-history or broad backend rerun was requested or performed. The earlier [F3 report](f3-bounded-path-report.md) is retained as a superseded snapshot; this README controls final pin and defect interpretation.
+The existing allocation is unchanged: 105 minutes of work plus 15 minutes of reporting from the original final start. At the replay plan snapshot, 71.17 minutes had elapsed, 33.83 work minutes remained and 48.83 total minutes remained. At postrun verification, 76.35 minutes had elapsed, 28.65 work minutes and 43.65 total minutes remained. **No deadline was reset.** Exact epochs and later packaging snapshots are retained.
 
-## Environment, durability and limits
+Locked test/build caps are 600 seconds each, replay suite 900 seconds, checks/supplement 600 seconds each, adversarial 300 seconds and namespace 180 seconds. Every engine call retains the unchanged Driver's 180-second cap. The outer wrapper additionally enforces the original execution cutoff, whole-owned-root <=6 GiB guard with 512 MiB margin and >=20 GiB free-space floor. It kills only its own launched process group on a limit. No cap or deadline fired.
 
-Native Darwin 25.6.0 / macOS 26.6.1 arm64, APFS, Rust/Cargo 1.89.0, Python 3.11.9 and system Bash 3.2. The volume is case- and Unicode-normalization-insensitive. Actual file/directory fsync, Darwin F_FULLFSYNC and same-filesystem hard-link probes succeeded. [development-environment.json](development-environment.json) preserves these probes. F3 executable disassembly in native-api-disassembly.txt retains fcntl(F_FULLFSYNC), linkat, rename and flock; this is F3 API evidence, not newly sampled corrected disassembly.
+- Preserved whole root: `/private/tmp/file-native-incremental-macos-20261018`
+- Exact new source worktree: `/private/tmp/file-native-incremental-macos-20261018/replay-checkout` at 7ac70f9
+- Executed source capsule: `/private/tmp/file-native-incremental-macos-20261018/source-replay-core/docs/research/file-native-incremental-engine-experiment-2026-10-18`
+- Separate build: `/private/tmp/file-native-incremental-macos-20261018/replay-lane/build`
+- Fresh runtimes: `replay-lane/replay`, `checks`, `supplement`, `adversarial`, `namespace` beneath the owned root
+- Local logs/pins: `/private/tmp/file-native-incremental-macos-20261018/evidence-replay`
+- Report checkout: `/private/tmp/file-native-incremental-macos-20261018/corrected-checkout`
+- Initial full transport: `source-replay` and `replay-full-transport` beneath the owned root; preserved and never executed
 
-These are API/process-interruption observations. Kernel/device caches survive; no power-cut/reboot persistence or physical write-amplification proof follows. Fresh process is not device-cold. The unchanged `/proc` peak-memory helper returns null on Mac; no borrowed prior-task RSS or zero-memory claim is substituted. Source/schema semantics remain experimental; the structured format standard remains proposed, owner/versioned contracts control and no production migration is authorized.
+All earlier source/build/runtime/evidence/worktree roots remain preserved. The four tiny bounds-unit temporary roots are enumerated in unit-temporary-roots-replay.json. No cleanup was performed. The shared Mac checkout stays read-only, clean at 379af4eda9b95ee82be9d3afcfdcdca2d6d132f9. Native environment remains Darwin 25.6.0/macOS 26.6.1 arm64, APFS, Rust/Cargo 1.89.0, Python 3.11.9 and Bash 3.2. Earlier fsync/F_FULLFSYNC/link probes and F3 disassembly remain version-labeled evidence, not newly sampled corrected disassembly. Peak-memory telemetry is null on Mac because the unchanged helper reads `/proc`. No power-cut or reboot persistence is established.
 
-## Bounded execution and preserved paths
+## Report transport and reproduction
 
-allocation-final.json records the prospectively authorized F3 final lane: 105 minutes work plus 15 minutes reporting. The a1108c6 affected-only amendment in [affected-plan.json](affected-plan.json) uses **the same original deadline**, without restarting the clock. Separate corrected source/target/runtime paths preserve every earlier artifact. The owned whole-root guard includes source/worktrees/build/runtime/evidence/report, with <=6 GiB and >=20 GiB free-space bounds; the original common runner additionally uses a 5 GiB run-root cap. Actual argv, caps, exits, launcher hashes and resource samples are retained. Ordinary engine calls have 180-second caps; build/tests use 600 seconds. No new broad benchmark or competing run was launched by this chat.
+This is a **report-only follow-up to Mac result `c09a709a9830a8337282bab4980e881574d0074c`**. Its inherited repository core is not relabeled as the tested 7ac70f9 core. New-pin executable/source bytes come from the separate exact source snapshot and source/session archives. This preserves the existing result branch through an ordinary fast-forward push without introducing engine changes into the report commit. The coordinator can consolidate the scoped report with its newer common core separately.
 
-- Whole owned root: `/private/tmp/file-native-incremental-macos-20261018`
-- Corrected worktree: `/private/tmp/file-native-incremental-macos-20261018/corrected-checkout`
-- Corrected source: `/private/tmp/file-native-incremental-macos-20261018/source-corrected/docs/research/file-native-incremental-engine-experiment-2026-10-18`
-- Corrected build: `/private/tmp/file-native-incremental-macos-20261018/corrected-lane/build`
-- Corrected runtimes: `corrected-lane/namespace`, `checks`, `supplement`, `adversarial` beneath the owned root
-- Corrected local evidence: `/private/tmp/file-native-incremental-macos-20261018/evidence-corrected`
-- Earlier F3 source/build/runtime: `source-final`, `final-lane/build`, `final-lane/results`, `final-lane/deep-cases`, `final-lane/walk-cases` beneath the owned root
-- The three tiny unit-test temporary roots are separately enumerated in unit-temporary-roots.json and preserved.
+[helpers/launch_replay.py](helpers/launch_replay.py) preserves the actual bounded launcher. [replay-plan.json](replay-plan.json) binds it prospectively to the original allocation. Actual argv/cwd/caps/start/end/exit/log hashes are in evidence/replay-7ac70f9/outer--runs.jsonl. Use a fresh exact-pin capsule and fresh paths; never rerun into retained roots. Commands are locked workspace test/release build, replay_lifetime.py first, then checks.py --faults, supplement.py, adversarial.py and namespace_cases.py. The unchanged collector exports raw Driver events/session source ZIPs/source TAR, byte-level stdout/stderr associations, source Git/SHA-256 pins, executable hashes and wrapper logs. A separately copied replay summary is bound by its exact hash in replay-summary-binding.json. Full runtime corpora and executable/build bytes stay on Mac.
 
-Every predecessor prerequisite root remains preserved. The shared Mac checkout was read only at HEAD 379af4eda9b95ee82be9d3afcfdcdca2d6d132f9; no switch/reset/source write or cleanup was performed there. Resource and precommit scope receipts accompany this report. No PR, force push, production merge/deploy, successor dispatch or Pro consultation was performed.
-
-## Reproduction and transport verification
-
-Use a fresh isolated worktree at a1108c6 and archive the capsule into fresh owned paths. [helpers/launch_affected.py](helpers/launch_affected.py) preserves the actual affected-only commands and original allocation binding; it depends on the retained top-level outer helper/allocation. Its recorded runs use `cargo test --locked --workspace`, `cargo build --release --locked --workspace`, `namespace_cases.py` (default fixed), `checks.py --faults`, `supplement.py` and `adversarial.py`, with the distinct corrected target. Consult evidence/corrected/outer--runs.jsonl for exact argv. Do not rerun into preserved roots.
-
-The transport includes compressed raw JSONL, exact stdout/stderr byte bindings, source/session ZIPs, source TARs, source Git-blob/SHA-256 pins, executable hashes, summaries and wrapper code. Full runtime corpora/build binaries remain on Mac. Local `.gitattributes` disables text conversion. Artifact names are checked for NFC/casefold collisions and portable characters; intentional native filesystem case probes are not unpacked into Git artifacts.
-
-After exact-byte Git materialization, run:
+After exact-byte Git materialization:
 
 ```bash
 python3 helpers/verify_export.py .
 ```
 
-The verifier checks raw gzip hashes/counts, stdout/stderr hashes and lengths, JSON type/parse association, session ZIP bytes against pinned sources, source TAR bytes and session/executable-hash associations. It does not claim a reproducible build or verify an absent physical executable. GitNexus coverage of this isolated report is unknown rather than zero risk; exact staged paths and pinned source bytes supply the manual scope check. Reporting does not alter engine symbols or execution flows.
+The portable verifier checks raw archive hashes/counts, stdout/stderr byte bindings, JSON type/parse association, session source ZIP bytes and source TAR bytes against per-lane pins and executable-hash associations. Physical binaries were rehashed locally; no reproducible-build claim is made. Local `.gitattributes` preserves exact bytes, including the earlier pinned CRLF companion helper. Artifact names remain portable and collision-checked. GitNexus cannot map this unregistered isolated report checkout; its coverage is unknown. Manual scope/source/index checks accompany the report. No PR, force push, production merge/deploy, outward message, new chat, subagent or Pro consultation was performed.

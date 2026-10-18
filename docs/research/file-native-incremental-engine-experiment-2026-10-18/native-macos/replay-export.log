@@ -1,0 +1,197 @@
+{
+  "lane": "replay-retention-7ac70f9",
+  "pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+  "events": 610,
+  "censors": 0,
+  "exit_counts": {
+    "0": 504,
+    "2": 70,
+    "86": 36
+  },
+  "action_counts": {
+    "init": 33,
+    "lifecycle": 165,
+    "prepare": 36,
+    "select": 31,
+    "publish": 123,
+    "inspect": 38,
+    "point": 10,
+    "audit": 52,
+    "resolve": 60,
+    "dump": 7,
+    "checkpoint": 8,
+    "cancel": 9,
+    "packet": 5,
+    "refresh": 6,
+    "view-audit": 3,
+    "resume": 24
+  },
+  "sessions": [
+    {
+      "path": "adversarial/events.jsonl",
+      "source_archive_sha256": "369143617c694c58824c370692eb4fb77cea02c74978c614ab270289c2c0f965",
+      "exe_sha256": "9f6d4c54939e2dfbf23d05e19cecf91d355ce75b276c0b961576e3a4fcedaf61",
+      "cap_seconds": 180
+    },
+    {
+      "path": "checks/events.jsonl",
+      "source_archive_sha256": "369143617c694c58824c370692eb4fb77cea02c74978c614ab270289c2c0f965",
+      "exe_sha256": "9f6d4c54939e2dfbf23d05e19cecf91d355ce75b276c0b961576e3a4fcedaf61",
+      "cap_seconds": 180
+    },
+    {
+      "path": "namespace/events.jsonl",
+      "source_archive_sha256": "369143617c694c58824c370692eb4fb77cea02c74978c614ab270289c2c0f965",
+      "exe_sha256": "9f6d4c54939e2dfbf23d05e19cecf91d355ce75b276c0b961576e3a4fcedaf61",
+      "cap_seconds": 180
+    },
+    {
+      "path": "replay/events.jsonl",
+      "source_archive_sha256": "369143617c694c58824c370692eb4fb77cea02c74978c614ab270289c2c0f965",
+      "exe_sha256": "9f6d4c54939e2dfbf23d05e19cecf91d355ce75b276c0b961576e3a4fcedaf61",
+      "cap_seconds": 180
+    },
+    {
+      "path": "supplement/events.jsonl",
+      "source_archive_sha256": "369143617c694c58824c370692eb4fb77cea02c74978c614ab270289c2c0f965",
+      "exe_sha256": "9f6d4c54939e2dfbf23d05e19cecf91d355ce75b276c0b961576e3a4fcedaf61",
+      "cap_seconds": 180
+    }
+  ],
+  "raw_archives": 5,
+  "source_files": 60,
+  "outer_artifacts": [
+    {
+      "file": "outer--adversarial.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--adversarial.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--binary-pins.json",
+      "sha256": "8ed17171662629525ef1658c3f41bf2fcec959a60aafc4f028c1c7770b7394e6",
+      "bytes": 745
+    },
+    {
+      "file": "outer--build.stderr",
+      "sha256": "79d65d568fa0b9f31032b46d74c61594663579d2a4599ea33339802bda60fb40",
+      "bytes": 2406
+    },
+    {
+      "file": "outer--build.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--checks.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--checks.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--console.log",
+      "sha256": "7408cfaaf3abeb9d81654f1856f316a3c97f574e69fe2589dbb626533251318b",
+      "bytes": 7432
+    },
+    {
+      "file": "outer--finished.json",
+      "sha256": "056f480e365cbc5d14725d826e1ff1c12b966efd7ac07f991f28d61defa7708e",
+      "bytes": 572
+    },
+    {
+      "file": "outer--namespace.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--namespace.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--replay-launcher.py",
+      "sha256": "dd3a94cdf5d63a4e56b67e45613b25cf54c973866899a861f45d42d7eb0be03a",
+      "bytes": 4829
+    },
+    {
+      "file": "outer--replay-plan.json",
+      "sha256": "7cd429ccc42ac8fad486597a42a0151b625a6f72ccd3e0059efe174a4685ab61",
+      "bytes": 1188
+    },
+    {
+      "file": "outer--replay-verification.json",
+      "sha256": "32d551d666c95ab3305ba0dd906a6aa6e0279b2b2c75079d951189ec5e6bf910",
+      "bytes": 2550
+    },
+    {
+      "file": "outer--replay-verifier.py",
+      "sha256": "6e7807c8115b644251d5a481992fd9c23def08b00084c284a79babfa402a8e38",
+      "bytes": 6517
+    },
+    {
+      "file": "outer--replay.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--replay.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--resources.jsonl",
+      "sha256": "5145e55caf6e099185ba745bf3e6acaac854ce19599dd7f14561f7ed2e9d47fb",
+      "bytes": 13155
+    },
+    {
+      "file": "outer--runs.jsonl",
+      "sha256": "7408cfaaf3abeb9d81654f1856f316a3c97f574e69fe2589dbb626533251318b",
+      "bytes": 7432
+    },
+    {
+      "file": "outer--source-capsule.tar",
+      "sha256": "132e542300e059c2820fce30167f604fa8eb17a31047e8d8223eaad7a7831d09",
+      "bytes": 501760
+    },
+    {
+      "file": "outer--source-pins.json",
+      "sha256": "cc48abfe5bd507d9dde1f57f791adf115d2f354cfdbb1e2f8ec1f4f4aec7c1da",
+      "bytes": 16234
+    },
+    {
+      "file": "outer--supplement.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--supplement.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "outer--test.stderr",
+      "sha256": "ecec8c018b5f85710b470543e51f8f225b02024feacf8929645ddd7d67c40552",
+      "bytes": 3158
+    },
+    {
+      "file": "outer--test.stdout",
+      "sha256": "d157c9af05a6bdab2de7e11bfab3346b2bf98b18ad8ecfd34d1f01e93eb99879",
+      "bytes": 706
+    },
+    {
+      "file": "outer--unit-temporary-roots.json",
+      "sha256": "b8c921085358b722b6b78f4d576cbea3ed1e676ee334b2c5b56a9e83d84b60fa",
+      "bytes": 955
+    }
+  ],
+  "status": "lossless-response-source-session-association-passed",
+  "qualification": "Events are process responses, not independent test trials. Expected injected exits/refusals are not automatically failures. Native completion and each required result are evaluated separately."
+}

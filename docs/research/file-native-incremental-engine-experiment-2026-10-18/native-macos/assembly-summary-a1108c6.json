@@ -1,0 +1,14 @@
+{
+  "final_affected_pin": "a1108c634cb8362aca50e1a6228766802b96f087",
+  "final_affected_events": 570,
+  "final_affected_censors": 0,
+  "f3_bounded_events": 726,
+  "f3_bounded_censors": 0,
+  "development_events": 117,
+  "all_retained_events": 1413,
+  "all_retained_censors": 0,
+  "corrected_source_files_verified": 53,
+  "no_corrected_smoke_rerun": true,
+  "original_final_deadline_preserved": true,
+  "epoch": 1792353864.575865
+}

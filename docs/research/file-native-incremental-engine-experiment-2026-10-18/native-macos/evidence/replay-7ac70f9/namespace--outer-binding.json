@@ -1,0 +1,10 @@
+{
+  "executable_sha256": "9f6d4c54939e2dfbf23d05e19cecf91d355ce75b276c0b961576e3a4fcedaf61",
+  "source_archive_sha256": "369143617c694c58824c370692eb4fb77cea02c74978c614ab270289c2c0f965",
+  "launcher_sha256": "dd3a94cdf5d63a4e56b67e45613b25cf54c973866899a861f45d42d7eb0be03a",
+  "allocation_sha256": "570befff76e2184b3d3eb8acbf246ad0e070592b398f7c6a952f8d3d765d8402",
+  "cap_seconds": 180,
+  "original_final_execution_deadline_epoch": 1792358324.418587,
+  "wrapper_run_file_sha256": "7408cfaaf3abeb9d81654f1856f316a3c97f574e69fe2589dbb626533251318b",
+  "binding_origin": "Postrun binding to actual retained launcher/runs and original allocation; Driver events/session bytes unchanged"
+}

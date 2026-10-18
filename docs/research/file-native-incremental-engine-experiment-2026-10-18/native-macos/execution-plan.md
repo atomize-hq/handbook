@@ -58,3 +58,17 @@ target are used. Run locked workspace tests/release build, namespace_cases.py
 in default fixed mode, checks.py --faults, supplement.py and adversarial.py.
 No broad 1k, consumer/copy, 10k/100k or history rerun. Preserve F3 raw evidence
 and qualify its role bins; use a1108c6 for the new affected safety result.
+
+
+## Replay-retention targeted correction
+
+The coordinator supplied 7ac70f93cce14ecd3d935852801f034c122000d8 after
+reproducing loss of eligible candidates' deterministic replay dependencies.
+replay-plan.json prospectively binds the same original allocation/deadlines.
+A fresh 60-file capsule excludes only committed native-macos report artifacts;
+the initial full snapshot is separately preserved. A new replay-lane/build target
+and fresh bases run locked tests/build, replay_lifetime.py A/B N512 first,
+then checks.py --faults, supplement.py, adversarial.py and namespace_cases.py.
+All seven commands passed within the existing window. No N1k/history rerun.
+Append report artifacts to the previous Mac result branch by ordinary fast-forward
+push; do not transplant newer core into the report-only result commit.
