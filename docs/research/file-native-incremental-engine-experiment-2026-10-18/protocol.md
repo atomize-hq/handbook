@@ -57,11 +57,26 @@ consumers use the shared core. No general plugin ABI/public format promise.
 | --- | --- |
 | Selected membership/outcomes, original results/publications | permanent accepted evidence; never traverse provenance into old content for GC |
 | Selected documents/constraints/projection | until replaced, then ordinary retained snapshot policy |
-| Non-retired historical content | until explicit retirement; pins/readers/packets block retirement |
+| Non-retired historical content | until explicit retirement; registered pins/readers/standalone packet preparations block retirement |
 | Reserved/sealed candidate and private stages | charged and protected until selection transfer or fenced abandonment plus deletion/GC |
 | Prepared checkpoint | reservation protects rebuilt roots; expected-head successor installs verified source/coverage/version binding |
-| Pending A plan | target and prior roots protected through completion; stable divergence backups retained |
+| Pending A plan | target and prior roots protected through completion; selected root/sequence bindings and complete actions rederived on resume; stable divergence backups retained |
 | Old history index versions | protect for live candidates/checkpoints; current roots cover permanent evidence |
+
+Selection binds a permanent allocation-owner record for the attempt's entire
+conservative allowance, including intermediate/rejected writes and stages. Only
+after this selected transfer may the candidate reservation be released. These
+selected-owner charges deliberately overcount shared and later collected bytes;
+report them separately from actual unique retained storage and candidate quota.
+Permanent selected-history growth is bounded by the run allocation, not an
+outcome horizon. GC can reclaim unreachable intermediates without losing owners.
+
+A combined packet follows its publication's explicit content-retirement lifetime;
+registering a publication pin extends that lifetime. A standalone prepared packet
+protects its exact base until explicit abandonment/release. A checkpoint carrying
+an unchanged packet reference also retains that capsule's physical owner until
+the last referencing live publication retires. External ordinary copies survive
+independently. No packet disappears because only a source object was collected.
 
 | Transition | Boundary case names |
 | --- | --- |
