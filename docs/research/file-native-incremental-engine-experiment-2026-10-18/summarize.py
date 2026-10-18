@@ -22,7 +22,8 @@ def run(root):
         for i,row in enumerate(rows,1):
             v=row['input'];action=v['action'];request=v.get('request',{}).get('request')
             if action in ['init','history','packet','checkpoint','refresh','validation-trace'] or action=='publish' and (request or '').startswith(('update-','genuine-','change-','B-one','one-in-','incoming-5000','combined-')):
-                picked.append({'raw_line':i,'action':action,'root':v['root'],'request':request,'n':v.get('count'),**measurement(row)})
+                picked.append({'raw_line':i,'action':action,'root':v['root'],'request':request,'n':v.get('count'),
+                    'metrics_scope':'outer API setup; per-publication counters are in the ledger' if action=='history' else 'this API invocation',**measurement(row)})
         report[name]={'events':len(rows),'censors':sum(v['censored'] for v in rows),'observations':picked}
     path=root/'history-common-pin/store/expected-ledger.jsonl'
     if path.exists():
