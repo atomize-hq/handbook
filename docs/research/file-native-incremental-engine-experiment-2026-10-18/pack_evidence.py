@@ -34,7 +34,7 @@ def export(source,destination):
             if child.is_dir():
                 if child.name in {'store','build','target','.git','__pycache__','disposable','fallback'} or child.name.startswith('build-') or (child/'STORE.json').is_file():continue
                 visit(child)
-            elif child.name in names or child.name in {'audit-evidence.json','audit_lane.py','calibration.json','contention.json','exact-closure-5000.zip','cancelled-before-work.json'} or child.name.endswith('-budget.json') or (child.name.startswith('pending-') and child.suffix in {'.json','.zip'}) or child.suffix in {'.stdout','.stderr'}:put(child,child.relative_to(source))
+            elif child.name in names or child.name in {'audit-evidence.json','audit_lane.py','calibration.json','contention.json','exact-closure-5000.zip','cancelled-before-work.json','reserve-bound.json','relocation.json','queued-v0.py','progress.jsonl','progress_watch.py','windows-resource-observer.jsonl','windows-audit-resource-observer.jsonl'} or child.name.endswith('-budget.json') or (child.name.startswith('pending-') and child.suffix in {'.json','.zip'}) or child.suffix in {'.stdout','.stderr'}:put(child,child.relative_to(source))
     visit(source)
     report={'source':str(source),'lossless_bytes_verified':True,'json_types_verified':True,'events':events,'files':rows}
     (destination/'manifest.json').write_text(json.dumps(report,indent=2));return report

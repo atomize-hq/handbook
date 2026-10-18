@@ -1,0 +1,10 @@
+{
+  "zip": "exact-closure-5000.zip",
+  "zip_bytes": 1976819,
+  "zip_sha256": "e2c8a75d27038a49b3ca25e991cc35d504ceb49130119f3b688e4bf16eb21f77",
+  "manifest_sha256": "53f424a677cec060c35f4cec815bbdaf8466ea98a1afa31fa50b9ee9c5f2ceaa",
+  "zip_entries": 5006,
+  "qualification": "Exact selected packet ZIP. Positive selected-membership binding and selected/combined equality are independently verified in genuine-source-final.json.",
+  "manifest_files": 5005,
+  "all_zip_entry_hashes_verified": true
+}

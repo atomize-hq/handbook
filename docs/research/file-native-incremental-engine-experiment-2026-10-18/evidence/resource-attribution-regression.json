@@ -1,0 +1,29 @@
+{
+  "synthetic_adversarial_rows": 2,
+  "real_writer_row": 1,
+  "read_only_and_dedup_not_attributed": true,
+  "bound_writer": {
+    "raw_event": "events.jsonl",
+    "raw_line": 1,
+    "action": "publish",
+    "request": "genuine-100000-64",
+    "controller_ms": 919.7548,
+    "observer": "windows-resource-observer.jsonl",
+    "observer_line": 9,
+    "observer_line_b64": "eyJraW5kIjoiZXhpdGVkLXByb2Nlc3MiLCJwaWQiOjcxNDEyLCJjcmVhdGVkX2ZpbGV0aW1lIjoxMzQzNjgzMjg3ODQ0MTI3MjEsImV4aXRfZmlsZXRpbWUiOjEzNDM2ODMyODc5MzU5NjkyMSwiZmlyc3Rfb2JzZXJ2ZWRfbnMiOjQwMzQ1NDM1MTgwNTIwMCwib2JzZXJ2ZWRfZXhpdF9ucyI6NDAzNDU1Mzc5MTQ5MDAwLCJ1c2VyX2NwdV9ucyI6MjM0Mzc1MDAwLCJzeXN0ZW1fY3B1X25zIjoyNTAwMDAwMDAsInBlYWtfd29ya2luZ19zZXRfYnl0ZXMiOjgxNTkyMzIsImV4ZV9zaGEyNTYiOiIzOGI3ZDAxMWMyNDgwZWJhMDIwZDk4YzE2OGQzNWIwZmM4NDNkMTYwMzc2NzJjMjE4ZTAwNjUyMjE0YThhNDU0In0=",
+    "observer_line_sha256": "7ba0d2309e19075b5ed0b0903e07fe360baafb20686274b493a078bc457ac1df",
+    "identity_method": "selected writer PID/epoch inside OS process lifetime, executable hash and monotonic call window",
+    "resources": {
+      "kind": "exited-process",
+      "pid": 71412,
+      "created_filetime": 134368328784412721,
+      "exit_filetime": 134368328793596921,
+      "first_observed_ns": 403454351805200,
+      "observed_exit_ns": 403455379149000,
+      "user_cpu_ns": 234375000,
+      "system_cpu_ns": 250000000,
+      "peak_working_set_bytes": 8159232,
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454"
+    }
+  }
+}
