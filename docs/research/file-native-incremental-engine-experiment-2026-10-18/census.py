@@ -1,5 +1,5 @@
 """Post-run actual logical file census; allocated blocks only where exposed."""
-import argparse,json,os,shutil,time
+import argparse,hashlib,json,os,shutil,time
 from pathlib import Path
 
 def census(root,owners=False):
@@ -10,8 +10,12 @@ def census(root,owners=False):
             row['files']+=1;row['logical_bytes']+=s.st_size
             if hasattr(s,'st_blocks'):row['allocated_file_bytes']+=s.st_blocks*512
             else:allocated=False
-            if owners and relative.parts[0]=='publications' and p.suffix=='.json':
-                value=json.loads(p.read_bytes());owner_bytes+=value['allocation_owner']['conservative_bytes'];owner_count+=1
+    if owners:
+        selected=json.loads((root/'SELECTED.json').read_bytes());seen=set()
+        while selected:
+            assert owner_count<200001 and selected['publication'] not in seen;seen.add(selected['publication'])
+            b=(root/f"publications/{selected['publication']}.json").read_bytes();assert hashlib.sha256(b).hexdigest()==selected['digest']
+            value=json.loads(b);owner_bytes+=value['allocation_owner']['conservative_bytes'];owner_count+=1;selected=value['predecessor']
     if not allocated:
         for row in groups.values():row['allocated_file_bytes']=None
     return {'root':str(root),'epoch':time.time(),'seconds':time.monotonic()-start,'categories':groups,'files':sum(x['files'] for x in groups.values()),'logical_bytes':sum(x['logical_bytes'] for x in groups.values()),'allocated_file_bytes':sum(x['allocated_file_bytes'] for x in groups.values()) if allocated else None,'free_bytes':shutil.disk_usage(root).free,'conservative_publication_owner_bytes':owner_bytes if owners else None,'owner_records':owner_count if owners else None,'qualification':'Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes.'}

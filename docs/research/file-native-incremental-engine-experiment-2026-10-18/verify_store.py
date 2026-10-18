@@ -52,6 +52,26 @@ class Tree:
         if h:walk(h)
         return out
     def stats(self):return {k:getattr(self,k) for k in ['pages','leaves','branches','physical','tombstones','height','occupancy']}
+
+class CachedPoints(Tree):
+    """Post-run graph-header proof; immutable page hashes permit checked reuse."""
+    def __init__(self,root):super().__init__(root);self.cache={}
+    def point(self,h,key):
+        expected=None
+        while h:
+            if h not in self.cache:self.cache[h]=self.node(h)
+            node=self.cache[h]
+            bounds=(0,node[1][0][0],node[1][-1][0]) if node[0]=='leaf' else (node[1],node[2][0][1],node[2][-1][2])
+            if expected is not None:assert bounds==expected
+            if node[0]=='leaf':
+                value=dict(node[1]).get(key)
+                if not value:return None
+                if value.startswith(b'@'):value=self.obj(value[1:].decode())
+                return json.loads(value)
+            child=next(((child,lo,hi) for child,lo,hi in node[2] if lo<=key<=hi),None)
+            if child is None:return None
+            h,lo,hi=child;expected=(node[1]-1,lo,hi)
+        return None
 def verify_history(root,allow_censored_prefix=False):
     root=Path(root);selected=json.loads((root/'SELECTED.json').read_bytes());next=selected;chain=[];seen=set()
     while next:
@@ -80,6 +100,7 @@ def verify_history(root,allow_censored_prefix=False):
     if history_rows:
         origin=json.loads((root/'HISTORY-SOURCE.json').read_bytes())
         original=checked(root/origin['original'],origin['digest']);variant=original[:-1]+(b'\n' if original[-1:]==b' ' else b' ')
+    points=CachedPoints(root);source_proofs=set()
     for row in receipts:
         i=row['index'];s,p=chronological[i]
         assert p['request']==f'history-{i:06}' and row['selected']==s
@@ -96,6 +117,18 @@ def verify_history(root,allow_censored_prefix=False):
         elif i%5 in [1,4]:assert len(ops)==1 and ops[0]['kind']=='import' and ops[0]['id']=='d000000' and ops[0]['text'].encode()==(variant if i%5==1 else original)
         elif i%5==2:assert len(ops)==1 and ops[0]['kind']=='label' and ops[0]['id']==f'd{i%16:06}' and ops[0]['text']==f'history-{i%16}-{(i//80)%2}'
         else:assert len(ops)==1 and ops[0]['kind']=='cost' and ops[0]['value']==0
+        previous=chronological[i-1][1]
+        if i%5 in [1,4]:
+            data=variant if i%5==1 else original;digest=sha(data)
+            before=points.point(previous['graph']['tree'],'D/d000000')['doc'];after=points.point(p['graph']['tree'],'D/d000000')['doc']
+            assert before['digest']!=after['digest'] and after['digest']==digest and after['bytes']==len(data),'content/restore was not a genuine exact-byte mutation'
+            if after['original'] not in source_proofs:
+                assert checked(root/after['original'],digest)==data;source_proofs.add(after['original'])
+        elif i%5==2:
+            key=f'D/d{i%16:06}';before=points.point(previous['graph']['tree'],key)['doc'];after=points.point(p['graph']['tree'],key)['doc']
+            assert before['label']!=after['label'] and after['label']==ops[0]['text'],'metadata label was not a genuine mutation'
+        else:
+            assert p['graph']==previous['graph'] and p['projection']==previous['projection'],'maintenance/equal-state changed semantic or projection state'
     recipe_verified=False
     initial=root/'INITIAL-ORACLE.json'
     if initial.exists():

@@ -26,3 +26,11 @@ At least 10,000 dense successful ledger rows plus authenticated chain/index/resu
 equality are required before claiming the mandatory durable depth. A selected but
 unreceipted censored tail stays uncertain/censored. The original native API,
 process-death and power-loss qualifications remain controlling.
+
+A follow-up read-only review found no blocker in the strengthened touched-header
+history proof or independent per-document renderer. It confirmed hash-checked
+node reuse with parent height/range checks, genuine old/new source and label
+transitions, and unchanged graph/projection roots for maintenance/equal-state.
+The renderer's static root navigation text and requested packet recipe are not
+independently recomputed there; selected digest checks and separate packet cases
+cover those stated scopes. B link counts establish current hardlink independence.
