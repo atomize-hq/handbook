@@ -74,3 +74,14 @@ Allow <=900 seconds total for fresh final-core A N1k/10k initialization, identic
 This small calibration uses the reporting reserve and does not rerun 100k or
 replace its censored original initialization. It repairs the history-depth match
 for the final document-size comparison; preserve both reused-root observations.
+
+Prospective audit correction amendment (recorded before corrected build): allow
+one <=900 s owned N128 A/B negative-evidence regression per Windows/Linux/macOS/
+WSL, plus locked build/tests and a <=900 s strict audit of the final history root.
+The old 7ac reproduction and long-running history remain version-qualified. The
+correction only preflights selected projection/source evidence before rendering
+the full audit oracle; it changes neither ordinary publication nor disk formats.
+Native followups use a new explicit <=1800 s correction cap including build and
+export; they do not reopen or reset the original native measurement windows.
+The Windows reproducer's exact diagnostic interval is recorded and overlapped
+the resident history lane; exclude that interval from quiet timing claims.

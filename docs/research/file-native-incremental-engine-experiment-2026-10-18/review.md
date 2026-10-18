@@ -34,3 +34,14 @@ transitions, and unchanged graph/projection roots for maintenance/equal-state.
 The renderer's static root navigation text and requested packet recipe are not
 independently recomputed there; selected digest checks and separate packet cases
 cover those stated scopes. B link counts establish current hardlink independence.
+
+Late audit review found and reproduced a required-evidence gap on 7ac in A/B:
+full rendering recreated missing bulk-layout projection children and navigation
+sources before checking them. Requested packet FileSpec sources could be missing
+or corrupt while separate retained capsule copies still passed. The N128 owned
+before-probe preserves all responses and exact diagnostic interval; missing root
+already refused. The correction traverses and hash-checks every selected source
+before oracle generation/exclusions. Explicit readable-view repair is unchanged.
+GitNexus full_oracle impact was UNKNOWN (target absent from stale index); scoped
+inspection found the explicit audit API as its sole direct caller. Ordinary
+publication, history selection, formats and owner contracts are unchanged.

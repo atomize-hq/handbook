@@ -293,8 +293,13 @@ pub fn audit_view(store:&Store,m:&mut Metrics)->Result<Value>{
 pub fn full_oracle(store:&Store,m:&mut Metrics)->Result<()>{
     let head=store.snapshot(m)?;let mut o=objects::object_store(&store.root,m);
     graph::audit(&mut o,&head.publication.graph)?;
-    let expected=full(&store.root,&mut o,&head.publication.graph)?;
     let mut actual=objects::entries(&mut o,&head.publication.projection)?;
+    // Observe selected evidence before the renderer can recreate missing objects.
+    for (path,bytes) in &actual{
+        safe_path(path)?;let file:FileSpec=objects::decode(bytes,&mut o)?;
+        safe_path(&file.source)?;io::checked(&store.root.join(&file.source),&file.digest,o.metrics)?;
+    }
+    let expected=full(&store.root,&mut o,&head.publication.graph)?;
     let mut expected=objects::entries(&mut o,&expected)?;
     // Packet work is independently checked against exact selected graph/closure.
     for path in ["packet/context.md","packet/provenance.json"]{actual.remove(path);expected.remove(path);}
