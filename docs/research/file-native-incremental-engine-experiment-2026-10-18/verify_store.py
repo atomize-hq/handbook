@@ -72,7 +72,7 @@ class CachedPoints(Tree):
             if child is None:return None
             h,lo,hi=child;expected=(node[1]-1,lo,hi)
         return None
-def verify_history(root,allow_censored_prefix=False):
+def verify_history(root,allow_censored_prefix=False,allow_retired_content=False):
     root=Path(root);selected=json.loads((root/'SELECTED.json').read_bytes());next=selected;chain=[];seen=set()
     while next:
         assert len(chain)<200001 and next['publication'] not in seen;seen.add(next['publication'])
@@ -100,7 +100,14 @@ def verify_history(root,allow_censored_prefix=False):
     if history_rows:
         origin=json.loads((root/'HISTORY-SOURCE.json').read_bytes())
         original=checked(root/origin['original'],origin['digest']);variant=original[:-1]+(b'\n' if original[-1:]==b' ' else b' ')
-    points=CachedPoints(root);source_proofs=set()
+    points=CachedPoints(root);source_proofs=set();retired=set();unavailable=[]
+    if allow_retired_content:
+        for s,p in chronological:
+            marker=root/f"retired/{p['id']}.json"
+            if marker.exists():
+                assert json.loads(marker.read_bytes())==s,'retirement selector mismatch'
+                retired.add(p['id'])
+        assert head['id'] not in retired
     for row in receipts:
         i=row['index'];s,p=chronological[i]
         assert p['request']==f'history-{i:06}' and row['selected']==s
@@ -123,6 +130,8 @@ def verify_history(root,allow_censored_prefix=False):
             c=json.loads(candidate.read_bytes())
             assert c['request']==request and c['graph']==p['graph'] and c['projection']==p['projection']
         previous=chronological[i-1][1]
+        if allow_retired_content and i%5 in [1,2,4] and (p['id'] in retired or previous['id'] in retired):
+            unavailable.append(i);continue
         if i%5 in [1,4]:
             data=variant if i%5==1 else original;digest=sha(data)
             before=points.point(previous['graph']['tree'],'D/d000000')['doc'];after=points.point(p['graph']['tree'],'D/d000000')['doc']
@@ -155,4 +164,6 @@ def verify_history(root,allow_censored_prefix=False):
             assert sha((root/doc['original']).read_bytes())==doc['digest']
         actual=Tree(root).entries(head['graph']['tree']);assert actual==expected,'independent complete history recipe/index mismatch'
         recipe_verified=True
-    return {'publications':len(chain),'ledger_boundaries':len(receipts),'membership':membership_stats,'outcomes':outcome_stats,'independent_full_walker':True,'independent_recipe_and_all_indexes':recipe_verified}
+    verified={'publications':len(chain),'ledger_boundaries':len(receipts),'membership':membership_stats,'outcomes':outcome_stats,'independent_full_walker':True,'independent_recipe_and_all_indexes':recipe_verified}
+    if allow_retired_content:verified.update(retired_publications=len(retired),retired_header_transition_checks_unavailable=unavailable)
+    return verified

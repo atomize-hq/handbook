@@ -114,3 +114,10 @@ moved and no original append deadline is extended. Capture the full history proo
 before retiring content; private candidates may disappear, while transition proofs
 still require historical graph pages. The continuation uses the reporting reserve
 and is unperformed if its complete cap does not fit.
+The continuation's inner controller is <=860 seconds within the <=900-second
+outer cap, reserving logging/termination time. A separate <=180-second fresh
+read-only check can verify original outcomes after a completed/censored GC; it
+cannot reconstruct an unobserved GC response. Explicit post-retirement proof mode
+still authenticates every receipt/result/index/intent and final full state, but
+lists the exact header-transition row numbers unavailable due to authenticated
+retirement markers. The pre-retirement proof retains all transition checks.
