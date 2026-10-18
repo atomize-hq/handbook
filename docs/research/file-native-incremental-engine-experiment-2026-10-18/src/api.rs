@@ -45,6 +45,7 @@ pub fn run(v:Value,m:&mut Metrics,consumer:Option<&str>)->Result<Value>{
         "checkpoint"=>store.checkpoint(v["request_id"].as_str().ok_or("request_id")?,m),
         "cancel"=>store.cancel(v["request_id"].as_str().ok_or("request_id")?,m),
         "cancel-signal"=>{
+            let _lease=store.preparation_gate(false)?;
             let id=v["request_id"].as_str().ok_or("request_id")?;
             io::atomic(&root.join(format!("cancel-signals/{}",io::digest(id.as_bytes()))),b"signal",m)?;
             Ok(json!({"status":"signal-only-not-terminal"}))
@@ -81,15 +82,8 @@ pub fn run(v:Value,m:&mut Metrics,consumer:Option<&str>)->Result<Value>{
             Ok(json!({"status":if action=="resume"{"audited-rebuilt"}else{"pending-refreshed"}}))
         },
         "packet"=>{
-            let sel=store.snapshot(m)?.selected;
-            let request=Request{request:io::unique("packet"),base:Some(sel),ops:vec![],packet:true};
-            match store.prepare(request,m)?{
-                Preparation::Existing(_)=>Err("integrity:packet-id-reuse".into()),
-                Preparation::Ready(p)=>{
-                    let path=Store::candidate_path(&p);
-                    Ok(json!({"path":path.replace("/candidate.json","/packet"),"candidate":path,"selection_unchanged":true}))
-                }
-            }
+            let sel:Selector=if v["selected"].is_object(){serde_json::from_value(v["selected"].clone())?}else{store.snapshot(m)?.selected};
+            store.assemble_snapshot(&sel,m)
         },
         "history"=>history(&store,&v,m),
         _=>Err("unknown-action".into())

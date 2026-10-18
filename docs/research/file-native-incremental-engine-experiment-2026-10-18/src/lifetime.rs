@@ -7,7 +7,7 @@ const MAX_RESERVATIONS:usize=8;
 const MAX_BYTES:u64=32*1024*1024*1024;
 #[derive(Clone,Serialize,Deserialize)]
 #[serde(deny_unknown_fields)]
-pub struct Reservation{pub request:String,pub intent:String,pub base:Option<Selector>,pub bytes:u64,pub state:String,pub used:u64}
+pub struct Reservation{pub request:String,pub intent:String,pub base:Option<Selector>,pub bytes:u64,pub state:String,pub used:u64,pub candidate_digest:Option<String>}
 pub fn reservations(root:&Path,m:&mut Metrics)->Result<BTreeMap<String,Reservation>>{
     let p=root.join("RESERVATIONS.json");
     if !p.exists(){return Ok(BTreeMap::new());}
@@ -30,6 +30,7 @@ pub fn reserve(root:&Path,attempt:&str,r:Reservation,m:&mut Metrics)->Result<()>
 pub fn mark_sealed(root:&Path,attempt:&str,m:&mut Metrics)->Result<()>{
     let mut all=reservations(root,m)?;let r=all.get_mut(attempt).ok_or("integrity:missing-reservation")?;
     r.state="sealed".into();r.used=m.quota_spent.checked_add(65536).ok_or("quota:overflow")?;
+    r.candidate_digest=Some(io::digest(&io::read(&root.join(format!("attempts/{attempt}/candidate.json")),m)?));
     write_reservations(root,&all,m)?;io::checkpoint("seal")
 }
 pub fn selection_grant(root:&Path,attempt:&str,m:&mut Metrics)->Result<()>{
@@ -146,19 +147,29 @@ fn collect(store:&Store,m:&mut Metrics)->Result<Value>{
     for (_,r) in store.membership_entries(m)?{evidence.push(store.publication(&r,m)?);}
     for p in &evidence{if live(root,&p.selector()?).is_ok(){contents.push((p.graph.clone(),p.projection.clone()));}}
     contents.extend(crate::projection::protected_roots(store,m)?);
+    if let Some(changes)=crate::projection::pending_changes(store,m)?{
+        let mut o=objects::object_store(root,m);keep.extend(objects::reachable(&mut o,&changes)?);
+    }
     let all=reservations(root,m)?;
     let mut abandoned=vec![];
     for (attempt,r) in &all{
         if r.state=="abandoned"||root.join(format!("abandoned/{attempt}")).exists(){abandoned.push(attempt.clone());continue;}
         let path=root.join(format!("attempts/{attempt}/candidate.json"));
-        if !path.exists(){return Err("refused:uncharged-or-unsealed-root-unknown".into());}
-        let c:Candidate=serde_json::from_slice(&io::read(&path,m)?)?;
+        if r.state!="sealed"||!path.exists(){return Err("refused:uncharged-or-unsealed-root-unknown".into());}
+        let bytes=io::read(&path,m)?;
+        if r.candidate_digest.as_deref()!=Some(io::digest(&bytes).as_str()){return Err("integrity:sealed-candidate-digest".into());}
+        let c:Candidate=serde_json::from_slice(&bytes)?;
+        if c.attempt!=*attempt||c.intent!=r.intent||c.request.request!=r.request||c.expected!=r.base||!["publication","packet"].contains(&c.purpose.as_str()){
+            return Err("integrity:sealed-candidate-binding".into());
+        }
         contents.push((c.graph.clone(),c.projection.clone()));
         if let Some(base)=&c.expected{
             let p=store.publication(base,m)?;
             contents.push((p.graph,p.projection));
-            let mut o=objects::object_store(root,m);
-            keep.extend(objects::reachable(&mut o,&p.membership)?);keep.extend(objects::reachable(&mut o,&p.outcomes)?);
+            if c.purpose=="publication"{
+                let mut o=objects::object_store(root,m);
+                for r in [&p.membership,&p.outcomes,&p.changes]{keep.extend(objects::reachable(&mut o,r)?);}
+            }
         }
         let mut o=objects::object_store(root,m);
         keep.extend(objects::reachable(&mut o,&c.changes)?);
@@ -180,6 +191,17 @@ fn collect(store:&Store,m:&mut Metrics)->Result<Value>{
         let retained=if is_object{keep.contains(path.file_name().unwrap().to_string_lossy().as_ref())}else{keep_files.contains(&path)};
         if !retained{bytes+=remove_checked(root,&path,m)?;removed+=1;io::checkpoint("reclaim-file")?;}
     }
+    // Atomic control replacement may die with a private stage. Both writer and
+    // exclusive preparation gates are held, so no cooperating operation uses it.
+    for dir in [root.clone(),root.join("attempt-hints"),root.join("abandoned"),root.join("fences"),root.join("retired"),root.join("cancel-signals")]{
+        if !dir.exists(){continue;}
+        for entry in fs::read_dir(dir)?{
+            let path=entry?.path();
+            if path.file_name().unwrap().to_string_lossy().starts_with("stage-")&&path.is_file(){
+                bytes+=remove_checked(root,&path,m)?;removed+=1;
+            }
+        }
+    }
     // Readable copies/attempt staging for retired or fenced work have independent
     // lifetime. Accepted publication/result evidence lives outside these trees.
     let packet_owners:BTreeSet<_>=evidence.iter().filter(|p|live(root,&p.selector().unwrap()).is_ok()).filter_map(|p|p.packet_ref.as_ref().map(|r|r.attempt.clone())).collect();
@@ -192,7 +214,30 @@ fn collect(store:&Store,m:&mut Metrics)->Result<Value>{
             }
         }
     }
+    // Unselected result/publication evidence and selector stages belong to the
+    // allocating attempt, including death before publication installation.
+    let accepted:BTreeSet<_>=evidence.iter().map(|p|p.id.clone()).collect();
     for attempt in abandoned{
+        let mut orphan_results=BTreeSet::new();
+        let mut owned=vec![];files(&root.join(format!("attempts/{attempt}/allocations")),&mut owned)?;
+        for path in owned{
+            if path.extension().is_none_or(|e|e!="json"){continue;}
+            let record:serde_json::Value=serde_json::from_slice(&io::read(&path,m)?)?;
+            let id=record["publication"].as_str().ok_or("integrity:allocation-record")?;
+            let hash=record["result"].as_str().ok_or("integrity:allocation-record")?;
+            if !crate::model::safe_id(id)||!objects::valid_hash(hash){return Err("integrity:allocation-record".into());}
+            if accepted.contains(id){return Err("integrity:abandoned-selected-allocation".into());}
+            let p=root.join(format!("publications/{id}.json"));
+            if p.exists(){bytes+=remove_checked(root,&p,m)?;removed+=1;}
+            orphan_results.insert(hash.to_owned());
+        }
+        for hash in orphan_results{
+            if evidence.iter().any(|p|p.result_hash==hash){continue;}
+            let p=root.join(format!("results/{hash}.json"));
+            if p.exists(){bytes+=remove_checked(root,&p,m)?;removed+=1;}
+        }
+        let hint=root.join(format!("attempt-hints/{attempt}.json"));
+        if hint.exists(){bytes+=remove_checked(root,&hint,m)?;removed+=1;}
         for name in [format!("attempts/{attempt}"),format!("generations/{attempt}")]{
             let mut paths=vec![];files(&root.join(name),&mut paths)?;
             for path in paths{bytes+=remove_checked(root,&path,m)?;removed+=1;io::checkpoint("reclaim-file")?;}

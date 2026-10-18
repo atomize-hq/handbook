@@ -5,6 +5,7 @@ from controller import Driver
 from checks import exercise,faults,result,req,op
 from supplement import run as supplement
 from matrix import run as matrix
+from adversarial import run as adversarial
 a=argparse.ArgumentParser();a.add_argument('--exe',required=True);a.add_argument('--base',required=True);a.add_argument('--pin',required=True);ns=a.parse_args()
 base=Path(ns.base);base.mkdir(parents=True,exist_ok=False)
 source=Path(__file__).parent
@@ -18,6 +19,8 @@ for name,cmd in [('uname',['uname','-a']),('df',['df','-h',str(base)]),('rust',[
 d=Driver(ns.exe,base/'checks',7200);rows=[exercise(d,m,c) for m in ['A','B'] for c in ['project','research']];rows.extend(faults(d))
 (base/'checks/summary.json').write_text(json.dumps(rows,indent=2))
 d=Driver(ns.exe,base/'supplement',3600);(base/'supplement/summary.json').write_text(json.dumps(supplement(d),indent=2))
+d=Driver(ns.exe,base/'adversarial',1800);(d.base/'summary.json').write_text(json.dumps(adversarial(d),indent=2))
+
 d=Driver(ns.exe,base/'smoke',3600);matrix(d,[1000])
 for consumer in ['project','research']:
     exe=Path(ns.exe).with_name(f'{consumer}-consumer')

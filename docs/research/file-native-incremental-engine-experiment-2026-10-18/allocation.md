@@ -35,6 +35,17 @@ be charged repeatedly. Selected transfer releases candidate charges; abandoned
 objects remain charged until coordinated GC/deletion. Accepted dedup precedes
 new admission even at full quota. A released OS lock/TTL never abandons work.
 
+Prospective final-lane amendment: correctness-driven source iterations exhausted
+the original development estimate; those observations are retained as development,
+not final common-pin measurements. After the retention corrections, allow one
+final correctness pass (180 s/process, 2 h lane cap), one serial Windows matrix
+(4 h), one Windows history lane (4 h including 10k required and bounded 100k),
+and one WSL/native lane each (105 min work + 15 min reporting). Do not reset a
+running lane deadline or silently replace a censor. Native outer run_lane.py
+includes build and subprocess descendants in the cap; per-command ordinary
+native cap 180 s, smoke 600 s. WSL reserve is 40 GiB and local+WSL allocation
+remains 32 GiB. Unperformed/censored larger controls must be reported explicitly.
+
 Measurements distinguish controller all-attempt time, engine inclusive operation,
 selection boundary, A completion and nested phases; overlapping clocks are not
 summed. Report total/unique pages, physical/tombstone keys, visited documents/

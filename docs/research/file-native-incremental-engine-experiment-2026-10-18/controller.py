@@ -34,7 +34,7 @@ class Driver:
             while not stop.wait(30):
                 try:
                     self.guard()
-                    owned=[Path('C:/file-native-incremental-20261018'),Path('C:/file-native-incremental-20261018-build'),Path('C:/file-native-incremental-20261018-build-control')] if os.name=='nt' else [self.base]
+                    owned=[Path('C:/file-native-incremental-20261018'),Path('C:/file-native-incremental-20261018-build'),Path('C:/file-native-incremental-20261018-build-control'),Path('C:/file-native-incremental-20261018-build-final')] if os.name=='nt' else [self.base]
                     total=0
                     for root in owned:
                         for directory,_,names in os.walk(root):

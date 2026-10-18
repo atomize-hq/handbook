@@ -43,7 +43,7 @@ def exercise(d,mode,consumer):
     call('select',candidate=prepared)
     # Tampered summaries and roots cannot become capabilities after reopen.
     prepared=result(call('prepare',request=req('tamper',[op('cost',value=0)])))['candidate']
-    path=root/prepared;c=json.loads(path.read_bytes());c['changed']=['invented'];path.write_text(json.dumps(c))
+    path=root/prepared;c=json.loads(path.read_bytes());c['changed']=['invented'];path.write_text(json.dumps(c));reseal(root,path)
     expect_error(call('select',allow=True,candidate=prepared),'replay')
     cleanup(d,r)
     call('checkpoint',request_id='checkpoint')
@@ -68,6 +68,13 @@ def exercise(d,mode,consumer):
     if mode=='A':
         assert result(call('view-audit'))['edited']==[]
     return {'mode':mode,'consumer':consumer,'initial':initial,'status':'passed'}
+def reseal(root,path):
+    # Deliberately update the independent seal to prove replay still refuses a
+    # self-consistent forged candidate, rather than only testing its checksum.
+    registry=root/'RESERVATIONS.json';v=json.loads(registry.read_bytes())
+    candidate=json.loads(path.read_bytes());v[candidate['attempt']]['candidate_digest']=hashlib.sha256(path.read_bytes()).hexdigest()
+    registry.write_text(json.dumps(v))
+
 def cleanup(d,r):
     all=result(d.call({'action':'lifecycle','operation':'quota','root':r}))['reservations']
     for attempt,record in all.items():
@@ -85,7 +92,7 @@ def faults(d):
     # Named authority boundaries are separately observed; no recovered outcome rewrites an exit event.
     rows=[]
     boundaries=['reservation-durable','allocation','semantic-root','projection-root','candidate-ready','seal','expected-checked',
-      'selection-budget','membership-root','outcome-root','publication-installed','selector-staged','selector-visible',
+      'selection-budget','membership-root','outcome-root','result-installed','publication-installed','attempt-hint','selector-staged','selector-visible',
       'selection-boundary','accounting-transfer','accounting-release','refresh-plan','refresh-file','refresh-before-complete','refresh-complete','reply']
     for point in boundaries:
         root=d.base/'faults'/point/'disposable'/'store';r=str(root)

@@ -224,6 +224,9 @@ pub fn protected_roots(store:&Store,m:&mut Metrics)->Result<Vec<(GraphRoot,Optio
         out.push((p.target.graph,p.target.projection));if let Some(w)=p.prior{out.push((w.graph,w.projection));}
     }Ok(out)
 }
+pub fn pending_changes(store:&Store,m:&mut Metrics)->Result<Option<Option<Id>>>{
+    pending(store,m)?.map(|p|Ok(store.publication(&p.target.selected,m)?.changes)).transpose()
+}
 fn execute_plan(store:&Store,plan:&Plan,m:&mut Metrics)->Result<()>{
     validate_mark(store,&plan.target,m)?;if let Some(w)=&plan.prior{validate_mark(store,w,m)?;}
     let expected=derive_actions(store,&plan.target,plan.prior.as_ref(),plan.full,&plan.extras,m)?;

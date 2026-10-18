@@ -10,7 +10,7 @@ impl Objects<'_>{
         let b=io::read_bounded(&self.base.join("objects").join(&id[..2]).join(id),crate::MAX_OBJECT,self.metrics)?;
         if io::digest(&b)!=id{return Err("integrity:object-digest".into());}
         self.metrics.page_reads+=1;self.metrics.unique_pages.insert(id.into());
-        self.metrics.bytes_metadata_read+=b.len() as u64;Ok(b)
+        Ok(b)
     }
     pub fn write(&mut self,b:&[u8])->Result<Id>{
         if b.len()>crate::MAX_OBJECT{return Err("object-cap".into());}
@@ -20,7 +20,6 @@ impl Objects<'_>{
         let stage=dest.with_file_name(io::unique("object-stage"));
         io::write_new(&stage,b,self.metrics)?;io::install_original(&stage,&dest,&id,self.metrics)?;
         io::sync_dir(dest.parent().unwrap(),self.metrics)?;
-        self.metrics.bytes_metadata_written+=b.len() as u64;
         io::checkpoint("cow-object-installed")?;Ok(id)
     }
 }

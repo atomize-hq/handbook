@@ -2,7 +2,7 @@
 import argparse,json,hashlib,threading,time
 from pathlib import Path
 from controller import Driver
-from checks import req,op,result,expect_error,cleanup
+from checks import req,op,result,expect_error,cleanup,reseal
 def run(d):
     root=d.base/'review'/'disposable'/'store';r=str(root)
     def call(action,allow=False,env=None,**kw):return d.call(dict(action=action,root=r,**kw),allow=allow,env=env)
@@ -19,8 +19,12 @@ def run(d):
     expect_error(call('lifecycle',allow=True,operation='retire',selected=initial),'active-preparation')
     expect_error(call('lifecycle',allow=True,operation='collect'),'active-preparation')
     release.write_text('release');thread.join(30);assert box and result(box[0])['value']['doc']['digest']==origin['digest']
+    firstpub=json.loads((root/f"publications/{initial['publication']}.json").read_bytes())
+    firstcandidate=f"attempts/{firstpub['attempt']}/candidate.json"
     call('lifecycle',operation='retire',selected=initial);call('lifecycle',operation='collect')
     assert not (root/origin['original']).exists(),'retired content was not actually reclaimed'
+    assert not (root/firstcandidate).exists()
+    assert result(call('select',candidate=firstcandidate))['outcome']=='accepted'
     assert result(call('resolve',request_id='initial'))['outcome']=='accepted'
     # Restore exact old authored bytes under a new publication identity.
     current=result(call('inspect'))['selected']
@@ -31,6 +35,7 @@ def run(d):
     call('publish',allow=True,request=req('b',[op('import',id='d000000',text='b')],base=current),env={'EXP_EXIT':'refresh-file'})
     current=result(call('inspect'))['selected']
     call('publish',request=req('a-again',[op('import',id='d000000',text=old.decode())],base=current),env={'EXP_DEFER_REFRESH':'1'})
+    call('lifecycle',operation='collect')
     call('refresh');assert result(call('view-audit'))=={'missing':[],'edited':[],'marker_is_integrity_proof':False}
     # Derived divergence is preserved once under a stable identity despite death.
     nav=root/'view/NAVIGATION.md';nav.write_bytes(b'external derived edit\r\n')
@@ -51,8 +56,8 @@ def run(d):
     prepared=result(call('prepare',request=req('packet-redirect',packet=True)))['candidate']
     path=root/prepared;saved=path.read_bytes();candidate=json.loads(saved)
     fake=root/'attempts/fake/packet';fake.mkdir(parents=True);fake_manifest=b'{}';(fake/'MANIFEST.json').write_bytes(fake_manifest)
-    candidate['packet_ref']['attempt']='fake';candidate['packet_ref']['manifest']=hashlib.sha256(fake_manifest).hexdigest();path.write_text(json.dumps(candidate))
-    expect_error(call('select',allow=True,candidate=prepared),'packet-ref-replay');path.write_bytes(saved)
+    candidate['packet_ref']['attempt']='fake';candidate['packet_ref']['manifest']=hashlib.sha256(fake_manifest).hexdigest();path.write_text(json.dumps(candidate));reseal(root,path)
+    expect_error(call('select',allow=True,candidate=prepared),'packet-ref-replay');path.write_bytes(saved);reseal(root,path)
     cleanup(d,r)
     ready=d.base/'resolve-ready';release=d.base/'resolve-release';box=[]
     thread=threading.Thread(target=lambda:box.append(call('resolve',request_id='owner',env={'EXP_BARRIER':'resolve-history-captured','EXP_READY':str(ready),'EXP_RELEASE':str(release)})))
@@ -67,6 +72,27 @@ def run(d):
     expect_error(call('prepare',allow=True,request=req('quota-full',[])),'admission-full')
     assert result(call('publish',request=req('owner',[op('import',id='d000000',text='intermediate'),op('import',id='d000000',text='final')],base=initial)))['result']==accepted
     cleanup(d,r)
+    # A historical live snapshot may have lost obsolete history/change indexes.
+    historical=result(call('inspect'))['selected']
+    call('publish',request=req('after-historical',[op('label',text='newer')]))
+    call('lifecycle',operation='collect')
+    assembled=result(call('packet',selected=historical));assert assembled['selected']==historical
+    expect_error(call('select',allow=True,candidate=assembled['candidate']),'candidate-version-intent')
+    call('lifecycle',operation='collect');cleanup(d,r)
+    # Candidate digest protects collection roots independently of selector replay.
+    prepared=result(call('prepare',request=req('sealed-roots',[])))['candidate'];path=root/prepared;saved=path.read_bytes()
+    candidate=json.loads(saved);candidate['graph']['tree']=None;path.write_text(json.dumps(candidate))
+    expect_error(call('lifecycle',allow=True,operation='collect'),'sealed-candidate-digest')
+    path.write_bytes(saved);cleanup(d,r)
+    # Selected orphan allocations remain charged until all owned files are gone.
+    before_results=set((root/'results').glob('*'));before_pubs=set((root/'publications').glob('*'))
+    call('publish',allow=True,request=req('orphan-cleanup',[]),env={'EXP_EXIT':'selector-staged'})
+    reservations=result(call('lifecycle',operation='quota'))['reservations'];attempt=next(a for a,v in reservations.items() if v['request']=='orphan-cleanup')
+    assert set((root/'results').glob('*'))-before_results and set((root/'publications').glob('*'))-before_pubs
+    cleanup(d,r)
+    assert set((root/'results').glob('*'))==before_results and set((root/'publications').glob('*'))==before_pubs
+    assert not (root/f'attempt-hints/{attempt}.json').exists()
+    assert not any(p.is_file() for p in (root/f'attempts/{attempt}').rglob('*'))
     # Additional non-publication lifecycle/repair boundaries.
     for point,action,kw in [
         ('checkpoint-built','checkpoint',{'request_id':'cp-built'}),

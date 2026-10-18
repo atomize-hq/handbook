@@ -17,8 +17,25 @@ pub struct Metrics {
     pub file_syncs: u64, pub directory_syncs: u64, pub unsupported_directory_syncs: u64,
     pub copies: u64, pub replacements: u64, pub created_directories: u64,
     pub bytes_metadata_read:u64, pub bytes_metadata_written:u64,
+    pub bytes_payload_read:u64,pub bytes_payload_written:u64,
+    pub bytes_control_read:u64,pub bytes_control_written:u64,
+    pub bytes_result_read:u64,pub bytes_result_written:u64,
 }
 impl Metrics {
+    fn record_bytes(&mut self,path:&Path,n:u64,write:bool){
+        let has=|name:&str|path.components().any(|c|c.as_os_str()==name);
+        let field=if has("objects"){
+            if write{&mut self.bytes_metadata_written}else{&mut self.bytes_metadata_read}
+        }else if has("results"){
+            if write{&mut self.bytes_result_written}else{&mut self.bytes_result_read}
+        }else if path.file_name().is_some_and(|s|s=="MANIFEST.json"||s=="provenance.json")||
+            !(has("originals")||has("derived")||has("view")||has("generations")||has("refresh-stages")||has("divergence")||has("packet")){
+            if write{&mut self.bytes_control_written}else{&mut self.bytes_control_read}
+        }else{
+            if write{&mut self.bytes_payload_written}else{&mut self.bytes_payload_read}
+        };
+        *field+=n;
+    }
     pub fn finish(&mut self){
         self.ns.insert("lock-hold".into(),self.lock_hold_counter.load(Ordering::Relaxed) as u128);
     }
@@ -73,7 +90,7 @@ pub fn read_bounded(path: &Path, limit: usize, m: &mut Metrics) -> Result<Vec<u8
     let mut b=Vec::new();
     f.take(limit as u64+1).read_to_end(&mut b)?;
     if b.len()>limit {return Err("integrity:file-length-bound".into());}
-    m.opens+=1; m.bytes_read+=b.len() as u64; m.elapsed("read",t); Ok(b)
+    m.opens+=1; m.bytes_read+=b.len() as u64;m.record_bytes(path,b.len() as u64,false);m.elapsed("read",t); Ok(b)
 }
 pub fn sync_file(path: &Path, m: &mut Metrics) -> Result<()> {
     let t=Instant::now(); OpenOptions::new().read(true).write(true).open(path)?.sync_all()?;
@@ -93,7 +110,7 @@ pub fn write_new(path: &Path, bytes: &[u8], m: &mut Metrics) -> Result<()> {
     m.charge(bytes.len() as u64+4096)?;m.namespace_ops+=1;
     mkdir(path.parent().ok_or("no-parent")?,m)?;
     let t=Instant::now(); let mut f=OpenOptions::new().create_new(true).write(true).open(path)?;
-    m.opens+=1; f.write_all(bytes)?; m.bytes_written+=bytes.len() as u64;
+    m.opens+=1; f.write_all(bytes)?; m.bytes_written+=bytes.len() as u64;m.record_bytes(path,bytes.len() as u64,true);
     checkpoint("file-write")?;
     let role=if path.file_name().unwrap().to_string_lossy().starts_with("selector-stage"){"selector"}else if path.parent().unwrap().ends_with("publications"){"publication"}else if path.file_name().unwrap()=="state.json"{"state"}else if path.file_name().unwrap()=="MANIFEST.json"{"manifest"}else if path.parent().unwrap().ends_with("receipts"){"receipt"}else{"other"};
     checkpoint(&format!("{role}-file-write"))?;m.elapsed("write",t);
@@ -157,7 +174,7 @@ pub fn copy(source: &Path, dest: &Path, m: &mut Metrics) -> Result<()> {
     mkdir(dest.parent().unwrap(),m)?; let t=Instant::now();
     let mut src=File::open(source)?; let mut dst=OpenOptions::new().write(true).create_new(true).open(dest)?;
     m.opens+=2; let mut buf=[0u8;65536];
-    loop { let n=src.read(&mut buf)?; if n==0 {break;} dst.write_all(&buf[..n])?; m.bytes_read+=n as u64; m.bytes_written+=n as u64; }
+    loop { let n=src.read(&mut buf)?; if n==0 {break;} dst.write_all(&buf[..n])?; m.bytes_read+=n as u64; m.bytes_written+=n as u64;m.record_bytes(source,n as u64,false);m.record_bytes(dest,n as u64,true); }
     m.copies+=1; m.elapsed("copy",t); checkpoint("copy-write")?;
     let role=if dest.file_name().unwrap().to_string_lossy().starts_with("view-stage"){"view"}else if dest.to_string_lossy().contains("generation-stage"){"generation"}else{"packet"};
     checkpoint(&format!("{role}-copy-write"))?;

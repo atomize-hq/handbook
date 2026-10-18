@@ -21,7 +21,7 @@ pub struct Checkpoint{pub source:Selector,pub coverage:u64,pub version:u32,pub m
 #[derive(Clone,Serialize,Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Candidate{
-    pub version:u32,pub store_id:String,pub attempt:String,pub expected:Option<Selector>,pub request:Request,pub intent:String,
+    pub purpose:String,pub version:u32,pub store_id:String,pub attempt:String,pub expected:Option<Selector>,pub request:Request,pub intent:String,
     pub graph:GraphRoot,pub projection:Option<Id>,pub changes:Option<Id>,pub changed:Vec<String>,pub removed:Vec<String>,
     pub generation_manifest:Option<Id>,pub checkpoint:Option<Checkpoint>,
     pub packet_ref:Option<PacketRef>,
@@ -194,9 +194,10 @@ impl Store{
         if r.base.is_none()&&r.ops.iter().any(|o|o.kind=="import"){return Err("refused:import-base-required".into());}
         if r.ops.len()>256||r.request.len()>256{return Err("refused:request-limit".into());}
         let attempt=io::unique("attempt");
-        let allowance=if self.config.mode=="B"{head.publication.graph.count.checked_mul(300_000).ok_or("quota:overflow")?+64*1024*1024}
-            else{64*1024*1024+r.ops.iter().map(|o|o.text.len() as u64*64).sum::<u64>()};
-        lifetime::reserve(&self.root,&attempt,lifetime::Reservation{request:r.request.clone(),intent:intent.clone(),base:Some(head.selected.clone()),bytes:allowance,state:"preparing".into(),used:0},m)?;
+        let per_document=u64::from(self.config.mode=="B")*300_000+u64::from(r.packet)*160_000;
+        let allowance=head.publication.graph.count.checked_mul(per_document).ok_or("quota:overflow")?
+            +64*1024*1024+r.ops.iter().map(|o|o.text.len() as u64*64).sum::<u64>();
+        lifetime::reserve(&self.root,&attempt,lifetime::Reservation{request:r.request.clone(),intent:intent.clone(),base:Some(head.selected.clone()),bytes:allowance,state:"preparing".into(),used:0,candidate_digest:None},m)?;
         m.quota_limit=Some(allowance);m.quota_spent=0;
         m.elapsed("lock-hold",hold);drop(guard);io::checkpoint("allocation")?;
         let c=self.compute(&head,r,intent,attempt,m)?;
@@ -218,7 +219,7 @@ impl Store{
         let changes=objects::update(&mut o,&head.publication.changes,changes)?;
         drop(o);
         let removed=delta.old.iter().filter_map(|(id,h)|h.as_ref().filter(|old|delta.final_docs[id].as_ref().is_none_or(|n|n.doc.path!=old.doc.path)).map(|h|h.doc.path.clone())).collect();
-        let mut c=Candidate{version:1,store_id:self.config.store_id.clone(),attempt,expected:Some(head.selected.clone()),request:r,intent,
+        let mut c=Candidate{purpose:"publication".into(),version:1,store_id:self.config.store_id.clone(),attempt,expected:Some(head.selected.clone()),request:r,intent,
             graph:delta.graph,projection,changes,changed:delta.changed.into_iter().collect(),removed,generation_manifest:None,checkpoint:None,packet_ref:None};
         if c.request.packet{
             c.projection=projection::packet(self,&c.graph,&c.projection,&c.attempt,m)?;
@@ -238,8 +239,20 @@ impl Store{
     pub fn candidate_path(p:&Prepared)->String{format!("attempts/{}/candidate.json",p.candidate.attempt)}
     pub fn select_file(&self,path:&str,m:&mut Metrics)->Result<Value>{
         if Path::new(path).components().any(|c|!matches!(c,std::path::Component::Normal(_))){return Err("refused:candidate-path".into());}
-        let c:Candidate=serde_json::from_slice(&io::read(&self.root.join(path),m)?)?;
+        let parts:Vec<_>=path.split('/').collect();
+        if parts.len()!=3||parts[0]!="attempts"||!model::safe_id(parts[1])||parts[2]!="candidate.json"{return Err("refused:candidate-path".into());}
         let guard=self.lock(m)?;let t=Instant::now();self.predecessor_established(m)?;
+        let hint=self.root.join(format!("attempt-hints/{}.json",parts[1]));
+        if hint.exists(){
+            let selected:Selector=serde_json::from_slice(&io::read_bounded(&hint,65536,m)?)?;
+            let p=self.publication(&selected,m)?;
+            if p.attempt!=parts[1]{return Err("integrity:attempt-hint-binding".into());}
+            if let Some(found)=self.accepted(&p.request,Some(&p.intent),m)?{
+                if found.attempt==parts[1]{return self.result(&found,m);}
+            }
+        }
+        let c:Candidate=serde_json::from_slice(&io::read(&self.root.join(path),m)?)?;
+        if c.attempt!=parts[1]{return Err("integrity:candidate-path-binding".into());}
         if let Some(found)=self.accepted(&c.request.request,Some(&c.intent),m)?{return self.result(&found,m);}
         self.check_candidate(&c,m)?;
         let head=self.head_unleased(m)?;
@@ -293,10 +306,10 @@ impl Store{
         let out=self.select_locked(c,m);m.elapsed("lock-hold",t);drop(guard);out
     }
     fn check_candidate(&self,c:&Candidate,m:&mut Metrics)->Result<()>{
-        if c.version!=1||c.store_id!=self.config.store_id||!model::safe_id(&c.attempt)||io::digest(&io::json(&c.request)?)!=c.intent{return Err("integrity:candidate-version-intent".into());}
+        if c.purpose!="publication"||c.version!=1||c.store_id!=self.config.store_id||!model::safe_id(&c.attempt)||io::digest(&io::json(&c.request)?)!=c.intent{return Err("integrity:candidate-version-intent".into());}
         if self.root.join(format!("abandoned/{}",c.attempt)).exists(){return Err("refused:abandoned".into());}
         let all=lifetime::reservations(&self.root,m)?;let r=all.get(&c.attempt).ok_or("refused:unreserved")?;
-        if r.request!=c.request.request||r.intent!=c.intent||r.base!=c.expected||r.state!="sealed"{return Err("integrity:reservation-binding-or-unsealed".into());}
+        if r.request!=c.request.request||r.intent!=c.intent||r.base!=c.expected||r.state!="sealed"||r.candidate_digest.as_deref()!=Some(io::digest(&io::read(&self.root.join(format!("attempts/{}/candidate.json",c.attempt)),m)?).as_str()){return Err("integrity:reservation-binding-or-unsealed".into());}
         m.quota_limit=Some(r.bytes);m.quota_spent=0;self.refuse_cancel(&c.request.request,m)
     }
     pub fn select_prepared(&self,p:Prepared,m:&mut Metrics)->Result<Value>{
@@ -331,13 +344,15 @@ impl Store{
         let id=io::unique("publication");
         let result=json!({"outcome":"accepted","request":c.request.request,"publication":id,"state_digest":io::digest(&io::json(&c.graph)?),"changed":c.changed,"removed":c.removed});
         let result_bytes=io::json(&result)?;let result_hash=io::digest(&result_bytes);
-        io::write_new(&self.root.join(format!("results/{result_hash}.json")),&result_bytes,m)?;
+        io::atomic(&self.root.join(format!("attempts/{}/allocations/{id}.json",c.attempt)),&io::json(&json!({"publication":id,"result":result_hash}))?,m)?;
+        io::write_new(&self.root.join(format!("results/{result_hash}.json")),&result_bytes,m)?;io::checkpoint("result-installed")?;
         let p=Publication{version:1,store_id:self.config.store_id.clone(),id:id.clone(),sequence:head.as_ref().map_or(0,|p|p.sequence+1),predecessor:selected,
             graph:c.graph,projection:c.projection,changes:c.changes,membership,outcomes,request:c.request.request,intent:c.intent,result_hash,attempt:c.attempt.clone(),generation_manifest:c.generation_manifest,
             allocation_owner:AllocationOwner{attempt:c.attempt.clone(),conservative_bytes:lifetime::reservations(&self.root,m)?.get(&c.attempt).ok_or("integrity:allocation-owner")?.bytes,includes_intermediates_and_stages:true},packet_ref:c.packet_ref};
         let bytes=io::json(&p)?;let selected=p.selector()?;
         io::write_new(&self.root.join(format!("publications/{id}.json")),&bytes,m)?;io::checkpoint("publication-installed")?;
-        let stage=self.root.join(io::unique("selector-stage"));io::write_new(&stage,&io::json(&selected)?,m)?;io::checkpoint("selector-staged")?;
+        io::atomic(&self.root.join(format!("attempt-hints/{}.json",c.attempt)),&io::json(&selected)?,m)?;io::checkpoint("attempt-hint")?;
+        let stage=self.root.join(format!("attempts/{}/{}",c.attempt,io::unique("selector-stage")));io::write_new(&stage,&io::json(&selected)?,m)?;io::checkpoint("selector-staged")?;
         let mut boundary=false;
         let delivery=(||->Result<()>{
             io::replace(&stage,&self.root.join("SELECTED.json"),m)?;io::checkpoint("selector-visible")?;
@@ -354,6 +369,23 @@ impl Store{
     pub fn publish(&self,r:Request,m:&mut Metrics)->Result<Value>{
         match self.prepare(r,m)?{Preparation::Existing(result)=>Ok(json!({"status":"deduplicated","result":result})),Preparation::Ready(p)=>self.select_prepared(p,m)}
     }
+    pub fn assemble_snapshot(&self,selected:&Selector,m:&mut Metrics)->Result<Value>{
+        let _gate=self.preparation_gate(false)?;let _guard=self.lock(m)?;
+        let p=self.member(selected,m)?;lifetime::live(&self.root,selected)?;
+        let attempt=io::unique("packet");let request=Request{request:io::unique("assembly"),base:Some(selected.clone()),ops:vec![],packet:true};
+        let intent=io::digest(&io::json(&request)?);
+        let allowance=p.graph.count.checked_mul(160_000).ok_or("quota:overflow")?+64*1024*1024;
+        lifetime::reserve(&self.root,&attempt,lifetime::Reservation{request:request.request.clone(),intent:intent.clone(),base:Some(selected.clone()),bytes:allowance,state:"preparing".into(),used:0,candidate_digest:None},m)?;
+        m.quota_limit=Some(allowance);m.quota_spent=0;
+        let projection=projection::packet(self,&p.graph,&p.projection,&attempt,m)?;
+        let manifest=io::digest(&io::read(&self.root.join(format!("attempts/{attempt}/packet/MANIFEST.json")),m)?);
+        let packet_ref=PacketRef{attempt:attempt.clone(),manifest:manifest.clone(),graph_digest:io::digest(&io::json(&p.graph)?)};
+        let c=Candidate{purpose:"packet".into(),version:1,store_id:self.config.store_id.clone(),attempt:attempt.clone(),expected:Some(selected.clone()),request,intent,
+            graph:p.graph,projection,changes:None,changed:vec![],removed:vec![],generation_manifest:None,checkpoint:None,packet_ref:Some(packet_ref)};
+        self.save_candidate(&c,m)?;lifetime::mark_sealed(&self.root,&attempt,m)?;
+        Ok(json!({"path":format!("attempts/{attempt}/packet"),"candidate":format!("attempts/{attempt}/candidate.json"),"selected":selected,
+            "manifest_digest":manifest,"selection_unchanged":true}))
+    }
     pub fn init(root:&Path,mode:&str,consumer:&str,n:usize,fallback:bool,m:&mut Metrics)->Result<Value>{
         if root.exists()||!["A","B"].contains(&mode)||!["project","research"].contains(&consumer)||n<10||n>100_000{return Err("refused:init-arguments-existing".into());}
         io::mkdir(root,m)?;
@@ -363,13 +395,13 @@ impl Store{
         let store=Self{root:root.into(),config};let _guard=store.lock(m)?;
         let attempt=io::unique("attempt");let request=Request{request:"initial".into(),base:None,ops:vec![],packet:false};let intent=io::digest(&io::json(&request)?);
         let allowance=n as u64*300_000+64*1024*1024;
-        lifetime::reserve(root,&attempt,lifetime::Reservation{request:"initial".into(),intent:intent.clone(),base:None,bytes:allowance,state:"preparing".into(),used:0},m)?;
+        lifetime::reserve(root,&attempt,lifetime::Reservation{request:"initial".into(),intent:intent.clone(),base:None,bytes:allowance,state:"preparing".into(),used:0,candidate_digest:None},m)?;
         m.quota_limit=Some(allowance);m.quota_spent=0;
         let s=model::fixture(root,consumer,n,m)?;let mut o=objects::object_store(root,m);
         let graph=graph::build(&mut o,&s,fallback)?;io::checkpoint("semantic-root")?;
         let projection=projection::full(root,&mut o,&graph)?;
         io::checkpoint("projection-root")?;drop(o);
-        let mut c=Candidate{version:1,store_id:store.config.store_id.clone(),attempt,expected:None,request,intent,graph,projection,changes:None,
+        let mut c=Candidate{purpose:"publication".into(),version:1,store_id:store.config.store_id.clone(),attempt,expected:None,request,intent,graph,projection,changes:None,
             changed:s.docs.keys().cloned().collect(),removed:vec![],generation_manifest:None,checkpoint:None,packet_ref:None};
         if mode=="B"{c.generation_manifest=Some(projection::generation(&store,&c,m)?);}
         store.save_candidate(&c,m)?;lifetime::mark_sealed(root,&c.attempt,m)?;store.select_locked(c,m)
@@ -381,7 +413,7 @@ impl Store{
         let intent=io::digest(&io::json(&request)?);
         if let Some(found)=self.accepted(id,Some(&intent),m)?{return self.result(&found,m);}
         let attempt=io::unique("checkpoint");let allowance=256*1024*1024;
-        lifetime::reserve(&self.root,&attempt,lifetime::Reservation{request:id.into(),intent:intent.clone(),base:Some(head.selected.clone()),bytes:allowance,state:"preparing".into(),used:0},m)?;
+        lifetime::reserve(&self.root,&attempt,lifetime::Reservation{request:id.into(),intent:intent.clone(),base:Some(head.selected.clone()),bytes:allowance,state:"preparing".into(),used:0,candidate_digest:None},m)?;
         m.quota_limit=Some(allowance);m.quota_spent=0;
         let mut members=BTreeMap::new();let mut outcomes=BTreeMap::new();let mut next=head.publication.predecessor.clone();let mut count=0;
         while let Some(s)=next{
@@ -397,7 +429,7 @@ impl Store{
         }
         let membership=objects::bulk(&mut o,members)?;let outcomes=objects::bulk(&mut o,outcomes)?;
         io::checkpoint("checkpoint-built")?;io::checkpoint("checkpoint-verified")?;drop(o);
-        let mut c=Candidate{version:1,store_id:self.config.store_id.clone(),attempt,expected:Some(head.selected.clone()),request,intent,
+        let mut c=Candidate{purpose:"publication".into(),version:1,store_id:self.config.store_id.clone(),attempt,expected:Some(head.selected.clone()),request,intent,
             graph:head.publication.graph.clone(),projection:head.publication.projection.clone(),changes:head.publication.changes.clone(),
             changed:vec![],removed:vec![],generation_manifest:head.publication.generation_manifest.clone(),
             checkpoint:Some(Checkpoint{source:head.selected,coverage:count,version:1,membership,outcomes}),packet_ref:head.publication.packet_ref.clone()};

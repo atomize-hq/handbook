@@ -124,3 +124,20 @@ MoveFileExW write-through with directory sync explicitly unsupported. Process
 interruption does not establish reboot/power-loss persistence. Fresh process
 does not imply device-cold caches. Source/schema validity beyond fixture grammar
 and hostile root/namespace substitution remain outside the experiment.
+
+## Premeasurement corrections
+
+The final common pin adds byte-role counters, bound-derived packet admission,
+typed retained-snapshot packet assembly, sealed-candidate root checks, exact
+pending-refresh change-root retention, and preselection attempt hints. Hints
+only locate an authenticated publication/request; selected membership/outcomes
+remain the acceptance authority. Compact hints and accepted result/publication
+evidence survive content retirement. Private allocation journals precede result
+creation; fenced collection removes unselected evidence and owned stages before
+releasing its reservation. Explicit packet-only candidates cannot be selected
+and retain graph/projection/packet contents without obsolete history indexes.
+
+Earlier development measurements remain separate observations. In particular,
+the first 5000-source packet refusal and Windows long-path failure are retained.
+This is an experimental private format iteration, not an approved format default
+or migration. The original baseline and control retain their separate contracts.
