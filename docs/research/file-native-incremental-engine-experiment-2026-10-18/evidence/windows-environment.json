@@ -1,0 +1,25 @@
+{
+  "epoch_utc": "2026-10-18T23:07:59.2441466Z",
+  "os": {
+    "Caption": "Microsoft Windows 11 Home",
+    "Version": "10.0.26200",
+    "BuildNumber": "26200",
+    "TotalVisibleMemorySize": 134021096
+  },
+  "cpu": [
+    {
+      "Name": "12th Gen Intel(R) Core(TM) i9-12900KF",
+      "NumberOfCores": 16,
+      "NumberOfLogicalProcessors": 24
+    }
+  ],
+  "filesystem": {
+    "FileSystemType": "NTFS",
+    "AllocationUnitSize": 4096,
+    "Size": 1999478190080,
+    "SizeRemaining": 204457533440
+  },
+  "python": "3.11.9",
+  "rust": "1.89.0",
+  "qualification": "Read-only environment snapshot during resident history. TotalVisibleMemorySize is KiB; file-volume fields are bytes. This is not a quiet timing or power-loss qualification."
+}
