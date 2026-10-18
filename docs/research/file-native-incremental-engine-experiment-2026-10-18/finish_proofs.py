@@ -3,17 +3,17 @@ import argparse,json,subprocess,sys,time
 from pathlib import Path
 
 a=argparse.ArgumentParser();a.add_argument('--scratch',required=True);ns=a.parse_args()
-scratch=Path(ns.scratch);source=Path(__file__).resolve().parent;log=scratch/'final-proofs-v2';log.mkdir(exist_ok=False)
-prior=scratch/'final-verification-v3';first=prior/'document-calibration.stdout';wait_end=time.monotonic()+6*3600
-# Last observed absence precedes the start of the existing reporting lane.
-lower_bound=None
-while not first.exists():
-    lower_bound=time.time()
+scratch=Path(ns.scratch);source=Path(__file__).resolve().parent;log=scratch/'final-proofs-v3';log.mkdir(exist_ok=False)
+prior=scratch/'final-verification-v3';prerequisite=scratch/'serial-continuation-v2/completed.json';wait_end=time.monotonic()+6*3600
+# On this pinned Windows Python 3.11 runtime st_ctime is file creation time.
+# The reporting lane cannot start before its prerequisite flag exists. A first
+# work-log absence would not establish that: the lane starts before opening it.
+assert sys.platform=='win32' and sys.version_info[:2]==(3,11)
+while not prerequisite.exists():
     if time.monotonic()>wait_end:raise TimeoutError('reporting lane did not start')
     time.sleep(15)
-assert lower_bound is not None,'must install observer before reporting starts'
-end=lower_bound+7200
-(log/'reserve-bound.json').write_text(json.dumps(dict(last_observed_before_first_report_work=lower_bound,conservative_deadline_epoch=end,original_reserve_seconds=7200),indent=2))
+creation=prerequisite.stat().st_ctime;end=creation+7200-1
+(log/'reserve-bound.json').write_text(json.dumps(dict(prerequisite=str(prerequisite),prerequisite_creation_epoch=creation,conservative_deadline_epoch=end,original_reserve_seconds=7200,additional_margin_seconds=1),indent=2))
 while not (prior/'completed.json').exists():
     if time.time()>=end:raise TimeoutError('existing report reserve expired')
     time.sleep(15)
