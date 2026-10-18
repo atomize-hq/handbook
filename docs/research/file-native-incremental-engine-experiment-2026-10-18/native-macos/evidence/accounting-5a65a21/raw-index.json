@@ -1,0 +1,26 @@
+[
+  {
+    "file": "paired-intents--events.jsonl.gz",
+    "source": "paired-intents/events.jsonl",
+    "records": 32,
+    "bytes": 116400,
+    "sha256": "ba6d912efaf9342a2280336fd31dd711ec06b64319b2adf73c76e51400d2c6c1",
+    "compressed_sha256": "cd98d16653cbb80f5c846090518df354119887d88e0b33befc3e3910c5a5f1ba"
+  },
+  {
+    "file": "replay-lifetime--events.jsonl.gz",
+    "source": "replay-lifetime/events.jsonl",
+    "records": 40,
+    "bytes": 403745,
+    "sha256": "f0fab9d692f6cd91f4159424ebd0e6ee097ba7028f3f4c6cc4349af377029c6d",
+    "compressed_sha256": "d1a7070a03ef95682c34d8d3d2e8e1f3bf577c0abf63d0bc62d9d2228a3e3bf4"
+  },
+  {
+    "file": "supplement--events.jsonl.gz",
+    "source": "supplement/events.jsonl",
+    "records": 109,
+    "bytes": 431159,
+    "sha256": "56c8244d885b1f11efc76f52e884b04e9d96ca8a1b38567e55b43b51f574e009",
+    "compressed_sha256": "468c14d34fd8ad58de53301fdc6d38beb94f1f157c224d8158fdb7f7d04a4249"
+  }
+]

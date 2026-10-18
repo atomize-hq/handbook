@@ -1,23 +1,33 @@
 {
-  "final_tested_source_pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
-  "current_lane_events": 42,
+  "final_tested_source_pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+  "current_lane_events": 181,
   "current_lane_censors": 0,
-  "current_lane_negative_cases": 18,
-  "successful_restored_audits": 18,
-  "current_lane_exit_counts": {
-    "0": 24,
-    "2": 18
+  "current_lane_counts": {
+    "paired-intents": 32,
+    "replay-lifetime": 40,
+    "supplement": 109
   },
+  "current_lane_exit_counts": {
+    "0": 149,
+    "2": 19,
+    "86": 13
+  },
+  "counts_derived": true,
+  "prior_7e00d22_events": 42,
   "prior_7ac70f9_events": 610,
   "prior_a1108c6_events": 570,
   "prior_f3_events": 726,
   "development_events": 117,
-  "all_retained_events": 2065,
+  "all_retained_events": 2246,
   "all_retained_censors": 0,
-  "retained_evidence_lanes": 7,
+  "retained_evidence_lanes": 8,
   "unperformed_requested_checks": [],
-  "original_measurement_windows_reopened": false,
-  "explicit_correction_cap_seconds": 1800,
-  "report_only_parent": "fe6e01e287bb6d4592059b1a6a9170789ab1c631",
-  "epoch": 1792360589.1539881
+  "explicit_total_cap_seconds": 1800,
+  "absolute_execution_cutoff_offset_seconds": 1500,
+  "reporting_reserve_seconds": 300,
+  "combined_case_cap_seconds": 900,
+  "original_windows_reset": false,
+  "successor_dispatch": false,
+  "report_only_parent": "c8d1195ee406deedee1f32649004ec3779b27256",
+  "epoch": 1792366032.481429
 }

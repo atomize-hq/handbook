@@ -1,0 +1,30 @@
+{
+  "pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+  "start_epoch": 1792365670.0,
+  "execution_deadline_epoch": 1792367170.0,
+  "total_deadline_epoch": 1792367470.0,
+  "total_cap_seconds": 1800,
+  "reporting_reserve_seconds": 300,
+  "combined_case_phase_cap_seconds": 900,
+  "build_cap_seconds": 300,
+  "test_cap_seconds": 300,
+  "ordinary_engine_call_cap_seconds": 180,
+  "logical_cap_bytes": 6442450944,
+  "reserve_bytes": 21474836480,
+  "scope_root": "/private/tmp/file-native-incremental-macos-20261018",
+  "source": "/private/tmp/file-native-incremental-macos-20261018/source-accounting-capsule/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+  "target": "/private/tmp/file-native-incremental-macos-20261018/accounting-lane/build",
+  "runtime": "/private/tmp/file-native-incremental-macos-20261018/accounting-lane",
+  "amendment": "One concrete accounting recovery followup explicitly authorized; all prior windows remain closed. No successor dispatch.",
+  "original_allocation_sha256": "570befff76e2184b3d3eb8acbf246ad0e070592b398f7c6a952f8d3d765d8402",
+  "authority_allocation_blob": "6158a984346d73fcb10b0edca3723de0f1982af7",
+  "case_order": [
+    "paired_intents.py default strict A/B",
+    "supplement.py",
+    "replay_lifetime.py A/B N512"
+  ],
+  "no_broad_rerun": true,
+  "epoch": 1792365734.2917912,
+  "source_selection": "Exclude only prior native-macos report and evidence transport; initial exact full279-file snapshot remains preserved, never executed",
+  "source_selection_epoch": 1792365767.707875
+}

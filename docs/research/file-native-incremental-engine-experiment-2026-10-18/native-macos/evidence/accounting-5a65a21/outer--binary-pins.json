@@ -1,0 +1,17 @@
+{
+  "file-native-incremental": {
+    "path": "/private/tmp/file-native-incremental-macos-20261018/accounting-lane/build/release/file-native-incremental",
+    "bytes": 1832080,
+    "sha256": "051c6dd72b7ebf6d7309a121cb374942fe71dc2ea526c0e3c05f8fb38c1447f6"
+  },
+  "project-consumer": {
+    "path": "/private/tmp/file-native-incremental-macos-20261018/accounting-lane/build/release/project-consumer",
+    "bytes": 1832080,
+    "sha256": "92a048de7388190e55105d804992c9b44610c24d717f209c1abf12bd6e6d1588"
+  },
+  "research-consumer": {
+    "path": "/private/tmp/file-native-incremental-macos-20261018/accounting-lane/build/release/research-consumer",
+    "bytes": 1832080,
+    "sha256": "bc9b73b4b826614488168a114c684144e147a23a30bfd10819e0b10d2a0b274d"
+  }
+}

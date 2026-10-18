@@ -1,0 +1,67 @@
+{
+  "epoch": 1792366064.645738,
+  "roots": [
+    {
+      "path": "/private/tmp/file-native-incremental-macos-20261018",
+      "files": 71412,
+      "logical_bytes": 2450416291,
+      "allocated_file_bytes": 2420994048
+    },
+    {
+      "path": "/private/tmp/file-native-prerequisite-macos-20261018-source/.git",
+      "files": 613,
+      "logical_bytes": 56234691,
+      "allocated_file_bytes": 58724352
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-10969-1792350998278108000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-14145-1792352131508793000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-19048-1792353435235413000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-32986-1792356332996193000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-36608-1792365828908629000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/var/folders/2x/5mqqp02j36v079m96nx8fjs00000gn/T/i1-bounds-62919-1792360454299601000-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    }
+  ],
+  "total_logical_bytes": 2506657276,
+  "total_allocated_file_bytes": 2479742976,
+  "logical_cap_bytes": 6442450944,
+  "free_bytes": 32547360768,
+  "required_free_bytes": 21474836480,
+  "explicit_start_epoch": 1792365670.0,
+  "absolute_execution_deadline_epoch": 1792367170.0,
+  "explicit_total_deadline_epoch": 1792367470.0,
+  "elapsed_seconds": 394.64573788642883,
+  "execution_remaining_seconds": 1105.3542621135712,
+  "total_remaining_seconds": 1405.3542621135712,
+  "reporting_reserve_seconds": 300,
+  "original_windows_reset": false,
+  "qualification": "Whole owned incremental root + conservative isolated Git DB + six bounds fixtures, preserving all old/new source/worktrees/build/runtime/evidence/report. Snapshot precedes its own receipt and small commit metadata."
+}

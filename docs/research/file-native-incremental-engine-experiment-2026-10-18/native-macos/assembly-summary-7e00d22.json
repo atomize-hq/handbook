@@ -1,0 +1,23 @@
+{
+  "final_tested_source_pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+  "current_lane_events": 42,
+  "current_lane_censors": 0,
+  "current_lane_negative_cases": 18,
+  "successful_restored_audits": 18,
+  "current_lane_exit_counts": {
+    "0": 24,
+    "2": 18
+  },
+  "prior_7ac70f9_events": 610,
+  "prior_a1108c6_events": 570,
+  "prior_f3_events": 726,
+  "development_events": 117,
+  "all_retained_events": 2065,
+  "all_retained_censors": 0,
+  "retained_evidence_lanes": 7,
+  "unperformed_requested_checks": [],
+  "original_measurement_windows_reopened": false,
+  "explicit_correction_cap_seconds": 1800,
+  "report_only_parent": "fe6e01e287bb6d4592059b1a6a9170789ab1c631",
+  "epoch": 1792360589.1539881
+}

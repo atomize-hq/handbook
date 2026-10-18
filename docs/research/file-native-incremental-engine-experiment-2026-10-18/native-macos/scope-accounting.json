@@ -1,0 +1,18 @@
+{
+  "epoch": 1792366064.645738,
+  "tested_source_pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+  "source_files_verified": 85,
+  "source_worktree_status": "clean",
+  "report_only_parent": "c8d1195ee406deedee1f32649004ec3779b27256",
+  "only_allowed_namespace": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native-macos",
+  "shared_head": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+  "shared_status": "clean and read only",
+  "core_symbol_edits": false,
+  "successor_dispatch": false,
+  "gitnexus": {
+    "scope": "staged",
+    "status": "UNKNOWN",
+    "error": "Repository not found: isolated report checkout unregistered",
+    "manual_scope": "Staged report/evidence/helpers only; no Rust/experiment-source edits"
+  }
+}

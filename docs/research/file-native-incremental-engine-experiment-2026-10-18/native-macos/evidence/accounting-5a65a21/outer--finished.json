@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+  "epoch": 1792365956.445566,
+  "resources": {
+    "epoch": 1792365957.837655,
+    "files": 71933,
+    "logical_bytes": 2503414396,
+    "allocated_file_bytes": 2476294144,
+    "free_bytes": 32556421120,
+    "scope": "Whole incremental root + conservative isolated Git database + all bounds temporary fixtures"
+  },
+  "completed": [
+    "build",
+    "tests",
+    "paired-intents",
+    "supplement",
+    "replay-lifetime"
+  ],
+  "unperformed": [],
+  "stop_reason": null,
+  "combined_case_start_epoch": 1792365833.284348,
+  "combined_case_deadline_epoch": 1792366733.284348,
+  "combined_case_elapsed_seconds": 124.69940710067749,
+  "explicit_start_epoch": 1792365670.0,
+  "absolute_execution_deadline_epoch": 1792367170.0,
+  "explicit_total_deadline_epoch": 1792367470.0,
+  "original_windows_reopened": false
+}

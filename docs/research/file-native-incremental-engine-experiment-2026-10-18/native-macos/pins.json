@@ -1,28 +1,29 @@
 {
-  "final_tested_source_pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
-  "current_lane": "N128 A/B strict negative-evidence audit only",
-  "source_files": 70,
-  "source_pins": "evidence/audit-7e00d22/outer--source-pins.json",
+  "final_tested_source_pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+  "current_lane": "Paired-intent accounting + causal supplement + replay lifetime only",
+  "source_files": 85,
+  "source_pins": "evidence/accounting-5a65a21/outer--source-pins.json",
   "binaries": {
     "file-native-incremental": {
-      "path": "/private/tmp/file-native-incremental-macos-20261018/audit-lane/build/release/file-native-incremental",
+      "path": "/private/tmp/file-native-incremental-macos-20261018/accounting-lane/build/release/file-native-incremental",
       "bytes": 1832080,
-      "sha256": "9991bd5640feb12fd4dbf5245cd61874d935f2f0a151e68b11a52a5a35856de6"
+      "sha256": "051c6dd72b7ebf6d7309a121cb374942fe71dc2ea526c0e3c05f8fb38c1447f6"
     },
     "project-consumer": {
-      "path": "/private/tmp/file-native-incremental-macos-20261018/audit-lane/build/release/project-consumer",
+      "path": "/private/tmp/file-native-incremental-macos-20261018/accounting-lane/build/release/project-consumer",
       "bytes": 1832080,
-      "sha256": "77b9786e938f4d066baecfa4b7afc4ee507ded934e8e54cca9374ea19bad5ae1"
+      "sha256": "92a048de7388190e55105d804992c9b44610c24d717f209c1abf12bd6e6d1588"
     },
     "research-consumer": {
-      "path": "/private/tmp/file-native-incremental-macos-20261018/audit-lane/build/release/research-consumer",
+      "path": "/private/tmp/file-native-incremental-macos-20261018/accounting-lane/build/release/research-consumer",
       "bytes": 1832080,
-      "sha256": "1378caadd494d85e4c2712cfb06dcd6a3a3f9b0991d4331d16b958612cedc43a"
+      "sha256": "bc9b73b4b826614488168a114c684144e147a23a30bfd10819e0b10d2a0b274d"
     }
   },
+  "prior_audit_pins": "pins-7e00d22.json",
   "prior_replay_pins": "pins-7ac70f9.json",
   "prior_affected_pins": "pins-a1108c6.json",
   "prior_smoke_pins": "pins-f3.json",
-  "report_only_parent": "fe6e01e287bb6d4592059b1a6a9170789ab1c631",
-  "qualification": "Current strict audit observations are source-bound to 7e00d22. Earlier measurements retain their own pins. The report-only branch does not transplant the independently tested core."
+  "report_only_parent": "c8d1195ee406deedee1f32649004ec3779b27256",
+  "qualification": "Each observation stays bound to its exact source/session/executable. The report branch does not transplant the independently tested core."
 }
