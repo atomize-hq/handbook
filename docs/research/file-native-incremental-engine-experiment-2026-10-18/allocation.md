@@ -85,3 +85,20 @@ Native followups use a new explicit <=1800 s correction cap including build and
 export; they do not reopen or reset the original native measurement windows.
 The Windows reproducer's exact diagnostic interval is recorded and overlapped
 the resident history lane; exclude that interval from quiet timing claims.
+
+Before WSL launch, its four companion entrypoints receive a distinct harness
+adapter while their original script bytes are retained as *.capsule.py. The
+adapter reads the exact monotonic work deadline from run_lane's original native
+adapter, clamps Driver and kills only its own descendant process group at that
+deadline or <=890 seconds per companion (10 seconds remain for the existing
+900-second host watchdog/reporting). It records expired work as unperformed.
+This prevents companion invocations from resetting the 105-minute work window.
+Rust and the original 7ac source TAR remain unchanged; source ZIPs record the
+actual budget adapter and original-script copies. Guest free>=40GiB and combined
+owned guest source/build/runtime<=6GiB checks remain explicit.
+
+Prospective final-source audit check, before launch: after the queued serial
+checks, permit one <=900-second strict 7e audit of the existing A100k selected
+store. It checks the corrected preflight at the achieved document tier, without
+repeating initialization or relabeling its original censor. It uses the existing
+two-hour reporting reserve and is unperformed if its full cap cannot fit.
