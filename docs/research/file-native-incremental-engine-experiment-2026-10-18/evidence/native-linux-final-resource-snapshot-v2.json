@@ -1,0 +1,192 @@
+{
+  "epoch": 1792367545.7418272,
+  "roots": [
+    {
+      "path": "/home/spenser/file-native-incremental-capsule-f3e942f.tar",
+      "files": 1,
+      "logical_bytes": 440320,
+      "allocated_file_bytes": 442368
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-capsule-fb73e75.tar",
+      "files": 1,
+      "logical_bytes": 419840,
+      "allocated_file_bytes": 421888
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-capsule-rootfix-precommit.tar",
+      "files": 1,
+      "logical_bytes": 460800,
+      "allocated_file_bytes": 462848
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-linux-accounting-evidence",
+      "files": 26,
+      "logical_bytes": 1196716,
+      "allocated_file_bytes": 1277952
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-linux-accounting-final",
+      "files": 9037,
+      "logical_bytes": 418729890,
+      "allocated_file_bytes": 437575680
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-linux-audit-export",
+      "files": 14,
+      "logical_bytes": 318186,
+      "allocated_file_bytes": 364544
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-linux-audit-final",
+      "files": 2396,
+      "logical_bytes": 374253222,
+      "allocated_file_bytes": 379768832
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-linux-evidence-20261018",
+      "files": 73,
+      "logical_bytes": 1952060,
+      "allocated_file_bytes": 2166784
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-linux-evidence-20261018.tar.gz",
+      "files": 1,
+      "logical_bytes": 1930575,
+      "allocated_file_bytes": 1933312
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-linux-final-20261018",
+      "files": 18511,
+      "logical_bytes": 464753721,
+      "allocated_file_bytes": 504119296
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-linux-recipe",
+      "files": 1473,
+      "logical_bytes": 90109427,
+      "allocated_file_bytes": 94486528
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-linux-replay-final",
+      "files": 13009,
+      "logical_bytes": 436421501,
+      "allocated_file_bytes": 464179200
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-linux-rootfix",
+      "files": 5847,
+      "logical_bytes": 385222788,
+      "allocated_file_bytes": 399183872
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-linux-rootfix-evidence",
+      "files": 23,
+      "logical_bytes": 942298,
+      "allocated_file_bytes": 999424
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-linux-rootfix-evidence.tar.gz",
+      "files": 1,
+      "logical_bytes": 939385,
+      "allocated_file_bytes": 942080
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-replay-probe",
+      "files": 2121,
+      "logical_bytes": 13970252,
+      "allocated_file_bytes": 18161664
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-source-5a65a21",
+      "files": 694,
+      "logical_bytes": 27435661,
+      "allocated_file_bytes": 29065216
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-source-7ac70f9",
+      "files": 365,
+      "logical_bytes": 6886129,
+      "allocated_file_bytes": 7667712
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-source-7e00d22",
+      "files": 444,
+      "logical_bytes": 9072770,
+      "allocated_file_bytes": 10043392
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-source-f3e942f",
+      "files": 55,
+      "logical_bytes": 474589,
+      "allocated_file_bytes": 614400
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-source-recipe",
+      "files": 60,
+      "logical_bytes": 466855,
+      "allocated_file_bytes": 614400
+    },
+    {
+      "path": "/home/spenser/file-native-incremental-source-rootfix",
+      "files": 56,
+      "logical_bytes": 444599,
+      "allocated_file_bytes": 581632
+    },
+    {
+      "path": "/home/spenser/native-linux-accounting-evidence.tar.gz",
+      "files": 1,
+      "logical_bytes": 1186463,
+      "allocated_file_bytes": 1187840
+    },
+    {
+      "path": "/home/spenser/native-linux-audit-evidence.tar.gz",
+      "files": 1,
+      "logical_bytes": 315929,
+      "allocated_file_bytes": 319488
+    },
+    {
+      "path": "/tmp/i1-bounds-3251610-1792352001734160902-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/tmp/i1-bounds-3270014-1792353061423475082-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/tmp/i1-bounds-3275645-1792353589021954851-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/tmp/i1-bounds-3304199-1792356261792043248-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/tmp/i1-bounds-3364470-1792360409071638901-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "path": "/tmp/i1-bounds-3475493-1792365719196705850-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "allocated_file_bytes": 4096
+    }
+  ],
+  "total_logical_bytes": 2238350270,
+  "total_allocated_file_bytes": 2356604928,
+  "logical_cap_bytes": 6442450944,
+  "free_bytes": 181846872064,
+  "required_free_bytes": 21474836480,
+  "matching_owned_processes": [],
+  "qualification": "Read-only post-work snapshot. Includes all incremental-prefixed home paths, preserved native evidence transports and all bounds fixtures conservatively. Allocated file bytes sum st_blocks per pathname, may repeat hardlinks, exclude directory/filesystem metadata, and are not unique physical/device usage. Process matches cover the three named engine basenames and Python argv with absolute incremental-prefixed .py paths; Cargo/Bash/relative scripts/python -c or stdin supervisors are outside this filter. Completed controller records establish their own children finished. Current Git report/export copies on the Windows host are separate."
+}
