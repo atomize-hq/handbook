@@ -18,7 +18,7 @@ def run(d,matrix):
                 for k in [1,8,64]:
                     ids=[f'd{(i*100000//k+17)%100000:06}' for i in range(k)]
                     base=result(d.call(dict(action='inspect',root=str(root))))['selected']
-                    ops=[op('import',id=id,text=f'# Exact bounded source {id}\r\n'+('x'*4000)) for id in ids]
+                    ops=[op('import',id=id,text=f'# Exact bounded source {id} batch {k:02}\r\n'+('x'*4000)) for id in ids]
                     pub=d.call(dict(action='publish',root=str(root),request=req(f'recovered-update-{k}',ops,base=base)),cap=1200,env={'EXP_DEFER_REFRESH':'1'},allow=True)
                     rows.append({'operation':'recovered-A100k-update','k':k,'observation':pub})
                     if not pub or pub['status']!='ok':break
@@ -37,6 +37,18 @@ def run(d,matrix):
     for root in roots:
         if not (root/'SELECTED.json').exists():
             rows.append({'root':str(root),'audit':'not-selected/unreached'});continue
+        if root.parent.parent.name.startswith('n'):
+            n=int(root.parent.parent.name[1:])
+            for k in [1,8,64]:
+                ids=[f'd{(i*n//k+17)%n:06}' for i in range(k)]
+                base=result(d.call(dict(action='inspect',root=str(root))))['selected']
+                ops=[op('import',id=id,text=f'# Genuine bounded source {id} batch {k:02}\r\n'+('x'*4000)) for id in ids]
+                pub=d.call(dict(action='publish',root=str(root),request=req(f'genuine-{n}-{k}',ops,base=base)),cap=1200,env={'EXP_DEFER_REFRESH':'1'},allow=True)
+                if pub and pub['status']=='ok':assert len(result(pub)['result']['changed'])==k
+                rows.append({'operation':'genuine-scattered-changes','root':str(root),'requested_and_checked_changed':k,'observation':pub})
+                (d.base/'post-matrix.json').write_text(json.dumps(rows,indent=2))
+                if not pub or pub['status']!='ok':break
+                d.call(dict(action='refresh',root=str(root)),cap=900,allow=True)
         audit=d.call(dict(action='audit',root=str(root)),cap=1200,allow=True)
         head=result(d.call(dict(action='inspect',root=str(root))))['publication'];stats={}
         if audit and audit['status']=='ok':
