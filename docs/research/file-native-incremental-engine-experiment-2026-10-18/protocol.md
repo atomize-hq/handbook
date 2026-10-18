@@ -141,3 +141,16 @@ Earlier development measurements remain separate observations. In particular,
 the first 5000-source packet refusal and Windows long-path failure are retained.
 This is an experimental private format iteration, not an approved format default
 or migration. The original baseline and control retain their separate contracts.
+
+Final history recipe amendment, before the final history lane: metadata selects
+ID `i % 16` at `i % 5 == 2`, with label suffix `(i / 80) % 2`. Each ID is revisited
+after 80 selections, so its value now toggles on every metadata visit. The pilot's
+`(i / 5) % 2` suffix became equal-content after each ID's first update; that pilot
+is preserved and cannot be counted as a sustained metadata mutation mix. Final
+verification reconstructs the complete expected small state from the captured
+checked initial fixture and declared recipe, then independently compares every
+logical semantic-index entry at each history depth. Full history selection and
+outcome walking remains outside append clocks. Engine work has 225 minutes of
+the four-hour history allocation, reserving 15 minutes for independent truth and
+reporting after a censor. `store`/validation/projection/lifetime code is unchanged
+from a1108c6; this amendment changes the resident test workload and its oracle.

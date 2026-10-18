@@ -1,5 +1,5 @@
 """Independent bounded full walker/C1 decoder. Never used on timed normal paths."""
-import hashlib,json,struct
+import hashlib,json,struct,copy
 from pathlib import Path
 def sha(b):return hashlib.sha256(b).hexdigest()
 def checked(path,h):
@@ -77,7 +77,7 @@ def verify_history(root,allow_censored_prefix=False):
     assert [row['index'] for row in receipts]==list(range(1,len(receipts)+1))
     if not allow_censored_prefix:assert len(receipts)==len(history_rows),'ledger does not cover every claimed history selection'
     else:assert len(receipts)<=len(history_rows)<=len(receipts)+1
-    if receipts:
+    if history_rows:
         origin=json.loads((root/'HISTORY-SOURCE.json').read_bytes())
         original=checked(root/origin['original'],origin['digest']);variant=original[:-1]+(b'\n' if original[-1:]==b' ' else b' ')
     for row in receipts:
@@ -94,6 +94,27 @@ def verify_history(root,allow_censored_prefix=False):
         ops=c['request']['ops']
         if i%5==0:assert ops==[]
         elif i%5 in [1,4]:assert len(ops)==1 and ops[0]['kind']=='import' and ops[0]['id']=='d000000' and ops[0]['text'].encode()==(variant if i%5==1 else original)
-        elif i%5==2:assert len(ops)==1 and ops[0]['kind']=='label' and ops[0]['id']==f'd{i%16:06}' and ops[0]['text']==f'history-{i%16}-{(i//5)%2}'
+        elif i%5==2:assert len(ops)==1 and ops[0]['kind']=='label' and ops[0]['id']==f'd{i%16:06}' and ops[0]['text']==f'history-{i%16}-{(i//80)%2}'
         else:assert len(ops)==1 and ops[0]['kind']=='cost' and ops[0]['value']==0
-    return {'publications':len(chain),'ledger_boundaries':len(receipts),'membership':membership_stats,'outcomes':outcome_stats,'independent_full_walker':True}
+    recipe_verified=False
+    initial=root/'INITIAL-ORACLE.json'
+    if initial.exists():
+        state=json.loads(initial.read_bytes());docs=copy.deepcopy(state['docs'])
+        for i in range(1,len(history_rows)+1):
+            if i%5 in [1,4]:
+                data=variant if i%5==1 else original;h=sha(data);doc=docs['d000000']
+                doc.update(digest=h,bytes=len(data),original=f"originals/{h[:2]}/{h}-{Path(doc['path']).name}")
+            elif i%5==2:docs[f'd{i%16:06}']['label']=f'history-{i%16}-{(i//80)%2}'
+        expected={}
+        for id,doc in docs.items():
+            edges=doc['edges'];header=copy.deepcopy(doc);header['edges']=[]
+            expected['D/'+id]={'doc':header,'next':len(edges)}
+            expected['P/'+doc['path'].lower()]=id
+            if doc['label'] is not None:expected['L/'+doc['label']]=id
+            for ordinal,edge in enumerate(edges):
+                expected[f'E/{id}/{ordinal:016x}']=edge
+                if not edge['external']:expected[f"R/{edge['target']}/{id}/{ordinal:016x}"]=edge
+            assert sha((root/doc['original']).read_bytes())==doc['digest']
+        actual=Tree(root).entries(head['graph']['tree']);assert actual==expected,'independent complete history recipe/index mismatch'
+        recipe_verified=True
+    return {'publications':len(chain),'ledger_boundaries':len(receipts),'membership':membership_stats,'outcomes':outcome_stats,'independent_full_walker':True,'independent_recipe_and_all_indexes':recipe_verified}

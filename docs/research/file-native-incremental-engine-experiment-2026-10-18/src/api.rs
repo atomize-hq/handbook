@@ -111,7 +111,7 @@ fn history(store:&Store,v:&Value,m:&mut Metrics)->Result<Value>{
         *counts.entry(category).or_insert(0u64)+=1;
         let ops=match i%5{
             1|4=>vec![Op{kind:"import".into(),id:"d000000".into(),text:String::from_utf8(variants[usize::from(i%5==1)].clone())?,target:String::new(),value:0}],
-            2=>vec![Op{kind:"label".into(),id:format!("d{:06}",i%16),text:format!("history-{}-{}",i%16,(i/5)%2),target:String::new(),value:0}],
+            2=>vec![Op{kind:"label".into(),id:format!("d{:06}",i%16),text:format!("history-{}-{}",i%16,(i/80)%2),target:String::new(),value:0}],
             3=>vec![Op{kind:"cost".into(),id:format!("d{:06}",i%16),text:String::new(),target:String::new(),value:0}],
             _=>vec![]
         };

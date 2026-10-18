@@ -5,6 +5,7 @@ from verify_store import verify_history
 a=argparse.ArgumentParser();a.add_argument('--exe',required=True);a.add_argument('--base',required=True);a.add_argument('--max-depth',type=int,default=100000);ns=a.parse_args()
 d=Driver(ns.exe,ns.base,13500);root=str(d.base/'store');rows=[]
 d.call(dict(action='init',root=root,mode='A',consumer='project',count=16))
+(d.base/'store/INITIAL-ORACLE.json').write_text(json.dumps(result(d.call(dict(action='dump',root=root)))['state'],indent=2))
 start=0
 for depth in [1000,10000,100000]:
     if depth>ns.max_depth:break

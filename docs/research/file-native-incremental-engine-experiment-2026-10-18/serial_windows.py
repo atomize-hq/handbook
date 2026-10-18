@@ -43,4 +43,4 @@ else:
     command('wsl-native',prefix+['python3',guest+'/run_lane.py','--root',lane,'--source',guest,'--pin','a1108c634cb8362aca50e1a6228766802b96f087','--reserve-gib','40','--cap-gib','6'],7200,False)
     for script,name,extra in [('namespace_cases.py','namespace',[]),('deep_cases.py','deep-cases',[]),('walk_cases.py','walk-cases',['--source',guest,'--shell','bash'])]:
         command('wsl-'+name,prefix+['python3',guest+'/'+script,'--exe',binary,'--base',lane+'/'+name,*extra],900,False)
-(log/'completed.json').write_text(json.dumps({'engine_pin':'a1108c634cb8362aca50e1a6228766802b96f087','rows':rows},indent=2))
+(log/'completed.json').write_text(json.dumps({'core_pin':'a1108c634cb8362aca50e1a6228766802b96f087','workload_hashes':{name:__import__('hashlib').sha256((source/name).read_bytes()).hexdigest() for name in ['src/api.rs','history_run.py','verify_store.py']},'rows':rows},indent=2))
