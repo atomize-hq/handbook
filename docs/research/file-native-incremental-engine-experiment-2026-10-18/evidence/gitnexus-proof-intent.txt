@@ -1,0 +1,13 @@
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Impact (1.6.12)
+{"level":50,"time":1792363927134,"name":"gitnexus","msg":"GitNexus: ⚠️ Index for \"handbook\" was built at C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook; your cwd (C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook) is a sibling clone that is 30 commits ahead of the indexed commit. Results may be stale or incorrect — re-run `gitnexus analyze` to refresh the index."}
+{
+  "error": "Target 'verify_history' not found",
+  "target": {
+    "name": "verify_history"
+  },
+  "direction": "upstream",
+  "impactedCount": null,
+  "risk": "UNKNOWN"
+}

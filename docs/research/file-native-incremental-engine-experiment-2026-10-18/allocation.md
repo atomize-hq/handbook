@@ -102,3 +102,15 @@ checks, permit one <=900-second strict 7e audit of the existing A100k selected
 store. It checks the corrected preflight at the achieved document tier, without
 repeating initialization or relabeling its original censor. It uses the existing
 two-hour reporting reserve and is unperformed if its full cap cannot fit.
+
+Prospective history proof/GC correction, before continuation: the already loaded
+history harness uses a root named store, which cannot pass lifecycle setup's
+disposable-component guard. Preserve that refusal. After all queued readers and
+audits finish, allow <=900 seconds for a separately labeled continuation: record
+SELECTED/config/ledger hashes, move only this quiescent owned store into its own
+disposable/store subdirectory, verify unchanged hashes, setup, retire one early
+snapshot, collect and check exact early/lost-reply outcomes. No live process is
+moved and no original append deadline is extended. Capture the full history proof
+before retiring content; private candidates may disappear, while transition proofs
+still require historical graph pages. The continuation uses the reporting reserve
+and is unperformed if its complete cap does not fit.

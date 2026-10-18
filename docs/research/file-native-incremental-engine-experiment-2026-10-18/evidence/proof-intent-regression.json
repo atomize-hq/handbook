@@ -1,0 +1,37 @@
+{
+  "verification": {
+    "publications": 83,
+    "ledger_boundaries": 82,
+    "membership": {
+      "pages": 3,
+      "leaves": 2,
+      "branches": 1,
+      "physical": 82,
+      "tombstones": 0,
+      "height": 1,
+      "occupancy": [
+        32,
+        50
+      ]
+    },
+    "outcomes": {
+      "pages": 3,
+      "leaves": 2,
+      "branches": 1,
+      "physical": 82,
+      "tombstones": 0,
+      "height": 1,
+      "occupancy": [
+        39,
+        43
+      ]
+    },
+    "independent_full_walker": true,
+    "independent_recipe_and_all_indexes": true
+  },
+  "candidate_files_removed": 83,
+  "without_candidates": true,
+  "altered_candidate_refused": true,
+  "altered_recipe_intent_refused": true,
+  "restored": true
+}

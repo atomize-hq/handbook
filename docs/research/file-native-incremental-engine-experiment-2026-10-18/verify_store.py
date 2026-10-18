@@ -108,15 +108,20 @@ def verify_history(root,allow_censored_prefix=False):
         assert actual==row['result'] and actual['outcome']=='accepted'
         assert p['graph']['count']==16 and p['graph']['cost']==0
         assert row['category']==['maintenance','content','metadata','equal-content','restore'][i%5]
-        c=json.loads((root/f"attempts/{p['attempt']}/candidate.json").read_bytes())
-        assert sha(json.dumps(c['request'],indent=2,ensure_ascii=False).encode())==p['intent']
-        assert c['graph']==p['graph'] and c['projection']==p['projection']
-        assert c['request']['request']==f'history-{i:06}' and c['request']['base']==chronological[i-1][0]
-        ops=c['request']['ops']
-        if i%5==0:assert ops==[]
-        elif i%5 in [1,4]:assert len(ops)==1 and ops[0]['kind']=='import' and ops[0]['id']=='d000000' and ops[0]['text'].encode()==(variant if i%5==1 else original)
-        elif i%5==2:assert len(ops)==1 and ops[0]['kind']=='label' and ops[0]['id']==f'd{i%16:06}' and ops[0]['text']==f'history-{i%16}-{(i//80)%2}'
-        else:assert len(ops)==1 and ops[0]['kind']=='cost' and ops[0]['value']==0
+        # Accepted evidence outlives retireable attempt files. Reconstruct the
+        # exact bounded recipe independently and bind it to the selected intent.
+        ops=[]
+        if i%5:
+            kind={1:'import',2:'label',3:'cost',4:'import'}[i%5]
+            text=(variant if i%5==1 else original).decode() if i%5 in [1,4] else f'history-{i%16}-{(i//80)%2}' if i%5==2 else ''
+            ops=[dict(kind=kind,id='d000000' if i%5 in [1,4] else f'd{i%16:06}',text=text,target='',value=0)]
+        base=chronological[i-1][0]
+        request=dict(request=f'history-{i:06}',base=dict(publication=base['publication'],digest=base['digest']),ops=ops,packet=False)
+        assert sha(json.dumps(request,indent=2,ensure_ascii=False).encode())==p['intent'],'independent recipe intent mismatch'
+        candidate=root/f"attempts/{p['attempt']}/candidate.json"
+        if candidate.exists():
+            c=json.loads(candidate.read_bytes())
+            assert c['request']==request and c['graph']==p['graph'] and c['projection']==p['projection']
         previous=chronological[i-1][1]
         if i%5 in [1,4]:
             data=variant if i%5==1 else original;digest=sha(data)
