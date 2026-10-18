@@ -5,6 +5,13 @@ from controller import Driver
 from checks import req,op,result
 from verify_store import Tree
 
+def bounded_source(id,k):
+    kind=int(id[1:])%10
+    if kind==2:head=f'{{\r\n  "id": "{id}", "exact_number": 1.00, "batch": {k}, "text": "captured café α"\r\n}}\r\n'
+    elif kind in [0,1]:head=f'id: {id}\r\nbatch: {k}\r\n# Exact captured source bytes.\r\n'
+    else:head=f'# Captured evidence {id}\r\n\r\nBatch {k:02}. Exact bounded source bytes.\r\n'
+    return head.encode().ljust(4096,b' ').decode()
+
 def run(d,matrix):
     rows=[]
     # A selected before a cap is distinct from a completed initialization.
@@ -14,15 +21,6 @@ def run(d,matrix):
         if (root/'PENDING.json').exists() or selected['publication']['request']!='update-64':
             recovery=d.call(dict(action='resume',root=str(root)),cap=900,allow=True)
             rows.append({'operation':'separate-A100k-recovery','observation':recovery})
-            if recovery and recovery['status']=='ok':
-                for k in [1,8,64]:
-                    ids=[f'd{(i*100000//k+17)%100000:06}' for i in range(k)]
-                    base=result(d.call(dict(action='inspect',root=str(root))))['selected']
-                    ops=[op('import',id=id,text=f'# Exact bounded source {id} batch {k:02}\r\n'+('x'*4000)) for id in ids]
-                    pub=d.call(dict(action='publish',root=str(root),request=req(f'recovered-update-{k}',ops,base=base)),cap=1200,env={'EXP_DEFER_REFRESH':'1'},allow=True)
-                    rows.append({'operation':'recovered-A100k-update','k':k,'observation':pub})
-                    if not pub or pub['status']!='ok':break
-                    d.call(dict(action='refresh',root=str(root)),cap=900,allow=True)
     # The main controller can stop at an A censor; B stays an honest separate
     # complete-generation control, launched only if not already attempted.
     extra=None
@@ -42,7 +40,7 @@ def run(d,matrix):
             for k in [1,8,64]:
                 ids=[f'd{(i*n//k+17)%n:06}' for i in range(k)]
                 base=result(d.call(dict(action='inspect',root=str(root))))['selected']
-                ops=[op('import',id=id,text=f'# Genuine bounded source {id} batch {k:02}\r\n'+('x'*4000)) for id in ids]
+                ops=[op('import',id=id,text=bounded_source(id,k)) for id in ids]
                 pub=d.call(dict(action='publish',root=str(root),request=req(f'genuine-{n}-{k}',ops,base=base)),cap=1200,env={'EXP_DEFER_REFRESH':'1'},allow=True)
                 if pub and pub['status']=='ok':assert len(result(pub)['result']['changed'])==k
                 rows.append({'operation':'genuine-scattered-changes','root':str(root),'requested_and_checked_changed':k,'observation':pub})
