@@ -14,6 +14,15 @@ def measurement(row):
         'unique_pages':len(m['unique_pages']) if 'unique_pages' in m else None,
         **{k+'_ms':ns[k]/1e6 if k in ns else None for k in ['graph-transition-inclusive','projection-prepare-inclusive','preparation-inclusive','selection-inclusive','lock-wait','lock-hold','A-completion-inclusive']}}
 
+def validation_comparison(row):
+    result=(row.get('output') or {}).get('result') or {}
+    keys=['documents_visited','edges_visited','page_reads','index_updates','bytes_metadata_read','bytes_metadata_written','bytes_payload_read','bytes_payload_written','file_syncs','namespace_ops']
+    return {'scope':result.get('scope'),
+        'full_load_semantic_validation_ms':result['full_load_semantic_validation_ns']/1e6 if 'full_load_semantic_validation_ns' in result else None,
+        'incremental_complete_preparation_ms':result['incremental_complete_preparation_ns']/1e6 if 'incremental_complete_preparation_ns' in result else None,
+        'full_metrics':{k:result.get('full_metrics',{}).get(k) for k in keys},
+        'incremental_metrics':{k:result.get('incremental_metrics',{}).get(k) for k in keys}}
+
 def run(root):
     report={}
     for name in ['codec-windows-v1','matrix-common-pin','post-matrix','document-calibration-final','codec-common-pin','windows-final-extra','history-common-pin']:
@@ -26,6 +35,7 @@ def run(root):
             if history_probe or action in ['init','history','packet','checkpoint','refresh','resume','validation-trace'] or action=='publish' and (request or '').startswith(('update-','genuine-','change-','B-one','one-in-','incoming-5000','combined-')):
                 picked.append({'raw_line':i,'action':action,'root':v['root'],'request':request,'request_id':v.get('request_id'),'selected_input':v.get('selected'),'n':v.get('count'),
                     'collection_result':(row.get('output') or {}).get('result') if action=='lifecycle' else None,
+                    'validation_comparison':validation_comparison(row) if action=='validation-trace' else None,
                     'metrics_scope':'outer API setup; per-publication counters are in the ledger' if action=='history' else 'this API invocation',**measurement(row)})
         report[name]={'events':len(rows),'censors':sum(v['censored'] for v in rows),'observations':picked}
     path=root/'history-common-pin/store/expected-ledger.jsonl'
