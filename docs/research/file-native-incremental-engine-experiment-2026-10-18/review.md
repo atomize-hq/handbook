@@ -45,3 +45,11 @@ before oracle generation/exclusions. Explicit readable-view repair is unchanged.
 GitNexus full_oracle impact was UNKNOWN (target absent from stale index); scoped
 inspection found the explicit audit API as its sole direct caller. Ordinary
 publication, history selection, formats and owner contracts are unchanged.
+
+The final verification controller received a separate read-only review before
+launch. It now records remaining commands unperformed when the reporting deadline
+expires, checks that the complete guest cap fits, and passes the reporting epoch
+deadline to the guest watchdog. Two waiting controllers were replaced before any
+work ran; their cancellation receipts are preserved. The guest 6 GiB guard covers
+all owned incremental source/build/runtime roots, so local+6 GiB admission is a
+conservative combined bound, not an extra uncounted guest allocation.
