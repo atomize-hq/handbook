@@ -1,0 +1,150 @@
+{
+  "epoch": 1792375514.0039792,
+  "baseline": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+  "final_core": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+  "checked_worktree_parent_head": "d838126473c8f4baefe73d08cc40b340f07b8682",
+  "original_checkout_head": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+  "original_tracked_status": "",
+  "committed_paths": 881,
+  "pending_tracked_paths": 5,
+  "pending_untracked_paths": 526,
+  "all_changed_paths_within_experiment": true,
+  "core_inputs": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 8338,
+      "sha256": "07eca1011d8aabcf2e5508cd9b4954417dff9ab0c7a7a1accf06af719a81b330"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 504,
+      "sha256": "7e08fe410778cd11427f190e6c6991324c1a02d1c50c65a3cfd5e8d0dba6ab08"
+    },
+    {
+      "path": "consumers/project/Cargo.toml",
+      "bytes": 147,
+      "sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e"
+    },
+    {
+      "path": "consumers/project/src/main.rs",
+      "bytes": 68,
+      "sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173"
+    },
+    {
+      "path": "consumers/research/Cargo.toml",
+      "bytes": 148,
+      "sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed"
+    },
+    {
+      "path": "consumers/research/src/main.rs",
+      "bytes": 69,
+      "sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac"
+    },
+    {
+      "path": "control/Cargo.lock",
+      "bytes": 8140,
+      "sha256": "bb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998"
+    },
+    {
+      "path": "control/Cargo.toml",
+      "bytes": 439,
+      "sha256": "e78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0"
+    },
+    {
+      "path": "control/src/backend.rs",
+      "bytes": 5732,
+      "sha256": "fac529f6d41ee08eb693aa9ec3dc4d3777d16919156268b15b37c7222272b90b"
+    },
+    {
+      "path": "control/src/disk.rs",
+      "bytes": 30741,
+      "sha256": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5"
+    },
+    {
+      "path": "control/src/io.rs",
+      "bytes": 9847,
+      "sha256": "9ba206a4ddf86993702aca2b0dbcdc120d510e2a5b43f71ef0c789e30703c47e"
+    },
+    {
+      "path": "control/src/lifecycle.rs",
+      "bytes": 7735,
+      "sha256": "30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4"
+    },
+    {
+      "path": "control/src/main.rs",
+      "bytes": 33528,
+      "sha256": "8cd6800fb18e1c5f26738f648589287a3d8fb2a217b0f4bd4d6dc17310083d57"
+    },
+    {
+      "path": "control/src/model.rs",
+      "bytes": 8505,
+      "sha256": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10"
+    },
+    {
+      "path": "src/api.rs",
+      "bytes": 12022,
+      "sha256": "8eddbf39e06bdf1ca5708d02c6abd9a885184576d446b23d8aa064de0c9184ff"
+    },
+    {
+      "path": "src/baseline_model.rs",
+      "bytes": 8570,
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c"
+    },
+    {
+      "path": "src/bounds_tests.rs",
+      "bytes": 1001,
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594"
+    },
+    {
+      "path": "src/differential.rs",
+      "bytes": 2661,
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761"
+    },
+    {
+      "path": "src/disk.rs",
+      "bytes": 30741,
+      "sha256": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5"
+    },
+    {
+      "path": "src/graph.rs",
+      "bytes": 13349,
+      "sha256": "9e47637a2d213f1d1abdbc559ae680d4f2410bc50e30624d3dd41f83133d7454"
+    },
+    {
+      "path": "src/io.rs",
+      "bytes": 12673,
+      "sha256": "17a6a0bad6859f54793c37e6f1fc86e4cd35c86ac833dd24b5a877f4f01f6b06"
+    },
+    {
+      "path": "src/lib.rs",
+      "bytes": 390,
+      "sha256": "b68a60aa0da945f6f89190c19f296162b47e2ffa508eef1129cf2d8fc7a85307"
+    },
+    {
+      "path": "src/lifetime.rs",
+      "bytes": 15663,
+      "sha256": "8e1af6732ffc1888323664bfc815896ad4c2b6f72b014948b8a5f85da1b205e7"
+    },
+    {
+      "path": "src/main.rs",
+      "bytes": 57,
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701"
+    },
+    {
+      "path": "src/objects.rs",
+      "bytes": 3342,
+      "sha256": "6727e154f82334b9842f347797407bd7185ed576dd36d206fb323f0dc6c2b31c"
+    },
+    {
+      "path": "src/projection.rs",
+      "bytes": 20899,
+      "sha256": "f984ff24194f8793c0849f0a09b2cf6a6804de1a767357cd299cf2de03c7b43b"
+    },
+    {
+      "path": "src/store.rs",
+      "bytes": 34863,
+      "sha256": "a0d0ebae2173f6b24e687058a0cc6af7e52016bc07d7ecdeeee28400303a0c76"
+    }
+  ],
+  "qualification": "Read-only pre-final-commit scope/source check. Original unrelated untracked files are excluded and preserved. All listed Rust/Cargo inputs equal5a byte for byte. Final report/artifact commit and inventory are checked separately; no root workspace dependency or owner is modified."
+}

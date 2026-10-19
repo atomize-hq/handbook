@@ -75,8 +75,9 @@ unrelated recovery and prevent abandonment after the winner selected. Windows
 A/B reproduction confirmed it. The reviewed correction uses acceptance without
 the losing intent for internal accounting, transfers only the exact accepted
 attempt with matching intent/owner, and preserves public intent mismatch refusal.
-Windows/Linux/Mac each passed 181 focused responses and locked tests. WSL remains
-queued. Ordinary history/document measurements keep their earlier pins.
+Windows/Linux/Mac each passed 181 focused responses and locked tests. WSL was
+queued at that review and completed before closeout. Ordinary history/document
+measurements keep their earlier pins.
 
 Final proof/admission bounds use the original serial prerequisite's file creation
 time, conservatively preceding the reporting lane start. Replaced waiting queues
@@ -111,3 +112,41 @@ a guest alarm; a separate recorded controller enforces the actual outer600-secon
 descendant-process cap. Review confirmed the corrected bound, worktree resolution,
 NUL delimiter and conservative accounting/process-filter qualifications. This
 static review is separate from the final census's actual disposition.
+
+## Closing observations
+
+All queued work is finished. The corrected A100k strict audit passed in 363.292
+seconds per controller call. The full history proof export was censored after
+900.445 seconds, with its exact partial gzip retained and no completed manifest.
+Dependent fresh restoration, relocation, retirement, long-history GC and post-GC
+checks were unperformed. The completed original independent 101,003-publication
+check remains separate. A prospectively bounded ledger-only fallback passed in
+6.804 seconds, preserving 246,560,316 bytes and 100,000 dense rows through 15 chunks.
+No history retirement or deletion occurred after that export censor.
+
+WSL's later 7e 42-response and 5a 181-response suites passed with zero censors,
+including their actual inner build/test/case rows. All 13 generic lossless exports
+passed byte/type/session verification. The final Windows capture includes 7,396
+responses, original failures, two engine-call censors and 10 early missing compiler
+captures. Outer proof/projection censors remain in their own controller records.
+Mac's separate completed verifier covers 8 lanes, 23 session ZIPs and 8 source TARs.
+WSL's 15 sessions match 27 Rust/Cargo inputs per session to exact 7ac/7e/5a Git pins;
+nine retained guest binaries were rehashed. This is association evidence, not
+reproducible compilation or a full-matrix rerun at 5a.
+
+The actual bounded resource census passed in 136.690 seconds: 18,186,887,151 combined
+logical bytes against 32 GiB, with host/guest free space above 140/40 GiB reserves.
+Its conservative scope includes worktree, transports, sibling builds, shared Git
+database and temporary fixtures. No process matched either stated filter; their
+limited scope and the separate completed-controller evidence remain explicit.
+The census precedes its own small receipt and final report/inventory/Git writes.
+Local Git attributes now preserve exact bytes across checkout newline settings;
+no engine source or serialized engine format changes in this closeout.
+
+Final independent read-only review found no material correctness, scope or
+overstatement blocker. It checked the final claims against completed controller,
+transport, source/binary, ledger and resource receipts. The one stale WSL queue
+sentence above was made historical. The reviewer confirmed that the ledger
+transport relies on the recorded outer 300-second bound and does not establish
+the censored selected-history proof. Final inventory and staged Git-byte checks
+are performed after these report edits.

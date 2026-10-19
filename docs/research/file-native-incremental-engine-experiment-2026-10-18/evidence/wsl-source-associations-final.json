@@ -1,0 +1,266 @@
+{
+  "epoch": 1792375007.684496,
+  "lanes": [
+    {
+      "lane": "native-wsl-main",
+      "pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "guest_runtime": "/home/spenser/file-native-incremental-wsl-final-20261018",
+      "inputs": {
+        "Cargo.lock": "07eca1011d8aabcf2e5508cd9b4954417dff9ab0c7a7a1accf06af719a81b330",
+        "Cargo.toml": "7e08fe410778cd11427f190e6c6991324c1a02d1c50c65a3cfd5e8d0dba6ab08",
+        "consumers/project/Cargo.toml": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e",
+        "consumers/project/src/main.rs": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173",
+        "consumers/research/Cargo.toml": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed",
+        "consumers/research/src/main.rs": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac",
+        "control/Cargo.lock": "bb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998",
+        "control/Cargo.toml": "e78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0",
+        "control/src/backend.rs": "fac529f6d41ee08eb693aa9ec3dc4d3777d16919156268b15b37c7222272b90b",
+        "control/src/disk.rs": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+        "control/src/io.rs": "9ba206a4ddf86993702aca2b0dbcdc120d510e2a5b43f71ef0c789e30703c47e",
+        "control/src/lifecycle.rs": "30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4",
+        "control/src/main.rs": "8cd6800fb18e1c5f26738f648589287a3d8fb2a217b0f4bd4d6dc17310083d57",
+        "control/src/model.rs": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10",
+        "src/api.rs": "8eddbf39e06bdf1ca5708d02c6abd9a885184576d446b23d8aa064de0c9184ff",
+        "src/baseline_model.rs": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+        "src/bounds_tests.rs": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+        "src/differential.rs": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+        "src/disk.rs": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+        "src/graph.rs": "9e47637a2d213f1d1abdbc559ae680d4f2410bc50e30624d3dd41f83133d7454",
+        "src/io.rs": "17a6a0bad6859f54793c37e6f1fc86e4cd35c86ac833dd24b5a877f4f01f6b06",
+        "src/lib.rs": "b68a60aa0da945f6f89190c19f296162b47e2ffa508eef1129cf2d8fc7a85307",
+        "src/lifetime.rs": "df3203781a2d8ab348989b1069d6c568fff603e1ffbbce2bae289fc63e807f3d",
+        "src/main.rs": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+        "src/objects.rs": "6727e154f82334b9842f347797407bd7185ed576dd36d206fb323f0dc6c2b31c",
+        "src/projection.rs": "157a96ab416e1d3b0ad50fda6ebe435051e7a51020378becd70c9a181d0af3ba",
+        "src/store.rs": "a0d0ebae2173f6b24e687058a0cc6af7e52016bc07d7ecdeeee28400303a0c76"
+      },
+      "sessions": [
+        {
+          "session": "deep-cases/session.json",
+          "exe_sha256": "eaff134e2fb2b2ec396ce2ca6c9654fe986105b69a4f2828c7dff94796a54a36",
+          "source_archive_sha256": "e59bf6b43f0b7f1ad288cc85a461e335fb5ad27f47e33850887a0edfcaf64d2d",
+          "checked_input_files": 27
+        },
+        {
+          "session": "namespace/session.json",
+          "exe_sha256": "eaff134e2fb2b2ec396ce2ca6c9654fe986105b69a4f2828c7dff94796a54a36",
+          "source_archive_sha256": "e59bf6b43f0b7f1ad288cc85a461e335fb5ad27f47e33850887a0edfcaf64d2d",
+          "checked_input_files": 27
+        },
+        {
+          "session": "replay-lifetime/session.json",
+          "exe_sha256": "eaff134e2fb2b2ec396ce2ca6c9654fe986105b69a4f2828c7dff94796a54a36",
+          "source_archive_sha256": "e59bf6b43f0b7f1ad288cc85a461e335fb5ad27f47e33850887a0edfcaf64d2d",
+          "checked_input_files": 27
+        },
+        {
+          "session": "results/B-copy/session.json",
+          "exe_sha256": "eaff134e2fb2b2ec396ce2ca6c9654fe986105b69a4f2828c7dff94796a54a36",
+          "source_archive_sha256": "e59bf6b43f0b7f1ad288cc85a461e335fb5ad27f47e33850887a0edfcaf64d2d",
+          "checked_input_files": 27
+        },
+        {
+          "session": "results/adversarial/session.json",
+          "exe_sha256": "eaff134e2fb2b2ec396ce2ca6c9654fe986105b69a4f2828c7dff94796a54a36",
+          "source_archive_sha256": "e59bf6b43f0b7f1ad288cc85a461e335fb5ad27f47e33850887a0edfcaf64d2d",
+          "checked_input_files": 27
+        },
+        {
+          "session": "results/checks/session.json",
+          "exe_sha256": "eaff134e2fb2b2ec396ce2ca6c9654fe986105b69a4f2828c7dff94796a54a36",
+          "source_archive_sha256": "e59bf6b43f0b7f1ad288cc85a461e335fb5ad27f47e33850887a0edfcaf64d2d",
+          "checked_input_files": 27
+        },
+        {
+          "session": "results/consumer-project/session.json",
+          "exe_sha256": "bc8d2350f025cba68bc7f5b97a7beccec45d41e4d7d90ab5f1d2e6929dfc1f66",
+          "source_archive_sha256": "e59bf6b43f0b7f1ad288cc85a461e335fb5ad27f47e33850887a0edfcaf64d2d",
+          "checked_input_files": 27
+        },
+        {
+          "session": "results/consumer-research/session.json",
+          "exe_sha256": "4aa15c7495528db7e46b8141e0b59e5633456749546e76bd540e1f6f03431f6b",
+          "source_archive_sha256": "e59bf6b43f0b7f1ad288cc85a461e335fb5ad27f47e33850887a0edfcaf64d2d",
+          "checked_input_files": 27
+        },
+        {
+          "session": "results/smoke/session.json",
+          "exe_sha256": "eaff134e2fb2b2ec396ce2ca6c9654fe986105b69a4f2828c7dff94796a54a36",
+          "source_archive_sha256": "e59bf6b43f0b7f1ad288cc85a461e335fb5ad27f47e33850887a0edfcaf64d2d",
+          "checked_input_files": 27
+        },
+        {
+          "session": "results/supplement/session.json",
+          "exe_sha256": "eaff134e2fb2b2ec396ce2ca6c9654fe986105b69a4f2828c7dff94796a54a36",
+          "source_archive_sha256": "e59bf6b43f0b7f1ad288cc85a461e335fb5ad27f47e33850887a0edfcaf64d2d",
+          "checked_input_files": 27
+        },
+        {
+          "session": "walk-cases/session.json",
+          "exe_sha256": "eaff134e2fb2b2ec396ce2ca6c9654fe986105b69a4f2828c7dff94796a54a36",
+          "source_archive_sha256": "e59bf6b43f0b7f1ad288cc85a461e335fb5ad27f47e33850887a0edfcaf64d2d",
+          "checked_input_files": 27
+        }
+      ]
+    },
+    {
+      "lane": "native-wsl-audit",
+      "pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+      "guest_runtime": "/home/spenser/file-native-incremental-wsl-audit-final",
+      "inputs": {
+        "Cargo.lock": "07eca1011d8aabcf2e5508cd9b4954417dff9ab0c7a7a1accf06af719a81b330",
+        "Cargo.toml": "7e08fe410778cd11427f190e6c6991324c1a02d1c50c65a3cfd5e8d0dba6ab08",
+        "consumers/project/Cargo.toml": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e",
+        "consumers/project/src/main.rs": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173",
+        "consumers/research/Cargo.toml": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed",
+        "consumers/research/src/main.rs": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac",
+        "control/Cargo.lock": "bb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998",
+        "control/Cargo.toml": "e78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0",
+        "control/src/backend.rs": "fac529f6d41ee08eb693aa9ec3dc4d3777d16919156268b15b37c7222272b90b",
+        "control/src/disk.rs": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+        "control/src/io.rs": "9ba206a4ddf86993702aca2b0dbcdc120d510e2a5b43f71ef0c789e30703c47e",
+        "control/src/lifecycle.rs": "30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4",
+        "control/src/main.rs": "8cd6800fb18e1c5f26738f648589287a3d8fb2a217b0f4bd4d6dc17310083d57",
+        "control/src/model.rs": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10",
+        "src/api.rs": "8eddbf39e06bdf1ca5708d02c6abd9a885184576d446b23d8aa064de0c9184ff",
+        "src/baseline_model.rs": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+        "src/bounds_tests.rs": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+        "src/differential.rs": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+        "src/disk.rs": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+        "src/graph.rs": "9e47637a2d213f1d1abdbc559ae680d4f2410bc50e30624d3dd41f83133d7454",
+        "src/io.rs": "17a6a0bad6859f54793c37e6f1fc86e4cd35c86ac833dd24b5a877f4f01f6b06",
+        "src/lib.rs": "b68a60aa0da945f6f89190c19f296162b47e2ffa508eef1129cf2d8fc7a85307",
+        "src/lifetime.rs": "df3203781a2d8ab348989b1069d6c568fff603e1ffbbce2bae289fc63e807f3d",
+        "src/main.rs": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+        "src/objects.rs": "6727e154f82334b9842f347797407bd7185ed576dd36d206fb323f0dc6c2b31c",
+        "src/projection.rs": "f984ff24194f8793c0849f0a09b2cf6a6804de1a767357cd299cf2de03c7b43b",
+        "src/store.rs": "a0d0ebae2173f6b24e687058a0cc6af7e52016bc07d7ecdeeee28400303a0c76"
+      },
+      "sessions": [
+        {
+          "session": "audit-evidence/session.json",
+          "exe_sha256": "940efba6c6fb5bf0313c971bb963031fb8340cbeb9928862549e8a8f0b9fb23c",
+          "source_archive_sha256": "8d85cfa90aa3c49cdbe7cae3ecf856a53b74b3b517fc754ba5b1062796e49b7f",
+          "checked_input_files": 27
+        }
+      ]
+    },
+    {
+      "lane": "native-wsl-accounting",
+      "pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+      "guest_runtime": "/home/spenser/file-native-incremental-wsl-accounting-final",
+      "inputs": {
+        "Cargo.lock": "07eca1011d8aabcf2e5508cd9b4954417dff9ab0c7a7a1accf06af719a81b330",
+        "Cargo.toml": "7e08fe410778cd11427f190e6c6991324c1a02d1c50c65a3cfd5e8d0dba6ab08",
+        "consumers/project/Cargo.toml": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e",
+        "consumers/project/src/main.rs": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173",
+        "consumers/research/Cargo.toml": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed",
+        "consumers/research/src/main.rs": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac",
+        "control/Cargo.lock": "bb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998",
+        "control/Cargo.toml": "e78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0",
+        "control/src/backend.rs": "fac529f6d41ee08eb693aa9ec3dc4d3777d16919156268b15b37c7222272b90b",
+        "control/src/disk.rs": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+        "control/src/io.rs": "9ba206a4ddf86993702aca2b0dbcdc120d510e2a5b43f71ef0c789e30703c47e",
+        "control/src/lifecycle.rs": "30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4",
+        "control/src/main.rs": "8cd6800fb18e1c5f26738f648589287a3d8fb2a217b0f4bd4d6dc17310083d57",
+        "control/src/model.rs": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10",
+        "src/api.rs": "8eddbf39e06bdf1ca5708d02c6abd9a885184576d446b23d8aa064de0c9184ff",
+        "src/baseline_model.rs": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+        "src/bounds_tests.rs": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+        "src/differential.rs": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+        "src/disk.rs": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+        "src/graph.rs": "9e47637a2d213f1d1abdbc559ae680d4f2410bc50e30624d3dd41f83133d7454",
+        "src/io.rs": "17a6a0bad6859f54793c37e6f1fc86e4cd35c86ac833dd24b5a877f4f01f6b06",
+        "src/lib.rs": "b68a60aa0da945f6f89190c19f296162b47e2ffa508eef1129cf2d8fc7a85307",
+        "src/lifetime.rs": "8e1af6732ffc1888323664bfc815896ad4c2b6f72b014948b8a5f85da1b205e7",
+        "src/main.rs": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+        "src/objects.rs": "6727e154f82334b9842f347797407bd7185ed576dd36d206fb323f0dc6c2b31c",
+        "src/projection.rs": "f984ff24194f8793c0849f0a09b2cf6a6804de1a767357cd299cf2de03c7b43b",
+        "src/store.rs": "a0d0ebae2173f6b24e687058a0cc6af7e52016bc07d7ecdeeee28400303a0c76"
+      },
+      "sessions": [
+        {
+          "session": "paired-intents/session.json",
+          "exe_sha256": "cf50f553d9b56fc591f56f1a5540c08a1b5067db7d278d9e6e5602b8964d0750",
+          "source_archive_sha256": "7b4ddff4f0089ec52f87fbf3903e881af6a5de03027faf0ea3b39b56d552fd36",
+          "checked_input_files": 27
+        },
+        {
+          "session": "replay-lifetime/session.json",
+          "exe_sha256": "cf50f553d9b56fc591f56f1a5540c08a1b5067db7d278d9e6e5602b8964d0750",
+          "source_archive_sha256": "7b4ddff4f0089ec52f87fbf3903e881af6a5de03027faf0ea3b39b56d552fd36",
+          "checked_input_files": 27
+        },
+        {
+          "session": "supplement/session.json",
+          "exe_sha256": "cf50f553d9b56fc591f56f1a5540c08a1b5067db7d278d9e6e5602b8964d0750",
+          "source_archive_sha256": "7b4ddff4f0089ec52f87fbf3903e881af6a5de03027faf0ea3b39b56d552fd36",
+          "checked_input_files": 27
+        }
+      ]
+    }
+  ],
+  "retained_native_environment": {
+    "binaries": [
+      {
+        "lane": "native-wsl-main",
+        "path": "/home/spenser/file-native-incremental-wsl-final-20261018/build/release/file-native-incremental",
+        "bytes": 2140680,
+        "sha256": "eaff134e2fb2b2ec396ce2ca6c9654fe986105b69a4f2828c7dff94796a54a36"
+      },
+      {
+        "lane": "native-wsl-main",
+        "path": "/home/spenser/file-native-incremental-wsl-final-20261018/build/release/project-consumer",
+        "bytes": 2140664,
+        "sha256": "bc8d2350f025cba68bc7f5b97a7beccec45d41e4d7d90ab5f1d2e6929dfc1f66"
+      },
+      {
+        "lane": "native-wsl-main",
+        "path": "/home/spenser/file-native-incremental-wsl-final-20261018/build/release/research-consumer",
+        "bytes": 2140664,
+        "sha256": "4aa15c7495528db7e46b8141e0b59e5633456749546e76bd540e1f6f03431f6b"
+      },
+      {
+        "lane": "native-wsl-audit",
+        "path": "/home/spenser/file-native-incremental-wsl-audit-final/build/release/file-native-incremental",
+        "bytes": 2140680,
+        "sha256": "940efba6c6fb5bf0313c971bb963031fb8340cbeb9928862549e8a8f0b9fb23c"
+      },
+      {
+        "lane": "native-wsl-audit",
+        "path": "/home/spenser/file-native-incremental-wsl-audit-final/build/release/project-consumer",
+        "bytes": 2140664,
+        "sha256": "bd13d0ce43bac44f8d5c3cddcb8c9d29d8653b61366b4417317665635c0b420a"
+      },
+      {
+        "lane": "native-wsl-audit",
+        "path": "/home/spenser/file-native-incremental-wsl-audit-final/build/release/research-consumer",
+        "bytes": 2140664,
+        "sha256": "2cc76de45e8fafec2355420f660e501c49ba518baec78b95f9bcf671b89bd5ed"
+      },
+      {
+        "lane": "native-wsl-accounting",
+        "path": "/home/spenser/file-native-incremental-wsl-accounting-final/build/release/file-native-incremental",
+        "bytes": 2140696,
+        "sha256": "cf50f553d9b56fc591f56f1a5540c08a1b5067db7d278d9e6e5602b8964d0750"
+      },
+      {
+        "lane": "native-wsl-accounting",
+        "path": "/home/spenser/file-native-incremental-wsl-accounting-final/build/release/project-consumer",
+        "bytes": 2140688,
+        "sha256": "eca578800bd6626cdb96899e4af8c4618e2e2440462ff01f62676311cc2a3740"
+      },
+      {
+        "lane": "native-wsl-accounting",
+        "path": "/home/spenser/file-native-incremental-wsl-accounting-final/build/release/research-consumer",
+        "bytes": 2140688,
+        "sha256": "8aae9d22e49ac81c642bcb9366eb2f2bc7587d9a462dd9fd7f48eafb40375dc8"
+      }
+    ],
+    "uname": "Linux SpensersDesktop 6.18.54.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 19:13:07 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n",
+    "filesystem": "Filesystem     Type  1K-blocks      Used Available Use% Mounted on\n/dev/sdd       ext4 1055762868 497145880 504913516  50% /\n",
+    "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\n",
+    "python": "Python 3.12.3\n"
+  },
+  "qualification": "Every exported session Rust/Cargo input listed here equals its named Git pin; source ZIPs are working snapshots at controller creation. Completed build/controller records establish ordering. Session executable hashes also match retained guest binaries rehashed after work. Captured inputs include the separate control crate and are not all compiled into each binary. This is source/binary association, not reproducible compilation or historical toolchain reconstruction."
+}

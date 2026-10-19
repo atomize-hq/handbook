@@ -1,0 +1,135 @@
+{
+  "kind": "ledger-only-lossless-transport-not-selected-history-proof",
+  "source": "C:\\file-native-incremental-20261018\\history-common-pin\\store\\expected-ledger.jsonl",
+  "selected": {
+    "publication": "publication-74796-1792371048916760700-13",
+    "digest": "9b80c0b54b15af6457ee50290f266684bed6c06223cbe105a2654da7bb368546"
+  },
+  "raw_bytes": 246560316,
+  "raw_sha256": "6ab8bef045580f7642b0f404cf58ab7cb8211badfeb68d258bc62e984e02af18",
+  "dense_rows": 100000,
+  "chunks": [
+    {
+      "path": "part-000.bin.gz",
+      "offset": 0,
+      "raw_bytes": 16777216,
+      "raw_sha256": "b06168f38247ab60765b088d505b92d1f21181c2d680110f02141686b3207784",
+      "bytes": 3755120,
+      "sha256": "1f7116954bdbf94a0880f9bc883ece6ae59d624681d9aa876c205b6013c917d5"
+    },
+    {
+      "path": "part-001.bin.gz",
+      "offset": 16777216,
+      "raw_bytes": 16777216,
+      "raw_sha256": "08a145f9f85934b2ae6953bfb99a9cffbb4ebceb9b50cb9ee666eefc7dfd2e17",
+      "bytes": 3812652,
+      "sha256": "3bc3e0d549548a37bf2aaf8a11ba4ca40f4d1608868a833c0ca913355c8cbfaf"
+    },
+    {
+      "path": "part-002.bin.gz",
+      "offset": 33554432,
+      "raw_bytes": 16777216,
+      "raw_sha256": "26b63f31916c52c557df47fad9acada58d8dffa193fb98b2680af8f51819e118",
+      "bytes": 3921819,
+      "sha256": "d8cda58336fa84d413354645ae268ca9c850ba3e2ece8bd75be89925ab655f11"
+    },
+    {
+      "path": "part-003.bin.gz",
+      "offset": 50331648,
+      "raw_bytes": 16777216,
+      "raw_sha256": "70195aeb7d6a8511acbb2dbf72291726a6d0669aaddd0ba2fdfd18db43ef0d83",
+      "bytes": 3977788,
+      "sha256": "9a248613f7faed0a32477f36131fef9273128e8b72d53015fc22fd1431da0f91"
+    },
+    {
+      "path": "part-004.bin.gz",
+      "offset": 67108864,
+      "raw_bytes": 16777216,
+      "raw_sha256": "d9945d8c81c2feb81e477e36c9ed0d74bd3bafc38145f55e3d85b94f92d26491",
+      "bytes": 4021259,
+      "sha256": "a5a71d44e466bcf4b885fa00c9e228da1c8e5c489cfcb2e4d49e9e4c5297ebf9"
+    },
+    {
+      "path": "part-005.bin.gz",
+      "offset": 83886080,
+      "raw_bytes": 16777216,
+      "raw_sha256": "7969bad8e1b0e7225784b618c554e6d180a8456ac0fde6c5047403f796f0d6e6",
+      "bytes": 4088757,
+      "sha256": "63bd7b860a2aa41b57f03e1e74d16768fef987028a9c32382b714090d290456b"
+    },
+    {
+      "path": "part-006.bin.gz",
+      "offset": 100663296,
+      "raw_bytes": 16777216,
+      "raw_sha256": "ce8b39395fa6aabfadb66069a892ea42cbb67edb07fa9ecdecca29f2709f50bb",
+      "bytes": 4152917,
+      "sha256": "444cc94084a3cb14878b197fd3f6ce999435b6e373faa42fe9a9a4ae0876b559"
+    },
+    {
+      "path": "part-007.bin.gz",
+      "offset": 117440512,
+      "raw_bytes": 16777216,
+      "raw_sha256": "9244580e6ba581854988e1d1f3ae009c1e89624d1fb68089a28133df03e016fc",
+      "bytes": 4149092,
+      "sha256": "920b26ba327ebbd8e04670c29c64945448a44a04b0eae8c5041b6f5b7d86c591"
+    },
+    {
+      "path": "part-008.bin.gz",
+      "offset": 134217728,
+      "raw_bytes": 16777216,
+      "raw_sha256": "0322ddd2469b5987f2065c7d206c1a1e9c37afe7aa344a80686fa5dc7c44d076",
+      "bytes": 4145551,
+      "sha256": "67c88a337ab13087e5d1186c0a2ace8cd0407e45139aa4f2452038408713e1e2"
+    },
+    {
+      "path": "part-009.bin.gz",
+      "offset": 150994944,
+      "raw_bytes": 16777216,
+      "raw_sha256": "300d8885a69e74c8e258d57124836e0f96daa179b7f3af9ff25bf5f37658f9b9",
+      "bytes": 4138357,
+      "sha256": "6ccf2e5341027f7c3a8001ff1fe40ffafcb94c6c5952776dff3707d45719d095"
+    },
+    {
+      "path": "part-010.bin.gz",
+      "offset": 167772160,
+      "raw_bytes": 16777216,
+      "raw_sha256": "e7c547f90ad47476633ea5ee697a0aec3431a8e1464363815232fe49b5b9ff40",
+      "bytes": 4132758,
+      "sha256": "dbf24c26fb33439271321e92dd28408cf99cbce0b050760d60a0976a09ebe3b9"
+    },
+    {
+      "path": "part-011.bin.gz",
+      "offset": 184549376,
+      "raw_bytes": 16777216,
+      "raw_sha256": "c78f9ac21a2b1c138db4e54e5ed85e7a4106860e595774aa94b37732882e7ac4",
+      "bytes": 4126748,
+      "sha256": "602ff8484c0f3927ef1211fe828fd68410417a06d135b37c56c1407d95a9b2a8"
+    },
+    {
+      "path": "part-012.bin.gz",
+      "offset": 201326592,
+      "raw_bytes": 16777216,
+      "raw_sha256": "080a922f961d0509917ed31c5241d2a1b9f96a1268d7c4aa76353ff5888a919c",
+      "bytes": 4126059,
+      "sha256": "327778b5b804c52e3e20284d12f4049f63bd984bbc6060af18154d037ae07fd1"
+    },
+    {
+      "path": "part-013.bin.gz",
+      "offset": 218103808,
+      "raw_bytes": 16777216,
+      "raw_sha256": "1bb6c8dfc4a7570a734235ce803738c487864379589512ffce3df5a0f6740cd7",
+      "bytes": 4127117,
+      "sha256": "0f927959aa4ac2564916e6bad5cc3e01982716c50635b3d4c4a7d323e188af6d"
+    },
+    {
+      "path": "part-014.bin.gz",
+      "offset": 234881024,
+      "raw_bytes": 11679292,
+      "raw_sha256": "4e40ed631654ae4f945965cb6f798a59580d385460af086d3ba6da09c9ad0f4f",
+      "bytes": 2872572,
+      "sha256": "cd184dc22e8a31eb2e12d36a26498def1514a5d01113ae90c45b7ed061e6b321"
+    }
+  ],
+  "seconds": 6.73399999999674,
+  "qualification": "Exact dense expected-ledger bytes, verified through all compressed chunks and an independent reread. This does not substitute for the censored full proof export, selected-chain verification or a complete restartable store. Historical independent state checks remain separate raw observations. Caller enforces an actual300-second process-tree cap."
+}

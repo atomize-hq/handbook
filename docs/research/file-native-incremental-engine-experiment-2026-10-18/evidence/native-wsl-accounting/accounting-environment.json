@@ -1,0 +1,9 @@
+{
+  "pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+  "source_tar_sha256": "7e51fed2dcb487afdbbe17cbd1eb77cf7efba8c4262082c790fb83a0b24ec7fd",
+  "exe_sha256": "cf50f553d9b56fc591f56f1a5540c08a1b5067db7d278d9e6e5602b8964d0750",
+  "outer_exit": 0,
+  "work_deadline_epoch": 1792376397.137216,
+  "elapsed_including_export": 59.5497465133667,
+  "free_bytes": 517048840192
+}

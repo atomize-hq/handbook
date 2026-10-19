@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\verify_wsl_sources.py",
+    "--scratch",
+    "C:\\file-native-incremental-20261018",
+    "--output",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\evidence\\wsl-source-associations-final.json"
+  ],
+  "exit": 0,
+  "censored": false,
+  "cap_seconds": 300,
+  "started_epoch": 1792375002.7384539,
+  "deadline_epoch": 1792378745.5431294,
+  "seconds": 4.9530556201934814
+}

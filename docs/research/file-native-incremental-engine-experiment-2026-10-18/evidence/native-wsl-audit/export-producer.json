@@ -1,0 +1,7 @@
+{
+  "epoch": 1792374968.074498,
+  "source_root": "/home/spenser/file-native-incremental-wsl-audit-final",
+  "packer_sha256": "53a68a3f76090c8bab84785e948f40eec2c87cb0130b17fa44dadfa1e901e492",
+  "matching_known_processes": [],
+  "qualification": "Post-work raw export after all host queue completion records. Process scan covers known engine basenames and argv containing absolute owned paths, including embedded python -c code; it is not universal supervisor detection. No engine is launched."
+}

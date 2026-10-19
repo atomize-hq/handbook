@@ -1,0 +1,179 @@
+{
+  "verified": true,
+  "manifests": [
+    {
+      "manifest": "native-linux/manifest.json",
+      "files": 72,
+      "events": 730,
+      "censors": 0,
+      "exits": {
+        "0": 607,
+        "86": 53,
+        "2": 70
+      },
+      "verified_source_archives": 10,
+      "sessions_without_compiled_source_archive": []
+    },
+    {
+      "manifest": "native-linux-accounting/manifest.json",
+      "files": 23,
+      "events": 181,
+      "censors": 0,
+      "exits": {
+        "0": 149,
+        "2": 19,
+        "86": 13
+      },
+      "verified_source_archives": 3,
+      "sessions_without_compiled_source_archive": []
+    },
+    {
+      "manifest": "native-linux-audit/manifest.json",
+      "files": 13,
+      "events": 42,
+      "censors": 0,
+      "exits": {
+        "0": 24,
+        "2": 18
+      },
+      "verified_source_archives": 1,
+      "sessions_without_compiled_source_archive": []
+    },
+    {
+      "manifest": "native-linux-extra/namespace-before/manifest.json",
+      "files": 4,
+      "events": 5,
+      "censors": 0,
+      "exits": {
+        "0": 4,
+        "2": 1
+      },
+      "verified_source_archives": 1,
+      "sessions_without_compiled_source_archive": []
+    },
+    {
+      "manifest": "native-linux-extra/old-oracle/manifest.json",
+      "files": 4,
+      "events": 6,
+      "censors": 0,
+      "exits": {
+        "0": 6
+      },
+      "verified_source_archives": 1,
+      "sessions_without_compiled_source_archive": []
+    },
+    {
+      "manifest": "native-linux-extra/recipe/manifest.json",
+      "files": 4,
+      "events": 6,
+      "censors": 0,
+      "exits": {
+        "0": 6
+      },
+      "verified_source_archives": 1,
+      "sessions_without_compiled_source_archive": []
+    },
+    {
+      "manifest": "native-linux-extra/replay-before/manifest.json",
+      "files": 4,
+      "events": 5,
+      "censors": 0,
+      "exits": {
+        "0": 4,
+        "2": 1
+      },
+      "verified_source_archives": 1,
+      "sessions_without_compiled_source_archive": []
+    },
+    {
+      "manifest": "native-linux-replay/manifest.json",
+      "files": 37,
+      "events": 610,
+      "censors": 0,
+      "exits": {
+        "0": 504,
+        "2": 70,
+        "86": 36
+      },
+      "verified_source_archives": 5,
+      "sessions_without_compiled_source_archive": []
+    },
+    {
+      "manifest": "native-linux-rootfix/manifest.json",
+      "files": 22,
+      "events": 570,
+      "censors": 0,
+      "exits": {
+        "0": 466,
+        "2": 68,
+        "86": 36
+      },
+      "verified_source_archives": 4,
+      "sessions_without_compiled_source_archive": []
+    },
+    {
+      "manifest": "native-wsl-accounting/manifest.json",
+      "files": 23,
+      "events": 181,
+      "censors": 0,
+      "exits": {
+        "0": 149,
+        "2": 19,
+        "86": 13
+      },
+      "verified_source_archives": 3,
+      "sessions_without_compiled_source_archive": []
+    },
+    {
+      "manifest": "native-wsl-audit/manifest.json",
+      "files": 12,
+      "events": 42,
+      "censors": 0,
+      "exits": {
+        "0": 24,
+        "2": 18
+      },
+      "verified_source_archives": 1,
+      "sessions_without_compiled_source_archive": []
+    },
+    {
+      "manifest": "native-wsl-main/manifest.json",
+      "files": 74,
+      "events": 771,
+      "censors": 0,
+      "exits": {
+        "0": 647,
+        "86": 53,
+        "2": 71
+      },
+      "verified_source_archives": 11,
+      "sessions_without_compiled_source_archive": []
+    },
+    {
+      "manifest": "windows-raw-final/manifest.json",
+      "files": 364,
+      "events": 7396,
+      "censors": 2,
+      "exits": {
+        "0": 6327,
+        "2": 670,
+        "86": 397,
+        "1": 2
+      },
+      "verified_source_archives": 46,
+      "sessions_without_compiled_source_archive": [
+        "checks-dev-v1",
+        "checks-dev-v2",
+        "checks-dev-v3",
+        "checks-pin-candidate",
+        "codec-windows-v1",
+        "differential-v1",
+        "supplement-nativepath-candidate",
+        "supplement-pin-candidate",
+        "supplement-v1",
+        "supplement-v2"
+      ]
+    }
+  ],
+  "qualification": "Checks exported lossless evidence manifests; native Mac uses its separate portable verifier, and history proof capsules use pack_history verification. Missing early-development source archives remain unavailable, not reconstructed."
+}

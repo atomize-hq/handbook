@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "node",
+    "C:/Users/spmcc/Documents/__Project_Code/handbook/.gitnexus/run.cjs",
+    "detect-changes",
+    "--scope",
+    "staged",
+    "--repo",
+    "C:/Users/spmcc/Documents/__Project_Code/handbook"
+  ],
+  "cwd": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook",
+  "started_epoch": 1792375574.8508494,
+  "exit": 0,
+  "qualification": "Pre-inventory closing staged check. Decoded text is display only; raw base64/length/SHA bind exact diagnostic output. Stale/degraded index has no authoritative experiment coverage. No indexed overlap is unknown impact, not a clean tree. Final staged check is repeated after inventory/receipt addition.",
+  "stdout": "Diff touched 532 file(s) but no indexed symbols overlap those hunks \u2014 not a clean tree.\n",
+  "stdout_b64": "RGlmZiB0b3VjaGVkIDUzMiBmaWxlKHMpIGJ1dCBubyBpbmRleGVkIHN5bWJvbHMgb3ZlcmxhcCB0aG9zZSBodW5rcyDigJQgbm90IGEgY2xlYW4gdHJlZS4K",
+  "stdout_bytes": 90,
+  "stdout_sha256": "274ffd55847f90ca5e0890e24ef38727d0ede9229570fc2006141579be3641a5",
+  "stderr": ".../node_modules/gitnexus                | \u2009WARN\u2009 Unsupported engine: wanted: {\"node\":\"^22.18.0 || >=24.11.0\"} (current: {\"node\":\"v22.15.0\",\"pnpm\":\"10.15.1\"})\n\n  GitNexus Detect Changes (1.6.12)\n{\"level\":50,\"time\":1792375576658,\"name\":\"gitnexus\",\"msg\":\"GitNexus: \u26a0\ufe0f Index for \\\"handbook\\\" was built at C:\\\\Users\\\\spmcc\\\\Documents\\\\__Project_Code\\\\handbook; your cwd (C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-incremental-20261018\\\\handbook) is a sibling clone that is 52 commits ahead of the indexed commit. Results may be stale or incorrect \u2014 re-run `gitnexus analyze` to refresh the index.\"}\n",
+  "stderr_b64": "Li4uL25vZGVfbW9kdWxlcy9naXRuZXh1cyAgICAgICAgICAgICAgICB8IOKAiVdBUk7igIkgVW5zdXBwb3J0ZWQgZW5naW5lOiB3YW50ZWQ6IHsibm9kZSI6Il4yMi4xOC4wIHx8ID49MjQuMTEuMCJ9IChjdXJyZW50OiB7Im5vZGUiOiJ2MjIuMTUuMCIsInBucG0iOiIxMC4xNS4xIn0pCgogIEdpdE5leHVzIERldGVjdCBDaGFuZ2VzICgxLjYuMTIpCnsibGV2ZWwiOjUwLCJ0aW1lIjoxNzkyMzc1NTc2NjU4LCJuYW1lIjoiZ2l0bmV4dXMiLCJtc2ciOiJHaXROZXh1czog4pqg77iPIEluZGV4IGZvciBcImhhbmRib29rXCIgd2FzIGJ1aWx0IGF0IEM6XFxVc2Vyc1xcc3BtY2NcXERvY3VtZW50c1xcX19Qcm9qZWN0X0NvZGVcXGhhbmRib29rOyB5b3VyIGN3ZCAoQzpcXFVzZXJzXFxzcG1jY1xcLmNvZGV4XFx3b3JrdHJlZXNcXGZpbGUtbmF0aXZlLWluY3JlbWVudGFsLTIwMjYxMDE4XFxoYW5kYm9vaykgaXMgYSBzaWJsaW5nIGNsb25lIHRoYXQgaXMgNTIgY29tbWl0cyBhaGVhZCBvZiB0aGUgaW5kZXhlZCBjb21taXQuIFJlc3VsdHMgbWF5IGJlIHN0YWxlIG9yIGluY29ycmVjdCDigJQgcmUtcnVuIGBnaXRuZXh1cyBhbmFseXplYCB0byByZWZyZXNoIHRoZSBpbmRleC4ifQo=",
+  "stderr_bytes": 611,
+  "stderr_sha256": "3bb3ba7a8c640c1111a6107f403113e6fd414a133a5dc87053f930600e58a41e"
+}

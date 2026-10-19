@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\pack_evidence.py",
+    "--source",
+    "C:\\file-native-incremental-20261018",
+    "--destination",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\evidence\\windows-raw-final"
+  ],
+  "exit": 0,
+  "censored": false,
+  "cap_seconds": 300,
+  "started_epoch": 1792375030.496732,
+  "deadline_epoch": 1792378745.5431294,
+  "seconds": 5.931408882141113
+}

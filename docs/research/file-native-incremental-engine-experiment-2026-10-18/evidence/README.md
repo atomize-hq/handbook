@@ -17,6 +17,7 @@ and [independent review](../review.md). The accepted brief and reconciliation in
 | [Aggregate projection partial result](independent-projection-final.json) | Four completed matrix roots; original 900-second censor while visiting A100k remains |
 | [Calibration continuation](calibration-projection-continuation.json), [controller](calibration-projection-continuation-controller.json), [prospective bound](calibration-projection-amendment.md) | Separate two-root check; no A100k retry |
 | [Selected-root census](selected-store-census-final.json), [unselected B census](unselected-B-census-final.json) | File lengths/categories, owner charges and active reservations kept distinct |
+| [Corrected A100k strict audit](strict-large-audit-derived.json) | Completed 7e audit; exact event hash and counters, separately qualified from the independent-renderer censor |
 
 Historical `*-progress*`, `*-development*` and `*-small*` artifacts remain separate
 observations. Their filenames do not substitute for source pins or controller
@@ -27,8 +28,20 @@ controller completed.
 
 The native Linux directories retain main, correction and accounting capsules.
 Mac exports use [their own evidence and verifier](../native-macos/), including
-source TARs and session ZIPs. Windows and WSL final lossless exports are described
-in the completed report when their closeout queues finish.
+source TARs and session ZIPs. [Windows](windows-raw-final/manifest.json) and
+WSL [main](native-wsl-main/manifest.json), [audit](native-wsl-audit/manifest.json)
+and [accounting](native-wsl-accounting/manifest.json) exports are complete.
+[Final transport verification](transport-verification-final.json) checks all 13
+lossless manifests; Mac's latest separate result is
+[the accounting-inclusive verification](mac-transport-accounting-verification.json).
+
+The [full proof export](history-proof-final/) was censored and has no completed
+manifest; its partial gzip is not a restorable capsule. The separately bounded
+[ledger-only transport](history-ledger-transport-final/manifest.json) preserves all
+100,000 receipts through exact-byte/dense-row checks. Dependent restoration and
+long-history collection were unperformed. [Final dispositions](final-dispositions.json)
+record that distinction. [Resource census](final-resources.json) separately records
+actual file-length sums, reserves and the stated process-filter scope.
 
 Within a lossless export, `manifest.json` records original length/SHA-256 and
 compressed length/SHA-256 for each `.gz` file. Decompression yields the original
@@ -58,6 +71,7 @@ Run from this standalone experiment directory using an explicit Python executabl
 ```bash
 python3 verify_exports.py --root evidence --output /fresh/transport-verification.json
 python3 native-macos/helpers/verify_export.py native-macos
+python3 index_evidence.py --output evidence/inventory-final.json --verify
 ```
 
 The generic verifier checks lossless manifests, event bytes/types and
@@ -69,3 +83,5 @@ fresh restoration completed, and any retirement-related proof limitations.
 The final inventory is a byte/membership snapshot of standalone source, documents
 and retained evidence, excluding itself, Git metadata, caches and build targets.
 It authenticates recorded bytes, not semantic conclusions or missing observations.
+The local `.gitattributes` disables checkout newline conversion in this standalone
+directory so these hashes retain their meaning across exact Git materialization.

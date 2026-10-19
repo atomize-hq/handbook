@@ -1,0 +1,26 @@
+{
+  "rows": [
+    {
+      "transport": "C:\\file-native-incremental-20261018\\native-wsl-main-evidence.tar.gz",
+      "bytes": 3443089,
+      "sha256": "f0d945f607c7448d70eae253058de54d6fe8062a39a61dd258d158a600f30424",
+      "members": 89,
+      "extracted_root": "native-wsl-main"
+    },
+    {
+      "transport": "C:\\file-native-incremental-20261018\\native-wsl-audit-evidence.tar.gz",
+      "bytes": 315097,
+      "sha256": "3c4ce60f7c411a3d09edd453ca2394f3d5c771b0f09dcac114a786793f952010",
+      "members": 16,
+      "extracted_root": "native-wsl-audit"
+    },
+    {
+      "transport": "C:\\file-native-incremental-20261018\\native-wsl-accounting-evidence.tar.gz",
+      "bytes": 1183946,
+      "sha256": "16a9d0d19dac8917b27bf469ef7ae3acadffc48832ef2e3f824a524c1366d5fc",
+      "members": 29,
+      "extracted_root": "native-wsl-accounting"
+    }
+  ],
+  "qualification": "Closed guest transport TARs imported into fresh owned destinations after path/type checks; main/audit hashes match successful guest replies. Accounting bytes match its successful guest reply; its closed TAR hash is recorded here. Generic lossless manifest/event verification and source/binary association are separate."
+}

@@ -2,7 +2,10 @@
 
 Core pin: `5a65a2155f9eb297d2cbb1b7c900fa749629605c`. Earlier measurements keep
 their own source/executable pins; see [the report](report.md) and
-[independent review](review.md). Final proof/collection and native exports are pending.
+[independent review](review.md). The full proof export was censored; dependent
+restoration/collection were unperformed. Final native/Windows lossless exports
+and source associations passed. The final resource census passed with all known
+controllers completed and no process matching its stated filters.
 
 ## Executed final correctness
 
@@ -25,7 +28,7 @@ observations, not a claim that every suite was repeated on the latest pin.
 | Native Mac targeted final | 610 | Same affected suites; zero censors; original deadline unchanged |
 | WSL common capsule and companions | 771 | 647 exit0, 71 expected exit2, 53 injected exit86; zero censors; locked tests/build passed |
 | Windows/Linux/Mac/WSL strict audit correction | 42 each | Each has 18 damaged-evidence refusals without repair and 18 restored audits; zero censors |
-| Windows/Linux/Mac paired-intent accounting correction | 181 each | 32 paired A/B, 109 causal supplement, 40 replay/GC; locked tests; zero censors |
+| Windows/Linux/Mac/WSL paired-intent accounting correction | 181 each | 32 paired A/B, 109 causal supplement, 40 replay/GC; locked tests; zero censors |
 
 Each response is an observation, not an independent trial or assertion count.
 Both workspace unit tests passed. Original boundary exits remain exits even when
@@ -40,7 +43,7 @@ and smoke cases plus replay, namespace, deep and selected-once Bash companions;
 its main controller's test/build/native steps all completed successfully in
 127.428 seconds, with companions measured separately. Do not infer a final 1k
 native Linux/Mac rerun from their affected-only suites. WSL's later correction
-followups and lossless final evidence export remain separate observations.
+followups and lossless final evidence export are separately completed observations.
 
 ## Executed growth and history observations
 
@@ -49,15 +52,21 @@ followups and lossless final evidence export remain separate observations.
 | Actual history depths 1k/10k/100k | 7ac; independent chain, original-result, index, header-transition and final recipe checks passed |
 | Checkpoint at H100k | 7ac; 100,002 publications independently verified after checkpoint |
 | Reply exit86 beneath 1,000 real successors | 7ac; original outcome exact, 101,003 publications independently verified |
-| Original history lifecycle setup | Exit 1 after completed checks: `refused:disposable-root`; preserved, separate continuation pending |
+| Original history lifecycle setup | Exit 1 after completed checks: `refused:disposable-root`; preserved |
+| Full history proof export | Censored at 900.445 s; exact partial archive retained, no completed manifest |
+| Fresh restore and long-history retirement/collection | Unperformed because full export failed; original root remains unmoved/unretired |
+| Ledger-only lossless transport | Passed in 6.804 s; 246,560,316 bytes, 100,000 dense rows, 15 chunks; not a selected-history proof |
+| Final selected-root geometry | Passed in 5.162 s across eight selected roots; physical/tombstone keys and per-role geometry retained |
 | Fresh N1k/10k, H2/3/4, genuine 1/8/64 imports | 7e; 344.078-second calibration passed, including audits and independent source checks |
 | Controlled 1/2/4/8 contention | 7e; all 15 requests accepted in 26 attempts, 347.781-second trace; no censor |
 | Synthetic pessimistic byte ceiling | 7e; one real reservation inflated to 32 GiB, refusal/restore/reclamation passed; no 32 GiB physical allocation |
+| Corrected strict audit at N100k | 7e; passed, 363.292-second controller call, 1,068,140 object-read calls; independent projection 900 censor remains |
 
 The original A100k/B100k initialization censors retain their raw outcomes. A's
-separate resume completed; B remained unselected. Full proof export/restoration,
-final selected-root storage censuses and long-history collection are distinct
-queued observations. See the report for exact timings and scope qualifications.
+separate resume completed; B remained unselected. Final selected-root storage
+censuses completed. The full-proof censor and unperformed dependent cases remain
+distinct from the completed live-selection/state checks. See the report for exact
+timings and scope qualifications.
 
 ## Fresh-path commands
 
@@ -129,7 +138,10 @@ python3 pack_history.py --verify /evidence/history-proof --restore /fresh/proof-
 This proof does not contain every mutable view/generation/quota/intermediate file
 required to restart the engine. It establishes its explicitly recorded evidence
 scope. A cross-host H82 sample has already restored and independently verified 417
-files; final durable-history proof is a separate artifact.
+files. The final full durable-history export was censored; its partial archive
+cannot be restored or treated as that completed H82 sample. The separately
+exported expected ledger is raw receipt transport with exact-byte and dense-row
+checks, not a replacement full selected-history proof.
 
 Mac's portable verifier runs from this experiment directory:
 
@@ -141,3 +153,27 @@ It verifies all source TARs/session ZIPs and response/binary-hash associations,
 including the final 610-response lane. No reproducible build or absent physical
 executable verification is implied. Rehashing retained native executables is
 separate from checking the recorded association.
+
+Final generic transport verification passed 13 lossless manifests, including the
+three WSL exports and final Windows capture. The latter retains 7,396 responses
+from development and final work, including original failures and two engine-call
+censors; it is not a claim that all development cases passed. Projection/proof
+outer censors are also retained in their controller receipts. Ten early Windows
+sessions lack original compiler-input captures; no archive was reconstructed.
+Mac's separate completed verification covers 8 lanes, 23 session ZIPs and 8 source
+TARs. WSL's final association check verified 27 Rust/Cargo files per session across
+15 sessions against their exact 7ac/7e/5a Git pins, and rehashed 9 retained guest
+executables. Data/builds are on guest ext4, not the Windows transport mount.
+
+See [final transport verification](evidence/transport-verification-final.json),
+[WSL source associations](evidence/wsl-source-associations-final.json),
+[controller dispositions](evidence/final-dispositions.json) and the
+[evidence guide](evidence/README.md). Closing controller bytes written after the
+main raw capture, including extensionless output, are copied separately under
+`evidence/closeout-controller-raw/`.
+
+The final inventory is checked for exact file membership, lengths and SHA-256,
+then compared with every corresponding staged Git blob. Local `.gitattributes`
+disables newline conversion only in this standalone directory. Rust/Cargo inputs
+remain byte-identical to the final 5a core, and the original shared checkout's
+tracked files and baseline HEAD remain unchanged.

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\pack_ledger.py",
+    "--root",
+    "C:\\file-native-incremental-20261018\\history-common-pin\\store",
+    "--destination",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\evidence\\history-ledger-transport-final",
+    "--deadline-epoch",
+    "1792378745.5431294"
+  ],
+  "started_epoch": 1792374800.9351404,
+  "deadline_epoch": 1792378745.5431294,
+  "cap_seconds": 300,
+  "exit": 0,
+  "censored": false,
+  "seconds": 6.804003715515137
+}

@@ -1,0 +1,60 @@
+{
+  "kind": "closing-controller-byte-copies",
+  "files": [
+    {
+      "source": "calibration-projection-continuation/stdout",
+      "path": "calibration-projection-continuation/stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "calibration-projection-continuation/stderr",
+      "path": "calibration-projection-continuation/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "calibration-projection-continuation/completed.json",
+      "path": "calibration-projection-continuation/completed.json",
+      "bytes": 890,
+      "sha256": "1a5def224d7ed968d23a23cc9e52d3c473d8476c58cf0d92a6feb90aac1661fb"
+    },
+    {
+      "source": "windows-raw-export-final/export.stdout",
+      "path": "windows-raw-export-final/export.stdout",
+      "bytes": 32,
+      "sha256": "baa1114e728bd188f7df17c9ae0a5ec99b2efb1f95b237f8b0b17932f2cf877d"
+    },
+    {
+      "source": "windows-raw-export-final/export.stderr",
+      "path": "windows-raw-export-final/export.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "windows-raw-export-final/completed.json",
+      "path": "windows-raw-export-final/completed.json",
+      "bytes": 714,
+      "sha256": "7727b47a1a71c37447baa0b63f65f17f557c17342d4257f2a86ca710b7951a17"
+    },
+    {
+      "source": "wsl-source-verification-final/verify.stdout",
+      "path": "wsl-source-verification-final/verify.stdout",
+      "bytes": 54,
+      "sha256": "0f59c680df344d323c39f8749849eb1545a715067d78fdb71897af0d739ba43f"
+    },
+    {
+      "source": "wsl-source-verification-final/verify.stderr",
+      "path": "wsl-source-verification-final/verify.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "wsl-source-verification-final/completed.json",
+      "path": "wsl-source-verification-final/completed.json",
+      "bytes": 734,
+      "sha256": "bcf864a722af19a2ad303c615ec6079965ce901eb15f3a5bb5c4afd5b0b251b1"
+    }
+  ],
+  "qualification": "Exact copies after each closing controller stopped. Preserves extensionless continuation output and the exporter/source-verifier receipts written after the main raw capture. The earlier raw manifest preserves its captured bytes at that time."
+}

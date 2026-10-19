@@ -1,7 +1,7 @@
 # Incremental file-native engine experiment
 
-Status: final integrated observations are still running. This draft must not be
-read as a completion or production-readiness claim.
+Status: completed bounded experiment, with original failures/censors and
+unperformed dependent cases retained. This is not a production-readiness claim.
 
 This experiment implements a bounded compact COW core, declared constraint
 indexes, predecessor-only history indexes, durable incremental A refresh,
@@ -24,8 +24,8 @@ migration, public API or Dolt adoption is selected.
 | Validation | Final-batch overlay; D/E/R/P/L indexes, exact count/cost, explicit full fallback; 2,000 seeded differential batches and complete audits | Affected-work approach implemented and testable. A checked base is required; unrelated corruption is found by explicit audit, not every small commit. |
 | Metadata | C1 bounded tagged pages replace JSON numeric byte arrays in an otherwise unchanged control | Logical maps and observed structural packing agree in this control; encoding reduces bytes. Byte bounds can change packing in other workloads. No production encoding approval follows. |
 | History | Current head directly represented; predecessor-only membership/outcome maps; original result bodies separate; verified checkpoint successor | Actual durable-depth results appear below. No chain walk on normal open/resolve; audit/checkpoint/GC remain explicitly full operations. |
-| Rendering | Per-document navigation and indexed change ranges; persisted target/prior pending plans and stable divergence backups | Small unrelated A edits can update affected paths. A may lag or mix until completion; full view audit remains separate. B still copies/verifies complete independent generations. |
-| Lifecycle | Pessimistic reservations, selected ownership transfer, reader/pin/candidate/pending roots, typed retirement | Two real GC defects required corrections and are retained as failures. Final eligible preparations include every deterministic replay dependency. This complexity needs continued scrutiny before adoption. |
+| Rendering | Per-document navigation and indexed change ranges; persisted target/prior pending plans and stable divergence backups | Small unrelated A edits can update affected paths. A may lag or mix until completion. Independent 1k/10k checks passed; A100k renderer check was censored. B still copies/verifies complete independent generations. |
+| Lifecycle | Pessimistic reservations, selected ownership transfer, reader/pin/candidate/pending roots, typed retirement | Two real GC defects required corrections. Focused corrected cases passed; long-history GC was unperformed after the full-proof export censor. Final eligible preparations include deterministic replay dependencies. This complexity needs continued scrutiny before adoption. |
 | Library | Store/Snapshot/Transaction/private Prepared; typed outcomes; two separately linked concrete consumers | Demonstrates a narrow shared core and explicit projection/packet capabilities. No general plugin ABI or public compatibility promise. |
 
 [Design and scope](design-and-scope.md), [private protocol](protocol.md) and
@@ -73,6 +73,11 @@ preparing reservation of 30,067,108,864 conservative bytes. Its registry's
 `used=0` is not a physical-storage measurement; the full allowance remains charged.
 It has not been implicitly abandoned to free quota. Actual file-length census,
 active reserved bytes and permanent publication ownership are separate quantities.
+The independently bound B100k process sample records 360.547 seconds of CPU and
+384,688,128 peak working-set bytes; the original controller censor remains
+2,418.539 seconds. [Resource binding](evidence/windows-B100k-resource-binding.json)
+states the reservation/PID/lifetime association used for that otherwise unselected
+process.
 
 Original requested imports 1/8/64 contained 1/7/56 genuinely different sources;
 overlapping IDs reused exact bytes. Corrected `genuine-*` batches use separate
@@ -100,7 +105,12 @@ invocation and touches exactly the listed number of changed source paths:
 | 100k | 64 | 919.755 ms | 286.008 ms | 128 / 1,990 | 10,606,617 / 2,972,437 bytes |
 
 These calls do not load all 100k document headers. Full A100k audit separately
-took 89.900 seconds on `7ac70f9`; its corrected preflight audit is a later check.
+took 89.900 seconds on `7ac70f9`. The later corrected `7e00d22` strict audit passed
+in 363.292 seconds per controller call (363.524-second enclosing wrapper), with
+1,068,140 object-read calls, 4,686,559,902 metadata bytes and 2,567,442,542 payload
+bytes read. These repeated verification reads are not unique stored bytes or
+physical I/O. [Exact derived counters](evidence/strict-large-audit-derived.json)
+remain separate from the independent projection censor below.
 Fresh N1k/10k roots avoid the reused medium root's older contention/incoming-build
 history. Their audits and independent selected-chain/source checks passed.
 The 7e change affects audit preflight; these mixed-pin observations still do not
@@ -183,6 +193,11 @@ ledger counters provide append work. Fresh process does not imply device-cold ca
 observer started after A100k recovery captures complete-process CPU and peak
 working set for observed later processes; short processes may be missed. No
 retrospective CPU values are inferred. Missing/censored engine clocks are unavailable, not zero.
+The final identity-checked join binds 97 of 7,396 captured Windows calls; unmatched
+calls have unavailable sampled CPU/peak values. Both observers stopped with no
+tracked live processes. [Final process bindings](evidence/windows-resource-bindings-final.json)
+retain exact observer-line bytes, executable hashes and checked lifetimes. These
+sampled complete-process clocks are distinct from engine-operation clocks.
 
 The API names `page_reads` and `unique_pages` count immutable-object read calls
 and distinct read IDs, including indirect values and verification of existing
@@ -194,12 +209,28 @@ objects after checking selected evidence; whole-store censuses include them.
 ## Real durable history
 
 The bounded 100,000-selection tier completed without append censoring and passed
-the running harness's independent verification: 100,001 publications including
+the captured harness's independent verification: 100,001 publications including
 initialization, 100,000 dense ledger receipts, exact predecessor membership/outcome
 maps and original results, header transitions and final graph/index/source recipe.
 The mandatory 10,000 depth passed the same checks earlier. No structural fixture
-or bulk chain is substituted for live commits. Final portable-proof export and
-fresh restoration remain separate pending observations.
+or bulk chain is substituted for live commits. The separate portable-proof export
+was censored; fresh restoration and long-history collection were not performed.
+
+The enclosing history controller ran 11,411.516 seconds including independent
+checks, checkpoint/refresh and the later successor test, then exited1 at the
+collection setup refusal described below. Its three real append phases were:
+
+| Real selections in phase | Enclosing API controller | Resident loop | Observed complete-process CPU | Observed peak working-set bytes |
+| --- | ---: | ---: | ---: | ---: |
+| First 1,000 | 80.480 s | 38.638 s | 18.813 s | 6,889,472 |
+| Next 9,000 | 631.902 s | 631.895 s | 203.063 s | 7,348,224 |
+| Next 90,000 | 9,721.455 s | 9,710.126 s | 2,302.281 s | 8,687,616 |
+
+Resident time includes durable selection and expected-ledger work. Controller
+time additionally includes capture/watchdog joins and filesystem scans; the first
+phase's large gap remains in the evidence. These clocks overlap and are not
+summed. [Raw-line-bound phase extraction](evidence/history-phase-times-final.json)
+distinguishes them from the per-row clocks below.
 
 The fixed corpus has 16 documents, 148 KiB of authored source and degree at most2.
 Content/restore operations
@@ -271,9 +302,24 @@ The harness then verified 100,002 publications, injected reply exit86, selected
 independent check covered 101,003 publications and the original 100,000 receipts.
 The controller subsequently exited1 on `refused:disposable-root`: its captured
 root was named `store`, which cannot arm collection. This original failure is
-preserved. The separately bounded, quiescent relocation/GC continuation and final
-strict proof remain queued; the saved reproduction script uses consistent
-`disposable/store` paths.
+preserved. The separate full proof exporter reached its 900-second cap after
+900.445 seconds, leaving a partial `part-000.jsonl.gz` without a completed
+manifest. That file remains unchanged; it is not a usable proof capsule. Fresh
+restoration, relocation, retirement, long-history collection and dependent
+post-GC checks were not performed because their prerequisite export failed.
+The history store remains at its original owned root, with no retirement/deletion
+from that continuation. The saved reproduction script uses consistent
+`disposable/store` paths for a future separately authorized run.
+
+A prospectively bounded ledger-only fallback completed in 6.804 seconds. It
+preserves all 246,560,316 raw bytes and 100,000 dense receipts, SHA-256
+`6ab8bef045580f7642b0f404cf58ab7cb8211badfeb68d258bc62e984e02af18`,
+through 15 losslessly verified gzip chunks. This is raw receipt transport, not a
+replacement selected-history proof or full store backup. The original harness's
+completed independent 101,003-publication verification remains a separate
+observation. See [ledger manifest](evidence/history-ledger-transport-final/manifest.json),
+[bounded controller](evidence/ledger-transport-controller.json) and
+[prospective fallback bound](evidence/ledger-transport-amendment.md).
 
 The pre-collection file census found 1,413,491 files and 5,464,941,402 logical
 bytes in this history root. It includes historical pages, preparations, the
@@ -294,8 +340,26 @@ both passed, with current readable views and no missing, edited or extra files,
 in 7.007 seconds total. The original censor remains. These checks independently
 render each document's navigation; they do not independently specify the static
 collection prose or packet recipe. Selected digests and separate packet assertions
-cover those portions. The later exact-outcome continuation checks the history
-root's current projection independently.
+cover those portions. The planned post-GC current-history projection check was
+unperformed with its dependent collection continuation.
+
+Independent final selected-root enumeration completed in 5.162 seconds. Selected
+structural geometry is distinct from the API's repeated object-read counters and
+from all retained files in the census:
+
+| Selected tree | Structural pages | Height | Physical keys | Tombstones |
+| --- | ---: | ---: | ---: | ---: |
+| Fresh N1k graph/constraints, H4 | 33 | 1 | 2,008 | 0 |
+| Fresh N10k graph/constraints, H4 | 485 | 2 | 30,008 | 0 |
+| A N100k graph/constraints, H4 | 3,390 | 3 | 210,008 | 0 |
+| History head graph/constraints, N16 / H101,003 | 3 | 1 | 72 | 17 |
+| History head predecessor membership | 1,641 | 3 | 101,002 | 0 |
+| History head predecessor outcomes | 2,413 | 3 | 101,002 | 0 |
+| History head change journal | 1,332 | 3 | 40,000 | 0 |
+
+The current head is represented directly; predecessor trees exclude it. Complete
+per-role geometry, occupancy and selected identities are in
+[root geometry](evidence/current-root-geometry-final.json).
 
 ## Correctness, failures and native coverage
 
@@ -309,7 +373,11 @@ within its unchanged original deadline. WSL's 7ac common capsule and four
 companions completed 771 responses (647 exit0, 71 expected exit2, 53 injected
 exit86), with zero censors. Locked tests/build, both separately linked consumers,
 1k A/B smoke and Bash selected-once copies passed. Its later audit/accounting
-followups and final raw export remain separate queued observations.
+followups and final raw export completed separately. WSL passed the 42-response
+strict audit correction and 181-response paired-intent/supplement/replay correction,
+including locked builds/tests, with zero censors. Its source association check
+verified 27 Rust/Cargo files in each of 15 session archives against the named
+7ac/7e/5a pins and rehashed nine retained guest executables.
 
 Important preserved failures and corrections:
 
@@ -347,8 +415,8 @@ Important preserved failures and corrections:
    with matching intent/ownership, and permits fencing another attempt. Public
    intent mismatch remains refused. Windows passed 32 paired-intent responses,
    109 causal supplement responses, 40 replay/GC responses and locked tests.
-   Native Linux and Mac each passed the same 181-response affected capsule and
-   both locked unit tests, with zero censors; the focused WSL followup is queued.
+   Native Linux, Mac and WSL each passed the same 181-response affected capsule
+   and both locked unit tests, with zero censors.
    No format changed.
 
 Fault assertions distinguish forbidden preselection, visible/incomplete uncertainty
@@ -369,6 +437,19 @@ These are host-local snapshots at their recorded times, not a measurement of
 only live selected state. The Mac snapshot precedes its own small receipt/commit.
 Linux allocated-file totals sum blocks per pathname and can repeat hardlinks;
 they do not measure unique physical/device usage.
+
+The final Windows+WSL census completed in 136.690 seconds. Its conservative sum is
+18,186,887,151 logical bytes against the 32 GiB limit: 16,826,800,029 local bytes
+plus 1,360,087,122 guest bytes. It includes retained transports, sibling builds,
+the entire managed worktree, the entire shared Git database and conservative
+temporary bounds fixtures. Host free space was 228,535,316,480 bytes and guest
+free space 517,021,782,016 bytes, exceeding 140 GiB / 40 GiB reserves; the guest
+total fits its 6 GiB allocation. Neither stated process filter matched a live
+process; completed controllers separately cover their known children. These
+filters are not universal supervisor detection. The snapshot precedes its own
+small receipts and final report/inventory/Git writes, and per-path lengths can
+repeat shared data. See [final resource snapshot](evidence/final-resources.json)
+and [bounded controller](evidence/final-resource-controller/completed.json).
 
 ## Source and durability qualifications
 
@@ -398,6 +479,12 @@ executable/harness hashes, without a complete original compiler-input archive.
 Session ZIPs capture working source at harness creation; an older executable can
 run beside newer working Rust. The separate build/source receipts and session
 association table distinguish those snapshots from associated compiler sources.
+The [final association table](evidence/windows-session-source-associations-final.json)
+contains 56 sessions and four independent compiler-source references. Six working
+snapshots differ from the associated checked engine inputs: one F3 session and
+five later 7e sessions captured beside the 5a lifetime correction. Those mismatches
+remain explicit; the separate canonical compilation receipts supply the source
+association.
 Report/helper-only
 commits do not silently change the core version attached to earlier observations.
 
@@ -423,7 +510,33 @@ semantic scope; opaque/global rules use the explicit full-validation route.
 
 ## Evidence and reproduction
 
-Final evidence index and reproduction commands are being assembled. Always use
-fresh disposable roots; preserved runs are evidence, not rerun destinations.
-Raw expected refusals, process exits and censors remain unchanged. A recovered
-result never relabels the original interrupted observation.
+The [evidence guide](evidence/README.md), [verification/reproduction](verification.md),
+[independent review](review.md) and [final controller dispositions](evidence/final-dispositions.json)
+provide entry points. The [final inventory](evidence/inventory-final.json)
+authenticates standalone source/document/evidence membership, lengths and hashes;
+it excludes itself, caches, build targets and Git metadata. Historical progress
+inventories remain snapshots of their own earlier bytes.
+Local Git attributes preserve exact source/evidence bytes across checkout newline
+settings. This is an evidence-materialization rule for the standalone directory,
+not a new engine format or production contract.
+
+| Retained collection | Scope |
+| --- | --- |
+| [Windows raw](evidence/windows-raw-final/manifest.json) | 364 files / 7,396 responses across development and final work, including original errors and two engine-call censors; 46 source ZIPs and 10 explicitly missing early compiler-input captures |
+| [WSL main](evidence/native-wsl-main/manifest.json), [audit](evidence/native-wsl-audit/manifest.json), [accounting](evidence/native-wsl-accounting/manifest.json) | 771 / 42 / 181 responses on their distinct pins, zero censors; exact transport and source/native-binary associations checked |
+| [Native Linux raw](evidence/native-linux/manifest.json), [corrected replay](evidence/native-linux-replay/manifest.json), [audit](evidence/native-linux-audit/manifest.json), [accounting](evidence/native-linux-accounting/manifest.json) | Historical and affected capsules remain separate, with old failures and intermediate corrections retained |
+| [Native Mac](native-macos/README.md), [latest portable verification](evidence/mac-transport-accounting-verification.json) | Eight lanes, 23 session ZIPs and 8 source TARs checked; no reproducible-build claim |
+| [Dense ledger transport](evidence/history-ledger-transport-final/manifest.json) | All 100,000 receipts, exact byte round trip; not the censored full proof |
+
+[Generic transport verification](evidence/transport-verification-final.json) passed
+all 13 lossless manifests; that validates bytes/types/associations, not a claim that
+every development case passed. Outer projection/proof censors are retained in
+their own controllers. Exact closing outputs written after the main capture are
+copied under `evidence/closeout-controller-raw/`. The incomplete full-proof archive
+is preserved under `evidence/history-proof-final/` without a completed manifest.
+
+Always use fresh disposable roots and the recorded source pins; preserved runs
+are evidence, not rerun destinations. No further large workload, Pro consultation,
+production migration or successor task is launched by this closeout. Raw refusals,
+process exits and censors remain unchanged. A recovered result never relabels the
+original interrupted observation.

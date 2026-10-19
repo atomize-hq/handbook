@@ -1,0 +1,369 @@
+{
+  "deadline_epoch": 1792378745.5431294,
+  "controllers": [
+    {
+      "source": "serial-continuation-v2/completed.json",
+      "sha256": "764bb7646024c5f2c5a1048d416189aacc271e7008ff23edbdbf34a1c57f965a",
+      "observations": [
+        {
+          "name": "build",
+          "exit": 0,
+          "censored": false,
+          "seconds": 5.5939999999827705
+        },
+        {
+          "name": "tests",
+          "exit": 0,
+          "censored": false,
+          "seconds": 1.422000000020489
+        },
+        {
+          "name": "replay-lifetime",
+          "exit": 0,
+          "censored": false,
+          "seconds": 33.40600000001723
+        },
+        {
+          "name": "namespace",
+          "exit": 0,
+          "censored": false,
+          "seconds": 0.43799999996554106
+        },
+        {
+          "name": "checks",
+          "exit": 0,
+          "censored": false,
+          "seconds": 17.57800000003772
+        },
+        {
+          "name": "supplement",
+          "exit": 0,
+          "censored": false,
+          "seconds": 2.625
+        },
+        {
+          "name": "adversarial",
+          "exit": 0,
+          "censored": false,
+          "seconds": 2.530999999959022
+        },
+        {
+          "name": "deep-cases",
+          "exit": 0,
+          "censored": false,
+          "seconds": 6.328000000037719
+        },
+        {
+          "name": "walk-cases",
+          "exit": 0,
+          "censored": false,
+          "seconds": 1.7969999999622814
+        },
+        {
+          "name": "differential",
+          "exit": 0,
+          "censored": false,
+          "seconds": 36.93800000002375
+        },
+        {
+          "name": "post-matrix",
+          "exit": 0,
+          "censored": false,
+          "seconds": 3047.0
+        },
+        {
+          "name": "codec",
+          "exit": 0,
+          "censored": false,
+          "seconds": 307.920999999973
+        },
+        {
+          "name": "history",
+          "exit": 1,
+          "censored": false,
+          "seconds": 11411.516000000003
+        },
+        {
+          "name": "wsl-native",
+          "exit": 0,
+          "censored": false,
+          "seconds": 127.48499999998603
+        },
+        {
+          "name": "wsl-replay-lifetime",
+          "exit": 0,
+          "censored": false,
+          "seconds": 137.0
+        },
+        {
+          "name": "wsl-namespace",
+          "exit": 0,
+          "censored": false,
+          "seconds": 1.9679999999934807
+        },
+        {
+          "name": "wsl-deep-cases",
+          "exit": 0,
+          "censored": false,
+          "seconds": 39.46900000004098
+        },
+        {
+          "name": "wsl-walk-cases",
+          "exit": 0,
+          "censored": false,
+          "seconds": 5.202999999979511
+        }
+      ]
+    },
+    {
+      "source": "final-verification-v3/completed.json",
+      "sha256": "e0dc6f4a7d5b8ca005094b2564c68056b494b69bccab017cbe099543d3e9dad8",
+      "observations": [
+        {
+          "name": "document-calibration",
+          "exit": 0,
+          "censored": false,
+          "seconds": 344.0779999999795
+        },
+        {
+          "name": "contention",
+          "exit": 0,
+          "censored": false,
+          "seconds": 347.78100000001723
+        },
+        {
+          "name": "quota-bytes",
+          "exit": 0,
+          "censored": false,
+          "seconds": 0.9849999999860302
+        },
+        {
+          "name": "strict-history-audit",
+          "exit": 0,
+          "censored": false,
+          "seconds": 0.23399999999674037
+        },
+        {
+          "name": "genuine-sources",
+          "exit": 0,
+          "censored": false,
+          "seconds": 2.25
+        },
+        {
+          "name": "genuine-calibration",
+          "exit": 0,
+          "censored": false,
+          "seconds": 0.20300000003771856
+        },
+        {
+          "name": "codec-geometry",
+          "exit": 0,
+          "censored": false,
+          "seconds": 2.4689999999827705
+        },
+        {
+          "name": "independent-projection",
+          "exit": 1,
+          "censored": true,
+          "seconds": 900.4060000000172
+        },
+        {
+          "name": "selected-store-census",
+          "exit": 0,
+          "censored": false,
+          "seconds": 110.15599999995902
+        },
+        {
+          "name": "unselected-B-census",
+          "exit": 0,
+          "censored": false,
+          "seconds": 19.969000000040978
+        },
+        {
+          "name": "measured-tables",
+          "exit": 0,
+          "censored": false,
+          "seconds": 2.8439999999827705
+        },
+        {
+          "name": "wsl-audit-source",
+          "exit": 0,
+          "censored": false,
+          "seconds": 1.797000000020489
+        },
+        {
+          "name": "wsl-audit",
+          "exit": 0,
+          "censored": false,
+          "seconds": 23.639999999955762
+        }
+      ]
+    },
+    {
+      "source": "final-proofs-v3/completed.json",
+      "sha256": "8f8624380368dc7ecdf94e5ec3f5ee9d1f2c483d55cc215e12ea82266235c961",
+      "observations": [
+        {
+          "name": "strict-A100k-audit",
+          "exit": 0,
+          "censored": false,
+          "seconds": 363.5236871242523
+        },
+        {
+          "name": "history-proof",
+          "exit": 1,
+          "censored": true,
+          "seconds": 900.4445979595184
+        },
+        {
+          "name": "current-root-geometry",
+          "exit": 0,
+          "censored": false,
+          "seconds": 5.162457466125488
+        }
+      ]
+    },
+    {
+      "source": "accounting-wsl-final-v2/completed.json",
+      "sha256": "22b91e684de53589548ec25bf6e15bc611c5e64b4485c5e88159c3adae6ce327",
+      "observations": [
+        {
+          "exit": 0,
+          "censored": false,
+          "seconds": 63.44004249572754,
+          "cap_seconds": 1800
+        }
+      ]
+    },
+    {
+      "source": "wsl-final-export/completed.json",
+      "sha256": "35abb428eda1cccc390d29effbcb0012e735d2725605b244d539dade4ded513b",
+      "observations": [
+        {
+          "name": "native-wsl-main",
+          "exit": 0,
+          "censored": false,
+          "seconds": 1.1818947792053223
+        },
+        {
+          "name": "native-wsl-audit",
+          "exit": 0,
+          "censored": false,
+          "seconds": 1.8555104732513428
+        }
+      ]
+    },
+    {
+      "source": "ledger-transport-final/completed.json",
+      "sha256": "a7917de40fa99ac9e2e8f6862dd91263e2026601aaca24138ed15a821b07fe94",
+      "observations": [
+        {
+          "exit": 0,
+          "censored": false,
+          "seconds": 6.804003715515137,
+          "cap_seconds": 300
+        }
+      ]
+    },
+    {
+      "source": "calibration-projection-continuation/completed.json",
+      "sha256": "1a5def224d7ed968d23a23cc9e52d3c473d8476c58cf0d92a6feb90aac1661fb",
+      "observations": [
+        {
+          "exit": 0,
+          "censored": false,
+          "seconds": 7.0071258544921875,
+          "cap_seconds": 600
+        }
+      ]
+    },
+    {
+      "source": "wsl-source-verification-final/completed.json",
+      "sha256": "bcf864a722af19a2ad303c615ec6079965ce901eb15f3a5bb5c4afd5b0b251b1",
+      "observations": [
+        {
+          "exit": 0,
+          "censored": false,
+          "seconds": 4.9530556201934814,
+          "cap_seconds": 300
+        }
+      ]
+    },
+    {
+      "source": "windows-raw-export-final/completed.json",
+      "sha256": "7727b47a1a71c37447baa0b63f65f17f557c17342d4257f2a86ca710b7951a17",
+      "observations": [
+        {
+          "exit": 0,
+          "censored": false,
+          "seconds": 5.931408882141113,
+          "cap_seconds": 300
+        }
+      ]
+    },
+    {
+      "source": "final-resource-census/completed.json",
+      "sha256": "fcfd979f0b5fb99d1d06bdb9cfb8de2fb4824c01e94364e5050782d6151172ac",
+      "observations": [
+        {
+          "exit": 0,
+          "censored": false,
+          "seconds": 136.77056908607483,
+          "cap_seconds": 600
+        }
+      ]
+    }
+  ],
+  "dependent_unperformed": [
+    {
+      "name": "restore-history-proof",
+      "unperformed": "Full history proof export was censored; prerequisite for safe retirement/restore was not met"
+    },
+    {
+      "name": "history-gc-continuation",
+      "unperformed": "Full history proof export was censored; prerequisite for safe retirement/restore was not met"
+    },
+    {
+      "name": "post-GC-exact-outcomes",
+      "unperformed": "Full history proof export was censored; prerequisite for safe retirement/restore was not met"
+    },
+    {
+      "name": "independent-post-GC-history",
+      "unperformed": "Full history proof export was censored; prerequisite for safe retirement/restore was not met"
+    },
+    {
+      "name": "post-GC-history-census",
+      "unperformed": "Full history proof export was censored; prerequisite for safe retirement/restore was not met"
+    }
+  ],
+  "qualification": "Derived from exact completed controller receipts. Outer success does not independently establish every inner assertion: guest finished rows and raw event dispositions are verified separately. Native corrected suites use their own pins. A full-proof censor does not relabel completed live selection/state checks or supply missing GC evidence.",
+  "incomplete_history_proof": {
+    "path": "history-proof-final/part-000.jsonl.gz",
+    "bytes": 8612353,
+    "sha256": "b0873993b847498aba14617c766c855731bbf8a34ac6b9963a73a5f77afc735f",
+    "completed_manifest_present": false,
+    "qualification": "Partial censored output only; not a restorable proof capsule"
+  },
+  "completed_verification_receipts": [
+    {
+      "path": "transport-verification-final.json",
+      "bytes": 4511,
+      "sha256": "235d1de8c801a984448283bc38f8ba7faa7ed716771da961dc32bbfece8b2d1a"
+    },
+    {
+      "path": "wsl-source-associations-final.json",
+      "bytes": 16931,
+      "sha256": "d69bb2db647e8c14b69e134100b2f82794217ec26822a6ea0bb108d4a0595b48"
+    },
+    {
+      "path": "mac-transport-accounting-verification.json",
+      "bytes": 940,
+      "sha256": "b43b1e46355ac41eb487b3595bb4f9921eab366730db8cf0f183d5e5a3c43968"
+    },
+    {
+      "path": "final-resources.json",
+      "bytes": 6306,
+      "sha256": "b662fa5c6e609c3d01c0a4dc178be52c3a90c7af111109921eb98bcdd7798394"
+    }
+  ]
+}

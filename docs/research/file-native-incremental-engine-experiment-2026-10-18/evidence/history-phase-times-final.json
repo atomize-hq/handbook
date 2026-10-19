@@ -1,0 +1,61 @@
+{
+  "source": "history-common-pin/events.jsonl",
+  "source_sha256": "523027c2d0a27b1507698b1fe09ed0438f613df5b16aaee7f2da7be1e833e56c",
+  "rows": [
+    {
+      "raw_line": 3,
+      "count": 1000,
+      "start": 0,
+      "controller_ms": 80479.5766,
+      "resident_ms": 38638.3937,
+      "engine_wall_ms": 38646.207,
+      "completed": 1000,
+      "categories": {
+        "content": 200,
+        "equal-content": 200,
+        "maintenance": 200,
+        "metadata": 200,
+        "restore": 200
+      },
+      "exit": 0,
+      "censored": false
+    },
+    {
+      "raw_line": 16,
+      "count": 9000,
+      "start": 1000,
+      "controller_ms": 631901.7656,
+      "resident_ms": 631895.2591,
+      "engine_wall_ms": 631896.4071,
+      "completed": 9000,
+      "categories": {
+        "content": 1800,
+        "equal-content": 1800,
+        "maintenance": 1800,
+        "metadata": 1800,
+        "restore": 1800
+      },
+      "exit": 0,
+      "censored": false
+    },
+    {
+      "raw_line": 29,
+      "count": 90000,
+      "start": 10000,
+      "controller_ms": 9721454.6189,
+      "resident_ms": 9710125.8647,
+      "engine_wall_ms": 9710127.0545,
+      "completed": 90000,
+      "categories": {
+        "content": 18000,
+        "equal-content": 18000,
+        "maintenance": 18000,
+        "metadata": 18000,
+        "restore": 18000
+      },
+      "exit": 0,
+      "censored": false
+    }
+  ],
+  "qualification": "Direct extraction, not new engine work. Resident loop includes durable selections and expected-ledger work; each ledger row engine clock excludes its own ledger serialization/sync. Outer controller also includes capture/watchdog join/scan overhead; these overlapping clocks are not summed."
+}
