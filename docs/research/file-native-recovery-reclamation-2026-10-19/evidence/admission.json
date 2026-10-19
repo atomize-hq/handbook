@@ -1,0 +1,18 @@
+{
+  "captured_owned_logical_bytes": 18035372172,
+  "captured_files": 2680529,
+  "archive_and_inventory_max_bytes": 6442450944,
+  "one_restore_max_bytes": 6442450944,
+  "new_work_reserve_bytes": 536870912,
+  "ceiling_bytes": 34359738368,
+  "forecast_files_after_restore": 4180529,
+  "file_cap": 5000000,
+  "original_selected_verified": {
+    "publication": "publication-74796-1792371048916760700-13",
+    "digest": "9b80c0b54b15af6457ee50290f266684bed6c06223cbe105a2654da7bb368546"
+  },
+  "forecast_logical_bytes": 33344581772,
+  "admitted": true,
+  "guest_preserved_and_new_logical_upper_bytes": 1887436800,
+  "note": "Guest du totals ~1.66 GB, rounded up to 1800 MiB; archive+inventory capped prospectively at 6 GiB. Native Linux new work separately <6 GiB and free reserve20GiB."
+}

@@ -1,0 +1,73 @@
+[
+  {
+    "root": "C:\\file-native-incremental-20261018\\history-common-pin\\store",
+    "categories": {
+      "(root-files)": {
+        "files": 10,
+        "logical_bytes": 246569721,
+        "compressed_size_api_bytes": 246569721,
+        "allocated_file_bytes": null
+      },
+      "attempt-hints": {
+        "files": 101003,
+        "logical_bytes": 14861926,
+        "compressed_size_api_bytes": 14861926,
+        "allocated_file_bytes": null
+      },
+      "attempts": {
+        "files": 202006,
+        "logical_bytes": 403010488,
+        "compressed_size_api_bytes": 403010488,
+        "allocated_file_bytes": null
+      },
+      "derived": {
+        "files": 19,
+        "logical_bytes": 3061,
+        "compressed_size_api_bytes": 3061,
+        "allocated_file_bytes": null
+      },
+      "fences": {
+        "files": 3,
+        "logical_bytes": 60,
+        "compressed_size_api_bytes": 60,
+        "allocated_file_bytes": null
+      },
+      "objects": {
+        "files": 908392,
+        "logical_bytes": 4638673934,
+        "compressed_size_api_bytes": 4638673934,
+        "allocated_file_bytes": null
+      },
+      "originals": {
+        "files": 17,
+        "logical_bytes": 155648,
+        "compressed_size_api_bytes": 155648,
+        "allocated_file_bytes": null
+      },
+      "publications": {
+        "files": 101003,
+        "logical_bytes": 135592497,
+        "compressed_size_api_bytes": 135592497,
+        "allocated_file_bytes": null
+      },
+      "results": {
+        "files": 101003,
+        "logical_bytes": 25919454,
+        "compressed_size_api_bytes": 25919454,
+        "allocated_file_bytes": null
+      },
+      "view": {
+        "files": 35,
+        "logical_bytes": 154613,
+        "compressed_size_api_bytes": 154613,
+        "allocated_file_bytes": null
+      }
+    },
+    "files": 1413491,
+    "logical_bytes": 5464941402,
+    "allocated_file_bytes": null,
+    "free_bytes": 226408628224,
+    "seconds": 107.03099999995902,
+    "qualification": "Windows compressed-size API does not measure cluster allocation; allocated file bytes unavailable on Windows in this census"
+  }
+]

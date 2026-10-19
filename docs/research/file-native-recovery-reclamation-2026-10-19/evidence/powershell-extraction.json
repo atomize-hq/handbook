@@ -1,0 +1,50 @@
+[
+  {
+    "copy": "C:/file-native-recovery-20261019/shell-copy-A-16.txt",
+    "selected": {
+      "publication": "publication-72160-1792425558446663900-10",
+      "digest": "07051cf95c9a74ddfbcbf5ec260c93a3020d2a0788cf628e43179fab3c76c46e"
+    },
+    "retained_tree": "C:/file-native-recovery-20261019/windows-final-capsule-data/main-A-16/disposable/store/view",
+    "mode": "A",
+    "count": 16,
+    "sha256": "0626E770A287286F918006FE5AE36B042C238BC3E9D5FCB8035FE1C90ABE26E2",
+    "source": "docs/item-attachments-d000009/evidence/deep/source.txt"
+  },
+  {
+    "copy": "C:/file-native-recovery-20261019/shell-copy-A-128.txt",
+    "selected": {
+      "publication": "publication-59940-1792425561317942400-14",
+      "digest": "a04fc6fcfcfc0ec276c1178671b1e4c247aae9a93eaeb721ed127814a3b97a3c"
+    },
+    "retained_tree": "C:/file-native-recovery-20261019/windows-final-capsule-data/main-A-128/disposable/store/view",
+    "mode": "A",
+    "count": 128,
+    "sha256": "0626E770A287286F918006FE5AE36B042C238BC3E9D5FCB8035FE1C90ABE26E2",
+    "source": "docs/item-attachments-d000009/evidence/deep/source.txt"
+  },
+  {
+    "copy": "C:/file-native-recovery-20261019/shell-copy-B-16.txt",
+    "selected": {
+      "publication": "publication-75452-1792425564001899100-10",
+      "digest": "61f79733e98fab529609c958941d34a929690cc3d55643fb515e70a8bcb4c171"
+    },
+    "retained_tree": "C:/file-native-recovery-20261019/windows-final-capsule-data/main-B-16/disposable/store/generations/attempt-75452-1792425563918468800-0",
+    "mode": "B",
+    "count": 16,
+    "sha256": "0626E770A287286F918006FE5AE36B042C238BC3E9D5FCB8035FE1C90ABE26E2",
+    "source": "docs/item-attachments-d000009/evidence/deep/source.txt"
+  },
+  {
+    "copy": "C:/file-native-recovery-20261019/shell-copy-B-128.txt",
+    "selected": {
+      "publication": "publication-72232-1792425568595213500-14",
+      "digest": "c3f3b70cb8de6f49d180f345769efce0eb825cb08d8bfc189d5b678f35f52156"
+    },
+    "retained_tree": "C:/file-native-recovery-20261019/windows-final-capsule-data/main-B-128/disposable/store/generations/attempt-72232-1792425567934268100-0",
+    "mode": "B",
+    "count": 128,
+    "sha256": "0626E770A287286F918006FE5AE36B042C238BC3E9D5FCB8035FE1C90ABE26E2",
+    "source": "docs/item-attachments-d000009/evidence/deep/source.txt"
+  }
+]

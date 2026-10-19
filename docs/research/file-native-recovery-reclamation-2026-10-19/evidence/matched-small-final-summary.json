@@ -1,0 +1,189 @@
+{
+  "rows": [
+    {
+      "profile": "legacy",
+      "mode": "A",
+      "n": 16,
+      "selection_ms": [
+        20.631,
+        23.286,
+        19.89
+      ],
+      "publish_ms": [
+        62.0,
+        78.0,
+        63.0
+      ],
+      "refresh_ms": [
+        16.0,
+        31.0,
+        15.0
+      ],
+      "metadata_read_bytes": [
+        193190,
+        321429,
+        210658
+      ]
+    },
+    {
+      "profile": "legacy",
+      "mode": "A",
+      "n": 128,
+      "selection_ms": [
+        19.81,
+        21.494,
+        17.99
+      ],
+      "publish_ms": [
+        62.0,
+        78.0,
+        63.0
+      ],
+      "refresh_ms": [
+        16.0,
+        31.0,
+        15.0
+      ],
+      "metadata_read_bytes": [
+        204201,
+        337709,
+        195902
+      ]
+    },
+    {
+      "profile": "legacy",
+      "mode": "B",
+      "n": 16,
+      "selection_ms": [
+        20.657,
+        21.653,
+        21.322
+      ],
+      "publish_ms": [
+        125.0,
+        140.0,
+        125.0
+      ],
+      "refresh_ms": [],
+      "metadata_read_bytes": [
+        222582,
+        351021,
+        240250
+      ]
+    },
+    {
+      "profile": "legacy",
+      "mode": "B",
+      "n": 128,
+      "selection_ms": [
+        37.35,
+        39.435,
+        36.69
+      ],
+      "publish_ms": [
+        844.0,
+        813.0,
+        781.0
+      ],
+      "refresh_ms": [],
+      "metadata_read_bytes": [
+        318645,
+        452727,
+        310920
+      ]
+    },
+    {
+      "profile": "profile2",
+      "mode": "A",
+      "n": 16,
+      "selection_ms": [
+        16.534,
+        15.946,
+        18.027
+      ],
+      "publish_ms": [
+        47.0,
+        62.0,
+        62.0
+      ],
+      "refresh_ms": [
+        16.0,
+        16.0,
+        16.0
+      ],
+      "metadata_read_bytes": [
+        419636,
+        510105,
+        439374
+      ]
+    },
+    {
+      "profile": "profile2",
+      "mode": "A",
+      "n": 128,
+      "selection_ms": [
+        23.62,
+        18.716,
+        16.772
+      ],
+      "publish_ms": [
+        78.0,
+        78.0,
+        78.0
+      ],
+      "refresh_ms": [
+        16.0,
+        16.0,
+        16.0
+      ],
+      "metadata_read_bytes": [
+        817019,
+        651418,
+        575304
+      ]
+    },
+    {
+      "profile": "profile2",
+      "mode": "B",
+      "n": 16,
+      "selection_ms": [
+        20.641,
+        19.575,
+        18.958
+      ],
+      "publish_ms": [
+        94.0,
+        109.0,
+        94.0
+      ],
+      "refresh_ms": [],
+      "metadata_read_bytes": [
+        436812,
+        527444,
+        456713
+      ]
+    },
+    {
+      "profile": "profile2",
+      "mode": "B",
+      "n": 128,
+      "selection_ms": [
+        27.208,
+        30.571,
+        56.334
+      ],
+      "publish_ms": [
+        484.0,
+        453.0,
+        500.0
+      ],
+      "refresh_ms": [],
+      "metadata_read_bytes": [
+        881927,
+        716900,
+        640786
+      ]
+    }
+  ],
+  "scope": "No other experiment child remained active during this final small run; caches uncontrolled and only three edits per cell. Whole metadata-map scans at N16/N128 are included; no causal ratio/SLA."
+}

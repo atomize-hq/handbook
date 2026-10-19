@@ -1,0 +1,25 @@
+{
+  "core_source_commit": "fe1ee22a82d65dc88a14e38b7e77c921538c4bc4",
+  "preservation_tool_commit": "3d3f7b47264029dd1a8a3a1298cb1c740c0e7ae9",
+  "history_source_commit": "3396092cbf20f593e36b9640c6a76e5afd2f2a09",
+  "windows_binary_sha256": "4d8ecb0ff2c29b42bf83161803336fadfc6dd9cfbd2ae6594c05d9358adbac0b",
+  "rust_sha256": {
+    "api.rs": "8eddbf39e06bdf1ca5708d02c6abd9a885184576d446b23d8aa064de0c9184ff",
+    "baseline_model.rs": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+    "bounds_tests.rs": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+    "differential.rs": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+    "disk.rs": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+    "graph.rs": "9e47637a2d213f1d1abdbc559ae680d4f2410bc50e30624d3dd41f83133d7454",
+    "io.rs": "17a6a0bad6859f54793c37e6f1fc86e4cd35c86ac833dd24b5a877f4f01f6b06",
+    "lib.rs": "b68a60aa0da945f6f89190c19f296162b47e2ffa508eef1129cf2d8fc7a85307",
+    "lifetime.rs": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+    "main.rs": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+    "objects.rs": "6727e154f82334b9842f347797407bd7185ed576dd36d206fb323f0dc6c2b31c",
+    "projection.rs": "de17df6e88ea1ac3846b6e16ab9022492b74935cda6dea2d00081754e83a3b6b",
+    "store.rs": "8852fec5fd75c8fe15e9f1964289c69623bfc11a2fc3a7d57efa2da525faeddc"
+  },
+  "cargo_sha256": {
+    "Cargo.lock": "07eca1011d8aabcf2e5508cd9b4954417dff9ab0c7a7a1accf06af719a81b330",
+    "Cargo.toml": "7e08fe410778cd11427f190e6c6991324c1a02d1c50c65a3cfd5e8d0dba6ab08"
+  }
+}

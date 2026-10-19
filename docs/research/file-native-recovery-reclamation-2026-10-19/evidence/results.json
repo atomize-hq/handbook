@@ -1,0 +1,133 @@
+{
+  "status": "bounded-unit-return-for-review",
+  "original_preserved": true,
+  "original_publications": 101003,
+  "final_publications": 101006,
+  "all_original_membership_outcome_results_preserved": true,
+  "retired_content_snapshots": 101,
+  "retired_content_status": "unavailable-by-contract",
+  "before_gc": {
+    "files": 1413495,
+    "logical_bytes": 5465011991
+  },
+  "after_no_retirement": {
+    "files": 510713,
+    "logical_bytes": 888599719
+  },
+  "after_retirement": {
+    "files": 510583,
+    "logical_bytes": 887923682
+  },
+  "gross_no_retirement_removed": {
+    "files": 902783,
+    "logical_bytes": 4576412351
+  },
+  "retirement_pass_removed": {
+    "accepted_evidence_preserved": true,
+    "content_root_visits": 100906,
+    "files": 270,
+    "logical_bytes": 819541,
+    "status": "collected",
+    "unique_content_roots": 89
+  },
+  "distinct_source_reclaimed": true,
+  "distinct_accepted_result_exact": true,
+  "original_permanent_digest": "68044def6497b6f74baeda401168d4ee343f4fc80679ff2b3b6e4946d2d88a10",
+  "measurement_core": "fe1ee22a82d65dc88a14e38b7e77c921538c4bc4",
+  "final_core": "07a8574e581e66ba58d7caac87238aa5f93918be",
+  "transport_tool": "3d3f7b47264029dd1a8a3a1298cb1c740c0e7ae9",
+  "final_windows_capsule": {
+    "cases": 24,
+    "events": 282,
+    "status": "success"
+  },
+  "cases": [
+    {
+      "name": "A namespace recovery",
+      "status": "success",
+      "detail": "both directions, corrections, divergence, changed-phase exits and external empty-directory guard"
+    },
+    {
+      "name": "Navigation profiles",
+      "status": "success",
+      "detail": "new YAML targets; exact legacy reader/replay; overview/target deletion and typed ordered relationships"
+    },
+    {
+      "name": "Accounting/checkpoint/GC",
+      "status": "success",
+      "detail": "original result exact; repeat collection passes"
+    },
+    {
+      "name": "Operational backup",
+      "status": "success",
+      "detail": "A/B N16/N128 plus H101003 full restore/reopen/successor"
+    },
+    {
+      "name": "Long collection restart",
+      "status": "success",
+      "detail": "exit86 after one reclaimed file and completed restart"
+    },
+    {
+      "name": "Retirement pilot",
+      "status": "success",
+      "detail": "100 historical publications plus one distinct snapshot"
+    },
+    {
+      "name": "Retired point read",
+      "status": "expected refusal",
+      "detail": "content unavailable while original accepted result remains exact"
+    },
+    {
+      "name": "Restored terminal fences",
+      "status": "expected refusal",
+      "detail": "all three original cancellation fences refuse publication"
+    },
+    {
+      "name": "Final native full capsule/guard",
+      "status": "unperformed",
+      "detail": "inherited native host deadlines closed; earlier qualified native sources and focused transition checks passed"
+    },
+    {
+      "name": "Mac lane",
+      "status": "unperformed",
+      "detail": "no configured shell route in this task"
+    },
+    {
+      "name": "Windows cluster allocation",
+      "status": "unperformed",
+      "detail": "logical sizes measured; initial API label corrected"
+    },
+    {
+      "name": "Second-pass per-role gross trace",
+      "status": "unperformed",
+      "detail": "gross total and net per-role states recorded"
+    },
+    {
+      "name": "Prior selected-only proof",
+      "status": "censored",
+      "detail": "inherited original export censor is preserved; new operational profile is separate"
+    }
+  ],
+  "harness_sha256": {
+    "bounded.py": "fae22396ad0c0e5b2915c692b31202e8ea18fe66d57acc10b3cba8faf6e244e3",
+    "bundle_results.py": "d5ea275bab5b1a4d70ee131d8028d17e0cf4f78ad6b5fbded1479913514c1caf",
+    "capsule.py": "1b997e6bc058660fcfe7246ee98a7b13317e63f7232acef73fef6c3987273b71",
+    "collect_native_evidence.py": "06529314d6d55c4f8bc4c4f3ad4258962c7992bc7cc319b0932917d82bfe4a35",
+    "final_native.py": "ca2b017489aaef6ea45615fd44fd8f6f67925b2d987b2f6008cf8c1b348ad270",
+    "finish_compatible.py": "7ebbb3b2c73437af51e6127b53538ef4c20e49360b1c7e156ebfaa244fb5bf1b",
+    "focused_extra.py": "1010406cb71faa449d79d4e8bf141839ea742c4bb35626e685a30a73a572b4d9",
+    "inventory.py": "85b19a9057b6202f3d71669e5c7a2213660b69bc8e74e21aca774fccfbc42a68",
+    "legacy_compatibility.py": "c8eb8214133bcdcb8a8945dd62384f3ea8ed0b23cff5112ca2a79d118bb6508a",
+    "long_trial.py": "91f6db36141e713a528f7ad1662d37afdfd8dde284fe2ed267e298ff1e8c3f3b",
+    "native_runner.py": "48c9d6efedd2124818cd7c5554698f62e60ec4a5e58ff89417e446817601d357",
+    "operational_backup.py": "20aa1b2965fd294bbf11942e5d399c7944c1f699b11021c0349b57ee5ee10bbe",
+    "oracle.py": "a5ff418c13571fe1163a1ccfa8fdc01cf6af37d9f690009002c5cc3a49d4b431",
+    "oracle_supplement.py": "3455217beae778b69a8c32057f899a17aab3f85fe653c4e57c3408e5d892d0a6",
+    "post_gc_probes.py": "292442dba0707a5f49b4fe9668cd2ea60307bb6f70ffcfd23a01e17c54dfe5ff",
+    "restored_fences.py": "9e1096285ca7cb02174f62c047b5142f22a75386f73e55389c4a654f9d009c26",
+    "restore_gate.py": "2750f3401f29e34dd74fbbd8bde9cfe8444b3d7e01b140ecdf5a88dd14325bb6",
+    "small_costs.py": "7b32c85582af39f2e0b03b236951c8a90ca1438b2d5d6b4020f3131b4cfc324e",
+    "verify_operational.py": "d86c7d5406d5c5a5d00553b85dd0f16a039838132c31f41cc0567a7e3920e5cd"
+  },
+  "captured_epoch": 1792431050.8478203
+}

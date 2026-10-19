@@ -1,0 +1,60 @@
+[
+  {
+    "host": "linux",
+    "source_pin": "ec544776255c6eafb06700c40c04b1e27fdf8898",
+    "binary_sha256": "16343046dda1a8dc36d6fcae06b4b3b808e7131fdc7779aa42c91888ee8cb785",
+    "all_rust_sources_verified": true,
+    "rows": [
+      {
+        "name": "build",
+        "status": "success",
+        "seconds": 3.253678798675537
+      },
+      {
+        "name": "tests",
+        "status": "success",
+        "seconds": 0.7520155906677246
+      },
+      {
+        "name": "capsule",
+        "status": "success",
+        "seconds": 69.60931921005249
+      },
+      {
+        "name": "extra",
+        "status": "success",
+        "seconds": 15.521973371505737
+      }
+    ],
+    "archive_sha256": "3cfed40f7afb4c02e45ea33e3dda18943934b1f3a5b415b14cbd0424b47f9472"
+  },
+  {
+    "host": "wsl",
+    "source_pin": "ec544776255c6eafb06700c40c04b1e27fdf8898",
+    "binary_sha256": "34a3ae38f6ff01d309cc24e9e29dd383ea37b64eaa6d0c8ecfe5a4d7ae4131fe",
+    "all_rust_sources_verified": true,
+    "rows": [
+      {
+        "name": "build",
+        "status": "success",
+        "seconds": 10.51914381980896
+      },
+      {
+        "name": "tests",
+        "status": "success",
+        "seconds": 3.004758834838867
+      },
+      {
+        "name": "capsule",
+        "status": "success",
+        "seconds": 36.80800938606262
+      },
+      {
+        "name": "extra",
+        "status": "success",
+        "seconds": 9.769236326217651
+      }
+    ],
+    "archive_sha256": "bc1853727d9011fee8f4072edb5d2b8b124eb7f4cd83c40d9ea1071207951fd1"
+  }
+]

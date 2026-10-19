@@ -1,0 +1,44 @@
+[
+  {
+    "host": "linux",
+    "source_pin": "fe1ee22a82d65dc88a14e38b7e77c921538c4bc4",
+    "binary_sha256": "13e368f6f46e3781f32bf73616477de9fa3828ec762e4e08001f8b0e769aa6db",
+    "all_rust_sources_verified": true,
+    "rows": [
+      {
+        "name": "legacy",
+        "status": "success"
+      },
+      {
+        "name": "extra",
+        "status": "unperformed"
+      },
+      {
+        "name": "capsule",
+        "status": "unperformed"
+      }
+    ],
+    "archive_sha256": "b95ea82e73b6a6783f6e6884de26bff80da9000ece21fa2b4041b63b8ae62216"
+  },
+  {
+    "host": "wsl",
+    "source_pin": "fe1ee22a82d65dc88a14e38b7e77c921538c4bc4",
+    "binary_sha256": "a4b728862b86df5940abf9379f995706d155a5e46a9f9aeafec6ccdfb9818d36",
+    "all_rust_sources_verified": true,
+    "rows": [
+      {
+        "name": "legacy",
+        "status": "success"
+      },
+      {
+        "name": "extra",
+        "status": "success"
+      },
+      {
+        "name": "capsule",
+        "status": "unperformed"
+      }
+    ],
+    "archive_sha256": "9729f937db41de6e823cd15f6969dc304fc2ca0e656fe6339c4df874e8acf700"
+  }
+]

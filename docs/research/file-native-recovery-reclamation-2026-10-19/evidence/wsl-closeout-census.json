@@ -1,0 +1,72 @@
+{
+  "rows": [
+    {
+      "root": "/home/spenser/file-native-incremental-wsl-accounting-final",
+      "files": 9037,
+      "logical_bytes": 418743425
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-wsl-audit-final",
+      "files": 2395,
+      "logical_bytes": 374269828
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-budget-probe",
+      "files": 7,
+      "logical_bytes": 266996
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-wsl-final-20261018",
+      "files": 25756,
+      "logical_bytes": 517579829
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-5a65a21",
+      "files": 694,
+      "logical_bytes": 27435868
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-wsl-accounting-evidence",
+      "files": 25,
+      "logical_bytes": 1193107
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-wsl-export-native-wsl-main",
+      "files": 76,
+      "logical_bytes": 3467632
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-7e00d22",
+      "files": 444,
+      "logical_bytes": 9072512
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-a1108c6",
+      "files": 53,
+      "logical_bytes": 404920
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-wsl-export-native-wsl-audit",
+      "files": 14,
+      "logical_bytes": 316923
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-f3e942f",
+      "files": 49,
+      "logical_bytes": 392763
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-7ac70f9",
+      "files": 375,
+      "logical_bytes": 6940780
+    },
+    {
+      "root": "/home/spenser/file-native-recovery-20261019",
+      "files": 30521,
+      "logical_bytes": 633565688
+    }
+  ],
+  "files": 69446,
+  "logical_bytes": 1993650271,
+  "free_bytes": 516230815744
+}

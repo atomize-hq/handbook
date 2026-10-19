@@ -1,0 +1,37 @@
+{
+  "binary_sha256": "cbd9b0352c52998ae7e6c9a2cd160bc3cbc16ea3d1b40c339eb570450d765cca",
+  "rows": [
+    {
+      "input": {
+        "root": "C:\\file-native-recovery-20261019\\empty-external-directory-case\\disposable\\store",
+        "action": "init",
+        "mode": "A",
+        "consumer": "project",
+        "count": 16
+      },
+      "exit": 0,
+      "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":13931,\"bytes_control_written\":14581,\"bytes_metadata_read\":2015956,\"bytes_metadata_written\":11808,\"bytes_payload_read\":460210,\"bytes_payload_written\":308658,\"bytes_read\":2490097,\"bytes_result_read\":0,\"bytes_result_written\":474,\"bytes_written\":335521,\"copies\":19,\"created_directories\":41,\"directory_syncs\":0,\"documents_visited\":16,\"edges_visited\":8,\"file_syncs\":54,\"index_updates\":0,\"namespace_ops\":55,\"ns\":{\"A-completion-inclusive\":61392500,\"copy\":3871000,\"creation-inclusive\":68726500,\"directory-create\":6103500,\"lock-hold\":184817200,\"lock-wait\":195600,\"read\":101535700,\"replace\":9387500,\"selection-inclusive\":15899000,\"sync\":33620600,\"write\":6400000},\"opens\":474,\"page_reads\":354,\"quota_limit\":null,\"quota_spent\":273975,\"replacements\":49,\"touched_paths\":19,\"unique_pages\":[\"09f93f31977ed0c8b3ca6896bb9e19f999f5c5169a56be1ae2d0320c6ec00e29\",\"b0941651d7dae9e571379ebf0598c283758902182d5caf510c9aca11079edcbc\"],\"unsupported_directory_syncs\":256,\"verify_only\":false},\"peak_memory_bytes\":6123520,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000000\",\"d000001\",\"d000002\",\"d000003\",\"d000004\",\"d000005\",\"d000006\",\"d000007\",\"d000008\",\"d000009\",\"d000010\",\"d000011\",\"d000012\",\"d000013\",\"d000014\",\"d000015\"],\"outcome\":\"accepted\",\"publication\":\"publication-65652-1792429098525467300-26\",\"removed\":[],\"request\":\"initial\",\"state_digest\":\"1a1a19330f3a30a64b1f3979a6e8e19fc869ba252694fa833e123d73f8343da7\"},\"selected\":{\"digest\":\"bdf52e3ef380eb6cdce33939b33e3477dbfb70e21577d8e88b25d6f33dde1b35\",\"publication\":\"publication-65652-1792429098525467300-26\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":188530100}\n",
+      "stderr": "progress:creation:0/16:{\"page_reads\":0,\"unique_pages\":[],\"documents_visited\":0,\"edges_visited\":0,\"index_updates\":0,\"touched_paths\":0,\"namespace_ops\":3,\"quota_limit\":71908864,\"quota_spent\":0,\"verify_only\":false,\"ns\":{\"directory-create\":444100,\"lock-wait\":195600,\"replace\":351700,\"sync\":3180000,\"write\":592100},\"bytes_read\":0,\"bytes_written\":786,\"opens\":3,\"file_syncs\":3,\"directory_syncs\":0,\"unsupported_directory_syncs\":11,\"copies\":0,\"replacements\":1,\"created_directories\":3,\"bytes_metadata_read\":0,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_control_read\":0,\"bytes_control_written\":786,\"bytes_result_read\":0,\"bytes_result_written\":0}\nprogress:creation-complete:16:{\"page_reads\":0,\"unique_pages\":[],\"documents_visited\":0,\"edges_visited\":0,\"index_updates\":0,\"touched_paths\":0,\"namespace_ops\":19,\"quota_limit\":71908864,\"quota_spent\":217088,\"verify_only\":false,\"ns\":{\"directory-create\":3353300,\"lock-wait\":195600,\"read\":43323500,\"replace\":351700,\"sync\":11918500,\"write\":3419100},\"bytes_read\":151552,\"bytes_written\":152338,\"opens\":35,\"file_syncs\":19,\"directory_syncs\":0,\"unsupported_directory_syncs\":92,\"copies\":0,\"replacements\":17,\"created_directories\":20,\"bytes_metadata_read\":0,\"bytes_metadata_written\":0,\"bytes_payload_read\":151552,\"bytes_payload_written\":151552,\"bytes_control_read\":0,\"bytes_control_written\":786,\"bytes_result_read\":0,\"bytes_result_written\":0}\n"
+    },
+    {
+      "input": {
+        "root": "C:\\file-native-recovery-20261019\\empty-external-directory-case\\disposable\\store",
+        "action": "resume"
+      },
+      "exit": 0,
+      "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":8316,\"bytes_control_written\":12568,\"bytes_metadata_read\":768624,\"bytes_metadata_written\":0,\"bytes_payload_read\":154124,\"bytes_payload_written\":23,\"bytes_read\":931064,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":12591,\"copies\":0,\"created_directories\":3,\"directory_syncs\":0,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":3,\"index_updates\":0,\"namespace_ops\":5,\"ns\":{\"A-completion-inclusive\":22803700,\"directory-create\":417100,\"lock-hold\":22830000,\"lock-wait\":160800,\"read\":13044900,\"replace\":728500,\"sync\":2627000,\"write\":614200},\"opens\":212,\"page_reads\":176,\"quota_limit\":null,\"quota_spent\":24879,\"replacements\":3,\"touched_paths\":20,\"unique_pages\":[\"09f93f31977ed0c8b3ca6896bb9e19f999f5c5169a56be1ae2d0320c6ec00e29\",\"b0941651d7dae9e571379ebf0598c283758902182d5caf510c9aca11079edcbc\"],\"unsupported_directory_syncs\":14,\"verify_only\":false},\"peak_memory_bytes\":5206016,\"result\":{\"status\":\"audited-rebuilt\"},\"status\":\"ok\",\"wall_ns\":23273100}\n",
+      "stderr": ""
+    },
+    {
+      "input": {
+        "root": "C:\\file-native-recovery-20261019\\empty-external-directory-case\\disposable\\store",
+        "action": "audit"
+      },
+      "exit": 0,
+      "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":2407,\"bytes_control_written\":0,\"bytes_metadata_read\":1717522,\"bytes_metadata_written\":0,\"bytes_payload_read\":308658,\"bytes_payload_written\":0,\"bytes_read\":2028587,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":16,\"edges_visited\":8,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"ns\":{\"lock-hold\":0,\"read\":14084700},\"opens\":326,\"page_reads\":283,\"quota_limit\":null,\"quota_spent\":0,\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"09f93f31977ed0c8b3ca6896bb9e19f999f5c5169a56be1ae2d0320c6ec00e29\",\"b0941651d7dae9e571379ebf0598c283758902182d5caf510c9aca11079edcbc\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":5287936,\"result\":{\"selected\":{\"digest\":\"bdf52e3ef380eb6cdce33939b33e3477dbfb70e21577d8e88b25d6f33dde1b35\",\"publication\":\"publication-65652-1792429098525467300-26\"},\"status\":\"full-graph-index-source-projection-audit\"},\"status\":\"ok\",\"wall_ns\":17720700}\n",
+      "stderr": ""
+    }
+  ],
+  "external_directory_preserved": true,
+  "divergent_bytes_preserved": true
+}

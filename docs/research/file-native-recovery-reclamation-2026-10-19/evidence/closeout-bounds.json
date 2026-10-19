@@ -1,0 +1,12 @@
+{
+  "fixed_preserved_local_bytes": 17498162417,
+  "post_gc_runtime_bytes": 5098582632,
+  "wsl_bytes": 1993650271,
+  "post_gc_combined_observed_bytes": 24590395320,
+  "conservative_peak_upper_bytes": 29704498124,
+  "conservative_peak_files": 4310811,
+  "logical_ceiling": 34359738368,
+  "file_ceiling": 5000000,
+  "elapsed_seconds": 4915.930777311325,
+  "host_free_observation_bytes": 216897343488
+}

@@ -1,0 +1,187 @@
+[
+  {
+    "root": "C:\\file-native-recovery-20261019",
+    "categories": {
+      "(root-files)": {
+        "files": 136,
+        "logical_bytes": 18474194,
+        "compressed_size_api_bytes": 18474194,
+        "allocated_file_bytes": null
+      },
+      "baseline-build": {
+        "files": 322,
+        "logical_bytes": 118327789,
+        "compressed_size_api_bytes": 118327789,
+        "allocated_file_bytes": null
+      },
+      "baseline-source": {
+        "files": 19,
+        "logical_bytes": 165505,
+        "compressed_size_api_bytes": 165505,
+        "allocated_file_bytes": null
+      },
+      "build": {
+        "files": 1052,
+        "logical_bytes": 419253882,
+        "compressed_size_api_bytes": 419253882,
+        "allocated_file_bytes": null
+      },
+      "build-final": {
+        "files": 1052,
+        "logical_bytes": 419189058,
+        "compressed_size_api_bytes": 419189058,
+        "allocated_file_bytes": null
+      },
+      "empty-external-directory-case": {
+        "files": 53,
+        "logical_bytes": 327926,
+        "compressed_size_api_bytes": 327926,
+        "allocated_file_bytes": null
+      },
+      "history-operational-backup": {
+        "files": 3,
+        "logical_bytes": 2714534395,
+        "compressed_size_api_bytes": 2714534395,
+        "allocated_file_bytes": null
+      },
+      "history-restored": {
+        "files": 510583,
+        "logical_bytes": 887923682,
+        "compressed_size_api_bytes": 887923682,
+        "allocated_file_bytes": null
+      },
+      "legacy-fixtures": {
+        "files": 173,
+        "logical_bytes": 686858,
+        "compressed_size_api_bytes": 686858,
+        "allocated_file_bytes": null
+      },
+      "legacy-packet-fixtures": {
+        "files": 207,
+        "logical_bytes": 1168838,
+        "compressed_size_api_bytes": 1168838,
+        "allocated_file_bytes": null
+      },
+      "matched-small": {
+        "files": 3580,
+        "logical_bytes": 26283003,
+        "compressed_size_api_bytes": 26283003,
+        "allocated_file_bytes": null
+      },
+      "matched-small-final": {
+        "files": 3580,
+        "logical_bytes": 26283004,
+        "compressed_size_api_bytes": 26283004,
+        "allocated_file_bytes": null
+      },
+      "reclamation": {
+        "files": 349,
+        "logical_bytes": 2337874,
+        "compressed_size_api_bytes": 2337874,
+        "allocated_file_bytes": null
+      },
+      "windows-compatible-core-data": {
+        "files": 5031,
+        "logical_bytes": 46122710,
+        "compressed_size_api_bytes": 46122710,
+        "allocated_file_bytes": null
+      },
+      "windows-existing-checks-data": {
+        "files": 2457,
+        "logical_bytes": 14922201,
+        "compressed_size_api_bytes": 14922201,
+        "allocated_file_bytes": null
+      },
+      "windows-extra-data": {
+        "files": 788,
+        "logical_bytes": 10052606,
+        "compressed_size_api_bytes": 10052606,
+        "allocated_file_bytes": null
+      },
+      "windows-final-capsule-data": {
+        "files": 5030,
+        "logical_bytes": 46122675,
+        "compressed_size_api_bytes": 46122675,
+        "allocated_file_bytes": null
+      },
+      "windows-final-complete-data": {
+        "files": 5082,
+        "logical_bytes": 46099729,
+        "compressed_size_api_bytes": 46099729,
+        "allocated_file_bytes": null
+      },
+      "windows-final-core-data": {
+        "files": 5031,
+        "logical_bytes": 46122356,
+        "compressed_size_api_bytes": 46122356,
+        "allocated_file_bytes": null
+      },
+      "windows-final-protocol-data": {
+        "files": 2457,
+        "logical_bytes": 14923079,
+        "compressed_size_api_bytes": 14923079,
+        "allocated_file_bytes": null
+      },
+      "windows-legacy-packet-upgrade": {
+        "files": 279,
+        "logical_bytes": 1517809,
+        "compressed_size_api_bytes": 1517809,
+        "allocated_file_bytes": null
+      },
+      "windows-legacy-upgrade": {
+        "files": 245,
+        "logical_bytes": 1034848,
+        "compressed_size_api_bytes": 1034848,
+        "allocated_file_bytes": null
+      },
+      "windows-operational-final-data": {
+        "files": 5082,
+        "logical_bytes": 46100592,
+        "compressed_size_api_bytes": 46100592,
+        "allocated_file_bytes": null
+      },
+      "windows-oracle-capsule-data": {
+        "files": 5030,
+        "logical_bytes": 46123349,
+        "compressed_size_api_bytes": 46123349,
+        "allocated_file_bytes": null
+      },
+      "windows-paired-data": {
+        "files": 214,
+        "logical_bytes": 1730357,
+        "compressed_size_api_bytes": 1730357,
+        "allocated_file_bytes": null
+      },
+      "windows-parallel-backup-data": {
+        "files": 5030,
+        "logical_bytes": 46123319,
+        "compressed_size_api_bytes": 46123319,
+        "allocated_file_bytes": null
+      },
+      "windows-replay-data": {
+        "files": 3840,
+        "logical_bytes": 49685263,
+        "compressed_size_api_bytes": 49685263,
+        "allocated_file_bytes": null
+      },
+      "windows-small-v1": {
+        "files": 106,
+        "logical_bytes": 825599,
+        "compressed_size_api_bytes": 825599,
+        "allocated_file_bytes": null
+      },
+      "windows-small-v2": {
+        "files": 5030,
+        "logical_bytes": 46120132,
+        "compressed_size_api_bytes": 46120132,
+        "allocated_file_bytes": null
+      }
+    },
+    "files": 571841,
+    "logical_bytes": 5098582632,
+    "allocated_file_bytes": null,
+    "free_bytes": 216897343488,
+    "seconds": 50.89100000000326,
+    "qualification": "Windows compressed-size API does not measure cluster allocation; allocated file bytes unavailable on Windows in this census"
+  }
+]

@@ -1,0 +1,742 @@
+[
+  {
+    "root": "C:\\file-native-incremental-20261018",
+    "categories": {
+      "accounting-after": {
+        "files": 4,
+        "logical_bytes": 4664,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 4664
+      },
+      "accounting-after-v2": {
+        "files": 8048,
+        "logical_bytes": 53958757,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 53958757
+      },
+      "accounting-wsl-final": {
+        "files": 2,
+        "logical_bytes": 4280,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 4280
+      },
+      "accounting-wsl-final-v2": {
+        "files": 3,
+        "logical_bytes": 3680,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 3680
+      },
+      "adversarial-final-v1": {
+        "files": 575,
+        "logical_bytes": 3720100,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 3720100
+      },
+      "(root-files)": {
+        "files": 34,
+        "logical_bytes": 58649107,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 58649107
+      },
+      "audit-after": {
+        "files": 1404,
+        "logical_bytes": 9456105,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 9456105
+      },
+      "audit-before": {
+        "files": 1400,
+        "logical_bytes": 9451415,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 9451415
+      },
+      "build-accounting": {
+        "files": 1104,
+        "logical_bytes": 434678760,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 434678760
+      },
+      "build-audit": {
+        "files": 371,
+        "logical_bytes": 148159088,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 148159088
+      },
+      "build-current": {
+        "files": 1259,
+        "logical_bytes": 464175269,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 464175269
+      },
+      "calibration-projection-continuation": {
+        "files": 3,
+        "logical_bytes": 890,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 890
+      },
+      "checks-categories-v1": {
+        "files": 3234,
+        "logical_bytes": 13804490,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 13804490
+      },
+      "checks-dev-v1": {
+        "files": 130,
+        "logical_bytes": 546472,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 546472
+      },
+      "checks-dev-v2": {
+        "files": 3233,
+        "logical_bytes": 13571136,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 13571136
+      },
+      "checks-dev-v3": {
+        "files": 3233,
+        "logical_bytes": 13609435,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 13609435
+      },
+      "checks-final-categories": {
+        "files": 3234,
+        "logical_bytes": 13950461,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 13950461
+      },
+      "checks-packet-v2": {
+        "files": 3234,
+        "logical_bytes": 13948601,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 13948601
+      },
+      "checks-pin-candidate": {
+        "files": 3233,
+        "logical_bytes": 13633319,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 13633319
+      },
+      "checks-retention-v1": {
+        "files": 3629,
+        "logical_bytes": 14740303,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 14740303
+      },
+      "checks-retention-v2": {
+        "files": 3629,
+        "logical_bytes": 14742324,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 14742324
+      },
+      "codec-common-pin": {
+        "files": 44760,
+        "logical_bytes": 593643649,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 593643649
+      },
+      "codec-windows-v1": {
+        "files": 44759,
+        "logical_bytes": 593331843,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 593331843
+      },
+      "contention-final": {
+        "files": 31,
+        "logical_bytes": 5921009,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 5921009
+      },
+      "dev-small-v1": {
+        "files": 81,
+        "logical_bytes": 327434,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 327434
+      },
+      "differential-final-v1": {
+        "files": 8118,
+        "logical_bytes": 86552460,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 86552460
+      },
+      "differential-v1": {
+        "files": 8117,
+        "logical_bytes": 86421832,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 86421832
+      },
+      "document-calibration-final": {
+        "files": 45338,
+        "logical_bytes": 304549716,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 304549716
+      },
+      "final-adversarial": {
+        "files": 575,
+        "logical_bytes": 3845976,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 3845976
+      },
+      "final-checks": {
+        "files": 3629,
+        "logical_bytes": 14866056,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 14866056
+      },
+      "final-deep-cases": {
+        "files": 1732,
+        "logical_bytes": 6427621,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 6427621
+      },
+      "final-namespace": {
+        "files": 89,
+        "logical_bytes": 619570,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 619570
+      },
+      "final-proofs": {
+        "files": 2,
+        "logical_bytes": 4307,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 4307
+      },
+      "final-proofs-v2": {
+        "files": 2,
+        "logical_bytes": 4342,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 4342
+      },
+      "final-proofs-v3": {
+        "files": 9,
+        "logical_bytes": 6148,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 6148
+      },
+      "final-resource-census": {
+        "files": 3,
+        "logical_bytes": 1080,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1080
+      },
+      "final-supplement": {
+        "files": 268,
+        "logical_bytes": 1645348,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1645348
+      },
+      "final-v2-adversarial": {
+        "files": 575,
+        "logical_bytes": 3896171,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 3896171
+      },
+      "final-v2-checks": {
+        "files": 3629,
+        "logical_bytes": 15071838,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 15071838
+      },
+      "final-v2-deep-cases": {
+        "files": 1732,
+        "logical_bytes": 6552752,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 6552752
+      },
+      "final-v2-differential": {
+        "files": 8118,
+        "logical_bytes": 86695114,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 86695114
+      },
+      "final-v2-namespace": {
+        "files": 89,
+        "logical_bytes": 629437,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 629437
+      },
+      "final-v2-replay-lifetime": {
+        "files": 7444,
+        "logical_bytes": 50380924,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 50380924
+      },
+      "final-v2-supplement": {
+        "files": 268,
+        "logical_bytes": 1662993,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1662993
+      },
+      "final-v2-walk-cases": {
+        "files": 298,
+        "logical_bytes": 1740790,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1740790
+      },
+      "final-verification": {
+        "files": 1,
+        "logical_bytes": 133,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 133
+      },
+      "final-verification-v2": {
+        "files": 1,
+        "logical_bytes": 104,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 104
+      },
+      "final-verification-v3": {
+        "files": 28,
+        "logical_bytes": 20817,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 20817
+      },
+      "final-walk-cases": {
+        "files": 126,
+        "logical_bytes": 1028213,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1028213
+      },
+      "history-common-pin": {
+        "files": 1413495,
+        "logical_bytes": 5472780517,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 5472780517
+      },
+      "history-pilot-1k": {
+        "files": 7835,
+        "logical_bytes": 39316405,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 39316405
+      },
+      "ledger-transport-final": {
+        "files": 3,
+        "logical_bytes": 1031,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1031
+      },
+      "linux-recipe-proof-restored": {
+        "files": 417,
+        "logical_bytes": 1033631,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1033631
+      },
+      "linux-recipe-proof-restored-v2": {
+        "files": 417,
+        "logical_bytes": 1033631,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1033631
+      },
+      "matrix-common-pin": {
+        "files": 536195,
+        "logical_bytes": 3505182656,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 3505182656
+      },
+      "matrix-small-medium-v1": {
+        "files": 66771,
+        "logical_bytes": 404027589,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 404027589
+      },
+      "packer-traversal-regression": {
+        "files": 11,
+        "logical_bytes": 922,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 922
+      },
+      "paired-intents-before": {
+        "files": 99,
+        "logical_bytes": 746985,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 746985
+      },
+      "paired-intents-before-v2": {
+        "files": 266,
+        "logical_bytes": 1468195,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1468195
+      },
+      "post-matrix": {
+        "files": 393474,
+        "logical_bytes": 2666816722,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 2666816722
+      },
+      "proof-intent-regression": {
+        "files": 335,
+        "logical_bytes": 791525,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 791525
+      },
+      "proof-intent-regression-v1": {
+        "files": 417,
+        "logical_bytes": 1033631,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1033631
+      },
+      "proof-retired-regression": {
+        "files": 416,
+        "logical_bytes": 1020794,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1020794
+      },
+      "quota-bytes-final": {
+        "files": 176,
+        "logical_bytes": 1139470,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1139470
+      },
+      "replay-fixed-v1": {
+        "files": 7444,
+        "logical_bytes": 50378167,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 50378167
+      },
+      "resource-attribution-regression": {
+        "files": 4,
+        "logical_bytes": 1100199,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1100199
+      },
+      "serial-continuation": {
+        "files": 17,
+        "logical_bytes": 11493,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 11493
+      },
+      "serial-continuation-v2": {
+        "files": 38,
+        "logical_bytes": 28788,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 28788
+      },
+      "strict-history-audit": {
+        "files": 3,
+        "logical_bytes": 405304,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 405304
+      },
+      "strict-large-audit": {
+        "files": 3,
+        "logical_bytes": 1443974,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1443974
+      },
+      "supplement-categories-v1": {
+        "files": 240,
+        "logical_bytes": 1391095,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1391095
+      },
+      "supplement-final-categories": {
+        "files": 240,
+        "logical_bytes": 1419024,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1419024
+      },
+      "supplement-final-v1": {
+        "files": 240,
+        "logical_bytes": 1390310,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1390310
+      },
+      "supplement-nativepath-candidate": {
+        "files": 232,
+        "logical_bytes": 1217390,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1217390
+      },
+      "supplement-packet-v2": {
+        "files": 240,
+        "logical_bytes": 1418638,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1418638
+      },
+      "supplement-pin-candidate": {
+        "files": 120,
+        "logical_bytes": 505258,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 505258
+      },
+      "supplement-retention-v1": {
+        "files": 268,
+        "logical_bytes": 1518099,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1518099
+      },
+      "supplement-retention-v2": {
+        "files": 268,
+        "logical_bytes": 1520069,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1520069
+      },
+      "supplement-v1": {
+        "files": 225,
+        "logical_bytes": 1234725,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1234725
+      },
+      "supplement-v2": {
+        "files": 232,
+        "logical_bytes": 1213315,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 1213315
+      },
+      "windows-raw-export-final": {
+        "files": 3,
+        "logical_bytes": 746,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 746
+      },
+      "wsl-final-export": {
+        "files": 6,
+        "logical_bytes": 2848,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 2848
+      },
+      "wsl-source-verification-final": {
+        "files": 3,
+        "logical_bytes": 788,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 788
+      }
+    },
+    "files": 2650971,
+    "logical_bytes": 15323250267,
+    "allocated_file_bytes": null,
+    "free_bytes": 226977198080,
+    "seconds": 201.34299999999348,
+    "correction": "Original raw capture mislabeled GetCompressedFileSizeW values; those values are compressed-size API bytes, not cluster allocation. Logical file bytes/counts unchanged."
+  },
+  {
+    "root": "C:\\file-native-recovery-20261019",
+    "categories": {
+      "build": {
+        "files": 1052,
+        "logical_bytes": 418344964,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 418344964
+      },
+      "(root-files)": {
+        "files": 10,
+        "logical_bytes": 12398,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 12398
+      },
+      "windows-existing-checks-data": {
+        "files": 2457,
+        "logical_bytes": 14922201,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 14922201
+      },
+      "windows-final-capsule-data": {
+        "files": 4184,
+        "logical_bytes": 41261142,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 41261142
+      },
+      "windows-replay-data": {
+        "files": 1219,
+        "logical_bytes": 15723319,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 15723319
+      },
+      "windows-small-v1": {
+        "files": 106,
+        "logical_bytes": 825599,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 825599
+      },
+      "windows-small-v2": {
+        "files": 5030,
+        "logical_bytes": 46120132,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 46120132
+      }
+    },
+    "files": 14058,
+    "logical_bytes": 537209755,
+    "allocated_file_bytes": null,
+    "free_bytes": 226974515200,
+    "seconds": 1.5,
+    "correction": "Original raw capture mislabeled GetCompressedFileSizeW values; those values are compressed-size API bytes, not cluster allocation. Logical file bytes/counts unchanged."
+  },
+  {
+    "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook",
+    "categories": {
+      ".claude": {
+        "files": 6,
+        "logical_bytes": 28303,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 28303
+      },
+      ".codex": {
+        "files": 24,
+        "logical_bytes": 114287,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 114287
+      },
+      "(root-files)": {
+        "files": 11,
+        "logical_bytes": 151243,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 151243
+      },
+      ".github": {
+        "files": 3,
+        "logical_bytes": 7234,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 7234
+      },
+      "archived": {
+        "files": 356,
+        "logical_bytes": 3075285,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 3075285
+      },
+      "core": {
+        "files": 110,
+        "logical_bytes": 145608,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 145608
+      },
+      "crates": {
+        "files": 882,
+        "logical_bytes": 15473388,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 15473388
+      },
+      "docs": {
+        "files": 2917,
+        "logical_bytes": 226356539,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 226356539
+      },
+      "install": {
+        "files": 4,
+        "logical_bytes": 13482,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 13482
+      },
+      "scripts": {
+        "files": 1,
+        "logical_bytes": 4603,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 4603
+      },
+      "specs": {
+        "files": 3,
+        "logical_bytes": 66911,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 66911
+      },
+      "tests": {
+        "files": 145,
+        "logical_bytes": 305637,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 305637
+      },
+      "tools": {
+        "files": 27,
+        "logical_bytes": 169005,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 169005
+      }
+    },
+    "files": 4489,
+    "logical_bytes": 245911525,
+    "allocated_file_bytes": null,
+    "free_bytes": 226970910720,
+    "seconds": 0.4850000000442378,
+    "correction": "Original raw capture mislabeled GetCompressedFileSizeW values; those values are compressed-size API bytes, not cluster allocation. Logical file bytes/counts unchanged."
+  },
+  {
+    "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-recovery-20261019\\handbook",
+    "categories": {
+      ".claude": {
+        "files": 6,
+        "logical_bytes": 28303,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 28303
+      },
+      ".codex": {
+        "files": 24,
+        "logical_bytes": 114287,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 114287
+      },
+      "(root-files)": {
+        "files": 11,
+        "logical_bytes": 151244,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 151244
+      },
+      ".github": {
+        "files": 3,
+        "logical_bytes": 7234,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 7234
+      },
+      "archived": {
+        "files": 356,
+        "logical_bytes": 3075285,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 3075285
+      },
+      "core": {
+        "files": 110,
+        "logical_bytes": 145608,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 145608
+      },
+      "crates": {
+        "files": 882,
+        "logical_bytes": 15473388,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 15473388
+      },
+      "docs": {
+        "files": 2910,
+        "logical_bytes": 226287811,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 226287811
+      },
+      "install": {
+        "files": 4,
+        "logical_bytes": 13482,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 13482
+      },
+      "scripts": {
+        "files": 1,
+        "logical_bytes": 4603,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 4603
+      },
+      "specs": {
+        "files": 3,
+        "logical_bytes": 66911,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 66911
+      },
+      "tests": {
+        "files": 145,
+        "logical_bytes": 305637,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 305637
+      },
+      "tools": {
+        "files": 27,
+        "logical_bytes": 169005,
+        "allocated_file_bytes": null,
+        "compressed_size_api_bytes": 169005
+      }
+    },
+    "files": 4482,
+    "logical_bytes": 245842798,
+    "allocated_file_bytes": null,
+    "free_bytes": 226970243072,
+    "seconds": 0.4220000000204891,
+    "correction": "Original raw capture mislabeled GetCompressedFileSizeW values; those values are compressed-size API bytes, not cluster allocation. Logical file bytes/counts unchanged."
+  }
+]

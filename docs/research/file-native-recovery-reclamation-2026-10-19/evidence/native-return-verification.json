@@ -1,0 +1,94 @@
+[
+  {
+    "host": "linux",
+    "source_commit": "40509a90a015de84bd12d26e152a52c92721baa0",
+    "source_hashes_matched": 21,
+    "all_core_rust_source_hashes_verified": true,
+    "cargo_consumers_and_driver_sources_verified": true,
+    "binary_sha256": "689f7ceb569ec628132fbd57e16b13d12c60215a9d465f5440a5543530e31392",
+    "archive_sha256": "1dde3293200aa87a3ebdbaa4376656e244967dba0979fbcd01ba45c6fe906e02",
+    "rows": [
+      {
+        "name": "build",
+        "status": "success",
+        "seconds": 5.756197690963745
+      },
+      {
+        "name": "tests",
+        "status": "success",
+        "seconds": 4.005798578262329
+      },
+      {
+        "name": "capsule",
+        "status": "success",
+        "seconds": 69.10363507270813
+      },
+      {
+        "name": "extra",
+        "status": "success",
+        "seconds": 15.274133205413818
+      },
+      {
+        "name": "paired",
+        "status": "success",
+        "seconds": 4.758151531219482
+      },
+      {
+        "name": "replay",
+        "status": "success",
+        "seconds": 58.83692002296448
+      },
+      {
+        "name": "protocol",
+        "status": "success",
+        "seconds": 62.09326672554016
+      }
+    ]
+  },
+  {
+    "host": "wsl",
+    "source_commit": "40509a90a015de84bd12d26e152a52c92721baa0",
+    "source_hashes_matched": 21,
+    "all_core_rust_source_hashes_verified": true,
+    "cargo_consumers_and_driver_sources_verified": true,
+    "binary_sha256": "eeb80b607f0a13433f09d3a66c2aa7e462ab32ecd72310f3f18d11de9ef59578",
+    "archive_sha256": "6ae3f985219f485fdcd31145e6094dcb2e231d6f5ef7e97ceda46ec8165e8778",
+    "rows": [
+      {
+        "name": "build",
+        "status": "success",
+        "seconds": 8.511606693267822
+      },
+      {
+        "name": "tests",
+        "status": "success",
+        "seconds": 5.755815029144287
+      },
+      {
+        "name": "capsule",
+        "status": "success",
+        "seconds": 18.530460357666016
+      },
+      {
+        "name": "extra",
+        "status": "success",
+        "seconds": 4.504082441329956
+      },
+      {
+        "name": "paired",
+        "status": "success",
+        "seconds": 1.2514739036560059
+      },
+      {
+        "name": "replay",
+        "status": "success",
+        "seconds": 18.76945185661316
+      },
+      {
+        "name": "protocol",
+        "status": "success",
+        "seconds": 17.783386945724487
+      }
+    ]
+  }
+]

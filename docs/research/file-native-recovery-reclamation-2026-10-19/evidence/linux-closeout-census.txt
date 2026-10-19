@@ -1,0 +1,4 @@
+592312728	/home/spenser/file-native-recovery-20261019
+29739
+Filesystem        1B-blocks         Used   Available Use% Mounted on
+/dev/nvme0n1p2 983038173184 883216384000 49810735104  95% /

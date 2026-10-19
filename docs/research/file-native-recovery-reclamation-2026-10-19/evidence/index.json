@@ -1,0 +1,127 @@
+{
+  "admission.json": {
+    "bytes": 800,
+    "sha256": "eac32c188fbbbdb7afab9418c464934727f884d11a76e23192ca35578dbe7658"
+  },
+  "closeout-bounds.json": {
+    "bytes": 409,
+    "sha256": "cda463109aaaae260d1cecefcc836d8f5fd2e2a49423ac07b1eb195d65ca669a"
+  },
+  "empty-external-directory-case.json": {
+    "bytes": 6563,
+    "sha256": "9df22d6172cb1d8bf1d8cbbd3d9029d93902b21cdf2ac8821e491005a533b2ab"
+  },
+  "execution-clock.json": {
+    "bytes": 240,
+    "sha256": "b68d1645fcb59eb2f6838465a26f35467e6ebb5644ae56aa9d8bf150ba4c7843"
+  },
+  "final-build-binding.json": {
+    "bytes": 1669,
+    "sha256": "f455b16f61ee7d3d667a75002c42f5565bd46e1ac15e0faa8750016091bf76b1"
+  },
+  "final-code-build-binding.json": {
+    "bytes": 1669,
+    "sha256": "1dfce159ad932840fe8ddf54c09760d494db3f575189a2547665b16fbc93da9c"
+  },
+  "final-owned-roles.json": {
+    "bytes": 5862,
+    "sha256": "c0e5172fba70488508369c55aa6391b243da1d6fb0ec039b5fc844fdaac0dc91"
+  },
+  "gitnexus-main-compare.txt": {
+    "bytes": 2303,
+    "sha256": "206207cc710120ce1c32c013265071aa9df6cc89a7143c9db0617c54e8fb26f8"
+  },
+  "gitnexus-precommit.txt": {
+    "bytes": 2303,
+    "sha256": "206207cc710120ce1c32c013265071aa9df6cc89a7143c9db0617c54e8fb26f8"
+  },
+  "independent-oracle-whitespace-negative.json": {
+    "bytes": 59,
+    "sha256": "84873fedb7ddfaf4031155c356e19d289fba8a99834cc7617257cb6b1c4490cd"
+  },
+  "inventory-additional-corrected.json": {
+    "bytes": 3826,
+    "sha256": "98791aca83b6c53349aadcdd0cbbd865ad4c0e2b6fba23d03da15a1c99027610"
+  },
+  "inventory-preflight-corrected.json": {
+    "bytes": 22841,
+    "sha256": "2a63c8bacc30e4d491ab69946ae60435433e2044957220806ac964331968185c"
+  },
+  "legacy-fixtures.tar.gz": {
+    "bytes": 30980,
+    "sha256": "412f022fa5ea6bfe659b7897f404d7862e1c1755573fb5d935e81607c97e2bfd"
+  },
+  "linux-closeout-census.txt": {
+    "bytes": 189,
+    "sha256": "a3f2a057521bf1050f56fc0e46d869427cc78077f602f3a7949d558ea0797505"
+  },
+  "linux-raw.tar.gz": {
+    "bytes": 2341143,
+    "sha256": "b95ea82e73b6a6783f6e6884de26bff80da9000ece21fa2b4041b63b8ae62216"
+  },
+  "matched-small-final-summary.json": {
+    "bytes": 3310,
+    "sha256": "557fd75e47f7813db17dc4b85dc1a369b691a795c0df3d34183bf177b08a5a9a"
+  },
+  "native-compatible-core-verification.json": {
+    "bytes": 1139,
+    "sha256": "d15614bf1fec72c01c32bd544259b7cd9c3d4b4242730d22f070935dd55c8500"
+  },
+  "native-final-core-verification.json": {
+    "bytes": 1587,
+    "sha256": "ccbfb94e7a3e24f33ff5b56e49e65e29d3bcc5bb3d3106185fdf1caf18485744"
+  },
+  "native-return-verification.json": {
+    "bytes": 2489,
+    "sha256": "6f2cd27e31c8e857ae2108d0b10f40d0019ad8e7e06f1f0cb4a086707fdbc5d9"
+  },
+  "operational-backup-manifest.json": {
+    "bytes": 737,
+    "sha256": "8b5d1ab86ba38d8d30c33e08e9ebb3d09cbac18c92c49f97622a6f0c1a1ef7dc"
+  },
+  "operational-restore-gate.json": {
+    "bytes": 1916,
+    "sha256": "9dc49d19cb291e987c9857afb13b42d16309da3db2370e9824982c03bf55b19f"
+  },
+  "original-operational-verification-result.json": {
+    "bytes": 652,
+    "sha256": "2680ca18d73b89c4bb15a604043191d437b97a797ef488a3e14ff03ac6c3fa03"
+  },
+  "original-preservation-and-final-state.json": {
+    "bytes": 1055,
+    "sha256": "53caeb3a8d40ffdd4402edf52e8ef83748bd351a1007b851d8ff71641523afb9"
+  },
+  "original-roles.json": {
+    "bytes": 2187,
+    "sha256": "59509dad8b0b69cd491be12c9946301b10622e70f688f675673845de9627d622"
+  },
+  "post-gc-operational-verification-result.json": {
+    "bytes": 769,
+    "sha256": "e9c300e9e9218ed513cabaa3e4267b4a525b1fba498200d389d8448baa1c00e7"
+  },
+  "powershell-extraction.json": {
+    "bytes": 2357,
+    "sha256": "39867ee8730d089c362e4500b6f19162f19ad63a6fb8ab62d04ad86593ee5393"
+  },
+  "restored-operational-verification-result.json": {
+    "bytes": 760,
+    "sha256": "14f042b76da91167d6986d493524cf773cdb4efbd663fc81511616f4dd91f313"
+  },
+  "results.json": {
+    "bytes": 5454,
+    "sha256": "663a9eec25d8a5cd67794e3ff84c63d993e06097446d33fdf45760df7104f480"
+  },
+  "windows-raw.tar.gz": {
+    "bytes": 7550368,
+    "sha256": "04e462d5a65fe582dec536a6b6268f5a48ba28aafedfced67f5f47c27f252763"
+  },
+  "wsl-closeout-census.json": {
+    "bytes": 1878,
+    "sha256": "70d7549450c28eafb06e88604934c98e99298913e51d15b76c0470ff708b0b63"
+  },
+  "wsl-raw.tar.gz": {
+    "bytes": 2529381,
+    "sha256": "9729f937db41de6e823cd15f6969dc304fc2ca0e656fe6339c4df874e8acf700"
+  },
+  "qualification": "Full operational payload/inventory remain at runtime. Corrected Windows census labels supersede raw initial labels. Executed source/build and native gaps are in report.md."
+}

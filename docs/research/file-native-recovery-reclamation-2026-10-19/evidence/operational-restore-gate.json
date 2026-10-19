@@ -1,0 +1,46 @@
+{
+  "status": "operational-restore-verified",
+  "destination": "C:\\file-native-recovery-20261019\\history-restored\\disposable\\store",
+  "original": "C:\\file-native-incremental-20261018\\history-common-pin\\store",
+  "archive_manifest_sha256": "8b5d1ab86ba38d8d30c33e08e9ebb3d09cbac18c92c49f97622a6f0c1a1ef7dc",
+  "original_selected": {
+    "publication": "publication-74796-1792371048916760700-13",
+    "digest": "9b80c0b54b15af6457ee50290f266684bed6c06223cbe105a2654da7bb368546"
+  },
+  "selected": {
+    "digest": "01b1296965e603197789f7d2d6537989a6519dd2d4e2bef9204d856e2fba885f",
+    "publication": "publication-71260-1792428570684014800-19"
+  },
+  "successor": {
+    "changed": [],
+    "outcome": "accepted",
+    "publication": "publication-71260-1792428570684014800-19",
+    "removed": [],
+    "request": "restored-operational-successor",
+    "state_digest": "214da75cfb75bbd2def53fd52c361709289fa0976d140b8e5176e605f0ba320d"
+  },
+  "binary_sha256": "4d8ecb0ff2c29b42bf83161803336fadfc6dd9cfbd2ae6594c05d9358adbac0b",
+  "verification": {
+    "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+    "selected": {
+      "publication": "publication-74796-1792371048916760700-13",
+      "digest": "9b80c0b54b15af6457ee50290f266684bed6c06223cbe105a2654da7bb368546"
+    },
+    "publications": 101003,
+    "ledger_rows": 100000,
+    "permanent_digest": "68044def6497b6f74baeda401168d4ee343f4fc80679ff2b3b6e4946d2d88a10",
+    "retired_publications": 0,
+    "retired_content": "none",
+    "unique_content_roots": 128,
+    "root_visits": 101003,
+    "sources": 36,
+    "pins": 0,
+    "reservations": 0,
+    "packets": 0,
+    "generations": 0,
+    "conservative_cumulative_owner_allowance_bytes": 6788903037184,
+    "actual_physical_owner_bytes": false,
+    "seconds": 517.9070000000065
+  },
+  "disposable_permission_imported": false
+}

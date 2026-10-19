@@ -25,6 +25,14 @@ Required findings corrected before the source pin:
   edits to an old store. Routing now binds the reader to the immutable projection
   profile, replays sealed legacy candidates in their original profile, and targets
   YAML for every new ordinary preparation. Historical objects stay unchanged.
+- Full repair now prunes parents only for prior/desired projection paths, keeping
+  empty external directories around preserved untracked files. The final Windows
+  regression proves both the directory and divergent bytes survive.
+- The independent oracle now verifies backing-file hashes and B manifest binding,
+  rather than accepting semantically equivalent but byte-corrupt derived data.
+  Backup tests include a nonempty interrupted A obligation and verify it before
+  restored selection. Final native reruns of these late refinements are explicitly
+  unperformed at the inherited host deadlines; the report preserves earlier pins.
 
 Regression evidence covers namespace replay and corrections, divergent files and
 subtrees, semantic discovery/membership, relationship direction/type/order and
@@ -46,3 +54,12 @@ schema error. detect-changes is invoked against the actual worktree and fails
 repository binding. No zero-impact/clean graph claim is made; direct source caller
 tracing and focused recovery tests are the substitute evidence authorized by this
 unit. No analyzer repair is attempted.
+
+Direct source callers traced: full/delta rendering through Store initialization,
+preparation, reopened selection and audit; A execution through refresh/resume and
+selection delivery; packet generation/replay through preparation and assembly;
+checkpoint through API dispatch; and transfer recovery through preparation,
+checkpoint and collection. These paths feed both standalone consumer entrypoints.
+The manual risk assessment is high for recovery/lifecycle changes, confined to
+the standalone experiment. Final post-GC all-history proof and exact source
+checks passed; no product ownership or dependencies were changed.
