@@ -1,0 +1,44 @@
+[
+  {
+    "n": 1000,
+    "k": 1,
+    "selected": "publication-57072-1792371583354061000-12",
+    "distinct_source_digests_verified": 1,
+    "exact_4096_byte_sources_verified": 1
+  },
+  {
+    "n": 1000,
+    "k": 8,
+    "selected": "publication-74568-1792371583520644300-33",
+    "distinct_source_digests_verified": 8,
+    "exact_4096_byte_sources_verified": 8
+  },
+  {
+    "n": 1000,
+    "k": 64,
+    "selected": "publication-74576-1792371584176491400-107",
+    "distinct_source_digests_verified": 64,
+    "exact_4096_byte_sources_verified": 64
+  },
+  {
+    "n": 10000,
+    "k": 1,
+    "selected": "publication-42376-1792371890272059800-14",
+    "distinct_source_digests_verified": 1,
+    "exact_4096_byte_sources_verified": 1
+  },
+  {
+    "n": 10000,
+    "k": 8,
+    "selected": "publication-60636-1792371890481602800-43",
+    "distinct_source_digests_verified": 8,
+    "exact_4096_byte_sources_verified": 8
+  },
+  {
+    "n": 10000,
+    "k": 64,
+    "selected": "publication-74008-1792371891310044000-208",
+    "distinct_source_digests_verified": 64,
+    "exact_4096_byte_sources_verified": 64
+  }
+]

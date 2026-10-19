@@ -1,0 +1,513 @@
+[
+  {
+    "root": "C:\\file-native-incremental-20261018\\matrix-common-pin\\n1000\\disposable\\store",
+    "epoch": 1792373158.5220237,
+    "seconds": 0.26500000001396984,
+    "categories": {
+      "(root-files)": {
+        "files": 8,
+        "logical_bytes": 1202,
+        "allocated_file_bytes": null
+      },
+      "abandoned": {
+        "files": 3,
+        "logical_bytes": 18,
+        "allocated_file_bytes": null
+      },
+      "attempt-hints": {
+        "files": 7,
+        "logical_bytes": 1004,
+        "allocated_file_bytes": null
+      },
+      "attempts": {
+        "files": 14,
+        "logical_bytes": 669672,
+        "allocated_file_bytes": null
+      },
+      "derived": {
+        "files": 1003,
+        "logical_bytes": 144692,
+        "allocated_file_bytes": null
+      },
+      "objects": {
+        "files": 196,
+        "logical_bytes": 2972644,
+        "allocated_file_bytes": null
+      },
+      "originals": {
+        "files": 1137,
+        "logical_bytes": 13254656,
+        "allocated_file_bytes": null
+      },
+      "publications": {
+        "files": 7,
+        "logical_bytes": 8906,
+        "allocated_file_bytes": null
+      },
+      "results": {
+        "files": 7,
+        "logical_bytes": 18857,
+        "allocated_file_bytes": null
+      },
+      "view": {
+        "files": 2003,
+        "logical_bytes": 12399924,
+        "allocated_file_bytes": null
+      }
+    },
+    "files": 4385,
+    "logical_bytes": 29471575,
+    "allocated_file_bytes": null,
+    "free_bytes": 230405386240,
+    "conservative_publication_owner_bytes": 807736064,
+    "owner_records": 7,
+    "observed_reservations": {},
+    "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "conservative_active_reserved_bytes": 0,
+    "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+  },
+  {
+    "root": "C:\\file-native-incremental-20261018\\matrix-common-pin\\B-n1000\\disposable\\store",
+    "epoch": 1792373158.9270837,
+    "seconds": 0.39100000000325963,
+    "categories": {
+      "(root-files)": {
+        "files": 6,
+        "logical_bytes": 623,
+        "allocated_file_bytes": null
+      },
+      "attempt-hints": {
+        "files": 2,
+        "logical_bytes": 288,
+        "allocated_file_bytes": null
+      },
+      "attempts": {
+        "files": 4,
+        "logical_bytes": 17273,
+        "allocated_file_bytes": null
+      },
+      "derived": {
+        "files": 1003,
+        "logical_bytes": 144692,
+        "allocated_file_bytes": null
+      },
+      "generations": {
+        "files": 4008,
+        "logical_bytes": 26629800,
+        "allocated_file_bytes": null
+      },
+      "objects": {
+        "files": 74,
+        "logical_bytes": 946537,
+        "allocated_file_bytes": null
+      },
+      "originals": {
+        "files": 1000,
+        "logical_bytes": 12697600,
+        "allocated_file_bytes": null
+      },
+      "publications": {
+        "files": 2,
+        "logical_bytes": 2365,
+        "allocated_file_bytes": null
+      },
+      "results": {
+        "files": 2,
+        "logical_bytes": 15483,
+        "allocated_file_bytes": null
+      }
+    },
+    "files": 6101,
+    "logical_bytes": 40454661,
+    "allocated_file_bytes": null,
+    "free_bytes": 230405357568,
+    "conservative_publication_owner_bytes": 734218176,
+    "owner_records": 2,
+    "observed_reservations": {},
+    "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "conservative_active_reserved_bytes": 0,
+    "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+  },
+  {
+    "root": "C:\\file-native-incremental-20261018\\matrix-common-pin\\n10000\\disposable\\store",
+    "epoch": 1792373162.043428,
+    "seconds": 3.125,
+    "categories": {
+      "(root-files)": {
+        "files": 8,
+        "logical_bytes": 1203,
+        "allocated_file_bytes": null
+      },
+      "abandoned": {
+        "files": 26,
+        "logical_bytes": 156,
+        "allocated_file_bytes": null
+      },
+      "attempt-hints": {
+        "files": 60,
+        "logical_bytes": 8601,
+        "allocated_file_bytes": null
+      },
+      "attempts": {
+        "files": 5126,
+        "logical_bytes": 65465018,
+        "allocated_file_bytes": null
+      },
+      "derived": {
+        "files": 20011,
+        "logical_bytes": 6081778,
+        "allocated_file_bytes": null
+      },
+      "objects": {
+        "files": 2338,
+        "logical_bytes": 23371977,
+        "allocated_file_bytes": null
+      },
+      "originals": {
+        "files": 10137,
+        "logical_bytes": 127533056,
+        "allocated_file_bytes": null
+      },
+      "publications": {
+        "files": 60,
+        "logical_bytes": 79359,
+        "allocated_file_bytes": null
+      },
+      "results": {
+        "files": 60,
+        "logical_bytes": 242210,
+        "allocated_file_bytes": null
+      },
+      "view": {
+        "files": 20003,
+        "logical_bytes": 128409768,
+        "allocated_file_bytes": null
+      }
+    },
+    "files": 57829,
+    "logical_bytes": 351193126,
+    "allocated_file_bytes": null,
+    "free_bytes": 230404997120,
+    "conservative_publication_owner_bytes": 8667088576,
+    "owner_records": 60,
+    "observed_reservations": {},
+    "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "conservative_active_reserved_bytes": 0,
+    "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+  },
+  {
+    "root": "C:\\file-native-incremental-20261018\\matrix-common-pin\\B-n10000\\disposable\\store",
+    "epoch": 1792373165.383993,
+    "seconds": 3.3439999999827705,
+    "categories": {
+      "(root-files)": {
+        "files": 6,
+        "logical_bytes": 623,
+        "allocated_file_bytes": null
+      },
+      "attempt-hints": {
+        "files": 2,
+        "logical_bytes": 289,
+        "allocated_file_bytes": null
+      },
+      "attempts": {
+        "files": 4,
+        "logical_bytes": 152277,
+        "allocated_file_bytes": null
+      },
+      "derived": {
+        "files": 10003,
+        "logical_bytes": 1811919,
+        "allocated_file_bytes": null
+      },
+      "generations": {
+        "files": 40008,
+        "logical_bytes": 267060254,
+        "allocated_file_bytes": null
+      },
+      "objects": {
+        "files": 817,
+        "logical_bytes": 10053621,
+        "allocated_file_bytes": null
+      },
+      "originals": {
+        "files": 10000,
+        "logical_bytes": 126976000,
+        "allocated_file_bytes": null
+      },
+      "publications": {
+        "files": 2,
+        "logical_bytes": 2371,
+        "allocated_file_bytes": null
+      },
+      "results": {
+        "files": 2,
+        "logical_bytes": 150484,
+        "allocated_file_bytes": null
+      }
+    },
+    "files": 60844,
+    "logical_bytes": 406207838,
+    "allocated_file_bytes": null,
+    "free_bytes": 230404669440,
+    "conservative_publication_owner_bytes": 6134218176,
+    "owner_records": 2,
+    "observed_reservations": {},
+    "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "conservative_active_reserved_bytes": 0,
+    "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+  },
+  {
+    "root": "C:\\file-native-incremental-20261018\\matrix-common-pin\\n100000\\disposable\\store",
+    "epoch": 1792373185.18478,
+    "seconds": 19.79700000002049,
+    "categories": {
+      "(root-files)": {
+        "files": 7,
+        "logical_bytes": 1114,
+        "allocated_file_bytes": null
+      },
+      "attempt-hints": {
+        "files": 4,
+        "logical_bytes": 577,
+        "allocated_file_bytes": null
+      },
+      "attempts": {
+        "files": 8,
+        "logical_bytes": 1861720,
+        "allocated_file_bytes": null
+      },
+      "derived": {
+        "files": 100003,
+        "logical_bytes": 15140919,
+        "allocated_file_bytes": null
+      },
+      "objects": {
+        "files": 6907,
+        "logical_bytes": 95576141,
+        "allocated_file_bytes": null
+      },
+      "originals": {
+        "files": 100073,
+        "logical_bytes": 1270059008,
+        "allocated_file_bytes": null
+      },
+      "publications": {
+        "files": 4,
+        "logical_bytes": 4977,
+        "allocated_file_bytes": null
+      },
+      "results": {
+        "files": 4,
+        "logical_bytes": 1502064,
+        "allocated_file_bytes": null
+      },
+      "view": {
+        "files": 200003,
+        "logical_bytes": 1283721271,
+        "allocated_file_bytes": null
+      }
+    },
+    "files": 407013,
+    "logical_bytes": 2667867791,
+    "allocated_file_bytes": null,
+    "free_bytes": 230404141056,
+    "conservative_publication_owner_bytes": 30287571968,
+    "owner_records": 4,
+    "observed_reservations": {},
+    "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "conservative_active_reserved_bytes": 0,
+    "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+  },
+  {
+    "root": "C:\\file-native-incremental-20261018\\document-calibration-final\\n1000\\disposable\\store",
+    "epoch": 1792373185.4041286,
+    "seconds": 0.21799999999348074,
+    "categories": {
+      "(root-files)": {
+        "files": 7,
+        "logical_bytes": 1112,
+        "allocated_file_bytes": null
+      },
+      "attempt-hints": {
+        "files": 4,
+        "logical_bytes": 575,
+        "allocated_file_bytes": null
+      },
+      "attempts": {
+        "files": 8,
+        "logical_bytes": 705332,
+        "allocated_file_bytes": null
+      },
+      "derived": {
+        "files": 1003,
+        "logical_bytes": 144692,
+        "allocated_file_bytes": null
+      },
+      "objects": {
+        "files": 133,
+        "logical_bytes": 1950464,
+        "allocated_file_bytes": null
+      },
+      "originals": {
+        "files": 1073,
+        "logical_bytes": 12996608,
+        "allocated_file_bytes": null
+      },
+      "publications": {
+        "files": 4,
+        "logical_bytes": 4957,
+        "allocated_file_bytes": null
+      },
+      "results": {
+        "files": 4,
+        "logical_bytes": 17056,
+        "allocated_file_bytes": null
+      },
+      "view": {
+        "files": 2003,
+        "logical_bytes": 12399924,
+        "allocated_file_bytes": null
+      }
+    },
+    "files": 4239,
+    "logical_bytes": 28220720,
+    "allocated_file_bytes": null,
+    "free_bytes": 230404128768,
+    "conservative_publication_owner_bytes": 587571968,
+    "owner_records": 4,
+    "observed_reservations": {},
+    "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "conservative_active_reserved_bytes": 0,
+    "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+  },
+  {
+    "root": "C:\\file-native-incremental-20261018\\document-calibration-final\\n10000\\disposable\\store",
+    "epoch": 1792373187.203802,
+    "seconds": 1.797000000020489,
+    "categories": {
+      "(root-files)": {
+        "files": 7,
+        "logical_bytes": 1113,
+        "allocated_file_bytes": null
+      },
+      "attempt-hints": {
+        "files": 4,
+        "logical_bytes": 576,
+        "allocated_file_bytes": null
+      },
+      "attempts": {
+        "files": 8,
+        "logical_bytes": 3968288,
+        "allocated_file_bytes": null
+      },
+      "derived": {
+        "files": 10003,
+        "logical_bytes": 1811919,
+        "allocated_file_bytes": null
+      },
+      "objects": {
+        "files": 989,
+        "logical_bytes": 13054222,
+        "allocated_file_bytes": null
+      },
+      "originals": {
+        "files": 10073,
+        "logical_bytes": 127275008,
+        "allocated_file_bytes": null
+      },
+      "publications": {
+        "files": 4,
+        "logical_bytes": 4967,
+        "allocated_file_bytes": null
+      },
+      "results": {
+        "files": 4,
+        "logical_bytes": 152060,
+        "allocated_file_bytes": null
+      },
+      "view": {
+        "files": 20003,
+        "logical_bytes": 128099791,
+        "allocated_file_bytes": null
+      }
+    },
+    "files": 41095,
+    "logical_bytes": 274367944,
+    "allocated_file_bytes": null,
+    "free_bytes": 230403899392,
+    "conservative_publication_owner_bytes": 3287571968,
+    "owner_records": 4,
+    "observed_reservations": {},
+    "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "conservative_active_reserved_bytes": 0,
+    "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+  },
+  {
+    "root": "C:\\file-native-incremental-20261018\\history-common-pin\\store",
+    "epoch": 1792373268.3457909,
+    "seconds": 81.14100000000326,
+    "categories": {
+      "(root-files)": {
+        "files": 10,
+        "logical_bytes": 246569721,
+        "allocated_file_bytes": null
+      },
+      "attempt-hints": {
+        "files": 101003,
+        "logical_bytes": 14861926,
+        "allocated_file_bytes": null
+      },
+      "attempts": {
+        "files": 202006,
+        "logical_bytes": 403010488,
+        "allocated_file_bytes": null
+      },
+      "derived": {
+        "files": 19,
+        "logical_bytes": 3061,
+        "allocated_file_bytes": null
+      },
+      "fences": {
+        "files": 3,
+        "logical_bytes": 60,
+        "allocated_file_bytes": null
+      },
+      "objects": {
+        "files": 908392,
+        "logical_bytes": 4638673934,
+        "allocated_file_bytes": null
+      },
+      "originals": {
+        "files": 17,
+        "logical_bytes": 155648,
+        "allocated_file_bytes": null
+      },
+      "publications": {
+        "files": 101003,
+        "logical_bytes": 135592497,
+        "allocated_file_bytes": null
+      },
+      "results": {
+        "files": 101003,
+        "logical_bytes": 25919454,
+        "allocated_file_bytes": null
+      },
+      "view": {
+        "files": 35,
+        "logical_bytes": 154613,
+        "allocated_file_bytes": null
+      }
+    },
+    "files": 1413491,
+    "logical_bytes": 5464941402,
+    "allocated_file_bytes": null,
+    "free_bytes": 230402449408,
+    "conservative_publication_owner_bytes": 6788903037184,
+    "owner_records": 101003,
+    "observed_reservations": {},
+    "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "conservative_active_reserved_bytes": 0,
+    "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+  }
+]

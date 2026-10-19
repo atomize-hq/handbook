@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\verify_projection.py",
+    "--roots",
+    "C:\\file-native-incremental-20261018\\document-calibration-final\\n1000\\disposable\\store",
+    "C:\\file-native-incremental-20261018\\document-calibration-final\\n10000\\disposable\\store",
+    "--output",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\evidence\\calibration-projection-continuation.json"
+  ],
+  "started_epoch": 1792373331.035579,
+  "cap_seconds": 600,
+  "deadline_epoch": 1792378745.5431294,
+  "exit": 0,
+  "censored": false,
+  "seconds": 7.0071258544921875
+}

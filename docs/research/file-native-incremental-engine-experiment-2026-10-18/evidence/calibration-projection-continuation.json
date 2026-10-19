@@ -1,0 +1,36 @@
+[
+  {
+    "root": "C:\\file-native-incremental-20261018\\document-calibration-final\\n1000\\disposable\\store",
+    "selected": {
+      "publication": "publication-74576-1792371584176491400-107",
+      "digest": "5d4b7fce3441a3ccfd65b0aa69f7eb97c224b507610cb5d2a25ea491eeb49d72"
+    },
+    "documents": 1000,
+    "projection_files": 2003,
+    "independent_navigation_render_verified": true,
+    "exact_sources_verified": true,
+    "B_file_hardlink_independence_verified": false,
+    "readable_declared_current": true,
+    "readable_missing": 0,
+    "readable_edited": 0,
+    "readable_extra": 0,
+    "seconds": 0.6559999999590218
+  },
+  {
+    "root": "C:\\file-native-incremental-20261018\\document-calibration-final\\n10000\\disposable\\store",
+    "selected": {
+      "publication": "publication-74008-1792371891310044000-208",
+      "digest": "1928c65916295289f77e0438b4ccd2d08cf58013752d72612d29ed460e3527ce"
+    },
+    "documents": 10000,
+    "projection_files": 20003,
+    "independent_navigation_render_verified": true,
+    "exact_sources_verified": true,
+    "B_file_hardlink_independence_verified": false,
+    "readable_declared_current": true,
+    "readable_missing": 0,
+    "readable_edited": 0,
+    "readable_extra": 0,
+    "seconds": 6.2810000000172295
+  }
+]

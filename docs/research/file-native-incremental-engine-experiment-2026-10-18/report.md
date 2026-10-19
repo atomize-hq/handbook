@@ -240,6 +240,24 @@ latency distribution or device-cold performance.
 The slower early 100k lookup is retained; bounded read counts do not guarantee
 flat elapsed time.
 
+The dense ledger also separates homogeneous append groups. These are medians
+of per-row engine time, excluding expected-ledger serialization/sync; enclosing
+controller time includes that work. Rows within a group are successive dependent
+publications, not independent trials. The observer/watchdog overlap described
+above applies, so the growth in elapsed time is not an isolated causal ablation.
+
+| Append category | H1–1k median ms / object reads | H1k–10k median ms / object reads | H10k–100k median ms / object reads |
+| --- | ---: | ---: | ---: |
+| Source variant | 38.387 / 68 | 47.566 / 75 | 113.933 / 82 |
+| Metadata | 36.389 / 62 | 43.004 / 68 | 99.357 / 74 |
+| Already-zero cost (`equal-content`) | 34.828 / 56 | 42.470 / 62 | 99.056 / 68 |
+| Restore exact source | 39.086 / 68 | 47.284 / 75 | 113.759 / 82 |
+| Maintenance | 34.103 / 40 | 41.318 / 46 | 98.311 / 52 |
+
+Each category has 200, 1,800 and 18,000 rows in these intervals, respectively.
+Exact medians, maxima and metadata read/write bytes are in
+[the measured tables](evidence/measured-tables-final.json).
+
 Checkpoint rebuild, A refresh, lost reply beneath 1,000 actual successors and
 bounded long-history collection are separate observations. Collection is allowed
 to fail or censor; later successful resolution alone cannot prove reclamation.
@@ -256,6 +274,28 @@ root was named `store`, which cannot arm collection. This original failure is
 preserved. The separately bounded, quiescent relocation/GC continuation and final
 strict proof remain queued; the saved reproduction script uses consistent
 `disposable/store` paths.
+
+The pre-collection file census found 1,413,491 files and 5,464,941,402 logical
+bytes in this history root. It includes historical pages, preparations, the
+246,560,316-byte dense expected ledger and readable files, rather than only live
+selected-tree geometry. Active reserved bytes were zero; 101,003 permanent owner
+records sum to 6,788,903,037,184 conservative bytes. Cumulative ownership allowances
+are not physical allocation. The unselected censored B100k root separately holds
+2,660,013,821 logical file bytes and its 30,067,108,864-byte active reservation.
+Windows allocated-file bytes are unavailable, not zero. See
+[selected-store census](evidence/selected-store-census-final.json) and
+[unselected B census](evidence/unselected-B-census-final.json).
+
+The aggregate independent navigation/source/readable-file verifier passed the
+matrix A/B roots at 1k and 10k, then was censored at 900.406 seconds while visiting
+A100k. Its partial output does not verify A100k or subsequent roots. A separately
+recorded 600-second continuation checked only the two fresh calibration roots:
+both passed, with current readable views and no missing, edited or extra files,
+in 7.007 seconds total. The original censor remains. These checks independently
+render each document's navigation; they do not independently specify the static
+collection prose or packet recipe. Selected digests and separate packet assertions
+cover those portions. The later exact-outcome continuation checks the history
+root's current projection independently.
 
 ## Correctness, failures and native coverage
 

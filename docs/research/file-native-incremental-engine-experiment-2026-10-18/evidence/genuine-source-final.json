@@ -1,0 +1,73 @@
+[
+  {
+    "n": 1000,
+    "k": 1,
+    "selected": "publication-64552-1792359246326762100-14",
+    "distinct_source_digests_verified": 1,
+    "exact_4096_byte_sources_verified": 1
+  },
+  {
+    "n": 1000,
+    "k": 8,
+    "selected": "publication-56252-1792359246614447700-34",
+    "distinct_source_digests_verified": 8,
+    "exact_4096_byte_sources_verified": 8
+  },
+  {
+    "n": 1000,
+    "k": 64,
+    "selected": "publication-54720-1792359247547350400-107",
+    "distinct_source_digests_verified": 64,
+    "exact_4096_byte_sources_verified": 64
+  },
+  {
+    "operation": "combined-packet",
+    "selected_membership_authenticated": {
+      "publication": "publication-70660-1792352412827028900-14",
+      "digest": "50ea2c40cac273b0e2a585864a63c78ae7583da511130ecb4ae319364ba16a2a"
+    },
+    "packet_manifest": "53f424a677cec060c35f4cec815bbdaf8466ea98a1afa31fa50b9ee9c5f2ceaa"
+  },
+  {
+    "n": 10000,
+    "k": 1,
+    "selected": "publication-68144-1792359249578972900-16",
+    "distinct_source_digests_verified": 1,
+    "exact_4096_byte_sources_verified": 1
+  },
+  {
+    "n": 10000,
+    "k": 8,
+    "selected": "publication-14608-1792359249919664100-45",
+    "distinct_source_digests_verified": 8,
+    "exact_4096_byte_sources_verified": 8
+  },
+  {
+    "n": 10000,
+    "k": 64,
+    "selected": "publication-816-1792359250993282100-209",
+    "distinct_source_digests_verified": 64,
+    "exact_4096_byte_sources_verified": 64
+  },
+  {
+    "n": 100000,
+    "k": 1,
+    "selected": "publication-67356-1792359278173195200-16",
+    "distinct_source_digests_verified": 1,
+    "exact_4096_byte_sources_verified": 1
+  },
+  {
+    "n": 100000,
+    "k": 8,
+    "selected": "publication-48752-1792359278375949100-53",
+    "distinct_source_digests_verified": 8,
+    "exact_4096_byte_sources_verified": 8
+  },
+  {
+    "n": 100000,
+    "k": 64,
+    "selected": "publication-71412-1792359279349889500-304",
+    "distinct_source_digests_verified": 64,
+    "exact_4096_byte_sources_verified": 64
+  }
+]
