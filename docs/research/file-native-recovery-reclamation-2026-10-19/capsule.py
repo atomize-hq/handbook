@@ -76,6 +76,7 @@ def run(exe,scratch):
                 if direction=='down' and phase=='refresh-preserved':(root/'view'/ancestor).write_bytes(b'changed ancestor')
                 pub(root,'interrupted',[dict(kind='path',id='d000009',text=target)],defer=True)
                 call(root,'refresh',code=86,exit_at=phase)
+                assert verify(root)['readable_declared_current'] is False
                 pub(root,'correcting',[dict(kind='path',id='d000009',text='docs/item-corrected-d000009.txt')],defer=True)
                 call(root,'refresh');call(root,'resume');call(root,'audit');verify(root,reference(root))
                 if direction=='up':
@@ -108,7 +109,9 @@ def run(exe,scratch):
             oldnav=navigation(oldtree) if mode=='B' else None
             pub(root,'skip-1',[dict(kind='delete',id='d000000')],defer=True)
             pub(root,'skip-2',[dict(kind='path',id='d000009',text=ancestor)],defer=True)
-            if mode=='A':call(root,'refresh')
+            if mode=='A':
+                assert verify(root)['readable_declared_current'] is False
+                call(root,'refresh')
             else:assert navigation(oldtree)==oldnav
             verify(root,reference(root));cases.append(dict(case='skipped-or-selected-once',mode=mode,status='success'))
     finally:

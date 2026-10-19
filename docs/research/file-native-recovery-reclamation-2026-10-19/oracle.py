@@ -5,7 +5,8 @@ sys.path.insert(0,str(Path(__file__).resolve().parent.parent/'file-native-increm
 from verify_store import Tree,checked
 
 def navigation(tree):
-    lines=(Path(tree)/'collection.yaml').read_text(encoding='utf-8').splitlines()
+    path=Path(tree);path=path if path.is_file() else path/'collection.yaml'
+    lines=path.read_text(encoding='utf-8').splitlines()
     assert lines[:2]==['version: 2','documents:'];docs={};doc=edge=None
     for line in lines[2:]:
         if line.startswith('  - id: '):
@@ -33,11 +34,17 @@ def verify(root,reference=None,readable=None):
         assert set(docs)==set(reference['docs'])
         for id in docs:assert expected[id]['relationships']==reference['docs'][id]['edges']
     config=json.loads((root/'STORE.json').read_bytes())
+    assert navigation(root/projection['collection.yaml']['source'])==expected
+    current=True
+    if config['mode']=='A':
+        mark=json.loads((root/'VIEW.json').read_bytes()) if (root/'VIEW.json').exists() else None
+        current=bool(mark and mark['selected']==s and not (root/'PENDING.json').exists())
     if readable is None:readable=root/('view' if config['mode']=='A' else f"generations/{p['attempt']}")
-    readable=Path(readable);assert navigation(readable)==expected
+    readable=Path(readable)
     assert set(projection)=={'collection.yaml','packet/context.md','packet/provenance.json'}|{d['path'] for d in docs.values()}
     actual={x.relative_to(readable).as_posix() for x in readable.rglob('*') if x.is_file()};actual.discard('MANIFEST.json')
-    assert actual==set(projection)
-    for path,spec in projection.items():checked(readable/path,spec['digest'])
-    for d in docs.values():assert (readable/d['path']).read_bytes()==checked(root/d['original'],d['digest'])
-    return dict(documents=len(docs),projection_files=len(projection),discovery_relationships_and_extraction=True)
+    if current:
+        assert navigation(readable)==expected and actual==set(projection)
+        for path,spec in projection.items():checked(readable/path,spec['digest'])
+        for d in docs.values():assert (readable/d['path']).read_bytes()==checked(root/d['original'],d['digest'])
+    return dict(documents=len(docs),projection_files=len(projection),immutable_discovery_semantics_verified=True,readable_declared_current=current,discovery_relationships_and_extraction=current)

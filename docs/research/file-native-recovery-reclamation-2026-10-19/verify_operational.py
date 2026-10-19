@@ -3,22 +3,41 @@
 All accepted membership/outcome entries are compared. Reuse is only for exactly
 equal immutable root identities; Tree still verifies every parent/child binding.
 """
-import argparse,hashlib,json,sys,time
+import argparse,hashlib,json,sys,time,os
+from concurrent.futures import ThreadPoolExecutor
+from collections import deque
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent.parent/'file-native-incremental-engine-experiment-2026-10-18'))
-from verify_store import Tree,checked
+from verify_store import Tree
 
 def sha(b):return hashlib.sha256(b).hexdigest()
+def checked(path,h):
+    with Path(path).open('rb') as f:
+        assert os.fstat(f.fileno()).st_size<=128*1024*1024
+        b=f.read()
+    assert sha(b)==h,(str(path),h);return b
 
 def verify(root,baseline=None):
     root=Path(root);start=time.monotonic();config=json.loads((root/'STORE.json').read_bytes());selected=json.loads((root/'SELECTED.json').read_bytes());s=selected;chain={};outcomes={};content=set();results={};sources=set();roots=0;permanent=hashlib.sha256();retired=[];packets=set();generations=[]
+    base=json.loads(Path(baseline).read_bytes()) if baseline else None;tail=hashlib.sha256();tail_count=0;tail_started=False
+    expected_sequence=None
+    pool=ThreadPoolExecutor(max_workers=4);pending=deque()
+    def result_body(s,p):
+        body=json.loads(checked(root/f"results/{p['result_hash']}.json",p['result_hash']))
+        assert body['outcome']=='accepted' and body['request']==p['request'] and body['publication']==p['id'] and body['state_digest']==sha(json.dumps(p['graph'],indent=2,ensure_ascii=False).encode())
+        return p['request'],(s,body)
+    def finish_one():
+        request,value=pending.popleft().result();assert request not in results;results[request]=value
     while s:
         assert len(chain)<200001 and s['publication'] not in chain
         p=json.loads(checked(root/f"publications/{s['publication']}.json",s['digest']));assert p['store_id']==config['store_id'] and p['id']==s['publication'] and p['version']==1
-        b=checked(root/f"results/{p['result_hash']}.json",p['result_hash']);body=json.loads(b)
-        assert body['outcome']=='accepted' and body['request']==p['request'] and body['publication']==p['id'] and body['state_digest']==sha(json.dumps(p['graph'],indent=2,ensure_ascii=False).encode())
-        permanent.update(json.dumps([s,p['result_hash']],sort_keys=True,separators=(',',':')).encode()+b'\n')
-        chain[p['id']]=s;results[p['request']]=(s,body)
+        if expected_sequence is not None:assert p['sequence']==expected_sequence
+        pending.append(pool.submit(result_body,s,p))
+        if len(pending)>=256:finish_one()
+        evidence=json.dumps([s,p['result_hash']],sort_keys=True,separators=(',',':')).encode()+b'\n';permanent.update(evidence)
+        if base and s==base['selected']:tail_started=True
+        if tail_started:tail.update(evidence);tail_count+=1
+        chain[p['id']]=s
         if s!=selected:
             key=sha(p['request'].encode());assert key not in outcomes
             outcomes[key]=dict(request=p['request'],intent=p['intent'],selected=s,result_hash=p['result_hash'],attempt=p['attempt'])
@@ -31,15 +50,17 @@ def verify(root,baseline=None):
             if config['mode']=='B':generations.append((p['attempt'],p['generation_manifest'],p['projection']))
         expected_sequence=p['sequence']-1
         s=p['predecessor']
-        if s:
-            previous=json.loads(checked(root/f"publications/{s['publication']}.json",s['digest']));assert previous['sequence']==expected_sequence
         if len(chain)%10000==0:print(json.dumps(dict(phase='verify-chain',publications=len(chain),seconds=time.monotonic()-start)),flush=True)
+    assert expected_sequence==-1
+    while pending:finish_one()
+    pool.shutdown()
     assert selected['publication'] not in retired
     members=Tree(root).entries(head['membership']);assert members=={k:v['digest'] for k,v in chain.items() if k!=selected['publication']}
     actual=Tree(root).entries(head['outcomes']);assert actual==outcomes
+    Tree(root).entries(head['changes'])
     permanent_digest=permanent.hexdigest()
     if baseline:
-        base=json.loads(Path(baseline).read_bytes());assert base['permanent_digest']==permanent_digest and base['publications']==len(chain)
+        assert base['permanent_digest']==tail.hexdigest() and base['publications']==tail_count
     ledger=root/'expected-ledger.jsonl';ledger_rows=0
     if ledger.exists():
         with ledger.open('rb') as f:
@@ -66,6 +87,9 @@ def verify(root,baseline=None):
         content.add((c['graph']['tree'],c['projection']))
         for h in c['replay_objects']:checked(root/'objects'/h[:2]/h,h)
         for path,h in c['replay_files'].items():checked(root/path,h)
+        Tree(root).entries(c['changes'])
+        if c['checkpoint']:
+            Tree(root).entries(c['checkpoint']['membership']);Tree(root).entries(c['checkpoint']['outcomes'])
         if c['packet_ref']:packets.add((c['packet_ref']['attempt'],c['packet_ref']['manifest']))
     # Full independent graph indexes from exact header + ordered-edge identities.
     for graph,projection in sorted(content,key=str):

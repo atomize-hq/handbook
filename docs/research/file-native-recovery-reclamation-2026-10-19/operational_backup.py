@@ -5,6 +5,9 @@ exclude concurrent mutators for the entire capture. No portable delete authority
 Incomplete transports have no manifest and can never report restore success.
 """
 import argparse, gzip, hashlib, json, os, struct, time
+import shutil
+from collections import deque
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path, PurePosixPath
 
 MAGIC = b'FNOP1\n'
@@ -37,22 +40,45 @@ def capture(root, destination, source_pin, quiescent=False):
     destination.mkdir(parents=True,exist_ok=False)
     selected=(root/'SELECTED.json').read_bytes(); count=total=0; start=time.monotonic()
     inventory=hashlib.sha256()
+    # Hide small-file open latency with a bounded queue. Every file is still
+    # read and hashed; large files stay on the streaming path. Never executor.map
+    # a million-file iterator: it eagerly allocates all pending futures.
+    def read_small(p):
+        with p.open('rb') as f:
+            size=os.fstat(f.fileno()).st_size
+            data=f.read() if size<=1024*1024 else None
+        if data is not None and len(data)!=size:raise ValueError('changed-during-capture')
+        return p,size,data
+    def reads():
+        with ThreadPoolExecutor(max_workers=16) as pool:
+            pending=deque()
+            for p in paths(root):
+                if p.relative_to(root).as_posix() in EXCLUDED:continue
+                pending.append(pool.submit(read_small,p))
+                if len(pending)>=64:yield pending.popleft().result()
+            while pending:yield pending.popleft().result()
     with gzip.open(destination/'operational.bin.gz','wb',compresslevel=1) as out, (destination/'files.jsonl').open('wb') as manifest:
         out.write(MAGIC)
-        for p in paths(root):
+        for p,size,data in reads():
             relative=p.relative_to(root).as_posix()
             if relative in EXCLUDED: continue
-            name=relative.encode(); size=p.stat().st_size
+            name=relative.encode()
             count+=1;total+=size
             if count>MAX_FILES or total>MAX_BYTES or size>512*1024**2: raise ValueError('capture-cap')
             out.write(struct.pack('<IQ',len(name),size));out.write(name);h=hashlib.sha256();n=0
-            with p.open('rb') as f:
-                for b in iter(lambda:f.read(1024*1024),b''): out.write(b);h.update(b);n+=len(b)
+            if data is not None:out.write(data);h.update(data);n=len(data)
+            else:
+                with p.open('rb') as f:
+                    for b in iter(lambda:f.read(1024*1024),b''): out.write(b);h.update(b);n+=len(b)
             if n!=size: raise ValueError('changed-during-capture')
             digest=h.digest();out.write(digest)
             line=json.dumps(dict(path=relative,bytes=size,sha256=digest.hex()),separators=(',',':')).encode()+b'\n'
             manifest.write(line);inventory.update(line)
-            if count%10000==0: print(json.dumps(dict(phase='capture',files=count,bytes=total,seconds=time.monotonic()-start)),flush=True)
+            if count%10000==0:
+                out.flush();manifest.flush()
+                if (destination/'operational.bin.gz').stat().st_size+manifest.tell()>6*1024**3:raise ValueError('archive-allocation-cap')
+                if shutil.disk_usage(destination).free<(140 if os.name=='nt' else 20)*1024**3:raise ValueError('free-reserve')
+                print(json.dumps(dict(phase='capture',files=count,bytes=total,seconds=time.monotonic()-start)),flush=True)
     if selected!=(root/'SELECTED.json').read_bytes(): raise ValueError('selector-changed')
     result=dict(version=1,profile='quiescent-full-operational',source_pin=source_pin,original=str(root),selected=json.loads(selected),files=count,logical_bytes=total,
                 inventory_sha256=inventory.hexdigest(),transport_sha256=sha_file(destination/'operational.bin.gz'),excluded=sorted(EXCLUDED),seconds=time.monotonic()-start)
@@ -69,22 +95,35 @@ def restore(capsule,destination):
         b=f.read(n)
         if len(b)!=n:raise ValueError('truncated-transport')
         return b
-    with gzip.open(capsule/'operational.bin.gz','rb') as source,(capsule/'files.jsonl').open('rb') as inventory:
+    def write_small(target,b):
+        target.parent.mkdir(parents=True,exist_ok=True)
+        with target.open('xb') as out:
+            if out.write(b)!=len(b):raise ValueError('short-restore-write')
+    with ThreadPoolExecutor(max_workers=16) as pool,gzip.open(capsule/'operational.bin.gz','rb') as source,(capsule/'files.jsonl').open('rb') as inventory:
+        pending=deque()
         if take(source,len(MAGIC))!=MAGIC:raise ValueError('magic')
         for line in inventory:
             row=json.loads(line); n,size=struct.unpack('<IQ',take(source,12))
             if n>4096 or size>512*1024**2:raise ValueError('record-cap')
             name=take(source,n).decode();p=PurePosixPath(name)
             if name!=row['path'] or size!=row['bytes'] or n>4096 or p.is_absolute() or '..' in p.parts or '\\' in name or ':' in name or name in EXCLUDED:raise ValueError('restore-path-binding')
-            target=destination/name;target.parent.mkdir(parents=True,exist_ok=True);h=hashlib.sha256();remaining=size
-            with target.open('xb') as out:
-                while remaining:
-                    b=take(source,min(1024*1024,remaining));out.write(b);h.update(b);remaining-=len(b)
+            target=destination/name;h=hashlib.sha256();remaining=size
+            if size<=1024*1024:
+                data=take(source,size);h.update(data)
+            else:
+                target.parent.mkdir(parents=True,exist_ok=True)
+                with target.open('xb') as out:
+                    while remaining:
+                        b=take(source,min(1024*1024,remaining));out.write(b);h.update(b);remaining-=len(b)
             if h.digest()!=take(source,32) or h.hexdigest()!=row['sha256']:raise ValueError('file-digest')
+            if size<=1024*1024:
+                pending.append(pool.submit(write_small,target,data))
+                if len(pending)>=64:pending.popleft().result()
             count+=1;total+=size
             if count>MAX_FILES or total>MAX_BYTES:raise ValueError('restore-cap')
             if count%10000==0:print(json.dumps(dict(phase='restore',files=count,bytes=total,seconds=time.monotonic()-start)),flush=True)
         if source.read(1):raise ValueError('extra-transport')
+        while pending:pending.popleft().result()
     if count!=m['files'] or total!=m['logical_bytes'] or json.loads((destination/'SELECTED.json').read_bytes())!=m['selected']:raise ValueError('restore-completeness')
     return dict(status='bytes-restored-operational-reopening-still-required',files=count,logical_bytes=total,seconds=time.monotonic()-start,destination=str(destination),disposable_authority_imported=False)
 
