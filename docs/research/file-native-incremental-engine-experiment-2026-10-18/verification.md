@@ -23,7 +23,8 @@ observations, not a claim that every suite was repeated on the latest pin.
 | Windows total | 742 | 618 exit0, 71 expected exit2, 53 injected exit86; zero censors |
 | Native Linux targeted final | 610 | Locked tests/build plus replay, namespace, checks/faults, supplement, adversarial; zero censors |
 | Native Mac targeted final | 610 | Same affected suites; zero censors; original deadline unchanged |
-| Windows/Linux/Mac strict audit correction | 42 each | Each has 18 damaged-evidence refusals without repair and 18 restored audits; zero censors |
+| WSL common capsule and companions | 771 | 647 exit0, 71 expected exit2, 53 injected exit86; zero censors; locked tests/build passed |
+| Windows/Linux/Mac/WSL strict audit correction | 42 each | Each has 18 damaged-evidence refusals without repair and 18 restored audits; zero censors |
 | Windows/Linux/Mac paired-intent accounting correction | 181 each | 32 paired A/B, 109 causal supplement, 40 replay/GC; locked tests; zero censors |
 
 Each response is an observation, not an independent trial or assertion count.
@@ -34,8 +35,12 @@ successors. The separate source-retirement regressions check actual deletion,
 not merely a quota decrement.
 
 Earlier F3 native capsules retain two independently linked consumer executions,
-1k A/B smoke and Bash copies. Corrected WSL runs will execute the common capsule
-and companions; do not infer a final 1k native rerun from the affected-only suites.
+1k A/B smoke and Bash copies. WSL's 7ac common capsule executes those consumer
+and smoke cases plus replay, namespace, deep and selected-once Bash companions;
+its main controller's test/build/native steps all completed successfully in
+127.428 seconds, with companions measured separately. Do not infer a final 1k
+native Linux/Mac rerun from their affected-only suites. WSL's later correction
+followups and lossless final evidence export remain separate observations.
 
 ## Executed growth and history observations
 

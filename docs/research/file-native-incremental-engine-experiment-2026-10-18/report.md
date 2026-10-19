@@ -305,7 +305,11 @@ semantic cases, 23 publication boundaries, causal supplement, adversarial damage
 and replay-retention regressions, 2,000 seeded differential batches and PowerShell
 selected-once copies. Native Linux passed the targeted corrected 610-response
 capsule. Native Mac also passed the corrected 610-response capsule with zero censors,
-within its unchanged original deadline. WSL final observations are still queued.
+within its unchanged original deadline. WSL's 7ac common capsule and four
+companions completed 771 responses (647 exit0, 71 expected exit2, 53 injected
+exit86), with zero censors. Locked tests/build, both separately linked consumers,
+1k A/B smoke and Bash selected-once copies passed. Its later audit/accounting
+followups and final raw export remain separate queued observations.
 
 Important preserved failures and corrections:
 
