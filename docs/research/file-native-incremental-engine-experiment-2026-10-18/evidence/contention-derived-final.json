@@ -1,0 +1,300 @@
+{
+  "source": "contention-final/contention.json",
+  "source_sha256": "9f1ca9d02ee12423c2fe3abf604b0057a9ff40f7866eaf64df87d8056bba789e",
+  "waves": [
+    {
+      "workers": 1,
+      "requests": [
+        {
+          "request": "final-wave-1-0",
+          "attempts": 1,
+          "failed_attempts": 0,
+          "errors": [],
+          "all_attempt_seconds": 4.5115581,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 0,
+          "failed_attempt_object_reads": 0,
+          "sum_lock_wait_ms": 0.329,
+          "sum_lock_hold_ms": 51.1656,
+          "post_request_reservations": {}
+        }
+      ],
+      "total_attempts": 1,
+      "accepted_requests": 1,
+      "failed_attempts": 0,
+      "min_request_seconds": 4.5115581,
+      "max_request_seconds": 4.5115581,
+      "all_observed_requests_within_aggregate_180_seconds": true,
+      "observed_reservations": 1,
+      "reserved_bytes": 67109568,
+      "new_unique_files": 15,
+      "new_unique_file_bytes": 403801,
+      "existing_file_growth_bytes": 424,
+      "census_and_archive_pause_seconds": 2.625,
+      "snapshot_archive": "pending-1.zip",
+      "snapshot_sha256": "df1ef2beb5352e24807312c37ba1890522f7c61fb8a657f134066553c9b8b519"
+    },
+    {
+      "workers": 2,
+      "requests": [
+        {
+          "request": "final-wave-2-0",
+          "attempts": 2,
+          "failed_attempts": 1,
+          "errors": [
+            "conflict:expected-publication"
+          ],
+          "all_attempt_seconds": 18.2099459,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 38542,
+          "failed_attempt_object_reads": 71,
+          "sum_lock_wait_ms": 52.1863,
+          "sum_lock_hold_ms": 54.8472,
+          "post_request_reservations": {}
+        },
+        {
+          "request": "final-wave-2-1",
+          "attempts": 1,
+          "failed_attempts": 0,
+          "errors": [],
+          "all_attempt_seconds": 4.5550319,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 0,
+          "failed_attempt_object_reads": 0,
+          "sum_lock_wait_ms": 0.3883,
+          "sum_lock_hold_ms": 49.2822,
+          "post_request_reservations": {}
+        }
+      ],
+      "total_attempts": 3,
+      "accepted_requests": 2,
+      "failed_attempts": 1,
+      "min_request_seconds": 4.5550319,
+      "max_request_seconds": 18.2099459,
+      "all_observed_requests_within_aggregate_180_seconds": true,
+      "observed_reservations": 2,
+      "reserved_bytes": 134219328,
+      "new_unique_files": 19,
+      "new_unique_file_bytes": 434525,
+      "existing_file_growth_bytes": 850,
+      "census_and_archive_pause_seconds": 2.7030000000377186,
+      "snapshot_archive": "pending-2.zip",
+      "snapshot_sha256": "48569d74889b90628e4e7265718aeb10c387e66c0b34ad098a8d1545e4b5aca4"
+    },
+    {
+      "workers": 4,
+      "requests": [
+        {
+          "request": "final-wave-4-0",
+          "attempts": 2,
+          "failed_attempts": 1,
+          "errors": [
+            "conflict:expected-publication"
+          ],
+          "all_attempt_seconds": 18.7434934,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 39117,
+          "failed_attempt_object_reads": 67,
+          "sum_lock_wait_ms": 60.6394,
+          "sum_lock_hold_ms": 49.5,
+          "post_request_reservations": {}
+        },
+        {
+          "request": "final-wave-4-1",
+          "attempts": 2,
+          "failed_attempts": 1,
+          "errors": [
+            "conflict:expected-publication"
+          ],
+          "all_attempt_seconds": 18.8136632,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 39679,
+          "failed_attempt_object_reads": 71,
+          "sum_lock_wait_ms": 57.3098,
+          "sum_lock_hold_ms": 54.1812,
+          "post_request_reservations": {}
+        },
+        {
+          "request": "final-wave-4-2",
+          "attempts": 2,
+          "failed_attempts": 1,
+          "errors": [
+            "conflict:expected-publication"
+          ],
+          "all_attempt_seconds": 18.8851667,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 40474,
+          "failed_attempt_object_reads": 83,
+          "sum_lock_wait_ms": 66.4589,
+          "sum_lock_hold_ms": 53.8443,
+          "post_request_reservations": {}
+        },
+        {
+          "request": "final-wave-4-3",
+          "attempts": 1,
+          "failed_attempts": 0,
+          "errors": [],
+          "all_attempt_seconds": 4.5527946,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 0,
+          "failed_attempt_object_reads": 0,
+          "sum_lock_wait_ms": 14.4125,
+          "sum_lock_hold_ms": 49.664,
+          "post_request_reservations": {}
+        }
+      ],
+      "total_attempts": 7,
+      "accepted_requests": 4,
+      "failed_attempts": 3,
+      "min_request_seconds": 4.5527946,
+      "max_request_seconds": 18.8851667,
+      "all_observed_requests_within_aggregate_180_seconds": true,
+      "observed_reservations": 4,
+      "reserved_bytes": 268438848,
+      "new_unique_files": 31,
+      "new_unique_file_bytes": 509490,
+      "existing_file_growth_bytes": 1700,
+      "census_and_archive_pause_seconds": 2.6410000000032596,
+      "snapshot_archive": "pending-4.zip",
+      "snapshot_sha256": "cc060523f40ae1be50e8b7b1d555de31af54aca4f017f31be9cbbeb325d6b788"
+    },
+    {
+      "workers": 8,
+      "requests": [
+        {
+          "request": "final-wave-8-0",
+          "attempts": 2,
+          "failed_attempts": 1,
+          "errors": [
+            "conflict:expected-publication"
+          ],
+          "all_attempt_seconds": 20.1150657,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 41751,
+          "failed_attempt_object_reads": 75,
+          "sum_lock_wait_ms": 84.7307,
+          "sum_lock_hold_ms": 47.9408,
+          "post_request_reservations": {}
+        },
+        {
+          "request": "final-wave-8-1",
+          "attempts": 2,
+          "failed_attempts": 1,
+          "errors": [
+            "conflict:expected-publication"
+          ],
+          "all_attempt_seconds": 20.1903467,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 42633,
+          "failed_attempt_object_reads": 79,
+          "sum_lock_wait_ms": 103.6789,
+          "sum_lock_hold_ms": 54.7621,
+          "post_request_reservations": {}
+        },
+        {
+          "request": "final-wave-8-2",
+          "attempts": 2,
+          "failed_attempts": 1,
+          "errors": [
+            "conflict:expected-publication"
+          ],
+          "all_attempt_seconds": 20.2737999,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 43154,
+          "failed_attempt_object_reads": 87,
+          "sum_lock_wait_ms": 86.2672,
+          "sum_lock_hold_ms": 55.6841,
+          "post_request_reservations": {}
+        },
+        {
+          "request": "final-wave-8-3",
+          "attempts": 2,
+          "failed_attempts": 1,
+          "errors": [
+            "conflict:expected-publication"
+          ],
+          "all_attempt_seconds": 20.3503223,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 43789,
+          "failed_attempt_object_reads": 91,
+          "sum_lock_wait_ms": 115.8341,
+          "sum_lock_hold_ms": 56.232,
+          "post_request_reservations": {}
+        },
+        {
+          "request": "final-wave-8-4",
+          "attempts": 2,
+          "failed_attempts": 1,
+          "errors": [
+            "conflict:expected-publication"
+          ],
+          "all_attempt_seconds": 20.4241314,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 41591,
+          "failed_attempt_object_reads": 75,
+          "sum_lock_wait_ms": 58.8806,
+          "sum_lock_hold_ms": 57.0508,
+          "post_request_reservations": {}
+        },
+        {
+          "request": "final-wave-8-5",
+          "attempts": 2,
+          "failed_attempts": 1,
+          "errors": [
+            "conflict:expected-publication"
+          ],
+          "all_attempt_seconds": 20.4992937,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 41297,
+          "failed_attempt_object_reads": 71,
+          "sum_lock_wait_ms": 74.7238,
+          "sum_lock_hold_ms": 51.9039,
+          "post_request_reservations": {}
+        },
+        {
+          "request": "final-wave-8-6",
+          "attempts": 2,
+          "failed_attempts": 1,
+          "errors": [
+            "conflict:expected-publication"
+          ],
+          "all_attempt_seconds": 20.5751793,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 43133,
+          "failed_attempt_object_reads": 87,
+          "sum_lock_wait_ms": 101.7233,
+          "sum_lock_hold_ms": 52.884,
+          "post_request_reservations": {}
+        },
+        {
+          "request": "final-wave-8-7",
+          "attempts": 1,
+          "failed_attempts": 0,
+          "errors": [],
+          "all_attempt_seconds": 4.7140127,
+          "within_declared_aggregate_180_seconds": true,
+          "failed_attempt_logical_write_bytes": 0,
+          "failed_attempt_object_reads": 0,
+          "sum_lock_wait_ms": 58.6871,
+          "sum_lock_hold_ms": 54.8854,
+          "post_request_reservations": {}
+        }
+      ],
+      "total_attempts": 15,
+      "accepted_requests": 8,
+      "failed_attempts": 7,
+      "min_request_seconds": 4.7140127,
+      "max_request_seconds": 20.5751793,
+      "all_observed_requests_within_aggregate_180_seconds": true,
+      "observed_reservations": 8,
+      "reserved_bytes": 536877888,
+      "new_unique_files": 57,
+      "new_unique_file_bytes": 663436,
+      "existing_file_growth_bytes": 3400,
+      "census_and_archive_pause_seconds": 2.75,
+      "snapshot_archive": "pending-8.zip",
+      "snapshot_sha256": "7ebb987213bbc4c754363718974e59d08e33f5eef7bfd4d45481b0caf1f718f0"
+    }
+  ],
+  "qualification": "Controlled preparation barrier, file census/archive, cleanup and pure retries are included in request wall time. One request per wave edits a5002-edge adjacency; others change scattered labels. Failed-attempt logical API writes are not unique discarded physical bytes. Code caps each call at180s and at most4 attempts; observed whole-request180s compliance is reported separately, not asserted as an implemented aggregate watchdog."
+}

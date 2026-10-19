@@ -1,0 +1,108 @@
+{
+  "workers": 8,
+  "observed_reservations": {
+    "attempt-22652-1792372076091457400-0": {
+      "base": {
+        "digest": "307af2f24393dfecd9894fb18da0ba1363ca020c71e1b450a3a7f6471e0375ef",
+        "publication": "publication-73288-1792372043730535600-11"
+      },
+      "bytes": 67109760,
+      "candidate_digest": null,
+      "intent": "124cbac3fce509ad1c2e3c017952861b9669a86796832d75a50422be097876ea",
+      "request": "final-wave-8-5",
+      "state": "preparing",
+      "used": 0
+    },
+    "attempt-48444-1792372076145160000-0": {
+      "base": {
+        "digest": "307af2f24393dfecd9894fb18da0ba1363ca020c71e1b450a3a7f6471e0375ef",
+        "publication": "publication-73288-1792372043730535600-11"
+      },
+      "bytes": 67109760,
+      "candidate_digest": null,
+      "intent": "515a06e885f5e1052c3315e55afc398e8a08e54b1ac8846d0cb39da9d142c9a3",
+      "request": "final-wave-8-3",
+      "state": "preparing",
+      "used": 0
+    },
+    "attempt-54584-1792372076155770300-0": {
+      "base": {
+        "digest": "307af2f24393dfecd9894fb18da0ba1363ca020c71e1b450a3a7f6471e0375ef",
+        "publication": "publication-73288-1792372043730535600-11"
+      },
+      "bytes": 67109568,
+      "candidate_digest": null,
+      "intent": "f4996e9ffa4d1c565bbed798ecc53b6acbdbbe8a57a64614638fadbcf077f3d0",
+      "request": "final-wave-8-7",
+      "state": "preparing",
+      "used": 0
+    },
+    "attempt-59360-1792372076125145100-0": {
+      "base": {
+        "digest": "307af2f24393dfecd9894fb18da0ba1363ca020c71e1b450a3a7f6471e0375ef",
+        "publication": "publication-73288-1792372043730535600-11"
+      },
+      "bytes": 67109760,
+      "candidate_digest": null,
+      "intent": "1c9f801d525e7c89db364ac45f66429679870180e5e35100bdaaa7f5e9fdeab3",
+      "request": "final-wave-8-6",
+      "state": "preparing",
+      "used": 0
+    },
+    "attempt-69180-1792372076135332200-0": {
+      "base": {
+        "digest": "307af2f24393dfecd9894fb18da0ba1363ca020c71e1b450a3a7f6471e0375ef",
+        "publication": "publication-73288-1792372043730535600-11"
+      },
+      "bytes": 67109760,
+      "candidate_digest": null,
+      "intent": "235baa4214f87a7f4a3ad2e3793b644b7c58b4941fb69789dcad77a35584df1e",
+      "request": "final-wave-8-2",
+      "state": "preparing",
+      "used": 0
+    },
+    "attempt-70976-1792372076116459800-0": {
+      "base": {
+        "digest": "307af2f24393dfecd9894fb18da0ba1363ca020c71e1b450a3a7f6471e0375ef",
+        "publication": "publication-73288-1792372043730535600-11"
+      },
+      "bytes": 67109760,
+      "candidate_digest": null,
+      "intent": "75b065634f3ab2df3418d042798e6d87983f6e2720b2cfe0b22c6da4d97828e7",
+      "request": "final-wave-8-1",
+      "state": "preparing",
+      "used": 0
+    },
+    "attempt-74524-1792372076099806400-0": {
+      "base": {
+        "digest": "307af2f24393dfecd9894fb18da0ba1363ca020c71e1b450a3a7f6471e0375ef",
+        "publication": "publication-73288-1792372043730535600-11"
+      },
+      "bytes": 67109760,
+      "candidate_digest": null,
+      "intent": "5a8ecbc7a0f5fd278b4521c382c2d4ab1560816ba007ab67014bea1a81703964",
+      "request": "final-wave-8-4",
+      "state": "preparing",
+      "used": 0
+    },
+    "attempt-75476-1792372076107948500-0": {
+      "base": {
+        "digest": "307af2f24393dfecd9894fb18da0ba1363ca020c71e1b450a3a7f6471e0375ef",
+        "publication": "publication-73288-1792372043730535600-11"
+      },
+      "bytes": 67109760,
+      "candidate_digest": null,
+      "intent": "11ff5f4fa30ba4a327ffa0bbd86fad57b48f8015c1f85f05ab7e8fe9b0b5f075",
+      "request": "final-wave-8-0",
+      "state": "preparing",
+      "used": 0
+    }
+  },
+  "reserved_bytes": 536877888,
+  "new_unique_files": 57,
+  "new_unique_file_bytes": 663436,
+  "existing_file_growth_bytes": 3400,
+  "snapshot_archive": "pending-8.zip",
+  "snapshot_sha256": "7ebb987213bbc4c754363718974e59d08e33f5eef7bfd4d45481b0caf1f718f0",
+  "census_and_archive_pause_seconds": 2.75
+}

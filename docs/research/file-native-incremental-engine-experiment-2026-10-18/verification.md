@@ -2,7 +2,7 @@
 
 Core pin: `5a65a2155f9eb297d2cbb1b7c900fa749629605c`. Earlier measurements keep
 their own source/executable pins; see [the report](report.md) and
-[independent review](review.md). Final growth/history/WSL evidence is pending.
+[independent review](review.md). Final proof/collection and native exports are pending.
 
 ## Executed final correctness
 
@@ -36,6 +36,23 @@ not merely a quota decrement.
 Earlier F3 native capsules retain two independently linked consumer executions,
 1k A/B smoke and Bash copies. Corrected WSL runs will execute the common capsule
 and companions; do not infer a final 1k native rerun from the affected-only suites.
+
+## Executed growth and history observations
+
+| Observation | Pin / result |
+| --- | --- |
+| Actual history depths 1k/10k/100k | 7ac; independent chain, original-result, index, header-transition and final recipe checks passed |
+| Checkpoint at H100k | 7ac; 100,002 publications independently verified after checkpoint |
+| Reply exit86 beneath 1,000 real successors | 7ac; original outcome exact, 101,003 publications independently verified |
+| Original history lifecycle setup | Exit 1 after completed checks: `refused:disposable-root`; preserved, separate continuation pending |
+| Fresh N1k/10k, H2/3/4, genuine 1/8/64 imports | 7e; 344.078-second calibration passed, including audits and independent source checks |
+| Controlled 1/2/4/8 contention | 7e; all 15 requests accepted in 26 attempts, 347.781-second trace; no censor |
+| Synthetic pessimistic byte ceiling | 7e; one real reservation inflated to 32 GiB, refusal/restore/reclamation passed; no 32 GiB physical allocation |
+
+The original A100k/B100k initialization censors retain their raw outcomes. A's
+separate resume completed; B remained unselected. Full proof export/restoration,
+final selected-root storage censuses and long-history collection are distinct
+queued observations. See the report for exact timings and scope qualifications.
 
 ## Fresh-path commands
 

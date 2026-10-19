@@ -1,0 +1,24 @@
+{
+  "workers": 1,
+  "observed_reservations": {
+    "attempt-59556-1792371928917584100-0": {
+      "base": {
+        "digest": "a9f6de393869aed59af5f97d75ee2b9c33fbf3e599d1f69ed0d36dd677916430",
+        "publication": "publication-816-1792359250993282100-209"
+      },
+      "bytes": 67109568,
+      "candidate_digest": null,
+      "intent": "fa53a5f81d2d9a223d0d8b2f1447df302499f678fbbe6ba67212afe41bb57bdb",
+      "request": "final-wave-1-0",
+      "state": "preparing",
+      "used": 0
+    }
+  },
+  "reserved_bytes": 67109568,
+  "new_unique_files": 15,
+  "new_unique_file_bytes": 403801,
+  "existing_file_growth_bytes": 424,
+  "snapshot_archive": "pending-1.zip",
+  "snapshot_sha256": "df1ef2beb5352e24807312c37ba1890522f7c61fb8a657f134066553c9b8b519",
+  "census_and_archive_pause_seconds": 2.625
+}

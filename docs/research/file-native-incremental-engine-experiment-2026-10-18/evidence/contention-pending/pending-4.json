@@ -1,0 +1,60 @@
+{
+  "workers": 4,
+  "observed_reservations": {
+    "attempt-41892-1792372024874498000-0": {
+      "base": {
+        "digest": "18af335f7af783470885a8a9ffbcaa3c6f900f5f3ee3ea41d3684b70e73e1762",
+        "publication": "publication-73076-1792371994504890100-11"
+      },
+      "bytes": 67109760,
+      "candidate_digest": null,
+      "intent": "8a2c5ffad190b0cd51098d0b78359d6baf9a772c7c5b08cb3a11c578a3af4c33",
+      "request": "final-wave-4-0",
+      "state": "preparing",
+      "used": 0
+    },
+    "attempt-54332-1792372024890994300-0": {
+      "base": {
+        "digest": "18af335f7af783470885a8a9ffbcaa3c6f900f5f3ee3ea41d3684b70e73e1762",
+        "publication": "publication-73076-1792371994504890100-11"
+      },
+      "bytes": 67109568,
+      "candidate_digest": null,
+      "intent": "43b293054a9e5b298f15a403eea722af48a4610b9282b4b2f082d25301dfdc69",
+      "request": "final-wave-4-3",
+      "state": "preparing",
+      "used": 0
+    },
+    "attempt-57284-1792372024883598200-0": {
+      "base": {
+        "digest": "18af335f7af783470885a8a9ffbcaa3c6f900f5f3ee3ea41d3684b70e73e1762",
+        "publication": "publication-73076-1792371994504890100-11"
+      },
+      "bytes": 67109760,
+      "candidate_digest": null,
+      "intent": "a26c1de7d229731b5808e1e0da73dbeef645680e98d801ea9b0cba47504fe2d9",
+      "request": "final-wave-4-1",
+      "state": "preparing",
+      "used": 0
+    },
+    "attempt-64740-1792372024900659200-0": {
+      "base": {
+        "digest": "18af335f7af783470885a8a9ffbcaa3c6f900f5f3ee3ea41d3684b70e73e1762",
+        "publication": "publication-73076-1792371994504890100-11"
+      },
+      "bytes": 67109760,
+      "candidate_digest": null,
+      "intent": "d6c59e1d5eb01f851e9f29164dd16d4ad4816997080b9c1f3694e07949ab501b",
+      "request": "final-wave-4-2",
+      "state": "preparing",
+      "used": 0
+    }
+  },
+  "reserved_bytes": 268438848,
+  "new_unique_files": 31,
+  "new_unique_file_bytes": 509490,
+  "existing_file_growth_bytes": 1700,
+  "snapshot_archive": "pending-4.zip",
+  "snapshot_sha256": "cc060523f40ae1be50e8b7b1d555de31af54aca4f017f31be9cbbeb325d6b788",
+  "census_and_archive_pause_seconds": 2.6410000000032596
+}

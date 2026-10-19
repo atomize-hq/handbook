@@ -1,0 +1,36 @@
+{
+  "workers": 2,
+  "observed_reservations": {
+    "attempt-52440-1792371976324948400-0": {
+      "base": {
+        "digest": "349bd2af0b97b4d13cd13ce0482ab7546915116b279720056c4e7cff6697331e",
+        "publication": "publication-59556-1792371933387696000-20"
+      },
+      "bytes": 67109568,
+      "candidate_digest": null,
+      "intent": "4c7a862bf6c75e58f133e524d9b2f7e86ab25918491ebfdad8828243f420f201",
+      "request": "final-wave-2-1",
+      "state": "preparing",
+      "used": 0
+    },
+    "attempt-68988-1792371976332751100-0": {
+      "base": {
+        "digest": "349bd2af0b97b4d13cd13ce0482ab7546915116b279720056c4e7cff6697331e",
+        "publication": "publication-59556-1792371933387696000-20"
+      },
+      "bytes": 67109760,
+      "candidate_digest": null,
+      "intent": "f515e29debc44afb1242a71f54e58262f4f8fa1d4857eda8a432ba8d87e41344",
+      "request": "final-wave-2-0",
+      "state": "preparing",
+      "used": 0
+    }
+  },
+  "reserved_bytes": 134219328,
+  "new_unique_files": 19,
+  "new_unique_file_bytes": 434525,
+  "existing_file_growth_bytes": 850,
+  "snapshot_archive": "pending-2.zip",
+  "snapshot_sha256": "48569d74889b90628e4e7265718aeb10c387e66c0b34ad098a8d1545e4b5aca4",
+  "census_and_archive_pause_seconds": 2.7030000000377186
+}

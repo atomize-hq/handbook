@@ -8,8 +8,9 @@ indexes, predecessor-only history indexes, durable incremental A refresh,
 complete independent B generations, exact packets and a small shared library.
 The original baseline is `379af4eda9b95ee82be9d3afcfdcdca2d6d132f9`.
 The final accounting-corrected core is `5a65a2155f9eb297d2cbb1b7c900fa749629605c`.
-Ordinary publication/history measurements use `7ac70f9`. The later `7e00d22`
-correction preflights selected projection/source evidence before audit rendering;
+The original document matrix uses F3; continued publication/history measurements
+use `7ac70f9`. Fresh matched-depth calibration and final contention use `7e00d22`.
+That correction preflights selected projection/source evidence before audit rendering;
 `5a65a21` repairs reservation recovery for two eligible different-intent requests
 sharing one ID. These corrected paths have focused regressions, rather than a
 replacement full document/history matrix on the latest pin.
@@ -81,20 +82,56 @@ checks old versus final digests and exact captured bytes, rather than treating a
 not change the original censored initialization. Post-matrix measurements and
 original censors remain separate.
 
-At achieved N=100k, the corrected 4 KiB scattered-import observations use
-publication depths H=2/3/4 including initialization. Publication defers A refresh;
-the following refresh is a separate invocation:
+The corrected 4 KiB scattered-import observations use publication depths H=2/3/4
+including initialization. Fresh N1k/10k calibration uses 7e, and achieved N100k
+uses 7ac. Publication defers A refresh; each following refresh is a separate
+invocation and touches exactly the listed number of changed source paths:
 
-| Changed sources | Publication controller time | Separate A refresh | Publication document visits / object reads | Publication metadata read / written | Refreshed paths |
+| N | Changed sources | Publication controller time | Separate A refresh | Publication document visits / object reads | Publication metadata read / written |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| 1 | 66.121 ms | 15.478 ms | 2 / 55 | 212,502 / 52,435 bytes | 1 |
-| 8 | 174.754 ms | 40.734 ms | 16 / 300 | 1,396,700 / 391,103 bytes | 8 |
-| 64 | 919.755 ms | 286.008 ms | 128 / 1,990 | 10,606,617 / 2,972,437 bytes | 64 |
+| 1k | 1 | 58.744 ms | 16.656 ms | 2 / 33 | 230,035 / 47,373 bytes |
+| 1k | 8 | 133.894 ms | 38.706 ms | 16 / 184 | 1,431,318 / 337,876 bytes |
+| 1k | 64 | 598.824 ms | 249.450 ms | 129 / 1,051 | 8,802,444 / 664,672 bytes |
+| 10k | 1 | 72.891 ms | 20.735 ms | 2 / 44 | 213,585 / 49,434 bytes |
+| 10k | 8 | 171.701 ms | 38.949 ms | 16 / 242 | 1,340,043 / 364,164 bytes |
+| 10k | 64 | 771.760 ms | 258.215 ms | 128 / 1,520 | 9,901,095 / 2,623,684 bytes |
+| 100k | 1 | 66.121 ms | 15.478 ms | 2 / 55 | 212,502 / 52,435 bytes |
+| 100k | 8 | 174.754 ms | 40.734 ms | 16 / 300 | 1,396,700 / 391,103 bytes |
+| 100k | 64 | 919.755 ms | 286.008 ms | 128 / 1,990 | 10,606,617 / 2,972,437 bytes |
 
 These calls do not load all 100k document headers. Full A100k audit separately
 took 89.900 seconds on `7ac70f9`; its corrected preflight audit is a later check.
-The queued N1k/10k calibration uses fresh H=2/3/4 roots to avoid comparing against
-the reused medium root's older contention/incoming-build history.
+Fresh N1k/10k roots avoid the reused medium root's older contention/incoming-build
+history. Their audits and independent selected-chain/source checks passed.
+The 7e change affects audit preflight; these mixed-pin observations still do not
+establish a perfectly isolated causal ablation or latency distribution.
+
+## Controlled contention and reservations
+
+The corrected 7e repeat accepted all 15 requests across 1/2/4/8-worker waves.
+Each wave mixes one edit in the 5,002-edge adjacency with scattered label edits.
+It deliberately waits at prepared-candidate barriers, inventories new files and
+archives them before releasing selection. The complete trace took 347.781 seconds,
+including collection/cleanup between waves; request response times below cover
+their preparation, barrier/census waits and any cleanup/retry before acceptance.
+
+| Workers | Accepted / attempts | Request response range | Observed reserved bytes | New file bytes at barrier | Existing-file growth |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | 1 / 1 | 4.512 s | 67,109,568 | 403,801 | 424 |
+| 2 | 2 / 3 | 4.555–18.210 s | 134,219,328 | 434,525 | 850 |
+| 4 | 4 / 7 | 4.553–18.885 s | 268,438,848 | 509,490 | 1,700 |
+| 8 | 8 / 15 | 4.714–20.575 s | 536,877,888 | 663,436 | 3,400 |
+
+The census/archive pauses were 2.625/2.703/2.641/2.750 seconds. These controlled
+latencies are not ordinary throughput trials. All observed whole-request times
+fit 180 seconds; the implementation caps individual calls at 180 seconds and
+four attempts, rather than implementing a separate aggregate-request watchdog.
+The observed pending state is not continuous physical peak monitoring.
+[Derived request/lock/retry data](evidence/contention-derived-final.json) retain
+per-request clocks, refusals and failed-attempt logical writes. Those writes are
+not unique discarded physical bytes. Exact pending ZIPs and quota receipts are
+retained in `evidence/contention-pending/` and independently checked by
+`derive_contention.py`.
 
 ## Encoding, validation and timing interpretation
 
@@ -156,11 +193,13 @@ objects after checking selected evidence; whole-store censuses include them.
 
 ## Real durable history
 
-The mandatory 10,000 actual completed durable selections passed independent
-verification: 10,001 publications including initialization, 10,000 dense ledger
-receipts, exact predecessor membership/outcome maps and original results. The
-bounded 100,000-selection tier remains running; no structural fixture or bulk
-chain is substituted for live commits.
+The bounded 100,000-selection tier completed without append censoring and passed
+the running harness's independent verification: 100,001 publications including
+initialization, 100,000 dense ledger receipts, exact predecessor membership/outcome
+maps and original results, header transitions and final graph/index/source recipe.
+The mandatory 10,000 depth passed the same checks earlier. No structural fixture
+or bulk chain is substituted for live commits. Final portable-proof export and
+fresh restoration remain separate pending observations.
 
 The fixed corpus has 16 documents, 148 KiB of authored source and degree at most2.
 Content/restore operations
@@ -192,11 +231,14 @@ Fresh-process positive resolution at the independently verified depths:
 | --- | ---: | ---: | ---: |
 | 1,000 | 7.112 / 6.237 / 5.988 ms | 8 / 8 / 2 | 45,693 / 54,841 / 7,516 |
 | 10,000 | 9.746 / 6.519 / 5.814 ms | 10 / 10 / 2 | 41,927 / 39,924 / 3,644 |
+| 100,000 | 77.165 / 8.119 / 5.943 ms | 12 / 12 / 2 | 38,943 / 47,956 / 2,158 |
 
 These sparse point observations show bounded index-path work rather than a read
 of every predecessor. The current publication is represented directly; older
 requests traverse the selected predecessor index. They do not establish a
 latency distribution or device-cold performance.
+The slower early 100k lookup is retained; bounded read counts do not guarantee
+flat elapsed time.
 
 Checkpoint rebuild, A refresh, lost reply beneath 1,000 actual successors and
 bounded long-history collection are separate observations. Collection is allowed
@@ -204,6 +246,16 @@ to fail or censor; later successful resolution alone cannot prove reclamation.
 The report uses its actual disposition and removed counts. Selected-tree geometry
 is not a census of all retained historical files. The portable history export is
 a proof capsule, not a complete restartable store backup.
+
+The checkpoint completed in 11.542 seconds and separate A refresh in 2.719 seconds.
+The harness then verified 100,002 publications, injected reply exit86, selected
+1,000 actual successors and verified the original outcome beneath them. Its final
+independent check covered 101,003 publications and the original 100,000 receipts.
+The controller subsequently exited1 on `refused:disposable-root`: its captured
+root was named `store`, which cannot arm collection. This original failure is
+preserved. The separately bounded, quiescent relocation/GC continuation and final
+strict proof remain queued; the saved reproduction script uses consistent
+`disposable/store` paths.
 
 ## Correctness, failures and native coverage
 
@@ -289,9 +341,11 @@ they do not measure unique physical/device usage.
 Windows F3 was compiled before source newline normalization. The exact compiled
 Rust bytes are retained in a session ZIP; the source-binding receipt proves that
 the pin differs only by CRLF/LF. Do not call that byte-exact Git-source compilation.
-The main Windows measurement build's 21 Rust source files match `7ac70f9` byte
-for byte, as checked in `evidence/windows-final-source-binding.json`. The later
-accounting build matches `5a65a21`, separately recorded in
+The captured source tree for the main Windows measurement build has 21 Rust
+files matching `7ac70f9` byte for byte, as checked in
+`evidence/windows-final-source-binding.json`. That tree also contains the separate
+control crate; the engine build does not compile every captured file. The later
+accounting build's captured Rust/Cargo inputs match `5a65a21`, separately recorded in
 `evidence/windows-accounting-source-binding.json`; its focused reruns do not
 replace the earlier matrix/history source pin.
 Raw events bind recorded executable SHA-256; retained session archives provide
