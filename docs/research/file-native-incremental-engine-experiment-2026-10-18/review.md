@@ -94,3 +94,20 @@ The evidence inventory's immediate byte/membership round trip passed. Linux
 census review qualified per-path block totals (possible hardlink repeats) and its
 explicit engine/Python process filter; it does not claim universal supervisor
 detection. Completed controller records remain separate termination evidence.
+
+The closing claims review checked the completed 100k/checkpoint/lost-reply counts,
+homogeneous groups, storage totals, contention dispositions and distinct source
+pins against retained observations. It found no additional blocker. The aggregate
+projection pass's 900.406-second censor is retained, with four completed matrix
+roots; the separately admitted two-calibration-root check does not claim A100k
+completion. WSL's 7ac common capsule and companions completed 771 responses,
+647 success exits, 71 expected refusals and 53 injected exits, with no censors.
+Its strict 7e correction also completed 42 responses and locked tests/build.
+
+Pre-execution review of the final resource census caught an admission/enforcement
+gap: two subprocess caps could outlive the admitted 600 seconds. The helper now
+uses monotonic per-file/directory reserves, bounded Git/guest/PowerShell waits and
+a guest alarm; a separate recorded controller enforces the actual outer600-second
+descendant-process cap. Review confirmed the corrected bound, worktree resolution,
+NUL delimiter and conservative accounting/process-filter qualifications. This
+static review is separate from the final census's actual disposition.
