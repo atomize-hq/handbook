@@ -70,7 +70,7 @@ impl Store{
     pub fn open(root:&Path,m:&mut Metrics)->Result<Self>{
         m.store_root=Some(root.into());
         let config:StoreConfig=serde_json::from_slice(&io::read_bounded(&root.join("STORE.json"),65536,m)?)?;
-        if config.version!=1||![1,2].contains(&config.navigation_version)||!["A","B"].contains(&config.mode.as_str())||!["project","research"].contains(&config.consumer.as_str()){
+        if config.version!=1||![1,2,3,4].contains(&config.navigation_version)||!["A","B"].contains(&config.mode.as_str())||!["project","research"].contains(&config.consumer.as_str()){
             return Err("integrity:store-version-kind".into());
         }
         Ok(Self{root:root.into(),config})
@@ -217,7 +217,7 @@ impl Store{
         o.metrics.elapsed("graph-transition-inclusive",graph_started);
         io::checkpoint("semantic-root")?;
         let projection_started=Instant::now();
-        let (projection,changed_paths)=projection::delta(&self.root,&mut o,&head.publication.projection,&delta,2)?;
+        let (projection,changed_paths)=projection::delta(&self.root,&mut o,&head.publication.projection,&delta,projection::new_profile())?;
         o.metrics.elapsed("projection-prepare-inclusive",projection_started);
         io::checkpoint("projection-root")?;
         let mut changes=BTreeMap::new();
@@ -399,7 +399,7 @@ impl Store{
         m.store_root=Some(root.into());
         if root.exists()||!["A","B"].contains(&mode)||!["project","research"].contains(&consumer)||n<10||n>100_000{return Err("refused:init-arguments-existing".into());}
         io::mkdir(root,m)?;
-        let config=StoreConfig{version:1,store_id:io::unique("store"),mode:mode.into(),consumer:consumer.into(),fallback,navigation_version:2};
+        let config=StoreConfig{version:1,store_id:io::unique("store"),mode:mode.into(),consumer:consumer.into(),fallback,navigation_version:projection::new_profile()};
         io::write_new(&root.join("STORE.json"),&io::json(&config)?,m)?;
         io::write_new(&root.join("README.md"),b"# File-native collection\n\nRead SELECTED.json once and verify its publication digest. The publication binds exact immutable state. B: retain generations/<attempt>/ once and read collection.yaml and exact source paths. A: view/ may mix/lag; VIEW.json names completed state and PENDING.json records unfinished work. Ordinary edits are not automatically admitted.\n",m)?;
         let store=Self{root:root.into(),config};let _guard=store.lock(m)?;

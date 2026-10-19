@@ -5,7 +5,13 @@ use serde_json::{json,Value};
 use std::{collections::{BTreeMap,BTreeSet},fs,path::{Path,PathBuf},time::Instant};
 #[derive(Clone,Serialize,Deserialize,PartialEq,Eq)]
 #[serde(deny_unknown_fields)]
-pub struct FileSpec{pub source:String,pub digest:Id}
+pub struct FileSpec{pub source:String,pub digest:Id,
+    #[serde(default,skip_serializing_if="Option::is_none")]
+    pub projection_profile:Option<u32>,
+}
+// Experimental controls identify new immutable targets; replay always uses the
+// prepared target's own marker. Historical profiles never acquire this field.
+pub fn new_profile()->u32{std::env::var("EXP_NAVIGATION").ok().and_then(|v|v.parse().ok()).filter(|v|[2,3].contains(v)).unwrap_or(3)}
 #[derive(Clone,Serialize,Deserialize)]
 #[serde(deny_unknown_fields)]
 struct Watermark{selected:Selector,sequence:u64,graph:GraphRoot,projection:Option<Id>}
@@ -23,7 +29,7 @@ fn derived(root:&Path,bytes:&[u8],m:&mut Metrics)->Result<FileSpec>{
         let stage=path.with_file_name(io::unique("derived-stage"));
         io::write_new(&stage,bytes,m)?;io::install_original(&stage,&path,&digest,m)?;io::sync_dir(path.parent().unwrap(),m)?;
     }
-    Ok(FileSpec{source,digest})
+    Ok(FileSpec{source,digest,projection_profile:None})
 }
 fn safe_path(path:&str)->Result<()>{
     if path.len()>1000||path.contains('\\')||Path::new(path).components().any(|p|!matches!(p,std::path::Component::Normal(_))){
@@ -45,8 +51,10 @@ fn static_files(root:&Path,o:&mut Objects,version:u32)->Result<BTreeMap<String,V
     let mut files=BTreeMap::new();
     let text=b"# Collection navigation\n\nExact authored sources are in docs/. Read navigation/ in stable ID order for titles, kinds, source paths and typed local/external relationships. Use ordinary listing, text search, copying and SHA-256 tools.\n\n[Overview](navigation/d000000.md) | [Packet](packet/context.md) | [Ordered provenance](packet/provenance.json)\n\nReadable files do not grant edit/import authority. A may mix or lag; B requires one positively selected retained generation path.\n";
     for (path,b) in [("NAVIGATION.md",text.as_slice()),("packet/context.md",b"".as_slice()),("packet/provenance.json",b"{\"requested\":false,\"recipe\":\"not-requested\",\"renderer\":\"exact-concat-v1\",\"inputs\":[],\"omissions\":[\"no new context packet requested\"],\"errors\":[],\"output_sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}".as_slice())]{
-        if version==2&&path=="NAVIGATION.md"{continue;}
-        let f=derived(root,b,o.metrics)?;files.insert(path.into(),objects::encode(&f,o)?);
+        if version>=2&&path=="NAVIGATION.md"{continue;}
+        let mut f=derived(root,b,o.metrics)?;
+        if version>=3&&path=="packet/provenance.json"{f.projection_profile=Some(version);}
+        files.insert(path.into(),objects::encode(&f,o)?);
     }Ok(files)
 }
 // Version 2 supplies only metadata absent from the exact authored files. One
@@ -61,9 +69,13 @@ fn collection(root:&Path,o:&mut Objects,g:&GraphRoot)->Result<FileSpec>{
             for (_,e) in edges{b.push_str(&format!("      - kind: {}\n        target: {}\n        external: {}\n",serde_json::to_string(&e.kind)?,serde_json::to_string(&e.target)?,e.external));}
         }
     }
+    o.metrics.navigation_parts+=1;o.metrics.navigation_bytes+=b.len() as u64;
     derived(root,b.as_bytes(),o.metrics)
 }
 pub fn profile(o:&mut Objects,projection:&Option<Id>)->Result<u32>{
+    if let Some(f)=objects::point::<FileSpec>(o,projection,"packet/provenance.json")?{
+        if let Some(v)=f.projection_profile{if [3,4].contains(&v){return Ok(v);}return Err("integrity:projection-profile".into());}
+    }
     Ok(if objects::point::<FileSpec>(o,projection,"collection.yaml")?.is_some(){2}else{1})
 }
 fn namespace(o:&mut Objects,projection:&Option<Id>,g:&GraphRoot,paths:impl Iterator<Item=String>)->Result<()>{
@@ -92,9 +104,9 @@ fn namespace(o:&mut Objects,projection:&Option<Id>,g:&GraphRoot,paths:impl Itera
 }
 pub fn full(root:&Path,o:&mut Objects,g:&GraphRoot,version:u32)->Result<Option<Id>>{
     let mut files=static_files(root,o,version)?;
-    if version==2{files.remove("NAVIGATION.md");files.insert("collection.yaml".into(),objects::encode(&collection(root,o,g)?,o)?);}
+    if version>=2{files.remove("NAVIGATION.md");files.insert("collection.yaml".into(),objects::encode(&collection(root,o,g)?,o)?);}
     for (_,h) in objects::range::<graph::Header>(o,&g.tree,"D/")?{
-        files.insert(h.doc.path.clone(),objects::encode(&FileSpec{source:h.doc.original,digest:h.doc.digest},o)?);
+        files.insert(h.doc.path.clone(),objects::encode(&FileSpec{source:h.doc.original,digest:h.doc.digest,projection_profile:None},o)?);
         if version==1{let n=nav(root,o,g,&h.doc.id)?.ok_or("integrity:navigation")?;
         files.insert(format!("navigation/{}.md",h.doc.id),objects::encode(&n,o)?);}
     }
@@ -112,8 +124,8 @@ pub fn delta(root:&Path,o:&mut Objects,old:&Option<Id>,d:&Delta,version:u32)->Re
     }
     let mut changes=BTreeMap::new();
     for h in d.old.values().flatten(){changes.insert(h.doc.path.clone(),vec![]);}
-    for h in d.final_docs.values().flatten(){changes.insert(h.doc.path.clone(),objects::encode(&FileSpec{source:h.doc.original.clone(),digest:h.doc.digest.clone()},o)?);}
-    if version==2{changes.insert("collection.yaml".into(),objects::encode(&collection(root,o,&d.graph)?,o)?);}
+    for h in d.final_docs.values().flatten(){changes.insert(h.doc.path.clone(),objects::encode(&FileSpec{source:h.doc.original.clone(),digest:h.doc.digest.clone(),projection_profile:None},o)?);}
+    if version==2||(version==3&&!d.navigation_facts.is_empty()){changes.insert("collection.yaml".into(),objects::encode(&collection(root,o,&d.graph)?,o)?);}
     for id in d.navigation.iter().filter(|_|version==1){
         let key=format!("navigation/{id}.md");
         changes.insert(key,nav(root,o,&d.graph,id)?.map(|f|objects::encode(&f,o)).transpose()?.unwrap_or_default());
@@ -125,7 +137,7 @@ pub fn delta(root:&Path,o:&mut Objects,old:&Option<Id>,d:&Delta,version:u32)->Re
     }
     // A no-packet transaction explicitly clears any preceding packet status.
     for (p,b) in static_files(root,o,version)?{
-        if version==2&&p=="NAVIGATION.md"{continue;}
+        if version>=2&&p=="NAVIGATION.md"{continue;}
         let prior=crate::disk::DiskIndex::open(o,old.clone())?.get(o,&p)?.unwrap_or_default();
         if prior!=b{paths.insert(p.clone());actual.insert(p,b);}
     }
@@ -170,7 +182,7 @@ fn packet_content(store:&Store,g:&GraphRoot,m:&mut Metrics)->Result<(BTreeMap<St
     }
     let mut files=BTreeMap::new();let mut output=vec![];let mut inputs=vec![];
     for id in &included{
-        let d=&s.docs[id];files.insert(d.path.clone(),FileSpec{source:d.original.clone(),digest:d.digest.clone()});
+        let d=&s.docs[id];files.insert(d.path.clone(),FileSpec{source:d.original.clone(),digest:d.digest.clone(),projection_profile:None});
         if ids.contains(id){
             let b=io::checked(&store.root.join(&d.original),&d.digest,m)?;
             output.extend(format!("\n\n<!-- source {} sha256 {} -->\n",d.id,d.digest).as_bytes());output.extend(&b);
@@ -194,8 +206,11 @@ pub fn packet(store:&Store,g:&GraphRoot,projection:&Option<Id>,attempt:&str,m:&m
     for (p,h) in &manifest{io::checked(&dest.join(p),h,m)?;}
     io::write_new(&dest.join("MANIFEST.json"),&io::json(&manifest)?,m)?;
     let mut o=objects::object_store(&store.root,m);let mut updates=BTreeMap::new();
+    let version=profile(&mut o,projection)?;
     for (p,b) in [("packet/context.md",output),("packet/provenance.json",prov)]{
-        let f=derived(&store.root,&b,o.metrics)?;updates.insert(p.into(),objects::encode(&f,&mut o)?);
+        let mut f=derived(&store.root,&b,o.metrics)?;
+        if version>=3&&p=="packet/provenance.json"{f.projection_profile=Some(version);}
+        updates.insert(p.into(),objects::encode(&f,&mut o)?);
     }
     let result=objects::update(&mut o,projection,updates)?;o.metrics.elapsed("packet-inclusive",t);Ok(result)
 }
@@ -205,7 +220,7 @@ pub fn packet_verify_replay(store:&Store,g:&GraphRoot,projection:&Option<Id>,att
     let manifest:BTreeMap<String,String>=serde_json::from_slice(&io::read(&dest.join("MANIFEST.json"),m)?)?;
     let mut expected:BTreeMap<_,_>=files.iter().map(|(p,f)|(p.clone(),f.digest.clone())).collect();
     expected.insert("packet/context.md".into(),io::digest(&output));expected.insert("packet/provenance.json".into(),io::digest(&prov));
-    let legacy={let mut o=objects::object_store(&store.root,m);profile(&mut o,projection)?==1};
+    let version={let mut o=objects::object_store(&store.root,m);profile(&mut o,projection)?};let legacy=version==1;
     if legacy{expected.insert("NAVIGATION.md".into(),io::digest(b"# Exact retained packet\n\nSources are in docs/. Ordered inputs, exact paths, hashes, omissions and recipe are in packet/provenance.json.\n"));}
     if manifest!=expected{return Err("integrity:packet-manifest-completeness".into());}
     let mut actual=vec![];crate::lifetime::files(&dest,&mut actual)?;
@@ -219,7 +234,9 @@ pub fn packet_verify_replay(store:&Store,g:&GraphRoot,projection:&Option<Id>,att
     let mut o=objects::object_store(&store.root,m);let mut updates=BTreeMap::new();
     for (p,b) in [("packet/context.md",output),("packet/provenance.json",prov)]{
         io::checked(&dest.join(p),&io::digest(&b),o.metrics)?;
-        let f=derived(&store.root,&b,o.metrics)?;updates.insert(p.into(),objects::encode(&f,&mut o)?);
+        let mut f=derived(&store.root,&b,o.metrics)?;
+        if version>=3&&p=="packet/provenance.json"{f.projection_profile=Some(version);}
+        updates.insert(p.into(),objects::encode(&f,&mut o)?);
     }objects::update(&mut o,projection,updates)
 }
 pub fn verify_capsule(store:&Store,g:&GraphRoot,packet:&crate::store::PacketRef,m:&mut Metrics)->Result<()>{

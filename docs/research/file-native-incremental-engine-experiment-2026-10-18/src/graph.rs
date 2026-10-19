@@ -115,6 +115,7 @@ fn full_fallback(s:&State)->Result<()>{
 }
 pub struct Delta{
     pub graph:GraphRoot,pub changed:BTreeSet<String>,pub navigation:BTreeSet<String>,
+    pub navigation_facts:BTreeSet<String>,
     pub old:BTreeMap<String,Option<Header>>,pub final_docs:BTreeMap<String,Option<Header>>,
 }
 pub fn transition(root:&Path,o:&mut Objects,g:&GraphRoot,ops:&[Op])->Result<Delta>{
@@ -224,5 +225,16 @@ pub fn transition(root:&Path,o:&mut Objects,g:&GraphRoot,ops:&[Op])->Result<Delt
     let tree=objects::update(o,&g.tree,changes)?;
     let graph=GraphRoot{version:1,consumer:g.consumer.clone(),budget,cost:cost as u64,count,tree,fallback:g.fallback};
     if g.fallback{full_fallback(&all(o,&graph)?)?;}
-    Ok(Delta{graph,changed:final_docs.keys().cloned().collect(),navigation,old,final_docs})
+    let mut navigation_facts=BTreeSet::new();
+    for (id,next) in &final_docs{
+        let same=match (old[id].as_ref(),next.as_ref()){
+            (Some(a),Some(b))=>a.doc.id==b.doc.id&&a.doc.title==b.doc.title&&a.doc.kind==b.doc.kind&&a.doc.path==b.doc.path,
+            (None,None)=>true,_=>false,
+        };
+        if !same{navigation_facts.insert(id.clone());}
+    }
+    for (key,prior) in &old_edges{
+        if serde_json::to_vec(prior)?!=serde_json::to_vec(&edges[key])?{navigation_facts.insert(key.0.clone());}
+    }
+    Ok(Delta{graph,changed:final_docs.keys().cloned().collect(),navigation,navigation_facts,old,final_docs})
 }
