@@ -1,0 +1,27 @@
+{
+  "core_commit": "4bde156323812ef18c0dea6798cfc2108aaad933",
+  "src_git_tree": "d22e997c7c75940a6b4077368549d28c1780ef49",
+  "source_sha256": {
+    "api.rs": "9e3ad5197b97970ca44abe69ef96fa9564d330f8d46c260cd61cd1f2938628be",
+    "baseline_model.rs": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+    "bounds_tests.rs": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+    "differential.rs": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+    "disk.rs": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d",
+    "graph.rs": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+    "io.rs": "a96816470ceaf82f044f5d00eda7c8ecce0bde09f6a9cf94f4608e29555a204d",
+    "lib.rs": "0ed74eb1aa9f6796d1fd8bb0bb254933ab500fdcd4ab113bcaca4d97e635dbd8",
+    "lifetime.rs": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+    "main.rs": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+    "navigation.rs": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+    "objects.rs": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+    "projection.rs": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6",
+    "store.rs": "43aafc4d800f0ba190f9f38f50733e04d8a738c623b73061e39d3699fd2ab834",
+    "Cargo.toml": "7e08fe410778cd11427f190e6c6991324c1a02d1c50c65a3cfd5e8d0dba6ab08",
+    "Cargo.lock": "07eca1011d8aabcf2e5508cd9b4954417dff9ab0c7a7a1accf06af719a81b330"
+  },
+  "binary": "C:\\file-native-navigation-20261019\\bin\\final.exe",
+  "binary_sha256": "d4b7c495abfc029e8fabd6fcfc75501c5de04ce72dd38847a69bc8824022303f",
+  "measurement_core_commit": "6e66a7523612b80386cf9cc2b96d5341579b54fd",
+  "measurement_exe_sha256": "6336944d13967dfce04e4cc40b3459cdac4718b223dda147dcd202598ad50558",
+  "difference": "final core only omits inherited Markdown guidance at profile4 genesis; ordinary matrix not relabeled"
+}

@@ -1,0 +1,30 @@
+{
+  "utc": "2026-10-19T23:56:03Z",
+  "roots": [
+    {
+      "root": "C:\\file-native-navigation-20261019",
+      "files": 78108,
+      "logical_bytes": 901730220,
+      "links_excluded": 0,
+      "seconds": 1.0160000000032596
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-navigation-20261019\\handbook",
+      "files": 133,
+      "logical_bytes": 7629481,
+      "links_excluded": 0,
+      "seconds": 0.0
+    }
+  ],
+  "files": 78241,
+  "logical_bytes": 909359701,
+  "free_bytes": 202350628864,
+  "owned_ceiling_bytes": 1610612736,
+  "owned_ceiling_files": 150000,
+  "physical_allocation_bytes": null,
+  "cache_residue_separately_in_global_baseline": {
+    "logical_bytes": 1050883003,
+    "files": 15042
+  },
+  "note": "Logical regular file lengths exclude reparse points. Global and other-lane accounting belongs to coordinator. No continuous aggregate RSS or historical disk peak claim. Worktree census includes evidence archive."
+}

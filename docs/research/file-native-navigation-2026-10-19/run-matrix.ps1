@@ -23,7 +23,7 @@ foreach($n in @(128,1000,10000)){
       $forecast=$sources*$(if($mode -eq 'B'){3}else{2})+64MB
       if($before.logical_bytes+$forecast -gt 768MB -or $before.files+4*$n+10000 -gt 100000){throw "capacity admission refusal for $label"}
       $before|ConvertTo-Json -Depth 6|Set-Content -LiteralPath (Join-Path $matrix "$label-admission.json") -Encoding utf8
-      & $Python $driver --exe $Executable --base $base --n $n --mode $mode --profile $profile --deadline $deadline 2>&1|Tee-Object -FilePath (Join-Path $matrix "$label-run.txt")
+      & $Python $driver --exe $Executable --base $base --n $n --mode $mode --profile $profile --deadline $deadline --owned-root $Owned --worktree $Worktree 2>&1|Tee-Object -FilePath (Join-Path $matrix "$label-run.txt")
       if($LASTEXITCODE){throw "measurement failure/censor: $label; fixture retained"}
       $summary=Get-Content -LiteralPath (Join-Path $base 'summary.json') -Raw|ConvertFrom-Json
       if($summary.status -ne 'success'){throw 'missing completion proof'}

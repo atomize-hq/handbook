@@ -1,0 +1,34 @@
+{
+  "utc": "2026-10-19T23:56:02Z",
+  "primary_rows": 195,
+  "extra_deferred_rows": 24,
+  "all_primary_oracle_flags": true,
+  "matrix_child_receipts": 1063,
+  "matrix_distinct_child_receipts": 1062,
+  "matrix_children_with_rss_samples": 1062,
+  "matrix_sampled_peak_rss": 52924416,
+  "checker_peak_rss": 202440704,
+  "prepared_owned_samples": 63,
+  "prepared_owned_max_bytes": {
+    "cell": "n10000-A-p2-full",
+    "case": "merge",
+    "bytes": 903835852,
+    "files": 78266
+  },
+  "prepared_owned_max_files": {
+    "cell": "n10000-A-p2-full",
+    "case": "merge",
+    "bytes": 903835852,
+    "files": 78266
+  },
+  "historical_owned_peak": "not continuously measured; admission forecasts and available boundary/prepare censuses retained",
+  "B10000": {
+    "status": "initialization-censored-before-selection",
+    "ordinary_rows": 0,
+    "profiles2and3": "unperformed"
+  },
+  "fixture_retention": {
+    "profile2_full": true,
+    "profile3_full": false
+  }
+}
