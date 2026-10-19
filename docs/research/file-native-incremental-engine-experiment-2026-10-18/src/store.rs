@@ -401,7 +401,7 @@ impl Store{
         io::mkdir(root,m)?;
         let config=StoreConfig{version:1,store_id:io::unique("store"),mode:mode.into(),consumer:consumer.into(),fallback,navigation_version:projection::new_profile()};
         io::write_new(&root.join("STORE.json"),&io::json(&config)?,m)?;
-        io::write_new(&root.join("README.md"),b"# File-native collection\n\nRead SELECTED.json once and verify its publication digest. The publication binds exact immutable state. B: retain generations/<attempt>/ once and read collection.yaml and exact source paths. A: view/ may mix/lag; VIEW.json names completed state and PENDING.json records unfinished work. Ordinary edits are not automatically admitted.\n",m)?;
+        if config.navigation_version<=3{io::write_new(&root.join("README.md"),b"# File-native collection\n\nRead SELECTED.json once and verify its publication digest. The publication binds exact immutable state. B: retain generations/<attempt>/ once and read collection.yaml and exact source paths. A: view/ may mix/lag; VIEW.json names completed state and PENDING.json records unfinished work. Ordinary edits are not automatically admitted.\n",m)?;}
         let store=Self{root:root.into(),config};let _guard=store.lock(m)?;
         let attempt=io::unique("attempt");let request=Request{request:"initial".into(),base:None,ops:vec![],packet:false};let intent=io::digest(&io::json(&request)?);
         let allowance=n as u64*300_000+64*1024*1024;

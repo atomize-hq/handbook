@@ -72,7 +72,7 @@ def run(exe,base,capsule=False,legacy=None):
     def check(root,label):
         d.call(root,'audit');row=dict(case=label,**verify(root));cases.append(row);(d.base/'cases.json').write_text(json.dumps(cases,indent=2),encoding='utf-8')
     for mode in ['A','B']:
-        root=d.init('main-'+mode,mode);state=d.call(root,'dump')['result']['state'];check(root,'initial-'+mode)
+        root=d.init('main-'+mode,mode);assert not (root/'README.md').exists();state=d.call(root,'dump')['result']['state'];check(root,'initial-'+mode)
         for label,ops in [('payload',[dict(kind='edit',id='d000004',text=' payload')]),('batch-payload',[dict(kind='edit',id=f'd{i:06}',text=' batch') for i in range(16,24)]),('label',[dict(kind='label',id='d000005',text='unexported')])]:
             r=d.publish(root,label,ops);assert r['prepare']['metrics']['navigation_parts']==0;check(root,label+'-'+mode)
         long='T'*4090
