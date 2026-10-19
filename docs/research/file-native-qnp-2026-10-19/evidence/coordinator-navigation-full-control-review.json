@@ -1,0 +1,66 @@
+{
+  "epoch": 1792453827.3572793,
+  "restored_setup_censors_remain_explicit": true,
+  "completed_controls": [
+    {
+      "cell": "n10000-A-p3-full",
+      "summary": {
+        "status": "success",
+        "scope": "complete ordinary view and immutable projection",
+        "unperformed_cases": [],
+        "initialization_status": "authenticated-operational-prefix-restore; original fresh-init censor unchanged",
+        "owned_cap_mib": 1024,
+        "original_cell_epoch": null,
+        "n": 10000,
+        "mode": "A",
+        "profile": 3,
+        "cases": 13,
+        "seconds": 322.18799999996554,
+        "fixture": "C:\\file-native-navigation-20261019\\matrix-final\\n10000-A-p3-full\\cell\\disposable\\store",
+        "final": {
+          "root": "C:\\file-native-navigation-20261019\\matrix-final\\n10000-A-p3-full\\cell\\disposable\\store",
+          "files": 20910,
+          "logical_bytes": 268705873,
+          "links_excluded": 0,
+          "seconds": 0.062000000034458935
+        },
+        "exe_sha256": "6336944d13967dfce04e4cc40b3459cdac4718b223dda147dcd202598ad50558"
+      },
+      "all13_oracle_and_readable_extraction_flags": true,
+      "all13_refresh_timings_present": true,
+      "current_fixture_retained": false,
+      "source_manifest": "actualWindows6e66/633694 measurementgeneration; not relabeled4bde",
+      "raw_measurements_sha256": "28e38b71247f2da3cefab5be8785474c5dfc3534432e772f410b9017dd61e1a0"
+    },
+    {
+      "cell": "n10000-A-p2-full",
+      "summary": {
+        "status": "success",
+        "scope": "complete ordinary view and immutable projection",
+        "unperformed_cases": [],
+        "initialization_status": "authenticated-operational-prefix-restore; original fresh-init censor unchanged",
+        "owned_cap_mib": 1024,
+        "original_cell_epoch": null,
+        "n": 10000,
+        "mode": "A",
+        "profile": 2,
+        "cases": 13,
+        "seconds": 328.26600000000326,
+        "fixture": "C:\\file-native-navigation-20261019\\matrix-final\\n10000-A-p2-full\\cell\\disposable\\store",
+        "final": {
+          "root": "C:\\file-native-navigation-20261019\\matrix-final\\n10000-A-p2-full\\cell\\disposable\\store",
+          "files": 20910,
+          "logical_bytes": 268705817,
+          "links_excluded": 0,
+          "seconds": 0.0779999999795109
+        },
+        "exe_sha256": "6336944d13967dfce04e4cc40b3459cdac4718b223dda147dcd202598ad50558"
+      },
+      "all13_oracle_and_readable_extraction_flags": true,
+      "all13_refresh_timings_present": true,
+      "current_fixture_retained": true,
+      "source_manifest": "actualWindows6e66/633694 measurementgeneration; not relabeled4bde",
+      "raw_measurements_sha256": "8492fd892bdeb7996ffeddb5c974f6d5d051b318287f5485cf61f23a922463e2"
+    }
+  ]
+}

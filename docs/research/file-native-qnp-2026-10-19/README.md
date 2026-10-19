@@ -18,7 +18,7 @@ original H101003 store, original archive and final H101006 clone are preserved.
 | Q native macOS | required functional cases passed; reviewed and integrated | approval-delayed artifact closeout exceeded original budget; explicitly retained |
 | N Windows | frozen 4bde core integrated; measurements continue | final report and bounded comparator closeout |
 | N native Linux/ext4 | final 4bde: 39 focused, 24 recovery, eight README cases passed | source, archive and native binary authenticated; reports integrated |
-| N native macOS | isolated source advanced to final 4bde | execution/approval sequence continues under original cutoff; review pending |
+| N native macOS | final 4bde tests/build passed; full suite censored at original cutoff | original attempt remains censored; remainder-stage admission under the still-active overall N window is being assessed |
 | P | undispatched | reviewed Q/N, actual integrated-pin native qualification, frozen navigation |
 
 Linux's original retained samples failed admission. After the human freed space,
@@ -80,6 +80,17 @@ bounded resume completed its view and 13 ordinary measurements. Seeded N10k B
 also reached 120 seconds, with no selector; its edit matrix is unperformed and
 its prefix retained. Neither setup is reported as a fresh initialization pass.
 
+Windows now has 195 complete-view operation measurements plus 24 separately
+labeled deferred-view controls. All three N10k A profiles completed 13 ordinary
+cases, with the two monolithic controls independently restored from the authentic
+selected prefix and normalized through a real publication before measurement.
+The parent checked every full control's oracle/extraction flags and refresh
+timings. The profile-3 disposable full fixture was removed by its original
+launcher before the later retention amendment; raw measurements and authenticated
+restore input survive. Profile 2's full fixture is retained. See
+[the full-control review](evidence/coordinator-navigation-full-control-review.json).
+No deleted control state is reconstructed or passed test repeated for retention.
+
 For Q Mac, the parent matched all 15 baseline core files, 19 pinned harnesses and
 seven added harnesses against committed blobs, checked all 282 capsule events and
 24 cases, and verified every functional stage finished before its original
@@ -103,3 +114,12 @@ continues. Follow-ups cannot reset these bounds or relabel an eventual censor.
 Native N Linux execution/closeout ends at 23:44:45 / 23:54:45 UTC; native N Mac
 at 23:44:38 / 23:54:38 UTC on October 19. Complete cross-platform and packing
 gates remain open. No keep/adjust/reject storage recommendation is yet justified.
+
+The 60-minute native N allocations were parent suballocations within the human's
+four-hour N task. Mac's focused/capsule group began at 23:43:03.005 UTC and was
+killed 95.000179 seconds later at its fixed cutoff, with `original-cutoff` and
+exit -9. That attempt will not be relabeled or have its clock reset. The parent
+is assessing a separately recorded, prospectively bounded remainder stage on the
+same pin and build inside the original overall N deadline, after actual ownership,
+free space and coexistence checks. No such stage or P execution is admitted by
+this status note.

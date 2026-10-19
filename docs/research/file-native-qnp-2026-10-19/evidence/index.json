@@ -11,6 +11,10 @@
     "bytes": 5547,
     "sha256": "2d5cf203c96ea8cdebe717c3c676771f6358e7e87369644cdc58b8d8e84c3d84"
   },
+  "coordinator-full-control-precommit.txt": {
+    "bytes": 2151,
+    "sha256": "ba3f391ca7e56875a2440abd066551bcfe8ac7e6a03dbcace54e8057e8523928"
+  },
   "coordinator-n-linux-review.json": {
     "bytes": 1231,
     "sha256": "9ca440a58e959170852a42e1aa9af4c59f665186540016113b6e669d958c3917"
@@ -18,6 +22,10 @@
   "coordinator-navigation-detect-changes.txt": {
     "bytes": 2151,
     "sha256": "ba3f391ca7e56875a2440abd066551bcfe8ac7e6a03dbcace54e8057e8523928"
+  },
+  "coordinator-navigation-full-control-review.json": {
+    "bytes": 2843,
+    "sha256": "b90ae87ab3bee2268ea6074eee3aaa0a60cd06206e0915e8877dbf8b616417e0"
   },
   "coordinator-navigation-impact-attempts.json": {
     "bytes": 22582,
