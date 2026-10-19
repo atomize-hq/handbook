@@ -189,8 +189,8 @@ pub fn packet(store:&Store,g:&GraphRoot,projection:&Option<Id>,attempt:&str,m:&m
     for (p,b) in [("packet/context.md",&output),("packet/provenance.json",&prov)]{
         io::write_new(&dest.join(p),b,m)?;manifest.insert(p.into(),io::digest(b));
     }
-    // The independent retained packet has source/provenance/recipe plus its own
-    // ordinary navigation. Exact closure verification precedes manifest sealing.
+    // Existing source/provenance/recipe files suffice for retained packets.
+    // Exact closure verification precedes manifest sealing.
     for (p,h) in &manifest{io::checked(&dest.join(p),h,m)?;}
     io::write_new(&dest.join("MANIFEST.json"),&io::json(&manifest)?,m)?;
     let mut o=objects::object_store(&store.root,m);let mut updates=BTreeMap::new();
@@ -329,7 +329,7 @@ fn execute_plan(store:&Store,plan:&Plan,m:&mut Metrics)->Result<()>{
         }else if dest.is_file(){crate::lifetime::remove_checked(root,&dest,m)?;}
         // Remove only empty directories under the engine's readable root. This
         // never recursively deletes an external subtree.
-        let mut parent=dest.parent();
+        let mut parent=if action.prior.is_some()||action.desired.is_some(){dest.parent()}else{None};
         while let Some(p)=parent{
             if p==view||!p.starts_with(&view){break;}
             match fs::remove_dir(p){Ok(())=>{io::sync_dir(p.parent().unwrap(),m)?;m.namespace_ops+=1;},Err(_)=>break}

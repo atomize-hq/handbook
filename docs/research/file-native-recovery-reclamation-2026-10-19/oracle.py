@@ -23,6 +23,7 @@ def navigation(tree):
 def verify(root,reference=None,readable=None):
     root=Path(root);s=json.loads((root/'SELECTED.json').read_bytes());p=json.loads(checked(root/f"publications/{s['publication']}.json",s['digest']))
     graph=Tree(root).entries(p['graph']['tree']);projection=Tree(root).entries(p['projection'])
+    for spec in projection.values():checked(root/spec['source'],spec['digest'])
     docs={key[2:]:value['doc'] for key,value in graph.items() if key.startswith('D/')}
     expected={}
     for id,d in docs.items():
@@ -44,7 +45,10 @@ def verify(root,reference=None,readable=None):
     assert set(projection)=={'collection.yaml','packet/context.md','packet/provenance.json'}|{d['path'] for d in docs.values()}
     actual={x.relative_to(readable).as_posix() for x in readable.rglob('*') if x.is_file()};actual.discard('MANIFEST.json')
     if current:
+        if config['mode']=='B':assert json.loads(checked(readable/'MANIFEST.json',p['generation_manifest']))==projection
         assert navigation(readable)==expected and actual==set(projection)
-        for path,spec in projection.items():checked(readable/path,spec['digest'])
+        for path,spec in projection.items():
+            checked(readable/path,spec['digest'])
+            if config['mode']=='B':assert (readable/path).stat().st_nlink==1
         for d in docs.values():assert (readable/d['path']).read_bytes()==checked(root/d['original'],d['digest'])
     return dict(documents=len(docs),projection_files=len(projection),immutable_discovery_semantics_verified=True,readable_declared_current=current,discovery_relationships_and_extraction=current)

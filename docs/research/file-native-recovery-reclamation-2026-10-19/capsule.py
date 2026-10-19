@@ -46,13 +46,19 @@ def run(exe,scratch):
                 # Fences, pin, packet owner and a genuinely eligible candidate survive.
                 call(root,'cancel',request_id='terminal-fence');pin=selected(root);call(root,'lifecycle',operation='pin',name='durable-pin',selected=pin)
                 packet=call(root,'packet')['result'];packet_bytes={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in (root/packet['path']).rglob('*') if p.is_file()}
+                if mode=='A':pub(root,'pending-backup-transition',[dict(kind='path',id='d000009',text=ancestor)],defer=True)
                 candidate=call(root,'prepare',request=dict(request='eligible',base=selected(root),ops=[dict(kind='label',id='d000003',text='eligible')],packet=False))['result']['candidate']
                 if mode=='A':
-                    call(root,'resume',code=86,exit_at='refresh-plan')
+                    call(root,'refresh',code=86,exit_at='refresh-file')
+                    assert not (root/'view'/ancestor).exists()
                 archive=scratch/f'backup-{mode}-{n}';capture(root,archive,'working-source-in-session-manifest',True)
                 clone=scratch/f'restored-{mode}-{n}'/'disposable/store';restore(archive,clone)
                 assert not (clone/'DISPOSABLE.json').exists()
                 assert selected(clone)==selected(root)
+                if mode=='A':
+                    assert (clone/'PENDING.json').read_bytes()==(root/'PENDING.json').read_bytes()
+                    assert (clone/'VIEW.json').read_bytes()==(root/'VIEW.json').read_bytes()
+                verify(clone)
                 assert call(clone,'resolve',request_id='terminal-fence')['result']['outcome']=='cancelled-fenced'
                 assert json.loads((clone/'PINS.json').read_bytes())['durable-pin']==pin
                 for path,h in packet_bytes.items():assert hashlib.sha256((clone/path).read_bytes()).hexdigest()==h
