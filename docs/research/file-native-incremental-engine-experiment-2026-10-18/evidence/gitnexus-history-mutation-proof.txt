@@ -1,0 +1,9 @@
+{
+  "error": "Target 'verify_history' not found",
+  "target": {
+    "name": "verify_history"
+  },
+  "direction": "upstream",
+  "impactedCount": null,
+  "risk": "UNKNOWN"
+}

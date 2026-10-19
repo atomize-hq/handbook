@@ -1,0 +1,465 @@
+{
+  "references": [
+    {
+      "exe_sha256": "8867311509adf59d4e1a8eb84447cca948938bfe153f1edf12374a6b9d291cc3",
+      "pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "compiler_source_receipt": "windows-f3-source-binding.json",
+      "source_archive_sha256": "908f666c62483e8faa1f1ea46882cd8ec928459d37e994b6d96fd7eafb8e1133"
+    },
+    {
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454",
+      "pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "compiler_source_receipt": "windows-final-source-binding.json",
+      "source_archive_sha256": "0c4782629a47accf4197a525ee928f1b170975c33e9f127425c7d6ac469e220b"
+    },
+    {
+      "exe_sha256": "7e834b9f0f4a5c2edf60be0c1b288cb5de1c6a88f70b97300be8c85061a91b26",
+      "pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+      "compiler_source_receipt": "windows-audit-source-binding.json",
+      "source_archive_sha256": "2ab0acc31aff28bbd2a90e449abfec01c902aac11c9c5dd37b3e5bba24df82e8"
+    },
+    {
+      "exe_sha256": "5e3ff6efd2f00e8b27e2bb6883f198ec47c7237eb28f65d6bee14bf868e297aa",
+      "pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+      "compiler_source_receipt": "windows-accounting-source-binding.json",
+      "source_archive_sha256": "5c4dc217f93dde17bc6e36d39352268c9443cbe9f92a085bcf7be143ba665e84"
+    }
+  ],
+  "sessions": [
+    {
+      "session": "accounting-after-v2/paired-intents/session.json",
+      "exe_sha256": "5e3ff6efd2f00e8b27e2bb6883f198ec47c7237eb28f65d6bee14bf868e297aa",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-accounting-source-binding.json",
+      "associated_core_pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "accounting-after-v2/replay-lifetime/session.json",
+      "exe_sha256": "5e3ff6efd2f00e8b27e2bb6883f198ec47c7237eb28f65d6bee14bf868e297aa",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-accounting-source-binding.json",
+      "associated_core_pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "accounting-after-v2/supplement/session.json",
+      "exe_sha256": "5e3ff6efd2f00e8b27e2bb6883f198ec47c7237eb28f65d6bee14bf868e297aa",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-accounting-source-binding.json",
+      "associated_core_pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "adversarial-final-v1/session.json",
+      "exe_sha256": "8867311509adf59d4e1a8eb84447cca948938bfe153f1edf12374a6b9d291cc3",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-f3-source-binding.json",
+      "associated_core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "audit-after/session.json",
+      "exe_sha256": "7e834b9f0f4a5c2edf60be0c1b288cb5de1c6a88f70b97300be8c85061a91b26",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-audit-source-binding.json",
+      "associated_core_pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "audit-before/session.json",
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-final-source-binding.json",
+      "associated_core_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "checks-categories-v1/session.json",
+      "exe_sha256": "fbdf6aa2f4d7ff68c1467f23177aa2bfa9733f332910b72038e500af876f3e56",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "checks-dev-v1/session.json",
+      "exe_sha256": "19ed3fe076ce572689989095d156cd017e2389927cec5a4c0b2360736496bf86",
+      "workspace_source_archive_present": false,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "checks-dev-v2/session.json",
+      "exe_sha256": "19ed3fe076ce572689989095d156cd017e2389927cec5a4c0b2360736496bf86",
+      "workspace_source_archive_present": false,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "checks-dev-v3/session.json",
+      "exe_sha256": "95fe6c330df134db95b01c34af56d7df62c39fb95b08fdc3331b0c27ca4b467e",
+      "workspace_source_archive_present": false,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "checks-final-categories/session.json",
+      "exe_sha256": "bd9d40a8e48b39276b0fb923cc1af5150e41258315b75daba00f33b43ad31475",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "checks-packet-v2/session.json",
+      "exe_sha256": "dcfae595d327cce6436493e6cdd1da8e6dbe80a0dc66f1caddcfb65b57f18805",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "checks-pin-candidate/session.json",
+      "exe_sha256": "dcdf036652b451befe622570afd775c488e1a2bd06276069d626d5279208171f",
+      "workspace_source_archive_present": false,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "checks-retention-v1/session.json",
+      "exe_sha256": "154953b60258a7e0146e47ac9113eb198e49d8181f58f48feeb5c45d7bd49e7a",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "checks-retention-v2/session.json",
+      "exe_sha256": "8867311509adf59d4e1a8eb84447cca948938bfe153f1edf12374a6b9d291cc3",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-f3-source-binding.json",
+      "associated_core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "codec-common-pin/session.json",
+      "exe_sha256": "3253343fd27b404e267272c2c8a2fad1401f927d4c33fb9ff232800579806594",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "codec-windows-v1/session.json",
+      "exe_sha256": "3253343fd27b404e267272c2c8a2fad1401f927d4c33fb9ff232800579806594",
+      "workspace_source_archive_present": false,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "differential-final-v1/session.json",
+      "exe_sha256": "fbdf6aa2f4d7ff68c1467f23177aa2bfa9733f332910b72038e500af876f3e56",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "differential-v1/session.json",
+      "exe_sha256": "2a266e3a90d46b9e820fe3bece5333a644a8a9d87baab31ff3b14a7b87d7a8f6",
+      "workspace_source_archive_present": false,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "final-adversarial/session.json",
+      "exe_sha256": "d81f0e66edbb5d079843e50c8e67d6bbb9277d59c429964f37e252efa96b9efb",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "final-checks/session.json",
+      "exe_sha256": "d81f0e66edbb5d079843e50c8e67d6bbb9277d59c429964f37e252efa96b9efb",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "final-deep-cases/session.json",
+      "exe_sha256": "d81f0e66edbb5d079843e50c8e67d6bbb9277d59c429964f37e252efa96b9efb",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "final-namespace/session.json",
+      "exe_sha256": "d81f0e66edbb5d079843e50c8e67d6bbb9277d59c429964f37e252efa96b9efb",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "final-supplement/session.json",
+      "exe_sha256": "d81f0e66edbb5d079843e50c8e67d6bbb9277d59c429964f37e252efa96b9efb",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "final-v2-adversarial/session.json",
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-final-source-binding.json",
+      "associated_core_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "final-v2-checks/session.json",
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-final-source-binding.json",
+      "associated_core_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "final-v2-deep-cases/session.json",
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-final-source-binding.json",
+      "associated_core_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "final-v2-differential/session.json",
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-final-source-binding.json",
+      "associated_core_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "final-v2-namespace/session.json",
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-final-source-binding.json",
+      "associated_core_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "final-v2-replay-lifetime/session.json",
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-final-source-binding.json",
+      "associated_core_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "final-v2-supplement/session.json",
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-final-source-binding.json",
+      "associated_core_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "final-v2-walk-cases/session.json",
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-final-source-binding.json",
+      "associated_core_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "final-walk-cases/session.json",
+      "exe_sha256": "d81f0e66edbb5d079843e50c8e67d6bbb9277d59c429964f37e252efa96b9efb",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "history-common-pin/session.json",
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-final-source-binding.json",
+      "associated_core_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "history-pilot-1k/session.json",
+      "exe_sha256": "50c7dfb992cd56ed2b7359215a517a9111dffc9f2f2cb7f814b21dfea2e12709",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "matrix-common-pin/session.json",
+      "exe_sha256": "8867311509adf59d4e1a8eb84447cca948938bfe153f1edf12374a6b9d291cc3",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-f3-source-binding.json",
+      "associated_core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "workspace_engine_sources_match_associated_compiler_snapshot": false,
+      "workspace_engine_source_mismatches": [
+        "src/lifetime.rs",
+        "src/objects.rs",
+        "src/projection.rs",
+        "src/store.rs"
+      ]
+    },
+    {
+      "session": "matrix-small-medium-v1/session.json",
+      "exe_sha256": "fbdf6aa2f4d7ff68c1467f23177aa2bfa9733f332910b72038e500af876f3e56",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "paired-intents-before/session.json",
+      "exe_sha256": "7e834b9f0f4a5c2edf60be0c1b288cb5de1c6a88f70b97300be8c85061a91b26",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-audit-source-binding.json",
+      "associated_core_pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "paired-intents-before-v2/session.json",
+      "exe_sha256": "7e834b9f0f4a5c2edf60be0c1b288cb5de1c6a88f70b97300be8c85061a91b26",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-audit-source-binding.json",
+      "associated_core_pin": "7e00d22b470c1eed476127d2f585789036e79cf3",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "post-matrix/session.json",
+      "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-final-source-binding.json",
+      "associated_core_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "replay-fixed-v1/session.json",
+      "exe_sha256": "d3f5b9c5e6d5f7eaebd4db8ee27359622bf0f993057a59fc24d64dd3805c1847",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "supplement-categories-v1/session.json",
+      "exe_sha256": "fbdf6aa2f4d7ff68c1467f23177aa2bfa9733f332910b72038e500af876f3e56",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "supplement-final-categories/session.json",
+      "exe_sha256": "bd9d40a8e48b39276b0fb923cc1af5150e41258315b75daba00f33b43ad31475",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "supplement-final-v1/session.json",
+      "exe_sha256": "fbdf6aa2f4d7ff68c1467f23177aa2bfa9733f332910b72038e500af876f3e56",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "supplement-nativepath-candidate/session.json",
+      "exe_sha256": "50c7dfb992cd56ed2b7359215a517a9111dffc9f2f2cb7f814b21dfea2e12709",
+      "workspace_source_archive_present": false,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "supplement-packet-v2/session.json",
+      "exe_sha256": "dcfae595d327cce6436493e6cdd1da8e6dbe80a0dc66f1caddcfb65b57f18805",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "supplement-pin-candidate/session.json",
+      "exe_sha256": "dcdf036652b451befe622570afd775c488e1a2bd06276069d626d5279208171f",
+      "workspace_source_archive_present": false,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "supplement-retention-v1/session.json",
+      "exe_sha256": "154953b60258a7e0146e47ac9113eb198e49d8181f58f48feeb5c45d7bd49e7a",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "supplement-retention-v2/session.json",
+      "exe_sha256": "8867311509adf59d4e1a8eb84447cca948938bfe153f1edf12374a6b9d291cc3",
+      "workspace_source_archive_present": true,
+      "associated_compiler_source_receipt": "windows-f3-source-binding.json",
+      "associated_core_pin": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+      "workspace_engine_sources_match_associated_compiler_snapshot": true,
+      "workspace_engine_source_mismatches": []
+    },
+    {
+      "session": "supplement-v1/session.json",
+      "exe_sha256": "fdedab5ef6d4aa5d42420762bd6a3dd8a2e009bef8c29410f4ee4675154267a2",
+      "workspace_source_archive_present": false,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    },
+    {
+      "session": "supplement-v2/session.json",
+      "exe_sha256": "de5bc42cd57864a4ef3cbe5a4ec02f5c5c81dbc9588f0059fd8fa4c3df62e0e7",
+      "workspace_source_archive_present": false,
+      "associated_compiler_source_receipt": null,
+      "associated_core_pin": null,
+      "workspace_engine_sources_match_associated_compiler_snapshot": null
+    }
+  ],
+  "qualification": "Session ZIPs capture working source/harness at Driver creation. Later old-binary audits can capture newer Rust source; that ZIP alone is not its compiler-input evidence. Named independent build/source receipts associate those binaries. Unknown development/control binaries retain their raw hashes/snapshots without an invented compiler-input association. No reproducible-build claim."
+}

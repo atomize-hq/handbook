@@ -1,0 +1,109 @@
+[
+  {
+    "root": "C:\\file-native-incremental-20261018\\audit-after\\A\\disposable\\store",
+    "selected": {
+      "publication": "publication-65364-1792360343164336800-11",
+      "digest": "4ce190f623ec22e0f70ac634174336a87a1398586b30acafe3c5b55ac70457ae"
+    },
+    "selected_publications": 2,
+    "roles": {
+      "graph-and-constraints": {
+        "root": "de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047",
+        "entries": 264,
+        "stats": {
+          "pages": 6,
+          "leaves": 5,
+          "branches": 1,
+          "physical": 264,
+          "tombstones": 0,
+          "height": 1,
+          "occupancy": [
+            64,
+            64,
+            64,
+            64,
+            8
+          ]
+        },
+        "reachable_objects": 6,
+        "reachable_object_file_bytes": 58703
+      },
+      "projection": {
+        "root": "5e5e9c3cd824cb5f0dab728d595bbb45f747bffad2006f39a0cab1db65f51adf",
+        "entries": 259,
+        "stats": {
+          "pages": 6,
+          "leaves": 5,
+          "branches": 1,
+          "physical": 259,
+          "tombstones": 0,
+          "height": 1,
+          "occupancy": [
+            64,
+            64,
+            64,
+            64,
+            3
+          ]
+        },
+        "reachable_objects": 6,
+        "reachable_object_file_bytes": 56764
+      },
+      "membership": {
+        "root": "28d6cfb5cc78a083645769a79463208ebfe0c91e4c8c1962db1c3afcd8da35f6",
+        "entries": 1,
+        "stats": {
+          "pages": 1,
+          "leaves": 1,
+          "branches": 0,
+          "physical": 1,
+          "tombstones": 0,
+          "height": 0,
+          "occupancy": [
+            1
+          ]
+        },
+        "reachable_objects": 1,
+        "reachable_object_file_bytes": 120
+      },
+      "outcomes": {
+        "root": "75fb97a47fcb3d26a6ded3c344c541ab975bc8d1da26842ceb555f3ad8f3686a",
+        "entries": 1,
+        "stats": {
+          "pages": 1,
+          "leaves": 1,
+          "branches": 0,
+          "physical": 1,
+          "tombstones": 0,
+          "height": 0,
+          "occupancy": [
+            1
+          ]
+        },
+        "reachable_objects": 1,
+        "reachable_object_file_bytes": 450
+      },
+      "change-journal": {
+        "root": "50794bdff6f739e3c89dd1f336184df2a04916fcadd405d221e1841e41cea23b",
+        "entries": 2,
+        "stats": {
+          "pages": 1,
+          "leaves": 1,
+          "branches": 0,
+          "physical": 2,
+          "tombstones": 0,
+          "height": 0,
+          "occupancy": [
+            2
+          ]
+        },
+        "reachable_objects": 1,
+        "reachable_object_file_bytes": 108
+      }
+    },
+    "union_reachable_objects": 15,
+    "union_reachable_object_file_bytes": 116145,
+    "seconds": 0.0,
+    "qualification": "Current selected roots only, including indirect values; role totals may share objects. Excludes older COW versions/intermediates, source/derived blobs, publication/result files and filesystem overhead. Whole-root actual census is separate."
+  }
+]

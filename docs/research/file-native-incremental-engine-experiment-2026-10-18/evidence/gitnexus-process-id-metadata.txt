@@ -1,0 +1,98 @@
+{
+  "status": "ambiguous",
+  "message": "Found 3 symbols matching 'call'. Blast radius differs per candidate (max 0 impacted at risk UNKNOWN). Disambiguate with target_uid (or file_path/kind) for a single authoritative result.",
+  "target": {
+    "name": "call"
+  },
+  "direction": "upstream",
+  "totalCandidates": 3,
+  "impactedCount": null,
+  "risk": "UNKNOWN",
+  "maxImpactedCount": 0,
+  "maxRisk": "UNKNOWN",
+  "candidates": [
+    {
+      "uid": "Function:docs/research/work-registration-phase-refactor-2026-10-11/collect_impacts.py:call",
+      "name": "call",
+      "kind": "Function",
+      "filePath": "docs/research/work-registration-phase-refactor-2026-10-11/collect_impacts.py",
+      "line": 17,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Method:docs/research/durable-membership-prototype-2026-10-12/scripts/run.py:Runner.call",
+      "name": "call",
+      "kind": "Method",
+      "filePath": "docs/research/durable-membership-prototype-2026-10-12/scripts/run.py",
+      "line": 192,
+      "score": 0.54,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Method:docs/research/durable-membership-prototype-2026-10-12/evidence/windows-run-harness.py:Runner.call",
+      "name": "call",
+      "kind": "Method",
+      "filePath": "docs/research/durable-membership-prototype-2026-10-12/evidence/windows-run-harness.py",
+      "line": 192,
+      "score": 0.54,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    }
+  ],
+  "staleness": {
+    "status": "behind",
+    "commitsBehind": 3,
+    "hint": "⚠️ Index is 3 commits behind HEAD. Run analyze tool to update."
+  }
+}

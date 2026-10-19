@@ -1,0 +1,40 @@
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Detect Changes (1.6.12)
+{"level":50,"time":1792350342299,"name":"gitnexus","msg":"GitNexus: ⚠️ Index for \"handbook\" was built at C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook; your cwd (C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook) is a sibling clone that is 4 commits ahead of the indexed commit. Results may be stale or incorrect — re-run `gitnexus analyze` to refresh the index."}
+LISTING CAPPED: the changed-symbol list was capped, so it does not name every changed symbol. The counts and risk level still cover all of them.
+
+Changes: 2539 files, 28207 symbols
+Affected processes: 296
+Risk level: critical
+
+Changed symbols:
+  Section Structured data format decisions → AGENTS.md
+  Section GitNexus — Code Intelligence → AGENTS.md
+  Section Always Do → AGENTS.md
+  Section Never Do → AGENTS.md
+  Section Resources → AGENTS.md
+  Section GitNexus — Code Intelligence → CLAUDE.md
+  Section Always Do → CLAUDE.md
+  Section Never Do → CLAUDE.md
+  Section Resources → CLAUDE.md
+  Section Handbook → README.md
+  Section Read this first → README.md
+  Section Current authority posture → README.md
+  Section Where things live now → README.md
+  Section Charter Authoring Method → core/library/authoring/charter_authoring_method.md
+  Section Charter Intake Envelope Directive → core/library/charter/charter_inputs_directive.md
+... and 28192 more
+
+Affected execution flows:
+  • Run → TransportFailureDetailsV1 (5 steps) — changed: emit_transport_failure, run, adapter_error, adapter_error_with_presentation, TransportFailureDetailsV1
+  • Run → InvocationResponsePreimage (5 steps) — changed: emit_transport_failure, run, transport_failure, from_body, InvocationResponsePreimage
+  • Run → Document_bytes (5 steps) — changed: emit_transport_failure, render_invocation, run, document_bytes, canonical_json_bytes
+  • Run → New (5 steps) — changed: emit_transport_failure, render_invocation, run, new, canonical_json_bytes
+  • Run → Packet0 (4 steps) — changed: emit_transport_failure, render_invocation, run, packet0
+  • Run → Emit_to (4 steps) — changed: emit_transport_failure, emit_stdout, emit_to, run
+  • Run → Failure (4 steps) — changed: emit_transport_failure, emit_stdout, run
+  • Run → Reference (5 steps) — changed: emit_approver_invocation, run, emit_invalid_request, reference, approver_administration_outcome
+  • Run → As_str (5 steps) — changed: emit_approver_invocation, run, emit_invalid_request, as_str, approver_administration_outcome
+  • Run → Packet0 (5 steps) — changed: emit_approver_invocation, run, emit_invalid_request, render_invocation, packet0
+... and 286 more

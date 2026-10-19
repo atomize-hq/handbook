@@ -1,0 +1,54 @@
+{
+  "error": "Target 'put_original' not found",
+  "target": {
+    "name": "put_original"
+  },
+  "direction": "upstream",
+  "impactedCount": null,
+  "risk": "UNKNOWN"
+}
+{
+  "target": {
+    "id": "Function:crates/engine/src/snapshot_grounding_capture.rs:SnapshotSlotObservationV1.derived#2",
+    "name": "derived",
+    "type": "Function",
+    "filePath": "crates/engine/src/snapshot_grounding_capture.rs"
+  },
+  "direction": "upstream",
+  "impactedCount": 0,
+  "risk": "UNKNOWN",
+  "riskSharedAxes": "UNKNOWN",
+  "riskScale": {
+    "comparableAcrossKinds": true,
+    "unusedAxes": []
+  },
+  "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe.",
+  "epistemic": "lower-bound",
+  "boundaries": [
+    "Scope-extraction completeness was not recorded for this index, so actual impact may be higher.",
+    "Convex runtime-proxy metadata is unavailable because this index predates convexEndpointFactory; re-index before treating impact as exact."
+  ],
+  "causes": {
+    "scopeExtractionFiles": 0,
+    "receiverTyping": 0,
+    "dispatchBoundary": 0,
+    "externalBoundary": 0,
+    "undecidedSatisfaction": 0,
+    "callableValueReferences": 0
+  },
+  "partial": true,
+  "summary": {
+    "direct": 0,
+    "processes_affected": 0,
+    "modules_affected": 0
+  },
+  "byDepthCounts": {},
+  "affected_processes": [],
+  "affected_modules": [],
+  "byDepth": {},
+  "staleness": {
+    "status": "behind",
+    "commitsBehind": 3,
+    "hint": "⚠️ Index is 3 commits behind HEAD. Run analyze tool to update."
+  }
+}

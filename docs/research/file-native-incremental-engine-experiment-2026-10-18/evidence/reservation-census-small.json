@@ -1,0 +1,64 @@
+[
+  {
+    "root": "C:\\file-native-incremental-20261018\\audit-after\\A\\disposable\\store",
+    "epoch": 1792361993.6684346,
+    "seconds": 0.0470000000204891,
+    "categories": {
+      "(root-files)": {
+        "files": 8,
+        "logical_bytes": 1189,
+        "allocated_file_bytes": null
+      },
+      "attempt-hints": {
+        "files": 2,
+        "logical_bytes": 287,
+        "allocated_file_bytes": null
+      },
+      "attempts": {
+        "files": 17,
+        "logical_bytes": 210195,
+        "allocated_file_bytes": null
+      },
+      "derived": {
+        "files": 133,
+        "logical_bytes": 67418,
+        "allocated_file_bytes": null
+      },
+      "objects": {
+        "files": 17,
+        "logical_bytes": 117180,
+        "allocated_file_bytes": null
+      },
+      "originals": {
+        "files": 128,
+        "logical_bytes": 1568768,
+        "allocated_file_bytes": null
+      },
+      "publications": {
+        "files": 2,
+        "logical_bytes": 2541,
+        "allocated_file_bytes": null
+      },
+      "results": {
+        "files": 2,
+        "logical_bytes": 2402,
+        "allocated_file_bytes": null
+      },
+      "view": {
+        "files": 259,
+        "logical_bytes": 1635958,
+        "allocated_file_bytes": null
+      }
+    },
+    "files": 568,
+    "logical_bytes": 3605938,
+    "allocated_file_bytes": null,
+    "free_bytes": 207452585984,
+    "conservative_publication_owner_bytes": 193097728,
+    "owner_records": 2,
+    "observed_reservations": {},
+    "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "conservative_active_reserved_bytes": 0,
+    "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+  }
+]

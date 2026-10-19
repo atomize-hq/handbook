@@ -1,0 +1,9 @@
+{
+  "error": "Target 'point' not found",
+  "target": {
+    "name": "point"
+  },
+  "direction": "upstream",
+  "impactedCount": null,
+  "risk": "UNKNOWN"
+}

@@ -1,0 +1,176 @@
+[
+  {
+    "scope": "reference includes full load+semantic validation; incremental includes graph/projection persistence, reservation and sealing; explicit comparison audit excluded from these clocks",
+    "full_load_semantic_validation_ms": 3.0481,
+    "incremental_complete_preparation_ms": 28.1131,
+    "full_metrics": {
+      "documents_visited": 1000,
+      "edges_visited": 4,
+      "page_reads": 21,
+      "index_updates": 0,
+      "bytes_metadata_read": 428562,
+      "bytes_metadata_written": 0,
+      "bytes_payload_read": 0,
+      "bytes_payload_written": 0,
+      "file_syncs": 0,
+      "namespace_ops": 0
+    },
+    "incremental_metrics": {
+      "documents_visited": 2,
+      "edges_visited": 0,
+      "page_reads": 37,
+      "index_updates": 3,
+      "bytes_metadata_read": 230947,
+      "bytes_metadata_written": 45442,
+      "bytes_payload_read": 846,
+      "bytes_payload_written": 0,
+      "file_syncs": 10,
+      "namespace_ops": 9
+    }
+  },
+  {
+    "scope": "reference includes full load+semantic validation; incremental includes graph/projection persistence, reservation and sealing; explicit comparison audit excluded from these clocks",
+    "full_load_semantic_validation_ms": 3.0537,
+    "incremental_complete_preparation_ms": 48.4919,
+    "full_metrics": {
+      "documents_visited": 1000,
+      "edges_visited": 4,
+      "page_reads": 21,
+      "index_updates": 0,
+      "bytes_metadata_read": 428561,
+      "bytes_metadata_written": 0,
+      "bytes_payload_read": 0,
+      "bytes_payload_written": 0,
+      "file_syncs": 0,
+      "namespace_ops": 0
+    },
+    "incremental_metrics": {
+      "documents_visited": 16,
+      "edges_visited": 0,
+      "page_reads": 203,
+      "index_updates": 24,
+      "bytes_metadata_read": 1323293,
+      "bytes_metadata_written": 224517,
+      "bytes_payload_read": 1849,
+      "bytes_payload_written": 0,
+      "file_syncs": 17,
+      "namespace_ops": 16
+    }
+  },
+  {
+    "scope": "reference includes full load+semantic validation; incremental includes graph/projection persistence, reservation and sealing; explicit comparison audit excluded from these clocks",
+    "full_load_semantic_validation_ms": 2.9806,
+    "incremental_complete_preparation_ms": 142.9367,
+    "full_metrics": {
+      "documents_visited": 1000,
+      "edges_visited": 4,
+      "page_reads": 21,
+      "index_updates": 0,
+      "bytes_metadata_read": 428558,
+      "bytes_metadata_written": 0,
+      "bytes_payload_read": 0,
+      "bytes_payload_written": 0,
+      "file_syncs": 0,
+      "namespace_ops": 0
+    },
+    "incremental_metrics": {
+      "documents_visited": 129,
+      "edges_visited": 1,
+      "page_reads": 1342,
+      "index_updates": 192,
+      "bytes_metadata_read": 9409293,
+      "bytes_metadata_written": 405357,
+      "bytes_payload_read": 9954,
+      "bytes_payload_written": 0,
+      "file_syncs": 24,
+      "namespace_ops": 23
+    }
+  },
+  {
+    "scope": "reference includes full load+semantic validation; incremental includes graph/projection persistence, reservation and sealing; explicit comparison audit excluded from these clocks",
+    "full_load_semantic_validation_ms": 30.5968,
+    "incremental_complete_preparation_ms": 26.994,
+    "full_metrics": {
+      "documents_visited": 10000,
+      "edges_visited": 5004,
+      "page_reads": 249,
+      "index_updates": 0,
+      "bytes_metadata_read": 4506919,
+      "bytes_metadata_written": 0,
+      "bytes_payload_read": 0,
+      "bytes_payload_written": 0,
+      "file_syncs": 0,
+      "namespace_ops": 0
+    },
+    "incremental_metrics": {
+      "documents_visited": 2,
+      "edges_visited": 0,
+      "page_reads": 46,
+      "index_updates": 3,
+      "bytes_metadata_read": 206368,
+      "bytes_metadata_written": 36127,
+      "bytes_payload_read": 846,
+      "bytes_payload_written": 0,
+      "file_syncs": 10,
+      "namespace_ops": 9
+    }
+  },
+  {
+    "scope": "reference includes full load+semantic validation; incremental includes graph/projection persistence, reservation and sealing; explicit comparison audit excluded from these clocks",
+    "full_load_semantic_validation_ms": 31.2977,
+    "incremental_complete_preparation_ms": 56.7564,
+    "full_metrics": {
+      "documents_visited": 10000,
+      "edges_visited": 5004,
+      "page_reads": 249,
+      "index_updates": 0,
+      "bytes_metadata_read": 4506918,
+      "bytes_metadata_written": 0,
+      "bytes_payload_read": 0,
+      "bytes_payload_written": 0,
+      "file_syncs": 0,
+      "namespace_ops": 0
+    },
+    "incremental_metrics": {
+      "documents_visited": 16,
+      "edges_visited": 0,
+      "page_reads": 248,
+      "index_updates": 24,
+      "bytes_metadata_read": 1264501,
+      "bytes_metadata_written": 223469,
+      "bytes_payload_read": 1875,
+      "bytes_payload_written": 0,
+      "file_syncs": 21,
+      "namespace_ops": 20
+    }
+  },
+  {
+    "scope": "reference includes full load+semantic validation; incremental includes graph/projection persistence, reservation and sealing; explicit comparison audit excluded from these clocks",
+    "full_load_semantic_validation_ms": 29.899,
+    "incremental_complete_preparation_ms": 236.5428,
+    "full_metrics": {
+      "documents_visited": 10000,
+      "edges_visited": 5004,
+      "page_reads": 249,
+      "index_updates": 0,
+      "bytes_metadata_read": 4506911,
+      "bytes_metadata_written": 0,
+      "bytes_payload_read": 0,
+      "bytes_payload_written": 0,
+      "file_syncs": 0,
+      "namespace_ops": 0
+    },
+    "incremental_metrics": {
+      "documents_visited": 128,
+      "edges_visited": 0,
+      "page_reads": 1699,
+      "index_updates": 192,
+      "bytes_metadata_read": 9556542,
+      "bytes_metadata_written": 1665936,
+      "bytes_payload_read": 10039,
+      "bytes_payload_written": 0,
+      "file_syncs": 77,
+      "namespace_ops": 76
+    }
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "root": "C:\\file-native-incremental-20261018\\final-v2-namespace\\objects\\results\\disposable\\store",
+    "selected": {
+      "publication": "publication-756-1792356258110042200-42",
+      "digest": "b1d8cbaf7b6b8fced383a0babbad3aeccf361dcc2ec2ae9ce531630c3cc0f2aa"
+    },
+    "documents": 16,
+    "projection_files": 35,
+    "independent_navigation_render_verified": true,
+    "exact_sources_verified": true,
+    "B_file_hardlink_independence_verified": false,
+    "readable_declared_current": true,
+    "readable_missing": 0,
+    "readable_edited": 0,
+    "readable_extra": 0,
+    "seconds": 0.014999999955762178
+  },
+  {
+    "root": "C:\\file-native-incremental-20261018\\final-v2-checks\\B-project\\disposable\\store",
+    "selected": {
+      "publication": "publication-70480-1792356263152228900-6",
+      "digest": "965b7ba7555a30638a012620d00816c68578dfe579b70b9d28f952900f1e1c83"
+    },
+    "documents": 15,
+    "projection_files": 33,
+    "independent_navigation_render_verified": true,
+    "exact_sources_verified": true,
+    "B_file_hardlink_independence_verified": true,
+    "readable_declared_current": true,
+    "readable_missing": 0,
+    "readable_edited": 0,
+    "readable_extra": 0,
+    "seconds": 0.01600000000325963
+  }
+]

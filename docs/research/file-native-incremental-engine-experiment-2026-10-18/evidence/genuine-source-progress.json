@@ -1,0 +1,55 @@
+[
+  {
+    "n": 1000,
+    "k": 1,
+    "unperformed_or_not_selected": true
+  },
+  {
+    "n": 1000,
+    "k": 8,
+    "unperformed_or_not_selected": true
+  },
+  {
+    "n": 1000,
+    "k": 64,
+    "unperformed_or_not_selected": true
+  },
+  {
+    "operation": "combined-packet",
+    "selected_membership_authenticated": {
+      "publication": "publication-70660-1792352412827028900-14",
+      "digest": "50ea2c40cac273b0e2a585864a63c78ae7583da511130ecb4ae319364ba16a2a"
+    },
+    "packet_manifest": "53f424a677cec060c35f4cec815bbdaf8466ea98a1afa31fa50b9ee9c5f2ceaa"
+  },
+  {
+    "n": 10000,
+    "k": 1,
+    "unperformed_or_not_selected": true
+  },
+  {
+    "n": 10000,
+    "k": 8,
+    "unperformed_or_not_selected": true
+  },
+  {
+    "n": 10000,
+    "k": 64,
+    "unperformed_or_not_selected": true
+  },
+  {
+    "n": 100000,
+    "k": 1,
+    "unperformed_or_not_selected": true
+  },
+  {
+    "n": 100000,
+    "k": 8,
+    "unperformed_or_not_selected": true
+  },
+  {
+    "n": 100000,
+    "k": 64,
+    "unperformed_or_not_selected": true
+  }
+]

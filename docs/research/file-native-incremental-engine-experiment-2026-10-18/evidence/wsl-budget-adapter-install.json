@@ -1,0 +1,35 @@
+{
+  "core_pin": "7ac70f93cce14ecd3d935852801f034c122000d8",
+  "source": "/home/spenser/file-native-incremental-source-7ac70f9",
+  "started_epoch": 1792363349.60306,
+  "finished_epoch": 1792363349.6335564,
+  "adapter_sha256": "5ac1fbd17a1e8416aa7f73255faf9df804414868105d75e165dde7fd9fdff603",
+  "original_helpers_and_all_rust_checked": true,
+  "unchanged_rust_files": 21,
+  "helpers": [
+    {
+      "path": "replay_lifetime.py",
+      "capsule_copy": "replay_lifetime.capsule.py",
+      "original_sha256": "b946c1d46b4ec8e87cae6d812692bb40f0b333d251bce77e92a56c22cec48dc0",
+      "wrapper_sha256": "ed0ffb4393a01557e48effaa1b3ad1a93d3c9cd8a5fb82e812a190c76ec940a4"
+    },
+    {
+      "path": "namespace_cases.py",
+      "capsule_copy": "namespace_cases.capsule.py",
+      "original_sha256": "bbec0fe3968276c28a8f642074b79a2bfb7bb7f934ba6579cb737303661aad7f",
+      "wrapper_sha256": "d4b9b1e714f84afaf5e8136b1097a0cff45e62ea7984812471307a51d3e0f8b7"
+    },
+    {
+      "path": "deep_cases.py",
+      "capsule_copy": "deep_cases.capsule.py",
+      "original_sha256": "ae6f436c7f61b53e4d3e076dd2be14c67ba992190d6cd0145302f537af967427",
+      "wrapper_sha256": "2c24780eae38d4be0ac87ed2ce3d831c86210aefc9e751f8a0d32c6f709e576d"
+    },
+    {
+      "path": "walk_cases.py",
+      "capsule_copy": "walk_cases.capsule.py",
+      "original_sha256": "33e02d7a3c072f0f9a8e276d50ed2b82c6eac47723b5b361a6d73a332799db58",
+      "wrapper_sha256": "92d637667b006bd3393a0871ac5558ebca55b82867cc4c0f92ac54fd66d6f646"
+    }
+  ]
+}

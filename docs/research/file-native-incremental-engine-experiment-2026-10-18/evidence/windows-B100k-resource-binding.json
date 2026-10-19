@@ -1,0 +1,23 @@
+{
+  "raw_event": "post-matrix/events.jsonl",
+  "raw_line": 3,
+  "reservation_attempt": "attempt-65376-1792356827692108900-1",
+  "reservation_registry_sha256": "79d784d490886dce6d1f811125d6e2a60152efaa113ad3f213b26b0f6a6cb285",
+  "observer_line_b64": "eyJraW5kIjoiZXhpdGVkLXByb2Nlc3MiLCJwaWQiOjY1Mzc2LCJjcmVhdGVkX2ZpbGV0aW1lIjoxMzQzNjgzMDQyNzY4NDgwOTQsImV4aXRfZmlsZXRpbWUiOjEzNDM2ODMyODI3Njk4OTQ0MCwiZmlyc3Rfb2JzZXJ2ZWRfbnMiOjQwMTE4OTgwNTAyNDAwMCwib2JzZXJ2ZWRfZXhpdF9ucyI6NDAzNDAzNzMzNDUwNzAwLCJ1c2VyX2NwdV9ucyI6NTc5MjE4NzUwMDAsInN5c3RlbV9jcHVfbnMiOjMwMjYyNTAwMDAwMCwicGVha193b3JraW5nX3NldF9ieXRlcyI6Mzg0Njg4MTI4LCJleGVfc2hhMjU2IjoiMzhiN2QwMTFjMjQ4MGViYTAyMGQ5OGMxNjhkMzViMGZjODQzZDE2MDM3NjcyYzIxOGUwMDY1MjIxNGE4YTQ1NCJ9",
+  "observer_line_sha256": "9f9edd8b75470adc2b8ff7b7e1a4b5b54c5ebab4087945ac35dcc51ae0143e01",
+  "observer": {
+    "kind": "exited-process",
+    "pid": 65376,
+    "created_filetime": 134368304276848094,
+    "exit_filetime": 134368328276989440,
+    "first_observed_ns": 401189805024000,
+    "observed_exit_ns": 403403733450700,
+    "user_cpu_ns": 57921875000,
+    "system_cpu_ns": 302625000000,
+    "peak_working_set_bytes": 384688128,
+    "exe_sha256": "38b7d011c2480eba020d98c168d35b0fc843d16037672c218e00652214a8a454"
+  },
+  "process_created_epoch": 1792356827.6848094,
+  "attempt_epoch": 1792356827.6921089,
+  "qualification": "PID and creation-time/attempt timestamp plus executable hash bind this observed exited process. CPU covers the full process even though sampling began later; peak is the OS recorded working-set peak. The original initialization remains censored and unselected."
+}

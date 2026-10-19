@@ -1,0 +1,87 @@
+{
+  "exe_sha256": "8867311509adf59d4e1a8eb84447cca948938bfe153f1edf12374a6b9d291cc3",
+  "compiled_source_session": "checks-retention-v2",
+  "compiled_source_archive_sha256": "908f666c62483e8faa1f1ea46882cd8ec928459d37e994b6d96fd7eafb8e1133",
+  "commit": "f3e942f6a2e84ff33fd6ea860caed49ad650f86f",
+  "files": {
+    "src/api.rs": {
+      "compiled_source_sha256": "0c194c2412b8f818e529efc2f1350b35e578d0ac8cc93d76fa83983bedf6d79a",
+      "pinned_sha256": "0c194c2412b8f818e529efc2f1350b35e578d0ac8cc93d76fa83983bedf6d79a",
+      "byte_identical": true,
+      "lexical_difference": "none"
+    },
+    "src/baseline_model.rs": {
+      "compiled_source_sha256": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10",
+      "pinned_sha256": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10",
+      "byte_identical": true,
+      "lexical_difference": "none"
+    },
+    "src/bounds_tests.rs": {
+      "compiled_source_sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "pinned_sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "byte_identical": true,
+      "lexical_difference": "none"
+    },
+    "src/differential.rs": {
+      "compiled_source_sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "pinned_sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "byte_identical": true,
+      "lexical_difference": "none"
+    },
+    "src/disk.rs": {
+      "compiled_source_sha256": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+      "pinned_sha256": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+      "byte_identical": true,
+      "lexical_difference": "none"
+    },
+    "src/graph.rs": {
+      "compiled_source_sha256": "9e47637a2d213f1d1abdbc559ae680d4f2410bc50e30624d3dd41f83133d7454",
+      "pinned_sha256": "9e47637a2d213f1d1abdbc559ae680d4f2410bc50e30624d3dd41f83133d7454",
+      "byte_identical": true,
+      "lexical_difference": "none"
+    },
+    "src/io.rs": {
+      "compiled_source_sha256": "cc0787312ed7363b42165138b64deffc2951a63856d92b7863642ced9c7aed56",
+      "pinned_sha256": "cc0787312ed7363b42165138b64deffc2951a63856d92b7863642ced9c7aed56",
+      "byte_identical": true,
+      "lexical_difference": "none"
+    },
+    "src/lib.rs": {
+      "compiled_source_sha256": "b68a60aa0da945f6f89190c19f296162b47e2ffa508eef1129cf2d8fc7a85307",
+      "pinned_sha256": "b68a60aa0da945f6f89190c19f296162b47e2ffa508eef1129cf2d8fc7a85307",
+      "byte_identical": true,
+      "lexical_difference": "none"
+    },
+    "src/lifetime.rs": {
+      "compiled_source_sha256": "7cf9fabe165702eefc3ef009248dca3520ca21d60d827870cc2609583a1d56c6",
+      "pinned_sha256": "a29532e10e35f0658d611e4c683b29986b0b0c75084b8ab5c8df16331eeadc61",
+      "byte_identical": false,
+      "lexical_difference": "CRLF/LF only"
+    },
+    "src/main.rs": {
+      "compiled_source_sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "pinned_sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "byte_identical": true,
+      "lexical_difference": "none"
+    },
+    "src/objects.rs": {
+      "compiled_source_sha256": "bc0ab3bbd71b81f1d52da9a76846d72ce1ad15027bda2d9b36b417b5ef924621",
+      "pinned_sha256": "0fc51fcf86ade965effcadc9e76446c18fef3726a0ae706086895576feb7f538",
+      "byte_identical": false,
+      "lexical_difference": "CRLF/LF only"
+    },
+    "src/projection.rs": {
+      "compiled_source_sha256": "27f0395d3d24804d1572e34dc701cf24ce0079cddb3004930ff16a1df8c3b0d5",
+      "pinned_sha256": "3690dc014a6b9c464d88f9b8022257d1a8231cc7450f766f33782edab61298b1",
+      "byte_identical": false,
+      "lexical_difference": "CRLF/LF only"
+    },
+    "src/store.rs": {
+      "compiled_source_sha256": "f95254d25bc444e2d7b5659b4243ac92f7d3b9b66231fe826c698d45084f4b39",
+      "pinned_sha256": "419f65b13a45d1e0dace7c7fbb78c3e28c0b84946813175edba919492aad97d5",
+      "byte_identical": false,
+      "lexical_difference": "CRLF/LF only"
+    }
+  },
+  "qualification": "Windows F3 executable predates line-ending normalization in the pin. Exact compiled Rust bytes are retained in the named archive; comparison verifies CRLF/LF-only differences."
+}

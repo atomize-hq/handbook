@@ -1,0 +1,6 @@
+{
+  "upstream_report_commit": "c09a709a9830a8337282bab4980e881574d0074c",
+  "original_helper_sha256": "b49022ad16e291b67ee4686006597f475675d954b5b0bcfbb3349c19744f421d",
+  "portable_helper_sha256": "c294e39fffd2dac6e299617d8a3356f5e1ddaaa7f4d5bc93d8e9b4423a680906",
+  "change": "Use Path.as_posix() for materialized relative filenames; Windows separators previously failed the portable filename check after all raw/source association checks passed. Native raw evidence/source archives unchanged."
+}

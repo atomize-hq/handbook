@@ -1,0 +1,1115 @@
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Impact (1.6.12)
+{"level":50,"time":1792352931594,"name":"gitnexus","msg":"GitNexus: ⚠️ Index for \"handbook\" was built at C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook; your cwd (C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook) is a sibling clone that is 8 commits ahead of the indexed commit. Results may be stale or incorrect — re-run `gitnexus analyze` to refresh the index."}
+{"level":40,"time":1792352931894,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352931895,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352931895,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352931895,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352931895,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352931895,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{
+  "status": "ambiguous",
+  "message": "Found 6 symbols matching 'record_bytes'. Blast radius differs per candidate (max 0 impacted at risk UNKNOWN). Disambiguate with target_uid (or file_path/kind) for a single authoritative result.",
+  "target": {
+    "name": "record_bytes"
+  },
+  "direction": "upstream",
+  "totalCandidates": 6,
+  "impactedCount": null,
+  "risk": "UNKNOWN",
+  "maxImpactedCount": 0,
+  "maxRisk": "UNKNOWN",
+  "candidates": [
+    {
+      "uid": "Function:crates/contracts/src/owner_repository.rs:DefinitionRecordV1.record_bytes#0",
+      "name": "record_bytes",
+      "kind": "Function",
+      "filePath": "crates/contracts/src/owner_repository.rs",
+      "line": 280,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Function:crates/contracts/src/owner_repository/evidence_repository.rs:StoredEvidenceRecordV1.record_bytes#0",
+      "name": "record_bytes",
+      "kind": "Function",
+      "filePath": "crates/contracts/src/owner_repository/evidence_repository.rs",
+      "line": 108,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Property:crates/contracts/src/owner_repository.rs:DefinitionRecordV1.record_bytes",
+      "name": "record_bytes",
+      "kind": "",
+      "filePath": "crates/contracts/src/owner_repository.rs",
+      "line": 266,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Property:crates/engine/src/snapshot_memory/redaction.rs:ImmutableRecord.record_bytes",
+      "name": "record_bytes",
+      "kind": "",
+      "filePath": "crates/engine/src/snapshot_memory/redaction.rs",
+      "line": 318,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Property:crates/engine/src/snapshot_memory/redaction.rs:PayloadBinding.record_bytes",
+      "name": "record_bytes",
+      "kind": "",
+      "filePath": "crates/engine/src/snapshot_memory/redaction.rs",
+      "line": 325,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Property:crates/contracts/src/owner_repository/evidence_repository.rs:StoredEvidenceRecordV1.record_bytes",
+      "name": "record_bytes",
+      "kind": "",
+      "filePath": "crates/contracts/src/owner_repository/evidence_repository.rs",
+      "line": 101,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    }
+  ],
+  "staleness": {
+    "status": "behind",
+    "commitsBehind": 3,
+    "hint": "⚠️ Index is 3 commits behind HEAD. Run analyze tool to update."
+  }
+}
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Impact (1.6.12)
+{"level":50,"time":1792352933740,"name":"gitnexus","msg":"GitNexus: ⚠️ Index for \"handbook\" was built at C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook; your cwd (C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook) is a sibling clone that is 8 commits ahead of the indexed commit. Results may be stale or incorrect — re-run `gitnexus analyze` to refresh the index."}
+{"level":40,"time":1792352934031,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352934031,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352934031,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352934031,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352934032,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352934032,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{
+  "status": "ambiguous",
+  "message": "Found 19 symbols matching 'open' (showing 6 of 19). Blast radius differs per candidate (max 0 impacted at risk UNKNOWN). Disambiguate with target_uid (or file_path/kind) for a single authoritative result.",
+  "target": {
+    "name": "open"
+  },
+  "direction": "upstream",
+  "totalCandidates": 19,
+  "candidatesTruncated": true,
+  "impactedCount": null,
+  "risk": "UNKNOWN",
+  "maxImpactedCount": 0,
+  "maxRisk": "UNKNOWN",
+  "candidates": [
+    {
+      "uid": "Function:crates/sdk/src/lib.rs:HandbookSdkV1.open#1",
+      "name": "open",
+      "kind": "Function",
+      "filePath": "crates/sdk/src/lib.rs",
+      "line": 83,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Function:crates/tauri/src/lib.rs:FacadeState.open#3",
+      "name": "open",
+      "kind": "Function",
+      "filePath": "crates/tauri/src/lib.rs",
+      "line": 58,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Function:crates/dock/src/store.rs:DockCapturedInputCurrentnessV1.open#1",
+      "name": "open",
+      "kind": "Function",
+      "filePath": "crates/dock/src/store.rs",
+      "line": 1213,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Function:crates/dock/src/store.rs:DockEvidenceCandidateSourceV1.open#2",
+      "name": "open",
+      "kind": "Function",
+      "filePath": "crates/dock/src/store.rs",
+      "line": 1295,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Function:crates/dock/src/store.rs:DockOperationalStoreV1.open#1",
+      "name": "open",
+      "kind": "Function",
+      "filePath": "crates/dock/src/store.rs",
+      "line": 361,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Function:crates/sdk/src/artifact.rs:ArtifactSdk.open#1",
+      "name": "open",
+      "kind": "Function",
+      "filePath": "crates/sdk/src/artifact.rs",
+      "line": 103,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    }
+  ],
+  "staleness": {
+    "status": "behind",
+    "commitsBehind": 3,
+    "hint": "⚠️ Index is 3 commits behind HEAD. Run analyze tool to update."
+  }
+}
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Impact (1.6.12)
+{"level":50,"time":1792352935918,"name":"gitnexus","msg":"GitNexus: ⚠️ Index for \"handbook\" was built at C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook; your cwd (C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook) is a sibling clone that is 8 commits ahead of the indexed commit. Results may be stale or incorrect — re-run `gitnexus analyze` to refresh the index."}
+{"level":40,"time":1792352936226,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352936227,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352936227,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352936227,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352936227,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352936227,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{
+  "status": "ambiguous",
+  "message": "Found 6 symbols matching 'lock'. Blast radius differs per candidate (max 0 impacted at risk UNKNOWN). Disambiguate with target_uid (or file_path/kind) for a single authoritative result.",
+  "target": {
+    "name": "lock"
+  },
+  "direction": "upstream",
+  "totalCandidates": 6,
+  "impactedCount": null,
+  "risk": "UNKNOWN",
+  "maxImpactedCount": 0,
+  "maxRisk": "UNKNOWN",
+  "candidates": [
+    {
+      "uid": "Property:crates/dock/src/store.rs:DockExecutionLeaseV1.lock",
+      "name": "lock",
+      "kind": "",
+      "filePath": "crates/dock/src/store.rs",
+      "line": 206,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Property:crates/engine/src/work_state/store.rs:WorkLock.lock",
+      "name": "lock",
+      "kind": "",
+      "filePath": "crates/engine/src/work_state/store.rs",
+      "line": 174,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Property:crates/engine/src/repository_initialization.rs:RepositoryInitializationGuardV1.lock",
+      "name": "lock",
+      "kind": "",
+      "filePath": "crates/engine/src/repository_initialization.rs",
+      "line": 209,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Property:docs/research/durable-membership-prototype-2026-10-12/src/main.rs:Root.lock",
+      "name": "lock",
+      "kind": "",
+      "filePath": "docs/research/durable-membership-prototype-2026-10-12/src/main.rs",
+      "line": 347,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Variable:docs/research/work-registration-phase-refactor-2026-10-11/prepare_driver.py:lock",
+      "name": "lock",
+      "kind": "Variable",
+      "filePath": "docs/research/work-registration-phase-refactor-2026-10-11/prepare_driver.py",
+      "line": 10,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Property:docs/research/durable-membership-prototype-2026-10-12/evidence/measured-main.rs:Root.lock",
+      "name": "lock",
+      "kind": "",
+      "filePath": "docs/research/durable-membership-prototype-2026-10-12/evidence/measured-main.rs",
+      "line": 335,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    }
+  ],
+  "staleness": {
+    "status": "behind",
+    "commitsBehind": 3,
+    "hint": "⚠️ Index is 3 commits behind HEAD. Run analyze tool to update."
+  }
+}
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Impact (1.6.12)
+{"level":50,"time":1792352938129,"name":"gitnexus","msg":"GitNexus: ⚠️ Index for \"handbook\" was built at C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook; your cwd (C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook) is a sibling clone that is 8 commits ahead of the indexed commit. Results may be stale or incorrect — re-run `gitnexus analyze` to refresh the index."}
+{"level":40,"time":1792352938446,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352938446,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352938446,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352938446,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352938446,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352938446,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{
+  "status": "ambiguous",
+  "message": "Found 12 symbols matching 'selected' (showing 6 of 12). Blast radius differs per candidate (max 0 impacted at risk UNKNOWN). Disambiguate with target_uid (or file_path/kind) for a single authoritative result.",
+  "target": {
+    "name": "selected"
+  },
+  "direction": "upstream",
+  "totalCandidates": 12,
+  "candidatesTruncated": true,
+  "impactedCount": null,
+  "risk": "UNKNOWN",
+  "maxImpactedCount": 0,
+  "maxRisk": "UNKNOWN",
+  "candidates": [
+    {
+      "uid": "Function:crates/engine/src/local_authority/local_check.rs:selected",
+      "name": "selected",
+      "kind": "Function",
+      "filePath": "crates/engine/src/local_authority/local_check.rs",
+      "line": 1094,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Function:crates/engine/src/local_authority/local_evaluation.rs:LocalEvaluationReachV1.selected#1",
+      "name": "selected",
+      "kind": "Function",
+      "filePath": "crates/engine/src/local_authority/local_evaluation.rs",
+      "line": 1374,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Method:docs/research/scalable-work-state-storage-feasibility-2026-10-10/prototypes.py:FileStore.selected#1",
+      "name": "selected",
+      "kind": "Method",
+      "filePath": "docs/research/scalable-work-state-storage-feasibility-2026-10-10/prototypes.py",
+      "line": 308,
+      "score": 0.54,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Method:docs/research/scalable-work-state-storage-feasibility-2026-10-10/prototypes.py:SqliteStore.selected#1",
+      "name": "selected",
+      "kind": "Method",
+      "filePath": "docs/research/scalable-work-state-storage-feasibility-2026-10-10/prototypes.py",
+      "line": 494,
+      "score": 0.54,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Property:tools/harness.py:selected",
+      "name": "selected",
+      "kind": "",
+      "filePath": "tools/harness.py",
+      "line": 748,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Property:crates/contracts/src/local_evaluation.rs:LocalEvaluationRequirementsV3.selected",
+      "name": "selected",
+      "kind": "",
+      "filePath": "crates/contracts/src/local_evaluation.rs",
+      "line": 44,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    }
+  ],
+  "staleness": {
+    "status": "behind",
+    "commitsBehind": 3,
+    "hint": "⚠️ Index is 3 commits behind HEAD. Run analyze tool to update."
+  }
+}
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Impact (1.6.12)
+{"level":50,"time":1792352940260,"name":"gitnexus","msg":"GitNexus: ⚠️ Index for \"handbook\" was built at C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook; your cwd (C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook) is a sibling clone that is 8 commits ahead of the indexed commit. Results may be stale or incorrect — re-run `gitnexus analyze` to refresh the index."}
+{"level":40,"time":1792352940553,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352940554,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{
+  "status": "ambiguous",
+  "message": "Found 2 symbols matching 'publication'. Blast radius differs per candidate (max 0 impacted at risk UNKNOWN). Disambiguate with target_uid (or file_path/kind) for a single authoritative result.",
+  "target": {
+    "name": "publication"
+  },
+  "direction": "upstream",
+  "totalCandidates": 2,
+  "impactedCount": null,
+  "risk": "UNKNOWN",
+  "maxImpactedCount": 0,
+  "maxRisk": "UNKNOWN",
+  "candidates": [
+    {
+      "uid": "Function:crates/engine/src/work_state/transaction.rs:publication",
+      "name": "publication",
+      "kind": "Function",
+      "filePath": "crates/engine/src/work_state/transaction.rs",
+      "line": 341,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Property:crates/engine/src/work_state/transaction.rs:ExpectedRecords.publication",
+      "name": "publication",
+      "kind": "",
+      "filePath": "crates/engine/src/work_state/transaction.rs",
+      "line": 144,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    }
+  ],
+  "staleness": {
+    "status": "behind",
+    "commitsBehind": 3,
+    "hint": "⚠️ Index is 3 commits behind HEAD. Run analyze tool to update."
+  }
+}
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Impact (1.6.12)
+{"level":50,"time":1792352942438,"name":"gitnexus","msg":"GitNexus: ⚠️ Index for \"handbook\" was built at C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook; your cwd (C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook) is a sibling clone that is 8 commits ahead of the indexed commit. Results may be stale or incorrect — re-run `gitnexus analyze` to refresh the index."}
+{
+  "error": "Target 'init' not found",
+  "target": {
+    "name": "init"
+  },
+  "direction": "upstream",
+  "impactedCount": null,
+  "risk": "UNKNOWN"
+}
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Impact (1.6.12)
+{"level":50,"time":1792352944471,"name":"gitnexus","msg":"GitNexus: ⚠️ Index for \"handbook\" was built at C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook; your cwd (C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook) is a sibling clone that is 8 commits ahead of the indexed commit. Results may be stale or incorrect — re-run `gitnexus analyze` to refresh the index."}
+{
+  "error": "Target 'object_store' not found",
+  "target": {
+    "name": "object_store"
+  },
+  "direction": "upstream",
+  "impactedCount": null,
+  "risk": "UNKNOWN"
+}
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Impact (1.6.12)
+{"level":50,"time":1792352946500,"name":"gitnexus","msg":"GitNexus: ⚠️ Index for \"handbook\" was built at C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook; your cwd (C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook) is a sibling clone that is 8 commits ahead of the indexed commit. Results may be stale or incorrect — re-run `gitnexus analyze` to refresh the index."}
+{"level":40,"time":1792352946817,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352946817,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{
+  "status": "ambiguous",
+  "message": "Found 2 symbols matching 'history'. Blast radius differs per candidate (max 0 impacted at risk UNKNOWN). Disambiguate with target_uid (or file_path/kind) for a single authoritative result.",
+  "target": {
+    "name": "history"
+  },
+  "direction": "upstream",
+  "totalCandidates": 2,
+  "impactedCount": null,
+  "risk": "UNKNOWN",
+  "maxImpactedCount": 0,
+  "maxRisk": "UNKNOWN",
+  "candidates": [
+    {
+      "uid": "Function:crates/contracts/tests/admission_deferral_repository.rs:history",
+      "name": "history",
+      "kind": "Function",
+      "filePath": "crates/contracts/tests/admission_deferral_repository.rs",
+      "line": 31,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Property:docs/research/work-state-capacity-and-performance-2026-10-10/harness/src/probes.rs:Fixture.history",
+      "name": "history",
+      "kind": "",
+      "filePath": "docs/research/work-state-capacity-and-performance-2026-10-10/harness/src/probes.rs",
+      "line": 16,
+      "score": 0.5,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    }
+  ],
+  "staleness": {
+    "status": "behind",
+    "commitsBehind": 3,
+    "hint": "⚠️ Index is 3 commits behind HEAD. Run analyze tool to update."
+  }
+}
+.../node_modules/gitnexus                |  WARN  Unsupported engine: wanted: {"node":"^22.18.0 || >=24.11.0"} (current: {"node":"v22.15.0","pnpm":"10.15.1"})
+
+  GitNexus Impact (1.6.12)
+{"level":50,"time":1792352948636,"name":"gitnexus","msg":"GitNexus: ⚠️ Index for \"handbook\" was built at C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook; your cwd (C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook) is a sibling clone that is 8 commits ahead of the indexed commit. Results may be stale or incorrect — re-run `gitnexus analyze` to refresh the index."}
+{"level":40,"time":1792352948938,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352948939,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352948939,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352948939,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352948939,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{"level":40,"time":1792352948939,"name":"gitnexus","context":"impact:depth-traversal","err":"Prepare failed: Binder exception: Cannot find property staticGated for r.","msg":"GitNexus query failed (degraded)"}
+{
+  "status": "ambiguous",
+  "message": "Found 47 symbols matching 'run' (showing 6 of 47). Blast radius differs per candidate (max 0 impacted at risk UNKNOWN). Disambiguate with target_uid (or file_path/kind) for a single authoritative result.",
+  "target": {
+    "name": "run"
+  },
+  "direction": "upstream",
+  "totalCandidates": 47,
+  "candidatesTruncated": true,
+  "impactedCount": null,
+  "risk": "UNKNOWN",
+  "maxImpactedCount": 0,
+  "maxRisk": "UNKNOWN",
+  "candidates": [
+    {
+      "uid": "Function:crates/cli/src/main.rs:Command.run#1",
+      "name": "run",
+      "kind": "Function",
+      "filePath": "crates/cli/src/main.rs",
+      "line": 95,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Function:crates/cli/src/setup.rs:run",
+      "name": "run",
+      "kind": "Function",
+      "filePath": "crates/cli/src/setup.rs",
+      "line": 8,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Function:crates/cli/src/author.rs:run",
+      "name": "run",
+      "kind": "Function",
+      "filePath": "crates/cli/src/author.rs",
+      "line": 83,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Function:crates/cli/src/doctor.rs:run",
+      "name": "run",
+      "kind": "Function",
+      "filePath": "crates/cli/src/doctor.rs",
+      "line": 8,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Function:crates/cli/src/inspect.rs:run",
+      "name": "run",
+      "kind": "Function",
+      "filePath": "crates/cli/src/inspect.rs",
+      "line": 4,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    },
+    {
+      "uid": "Function:crates/cli/src/artifact.rs:run",
+      "name": "run",
+      "kind": "Function",
+      "filePath": "crates/cli/src/artifact.rs",
+      "line": 147,
+      "score": 0.56,
+      "impactedCount": 0,
+      "risk": "UNKNOWN",
+      "riskSharedAxes": "UNKNOWN",
+      "riskScale": {
+        "comparableAcrossKinds": false,
+        "unusedAxes": [
+          {
+            "axis": "processes",
+            "reason": "enrichment-skipped"
+          },
+          {
+            "axis": "modules",
+            "reason": "enrichment-skipped"
+          }
+        ]
+      },
+      "direct": 0,
+      "riskNote": "No callers resolved. Absence of edges is not evidence the symbol is unused: a caller reaching it through a reference class this index does not record — plain-object property access, a bare-identifier read of a module-scope const — produces no edge to find. Confirm with a text search before treating the change as safe."
+    }
+  ],
+  "staleness": {
+    "status": "behind",
+    "commitsBehind": 3,
+    "hint": "⚠️ Index is 3 commits behind HEAD. Run analyze tool to update."
+  }
+}
