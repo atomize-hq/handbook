@@ -31,7 +31,8 @@ def run(exe,scratch):
                 # Ordered duplicate local relationships plus captured external edges.
                 result=pub(root,'semantic-change',[dict(kind='delete',id='d000000'),dict(kind='rename',id='d000001',text='Renamed title'),dict(kind='edge',id='d000001',text='cites',target='d000002'),dict(kind='edge',id='d000001',text='cites',target='d000002'),dict(kind='path',id='d000009',text=ancestor)])
                 assert result['result']['status']=='published',result
-                state=reference(root);assert 'd000000' not in state['docs'];assert state['docs']['d000001']['title']=='Renamed title'
+                state=reference(root);assert set(state['docs'])==set(initial['docs'])-{'d000000'};assert state['docs']['d000001']['title']=='Renamed title'
+                assert state['docs']['d000009']['path']==ancestor
                 assert state['docs']['d000001']['edges'][-2:]==[dict(kind='cites',target='d000002',external=False)]*2
                 verify(root,state)
                 pub(root,'inverse',[dict(kind='path',id='d000009',text=deep)]);verify(root,reference(root))
@@ -77,11 +78,14 @@ def run(exe,scratch):
                 pub(root,'interrupted',[dict(kind='path',id='d000009',text=target)],defer=True)
                 call(root,'refresh',code=86,exit_at=phase)
                 assert verify(root)['readable_declared_current'] is False
+                if phase=='refresh-namespace-preserved':
+                    external=root/'view'/ancestor/'second-external.txt';external.parent.mkdir(parents=True,exist_ok=False);external.write_bytes(b'external second incarnation')
                 pub(root,'correcting',[dict(kind='path',id='d000009',text='docs/item-corrected-d000009.txt')],defer=True)
                 call(root,'refresh');call(root,'resume');call(root,'audit');verify(root,reference(root))
                 if direction=='up':
                     preserved=[p.read_bytes() for p in (root/'divergence').rglob('*') if p.is_file()]
                     assert b'external divergent source' in preserved and b'external subtree' in preserved
+                    if phase=='refresh-namespace-preserved':assert b'external second incarnation' in preserved
                 cases.append(dict(case='namespace-interruption-correcting-successor',direction=direction,phase=phase,status='success'))
         for mode in ['A','B']:
             root=init('accounting-'+mode,mode)

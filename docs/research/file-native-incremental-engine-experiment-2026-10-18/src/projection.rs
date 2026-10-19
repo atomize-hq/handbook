@@ -306,8 +306,10 @@ fn execute_plan(store:&Store,plan:&Plan,m:&mut Metrics)->Result<()>{
                 // Known obsolete files were removed first. Preserve any remaining
                 // externally added subtree before replacing its namespace.
                 let backup=root.join(format!("divergence/{}/namespace/{}",plan.id,io::digest(action.path.as_bytes())));
-                io::mkdir(backup.parent().unwrap(),m)?;
-                if backup.exists(){return Err("integrity:namespace-preservation-collision".into());}
+                io::mkdir(&backup,m)?;
+                // A user may recreate the obstructing directory after an exit.
+                // Preserve each incarnation without overwriting the earlier one.
+                let backup=backup.join(io::unique("tree"));
                 fs::rename(&dest,&backup)?;io::sync_dir(dest.parent().unwrap(),m)?;io::sync_dir(backup.parent().unwrap(),m)?;
                 io::checkpoint("refresh-namespace-preserved")?;
             }
