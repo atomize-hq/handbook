@@ -1,0 +1,6 @@
+{
+  "start_epoch": 1792425183.463,
+  "work_deadline_epoch": 1792444983.463,
+  "hard_deadline_epoch": 1792446783.463,
+  "note": "First cargo test began immediately before clock capture; deadline is not reset after failed harness run."
+}

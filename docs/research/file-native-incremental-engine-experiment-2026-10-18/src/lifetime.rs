@@ -138,6 +138,7 @@ fn collect(store:&Store,m:&mut Metrics)->Result<Value>{
     let _gate=store.preparation_gate(true)?;let root=&store.root;
     let allowed:String=serde_json::from_slice(&io::read(&root.join("DISPOSABLE.json"),m)?)?;
     if allowed!=root.canonicalize()?.to_string_lossy(){return Err("refused:disposable-identity".into());}
+    recover_transfers(store,m)?;
     let head=store.head_unleased(m)?;let mut keep=BTreeSet::new();
     let mut o=objects::object_store(root,m);
     for r in [&head.publication.membership,&head.publication.outcomes,&head.publication.changes]{
@@ -185,7 +186,10 @@ fn collect(store:&Store,m:&mut Metrics)->Result<Value>{
         keep.extend(objects::reachable(&mut o,&c.changes)?);
         if let Some(cp)=&c.checkpoint{keep.extend(objects::reachable(&mut o,&cp.membership)?);keep.extend(objects::reachable(&mut o,&cp.outcomes)?);}
     }
+    let content_visits=contents.len();
+    let mut unique_contents=BTreeSet::new();
     for (g,projection) in contents{
+        if !unique_contents.insert((g.tree.clone(),projection.clone())){continue;}
         let mut o=objects::object_store(root,m);
         keep.extend(objects::reachable(&mut o,&g.tree)?);keep.extend(objects::reachable(&mut o,&projection)?);
         for (_,h) in objects::range::<crate::graph::Header>(&mut o,&g.tree,"D/")?{keep_files.insert(root.join(h.doc.original));}
@@ -253,5 +257,5 @@ fn collect(store:&Store,m:&mut Metrics)->Result<Value>{
         }
         io::checkpoint("reclaim-accounting")?;transfer(root,&attempt,m)?;
     }
-    Ok(json!({"status":"collected","files":removed,"logical_bytes":bytes,"accepted_evidence_preserved":true}))
+    Ok(json!({"status":"collected","files":removed,"logical_bytes":bytes,"accepted_evidence_preserved":true,"content_root_visits":content_visits,"unique_content_roots":unique_contents.len()}))
 }

@@ -1,5 +1,5 @@
 """Independent complete navigation renderer and ordinary-file verification."""
-import argparse,hashlib,json,time
+import argparse,hashlib,json,time,sys
 from pathlib import Path
 from verify_store import Tree,checked
 
@@ -7,12 +7,22 @@ def sha(b):return hashlib.sha256(b).hexdigest()
 def verify(root):
     started=time.monotonic();root=Path(root)
     if not (root/'SELECTED.json').exists():return {'root':str(root),'not_selected':True}
+    if json.loads((root/'STORE.json').read_bytes()).get('navigation_version',1)==2:
+        sys.path.insert(0,str(Path(__file__).resolve().parent.parent/'file-native-recovery-reclamation-2026-10-19'))
+        from oracle import verify as verify_v2
+        return {'root':str(root),'navigation_version':2,**verify_v2(root),'seconds':time.monotonic()-started}
     selected=json.loads((root/'SELECTED.json').read_bytes());pub=json.loads(checked(root/f"publications/{selected['publication']}.json",selected['digest']))
     entries=Tree(root).entries(pub['graph']['tree']);projection=Tree(root).entries(pub['projection']);docs={k[2:]:v['doc'] for k,v in entries.items() if k.startswith('D/')};outgoing={id:[] for id in docs}
     for key,value in sorted(entries.items()):
         if key.startswith('E/'):
             _,id,ordinal=key.split('/');outgoing[id].append((int(ordinal,16),value))
     expected_paths={'NAVIGATION.md','packet/context.md','packet/provenance.json'};expected={}
+    # Frozen profile-1 bytes remain valid; their actual root destinations must
+    # exist too. A legacy dangling overview is a defect, never an oracle pass.
+    root_text=(root/projection['NAVIGATION.md']['source']).read_text(encoding='utf-8')
+    import re
+    for destination in re.findall(r'\]\(([^)]+)\)',root_text):
+        assert destination in projection,('legacy dangling root destination',destination)
     for id,doc in docs.items():
         source=checked(root/doc['original'],doc['digest']);assert len(source)==doc['bytes']
         expected[doc['path']]={'source':doc['original'],'digest':doc['digest']};expected_paths.add(doc['path'])

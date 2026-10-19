@@ -41,27 +41,69 @@ fn nav(root:&Path,o:&mut Objects,g:&GraphRoot,id:&str)->Result<Option<FileSpec>>
         }
     }Ok(Some(derived(root,b.as_bytes(),o.metrics)?))
 }
-fn static_files(root:&Path,o:&mut Objects)->Result<BTreeMap<String,Vec<u8>>>{
+fn static_files(root:&Path,o:&mut Objects,version:u32)->Result<BTreeMap<String,Vec<u8>>>{
     let mut files=BTreeMap::new();
     let text=b"# Collection navigation\n\nExact authored sources are in docs/. Read navigation/ in stable ID order for titles, kinds, source paths and typed local/external relationships. Use ordinary listing, text search, copying and SHA-256 tools.\n\n[Overview](navigation/d000000.md) | [Packet](packet/context.md) | [Ordered provenance](packet/provenance.json)\n\nReadable files do not grant edit/import authority. A may mix or lag; B requires one positively selected retained generation path.\n";
     for (path,b) in [("NAVIGATION.md",text.as_slice()),("packet/context.md",b"".as_slice()),("packet/provenance.json",b"{\"requested\":false,\"recipe\":\"not-requested\",\"renderer\":\"exact-concat-v1\",\"inputs\":[],\"omissions\":[\"no new context packet requested\"],\"errors\":[],\"output_sha256\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}".as_slice())]{
+        if version==2&&path=="NAVIGATION.md"{continue;}
         let f=derived(root,b,o.metrics)?;files.insert(path.into(),objects::encode(&f,o)?);
     }Ok(files)
 }
-pub fn full(root:&Path,o:&mut Objects,g:&GraphRoot)->Result<Option<Id>>{
-    let mut files=static_files(root,o)?;
+// Version 2 supplies only metadata absent from the exact authored files. One
+// small collection map is intentional here; large-layout costs are unmeasured.
+fn collection(root:&Path,o:&mut Objects,g:&GraphRoot)->Result<FileSpec>{
+    let mut b=String::from("version: 2\ndocuments:\n");
+    for (_,h) in objects::range::<graph::Header>(o,&g.tree,"D/")?{
+        b.push_str(&format!("  - id: {}\n    title: {}\n    kind: {}\n    source: {}\n    relationships:",serde_json::to_string(&h.doc.id)?,serde_json::to_string(&h.doc.title)?,serde_json::to_string(&h.doc.kind)?,serde_json::to_string(&h.doc.path)?));
+        let edges=graph::outgoing(o,g,&h.doc.id)?;
+        if edges.is_empty(){b.push_str(" []\n");}else{
+            b.push('\n');
+            for (_,e) in edges{b.push_str(&format!("      - kind: {}\n        target: {}\n        external: {}\n",serde_json::to_string(&e.kind)?,serde_json::to_string(&e.target)?,e.external));}
+        }
+    }
+    derived(root,b.as_bytes(),o.metrics)
+}
+fn namespace(o:&mut Objects,projection:&Option<Id>,g:&GraphRoot,paths:impl Iterator<Item=String>)->Result<()>{
+    for path in paths{
+        safe_path(&path)?;
+        if objects::point::<FileSpec>(o,projection,&path)?.is_none(){continue;}
+        let mut parent=Path::new(&path).parent();
+        while let Some(p)=parent{
+            if let Some(s)=p.to_str(){if !s.is_empty()&&objects::point::<FileSpec>(o,projection,s)?.is_some(){return Err("semantic:projection-file-ancestor".into());}}
+            parent=p.parent();
+        }
+        let prefix=format!("{path}/");
+        if !objects::range::<FileSpec>(o,projection,&prefix)?.is_empty(){return Err("semantic:projection-file-ancestor".into());}
+        // The graph's path namespace is case folded on every supported host.
+        // Check that contract too, before any A selection or B materialization.
+        if path.starts_with("docs/"){
+            let lower=path.to_lowercase();let mut parent=Path::new(&lower).parent();
+            while let Some(p)=parent{
+                let key=format!("P/{}",p.to_string_lossy());
+                if objects::point::<String>(o,&g.tree,&key)?.is_some(){return Err("semantic:projection-file-ancestor".into());}
+                parent=p.parent();
+            }
+            if !objects::range::<String>(o,&g.tree,&format!("P/{lower}/"))?.is_empty(){return Err("semantic:projection-file-ancestor".into());}
+        }
+    }Ok(())
+}
+pub fn full(root:&Path,o:&mut Objects,g:&GraphRoot,version:u32)->Result<Option<Id>>{
+    let mut files=static_files(root,o,version)?;
+    if version==2{files.remove("NAVIGATION.md");files.insert("collection.yaml".into(),objects::encode(&collection(root,o,g)?,o)?);}
     for (_,h) in objects::range::<graph::Header>(o,&g.tree,"D/")?{
         files.insert(h.doc.path.clone(),objects::encode(&FileSpec{source:h.doc.original,digest:h.doc.digest},o)?);
-        let n=nav(root,o,g,&h.doc.id)?.ok_or("integrity:navigation")?;
-        files.insert(format!("navigation/{}.md",h.doc.id),objects::encode(&n,o)?);
+        if version==1{let n=nav(root,o,g,&h.doc.id)?.ok_or("integrity:navigation")?;
+        files.insert(format!("navigation/{}.md",h.doc.id),objects::encode(&n,o)?);}
     }
-    objects::bulk(o,files)
+    let paths:Vec<_>=files.keys().cloned().collect();let result=objects::bulk(o,files)?;
+    namespace(o,&result,g,paths.into_iter())?;Ok(result)
 }
-pub fn delta(root:&Path,o:&mut Objects,old:&Option<Id>,d:&Delta)->Result<(Option<Id>,BTreeSet<String>)>{
+pub fn delta(root:&Path,o:&mut Objects,old:&Option<Id>,d:&Delta,version:u32)->Result<(Option<Id>,BTreeSet<String>)>{
     let mut changes=BTreeMap::new();
     for h in d.old.values().flatten(){changes.insert(h.doc.path.clone(),vec![]);}
     for h in d.final_docs.values().flatten(){changes.insert(h.doc.path.clone(),objects::encode(&FileSpec{source:h.doc.original.clone(),digest:h.doc.digest.clone()},o)?);}
-    for id in &d.navigation{
+    if version==2{changes.insert("collection.yaml".into(),objects::encode(&collection(root,o,&d.graph)?,o)?);}
+    for id in d.navigation.iter().filter(|_|version==1){
         let key=format!("navigation/{id}.md");
         changes.insert(key,nav(root,o,&d.graph,id)?.map(|f|objects::encode(&f,o)).transpose()?.unwrap_or_default());
     }
@@ -71,11 +113,12 @@ pub fn delta(root:&Path,o:&mut Objects,old:&Option<Id>,d:&Delta)->Result<(Option
         if prior!=b{paths.insert(p.clone());actual.insert(p,b);}
     }
     // A no-packet transaction explicitly clears any preceding packet status.
-    for (p,b) in static_files(root,o)?{
+    for (p,b) in static_files(root,o,version)?{
+        if version==2&&p=="NAVIGATION.md"{continue;}
         let prior=crate::disk::DiskIndex::open(o,old.clone())?.get(o,&p)?.unwrap_or_default();
         if prior!=b{paths.insert(p.clone());actual.insert(p,b);}
     }
-    Ok((objects::update(o,old,actual)?,paths))
+    let result=objects::update(o,old,actual)?;namespace(o,&result,&d.graph,paths.iter().cloned())?;Ok((result,paths))
 }
 fn map(root:&Path,projection:&Option<Id>,m:&mut Metrics)->Result<BTreeMap<String,FileSpec>>{
     let mut o=objects::object_store(root,m);
@@ -137,8 +180,10 @@ pub fn packet(store:&Store,g:&GraphRoot,projection:&Option<Id>,attempt:&str,m:&m
     }
     // The independent retained packet has source/provenance/recipe plus its own
     // ordinary navigation. Exact closure verification precedes manifest sealing.
-    io::write_new(&dest.join("NAVIGATION.md"),b"# Exact retained packet\n\nSources are in docs/. Ordered inputs, exact paths, hashes, omissions and recipe are in packet/provenance.json.\n",m)?;
-    manifest.insert("NAVIGATION.md".into(),io::digest(&io::read(&dest.join("NAVIGATION.md"),m)?));
+    if store.config.navigation_version==1{
+        io::write_new(&dest.join("NAVIGATION.md"),b"# Exact retained packet\n\nSources are in docs/. Ordered inputs, exact paths, hashes, omissions and recipe are in packet/provenance.json.\n",m)?;
+        manifest.insert("NAVIGATION.md".into(),io::digest(&io::read(&dest.join("NAVIGATION.md"),m)?));
+    }
     for (p,h) in &manifest{io::checked(&dest.join(p),h,m)?;}
     io::write_new(&dest.join("MANIFEST.json"),&io::json(&manifest)?,m)?;
     let mut o=objects::object_store(&store.root,m);let mut updates=BTreeMap::new();
@@ -153,7 +198,7 @@ pub fn packet_verify_replay(store:&Store,g:&GraphRoot,projection:&Option<Id>,att
     let manifest:BTreeMap<String,String>=serde_json::from_slice(&io::read(&dest.join("MANIFEST.json"),m)?)?;
     let mut expected:BTreeMap<_,_>=files.iter().map(|(p,f)|(p.clone(),f.digest.clone())).collect();
     expected.insert("packet/context.md".into(),io::digest(&output));expected.insert("packet/provenance.json".into(),io::digest(&prov));
-    expected.insert("NAVIGATION.md".into(),io::digest(b"# Exact retained packet\n\nSources are in docs/. Ordered inputs, exact paths, hashes, omissions and recipe are in packet/provenance.json.\n"));
+    if store.config.navigation_version==1{expected.insert("NAVIGATION.md".into(),io::digest(b"# Exact retained packet\n\nSources are in docs/. Ordered inputs, exact paths, hashes, omissions and recipe are in packet/provenance.json.\n"));}
     if manifest!=expected{return Err("integrity:packet-manifest-completeness".into());}
     let mut actual=vec![];crate::lifetime::files(&dest,&mut actual)?;
     let names:BTreeSet<_>=actual.iter().map(|p|p.strip_prefix(&dest).unwrap().to_string_lossy().replace('\\',"/")).filter(|p|p!="MANIFEST.json").collect();
@@ -233,12 +278,18 @@ fn execute_plan(store:&Store,plan:&Plan,m:&mut Metrics)->Result<()>{
     let expected=derive_actions(store,&plan.target,plan.prior.as_ref(),plan.full,&plan.extras,m)?;
     if io::json(&expected)?!=io::json(&plan.actions)?{return Err("integrity:refresh-plan-actions".into());}
     let root=&store.root;let view=root.join("view");
-    for action in &plan.actions{
+    // Keep the sealed plan's byte order for old pending plans, but execute
+    // removals deepest first and installations shallowest first on every replay.
+    let mut ordered:Vec<_>=plan.actions.iter().collect();
+    ordered.sort_by_key(|a|(a.desired.is_some(),if a.desired.is_none(){usize::MAX-a.path.matches('/').count()}else{a.path.matches('/').count()},a.path.clone()));
+    for action in ordered{
         safe_path(&action.path)?;m.touched_paths+=1;
         let dest=view.join(&action.path);
-        let actual=if dest.exists(){Some(io::read(&dest,m)?)}else{None};
+        // An ancestor file may still obscure this obsolete descendant after an
+        // interrupted installation. The desired namespace cannot contain both.
+        let actual=if dest.is_file(){Some(io::read(&dest,m)?)}else{None};
         let hash=actual.as_ref().map(|b|io::digest(b));
-        if hash.as_ref()==action.desired.as_ref().map(|f|&f.digest){continue;}
+        if hash.as_ref()==action.desired.as_ref().map(|f|&f.digest)&&!dest.is_dir(){continue;}
         if let Some(bytes)=actual{
             if action.prior.as_ref().is_none_or(|f|Some(&f.digest)!=hash.as_ref()){
                 let backup=root.join(format!("divergence/{}/{}/{}",plan.id,io::digest(action.path.as_bytes()),io::digest(&bytes)));
@@ -251,12 +302,30 @@ fn execute_plan(store:&Store,plan:&Plan,m:&mut Metrics)->Result<()>{
             }
         }
         if let Some(want)=&action.desired{
+            if dest.is_dir(){
+                // Known obsolete files were removed first. Preserve any remaining
+                // externally added subtree before replacing its namespace.
+                let backup=root.join(format!("divergence/{}/namespace/{}",plan.id,io::digest(action.path.as_bytes())));
+                io::mkdir(backup.parent().unwrap(),m)?;
+                if backup.exists(){return Err("integrity:namespace-preservation-collision".into());}
+                fs::rename(&dest,&backup)?;io::sync_dir(dest.parent().unwrap(),m)?;io::sync_dir(backup.parent().unwrap(),m)?;
+                io::checkpoint("refresh-namespace-preserved")?;
+            }
             let stage=root.join(format!("refresh-stages/{}/{}",plan.id,io::digest(action.path.as_bytes())));
             if stage.exists(){crate::lifetime::remove_checked(root,&stage,m)?;}
             io::copy(&root.join(&want.source),&stage,m)?;io::checked(&stage,&want.digest,m)?;
             io::mkdir(dest.parent().unwrap(),m)?;io::replace(&stage,&dest,m)?;
             io::sync_dir(dest.parent().unwrap(),m)?;io::sync_dir(stage.parent().unwrap(),m)?;
-        }else if dest.exists(){crate::lifetime::remove_checked(root,&dest,m)?;}
+        }else if dest.is_file(){crate::lifetime::remove_checked(root,&dest,m)?;}
+        // Remove only empty directories under the engine's readable root. This
+        // never recursively deletes an external subtree.
+        let mut parent=dest.parent();
+        while let Some(p)=parent{
+            if p==view||!p.starts_with(&view){break;}
+            match fs::remove_dir(p){Ok(())=>{io::sync_dir(p.parent().unwrap(),m)?;m.namespace_ops+=1;},Err(_)=>break}
+            parent=p.parent();
+        }
+        io::checkpoint("refresh-namespace")?;
         io::checkpoint("refresh-file")?;
     }
     io::checkpoint("refresh-before-complete")?;
@@ -299,7 +368,7 @@ pub fn full_oracle(store:&Store,m:&mut Metrics)->Result<()>{
         safe_path(path)?;let file:FileSpec=objects::decode(bytes,&mut o)?;
         safe_path(&file.source)?;io::checked(&store.root.join(&file.source),&file.digest,o.metrics)?;
     }
-    let expected=full(&store.root,&mut o,&head.publication.graph)?;
+    let expected=full(&store.root,&mut o,&head.publication.graph,store.config.navigation_version)?;
     let mut expected=objects::entries(&mut o,&expected)?;
     // Packet work is independently checked against exact selected graph/closure.
     for path in ["packet/context.md","packet/provenance.json"]{actual.remove(path);expected.remove(path);}

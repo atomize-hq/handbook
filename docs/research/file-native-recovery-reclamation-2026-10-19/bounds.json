@@ -1,0 +1,16 @@
+{
+  "execution_total_seconds": 21600,
+  "closeout_reserved_seconds": 1800,
+  "implementation_time_separate": true,
+  "stage_caps_seconds": {"small_per_host":1800,"child":180,"inventory":600,"backup":1800,"restore":1800,"collection_pass":1800,"verification":900},
+  "combined_owned_logical_bytes_ceiling": 34359738368,
+  "minimum_free_bytes": {"windows":150323855360,"wsl":42949672960,"native_unix":21474836480},
+  "new_full_history_clones": 1,
+  "prospective_file_count_cap": 5000000,
+  "verifier_rss_bytes_cap": 2147483648,
+  "retirement_pilot_max": 100,
+  "original": "C:/file-native-incremental-20261018/history-common-pin/store",
+  "original_selected": {"publication":"publication-74796-1792371048916760700-13","digest":"9b80c0b54b15af6457ee50290f266684bed6c06223cbe105a2654da7bb368546"},
+  "original_policy": "read-only capture; never rename, repair, publish or collect",
+  "classification": "success, expected refusal, censored, unperformed; expired prerequisites block dependent mutation"
+}

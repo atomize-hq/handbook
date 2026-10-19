@@ -39,13 +39,8 @@ packed=command('history-proof',[python,source/'pack_history.py','--root',history
 restored=None
 if packed.get('exit')==0:
     restored=command('restore-history-proof',[python,source/'pack_history.py','--verify',proof,'--restore',scratch/'history-proof-final-restored/disposable/store'],900)
-if restored and restored.get('exit')==0:
-    gc=command('history-gc-continuation',[python,source/'history_gc_continuation.py','--scratch',scratch,'--exe',exe,'--deadline-epoch',end],900)
-    if (scratch/'history-common-pin/disposable/store/SELECTED.json').exists():history=scratch/'history-common-pin/disposable/store'
-    if (scratch/'history-gc-continuation/relocation.json').exists():
-        command('post-GC-exact-outcomes',[python,source/'verify_gc_outcomes.py','--scratch',scratch,'--exe',exe],180)
-        command('independent-post-GC-history',[python,'-c',"from verify_store import verify_history; import json; print(json.dumps(verify_history(r'"+str(history)+"',allow_retired_content=True),indent=2))"],600)
-        command('post-GC-history-census',[python,source/'census.py','--roots',history,'--owners','--output',source/'evidence/history-census-post-GC.json'],600)
+# Proof restoration deliberately grants no operational collection permission.
+rows.append(dict(name='history-gc-continuation',unperformed='requires full operational backup, independent restore, reopening and new destination-bound deletion permission'))
 matrix=scratch/'matrix-common-pin';roots=[matrix/f'{prefix}n{n}/disposable/store' for n in [1000,10000,100000] for prefix in ['','B-']]
 roots += [scratch/f'document-calibration-final/n{n}/disposable/store' for n in [1000,10000]]+[history]
 roots=[root for root in roots if (root/'SELECTED.json').exists()]

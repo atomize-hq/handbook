@@ -6,7 +6,8 @@ use fs2::FileExt;
 use std::{collections::BTreeMap,fs::{self,File,OpenOptions},path::{Path,PathBuf},time::{Instant,Duration}};
 #[derive(Clone,Serialize,Deserialize)]
 #[serde(deny_unknown_fields)]
-pub struct StoreConfig{pub version:u32,pub store_id:String,pub mode:String,pub consumer:String,pub fallback:bool}
+pub struct StoreConfig{pub version:u32,pub store_id:String,pub mode:String,pub consumer:String,pub fallback:bool,#[serde(default="legacy_navigation")] pub navigation_version:u32}
+fn legacy_navigation()->u32{1}
 pub struct Store{pub root:PathBuf,pub config:StoreConfig}
 pub struct LockGuard{_file:File,started:Instant,counter:std::sync::Arc<std::sync::atomic::AtomicU64>}
 impl Drop for LockGuard{
@@ -69,7 +70,7 @@ impl Store{
     pub fn open(root:&Path,m:&mut Metrics)->Result<Self>{
         m.store_root=Some(root.into());
         let config:StoreConfig=serde_json::from_slice(&io::read_bounded(&root.join("STORE.json"),65536,m)?)?;
-        if config.version!=1||!["A","B"].contains(&config.mode.as_str())||!["project","research"].contains(&config.consumer.as_str()){
+        if config.version!=1||![1,2].contains(&config.navigation_version)||!["A","B"].contains(&config.mode.as_str())||!["project","research"].contains(&config.consumer.as_str()){
             return Err("integrity:store-version-kind".into());
         }
         Ok(Self{root:root.into(),config})
@@ -216,7 +217,7 @@ impl Store{
         o.metrics.elapsed("graph-transition-inclusive",graph_started);
         io::checkpoint("semantic-root")?;
         let projection_started=Instant::now();
-        let (projection,changed_paths)=projection::delta(&self.root,&mut o,&head.publication.projection,&delta)?;
+        let (projection,changed_paths)=projection::delta(&self.root,&mut o,&head.publication.projection,&delta,self.config.navigation_version)?;
         o.metrics.elapsed("projection-prepare-inclusive",projection_started);
         io::checkpoint("projection-root")?;
         let mut changes=BTreeMap::new();
@@ -286,7 +287,7 @@ impl Store{
         // avoids trusting/replacing prepared B/packet destinations.
         let mut o=objects::object_store(&self.root,m);
         let d=graph::transition(&self.root,&mut o,&head.publication.graph,&c.request.ops)?;
-        let (projection,paths)=projection::delta(&self.root,&mut o,&head.publication.projection,&d)?;
+        let (projection,paths)=projection::delta(&self.root,&mut o,&head.publication.projection,&d,self.config.navigation_version)?;
         let mut updates=BTreeMap::new();for p in paths{updates.insert(format!("{:020}/{p}",head.publication.sequence+1),serde_json::to_vec(&true)?);}
         let mut changes=objects::update(&mut o,&head.publication.changes,updates)?;
         drop(o);
@@ -397,9 +398,9 @@ impl Store{
         m.store_root=Some(root.into());
         if root.exists()||!["A","B"].contains(&mode)||!["project","research"].contains(&consumer)||n<10||n>100_000{return Err("refused:init-arguments-existing".into());}
         io::mkdir(root,m)?;
-        let config=StoreConfig{version:1,store_id:io::unique("store"),mode:mode.into(),consumer:consumer.into(),fallback};
+        let config=StoreConfig{version:1,store_id:io::unique("store"),mode:mode.into(),consumer:consumer.into(),fallback,navigation_version:2};
         io::write_new(&root.join("STORE.json"),&io::json(&config)?,m)?;
-        io::write_new(&root.join("README.md"),b"# File-native collection\n\nRead SELECTED.json once and verify its publication digest. The publication binds exact immutable state. B: retain generations/<attempt>/ once and read NAVIGATION.md. A: view/NAVIGATION.md may mix/lag; VIEW.json names completed state and PENDING.json records unfinished work. Ordinary edits are not automatically admitted.\n",m)?;
+        io::write_new(&root.join("README.md"),b"# File-native collection\n\nRead SELECTED.json once and verify its publication digest. The publication binds exact immutable state. B: retain generations/<attempt>/ once and read collection.yaml and exact source paths. A: view/ may mix/lag; VIEW.json names completed state and PENDING.json records unfinished work. Ordinary edits are not automatically admitted.\n",m)?;
         let store=Self{root:root.into(),config};let _guard=store.lock(m)?;
         let attempt=io::unique("attempt");let request=Request{request:"initial".into(),base:None,ops:vec![],packet:false};let intent=io::digest(&io::json(&request)?);
         let allowance=n as u64*300_000+64*1024*1024;
@@ -407,7 +408,7 @@ impl Store{
         m.quota_limit=Some(allowance);m.quota_spent=0;m.replay_objects.clear();m.replay_files.clear();
         let s=model::fixture(root,consumer,n,m)?;let mut o=objects::object_store(root,m);
         let graph=graph::build(&mut o,&s,fallback)?;io::checkpoint("semantic-root")?;
-        let projection=projection::full(root,&mut o,&graph)?;
+        let projection=projection::full(root,&mut o,&graph,store.config.navigation_version)?;
         io::checkpoint("projection-root")?;drop(o);
         let mut c=Candidate{purpose:"publication".into(),version:2,store_id:store.config.store_id.clone(),attempt,expected:None,request,intent,graph,projection,changes:None,
             changed:s.docs.keys().cloned().collect(),removed:vec![],generation_manifest:None,checkpoint:None,packet_ref:None,replay_objects:vec![],replay_files:BTreeMap::new()};
@@ -416,6 +417,7 @@ impl Store{
     }
     pub fn checkpoint(&self,id:&str,m:&mut Metrics)->Result<Value>{
         let _guard=self.lock(m)?;self.predecessor_established(m)?;
+        lifetime::recover_transfers(self,m)?;
         let head=self.snapshot(m)?;
         let request=Request{request:id.into(),base:None,ops:vec![model::Op{kind:"checkpoint".into(),id:String::new(),text:String::new(),target:String::new(),value:1}],packet:false};
         let intent=io::digest(&io::json(&request)?);
