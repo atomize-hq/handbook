@@ -1,0 +1,115 @@
+{
+  "epoch": 1792452647.7612724,
+  "status": "point-in-time Windows re-census; N remains active, not global P admission",
+  "roots": [
+    {
+      "root": "C:\\file-native-incremental-20261018",
+      "files": 2650971,
+      "logical_bytes": 15323250267,
+      "links_excluded": 0,
+      "seconds": 27.04699999996228
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018-build",
+      "files": 1259,
+      "logical_bytes": 460187464,
+      "links_excluded": 0,
+      "seconds": 0.015000000013969839
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018-build-control",
+      "files": 717,
+      "logical_bytes": 226053498,
+      "links_excluded": 0,
+      "seconds": 0.01600000000325963
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018-build-final",
+      "files": 1259,
+      "logical_bytes": 461657446,
+      "links_excluded": 0,
+      "seconds": 0.01600000000325963
+    },
+    {
+      "root": "C:\\file-native-qnp-20261019",
+      "files": 8,
+      "logical_bytes": 74296,
+      "links_excluded": 0,
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\file-native-recovery-20261019",
+      "files": 575910,
+      "logical_bytes": 5150064752,
+      "links_excluded": 0,
+      "seconds": 15.01500000001397
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook",
+      "files": 4489,
+      "logical_bytes": 245911525,
+      "links_excluded": 0,
+      "seconds": 0.0779999999795109
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-recovery-20261019\\handbook",
+      "files": 4534,
+      "logical_bytes": 258482758,
+      "links_excluded": 0,
+      "seconds": 0.0779999999795109
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook",
+      "files": 4829,
+      "logical_bytes": 279772852,
+      "links_excluded": 0,
+      "seconds": 0.06300000002374873
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\18\\01a14f52-1f53-7990-9b84-ebb0af672ff5",
+      "files": 9202,
+      "logical_bytes": 1118451863,
+      "links_excluded": 0,
+      "seconds": 0.34399999998277053
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\19\\01a155e1-fe59-7682-be45-f6204e9f8824",
+      "files": 0,
+      "logical_bytes": 0,
+      "links_excluded": 0,
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\file-native-navigation-20261019",
+      "files": 67402,
+      "logical_bytes": 756194004,
+      "links_excluded": 0,
+      "seconds": 1.1089999999967404
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-navigation-20261019\\handbook",
+      "files": 120,
+      "logical_bytes": 774755,
+      "links_excluded": 0,
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-q-linux-20261019\\handbook",
+      "files": 140,
+      "logical_bytes": 9222787,
+      "links_excluded": 0,
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\b3fc\\handbook",
+      "files": 378,
+      "logical_bytes": 15795380,
+      "links_excluded": 0,
+      "seconds": 0.0
+    }
+  ],
+  "logical_bytes": 24305893647,
+  "files": 3321218,
+  "free_bytes": 201628594176,
+  "exclusions": "20261017 separately bounded preserved scope remains in historical census; known cache residues and sharedGit growth tracked separately; native/WSL separate"
+}
