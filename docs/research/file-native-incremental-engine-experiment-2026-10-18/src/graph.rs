@@ -115,7 +115,7 @@ fn full_fallback(s:&State)->Result<()>{
 }
 pub struct Delta{
     pub graph:GraphRoot,pub changed:BTreeSet<String>,pub navigation:BTreeSet<String>,
-    pub navigation_facts:BTreeSet<String>,
+    pub navigation_facts:BTreeSet<String>,pub navigation_sources:BTreeSet<String>,pub prior_graph:GraphRoot,
     pub old:BTreeMap<String,Option<Header>>,pub final_docs:BTreeMap<String,Option<Header>>,
 }
 pub fn transition(root:&Path,o:&mut Objects,g:&GraphRoot,ops:&[Op])->Result<Delta>{
@@ -236,5 +236,8 @@ pub fn transition(root:&Path,o:&mut Objects,g:&GraphRoot,ops:&[Op])->Result<Delt
     for (key,prior) in &old_edges{
         if serde_json::to_vec(prior)?!=serde_json::to_vec(&edges[key])?{navigation_facts.insert(key.0.clone());}
     }
-    Ok(Delta{graph,changed:final_docs.keys().cloned().collect(),navigation,navigation_facts,old,final_docs})
+    let navigation_sources=final_docs.iter().filter_map(|(id,next)|match(old[id].as_ref(),next.as_ref()){
+        (Some(a),Some(b)) if (a.doc.kind=="self-describing-json"||b.doc.kind=="self-describing-json")&&a.doc.digest!=b.doc.digest=>Some(id.clone()),_=>None
+    }).collect();
+    Ok(Delta{graph,changed:final_docs.keys().cloned().collect(),navigation,navigation_facts,navigation_sources,prior_graph:g.clone(),old,final_docs})
 }

@@ -741,8 +741,10 @@ impl DiskIndex {
     pub fn range(&mut self,store:&mut Objects,lo:&str,hi:&str)->Result<Vec<(String,Vec<u8>)>>{
         fn visit(store:&mut Objects,id:&str,expected:Option<&Bounds>,lo:&str,hi:&str,out:&mut Vec<(String,Vec<u8>)>,depth:usize)->Result<()>{
             if depth>MAX_HEIGHT as usize{return Err("integrity:range-depth".into());}
+            let role=lo.split('/').next().unwrap_or("").to_owned();
+            *store.metrics.range_page_visits.entry(role.clone()).or_default()+=1;
             match read_node(store,id,expected)?{
-                Node::Leaf{pairs}=>out.extend(pairs.into_iter().filter(|(k,_)|k.as_str()>=lo&&k.as_str()<hi)),
+                Node::Leaf{pairs}=>{*store.metrics.range_leaf_pairs.entry(role).or_default()+=pairs.len() as u64;out.extend(pairs.into_iter().filter(|(k,_)|k.as_str()>=lo&&k.as_str()<hi));},
                 Node::Branch{height,children}=>for c in children{
                     if c.max.as_str()>=lo&&c.min.as_str()<hi{visit(store,&c.id,Some(&expected_child(&c,height-1)),lo,hi,out,depth+1)?;}
                 }

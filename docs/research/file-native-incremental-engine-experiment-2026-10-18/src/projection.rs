@@ -11,7 +11,7 @@ pub struct FileSpec{pub source:String,pub digest:Id,
 }
 // Experimental controls identify new immutable targets; replay always uses the
 // prepared target's own marker. Historical profiles never acquire this field.
-pub fn new_profile()->u32{std::env::var("EXP_NAVIGATION").ok().and_then(|v|v.parse().ok()).filter(|v|[2,3].contains(v)).unwrap_or(3)}
+pub fn new_profile()->u32{std::env::var("EXP_NAVIGATION").ok().and_then(|v|v.parse().ok()).filter(|v|[2,3,4].contains(v)).unwrap_or(4)}
 #[derive(Clone,Serialize,Deserialize)]
 #[serde(deny_unknown_fields)]
 struct Watermark{selected:Selector,sequence:u64,graph:GraphRoot,projection:Option<Id>}
@@ -21,7 +21,7 @@ struct Action{path:String,prior:Option<FileSpec>,desired:Option<FileSpec>}
 #[derive(Clone,Serialize,Deserialize)]
 #[serde(deny_unknown_fields)]
 struct Plan{version:u32,id:String,target:Watermark,prior:Option<Watermark>,full:bool,extras:BTreeSet<String>,actions:Vec<Action>}
-fn derived(root:&Path,bytes:&[u8],m:&mut Metrics)->Result<FileSpec>{
+pub(crate) fn derived(root:&Path,bytes:&[u8],m:&mut Metrics)->Result<FileSpec>{
     let digest=io::digest(bytes);let source=format!("derived/{}/{}",&digest[..2],digest);let path=root.join(&source);
     m.replay_files.insert(source.clone(),digest.clone());
     if path.exists(){io::checked(&path,&digest,m)?;}
@@ -104,7 +104,8 @@ fn namespace(o:&mut Objects,projection:&Option<Id>,g:&GraphRoot,paths:impl Itera
 }
 pub fn full(root:&Path,o:&mut Objects,g:&GraphRoot,version:u32)->Result<Option<Id>>{
     let mut files=static_files(root,o,version)?;
-    if version>=2{files.remove("NAVIGATION.md");files.insert("collection.yaml".into(),objects::encode(&collection(root,o,g)?,o)?);}
+    if [2,3].contains(&version){files.remove("NAVIGATION.md");files.insert("collection.yaml".into(),objects::encode(&collection(root,o,g)?,o)?);}
+    if version==4{files.extend(crate::navigation::full(root,o,g)?);}
     for (_,h) in objects::range::<graph::Header>(o,&g.tree,"D/")?{
         files.insert(h.doc.path.clone(),objects::encode(&FileSpec{source:h.doc.original,digest:h.doc.digest,projection_profile:None},o)?);
         if version==1{let n=nav(root,o,g,&h.doc.id)?.ok_or("integrity:navigation")?;
@@ -126,6 +127,7 @@ pub fn delta(root:&Path,o:&mut Objects,old:&Option<Id>,d:&Delta,version:u32)->Re
     for h in d.old.values().flatten(){changes.insert(h.doc.path.clone(),vec![]);}
     for h in d.final_docs.values().flatten(){changes.insert(h.doc.path.clone(),objects::encode(&FileSpec{source:h.doc.original.clone(),digest:h.doc.digest.clone(),projection_profile:None},o)?);}
     if version==2||(version==3&&!d.navigation_facts.is_empty()){changes.insert("collection.yaml".into(),objects::encode(&collection(root,o,&d.graph)?,o)?);}
+    if version==4{changes.extend(crate::navigation::delta(root,o,old,d)?);}
     for id in d.navigation.iter().filter(|_|version==1){
         let key=format!("navigation/{id}.md");
         changes.insert(key,nav(root,o,&d.graph,id)?.map(|f|objects::encode(&f,o)).transpose()?.unwrap_or_default());
@@ -148,6 +150,7 @@ fn map(root:&Path,projection:&Option<Id>,m:&mut Metrics)->Result<BTreeMap<String
     objects::entries(&mut o,projection)?.into_iter().map(|(p,b)|{safe_path(&p)?;Ok((p,objects::decode(&b,&mut o)?))}).collect()
 }
 pub fn generation(store:&Store,c:&Candidate,m:&mut Metrics)->Result<Id>{
+    let started=Instant::now();
     let dest=store.root.join(format!("generations/{}",c.attempt));
     let files=map(&store.root,&c.projection,m)?;
     for (p,f) in &files{
@@ -156,10 +159,12 @@ pub fn generation(store:&Store,c:&Candidate,m:&mut Metrics)->Result<Id>{
     }
     let b=io::json(&files)?;io::write_new(&dest.join("MANIFEST.json"),&b,m)?;
     io::checkpoint("generation-installed")?;
+    m.elapsed("B-generation-inclusive",started);
     Ok(io::digest(&b))
 }
 pub fn verify_generation(store:&Store,c:&Candidate,m:&mut Metrics)->Result<()>{
-    verify_generation_parts(store,&c.attempt,&c.projection,c.generation_manifest.as_ref().ok_or("integrity:missing-B-readiness")?,m)
+    let started=Instant::now();let out=verify_generation_parts(store,&c.attempt,&c.projection,c.generation_manifest.as_ref().ok_or("integrity:missing-B-readiness")?,m);
+    m.elapsed("B-generation-verification-inclusive",started);out
 }
 fn verify_generation_parts(store:&Store,attempt:&str,projection:&Option<Id>,hash:&str,m:&mut Metrics)->Result<()>{
     let dest=store.root.join(format!("generations/{attempt}"));

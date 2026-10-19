@@ -7,6 +7,7 @@ pub mod model;
 pub mod graph;
 pub mod store;
 pub mod projection;
+mod navigation;
 pub mod lifetime;
 pub mod api;
 pub mod differential;
