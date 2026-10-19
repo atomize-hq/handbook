@@ -1,0 +1,294 @@
+[
+  {
+    "name": "bash-extraction",
+    "args": [
+      "/bin/bash",
+      "/private/tmp/file-native-q-macos-20261019/bash-extract.sh"
+    ],
+    "start_epoch": 1792449378.852984,
+    "seconds": 0.1655900478363037,
+    "cap": 82.1470160484314,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 2228224,
+    "samples": 2,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "capsule",
+    "args": [
+      "python3",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook/docs/research/file-native-recovery-reclamation-2026-10-19/capsule.py",
+      "--exe",
+      "/private/tmp/file-native-q-macos-20261019/engine",
+      "--scratch",
+      "/private/tmp/file-native-q-macos-20261019/capsule"
+    ],
+    "start_epoch": 1792449200.0679958,
+    "seconds": 68.26484823226929,
+    "cap": 180.0,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 60211200,
+    "samples": 806,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "cargo-build",
+    "args": [
+      "cargo",
+      "build",
+      "--locked",
+      "--offline",
+      "--release",
+      "-j2"
+    ],
+    "start_epoch": 1792449149.847191,
+    "seconds": 14.649263858795166,
+    "cap": 120.0,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 529416192,
+    "samples": 178,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "cargo-test-native",
+    "args": [
+      "cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--workspace",
+      "-j2"
+    ],
+    "start_epoch": 1792449360.271211,
+    "seconds": 0.4124631881713867,
+    "cap": 100.72878909111023,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 122257408,
+    "samples": 5,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "cargo-test",
+    "args": [
+      "cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--workspace",
+      "-j2"
+    ],
+    "start_epoch": 1792449085.948247,
+    "seconds": 10.48881220817566,
+    "cap": 120.0,
+    "exit": 1,
+    "status": "failure",
+    "censor": null,
+    "native_time_l": true
+  },
+  {
+    "name": "delta",
+    "args": [
+      "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+      "/private/tmp/file-native-q-macos-20261019/delta.py"
+    ],
+    "start_epoch": 1792449377.417536,
+    "seconds": 1.4075148105621338,
+    "cap": 83.58246397972107,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 42401792,
+    "samples": 17,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "extra",
+    "args": [
+      "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook/docs/research/file-native-recovery-reclamation-2026-10-19/focused_extra.py",
+      "--exe",
+      "/private/tmp/file-native-q-macos-20261019/engine",
+      "--base",
+      "/private/tmp/file-native-q-macos-20261019/extra"
+    ],
+    "start_epoch": 1792449360.718108,
+    "seconds": 16.230103015899658,
+    "cap": 100.28189206123352,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 48758784,
+    "samples": 194,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "legacy-build",
+    "args": [
+      "cargo",
+      "build",
+      "--locked",
+      "--offline",
+      "--release",
+      "-j2"
+    ],
+    "start_epoch": 1792449407.826056,
+    "seconds": 8.913156986236572,
+    "cap": 53.17394399642944,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 373735424,
+    "samples": 107,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "legacy-create",
+    "args": [
+      "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook/docs/research/file-native-recovery-reclamation-2026-10-19/legacy_compatibility.py",
+      "--exe",
+      "/private/tmp/file-native-q-macos-20261019/legacy-engine",
+      "--fixtures",
+      "/private/tmp/file-native-q-macos-20261019/unused",
+      "--base",
+      "/private/tmp/file-native-q-macos-20261019/legacy-fixtures",
+      "--create",
+      "--packet"
+    ],
+    "start_epoch": 1792449416.7984169,
+    "seconds": 8.321274042129517,
+    "cap": 44.20158314704895,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 25804800,
+    "samples": 98,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "legacy-replay",
+    "args": [
+      "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook/docs/research/file-native-recovery-reclamation-2026-10-19/legacy_compatibility.py",
+      "--exe",
+      "/private/tmp/file-native-q-macos-20261019/final-engine",
+      "--fixtures",
+      "/private/tmp/file-native-q-macos-20261019/legacy-fixtures",
+      "--base",
+      "/private/tmp/file-native-q-macos-20261019/legacy-replayed"
+    ],
+    "start_epoch": 1792449425.157699,
+    "seconds": 2.9168479442596436,
+    "cap": 35.84230089187622,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 26279936,
+    "samples": 34,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "lock-and-checkpoint",
+    "args": [
+      "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18/deep_cases.py",
+      "--exe",
+      "/private/tmp/file-native-q-macos-20261019/engine",
+      "--base",
+      "/private/tmp/file-native-q-macos-20261019/deep"
+    ],
+    "start_epoch": 1792449379.786148,
+    "seconds": 28.001110792160034,
+    "cap": 81.21385192871094,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 62570496,
+    "samples": 323,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "native-fileops-build",
+    "args": [
+      "rustc",
+      "--edition=2021",
+      "/private/tmp/file-native-q-macos-20261019/native_ops.rs",
+      "--extern",
+      "file_native_incremental=/private/tmp/file-native-q-macos-20261019/build/release/deps/libfile_native_incremental-90fc4a1899a615a8.rlib",
+      "-L",
+      "dependency=/private/tmp/file-native-q-macos-20261019/build/release/deps",
+      "-o",
+      "/private/tmp/file-native-q-macos-20261019/native_ops"
+    ],
+    "start_epoch": 1792449379.055466,
+    "seconds": 0.2517120838165283,
+    "cap": 81.94453406333923,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 92520448,
+    "samples": 3,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "native-fileops",
+    "args": [
+      "/private/tmp/file-native-q-macos-20261019/native_ops"
+    ],
+    "start_epoch": 1792449379.337717,
+    "seconds": 0.41791677474975586,
+    "cap": 81.66228294372559,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 1589248,
+    "samples": 5,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "restored-fences",
+    "args": [
+      "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook/docs/research/file-native-recovery-reclamation-2026-10-19/restored_fences.py",
+      "--exe",
+      "/private/tmp/file-native-q-macos-20261019/engine",
+      "--capsule",
+      "/private/tmp/file-native-q-macos-20261019/capsule",
+      "--output",
+      "/private/tmp/file-native-q-macos-20261019/evidence/restored-fences-results.json"
+    ],
+    "start_epoch": 1792449376.976832,
+    "seconds": 0.4108879566192627,
+    "cap": 84.02316808700562,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 34816000,
+    "samples": 5,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  },
+  {
+    "name": "shell-semantics",
+    "args": [
+      "python3",
+      "/private/tmp/file-native-q-macos-20261019/shell_semantics.py"
+    ],
+    "start_epoch": 1792449437.209354,
+    "seconds": 2.3375439643859863,
+    "cap": 23.790646076202393,
+    "exit": 0,
+    "status": "success",
+    "censor": null,
+    "sampled_aggregate_peak_bytes": 25182208,
+    "samples": 27,
+    "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+  }
+]

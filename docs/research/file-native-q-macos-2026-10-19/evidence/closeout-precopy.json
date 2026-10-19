@@ -1,0 +1,15 @@
+{
+  "utc": "2026-10-19T22:37:46.040258+00:00",
+  "scratch_logical_bytes": 206403487,
+  "scratch_files": 8463,
+  "new_total_logical_bytes_before_final_report_and_worktree_result_copy": 607948509,
+  "new_total_files_before_final_report_and_worktree_result_copy": 13001,
+  "total_new_cap": 1073741824,
+  "new_files_cap": 50000,
+  "free_bytes": 188862357504,
+  "free_reserve": 21474836480,
+  "engine_wait4_peak_bytes": 4882432,
+  "engine_wait4_samples": 467,
+  "sampled_aggregate_peak_bytes": 529416192,
+  "qualification": "Sampled RSS can miss short peaks. wait4 ru_maxrss is native macOS bytes per wrapped engine. Original first sampler failure retained. Final metadata/result-copy delta will be separately censused."
+}

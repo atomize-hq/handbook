@@ -1,0 +1,151 @@
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-attachments-d000009/evidence
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-project-source-15-d000015.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-project-source-13-d000013.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item---d000008.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-con-d000003.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-case-d000006.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-case-d000007.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-project-source-14-d000014.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-project-source-11-d000011.yaml
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-project-source-12-d000012.json
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-project-source-10-d000010.yaml
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-con--d000004.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-aux--d000005.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-renamed-title-d000001.yaml
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/packet/provenance.json
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/packet/context.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/collection.yaml
+3:  - id: "d000001"
+4:    title: "Renamed title"
+5:    kind: "requirement"
+6:    source: "docs/item-renamed-title-d000001.yaml"
+8:  - id: "d000003"
+9:    title: "CON"
+10:    kind: "decision-source"
+11:    source: "docs/item-con-d000003.md"
+13:  - id: "d000004"
+14:    title: "con."
+15:    kind: "decision-source"
+16:    source: "docs/item-con--d000004.md"
+18:  - id: "d000005"
+19:    title: "AUX "
+20:    kind: "decision-source"
+21:    source: "docs/item-aux--d000005.md"
+23:  - id: "d000006"
+24:    title: "Case"
+25:    kind: "decision-source"
+26:    source: "docs/item-case-d000006.md"
+28:  - id: "d000007"
+29:    title: "case"
+30:    kind: "decision-source"
+31:    source: "docs/item-case-d000007.md"
+33:  - id: "d000008"
+34:    title: "é"
+35:    kind: "decision-source"
+36:    source: "docs/item---d000008.md"
+38:  - id: "d000009"
+39:    title: "é"
+40:    kind: "attachment"
+41:    source: "docs/item-attachments-d000009/evidence"
+43:  - id: "d000010"
+44:    title: "project source 10"
+45:    kind: "overview"
+46:    source: "docs/item-project-source-10-d000010.yaml"
+48:  - id: "d000011"
+49:    title: "project source 11"
+50:    kind: "requirement"
+51:    source: "docs/item-project-source-11-d000011.yaml"
+53:  - id: "d000012"
+54:    title: "project source 12"
+55:    kind: "exact-json"
+56:    source: "docs/item-project-source-12-d000012.json"
+58:  - id: "d000013"
+59:    title: "project source 13"
+60:    kind: "decision-source"
+61:    source: "docs/item-project-source-13-d000013.md"
+63:  - id: "d000014"
+64:    title: "project source 14"
+65:    kind: "decision-source"
+66:    source: "docs/item-project-source-14-d000014.md"
+68:  - id: "d000015"
+69:    title: "project source 15"
+70:    kind: "decision-source"
+71:    source: "docs/item-project-source-15-d000015.md"
+57cb37815517806140ddc9244b4bdb60b185b23f9bc5465c0ba25c7ff47e8812  /private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store/view/docs/item-renamed-title-d000001.yaml
+57cb37815517806140ddc9244b4bdb60b185b23f9bc5465c0ba25c7ff47e8812  /private/tmp/file-native-q-macos-20261019/bash-copy-A/exact
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-attachments-d000009/evidence/deep/source.txt
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-project-source-15-d000015.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-project-source-13-d000013.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item---d000008.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-con-d000003.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-case-d000006.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-case-d000007.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-project-source-14-d000014.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-project-source-11-d000011.yaml
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-project-source-12-d000012.json
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-project-source-10-d000010.yaml
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-con--d000004.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-aux--d000005.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-renamed-title-d000001.yaml
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/MANIFEST.json
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/packet/provenance.json
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/packet/context.md
+/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/collection.yaml
+3:  - id: "d000001"
+4:    title: "Renamed title"
+5:    kind: "requirement"
+6:    source: "docs/item-renamed-title-d000001.yaml"
+8:  - id: "d000003"
+9:    title: "CON"
+10:    kind: "decision-source"
+11:    source: "docs/item-con-d000003.md"
+13:  - id: "d000004"
+14:    title: "con."
+15:    kind: "decision-source"
+16:    source: "docs/item-con--d000004.md"
+18:  - id: "d000005"
+19:    title: "AUX "
+20:    kind: "decision-source"
+21:    source: "docs/item-aux--d000005.md"
+23:  - id: "d000006"
+24:    title: "Case"
+25:    kind: "decision-source"
+26:    source: "docs/item-case-d000006.md"
+28:  - id: "d000007"
+29:    title: "case"
+30:    kind: "decision-source"
+31:    source: "docs/item-case-d000007.md"
+33:  - id: "d000008"
+34:    title: "é"
+35:    kind: "decision-source"
+36:    source: "docs/item---d000008.md"
+38:  - id: "d000009"
+39:    title: "é"
+40:    kind: "attachment"
+41:    source: "docs/item-attachments-d000009/evidence/deep/source.txt"
+43:  - id: "d000010"
+44:    title: "project source 10"
+45:    kind: "overview"
+46:    source: "docs/item-project-source-10-d000010.yaml"
+48:  - id: "d000011"
+49:    title: "project source 11"
+50:    kind: "requirement"
+51:    source: "docs/item-project-source-11-d000011.yaml"
+53:  - id: "d000012"
+54:    title: "project source 12"
+55:    kind: "exact-json"
+56:    source: "docs/item-project-source-12-d000012.json"
+58:  - id: "d000013"
+59:    title: "project source 13"
+60:    kind: "decision-source"
+61:    source: "docs/item-project-source-13-d000013.md"
+63:  - id: "d000014"
+64:    title: "project source 14"
+65:    kind: "decision-source"
+66:    source: "docs/item-project-source-14-d000014.md"
+68:  - id: "d000015"
+69:    title: "project source 15"
+70:    kind: "decision-source"
+71:    source: "docs/item-project-source-15-d000015.md"
+57cb37815517806140ddc9244b4bdb60b185b23f9bc5465c0ba25c7ff47e8812  /private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store/generations/attempt-2952-1792449216605487000-0/docs/item-renamed-title-d000001.yaml
+57cb37815517806140ddc9244b4bdb60b185b23f9bc5465c0ba25c7ff47e8812  /private/tmp/file-native-q-macos-20261019/bash-copy-B/exact

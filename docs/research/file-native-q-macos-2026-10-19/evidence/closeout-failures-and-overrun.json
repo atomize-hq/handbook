@@ -1,0 +1,22 @@
+{
+  "artifact_copy_completed_epoch": 1792452805.767122,
+  "artifact_whitespace_check": {
+    "status": "failure",
+    "error": "evidence/cargo-test.stdout:27: new blank line at EOF.",
+    "resolution": "Preserve raw bytes; exclude raw captured outputs from source whitespace policy."
+  },
+  "harness_preparation": {
+    "status": "failure",
+    "error": "NameError: name 'json' is not defined",
+    "resolution": "Import json before binary receipt write; generated scripts and copied binary were already complete."
+  },
+  "native_ps_sandbox_probe": {
+    "status": "unavailable-in-sandbox",
+    "error": "operation not permitted: ps",
+    "resolution": "Explicit platform approval obtained for native monitor."
+  },
+  "original_deadline_epoch": 1792449551,
+  "functional_checks_after_deadline": false,
+  "closeout_after_deadline_authorized_by_coordinator": true,
+  "closeout_preparation_utc": "2026-10-19T23:34:08.730090+00:00"
+}

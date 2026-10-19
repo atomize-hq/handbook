@@ -1,0 +1,19 @@
+{
+  "args": [
+    "cargo",
+    "build",
+    "--locked",
+    "--offline",
+    "--release",
+    "-j2"
+  ],
+  "start_epoch": 1792449149.847191,
+  "seconds": 14.649263858795166,
+  "cap": 120.0,
+  "exit": 0,
+  "status": "success",
+  "censor": null,
+  "sampled_aggregate_peak_bytes": 529416192,
+  "samples": 178,
+  "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+}

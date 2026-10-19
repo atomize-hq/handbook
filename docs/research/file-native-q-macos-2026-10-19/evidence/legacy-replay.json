@@ -1,0 +1,21 @@
+{
+  "args": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook/docs/research/file-native-recovery-reclamation-2026-10-19/legacy_compatibility.py",
+    "--exe",
+    "/private/tmp/file-native-q-macos-20261019/final-engine",
+    "--fixtures",
+    "/private/tmp/file-native-q-macos-20261019/legacy-fixtures",
+    "--base",
+    "/private/tmp/file-native-q-macos-20261019/legacy-replayed"
+  ],
+  "start_epoch": 1792449425.157699,
+  "seconds": 2.9168479442596436,
+  "cap": 35.84230089187622,
+  "exit": 0,
+  "status": "success",
+  "censor": null,
+  "sampled_aggregate_peak_bytes": 26279936,
+  "samples": 34,
+  "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+}

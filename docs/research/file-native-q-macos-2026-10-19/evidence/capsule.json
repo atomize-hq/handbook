@@ -1,0 +1,19 @@
+{
+  "args": [
+    "python3",
+    "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook/docs/research/file-native-recovery-reclamation-2026-10-19/capsule.py",
+    "--exe",
+    "/private/tmp/file-native-q-macos-20261019/engine",
+    "--scratch",
+    "/private/tmp/file-native-q-macos-20261019/capsule"
+  ],
+  "start_epoch": 1792449200.0679958,
+  "seconds": 68.26484823226929,
+  "cap": 180.0,
+  "exit": 0,
+  "status": "success",
+  "censor": null,
+  "sampled_aggregate_peak_bytes": 60211200,
+  "samples": 806,
+  "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+}

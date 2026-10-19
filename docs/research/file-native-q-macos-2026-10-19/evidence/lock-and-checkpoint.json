@@ -1,0 +1,19 @@
+{
+  "args": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18/deep_cases.py",
+    "--exe",
+    "/private/tmp/file-native-q-macos-20261019/engine",
+    "--base",
+    "/private/tmp/file-native-q-macos-20261019/deep"
+  ],
+  "start_epoch": 1792449379.786148,
+  "seconds": 28.001110792160034,
+  "cap": 81.21385192871094,
+  "exit": 0,
+  "status": "success",
+  "censor": null,
+  "sampled_aggregate_peak_bytes": 62570496,
+  "samples": 323,
+  "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+}

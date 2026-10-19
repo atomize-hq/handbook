@@ -1,0 +1,24 @@
+{
+  "pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+  "paths": [
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/Cargo.toml",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/src/main.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/Cargo.toml",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/src/main.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs"
+  ]
+}

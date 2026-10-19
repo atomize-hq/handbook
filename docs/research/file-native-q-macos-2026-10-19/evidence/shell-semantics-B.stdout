@@ -1,0 +1,105 @@
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-attachments-d000009/evidence/deep/source.txt
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-project-source-15-d000015.md
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-project-source-13-d000013.md
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item---d000008.md
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-con-d000003.md
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-overview-d000000.yaml
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-case-d000006.md
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-case-d000007.md
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-project-source-14-d000014.md
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-requirement---d000001.yaml
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-project-source-11-d000011.yaml
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-project-source-12-d000012.json
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-project-source-10-d000010.yaml
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-con--d000004.md
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-aux--d000005.md
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/docs/item-decision-caf--d000002.json
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/MANIFEST.json
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/packet/provenance.json
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/packet/context.md
+/private/tmp/file-native-q-macos-20261019/shell-B/generations/attempt-11183-1792449439131709000-0/collection.yaml
+3:  - id: "d000000"
+4:    title: "Overview"
+5:    kind: "overview"
+6:    source: "docs/item-overview-d000000.yaml"
+8:      - kind: "requires"
+9:        target: "d000001"
+10:        external: false
+11:      - kind: "attachment"
+12:        target: "d000009"
+13:        external: false
+14:  - id: "d000001"
+15:    title: "Requirement α"
+16:    kind: "requirement"
+17:    source: "docs/item-requirement---d000001.yaml"
+19:      - kind: "cites"
+20:        target: "d000002"
+21:        external: false
+22:      - kind: "cites"
+23:        target: "d000003"
+24:        external: false
+25:      - kind: "cites"
+26:        target: "d000003"
+27:        external: false
+28:      - kind: "requires"
+29:        target: "d000004"
+30:        external: false
+31:  - id: "d000002"
+32:    title: "Decision café"
+33:    kind: "exact-json"
+34:    source: "docs/item-decision-caf--d000002.json"
+36:      - kind: "cites"
+37:        target: "https://unavailable.invalid/source"
+38:        external: true
+39:  - id: "d000003"
+40:    title: "CON"
+41:    kind: "decision-source"
+42:    source: "docs/item-con-d000003.md"
+44:  - id: "d000004"
+45:    title: "con."
+46:    kind: "decision-source"
+47:    source: "docs/item-con--d000004.md"
+49:  - id: "d000005"
+50:    title: "AUX "
+51:    kind: "decision-source"
+52:    source: "docs/item-aux--d000005.md"
+54:  - id: "d000006"
+55:    title: "Case"
+56:    kind: "decision-source"
+57:    source: "docs/item-case-d000006.md"
+59:  - id: "d000007"
+60:    title: "case"
+61:    kind: "decision-source"
+62:    source: "docs/item-case-d000007.md"
+64:  - id: "d000008"
+65:    title: "é"
+66:    kind: "decision-source"
+67:    source: "docs/item---d000008.md"
+69:  - id: "d000009"
+70:    title: "é"
+71:    kind: "attachment"
+72:    source: "docs/item-attachments-d000009/evidence/deep/source.txt"
+74:  - id: "d000010"
+75:    title: "project source 10"
+76:    kind: "overview"
+77:    source: "docs/item-project-source-10-d000010.yaml"
+79:  - id: "d000011"
+80:    title: "project source 11"
+81:    kind: "requirement"
+82:    source: "docs/item-project-source-11-d000011.yaml"
+84:  - id: "d000012"
+85:    title: "project source 12"
+86:    kind: "exact-json"
+87:    source: "docs/item-project-source-12-d000012.json"
+89:  - id: "d000013"
+90:    title: "project source 13"
+91:    kind: "decision-source"
+92:    source: "docs/item-project-source-13-d000013.md"
+94:  - id: "d000014"
+95:    title: "project source 14"
+96:    kind: "decision-source"
+97:    source: "docs/item-project-source-14-d000014.md"
+99:  - id: "d000015"
+100:    title: "project source 15"
+101:    kind: "decision-source"
+102:    source: "docs/item-project-source-15-d000015.md"

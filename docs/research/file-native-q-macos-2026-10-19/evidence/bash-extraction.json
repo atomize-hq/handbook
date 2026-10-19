@@ -1,0 +1,15 @@
+{
+  "args": [
+    "/bin/bash",
+    "/private/tmp/file-native-q-macos-20261019/bash-extract.sh"
+  ],
+  "start_epoch": 1792449378.852984,
+  "seconds": 0.1655900478363037,
+  "cap": 82.1470160484314,
+  "exit": 0,
+  "status": "success",
+  "censor": null,
+  "sampled_aggregate_peak_bytes": 2228224,
+  "samples": 2,
+  "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+}
