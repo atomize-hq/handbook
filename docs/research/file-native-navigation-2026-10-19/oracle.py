@@ -132,6 +132,8 @@ def verify(root,reference=None,readable=None):
         names={x.relative_to(readable).as_posix() for x in readable.rglob('*') if x.is_file()};names.discard('MANIFEST.json');assert names==set(projection)
         if config['mode']=='B':assert strict(checked(readable/'MANIFEST.json',p['generation_manifest']))==projection
         assert navigation(readable)==expected
-        for path,f in projection.items():checked(readable/path,f['digest'])
+        for path,f in projection.items():
+            checked(readable/path,f['digest'])
+            if config['mode']=='B':assert (readable/path).stat().st_nlink==1
         for h in docs.values():assert (readable/h['doc']['path']).read_bytes()==checked(root/h['doc']['original'],h['doc']['digest'])
     return dict(documents=len(docs),supplemented_documents=len(expected),projection_files=len(projection),immutable_discovery_semantics_verified=True,readable_declared_current=current,discovery_relationships_and_extraction=current)

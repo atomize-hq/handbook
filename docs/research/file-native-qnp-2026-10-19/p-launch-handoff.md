@@ -6,6 +6,12 @@ this note preserves execution details needed by a later fresh top-level P chat.
 The human authorized the Q/N/P increment and approved a 40 GiB combined ceiling.
 No further routine permission is needed for work inside that authorized scope.
 
+P must use a preemptive 900-second process-group watchdog for complete independent
+verification and enforce applicable checker/aggregate memory budgets. Do not copy
+N's measurement-only post-return elapsed assertion as a hard watchdog. N's final
+report preserves that enforcement gap and its boundary RSS observations; future
+P claims need the stronger supervision before execution.
+
 ## Launch and source binding
 
 Before launch, the parent reviews Q/N results, freezes the actual integrated

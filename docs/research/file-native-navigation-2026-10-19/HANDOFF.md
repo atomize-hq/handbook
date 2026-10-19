@@ -67,3 +67,38 @@ not the same quantity as changed output files or physical writes.
 The preexisting GitNexus graph cannot resolve this worktree; retained impact and
 detect-changes failures remain UNKNOWN, with manual call tracing substituted.
 No power-loss qualification, N100k run, production adoption, or packing is implied.
+
+## Closed Windows measurement handoff
+
+The final engine is frozen at `4bde156323812ef18c0dea6798cfc2108aaad933`.
+Its Windows binary SHA-256 is
+`d4b7c495abfc029e8fabd6fcfc75501c5de04ce72dd38847a69bc8824022303f`.
+The ordinary Windows matrix and full focused suite used core
+`6e66a7523612b80386cf9cc2b96d5341579b54fd`, executable SHA-256
+`6336944d13967dfce04e4cc40b3459cdac4718b223dda147dcd202598ad50558`.
+The final core only omits inherited Markdown guidance for new profile4 genesis;
+eight checks on the final binary verify this change. Do not relabel the matrix.
+
+Read `report.md`, `results/qualification-summary.json`, and the indexed raw
+archive for coverage and censors. The 195 primary operation rows check complete
+views; 24 extra deferred-view rows are separate controls. N10k A4 initialization
+was censored then resumed from its authentic selected prefix, retaining the
+original admission epoch. Full A10k profiles3/2 are authenticated restore-backed
+comparators with an untimed normalization publication. N10k B initialization
+was censored before selection and was never restarted. B10k profiles2/3 and all
+B10k ordinary operations are unperformed.
+
+Late harness options support authenticated operational restore, original-epoch
+continuation, payload-only seeding at the existing creation barrier and owned
+byte/file guards. Native focused defaults do not use these matrix-only options.
+Do not reuse an existing successful base or fabricate a selector/control file.
+The amended full-control launcher retains successful fixtures; its completed
+original runs used the stricter 1GiB/100000-file guard. Profile3's fixture had
+already been removed by the old launcher before the retention amendment; its
+raw results and original input capture survive. Profile2's fixture is retained.
+The old suspended launcher was stopped after child completion to preserve it.
+
+The coordinator owns Linux/Mac/integration and P. Linux final4bde full qualification
+was reported passed; Mac was incomplete at this worker's last update. This
+handoff does not authorize or declare a P-gate pass. All source/tool bindings,
+current census, residue and rejected-cleanup details are explicit in the report.

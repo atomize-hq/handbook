@@ -16,7 +16,7 @@ original H101003 store, original archive and final H101006 clone are preserved.
 | --- | --- | --- |
 | Q native Linux/ext4 | required named cases passed; reviewed and integrated | optional stress censor and late read-only closeout remain explicit |
 | Q native macOS | required functional cases passed; reviewed and integrated | approval-delayed artifact closeout exceeded original budget; explicitly retained |
-| N Windows | frozen 4bde core integrated; measurements continue | final report and bounded comparator closeout |
+| N Windows | frozen 4bde core and final 83f7330f report reviewed and integrated | native Mac qualification remains the functional gate |
 | N native Linux/ext4 | final 4bde: 39 focused, 24 recovery, eight README cases passed | source, archive and native binary authenticated; reports integrated |
 | N native macOS | final 4bde tests/build passed; full suite censored at original cutoff | original attempt remains censored; remainder-stage admission under the still-active overall N window is being assessed |
 | P | undispatched | reviewed Q/N, actual integrated-pin native qualification, frozen navigation |
@@ -90,6 +90,12 @@ launcher before the later retention amendment; raw measurements and authenticate
 restore input survive. Profile 2's full fixture is retained. See
 [the full-control review](evidence/coordinator-navigation-full-control-review.json).
 No deleted control state is reconstructed or passed test repeated for retention.
+The parent authenticated all 175 raw archive members (30,818,359 expanded bytes),
+all 16 final source bindings and the final Windows executable. The
+[final N report](../file-native-navigation-2026-10-19/report.md) explicitly records
+the non-preemptive measurement-checker timeout and boundary RSS observations;
+neither is presented as a continuously enforced resource bound. See
+[the final parent review](evidence/coordinator-navigation-final-review.json).
 
 For Q Mac, the parent matched all 15 baseline core files, 19 pinned harnesses and
 seven added harnesses against committed blobs, checked all 282 capsule events and

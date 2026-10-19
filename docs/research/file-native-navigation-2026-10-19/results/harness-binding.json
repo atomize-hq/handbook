@@ -1,0 +1,20 @@
+{
+  "note": "Closeout harness version; late continuation/admission/reporting changes are not relabeled as the originally measured harness. Raw events and original committed native kit remain bound to their runs.",
+  "files": {
+    "archive_fixture.py": "e35d428146f33016b00543616d473355b7ea8fc2e2acda5f9ab6107ca87f5540",
+    "census.py": "efc320fa4ebe77e6abc04a2b3e067b202ad177ecd63a0de77a2aa320a819fa24",
+    "closeout.py": "73e547ee685455b10b2042f5951a3aedbdafad9c05c32941f4a7c5849e99998d",
+    "continue-n10k.ps1": "28491d58f21545bca140693411947e3f248f9615d2d303300bb08dd3b3b60a4e",
+    "controls-n10k.ps1": "76d0e6954c6ef814f0a87f7c8000bf25613cee0648dbafeec12e75c562b34c42",
+    "focused.py": "482d54fc38aa1412022980ffc42af9b61d196b5dbb84a1adbf0fbb0e054bb412",
+    "full-controls-n10k.ps1": "f6aca67eb1bb56647a3ebde9fccd875f323c87fab13bd92fc3b2b7b72b853d1a",
+    "genesis_delta.py": "8797f823e82aab8f6042db18714baf9e845bed61a4c183dbf935e359162c21a8",
+    "measure.py": "63ae6deac8737223c87570e25fd216b9d575fb48707c65c922dd7d180a8059e3",
+    "oracle.py": "877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f",
+    "ordinary.ps1": "f8126b1d413e65814b5d230b168303b430ab0f6edaa01c94e0f85df03e9cd778",
+    "run-matrix.ps1": "0d0898cd00cd81b2f883e406850aa727c7d9817375cef0e7465a814a37a20f1d",
+    "seed.py": "dee6b294bfcdb70af6bedf2d8fa2bc7a1a13adef4d81dd1aa4c6ad2a94e3b903",
+    "stage1.py": "3eda45a36ae84a12faa61049c355dd4642186564242f3d058bdd65c4540a9b58",
+    "summarize.py": "78a739fa5d5e0351754fb471dbb698becc087b7669c036a07b3651b34efa205f"
+  }
+}

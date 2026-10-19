@@ -23,16 +23,38 @@ def rss(pid):
     except (OSError,ValueError,subprocess.TimeoutExpired):return None
 
 class Driver:
-    def __init__(self,exe,base):
-        self.exe=str(Path(exe).resolve());self.base=Path(base).resolve();self.base.mkdir(parents=True,exist_ok=False);self.events=[];self.start=time.monotonic()
+    def __init__(self,exe,base,reuse_epoch=None,seed_archive=None):
+        self.exe=str(Path(exe).resolve());self.base=Path(base).resolve();self.base.mkdir(parents=True,exist_ok=reuse_epoch is not None)
+        self.events=json.loads((self.base/'events.json').read_bytes()) if reuse_epoch is not None else []
+        self.start=time.monotonic()-(max(0,time.time()-reuse_epoch) if reuse_epoch is not None else 0)
+        self.seed_archive=Path(seed_archive).resolve() if seed_archive else None
     def call(self,root,action,code=0,profile=4,defer=False,exit_at=None,**fields):
         root=Path(root).resolve();assert root.is_relative_to(self.base)
         assert time.monotonic()-self.start<1800
         env={k:v for k,v in os.environ.items() if not k.startswith('EXP_')};env['EXP_NAVIGATION']=str(profile)
         if defer:env['EXP_DEFER_REFRESH']='1'
         if exit_at:env['EXP_EXIT']=exit_at
+        seed_receipt={}
+        if action=='init' and self.seed_archive:
+            env.update(EXP_BARRIER='lock-acquired',EXP_READY=str(self.base/'seed-ready'),EXP_RELEASE=str(self.base/'seed-release'))
         payload=dict(root=str(root),action=action,**fields);begin=time.monotonic();peak=[0];stop=threading.Event();violation=[]
         p=subprocess.Popen([self.exe],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env)
+        if action=='init' and self.seed_archive:
+            def seed():
+                try:
+                    import tarfile
+                    began=time.monotonic()
+                    while not (self.base/'seed-ready').exists():
+                        assert p.poll() is None and time.monotonic()-began<30
+                        time.sleep(.01)
+                    with tarfile.open(self.seed_archive) as archive:
+                        members=archive.getmembers();assert len(members)<20000 and sum(m.size for m in members)<160*1024**2
+                        for m in members:assert m.isfile() and Path(m.name).parts[0]=='originals' and (root/m.name).resolve().is_relative_to(root)
+                        archive.extractall(root,filter='data')
+                    seed_receipt.update(archive=str(self.seed_archive),sha256=hashlib.sha256(self.seed_archive.read_bytes()).hexdigest(),files=len(members),logical_bytes=sum(m.size for m in members),seconds=time.monotonic()-began)
+                    (self.base/'seed-release').write_bytes(b'release')
+                except BaseException as e:violation.append('seed:'+repr(e));p.kill()
+            threading.Thread(target=seed,daemon=True).start()
         limit=256*1024**2 if action in ['point','inspect','resolve'] else 2*1024**3
         def sample():
             while not stop.is_set():
@@ -45,12 +67,12 @@ class Driver:
         except subprocess.TimeoutExpired:
             p.kill();out,err=p.communicate();violation.append('120s-censor')
         finally:stop.set();t.join(timeout=3)
-        row=dict(input=payload,profile=profile,defer=defer,exit_at=exit_at,exit=p.returncode,seconds=time.monotonic()-begin,sampled_peak_rss=peak[0] or None,rss_limit=limit,violations=violation,stdout=out.decode(),stderr=err.decode());self.events.append(row)
+        row=dict(input=payload,profile=profile,defer=defer,exit_at=exit_at,exit=p.returncode,seconds=time.monotonic()-begin,sampled_peak_rss=peak[0] or None,rss_limit=limit,violations=violation,seed_receipt=seed_receipt or None,stdout=out.decode(),stderr=err.decode());self.events.append(row)
         (self.base/'events.json').write_text(json.dumps(self.events,indent=2),encoding='utf-8')
         assert not violation and p.returncode==code,row
         return json.loads(out) if out else None
-    def init(self,name,mode='A',n=128,profile=4):
-        root=self.base/name/'disposable/store';self.call(root,'init',profile=profile,mode=mode,count=n,consumer='project');return root
+    def init(self,name,mode='A',n=128,profile=4,defer=False):
+        root=self.base/name/'disposable/store';self.call(root,'init',profile=profile,mode=mode,count=n,consumer='project',defer=defer);return root
     def head(self,root):return json.loads((root/'SELECTED.json').read_bytes())
     def publish(self,root,name,ops,packet=False,defer=False,profile=4):
         request=dict(request=name,base=self.head(root),ops=ops,packet=packet)

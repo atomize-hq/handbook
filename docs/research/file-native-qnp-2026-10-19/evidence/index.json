@@ -23,9 +23,21 @@
     "bytes": 2151,
     "sha256": "ba3f391ca7e56875a2440abd066551bcfe8ac7e6a03dbcace54e8057e8523928"
   },
+  "coordinator-navigation-final-precommit.txt": {
+    "bytes": 2151,
+    "sha256": "ba3f391ca7e56875a2440abd066551bcfe8ac7e6a03dbcace54e8057e8523928"
+  },
+  "coordinator-navigation-final-review.json": {
+    "bytes": 2363,
+    "sha256": "8f57fd650d5189bb71debcf125d2bbcd0cd9d639d549c078eeb2e0655608445f"
+  },
   "coordinator-navigation-full-control-review.json": {
     "bytes": 2843,
     "sha256": "b90ae87ab3bee2268ea6074eee3aaa0a60cd06206e0915e8877dbf8b616417e0"
+  },
+  "coordinator-navigation-harness-impact.json": {
+    "bytes": 7857,
+    "sha256": "7ae9494f55d639866fe6a0eeb94b8fe95da36939cd9b4c426071291808635aa6"
   },
   "coordinator-navigation-impact-attempts.json": {
     "bytes": 22582,

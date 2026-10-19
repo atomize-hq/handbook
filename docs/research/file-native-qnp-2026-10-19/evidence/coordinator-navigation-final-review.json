@@ -1,0 +1,33 @@
+{
+  "epoch": 1792454234.7371433,
+  "worker_commit": "83f7330f00dd35ad7b6d8c3c850f5f8bcc1be75e",
+  "core_commit": "4bde156323812ef18c0dea6798cfc2108aaad933",
+  "core_files_verified": [
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock"
+  ],
+  "archive_sha256": "3c50268d3d3f2443c27d6707791d1b4090ef35adaf2762ce2f0ca97d5be67850",
+  "archive_bytes": 6188466,
+  "raw_members_verified": 175,
+  "raw_bytes_verified": 30818359,
+  "actual_complete_view_measurements": 195,
+  "separately_labeled_deferred_view_controls": 24,
+  "B10k_edit_matrix": "unperformed after120s initializationcensor/noSELECTED",
+  "remaining_gate": "Mac exactfinal native remainderqualification not yetadmitted",
+  "limits": "checker elapsed900s assertedafterreturn; checker memoryboundarysampling; historicalaggregatepeaksnotcontinuouslysampled; documentedinstrumentationgapsnotcleanproof",
+  "final_Windows_binary_parent_rehash": "d4b7c495abfc029e8fabd6fcfc75501c5de04ce72dd38847a69bc8824022303f"
+}

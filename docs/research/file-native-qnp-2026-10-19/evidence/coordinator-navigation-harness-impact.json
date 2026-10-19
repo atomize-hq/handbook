@@ -1,0 +1,55 @@
+{
+  "epoch": 1792454288.2887645,
+  "worktree": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook",
+  "risk": "UNKNOWN/unregistered; manual diff review of measurement/seed/restore/extraction/sourcebinding/closeout paths, no engine changes",
+  "attempts": [
+    {
+      "target": "Driver::__init__",
+      "exit": 1,
+      "stdout": "{\n  \"error\": \"Repository \\\"C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-qnp-integration-20261019\\\\handbook\\\" not found. Available: handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation-20260808), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\hcm32r-adf08a6e\\\\handbook), handbook (C:\\\\Users\\\\spmcc\\\\Documents\\\\__Project_Code\\\\handbook)\",\n  \"target\": {\n    \"name\": \"Driver::__init__\"\n  },\n  \"direction\": \"upstream\",\n  \"suggestion\": \"Try reducing --depth or using gitnexus context <symbol> as a fallback\"\n}\n",
+      "stderr": "\n  GitNexus Impact (1.6.12)\n"
+    },
+    {
+      "target": "Driver::call",
+      "exit": 1,
+      "stdout": "{\n  \"error\": \"Repository \\\"C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-qnp-integration-20261019\\\\handbook\\\" not found. Available: handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation-20260808), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\hcm32r-adf08a6e\\\\handbook), handbook (C:\\\\Users\\\\spmcc\\\\Documents\\\\__Project_Code\\\\handbook)\",\n  \"target\": {\n    \"name\": \"Driver::call\"\n  },\n  \"direction\": \"upstream\",\n  \"suggestion\": \"Try reducing --depth or using gitnexus context <symbol> as a fallback\"\n}\n",
+      "stderr": "\n  GitNexus Impact (1.6.12)\n"
+    },
+    {
+      "target": "verify",
+      "exit": 1,
+      "stdout": "{\n  \"error\": \"Repository \\\"C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-qnp-integration-20261019\\\\handbook\\\" not found. Available: handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation-20260808), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\hcm32r-adf08a6e\\\\handbook), handbook (C:\\\\Users\\\\spmcc\\\\Documents\\\\__Project_Code\\\\handbook)\",\n  \"target\": {\n    \"name\": \"verify\"\n  },\n  \"direction\": \"upstream\",\n  \"suggestion\": \"Try reducing --depth or using gitnexus context <symbol> as a fallback\"\n}\n",
+      "stderr": "\n  GitNexus Impact (1.6.12)\n"
+    },
+    {
+      "target": "measure::run",
+      "exit": 1,
+      "stdout": "{\n  \"error\": \"Repository \\\"C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-qnp-integration-20261019\\\\handbook\\\" not found. Available: handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation-20260808), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\hcm32r-adf08a6e\\\\handbook), handbook (C:\\\\Users\\\\spmcc\\\\Documents\\\\__Project_Code\\\\handbook)\",\n  \"target\": {\n    \"name\": \"measure::run\"\n  },\n  \"direction\": \"upstream\",\n  \"suggestion\": \"Try reducing --depth or using gitnexus context <symbol> as a fallback\"\n}\n",
+      "stderr": "\n  GitNexus Impact (1.6.12)\n"
+    },
+    {
+      "target": "seed",
+      "exit": 1,
+      "stdout": "{\n  \"error\": \"Repository \\\"C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-qnp-integration-20261019\\\\handbook\\\" not found. Available: handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation-20260808), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\hcm32r-adf08a6e\\\\handbook), handbook (C:\\\\Users\\\\spmcc\\\\Documents\\\\__Project_Code\\\\handbook)\",\n  \"target\": {\n    \"name\": \"seed\"\n  },\n  \"direction\": \"upstream\",\n  \"suggestion\": \"Try reducing --depth or using gitnexus context <symbol> as a fallback\"\n}\n",
+      "stderr": "\n  GitNexus Impact (1.6.12)\n"
+    },
+    {
+      "target": "archive_fixture",
+      "exit": 1,
+      "stdout": "{\n  \"error\": \"Repository \\\"C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-qnp-integration-20261019\\\\handbook\\\" not found. Available: handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation-20260808), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\hcm32r-adf08a6e\\\\handbook), handbook (C:\\\\Users\\\\spmcc\\\\Documents\\\\__Project_Code\\\\handbook)\",\n  \"target\": {\n    \"name\": \"archive_fixture\"\n  },\n  \"direction\": \"upstream\",\n  \"suggestion\": \"Try reducing --depth or using gitnexus context <symbol> as a fallback\"\n}\n",
+      "stderr": "\n  GitNexus Impact (1.6.12)\n"
+    },
+    {
+      "target": "closeout",
+      "exit": 1,
+      "stdout": "{\n  \"error\": \"Repository \\\"C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-qnp-integration-20261019\\\\handbook\\\" not found. Available: handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation-20260808), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\hcm32r-adf08a6e\\\\handbook), handbook (C:\\\\Users\\\\spmcc\\\\Documents\\\\__Project_Code\\\\handbook)\",\n  \"target\": {\n    \"name\": \"closeout\"\n  },\n  \"direction\": \"upstream\",\n  \"suggestion\": \"Try reducing --depth or using gitnexus context <symbol> as a fallback\"\n}\n",
+      "stderr": "\n  GitNexus Impact (1.6.12)\n"
+    },
+    {
+      "target": "summarize",
+      "exit": 1,
+      "stdout": "{\n  \"error\": \"Repository \\\"C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-qnp-integration-20261019\\\\handbook\\\" not found. Available: handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\orchestration\\\\handbook-hcm-3-6-implementation-20260808), handbook (C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\hcm32r-adf08a6e\\\\handbook), handbook (C:\\\\Users\\\\spmcc\\\\Documents\\\\__Project_Code\\\\handbook)\",\n  \"target\": {\n    \"name\": \"summarize\"\n  },\n  \"direction\": \"upstream\",\n  \"suggestion\": \"Try reducing --depth or using gitnexus context <symbol> as a fallback\"\n}\n",
+      "stderr": "\n  GitNexus Impact (1.6.12)\n"
+    }
+  ]
+}
