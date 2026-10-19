@@ -1,0 +1,9 @@
+{
+  "start_epoch": 1792451937.86653,
+  "compiler": "rustc 1.89.0 (29483883e 2025-08-04)\n",
+  "cargo": "cargo 1.89.0 (c24e10642 2025-06-23)\n",
+  "python": "3.13.7 (main, Aug 15 2025, 12:34:02) [GCC 15.2.1 20250813]",
+  "source_verified": true,
+  "preserved_6e66_binary_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e",
+  "supervisor_sha256": "b8e233811adac0e71112fcec38e42780167b024c592119f341eb0ac2aeb67663"
+}

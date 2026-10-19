@@ -1,0 +1,18 @@
+{
+  "candidate": "4bde156323812ef18c0dea6798cfc2108aaad933",
+  "core_src_tree": "d22e997c7c75940a6b4077368549d28c1780ef49",
+  "core_files": 16,
+  "only_changed_core_file": [
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs"
+  ],
+  "archive_sha256": "07ec4c40e36489424f23b05d58732c0baa511f2e28d4fa578254846b6e5e7548",
+  "raw_files_verified": 30,
+  "raw_bytes_verified": 3050382,
+  "native_executable_sha256": "da75d34e5fe162447e356aead2fba0f2a1ac21bc1055ebb3812bce80fda79846",
+  "source_manifest_sha256": "4e9a39306385256489df87dca084870843cf1c75fdaccc3008fc5abfe0a7f1d2",
+  "native_harness_matches_local": true,
+  "focused_cases": 39,
+  "recovery_cases": 24,
+  "README_smoke_cases": 8,
+  "all_completed_assertions_passed": true
+}

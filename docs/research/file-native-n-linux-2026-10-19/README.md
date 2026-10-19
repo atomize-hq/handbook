@@ -1,5 +1,10 @@
 # Native Linux N source-delta qualification
 
+The later initialization-only candidate `4bde156323812ef18c0dea6798cfc2108aaad933`
+has a [separate final-pin qualification](final-4bde/README.md), including a fresh
+build, full focused/recovery run and explicit README compatibility checks. All
+results below remain bound to `6e66a752`; they have not been relabeled.
+
 The required bounded native delta passed on Linux/ext4 at exact candidate
 `6e66a7523612b80386cf9cc2b96d5341579b54fd`. This is a fresh N lane, separate
 from the closed Q qualification. No engine source, dependency, format contract,

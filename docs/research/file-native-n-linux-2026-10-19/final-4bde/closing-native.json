@@ -1,0 +1,219 @@
+{
+  "epoch": 1792452174.3389056,
+  "harness_sha256": "541d3b3001cb1ad1ac1ee8e3297d6c74ecce4a58d4165951a35a8e911867813c",
+  "candidate": "4bde156323812ef18c0dea6798cfc2108aaad933",
+  "native_owned": {
+    "root": "/home/spenser/file-native-n-linux-20261019",
+    "files": 24303,
+    "logical_bytes": 532429255,
+    "links_excluded": 0,
+    "seconds": 0.1149993478320539
+  },
+  "new_test_temporary": {
+    "root": "/tmp/i1-bounds-250183-1792450605137123489-0",
+    "files": 2,
+    "logical_bytes": 1049,
+    "links_excluded": 0,
+    "seconds": 2.1239742636680603e-05
+  },
+  "relevant_preserved_host_scope": [
+    {
+      "root": "/home/spenser/file-native-incremental-capsule-f3e942f.tar",
+      "files": 1,
+      "logical_bytes": 440320
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-capsule-fb73e75.tar",
+      "files": 1,
+      "logical_bytes": 419840
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-capsule-rootfix-precommit.tar",
+      "files": 1,
+      "logical_bytes": 460800
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-accounting-evidence",
+      "files": 26,
+      "logical_bytes": 1196716,
+      "links_excluded": 0,
+      "seconds": 0.009050671011209488
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-accounting-final",
+      "files": 9037,
+      "logical_bytes": 418729890,
+      "links_excluded": 0,
+      "seconds": 0.2082613231614232
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-audit-export",
+      "files": 14,
+      "logical_bytes": 318186,
+      "links_excluded": 0,
+      "seconds": 0.0003256620839238167
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-audit-final",
+      "files": 2396,
+      "logical_bytes": 374253222,
+      "links_excluded": 0,
+      "seconds": 0.08564287470653653
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-evidence-20261018",
+      "files": 73,
+      "logical_bytes": 1952060,
+      "links_excluded": 0,
+      "seconds": 0.0017846981063485146
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-evidence-20261018.tar.gz",
+      "files": 1,
+      "logical_bytes": 1930575
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-final-20261018",
+      "files": 18511,
+      "logical_bytes": 464753721,
+      "links_excluded": 0,
+      "seconds": 0.6752672456204891
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-recipe",
+      "files": 1473,
+      "logical_bytes": 90109427,
+      "links_excluded": 0,
+      "seconds": 0.05668482696637511
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-replay-final",
+      "files": 13009,
+      "logical_bytes": 436421501,
+      "links_excluded": 0,
+      "seconds": 0.5104480884037912
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-rootfix",
+      "files": 5847,
+      "logical_bytes": 385222788,
+      "links_excluded": 0,
+      "seconds": 0.2624054690822959
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-rootfix-evidence",
+      "files": 23,
+      "logical_bytes": 942298,
+      "links_excluded": 0,
+      "seconds": 0.0004881070926785469
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-rootfix-evidence.tar.gz",
+      "files": 1,
+      "logical_bytes": 939385
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-replay-probe",
+      "files": 2121,
+      "logical_bytes": 13970252,
+      "links_excluded": 0,
+      "seconds": 0.042817025911062956
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-5a65a21",
+      "files": 694,
+      "logical_bytes": 27435661,
+      "links_excluded": 0,
+      "seconds": 0.00595405837520957
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-7ac70f9",
+      "files": 365,
+      "logical_bytes": 6886129,
+      "links_excluded": 0,
+      "seconds": 0.0025741872377693653
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-7e00d22",
+      "files": 444,
+      "logical_bytes": 9072770,
+      "links_excluded": 0,
+      "seconds": 0.0022906227968633175
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-f3e942f",
+      "files": 55,
+      "logical_bytes": 474589,
+      "links_excluded": 0,
+      "seconds": 0.0008031339384615421
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-recipe",
+      "files": 60,
+      "logical_bytes": 466855,
+      "links_excluded": 0,
+      "seconds": 0.0008270400576293468
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-rootfix",
+      "files": 56,
+      "logical_bytes": 444599,
+      "links_excluded": 0,
+      "seconds": 0.0007803556509315968
+    },
+    {
+      "root": "/home/spenser/file-native-n-linux-20261019",
+      "files": 24303,
+      "logical_bytes": 532429255,
+      "links_excluded": 0,
+      "seconds": 0.1180056338198483
+    },
+    {
+      "root": "/home/spenser/file-native-prerequisite-linux-20261018",
+      "files": 123143,
+      "logical_bytes": 1304492667,
+      "links_excluded": 0,
+      "seconds": 5.565315376967192
+    },
+    {
+      "root": "/home/spenser/file-native-q-linux-20261019-final",
+      "files": 15443,
+      "logical_bytes": 277573914,
+      "links_excluded": 0,
+      "seconds": 0.6814811476506293
+    },
+    {
+      "root": "/home/spenser/file-native-recovery-20261019",
+      "files": 29739,
+      "logical_bytes": 631851798,
+      "links_excluded": 0,
+      "seconds": 0.8085118769668043
+    },
+    {
+      "root": "/home/spenser/file-native-recovery-20261019-source.tar",
+      "files": 1,
+      "logical_bytes": 573440
+    },
+    {
+      "root": "/home/spenser/.cargo/registry",
+      "files": 21539,
+      "logical_bytes": 439121763,
+      "links_excluded": 0,
+      "seconds": 0.06890118168666959
+    },
+    {
+      "root": "/home/spenser/.cargo/git",
+      "files": 1,
+      "logical_bytes": 177,
+      "links_excluded": 0,
+      "seconds": 2.0490027964115143e-05
+    }
+  ],
+  "changed_prior_scopes": [],
+  "task_processes": [],
+  "filter_scope": "owned-root Python/engine argv, this checker excluded",
+  "free_bytes": 41742958592,
+  "shared_cargo_logical_growth_bytes": 0,
+  "original_execution_cutoff_epoch": 1792453485,
+  "original_lane_deadline_epoch": 1792454085
+}

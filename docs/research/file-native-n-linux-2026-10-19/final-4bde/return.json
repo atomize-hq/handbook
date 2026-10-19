@@ -1,0 +1,15 @@
+{
+  "candidate": "4bde156323812ef18c0dea6798cfc2108aaad933",
+  "archive_bytes": 350686,
+  "archive_sha256": "07ec4c40e36489424f23b05d58732c0baa511f2e28d4fa578254846b6e5e7548",
+  "raw_files": 30,
+  "raw_bytes": 3050382,
+  "combined_native_after_archive": {
+    "root": "/home/spenser/file-native-n-linux-20261019",
+    "files": 24301,
+    "logical_bytes": 532426140,
+    "links_excluded": 0,
+    "seconds": 0.11501311510801315
+  },
+  "final_executable_sha256": "da75d34e5fe162447e356aead2fba0f2a1ac21bc1055ebb3812bce80fda79846"
+}

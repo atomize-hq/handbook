@@ -1,0 +1,183 @@
+{
+  "epoch": 1792452120.7854698,
+  "candidate": "4bde156323812ef18c0dea6798cfc2108aaad933",
+  "core_files": 16,
+  "source_reverified": true,
+  "prior_6e66_source_executable_and_archive_unchanged": true,
+  "prior_Q_binary_unchanged": true,
+  "focused_cases": 39,
+  "focused_calls": 153,
+  "recovery": {
+    "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+    "binary": "/home/spenser/file-native-n-linux-20261019/final-4bde/build/release/file-native-incremental",
+    "binary_sha256": "da75d34e5fe162447e356aead2fba0f2a1ac21bc1055ebb3812bce80fda79846",
+    "cases": [
+      {
+        "case": "navigation-and-operational-backup",
+        "mode": "A",
+        "n": 16,
+        "status": "success"
+      },
+      {
+        "case": "navigation-and-operational-backup",
+        "mode": "A",
+        "n": 128,
+        "status": "success"
+      },
+      {
+        "case": "navigation-and-operational-backup",
+        "mode": "B",
+        "n": 16,
+        "status": "success"
+      },
+      {
+        "case": "navigation-and-operational-backup",
+        "mode": "B",
+        "n": 128,
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-plan",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-preserved",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-file",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-namespace",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-before-complete",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-complete",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-namespace-preserved",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-plan",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-preserved",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-file",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-namespace",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-before-complete",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-complete",
+        "status": "success"
+      },
+      {
+        "case": "checkpoint-transfer-retire-repeat-gc",
+        "mode": "A",
+        "status": "success"
+      },
+      {
+        "case": "half-preparation-backup-recovery",
+        "mode": "A",
+        "status": "success"
+      },
+      {
+        "case": "checkpoint-transfer-retire-repeat-gc",
+        "mode": "B",
+        "status": "success"
+      },
+      {
+        "case": "half-preparation-backup-recovery",
+        "mode": "B",
+        "status": "success"
+      },
+      {
+        "case": "impossible-final-namespace",
+        "status": "expected refusal"
+      },
+      {
+        "case": "skipped-or-selected-once",
+        "mode": "A",
+        "status": "success"
+      },
+      {
+        "case": "skipped-or-selected-once",
+        "mode": "B",
+        "status": "success"
+      }
+    ],
+    "events": 282,
+    "seconds": 71.36844283528626
+  },
+  "README_cases": 8,
+  "sampled_resource_rows": 461,
+  "missing_child_RSS_samples": 0,
+  "maximum_sampled_engine_child_RSS": 5771264,
+  "maximum_ordinary_child_seconds": 7.476845391094685,
+  "combined_native": {
+    "root": "/home/spenser/file-native-n-linux-20261019",
+    "files": 24298,
+    "logical_bytes": 532066441,
+    "links_excluded": 0,
+    "seconds": 0.11574958264827728
+  },
+  "free_bytes": 41743462400,
+  "shared_cargo_before": {
+    "root": "/home/spenser/.cargo",
+    "files": 22489,
+    "logical_bytes": 621496978,
+    "links_excluded": 14,
+    "seconds": 0.18087259493768215
+  },
+  "shared_cargo_after": {
+    "root": "/home/spenser/.cargo",
+    "files": 22489,
+    "logical_bytes": 621496978,
+    "links_excluded": 14,
+    "seconds": 0.7158941901288927
+  },
+  "shared_cargo_logical_growth_bytes": 0
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "mode": "A",
+    "profile": 4,
+    "case": "genesis-root-README-absent",
+    "status": "success"
+  },
+  {
+    "mode": "A",
+    "profile": 1,
+    "case": "stored-README-and-old-publication-preserved-through-upgrade-checkpoint",
+    "README_sha256": "c4893344f943a792073d717a9c0bd0179318a17aabb6af8d3336d223315965fd",
+    "old_publication_sha256": "2a7b14bfd1a8dfba7ff72374f2b27eb8516d8b2b8c4a169ed3c3e3199a002533",
+    "status": "success"
+  },
+  {
+    "mode": "A",
+    "profile": 2,
+    "case": "stored-README-and-old-publication-preserved-through-upgrade-checkpoint",
+    "README_sha256": "f2c1ff7eebc37818ed29ae27982622d024d861fdf343e9e82e76ea41dabe0cf2",
+    "old_publication_sha256": "79be63dd01e4758278a901043678a3365d1720a930875ab7c81d3fa7c73aa93a",
+    "status": "success"
+  },
+  {
+    "mode": "A",
+    "profile": 3,
+    "case": "stored-README-and-old-publication-preserved-through-upgrade-checkpoint",
+    "README_sha256": "f2c1ff7eebc37818ed29ae27982622d024d861fdf343e9e82e76ea41dabe0cf2",
+    "old_publication_sha256": "5eb5bcec6b995b308148517da32ea0b38eaf6ac54ae55baf4aceb70bf148c2ca",
+    "status": "success"
+  },
+  {
+    "mode": "B",
+    "profile": 4,
+    "case": "genesis-root-README-absent",
+    "status": "success"
+  },
+  {
+    "mode": "B",
+    "profile": 1,
+    "case": "stored-README-and-old-publication-preserved-through-upgrade-checkpoint",
+    "README_sha256": "c4893344f943a792073d717a9c0bd0179318a17aabb6af8d3336d223315965fd",
+    "old_publication_sha256": "be43558ac4f47acd2a6becce29ae724f7339133784f818eb460fd85290a63004",
+    "status": "success"
+  },
+  {
+    "mode": "B",
+    "profile": 2,
+    "case": "stored-README-and-old-publication-preserved-through-upgrade-checkpoint",
+    "README_sha256": "f2c1ff7eebc37818ed29ae27982622d024d861fdf343e9e82e76ea41dabe0cf2",
+    "old_publication_sha256": "ee626a7433004558dc56108286ff1e512172a312beb62ca7c61196601c59f7aa",
+    "status": "success"
+  },
+  {
+    "mode": "B",
+    "profile": 3,
+    "case": "stored-README-and-old-publication-preserved-through-upgrade-checkpoint",
+    "README_sha256": "f2c1ff7eebc37818ed29ae27982622d024d861fdf343e9e82e76ea41dabe0cf2",
+    "old_publication_sha256": "51812f2d69b328e09423abe0cd0f7dcda50b7fa6f8f565bd0ae0ffde75864e92",
+    "status": "success"
+  }
+]

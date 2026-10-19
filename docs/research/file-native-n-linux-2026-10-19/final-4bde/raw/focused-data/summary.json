@@ -1,0 +1,362 @@
+{
+  "status": "success",
+  "cases": [
+    {
+      "case": "initial-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "payload-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "batch-payload-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "label-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "byte-split-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 133,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "byte-merge-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "adjacency-duplicates-types-order-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 133,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "adjacency-collapse-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "target-location-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "delete-A",
+      "documents": 127,
+      "supplemented_documents": 127,
+      "projection_files": 131,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "external-interruption-A",
+      "documents": 127,
+      "supplemented_documents": 127,
+      "projection_files": 131,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "navigation-absent-A",
+      "documents": 16,
+      "supplemented_documents": 0,
+      "projection_files": 18,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "absent-packet-replay-checkpoint-A",
+      "documents": 16,
+      "supplemented_documents": 0,
+      "projection_files": 18,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "source-completeness-dirty-A",
+      "documents": 16,
+      "supplemented_documents": 1,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "source-completeness-restored-A",
+      "documents": 16,
+      "supplemented_documents": 0,
+      "projection_files": 18,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "mixed-complete-whitespace-A",
+      "documents": 16,
+      "supplemented_documents": 15,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "mixed-complete-key-order-A",
+      "documents": 16,
+      "supplemented_documents": 15,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "frozen2-candidate-pending-upgrade-A",
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "initial-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "payload-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "batch-payload-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "label-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "byte-split-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 133,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "byte-merge-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "adjacency-duplicates-types-order-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 133,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "adjacency-collapse-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "target-location-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "delete-B",
+      "documents": 127,
+      "supplemented_documents": 127,
+      "projection_files": 131,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "navigation-absent-B",
+      "documents": 16,
+      "supplemented_documents": 0,
+      "projection_files": 18,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "absent-packet-replay-checkpoint-B",
+      "documents": 16,
+      "supplemented_documents": 0,
+      "projection_files": 18,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "source-completeness-dirty-B",
+      "documents": 16,
+      "supplemented_documents": 1,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "source-completeness-restored-B",
+      "documents": 16,
+      "supplemented_documents": 0,
+      "projection_files": 18,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "mixed-complete-whitespace-B",
+      "documents": 16,
+      "supplemented_documents": 15,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "mixed-complete-key-order-B",
+      "documents": 16,
+      "supplemented_documents": 15,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "frozen2-candidate-pending-upgrade-B",
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "frozen1-candidate-upgrade-A",
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "frozen1-candidate-upgrade-B",
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "frozen1-packet-candidate-upgrade-A",
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "frozen1-packet-candidate-upgrade-B",
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    }
+  ],
+  "events": 153,
+  "seconds": 140.17880736012012,
+  "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+  "exe_sha256": "da75d34e5fe162447e356aead2fba0f2a1ac21bc1055ebb3812bce80fda79846",
+  "capsule": true,
+  "legacy1": true
+}
