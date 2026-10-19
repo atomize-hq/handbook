@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-19",
+  "workflow": "chatgpt-pro-consult",
+  "mode": "approach review",
+  "context": "independent fresh conversation",
+  "destination": "https://chatgpt.com/",
+  "artifact_path": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-packing-guidance-pro-consult-2026-10-19\\file-native-packing-evidence.md",
+  "artifact_bytes": 202338,
+  "artifact_sha256": "fe01bc623b20fe34e77a82a4cc9a7c156cc010276da0113a853f6360c12116e9",
+  "prompt_sha256": "cae53a8c506d37ab13801c292c019a48c26a39984bf86300fbf55dfb9af12784",
+  "source_pin": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+  "entries": [
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/report.md",
+      "source_pin": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+      "original_sha256": "78c5f0e6cedcb1711a89b3f9c61aa034be335f9b8b3854901a04544e301ff115",
+      "transmitted_sha256": "3bed3577fbadb2f15105d7e1d379782ae97435f7790ca59a7b20b8d61766c03f",
+      "bytes": 21161
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-review-2026-10-19.md",
+      "source_pin": "untracked coordinator/research evidence",
+      "original_sha256": "457afd1503356af245fd63e4cdf1a467ec038034b2e803e37cccbaa6d5ea2a78",
+      "transmitted_sha256": "2af0ea29bbe2995b1c8a7709964f57b2d0a2ad2a1275ff2414fc05fcf91a7742",
+      "bytes": 12928
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/protocol.md",
+      "source_pin": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+      "original_sha256": "474080472c2ce3d8f767be6e68ef039c2e9736cf72883cbd510de77364a25544",
+      "transmitted_sha256": "474080472c2ce3d8f767be6e68ef039c2e9736cf72883cbd510de77364a25544",
+      "bytes": 4450
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/design-and-scope.md",
+      "source_pin": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+      "original_sha256": "9a8c8f23e9333cad04f320ea26c5b7f14be86bf95ee59647979e8157bf5bad41",
+      "transmitted_sha256": "9a8c8f23e9333cad04f320ea26c5b7f14be86bf95ee59647979e8157bf5bad41",
+      "bytes": 10244
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs",
+      "source_pin": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+      "original_sha256": "8eddbf39e06bdf1ca5708d02c6abd9a885184576d446b23d8aa064de0c9184ff",
+      "transmitted_sha256": "8eddbf39e06bdf1ca5708d02c6abd9a885184576d446b23d8aa064de0c9184ff",
+      "bytes": 12022
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs",
+      "source_pin": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+      "original_sha256": "8852fec5fd75c8fe15e9f1964289c69623bfc11a2fc3a7d57efa2da525faeddc",
+      "transmitted_sha256": "8852fec5fd75c8fe15e9f1964289c69623bfc11a2fc3a7d57efa2da525faeddc",
+      "bytes": 35189
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+      "source_pin": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+      "original_sha256": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+      "transmitted_sha256": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+      "bytes": 15945
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs",
+      "source_pin": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+      "original_sha256": "fd90391da2100ac416d215619419f363b6d6557dfaffd71b7504faa0f9c49b87",
+      "transmitted_sha256": "fd90391da2100ac416d215619419f363b6d6557dfaffd71b7504faa0f9c49b87",
+      "bytes": 26311
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs",
+      "source_pin": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+      "original_sha256": "17a6a0bad6859f54793c37e6f1fc86e4cd35c86ac833dd24b5a877f4f01f6b06",
+      "transmitted_sha256": "17a6a0bad6859f54793c37e6f1fc86e4cd35c86ac833dd24b5a877f4f01f6b06",
+      "bytes": 12673
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs",
+      "source_pin": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+      "original_sha256": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+      "transmitted_sha256": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+      "bytes": 30741
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs",
+      "source_pin": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+      "original_sha256": "6727e154f82334b9842f347797407bd7185ed576dd36d206fb323f0dc6c2b31c",
+      "transmitted_sha256": "6727e154f82334b9842f347797407bd7185ed576dd36d206fb323f0dc6c2b31c",
+      "bytes": 3342
+    },
+    {
+      "path": "docs/research/durable-membership-lookup-2026-10-11/component-reuse-review.md",
+      "source_pin": "untracked coordinator/research evidence",
+      "original_sha256": "48eaea2bc45bd4ea99019bde999372390915cf6a694d80fa9f7b73c9712df495",
+      "transmitted_sha256": "01fe16adf5969845f65534ed1f7718a9ad88a484ebfff86cf3c8d73bd9d37bdf",
+      "bytes": 3090
+    },
+    {
+      "path": "docs/research/dolt-gitbutler-file-engine-2026-10-16/components.md",
+      "source_pin": "untracked coordinator/research evidence",
+      "original_sha256": "81fb6f787dbb6e1d464c3e7eaab458d8a94e57230fcc79bbef9ddd595dc9f3d7",
+      "transmitted_sha256": "81fb6f787dbb6e1d464c3e7eaab458d8a94e57230fcc79bbef9ddd595dc9f3d7",
+      "bytes": 11866
+    }
+  ],
+  "exclusions": [
+    "live stores",
+    "raw platform logs",
+    "full backup transport/inventory",
+    "private host/connection details",
+    "prior Pro answers",
+    "production Handbook sources"
+  ],
+  "advisory_note": "Advisory only; verify against local project truth and authoritative docs; do not reduce scope without user approval."
+}

@@ -1,0 +1,15 @@
+{
+  "status": "cleanup-blocked-by-automatic-review",
+  "target": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a155e39b96-135e0",
+  "target_exists": true,
+  "regular_files_retained": 15042,
+  "logical_bytes_retained": 1050883003,
+  "reparse_points_excluded": 633,
+  "attempts": [
+    "bounded native PowerShell cleanup rejected before execution",
+    "direct Remove-Item -LiteralPath exact-new-subtree -Recurse -Force rejected before execution"
+  ],
+  "rejection_reason": "blocked by policy",
+  "free_bytes_after": 210942078976,
+  "completed_utc": "2026-10-19T20:43:46.4727351Z"
+}

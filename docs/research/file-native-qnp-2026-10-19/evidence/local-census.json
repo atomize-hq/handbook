@@ -1,0 +1,162 @@
+{
+  "epoch": 1792442474.6029596,
+  "rows": [
+    {
+      "root": "C:\\file-native-experiment-20261017",
+      "files": 177835,
+      "logical_bytes": 2171962409,
+      "seconds": 12.96899999998277,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-experiment-20261017-build",
+      "files": 378,
+      "logical_bytes": 103333842,
+      "seconds": 0.015000000013969839,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-experiment-20261017-v2",
+      "files": 14412,
+      "logical_bytes": 156047821,
+      "seconds": 1.7969999999622814,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-experiment-20261017-v3",
+      "files": 596897,
+      "logical_bytes": 7593945147,
+      "seconds": 36.76600000000326,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-followup-20261017",
+      "files": 1946032,
+      "logical_bytes": 25216771931,
+      "seconds": 17.90600000001723,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-followup-20261017-build",
+      "files": 312,
+      "logical_bytes": 101569779,
+      "seconds": 0.01600000000325963,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-followup-20261017-build-final",
+      "files": 313,
+      "logical_bytes": 102443082,
+      "seconds": 0.0,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-followup-20261017-build-final-v2",
+      "files": 313,
+      "logical_bytes": 102444455,
+      "seconds": 0.015000000013969839,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-followup-20261017-build-final-v3",
+      "files": 313,
+      "logical_bytes": 102446503,
+      "seconds": 0.0,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-followup-20261017-build-final-v4",
+      "files": 313,
+      "logical_bytes": 102453671,
+      "seconds": 0.0,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-followup-20261017-build-next",
+      "files": 313,
+      "logical_bytes": 102431703,
+      "seconds": 0.01600000000325963,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018",
+      "files": 2650971,
+      "logical_bytes": 15323250267,
+      "seconds": 26.81199999997625,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018-build",
+      "files": 1259,
+      "logical_bytes": 460187464,
+      "seconds": 0.01600000000325963,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018-build-control",
+      "files": 717,
+      "logical_bytes": 226053498,
+      "seconds": 0.0,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018-build-final",
+      "files": 1259,
+      "logical_bytes": 461657446,
+      "seconds": 0.0,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-qnp-20261019",
+      "files": 1,
+      "logical_bytes": 2955,
+      "seconds": 0.0,
+      "errors": []
+    },
+    {
+      "root": "C:\\file-native-recovery-20261019",
+      "files": 575910,
+      "logical_bytes": 5150064752,
+      "seconds": 13.780999999959022,
+      "errors": []
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook",
+      "files": 4489,
+      "logical_bytes": 245911525,
+      "seconds": 0.07900000002700835,
+      "errors": []
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-recovery-20261019\\handbook",
+      "files": 4534,
+      "logical_bytes": 258482758,
+      "seconds": 0.045999999972991645,
+      "errors": []
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook",
+      "files": 4540,
+      "logical_bytes": 258918607,
+      "seconds": 0.0470000000204891,
+      "errors": []
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\18\\01a14f52-1f53-7990-9b84-ebb0af672ff5",
+      "files": 9202,
+      "logical_bytes": 1118451863,
+      "seconds": 0.28100000001722947,
+      "errors": []
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\19\\01a155e1-fe59-7682-be45-f6204e9f8824",
+      "files": 0,
+      "logical_bytes": 0,
+      "seconds": 0.0,
+      "errors": []
+    }
+  ],
+  "total_files": 5990313,
+  "total_logical_bytes": 59358831478,
+  "free_bytes": 211942350848
+}

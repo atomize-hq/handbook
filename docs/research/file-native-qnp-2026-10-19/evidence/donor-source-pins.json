@@ -1,0 +1,26 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/dolthub/dolt/48829716caa01d5c958b328cc6a93cb5ff1e50ce/go/store/nbs/table.go",
+    "commit": "48829716caa01d5c958b328cc6a93cb5ff1e50ce",
+    "path": "go/store/nbs/table.go",
+    "bytes": 13027,
+    "sha256": "a08b8931a9da16f9dda299d0ebcfcc2d40c0298d3ad9f4cfd19ffab1ef7b2002",
+    "status": "retrieved"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/dolthub/dolt/48829716caa01d5c958b328cc6a93cb5ff1e50ce/go/store/nbs/table_index.go",
+    "commit": "48829716caa01d5c958b328cc6a93cb5ff1e50ce",
+    "path": "go/store/nbs/table_index.go",
+    "bytes": 23480,
+    "sha256": "9c39a079e789befcae9ad8e6941cfd428b20cd685c1cf3ae434972e1ab27dd47",
+    "status": "retrieved"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/dolthub/dolt/48829716caa01d5c958b328cc6a93cb5ff1e50ce/go/store/nbs/file_manifest.go",
+    "commit": "48829716caa01d5c958b328cc6a93cb5ff1e50ce",
+    "path": "go/store/nbs/file_manifest.go",
+    "bytes": 17817,
+    "sha256": "999e2542595528d5fa84f202216ce4936e27fa7052da35244d373fba1cdef8b9",
+    "status": "retrieved"
+  }
+]

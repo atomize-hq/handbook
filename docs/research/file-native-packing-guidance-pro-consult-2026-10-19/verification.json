@@ -1,0 +1,39 @@
+{
+  "status": "complete",
+  "prompt_and_artifact_match_transmitted_hashes": true,
+  "answer_hash_matches_completion_receipt": true,
+  "artifacts": {
+    "prompt.md": {
+      "bytes": 15935,
+      "sha256": "cae53a8c506d37ab13801c292c019a48c26a39984bf86300fbf55dfb9af12784"
+    },
+    "file-native-packing-evidence.md": {
+      "bytes": 202338,
+      "sha256": "fe01bc623b20fe34e77a82a4cc9a7c156cc010276da0113a853f6360c12116e9"
+    },
+    "answer.md": {
+      "bytes": 43220,
+      "sha256": "b59291794b5d2e02ff6ce993bf90b21dcdeb4c1f325e877d1618b61c3798212a"
+    },
+    "reconciliation.md": {
+      "bytes": 11684,
+      "sha256": "24d5ed0a60707410b423016d7dc7d9762f827f0b2010e39f2f1c29294ee7717e"
+    },
+    "next-experiment-brief.md": {
+      "bytes": 17315,
+      "sha256": "84fe151007d0dfffe61faafb47462ce989a9b5fc6e8346d8927d7ac1cb2729bc"
+    },
+    "pro-recommendation.png": {
+      "bytes": 174566,
+      "sha256": "1faa9f594a6c88024146c4af96aa8d432876c83524ade73931af2b74bdc2c626"
+    },
+    "pro-recommendation-detail.png": {
+      "bytes": 60915,
+      "sha256": "e6b42603f6efdd2a11093cb4c4afadacab6dfae1ed50d01f8eff35c447ef123c"
+    },
+    "codec-metadata-check.json": {
+      "bytes": 298,
+      "sha256": "d75ef153357cd97a0be928eeb41e46754af86b5f3ca9c1918cb8b8c4ee67db00"
+    }
+  }
+}

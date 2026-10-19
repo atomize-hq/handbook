@@ -1,0 +1,29 @@
+{
+  "status": "HOLD: Mac census incomplete, Linux free reserve failed; no executable work admitted",
+  "epoch": 1792442824.6117384,
+  "ceilings": {
+    "logical_bytes": 34359738368,
+    "files": 5000000,
+    "reserved_inside_bytes": 1073741824,
+    "reserved_inside_files": 100000
+  },
+  "current_known_inherited_scope_bytes": {
+    "windows_inherited_lineage_plus_integration": 23502981135,
+    "wsl_inherited_lineage": 1993650271,
+    "native_linux_preserved": 4178628683,
+    "new_q_tool_residue": 1051205486,
+    "new_n_tool_residue": 1050883003
+  },
+  "known_subtotal_bytes": 31777348578,
+  "mac_current_owned_bytes": null,
+  "scope": "Preserve prior incremental/recovery accounting lineage. Earlier separately bounded 20261017 research roots are separately censused and preserved, never called free capacity; no broadening of cap scope is implied.",
+  "older_windows_separate_bytes": 35855850343,
+  "older_wsl_separate_bytes": 23402002010,
+  "new_task_fixture_bytes": 0,
+  "preexisting_cache_parent_counted_as_new": false,
+  "resource_go": false,
+  "n_forecast_new_peak_bytes": 805306368,
+  "q_linux_forecast_native_new_bytes": 536870912,
+  "qualification_pass": false,
+  "packing_dispatched": false
+}

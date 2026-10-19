@@ -1,0 +1,46 @@
+{
+  "admission-summary.json": {
+    "bytes": 1235,
+    "sha256": "6c1e37c181122f0cb568355697717b97dbf056be3b2ea419fed9ff6f597df268"
+  },
+  "baseline-source-binding.json": {
+    "bytes": 5547,
+    "sha256": "2d5cf203c96ea8cdebe717c3c676771f6358e7e87369644cdc58b8d8e84c3d84"
+  },
+  "donor-source-pins.json": {
+    "bytes": 1123,
+    "sha256": "9a9b6a179cc011102d45c5794cb69350ead7b074e5ac78253141924d67b0f29d"
+  },
+  "gitnexus-precommit-failed.txt": {
+    "bytes": 2151,
+    "sha256": "ba3f391ca7e56875a2440abd066551bcfe8ac7e6a03dbcace54e8057e8523928"
+  },
+  "local-census.json": {
+    "bytes": 4440,
+    "sha256": "512111bbe76e0fa2cf70ed6afd78a9e2778d55fc7e1d26fc7f6d1a393f4e0791"
+  },
+  "n-tool-cleanup-rejected.json": {
+    "bytes": 669,
+    "sha256": "e6503eebc30898cab59bef1977b75a27b0bc9867c2bda7d40430e7e3a0770a53"
+  },
+  "native-linux-census.json": {
+    "bytes": 5314,
+    "sha256": "dfc9cbc853ffb8a36a966cb42ff3ffa123049c15bb8143d992d9e90498b17a9c"
+  },
+  "native-linux-mount.json": {
+    "bytes": 804,
+    "sha256": "0337c9cce4c91eac928996a181aa897ce8ad270b5f4c7b8c14e633dc4c1534b9"
+  },
+  "q-linux-admission.json": {
+    "bytes": 2047,
+    "sha256": "bea8e7d65b66a7346d3dba8d261da812603fe0709bc077ceac34ddc3ab58b5e3"
+  },
+  "q-tool-residue.json": {
+    "bytes": 369,
+    "sha256": "3a9a6cddac2de9ffb3ac372a327645bd92ad03ae9e1581deea0a2fc5aab4411d"
+  },
+  "wsl-census.json": {
+    "bytes": 2820,
+    "sha256": "0233909dc42f683f554716878b29eaba2140572b68fea997862eedc2e3cdb07a"
+  }
+}
