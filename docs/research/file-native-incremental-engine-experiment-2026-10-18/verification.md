@@ -39,8 +39,13 @@ and companions; do not infer a final 1k native rerun from the affected-only suit
 
 ## Fresh-path commands
 
-Create a disposable checkout at the core pin. Run from this standalone directory,
-with a **new** build target and **new** runtime roots. Never reuse preserved paths.
+Use this report's Git revision for the finalized reproduction/proof helpers;
+its Rust core is unchanged from `5a65a21`. Historical measurements retain their
+own captured harnesses and source pins, so this is an affected correctness rerun,
+not a byte-identical replay of every old controller. Run from this standalone
+directory, with a **new** build target and **new** runtime roots. Never reuse
+preserved paths. In particular, the finalized history script's disposable paths
+differ from the already loaded long-running harness preserved in its source ZIP.
 
 ```bash
 cargo test --locked --workspace --target-dir /new/owned/build
