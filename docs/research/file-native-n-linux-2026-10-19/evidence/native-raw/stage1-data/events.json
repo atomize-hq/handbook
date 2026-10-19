@@ -1,0 +1,812 @@
+[
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "init",
+      "mode": "A",
+      "consumer": "project",
+      "count": 128
+    },
+    "profile": 2,
+    "seconds": 5.240761063061655,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":57329,\"bytes_control_written\":30744,\"bytes_metadata_read\":8871566,\"bytes_metadata_written\":90853,\"bytes_payload_read\":1568768,\"bytes_payload_written\":1588526,\"bytes_read\":10497663,\"bytes_result_read\":0,\"bytes_result_written\":2156,\"bytes_written\":1712279,\"copies\":0,\"created_directories\":125,\"directory_syncs\":1000,\"documents_visited\":128,\"edges_visited\":8,\"file_syncs\":153,\"index_updates\":0,\"namespace_ops\":153,\"navigation_bytes\":19530,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"creation-inclusive\":4415757067,\"directory-create\":9058680,\"lock-hold\":5183531935,\"lock-wait\":20881,\"read\":16526099,\"replace\":360128,\"selection-inclusive\":134902234,\"sync\":5140636198,\"write\":12358574},\"opens\":3047,\"page_reads\":2759,\"quota_limit\":null,\"quota_spent\":28158,\"range_calls\":{\"D\":3,\"E\":129,\"P\":128,\"collection.yaml\":1,\"docs\":128,\"packet\":2},\"range_leaf_pairs\":{\"D\":384,\"E\":8256,\"P\":7784,\"collection.yaml\":64,\"docs\":8003,\"packet\":3},\"range_page_visits\":{\"D\":9,\"E\":258,\"P\":254,\"collection.yaml\":2,\"docs\":254,\"packet\":3},\"range_rows\":{\"D\":384,\"E\":8,\"P\":0,\"collection.yaml\":0,\"docs\":0,\"packet\":0},\"replacements\":148,\"touched_paths\":0,\"unique_pages\":[\"14c67a26b134ca1ff4ad20b89e390be9d46a79da9a209f9ad688129f624d2923\",\"2149b90e7fcb205415a616a438053502ec442876da5d314fa866e9ab62ac89f2\",\"2f0815aa01f9ce705a281a86f5f70775eba9fae8be254e77fd97079119814d0b\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4\",\"de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047\",\"fae94f4496a3130aebd1a22f2b5b2da243b0e0dd70c1c00f64a6e207f6a5862a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4149248,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000000\",\"d000001\",\"d000002\",\"d000003\",\"d000004\",\"d000005\",\"d000006\",\"d000007\",\"d000008\",\"d000009\",\"d000010\",\"d000011\",\"d000012\",\"d000013\",\"d000014\",\"d000015\",\"d000016\",\"d000017\",\"d000018\",\"d000019\",\"d000020\",\"d000021\",\"d000022\",\"d000023\",\"d000024\",\"d000025\",\"d000026\",\"d000027\",\"d000028\",\"d000029\",\"d000030\",\"d000031\",\"d000032\",\"d000033\",\"d000034\",\"d000035\",\"d000036\",\"d000037\",\"d000038\",\"d000039\",\"d000040\",\"d000041\",\"d000042\",\"d000043\",\"d000044\",\"d000045\",\"d000046\",\"d000047\",\"d000048\",\"d000049\",\"d000050\",\"d000051\",\"d000052\",\"d000053\",\"d000054\",\"d000055\",\"d000056\",\"d000057\",\"d000058\",\"d000059\",\"d000060\",\"d000061\",\"d000062\",\"d000063\",\"d000064\",\"d000065\",\"d000066\",\"d000067\",\"d000068\",\"d000069\",\"d000070\",\"d000071\",\"d000072\",\"d000073\",\"d000074\",\"d000075\",\"d000076\",\"d000077\",\"d000078\",\"d000079\",\"d000080\",\"d000081\",\"d000082\",\"d000083\",\"d000084\",\"d000085\",\"d000086\",\"d000087\",\"d000088\",\"d000089\",\"d000090\",\"d000091\",\"d000092\",\"d000093\",\"d000094\",\"d000095\",\"d000096\",\"d000097\",\"d000098\",\"d000099\",\"d000100\",\"d000101\",\"d000102\",\"d000103\",\"d000104\",\"d000105\",\"d000106\",\"d000107\",\"d000108\",\"d000109\",\"d000110\",\"d000111\",\"d000112\",\"d000113\",\"d000114\",\"d000115\",\"d000116\",\"d000117\",\"d000118\",\"d000119\",\"d000120\",\"d000121\",\"d000122\",\"d000123\",\"d000124\",\"d000125\",\"d000126\",\"d000127\"],\"outcome\":\"accepted\",\"publication\":\"publication-254863-1792451215201814667-146\",\"removed\":[],\"request\":\"initial\",\"state_digest\":\"5fb2c68c2f62c4550fad2638345d7bb326d65d2062ace90378b4edcf0c4e72ec\"},\"selected\":{\"digest\":\"f9f85a4833b80a40524172d5cb19dd9d05deb4d391b0cecd6263c55ea43f0e5d\",\"publication\":\"publication-254863-1792451215201814667-146\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":5239140985}\n",
+    "stderr": "progress:creation:0/128:{\"page_reads\":0,\"unique_pages\":[],\"documents_visited\":0,\"edges_visited\":0,\"index_updates\":0,\"range_calls\":{},\"range_rows\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"navigation_parts\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"touched_paths\":0,\"namespace_ops\":3,\"quota_limit\":105508864,\"quota_spent\":0,\"verify_only\":false,\"ns\":{\"directory-create\":63292,\"lock-wait\":20881,\"replace\":34742,\"sync\":80934462,\"write\":252270},\"bytes_read\":0,\"bytes_written\":789,\"opens\":3,\"file_syncs\":3,\"directory_syncs\":11,\"unsupported_directory_syncs\":0,\"copies\":0,\"replacements\":1,\"created_directories\":3,\"bytes_metadata_read\":0,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_control_read\":0,\"bytes_control_written\":789,\"bytes_result_read\":0,\"bytes_result_written\":0}\nprogress:creation-complete:128:{\"page_reads\":0,\"unique_pages\":[],\"documents_visited\":0,\"edges_visited\":0,\"index_updates\":0,\"range_calls\":{},\"range_rows\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"navigation_parts\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"touched_paths\":0,\"namespace_ops\":131,\"quota_limit\":105508864,\"quota_spent\":2093056,\"verify_only\":false,\"ns\":{\"directory-create\":7661533,\"lock-wait\":20881,\"read\":4704980,\"replace\":34742,\"sync\":4444789997,\"write\":10610857},\"bytes_read\":1568768,\"bytes_written\":1569557,\"opens\":259,\"file_syncs\":131,\"directory_syncs\":880,\"unsupported_directory_syncs\":0,\"copies\":0,\"replacements\":129,\"created_directories\":104,\"bytes_metadata_read\":0,\"bytes_metadata_written\":0,\"bytes_payload_read\":1568768,\"bytes_payload_written\":1568768,\"bytes_control_read\":0,\"bytes_control_written\":789,\"bytes_result_read\":0,\"bytes_result_written\":0}\n"
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "inspect"
+    },
+    "profile": 2,
+    "seconds": 0.004089350812137127,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":1292,\"bytes_control_written\":0,\"bytes_metadata_read\":752,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":2044,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"lock-hold\":0,\"read\":257185},\"opens\":5,\"page_reads\":2,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"2149b90e7fcb205415a616a438053502ec442876da5d314fa866e9ab62ac89f2\",\"de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3448832,\"result\":{\"history_depth\":1,\"publication\":{\"allocation_owner\":{\"attempt\":\"attempt-254863-1792451210144215120-1\",\"conservative_bytes\":105508864,\"includes_intermediates_and_stages\":true},\"attempt\":\"attempt-254863-1792451210144215120-1\",\"changes\":null,\"generation_manifest\":null,\"graph\":{\"budget\":1000,\"consumer\":\"project\",\"cost\":0,\"count\":128,\"fallback\":false,\"tree\":\"de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047\",\"version\":1},\"id\":\"publication-254863-1792451215201814667-146\",\"intent\":\"fe06921997473964517c26de4d630594ed32727e9de1eab1d9c28ac74ce9e398\",\"membership\":null,\"outcomes\":null,\"packet_ref\":null,\"predecessor\":null,\"projection\":\"2149b90e7fcb205415a616a438053502ec442876da5d314fa866e9ab62ac89f2\",\"request\":\"initial\",\"result_hash\":\"a1d8bf8eb452ce897d4e69d10e0d9d4b5fe072da24ecf6d6118e34495a58f7e2\",\"sequence\":0,\"store_id\":\"store-254863-1792451210126584718-0\",\"version\":1},\"selected\":{\"digest\":\"f9f85a4833b80a40524172d5cb19dd9d05deb4d391b0cecd6263c55ea43f0e5d\",\"publication\":\"publication-254863-1792451215201814667-146\"}},\"status\":\"ok\",\"wall_ns\":757605}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "prepare",
+      "request": {
+        "request": "payload",
+        "base": {
+          "digest": "f9f85a4833b80a40524172d5cb19dd9d05deb4d391b0cecd6263c55ea43f0e5d",
+          "publication": "publication-254863-1792451215201814667-146"
+        },
+        "ops": [
+          {
+            "kind": "edit",
+            "id": "d000004",
+            "text": " payload delta"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "profile": 2,
+    "seconds": 0.2984267487190664,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":6473,\"bytes_control_written\":3251,\"bytes_metadata_read\":818255,\"bytes_metadata_written\":41364,\"bytes_payload_read\":27964,\"bytes_payload_written\":4110,\"bytes_read\":852692,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":48725,\"copies\":0,\"created_directories\":7,\"directory_syncs\":52,\"documents_visited\":1,\"edges_visited\":4,\"file_syncs\":10,\"index_updates\":4,\"namespace_ops\":9,\"navigation_bytes\":19530,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":595670,\"graph-transition-inclusive\":109758763,\"lock-hold\":49266288,\"lock-wait\":31102,\"preparation-inclusive\":294652727,\"projection-prepare-inclusive\":81531149,\"read\":3976890,\"replace\":166674,\"sync\":280202126,\"write\":943525},\"opens\":463,\"page_reads\":436,\"quota_limit\":67109760,\"quota_spent\":81070,\"range_calls\":{\"D\":1,\"E\":128,\"P\":1,\"docs\":1},\"range_leaf_pairs\":{\"D\":128,\"E\":8192,\"P\":64,\"docs\":64},\"range_page_visits\":{\"D\":3,\"E\":256,\"P\":2,\"docs\":2},\"range_rows\":{\"D\":128,\"E\":4,\"P\":0,\"docs\":0},\"replacements\":8,\"touched_paths\":0,\"unique_pages\":[\"14c67a26b134ca1ff4ad20b89e390be9d46a79da9a209f9ad688129f624d2923\",\"2149b90e7fcb205415a616a438053502ec442876da5d314fa866e9ab62ac89f2\",\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4\",\"de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047\",\"f19553215c5cd521eec47d4afefe2c150bcc1d641ce7d32d987c40fce18f815c\",\"fae94f4496a3130aebd1a22f2b5b2da243b0e0dd70c1c00f64a6e207f6a5862a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3792896,\"result\":{\"candidate\":\"attempts/attempt-254897-1792451215350074513-0/candidate.json\"},\"status\":\"ok\",\"wall_ns\":294996183}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "select",
+      "candidate": "attempts/attempt-254897-1792451215350074513-0/candidate.json"
+    },
+    "profile": 2,
+    "seconds": 0.21477282419800758,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":16712,\"bytes_control_written\":2238,\"bytes_metadata_read\":876972,\"bytes_metadata_written\":573,\"bytes_payload_read\":27964,\"bytes_payload_written\":0,\"bytes_read\":921648,\"bytes_result_read\":0,\"bytes_result_written\":249,\"bytes_written\":3060,\"copies\":0,\"created_directories\":3,\"directory_syncs\":36,\"documents_visited\":1,\"edges_visited\":4,\"file_syncs\":11,\"index_updates\":6,\"namespace_ops\":9,\"navigation_bytes\":19530,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":218490,\"incremental-replay\":12653715,\"lock-hold\":211463069,\"lock-wait\":9436,\"read\":4357061,\"replace\":302273,\"selection-inclusive\":169191467,\"sync\":196218793,\"write\":611880},\"opens\":486,\"page_reads\":447,\"quota_limit\":null,\"quota_spent\":35340,\"range_calls\":{\"D\":1,\"E\":128,\"P\":1,\"docs\":1},\"range_leaf_pairs\":{\"D\":128,\"E\":8192,\"P\":64,\"docs\":64},\"range_page_visits\":{\"D\":3,\"E\":256,\"P\":2,\"docs\":2},\"range_rows\":{\"D\":128,\"E\":4,\"P\":0,\"docs\":0},\"replacements\":7,\"touched_paths\":0,\"unique_pages\":[\"14c67a26b134ca1ff4ad20b89e390be9d46a79da9a209f9ad688129f624d2923\",\"2149b90e7fcb205415a616a438053502ec442876da5d314fa866e9ab62ac89f2\",\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4\",\"de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047\",\"f19553215c5cd521eec47d4afefe2c150bcc1d641ce7d32d987c40fce18f815c\",\"fae94f4496a3130aebd1a22f2b5b2da243b0e0dd70c1c00f64a6e207f6a5862a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3866624,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000004\"],\"outcome\":\"accepted\",\"publication\":\"publication-254898-1792451215750732515-3\",\"removed\":[],\"request\":\"payload\",\"state_digest\":\"2a827d82cd4117f736ce5d8506f0f875d94b09883035214d73878781f182526b\"},\"selected\":{\"digest\":\"4707b0a7e08518cb70fe997b762246bf74552fd546d7f3eb42b8fc9cae791849\",\"publication\":\"publication-254898-1792451215750732515-3\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":211662808}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "refresh"
+    },
+    "profile": 2,
+    "seconds": 2.492417108733207,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":4401,\"bytes_control_written\":44899,\"bytes_metadata_read\":4226896,\"bytes_metadata_written\":0,\"bytes_payload_read\":3177080,\"bytes_payload_written\":1588540,\"bytes_read\":7408377,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":1633439,\"copies\":131,\"created_directories\":8,\"directory_syncs\":670,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":133,\"index_updates\":0,\"namespace_ops\":134,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"A-completion-inclusive\":2489770688,\"copy\":5715683,\"directory-create\":340757,\"lock-hold\":2489787615,\"lock-wait\":14734,\"read\":9910959,\"replace\":3051631,\"sync\":2445400685,\"write\":203407},\"opens\":1207,\"page_reads\":806,\"quota_limit\":null,\"quota_spent\":2178207,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":133,\"touched_paths\":131,\"unique_pages\":[\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"475862bccede25b36bde71c44d54c081843015ed3d2136e02e065df626b096f8\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"dbf981dc859168f27870769b5afc5f46f741b90fa8a5467b05ddbe94bb80315c\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3948544,\"result\":{\"status\":\"pending-refreshed\"},\"status\":\"ok\",\"wall_ns\":2489935534}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "audit"
+    },
+    "profile": 2,
+    "seconds": 0.03236079774796963,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":3082,\"bytes_control_written\":0,\"bytes_metadata_read\":9040129,\"bytes_metadata_written\":0,\"bytes_payload_read\":3177080,\"bytes_payload_written\":0,\"bytes_read\":12220291,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":128,\"edges_visited\":8,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":19530,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"lock-hold\":0,\"read\":10169001},\"opens\":3060,\"page_reads\":2793,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{\"D\":4,\"E\":129,\"P\":128,\"collection.yaml\":1,\"docs\":128,\"packet\":2},\"range_leaf_pairs\":{\"D\":512,\"E\":8256,\"P\":7784,\"collection.yaml\":64,\"docs\":8003,\"packet\":3},\"range_page_visits\":{\"D\":12,\"E\":258,\"P\":254,\"collection.yaml\":2,\"docs\":254,\"packet\":3},\"range_rows\":{\"D\":512,\"E\":8,\"P\":0,\"collection.yaml\":0,\"docs\":0,\"packet\":0},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"2f0815aa01f9ce705a281a86f5f70775eba9fae8be254e77fd97079119814d0b\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"475862bccede25b36bde71c44d54c081843015ed3d2136e02e065df626b096f8\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"dbf981dc859168f27870769b5afc5f46f741b90fa8a5467b05ddbe94bb80315c\",\"dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4\",\"f19553215c5cd521eec47d4afefe2c150bcc1d641ce7d32d987c40fce18f815c\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4120576,\"result\":{\"selected\":{\"digest\":\"4707b0a7e08518cb70fe997b762246bf74552fd546d7f3eb42b8fc9cae791849\",\"publication\":\"publication-254898-1792451215750732515-3\"},\"status\":\"full-graph-index-source-projection-audit\"},\"status\":\"ok\",\"wall_ns\":30731080}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "inspect"
+    },
+    "profile": 2,
+    "seconds": 0.0011362051591277122,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":1620,\"bytes_control_written\":0,\"bytes_metadata_read\":1388,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":3008,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"lock-hold\":0,\"read\":50365},\"opens\":8,\"page_reads\":5,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"475862bccede25b36bde71c44d54c081843015ed3d2136e02e065df626b096f8\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"dbf981dc859168f27870769b5afc5f46f741b90fa8a5467b05ddbe94bb80315c\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3518464,\"result\":{\"history_depth\":2,\"publication\":{\"allocation_owner\":{\"attempt\":\"attempt-254897-1792451215350074513-0\",\"conservative_bytes\":67109760,\"includes_intermediates_and_stages\":true},\"attempt\":\"attempt-254897-1792451215350074513-0\",\"changes\":\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"generation_manifest\":null,\"graph\":{\"budget\":1000,\"consumer\":\"project\",\"cost\":0,\"count\":128,\"fallback\":false,\"tree\":\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"version\":1},\"id\":\"publication-254898-1792451215750732515-3\",\"intent\":\"e7a4866dc30d4121167ccf1a54772f4204d2f8cc9ce78ae8918bca2b27bdbdab\",\"membership\":\"dbf981dc859168f27870769b5afc5f46f741b90fa8a5467b05ddbe94bb80315c\",\"outcomes\":\"475862bccede25b36bde71c44d54c081843015ed3d2136e02e065df626b096f8\",\"packet_ref\":null,\"predecessor\":{\"digest\":\"f9f85a4833b80a40524172d5cb19dd9d05deb4d391b0cecd6263c55ea43f0e5d\",\"publication\":\"publication-254863-1792451215201814667-146\"},\"projection\":\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"request\":\"payload\",\"result_hash\":\"9c383c36cda9914afd40844d2ac6a08406d7ccd833974544fd62e220dddb85d1\",\"sequence\":1,\"store_id\":\"store-254863-1792451210126584718-0\",\"version\":1},\"selected\":{\"digest\":\"4707b0a7e08518cb70fe997b762246bf74552fd546d7f3eb42b8fc9cae791849\",\"publication\":\"publication-254898-1792451215750732515-3\"}},\"status\":\"ok\",\"wall_ns\":169881}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "prepare",
+      "request": {
+        "request": "label",
+        "base": {
+          "digest": "4707b0a7e08518cb70fe997b762246bf74552fd546d7f3eb42b8fc9cae791849",
+          "publication": "publication-254898-1792451215750732515-3"
+        },
+        "ops": [
+          {
+            "kind": "label",
+            "id": "d000005",
+            "text": "not-navigation"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "profile": 2,
+    "seconds": 0.21006910596042871,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":7200,\"bytes_control_written\":2992,\"bytes_metadata_read\":546418,\"bytes_metadata_written\":29293,\"bytes_payload_read\":19758,\"bytes_payload_written\":0,\"bytes_read\":573376,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":32285,\"copies\":0,\"created_directories\":4,\"directory_syncs\":37,\"documents_visited\":1,\"edges_visited\":4,\"file_syncs\":8,\"index_updates\":3,\"namespace_ops\":7,\"navigation_bytes\":19530,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":206327,\"graph-transition-inclusive\":134865183,\"lock-hold\":47455458,\"lock-wait\":16220,\"preparation-inclusive\":208500769,\"projection-prepare-inclusive\":8092517,\"read\":2896076,\"replace\":117756,\"sync\":198165976,\"write\":515995},\"opens\":454,\"page_reads\":431,\"quota_limit\":67109760,\"quota_spent\":56442,\"range_calls\":{\"D\":1,\"E\":128},\"range_leaf_pairs\":{\"D\":128,\"E\":4096},\"range_page_visits\":{\"D\":3,\"E\":256},\"range_rows\":{\"D\":128,\"E\":4},\"replacements\":6,\"touched_paths\":0,\"unique_pages\":[\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"475862bccede25b36bde71c44d54c081843015ed3d2136e02e065df626b096f8\",\"4e51f54953bca1901b2b2c05a1d724677c363db29a6418eea250fde84905d5b5\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"a77650ca2aaef95606f3d83c8ac57cdc8247a6c20a70316cb4b379a7fd1bb590\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"dbf981dc859168f27870769b5afc5f46f741b90fa8a5467b05ddbe94bb80315c\",\"dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4\",\"f19553215c5cd521eec47d4afefe2c150bcc1d641ce7d32d987c40fce18f815c\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3792896,\"result\":{\"candidate\":\"attempts/attempt-254902-1792451218402695971-0/candidate.json\"},\"status\":\"ok\",\"wall_ns\":208621363}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "select",
+      "candidate": "attempts/attempt-254902-1792451218402695971-0/candidate.json"
+    },
+    "profile": 2,
+    "seconds": 0.22389974910765886,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":17903,\"bytes_control_written\":2230,\"bytes_metadata_read\":597164,\"bytes_metadata_written\":1128,\"bytes_payload_read\":19758,\"bytes_payload_written\":0,\"bytes_read\":634825,\"bytes_result_read\":0,\"bytes_result_written\":247,\"bytes_written\":3605,\"copies\":0,\"created_directories\":3,\"directory_syncs\":36,\"documents_visited\":1,\"edges_visited\":4,\"file_syncs\":11,\"index_updates\":5,\"namespace_ops\":9,\"navigation_bytes\":19530,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":238313,\"incremental-replay\":12280857,\"lock-hold\":220940221,\"lock-wait\":9116,\"read\":4676050,\"replace\":306155,\"selection-inclusive\":179115856,\"sync\":205655484,\"write\":665656},\"opens\":490,\"page_reads\":453,\"quota_limit\":null,\"quota_spent\":35889,\"range_calls\":{\"D\":1,\"E\":128},\"range_leaf_pairs\":{\"D\":128,\"E\":4096},\"range_page_visits\":{\"D\":3,\"E\":256},\"range_rows\":{\"D\":128,\"E\":4},\"replacements\":7,\"touched_paths\":0,\"unique_pages\":[\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"475862bccede25b36bde71c44d54c081843015ed3d2136e02e065df626b096f8\",\"4e51f54953bca1901b2b2c05a1d724677c363db29a6418eea250fde84905d5b5\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"a77650ca2aaef95606f3d83c8ac57cdc8247a6c20a70316cb4b379a7fd1bb590\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"dbf981dc859168f27870769b5afc5f46f741b90fa8a5467b05ddbe94bb80315c\",\"dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4\",\"f19553215c5cd521eec47d4afefe2c150bcc1d641ce7d32d987c40fce18f815c\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3833856,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000005\"],\"outcome\":\"accepted\",\"publication\":\"publication-254903-1792451218727381544-3\",\"removed\":[],\"request\":\"label\",\"state_digest\":\"35ad14212bbc784f74d80408939e1ded8ccdfa1f600a98a47b129176a6315190\"},\"selected\":{\"digest\":\"3a4f26a0becee665db57eea4314faec377cd8b7aa8790ff8a54f920ab4afffa0\",\"publication\":\"publication-254903-1792451218727381544-3\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":221137388}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "refresh"
+    },
+    "profile": 2,
+    "seconds": 0.05627591209486127,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":13059,\"bytes_control_written\":1665,\"bytes_metadata_read\":9428,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":22487,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":1665,\"copies\":0,\"created_directories\":0,\"directory_syncs\":7,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":2,\"index_updates\":0,\"namespace_ops\":3,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"A-completion-inclusive\":53007407,\"lock-hold\":53024043,\"lock-wait\":9085,\"read\":490617,\"replace\":90784,\"sync\":51594379,\"write\":140194},\"opens\":45,\"page_reads\":28,\"quota_limit\":null,\"quota_spent\":9857,\"range_calls\":{},\"range_leaf_pairs\":{\"00000000000000000002\":2},\"range_page_visits\":{\"00000000000000000002\":2},\"range_rows\":{},\"replacements\":2,\"touched_paths\":0,\"unique_pages\":[\"01ae10b77acd56ce8e6e5738778e662f0ded101bd18db5446f6e4f61a40c5146\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"e7163563cd3d7509f394d32e8a2bd8d1a6080b750c760a32db3267640887797e\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3559424,\"result\":{\"status\":\"pending-refreshed\"},\"status\":\"ok\",\"wall_ns\":53212046}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "audit"
+    },
+    "profile": 2,
+    "seconds": 0.036824577022343874,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":3074,\"bytes_control_written\":0,\"bytes_metadata_read\":8353992,\"bytes_metadata_written\":0,\"bytes_payload_read\":3177080,\"bytes_payload_written\":0,\"bytes_read\":11534146,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":128,\"edges_visited\":8,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":19530,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"lock-hold\":0,\"read\":11098768},\"opens\":3060,\"page_reads\":2793,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{\"D\":4,\"E\":129,\"P\":128,\"collection.yaml\":1,\"docs\":128,\"packet\":2},\"range_leaf_pairs\":{\"D\":512,\"E\":4128,\"P\":5928,\"collection.yaml\":64,\"docs\":8003,\"packet\":3},\"range_page_visits\":{\"D\":12,\"E\":258,\"P\":253,\"collection.yaml\":2,\"docs\":254,\"packet\":3},\"range_rows\":{\"D\":512,\"E\":8,\"P\":0,\"collection.yaml\":0,\"docs\":0,\"packet\":0},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"01ae10b77acd56ce8e6e5738778e662f0ded101bd18db5446f6e4f61a40c5146\",\"2f0815aa01f9ce705a281a86f5f70775eba9fae8be254e77fd97079119814d0b\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"4e51f54953bca1901b2b2c05a1d724677c363db29a6418eea250fde84905d5b5\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"a77650ca2aaef95606f3d83c8ac57cdc8247a6c20a70316cb4b379a7fd1bb590\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"e7163563cd3d7509f394d32e8a2bd8d1a6080b750c760a32db3267640887797e\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4018176,\"result\":{\"selected\":{\"digest\":\"3a4f26a0becee665db57eea4314faec377cd8b7aa8790ff8a54f920ab4afffa0\",\"publication\":\"publication-254903-1792451218727381544-3\"},\"status\":\"full-graph-index-source-projection-audit\"},\"status\":\"ok\",\"wall_ns\":34023088}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "inspect"
+    },
+    "profile": 2,
+    "seconds": 0.0009867781773209572,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":1616,\"bytes_control_written\":0,\"bytes_metadata_read\":2061,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":3677,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"lock-hold\":0,\"read\":26344},\"opens\":8,\"page_reads\":5,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"01ae10b77acd56ce8e6e5738778e662f0ded101bd18db5446f6e4f61a40c5146\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"e7163563cd3d7509f394d32e8a2bd8d1a6080b750c760a32db3267640887797e\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3518464,\"result\":{\"history_depth\":3,\"publication\":{\"allocation_owner\":{\"attempt\":\"attempt-254902-1792451218402695971-0\",\"conservative_bytes\":67109760,\"includes_intermediates_and_stages\":true},\"attempt\":\"attempt-254902-1792451218402695971-0\",\"changes\":\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"generation_manifest\":null,\"graph\":{\"budget\":1000,\"consumer\":\"project\",\"cost\":0,\"count\":128,\"fallback\":false,\"tree\":\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"version\":1},\"id\":\"publication-254903-1792451218727381544-3\",\"intent\":\"68c870aa36d38c653a2b40a562cb90534c9f76f3b463fc2d2ce16d35d56e9ead\",\"membership\":\"e7163563cd3d7509f394d32e8a2bd8d1a6080b750c760a32db3267640887797e\",\"outcomes\":\"01ae10b77acd56ce8e6e5738778e662f0ded101bd18db5446f6e4f61a40c5146\",\"packet_ref\":null,\"predecessor\":{\"digest\":\"4707b0a7e08518cb70fe997b762246bf74552fd546d7f3eb42b8fc9cae791849\",\"publication\":\"publication-254898-1792451215750732515-3\"},\"projection\":\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"request\":\"label\",\"result_hash\":\"1f1785fe6dcfb5e0e202471ea0a3e897af2f32211112ba50c95c74fa57fa9dfb\",\"sequence\":2,\"store_id\":\"store-254863-1792451210126584718-0\",\"version\":1},\"selected\":{\"digest\":\"3a4f26a0becee665db57eea4314faec377cd8b7aa8790ff8a54f920ab4afffa0\",\"publication\":\"publication-254903-1792451218727381544-3\"}},\"status\":\"ok\",\"wall_ns\":134067}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "prepare",
+      "request": {
+        "request": "title",
+        "base": {
+          "digest": "3a4f26a0becee665db57eea4314faec377cd8b7aa8790ff8a54f920ab4afffa0",
+          "publication": "publication-254903-1792451218727381544-3"
+        },
+        "ops": [
+          {
+            "kind": "rename",
+            "id": "d000006",
+            "text": "Navigation title"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "profile": 2,
+    "seconds": 0.37841211538761854,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":7442,\"bytes_control_written\":3246,\"bytes_metadata_read\":645197,\"bytes_metadata_written\":43719,\"bytes_payload_read\":228,\"bytes_payload_written\":19554,\"bytes_read\":652867,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":66519,\"copies\":0,\"created_directories\":9,\"directory_syncs\":65,\"documents_visited\":1,\"edges_visited\":4,\"file_syncs\":12,\"index_updates\":9,\"namespace_ops\":11,\"navigation_bytes\":19554,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":645261,\"graph-transition-inclusive\":108272150,\"lock-hold\":49194140,\"lock-wait\":15342,\"preparation-inclusive\":377035133,\"projection-prepare-inclusive\":164670420,\"read\":3990861,\"replace\":165568,\"sync\":361868157,\"write\":843250},\"opens\":493,\"page_reads\":467,\"quota_limit\":67109888,\"quota_spent\":107060,\"range_calls\":{\"D\":1,\"E\":128,\"P\":1,\"R\":1,\"collection.yaml\":1,\"docs\":1},\"range_leaf_pairs\":{\"D\":128,\"E\":4224,\"P\":33,\"R\":8,\"collection.yaml\":32,\"docs\":32},\"range_page_visits\":{\"D\":3,\"E\":256,\"P\":2,\"R\":2,\"collection.yaml\":2,\"docs\":2},\"range_rows\":{\"D\":128,\"E\":4,\"P\":0,\"R\":0,\"collection.yaml\":0,\"docs\":0},\"replacements\":10,\"touched_paths\":0,\"unique_pages\":[\"00a5ae8ab8a0b16571fd5c7e39bc267cf127369d45377943633e5b07126d3ad9\",\"01ae10b77acd56ce8e6e5738778e662f0ded101bd18db5446f6e4f61a40c5146\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"4e51f54953bca1901b2b2c05a1d724677c363db29a6418eea250fde84905d5b5\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"9eae2fc2b446af0ce97a97557975e374ce17f091e38472308cb61786ac0deb82\",\"a77650ca2aaef95606f3d83c8ac57cdc8247a6c20a70316cb4b379a7fd1bb590\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"e7163563cd3d7509f394d32e8a2bd8d1a6080b750c760a32db3267640887797e\",\"fcb0f24c24f709752e38b77c563326f89d1150ceade7047a95b734198671aa0a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3784704,\"result\":{\"candidate\":\"attempts/attempt-254907-1792451218948315381-0/candidate.json\"},\"status\":\"ok\",\"wall_ns\":377137242}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "select",
+      "candidate": "attempts/attempt-254907-1792451218948315381-0/candidate.json"
+    },
+    "profile": 2,
+    "seconds": 0.217708891723305,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":18641,\"bytes_control_written\":2230,\"bytes_metadata_read\":706748,\"bytes_metadata_written\":1681,\"bytes_payload_read\":19782,\"bytes_payload_written\":0,\"bytes_read\":745171,\"bytes_result_read\":0,\"bytes_result_written\":282,\"bytes_written\":4193,\"copies\":0,\"created_directories\":2,\"directory_syncs\":35,\"documents_visited\":1,\"edges_visited\":4,\"file_syncs\":11,\"index_updates\":11,\"namespace_ops\":9,\"navigation_bytes\":19554,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":116794,\"incremental-replay\":17185711,\"lock-hold\":214592582,\"lock-wait\":11928,\"read\":6251398,\"replace\":270799,\"selection-inclusive\":166886318,\"sync\":194389236,\"write\":673502},\"opens\":529,\"page_reads\":492,\"quota_limit\":null,\"quota_spent\":36477,\"range_calls\":{\"D\":1,\"E\":128,\"P\":1,\"R\":1,\"collection.yaml\":1,\"docs\":1},\"range_leaf_pairs\":{\"D\":128,\"E\":4224,\"P\":33,\"R\":8,\"collection.yaml\":32,\"docs\":32},\"range_page_visits\":{\"D\":3,\"E\":256,\"P\":2,\"R\":2,\"collection.yaml\":2,\"docs\":2},\"range_rows\":{\"D\":128,\"E\":4,\"P\":0,\"R\":0,\"collection.yaml\":0,\"docs\":0},\"replacements\":7,\"touched_paths\":0,\"unique_pages\":[\"00a5ae8ab8a0b16571fd5c7e39bc267cf127369d45377943633e5b07126d3ad9\",\"01ae10b77acd56ce8e6e5738778e662f0ded101bd18db5446f6e4f61a40c5146\",\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"4e51f54953bca1901b2b2c05a1d724677c363db29a6418eea250fde84905d5b5\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"9eae2fc2b446af0ce97a97557975e374ce17f091e38472308cb61786ac0deb82\",\"a77650ca2aaef95606f3d83c8ac57cdc8247a6c20a70316cb4b379a7fd1bb590\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"e7163563cd3d7509f394d32e8a2bd8d1a6080b750c760a32db3267640887797e\",\"f300110b38974c4205f9f3201ae691d3d70c09c6de7b0397c770fd23d1de51cf\",\"fcb0f24c24f709752e38b77c563326f89d1150ceade7047a95b734198671aa0a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3837952,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000006\"],\"outcome\":\"accepted\",\"publication\":\"publication-254908-1792451219429360121-3\",\"removed\":[\"docs/item-case-d000006.md\"],\"request\":\"title\",\"state_digest\":\"ecb89d8388e2cd918ca849fb1c5b432405a3a74f6a50fffd99600bcf6163eb15\"},\"selected\":{\"digest\":\"28612be823c67f3b03a597f2a4a91769548fa46fa24934fad9340502d12ad75d\",\"publication\":\"publication-254908-1792451219429360121-3\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":214792916}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "refresh"
+    },
+    "profile": 2,
+    "seconds": 0.12108355993404984,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":13051,\"bytes_control_written\":2760,\"bytes_metadata_read\":160278,\"bytes_metadata_written\":0,\"bytes_payload_read\":70926,\"bytes_payload_written\":23650,\"bytes_read\":244255,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":26410,\"copies\":2,\"created_directories\":1,\"directory_syncs\":19,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":4,\"index_updates\":0,\"namespace_ops\":6,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"A-completion-inclusive\":118025413,\"copy\":129936,\"directory-create\":62897,\"lock-hold\":118035116,\"lock-wait\":13851,\"read\":1114240,\"replace\":169705,\"sync\":114277734,\"write\":138502},\"opens\":89,\"page_reads\":64,\"quota_limit\":null,\"quota_spent\":42794,\"range_calls\":{},\"range_leaf_pairs\":{\"00000000000000000003\":8},\"range_page_visits\":{\"00000000000000000003\":2},\"range_rows\":{},\"replacements\":4,\"touched_paths\":3,\"unique_pages\":[\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"6976b5ec5ebd4ebba1facffc96d9c5b6c153d03530e3383de909f14568307447\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"c2a927671db5e108a650520b3cc4f283bed67f5709bef1f8c32d0ecd79e90166\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"ca30da187d33d0a641af7da21c93e384549c656a82c2e77eaaaccaac2b634c4c\",\"fcb0f24c24f709752e38b77c563326f89d1150ceade7047a95b734198671aa0a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3649536,\"result\":{\"status\":\"pending-refreshed\"},\"status\":\"ok\",\"wall_ns\":118246233}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "audit"
+    },
+    "profile": 2,
+    "seconds": 0.1317651611752808,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":3074,\"bytes_control_written\":0,\"bytes_metadata_read\":8354474,\"bytes_metadata_written\":15827,\"bytes_payload_read\":3177128,\"bytes_payload_written\":0,\"bytes_read\":11534676,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":15827,\"copies\":0,\"created_directories\":2,\"directory_syncs\":14,\"documents_visited\":128,\"edges_visited\":8,\"file_syncs\":2,\"index_updates\":0,\"namespace_ops\":2,\"navigation_bytes\":19554,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":166735,\"lock-hold\":0,\"read\":16504390,\"sync\":79838715,\"write\":145840},\"opens\":3061,\"page_reads\":2792,\"quota_limit\":null,\"quota_spent\":24019,\"range_calls\":{\"D\":4,\"E\":129,\"P\":128,\"collection.yaml\":1,\"docs\":128,\"packet\":2},\"range_leaf_pairs\":{\"D\":512,\"E\":4257,\"P\":5953,\"collection.yaml\":64,\"docs\":8003,\"packet\":3},\"range_page_visits\":{\"D\":12,\"E\":258,\"P\":253,\"collection.yaml\":2,\"docs\":254,\"packet\":3},\"range_rows\":{\"D\":512,\"E\":8,\"P\":0,\"collection.yaml\":0,\"docs\":0,\"packet\":0},\"replacements\":2,\"touched_paths\":0,\"unique_pages\":[\"00a5ae8ab8a0b16571fd5c7e39bc267cf127369d45377943633e5b07126d3ad9\",\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"2d2c18a8a5fb3a2a9cdbe808e5f3579c054603068567729c048687c6feee4dae\",\"2f0815aa01f9ce705a281a86f5f70775eba9fae8be254e77fd97079119814d0b\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"6976b5ec5ebd4ebba1facffc96d9c5b6c153d03530e3383de909f14568307447\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"9eae2fc2b446af0ce97a97557975e374ce17f091e38472308cb61786ac0deb82\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"af35880cbb945ab1bc6471893d269ee3ace5dcd2d3939a5e8fbff6a98898f84f\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca30da187d33d0a641af7da21c93e384549c656a82c2e77eaaaccaac2b634c4c\",\"f300110b38974c4205f9f3201ae691d3d70c09c6de7b0397c770fd23d1de51cf\",\"fcb0f24c24f709752e38b77c563326f89d1150ceade7047a95b734198671aa0a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4112384,\"result\":{\"selected\":{\"digest\":\"28612be823c67f3b03a597f2a4a91769548fa46fa24934fad9340502d12ad75d\",\"publication\":\"publication-254908-1792451219429360121-3\"},\"status\":\"full-graph-index-source-projection-audit\"},\"status\":\"ok\",\"wall_ns\":129720552}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "inspect"
+    },
+    "profile": 2,
+    "seconds": 0.0010200953111052513,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":1616,\"bytes_control_written\":0,\"bytes_metadata_read\":2899,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":4515,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"lock-hold\":0,\"read\":31349},\"opens\":8,\"page_reads\":5,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"6976b5ec5ebd4ebba1facffc96d9c5b6c153d03530e3383de909f14568307447\",\"ca30da187d33d0a641af7da21c93e384549c656a82c2e77eaaaccaac2b634c4c\",\"fcb0f24c24f709752e38b77c563326f89d1150ceade7047a95b734198671aa0a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3452928,\"result\":{\"history_depth\":4,\"publication\":{\"allocation_owner\":{\"attempt\":\"attempt-254907-1792451218948315381-0\",\"conservative_bytes\":67109888,\"includes_intermediates_and_stages\":true},\"attempt\":\"attempt-254907-1792451218948315381-0\",\"changes\":\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"generation_manifest\":null,\"graph\":{\"budget\":1000,\"consumer\":\"project\",\"cost\":0,\"count\":128,\"fallback\":false,\"tree\":\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"version\":1},\"id\":\"publication-254908-1792451219429360121-3\",\"intent\":\"246849f1430d78f1dc391b08918538e20cee8a490987987369b725d1680b807e\",\"membership\":\"6976b5ec5ebd4ebba1facffc96d9c5b6c153d03530e3383de909f14568307447\",\"outcomes\":\"ca30da187d33d0a641af7da21c93e384549c656a82c2e77eaaaccaac2b634c4c\",\"packet_ref\":null,\"predecessor\":{\"digest\":\"3a4f26a0becee665db57eea4314faec377cd8b7aa8790ff8a54f920ab4afffa0\",\"publication\":\"publication-254903-1792451218727381544-3\"},\"projection\":\"fcb0f24c24f709752e38b77c563326f89d1150ceade7047a95b734198671aa0a\",\"request\":\"title\",\"result_hash\":\"3af1396d70d6f80f7c6b366ec2b91dfda5a4ee547d5c599da2a1709e97490384\",\"sequence\":3,\"store_id\":\"store-254863-1792451210126584718-0\",\"version\":1},\"selected\":{\"digest\":\"28612be823c67f3b03a597f2a4a91769548fa46fa24934fad9340502d12ad75d\",\"publication\":\"publication-254908-1792451219429360121-3\"}},\"status\":\"ok\",\"wall_ns\":112674}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "prepare",
+      "request": {
+        "request": "relations",
+        "base": {
+          "digest": "28612be823c67f3b03a597f2a4a91769548fa46fa24934fad9340502d12ad75d",
+          "publication": "publication-254908-1792451219429360121-3"
+        },
+        "ops": [
+          {
+            "kind": "edge",
+            "id": "d000004",
+            "text": "cites",
+            "target": "d000005"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "profile": 2,
+    "seconds": 0.3527516620233655,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":7409,\"bytes_control_written\":3217,\"bytes_metadata_read\":593312,\"bytes_metadata_written\":36383,\"bytes_payload_read\":228,\"bytes_payload_written\":19623,\"bytes_read\":600949,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":59223,\"copies\":0,\"created_directories\":9,\"directory_syncs\":65,\"documents_visited\":2,\"edges_visited\":5,\"file_syncs\":12,\"index_updates\":6,\"namespace_ops\":11,\"navigation_bytes\":19623,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":616762,\"graph-transition-inclusive\":137970222,\"lock-hold\":46709141,\"lock-wait\":13371,\"preparation-inclusive\":351259908,\"projection-prepare-inclusive\":112672249,\"read\":3450999,\"replace\":156159,\"sync\":337733071,\"write\":819938},\"opens\":467,\"page_reads\":441,\"quota_limit\":67109184,\"quota_spent\":99760,\"range_calls\":{\"D\":1,\"E\":128,\"collection.yaml\":1},\"range_leaf_pairs\":{\"D\":128,\"E\":4352,\"collection.yaml\":32},\"range_page_visits\":{\"D\":3,\"E\":256,\"collection.yaml\":2},\"range_rows\":{\"D\":128,\"E\":5,\"collection.yaml\":0},\"replacements\":10,\"touched_paths\":0,\"unique_pages\":[\"00a5ae8ab8a0b16571fd5c7e39bc267cf127369d45377943633e5b07126d3ad9\",\"07891bc18baf7b8e58593d33d1d3d8dafa37216adc2fbc284bf49b5748e815c4\",\"087109fea3636af7f840a7739f7d873e56e15db59525f57242ce5df044535205\",\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"6976b5ec5ebd4ebba1facffc96d9c5b6c153d03530e3383de909f14568307447\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"9eae2fc2b446af0ce97a97557975e374ce17f091e38472308cb61786ac0deb82\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca30da187d33d0a641af7da21c93e384549c656a82c2e77eaaaccaac2b634c4c\",\"eda8ebee0dc803f3301cd9d00a2837733da9366c4419248c8969669a2b124574\",\"fcb0f24c24f709752e38b77c563326f89d1150ceade7047a95b734198671aa0a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3727360,\"result\":{\"candidate\":\"attempts/attempt-254912-1792451219815097779-0/candidate.json\"},\"status\":\"ok\",\"wall_ns\":351350477}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "select",
+      "candidate": "attempts/attempt-254912-1792451219815097779-0/candidate.json"
+    },
+    "profile": 2,
+    "seconds": 0.21354766422882676,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":18550,\"bytes_control_written\":2238,\"bytes_metadata_read\":651503,\"bytes_metadata_written\":2234,\"bytes_payload_read\":19851,\"bytes_payload_written\":0,\"bytes_read\":689904,\"bytes_result_read\":0,\"bytes_result_written\":251,\"bytes_written\":4723,\"copies\":0,\"created_directories\":3,\"directory_syncs\":36,\"documents_visited\":2,\"edges_visited\":5,\"file_syncs\":11,\"index_updates\":8,\"namespace_ops\":9,\"navigation_bytes\":19623,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":222392,\"incremental-replay\":8563627,\"lock-hold\":209643425,\"lock-wait\":8770,\"read\":3228974,\"replace\":288664,\"selection-inclusive\":171936332,\"sync\":198461968,\"write\":421897},\"opens\":503,\"page_reads\":466,\"quota_limit\":null,\"quota_spent\":37003,\"range_calls\":{\"D\":1,\"E\":128,\"collection.yaml\":1},\"range_leaf_pairs\":{\"D\":128,\"E\":4352,\"collection.yaml\":32},\"range_page_visits\":{\"D\":3,\"E\":256,\"collection.yaml\":2},\"range_rows\":{\"D\":128,\"E\":5,\"collection.yaml\":0},\"replacements\":7,\"touched_paths\":0,\"unique_pages\":[\"00a5ae8ab8a0b16571fd5c7e39bc267cf127369d45377943633e5b07126d3ad9\",\"07891bc18baf7b8e58593d33d1d3d8dafa37216adc2fbc284bf49b5748e815c4\",\"087109fea3636af7f840a7739f7d873e56e15db59525f57242ce5df044535205\",\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"6976b5ec5ebd4ebba1facffc96d9c5b6c153d03530e3383de909f14568307447\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"9eae2fc2b446af0ce97a97557975e374ce17f091e38472308cb61786ac0deb82\",\"a0aafed2f6cafe853375fb7f5588207467d9be7f0d6edd65008bdda6d3b14af5\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca30da187d33d0a641af7da21c93e384549c656a82c2e77eaaaccaac2b634c4c\",\"eda8ebee0dc803f3301cd9d00a2837733da9366c4419248c8969669a2b124574\",\"fcb0f24c24f709752e38b77c563326f89d1150ceade7047a95b734198671aa0a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3776512,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000004\"],\"outcome\":\"accepted\",\"publication\":\"publication-254913-1792451220274814831-3\",\"removed\":[],\"request\":\"relations\",\"state_digest\":\"fdf884e2d050707f8a08487a328e62a47ff81580cd223e823eae36a6f2af4283\"},\"selected\":{\"digest\":\"541fa79861be4ff4a0ed0634a3287178d44c19b58b021936e2766481c11dbbb7\",\"publication\":\"publication-254913-1792451220274814831-3\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":209843872}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "refresh"
+    },
+    "profile": 2,
+    "seconds": 0.08448158903047442,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":13079,\"bytes_control_written\":2130,\"bytes_metadata_read\":50040,\"bytes_metadata_written\":0,\"bytes_payload_read\":58800,\"bytes_payload_written\":19623,\"bytes_read\":121919,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":21753,\"copies\":1,\"created_directories\":1,\"directory_syncs\":13,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":3,\"index_updates\":0,\"namespace_ops\":4,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"A-completion-inclusive\":80959116,\"copy\":85334,\"directory-create\":56943,\"lock-hold\":80969761,\"lock-wait\":28308,\"read\":1359446,\"replace\":89366,\"sync\":77579057,\"write\":97031},\"opens\":61,\"page_reads\":40,\"quota_limit\":null,\"quota_spent\":34041,\"range_calls\":{},\"range_leaf_pairs\":{\"00000000000000000004\":10},\"range_page_visits\":{\"00000000000000000004\":2},\"range_rows\":{},\"replacements\":3,\"touched_paths\":1,\"unique_pages\":[\"087109fea3636af7f840a7739f7d873e56e15db59525f57242ce5df044535205\",\"09c5416455a64c01c02b0659e62dfcfc3cf2d92f6056bd410485827778ca61a3\",\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"ccf5816093d39c379c03df3ad3e11db23ae74f7d3455cc5cb13beed5efd07468\",\"fcb0f24c24f709752e38b77c563326f89d1150ceade7047a95b734198671aa0a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3665920,\"result\":{\"status\":\"pending-refreshed\"},\"status\":\"ok\",\"wall_ns\":81249911}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "audit"
+    },
+    "profile": 2,
+    "seconds": 0.11228620121255517,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":3082,\"bytes_control_written\":0,\"bytes_metadata_read\":8417206,\"bytes_metadata_written\":15827,\"bytes_payload_read\":3177266,\"bytes_payload_written\":0,\"bytes_read\":11597554,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":15827,\"copies\":0,\"created_directories\":2,\"directory_syncs\":14,\"documents_visited\":128,\"edges_visited\":10,\"file_syncs\":2,\"index_updates\":0,\"namespace_ops\":2,\"navigation_bytes\":19623,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":43790,\"lock-hold\":0,\"read\":10809281,\"sync\":76256854,\"write\":52088},\"opens\":3064,\"page_reads\":2795,\"quota_limit\":null,\"quota_spent\":24019,\"range_calls\":{\"D\":4,\"E\":129,\"P\":128,\"collection.yaml\":1,\"docs\":128,\"packet\":2},\"range_leaf_pairs\":{\"D\":512,\"E\":4386,\"P\":5983,\"collection.yaml\":64,\"docs\":8003,\"packet\":3},\"range_page_visits\":{\"D\":12,\"E\":258,\"P\":253,\"collection.yaml\":2,\"docs\":254,\"packet\":3},\"range_rows\":{\"D\":512,\"E\":10,\"P\":0,\"collection.yaml\":0,\"docs\":0,\"packet\":0},\"replacements\":2,\"touched_paths\":0,\"unique_pages\":[\"07891bc18baf7b8e58593d33d1d3d8dafa37216adc2fbc284bf49b5748e815c4\",\"087109fea3636af7f840a7739f7d873e56e15db59525f57242ce5df044535205\",\"09c5416455a64c01c02b0659e62dfcfc3cf2d92f6056bd410485827778ca61a3\",\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"250fbc55942c427bc2017b639a01ba48794db14b80b901d316af198b2328531c\",\"2f0815aa01f9ce705a281a86f5f70775eba9fae8be254e77fd97079119814d0b\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"67aa49c784a68f6e07215b54fa0fc89eb0c03b82bb6db7eadfad3528105ef1b1\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"a0aafed2f6cafe853375fb7f5588207467d9be7f0d6edd65008bdda6d3b14af5\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ccf5816093d39c379c03df3ad3e11db23ae74f7d3455cc5cb13beed5efd07468\",\"eda8ebee0dc803f3301cd9d00a2837733da9366c4419248c8969669a2b124574\",\"f300110b38974c4205f9f3201ae691d3d70c09c6de7b0397c770fd23d1de51cf\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4071424,\"result\":{\"selected\":{\"digest\":\"541fa79861be4ff4a0ed0634a3287178d44c19b58b021936e2766481c11dbbb7\",\"publication\":\"publication-254913-1792451220274814831-3\"},\"status\":\"full-graph-index-source-projection-audit\"},\"status\":\"ok\",\"wall_ns\":109747051}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "inspect"
+    },
+    "profile": 2,
+    "seconds": 0.0008965716697275639,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":1620,\"bytes_control_written\":0,\"bytes_metadata_read\":3498,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":5118,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"lock-hold\":0,\"read\":28681},\"opens\":8,\"page_reads\":5,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"087109fea3636af7f840a7739f7d873e56e15db59525f57242ce5df044535205\",\"09c5416455a64c01c02b0659e62dfcfc3cf2d92f6056bd410485827778ca61a3\",\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"ccf5816093d39c379c03df3ad3e11db23ae74f7d3455cc5cb13beed5efd07468\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3387392,\"result\":{\"history_depth\":5,\"publication\":{\"allocation_owner\":{\"attempt\":\"attempt-254912-1792451219815097779-0\",\"conservative_bytes\":67109184,\"includes_intermediates_and_stages\":true},\"attempt\":\"attempt-254912-1792451219815097779-0\",\"changes\":\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"generation_manifest\":null,\"graph\":{\"budget\":1000,\"consumer\":\"project\",\"cost\":0,\"count\":128,\"fallback\":false,\"tree\":\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"version\":1},\"id\":\"publication-254913-1792451220274814831-3\",\"intent\":\"291dff728947380619d1a8defbdf6bfade322787712fa579b4d85de5ffbb4004\",\"membership\":\"ccf5816093d39c379c03df3ad3e11db23ae74f7d3455cc5cb13beed5efd07468\",\"outcomes\":\"09c5416455a64c01c02b0659e62dfcfc3cf2d92f6056bd410485827778ca61a3\",\"packet_ref\":null,\"predecessor\":{\"digest\":\"28612be823c67f3b03a597f2a4a91769548fa46fa24934fad9340502d12ad75d\",\"publication\":\"publication-254908-1792451219429360121-3\"},\"projection\":\"087109fea3636af7f840a7739f7d873e56e15db59525f57242ce5df044535205\",\"request\":\"relations\",\"result_hash\":\"85b674d363c49a820471d7edc72247b6119282544c356a33cad4e93e4a962a2f\",\"sequence\":4,\"store_id\":\"store-254863-1792451210126584718-0\",\"version\":1},\"selected\":{\"digest\":\"541fa79861be4ff4a0ed0634a3287178d44c19b58b021936e2766481c11dbbb7\",\"publication\":\"publication-254913-1792451220274814831-3\"}},\"status\":\"ok\",\"wall_ns\":116033}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "prepare",
+      "request": {
+        "request": "batch-payload",
+        "base": {
+          "digest": "541fa79861be4ff4a0ed0634a3287178d44c19b58b021936e2766481c11dbbb7",
+          "publication": "publication-254913-1792451220274814831-3"
+        },
+        "ops": [
+          {
+            "kind": "edit",
+            "id": "d000010",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000011",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000012",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000013",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000014",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000015",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000016",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000017",
+            "text": " batch"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "profile": 2,
+    "seconds": 0.5507533326745033,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":9889,\"bytes_control_written\":5689,\"bytes_metadata_read\":1089345,\"bytes_metadata_written\":42457,\"bytes_payload_read\":110011,\"bytes_payload_written\":45104,\"bytes_read\":1209245,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":93250,\"copies\":0,\"created_directories\":12,\"directory_syncs\":105,\"documents_visited\":8,\"edges_visited\":5,\"file_syncs\":18,\"index_updates\":32,\"namespace_ops\":17,\"navigation_bytes\":19623,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":859535,\"graph-transition-inclusive\":346907818,\"lock-hold\":46917755,\"lock-wait\":8109,\"preparation-inclusive\":549362066,\"projection-prepare-inclusive\":102043585,\"read\":5730911,\"replace\":156438,\"sync\":527700822,\"write\":1201794},\"opens\":668,\"page_reads\":619,\"quota_limit\":67111936,\"quota_spent\":158359,\"range_calls\":{\"D\":1,\"E\":128,\"P\":8,\"docs\":8},\"range_leaf_pairs\":{\"D\":128,\"E\":4352,\"P\":266,\"docs\":262},\"range_page_visits\":{\"D\":3,\"E\":256,\"P\":16,\"docs\":16},\"range_rows\":{\"D\":128,\"E\":5,\"P\":0,\"docs\":0},\"replacements\":16,\"touched_paths\":0,\"unique_pages\":[\"07891bc18baf7b8e58593d33d1d3d8dafa37216adc2fbc284bf49b5748e815c4\",\"087109fea3636af7f840a7739f7d873e56e15db59525f57242ce5df044535205\",\"09c5416455a64c01c02b0659e62dfcfc3cf2d92f6056bd410485827778ca61a3\",\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"3c7add573f8778aeaaa150b1299d6bd57e4f3b61bb78c0621644e5750ac6c219\",\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"53c4e5c2b2fa617c1ac177e726b1a14d31da297a5869669c856200993449b838\",\"87849c354fc8902d1fcfcda416e2dd986ec29bc9196c4548574c9e977c330e73\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ccf5816093d39c379c03df3ad3e11db23ae74f7d3455cc5cb13beed5efd07468\",\"da1af85671eca082a3fedf876556311c0d0eccaabf59c540ef5225edc274a9d5\",\"e73e1de9d837aae9664aedc48d7be7d17bd8a4413972ac00b95c868e8e651cc6\",\"eda8ebee0dc803f3301cd9d00a2837733da9366c4419248c8969669a2b124574\",\"f300110b38974c4205f9f3201ae691d3d70c09c6de7b0397c770fd23d1de51cf\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3805184,\"result\":{\"candidate\":\"attempts/attempt-254917-1792451220596988783-0/candidate.json\"},\"status\":\"ok\",\"wall_ns\":549465216}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "select",
+      "candidate": "attempts/attempt-254917-1792451220596988783-0/candidate.json"
+    },
+    "profile": 2,
+    "seconds": 0.22230436280369759,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":25986,\"bytes_control_written\":2246,\"bytes_metadata_read\":1157586,\"bytes_metadata_written\":2791,\"bytes_payload_read\":110011,\"bytes_payload_written\":0,\"bytes_read\":1293583,\"bytes_result_read\":0,\"bytes_result_written\":360,\"bytes_written\":5397,\"copies\":0,\"created_directories\":3,\"directory_syncs\":36,\"documents_visited\":8,\"edges_visited\":5,\"file_syncs\":11,\"index_updates\":34,\"namespace_ops\":9,\"navigation_bytes\":19623,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":204382,\"incremental-replay\":14330325,\"lock-hold\":218662635,\"lock-wait\":26381,\"read\":5909285,\"replace\":321754,\"selection-inclusive\":173223191,\"sync\":200349891,\"write\":718846},\"opens\":696,\"page_reads\":643,\"quota_limit\":null,\"quota_spent\":37673,\"range_calls\":{\"D\":1,\"E\":128,\"P\":8,\"docs\":8},\"range_leaf_pairs\":{\"D\":128,\"E\":4352,\"P\":266,\"docs\":262},\"range_page_visits\":{\"D\":3,\"E\":256,\"P\":16,\"docs\":16},\"range_rows\":{\"D\":128,\"E\":5,\"P\":0,\"docs\":0},\"replacements\":7,\"touched_paths\":0,\"unique_pages\":[\"07891bc18baf7b8e58593d33d1d3d8dafa37216adc2fbc284bf49b5748e815c4\",\"087109fea3636af7f840a7739f7d873e56e15db59525f57242ce5df044535205\",\"09c5416455a64c01c02b0659e62dfcfc3cf2d92f6056bd410485827778ca61a3\",\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"3c7add573f8778aeaaa150b1299d6bd57e4f3b61bb78c0621644e5750ac6c219\",\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"53c4e5c2b2fa617c1ac177e726b1a14d31da297a5869669c856200993449b838\",\"87849c354fc8902d1fcfcda416e2dd986ec29bc9196c4548574c9e977c330e73\",\"8a668841a4becaba8092a4a6e58d5e11c4b1eb1ef2d395ce87b7606fbc22318f\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ccf5816093d39c379c03df3ad3e11db23ae74f7d3455cc5cb13beed5efd07468\",\"da1af85671eca082a3fedf876556311c0d0eccaabf59c540ef5225edc274a9d5\",\"e73e1de9d837aae9664aedc48d7be7d17bd8a4413972ac00b95c868e8e651cc6\",\"eda8ebee0dc803f3301cd9d00a2837733da9366c4419248c8969669a2b124574\",\"f300110b38974c4205f9f3201ae691d3d70c09c6de7b0397c770fd23d1de51cf\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3891200,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000010\",\"d000011\",\"d000012\",\"d000013\",\"d000014\",\"d000015\",\"d000016\",\"d000017\"],\"outcome\":\"accepted\",\"publication\":\"publication-254918-1792451221264314025-3\",\"removed\":[],\"request\":\"batch-payload\",\"state_digest\":\"61ca51957533e71f5711a9e8a33e348af40d028d491e2d1a3f3599e6ddec911c\"},\"selected\":{\"digest\":\"4923c159ee7c261a184abc651181d128d138c3e8b117ee0b815e1c7f66a02b3e\",\"publication\":\"publication-254918-1792451221264314025-3\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":218954291}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "refresh"
+    },
+    "profile": 2,
+    "seconds": 0.21235553175210953,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":13115,\"bytes_control_written\":6149,\"bytes_metadata_read\":305348,\"bytes_metadata_written\":0,\"bytes_payload_read\":135264,\"bytes_payload_written\":45104,\"bytes_read\":453727,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":51253,\"copies\":8,\"created_directories\":1,\"directory_syncs\":48,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":10,\"index_updates\":0,\"namespace_ops\":11,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"A-completion-inclusive\":209249047,\"copy\":356788,\"directory-create\":55553,\"lock-hold\":209262410,\"lock-wait\":8337,\"read\":2145954,\"replace\":548949,\"sync\":201929296,\"write\":227280},\"opens\":173,\"page_reads\":124,\"quota_limit\":null,\"quota_spent\":92213,\"range_calls\":{},\"range_leaf_pairs\":{\"00000000000000000005\":26},\"range_page_visits\":{\"00000000000000000005\":2},\"range_rows\":{},\"replacements\":10,\"touched_paths\":8,\"unique_pages\":[\"087109fea3636af7f840a7739f7d873e56e15db59525f57242ce5df044535205\",\"10805c1b4f899bf3538ede40e0f23b1108984dc3f139c91e173783077044a98a\",\"3c7add573f8778aeaaa150b1299d6bd57e4f3b61bb78c0621644e5750ac6c219\",\"87849c354fc8902d1fcfcda416e2dd986ec29bc9196c4548574c9e977c330e73\",\"8a668841a4becaba8092a4a6e58d5e11c4b1eb1ef2d395ce87b7606fbc22318f\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"d9de59f0662da93188b94c62afb7fd5f3cb04b73b8448c4aa6e9c70ad16ecd59\",\"da1af85671eca082a3fedf876556311c0d0eccaabf59c540ef5225edc274a9d5\",\"e73e1de9d837aae9664aedc48d7be7d17bd8a4413972ac00b95c868e8e651cc6\",\"f300110b38974c4205f9f3201ae691d3d70c09c6de7b0397c770fd23d1de51cf\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3616768,\"result\":{\"status\":\"pending-refreshed\"},\"status\":\"ok\",\"wall_ns\":209439543}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p2/disposable/store",
+      "action": "audit"
+    },
+    "profile": 2,
+    "seconds": 0.1232881941832602,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":3090,\"bytes_control_written\":0,\"bytes_metadata_read\":8419436,\"bytes_metadata_written\":15827,\"bytes_payload_read\":3177362,\"bytes_payload_written\":0,\"bytes_read\":11599888,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":15827,\"copies\":0,\"created_directories\":1,\"directory_syncs\":13,\"documents_visited\":128,\"edges_visited\":10,\"file_syncs\":2,\"index_updates\":0,\"namespace_ops\":2,\"navigation_bytes\":19623,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":76870,\"lock-hold\":0,\"read\":17367663,\"sync\":67264061,\"write\":183479},\"opens\":3064,\"page_reads\":2795,\"quota_limit\":null,\"quota_spent\":24019,\"range_calls\":{\"D\":4,\"E\":129,\"P\":128,\"collection.yaml\":1,\"docs\":128,\"packet\":2},\"range_leaf_pairs\":{\"D\":512,\"E\":4386,\"P\":5983,\"collection.yaml\":64,\"docs\":8003,\"packet\":3},\"range_page_visits\":{\"D\":12,\"E\":258,\"P\":253,\"collection.yaml\":2,\"docs\":254,\"packet\":3},\"range_rows\":{\"D\":512,\"E\":10,\"P\":0,\"collection.yaml\":0,\"docs\":0,\"packet\":0},\"replacements\":2,\"touched_paths\":0,\"unique_pages\":[\"10805c1b4f899bf3538ede40e0f23b1108984dc3f139c91e173783077044a98a\",\"2f0815aa01f9ce705a281a86f5f70775eba9fae8be254e77fd97079119814d0b\",\"395278278e371c587f4cdff7ad512b0685a54fbad3c1a4271d1be13a34750a0f\",\"3c7add573f8778aeaaa150b1299d6bd57e4f3b61bb78c0621644e5750ac6c219\",\"53c4e5c2b2fa617c1ac177e726b1a14d31da297a5869669c856200993449b838\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"87849c354fc8902d1fcfcda416e2dd986ec29bc9196c4548574c9e977c330e73\",\"8a668841a4becaba8092a4a6e58d5e11c4b1eb1ef2d395ce87b7606fbc22318f\",\"a0aafed2f6cafe853375fb7f5588207467d9be7f0d6edd65008bdda6d3b14af5\",\"a15b5d6df8f317a5d040535c0088e9844329e9cfda33e0d01675257cd4369f06\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"c2067d34e1c718b3e5e105633678a3fcac2f20c39076a971e810fe2aa2bf0429\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"d9de59f0662da93188b94c62afb7fd5f3cb04b73b8448c4aa6e9c70ad16ecd59\",\"da1af85671eca082a3fedf876556311c0d0eccaabf59c540ef5225edc274a9d5\",\"e73e1de9d837aae9664aedc48d7be7d17bd8a4413972ac00b95c868e8e651cc6\",\"eda8ebee0dc803f3301cd9d00a2837733da9366c4419248c8969669a2b124574\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4055040,\"result\":{\"selected\":{\"digest\":\"4923c159ee7c261a184abc651181d128d138c3e8b117ee0b815e1c7f66a02b3e\",\"publication\":\"publication-254918-1792451221264314025-3\"},\"status\":\"full-graph-index-source-projection-audit\"},\"status\":\"ok\",\"wall_ns\":120785144}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "init",
+      "mode": "A",
+      "consumer": "project",
+      "count": 128
+    },
+    "profile": 3,
+    "seconds": 5.196958602871746,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":57329,\"bytes_control_written\":30744,\"bytes_metadata_read\":8871727,\"bytes_metadata_written\":90876,\"bytes_payload_read\":1568768,\"bytes_payload_written\":1588526,\"bytes_read\":10497824,\"bytes_result_read\":0,\"bytes_result_written\":2156,\"bytes_written\":1712302,\"copies\":0,\"created_directories\":125,\"directory_syncs\":1000,\"documents_visited\":128,\"edges_visited\":8,\"file_syncs\":153,\"index_updates\":0,\"namespace_ops\":153,\"navigation_bytes\":19530,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"creation-inclusive\":4379440054,\"directory-create\":9133707,\"lock-hold\":5143233098,\"lock-wait\":83772,\"read\":16430381,\"replace\":264481,\"selection-inclusive\":132657706,\"sync\":5097559083,\"write\":11848855},\"opens\":3047,\"page_reads\":2759,\"quota_limit\":null,\"quota_spent\":28158,\"range_calls\":{\"D\":3,\"E\":129,\"P\":128,\"collection.yaml\":1,\"docs\":128,\"packet\":2},\"range_leaf_pairs\":{\"D\":384,\"E\":8256,\"P\":7784,\"collection.yaml\":64,\"docs\":8003,\"packet\":3},\"range_page_visits\":{\"D\":9,\"E\":258,\"P\":254,\"collection.yaml\":2,\"docs\":254,\"packet\":3},\"range_rows\":{\"D\":384,\"E\":8,\"P\":0,\"collection.yaml\":0,\"docs\":0,\"packet\":0},\"replacements\":148,\"touched_paths\":0,\"unique_pages\":[\"14c67a26b134ca1ff4ad20b89e390be9d46a79da9a209f9ad688129f624d2923\",\"177ac86f0b8c0707ada364cf0e52e5465dea191486a519b1515cfd1189e9d9fb\",\"2f0815aa01f9ce705a281a86f5f70775eba9fae8be254e77fd97079119814d0b\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4\",\"de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047\",\"fae94f4496a3130aebd1a22f2b5b2da243b0e0dd70c1c00f64a6e207f6a5862a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4202496,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000000\",\"d000001\",\"d000002\",\"d000003\",\"d000004\",\"d000005\",\"d000006\",\"d000007\",\"d000008\",\"d000009\",\"d000010\",\"d000011\",\"d000012\",\"d000013\",\"d000014\",\"d000015\",\"d000016\",\"d000017\",\"d000018\",\"d000019\",\"d000020\",\"d000021\",\"d000022\",\"d000023\",\"d000024\",\"d000025\",\"d000026\",\"d000027\",\"d000028\",\"d000029\",\"d000030\",\"d000031\",\"d000032\",\"d000033\",\"d000034\",\"d000035\",\"d000036\",\"d000037\",\"d000038\",\"d000039\",\"d000040\",\"d000041\",\"d000042\",\"d000043\",\"d000044\",\"d000045\",\"d000046\",\"d000047\",\"d000048\",\"d000049\",\"d000050\",\"d000051\",\"d000052\",\"d000053\",\"d000054\",\"d000055\",\"d000056\",\"d000057\",\"d000058\",\"d000059\",\"d000060\",\"d000061\",\"d000062\",\"d000063\",\"d000064\",\"d000065\",\"d000066\",\"d000067\",\"d000068\",\"d000069\",\"d000070\",\"d000071\",\"d000072\",\"d000073\",\"d000074\",\"d000075\",\"d000076\",\"d000077\",\"d000078\",\"d000079\",\"d000080\",\"d000081\",\"d000082\",\"d000083\",\"d000084\",\"d000085\",\"d000086\",\"d000087\",\"d000088\",\"d000089\",\"d000090\",\"d000091\",\"d000092\",\"d000093\",\"d000094\",\"d000095\",\"d000096\",\"d000097\",\"d000098\",\"d000099\",\"d000100\",\"d000101\",\"d000102\",\"d000103\",\"d000104\",\"d000105\",\"d000106\",\"d000107\",\"d000108\",\"d000109\",\"d000110\",\"d000111\",\"d000112\",\"d000113\",\"d000114\",\"d000115\",\"d000116\",\"d000117\",\"d000118\",\"d000119\",\"d000120\",\"d000121\",\"d000122\",\"d000123\",\"d000124\",\"d000125\",\"d000126\",\"d000127\"],\"outcome\":\"accepted\",\"publication\":\"publication-254921-1792451226783736422-146\",\"removed\":[],\"request\":\"initial\",\"state_digest\":\"5fb2c68c2f62c4550fad2638345d7bb326d65d2062ace90378b4edcf0c4e72ec\"},\"selected\":{\"digest\":\"858c414ac9e74e9644f5a6f6c1b6b6995253ebb513543d96d61b55141975d6ed\",\"publication\":\"publication-254921-1792451226783736422-146\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":5195381173}\n",
+    "stderr": "progress:creation:0/128:{\"page_reads\":0,\"unique_pages\":[],\"documents_visited\":0,\"edges_visited\":0,\"index_updates\":0,\"range_calls\":{},\"range_rows\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"navigation_parts\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"touched_paths\":0,\"namespace_ops\":3,\"quota_limit\":105508864,\"quota_spent\":0,\"verify_only\":false,\"ns\":{\"directory-create\":303437,\"lock-wait\":83772,\"replace\":61812,\"sync\":76814937,\"write\":345225},\"bytes_read\":0,\"bytes_written\":789,\"opens\":3,\"file_syncs\":3,\"directory_syncs\":11,\"unsupported_directory_syncs\":0,\"copies\":0,\"replacements\":1,\"created_directories\":3,\"bytes_metadata_read\":0,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_control_read\":0,\"bytes_control_written\":789,\"bytes_result_read\":0,\"bytes_result_written\":0}\nprogress:creation-complete:128:{\"page_reads\":0,\"unique_pages\":[],\"documents_visited\":0,\"edges_visited\":0,\"index_updates\":0,\"range_calls\":{},\"range_rows\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"navigation_parts\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"touched_paths\":0,\"namespace_ops\":131,\"quota_limit\":105508864,\"quota_spent\":2093056,\"verify_only\":false,\"ns\":{\"directory-create\":7835731,\"lock-wait\":83772,\"read\":4727614,\"replace\":61812,\"sync\":4405079067,\"write\":10257845},\"bytes_read\":1568768,\"bytes_written\":1569557,\"opens\":259,\"file_syncs\":131,\"directory_syncs\":880,\"unsupported_directory_syncs\":0,\"copies\":0,\"replacements\":129,\"created_directories\":104,\"bytes_metadata_read\":0,\"bytes_metadata_written\":0,\"bytes_payload_read\":1568768,\"bytes_payload_written\":1568768,\"bytes_control_read\":0,\"bytes_control_written\":789,\"bytes_result_read\":0,\"bytes_result_written\":0}\n"
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "inspect"
+    },
+    "profile": 3,
+    "seconds": 0.003947662189602852,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":1292,\"bytes_control_written\":0,\"bytes_metadata_read\":752,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":2044,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"lock-hold\":0,\"read\":85558},\"opens\":5,\"page_reads\":2,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"177ac86f0b8c0707ada364cf0e52e5465dea191486a519b1515cfd1189e9d9fb\",\"de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3383296,\"result\":{\"history_depth\":1,\"publication\":{\"allocation_owner\":{\"attempt\":\"attempt-254921-1792451221764545842-1\",\"conservative_bytes\":105508864,\"includes_intermediates_and_stages\":true},\"attempt\":\"attempt-254921-1792451221764545842-1\",\"changes\":null,\"generation_manifest\":null,\"graph\":{\"budget\":1000,\"consumer\":\"project\",\"cost\":0,\"count\":128,\"fallback\":false,\"tree\":\"de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047\",\"version\":1},\"id\":\"publication-254921-1792451226783736422-146\",\"intent\":\"fe06921997473964517c26de4d630594ed32727e9de1eab1d9c28ac74ce9e398\",\"membership\":null,\"outcomes\":null,\"packet_ref\":null,\"predecessor\":null,\"projection\":\"177ac86f0b8c0707ada364cf0e52e5465dea191486a519b1515cfd1189e9d9fb\",\"request\":\"initial\",\"result_hash\":\"ac1e5e4604aa942df90b7825f65cc1928e41034f8c4f2793910071b58ccd5293\",\"sequence\":0,\"store_id\":\"store-254921-1792451221746602080-0\",\"version\":1},\"selected\":{\"digest\":\"858c414ac9e74e9644f5a6f6c1b6b6995253ebb513543d96d61b55141975d6ed\",\"publication\":\"publication-254921-1792451226783736422-146\"}},\"status\":\"ok\",\"wall_ns\":437612}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "prepare",
+      "request": {
+        "request": "payload",
+        "base": {
+          "digest": "858c414ac9e74e9644f5a6f6c1b6b6995253ebb513543d96d61b55141975d6ed",
+          "publication": "publication-254921-1792451226783736422-146"
+        },
+        "ops": [
+          {
+            "kind": "edit",
+            "id": "d000004",
+            "text": " payload delta"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "profile": 3,
+    "seconds": 0.2914210697636008,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":6322,\"bytes_control_written\":3100,\"bytes_metadata_read\":154230,\"bytes_metadata_written\":41364,\"bytes_payload_read\":8434,\"bytes_payload_written\":4110,\"bytes_read\":168986,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":48574,\"copies\":0,\"created_directories\":7,\"directory_syncs\":52,\"documents_visited\":1,\"edges_visited\":0,\"file_syncs\":10,\"index_updates\":4,\"namespace_ops\":9,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"directory-create\":469352,\"graph-transition-inclusive\":115220990,\"lock-hold\":47547601,\"lock-wait\":14407,\"preparation-inclusive\":288186364,\"projection-prepare-inclusive\":72281746,\"read\":826412,\"replace\":139108,\"sync\":283402225,\"write\":702627},\"opens\":68,\"page_reads\":42,\"quota_limit\":67109760,\"quota_spent\":80919,\"range_calls\":{\"P\":1,\"docs\":1},\"range_leaf_pairs\":{\"P\":64,\"docs\":64},\"range_page_visits\":{\"P\":2,\"docs\":2},\"range_rows\":{\"P\":0,\"docs\":0},\"replacements\":8,\"touched_paths\":0,\"unique_pages\":[\"14c67a26b134ca1ff4ad20b89e390be9d46a79da9a209f9ad688129f624d2923\",\"177ac86f0b8c0707ada364cf0e52e5465dea191486a519b1515cfd1189e9d9fb\",\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\",\"dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4\",\"de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047\",\"fae94f4496a3130aebd1a22f2b5b2da243b0e0dd70c1c00f64a6e207f6a5862a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3706880,\"result\":{\"candidate\":\"attempts/attempt-254961-1792451226930160718-0/candidate.json\"},\"status\":\"ok\",\"wall_ns\":288385675}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "select",
+      "candidate": "attempts/attempt-254961-1792451226930160718-0/candidate.json"
+    },
+    "profile": 3,
+    "seconds": 0.204895812086761,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":16259,\"bytes_control_written\":2238,\"bytes_metadata_read\":196851,\"bytes_metadata_written\":573,\"bytes_payload_read\":8434,\"bytes_payload_written\":0,\"bytes_read\":221544,\"bytes_result_read\":0,\"bytes_result_written\":249,\"bytes_written\":3060,\"copies\":0,\"created_directories\":3,\"directory_syncs\":36,\"documents_visited\":1,\"edges_visited\":0,\"file_syncs\":11,\"index_updates\":6,\"namespace_ops\":9,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"directory-create\":162974,\"incremental-replay\":2534642,\"lock-hold\":201277738,\"lock-wait\":14346,\"read\":1240705,\"replace\":327426,\"selection-inclusive\":168770007,\"sync\":196026814,\"write\":663497},\"opens\":88,\"page_reads\":50,\"quota_limit\":null,\"quota_spent\":35340,\"range_calls\":{\"P\":1,\"docs\":1},\"range_leaf_pairs\":{\"P\":64,\"docs\":64},\"range_page_visits\":{\"P\":2,\"docs\":2},\"range_rows\":{\"P\":0,\"docs\":0},\"replacements\":7,\"touched_paths\":0,\"unique_pages\":[\"14c67a26b134ca1ff4ad20b89e390be9d46a79da9a209f9ad688129f624d2923\",\"177ac86f0b8c0707ada364cf0e52e5465dea191486a519b1515cfd1189e9d9fb\",\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\",\"dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4\",\"de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047\",\"f19553215c5cd521eec47d4afefe2c150bcc1d641ce7d32d987c40fce18f815c\",\"fae94f4496a3130aebd1a22f2b5b2da243b0e0dd70c1c00f64a6e207f6a5862a\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3776512,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000004\"],\"outcome\":\"accepted\",\"publication\":\"publication-254962-1792451227314612896-3\",\"removed\":[],\"request\":\"payload\",\"state_digest\":\"2a827d82cd4117f736ce5d8506f0f875d94b09883035214d73878781f182526b\"},\"selected\":{\"digest\":\"109f6b25a5abb1331d05ad1b838d50e9e8075a2a36ac95101911cf2453fcb20b\",\"publication\":\"publication-254962-1792451227314612896-3\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":201504634}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "refresh"
+    },
+    "profile": 3,
+    "seconds": 2.5056836451403797,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":4401,\"bytes_control_written\":44932,\"bytes_metadata_read\":4227080,\"bytes_metadata_written\":0,\"bytes_payload_read\":3177080,\"bytes_payload_written\":1588540,\"bytes_read\":7408561,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":1633472,\"copies\":131,\"created_directories\":8,\"directory_syncs\":670,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":133,\"index_updates\":0,\"namespace_ops\":134,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"A-completion-inclusive\":2501940930,\"copy\":5847218,\"directory-create\":233054,\"lock-hold\":2501970744,\"lock-wait\":19153,\"read\":8226719,\"replace\":3251915,\"sync\":2463184762,\"write\":147541},\"opens\":1207,\"page_reads\":806,\"quota_limit\":null,\"quota_spent\":2178240,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":133,\"touched_paths\":131,\"unique_pages\":[\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"3e9a1d2341d894b0185b337734b62aee75a281b546ff0e5f992af074523937f7\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\",\"fd618093e9c309c6a2ed72c65093f1d4996cb7436fee0bc2c1e8cc39241329a6\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3944448,\"result\":{\"status\":\"pending-refreshed\"},\"status\":\"ok\",\"wall_ns\":2502297185}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "audit"
+    },
+    "profile": 3,
+    "seconds": 0.033564500976353884,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":3082,\"bytes_control_written\":0,\"bytes_metadata_read\":9024263,\"bytes_metadata_written\":0,\"bytes_payload_read\":3177080,\"bytes_payload_written\":0,\"bytes_read\":12204425,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":128,\"edges_visited\":8,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":19530,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"lock-hold\":0,\"read\":10225741},\"opens\":3057,\"page_reads\":2790,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{\"D\":4,\"E\":129,\"P\":128,\"collection.yaml\":1,\"docs\":128,\"packet\":2},\"range_leaf_pairs\":{\"D\":512,\"E\":8256,\"P\":7784,\"collection.yaml\":64,\"docs\":8003,\"packet\":3},\"range_page_visits\":{\"D\":12,\"E\":258,\"P\":254,\"collection.yaml\":2,\"docs\":254,\"packet\":3},\"range_rows\":{\"D\":512,\"E\":8,\"P\":0,\"collection.yaml\":0,\"docs\":0,\"packet\":0},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"2f0815aa01f9ce705a281a86f5f70775eba9fae8be254e77fd97079119814d0b\",\"3e9a1d2341d894b0185b337734b62aee75a281b546ff0e5f992af074523937f7\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\",\"dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4\",\"f19553215c5cd521eec47d4afefe2c150bcc1d641ce7d32d987c40fce18f815c\",\"fd618093e9c309c6a2ed72c65093f1d4996cb7436fee0bc2c1e8cc39241329a6\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3952640,\"result\":{\"selected\":{\"digest\":\"109f6b25a5abb1331d05ad1b838d50e9e8075a2a36ac95101911cf2453fcb20b\",\"publication\":\"publication-254962-1792451227314612896-3\"},\"status\":\"full-graph-index-source-projection-audit\"},\"status\":\"ok\",\"wall_ns\":30903413}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "inspect"
+    },
+    "profile": 3,
+    "seconds": 0.0010248059406876564,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":1620,\"bytes_control_written\":0,\"bytes_metadata_read\":1388,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":3008,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"lock-hold\":0,\"read\":27073},\"opens\":8,\"page_reads\":5,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"3e9a1d2341d894b0185b337734b62aee75a281b546ff0e5f992af074523937f7\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\",\"fd618093e9c309c6a2ed72c65093f1d4996cb7436fee0bc2c1e8cc39241329a6\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3391488,\"result\":{\"history_depth\":2,\"publication\":{\"allocation_owner\":{\"attempt\":\"attempt-254961-1792451226930160718-0\",\"conservative_bytes\":67109760,\"includes_intermediates_and_stages\":true},\"attempt\":\"attempt-254961-1792451226930160718-0\",\"changes\":\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"generation_manifest\":null,\"graph\":{\"budget\":1000,\"consumer\":\"project\",\"cost\":0,\"count\":128,\"fallback\":false,\"tree\":\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"version\":1},\"id\":\"publication-254962-1792451227314612896-3\",\"intent\":\"91ebb76ba743a5c3765aaf3585d78edab0815c6ee7c0d9875c32dfd27a5125dc\",\"membership\":\"fd618093e9c309c6a2ed72c65093f1d4996cb7436fee0bc2c1e8cc39241329a6\",\"outcomes\":\"3e9a1d2341d894b0185b337734b62aee75a281b546ff0e5f992af074523937f7\",\"packet_ref\":null,\"predecessor\":{\"digest\":\"858c414ac9e74e9644f5a6f6c1b6b6995253ebb513543d96d61b55141975d6ed\",\"publication\":\"publication-254921-1792451226783736422-146\"},\"projection\":\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\",\"request\":\"payload\",\"result_hash\":\"f989806647c220a4cd865e2483c9e8941f84044c2dcd862a47d959fb67aab456\",\"sequence\":1,\"store_id\":\"store-254921-1792451221746602080-0\",\"version\":1},\"selected\":{\"digest\":\"109f6b25a5abb1331d05ad1b838d50e9e8075a2a36ac95101911cf2453fcb20b\",\"publication\":\"publication-254962-1792451227314612896-3\"}},\"status\":\"ok\",\"wall_ns\":106910}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "prepare",
+      "request": {
+        "request": "label",
+        "base": {
+          "digest": "109f6b25a5abb1331d05ad1b838d50e9e8075a2a36ac95101911cf2453fcb20b",
+          "publication": "publication-254962-1792451227314612896-3"
+        },
+        "ops": [
+          {
+            "kind": "label",
+            "id": "d000005",
+            "text": "not-navigation"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "profile": 3,
+    "seconds": 0.20510311238467693,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":7049,\"bytes_control_written\":2841,\"bytes_metadata_read\":84641,\"bytes_metadata_written\":29293,\"bytes_payload_read\":228,\"bytes_payload_written\":0,\"bytes_read\":91918,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":32134,\"copies\":0,\"created_directories\":4,\"directory_syncs\":37,\"documents_visited\":1,\"edges_visited\":0,\"file_syncs\":8,\"index_updates\":3,\"namespace_ops\":7,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"directory-create\":415182,\"graph-transition-inclusive\":136107860,\"lock-hold\":48763836,\"lock-wait\":10889,\"preparation-inclusive\":203612829,\"projection-prepare-inclusive\":839712,\"read\":978935,\"replace\":181731,\"sync\":198489181,\"write\":738844},\"opens\":59,\"page_reads\":37,\"quota_limit\":67109760,\"quota_spent\":56291,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":6,\"touched_paths\":0,\"unique_pages\":[\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"3e9a1d2341d894b0185b337734b62aee75a281b546ff0e5f992af074523937f7\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\",\"dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4\",\"f19553215c5cd521eec47d4afefe2c150bcc1d641ce7d32d987c40fce18f815c\",\"fd618093e9c309c6a2ed72c65093f1d4996cb7436fee0bc2c1e8cc39241329a6\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3743744,\"result\":{\"candidate\":\"attempts/attempt-254966-1792451229984681508-0/candidate.json\"},\"status\":\"ok\",\"wall_ns\":203722527}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "select",
+      "candidate": "attempts/attempt-254966-1792451229984681508-0/candidate.json"
+    },
+    "profile": 3,
+    "seconds": 0.20589306810870767,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":17450,\"bytes_control_written\":2230,\"bytes_metadata_read\":119291,\"bytes_metadata_written\":1128,\"bytes_payload_read\":228,\"bytes_payload_written\":0,\"bytes_read\":136969,\"bytes_result_read\":0,\"bytes_result_written\":247,\"bytes_written\":3605,\"copies\":0,\"created_directories\":3,\"directory_syncs\":36,\"documents_visited\":1,\"edges_visited\":0,\"file_syncs\":11,\"index_updates\":5,\"namespace_ops\":9,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"directory-create\":185786,\"incremental-replay\":1585996,\"lock-hold\":202682671,\"lock-wait\":9343,\"read\":1137159,\"replace\":354233,\"selection-inclusive\":170576484,\"sync\":197925612,\"write\":693835},\"opens\":92,\"page_reads\":56,\"quota_limit\":null,\"quota_spent\":35889,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":7,\"touched_paths\":0,\"unique_pages\":[\"2cb20fabefe82e1760fe065707d0f0b340a693319c4ce43968ce59ce6b8cbc91\",\"3e9a1d2341d894b0185b337734b62aee75a281b546ff0e5f992af074523937f7\",\"4e51f54953bca1901b2b2c05a1d724677c363db29a6418eea250fde84905d5b5\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"a77650ca2aaef95606f3d83c8ac57cdc8247a6c20a70316cb4b379a7fd1bb590\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\",\"dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4\",\"f19553215c5cd521eec47d4afefe2c150bcc1d641ce7d32d987c40fce18f815c\",\"fd618093e9c309c6a2ed72c65093f1d4996cb7436fee0bc2c1e8cc39241329a6\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3801088,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000005\"],\"outcome\":\"accepted\",\"publication\":\"publication-254967-1792451230284151685-3\",\"removed\":[],\"request\":\"label\",\"state_digest\":\"35ad14212bbc784f74d80408939e1ded8ccdfa1f600a98a47b129176a6315190\"},\"selected\":{\"digest\":\"dff4e05c887ffb751892acda39f19a0ac2442e8715f169b81541bbb4b919dad0\",\"publication\":\"publication-254967-1792451230284151685-3\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":202848122}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "refresh"
+    },
+    "profile": 3,
+    "seconds": 0.05679352628067136,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":13059,\"bytes_control_written\":1665,\"bytes_metadata_read\":9428,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":22487,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":1665,\"copies\":0,\"created_directories\":0,\"directory_syncs\":7,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":2,\"index_updates\":0,\"namespace_ops\":3,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"A-completion-inclusive\":54284813,\"lock-hold\":54309013,\"lock-wait\":10994,\"read\":663518,\"replace\":138227,\"sync\":52500204,\"write\":174215},\"opens\":45,\"page_reads\":28,\"quota_limit\":null,\"quota_spent\":9857,\"range_calls\":{},\"range_leaf_pairs\":{\"00000000000000000002\":2},\"range_page_visits\":{\"00000000000000000002\":2},\"range_rows\":{},\"replacements\":2,\"touched_paths\":0,\"unique_pages\":[\"658c286d5f3b9a6978a5b00534a4ca6b0e408d3433c785a8158c916761225e0e\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c43642cb5be7197a030f0f5650c9bc27051aa0347e4b4e80af64104189e369fe\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3641344,\"result\":{\"status\":\"pending-refreshed\"},\"status\":\"ok\",\"wall_ns\":54484325}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "audit"
+    },
+    "profile": 3,
+    "seconds": 0.03854353725910187,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":3074,\"bytes_control_written\":0,\"bytes_metadata_read\":8338126,\"bytes_metadata_written\":0,\"bytes_payload_read\":3177080,\"bytes_payload_written\":0,\"bytes_read\":11518280,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":128,\"edges_visited\":8,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":19530,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"lock-hold\":0,\"read\":12061126},\"opens\":3057,\"page_reads\":2790,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{\"D\":4,\"E\":129,\"P\":128,\"collection.yaml\":1,\"docs\":128,\"packet\":2},\"range_leaf_pairs\":{\"D\":512,\"E\":4128,\"P\":5928,\"collection.yaml\":64,\"docs\":8003,\"packet\":3},\"range_page_visits\":{\"D\":12,\"E\":258,\"P\":253,\"collection.yaml\":2,\"docs\":254,\"packet\":3},\"range_rows\":{\"D\":512,\"E\":8,\"P\":0,\"collection.yaml\":0,\"docs\":0,\"packet\":0},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"2f0815aa01f9ce705a281a86f5f70775eba9fae8be254e77fd97079119814d0b\",\"4e51f54953bca1901b2b2c05a1d724677c363db29a6418eea250fde84905d5b5\",\"658c286d5f3b9a6978a5b00534a4ca6b0e408d3433c785a8158c916761225e0e\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"a77650ca2aaef95606f3d83c8ac57cdc8247a6c20a70316cb4b379a7fd1bb590\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"c43642cb5be7197a030f0f5650c9bc27051aa0347e4b4e80af64104189e369fe\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4120576,\"result\":{\"selected\":{\"digest\":\"dff4e05c887ffb751892acda39f19a0ac2442e8715f169b81541bbb4b919dad0\",\"publication\":\"publication-254967-1792451230284151685-3\"},\"status\":\"full-graph-index-source-projection-audit\"},\"status\":\"ok\",\"wall_ns\":36233637}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "inspect"
+    },
+    "profile": 3,
+    "seconds": 0.0011428799480199814,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":1616,\"bytes_control_written\":0,\"bytes_metadata_read\":2061,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":3677,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"lock-hold\":0,\"read\":50993},\"opens\":8,\"page_reads\":5,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"658c286d5f3b9a6978a5b00534a4ca6b0e408d3433c785a8158c916761225e0e\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c43642cb5be7197a030f0f5650c9bc27051aa0347e4b4e80af64104189e369fe\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3522560,\"result\":{\"history_depth\":3,\"publication\":{\"allocation_owner\":{\"attempt\":\"attempt-254966-1792451229984681508-0\",\"conservative_bytes\":67109760,\"includes_intermediates_and_stages\":true},\"attempt\":\"attempt-254966-1792451229984681508-0\",\"changes\":\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"generation_manifest\":null,\"graph\":{\"budget\":1000,\"consumer\":\"project\",\"cost\":0,\"count\":128,\"fallback\":false,\"tree\":\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"version\":1},\"id\":\"publication-254967-1792451230284151685-3\",\"intent\":\"1752f81a5244dd7547cae616d225fe01465a4af7ccb3ef91ab58cdbbeadf9892\",\"membership\":\"658c286d5f3b9a6978a5b00534a4ca6b0e408d3433c785a8158c916761225e0e\",\"outcomes\":\"c43642cb5be7197a030f0f5650c9bc27051aa0347e4b4e80af64104189e369fe\",\"packet_ref\":null,\"predecessor\":{\"digest\":\"109f6b25a5abb1331d05ad1b838d50e9e8075a2a36ac95101911cf2453fcb20b\",\"publication\":\"publication-254962-1792451227314612896-3\"},\"projection\":\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\",\"request\":\"label\",\"result_hash\":\"597114479c1e7cff7c9f99f20c0084144e272dc34b3ed8f66d9fd9c304bde19b\",\"sequence\":2,\"store_id\":\"store-254921-1792451221746602080-0\",\"version\":1},\"selected\":{\"digest\":\"dff4e05c887ffb751892acda39f19a0ac2442e8715f169b81541bbb4b919dad0\",\"publication\":\"publication-254967-1792451230284151685-3\"}},\"status\":\"ok\",\"wall_ns\":198446}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "prepare",
+      "request": {
+        "request": "title",
+        "base": {
+          "digest": "dff4e05c887ffb751892acda39f19a0ac2442e8715f169b81541bbb4b919dad0",
+          "publication": "publication-254967-1792451230284151685-3"
+        },
+        "ops": [
+          {
+            "kind": "rename",
+            "id": "d000006",
+            "text": "Navigation title"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "profile": 3,
+    "seconds": 0.36696348898112774,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":7442,\"bytes_control_written\":3246,\"bytes_metadata_read\":629147,\"bytes_metadata_written\":43719,\"bytes_payload_read\":228,\"bytes_payload_written\":19554,\"bytes_read\":636817,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":66519,\"copies\":0,\"created_directories\":9,\"directory_syncs\":65,\"documents_visited\":1,\"edges_visited\":4,\"file_syncs\":12,\"index_updates\":9,\"namespace_ops\":11,\"navigation_bytes\":19554,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":627904,\"graph-transition-inclusive\":110194837,\"lock-hold\":48568602,\"lock-wait\":12344,\"preparation-inclusive\":365398185,\"projection-prepare-inclusive\":152783026,\"read\":3954395,\"replace\":133258,\"sync\":350317073,\"write\":846784},\"opens\":490,\"page_reads\":464,\"quota_limit\":67109888,\"quota_spent\":107060,\"range_calls\":{\"D\":1,\"E\":128,\"P\":1,\"R\":1,\"collection.yaml\":1,\"docs\":1},\"range_leaf_pairs\":{\"D\":128,\"E\":4224,\"P\":33,\"R\":8,\"collection.yaml\":32,\"docs\":32},\"range_page_visits\":{\"D\":3,\"E\":256,\"P\":2,\"R\":2,\"collection.yaml\":2,\"docs\":2},\"range_rows\":{\"D\":128,\"E\":4,\"P\":0,\"R\":0,\"collection.yaml\":0,\"docs\":0},\"replacements\":10,\"touched_paths\":0,\"unique_pages\":[\"00a5ae8ab8a0b16571fd5c7e39bc267cf127369d45377943633e5b07126d3ad9\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"4e51f54953bca1901b2b2c05a1d724677c363db29a6418eea250fde84905d5b5\",\"641e706f1c3a1b0a1b03c9293287a1252af2d6c830a9ae004b43dd57e1817dd9\",\"658c286d5f3b9a6978a5b00534a4ca6b0e408d3433c785a8158c916761225e0e\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"9eae2fc2b446af0ce97a97557975e374ce17f091e38472308cb61786ac0deb82\",\"a77650ca2aaef95606f3d83c8ac57cdc8247a6c20a70316cb4b379a7fd1bb590\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"c43642cb5be7197a030f0f5650c9bc27051aa0347e4b4e80af64104189e369fe\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3809280,\"result\":{\"candidate\":\"attempts/attempt-254971-1792451230511957480-0/candidate.json\"},\"status\":\"ok\",\"wall_ns\":365515112}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "select",
+      "candidate": "attempts/attempt-254971-1792451230511957480-0/candidate.json"
+    },
+    "profile": 3,
+    "seconds": 0.21677467785775661,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":18641,\"bytes_control_written\":2230,\"bytes_metadata_read\":682445,\"bytes_metadata_written\":1681,\"bytes_payload_read\":19782,\"bytes_payload_written\":0,\"bytes_read\":720868,\"bytes_result_read\":0,\"bytes_result_written\":282,\"bytes_written\":4193,\"copies\":0,\"created_directories\":3,\"directory_syncs\":36,\"documents_visited\":1,\"edges_visited\":4,\"file_syncs\":11,\"index_updates\":11,\"namespace_ops\":9,\"navigation_bytes\":19554,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":54206,\"incremental-replay\":16356755,\"lock-hold\":214204024,\"lock-wait\":9492,\"read\":5983291,\"replace\":277665,\"selection-inclusive\":167544445,\"sync\":195535767,\"write\":478689},\"opens\":523,\"page_reads\":486,\"quota_limit\":null,\"quota_spent\":36477,\"range_calls\":{\"D\":1,\"E\":128,\"P\":1,\"R\":1,\"collection.yaml\":1,\"docs\":1},\"range_leaf_pairs\":{\"D\":128,\"E\":4224,\"P\":33,\"R\":8,\"collection.yaml\":32,\"docs\":32},\"range_page_visits\":{\"D\":3,\"E\":256,\"P\":2,\"R\":2,\"collection.yaml\":2,\"docs\":2},\"range_rows\":{\"D\":128,\"E\":4,\"P\":0,\"R\":0,\"collection.yaml\":0,\"docs\":0},\"replacements\":7,\"touched_paths\":0,\"unique_pages\":[\"00a5ae8ab8a0b16571fd5c7e39bc267cf127369d45377943633e5b07126d3ad9\",\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"4e51f54953bca1901b2b2c05a1d724677c363db29a6418eea250fde84905d5b5\",\"641e706f1c3a1b0a1b03c9293287a1252af2d6c830a9ae004b43dd57e1817dd9\",\"658c286d5f3b9a6978a5b00534a4ca6b0e408d3433c785a8158c916761225e0e\",\"6efb73e05392ee2ef7ff0e396f4a08a78822d19472db9cc3edc92fe4e524776e\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"9eae2fc2b446af0ce97a97557975e374ce17f091e38472308cb61786ac0deb82\",\"a77650ca2aaef95606f3d83c8ac57cdc8247a6c20a70316cb4b379a7fd1bb590\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"ba5eabd48b060d1d9ef6ce010c97c7f58907820b4c0d8ca93b76a3312113e2d8\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"c43642cb5be7197a030f0f5650c9bc27051aa0347e4b4e80af64104189e369fe\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\",\"f300110b38974c4205f9f3201ae691d3d70c09c6de7b0397c770fd23d1de51cf\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3870720,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000006\"],\"outcome\":\"accepted\",\"publication\":\"publication-254972-1792451230985942932-3\",\"removed\":[\"docs/item-case-d000006.md\"],\"request\":\"title\",\"state_digest\":\"ecb89d8388e2cd918ca849fb1c5b432405a3a74f6a50fffd99600bcf6163eb15\"},\"selected\":{\"digest\":\"149dbcb56498855bb2930c4332dbea46f0065a5a9aa43dc489841d20653328b9\",\"publication\":\"publication-254972-1792451230985942932-3\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":214381343}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "refresh"
+    },
+    "profile": 3,
+    "seconds": 0.11266613798215985,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":13051,\"bytes_control_written\":2760,\"bytes_metadata_read\":160278,\"bytes_metadata_written\":0,\"bytes_payload_read\":70926,\"bytes_payload_written\":23650,\"bytes_read\":244255,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":26410,\"copies\":2,\"created_directories\":1,\"directory_syncs\":19,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":4,\"index_updates\":0,\"namespace_ops\":6,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"A-completion-inclusive\":110688643,\"copy\":215816,\"directory-create\":74642,\"lock-hold\":110701712,\"lock-wait\":6849,\"read\":1341936,\"replace\":278656,\"sync\":106161802,\"write\":270641},\"opens\":89,\"page_reads\":64,\"quota_limit\":null,\"quota_spent\":42794,\"range_calls\":{},\"range_leaf_pairs\":{\"00000000000000000003\":8},\"range_page_visits\":{\"00000000000000000003\":2},\"range_rows\":{},\"replacements\":4,\"touched_paths\":3,\"unique_pages\":[\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"30536843bde13bf75b7d3e9886e6dd563c002b63fbfbf5795f272e557867f34a\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"641e706f1c3a1b0a1b03c9293287a1252af2d6c830a9ae004b43dd57e1817dd9\",\"99a5a52e412c8a87f99a6ee8c597f57f27778b04c2a36310b8516604e2184b37\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"ca0970982cebfc13cca92f003d0300bae96984bed4506ea7cd16149e1044fcb0\",\"dae4949d6f24bb8b3801a24ee48c2a99acb326c2f2e3c7602acabbc2e021c417\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3637248,\"result\":{\"status\":\"pending-refreshed\"},\"status\":\"ok\",\"wall_ns\":110827521}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "audit"
+    },
+    "profile": 3,
+    "seconds": 0.1278674411587417,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":3074,\"bytes_control_written\":0,\"bytes_metadata_read\":8346451,\"bytes_metadata_written\":15827,\"bytes_payload_read\":3177128,\"bytes_payload_written\":0,\"bytes_read\":11526653,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":15827,\"copies\":0,\"created_directories\":2,\"directory_syncs\":14,\"documents_visited\":128,\"edges_visited\":8,\"file_syncs\":2,\"index_updates\":0,\"namespace_ops\":2,\"navigation_bytes\":19554,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":167505,\"lock-hold\":0,\"read\":15977410,\"sync\":77955674,\"write\":144825},\"opens\":3058,\"page_reads\":2789,\"quota_limit\":null,\"quota_spent\":24019,\"range_calls\":{\"D\":4,\"E\":129,\"P\":128,\"collection.yaml\":1,\"docs\":128,\"packet\":2},\"range_leaf_pairs\":{\"D\":512,\"E\":4257,\"P\":5953,\"collection.yaml\":64,\"docs\":8003,\"packet\":3},\"range_page_visits\":{\"D\":12,\"E\":258,\"P\":253,\"collection.yaml\":2,\"docs\":254,\"packet\":3},\"range_rows\":{\"D\":512,\"E\":8,\"P\":0,\"collection.yaml\":0,\"docs\":0,\"packet\":0},\"replacements\":2,\"touched_paths\":0,\"unique_pages\":[\"00a5ae8ab8a0b16571fd5c7e39bc267cf127369d45377943633e5b07126d3ad9\",\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"2d2c18a8a5fb3a2a9cdbe808e5f3579c054603068567729c048687c6feee4dae\",\"2f0815aa01f9ce705a281a86f5f70775eba9fae8be254e77fd97079119814d0b\",\"30536843bde13bf75b7d3e9886e6dd563c002b63fbfbf5795f272e557867f34a\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"641e706f1c3a1b0a1b03c9293287a1252af2d6c830a9ae004b43dd57e1817dd9\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"99a5a52e412c8a87f99a6ee8c597f57f27778b04c2a36310b8516604e2184b37\",\"9eae2fc2b446af0ce97a97557975e374ce17f091e38472308cb61786ac0deb82\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"cf4855e753ded93f9040c90dd9feec0efd81b9996c201cd22eb4c4802f80c03d\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"f300110b38974c4205f9f3201ae691d3d70c09c6de7b0397c770fd23d1de51cf\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4014080,\"result\":{\"selected\":{\"digest\":\"149dbcb56498855bb2930c4332dbea46f0065a5a9aa43dc489841d20653328b9\",\"publication\":\"publication-254972-1792451230985942932-3\"},\"status\":\"full-graph-index-source-projection-audit\"},\"status\":\"ok\",\"wall_ns\":126066958}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "inspect"
+    },
+    "profile": 3,
+    "seconds": 0.0010661575943231583,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":1616,\"bytes_control_written\":0,\"bytes_metadata_read\":2899,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":4515,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"lock-hold\":0,\"read\":57344},\"opens\":8,\"page_reads\":5,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"30536843bde13bf75b7d3e9886e6dd563c002b63fbfbf5795f272e557867f34a\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"641e706f1c3a1b0a1b03c9293287a1252af2d6c830a9ae004b43dd57e1817dd9\",\"99a5a52e412c8a87f99a6ee8c597f57f27778b04c2a36310b8516604e2184b37\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3391488,\"result\":{\"history_depth\":4,\"publication\":{\"allocation_owner\":{\"attempt\":\"attempt-254971-1792451230511957480-0\",\"conservative_bytes\":67109888,\"includes_intermediates_and_stages\":true},\"attempt\":\"attempt-254971-1792451230511957480-0\",\"changes\":\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"generation_manifest\":null,\"graph\":{\"budget\":1000,\"consumer\":\"project\",\"cost\":0,\"count\":128,\"fallback\":false,\"tree\":\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"version\":1},\"id\":\"publication-254972-1792451230985942932-3\",\"intent\":\"701403fb15c8ea8bcf72f84c0a3e4eaffef861fd81548eaad50e2dadb9f285b8\",\"membership\":\"99a5a52e412c8a87f99a6ee8c597f57f27778b04c2a36310b8516604e2184b37\",\"outcomes\":\"30536843bde13bf75b7d3e9886e6dd563c002b63fbfbf5795f272e557867f34a\",\"packet_ref\":null,\"predecessor\":{\"digest\":\"dff4e05c887ffb751892acda39f19a0ac2442e8715f169b81541bbb4b919dad0\",\"publication\":\"publication-254967-1792451230284151685-3\"},\"projection\":\"641e706f1c3a1b0a1b03c9293287a1252af2d6c830a9ae004b43dd57e1817dd9\",\"request\":\"title\",\"result_hash\":\"a66e197c2b4ae1e650b7c8eacca71efa2d641f39d1d8ce85740a8634dacc95c5\",\"sequence\":3,\"store_id\":\"store-254921-1792451221746602080-0\",\"version\":1},\"selected\":{\"digest\":\"149dbcb56498855bb2930c4332dbea46f0065a5a9aa43dc489841d20653328b9\",\"publication\":\"publication-254972-1792451230985942932-3\"}},\"status\":\"ok\",\"wall_ns\":178100}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "prepare",
+      "request": {
+        "request": "relations",
+        "base": {
+          "digest": "149dbcb56498855bb2930c4332dbea46f0065a5a9aa43dc489841d20653328b9",
+          "publication": "publication-254972-1792451230985942932-3"
+        },
+        "ops": [
+          {
+            "kind": "edge",
+            "id": "d000004",
+            "text": "cites",
+            "target": "d000005"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "profile": 3,
+    "seconds": 0.3551366161555052,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":7409,\"bytes_control_written\":3217,\"bytes_metadata_read\":585105,\"bytes_metadata_written\":36383,\"bytes_payload_read\":228,\"bytes_payload_written\":19623,\"bytes_read\":592742,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":59223,\"copies\":0,\"created_directories\":8,\"directory_syncs\":64,\"documents_visited\":2,\"edges_visited\":5,\"file_syncs\":12,\"index_updates\":6,\"namespace_ops\":11,\"navigation_bytes\":19623,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":570181,\"graph-transition-inclusive\":142325275,\"lock-hold\":47871603,\"lock-wait\":17283,\"preparation-inclusive\":353538784,\"projection-prepare-inclusive\":108278772,\"read\":3856287,\"replace\":175857,\"sync\":338843083,\"write\":865629},\"opens\":464,\"page_reads\":438,\"quota_limit\":67109184,\"quota_spent\":99760,\"range_calls\":{\"D\":1,\"E\":128,\"collection.yaml\":1},\"range_leaf_pairs\":{\"D\":128,\"E\":4352,\"collection.yaml\":32},\"range_page_visits\":{\"D\":3,\"E\":256,\"collection.yaml\":2},\"range_rows\":{\"D\":128,\"E\":5,\"collection.yaml\":0},\"replacements\":10,\"touched_paths\":0,\"unique_pages\":[\"00a5ae8ab8a0b16571fd5c7e39bc267cf127369d45377943633e5b07126d3ad9\",\"07891bc18baf7b8e58593d33d1d3d8dafa37216adc2fbc284bf49b5748e815c4\",\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"30536843bde13bf75b7d3e9886e6dd563c002b63fbfbf5795f272e557867f34a\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"641e706f1c3a1b0a1b03c9293287a1252af2d6c830a9ae004b43dd57e1817dd9\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"99a5a52e412c8a87f99a6ee8c597f57f27778b04c2a36310b8516604e2184b37\",\"99e6ba6fda31da052fe9b34ed87d5ec1e1c81aafef77e8a1b35e56a5a2a8ad8c\",\"9eae2fc2b446af0ce97a97557975e374ce17f091e38472308cb61786ac0deb82\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"eda8ebee0dc803f3301cd9d00a2837733da9366c4419248c8969669a2b124574\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3727360,\"result\":{\"candidate\":\"attempts/attempt-254976-1792451231355655820-0/candidate.json\"},\"status\":\"ok\",\"wall_ns\":353655129}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "select",
+      "candidate": "attempts/attempt-254976-1792451231355655820-0/candidate.json"
+    },
+    "profile": 3,
+    "seconds": 0.23603059025481343,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":18550,\"bytes_control_written\":2238,\"bytes_metadata_read\":635043,\"bytes_metadata_written\":2234,\"bytes_payload_read\":19851,\"bytes_payload_written\":0,\"bytes_read\":673444,\"bytes_result_read\":0,\"bytes_result_written\":251,\"bytes_written\":4723,\"copies\":0,\"created_directories\":3,\"directory_syncs\":36,\"documents_visited\":2,\"edges_visited\":5,\"file_syncs\":11,\"index_updates\":8,\"namespace_ops\":9,\"navigation_bytes\":19623,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":199860,\"incremental-replay\":13300074,\"lock-hold\":232973984,\"lock-wait\":9213,\"read\":4773094,\"replace\":395442,\"selection-inclusive\":188919225,\"sync\":215715876,\"write\":823400},\"opens\":497,\"page_reads\":460,\"quota_limit\":null,\"quota_spent\":37003,\"range_calls\":{\"D\":1,\"E\":128,\"collection.yaml\":1},\"range_leaf_pairs\":{\"D\":128,\"E\":4352,\"collection.yaml\":32},\"range_page_visits\":{\"D\":3,\"E\":256,\"collection.yaml\":2},\"range_rows\":{\"D\":128,\"E\":5,\"collection.yaml\":0},\"replacements\":7,\"touched_paths\":0,\"unique_pages\":[\"00a5ae8ab8a0b16571fd5c7e39bc267cf127369d45377943633e5b07126d3ad9\",\"07891bc18baf7b8e58593d33d1d3d8dafa37216adc2fbc284bf49b5748e815c4\",\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"1d778b6e6395f7ea3d873cab432b8f1a505d97bf6997a6697f6a70a473ea5e74\",\"30536843bde13bf75b7d3e9886e6dd563c002b63fbfbf5795f272e557867f34a\",\"3c355a6905e54dc53b77db75bdb401f000c2dc90c2b5bfea4f208f5011864cdd\",\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"641e706f1c3a1b0a1b03c9293287a1252af2d6c830a9ae004b43dd57e1817dd9\",\"8847356d6c9db254f2cafc879b8874d727dd46656323d490d6bb4026c7b22f88\",\"99a5a52e412c8a87f99a6ee8c597f57f27778b04c2a36310b8516604e2184b37\",\"99e6ba6fda31da052fe9b34ed87d5ec1e1c81aafef77e8a1b35e56a5a2a8ad8c\",\"9eae2fc2b446af0ce97a97557975e374ce17f091e38472308cb61786ac0deb82\",\"a0aafed2f6cafe853375fb7f5588207467d9be7f0d6edd65008bdda6d3b14af5\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"eda8ebee0dc803f3301cd9d00a2837733da9366c4419248c8969669a2b124574\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3874816,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000004\"],\"outcome\":\"accepted\",\"publication\":\"publication-254977-1792451231838328047-3\",\"removed\":[],\"request\":\"relations\",\"state_digest\":\"fdf884e2d050707f8a08487a328e62a47ff81580cd223e823eae36a6f2af4283\"},\"selected\":{\"digest\":\"52ceb3930b601143ae9c29177df03ae80da9a02fe72dbe12ce369372c11709cc\",\"publication\":\"publication-254977-1792451231838328047-3\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":233158274}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "refresh"
+    },
+    "profile": 3,
+    "seconds": 0.08218091493472457,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":13079,\"bytes_control_written\":2130,\"bytes_metadata_read\":50040,\"bytes_metadata_written\":0,\"bytes_payload_read\":58800,\"bytes_payload_written\":19623,\"bytes_read\":121919,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":21753,\"copies\":1,\"created_directories\":1,\"directory_syncs\":13,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":3,\"index_updates\":0,\"namespace_ops\":4,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"A-completion-inclusive\":79140934,\"copy\":72623,\"directory-create\":26514,\"lock-hold\":79156444,\"lock-wait\":9365,\"read\":583594,\"replace\":146008,\"sync\":77135401,\"write\":167597},\"opens\":61,\"page_reads\":40,\"quota_limit\":null,\"quota_spent\":34041,\"range_calls\":{},\"range_leaf_pairs\":{\"00000000000000000004\":10},\"range_page_visits\":{\"00000000000000000004\":2},\"range_rows\":{},\"replacements\":3,\"touched_paths\":1,\"unique_pages\":[\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"29d9a627587c32d82656916834b6991af4c5d98231271cfc888e61c38cdb2c4a\",\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"641e706f1c3a1b0a1b03c9293287a1252af2d6c830a9ae004b43dd57e1817dd9\",\"8b72cd4b3de2db3fc2b491b714a70a5d222373c56c18a98c216092986edfbc20\",\"99e6ba6fda31da052fe9b34ed87d5ec1e1c81aafef77e8a1b35e56a5a2a8ad8c\",\"ab8412af9bf031b9786cf6faa2ad37af13c16c384e96f382ab36cfa3b09cd3cd\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3649536,\"result\":{\"status\":\"pending-refreshed\"},\"status\":\"ok\",\"wall_ns\":79336719}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "audit"
+    },
+    "profile": 3,
+    "seconds": 0.11755112232640386,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":3082,\"bytes_control_written\":0,\"bytes_metadata_read\":8409183,\"bytes_metadata_written\":15827,\"bytes_payload_read\":3177266,\"bytes_payload_written\":0,\"bytes_read\":11589531,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":15827,\"copies\":0,\"created_directories\":2,\"directory_syncs\":14,\"documents_visited\":128,\"edges_visited\":10,\"file_syncs\":2,\"index_updates\":0,\"namespace_ops\":2,\"navigation_bytes\":19623,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":155678,\"lock-hold\":0,\"read\":12386958,\"sync\":77500961,\"write\":97022},\"opens\":3061,\"page_reads\":2792,\"quota_limit\":null,\"quota_spent\":24019,\"range_calls\":{\"D\":4,\"E\":129,\"P\":128,\"collection.yaml\":1,\"docs\":128,\"packet\":2},\"range_leaf_pairs\":{\"D\":512,\"E\":4386,\"P\":5983,\"collection.yaml\":64,\"docs\":8003,\"packet\":3},\"range_page_visits\":{\"D\":12,\"E\":258,\"P\":253,\"collection.yaml\":2,\"docs\":254,\"packet\":3},\"range_rows\":{\"D\":512,\"E\":10,\"P\":0,\"collection.yaml\":0,\"docs\":0,\"packet\":0},\"replacements\":2,\"touched_paths\":0,\"unique_pages\":[\"07891bc18baf7b8e58593d33d1d3d8dafa37216adc2fbc284bf49b5748e815c4\",\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"250fbc55942c427bc2017b639a01ba48794db14b80b901d316af198b2328531c\",\"29d9a627587c32d82656916834b6991af4c5d98231271cfc888e61c38cdb2c4a\",\"2f0815aa01f9ce705a281a86f5f70775eba9fae8be254e77fd97079119814d0b\",\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"6790825867680708f99af94783f0c6e01e4c2c65fd786f1cca86d77bdac70bc1\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"8b72cd4b3de2db3fc2b491b714a70a5d222373c56c18a98c216092986edfbc20\",\"99e6ba6fda31da052fe9b34ed87d5ec1e1c81aafef77e8a1b35e56a5a2a8ad8c\",\"a0aafed2f6cafe853375fb7f5588207467d9be7f0d6edd65008bdda6d3b14af5\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"eda8ebee0dc803f3301cd9d00a2837733da9366c4419248c8969669a2b124574\",\"f300110b38974c4205f9f3201ae691d3d70c09c6de7b0397c770fd23d1de51cf\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4120576,\"result\":{\"selected\":{\"digest\":\"52ceb3930b601143ae9c29177df03ae80da9a02fe72dbe12ce369372c11709cc\",\"publication\":\"publication-254977-1792451231838328047-3\"},\"status\":\"full-graph-index-source-projection-audit\"},\"status\":\"ok\",\"wall_ns\":115452929}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "inspect"
+    },
+    "profile": 3,
+    "seconds": 0.0009613437578082085,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":1620,\"bytes_control_written\":0,\"bytes_metadata_read\":3498,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":5118,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"lock-hold\":0,\"read\":27827},\"opens\":8,\"page_reads\":5,\"quota_limit\":null,\"quota_spent\":0,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"29d9a627587c32d82656916834b6991af4c5d98231271cfc888e61c38cdb2c4a\",\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"8b72cd4b3de2db3fc2b491b714a70a5d222373c56c18a98c216092986edfbc20\",\"99e6ba6fda31da052fe9b34ed87d5ec1e1c81aafef77e8a1b35e56a5a2a8ad8c\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3444736,\"result\":{\"history_depth\":5,\"publication\":{\"allocation_owner\":{\"attempt\":\"attempt-254976-1792451231355655820-0\",\"conservative_bytes\":67109184,\"includes_intermediates_and_stages\":true},\"attempt\":\"attempt-254976-1792451231355655820-0\",\"changes\":\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"generation_manifest\":null,\"graph\":{\"budget\":1000,\"consumer\":\"project\",\"cost\":0,\"count\":128,\"fallback\":false,\"tree\":\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"version\":1},\"id\":\"publication-254977-1792451231838328047-3\",\"intent\":\"872e8125b7e5644eefad3c31376be84bc556f2e51efdb8b91831411e959157a9\",\"membership\":\"29d9a627587c32d82656916834b6991af4c5d98231271cfc888e61c38cdb2c4a\",\"outcomes\":\"8b72cd4b3de2db3fc2b491b714a70a5d222373c56c18a98c216092986edfbc20\",\"packet_ref\":null,\"predecessor\":{\"digest\":\"149dbcb56498855bb2930c4332dbea46f0065a5a9aa43dc489841d20653328b9\",\"publication\":\"publication-254972-1792451230985942932-3\"},\"projection\":\"99e6ba6fda31da052fe9b34ed87d5ec1e1c81aafef77e8a1b35e56a5a2a8ad8c\",\"request\":\"relations\",\"result_hash\":\"3e5182f95bc69c1e241cf54dd7cab7e0b2e94b301e5c160804f5f76f4d48ee01\",\"sequence\":4,\"store_id\":\"store-254921-1792451221746602080-0\",\"version\":1},\"selected\":{\"digest\":\"52ceb3930b601143ae9c29177df03ae80da9a02fe72dbe12ce369372c11709cc\",\"publication\":\"publication-254977-1792451231838328047-3\"}},\"status\":\"ok\",\"wall_ns\":108931}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "prepare",
+      "request": {
+        "request": "batch-payload",
+        "base": {
+          "digest": "52ceb3930b601143ae9c29177df03ae80da9a02fe72dbe12ce369372c11709cc",
+          "publication": "publication-254977-1792451231838328047-3"
+        },
+        "ops": [
+          {
+            "kind": "edit",
+            "id": "d000010",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000011",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000012",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000013",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000014",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000015",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000016",
+            "text": " batch"
+          },
+          {
+            "kind": "edit",
+            "id": "d000017",
+            "text": " batch"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "profile": 3,
+    "seconds": 0.5534282121807337,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":9738,\"bytes_control_written\":5538,\"bytes_metadata_read\":626718,\"bytes_metadata_written\":42457,\"bytes_payload_read\":90388,\"bytes_payload_written\":45104,\"bytes_read\":726844,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":93099,\"copies\":0,\"created_directories\":13,\"directory_syncs\":106,\"documents_visited\":8,\"edges_visited\":0,\"file_syncs\":18,\"index_updates\":32,\"namespace_ops\":17,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"directory-create\":964272,\"graph-transition-inclusive\":346114312,\"lock-hold\":48362972,\"lock-wait\":21200,\"preparation-inclusive\":551983220,\"projection-prepare-inclusive\":103403169,\"read\":3957660,\"replace\":182980,\"sync\":536017735,\"write\":1437121},\"opens\":273,\"page_reads\":225,\"quota_limit\":67111936,\"quota_spent\":158208,\"range_calls\":{\"P\":8,\"docs\":8},\"range_leaf_pairs\":{\"P\":266,\"docs\":262},\"range_page_visits\":{\"P\":16,\"docs\":16},\"range_rows\":{\"P\":0,\"docs\":0},\"replacements\":16,\"touched_paths\":0,\"unique_pages\":[\"07891bc18baf7b8e58593d33d1d3d8dafa37216adc2fbc284bf49b5748e815c4\",\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"29d9a627587c32d82656916834b6991af4c5d98231271cfc888e61c38cdb2c4a\",\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"5f77b19b950d50b51eb830afacd60ef7adc3d011699d3aeb69e36da48d0064d9\",\"87849c354fc8902d1fcfcda416e2dd986ec29bc9196c4548574c9e977c330e73\",\"8b72cd4b3de2db3fc2b491b714a70a5d222373c56c18a98c216092986edfbc20\",\"99e6ba6fda31da052fe9b34ed87d5ec1e1c81aafef77e8a1b35e56a5a2a8ad8c\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"da1af85671eca082a3fedf876556311c0d0eccaabf59c540ef5225edc274a9d5\",\"e73e1de9d837aae9664aedc48d7be7d17bd8a4413972ac00b95c868e8e651cc6\",\"eda8ebee0dc803f3301cd9d00a2837733da9366c4419248c8969669a2b124574\",\"f300110b38974c4205f9f3201ae691d3d70c09c6de7b0397c770fd23d1de51cf\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3784704,\"result\":{\"candidate\":\"attempts/attempt-254981-1792451232167897249-0/candidate.json\"},\"status\":\"ok\",\"wall_ns\":552105145}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "select",
+      "candidate": "attempts/attempt-254981-1792451232167897249-0/candidate.json"
+    },
+    "profile": 3,
+    "seconds": 0.19506598822772503,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":25533,\"bytes_control_written\":2246,\"bytes_metadata_read\":686706,\"bytes_metadata_written\":2791,\"bytes_payload_read\":90388,\"bytes_payload_written\":0,\"bytes_read\":802627,\"bytes_result_read\":0,\"bytes_result_written\":360,\"bytes_written\":5397,\"copies\":0,\"created_directories\":2,\"directory_syncs\":35,\"documents_visited\":8,\"edges_visited\":0,\"file_syncs\":11,\"index_updates\":34,\"namespace_ops\":9,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"directory-create\":153487,\"incremental-replay\":4388731,\"lock-hold\":191666325,\"lock-wait\":8869,\"read\":1969721,\"replace\":339011,\"selection-inclusive\":157740902,\"sync\":184623587,\"write\":654608},\"opens\":298,\"page_reads\":246,\"quota_limit\":null,\"quota_spent\":37673,\"range_calls\":{\"P\":8,\"docs\":8},\"range_leaf_pairs\":{\"P\":266,\"docs\":262},\"range_page_visits\":{\"P\":16,\"docs\":16},\"range_rows\":{\"P\":0,\"docs\":0},\"replacements\":7,\"touched_paths\":0,\"unique_pages\":[\"07891bc18baf7b8e58593d33d1d3d8dafa37216adc2fbc284bf49b5748e815c4\",\"159c4409a60a2a30d3c3f4c12f8de00307f6c9887bc4af6460aca30adbd7c576\",\"29d9a627587c32d82656916834b6991af4c5d98231271cfc888e61c38cdb2c4a\",\"50b2cf8fdb1ffd3b529d0980ae1baf0d98a53fcb560f090507754aa154b52ac7\",\"53c4e5c2b2fa617c1ac177e726b1a14d31da297a5869669c856200993449b838\",\"5f77b19b950d50b51eb830afacd60ef7adc3d011699d3aeb69e36da48d0064d9\",\"87849c354fc8902d1fcfcda416e2dd986ec29bc9196c4548574c9e977c330e73\",\"8a668841a4becaba8092a4a6e58d5e11c4b1eb1ef2d395ce87b7606fbc22318f\",\"8b72cd4b3de2db3fc2b491b714a70a5d222373c56c18a98c216092986edfbc20\",\"99e6ba6fda31da052fe9b34ed87d5ec1e1c81aafef77e8a1b35e56a5a2a8ad8c\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"da1af85671eca082a3fedf876556311c0d0eccaabf59c540ef5225edc274a9d5\",\"e73e1de9d837aae9664aedc48d7be7d17bd8a4413972ac00b95c868e8e651cc6\",\"eda8ebee0dc803f3301cd9d00a2837733da9366c4419248c8969669a2b124574\",\"f300110b38974c4205f9f3201ae691d3d70c09c6de7b0397c770fd23d1de51cf\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3772416,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000010\",\"d000011\",\"d000012\",\"d000013\",\"d000014\",\"d000015\",\"d000016\",\"d000017\"],\"outcome\":\"accepted\",\"publication\":\"publication-254982-1792451232808438903-3\",\"removed\":[],\"request\":\"batch-payload\",\"state_digest\":\"61ca51957533e71f5711a9e8a33e348af40d028d491e2d1a3f3599e6ddec911c\"},\"selected\":{\"digest\":\"36817e64cf464522151866506aabfb4cc4e4149ee45f798597b04e507b1da047\",\"publication\":\"publication-254982-1792451232808438903-3\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":191829762}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "refresh"
+    },
+    "profile": 3,
+    "seconds": 0.20325845899060369,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":13115,\"bytes_control_written\":6149,\"bytes_metadata_read\":305348,\"bytes_metadata_written\":0,\"bytes_payload_read\":135264,\"bytes_payload_written\":45104,\"bytes_read\":453727,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":51253,\"copies\":8,\"created_directories\":1,\"directory_syncs\":48,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":10,\"index_updates\":0,\"namespace_ops\":11,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"A-completion-inclusive\":201787419,\"copy\":264400,\"directory-create\":57141,\"lock-hold\":201792980,\"lock-wait\":4534,\"read\":1609856,\"replace\":306021,\"sync\":196568459,\"write\":99886},\"opens\":173,\"page_reads\":124,\"quota_limit\":null,\"quota_spent\":92213,\"range_calls\":{},\"range_leaf_pairs\":{\"00000000000000000005\":26},\"range_page_visits\":{\"00000000000000000005\":2},\"range_rows\":{},\"replacements\":10,\"touched_paths\":8,\"unique_pages\":[\"19dbfb3baa81f573456c480ef93e05389fd59dc0d31342a733c07f58fd25e100\",\"5f77b19b950d50b51eb830afacd60ef7adc3d011699d3aeb69e36da48d0064d9\",\"87849c354fc8902d1fcfcda416e2dd986ec29bc9196c4548574c9e977c330e73\",\"8a668841a4becaba8092a4a6e58d5e11c4b1eb1ef2d395ce87b7606fbc22318f\",\"99e6ba6fda31da052fe9b34ed87d5ec1e1c81aafef77e8a1b35e56a5a2a8ad8c\",\"b1863e1f251e56135045b99bdfea5f4fed48a8925af3fd601d807cce647997d5\",\"ca7244aa8ad9c6fce85f7add38feeb4f4b94973e8572c5467ae0aec15cfbb563\",\"da1af85671eca082a3fedf876556311c0d0eccaabf59c540ef5225edc274a9d5\",\"e73e1de9d837aae9664aedc48d7be7d17bd8a4413972ac00b95c868e8e651cc6\",\"f300110b38974c4205f9f3201ae691d3d70c09c6de7b0397c770fd23d1de51cf\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3727360,\"result\":{\"status\":\"pending-refreshed\"},\"status\":\"ok\",\"wall_ns\":201874814}\n",
+    "stderr": ""
+  },
+  {
+    "input": {
+      "root": "/home/spenser/file-native-n-linux-20261019/stage1-data/p3/disposable/store",
+      "action": "audit"
+    },
+    "profile": 3,
+    "seconds": 0.15134650189429522,
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":3090,\"bytes_control_written\":0,\"bytes_metadata_read\":8411413,\"bytes_metadata_written\":15827,\"bytes_payload_read\":3177362,\"bytes_payload_written\":0,\"bytes_read\":11591865,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":15827,\"copies\":0,\"created_directories\":2,\"directory_syncs\":14,\"documents_visited\":128,\"edges_visited\":10,\"file_syncs\":2,\"index_updates\":0,\"namespace_ops\":2,\"navigation_bytes\":19623,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":1,\"ns\":{\"directory-create\":132357,\"lock-hold\":0,\"read\":12358736,\"sync\":112803133,\"write\":98764},\"opens\":3061,\"page_reads\":2792,\"quota_limit\":null,\"quota_spent\":24019,\"range_calls\":{\"D\":4,\"E\":129,\"P\":128,\"collection.yaml\":1,\"docs\":128,\"packet\":2},\"range_leaf_pairs\":{\"D\":512,\"E\":4386,\"P\":5983,\"collection.yaml\":64,\"docs\":8003,\"packet\":3},\"range_page_visits\":{\"D\":12,\"E\":258,\"P\":253,\"collection.yaml\":2,\"docs\":254,\"packet\":3},\"range_rows\":{\"D\":512,\"E\":10,\"P\":0,\"collection.yaml\":0,\"docs\":0,\"packet\":0},\"replacements\":2,\"touched_paths\":0,\"unique_pages\":[\"19dbfb3baa81f573456c480ef93e05389fd59dc0d31342a733c07f58fd25e100\",\"2f0815aa01f9ce705a281a86f5f70775eba9fae8be254e77fd97079119814d0b\",\"3f06fbd5d5554a41fecdb1ef3ff4efa274d285567caad0d51435c8359223b392\",\"53c4e5c2b2fa617c1ac177e726b1a14d31da297a5869669c856200993449b838\",\"5f77b19b950d50b51eb830afacd60ef7adc3d011699d3aeb69e36da48d0064d9\",\"6e575db793bee32c16de2241b18d0c22888a68b3b22cc2996f6e4d8c3028d48e\",\"87849c354fc8902d1fcfcda416e2dd986ec29bc9196c4548574c9e977c330e73\",\"8a668841a4becaba8092a4a6e58d5e11c4b1eb1ef2d395ce87b7606fbc22318f\",\"a0aafed2f6cafe853375fb7f5588207467d9be7f0d6edd65008bdda6d3b14af5\",\"ae8439ee3ac99b645882c25c13ed0bc63ff526bad76c3fc339ce41f9fbfd85f0\",\"c2067d34e1c718b3e5e105633678a3fcac2f20c39076a971e810fe2aa2bf0429\",\"c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221\",\"ca7244aa8ad9c6fce85f7add38feeb4f4b94973e8572c5467ae0aec15cfbb563\",\"d73be59dc3fbde63dd9d88d773d668b4a6efd5110aebf338ade8ce6e7171873e\",\"da1af85671eca082a3fedf876556311c0d0eccaabf59c540ef5225edc274a9d5\",\"e73e1de9d837aae9664aedc48d7be7d17bd8a4413972ac00b95c868e8e651cc6\",\"eda8ebee0dc803f3301cd9d00a2837733da9366c4419248c8969669a2b124574\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4042752,\"result\":{\"selected\":{\"digest\":\"36817e64cf464522151866506aabfb4cc4e4149ee45f798597b04e507b1da047\",\"publication\":\"publication-254982-1792451232808438903-3\"},\"status\":\"full-graph-index-source-projection-audit\"},\"status\":\"ok\",\"wall_ns\":150123073}\n",
+    "stderr": ""
+  }
+]

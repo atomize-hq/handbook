@@ -1,0 +1,145 @@
+{
+  "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+  "binary": "/home/spenser/file-native-n-linux-20261019/final-4bde/build/release/file-native-incremental",
+  "binary_sha256": "da75d34e5fe162447e356aead2fba0f2a1ac21bc1055ebb3812bce80fda79846",
+  "cases": [
+    {
+      "case": "navigation-and-operational-backup",
+      "mode": "A",
+      "n": 16,
+      "status": "success"
+    },
+    {
+      "case": "navigation-and-operational-backup",
+      "mode": "A",
+      "n": 128,
+      "status": "success"
+    },
+    {
+      "case": "navigation-and-operational-backup",
+      "mode": "B",
+      "n": 16,
+      "status": "success"
+    },
+    {
+      "case": "navigation-and-operational-backup",
+      "mode": "B",
+      "n": 128,
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-plan",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-preserved",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-file",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-namespace",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-before-complete",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-complete",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-namespace-preserved",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-plan",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-preserved",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-file",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-namespace",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-before-complete",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-complete",
+      "status": "success"
+    },
+    {
+      "case": "checkpoint-transfer-retire-repeat-gc",
+      "mode": "A",
+      "status": "success"
+    },
+    {
+      "case": "half-preparation-backup-recovery",
+      "mode": "A",
+      "status": "success"
+    },
+    {
+      "case": "checkpoint-transfer-retire-repeat-gc",
+      "mode": "B",
+      "status": "success"
+    },
+    {
+      "case": "half-preparation-backup-recovery",
+      "mode": "B",
+      "status": "success"
+    },
+    {
+      "case": "impossible-final-namespace",
+      "status": "expected refusal"
+    },
+    {
+      "case": "skipped-or-selected-once",
+      "mode": "A",
+      "status": "success"
+    },
+    {
+      "case": "skipped-or-selected-once",
+      "mode": "B",
+      "status": "success"
+    }
+  ],
+  "events": 282,
+  "seconds": 71.36844283528626
+}

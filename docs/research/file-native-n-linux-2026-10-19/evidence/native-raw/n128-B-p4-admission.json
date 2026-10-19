@@ -1,0 +1,16 @@
+{
+  "cell": "n128-B-p4",
+  "current": {
+    "root": "/home/spenser/file-native-n-linux-20261019",
+    "files": 10729,
+    "logical_bytes": 249388141,
+    "links_excluded": 0,
+    "seconds": 0.05309963785111904
+  },
+  "forecast_additional_bytes": 73252864,
+  "additional_total_bound": 356195437,
+  "local_and_return_allowance_bytes": 33554432,
+  "new_file_forecast": 21241,
+  "global_parent_forecast_bytes": 40828300920,
+  "global_parent_forecast_files": 4282696
+}

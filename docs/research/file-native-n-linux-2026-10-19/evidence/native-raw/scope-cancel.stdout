@@ -1,0 +1,20 @@
+{
+  "status": "scope-cancelled-unqualified-prefix",
+  "epoch": 1792451209.9745507,
+  "reason": "Parent explicitly narrowed native qualification to N128 and small >512-record geometry (N1k); do not launch a native N10k performance matrix. N10k A had already started initialization when steering arrived.",
+  "stopped_process_groups": [
+    254757,
+    253254
+  ],
+  "kill": "SIGKILL after stopping the owning matrix controller",
+  "n10000_A_summary_present": false,
+  "n10000_B": "unperformed; never launched",
+  "earlier_four_cells": "success; raw receipts preserved",
+  "owned_after": {
+    "root": "/home/spenser/file-native-n-linux-20261019",
+    "files": 12650,
+    "logical_bytes": 275903074,
+    "links_excluded": 0,
+    "seconds": 0.05846259603276849
+  }
+}

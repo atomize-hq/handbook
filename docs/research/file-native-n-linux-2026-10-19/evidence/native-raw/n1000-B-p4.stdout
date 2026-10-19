@@ -1,0 +1,13 @@
+{"n": 1000, "mode": "B", "profile": 4, "case": "single-payload", "prepare_s": 6.990050163, "navigation_parts": 0, "D_rows": 0, "E_rows": 0, "changed_paths": 1}
+{"n": 1000, "mode": "B", "profile": 4, "case": "batch-payload", "prepare_s": 7.310703923, "navigation_parts": 0, "D_rows": 0, "E_rows": 0, "changed_paths": 8}
+{"n": 1000, "mode": "B", "profile": 4, "case": "label", "prepare_s": 6.609422291, "navigation_parts": 0, "D_rows": 0, "E_rows": 0, "changed_paths": 0}
+{"n": 1000, "mode": "B", "profile": 4, "case": "single-title", "prepare_s": 6.710771303, "navigation_parts": 2, "D_rows": 0, "E_rows": 2, "changed_paths": 1}
+{"n": 1000, "mode": "B", "profile": 4, "case": "batch-title", "prepare_s": 7.146503611, "navigation_parts": 4, "D_rows": 0, "E_rows": 4, "changed_paths": 2}
+{"n": 1000, "mode": "B", "profile": 4, "case": "path", "prepare_s": 10.286664831, "navigation_parts": 2, "D_rows": 0, "E_rows": 2, "changed_paths": 3}
+{"n": 1000, "mode": "B", "profile": 4, "case": "relations", "prepare_s": 10.009507638, "navigation_parts": 2, "D_rows": 0, "E_rows": 4, "changed_paths": 1}
+{"n": 1000, "mode": "B", "profile": 4, "case": "high-degree", "prepare_s": 10.221733759, "navigation_parts": 3, "D_rows": 0, "E_rows": 132, "changed_paths": 2}
+{"n": 1000, "mode": "B", "profile": 4, "case": "high-degree-title", "prepare_s": 9.692021826, "navigation_parts": 3, "D_rows": 0, "E_rows": 132, "changed_paths": 1}
+{"n": 1000, "mode": "B", "profile": 4, "case": "split", "prepare_s": 12.982046275, "navigation_parts": 4, "D_rows": 0, "E_rows": 132, "changed_paths": 131}
+{"n": 1000, "mode": "B", "profile": 4, "case": "merge", "prepare_s": 11.461165679, "navigation_parts": 3, "D_rows": 0, "E_rows": 132, "changed_paths": 131}
+{"n": 1000, "mode": "B", "profile": 4, "case": "external-edit", "prepare_s": 9.882884502, "navigation_parts": 3, "D_rows": 0, "E_rows": 132, "changed_paths": 3}
+{"n": 1000, "mode": "B", "profile": 4, "case": "delete", "prepare_s": 9.942504643, "navigation_parts": 2, "D_rows": 0, "E_rows": 4, "changed_paths": 2}

@@ -1,0 +1,198 @@
+{
+  "roots": [
+    {
+      "root": "/home/spenser/file-native-incremental-capsule-f3e942f.tar",
+      "files": 1,
+      "logical_bytes": 440320
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-capsule-fb73e75.tar",
+      "files": 1,
+      "logical_bytes": 419840
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-capsule-rootfix-precommit.tar",
+      "files": 1,
+      "logical_bytes": 460800
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-accounting-evidence",
+      "files": 26,
+      "logical_bytes": 1196716,
+      "links_excluded": 0,
+      "seconds": 0.0005852552130818367
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-accounting-final",
+      "files": 9037,
+      "logical_bytes": 418729890,
+      "links_excluded": 0,
+      "seconds": 0.2005945472046733
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-audit-export",
+      "files": 14,
+      "logical_bytes": 318186,
+      "links_excluded": 0,
+      "seconds": 0.0003242748789489269
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-audit-final",
+      "files": 2396,
+      "logical_bytes": 374253222,
+      "links_excluded": 0,
+      "seconds": 0.08539459388703108
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-evidence-20261018",
+      "files": 73,
+      "logical_bytes": 1952060,
+      "links_excluded": 0,
+      "seconds": 0.0018527740612626076
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-evidence-20261018.tar.gz",
+      "files": 1,
+      "logical_bytes": 1930575
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-final-20261018",
+      "files": 18511,
+      "logical_bytes": 464753721,
+      "links_excluded": 0,
+      "seconds": 0.6806665048934519
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-recipe",
+      "files": 1473,
+      "logical_bytes": 90109427,
+      "links_excluded": 0,
+      "seconds": 0.05587906530126929
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-replay-final",
+      "files": 13009,
+      "logical_bytes": 436421501,
+      "links_excluded": 0,
+      "seconds": 0.5228796247392893
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-rootfix",
+      "files": 5847,
+      "logical_bytes": 385222788,
+      "links_excluded": 0,
+      "seconds": 0.2394179990515113
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-rootfix-evidence",
+      "files": 23,
+      "logical_bytes": 942298,
+      "links_excluded": 0,
+      "seconds": 0.0005683437921106815
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-rootfix-evidence.tar.gz",
+      "files": 1,
+      "logical_bytes": 939385
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-replay-probe",
+      "files": 2121,
+      "logical_bytes": 13970252,
+      "links_excluded": 0,
+      "seconds": 0.04599151201546192
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-5a65a21",
+      "files": 694,
+      "logical_bytes": 27435661,
+      "links_excluded": 0,
+      "seconds": 0.0059949299320578575
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-7ac70f9",
+      "files": 365,
+      "logical_bytes": 6886129,
+      "links_excluded": 0,
+      "seconds": 0.0025612879544496536
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-7e00d22",
+      "files": 444,
+      "logical_bytes": 9072770,
+      "links_excluded": 0,
+      "seconds": 0.002338845282793045
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-f3e942f",
+      "files": 55,
+      "logical_bytes": 474589,
+      "links_excluded": 0,
+      "seconds": 0.0007981462404131889
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-recipe",
+      "files": 60,
+      "logical_bytes": 466855,
+      "links_excluded": 0,
+      "seconds": 0.0008248738013207912
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-rootfix",
+      "files": 56,
+      "logical_bytes": 444599,
+      "links_excluded": 0,
+      "seconds": 0.000792400911450386
+    },
+    {
+      "root": "/home/spenser/file-native-n-linux-20261019",
+      "files": 169,
+      "logical_bytes": 2268544,
+      "links_excluded": 0,
+      "seconds": 0.0008653812110424042
+    },
+    {
+      "root": "/home/spenser/file-native-prerequisite-linux-20261018",
+      "files": 123143,
+      "logical_bytes": 1304492667,
+      "links_excluded": 0,
+      "seconds": 5.566006089095026
+    },
+    {
+      "root": "/home/spenser/file-native-q-linux-20261019-final",
+      "files": 15443,
+      "logical_bytes": 277573914,
+      "links_excluded": 0,
+      "seconds": 0.28158965380862355
+    },
+    {
+      "root": "/home/spenser/file-native-recovery-20261019",
+      "files": 29739,
+      "logical_bytes": 631851798,
+      "links_excluded": 0,
+      "seconds": 0.14485089806839824
+    },
+    {
+      "root": "/home/spenser/file-native-recovery-20261019-source.tar",
+      "files": 1,
+      "logical_bytes": 573440
+    },
+    {
+      "root": "/home/spenser/.cargo/registry",
+      "files": 21539,
+      "logical_bytes": 439121763,
+      "links_excluded": 0,
+      "seconds": 0.709223706740886
+    },
+    {
+      "root": "/home/spenser/.cargo/git",
+      "files": 1,
+      "logical_bytes": 177,
+      "links_excluded": 0,
+      "seconds": 0.00028973398730158806
+    }
+  ],
+  "logical_bytes": 4892723887,
+  "files": 244244,
+  "free_bytes": 42324443136
+}

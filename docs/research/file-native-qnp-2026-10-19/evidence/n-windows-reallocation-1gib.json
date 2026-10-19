@@ -1,0 +1,20 @@
+{
+  "epoch": 1792452416.722906,
+  "authority": "parent reallocation within human-approved global40GiB",
+  "n_windows_total_new_bytes": 1073741824,
+  "n_windows_total_new_files": 100000,
+  "additional_allocation_bytes": 268435456,
+  "prior_all_lane_forecast_including_reserve_bytes": 40828300920,
+  "updated_all_lane_forecast_including_reserve_bytes": 41096736376,
+  "global_ceiling_bytes": 42949672960,
+  "reserved_inside_bytes": 1073741824,
+  "forecast_files_including_reserve": 4282696,
+  "global_file_ceiling": 5000000,
+  "reserved_inside_files": 100000,
+  "windows_free_verified_bytes": 201791389696,
+  "windows_free_reserve_bytes": 150323855360,
+  "deadline_utc": "2026-10-20T00:38:51Z",
+  "ordinary_child_seconds": 120,
+  "no_B_init_restart": true,
+  "next_comparators_require_actual_census_and_prospective_stage_bound": true
+}

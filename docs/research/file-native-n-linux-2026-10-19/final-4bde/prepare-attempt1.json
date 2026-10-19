@@ -1,0 +1,7 @@
+{
+  "status": "failed-local-inventory-assertion-before-native-transfer",
+  "error": "AssertionError: len(core)==16",
+  "cause": "The initial inventory filter included control and consumer src directories in the core-only count (24 files instead of 16).",
+  "preserved_original_source": "prepare-attempt1.py.original",
+  "correction": "Limit core selector to experimental workspace root src plus Cargo.toml/Cargo.lock. Full 163-file transport remains unchanged."
+}

@@ -3,20 +3,22 @@
 October 19, 2026. **The three-task increment is incomplete.** Fresh top-level Q
 Linux, Q Mac and N chats were dispatched under the human's authorization.
 The human approved 40 GiB combined capacity; finite Q/N execution is now admitted.
-Their results have not yet passed coordinator review. P has not been dispatched
-because its Q/N gates are open.
+Q Linux and N Linux have passed independent coordinator evidence review. P has
+not been dispatched because the remaining Q/N gates are open.
 
 The integration branch is `codex/file-native-qnp-20261019`, based on verified
 recovery commit `f0904a63cb2500b9bea3a4034d19cbe38bfac729`. Current Rust/Cargo
-hashes match final core `07a8574e581e66ba58d7caac87238aa5f93918be`; this is a local
-source binding check, not a native qualification result. Shared checkout,
+hashes now match N candidate `4bde156323812ef18c0dea6798cfc2108aaad933`.
+Q separately qualifies baseline `07a8574e581e66ba58d7caac87238aa5f93918be`. Shared checkout,
 original H101003 store, original archive and final H101006 clone are preserved.
 
 | Task | Current result | Needed next |
 | --- | --- | --- |
-| Q native Linux/ext4 | executing exact-final bounded qualification | review complete evidence and original censors |
-| Q native macOS | executing exact-final bounded qualification | review complete evidence and original censors |
-| N Windows | implementation admitted | candidate pin, measurements, review and native deltas |
+| Q native Linux/ext4 | required named cases passed; reviewed and integrated | optional stress censor and late read-only closeout remain explicit |
+| Q native macOS | worker reports functional cases passed | pending platform approval holds artifact closeout and parent review |
+| N Windows | frozen 4bde core integrated; measurements continue | final report and bounded comparator closeout |
+| N native Linux/ext4 | final 4bde: 39 focused, 24 recovery, eight README cases passed | source, archive and native binary authenticated; reports integrated |
+| N native macOS | fresh final-pin lane dispatched | first execution held by platform approval; original clock continues |
 | P | undispatched | reviewed Q/N, actual integrated-pin native qualification, frozen navigation |
 
 Linux's original retained samples failed admission. After the human freed space,
@@ -36,7 +38,13 @@ been silently deleted or called available capacity. The human explicitly approve
 a 40 GiB combined ceiling, leaving other limits unchanged. The
 [execution admission](evidence/q-n-execution-admission-40gib.json) forecasts
 39,217,688,184 bytes / 4,107,696 files including the closeout reserve and bounded
-Q/N shares. P still requires separate worst-case coexistence admission.
+Q/N shares. After both N native allocations and a 256 MiB reallocation to Windows
+N, the conservative all-lane forecast is **41,096,736,376 bytes / 4,282,696 files**,
+including the internal 1 GiB / 100,000-file reserve, below 40 GiB / 5,000,000 files.
+Windows N has 1 GiB / 100,000 files total new ownership; native N lanes retain
+768 MiB each. This is a prospective allocation, not a final census.
+See [the reallocation receipt](evidence/n-windows-reallocation-1gib.json).
+P still requires fresh actual accounting and separate admission per large stage.
 
 GitNexus availability checks unexpectedly invoked package staging. Both workers
 stopped retries. N's exact-subtree PowerShell cleanup attempts were rejected
@@ -49,9 +57,22 @@ No cleanup success is assumed. The
 
 The coordinator's direct cached GitNexus invocation avoided further package
 installation, but detect-changes refused the unregistered integration worktree.
-The [failure](evidence/gitnexus-precommit-failed.txt) remains UNKNOWN. Only
-documentation/evidence is changed in this coordination commit; manual review
-checks the exact staged scope, source/provenance hashes, links and evidence index.
+The [failure](evidence/gitnexus-precommit-failed.txt) remains UNKNOWN. The
+[24 explicit symbol impact attempts](evidence/coordinator-navigation-impact-attempts.json)
+also remain UNKNOWN. Manual review traced prepare/replay, A refresh, B generation,
+packets, checkpoints and GC and reviewed the complete N core diff. Exact staged
+scope, source/provenance hashes, links and evidence index are checked separately.
+
+The parent independently checked both N Linux archives, all **326 source blob
+bindings**, raw members and the final native executable hash. See
+[the review receipt](evidence/coordinator-n-linux-review.json) and
+[the separate final-pin report](../file-native-n-linux-2026-10-19/final-4bde/README.md).
+Ordinary measurements remain bound to 6e66; final 4bde's initialization-only README
+guard has separate build, focused, recovery and legacy compatibility receipts.
+N10k A initialization reached 120 seconds after immutable selection; a separately
+bounded resume completed its view and 13 ordinary measurements. Seeded N10k B
+also reached 120 seconds, with no selector; its edit matrix is unperformed and
+its prefix retained. Neither setup is reported as a fresh initialization pass.
 
 Read [coordination and frozen decision rules](coordination.md), the
 [N design handoff](navigation-admission-design.md), and
@@ -63,5 +84,6 @@ wording is historical, superseded by the human's dispatch authorization.
 Q Linux's original deadline is 6:38:49 p.m. and N's is 8:38:51 p.m.
 America/Indianapolis on October 19. Q Mac's original two-hour clock likewise
 continues. Follow-ups cannot reset these bounds or relabel an eventual censor.
-No correctness, performance, packing or native parity gate has passed in this
-increment. No keep/adjust/reject storage recommendation is yet justified.
+Native N Linux execution/closeout ends at 23:44:45 / 23:54:45 UTC; native N Mac
+at 23:44:38 / 23:54:38 UTC on October 19. Complete cross-platform and packing
+gates remain open. No keep/adjust/reject storage recommendation is yet justified.

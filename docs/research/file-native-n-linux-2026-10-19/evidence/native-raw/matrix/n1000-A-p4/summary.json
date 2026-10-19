@@ -1,0 +1,82 @@
+{
+  "status": "success",
+  "n": 1000,
+  "mode": "A",
+  "profile": 4,
+  "cases": 13,
+  "seconds": 55.43232332309708,
+  "fixture": "/home/spenser/file-native-n-linux-20261019/matrix/n1000-A-p4/cell/disposable/store",
+  "final": {
+    "root": "/home/spenser/file-native-n-linux-20261019/matrix/n1000-A-p4/cell/disposable/store",
+    "epoch": 1792450895.0044878,
+    "seconds": 0.03171920496970415,
+    "categories": {
+      "(root-files)": {
+        "files": 8,
+        "logical_bytes": 1234,
+        "allocated_file_bytes": 24576
+      },
+      "retired": {
+        "files": 13,
+        "logical_bytes": 1862,
+        "allocated_file_bytes": 53248
+      },
+      "objects": {
+        "files": 89,
+        "logical_bytes": 1022609,
+        "allocated_file_bytes": 1142784
+      },
+      "publications": {
+        "files": 14,
+        "logical_bytes": 18165,
+        "allocated_file_bytes": 57344
+      },
+      "attempts": {
+        "files": 2,
+        "logical_bytes": 2911,
+        "allocated_file_bytes": 8192
+      },
+      "derived": {
+        "files": 6,
+        "logical_bytes": 163877,
+        "allocated_file_bytes": 180224
+      },
+      "attempt-hints": {
+        "files": 14,
+        "logical_bytes": 2005,
+        "allocated_file_bytes": 57344
+      },
+      "originals": {
+        "files": 999,
+        "logical_bytes": 12693616,
+        "allocated_file_bytes": 12726272
+      },
+      "view": {
+        "files": 1005,
+        "logical_bytes": 12857493,
+        "allocated_file_bytes": 12906496
+      },
+      "results": {
+        "files": 14,
+        "logical_bytes": 28023,
+        "allocated_file_bytes": 77824
+      },
+      "divergence": {
+        "files": 1,
+        "logical_bytes": 28,
+        "allocated_file_bytes": 4096
+      }
+    },
+    "files": 2165,
+    "logical_bytes": 26791823,
+    "allocated_file_bytes": 27238400,
+    "free_bytes": 42023030784,
+    "conservative_publication_owner_bytes": null,
+    "owner_records": null,
+    "observed_reservations": {},
+    "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "conservative_active_reserved_bytes": 0,
+    "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+  },
+  "exe_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e"
+}

@@ -1,0 +1,26 @@
+{
+  "checked_epoch": 1792452356.3900478,
+  "source": "independent parent Git batch blob, raw archive, local member comparison and native executable hash",
+  "prior_attempt": "All source/archive assertions passed; binary check used incorrect target/ instead of actual build/ path and failed without modifying native files. Corrected below.",
+  "generations": [
+    {
+      "revision": "6e66a7523612b80386cf9cc2b96d5341579b54fd",
+      "git_blobs_verified": 163,
+      "archive_sha256": "248c413ea513a1f310b8064f29319767930ca75fbb9576ee9dbd5f5060b79895",
+      "raw_members_verified": 120,
+      "raw_bytes": 7970157,
+      "focused_cases": 39,
+      "recovery_cases": 24
+    },
+    {
+      "revision": "4bde156323812ef18c0dea6798cfc2108aaad933",
+      "git_blobs_verified": 163,
+      "archive_sha256": "07ec4c40e36489424f23b05d58732c0baa511f2e28d4fa578254846b6e5e7548",
+      "raw_members_verified": 30,
+      "raw_bytes": 3050382,
+      "focused_cases": 39,
+      "recovery_cases": 24
+    }
+  ],
+  "final_native_binary_independently_rehashed": "da75d34e5fe162447e356aead2fba0f2a1ac21bc1055ebb3812bce80fda79846  /home/spenser/file-native-n-linux-20261019/final-4bde/build/release/file-native-incremental"
+}

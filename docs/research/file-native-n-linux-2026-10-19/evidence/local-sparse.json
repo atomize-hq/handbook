@@ -1,0 +1,20 @@
+{
+  "roots": [
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\b3fc\\handbook",
+      "files": 1643,
+      "logical_bytes": 177895957,
+      "links_excluded": 0,
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\.git",
+      "files": 1262,
+      "logical_bytes": 209990356,
+      "links_excluded": 0,
+      "seconds": 0.031000000017229468
+    }
+  ],
+  "files": 2905,
+  "logical_bytes": 387886313
+}

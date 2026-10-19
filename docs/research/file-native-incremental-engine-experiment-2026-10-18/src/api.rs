@@ -140,7 +140,7 @@ pub fn main_for(consumer:Option<&str>){
     println!("{}",json!({"status":status,"result":result,"error":error,"metrics":m,"wall_ns":t.elapsed().as_nanos(),"peak_memory_bytes":io::peak_memory()}));
     if status=="error"{std::process::exit(2);}
 }
-fn strict_json(text:&str)->Result<Value> {
+pub(crate) fn strict_json(text:&str)->Result<Value> {
     // Parse before Value can collapse duplicate fields, including nested ops.
     struct Strict(Value);
     impl<'de> Deserialize<'de> for Strict {

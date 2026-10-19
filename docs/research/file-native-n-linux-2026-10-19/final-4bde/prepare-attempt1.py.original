@@ -1,0 +1,18 @@
+"""Export final 4bde committed inputs separately from the preserved 6e66 lane."""
+import json,hashlib,subprocess,tarfile,io
+from pathlib import Path
+BASE=Path(__file__).resolve().parent
+ROOT=BASE.parents[3]
+PIN='4bde156323812ef18c0dea6798cfc2108aaad933'
+prior=json.loads((BASE.parent/'evidence/source-manifest.json').read_bytes())
+manifest={}
+with tarfile.open(BASE/'source.tar','w') as archive:
+    for path in prior['files']:
+        raw=subprocess.check_output(['git','show',PIN+':'+path],cwd=ROOT)
+        manifest[path]=dict(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest(),git_blob=subprocess.check_output(['git','rev-parse',PIN+':'+path],cwd=ROOT).decode().strip())
+        entry=tarfile.TarInfo(path);entry.size=len(raw);entry.mode=0o644;archive.addfile(entry,io.BytesIO(raw))
+core={k:v for k,v in manifest.items() if '/src/' in k or k in ['docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml','docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock']}
+assert len(core)==16
+row=dict(checkout=PIN,previous_checkout=prior['checkout'],files=manifest,core_Rust_Cargo_files=core,core_src_tree=subprocess.check_output(['git','rev-parse',PIN+':docs/research/file-native-incremental-engine-experiment-2026-10-18/src'],cwd=ROOT).decode().strip(),archive_sha256=hashlib.sha256((BASE/'source.tar').read_bytes()).hexdigest(),original_execution_cutoff='2026-10-19T23:44:45Z',original_lane_deadline='2026-10-19T23:54:45Z')
+(BASE/'source-manifest.json').write_text(json.dumps(row,indent=2))
+print(json.dumps(dict(files=len(manifest),core_files=len(core),bytes=sum(r['bytes'] for r in manifest.values()))))

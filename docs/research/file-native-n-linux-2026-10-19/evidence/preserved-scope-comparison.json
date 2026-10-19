@@ -1,0 +1,16 @@
+{
+  "before_logical_bytes": 4892723887,
+  "before_files": 244244,
+  "after_logical_bytes": 5175792571,
+  "after_files": 257725,
+  "before_free_bytes": 42324443136,
+  "after_free_bytes": 42012012544,
+  "changed_prior_scopes": [],
+  "shared_cargo_entire_current": {
+    "root": "/home/spenser/.cargo",
+    "files": 22489,
+    "logical_bytes": 621496978,
+    "links_excluded": 14,
+    "seconds": 0.18087259493768215
+  }
+}

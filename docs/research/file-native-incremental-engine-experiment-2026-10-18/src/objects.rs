@@ -39,8 +39,11 @@ pub fn point<T:DeserializeOwned>(o:&mut Objects,root:&Option<Id>,key:&str)->Resu
     DiskIndex::open(o,root.clone())?.get(o,key)?.filter(|b|!b.is_empty()).map(|b|decode(&b,o)).transpose()
 }
 pub fn range<T:DeserializeOwned>(o:&mut Objects,root:&Option<Id>,prefix:&str)->Result<Vec<(String,T)>>{
-    DiskIndex::open(o,root.clone())?.range(o,prefix,&format!("{prefix}\u{10ffff}"))?
-        .into_iter().filter(|(_,b)|!b.is_empty()).map(|(k,b)|Ok((k,decode(&b,o)?))).collect()
+    let rows=DiskIndex::open(o,root.clone())?.range(o,prefix,&format!("{prefix}\u{10ffff}"))?;
+    let role=prefix.split('/').next().unwrap_or("").to_owned();
+    *o.metrics.range_calls.entry(role.clone()).or_default()+=1;
+    *o.metrics.range_rows.entry(role).or_default()+=rows.len() as u64;
+    rows.into_iter().filter(|(_,b)|!b.is_empty()).map(|(k,b)|Ok((k,decode(&b,o)?))).collect()
 }
 pub fn update(o:&mut Objects,root:&Option<Id>,changes:BTreeMap<String,Vec<u8>>)->Result<Option<Id>>{
     let mut index=DiskIndex::open(o,root.clone())?;

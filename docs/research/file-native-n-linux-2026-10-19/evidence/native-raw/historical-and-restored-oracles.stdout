@@ -1,0 +1,18 @@
+[
+  {
+    "mode": "A",
+    "sealed2_packet_replayed": true,
+    "checkpoint_carried_profile2": true,
+    "old_publication_unchanged": true,
+    "candidate_sha256": "5e1bddb8d99390d7dbbe411ac3c06a9b92c14b5c59b0d7dad8d04a58bc598e8a",
+    "status": "success"
+  },
+  {
+    "mode": "B",
+    "sealed2_packet_replayed": true,
+    "checkpoint_carried_profile2": true,
+    "old_publication_unchanged": true,
+    "candidate_sha256": "d5c96c8cd64dda75a30ff63e1ce2d52ed09c9dd1c39579e98a80dfa52d8b9720",
+    "status": "success"
+  }
+]

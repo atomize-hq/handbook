@@ -1,0 +1,10 @@
+{
+  "start_epoch": 1792450817.773717,
+  "end_epoch": 1792451210.2343252,
+  "samples": 698,
+  "observed_peak_owned_bytes": 293453827,
+  "observed_peak_owned_files": 14024,
+  "minimum_free_bytes": 42004840448,
+  "earlier_unsampled_peak": "missing; earlier stage-end census retained",
+  "watcher_peak_rss": 15233024
+}

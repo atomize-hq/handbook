@@ -1,0 +1,13 @@
+{"n": 128, "mode": "B", "profile": 4, "case": "single-payload", "prepare_s": 1.196157428, "navigation_parts": 0, "D_rows": 0, "E_rows": 0, "changed_paths": 1}
+{"n": 128, "mode": "B", "profile": 4, "case": "batch-payload", "prepare_s": 1.310781278, "navigation_parts": 0, "D_rows": 0, "E_rows": 0, "changed_paths": 8}
+{"n": 128, "mode": "B", "profile": 4, "case": "label", "prepare_s": 1.058487394, "navigation_parts": 0, "D_rows": 0, "E_rows": 0, "changed_paths": 0}
+{"n": 128, "mode": "B", "profile": 4, "case": "single-title", "prepare_s": 1.106571554, "navigation_parts": 2, "D_rows": 0, "E_rows": 4, "changed_paths": 1}
+{"n": 128, "mode": "B", "profile": 4, "case": "batch-title", "prepare_s": 1.154574138, "navigation_parts": 2, "D_rows": 0, "E_rows": 4, "changed_paths": 1}
+{"n": 128, "mode": "B", "profile": 4, "case": "path", "prepare_s": 1.230156445, "navigation_parts": 2, "D_rows": 0, "E_rows": 4, "changed_paths": 3}
+{"n": 128, "mode": "B", "profile": 4, "case": "relations", "prepare_s": 1.178673572, "navigation_parts": 2, "D_rows": 0, "E_rows": 6, "changed_paths": 1}
+{"n": 128, "mode": "B", "profile": 4, "case": "high-degree", "prepare_s": 1.445325283, "navigation_parts": 3, "D_rows": 0, "E_rows": 136, "changed_paths": 2}
+{"n": 128, "mode": "B", "profile": 4, "case": "high-degree-title", "prepare_s": 1.170639481, "navigation_parts": 3, "D_rows": 0, "E_rows": 136, "changed_paths": 1}
+{"n": 128, "mode": "B", "profile": 4, "case": "split", "prepare_s": 3.11495209, "navigation_parts": 4, "D_rows": 0, "E_rows": 136, "changed_paths": 131}
+{"n": 128, "mode": "B", "profile": 4, "case": "merge", "prepare_s": 1.431210094, "navigation_parts": 3, "D_rows": 0, "E_rows": 136, "changed_paths": 131}
+{"n": 128, "mode": "B", "profile": 4, "case": "external-edit", "prepare_s": 1.211866402, "navigation_parts": 3, "D_rows": 0, "E_rows": 136, "changed_paths": 3}
+{"n": 128, "mode": "B", "profile": 4, "case": "delete", "prepare_s": 1.294982025, "navigation_parts": 3, "D_rows": 0, "E_rows": 136, "changed_paths": 2}

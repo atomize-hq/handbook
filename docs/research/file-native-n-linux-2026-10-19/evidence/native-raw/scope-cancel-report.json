@@ -1,0 +1,35 @@
+{
+  "status": "scope-cancelled-unqualified-prefix",
+  "epoch": 1792451209.9745507,
+  "reason": "Parent explicitly narrowed native qualification to N128 and small >512-record geometry (N1k); do not launch a native N10k performance matrix. N10k A had already started initialization when steering arrived.",
+  "stopped_process_groups": [
+    254757,
+    253254
+  ],
+  "kill": "SIGKILL after stopping the owning matrix controller",
+  "n10000_A_summary_present": false,
+  "n10000_B": "unperformed; never launched",
+  "earlier_four_cells": "success; raw receipts preserved",
+  "owned_after": {
+    "root": "/home/spenser/file-native-n-linux-20261019",
+    "files": 12650,
+    "logical_bytes": 275903074,
+    "links_excluded": 0,
+    "seconds": 0.05846259603276849
+  },
+  "task_process_snapshot": [
+    " 253641  253640  253641  3176 bash -c cd /home/spenser/file-native-n-linux-20261019 && python3 resource_watch.py > watcher.stdout 2> watcher.stderr",
+    " 254858  254857  254858  3208 bash -c cd /home/spenser/file-native-n-linux-20261019 && python3 scope_cancel.py > scope-cancel.stdout && python3 finish_native.py > finish.stdout 2> finish.stderr"
+  ],
+  "original_native_receipt_sha256": "85c78088789247383be84c4d241a1b9474386ee085ebe0bd3ad5eaf6b53ca03b",
+  "original_native_receipt_preserved_at": "/home/spenser/file-native-n-linux-20261019/matrix-failed.json",
+  "unrelated_host_process_arguments": "omitted from bounded return; original remains at native path",
+  "cancelled_N10k_A_prefix_census": {
+    "root": "/home/spenser/file-native-n-linux-20261019/matrix/n10000-A-p4/cell/disposable/store",
+    "files": 1879,
+    "logical_bytes": 23765782,
+    "links_excluded": 0,
+    "seconds": 0.0049558887258172035
+  },
+  "cancelled_N10k_A_selected_present": false
+}

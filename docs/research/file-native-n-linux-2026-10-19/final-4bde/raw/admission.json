@@ -1,0 +1,18 @@
+{
+  "epoch": 1792451937.8629937,
+  "current_combined_native": {
+    "root": "/home/spenser/file-native-n-linux-20261019",
+    "files": 13825,
+    "logical_bytes": 288394608,
+    "links_excluded": 0,
+    "seconds": 0.0632618647068739
+  },
+  "new_source_build_fixtures_return_forecast_bytes": 335544320,
+  "local_and_git_growth_allowance_bytes": 67108864,
+  "worst_case_additional_lane_bytes": 691047792,
+  "lane_limit_bytes": 805306368,
+  "new_file_forecast": 38825,
+  "free_bytes": 42006167552,
+  "original_cutoff_epoch": 1792453485,
+  "original_deadline_epoch": 1792454085
+}
