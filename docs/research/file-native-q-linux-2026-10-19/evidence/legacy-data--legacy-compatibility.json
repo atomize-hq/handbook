@@ -1,0 +1,22 @@
+[
+  {
+    "mode": "A",
+    "legacy_root_exact": true,
+    "legacy_candidate_replayed": true,
+    "new_target_profile2": true,
+    "old_selected": {
+      "digest": "2a7b14bfd1a8dfba7ff72374f2b27eb8516d8b2b8c4a169ed3c3e3199a002533",
+      "publication": "publication-71940-1792427476697087700-42"
+    }
+  },
+  {
+    "mode": "B",
+    "legacy_root_exact": true,
+    "legacy_candidate_replayed": true,
+    "new_target_profile2": true,
+    "old_selected": {
+      "digest": "be43558ac4f47acd2a6becce29ae724f7339133784f818eb460fd85290a63004",
+      "publication": "publication-38680-1792427477040021100-42"
+    }
+  }
+]

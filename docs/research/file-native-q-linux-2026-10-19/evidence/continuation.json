@@ -1,0 +1,112 @@
+{
+  "stages": [
+    {
+      "name": "capsule-v2",
+      "args": [
+        "/usr/bin/python3",
+        "/home/spenser/file-native-q-linux-20261019-final/bounded_capsule_v2.py",
+        "/home/spenser/file-native-q-linux-20261019-final/build/debug/file-native-incremental",
+        "/home/spenser/file-native-q-linux-20261019-final/capsule-v2-data"
+      ],
+      "start_epoch": 1792449272.3661127,
+      "seconds": 81.01767420768738,
+      "exit": 0,
+      "peak_aggregate_sampled_rss": 35131392,
+      "status": "success",
+      "reason": null
+    },
+    {
+      "name": "io-compile",
+      "args": [
+        "rustc",
+        "--edition=2021",
+        "/home/spenser/file-native-q-linux-20261019-final/io_probe.rs",
+        "--extern",
+        "file_native_incremental=/home/spenser/file-native-q-linux-20261019-final/build/debug/libfile_native_incremental.rlib",
+        "-L",
+        "dependency=/home/spenser/file-native-q-linux-20261019-final/build/debug/deps",
+        "-o",
+        "/home/spenser/file-native-q-linux-20261019-final/io-probe"
+      ],
+      "start_epoch": 1792449353.3844042,
+      "seconds": 0.2750065326690674,
+      "exit": 0,
+      "peak_aggregate_sampled_rss": 140316672,
+      "status": "success",
+      "reason": null
+    },
+    {
+      "name": "io-probe",
+      "args": [
+        "/home/spenser/file-native-q-linux-20261019-final/io-probe",
+        "/home/spenser/file-native-q-linux-20261019-final/io-data"
+      ],
+      "start_epoch": 1792449353.660018,
+      "seconds": 0.1567227840423584,
+      "exit": 0,
+      "peak_aggregate_sampled_rss": 2666496,
+      "status": "success",
+      "reason": null
+    },
+    {
+      "name": "deep-cases",
+      "args": [
+        "/usr/bin/python3",
+        "/home/spenser/file-native-q-linux-20261019-final/source/docs/research/file-native-incremental-engine-experiment-2026-10-18/deep_cases.py",
+        "--exe",
+        "/home/spenser/file-native-q-linux-20261019-final/build/debug/file-native-incremental",
+        "--base",
+        "/home/spenser/file-native-q-linux-20261019-final/deep-data"
+      ],
+      "start_epoch": 1792449353.8172839,
+      "seconds": 31.10719347000122,
+      "exit": 0,
+      "peak_aggregate_sampled_rss": 36507648,
+      "status": "success",
+      "reason": null
+    },
+    {
+      "name": "paired-intents",
+      "args": [
+        "/usr/bin/python3",
+        "/home/spenser/file-native-q-linux-20261019-final/source/docs/research/file-native-incremental-engine-experiment-2026-10-18/paired_intents.py",
+        "--exe",
+        "/home/spenser/file-native-q-linux-20261019-final/build/debug/file-native-incremental",
+        "--base",
+        "/home/spenser/file-native-q-linux-20261019-final/paired-data",
+        "--deadline-epoch",
+        "1792449439.0"
+      ],
+      "start_epoch": 1792449384.925062,
+      "seconds": 5.472350120544434,
+      "exit": 0,
+      "peak_aggregate_sampled_rss": 26767360,
+      "status": "success",
+      "reason": null
+    },
+    {
+      "name": "replay-lifetime",
+      "args": [
+        "/usr/bin/python3",
+        "/home/spenser/file-native-q-linux-20261019-final/source/docs/research/file-native-incremental-engine-experiment-2026-10-18/replay_lifetime.py",
+        "--exe",
+        "/home/spenser/file-native-q-linux-20261019-final/build/debug/file-native-incremental",
+        "--base",
+        "/home/spenser/file-native-q-linux-20261019-final/replay-data"
+      ],
+      "start_epoch": 1792449390.3980033,
+      "seconds": 48.64789438247681,
+      "exit": -9,
+      "peak_aggregate_sampled_rss": 28581888,
+      "status": "censored",
+      "reason": "time-cap-original-deadline"
+    }
+  ],
+  "census": {
+    "files": 15439,
+    "logical_bytes": 269431426,
+    "free_bytes": 46079950848
+  },
+  "original_deadline_utc": "2026-10-19T22:38:49Z",
+  "epoch": 1792449439.1190565
+}

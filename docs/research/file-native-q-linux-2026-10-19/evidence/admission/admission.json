@@ -1,0 +1,52 @@
+{
+  "status": "HOLD: native free-reserve admission refused; awaiting coordinator resource GO",
+  "started_utc": "2026-10-19T20:38:49Z",
+  "original_deadline_utc": "2026-10-19T22:38:49Z",
+  "native": {
+    "files": 207153,
+    "logical_bytes": 4178628683,
+    "allocated_file_bytes": 4512436224
+  },
+  "native_free_bytes": 6389047296,
+  "native_reserve_bytes": 21474836480,
+  "native_reserve_shortfall_bytes": 15085789184,
+  "native_initial_new_allowance_proposal_bytes": 536870912,
+  "wsl": {
+    "files": 1837621,
+    "logical_bytes": 25395652281,
+    "allocated_file_bytes": 25715208192
+  },
+  "wsl_free_bytes": 516225916928,
+  "wsl_legacy_followup_separate": {
+    "root": "/home/spenser/file-native-followup-20261017",
+    "files": 1768175,
+    "logical_bytes": 23402002010,
+    "allocated_file_bytes": 23610359808
+  },
+  "new_native_roots_created": 0,
+  "new_builds": 0,
+  "fixtures_run": 0,
+  "core_modified": false,
+  "commits": 0,
+  "planned_windows_worktree": "C:/Users/spmcc/.codex/worktrees/file-native-q-linux-20261019/handbook",
+  "planned_native_root_label": "file-native-q-linux-20261019-final",
+  "note": "512MiB proposal covers native source/build/fixtures only; full Windows worktree adds 258361988 tracked bytes plus metadata and must be globally admitted. All roots are proposed, not created. No deletion/migration authorized. WSL census is accounting only.",
+  "raw_receipts": {
+    "native-mount-admission.raw.json": {
+      "bytes": 804,
+      "sha256": "0337c9cce4c91eac928996a181aa897ce8ad270b5f4c7b8c14e633dc4c1534b9"
+    },
+    "native-root-census.raw.json": {
+      "bytes": 5314,
+      "sha256": "dfc9cbc853ffb8a36a966cb42ff3ffa123049c15bb8143d992d9e90498b17a9c"
+    },
+    "wsl-root-census.raw.json": {
+      "bytes": 2820,
+      "sha256": "0233909dc42f683f554716878b29eaba2140572b68fea997862eedc2e3cdb07a"
+    },
+    "local-source-binding.json": {
+      "bytes": 5547,
+      "sha256": "2d5cf203c96ea8cdebe717c3c676771f6358e7e87369644cdc58b8d8e84c3d84"
+    }
+  }
+}

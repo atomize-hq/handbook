@@ -1,0 +1,29 @@
+{
+  "kind": "read-only-native-mount-admission",
+  "epoch": 1792442498.0053117,
+  "mounts": [
+    {
+      "target": "/",
+      "fstype": "ext4",
+      "options": "rw,noatime",
+      "free_bytes": 4390662144,
+      "total_bytes": 983038173184,
+      "user_writable": false
+    }
+  ],
+  "df": "Filesystem        1B-blocks         Used  Available Use% Mounted on\n/dev/nvme0n1p2 983038173184 928636456960 4390662144 100% /\n",
+  "home_user_writable": true,
+  "ps_rss": [
+    "COMMAND           RSS",
+    "MainThread      1726876",
+    "codex           956372",
+    "chrome          496720",
+    "MainThread      346416",
+    "chrome          157548",
+    "MainThread      151260",
+    "MainThread      150532",
+    "tailscaled      148328",
+    "MainThread      146068"
+  ],
+  "reserve_bytes": 21474836480
+}

@@ -1,0 +1,193 @@
+{
+  "kind": "read-only-engine-root-census",
+  "epoch": 1792442517.6466565,
+  "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+  "free_bytes": 6389047296,
+  "totals": {
+    "files": 207153,
+    "logical_bytes": 4178628683,
+    "allocated_file_bytes": 4512436224
+  },
+  "roots": [
+    {
+      "name": "file-native-incremental-capsule-f3e942f.tar",
+      "files": 1,
+      "logical_bytes": 440320,
+      "allocated_file_bytes": 442368
+    },
+    {
+      "name": "file-native-incremental-capsule-fb73e75.tar",
+      "files": 1,
+      "logical_bytes": 419840,
+      "allocated_file_bytes": 421888
+    },
+    {
+      "name": "file-native-incremental-capsule-rootfix-precommit.tar",
+      "files": 1,
+      "logical_bytes": 460800,
+      "allocated_file_bytes": 462848
+    },
+    {
+      "name": "file-native-incremental-linux-accounting-evidence",
+      "files": 26,
+      "logical_bytes": 1196716,
+      "allocated_file_bytes": 1277952
+    },
+    {
+      "name": "file-native-incremental-linux-accounting-final",
+      "files": 9037,
+      "logical_bytes": 418729890,
+      "allocated_file_bytes": 437575680
+    },
+    {
+      "name": "file-native-incremental-linux-audit-export",
+      "files": 14,
+      "logical_bytes": 318186,
+      "allocated_file_bytes": 364544
+    },
+    {
+      "name": "file-native-incremental-linux-audit-final",
+      "files": 2396,
+      "logical_bytes": 374253222,
+      "allocated_file_bytes": 379768832
+    },
+    {
+      "name": "file-native-incremental-linux-evidence-20261018",
+      "files": 73,
+      "logical_bytes": 1952060,
+      "allocated_file_bytes": 2166784
+    },
+    {
+      "name": "file-native-incremental-linux-evidence-20261018.tar.gz",
+      "files": 1,
+      "logical_bytes": 1930575,
+      "allocated_file_bytes": 1933312
+    },
+    {
+      "name": "file-native-incremental-linux-final-20261018",
+      "files": 18511,
+      "logical_bytes": 464753721,
+      "allocated_file_bytes": 504119296
+    },
+    {
+      "name": "file-native-incremental-linux-recipe",
+      "files": 1473,
+      "logical_bytes": 90109427,
+      "allocated_file_bytes": 94486528
+    },
+    {
+      "name": "file-native-incremental-linux-replay-final",
+      "files": 13009,
+      "logical_bytes": 436421501,
+      "allocated_file_bytes": 464179200
+    },
+    {
+      "name": "file-native-incremental-linux-rootfix",
+      "files": 5847,
+      "logical_bytes": 385222788,
+      "allocated_file_bytes": 399183872
+    },
+    {
+      "name": "file-native-incremental-linux-rootfix-evidence",
+      "files": 23,
+      "logical_bytes": 942298,
+      "allocated_file_bytes": 999424
+    },
+    {
+      "name": "file-native-incremental-linux-rootfix-evidence.tar.gz",
+      "files": 1,
+      "logical_bytes": 939385,
+      "allocated_file_bytes": 942080
+    },
+    {
+      "name": "file-native-incremental-replay-probe",
+      "files": 2121,
+      "logical_bytes": 13970252,
+      "allocated_file_bytes": 18161664
+    },
+    {
+      "name": "file-native-incremental-source-5a65a21",
+      "files": 694,
+      "logical_bytes": 27435661,
+      "allocated_file_bytes": 29065216
+    },
+    {
+      "name": "file-native-incremental-source-7ac70f9",
+      "files": 365,
+      "logical_bytes": 6886129,
+      "allocated_file_bytes": 7667712
+    },
+    {
+      "name": "file-native-incremental-source-7e00d22",
+      "files": 444,
+      "logical_bytes": 9072770,
+      "allocated_file_bytes": 10043392
+    },
+    {
+      "name": "file-native-incremental-source-f3e942f",
+      "files": 55,
+      "logical_bytes": 474589,
+      "allocated_file_bytes": 614400
+    },
+    {
+      "name": "file-native-incremental-source-recipe",
+      "files": 60,
+      "logical_bytes": 466855,
+      "allocated_file_bytes": 614400
+    },
+    {
+      "name": "file-native-incremental-source-rootfix",
+      "files": 56,
+      "logical_bytes": 444599,
+      "allocated_file_bytes": 581632
+    },
+    {
+      "name": "file-native-prerequisite-linux-20261018",
+      "files": 123143,
+      "logical_bytes": 1304492667,
+      "allocated_file_bytes": 1491001344
+    },
+    {
+      "name": "file-native-recovery-20261019",
+      "files": 29739,
+      "logical_bytes": 631851798,
+      "allocated_file_bytes": 660754432
+    },
+    {
+      "name": "file-native-recovery-20261019-source.tar",
+      "files": 1,
+      "logical_bytes": 573440,
+      "allocated_file_bytes": 573440
+    },
+    {
+      "name": "incremental-extra-evidence",
+      "files": 20,
+      "logical_bytes": 614285,
+      "allocated_file_bytes": 659456
+    },
+    {
+      "name": "incremental-extra-evidence.tar.gz",
+      "files": 1,
+      "logical_bytes": 610419,
+      "allocated_file_bytes": 614400
+    },
+    {
+      "name": "incremental-recipe-proof.tar.gz",
+      "files": 1,
+      "logical_bytes": 214376,
+      "allocated_file_bytes": 217088
+    },
+    {
+      "name": "incremental-replay-evidence",
+      "files": 38,
+      "logical_bytes": 1721534,
+      "allocated_file_bytes": 1830912
+    },
+    {
+      "name": "incremental-replay-evidence.tar.gz",
+      "files": 1,
+      "logical_bytes": 1708580,
+      "allocated_file_bytes": 1712128
+    }
+  ]
+}

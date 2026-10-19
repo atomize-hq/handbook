@@ -1,0 +1,86 @@
+[
+  {
+    "checkpoint_boundary": "checkpoint-built",
+    "original_exit": 86,
+    "recovered": "absent-as-of"
+  },
+  {
+    "checkpoint_boundary": "checkpoint-verified",
+    "original_exit": 86,
+    "recovered": "absent-as-of"
+  },
+  {
+    "checkpoint_boundary": "seal",
+    "original_exit": 86,
+    "recovered": "absent-as-of"
+  },
+  {
+    "checkpoint_boundary": "expected-checked",
+    "original_exit": 86,
+    "recovered": "absent-as-of"
+  },
+  {
+    "checkpoint_boundary": "selection-budget",
+    "original_exit": 86,
+    "recovered": "absent-as-of"
+  },
+  {
+    "checkpoint_boundary": "membership-root",
+    "original_exit": 86,
+    "recovered": "absent-as-of"
+  },
+  {
+    "checkpoint_boundary": "outcome-root",
+    "original_exit": 86,
+    "recovered": "absent-as-of"
+  },
+  {
+    "checkpoint_boundary": "result-installed",
+    "original_exit": 86,
+    "recovered": "absent-as-of"
+  },
+  {
+    "checkpoint_boundary": "publication-installed",
+    "original_exit": 86,
+    "recovered": "absent-as-of"
+  },
+  {
+    "checkpoint_boundary": "attempt-hint",
+    "original_exit": 86,
+    "recovered": "absent-as-of"
+  },
+  {
+    "checkpoint_boundary": "selector-staged",
+    "original_exit": 86,
+    "recovered": "absent-as-of"
+  },
+  {
+    "checkpoint_boundary": "selector-visible",
+    "original_exit": 86,
+    "recovered": "accepted"
+  },
+  {
+    "checkpoint_boundary": "selection-boundary",
+    "original_exit": 86,
+    "recovered": "accepted"
+  },
+  {
+    "checkpoint_boundary": "accounting-transfer",
+    "original_exit": 86,
+    "recovered": "accepted"
+  },
+  {
+    "checkpoint_boundary": "accounting-release",
+    "original_exit": 86,
+    "recovered": "accepted"
+  },
+  {
+    "checkpoint_boundary": "reply",
+    "original_exit": 86,
+    "recovered": "accepted"
+  },
+  {
+    "waiting_cancel": true,
+    "killed_holder_recovered": true
+  }
+]

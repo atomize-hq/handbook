@@ -1,0 +1,26 @@
+[
+  {
+    "case": "external-empty-directory",
+    "status": "success"
+  },
+  {
+    "case": "ordinary-Bash-bound-tree-extraction",
+    "mode": "A",
+    "documents": 16,
+    "status": "success"
+  },
+  {
+    "case": "ordinary-Bash-bound-tree-extraction",
+    "mode": "B",
+    "documents": 16,
+    "status": "success"
+  },
+  {
+    "case": "native-filesystem-API-probes-not-engine-race-suite",
+    "case_sensitive": true,
+    "directory_fsync": true,
+    "no_replace": true,
+    "replace": true,
+    "status": "success"
+  }
+]

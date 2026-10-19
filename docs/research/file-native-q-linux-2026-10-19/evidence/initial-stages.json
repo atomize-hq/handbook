@@ -1,0 +1,101 @@
+[
+  {
+    "name": "build",
+    "args": [
+      "cargo",
+      "build",
+      "--locked",
+      "--offline",
+      "--workspace",
+      "-j2"
+    ],
+    "start_epoch": 1792449143.7705555,
+    "seconds": 5.100849628448486,
+    "exit": 0,
+    "peak_aggregate_sampled_rss": 494252032,
+    "status": "success",
+    "reason": null
+  },
+  {
+    "name": "tests",
+    "args": [
+      "cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--workspace",
+      "-j2"
+    ],
+    "start_epoch": 1792449148.8755941,
+    "seconds": 1.1896703243255615,
+    "exit": 0,
+    "peak_aggregate_sampled_rss": 312401920,
+    "status": "success",
+    "reason": null
+  },
+  {
+    "name": "capsule",
+    "args": [
+      "/usr/bin/python3",
+      "/home/spenser/file-native-q-linux-20261019-final/bounded_capsule.py",
+      "/home/spenser/file-native-q-linux-20261019-final/build/debug/file-native-incremental",
+      "/home/spenser/file-native-q-linux-20261019-final/capsule-data"
+    ],
+    "start_epoch": 1792449150.0655894,
+    "seconds": 80.69870710372925,
+    "exit": 1,
+    "peak_aggregate_sampled_rss": 35500032,
+    "status": "failure",
+    "reason": null
+  },
+  {
+    "name": "extra",
+    "args": [
+      "/usr/bin/python3",
+      "/home/spenser/file-native-q-linux-20261019-final/source/docs/research/file-native-recovery-reclamation-2026-10-19/focused_extra.py",
+      "--exe",
+      "/home/spenser/file-native-q-linux-20261019-final/build/debug/file-native-incremental",
+      "--base",
+      "/home/spenser/file-native-q-linux-20261019-final/extra-data"
+    ],
+    "start_epoch": 1792449230.764875,
+    "seconds": 19.834651947021484,
+    "exit": 0,
+    "peak_aggregate_sampled_rss": 30818304,
+    "status": "success",
+    "reason": null
+  },
+  {
+    "name": "legacy",
+    "args": [
+      "/usr/bin/python3",
+      "/home/spenser/file-native-q-linux-20261019-final/source/docs/research/file-native-recovery-reclamation-2026-10-19/legacy_compatibility.py",
+      "--exe",
+      "/home/spenser/file-native-q-linux-20261019-final/build/debug/file-native-incremental",
+      "--fixtures",
+      "/home/spenser/file-native-recovery-20261019/legacy-fixtures",
+      "--base",
+      "/home/spenser/file-native-q-linux-20261019-final/legacy-data"
+    ],
+    "start_epoch": 1792449250.5998619,
+    "seconds": 2.326821804046631,
+    "exit": 0,
+    "peak_aggregate_sampled_rss": 26394624,
+    "status": "success",
+    "reason": null
+  },
+  {
+    "name": "supplement",
+    "args": [
+      "/usr/bin/python3",
+      "/home/spenser/file-native-q-linux-20261019-final/supplement.py",
+      "/home/spenser/file-native-q-linux-20261019-final/build/debug/file-native-incremental"
+    ],
+    "start_epoch": 1792449252.9273152,
+    "seconds": 2.477372884750366,
+    "exit": 0,
+    "peak_aggregate_sampled_rss": 26861568,
+    "status": "success",
+    "reason": null
+  }
+]

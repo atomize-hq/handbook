@@ -1,0 +1,16 @@
+[
+  {
+    "mode": "A",
+    "strict_missing_corrupt_evidence_refused": true,
+    "packet_owner_survives_retirement": true,
+    "case_ancestor_refused": true,
+    "damaged_transport_refused": true
+  },
+  {
+    "mode": "B",
+    "strict_missing_corrupt_evidence_refused": true,
+    "packet_owner_survives_retirement": true,
+    "case_ancestor_refused": true,
+    "damaged_transport_refused": true
+  }
+]
