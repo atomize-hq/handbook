@@ -1,0 +1,21 @@
+{
+  "args": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook/docs/research/file-native-recovery-reclamation-2026-10-19/restored_fences.py",
+    "--exe",
+    "/private/tmp/file-native-q-macos-20261019/engine",
+    "--capsule",
+    "/private/tmp/file-native-q-macos-20261019/capsule",
+    "--output",
+    "/private/tmp/file-native-q-macos-20261019/evidence/restored-fences-results.json"
+  ],
+  "start_epoch": 1792449376.976832,
+  "seconds": 0.4108879566192627,
+  "cap": 84.02316808700562,
+  "exit": 0,
+  "status": "success",
+  "censor": null,
+  "sampled_aggregate_peak_bytes": 34816000,
+  "samples": 5,
+  "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+}

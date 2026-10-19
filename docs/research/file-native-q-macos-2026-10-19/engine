@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+import subprocess,os,sys,json,time
+p=subprocess.Popen(['/private/tmp/file-native-q-macos-20261019/build/release/file-native-incremental'])
+pid,status,ru=os.wait4(p.pid,0);code=os.waitstatus_to_exitcode(status);p.returncode=code
+fd=os.open('/private/tmp/file-native-q-macos-20261019/evidence/engine-rusage.jsonl',os.O_WRONLY|os.O_CREAT|os.O_APPEND,0o644);os.write(fd,(json.dumps(dict(pid=pid,exit=code,ru_maxrss_bytes=ru.ru_maxrss,method='macOS wait4 rusage bytes'))+'\n').encode());os.close(fd)
+sys.exit(code)

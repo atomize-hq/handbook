@@ -1,0 +1,15 @@
+{
+  "args": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "/private/tmp/file-native-q-macos-20261019/delta.py"
+  ],
+  "start_epoch": 1792449377.417536,
+  "seconds": 1.4075148105621338,
+  "cap": 83.58246397972107,
+  "exit": 0,
+  "status": "success",
+  "censor": null,
+  "sampled_aggregate_peak_bytes": 42401792,
+  "samples": 17,
+  "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+}

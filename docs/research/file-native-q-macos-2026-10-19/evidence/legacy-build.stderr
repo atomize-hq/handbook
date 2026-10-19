@@ -1,0 +1,29 @@
+   Compiling file-native-incremental v0.1.0 (/private/tmp/file-native-q-macos-20261019/legacy-source)
+warning: unused import: `Metrics`
+ --> src/graph.rs:2:23
+  |
+2 | use crate::{io::{self,Metrics,Result},objects::{self,Id,Objects},model::{self,Doc,Edge,Op,State}};
+  |                       ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `self`
+ --> src/store.rs:6:38
+  |
+6 | use std::{collections::BTreeMap,fs::{self,File,OpenOptions},path::{Path,PathBuf},time::{Instant,Duration}};
+  |                                      ^^^^
+
+warning: unused imports: `PathBuf` and `fs`
+ --> src/projection.rs:5:44
+  |
+5 | use std::{collections::{BTreeMap,BTreeSet},fs,path::{Path,PathBuf},time::Instant};
+  |                                            ^^             ^^^^^^^
+
+warning: unused import: `Publication`
+ --> src/lifetime.rs:2:79
+  |
+2 | use crate::{io::{self,Metrics,Result},model::Selector,store::{Store,Candidate,Publication},objects};
+  |                                                                               ^^^^^^^^^^^
+
+warning: `file-native-incremental` (lib) generated 4 warnings (run `cargo fix --lib -p file-native-incremental` to apply 4 suggestions)
+    Finished `release` profile [optimized] target(s) in 8.80s

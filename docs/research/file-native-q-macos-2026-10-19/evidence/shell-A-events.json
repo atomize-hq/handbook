@@ -1,0 +1,56 @@
+[
+  {
+    "action": "init",
+    "fields": {
+      "mode": "A",
+      "consumer": "project",
+      "count": 16
+    },
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":13931,\"bytes_control_written\":14581,\"bytes_metadata_read\":2015956,\"bytes_metadata_written\":11808,\"bytes_payload_read\":460210,\"bytes_payload_written\":308658,\"bytes_read\":2490097,\"bytes_result_read\":0,\"bytes_result_written\":474,\"bytes_written\":335521,\"copies\":19,\"created_directories\":39,\"directory_syncs\":296,\"documents_visited\":16,\"edges_visited\":8,\"file_syncs\":54,\"index_updates\":0,\"namespace_ops\":55,\"ns\":{\"A-completion-inclusive\":316897834,\"copy\":4338499,\"creation-inclusive\":333916250,\"directory-create\":2932255,\"lock-hold\":901616000,\"lock-wait\":72167,\"read\":9721127,\"replace\":3206920,\"selection-inclusive\":73925750,\"sync\":875475457,\"write\":5783084},\"opens\":474,\"page_reads\":354,\"quota_limit\":null,\"quota_spent\":273975,\"replacements\":49,\"touched_paths\":19,\"unique_pages\":[\"09f93f31977ed0c8b3ca6896bb9e19f999f5c5169a56be1ae2d0320c6ec00e29\",\"b0941651d7dae9e571379ebf0598c283758902182d5caf510c9aca11079edcbc\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":null,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000000\",\"d000001\",\"d000002\",\"d000003\",\"d000004\",\"d000005\",\"d000006\",\"d000007\",\"d000008\",\"d000009\",\"d000010\",\"d000011\",\"d000012\",\"d000013\",\"d000014\",\"d000015\"],\"outcome\":\"accepted\",\"publication\":\"publication-11097-1792449437783418000-26\",\"removed\":[],\"request\":\"initial\",\"state_digest\":\"1a1a19330f3a30a64b1f3979a6e8e19fc869ba252694fa833e123d73f8343da7\"},\"selected\":{\"digest\":\"d41722977f57ec553e9fdfd66b0792693248be11dc0aa16318d2b012405236fb\",\"publication\":\"publication-11097-1792449437783418000-26\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":922268000}\n",
+    "stderr": "progress:creation:0/16:{\"page_reads\":0,\"unique_pages\":[],\"documents_visited\":0,\"edges_visited\":0,\"index_updates\":0,\"touched_paths\":0,\"namespace_ops\":3,\"quota_limit\":71908864,\"quota_spent\":0,\"verify_only\":false,\"ns\":{\"directory-create\":96000,\"lock-wait\":72167,\"replace\":211292,\"sync\":34497207,\"write\":431792},\"bytes_read\":0,\"bytes_written\":786,\"opens\":3,\"file_syncs\":3,\"directory_syncs\":9,\"unsupported_directory_syncs\":0,\"copies\":0,\"replacements\":1,\"created_directories\":1,\"bytes_metadata_read\":0,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_control_read\":0,\"bytes_control_written\":786,\"bytes_result_read\":0,\"bytes_result_written\":0}\nprogress:creation-complete:16:{\"page_reads\":0,\"unique_pages\":[],\"documents_visited\":0,\"edges_visited\":0,\"index_updates\":0,\"touched_paths\":0,\"namespace_ops\":19,\"quota_limit\":71908864,\"quota_spent\":217088,\"verify_only\":false,\"ns\":{\"directory-create\":1116045,\"lock-wait\":72167,\"read\":416294,\"replace\":211292,\"sync\":358579544,\"write\":1970084},\"bytes_read\":151552,\"bytes_written\":152338,\"opens\":35,\"file_syncs\":19,\"directory_syncs\":122,\"unsupported_directory_syncs\":0,\"copies\":0,\"replacements\":17,\"created_directories\":18,\"bytes_metadata_read\":0,\"bytes_metadata_written\":0,\"bytes_payload_read\":151552,\"bytes_payload_written\":151552,\"bytes_control_read\":0,\"bytes_control_written\":786,\"bytes_result_read\":0,\"bytes_result_written\":0}\n"
+  },
+  {
+    "action": "publish",
+    "fields": {
+      "request": {
+        "request": "ordered-multiple",
+        "base": {
+          "publication": "publication-11097-1792449437783418000-26",
+          "digest": "d41722977f57ec553e9fdfd66b0792693248be11dc0aa16318d2b012405236fb"
+        },
+        "packet": false,
+        "ops": [
+          {
+            "kind": "edge",
+            "id": "d000001",
+            "text": "cites",
+            "target": "d000003"
+          },
+          {
+            "kind": "edge",
+            "id": "d000001",
+            "text": "cites",
+            "target": "d000003"
+          },
+          {
+            "kind": "edge",
+            "id": "d000001",
+            "text": "requires",
+            "target": "d000004"
+          }
+        ]
+      }
+    },
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":26483,\"bytes_control_written\":7600,\"bytes_metadata_read\":516176,\"bytes_metadata_written\":12963,\"bytes_payload_read\":8313,\"bytes_payload_written\":5536,\"bytes_read\":550972,\"bytes_result_read\":0,\"bytes_result_written\":258,\"bytes_written\":26357,\"copies\":1,\"created_directories\":9,\"directory_syncs\":85,\"documents_visited\":4,\"edges_visited\":7,\"file_syncs\":21,\"index_updates\":12,\"namespace_ops\":20,\"ns\":{\"A-completion-inclusive\":45976083,\"copy\":237458,\"directory-create\":786916,\"graph-transition-inclusive\":19035792,\"lock-hold\":165902875,\"lock-wait\":94792,\"preparation-inclusive\":122967292,\"projection-prepare-inclusive\":38242000,\"read\":3210919,\"replace\":2121167,\"selection-inclusive\":80954459,\"sync\":246156755,\"write\":4184876},\"opens\":162,\"page_reads\":98,\"quota_limit\":null,\"quota_spent\":52530,\"replacements\":16,\"touched_paths\":1,\"unique_pages\":[\"09f93f31977ed0c8b3ca6896bb9e19f999f5c5169a56be1ae2d0320c6ec00e29\",\"5051e67896e719195aaf002f9701e81d9164d3ef0086e3dafb1f04da5029de62\",\"a07bb7888dd05d2deae821e30c7d00b5b0a465489d3379c47712c25072978e04\",\"b0941651d7dae9e571379ebf0598c283758902182d5caf510c9aca11079edcbc\",\"baffbc8a76d9c8a2823290e4b14193f677b8149c3af8a4d6b450da9bfdec99a5\",\"cf0dcdbc711108bb405073ef0896e423f54d06d53eb931e3da595bc34e143088\",\"d4689d343b2abf2cb80edbaf0cd66cf6bfa57a1a7bd4574a8b0a844463f9eb0c\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":null,\"result\":{\"delivery_error\":null,\"readable\":\"view\",\"result\":{\"changed\":[\"d000001\"],\"outcome\":\"accepted\",\"publication\":\"publication-11125-1792449438342267000-10\",\"removed\":[],\"request\":\"ordered-multiple\",\"state_digest\":\"8f413924bdf896f805b7e55d9f74385f393bb21a9fb9ec4c5e43a2ef7edd7d45\"},\"selected\":{\"digest\":\"6fc4ceb5ac219b605d72df8dbd7738f51620a41b45a7bded41d5fcd94d88ee61\",\"publication\":\"publication-11125-1792449438342267000-10\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":263029542}\n",
+    "stderr": ""
+  },
+  {
+    "action": "inspect",
+    "fields": {},
+    "exit": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":1622,\"bytes_control_written\":0,\"bytes_metadata_read\":12963,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":14585,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":0,\"copies\":0,\"created_directories\":0,\"directory_syncs\":0,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":0,\"index_updates\":0,\"namespace_ops\":0,\"ns\":{\"lock-hold\":0,\"read\":161124},\"opens\":8,\"page_reads\":5,\"quota_limit\":null,\"quota_spent\":0,\"replacements\":0,\"touched_paths\":0,\"unique_pages\":[\"5051e67896e719195aaf002f9701e81d9164d3ef0086e3dafb1f04da5029de62\",\"a07bb7888dd05d2deae821e30c7d00b5b0a465489d3379c47712c25072978e04\",\"baffbc8a76d9c8a2823290e4b14193f677b8149c3af8a4d6b450da9bfdec99a5\",\"cf0dcdbc711108bb405073ef0896e423f54d06d53eb931e3da595bc34e143088\",\"d4689d343b2abf2cb80edbaf0cd66cf6bfa57a1a7bd4574a8b0a844463f9eb0c\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":null,\"result\":{\"history_depth\":2,\"publication\":{\"allocation_owner\":{\"attempt\":\"attempt-11125-1792449438178748000-0\",\"conservative_bytes\":67110016,\"includes_intermediates_and_stages\":true},\"attempt\":\"attempt-11125-1792449438178748000-0\",\"changes\":\"a07bb7888dd05d2deae821e30c7d00b5b0a465489d3379c47712c25072978e04\",\"generation_manifest\":null,\"graph\":{\"budget\":1000,\"consumer\":\"project\",\"cost\":0,\"count\":16,\"fallback\":false,\"tree\":\"d4689d343b2abf2cb80edbaf0cd66cf6bfa57a1a7bd4574a8b0a844463f9eb0c\",\"version\":1},\"id\":\"publication-11125-1792449438342267000-10\",\"intent\":\"f6cd7ee523090d1e2be02c3c97dc0213c5f34a59811e42243ada6eb209c43a8b\",\"membership\":\"5051e67896e719195aaf002f9701e81d9164d3ef0086e3dafb1f04da5029de62\",\"outcomes\":\"baffbc8a76d9c8a2823290e4b14193f677b8149c3af8a4d6b450da9bfdec99a5\",\"packet_ref\":null,\"predecessor\":{\"digest\":\"d41722977f57ec553e9fdfd66b0792693248be11dc0aa16318d2b012405236fb\",\"publication\":\"publication-11097-1792449437783418000-26\"},\"projection\":\"cf0dcdbc711108bb405073ef0896e423f54d06d53eb931e3da595bc34e143088\",\"request\":\"ordered-multiple\",\"result_hash\":\"cf703e4896e92af89a1bb599041e6a28041f6b2e3f0891279cb9836bdc04d4fe\",\"sequence\":1,\"store_id\":\"store-11097-1792449437257590000-0\",\"version\":1},\"selected\":{\"digest\":\"6fc4ceb5ac219b605d72df8dbd7738f51620a41b45a7bded41d5fcd94d88ee61\",\"publication\":\"publication-11125-1792449438342267000-10\"}},\"status\":\"ok\",\"wall_ns\":327208}\n",
+    "stderr": ""
+  }
+]

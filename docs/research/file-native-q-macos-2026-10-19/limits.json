@@ -1,0 +1,14 @@
+{
+  "deadline_epoch": 1792449551,
+  "deadline_utc": "2026-10-19T22:39:11Z",
+  "go_utc": "2026-10-19T22:31:25.820898+00:00",
+  "source": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook",
+  "new_total_cap": 1073741824,
+  "new_files_cap": 50000,
+  "initial_new_bytes": 401545022,
+  "free_reserve": 21474836480,
+  "build_jobs": 2,
+  "rss_aggregate": 3221225472,
+  "rss_checker": 2147483648,
+  "rss_reader": 268435456
+}

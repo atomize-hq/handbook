@@ -1,0 +1,15 @@
+{
+  "args": [
+    "python3",
+    "/private/tmp/file-native-q-macos-20261019/shell_semantics.py"
+  ],
+  "start_epoch": 1792449437.209354,
+  "seconds": 2.3375439643859863,
+  "cap": 23.790646076202393,
+  "exit": 0,
+  "status": "success",
+  "censor": null,
+  "sampled_aggregate_peak_bytes": 25182208,
+  "samples": 27,
+  "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+}

@@ -1,0 +1,107 @@
+{
+  "type": "read-only-native-Q-admission",
+  "status": "HOLD-global-resource-decision-required",
+  "utc": "2026-10-19T21:36:08.961888+00:00",
+  "source_commit": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+  "core_commit": "07a8574e581e66ba58d7caac87238aa5f93918be",
+  "source_hashes_verified": 15,
+  "dependency_archive_checksums_verified": 35,
+  "native": {
+    "os": "macOS 26.6.1 (25G76)",
+    "cpu": "Apple M2 Max",
+    "target": "aarch64-apple-darwin",
+    "ram_bytes": 68719476736,
+    "rustc": "1.89.0",
+    "cargo": "1.89.0",
+    "filesystem": "APFS /dev/disk3s5"
+  },
+  "owned_roots": [
+    {
+      "root": "/private/tmp/file-native-prerequisite-macos-20261018-source",
+      "logical_bytes": 150224451,
+      "files": 3952
+    },
+    {
+      "root": "/private/tmp/file-native-incremental-macos-20261018",
+      "logical_bytes": 2450424153,
+      "files": 71418
+    },
+    {
+      "root": "/private/tmp/file-native-prerequisite-macos-20261018",
+      "logical_bytes": 1287637311,
+      "files": 117676
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/docs/research/file-native-engine-followup-2026-10-17",
+      "logical_bytes": 25705615,
+      "files": 404
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/docs/research/file-native-publication-experiment-2026-10-17",
+      "logical_bytes": 3132716,
+      "files": 60
+    },
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook",
+      "logical_bytes": 258362078,
+      "files": 4526
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git/worktrees/handbook",
+      "logical_bytes": 773886,
+      "files": 8
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git/objects/pack/pack-2b19abdba59bb6234fa0a3034fac2ab8e230ce9a.idx",
+      "logical_bytes": 46460,
+      "files": 1
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git/objects/pack/pack-2b19abdba59bb6234fa0a3034fac2ab8e230ce9a.pack",
+      "logical_bytes": 142352083,
+      "files": 1
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git/objects/pack/pack-2b19abdba59bb6234fa0a3034fac2ab8e230ce9a.rev",
+      "logical_bytes": 6536,
+      "files": 1
+    }
+  ],
+  "total_before_this_receipt": {
+    "logical_bytes": 4318665289,
+    "files": 198047
+  },
+  "new_before_this_receipt": {
+    "logical_bytes": 401541043,
+    "files": 4537
+  },
+  "volume_free_bytes_before_receipt": 92796903424,
+  "free_reserve_bytes": 21474836480,
+  "earlier_census_correction": "Earlier 4175486324-byte total omitted newly fetched Git pack/index/reverse-index and worktree administration; added explicitly here. Shared unrelated Git contents are excluded.",
+  "initial_cap_bytes": 536870912,
+  "initial_cap_files": 50000,
+  "historical_geometry": {
+    "debug_build_bytes": 195953238,
+    "release_build_bytes": 73033701,
+    "final_lane_build_bytes": 270544715,
+    "final_lane_small_results_bytes": 91568522,
+    "final_lane_walk_cases_bytes": 1599827,
+    "final_lane_deep_cases_bytes": 6306607,
+    "prerequisite_release_bytes": 55061832
+  },
+  "proposed_total_new_cap_bytes": 1073741824,
+  "proposed_total_new_cap_files": 50000,
+  "cap_reason": "Full checkout plus fetched Git overhead leave about 129 MiB under 512 MiB; historical final build alone is about 258 MiB, before capsule/legacy builds/evidence. 1 GiB is a conservative finite total request; no build or fixture admission claimed. Sparse checkout could lower worktree bytes after GO but does not remove fetched pack bytes.",
+  "process_limits": {
+    "build_jobs": 2,
+    "combined_rss_bytes": 3221225472,
+    "checker_rss_bytes": 2147483648,
+    "point_reader_rss_bytes": 268435456
+  },
+  "execution": {
+    "builds_started": false,
+    "fixtures_created": false,
+    "checkout_mutated_after_creation": false,
+    "deadline_reset": false
+  }
+}

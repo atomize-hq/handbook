@@ -1,0 +1,11 @@
+{
+  "gitnexus_detect_changes": {
+    "changed_count": 0,
+    "affected_count": 0,
+    "risk": "none",
+    "coverage": "UNKNOWN for new harness: GitNexus is bound to shared baseline, not isolated checkout"
+  },
+  "manual_review": "Only new docs/research/file-native-q-macos-2026-10-19 files; no existing engine or harness edits. Engine source hashes verified again before commit. New external native_ops imports the unchanged experimental library; Python/shell harnesses use exact pinned entry points.",
+  "no_new_engine_symbols": true,
+  "review_utc": "2026-10-19T23:34:08.730090+00:00"
+}

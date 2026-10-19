@@ -1,0 +1,19 @@
+{
+  "args": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook/docs/research/file-native-recovery-reclamation-2026-10-19/focused_extra.py",
+    "--exe",
+    "/private/tmp/file-native-q-macos-20261019/engine",
+    "--base",
+    "/private/tmp/file-native-q-macos-20261019/extra"
+  ],
+  "start_epoch": 1792449360.718108,
+  "seconds": 16.230103015899658,
+  "cap": 100.28189206123352,
+  "exit": 0,
+  "status": "success",
+  "censor": null,
+  "sampled_aggregate_peak_bytes": 48758784,
+  "samples": 194,
+  "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+}

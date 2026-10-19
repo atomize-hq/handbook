@@ -1,0 +1,56 @@
+{
+  "source_commit": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+  "core_commit": "07a8574e581e66ba58d7caac87238aa5f93918be",
+  "actual_executable_sha256": "c6030f5bd02af83744d98f451e109cbf5ade67b6708f27fa4a9049a8175710bb",
+  "legacy_pin": "5a65a2155f9eb297d2cbb1b7c900fa749629605c",
+  "legacy_executable_sha256": "051c6dd72b7ebf6d7309a121cb374942fe71dc2ea526c0e3c05f8fb38c1447f6",
+  "rust_sha256": {
+    "io.rs": "17a6a0bad6859f54793c37e6f1fc86e4cd35c86ac833dd24b5a877f4f01f6b06",
+    "graph.rs": "9e47637a2d213f1d1abdbc559ae680d4f2410bc50e30624d3dd41f83133d7454",
+    "lib.rs": "b68a60aa0da945f6f89190c19f296162b47e2ffa508eef1129cf2d8fc7a85307",
+    "store.rs": "8852fec5fd75c8fe15e9f1964289c69623bfc11a2fc3a7d57efa2da525faeddc",
+    "disk.rs": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+    "lifetime.rs": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+    "baseline_model.rs": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+    "differential.rs": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+    "projection.rs": "fd90391da2100ac416d215619419f363b6d6557dfaffd71b7504faa0f9c49b87",
+    "main.rs": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+    "objects.rs": "6727e154f82334b9842f347797407bd7185ed576dd36d206fb323f0dc6c2b31c",
+    "bounds_tests.rs": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+    "api.rs": "8eddbf39e06bdf1ca5708d02c6abd9a885184576d446b23d8aa064de0c9184ff"
+  },
+  "cargo_sha256": {
+    "Cargo.toml": "7e08fe410778cd11427f190e6c6991324c1a02d1c50c65a3cfd5e8d0dba6ab08",
+    "Cargo.lock": "07eca1011d8aabcf2e5508cd9b4954417dff9ab0c7a7a1accf06af719a81b330"
+  },
+  "pinned_harness_sha256": {
+    "bounded.py": "fae22396ad0c0e5b2915c692b31202e8ea18fe66d57acc10b3cba8faf6e244e3",
+    "capsule.py": "1b997e6bc058660fcfe7246ee98a7b13317e63f7232acef73fef6c3987273b71",
+    "final_native.py": "ca2b017489aaef6ea45615fd44fd8f6f67925b2d987b2f6008cf8c1b348ad270",
+    "native_runner.py": "48c9d6efedd2124818cd7c5554698f62e60ec4a5e58ff89417e446817601d357",
+    "operational_backup.py": "20aa1b2965fd294bbf11942e5d399c7944c1f699b11021c0349b57ee5ee10bbe",
+    "small_costs.py": "7b32c85582af39f2e0b03b236951c8a90ca1438b2d5d6b4020f3131b4cfc324e",
+    "focused_extra.py": "1010406cb71faa449d79d4e8bf141839ea742c4bb35626e685a30a73a572b4d9",
+    "restore_gate.py": "2750f3401f29e34dd74fbbd8bde9cfe8444b3d7e01b140ecdf5a88dd14325bb6",
+    "restored_fences.py": "9e1096285ca7cb02174f62c047b5142f22a75386f73e55389c4a654f9d009c26",
+    "long_trial.py": "91f6db36141e713a528f7ad1662d37afdfd8dde284fe2ed267e298ff1e8c3f3b",
+    "verify_operational.py": "d86c7d5406d5c5a5d00553b85dd0f16a039838132c31f41cc0567a7e3920e5cd",
+    "post_gc_probes.py": "292442dba0707a5f49b4fe9668cd2ea60307bb6f70ffcfd23a01e17c54dfe5ff",
+    "finish_compatible.py": "7ebbb3b2c73437af51e6127b53538ef4c20e49360b1c7e156ebfaa244fb5bf1b",
+    "oracle_supplement.py": "3455217beae778b69a8c32057f899a17aab3f85fe653c4e57c3408e5d892d0a6",
+    "oracle.py": "a5ff418c13571fe1163a1ccfa8fdc01cf6af37d9f690009002c5cc3a49d4b431",
+    "collect_native_evidence.py": "06529314d6d55c4f8bc4c4f3ad4258962c7992bc7cc319b0932917d82bfe4a35",
+    "bundle_results.py": "d5ea275bab5b1a4d70ee131d8028d17e0cf4f78ad6b5fbded1479913514c1caf",
+    "legacy_compatibility.py": "c8eb8214133bcdcb8a8945dd62384f3ea8ed0b23cff5112ca2a79d118bb6508a",
+    "inventory.py": "85b19a9057b6202f3d71669e5c7a2213660b69bc8e74e21aca774fccfbc42a68"
+  },
+  "new_harness_sha256": {
+    "remaining.py": "51322748880c09db3cb3e31100427ff42fa1f4ac31affc641d908c39a89d3798",
+    "run.py": "1fba297b65d0297f8b63c545680655588f62294134a0588518d7c7cadc22b806",
+    "native_ops.rs": "a9f417addb9cb95bec0601206595a27d88a485c9db630fe2d65f69e2ce084b74",
+    "delta.py": "31e8297260fbf9322343d3b1cf002cda4f0ec37654426d1edca765aff4de9bc7",
+    "shell_semantics.py": "4e9a4b6350e50ca90888b96f78338a792f6747b188a6cc2f23b65eb12953facd",
+    "engine": "2d8ae74dd3920582bce375877e3863daf67f2cb8165eaf78c7f56816f67818c9",
+    "bash-extract.sh": "b6c156b7e0d815cd5aaac3680b795b2236a1d9c9fd64b39c693003418be06d39"
+  }
+}

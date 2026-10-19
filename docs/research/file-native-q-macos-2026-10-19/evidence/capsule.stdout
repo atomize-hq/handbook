@@ -1,0 +1,145 @@
+{
+  "platform": "macOS-26.6.1-arm64-arm-64bit",
+  "binary": "/private/tmp/file-native-q-macos-20261019/engine",
+  "binary_sha256": "2d8ae74dd3920582bce375877e3863daf67f2cb8165eaf78c7f56816f67818c9",
+  "cases": [
+    {
+      "case": "navigation-and-operational-backup",
+      "mode": "A",
+      "n": 16,
+      "status": "success"
+    },
+    {
+      "case": "navigation-and-operational-backup",
+      "mode": "A",
+      "n": 128,
+      "status": "success"
+    },
+    {
+      "case": "navigation-and-operational-backup",
+      "mode": "B",
+      "n": 16,
+      "status": "success"
+    },
+    {
+      "case": "navigation-and-operational-backup",
+      "mode": "B",
+      "n": 128,
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-plan",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-preserved",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-file",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-namespace",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-before-complete",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-complete",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-namespace-preserved",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-plan",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-preserved",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-file",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-namespace",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-before-complete",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-complete",
+      "status": "success"
+    },
+    {
+      "case": "checkpoint-transfer-retire-repeat-gc",
+      "mode": "A",
+      "status": "success"
+    },
+    {
+      "case": "half-preparation-backup-recovery",
+      "mode": "A",
+      "status": "success"
+    },
+    {
+      "case": "checkpoint-transfer-retire-repeat-gc",
+      "mode": "B",
+      "status": "success"
+    },
+    {
+      "case": "half-preparation-backup-recovery",
+      "mode": "B",
+      "status": "success"
+    },
+    {
+      "case": "impossible-final-namespace",
+      "status": "expected refusal"
+    },
+    {
+      "case": "skipped-or-selected-once",
+      "mode": "A",
+      "status": "success"
+    },
+    {
+      "case": "skipped-or-selected-once",
+      "mode": "B",
+      "status": "success"
+    }
+  ],
+  "events": 282,
+  "seconds": 68.12134141707793
+}

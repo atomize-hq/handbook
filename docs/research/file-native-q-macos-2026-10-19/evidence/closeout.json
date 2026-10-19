@@ -1,0 +1,30 @@
+{
+  "epoch": 1792452849.136482,
+  "new_bytes_before_receipt_and_git_metadata": 610202140,
+  "new_files_before_receipt_and_git_metadata": 13083,
+  "total_mac_bytes_before_receipt_and_git_metadata": 4527326386,
+  "total_mac_files_before_receipt_and_git_metadata": 206593,
+  "roots": [
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook",
+      "logical_bytes": 260604274,
+      "files": 4605
+    },
+    {
+      "root": "/private/tmp/file-native-q-macos-20261019",
+      "logical_bytes": 206414667,
+      "files": 8466
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git/worktrees/handbook",
+      "logical_bytes": 774141,
+      "files": 8
+    }
+  ],
+  "free_bytes": 188481847296,
+  "new_cap_bytes": 1073741824,
+  "new_cap_files": 50000,
+  "metadata_headroom_bytes": 1048576,
+  "metadata_headroom_files": 100,
+  "prior_roots": "unchanged admission census; no writes to those roots"
+}

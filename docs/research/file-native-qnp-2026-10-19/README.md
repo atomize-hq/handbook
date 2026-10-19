@@ -3,7 +3,7 @@
 October 19, 2026. **The three-task increment is incomplete.** Fresh top-level Q
 Linux, Q Mac and N chats were dispatched under the human's authorization.
 The human approved 40 GiB combined capacity; finite Q/N execution is now admitted.
-Q Linux and N Linux have passed independent coordinator evidence review. P has
+Q Linux, Q Mac and N Linux have passed independent coordinator evidence review. P has
 not been dispatched because the remaining Q/N gates are open.
 
 The integration branch is `codex/file-native-qnp-20261019`, based on verified
@@ -15,10 +15,10 @@ original H101003 store, original archive and final H101006 clone are preserved.
 | Task | Current result | Needed next |
 | --- | --- | --- |
 | Q native Linux/ext4 | required named cases passed; reviewed and integrated | optional stress censor and late read-only closeout remain explicit |
-| Q native macOS | worker reports functional cases passed | pending platform approval holds artifact closeout and parent review |
+| Q native macOS | required functional cases passed; reviewed and integrated | approval-delayed artifact closeout exceeded original budget; explicitly retained |
 | N Windows | frozen 4bde core integrated; measurements continue | final report and bounded comparator closeout |
 | N native Linux/ext4 | final 4bde: 39 focused, 24 recovery, eight README cases passed | source, archive and native binary authenticated; reports integrated |
-| N native macOS | fresh final-pin lane dispatched | first execution held by platform approval; original clock continues |
+| N native macOS | isolated source advanced to final 4bde | execution/approval sequence continues under original cutoff; review pending |
 | P | undispatched | reviewed Q/N, actual integrated-pin native qualification, frozen navigation |
 
 Linux's original retained samples failed admission. After the human freed space,
@@ -39,11 +39,17 @@ a 40 GiB combined ceiling, leaving other limits unchanged. The
 [execution admission](evidence/q-n-execution-admission-40gib.json) forecasts
 39,217,688,184 bytes / 4,107,696 files including the closeout reserve and bounded
 Q/N shares. After both N native allocations and a 256 MiB reallocation to Windows
-N, the conservative all-lane forecast is **41,096,736,376 bytes / 4,282,696 files**,
+N, the conservative all-lane forecast was **41,096,736,376 bytes / 4,282,696 files**,
 including the internal 1 GiB / 100,000-file reserve, below 40 GiB / 5,000,000 files.
-Windows N has 1 GiB / 100,000 files total new ownership; native N lanes retain
-768 MiB each. This is a prospective allocation, not a final census.
+Windows N subsequently received **1.5 GiB / 150,000 files** to retain both complete
+restore-backed A10k comparator fixtures and all prior prefixes. Including an
+additional 32 MiB / 2,000-file parent integration allowance, the new full forecast
+is **41,667,161,720 bytes / 4,334,696 files**, still including the internal reserve
+and below 40 GiB / 5,000,000 files. Native N lanes retain 768 MiB each. These are
+prospective allocations, not final censuses.
 See [the reallocation receipt](evidence/n-windows-reallocation-1gib.json).
+The later [1536 MiB receipt](evidence/n-windows-reallocation-1536mib.json)
+supersedes that Windows allocation. No cleanup success is needed for admission.
 P still requires fresh actual accounting and separate admission per large stage.
 
 GitNexus availability checks unexpectedly invoked package staging. Both workers
@@ -73,6 +79,16 @@ N10k A initialization reached 120 seconds after immutable selection; a separatel
 bounded resume completed its view and 13 ordinary measurements. Seeded N10k B
 also reached 120 seconds, with no selector; its edit matrix is unperformed and
 its prefix retained. Neither setup is reported as a fresh initialization pass.
+
+For Q Mac, the parent matched all 15 baseline core files, 19 pinned harnesses and
+seven added harnesses against committed blobs, checked all 282 capsule events and
+24 cases, and verified every functional stage finished before its original
+90-second closeout cutoff. The failed sandboxed time wrapper and successful
+native rerun remain separate. Artifact closeout completed about 55 minutes after
+the original deadline; no later functional test is claimed. See
+[the parent review](evidence/coordinator-q-macos-review.json) and
+[the report](../file-native-q-macos-2026-10-19/report.md). The Mac executable hash
+is worker-receipted; the parent did not independently rehash the native binary.
 
 Read [coordination and frozen decision rules](coordination.md), the
 [N design handoff](navigation-admission-design.md), and

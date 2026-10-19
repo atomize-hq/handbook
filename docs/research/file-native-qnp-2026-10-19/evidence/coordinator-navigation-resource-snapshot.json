@@ -1,0 +1,325 @@
+{
+  "epoch": 1792453147.167514,
+  "status": "independent snapshot, not final closeout; expected timeout/error exits retained",
+  "ordinary_child_rows": 915,
+  "sampled_rss_rows": 915,
+  "missing_sample_rows": 0,
+  "max_sampled_child_rss": 52924416,
+  "sampled_limit_violations": [],
+  "cells": [
+    {
+      "cell": "n1000-A-p2",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        31678464,
+        32833536,
+        33746944,
+        34865152,
+        37457920,
+        39919616,
+        42618880,
+        42725376,
+        42725376,
+        45256704,
+        45256704,
+        45256704,
+        45785088
+      ],
+      "prepared_owned_measurements": 0,
+      "prepared_owned_missing": 13
+    },
+    {
+      "cell": "n1000-A-p3",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        31432704,
+        32272384,
+        34586624,
+        35201024,
+        36696064,
+        37335040,
+        39739392,
+        41189376,
+        41189376,
+        43409408,
+        43409408,
+        43446272,
+        43446272
+      ],
+      "prepared_owned_measurements": 0,
+      "prepared_owned_missing": 13
+    },
+    {
+      "cell": "n1000-A-p4",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        33259520,
+        36339712,
+        36339712,
+        36765696,
+        38912000,
+        39469056,
+        40087552,
+        41541632,
+        41824256,
+        44654592,
+        46567424,
+        48140288,
+        49098752
+      ],
+      "prepared_owned_measurements": 0,
+      "prepared_owned_missing": 13
+    },
+    {
+      "cell": "n1000-B-p2",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        32616448,
+        35807232,
+        37965824,
+        38473728,
+        42795008,
+        44707840,
+        44916736,
+        45514752,
+        46211072,
+        54382592,
+        54382592,
+        54464512,
+        54845440
+      ],
+      "prepared_owned_measurements": 0,
+      "prepared_owned_missing": 13
+    },
+    {
+      "cell": "n1000-B-p3",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        32473088,
+        35586048,
+        38105088,
+        38559744,
+        42549248,
+        45813760,
+        46206976,
+        46739456,
+        46882816,
+        49553408,
+        49553408,
+        49696768,
+        50442240
+      ],
+      "prepared_owned_measurements": 0,
+      "prepared_owned_missing": 13
+    },
+    {
+      "cell": "n1000-B-p4",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        32342016,
+        33734656,
+        36380672,
+        37638144,
+        41418752,
+        44314624,
+        45117440,
+        45314048,
+        45809664,
+        54534144,
+        55414784,
+        55414784,
+        55603200
+      ],
+      "prepared_owned_measurements": 0,
+      "prepared_owned_missing": 13
+    },
+    {
+      "cell": "n10000-A-p2",
+      "completed_measurements": 12,
+      "checker_rss_values": [
+        116781056,
+        117874688,
+        119218176,
+        149598208,
+        151175168,
+        152420352,
+        152420352,
+        154169344,
+        155242496,
+        165838848,
+        167165952,
+        168042496
+      ],
+      "prepared_owned_measurements": 12,
+      "prepared_owned_missing": 0
+    },
+    {
+      "cell": "n10000-A-p3",
+      "completed_measurements": 12,
+      "checker_rss_values": [
+        116248576,
+        116998144,
+        117141504,
+        146530304,
+        148488192,
+        149876736,
+        149925888,
+        151752704,
+        153772032,
+        163151872,
+        163151872,
+        164384768
+      ],
+      "prepared_owned_measurements": 12,
+      "prepared_owned_missing": 0
+    },
+    {
+      "cell": "n10000-A-p4",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        124878848,
+        125239296,
+        125358080,
+        154632192,
+        155705344,
+        156020736,
+        156315648,
+        157237248,
+        157806592,
+        175468544,
+        175468544,
+        175468544,
+        175996928
+      ],
+      "prepared_owned_measurements": 13,
+      "prepared_owned_missing": 0
+    },
+    {
+      "cell": "n128-A-p2",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        21454848,
+        21852160,
+        22634496,
+        22994944,
+        23572480,
+        23744512,
+        24305664,
+        24911872,
+        25485312,
+        28123136,
+        28123136,
+        28123136,
+        28123136
+      ],
+      "prepared_owned_measurements": 0,
+      "prepared_owned_missing": 13
+    },
+    {
+      "cell": "n128-A-p3",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        21577728,
+        22339584,
+        23044096,
+        23175168,
+        23601152,
+        23855104,
+        24162304,
+        24911872,
+        25034752,
+        28135424,
+        28135424,
+        28196864,
+        28225536
+      ],
+      "prepared_owned_measurements": 0,
+      "prepared_owned_missing": 13
+    },
+    {
+      "cell": "n128-A-p4",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        21839872,
+        22257664,
+        22966272,
+        23355392,
+        24018944,
+        24559616,
+        24813568,
+        25083904,
+        25522176,
+        27684864,
+        28758016,
+        29212672,
+        29274112
+      ],
+      "prepared_owned_measurements": 0,
+      "prepared_owned_missing": 13
+    },
+    {
+      "cell": "n128-B-p2",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        21696512,
+        22228992,
+        22843392,
+        23478272,
+        23932928,
+        24432640,
+        24608768,
+        25337856,
+        25579520,
+        27594752,
+        27672576,
+        27930624,
+        28852224
+      ],
+      "prepared_owned_measurements": 0,
+      "prepared_owned_missing": 13
+    },
+    {
+      "cell": "n128-B-p3",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        21700608,
+        22220800,
+        22962176,
+        23277568,
+        23834624,
+        24334336,
+        24559616,
+        25051136,
+        25186304,
+        27631616,
+        27770880,
+        28041216,
+        28368896
+      ],
+      "prepared_owned_measurements": 0,
+      "prepared_owned_missing": 13
+    },
+    {
+      "cell": "n128-B-p4",
+      "completed_measurements": 13,
+      "checker_rss_values": [
+        21680128,
+        22077440,
+        22691840,
+        23314432,
+        23658496,
+        24399872,
+        24616960,
+        25083904,
+        25493504,
+        27553792,
+        28774400,
+        29089792,
+        29089792
+      ],
+      "prepared_owned_measurements": 0,
+      "prepared_owned_missing": 13
+    }
+  ],
+  "caveat": "Prepared-owned census was absent in earlier matrix rows; before/after or reconstructed bounds do not become directly sampled peaks. Sampling is not continuous kernel proof."
+}

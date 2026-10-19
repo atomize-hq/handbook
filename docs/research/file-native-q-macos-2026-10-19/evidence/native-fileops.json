@@ -1,0 +1,14 @@
+{
+  "args": [
+    "/private/tmp/file-native-q-macos-20261019/native_ops"
+  ],
+  "start_epoch": 1792449379.337717,
+  "seconds": 0.41791677474975586,
+  "cap": 81.66228294372559,
+  "exit": 0,
+  "status": "success",
+  "censor": null,
+  "sampled_aggregate_peak_bytes": 1589248,
+  "samples": 5,
+  "sampler": "native ps rss KiB times1024, descendant closure, 50ms interval"
+}

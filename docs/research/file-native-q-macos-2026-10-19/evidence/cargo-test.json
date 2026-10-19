@@ -1,0 +1,17 @@
+{
+  "args": [
+    "cargo",
+    "test",
+    "--locked",
+    "--offline",
+    "--workspace",
+    "-j2"
+  ],
+  "start_epoch": 1792449085.948247,
+  "seconds": 10.48881220817566,
+  "cap": 120.0,
+  "exit": 1,
+  "status": "failure",
+  "censor": null,
+  "native_time_l": true
+}

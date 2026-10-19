@@ -1,0 +1,530 @@
+[
+  {
+    "mode": "A",
+    "n": 16,
+    "input": {
+      "root": "/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store",
+      "action": "publish",
+      "request": {
+        "request": "terminal-fence",
+        "base": {
+          "publication": "publication-2576-1792449204310926000-6",
+          "digest": "86c27e10c0b114fdb3122ccf39bf8dbcc121a2f6a5717c4e1a7ccedae205a7a8"
+        },
+        "ops": [],
+        "packet": false
+      }
+    },
+    "expected_refusal": "refused:cancelled-fenced",
+    "response": {
+      "error": "refused:cancelled-fenced",
+      "metrics": {
+        "bytes_control_read": 3223,
+        "bytes_control_written": 0,
+        "bytes_metadata_read": 17418,
+        "bytes_metadata_written": 0,
+        "bytes_payload_read": 0,
+        "bytes_payload_written": 0,
+        "bytes_read": 20641,
+        "bytes_result_read": 0,
+        "bytes_result_written": 0,
+        "bytes_written": 0,
+        "copies": 0,
+        "created_directories": 0,
+        "directory_syncs": 1,
+        "documents_visited": 0,
+        "edges_visited": 0,
+        "file_syncs": 1,
+        "index_updates": 0,
+        "namespace_ops": 0,
+        "ns": {
+          "lock-hold": 5924833,
+          "lock-wait": 24917,
+          "read": 824206,
+          "sync": 5056917
+        },
+        "opens": 16,
+        "page_reads": 8,
+        "quota_limit": null,
+        "quota_spent": 0,
+        "replacements": 0,
+        "touched_paths": 0,
+        "unique_pages": [
+          "13bd1c80a59ffc924339694d31d77b873fea2e2e49eb3211b58a7266181c0303",
+          "f034fc9bd0490504ae5a1403bf8bec81920d836a912cad29dc23fc59242eeaef"
+        ],
+        "unsupported_directory_syncs": 0,
+        "verify_only": false
+      },
+      "peak_memory_bytes": null,
+      "result": null,
+      "status": "error",
+      "wall_ns": 6169083
+    }
+  },
+  {
+    "mode": "A",
+    "n": 16,
+    "input": {
+      "root": "/private/tmp/file-native-q-macos-20261019/capsule/restored-A-16/disposable/store",
+      "action": "publish",
+      "request": {
+        "request": "eligible",
+        "base": {
+          "publication": "publication-2533-1792449203545197000-10",
+          "digest": "b3a98cce095b6f37395c302ce27bc45dee4f615632050fb1d1309bce4df3c421"
+        },
+        "ops": [
+          {
+            "kind": "label",
+            "id": "d000003",
+            "text": "different-restored-intent"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "expected_refusal": "refused:request-id-intent-mismatch",
+    "response": {
+      "error": "refused:request-id-intent-mismatch",
+      "metrics": {
+        "bytes_control_read": 1752,
+        "bytes_control_written": 0,
+        "bytes_metadata_read": 10053,
+        "bytes_metadata_written": 0,
+        "bytes_payload_read": 0,
+        "bytes_payload_written": 0,
+        "bytes_read": 11805,
+        "bytes_result_read": 0,
+        "bytes_result_written": 0,
+        "bytes_written": 0,
+        "copies": 0,
+        "created_directories": 0,
+        "directory_syncs": 1,
+        "documents_visited": 0,
+        "edges_visited": 0,
+        "file_syncs": 1,
+        "index_updates": 0,
+        "namespace_ops": 0,
+        "ns": {
+          "lock-hold": 4584208,
+          "lock-wait": 19000,
+          "read": 247040,
+          "sync": 4265333
+        },
+        "opens": 11,
+        "page_reads": 6,
+        "quota_limit": null,
+        "quota_spent": 0,
+        "replacements": 0,
+        "touched_paths": 0,
+        "unique_pages": [
+          "13bd1c80a59ffc924339694d31d77b873fea2e2e49eb3211b58a7266181c0303",
+          "f034fc9bd0490504ae5a1403bf8bec81920d836a912cad29dc23fc59242eeaef"
+        ],
+        "unsupported_directory_syncs": 0,
+        "verify_only": false
+      },
+      "peak_memory_bytes": null,
+      "result": null,
+      "status": "error",
+      "wall_ns": 4717500
+    }
+  },
+  {
+    "mode": "A",
+    "n": 128,
+    "input": {
+      "root": "/private/tmp/file-native-q-macos-20261019/capsule/restored-A-128/disposable/store",
+      "action": "publish",
+      "request": {
+        "request": "terminal-fence",
+        "base": {
+          "publication": "publication-2840-1792449212999804000-6",
+          "digest": "cf9e414b66859df59125fc33984ed0d249a2f4ef69482ec59a4afdd06f0e808e"
+        },
+        "ops": [],
+        "packet": false
+      }
+    },
+    "expected_refusal": "refused:cancelled-fenced",
+    "response": {
+      "error": "refused:cancelled-fenced",
+      "metrics": {
+        "bytes_control_read": 3225,
+        "bytes_control_written": 0,
+        "bytes_metadata_read": 17426,
+        "bytes_metadata_written": 0,
+        "bytes_payload_read": 0,
+        "bytes_payload_written": 0,
+        "bytes_read": 20651,
+        "bytes_result_read": 0,
+        "bytes_result_written": 0,
+        "bytes_written": 0,
+        "copies": 0,
+        "created_directories": 0,
+        "directory_syncs": 1,
+        "documents_visited": 0,
+        "edges_visited": 0,
+        "file_syncs": 1,
+        "index_updates": 0,
+        "namespace_ops": 0,
+        "ns": {
+          "lock-hold": 5150875,
+          "lock-wait": 26250,
+          "read": 835709,
+          "sync": 4262833
+        },
+        "opens": 16,
+        "page_reads": 8,
+        "quota_limit": null,
+        "quota_spent": 0,
+        "replacements": 0,
+        "touched_paths": 0,
+        "unique_pages": [
+          "5bf4d3f8bea88f007935b0237d0cdd5230c3f79a8f787cf16e5274a91025b704",
+          "fdd1ac3fc5f4da3ec5976237c82a1f740f0fa7ad7f52454fc543ca869ca3f1f4"
+        ],
+        "unsupported_directory_syncs": 0,
+        "verify_only": false
+      },
+      "peak_memory_bytes": null,
+      "result": null,
+      "status": "error",
+      "wall_ns": 5401000
+    }
+  },
+  {
+    "mode": "A",
+    "n": 128,
+    "input": {
+      "root": "/private/tmp/file-native-q-macos-20261019/capsule/restored-A-128/disposable/store",
+      "action": "publish",
+      "request": {
+        "request": "eligible",
+        "base": {
+          "publication": "publication-2794-1792449212027990000-13",
+          "digest": "ecd9931f05bd13003855b5eb75e241f54c08bd21f6cc894aa38464c4db0f0f70"
+        },
+        "ops": [
+          {
+            "kind": "label",
+            "id": "d000003",
+            "text": "different-restored-intent"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "expected_refusal": "refused:request-id-intent-mismatch",
+    "response": {
+      "error": "refused:request-id-intent-mismatch",
+      "metrics": {
+        "bytes_control_read": 1753,
+        "bytes_control_written": 0,
+        "bytes_metadata_read": 10059,
+        "bytes_metadata_written": 0,
+        "bytes_payload_read": 0,
+        "bytes_payload_written": 0,
+        "bytes_read": 11812,
+        "bytes_result_read": 0,
+        "bytes_result_written": 0,
+        "bytes_written": 0,
+        "copies": 0,
+        "created_directories": 0,
+        "directory_syncs": 1,
+        "documents_visited": 0,
+        "edges_visited": 0,
+        "file_syncs": 1,
+        "index_updates": 0,
+        "namespace_ops": 0,
+        "ns": {
+          "lock-hold": 5125292,
+          "lock-wait": 22666,
+          "read": 266376,
+          "sync": 4790626
+        },
+        "opens": 11,
+        "page_reads": 6,
+        "quota_limit": null,
+        "quota_spent": 0,
+        "replacements": 0,
+        "touched_paths": 0,
+        "unique_pages": [
+          "5bf4d3f8bea88f007935b0237d0cdd5230c3f79a8f787cf16e5274a91025b704",
+          "fdd1ac3fc5f4da3ec5976237c82a1f740f0fa7ad7f52454fc543ca869ca3f1f4"
+        ],
+        "unsupported_directory_syncs": 0,
+        "verify_only": false
+      },
+      "peak_memory_bytes": null,
+      "result": null,
+      "status": "error",
+      "wall_ns": 5289792
+    }
+  },
+  {
+    "mode": "B",
+    "n": 16,
+    "input": {
+      "root": "/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store",
+      "action": "publish",
+      "request": {
+        "request": "terminal-fence",
+        "base": {
+          "publication": "publication-2952-1792449216800685000-6",
+          "digest": "d37fcb6a96f3bab5d3062eb1e73b7e19078abef0865c577ba83d84bb470f038c"
+        },
+        "ops": [],
+        "packet": false
+      }
+    },
+    "expected_refusal": "refused:cancelled-fenced",
+    "response": {
+      "error": "refused:cancelled-fenced",
+      "metrics": {
+        "bytes_control_read": 3347,
+        "bytes_control_written": 0,
+        "bytes_metadata_read": 14448,
+        "bytes_metadata_written": 0,
+        "bytes_payload_read": 0,
+        "bytes_payload_written": 0,
+        "bytes_read": 17795,
+        "bytes_result_read": 0,
+        "bytes_result_written": 0,
+        "bytes_written": 0,
+        "copies": 0,
+        "created_directories": 0,
+        "directory_syncs": 1,
+        "documents_visited": 0,
+        "edges_visited": 0,
+        "file_syncs": 1,
+        "index_updates": 0,
+        "namespace_ops": 0,
+        "ns": {
+          "lock-hold": 9149208,
+          "lock-wait": 40833,
+          "read": 735794,
+          "sync": 8347668
+        },
+        "opens": 16,
+        "page_reads": 8,
+        "quota_limit": null,
+        "quota_spent": 0,
+        "replacements": 0,
+        "touched_paths": 0,
+        "unique_pages": [
+          "b40d295e5a686a36628b91fabc3c5b4ace20689bfe59292fcd512ec711f9f57a",
+          "b9d812997bbf0e74d05b1cab50bf25cafdd86e2073b859424446c21b72b09b7c"
+        ],
+        "unsupported_directory_syncs": 0,
+        "verify_only": false
+      },
+      "peak_memory_bytes": null,
+      "result": null,
+      "status": "error",
+      "wall_ns": 9396042
+    }
+  },
+  {
+    "mode": "B",
+    "n": 16,
+    "input": {
+      "root": "/private/tmp/file-native-q-macos-20261019/capsule/restored-B-16/disposable/store",
+      "action": "publish",
+      "request": {
+        "request": "eligible",
+        "base": {
+          "publication": "publication-2912-1792449215447799000-10",
+          "digest": "84154d9885e2abb1901b8994b6323e87a1c182c2222e6335f3b777c31ba7ddf0"
+        },
+        "ops": [
+          {
+            "kind": "label",
+            "id": "d000003",
+            "text": "different-restored-intent"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "expected_refusal": "refused:request-id-intent-mismatch",
+    "response": {
+      "error": "refused:request-id-intent-mismatch",
+      "metrics": {
+        "bytes_control_read": 1814,
+        "bytes_control_written": 0,
+        "bytes_metadata_read": 8346,
+        "bytes_metadata_written": 0,
+        "bytes_payload_read": 0,
+        "bytes_payload_written": 0,
+        "bytes_read": 10160,
+        "bytes_result_read": 0,
+        "bytes_result_written": 0,
+        "bytes_written": 0,
+        "copies": 0,
+        "created_directories": 0,
+        "directory_syncs": 1,
+        "documents_visited": 0,
+        "edges_visited": 0,
+        "file_syncs": 1,
+        "index_updates": 0,
+        "namespace_ops": 0,
+        "ns": {
+          "lock-hold": 5725625,
+          "lock-wait": 24208,
+          "read": 248750,
+          "sync": 5417917
+        },
+        "opens": 11,
+        "page_reads": 6,
+        "quota_limit": null,
+        "quota_spent": 0,
+        "replacements": 0,
+        "touched_paths": 0,
+        "unique_pages": [
+          "b40d295e5a686a36628b91fabc3c5b4ace20689bfe59292fcd512ec711f9f57a",
+          "b9d812997bbf0e74d05b1cab50bf25cafdd86e2073b859424446c21b72b09b7c"
+        ],
+        "unsupported_directory_syncs": 0,
+        "verify_only": false
+      },
+      "peak_memory_bytes": null,
+      "result": null,
+      "status": "error",
+      "wall_ns": 5886958
+    }
+  },
+  {
+    "mode": "B",
+    "n": 128,
+    "input": {
+      "root": "/private/tmp/file-native-q-macos-20261019/capsule/restored-B-128/disposable/store",
+      "action": "publish",
+      "request": {
+        "request": "terminal-fence",
+        "base": {
+          "publication": "publication-3199-1792449226785247000-6",
+          "digest": "b920e12fd5bfb27e7ba1518224ac2488f50f05dc480764de99bd62976ad986c8"
+        },
+        "ops": [],
+        "packet": false
+      }
+    },
+    "expected_refusal": "refused:cancelled-fenced",
+    "response": {
+      "error": "refused:cancelled-fenced",
+      "metrics": {
+        "bytes_control_read": 3351,
+        "bytes_control_written": 0,
+        "bytes_metadata_read": 14456,
+        "bytes_metadata_written": 0,
+        "bytes_payload_read": 0,
+        "bytes_payload_written": 0,
+        "bytes_read": 17807,
+        "bytes_result_read": 0,
+        "bytes_result_written": 0,
+        "bytes_written": 0,
+        "copies": 0,
+        "created_directories": 0,
+        "directory_syncs": 1,
+        "documents_visited": 0,
+        "edges_visited": 0,
+        "file_syncs": 1,
+        "index_updates": 0,
+        "namespace_ops": 0,
+        "ns": {
+          "lock-hold": 6201708,
+          "lock-wait": 31250,
+          "read": 1071331,
+          "sync": 5078792
+        },
+        "opens": 16,
+        "page_reads": 8,
+        "quota_limit": null,
+        "quota_spent": 0,
+        "replacements": 0,
+        "touched_paths": 0,
+        "unique_pages": [
+          "7672a500489bfbfd56da17a7c268206902fe9dcd77130a39712fcea47b066476",
+          "a2c99e9a919f99d88004693bce0ffae8b88c11b888b0d9ab954c6bbb65501437"
+        ],
+        "unsupported_directory_syncs": 0,
+        "verify_only": false
+      },
+      "peak_memory_bytes": null,
+      "result": null,
+      "status": "error",
+      "wall_ns": 6487958
+    }
+  },
+  {
+    "mode": "B",
+    "n": 128,
+    "input": {
+      "root": "/private/tmp/file-native-q-macos-20261019/capsule/restored-B-128/disposable/store",
+      "action": "publish",
+      "request": {
+        "request": "eligible",
+        "base": {
+          "publication": "publication-3105-1792449223919339000-14",
+          "digest": "af5e92667db7872615a2ca52ab04df3dff13ea6d58de2b416c3071cf2055a43d"
+        },
+        "ops": [
+          {
+            "kind": "label",
+            "id": "d000003",
+            "text": "different-restored-intent"
+          }
+        ],
+        "packet": false
+      }
+    },
+    "expected_refusal": "refused:request-id-intent-mismatch",
+    "response": {
+      "error": "refused:request-id-intent-mismatch",
+      "metrics": {
+        "bytes_control_read": 1816,
+        "bytes_control_written": 0,
+        "bytes_metadata_read": 8352,
+        "bytes_metadata_written": 0,
+        "bytes_payload_read": 0,
+        "bytes_payload_written": 0,
+        "bytes_read": 10168,
+        "bytes_result_read": 0,
+        "bytes_result_written": 0,
+        "bytes_written": 0,
+        "copies": 0,
+        "created_directories": 0,
+        "directory_syncs": 1,
+        "documents_visited": 0,
+        "edges_visited": 0,
+        "file_syncs": 1,
+        "index_updates": 0,
+        "namespace_ops": 0,
+        "ns": {
+          "lock-hold": 4947708,
+          "lock-wait": 18875,
+          "read": 220707,
+          "sync": 4669291
+        },
+        "opens": 11,
+        "page_reads": 6,
+        "quota_limit": null,
+        "quota_spent": 0,
+        "replacements": 0,
+        "touched_paths": 0,
+        "unique_pages": [
+          "7672a500489bfbfd56da17a7c268206902fe9dcd77130a39712fcea47b066476",
+          "a2c99e9a919f99d88004693bce0ffae8b88c11b888b0d9ab954c6bbb65501437"
+        ],
+        "unsupported_directory_syncs": 0,
+        "verify_only": false
+      },
+      "peak_memory_bytes": null,
+      "result": null,
+      "status": "error",
+      "wall_ns": 5082292
+    }
+  }
+]
