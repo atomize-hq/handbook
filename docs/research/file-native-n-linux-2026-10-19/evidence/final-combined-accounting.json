@@ -1,0 +1,61 @@
+{
+  "epoch": 1792451554.3988426,
+  "report_commit": "6ead39a4ee8823b530eaa6beeb5f6c2fa43a793a",
+  "candidate": "6e66a7523612b80386cf9cc2b96d5341579b54fd",
+  "committed_raw_members_byte_verified": 120,
+  "scope_only_new_qualification_directory": true,
+  "local_worktree": {
+    "root": "C:\\Users\\spmcc\\.codex\\worktrees\\b3fc\\handbook",
+    "files": 328,
+    "logical_bytes": 11087237,
+    "links_excluded": 0,
+    "seconds": 0.0
+  },
+  "shared_git": {
+    "root": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\.git",
+    "files": 1396,
+    "logical_bytes": 211811528,
+    "links_excluded": 0,
+    "seconds": 0.014999999955762178
+  },
+  "shared_git_initial": {
+    "root": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\.git",
+    "files": 1261,
+    "logical_bytes": 209983896,
+    "links_excluded": 0,
+    "seconds": 0.03200000000651926
+  },
+  "conservative_entire_shared_git_growth_bytes": 1827632,
+  "conservative_entire_shared_git_growth_files": 135,
+  "native": {
+    "epoch": 1792451550.6047611,
+    "harness_sha256": "c6c013326faa530390360fe5d79b1ae89be81d9a8c933fab11b0b5b9e899cb9a",
+    "native_owned": {
+      "root": "/home/spenser/file-native-n-linux-20261019",
+      "files": 13655,
+      "logical_bytes": 286118389,
+      "links_excluded": 0,
+      "seconds": 0.06331541994586587
+    },
+    "new_test_temporary": {
+      "root": "/tmp/i1-bounds-250183-1792450605137123489-0",
+      "files": 2,
+      "logical_bytes": 1049,
+      "links_excluded": 0,
+      "seconds": 2.18050554394722e-05
+    },
+    "free_bytes": 42010050560,
+    "task_python_engine_processes": [],
+    "filter_scope": "owned-root Python and engine argv only; this read-only checker excluded",
+    "qualified_executable_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e",
+    "original_execution_cutoff_epoch": 1792453485,
+    "original_lane_deadline_epoch": 1792454085
+  },
+  "combined_additional_logical_bytes": 299034307,
+  "combined_additional_files": 14120,
+  "lane_cap_bytes": 805306368,
+  "lane_cap_files": 100000,
+  "extra_final_receipt_git_allowance_bytes": 16777216,
+  "extra_final_receipt_git_allowance_files": 1000,
+  "continuous_full_lane_peak": "missing; this is a closing census, prior stage samples/caps retained"
+}

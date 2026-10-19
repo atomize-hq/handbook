@@ -137,6 +137,15 @@ before/after. [Comparison](evidence/preserved-scope-comparison.json). The shared
 scope and must not be added twice. Local initial/shared-Git and final source/
 return censuses are retained separately.
 
+The [final combined closing census](evidence/final-combined-accounting.json)
+includes the native root, new temporary test root, local source/return copies
+and **all** shared Git growth since dispatch, including the first report commit
+and push. It is about 299 MB / 14,118 files, with a further 16 MiB / 1,000-file
+allowance inside the lane ceiling for these final receipts and Git writes. All
+120 raw members were also rehashed from committed Git blobs. No task Python or
+engine process matched the stated native closing filter; this is not a universal
+host process inventory.
+
 Per-child limits were 120 s, point readers 256 MiB and other children/checkers
 2 GiB. The entire focused process group, including the oracle and descendants,
 had a hard 1,800-second cap. Largest completed ordinary driver call was 35.87 s;

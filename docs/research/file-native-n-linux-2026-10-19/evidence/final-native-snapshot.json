@@ -1,0 +1,24 @@
+{
+  "epoch": 1792451550.6047611,
+  "harness_sha256": "c6c013326faa530390360fe5d79b1ae89be81d9a8c933fab11b0b5b9e899cb9a",
+  "native_owned": {
+    "root": "/home/spenser/file-native-n-linux-20261019",
+    "files": 13655,
+    "logical_bytes": 286118389,
+    "links_excluded": 0,
+    "seconds": 0.06331541994586587
+  },
+  "new_test_temporary": {
+    "root": "/tmp/i1-bounds-250183-1792450605137123489-0",
+    "files": 2,
+    "logical_bytes": 1049,
+    "links_excluded": 0,
+    "seconds": 2.18050554394722e-05
+  },
+  "free_bytes": 42010050560,
+  "task_python_engine_processes": [],
+  "filter_scope": "owned-root Python and engine argv only; this read-only checker excluded",
+  "qualified_executable_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e",
+  "original_execution_cutoff_epoch": 1792453485,
+  "original_lane_deadline_epoch": 1792454085
+}
