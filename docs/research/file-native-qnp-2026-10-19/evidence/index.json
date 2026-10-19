@@ -1,4 +1,8 @@
 {
+  "admission-after-user-remediation.json": {
+    "bytes": 1976,
+    "sha256": "1157c2a5922f26e707a9158bc1495172698a95e2f3a2ae6ec44a19006e80a5f6"
+  },
   "admission-summary.json": {
     "bytes": 1235,
     "sha256": "6c1e37c181122f0cb568355697717b97dbf056be3b2ea419fed9ff6f597df268"
@@ -22,6 +26,10 @@
   "n-tool-cleanup-rejected.json": {
     "bytes": 669,
     "sha256": "e6503eebc30898cab59bef1977b75a27b0bc9867c2bda7d40430e7e3a0770a53"
+  },
+  "native-linux-admission-refreshed.json": {
+    "bytes": 6237,
+    "sha256": "1b853ec2b3a7d80e943c7232759a93add80480ab13f7a6a69f8de70a4c59f51f"
   },
   "native-linux-census.json": {
     "bytes": 5314,

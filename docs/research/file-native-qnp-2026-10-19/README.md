@@ -13,29 +13,35 @@ original H101003 store, original archive and final H101006 clone are preserved.
 
 | Task | Current result | Needed next |
 | --- | --- | --- |
-| Q native Linux/ext4 | admission refusal; no alternate ext4 mount | restore 20 GiB free reserve plus admitted new-work capacity |
-| Q native macOS | platform reports `waitingOnApproval`; current owned-data census incomplete | review pending platform action, complete census, then admit finite lane |
+| Q native Linux/ext4 | free reserve now passes after human cleanup | combined resource decision and finite lane admission |
+| Q native macOS | platform action approved; current census complete; free reserve passes | combined resource decision and finite lane admission |
 | N Windows | source/design handoff only | complete global resource admission; no implementation claim |
 | P | undispatched | reviewed Q/N, actual integrated-pin native qualification, frozen navigation |
 
-Linux's retained samples fluctuate below the reserve. The latest is
-6,389,047,296 free bytes versus 21,474,836,480 required; another sample recorded
-4,390,662,144. No preserved data was deleted to alter admission. New fixtures
-also require space above the free reserve. See the
+Linux's original retained samples failed admission. After the human freed space,
+the refreshed sample records 51,107,393,536 free bytes versus 21,474,836,480
+required. Mac's approved checks record 92,726,833,152 free bytes and a complete
+4,318,669,268-byte / 198,048-file current owned census. Both native free reserves
+now pass. New fixtures still require separate combined admission. See the
 [case map](q-linux-admission-case-map.md) and [admission receipt](evidence/q-linux-admission.json).
 
-The [current admission summary](evidence/admission-summary.json) records a known
-31,777,348,578-byte inherited-scope subtotal before Mac's current census, additional
-work and the reserved 1 GiB. This includes both unintended new tool-cache
-subtrees, totaling 2,102,088,489 bytes. No resource GO follows from this incomplete
-total. Older separately bounded research is explicitly recorded as well; it has
-not been silently deleted or called available capacity.
+The [original admission summary](evidence/admission-summary.json) preserved an
+incomplete host census. The [completed update](evidence/admission-after-user-remediation.json)
+records 36,096,017,846 bytes / 3,757,696 files before additional work and the
+reserved 1 GiB / 100,000 files. This exceeds the 32 GiB logical ceiling already.
+It includes both unintended new tool-cache subtrees, totaling 2,102,088,489 bytes.
+Older separately bounded research is explicitly recorded as well; it has not
+been silently deleted or called available capacity. The human has been asked to
+approve a 40 GiB combined ceiling with other limits unchanged, or retain 32 GiB
+and review a cleanup plan. No cap change or resource GO is assumed.
 
 GitNexus availability checks unexpectedly invoked package staging. Both workers
 stopped retries. N's exact-subtree PowerShell cleanup attempts were rejected
 before execution by automatic approval review with "blocked by policy". Both
-new subtrees remain counted. The human was asked for an explicit decision on
-only those new subtrees; no approval or cleanup success is assumed. The
+new subtrees remain counted. The human explicitly authorized removing only those
+two subtrees. The coordinator's exact-target PowerShell removal was then also
+rejected before execution with "blocked by policy"; no other route was attempted.
+No cleanup success is assumed. The
 [rejection receipt](evidence/n-tool-cleanup-rejected.json) is preserved.
 
 The coordinator's direct cached GitNexus invocation avoided further package

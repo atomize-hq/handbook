@@ -1,0 +1,36 @@
+{
+  "status": "HOLD: Mac census incomplete, Linux free reserve failed; no executable work admitted",
+  "epoch": 1792445815.5915856,
+  "ceilings": {
+    "logical_bytes": 34359738368,
+    "files": 5000000,
+    "reserved_inside_bytes": 1073741824,
+    "reserved_inside_files": 100000
+  },
+  "current_known_inherited_scope_bytes": {
+    "windows_inherited_lineage_plus_integration": 23502981135,
+    "wsl_inherited_lineage": 1993650271,
+    "native_linux_preserved": 4178628683,
+    "new_q_tool_residue": 1051205486,
+    "new_n_tool_residue": 1050883003
+  },
+  "known_subtotal_bytes": 31777348578,
+  "mac_current_owned_bytes": 4318669268,
+  "scope": "Preserve prior incremental/recovery accounting lineage. Earlier separately bounded 20261017 research roots are separately censused and preserved, never called free capacity; no broadening of cap scope is implied.",
+  "older_windows_separate_bytes": 35855850343,
+  "older_wsl_separate_bytes": 23402002010,
+  "new_task_fixture_bytes": 0,
+  "preexisting_cache_parent_counted_as_new": false,
+  "resource_go": false,
+  "n_forecast_new_peak_bytes": 805306368,
+  "q_linux_forecast_native_new_bytes": 536870912,
+  "qualification_pass": false,
+  "packing_dispatched": false,
+  "known_combined_bytes": 36096017846,
+  "known_combined_files": 3757696,
+  "known_status": "Complete host census; Linux/Mac free reserves pass; combined32GiB ceiling fails before closeout reserve or new work",
+  "human_resource_decision_pending": "40GiB combined ceiling, same file/reserve/RSS/stage limits, or retain32GiB with separately reviewed cleanup",
+  "cache_cleanup_after_explicit_human_authorization": "Exact2-subtree PowerShell deletion rejected before execution by automatic approval review: blocked by policy; no alternative route attempted",
+  "mac_correction": "Includes fetched shared Git pack and worktree administration, omitted from initial host census",
+  "mac_initial_new_work_proposed_bytes": 1073741824
+}
