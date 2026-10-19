@@ -1,0 +1,72 @@
+[
+  {
+    "case": "sealed-profile3-packet-replay-checkpoint-upgrade",
+    "mode": "A",
+    "old_publication_sha256": "3408b48856d2e2639ed4afd9d1bbd4ef4732255b1f5ff2cc2224e267f037348d",
+    "candidate_sha256": "cbc23ce789a1a37428c6a7c9b350a820c02fff22aa4f7f18dbbec4e2af0f665d",
+    "status": "success"
+  },
+  {
+    "case": "multipart-601-ordered-typed-duplicate-external-target-location",
+    "mode": "A",
+    "adjacency_parts": 3,
+    "incoming_record_and_adjacency_bytes_unchanged": true,
+    "status": "success"
+  },
+  {
+    "case": "profile4-strict-navigation-packet-tree-evidence-and-owner-retention",
+    "mode": "A",
+    "status": "success"
+  },
+  {
+    "case": "tool-free-bash-discovery-copy-extraction",
+    "mode": "A",
+    "captured_tree_once": "/home/spenser/file-native-n-linux-20261019/supplement-data/multipart-A/disposable/store/view",
+    "selected_at_capture": "publication-253065-1792450770681631288-6",
+    "files_verified": 23,
+    "authored_documents": 16,
+    "external_locators_discovered": true,
+    "status": "success"
+  },
+  {
+    "case": "independent-complete-operational-oracle",
+    "mode": "A",
+    "publications": 7,
+    "status": "success"
+  },
+  {
+    "case": "sealed-profile3-packet-replay-checkpoint-upgrade",
+    "mode": "B",
+    "old_publication_sha256": "d687edc2512702c3a02e1aeb301ea5dfc9f4d7d7c703a581796079a8aca914f8",
+    "candidate_sha256": "c6977d0d27d97a567f4c30e6e8371767ec786c21da51b9b2946f586d9f8c1843",
+    "status": "success"
+  },
+  {
+    "case": "multipart-601-ordered-typed-duplicate-external-target-location",
+    "mode": "B",
+    "adjacency_parts": 3,
+    "incoming_record_and_adjacency_bytes_unchanged": true,
+    "status": "success"
+  },
+  {
+    "case": "profile4-strict-navigation-packet-tree-evidence-and-owner-retention",
+    "mode": "B",
+    "status": "success"
+  },
+  {
+    "case": "tool-free-bash-discovery-copy-extraction",
+    "mode": "B",
+    "captured_tree_once": "/home/spenser/file-native-n-linux-20261019/supplement-data/multipart-B/disposable/store/generations/checkpoint-253184-1792450779584135735-0",
+    "selected_at_capture": "publication-253184-1792450779912532603-6",
+    "files_verified": 23,
+    "authored_documents": 16,
+    "external_locators_discovered": true,
+    "status": "success"
+  },
+  {
+    "case": "independent-complete-operational-oracle",
+    "mode": "B",
+    "publications": 8,
+    "status": "success"
+  }
+]

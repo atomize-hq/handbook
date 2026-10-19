@@ -1,0 +1,21 @@
+{
+  "archive": "/home/spenser/file-native-n-linux-20261019/native-raw.tar.gz",
+  "bytes": 753508,
+  "sha256": "248c413ea513a1f310b8064f29319767930ca75fbb9576ee9dbd5f5060b79895",
+  "raw_files": 120,
+  "raw_bytes": 7970157,
+  "owned_after_archive": {
+    "root": "/home/spenser/file-native-n-linux-20261019",
+    "files": 13653,
+    "logical_bytes": 286115824,
+    "links_excluded": 0,
+    "seconds": 0.06290329433977604
+  },
+  "new_test_temporary_census": {
+    "root": "/tmp/i1-bounds-250183-1792450605137123489-0",
+    "files": 2,
+    "logical_bytes": 1049,
+    "links_excluded": 0,
+    "seconds": 1.8948689103126526e-05
+  }
+}

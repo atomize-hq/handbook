@@ -1,0 +1,9 @@
+{
+  "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+  "python": "3.13.7 (main, Aug 15 2025, 12:34:02) [GCC 15.2.1 20250813]",
+  "start_epoch": 1792450599.9784422,
+  "cutoff_epoch": 1792453485,
+  "source_verified": true,
+  "cargo": "cargo 1.89.0 (c24e10642 2025-06-23)\n",
+  "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\n"
+}

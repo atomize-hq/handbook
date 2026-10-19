@@ -1,0 +1,15 @@
+{
+  "root_pid": 252981,
+  "start_epoch": 1792450995.2872975,
+  "end_epoch": 1792451209.197067,
+  "hard_deadline_epoch": 1792452581.0,
+  "samples": 3049,
+  "peak_descendant_plus_guardian_and_watcher_allowance_rss": 164646912,
+  "peak_single_descendant_rss": 36691968,
+  "watcher_allowance_bytes": 67108864,
+  "missing_measurement": false,
+  "censor": null,
+  "killed_process_groups": [],
+  "tracked_processes": 34,
+  "earlier_unobserved_interval": "missing; original per-stage samplers retained"
+}

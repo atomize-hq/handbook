@@ -1,0 +1,17 @@
+{
+  "start": "2026-10-19T22:54:45Z",
+  "execution_cutoff": "2026-10-19T23:44:45Z",
+  "lane_deadline": "2026-10-19T23:54:45Z",
+  "original_N_deadline": "2026-10-20T00:38:51Z",
+  "effective_deadline": "2026-10-19T23:54:45Z",
+  "seconds": 3600,
+  "closeout_reserved_seconds": 600,
+  "additional_owned_limit_bytes": 805306368,
+  "new_file_limit": 100000,
+  "global_limit_bytes": 42949672960,
+  "global_file_limit": 5000000,
+  "reserve_bytes": 1073741824,
+  "reserve_files": 100000,
+  "parent_forecast_including_reserve_bytes": 40828300920,
+  "parent_forecast_including_reserve_files": 4282696
+}

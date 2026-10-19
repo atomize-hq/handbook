@@ -1,0 +1,426 @@
+[
+  {
+    "n": 1000,
+    "mode": "A",
+    "profile": 4,
+    "case": "single-payload",
+    "prepare_seconds": 0.188894989,
+    "select_seconds": 0.142163749,
+    "refresh_seconds": 0.058627521,
+    "replay_objects": 5,
+    "replay_files": 3,
+    "oracle_seconds": 0.13144834293052554,
+    "changed_paths": [
+      "docs/item-con--d000004.md"
+    ],
+    "navigation_changed_paths": [],
+    "document_visits": 1,
+    "edge_visits": 0,
+    "range_rows": {
+      "P": 0,
+      "docs": 0
+    },
+    "range_leaf_pairs": {
+      "P": 64,
+      "docs": 64
+    },
+    "range_page_visits": {
+      "P": 2,
+      "docs": 2
+    },
+    "parts_emitted": 0,
+    "navigation_bytes_emitted": 0,
+    "B_generation_ns": null,
+    "B_generation_verification_ns": null
+  },
+  {
+    "n": 1000,
+    "mode": "A",
+    "profile": 4,
+    "case": "single-title",
+    "prepare_seconds": 0.261532454,
+    "select_seconds": 0.201289101,
+    "refresh_seconds": 0.06170271,
+    "replay_objects": 6,
+    "replay_files": 4,
+    "oracle_seconds": 0.11838470865041018,
+    "changed_paths": [
+      "navigation/groups/0.yaml"
+    ],
+    "navigation_changed_paths": [
+      "navigation/groups/0.yaml"
+    ],
+    "document_visits": 511,
+    "edge_visits": 2,
+    "range_rows": {
+      "E": 2,
+      "navigation": 0
+    },
+    "range_leaf_pairs": {
+      "E": 16830,
+      "navigation": 45
+    },
+    "range_page_visits": {
+      "E": 1530,
+      "navigation": 2
+    },
+    "parts_emitted": 2,
+    "navigation_bytes_emitted": 78407,
+    "B_generation_ns": null,
+    "B_generation_verification_ns": null
+  },
+  {
+    "n": 1000,
+    "mode": "A",
+    "profile": 4,
+    "case": "high-degree-title",
+    "prepare_seconds": 0.258817326,
+    "select_seconds": 0.189382816,
+    "refresh_seconds": 0.05914472,
+    "replay_objects": 6,
+    "replay_files": 5,
+    "oracle_seconds": 0.1201841440051794,
+    "changed_paths": [
+      "navigation/groups/0.yaml"
+    ],
+    "navigation_changed_paths": [
+      "navigation/groups/0.yaml"
+    ],
+    "document_visits": 511,
+    "edge_visits": 132,
+    "range_rows": {
+      "E": 132,
+      "navigation": 0
+    },
+    "range_leaf_pairs": {
+      "E": 21544,
+      "navigation": 46
+    },
+    "range_page_visits": {
+      "E": 1533,
+      "navigation": 2
+    },
+    "parts_emitted": 3,
+    "navigation_bytes_emitted": 88619,
+    "B_generation_ns": null,
+    "B_generation_verification_ns": null
+  },
+  {
+    "n": 1000,
+    "mode": "B",
+    "profile": 4,
+    "case": "single-payload",
+    "prepare_seconds": 6.990050163,
+    "select_seconds": 0.168983756,
+    "refresh_seconds": null,
+    "replay_objects": 5,
+    "replay_files": 3,
+    "oracle_seconds": 0.11897049006074667,
+    "changed_paths": [
+      "docs/item-con--d000004.md"
+    ],
+    "navigation_changed_paths": [],
+    "document_visits": 1,
+    "edge_visits": 0,
+    "range_rows": {
+      "P": 0,
+      "docs": 0
+    },
+    "range_leaf_pairs": {
+      "P": 64,
+      "docs": 64
+    },
+    "range_page_visits": {
+      "P": 2,
+      "docs": 2
+    },
+    "parts_emitted": 0,
+    "navigation_bytes_emitted": 0,
+    "B_generation_ns": 6793667669,
+    "B_generation_verification_ns": 19334128
+  },
+  {
+    "n": 1000,
+    "mode": "B",
+    "profile": 4,
+    "case": "single-title",
+    "prepare_seconds": 6.710771303,
+    "select_seconds": 0.218829261,
+    "refresh_seconds": null,
+    "replay_objects": 6,
+    "replay_files": 4,
+    "oracle_seconds": 0.1197462659329176,
+    "changed_paths": [
+      "navigation/groups/0.yaml"
+    ],
+    "navigation_changed_paths": [
+      "navigation/groups/0.yaml"
+    ],
+    "document_visits": 511,
+    "edge_visits": 2,
+    "range_rows": {
+      "E": 2,
+      "navigation": 0
+    },
+    "range_leaf_pairs": {
+      "E": 16830,
+      "navigation": 45
+    },
+    "range_page_visits": {
+      "E": 1530,
+      "navigation": 2
+    },
+    "parts_emitted": 2,
+    "navigation_bytes_emitted": 78407,
+    "B_generation_ns": 6464796830,
+    "B_generation_verification_ns": 14428678
+  },
+  {
+    "n": 1000,
+    "mode": "B",
+    "profile": 4,
+    "case": "high-degree-title",
+    "prepare_seconds": 9.692021826,
+    "select_seconds": 0.263105838,
+    "refresh_seconds": null,
+    "replay_objects": 6,
+    "replay_files": 5,
+    "oracle_seconds": 0.12642161222174764,
+    "changed_paths": [
+      "navigation/groups/0.yaml"
+    ],
+    "navigation_changed_paths": [
+      "navigation/groups/0.yaml"
+    ],
+    "document_visits": 511,
+    "edge_visits": 132,
+    "range_rows": {
+      "E": 132,
+      "navigation": 0
+    },
+    "range_leaf_pairs": {
+      "E": 21544,
+      "navigation": 46
+    },
+    "range_page_visits": {
+      "E": 1533,
+      "navigation": 2
+    },
+    "parts_emitted": 3,
+    "navigation_bytes_emitted": 88619,
+    "B_generation_ns": 9355547476,
+    "B_generation_verification_ns": 16024204
+  },
+  {
+    "n": 128,
+    "mode": "A",
+    "profile": 4,
+    "case": "single-payload",
+    "prepare_seconds": 0.233401611,
+    "select_seconds": 0.142396543,
+    "refresh_seconds": 0.0580815,
+    "replay_objects": 5,
+    "replay_files": 3,
+    "oracle_seconds": 0.01962737925350666,
+    "changed_paths": [
+      "docs/item-con--d000004.md"
+    ],
+    "navigation_changed_paths": [],
+    "document_visits": 1,
+    "edge_visits": 0,
+    "range_rows": {
+      "P": 0,
+      "docs": 0
+    },
+    "range_leaf_pairs": {
+      "P": 64,
+      "docs": 64
+    },
+    "range_page_visits": {
+      "P": 2,
+      "docs": 2
+    },
+    "parts_emitted": 0,
+    "navigation_bytes_emitted": 0,
+    "B_generation_ns": null,
+    "B_generation_verification_ns": null
+  },
+  {
+    "n": 128,
+    "mode": "A",
+    "profile": 4,
+    "case": "single-title",
+    "prepare_seconds": 0.202618177,
+    "select_seconds": 0.154150791,
+    "refresh_seconds": 0.059558418,
+    "replay_objects": 5,
+    "replay_files": 4,
+    "oracle_seconds": 0.019664608407765627,
+    "changed_paths": [
+      "navigation/groups/root.yaml"
+    ],
+    "navigation_changed_paths": [
+      "navigation/groups/root.yaml"
+    ],
+    "document_visits": 129,
+    "edge_visits": 4,
+    "range_rows": {
+      "E": 4,
+      "navigation": 0
+    },
+    "range_leaf_pairs": {
+      "E": 4096,
+      "navigation": 4
+    },
+    "range_page_visits": {
+      "E": 256,
+      "navigation": 2
+    },
+    "parts_emitted": 2,
+    "navigation_bytes_emitted": 19980,
+    "B_generation_ns": null,
+    "B_generation_verification_ns": null
+  },
+  {
+    "n": 128,
+    "mode": "A",
+    "profile": 4,
+    "case": "high-degree-title",
+    "prepare_seconds": 0.217767688,
+    "select_seconds": 0.14306798,
+    "refresh_seconds": 0.058072874,
+    "replay_objects": 5,
+    "replay_files": 5,
+    "oracle_seconds": 0.021114903036504984,
+    "changed_paths": [
+      "navigation/groups/root.yaml"
+    ],
+    "navigation_changed_paths": [
+      "navigation/groups/root.yaml"
+    ],
+    "document_visits": 129,
+    "edge_visits": 136,
+    "range_rows": {
+      "E": 136,
+      "navigation": 0
+    },
+    "range_leaf_pairs": {
+      "E": 5499,
+      "navigation": 5
+    },
+    "range_page_visits": {
+      "E": 259,
+      "navigation": 2
+    },
+    "parts_emitted": 3,
+    "navigation_bytes_emitted": 30386,
+    "B_generation_ns": null,
+    "B_generation_verification_ns": null
+  },
+  {
+    "n": 128,
+    "mode": "B",
+    "profile": 4,
+    "case": "single-payload",
+    "prepare_seconds": 1.196157428,
+    "select_seconds": 0.150178013,
+    "refresh_seconds": null,
+    "replay_objects": 5,
+    "replay_files": 3,
+    "oracle_seconds": 0.020693214144557714,
+    "changed_paths": [
+      "docs/item-con--d000004.md"
+    ],
+    "navigation_changed_paths": [],
+    "document_visits": 1,
+    "edge_visits": 0,
+    "range_rows": {
+      "P": 0,
+      "docs": 0
+    },
+    "range_leaf_pairs": {
+      "P": 64,
+      "docs": 64
+    },
+    "range_page_visits": {
+      "P": 2,
+      "docs": 2
+    },
+    "parts_emitted": 0,
+    "navigation_bytes_emitted": 0,
+    "B_generation_ns": 998296647,
+    "B_generation_verification_ns": 7336306
+  },
+  {
+    "n": 128,
+    "mode": "B",
+    "profile": 4,
+    "case": "single-title",
+    "prepare_seconds": 1.106571554,
+    "select_seconds": 0.147561149,
+    "refresh_seconds": null,
+    "replay_objects": 5,
+    "replay_files": 4,
+    "oracle_seconds": 0.020173984114080667,
+    "changed_paths": [
+      "navigation/groups/root.yaml"
+    ],
+    "navigation_changed_paths": [
+      "navigation/groups/root.yaml"
+    ],
+    "document_visits": 129,
+    "edge_visits": 4,
+    "range_rows": {
+      "E": 4,
+      "navigation": 0
+    },
+    "range_leaf_pairs": {
+      "E": 4096,
+      "navigation": 4
+    },
+    "range_page_visits": {
+      "E": 256,
+      "navigation": 2
+    },
+    "parts_emitted": 2,
+    "navigation_bytes_emitted": 19980,
+    "B_generation_ns": 914345958,
+    "B_generation_verification_ns": 1649981
+  },
+  {
+    "n": 128,
+    "mode": "B",
+    "profile": 4,
+    "case": "high-degree-title",
+    "prepare_seconds": 1.170639481,
+    "select_seconds": 0.15621327,
+    "refresh_seconds": null,
+    "replay_objects": 5,
+    "replay_files": 5,
+    "oracle_seconds": 0.021474311593919992,
+    "changed_paths": [
+      "navigation/groups/root.yaml"
+    ],
+    "navigation_changed_paths": [
+      "navigation/groups/root.yaml"
+    ],
+    "document_visits": 129,
+    "edge_visits": 136,
+    "range_rows": {
+      "E": 136,
+      "navigation": 0
+    },
+    "range_leaf_pairs": {
+      "E": 5499,
+      "navigation": 5
+    },
+    "range_page_visits": {
+      "E": 259,
+      "navigation": 2
+    },
+    "parts_emitted": 3,
+    "navigation_bytes_emitted": 30386,
+    "B_generation_ns": 951465812,
+    "B_generation_verification_ns": 2542020
+  }
+]

@@ -1,0 +1,13 @@
+{"n": 1000, "mode": "A", "profile": 4, "case": "single-payload", "prepare_s": 0.188894989, "navigation_parts": 0, "D_rows": 0, "E_rows": 0, "changed_paths": 1}
+{"n": 1000, "mode": "A", "profile": 4, "case": "batch-payload", "prepare_s": 0.653436313, "navigation_parts": 0, "D_rows": 0, "E_rows": 0, "changed_paths": 8}
+{"n": 1000, "mode": "A", "profile": 4, "case": "label", "prepare_s": 0.200245952, "navigation_parts": 0, "D_rows": 0, "E_rows": 0, "changed_paths": 0}
+{"n": 1000, "mode": "A", "profile": 4, "case": "single-title", "prepare_s": 0.261532454, "navigation_parts": 2, "D_rows": 0, "E_rows": 2, "changed_paths": 1}
+{"n": 1000, "mode": "A", "profile": 4, "case": "batch-title", "prepare_s": 0.528910401, "navigation_parts": 4, "D_rows": 0, "E_rows": 4, "changed_paths": 2}
+{"n": 1000, "mode": "A", "profile": 4, "case": "path", "prepare_s": 0.363934722, "navigation_parts": 2, "D_rows": 0, "E_rows": 2, "changed_paths": 3}
+{"n": 1000, "mode": "A", "profile": 4, "case": "relations", "prepare_s": 0.305806092, "navigation_parts": 2, "D_rows": 0, "E_rows": 4, "changed_paths": 1}
+{"n": 1000, "mode": "A", "profile": 4, "case": "high-degree", "prepare_s": 0.574232474, "navigation_parts": 3, "D_rows": 0, "E_rows": 132, "changed_paths": 2}
+{"n": 1000, "mode": "A", "profile": 4, "case": "high-degree-title", "prepare_s": 0.258817326, "navigation_parts": 3, "D_rows": 0, "E_rows": 132, "changed_paths": 1}
+{"n": 1000, "mode": "A", "profile": 4, "case": "split", "prepare_s": 2.728229986, "navigation_parts": 4, "D_rows": 0, "E_rows": 132, "changed_paths": 131}
+{"n": 1000, "mode": "A", "profile": 4, "case": "merge", "prepare_s": 1.11421451, "navigation_parts": 3, "D_rows": 0, "E_rows": 132, "changed_paths": 131}
+{"n": 1000, "mode": "A", "profile": 4, "case": "external-edit", "prepare_s": 0.343823218, "navigation_parts": 3, "D_rows": 0, "E_rows": 132, "changed_paths": 3}
+{"n": 1000, "mode": "A", "profile": 4, "case": "delete", "prepare_s": 0.351616723, "navigation_parts": 2, "D_rows": 0, "E_rows": 4, "changed_paths": 2}

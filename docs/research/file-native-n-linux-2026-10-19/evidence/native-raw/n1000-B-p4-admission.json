@@ -1,0 +1,16 @@
+{
+  "cell": "n1000-B-p4",
+  "current": {
+    "root": "/home/spenser/file-native-n-linux-20261019",
+    "files": 10746,
+    "logical_bytes": 251011724,
+    "links_excluded": 0,
+    "seconds": 0.051164594013243914
+  },
+  "forecast_additional_bytes": 105201664,
+  "additional_total_bound": 389767820,
+  "local_and_return_allowance_bytes": 33554432,
+  "new_file_forecast": 24746,
+  "global_parent_forecast_bytes": 40828300920,
+  "global_parent_forecast_files": 4282696
+}

@@ -1,0 +1,5 @@
+{
+  "gitnexus": "Cached direct detect-changes refused the unregistered worktree; raw stderr retained. No bootstrap or package-manager resolution attempted.",
+  "temporary_monitor_lookup": "A read of /proc/249653/status after the original supervisor completed returned No such file or directory. That supervisor high-water measurement is missing, never zero.",
+  "inline_metrics_read": "A PowerShell command containing nested SSH/Python shell quoting was rejected by the local parser (Missing opening parenthesis after keyword for). No remote qualification ran from that command. A separately bound collect_metrics.py replaces the inspection command."
+}

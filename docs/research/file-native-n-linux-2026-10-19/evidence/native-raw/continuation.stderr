@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/spenser/file-native-n-linux-20261019/continue_native.py", line 7, in <module>
+    s.stage('matrix-controller',[sys.executable,str(s.BASE/'matrix_native.py')],1800,checker=True)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/spenser/file-native-n-linux-20261019/supervise.py", line 61, in stage
+    if reason or p.returncode:raise RuntimeError(row)
+                              ^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: {'stage': 'matrix-controller', 'args': ['/usr/bin/python3', '/home/spenser/file-native-n-linux-20261019/matrix_native.py'], 'cwd': '/home/spenser/file-native-n-linux-20261019', 'start_epoch': 1792450781.7085156, 'end_epoch': 1792451209.0717263, 'seconds': 427.36321091651917, 'exit': -9, 'censor': None, 'peak_aggregate_rss': 20156416, 'peak_single_process_rss': 20156416, 'samples': 7628, 'missing_measurement': False, 'outer_cap_seconds': 1800, 'checker': True, 'owned_after': {'root': '/home/spenser/file-native-n-linux-20261019', 'files': 12647, 'logical_bytes': 275902674, 'links_excluded': 0, 'seconds': 0.057680977042764425}}

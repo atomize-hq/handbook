@@ -1,0 +1,22 @@
+{
+  "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+  "selected": {
+    "publication": "publication-253065-1792450770681631288-6",
+    "digest": "e850eb799f41d9e22af83a003f1450e09c9a6f41dfd50fd38979839c242076d4"
+  },
+  "publications": 7,
+  "ledger_rows": 0,
+  "permanent_digest": "0af4b970e52a3b9066b04414a8475ff8d1c8d69cf8edf57f252d974eb86543dd",
+  "retired_publications": 1,
+  "retired_content": "unavailable-by-contract",
+  "unique_content_roots": 6,
+  "root_visits": 7,
+  "sources": 31,
+  "pins": 0,
+  "reservations": 0,
+  "packets": 1,
+  "generations": 0,
+  "conservative_cumulative_owner_allowance_bytes": 678701184,
+  "actual_physical_owner_bytes": false,
+  "seconds": 0.018895672168582678
+}

@@ -1,0 +1,392 @@
+[
+  {
+    "cell": "n128-A-p4",
+    "summary": {
+      "status": "success",
+      "n": 128,
+      "mode": "A",
+      "profile": 4,
+      "cases": 13,
+      "seconds": 19.389626698102802,
+      "fixture": "/home/spenser/file-native-n-linux-20261019/matrix/n128-A-p4/cell/disposable/store",
+      "final": {
+        "root": "/home/spenser/file-native-n-linux-20261019/matrix/n128-A-p4/cell/disposable/store",
+        "epoch": 1792450801.199741,
+        "seconds": 0.006350079085677862,
+        "categories": {
+          "(root-files)": {
+            "files": 8,
+            "logical_bytes": 1233,
+            "allocated_file_bytes": 24576
+          },
+          "retired": {
+            "files": 13,
+            "logical_bytes": 1861,
+            "allocated_file_bytes": 53248
+          },
+          "objects": {
+            "files": 34,
+            "logical_bytes": 187300,
+            "allocated_file_bytes": 241664
+          },
+          "publications": {
+            "files": 14,
+            "logical_bytes": 18150,
+            "allocated_file_bytes": 57344
+          },
+          "attempts": {
+            "files": 2,
+            "logical_bytes": 2918,
+            "allocated_file_bytes": 8192
+          },
+          "derived": {
+            "files": 5,
+            "logical_bytes": 30328,
+            "allocated_file_bytes": 40960
+          },
+          "attempt-hints": {
+            "files": 14,
+            "logical_bytes": 2004,
+            "allocated_file_bytes": 57344
+          },
+          "originals": {
+            "files": 127,
+            "logical_bytes": 1564784,
+            "allocated_file_bytes": 1597440
+          },
+          "view": {
+            "files": 132,
+            "logical_bytes": 1595112,
+            "allocated_file_bytes": 1638400
+          },
+          "results": {
+            "files": 14,
+            "logical_bytes": 14884,
+            "allocated_file_bytes": 65536
+          },
+          "divergence": {
+            "files": 1,
+            "logical_bytes": 28,
+            "allocated_file_bytes": 4096
+          }
+        },
+        "files": 364,
+        "logical_bytes": 3418602,
+        "allocated_file_bytes": 3788800,
+        "free_bytes": 42049884160,
+        "conservative_publication_owner_bytes": null,
+        "owner_records": null,
+        "observed_reservations": {},
+        "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "conservative_active_reserved_bytes": 0,
+        "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+      },
+      "exe_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e"
+    },
+    "successful_disposable_fixture_removed": true,
+    "removed_census": {
+      "root": "/home/spenser/file-native-n-linux-20261019/matrix/n128-A-p4/cell/disposable/store",
+      "files": 364,
+      "logical_bytes": 3418602,
+      "links_excluded": 0,
+      "seconds": 0.00269493879750371
+    },
+    "owned_after": {
+      "root": "/home/spenser/file-native-n-linux-20261019",
+      "files": 10727,
+      "logical_bytes": 249379976,
+      "links_excluded": 0,
+      "seconds": 0.05327810486778617
+    }
+  },
+  {
+    "cell": "n128-B-p4",
+    "summary": {
+      "status": "success",
+      "n": 128,
+      "mode": "B",
+      "profile": 4,
+      "cases": 13,
+      "seconds": 37.87705594114959,
+      "fixture": "/home/spenser/file-native-n-linux-20261019/matrix/n128-B-p4/cell/disposable/store",
+      "final": {
+        "root": "/home/spenser/file-native-n-linux-20261019/matrix/n128-B-p4/cell/disposable/store",
+        "epoch": 1792450839.3288522,
+        "seconds": 0.007139119785279036,
+        "categories": {
+          "(root-files)": {
+            "files": 7,
+            "logical_bytes": 746,
+            "allocated_file_bytes": 20480
+          },
+          "generations": {
+            "files": 133,
+            "logical_bytes": 1629432,
+            "allocated_file_bytes": 1675264
+          },
+          "retired": {
+            "files": 13,
+            "logical_bytes": 1861,
+            "allocated_file_bytes": 53248
+          },
+          "objects": {
+            "files": 34,
+            "logical_bytes": 187300,
+            "allocated_file_bytes": 241664
+          },
+          "publications": {
+            "files": 14,
+            "logical_bytes": 19031,
+            "allocated_file_bytes": 57344
+          },
+          "attempts": {
+            "files": 2,
+            "logical_bytes": 2980,
+            "allocated_file_bytes": 8192
+          },
+          "derived": {
+            "files": 5,
+            "logical_bytes": 30328,
+            "allocated_file_bytes": 40960
+          },
+          "attempt-hints": {
+            "files": 14,
+            "logical_bytes": 2004,
+            "allocated_file_bytes": 57344
+          },
+          "originals": {
+            "files": 127,
+            "logical_bytes": 1564784,
+            "allocated_file_bytes": 1597440
+          },
+          "results": {
+            "files": 14,
+            "logical_bytes": 14884,
+            "allocated_file_bytes": 65536
+          }
+        },
+        "files": 363,
+        "logical_bytes": 3453350,
+        "allocated_file_bytes": 3817472,
+        "free_bytes": 42047901696,
+        "conservative_publication_owner_bytes": null,
+        "owner_records": null,
+        "observed_reservations": {},
+        "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "conservative_active_reserved_bytes": 0,
+        "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+      },
+      "exe_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e"
+    },
+    "successful_disposable_fixture_removed": true,
+    "removed_census": {
+      "root": "/home/spenser/file-native-n-linux-20261019/matrix/n128-B-p4/cell/disposable/store",
+      "files": 363,
+      "logical_bytes": 3453350,
+      "links_excluded": 0,
+      "seconds": 0.003441436216235161
+    },
+    "owned_after": {
+      "root": "/home/spenser/file-native-n-linux-20261019",
+      "files": 10740,
+      "logical_bytes": 250085401,
+      "links_excluded": 0,
+      "seconds": 0.052555776201188564
+    }
+  },
+  {
+    "cell": "n1000-A-p4",
+    "summary": {
+      "status": "success",
+      "n": 1000,
+      "mode": "A",
+      "profile": 4,
+      "cases": 13,
+      "seconds": 55.43232332309708,
+      "fixture": "/home/spenser/file-native-n-linux-20261019/matrix/n1000-A-p4/cell/disposable/store",
+      "final": {
+        "root": "/home/spenser/file-native-n-linux-20261019/matrix/n1000-A-p4/cell/disposable/store",
+        "epoch": 1792450895.0044878,
+        "seconds": 0.03171920496970415,
+        "categories": {
+          "(root-files)": {
+            "files": 8,
+            "logical_bytes": 1234,
+            "allocated_file_bytes": 24576
+          },
+          "retired": {
+            "files": 13,
+            "logical_bytes": 1862,
+            "allocated_file_bytes": 53248
+          },
+          "objects": {
+            "files": 89,
+            "logical_bytes": 1022609,
+            "allocated_file_bytes": 1142784
+          },
+          "publications": {
+            "files": 14,
+            "logical_bytes": 18165,
+            "allocated_file_bytes": 57344
+          },
+          "attempts": {
+            "files": 2,
+            "logical_bytes": 2911,
+            "allocated_file_bytes": 8192
+          },
+          "derived": {
+            "files": 6,
+            "logical_bytes": 163877,
+            "allocated_file_bytes": 180224
+          },
+          "attempt-hints": {
+            "files": 14,
+            "logical_bytes": 2005,
+            "allocated_file_bytes": 57344
+          },
+          "originals": {
+            "files": 999,
+            "logical_bytes": 12693616,
+            "allocated_file_bytes": 12726272
+          },
+          "view": {
+            "files": 1005,
+            "logical_bytes": 12857493,
+            "allocated_file_bytes": 12906496
+          },
+          "results": {
+            "files": 14,
+            "logical_bytes": 28023,
+            "allocated_file_bytes": 77824
+          },
+          "divergence": {
+            "files": 1,
+            "logical_bytes": 28,
+            "allocated_file_bytes": 4096
+          }
+        },
+        "files": 2165,
+        "logical_bytes": 26791823,
+        "allocated_file_bytes": 27238400,
+        "free_bytes": 42023030784,
+        "conservative_publication_owner_bytes": null,
+        "owner_records": null,
+        "observed_reservations": {},
+        "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "conservative_active_reserved_bytes": 0,
+        "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+      },
+      "exe_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e"
+    },
+    "successful_disposable_fixture_removed": true,
+    "removed_census": {
+      "root": "/home/spenser/file-native-n-linux-20261019/matrix/n1000-A-p4/cell/disposable/store",
+      "files": 2165,
+      "logical_bytes": 26791823,
+      "links_excluded": 0,
+      "seconds": 0.006768574006855488
+    },
+    "owned_after": {
+      "root": "/home/spenser/file-native-n-linux-20261019",
+      "files": 10746,
+      "logical_bytes": 251007075,
+      "links_excluded": 0,
+      "seconds": 0.0518911792896688
+    }
+  },
+  {
+    "cell": "n1000-B-p4",
+    "summary": {
+      "status": "success",
+      "n": 1000,
+      "mode": "B",
+      "profile": 4,
+      "cases": 13,
+      "seconds": 260.6237971759401,
+      "fixture": "/home/spenser/file-native-n-linux-20261019/matrix/n1000-B-p4/cell/disposable/store",
+      "final": {
+        "root": "/home/spenser/file-native-n-linux-20261019/matrix/n1000-B-p4/cell/disposable/store",
+        "epoch": 1792451155.9067085,
+        "seconds": 0.03387252613902092,
+        "categories": {
+          "(root-files)": {
+            "files": 7,
+            "logical_bytes": 747,
+            "allocated_file_bytes": 20480
+          },
+          "generations": {
+            "files": 1006,
+            "logical_bytes": 13122577,
+            "allocated_file_bytes": 13172736
+          },
+          "retired": {
+            "files": 13,
+            "logical_bytes": 1862,
+            "allocated_file_bytes": 53248
+          },
+          "objects": {
+            "files": 89,
+            "logical_bytes": 1022609,
+            "allocated_file_bytes": 1142784
+          },
+          "publications": {
+            "files": 14,
+            "logical_bytes": 19046,
+            "allocated_file_bytes": 57344
+          },
+          "attempts": {
+            "files": 2,
+            "logical_bytes": 2973,
+            "allocated_file_bytes": 8192
+          },
+          "derived": {
+            "files": 6,
+            "logical_bytes": 163877,
+            "allocated_file_bytes": 180224
+          },
+          "attempt-hints": {
+            "files": 14,
+            "logical_bytes": 2005,
+            "allocated_file_bytes": 57344
+          },
+          "originals": {
+            "files": 999,
+            "logical_bytes": 12693616,
+            "allocated_file_bytes": 12726272
+          },
+          "results": {
+            "files": 14,
+            "logical_bytes": 28023,
+            "allocated_file_bytes": 77824
+          }
+        },
+        "files": 2164,
+        "logical_bytes": 27057335,
+        "allocated_file_bytes": 27496448,
+        "free_bytes": 42018979840,
+        "conservative_publication_owner_bytes": null,
+        "owner_records": null,
+        "observed_reservations": {},
+        "reservation_registry_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "conservative_active_reserved_bytes": 0,
+        "qualification": "Actual file-length sum, not content-hash deduplication or filesystem metadata/physical write amplification. Conservative ownership includes intermediates/stages and overcounts shared or collected storage; it is separate from active candidate admission and actual bytes. Preparing reservation used=0 does not mean zero physical writes: its full allowance remains charged until sealed transfer or fenced deletion."
+      },
+      "exe_sha256": "5295ce01770f9c4ba8b88bd4848f745c23c327ca78d6cd1a80770c2e1b69e89e"
+    },
+    "successful_disposable_fixture_removed": true,
+    "removed_census": {
+      "root": "/home/spenser/file-native-n-linux-20261019/matrix/n1000-B-p4/cell/disposable/store",
+      "files": 2164,
+      "logical_bytes": 27057335,
+      "links_excluded": 0,
+      "seconds": 0.007625437807291746
+    },
+    "owned_after": {
+      "root": "/home/spenser/file-native-n-linux-20261019",
+      "files": 10764,
+      "logical_bytes": 252107937,
+      "links_excluded": 0,
+      "seconds": 0.05612946208566427
+    }
+  }
+]
