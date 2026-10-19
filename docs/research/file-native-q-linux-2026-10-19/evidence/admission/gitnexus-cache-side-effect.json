@@ -1,0 +1,10 @@
+{
+  "status": "complete",
+  "root": "C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc",
+  "files": 346316,
+  "logical_bytes": 24163472108,
+  "reparse_entries_skipped": 14317,
+  "seconds": 9.077999999979511,
+  "remaining_dirs": 0,
+  "note": "GitNexus launcher initialized cache via pnpm dlx and query then failed argument parsing. This path may be shared with N launcher residue; coordinator must deduplicate exact roots. No deletion or further launcher retries. Initial naive census terminated; second20s census censored; neither yielded complete count."
+}

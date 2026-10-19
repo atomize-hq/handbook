@@ -1,0 +1,11 @@
+{
+  "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+  "filesystem": "ext4 rw,noatime\n",
+  "rust": "rustc 1.89.0 (29483883e 2025-08-04)\nbinary: rustc\ncommit-hash: 29483883eed69d5fb4db01964cdf2af4d86e9cb2\ncommit-date: 2025-08-04\nhost: x86_64-unknown-linux-gnu\nrelease: 1.89.0\nLLVM version: 20.1.7\n",
+  "cargo": "cargo 1.89.0 (c24e10642 2025-06-23)\n",
+  "initial": {
+    "files": 100,
+    "logical_bytes": 989435,
+    "free_bytes": 46366552064
+  }
+}

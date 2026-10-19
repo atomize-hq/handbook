@@ -1,0 +1,7 @@
+Command: node .gitnexus/run.cjs query 'file native recovery immutable installation lock lifecycle'
+Exit: 1
+Runner unexpectedly bootstrapped pnpm dlx: Packages: +250; build-tree-sitter-grammars postinstall completed.
+WARN Unsupported engine: wanted node ^22.18.0 || >=24.11.0; current node v22.15.0 / pnpm10.15.1.
+error: too many arguments for 'query'. Expected 1 argument but got7: file, native, recovery, immutable, installation, lock, lifecycle.
+No query/impact coverage obtained. No retry/bootstrap/deletion followed.
+The shared cache root's complete reparse-pruned census is24163472108 logical bytes /346316 files. This is a current root census, not a measured before-after increment; no pre-launch cache census exists. Coordinate exact-root deduplication with N before attributing newly owned bytes. Hardlinked paths may contribute repeated logical lengths. Preserve residue and original failure.

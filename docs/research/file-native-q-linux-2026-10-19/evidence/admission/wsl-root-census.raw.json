@@ -1,0 +1,96 @@
+{
+  "kind": "read-only-wsl-census-not-native-qualification",
+  "epoch": 1792442550.5740032,
+  "free_bytes": 516225916928,
+  "totals": {
+    "files": 1837621,
+    "logical_bytes": 25395652281,
+    "allocated_file_bytes": 25715208192
+  },
+  "roots": [
+    {
+      "root": "/home/spenser/file-native-followup-20261017",
+      "files": 1768175,
+      "logical_bytes": 23402002010,
+      "allocated_file_bytes": 23610359808
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-budget-probe",
+      "files": 7,
+      "logical_bytes": 266996,
+      "allocated_file_bytes": 290816
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-5a65a21",
+      "files": 694,
+      "logical_bytes": 27435868,
+      "allocated_file_bytes": 29065216
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-7ac70f9",
+      "files": 375,
+      "logical_bytes": 6940780,
+      "allocated_file_bytes": 7749632
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-7e00d22",
+      "files": 444,
+      "logical_bytes": 9072512,
+      "allocated_file_bytes": 10043392
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-a1108c6",
+      "files": 53,
+      "logical_bytes": 404920,
+      "allocated_file_bytes": 536576
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-f3e942f",
+      "files": 49,
+      "logical_bytes": 392763,
+      "allocated_file_bytes": 520192
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-wsl-accounting-evidence",
+      "files": 25,
+      "logical_bytes": 1193107,
+      "allocated_file_bytes": 1273856
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-wsl-accounting-final",
+      "files": 9037,
+      "logical_bytes": 418743425,
+      "allocated_file_bytes": 437587968
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-wsl-audit-final",
+      "files": 2395,
+      "logical_bytes": 374269828,
+      "allocated_file_bytes": 379781120
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-wsl-export-native-wsl-audit",
+      "files": 14,
+      "logical_bytes": 316923,
+      "allocated_file_bytes": 360448
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-wsl-export-native-wsl-main",
+      "files": 76,
+      "logical_bytes": 3467632,
+      "allocated_file_bytes": 3682304
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-wsl-final-20261018",
+      "files": 25756,
+      "logical_bytes": 517579829,
+      "allocated_file_bytes": 571105280
+    },
+    {
+      "root": "/home/spenser/file-native-recovery-20261019",
+      "files": 30521,
+      "logical_bytes": 633565688,
+      "allocated_file_bytes": 662851584
+    }
+  ]
+}
