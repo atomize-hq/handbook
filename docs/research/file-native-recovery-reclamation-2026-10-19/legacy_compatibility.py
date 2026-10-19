@@ -2,7 +2,7 @@
 import argparse,hashlib,json,os,shutil,subprocess
 from pathlib import Path
 from oracle import verify
-a=argparse.ArgumentParser();a.add_argument('--exe',required=True);a.add_argument('--fixtures',required=True);a.add_argument('--base',required=True);a.add_argument('--create',action='store_true');ns=a.parse_args();base=Path(ns.base);base.mkdir(parents=True,exist_ok=False);rows=[]
+a=argparse.ArgumentParser();a.add_argument('--exe',required=True);a.add_argument('--fixtures',required=True);a.add_argument('--base',required=True);a.add_argument('--create',action='store_true');a.add_argument('--packet',action='store_true');ns=a.parse_args();base=Path(ns.base);base.mkdir(parents=True,exist_ok=False);rows=[]
 for mode in ['A','B']:
  root=base/mode
  if not ns.create:shutil.copytree(Path(ns.fixtures)/mode,root)
@@ -12,7 +12,7 @@ for mode in ['A','B']:
   p=subprocess.run([ns.exe],input=json.dumps(dict(root=str(root),action=action,**fields)).encode(),capture_output=True,timeout=120,env=env);assert p.returncode==code,(p.returncode,p.stdout,p.stderr);return json.loads(p.stdout)['result']
  if ns.create:
   call('init',mode=mode,count=16,consumer='project')
-  candidate=call('prepare',request=dict(request='legacy-eligible',base=None,ops=[],packet=False))['candidate'];(root/'FIXTURE-CANDIDATE.json').write_text(json.dumps(candidate));continue
+  candidate=call('prepare',request=dict(request='legacy-eligible',base=None,ops=[],packet=ns.packet))['candidate'];(root/'FIXTURE-CANDIDATE.json').write_text(json.dumps(candidate));continue
  old=call('inspect')['selected'];old_bytes=(root/f"publications/{old['publication']}.json").read_bytes();call('audit')
  if mode=='A':call('resume')
  call('select',candidate=json.loads((root/'FIXTURE-CANDIDATE.json').read_bytes()))

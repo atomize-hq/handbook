@@ -4,16 +4,22 @@ Standalone experimental engine; no Handbook production integration. Parent sourc
 3396092cbf20f593e36b9640c6a76e5afd2f2a09 has identical Rust/Cargo bytes to
 5a65a2155f9eb297d2cbb1b7c900fa749629605c. The shared checkout is untouched.
 
-Navigation version is store-owned experimental configuration. Missing
-`navigation_version` means the explicit frozen legacy profile 1, preserving its
-existing hashes, pure candidate replay and audit renderer. New stores use profile
-2: exact authored files, existing packet files and one `collection.yaml` for
+Navigation profile is identified by the immutable projection namespace:
+`collection.yaml` identifies profile 2; its absence identifies frozen legacy
+profile 1. The store's optional `navigation_version` records its initialization
+profile (missing means 1). Historical readers and already-sealed legacy
+preparations preserve existing hashes and pure candidate replay. Every new
+ordinary preparation targets profile 2, including when its base is legacy; only
+the new target changes. A checkpoint carries its selected snapshot unchanged.
+Profile 2 supplies exact authored files, existing packet files and one `collection.yaml` for
 stable identity, current title/kind/location and directed ordered relationships.
 There are no generated Markdown navigation files or compulsory document guides
 in profile 2. JSON-quoted YAML scalars preserve arbitrary fixture strings. This
 small collection map deliberately performs whole-collection metadata work; large
-layout/performance competition is outside this unit. Legacy stores remain a
-versioned compatibility lane, not an implicit history rewrite or migration.
+layout/performance competition is outside this unit. Existing historical roots
+are never rewritten. New standalone packets use existing provenance/source files
+without an additional navigation guide; sealed legacy packet preparations replay
+against their original retained manifests.
 The independent legacy verifier now rejects dangling root destinations. A full
 logical graph export and packet composition are separate from this discovery map.
 

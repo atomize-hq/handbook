@@ -7,6 +7,9 @@ for directory,names in [('small',['summary.json','events.json']),('oracle-small-
 files.extend(root/'backup-pipeline'/name for name in ['summary.json','events.json'])
 files.extend(root/'final-core-small'/name for name in ['summary.json','events.json'])
 files.extend(root/'final-core-extra'/name for name in ['extra.json','events.jsonl','session.json','session-source.zip'])
+files.extend(root/'compatible-legacy'/name for name in ['legacy-compatibility.json'])
+files.extend(root/'compatible-extra'/name for name in ['extra.json','events.jsonl','session.json','session-source.zip'])
+files.extend(root/'compatible-small'/name for name in ['summary.json','events.json'])
 with tarfile.open(ns.output,'w:gz',compresslevel=1) as archive:
     for p in files:
         if p.is_file():archive.add(p,arcname=str(p.relative_to(root)))

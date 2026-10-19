@@ -18,6 +18,13 @@ Required findings corrected before the source pin:
 - A first backup-test attempt used refresh on an already-current watermark and
   therefore reached no interruption hook. The corrected test uses explicit resume;
   the original failed attempt is retained.
+- Preserving a directory at one fixed backup name could block replay if a user
+  recreated it after an exit. Each incarnation now receives a distinct retained
+  path. The changed-phase regression recreates the obstruction before resume.
+- Per-store-only format routing would keep producing legacy Markdown after new
+  edits to an old store. Routing now binds the reader to the immutable projection
+  profile, replays sealed legacy candidates in their original profile, and targets
+  YAML for every new ordinary preparation. Historical objects stay unchanged.
 
 Regression evidence covers namespace replay and corrections, divergent files and
 subtrees, semantic discovery/membership, relationship direction/type/order and
@@ -27,8 +34,9 @@ intent and packet-owner protection across checkpoint/retirement/collection.
 
 Known bounded tradeoff: profile-2 metadata rendering is O(N) into one YAML map.
 This is acceptable for the assigned small surface, not a large-N performance
-claim. Legacy compatibility intentionally retains the old renderer; no historical
-Markdown or stored hashes are rewritten. Hostile external namespace/root swaps,
+claim. Legacy compatibility intentionally retains the old reader/replay renderer;
+new targets use profile 2 and historical Markdown/stored hashes are unchanged.
+Hostile external namespace/root swaps,
 power-loss durability and generalized restore security remain outside this
 cooperating experimental contract.
 

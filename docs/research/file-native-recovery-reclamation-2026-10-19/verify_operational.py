@@ -20,7 +20,7 @@ def checked(path,h):
 def verify(root,baseline=None):
     root=Path(root);start=time.monotonic();config=json.loads((root/'STORE.json').read_bytes());selected=json.loads((root/'SELECTED.json').read_bytes());s=selected;chain={};outcomes={};content=set();results={};sources=set();roots=0;permanent=hashlib.sha256();retired=[];packets=set();generations=[]
     base=json.loads(Path(baseline).read_bytes()) if baseline else None;tail=hashlib.sha256();tail_count=0;tail_started=False
-    expected_sequence=None
+    expected_sequence=None;owner_bytes=0;graph_contracts={}
     pool=ThreadPoolExecutor(max_workers=4);pending=deque()
     def result_body(s,p):
         body=json.loads(checked(root/f"results/{p['result_hash']}.json",p['result_hash']))
@@ -31,6 +31,8 @@ def verify(root,baseline=None):
     while s:
         assert len(chain)<200001 and s['publication'] not in chain
         p=json.loads(checked(root/f"publications/{s['publication']}.json",s['digest']));assert p['store_id']==config['store_id'] and p['id']==s['publication'] and p['version']==1
+        owner=p['allocation_owner'];assert owner['attempt']==p['attempt'] and owner['includes_intermediates_and_stages'];owner_bytes+=owner['conservative_bytes']
+        g=p['graph'];assert g['version']==1 and g['consumer']==config['consumer'];graph_contracts.setdefault(g['tree'],set()).add((g['count'],g['cost'],g['budget']))
         if expected_sequence is not None:assert p['sequence']==expected_sequence
         pending.append(pool.submit(result_body,s,p))
         if len(pending)>=256:finish_one()
@@ -94,6 +96,9 @@ def verify(root,baseline=None):
     # Full independent graph indexes from exact header + ordered-edge identities.
     for graph,projection in sorted(content,key=str):
         entries=Tree(root).entries(graph);expected={};docs={k[2:]:v for k,v in entries.items() if k.startswith('D/')}
+        assert len({h['doc']['path'].lower() for h in docs.values()})==len(docs)
+        labels=[h['doc']['label'] for h in docs.values() if h['doc']['label'] is not None];assert len(set(labels))==len(labels)
+        for count,cost,budget in graph_contracts.get(graph,[]):assert len(docs)==count and sum(h['doc']['cost'] for h in docs.values())==cost and cost<=budget
         for id,h in docs.items():
             d=h['doc'];assert d['id']==id and d['edges']==[];expected['D/'+id]=h;expected['P/'+d['path'].lower()]=id
             if d['label'] is not None:expected['L/'+d['label']]=id
@@ -113,7 +118,7 @@ def verify(root,baseline=None):
     for attempt,h,projection in generations:
         base=root/f'generations/{attempt}';manifest=json.loads(checked(base/'MANIFEST.json',h));assert manifest==Tree(root).entries(projection)
         for path,f in manifest.items():checked(base/path,f['digest'])
-    return dict(profile='all-accepted-membership-outcomes-retained-graph-projection-sources-controls',selected=selected,publications=len(chain),ledger_rows=ledger_rows,permanent_digest=permanent_digest,retired_publications=len(retired),retired_content='unavailable-by-contract' if retired else 'none',unique_content_roots=roots,root_visits=len(chain),sources=len(sources),pins=len(pins),reservations=len(reservations),packets=len(packets),generations=len(generations),seconds=time.monotonic()-start)
+    return dict(profile='all-accepted-membership-outcomes-retained-graph-projection-sources-controls',selected=selected,publications=len(chain),ledger_rows=ledger_rows,permanent_digest=permanent_digest,retired_publications=len(retired),retired_content='unavailable-by-contract' if retired else 'none',unique_content_roots=roots,root_visits=len(chain),sources=len(sources),pins=len(pins),reservations=len(reservations),packets=len(packets),generations=len(generations),conservative_cumulative_owner_allowance_bytes=owner_bytes,actual_physical_owner_bytes=False,seconds=time.monotonic()-start)
 
 if __name__=='__main__':
     a=argparse.ArgumentParser();a.add_argument('--root',required=True);a.add_argument('--baseline');a.add_argument('--output',required=True);ns=a.parse_args();result=verify(ns.root,ns.baseline);Path(ns.output).write_text(json.dumps(result,indent=2),encoding='utf-8');print(json.dumps(result,indent=2))
