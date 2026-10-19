@@ -17,7 +17,11 @@ def run(exe,base,n,mode,profile,deadline):
         if external is not None:
             tree=root/('view' if mode=='A' else 'generations/'+selected()['attempt']);path=tree/external;saved=path.read_bytes();path.write_bytes(b'external measured navigation')
             if mode=='B':
-                d.call(root,'audit',code=2);path.write_bytes(saved)
+                try:verify(root)
+                except AssertionError:
+                    (d.base/'external-edit-expected-refusal.json').write_text(json.dumps(dict(check='independent ordinary-tree hash verification',status='expected-refusal',path=str(path))),encoding='utf-8')
+                else:raise AssertionError('external B edit escaped independent verifier')
+                path.write_bytes(saved)
         request=dict(request=label,base=before,ops=ops,packet=False)
         prep=d.call(root,'prepare',profile=profile,request=request);candidate=prep['result']['candidate'];c=json.loads((root/candidate).read_bytes());target=Tree(root).entries(c['projection'])
         changed=[p for p in prior.keys()|target.keys() if prior.get(p)!=target.get(p)]

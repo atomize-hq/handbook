@@ -76,7 +76,7 @@ pub(crate) fn full(root:&Path,o:&mut Objects,g:&GraphRoot)->Result<BTreeMap<Stri
 fn spec(o:&mut Objects,old:&Option<Id>,out:&BTreeMap<String,Vec<u8>>,p:&str)->Result<Option<FileSpec>>{
     if let Some(b)=out.get(p){return if b.is_empty(){Ok(None)}else{Ok(Some(objects::decode(b,o)?))};}objects::point(o,old,p)
 }
-fn ids(root:&Path,o:&mut Objects,f:&FileSpec,out:&mut BTreeMap<String,Vec<u8>>)->Result<BTreeSet<String>>{
+fn ids(root:&Path,o:&mut Objects,f:&FileSpec,out:&mut BTreeMap<String,Vec<u8>>)->Result<(BTreeSet<String>,usize)>{
     let b=io::checked(&root.join(&f.source),&f.digest,o.metrics)?;let mut ids=BTreeSet::new();let mut directory=None;
     for line in std::str::from_utf8(&b)?.lines(){
         if let Some(s)=line.strip_prefix("  - id: "){if !ids.insert(serde_json::from_str(s)?){return Err("integrity:navigation-duplicate-id".into());}}
@@ -86,7 +86,7 @@ fn ids(root:&Path,o:&mut Objects,f:&FileSpec,out:&mut BTreeMap<String,Vec<u8>>)-
             if !p.starts_with("navigation/relationships/")||count>1_000_000{return Err("integrity:navigation-adjacency-path".into());}
             for n in 0..count{out.insert(format!("{p}{n:06}.yaml"),vec![]);}
         }
-    }Ok(ids)
+    }Ok((ids,b.len()))
 }
 fn records(root:&Path,o:&mut Objects,g:&GraphRoot,members:&BTreeSet<String>)->Result<Vec<Record>>{
     let mut rows=vec![];for id in members{if let Some(h)=graph::header(o,g,id)?{if let Some(r)=record(root,o,g,h)?{rows.push(r);}}}Ok(rows)
@@ -107,21 +107,23 @@ pub(crate) fn delta(root:&Path,o:&mut Objects,old:&Option<Id>,d:&Delta)->Result<
     }
     for id in &dirty{
         if covered.contains(id){continue;}
-        let route=bits(id);let mut prefix=String::new();let mut members=BTreeSet::new();
+        let route=bits(id);let mut prefix=String::new();let mut members=BTreeSet::new();let mut prior_bytes=0;let mut prior_count=0;
         if spec(o,old,&out,"navigation.yaml")?.is_some(){
-            let mut found=false;for n in 0..=256{let p=&route[..n];if let Some(f)=spec(o,old,&out,&path(p))?{prefix=p.into();members=ids(root,o,&f,&mut out)?;out.insert(path(p),vec![]);found=true;break;}}
+            let mut found=false;for n in 0..=256{let p=&route[..n];if let Some(f)=spec(o,old,&out,&path(p))?{prefix=p.into();let previous=ids(root,o,&f,&mut out)?;members=previous.0;prior_bytes=previous.1;prior_count=members.len();out.insert(path(p),vec![]);found=true;break;}}
             if !found{return Err("integrity:navigation-routing".into());}
         }
         members.insert(id.clone());let mut rows=records(root,o,&d.graph,&members)?;
+        let shrinking=rows.len()<prior_count||heading(&prefix).len()+rows.iter().map(|r|r.body.len()).sum::<usize>()<prior_bytes;
         // A branch sibling cannot fit: it was split by these same monotone
         // record/byte bounds. Only two leaf siblings can merge locally.
-        while !prefix.is_empty(){
+        while shrinking&&!prefix.is_empty(){
             let parent=&prefix[..prefix.len()-1];let sibling=format!("{parent}{}",if prefix.ends_with('0'){'1'}else{'0'});
             let Some(f)=spec(o,old,&out,&path(&sibling))? else{break};
-            let mut scratch=BTreeMap::new();let sibling_ids=ids(root,o,&f,&mut scratch)?;let mut joined=members.clone();joined.extend(sibling_ids);
-            let joined_rows=records(root,o,&d.graph,&joined)?;
-            if !fits(parent,&joined_rows){break;}
-            out.extend(scratch);out.insert(path(&sibling),vec![]);members=joined;rows=joined_rows;prefix=parent.into();
+            let mut scratch=BTreeMap::new();let (sibling_ids,_)=ids(root,o,&f,&mut scratch)?;
+            if rows.len()+sibling_ids.len()>RECORDS{break;}
+            let sibling_rows=records(root,o,&d.graph,&sibling_ids)?;
+            if rows.len()+sibling_rows.len()>RECORDS||heading(parent).len()+rows.iter().chain(sibling_rows.iter()).map(|r|r.body.len()).sum::<usize>()>BYTES{break;}
+            out.extend(scratch);out.insert(path(&sibling),vec![]);members.extend(sibling_ids);rows.extend(sibling_rows);prefix=parent.into();
         }
         covered.extend(members);
         if prefix.is_empty()&&rows.is_empty(){out.insert(path(""),vec![]);out.insert("navigation.yaml".into(),vec![]);}
