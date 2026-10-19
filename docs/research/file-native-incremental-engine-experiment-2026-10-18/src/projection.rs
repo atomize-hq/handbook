@@ -63,6 +63,9 @@ fn collection(root:&Path,o:&mut Objects,g:&GraphRoot)->Result<FileSpec>{
     }
     derived(root,b.as_bytes(),o.metrics)
 }
+pub fn profile(o:&mut Objects,projection:&Option<Id>)->Result<u32>{
+    Ok(if objects::point::<FileSpec>(o,projection,"collection.yaml")?.is_some(){2}else{1})
+}
 fn namespace(o:&mut Objects,projection:&Option<Id>,g:&GraphRoot,paths:impl Iterator<Item=String>)->Result<()>{
     for path in paths{
         safe_path(&path)?;
@@ -99,6 +102,14 @@ pub fn full(root:&Path,o:&mut Objects,g:&GraphRoot,version:u32)->Result<Option<I
     namespace(o,&result,g,paths.into_iter())?;Ok(result)
 }
 pub fn delta(root:&Path,o:&mut Objects,old:&Option<Id>,d:&Delta,version:u32)->Result<(Option<Id>,BTreeSet<String>)>{
+    if profile(o,old)?!=version{
+        // New preparation upgrades only its new immutable target. Old roots and
+        // already-sealed legacy candidates retain their exact byte identities.
+        let result=full(root,o,&d.graph,version)?;
+        let prior=objects::entries(o,old)?;let next=objects::entries(o,&result)?;
+        let paths=prior.keys().chain(next.keys()).filter(|p|prior.get(*p)!=next.get(*p)).cloned().collect();
+        return Ok((result,paths));
+    }
     let mut changes=BTreeMap::new();
     for h in d.old.values().flatten(){changes.insert(h.doc.path.clone(),vec![]);}
     for h in d.final_docs.values().flatten(){changes.insert(h.doc.path.clone(),objects::encode(&FileSpec{source:h.doc.original.clone(),digest:h.doc.digest.clone()},o)?);}
@@ -180,10 +191,6 @@ pub fn packet(store:&Store,g:&GraphRoot,projection:&Option<Id>,attempt:&str,m:&m
     }
     // The independent retained packet has source/provenance/recipe plus its own
     // ordinary navigation. Exact closure verification precedes manifest sealing.
-    if store.config.navigation_version==1{
-        io::write_new(&dest.join("NAVIGATION.md"),b"# Exact retained packet\n\nSources are in docs/. Ordered inputs, exact paths, hashes, omissions and recipe are in packet/provenance.json.\n",m)?;
-        manifest.insert("NAVIGATION.md".into(),io::digest(&io::read(&dest.join("NAVIGATION.md"),m)?));
-    }
     for (p,h) in &manifest{io::checked(&dest.join(p),h,m)?;}
     io::write_new(&dest.join("MANIFEST.json"),&io::json(&manifest)?,m)?;
     let mut o=objects::object_store(&store.root,m);let mut updates=BTreeMap::new();
@@ -198,7 +205,8 @@ pub fn packet_verify_replay(store:&Store,g:&GraphRoot,projection:&Option<Id>,att
     let manifest:BTreeMap<String,String>=serde_json::from_slice(&io::read(&dest.join("MANIFEST.json"),m)?)?;
     let mut expected:BTreeMap<_,_>=files.iter().map(|(p,f)|(p.clone(),f.digest.clone())).collect();
     expected.insert("packet/context.md".into(),io::digest(&output));expected.insert("packet/provenance.json".into(),io::digest(&prov));
-    if store.config.navigation_version==1{expected.insert("NAVIGATION.md".into(),io::digest(b"# Exact retained packet\n\nSources are in docs/. Ordered inputs, exact paths, hashes, omissions and recipe are in packet/provenance.json.\n"));}
+    let legacy={let mut o=objects::object_store(&store.root,m);profile(&mut o,projection)?==1};
+    if legacy{expected.insert("NAVIGATION.md".into(),io::digest(b"# Exact retained packet\n\nSources are in docs/. Ordered inputs, exact paths, hashes, omissions and recipe are in packet/provenance.json.\n"));}
     if manifest!=expected{return Err("integrity:packet-manifest-completeness".into());}
     let mut actual=vec![];crate::lifetime::files(&dest,&mut actual)?;
     let names:BTreeSet<_>=actual.iter().map(|p|p.strip_prefix(&dest).unwrap().to_string_lossy().replace('\\',"/")).filter(|p|p!="MANIFEST.json").collect();
@@ -370,7 +378,8 @@ pub fn full_oracle(store:&Store,m:&mut Metrics)->Result<()>{
         safe_path(path)?;let file:FileSpec=objects::decode(bytes,&mut o)?;
         safe_path(&file.source)?;io::checked(&store.root.join(&file.source),&file.digest,o.metrics)?;
     }
-    let expected=full(&store.root,&mut o,&head.publication.graph,store.config.navigation_version)?;
+    let version=profile(&mut o,&head.publication.projection)?;
+    let expected=full(&store.root,&mut o,&head.publication.graph,version)?;
     let mut expected=objects::entries(&mut o,&expected)?;
     // Packet work is independently checked against exact selected graph/closure.
     for path in ["packet/context.md","packet/provenance.json"]{actual.remove(path);expected.remove(path);}

@@ -7,7 +7,8 @@ def sha(b):return hashlib.sha256(b).hexdigest()
 def verify(root):
     started=time.monotonic();root=Path(root)
     if not (root/'SELECTED.json').exists():return {'root':str(root),'not_selected':True}
-    if json.loads((root/'STORE.json').read_bytes()).get('navigation_version',1)==2:
+    selected=json.loads((root/'SELECTED.json').read_bytes());pub=json.loads(checked(root/f"publications/{selected['publication']}.json",selected['digest']))
+    if 'collection.yaml' in Tree(root).entries(pub['projection']):
         sys.path.insert(0,str(Path(__file__).resolve().parent.parent/'file-native-recovery-reclamation-2026-10-19'))
         from oracle import verify as verify_v2
         return {'root':str(root),'navigation_version':2,**verify_v2(root),'seconds':time.monotonic()-started}

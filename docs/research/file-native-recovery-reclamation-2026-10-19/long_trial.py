@@ -28,7 +28,7 @@ def run(exe,root,evidence,gate):
         row=dict(input=payload,exit_at=exit_at,exit=p.returncode,seconds=time.time()-start,peak_memory_bytes=peak,status='censored' if censor else ('success' if p.returncode==code else 'failure'),censor=censor)
         rows.append(row);(evidence/'events.json').write_text(json.dumps(rows,indent=2),encoding='utf-8')
         assert not censor and p.returncode==code,row
-        return json.loads(Path(str(prefix)+'.stdout').read_bytes()) if p.returncode==0 else None
+        return json.loads(Path(str(prefix)+'.stdout').read_bytes()) if p.returncode in [0,2] else None
     def selected():return json.loads((root/'SELECTED.json').read_bytes())
     def pub(name,ops):return call('publish',request=dict(request=name,base=selected(),ops=ops,packet=False))['result']
     def inventory(name):
@@ -59,7 +59,7 @@ def run(exe,root,evidence,gate):
     assert not (root/unique['original']).exists()
     assert call('resolve',request_id='reclamation-distinct-source')['result']==accepted
     assert (root/prior['original']).read_bytes()==prior_bytes
-    call('point',selected=unique_selector,id='d000000',code=2)
+    retired=call('point',selected=unique_selector,id='d000000',code=2);assert retired['error']=='retired:snapshot'
     call('audit')
     result=dict(status='success',first_collection=first,second_collection=second,retired_cohort=len(cohort),distinct_source_reclaimed=True,accepted_result_exact=True,unique_selector=unique_selector,before=before,after_no_retirement=after,after_retirement=final)
     (evidence/'completed.json').write_text(json.dumps(result,indent=2),encoding='utf-8');print(json.dumps({k:v for k,v in result.items() if not k.startswith(('before','after'))},indent=2))

@@ -217,7 +217,7 @@ impl Store{
         o.metrics.elapsed("graph-transition-inclusive",graph_started);
         io::checkpoint("semantic-root")?;
         let projection_started=Instant::now();
-        let (projection,changed_paths)=projection::delta(&self.root,&mut o,&head.publication.projection,&delta,self.config.navigation_version)?;
+        let (projection,changed_paths)=projection::delta(&self.root,&mut o,&head.publication.projection,&delta,2)?;
         o.metrics.elapsed("projection-prepare-inclusive",projection_started);
         io::checkpoint("projection-root")?;
         let mut changes=BTreeMap::new();
@@ -287,7 +287,8 @@ impl Store{
         // avoids trusting/replacing prepared B/packet destinations.
         let mut o=objects::object_store(&self.root,m);
         let d=graph::transition(&self.root,&mut o,&head.publication.graph,&c.request.ops)?;
-        let (projection,paths)=projection::delta(&self.root,&mut o,&head.publication.projection,&d,self.config.navigation_version)?;
+        let version=projection::profile(&mut o,&c.projection)?;
+        let (projection,paths)=projection::delta(&self.root,&mut o,&head.publication.projection,&d,version)?;
         let mut updates=BTreeMap::new();for p in paths{updates.insert(format!("{:020}/{p}",head.publication.sequence+1),serde_json::to_vec(&true)?);}
         let mut changes=objects::update(&mut o,&head.publication.changes,updates)?;
         drop(o);
