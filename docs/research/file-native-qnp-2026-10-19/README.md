@@ -1,9 +1,10 @@
-# Q/N/P coordination: admission held
+# Q/N/P coordination: execution in progress
 
 October 19, 2026. **The three-task increment is incomplete.** Fresh top-level Q
-Linux, Q Mac and N chats were dispatched under the human's authorization. No
-engine change, build, fixture or new qualification result has been admitted.
-P has not been dispatched because its Q/N gates are open.
+Linux, Q Mac and N chats were dispatched under the human's authorization.
+The human approved 40 GiB combined capacity; finite Q/N execution is now admitted.
+Their results have not yet passed coordinator review. P has not been dispatched
+because its Q/N gates are open.
 
 The integration branch is `codex/file-native-qnp-20261019`, based on verified
 recovery commit `f0904a63cb2500b9bea3a4034d19cbe38bfac729`. Current Rust/Cargo
@@ -13,9 +14,9 @@ original H101003 store, original archive and final H101006 clone are preserved.
 
 | Task | Current result | Needed next |
 | --- | --- | --- |
-| Q native Linux/ext4 | free reserve now passes after human cleanup | combined resource decision and finite lane admission |
-| Q native macOS | platform action approved; current census complete; free reserve passes | combined resource decision and finite lane admission |
-| N Windows | source/design handoff only | complete global resource admission; no implementation claim |
+| Q native Linux/ext4 | executing exact-final bounded qualification | review complete evidence and original censors |
+| Q native macOS | executing exact-final bounded qualification | review complete evidence and original censors |
+| N Windows | implementation admitted | candidate pin, measurements, review and native deltas |
 | P | undispatched | reviewed Q/N, actual integrated-pin native qualification, frozen navigation |
 
 Linux's original retained samples failed admission. After the human freed space,
@@ -31,9 +32,11 @@ records 36,096,017,846 bytes / 3,757,696 files before additional work and the
 reserved 1 GiB / 100,000 files. This exceeds the 32 GiB logical ceiling already.
 It includes both unintended new tool-cache subtrees, totaling 2,102,088,489 bytes.
 Older separately bounded research is explicitly recorded as well; it has not
-been silently deleted or called available capacity. The human has been asked to
-approve a 40 GiB combined ceiling with other limits unchanged, or retain 32 GiB
-and review a cleanup plan. No cap change or resource GO is assumed.
+been silently deleted or called available capacity. The human explicitly approved
+a 40 GiB combined ceiling, leaving other limits unchanged. The
+[execution admission](evidence/q-n-execution-admission-40gib.json) forecasts
+39,217,688,184 bytes / 4,107,696 files including the closeout reserve and bounded
+Q/N shares. P still requires separate worst-case coexistence admission.
 
 GitNexus availability checks unexpectedly invoked package staging. Both workers
 stopped retries. N's exact-subtree PowerShell cleanup attempts were rejected

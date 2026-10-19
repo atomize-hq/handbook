@@ -11,6 +11,10 @@
     "bytes": 5547,
     "sha256": "2d5cf203c96ea8cdebe717c3c676771f6358e7e87369644cdc58b8d8e84c3d84"
   },
+  "coordinator-q-linux-review.json": {
+    "bytes": 901,
+    "sha256": "ec3a47cb6d61eabe633de9fa44fe2e94713a6f62b4d38620ca688c6eae09e299"
+  },
   "donor-source-pins.json": {
     "bytes": 1123,
     "sha256": "9a9b6a179cc011102d45c5794cb69350ead7b074e5ac78253141924d67b0f29d"
@@ -42,6 +46,10 @@
   "q-linux-admission.json": {
     "bytes": 2047,
     "sha256": "bea8e7d65b66a7346d3dba8d261da812603fe0709bc077ceac34ddc3ab58b5e3"
+  },
+  "q-n-execution-admission-40gib.json": {
+    "bytes": 1354,
+    "sha256": "65f5148efc98bf5f08e7352c7d801084f6048ce2c4b59bc93aeec17dcef7cfbe"
   },
   "q-tool-residue.json": {
     "bytes": 369,

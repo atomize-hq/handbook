@@ -1,0 +1,18 @@
+{
+  "review": "required Q Linux named mechanisms pass; optional replay stress remains censored",
+  "epoch": 1792449658.2576866,
+  "source_commit": "f0904a63cb2500b9bea3a4034d19cbe38bfac729",
+  "worker_commit": "e75a95c4bd27c62a9d872220ceb80f827d5a6a2e",
+  "source_files_independently_matched_to_git": 95,
+  "indexed_artifacts_verified": 41,
+  "raw_capsule_events_verified": 282,
+  "archive_sha256": "29e8f03b0f58cca7fe1f4872df8dd7c9b4eff3d169790ff3f1c9fd2bf60db24b",
+  "native_executable_independent_ssh_sha256": "e70d47a82e1c51a989395f0025f85859e74aed07c07e482e0a6b37913e76e854",
+  "wrappers_match_executed_archive": true,
+  "limits": [
+    "original timeout-wrapper failure retained",
+    "extra replay-lifetime stress censored after22completed events",
+    "final read-only integrity verification4s beyond original taskdeadline",
+    "no powerloss or productionqualification"
+  ]
+}

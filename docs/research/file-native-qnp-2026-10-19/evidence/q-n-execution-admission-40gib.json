@@ -1,0 +1,36 @@
+{
+  "status": "Q/N EXECUTION ADMITTED; P remains gated",
+  "epoch": 1792449100.5494113,
+  "human_authorization": "Approve 40 GiB combined ceiling",
+  "logical_ceiling_bytes": 42949672960,
+  "file_ceiling": 5000000,
+  "closeout_reserved_inside": {
+    "logical_bytes": 1073741824,
+    "files": 100000
+  },
+  "current_known_combined_bytes": 36096017846,
+  "current_known_combined_files": 3757696,
+  "admitted_additional": {
+    "q_linux_native_bytes": 536870912,
+    "q_linux_sparse_local_and_return_bytes": 33554432,
+    "q_mac_bytes": 672196802,
+    "n_windows_bytes": 805306368
+  },
+  "admitted_additional_files": {
+    "q_linux": 100000,
+    "q_mac": 50000,
+    "n_windows": 100000
+  },
+  "native_linux_free_verified_bytes": 51107393536,
+  "mac_free_verified_bytes": 92796895232,
+  "tool_cache_cleanup": "explicitly human-authorized exact2subtree removal rejected before execution by automatic approval review;2,102,088,489B remain in baseline; no alternative route",
+  "original_deadlines_utc": {
+    "q_linux": "2026-10-19T22:38:49Z",
+    "q_mac": "original dispatch+2h; worker confirms exact time",
+    "n": "2026-10-20T00:38:51Z"
+  },
+  "deadline_extension": false,
+  "packing_admitted": false,
+  "forecast_bytes_including_reserved_closeout": 39217688184,
+  "forecast_files_including_reserved_closeout": 4107696
+}

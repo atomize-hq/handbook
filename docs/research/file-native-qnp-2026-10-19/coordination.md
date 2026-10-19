@@ -37,9 +37,12 @@ destructive packing, its exact baseline must be captured, independently restored
 verified and reopened, with fresh disposable authorization at the new destination.
 The older H101003 archive is not an exact rollback for that state.
 
-The combined owned ceiling is 32 GiB logical bytes and 5,000,000 files, including
+The human subsequently approved a 40 GiB combined owned logical-byte ceiling
+after the complete cross-host census exceeded the original 32 GiB. The
+5,000,000-file ceiling is unchanged. The scope includes
 preserved datasets, archives, builds, stages and evidence. Reserve 1 GiB and
-100,000 files inside those limits. Current census, not historical closeout totals,
+100,000 files inside those limits. The approved change is recorded in
+`evidence/q-n-execution-admission-40gib.json`. Current census, not historical closeout totals,
 controls admission. No child receives an independent allowance. Keep one active
 long-history mutation lane. Free-space reserves are Windows 140 GiB, native Linux
 20 GiB, WSL 40 GiB and Mac 20 GiB. Initial aggregate new-work RSS limits are 4 GiB
