@@ -1,13 +1,14 @@
 # Packing experiment — working report
 
-Status at 2026-10-20 06:53 UTC: the primary Windows A long-history PZ build,
+Status at 2026-10-20 07:43 UTC: the primary Windows A long-history PZ build,
 complete independent verification, matched measurements, physical cleanup and
 complete post-cleanup verification passed. Packed operational capture, parent
 independent transport/source verification, fresh byte restore, complete restored
 oracle, read-only reopen and valid successor passed. H1k/H10k record controls and
 the complete final-source Windows F recovery capsule passed. The authentic
-N8000-A baseline passed; its four measurement cells, N8000-B and native
-final-source results are still pending. This is research evidence,
+N8000-A baseline and all four valid matched measurement cells passed their
+correctness oracles. Its low-history file-count gate failed. N8000-B and native
+final-source results remain pending. This is research evidence,
 not approval of a production format or migration.
 
 ## Exact revisions and scope
@@ -175,9 +176,48 @@ including the impossible-final-namespace expected refusal. Its actual source,
 binary, child resources and fresh fixtures are separately preserved from the old
 4cb run. No old result was relabeled as a final-source pass.
 
+## Representative collection and research gates
+
+All four valid A cells use the same authentic N8000/H8 operational image, six
+original request categories, 500 warm samples per category, 120 fresh starts and
+the same seven real operations: payload, batch payload, label, rename, batch
+rename, explicit path-only move and relationship. Each reached H15. Their seven
+logical state digests match qualified L, and each passed complete semantic,
+source/navigation and full operational capture/source equality checks.
+
+| N8000-A cell | Median complete prepare + select, ms | / qualified L | Frozen ordinary gate |
+|---|---:|---:|---|
+| Qualified L | 370.8002 | 1.000 | pass |
+| New loose | 367.0095 | 0.990 | pass |
+| P0 | 364.7921 | 0.984 | pass |
+| PZ | 386.1715 | 1.041 | pass |
+
+Warm P0/qualified-L ratios are 0.941–1.022; PZ/P0 ratios are 1.006–1.084, so the
+two warm 2× gates pass. New loose tails are measured separately and never
+substitute for the original keys. Exact distributions/counters/RSS are retained.
+
+The frozen eligible cohort is only 28 records / 1,804,278 raw bytes. Both P0 and
+PZ use five packs, five indexes and one catalog: **11 representation files,
+60.7143% reduction — FAIL against the unchanged 95% file rule**. P0 pack/index
+bytes are 1,807,781; PZ is 412,467 (22.8162% of P0), passing compression. This
+negative short-history file result remains separate from the passing long A
+history result. Packing owners/journals/control files are additionally charged
+to whole-store footprint; omitting them cannot improve this failed criterion
+into a pass. B's required loose publication duplicates must also be charged.
+
+The first old-L cell used an invalid explicit path lacking the required
+`docs/item-` prefix. The engine correctly refused `semantic:local-I1` after five
+accepted publications. Its H13 clone, failed events, timings, source snapshot and
+complete lossless archive were preserved separately. No selector was rewound.
+The valid `-path-v2` epoch starts from a fresh authenticated baseline image; the
+pre-publication tuple inventory was checked equal to the original frozen cohort.
+Only the valid complete epoch enters matched tables. Literal source-pin
+clarifications distinguish qualified old baseline creation from the frozen d70
+candidate observer; original manifests/events/snapshots were not overwritten.
+
 ## Remaining scope and limits
 
-N8k A/B ordinary-publication gates and final native platform
+N8000-B ordinary-publication gates and final native platform
 results must be reported from actual receipts. No pending stage is a pass.
 Current additional fixture grants are finite and coordinated globally; prospective
 release is never counted before actual deletion. The original functional cutoff
@@ -190,4 +230,9 @@ remains unsupported. GitNexus does not register this isolated experimental
 worktree, so attempted impact/detect calls remain UNKNOWN with manual traces,
 never a claimed clean graph result. No production adoption is authorized.
 
-Recommendation remains pending the required restore/publication/native results.
+Provisional recommendation: **adjust; do not adopt as a universal replacement**.
+Keep the bounded private PZ prototype and long-history A evidence. The frozen
+short-history file criterion fails, fresh-process index startup is materially
+slower, B publication-control duplicates are necessary, and remaining native/B
+coverage must be reported from actual results. No new activation threshold,
+owner migration or production format is approved by these observations.

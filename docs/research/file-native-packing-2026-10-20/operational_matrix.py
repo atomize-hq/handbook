@@ -7,6 +7,7 @@ Large counts require their own parent admission. No control-state rewind.
 import argparse,json,statistics,sys,time
 from pathlib import Path
 from driver import Driver
+from guard import census
 from independent import Decoder,freeze,verify,sha
 HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(HERE.parent/'file-native-recovery-reclamation-2026-10-19'))
@@ -32,13 +33,22 @@ def operations():
     # Actual Store::prepare uses graph::transition, which supports explicit path.
     # The older baseline_model::apply reference helper has a narrower opcode set.
     # Rename changes title and derived path together; path alone is case six.
-    return [('payload',[dict(kind='edit',id='d000004',text=' ordinary payload')]),('batch-payload',[dict(kind='edit',id=f'd{i:06}',text=' batch') for i in range(16,24)]),('label',[dict(kind='label',id='d000005',text='ordinary-label')]),('title-and-derived-path',[dict(kind='rename',id='d000004',text='Ordinary exact matched title')]),('batch-title-and-derived-path',[dict(kind='rename',id=f'd{i:06}',text=f'Ordinary batch title {i}') for i in range(16,24)]),('explicit-path-move',[dict(kind='path',id='d000005',text='docs/ordinary-moved-d000005.md')]),('relationship',[dict(kind='edge',id='d000004',text='cites',target='d000005')])]
-def cell(mode,count,representation):
-    case=BASE/f'n{count}-{mode}';baseline=read(case/'baseline.json');d=Driver(case/(representation+'-events'));root=case/representation/'disposable/store'
+    return [('payload',[dict(kind='edit',id='d000004',text=' ordinary payload')]),('batch-payload',[dict(kind='edit',id=f'd{i:06}',text=' batch') for i in range(16,24)]),('label',[dict(kind='label',id='d000005',text='ordinary-label')]),('title-and-derived-path',[dict(kind='rename',id='d000004',text='Ordinary exact matched title')]),('batch-title-and-derived-path',[dict(kind='rename',id=f'd{i:06}',text=f'Ordinary batch title {i}') for i in range(16,24)]),('explicit-path-move',[dict(kind='path',id='d000005',text='docs/item-ordinary-moved-d000005.md')]),('relationship',[dict(kind='edge',id='d000004',text='cites',target='d000005')])]
+def cell(mode,count,representation,epoch='',store_limit=None):
+    assert epoch in ['', '-path-v2'];label=representation+epoch;reference='L-old'+epoch
+    case=BASE/f'n{count}-{mode}';baseline=read(case/'baseline.json');d=Driver(case/(label+'-events'));root=case/label/'disposable/store'
+    assert not (case/(label+'-measurement.json')).exists()
     restored=backup.restore(case/'baseline-operational-backup',root);engine=OLD if representation=='L-old' else NEW
     d.call(root,'inspect',exe_override=engine);d.call(root,'lifecycle',exe_override=engine,operation='setup');d.call(root,'lifecycle',exe_override=engine,operation='pin',name='frozen-cohort',selected=baseline['selected'])
-    inventory=case/(representation+'-inventory.jsonl');frozen=freeze(root,inventory,True)
-    if representation in ['P0','PZ']:d.call(root,'packing',exe_override=NEW,operation='build',codec='raw' if representation=='P0' else 'zstd',include_attempts=True,cleanup=True)
+    inventory=case/(label+'-inventory.jsonl');frozen=freeze(root,inventory,True)
+    if representation=='L-old':
+        prior=case/'L-old-inventory.jsonl'
+        if epoch and prior.exists():assert [json.loads(line) for line in prior.read_text().splitlines()]==frozen
+        matched=case/'matched-cohort-inventory.jsonl';assert not matched.exists();matched.write_bytes(inventory.read_bytes())
+    upper=census(root)['bytes'] if mode=='A' and store_limit else None;growth=[]
+    if representation in ['P0','PZ']:
+        packed=d.call(root,'packing',exe_override=NEW,operation='build',codec='raw' if representation=='P0' else 'zstd',include_attempts=True,cleanup=True)
+        if upper is not None:upper+=packed['metrics']['bytes_written']
     # Original cohort lookup costs precede all new loose tail publications.
     warm=d.call(root,'lookup-bench',exe_override=HELPER if representation=='L-old' else NEW,count=500,requests=baseline['requests']);fresh=[]
     for request in baseline['requests']:
@@ -46,20 +56,26 @@ def cell(mode,count,representation):
             out=d.call(root,'resolve',exe_override=engine,request_id=request['id']);fresh.append(dict(category=request['category'],sample=i,child_seconds=d.events[-1]['seconds'],engine_wall_ns=out['wall_ns'],rss=out.get('peak_memory_bytes'),metrics=out['metrics']))
     publications=[]
     for i,(name,ops) in enumerate(operations()):
+        if upper is not None:
+            forecast=upper+(7-i)*24*1024**2;assert forecast<=store_limit
+            growth.append(dict(case=name,known_root_upper=upper,remaining_publications=7-i,remaining_allowance=(7-i)*24*1024**2,prospective=forecast,ceiling=store_limit))
         previous=d.head(root);req=dict(request='ordinary-'+str(i),base=previous,ops=ops,packet=False)
         prepared=d.call(root,'prepare',exe_override=engine,request=req);path=prepared['result']['candidate'];c=json.loads((root/path).read_bytes())
         selected=d.call(root,'select',exe_override=engine,candidate=path);assert selected['result']['status']=='published'
         publications.append(dict(case=name,prepare=prepared,select=selected,complete_engine_ns=prepared['wall_ns']+selected['wall_ns'],replay_objects=len(c['replay_objects']),replay_files=len(c['replay_files']),result_state_digest=selected['result']['result']['state_digest']))
-        if previous not in [baseline['initial'],baseline['selected']]:d.call(root,'lifecycle',exe_override=engine,operation='retire',selected=previous);d.call(root,'lifecycle',exe_override=engine,operation='collect')
+        positive=prepared['metrics']['bytes_written']+selected['metrics']['bytes_written']
+        if previous not in [baseline['initial'],baseline['selected']]:
+            retired=d.call(root,'lifecycle',exe_override=engine,operation='retire',selected=previous);collected=d.call(root,'lifecycle',exe_override=engine,operation='collect');positive+=retired['metrics']['bytes_written']+collected['metrics']['bytes_written']
+        if upper is not None:assert positive<=24*1024**2;upper+=positive;growth[-1]['actual_positive_written']=positive
     tail=d.call(root,'lookup-bench',exe_override=HELPER if representation=='L-old' else NEW,count=500,requests=[dict(category='new-loose-tail-separate',id='ordinary-6')])
-    verification=verify(root,case/(representation+'-independent.json'),inventory if representation in ['P0','PZ'] else None)
+    verification=verify(root,case/(label+'-independent.json'),inventory if representation in ['P0','PZ'] else None)
     if representation in ['P0','PZ']:
-        expected=[json.loads(line) for line in (case/'L-old-inventory.jsonl').read_text().splitlines()];assert expected==frozen
+        expected=[json.loads(line) for line in (case/'matched-cohort-inventory.jsonl').read_text().splitlines()];assert expected==frozen
     if representation!='L-old':
-        old=read(case/'L-old-measurement.json');assert [r['result_state_digest'] for r in publications]==[r['result_state_digest'] for r in old['publications']]
+        old=read(case/(reference+'-measurement.json'));assert [r['result_state_digest'] for r in publications]==[r['result_state_digest'] for r in old['publications']]
         assert [r['result_digest'] for r in warm['result']['rows']]==[r['result_digest'] for r in old['warm']['result']['rows']]
     result=dict(mode=mode,documents=count,representation=representation,history_before=8,history_after=15,restore=restored,cohort_records=len(frozen),warm=warm,fresh=fresh,fresh_process_starts=len(fresh),new_loose_tail=tail,publications=publications,ordinary_median_complete_engine_ns=statistics.median(r['complete_engine_ns'] for r in publications),independent=verification,fixture=str(root),binary_sha256=sha(engine.read_bytes()),cache_qualification='same-process warm after first lookup; fresh process not device cold',retention='same initial and original-cohort pins in each authentic restore; retire only new unpinned predecessor tails outside measured publication clocks')
-    write(case/(representation+'-measurement.json'),result);print(json.dumps(dict(status='measured',mode=mode,documents=count,representation=representation,publication_cases=len(publications),median_ns=result['ordinary_median_complete_engine_ns'])))
+    result.update(epoch=epoch,A_growth_bound_observations=growth);write(case/(label+'-measurement.json'),result);print(json.dumps(dict(status='measured',mode=mode,documents=count,representation=representation,epoch=epoch,publication_cases=len(publications),median_ns=result['ordinary_median_complete_engine_ns'])))
 if __name__=='__main__':
     a=argparse.ArgumentParser();a.add_argument('stage',choices=['initial','cell']);a.add_argument('--mode',required=True);a.add_argument('--count',required=True,type=int);a.add_argument('--representation');n=a.parse_args()
     if n.stage=='initial':initial(n.mode,n.count)
