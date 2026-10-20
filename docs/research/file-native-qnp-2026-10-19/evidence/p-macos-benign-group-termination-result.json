@@ -1,0 +1,77 @@
+{
+  "utc": "2026-10-20T06:35:03.639545+00:00",
+  "start_epoch": 1792478102.3877,
+  "whole_elapsed_seconds": 1.251847743988037,
+  "dummy_PGID": 41713,
+  "dummy_ready": [
+    {
+      "role": "child",
+      "pid": 41713,
+      "pgid": 41713
+    },
+    {
+      "role": "TERM-ignoring-grandchild",
+      "pid": 41715,
+      "pgid": 41713
+    }
+  ],
+  "events": [
+    {
+      "utc": "2026-10-20T06:35:02.531018+00:00",
+      "pgid": 41713,
+      "signal": 15,
+      "result": "sent"
+    },
+    {
+      "utc": "2026-10-20T06:35:03.338507+00:00",
+      "pgid": 41713,
+      "signal": 9,
+      "result": "sent"
+    },
+    {
+      "utc": "2026-10-20T06:35:03.527730+00:00",
+      "pgid": 41713,
+      "signal": 0,
+      "result": "ESRCH"
+    }
+  ],
+  "snapshots": [
+    {
+      "utc": "2026-10-20T06:35:02.530675+00:00",
+      "excluded_probe_PID": 41716,
+      "rows": [
+        {
+          "pid": 41713,
+          "ppid": 41680,
+          "pgid": 41713,
+          "rss_bytes": 17203200,
+          "command": "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3 -B /private/tmp/file-native-p-macos-20261020/cargo-private-proposed/.p-build-receipts-v5/guard-dummy-validation.py --child"
+        },
+        {
+          "pid": 41715,
+          "ppid": 41713,
+          "pgid": 41713,
+          "rss_bytes": 17268736,
+          "command": "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3 -B /private/tmp/file-native-p-macos-20261020/cargo-private-proposed/.p-build-receipts-v5/guard-dummy-validation.py --grandchild"
+        }
+      ]
+    },
+    {
+      "utc": "2026-10-20T06:35:03.527673+00:00",
+      "excluded_probe_PID": 41822,
+      "rows": []
+    },
+    {
+      "utc": "2026-10-20T06:35:03.639492+00:00",
+      "excluded_probe_PID": 41827,
+      "rows": []
+    }
+  ],
+  "live_group_shutdown_test_pass": true,
+  "parent_child_exit": -15,
+  "watchdog_exit": 0,
+  "future_build": "HOLD pending parent review",
+  "Cargo_compiler_engine_invoked": false,
+  "method": "normal approved same-user signals only; no alternate privilege route",
+  "independent_watchdog_armed_before_measurements": true
+}

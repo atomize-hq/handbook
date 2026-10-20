@@ -1,0 +1,67 @@
+{
+  "status": "ALL_EIGHT_MAC_UNIT_FILES_MATCH_VERIFIED_LINUX_ARCHIVE_BYTES",
+  "Mac_run_result": "separate native Mac five units passed; not relabelled Linux run",
+  "Mac_unit_fixture_total_bytes": 80976318,
+  "Linux_archive": "/home/spenser/file-native-p-linux-20261020/preservation-artifact/two-roots.tar.gz",
+  "Linux_archive_sha256": "d6f3eca1abd4bb74ca393c9c3ef743abdf5c6061bb98aad74ac938769c2cdbc7",
+  "mapping": [
+    {
+      "Mac_path": "/private/tmp/file-native-p-macos-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-52875-1792478528830285000-2/lease",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "Linux_already_independently_verified_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/lease",
+      "exact_match": true
+    },
+    {
+      "Mac_path": "/private/tmp/file-native-p-macos-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-52875-1792478528830285000-2/packs/14129ba46852350f7a557e7925fe0d1e4ff81fa3aed9ca1899022d8232b1ec28.idx",
+      "bytes": 13496053,
+      "sha256": "14129ba46852350f7a557e7925fe0d1e4ff81fa3aed9ca1899022d8232b1ec28",
+      "Linux_already_independently_verified_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/14129ba46852350f7a557e7925fe0d1e4ff81fa3aed9ca1899022d8232b1ec28.idx",
+      "exact_match": true
+    },
+    {
+      "Mac_path": "/private/tmp/file-native-p-macos-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-52875-1792478528830285000-2/packs/2e30643ec03ee32590ddbd030db51b5dfbf95052bd915c4d5d33a1834343658c.idx",
+      "bytes": 13496053,
+      "sha256": "2e30643ec03ee32590ddbd030db51b5dfbf95052bd915c4d5d33a1834343658c",
+      "Linux_already_independently_verified_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/2e30643ec03ee32590ddbd030db51b5dfbf95052bd915c4d5d33a1834343658c.idx",
+      "exact_match": true
+    },
+    {
+      "Mac_path": "/private/tmp/file-native-p-macos-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-52875-1792478528830285000-2/packs/317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3.idx",
+      "bytes": 13496053,
+      "sha256": "317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3",
+      "Linux_already_independently_verified_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3.idx",
+      "exact_match": true
+    },
+    {
+      "Mac_path": "/private/tmp/file-native-p-macos-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-52875-1792478528830285000-2/packs/8c3e874cb9612903b53911498b8e5d6fd7c55d4c1aa95d3f9f36e080cc1d1549.idx",
+      "bytes": 13496053,
+      "sha256": "8c3e874cb9612903b53911498b8e5d6fd7c55d4c1aa95d3f9f36e080cc1d1549",
+      "Linux_already_independently_verified_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/8c3e874cb9612903b53911498b8e5d6fd7c55d4c1aa95d3f9f36e080cc1d1549.idx",
+      "exact_match": true
+    },
+    {
+      "Mac_path": "/private/tmp/file-native-p-macos-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-52875-1792478528830285000-2/packs/9451e66a13810fefcd5605edd2a50c982f909d9c993047467013f2769e08bd8e.idx",
+      "bytes": 13496053,
+      "sha256": "9451e66a13810fefcd5605edd2a50c982f909d9c993047467013f2769e08bd8e",
+      "Linux_already_independently_verified_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/9451e66a13810fefcd5605edd2a50c982f909d9c993047467013f2769e08bd8e.idx",
+      "exact_match": true
+    },
+    {
+      "Mac_path": "/private/tmp/file-native-p-macos-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-52875-1792478528830285000-2/packs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.pack",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "Linux_already_independently_verified_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.pack",
+      "exact_match": true
+    },
+    {
+      "Mac_path": "/private/tmp/file-native-p-macos-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-52875-1792478528830285000-2/packs/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.idx",
+      "bytes": 13496053,
+      "sha256": "317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3",
+      "Linux_already_independently_verified_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.idx",
+      "exact_match": true
+    }
+  ],
+  "Mac_file_hashes": "actual native tool output; parent has no direct native filesystem channel",
+  "deletion_performed": false
+}

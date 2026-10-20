@@ -222,3 +222,31 @@ valid successor, H1k/H10k compression controls and the representative ordinary
 publication matrix remain pending. The integration branch still contains the
 qualified N engine; final P source has not yet been merged. No overall P pass or
 product-adoption recommendation is claimed.
+
+
+At 07:36 UTC the final Windows F capsule has passed all 24 cases / 282 events,
+and H1k/H10k compressed controls pass exact raw-inventory and grouping checks.
+The packed long-history image has passed fresh restore, full independent oracle,
+111 reopen events and a real successor publication; the successor image also
+passed complete independent verification. Parent stream checks authenticated both
+archives against every current source file before their separately approved
+regular-file reclamation. Their archives, controls, directories and evidence remain.
+
+Native Mac built the unchanged d70 core offline and passed five units. Its target
+and unit fixtures were independently archived before exact reclamation. Native
+archive verification used a separate manual USTAR reader; the large archives were
+not transferred to the parent. Shared Cargo bookkeeping changed with unknown
+attribution while all 1,262 non-database inputs remained unchanged. These limits
+remain explicit. The current Mac full qualification runs 07:22–07:52 UTC, with
+artifact closeout by 08:02: immediate checks passed; packing and subsequent phases
+remain in progress. No full Mac pass is claimed.
+
+Valid N8000-A old loose, new loose and P0 cells passed the same seven publications,
+full byte/semantic/navigation checks and 120 fresh-process lookups. Their ordinary
+medians are 370.8002, 367.0095 and 364.7921 ms. The initial old-loose cell's invalid
+path-input refusal is preserved separately; it is not a completed measurement.
+All valid cells use the corrected common path request. PZ and N8000-B remain
+pending. The parent final-artifact allowance is now 32 MiB, reallocated from unused
+global space: prospective total 42,918,906,644 bytes, with the original internal
+1 GiB / 100,000-file reserve intact. Windows remains 2.5 GiB, Mac 288 MiB and
+closed Linux 64 MiB. All original P functional/closeout cutoffs still apply.

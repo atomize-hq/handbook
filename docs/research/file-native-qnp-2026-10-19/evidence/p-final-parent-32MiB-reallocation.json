@@ -1,0 +1,17 @@
+{
+  "utc": "2026-10-20T07:34:33.328442+00:00",
+  "global_ceiling": 42949672960,
+  "files_ceiling": 5000000,
+  "reserve_bytes": 1073741824,
+  "reserve_files": 100000,
+  "prior_combined_prospective_bytes": 42902129428,
+  "parent_before": 16777216,
+  "parent_after": 33554432,
+  "combined_prospective_bytes": 42918906644,
+  "unallocated_bytes": 30766316,
+  "prospective_files": 4607675,
+  "windows": 2684354560,
+  "linux_closed": 67108864,
+  "mac": 301989888,
+  "reason": "Reallocate 16 MiB unassigned capacity to bounded final source integration and native raw receipts; no ceiling change"
+}

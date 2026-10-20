@@ -1,0 +1,332 @@
+{
+  "status": "passed",
+  "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "pack_implementation_sha256": "4d854885a54ee95ffed44bfec704f95c5c91d95b98964d419a7607dd2a48b2e3",
+  "tool_sha256": "1c591b34f961ea58037f3e0327218525e3763c566e91d1355c0ce609d937e98e",
+  "results": {
+    "H1000-zstd": {
+      "container": {
+        "codec": 1,
+        "no_operational_controls": true,
+        "pack_plus_index_bytes": 2626886,
+        "packs": [
+          {
+            "codec": 1,
+            "first": "attempts/attempt-52100-1792359685380803900-1258/allocations/publication-52100-1792359685406352100-1267.json",
+            "index": "1492202a2a1f614d17ad1f8264328e9a1dcfb8f26997b83759ae5fd2582770aa",
+            "index_bytes": 141909,
+            "last": "attempts/attempt-72404-1792359681226051900-1/allocations/publication-72404-1792359681398718500-42.json",
+            "pack": "5e90183a4933790f3063cf6b4b171e894f70daacc47898f3971511b485af0965",
+            "pack_bytes": 110385,
+            "records": 900,
+            "role": "allocation"
+          },
+          {
+            "codec": 1,
+            "first": "attempts/attempt-52100-1792359685380803900-1258/candidate.json",
+            "index": "a11a7545084e1e5684f5e62cc21d1d5d9240a34752180623fac4abcf3b450e9e",
+            "index_bytes": 101130,
+            "last": "attempts/attempt-72404-1792359681226051900-1/candidate.json",
+            "pack": "043906eb6ba1f394a058b3895790392eb81965e8d8a3a41ad5ce334a11f6aa8c",
+            "pack_bytes": 867524,
+            "records": 900,
+            "role": "candidate"
+          },
+          {
+            "codec": 1,
+            "first": "attempt-hints/attempt-52100-1792359681531997100-0.json",
+            "index": "974eb7882e5dbac2c2239ab1994a48cf30462914185115875d07d118edc99072",
+            "index_bytes": 107238,
+            "last": "attempt-hints/attempt-72404-1792359681226051900-1.json",
+            "pack": "9163d14cd73dec8db0f73e932de44b2e6aadf657bccd11620a8d49975f98896e",
+            "pack_bytes": 122183,
+            "records": 1000,
+            "role": "hint"
+          },
+          {
+            "codec": 1,
+            "first": "publications/publication-52100-1792359681568057800-10.json",
+            "index": "53140860a13d834ec6e89e6bd58f65dd28ccb2af4363f4d4fe1c66045de22c3e",
+            "index_bytes": 110243,
+            "last": "publications/publication-72404-1792359681398718500-42.json",
+            "pack": "3c5a996ea72fbbf8597184284b4a80110489acde661c6f0f241d180ee3f293ff",
+            "pack_bytes": 745959,
+            "records": 1000,
+            "role": "publication"
+          },
+          {
+            "codec": 1,
+            "first": "results/001e7fb42476c635c8d75d08ff5d8160d0829a753cfbe9b615cc56e56900db96.json",
+            "index": "9f344012e153764eff23349d3901bad0f86104d099ad1500bc7e98520c6ae229",
+            "index_bytes": 127053,
+            "last": "results/ff9ec9a430ad2322708b23be356cb5b59241f803c05fb7b47caa098c52e73b5f.json",
+            "pack": "84f930406b001c181fd4cdba8da3d5d5f3a8300491e7fc78b78d551e06412e29",
+            "pack_bytes": 193262,
+            "records": 1000,
+            "role": "result"
+          }
+        ],
+        "profile": "authenticated-record-subset-nonoperational",
+        "raw_bytes": 5298334,
+        "records": 4800,
+        "seconds": 0.2613949,
+        "self_verification_metrics": {
+          "bytes_read": 2626886,
+          "logical_record_bytes": 5298334,
+          "opens": 4805,
+          "pack_decoded_bytes": 5298334,
+          "pack_index_loads": 5,
+          "pack_records_read": 4800,
+          "pack_storage_bytes": 2626886
+        }
+      },
+      "independent": {
+        "status": "passed",
+        "profile": "record-subset-not-operational-history",
+        "records": 4800,
+        "raw_bytes": 5298334,
+        "pack_plus_index_bytes": 2626886,
+        "packs": 5,
+        "codec": 1,
+        "independent_codec": {
+          "version": "1.5.6",
+          "path": "C:\\Program Files\\Git\\mingw64\\bin\\libzstd.dll",
+          "sha256": "f216ea8efb5b3bb9ad3d938fb9ac07e3b8f78c2c92faab03d2c468d0b6798a5a"
+        },
+        "source_inventory_sha256": "c92db05fbdf50c02b29b1259137f7a3d1e905bfb1af9c88102bb4da897a45ea1",
+        "source_corpus_sha256": "7c74902c8f218c784cb0b36cdd00adee5b8907b2a07001a7eb2f5615e46b8f01",
+        "source_capture_transport_sha256": "c052a458169768cd0b17e6b4ec9f0daec1f7aabab23d552288f9dde82587e452",
+        "source_capture_inventory_sha256": "fd5fc7c9085e00b9a6a7af6980c431a4c36386bed59bff245b1d55ce413899ff",
+        "seconds": 0.0779999999795109
+      },
+      "prospective_container_bound": 6277358,
+      "ceiling": 8000000
+    },
+    "H10000-raw": {
+      "container": {
+        "codec": 0,
+        "no_operational_controls": true,
+        "pack_plus_index_bytes": 62996137,
+        "packs": [
+          {
+            "codec": 0,
+            "first": "attempts/attempt-52100-1792359685380803900-1258/allocations/publication-52100-1792359685406352100-1267.json",
+            "index": "db8566ee0a408df8ae71c534fa7aea057ce35001bbe12dc2efed9daa6d24b23d",
+            "index_bytes": 1576991,
+            "last": "attempts/attempt-72456-1792360394353331300-145241/allocations/publication-72456-1792360394383873800-145254.json",
+            "pack": "273375f14dabffee0312c5d54e77c0c63a70b0c87605579469b66cb4ce0b7275",
+            "pack_bytes": 1446822,
+            "records": 9900,
+            "role": "allocation"
+          },
+          {
+            "codec": 0,
+            "first": "attempts/attempt-52100-1792359685380803900-1258/candidate.json",
+            "index": "d4fb7b79aa4801ede5b231aea7030e5c9b24e46141102787a7451e1b0bf0712f",
+            "index_bytes": 1120169,
+            "last": "attempts/attempt-72456-1792360394353331300-145241/candidate.json",
+            "pack": "1f1b53f1f25f3fb381e2342b3efb0a15bd45a41d0eb05505b2f3c0d6dc97f7a2",
+            "pack_bytes": 37997376,
+            "records": 9900,
+            "role": "candidate"
+          },
+          {
+            "codec": 0,
+            "first": "attempt-hints/attempt-52100-1792359681531997100-0.json",
+            "index": "4bd700a1fc549dd7bdc41700761cfd4a86672d456e6b70036f8a7829eeef99cf",
+            "index_bytes": 1081277,
+            "last": "attempt-hints/attempt-72456-1792360394353331300-145241.json",
+            "pack": "cff4239f15be55d0b3e0d2279b6cbcaaf94fd0b100cdf70fc3c4001f2b2ce7cc",
+            "pack_bytes": 1461233,
+            "records": 10000,
+            "role": "hint"
+          },
+          {
+            "codec": 0,
+            "first": "publications/publication-52100-1792359681568057800-10.json",
+            "index": "16569738be4256ed76951bbeecebe9309292e024f77875ba4cdc9bbb5fada149",
+            "index_bytes": 1111286,
+            "last": "publications/publication-72456-1792360394383873800-145254.json",
+            "pack": "a02e7850a4ffa731c61d386abc1e1af67e0133d26455befaed01bbdef53e39ee",
+            "pack_bytes": 13373462,
+            "records": 10000,
+            "role": "publication"
+          },
+          {
+            "codec": 0,
+            "first": "results/0001f68e95c43bab06a5634fd8e66139e8e59dcd6c52785d3f15c9fc643a0b4b.json",
+            "index": "50df5a07905705c2e2491f5b29b10d0c8e05d6ca6dfb9d0fcc6b8651ad4b90d7",
+            "index_bytes": 1270053,
+            "last": "results/fffbbd30e53fefb0354d19b5156ab908c4be8c7b87c611f948adad38bbf35440.json",
+            "pack": "199fa9c955475c094ae78bfb4e95e01dd349b113969c4ef962e41ff382a113b8",
+            "pack_bytes": 2557468,
+            "records": 10000,
+            "role": "result"
+          }
+        ],
+        "profile": "authenticated-record-subset-nonoperational",
+        "raw_bytes": 56836361,
+        "records": 49800,
+        "seconds": 1.6613649000000001,
+        "self_verification_metrics": {
+          "bytes_read": 62996137,
+          "logical_record_bytes": 56836361,
+          "opens": 49805,
+          "pack_decoded_bytes": 56836361,
+          "pack_index_loads": 5,
+          "pack_records_read": 49800,
+          "pack_storage_bytes": 62996137
+        }
+      },
+      "independent": {
+        "status": "passed",
+        "profile": "record-subset-not-operational-history",
+        "records": 49800,
+        "raw_bytes": 56836361,
+        "pack_plus_index_bytes": 62996137,
+        "packs": 5,
+        "codec": 0,
+        "independent_codec": null,
+        "source_inventory_sha256": "915640abb8778b27febe9e930c6cda7676f8c51f5df7cd369a1da6b4778c1669",
+        "source_corpus_sha256": "63d8add4c85eee090c0d6039e50bb9fda5f45f7449f0a54ce72e964312b51c6d",
+        "source_capture_transport_sha256": "c052a458169768cd0b17e6b4ec9f0daec1f7aabab23d552288f9dde82587e452",
+        "source_capture_inventory_sha256": "fd5fc7c9085e00b9a6a7af6980c431a4c36386bed59bff245b1d55ce413899ff",
+        "seconds": 0.5310000000172295
+      },
+      "prospective_container_bound": 63061673,
+      "ceiling": 64000000
+    },
+    "H10000-zstd": {
+      "container": {
+        "codec": 1,
+        "no_operational_controls": true,
+        "pack_plus_index_bytes": 27715268,
+        "packs": [
+          {
+            "codec": 1,
+            "first": "attempts/attempt-52100-1792359685380803900-1258/allocations/publication-52100-1792359685406352100-1267.json",
+            "index": "37a3a178fda43895ec24579c65886a3861deb386283d242698187f85dee57645",
+            "index_bytes": 1576991,
+            "last": "attempts/attempt-72456-1792360394353331300-145241/allocations/publication-72456-1792360394383873800-145254.json",
+            "pack": "1878e16d6f39d04928c990e7d52b3344251f74ff2034aad61e0cf838c764ab9f",
+            "pack_bytes": 1219922,
+            "records": 9900,
+            "role": "allocation"
+          },
+          {
+            "codec": 1,
+            "first": "attempts/attempt-52100-1792359685380803900-1258/candidate.json",
+            "index": "8a0ca9a50c40be92fcf3ebe5aa87bc14c8e715b3a56950cc667a4455b877f150",
+            "index_bytes": 1120169,
+            "last": "attempts/attempt-72456-1792360394353331300-145241/candidate.json",
+            "pack": "19140333968f4960e8b74a375d4f4027bbee53c9ebaeceef4f08dde07d1d388f",
+            "pack_bytes": 9671301,
+            "records": 9900,
+            "role": "candidate"
+          },
+          {
+            "codec": 1,
+            "first": "attempt-hints/attempt-52100-1792359681531997100-0.json",
+            "index": "e30a29682c2e629a6e53a009568657ba24e0444fba2966efe2874d984ba12745",
+            "index_bytes": 1081277,
+            "last": "attempt-hints/attempt-72456-1792360394353331300-145241.json",
+            "pack": "86f3bcc1dc2351d7f125c8fe670bcd41e348e71d2671d7b9023eea3deebecc54",
+            "pack_bytes": 1228551,
+            "records": 10000,
+            "role": "hint"
+          },
+          {
+            "codec": 1,
+            "first": "publications/publication-52100-1792359681568057800-10.json",
+            "index": "3d48d4a3196030251f96c96aac791c91571b4048972f550d392add4acb1323fa",
+            "index_bytes": 1111286,
+            "last": "publications/publication-72456-1792360394383873800-145254.json",
+            "pack": "17c6141957d6386f494dacb5bfa493c12a81c065c5b82820b31e2ad7daf885cf",
+            "pack_bytes": 7494029,
+            "records": 10000,
+            "role": "publication"
+          },
+          {
+            "codec": 1,
+            "first": "results/0001f68e95c43bab06a5634fd8e66139e8e59dcd6c52785d3f15c9fc643a0b4b.json",
+            "index": "bf956ebca09eaed045f68c44f2d2afd38f3d0dd6e6d008a59a0169aa6c859402",
+            "index_bytes": 1270053,
+            "last": "results/fffbbd30e53fefb0354d19b5156ab908c4be8c7b87c611f948adad38bbf35440.json",
+            "pack": "5f62f7de339dcea66c3615a55dccf3a0d5e8db0058b8bb12f2eaec23db4fd12f",
+            "pack_bytes": 1941689,
+            "records": 10000,
+            "role": "result"
+          }
+        ],
+        "profile": "authenticated-record-subset-nonoperational",
+        "raw_bytes": 56836361,
+        "records": 49800,
+        "seconds": 2.1121293,
+        "self_verification_metrics": {
+          "bytes_read": 27715268,
+          "logical_record_bytes": 56836361,
+          "opens": 49805,
+          "pack_decoded_bytes": 56836361,
+          "pack_index_loads": 5,
+          "pack_records_read": 49800,
+          "pack_storage_bytes": 27715268
+        }
+      },
+      "independent": {
+        "status": "passed",
+        "profile": "record-subset-not-operational-history",
+        "records": 49800,
+        "raw_bytes": 56836361,
+        "pack_plus_index_bytes": 27715268,
+        "packs": 5,
+        "codec": 1,
+        "independent_codec": {
+          "version": "1.5.6",
+          "path": "C:\\Program Files\\Git\\mingw64\\bin\\libzstd.dll",
+          "sha256": "f216ea8efb5b3bb9ad3d938fb9ac07e3b8f78c2c92faab03d2c468d0b6798a5a"
+        },
+        "source_inventory_sha256": "915640abb8778b27febe9e930c6cda7676f8c51f5df7cd369a1da6b4778c1669",
+        "source_corpus_sha256": "63d8add4c85eee090c0d6039e50bb9fda5f45f7449f0a54ce72e964312b51c6d",
+        "source_capture_transport_sha256": "c052a458169768cd0b17e6b4ec9f0daec1f7aabab23d552288f9dde82587e452",
+        "source_capture_inventory_sha256": "fd5fc7c9085e00b9a6a7af6980c431a4c36386bed59bff245b1d55ce413899ff",
+        "seconds": 0.7189999999827705
+      },
+      "prospective_container_bound": 66450931,
+      "ceiling": 80000000
+    },
+    "H1000-ratios": {
+      "PZ_over_P0_bytes": 0.44630096941728775,
+      "P0_bytes": 5885907,
+      "PZ_bytes": 2626886,
+      "operational_store": false
+    },
+    "H10000-ratios": {
+      "PZ_over_P0_bytes": 0.43995186561995064,
+      "P0_bytes": 62996137,
+      "PZ_bytes": 27715268,
+      "operational_store": false
+    }
+  },
+  "new_growth": {
+    "C:\\file-native-packing-20261020\\subsets\\H1000-PZ": {
+      "bytes": 2630597,
+      "files": 12
+    },
+    "C:\\file-native-packing-20261020\\subsets\\H10000-corpus": {
+      "bytes": 67490161,
+      "files": 3
+    },
+    "C:\\file-native-packing-20261020\\subsets\\H10000-P0": {
+      "bytes": 62999734,
+      "files": 12
+    },
+    "C:\\file-native-packing-20261020\\subsets\\H10000-PZ": {
+      "bytes": 27719029,
+      "files": 12
+    }
+  },
+  "protected_selectors_and_core_unchanged": true,
+  "existing_H1000_P0_preserved": true,
+  "no_STORE_no_SELECTED": true,
+  "not_operational_history": true
+}

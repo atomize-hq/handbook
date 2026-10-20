@@ -1,0 +1,152 @@
+{
+  "status": "NATIVE_ARM64_OFFLINE_LOCKED_BUILD_AND_FIVE_UNITS_PASS",
+  "created_utc": "2026-10-20T06:43:55.894731+00:00",
+  "build_receipt": {
+    "label": "native-build",
+    "argv": [
+      "/Users/spensermcconnell/.rustup/toolchains/1.89.0-aarch64-apple-darwin/bin/cargo",
+      "build",
+      "--release",
+      "--target",
+      "aarch64-apple-darwin",
+      "--locked",
+      "--offline",
+      "-j1",
+      "-p",
+      "file-native-incremental",
+      "--bin",
+      "file-native-incremental"
+    ],
+    "exit": 0,
+    "finished_utc": "2026-10-20T06:41:59.995231+00:00"
+  },
+  "unit_receipt": {
+    "label": "workspace-five-units",
+    "argv": [
+      "/Users/spensermcconnell/.rustup/toolchains/1.89.0-aarch64-apple-darwin/bin/cargo",
+      "test",
+      "--release",
+      "--target",
+      "aarch64-apple-darwin",
+      "--locked",
+      "--offline",
+      "-j1",
+      "--workspace",
+      "--lib",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "finished_utc": "2026-10-20T06:42:09.963059+00:00"
+  },
+  "unit_stdout": "\nrunning 5 tests\ntest bounds_tests::bounded_file_and_indirection_routes_refuse ... ok\ntest disk::codec_tests::compact_refuses_damage_before_allocating ... ok\ntest pack::tests::decoder_never_uses_advertised_size ... ok\ntest pack::tests::typed_keys_exclude_controls_and_active_payloads ... ok\ntest packing::tests::loading_indexes_evicts_before_transient_allocation ... ok\n\ntest result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.10s\n\n",
+  "frozen_binary": {
+    "path": "/private/tmp/file-native-p-macos-20261020/frozen-bin-private-proposed-v6/file-native-incremental",
+    "bytes": 2194384,
+    "sha256": "9ae57af7f16a05aa01d79b0aa88ce90b50f7669858548be6933cfc2d0f1c0def",
+    "architecture": "aarch64-apple-darwin",
+    "executed": false
+  },
+  "supervisor": {
+    "utc": "2026-10-20T06:42:15.002277+00:00",
+    "worker_exit": 0,
+    "reason": null,
+    "watchdog_error": null,
+    "remaining_group": false,
+    "worker_pgid": 50316,
+    "sampled_aggregate_peak_RSS_bytes": 906510336,
+    "sampled_per_process_peak_RSS_bytes": 768557056,
+    "samples": 302,
+    "missing_samples": 0,
+    "transient_null_measurements": [
+      {
+        "utc": "2026-10-20T06:41:29.768803+00:00",
+        "attempt": 1,
+        "measurement": null,
+        "errno": 2,
+        "vanished_live_target_path": "/private/tmp/file-native-p-macos-20261020/target-private-proposed-v6/aarch64-apple-darwin/release/build/zstd-sys-0e65447a9580912a/out/7c9960efb53c0b35-zstd_opt-a78cfe0a.o.tmp"
+      }
+    ],
+    "failed_or_timed_out_after_bindings": "UNKNOWN unless execution-after.json exists",
+    "missing_RSS_policy": "NULL and stop; never interpret missing as zero",
+    "disk_enforcement": "sampled conservative thresholds with inflight reserve, not hard quota",
+    "RLIMIT_FSIZE_bytes": 16777216,
+    "RLIMIT_AS": null,
+    "checker_started": false,
+    "checker_RSS_bytes": null,
+    "engine_CLI_invoked": false,
+    "qualification": null,
+    "original_cutoff_utc": "2026-10-20T07:55:16Z",
+    "original_closeout_utc": "2026-10-20T08:25:16Z"
+  },
+  "strong_group_proof": {
+    "utc": "2026-10-20T06:43:20.467854+00:00",
+    "known_owned_worker_PGID": 50316,
+    "excluded_exact_probe_PID": 54709,
+    "rows": [],
+    "group_present_native_signal0": false,
+    "native_ps_exit": 0,
+    "native_ps_stderr": ""
+  },
+  "source145_core18_tools_private1520_shared1262_oldQN_and_SDK_preserved": true,
+  "shared_DB_writer_attribution": "UNKNOWN; historical drift limitation persists; no restore",
+  "accounting_before_archive": {
+    "whole": {
+      "bytes": 199497950,
+      "files": 2312
+    },
+    "private_cache": {
+      "bytes": 24738123,
+      "files": 1626
+    },
+    "target": {
+      "bytes": 81216173,
+      "files": 400
+    },
+    "frozen": {
+      "bytes": 2194384,
+      "files": 1
+    },
+    "unit_fixture": {
+      "bytes": 80976318,
+      "files": 8
+    },
+    "retained_old_targets_bytes": 7925801,
+    "retained_old_targets": [
+      {
+        "bytes": 0,
+        "files": 0
+      },
+      {
+        "bytes": 0,
+        "files": 0
+      },
+      {
+        "bytes": 277070,
+        "files": 13
+      },
+      {
+        "bytes": 7648731,
+        "files": 43
+      },
+      {
+        "bytes": 0,
+        "files": 0
+      }
+    ],
+    "other_bytes": 2447151,
+    "unmeasured_Git_OS_reserve_bytes": 1572864,
+    "measurement": "strict single traversal, same-stat partition; no transient omitted"
+  },
+  "no_Cargo_download_or_shared_write": true,
+  "engine_CLI_full_native_P": "NOT RUN; separate bounded GO needed",
+  "cleanup": "NONE; all failed and successful target/unit prefixes retained",
+  "reclaim_candidate_bytes_NOT_RELEASED": 162192491,
+  "stage_GO": "2026-10-20T06:41:00Z",
+  "functional_cutoff": "2026-10-20T06:51:00Z",
+  "artifact_cutoff": "2026-10-20T06:56:00Z",
+  "old_failed_stage": "06:22-06:32 FAILED/CENSORED unchanged",
+  "original_P_functional_cutoff": "2026-10-20T07:55:16Z",
+  "original_P_closeout": "2026-10-20T08:25:16Z"
+}

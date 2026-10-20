@@ -167,6 +167,34 @@
     "bytes": 786,
     "sha256": "2d334afbcc1744996416794eecba1c76a3fd295df2326cf3431164d8cf3564e9"
   },
+  "p-final-parent-32MiB-reallocation.json": {
+    "bytes": 607,
+    "sha256": "8aee15bc6d55b1032ee4f46070db11368ec20027864d53c9dc92662efaa59e70"
+  },
+  "p-final-record-corpus-controls-binding.json": {
+    "bytes": 1535,
+    "sha256": "dee67ef0627bb077c454d8c72205c41a388b3f563e16ef16d604b9df837bebd7"
+  },
+  "p-final-record-corpus-controls.json": {
+    "bytes": 14651,
+    "sha256": "29473d969f72606276351f915147ed0eaa9c4f94f7794ef2f83248ebcacb80eb"
+  },
+  "p-final-Windows-F-actual-events.json": {
+    "bytes": 1565768,
+    "sha256": "0a33ab7533a0308a4a732f5b4c6a2886d86b842dcf24f70ee3d155c963213d19"
+  },
+  "p-final-Windows-F-parent-raw-review.json": {
+    "bytes": 465,
+    "sha256": "9c96265e04e9a6ca91200d49773d802c6c952b62dbb40a60d75fe7f16361103e"
+  },
+  "p-final-Windows-F-resource-events.json": {
+    "bytes": 52408,
+    "sha256": "3525bd777ea1efe52bef733d3d643b0c013e9859bbcffda1ad92a608ea15beee"
+  },
+  "p-final-Windows-F-summary.json": {
+    "bytes": 6839,
+    "sha256": "bb2d4da6c23240bd1e88440e32ecd8d86e1f2a6086dfb120f0c1da15b883eaee"
+  },
   "p-fixed-candidate-old-counterexample.json": {
     "bytes": 6669,
     "sha256": "009335071518ae1bcd2fad20ba00b3bcef4c875c4bd877d0e4a65d929a141450"
@@ -291,6 +319,14 @@
     "bytes": 3276,
     "sha256": "5d093e58d4f25e15bf85980b0b92e09d213e96deccd83215ea71fc36a8ad81e2"
   },
+  "p-macos-benign-group-termination-result.json": {
+    "bytes": 2103,
+    "sha256": "c232478e7e3b3a7c8a8c597bb656be78ee00eaa511b8fb3f6fb4e5da04144f06"
+  },
+  "p-macos-benign-group-termination-validation.py": {
+    "bytes": 4794,
+    "sha256": "247f35c291a1746b3be06a913579165338c51324ea2747b847faeaf7201513fa"
+  },
   "p-macos-build-failures-and-guard-review.json": {
     "bytes": 1542,
     "sha256": "dfdb61225a71ebab7f358dd4647ea6c335d86aff54f0d67c4a51cf5bd16f36d3"
@@ -303,9 +339,21 @@
     "bytes": 1050,
     "sha256": "87d750ed7cfffde40b603c0c78ce67f936e2a9b98af7fd26a645bebdfb8a13e2"
   },
+  "p-macos-full-control-parent-reviewed.py": {
+    "bytes": 11608,
+    "sha256": "56fc2ff83fa16f0244e0a8cf8613f4443b49d6733d59513953787534edc0c34c"
+  },
+  "p-macos-full-parent-approved-code-hashes.json": {
+    "bytes": 803,
+    "sha256": "0b25c0df848691283ca967ba8de881b3d7c0e83d0e94f1d8748fa27054699377"
+  },
   "p-macos-isolated-preparation-reservation.json": {
     "bytes": 934,
     "sha256": "125b3aab7d7ac1a76953fe79c6b865c3d0f2abc23731b1143d39ebb94f035772"
+  },
+  "p-macos-native-build-unit5-closeout.json": {
+    "bytes": 5050,
+    "sha256": "b205df65a6e56c4b9abe88e682e134d7bd6e814cc680abac09335de758dcbaf9"
   },
   "p-macos-preflight-raw.tar.gz": {
     "bytes": 45963,
@@ -331,6 +379,10 @@
     "bytes": 19760,
     "sha256": "eab01192c6665c0c70e920f20b0f219a32b5c2237e2867a02ca7809ce4452158"
   },
+  "p-macos-reviewed-build-supervisor-v6.py": {
+    "bytes": 23754,
+    "sha256": "a737c9f564290840c4c66c95570b9b9fc10aac6b20433882d31f78280116d645"
+  },
   "p-macos-reviewed-build-supervisor.py": {
     "bytes": 18653,
     "sha256": "8bb745ac95cb18d63bef4af0f4573a4bb2e53d2d0d2bfb56143f4a3684095700"
@@ -342,6 +394,34 @@
   "p-macos-reviewed-proposal.json": {
     "bytes": 2814,
     "sha256": "def5177722eef6eb119a02655923c0e5cd5dfeed7ba80a24f45630e6252288bc"
+  },
+  "p-macos-unit-fixture-cross-host-parent-review.json": {
+    "bytes": 5480,
+    "sha256": "01cffe98594a47ce7fa601524a14c468a7edbea339dac04ae6038e1131de2577"
+  },
+  "p-macos-v6-build-admission-and-early-result.json": {
+    "bytes": 2097,
+    "sha256": "589a81bfa38cf54f4fad751b784358e0f8d1c072fe9501b9aa93a5bf51fa83e5"
+  },
+  "p-n8000-A-baseline-parent-stream-review.txt": {
+    "bytes": 765,
+    "sha256": "dc0d79324441e8451436a11b94de29ea35caab3aff4271a2f78fcbfcbd76e098"
+  },
+  "p-N8000-A-failed-L-old-parent-verify.txt": {
+    "bytes": 759,
+    "sha256": "6ee6725277eea9992ab42de8efd0760a40558a05a96453fa965918186059c46d"
+  },
+  "p-N8000-A-L-new-v2-parent-verify.txt": {
+    "bytes": 775,
+    "sha256": "ea9f13bdce9c1b128303de57b47786f10dfb3baca59254c927f4e58344965978"
+  },
+  "p-N8000-A-L-old-v2-parent-verify.txt": {
+    "bytes": 775,
+    "sha256": "7301b4bd03da8d608eb542fbdb672d4ec49f53f59df891b0c76503c0dc97ab0d"
+  },
+  "p-N8000-A-P0-v2-parent-verify.txt": {
+    "bytes": 766,
+    "sha256": "85bfac1cc7ed0b6227bd4abbea03f0ecc9c1609375593b64072bd45aadd08d71"
   },
   "p-native-stage-resource-precommit.txt": {
     "bytes": 2766,
@@ -378,6 +458,18 @@
   "p-packed-restored-verify-guard.json": {
     "bytes": 3776,
     "sha256": "646a06fdd54a46c4ddf8d823fb00b5d7931bfed3257ad2e9d0c44e8091c5bbb4"
+  },
+  "p-packed-successor-independent.json": {
+    "bytes": 1480,
+    "sha256": "80196a4488a14fb0f420374cd8ab45e497a7f24051edba7a85285936a4e4c52a"
+  },
+  "p-packed-successor-parent-stream-verification.txt": {
+    "bytes": 720,
+    "sha256": "b69633a69f79cb41f1afad300085b671c29504af6df4dd2a47cccfbdf76cea33"
+  },
+  "p-parent-preintegration-checkpoint-detect.txt": {
+    "bytes": 2151,
+    "sha256": "72015f93bac21465d15a38d696cb847a30dc4277173034d6eac4f352603b392f"
   },
   "p-preservation-admission.json": {
     "bytes": 3391,
@@ -490,6 +582,10 @@
   "p-temporary-archive-unit-allocation.json": {
     "bytes": 1362,
     "sha256": "b9e98a71f9266f48ee3343d6b9f44cdd802391ba6f21c8a71f650bf53b3d0656"
+  },
+  "p-verify-operational-image.py": {
+    "bytes": 4407,
+    "sha256": "971d894c8754b5bb4c8cb4ad26cd28df33d415ffc75ca1749443d2f7b709abc8"
   },
   "p-windows-XZ-parent-review.json": {
     "bytes": 652,

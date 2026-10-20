@@ -1,0 +1,188 @@
+{
+  "status": "passed",
+  "core_pin": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "binary_sha256": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b",
+  "cases": 24,
+  "events": 282,
+  "source_unchanged": true,
+  "sources": {
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\final_recovery_stage.py": {
+      "sha256": "42d12b1f1368bd6bc1be785c6f559b326b9f08f80990687eedcd3e5f9997f0ea",
+      "snapshot": "C:\\file-native-packing-20261020\\fix2\\loose-regression-final\\0-final_recovery_stage.py"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\loose_regression.py": {
+      "sha256": "57d72688fefef474683b6386693e581d13e99d7ff3f1e9c8299c3f707f708bba",
+      "snapshot": "C:\\file-native-packing-20261020\\fix2\\loose-regression-final\\1-loose_regression.py"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\driver.py": {
+      "sha256": "6e45ef7892a2702ea6e8992102d06b472164e01a15dbae28efcfbb7cc9121aa0",
+      "snapshot": "C:\\file-native-packing-20261020\\fix2\\loose-regression-final\\2-driver.py"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\guard.py": {
+      "sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68",
+      "snapshot": "C:\\file-native-packing-20261020\\fix2\\loose-regression-final\\3-guard.py"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-recovery-reclamation-2026-10-19\\capsule.py": {
+      "sha256": "1b997e6bc058660fcfe7246ee98a7b13317e63f7232acef73fef6c3987273b71",
+      "snapshot": "C:\\file-native-packing-20261020\\fix2\\loose-regression-final\\4-capsule.py"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-recovery-reclamation-2026-10-19\\operational_backup.py": {
+      "sha256": "20aa1b2965fd294bbf11942e5d399c7944c1f699b11021c0349b57ee5ee10bbe",
+      "snapshot": "C:\\file-native-packing-20261020\\fix2\\loose-regression-final\\5-operational_backup.py"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-navigation-2026-10-19\\oracle.py": {
+      "sha256": "877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f",
+      "snapshot": "C:\\file-native-packing-20261020\\fix2\\loose-regression-final\\6-oracle.py"
+    }
+  },
+  "fixture": {
+    "bytes": 46571680,
+    "files": 5194
+  },
+  "old_4cb_run_preserved": true,
+  "actual": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "binary": "C:\\file-native-packing-20261020\\bin\\candidate2.exe",
+    "binary_sha256": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b",
+    "cases": [
+      {
+        "case": "navigation-and-operational-backup",
+        "mode": "A",
+        "n": 16,
+        "status": "success"
+      },
+      {
+        "case": "navigation-and-operational-backup",
+        "mode": "A",
+        "n": 128,
+        "status": "success"
+      },
+      {
+        "case": "navigation-and-operational-backup",
+        "mode": "B",
+        "n": 16,
+        "status": "success"
+      },
+      {
+        "case": "navigation-and-operational-backup",
+        "mode": "B",
+        "n": 128,
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-plan",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-preserved",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-file",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-namespace",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-before-complete",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-complete",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-namespace-preserved",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-plan",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-preserved",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-file",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-namespace",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-before-complete",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-complete",
+        "status": "success"
+      },
+      {
+        "case": "checkpoint-transfer-retire-repeat-gc",
+        "mode": "A",
+        "status": "success"
+      },
+      {
+        "case": "half-preparation-backup-recovery",
+        "mode": "A",
+        "status": "success"
+      },
+      {
+        "case": "checkpoint-transfer-retire-repeat-gc",
+        "mode": "B",
+        "status": "success"
+      },
+      {
+        "case": "half-preparation-backup-recovery",
+        "mode": "B",
+        "status": "success"
+      },
+      {
+        "case": "impossible-final-namespace",
+        "status": "expected refusal"
+      },
+      {
+        "case": "skipped-or-selected-once",
+        "mode": "A",
+        "status": "success"
+      },
+      {
+        "case": "skipped-or-selected-once",
+        "mode": "B",
+        "status": "success"
+      }
+    ],
+    "events": 282,
+    "seconds": 21.75
+  }
+}

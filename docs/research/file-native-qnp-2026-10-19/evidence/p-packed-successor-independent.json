@@ -1,0 +1,41 @@
+{
+  "raw_records": 504833,
+  "raw_bytes": 579015428,
+  "inventory_digest": "058be9aea3ff6e4130f2a9f1af545c2f7ce895b6ebe6677d09b63e48d2f43e84",
+  "independent_codec": {
+    "version": "1.5.6",
+    "path": "C:\\Program Files\\Git\\mingw64\\bin\\libzstd.dll",
+    "sha256": "f216ea8efb5b3bb9ad3d938fb9ac07e3b8f78c2c92faab03d2c468d0b6798a5a"
+  },
+  "semantic": {
+    "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+    "selected": {
+      "publication": "publication-75228-1792477838849957900-15",
+      "digest": "7cb53be20148712464aba1a8f1147717750cc0eaaf78a842c1f9d7834f8ae59d"
+    },
+    "publications": 101008,
+    "ledger_rows": 100000,
+    "permanent_digest": "33ed5b72937e57c2496dbdbcca1b606f5ac59bd892f70cab2ef07a1e91944ea2",
+    "retired_publications": 101,
+    "retired_content": "unavailable-by-contract",
+    "unique_content_roots": 91,
+    "root_visits": 101008,
+    "sources": 39,
+    "pins": 0,
+    "reservations": 0,
+    "packets": 0,
+    "generations": 0,
+    "conservative_cumulative_owner_allowance_bytes": 6789238848192,
+    "actual_physical_owner_bytes": false,
+    "seconds": 31.09399999998277
+  },
+  "navigation": {
+    "documents": 16,
+    "supplemented_documents": 16,
+    "projection_files": 20,
+    "immutable_discovery_semantics_verified": true,
+    "readable_declared_current": true,
+    "discovery_relationships_and_extraction": true
+  },
+  "seconds": 65.10899999999674
+}

@@ -1,0 +1,46 @@
+{
+  "original_failed_build_stage": [
+    "2026-10-20T06:22:00Z",
+    "2026-10-20T06:32:00Z"
+  ],
+  "guard_only_preparation_separate": true,
+  "native_benign_child_grandchild_TERM_KILL_and_empty_ps_pass": true,
+  "parent_full_v5_archive_review": {
+    "bytes": 17415,
+    "sha256": "aa70247b6574fc1746ebf979553d621022dd8985f48fe3b152aa33d48a3080a1",
+    "members": 8,
+    "expanded_bytes": 56268,
+    "source_sha256": "cd8045fe235273c6c6102f301430034b434a15fc5c7f92e562ae6028c4a7dabc"
+  },
+  "V4_EPERM_cause": "UNKNOWN",
+  "v5_review": "coherent same-stat single traversal; live-target ENOENT NULL with bounded retries; other errors propagate; EPERM accepted as absent only after native exact-group snapshot empty",
+  "parent_additional_v6_change": "publish guard receipts atomically through exclusive .writing file and rename to prevent unit-admission partial JSON read; retain all partial records",
+  "v6_exact_parent_constructed_full_code_bytes": 23754,
+  "v6_exact_code_sha256": "a737c9f564290840c4c66c95570b9b9fc10aac6b20433882d31f78280116d645",
+  "unchanged_historical_proposal_sha256": "d7b245e61fb6751a63ebc8407902f7fae89f7ec84833aa66089d0098c73b80a3",
+  "separate_new_build_fixed_window": [
+    "2026-10-20T06:41:00Z",
+    "2026-10-20T06:51:00Z"
+  ],
+  "artifact_closeout": "2026-10-20T06:56:00Z",
+  "Mac_allocation_bytes": 268435456,
+  "retained_old_target_MiB": 12,
+  "new_target_MiB": 152,
+  "new_target_soft_MiB": 118,
+  "unit_fixture_MiB": 84,
+  "conditional_units_only_if_time_and_fresh_actual_fit": true,
+  "early_observed_result": {
+    "native_ARM64_build": "PASS",
+    "unit_tests": 5,
+    "binary_bytes": 2194384,
+    "binary_sha256": "9ae57af7f16a05aa01d79b0aa88ce90b50f7669858548be6933cfc2d0f1c0def",
+    "worker_PGID": 50316,
+    "group_closed": true,
+    "sampled_RSS_aggregate_bytes": 906510336,
+    "sampled_RSS_per_process_bytes": 768557056,
+    "missing_RSS_samples": 0
+  },
+  "full_Mac_engine_qualification": null,
+  "original_P_functional_cutoff": "2026-10-20T07:55:16Z",
+  "original_P_closeout": "2026-10-20T08:25:16Z"
+}

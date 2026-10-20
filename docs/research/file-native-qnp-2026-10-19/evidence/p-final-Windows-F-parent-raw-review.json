@@ -1,0 +1,11 @@
+{
+  "status": "PARENT_FINAL_WINDOWS_F_RAW_282_ACTION_EXIT_RECORDS_MATCH",
+  "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "actual_events": 282,
+  "resource_events": 282,
+  "maximum_child_seconds": 1.2810000000172295,
+  "all_resource_violations_empty": true,
+  "raw_events_sha256": "0a33ab7533a0308a4a732f5b4c6a2886d86b842dcf24f70ee3d155c963213d19",
+  "expected_impossible_namespace_refusal_preserved": true,
+  "no_relabel_of_old_4cb_run": true
+}

@@ -1,0 +1,25 @@
+{
+  "sources": {
+    "corpus_controls_stage.py": "ef8ece1266579e6471ab7da08c16947d191f5bfbd149c0886a104524665ca4ae",
+    "subset_corpus.py": "659d431369e80c7b6b6534953bfa5e2cd5636c4a3ad8caaaedfa9bbdf6b37b8d",
+    "verify_subset.py": "c582ef2f58a0b304bf611d106032a1cb230731bce27d039568ec5ff798a319da",
+    "independent.py": "94987dbe1c992ef2491bb9819ad90185d2f29aef704b1bfaaa8f7e052a449e66",
+    "guard.py": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68",
+    "driver.py": "6e45ef7892a2702ea6e8992102d06b472164e01a15dbae28efcfbb7cc9121aa0"
+  },
+  "tool_sha256": "1c591b34f961ea58037f3e0327218525e3763c566e91d1355c0ce609d937e98e",
+  "pack_sha256": "4d854885a54ee95ffed44bfec704f95c5c91d95b98964d419a7607dd2a48b2e3",
+  "protected_selector_reader": "C:\\file-native-recovery-20261019\\history-restored\\disposable\\store",
+  "protected_ledger_sha256": "6ab8bef045580f7642b0f404cf58ab7cb8211badfeb68d258bc62e984e02af18",
+  "first_original_selector": {
+    "digest": "f46b73abef341df608067794106b081460ab2ed2610f020f20c03c52d805642c",
+    "publication": "publication-52100-1792359681568057800-10"
+  },
+  "first_original_publication_sha256": "f46b73abef341df608067794106b081460ab2ed2610f020f20c03c52d805642c",
+  "original_initial_selector": {
+    "publication": "publication-72404-1792359681398718500-42",
+    "digest": "b60f69ca0fff5f5e4a6f9dae87eca019927a9399664c475a6fc5526370d241ff"
+  },
+  "emitted_raw_source": "fully authenticated exact post-GC FNOP1 capture",
+  "operational_rewind": false
+}
