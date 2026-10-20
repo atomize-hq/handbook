@@ -1,0 +1,85 @@
+{
+  "scope": "new separately authorized follow-up; original run unchanged",
+  "start": "2026-10-20T11:43:00Z",
+  "functional_cutoff": "2026-10-20T12:53:00Z",
+  "artifact_closeout": "2026-10-20T13:13:00Z",
+  "source_head": "f59ba64d259abbb9ba140a3a2ef0663a35ab1725",
+  "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "windows_bytes_cap": 2684354560,
+  "windows_files_cap": 560000,
+  "free_bytes_min": 150323855360,
+  "new_store_cap": 600000000,
+  "archive_cap": 67108864,
+  "returns_cap": 33554432,
+  "whole_cell_seconds": 900,
+  "bindings": {
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\api.rs": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\baseline_model.rs": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\bounds_tests.rs": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\differential.rs": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\disk.rs": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\graph.rs": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\io.rs": "66bf895132ce9dc22b8be04cb6558390ef940f6868c69fe99969508b90e8d93a",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\lib.rs": "a86f5ca110500f55fe860f20988125c85e63fcf6e2a7fbb4204bfd77898a7ce5",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\lifetime.rs": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\main.rs": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\navigation.rs": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\objects.rs": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\pack.rs": "4d854885a54ee95ffed44bfec704f95c5c91d95b98964d419a7607dd2a48b2e3",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\packing.rs": "5edb97a4527abc35257837f79872b76c9dbf0ac010d2e66114a01b8809420647",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\projection.rs": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\store.rs": "569e9470bda03dcfeadc6ed49e5c0058cb9a27e0d0f54fe383eadb6b9d0fa330",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\Cargo.toml": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\Cargo.lock": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+    "C:\\file-native-packing-20261020\\bin\\candidate2.exe": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b",
+    "C:\\file-native-navigation-20261019\\bin\\final.exe": "d4b7c495abfc029e8fabd6fcfc75501c5de04ce72dd38847a69bc8824022303f",
+    "C:\\file-native-packing-20261020\\build\\release\\qualified_lookup.exe": "0a0558b3b91a37b9cdaec95a26ba9d1af09a45e45640a0743be41d448de8b404",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\independent.py": "94987dbe1c992ef2491bb9819ad90185d2f29aef704b1bfaaa8f7e052a449e66",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\guard.py": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\reclaim_operational_image_fast_slots.ps1": "7d72b0e5af31f86f4903450a9bd400f6d974b84ec2075d1813074374c4c0f5be",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\final-evidence\\raw-evidence.tar.gz": "5176e47d4a7569ed7ac57b29fe0972e5d2e1d37c713f44c4d38c95311ded815d",
+    "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\baseline-operational-backup\\operational.bin.gz": "c5a8f54d0e1c4de85b795d9b4da2a4b8deedfa9c1a0b0e79edd312744aa7af14",
+    "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\baseline-operational-backup\\files.jsonl": "642ea31054c7d0d224ff59b93882a043b7473ddccf1a4ca52ef70c00d98faa1d",
+    "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\baseline-operational-backup\\manifest.json": "acfc9cf9f88f433367c20656b483de48b12d0a0b1456d8b06378c5919740ea9e",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\driver.py": "6e45ef7892a2702ea6e8992102d06b472164e01a15dbae28efcfbb7cc9121aa0",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\sequenced_matrix_stage.py": "44f99afb68d93bf3b4ad5412af34dee06917e3ff85601b0a9a0538ecd94ad560",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\operational_matrix.py": "d05358681750d0a4e0f1d2f02e70dcdf0b2320248e5bea649542647fb165b3b3",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\packed_backup_stage.py": "fd377986be3e525654b20a1b77f621b9f1d9dab22d8df131731b799f786d0ca9",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\final-evidence\\raw-index.json": "2e37f98eb7038383f31e1e68119e9cbb4e8453c992b683a8d8568c08ad90c11d",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\final-evidence\\external-retained-index.json": "7486fc4c8e90039bcbd712f60c11625ac53e6a122313355d040f14c0774004ed",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\report.md": "7560e65d83510e747fa8d25cc5f3599d5cacd11f910a733b2e81c97495477273"
+  },
+  "actual": {
+    "scopes": {
+      "runtime": {
+        "bytes": 1978557271,
+        "files": 56345
+      },
+      "worktree": {
+        "bytes": 14433765,
+        "files": 272
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 241828046,
+        "files": 2268
+      }
+    },
+    "total_new_bytes": 2182315994,
+    "total_new_files": 60832,
+    "free_bytes": 200467505152,
+    "time_utc": "2026-10-20T11:49:26.832646+00:00"
+  },
+  "retained_baseline": {
+    "bytes": 320288517,
+    "files": 24518
+  },
+  "baseline_regular_reclaim_planned_bytes": 320288418,
+  "baseline_regular_reclaim_planned_files": 24515,
+  "admission": false,
+  "prospective_before_baseline_reclaim": 2882979290,
+  "prospective_after_planned_reclaim_NOT_credit": 2562690872
+}

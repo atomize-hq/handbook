@@ -1,0 +1,32 @@
+{
+  "post_main_delta_push_actual": {
+    "scopes": {
+      "runtime": {
+        "bytes": 2210105210,
+        "files": 64611
+      },
+      "worktree": {
+        "bytes": 23842707,
+        "files": 294
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 250767019,
+        "files": 2372
+      }
+    },
+    "total_new_bytes": 2432211848,
+    "total_new_files": 69224,
+    "free_bytes": 200042815488,
+    "time_utc": "2026-10-20T12:59:45.870732+00:00"
+  },
+  "main_delta_commit": "a36e0401a33109f5ab74197c63b10cdc6eaa00cb",
+  "all_owned_Windows_functional_and_artifact_Jobs_closed": true,
+  "PZ_source_and_all_sole_archives_retained": true,
+  "only_final_small_metadata_commit_remains": true,
+  "remaining_metadata_and_positive_Git_margin": 4194304,
+  "frozen_core": "d70f3864f2888d46d9112213b4a03f8d82745a8e"
+}

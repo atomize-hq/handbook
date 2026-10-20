@@ -1,0 +1,11 @@
+{
+  "scope": "incremental followup only; original sealed evidence unchanged",
+  "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "harness_head": "81f35c70278a859615185fc7d03967c31a8ece4e",
+  "archive_bytes": 9317170,
+  "archive_sha256": "46a56aa9c06510f965ddd76edf1ecfe6df6e56af6a805b3660d05c722c166ebb",
+  "members": 172,
+  "expanded_bytes": 55541654,
+  "external_retained_entries": 13,
+  "whole_gzip_EOF_and_all_member_hashes_verified": true
+}

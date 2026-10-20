@@ -1,0 +1,82 @@
+{
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\followup-20261020\\package_v2.py"
+  ],
+  "cwd": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook",
+  "guard_sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68",
+  "started_utc": "2026-10-20T12:55:20.468124+00:00",
+  "seconds": 21.829248428344727,
+  "cap_seconds": 120,
+  "effective_seconds": 120,
+  "exit": 0,
+  "censor": null,
+  "independent_deadline": null,
+  "group_observations": {
+    "root_exit_seen_epoch": 1792500921.5224154,
+    "group_empty_seen_epoch": 1792500921.5224154
+  },
+  "job_query_errors": 0,
+  "process_closure_verified": true,
+  "per_process_rss_limit": 2147483648,
+  "job_commit_limit_bytes": 3221225472,
+  "aggregate_rss_limit": 4294967296,
+  "sampled_peak_rss_by_pid": {
+    "73956": 204025856,
+    "28348": 30703616,
+    "13648": 8007680
+  },
+  "missing_samples": 0,
+  "aggregate_sampled_peak_rss": 172552192,
+  "ownership_samples": [
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 2210100757,
+          "files": 64609
+        },
+        "worktree": {
+          "bytes": 23830788,
+          "files": 286
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 243042603,
+          "files": 2331
+        }
+      },
+      "total_new_bytes": 2424471060,
+      "total_new_files": 69173,
+      "free_bytes": 200052510720,
+      "time_utc": "2026-10-20T12:55:42.256542+00:00"
+    }
+  ],
+  "final_ownership": {
+    "scopes": {
+      "runtime": {
+        "bytes": 2210102900,
+        "files": 64610
+      },
+      "worktree": {
+        "bytes": 23830788,
+        "files": 286
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 243057012,
+        "files": 2340
+      }
+    },
+    "total_new_bytes": 2424487612,
+    "total_new_files": 69183,
+    "free_bytes": 200052146176,
+    "time_utc": "2026-10-20T12:56:04.383754+00:00"
+  },
+  "group_remaining_before_closure": []
+}

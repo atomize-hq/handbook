@@ -1,0 +1,11 @@
+{
+  "parent_proof": "C:\\file-native-qnp-20261019\\followup-20261020\\B-delta-parent-artifact-verify-job.stdout",
+  "parent_proof_sha256": "32f5241489f324ff0d61d3aee140e2cd7a43677f7ae5d74d5170ada8e1ee8920",
+  "parent_job": "C:\\file-native-qnp-20261019\\followup-20261020\\B-delta-parent-artifact-verify-job.json",
+  "parent_job_sha256": "2fcd92179e41977a52bd065c6271880be25dd38b03bc1ae8570afad87621eefa",
+  "parent_job_exit": 0,
+  "parent_job_closure": true,
+  "archive_sha256": "46a56aa9c06510f965ddd76edf1ecfe6df6e56af6a805b3660d05c722c166ebb",
+  "members": 172,
+  "external_retained_entries": 13
+}

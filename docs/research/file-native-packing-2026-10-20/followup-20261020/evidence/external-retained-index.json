@@ -1,0 +1,80 @@
+{
+  "runtime/n8000-B/baseline-operational-backup/files.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\baseline-operational-backup\\files.jsonl",
+    "bytes": 4846610,
+    "sha256": "642ea31054c7d0d224ff59b93882a043b7473ddccf1a4ca52ef70c00d98faa1d",
+    "retained": true
+  },
+  "runtime/n8000-B/baseline-operational-backup/manifest.json": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\baseline-operational-backup\\manifest.json",
+    "bytes": 792,
+    "sha256": "acfc9cf9f88f433367c20656b483de48b12d0a0b1456d8b06378c5919740ea9e",
+    "retained": true
+  },
+  "runtime/n8000-B/baseline-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\baseline-operational-backup\\operational.bin.gz",
+    "bytes": 9000416,
+    "sha256": "c5a8f54d0e1c4de85b795d9b4da2a4b8deedfa9c1a0b0e79edd312744aa7af14",
+    "retained": true
+  },
+  "runtime/n8000-B/L-old-path-v2-operational-backup/files.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\L-old-path-v2-operational-backup\\files.jsonl",
+    "bytes": 6383377,
+    "sha256": "57eb1d5b93bb470e7c95091f2c6bccf105ccb0c0e2c50ddac3655e9e636c22cd",
+    "retained": true
+  },
+  "runtime/n8000-B/L-old-path-v2-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\L-old-path-v2-operational-backup\\operational.bin.gz",
+    "bytes": 11576922,
+    "sha256": "e5a7d1183ca4cc1db46ff2a48d3bef6d4e4a3670affe894a822d317788ac3742",
+    "retained": true
+  },
+  "runtime/n8000-B/L-new-path-v2-operational-backup/files.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\L-new-path-v2-operational-backup\\files.jsonl",
+    "bytes": 6383375,
+    "sha256": "8a63c5addc7fa6dd17b00206c9c78db2ac781c7737867d8382843ee5b7d6448a",
+    "retained": true
+  },
+  "runtime/n8000-B/L-new-path-v2-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\L-new-path-v2-operational-backup\\operational.bin.gz",
+    "bytes": 11577696,
+    "sha256": "33322d1c56b98e6eae57c5e809b16b771db911576ab271ebd23fd65883a0a023",
+    "retained": true
+  },
+  "runtime/n8000-B/P0-path-v2-operational-backup/files.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\P0-path-v2-operational-backup\\files.jsonl",
+    "bytes": 6382205,
+    "sha256": "81b569201b031fb32f9e53e7f6d1ac9d6db82fd2fc70bc1fed423ba5711209ba",
+    "retained": true
+  },
+  "runtime/n8000-B/P0-path-v2-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\P0-path-v2-operational-backup\\operational.bin.gz",
+    "bytes": 11583212,
+    "sha256": "3d4d51693a3bcda4e40719abdc6cb4a0856cadf1f51269eeb325d0190ca8ce69",
+    "retained": true
+  },
+  "runtime/n8000-B/PZ-path-v2-operational-backup/files.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\PZ-path-v2-operational-backup\\files.jsonl",
+    "bytes": 6374171,
+    "sha256": "d94b3ffa2b6f33a09e08e731974686a5f61713c7ce13830b253a4aa2836997b8",
+    "retained": true
+  },
+  "runtime/n8000-B/PZ-path-v2-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\PZ-path-v2-operational-backup\\operational.bin.gz",
+    "bytes": 11478153,
+    "sha256": "8ad5961d47fa0ce522b46c2e601e1d34e103d8ead51e5e97420ef44134541344",
+    "retained": true
+  },
+  "original-sealed-evidence": {
+    "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\final-evidence\\raw-evidence.tar.gz",
+    "bytes": 11106893,
+    "sha256": "5176e47d4a7569ed7ac57b29fe0972e5d2e1d37c713f44c4d38c95311ded815d",
+    "retained": true
+  },
+  "parent-fresh-Mac-recovery": {
+    "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-qnp-2026-10-19\\followup-20261020\\mac-fresh-return.tar.gz",
+    "bytes": 1131583,
+    "sha256": "e13fe472478797febb6312bc32cd7e69c37ecc08b38df344f1ad9f2308105455",
+    "retained": true
+  }
+}
