@@ -9,6 +9,10 @@ pub struct Metrics {
     pub physical_upgrade_holds_ns:Vec<u64>,pub physical_upgrade_wait_ns:u64,pub physical_capture_bytes:u64,
     pub pack_page_resident_peak_bytes:u64,pub pack_page_parse_peak_bytes:u64,pub pack_legacy_index_bytes:u64,
     pub pack_physical_key_lookups:u64,pub pack_key_page_read_max:u64,pub pack_key_index_bytes_max:u64,pub pack_key_relevant_max:u64,
+    pub pack_constructor_peak_bytes:u64,pub pack_constructor_serialized_peak_bytes:u64,pub pack_constructor_metadata_peak_bytes:u64,
+    pub pack_paged_index_metadata_bytes:u64,pub pack_key_paged_index_bytes_max:u64,pub pack_key_legacy_index_bytes_max:u64,pub pack_key_legacy_or_mixed_lookups:u64,pub pack_conversion_duplicate_records:u64,
+    pub pack_output_same_owner_reuses:u64,pub pack_output_created_files:u64,pub pack_conversion_input_records:u64,pub pack_conversion_output_descriptor_records:u64,
+    pub pack_path_canonicalizations:u64,pub io_metadata_stats:u64,
     pub rolling_publications_visited:u64,pub rolling_deferred_visited:u64,pub rolling_collateral_records:u64,pub rolling_collateral_raw_bytes:u64,pub rolling_bootstrap:bool,
     #[serde(skip)]
     pub(crate) cleanup_budget:Option<crate::physical_lifetime::CleanupBudget>,
@@ -101,10 +105,10 @@ pub fn checkpoint(name: &str) -> Result<()> {
     Ok(())
 }
 pub fn mkdir(path: &Path, m: &mut Metrics) -> Result<()> {
-    if m.verify_only&&!path.is_dir(){return Err("integrity:replay-unprepared-directory".into());}
-    if path.is_dir() { if let Some(p)=path.parent(){if p!=path {sync_dir(p,m)?;}} return Ok(()); }
+    if m.verify_only&&!is_dir(path,m){return Err("integrity:replay-unprepared-directory".into());}
+    if is_dir(path,m) { if let Some(p)=path.parent(){if p!=path {sync_dir(p,m)?;}} return Ok(()); }
     if let Some(p)=path.parent() { mkdir(p,m)?; }
-    let create=Instant::now();let created=match fs::create_dir(path){Ok(())=>true,Err(e) if e.kind()==std::io::ErrorKind::AlreadyExists&&path.is_dir()=>false,Err(e)=>return Err(e.into())};m.elapsed("directory-create",create);
+    let create=Instant::now();let created=match fs::create_dir(path){Ok(())=>true,Err(e) if e.kind()==std::io::ErrorKind::AlreadyExists&&is_dir(path,m)=>false,Err(e)=>return Err(e.into())};m.elapsed("directory-create",create);
     if created {m.created_directories+=1;checkpoint("directory-create")?;}
     if path.to_string_lossy().contains("generation-stage"){checkpoint("generation-directory-create")?;}
     if path.to_string_lossy().contains("view"){checkpoint("view-directory-create")?;}
@@ -114,11 +118,12 @@ pub fn mkdir(path: &Path, m: &mut Metrics) -> Result<()> {
 pub fn read(path: &Path, m: &mut Metrics) -> Result<Vec<u8>> {
     read_bounded(path, 128*1024*1024, m)
 }
+fn is_dir(path:&Path,m:&mut Metrics)->bool{m.io_metadata_stats+=1;path.is_dir()}
 pub fn read_bounded(path: &Path, limit: usize, m: &mut Metrics) -> Result<Vec<u8>> {
     let t=Instant::now();
     if let Some(bytes)=crate::packing::read(path,limit,m)?{m.elapsed("read",t);return Ok(bytes);}
     let f=File::open(path).map_err(|e|format!("integrity-read:{}:{e}",path.display()))?;
-    if f.metadata()?.len()>limit as u64 {return Err("integrity:file-length-bound".into());}
+    m.io_metadata_stats+=1;if f.metadata()?.len()>limit as u64 {return Err("integrity:file-length-bound".into());}
     let mut b=Vec::new();
     f.take(limit as u64+1).read_to_end(&mut b)?;
     if b.len()>limit {return Err("integrity:file-length-bound".into());}
@@ -180,7 +185,7 @@ pub fn install_original(stage:&Path,dest:&Path,expected:&str,m:&mut Metrics)->Re
             let ok=unsafe{windows_sys::Win32::Storage::FileSystem::MoveFileExW(a.as_ptr(),b.as_ptr(),0x8)};
             if ok!=0 {m.replacements+=1;return Ok(());}
             let error=std::io::Error::last_os_error();
-            if dest.exists(){return checked(dest,expected,m).map(|_|());}
+            m.io_metadata_stats+=1;if dest.exists(){return checked(dest,expected,m).map(|_|());}
             if attempt==4{return Err(format!("refused:original-install:{error}").into());}
             std::thread::sleep(std::time::Duration::from_millis(5));
         }
@@ -202,7 +207,7 @@ pub fn atomic(path: &Path, bytes: &[u8], m: &mut Metrics) -> Result<()> {
     replace(&stage,path,m)?; sync_dir(path.parent().unwrap(),m)
 }
 pub fn copy(source: &Path, dest: &Path, m: &mut Metrics) -> Result<()> {
-    m.charge(source.metadata()?.len()+4096)?;m.namespace_ops+=1;
+    m.io_metadata_stats+=1;m.charge(source.metadata()?.len()+4096)?;m.namespace_ops+=1;
     mkdir(dest.parent().unwrap(),m)?; let t=Instant::now();
     let mut src=File::open(source)?; let mut dst=OpenOptions::new().write(true).create_new(true).open(dest)?;
     m.opens+=2; let mut buf=[0u8;65536];
