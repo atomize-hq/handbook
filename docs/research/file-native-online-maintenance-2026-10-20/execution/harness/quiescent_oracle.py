@@ -13,6 +13,7 @@ parser.add_argument('--module', required=True)
 parser.add_argument('--module-sha256', required=True)
 parser.add_argument('--output', required=True)
 parser.add_argument('--known-requests')
+parser.add_argument('--request-provenance')
 args = parser.parse_args()
 assert sys.dont_write_bytecode and os.environ.get('FILE_NATIVE_STAGE_JOB') == '1'
 root = Path(args.root).resolve()
@@ -43,8 +44,11 @@ sys.path.insert(0, str(module_path.parent))
 module = importlib.import_module(module_path.stem)
 assert Path(module.__file__).resolve() == module_path
 known = json.loads(Path(args.known_requests).read_bytes()) if args.known_requests else None
+provenance = json.loads(Path(args.request_provenance).read_bytes()) if args.request_provenance else None
 try:
-    answer = module.verify(root, output, quiescent=True, known_requests=known)
+    options = dict(quiescent=True,known_requests=known)
+    if provenance is not None:options['request_provenance'] = provenance
+    answer = module.verify(root, output, **options)
 finally:
     after = snapshot()
     write_json(output.with_suffix('.after.json'), after)
