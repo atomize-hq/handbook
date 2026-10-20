@@ -1,0 +1,274 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "case": "operational-A",
+      "raw_records": 20,
+      "same_P0_PZ_inventory_and_grouping": true,
+      "pins_candidates_packets_pending_A": true,
+      "backup_deferred_cleanup_and_successor": true,
+      "retired_attempt_repack": true
+    },
+    {
+      "case": "operational-B",
+      "raw_records": 15,
+      "same_P0_PZ_inventory_and_grouping": true,
+      "pins_candidates_packets_pending_A": true,
+      "backup_deferred_cleanup_and_successor": true,
+      "retired_attempt_repack": true
+    },
+    {
+      "case": "interruption-A-pack-reservation-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-A-pack-build-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-A-pack-index-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "orphan-unregistered-backup-restore"
+    },
+    {
+      "case": "interruption-A-pack-install-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-A-pack-before-catalog-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-A-pack-catalog-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-A-pack-accounting-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-A-pack-loose-delete-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-A-pack-loose-delete-3",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "missing-catalog",
+      "strict_integrity_refusal": "integrity:pack-required:C:\\file-native-packing-20261020\\full-capsule\\malformed\\missing-catalog\\disposable\\store\\pack-catalogs/bea572a062993f959b25065909a8d6506184231ed5c596dd8a9e964949eb7d2a.json:The system cannot find the file specified. (os error 2)",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "corrupt-catalog",
+      "strict_integrity_refusal": "integrity:catalog-digest",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "missing-index",
+      "strict_integrity_refusal": "integrity:catalog-required-file:The system cannot find the file specified. (os error 2)",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "corrupt-index",
+      "strict_integrity_refusal": "integrity:index-pack-binding",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "missing-pack",
+      "strict_integrity_refusal": "integrity:catalog-required-file:The system cannot find the file specified. (os error 2)",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "truncated-pack",
+      "strict_integrity_refusal": "integrity:catalog-size-binding",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "corrupt-record",
+      "strict_integrity_refusal": "integrity:pack-raw-identity",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "offset-overflow",
+      "strict_integrity_refusal": "integrity:index-order-offset-length",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "raw-length-bound",
+      "strict_integrity_refusal": "integrity:index-order-offset-length",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "duplicate-key",
+      "strict_integrity_refusal": "integrity:index-order-offset-length",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "omitted-entry",
+      "strict_integrity_refusal": "integrity:index-coverage",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "wrong-pack-binding",
+      "strict_integrity_refusal": "integrity:index-pack-binding",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "raw-hash-mismatch",
+      "strict_integrity_refusal": "integrity:pack-raw-identity",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "bad-codec",
+      "strict_integrity_refusal": "integrity:catalog-descriptor",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "too-many-packs",
+      "strict_integrity_refusal": "integrity:catalog-version-count",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "duplicate-json-key",
+      "strict_integrity_refusal": "duplicate-key:version at line 2 column 25",
+      "loose_duplicate_present": true
+    },
+    {
+      "case": "unselected-installed-backup-restore"
+    },
+    {
+      "case": "protected-read-A-pack-read-lease"
+    },
+    {
+      "case": "protected-read-A-pack-catalog-captured"
+    },
+    {
+      "case": "protected-read-A-resolve-history-captured"
+    },
+    {
+      "case": "protected-read-A-pack-record-located"
+    },
+    {
+      "case": "writer-and-competing-maintenance-A"
+    },
+    {
+      "case": "cancelled-drain-releases-barriers-A"
+    },
+    {
+      "case": "windows-loose-no-delete-sharing-A",
+      "deferred_bytes_at_least": 1249
+    },
+    {
+      "case": "repack-old-pack-deletion-interruption-A"
+    },
+    {
+      "case": "interruption-B-pack-reservation-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-B-pack-build-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-B-pack-index-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-B-pack-install-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-B-pack-before-catalog-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-B-pack-catalog-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-B-pack-accounting-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-B-pack-loose-delete-1",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "interruption-B-pack-loose-delete-3",
+      "prefix_preserved": true,
+      "reservation_survived": true,
+      "original_outcome_exact": true
+    },
+    {
+      "case": "protected-read-B-pack-read-lease"
+    },
+    {
+      "case": "protected-read-B-pack-catalog-captured"
+    },
+    {
+      "case": "protected-read-B-resolve-history-captured"
+    },
+    {
+      "case": "protected-read-B-pack-record-located"
+    },
+    {
+      "case": "writer-and-competing-maintenance-B"
+    },
+    {
+      "case": "cancelled-drain-releases-barriers-B"
+    },
+    {
+      "case": "windows-loose-no-delete-sharing-B",
+      "deferred_bytes_at_least": 1309
+    },
+    {
+      "case": "repack-old-pack-deletion-interruption-B"
+    }
+  ],
+  "events": 275,
+  "exe_sha256": "478dd9ba9f687d4de81c60ce55f9ddf9e4e2fafcc493d581b3c63e12e42f7fe5",
+  "operational_backup_exclusions": [
+    "DISPOSABLE.json",
+    "pack-maintenance.lock",
+    "pack-readers.lock",
+    "preparation.lock",
+    "writer.lock"
+  ]
+}

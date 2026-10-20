@@ -1,0 +1,57 @@
+{
+  "source": "authenticated exact H101006 operational-capture files.jsonl; role-potential upper bound, final accepted/finalized eligibility rechecked by maintenance",
+  "roles": {
+    "hint": {
+      "files": 101006,
+      "raw_bytes": 14862355,
+      "index_entry_bytes": 11023109,
+      "oversize_files": 0,
+      "oversize_bytes": 0
+    },
+    "allocation": {
+      "files": 100905,
+      "raw_bytes": 14847801,
+      "index_entry_bytes": 16274223,
+      "oversize_files": 0,
+      "oversize_bytes": 0
+    },
+    "candidate": {
+      "files": 100905,
+      "raw_bytes": 387784479,
+      "index_entry_bytes": 11516922,
+      "oversize_files": 0,
+      "oversize_bytes": 0
+    },
+    "publication": {
+      "files": 101006,
+      "raw_bytes": 135596518,
+      "index_entry_bytes": 11327145,
+      "oversize_files": 0,
+      "oversize_bytes": 0
+    },
+    "result": {
+      "files": 101006,
+      "raw_bytes": 25920251,
+      "index_entry_bytes": 12827762,
+      "oversize_files": 0,
+      "oversize_bytes": 0
+    }
+  },
+  "eligible_raw_bytes": 579011404,
+  "index_upper_bytes": 62972553,
+  "P0_max_new_owned_bytes": 644081109,
+  "PZ_new_owned_cap_bytes": 350000000,
+  "PZ_exhaustion": "censor before reserved write; never silently enlarge",
+  "proposed_total_P_cap_bytes": 2952790016,
+  "proposed_total_P_cap_files": 560000,
+  "preservation_complete_summary": "C:\\file-native-packing-20261020\\preservation-reopen\\summary.json",
+  "latest_complete_ownership_receipt": "C:\\file-native-packing-20261020\\receipts\\candidate-build.json",
+  "proposed_stage": "after complete small final-candidate fault/byte/restore pass and parent GO: freeze/measure qualified-old L plus new-binary L under fixed navigation; build P0 without deletion; independently verify; measure P0; build same frozen inventory/grouping PZ without deletion within reservation; independently verify and measure; return actual census before chosen long cleanup",
+  "large_cleanup_admitted": false,
+  "packed_restore_admitted": false,
+  "native_admitted": false,
+  "later_coexistence_constraints": "Final packed archive+restore and N8k A/B need independent admissions after actual packing cleanup. Generated successful cache-bound fixtures currently ~148MB, and bounded record-subset containers may be archived/verified and reclaimed only through separately reviewed exact-target cleanup if needed. No protected originals/censors/cache residues are proposed for deletion.",
+  "fixed_functional_cutoff": "2026-10-20T07:55:16Z",
+  "fixed_closeout_deadline": "2026-10-20T08:25:16Z",
+  "seconds": 1.672000000020489
+}

@@ -1,0 +1,103 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "case": "independent-bad-codec",
+      "status": "refused"
+    },
+    {
+      "case": "independent-corrupt-catalog",
+      "status": "refused"
+    },
+    {
+      "case": "independent-corrupt-index",
+      "status": "refused"
+    },
+    {
+      "case": "independent-corrupt-record",
+      "status": "refused"
+    },
+    {
+      "case": "independent-duplicate-json-key",
+      "status": "refused"
+    },
+    {
+      "case": "independent-duplicate-key",
+      "status": "refused"
+    },
+    {
+      "case": "independent-missing-catalog",
+      "status": "refused"
+    },
+    {
+      "case": "independent-missing-index",
+      "status": "refused"
+    },
+    {
+      "case": "independent-missing-pack",
+      "status": "refused"
+    },
+    {
+      "case": "independent-offset-overflow",
+      "status": "refused"
+    },
+    {
+      "case": "independent-omitted-entry",
+      "status": "refused"
+    },
+    {
+      "case": "independent-raw-hash-mismatch",
+      "status": "refused"
+    },
+    {
+      "case": "independent-raw-length-bound",
+      "status": "refused"
+    },
+    {
+      "case": "independent-too-many-packs",
+      "status": "refused"
+    },
+    {
+      "case": "independent-truncated-pack",
+      "status": "refused"
+    },
+    {
+      "case": "independent-wrong-pack-binding",
+      "status": "refused"
+    },
+    {
+      "case": "strict-numeric-type-version",
+      "status": "refused-before-index-allocation"
+    },
+    {
+      "case": "strict-numeric-type-records",
+      "status": "refused-before-index-allocation"
+    },
+    {
+      "case": "strict-numeric-type-pack_bytes",
+      "status": "refused-before-index-allocation"
+    },
+    {
+      "case": "strict-numeric-type-index_bytes",
+      "status": "refused-before-index-allocation"
+    },
+    {
+      "case": "strict-numeric-type-codec",
+      "status": "refused-before-index-allocation"
+    },
+    {
+      "case": "independent-oversize-catalog",
+      "status": "refused-before-allocation"
+    },
+    {
+      "case": "independent-oversize-index",
+      "status": "refused-before-allocation"
+    },
+    {
+      "case": "physical-catalog-and-hint-cannot-grant-membership",
+      "selected_control_unchanged": true,
+      "status": "passed"
+    }
+  ],
+  "engine_events": 4
+}
