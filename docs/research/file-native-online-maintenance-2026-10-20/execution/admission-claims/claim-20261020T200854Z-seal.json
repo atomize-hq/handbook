@@ -1,0 +1,19 @@
+{
+  "claim_id": "44GiB-CENTRAL-001-F08-FINAL-NATIVE",
+  "utc": "2026-10-20T20:08:54.350409+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T200854Z.json",
+      "bytes": 6541,
+      "sha256": "9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984"
+    },
+    {
+      "file": "claim-20261020T200854Z.md",
+      "bytes": 1627,
+      "sha256": "16813520da3f5a8bb057006698c39304369f148274e6aa90bd104e2e05ebf932"
+    }
+  ],
+  "total_data_bytes": 8168,
+  "claim_report_cap_bytes": 65536,
+  "no_mutation_of_prior_seals": true
+}

@@ -1,0 +1,125 @@
+{
+  "kind": "44GiB-shared-allocator-dated-claim",
+  "claim_id": "44GiB-CENTRAL-001-F08-FINAL-NATIVE",
+  "utc": "2026-10-20T20:08:54.350409+00:00",
+  "status": "AUTHORIZED_RESERVATION_REALLOCATION_RECORDED",
+  "authority": "Human-authorized same-meta continuation; coordinator explicitly authorizes this F08/C3/central contingency claim. No new independent worker allowance.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib\\admission-ledger.json",
+    "sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
+    "seal_sha256": "65386dcbf63484b3d62228c999b67bfc42404f13d595c5d0d17b3613627769e6",
+    "preserved_unchanged": true
+  },
+  "reason": {
+    "measured_cache_boundary_fixture_bytes": 80976318,
+    "old_F08_per_host_bytes": 33554432,
+    "old_per_host_inadequate": true,
+    "new_F08_per_host_bytes": 100663296,
+    "headroom_after_one_fixture_per_host_bytes": 19686978,
+    "scope": "Same final-pin required native unit/workspace/strict/packing/recovery/lifetime evidence. Intermediate CP1 native builds/smallunits defer the81MBcacheboundaryunit until FINAL pin; no matrix reduction.",
+    "prewrite_rule": "96MiB is the full per-host F08 native-fixture coexistence bound, not an81MBfixture plus independent96MiB grant. Census before finalunit; additionalfixturecoexistence must fit or trigger central reallocation/censor before write."
+  },
+  "reservation_transfers": [
+    {
+      "from": "C3 checkpoint/source/review/control earmark",
+      "to": "F08 final-native fixture total",
+      "bytes": 67108864,
+      "meaning": "Reassign existing charged reservation, no new prospective bytes and no deletion credit."
+    },
+    {
+      "from": "central unassigned contingency",
+      "to": "F08 final-native fixture total",
+      "bytes": 67108864,
+      "meaning": "Additional charged reservation within44GiB."
+    },
+    {
+      "from": "central unassigned contingency",
+      "to": "C3 replacement source/review/control earmark",
+      "bytes": 16777216,
+      "meaning": "Backfill bounded remainingfreshworkers/reviewlogs/control, within samecap."
+    }
+  ],
+  "F08": {
+    "prior_total_bytes": 67108864,
+    "new_total_bytes": 201326592,
+    "increase_bytes": 134217728,
+    "Linux_bytes": 100663296,
+    "Mac_bytes": 100663296,
+    "files_total_unchanged": 60000,
+    "Linux_file_subcap": 30000,
+    "Mac_file_subcap": 30000,
+    "owner": "meta allocator assigns to nativefinal-pinworkers; shared category only",
+    "consumption": "Actual fixturebytes draw down F08 reservation, not added on top of full charged amount."
+  },
+  "C3": {
+    "prior_bytes": 67108864,
+    "prior_checkpoint_earmark_transferred_bytes": 67108864,
+    "old_bytes_remaining": 0,
+    "replacement_bytes": 16777216,
+    "files_unchanged": 15000,
+    "purpose": "Remainingfreshworker sourcecopies(<4MiB total designated sourcecopies), reviewlogs, report/control/sharedadmin. All together<=16MiB; not perworker.",
+    "owner": "meta only; record exactroot/category claims before writes"
+  },
+  "unchanged_central_earmarks": [
+    {
+      "id": "C1",
+      "label": "Selected private Cargo cache/source materialization if needed",
+      "bytes": 335544320,
+      "files": 20000,
+      "host_subcaps": {
+        "Windows_bytes": 201326592,
+        "Linux_bytes": 67108864,
+        "Mac_bytes": 67108864
+      },
+      "owner": "meta only; explicit claim before copying",
+      "qualification": "Unchanged cumulative reservation; earlieroperationaldraws do not create additive capacity. Meta tracks actual versus still-unused portion."
+    },
+    {
+      "id": "C2",
+      "label": "Private build-target topups for checkpoint/final-pin coexistence",
+      "bytes": 402653184,
+      "files": 15000,
+      "host_subcaps": {
+        "Windows_bytes": 134217728,
+        "Linux_bytes": 134217728,
+        "Mac_bytes": 134217728
+      },
+      "owner": "meta only; explicit claim before growth",
+      "qualification": "Unchanged cumulative reservation; earlieroperationaldraws do not create additive capacity. Meta tracks actual versus still-unused portion."
+    }
+  ],
+  "whole_allocator_snapshot": {
+    "cap_bytes": 47244640256,
+    "prior_whole_prospective_bytes": 46987225461,
+    "prospective_increase_bytes": 83886080,
+    "new_whole_prospective_bytes": 47071111541,
+    "prior_unassigned_central_contingency_bytes": 257414795,
+    "contingency_draw_for_native_bytes": 67108864,
+    "contingency_draw_for_C3_backfill_bytes": 16777216,
+    "new_unassigned_central_contingency_bytes": 173528715,
+    "inside_closeout_reserve_bytes_unchanged": 1073741824,
+    "inside_closeout_reserve_files_unchanged": 100000,
+    "file_cap_unchanged": 5000000,
+    "whole_prospective_files_unchanged": 4792540,
+    "remaining_files_unchanged": 207460,
+    "native_private_targets_C1_C2_unchanged": true,
+    "functional_matrix_total_bytes_after_F08_increase": 3829771487,
+    "central_earmarks_total_after_C3_replacement": 754974720,
+    "math": "F08+128MiB + C3(-64MiB+16MiB) = net+80MiB=83886080B; centralcontingency257414795-64MiB-16MiB=173528715B."
+  },
+  "accounting_scope": "Forecast reallocation only. Currentactual basis remains sealed44GiB census; nofresh allhostactual census or uncharged post-admission growth is inferred. Actuals within existingreservations replace unusedportion, never doublecount. New claimreport family is<64KiB and fits the alreadycharged512KiB/16file amendmentreport envelope (7existing+3newfiles=10); do not add independently. Parent integrates duplicate report/Gitbytes within existing C3/closeout reservations.",
+  "unchanged_controls": {
+    "t0_utc": "2026-10-20T19:10:14Z",
+    "functional_cutoff_utc": "2026-10-21T11:10:14Z",
+    "closeout_cutoff_utc": "2026-10-21T13:10:14Z",
+    "one_long_mutation_lane": true,
+    "Windows_new_work_RSS_bytes": 4294967296,
+    "Linux_Mac_new_work_RSS_each_bytes": 3221225472,
+    "reader_bytes": 268435456,
+    "checker_bytes": 2147483648,
+    "j2": true,
+    "protected_originals_archives_builds_evidence_rejected_targets_untouched": true,
+    "no_deletion_or_growth_credit": true
+  },
+  "disposition": "RESOURCE GO retained for complete44GiB conservative envelope after thisclaim. Finalnativeunit execution requires nativeF08 prewritecensus and existing operationalguard/token/rolecaps; this resourceworker performs no executable work or corpusgrowth."
+}

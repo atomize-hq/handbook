@@ -1,0 +1,465 @@
+{
+  "review_utc": "2026-10-20T20:33:21.693803+00:00",
+  "verdict": "REMEDIATE",
+  "source_commit": "62ce963085ac054bcc34eb21c6733b94db160975",
+  "base_commit": "47d667f26a75fa1454dee2d1c50d238aec4cf6bd",
+  "branch": "codex/file-native-online-cp1-20261020",
+  "remote_head_checked_match": true,
+  "worktree_mutating_during_review": true,
+  "binding_source": "committed blobs, not later worktree",
+  "source_bindings": [
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock",
+      "bytes": 10547,
+      "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+      "bytes": 561,
+      "sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/Cargo.toml",
+      "bytes": 147,
+      "sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/src/main.rs",
+      "bytes": 68,
+      "sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/Cargo.toml",
+      "bytes": 148,
+      "sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/src/main.rs",
+      "bytes": 69,
+      "sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs",
+      "bytes": 12161,
+      "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs",
+      "bytes": 8570,
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs",
+      "bytes": 1001,
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs",
+      "bytes": 2661,
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs",
+      "bytes": 30973,
+      "sha256": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs",
+      "bytes": 14324,
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs",
+      "bytes": 13519,
+      "sha256": "2cf972443ddfe8732e53815bccb7c3a059f44d65f45fb70feccf924a01478fda",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs",
+      "bytes": 452,
+      "sha256": "2f7b086f78f5860e2d2592757e29817d6bd435c1808e37d79d07504718e5c9ed",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+      "bytes": 15945,
+      "sha256": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs",
+      "bytes": 57,
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs",
+      "bytes": 10576,
+      "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs",
+      "bytes": 3551,
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs",
+      "bytes": 13379,
+      "sha256": "b452e2d6fe7d794953ed5c8a1e8d0020dd9241eca05a36c55518e7063533f755",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "bytes": 39047,
+      "sha256": "f7339e4800289626d7821848257ad44f1c21c1a51599f720f4fce70fdd7fa695",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/physical_lifetime.rs",
+      "bytes": 14287,
+      "sha256": "b7efcbb54f5c22670a550f51f751a4d3539b3f7a3b9d798ee6070fb692a1f756",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs",
+      "bytes": 27876,
+      "sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs",
+      "bytes": 36078,
+      "sha256": "31cafafddede7c2347a1fe85d3f18346972796af9fa8cb6b12c6c531502eb58d",
+      "matches_manifest": true,
+      "matches_prebuild": true
+    }
+  ],
+  "executable": {
+    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate3.exe",
+    "bytes": 2902528,
+    "sha256": "f1439fd9f222d327ac4c820ca2e0afa5c49bc7e83d8116b47c6b391a593fe4dc"
+  },
+  "review_runtime": "read/hash/parse only; no engine/build/copy/recovery",
+  "raw_artifacts": {
+    "candidate3-binding.json": {
+      "bytes": 5369,
+      "sha256": "69e32b1c59704a456bb5706c7f378631f136987bf5941c0876b8e7ef52a7b05f"
+    },
+    "build3-source-before.json": {
+      "bytes": 4870,
+      "sha256": "b46070494c69cef5c456d166c4ea757e94cc61afe7731943edf1618341a3d932"
+    },
+    "build3-units.json": {
+      "bytes": 25773,
+      "sha256": "6502be2f4a65b28863c284a9096187ab716b81052b4c19bbd84e60bd92da2fa9"
+    },
+    "build3-units.stdout": {
+      "bytes": 839,
+      "sha256": "f14d3995bacc929695b0a7d058d397ab5fb86498161818cdde7c0fd18e2b1a4e"
+    },
+    "build3-units.stderr": {
+      "bytes": 4658,
+      "sha256": "655e96f7a76b3a1467f2b752e6035a8aa678ef169d3689ed31eff1f3f034109c"
+    },
+    "build3-units.rss.jsonl.gz": {
+      "bytes": 34550,
+      "sha256": "f96fa5ca5d09ed37d2dd992104d89869cdcf0b1199db883ad968ebe403590183"
+    },
+    "focus3-events.jsonl": {
+      "bytes": 37394,
+      "sha256": "919e9bdfaaf7b0c661f5224e61e8e8bd37d15eab5086d82687ab5b61aca28293"
+    },
+    "focus3-guard.json": {
+      "bytes": 27989,
+      "sha256": "dbb36624d3c426c704bcdb80fadeb609406d2dc6de34d348c4ac7d25d0d736de"
+    },
+    "focus3-guard.stdout": {
+      "bytes": 71,
+      "sha256": "2b60a646429ec4fd1adaad8fd902d2b7cea5c970938971bb069f84d5a04e980b"
+    },
+    "focus3-guard.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "focus3-guard.rss.jsonl.gz": {
+      "bytes": 14095,
+      "sha256": "9da92fd8d9da4ccac667650b3c46bf4df70cce42ece7baf6b89234a47d9830f0"
+    },
+    "focus3-program.txt": {
+      "bytes": 5131,
+      "sha256": "a2d68888d99834407bf7515288bdd67643516dd4930405b48cdab03fdbd3bc73"
+    },
+    "focus3-progress-before.json": {
+      "bytes": 19938,
+      "sha256": "e23cf27017d936f3971015f2cb6945cd5ad325aecefabb382c5c0abec5c81a5c"
+    },
+    "focus3-results.json": {
+      "bytes": 3859,
+      "sha256": "cbb831c2dcd95659553a406d929bf000675fc06fdfefe89100bf6c06ef96a856"
+    },
+    "focus2-results.json": {
+      "bytes": 3854,
+      "sha256": "dc5a0f1fc62599cd10ee2dd94e55d49fbdb602981df96718876981ef253b77e1"
+    },
+    "smoke1-guard.json": {
+      "bytes": 9750,
+      "sha256": "80d9d2edb535583ce965ed8ae3bf3749680b85a02badc0ee91f9c40551d52afe"
+    },
+    "smoke1-preserved-finding.json": {
+      "bytes": 491,
+      "sha256": "33c0fdc991eede77e22c5b30318b1c0546c44790387ec1985ca88d958f73c97c"
+    },
+    "faults4-guard.json": {
+      "bytes": 20785,
+      "sha256": "c2fb2f4aa3c0c5b97404af77a3ac81a29f8df03feef2ca5891202d7bdf51adcd"
+    },
+    "faults4-guard.stderr": {
+      "bytes": 102,
+      "sha256": "0bbf1df431730fb357de455a6907fa9cf1df2718db304cb3ff3eb96798d265c2"
+    },
+    "faults4-partial.json": {
+      "bytes": 13633,
+      "sha256": "6eb25b63b85273442c2464b8d14a9435207531fe7a990524697f31ff1659d18d"
+    }
+  },
+  "build3": {
+    "exit": 0,
+    "censor": null,
+    "errors": [],
+    "sampled_peak_rss": 420765696,
+    "sample_timing": {
+      "samples": 1078,
+      "max_interval_seconds": 0.0470000000204891,
+      "intervals_over_40ms": 8
+    },
+    "tests": "4 passed,1 filtered heavy cache unit"
+  },
+  "focus3": {
+    "events": 14,
+    "all_executable_bindings_match": true,
+    "exit_counts": {
+      "0": 12,
+      "2": 2
+    },
+    "errors": [
+      "integrity:progress-omitted-held-generation",
+      "integrity:progress-invented-garbage"
+    ],
+    "activation_hold_samples_ns": [
+      760000,
+      632500
+    ],
+    "capture_hold_totals_ns": [
+      209200,
+      158500,
+      157900,
+      3764700,
+      150000,
+      3438800,
+      148700,
+      146200,
+      144500,
+      176100,
+      159900,
+      180900,
+      165300,
+      199100
+    ],
+    "guard_violations": [],
+    "guard_exit": 0,
+    "guard_censor": null,
+    "guard_errors": [],
+    "sampled_peak_rss": 30691328,
+    "sample_timing": {
+      "samples": 811,
+      "max_interval_seconds": 0.0470000000204891,
+      "intervals_over_40ms": 10
+    },
+    "reported_results": {
+      "status": "PASS",
+      "held_seconds": 16.094000000040978,
+      "two_successor_activations": [
+        {
+          "seconds": 0.046999999904073775,
+          "response": {
+            "batch_ns": 2045300,
+            "blocked_checks": 16,
+            "candidate_limit": 1000,
+            "candidates": 13,
+            "catalog": "822e4fc607b776e53503db9dfb42569b93d86775b3082fd28aad5c8b9efe0aec",
+            "cooperative_limit_ms": 50,
+            "deleted_this_batch_bytes": 428,
+            "deleted_this_batch_files": 2,
+            "generation": {
+              "id": "physical-32140-1792527952931932500-0",
+              "ordinal": 6,
+              "plan": "1c51c552b58394a59466cf902fd23227d4c3677105c1cb72914a07ae3882189f"
+            },
+            "historical_allocation_owners_unchanged": true,
+            "native_allocation_credit": 0,
+            "pending_loose_jobs": 5,
+            "pending_metadata": 0,
+            "pending_old_containers": 5,
+            "protected_metadata_until_successor": 0,
+            "reconciled_absent_without_credit": 60,
+            "retained_generations": 2,
+            "retained_loose_control_bytes": 0,
+            "retained_loose_control_records": 0,
+            "status": "cleaning",
+            "successfully_deleted_bytes_recorded": 138492
+          }
+        },
+        {
+          "seconds": 0.06300000008195639,
+          "response": {
+            "batch_ns": 4110900,
+            "blocked_checks": 32,
+            "candidate_limit": 1000,
+            "candidates": 26,
+            "catalog": "5755d566382f20a11d658009cd1ab5ae70c20b8cc717c872ca5b2aff9d0b8115",
+            "cooperative_limit_ms": 50,
+            "deleted_this_batch_bytes": 28731,
+            "deleted_this_batch_files": 3,
+            "generation": {
+              "id": "physical-29596-1792527952999985600-0",
+              "ordinal": 7,
+              "plan": "16eff78fd64cc25a3dcf67422b1e825ab2a5f63658b8458420c32e684b493883"
+            },
+            "historical_allocation_owners_unchanged": true,
+            "native_allocation_credit": 0,
+            "pending_loose_jobs": 10,
+            "pending_metadata": 1,
+            "pending_old_containers": 10,
+            "protected_metadata_until_successor": 1,
+            "reconciled_absent_without_credit": 60,
+            "retained_generations": 2,
+            "retained_loose_control_bytes": 0,
+            "retained_loose_control_records": 0,
+            "status": "cleaning",
+            "successfully_deleted_bytes_recorded": 167223
+          }
+        }
+      ],
+      "omitted_held_generation_refused": "integrity:progress-omitted-held-generation",
+      "invented_garbage_refused": "integrity:progress-invented-garbage",
+      "after_release_cleanup": {
+        "batch_ns": 20318100,
+        "blocked_checks": 2,
+        "candidate_limit": 1000,
+        "candidates": 56,
+        "catalog": "5755d566382f20a11d658009cd1ab5ae70c20b8cc717c872ca5b2aff9d0b8115",
+        "cooperative_limit_ms": 50,
+        "deleted_this_batch_bytes": 51300,
+        "deleted_this_batch_files": 23,
+        "generation": {
+          "id": "physical-29596-1792527952999985600-0",
+          "ordinal": 7,
+          "plan": "16eff78fd64cc25a3dcf67422b1e825ab2a5f63658b8458420c32e684b493883"
+        },
+        "historical_allocation_owners_unchanged": true,
+        "native_allocation_credit": 0,
+        "pending_loose_jobs": 0,
+        "pending_metadata": 2,
+        "pending_old_containers": 0,
+        "protected_metadata_until_successor": 2,
+        "reconciled_absent_without_credit": 90,
+        "retained_generations": 1,
+        "retained_loose_control_bytes": 0,
+        "retained_loose_control_records": 0,
+        "status": "complete",
+        "successfully_deleted_bytes_recorded": 218523
+      },
+      "old_instances_removed": 10,
+      "old_reader_exact_outcome": true,
+      "new_reader_and_two_publishers_progress": true,
+      "capture_gap": "old physical/new semantic sanity passed; new-tail-compaction causal variant PENDING CP2 frozen legacy discovery",
+      "profile4_B_old_selected_once_manifest_paths": 20,
+      "initial_smoke_failure_preserved": true
+    }
+  },
+  "progress_structural_observation": {
+    "snapshot_plan": "16eff78fd64cc25a3dcf67422b1e825ab2a5f63658b8458420c32e684b493883",
+    "counts": {
+      "older": 1,
+      "jobs": 10,
+      "retired": 10,
+      "garbage": 1
+    },
+    "pending_retired": 10,
+    "removing_retired_rows_or_forging_done_flags_satisfies_implemented_subset_predicate": true,
+    "removing_garbage_satisfies_introduction_predicate": true,
+    "qualification": "source-derived predicate proof on parsed snapshot; not executed Rust"
+  },
+  "faults4": {
+    "exit": 1,
+    "censor": null,
+    "errors": [],
+    "partial_rows": 11,
+    "failure": "Traceback (most recent call last):\n  File \"<string>\", line 30, in <module>\nAssertionError: 8681977\n"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "P2 Required",
+      "status": "OPEN",
+      "topic": "aborted owner durable handover/transitive work"
+    },
+    {
+      "id": "F2",
+      "priority": "P2 Required",
+      "status": "OPEN",
+      "topic": "progress pending obligation omissions/forged done"
+    },
+    {
+      "id": "F3",
+      "priority": "P2 Required",
+      "status": "OPEN",
+      "topic": "orphan physical-progress stages and selected stage directories"
+    },
+    {
+      "id": "F4",
+      "priority": "P2 Required",
+      "status": "OPEN",
+      "topic": "durable monotonic instance discriminator/ordinal overflow"
+    }
+  ],
+  "gitnexus": "UNKNOWN unavailable; manual traces only",
+  "clock_reset": false,
+  "cp2_released": false
+}

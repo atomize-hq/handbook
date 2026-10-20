@@ -1,0 +1,40 @@
+{
+  "reviewed_utc": "2026-10-20T20:45:00Z",
+  "engine_qualification": false,
+  "native_linux": {
+    "guard_sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
+    "status": "ACCEPTED_GUARD_PENDING_REVIEWED_ENGINE_PIN",
+    "independent_checks": [
+      "full source read",
+      "all eight launched v5/stress receipt SHA/strict gzip EOF/JSON rows",
+      "positive initial RSS and tracked identities",
+      "joined timer/sampler/disk",
+      "two successful empty numeric process closure observations",
+      "all expected timeout/memory/orphan/reservation censors preserved"
+    ],
+    "max_sample_interval_seconds": 0.02018456580117345,
+    "intervals_over_40ms": 0,
+    "old_build": "62ce native compile passed but sampler max58.10ms; preserved unqualified cadence, no repeat old-pin compile"
+  },
+  "native_macos": {
+    "guard_sha256": "4ec468760ef9bdfafc13787db5beca95659a25bd10d44b8496bee16217ce9aac",
+    "bundle_sha256": "0fd94a99420f48afea38a19c1e1e05fcdc5b294f0be1c505e9e8b42822c228e4",
+    "bundle_bytes": 39223,
+    "tar_bytes": 225280,
+    "regular_members": 77,
+    "all_76_manifest_member_sizes_and_hashes_verified": true,
+    "full_code_read": true,
+    "status": "CONTROL_ONLY_REMEDIATION_REQUIRED",
+    "adapter": "narrow own-session libproc accepted; original global ps wording not claimed satisfied",
+    "controls": "normal/nested/memory/missingRSS/orphan/timeout/watchdogdeath have two valid empty numeric group observations",
+    "supervisor_death": "external closure separate; killed writer RSS gzip truncated before EOF, retained as censored incomplete raw",
+    "required_before_release": [
+      "per-category prospective byte/file reservations, source/claim bindings, live disk/output stress",
+      "scoped child/escape tracking and inspected foreground launchers",
+      "persistent host fence and ownership retention on UNKNOWN closure; explicit length>=2 observations",
+      "positive pre-GO RSS and actual cadence qualification",
+      "exact reviewed source pin, all final native capsules"
+    ]
+  },
+  "no_final_native_pass_claim": true
+}

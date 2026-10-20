@@ -1,0 +1,53 @@
+{
+  "utc": "2026-10-20T20:15:11.445659+00:00",
+  "status": "PARENT_GUARD_REVIEW_PASS_ENGINE_WORKLOADS_RELEASED_UNDER_BUDGETS",
+  "Windows_guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "Windows_raw_checked": [
+    {
+      "case": "normal",
+      "rss_samples": 1,
+      "max_interval": 0.0,
+      "intervals_over40ms": 0,
+      "censor": null,
+      "sha256": "94080e731a4c9afa2f54b9ab3713650990ac37d7c3e0d9a9d1f2d39775ff484a"
+    },
+    {
+      "case": "blocked-stdin",
+      "rss_samples": 100,
+      "max_interval": 0.03200000000651926,
+      "intervals_over40ms": 0,
+      "censor": "time-censor",
+      "sha256": "3d197d93cb12daa63288bb938edbf69445ca25d097f1daf33b5c18dbdd6394ba"
+    },
+    {
+      "case": "descendant",
+      "rss_samples": 7,
+      "max_interval": 0.03200000000651926,
+      "intervals_over40ms": 0,
+      "censor": null,
+      "sha256": "ad5dac36dfc9711be6ffe56ffd6700815ae382a80b9100e977aae5a866c7a59e"
+    },
+    {
+      "case": "token-holder",
+      "rss_samples": 250,
+      "max_interval": 0.0470000000204891,
+      "intervals_over40ms": 6,
+      "censor": null,
+      "sha256": "6758ff28b9cbaed20e16a496a85b600f99069835608b258d914ec8b53bf6b789"
+    },
+    {
+      "case": "token-waiter",
+      "rss_samples": 1,
+      "max_interval": 0.0,
+      "intervals_over40ms": 0,
+      "censor": null,
+      "sha256": "48d1c6d79f0581043612d3c378788908f07fb6fbf0ee39040b8a696c16472aeb"
+    }
+  ],
+  "Windows_role_driver": "Suspended positiveRSS and rolelimits sampled/reportedpeak checked; reader256MiB/checker2GiB; aggregateJob3GiB",
+  "native_Linux_guard_accepted_logic_sha256": "0c1e8b71aa38fd4c02a9fcfd509e66fd4fb1817c81d83a3d7a73cfcc1818a856",
+  "native_Linux_config96MiB_sha256": "e92aa3ffc7d743d2cffac15319fe00b48c0f522d3ff33a36e2480a4983f1062e",
+  "native_Linux_review": "Six launched control-case exactSHA/RSSgziprows/2emptyclosurechecks/monitorjoined plusfree/setuprefusals; config-only96MiB change provenancechecked separately",
+  "limits": "All actual workloads require percategoryprewrite reservation,sharedtoken,exactsource/binarybindings andfixedglobalcutoff; no production/powerloss qualification fromcontrolsmokes",
+  "measurement_caveat": "Observed RSS intervals over40ms retained; sampled memory is not zero-latency kernelRSS enforcement."
+}
