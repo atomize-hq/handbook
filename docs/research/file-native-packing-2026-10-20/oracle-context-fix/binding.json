@@ -1,0 +1,20 @@
+{
+  "utc": "2026-10-20T05:55:50.858322+00:00",
+  "engine_core_unchanged": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "old_independent_sha256": "6d376a8e0d6714d682158fc14cc4dd71ec433246d9222eb5d35d6daec99b3d65",
+  "corrected_independent_sha256": "94987dbe1c992ef2491bb9819ad90185d2f29aef704b1bfaaa8f7e052a449e66",
+  "change": "exclusive per-instance access to mutable native DCtx; fixed call-local buffers/frame checks/raw hashes unchanged",
+  "before": "20 serial valid; 10000 concurrent produced errors and one wrong result; process subsequently exited3221226356; negative diagnostic is not a passing process",
+  "after": "20 serial valid and10000 concurrent correct; exit0 and empty Job",
+  "complete": "504833raw records/579015428raw bytes;101007publications/100000ledger rows/101retired refusals; complete graph/source/Nav oracle; exit0 empty Job",
+  "inventory_digest": "058be9aea3ff6e4130f2a9f1af545c2f7ce895b6ebe6677d09b63e48d2f43e84",
+  "semantic_digest": "f398ab10c2020b988d46530c6e93e0c6c6e0188d6e66e9b8e4e07e96c107f63e",
+  "documentation": "https://facebook.github.io/zstd/doc/api_manual_v1.5.7.html",
+  "actual_independent_codec": {
+    "version": "1.5.6",
+    "path": "C:\\Program Files\\Git\\mingw64\\bin\\libzstd.dll",
+    "sha256": "f216ea8efb5b3bb9ad3d938fb9ac07e3b8f78c2c92faab03d2c468d0b6798a5a"
+  },
+  "engine_not_substituted_for_oracle": true,
+  "all_failure_prefixes_preserved": true
+}

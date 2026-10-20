@@ -4,7 +4,7 @@ Zstandard uses Git's separately installed native DLL through its public C API,
 with fixed output and window bounds. Semantic checks reuse the existing separate
 C1/operational walker above this independently implemented byte resolver.
 """
-import argparse,bisect,ctypes,ctypes.util,hashlib,json,os,struct,sys,time,re
+import argparse,bisect,ctypes,ctypes.util,hashlib,json,os,struct,sys,time,re,threading
 from pathlib import Path
 HERE=Path(__file__).resolve().parent
 MAX_RAW=8*1024**2;MAX_PACK=64*1024**2;MAX_INDEX=16*1024**2
@@ -42,7 +42,7 @@ class Zstd:
         z.ZSTD_decompressDCtx.argtypes=[ctypes.c_void_p,ctypes.c_void_p,ctypes.c_size_t,ctypes.c_void_p,ctypes.c_size_t];z.ZSTD_decompressDCtx.restype=ctypes.c_size_t
         z.ZSTD_findFrameCompressedSize.argtypes=[ctypes.c_void_p,ctypes.c_size_t];z.ZSTD_findFrameCompressedSize.restype=ctypes.c_size_t
         z.ZSTD_isError.argtypes=[ctypes.c_size_t];z.ZSTD_isError.restype=ctypes.c_uint
-        self.context=z.ZSTD_createDCtx();assert self.context
+        self.context=z.ZSTD_createDCtx();assert self.context;self.decode_lock=threading.Lock()
         assert not z.ZSTD_isError(z.ZSTD_DCtx_setParameter(self.context,100,23))
         self.binding=dict(version=z.ZSTD_versionString().decode(),path=str(self.path),sha256=sha(self.path.read_bytes()) if self.path.is_file() else None)
     def decode(self,data,length):
@@ -58,7 +58,9 @@ class Zstd:
             if single:assert content_size<=MAX_RAW
         source=ctypes.create_string_buffer(data);destination=ctypes.create_string_buffer(max(1,length))
         n=self.lib.ZSTD_findFrameCompressedSize(source,len(data));assert not self.lib.ZSTD_isError(n) and n==len(data)
-        n=self.lib.ZSTD_decompressDCtx(self.context,destination,length,source,len(data))
+        # The semantic walker also reads publication/results concurrently. A
+        # DCtx may be reused serially, but concurrent calls must not share it.
+        with self.decode_lock:n=self.lib.ZSTD_decompressDCtx(self.context,destination,length,source,len(data))
         assert not self.lib.ZSTD_isError(n) and n==length
         return destination.raw[:n]
     def __del__(self):

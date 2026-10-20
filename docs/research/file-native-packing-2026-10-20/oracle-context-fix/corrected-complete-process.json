@@ -1,0 +1,129 @@
+{
+  "argv": [
+    "python",
+    "docs/research/file-native-packing-2026-10-20/retry_PZ_verifier.py"
+  ],
+  "cwd": null,
+  "guard_sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68",
+  "started_utc": "2026-10-20T05:48:34.752926+00:00",
+  "seconds": 142.34877681732178,
+  "cap_seconds": 900,
+  "effective_seconds": 900,
+  "exit": 0,
+  "censor": null,
+  "independent_deadline": null,
+  "group_observations": {
+    "root_exit_seen_epoch": 1792475426.4734955,
+    "group_empty_seen_epoch": 1792475426.4734955
+  },
+  "job_query_errors": 0,
+  "process_closure_verified": true,
+  "per_process_rss_limit": 2147483648,
+  "job_commit_limit_bytes": 3221225472,
+  "aggregate_rss_limit": 4294967296,
+  "sampled_peak_rss_by_pid": {
+    "64356": 1140187136,
+    "71640": 46338048
+  },
+  "missing_samples": 0,
+  "aggregate_sampled_peak_rss": 1177190400,
+  "ownership_samples": [
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 2504897689,
+          "files": 536815
+        },
+        "worktree": {
+          "bytes": 2311269,
+          "files": 210
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 228673278,
+          "files": 1982
+        }
+      },
+      "total_new_bytes": 2683379148,
+      "total_new_files": 540954,
+      "free_bytes": 197711757312,
+      "time_utc": "2026-10-20T05:49:22.005049+00:00"
+    },
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 2504899208,
+          "files": 536816
+        },
+        "worktree": {
+          "bytes": 2311269,
+          "files": 210
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 228673278,
+          "files": 1982
+        }
+      },
+      "total_new_bytes": 2683380667,
+      "total_new_files": 540955,
+      "free_bytes": 197711458304,
+      "time_utc": "2026-10-20T05:50:10.603162+00:00"
+    },
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 2504903982,
+          "files": 536818
+        },
+        "worktree": {
+          "bytes": 2311269,
+          "files": 210
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 228673278,
+          "files": 1982
+        }
+      },
+      "total_new_bytes": 2683385441,
+      "total_new_files": 540957,
+      "free_bytes": 197710729216,
+      "time_utc": "2026-10-20T05:50:57.061339+00:00"
+    }
+  ],
+  "final_ownership": {
+    "scopes": {
+      "runtime": {
+        "bytes": 2504903982,
+        "files": 536818
+      },
+      "worktree": {
+        "bytes": 2311269,
+        "files": 210
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 228673278,
+        "files": 1982
+      }
+    },
+    "total_new_bytes": 2683385441,
+    "total_new_files": 540957,
+    "free_bytes": 197709922304,
+    "time_utc": "2026-10-20T05:51:36.773768+00:00"
+  },
+  "group_remaining_before_closure": []
+}
