@@ -1,0 +1,1 @@
+detect_changes(repo=/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook,scope=all) failed: Repository not found. Graph UNKNOWN. No bootstrap attempted. Manual scope: only new native-macos report/harness/evidence; all 16 core Rust/Cargo hashes unchanged against 4bde156.

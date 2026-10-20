@@ -1,0 +1,5 @@
+{
+  "path": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental",
+  "sha256": "1de6432fc24922f10a6e4a1eddb95e07f1e236cf4435723e4fd2320e5dbdc786",
+  "build": "native dev debug=0 incremental=0"
+}

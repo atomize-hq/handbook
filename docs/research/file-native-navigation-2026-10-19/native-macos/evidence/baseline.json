@@ -1,0 +1,43 @@
+{
+  "start": "2026-10-19T22:54:38Z",
+  "test_cutoff": "2026-10-19T23:44:38Z",
+  "deadline": "2026-10-19T23:54:38Z",
+  "overall_N_deadline": "2026-10-20T00:38:51Z",
+  "source": "4bde156323812ef18c0dea6798cfc2108aaad933",
+  "platform": "macOS-26.6.1-arm64-arm-64bit",
+  "python": "3.11.9",
+  "tar_filter_supported": true,
+  "free": 188232491008,
+  "roots": [
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook",
+      "files": 1637,
+      "logical_bytes": 176643866
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git",
+      "files": 5398,
+      "logical_bytes": 187257064
+    },
+    {
+      "root": "/private/tmp/file-native-q-macos-20261019",
+      "files": 8466,
+      "logical_bytes": 206414667
+    },
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook",
+      "files": 4605,
+      "logical_bytes": 260604163
+    },
+    {
+      "root": "/Users/spensermcconnell/.npm/_npx",
+      "files": 254349,
+      "logical_bytes": 5523514665
+    }
+  ],
+  "git_prefetch_bytes": 185803386,
+  "allowance_bytes": 805306368,
+  "allowance_files": 75000,
+  "parent_combined_forecast_bytes": 40828300920,
+  "parent_combined_forecast_files": 4282696
+}

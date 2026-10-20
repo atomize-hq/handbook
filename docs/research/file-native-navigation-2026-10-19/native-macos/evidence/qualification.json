@@ -1,0 +1,419 @@
+{
+  "status": "CENSORED-original-functional-cutoff",
+  "source": "4bde156323812ef18c0dea6798cfc2108aaad933",
+  "exe": {
+    "path": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental",
+    "sha256": "1de6432fc24922f10a6e4a1eddb95e07f1e236cf4435723e4fd2320e5dbdc786",
+    "build": "native dev debug=0 incremental=0"
+  },
+  "focused_cases": [
+    {
+      "case": "initial-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "payload-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "batch-payload-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "label-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "byte-split-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 133,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "byte-merge-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "adjacency-duplicates-types-order-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 133,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "adjacency-collapse-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "target-location-A",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "delete-A",
+      "documents": 127,
+      "supplemented_documents": 127,
+      "projection_files": 131,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "external-interruption-A",
+      "documents": 127,
+      "supplemented_documents": 127,
+      "projection_files": 131,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "navigation-absent-A",
+      "documents": 16,
+      "supplemented_documents": 0,
+      "projection_files": 18,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "absent-packet-replay-checkpoint-A",
+      "documents": 16,
+      "supplemented_documents": 0,
+      "projection_files": 18,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "source-completeness-dirty-A",
+      "documents": 16,
+      "supplemented_documents": 1,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "source-completeness-restored-A",
+      "documents": 16,
+      "supplemented_documents": 0,
+      "projection_files": 18,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "mixed-complete-whitespace-A",
+      "documents": 16,
+      "supplemented_documents": 15,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "mixed-complete-key-order-A",
+      "documents": 16,
+      "supplemented_documents": 15,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "frozen2-candidate-pending-upgrade-A",
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "initial-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "payload-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "batch-payload-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "label-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "byte-split-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 133,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "byte-merge-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "adjacency-duplicates-types-order-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 133,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "adjacency-collapse-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "target-location-B",
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "delete-B",
+      "documents": 127,
+      "supplemented_documents": 127,
+      "projection_files": 131,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "navigation-absent-B",
+      "documents": 16,
+      "supplemented_documents": 0,
+      "projection_files": 18,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "absent-packet-replay-checkpoint-B",
+      "documents": 16,
+      "supplemented_documents": 0,
+      "projection_files": 18,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "source-completeness-dirty-B",
+      "documents": 16,
+      "supplemented_documents": 1,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "source-completeness-restored-B",
+      "documents": 16,
+      "supplemented_documents": 0,
+      "projection_files": 18,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "mixed-complete-whitespace-B",
+      "documents": 16,
+      "supplemented_documents": 15,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "mixed-complete-key-order-B",
+      "documents": 16,
+      "supplemented_documents": 15,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "frozen2-candidate-pending-upgrade-B",
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "frozen1-candidate-upgrade-A",
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "frozen1-candidate-upgrade-B",
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "frozen1-packet-candidate-upgrade-A",
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    {
+      "case": "frozen1-packet-candidate-upgrade-B",
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    }
+  ],
+  "focused_events": 153,
+  "recovery_recorded_events": 83,
+  "recovery_last_action": {
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/focused/recovery-capsule/main-B-128/disposable/store",
+    "action": "dump"
+  },
+  "recovery_completed_case_count": "not durably recorded before SIGKILL",
+  "focused_summary_exists": false,
+  "recovery_summary_exists": false,
+  "sampled_engine_rss_max_bytes": 8028160,
+  "engine_missing_rss_samples": 10,
+  "aggregate_sampled_peak_rss_bytes": 610320384,
+  "cutoff": "2026-10-19T23:44:38Z",
+  "original_closeout_deadline": "2026-10-19T23:54:38Z",
+  "overall_N_deadline": "2026-10-20T00:38:51Z",
+  "artifact_closeout_overrun": true,
+  "graph": "UNKNOWN: worktree repository not registered; detect_changes failed; no installation attempted",
+  "supplement": "no recorded functional coverage; outer original-cutoff censor",
+  "resource": {
+    "timestamp": "2026-10-20T01:48:35.709332+00:00",
+    "roots": [
+      {
+        "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook",
+        "files": 7959,
+        "logical_bytes": 318044384
+      },
+      {
+        "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git",
+        "files": 5398,
+        "logical_bytes": 187257064
+      },
+      {
+        "root": "/private/tmp/file-native-q-macos-20261019",
+        "files": 8466,
+        "logical_bytes": 206414667
+      },
+      {
+        "root": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook",
+        "files": 4605,
+        "logical_bytes": 260604163
+      },
+      {
+        "root": "/Users/spensermcconnell/.npm/_npx",
+        "files": 254349,
+        "logical_bytes": 5523514665
+      }
+    ],
+    "owned_plus_shared_git_growth_bytes": 319498062,
+    "owned_plus_shared_git_growth_files": 8093,
+    "allowance_bytes": 805306368,
+    "allowance_files": 75000,
+    "free_bytes": 196888551424,
+    "continuous_disk_peak": "missing",
+    "shared_git_growth_includes_other_chat_writes_conservatively": true,
+    "prefetch_full_worktree_bytes": 258508273,
+    "prefetch_full_worktree_files": 4536
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-10-20T01:48:35.709332+00:00",
+  "roots": [
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook",
+      "files": 7959,
+      "logical_bytes": 318044384
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git",
+      "files": 5398,
+      "logical_bytes": 187257064
+    },
+    {
+      "root": "/private/tmp/file-native-q-macos-20261019",
+      "files": 8466,
+      "logical_bytes": 206414667
+    },
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook",
+      "files": 4605,
+      "logical_bytes": 260604163
+    },
+    {
+      "root": "/Users/spensermcconnell/.npm/_npx",
+      "files": 254349,
+      "logical_bytes": 5523514665
+    }
+  ],
+  "owned_plus_shared_git_growth_bytes": 319498062,
+  "owned_plus_shared_git_growth_files": 8093,
+  "allowance_bytes": 805306368,
+  "allowance_files": 75000,
+  "free_bytes": 196888551424,
+  "continuous_disk_peak": "missing",
+  "shared_git_growth_includes_other_chat_writes_conservatively": true,
+  "prefetch_full_worktree_bytes": 258508273,
+  "prefetch_full_worktree_files": 4536
+}
