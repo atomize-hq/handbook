@@ -1,0 +1,11 @@
+{
+  "tool": "detect_changes",
+  "scope": "staged",
+  "repo": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook",
+  "timestamp": "2026-10-20T02:20:20.865041+00:00",
+  "isError": true,
+  "error": "Repository not found",
+  "status": "UNKNOWN",
+  "bootstrap_attempted": false,
+  "manual_scope": "All staged changes are newly added files beneath native-macos/followup-20261020; no engine/source changes; 16 Rust/Cargo hashes and 29 original e6d1 artifacts verified unchanged."
+}

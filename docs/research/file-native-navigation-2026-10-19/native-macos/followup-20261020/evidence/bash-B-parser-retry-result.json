@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "case": "ordinary-bash-discovery-search-exact-copy",
+  "mode": "B",
+  "selected_once": {
+    "publication": "publication-58585-1792462542601259000-3",
+    "digest": "93e7784a60fa61b1ae523adaf105484cd476938ff7102954fac02dfae697f80d"
+  },
+  "captured_tree": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020/supplement/growing-B-128/disposable/store/generations/attempt-58513-1792462541227793000-0",
+  "source_path": "docs/item-overview-d000000.yaml",
+  "sha256": "9968d0d760a9b3214d613d18b985cbada9d4b6be09ac7777e198e3f243feea55",
+  "time": "2026-10-20T02:17:18.830166+00:00",
+  "engine_calls_during_extraction": 0,
+  "failed_original_preserved": true
+}

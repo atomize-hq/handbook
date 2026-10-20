@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/followup-20261020/followup.py", line 112, in <module>
+    try:worker()
+        ^^^^^^^^
+  File "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/followup-20261020/followup.py", line 104, in worker
+    command=['bash','-c',SHELL,'native-followup',str(root),str(destination),mode];t=time.time();p=bounded(command);assert p.returncode==0,(p.stdout,p.stderr);assert len(d.events)==before
+                                                                                                                          ^^^^^^^^^^^^^^^
+AssertionError: (b'', b'native-followup: line 13: cd: /Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020/supplement/growing-B-128/disposable/store/generations/attempt-58513-1792462541227793000-0\nattempt-58513-1792462541227793000-0: No such file or directory\n')

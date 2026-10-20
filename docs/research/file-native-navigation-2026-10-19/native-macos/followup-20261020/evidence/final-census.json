@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-10-20T02:19:12.602013+00:00",
+  "roots": [
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook",
+      "files": 20439,
+      "logical_bytes": 449259739
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git",
+      "files": 5433,
+      "logical_bytes": 187492778
+    },
+    {
+      "root": "/private/tmp/file-native-q-macos-20261019",
+      "files": 8466,
+      "logical_bytes": 206414667
+    },
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook",
+      "files": 4605,
+      "logical_bytes": 260604163
+    }
+  ],
+  "owned_bytes": 450949131,
+  "owned_files": 20608,
+  "free_bytes": 197610692608,
+  "followup_runtime": {
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 12416,
+    "logical_bytes": 130261490
+  },
+  "maximum_observed_runtime_bytes": 130261490,
+  "maximum_observed_runtime_files": 12416,
+  "sampling": "Runtime logical census every approximately two seconds; final includes all continuing source/build/old fixtures/new fixtures/returns plus conservative shared Git growth. Census snapshots do not measure every transient byte."
+}

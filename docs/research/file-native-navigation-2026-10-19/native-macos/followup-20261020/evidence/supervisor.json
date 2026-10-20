@@ -1,0 +1,11 @@
+{
+  "finished": "2026-10-20T02:16:21.720721+00:00",
+  "worker_start_epoch": 1792462393.426881,
+  "seconds": 188.29385495185852,
+  "exit": 1,
+  "censor": null,
+  "aggregate_sampled_peak_rss_bytes": 56737792,
+  "remaining_process_group_before_cleanup": [],
+  "remaining_process_group_after_cleanup": [],
+  "status": "failed-or-censored"
+}
