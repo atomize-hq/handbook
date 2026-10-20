@@ -1,0 +1,33 @@
+{
+  "post_push_actual": {
+    "scopes": {
+      "runtime": {
+        "bytes": 1978553034,
+        "files": 56343
+      },
+      "worktree": {
+        "bytes": 14415237,
+        "files": 266
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 240581498,
+        "files": 2214
+      }
+    },
+    "total_new_bytes": 2181046681,
+    "total_new_files": 60770,
+    "free_bytes": 198694150144,
+    "time_utc": "2026-10-20T08:03:48.732756+00:00"
+  },
+  "archive_Git_blob_matches_runtime_packager_SHA": true,
+  "functional_cutoff_unchanged": "2026-10-20T07:55:16Z",
+  "recommendation": "ADJUST; no production adoption",
+  "proposed_closed_cap_if_parent_accepts": 2254857830,
+  "proposed_closed_cap_fits_actual_plus8MiB": true,
+  "all_owned_Windows_functional_and_artifact_groups_closed": true,
+  "scope": "Windows P task ownership; native closure is separately qualified in native-evidence addendum"
+}

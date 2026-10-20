@@ -1,0 +1,13 @@
+
+  GitNexus Detect Changes (1.6.12)
+file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e39b96-135e0/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435
+            throw new Error(`Repository "${repoParam}" not found. Available: ${labels.join(', ')}`);
+                  ^
+
+Error: Repository "C:/Users/spmcc/.codex/worktrees/file-native-packing-20261020/handbook" not found. Available: handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation-20260808), handbook (C:\Users\spmcc\.codex\worktrees\hcm32r-adf08a6e\handbook), handbook (C:\Users\spmcc\Documents\__Project_Code\handbook)
+    at LocalBackend.selectToolRepository (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e39b96-135e0/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435:19)
+    at async LocalBackend.callTool (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e39b96-135e0/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:2075:22)
+    at async detectChangesCommand (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e39b96-135e0/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/tool.js:293:20)
+    at async Command.<anonymous> (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e39b96-135e0/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/lazy-action.js:33:9)
+
+Node.js v22.15.0

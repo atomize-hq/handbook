@@ -1,0 +1,21 @@
+{
+  "status": "LATER_PARENT_REVIEW; OVERALL_MAC_P_STILL_INCOMPLETE",
+  "parent_review_sha256": "6550cf447f7f0827ce35186f8ecd8875dc149548781c3c89ddf6d182f4263a84",
+  "source_core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "native_exe_sha256": "9ae57af7f16a05aa01d79b0aa88ce90b50f7669858548be6933cfc2d0f1c0def",
+  "fresh_final_F_events": 37,
+  "fresh_final_F_target": 282,
+  "completed_recovery_case_count": null,
+  "original_cutoff_closure": "UNKNOWN; EPERM and absent outer receipt retained",
+  "eventual_process_absence": true,
+  "native_PGIDs_exactly_covered": 368,
+  "later_numeric_observations": [
+    "2026-10-20T07:54:25.479251+00:00",
+    "2026-10-20T07:54:26.071197+00:00"
+  ],
+  "unreceipted_sampled_groups": [
+    8284,
+    57397
+  ],
+  "sealed_raw_package_not_modified": true
+}

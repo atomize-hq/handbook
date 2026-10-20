@@ -255,9 +255,30 @@ Parent's final Mac functional status at its fixed 07:52 cutoff: immediate A/B,
 and all 17 authored Bash processes passed. Fresh final-source F stopped at
 37 / 282 events and is TIME-CENSORED. Overall Mac P qualification is incomplete;
 older N recovery evidence cannot substitute. Shutdown returned EPERM for PGID
-8284 with a zero-RSS row; process-group closure remains unknown pending the
-parent's read-only audit. Zero RSS is not proof of closure. Exact final Mac
-artifact and executable bindings will be recorded only when supplied by parent.
+8284 with a zero-RSS row; closure at that original cutoff remains unknown, with
+no completed outer guard receipt. Zero RSS is not proof of closure. Parent's
+later independently checked supplement covers the exact union of 368 recorded
+PGIDs in two native numeric-column observations, both with no rows, at
+07:54:25.479251Z and 07:54:26.071197Z. This establishes eventual process absence;
+it does not turn the original closeout or two unreceipted groups into successful
+guard receipts. Original state/UID fields remain null, with no zombie inference.
+
+Parent matched all 345 engine events to raw child resources and checked all
+366 completed process receipts; their missing-RSS count is zero. Final Mac
+executable SHA-256 is
+`9ae57af7f16a05aa01d79b0aa88ce90b50f7669858548be6933cfc2d0f1c0def`;
+independent library SHA-256 is
+`69d8dee81bccdee425d167300d11431f3c5ecc34a3011400e536aa89f7756189`.
+The 145 source inputs / 18 core files remain d70. Original return archive
+1,119,837 bytes has SHA-256
+`032ab642f612583c6cbefb82fa80b2ff4e7069a1a4c6cdc2d50a346f6f819e61`;
+the 8,985-byte closure supplement is
+`3fb12d38c7b376b4e0b2ceeab03c64c98ab6b81693773cbff0cf1237ff3d84f1`.
+The later parent review is retained separately under `native-evidence/`.
+
+The sealed 695-member raw evidence package is an earlier as-of snapshot that
+correctly recorded Mac closure unknown. Its archive and indexes remain unchanged;
+this report and the separate native closure addendum incorporate the later audit.
 
 No absent stage or native partial phase is a pass.
 Current additional fixture grants are finite and coordinated globally; prospective
