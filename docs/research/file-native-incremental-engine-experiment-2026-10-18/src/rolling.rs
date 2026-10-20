@@ -46,14 +46,18 @@ fn eligible(store:&Store,c:&Cutoff,p:&Publication,mask:u8,active:&BTreeMap<Strin
         let bit=1u8<<n;if mask&bit==0{continue;}
         if n>=3{
             if active.contains_key(&p.attempt){deferred|=bit;reason="reservation";continue;}
-            if lifetime::live(&store.root,&c.selected).is_err(){deferred|=bit;reason="retired";continue;}
+            // Retirement is permanent: attempt metadata can never become eligible.
+            // It must not occupy a retryable hole or stop permanent history.
+            if lifetime::live(&store.root,&c.selected).is_err(){continue;}
         }
         if crate::packing::mapped(&key,m)?{continue;}
         let path=store.root.join(&key.0);
         // A reservation owns candidates/allocations until transfer completes.
         // No recursive attempt-directory discovery, including retry allocations.
         let raw=io::read(&path,m)?;
-        if raw.len()>pack::MAX_RAW{deferred|=bit;reason="oversize";continue;}
+        // Immutable oversize records are terminal physical exclusions. Their
+        // accepted publication remains discoverable; never retry forever.
+        if raw.len()>pack::MAX_RAW{m.pack_excluded_records+=1;m.pack_excluded_bytes+=raw.len() as u64;continue;}
         match n{
             0=>if io::digest(&raw)!=c.selected.digest{return Err("integrity:discovery-publication-digest".into());},
             1=>{if io::digest(&raw)!=p.result_hash{return Err("integrity:discovery-result-digest".into());}let _:Value=crate::physical_lifetime::strict(&raw)?;},

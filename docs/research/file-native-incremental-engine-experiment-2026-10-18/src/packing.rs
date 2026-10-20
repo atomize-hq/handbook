@@ -167,8 +167,10 @@ fn consolidate(keys:&mut BTreeSet<Key>,old:&[Descriptor],limit:usize,m:&mut Metr
     if keys.is_empty()||groups.len()<limit{return Ok(old.to_vec());}
     let mut sizes=groups.iter().map(|(id,ds)|(*id,ds.iter().map(|d|d.pack_bytes).sum::<u64>())).collect::<Vec<_>>();
     // Preserve a large stable base whenever smaller delta segments suffice.
+    let stable=groups.keys().next().copied();
+    if groups.len()>1{sizes.retain(|(id,_)|Some(*id)!=stable);}
     sizes.sort_by_key(|(id,bytes)|(*bytes,*id));
-    let remove=sizes.into_iter().take(if groups.len()>1{2}else{1}).map(|(id,_)|id).collect::<BTreeSet<_>>();
+    let remove=sizes.into_iter().take(2).map(|(id,_)|id).collect::<BTreeSet<_>>();
     for d in old.iter().filter(|d|remove.contains(&d.segment)){
         let mut physical=m.physical.take().ok_or("integrity:consolidation-capture")?;
         let index=physical.index(d,m);m.physical=Some(physical);let index=index?;
@@ -563,6 +565,17 @@ fn run_inner(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
         let segment_limit=v["segment_limit"].as_u64().unwrap_or(4);
         if segment_limit==0||segment_limit>4{return Err("refused:segment-limit".into());}
         let retained=consolidate(&mut keys,&old,segment_limit as usize,m)?;
+        // A low-count automatic refusal creates no build ownership/output.
+        let mut potential_removable=0u64;
+        for key in &keys{
+            if store.config.mode=="B"&&key.role()==Some("publication"){continue;}
+            match std::fs::symlink_metadata(root.join(&key.0)){
+                Ok(meta) if meta.file_type().is_file()=>potential_removable+=1,
+                Ok(_)=>return Err("integrity:automatic-loose-file-type".into()),
+                Err(e) if e.kind()==std::io::ErrorKind::NotFound=>{},Err(e)=>return Err(e.into()),
+            }
+        }
+        if v["force"].as_bool()!=Some(true)&&potential_removable<128{return Err("refused:automatic-compaction-benefit".into());}
         let reserve=v["reserve_bytes"].as_u64().unwrap_or(256*1024*1024);
         if reserve>4*1024*1024*1024||reserve<1024*1024{return Err("refused:maintenance-reservation-bound".into());}
         let codec=match v["codec"].as_str().unwrap_or("raw"){"raw"=>0,"zstd"=>1,_=>return Err("refused:codec".into())};
@@ -589,7 +602,12 @@ fn run_inner(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
         if let Some(b)=builder{if !b.is_empty(){packs.push(flush(root,&stage,b,m)?);}}
         let added_files=packs.len()*2+3;
 
-        if v["force"].as_bool()!=Some(true)&&(removable.0<128||removable.0<4*added_files as u64||removable.1<=m.quota_spent+physical::WORK_LIMIT as u64+physical::CATALOG_LIMIT as u64+4096){return Err("refused:automatic-compaction-benefit".into());}
+        if v["force"].as_bool()!=Some(true)&&(removable.0<128||removable.0<4*added_files as u64||removable.1<=m.quota_spent+physical::WORK_LIMIT as u64+physical::CATALOG_LIMIT as u64+4096){
+            // Declining a completely owned candidate is a durable abort, not an
+            // unfinished build requiring a manual repair before the next try.
+            j.status="aborted-owned".into();j.used_bytes=m.quota_spent;m.quota_limit=None;save(root,&j,m)?;
+            return Err("refused:automatic-compaction-benefit".into());
+        }
         for d in &mut packs{d.segment=ordinal;}
         packs.extend(retained);
         packs.sort_by(|a,b|(a.segment,&a.role,&a.first).cmp(&(b.segment,&b.role,&b.first)));
@@ -612,7 +630,7 @@ fn run_inner(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
         if physical::persist_plan(root,&work,m)?!=plan{return Err("integrity:plan-correspondence".into());}
         physical::create_pin(root,&target,m)?;catalog(root,&target,m)?;
         j.catalog=Some(hash);j.target=Some(target);j.status="installed".into();j.used_bytes=m.quota_spent;m.quota_limit=None;save(root,&j,m)?;
-        m.elapsed("pack-construction-inclusive",construction);m.pack_eligible_records=records;m.pack_eligible_raw_bytes=logical;m.pack_excluded_records=excluded;m.pack_excluded_bytes=excluded_bytes;
+        m.elapsed("pack-construction-inclusive",construction);m.pack_eligible_records=records;m.pack_eligible_raw_bytes=logical;m.pack_excluded_records+=excluded;m.pack_excluded_bytes+=excluded_bytes;
         io::checkpoint("pack-before-catalog")?;io::checkpoint("physical-before-selection")?;
     }else if operation=="resume"{
         j=previous.ok_or("refused:no-maintenance")?;
