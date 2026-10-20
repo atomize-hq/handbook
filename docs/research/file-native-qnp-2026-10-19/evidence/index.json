@@ -75,6 +75,10 @@
     "bytes": 2096,
     "sha256": "84615a8646fb2e593b11a685b9119a0136b6f741bd121a8a76bae09902c1bb32"
   },
+  "coordinator-p-fixed-source-review.json": {
+    "bytes": 1018,
+    "sha256": "e912f76609787a7b621f7602e7f83f1a79222067937fe8ecad440f02137a9a05"
+  },
   "coordinator-p-preparation-detect-changes.txt": {
     "bytes": 2151,
     "sha256": "ba3f391ca7e56875a2440abd066551bcfe8ac7e6a03dbcace54e8057e8523928"
@@ -150,6 +154,26 @@
   "p-dispatch-precommit.txt": {
     "bytes": 2149,
     "sha256": "6ed27551e02b03d506071a4c7f936bbcada0503dec889d6af83877da23993b60"
+  },
+  "p-fixed-candidate-old-counterexample.json": {
+    "bytes": 6669,
+    "sha256": "009335071518ae1bcd2fad20ba00b3bcef4c875c4bd877d0e4a65d929a141450"
+  },
+  "p-fixed-candidate-qualification.json": {
+    "bytes": 975,
+    "sha256": "eec1c71e0323c4c9814fab0deecb439196a6490ac7a6a9b9fb62ba6312a7b69b"
+  },
+  "p-fixed-candidate-source-binding.json": {
+    "bytes": 4109,
+    "sha256": "59f4b33ee8c44dd0a044ccf4f9feda09aff4cddd9087101b506ec69ce86186f7"
+  },
+  "p-fixed-candidate-targeted-summary.json": {
+    "bytes": 13625,
+    "sha256": "92d8501d04f596cbe4c7eb7d2f194958088698ca7b577609ad822c171bda0efb"
+  },
+  "p-fixed-transport-precommit.txt": {
+    "bytes": 2733,
+    "sha256": "5356d2dfb0908bb48f326d1d038eb19b109a72901348c5d64bbf447791768eef"
   },
   "p-initial-admission.json": {
     "bytes": 1714,

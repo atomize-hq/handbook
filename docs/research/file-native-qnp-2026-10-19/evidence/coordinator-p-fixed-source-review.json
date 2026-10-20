@@ -1,0 +1,16 @@
+{
+  "utc": "2026-10-20T04:52:12.181981+00:00",
+  "core_commit": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "manual_core_delta": "only packing.rs versus4cb; B permanent publication duplicates retained after byte validation, missing/conflicting controls refuse, zero false deletion credit, A control count0",
+  "source_file_map_verified_against_Git": 18,
+  "changed_core_files": 1,
+  "Windows_exe_parent_rehashed": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b",
+  "targeted_cases": 9,
+  "engine_events": 26,
+  "ordinary_shell_processes": 9,
+  "native_qualification": null,
+  "affected_full_capsule": "pending",
+  "transport_members_roundtrip_verified": 145,
+  "transport_sha256": "0082767199baa9f9e06ea70f9efa40f5a9a086b71d2f236cf7356238ca1bdf64",
+  "worker_binding_placeholder": "source-binding source_commit placeholder is historical precommit text; parent transport final_core_files verified against actual d70 Git blobs supplies final pin; no rewrite of earlier4cb results"
+}
