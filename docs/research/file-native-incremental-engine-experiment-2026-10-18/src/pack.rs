@@ -18,7 +18,10 @@ pub(crate) struct Descriptor {
     pub records: u32, pub codec: u8, pub role: String, pub first: String, pub last: String,
     #[serde(default,skip_serializing_if="Option::is_none")]
     pub instance: Option<String>,
+    #[serde(default,skip_serializing_if="is_zero")]
+    pub segment:u64,
 }
+fn is_zero(n:&u64)->bool{*n==0}
 impl Descriptor {
     pub fn path(&self, extension:&str)->Result<String> {
         let hash=match extension{"pack"=>&self.pack,"idx"=>&self.index,_=>return Err("integrity:container-extension".into())};
@@ -162,7 +165,7 @@ impl Builder {
         let hash=io::digest(&self.pack);let mut index=MAGIC.to_vec();index.extend(hash_bytes(&hash)?);index.extend((self.pack.len() as u64).to_le_bytes());index.push(self.codec);index.extend((self.entries.len() as u32).to_le_bytes());
         for e in &self.entries {index.extend((e.key.0.len() as u16).to_le_bytes());index.extend(e.key.0.as_bytes());index.extend(e.offset.to_le_bytes());index.extend((e.encoded as u32).to_le_bytes());index.extend((e.raw as u32).to_le_bytes());index.extend(hash_bytes(&e.hash)?);}
         if index.len()>MAX_INDEX{return Err("refused:index-size".into());}
-        let d=Descriptor{instance:None,pack:hash,index:io::digest(&index),pack_bytes:self.pack.len() as u64,index_bytes:index.len() as u64,records:self.entries.len() as u32,codec:self.codec,role:self.role,first:self.entries[0].key.0.clone(),last:self.entries.last().unwrap().key.0.clone()};
+        let d=Descriptor{instance:None,segment:0,pack:hash,index:io::digest(&index),pack_bytes:self.pack.len() as u64,index_bytes:index.len() as u64,records:self.entries.len() as u32,codec:self.codec,role:self.role,first:self.entries[0].key.0.clone(),last:self.entries.last().unwrap().key.0.clone()};
         Ok((d,self.pack,index))
     }
 }

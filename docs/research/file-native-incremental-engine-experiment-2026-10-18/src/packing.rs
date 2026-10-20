@@ -26,13 +26,15 @@ fn catalog(root:&Path,c:&crate::store::StoreConfig,m:&mut Metrics)->Result<Optio
             if io::digest(&b)!=hash{return Err("integrity:catalog-digest".into());}
             m.pack_catalog_bytes+=b.len() as u64;
             let cat:Catalog=strict(&b)?;
-            if cat.version!=(if c.version==3{2}else{1})||cat.store_id!=c.store_id||cat.packs.len()>64{return Err("integrity:catalog-version-count".into());}
-            let mut previous:Option<&Descriptor>=None;let mut hashes=BTreeSet::new();
+            if !(if c.version==3{cat.version==2||cat.version==3}else{cat.version==1})||cat.store_id!=c.store_id||cat.packs.len()>64{return Err("integrity:catalog-version-count".into());}
+            let mut previous:Option<&Descriptor>=None;let mut hashes=BTreeSet::new();let mut segments=BTreeSet::new();
             for d in &cat.packs {
-                if c.version==2&&d.instance.is_some()||c.version==3&&d.instance.is_none()||!crate::objects::valid_hash(&d.pack)||!crate::objects::valid_hash(&d.index)||d.pack_bytes>pack::MAX_PACK as u64||d.index_bytes>pack::MAX_INDEX as u64||d.records==0||d.records as usize>pack::MAX_RECORDS||d.codec>1||Key::new(&d.first)?.role()!=Some(d.role.as_str())||Key::new(&d.last)?.role()!=Some(d.role.as_str())||d.first>d.last||!hashes.insert(d.index.clone()) {
+                if c.version==2&&d.instance.is_some()||c.version==3&&d.instance.is_none()||!crate::objects::valid_hash(&d.pack)||!crate::objects::valid_hash(&d.index)||d.pack_bytes>pack::MAX_PACK as u64||d.index_bytes>pack::MAX_INDEX as u64||d.records==0||d.records as usize>pack::MAX_RECORDS||d.codec>1||Key::new(&d.first)?.role()!=Some(d.role.as_str())||Key::new(&d.last)?.role()!=Some(d.role.as_str())||d.first>d.last||!hashes.insert(d.path("idx")?)||cat.version<3&&d.segment!=0 {
                     return Err("integrity:catalog-descriptor".into());
                 }
-                if previous.is_some_and(|p|(&p.role,&p.first)>=(&d.role,&d.first)||p.role==d.role&&p.last>=d.first){return Err("integrity:catalog-order-overlap".into());}
+                segments.insert(d.segment);
+                if segments.len()>4{return Err("integrity:catalog-segment-cap".into());}
+                if previous.is_some_and(|p|(p.segment,&p.role,&p.first)>=(d.segment,&d.role,&d.first)||p.segment==d.segment&&p.role==d.role&&p.last>=d.first){return Err("integrity:catalog-order-overlap".into());}
                 for (name,len) in [(d.path("pack")?,d.pack_bytes),(d.path("idx")?,d.index_bytes)] {
                     m.cleanup_step()?;if root.join(name).metadata().map_err(|e|format!("integrity:catalog-required-file:{e}"))?.len()!=len{return Err("integrity:catalog-size-binding".into());}
                 }
@@ -59,19 +61,31 @@ impl PhysicalRead {
         m.pack_cache_peak_bytes=m.pack_cache_peak_bytes.max((self.cache_bytes+bound) as u64);Ok(())
     }
     fn index(&mut self,d:&Descriptor,m:&mut Metrics)->Result<Rc<Index>> {
-        if let Some(index)=self.cache.get(&d.index){m.pack_cache_hits+=1;return Ok(index.clone());}
+        let cache_key=d.path("idx")?;
+        if let Some(index)=self.cache.get(&cache_key){m.pack_cache_hits+=1;return Ok(index.clone());}
         let bound=Index::allocation_bound(d)?;
         // Evict before allocation: the loading index is included in residency.
         self.make_room(bound,m)?;
         let index=Rc::new(Index::load(&self.root,d,m)?);let bytes=index.memory();
         if bytes>bound{return Err("integrity:index-cache-estimate".into());}
-        self.cache_bytes+=bytes;m.pack_cache_peak_bytes=m.pack_cache_peak_bytes.max(self.cache_bytes as u64);self.cache.insert(d.index.clone(),index.clone());Ok(index)
+        self.cache_bytes+=bytes;m.pack_cache_peak_bytes=m.pack_cache_peak_bytes.max(self.cache_bytes as u64);self.cache.insert(cache_key,index.clone());Ok(index)
     }
-    fn locate(&mut self,key:&Key,m:&mut Metrics)->Result<Option<(Rc<Index>,pack::Entry)>> {
-        let Some(cat)=&self.catalog else{return Ok(None)};
-        let desc=cat.packs.iter().find(|d|Some(d.role.as_str())==key.role()&&d.first<=key.0&&key.0<=d.last).cloned();
-        if let Some(d)=desc {let index=self.index(&d,m)?;if let Some(e)=index.find(key)?{return Ok(Some((index,e)));}}
-        Ok(None)
+    fn locate(&mut self,key:&Key,m:&mut Metrics)->Result<Option<(Descriptor,pack::Entry)>> {
+        let descriptors=self.catalog.as_ref().map_or(vec![],|cat|cat.packs.iter().filter(|d|Some(d.role.as_str())==key.role()&&d.first<=key.0&&key.0<=d.last).cloned().collect::<Vec<_>>());
+        if descriptors.len()>4{return Err("integrity:relevant-segment-cap".into());}
+        let mut found:Option<(Descriptor,pack::Entry)>=None;
+        for d in descriptors {
+            // No Rc survives a subsequent cache load: eviction never leaves an
+            // uncharged borrowed index. Every relevant route is authenticated.
+            let index=self.index(&d,m)?;
+            if let Some(e)=index.find(key)? {
+                if let Some((_,old))=&found {
+                    if old.hash!=e.hash||old.raw!=e.raw{return Err("integrity:segment-conflicting-identity".into());}
+                    index.read(&self.root,&e,pack::MAX_RAW,m)?;
+                }else{found=Some((d,e));}
+            }
+        }
+        Ok(found)
     }
 }
 pub(crate) fn capture(root:&Path,m:&mut Metrics)->Result<()> {
@@ -93,7 +107,7 @@ pub(crate) fn read(path:&Path,limit:usize,m:&mut Metrics)->Result<Option<Vec<u8>
     capture(&root,m)?;
     let mut physical=m.physical.take().ok_or("integrity:physical-capture")?;
     let result=(||->Result<Option<Vec<u8>>>{
-        if let Some((index,e))=physical.locate(&key,m)?{return Ok(Some(index.read(&root,&e,limit,m)?));}Ok(None)
+        if let Some((d,e))=physical.locate(&key,m)?{let index=physical.index(&d,m)?;return Ok(Some(index.read(&root,&e,limit,m)?));}Ok(None)
     })();m.physical=Some(physical);result
 }
 pub(crate) fn exists(path:&Path,m:&mut Metrics)->Result<bool> {
@@ -256,14 +270,21 @@ fn append_work(root:&Path,c:&crate::store::StoreConfig,id:&str,packs:Vec<Descrip
     let mut w=if c.version==3{physical::load(root,c,m)?}else{blank_work(c,id,ordinal,vec![],hash,parent)};
     if c.version==3{w.older.push(physical::generation(c,old.to_vec())?);}
     else if let Some(previous)=&c.catalog{w.garbage.push(format!("pack-catalogs/{previous}.json"));}
-    for d in old{physical::add_retired(&mut w,d.clone());}
+    for d in old{
+        let pack_live=packs.iter().any(|p|p.path("pack").ok()==d.path("pack").ok());
+        let index_live=packs.iter().any(|p|p.path("idx").ok()==d.path("idx").ok());
+        if !pack_live||!index_live{
+            if let Some(retired)=w.retired.iter_mut().find(|r|r.descriptor==*d){retired.pack_done|=pack_live;retired.index_done|=index_live;}
+            else{w.retired.push(physical::Retired{descriptor:d.clone(),pack_done:pack_live,index_done:index_live});}
+        }
+    }
     w.physical_parent=parent.into();
     w.generation=physical::Generation{id:id.into(),ordinal,catalog:hash.into(),plan:None,packs:packs.clone()};
     // A committed physical successor advances the ordinal before old claims
     // disappear. Unselected candidates cannot clear the parent authority.
     w.birth_claims.clear();w.transition_parent=None;
     w.garbage.push(format!("physical-stages/{id}/STORE.json"));
-    for d in packs{w.jobs.push(physical::LooseJob{descriptor:d,frontier:ordinal,position:0});}
+    for d in packs{if !old.contains(&d){w.jobs.push(physical::LooseJob{descriptor:d,frontier:ordinal,position:0});}}
     physical::validate_work(&w)?;Ok(w)
 }
 fn next_ordinal(c:&crate::store::StoreConfig)->Result<u64>{
