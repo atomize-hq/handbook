@@ -1,0 +1,120 @@
+{
+  "utc": "2026-10-20T21:21:01.227774+00:00",
+  "Work2_f6_negatives": {
+    "schema_pin": "f6f907943c54936e49123a136a5f0f87993758ab",
+    "cases": [
+      {
+        "case": "mutable-progress",
+        "refused": true,
+        "exception": "AssertionError",
+        "message": "unexpected-mutable-progress"
+      },
+      {
+        "case": "bad-selected-plan-bytes",
+        "refused": true,
+        "exception": "AssertionError",
+        "message": ""
+      },
+      {
+        "case": "malformed-selector",
+        "refused": true,
+        "exception": "AssertionError",
+        "message": "unidentified-selector-stage-ownership-must-refuse-and-preserve"
+      },
+      {
+        "case": "wrong-selector-parent",
+        "refused": true,
+        "exception": "AssertionError",
+        "message": "candidate-stage-not-owned-by-exact-selected-root"
+      },
+      {
+        "case": "duplicate-birth-claims",
+        "refused": true,
+        "exception": "AssertionError",
+        "message": ""
+      },
+      {
+        "case": "bool-pin-version",
+        "refused": true,
+        "exception": "AssertionError",
+        "message": ""
+      }
+    ],
+    "source": "C:\\file-native-online-cp1-20261020\\fixtures\\rem8\\disposable\\store",
+    "source_files": 56,
+    "source_all_file_hashes_unchanged": true,
+    "only_owned_fault_copies_mutated": true,
+    "qualification": "historical f6 schema decoder controls only; not native engine fault or final-pin qualification"
+  },
+  "guard": {
+    "exit": 0,
+    "censor": null,
+    "errors": [],
+    "process_closure_verified": true,
+    "closure_checks": [
+      {
+        "epoch": 1792531108.402135,
+        "members": []
+      },
+      {
+        "epoch": 1792531108.4224756,
+        "members": []
+      }
+    ],
+    "memory_sample_timing": {
+      "samples": 708,
+      "max_interval_seconds": 0.0470000000204891,
+      "intervals_over_40ms": 1
+    },
+    "job_aggregate_sampled_peak_rss": 23236608
+  },
+  "raw": [
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\work2-f6-decoder-negatives.json",
+      "bytes": 9347,
+      "sha256": "5ecf1160adca24c79ca81829b12bdda9a0f3d32ab09aae8e6c71ff8c45ec9014"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\work2-f6-decoder-negatives-guard.json",
+      "bytes": 24892,
+      "sha256": "cc2178c6079b815e3b21010395c10c17cee0b98a474278921c9c03e9305591a0"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\N64-B-baseline.json",
+      "bytes": 11032,
+      "sha256": "41afbd2195d09508d68f7994ff3762509ea9a3c7d373976d2ab5313f515beba8"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\control-N64-B-baseline-guard.json",
+      "bytes": 51301,
+      "sha256": "4e046fa384190549a016126982152aeb774be1d17ca21f84d663501e315c9b35"
+    }
+  ],
+  "F07_forecast": {
+    "final_store_pairs": 4,
+    "source_payload_sizes": {
+      "N64": 778240,
+      "N1000": 12697600
+    },
+    "all_final_payload_readable_floor": 161710080,
+    "retained_old_N64_extras": 8435478,
+    "new_cohort_metadata_forecast": 20971520,
+    "physical_coexistence_forecast": 4194304,
+    "total_forecast": 195311382,
+    "proposed_cap": 201326592,
+    "headroom": 6015210,
+    "execution": "NOT_RUN_WAITING_FINAL_PIN_AND_ADMISSION",
+    "qualification": "forecast not universal bound; actual cap and each prospective stage check mandatory"
+  },
+  "new_document_helper": {
+    "path": "docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\final_document_controls.py",
+    "sha256": "08feceddcf74a3f9da8c4fe187728faaf6ba2869cfc78156de451c1f206d1748",
+    "syntax": "PASS",
+    "engine_execution": "NOT_RUN",
+    "fixed_semantic_operations": 2,
+    "two_final_stores_per_pair": true,
+    "old_N64_retained": true,
+    "no_third_seed": true,
+    "no_percentile_claim": true
+  }
+}
