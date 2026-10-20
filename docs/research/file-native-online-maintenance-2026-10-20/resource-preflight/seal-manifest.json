@@ -1,0 +1,112 @@
+{
+  "status": "SEALED_RESOURCE_PREFLIGHT_NO_GO",
+  "version": 2,
+  "utc": "2026-10-20T19:25:17.899931+00:00",
+  "authoritative_report": "report-corrected.md",
+  "authoritative_ledger": "admission-ledger-corrected.json",
+  "superseded_drafts_retained": [
+    "report.md",
+    "admission-ledger.json"
+  ],
+  "previous_seal_preserved": "seal-manifest-v1.json",
+  "files": [
+    {
+      "file": "admission-ledger-corrected.json",
+      "bytes": 16005,
+      "sha256": "19fe88a91b09f7aeddddfa15069dc723a8f7dd5b5d0413c9e105500369977b80"
+    },
+    {
+      "file": "admission-ledger.json",
+      "bytes": 11272,
+      "sha256": "33b6b3c89955fe8a50e6cf01cdec5ccbbcb55ae3d2dfb6a48a547b3a8f52d874"
+    },
+    {
+      "file": "baseline-authentication.json",
+      "bytes": 620,
+      "sha256": "a5318220c6b058d04743514246706b373e9b3226059f1eebdc49013eec6bc2ad"
+    },
+    {
+      "file": "checkout-sizing.json",
+      "bytes": 26479,
+      "sha256": "0d641f27df061e48de2547d22cb4c7568cc38668d2299ba7312e0b1f81ab42fb"
+    },
+    {
+      "file": "correction-receipt.json",
+      "bytes": 935,
+      "sha256": "02b355b9ce96bb38142a7343f2bf4493293c6e5884e8827f51c2ddee6556fc6b"
+    },
+    {
+      "file": "ledger-wording-cleanup-receipt.json",
+      "bytes": 619,
+      "sha256": "6a776820208669e3e2a65e2bc387c6de741bf23f6c0280b600e11cda05e4c3e8"
+    },
+    {
+      "file": "linux-additional-ownership.json",
+      "bytes": 1909,
+      "sha256": "cba6998b6d34138ec43d96cc6a150c8cecb420ab3f87a5b5532ebcbded95de3e"
+    },
+    {
+      "file": "linux-census.json",
+      "bytes": 25798,
+      "sha256": "3a54b701cb6273d3b970b56be26f1a0ead40bc75099f2c68cb0d611cc892ad23"
+    },
+    {
+      "file": "linux-offline-readiness.json",
+      "bytes": 19352,
+      "sha256": "83f15448c82887c69e087fac73a7c0fe082589e66d642d31057269110487318c"
+    },
+    {
+      "file": "linux-supplement.json",
+      "bytes": 1256,
+      "sha256": "58a1826ff1bfdfdf04dce47798d90120ed7f6197a5e2e7333a94bd4dff2e4dcc"
+    },
+    {
+      "file": "long-archive-authentication.json",
+      "bytes": 13828,
+      "sha256": "90c6b81a7f75fea3631ef8857a5f9d277a8c230e647021c9483d825dbecfef97"
+    },
+    {
+      "file": "mac-attribution-relayed.json",
+      "bytes": 9736,
+      "sha256": "d8b1d5eca346f7a1a2168d2f3bd8c4a8fad8f996672074df57b9928a5be2a318"
+    },
+    {
+      "file": "original-archive-authentication.json",
+      "bytes": 1370,
+      "sha256": "e8e3900777ec06605eae21fd5b3da3b203e564166c67c668971e32c9c9220990"
+    },
+    {
+      "file": "protected-history-roots.json",
+      "bytes": 7272,
+      "sha256": "a43ae871bbe335f47beb06870369aee94438c0238870f1021654e7ef93eaf4ce"
+    },
+    {
+      "file": "report-corrected.md",
+      "bytes": 9145,
+      "sha256": "07ef6dad45da5790e4df056ff3843e7a4bda51bfea4ffc61f6121542d5c9dec5"
+    },
+    {
+      "file": "report.md",
+      "bytes": 11002,
+      "sha256": "191d0bd3bc0ad021d8ea8568cc8fa355bda12e36ddaca1e3f094a260bfafc9a9"
+    },
+    {
+      "file": "seal-manifest-v1.json",
+      "bytes": 3228,
+      "sha256": "57c554b5b69cc24904be5950b5cc1e78d79f9f64510ad24b636e232c9629a6a1"
+    },
+    {
+      "file": "windows-census.json",
+      "bytes": 16650,
+      "sha256": "6ad6af46e5dcab138a4cfb1205b7d2ea45b8a88a10a86ee62dcbafdc0dd3fbfd"
+    },
+    {
+      "file": "wsl-census.json",
+      "bytes": 2121,
+      "sha256": "1139540e5bd13973c9d475819b8c70d64ec37abae2f2342f5993351542d43c4e"
+    }
+  ],
+  "total_data_bytes_excluding_manifest": 178597,
+  "output_cap_bytes": 524288,
+  "no_more_mutations_expected": true
+}

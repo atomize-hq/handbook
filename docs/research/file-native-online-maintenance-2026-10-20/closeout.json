@@ -1,0 +1,69 @@
+{
+  "status": "INCOMPLETE_NO_GO_BEFORE_ENGINE_WORK",
+  "utc": "2026-10-20T19:27:08.963364+00:00",
+  "branch": "codex/file-native-online-maintenance-20261020",
+  "base_commit": "a0b92fe5dc64269508601dcddf7e2e2ca477e30d",
+  "unchanged_engine_core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "source_changes": false,
+  "builds": false,
+  "corpus_growth": false,
+  "restores": false,
+  "protected_disposal": false,
+  "matrix_reduced": false,
+  "new_native_qualification": "UNPERFORMED",
+  "independent_review": "PASS corrected conservative admission NO-GO",
+  "functional_cutoff_utc": "2026-10-21T11:10:14Z",
+  "absolute_closeout_utc": "2026-10-21T13:10:14Z",
+  "clock_reset": false,
+  "workers": [
+    {
+      "id": "01a15ab9-fdd1-7a70-9076-c007d6007d97",
+      "scope": "source protocol",
+      "host": "local"
+    },
+    {
+      "id": "01a15aba-0525-7792-9ea0-c11239a49445",
+      "scope": "resource Windows/Linux",
+      "host": "local native SSH"
+    },
+    {
+      "id": "01a15aba-14a9-7ff0-a81a-3c15f7b4fc8d",
+      "scope": "Mac preflight",
+      "host": "native Mac"
+    },
+    {
+      "id": "01a15ac1-68dc-7ea2-944e-822ed693431b",
+      "scope": "independent admission review",
+      "host": "local"
+    }
+  ],
+  "closeout_subreservation_bytes": 4194304,
+  "closeout_subreservation_inside_1GiB": true,
+  "precommit_census": {
+    "branch_report": {
+      "bytes": 891403,
+      "files": 55
+    },
+    "parent_meta_artifacts": {
+      "bytes": 405789,
+      "files": 32
+    },
+    "Mac_reports_native_bytes": 28056,
+    "main_common_git": {
+      "bytes": 252010373,
+      "files": 2437
+    },
+    "main_common_git_baseline_bytes": 251092876,
+    "positive_main_git_growth_bytes": 917497
+  },
+  "cleanup_credit_bytes": 0,
+  "cleanup_credit_files": 0,
+  "raw_worktree_attachment": "App attach rejected as checkout not managed; isolated raw sparse Git worktree remains usable. No retry.",
+  "tooling_notes": [
+    "Initial no-checkout index empty status showed inherited deletions; populated exact HEAD index using read-tree with sparse pattern before any add/commit; all inherited files unchanged.",
+    "GitNexus main runner inspected and not invoked because it could bootstrap package manager. Direct existing cached GitNexus1.6.12 detect-changes exact-path attempt returns unregistered; indexed result UNKNOWN.",
+    "Mac worker direct resource message automatic approval review rejected because its trusted destination was meta only. No retry or bypass; exact data returned to meta and recorded.",
+    "Exact full native reports transferred via compressed command output, decoded and SHA verified; initial attempted read_thread60000 output limit refused without mutation."
+  ],
+  "final_pin_note": "Commit and remote SHA are recorded in parent post-push landing receipt; no self-referential commit hash in this file."
+}

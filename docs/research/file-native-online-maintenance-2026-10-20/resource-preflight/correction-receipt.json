@@ -1,0 +1,20 @@
+{
+  "utc": "2026-10-20T19:23:58.610219+00:00",
+  "originals_preserved": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\report.md",
+      "sha256": "191d0bd3bc0ad021d8ea8568cc8fa355bda12e36ddaca1e3f094a260bfafc9a9"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\admission-ledger.json",
+      "sha256": "33b6b3c89955fe8a50e6cf01cdec5ccbbcb55ae3d2dfb6a48a547b3a8f52d874"
+    }
+  ],
+  "authoritative_corrected_files": [
+    "report-corrected.md",
+    "admission-ledger-corrected.json"
+  ],
+  "reason": "Independent review: shared-support whole-root net deltas have unresolved attribution; do not call continuity ledger a strict minimum/proven mathematical impossibility.",
+  "no_executable_work_released": true,
+  "no_deletion": true
+}

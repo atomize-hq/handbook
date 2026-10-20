@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-20",
+  "workflow": "chatgpt-pro-consult approach review",
+  "context": "fresh conversation",
+  "destination": "https://chatgpt.com/",
+  "visible_power": "Pro, 5 of 5",
+  "user_supplied_opening_exact_in_request_and_packet": true,
+  "scope": "guidance and bounded experiment planning; no dispatch or implementation",
+  "inline_request": {
+    "path": "request.md",
+    "bytes": 4351,
+    "sha256": "a845a8df54c67284477f69ad4aaca29b8a63b15981037dc3a0c51eb87ccd7865"
+  },
+  "attachments": [
+    {
+      "path": "bounded-review-packet.md",
+      "bytes": 24982,
+      "sha256": "473d5a142c565265b39b38aa8b3d5f789190f739445205561268ee858de0cbaa"
+    }
+  ],
+  "redaction": "No credentials, private contact information, native host paths/names, system/developer instructions, unrelated chats, or raw sensitive logs. Research facts and bounded source excerpts only.",
+  "project_sources_sync": false,
+  "full_repository_upload": false
+}

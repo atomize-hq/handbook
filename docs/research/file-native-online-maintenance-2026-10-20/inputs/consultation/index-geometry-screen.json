@@ -1,0 +1,43 @@
+{
+  "scope": "read-only retained final PZ build receipt; original disposable data files were previously reclaimed after authenticated capture, not opened or reconstructed now",
+  "source_receipt": "C:\\file-native-packing-20261020\\long-matrix-fixed2\\PZ-build.json",
+  "source_receipt_sha256": "a54a04a4fdc8dad85dee038502976886b015ed5b53bb1b8fbcf32dcffe8ca1ad",
+  "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "roles": {
+    "allocation": {
+      "records": 100906,
+      "index_bytes": 16274481,
+      "packs": 2,
+      "min_whole_indexes_at_192KiB": 83
+    },
+    "candidate": {
+      "records": 100906,
+      "index_bytes": 11517402,
+      "packs": 7,
+      "min_whole_indexes_at_192KiB": 59
+    },
+    "hint": {
+      "records": 101007,
+      "index_bytes": 11023319,
+      "packs": 2,
+      "min_whole_indexes_at_192KiB": 57
+    },
+    "publication": {
+      "records": 101007,
+      "index_bytes": 11327412,
+      "packs": 3,
+      "min_whole_indexes_at_192KiB": 58
+    },
+    "result": {
+      "records": 101007,
+      "index_bytes": 12827995,
+      "packs": 2,
+      "min_whole_indexes_at_192KiB": 66
+    }
+  },
+  "existing_indexes": 16,
+  "summed_index_bytes": 62970609,
+  "lower_bound_indexes_at_192KiB": 323,
+  "existing_pack_limit": 64,
+  "qualification": "Optimistic lower bound ignoring extra headers. The existing one-fully-authenticated-index-per-pack format cannot fit the prospective192KiB index envelope for every physical key in this exact cohort within64packs. This screen does not qualify any paged design."
+}

@@ -1,0 +1,310 @@
+{
+  "status": "NO_GO_CONSERVATIVE_CONTINUITY_LEDGER__EXACT_ATTRIBUTION_INCOMPLETE",
+  "utc": "2026-10-20T19:20:50.209199+00:00",
+  "functional_cutoff_utc": "2026-10-21T11:10:14Z",
+  "closeout_utc": "2026-10-21T13:10:14Z",
+  "clock_reset": false,
+  "cap_bytes": 42949672960,
+  "cap_files": 5000000,
+  "inside_closeout_reserve_bytes": 1073741824,
+  "inside_closeout_reserve_files": 100000,
+  "additional_recovered_native_ownership": {
+    "bytes": 44947034,
+    "files": 11,
+    "included_in_expanded_known_total": true,
+    "overlap": "outside all native named roots; separate top-level capsule*.tar and provenance-linked controllers"
+  },
+  "Mac_support_upperbound_option_bytes": 193433667,
+  "Mac_unknown_support": "earlier shared metadata and per-path cache churn lack complete inventories; cannot assert exact whole owned total. Full preexisting Cargo/Rustup/npm are not silently treated as new ownership. Known lowerbound suffices.",
+  "prospective_plan": {
+    "admitted": false,
+    "quality": "Not admitted; small source-only sequential prospective caps, not measured sizes or proven minima. Whole matrix cannot be marked admitted from these bounds. No claim information-theoretic impossibility.",
+    "rows": [
+      {
+        "label": "Three source-only sparse research copies, worktree metadata and small controller copies",
+        "bytes": 12582912,
+        "files": 3000
+      },
+      {
+        "label": "Windows one private offline j2 target, release plus capsule/unit artifacts",
+        "bytes": 268435456,
+        "files": 5000
+      },
+      {
+        "label": "Linux one private offline j2 target",
+        "bytes": 134217728,
+        "files": 5000
+      },
+      {
+        "label": "Mac one private offline j2 target",
+        "bytes": 134217728,
+        "files": 5000
+      },
+      {
+        "label": "Authentic fixed N128 H1k/H10k accepted histories, matched derivatives and three +100 cycles per1/4publisher schedule",
+        "bytes": 268435456,
+        "files": 220000
+      },
+      {
+        "label": "Small A/B N64/H64 protocol, quota/segments,1,000activation stress fixtures",
+        "bytes": 134217728,
+        "files": 100000
+      },
+      {
+        "label": "A/B N64/N1k document/view matched controls",
+        "bytes": 67108864,
+        "files": 30000
+      },
+      {
+        "label": "Native Linux/Mac final-pin workspace, strict, packing, recovery and generation/lifetime fixtures",
+        "bytes": 67108864,
+        "files": 60000
+      },
+      {
+        "label": "Exact H101007 full FNOP1 initial restore including test ledger",
+        "bytes": 592458971,
+        "files": 5807
+      },
+      {
+        "label": "New paged metadata with old index retained; no pack-copy credit needed for this optimistic option",
+        "bytes": 83886080,
+        "files": 2000
+      },
+      {
+        "label": "Final independent long restore retaining source including added metadata",
+        "bytes": 676345051,
+        "files": 8000
+      },
+      {
+        "label": "Functional raw samples, counters, ledgers and manifests",
+        "bytes": 134217728,
+        "files": 10000
+      },
+      {
+        "label": "Additional shared Git/Cargo/parent integration growth beyond measured baselines",
+        "bytes": 33554432,
+        "files": 5000
+      }
+    ],
+    "additional_bytes": 2606786998,
+    "additional_files": 458807,
+    "known_actual_plus_plan_plus_reserve_bytes": 45044619282,
+    "deficit_bytes": 2094946322,
+    "files_with_actual_plan_and_reserve": 4556834,
+    "physical_pack_copy_if_generation_namespace_requires_it_bytes": 283460393,
+    "no_hardlink_reflink_clone_dedup_or_planned_deletion_credit": true,
+    "without_uncertain_support_net_charges_deficit_bytes": 1890277364,
+    "known_actual_plus_plan_plus_reserve_bytes_qualification": "Continuing assigned-ledger forecast; no strict attribution/minimum claim."
+  },
+  "forecast_reconciliation": {
+    "previous_forecast_bytes": 42944072468,
+    "meaning": "closed Q/P/N-followup prospective ledger, not current actual or continuing capacity claim",
+    "closed_or_expired": [
+      "Q original qualification",
+      "N original and separately completed Mac followup",
+      "P original",
+      "P followup final Mac recovery24/282 and four B comparisons"
+    ],
+    "still_valid_prior_functional_reservations": [],
+    "still_valid_inside_closeout_reserve_bytes": 1073741824,
+    "new_meta_closeout_subreservation_bytes_inside_reserve": 4194304,
+    "new_meta_worker_report_envelopes": "meta report plus3worker reports at512KiB each; inside4MiB closeout subreservation, not additive outside1GiB",
+    "actual_bytes_reclaimed_this_turn": 0,
+    "files_removed_this_turn": 0
+  },
+  "separate_inherited_scope": {
+    "Windows_20261017_bytes": 35855850343,
+    "Windows_20261017_files": 2737431,
+    "WSL_20261017_bytes": 23402002010,
+    "WSL_20261017_files": 1768175,
+    "classification": "same separately bounded preserved lineage as controlling prior census/admission; no new exemption. Stronger all-earlier scope only increases blocker. All remain untouched."
+  },
+  "actions": {
+    "no_experiment_source_edits": true,
+    "no_builds": true,
+    "no_index_bootstrap": true,
+    "no_restores": true,
+    "no_corpus_copies": true,
+    "no_deletion": true,
+    "only_new_local_reports": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight"
+  },
+  "Windows_row_selection": {
+    "main_root_names": [
+      "C:\\file-native-incremental-20261018",
+      "C:\\file-native-incremental-20261018-build",
+      "C:\\file-native-incremental-20261018-build-control",
+      "C:\\file-native-incremental-20261018-build-final",
+      "C:\\file-native-navigation-20261019",
+      "C:\\file-native-p-linux-20261020",
+      "C:\\file-native-packing-20261020",
+      "C:\\file-native-qnp-20261019",
+      "C:\\file-native-recovery-20261019",
+      "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018",
+      "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-navigation-20261019",
+      "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020",
+      "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-q-linux-20261019",
+      "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019",
+      "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-recovery-20261019",
+      "C:\\Users\\spmcc\\.codex\\worktrees\\b3fc",
+      "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\18\\01a14f52-1f53-7990-9b84-ebb0af672ff5",
+      "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\19\\01a155e1-fe59-7682-be45-f6204e9f8824"
+    ],
+    "main_bytes": 26759501225,
+    "main_files": 3398370,
+    "rejected_root_names": [
+      "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a155e39b96-135e0",
+      "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a155e76749-e278"
+    ],
+    "reparse_policy": "lstat file-attribute REPARSE_POINT and symlinks excluded from traversal;1266 rejected-cache reparse entries skipped; regular paths charged logical size, no hardlink/reflink/dedup credit. Distinct disjoint root paths; archived bytes remain charged.",
+    "cache_attribution": "Only exact Q/N newly staged and rejected targets charged; other measured siblings are continuing preexisting tooling, retained separately in windows-census.json, no disposal credit.",
+    "shared_Cargo_basis": "Frozen P ownership-baseline719270031B/14465files and final followup893702027B/18188files explicitly charged174431996B/3723files. Current unchanged. Inherited ownership charge retained; net size alone is not fresh proof of writer attribution.",
+    "shared_Git_basis": "Current251092876B/2427files minus frozen P baseline226935084B/1776files; single charge, all common Git/admin below root included. Prior main Git contents not counted anew."
+  },
+  "long_restore_contract": {
+    "path": "C:/file-native-packing-20261020/packed-operational-backup",
+    "files": 5807,
+    "logical_bytes": 592458971,
+    "test_ledger_bytes": 246560316,
+    "test_ledger_included": true,
+    "reason": "The authenticated complete retained H101007 operational representation is the requested source; full fresh independent restore includes every inventory row. Existing protected ledgers/archives are not disposable destinations. Hardlink/reflink/partial restore or excluding ledger changes that tested contract and has not been admitted.",
+    "one_long_mutation_lane": true
+  },
+  "corrects": "admission-ledger.json (preserved original draft; never used as execution admission)",
+  "correction_utc": "2026-10-20T19:23:58.609221+00:00",
+  "attribution_correction": {
+    "uncertain_net_continuity_charges": [
+      {
+        "label": "Windows shared Git positive growth since frozen P baseline226935084B/1776files",
+        "bytes": 24157792,
+        "files": 651
+      },
+      {
+        "label": "Windows shared Cargo positive growth since P baseline719270031B/14465files",
+        "bytes": 174431996,
+        "files": 3723
+      },
+      {
+        "label": "Native Linux shared Cargo positive growth since621497085B/22503files",
+        "bytes": 6079170,
+        "files": 287
+      }
+    ],
+    "uncertain_net_continuity_bytes": 204668958,
+    "uncertain_net_continuity_files": 4661,
+    "meaning": "Inherited conservative charge retained for admission continuity; exact experiment writer/provenance is not proved by whole-root net size. No claim these are strict known-attributed lower-bound bytes.",
+    "known_attributed_with_recovered_native_transports_bytes": 41159421502,
+    "known_attributed_files_excluding_uncertain_net_file_growth": 3993366,
+    "known_attributed_plus_reserve_plus_required_long_restore": 42825622297,
+    "remaining_if_all_uncertain_continuity_charges_excluded": 124050663,
+    "entire_matrix_credible_plan_deficit_even_excluding_uncertain_net_charges": 1890277364,
+    "strict_universal_mathematical_impossibility_proven": false,
+    "recommendation": "NO GO for combined exact admission: conservative continuity ledger exceeds cap on required long restore; provenance gaps unresolved and no complete matrix schedule demonstrated to fit even optimistic exclusion."
+  },
+  "continuing_assigned_ledger_components": [
+    {
+      "label": "Windows experiment runtimes/worktrees/known evidence roots",
+      "bytes": 26759501225,
+      "files": 3398370
+    },
+    {
+      "label": "Windows exact rejected Q/N cache targets (both retained)",
+      "bytes": 2102088489,
+      "files": 30167
+    },
+    {
+      "label": "Windows shared Git positive growth since frozen P baseline226935084B/1776files",
+      "bytes": 24157792,
+      "files": 651
+    },
+    {
+      "label": "Windows shared Cargo positive growth since P baseline719270031B/14465files",
+      "bytes": 174431996,
+      "files": 3723
+    },
+    {
+      "label": "Native Linux named experiment roots (all prior32 plus P and returned archive copies)",
+      "bytes": 5040709153,
+      "files": 249595
+    },
+    {
+      "label": "Native Linux shared Cargo positive growth since621497085B/22503files",
+      "bytes": 6079170,
+      "files": 287
+    },
+    {
+      "label": "WSL inherited incremental/recovery accounting scope; not native qualification",
+      "bytes": 1993650271,
+      "files": 69446
+    },
+    {
+      "label": "Mac disjoint retained experiment roots, worker-native measurement",
+      "bytes": 5070665192,
+      "files": 245320
+    },
+    {
+      "label": "Mac known fetched pack/index/rev, outside retained roots and below whole-Git upperbound",
+      "bytes": 142405079,
+      "files": 3
+    },
+    {
+      "label": "Mac known prerequisite libc crate archive+source outside retained roots",
+      "bytes": 5455059,
+      "files": 454
+    }
+  ],
+  "continuing_assigned_subtotal_before_recovered_native_transports_bytes": 41319143426,
+  "continuing_assigned_subtotal_before_recovered_native_transports_files": 3998016,
+  "continuing_assigned_ledger_scenario_before_recovered_native_transports": {
+    "actual_bytes": 41319143426,
+    "reserve_bytes": 1073741824,
+    "mandatory_exact_long_restore_bytes": 592458971,
+    "sum_bytes": 42985344221,
+    "deficit_bytes": 35671261,
+    "excludes": "all new builds/source/candidate/history/fixtures; all unknown Mac support; conservative net Mac Cargo5716; newly recovered Linux transport/controller ownership",
+    "qualification": "Do not cite as mathematical impossibility or a proven minimum. See attribution_correction.",
+    "validity": "SUPERSEDED: this is conservative continuity-ledger arithmetic, not a strict attributable minimum proof.",
+    "description": "CONTINUING ASSIGNED LEDGER SCENARIO; includes Windows/Linux net support charges assigned under prior P guard. Not strict causal attribution; excludes recovered44,947,034B native transports for comparison only."
+  },
+  "continuing_assigned_scenario_with_unknown_Mac_net5716": {
+    "actual_bytes_including_Mac_positive_net5716": 41319149142,
+    "sum_with_reserve_and_long_restore": 42985349937,
+    "deficit_bytes": 35676977,
+    "validity": "conservative accounting option only, includes unknown-writer Mac net5716"
+  },
+  "continuing_assigned_ledger_with_recovered_native_transports_bytes": 41364090460,
+  "continuing_assigned_ledger_with_inside_reserve_bytes": 42437832284,
+  "continuing_assigned_ledger_headroom_after_reserve_bytes": 511840676,
+  "continuing_assigned_ledger_required_long_restore_deficit_bytes": 80618295,
+  "continuing_assigned_components_qualification": "Three Git/Cargo net rows are uncertain continuity charges; remaining payload/root rows use identified ownership/provenance. Mac shared metadata churn remains UNKNOWN.",
+  "continuing_assigned_total_qualification": "conservative continuity charge including unresolved net support growth, not exact attributable total",
+  "continuing_assigned_deficit_qualification": "conservative-ledger refusal only",
+  "strict_attributed_scenario": {
+    "uncertain_net_continuity_charges": [
+      {
+        "label": "Windows shared Git positive growth since frozen P baseline226935084B/1776files",
+        "bytes": 24157792,
+        "files": 651
+      },
+      {
+        "label": "Windows shared Cargo positive growth since P baseline719270031B/14465files",
+        "bytes": 174431996,
+        "files": 3723
+      },
+      {
+        "label": "Native Linux shared Cargo positive growth since621497085B/22503files",
+        "bytes": 6079170,
+        "files": 287
+      }
+    ],
+    "uncertain_net_continuity_bytes": 204668958,
+    "uncertain_net_continuity_files": 4661,
+    "meaning": "Identified retained roots/payload plus disjoint recovered native transports, excluding204668958B unresolved net support charges; this optimistic interpretation is not permission to release assigned resources.",
+    "known_attributed_with_recovered_native_transports_bytes": 41159421502,
+    "known_attributed_files_excluding_uncertain_net_file_growth": 3993366,
+    "known_attributed_plus_reserve_plus_required_long_restore": 42825622297,
+    "remaining_if_all_uncertain_continuity_charges_excluded": 124050663,
+    "entire_matrix_credible_plan_deficit_even_excluding_uncertain_net_charges": 1890277364,
+    "strict_universal_mathematical_impossibility_proven": false,
+    "recommendation": "NO GO for combined exact admission: conservative continuity ledger exceeds cap on required long restore; provenance gaps unresolved and no complete matrix schedule demonstrated to fit even optimistic exclusion."
+  }
+}

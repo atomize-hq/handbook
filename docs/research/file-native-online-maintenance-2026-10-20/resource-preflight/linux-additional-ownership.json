@@ -1,0 +1,72 @@
+{
+  "rows": [
+    {
+      "root": "/home/spenser/capsule-7ac70f9.tar",
+      "logical_bytes": 7127040,
+      "files": 1,
+      "allocated_file_bytes": 7127040
+    },
+    {
+      "root": "/home/spenser/capsule-recipe-precommit.tar",
+      "logical_bytes": 471040,
+      "files": 1,
+      "allocated_file_bytes": 471040
+    },
+    {
+      "root": "/home/spenser/capsule-5a65a21.tar",
+      "logical_bytes": 27965440,
+      "files": 1,
+      "allocated_file_bytes": 27967488
+    },
+    {
+      "root": "/home/spenser/capsule-7e00d22.tar",
+      "logical_bytes": 9369600,
+      "files": 1,
+      "allocated_file_bytes": 9371648
+    },
+    {
+      "root": "/home/spenser/linux_accounting_launch.py",
+      "logical_bytes": 2222,
+      "files": 1,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "root": "/home/spenser/linux_replay_lane.py",
+      "logical_bytes": 2578,
+      "files": 1,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "root": "/home/spenser/oracle_probe.py",
+      "logical_bytes": 844,
+      "files": 1,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "root": "/home/spenser/oracle_probe_recipe.py",
+      "logical_bytes": 842,
+      "files": 1,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "root": "/home/spenser/replay_probe.py",
+      "logical_bytes": 964,
+      "files": 1,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "root": "/home/spenser/pack_evidence_audit.py",
+      "logical_bytes": 3339,
+      "files": 1,
+      "allocated_file_bytes": 4096
+    },
+    {
+      "root": "/home/spenser/pack_evidence_final.py",
+      "logical_bytes": 3125,
+      "files": 1,
+      "allocated_file_bytes": 4096
+    }
+  ],
+  "note": "additional provenance-linked retained transports/controllers outside prior named-root census; conservative uplift, no deletion credit",
+  "tmp_matching_names": []
+}

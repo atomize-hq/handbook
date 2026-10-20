@@ -1,0 +1,12 @@
+{
+  "utc": "2026-10-20T19:27:39.814867+00:00",
+  "status": "PASS_DOCUMENTATION_AND_EVIDENCE_ONLY",
+  "json_files_parsed": 33,
+  "exact_main_input_copies": 19,
+  "unchanged_core_hashes_checked": 18,
+  "independent_review_hashes": 2,
+  "resource_arithmetic": "PASS",
+  "engine_tests": "NOT_RUN_ADMISSION_REFUSED",
+  "GitNexus": "UNKNOWN_UNREGISTERED_EXACT_PATH_DIRECT_CACHED_CLI",
+  "scope": "only new research report directory; no engine source edits"
+}

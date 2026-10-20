@@ -1,0 +1,821 @@
+{
+  "pin": "a0b92fe5dc64269508601dcddf7e2e2ca477e30d",
+  "full_tracked_bytes": 320883240,
+  "full_tracked_files": 5398,
+  "four_experiment_sparse_paths_bytes": 218598022,
+  "four_experiment_sparse_paths_files": 2036,
+  "new_worktree_git_metadata_not_included": true,
+  "source_only_sparse_bytes": 1049900,
+  "source_only_sparse_files": 202,
+  "source_only_sparse_selection": "top-level Python/PowerShell/Bash/Cargo files and src/*.rs in four existing research packages; no reports/evidence",
+  "source_only_sparse_paths": [
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/Cargo.lock",
+      "bytes": 8140
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/Cargo.toml",
+      "bytes": 439
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/account.py",
+      "bytes": 3266
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/backend_checks.py",
+      "bytes": 3322
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/baseline_harness.py",
+      "bytes": 33147
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/budget_amendment.py",
+      "bytes": 3168
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/cap_diagnosis.py",
+      "bytes": 1421
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/capture_checks.py",
+      "bytes": 3147
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/collect.py",
+      "bytes": 4927
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/continue_selected.py",
+      "bytes": 5149
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/execute.py",
+      "bytes": 2210
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/experiment.py",
+      "bytes": 18763
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/extend.py",
+      "bytes": 9267
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/indirect_gc.py",
+      "bytes": 2639
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/monitor.py",
+      "bytes": 1234
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/pin.py",
+      "bytes": 2114
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/profile.py",
+      "bytes": 1401
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/regressions.py",
+      "bytes": 710
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/reporting_checks.py",
+      "bytes": 6080
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/restoration.py",
+      "bytes": 3518
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/retained_probe.py",
+      "bytes": 3069
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/src/backend.rs",
+      "bytes": 6213
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/src/disk.rs",
+      "bytes": 24532
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/src/io.rs",
+      "bytes": 9320
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/src/lifecycle.rs",
+      "bytes": 7735
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/src/main.rs",
+      "bytes": 33528
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/src/model.rs",
+      "bytes": 8505
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/storage_account.py",
+      "bytes": 3815
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/tables.py",
+      "bytes": 13342
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/terminal_copy.py",
+      "bytes": 1399
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/verify_evidence.py",
+      "bytes": 10471
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/walkthrough.ps1",
+      "bytes": 2113
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/walkthrough.sh",
+      "bytes": 1403
+    },
+    {
+      "path": "docs/research/file-native-engine-followup-2026-10-17/workloads.py",
+      "bytes": 11054
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock",
+      "bytes": 10547
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+      "bytes": 561
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_lane.py",
+      "bytes": 3280
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_windows.py",
+      "bytes": 1826
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_wsl_final.py",
+      "bytes": 5074
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/adversarial.py",
+      "bytes": 3413
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/audit_evidence.py",
+      "bytes": 2838
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/audit_lane.py",
+      "bytes": 2539
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/calibrate_documents.py",
+      "bytes": 2238
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/census.py",
+      "bytes": 3010
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/checks.py",
+      "bytes": 8983
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/codec_geometry.py",
+      "bytes": 2293
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/codec_upgrade.py",
+      "bytes": 1750
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/contention_final.py",
+      "bytes": 4614
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/controller.py",
+      "bytes": 5779
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/deep_cases.py",
+      "bytes": 3402
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/derive_contention.py",
+      "bytes": 3962
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/export_wsl_evidence.py",
+      "bytes": 4873
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/final_resources.py",
+      "bytes": 6002
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_matrix.py",
+      "bytes": 5658
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_proofs.py",
+      "bytes": 3790
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_resource_census.py",
+      "bytes": 1714
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_verification.py",
+      "bytes": 5561
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/history_gc_continuation.py",
+      "bytes": 258
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/history_run.py",
+      "bytes": 4136
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/index_evidence.py",
+      "bytes": 1607
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/install_wsl_budget.py",
+      "bytes": 3305
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/matrix.py",
+      "bytes": 6183
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/namespace_cases.py",
+      "bytes": 1833
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native.py",
+      "bytes": 3387
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native_linux_final_census.py",
+      "bytes": 2406
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/ordinary.py",
+      "bytes": 1288
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/pack_evidence.py",
+      "bytes": 3581
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/pack_history.py",
+      "bytes": 5181
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/pack_ledger.py",
+      "bytes": 2709
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/paired_intents.py",
+      "bytes": 2675
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/proof_intent_regression.py",
+      "bytes": 2239
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/proof_retired_regression.py",
+      "bytes": 2229
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/quota_bytes.py",
+      "bytes": 1835
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/replay_lifetime.py",
+      "bytes": 2864
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/resource_bindings.py",
+      "bytes": 3708
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/root_geometry.py",
+      "bytes": 1803
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/run_differential.py",
+      "bytes": 448
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/run_lane.py",
+      "bytes": 3117
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/serial_windows.py",
+      "bytes": 4416
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/serial_windows_v2.py",
+      "bytes": 4510
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/session_source_associations.py",
+      "bytes": 3501
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs",
+      "bytes": 12161
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs",
+      "bytes": 8570
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs",
+      "bytes": 1001
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs",
+      "bytes": 2661
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs",
+      "bytes": 30973
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs",
+      "bytes": 14324
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs",
+      "bytes": 13471
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs",
+      "bytes": 429
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+      "bytes": 15945
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs",
+      "bytes": 57
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs",
+      "bytes": 10576
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs",
+      "bytes": 3551
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs",
+      "bytes": 12700
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "bytes": 27358
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs",
+      "bytes": 27876
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs",
+      "bytes": 35442
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/summarize.py",
+      "bytes": 5122
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/supplement.py",
+      "bytes": 11032
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_exports.py",
+      "bytes": 3006
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_gc_outcomes.py",
+      "bytes": 1386
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_genuine.py",
+      "bytes": 2700
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_projection.py",
+      "bytes": 5201
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_store.py",
+      "bytes": 10936
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_wsl_sources.py",
+      "bytes": 4198
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/walk_cases.py",
+      "bytes": 2519
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/walkthrough.ps1",
+      "bytes": 1524
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/walkthrough.sh",
+      "bytes": 841
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/windows_resources.py",
+      "bytes": 4498
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/wsl_budget_adapter.py",
+      "bytes": 2728
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/allocation.py",
+      "bytes": 3677
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/allocation_parallel.py",
+      "bytes": 2555
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/archive_artifacts.py",
+      "bytes": 6010
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/archive_artifacts_xz.py",
+      "bytes": 6113
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/artifact_closeout_guard.py",
+      "bytes": 1873
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/b_shell_reproducer.py",
+      "bytes": 2605
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/bind.py",
+      "bytes": 1012
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/build_sample_tool.py",
+      "bytes": 922
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/capsule.py",
+      "bytes": 19536
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/cohort_forecast.py",
+      "bytes": 2562
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/corpus_controls_stage.py",
+      "bytes": 6898
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/dependency_inventory.py",
+      "bytes": 1468
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/derive_tables.py",
+      "bytes": 4543
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/driver.py",
+      "bytes": 3304
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/failed_cell_preservation.py",
+      "bytes": 2043
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/final_evidence.py",
+      "bytes": 4059
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/final_long_matrix.py",
+      "bytes": 6543
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/final_recovery_stage.py",
+      "bytes": 2454
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/final_small_qualification.py",
+      "bytes": 3739
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/final_tables.py",
+      "bytes": 3843
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/final_unit_tests.py",
+      "bytes": 3567
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/fix2_build.py",
+      "bytes": 2013
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/fix2_checkpoint.py",
+      "bytes": 4863
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/fix2_regression.py",
+      "bytes": 7331
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/fixed_P0_readonly.py",
+      "bytes": 3399
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/guard.py",
+      "bytes": 11177
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/handoff_candidate.py",
+      "bytes": 4698
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/independent.py",
+      "bytes": 13097
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/inspect_dependencies.py",
+      "bytes": 1503
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/intent_probe.py",
+      "bytes": 3056
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/long_matrix.py",
+      "bytes": 7917
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/loose_regression.py",
+      "bytes": 2263
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/main_checkpoint.py",
+      "bytes": 3222
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/main_cleanup.py",
+      "bytes": 3706
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/matrix_tables.py",
+      "bytes": 4870
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/operational_matrix.py",
+      "bytes": 9344
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/p0_admission.py",
+      "bytes": 593
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/p0_checkpoint.py",
+      "bytes": 4817
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/packed_backup_adapter_check.py",
+      "bytes": 2063
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/packed_backup_stage.py",
+      "bytes": 6393
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/packed_capture_launch.py",
+      "bytes": 1817
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/packed_restore_check.py",
+      "bytes": 5730
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/packed_restore_launch.py",
+      "bytes": 1500
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/packed_successor_launch.py",
+      "bytes": 2470
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/post_measure_metadata.py",
+      "bytes": 3018
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/postcleanup_check.py",
+      "bytes": 3974
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/postcleanup_metadata.py",
+      "bytes": 2230
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/preservation_reopen.py",
+      "bytes": 1746
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/preservation_reopen_check.py",
+      "bytes": 1823
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/preservation_stage.py",
+      "bytes": 3443
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/process_progress.py",
+      "bytes": 1809
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/qualified_loose.py",
+      "bytes": 3991
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/qualified_restore_stage.py",
+      "bytes": 1220
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/reclaim_archived_targets.ps1",
+      "bytes": 6077
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/reclaim_old_cells_stage.py",
+      "bytes": 3474
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/reclaim_operational_image.ps1",
+      "bytes": 6749
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/reclaim_operational_image_fast.ps1",
+      "bytes": 6769
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/reclaim_operational_image_fast_slots.ps1",
+      "bytes": 6819
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/request_preservation.py",
+      "bytes": 2060
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/retry_PZ_verifier.py",
+      "bytes": 1463
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/selected_once_copy.ps1",
+      "bytes": 2146
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/sequenced_matrix_stage.py",
+      "bytes": 6043
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/slice1.py",
+      "bytes": 4008
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/strict_supplement.py",
+      "bytes": 5052
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/subset_corpus.py",
+      "bytes": 5308
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/successor_capture_stage.py",
+      "bytes": 3229
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/valid_cell_retry_launch.py",
+      "bytes": 1539
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/verifier_context_check.py",
+      "bytes": 2510
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/verify_subset.py",
+      "bytes": 4286
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/watchdog_check.py",
+      "bytes": 1162
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/watchdog_final_check.py",
+      "bytes": 2190
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/watchdog_group_check.py",
+      "bytes": 1637
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/bash_walk.sh",
+      "bytes": 1096
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/bounded.py",
+      "bytes": 2807
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/bundle_results.py",
+      "bytes": 3272
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/capsule.py",
+      "bytes": 11507
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/collect_native_evidence.py",
+      "bytes": 1599
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/final_native.py",
+      "bytes": 2031
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/finish_compatible.py",
+      "bytes": 1446
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/focused_extra.py",
+      "bytes": 3299
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/inventory.py",
+      "bytes": 2187
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/legacy_compatibility.py",
+      "bytes": 2029
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/long_trial.py",
+      "bytes": 5612
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/native_runner.py",
+      "bytes": 2421
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/operational_backup.py",
+      "bytes": 8308
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/oracle.py",
+      "bytes": 3702
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/oracle_supplement.py",
+      "bytes": 831
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/post_gc_probes.py",
+      "bytes": 3708
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/restore_gate.py",
+      "bytes": 2261
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/restored_fences.py",
+      "bytes": 1408
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/small_costs.py",
+      "bytes": 1870
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/verify_operational.py",
+      "bytes": 9290
+    }
+  ]
+}

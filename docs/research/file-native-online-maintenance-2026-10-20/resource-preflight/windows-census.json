@@ -1,0 +1,567 @@
+{
+  "utc": "2026-10-20T19:14:57Z",
+  "roots": [
+    {
+      "root": "C:\\file-native-experiment-20261017",
+      "exists": true,
+      "logical_bytes": 2171962409,
+      "files": 177835,
+      "directories": 38694,
+      "links": 0,
+      "errors": [],
+      "seconds": 3.109
+    },
+    {
+      "root": "C:\\file-native-experiment-20261017-build",
+      "exists": true,
+      "logical_bytes": 103333842,
+      "files": 378,
+      "directories": 98,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\file-native-experiment-20261017-v2",
+      "exists": true,
+      "logical_bytes": 156047821,
+      "files": 14412,
+      "directories": 6897,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.61
+    },
+    {
+      "root": "C:\\file-native-experiment-20261017-v3",
+      "exists": true,
+      "logical_bytes": 7593945147,
+      "files": 596897,
+      "directories": 272754,
+      "links": 0,
+      "errors": [],
+      "seconds": 21.0
+    },
+    {
+      "root": "C:\\file-native-followup-20261017",
+      "exists": true,
+      "logical_bytes": 25216771931,
+      "files": 1946032,
+      "directories": 100077,
+      "links": 0,
+      "errors": [],
+      "seconds": 10.562
+    },
+    {
+      "root": "C:\\file-native-followup-20261017-build",
+      "exists": true,
+      "logical_bytes": 101569779,
+      "files": 312,
+      "directories": 72,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.016
+    },
+    {
+      "root": "C:\\file-native-followup-20261017-build-final",
+      "exists": true,
+      "logical_bytes": 102443082,
+      "files": 313,
+      "directories": 72,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\file-native-followup-20261017-build-final-v2",
+      "exists": true,
+      "logical_bytes": 102444455,
+      "files": 313,
+      "directories": 72,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\file-native-followup-20261017-build-final-v3",
+      "exists": true,
+      "logical_bytes": 102446503,
+      "files": 313,
+      "directories": 72,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.016
+    },
+    {
+      "root": "C:\\file-native-followup-20261017-build-final-v4",
+      "exists": true,
+      "logical_bytes": 102453671,
+      "files": 313,
+      "directories": 72,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\file-native-followup-20261017-build-next",
+      "exists": true,
+      "logical_bytes": 102431703,
+      "files": 313,
+      "directories": 72,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018",
+      "exists": true,
+      "logical_bytes": 15323250267,
+      "files": 2650971,
+      "directories": 257435,
+      "links": 0,
+      "errors": [],
+      "seconds": 25.984
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018-build",
+      "exists": true,
+      "logical_bytes": 460187464,
+      "files": 1259,
+      "directories": 192,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018-build-control",
+      "exists": true,
+      "logical_bytes": 226053498,
+      "files": 717,
+      "directories": 146,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.016
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018-build-final",
+      "exists": true,
+      "logical_bytes": 461657446,
+      "files": 1259,
+      "directories": 192,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.015
+    },
+    {
+      "root": "C:\\file-native-navigation-20261019",
+      "exists": true,
+      "logical_bytes": 901730220,
+      "files": 78108,
+      "directories": 19284,
+      "links": 0,
+      "errors": [],
+      "seconds": 1.25
+    },
+    {
+      "root": "C:\\file-native-p-linux-20261020",
+      "exists": true,
+      "logical_bytes": 7528143,
+      "files": 329,
+      "directories": 23,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\file-native-packing-20261020",
+      "exists": true,
+      "logical_bytes": 2210105210,
+      "files": 64611,
+      "directories": 225977,
+      "links": 0,
+      "errors": [],
+      "seconds": 15.281
+    },
+    {
+      "root": "C:\\file-native-qnp-20261019",
+      "exists": true,
+      "logical_bytes": 17691291,
+      "files": 435,
+      "directories": 50,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\file-native-recovery-20261019",
+      "exists": true,
+      "logical_bytes": 5150064752,
+      "files": 575910,
+      "directories": 231689,
+      "links": 0,
+      "errors": [],
+      "seconds": 13.063
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018",
+      "exists": true,
+      "logical_bytes": 245911525,
+      "files": 4490,
+      "directories": 854,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.062
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-navigation-20261019",
+      "exists": true,
+      "logical_bytes": 7629482,
+      "files": 133,
+      "directories": 18,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020",
+      "exists": true,
+      "logical_bytes": 23845731,
+      "files": 297,
+      "directories": 35,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-q-linux-20261019",
+      "exists": true,
+      "logical_bytes": 9222787,
+      "files": 140,
+      "directories": 15,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019",
+      "exists": true,
+      "logical_bytes": 320886788,
+      "files": 5401,
+      "directories": 907,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.047
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-recovery-20261019",
+      "exists": true,
+      "logical_bytes": 258482758,
+      "files": 4535,
+      "directories": 857,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.063
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\b3fc",
+      "exists": true,
+      "logical_bytes": 15795380,
+      "files": 379,
+      "directories": 52,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\18\\01a14f52-1f53-7990-9b84-ebb0af672ff5",
+      "exists": true,
+      "logical_bytes": 1119458483,
+      "files": 9396,
+      "directories": 4000,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.281
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\19\\01a155e1-fe59-7682-be45-f6204e9f8824",
+      "exists": true,
+      "logical_bytes": 0,
+      "files": 0,
+      "directories": 0,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\.git",
+      "exists": true,
+      "logical_bytes": 251092876,
+      "files": 2427,
+      "directories": 416,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.016
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.cargo",
+      "exists": true,
+      "logical_bytes": 893702027,
+      "files": 18188,
+      "directories": 3910,
+      "links": 0,
+      "errors": [],
+      "seconds": 0.25
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\.ignored_pkg",
+      "exists": true,
+      "logical_bytes": 1050929282,
+      "files": 15108,
+      "directories": 2566,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.781
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a0f553ebf7-1db4",
+      "exists": true,
+      "logical_bytes": 1050637729,
+      "files": 15075,
+      "directories": 2560,
+      "links": 632,
+      "errors": [],
+      "seconds": 0.453
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a0fd275800-6e74",
+      "exists": true,
+      "logical_bytes": 1050640992,
+      "files": 15075,
+      "directories": 2560,
+      "links": 632,
+      "errors": [],
+      "seconds": 0.391
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a1031fce11-83d0",
+      "exists": true,
+      "logical_bytes": 1050794200,
+      "files": 15079,
+      "directories": 2556,
+      "links": 632,
+      "errors": [],
+      "seconds": 0.422
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a10320577c-993c",
+      "exists": true,
+      "logical_bytes": 1050794200,
+      "files": 15079,
+      "directories": 2556,
+      "links": 632,
+      "errors": [],
+      "seconds": 0.406
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a1084864cf-a9d8",
+      "exists": true,
+      "logical_bytes": 1050927667,
+      "files": 15108,
+      "directories": 2566,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.39
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a108487ba0-10040",
+      "exists": true,
+      "logical_bytes": 1050929282,
+      "files": 15108,
+      "directories": 2566,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.485
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a108487cfc-c920",
+      "exists": true,
+      "logical_bytes": 1050927667,
+      "files": 15108,
+      "directories": 2566,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.453
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a108487ed9-107dc",
+      "exists": true,
+      "logical_bytes": 1050929282,
+      "files": 15108,
+      "directories": 2566,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.359
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a108488177-e8f0",
+      "exists": true,
+      "logical_bytes": 1050927667,
+      "files": 15108,
+      "directories": 2566,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.438
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a10de34d3a-b0c0",
+      "exists": true,
+      "logical_bytes": 1041975065,
+      "files": 13973,
+      "directories": 2496,
+      "links": 393,
+      "errors": [],
+      "seconds": 0.453
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a10de891da-e964",
+      "exists": true,
+      "logical_bytes": 1050929039,
+      "files": 15108,
+      "directories": 2566,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.406
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a113142045-e648",
+      "exists": true,
+      "logical_bytes": 1051005623,
+      "files": 15117,
+      "directories": 2568,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.422
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a1184a0365-375c",
+      "exists": true,
+      "logical_bytes": 1051031879,
+      "files": 15119,
+      "directories": 2569,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.406
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a11daffe1c-bfa8",
+      "exists": true,
+      "logical_bytes": 1051031915,
+      "files": 15119,
+      "directories": 2569,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.438
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a122db1874-fe74",
+      "exists": true,
+      "logical_bytes": 1051061934,
+      "files": 15121,
+      "directories": 2570,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.406
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a1280908f9-61a0",
+      "exists": true,
+      "logical_bytes": 1051074843,
+      "files": 15123,
+      "directories": 2570,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.406
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a130fe26b5-b3d4",
+      "exists": true,
+      "logical_bytes": 1051084851,
+      "files": 15123,
+      "directories": 2570,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.469
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a13822497c-819c",
+      "exists": true,
+      "logical_bytes": 1051085181,
+      "files": 15123,
+      "directories": 2570,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.438
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a1455645e5-7f60",
+      "exists": true,
+      "logical_bytes": 1051198201,
+      "files": 15125,
+      "directories": 2570,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.406
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a14a83f34a-b3d4",
+      "exists": true,
+      "logical_bytes": 1051198201,
+      "files": 15125,
+      "directories": 2570,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.422
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a15046dde9-b500",
+      "exists": true,
+      "logical_bytes": 1051198201,
+      "files": 15125,
+      "directories": 2570,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.406
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a155e39b96-135e0",
+      "exists": true,
+      "logical_bytes": 1050883003,
+      "files": 15042,
+      "directories": 2535,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.422
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a155e76749-e278",
+      "exists": true,
+      "logical_bytes": 1051205486,
+      "files": 15125,
+      "directories": 2570,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.453
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\pkg",
+      "exists": true,
+      "logical_bytes": 1051205486,
+      "files": 15125,
+      "directories": 2570,
+      "links": 633,
+      "errors": [],
+      "seconds": 0.5
+    }
+  ],
+  "free_bytes": 198431051776,
+  "method": "read-only scandir; regular logical bytes, no reparse traversal; older 20261017 scope separately classified; shared caches/Git baseline attribution pending"
+}

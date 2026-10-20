@@ -1,0 +1,195 @@
+{
+  "kind": "Mac-report-only-shared-support-attribution-addendum",
+  "utc": "2026-10-20T19:18:40.875813+00:00",
+  "original_report_unchanged": {
+    "path": "/private/tmp/file-native-online-macos-preflight-20261020T1955Z/report.json",
+    "bytes": 18320,
+    "sha256": "967f3c92d127f730148c1321a8ce678cccbc646f8fc15360ba582d72aaf3ed26"
+  },
+  "retained_disjoint_roots": {
+    "logical_bytes": 5070665192,
+    "files": 245320,
+    "excludes": "whole shared Git, Cargo, Rustup and npm _npx; P private Cargo/build/fixtures/returns already inside P root235928344B"
+  },
+  "old_aggregate_overlap": "Prior Q4527326386B contains historical shared Git pack/index/rev/admin annotations. Current retained disjoint total excludes those; do not add old Q aggregate to current roots. N worktree449300755B is already included.",
+  "earliest_known_added_Cargo_payload": {
+    "source_evidence": "/private/tmp/file-native-prerequisite-macos-20261018-source/docs/research/file-native-platform-prerequisite-macos-2026-10-18/locked-crate-cache-footprint.json",
+    "crate": "libc0.2.191",
+    "logical_bytes": 5455059,
+    "regular_files": 454,
+    "allocated_bytes": 6791168,
+    "historic_reason": "only locked crate missing from preexisting shared Cargo cache",
+    "current_archive_verified": {
+      "path": "/Users/spensermcconnell/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/libc-0.2.191.crate",
+      "bytes": 855401,
+      "sha256": "65cd87c9a6d60536580b316ad985726104730a5151c99845f2490428ef91240a"
+    },
+    "no_broad_toolchain_install": true,
+    "current_source_census": {
+      "path": "/Users/spensermcconnell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.191",
+      "files": 453,
+      "logical_bytes": 4599658,
+      "allocated_bytes": 5935104
+    },
+    "live_archive_plus_source_logical_bytes": 5455059,
+    "nonoverlap": "Archive and extracted source are distinct paths under .cargo (not P private cache); subset charge only, never additive to whole-Cargo charge."
+  },
+  "Git": {
+    "conservative_current_whole_root_charge_bytes": 187972892,
+    "entries": 5492,
+    "allocated_bytes": 205025280,
+    "earliest_Q_known_fetched_pack_idx_rev_bytes": 142405079,
+    "earliest_Q_known_admin_bytes": 773886,
+    "P_later_Q_admin_annotation_bytes": 785335,
+    "rule": "Charge current whole Git once as safe upperbound, replacing individual attributed Q/N Git sums; no fetch performed.",
+    "current_verified_files": [
+      {
+        "path": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git/objects/pack/pack-2b19abdba59bb6234fa0a3034fac2ab8e230ce9a.idx",
+        "bytes": 46460,
+        "allocated_bytes": 49152,
+        "sha256": "117bdd2de053ba4897182bd5e374a8252e16b83faff32104c5518e8dd6eba58e",
+        "device": 16777233,
+        "inode": 617533692,
+        "links": 1
+      },
+      {
+        "path": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git/objects/pack/pack-2b19abdba59bb6234fa0a3034fac2ab8e230ce9a.pack",
+        "bytes": 142352083,
+        "allocated_bytes": 142352384,
+        "sha256": "bfc49960d1a7c61f1699fef4eb8bbf9b53be7c2f3eae1cd8684e9491408c0128",
+        "device": 16777233,
+        "inode": 617533657,
+        "links": 1
+      },
+      {
+        "path": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git/objects/pack/pack-2b19abdba59bb6234fa0a3034fac2ab8e230ce9a.rev",
+        "bytes": 6536,
+        "allocated_bytes": 8192,
+        "sha256": "b38a707bcd58628b48a319df801e404a7d06a3b2c9a742ebc9ed45aab44425b8",
+        "device": 16777233,
+        "inode": 617533693,
+        "links": 1
+      }
+    ],
+    "current_verified_sum_bytes": 142405079,
+    "nonoverlap": "Three distinct files/device-inode pairs under already censused whole .git root; subset charge only, never additive to whole-Git charge."
+  },
+  "shared_baseline_comparisons": [
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git",
+      "P_baseline_logical_bytes": 187972851,
+      "current_logical_bytes": 187972892,
+      "net_delta_bytes": 41,
+      "current_entries": 5492,
+      "qualification": "Net difference is not a per-path added-byte inventory and cannot prove zero churn or writer attribution."
+    },
+    {
+      "root": "/Users/spensermcconnell/.cargo",
+      "P_baseline_logical_bytes": 1859789385,
+      "current_logical_bytes": 1859795101,
+      "net_delta_bytes": 5716,
+      "current_entries": 81747,
+      "qualification": "Net difference is not a per-path added-byte inventory and cannot prove zero churn or writer attribution."
+    },
+    {
+      "root": "/Users/spensermcconnell/.rustup",
+      "P_baseline_logical_bytes": 7189392555,
+      "current_logical_bytes": 7189392555,
+      "net_delta_bytes": 0,
+      "current_entries": 143329,
+      "qualification": "Net difference is not a per-path added-byte inventory and cannot prove zero churn or writer attribution."
+    },
+    {
+      "root": "/Users/spensermcconnell/.npm/_npx",
+      "P_baseline_logical_bytes": 5523514719,
+      "current_logical_bytes": 5520186620,
+      "net_delta_bytes": -3328099,
+      "current_entries": 251644,
+      "qualification": "Net difference is not a per-path added-byte inventory and cannot prove zero churn or writer attribution."
+    }
+  ],
+  "N_npm_evidence": {
+    "baseline_utc": "2026-10-19T22:54:38Z",
+    "closeout_utc": "2026-10-20T01:48:35.709332+00:00",
+    "both_logical_bytes": 5523514665,
+    "both_files": 254349,
+    "interpretation": "N start/closeout explicitly record existing npm tool-cache scope and identical totals. Current smaller total is not an authorized disposal/reclaimed-byte claim."
+  },
+  "GitNexus_cache": {
+    "path": "/Users/spensermcconnell/.npm/_npx/5e786f48223a616c",
+    "package_version": "1.6.9",
+    "logical_bytes": 1139827119,
+    "allocated_bytes": 1176248320,
+    "entries": 13064,
+    "annotation_not_additive": true,
+    "attribution": "No recovered local receipt identifies this preexisting cache as experiment-created or as the Windows rejected deletion target. Rejected Windows~2.1GB target identity must be resolved on Windows. No cache removal or bootstrap performed."
+  },
+  "known_support_charge_candidate": {
+    "retained_roots": 5070665192,
+    "whole_current_Git": 187972892,
+    "known_Cargo_payload": 5455059,
+    "positive_net_Cargo_since_P": 5716,
+    "sum_before_reports": 5264098859,
+    "qualification": "Candidate for parent ledger reconciliation, NOT full exact attribution proof. Whole Cargo/Rustup/npm support upperbounds remain in original report. Earlier metadata, OS incidental and per-path churn without preserved inventories remain unknown."
+  },
+  "unresolved": [
+    "No complete shared Cargo/Rustup/npm per-path inventory from before the earliest prerequisite; cannot establish exact all-experiment shared attribution.",
+    "Known libc footprint is a justified added-payload charge, not proof there were no other shared metadata/index/bookkeeping changes.",
+    "P-to-now Cargo +5716B has UNKNOWN writer attribution.",
+    "Rustup has identical P/current totals; no new toolchain install performed by this worker, but equal totals alone do not prove byte identity.",
+    "Observed npm size decrease is neither worker deletion nor reclamation credit."
+  ],
+  "evidence": [
+    {
+      "path": "/private/tmp/file-native-q-macos-20261019-admission.json",
+      "bytes": 3979,
+      "sha256": "c051c6423900b818b7484885da72f5256ebc3f093aa48f13699b7b3845396658"
+    },
+    {
+      "path": "/private/tmp/file-native-p-macos-20261020/preflight/root-census.json",
+      "bytes": 4293,
+      "sha256": "74aec8a0be6ba0ad8febef9dfdcaf8ceb7fcd50698a3215a7ac6e5b21246a5ca"
+    },
+    {
+      "path": "/private/tmp/file-native-p-macos-20261020/preflight/q-shared-git-annotations-not-additive.json",
+      "bytes": 1184,
+      "sha256": "2c7fc2bbb5a8989c2a9d170a3d57e0cc36aa7043378d9aa9d2257e0253d8248d"
+    },
+    {
+      "path": "/private/tmp/file-native-p-macos-20261020/preflight/baseline-deltas.json",
+      "bytes": 1670,
+      "sha256": "d7c3e27da4af00fd8f900881f7f721c9fdd568ac13c341949161550d9a06d703"
+    },
+    {
+      "path": "/private/tmp/file-native-prerequisite-macos-20261018-source/docs/research/file-native-platform-prerequisite-macos-2026-10-18/locked-crate-cache-footprint.json",
+      "bytes": 844,
+      "sha256": "30bb540005724b967214f6cecbb29b0647b3ce54746bb4bc9b2ad4503952bb0f"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/evidence/baseline.json",
+      "bytes": 1270,
+      "sha256": "0b48c9b2221e5f1fafcca46d195399b76ad3f087e107d3fd2fbc88701f8e2797"
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/evidence/closeout-census.json",
+      "bytes": 1170,
+      "sha256": "57b176982d850f1987a358aa2e892e6f1d260572cd83ac7cef6f3acb8236fa7d"
+    }
+  ],
+  "delivery": {
+    "complete_original_report_delivered_to_meta": true,
+    "attribution_summary_delivered_to_meta": true,
+    "direct_resource_worker_delivery": "Auto-review rejected: trusted authorization names only meta chat as approved destination. No retry or bypass."
+  },
+  "mutations": {
+    "only_new_addendum_report": true,
+    "source_executable_build_corpus_cache_deletion_index_operations": false
+  },
+  "known_minimum_support_payload": {
+    "Git_pack_idx_rev_bytes": 142405079,
+    "libc_archive_source_bytes": 5455059,
+    "sum_bytes": 147860138,
+    "files": 457,
+    "excludes": "worktree administration, other Git growth and all unknown incidental metadata; included as subsets within original report shared-support rows"
+  }
+}

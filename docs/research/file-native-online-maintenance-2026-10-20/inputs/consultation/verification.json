@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-20",
+  "status": "PASS",
+  "core_18_files_still_match_frozen_pin": true,
+  "sent_request_matches_saved_and_user_opening_first": true,
+  "one_bounded_attachment": true,
+  "visible_power": "Pro, 5 of 5",
+  "completed_with_explicit_controls": true,
+  "answer_all_six_outputs_preserved": true,
+  "local_geometry_screen": "323 whole indexes required at192KiB versus64pack limit; conditional on prospective budget",
+  "source_mutations": false,
+  "worker_dispatches": 0,
+  "primary_Windows_reference_checked": "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew",
+  "artifacts": {
+    "answer-rendered.txt": {
+      "bytes": 36492,
+      "sha256": "9c27f81ea2fed24661ac68fe5718e37b865375a9b4d37901c2678cc11a0cad34"
+    },
+    "answer.md": {
+      "bytes": 37812,
+      "sha256": "69f7e04ba5406ca9167442091d1d7d31ebb4489979b781a7db432ed4c6c4d410"
+    },
+    "bounded-review-packet.md": {
+      "bytes": 24982,
+      "sha256": "473d5a142c565265b39b38aa8b3d5f789190f739445205561268ee858de0cbaa"
+    },
+    "browser-verification.json": {
+      "bytes": 608,
+      "sha256": "91c3776de629d614baa247b6babc02dd3d87a47b54046d308447005df8a1e4a1"
+    },
+    "consultation.json": {
+      "bytes": 1597,
+      "sha256": "61efe60678062ad1982ac853744e1d65571056c8ca9dfc06778fb8a558dfd29c"
+    },
+    "consultation.md": {
+      "bytes": 68651,
+      "sha256": "3dc6c378624c277cdc6a2467c5d0a47ee1cc13ddcc46a196b7e478a28bdc27ab"
+    },
+    "index-geometry-screen.json": {
+      "bytes": 1582,
+      "sha256": "39088884277e796fab9ddda492f259c5b6d0f0869b2c751225a1ed592de55fad"
+    },
+    "local-inspection-notes.md": {
+      "bytes": 6514,
+      "sha256": "0557a4c6b7409c8b74c50490faae8d39ff6c87ff50bba9251b24a663a543b31b"
+    },
+    "next-experiment-brief.md": {
+      "bytes": 22544,
+      "sha256": "4bed1f24aa9f7e014cb0ae93b65dbcf712d2f91d2d3a655af9d254c14cfa425c"
+    },
+    "partial-answer-poll-3.txt": {
+      "bytes": 31657,
+      "sha256": "8fce29677db2463e2c9562bb2b395dd0bf05e04209413fe259dbf77a1b614c2b"
+    },
+    "pro-recommendation.jpg": {
+      "bytes": 157319,
+      "sha256": "5abf248c391daec49977a34ac903777c0fb004ee39eb13cee96c4587f75dcfd5"
+    },
+    "prompt.md": {
+      "bytes": 24982,
+      "sha256": "473d5a142c565265b39b38aa8b3d5f789190f739445205561268ee858de0cbaa"
+    },
+    "README.md": {
+      "bytes": 1355,
+      "sha256": "cfb638edf6cc248344672b263e697bb91d436b6e209c923cc993191a21db19b6"
+    },
+    "reconciliation.md": {
+      "bytes": 7706,
+      "sha256": "946ae4fdb698c5e8c34d1e16b67713b0a0273e5ca23e69623e710a6a033d2494"
+    },
+    "request.md": {
+      "bytes": 4351,
+      "sha256": "a845a8df54c67284477f69ad4aaca29b8a63b15981037dc3a0c51eb87ccd7865"
+    },
+    "transmission-manifest.json": {
+      "bytes": 971,
+      "sha256": "205928fc6b4ab72c14d751c8ae690ef1820b896c84a39b166f41d0025f3dcde0"
+    }
+  }
+}

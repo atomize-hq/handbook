@@ -1,0 +1,639 @@
+{
+  "packages": [
+    {
+      "package": {
+        "name": "block-buffer",
+        "version": "0.10.4",
+        "checksum": "3078c7629b62d3f0439517fa394996acacc5cbc91c5a20d8c658e77abd503a71"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/block-buffer-0.10.4.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "cc",
+        "version": "1.9.0",
+        "checksum": "877bf67ac8e52449eb2f9e98a344ea163beb70dd1f9eebe3cc5357dcfeaee4df"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/cc-1.9.0.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "cfg-if",
+        "version": "1.0.5",
+        "checksum": "4e7648175b45a9a48536d676f68d918270699102aa8dab5496df06904c914600"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/cfg-if-1.0.5.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "cpufeatures",
+        "version": "0.2.17",
+        "checksum": "59ed5838eebb26a2bb2e58f6d5b5316989ae9d08bab10e0e6d103e656d1b0280"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/cpufeatures-0.2.17.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "crypto-common",
+        "version": "0.1.7",
+        "checksum": "78c8292055d1c1df0cce5d180393dc8cce0abec0a7102adb6c7b1eef6016d60a"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/crypto-common-0.1.7.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "digest",
+        "version": "0.10.7",
+        "checksum": "9ed9a281f7bc9b7576e61468ba615a66a5c8cfdff42420a70aa82701a3b1e292"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/digest-0.10.7.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "find-msvc-tools",
+        "version": "0.1.15",
+        "checksum": "1c66915cc5391097de7a2b0b972e8505aa33c0df401fd3a6811dbdb32881ba48"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/find-msvc-tools-0.1.15.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "fs2",
+        "version": "0.4.3",
+        "checksum": "9564fc758e15025b46aa6643b1b77d047d1a56a1aea6e01002ac0c7026876213"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/fs2-0.4.3.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "generic-array",
+        "version": "0.14.7",
+        "checksum": "85649ca51fd72272d7821adaf274ad91c288277713d9c18820d8499a7ff69e9a"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/generic-array-0.14.7.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "getrandom",
+        "version": "0.4.3",
+        "checksum": "300e883d756b2e4ec94e02791f39b04b522276138852cfc41d9fb7e904106099"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/getrandom-0.4.3.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "itoa",
+        "version": "1.0.18",
+        "checksum": "8f42a60cbdf9a97f5d2305f08a87dc4e09308d1276d28c869c684d7777685682"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/itoa-1.0.18.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "jobserver",
+        "version": "0.1.35",
+        "checksum": "1c00acbd29eabad4a2392fa0e921c874934dbbf4194312ad20f04a0ed67a3cb3"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/jobserver-0.1.35.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "libc",
+        "version": "0.2.191",
+        "checksum": "65cd87c9a6d60536580b316ad985726104730a5151c99845f2490428ef91240a"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/libc-0.2.191.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "memchr",
+        "version": "2.8.3",
+        "checksum": "cf8baf1c55e62ffcace7a9f06f4bd9cd3f0c4beb022d3b367256b91b87513d98"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/memchr-2.8.3.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "pkg-config",
+        "version": "0.3.34",
+        "checksum": "f6b464fbc74e149a392436b17d523f769e057cb6877f6a5c4618bc6f11800548"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/pkg-config-0.3.34.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "proc-macro2",
+        "version": "1.0.107",
+        "checksum": "985e7ec9bb745e6ce6535b544d84d6cd6f7ad8bd711c398938ae983b91a766d9"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.107.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "quote",
+        "version": "1.0.47",
+        "checksum": "1fbf4db142a473a8d80c26bbf18454ed458bf8d26c8219c331daecfdbd079001"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/quote-1.0.47.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "r-efi",
+        "version": "6.0.0",
+        "checksum": "f8dcc9c7d52a811697d2151c701e0d08956f92b0e24136cf4cf27b57a6a0d9bf"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/r-efi-6.0.0.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "ryu",
+        "version": "1.0.23",
+        "checksum": "9774ba4a74de5f7b1c1451ed6cd5285a32eddb5cccb8cc655a4e50009e06477f"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/ryu-1.0.23.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "serde",
+        "version": "1.0.228",
+        "checksum": "9a8e94ea7f378bd32cbbd37198a4a91436180c5bb472411e48b5ec2e2124ae9e"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/serde-1.0.228.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "serde_core",
+        "version": "1.0.228",
+        "checksum": "41d385c7d4ca58e59fc732af25c3983b67ac852c1a25000afe1175de458b67ad"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.228.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "serde_derive",
+        "version": "1.0.228",
+        "checksum": "d540f220d3187173da220f885ab66608367b6574e925011a9353e4badda91d79"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/serde_derive-1.0.228.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "serde_json",
+        "version": "1.0.145",
+        "checksum": "402a6f66d8c709116cf22f558eab210f5a50187f702eb4d7e5ef38d9a7f1c79c"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.145.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "sha2",
+        "version": "0.10.9",
+        "checksum": "a7507d819769d01a365ab707794a4084392c824f54a7a6a7862f8c3d0892b283"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/sha2-0.10.9.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "shlex",
+        "version": "2.0.1",
+        "checksum": "f8fadd59c855ef2080decdef8ff161eb6661b86933c9d82e5ba29dc602a55aba"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/shlex-2.0.1.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "syn",
+        "version": "2.0.119",
+        "checksum": "872831b642d1a07999a962a351ed35b955ea2cfc8f3862091e2a240a84f17297"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/syn-2.0.119.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "typenum",
+        "version": "1.20.1",
+        "checksum": "b6f5e870be6c3b371b77fe0ee0bafb859fa4964b4404c27de1d380043c4dda20"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/typenum-1.20.1.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "unicode-ident",
+        "version": "1.0.27",
+        "checksum": "a2c754d6c33795a1c324727428e5a7dedb5b06195f9890bdbcba760d3e246563"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.27.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "version_check",
+        "version": "0.9.5",
+        "checksum": "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/version_check-0.9.5.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "winapi",
+        "version": "0.3.9",
+        "checksum": "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/winapi-0.3.9.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "winapi-i686-pc-windows-gnu",
+        "version": "0.4.0",
+        "checksum": "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/winapi-i686-pc-windows-gnu-0.4.0.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "winapi-x86_64-pc-windows-gnu",
+        "version": "0.4.0",
+        "checksum": "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/winapi-x86_64-pc-windows-gnu-0.4.0.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "windows-sys",
+        "version": "0.59.0",
+        "checksum": "1e38bc4d79ed67fd075bcc251a1c39b32a1776bbe92e5bef1f0bf1f8c531853b"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/windows-sys-0.59.0.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "windows-targets",
+        "version": "0.52.6",
+        "checksum": "9b724f72796e036ab90c1021d4780d4d3d648aca59e491e6b98e725b84e99973"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/windows-targets-0.52.6.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "windows_aarch64_gnullvm",
+        "version": "0.52.6",
+        "checksum": "32a4622180e7a0ec044bb555404c800bc9fd9ec262ec147edd5989ccd0c02cd3"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_aarch64_gnullvm-0.52.6.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "windows_aarch64_msvc",
+        "version": "0.52.6",
+        "checksum": "09ec2a7bb152e2252b53fa7803150007879548bc709c039df7627cabbd05d469"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_aarch64_msvc-0.52.6.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "windows_i686_gnu",
+        "version": "0.52.6",
+        "checksum": "8e9b5ad5ab802e97eb8e295ac6720e509ee4c243f69d781394014ebfe8bbfa0b"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_i686_gnu-0.52.6.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "windows_i686_gnullvm",
+        "version": "0.52.6",
+        "checksum": "0eee52d38c090b3caa76c563b86c3a4bd71ef1a819287c19d586d7334ae8ed66"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_i686_gnullvm-0.52.6.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "windows_i686_msvc",
+        "version": "0.52.6",
+        "checksum": "240948bc05c5e7c6dabba28bf89d89ffce3e303022809e73deaefe4f6ec56c66"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_i686_msvc-0.52.6.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "windows_x86_64_gnu",
+        "version": "0.52.6",
+        "checksum": "147a5c80aabfbf0c7d901cb5895d1de30ef2907eb21fbbab29ca94c5b08b1a78"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_x86_64_gnu-0.52.6.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "windows_x86_64_gnullvm",
+        "version": "0.52.6",
+        "checksum": "24d5b23dc417412679681396f2b49f3de8c1473deb516bd34410872eff51ed0d"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_x86_64_gnullvm-0.52.6.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "windows_x86_64_msvc",
+        "version": "0.52.6",
+        "checksum": "589f6da84c646204747d1270a2a5661ea66ed1cced2631d546fdfb155959f9ec"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/windows_x86_64_msvc-0.52.6.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": false
+    },
+    {
+      "package": {
+        "name": "zstd",
+        "version": "0.14.3",
+        "checksum": "db3ae9bf90af6e40197bef767eeefc46ad6397420fe873830bd85e5fbbfb3c70"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/zstd-0.14.3.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "zstd-safe",
+        "version": "8.2.0",
+        "checksum": "ded520f16b29e1a9b771c722221b2b0a0398c2316d9bb3c42b458a5414d7434b"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/zstd-safe-8.2.0.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    },
+    {
+      "package": {
+        "name": "zstd-sys",
+        "version": "2.1.2+zstd.1.5.7",
+        "checksum": "481ada9c543b2323cbb7bbdbb5249177fbf0188ed959ed2c15e4b22421c84ed3"
+      },
+      "cache": [
+        {
+          "path": "/home/spenser/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/zstd-sys-2.1.2+zstd.1.5.7.crate",
+          "checksum_match": true
+        }
+      ],
+      "source_present": true
+    }
+  ],
+  "all_archive_checksums_match": true,
+  "all_sources_present": false,
+  "compiler_version": "cc (GCC) 15.2.1 20250813",
+  "cargo_config_candidates": [],
+  "no_build_performed": true
+}

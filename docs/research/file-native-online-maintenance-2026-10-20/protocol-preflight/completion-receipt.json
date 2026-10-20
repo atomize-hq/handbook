@@ -1,0 +1,129 @@
+{
+  "completed_utc": "2026-10-20T19:19:45.2091298Z",
+  "pin": "a0b92fe5dc64269508601dcddf7e2e2ca477e30d",
+  "clean": true,
+  "files": [
+    {
+      "name": "manual-occurrence-ledger.txt",
+      "bytes": 74336,
+      "sha256": "7d5ef80e1ed18a91f84db0145cfba7beddfb588c274de9d449be7a3002241a2f"
+    },
+    {
+      "name": "report.md",
+      "bytes": 55079,
+      "sha256": "5ea96259e23c653c0fd8d31af6b0fd41782fbeae6c7ace95cc125006292d9cc4"
+    },
+    {
+      "name": "source-binding.json",
+      "bytes": 5839,
+      "sha256": "c04e853507bd863d5009736cc8e3220cb1b8b9513cde6950e1bb06bd0de40cda"
+    }
+  ],
+  "controlling_documents": [
+    {
+      "path": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\next-experiment-brief.md",
+      "bytes": 22544,
+      "sha256": "4bed1f24aa9f7e014cb0ae93b65dbcf712d2f91d2d3a655af9d254c14cfa425c",
+      "read": "full"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\reconciliation.md",
+      "bytes": 7706,
+      "sha256": "946ae4fdb698c5e8c34d1e16b67713b0a0273e5ca23e69623e710a6a033d2494",
+      "read": "full"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\answer.md",
+      "bytes": 37812,
+      "sha256": "69f7e04ba5406ca9167442091d1d7d31ebb4489979b781a7db432ed4c6c4d410",
+      "read": "full"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\bounded-review-packet.md",
+      "bytes": 24982,
+      "sha256": "473d5a142c565265b39b38aa8b3d5f789190f739445205561268ee858de0cbaa",
+      "read": "full"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\local-inspection-notes.md",
+      "bytes": 6514,
+      "sha256": "0557a4c6b7409c8b74c50490faae8d39ff6c87ff50bba9251b24a663a543b31b",
+      "read": "full"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-qnp-review-2026-10-20.md",
+      "bytes": 12766,
+      "sha256": "46ab6e1ce5c4869aa161a530944c2d624d0ef45869b2d8c1f809d9ccd8f7a93b",
+      "read": "full"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\specs\\handbook-contract-membrane\\structured-data-format-standard.md",
+      "bytes": 11051,
+      "sha256": "48f4c4fbaaed3bbe5a65f9405d4aa68e32f924860f4e65252cf6aa092ff1b481",
+      "read": "full"
+    }
+  ],
+  "engine_edits": 0,
+  "builds": 0,
+  "corpus_copies": 0,
+  "resource_disposition": "Conservative continuing-charge NO-GO; final scenario residual124,050,663 B after exact restore+inside reserve; full matrix fit unestablished; no universal impossibility claim",
+  "native_defaults": "UNKNOWN outside pinned source",
+  "graph": "UNKNOWN tools unavailable; no bootstrap",
+  "allocation_bytes": 524288,
+  "initial_completion_history": {
+    "completed_utc": "2026-10-20T19:19:45.2091298Z",
+    "files": [
+      {
+        "name": "manual-occurrence-ledger.txt",
+        "bytes": 74336,
+        "sha256": "7d5ef80e1ed18a91f84db0145cfba7beddfb588c274de9d449be7a3002241a2f"
+      },
+      {
+        "name": "report.md",
+        "bytes": 51839,
+        "sha256": "a25123a6100ddee572bb680a96afa743fefecfacfd8edafa9c6b521c4f53a0bc"
+      },
+      {
+        "name": "source-binding.json",
+        "bytes": 5839,
+        "sha256": "c04e853507bd863d5009736cc8e3220cb1b8b9513cde6950e1bb06bd0de40cda"
+      }
+    ],
+    "resource_disposition": "NO-GO pending admission resolution; coordinator-supplied lower bound",
+    "interpretation": "Preserved original claim; superseded by correction below"
+  },
+  "corrections": [
+    {
+      "utc": "2026-10-20T19:22:09.0427008Z",
+      "source": "Coordinator independent admission review correction",
+      "uncertain_ownership_net_growth": {
+        "windows_cargo_bytes": 174431996,
+        "shared_git_bytes": 24157792,
+        "total_bytes": 198589788
+      },
+      "conservative_charge_deficit_bytes": 35671261,
+      "proven_minimum_deficit": false,
+      "remaining_after_restore_and_reserve_if_both_excluded_bytes": 162918527,
+      "remaining_excludes": "new matrix, builds, index, history, coexistence and other prospective needs",
+      "disposition": "Conservative NO-GO pending ownership reconciliation and full prospective fit",
+      "actual_bytes_reclaimed": 0,
+      "engine_changes": 0
+    },
+    {
+      "utc": "2026-10-20T19:24:01.3390013Z",
+      "source": "Coordinator independent reviewer final Linux correction",
+      "superseded_intermediate_residual_bytes": 162918527,
+      "exclude_linux_cargo_bytes": 6079170,
+      "include_recovered_linux_transports_controllers_bytes": 44947034,
+      "final_residual_after_exact_restore_and_inside_reserve_bytes": 124050663,
+      "scenario_name": "continuing assigned-ledger scenario",
+      "superseded_scenario_name": "minimal_proof",
+      "full_prospective_matrix_fit_established": false,
+      "universal_impossibility_established": false,
+      "disposition": "Conservative continuing-charge NO-GO; full prospective matrix fit unestablished",
+      "actual_bytes_reclaimed": 0,
+      "engine_changes": 0,
+      "prior_report_sha256": "95857459baa348e83302398c115218d2de7e768d3f7992efe8a1d681cd25188f"
+    }
+  ]
+}

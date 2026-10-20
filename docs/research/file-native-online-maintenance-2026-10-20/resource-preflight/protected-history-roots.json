@@ -1,0 +1,312 @@
+[
+  {
+    "root": "C:/file-native-incremental-20261018/history-common-pin/store",
+    "logical_bytes": 5464941402,
+    "files": 1413491,
+    "roles": {
+      "expected-ledger.jsonl": {
+        "bytes": 246560316,
+        "files": 1
+      },
+      "HISTORY-SOURCE.json": {
+        "bytes": 375,
+        "files": 1
+      },
+      "INITIAL-ORACLE.json": {
+        "bytes": 7915,
+        "files": 1
+      },
+      "preparation.lock": {
+        "bytes": 0,
+        "files": 1
+      },
+      "README.md": {
+        "bytes": 348,
+        "files": 1
+      },
+      "RESERVATIONS.json": {
+        "bytes": 2,
+        "files": 1
+      },
+      "SELECTED.json": {
+        "bytes": 143,
+        "files": 1
+      },
+      "STORE.json": {
+        "bytes": 130,
+        "files": 1
+      },
+      "VIEW.json": {
+        "bytes": 492,
+        "files": 1
+      },
+      "writer.lock": {
+        "bytes": 0,
+        "files": 1
+      },
+      "attempt-hints": {
+        "bytes": 14861926,
+        "files": 101003
+      },
+      "attempts": {
+        "bytes": 403010488,
+        "files": 202006
+      },
+      "derived": {
+        "bytes": 3061,
+        "files": 19
+      },
+      "fences": {
+        "bytes": 60,
+        "files": 3
+      },
+      "objects": {
+        "bytes": 4638673934,
+        "files": 908392
+      },
+      "originals": {
+        "bytes": 155648,
+        "files": 17
+      },
+      "publications": {
+        "bytes": 135592497,
+        "files": 101003
+      },
+      "results": {
+        "bytes": 25919454,
+        "files": 101003
+      },
+      "view": {
+        "bytes": 154613,
+        "files": 35
+      }
+    },
+    "controls": {
+      "SELECTED.json": {
+        "sha256": "056ef79648795f6fb4a62e015fa326a4819866a2e51eff776cc9affba0374e13",
+        "value": {
+          "publication": "publication-74796-1792371048916760700-13",
+          "digest": "9b80c0b54b15af6457ee50290f266684bed6c06223cbe105a2654da7bb368546"
+        }
+      },
+      "STORE.json": {
+        "sha256": "45a88628e73594ba5d233b4ee7ec61e334d992555c4a4a607f067add7a1dffc8",
+        "value": {
+          "version": 1,
+          "store_id": "store-72404-1792359681223251200-0",
+          "mode": "A",
+          "consumer": "project",
+          "fallback": false
+        }
+      }
+    }
+  },
+  {
+    "root": "C:/file-native-incremental-20261018/history-pilot-1k/store",
+    "logical_bytes": 39115895,
+    "files": 7831,
+    "roles": {
+      "expected-ledger.jsonl": {
+        "bytes": 1739323,
+        "files": 1
+      },
+      "HISTORY-SOURCE.json": {
+        "bytes": 375,
+        "files": 1
+      },
+      "preparation.lock": {
+        "bytes": 0,
+        "files": 1
+      },
+      "README.md": {
+        "bytes": 348,
+        "files": 1
+      },
+      "RESERVATIONS.json": {
+        "bytes": 2,
+        "files": 1
+      },
+      "SELECTED.json": {
+        "bytes": 143,
+        "files": 1
+      },
+      "STORE.json": {
+        "bytes": 130,
+        "files": 1
+      },
+      "VIEW.json": {
+        "bytes": 488,
+        "files": 1
+      },
+      "writer.lock": {
+        "bytes": 0,
+        "files": 1
+      },
+      "attempts": {
+        "bytes": 2909860,
+        "files": 1002
+      },
+      "derived": {
+        "bytes": 3061,
+        "files": 19
+      },
+      "fences": {
+        "bytes": 19,
+        "files": 1
+      },
+      "objects": {
+        "bytes": 32562170,
+        "files": 4744
+      },
+      "originals": {
+        "bytes": 155648,
+        "files": 17
+      },
+      "publications": {
+        "bytes": 1334359,
+        "files": 1002
+      },
+      "results": {
+        "bytes": 255356,
+        "files": 1002
+      },
+      "view": {
+        "bytes": 154613,
+        "files": 35
+      }
+    },
+    "controls": {
+      "SELECTED.json": {
+        "sha256": "4c2a2dab508c9e47677a7537632d31a75c7a2ffbfbb96843e0809e7307e8d03c",
+        "value": {
+          "publication": "publication-69012-1792350480921439700-42",
+          "digest": "da933ee2c3d21d544373d749ffe3151ec867887e207408a85ade2a7d21f88b3d"
+        }
+      },
+      "STORE.json": {
+        "sha256": "a68c38444ed880c688ca6ba9158a5c1bea55a82780d28220e2f56747d8de00b2",
+        "value": {
+          "version": 1,
+          "store_id": "store-58172-1792350451405746600-0",
+          "mode": "A",
+          "consumer": "project",
+          "fallback": false
+        }
+      }
+    }
+  },
+  {
+    "root": "C:/file-native-recovery-20261019/history-restored/disposable/store",
+    "logical_bytes": 887923682,
+    "files": 510583,
+    "roles": {
+      "DISPOSABLE.json": {
+        "bytes": 79,
+        "files": 1
+      },
+      "expected-ledger.jsonl": {
+        "bytes": 246560316,
+        "files": 1
+      },
+      "HISTORY-SOURCE.json": {
+        "bytes": 375,
+        "files": 1
+      },
+      "INITIAL-ORACLE.json": {
+        "bytes": 7915,
+        "files": 1
+      },
+      "preparation.lock": {
+        "bytes": 0,
+        "files": 1
+      },
+      "README.md": {
+        "bytes": 348,
+        "files": 1
+      },
+      "RESERVATIONS.json": {
+        "bytes": 2,
+        "files": 1
+      },
+      "SELECTED.json": {
+        "bytes": 143,
+        "files": 1
+      },
+      "STORE.json": {
+        "bytes": 130,
+        "files": 1
+      },
+      "VIEW.json": {
+        "bytes": 490,
+        "files": 1
+      },
+      "writer.lock": {
+        "bytes": 0,
+        "files": 1
+      },
+      "attempt-hints": {
+        "bytes": 14862355,
+        "files": 101006
+      },
+      "attempts": {
+        "bytes": 402632280,
+        "files": 201810
+      },
+      "derived": {
+        "bytes": 5610,
+        "files": 20
+      },
+      "fences": {
+        "bytes": 60,
+        "files": 3
+      },
+      "objects": {
+        "bytes": 62012279,
+        "files": 5584
+      },
+      "originals": {
+        "bytes": 155648,
+        "files": 17
+      },
+      "publications": {
+        "bytes": 135596518,
+        "files": 101006
+      },
+      "results": {
+        "bytes": 25920251,
+        "files": 101006
+      },
+      "retired": {
+        "bytes": 14554,
+        "files": 101
+      },
+      "view": {
+        "bytes": 154329,
+        "files": 19
+      }
+    },
+    "controls": {
+      "SELECTED.json": {
+        "sha256": "d7d4947606e55161714c40c77bf23662acf7ea782175abbc5b0c52929a730680",
+        "value": {
+          "publication": "publication-49204-1792429021747802100-16",
+          "digest": "8b816596942b684e53a3f7366876976f73450280581ff4714472be26d9595169"
+        }
+      },
+      "STORE.json": {
+        "sha256": "45a88628e73594ba5d233b4ee7ec61e334d992555c4a4a607f067add7a1dffc8",
+        "value": {
+          "version": 1,
+          "store_id": "store-72404-1792359681223251200-0",
+          "mode": "A",
+          "consumer": "project",
+          "fallback": false
+        }
+      },
+      "DISPOSABLE.json": {
+        "sha256": "d370812c1e039e29dff8b944be7726d35b3d50886526bab333717125317e6c84",
+        "value": "\\\\?\\C:\\file-native-recovery-20261019\\history-restored\\disposable\\store"
+      }
+    }
+  }
+]

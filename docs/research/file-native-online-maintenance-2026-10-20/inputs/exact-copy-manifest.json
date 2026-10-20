@@ -1,0 +1,120 @@
+{
+  "source_main_head": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+  "complete_original_consultation_unchanged": true,
+  "files": [
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\answer-rendered.txt",
+      "copy": "inputs\\consultation\\answer-rendered.txt",
+      "bytes": 36492,
+      "sha256": "9c27f81ea2fed24661ac68fe5718e37b865375a9b4d37901c2678cc11a0cad34"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\answer.md",
+      "copy": "inputs\\consultation\\answer.md",
+      "bytes": 37812,
+      "sha256": "69f7e04ba5406ca9167442091d1d7d31ebb4489979b781a7db432ed4c6c4d410"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\bounded-review-packet.md",
+      "copy": "inputs\\consultation\\bounded-review-packet.md",
+      "bytes": 24982,
+      "sha256": "473d5a142c565265b39b38aa8b3d5f789190f739445205561268ee858de0cbaa"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\browser-verification.json",
+      "copy": "inputs\\consultation\\browser-verification.json",
+      "bytes": 608,
+      "sha256": "91c3776de629d614baa247b6babc02dd3d87a47b54046d308447005df8a1e4a1"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\consultation.json",
+      "copy": "inputs\\consultation\\consultation.json",
+      "bytes": 1597,
+      "sha256": "61efe60678062ad1982ac853744e1d65571056c8ca9dfc06778fb8a558dfd29c"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\consultation.md",
+      "copy": "inputs\\consultation\\consultation.md",
+      "bytes": 68651,
+      "sha256": "3dc6c378624c277cdc6a2467c5d0a47ee1cc13ddcc46a196b7e478a28bdc27ab"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\index-geometry-screen.json",
+      "copy": "inputs\\consultation\\index-geometry-screen.json",
+      "bytes": 1582,
+      "sha256": "39088884277e796fab9ddda492f259c5b6d0f0869b2c751225a1ed592de55fad"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\local-inspection-notes.md",
+      "copy": "inputs\\consultation\\local-inspection-notes.md",
+      "bytes": 6514,
+      "sha256": "0557a4c6b7409c8b74c50490faae8d39ff6c87ff50bba9251b24a663a543b31b"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\next-experiment-brief.md",
+      "copy": "inputs\\consultation\\next-experiment-brief.md",
+      "bytes": 22544,
+      "sha256": "4bed1f24aa9f7e014cb0ae93b65dbcf712d2f91d2d3a655af9d254c14cfa425c"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\partial-answer-poll-3.txt",
+      "copy": "inputs\\consultation\\partial-answer-poll-3.txt",
+      "bytes": 31657,
+      "sha256": "8fce29677db2463e2c9562bb2b395dd0bf05e04209413fe259dbf77a1b614c2b"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\pro-recommendation.jpg",
+      "copy": "inputs\\consultation\\pro-recommendation.jpg",
+      "bytes": 157319,
+      "sha256": "5abf248c391daec49977a34ac903777c0fb004ee39eb13cee96c4587f75dcfd5"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\prompt.md",
+      "copy": "inputs\\consultation\\prompt.md",
+      "bytes": 24982,
+      "sha256": "473d5a142c565265b39b38aa8b3d5f789190f739445205561268ee858de0cbaa"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\README.md",
+      "copy": "inputs\\consultation\\README.md",
+      "bytes": 1355,
+      "sha256": "cfb638edf6cc248344672b263e697bb91d436b6e209c923cc993191a21db19b6"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\reconciliation.md",
+      "copy": "inputs\\consultation\\reconciliation.md",
+      "bytes": 7706,
+      "sha256": "946ae4fdb698c5e8c34d1e16b67713b0a0273e5ca23e69623e710a6a033d2494"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\request.md",
+      "copy": "inputs\\consultation\\request.md",
+      "bytes": 4351,
+      "sha256": "a845a8df54c67284477f69ad4aaca29b8a63b15981037dc3a0c51eb87ccd7865"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\transmission-manifest.json",
+      "copy": "inputs\\consultation\\transmission-manifest.json",
+      "bytes": 971,
+      "sha256": "205928fc6b4ab72c14d751c8ae690ef1820b896c84a39b166f41d0025f3dcde0"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-online-maintenance-pro-consult-2026-10-20\\verification.json",
+      "copy": "inputs\\consultation\\verification.json",
+      "bytes": 2956,
+      "sha256": "292055e4302d83ffab7016c82dcf9d426abfe561785d1d0e934b2dbb503b0063"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\research\\file-native-qnp-review-2026-10-20.md",
+      "copy": "inputs\\file-native-qnp-review-2026-10-20.md",
+      "bytes": 12766,
+      "sha256": "46ab6e1ce5c4869aa161a530944c2d624d0ef45869b2d8c1f809d9ccd8f7a93b"
+    },
+    {
+      "source": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\docs\\specs\\handbook-contract-membrane\\structured-data-format-standard.md",
+      "copy": "inputs\\structured-data-format-standard.md",
+      "bytes": 11051,
+      "sha256": "48f4c4fbaaed3bbe5a65f9405d4aa68e32f924860f4e65252cf6aa092ff1b481"
+    }
+  ]
+}

@@ -1,0 +1,351 @@
+{
+  "status": "PASS_CORRECTED_CONSERVATIVE_NO_GO",
+  "completed_utc": "2026-10-20T19:26:20.5072083Z",
+  "parent_chat": "01a15ab8-d85f-71b1-8d37-c3c5689790be",
+  "source_pin": "a0b92fe5dc64269508601dcddf7e2e2ca477e30d",
+  "source_clean": true,
+  "source_binding_files_independently_hashed": 18,
+  "source_binding_mismatches": 0,
+  "resource_seal_files_independently_checked": 19,
+  "resource_seal_mismatches": 0,
+  "review_limit_bytes": 262144,
+  "shared_closeout_subreservation_bytes": 4194304,
+  "inside_reserve_bytes": 1073741824,
+  "cap_bytes": 42949672960,
+  "functional_cutoff_utc": "2026-10-21T11:10:14Z",
+  "closeout_utc": "2026-10-21T13:10:14Z",
+  "clock_reset": false,
+  "attributed_root_payload_scenario_bytes": 41159421502,
+  "unknown_net_continuity_bytes": 204668958,
+  "continuing_charge_scenario_bytes": 41364090460,
+  "required_exact_initial_restore_bytes": 592458971,
+  "continuing_charge_restore_plus_reserve_deficit_bytes": 80618295,
+  "permissive_exclude_all_net_remaining_after_restore_reserve_bytes": 124050663,
+  "universal_impossibility_proven": false,
+  "complete_fitting_schedule_demonstrated": false,
+  "prospective_additional_plan_bytes": 2606786998,
+  "prospective_plan_is_proven_minimum": false,
+  "findings": [
+    {
+      "id": "R1",
+      "issue": "Net support deltas described as strict attributable lower bound",
+      "resolution": "RESOLVED by authoritative corrected report/ledger and protocol superseding corrections; initial draft preserved"
+    },
+    {
+      "id": "R2",
+      "issue": "Intermediate scenario omitted Linux net/recovered transports corrections",
+      "resolution": "RESOLVED: permissive residual124050663, continuing-charge deficit80618295"
+    },
+    {
+      "id": "R3",
+      "issue": "Exact Mac root evidence initially summary-only",
+      "resolution": "RESOLVED by byte-identical local original/addendum independently rehashed"
+    }
+  ],
+  "remaining_limits": [
+    "Exact historical support writer/per-path attribution incomplete",
+    "No complete matrix admission demonstrated",
+    "No independent native re-enumeration by this reviewer",
+    "No independent rerun of full embedded archive-digest stream check; independently matched exact transport/inventory SHA and all inventory row counts/bytes",
+    "Protocol design and required native/engine gates unimplemented/unrun; this is not code approval"
+  ],
+  "engine_execution": 0,
+  "builds": 0,
+  "source_edits": 0,
+  "restores": 0,
+  "corpus_copies": 0,
+  "deletions": 0,
+  "fetches": 0,
+  "index_bootstraps": 0,
+  "reviewer_mutations": "Only independent-review/report.md and receipt.json inside shared reserve",
+  "input_files": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\dispatch.md",
+      "bytes": 3045,
+      "sha256": "1296a327ed5d18f6f4b7f6a5dcc3a963aa25235cc8267621c7ed2bbe49bb3785"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\gates-and-watchdogs.md",
+      "bytes": 5149,
+      "sha256": "3d4f9c47e59ed977f69454c27d370e29194ec1c7a806f4c9d4007f9e05f750fd"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\mac-census-summary.json",
+      "bytes": 3484,
+      "sha256": "0f401424c2ce0300b9b3749a4934c1cd6ceecc83ad22d00219f61bfd5c666471"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\mac-native-preflight\\report.json",
+      "bytes": 18320,
+      "sha256": "967f3c92d127f730148c1321a8ce678cccbc646f8fc15360ba582d72aaf3ed26"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\mac-native-preflight\\attribution-addendum.json",
+      "bytes": 9736,
+      "sha256": "d8b1d5eca346f7a1a2168d2f3bd8c4a8fad8f996672074df57b9928a5be2a318"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\mac-native-preflight\\transfer.json",
+      "bytes": 10592,
+      "sha256": "6f39da2091a02427d5e0231eb73df1da98092d6312cfc478bf45485d536cdcbf"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\protocol-preflight\\report.md",
+      "bytes": 55079,
+      "sha256": "5ea96259e23c653c0fd8d31af6b0fd41782fbeae6c7ace95cc125006292d9cc4"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\protocol-preflight\\source-binding.json",
+      "bytes": 5839,
+      "sha256": "c04e853507bd863d5009736cc8e3220cb1b8b9513cde6950e1bb06bd0de40cda"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\protocol-preflight\\manual-occurrence-ledger.txt",
+      "bytes": 74336,
+      "sha256": "7d5ef80e1ed18a91f84db0145cfba7beddfb588c274de9d449be7a3002241a2f"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\protocol-preflight\\completion-receipt.json",
+      "bytes": 5650,
+      "sha256": "cac940552515078c884e97ce71e51debd2551ca0a645eac1708938b13c47c5d4"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\windows-census.json",
+      "bytes": 16650,
+      "sha256": "6ad6af46e5dcab138a4cfb1205b7d2ea45b8a88a10a86ee62dcbafdc0dd3fbfd"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\linux-census.json",
+      "bytes": 25798,
+      "sha256": "3a54b701cb6273d3b970b56be26f1a0ead40bc75099f2c68cb0d611cc892ad23"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\linux-supplement.json",
+      "bytes": 1256,
+      "sha256": "58a1826ff1bfdfdf04dce47798d90120ed7f6197a5e2e7333a94bd4dff2e4dcc"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\linux-additional-ownership.json",
+      "bytes": 1909,
+      "sha256": "cba6998b6d34138ec43d96cc6a150c8cecb420ab3f87a5b5532ebcbded95de3e"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\linux-offline-readiness.json",
+      "bytes": 19352,
+      "sha256": "83f15448c82887c69e087fac73a7c0fe082589e66d642d31057269110487318c"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\wsl-census.json",
+      "bytes": 2121,
+      "sha256": "1139540e5bd13973c9d475819b8c70d64ec37abae2f2342f5993351542d43c4e"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\protected-history-roots.json",
+      "bytes": 7272,
+      "sha256": "a43ae871bbe335f47beb06870369aee94438c0238870f1021654e7ef93eaf4ce"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\mac-attribution-relayed.json",
+      "bytes": 9736,
+      "sha256": "d8b1d5eca346f7a1a2168d2f3bd8c4a8fad8f996672074df57b9928a5be2a318"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\long-archive-authentication.json",
+      "bytes": 13828,
+      "sha256": "90c6b81a7f75fea3631ef8857a5f9d277a8c230e647021c9483d825dbecfef97"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\baseline-authentication.json",
+      "bytes": 620,
+      "sha256": "a5318220c6b058d04743514246706b373e9b3226059f1eebdc49013eec6bc2ad"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\checkout-sizing.json",
+      "bytes": 26479,
+      "sha256": "0d641f27df061e48de2547d22cb4c7568cc38668d2299ba7312e0b1f81ab42fb"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\report.md",
+      "bytes": 11002,
+      "sha256": "191d0bd3bc0ad021d8ea8568cc8fa355bda12e36ddaca1e3f094a260bfafc9a9"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\admission-ledger.json",
+      "bytes": 11272,
+      "sha256": "33b6b3c89955fe8a50e6cf01cdec5ccbbcb55ae3d2dfb6a48a547b3a8f52d874"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\report-corrected.md",
+      "bytes": 9145,
+      "sha256": "07ef6dad45da5790e4df056ff3843e7a4bda51bfea4ffc61f6121542d5c9dec5"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\admission-ledger-corrected.json",
+      "bytes": 16005,
+      "sha256": "19fe88a91b09f7aeddddfa15069dc723a8f7dd5b5d0413c9e105500369977b80"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\correction-receipt.json",
+      "bytes": 935,
+      "sha256": "02b355b9ce96bb38142a7343f2bf4493293c6e5884e8827f51c2ddee6556fc6b"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\resource-preflight\\seal-manifest.json",
+      "bytes": 3635,
+      "sha256": "815479f0e32508a2f752c84d5dad37b6f9ba281c281287c63cecf49944964a4a"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\independent-review\\report.md",
+      "bytes": 13571,
+      "sha256": "0fece8293a3876329f8f990ac983f225778c8464188b6d4fef619306f3418dd1"
+    },
+    {
+      "path": "C:/Users/spmcc/Documents/__Project_Code/handbook/docs/research/file-native-online-maintenance-pro-consult-2026-10-20/next-experiment-brief.md",
+      "bytes": 22544,
+      "sha256": "4bed1f24aa9f7e014cb0ae93b65dbcf712d2f91d2d3a655af9d254c14cfa425c"
+    },
+    {
+      "path": "C:/Users/spmcc/Documents/__Project_Code/handbook/docs/research/file-native-online-maintenance-pro-consult-2026-10-20/reconciliation.md",
+      "bytes": 7706,
+      "sha256": "946ae4fdb698c5e8c34d1e16b67713b0a0273e5ca23e69623e710a6a033d2494"
+    },
+    {
+      "path": "C:/Users/spmcc/Documents/__Project_Code/handbook/docs/specs/handbook-contract-membrane/structured-data-format-standard.md",
+      "bytes": 11051,
+      "sha256": "48f4c4fbaaed3bbe5a65f9405d4aa68e32f924860f4e65252cf6aa092ff1b481"
+    },
+    {
+      "path": "C:/file-native-packing-20261020/receipts/ownership-baseline.json",
+      "bytes": 358,
+      "sha256": "fd03da7112870c9127068d6df9c5a39e9f015dc5110730e50e17e92c55eee141"
+    },
+    {
+      "path": "C:/file-native-packing-20261020/packed-operational-backup/manifest.json",
+      "bytes": 784,
+      "sha256": "3b8f1b875a6b567cb386be34f4b3f7442f9e3538d8a58fbac524cf1473777281"
+    },
+    {
+      "path": "C:/file-native-packing-20261020/packed-operational-backup/files.jsonl",
+      "bytes": 1021212,
+      "sha256": "0974f4a1dac1f13618105b9fca425b2a56c99528accecb5255f0d4ec6515b9b5"
+    },
+    {
+      "path": "C:/file-native-packing-20261020/packed-operational-backup/operational.bin.gz",
+      "bytes": 313275597,
+      "sha256": "2fabd1c2439fc95a37a0411c99025bfb5646dee855b6ed0e879fd190e35e324b"
+    },
+    {
+      "path": "C:/file-native-packing-20261020/bin/candidate2.exe",
+      "bytes": 2711552,
+      "sha256": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b"
+    },
+    {
+      "path": "C:/file-native-packing-20261020/long-matrix-fixed2/PZ-build.json",
+      "bytes": 141997,
+      "sha256": "a54a04a4fdc8dad85dee038502976886b015ed5b53bb1b8fbcf32dcffe8ca1ad"
+    },
+    {
+      "path": "C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be/resource-preflight/seal-manifest-v1.json",
+      "bytes": 3228,
+      "sha256": "57c554b5b69cc24904be5950b5cc1e78d79f9f64510ad24b636e232c9629a6a1"
+    },
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/README.md",
+      "bytes": 7140,
+      "sha256": "be6b36158e8cacaafa95b1cbee3b9fad35328a841282bfbc642d9102a2768c23"
+    }
+  ],
+  "independently_rehashed_core_files": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\Cargo.lock",
+      "bytes": 10547,
+      "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\Cargo.toml",
+      "bytes": 561,
+      "sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\api.rs",
+      "bytes": 12161,
+      "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\baseline_model.rs",
+      "bytes": 8570,
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\bounds_tests.rs",
+      "bytes": 1001,
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\differential.rs",
+      "bytes": 2661,
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\disk.rs",
+      "bytes": 30973,
+      "sha256": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\graph.rs",
+      "bytes": 14324,
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\io.rs",
+      "bytes": 13471,
+      "sha256": "66bf895132ce9dc22b8be04cb6558390ef940f6868c69fe99969508b90e8d93a"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\lib.rs",
+      "bytes": 429,
+      "sha256": "a86f5ca110500f55fe860f20988125c85e63fcf6e2a7fbb4204bfd77898a7ce5"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\lifetime.rs",
+      "bytes": 15945,
+      "sha256": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\main.rs",
+      "bytes": 57,
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\navigation.rs",
+      "bytes": 10576,
+      "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\objects.rs",
+      "bytes": 3551,
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\pack.rs",
+      "bytes": 12700,
+      "sha256": "4d854885a54ee95ffed44bfec704f95c5c91d95b98964d419a7607dd2a48b2e3"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\packing.rs",
+      "bytes": 27358,
+      "sha256": "5edb97a4527abc35257837f79872b76c9dbf0ac010d2e66114a01b8809420647"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\projection.rs",
+      "bytes": 27876,
+      "sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\store.rs",
+      "bytes": 35442,
+      "sha256": "569e9470bda03dcfeadc6ed49e5c0058cb9a27e0d0f54fe383eadb6b9d0fa330"
+    }
+  ],
+  "parent_readme_review": "PASS: no material factual/scope/accounting defect in bound draft; coordinator landing not independently completed here"
+}

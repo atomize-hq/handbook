@@ -1,0 +1,16 @@
+[
+  {
+    "path": "C:/file-native-packing-20261020/bin/candidate2.exe",
+    "bytes": 2711552,
+    "expected_sha256": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b",
+    "actual_sha256": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b",
+    "match": true
+  },
+  {
+    "path": "C:/file-native-packing-20261020/long-matrix-fixed2/PZ-build.json",
+    "bytes": 141997,
+    "expected_sha256": "a54a04a4fdc8dad85dee038502976886b015ed5b53bb1b8fbcf32dcffe8ca1ad",
+    "actual_sha256": "a54a04a4fdc8dad85dee038502976886b015ed5b53bb1b8fbcf32dcffe8ca1ad",
+    "match": true
+  }
+]

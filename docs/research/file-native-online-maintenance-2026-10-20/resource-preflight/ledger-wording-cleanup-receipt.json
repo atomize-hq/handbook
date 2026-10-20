@@ -1,0 +1,8 @@
+{
+  "utc": "2026-10-20T19:25:17.887906+00:00",
+  "reason": "Meta/reviewer requested final active-key wording cleanup after first seal. Prior corrected ledger key renames already applied; remaining Mac known-lowerbound sentence corrected. Historical scenario now explicitly named superseded. No numeric changes.",
+  "prior_corrected_ledger_sha256": "f8c63d5805d59d787aef998f145de88bc3eb774b3e2dab304fcb3c1f22ed316c",
+  "new_corrected_ledger_sha256": "19fe88a91b09f7aeddddfa15069dc723a8f7dd5b5d0413c9e105500369977b80",
+  "prior_seal_preserved": "seal-manifest-v1.json",
+  "no_executable_or_corpus_mutation": true
+}
