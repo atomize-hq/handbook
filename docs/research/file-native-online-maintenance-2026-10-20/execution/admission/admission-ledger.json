@@ -1,0 +1,340 @@
+{
+  "status": "RESOURCE_GO__META_EXECUTION_RELEASE_REQUIRED",
+  "utc": "2026-10-20T19:58:49.166824+00:00",
+  "authority": "Human-authorized cumulative44GiB replaces40GiB only; same meta experiment and clock; no repeated approval required",
+  "cap_bytes": 47244640256,
+  "cap_files": 5000000,
+  "prior_cap_bytes": 42949672960,
+  "t0_utc": "2026-10-20T19:10:14Z",
+  "functional_cutoff_utc": "2026-10-21T11:10:14Z",
+  "closeout_cutoff_utc": "2026-10-21T13:10:14Z",
+  "clock_reset": false,
+  "old_40gib_evidence": "resource-preflight/ unchanged; prior seal verified19data files plus seal",
+  "retained_conservative_actual": {
+    "prior_continuing_assigned_ledger_bytes": 41364090460,
+    "Mac_conservative_Git_replacement_and_net_Cargo_addition": 45573529,
+    "Mac_qualification": "Whole current Git187972892 replaces known fetched triple142405079; positiveCargo5716 retained though writerUNKNOWN. Not additive to whole shared Cargo; private Pcache already retained roots.",
+    "fresh_nonoverlapping_new_ownership_rows": [
+      {
+        "label": "Windows commonGit positive growth since prior census",
+        "bytes": 1084767,
+        "files": 72
+      },
+      {
+        "label": "New docs-only online-maintenance worktree, before future core materialization",
+        "bytes": 907464,
+        "files": 60
+      },
+      {
+        "label": "Entire parent localartifactroot before amendment writes; includes Mac transferred reports and all previous worker/parent reports once",
+        "bytes": 408215,
+        "files": 34
+      },
+      {
+        "label": "Native Mac reportroot incl44GiBrefresh, physically distinct from local returns",
+        "bytes": 34787,
+        "files": 3
+      }
+    ],
+    "refresh_sum_bytes": 2435233,
+    "current_conservative_bytes_before_amendment": 41412099222,
+    "current_conservative_files_before_amendment": 4003685,
+    "amendment_report_upperbound_bytes": 524288,
+    "amendment_report_file_allowance": 16,
+    "current_conservative_bytes_upperbound_including_entire_amendment_envelope": 41412623510,
+    "method": "Small growth refresh only; frozen corpora unchanged per meta/no executable work. No negative size deltas credited. Whole-root net assigned support charges retained without pretending causal proof.",
+    "shared_cargo_Windows": {
+      "bytes": 893702027,
+      "files": 18188,
+      "unchanged": true
+    },
+    "shared_cargo_Linux": {
+      "bytes": 627576255,
+      "files": 22790,
+      "unchanged": true
+    }
+  },
+  "inside_closeout": {
+    "bytes": 1073741824,
+    "files": 100000,
+    "preserved": true,
+    "docs_only_subreservation_bytes": 4194304,
+    "amendment_budget_bytes": 524288,
+    "accounting": "Report actuals/envelope additionally charged above while full1GiB reserve remains, a conservative over-reservation; do not add separate capacity. Never claim data deletion."
+  },
+  "functional_shared_allocations": [
+    {
+      "label": "Three source-only sparse research copies, worktree metadata and small controller copies",
+      "bytes": 12582912,
+      "files": 3000,
+      "id": "F01",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Windows one private offline j2 target, release plus capsule/unit artifacts",
+      "bytes": 268435456,
+      "files": 5000,
+      "id": "F02",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Linux one private offline j2 target",
+      "bytes": 134217728,
+      "files": 5000,
+      "id": "F03",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Mac one private offline j2 target",
+      "bytes": 134217728,
+      "files": 5000,
+      "id": "F04",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Authentic N128 H1k/H10k accepted publisher histories, matched derivatives, three +100 cycles per1/4publisher configuration; staged H1k/H10k census; no hidden copies",
+      "bytes": 1073741824,
+      "files": 400000,
+      "id": "F05",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Small A/B N64/H64 protocol, quota/segments,1,000activation stress fixtures",
+      "bytes": 134217728,
+      "files": 100000,
+      "id": "F06",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "A/B N64/N1k document/view matched controls",
+      "bytes": 67108864,
+      "files": 30000,
+      "id": "F07",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Native Linux/Mac final-pin workspace, strict, packing, recovery and generation/lifetime fixtures",
+      "bytes": 67108864,
+      "files": 60000,
+      "id": "F08",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Exact H101007 full FNOP1 initial restore including test ledger",
+      "bytes": 592458971,
+      "files": 5807,
+      "id": "F09",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "New paged metadata with old index retained; no pack-copy credit needed for this optimistic option",
+      "bytes": 83886080,
+      "files": 2000,
+      "id": "F10",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Final independent long restore retaining source including added metadata",
+      "bytes": 676345051,
+      "files": 8000,
+      "id": "F11",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Functional raw samples, counters, ledgers and manifests",
+      "bytes": 134217728,
+      "files": 10000,
+      "id": "F12",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Additional shared Git/Cargo/parent integration growth beyond measured baselines",
+      "bytes": 33554432,
+      "files": 5000,
+      "id": "F13",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "id": "F14",
+      "label": "Unique old/new pack-byte coexistence if generation namespace requires physical copies; reserved now, no link/clone credit",
+      "bytes": 283460393,
+      "files": 32,
+      "owner": "meta assigns to one long-lane worker",
+      "allocation_status": "reserved, conditional actual use"
+    }
+  ],
+  "functional_total_bytes": 3695553759,
+  "functional_total_files": 638839,
+  "whole_functional_prospective_including_actual_upper_and_inside_reserve_bytes": 46181919093,
+  "central_margin_before_earmarks_bytes": 1062721163,
+  "central_earmarks": [
+    {
+      "id": "C1",
+      "label": "Selected private Cargo cache/source materialization if needed",
+      "bytes": 335544320,
+      "files": 20000,
+      "host_subcaps": {
+        "Windows_bytes": 201326592,
+        "Linux_bytes": 67108864,
+        "Mac_bytes": 67108864
+      },
+      "owner": "meta only; explicit claim before copying"
+    },
+    {
+      "id": "C2",
+      "label": "Private build-target topups for checkpoint/final-pin coexistence",
+      "bytes": 402653184,
+      "files": 15000,
+      "host_subcaps": {
+        "Windows_bytes": 134217728,
+        "Linux_bytes": 134217728,
+        "Mac_bytes": 134217728
+      },
+      "owner": "meta only; explicit claim before growth"
+    },
+    {
+      "id": "C3",
+      "label": "Source-only worker/reviewer copies, checkpoint fixtures, extra shared Git/admin beyond functional rows",
+      "bytes": 67108864,
+      "files": 15000,
+      "owner": "meta only; bounded claim and fresh accounting"
+    }
+  ],
+  "central_earmarks_total_bytes": 805306368,
+  "central_earmarks_total_files": 50000,
+  "whole_prospective_with_central_earmarks_bytes": 46987225461,
+  "remaining_unassigned_central_contingency_bytes": 257414795,
+  "whole_prospective_files_with100kreserve_and_amendment16files": 4792540,
+  "remaining_files": 207460,
+  "allocation_rules": [
+    "All rows are one cumulative global allocator. A worker references category IDs; allocations never sum independently per chat.",
+    "Meta records each host/root claimant and prewrite byte/file bound before materialization; current actual plus all still-valid unused reservations must fit.",
+    "F05 history1GiB includes originals/archives/derivatives/cycles/coexistence; H1k and H10k boundary censuses required before further growth.",
+    "Only one mutable long-history lane; F09 initialfullrestore and F11 independentfinalrestore coexist with full ledger bytes included.",
+    "F14 is already charged even if exact packs can be reused; release only unused forecast after proof, never claim actual removal.",
+    "C1/C2/C3 require coordinator claims against central margin, not new human approval or automatic worker allowances.",
+    "Preserved old targets/caches/corpora/rejected targets untouched. Reuse is one NEW target per host across new experiment checkpoints; retain source/executable bindings.",
+    "Failed or refused cells remain recorded; no silent matrix reduction. Reallocate central contingency or report censor before exceeding a category."
+  ],
+  "host_role_map": {
+    "meta": "sole allocator, common Git/evidence, central margin, heavy/light token coordination, per-stage admission and source/binary binding",
+    "CP1_engine_owner": "Windows source4MiB share ofF01; newWindows buildF02; smallprotocolF06; claimsC2 only if needed; exclusive engine source ownership",
+    "matrix_harness_owner": "uses sameF01 sourcecategory; F05 authentic histories1GiB; F07 document controls; F09-F11 longlane by exclusive handoff; F12 evidence; no separate grant",
+    "native_Linux_owner": "F01 source4MiB; F03 build128MiB; F08 nativefixture32MiB; F12 evidence24MiB share; C1Linux64MiB only onclaim; C2Linux128MiB only onclaim",
+    "native_Mac_owner": "F01 source4MiB; F04 build128MiB; F08 nativefixture32MiB; F12 evidence24MiB share; C1Mac64MiB only onclaim; C2Mac128MiB only onclaim",
+    "evidence_shares": "F12 total128MiB:Windows80MiB/Linux24MiB/Mac24MiB; all parent/return duplicates charged",
+    "functional_shared_growth": "F13 total32MiB:Windows/meta24MiB/Linux4MiB/Mac4MiB; future C3 topup only oncoordinatorclaim"
+  },
+  "host_readiness": {
+    "Windows": {
+      "utc": "2026-10-20T19:55:34.086799+00:00",
+      "platform": "nativeWindows11Home10.0.26200 NTFS",
+      "free_bytes": 201291649024,
+      "minimum_free_bytes": 150323855360,
+      "available_memory_KiB": 58546636,
+      "free_pass": true
+    },
+    "Linux": {
+      "utc": "2026-10-20T19:55:32.133548+00:00",
+      "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+      "native_not_wsl": true,
+      "free_bytes": 87803977728,
+      "filesystem": "Filesystem     Type    1B-blocks         Used   Available Use% Mounted on\n/dev/nvme0n1p2 ext4 983038173184 845223141376 87803977728  91% /\n",
+      "memory": {
+        "MemTotal": "65622276 kB",
+        "MemAvailable": "52517076 kB"
+      },
+      "shared_cargo": {
+        "bytes": 627576255,
+        "files": 22790
+      },
+      "rustc": "rustc 1.89.0 (29483883e 2025-08-04)",
+      "cargo": "cargo 1.89.0 (c24e10642 2025-06-23)",
+      "new_online_roots": [],
+      "no_remote_files_created": true,
+      "minimum_free_bytes": 21474836480,
+      "free_pass": true
+    },
+    "Mac": {
+      "utc": "2026-10-20T19:55:24.106634Z",
+      "platform": "native macOS26.6.1 arm64/APFS",
+      "free_bytes": 168087568384,
+      "minimum_free_bytes": 21474836480,
+      "free_pass": true,
+      "retained_root_size_count_unchanged": true,
+      "content_byte_identity_not_inferred": true,
+      "rust_cargo": "1.89.0",
+      "Python": "3.11",
+      "readiness_report_sha256": "90fb41e0a5f118cb518afe7d8eae9cccc8ca01b39020cc5413bc07ce272ff6cd",
+      "report_bytes": 6731,
+      "report_root_bytes": 34787,
+      "report_root_files": 3
+    }
+  },
+  "RSS_controls": {
+    "frozen_caps": {
+      "Windows": {
+        "aggregate_limit": 4294967296,
+        "one_heavy_job_cap": 3221225472,
+        "all_supervisors_report_only_helpers_cap": 805306368,
+        "sum_known_caps": 4026531840
+      },
+      "Linux": {
+        "aggregate_limit": 3221225472,
+        "one_heavy_session_cap": 2147483648,
+        "all_supervisors_helpers_cap": 805306368,
+        "sum_known_caps": 2952790016
+      },
+      "Mac": {
+        "aggregate_limit": 3221225472,
+        "one_heavy_session_cap": 2147483648,
+        "all_supervisors_helpers_cap": 805306368,
+        "sum_known_caps": 2952790016
+      }
+    },
+    "reader_per_process_bytes": 268435456,
+    "checker_per_process_bytes": 2147483648,
+    "builds_hostwide_j": 2,
+    "allowed_Windows_overlap": "Exactly one new-work heavyJob for any engine/build/checker workload. No separate light engine/baseline Job overlaps. Report-only supervisors/helpers combined<=768MiB; all publisher/reader/maintenance concurrency is inside the single guardedJob.",
+    "checker_exclusivity": "Checker is inside exclusiveheavyJob; each checker<=2GiB, reader<=256MiB. Entire Job<=3GiB; no second new-work heavyJob.",
+    "native_overlap": "One new-work heavy ownedgroup per nativehost<=2GiB; supervisors/helpers combined<=768MiB. No concurrentlightengine lane.",
+    "token_protocol": "Every engine/build/checker workload acquires an exclusivehosttoken before creating any activechild. Windows token held at C:/file-native-online-control-20261020/windows-heavy.lock by the top-levelguard until Job membership is empty and closure recorded. All parallel publishers/readers/maintenance belong to that singleJob. No unguarded compiler/engine and nosecondheavyJob. Native guards apply same exclusiveowned-session rule. Waits outside localcell executionclock still count against fixedglobalcutoff. BoundedAPI stages may handoff token after wholeJob closure, permitting CP1/matrix interleaving. PID/nonce/start-time/category ownerrecord required; no PID-only stale release.",
+    "guard_preconditions": "Meta releases code work after arithmeticreview; all actual engine/build/corpus workloads remain behind operationalguard. Before first engine/buildchild, guard must acquiretoken, create suspended child, assignallchildren toownedkill-on-closeJob before resume, setcap, verifyJobmembership, armabsolute watchdog andRSSsampling, and refuseif anyprecondition fails. Nativeguard must establishownedprocessgroup andexclusive token before workload. Benigncontrol-onlyguard smoke may verify this; no engine qualification inferred. Resourceworker performs staticvalidation only.",
+    "runtime": "Windows ownedkill-on-closeJob hardcommit/memorycap plus>=25Hz ownedRSSsamples; nativeownedgroup>=25Hz aggregateRSSsamples and deadlinekill. Missing/unreadableownedRSS or registrymismatch refuses newwork and terminates ownedgroup. Actual observedovershoots/late samples remain visible; sampledRSS not described as zero-latencykernelhardRSS.",
+    "Windows_heavy_job_hard_commit_cap_bytes": 3221225472,
+    "global_cpu": "Only one build perhost with-j2; nosecondbuildworker. Nativehost stages sequential; one longmutation globally.",
+    "static_cap_validation_pass": true,
+    "behavioral_guard_smoke_completed_by_resource_worker": false,
+    "token_path_Windows": "C:/file-native-online-control-20261020/windows-heavy.lock",
+    "resource_control_root_reservation": {
+      "path": "C:/file-native-online-control-20261020",
+      "bytes_upperbound": 32768,
+      "files_upperbound": 8,
+      "charged_to": "C3 central source/review/control earmark, not an additional allowance",
+      "created_by_resource_worker": false
+    }
+  },
+  "disposition": "RESOURCE GO for the full conservative44GiB envelope with unchanged scope and clock. Meta may release source implementation after arithmeticreview; operationalguards/token/member/cap checks must precede every engine/build/corpus workload. Resourceworker does not release or run workloads.",
+  "no_worker_mutations": {
+    "source_edits": false,
+    "builds": false,
+    "corpus_growth": false,
+    "restores": false,
+    "deletion": false,
+    "remote_writes": false
+  },
+  "report_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib\\report.md"
+}

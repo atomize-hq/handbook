@@ -1,0 +1,75 @@
+{
+  "status": "RESUMED_RESOURCE_ADMITTED_IMPLEMENTATION_ACTIVE_GUARDS_PENDING",
+  "human_byte_ceiling": 47244640256,
+  "file_cap": 5000000,
+  "inside_closeout_bytes": 1073741824,
+  "inside_closeout_files": 100000,
+  "whole_conservative_prospective_with_earmarks": 46987225461,
+  "central_unassigned_bytes": 257414795,
+  "remaining_files": 207460,
+  "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
+  "t0": "2026-10-20T19:10:14Z",
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "protected_closeout_end": "2026-10-21T13:10:14Z",
+  "clock_reset": false,
+  "preserved_preflight_commit": "47d667f26a75fa1454dee2d1c50d238aec4cf6bd",
+  "preserved_integration": "a0b92fe5dc64269508601dcddf7e2e2ca477e30d",
+  "baseline_core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "landing_branch": "codex/file-native-online-maintenance-20261020",
+  "landing_checkout": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook",
+  "main_engine_edits_forbidden": true,
+  "protected_prior_disposal": false,
+  "resource_owner_chat": "01a15aba-0525-7792-9ea0-c11239a49445",
+  "active_workers": [
+    {
+      "chat": "01a15ae1-839d-7b02-843b-558ddc9e78cc",
+      "host": "local",
+      "scope": "CP1 sole engine edit owner: generation lifetime and bounded online cleanup; retain whole-index reader",
+      "base": "47d667f26a75fa1454dee2d1c50d238aec4cf6bd",
+      "target_branch": "codex/file-native-online-cp1-20261020",
+      "watchdog": "2026-10-20T22:10:14Z",
+      "claims": {"F01_source_bytes": 2097152, "F02_build_bytes": 268435456, "F06_protocol_bytes": 100663296, "F12_Windows_evidence_bytes": 50331648}
+    },
+    {
+      "chat": "01a15ae2-798d-7a91-b063-7e45b4768671",
+      "host": "local",
+      "scope": "shared Windows Job guard, independent oracle, baseline and final matrix; no Rust edits",
+      "base": "47d667f26a75fa1454dee2d1c50d238aec4cf6bd",
+      "target_branch": "codex/file-native-online-matrix-20261020",
+      "claims": {"F01_source_bytes": 2097152, "F05_history_bytes": 1073741824, "F06_protocol_bytes": 33554432, "F07_document_bytes": 67108864, "F12_Windows_evidence_bytes": 33554432},
+      "long_lane": "not released; F09-F11/F14 require later explicit handoff"
+    },
+    {
+      "chat": "01a15ae6-04a2-7292-8ebe-30ad725ca61b",
+      "host": "native Linux via spenser-linux-codex",
+      "scope": "qualification controls and native final-pin capsules; no engine edits",
+      "claims": {"F01_source_bytes": 4194304, "F03_build_bytes": 134217728, "F08_fixture_bytes": 33554432, "F12_evidence_bytes": 25165824, "F13_growth_bytes": 4194304},
+      "build_and_engine_status": "hold until reviewed exact CP1 pin and native guard check"
+    }
+  ],
+  "Mac_readiness_chat": "01a15aba-14a9-7ff0-a81a-3c15f7b4fc8d",
+  "Mac_qualification": "fresh worker to be dispatched with reviewed source; readiness passes, no fetch/build yet",
+  "central_claims_used": [],
+  "central_earmarks": {"C1_private_caches": 335544320, "C2_build_topups": 402653184, "C3_source_review_control": 67108864},
+  "Windows_guard": {
+    "owner": "matrix worker",
+    "token": "C:/file-native-online-control-20261020/windows-heavy.lock",
+    "one_job_bytes": 3221225472,
+    "all_supervisors_bytes": 805306368,
+    "reader_bytes": 268435456,
+    "checker_bytes": 2147483648,
+    "j": 2,
+    "status": "implementation and benign smoke pending; required before first actual workload"
+  },
+  "source_protocol_candidate": "STORE v3 physical generation binding, one-time legacy drain/refusal, separate short Q capture, generation pins, unique container birth-id instances, successor-carried bounded retirement/deferred work; not implemented/qualified yet",
+  "next_required": [
+    "Review and smoke shared operational guards, then baseline/build execution",
+    "CP1 reviewed source and adversarial generation/cleanup schedules",
+    "Fresh CP2 rolling cutoff/deferred-tail implementation worker from reviewed CP1 pin",
+    "Fresh CP3 paged authenticated lookup worker from reviewed CP2 pin",
+    "Independent code review/remediation and one final frozen source pin",
+    "Complete required matrix and same-final-pin native Windows/Linux/Mac capsules",
+    "Complete long representation verification, backup/restore/full oracle and accepted successor",
+    "Final resource/evidence review, isolated commit/push and truthful KEEP/ADJUST/PIVOT closeout"
+  ]
+}

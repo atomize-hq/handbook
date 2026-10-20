@@ -1,0 +1,41 @@
+{
+  "status": "SEALED_44GIB_RESOURCE_GO_META_RELEASE_PENDING",
+  "utc": "2026-10-20T20:00:06.918071+00:00",
+  "authoritative_report": "report.md",
+  "authoritative_ledger": "admission-ledger.json",
+  "old_40gib_evidence_unchanged": true,
+  "files": [
+    {
+      "file": "admission-ledger.json",
+      "bytes": 17339,
+      "sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c"
+    },
+    {
+      "file": "baseline-refresh.json",
+      "bytes": 502,
+      "sha256": "d226537ac2bc55b6fad4bbc3b03826b468e8c0f4980cf3546f19ab84db9f4ed4"
+    },
+    {
+      "file": "linux-refresh.json",
+      "bytes": 592,
+      "sha256": "2ea4ff62d9cfef7aae816508296dc55801199632b73136e66c6c98a75493cb26"
+    },
+    {
+      "file": "prior-seal-preservation.json",
+      "bytes": 192,
+      "sha256": "e36bfa906faaea44fa593854ab147befa3859ea60325aff3fc0bb035f92f4d2c"
+    },
+    {
+      "file": "report.md",
+      "bytes": 8461,
+      "sha256": "0d22466f5a9ea4b54925c5129eeaebef87351a6d736bd3d0b9120cf85c7f413f"
+    },
+    {
+      "file": "windows-refresh.json",
+      "bytes": 1359,
+      "sha256": "c0863cdc9b04f12861f5ee751d9fcafb19bb30ca3f3d0808596985dcea373fe7"
+    }
+  ],
+  "report_budget_bytes": 524288,
+  "data_bytes": 28445
+}
