@@ -110,22 +110,34 @@ def history_append(target, chunk=100):
         write_json(RUNTIME/'receipts'/f'history-{target}-summary.json', record)
 
 
-def history_match(target):
+def history_match(target, in_place=False):
     source = RUNTIME/'history/authentic-N128/disposable/store'
-    destination = RUNTIME/'history'/f'H{target}-baseline/disposable/store'
-    assert not destination.exists()
-    size = census(source)
-    budget().check({'history': dict(bytes=size['bytes']+16*1024**2,
-                                    files=size['files']+1000)})
-    # Explicit quiescent full copy, no control rewind or imported delete marker.
-    shutil.copytree(source, destination, ignore=shutil.ignore_patterns('DISPOSABLE.json'))
-    assert not (destination/'DISPOSABLE.json').exists()
+    assert not in_place or target == 10000
+    destination = source if in_place else RUNTIME/'history'/f'H{target}-baseline/disposable/store'
+    if not in_place:
+        assert not destination.exists()
+        size = census(source)
+        budget().check({'history': dict(bytes=size['bytes']+16*1024**2,
+                                        files=size['files']+1000)})
+        # Quiescent full copy, no control rewind or imported delete marker.
+        shutil.copytree(source, destination, ignore=shutil.ignore_patterns('DISPOSABLE.json'))
+        assert not (destination/'DISPOSABLE.json').exists()
+    else:
+        budget().check({'history': dict(bytes=16*1024**2, files=1000)})
     d = driver('history-match-'+str(target))
     before = d.call(destination, 'inspect')['result']['history_depth']
     assert before == target+1
-    d.publish(destination, 'deep-lost-reply', code=86, env={'EXP_EXIT': 'reply'})
+    lost_request = dict(request='deep-lost-reply', base=d.head(destination), ops=[], packet=False)
+    d.call(destination, 'publish', request=lost_request, code=86, env={'EXP_EXIT': 'reply'})
     lost = d.call(destination, 'resolve', request_id='deep-lost-reply')['result']
     assert lost['outcome'] == 'accepted'
+    retry = d.call(destination, 'publish', request=lost_request)['result']
+    assert retry['status'] == 'deduplicated' and retry['result'] == lost
+    assert d.call(destination, 'cancel', request_id='deep-lost-reply')['result'] == lost
+    wrong_intent = d.call(destination, 'resolve', request_id='deep-lost-reply', intent='0'*64, code=2)
+    assert wrong_intent['error'] == 'refused:request-id-intent-mismatch'
+    wrong_retry = d.call(destination, 'publish', request={**lost_request, 'packet': True}, code=2)
+    assert wrong_retry['error'] == 'refused:request-id-intent-mismatch'
     d.call(destination, 'cancel', request_id='cancelled')
     d.call(destination, 'refresh', timeout=240)
     categories = [dict(category='early', id='history-000001'),
@@ -136,10 +148,14 @@ def history_match(target):
                   dict(category='lost-reply', id='deep-lost-reply')]
     outcomes = {r['category']: d.call(destination, 'resolve', request_id=r['id'])['result'] for r in categories}
     result = oracle(destination, RUNTIME/'receipts'/f'H{target}-baseline-independent.json')
+    from outcome_oracle import verify as verify_intents
+    result['request_intents'] = verify_intents(destination, known_requests={'deep-lost-reply': lost_request})
     row = actual(destination)
     assert row['actual_H'] == target+2
     row.update(requests=categories, expected_outcomes=outcomes,
+               fixture=str(destination), matched_representation_plan='same exact frozen accepted cohort; physical-only conversion after baseline samples',
                parent_H=before, lost_reply_exit=86, independent=result,
+               exact_retry_deduplicated=True, changed_intent_refused=True,
                operational_history=True, subset_of_physical_records=False)
     write_json(RUNTIME/'receipts'/f'H{target}-baseline.json', row)
 
@@ -177,10 +193,11 @@ if __name__ == '__main__':
     parser.add_argument('--target', type=int)
     parser.add_argument('--chunk', type=int, default=100)
     parser.add_argument('--mode', choices=['A', 'B'])
+    parser.add_argument('--in-place', action='store_true')
     parser.add_argument('--count', type=int, choices=[64, 1000])
     args = parser.parse_args()
     if args.stage == 'bind': bind()
     elif args.stage == 'history-init': history_init()
     elif args.stage == 'history-append': history_append(args.target, args.chunk)
-    elif args.stage == 'history-match': history_match(args.target)
+    elif args.stage == 'history-match': history_match(args.target, args.in_place)
     else: controls(args.mode, args.count)
