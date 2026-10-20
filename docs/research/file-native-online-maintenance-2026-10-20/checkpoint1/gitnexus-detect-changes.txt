@@ -12,3 +12,5 @@ Error: Repository "C:/Users/spmcc/.codex/worktrees/file-native-online-cp1-202610
 
 Node.js v22.15.0
 Indexed UNKNOWN exact unregistered checkout, no bootstrap. ManualHIGH bounded delta: metrics cleanup budget, physical work/candidate admission and owned directories; unchanged semantic COW and legacy whole-index format.
+
+2026-10-20 legacy10: exact-worktree detect-changes --scope all attempted; UNKNOWN repository unregistered. Raw evidence/detect-before-legacy10.txt. Manual scope one try_remove condition plus review binding/status/docs; no unexpected source changes.

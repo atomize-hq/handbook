@@ -17,3 +17,5 @@ Cleanup uses ONE entry budget including setup/adoption/recovery/metadata, <=1000
 GitNexus remains UNKNOWN (exact unregistered checkout, direct cached CLI only); manual blast radius HIGH. Impact attempts, review findings, preserved harness/engine failures, resources, build commands and raw RSS are bound in evidence. Main, prior integration and meta source are unchanged.
 
 Unselected activation checks frozen nonphysical config, exact birth/catalog/next ordinal, verified candidate pin, immutable physical_parent and current physical CAS before selection. Already-selected STORE recovery ignores obsolete journal targets.
+
+Candidate10 corrects one concrete legacy regression: two-component `packs/<hash>.pack`/`.idx` paths use checked file removal; only `packs/<safe birth id>` uses empty-directory removal. The candidate9 legacy failure and candidate10 harness error-name mismatch remain preserved. Candidate10 compilation/four small units and the first four native focused cells passed. Prior cd12 stress/authority/online evidence retains its original binding; complete latest-pin qualification remains pending. Heavy cache execution remains deferred to final CP3 pin.
