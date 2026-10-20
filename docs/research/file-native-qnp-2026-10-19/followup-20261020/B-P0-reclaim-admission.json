@@ -1,0 +1,16 @@
+{
+  "scope": "P-followup-20261020-B-reclaim",
+  "slot": "P0-path-v2",
+  "go": true,
+  "functional_cutoff": "2026-10-20T12:53:00Z",
+  "files": 32610,
+  "logical_bytes": 425987494,
+  "manifest_sha256": "19ae6aa3d7f9e96e8b8a4352d566023e2d382f24791852df50bb92a393113803",
+  "inventory_sha256": "81b569201b031fb32f9e53e7f6d1ac9d6db82fd2fc70bc1fed423ba5711209ba",
+  "transport_sha256": "3d4d51693a3bcda4e40719abdc6cb4a0856cadf1f51269eeb325d0190ca8ce69",
+  "parent_proof": "C:\\file-native-qnp-20261019\\followup-20261020\\B-P0-parent-verify-job.stdout",
+  "parent_proof_sha256": "8e2cd6b499c1ef4eb44fcc66b5d396ba23fb8fc915ad9dc33eb75a4ad3d6cbfd",
+  "existing_controls_and_all_directories_retained": true,
+  "archive_unchanged": true,
+  "actual_successful_deletion_credit_only": true
+}

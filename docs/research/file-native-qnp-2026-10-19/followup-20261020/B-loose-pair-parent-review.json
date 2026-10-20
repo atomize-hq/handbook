@@ -1,0 +1,14 @@
+{
+  "parent_read_only_pair_review": "PASS",
+  "cohort_sha256": "b6850f05c7c6eda152aed9f8bbb5657f4ccf8579f620bb38c2d6e058e7661ccb",
+  "cohort_records": 28,
+  "same_complete_inventory": true,
+  "same7publication_case_result_digests_and_replay_counts": true,
+  "same6warm_category_ID_result_digests": true,
+  "samples_per_warm_category": 500,
+  "fresh_processes_each": 120,
+  "old_ordinary_median_ns": 39991057000,
+  "new_ordinary_median_ns": 38473217600,
+  "ordinary_threshold_ns": 47990268400.0,
+  "L_new_gate": true
+}
