@@ -1,0 +1,6 @@
+{
+  "linux_map_sha256": "ec53160ad948ef177cbcf2eaa2facdb64d398a105c67b731a98e9695781c413d",
+  "Mac_status_from_parent": "immediate A/B, packing52/267, strict24, focus8/25, Bash17 passed; fresh final-source F37/282 time-censored at07:52; process closure unknown EPERM PGID8284; no global native P pass",
+  "Mac_final_exe_sha256": null,
+  "Mac_group_closure": null
+}

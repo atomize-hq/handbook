@@ -1,0 +1,43 @@
+{
+  "status": "INCOMPLETE_BOUNDED_RESEARCH; ADJUST",
+  "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "functional_cutoff": "2026-10-20T07:55:16Z",
+  "final_deadline": "2026-10-20T08:25:16Z",
+  "all_4_valid_A_cells_complete": true,
+  "A_long_file_gate": true,
+  "A_H8_file_gate": false,
+  "A_ordinary_warm_compression_gates": true,
+  "B_baseline_full_oracle_capture_pass": true,
+  "B_comparison_cells": {
+    "L-old": {
+      "status": "UNPERFORMED_TIME_AND_COEXISTENCE_CENSORED",
+      "ordinary_gate": null,
+      "warm_gate": null,
+      "file_gate": null
+    },
+    "L-new": {
+      "status": "UNPERFORMED_TIME_AND_COEXISTENCE_CENSORED",
+      "ordinary_gate": null,
+      "warm_gate": null,
+      "file_gate": null
+    },
+    "P0": {
+      "status": "UNPERFORMED_TIME_AND_COEXISTENCE_CENSORED",
+      "ordinary_gate": null,
+      "warm_gate": null,
+      "file_gate": null
+    },
+    "PZ": {
+      "status": "UNPERFORMED_TIME_AND_COEXISTENCE_CENSORED",
+      "ordinary_gate": null,
+      "warm_gate": null,
+      "file_gate": null
+    }
+  },
+  "Mac_P_full_qualification": false,
+  "Mac_final_F_events": 37,
+  "Mac_group_closure": null,
+  "Linux_final_native_coverage_complete_as_individually_reported": true,
+  "failed_A_original_input_epoch_preserved_not_relabelled": true,
+  "all_original_protected_data_unchanged": true
+}

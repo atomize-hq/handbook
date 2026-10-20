@@ -1,0 +1,118 @@
+{
+  "runtime/packed-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\packed-operational-backup\\operational.bin.gz",
+    "bytes": 313275597,
+    "sha256": "2fabd1c2439fc95a37a0411c99025bfb5646dee855b6ed0e879fd190e35e324b",
+    "retained": true,
+    "kind": "full operational image"
+  },
+  "runtime/packed-successor-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\packed-successor-operational-backup\\operational.bin.gz",
+    "bytes": 313303876,
+    "sha256": "04a34211ea8efc74127e1d9f69f9e67bde788a17f9dac5c59a44c167cb48b081",
+    "retained": true,
+    "kind": "full operational image"
+  },
+  "runtime/receipts/A-L-new-reclaim.json.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\receipts\\A-L-new-reclaim.json.jsonl",
+    "bytes": 5423703,
+    "sha256": "1cb91284b0f0dfec179d42f98edca767e384b33e75d4b28079aee124ce8cb6cc",
+    "retained": true
+  },
+  "runtime/receipts/A-P0-reclaim.json.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\receipts\\A-P0-reclaim.json.jsonl",
+    "bytes": 5369143,
+    "sha256": "7a64d1c2ffeede3238b7638bbb0d1400332864f3e739c61013738472900836a2",
+    "retained": true
+  },
+  "runtime/receipts/A-PZ-reclaim.json.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\receipts\\A-PZ-reclaim.json.jsonl",
+    "bytes": 5369138,
+    "sha256": "db5a12ab491b12ce3301d01e4558b21e93312569b33753df67ae878de3ab5ac6",
+    "retained": true
+  },
+  "runtime/receipts/artifact-reclaim.json.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\receipts\\artifact-reclaim.json.jsonl",
+    "bytes": 146773,
+    "sha256": "fb5866c7d424808933d637f3f1130e80b8760e243e34c45f9a71be846f9437a8",
+    "retained": true
+  },
+  "runtime/receipts/failed-L-old-fast-exec.json.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\receipts\\failed-L-old-fast-exec.json.jsonl",
+    "bytes": 5287835,
+    "sha256": "cd5a8173aa4fda380558e68d043616120831e49e34f1dbc34684b4dd312d2801",
+    "retained": true
+  },
+  "runtime/receipts/matrix-n8000-A-baseline-reclaim.json.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\receipts\\matrix-n8000-A-baseline-reclaim.json.jsonl",
+    "bytes": 5316664,
+    "sha256": "4d492d3d89719627b1de00ed4a29ea8269b6eaf9354d50ee0527703c1fa39fe5",
+    "retained": true
+  },
+  "runtime/receipts/primary-reclaim-exec.json.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\receipts\\primary-reclaim-exec.json.jsonl",
+    "bytes": 1722472,
+    "sha256": "d620a75b54232b65b56221fa7218c0314729db6976f2042d40b324866ed9e9ae",
+    "retained": true
+  },
+  "runtime/receipts/successor-reclaim-exec.json.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\receipts\\successor-reclaim-exec.json.jsonl",
+    "bytes": 1721357,
+    "sha256": "96bdc1f1851f4b9837bcf0f4940e2f69d16ae7bd24bef390e3bb862bab79269d",
+    "retained": true
+  },
+  "runtime/receipts/valid-L-old-fast-exec.json.jsonl": {
+    "path": "C:\\file-native-packing-20261020\\receipts\\valid-L-old-fast-exec.json.jsonl",
+    "bytes": 5423709,
+    "sha256": "092efbfed3c1cb76e1e3713de4ccb9aa624a9e85444f11607aa4d773359d924c",
+    "retained": true
+  },
+  "runtime/operational-matrix/n8000-A/baseline-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-A\\baseline-operational-backup\\operational.bin.gz",
+    "bytes": 5958151,
+    "sha256": "b53777ae2f84128f7ce0132d693e8b099fbbc846197aedb89734c62ba8f2218a",
+    "retained": true
+  },
+  "runtime/operational-matrix/n8000-A/L-new-path-v2-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-A\\L-new-path-v2-operational-backup\\operational.bin.gz",
+    "bytes": 6080587,
+    "sha256": "74b8c92b8c34cacf1ff2fa5aa8c70982305f6f4489178651ef162858a5093f40",
+    "retained": true
+  },
+  "runtime/operational-matrix/n8000-A/L-old-failed-path-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-A\\L-old-failed-path-operational-backup\\operational.bin.gz",
+    "bytes": 6067580,
+    "sha256": "1daf9bcbcd3bbf06797db17259837d09a8b772586a4d12f6fb8b1e20d088418d",
+    "retained": true
+  },
+  "runtime/operational-matrix/n8000-A/L-old-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-A\\L-old-operational-backup\\operational.bin.gz",
+    "bytes": 6067580,
+    "sha256": "1daf9bcbcd3bbf06797db17259837d09a8b772586a4d12f6fb8b1e20d088418d",
+    "retained": true
+  },
+  "runtime/operational-matrix/n8000-A/L-old-path-v2-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-A\\L-old-path-v2-operational-backup\\operational.bin.gz",
+    "bytes": 6080563,
+    "sha256": "a5f06b3dc8486afe7e6e9d31786c829b77dbe555b4729e1c8c7136a394da66d1",
+    "retained": true
+  },
+  "runtime/operational-matrix/n8000-A/P0-path-v2-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-A\\P0-path-v2-operational-backup\\operational.bin.gz",
+    "bytes": 6082134,
+    "sha256": "7caac02998cc9c46e139e04eb10634249213b1177b17b37e5a4377d51183e45d",
+    "retained": true
+  },
+  "runtime/operational-matrix/n8000-A/PZ-path-v2-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-A\\PZ-path-v2-operational-backup\\operational.bin.gz",
+    "bytes": 5979469,
+    "sha256": "1a2b56b991fa2967e6d1d1610b2bf63dbe923228f924e5c1a3dadc9f47da4623",
+    "retained": true
+  },
+  "runtime/operational-matrix/n8000-B/baseline-operational-backup/operational.bin.gz": {
+    "path": "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\baseline-operational-backup\\operational.bin.gz",
+    "bytes": 9000416,
+    "sha256": "c5a8f54d0e1c4de85b795d9b4da2a4b8deedfa9c1a0b0e79edd312744aa7af14",
+    "retained": true
+  }
+}

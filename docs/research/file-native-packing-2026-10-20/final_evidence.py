@@ -3,6 +3,12 @@ import gzip,hashlib,io,json,subprocess,tarfile
 from pathlib import Path
 HERE=Path(__file__).resolve().parent;R=Path('C:/file-native-packing-20261020');OUT=HERE/'final-evidence'
 OUT.mkdir(exist_ok=False);files={};external={}
+class BoundedArchive:
+    def __init__(self,file):self.file=file;self.bytes=0
+    def write(self,data):
+        if self.bytes+len(data)>12*1024**2:raise ValueError('closeout-archive-prewrite-12MiB-cap')
+        self.bytes+=len(data);return self.file.write(data)
+    def __getattr__(self,name):return getattr(self.file,name)
 def add(path,label=None):
     path=Path(path)
     if not path.is_file():return
@@ -36,11 +42,12 @@ for case in matrix.glob('n8000-*'):
 for name in ['tables.json','tables.md']:add(matrix/name)
 for p in HERE.glob('*.py'):add(p,'harness/'+p.name)
 for p in HERE.glob('*.ps1'):add(p,'harness/'+p.name)
+for p in (HERE/'native-evidence').glob('*'):add(p,'native-evidence/'+p.name)
 add(HERE/'report.md','report.md');index={};expanded=0
-with (OUT/'raw-evidence.tar.gz').open('xb') as raw,gzip.GzipFile(filename='',mode='wb',fileobj=raw,compresslevel=6,mtime=0) as compressed,tarfile.open(fileobj=compressed,mode='w|') as tar:
+with (OUT/'raw-evidence.tar.gz').open('xb') as raw,gzip.GzipFile(filename='',mode='wb',fileobj=BoundedArchive(raw),compresslevel=6,mtime=0) as compressed,tarfile.open(fileobj=compressed,mode='w|') as tar:
     for name,path in sorted(files.items()):
         b=path.read_bytes();expanded+=len(b);assert expanded<=128*1024**2
         row=tarfile.TarInfo(name);row.size=len(b);row.mtime=0;tar.addfile(row,io.BytesIO(b));index[name]=dict(bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
 (OUT/'raw-index.json').write_text(json.dumps(index,indent=2));(OUT/'external-retained-index.json').write_text(json.dumps(external,indent=2))
 archive=OUT/'raw-evidence.tar.gz';summary=dict(core='d70f3864f2888d46d9112213b4a03f8d82745a8e',harness_head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),archive_bytes=archive.stat().st_size,archive_sha256=hashlib.sha256(archive.read_bytes()).hexdigest(),members=len(index),expanded_bytes=expanded,external_retained_entries=len(external),large_progress_and_images_retained_at_exact_hashed_paths=True)
-(OUT/'summary.json').write_text(json.dumps(summary,indent=2));print(json.dumps(summary,indent=2))
+(OUT/'summary.json').write_text(json.dumps(summary,indent=2));assert sum(p.stat().st_size for p in OUT.iterdir() if p.is_file())<=14*1024**2;print(json.dumps(summary,indent=2))

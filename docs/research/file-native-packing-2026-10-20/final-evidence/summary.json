@@ -1,0 +1,10 @@
+{
+  "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "harness_head": "3592654b8a3fea3fca548f75161de4f16aa67342",
+  "archive_bytes": 11106893,
+  "archive_sha256": "5176e47d4a7569ed7ac57b29fe0972e5d2e1d37c713f44c4d38c95311ded815d",
+  "members": 695,
+  "expanded_bytes": 47330271,
+  "external_retained_entries": 19,
+  "large_progress_and_images_retained_at_exact_hashed_paths": true
+}
