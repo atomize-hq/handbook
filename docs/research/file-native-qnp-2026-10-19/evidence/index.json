@@ -655,6 +655,10 @@
     "bytes": 1012,
     "sha256": "7dfd739a60c6f9f335dc3596b9962c6b01a84084d4d0ddba3687e50e6fa0677e"
   },
+  "p-summary-encoding-repair-precommit.txt": {
+    "bytes": 2151,
+    "sha256": "72015f93bac21465d15a38d696cb847a30dc4277173034d6eac4f352603b392f"
+  },
   "p-temporary-archive-unit-allocation.json": {
     "bytes": 1362,
     "sha256": "b9e98a71f9266f48ee3343d6b9f44cdd802391ba6f21c8a71f650bf53b3d0656"

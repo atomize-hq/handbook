@@ -26,7 +26,7 @@ is authorized by this recommendation.
 | Primary P0 / PZ pack-plus-index bytes | 641,986,037 / 283,460,393; PZ is 55.85% smaller |
 | Primary eligible representation files | 504,833 to 33; 99.9935% reduction, pass |
 | Primary matched warm limits | P0/L and PZ/P0 below 2x in all six categories |
-| Primary fresh-process medians | P0/PZ about 18ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ45 ms; qualified L about 1.0ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ1.4 ms |
+| Primary fresh-process medians | P0/PZ about 18-45 ms; qualified L about 1.0-1.4 ms |
 | Complete independent history oracle | 101,007 publications, 100,000 ledger rows, 101 retired refusals; before and after cleanup |
 | Actual engine cleanup | 1,221,001,465 bytes / 504,865 files; no deferred bytes |
 | Packed fresh restore and reopen | Full independent oracle and 111 reopen events pass |
@@ -65,7 +65,7 @@ This result is not repaired by the long-history pass or by excluding catalog cos
 The authentic N8000-B H8 baseline completed and passed the full oracle and
 parent stream/source verification: 24,515 files / 320,288,418 raw bytes. All four
 B measurement cells are unperformed. Measured initialization took96.266 s and
-publications about38ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“39 s each. Retained baseline ownership plus a 600 MB cell,
+publications about 38-39 s each. Retained baseline ownership plus a 600 MB cell,
 64 MiB image and 32 MiB returns exceeds the 2.5 GiB allocation; exact reclamation
 plus seven measured publications and checks could not fit before 07:55:16.
 No smaller fixture, reduced samples, inferred median or extended clock was used.
@@ -105,7 +105,7 @@ review used preserved attempts plus direct manual source and execution tracing.
 ## Bounds and landing
 
 The original P functional cutoff is 2026-10-20 07:55:16 UTC; its closeout deadline
-is 08:25:16. The current Mac full stage is 07:22ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ07:52 with artifact closeout by
+is 08:25:16. The current Mac full stage is 07:22-07:52 with artifact closeout by
 08:02. No clock extension or relabeling of expired attempts is implied.
 
 The 40 GiB / five-million-file global ceiling includes a 1 GiB / 100,000-file
