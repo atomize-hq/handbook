@@ -1,0 +1,214 @@
+{
+  "status": "PASS_ALL_FOUR_A_CELLS_COMMON_VALID_REQUESTS_DIGESTS_COHORT_OUTCOMES",
+  "cells": {
+    "L-old": {
+      "median_ms": 370.8002,
+      "ratio": 1.0,
+      "ordinary_gate": true,
+      "source_sha256": "a52ceb0a3186b788f9135ce19333af51f373ec377a4a08e579b1b5438c947d75",
+      "warm": {
+        "early": 996400,
+        "middle": 450700,
+        "recent": 283200,
+        "missing": 355900,
+        "cancelled": 375400,
+        "lost-reply": 443300
+      },
+      "independent": {
+        "raw_records": 0,
+        "raw_bytes": 0,
+        "inventory_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "independent_codec": null,
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-9140-1792480344280940600-3",
+            "digest": "2ddd6a0f373390329a2b3c264007d6613a63862522cf9b1f6fff24d9bd6ba3f0"
+          },
+          "publications": 15,
+          "ledger_rows": 0,
+          "permanent_digest": "e982b049348dc4e51fa3f79046423bad3d8ce5018c55fb11d216352e394e276a",
+          "retired_publications": 12,
+          "retired_content": "unavailable-by-contract",
+          "unique_content_roots": 3,
+          "root_visits": 15,
+          "sources": 8040,
+          "pins": 2,
+          "reservations": 0,
+          "packets": 0,
+          "generations": 0,
+          "conservative_cumulative_owner_allowance_bytes": 3406660416,
+          "actual_physical_owner_bytes": false,
+          "seconds": 28.296999999904074
+        },
+        "navigation": {
+          "documents": 8000,
+          "supplemented_documents": 8000,
+          "projection_files": 8025,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "seconds": 57.71899999992456
+      }
+    },
+    "L-new": {
+      "median_ms": 367.0095,
+      "ratio": 0.9897769742303267,
+      "ordinary_gate": true,
+      "source_sha256": "0012eccbbf530a0250e2cf6db91d30ec44be4d0938bd07718f52d608baacaaa6",
+      "warm": {
+        "early": 955600,
+        "middle": 403700,
+        "recent": 248000,
+        "missing": 313500,
+        "cancelled": 339000,
+        "lost-reply": 443800
+      },
+      "independent": {
+        "raw_records": 0,
+        "raw_bytes": 0,
+        "inventory_digest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "independent_codec": null,
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-60752-1792481009208062700-3",
+            "digest": "fd0e12f6974383726f9cd01d4a046553f9e436876046ba7d6dc96647f48c4d49"
+          },
+          "publications": 15,
+          "ledger_rows": 0,
+          "permanent_digest": "b4c8840fec96ad239cf3e392f868435799419bb98e82d113860ca8e3c873f5d6",
+          "retired_publications": 12,
+          "retired_content": "unavailable-by-contract",
+          "unique_content_roots": 3,
+          "root_visits": 15,
+          "sources": 8040,
+          "pins": 2,
+          "reservations": 0,
+          "packets": 0,
+          "generations": 0,
+          "conservative_cumulative_owner_allowance_bytes": 3406660416,
+          "actual_physical_owner_bytes": false,
+          "seconds": 27.60999999998603
+        },
+        "navigation": {
+          "documents": 8000,
+          "supplemented_documents": 8000,
+          "projection_files": 8025,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "seconds": 56.42200000002049
+      }
+    },
+    "P0": {
+      "median_ms": 364.7921,
+      "ratio": 0.9837969343058607,
+      "ordinary_gate": true,
+      "source_sha256": "3f49137a619112d6750965f9522b62f6a16dc5a5a8a7fbcb75c331eea091b03a",
+      "warm": {
+        "early": 938100,
+        "middle": 434800,
+        "recent": 270700,
+        "missing": 335100,
+        "cancelled": 374200,
+        "lost-reply": 453100
+      },
+      "independent": {
+        "raw_records": 28,
+        "raw_bytes": 1804278,
+        "inventory_digest": "366234b488f374d10853b05b96770e23bbe906737631955679f14c1a7eeea8e3",
+        "independent_codec": null,
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-44264-1792481378006178500-3",
+            "digest": "9bef24db75f88671137fe64532f3b936e0d18edab329591f0d79ccb5746029bb"
+          },
+          "publications": 15,
+          "ledger_rows": 0,
+          "permanent_digest": "3c7a200b87fb1083d23fb048ef5aa77ed992102c2af227dc9162988c41d3f7d1",
+          "retired_publications": 12,
+          "retired_content": "unavailable-by-contract",
+          "unique_content_roots": 3,
+          "root_visits": 15,
+          "sources": 8040,
+          "pins": 2,
+          "reservations": 0,
+          "packets": 0,
+          "generations": 0,
+          "conservative_cumulative_owner_allowance_bytes": 3406660416,
+          "actual_physical_owner_bytes": false,
+          "seconds": 26.03200000000652
+        },
+        "navigation": {
+          "documents": 8000,
+          "supplemented_documents": 8000,
+          "projection_files": 8025,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "seconds": 53.89000000001397
+      }
+    },
+    "PZ": {
+      "median_ms": 386.1715,
+      "ratio": 1.0414544005100321,
+      "ordinary_gate": true,
+      "source_sha256": "96bc7abf7f2f445e1357cc5baeab32b85c72bd4935755f2cd8962649a53930ed",
+      "warm": {
+        "early": 992100,
+        "middle": 461200,
+        "recent": 283600,
+        "missing": 363100,
+        "cancelled": 386300,
+        "lost-reply": 455800
+      },
+      "independent": {
+        "raw_records": 28,
+        "raw_bytes": 1804278,
+        "inventory_digest": "366234b488f374d10853b05b96770e23bbe906737631955679f14c1a7eeea8e3",
+        "independent_codec": {
+          "version": "1.5.6",
+          "path": "C:\\Program Files\\Git\\mingw64\\bin\\libzstd.dll",
+          "sha256": "f216ea8efb5b3bb9ad3d938fb9ac07e3b8f78c2c92faab03d2c468d0b6798a5a"
+        },
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-38072-1792481815941915700-3",
+            "digest": "161da2a4841ff9496920854cc8434c7ea9d5a2e49f26808c323b8bdc382ac68d"
+          },
+          "publications": 15,
+          "ledger_rows": 0,
+          "permanent_digest": "31c213feb8fbdb81af0b49e899ea556c820f86fe7c393d194c3ff60e865ca078",
+          "retired_publications": 12,
+          "retired_content": "unavailable-by-contract",
+          "unique_content_roots": 3,
+          "root_visits": 15,
+          "sources": 8040,
+          "pins": 2,
+          "reservations": 0,
+          "packets": 0,
+          "generations": 0,
+          "conservative_cumulative_owner_allowance_bytes": 3406660416,
+          "actual_physical_owner_bytes": false,
+          "seconds": 30.04700000002049
+        },
+        "navigation": {
+          "documents": 8000,
+          "supplemented_documents": 8000,
+          "projection_files": 8025,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "seconds": 60.64000000001397
+      }
+    }
+  },
+  "failed_original_cell_excluded": true
+}

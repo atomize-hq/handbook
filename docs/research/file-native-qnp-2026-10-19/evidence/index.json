@@ -155,6 +155,10 @@
     "bytes": 804,
     "sha256": "0337c9cce4c91eac928996a181aa897ce8ad270b5f4c7b8c14e633dc4c1534b9"
   },
+  "p-A-final-matched-cells-precommit-detect.txt": {
+    "bytes": 2151,
+    "sha256": "72015f93bac21465d15a38d696cb847a30dc4277173034d6eac4f352603b392f"
+  },
   "p-candidate-and-native-precommit.txt": {
     "bytes": 2149,
     "sha256": "6ed27551e02b03d506071a4c7f936bbcada0503dec889d6af83877da23993b60"
@@ -423,6 +427,18 @@
     "bytes": 766,
     "sha256": "85bfac1cc7ed0b6227bd4abbea03f0ecc9c1609375593b64072bd45aadd08d71"
   },
+  "p-N8000-A-parent-file-gate-review.json": {
+    "bytes": 1124,
+    "sha256": "c00cbe0ea0d6bcf225a302b36991928704bae0d61bd0bac44dc076466c88954e"
+  },
+  "p-N8000-A-parent-matched-measurement-review.json": {
+    "bytes": 8050,
+    "sha256": "9c44a27ad60ab42278f082845a140590393bb910c87242ed557c637c1f0ef64b"
+  },
+  "p-N8000-A-PZ-v2-parent-verify.txt": {
+    "bytes": 766,
+    "sha256": "a803d2cf091d8437873f1256dfc733a09a3b0cb365129df022f1ce1f757762fc"
+  },
   "p-native-stage-resource-precommit.txt": {
     "bytes": 2766,
     "sha256": "e3d171660c9e16862d8979e8c7478817dfa7605c56e491cea9e8cac9b8a762b3"
@@ -468,6 +484,10 @@
     "sha256": "b69633a69f79cb41f1afad300085b671c29504af6df4dd2a47cccfbdf76cea33"
   },
   "p-parent-preintegration-checkpoint-detect.txt": {
+    "bytes": 2151,
+    "sha256": "72015f93bac21465d15a38d696cb847a30dc4277173034d6eac4f352603b392f"
+  },
+  "p-postintegration-compare-detect.txt": {
     "bytes": 2151,
     "sha256": "72015f93bac21465d15a38d696cb847a30dc4277173034d6eac4f352603b392f"
   },

@@ -1,0 +1,30 @@
+{
+  "status": "LOW_HISTORY_FILE_GATE_FAIL_REPORTED_WITHOUT_THRESHOLD_CHANGE",
+  "A": {
+    "P0": {
+      "eligible_original_files": 28,
+      "pack_files": 5,
+      "index_files": 5,
+      "catalog_files": 1,
+      "representation_files": 11,
+      "eligible_file_reduction": 0.6071428571428572,
+      "file_95_percent_gate": false,
+      "pack_index_bytes": 1807781,
+      "inventory_sha256": "a85222778025d3edd469c379e0082d1ca16ab2bb4408260b776b23ec6fbd9932"
+    },
+    "PZ": {
+      "eligible_original_files": 28,
+      "pack_files": 5,
+      "index_files": 5,
+      "catalog_files": 1,
+      "representation_files": 11,
+      "eligible_file_reduction": 0.6071428571428572,
+      "file_95_percent_gate": false,
+      "pack_index_bytes": 412467,
+      "inventory_sha256": "357ab127effcae005fc02bd90eb84fdb91ef34173898e38ec16fc2a0ced86f8f"
+    }
+  },
+  "compression_ratio": 0.22816203953908135,
+  "primary_long_A_file_gate": "PASS99.993463percent; this does not imply low-H or B pass",
+  "B": "Retained publication loose controls must be counted with containers; no universal95percentclaim"
+}
