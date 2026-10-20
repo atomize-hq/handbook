@@ -164,7 +164,8 @@ def controls(mode, count):
     label = f'N{count}-{mode}'
     root = RUNTIME/'document-controls'/label/'baseline/disposable/store'
     assert not root.exists()
-    budget().check({'document_controls': dict(bytes=16*1024**2, files=8000)})
+    initial_forecast = max(16*1024**2, (3301302*count+127)//128+4*1024**2)
+    budget().check({'document_controls': dict(bytes=initial_forecast, files=8000)})
     d = driver('control-'+label)
     d.call(root, 'init', mode=mode, consumer='project', count=count, timeout=240)
     d.call(root, 'lifecycle', operation='setup')
@@ -177,6 +178,12 @@ def controls(mode, count):
     # Identical shallow state sequence is used later in matched candidate copies.
     for name, ops in [('payload', [dict(kind='edit', id='d000004', text=' matched payload')]),
                       ('title', [dict(kind='rename', id='d000004', text='Matched title')])]:
+        readable = 0
+        if mode == 'B':
+            selected = d.head(root)
+            p = json.loads((root/f"publications/{selected['publication']}.json").read_bytes())
+            readable = census(root/'generations'/p['attempt'])['bytes']
+        budget().check({'document_controls': dict(bytes=readable+4*1024**2, files=count+1000)})
         response = d.publish(root, 'control-'+name, ops=ops, timeout=240)
         assert response['result']['status'] == 'published'
         observations.append(dict(case=name, engine_ns=response['wall_ns'],
