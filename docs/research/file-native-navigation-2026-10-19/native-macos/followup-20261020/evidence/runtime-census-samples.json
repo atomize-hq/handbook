@@ -1,0 +1,518 @@
+[
+  {
+    "timestamp": "2026-10-20T02:13:13.466524+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 0,
+    "logical_bytes": 0
+  },
+  {
+    "timestamp": "2026-10-20T02:13:15.573957+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 79,
+    "logical_bytes": 422965
+  },
+  {
+    "timestamp": "2026-10-20T02:13:17.697984+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 260,
+    "logical_bytes": 1704686
+  },
+  {
+    "timestamp": "2026-10-20T02:13:19.803535+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 375,
+    "logical_bytes": 3207918
+  },
+  {
+    "timestamp": "2026-10-20T02:13:21.906951+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 486,
+    "logical_bytes": 4321249
+  },
+  {
+    "timestamp": "2026-10-20T02:13:24.019452+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 571,
+    "logical_bytes": 5200583
+  },
+  {
+    "timestamp": "2026-10-20T02:13:26.127514+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 622,
+    "logical_bytes": 5947997
+  },
+  {
+    "timestamp": "2026-10-20T02:13:28.275825+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 1042,
+    "logical_bytes": 10429378
+  },
+  {
+    "timestamp": "2026-10-20T02:13:30.412830+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 1168,
+    "logical_bytes": 11178661
+  },
+  {
+    "timestamp": "2026-10-20T02:13:32.546498+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 1464,
+    "logical_bytes": 13784692
+  },
+  {
+    "timestamp": "2026-10-20T02:13:34.699607+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 1571,
+    "logical_bytes": 15063306
+  },
+  {
+    "timestamp": "2026-10-20T02:13:36.853408+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 1784,
+    "logical_bytes": 17547552
+  },
+  {
+    "timestamp": "2026-10-20T02:13:38.916616+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 2005,
+    "logical_bytes": 20224955
+  },
+  {
+    "timestamp": "2026-10-20T02:13:41.079971+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 2162,
+    "logical_bytes": 22106325
+  },
+  {
+    "timestamp": "2026-10-20T02:13:43.209444+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 3231,
+    "logical_bytes": 35320982
+  },
+  {
+    "timestamp": "2026-10-20T02:13:45.383228+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 3376,
+    "logical_bytes": 36925681
+  },
+  {
+    "timestamp": "2026-10-20T02:13:47.561287+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 3457,
+    "logical_bytes": 37332691
+  },
+  {
+    "timestamp": "2026-10-20T02:13:49.740234+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 3533,
+    "logical_bytes": 37725176
+  },
+  {
+    "timestamp": "2026-10-20T02:13:51.903965+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 3613,
+    "logical_bytes": 38131664
+  },
+  {
+    "timestamp": "2026-10-20T02:13:54.082110+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 3692,
+    "logical_bytes": 38533690
+  },
+  {
+    "timestamp": "2026-10-20T02:13:56.247757+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 3778,
+    "logical_bytes": 38942090
+  },
+  {
+    "timestamp": "2026-10-20T02:13:58.407632+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 3854,
+    "logical_bytes": 39343158
+  },
+  {
+    "timestamp": "2026-10-20T02:14:00.484676+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 3927,
+    "logical_bytes": 39732443
+  },
+  {
+    "timestamp": "2026-10-20T02:14:02.634413+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 4006,
+    "logical_bytes": 40128467
+  },
+  {
+    "timestamp": "2026-10-20T02:14:04.830648+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 4080,
+    "logical_bytes": 40408461
+  },
+  {
+    "timestamp": "2026-10-20T02:14:06.931250+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 4156,
+    "logical_bytes": 40798122
+  },
+  {
+    "timestamp": "2026-10-20T02:14:09.128896+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 4232,
+    "logical_bytes": 41200596
+  },
+  {
+    "timestamp": "2026-10-20T02:14:11.320673+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 4309,
+    "logical_bytes": 41611555
+  },
+  {
+    "timestamp": "2026-10-20T02:14:13.502266+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 4389,
+    "logical_bytes": 41956976
+  },
+  {
+    "timestamp": "2026-10-20T02:14:15.696743+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 4460,
+    "logical_bytes": 42291999
+  },
+  {
+    "timestamp": "2026-10-20T02:14:17.811808+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 4536,
+    "logical_bytes": 42719355
+  },
+  {
+    "timestamp": "2026-10-20T02:14:19.944883+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 4575,
+    "logical_bytes": 42980870
+  },
+  {
+    "timestamp": "2026-10-20T02:14:22.207282+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 4724,
+    "logical_bytes": 43869984
+  },
+  {
+    "timestamp": "2026-10-20T02:14:24.478730+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 4799,
+    "logical_bytes": 44361755
+  },
+  {
+    "timestamp": "2026-10-20T02:14:26.671092+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 4971,
+    "logical_bytes": 45322741
+  },
+  {
+    "timestamp": "2026-10-20T02:14:28.803165+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 5048,
+    "logical_bytes": 45726775
+  },
+  {
+    "timestamp": "2026-10-20T02:14:31.046815+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 5590,
+    "logical_bytes": 48448989
+  },
+  {
+    "timestamp": "2026-10-20T02:14:33.280720+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 5676,
+    "logical_bytes": 48890131
+  },
+  {
+    "timestamp": "2026-10-20T02:14:35.433771+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 5752,
+    "logical_bytes": 49260948
+  },
+  {
+    "timestamp": "2026-10-20T02:14:37.658599+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 5847,
+    "logical_bytes": 49720704
+  },
+  {
+    "timestamp": "2026-10-20T02:14:40.122150+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 5949,
+    "logical_bytes": 50998656
+  },
+  {
+    "timestamp": "2026-10-20T02:14:42.603726+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 5984,
+    "logical_bytes": 51380246
+  },
+  {
+    "timestamp": "2026-10-20T02:14:44.881980+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 6104,
+    "logical_bytes": 52722291
+  },
+  {
+    "timestamp": "2026-10-20T02:14:47.149242+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 6203,
+    "logical_bytes": 53894811
+  },
+  {
+    "timestamp": "2026-10-20T02:14:49.280764+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 6318,
+    "logical_bytes": 55324315
+  },
+  {
+    "timestamp": "2026-10-20T02:14:51.558293+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 6446,
+    "logical_bytes": 56954523
+  },
+  {
+    "timestamp": "2026-10-20T02:14:53.826405+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 6577,
+    "logical_bytes": 58609307
+  },
+  {
+    "timestamp": "2026-10-20T02:14:56.097328+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 6719,
+    "logical_bytes": 60419739
+  },
+  {
+    "timestamp": "2026-10-20T02:14:58.222591+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 6851,
+    "logical_bytes": 62140059
+  },
+  {
+    "timestamp": "2026-10-20T02:15:00.596435+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 6988,
+    "logical_bytes": 63831707
+  },
+  {
+    "timestamp": "2026-10-20T02:15:02.793691+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 7110,
+    "logical_bytes": 65437339
+  },
+  {
+    "timestamp": "2026-10-20T02:15:04.978322+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 7202,
+    "logical_bytes": 66558866
+  },
+  {
+    "timestamp": "2026-10-20T02:15:07.260144+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 7224,
+    "logical_bytes": 66972341
+  },
+  {
+    "timestamp": "2026-10-20T02:15:09.593191+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 7224,
+    "logical_bytes": 66972341
+  },
+  {
+    "timestamp": "2026-10-20T02:15:11.845763+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 7235,
+    "logical_bytes": 67572493
+  },
+  {
+    "timestamp": "2026-10-20T02:15:14.024210+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 7366,
+    "logical_bytes": 69153549
+  },
+  {
+    "timestamp": "2026-10-20T02:15:16.210870+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 7504,
+    "logical_bytes": 70837005
+  },
+  {
+    "timestamp": "2026-10-20T02:15:18.482401+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 7654,
+    "logical_bytes": 72741645
+  },
+  {
+    "timestamp": "2026-10-20T02:15:20.652306+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 7763,
+    "logical_bytes": 74134285
+  },
+  {
+    "timestamp": "2026-10-20T02:15:22.869536+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 7906,
+    "logical_bytes": 75948813
+  },
+  {
+    "timestamp": "2026-10-20T02:15:25.068165+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 8028,
+    "logical_bytes": 77542157
+  },
+  {
+    "timestamp": "2026-10-20T02:15:27.288915+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 8152,
+    "logical_bytes": 79082253
+  },
+  {
+    "timestamp": "2026-10-20T02:15:29.630669+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 8263,
+    "logical_bytes": 80376190
+  },
+  {
+    "timestamp": "2026-10-20T02:15:31.929743+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 8438,
+    "logical_bytes": 81553542
+  },
+  {
+    "timestamp": "2026-10-20T02:15:34.123051+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 8589,
+    "logical_bytes": 82413096
+  },
+  {
+    "timestamp": "2026-10-20T02:15:36.318340+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 8726,
+    "logical_bytes": 83363472
+  },
+  {
+    "timestamp": "2026-10-20T02:15:38.469566+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 8871,
+    "logical_bytes": 84537580
+  },
+  {
+    "timestamp": "2026-10-20T02:15:40.803588+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 9019,
+    "logical_bytes": 86254466
+  },
+  {
+    "timestamp": "2026-10-20T02:15:43.105756+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 9250,
+    "logical_bytes": 88972415
+  },
+  {
+    "timestamp": "2026-10-20T02:15:45.337471+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 9355,
+    "logical_bytes": 90262655
+  },
+  {
+    "timestamp": "2026-10-20T02:15:47.575606+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 9451,
+    "logical_bytes": 91516031
+  },
+  {
+    "timestamp": "2026-10-20T02:15:49.754424+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 9576,
+    "logical_bytes": 93060223
+  },
+  {
+    "timestamp": "2026-10-20T02:15:51.996368+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 9706,
+    "logical_bytes": 94710911
+  },
+  {
+    "timestamp": "2026-10-20T02:15:54.226190+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 9839,
+    "logical_bytes": 96459903
+  },
+  {
+    "timestamp": "2026-10-20T02:15:56.483291+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 9970,
+    "logical_bytes": 98114687
+  },
+  {
+    "timestamp": "2026-10-20T02:15:58.730694+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 10101,
+    "logical_bytes": 99769471
+  },
+  {
+    "timestamp": "2026-10-20T02:16:01.075519+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 10209,
+    "logical_bytes": 101158015
+  },
+  {
+    "timestamp": "2026-10-20T02:16:03.270929+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 10301,
+    "logical_bytes": 102279542
+  },
+  {
+    "timestamp": "2026-10-20T02:16:05.608195+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 10323,
+    "logical_bytes": 102693017
+  },
+  {
+    "timestamp": "2026-10-20T02:16:07.810080+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 10367,
+    "logical_bytes": 103217305
+  },
+  {
+    "timestamp": "2026-10-20T02:16:10.107899+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 10779,
+    "logical_bytes": 108370073
+  },
+  {
+    "timestamp": "2026-10-20T02:16:12.283350+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 11159,
+    "logical_bytes": 113256601
+  },
+  {
+    "timestamp": "2026-10-20T02:16:14.586782+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 11380,
+    "logical_bytes": 116971347
+  },
+  {
+    "timestamp": "2026-10-20T02:16:16.893552+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 11779,
+    "logical_bytes": 121960275
+  },
+  {
+    "timestamp": "2026-10-20T02:16:19.198686+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 12192,
+    "logical_bytes": 127203155
+  },
+  {
+    "timestamp": "2026-10-20T02:16:21.508943+00:00",
+    "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020",
+    "files": 12406,
+    "logical_bytes": 130248883
+  }
+]

@@ -141,3 +141,25 @@ will remain separate. P is still undispatched and its six-hour clock has not
 started. Current Mac ownership including conservative Git growth is about
 320 MB / 8,133 files, with about 197 GB free, within the existing 768 MiB /
 75,000-file allocation and 20 GiB reserve. Re-census before any further execution.
+
+The human subsequently authorized a **separate 20-minute Mac follow-up** at
+02:09:38 UTC on October 20, with functional cutoff 02:19:38 and closeout
+deadline 02:29:38. It passed all **24 recovery cases / 282 operations and 14
+supplements** on unchanged 4bde source, finishing functional work at 02:17:18.
+The initial helper clock was 14 seconds late and was corrected during execution.
+The failed B Bash parser and successful separate parser retry both survive;
+no successful case was repeated. All 29 original censored-run artifacts remain
+byte-identical. See [the separate report](../file-native-navigation-2026-10-19/native-macos/followup-20261020/REPORT.md)
+and [independent parent review](evidence/coordinator-n-macos-followup-review.json).
+The Mac executable hash remains worker-receipted rather than parent-rehashed
+on the native host. Missing RSS samples remain null.
+
+Q and N qualification prerequisites are now reviewed. The frozen integrated
+Rust/Cargo map still equals 4bde156323812ef18c0dea6798cfc2108aaad933.
+The [fresh storage admission](evidence/p-initial-admission.json) releases only
+unused prior forecasts and admits **512 MiB / 25,000 files total new P ownership**
+for source, bounded builds and small correctness fixtures. Protected data, all
+censored prefixes and both blocked-cleanup caches stay counted. Large P stages
+and native P stages require separate prospective admission within the same
+40 GiB combined ceiling and internal closeout reserve. This admission is not
+a packing correctness or performance result.

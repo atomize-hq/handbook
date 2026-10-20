@@ -1,0 +1,538 @@
+[
+  {
+    "case": "historical-readme-upgrade-checkpoint",
+    "mode": "A",
+    "profile": 1,
+    "readme_sha256": "c4893344f943a792073d717a9c0bd0179318a17aabb6af8d3336d223315965fd",
+    "proof": {
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    }
+  },
+  {
+    "case": "historical-readme-upgrade-checkpoint",
+    "mode": "A",
+    "profile": 2,
+    "readme_sha256": "f2c1ff7eebc37818ed29ae27982622d024d861fdf343e9e82e76ea41dabe0cf2",
+    "proof": {
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    }
+  },
+  {
+    "case": "historical-readme-upgrade-checkpoint",
+    "mode": "A",
+    "profile": 3,
+    "readme_sha256": "f2c1ff7eebc37818ed29ae27982622d024d861fdf343e9e82e76ea41dabe0cf2",
+    "proof": {
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    }
+  },
+  {
+    "case": "new-profile4-genesis-readme-absent",
+    "mode": "A",
+    "profile": 4,
+    "readme_sha256": null,
+    "proof": {
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    }
+  },
+  {
+    "case": "growing-title-local-leaf-no-sibling-regeneration",
+    "mode": "A",
+    "n": 128,
+    "groups": 1,
+    "affected_members": 128,
+    "target_group": "navigation/groups/root.yaml",
+    "metrics": {
+      "bytes_control_read": 6603,
+      "bytes_control_written": 3393,
+      "bytes_metadata_read": 4017086,
+      "bytes_metadata_written": 26667,
+      "bytes_payload_read": 20198,
+      "bytes_payload_written": 19672,
+      "bytes_read": 4043887,
+      "bytes_result_read": 0,
+      "bytes_result_written": 0,
+      "bytes_written": 49732,
+      "copies": 0,
+      "created_directories": 7,
+      "directory_syncs": 51,
+      "documents_visited": 129,
+      "edges_visited": 4,
+      "file_syncs": 10,
+      "index_updates": 4,
+      "namespace_ops": 9,
+      "navigation_bytes": 20008,
+      "navigation_oversize_relationship_parts": 0,
+      "navigation_parts": 2,
+      "ns": {
+        "directory-create": 641625,
+        "graph-transition-inclusive": 36995375,
+        "lock-hold": 23569125,
+        "lock-wait": 98667,
+        "preparation-inclusive": 297279833,
+        "projection-prepare-inclusive": 210284958,
+        "read": 22174463,
+        "replace": 545750,
+        "sync": 143722086,
+        "write": 2115290
+      },
+      "opens": 842,
+      "page_reads": 816,
+      "quota_limit": 67113152,
+      "quota_spent": 82082,
+      "range_calls": {
+        "E": 128,
+        "navigation": 1
+      },
+      "range_leaf_pairs": {
+        "E": 8192,
+        "navigation": 4
+      },
+      "range_page_visits": {
+        "E": 256,
+        "navigation": 2
+      },
+      "range_rows": {
+        "E": 4,
+        "navigation": 0
+      },
+      "replacements": 8,
+      "touched_paths": 0,
+      "unique_pages": [
+        "18adcfa85883fa7905f0b11955e42009dfa1f9091656e53029fb7ac41668e83d",
+        "2d47dc0aed12f3ddd3515e8a86a798d415377cc40f873cc58c1fc315fc9cdd6f",
+        "3560a795d70c471bf6347cbf627538c889d3a0b49854eea3598515e64888c006",
+        "38b1cf5cc956a5ba855373e49e0874f88e46c97bd4433359e734e91fe35f5dd4",
+        "767959bb3dc95bfda237fe40da267ae2bb0adff4511f628c960ca18224707528",
+        "a4237df6b6863889f6c9017ff90d611031bc35a1fd281a7a3c9da6fba66683d9",
+        "bccd06ae5b50c9e7b0e6c96c91fa64ea86af807e964168c92f5d3ae79323c53a",
+        "c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221",
+        "dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4",
+        "de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047",
+        "fae94f4496a3130aebd1a22f2b5b2da243b0e0dd70c1c00f64a6e207f6a5862a"
+      ],
+      "unsupported_directory_syncs": 0,
+      "verify_only": false
+    },
+    "proof": {
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    "scope": "No full D scan; E range calls bounded by one leaf; all sibling FileSpecs unchanged. No syscall-level open trace claimed."
+  },
+  {
+    "case": "growing-title-local-leaf-no-sibling-regeneration",
+    "mode": "A",
+    "n": 1024,
+    "groups": 3,
+    "affected_members": 253,
+    "target_group": "navigation/groups/00.yaml",
+    "metrics": {
+      "bytes_control_read": 6689,
+      "bytes_control_written": 3470,
+      "bytes_metadata_read": 8240982,
+      "bytes_metadata_written": 29404,
+      "bytes_payload_read": 39221,
+      "bytes_payload_written": 38695,
+      "bytes_read": 8286892,
+      "bytes_result_read": 0,
+      "bytes_result_written": 0,
+      "bytes_written": 71569,
+      "copies": 0,
+      "created_directories": 7,
+      "directory_syncs": 57,
+      "documents_visited": 254,
+      "edges_visited": 0,
+      "file_syncs": 11,
+      "index_updates": 4,
+      "namespace_ops": 10,
+      "navigation_bytes": 39031,
+      "navigation_oversize_relationship_parts": 0,
+      "navigation_parts": 2,
+      "ns": {
+        "directory-create": 700751,
+        "graph-transition-inclusive": 56108042,
+        "lock-hold": 31267292,
+        "lock-wait": 240209,
+        "preparation-inclusive": 669611958,
+        "projection-prepare-inclusive": 535532583,
+        "read": 113679267,
+        "replace": 1221792,
+        "sync": 208724913,
+        "write": 2963999
+      },
+      "opens": 2107,
+      "page_reads": 2080,
+      "quota_limit": 67113152,
+      "quota_spent": 108014,
+      "range_calls": {
+        "E": 253,
+        "navigation": 1
+      },
+      "range_leaf_pairs": {
+        "E": 16192,
+        "navigation": 6
+      },
+      "range_page_visits": {
+        "E": 759,
+        "navigation": 2
+      },
+      "range_rows": {
+        "E": 0,
+        "navigation": 0
+      },
+      "replacements": 9,
+      "touched_paths": 0,
+      "unique_pages": [
+        "05f097b6afb5a7c239d236f32fc3b6e0b1ac3f2975cd54e26fa38dd2b723511a",
+        "0b06ace79c77b1877cb088221eb34087574a229972a05fbf57decef35cf11cbc",
+        "11d68a99efc18f23f2acc4d0dc246ef0073e6ddaf5931d82fb029a669882ef7f",
+        "15696125e0f99df6b5d6d93c73d68ab4da032f58ddfdbce75d37d3c892b19fd3",
+        "1f6acfed3d6ac12975ff99077bab2a583624c0674f86a604fc4464abde51acbf",
+        "1fad0a21d5736218fd6fec8d8dc2107662f235b17145bdd9e83fa6d93cc1c7d2",
+        "37efebae9948292ec95daa575276a94163abf8dd9facc0847c9c485de860cda9",
+        "38b1cf5cc956a5ba855373e49e0874f88e46c97bd4433359e734e91fe35f5dd4",
+        "3a6dfb94ddf8130e3927960557376b8cd4a548d68b7758d9bee00585169dbc25",
+        "3efd313b4e3453f0f0247b5ffe66f903275662e1465b9be148acab9d0374eb84",
+        "5cbc9d8d24f021ea875327c83ee1accf6c70a2db7958becf42425702cf9fcd77",
+        "8bd69158aebea9fb90acc61b80fd4c6290040673f86c200c356bb77c360fc3c7",
+        "8e4e06a656e1360ded74a3eaf255d56f8594097764c095f3d1e5e34c2f384ab9",
+        "8eb9dfacd0285f33b55a27850d6c6deae96a98d3deb428628f832a4e1672c052",
+        "a0f24b040ebc136f40a05cf9ffb1b0a969a599f9bc7707dcdf2de07b80a23a78",
+        "aa520ed53291f494d8f1819fe48fa3e4e94e3976f29b66b4b9e778e0b65b5b70",
+        "ba173bd11780bd8c9001acdac09f59629060c743a74689cf33d17cb40490c2f0",
+        "bbdc3d62386b0d04a28c3aaeb425bb99304fd666e9a4c4e4199f63b6364035ef",
+        "c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221",
+        "c9fc5de2cfd9c060ae36bd60a8b546d153dde9e22835ce853bc7f9515b5f9aa0",
+        "cbee70a34bc4becd8a3573bc583c5970c6d770d683fdbf59d0e2b738d0f8ef89",
+        "d5b90eb5d36a34344990e19b66721bab59c8f33aeccf36d1b6ff4bf531f05b49",
+        "f4be68852a9195a0623a54bfa80f3c06b184c6029515c8ec951a797d69f59863",
+        "f799c704a4066f3eb5bc49edfbbf46a93bd730d0205164f32eb6e84aabc2ae1a",
+        "fae94f4496a3130aebd1a22f2b5b2da243b0e0dd70c1c00f64a6e207f6a5862a",
+        "fca12d0be16cc6e11d6069a56cf60eeac58a3433fab76531e835a54b88b63de1",
+        "ff7a5393f3570ecae9a184a76d87fd9a05171dd25476c268274ffe1db273ffbc"
+      ],
+      "unsupported_directory_syncs": 0,
+      "verify_only": false
+    },
+    "proof": {
+      "documents": 1024,
+      "supplemented_documents": 1024,
+      "projection_files": 1030,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    "scope": "No full D scan; E range calls bounded by one leaf; all sibling FileSpecs unchanged. No syscall-level open trace claimed."
+  },
+  {
+    "case": "ordinary-bash-discovery-search-exact-copy",
+    "mode": "A",
+    "selected_once": {
+      "publication": "publication-54845-1792462485646988000-3",
+      "digest": "e54a2c00cbd419ce9c14bf505e9d0cf7a5eae32eda593835497a25dbaa3b00c8"
+    },
+    "captured_tree": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020/supplement/growing-A-128/disposable/store/view",
+    "path": "docs/item-overview-d000000.yaml",
+    "sha256": "9968d0d760a9b3214d613d18b985cbada9d4b6be09ac7777e198e3f243feea55",
+    "seconds": 0.05712771415710449,
+    "engine_calls_during_extraction": 0,
+    "script_sha256": "95531e6cc66a68b0bd94b1222eedbb4a9f1e3de9edf5f149926a6b1a909e4c06",
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "case": "historical-readme-upgrade-checkpoint",
+    "mode": "B",
+    "profile": 1,
+    "readme_sha256": "c4893344f943a792073d717a9c0bd0179318a17aabb6af8d3336d223315965fd",
+    "proof": {
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    }
+  },
+  {
+    "case": "historical-readme-upgrade-checkpoint",
+    "mode": "B",
+    "profile": 2,
+    "readme_sha256": "f2c1ff7eebc37818ed29ae27982622d024d861fdf343e9e82e76ea41dabe0cf2",
+    "proof": {
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    }
+  },
+  {
+    "case": "historical-readme-upgrade-checkpoint",
+    "mode": "B",
+    "profile": 3,
+    "readme_sha256": "f2c1ff7eebc37818ed29ae27982622d024d861fdf343e9e82e76ea41dabe0cf2",
+    "proof": {
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    }
+  },
+  {
+    "case": "new-profile4-genesis-readme-absent",
+    "mode": "B",
+    "profile": 4,
+    "readme_sha256": null,
+    "proof": {
+      "documents": 16,
+      "supplemented_documents": 16,
+      "projection_files": 20,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    }
+  },
+  {
+    "case": "growing-title-local-leaf-no-sibling-regeneration",
+    "mode": "B",
+    "n": 128,
+    "groups": 1,
+    "affected_members": 128,
+    "target_group": "navigation/groups/root.yaml",
+    "metrics": {
+      "bytes_control_read": 7080,
+      "bytes_control_written": 37983,
+      "bytes_metadata_read": 4049726,
+      "bytes_metadata_written": 26667,
+      "bytes_payload_read": 3197978,
+      "bytes_payload_written": 1608448,
+      "bytes_read": 7254784,
+      "bytes_result_read": 0,
+      "bytes_result_written": 0,
+      "bytes_written": 1673098,
+      "copies": 132,
+      "created_directories": 15,
+      "directory_syncs": 325,
+      "documents_visited": 129,
+      "edges_visited": 4,
+      "file_syncs": 143,
+      "index_updates": 4,
+      "namespace_ops": 142,
+      "navigation_bytes": 20008,
+      "navigation_oversize_relationship_parts": 0,
+      "navigation_parts": 2,
+      "ns": {
+        "B-generation-inclusive": 807058209,
+        "copy": 22577453,
+        "directory-create": 1551960,
+        "graph-transition-inclusive": 41940208,
+        "lock-hold": 24100042,
+        "lock-wait": 74292,
+        "preparation-inclusive": 1106463708,
+        "projection-prepare-inclusive": 204802916,
+        "read": 29405795,
+        "replace": 735416,
+        "sync": 870617884,
+        "write": 2249584
+      },
+      "opens": 1244,
+      "page_reads": 821,
+      "quota_limit": 105513152,
+      "quota_spent": 2250215,
+      "range_calls": {
+        "E": 128,
+        "navigation": 1
+      },
+      "range_leaf_pairs": {
+        "E": 8192,
+        "navigation": 4
+      },
+      "range_page_visits": {
+        "E": 256,
+        "navigation": 2
+      },
+      "range_rows": {
+        "E": 4,
+        "navigation": 0
+      },
+      "replacements": 8,
+      "touched_paths": 0,
+      "unique_pages": [
+        "18adcfa85883fa7905f0b11955e42009dfa1f9091656e53029fb7ac41668e83d",
+        "2d47dc0aed12f3ddd3515e8a86a798d415377cc40f873cc58c1fc315fc9cdd6f",
+        "3560a795d70c471bf6347cbf627538c889d3a0b49854eea3598515e64888c006",
+        "38b1cf5cc956a5ba855373e49e0874f88e46c97bd4433359e734e91fe35f5dd4",
+        "767959bb3dc95bfda237fe40da267ae2bb0adff4511f628c960ca18224707528",
+        "8238f4410aa6057e56e62b8b217c358a206b82ccf4a2eb0ea159c14bb4c77afa",
+        "a4237df6b6863889f6c9017ff90d611031bc35a1fd281a7a3c9da6fba66683d9",
+        "bccd06ae5b50c9e7b0e6c96c91fa64ea86af807e964168c92f5d3ae79323c53a",
+        "c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221",
+        "dc90f1a49413fe87c2ea01f37ec90d2bd0f8a0c42984145aef6577658e9e6ef4",
+        "de2338c5f197427ca677756b11a55829657e1199f8bcbcaafd8d2bf8de340047",
+        "fae94f4496a3130aebd1a22f2b5b2da243b0e0dd70c1c00f64a6e207f6a5862a"
+      ],
+      "unsupported_directory_syncs": 0,
+      "verify_only": false
+    },
+    "proof": {
+      "documents": 128,
+      "supplemented_documents": 128,
+      "projection_files": 132,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    "scope": "No full D scan; E range calls bounded by one leaf; all sibling FileSpecs unchanged. No syscall-level open trace claimed."
+  },
+  {
+    "case": "growing-title-local-leaf-no-sibling-regeneration",
+    "mode": "B",
+    "n": 1024,
+    "groups": 3,
+    "affected_members": 253,
+    "target_group": "navigation/groups/00.yaml",
+    "metrics": {
+      "bytes_control_read": 7166,
+      "bytes_control_written": 275438,
+      "bytes_metadata_read": 8499063,
+      "bytes_metadata_written": 29404,
+      "bytes_payload_read": 26289991,
+      "bytes_payload_written": 13163966,
+      "bytes_read": 34796220,
+      "bytes_result_read": 0,
+      "bytes_result_written": 0,
+      "bytes_written": 13468808,
+      "copies": 1030,
+      "created_directories": 15,
+      "directory_syncs": 2127,
+      "documents_visited": 254,
+      "edges_visited": 0,
+      "file_syncs": 1042,
+      "index_updates": 4,
+      "namespace_ops": 1041,
+      "navigation_bytes": 39031,
+      "navigation_oversize_relationship_parts": 0,
+      "navigation_parts": 2,
+      "ns": {
+        "B-generation-inclusive": 5862952167,
+        "copy": 194589040,
+        "directory-create": 1481542,
+        "graph-transition-inclusive": 54024708,
+        "lock-hold": 24647459,
+        "lock-wait": 67249,
+        "preparation-inclusive": 6378766875,
+        "projection-prepare-inclusive": 403003792,
+        "read": 91303340,
+        "replace": 689666,
+        "sync": 5417926273,
+        "write": 2901749
+      },
+      "opens": 5217,
+      "page_reads": 2099,
+      "quota_limit": 374313152,
+      "quota_spent": 17728228,
+      "range_calls": {
+        "E": 253,
+        "navigation": 1
+      },
+      "range_leaf_pairs": {
+        "E": 16192,
+        "navigation": 6
+      },
+      "range_page_visits": {
+        "E": 759,
+        "navigation": 2
+      },
+      "range_rows": {
+        "E": 0,
+        "navigation": 0
+      },
+      "replacements": 9,
+      "touched_paths": 0,
+      "unique_pages": [
+        "00f5b8ca9e42d59a1fe183efcd25008221910cafa02f1ff92466e7ac57342370",
+        "05f097b6afb5a7c239d236f32fc3b6e0b1ac3f2975cd54e26fa38dd2b723511a",
+        "0b06ace79c77b1877cb088221eb34087574a229972a05fbf57decef35cf11cbc",
+        "11d68a99efc18f23f2acc4d0dc246ef0073e6ddaf5931d82fb029a669882ef7f",
+        "15696125e0f99df6b5d6d93c73d68ab4da032f58ddfdbce75d37d3c892b19fd3",
+        "1becc4df663b18fd5845d4d21e5f82b51178e96d086e775d549586f945709b13",
+        "1f6acfed3d6ac12975ff99077bab2a583624c0674f86a604fc4464abde51acbf",
+        "1fad0a21d5736218fd6fec8d8dc2107662f235b17145bdd9e83fa6d93cc1c7d2",
+        "28d8ee815617f98781b092579fe1964d42438762a683a2f6d4ea9f195f9de765",
+        "37efebae9948292ec95daa575276a94163abf8dd9facc0847c9c485de860cda9",
+        "38b1cf5cc956a5ba855373e49e0874f88e46c97bd4433359e734e91fe35f5dd4",
+        "3a6dfb94ddf8130e3927960557376b8cd4a548d68b7758d9bee00585169dbc25",
+        "3efd313b4e3453f0f0247b5ffe66f903275662e1465b9be148acab9d0374eb84",
+        "3f75cba26661930cab744c1628541b5296ce4c5666ea230bf43689b31a17567b",
+        "49c45c7129e138f66a4e480c4bbfa0214879bd9ca63e8b0ee8007c2d29110445",
+        "53a4d82e228143b934dea6de1230c2499c12df82c93d87556953e4c0f4d11da2",
+        "558804fff684de8f25fc02faf76cf9813101397ca11a41c96df7143a580b490c",
+        "5cbc9d8d24f021ea875327c83ee1accf6c70a2db7958becf42425702cf9fcd77",
+        "5e9d8df6cebdb9078da1a833a3444f96b8bc6e353ad4f964beba3010151fd5c6",
+        "7c5f525d0648ed2e8d5b1dee82538722f66e02b033c166bbdf8a9bc437de9715",
+        "8bd69158aebea9fb90acc61b80fd4c6290040673f86c200c356bb77c360fc3c7",
+        "8e4e06a656e1360ded74a3eaf255d56f8594097764c095f3d1e5e34c2f384ab9",
+        "8eb9dfacd0285f33b55a27850d6c6deae96a98d3deb428628f832a4e1672c052",
+        "9364a071c659e0b7433a933b9657a8d0126343891548657ed63b34d713c5ab95",
+        "a0f24b040ebc136f40a05cf9ffb1b0a969a599f9bc7707dcdf2de07b80a23a78",
+        "a51081ca4e40272c01f5d936e10a4a06d5364cb3d898e743631aeeb64b061ba7",
+        "a98a79bb2a46d8bc9f8aa36c0c4292b21e2f861ff3e063f344330b3d8aa9d6b3",
+        "aa520ed53291f494d8f1819fe48fa3e4e94e3976f29b66b4b9e778e0b65b5b70",
+        "ba173bd11780bd8c9001acdac09f59629060c743a74689cf33d17cb40490c2f0",
+        "bbdc3d62386b0d04a28c3aaeb425bb99304fd666e9a4c4e4199f63b6364035ef",
+        "c37e4517844093234fce9652b1730d7df2804370c28e28b4313c9a1334b65221",
+        "c9fc5de2cfd9c060ae36bd60a8b546d153dde9e22835ce853bc7f9515b5f9aa0",
+        "cbee70a34bc4becd8a3573bc583c5970c6d770d683fdbf59d0e2b738d0f8ef89",
+        "d5b90eb5d36a34344990e19b66721bab59c8f33aeccf36d1b6ff4bf531f05b49",
+        "eabb2b819040dade127645f24e2f37a7d0f517622a5449dd8a26bb34fc4d6703",
+        "f4be68852a9195a0623a54bfa80f3c06b184c6029515c8ec951a797d69f59863",
+        "f627022576d8d4341f517959c530493e105712571454602f0e42bd0aea87bf0c",
+        "f799c704a4066f3eb5bc49edfbbf46a93bd730d0205164f32eb6e84aabc2ae1a",
+        "fac61bac503ebc71439606844caa0a9141290a51afdaaff40c203bff87eede45",
+        "fae94f4496a3130aebd1a22f2b5b2da243b0e0dd70c1c00f64a6e207f6a5862a",
+        "fca12d0be16cc6e11d6069a56cf60eeac58a3433fab76531e835a54b88b63de1",
+        "ff7a5393f3570ecae9a184a76d87fd9a05171dd25476c268274ffe1db273ffbc"
+      ],
+      "unsupported_directory_syncs": 0,
+      "verify_only": false
+    },
+    "proof": {
+      "documents": 1024,
+      "supplemented_documents": 1024,
+      "projection_files": 1030,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    "scope": "No full D scan; E range calls bounded by one leaf; all sibling FileSpecs unchanged. No syscall-level open trace claimed."
+  }
+]

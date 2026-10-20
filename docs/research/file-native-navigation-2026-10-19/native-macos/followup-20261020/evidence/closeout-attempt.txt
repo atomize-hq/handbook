@@ -1,0 +1,1 @@
+Artifact-only closeout first attempt failed: FileNotFoundError reading supplement/readme-A-2/README.md. Driver.init places profiles 2/3 under disposable/store; historical profile 1 is copied directly. Original failed closeout helper preserved as closeout-failed-attempt.py; corrected only artifact source path. No engine/test invocation or functional rerun.

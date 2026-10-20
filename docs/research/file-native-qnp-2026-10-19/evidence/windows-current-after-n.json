@@ -1,0 +1,138 @@
+{
+  "epoch": 1792462374.9408615,
+  "kind": "fresh Windows scope before conditional P admission",
+  "roots": [
+    {
+      "root": "C:\\file-native-incremental-20261018",
+      "files": 2650971,
+      "logical_bytes": 15323250267,
+      "links_excluded": 0,
+      "seconds": 27.75
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018-build",
+      "files": 1259,
+      "logical_bytes": 460187464,
+      "links_excluded": 0,
+      "seconds": 0.01600000000325963
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018-build-control",
+      "files": 717,
+      "logical_bytes": 226053498,
+      "links_excluded": 0,
+      "seconds": 0.015000000013969839
+    },
+    {
+      "root": "C:\\file-native-incremental-20261018-build-final",
+      "files": 1259,
+      "logical_bytes": 461657446,
+      "links_excluded": 0,
+      "seconds": 0.01600000000325963
+    },
+    {
+      "root": "C:\\file-native-qnp-20261019",
+      "files": 8,
+      "logical_bytes": 85162,
+      "links_excluded": 0,
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\file-native-recovery-20261019",
+      "files": 575910,
+      "logical_bytes": 5150064752,
+      "links_excluded": 0,
+      "seconds": 15.047000000020489
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-incremental-20261018\\handbook",
+      "files": 4489,
+      "logical_bytes": 245911525,
+      "links_excluded": 0,
+      "seconds": 0.061999999976251274
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-recovery-20261019\\handbook",
+      "files": 4534,
+      "logical_bytes": 258482758,
+      "links_excluded": 0,
+      "seconds": 0.06300000002374873
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook",
+      "files": 4972,
+      "logical_bytes": 289322047,
+      "links_excluded": 0,
+      "seconds": 0.046999999962281436
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\18\\01a14f52-1f53-7990-9b84-ebb0af672ff5",
+      "files": 9202,
+      "logical_bytes": 1118451863,
+      "links_excluded": 0,
+      "seconds": 0.2970000000204891
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\19\\01a155e1-fe59-7682-be45-f6204e9f8824",
+      "files": 0,
+      "logical_bytes": 0,
+      "links_excluded": 0,
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\file-native-navigation-20261019",
+      "files": 78108,
+      "logical_bytes": 901730220,
+      "links_excluded": 0,
+      "seconds": 1.3119999999762513
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-navigation-20261019\\handbook",
+      "files": 133,
+      "logical_bytes": 7629482,
+      "links_excluded": 0,
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-q-linux-20261019\\handbook",
+      "files": 140,
+      "logical_bytes": 9222787,
+      "links_excluded": 0,
+      "seconds": 0.0
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\b3fc\\handbook",
+      "files": 378,
+      "logical_bytes": 15795380,
+      "links_excluded": 0,
+      "seconds": 0.01600000000325963
+    },
+    {
+      "root": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\.git",
+      "files": 1682,
+      "logical_bytes": 225569144,
+      "links_excluded": 0,
+      "seconds": 0.031000000017229468
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a155e39b96-135e0",
+      "files": 15042,
+      "logical_bytes": 1050883003,
+      "links_excluded": 633,
+      "seconds": 0.5470000000204891
+    },
+    {
+      "root": "C:\\Users\\spmcc\\AppData\\Local\\pnpm-cache\\dlx\\0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc\\1a155e76749-e278",
+      "files": 15125,
+      "logical_bytes": 1051205486,
+      "links_excluded": 633,
+      "seconds": 0.46899999998277053
+    }
+  ],
+  "logical_bytes": 26795502284,
+  "files": 3363929,
+  "free_bytes": 201419194368,
+  "shared_git": "entire shared Git counted conservatively, not only new growth",
+  "older20261017scope": "separately censused/preserved historical scope unchanged; not free capacity",
+  "P_admitted": false
+}

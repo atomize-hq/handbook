@@ -1,0 +1,31 @@
+{
+  "core": {
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs": "a96816470ceaf82f044f5d00eda7c8ecce0bde09f6a9cf94f4608e29555a204d",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs": "0ed74eb1aa9f6796d1fd8bb0bb254933ab500fdcd4ab113bcaca4d97e635dbd8",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs": "43aafc4d800f0ba190f9f38f50733e04d8a738c623b73061e39d3699fd2ab834",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs": "9e3ad5197b97970ca44abe69ef96fa9564d330f8d46c260cd61cd1f2938628be",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml": "7e08fe410778cd11427f190e6c6991324c1a02d1c50c65a3cfd5e8d0dba6ab08",
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock": "07eca1011d8aabcf2e5508cd9b4954417dff9ab0c7a7a1accf06af719a81b330"
+  },
+  "exe_sha256": "1de6432fc24922f10a6e4a1eddb95e07f1e236cf4435723e4fd2320e5dbdc786",
+  "source": "4bde156323812ef18c0dea6798cfc2108aaad933",
+  "harness": {
+    "docs/research/file-native-navigation-2026-10-19/oracle.py": "4cee8d181d67c17ea684c784314f0a8c8fade51cbad383864f51b48fc75a91f2",
+    "docs/research/file-native-navigation-2026-10-19/focused.py": "da93f5819978ea08bf308148396baf0305cefe7f58c42d5adb6177395c782bd9",
+    "docs/research/file-native-navigation-2026-10-19/census.py": "efc320fa4ebe77e6abc04a2b3e067b202ad177ecd63a0de77a2aa320a819fa24",
+    "docs/research/file-native-navigation-2026-10-19/legacy-fixtures.tar.gz": "eeae73e002ce81539ace34d7bb3cd41e551b79b0516781cfb6050b181b32095b",
+    "docs/research/file-native-recovery-reclamation-2026-10-19/capsule.py": "1b997e6bc058660fcfe7246ee98a7b13317e63f7232acef73fef6c3987273b71",
+    "docs/research/file-native-recovery-reclamation-2026-10-19/operational_backup.py": "20aa1b2965fd294bbf11942e5d399c7944c1f699b11021c0349b57ee5ee10bbe",
+    "docs/research/file-native-navigation-2026-10-19/native-macos/followup-20261020/followup.py": "6f2969b7b813629a7b161f8230f2002ea7c43b6847629693392c01f33fa1f2e1"
+  }
+}

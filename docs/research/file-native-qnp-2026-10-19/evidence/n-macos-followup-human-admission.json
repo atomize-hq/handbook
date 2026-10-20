@@ -1,0 +1,21 @@
+{
+  "human_authorization": "Authorize20-minute follow-up",
+  "dispatch_utc": "2026-10-20T02:09:38Z",
+  "functional_cutoff_utc": "2026-10-20T02:19:38Z",
+  "closeout_deadline_utc": "2026-10-20T02:29:38Z",
+  "original_N_deadline_expired": true,
+  "original_censored_runs_preserved": true,
+  "source": "4bde156323812ef18c0dea6798cfc2108aaad933",
+  "native_binary": "1de6432fc24922f10a6e4a1eddb95e07f1e236cf4435723e4fd2320e5dbdc786",
+  "continuing_total_ownership_cap_bytes": 805306368,
+  "continuing_total_ownership_cap_files": 75000,
+  "fresh_followup_additional_upper_bytes": 268435456,
+  "fresh_followup_additional_upper_files": 25000,
+  "execution_conditional_on_fresh_actual_census_plus_upper_within_cap": true,
+  "reserve_free_bytes": 21474836480,
+  "global_logical_ceiling_bytes": 42949672960,
+  "global_file_ceiling": 5000000,
+  "global_reserved_inside_bytes": 1073741824,
+  "global_reserved_inside_files": 100000,
+  "P_admitted": false
+}

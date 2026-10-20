@@ -1,0 +1,3990 @@
+[
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462393.494387,
+    "seconds": 1.040053129196167,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4997120,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "8631bb2a68888c1ad306da71a6146b7df485fc874f72aa41c6717a0396379dc0",
+    "stderr_sha256": "d7f1a92c354ff70d8d4e5c22b1ca079a6ecb1c902375e343841304abd5d09972"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462394.535436,
+    "seconds": 0.03842806816101074,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3506176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "9cba87a112b0a2f6b34d2ad832688fe3cfe4603d465fca73c03bc7c5e21e12c1",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462394.574686,
+    "seconds": 0.036607980728149414,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3735552,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "921af2236eb626f559608a5bad9fe49d035bbb957138960895045e9738389086",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462394.6182761,
+    "seconds": 0.3822929859161377,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4751360,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ea47c0e8b9950486e9e11bda6f21c5e598ea8c9911851160e79632f30ae9bdd9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462395.001696,
+    "seconds": 0.040445804595947266,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3833856,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "99143e729d3ce2932b8e2960bedde0c6aeb563b493194df619a1049081a15a20",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462395.049359,
+    "seconds": 0.3664548397064209,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4751360,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "f73fa5fcce026ebbece4a5029013a1317cc460b0fd82ea6336c5d992fe7cfdc8",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462395.416909,
+    "seconds": 0.03800201416015625,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3751936,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "47cbe1eb858c05329ac13b21f9a25b1dbc717d4396ce8915c3acd46428593959",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462395.462409,
+    "seconds": 0.03907489776611328,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3801088,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "d7e9885f08ddac821bf7bead5f0d9d8da92afdd4573a9d4368a2f6f7a27eb9ac",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462395.502923,
+    "seconds": 0.2943699359893799,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4571136,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "c721b5aea8c3509a554d9da9a38e4bb304d23774dd20bc420462b945077cb3c5",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462395.7984588,
+    "seconds": 0.038065195083618164,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3751936,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "7b61d83f1c2f30b76de1d7715fb8157220dbb4be4b787631a262543690766aa2",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462395.842923,
+    "seconds": 0.11947202682495117,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3768320,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "011ecd7b4d5fc38510f46fd75a187b97d8377cde6bdfb2742d4179c8435c1ed5",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "cancel",
+    "start": 1792462395.963982,
+    "seconds": 0.03853273391723633,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 2998272,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "4b716b1a0b4bdb5dff79139acaab55f2b8c08e3f46ba57e3c81bd9c13bf50899",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462396.00403,
+    "seconds": 0.03941202163696289,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3768320,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "36c41f405a0bcbe8526412615beef14507dc20f388f92766549e1aced7216e66",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "packet",
+    "start": 1792462396.044766,
+    "seconds": 0.20494413375854492,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4751360,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "086e8dff17489bacfe97b4e046e4aa7d14501ea624677f377a3fa3cc38222021",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462396.252084,
+    "seconds": 0.24152398109436035,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4456448,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "8b6f034d57dbf61a6886f6ffbd3b73b8a569416fa36b4943afc6808e1b471514",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "prepare",
+    "start": 1792462396.495209,
+    "seconds": 0.06034517288208008,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3293184,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "c4560a1213012f7a862fb8650787be9a2ba83aaaf4aebbbbd7cc8c834839a006",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462396.5568,
+    "seconds": 0.0527040958404541,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3620864,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resolve",
+    "start": 1792462396.638156,
+    "seconds": 0.04015016555786133,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "6edcab003739f83e190a8920e8254ee9268d18ef63b18566cd511e723f8289b5",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462396.6801841,
+    "seconds": 0.038466691970825195,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3538944,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "9932f208d9338b83463d9f755a71afa2fd433f5bd690a4988944322a8ade2260",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "select",
+    "start": 1792462396.720442,
+    "seconds": 0.20450592041015625,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4620288,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "f42c58194dad452e8d7dc88fe58a0f6d3d3f8649e11d48cd9700df03393aa2a1",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resolve",
+    "start": 1792462396.9263208,
+    "seconds": 0.03902626037597656,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 0,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "7f8c5ffd8dff45dc85de14644bec102d3cab42127523be6e5c320ec96c9b8693",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462396.966672,
+    "seconds": 0.0658111572265625,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3620864,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "458f12bf5397c853769083068caabd01e993a70443c048415bacc3f3bd640e7e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462397.033945,
+    "seconds": 0.1985018253326416,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4341760,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "027940d7d1f4c80b69ee79d5a24b54a3db01817aadd414500cf152a2d740e570",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462397.233917,
+    "seconds": 0.1170511245727539,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4587520,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "2447a7d1e0aff28031343fa1be3f52297b66848f070c0dfaaf5c96f9a25d49b9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462397.352438,
+    "seconds": 0.04270601272583008,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3801088,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "1b0f2e6abfa54f5a122629e1b4170107eac07e2bd36950e04bdeaf5f0357839b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "inspect",
+    "start": 1792462397.402106,
+    "seconds": 0.04103684425354004,
+    "exit": 2,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "053dc63ffed3b7a609658daba67aa9d384b20157ca17d8c03f0000820fe97020",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462397.444791,
+    "seconds": 0.03906393051147461,
+    "exit": 2,
+    "sampled_peak_rss_bytes": 3588096,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "4b9f2700cf41e72b9d75507cc8f2d51b31db746386f2b86d1254c40fd7e8944e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462397.4875112,
+    "seconds": 5.199065685272217,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 6176768,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "b4d2ef77e236a3a81278cc092c47f9c07473a25808ea9a40608ece47f5b61998",
+    "stderr_sha256": "9d091a965f4d0b1b6360b105af1a7c010e25c75d89fc962b709dae53388cda8e"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462402.688301,
+    "seconds": 0.0372617244720459,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "622d28a72c064e397139634aacae2e9f6c2b9e6eeb426c81a69d4f37b6a32fa6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462402.727375,
+    "seconds": 0.038542985916137695,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3555328,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "31a8a49960f1e8b573cde1e991ae136d8a5691026abb60da4a9ba124506eb519",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462402.801326,
+    "seconds": 0.6850540637969971,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5095424,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "87d10eb8cfa96975bcc317be1df4047abf8996fa7fcd140343eda704398e0b45",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462403.488276,
+    "seconds": 0.03916215896606445,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3620864,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "58553d5a529d559a7b49aeebd21f3276dcbf359b50e60a330176ef505e98dc1d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462403.5675268,
+    "seconds": 0.5325391292572021,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5062656,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "468f744e521664ddb6e661dbcd6701ab5872e2ed3297560d999e75f2510ecf31",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462404.1026251,
+    "seconds": 0.039659976959228516,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3604480,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "9c88131ad249fd39fc88de391accdc8624b0066b4ce8735eb6543189d72b6531",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462404.182842,
+    "seconds": 0.042134761810302734,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3768320,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "63892c7f6bffdf11504b4f1497077a14c3021e34c320f177fd27db9d2c686b08",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462404.2277062,
+    "seconds": 0.5353837013244629,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4980736,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "4e7d7953bc747da8d09544cf38e61eb3b41654383d59b3aeb6e4160faef39e16",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462404.765771,
+    "seconds": 0.040084123611450195,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3620864,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "7e1f8fd6bf96fba6c1c766b3047dac3fa8bed221dfbf7120770648f8c2abc058",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462404.844286,
+    "seconds": 0.5295448303222656,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5242880,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "93803367e01e729f947aa28c7f063ecd1f03f119c4f6fafaf1b6e2017e8fd81b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "cancel",
+    "start": 1792462405.3762538,
+    "seconds": 0.040203094482421875,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 2998272,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e53836736b987fd1b3318fa165cbf5e28330dbe19a80ce75a360403204951df8",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462405.418872,
+    "seconds": 0.03857898712158203,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3670016,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "add01f0c44ba1514c1a6dd2761b588899dedd67d759eb82699b134955bcc2199",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "packet",
+    "start": 1792462405.4602711,
+    "seconds": 0.22968602180480957,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4784128,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e32824b5fc12ff55f61d1eadefda95fd2c24b107c4754839d12c4d9b9223a460",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462405.6937332,
+    "seconds": 0.3979346752166748,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4784128,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "af20a5eb40d3524b2b6e41682c63e033cfb87900644c4bd2b00680017aa1b018",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "prepare",
+    "start": 1792462406.094592,
+    "seconds": 0.12151479721069336,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4390912,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "6de8a6751743d60b9ed56eef02f442d79a91895c77f08eb1c0c4e27307d53e87",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462406.2191648,
+    "seconds": 0.04545927047729492,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3801088,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resolve",
+    "start": 1792462406.3801448,
+    "seconds": 0.03979015350341797,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "9be7252eacf7868c1583d28d5e7bc53ebabc8dd20e212f80d0b17eed3ee7589d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462406.4234262,
+    "seconds": 0.04084181785583496,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3457024,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "152738a77a9f12dbb8216103eb30fea80dc2b05390e62f0a111d039f6140e3b7",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "select",
+    "start": 1792462406.467156,
+    "seconds": 0.2119591236114502,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4833280,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "265d69639eb6b1421d0787c3e6b36a88c519e9a9cd95a9951c6847755aeaa039",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resolve",
+    "start": 1792462406.68181,
+    "seconds": 0.03909802436828613,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "f262abde083d6b782b3a758d319e20b60a25bdae5f020d07f2c3a36c224ad657",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462406.7236202,
+    "seconds": 0.2875709533691406,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5111808,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "8328455b72237250cd809ff1a546d3476542bd8d4501918df9a7883d631665a2",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462407.0141819,
+    "seconds": 0.2070152759552002,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4341760,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "6b714a1f53fb58740e718ab88487dd1e83aae7c4dfe1703a3d22650108f00396",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462407.224083,
+    "seconds": 0.4972269535064697,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5193728,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "9e0aa54e8c0dc43698ee3a1b9369f8cbab0552efe1c1e48fae0778503cbfa09f",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462407.724166,
+    "seconds": 0.037833213806152344,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3670016,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "afa161afa8eeafe885019e780116f182a633a21abfaddbbadbcb3d330ff54186",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "inspect",
+    "start": 1792462407.794652,
+    "seconds": 0.041433095932006836,
+    "exit": 2,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "c1081cb8d2e754d1142b4c8fb6c1586b8f0ae2750edfca9946f76c7be570595c",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462407.839309,
+    "seconds": 0.037867069244384766,
+    "exit": 2,
+    "sampled_peak_rss_bytes": 0,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "f4d18f723535f150003fd5a4fb08040916424f5f68e57358a8b0049f2170ebc3",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462407.880333,
+    "seconds": 0.8305790424346924,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4997120,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "4d527ad8ea79079a94b58accd4aacbffe4ae87e6ada875f1a327ddef3005724e",
+    "stderr_sha256": "c6eecf58dfbb1a7af3132d6d3ad9b6801bd418ec0e08dad807b0af98bd52f453"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462408.714102,
+    "seconds": 0.04000401496887207,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3506176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "0e47af511278abdd305d44072953f69f32462e7b9629aa7faa595e8d7f4f9cb6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462408.757097,
+    "seconds": 0.036535024642944336,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3850240,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "57c6bdd2f4bfbafa7ef6f51e9fd6b701cd5a72bf86e1a586dffd34ef231a50e8",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462408.802308,
+    "seconds": 0.44287586212158203,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4800512,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ff8db72a35cde6cbf8c5dc946e4618dc1dedde0349f25eddf743a6288d5d0602",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462409.2485492,
+    "seconds": 0.04058480262756348,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3735552,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "5e4c05021eedbfbc11f24947f3993e2c3802dabf8cb70cab42f1895dae38e5df",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462409.298032,
+    "seconds": 0.45330381393432617,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4767744,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "2f3e2b51c4e064bda41d926c9a2052e9b1a77da783b5e1ce87885f79bd337f2f",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462409.7551842,
+    "seconds": 0.040709733963012695,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3833856,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "f0da39ba9c9aa76fc7dcd680d1677f615c4b8ff1654144b4a402080856a377f7",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462409.805137,
+    "seconds": 0.037847042083740234,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3899392,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "6f42c40065513ac21f12dabbd4957f73e0a6f3bfd174bb4371770db005cc63d7",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462409.84653,
+    "seconds": 0.41142725944519043,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4800512,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "2001b10a6d0504053ccf2f003cb8309d876d67a047ad7d46f60dfde0e4addf28",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462410.26228,
+    "seconds": 0.04226803779602051,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 0,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "32454fea80c9f5d960b1f39c0af9a923510dd2c38c41db8022f653df22d1e93d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462410.313644,
+    "seconds": 0.12389802932739258,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4505600,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e2a4932ae2d0d0b97cdd64f6c30d0fe3db1094593914caa77828dccee156c696",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "cancel",
+    "start": 1792462410.440993,
+    "seconds": 0.04010486602783203,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 2998272,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "1d26077d93405b91a5f04c4e3c4d5f6ebe7290f95ee665238f7444a0bc58b7d7",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462410.484494,
+    "seconds": 0.03933596611022949,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3751936,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "9f2d7b828da4d6ace26170ece9e46189e2b29d2aeab36d42032b8df0c39716e3",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "packet",
+    "start": 1792462410.5273468,
+    "seconds": 0.2127213478088379,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4767744,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ec4c7d6f441c3219bb14d3fae5050c89f90238e6f35cb48f377d08378d894eb8",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "prepare",
+    "start": 1792462410.744398,
+    "seconds": 0.21764302253723145,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4521984,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "3af7ece6f3f30b4917a4484b4569095657cff328dd6c9d42cd49b4e402925603",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resolve",
+    "start": 1792462411.011848,
+    "seconds": 0.043665170669555664,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "ac93957abf69a8b0b66be5aa46f759f725f253dbf77315220e16abf7e764fd61",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462411.059652,
+    "seconds": 0.04010295867919922,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3538944,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "7a4e52fc9c0c40c79b0512326161bb1920cf7797b2bd1d083b9c9326010b62e1",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "select",
+    "start": 1792462411.103358,
+    "seconds": 0.13367176055908203,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4718592,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "5c36e316a43004359eed84f6df850039f7a3ad96539bb108361db3a172309e5a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resolve",
+    "start": 1792462411.240709,
+    "seconds": 0.038787841796875,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "e0e617c4723df1ccb87c785f648d335d8dca7796ab7ef32c94b707090d60e4eb",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462411.2829351,
+    "seconds": 0.3020029067993164,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4620288,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "b142f2d89b3305c8a2c3d71b384762776a9c01c9419c28ad4c33a34ea1cb9598",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462411.5888078,
+    "seconds": 0.05891728401184082,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3964928,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "94076c14dcbef0ff8d11961e8433d0fcc9616107c6e86a00c3940348027e4b0d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462411.651372,
+    "seconds": 0.041021108627319336,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 0,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "f8427b2f03c0ceef1905a5d4c1ecf982aa0fc283c87ff334242499314391305d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "inspect",
+    "start": 1792462411.7016451,
+    "seconds": 0.038019657135009766,
+    "exit": 2,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "d36d9335f330d4a75c8fab58a8e7212e428d30e17a48c4f06427cc5411cf08cc",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462411.743666,
+    "seconds": 0.038667917251586914,
+    "exit": 2,
+    "sampled_peak_rss_bytes": 3620864,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "62d18a3d243943a9abe5741c435a8cba96bf9a8c015e1a858208c6c4915df95b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462411.7856379,
+    "seconds": 4.161684989929199,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 6144000,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "484919495b7d7a3853582432fb464b4bf94ec090a8594ff46c58743938f9cbf3",
+    "stderr_sha256": "ee61c8cf4aba18d9e3c1c67e494aae1a4167a4bcbd4cf3b899a9a2ed100f1a81"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462415.950896,
+    "seconds": 0.03768801689147949,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3440640,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "911421348910bc4dc5d6d37a7efe8fbdec6109349360572c7f2fd1bdc0fb867a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462415.99206,
+    "seconds": 0.04132509231567383,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3670016,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "21d3a4bfa22658659ed34188bc3558bb33d0fc364de34c38462816216b54beb5",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462416.075043,
+    "seconds": 1.3731279373168945,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5455872,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ba8cac08199ba6483443a04e6afa582ccfe07c9d7fe6a6f1e2e8b1b2445e4b0e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462417.453114,
+    "seconds": 0.04601311683654785,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3915776,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "5cd842cc035bdb4e3422cf2cf44bf172b32dc78c868f859fed49d0ca7737d9b9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462417.5553422,
+    "seconds": 1.5089147090911865,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5554176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "d5f30c1e1a48ad8d9cb893d75ea727282085e89e620d1ae89a580ce1359b9ff6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462419.068628,
+    "seconds": 0.037969112396240234,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3751936,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "5ea1896c04060b081e3c664dd5ab66e37d5b2a3bc91ae50db4a473b9dc98d2d3",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462419.149451,
+    "seconds": 0.04182910919189453,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3670016,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "1494aed4a751f6233479a15fba41e8d327fa8aada10ef1d0be22b2e81251c001",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462419.196203,
+    "seconds": 1.2920019626617432,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5521408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "41302b98ddcdc12ddc453999958a33fed981326d2af3cb52d8892e6ded15b45a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462420.4931688,
+    "seconds": 0.04050421714782715,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3768320,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "72ce282b7136e8c9dd06dbe0ed0320d954a58bc1c6ba7b1e7f5d1f8cf8e57dae",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462420.575583,
+    "seconds": 0.5491409301757812,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5259264,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "c3062ed23ef19ebdba4ef1b22926c9bd6d72a3e8f1658b7f69035a09a5d4be5e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "cancel",
+    "start": 1792462421.1294332,
+    "seconds": 0.04136776924133301,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 2998272,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "2a061e15b2342605400d2eeab2e46a68e6971c918c614f30d5311947f0cf3b20",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462421.175738,
+    "seconds": 0.039456844329833984,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3670016,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "d350e649cae3e4d513282de72b9d13e4a31f037c31afdd7502956534241600c6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "packet",
+    "start": 1792462421.219689,
+    "seconds": 0.22841906547546387,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4882432,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "08cd834fbad0adb823b41d0da716cb3040b3d67ec81d81d448f0d2630725e3d1",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "prepare",
+    "start": 1792462421.4534342,
+    "seconds": 1.0044877529144287,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4849664,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "09cd71ca654818f957505c419f1331e02c748e97b941fbfdde937176e5b91c0f",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resolve",
+    "start": 1792462422.692041,
+    "seconds": 0.03936910629272461,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "54d85b1a2d0f3c45e5a7301ca18702b53de2dbe0886cca134e5aed510e598ae7",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462422.7369359,
+    "seconds": 0.0400090217590332,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3457024,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "f7af7a171033671ab90b7c8b625f4bcc417bfdf2b5f7ee70beb66d0db91be9f6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "select",
+    "start": 1792462422.781842,
+    "seconds": 0.20008111000061035,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5308416,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "3123e92bfb5ed120335edcc42750aef03c9ef5459612876bac7cbbfc271c264d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resolve",
+    "start": 1792462422.9872692,
+    "seconds": 0.039914846420288086,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "b4428c6dec808c5a9a905d21bc5c45fd73c03ed80eaf970bacc9162630cbcd8a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462423.032646,
+    "seconds": 0.9834010601043701,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5144576,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "dc1eff6e12c53747d9095a6f96b059fc25a00ed82df6a51f6fe1a51dc7fcb192",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462424.02112,
+    "seconds": 0.4566340446472168,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5275648,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "65f1947ff5865dcf6a616b299c7e124176bc471592ef21bddc9812a2a90873e0",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462424.482643,
+    "seconds": 0.03877091407775879,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3817472,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "8ba856f0f8ee17e4dbdfed29a3528e47884aca8469c9296d1049d303408ee09f",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "inspect",
+    "start": 1792462424.5598102,
+    "seconds": 0.040493011474609375,
+    "exit": 2,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "038a4102e09ca1715e8599b86ee0064dc1ee37bfb8e89f76ff7394b5af710fc7",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462424.605665,
+    "seconds": 0.04019618034362793,
+    "exit": 2,
+    "sampled_peak_rss_bytes": 0,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "06c2de45645d73a596af007916dd89b20a96e27c6b1a1cb508c418a996e20053",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462424.650955,
+    "seconds": 1.2201440334320068,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5095424,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "4d61ce64656995126a10c795f951d613c4c9714f7097967fc0ea1054633bd425",
+    "stderr_sha256": "cafe9b04c7cfce6993dd6343dcc4b8a02ff20cd3bb914989f8a659230b7765fa"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462425.87654,
+    "seconds": 0.04040813446044922,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ce0d99d99a4eb9aa42fd23c930b7996ced1e62d80a44b5a8daf06e67de5856f3",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462425.922826,
+    "seconds": 0.24211502075195312,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4489216,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "b24586ae16579e5848fea07a4220cf4ba582e8e08189611663c277bfca16dd1c",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462426.1702971,
+    "seconds": 0.03919386863708496,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3637248,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462426.217537,
+    "seconds": 0.24448609352111816,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4538368,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "71a39b4c1243497703240a69877e657265c3e6cf4f7b893bd71cba6c70dc8973",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462426.467675,
+    "seconds": 0.20351719856262207,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4390912,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "9a72e4c004c00cca30a4f1280de54564ad3b90e644120ae3a71c953b1e2b05fa",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462426.676414,
+    "seconds": 0.07476186752319336,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3702784,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "fdcff2d43e5588b789d253e00c8f6edea77e0003f32cc33cee367eccee370e9d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462426.756834,
+    "seconds": 0.11914706230163574,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4587520,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "1b8aee174a53adeb000394b53ea0041502ae68f3cf6db5e44544899abd94bafd",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462426.8812249,
+    "seconds": 0.03973102569580078,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3915776,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "db71e1edb29e6c3e5d8d3cb140a815ab87a1d90c4c137dec65a6bf5e5afe4ff6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462426.933377,
+    "seconds": 1.124258041381836,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5079040,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e84bf03ce7977af859dd8794ca602bfddbbfde5804b04f34b58b7b3c6505a95c",
+    "stderr_sha256": "25d19085d3829146f0aba4bafaaae46d627919a4a536c9a0a823be35534232b4"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462428.063394,
+    "seconds": 0.04048490524291992,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "3cfe7966f98dfa19c29a0b9e3600ecad20dd5f0c940e72c5aaf3a828f04b25d3",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462428.110055,
+    "seconds": 0.28557419776916504,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4571136,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "fa7e292895b7deafda6b629647711d941fdfedad54c105d9eaab37b1219d42d9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462428.401257,
+    "seconds": 0.05082583427429199,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3833856,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462428.460109,
+    "seconds": 0.2935299873352051,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4571136,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e76e8bc5e49b967ae0700877a8b2473b0039bc2e7b25483067b95c17e8359aff",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462428.759725,
+    "seconds": 0.2042999267578125,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4308992,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "37cb71884a51397217bd478b3cc3d58e01a3a597dcf7f874c09c8a31d6056149",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462428.969522,
+    "seconds": 0.06879496574401855,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3964928,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "325bc5f2f4b9d07f1858c4b68be50fda066fc35b0aa62fb440b871811d14a34b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462429.043597,
+    "seconds": 0.12302184104919434,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4505600,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "29183d89d743ba7a0593278ecf2b9af13f82e627cb1bb0345abbb56337859cdf",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462429.17211,
+    "seconds": 0.04126596450805664,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3932160,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "abe569fbd24d072372a853254b939f93a7f0efd145181c21d6ede0bb780e915c",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462429.2249799,
+    "seconds": 1.0369350910186768,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5046272,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ca2ac93f003db3d527f728b9466f252bd47d1779589b781f2d827e7f78619010",
+    "stderr_sha256": "ea63c0374b7b11c7305d28ca6a7223fb4ffe92603622b5b580dc8ffc80b66411"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462430.2675798,
+    "seconds": 0.037644147872924805,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "f78f6d9a4989755abaa0f30fb1fb9a76fa72dc6a95d3c342d754f0219df7a28e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462430.310776,
+    "seconds": 0.2882041931152344,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4521984,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "34cd6656724f47e86625c5fd0f39cd27ebe8a3e7653768756070274c9d0c62ca",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462430.605164,
+    "seconds": 0.12030386924743652,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3817472,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462430.735009,
+    "seconds": 0.23583483695983887,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4521984,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "138e40871907e436c2c9278c20246c27766290669dcffa749323f8645f80dbd6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462430.977211,
+    "seconds": 0.15846800804138184,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4292608,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "9a51ac8385bdfc3d238b010eeb1bbadd30501376d96c26d74f00a04b2697ae70",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462431.140984,
+    "seconds": 0.06872391700744629,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3670016,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "f84b1fe12ee26cb6f569a457e325f1a122015f6beee7d1d1f0bb0d5cf6d3c7a4",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462431.215334,
+    "seconds": 0.12009525299072266,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4571136,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "1fe30b0aa86febbe8539e966876bedf92c6e60e13eb8b407bf881c70407b70da",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462431.341063,
+    "seconds": 0.041320085525512695,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3751936,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "8d4aa4fa67490cd3e2b463841d5091fe0bd11708ec455732085020f1d394e4b2",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462431.394059,
+    "seconds": 1.0123729705810547,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5095424,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "5c5fb4c72a5c96c07f8fca4583e2843ea7d0e92ebdc5f6a44712d3298ad85f59",
+    "stderr_sha256": "d453754bfb660cb43b4def8dbadf2ab15ea0e52315090d26df75aca58f2d42d2"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462432.4123,
+    "seconds": 0.03966689109802246,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "1c6d5a0406e9c4bc1330dc8c012de5c7c032b3e049daf389015df47ca0713875",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462432.4581509,
+    "seconds": 0.29538512229919434,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4489216,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "0233217bc3b64c4ef25cfd08e70643768c0038eca832826f8d142aa0a2d4ab69",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462432.759182,
+    "seconds": 0.0631570816040039,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3784704,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462432.830799,
+    "seconds": 0.29446983337402344,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4571136,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "df035fd4cce9d5e62ffe24fbb6f70406e3a02088da5416ddc3933c71450f937c",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462433.131316,
+    "seconds": 0.15021419525146484,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4276224,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "c536e4b068e7c2aaa8567c245e7ac7c43cf0f3637dc713f649f1e3240dde4651",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462433.287454,
+    "seconds": 0.07605910301208496,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3833856,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "57be4cb11cad53ed4929b2f0203213560142257f0ad4bd51a713bb0f07298604",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462433.369826,
+    "seconds": 0.1215968132019043,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4620288,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "db73bd5f7432ce4d09421250c7b00a954bab9ce7db203906326e7e3351ba5b75",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462433.497348,
+    "seconds": 0.03811001777648926,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3915776,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "5363eaf59d1882928f69834d4af55ee69225c796014e9493f53bf724c1c552b9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462433.5477571,
+    "seconds": 1.0341386795043945,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5079040,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "c50b603b82a7247c20d30da6a9618f7677c1364f0615ecf172216427182ec166",
+    "stderr_sha256": "9b306e0a201f12ed93d87942ff0048d329f511eff7ad91f51c212d1a7d31f7fe"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462434.5878348,
+    "seconds": 0.03808927536010742,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3522560,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "74861d124cc947f4212fab9fa75ec1082805fab47ac5121e1789614dac51959c",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462434.632431,
+    "seconds": 0.24344682693481445,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4472832,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "9e74c7a8d03b2375aae108c8f157e9d840d5424813e7b9a40cd985749105097c",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462434.8820858,
+    "seconds": 0.1159982681274414,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 4096000,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462435.006381,
+    "seconds": 0.2365880012512207,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4521984,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "1470194aeffcfc6a3dea60487a5770b692bfebfa59da3a5536ac6e6de109aab0",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462435.2486851,
+    "seconds": 0.12323188781738281,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4325376,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "867bf8c3830b1e93ab99ba8881e557be469431b5262d5edc392a4481afd80eda",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462435.377835,
+    "seconds": 0.06893396377563477,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3653632,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "7ec67a8c5e5d7bf5cb59f7c5f1b3a3fd55b05b58313f8b2f6b070ff89e7daf74",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462435.452539,
+    "seconds": 0.12636899948120117,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4456448,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "f4f9403bbfc492f146c78489d777f36ed216faac7155f13df994900a7c4e00a5",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462435.584932,
+    "seconds": 0.03839898109436035,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3915776,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "bca7105e72f5a61eff002e8ed4360cdda183b54660530f8b54bf0afba036bb81",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462435.6366751,
+    "seconds": 1.018925666809082,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4997120,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "45d321dc6e200a97436748f7580734b395baf27b80fb299e256b45aad7854bc5",
+    "stderr_sha256": "495221ee582a7607ffecf6bab78af8a6141d3bd2dac2e9a77d9b10068a627cad"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462436.661963,
+    "seconds": 0.03967404365539551,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "301dc99f828675cb93b6872ce7bb77e9ac21ab5427b0c8741256e3bb9439f4a9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462436.708305,
+    "seconds": 0.24284005165100098,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4521984,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "c486253b9d7ef31f134e6ad8c681e6d31684c8dfa649ee974f88b90d3afe4f26",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462436.9572532,
+    "seconds": 0.12326455116271973,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 4243456,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462437.08939,
+    "seconds": 0.2409517765045166,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4505600,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "b7c8da7bc01f020dd9e3acaafaa7ba88b54828620452089dd92b062088ad4f64",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462437.337274,
+    "seconds": 0.12495088577270508,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4390912,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ec0ad4fbfbc3541da48714a85d7ff623c0a1f984a50972ec146fd3d08dff1416",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462437.4685729,
+    "seconds": 0.07573509216308594,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3866624,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "10b7aa96663d02e910ead64fe0f60b29aeabd0d74dbaa4667bcd1e4f3c21c838",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462437.550745,
+    "seconds": 0.1257009506225586,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4505600,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "072e5dd884e475fc682341d3445865c7015ac25f616ad0bbef9cb54cc539a00a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462437.682869,
+    "seconds": 0.039977073669433594,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3883008,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "693c57e1848a6032586d1fd83d5200facafe6a224f90b50dbfbc7da30890fd69",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462437.736209,
+    "seconds": 1.1077470779418945,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5062656,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ab35403e1a737b49fde3398905d0a6e87886f315358f8815fe7f949688c4c8c0",
+    "stderr_sha256": "4236a1007ba448eb8861072959c1e986129c7524bd0c92c1274998a8fea0d927"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462438.849935,
+    "seconds": 0.039414167404174805,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3506176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "a0e8dec02d411b3ae92cf63010bf1ca097be522792946fa1ef679e3cd0365483",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462438.896309,
+    "seconds": 0.22748708724975586,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4521984,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "6e95009bcf33d330cff8edb0cb0bd51dddbdf1716710b8b409ec63545906b5ac",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462439.130614,
+    "seconds": 0.11560177803039551,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3620864,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462439.255584,
+    "seconds": 0.2261829376220703,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4489216,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "8e97fb3c7f6d9fc498efc75f7104342fb0a360b37e36f2455214aa9e5eb624b9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462439.488032,
+    "seconds": 0.13765692710876465,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4259840,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "81abf11e1a8b812235106f70ec9a98023bccf0b21ec8f6496c008cfbcc4b7de7",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462439.632403,
+    "seconds": 0.0708773136138916,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3817472,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e6ea8033906ea76e853202eca814076ce355655f6915df906837d3f7244df482",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462439.717231,
+    "seconds": 0.18151211738586426,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4521984,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "19a5445a057a61266957ef4283fca25fe78619ea41910c30313b0127594df72a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462439.9149282,
+    "seconds": 0.05697274208068848,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3932160,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "4a59193beea25d6a118679a49529028de3bde6b05d0a52c634d7c38fca65150a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462439.986086,
+    "seconds": 1.0391991138458252,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5079040,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "304efbce13c7eedc9ac645f07e9ccd95f554e9655fd4d04ea300ea22bfee4351",
+    "stderr_sha256": "a756a520c165856dbc16a40459abda891a726414b8395dfaccb23cc9ba9700c2"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462441.0325272,
+    "seconds": 0.03966689109802246,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3506176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "3ccda4aeeb45b068d3a21a0cab63b47385e3bc93c6c9bc1ea033a7758111452b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462441.078559,
+    "seconds": 0.32811903953552246,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4571136,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "fb968d40f5f363569a425881265ba54e5e56577faaf5d39e1e39fa0e9090d853",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462441.413816,
+    "seconds": 0.22590112686157227,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4538368,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "558ea97bf086eb4b503e58db69dc5b6d94dc5b063f43a8b62623234c2b1bd463",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462441.6466508,
+    "seconds": 0.04211020469665527,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3883008,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462441.69749,
+    "seconds": 0.2211010456085205,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4554752,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ca0b94dc745b2cd5ea80929184dd6b8dfb3af90611bfb640950519f5f0d1c4da",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462441.9257889,
+    "seconds": 0.16580915451049805,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4276224,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "de60f2fc8e3e21f601542ba90d7c9ad8529ffc6b39a755bd8f2a85d93a8cbdad",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462442.09863,
+    "seconds": 0.07056093215942383,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3817472,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "1e5649853e92e3f1644a6c22ae63b3e3647562b75cd0a5ef8690b9f30bab6793",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462442.176395,
+    "seconds": 0.1181480884552002,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4505600,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "9427647aabec7992badcbbbf19d6e40a43935bc2fcfa6806e63ddd80445e7e45",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462442.30095,
+    "seconds": 0.038847923278808594,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3964928,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "8d1b82a0a0946d3cb6261d0f27ba95a5c371868940d63643ed560a331bb22a51",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462442.352936,
+    "seconds": 1.104686975479126,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5013504,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "c1c3bc8748e3d76a5e6721265fe9ba90ccd9bcee198cf46ca21730cfa947c86f",
+    "stderr_sha256": "4e34d3155d3e3cbf27a127cefb62af08ce4fa8f6af676eefd3ffda74e12b2108"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462443.464982,
+    "seconds": 0.042478084564208984,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "b10bc96f5ac027c562695836aa2155829383a3d05e750b0fd2ca01a46a0c5ab4",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462443.514317,
+    "seconds": 0.36879992485046387,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4866048,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "1620db5342f832ddfcbd868d30aad6c7b18b355557d460457b9fdedd7d0b32fc",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462443.890738,
+    "seconds": 0.23928117752075195,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4521984,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ca69e54172210d9a79db9db9324b5926429fea33167d816ebed22bb88c86489a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462444.136708,
+    "seconds": 0.057238101959228516,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3801088,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462444.2032251,
+    "seconds": 0.24407386779785156,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4505600,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "a0aa69dc62cc3999c6ce4031498a5f38249a9b48acbd7fb3bdc197108cfaeef4",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462444.454564,
+    "seconds": 0.21836185455322266,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4407296,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "563fd2c61f5f6c171726317c6c0165ee1c26dcc09f6bd12b53218d4cad759630",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462444.680149,
+    "seconds": 0.07807302474975586,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3932160,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ce57c8a924255fd8aef2e6b44e527f95fa5e1d084c92a80c8a61aa7b6bd45549",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462444.765305,
+    "seconds": 0.12407493591308594,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4505600,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "6f4f22bdacdc3b2551ac4d751ec9d2faf27fbadcf4bd8a404e53630a68187d30",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462444.89699,
+    "seconds": 0.0405879020690918,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3981312,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "0ccc16b8dbc99a31d101fc2c86b73a99f5c16b7fc643747311a92584d4a37a7c",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462444.950542,
+    "seconds": 1.2169849872589111,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5062656,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "1f0f9e26188795a44bc8c53b7924b5d93cce1a085be81c0ac01cbd8a1a1c0f99",
+    "stderr_sha256": "c48f3961223ecd5503463c4f83bed664b0ebb166be43dea840812194107afa3a"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462446.1753118,
+    "seconds": 0.04153919219970703,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "0b5ad5e6fbf7f1d8147f37ef9ad3ff64f4a4d4f74782dcf9dce2994130e807d5",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462446.22503,
+    "seconds": 0.3752889633178711,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4898816,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "87f97fbbe8ac409146d9312be934da3c1ee4be9e506b320f5fc8482612270059",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462446.608035,
+    "seconds": 0.24943113327026367,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4505600,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "03411205fe207a5b6e0b19cc0be993a13c58e2ddfa11619a939734b2cf9e66ac",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462446.8650749,
+    "seconds": 0.04207801818847656,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3817472,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462446.917079,
+    "seconds": 0.28994107246398926,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4505600,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "6959af4951192e862985680787e5b4b1a220693b755d848ace0bf3cb0b1014ee",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462447.214634,
+    "seconds": 0.16769003868103027,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4292608,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "608c998b63ee5589e0ecc763671574474d6318d13c73a8d27647405f3f0f38e8",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462447.390368,
+    "seconds": 0.07411408424377441,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4014080,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "29592c0b04663d65340727d47694ea244447bc7ea24bd8431ea6fdf0f53eb741",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462447.472113,
+    "seconds": 0.12111902236938477,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4587520,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "9c6c16fc3bc5c132bc33fc3ce88ed92b3649add30135dd2fbe0574c8e4cc4116",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462447.600659,
+    "seconds": 0.03904104232788086,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3981312,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "9cc291c5680accb1b924bd43e36fea3ca1271c79b53857087ef2f5775d27bfff",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462447.653344,
+    "seconds": 1.0590341091156006,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5095424,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "d4a0fbea86675e234d1f62b953c07259ddcfc0c1da29d84dee9f8c160ad4cf56",
+    "stderr_sha256": "cdb7f5e45f4b53da67e46e0c10e7c376fd14f899662f158da27c18ad14dba2cf"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462448.7196002,
+    "seconds": 0.039447784423828125,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "2d60491ab3ea01bb85cd681ae0a870900ad7f561b07dc10625c4221d0c3f452e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462448.7667341,
+    "seconds": 0.364577054977417,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4833280,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "414df10e8616ef02db6240ae169e231e3d02dba8031dd6f95b66e72538afd900",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462449.138247,
+    "seconds": 0.23011493682861328,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4521984,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "0f3df5a9848a9c6275a34ced1e5ae5dd125e2556f05f5302f630caac9c8177ab",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462449.376307,
+    "seconds": 0.04103994369506836,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3817472,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462449.4274812,
+    "seconds": 0.23774385452270508,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4538368,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "6622c7bf87b56ee6cde6f5a1efb172e8c42ff6addd93cc36ad3aaa6003c782fe",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462449.673548,
+    "seconds": 0.206956148147583,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4276224,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "c730e75edec389780c2254ff0ca8d1583377f9ae1fefab19350505debb61ff33",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462449.887818,
+    "seconds": 0.06841897964477539,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3670016,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "c6d53ee15c44462791906c73a4fba30a79fae0a1316d1eb43d4d3959af21fabe",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462449.9638689,
+    "seconds": 0.13048815727233887,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4603904,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "91b18763741ba7e22ad61aba9886033279d448e0039813a6a07eb62c74e6a827",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462450.101902,
+    "seconds": 0.03974103927612305,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3784704,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "f88bdd1ab19f211189925379657633c32e25418cdae75e597d858fdede19b738",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462450.155117,
+    "seconds": 1.046130895614624,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5029888,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "9dcfcde450cca74e85f7de3de86f3b08b244d74b3f391e085fc1460ea1d5d71c",
+    "stderr_sha256": "67300997252f93cd53d7cfff212e4a3c5f1429696e7526198ab08fd09bd2a53a"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462451.209162,
+    "seconds": 0.03918600082397461,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3506176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "4281b83852efe42d8a75714701c479f4bbb085e39a7b9187bb262519432b550b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462451.256279,
+    "seconds": 0.3775501251220703,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4489216,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "11b431a600b09309adede03137a1fd8eb1b5bbd173964df9dc5468a1b528cb1f",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462451.6416829,
+    "seconds": 0.22943806648254395,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4505600,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "1cbaba7d2c9fdc909e113ba1e83837de43db93f85e35a75fa62e67981576ac38",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462451.878721,
+    "seconds": 0.0781850814819336,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3784704,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462451.967146,
+    "seconds": 0.22175908088684082,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4456448,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "be130b1cf4d6eed6ab476154e2a0a69d88ab50d6d8958751304de3692d3ae994",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462452.1969228,
+    "seconds": 0.11901021003723145,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4292608,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "24382ad7cd1006793ebc7a8e0d0967af4f6d86ae0bef0f28e6e7d6db4267800e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462452.323589,
+    "seconds": 0.07316374778747559,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3932160,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "eec1e5894cc2b7fc334aeee59484db7bc6bf5de8419595e27fdb7738136ce34b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462452.404511,
+    "seconds": 0.12169289588928223,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4489216,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "5df30865d4d58b0e2a02cc4949c6dd42b86f878c5c2734c53afd6d9fd6bc0ccb",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462452.534116,
+    "seconds": 0.04026985168457031,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3751936,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ef70135c479638f7c4851b9bf2461e4e11756a7dd0a007de4e6cbc3274fe7534",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462452.587908,
+    "seconds": 0.9711549282073975,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5013504,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "640c9bf62868408fda7ada9f6c698f8de0a36cacfc4a9b7c5f2276bc2c9bbe0d",
+    "stderr_sha256": "a5679e0ec0f6ccdb5693c0427722c3d7dc39423f905ab81786109a104241272e"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462453.5668402,
+    "seconds": 0.03817582130432129,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ddc4851653b283f4db0e7762fe1ff72da224c61c0743df7a40ab5aa84c8e90b7",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462453.6129081,
+    "seconds": 0.33623480796813965,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4587520,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "93c56d028518e0f1a9bd4c23a44ef1dec037660e9699b9735e50be10949c4d5c",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462453.957264,
+    "seconds": 0.22379517555236816,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4521984,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "8a97b7427bb885d7f006cd4cd5e0f0cb38cbe4d3c4a62b162bb22369cd637ce4",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462454.188917,
+    "seconds": 0.1250441074371338,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 4308992,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462454.3251321,
+    "seconds": 0.2370150089263916,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4538368,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "b0580c7c7f7d1966e6962e483fc53a133b074f44da6515ca2e18f63b94dfc050",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462454.5696158,
+    "seconds": 0.1262061595916748,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4390912,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "c6768643b2dd1612ce77f031c57c9f3b9222ce92e468c6760e508a4acb6fbb2b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resume",
+    "start": 1792462454.704234,
+    "seconds": 0.07284212112426758,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3817472,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "b1e834d1d4839c0d62b0d7b6f0b224a5e66972ef7f2b1005fabfbcac93f6913c",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462454.785184,
+    "seconds": 0.12027502059936523,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4571136,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "03bcb706b247fd25544ba5c791bf19b05be564206c3222a7cd1dc44a65eb67b8",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462454.913312,
+    "seconds": 0.0411069393157959,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 0,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "0ed0160d9302e01cd50f72934bd0f96c6ec9e2e8c40cc783a618834bcaff39a1",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462454.96837,
+    "seconds": 1.1136410236358643,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5029888,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "820d70fb7e939fc0b4de48ef8ce46e66ae7810b776145fc7758408b31f336686",
+    "stderr_sha256": "131cb3f76c812dd7896097b596f0de3b73e5165898a76f73f764484895f15f24"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462456.0897589,
+    "seconds": 0.03930234909057617,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3506176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "172ea6b027a24543b6e2e5292c7bfc9c2d8f0211d43f25f1975ee310a282f7c7",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462456.13679,
+    "seconds": 0.49306488037109375,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4898816,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ab4c06937beef0ca19c394f52785f95d453ad9e6cd4ca2c216536fbb943ad545",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462456.639222,
+    "seconds": 1.4151320457458496,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5029888,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3c95b68b1ca6d2bbe326a60539a298a643609c12287e03be24f22ecb02a9fbf",
+    "stderr_sha256": "6f86aea863a308d93df351dba59d3532101fbe507f551c86ac8b19597cca51ae"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462458.0626209,
+    "seconds": 0.042684316635131836,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3506176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "fb2e83cbe82b1b859e905a3964c0a8c355deb7940d6608a9d39c83f5143933d0",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462458.113878,
+    "seconds": 0.22848296165466309,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 4341760,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resolve",
+    "start": 1792462458.3513129,
+    "seconds": 0.0443110466003418,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "c9a5afc54966f585f1733dd9b941a6f79c51229d48b8eb8342093d8bc60d2f6d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "checkpoint",
+    "start": 1792462458.403991,
+    "seconds": 0.2530350685119629,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4079616,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "be42d24e7b1c089ff88cb2787791ca904772a3d7ccf12402b43574ba97c709bb",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462458.669309,
+    "seconds": 0.14720892906188965,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3801088,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ff8a2091c3a2c399d40c5838d1863823c4ea2f06c8fa4d5aa2f17c862a32e4e3",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462458.836881,
+    "seconds": 0.17411494255065918,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3817472,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "8ca0548436005e216dc66e37923b8bfb84b292f2dfe035e65ed5fa1baefcd0df",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462459.031184,
+    "seconds": 0.09308004379272461,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3588096,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "71f0163bdf818e72a873ebab5a1e21bae74030fcd824c15bb66aa8313006b2e3",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resolve",
+    "start": 1792462459.137166,
+    "seconds": 0.07152891159057617,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "0dc9ea1d040dd37fb8c1bad4f0e2ae0468343ed900a8ce5016557b5a9b0f527b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462459.223666,
+    "seconds": 0.19547200202941895,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4128768,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "42936d7bec0db3e11c82a7bfff924ceb20efc9b75b156280258406aabd02b408",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462459.431464,
+    "seconds": 1.2840900421142578,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4980736,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "6ee0e20de36d86699e6dd67a5eb59833907773d702aed517828c396d4ac730d8",
+    "stderr_sha256": "540f3837e3e5cb759a825c1d02dd5934324c7841d22c67f2717651810db5a1dc"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462460.723767,
+    "seconds": 0.04065108299255371,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3506176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "fdc17e7f3968c6ea7e3818c64d895758109eb7c176a7d3453110cfbeca339029",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462460.773397,
+    "seconds": 0.040296077728271484,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3260416,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462460.839015,
+    "seconds": 0.0405879020690918,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "d1cdc5748d278fcf6da7ec8561ca79efdcdb5248aec59ec60afcbf7159714e5d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462460.888112,
+    "seconds": 0.046159982681274414,
+    "exit": 2,
+    "sampled_peak_rss_bytes": 0,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "a84659c1a114e3d39a53d710b37f4d93d8b382f51d56da65f163bb05af67e673",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462460.943054,
+    "seconds": 0.041563987731933594,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3620864,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "661179d42fc4453b7bc52b7e60339d6cd2257803dc09bcbb2b433577d2e9a334",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462460.993367,
+    "seconds": 0.042012929916381836,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3997696,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "d042c37c885f899a0788995d81d99fb719a210d47b758a25b8b758534cf3aa71",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462461.044457,
+    "seconds": 0.2120380401611328,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4292608,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "28f14237c6c758262e9e26820da36f3203595ff346e07fdc4d6ca23f1d8c1321",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462461.26594,
+    "seconds": 1.0277509689331055,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5013504,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "d36bfbf1105faf813d5d40c017960536a4c5822219a6949e4f741a64ba47e6e6",
+    "stderr_sha256": "1295953b006b1ca7e47ea95a6ae0dae693298c2d42db297b0c234ffa59c3c807"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462462.3021262,
+    "seconds": 0.0411677360534668,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3506176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "dcede58b06d5ebc07578e862dfa73f7f07bf39ad0fca8fdbcbda40f0e8ce72b1",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462462.3518898,
+    "seconds": 0.39203810691833496,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 4833280,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resolve",
+    "start": 1792462462.752126,
+    "seconds": 0.04084610939025879,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "7b37db347d2930c7b05001ac942883e3c2d62b268db59bef8ed4f26dea815e69",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "checkpoint",
+    "start": 1792462462.801694,
+    "seconds": 0.46277713775634766,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4571136,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "fb96fe681f5e7492ebcfba4511329359e15d72b9fdf9c43f48fc7c3fac9ed172",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462463.2732632,
+    "seconds": 0.04161381721496582,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3735552,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "b48db83e95395df27789af2c1a7efbd88f8015683c24fe5d457487eeb33df928",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462463.3250968,
+    "seconds": 0.1385023593902588,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4440064,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "0b359bfec161ccd7699ee93d9fb0202167e9d048f2ff205c4aa5da26f104a646",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462463.472842,
+    "seconds": 0.042304039001464844,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3817472,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "71205bfbddf549a2292fcd277fee8933bf43bd8e2f7299f08364299d1027bfd3",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "resolve",
+    "start": 1792462463.5238771,
+    "seconds": 0.04087090492248535,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "9ded6b2d60585aa0e4a279444ca7b4ca91dca8b949de92196f80e0cad3a17d4d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "audit",
+    "start": 1792462463.573674,
+    "seconds": 0.07495594024658203,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3948544,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "0503074509c028fe8330bf6e02dede3c9bb554f92196cda555b7cde814b2491c",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462463.657063,
+    "seconds": 1.0135741233825684,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4997120,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "57d3170bc90b8f79dfbbc11ed433208c2bf68fac2bcf50837ff307128fd63eba",
+    "stderr_sha256": "55897ab126c1aa45b418d5862006614ddf976faffd7477ca8c33285b75b663f7"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462464.679162,
+    "seconds": 0.042768001556396484,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3506176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "a162373086d4714b0a2ff030c59430d16729fe48ac9bde62662def1c0f5a5f31",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462464.730735,
+    "seconds": 0.039732933044433594,
+    "exit": 86,
+    "sampled_peak_rss_bytes": 3260416,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462464.7940218,
+    "seconds": 0.04078316688537598,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "92f1616fc2ca58a601f344a95b1aba9a3b42126e629bad519698b7d845db817e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462464.843324,
+    "seconds": 0.04436612129211426,
+    "exit": 2,
+    "sampled_peak_rss_bytes": null,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "63757d8270e4d0c97ce98a80c17fb5247c1731105518b7e906056c32d0eb301b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462464.895682,
+    "seconds": 0.03916192054748535,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3588096,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "4c3c7a078a4ab7f6cadc93fc65f2720982fc278a921616e2233c9900af7d834e",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462464.943431,
+    "seconds": 0.03904604911804199,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3932160,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "b137923fcd1279dd9cf9da6bd41ceb02ed20f72fd004370860ba0d576ec59521",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462464.992013,
+    "seconds": 0.2889249324798584,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4620288,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "a279e4ad199172021004acb0ad56010e5e2a3a9ea0321b36b1612faf50585bb6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462465.289686,
+    "seconds": 0.9868988990783691,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5062656,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "3822d263d9971cee3ebdc6222bcb97b89d3e91052b49ca07cfc539f978bccd86",
+    "stderr_sha256": "537eab5b842c03179f90ac2f1502769d622e73cffb5b883a41071f723808118e"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462466.285687,
+    "seconds": 0.042243242263793945,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3506176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "06ef678f7b2519f5749fcdc4d710d1663087ed6d5f0408e1fc30e124566146e0",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462466.336388,
+    "seconds": 0.12068796157836914,
+    "exit": 2,
+    "sampled_peak_rss_bytes": 4440064,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "4486b4cbed4be25528703a38699fc121984e5514805cb5b735770e2c7fb3445f",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462466.46677,
+    "seconds": 1.1814639568328857,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 5046272,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "8e037b4c86b07ba1eb537e4a6c376e94b8d4ad779b005a18e4dd01ded7ee52e6",
+    "stderr_sha256": "1db1fb89701a20a2dac763a0e70e774069df214faf9f5d33350f26d349f5ef2b"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462467.658877,
+    "seconds": 0.04155588150024414,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3473408,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "a36101436397d354dd53574d84367d4fcdc88bc57e7132fef819edd145a30c31",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462467.7096791,
+    "seconds": 0.04145097732543945,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 0,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "865cbf22042386b1f0e786bb26d2572956c5df8d6e4560cb08c9fb6779b3be08",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "inspect",
+    "start": 1792462467.7601302,
+    "seconds": 0.04065871238708496,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "e5f4976c60f132ce966fd594aaec0e8da014aaf121cd35dc04face0f3f42006b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462467.810047,
+    "seconds": 0.24651598930358887,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4521984,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "03b2fb0490df4a70373a163c34fa9c7b5ff859ee93c08a569c0773d6c15bbf72",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462468.065077,
+    "seconds": 0.2848029136657715,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4472832,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "fdb53998fec89d70d3e372daca13640e0ed04d1e688cec087559ed7daff8d3ac",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "refresh",
+    "start": 1792462468.361498,
+    "seconds": 0.12391781806945801,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4325376,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ef210c8800eb69996cc82ee43d806fe373b84770845853ab9ec63369ece72864",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462468.495728,
+    "seconds": 0.043515920639038086,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 0,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "890df0ae9a4cc7534fafac7d87b9ac7f895b68d8a6c4af8ebb8146a6aafc8ef7",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "init",
+    "start": 1792462468.5547478,
+    "seconds": 0.9159901142120361,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4964352,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "59e8df72930c7e0ca6b738f6fd31bc85c37093bf2336fded4e638d319fd1f1ce",
+    "stderr_sha256": "b1215b97653719e7401c0149e788ad20b9e03ffc4431e54097fbc51106600a89"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "lifecycle",
+    "start": 1792462469.480022,
+    "seconds": 0.039663076400756836,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3506176,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "44a7220efe102f912f4d57772dd55b98bce6adb43aa3253f42408be622d6b199",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462469.529301,
+    "seconds": 0.043827056884765625,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3751936,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "ff29b7491cb73c3111e0a38fec2bcce16dfcbf3320cf93cd9b0e698999ec9922",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "inspect",
+    "start": 1792462469.582027,
+    "seconds": 0.044519901275634766,
+    "exit": 0,
+    "sampled_peak_rss_bytes": null,
+    "limit": 268435456,
+    "violations": [],
+    "stdout_sha256": "37ee12a6f7a2eb0a49a97f5ae576fe0486f3f3a84c0a1325744447de644f72c5",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462469.63755,
+    "seconds": 0.442241907119751,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4784128,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "2d3fee737dea33bba2faeff36ba06929ee5380893d533521305973617f4e6870",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "publish",
+    "start": 1792462470.088796,
+    "seconds": 0.4528932571411133,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 4767744,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "7d3d1c02299f99940a2a7f380db5acbd4b2df3d82aba9cbd74351b2f511d3f39",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental"
+    ],
+    "action": "dump",
+    "start": 1792462470.552329,
+    "seconds": 0.04092574119567871,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 0,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "4f1708d08a90fe1e8133548d1d0af8e91f78155e38199325787be2f4f681cd06",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "bash",
+      "-c",
+      "set -eu\nstore=\"$1\"\nout=\"$2\"\nmode=\"$3\"\ncp \"$store/SELECTED.json\" \"$out/selected-once.json\"\npublication=$(sed -n 's/.*\"publication\": *\"\\([^\"]*\\)\".*/\\1/p' \"$out/selected-once.json\")\nif [ \"$mode\" = B ]; then\n attempt=$(sed -n 's/.*\"attempt\": *\"\\([^\"]*\\)\".*/\\1/p' \"$store/publications/$publication.json\")\n tree=\"$store/generations/$attempt\"\nelse\n tree=\"$store/view\"\nfi\nprintf '%s\\n' \"$tree\" > \"$out/captured-tree.txt\"\ncd \"$tree\"\nfind navigation -type f -name '*.yaml' | sort > \"$out/listing.txt\"\nfind navigation/groups -type f -name '*.yaml' | sort > \"$out/groups.txt\"\nfirst=$(sed -n '1p' \"$out/groups.txt\")\ngrep -n 'source:' \"$first\" > \"$out/search.txt\"\nsource=$(sed -n '/^    source: /{s/^    source: \"//;s/\"$//;p;}' \"$first\" | sed -n '1p')\nprintf '%s\\n' \"$source\" > \"$out/chosen-source.txt\"\ncp \"$source\" \"$out/copied-source\"\nshasum -a 256 \"$out/copied-source\" > \"$out/copy-sha256.txt\"\n",
+      "native-followup",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020/supplement/growing-A-128/disposable/store",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020/supplement/shell-A",
+      "A"
+    ],
+    "action": "shell",
+    "start": 1792462530.907723,
+    "seconds": 0.05264687538146973,
+    "exit": 0,
+    "sampled_peak_rss_bytes": 3211264,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "args": [
+      "bash",
+      "-c",
+      "set -eu\nstore=\"$1\"\nout=\"$2\"\nmode=\"$3\"\ncp \"$store/SELECTED.json\" \"$out/selected-once.json\"\npublication=$(sed -n 's/.*\"publication\": *\"\\([^\"]*\\)\".*/\\1/p' \"$out/selected-once.json\")\nif [ \"$mode\" = B ]; then\n attempt=$(sed -n 's/.*\"attempt\": *\"\\([^\"]*\\)\".*/\\1/p' \"$store/publications/$publication.json\")\n tree=\"$store/generations/$attempt\"\nelse\n tree=\"$store/view\"\nfi\nprintf '%s\\n' \"$tree\" > \"$out/captured-tree.txt\"\ncd \"$tree\"\nfind navigation -type f -name '*.yaml' | sort > \"$out/listing.txt\"\nfind navigation/groups -type f -name '*.yaml' | sort > \"$out/groups.txt\"\nfirst=$(sed -n '1p' \"$out/groups.txt\")\ngrep -n 'source:' \"$first\" > \"$out/search.txt\"\nsource=$(sed -n '/^    source: /{s/^    source: \"//;s/\"$//;p;}' \"$first\" | sed -n '1p')\nprintf '%s\\n' \"$source\" > \"$out/chosen-source.txt\"\ncp \"$source\" \"$out/copied-source\"\nshasum -a 256 \"$out/copied-source\" > \"$out/copy-sha256.txt\"\n",
+      "native-followup",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020/supplement/growing-B-128/disposable/store",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/followup-20261020/supplement/shell-B",
+      "B"
+    ],
+    "action": "shell",
+    "start": 1792462581.365663,
+    "seconds": 0.04429793357849121,
+    "exit": 1,
+    "sampled_peak_rss_bytes": 3293184,
+    "limit": 2147483648,
+    "violations": [],
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "d2f0bf4fa15a919280a9432bca828d36f7346ceed8cf026088079a40c7ed202f"
+  }
+]

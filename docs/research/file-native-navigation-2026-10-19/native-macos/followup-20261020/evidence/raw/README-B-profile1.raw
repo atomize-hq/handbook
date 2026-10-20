@@ -1,0 +1,3 @@
+# File-native collection
+
+Read SELECTED.json once and verify its publication digest. The publication binds exact immutable state. B: retain generations/<attempt>/ once and read NAVIGATION.md. A: view/NAVIGATION.md may mix/lag; VIEW.json names completed state and PENDING.json records unfinished work. Ordinary edits are not automatically admitted.

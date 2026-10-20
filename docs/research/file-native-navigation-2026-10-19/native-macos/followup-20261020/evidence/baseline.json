@@ -1,0 +1,97 @@
+{
+  "start": "2026-10-20T02:09:52Z",
+  "functional_cutoff": "2026-10-20T02:19:52Z",
+  "closeout_deadline": "2026-10-20T02:29:52Z",
+  "actual_supervisor_start": "2026-10-20T02:13:13.415986+00:00",
+  "resources": {
+    "timestamp": "2026-10-20T02:13:13.205710+00:00",
+    "roots": [
+      {
+        "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook",
+        "files": 7966,
+        "logical_bytes": 318081459
+      },
+      {
+        "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git",
+        "files": 5433,
+        "logical_bytes": 187492778
+      },
+      {
+        "root": "/private/tmp/file-native-q-macos-20261019",
+        "files": 8466,
+        "logical_bytes": 206414667
+      },
+      {
+        "root": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook",
+        "files": 4605,
+        "logical_bytes": 260604163
+      }
+    ],
+    "owned_bytes": 319770851,
+    "owned_files": 8135,
+    "free_bytes": 197863956480
+  },
+  "bindings": {
+    "core": {
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs": "a96816470ceaf82f044f5d00eda7c8ecce0bde09f6a9cf94f4608e29555a204d",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs": "0ed74eb1aa9f6796d1fd8bb0bb254933ab500fdcd4ab113bcaca4d97e635dbd8",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs": "43aafc4d800f0ba190f9f38f50733e04d8a738c623b73061e39d3699fd2ab834",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs": "9e3ad5197b97970ca44abe69ef96fa9564d330f8d46c260cd61cd1f2938628be",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml": "7e08fe410778cd11427f190e6c6991324c1a02d1c50c65a3cfd5e8d0dba6ab08",
+      "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock": "07eca1011d8aabcf2e5508cd9b4954417dff9ab0c7a7a1accf06af719a81b330"
+    },
+    "exe_sha256": "1de6432fc24922f10a6e4a1eddb95e07f1e236cf4435723e4fd2320e5dbdc786",
+    "source": "4bde156323812ef18c0dea6798cfc2108aaad933",
+    "harness": {
+      "docs/research/file-native-navigation-2026-10-19/oracle.py": "4cee8d181d67c17ea684c784314f0a8c8fade51cbad383864f51b48fc75a91f2",
+      "docs/research/file-native-navigation-2026-10-19/focused.py": "da93f5819978ea08bf308148396baf0305cefe7f58c42d5adb6177395c782bd9",
+      "docs/research/file-native-navigation-2026-10-19/census.py": "efc320fa4ebe77e6abc04a2b3e067b202ad177ecd63a0de77a2aa320a819fa24",
+      "docs/research/file-native-navigation-2026-10-19/legacy-fixtures.tar.gz": "eeae73e002ce81539ace34d7bb3cd41e551b79b0516781cfb6050b181b32095b",
+      "docs/research/file-native-recovery-reclamation-2026-10-19/capsule.py": "1b997e6bc058660fcfe7246ee98a7b13317e63f7232acef73fef6c3987273b71",
+      "docs/research/file-native-recovery-reclamation-2026-10-19/operational_backup.py": "20aa1b2965fd294bbf11942e5d399c7944c1f699b11021c0349b57ee5ee10bbe",
+      "docs/research/file-native-navigation-2026-10-19/native-macos/followup-20261020/followup.py": "6f2969b7b813629a7b161f8230f2002ea7c43b6847629693392c01f33fa1f2e1"
+    }
+  },
+  "original_artifact_hashes": {
+    "run.py": "10e9ae50134459cea13460d1c703f986ec10b294969017f66be7de01bf2454a1",
+    "REPORT.md": "8030cef7fe1d188886aab161f7295f318eea411b1fc1264fa40ac2cef57baa85",
+    ".gitignore": "429a7ff8e3befe5ac528bb832881840115d63940883b125526b582eedcdcb7a9",
+    "closeout.py": "fdca4a723ddf221bafcf424e7aafa644105fe4f77f8ecdde00258b1b9f55ad63",
+    "supplement.py": "b827f060c7d53b1894c6dde6da2606faa4a881004a21b6bb049ea72cd0d1cfeb",
+    "evidence/source-verification.json": "9931dc8c0745421571c5b785342f92c93c444a479f7e5418572e038d2a3774e4",
+    "evidence/focused.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/qualification.json": "fca03c7922d29437f31897eefa9999b6327f4c7024ed5a457908fa8ad97f527b",
+    "evidence/gitnexus.txt": "ffc59facfcb8073938845aedbeceb1ead7c24cc598843549632162d57e670442",
+    "evidence/raw-capsule-resources.json.gz": "e3a26e1a326a26cad203db902bf535274692f2afd2b3f848ac5c46074d6c940f",
+    "evidence/supplement.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/cargo-test.stdout": "4cd0267d1862b2ea00a1222da4402f7462680e5f020ab5e2ca1644bb02d3c17f",
+    "evidence/source-pins.json": "057151b31dd1eb1fba7f0e1b5f1d2f4ff4c108669ff5f5ebc9569a1eefc91c7e",
+    "evidence/raw-events.json.gz": "ed8e538b03dc31f6b1eccd243de934368a754bea066627cee842ce9c6e6dd98b",
+    "evidence/cargo-test.stderr": "bb14cef29afb92e523570f8426e006677d29ec366a83c502c927b19960f1ee14",
+    "evidence/supplement.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/focused.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/commands.json": "6d39003e8c6537cb65536a0d4729b991aeeb17b6c472fe8ac6f5bf83facd844e",
+    "evidence/raw-recovery-capsule-events.json.gz": "992604e6c250e6c62300be27c1aa82d8edc68d83a1ccbbe0b19f05d6d58ee30b",
+    "evidence/closeout-census.json": "57b176982d850f1987a358aa2e892e6f1d260572cd83ac7cef6f3acb8236fa7d",
+    "evidence/raw-cases.json.gz": "9d33a48ff8df2087a64b6f22931730b9d1699d8d127e1e62d954ae697a81b799",
+    "evidence/exe.json": "ba2b0c6b558fae55014ef9775f7d90550eeba8160e60bed23a6fe1e8d03587a9",
+    "evidence/baseline.json": "0b48c9b2221e5f1fafcca46d195399b76ad3f087e107d3fd2fbc88701f8e2797",
+    "evidence/manifest.json": "65c5e6e1db10d81f58601710b0edf49d912fd63961468107efc26c7077a1caca",
+    "evidence/cargo-build.stderr": "37353952532100a3cfa9b0cc0566d9da4edc5f572e77603fd15ab4e6510b14e3",
+    "evidence/cargo-build.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/platform-attempts.json": "e0742c1e199fba0333045291f67d59012ab3f1047db8fd218d89e94c17d9db97",
+    "evidence/supplement-command.json": "0fc8bee54b2a52ede941a25c1864283fc30eb6a27245c924765465f4e2c563f7",
+    "evidence/additional-source-pins.json": "2062b9b7f74eb922c7d4635d27021ab6857ba1ccdbb43237b5285ed74187446a"
+  },
+  "setup_failure": "First creation command had Python nested-string syntax error; no files or functional tests created. Retained separately in setup-attempt.txt."
+}
