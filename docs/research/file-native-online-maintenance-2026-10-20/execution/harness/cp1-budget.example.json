@@ -1,0 +1,26 @@
+{
+  "template_not_execution_admission": true,
+  "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
+  "supervisor_pids": [],
+  "categories": {
+    "source": {"root": "C:/REPLACE_CP1_SOURCE_CHECKOUT", "bytes": 1048576, "files": 1000},
+    "source_admin": {"root": "C:/Users/spmcc/Documents/__Project_Code/handbook/.git/worktrees/REPLACE_CP1_ADMIN", "bytes": 1048576, "files": 100, "nonadditive_subset_of": "shared_git"},
+    "target": {"root": "C:/REPLACE_CP1_RUNTIME/target", "bytes": 268435456, "files": 5000},
+    "protocol": {"root": "C:/REPLACE_CP1_RUNTIME/fixtures", "bytes": 100663296, "files": 75000},
+    "receipts": {"root": "C:/REPLACE_CP1_RUNTIME/receipts", "bytes": 50331648, "files": 10000},
+    "shared_git": {"root": "C:/Users/spmcc/Documents/__Project_Code/handbook/.git", "bytes": 25165824, "files": 5000, "charge_mode": "positive_delta", "baseline_bytes": 252177643, "baseline_files": 2499},
+    "shared_cargo": {"root": "C:/Users/spmcc/.cargo", "bytes": 25165824, "files": 5000, "charge_mode": "positive_delta", "baseline_bytes": 893702027, "baseline_files": 18188}
+  },
+  "groups": {
+    "F13_windows_shared_support": {"categories": ["shared_git", "shared_cargo"], "bytes": 25165824, "files": 5000}
+  },
+  "notes": [
+    "Fill only exact parent-assigned roots and supervisor PIDs; remove template flag after parent review.",
+    "Target F02 is256MiB; C2 topup remains held until explicit parent claim.",
+    "Protocol F06 CP1 share96MiB; matrix retains32MiB. F12 CP1 share48MiB; matrix initial32MiB.",
+    "Source admin is a nonadditive subset bound. Actual Git growth is charged once to F13; F01 forecast stays conservatively reserved.",
+    "Only positive baseline deltas count; negative deltas create no reclaimed credit. No new dependency downloads.",
+    "Parent integrates its meta/other support consumption into the shared F13 ledger; these are shared caps, not fresh per-worker allowances.",
+    "Build command must explicitly use offline and j2 and one target. All engine/checker descendants remain in this single guarded Job."
+  ]
+}

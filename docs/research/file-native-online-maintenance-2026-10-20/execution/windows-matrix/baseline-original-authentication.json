@@ -1,0 +1,116 @@
+{
+  "status": "authenticated",
+  "baseline": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b",
+  "expected_source_manifest": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\protocol-preflight\\source-binding.json",
+  "manifest_sha256": "c04e853507bd863d5009736cc8e3220cb1b8b9513cde6950e1bb06bd0de40cda",
+  "source_files": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\Cargo.lock",
+      "expected_sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+      "actual_sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\Cargo.toml",
+      "expected_sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74",
+      "actual_sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\api.rs",
+      "expected_sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851",
+      "actual_sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\baseline_model.rs",
+      "expected_sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+      "actual_sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\bounds_tests.rs",
+      "expected_sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "actual_sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\differential.rs",
+      "expected_sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "actual_sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\disk.rs",
+      "expected_sha256": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d",
+      "actual_sha256": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\graph.rs",
+      "expected_sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+      "actual_sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\io.rs",
+      "expected_sha256": "66bf895132ce9dc22b8be04cb6558390ef940f6868c69fe99969508b90e8d93a",
+      "actual_sha256": "66bf895132ce9dc22b8be04cb6558390ef940f6868c69fe99969508b90e8d93a",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\lib.rs",
+      "expected_sha256": "a86f5ca110500f55fe860f20988125c85e63fcf6e2a7fbb4204bfd77898a7ce5",
+      "actual_sha256": "a86f5ca110500f55fe860f20988125c85e63fcf6e2a7fbb4204bfd77898a7ce5",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\lifetime.rs",
+      "expected_sha256": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+      "actual_sha256": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\main.rs",
+      "expected_sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "actual_sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\navigation.rs",
+      "expected_sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+      "actual_sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\objects.rs",
+      "expected_sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+      "actual_sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\pack.rs",
+      "expected_sha256": "4d854885a54ee95ffed44bfec704f95c5c91d95b98964d419a7607dd2a48b2e3",
+      "actual_sha256": "4d854885a54ee95ffed44bfec704f95c5c91d95b98964d419a7607dd2a48b2e3",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\packing.rs",
+      "expected_sha256": "5edb97a4527abc35257837f79872b76c9dbf0ac010d2e66114a01b8809420647",
+      "actual_sha256": "5edb97a4527abc35257837f79872b76c9dbf0ac010d2e66114a01b8809420647",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\projection.rs",
+      "expected_sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6",
+      "actual_sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6",
+      "match": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\store.rs",
+      "expected_sha256": "569e9470bda03dcfeadc6ed49e5c0058cb9a27e0d0f54fe383eadb6b9d0fa330",
+      "actual_sha256": "569e9470bda03dcfeadc6ed49e5c0058cb9a27e0d0f54fe383eadb6b9d0fa330",
+      "match": true
+    }
+  ]
+}
