@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-20T21:18:13.821199+00:00",
+  "utc": "2026-10-20T21:39:24.165400+00:00",
   "files": {
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock": {
       "bytes": 10547,
@@ -78,8 +78,8 @@
       "sha256": "b452e2d6fe7d794953ed5c8a1e8d0020dd9241eca05a36c55518e7063533f755"
     },
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs": {
-      "bytes": 48481,
-      "sha256": "b583ddaa513e7b761d1da81bf60e1f7158530fe9d5f675c8ce2b39af91cdc2a7"
+      "bytes": 48489,
+      "sha256": "bc3fcf3340e1cd98c8f5967b15c4595d8cd7bdf856595e8817d3770542a779d9"
     },
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/physical_lifetime.rs": {
       "bytes": 22534,
@@ -95,9 +95,9 @@
     }
   },
   "executable": {
-    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate9.exe",
+    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate10.exe",
     "bytes": 2979328,
-    "sha256": "b7b60980beaddc7af01302c05ea3eea8168e46ab3ac3db3d6ead05065ff2a4e7"
+    "sha256": "7d1157d5a2df08904e118ce86647fd45f1ae7fec209494c02afdb1fac4b0b22f"
   },
-  "build_receipt": "C:\\file-native-online-cp1-20261020\\evidence\\build9-units.json"
+  "build_receipt": "C:\\file-native-online-cp1-20261020\\evidence\\build10b-units.json"
 }

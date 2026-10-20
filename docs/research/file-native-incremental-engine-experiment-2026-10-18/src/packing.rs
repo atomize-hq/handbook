@@ -392,7 +392,7 @@ fn activate(root:&Path,store:&Store,j:&Journal,m:&mut Metrics)->Result<()> {
 fn try_remove(root:&Path,name:&str,w:&mut physical::Work,m:&mut Metrics)->Result<bool>{
     m.cleanup_step()?;let path=root.join(name);if !present(&path)?{w.reconciled_absent+=1;return Ok(true);}
     io::checkpoint("physical-before-delete")?;m.cleanup_step()?;let started=Instant::now();
-    if name.starts_with("packs/")&&name.split('/').count()==2{
+    if name.strip_prefix("packs/").is_some_and(crate::model::safe_id){
         let removed=std::fs::remove_dir(&path);m.elapsed("physical-directory-remove-native",started);
         return match removed{Ok(())=>{m.namespace_ops+=1;io::checkpoint("physical-owned-directory-delete")?;Ok(true)},Err(e) if e.kind()==std::io::ErrorKind::NotFound=>Ok(true),Err(e) if e.kind()==std::io::ErrorKind::DirectoryNotEmpty||matches!(e.raw_os_error(),Some(32|33))=>Ok(false),Err(e)=>Err(e.into())};
     }

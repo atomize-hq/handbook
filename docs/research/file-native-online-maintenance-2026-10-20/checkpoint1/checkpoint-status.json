@@ -1,12 +1,12 @@
 {
-  "status": "PROVISIONAL_FINAL_CP1_REMEDIATION_REVIEW__RUNTIME_PROOF_PENDING",
-  "utc": "2026-10-20T20:22:28.718821+00:00",
+  "status": "PROVISIONAL_CP1_LEGACY_FLAT_CONTAINER_FIX__REVIEW_AND_REMAINING_RUNTIME_PENDING",
+  "utc": "2026-10-20T21:40:39.835026+00:00",
   "base_commit": "47d667f26a75fa1454dee2d1c50d238aec4cf6bd",
   "core_baseline": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
   "candidate_binary": {
-    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate9.exe",
+    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate10.exe",
     "bytes": 2979328,
-    "sha256": "b7b60980beaddc7af01302c05ea3eea8168e46ab3ac3db3d6ead05065ff2a4e7"
+    "sha256": "7d1157d5a2df08904e118ce86647fd45f1ae7fec209494c02afdb1fac4b0b22f"
   },
   "guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
   "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
@@ -37,5 +37,11 @@
   "functional_cutoff_utc": "2026-10-21T11:10:14Z",
   "no_full_experiment_pass": true,
   "source_gate_fix": "single entry cleanup budget, single-try Q/W work CAS, immutable physical_parent and frozen target admission, explicit owned pack-directory tasks",
-  "pending_review_findings": "F1 aborted ownership, F2 mutable work deletion, F3 metadata-stage/directory reaping, F4 idle/no-reuse require updated regression/review; fixes implemented, not yet claimed passed"
+  "pending_review_findings": "legacy flatfile failure fixed one condition; native10 harness expected wrong competing-maintenance error, raw retained; native10b remaining cells pending; complete source qualification remains pending",
+  "latest_source_delta": "try_remove directory task requires safe_id, preventing legacy hash.pack/idx file paths from remove_dir",
+  "current_pin_proofs": [
+    "build10b offline release workspace compile and4smallunits",
+    "native10 partial first4 focused cells pass: legacy2 firstconversion/drain/flatfilecleanup/oldexerefusal; Windows sharing+release; readerprogress deletionbarrier"
+  ],
+  "prior_pin_proofs": "cd12/candidate9 rem9,authority9,online9 and1000stress retained under original source; not rebound to candidate10"
 }
