@@ -29,10 +29,18 @@ def check_matrix(reserves=None, path=None):
         assert other['bytes']+reserve <= cap, 'matrix-nonstream-receipts-prospective-cap'
         measured['matrix_nonstream_receipts'] = dict(actual=other,reserve_bytes=reserve,cap_bytes=cap,
              basis='one traversal excluding stream-control-main; equivalent to receipts minus stream census without racing the stream writer')
-    if 'final_protocol_source' in budget.categories:
+    reserved = budget.config.get('source_reservation_categories',
+        ['final_protocol_source'] if 'final_protocol_source' in budget.categories else [])
+    assert type(reserved) is list and len(set(reserved)) == len(reserved)
+    if reserved:
         rows = measured['categories']
-        other = rows['source']['absolute_actual']['bytes']-rows['final_protocol_source']['absolute_actual']['bytes']
-        cap = rows['source']['cap_bytes']-rows['final_protocol_source']['cap_bytes']
+        assert all(budget.categories[name].get('nonadditive_subset_of') == 'source' for name in reserved)
+        other = rows['source']['absolute_actual']['bytes']-sum(rows[name]['absolute_actual']['bytes'] for name in reserved)
+        cap = rows['source']['cap_bytes']-sum(rows[name]['cap_bytes'] for name in reserved)
         assert other+reserves.get('source',{}).get('bytes',0) <= cap, 'reserved-final-protocol-source-cap'
-        measured['matrix_source_excluding_reserved_focus'] = dict(actual_bytes=other,cap_bytes=cap)
+        other_files = rows['source']['absolute_actual']['files']-sum(rows[name]['absolute_actual']['files'] for name in reserved)
+        file_cap = budget.categories['source']['files']-sum(budget.categories[name]['files'] for name in reserved)
+        assert other_files+reserves.get('source',{}).get('files',0) <= file_cap, 'reserved-sibling-source-file-cap'
+        measured['matrix_source_excluding_reserved_focus'] = dict(actual_bytes=other,cap_bytes=cap,
+            actual_files=other_files,cap_files=file_cap,reservation_categories=reserved)
     return measured
