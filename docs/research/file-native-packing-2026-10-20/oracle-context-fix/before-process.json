@@ -1,0 +1,85 @@
+{
+  "argv": [
+    "python",
+    "docs/research/file-native-packing-2026-10-20/verifier_context_check.py",
+    "--name",
+    "context-before-lock",
+    "--expect",
+    "race"
+  ],
+  "cwd": null,
+  "guard_sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68",
+  "started_utc": "2026-10-20T05:42:05.178064+00:00",
+  "seconds": 40.366830825805664,
+  "cap_seconds": 120,
+  "effective_seconds": 120,
+  "exit": 3221226356,
+  "censor": null,
+  "independent_deadline": null,
+  "group_observations": {
+    "root_exit_seen_epoch": 1792474928.46609,
+    "group_empty_seen_epoch": 1792474928.46609
+  },
+  "job_query_errors": 0,
+  "process_closure_verified": true,
+  "per_process_rss_limit": 2147483648,
+  "job_commit_limit_bytes": 3221225472,
+  "aggregate_rss_limit": 4294967296,
+  "sampled_peak_rss_by_pid": {
+    "68584": 258666496,
+    "63700": 31940608
+  },
+  "missing_samples": 0,
+  "aggregate_sampled_peak_rss": 278085632,
+  "ownership_samples": [
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 2504862257,
+          "files": 536786
+        },
+        "worktree": {
+          "bytes": 2290877,
+          "files": 208
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 228673278,
+          "files": 1982
+        }
+      },
+      "total_new_bytes": 2683323324,
+      "total_new_files": 540923,
+      "free_bytes": 197722587136,
+      "time_utc": "2026-10-20T05:42:45.502551+00:00"
+    }
+  ],
+  "final_ownership": {
+    "scopes": {
+      "runtime": {
+        "bytes": 2504862257,
+        "files": 536786
+      },
+      "worktree": {
+        "bytes": 2290877,
+        "files": 208
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 228673278,
+        "files": 1982
+      }
+    },
+    "total_new_bytes": 2683323324,
+    "total_new_files": 540923,
+    "free_bytes": 197722140672,
+    "time_utc": "2026-10-20T05:43:25.671882+00:00"
+  },
+  "group_remaining_before_closure": []
+}

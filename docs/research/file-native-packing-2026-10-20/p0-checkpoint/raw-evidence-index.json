@@ -1,0 +1,578 @@
+{
+  "profile": "P0-completed-stage-raw-receipts-and-exact-harness",
+  "core_pin": "4cb6b9fba9ffabc294a6006ec54fe75366968db4",
+  "harness_base": "5b49815e",
+  "files": [
+    {
+      "path": "bindings/frozen-core.json",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\candidate\\source-binding.json",
+      "bytes": 4007,
+      "sha256": "35f52f2e5ef5f043de9d13abe182e3f1b96e36083d0471abda2da3b682ef75fa"
+    },
+    {
+      "path": "dependent-source/incremental/verify_store.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\verify_store.py",
+      "bytes": 10936,
+      "sha256": "ce74f48339b950ad62c9c159bd95d4f038248d500addd6b635559ccdba42e2b8"
+    },
+    {
+      "path": "dependent-source/navigation/oracle.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-navigation-2026-10-19\\oracle.py",
+      "bytes": 9057,
+      "sha256": "877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f"
+    },
+    {
+      "path": "dependent-source/recovery/operational_backup.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-recovery-reclamation-2026-10-19\\operational_backup.py",
+      "bytes": 8308,
+      "sha256": "20aa1b2965fd294bbf11942e5d399c7944c1f699b11021c0349b57ee5ee10bbe"
+    },
+    {
+      "path": "dependent-source/recovery/verify_operational.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-recovery-reclamation-2026-10-19\\verify_operational.py",
+      "bytes": 9290,
+      "sha256": "d86c7d5406d5c5a5d00553b85dd0f16a039838132c31f41cc0567a7e3920e5cd"
+    },
+    {
+      "path": "measurement-source/allocation.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\allocation.py",
+      "bytes": 3677,
+      "sha256": "35597fb1bcbfd6bdff752c44ba401b4febe1fb748a771a039d9cd817e921e97e"
+    },
+    {
+      "path": "measurement-source/allocation_parallel.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\allocation_parallel.py",
+      "bytes": 2555,
+      "sha256": "ba47a8c8b4a72a915c5b4bea848e6d5b10f4f9d32a783d9f8751fc70c5674fef"
+    },
+    {
+      "path": "measurement-source/derive_tables.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\derive_tables.py",
+      "bytes": 4543,
+      "sha256": "21030dbe183ccc6288f1b1460d6d30cb2d9e2a270d221593c1b39a4dd80974a8"
+    },
+    {
+      "path": "measurement-source/driver.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\driver.py",
+      "bytes": 3304,
+      "sha256": "6e45ef7892a2702ea6e8992102d06b472164e01a15dbae28efcfbb7cc9121aa0"
+    },
+    {
+      "path": "measurement-source/guard.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\guard.py",
+      "bytes": 11177,
+      "sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68"
+    },
+    {
+      "path": "measurement-source/independent.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\independent.py",
+      "bytes": 12875,
+      "sha256": "6d376a8e0d6714d682158fc14cc4dd71ec433246d9222eb5d35d6daec99b3d65"
+    },
+    {
+      "path": "measurement-source/intent_probe.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\intent_probe.py",
+      "bytes": 3056,
+      "sha256": "b92ea0b9d5ac6d5561fec106716a711f1361f6835fd5af533c426ad73a8c29fd"
+    },
+    {
+      "path": "measurement-source/long_matrix.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\long_matrix.py",
+      "bytes": 7917,
+      "sha256": "29706bc455e63bea05845d97782009b2f0a6d83b52ce397786eaf4693adfbedc"
+    },
+    {
+      "path": "measurement-source/measurement-protocol.md",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\measurement-protocol.md",
+      "bytes": 4279,
+      "sha256": "2b471649840082fad4f6c0e8379a5105e44d1b1003d343f6a9c0dae2aa87b2cf"
+    },
+    {
+      "path": "measurement-source/p0_checkpoint.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\p0_checkpoint.py",
+      "bytes": 4817,
+      "sha256": "2e807f9217fb571e3c646351c71231e0e750e29bad3ed0d8ed52a8121e9e79d2"
+    },
+    {
+      "path": "measurement-source/qualified_lookup.rs",
+      "source": "C:\\file-native-packing-20261020\\qualified-loose-core\\src\\bin\\qualified_lookup.rs",
+      "bytes": 2094,
+      "sha256": "edcae8656e55b71bab52cf2829c09dbe79c3478b2c258c4a3b09e57e18074163"
+    },
+    {
+      "path": "measurement-source/sample-tool/Cargo.lock",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\sample-tool\\Cargo.lock",
+      "bytes": 7112,
+      "sha256": "5c3bf954f5b006d4d9846e01585f1457fe2d2d55fde75a6f340112b8d11f9b95"
+    },
+    {
+      "path": "measurement-source/sample-tool/Cargo.toml",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\sample-tool\\Cargo.toml",
+      "bytes": 330,
+      "sha256": "040d0ee8d2f22c590263429dfce18485e1f3481ac6431154085f28166253b44e"
+    },
+    {
+      "path": "measurement-source/sample-tool/main.rs",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\sample-tool\\main.rs",
+      "bytes": 4353,
+      "sha256": "c372ab275de283d80f4f03f28e90a5d422c549348eefe115848df19def9438d4"
+    },
+    {
+      "path": "measurement-source/subset_corpus.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\subset_corpus.py",
+      "bytes": 5308,
+      "sha256": "659d431369e80c7b6b6534953bfa5e2cd5636c4a3ad8caaaedfa9bbdf6b37b8d"
+    },
+    {
+      "path": "measurement-source/verify_subset.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\verify_subset.py",
+      "bytes": 4286,
+      "sha256": "c582ef2f58a0b304bf611d106032a1cb230731bce27d039568ec5ff798a319da"
+    },
+    {
+      "path": "runtime/long-matrix/L-inventory.manifest.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\L-inventory.manifest.json",
+      "bytes": 2072,
+      "sha256": "b690de506a683884f00fa68aaf706654cfb49d2a6ab31bc79babdf51868f25c9"
+    },
+    {
+      "path": "runtime/long-matrix/L-new-events/events.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\L-new-events\\events.json",
+      "bytes": 322385,
+      "sha256": "4b703a11c36a21a95afaa01c8299f87b3406e6a734d89e37cda74309251f8816"
+    },
+    {
+      "path": "runtime/long-matrix/L-new-measurement.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\L-new-measurement.json",
+      "bytes": 348510,
+      "sha256": "9b8fc5c2a2c9a051ca470a555e58b1b37f9e381da0721b052b2d0be6eb059b30"
+    },
+    {
+      "path": "runtime/long-matrix/L-old-events/events.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\L-old-events\\events.json",
+      "bytes": 286890,
+      "sha256": "7877745ab3ab215aee5b42588679267317d426b486c88dd4551bb65e301badb6"
+    },
+    {
+      "path": "runtime/long-matrix/L-old-intent-events/events.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\L-old-intent-events\\events.json",
+      "bytes": 4528,
+      "sha256": "c5f1a6d7ac70a1ea1fad535e66d7784986a1e42eae58f722db2a6d0868d9e361"
+    },
+    {
+      "path": "runtime/long-matrix/L-old-intent.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\L-old-intent.json",
+      "bytes": 569,
+      "sha256": "6454065511dea0dbe5d3baea040564496da17e76f21fb8bbe34aba0fbc9d35b5"
+    },
+    {
+      "path": "runtime/long-matrix/L-old-measurement.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\L-old-measurement.json",
+      "bytes": 301358,
+      "sha256": "a505b18834ee2fe1ab819e2adba5691583536004e9aa9fcb2d9e89bc43812c14"
+    },
+    {
+      "path": "runtime/long-matrix/P0-allocation.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\P0-allocation.json",
+      "bytes": 3851,
+      "sha256": "ce7e7409f02626e0ec86cb479d223566f3cd43ffa59dac9c7a883cc610e402d5"
+    },
+    {
+      "path": "runtime/long-matrix/P0-allocation.prefix.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\P0-allocation.prefix.json",
+      "bytes": 3054,
+      "sha256": "72fe24791325d85d5bae714cb49ae89864bf4f37350c0efbe1d65b63f2145edf"
+    },
+    {
+      "path": "runtime/long-matrix/P0-build-events/events.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\P0-build-events\\events.json",
+      "bytes": 116071,
+      "sha256": "218808c7190e595320f8ae89e2e42833a9753a69832ec4649b3aec01e681ee2f"
+    },
+    {
+      "path": "runtime/long-matrix/P0-build.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\P0-build.json",
+      "bytes": 141581,
+      "sha256": "2ace38bee3221ce7c56c178f5be3598bdefe4d52cef204b8cf5659987d8aeed9"
+    },
+    {
+      "path": "runtime/long-matrix/P0-events/events.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\P0-events\\events.json",
+      "bytes": 326316,
+      "sha256": "8eb86e66f96b6e27df3b8eea3da9f1fe9e97933dbc2750dc7b5e774755da4e0b"
+    },
+    {
+      "path": "runtime/long-matrix/P0-independent.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\P0-independent.json",
+      "bytes": 1305,
+      "sha256": "834ac5ed44db274abe4b0596e1db95cb93d9341fa07521a1f2e75017619df6bf"
+    },
+    {
+      "path": "runtime/long-matrix/P0-intent-events/events.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\P0-intent-events\\events.json",
+      "bytes": 10857,
+      "sha256": "66ac55bccc15d91dd9de1780a99d07e12527a44fc8a992e8d9cf68d9ba337756"
+    },
+    {
+      "path": "runtime/long-matrix/P0-intent.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\P0-intent.json",
+      "bytes": 565,
+      "sha256": "a9f3b6d3c825164bf661932aab285fb91450a5d7eac45c566b68e23a3100a29c"
+    },
+    {
+      "path": "runtime/long-matrix/P0-measurement.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\P0-measurement.json",
+      "bytes": 351314,
+      "sha256": "b4c1f21762c1911e5d6d8d87b1c62f9d677734506bf0ac9247dfbb313f8df698"
+    },
+    {
+      "path": "runtime/long-matrix/frozen.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\frozen.json",
+      "bytes": 8380,
+      "sha256": "e2a7ad8c96009a568ca54dbea098db23eb493f398ad70425ae00f4dc0c3cdbcb"
+    },
+    {
+      "path": "runtime/long-matrix/prep-events/events.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\prep-events\\events.json",
+      "bytes": 22497,
+      "sha256": "f84c3a89d61566ccf1cf9a5a14af865df76d7786864eee7d18ca0293750f4403"
+    },
+    {
+      "path": "runtime/long-matrix/storage-observations.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\storage-observations.json",
+      "bytes": 1058,
+      "sha256": "8026479b8f84959bad63722ff66e2d1049cd2dfdeba91ab87dc6148dced250d8"
+    },
+    {
+      "path": "runtime/long-matrix/tables/lookup-tables.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\tables\\lookup-tables.json",
+      "bytes": 33992,
+      "sha256": "4290567e118b3276b1d6dac0fbea74054ef8e4204b2301b3360effadd35fe2e6"
+    },
+    {
+      "path": "runtime/long-matrix/tables/lookup-tables.md",
+      "source": "C:\\file-native-packing-20261020\\long-matrix\\tables\\lookup-tables.md",
+      "bytes": 1056,
+      "sha256": "ddfe17ad5bcf7247b24d7f345aceb5301d08324a154a79ff101d5db8f7cbf8f0"
+    },
+    {
+      "path": "runtime/receipts/P0-stage-result.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\P0-stage-result.json",
+      "bytes": 4359,
+      "sha256": "3316dd2868a276b889e608ab61a7a8a9b50a6c78034c7a80dc6f1e667f41b0ee"
+    },
+    {
+      "path": "runtime/receipts/long-L-new-measure.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-L-new-measure.json",
+      "bytes": 2448,
+      "sha256": "87a31a8dbdd4242fec78e7acdf7e5378cc2fbb968454667188b7b22f6741d37f"
+    },
+    {
+      "path": "runtime/receipts/long-L-new-measure.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-L-new-measure.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/long-L-new-measure.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-L-new-measure.stdout",
+      "bytes": 76,
+      "sha256": "464c136230b27c2d266965fd12fa019bf57307b8228f4d5b9c912a2875ca323d"
+    },
+    {
+      "path": "runtime/receipts/long-L-old-intent.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-L-old-intent.json",
+      "bytes": 2097,
+      "sha256": "852729eee30d64b1819d779c3a6ac49b86a8a49f87305288e8812c20f3c509c7"
+    },
+    {
+      "path": "runtime/receipts/long-L-old-intent.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-L-old-intent.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/long-L-old-intent.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-L-old-intent.stdout",
+      "bytes": 571,
+      "sha256": "ec7abdeb38e29eed1db1ed96d8072d7397d6114cb0f6fd137aaf3164ad81e16b"
+    },
+    {
+      "path": "runtime/receipts/long-L-old-measure.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-L-old-measure.json",
+      "bytes": 2445,
+      "sha256": "a84c2fdee3de15ea3e47f4fb6c97b37d731af3567cd0b388dffbf40bf375aada"
+    },
+    {
+      "path": "runtime/receipts/long-L-old-measure.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-L-old-measure.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/long-L-old-measure.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-L-old-measure.stdout",
+      "bytes": 76,
+      "sha256": "4b22e143d886ec5037b25ccf65a0c857455a58e1d906467eddfdc8ffefbc2ebb"
+    },
+    {
+      "path": "runtime/receipts/long-P0-allocation.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-allocation.json",
+      "bytes": 2779,
+      "sha256": "82017650c9b25317a63fa68ad815c9d7e83292216a30496561704058642d6a7d"
+    },
+    {
+      "path": "runtime/receipts/long-P0-allocation.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-allocation.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/long-P0-allocation.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-allocation.stdout",
+      "bytes": 3853,
+      "sha256": "4d4df2213e75a48c077f207906451c5f6be80e91bd24b32888acd566b0a736af"
+    },
+    {
+      "path": "runtime/receipts/long-P0-build.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-build.json",
+      "bytes": 18035,
+      "sha256": "a9984bc9a3d25d4d2f4bf48020df0ba13f2dafac6583ac040d387ed90a20e033"
+    },
+    {
+      "path": "runtime/receipts/long-P0-build.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-build.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/long-P0-build.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-build.stdout",
+      "bytes": 65,
+      "sha256": "8fb1347ece099f9b5452a58215bbb0510e20e8683764a6e1f172902dc44f1c22"
+    },
+    {
+      "path": "runtime/receipts/long-P0-intent.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-intent.json",
+      "bytes": 2183,
+      "sha256": "62d52ed15ebcbb1d7c4381d3c054d6ed057186f3a65dab6c463fe76ec7ab838b"
+    },
+    {
+      "path": "runtime/receipts/long-P0-intent.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-intent.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/long-P0-intent.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-intent.stdout",
+      "bytes": 567,
+      "sha256": "483f5d1e37b6b4bdb768a49fe5ca5179056aa78d3bd88c4387612642a0aac3ad"
+    },
+    {
+      "path": "runtime/receipts/long-P0-measure.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-measure.json",
+      "bytes": 4335,
+      "sha256": "5d8f99d1002fcf62ba84fe2740a21da90fa85be004c454a5fdd94b49ffbaccc4"
+    },
+    {
+      "path": "runtime/receipts/long-P0-measure.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-measure.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/long-P0-measure.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-measure.stdout",
+      "bytes": 73,
+      "sha256": "7b5721c3c60497304f100170363b0d0bf457c6c96e8835d959813846d18ad5a4"
+    },
+    {
+      "path": "runtime/receipts/long-P0-verify.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-verify.json",
+      "bytes": 2648,
+      "sha256": "6aeecbb8c101f95d355b32dbe0dc8bb048d7a87d3d061e6affc0131e547261bb"
+    },
+    {
+      "path": "runtime/receipts/long-P0-verify.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-verify.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/long-P0-verify.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-P0-verify.stdout",
+      "bytes": 2074,
+      "sha256": "dbf903feeeca190f5f226bf90089c2abbf9d63542c5ab3ca1dadd2d00508a8bb"
+    },
+    {
+      "path": "runtime/receipts/long-core-freeze-recheck.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\long-core-freeze-recheck.json",
+      "bytes": 245,
+      "sha256": "915f6a09059272d2f95b76d672da56c559bbcd87b89c5e8845a121a3c111c315"
+    },
+    {
+      "path": "runtime/receipts/next-stage-resource-proposal-v2.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\next-stage-resource-proposal-v2.json",
+      "bytes": 2358,
+      "sha256": "7b47d3e31c7aa42ddd32fc33d5c681aa42672ca85bad496f52c796af2a5025fd"
+    },
+    {
+      "path": "runtime/receipts/p0-fresh-admission.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\p0-fresh-admission.json",
+      "bytes": 667,
+      "sha256": "dc33f367ce324f9abcfa3f3060979906a696c14e743970da512ff27b0ea807b6"
+    },
+    {
+      "path": "runtime/receipts/qualified-loose-build.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\qualified-loose-build.json",
+      "bytes": 2658,
+      "sha256": "abd511f4dc3141c31aa30425360a4bee30709ea433e415c518b73af85a3acebe"
+    },
+    {
+      "path": "runtime/receipts/qualified-loose-build.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\qualified-loose-build.stderr",
+      "bytes": 1260,
+      "sha256": "cbd21676d7fe203549fa4193c58328bcf024cdb32e7c72855ed194c935cf0146"
+    },
+    {
+      "path": "runtime/receipts/qualified-loose-build.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\qualified-loose-build.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/qualified-loose-export.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\qualified-loose-export.json",
+      "bytes": 2568,
+      "sha256": "b918a6c6810633bf9e8614c68e4aacc31cbe4d7de7065220927c9797c8b683ef"
+    },
+    {
+      "path": "runtime/receipts/qualified-loose-export.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\qualified-loose-export.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/qualified-loose-export.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\qualified-loose-export.stdout",
+      "bytes": 170,
+      "sha256": "e24824c6c497dd7efcfc2571bbf91d50240c7ef7b07f0f41dd0bc17252f609be"
+    },
+    {
+      "path": "runtime/receipts/qualified-loose-source.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\qualified-loose-source.json",
+      "bytes": 2338,
+      "sha256": "4b655fd185b67479ad3f9b91bcf28b323e4e212917f8bdd69273a44d57486fa4"
+    },
+    {
+      "path": "runtime/receipts/sample-tool-binding.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\sample-tool-binding.json",
+      "bytes": 550,
+      "sha256": "0e0190fc197e2cc6e367fe005653b5f7414607635c0196a01aa61d4b4a3bc646"
+    },
+    {
+      "path": "runtime/receipts/sample-tool-build.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\sample-tool-build.json",
+      "bytes": 2567,
+      "sha256": "1aeee1abc3b165e368092a55222a4dcc1f92185582a47a80c50e450d7176e4d8"
+    },
+    {
+      "path": "runtime/receipts/sample-tool-build.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\sample-tool-build.stderr",
+      "bytes": 1474,
+      "sha256": "e5011cd525d0355f14e7f39ee62ff5b43f696fcf1acab0d8eb64e7905932cacf"
+    },
+    {
+      "path": "runtime/receipts/sample-tool-build.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\sample-tool-build.stdout",
+      "bytes": 552,
+      "sha256": "e20690a6ddef452764bbb84f913d4c9cfc4b1a7dfddf99df72f6f2613059428c"
+    },
+    {
+      "path": "runtime/receipts/subset-H1000-P0-build.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\subset-H1000-P0-build.json",
+      "bytes": 2269,
+      "sha256": "240c869b2db471eb5c3e25f7de75f9d6e194fa0ca3a9f7399faa0497d7600507"
+    },
+    {
+      "path": "runtime/receipts/subset-H1000-P0-build.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\subset-H1000-P0-build.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/subset-H1000-P0-build.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\subset-H1000-P0-build.stdout",
+      "bytes": 2382,
+      "sha256": "3c29c68ccaf8df9075695af68346d72e69f1f1bcc90dd2df4428d9e7501a95ad"
+    },
+    {
+      "path": "runtime/receipts/subset-H1000-P0-verify.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\subset-H1000-P0-verify.json",
+      "bytes": 2304,
+      "sha256": "41105822592f67c5827035a372442bc760f8cc2aa6b0b56d54a28410a7d6264d"
+    },
+    {
+      "path": "runtime/receipts/subset-H1000-P0-verify.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\subset-H1000-P0-verify.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/subset-H1000-P0-verify.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\subset-H1000-P0-verify.stdout",
+      "bytes": 666,
+      "sha256": "c0e498e5a3d8332e403b0c0828ef32d979c2e958448e82851b0e35c28e7eea8f"
+    },
+    {
+      "path": "runtime/receipts/subset-H1000-corpus.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\subset-H1000-corpus.json",
+      "bytes": 2162,
+      "sha256": "68a92c7a6365aa817a79c16d9cfbd97246e33d4acf7de2cc9bd0a5b956e153bf"
+    },
+    {
+      "path": "runtime/receipts/subset-H1000-corpus.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\subset-H1000-corpus.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/subset-H1000-corpus.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\subset-H1000-corpus.stdout",
+      "bytes": 1010,
+      "sha256": "19b294f09692e0ace530f25ead849cfa7037fc366f1ea16364a0221c0c5fc7fa"
+    },
+    {
+      "path": "runtime/subsets/H1000-P0-independent.json",
+      "source": "C:\\file-native-packing-20261020\\subsets\\H1000-P0-independent.json",
+      "bytes": 664,
+      "sha256": "d63550c210289ccbb96df2147de637d3f725a59b0dee05fe9a7b6d599d85fb0a"
+    },
+    {
+      "path": "runtime/subsets/H1000-P0/sample.json",
+      "source": "C:\\file-native-packing-20261020\\subsets\\H1000-P0\\sample.json",
+      "bytes": 2876,
+      "sha256": "c6882306635a3ac3e7c62715bcc72e25b093bc20ed0aa552af5ee1f5d0a99271"
+    },
+    {
+      "path": "runtime/subsets/H1000-corpus/inventory.jsonl",
+      "source": "C:\\file-native-packing-20261020\\subsets\\H1000-corpus\\inventory.jsonl",
+      "bytes": 1015268,
+      "sha256": "c92db05fbdf50c02b29b1259137f7a3d1e905bfb1af9c88102bb4da897a45ea1"
+    },
+    {
+      "path": "runtime/subsets/H1000-corpus/manifest.json",
+      "source": "C:\\file-native-packing-20261020\\subsets\\H1000-corpus\\manifest.json",
+      "bytes": 1008,
+      "sha256": "9bddcf3138f27ab6d0171216027a88b2dc7813a1c2854b69b6a47308526f143d"
+    }
+  ],
+  "expanded_file_bytes": 3508190,
+  "archive_bytes": 569099,
+  "archive_sha256": "0a6e60887bcb906f940d7acbb6f8bf78a41a21c2ef3f3e98c7700149e8a9ef57",
+  "round_trip_verified": true,
+  "large_data": "protected local original capture, working packed clone and H1k corpus/containers remain at their bound absolute paths; not duplicated into Git",
+  "PZ_qualified": false,
+  "cleanup_qualified": false
+}

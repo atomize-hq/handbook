@@ -1,0 +1,49 @@
+{
+  "status": "candidate ready for independent parent review and bounded native qualification; long performance and final storage recommendation remain open",
+  "source_commit": "4cb6b9fba9ffabc294a6006ec54fe75366968db4",
+  "source_core_files": 18,
+  "windows_exe_sha256": "478dd9ba9f687d4de81c60ce55f9ddf9e4e2fafcc493d581b3c63e12e42f7fe5",
+  "windows_exe": "C:\\file-native-packing-20261020\\bin\\candidate1.exe",
+  "checks": {
+    "rust_tests": 5,
+    "full_p_capsule_cases": 54,
+    "full_p_capsule_engine_events": 275,
+    "independent_strict_supplements": 24,
+    "exact_post_gc_publications": 101006,
+    "exact_post_gc_ledger_rows": 100000,
+    "retired_content_refusals": 101
+  },
+  "native_proposal": {
+    "per_host_total_new_cap_bytes": 805306368,
+    "per_host_total_new_files": 50000,
+    "source_and_transport_bound": 8388608,
+    "dependency_cache_growth_bound": 201326592,
+    "target_build_bound": 201326592,
+    "synthetic_cache_fixture_bound": 88080384,
+    "small_AB_fault_restore_and_legacy_fixture_bound": 117440512,
+    "evidence_and_git_bound": 33554432,
+    "prospective_total_bytes": 650117120,
+    "ordinary_seconds": 120,
+    "complete_verifier_seconds": 900,
+    "build_jobs": 2,
+    "native_aggregate_rss_bytes": 3221225472,
+    "checker_rss_bytes": 2147483648,
+    "point_rss_bytes": 268435456,
+    "functional_stage_seconds": 1800,
+    "closeout_seconds": 300,
+    "clamp_to_original_P_cutoff": "2026-10-20T07:55:16Z",
+    "scope": "locked tests/build; full capsule.py A/B N128/N16 and strict_supplement.py; actual old recovery capsule via loose_regression.py; host-correct independent zstd library binding; exact source before/after and shell discovery/extraction; no long history"
+  },
+  "native_commands": [
+    "cargo test --locked --offline --workspace --release -j2 --target-dir <owned>",
+    "cargo build --locked --offline --workspace --release -j2 --target-dir <owned>",
+    "FILE_NATIVE_P_EXE=<candidate> FILE_NATIVE_P_ROOT=<owned> python capsule.py --base <fresh-owned>",
+    "FILE_NATIVE_P_EXE=<candidate> FILE_NATIVE_P_ROOT=<owned> python strict_supplement.py --capsule-base <previous> --base <fresh-owned>",
+    "python loose_regression.py --exe <candidate> --base <fresh-owned>"
+  ],
+  "native_dependencies": "Exact Cargo.lock; cache fetch separately bounded if offline prerequisites absent. Independent Python decoder requires host libzstd via ctypes discovery; record actual version/path/hash rather than assuming Git Windows DLL. Parent owns admission/source transport/hosts.",
+  "guard_sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68",
+  "large_windows_packing_admitted": false,
+  "native_admitted": false,
+  "no_successor_chat_created": true
+}

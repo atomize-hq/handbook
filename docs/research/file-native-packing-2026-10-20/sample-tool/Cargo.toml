@@ -1,0 +1,17 @@
+[package]
+name = "file-native-packing-sample"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+[[bin]]
+name = "packing-sample"
+path = "main.rs"
+
+[dependencies]
+serde = { version = "=1.0.228", features = ["derive"] }
+serde_json = "=1.0.145"
+sha2 = "=0.10.9"
+zstd = { version = "=0.14.3", default-features = false }

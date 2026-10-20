@@ -6,6 +6,11 @@ static SEQ: AtomicU64 = AtomicU64::new(0);
 #[derive(Default, Serialize)]
 pub struct Metrics {
     #[serde(skip)]
+    pub(crate) physical:Option<crate::packing::PhysicalRead>,
+    pub pack_storage_bytes:u64,pub pack_decoded_bytes:u64,pub pack_records_read:u64,
+    pub pack_index_loads:u64,pub pack_cache_hits:u64,pub pack_cache_peak_bytes:u64,pub pack_catalog_bytes:u64,
+    pub pack_eligible_records:u64,pub pack_eligible_raw_bytes:u64,pub pack_excluded_records:u64,pub pack_excluded_bytes:u64,
+    #[serde(skip)]
     pub store_root:Option<std::path::PathBuf>,
     #[serde(skip)]
     pub replay_objects:std::collections::BTreeSet<String>,
@@ -32,7 +37,7 @@ pub struct Metrics {
     pub bytes_result_read:u64,pub bytes_result_written:u64,
 }
 impl Metrics {
-    fn record_bytes(&mut self,path:&Path,n:u64,write:bool){
+    pub(crate) fn record_bytes(&mut self,path:&Path,n:u64,write:bool){
         let path=self.store_root.as_ref().and_then(|root|path.strip_prefix(root).ok()).unwrap_or(path);
         let has=|name:&str|path.components().any(|c|c.as_os_str()==name);
         let field=if has("objects"){
@@ -96,6 +101,7 @@ pub fn read(path: &Path, m: &mut Metrics) -> Result<Vec<u8>> {
 }
 pub fn read_bounded(path: &Path, limit: usize, m: &mut Metrics) -> Result<Vec<u8>> {
     let t=Instant::now();
+    if let Some(bytes)=crate::packing::read(path,limit,m)?{m.elapsed("read",t);return Ok(bytes);}
     let f=File::open(path).map_err(|e|format!("integrity-read:{}:{e}",path.display()))?;
     if f.metadata()?.len()>limit as u64 {return Err("integrity:file-length-bound".into());}
     let mut b=Vec::new();

@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "C:\Users\spmcc\.codex\worktrees\file-native-packing-20261020\handbook\docs\research\file-native-packing-2026-10-20\final_long_matrix.py", line 40, in <module>
+    p=argparse.ArgumentParser();p.add_argument('stage',choices=['PZ-build','PZ-verify','PZ-measure']);a=p.parse_args();{'PZ-build':build,'PZ-verify':complete,'PZ-measure':measure}[a.stage]()
+                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\spmcc\.codex\worktrees\file-native-packing-20261020\handbook\docs\research\file-native-packing-2026-10-20\final_long_matrix.py", line 24, in complete
+    bound();assert not (BASE/'PZ-independent.json').exists();result=verify(ROOT,BASE/'PZ-independent.json',OLD/'L-inventory.manifest.json',R/'preservation-inputs/post-gc-reference.json');bound();assert result['inventory_digest']==read(OLD/'P0-independent.json')['inventory_digest'] and result['semantic']['permanent_digest']==read(OLD/'P0-independent.json')['semantic']['permanent_digest'] and result['semantic']['publications']==101007 and result['semantic']['ledger_rows']==100000 and result['semantic']['retired_publications']==101
+                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\spmcc\.codex\worktrees\file-native-packing-20261020\handbook\docs\research\file-native-packing-2026-10-20\independent.py", line 163, in verify
+    verify_operational.checked=d.checked;result['semantic']=verify_operational.verify(root,baseline)
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\spmcc\.codex\worktrees\file-native-packing-20261020\handbook\docs\research\file-native-recovery-reclamation-2026-10-19\verify_operational.py", line 33, in verify
+    p=json.loads(checked(root/f"publications/{s['publication']}.json",s['digest']));assert p['store_id']==config['store_id'] and p['id']==s['publication'] and p['version']==1
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\spmcc\.codex\worktrees\file-native-packing-20261020\handbook\docs\research\file-native-packing-2026-10-20\independent.py", line 110, in checked
+    path=Path(path);key=path.relative_to(self.root).as_posix();b=self.raw(key);assert sha(b)==h,(key,h);return b
+                                                                 ^^^^^^^^^^^^^
+  File "C:\Users\spmcc\.codex\worktrees\file-native-packing-20261020\handbook\docs\research\file-native-packing-2026-10-20\independent.py", line 106, in raw
+    data=self.zstd.decode(data,length)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\spmcc\.codex\worktrees\file-native-packing-20261020\handbook\docs\research\file-native-packing-2026-10-20\independent.py", line 62, in decode
+    assert not self.lib.ZSTD_isError(n) and n==length
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

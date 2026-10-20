@@ -10,6 +10,7 @@ pub fn run(v:Value,m:&mut Metrics,consumer:Option<&str>)->Result<Value>{
         return Store::init(&root,v["mode"].as_str().unwrap_or("A"),consumer.or(v["consumer"].as_str()).unwrap_or("project"),
             v["count"].as_u64().ok_or("count")? as usize,v["fallback"].as_bool().unwrap_or(false),m);
     }
+    if action=="packing"{return crate::packing::run(&root,&v,m);}
     let store=Store::open(&root,m)?;
     if consumer.is_some_and(|c|c!=store.config.consumer){return Err("refused:consumer-kind".into());}
     match action{
@@ -43,6 +44,7 @@ pub fn run(v:Value,m:&mut Metrics,consumer:Option<&str>)->Result<Value>{
         "select"=>store.select_file(v["candidate"].as_str().ok_or("candidate")?,m),
         "resolve"=>if v["intent"].is_string(){store.resolve(v["request_id"].as_str().ok_or("request_id")?,v["intent"].as_str(),m)}
             else{Ok(serde_json::to_value(store.resolve_typed(v["request_id"].as_str().ok_or("request_id")?,m)?)?)},
+        "lookup-bench"=>crate::packing::probe(&store,&v,m),
         "checkpoint"=>store.checkpoint(v["request_id"].as_str().ok_or("request_id")?,m),
         "cancel"=>store.cancel(v["request_id"].as_str().ok_or("request_id")?,m),
         "cancel-signal"=>{
