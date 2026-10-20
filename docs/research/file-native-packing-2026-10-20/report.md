@@ -1,11 +1,12 @@
 # Packing experiment — working report
 
-Status at 2026-10-20 06:29 UTC: the primary Windows A long-history PZ build,
+Status at 2026-10-20 06:53 UTC: the primary Windows A long-history PZ build,
 complete independent verification, matched measurements, physical cleanup and
 complete post-cleanup verification passed. Packed operational capture, parent
 independent transport/source verification, fresh byte restore, complete restored
-oracle and read-only reopen passed. The restored valid successor, representative
-N8k A/B publication comparisons, remaining record-corpus controls and native
+oracle, read-only reopen and valid successor passed. H1k/H10k record controls and
+the complete final-source Windows F recovery capsule passed. The authentic
+N8000-A baseline passed; its four measurement cells, N8000-B and native
 final-source results are still pending. This is research evidence,
 not approval of a production format or migration.
 
@@ -121,7 +122,7 @@ files were reclaimed, crediting 438,731,626 successful bytes; two required helpe
 executables remain in place. All binaries, failed prefixes, cache fixtures,
 original datasets and original operational captures are retained as recorded.
 
-## Remaining scope and limits
+## Operational restore and controls
 
 The packed operational image preserves 5,807 files / 592,458,971 raw bytes. Its
 gzip transport, inventory and manifest total 314,297,593 bytes. Parent independent
@@ -132,12 +133,51 @@ SHA-256 is `0974f4a1dac1f13618105b9fca425b2a56c99528accecb5255f0d4ec6515b9b5`.
 Byte restore took 3.469 seconds, with an all-thread prewrite cap and no imported
 disposable authority. The complete fresh-restored oracle passed in 89.140 seconds,
 then 111 read-only reopen events confirmed the original outcomes, intent checks
-and all 101 retired refusals. A new local authority and valid successor still
-await the separate conditional admission; no original or primary publication was
-added by these restore checks.
+and all 101 retired refusals. A new local authority and valid successor
+received separate conditional admission. Fresh local setup bound the canonical
+restored root and new marker identity, then a real label change published
+sequence 101007. Its new publication/result/hint/candidate/allocation stayed
+loose. All original outcomes, intent behavior and 101 explicit retirement
+refusals passed again. The complete successor oracle verified 101,008
+publications, the unchanged original 504,833 packed records, 100,000 ledger rows,
+101 retirements and valid current graph/navigation. Its new permanent digest is
+`33ed5b72937e57c2496dbdbcca1b606f5ac59bd892f70cab2ef07a1e91944ea2`.
 
-The restored valid successor, N8k A/B
-ordinary-publication gates, H1k/H10k container controls and final native platform
+The successor image was independently captured and parent-verified through every
+frame/hash and EOF: 5,823 files / 592,508,214 raw bytes; three archive files total
+314,328,654 bytes. Transport SHA-256 is
+`04a34211ea8efc74127e1d9f69f9e67bde788a17f9dac5c59a44c167cb48b081`.
+After separate parent approval, the exact inventoried regular files in each
+private clone were reclaimed: 5,807 / 592,458,971 bytes, then 5,823 /
+592,508,214 bytes. Both complete verified images, all raw evidence and all
+existing excluded control files/directories remain; protected older datasets
+and archives were untouched. The read-only first reclamation dry run refused an
+incorrectly constructed root-allowlist array before deletion; its source/failure
+remain, and only array construction was corrected before the reviewed execution.
+
+| Authenticated record corpus | Records | Raw P0 pack/index bytes | PZ pack/index bytes | PZ / P0 |
+|---|---:|---:|---:|---:|
+| H1k | 4,800 | 5,885,907 | 2,626,886 | 44.6301% |
+| H10k | 49,800 | 62,996,137 | 27,715,268 | 43.9952% |
+
+These corpora contain exact original accepted prefix records and still-retained
+finalized attempts from the authenticated post-GC transport. They have no STORE
+or SELECTED and are not shortened operational histories. Existing H1k raw data
+was retained, not rerun. All new containers passed independent complete tuple
+checks and matching P0/PZ role/range/count grouping. The helper uses the actual
+frozen pack implementation (SHA-256 `4d854885a54ee95ffed44bfec704f95c5c91d95b98964d419a7607dd2a48b2e3`),
+with no Rust rebuild. The protected original ledger/first-publication selector
+checks were read-only and SHA-bound before and after.
+
+Final d70 also passed a fresh complete F recovery capsule: 24 cases / 282 engine
+events, exactly matching the original case identities and expected status map,
+including the impossible-final-namespace expected refusal. Its actual source,
+binary, child resources and fresh fixtures are separately preserved from the old
+4cb run. No old result was relabeled as a final-source pass.
+
+## Remaining scope and limits
+
+N8k A/B ordinary-publication gates and final native platform
 results must be reported from actual receipts. No pending stage is a pass.
 Current additional fixture grants are finite and coordinated globally; prospective
 release is never counted before actual deletion. The original functional cutoff

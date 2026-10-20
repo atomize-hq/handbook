@@ -25,7 +25,7 @@ function Get-ImageHash([string]$Path){
  try{return [BitConverter]::ToString($Hash.ComputeHash($Stream)).Replace('-','').ToLowerInvariant()}finally{$Stream.Dispose();$Hash.Dispose()}
 }
 $Owned='C:\file-native-packing-20261020';$Root=[IO.Path]::GetFullPath($Root);$CapsuleRoot=[IO.Path]::GetFullPath($CapsuleRoot);$Receipt=[IO.Path]::GetFullPath($Receipt)
-$Fixed=@($Owned+'\history-restored\disposable\store',$Owned+'\packed-restored\disposable\store')
+$Fixed=@(($Owned+'\history-restored\disposable\store'),($Owned+'\packed-restored\disposable\store'))
 $Pattern='^C:\\file-native-packing-20261020\\operational-matrix\\n8000-[AB]\\(baseline|L-old|L-new|P0|PZ)\\disposable\\store$'
 if($Root -notin $Fixed -and $Root -notmatch $Pattern){throw 'root-not-in-explicit-owned-image-allowlist'}
 $null=Assert-ImageBoundary $Root $Root;$null=Assert-ImageBoundary $CapsuleRoot $Owned
