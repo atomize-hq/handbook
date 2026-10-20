@@ -1,0 +1,720 @@
+{
+  "utc": "2026-10-20T21:42:28.755454+00:00",
+  "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+  "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+  "cases": [
+    {
+      "label": "authority9",
+      "oracle": {
+        "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "raw_records": 10,
+        "raw_bytes": 8318,
+        "inventory_digest": "8b37d1d7101139199cee5d0459a8fe4cf506029c1d2ab9aded6cffeda6058207",
+        "physical_metadata": {
+          "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+          "work_version": 2,
+          "selected_generation": {
+            "id": "physical-1-birth-34664-1792531733980512400-0",
+            "ordinal": 1,
+            "plan": "4845083e901702e756823923ac8cf50b4bf2904887088253d10826ff81ecbb3b"
+          },
+          "physical_parent": "0e99a79c88468fa0a02ebde5d7a79a43e8ec51bc6b05b017a00f4d07311234ad",
+          "physical_parent_is_initial_physical_CAS_token": true,
+          "transition_parent": "e1de4a1269cc7d10cf2f4b8998fd218015f6997687862c0656e972f9c6a79935",
+          "transition_parent_is_comparison_token_not_retained_chain": true,
+          "birth_claims": [
+            "physical-2-birth-28624-1792531734227022900-0",
+            "physical-2-birth-37520-1792531734066966900-0"
+          ],
+          "birth_claim_count": 2,
+          "retained_generations": 0,
+          "pending_loose_jobs": 0,
+          "retired_container_jobs": 0,
+          "garbage_entries": 1,
+          "pending_garbage": 0,
+          "absent_garbage_tombstones": 1,
+          "owned_aborted_pack_directories": [],
+          "observed_removed_bytes": 55339,
+          "observed_removed_files": 26,
+          "observed_reconciled_absent": 28,
+          "counters_are_not_admission_credit": true,
+          "metadata_work_root_selection_is_not_physical_activation": true,
+          "mutable_progress_accepted": false,
+          "pending_selector_stage": null,
+          "journal": {
+            "version": 2,
+            "id": "physical-2-birth-28624-1792531734227022900-0",
+            "status": "aborted-owned",
+            "abandoned_owner_count": 0,
+            "ownership_transferred": true,
+            "selected_by_STORE": false,
+            "pending_owned_refs": [],
+            "establishes_acceptance": false
+          },
+          "owned_work_stage": null,
+          "required_paths": [
+            "PACKING.json",
+            "STORE.json",
+            "pack-catalogs/aa70d9e9e342f55ff44ef7d325443ce31256c542ed2638dd448bda9318e2037c.json",
+            "packs/physical-1-birth-34664-1792531733980512400-0/11ff9dcffe6d6b3ee4946dc68f31793f92f610a1d2e870fce04aedafb5be0ed5.idx",
+            "packs/physical-1-birth-34664-1792531733980512400-0/345157bc98bd2284c16f5f89ca30eaf7b85642b6808ac5fe3049786c942df615.pack",
+            "packs/physical-1-birth-34664-1792531733980512400-0/39c4468a25fb307d8419e7c4be64358264e3ac3a2cb4d71814f8ca33d2916d87.pack",
+            "packs/physical-1-birth-34664-1792531733980512400-0/750ca5e73e0a085c59c7408501b1252ff12c295a80db0071e90f929cbde844ec.idx",
+            "packs/physical-1-birth-34664-1792531733980512400-0/83009508f0c8fc556f09877af5eb8459a770883fe937d72cb5164459c4477d13.idx",
+            "packs/physical-1-birth-34664-1792531733980512400-0/888d35a66f20dfef9315256cb9ed975b63234d5e063b765ca386cab95a84a943.pack",
+            "packs/physical-1-birth-34664-1792531733980512400-0/8d17fd7860e356e44ad9abab312db716a631308fbda24058b908f6844d6f1dcb.pack",
+            "packs/physical-1-birth-34664-1792531733980512400-0/960f15fa42fc850361453164359d8e3954fedbdb341fef98051a1006a39bc4cd.pack",
+            "packs/physical-1-birth-34664-1792531733980512400-0/bf94aeb294c4f2cefc89a290aa6853f42aa181de8e076261ae82ebe1dee31db6.idx",
+            "packs/physical-1-birth-34664-1792531733980512400-0/cd75864552877a0cbb145d407c67d2f313732d6a86e412b7f5294aa38f789cbc.idx",
+            "physical-pins/physical-1-birth-34664-1792531733980512400-0.lock",
+            "physical-plans/4845083e901702e756823923ac8cf50b4bf2904887088253d10826ff81ecbb3b.json"
+          ],
+          "quiescent_native_lock_state_unmeasured": true
+        },
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-71408-1792531734498377700-6",
+            "digest": "07c9879485244bf1d6c955f83ec1babbed06b5d41724d0f289a0324ac585105c"
+          },
+          "publications": 3,
+          "ledger_rows": 0,
+          "permanent_digest": "9ce664809d0f4ad8a55609ae1138671e4c47fcee215fa255618be5e42af0dc71",
+          "retired_publications": 0,
+          "retired_content": "none",
+          "unique_content_roots": 1,
+          "root_visits": 3,
+          "sources": 14,
+          "pins": 0,
+          "reservations": 0,
+          "packets": 0,
+          "generations": 0,
+          "conservative_cumulative_owner_allowance_bytes": 204326592,
+          "actual_physical_owner_bytes": false,
+          "seconds": 0.0
+        },
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "request_intents": {
+          "profile": "independent-complete-exact-request-intent-and-accepted-result",
+          "selected": {
+            "publication": "publication-71408-1792531734498377700-6",
+            "digest": "07c9879485244bf1d6c955f83ec1babbed06b5d41724d0f289a0324ac585105c"
+          },
+          "publications": 3,
+          "actual_H": 3,
+          "authentic_history_recipe_intents": 0,
+          "retained_candidate_proofs": 3,
+          "exact_loose_B_publication_controls": 0,
+          "evidence_sha256": "1a18c305a8e396347ea2c9e604de512e79726064906d6820c4ee4774d5817dd3",
+          "engine_code_imported": false
+        },
+        "independent_codec": null,
+        "seconds": 0.045999999972991645,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      "read_only": {
+        "root": "C:\\file-native-online-cp1-20261020\\fixtures\\authority9\\disposable\\store",
+        "module": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v3.py",
+        "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+        "source_file_count": 63,
+        "source_logical_bytes": 292375,
+        "source_directory_count": 51,
+        "all_file_hashes_sizes_names_and_directories_unchanged": true,
+        "before_sha256": "fc08edb56fb44b2fac81e4b6318fc845e16f640f7dbf75ce8f9a3e34a7d02d38",
+        "after_sha256": "fc08edb56fb44b2fac81e4b6318fc845e16f640f7dbf75ce8f9a3e34a7d02d38",
+        "no_engine_calls": true,
+        "no_fixture_copies": true
+      },
+      "raw": [
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles\\authority9.json",
+          "bytes": 5452,
+          "sha256": "e66a852995e672390fcd051ed5285d8bdc7276dc653e0a4469aa1ff6aea48e02"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles\\authority9.before.json",
+          "bytes": 13435,
+          "sha256": "fc08edb56fb44b2fac81e4b6318fc845e16f640f7dbf75ce8f9a3e34a7d02d38"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles\\authority9.after.json",
+          "bytes": 13435,
+          "sha256": "fc08edb56fb44b2fac81e4b6318fc845e16f640f7dbf75ce8f9a3e34a7d02d38"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles\\authority9.read-only.json",
+          "bytes": 780,
+          "sha256": "3f1fa01aff57e25c862e9ac3848117bba6b5da545c7efbf591c9c8bf81cbc55a"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles\\authority9.stdout",
+          "bytes": 124,
+          "sha256": "e95f23cc70827a92518b2a5e3bf1ba01bf876966f907134821037f10482aef17"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles\\authority9.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "directory9",
+      "oracle": {
+        "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "raw_records": 5,
+        "raw_bytes": 5133,
+        "inventory_digest": "c6fcdaa823a742bd56392fb483ecff45cab6ed27f5d42e6b6ad3695d559745a8",
+        "physical_metadata": {
+          "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+          "work_version": 2,
+          "selected_generation": {
+            "id": "physical-1-birth-42560-1792531734961405900-0",
+            "ordinal": 1,
+            "plan": "13a6d65e1ab9272a0d45d6315f8d8023f1d3ff9260ed3b7708e41ade3975abde"
+          },
+          "physical_parent": "1a8b29afca5e2b8d177744e361057c9fc179cab45e16601d4534364a1e7e77a4",
+          "physical_parent_is_initial_physical_CAS_token": true,
+          "transition_parent": "bddefcbae54e92bb643d88541e05cddf1b159b4f8bc451d2973fe9a095952492",
+          "transition_parent_is_comparison_token_not_retained_chain": true,
+          "birth_claims": [
+            "physical-2-birth-16120-1792531735077934900-0"
+          ],
+          "birth_claim_count": 1,
+          "retained_generations": 0,
+          "pending_loose_jobs": 0,
+          "retired_container_jobs": 0,
+          "garbage_entries": 1,
+          "pending_garbage": 0,
+          "absent_garbage_tombstones": 1,
+          "owned_aborted_pack_directories": [],
+          "observed_removed_bytes": 5133,
+          "observed_removed_files": 5,
+          "observed_reconciled_absent": 13,
+          "counters_are_not_admission_credit": true,
+          "metadata_work_root_selection_is_not_physical_activation": true,
+          "mutable_progress_accepted": false,
+          "pending_selector_stage": null,
+          "journal": {
+            "version": 2,
+            "id": "physical-2-birth-16120-1792531735077934900-0",
+            "status": "aborted-owned",
+            "abandoned_owner_count": 0,
+            "ownership_transferred": true,
+            "selected_by_STORE": false,
+            "pending_owned_refs": [],
+            "establishes_acceptance": false
+          },
+          "owned_work_stage": null,
+          "required_paths": [
+            "PACKING.json",
+            "STORE.json",
+            "pack-catalogs/2f73d120064726fe55b3577b4b6c46cdfc5626969b9d9f4e4234534196f57ef9.json",
+            "packs/physical-1-birth-42560-1792531734961405900-0/21e9be23363350afc8cbbfdc08f39521cadcfc637531ec859263718efaa06386.idx",
+            "packs/physical-1-birth-42560-1792531734961405900-0/45d8668f09a5bc69e806a2d9de3242da2c54c5d802577255df13e4e441ac766d.pack",
+            "packs/physical-1-birth-42560-1792531734961405900-0/5f3c9373525e139d4d271ac574d04b0d00a84750b758b0d682fbee893308343e.idx",
+            "packs/physical-1-birth-42560-1792531734961405900-0/7b81329d481f1b2805b41492afd0374f2ec9794872cd7a5670d40cd01243abc1.idx",
+            "packs/physical-1-birth-42560-1792531734961405900-0/99b2589472cf787de4fb05926f2b19df5463f937f9a92a109f37038564555719.pack",
+            "packs/physical-1-birth-42560-1792531734961405900-0/bbc2acf9f9894ea9746081f72d7973cb90c41c72744cb03f496afd74723838fe.pack",
+            "packs/physical-1-birth-42560-1792531734961405900-0/cd142ca23708b4898db8879d9d1d3629611dda0563d31388ac77ae88e072a0a2.pack",
+            "packs/physical-1-birth-42560-1792531734961405900-0/d307ce2a5de20462d1295b6732e1b90265a6867cbc600c021f1cab3cf49d0032.idx",
+            "packs/physical-1-birth-42560-1792531734961405900-0/dd99cd6ab848fc3e294fbf99ad9b4a427cc6e20c02e09c214e73f1e751992f37.idx",
+            "packs/physical-1-birth-42560-1792531734961405900-0/eb8eca2e6bd146e758a6b24e14ac699d7f8bd06790e7bd5b2051db35e25be7a4.pack",
+            "physical-pins/physical-1-birth-42560-1792531734961405900-0.lock",
+            "physical-plans/13a6d65e1ab9272a0d45d6315f8d8023f1d3ff9260ed3b7708e41ade3975abde.json"
+          ],
+          "quiescent_native_lock_state_unmeasured": true
+        },
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-51480-1792531734840491500-21",
+            "digest": "99b2589472cf787de4fb05926f2b19df5463f937f9a92a109f37038564555719"
+          },
+          "publications": 1,
+          "ledger_rows": 0,
+          "permanent_digest": "cf19cd328c5c376cbe128e00a35283cce50a5a9b43c6ac4148f8cdb51695f86b",
+          "retired_publications": 0,
+          "retired_content": "none",
+          "unique_content_roots": 1,
+          "root_visits": 1,
+          "sources": 14,
+          "pins": 0,
+          "reservations": 0,
+          "packets": 0,
+          "generations": 0,
+          "conservative_cumulative_owner_allowance_bytes": 70108864,
+          "actual_physical_owner_bytes": false,
+          "seconds": 0.0
+        },
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "request_intents": {
+          "profile": "independent-complete-exact-request-intent-and-accepted-result",
+          "selected": {
+            "publication": "publication-51480-1792531734840491500-21",
+            "digest": "99b2589472cf787de4fb05926f2b19df5463f937f9a92a109f37038564555719"
+          },
+          "publications": 1,
+          "actual_H": 1,
+          "authentic_history_recipe_intents": 0,
+          "retained_candidate_proofs": 1,
+          "exact_loose_B_publication_controls": 0,
+          "evidence_sha256": "731d68890dc4a1e05ce8f19ee0a2f3b912aabb9bed206271075aa6b37d255802",
+          "engine_code_imported": false
+        },
+        "independent_codec": null,
+        "seconds": 0.030999999959021807,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      "read_only": {
+        "root": "C:\\file-native-online-cp1-20261020\\fixtures\\directory9\\disposable\\store",
+        "module": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v3.py",
+        "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+        "source_file_count": 54,
+        "source_logical_bytes": 283139,
+        "source_directory_count": 43,
+        "all_file_hashes_sizes_names_and_directories_unchanged": true,
+        "before_sha256": "6e92b0a32e036b027e3eb7f9cd2af80d2e5d19fdc19f5e8bf4dcaaa385c072d9",
+        "after_sha256": "6e92b0a32e036b027e3eb7f9cd2af80d2e5d19fdc19f5e8bf4dcaaa385c072d9",
+        "no_engine_calls": true,
+        "no_fixture_copies": true
+      },
+      "raw": [
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles\\directory9.json",
+          "bytes": 5395,
+          "sha256": "34c8ab67ca281d06107f30072a7603405081b56187e72ba8f1830b9033bd8cc7"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles\\directory9.before.json",
+          "bytes": 11356,
+          "sha256": "6e92b0a32e036b027e3eb7f9cd2af80d2e5d19fdc19f5e8bf4dcaaa385c072d9"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles\\directory9.after.json",
+          "bytes": 11356,
+          "sha256": "6e92b0a32e036b027e3eb7f9cd2af80d2e5d19fdc19f5e8bf4dcaaa385c072d9"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles\\directory9.read-only.json",
+          "bytes": 780,
+          "sha256": "7567d7a65650526044d57d5065068581c693531cbfdb083fad1f4d5e08480459"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles\\directory9.stdout",
+          "bytes": 123,
+          "sha256": "c493befc0c6fd59ac618e1c93751103555b37d58b54c2eb352543008154790b2"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles\\directory9.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "online9",
+      "oracle": {
+        "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "raw_records": 10,
+        "raw_bytes": 9619,
+        "inventory_digest": "48842e2c870acbeecef007c3856dd082ee183e6cc4d5fb0add608cd5fdef7c8c",
+        "physical_metadata": {
+          "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+          "work_version": 2,
+          "selected_generation": {
+            "id": "physical-4-birth-10420-1792531924168839500-0",
+            "ordinal": 4,
+            "plan": "2265ab46daa65858f2353149422e65b7a95c4e020779de5b83f501f2b786dad5"
+          },
+          "physical_parent": "9355b9e9178df6e0defe8fe8151f6b9b9d73ed4288ddbabc11d9865a3ee78794",
+          "physical_parent_is_initial_physical_CAS_token": true,
+          "transition_parent": "dd9cdb6a4716dc39e46695cb005caa293c748922e9f287d6cde43d77068834ce",
+          "transition_parent_is_comparison_token_not_retained_chain": true,
+          "birth_claims": [],
+          "birth_claim_count": 0,
+          "retained_generations": 0,
+          "pending_loose_jobs": 0,
+          "retired_container_jobs": 0,
+          "garbage_entries": 1,
+          "pending_garbage": 0,
+          "absent_garbage_tombstones": 1,
+          "owned_aborted_pack_directories": [],
+          "observed_removed_bytes": 66561,
+          "observed_removed_files": 49,
+          "observed_reconciled_absent": 37,
+          "counters_are_not_admission_credit": true,
+          "metadata_work_root_selection_is_not_physical_activation": true,
+          "mutable_progress_accepted": false,
+          "pending_selector_stage": null,
+          "journal": {
+            "version": 2,
+            "id": "physical-4-birth-10420-1792531924168839500-0",
+            "status": "registered",
+            "abandoned_owner_count": 0,
+            "ownership_transferred": false,
+            "selected_by_STORE": true,
+            "pending_owned_refs": [],
+            "establishes_acceptance": false
+          },
+          "owned_work_stage": null,
+          "required_paths": [
+            "PACKING.json",
+            "STORE.json",
+            "pack-catalogs/0277809b39e1f7253cfba1201707975787e2b3962651edde94bfaee8fca37203.json",
+            "packs/physical-4-birth-10420-1792531924168839500-0/0e65d388dec0c90d521d715025d27780e01b4fb1ea1815bd01fdda8932e528d1.idx",
+            "packs/physical-4-birth-10420-1792531924168839500-0/1c8cfdd94e48e68b1fc5d55e8d79258f99d18535491715230ffa99fb2f17913f.pack",
+            "packs/physical-4-birth-10420-1792531924168839500-0/28f593004ff923448d5a544691095ad922756067fbe8fb53361b9b35efa5a948.idx",
+            "packs/physical-4-birth-10420-1792531924168839500-0/3faee1ac3f201ce8fe2213aa5bd98f91f3fbfa64251ccbec1c37f83505298ab3.idx",
+            "packs/physical-4-birth-10420-1792531924168839500-0/77f718f8ee770e814231f7e213007bbb51ddfbfed409ffab6ff433d30c4dc98a.idx",
+            "packs/physical-4-birth-10420-1792531924168839500-0/8be45400af9cd3d68f6e36114ba3c77bd2bbf59fdfb0c27ea6bf51defcc5bdca.pack",
+            "packs/physical-4-birth-10420-1792531924168839500-0/b8691f317449e13fa534b0a248b8ea079977a294ce6523a2b3b8ac61e5ecbd25.idx",
+            "packs/physical-4-birth-10420-1792531924168839500-0/ba12735a227243eb30f74643d5f994ba06bc9fea02f56cfafa8092df0d847ab3.pack",
+            "packs/physical-4-birth-10420-1792531924168839500-0/bd9d722f348f76fccf4324bc90b3f15921b2826b1a259e8face0997abe19ce68.pack",
+            "packs/physical-4-birth-10420-1792531924168839500-0/fba888b125a3deec03042dff60766f493f28dca6ad8bc181dcddab5412eb6052.pack",
+            "physical-pins/physical-4-birth-10420-1792531924168839500-0.lock",
+            "physical-plans/2265ab46daa65858f2353149422e65b7a95c4e020779de5b83f501f2b786dad5.json"
+          ],
+          "quiescent_native_lock_state_unmeasured": true
+        },
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-15764-1792531908181461400-6",
+            "digest": "bfa15f4dae8e241645d28b4ce92a8d976314378349d60e0f951b85cdbc1745b3"
+          },
+          "publications": 4,
+          "ledger_rows": 0,
+          "permanent_digest": "df7f13e8071b5cb045168edf4e7077a0ea5c04f7259e543e94929abbbe9592e0",
+          "retired_publications": 0,
+          "retired_content": "none",
+          "unique_content_roots": 1,
+          "root_visits": 4,
+          "sources": 20,
+          "pins": 0,
+          "reservations": 0,
+          "packets": 0,
+          "generations": 0,
+          "conservative_cumulative_owner_allowance_bytes": 273235456,
+          "actual_physical_owner_bytes": false,
+          "seconds": 0.0
+        },
+        "navigation": {
+          "documents": 16,
+          "supplemented_documents": 16,
+          "projection_files": 20,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "request_intents": {
+          "profile": "independent-complete-exact-request-intent-and-accepted-result",
+          "selected": {
+            "publication": "publication-15764-1792531908181461400-6",
+            "digest": "bfa15f4dae8e241645d28b4ce92a8d976314378349d60e0f951b85cdbc1745b3"
+          },
+          "publications": 4,
+          "actual_H": 4,
+          "authentic_history_recipe_intents": 0,
+          "retained_candidate_proofs": 4,
+          "exact_loose_B_publication_controls": 0,
+          "evidence_sha256": "a0f3f9a45e2fb2e8cc97f28b33b94a2d61f1f1fa058719bac3774f368dca60a5",
+          "engine_code_imported": false
+        },
+        "independent_codec": {
+          "version": "1.5.6",
+          "path": "C:\\Program Files\\Git\\mingw64\\bin\\libzstd.dll",
+          "sha256": "f216ea8efb5b3bb9ad3d938fb9ac07e3b8f78c2c92faab03d2c468d0b6798a5a"
+        },
+        "seconds": 0.0470000000204891,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      "read_only": {
+        "root": "C:\\file-native-online-cp1-20261020\\fixtures\\online9\\disposable\\store",
+        "module": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v3.py",
+        "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+        "source_file_count": 82,
+        "source_logical_bytes": 348251,
+        "source_directory_count": 61,
+        "all_file_hashes_sizes_names_and_directories_unchanged": true,
+        "before_sha256": "ae280b212901ea342cd990ec960afab9d49e377e48cf15c5f554f0d8f0a5c2e6",
+        "after_sha256": "ae280b212901ea342cd990ec960afab9d49e377e48cf15c5f554f0d8f0a5c2e6",
+        "no_engine_calls": true,
+        "no_fixture_copies": true
+      },
+      "raw": [
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles\\online9.json",
+          "bytes": 5507,
+          "sha256": "fe8e8cead9c8c22352bf76302180e58cdb300dfbe3f5d4460c7f4f4b881be6ee"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles\\online9.before.json",
+          "bytes": 17520,
+          "sha256": "ae280b212901ea342cd990ec960afab9d49e377e48cf15c5f554f0d8f0a5c2e6"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles\\online9.after.json",
+          "bytes": 17520,
+          "sha256": "ae280b212901ea342cd990ec960afab9d49e377e48cf15c5f554f0d8f0a5c2e6"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles\\online9.read-only.json",
+          "bytes": 777,
+          "sha256": "c8b38fd3bc146f735f81ec15a9c9b4c5cc5d69cca12d9c0b6a45a535703070d9"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles\\online9.stdout",
+          "bytes": 124,
+          "sha256": "dcfa1e65924d9e6b442f4c9e209330759d5f7feaa21d15233d73abfc352dc11e"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles\\online9.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "stress9b",
+      "oracle": {
+        "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "raw_records": 5,
+        "raw_bytes": 5133,
+        "inventory_digest": "fb9462dbcd2927a96280e6da5eda26d9c9b288ec3f6a29d5f65be5f34e8ccf05",
+        "physical_metadata": {
+          "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+          "work_version": 2,
+          "selected_generation": {
+            "id": "physical-1000-birth-41344-1792532113408954000-0",
+            "ordinal": 1000,
+            "plan": "d70bf67fe1462f2221cca8bf521bfd2d46b515639aa35b24b3ab47a8e1ac9a98"
+          },
+          "physical_parent": "1375198c8e893fab3b9d85bb0eefc56c1ab823313214d1877fec00a1925d85c0",
+          "physical_parent_is_initial_physical_CAS_token": true,
+          "transition_parent": "17a8497f70a83208e229c43db3a0fba02c099834eba86d6089850fdcb987a93b",
+          "transition_parent_is_comparison_token_not_retained_chain": true,
+          "birth_claims": [],
+          "birth_claim_count": 0,
+          "retained_generations": 0,
+          "pending_loose_jobs": 0,
+          "retired_container_jobs": 0,
+          "garbage_entries": 1,
+          "pending_garbage": 0,
+          "absent_garbage_tombstones": 1,
+          "owned_aborted_pack_directories": [],
+          "observed_removed_bytes": 11085337,
+          "observed_removed_files": 12980,
+          "observed_reconciled_absent": 7006,
+          "counters_are_not_admission_credit": true,
+          "metadata_work_root_selection_is_not_physical_activation": true,
+          "mutable_progress_accepted": false,
+          "pending_selector_stage": null,
+          "journal": {
+            "version": 2,
+            "id": "physical-1000-birth-41344-1792532113408954000-0",
+            "status": "registered",
+            "abandoned_owner_count": 0,
+            "ownership_transferred": false,
+            "selected_by_STORE": true,
+            "pending_owned_refs": [],
+            "establishes_acceptance": false
+          },
+          "owned_work_stage": null,
+          "required_paths": [
+            "PACKING.json",
+            "STORE.json",
+            "pack-catalogs/dc54eb12ac6e70dfc843e6e910a610e5b2fe5272dce49216f294daa67e37313c.json",
+            "packs/physical-1000-birth-41344-1792532113408954000-0/1cc507a18e3cd94056844b0c9d464690264099bba8fab41c2d943262ce992f83.idx",
+            "packs/physical-1000-birth-41344-1792532113408954000-0/5fff3cb333acb8e21edc0cd9069f0953d8127ca6c9778f354a01a290e7a9c6c0.pack",
+            "packs/physical-1000-birth-41344-1792532113408954000-0/6b7d5fb9aafdce6ad798be11e29be620567af6b29d6bbe3c5449b2e58d0504b6.pack",
+            "packs/physical-1000-birth-41344-1792532113408954000-0/85b320821008f921f2ba6a8f69d3715a1d517c1e5e30403696d7b89a4d100f84.idx",
+            "packs/physical-1000-birth-41344-1792532113408954000-0/8fcf96fb7116a4822493cef82c22c038691a9dbf1a7adf3e32ea88f8ff864363.pack",
+            "packs/physical-1000-birth-41344-1792532113408954000-0/9b8dd31fa428eef865029a2582b4c3847faad97f866c15b7268ec12de123dfd3.pack",
+            "packs/physical-1000-birth-41344-1792532113408954000-0/af98c82b57147e70cb0146f9336d1ab0a357eb975598456fa744f0dc91ce5860.idx",
+            "packs/physical-1000-birth-41344-1792532113408954000-0/bce12b2c5e4b41ded57bec1125f9b9fc15b05a9754b81381e8184771f6e88847.idx",
+            "packs/physical-1000-birth-41344-1792532113408954000-0/bd4253c309c8428982ae9e7bf301cdccd19c6718013d4ad0d141d14cc802e62b.idx",
+            "packs/physical-1000-birth-41344-1792532113408954000-0/c40cd65050b4e94250c4c814d8e1bc73fe4710f546b996dec153843a3ad9274e.pack",
+            "physical-pins/physical-1000-birth-41344-1792532113408954000-0.lock",
+            "physical-plans/d70bf67fe1462f2221cca8bf521bfd2d46b515639aa35b24b3ab47a8e1ac9a98.json"
+          ],
+          "quiescent_native_lock_state_unmeasured": true
+        },
+        "semantic": {
+          "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+          "selected": {
+            "publication": "publication-79024-1792532030442663200-21",
+            "digest": "e6595399a029360d69de6d6f9c5851e82a0911c18fe53df1c860be2e89e032e4"
+          },
+          "publications": 1,
+          "ledger_rows": 0,
+          "permanent_digest": "23acfce1541732e639ff7e3c469b4996095c313e708720ba6084cf8aadb280fc",
+          "retired_publications": 0,
+          "retired_content": "none",
+          "unique_content_roots": 1,
+          "root_visits": 1,
+          "sources": 14,
+          "pins": 0,
+          "reservations": 0,
+          "packets": 0,
+          "generations": 0,
+          "conservative_cumulative_owner_allowance_bytes": 70108864,
+          "actual_physical_owner_bytes": false,
+          "seconds": 0.015000000013969839
+        },
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "request_intents": {
+          "profile": "independent-complete-exact-request-intent-and-accepted-result",
+          "selected": {
+            "publication": "publication-79024-1792532030442663200-21",
+            "digest": "e6595399a029360d69de6d6f9c5851e82a0911c18fe53df1c860be2e89e032e4"
+          },
+          "publications": 1,
+          "actual_H": 1,
+          "authentic_history_recipe_intents": 0,
+          "retained_candidate_proofs": 1,
+          "exact_loose_B_publication_controls": 0,
+          "evidence_sha256": "dc454cddf43c01591e367b81b689c36d5ceeab79bc92b73a5f5bf9d77e8aff0a",
+          "engine_code_imported": false
+        },
+        "independent_codec": {
+          "version": "1.5.6",
+          "path": "C:\\Program Files\\Git\\mingw64\\bin\\libzstd.dll",
+          "sha256": "f216ea8efb5b3bb9ad3d938fb9ac07e3b8f78c2c92faab03d2c468d0b6798a5a"
+        },
+        "seconds": 0.030999999959021807,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      "read_only": {
+        "root": "C:\\file-native-online-cp1-20261020\\fixtures\\stress9b\\disposable\\store",
+        "module": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v3.py",
+        "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+        "source_file_count": 54,
+        "source_logical_bytes": 280803,
+        "source_directory_count": 43,
+        "all_file_hashes_sizes_names_and_directories_unchanged": true,
+        "before_sha256": "2afbc67134c9b765585473ff88c2394c248e149174f936d5b5609be41d927d6f",
+        "after_sha256": "2afbc67134c9b765585473ff88c2394c248e149174f936d5b5609be41d927d6f",
+        "no_engine_calls": true,
+        "no_fixture_copies": true
+      },
+      "raw": [
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles\\stress9b.json",
+          "bytes": 5576,
+          "sha256": "94ab99771ee0f6148a533fc9bc0da815722384dc9a5524b83bb327173bd7ca5e"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles\\stress9b.before.json",
+          "bytes": 11392,
+          "sha256": "2afbc67134c9b765585473ff88c2394c248e149174f936d5b5609be41d927d6f"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles\\stress9b.after.json",
+          "bytes": 11392,
+          "sha256": "2afbc67134c9b765585473ff88c2394c248e149174f936d5b5609be41d927d6f"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles\\stress9b.read-only.json",
+          "bytes": 778,
+          "sha256": "31e81f732001d249181c0595c44ec82de74829c0411019ae57e54484b82e94b8"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles\\stress9b.stdout",
+          "bytes": 123,
+          "sha256": "c493befc0c6fd59ac618e1c93751103555b37d58b54c2eb352543008154790b2"
+        },
+        {
+          "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles\\stress9b.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "guards": [
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles-guard.json",
+      "sha256": "5cc4cd8b3b302a3295900841aaf946bf404c1968a242efcde07840b587643716",
+      "exit": 1,
+      "censor": null,
+      "errors": [],
+      "closure_checks": [
+        {
+          "epoch": 1792532319.3433328,
+          "members": []
+        },
+        {
+          "epoch": 1792532319.3641312,
+          "members": []
+        }
+      ],
+      "process_closure_verified": true,
+      "memory_sample_timing": {
+        "samples": 26,
+        "max_interval_seconds": 0.03200000000651926,
+        "intervals_over_40ms": 0
+      },
+      "job_aggregate_sampled_peak_rss": 42094592
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-remaining-full-oracles-guard.json",
+      "sha256": "ce441f606ca1bd400453b0ad0c95e255016c95bace72d3e6f9a02bab13f5952b",
+      "exit": 0,
+      "censor": null,
+      "errors": [],
+      "closure_checks": [
+        {
+          "epoch": 1792532441.700827,
+          "members": []
+        },
+        {
+          "epoch": 1792532441.7213662,
+          "members": []
+        }
+      ],
+      "process_closure_verified": true,
+      "memory_sample_timing": {
+        "samples": 28,
+        "max_interval_seconds": 0.03200000000651926,
+        "intervals_over_40ms": 0
+      },
+      "job_aggregate_sampled_peak_rss": 42549248
+    }
+  ],
+  "recorder_failure": {
+    "cause": "exclusive-create cumulative batch receipt reused after second successful oracle",
+    "first_two_oracles_passed": true,
+    "remaining_only_retry": true,
+    "original_failed_source": {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cd12-additional-full-oracles-failed-batch-source.py.txt",
+      "sha256": "55dfdddb977d0107deda65995a022d811eb32668e7137c00a4c8c8c363573222",
+      "exact_stage_binding_match": true
+    },
+    "engine_or_oracle_failure": false,
+    "failed_guard_preserved": true
+  },
+  "directory_counts_include_root": true,
+  "qualification": "all four full independent cd12 quiescent oracles passed, source file hashes and directory paths unchanged; legacy OS267 defect and later source/final pin qualification remain separate"
+}

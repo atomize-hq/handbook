@@ -43,18 +43,20 @@ sys.path.insert(0, str(module_path.parent))
 module = importlib.import_module(module_path.stem)
 assert Path(module.__file__).resolve() == module_path
 known = json.loads(Path(args.known_requests).read_bytes()) if args.known_requests else None
-answer = module.verify(root, output, quiescent=True, known_requests=known)
-after = snapshot()
-write_json(output.with_suffix('.after.json'), after)
-assert before == after and sha_file(module_path) == args.module_sha256
-write_json(output.with_suffix('.read-only.json'), dict(root=str(root),module=str(module_path),
-           module_sha256=args.module_sha256,source_file_count=len(before['files']),
-           source_logical_bytes=sum(x['bytes'] for x in before['files'].values()),
-           source_directory_count=len(before['directories']),
-           all_file_hashes_sizes_names_and_directories_unchanged=True,
-           before_sha256=sha_file(output.with_suffix('.before.json')),
-           after_sha256=sha_file(output.with_suffix('.after.json')),
-           no_engine_calls=True,no_fixture_copies=True))
+try:
+    answer = module.verify(root, output, quiescent=True, known_requests=known)
+finally:
+    after = snapshot()
+    write_json(output.with_suffix('.after.json'), after)
+    write_json(output.with_suffix('.read-only.json'), dict(root=str(root),module=str(module_path),
+               module_sha256=args.module_sha256,source_file_count=len(before['files']),
+               source_logical_bytes=sum(x['bytes'] for x in before['files'].values()),
+               source_directory_count=len(before['directories']),
+               all_file_hashes_sizes_names_and_directories_unchanged=before == after,
+               before_sha256=sha_file(output.with_suffix('.before.json')),
+               after_sha256=sha_file(output.with_suffix('.after.json')),
+               no_engine_calls=True,no_fixture_copies=True))
+    assert before == after and sha_file(module_path) == args.module_sha256
 print(json.dumps(dict(status='passed',actual_H=answer['semantic']['publications'],
                      records=answer['raw_records'],source_files=len(before['files']),
                      source_directories=len(before['directories']),source_unchanged=True)))
