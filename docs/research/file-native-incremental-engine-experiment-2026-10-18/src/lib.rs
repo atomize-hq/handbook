@@ -9,6 +9,7 @@ pub mod store;
 pub mod projection;
 mod navigation;
 mod pack;
+mod paged;
 mod packing;
 mod rolling;
 mod physical_lifetime;
