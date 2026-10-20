@@ -1,0 +1,119 @@
+{
+  "kind": "44GiB-F12-topup-and-C3-reused-source-admin-prospective-topup",
+  "claim_id": "44GiB-CENTRAL-009-F12-PLUS8MiB-C3-SOURCE-ADMIN3MiB",
+  "utc": "2026-10-20T22:21:14.622352+00:00",
+  "status": "AUTHORIZED_RESERVATIONS__LIVE_REGISTRATION_REQUIRED__NO_ENGINE_PERMISSION",
+  "authority": "Metaauthorizes F12+8MiB fromcentralcontingency, andbeforeCP2fixcommit/CP3handoff C3SOURCE_ADMIN2->3MiB internally. Combinedherebecause009wasnotwritten/sealedwhenadditionalinstructionarrived. No010duplicateclaimrequired.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T215822Z.json",
+    "sha256": "8b69a7c60846c637d77d2011ab1e39baab31617c9cba2da0b0a76cbe843804b5"
+  },
+  "arithmetic_correction": {
+    "requested_new_whole_typo_bytes": 47079400149,
+    "correct_old_plus8MiB_bytes": 47079500149,
+    "typo_difference_bytes": 100000,
+    "central_contingency_requested_was_correct": true,
+    "no_extra100000allocation": "Correctiononly;priorwhole47071111541+exact8MiB8388608=47079500149. No oldsealedrecordchanged."
+  },
+  "F12_transfer": {
+    "from": "centralunassignedcontingency",
+    "to": "F12Windowsmatrix+stream evidencepool",
+    "bytes": 8388608,
+    "net_whole_prospective_increase_bytes": 8388608,
+    "F12global_prior_bytes": 134217728,
+    "F12global_new_bytes": 142606336,
+    "Windows_prior_bytes": 83886080,
+    "Windows_new_bytes": 92274688,
+    "CP1_CP2_CP3_shared_bytes_unchanged": 50331648,
+    "matrix_stream_pool_prior_bytes": 33554432,
+    "matrix_stream_pool_new_bytes": 41943040,
+    "matrix_nonstream_share_bytes": 41418752,
+    "stream_share_bytes_unchanged": 524288,
+    "stream_runtime_bytes_unchanged": 458752,
+    "stream_Landing_bytes_unchanged": 65536,
+    "Linux_bytes_unchanged": 25165824,
+    "Mac_bytes_unchanged": 25165824,
+    "files_unchanged": true,
+    "accounting": "Allphysicalruntime/Landing/raw/receiptcopiescountonceperphysicalpathwithinsharedpool. Not8MiBperworker."
+  },
+  "CP_shared48_prospective": {
+    "reported_actual_bytes": 41229624,
+    "CP3_reserved_prospective_bytes": 6291456,
+    "actual_plus_CP3_bytes": 47521080,
+    "shared_cap_bytes": 50331648,
+    "remaining_bytes": 2810568,
+    "CP2_requested_final_upper_bytes": 44040192,
+    "CP2_42_plus_CP3_6_equals48": true,
+    "qualification": "Meta-reportedcombinedactual,notnewindependentallhostcensus. No assumedCPevidencerelease; allCP1/2remainingoutputssame48pool."
+  },
+  "C3_reused_CP2_CP3_SOURCE_ADMIN_topup": {
+    "parent_C3_replacement_bytes_unchanged": 16777216,
+    "subclaim_prior_combined_bytes": 2097152,
+    "internal_topup_bytes": 1048576,
+    "subclaim_new_combined_prospective_cap_bytes": 3145728,
+    "from": "C3unsubclaimedremainder",
+    "C3_unsubclaimed_before_bytes": 10354688,
+    "C3_unsubclaimed_after_bytes": 9306112,
+    "C3_unsubclaimed_after_MiB": 8.875,
+    "source_root": "C:/Users/spmcc/.codex/worktrees/file-native-online-cp2-20261020/handbook",
+    "source_cap_bytes": 1048576,
+    "source_reported_actual_bytes": 294100,
+    "planned_source_growth_bytes": 524288,
+    "source_actual_plus_growth_bytes": 818388,
+    "source_forecast_headroom_bytes": 230188,
+    "exact_admin_root": "C:/Users/spmcc/Documents/__Project_Code/handbook/.git/worktrees/handbook11",
+    "admin_subset_cap_bytes": 2097152,
+    "admin_prior_tight_cap_reported_bytes": 970752,
+    "index_plus_index_lock_reported_approx_bytes": 1858000,
+    "admin_combined_transient_rule": "CountindexANDindex.locksimultaneouslyplusallotherhandbook11filesbeforecommit. No silentbaselining, no ignoringtransientlockbytes, no lockdeletionbyresourceworker. Exactpathcensus/bindingrequiredparentregistrationbeforecommit.",
+    "combined_source_admin_cap_bytes": 3145728,
+    "source_and_admin_caps_sum_equal_combined": true,
+    "admin_actual_charge": "NONADDITIVEsubsetofF13sharedcommonGitglobalactual. C3sourceactualisownedworkingtreefiles/.gitpointer; commonGitobjects/admin/locks chargedonceF13globally. Do notaddadminactualagaintoC3/globaltotal. Combined3MiBprospectivegateensurescheckedtransientheadroom.",
+    "no_new_worktree_or_target": "SameCP2checkout/packagepath+newbranchafterownershiphandoff; sameF02target. CP3readonlyuntilmetaGO; sourcefix/commithandoffnotenginepermission.",
+    "file_caps_unchanged": true,
+    "other_C3_subclaims_unchanged": {
+      "META_REVIEW_bytes": 4194304,
+      "LONG_STREAM_SOURCE_bytes": 131072
+    }
+  },
+  "whole_applied_allocator": {
+    "prior_whole_forecast_bytes": 47071111541,
+    "F12_increase_bytes": 8388608,
+    "C3_internal_transfer_net_increase_bytes": 0,
+    "new_whole_forecast_bytes": 47079500149,
+    "cap_bytes": 47244640256,
+    "prior_central_contingency_bytes": 173528715,
+    "new_central_contingency_bytes": 165140107,
+    "inside_closeout_reserve_bytes_unchanged": 1073741824,
+    "inside_closeout_reserve_files_unchanged": 100000,
+    "reserved_files_with64claimslots_unchanged": 4792604,
+    "remaining_central_files_unchanged": 207396,
+    "no_global_file_increase": true
+  },
+  "future_complete_qualification_conditional": {
+    "prior_full448_F07192_audit_bytes": 47641536885,
+    "new_F12_evidence_cost_bytes": 8388608,
+    "updated_full448_F07192_audit_bytes": 47649925493,
+    "updated_fullaudit_shortfall_bytes": 405285237,
+    "conditional_F14_completed_coexistence_expiry_bytes": 283460393,
+    "conditional_native192_unused_target_release_bytes": 134217728,
+    "potential_complete_whole_after_ALLproofs_bytes": 47232247372,
+    "potential_margin_bytes": 12392884,
+    "prior_potential_margin_bytes": 20781492,
+    "margin_reduction_bytes": 8388608,
+    "status": "CONDITIONAL_NO_GO_LATER_STAGES",
+    "conditions": "Allaudit004otherreleaseproofs, currentF051600publicationforecast774439319inside768MiBnot736, actualF14enginecleanup/census/fulloracles/closure, reviewedF11streamcapture+independentrestore+successor, actualfinalnative192targetproof, F07finalpair192MiB/40kprospectiveadmission. Includeeveryfutureextraevidencecost; nocap/reservecreditorassumedCPpoolrelease."
+  },
+  "registration_before_use": [
+    "Parent/matrixownerregistersF12matrix39.5MiB+stream0.5MiBshared40MiB,andWindowscombined88MiBwithCPshared48beforeheadroomuse.",
+    "Parentupdatesreusedsource/adminbindingbudgetAFTERseal:exactsource1MiB,handbook11admin2MiBnonadditiveF13,combined3MiB. Thenfreshtransientcensus/prospectivecheckbeforeCP2commit orCP3handoff.",
+    "Resourceworkerdoesnoteditguardbudgets,Git/index/locks,sourceorbuild/corpus. PriorfrozenLandingharness/sourceownershiprulesandheavyJobtokensremain."
+  ],
+  "previous_seals_unchanged": true,
+  "resource_worker_actions": "Newclaimreports only; no engine/build/restore/corpus/cachecopy/deletionorbudgetedit.",
+  "clocks_unchanged": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z"
+  }
+}

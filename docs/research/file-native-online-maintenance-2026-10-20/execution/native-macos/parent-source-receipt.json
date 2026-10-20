@@ -1,0 +1,45 @@
+{
+  "status": "GUARD_CORE_AND_ROLE_INTERFACE_ACCEPTED_FINAL_ENGINE_BINDING_AND_CAPSULE_ADAPTER_PENDING",
+  "parent_review_sha256": "aeede0469157c4d69cc4ef34edf7935a24075406324356c2aa3eb4cc1db7b713",
+  "source_bindings": {
+    "admission_v20.py": {
+      "bytes": 9580,
+      "sha256": "aaf37aa66d486805a5fed459ba632d39bc65749d67ee153bc92a575b69410fe3"
+    },
+    "guard_v20.py": {
+      "bytes": 31667,
+      "sha256": "c33fa117667de50c9010e27830a1ec63019deb7186d4a047e439bda04530cfb4"
+    },
+    "keeper_v20.py": {
+      "bytes": 16949,
+      "sha256": "5a96e449f32f971dbd57f2ca62cdc194920858ae9708d5ecd6bec25e19aa8978"
+    },
+    "mac-v25-parent-review.json": {
+      "bytes": 5981,
+      "sha256": "aeede0469157c4d69cc4ef34edf7935a24075406324356c2aa3eb4cc1db7b713"
+    },
+    "monitor_v20.py": {
+      "bytes": 14274,
+      "sha256": "7b3f3fd0c79ddb3fd4115c22c0b17c1d7914ce2aca0aff54f16fcd4587bf52a7"
+    },
+    "native-guard-role-delta-v25.tar.gz": {
+      "bytes": 228373,
+      "sha256": "82c50c26c4a66a31915a1eb02016f4626e08e3b726345d69e48db3098d65d226"
+    },
+    "native-replacement-review-v17.tar.gz": {
+      "bytes": 193338,
+      "sha256": "043f78888c2ff09a55958deb6b3902a36832b1e35f701ba1b59b69f2e58f68f4"
+    },
+    "native_probe.py": {
+      "bytes": 5072,
+      "sha256": "ba21a8452e1b70d4725f387babcf31c6c994868137cf5a50552812e43bd61c90"
+    },
+    "role_driver_v23.py": {
+      "bytes": 13237,
+      "sha256": "f79bc1737b0ff0ba4fff4e4db4e15ffb2acce82cd88cf79a81e66a3c516ffa98"
+    }
+  },
+  "full_raw_control_evidence_in_exact_archives": true,
+  "native_engine_cache_build_status": "HOLD_FINAL_SOURCE_PIN_AND_ADAPTER_REVIEW",
+  "scope": "Preserved exact native sources/reports and compressed evidence, not a new engine qualification. Prior failed/censored controls remain in v17/v25 indices and remote raw roots."
+}

@@ -1,0 +1,197 @@
+{
+  "review": "ACCEPT_GUARD_CORE_V20_BOUNDED_FOREGROUND_LAUNCHER_AND_ROLE_INTERFACE_V23; FINAL_ENGINE_BINDING_AND_CAPSULE_ADAPTER_PENDING",
+  "archive_sha256": "82c50c26c4a66a31915a1eb02016f4626e08e3b726345d69e48db3098d65d226",
+  "source_hashes": {
+    "guard_v20.py": "c33fa117667de50c9010e27830a1ec63019deb7186d4a047e439bda04530cfb4",
+    "monitor_v20.py": "7b3f3fd0c79ddb3fd4115c22c0b17c1d7914ce2aca0aff54f16fcd4587bf52a7",
+    "keeper_v20.py": "5a96e449f32f971dbd57f2ca62cdc194920858ae9708d5ecd6bec25e19aa8978",
+    "admission_v20.py": "aaf37aa66d486805a5fed459ba632d39bc65749d67ee153bc92a575b69410fe3"
+  },
+  "driver_sha256": "f79bc1737b0ff0ba4fff4e4db4e15ffb2acce82cd88cf79a81e66a3c516ffa98",
+  "all_member_hashes_and_strict_transport_verified": true,
+  "core_controls": [
+    {
+      "case": "normal-final-v20",
+      "rows": 244,
+      "RSS_rows": 235,
+      "max_gap_seconds": 0.015017000027000904,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "nested-final-v20",
+      "rows": 243,
+      "RSS_rows": 234,
+      "max_gap_seconds": 0.012529999949038029,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "orphan-final-v20",
+      "rows": 178,
+      "RSS_rows": 176,
+      "max_gap_seconds": 0.012569000013172626,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "memory-final-v20",
+      "rows": 182,
+      "RSS_rows": 177,
+      "max_gap_seconds": 0.012300666887313128,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "missing-final-v20",
+      "rows": 171,
+      "RSS_rows": 167,
+      "max_gap_seconds": 0.012498416937887669,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "cadence-final-v20",
+      "rows": 170,
+      "RSS_rows": 168,
+      "max_gap_seconds": 0.012474542018026114,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "watchdog-death-final-v20",
+      "rows": 177,
+      "RSS_rows": 172,
+      "max_gap_seconds": 0.012346040923148394,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "output-final-v20",
+      "rows": 179,
+      "RSS_rows": 177,
+      "max_gap_seconds": 0.012592625338584185,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "live-byte-final-v20",
+      "rows": 192,
+      "RSS_rows": 190,
+      "max_gap_seconds": 0.014185500331223011,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "live-file-final-v20",
+      "rows": 188,
+      "RSS_rows": 184,
+      "max_gap_seconds": 0.01260029198601842,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "escape-final-v20",
+      "rows": 208,
+      "RSS_rows": 204,
+      "max_gap_seconds": 0.015234124846756458,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "fixed-token-wait-v20",
+      "rows": 28,
+      "RSS_rows": 28,
+      "max_gap_seconds": 0.01228387514129281,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "case": "fixed-setup-wait-v20",
+      "rows": 28,
+      "RSS_rows": 28,
+      "max_gap_seconds": 0.011697500012814999,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "case": "closure-HOLD-final-v20",
+      "rows": 181,
+      "RSS_rows": 179,
+      "max_gap_seconds": 0.012859249953180552,
+      "closure": "UNKNOWN_HOLD"
+    },
+    {
+      "case": "timeout-direct-v20b",
+      "rows": 646,
+      "RSS_rows": 603,
+      "max_gap_seconds": 0.02175416611135006,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "source-release-direct-v20b",
+      "rows": 165,
+      "RSS_rows": 165,
+      "max_gap_seconds": 0.014896499924361706,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "case": "budget-refusal-v20b",
+      "rows": 195,
+      "RSS_rows": 190,
+      "max_gap_seconds": 0.014631915837526321,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "sequential128-v20",
+      "rows": 1097,
+      "RSS_rows": 989,
+      "max_gap_seconds": 0.017741208896040916,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "reader-memory-v24-outer",
+      "rows": 336,
+      "RSS_rows": 330,
+      "max_gap_seconds": 0.027177791576832533,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "case": "checker-timeout-v24-outer",
+      "rows": 236,
+      "RSS_rows": 229,
+      "max_gap_seconds": 0.01467179087921977,
+      "closure": "PROVEN_EMPTY_TWICE"
+    }
+  ],
+  "role_controls": [
+    {
+      "case": "reader-normal-v25",
+      "rows": 21,
+      "RSS_rows": 19,
+      "gap_seconds": 0.015367916785180569,
+      "expected_refusals": 0,
+      "two_absence_observations": true
+    },
+    {
+      "case": "checker-normal-v25",
+      "rows": 19,
+      "RSS_rows": 17,
+      "gap_seconds": 0.015306874644011259,
+      "expected_refusals": 0,
+      "two_absence_observations": true
+    },
+    {
+      "case": "reader-memory-v24",
+      "rows": 6,
+      "RSS_rows": 4,
+      "gap_seconds": 0.015510042198002338,
+      "expected_refusals": 2,
+      "two_absence_observations": true
+    },
+    {
+      "case": "checker-timeout-v24",
+      "rows": 14,
+      "RSS_rows": 12,
+      "gap_seconds": 0.015512083191424608,
+      "expected_refusals": 2,
+      "two_absence_observations": true
+    }
+  ],
+  "limitations": [
+    "128 sequential control is not4096-process cadence proof; actual stage strict cadence and explicit identity budget required",
+    "Injected sampler silence uses keeper refusal; interval pairs do not establish terminal continuity",
+    "Supervisor-death killed-writer gzip truncated remains censored; independent closure separate",
+    "Mac full capsules/engine/cache copy/build not released",
+    "Role interface requires capsule adapter and bounded response logging before full qualification"
+  ],
+  "C1": "Activated64MiB Claim007 separate category verified; actual cache absent",
+  "protected_data_untouched": true
+}

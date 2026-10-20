@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-009-F12-PLUS8MiB-C3-SOURCE-ADMIN3MiB",
+  "utc": "2026-10-20T22:21:14.622352+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T222114Z.json",
+      "bytes": 7011,
+      "sha256": "dfe85f98db9820fbda0cdaf96bd97b51fdb376679df03646099e9d015fe31653"
+    },
+    {
+      "file": "claim-20261020T222114Z.md",
+      "bytes": 1854,
+      "sha256": "d4bfcbe9a1221e5b1fbd4d50ccc6b873118980c78e806e055b02e2003162f43f"
+    }
+  ],
+  "status": "AUTHORIZED_RESERVATIONS__LIVE_REGISTRATION_REQUIRED__NO_ENGINE_PERMISSION",
+  "sealed": true
+}

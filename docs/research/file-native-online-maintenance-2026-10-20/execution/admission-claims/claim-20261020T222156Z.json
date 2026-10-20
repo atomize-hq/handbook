@@ -1,0 +1,66 @@
+{
+  "kind": "44GiB-existing-matrix-protocol-file-subclaim-reassignment",
+  "claim_id": "44GiB-CENTRAL-010-STREAM-CONTROLS-166FILES",
+  "utc": "2026-10-20T22:21:56.128649+00:00",
+  "status": "AUTHORIZED_INTERNAL_FILE_SUBALLOCATION__VERSIONED_BINDING_REQUIRED",
+  "authority": "Metaauthorizes+16streamprotocolregularfiles fromEXISTINGmatrixF06fileallowance, same2MiB, topermitonecomplete29controlrerunafterfinalsourceinventoryboundfix. Preservealloldprefixes/claims.",
+  "sequence_note": "C3topupwascombinedinclaim009beforethisinstructionarrived; no separate010C3claimexists, sothisnextclaimis010, not011.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T222114Z.json",
+    "sha256": "dfe85f98db9820fbda0cdaf96bd97b51fdb376679df03646099e9d015fe31653"
+  },
+  "stream_protocol": {
+    "category": "F06-MATRIX-STREAM-TINY-CONTROLS",
+    "root": "C:/file-native-online-matrix-20261020/protocol/stream-control/",
+    "bytes_unchanged": 2097152,
+    "prior_regular_file_subcap": 150,
+    "new_regular_file_subcap": 166,
+    "increase_files": 16,
+    "parent_matrix_F06_regular_file_cap_unchanged": 25000,
+    "parent_other_protocol_files_before": 24850,
+    "parent_other_protocol_files_after": 24834,
+    "net_new_global_reserved_files": 0,
+    "all_current_prefixes_reported": {
+      "regular_files": 110,
+      "logical_bytes": 961937,
+      "qualification": "Meta-reportedpointintimebeforefinalrerun, no removalcredit."
+    },
+    "complete_final_control_rerun_prospective_new_files": 46,
+    "prospective_total_regular_files": 156,
+    "remaining_to166_files": 10,
+    "rule": "Allsource/destination/quarantinedfailedprefixdataandtempfiles countboth2MiB and166regularfiles; preservedprefixesnotdeletedorignored. Ifactualbytes/filesexceed,refusebeforegrowth/returnmeta."
+  },
+  "stream_subownership_total_after": {
+    "C3_source_files_unchanged": 1,
+    "F06_protocol_files_new": 166,
+    "F12_evidence_files_unchanged": 49,
+    "combined_files_prior": 200,
+    "combined_files_new": 216,
+    "source_bytes_unchanged": 131072,
+    "protocol_bytes_unchanged": 2097152,
+    "evidence_bytes_unchanged": 524288,
+    "evidence_runtime_bytes_unchanged": 458752,
+    "evidence_Landing_bytes_unchanged": 65536
+  },
+  "whole_applied_allocator_unchanged": {
+    "whole_forecast_bytes": 47079500149,
+    "central_contingency_bytes": 165140107,
+    "global_cap_bytes": 47244640256,
+    "reserved_files_with64claimslots": 4792604,
+    "remaining_central_files": 207396,
+    "global_file_cap": 5000000,
+    "C3_unsubclaimed_bytes_after009_unchanged": 9306112,
+    "inside_closeout_reserve_bytes": 1073741824,
+    "inside_closeout_reserve_files": 100000
+  },
+  "registration_before_use": "Parentregistersversionednewstreambudget/bindingAFTERseal; no writebeyondprior150regularfilesbeforebinding. Resourceworkerdoesnoteditbudgetorhelper. OriginalparentF0625kfilecapmustenforceaggregateothers24834+stream166, nottwoindependent25kgrants.",
+  "execution_scope": "Onecompletefinalsource29controlrerunundertiny syntheticclaim afterbinding/guard/sourcecheck. Nocasesomitted; no engine/realstore/longexecution, no protecteddata/cache/oldtargetmodification. Sourcefreeze,ownedJobtoken/deadline/RSSandrawreceiptproof unchanged.",
+  "no_resource_worker_execution": "Newclaimreports only; no controlrun/source/budget/Gitwrite/build/corpus/restore/deletion.",
+  "later_stages": "Fullqualificationandreal longstageconditionalNO_GOremain; noF14/native192forecastreleasebythisclaim.",
+  "prior_seals_unchanged": true,
+  "clocks_unchanged": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z"
+  }
+}

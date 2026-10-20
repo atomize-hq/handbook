@@ -1,0 +1,173 @@
+{
+  "utc": "2026-10-20T22:35:30.939009+00:00",
+  "repository": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook",
+  "source_pin": "7a6ee9db03f5cd2e388129a9019c0d5f274a1844",
+  "results": [
+    {
+      "target": "Descriptor",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "ad565b05d963cd06ce33e55aa728deda07b87b1c8e814ae71ef316e8690e460d"
+    },
+    {
+      "target": "Discovery",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "ceec5a9ad38ae96398bfa0cfbda3d65f63ebf2f43a06c25496671f4c621cbc67"
+    },
+    {
+      "target": "Metrics",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "c83d18f536e5dd676eda9725ef41eaec77b0cddc9c880874ae049a9a1a98cebb"
+    },
+    {
+      "target": "PhysicalRead",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "22ddd72909ef06f99b87e07094f630ae16d317e6996aadbf5662a7a8c296cde4"
+    },
+    {
+      "target": "abandoned_owners",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "9598e7197bd355dd2fa281a9f4dffc8b59e167c66f82ed5fef3780b0c2daff24"
+    },
+    {
+      "target": "activate",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "2c6e4ec90204579221a90ec64cae4bfaad27e50dd55cf086bc10e45b4962a69e"
+    },
+    {
+      "target": "append_work",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "39f3937a68997be16dd8f1545a54e6ae0c540b90ff90cbb873f86a2d7da41be2"
+    },
+    {
+      "target": "blank_work",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "3b82d39d0ba59561f2dcc0c16796f95dd2f6f654c4cd3ea1a5e10981bf11ee13"
+    },
+    {
+      "target": "catalog",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "fc24c4b3390dc01430731a20f72cdf212f93e62d987863756da95e9abc90adec"
+    },
+    {
+      "target": "cohort",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "0ecab93ce93eb7a6e69f7571d50d158bd3443881ca654476c100c58c58006616"
+    },
+    {
+      "target": "consolidate",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "59b3139f9134456d87eb62be448b1fe62fc0eb3d68f4c015bfe6c857cb7e1524"
+    },
+    {
+      "target": "discover",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "5e38736bb252debad8dc705c23a620bb403c00fb3d4c04fc02d38da7b3be0040"
+    },
+    {
+      "target": "eligible",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "c23a81ee427d10081db83a3299fc88a498043ff74511cd355364ea20194000ea"
+    },
+    {
+      "target": "exists",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "f89b88ca30f82e439c8bd8f1ebd10ec2d1e7241549538d10ee5ddb5104c29736"
+    },
+    {
+      "target": "flush",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "8d33a0036f4dbbbae298bb193e8839163924202025797eab3ae47015804d8435"
+    },
+    {
+      "target": "index",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "fa729ac8b8c841b6b3d5712da27e55d03f50228168981ffc636d9df305b9ec4a"
+    },
+    {
+      "target": "inherit_aborted",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "b016e62a7baa6869a6efb5a125b48a2a6727c79fad0005f4f04324530e70774a"
+    },
+    {
+      "target": "locate",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "681f6ad61c58850730f60d2143b2fbb3d908553cf786cceb22dc8a379f185a18"
+    },
+    {
+      "target": "mapped",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "c9547b0c8ff8972c81757d0474a60dfbe3f67f759191ea3021b23ade7872d92c"
+    },
+    {
+      "target": "read",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "a35865571164cb243655c8c7469f30d0fb1c074d8412511419f0393665b121a3"
+    },
+    {
+      "target": "run_inner",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "5808b6d3bfa3335eb0ce0fc7b259e00d55ce8f906145dd9db3ec84ff0a92242b"
+    },
+    {
+      "target": "sharing_refusal",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "2b65556b3cb573401d472838276e93ce08f1f5a1234801619affb7fe2e99c9f5"
+    },
+    {
+      "target": "validate_work",
+      "direction": "upstream",
+      "exit": 1,
+      "status": "UNKNOWN_EXACT_REPOSITORY_UNREGISTERED",
+      "output_sha256": "4bb13eb3af96e5a87c8cbded0439fce030b0ba48910d0f29813bbce3a3431b77"
+    }
+  ],
+  "manual_risk": "HIGH",
+  "manual_blast_radius": "ordinary Store open and physical read/resolve; rolling suffix discovery; immutable Work physical selection; pack construction/consolidation; loose/container cleanup; semantic APIs unchanged",
+  "direct_caller_counts": "UNKNOWN",
+  "process_counts": "UNKNOWN",
+  "review": "review-7a6ee9db.md INTEGRATE bounded engineering; full qualification remains incomplete"
+}

@@ -1,0 +1,88 @@
+{
+  "kind": "44GiB-C3-meta-review-closeout-copy-prospective-topup",
+  "claim_id": "44GiB-CENTRAL-012-C3-META-REVIEW-6MiB",
+  "utc": "2026-10-20T22:25:33.520951+00:00",
+  "status": "AUTHORIZED_INTERNAL_C3_TOPUP__FINITE_COPY_SCOPE_ONLY",
+  "authority": "Metaauthorizes C3_META_REVIEW4->6MiB fromexistingC3unsubclaimed9306112, beforefuturecopygrowth. Claim011alreadysealed, preserved; nextclaim012. No additionalhumanapproval/cap/reserveallocation.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T222344Z.json",
+    "sha256": "107f419f47418eeefa40dffc5e2bd70b38743e388de10246b92597c8055c4b49"
+  },
+  "C3_internal_transfer": {
+    "parent_C3_replacement_total_bytes": 16777216,
+    "META_REVIEW_prior_bytes": 4194304,
+    "META_REVIEW_increase_bytes": 2097152,
+    "META_REVIEW_new_bytes": 6291456,
+    "unsubclaimed_before_bytes": 9306112,
+    "unsubclaimed_after_bytes": 7208960,
+    "unsubclaimed_after_MiB": 6.875,
+    "META_REVIEW_regular_file_cap_unchanged": 2000,
+    "parent_C3_file_cap_unchanged": 15000,
+    "other_C3_subclaims_unchanged": {
+      "CP2_CP3_SOURCE_ADMIN_combined_bytes": 3145728,
+      "LONG_STREAM_SOURCE_bytes": 131072
+    },
+    "sum_subclaims_plus_unsubclaimed_equals16MiB": true,
+    "preexisting32KiBcontrolhold_inside_unsubclaimed": true,
+    "no_whole_forecast_increase": true
+  },
+  "META_REVIEW_scope": {
+    "parent_root": "C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be",
+    "paths": "Exactregisterednewcontroltransport/extracted/reviewreportpathsunderparentplusdistinctLandingreview/metadata/claimcopies. Wholeparentcurrentcensusisasafeuppercheck, notpermissiontodoublecountpathsunderothercategories.",
+    "byte_cap": 6291456,
+    "includes": [
+      "Coexistingcompressedarchives,transportJSON/base64ifpersisted,extractedcontrolsource/rawreceipts andfailedreviews inthisscope",
+      "Distinctreview/checkpoint/finalreportandclaimmetadata copiesinthe savedLandingbranch",
+      "LateracceptednativecapsulereturnREVIEWcopy whenexactpath/ownership/censusforecastregistered; preserveallrawarchiveevidencewithoutassumingdeletecredit"
+    ],
+    "excludes": [
+      "Newengine/corpus/fixture/buildtargetwork orblanketruntime allowance",
+      "Protectedolddata/caches/targetsoroldoriginalsarchives",
+      "AnyphysicalpathalreadycountedinF12actual, unlessexactcategoryreassignmentisrecordedwithoutdroppingglobalbytes"
+    ]
+  },
+  "reported_current_and_future_forecast": {
+    "parent_whole_actual_bytes_reported": 3702718,
+    "parent_whole_actual_files_reported": 443,
+    "distinct_existing_Landing_metadata_review_claim_copies_approx_bytes_range": [
+      300000,
+      400000
+    ],
+    "later_finalreview_Macacceptedcapsule_reviewcopy_approx_bytes": 700000,
+    "meta_conservative_working_forecast_formula": "3.7Mparent+0.4MLanding+0.736Mnewcopy+0.3Mlatermetadata~5.14M",
+    "illustrative_upper_sum_bytes": 5138747,
+    "illustrative_headroom_to6MiB_bytes": 1152709,
+    "qualification": "Parentreportedcensus+explicitprospectivebounds, notindependentfreshallpathmeasurement. Rawarchivefilecounts/sums andcompletephysicalcopylist MUSTbefrozenbeforeadditionalfullMacarchivecopy. Currentwholeparentcanincludeothercategoryfiles; classifydisjointlywhilekeepingthisupperforecastconservative.",
+    "no_full_Mac_archive_copy_permission_without_exactforecast": true
+  },
+  "F12_native_evidence_and_copy_partition": [
+    "Nativeoriginalraw/capsule/archiveevidence remainschargedtoitsF12hostcategoryandretained. Do notmakeitdisappearfromF12becauseitsreviewcopyfitsC3.",
+    "Physicallydistinctparent/LandingreviewcopiesmaydrawC3_META_REVIEWifexactpathsregisteredandALLduplicatesincluded. No physicalpathcountedagaininF12; ifF12groupcensusincludesnestedC3copies, partitiontheexactsubtreeswithglobalcrosscheck.",
+    "Neverresetactuals,rebasenetgrowth,removefailedreceiptsorassumedeletiontofit6MiB. NativeF12reservedcapsremainunchanged; unspentforecastisnotactualreclaimedbytes.",
+    "Parentarchive+extractedregularfiles+Landingcopyareseparaterealbytes; compressedtransportbytesarenotfullrawcopycount. Expandedtarstreamnotpersistedisasuchisnotanextrafile, butactualextractedbytesare."
+  ],
+  "whole_applied_allocator_unchanged": {
+    "whole_forecast_bytes": 47079500149,
+    "central_contingency_bytes": 165140107,
+    "global_cap_bytes": 47244640256,
+    "global_file_cap": 5000000,
+    "reserved_files_with64claimslots": 4792604,
+    "remaining_central_files": 207396,
+    "inside_closeout_reserve_bytes": 1073741824,
+    "inside_closeout_reserve_files": 100000,
+    "F12_Windows_bytes": 92274688,
+    "F12_matrix_stream_bytes": 41943040,
+    "F12_stream_evidence_bytes": 1048576,
+    "F12_othermatrix_evidence_bytes": 40894464,
+    "conditional_future_fullsuite_margin_bytes": 12392884,
+    "later_stage_status": "ConditionalNO_GOuntilsource/guard/actualF14cleanup/native192/streamrestore/completeledgerproofs. Noenginepermissionhere."
+  },
+  "registration_before_growth": "Parentregisters6MiBscope/ownershipmapandfullrawcopyprospectiveboundbeforeadditionalfullMacarchivecopy; source/dataformat/harnessfreezesandfilecapsremain. Resourceworkerdoesnoteditlivebudgets/Git/Landingorcopyarchives.",
+  "resource_worker_actions": "Newclaimreports only; no engine/build/restore/corpus/cache/othercopy/deletion.",
+  "prior_seals_unchanged": true,
+  "clocks_unchanged": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z"
+  }
+}
