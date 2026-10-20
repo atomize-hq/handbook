@@ -1,0 +1,19 @@
+{
+  "source_only_commit": "849bc29ec502536aea5932042b028fc1da9239e2",
+  "package_summary_head_is_precommit_ancestry": "81f35c70278a859615185fc7d03967c31a8ece4e",
+  "exact_packaged_python_sources_match_source_only_commit": true,
+  "python_sources": {
+    "cell.py": "101f683fe84e16019c763664afb5cbdefbae643cb0cdc66e7d9db5e2f8b924e3",
+    "closeout.py": "1a2676e981ff7140afbaa8c0ba5a86e13bc7048bb4ecc6cb2bb8a90bcec76b54",
+    "closeout_v2.py": "3f961e256598936385b9550714a0cca9164d9c468c3ca808af4bb58f334bd7f2",
+    "finalize.py": "4c8981967c58ec912d8d6dd4bb778b63d3eddeb811c66932b148a49c724e25ec",
+    "package.py": "24538c98f8e7c7c4ee8e25f0da3cb16b22f2a640cf13a03d1b266c775e638b4c",
+    "package_v2.py": "a7ff3f15b7cff6f5bec443dfae948c20dd4d71258d3993cef32da37861d0cd55",
+    "prepare.py": "0dee431ccf81601eb89bfd8fcc9c7cfab720fccd5ae9d96c0448d9b009f2aa2c",
+    "reclaim.py": "692031211cd48efd608f9a2a7ebcdf686beef385ab10b7a46db2a56154911990",
+    "tables.py": "cefd13d7a08228ce6231ece11db121590a301847b995c81cd07c5166a7db2fb5"
+  },
+  "report_encoding_correction_is_separate": "report-encoding-correction.json",
+  "archive_sha256_unchanged": "46a56aa9c06510f965ddd76edf1ecfe6df6e56af6a805b3660d05c722c166ebb",
+  "core18_d70_frozen": true
+}

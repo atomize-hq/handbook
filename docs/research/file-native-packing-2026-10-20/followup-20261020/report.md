@@ -36,7 +36,7 @@ every original tuple. Full raw measurements and distributions are in the delta.
 | Qualified L-old | 39,991.057 | reference | reference |
 | L-new | 38,473.218 | PASS | not the frozen P0/PZ comparison |
 | P0 | 38,818.799 | PASS | PASS, 0.893–1.078× qualified L |
-| PZ | 37,552.252 | PASS | PASS, 1.028�1.089� P0 |
+| PZ | 37,552.252 | PASS | PASS, 1.028-1.089x P0 |
 
 Ordinary publication passes at qualified-L median × 1.2 + 1 ms; the warm
 threshold is 2× for P0/qualified-L and PZ/P0. Missing observations remain null.

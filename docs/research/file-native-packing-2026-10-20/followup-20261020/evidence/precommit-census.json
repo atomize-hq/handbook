@@ -1,0 +1,24 @@
+{
+  "scopes": {
+    "runtime": {
+      "bytes": 2210105210,
+      "files": 64611
+    },
+    "worktree": {
+      "bytes": 23839427,
+      "files": 291
+    },
+    "cargo": {
+      "bytes": 893702027,
+      "files": 18188
+    },
+    "shared_git": {
+      "bytes": 243057012,
+      "files": 2340
+    }
+  },
+  "total_new_bytes": 2424498561,
+  "total_new_files": 69189,
+  "free_bytes": 200056860672,
+  "time_utc": "2026-10-20T12:57:52.199378+00:00"
+}
