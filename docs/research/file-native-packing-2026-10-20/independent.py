@@ -135,11 +135,29 @@ def freeze(root,output,attempts=False):
         b=d.raw(key)
         if len(b)<=MAX_RAW:rows.append(dict(role=role(key),key=key,raw_length=len(b),sha256=sha(b)))
     Path(output).write_text(''.join(json.dumps(row,separators=(',',':'))+'\n' for row in rows),encoding='utf-8');return rows
+def expected_inventory(path):
+    path=Path(path)
+    if path.name.endswith('.manifest.json'):
+        manifest=strict(bounded(path,65536));assert manifest['profile']=='authenticated-operational-capture-role-inventory-plus-added-records'
+        source=Path(manifest['source_inventory']);rows=[];digest=hashlib.sha256()
+        with source.open('rb') as f:
+            while True:
+                line=f.readline(4097)
+                if not line:break
+                assert len(line)<=4096;digest.update(line);row=strict(line);r=role(row['path'])
+                if r is not None and type(row['bytes']) is int and 0<=row['bytes']<=MAX_RAW:rows.append(dict(role=r,key=row['path'],raw_length=row['bytes'],sha256=row['sha256']))
+        assert digest.hexdigest()==manifest['source_inventory_sha256'];rows.extend(manifest['added_records']);rows.sort(key=lambda x:x['key'])
+    else:
+        with path.open('rb') as f:rows=[strict(line) for line in f]
+    assert len(rows)<=64*65536 and len({x['key'] for x in rows})==len(rows)
+    return rows
 def verify(root,output,inventory=None,baseline=None,semantic=True):
     start=time.monotonic();d=Decoder(root);rows=d.verify_packs()
     if inventory:
-        expected=[json.loads(line) for line in Path(inventory).read_text().splitlines()];assert rows==expected,('complete-raw-inventory-mismatch',len(rows),len(expected))
-    result=dict(raw_records=len(rows),raw_bytes=sum(r['raw_length'] for r in rows),inventory_digest=sha(''.join(json.dumps(r,separators=(',',':'))+'\n' for r in rows).encode()),independent_codec=d.zstd.binding if d.zstd else None)
+        expected=expected_inventory(inventory);assert rows==expected,('complete-raw-inventory-mismatch',len(rows),len(expected))
+    digest=hashlib.sha256()
+    for row in rows:digest.update((json.dumps(row,separators=(',',':'))+'\n').encode())
+    result=dict(raw_records=len(rows),raw_bytes=sum(r['raw_length'] for r in rows),inventory_digest=digest.hexdigest(),independent_codec=d.zstd.binding if d.zstd else None)
     if semantic:
         sys.path.insert(0,str(HERE.parent/'file-native-recovery-reclamation-2026-10-19'));import verify_operational
         verify_operational.checked=d.checked;result['semantic']=verify_operational.verify(root,baseline)
