@@ -44,6 +44,7 @@ for commands in schedule.values():
     for command in commands:
         assert command['action'] == 'packing' and 'root' not in command
 assert schedule['alongside_payload'] and schedule['alongside_title']
+assert plan['maintenance_overlap_checkpoint'] == 'physical-before-selection'
 
 runtime = Path('C:/file-native-online-matrix-20261020')
 receipts = runtime/'receipts'
@@ -79,6 +80,14 @@ def physical(commands, phase):
     md = Driver(plan['binary'], receipts/(label+'-maintenance-events.jsonl'))
     for index, command in enumerate(commands):
         budget.check({'document_controls':dict(bytes=1024**2,files=1000)})
+        command = dict(command)
+        if phase.startswith('alongside_') and index == 0:
+            environment = dict(command.pop('env', {}))
+            assert not any(k in environment for k in ['EXP_BARRIER','EXP_READY','EXP_RELEASE'])
+            environment.update(EXP_BARRIER=plan['maintenance_overlap_checkpoint'],
+                               EXP_READY=str(receipts/(label+'-'+phase+'.ready')),
+                               EXP_RELEASE=str(receipts/(label+'-'+phase+'.release')))
+            command['env'] = environment
         started = time.perf_counter_ns()
         response = md.call(maintained, timeout=120, **command)
         maintenance_rows.append(dict(phase=phase,index=index,started_ns=started,
@@ -91,15 +100,30 @@ for variant, root in [('without-maintenance', control), ('with-maintenance', mai
     for case, ops in operations:
         readable_reserve = payload if args.mode == 'B' else 0
         budget.check({'document_controls':dict(bytes=readable_reserve+2*1024**2,files=args.count+2000)})
-        started = time.perf_counter_ns()
         if variant == 'with-maintenance':
+            phase = 'alongside_'+case
+            ready = receipts/(label+'-'+phase+'.ready')
+            release = receipts/(label+'-'+phase+'.release')
+            assert not ready.exists() and not release.exists()
             with ThreadPoolExecutor(max_workers=1) as pool:
-                future = pool.submit(physical, schedule['alongside_'+case], 'alongside_'+case)
-                response = d.publish(root, 'final-document-'+case, ops=ops, timeout=240)
-                ordinary_end = time.perf_counter_ns()
+                future = pool.submit(physical, schedule[phase], phase)
+                try:
+                    deadline = time.monotonic()+45
+                    while not ready.exists():
+                        if future.done():
+                            future.result()
+                            raise AssertionError('maintenance-completed-without-overlap-checkpoint')
+                        assert time.monotonic() < deadline, 'maintenance-overlap-checkpoint-timeout'
+                        time.sleep(.005)
+                    started = time.perf_counter_ns()
+                    response = d.publish(root, 'final-document-'+case, ops=ops, timeout=45)
+                    ordinary_end = time.perf_counter_ns()
+                finally:
+                    release.write_bytes(b'release-after-ordinary-operation')
                 future.result()
         else:
-            response = d.publish(root, 'final-document-'+case, ops=ops, timeout=240)
+            started = time.perf_counter_ns()
+            response = d.publish(root, 'final-document-'+case, ops=ops, timeout=45)
             ordinary_end = time.perf_counter_ns()
         assert response['result']['status'] == 'published'
         rows.append(dict(case=case, started_ns=started, ended_ns=ordinary_end,
@@ -123,5 +147,7 @@ write_json(receipts/(label+'-comparison.json'),dict(source_pin=plan['source_pin'
            observations=observations,maintenance=maintenance_rows,
            actual_H_per_variant=3,semantic_operations_per_variant=2,
            full_oracles_pass=True,retained_old_N64_artifacts_unchanged=True,
+           maintenance_overlap_checkpoint=plan['maintenance_overlap_checkpoint'],
+           ordinary_operations_executed_between_maintenance_ready_and_release=True,
            qualification='two matched operations; no percentile claim; actual overlapping intervals retained, availability percentiles belong to concurrency cells'))
 print(json.dumps(dict(status='passed',count=args.count,mode=args.mode,variants=2,actual_H_each=3)))
