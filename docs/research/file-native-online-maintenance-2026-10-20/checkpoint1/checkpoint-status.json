@@ -1,12 +1,12 @@
 {
-  "status": "REVIEWABLE_SOURCE_CHECKPOINT__QUALIFICATION_INCOMPLETE",
+  "status": "PROVISIONAL_P2_REMEDIATION_REVIEW__NOT_QUALIFIED",
   "utc": "2026-10-20T20:22:28.718821+00:00",
   "base_commit": "47d667f26a75fa1454dee2d1c50d238aec4cf6bd",
   "core_baseline": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
   "candidate_binary": {
-    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate3.exe",
-    "bytes": 2902528,
-    "sha256": "f1439fd9f222d327ac4c820ca2e0afa5c49bc7e83d8116b47c6b391a593fe4dc"
+    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate8.exe",
+    "bytes": 2957312,
+    "sha256": "323608968d7cceb5c49bead47043a68eebf6ff2ca8e1668f39e2bf2436e6f7ec"
   },
   "guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
   "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
@@ -36,5 +36,6 @@
   "clock_reset": false,
   "functional_cutoff_utc": "2026-10-21T11:10:14Z",
   "no_full_experiment_pass": true,
-  "source_gate_fix": "Physical build no longer acquires W for transfer reconciliation; still-reserved attempts remain conservatively excluded. Candidate3 compile+four units pass. Candidate2 focus proof remains separately bound; same-source focus3 pending."
+  "source_gate_fix": "Work2 immutable selected metadata progress, deterministic stages, flat owners, checked ordinal and birth claims",
+  "pending_review_findings": "F1 aborted ownership, F2 mutable work deletion, F3 metadata-stage/directory reaping, F4 idle/no-reuse require updated regression/review; fixes implemented, not yet claimed passed"
 }
