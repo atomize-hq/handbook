@@ -1,6 +1,6 @@
 {
   "base": "bd6dd9367acddaddcd7873c8043548502a170c3b",
-  "utc": "2026-10-20T22:11:56.048403+00:00",
+  "utc": "2026-10-20T22:28:11.399573+00:00",
   "files": {
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock": {
       "bytes": 10547,
@@ -79,8 +79,8 @@
       "sha256": "b636bcea16eaa3418b4ab613504c8add45b86f358fd60838ae577fa8b93ffe8a"
     },
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs": {
-      "bytes": 50220,
-      "sha256": "397487a61da3890c8651425483be49af9af43e455cc5ad5df2b345f114402d1f"
+      "bytes": 51299,
+      "sha256": "5b1853b03bcb52ff6dc83ec21a744ead70052b0735b98ee25772bd85266b6cd2"
     },
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/physical_lifetime.rs": {
       "bytes": 22710,
@@ -91,8 +91,8 @@
       "sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6"
     },
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/rolling.rs": {
-      "bytes": 8838,
-      "sha256": "624f985f39e3e981cec1a338f17990587884e0041ed75384f946a549b947a6a1"
+      "bytes": 9157,
+      "sha256": "7f2ff7f8266a8d2d7d306051bbd5e12fc039abc3f8ff5b09c1b4993fad14776d"
     },
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs": {
       "bytes": 36078,
@@ -101,9 +101,11 @@
   },
   "binary": {
     "path": "C:\\file-native-online-cp1-20261020\\build\\release\\file-native-incremental.exe",
-    "bytes": 3111424,
-    "sha256": "8dd3a498289c2e5c438385e4cecd1af2c0cfb84f2769e28048a1a40666383467"
+    "bytes": 3100160,
+    "sha256": "6f77de3001f488d6dd57317b04f33f216856f11fbfd65d8236e8b45d28ebc4b5"
   },
+  "build": "C:/file-native-online-cp1-20261020/evidence/cp2-build3.json",
+  "budget_claim009_sha256": "6902d4344bacf378c274c2a4fe971102e721672f5462b8ae9f4fc930b72842d6",
   "guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
-  "scope": "provisional reviewed-source handoff; N16A/Bthreecycles andpartial PASS; completequalification pending"
+  "scope": "remediated CP2 source; focused runtime proofs and independent review completion pending; old b876 proofs separately bound"
 }
