@@ -1,0 +1,56 @@
+[
+  {
+    "name": "cargo-test",
+    "args": [
+      "cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--workspace",
+      "-j2"
+    ],
+    "start_utc": "2026-10-19T23:42:53.225026+00:00",
+    "seconds": 9.549623012542725,
+    "exit": 0,
+    "censor": null,
+    "aggregate_sampled_peak_rss_bytes": 610320384,
+    "missing_samples": false,
+    "status": "passed"
+  },
+  {
+    "name": "cargo-build",
+    "args": [
+      "cargo",
+      "build",
+      "--locked",
+      "--offline",
+      "-j2"
+    ],
+    "start_utc": "2026-10-19T23:43:02.775123+00:00",
+    "seconds": 0.22554326057434082,
+    "exit": 0,
+    "censor": null,
+    "aggregate_sampled_peak_rss_bytes": 193331200,
+    "missing_samples": false,
+    "status": "passed"
+  },
+  {
+    "name": "focused",
+    "args": [
+      "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/focused.py",
+      "--exe",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/build/debug/file-native-incremental",
+      "--base",
+      "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-navigation-2026-10-19/native-macos/runtime/focused",
+      "--capsule"
+    ],
+    "start_utc": "2026-10-19T23:43:03.005118+00:00",
+    "seconds": 95.0001790523529,
+    "exit": -9,
+    "censor": "original-cutoff",
+    "aggregate_sampled_peak_rss_bytes": 48496640,
+    "missing_samples": false,
+    "status": "failed-or-censored"
+  }
+]

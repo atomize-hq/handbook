@@ -1,0 +1,7 @@
+{
+  "initial_sparse": "Operation not permitted locking config.worktree; approved retry succeeded",
+  "initial_branch": "Operation not permitted creating branch lock; approved retry succeeded",
+  "initial_evidence_mkdir": "PermissionError Operation not permitted; approved retry succeeded",
+  "supplement_approval": "requested before original cutoff; completion observed at 2026-10-20T01:36:14Z after original and overall deadlines; no new functional tests authorized or run afterwards",
+  "no_6e66_tests": true
+}

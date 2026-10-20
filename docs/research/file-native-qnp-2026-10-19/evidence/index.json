@@ -19,6 +19,14 @@
     "bytes": 1231,
     "sha256": "9ca440a58e959170852a42e1aa9af4c59f665186540016113b6e669d958c3917"
   },
+  "coordinator-n-macos-censor-review.json": {
+    "bytes": 737,
+    "sha256": "e63bd85b80cea376e9529adf88dc98c050d91b957d70244b084240433d9dc54b"
+  },
+  "coordinator-n-macos-precommit.txt": {
+    "bytes": 2151,
+    "sha256": "ba3f391ca7e56875a2440abd066551bcfe8ac7e6a03dbcace54e8057e8523928"
+  },
   "coordinator-navigation-detect-changes.txt": {
     "bytes": 2151,
     "sha256": "ba3f391ca7e56875a2440abd066551bcfe8ac7e6a03dbcace54e8057e8523928"

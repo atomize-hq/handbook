@@ -18,7 +18,7 @@ original H101003 store, original archive and final H101006 clone are preserved.
 | Q native macOS | required functional cases passed; reviewed and integrated | approval-delayed artifact closeout exceeded original budget; explicitly retained |
 | N Windows | frozen 4bde core and final 83f7330f report reviewed and integrated | native Mac qualification remains the functional gate |
 | N native Linux/ext4 | final 4bde: 39 focused, 24 recovery, eight README cases passed | source, archive and native binary authenticated; reports integrated |
-| N native macOS | final 4bde tests/build passed; full suite censored at original cutoff | original attempt remains censored; remainder-stage admission under the still-active overall N window is being assessed |
+| N native macOS | final 4bde tests/build and all 39 focused checks passed; 83 recovery operations recorded before censor | full recovery and supplements incomplete; original overall N window expired; fresh bounded follow-up needs human authorization |
 | P | undispatched | reviewed Q/N, actual integrated-pin native qualification, frozen navigation |
 
 Linux's original retained samples failed admission. After the human freed space,
@@ -124,8 +124,20 @@ gates remain open. No keep/adjust/reject storage recommendation is yet justified
 The 60-minute native N allocations were parent suballocations within the human's
 four-hour N task. Mac's focused/capsule group began at 23:43:03.005 UTC and was
 killed 95.000179 seconds later at its fixed cutoff, with `original-cutoff` and
-exit -9. That attempt will not be relabeled or have its clock reset. The parent
-is assessing a separately recorded, prospectively bounded remainder stage on the
-same pin and build inside the original overall N deadline, after actual ownership,
-free space and coexistence checks. No such stage or P execution is admitted by
-this status note.
+exit -9. Its 39 focused checks and 153 engine events were durably recorded;
+the recovery capsule recorded 83 operations and no completion summary. Full
+recovery, growing-edit/no-sibling-scan checks, ordinary Bash extraction and the
+dedicated historical README supplement remain incomplete. The parent verified
+28 artifact-manifest entries, 22 pinned source inputs and all raw record counts.
+See [the Mac report](../file-native-navigation-2026-10-19/native-macos/REPORT.md)
+and [parent review](evidence/coordinator-n-macos-censor-review.json).
+
+The Mac chat has now completed artifact closeout and is idle; platform approval
+is no longer pending. Closeout exceeded both original deadlines. No remainder
+GO was issued and no functional work occurred after the cutoff. The original
+overall N deadline of 00:38:51 UTC on October 20 has expired, so a new bounded
+qualification window requires explicit human authorization. The original censor
+will remain separate. P is still undispatched and its six-hour clock has not
+started. Current Mac ownership including conservative Git growth is about
+320 MB / 8,133 files, with about 197 GB free, within the existing 768 MiB /
+75,000-file allocation and 20 GiB reserve. Re-census before any further execution.

@@ -1,0 +1,20 @@
+{
+  "checked_epoch": 1792461269.9386759,
+  "worker_commit": "e6d1eda80564ffee1092e353f6c50651e26ab8e6",
+  "source_commit": "4bde156323812ef18c0dea6798cfc2108aaad933",
+  "manifest_entries_verified": 28,
+  "source_files_bound_to_Git": 22,
+  "raw_record_counts": {
+    "raw-cases.json.gz": 39,
+    "raw-events.json.gz": 153,
+    "raw-recovery-capsule-events.json.gz": 83,
+    "raw-capsule-resources.json.gz": 83
+  },
+  "scope_paths": 29,
+  "risk": "UNKNOWN; new external harness/report only; no engine delta",
+  "result": "CENSORED; fullrecovery andsupplements incomplete",
+  "original_N_deadline_expired": true,
+  "pending_platform_approval_cleared": true,
+  "original_deadlines_not_reset": true,
+  "P_admitted": false
+}
