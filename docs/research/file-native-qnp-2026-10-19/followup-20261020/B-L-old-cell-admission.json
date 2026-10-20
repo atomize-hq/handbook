@@ -1,0 +1,15 @@
+{
+  "scope": "P-followup-20261020-B-cell",
+  "representation": "L-old",
+  "go": true,
+  "functional_cutoff": "2026-10-20T12:53:00Z",
+  "conditional_on": "Closed successful baseline exact regular reclaim; fresh complete actual +600000000 source +67108864 archive +33554432 returns <=2684354560;files<=560000;free>=140GiB",
+  "source": "qualified oldN4bde",
+  "fixed_N": 8000,
+  "history_before": 8,
+  "history_after": 15,
+  "ordinary_requests": 7,
+  "warm_each_category": 500,
+  "fresh_processes": 120,
+  "whole_job_seconds": 900
+}

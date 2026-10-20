@@ -1,0 +1,25 @@
+{
+  "utc": "2026-10-20T11:58:00Z",
+  "proposal_bytes": 20220,
+  "proposal_sha256": "a82228c35ea7cee0db9e4c64101cceefc05af44c2db12f9511fe7fa67dee0df6",
+  "parent_all_members_sha_and_gzip_EOF": true,
+  "full_config_control_actor_execute_launch_and_diff_review": "PASS",
+  "new_code_sha256": {
+    "config.json": "57b016c19c48d2a961a31fb873addcb8cc0d14aeb4081d1ac229bcedd7113b63",
+    "control.py": "d3c2b17d08bce022ff11a5b058ae1afe0b8e4d9c9910662b34c231b6c801abef",
+    "actor.py": "80d1a9b8681cbd5b620c5ea78cc6b824831ac3a9abff66958d203412a661a7b8",
+    "execute.py": "3b115233c86f0065ee9bec0c8cb23f5f2ea4a07699e7d4efef769d85d6625457",
+    "launch.py": "d715ad93cb2c675e3f033a416c768b54ec32c1f42ce5dd7ed76a47c1bb097587"
+  },
+  "conditional_execution_GO": "benign guard smoke PASS, unchanged exact code, fresh resource/source/history admission PASS",
+  "scope": "fresh dedicated F24/282 only; original incomplete run unchanged",
+  "whole_stage_seconds": 1800,
+  "functional_cutoff": "2026-10-20T12:53:00Z",
+  "closeout": "2026-10-20T13:13:00Z",
+  "notes": [
+    "Decoder lock is installed before consumer imports; Nav4 oracle binding remains early.",
+    "Complete verifier900 preemptive timer and native aggregate3GiB/checker2GiB/point256MiB remain.",
+    "Primary and closure errno/errors and timeout prefixes preserved; final presence failure remains NULL. Later numeric absence has separate epoch.",
+    "Fixture80MiB10000; whole288MiB30000; no reclaim credit; old12953files checked by full ordered path/size/content hash."
+  ]
+}
