@@ -2,7 +2,7 @@
   "scope": "new report prose encoding only; sealed raw delta unchanged",
   "sealed_archive_sha256": "46a56aa9c06510f965ddd76edf1ecfe6df6e56af6a805b3660d05c722c166ebb",
   "sealed_report_original_sha256": "0eb99bc82ae2c13eb20deaf10560b7f0b9ee23e4a2e2f9584693703809c72eb4",
-  "corrected_report_sha256": "06aca3025baacd4dea24ef46975de6cb95668405fc22ec0319ba549c72e118b4",
+  "corrected_report_sha256": "e5b0c8d7fee1b4d949191ae69fb1b2a724223500f935ca706ed22c1d412d2943",
   "invalid_bytes_replaced_with_ASCII": {
     "0x96": 1,
     "0xD7": 1
@@ -10,5 +10,8 @@
   "strict_UTF8_validation": true,
   "source_report_commit_before_correction": "849bc29e",
   "functional_results_unchanged": true,
-  "sealed_snapshot_includes_pre_correction_report": true
+  "sealed_snapshot_includes_pre_correction_report": true,
+  "previous_UTF8_intermediate_report_sha256": "06aca3025baacd4dea24ef46975de6cb95668405fc22ec0319ba549c72e118b4",
+  "line_endings": "LF only",
+  "sealed_archive_and_indexes_unchanged": true
 }
