@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-017-MATRIX-CADENCE-SOURCE-ONLY",
+  "utc": "2026-10-20T23:08:21.424931+00:00",
+  "status": "SOURCE_ONLY_WITHIN_EXISTING_F01__NO_CONTROLS_OR_QUALIFICATION_GO",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261020T230821Z.json",
+      "bytes": 4043,
+      "sha256": "990a696b96b7dfbd589a5fd6d134cc900e65c1c61b1a614d10556019a803050d"
+    },
+    {
+      "file": "claim-20261020T230821Z.md",
+      "bytes": 1152,
+      "sha256": "2b4b191c7ac07dfe689585a6bc76fa0eaf5e797782c4d5ab3d657d2740c59bb1"
+    }
+  ]
+}

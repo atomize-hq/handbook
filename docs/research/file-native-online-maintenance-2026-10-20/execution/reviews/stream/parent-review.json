@@ -1,0 +1,39 @@
+{
+  "disposition": "ACCEPT_BOUNDED_STREAM_HARNESS_FOR_LATER_ADMITTED_FINAL_STORE_USE",
+  "module_sha256": "f8d223618d869bf85a11ec648254830e643aa1abbb86374233ac9f31fe46cc20",
+  "module_bytes": 34729,
+  "historical_39_control_pin": "ac4d34b899036a4fb23515ddf1ea364c91094fdacd9671b1a439b7f308f10aa8",
+  "39_historical_controls_pass": true,
+  "all_40_functions_classes_byte_identical": true,
+  "only_main_error_emitter_changed": true,
+  "nine_unicode_error_byte_bound_controls_pass": true,
+  "max_error_bytes": 2001,
+  "guards": [
+    {
+      "stage": "guard-run-final",
+      "rss_rows": 759,
+      "max_gap_seconds": 0.0470000000204891,
+      "gaps_over40ms": 5,
+      "guard_sha256": "a3cfc9d4a31294ceade0da63ce6bb29fdfddbe1ad16c62014ea8a80f4d5926ae",
+      "raw_sha256": "e24738a223e981a7b4dc1c7518b1392bbabe441822c9212ce681475bf85c193d",
+      "two_empty_closures": true
+    },
+    {
+      "stage": "emitter-guard",
+      "rss_rows": 5,
+      "max_gap_seconds": 0.03200000000651926,
+      "gaps_over40ms": 0,
+      "guard_sha256": "d7832ad31cc3095ea62dbeefc7b7a273c9c5a22fcf1dadfce0a6d8b12c0e2cb9",
+      "raw_sha256": "d32ee0ff65517471fed8cabf9838ce69d67f9f7e5294457b6feac8778f9d7146",
+      "two_empty_closures": true
+    }
+  ],
+  "source_review": "Full initial source and all final deltas/control source inspected; framing, bounded independent decompression, exact manifest/path/EOF checks, pin/empty-directory preservation, quarantine, phase reservations and final postclose census",
+  "real_store_status": "NOT_RUN_FINAL_PIN_RESOURCE_ORACLES_SUCCESSOR_REQUIRED",
+  "limitations": [
+    "Windows strict cadence notqualified5gaps>40ms/max47ms in39run",
+    "Initial240s timeout and evidence subcapoverrun retained failure, later allocation notretroactivepass",
+    "Symlink/reparse checks faultinjected not nativecreationqualification",
+    "Caller must guarantee full source quiescence; verifier callback must be final independent full semantic/physical oracle; destination-only accepted successor still required"
+  ]
+}

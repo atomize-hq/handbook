@@ -1,0 +1,220 @@
+{
+  "kind": "44GiB-frozen-focused-forecast-and-480MiB-phase-arithmetic-dossier",
+  "claim_id": "44GiB-CENTRAL-015-READONLY-FOCUSED-480MiB-FEASIBILITY",
+  "utc": "2026-10-20T22:55:43.074640+00:00",
+  "status": "READ_ONLY_DOSSIER__NO_NEW_ALLOCATION_OR_QUALIFICATION_GO",
+  "authority": "Meta asksread-onlydossier/phasearithmetic;480MiBrouteisconditionalhypothesis,notcapapply. Currentcentralrestored014, noextraallocation.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T223648Z.json",
+    "sha256": "992e41ef6aa6aeec05532663e531e08d158ef22550ec61dec5d17ac1ede03ff4",
+    "preserved_unchanged": true
+  },
+  "source_authentication": {
+    "forecast_path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\final-protocol\\forecast.json",
+    "forecast_sha256": "0e697724206bf90f9222febba15535ba4c0de3f02d8b4da1b0dd335d679b4588",
+    "receipt_path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\final-protocol\\source_receipt.json",
+    "receipt_sha256": "a6ebd313ca3f7f8c81b0ac2e2b1bca8b30d30c4861bfae4dd45a4f0f90b8e7b8",
+    "six_source_data_files_match_receipt": true,
+    "bound_files": [
+      {
+        "file": "case_ledger.py",
+        "bytes": 14422,
+        "sha256": "e910aeb01cafca1968c9b36e8234a59956feb6b71b853d2e9c81d51ac99c0ad9",
+        "receipt_match": true
+      },
+      {
+        "file": "fake_controls.py",
+        "bytes": 20642,
+        "sha256": "8030fb289a1443f6e8d3c5340004a998200b70858d521533a07d07f465d62b08",
+        "receipt_match": true
+      },
+      {
+        "file": "focused_protocol.py",
+        "bytes": 38155,
+        "sha256": "1b10f9121483bb6b5adf1ca20ba31bfad3367161d7d8d77925ce30eb14b17a83",
+        "receipt_match": true
+      },
+      {
+        "file": "focused_schedules.py",
+        "bytes": 19586,
+        "sha256": "35ffbbaed3281ca470391f2dbc078805ae5fa5adec725d690b11d54c6ec571d5",
+        "receipt_match": true
+      },
+      {
+        "file": "forecast.json",
+        "bytes": 11496,
+        "sha256": "0e697724206bf90f9222febba15535ba4c0de3f02d8b4da1b0dd335d679b4588",
+        "receipt_match": true
+      },
+      {
+        "file": "README.md",
+        "bytes": 15332,
+        "sha256": "f513a35417ff13348a1bb7a3fd2dbfaccaf234a70a8e7fc4c4072409da2811b8",
+        "receipt_match": true
+      }
+    ],
+    "receipt_self_exclusion": true,
+    "whole_source_directory_bytes": 128761,
+    "whole_source_regular_files": 7,
+    "existing_source_cap_bytes": 131072,
+    "existing_source_cap_files": 8,
+    "no_new_source_grant": true,
+    "pure_controls_recorded": 36,
+    "required_engine_ledger_rows": {
+      "Windows": 166,
+      "Linux": 158,
+      "Mac": 158
+    },
+    "qualification": "Source-onlyfrozenreportandpurefakecontrols,NOTrealengine/native/RSS/fixturequalification. Any changedfinalsource/IDbounds/profile/opsinvalidatesboundsbeforerun."
+  },
+  "bounded_N64_B_geometry": {
+    "schedule": [
+      1,
+      4,
+      1
+    ],
+    "cycle_attempt_caps": [
+      32,
+      64,
+      32
+    ],
+    "actually_scheduled_single_publisher_attempts_each": 16,
+    "fourpub_total_attempts": 64,
+    "accepted_per_cycle_required": 16,
+    "implicit_retries": 0,
+    "failed_fourpub_preparations_upper": 48,
+    "final_H": 114,
+    "full_generation_bytes": 806161,
+    "full_generation_regular_files": 69,
+    "successful_generations": 114,
+    "failed_generations": 48,
+    "original_payload_bytes": 778240,
+    "payload_only_B_floor_bytes": 126853120,
+    "source_derived_B_generation_plus_external_upper_bytes": 147154114,
+    "initial_graph_projection_upper_bytes": 2097152,
+    "B_root_conditional_upper_before_physical_metadata": 149251266,
+    "accepted_external_metadata_upper_each": 131072,
+    "failed_noop_external_metadata_upper_each": 17408,
+    "no_failed_GC_or_accepted_retirement_credit": true,
+    "no_unbounded400attempt_topology": true,
+    "abort_or_attempt_exhaustion": "unqualified/censored,notreducedacceptedcycle orhiddenretry"
+  },
+  "frozen_whole_provisional_stack": {
+    "donor_bytes": 261739670,
+    "donor_regular_files": 15596,
+    "new_focused_conditional_bytes": 178611394,
+    "coexistence_bytes": 33554432,
+    "metadata_bytes": 16777216,
+    "existing_control_bytes": 109,
+    "whole_bytes": 490682821,
+    "whole_regular_files": 54596,
+    "old448MiB_cap_bytes": 469762048,
+    "over448_bytes": 20920773,
+    "old_file_cap": 50000,
+    "over50k_files": 4596,
+    "alternative480MiB_cap_bytes": 503316480,
+    "alternative60000filecap": 60000,
+    "headroom_to480_bytes": 12633659,
+    "headroom_to60k_files": 5404,
+    "status": "ProvisionaldiagnosticONLY;pendingper-root/sourceconstructorsbelowmeanNOTcompleteadmission,evenifcurrentarithmeticfits480."
+  },
+  "pending_complete_topology_proofs": [
+    "RetiredA(H263)6MiB andautoA(H151)5MiB areexplicitlyprovisional: uniform128KiBacceptedupperdoesnotfittheseproposals; tighterexactno-opCOW/metadata/sourceboundoractualstageproofrequired.",
+    "Windows1000activationstress33,554,432B/12kfiles isSEPARATEfromnativeaggregate; mustmapagainstWindowsmatrix32MiB/retainedotherprotocol/currentfailedprefixeswithoutcountingitfreeoromittingcases.",
+    "Existing-shallow-donor-root5MiBpositivegrowthrequiresexactcaseID/seed/version/reset/full-oraclemap;cannotasserthealthyreuseofcorrupted/oldpinfixtureswithoutproof.",
+    "EveryCP3/compatibility/backup/raw8MiB/pack64MiB/index16MiB/65536record/64pack/Work128KiB/deferred32KiB+128/cache64MiB constructorpeakstillSOURCE-BOUND_FORECAST_REQUIRED.",
+    "AllCURRENTretainedCPproof/nativecontrol rootsandfailedH551/F1/cancel/staleprefixesmustbeplacedonceinthecompletefinalfixturemap. Do notaddtheminvisiblyorbypassbyte/filecoexistencebycallingthemreused.",
+    "Whole480nativeestimateleaves12.63MBnominalslack; itdoesnotadmitunknownadditionalrootsorunboundedfailedrounds. SametrueforWindowsbody+matrixpartition.",
+    "No extra deepBclone, compactpayloadprofile, indexshortening/splitfallback, caseomission, sourceformatmigrationorplannedmanualcleanupcredit.",
+    "RemainingtighterCOW/metadataproofcouldbring448withinbound; no needchoose480untilsettledfullharnessverified."
+  ],
+  "byte_scenarios": {
+    "current_applied_whole_forecast_bytes_unchanged": 47079500149,
+    "current_central_contingency_bytes_unchanged": 165140107,
+    "future_full448_F07192_prospective_bytes": 47649925493,
+    "proposed_native_host_body_increase_bytes_each": 33554432,
+    "proposed_Windows_CPbody_increase_bytes": 33554432,
+    "threehost_total_increase_bytes": 100663296,
+    "future_full480_prospective_bytes": 47750588789,
+    "original_conditional_F14_expiry_and_native192_releases_bytes": 417678121,
+    "future480_after_original_staged_releases_bytes": 47332910668,
+    "cap_bytes": 47244640256,
+    "shortfall_after_original_staged_releases_bytes": 88270412,
+    "extra_conditional_release_candidates": [
+      {
+        "category": "F03LinuxfinalprivateNEWtarget",
+        "existing_future192MiB_plan": 201326592,
+        "new_feasibility160MiB_cap": 167772160,
+        "extra_unused_forecast_release_if_proven_bytes": 33554432
+      },
+      {
+        "category": "F04MacfinalprivateNEWtarget",
+        "existing_future192MiB_plan": 201326592,
+        "new_feasibility128MiB_cap": 134217728,
+        "extra_unused_forecast_release_if_proven_bytes": 67108864
+      },
+      {
+        "category": "C1Macprivatecache",
+        "existing_held_cap_bytes": 67108864,
+        "new_feasibility48MiB_cap": 50331648,
+        "extra_unused_forecast_release_if_proven_bytes": 16777216
+      }
+    ],
+    "extra_release_total_if_ALLactualproofs_bytes": 117440512,
+    "future480_after_original_and_extra_conditional_releases_bytes": 47215470156,
+    "potential_margin_if_allproofs_bytes": 29170100,
+    "no_release_applied": true,
+    "extra_evidence_and_constructor_costs_reduce_margin": true
+  },
+  "file_scenarios": {
+    "global_file_cap": 5000000,
+    "inside_closeout_file_reserve_alreadyincluded": 100000,
+    "current_applied_reserved_files_with64claimslots": 4792604,
+    "current_file_headroom": 207396,
+    "prior_full448_future_files_includingnative50keach_andF0740k": 4842604,
+    "native50k_to60k_twohost_increment": 20000,
+    "Windows_F06_existing_filecap": 100000,
+    "Windows_current_CP_matrix_file_partition": {
+      "CP": 75000,
+      "matrix": 25000
+    },
+    "Windows_proposed_body60000_fits_existing_CP75000": true,
+    "future480_files_if_existing_Windows100k_retained": 4862604,
+    "headroom_if_no_Windows_fileincrease": 137396,
+    "more_conservative_extra_Windows10000_slots_if_parentchooses": 10000,
+    "future_files_with3x10000_increases": 4872604,
+    "headroom_with_threehost_fileincrease": 127396,
+    "no_filecredit_from_shrinkingtarget_cache_orF14_proposed": true,
+    "status": "Bothfilevariantsfit5mwith100kreserve,subjectexactsourcecaseconstructorfilecounts; no newreservationapply."
+  },
+  "phase_and_actualproof_rules": [
+    "CurrentlimitedCP3proof32MiBinsame96hardcapmaycontinueonlywithregisteredbudget/reviewhandoff; thisdossierdoesnotraiseit. Allnative/fullcaps remainNO_GO.",
+    "Completefinalsourcepin/frozenCargo.lock/nativecompiler/profile/features; guardunderexisting256MiBnativeNEWtargetcapswhilefinalbuild+alltestEXEscompiled--no-runandretainedbindingscopiesremaincounted.",
+    "OnlyAFTERactualcompleteLinuxfinaltarget+allretainedartifacts<=160MiB andMac<=128MiB, nofutureunreservedcompilevariant/jobs, mayunusedtargetforecastexpire. Oldhistorical126.8M/81.2Mvaluesarefeasibility,notproof.",
+    "MacactualprivateCARGO_HOMEselectedcache+archives/unpacked/index/DB/privatebookkeepingmustbe<=48MiBafterfinalCargo/unitcompileclosure; futureCargo/privatewritesstillbound. GlobalF13positivegrowthdistinct; no source/categoryhiding.",
+    "InitialF14coexistencehelduntilactualengineoldcontainerremoval/allpathcensus/fulloracle/processclosure; no planneddeleteorclonecredit. ReviewedF11streamcapture/independentrestore/successor/profilegatesstayunchanged.",
+    "Recordunusedforecastreleaseonlyonce; actualbytesfreedbynativecompiler/engineoperationsareseparatemeasuredfacts,notanadditionalnegativeglobalcharge.",
+    "Fullnewallocationrequiresmetaacceptance/claim+versionedguardcapregistrationafterallproofsandcompletecoexistenceforecast; no stepresetsclock."
+  ],
+  "unchanged_limits": {
+    "byte_cap": 47244640256,
+    "file_cap": 5000000,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "one_global_long_mutation_lane": true,
+    "Windows_aggregate_RSS_bytes": 4294967296,
+    "Linux_Mac_each_aggregate_RSS_bytes": 3221225472,
+    "checker_bytes": 2147483648,
+    "reader_bytes": 268435456,
+    "builds_j": 2,
+    "source_and_protected_data_unchanged": true
+  },
+  "disposition": "NO newallocation orGO. Preserve480proposalasconditionalfeasibilityand490682821diagnosticasdatedsourceproof. Awaitcomplete/tighterharnessandACTUALfinaltarget/cachemeasurementsbeforechoosingallocation. No humancapincreasequestion, no reserveuse orscopecut.",
+  "resource_worker_actions": "Read-onlysource/receipt/hash/phasearithmetic plusnewimmutabledossierreports only; no source/engine/build/fixture/corpus/restore/copy/deletion.",
+  "prior_seals_unchanged": true,
+  "clocks_unchanged": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z"
+  }
+}

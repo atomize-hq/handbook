@@ -1,0 +1,182 @@
+{
+  "kind": "44GiB-allocator-evidence-increase-and-nested-source-control-subclaims",
+  "claim_id": "44GiB-CENTRAL-018-MATRIX-F12-PLUS12MiB",
+  "utc": "2026-10-20T23:14:05.922899+00:00",
+  "status": "ALLOCATOR_APPLIED_WITHIN44GiB__SOURCE_ONLY_GO__QPC_CONTROLS_EARMARK_ONLY__FULL_QUALIFICATION_NO_GO",
+  "authority": "META explicitly authorizes Matrix+stream F12 40->52MiB from existing central contingency and names existing-source/control subclaims; arithmetic verified before sealing. No human cap increase, reserve consumption, deletion or new global file grant.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T230821Z.json",
+    "sha256": "990a696b96b7dfbd589a5fd6d134cc900e65c1c61b1a614d10556019a803050d"
+  },
+  "current_allocator": {
+    "ceiling_bytes": 47244640256,
+    "before_whole_forecast_bytes": 47079500149,
+    "before_central_contingency_bytes": 165140107,
+    "F12_increase_bytes": 12582912,
+    "after_whole_forecast_bytes": 47092083061,
+    "after_central_contingency_bytes": 152557195,
+    "inside_closeout_reserve_bytes": 1073741824,
+    "inside_closeout_reserve_files": 100000,
+    "reserve_intact": true,
+    "global_file_cap": 5000000,
+    "global_reserved_files_unchanged": 4792604,
+    "unassigned_files_unchanged": 207396,
+    "note": "The resulting whole/central numbers happen to equal unused historical013 figures. This claim applies the delta to Matrix evidence F12, NOT the reversed CP3 fixture proposal. CP3 fixtures remain96MiB."
+  },
+  "F12_bytes_partition": {
+    "Matrix_plus_stream_before": 41943040,
+    "Matrix_plus_stream_after": 54525952,
+    "Windows_CP_shared_unchanged": 50331648,
+    "Windows_combined_before": 92274688,
+    "Windows_combined_after": 104857600,
+    "Linux_unchanged": 25165824,
+    "Mac_unchanged": 25165824,
+    "allhost_F12_before": 142606336,
+    "allhost_F12_after": 155189248,
+    "Matrix_stream_combined_unchanged": 1048576,
+    "stream_runtime_unchanged": 983040,
+    "stream_Landing_unchanged": 65536,
+    "Matrix_nonstream_after": 53477376,
+    "QPC_receipts_earmark_subset_nonstream": 1048576,
+    "Matrix_other_excluding_QPC_after": 52428800,
+    "counting": "stream_runtime is nested under runtime receipts; stream Landing is a distinct counted copy. Combined stream1MiB sits inside52MiB Matrix group. QPC1MiB receipts are nested inside nonstream51MiB, not additive. Other Matrix50MiB plus QPC1MiB plus stream1MiB=52MiB."
+  },
+  "actual_and_forecast_evidence": {
+    "META_reported_closed13rootbatch_bytes": 19546118,
+    "META_reported_stream_included_bytes": 559003,
+    "nonstream_actual_derived_bytes": 18987115,
+    "future24MiB_bytes": 25165824,
+    "nonstream_plus_future24MiB_bytes": 44152939,
+    "old_nonstream39MiB_cap_bytes": 40894464,
+    "old_forecast_excess_bytes": 3258475,
+    "corrected12root_approximation_reserved_here_bytes": 3145728,
+    "v5_approximation_reserved_here_bytes": 2097152,
+    "other_excluding_QPC_diagnostic_forecast_bytes": 49395819,
+    "other_excluding_QPC50MiB_cap_bytes": 52428800,
+    "diagnostic_slack_bytes": 3032981,
+    "earmarked_QPC_receipts_bytes": 1048576,
+    "other_plus_full_QPC_earmark_forecast_bytes": 50444395,
+    "nonstream51MiB_cap_bytes": 53477376,
+    "qualification": "META snapshot and prospective approximations, not an independently authenticated current whole-13-root census. Refresh actual receipts and next-command/outer guard finalization forecast again before writes. Preserve all failed raw receipts; no compression/deletion credit. Do not release the unfilled part of approximate reservations without actual closure."
+  },
+  "source_partition": {
+    "existing_budget_v2_path": "C:\\file-native-online-matrix-20261020\\receipts\\budget-final-source-v2.json",
+    "existing_budget_v2_sha256": "0b26efdba8af4ab41a939697244e02b1e7da1ec55ab857d05bd6d74de89ca781",
+    "existing_budget_v2_preserved_unchanged": true,
+    "Matrix_total_cap_bytes": 1048576,
+    "Matrix_total_cap_files": 200,
+    "final_protocol": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\final-protocol",
+      "owner_chat": "01a15b6c-b109-7090-a8c2-0e165f92f51e",
+      "cap_bytes": 196608,
+      "cap_files": 12,
+      "nonadditive_subset": "F01 Matrix source"
+    },
+    "windows_cadence": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-cadence",
+      "owner_chat": "01a15b8f-0e20-7553-941c-3210d5cb46e6",
+      "cap_bytes": 65536,
+      "cap_files": 8,
+      "nonadditive_subset": "F01 Matrix source"
+    },
+    "other_Matrix": {
+      "cap_bytes": 786432,
+      "cap_files": 180
+    },
+    "independent_current_source_census_excluding_git_pointer": {
+      "final_protocol": {
+        "bytes": 135633,
+        "regular_files": 7
+      },
+      "cadence": {
+        "bytes": 55099,
+        "regular_files": 4
+      },
+      "other": {
+        "bytes": 612959,
+        "regular_files": 70
+      }
+    },
+    "source_current_bytes": 803691,
+    "source_current_files": 81,
+    "prospective_with_both_named_subclaims_full_bytes": 875103,
+    "prospective_with_both_named_subclaims_full_files": 90,
+    "source_grant_increase_bytes": 0,
+    "source_grant_increase_files": 0
+  },
+  "QPC_control_earmark_only": {
+    "protocol_path": "C:/file-native-online-matrix-20261020/protocol/windows-cadence",
+    "receipts_path": "C:/file-native-online-matrix-20261020/receipts/windows-cadence",
+    "paths_status": "proposed explicit nested paths for new budget; parent must bind actual selected control paths before run registration",
+    "protocol_cap_bytes": 1048576,
+    "protocol_cap_files": 100,
+    "protocol_parent_existing_cap_bytes": 33554432,
+    "protocol_parent_existing_cap_files": 25000,
+    "stream_protocol_existing_cap_bytes": 2097152,
+    "stream_protocol_existing_cap_files": 166,
+    "other_protocol_after_both_named_subclaims_bytes": 30408704,
+    "other_protocol_after_both_named_subclaims_files": 24734,
+    "receipt_cap_bytes": 1048576,
+    "receipt_cap_files": 40,
+    "receipt_parent_nonstream_cap_bytes": 53477376,
+    "receipt_parent_group_cap_files": 10000,
+    "stream_receipt_group_existing_cap_files": 49,
+    "other_receipts_after_stream_and_QPC_files": 9911,
+    "global_positive_file_delta": 0,
+    "execution_authorized": false,
+    "prerequisites": [
+      "parent static review of NEW QPC module/diff/source bindings",
+      "new immutable budget version with018 binding and all nested caps enforced",
+      "exact root/run registration, fresh actual/next-command/outer-finalization budget forecast",
+      "finite source-bound control plan and explicit META control GO",
+      "strict measured actual25Hz intervals on final RSS qualification; no retroactive old gaps PASS"
+    ],
+    "clock_scope": "Frozen1e4 guard unchanged; NEW QPC opt-in profile only. No priority, timer-resolution, system settings or dependencies."
+  },
+  "future_forecast_deterioration": {
+    "full448_before018": 47649925493,
+    "full448_after018": 47662508405,
+    "original_conditional_F14_and_native_releases": 417678121,
+    "full448_after_original_conditional_releases": 47244830284,
+    "previous_margin": 12392884,
+    "new_shortfall": 190028,
+    "full448_disposition": "NO_GO even if original conditional releases later prove valid; now190028B short before additional unresolved costs.",
+    "full480_before018": 47750588789,
+    "full480_after018": 47763171701,
+    "extra_conditional_native_cache_releases": 117440512,
+    "full480_after_all_original_and_extra_conditional_releases": 47228053068,
+    "previous480_margin": 29170100,
+    "new480_margin": 16587188,
+    "full480_disposition": "FEASIBILITY ONLY, notGO. Final native target/cache actuals and closure, all source case/constructor bounds, final schema/guard and complete oracle/case mapping still pending. Any further evidence/control/constructor costs reduce this margin.",
+    "actual_unused_forecast_release_applied": 0,
+    "actual_delete_credit_applied": 0,
+    "F14_expiry_applied": false
+  },
+  "new_budget_version_requirements": {
+    "author": "Matrix budget owner/META after this seal; resource worker does not edit live guard budget",
+    "old_versions": "retain immutable including budget-final-source-v2 and old claim009-011; no overwrite",
+    "required_patches": {
+      "F12_matrix_evidence_total_bytes": 54525952,
+      "runtime_receipts_ceiling_under_group": 54525952,
+      "stream_runtime_bytes_unchanged": 983040,
+      "stream_Landing_bytes_unchanged": 65536,
+      "matrix_nonstream_max": 53477376,
+      "matrix_other_excluding_QPC_max": 52428800,
+      "QPC_receipt_nested_max": 1048576,
+      "QPC_protocol_nested_max": 1048576,
+      "QPC_protocol_files": 100,
+      "QPC_receipt_files": 40,
+      "source_partitions": "192KiB/12 final +64KiB/8 cadence +768KiB/180 other; unchanged1MiB/200total"
+    },
+    "claim018_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T231405Z.json",
+    "claim018_sha256": "bind sealed file SHA fromseal; do not invent self hash",
+    "full_source_copy_GO_only": true
+  },
+  "resource_worker_actions": "Read-only arithmetic/source census/budget hash and immutable claim reports only; no live budget/source/guard/engine edits, no controls/build/corpus/cachecopy/restores/deletions.",
+  "prior_claims_immutable": true,
+  "clocks_unchanged": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "closeout_end": "2026-10-21T13:10:14Z"
+  }
+}

@@ -1,11 +1,11 @@
 {
-  "status": "CP2_ENGINEERING_INTEGRATED_CP3_IMPLEMENTATION_ACTIVE_FULL_QUALIFICATION_RESOURCE_NO_GO",
+  "status": "CP3_ENGINEERING_AND_FOCUSED_V2_INTEGRATED_FULL_QUALIFICATION_INCOMPLETE_RESOURCE_NO_GO",
   "human_byte_ceiling": 47244640256,
   "file_cap": 5000000,
   "inside_closeout_bytes": 1073741824,
   "inside_closeout_files": 100000,
-  "whole_conservative_prospective_with_earmarks": 47079500149,
-  "central_unassigned_bytes": 165140107,
+  "whole_conservative_prospective_with_earmarks": 47092083061,
+  "central_unassigned_bytes": 152557195,
   "remaining_files": 207460,
   "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
   "t0": "2026-10-20T19:10:14Z",
@@ -66,7 +66,7 @@
     }
   ],
   "Mac_readiness_chat": "01a15aba-14a9-7ff0-a81a-3c15f7b4fc8d",
-  "Mac_qualification": "Authority capsule verified; v6 control bundle39223B/SHA0fd94a99 verified77members+allhashes. Guard remediation required before engine release; no build/corpus. Source pin pending.",
+  "Mac_qualification": "Accepted v20 core/v23 role; v30 transport raw4outer11role independently verified, final bridge startup/semantic/API/version remediation source-only active",
   "central_claims_used": [
     {
       "id": "44GiB-CENTRAL-001-F08-FINAL-NATIVE",
@@ -95,10 +95,11 @@
     "C2_build_topups": 402653184,
     "C3_source_review_control": 16777216,
     "C2_unclaimed_Windows_topup": 134217728,
-    "C3_unsubclaimed_bytes": 7208960,
+    "C3_unsubclaimed_bytes": 6160384,
     "C3_META_REVIEW_bytes": 6291456,
     "C1_Mac_private_cache_active_bytes": 67108864,
-    "C3_CP2_CP3_SOURCE_ADMIN_bytes": 3145728
+    "C3_CP2_CP3_SOURCE_ADMIN_bytes": 3145728,
+    "C3_Matrix_admin_topup_bytes": 1048576
   },
   "Windows_guard": {
     "owner": "matrix worker",
@@ -109,18 +110,18 @@
     "checker_bytes": 2147483648,
     "j": 2,
     "status": "parent reviewed frozen v4 raw control receipts; actual engine/build released20:15Z",
-    "sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae"
+    "sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+    "QPC_candidate": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378 static accepted; controls pending, old cadence gaps preserved"
   },
-  "source_protocol_candidate": "CP1 reviewed engineering integrated; STORE3/Work2 generation lifetime and short capture gates; CP2 segmented rolling-tail source provisional; CP3 not implemented",
+  "source_protocol_candidate": "Reviewed a3 STORE3/Work2/catalog4/FNPIDX02 normal-pair conversion; no split-location fallback. Full qualification pending.",
   "next_required": [
-    "CP3 paged reader/writer/conversion implementation then fresh independent source review and exact final pin",
-    "Complete isolated stream emitter proof and Mac v30 capsule adapter source/raw review",
-    "CP3 single paged format from reviewed CP2; independent review and final source freeze",
-    "Run scoped long conversion under existing F09/F10/F14; full oracle then actual retirement/census before any reallocation",
-    "Measure final native targets then seal full-suite rebudget only if all44GiB conditions proved",
-    "Complete full Windows/Linux/Mac same-final-pin capsules, scaled history/document and lookup matrices",
-    "Full streaming backup/restore oracle and destination accepted successor",
-    "Final evidence/resource review, isolated commit/push and truthful KEEP/ADJUST/PIVOT closeout"
+    "Resolve reservation-slot exhaustion in required four-publisher schedules using legitimate bounded source-reviewed method; preserve all work and latency",
+    "Assess quadratic production Builder metadata scans before long conversion; exact-source fix if necessary and fresh review",
+    "Complete independent v5 parser and native adapter reviews; QPC raw controls before future opt-in",
+    "Long conversion under existing F09/F10/F14; full oracle, actual reaping and census",
+    "Full stream restore/oracle/accepted destination successor before F11 unused forecast expiry",
+    "Actual final native targets and all full-suite case bounds before sealed rebudget",
+    "All final-source workspace/native/scaled/document/lookup/1000-mapping/performance gates; final evidence review and truthful closeout"
   ],
   "native_Linux_guard": {
     "sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
@@ -128,8 +129,8 @@
   },
   "shared_harness_pin": "01ff272a98fe2cddf01f8ebfc399192f234051af",
   "CP1_open_source_review_findings": [],
-  "as_of": "2026-10-20T22:43:11.832500+00:00",
-  "landing_head": "67026b3e",
+  "as_of": "2026-10-20T23:43:22.058238+00:00",
+  "landing_head": "b76958c1",
   "latest_harness_source_pin": "2aebde505a0f399d1c863084a461bd3c43ef01fa",
   "CP1_provisional_pin": "bd6dd9367acddaddcd7873c8043548502a170c3b",
   "CP1_replacement_schema": "STORE3/Work2 immutable selected roots; physical_parent exact initial STORE CAS-parent token, transition_parent metadata comparison-only token, bounded birth_claims; stable pin{id,ordinal,catalog}; no predecessor traversal; explicit owned pack-directory tasks; 128KiB private Work cap prospective quota/backpressure",
@@ -193,7 +194,7 @@
   "full_qualification_admission": {
     "status": "NO_GO_PROSPECTIVE_FULL_SUITE_REBUDGET_ONLY",
     "claim004_sha256": "2546259c68428b3148bab6584a1593d65ee4173766542eb6a1f4002a77c981bc",
-    "proposed_448_native_480_Windows_F07_192_forecast_bytes": 47649925493,
+    "proposed_448_native_480_Windows_F07_192_forecast_bytes": 47662508405,
     "over_44GiB_bytes": 405285237,
     "allocations_applied": false,
     "existing_limited_claims_unchanged": true,
@@ -229,18 +230,19 @@
       "stream_F11_max_source_bytes": 651179227,
       "F14_reassignment_condition": "ACTUAL old pair retirement after independent full oracle, quiescent census, no pending stages/jobs/owner claims, process closure; original archive protected",
       "native_target_reassignment_condition": "ACTUAL exact final targets each <=192MiB and complete target/profile/dependency receipts; current256MiB held",
-      "combined_possible_margin_bytes": 12392884,
+      "combined_possible_margin_bytes": -190028,
       "no_planned_deletion_credit": true,
-      "no_additional_human_budget": true
+      "no_additional_human_budget": true,
+      "additional_512_body_route": "Conditional actual F09 body512MiB expiry55588059 + post-success F11 600MiB expiry47199451; with extra112MiB proven target/cache reductions yields18711402 margin; no allocations applied"
     },
-    "conditional_staged_margin_bytes": 12392884,
-    "F12_Windows_current_bytes": 92274688,
-    "F12_matrix_stream_current_bytes": 41943040,
+    "conditional_staged_margin_bytes": -190028,
+    "F12_Windows_current_bytes": 104857600,
+    "F12_matrix_stream_current_bytes": 54525952,
     "claim013_014": "013unused12MiB forecast was sealed then014 reversed before any guard registration/spend; current96 unchanged; no actual reclaim"
   },
   "CP3_worker": {
     "chat": "01a15b15-3362-7133-b789-1ff556b75d04",
-    "status": "SOLE_ENGINE_EDIT_OWNER_IMPLEMENTATION_AND_LIMITED_PROOFS_GO",
+    "status": "A3_BOUNDED_ENGINEERING_INTEGRATE_READONLY_QUOTA_AND_SCALING_ANALYSIS",
     "credible_paged_designs": 1,
     "design": "One self-contained variable-page FNPIDX02 index per pack; <=48 slots/page, <=16KiB/page, max3pages/route and4segments=>192KiB. Catalog root SHA/len/format plus wholefile SHA audit. Typed keymax225B checked; exactserializedindexlimit16MiB.",
     "long_index_upper_bytes": 77128970,
@@ -258,7 +260,14 @@
     },
     "fixture_plan": "<=12MiB small A/B conversions/routes/corruption plusONE<=17MiB structural image patched in place plusRAMgeometry; actual64MiB cache/fullqualification later mandatory",
     "full_representation_conversion": "Explicit one-time descriptor-streaming normal-pair conversion; preserves Discovery exactly/None; no split-location fallback",
-    "qualification": "INCOMPLETE"
+    "qualification": "INCOMPLETE",
+    "source_pin": "a3f9805eccc19ede8dd5c735b54e675e98e63714",
+    "binding_sha256": "f21a616e822c906f75eabff04dd7e97435781ee7a4fa32171acd62d6f119317b",
+    "binary_sha256": "ce8b4d5cc6981e3ec4ee24e7d3fc25447550bd7d68b440d04bc334635d6ee2da",
+    "original_f9": "REMEDIATE_F1_F2_F3_F4_PRESERVED",
+    "review": "INTEGRATE_BOUNDED_ENGINEERING",
+    "full_qualification": "INCOMPLETE",
+    "unit_count_correction": "14 existing source units: build9=11pass/3filtered; actual64MiB production constructor fixture additional mandatory; no full13 claim"
   },
   "CP1_engineering_disposition": {
     "review": "INTEGRATE_BOUNDED_ENGINEERING",
@@ -272,11 +281,11 @@
   "stream_snapshot_worker": {
     "chat": "01a15b51-a50b-7930-8633-b42694240252",
     "claim008_sha256": "8b69a7c60846c637d77d2011ab1e39baab31617c9cba2da0b0a76cbe843804b5",
-    "status": "39_CONTROL_PASS_FINAL_EMITTER_BYTE_BOUND_REVIEW_FIX_PENDING",
+    "status": "CLOSED_PARENT_ACCEPTED_F8D223_SOURCE_MAIN_EMITTER_PROVED",
     "source_bytes": 131072,
     "protocol_bytes": 2097152,
     "evidence_bytes": 1048576,
-    "all_other_landing_harness_files_frozen": true,
+    "all_other_landing_harness_files_frozen": false,
     "long_restore": "HOLD_FINAL_PIN_AND_REVIEW",
     "protocol_files": 166,
     "prior_overrun": {
@@ -295,16 +304,17 @@
     "controls": 39,
     "protocol_actual_bytes": 1508133,
     "protocol_actual_files": 164,
-    "runtime_evidence_actual_bytes": 542242,
-    "landing_evidence_actual_bytes": 62588,
-    "freeze_reason": "Renewed briefly for isolated ASCII error emitter proof; no Matrix harness imported yet",
+    "runtime_evidence_actual_bytes": 559003,
+    "landing_evidence_actual_bytes": 63390,
+    "freeze_reason": "Released; immutable old controls remain old source bound, isolated main emitter proof accepted",
     "strict_cadence": "NOT_QUALIFIED_MAX47MS_FIVE_GAPS_OVER40",
-    "real_long_restore": "HOLD_FINAL_SOURCE_AND_RESOURCE_STAGE"
+    "real_long_restore": "HOLD_FINAL_SOURCE_AND_RESOURCE_STAGE",
+    "source_sha256": "f8d223618d869bf85a11ec648254830e643aa1abbb86374233ac9f31fe46cc20"
   },
   "final_focused_harness_worker": {
     "chat": "01a15b6c-b109-7090-a8c2-0e165f92f51e",
-    "status": "SOURCE_ONLY_NEW_MATRIX_DIRECTORY",
-    "source_claim": "Existing Matrix F01 source1MiB subset128KiB/8files, no new global grant/admin/target",
+    "status": "V2_FRESH_REVIEW_INTEGRATE_SOURCE_REAL_CASES_PENDING",
+    "source_claim": "Existing Matrix F01 subset192KiB12files; distinct Landing copy charged C3META",
     "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/final-protocol",
     "budget_sha256": "4ab05e3a333d4ec238ad80e64399affff78623e14faec77214e696177cc209c2",
     "execution": "HOLD_FINAL_SOURCE_AND_FULL_RESOURCE_ADMISSION",
@@ -318,8 +328,10 @@
       64,
       32
     ],
-    "native_full_allocation": "NO_GO_PENDING_EXACT_FAILED_B_GENERATION_TOPOLOGY_WITHIN_WHOLE448M; no duplicate deep B",
-    "source_status": "active source/fakecontrols only"
+    "native_full_allocation": "NO_GO; provisional whole529480133B58096files; F1/F2 caps unclosed; 512MiB route conditional actual donor expiries",
+    "source_status": "Frozen v2 accepted",
+    "source_receipt_sha256": "ae78d32a4a14d8327c3b4090fea3ea05f4f69b8542c0e3c281692ec7acc7b63a",
+    "core_sha256": "58928f6bf82f82d13fb5d809c8d6095e331ec4feeac48c389d72744a3ff32859"
   },
   "engine_edit_owner": {
     "chat": "01a15b15-3362-7133-b789-1ff556b75d04",

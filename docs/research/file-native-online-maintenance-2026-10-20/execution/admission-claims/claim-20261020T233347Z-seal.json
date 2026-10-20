@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-020-F09-F11-UNUSED-EXPIRY-512MiB-FEASIBILITY",
+  "utc": "2026-10-20T23:33:47.957610+00:00",
+  "status": "ANALYSIS_ONLY__NO_ALLOCATION_OR_RELEASE__LONG_NATIVE_FULL_GO_WITHHELD",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261020T233347Z.json",
+      "bytes": 16232,
+      "sha256": "9c8c1b428f11d08178e9a2d276970bb4480775681f8aa017c380f3c665fead45"
+    },
+    {
+      "file": "claim-20261020T233347Z.md",
+      "bytes": 2366,
+      "sha256": "6720c6dee5204057ea94ab0ed712c10eaf541c8e4c60acc51211fb4aafce868b"
+    }
+  ]
+}
