@@ -39,9 +39,11 @@ for name in ['L-old', 'L-new', 'P0', 'PZ']:
         assert len(original) == row['cohort_records']
         containers = [x for x in records if x['path'].startswith(('packs/', 'pack-catalogs/'))]
         remaining = len(paths & original)
+        duplicate_bytes = sum(x['bytes'] for x in records if x['path'] in original)
+        original_raw_bytes = sum(json.loads(line)['raw_length'] for line in (CASE / 'matched-cohort-inventory.jsonl').read_text().splitlines())
         physical = len(containers) + remaining
         reduction = 1 - physical / len(original)
-        cells[name]['packing'] = dict(pack_index_bytes=sum(x['bytes'] for x in containers if x['path'].startswith('packs/')), pack_index_catalog_files=len(containers), remaining_original_loose_duplicates=remaining, original_cohort_files=len(original), eligible_physical_files_after=physical, file_reduction=reduction, ninety_five_percent_gate=reduction >= .95, other_owner_journal_control_files_additionally_charged=True)
+        cells[name]['packing'] = dict(pack_index_bytes=sum(x['bytes'] for x in containers if x['path'].startswith('packs/')), pack_index_catalog_files=len(containers), remaining_original_loose_duplicates=remaining, remaining_original_loose_duplicate_bytes=duplicate_bytes, original_cohort_files=len(original), original_cohort_raw_bytes=original_raw_bytes, eligible_pack_index_catalog_and_duplicates_bytes=sum(x['bytes'] for x in containers)+duplicate_bytes, eligible_physical_files_after=physical, file_reduction=reduction, ninety_five_percent_gate=reduction >= .95, other_owner_journal_control_files_additionally_charged=True)
 reference = cells['L-old']
 for name, row in cells.items():
     if row is None:
