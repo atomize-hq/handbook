@@ -71,6 +71,7 @@ pub(crate) fn native(path:&Path,limit:usize,m:&mut Metrics)->Result<Vec<u8>> {
     m.opens+=1;m.bytes_read+=b.len() as u64;m.pack_storage_bytes+=b.len() as u64;Ok(b)
 }
 pub(crate) struct Index { bytes:Vec<u8>, offsets:Vec<usize>, pub descriptor:Descriptor, paged:Option<crate::paged::Reader> }
+pub(crate) fn path_exists(path:&Path,m:&mut Metrics)->bool{m.pack_metadata_stats+=1;path.exists()}
 #[derive(Clone)]
 pub(crate) struct Entry { pub key:Key,pub offset:u64,pub encoded:usize,pub raw:usize,pub hash:String }
 impl Index {
@@ -85,13 +86,14 @@ impl Index {
         }
         if d.page.is_some(){return Ok(Self{bytes:vec![],offsets:vec![],descriptor:d.clone(),paged:Some(crate::paged::Reader::open(root,d,m)?)});}
         // Reject a changed file before allocating beyond the incoming charge.
-        let b=native(&root.join(d.path("idx")?),usize::try_from(d.index_bytes)?,m)?;
-        m.pack_legacy_index_bytes+=b.len() as u64;
-        if b.len()!=d.index_bytes as usize||io::digest(&b)!=d.index||b.len()<HEADER||&b[..8]!=MAGIC||hex(&b[8..40])!=d.pack||u64::from_le_bytes(b[40..48].try_into()?)!=d.pack_bytes||b[48]!=d.codec||u32::from_le_bytes(b[49..53].try_into()?)!=d.records {
+        let t=std::time::Instant::now();let b=native(&root.join(d.path("idx")?),usize::try_from(d.index_bytes)?,m)?;m.elapsed("pack-legacy-index-read",t);
+        m.pack_legacy_index_bytes+=b.len() as u64;m.pack_index_metadata_bytes+=b.len() as u64;
+        let t=std::time::Instant::now();let digest=io::digest(&b);m.elapsed("pack-legacy-index-hash",t);
+        if b.len()!=d.index_bytes as usize||digest!=d.index||b.len()<HEADER||&b[..8]!=MAGIC||hex(&b[8..40])!=d.pack||u64::from_le_bytes(b[40..48].try_into()?)!=d.pack_bytes||b[48]!=d.codec||u32::from_le_bytes(b[49..53].try_into()?)!=d.records {
             return Err("integrity:index-pack-binding".into());
         }
-        if root.join(d.path("pack")?).metadata().map_err(|e|format!("integrity:pack-missing:{e}"))?.len()!=d.pack_bytes{return Err("integrity:pack-size-binding".into());}
-        let mut index=Self{bytes:b,offsets:Vec::with_capacity(d.records as usize),descriptor:d.clone(),paged:None};
+        m.pack_metadata_stats+=1;if root.join(d.path("pack")?).metadata().map_err(|e|format!("integrity:pack-missing:{e}"))?.len()!=d.pack_bytes{return Err("integrity:pack-size-binding".into());}
+        let t=std::time::Instant::now();let parsed=(||->Result<Self>{let mut index=Self{bytes:b,offsets:Vec::with_capacity(d.records as usize),descriptor:d.clone(),paged:None};
         let mut position=HEADER;let mut last=String::new();let mut end=0u64;
         for _ in 0..d.records {
             index.offsets.push(position);let (e,next)=index.at(position)?;
@@ -102,7 +104,7 @@ impl Index {
             last=e.key.0;end=e.offset+e.encoded as u64;position=next;
         }
         if position!=index.bytes.len()||end!=d.pack_bytes||index.at(index.offsets[0])?.0.key.0!=d.first||last!=d.last||index.memory()>MAX_CACHE{return Err("integrity:index-coverage".into());}
-        m.pack_index_loads+=1;Ok(index)
+        m.pack_index_loads+=1;Ok(index)})();m.elapsed("pack-legacy-index-parse",t);parsed
     }
     fn at(&self,p:usize)->Result<(Entry,usize)> {
         let n=u16::from_le_bytes(self.bytes.get(p..p+2).ok_or("integrity:index-truncated")?.try_into()?) as usize;
@@ -160,6 +162,15 @@ pub(crate) struct Builder { pub pack:Vec<u8>, entries:Vec<Entry>,raw_bytes:usize
 impl Builder {
     pub fn new(role:&str,codec:u8)->Self{Self{pack:vec![],entries:vec![],raw_bytes:0,index_bytes:HEADER,encoded_bound:0,role:role.into(),codec}}
     pub fn is_empty(&self)->bool{self.entries.is_empty()}
+    pub fn metadata_memory(&self)->usize{std::mem::size_of::<Self>()+self.role.capacity()+self.entries.capacity()*std::mem::size_of::<Entry>()+self.entries.iter().map(|e|e.key.0.capacity()+e.hash.capacity()).sum::<usize>()}
+    pub fn push_bound(&self,key:&Key)->Result<usize>{
+        let old=self.entries.capacity();let next=if self.entries.len()==old{old.checked_mul(2).ok_or("integrity:builder-memory-overflow")?.max(4)}else{old};
+        self.metadata_memory().checked_add(if next!=old{next.checked_mul(std::mem::size_of::<Entry>()).ok_or("integrity:builder-memory-overflow")?}else{0}).and_then(|n|n.checked_add(key.0.capacity())).and_then(|n|n.checked_add(4096)).ok_or_else(||"integrity:builder-memory-overflow".into())
+    }
+    pub fn finish_bound(&self)->Result<usize>{
+        let output=crate::paged::size_bound(self.entries.len(),self.index_bytes-HEADER)?;
+        self.metadata_memory().checked_add(output).and_then(|n|n.checked_add(self.entries.len().checked_mul(64)?)).and_then(|n|n.checked_add(2*crate::paged::PAGE+4096)).ok_or_else(||"integrity:builder-memory-overflow".into())
+    }
     pub fn fits(&self,key:&Key,raw:usize)->bool {
         self.entries.len()<MAX_RECORDS && self.raw_bytes+raw<=60*1024*1024 && crate::paged::size_bound(self.entries.len()+1,self.index_bytes-HEADER+key.0.len()+50).is_ok_and(|n|n<=MAX_INDEX) && self.encoded_bound+zstd::zstd_safe::compress_bound(raw)<=MAX_PACK
     }
@@ -172,12 +183,16 @@ impl Builder {
         self.entries.push(Entry{key,offset:self.pack.len() as u64,encoded:encoded.len(),raw:raw.len(),hash:io::digest(raw)});
         self.pack.extend(encoded);self.raw_bytes+=raw.len();Ok(())
     }
-    pub fn finish(self)->Result<(Descriptor,Vec<u8>,Vec<u8>)> {
+    pub fn finish_reserved(self,approved:usize)->Result<(Descriptor,Vec<u8>,Vec<u8>)> {
         if self.entries.is_empty(){return Err("refused:empty-pack".into());}
+        if self.finish_bound()?>approved{return Err("integrity:builder-unreserved-construction".into());}
         let hash=io::digest(&self.pack);
         let mut d=Descriptor{page:None,instance:None,segment:0,pack:hash,index:String::new(),pack_bytes:self.pack.len() as u64,index_bytes:0,records:self.entries.len() as u32,codec:self.codec,role:self.role,first:self.entries[0].key.0.clone(),last:self.entries.last().unwrap().key.0.clone()};
-        let (bytes,page)=crate::paged::build(&d,&self.entries)?;d.index=io::digest(&bytes);d.index_bytes=bytes.len() as u64;d.page=Some(page);Ok((d,self.pack,bytes))
+        let output=crate::paged::size_bound(self.entries.len(),self.index_bytes-HEADER)?;
+        let (bytes,page)=crate::paged::build(&d,&self.entries,output)?;d.index=io::digest(&bytes);d.index_bytes=bytes.len() as u64;d.page=Some(page);Ok((d,self.pack,bytes))
     }
+    #[cfg(test)]
+    pub fn finish(self)->Result<(Descriptor,Vec<u8>,Vec<u8>)>{self.finish_reserved(MAX_CACHE)}
     #[cfg(test)]
     pub fn finish_legacy(self)->Result<(Descriptor,Vec<u8>,Vec<u8>)> {
         if self.entries.is_empty(){return Err("refused:empty-pack".into());}

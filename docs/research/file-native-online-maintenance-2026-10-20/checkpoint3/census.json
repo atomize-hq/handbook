@@ -1,32 +1,27 @@
 [
   {
     "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-cp2-20261020/handbook",
-    "bytes": 357059.0,
-    "files": 33
+    "bytes": 386439.0,
+    "files": 35
   },
   {
     "root": "C:/Users/spmcc/Documents/__Project_Code/handbook/.git/worktrees/handbook11",
-    "bytes": 929757.0,
+    "bytes": 931005.0,
     "files": 8
   },
   {
     "root": "C:/file-native-online-cp1-20261020/build",
-    "bytes": 200886189.0,
+    "bytes": 201412934.0,
     "files": 517
   },
   {
     "root": "C:/file-native-online-cp1-20261020/fixtures",
-    "bytes": 73812794.0,
-    "files": 11700
+    "bytes": 77395734.0,
+    "files": 12078
   },
   {
     "root": "C:/file-native-online-cp1-20261020/evidence",
-    "bytes": 43998613.0,
-    "files": 357
-  },
-  {
-    "root": "C:/file-native-online-cp1-20261020/fixtures/cp3",
-    "bytes": 16026800.0,
-    "files": 2017
+    "bytes": 44509591.0,
+    "files": 382
   }
 ]

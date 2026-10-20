@@ -95,7 +95,7 @@ pub(crate) fn upgrade_handles(root:&Path,c:&StoreConfig,m:&mut Metrics)->Result<
 }
 fn validate_pin(f:&mut File,expected:&PinIdentity,m:&mut Metrics)->Result<()>{
     m.cleanup_step()?;
-    if f.metadata()?.len()>1024{return Err("integrity:pin-bound".into());}
+    m.pack_metadata_stats+=1;if f.metadata()?.len()>1024{return Err("integrity:pin-bound".into());}
     f.seek(SeekFrom::Start(0))?;let mut bytes=vec![];f.take(1025).read_to_end(&mut bytes)?;
     if bytes.len()>1024||strict::<PinIdentity>(&bytes)?!=*expected{return Err("integrity:pin-binding".into());}
     m.opens+=1;m.bytes_read+=bytes.len() as u64;Ok(())
@@ -178,7 +178,7 @@ pub(crate) fn validate_work(w:&Work)->Result<()>{
 pub(crate) fn persist_plan(root:&Path,w:&Work,m:&mut Metrics)->Result<String>{
     m.cleanup_step()?;validate_work(w)?;let bytes=io::json(w)?;m.cleanup_step()?;if bytes.len()>WORK_LIMIT{return Err("quota:physical-work-bytes".into());}
     let hash=io::digest(&bytes);let path=root.join(plan_name(&hash)?);
-    if path.exists(){if pack::native(&path,WORK_LIMIT,m)?!=bytes{return Err("integrity:existing-work-plan".into());}}
+    if pack::path_exists(&path,m){if pack::native(&path,WORK_LIMIT,m)?!=bytes{return Err("integrity:existing-work-plan".into());}}
     else{
         let stage=root.join(work_stage(&w.generation.id)?);m.cleanup_step()?;io::write_new(&stage,&bytes,m)?;
         m.cleanup_step()?;io::mkdir(path.parent().ok_or("integrity:work-plan-parent")?,m)?;
@@ -199,8 +199,9 @@ fn task_present(root:&Path,name:&str,m:&mut Metrics)->Result<bool>{
     if name.starts_with("physical-stages/"){return budget_present(path.parent().ok_or("integrity:stage-parent")?,m);}
     Ok(false)
 }
-fn budget_present(path:&Path,m:&mut Metrics)->Result<bool>{m.cleanup_step()?;native_present(path)}
-fn native_present(path:&Path)->Result<bool>{
+fn budget_present(path:&Path,m:&mut Metrics)->Result<bool>{m.cleanup_step()?;native_present(path,m)}
+fn native_present(path:&Path,m:&mut Metrics)->Result<bool>{
+    m.pack_metadata_stats+=1;
     match std::fs::symlink_metadata(path){Ok(_)=>Ok(true),Err(e) if e.kind()==std::io::ErrorKind::NotFound=>Ok(false),Err(e)=>Err(e.into())}
 }
 // One deterministic stage per generation. It owns the candidate plan hash before

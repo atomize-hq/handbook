@@ -73,7 +73,7 @@ fn parse(bytes:&[u8],d:&Descriptor,expected:&Child,height:u8,upper:Option<&str>,
 type Pages=BTreeMap<(u64,u32,String),Rc<Vec<u8>>>;
 pub(crate) struct Reader{root:PathBuf,d:Descriptor,pages:RefCell<Pages>}
 impl Reader{
-    pub fn open(root:&Path,d:&Descriptor,m:&mut Metrics)->Result<Self>{validate(d)?;let reader=Self{root:root.into(),d:d.clone(),pages:RefCell::new(BTreeMap::new())};let (e,h)=reader.root();let b=reader.page(&e,m)?;parse(&b,d,&e,h,None,Some(&d.last))?;m.pack_index_loads+=1;Ok(reader)}
+    pub fn open(root:&Path,d:&Descriptor,m:&mut Metrics)->Result<Self>{validate(d)?;let reader=Self{root:root.into(),d:d.clone(),pages:RefCell::new(BTreeMap::new())};let (e,h)=reader.root();let b=reader.page(&e,m)?;let t=Instant::now();let node=parse(&b,d,&e,h,None,Some(&d.last))?;m.elapsed("pack-page-parse",t);m.pack_pages_parsed+=1;m.pack_page_parse_peak_bytes=m.pack_page_parse_peak_bytes.max(node.memory() as u64);m.pack_index_loads+=1;Ok(reader)}
     fn root(&self)->(Child,u8){let r=self.d.page.as_ref().unwrap();(Child{first:self.d.first.clone(),offset:0,bytes:r.bytes,hash:r.hash.clone(),records:self.d.records,start:0,end:self.d.pack_bytes},r.height)}
     fn page(&self,e:&Child,m:&mut Metrics)->Result<Rc<Vec<u8>>>{
         let key=(e.offset,e.bytes,e.hash.clone());if let Some(b)=self.pages.borrow().get(&key){m.pack_cache_hits+=1;return Ok(b.clone());}
@@ -82,7 +82,7 @@ impl Reader{
         if e.bytes==0||e.bytes as usize>PAGE||e.offset.checked_add(e.bytes as u64).is_none_or(|n|n>self.d.index_bytes){return Err("integrity:paged-read-extent".into());}
         let started=Instant::now();let mut f=File::open(self.root.join(self.d.path("idx")?))?;m.pack_metadata_stats+=1;
         if f.metadata()?.len()!=self.d.index_bytes{return Err("integrity:paged-file-size".into());}f.seek(SeekFrom::Start(e.offset))?;
-        let mut b=vec![0;e.bytes as usize];f.read_exact(&mut b)?;m.opens+=1;m.bytes_read+=b.len() as u64;m.pack_storage_bytes+=b.len() as u64;m.pack_index_metadata_bytes+=b.len() as u64;m.pack_page_reads+=1;m.elapsed("pack-page-read",started);
+        let mut b=vec![0;e.bytes as usize];f.read_exact(&mut b)?;m.opens+=1;m.bytes_read+=b.len() as u64;m.pack_storage_bytes+=b.len() as u64;m.pack_index_metadata_bytes+=b.len() as u64;m.pack_paged_index_metadata_bytes+=b.len() as u64;m.pack_page_reads+=1;m.elapsed("pack-page-read",started);
         let resident=self.pages.borrow().iter().map(|((_,_,h),b)|h.capacity()+b.capacity()+192).sum::<usize>()+b.capacity()+e.hash.capacity()+192;
         if resident>MEMORY_BOUND/2{return Err("integrity:paged-cache-allocation".into());}m.pack_page_resident_peak_bytes=m.pack_page_resident_peak_bytes.max(resident as u64);
         let started=Instant::now();if io::digest(&b)!=e.hash{return Err("integrity:paged-page-hash".into());}m.pack_page_hash_bytes+=b.len() as u64;m.elapsed("pack-page-hash",started);
@@ -109,7 +109,7 @@ impl Reader{
     }
     fn walk(&self,e:&Child,h:u8,upper:Option<&str>,last:Option<&str>,next:&mut u64,m:&mut Metrics)->Result<()>{
         if e.offset!=*next{return Err("integrity:paged-alias-gap".into());}*next=next.checked_add(e.bytes as u64).ok_or("integrity:paged-overflow")?;
-        let b=self.page(e,m)?;let node=parse(&b,&self.d,e,h,upper,last)?;
+        let b=self.page(e,m)?;let t=Instant::now();let node=parse(&b,&self.d,e,h,upper,last)?;m.elapsed("pack-page-parse",t);m.pack_pages_parsed+=1;m.pack_page_parse_peak_bytes=m.pack_page_parse_peak_bytes.max(node.memory() as u64);
         for (n,child) in node.children.iter().enumerate(){self.walk(child,h-1,node.children.get(n+1).map(|c|c.first.as_str()).or(upper),if n+1==node.children.len(){Some(&node.last)}else{None},next,m)?;}
         Ok(())
     }
@@ -138,12 +138,13 @@ fn emit(node:&mut BuildNode,d:&Descriptor,entries:&[Entry],out:&mut[u8])->Result
     else{for child in &node.children{string(&mut page,&entries[child.start].key.0)?;page.extend((child.offset as u64).to_le_bytes());page.extend((child.bytes as u32).to_le_bytes());page.extend(hash(&child.hash)?);page.extend(((child.end-child.start) as u32).to_le_bytes());page.extend(entries[child.start].offset.to_le_bytes());let end=&entries[child.end-1];page.extend(end.offset.checked_add(end.encoded as u64).ok_or("integrity:paged-overflow")?.to_le_bytes());}}
     if page.len()!=node.bytes{return Err("integrity:paged-builder-size".into());}node.hash=io::digest(&page);out[node.offset..node.offset+node.bytes].copy_from_slice(&page);Ok(())
 }
-pub(crate) fn build(d:&Descriptor,entries:&[Entry])->Result<(Vec<u8>,Root)>{
+pub(crate) fn build(d:&Descriptor,entries:&[Entry],approved_output:usize)->Result<(Vec<u8>,Root)>{
     let entry_bytes=entries.iter().try_fold(0usize,|n,e|->Result<usize>{typed(&e.key.0)?;n.checked_add(e.key.0.len()+50).ok_or_else(||"integrity:paged-overflow".into())})?;
     if size_bound(entries.len(),entry_bytes)?>pack::MAX_INDEX{return Err("refused:paged-index-size".into());}
     let mut nodes=entries.chunks(SLOTS).enumerate().map(|(n,es)|BuildNode{start:n*SLOTS,end:n*SLOTS+es.len(),height:0,offset:0,bytes:0,hash:String::new(),children:vec![]}).collect::<Vec<_>>();
     while nodes.len()>1{let mut next=vec![];let mut it=nodes.into_iter();loop{let children=it.by_ref().take(SLOTS).collect::<Vec<_>>();if children.is_empty(){break;}next.push(BuildNode{start:children[0].start,end:children.last().unwrap().end,height:children[0].height+1,offset:0,bytes:0,hash:String::new(),children});}nodes=next;}
     let mut root=nodes.pop().ok_or("refused:empty-paged-index")?;let mut length=0;assign(&mut root,entries,&mut length)?;if length>pack::MAX_INDEX||root.height>2{return Err("refused:paged-index-size".into());}
+    if length>approved_output{return Err("integrity:unreserved-index-output".into());}
     let mut out=vec![0;length];emit(&mut root,d,entries,&mut out)?;Ok((out,Root{version:2,hash:root.hash,bytes:root.bytes as u32,height:root.height}))
 }
 #[cfg(test)]

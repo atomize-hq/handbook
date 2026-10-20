@@ -80,11 +80,12 @@ pub fn files(dir:&Path,out:&mut Vec<PathBuf>)->Result<()>{
     }Ok(())
 }
 pub fn remove_checked(root:&Path,path:&Path,m:&mut Metrics)->Result<u64>{
-    let base=root.canonicalize()?;let resolved=path.canonicalize()?;
-    if resolved==base||!resolved.starts_with(&base)||fs::symlink_metadata(path)?.file_type().is_symlink(){
+    m.pack_path_canonicalizations+=1;let base=root.canonicalize()?;m.pack_path_canonicalizations+=1;let resolved=path.canonicalize()?;
+    if resolved==base||!resolved.starts_with(&base){return Err("refused:unsafe-delete".into());}
+    m.pack_metadata_stats+=1;if fs::symlink_metadata(path)?.file_type().is_symlink(){
         return Err("refused:unsafe-delete".into());
     }
-    let n=path.metadata()?.len();fs::remove_file(path)?;io::sync_dir(path.parent().unwrap(),m)?;m.namespace_ops+=1;Ok(n)
+    m.pack_metadata_stats+=1;let n=path.metadata()?.len();fs::remove_file(path)?;io::sync_dir(path.parent().unwrap(),m)?;m.namespace_ops+=1;Ok(n)
 }
 pub fn run(store:&Store,v:&Value,m:&mut Metrics)->Result<Value>{
     let _guard=store.lock(m)?;let root=&store.root;
