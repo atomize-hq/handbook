@@ -499,7 +499,7 @@ class Decoder(prior.Decoder):
         assert j['catalog'] is None or type(j['catalog']) is str and prior.HASH.fullmatch(j['catalog'])
         assert type(j['old']) is list and len(j['old']) <= 64
         for d in j['old']:
-            prior.descriptor(d)
+            descriptor4(d)
         for field in ['reserved_bytes', 'used_bytes', 'deleted_bytes', 'deferred_bytes']:
             prior.unsigned(j[field])
         transferred = j.get('ownership_transferred', False)

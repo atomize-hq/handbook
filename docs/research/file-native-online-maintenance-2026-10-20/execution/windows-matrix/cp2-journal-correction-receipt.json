@@ -1,0 +1,165 @@
+{
+  "utc": "2026-10-20T23:13:01.436546+00:00",
+  "parser_source_pin": "7a6ee9db03f5cd2e388129a9019c0d5f274a1844",
+  "correction": "journal.old uses descriptor4 including segment instead of legacy descriptor",
+  "source": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v4.py",
+      "bytes": 36698,
+      "sha256": "a4eb1adb2dcc51c59977cf32a2dea5adbf97f51664aa4b3625f91dcce8e6464f"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\matrix_budget.py",
+      "bytes": 2771,
+      "sha256": "3f3f44bf7326fa45daf115ae1ce4b68011ac6a151835be04bacd3b94f37d693d"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\cp2_journal_controls.py",
+      "bytes": 2753,
+      "sha256": "b0b15953d05a69e934c7cbf31edb4e16d0714dd5371b94d417cd58da341d66b8"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\matrix_budget_controls.py",
+      "bytes": 2808,
+      "sha256": "517e47055bcc4c8278d9df0516d152ff38b2c031f82e47ee27621b73c3271edd"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\cp2_full_batch.py",
+      "bytes": 4955,
+      "sha256": "a7c8449060b3b526938b83c110722389bac890bf2654b733aa7004ddc86c6444"
+    }
+  ],
+  "original_parser": {
+    "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-v4-original-015590-source.py.txt",
+    "bytes": 36703,
+    "sha256": "015590d124c2da3bcd1c7c6758b2891094f4d9594f1b85ef949b8a332811e488"
+  },
+  "original_batch_source": {
+    "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-v4-original-batch-source.py.txt",
+    "bytes": 4358,
+    "sha256": "7a1bc10645b5e893fba92bef6cd6a48fd0865e4791f236547682b20761109b62"
+  },
+  "original_guard": {
+    "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4-guard.json",
+    "bytes": 263980,
+    "sha256": "6e72b4396f7fe35e8f3890fb57628370c998fd3e2b114b4f8f62a6b8bce962ac"
+  },
+  "original_batch": {
+    "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\batch-results.json",
+    "bytes": 38917,
+    "sha256": "54b068e3a21a789350468476bae600de7bb3e99236a0028bf29e813077c6ac7e"
+  },
+  "original_outcomes": {
+    "full_oracle_pass": [
+      "F2-auto"
+    ],
+    "journal_legacy_descriptor_assertions": 12,
+    "request_provenance_pass": 13,
+    "all_source_files_and_directories_unchanged": 13
+  },
+  "read_only_proofs": [
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\capture.read-only.json",
+      "bytes": 782,
+      "sha256": "5e1e91fb1b1d0a0c4799b1ba430e0e4977897bccfa92abb4c823d42e031f303e"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\cutoff-cross.read-only.json",
+      "bytes": 787,
+      "sha256": "6aa719c78e25ce7d1edfe3b36ff61e93b70fe61a5cec97be9124732281800eee"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\F1-oversize.read-only.json",
+      "bytes": 786,
+      "sha256": "4a7c169941ac3d4f1d8f04fe7e8554ee6c83d96393f87a11f396901ec164caa0"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\F1-reservation.read-only.json",
+      "bytes": 789,
+      "sha256": "15e5ad0cff592b947e100df39af0cee3eb01960d0fbf4a4f9a481c04f0ad2152"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\F1-retired.read-only.json",
+      "bytes": 789,
+      "sha256": "b17f8fab3d332defaf9a984fe638db8399f751f185c8838abe8486509f3d3ebe"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\F2-auto.read-only.json",
+      "bytes": 788,
+      "sha256": "244ef7c457f818e6ec5af2a9fe712e4475ed32268d38e4c49ae8d690719f13d3"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\interval-crash.read-only.json",
+      "bytes": 789,
+      "sha256": "dd8a1ed2a652da65ea5a50607286a6058c82d1fa2d11cb14f4d174869b28cfd4"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\late-eligible.read-only.json",
+      "bytes": 788,
+      "sha256": "5ec14f59d67ee1a579e35a6eafd6855bc153414d10c21e3e38c3969f4f826fd9"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\owners.read-only.json",
+      "bytes": 781,
+      "sha256": "ae315e7d1974fe7d388b5c5680068e61658424eb2bc5cce9994763a6982e917c"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\partial.read-only.json",
+      "bytes": 782,
+      "sha256": "8ed82afabc9b5ef988b799a6be5dd5d9c38994b088b8763191d6d7aac77b1e11"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\smoke-A.read-only.json",
+      "bytes": 785,
+      "sha256": "896e679a802e886e29d1820441c6cd220d302388345eac4c6539f608bd2bb26c"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\smoke-B.read-only.json",
+      "bytes": 786,
+      "sha256": "4df9c2aab2fa55dbb3188792357bf28509def205247e6eae6f9631061da906dd"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-full-v4\\stable-base.read-only.json",
+      "bytes": 789,
+      "sha256": "6976755bb22d2b9943ff15fa1763c23fb12cb7ad908c80220f243bbc46da3fe7"
+    }
+  ],
+  "focused_guard": {
+    "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-journal-controls-guard.json",
+    "bytes": 25730,
+    "sha256": "f24350064ab428adafd353c9ddfc80e2c1e5d353b0b2145f152edf1a04f6ef01"
+  },
+  "journal_controls": {
+    "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-journal-controls.json",
+    "bytes": 786,
+    "sha256": "9e168724b3e942715846b1ea6783abe46c91642465bf12376364deeb44518d3c"
+  },
+  "budget_controls": {
+    "path": "C:\\file-native-online-matrix-20261020\\receipts\\matrix-budget-two-reservations-controls.json",
+    "bytes": 6210,
+    "sha256": "56426912144336922cb2c1c6137d5a64be1e1b25de28b11fb6127957f36c5c9e"
+  },
+  "budget": {
+    "path": "C:\\file-native-online-matrix-20261020\\receipts\\budget-final-source-v2.json",
+    "bytes": 4815,
+    "sha256": "0b26efdba8af4ab41a939697244e02b1e7da1ec55ab857d05bd6d74de89ca781"
+  },
+  "impact": [
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\cp2-v4-journal-impact-exact.txt",
+      "bytes": 750,
+      "sha256": "84014b6de084156571399989cf1fafa295443020f9c102d831517f4b91cec52b"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\matrix-budget-two-source-reservations-impact.txt",
+      "bytes": 747,
+      "sha256": "e5c79e47333bc959596bcd66ed884b2a3946f3fce1db0eef3af39bdbd94936af"
+    }
+  ],
+  "graph_risk": "UNKNOWN: exact checkout unregistered; manual decoder and matrix preflight callers traced",
+  "remaining12_real_oracles_not_rerun": true,
+  "original_F2_pass_not_repeated": true,
+  "new_batch_explicit_case_and_decoder_binding_syntax_only": true,
+  "no_engine_calls": true,
+  "no_fixture_copies": true
+}
