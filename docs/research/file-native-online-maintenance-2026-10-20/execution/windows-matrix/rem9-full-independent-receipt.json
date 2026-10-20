@@ -1,0 +1,190 @@
+{
+  "utc": "2026-10-20T21:29:20.180822+00:00",
+  "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+  "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+  "oracle": {
+    "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+    "raw_records": 10,
+    "raw_bytes": 8318,
+    "inventory_digest": "9b60e9b602593f643bfe21225eaeb79c9372297ad5390efbbc26431c14c1f902",
+    "physical_metadata": {
+      "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+      "work_version": 2,
+      "selected_generation": {
+        "id": "physical-6-birth-34892-1792531407650918400-0",
+        "ordinal": 6,
+        "plan": "21d629e54a0b07755e6f1cce50fe084222fbe084629d12d2d8e8222729df314e"
+      },
+      "physical_parent": "1341144233f0dd77bc7d406442d99f8dca1ac76a4b737838e11d3f5ae3da8cb5",
+      "physical_parent_is_initial_physical_CAS_token": true,
+      "transition_parent": "23ef5b97f66b39c274581dd9855cfab574ccb22ec52cfb6a341871bcdcf727b0",
+      "transition_parent_is_comparison_token_not_retained_chain": true,
+      "birth_claims": [],
+      "birth_claim_count": 0,
+      "retained_generations": 0,
+      "pending_loose_jobs": 0,
+      "retired_container_jobs": 0,
+      "garbage_entries": 1,
+      "pending_garbage": 0,
+      "absent_garbage_tombstones": 1,
+      "owned_aborted_pack_directories": [],
+      "observed_removed_bytes": 139432,
+      "observed_removed_files": 103,
+      "observed_reconciled_absent": 83,
+      "counters_are_not_admission_credit": true,
+      "metadata_work_root_selection_is_not_physical_activation": true,
+      "mutable_progress_accepted": false,
+      "pending_selector_stage": null,
+      "journal": {
+        "version": 2,
+        "id": "physical-6-birth-34892-1792531407650918400-0",
+        "status": "registered",
+        "abandoned_owner_count": 0,
+        "ownership_transferred": false,
+        "selected_by_STORE": true,
+        "pending_owned_refs": [],
+        "establishes_acceptance": false
+      },
+      "owned_work_stage": null,
+      "required_paths": [
+        "PACKING.json",
+        "STORE.json",
+        "pack-catalogs/ab1f3cc9cfc9edcd7ef84e9b7bd5d1cda9b1125923cfaff7ddcf6e8dfffd8ac9.json",
+        "packs/physical-6-birth-34892-1792531407650918400-0/075cf653ffd3f83962898418cd2fe8eac64411fff958f3e2bac20dc9f30b8ada.idx",
+        "packs/physical-6-birth-34892-1792531407650918400-0/151c91f63e0cdb845e5a3bcca3082d7808744b098fad61725f523e77d10e7162.pack",
+        "packs/physical-6-birth-34892-1792531407650918400-0/18b881969e00eb129e25228bb725dcc05be4c903287d7160606b06b9c63ce6f6.idx",
+        "packs/physical-6-birth-34892-1792531407650918400-0/32c0d573769f60492f83465003c6777d98a8823630d3c931be1d8c69612a846e.pack",
+        "packs/physical-6-birth-34892-1792531407650918400-0/410eeef68c6d5c5f3f6db994f6362ba96a5ab6822abfb571dfb14847330408b1.idx",
+        "packs/physical-6-birth-34892-1792531407650918400-0/d22605bb3128940659fd6941fda09d6256abf5900158085473786ab8023a0a41.idx",
+        "packs/physical-6-birth-34892-1792531407650918400-0/d575d2fbd512bbd6b95a2c03dbaa0be2c33af5624db913120ffbc356e9658c7a.idx",
+        "packs/physical-6-birth-34892-1792531407650918400-0/e51f67151d63d12d445418c13c3420663382a89da8a6007f4912bd0f0528ce8f.pack",
+        "packs/physical-6-birth-34892-1792531407650918400-0/f06370687b721ce6d156aa94e5e79c1df5d9cbaac55febea81c6c76b938983f4.pack",
+        "packs/physical-6-birth-34892-1792531407650918400-0/f71647849459d07f2a393d3ad6f66d99d8a751181664783915b130be785c219c.pack",
+        "physical-pins/physical-6-birth-34892-1792531407650918400-0.lock",
+        "physical-plans/21d629e54a0b07755e6f1cce50fe084222fbe084629d12d2d8e8222729df314e.json"
+      ],
+      "quiescent_native_lock_state_unmeasured": true
+    },
+    "semantic": {
+      "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+      "selected": {
+        "publication": "publication-12016-1792531406487634400-6",
+        "digest": "4b499820fca74a8f86ba161d78ef1bf55c0639321b83bbd556cba419b1e6c5b0"
+      },
+      "publications": 2,
+      "ledger_rows": 0,
+      "permanent_digest": "15479df94622b14bc6b2fffb4b45019cb92e26db875362d332ae367958580872",
+      "retired_publications": 0,
+      "retired_content": "none",
+      "unique_content_roots": 1,
+      "root_visits": 2,
+      "sources": 14,
+      "pins": 0,
+      "reservations": 0,
+      "packets": 0,
+      "generations": 0,
+      "conservative_cumulative_owner_allowance_bytes": 137217728,
+      "actual_physical_owner_bytes": false,
+      "seconds": 0.0
+    },
+    "navigation": {
+      "documents": 10,
+      "supplemented_documents": 10,
+      "projection_files": 14,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    "request_intents": {
+      "profile": "independent-complete-exact-request-intent-and-accepted-result",
+      "selected": {
+        "publication": "publication-12016-1792531406487634400-6",
+        "digest": "4b499820fca74a8f86ba161d78ef1bf55c0639321b83bbd556cba419b1e6c5b0"
+      },
+      "publications": 2,
+      "actual_H": 2,
+      "authentic_history_recipe_intents": 0,
+      "retained_candidate_proofs": 2,
+      "exact_loose_B_publication_controls": 0,
+      "evidence_sha256": "6d2ac36e7d34254a7eef364ff7852909902b41fb073c96637c452a451edf7268",
+      "engine_code_imported": false
+    },
+    "independent_codec": null,
+    "seconds": 0.03200000000651926,
+    "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+  },
+  "read_only": {
+    "root": "C:\\file-native-online-cp1-20261020\\fixtures\\rem9\\disposable\\store",
+    "module": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v3.py",
+    "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+    "source_file_count": 56,
+    "source_logical_bytes": 287942,
+    "source_directory_count": 47,
+    "all_file_hashes_sizes_names_and_directories_unchanged": true,
+    "before_sha256": "a9e3e5274bb3fab70befb1697f87e7bcf7275e7f16187da95488d6d982a48a12",
+    "after_sha256": "a9e3e5274bb3fab70befb1697f87e7bcf7275e7f16187da95488d6d982a48a12",
+    "no_engine_calls": true,
+    "no_fixture_copies": true
+  },
+  "guard": {
+    "exit": 0,
+    "censor": null,
+    "errors": [],
+    "closure_checks": [
+      {
+        "epoch": 1792531718.1303499,
+        "members": []
+      },
+      {
+        "epoch": 1792531718.151051,
+        "members": []
+      }
+    ],
+    "process_closure_verified": true,
+    "memory_sample_timing": {
+      "samples": 12,
+      "max_interval_seconds": 0.03100000007543713,
+      "intervals_over_40ms": 0
+    },
+    "job_aggregate_sampled_peak_rss": 22028288
+  },
+  "raw": [
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\rem9-full-independent.json",
+      "bytes": 5335,
+      "sha256": "3f184fb36694ff690aeb2fcc12c771bf43e23e1473e0c465811e62e9fe33e7a5"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\rem9-full-independent.before.json",
+      "bytes": 11911,
+      "sha256": "a9e3e5274bb3fab70befb1697f87e7bcf7275e7f16187da95488d6d982a48a12"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\rem9-full-independent.after.json",
+      "bytes": 11911,
+      "sha256": "a9e3e5274bb3fab70befb1697f87e7bcf7275e7f16187da95488d6d982a48a12"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\rem9-full-independent.read-only.json",
+      "bytes": 774,
+      "sha256": "64f051ddfe02b6c0991d33e01f2762740c93799888df2d4d1aaeaa105a7a8861"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\rem9-full-independent-guard.json",
+      "bytes": 8213,
+      "sha256": "802af39540e476f2963fa0d4669a61c383f6cf6bfcf384b46c7678038ac1ae1c"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\rem9-full-independent-source-binding.json",
+      "bytes": 6360,
+      "sha256": "2eb4897b79e12111120cf2779e7ce5e5a9b05f9cccc3dafcb5cb19b2202d5020"
+    }
+  ],
+  "document_helper": {
+    "sha256": "29756e5dec11994dc934cb03226cdde249ed6bf19a9aee2d47c0a9bb8b2ddc33",
+    "execution": "NOT_RUN_WAITING_FINAL_PIN_AND_F07",
+    "overlap": "explicit physical-before-selection ready/release barrier; ordinary clock starts after ready; release finally drains maintenance",
+    "percentiles_claimed": false
+  },
+  "qualification": "historical cd12/rem9 full quiescent oracle pass only; separate authority/online/directory regressions and complete final matrix still required"
+}
