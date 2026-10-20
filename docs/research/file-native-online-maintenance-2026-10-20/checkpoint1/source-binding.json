@@ -1,5 +1,5 @@
 {
-  "utc": "2026-10-20T20:23:44.517897+00:00",
+  "utc": "2026-10-20T21:00:24.081799+00:00",
   "files": {
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock": {
       "bytes": 10547,
@@ -50,8 +50,8 @@
       "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27"
     },
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs": {
-      "bytes": 13519,
-      "sha256": "2cf972443ddfe8732e53815bccb7c3a059f44d65f45fb70feccf924a01478fda"
+      "bytes": 13561,
+      "sha256": "15c8ccae04b31b1d3256a0f053280c6d7167d27ad24fa20de745e8e96176d14e"
     },
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs": {
       "bytes": 452,
@@ -78,12 +78,12 @@
       "sha256": "b452e2d6fe7d794953ed5c8a1e8d0020dd9241eca05a36c55518e7063533f755"
     },
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs": {
-      "bytes": 39047,
-      "sha256": "f7339e4800289626d7821848257ad44f1c21c1a51599f720f4fce70fdd7fa695"
+      "bytes": 44865,
+      "sha256": "1c10cbbebc49721a3c1a65ed30577021b3b5bd11b26e43f69155a6400530910e"
     },
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/physical_lifetime.rs": {
-      "bytes": 14287,
-      "sha256": "b7efcbb54f5c22670a550f51f751a4d3539b3f7a3b9d798ee6070fb692a1f756"
+      "bytes": 19813,
+      "sha256": "c244cabd4ff7a84221db4285ca103c04cf5eb65e0eb68c2b808776dc1cc28b8e"
     },
     "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs": {
       "bytes": 27876,
@@ -95,12 +95,9 @@
     }
   },
   "executable": {
-    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate3.exe",
-    "bytes": 2902528,
-    "sha256": "f1439fd9f222d327ac4c820ca2e0afa5c49bc7e83d8116b47c6b391a593fe4dc"
+    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate8.exe",
+    "bytes": 2957312,
+    "sha256": "323608968d7cceb5c49bead47043a68eebf6ff2ca8e1668f39e2bf2436e6f7ec"
   },
-  "source_unchanged_by_build": true,
-  "build_receipt": "C:\\file-native-online-cp1-20261020\\evidence\\build3-units.json",
-  "scope": "Reviewable source checkpoint; complete CP1 and experiment qualification pending",
-  "source_commit": "Containing commit and exact source map control"
+  "build_receipt": "C:\\file-native-online-cp1-20261020\\evidence\\build8-units.json"
 }

@@ -127,8 +127,14 @@ fn all_mapped(m:&mut Metrics)->Result<Vec<Key>> {
 }
 #[derive(Clone,Serialize,Deserialize)]
 #[serde(deny_unknown_fields)]
-struct Journal { version:u32,id:String,status:String,expected_config:String,catalog:Option<String>,old:Vec<Descriptor>,reserved_bytes:u64,used_bytes:u64,deleted_bytes:u64,deferred_bytes:u64,#[serde(default,skip_serializing_if="Option::is_none")] target:Option<crate::store::StoreConfig> }
-fn save(root:&Path,j:&Journal,m:&mut Metrics)->Result<()> {io::atomic(&root.join("PACKING.json"),&io::json(j)?,m)}
+struct BirthOwner {id:String,catalog:Option<String>,plan:Option<String>}
+#[derive(Clone,Serialize,Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Journal { version:u32,id:String,status:String,expected_config:String,catalog:Option<String>,old:Vec<Descriptor>,reserved_bytes:u64,used_bytes:u64,deleted_bytes:u64,deferred_bytes:u64,#[serde(default,skip_serializing_if="Option::is_none")] target:Option<crate::store::StoreConfig>,#[serde(default,skip_serializing_if="Vec::is_empty")] abandoned:Vec<BirthOwner>,#[serde(default)] ownership_transferred:bool }
+fn save(root:&Path,j:&Journal,m:&mut Metrics)->Result<()> {
+    let bytes=io::json(j)?;if bytes.len()>65536||j.abandoned.len()>64{return Err("quota:maintenance-owner-bound".into());}
+    io::atomic(&root.join("PACKING.json"),&bytes,m)
+}
 fn authorized(root:&Path,m:&mut Metrics)->Result<()> {
     let allowed:String=strict(&pack::native(&root.join("DISPOSABLE.json"),65536,m)?)?;
     if allowed!=root.canonicalize()?.to_string_lossy(){return Err("refused:disposable-identity".into());}Ok(())
@@ -243,37 +249,78 @@ mod tests {
 
 fn selected_packs(m:&Metrics)->Vec<Descriptor>{m.physical.as_ref().and_then(|p|p.catalog.as_ref()).map_or(vec![],|c|c.packs.clone())}
 fn blank_work(c:&crate::store::StoreConfig,id:&str,ordinal:u64,packs:Vec<Descriptor>,hash:&str)->physical::Work{
-    physical::Work{version:1,store_id:c.store_id.clone(),generation:physical::Generation{id:id.into(),ordinal,catalog:hash.into(),plan:None,packs},older:vec![],jobs:vec![],retired:vec![],garbage:vec![],removed_bytes:0,removed_files:0,reconciled_absent:0,sealed_pin_roots:vec![]}
+    physical::Work{version:2,store_id:c.store_id.clone(),transition_parent:None,birth_claims:vec![],generation:physical::Generation{id:id.into(),ordinal,catalog:hash.into(),plan:None,packs},older:vec![],jobs:vec![],retired:vec![],garbage:vec![],removed_bytes:0,removed_files:0,reconciled_absent:0}
 }
 fn append_work(root:&Path,c:&crate::store::StoreConfig,id:&str,packs:Vec<Descriptor>,hash:&str,old:&[Descriptor],m:&mut Metrics)->Result<physical::Work>{
-    let ordinal=c.physical.as_ref().map_or(1,|b|b.ordinal+1);
+    let ordinal=next_ordinal(c)?;
     let mut w=if c.version==3{physical::load(root,c,m)?}else{blank_work(c,id,ordinal,vec![],hash)};
     if c.version==3{w.older.push(physical::generation(c,old.to_vec())?);}
     else if let Some(previous)=&c.catalog{w.garbage.push(format!("pack-catalogs/{previous}.json"));}
     for d in old{physical::add_retired(&mut w,d.clone());}
     w.generation=physical::Generation{id:id.into(),ordinal,catalog:hash.into(),plan:None,packs:packs.clone()};
+    // A committed physical successor advances the ordinal before old claims
+    // disappear. Unselected candidates cannot clear the parent authority.
+    w.birth_claims.clear();w.transition_parent=None;
+    w.garbage.push(format!("physical-stages/{id}/STORE.json"));
     for d in packs{w.jobs.push(physical::LooseJob{descriptor:d,frontier:ordinal,position:0});}
     physical::validate_work(&w)?;Ok(w)
 }
-fn inherit_aborted(root:&Path,old:&Journal,w:&mut physical::Work)->Result<()>{
-    if old.version!=2||old.status!="aborted-owned"{return Ok(());}
-    // Every candidate container is born under this already durable owner id.
-    // No recursive store scan, content-address reuse, or guessed release credit.
-    let directory=root.join(format!("packs/{}",old.id));
-    if directory.exists(){
-        for (n,e) in std::fs::read_dir(&directory)?.enumerate(){
-            if n>=128{return Err("quota:orphan-container-bound".into());}
-            let e=e?;if !e.file_type()?.is_file(){return Err("integrity:orphan-container-type".into());}
-            let name=e.file_name().to_str().ok_or("integrity:orphan-container-name")?.to_owned();
-            w.garbage.push(format!("packs/{}/{name}",old.id));
+fn next_ordinal(c:&crate::store::StoreConfig)->Result<u64>{
+    c.physical.as_ref().map_or(Some(1),|b|b.ordinal.checked_add(1)).ok_or_else(||"quota:physical-generation-overflow".into())
+}
+fn abandoned_owners(old:&Journal)->Result<Vec<BirthOwner>>{
+    if old.version!=2||old.status!="aborted-owned"{return Ok(vec![]);}
+    let mut owners=old.abandoned.clone();
+    if !old.ownership_transferred{owners.push(BirthOwner{id:old.id.clone(),catalog:old.catalog.clone(),plan:old.target.as_ref().and_then(|c|c.physical.as_ref()).map(|b|b.plan.clone())});}
+    owners.sort_by(|a,b|a.id.cmp(&b.id));
+    for pair in owners.windows(2){if pair[0].id==pair[1].id&&(pair[0].catalog!=pair[1].catalog||pair[0].plan!=pair[1].plan){return Err("integrity:aborted-owner-conflict".into());}}
+    owners.dedup_by(|a,b|a.id==b.id);
+    if owners.len()>64||owners.iter().any(|o|!crate::model::safe_id(&o.id)||o.catalog.as_ref().is_some_and(|h|!crate::objects::valid_hash(h))||o.plan.as_ref().is_some_and(|h|!crate::objects::valid_hash(h))){return Err("quota:maintenance-owner-bound".into());}
+    Ok(owners)
+}
+fn inherit_aborted(root:&Path,owners:&[BirthOwner],w:&mut physical::Work,m:&mut Metrics)->Result<()>{
+    for owner in owners{
+        // Enumerate only the <=128 files under an explicit durable birth owner.
+        // This is neither a historical directory discovery nor a journal chain.
+        let directory=root.join(format!("packs/{}",owner.id));
+        if directory.exists(){
+            for (n,e) in std::fs::read_dir(&directory)?.enumerate(){
+                if n>=128{return Err("quota:orphan-container-bound".into());}
+                let e=e?;if !e.file_type()?.is_file(){return Err("integrity:orphan-container-type".into());}
+                let name=e.file_name().to_str().ok_or("integrity:orphan-container-name")?.to_owned();
+                w.garbage.push(format!("packs/{}/{name}",owner.id));
+            }
         }
+        if let Some(hash)=&owner.catalog{w.garbage.push(format!("pack-catalogs/{hash}.json"));}
+        if let Some(plan)=&owner.plan{
+            let path=root.join(format!("physical-plans/{plan}.json"));
+            if path.exists(){
+                let bytes=pack::native(&path,4*1024*1024,m)?;
+                if io::digest(&bytes)!=*plan{return Err("integrity:aborted-plan-digest".into());}
+                let candidate:physical::Work=strict(&bytes)?;physical::validate_work(&candidate)?;
+                if candidate.store_id!=w.store_id||candidate.generation.id!=owner.id||Some(&candidate.generation.catalog)!=owner.catalog.as_ref(){return Err("integrity:aborted-plan-owner".into());}
+                // Transitive ownership is flattened before this plan retires.
+                w.garbage.extend(candidate.garbage);
+            }
+            w.garbage.push(format!("physical-plans/{plan}.json"));
+        }
+        w.garbage.push(format!("physical-progress/{}.work-stage",owner.id));w.garbage.push(format!("physical-progress/{}.selector-stage",owner.id));w.garbage.push(format!("physical-pins/{}.lock",owner.id));w.garbage.push(format!("physical-progress/{}.json",owner.id));w.garbage.push(format!("physical-stages/{}/STORE.json",owner.id));
     }
-    if let Some(hash)=&old.catalog{w.garbage.push(format!("pack-catalogs/{hash}.json"));}
-    if let Some(target)=&old.target{if let Some(b)=&target.physical{
-        w.garbage.push(format!("physical-pins/{}.lock",b.id));w.garbage.push(format!("physical-plans/{}.json",b.plan));w.garbage.push(format!("physical-progress/{}.json",b.id));
-    }}
-    w.garbage.push(format!("physical-stages/{}/STORE.json",old.id));
     w.garbage.sort();w.garbage.dedup();physical::validate_work(w)
+}
+fn adopt_aborted(root:&Path,c:&crate::store::StoreConfig,j:&mut Journal,m:&mut Metrics)->Result<bool>{
+    let owners=abandoned_owners(j)?;let Some(owner)=owners.first() else{return Ok(true)};
+    let mut work=physical::load(root,c,m)?;
+    if owner.id==work.generation.id||work.older.iter().any(|g|g.id==owner.id){return Err("integrity:aborted-selected-owner".into());}
+    if !work.birth_claims.contains(&owner.id){work.birth_claims.push(owner.id.clone());}
+    if let Err(e)=inherit_aborted(root,std::slice::from_ref(owner),&mut work,m){
+        if e.to_string().starts_with("quota:physical-"){return Ok(false);}return Err(e);
+    }
+    physical::save(root,c.physical.as_ref().ok_or("integrity:work-binding")?,&mut work,m)?;
+    // Durable selected ownership precedes dropping any journal reference. Death
+    // between these writes leaves duplicate ownership, never an orphan.
+    if owner.id==j.id{j.ownership_transferred=true;}else{j.abandoned.retain(|o|o.id!=owner.id);}
+    save(root,j,m)?;Ok(true)
 }
 // The STORE stage, complete candidate validation and all work parsing precede
 // exclusion. Only a bounded STORE CAS and native replacement are inside Q/W.
@@ -328,7 +375,7 @@ fn activate(root:&Path,store:&Store,j:&Journal,m:&mut Metrics)->Result<()> {
         let result=io::replace(&stage,&root.join("STORE.json"),m).and_then(|_|io::sync_dir(root,m));
         drop(writer);drop(legacy);drop(q);record_activation_hold(m,hold)?;m.elapsed("physical-activation-hold",hold);m.elapsed("physical-activation-wait-inclusive",wait);
         // No injected barrier or journal I/O runs under Q/W.
-        result?;std::fs::remove_dir(stage.parent().ok_or("integrity:stage-parent")?)?;io::checkpoint("pack-catalog")?;io::checkpoint("physical-after-selection")?;return Ok(());
+        result?;io::checkpoint("physical-after-store-replace")?;std::fs::remove_dir(stage.parent().ok_or("integrity:stage-parent")?)?;io::checkpoint("pack-catalog")?;io::checkpoint("physical-after-selection")?;return Ok(());
     }
 }
 fn try_remove(root:&Path,name:&str,w:&mut physical::Work,m:&mut Metrics)->Result<bool>{
@@ -349,7 +396,7 @@ fn present(path:&Path)->Result<bool>{
 }
 fn cleanup(root:&Path,c:&crate::store::StoreConfig,m:&mut Metrics)->Result<Value>{
     let started=Instant::now();let binding=c.physical.as_ref().ok_or("integrity:cleanup-binding")?;
-    let mut w=physical::load(root,c,m)?;let before_bytes=w.removed_bytes;let before_files=w.removed_files;
+    let mut w=physical::load(root,c,m)?;if w.generation.packs!=selected_packs(m){return Err("integrity:work-catalog-correspondence".into());}let before_bytes=w.removed_bytes;let before_files=w.removed_files;
     let mut candidates=0usize;let mut blocked=0u64;let mut loose_controls=0u64;let mut loose_control_bytes=0u64;
     let available=|n:usize|n<1000&&started.elapsed()<Duration::from_millis(50);
     // Nonblocking checks cover every retained old generation, including those
@@ -358,7 +405,7 @@ fn cleanup(root:&Path,c:&crate::store::StoreConfig,m:&mut Metrics)->Result<Value
     while n<w.older.len()&&available(candidates){
         candidates+=1;
         if physical::drained(root,&w.older[n],&c.store_id,m)?{
-            physical::reap_generation(&mut w,n)?;physical::save(root,binding,&w,m)?;
+            physical::reap_generation(&mut w,n)?;physical::save(root,binding,&mut w,m)?;
         }else{n+=1;blocked+=1;}
     }
     let mut n=0;
@@ -372,7 +419,7 @@ fn cleanup(root:&Path,c:&crate::store::StoreConfig,m:&mut Metrics)->Result<Value
         let mut first=true;
         while w.jobs[n].position<job.descriptor.records&&(first||available(candidates)){
             first=false;
-            if physical::cancelled(){physical::save(root,binding,&w,m)?;return Err("cancelled:physical-cleanup".into());}
+            if physical::cancelled(){physical::save(root,binding,&mut w,m)?;return Err("cancelled:physical-cleanup".into());}
             candidates+=1;let e=index.entry(w.jobs[n].position as usize)?;let path=root.join(&e.key.0);
             if c.mode=="B"&&e.key.role()==Some("publication"){
                 let raw=index.read(root,&e,pack::MAX_RAW,m)?;let loose=pack::native(&path,pack::MAX_RAW,m)?;
@@ -396,6 +443,10 @@ fn cleanup(root:&Path,c:&crate::store::StoreConfig,m:&mut Metrics)->Result<Value
         drop(index);if let Some(p)=m.physical.as_mut(){p.borrowed_index_bytes=0;}
         if w.jobs[n].position==job.descriptor.records{w.jobs.remove(n);}else{n+=1;}
     }
+    // Publish completed cursor/coverage before any replacement job container
+    // can disappear. Restart of an older immutable root can still replay safely.
+    physical::save(root,binding,&mut w,m)?;
+    let live_binding=config(root,m)?.physical.ok_or("integrity:cleanup-binding")?;
     let mut n=0;
     while n<w.retired.len()&&available(candidates){
         let d=w.retired[n].descriptor.clone();
@@ -417,19 +468,20 @@ fn cleanup(root:&Path,c:&crate::store::StoreConfig,m:&mut Metrics)->Result<Value
     let mut n=0;
     while n<w.garbage.len()&&available(candidates){
         candidates+=1;let name=w.garbage[n].clone();
-        if physical::garbage_referenced(&w,binding,&name)?{blocked+=1;n+=1;continue;}
+        if physical::garbage_referenced(&w,&live_binding,&name)?{blocked+=1;n+=1;continue;}
         if try_remove(root,&name,&mut w,m)?{
             if name.starts_with("packs/")||name.starts_with("physical-stages/"){
                 let dir=root.join(&name).parent().ok_or("integrity:garbage-parent")?.to_path_buf();
-                match std::fs::remove_dir(dir){Ok(())=>{},Err(e) if matches!(e.kind(),std::io::ErrorKind::DirectoryNotEmpty|std::io::ErrorKind::NotFound)=>{},Err(e)=>return Err(e.into())}
+                match std::fs::remove_dir(dir){Ok(())=>{},Err(e) if e.kind()==std::io::ErrorKind::NotFound=>{},Err(e) if name.starts_with("physical-stages/")&&e.kind()==std::io::ErrorKind::DirectoryNotEmpty=>{blocked+=1;n+=1;continue;},Err(e) if e.kind()==std::io::ErrorKind::DirectoryNotEmpty=>{},Err(e)=>return Err(e.into())}
             }
             w.garbage.remove(n);
         }else{blocked+=1;n+=1;}
     }
-    physical::save(root,binding,&w,m)?;m.elapsed("pack-deletion-inclusive",started);
-    let protected_metadata=w.garbage.iter().filter(|p|w.sealed_pin_roots.contains(p)).count();
+    physical::save(root,binding,&mut w,m)?;m.elapsed("pack-deletion-inclusive",started);
+    let final_binding=config(root,m)?.physical.ok_or("integrity:cleanup-binding")?;
+    let protected_metadata=0usize;
     let pending=!w.jobs.is_empty()||!w.retired.is_empty()||w.garbage.len()>protected_metadata||!w.older.is_empty();
-    Ok(json!({"status":if pending{"cleaning"}else{"complete"},"catalog":c.catalog,"generation":binding,"candidates":candidates,"batch_ns":started.elapsed().as_nanos(),"cooperative_limit_ms":50,"candidate_limit":1000,"blocked_checks":blocked,"pending_loose_jobs":w.jobs.len(),"pending_old_containers":w.retired.len(),"pending_metadata":w.garbage.len(),"protected_metadata_until_successor":protected_metadata,"retained_generations":w.older.len()+1,"successfully_deleted_bytes_recorded":w.removed_bytes,"deleted_this_batch_bytes":w.removed_bytes-before_bytes,"deleted_this_batch_files":w.removed_files-before_files,"reconciled_absent_without_credit":w.reconciled_absent,"retained_loose_control_records":loose_controls,"retained_loose_control_bytes":loose_control_bytes,"native_allocation_credit":0,"historical_allocation_owners_unchanged":true}))
+    Ok(json!({"status":if pending{"cleaning"}else{"complete"},"catalog":c.catalog,"generation":final_binding,"candidates":candidates,"batch_ns":started.elapsed().as_nanos(),"cooperative_limit_ms":50,"completion_basis":"selected immutable Work plus native absence of immutable instance names; absent metadata tombstones do not create work","candidate_limit":1000,"blocked_checks":blocked,"pending_loose_jobs":w.jobs.len(),"pending_old_containers":w.retired.len(),"pending_metadata":w.garbage.len(),"protected_metadata_until_successor":protected_metadata,"retained_generations":w.older.len()+1,"successfully_deleted_bytes_recorded":w.removed_bytes,"deleted_this_batch_bytes":w.removed_bytes-before_bytes,"deleted_this_batch_files":w.removed_files-before_files,"reconciled_absent_without_credit":w.reconciled_absent,"retained_loose_control_records":loose_controls,"retained_loose_control_bytes":loose_control_bytes,"native_allocation_credit":0,"historical_allocation_owners_unchanged":true}))
 }
 pub(crate) fn run(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
     m.store_root=Some(root.into());let maintenance=physical::lock_file(&root.join("pack-maintenance.lock"),true)?;
@@ -446,7 +498,12 @@ pub(crate) fn run(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
     }
     if operation=="cleanup"{
         if store.config.version!=3{return Err("refused:legacy-cleanup-requires-generation-build".into());}
-        return cleanup(root,&store.config,m);
+        let mut aborted=previous.filter(|j|j.status=="aborted-owned");
+        let adopted=if let Some(j)=aborted.as_mut(){adopt_aborted(root,&store.config,j,m)?}else{true};
+        let fresh=config(root,m)?;let mut result=cleanup(root,&fresh,m)?;
+        let remaining=aborted.as_ref().map(abandoned_owners).transpose()?.map_or(0,|v|v.len());
+        result["pending_aborted_owners"]=json!(remaining);result["aborted_owner_adoption_backpressure"]=json!(!adopted);
+        if remaining>0{result["status"]=json!("cleaning");}return Ok(result);
     }
     let protection=store.preparation_gate(false)?;
     let mut j;
@@ -469,7 +526,13 @@ pub(crate) fn run(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
         let old=selected_packs(m);let reserve=v["reserve_bytes"].as_u64().unwrap_or(256*1024*1024);
         if reserve>4*1024*1024*1024||reserve<1024*1024{return Err("refused:maintenance-reservation-bound".into());}
         let codec=match v["codec"].as_str().unwrap_or("raw"){"raw"=>0,"zstd"=>1,_=>return Err("refused:codec".into())};
-        j=Journal{version:2,id:io::unique("physical"),status:"building".into(),expected_config,catalog:None,old:old.clone(),reserved_bytes:reserve,used_bytes:0,deleted_bytes:0,deferred_bytes:0,target:None};
+        let ordinal=next_ordinal(&store.config)?;
+        let birth=format!("physical-{ordinal}-{}",io::unique("birth"));
+        if store.config.version==3&&physical::load(root,&store.config,m)?.birth_claims.contains(&birth){return Err("integrity:physical-birth-id-reuse".into());}
+        if previous.as_ref().is_some_and(|old|old.id==birth||old.abandoned.iter().any(|owner|owner.id==birth))||root.join(format!("packs/{birth}")).exists()||root.join(format!("physical-pins/{birth}.lock")).exists()||root.join(format!("physical-stages/{birth}")).exists()||root.join(format!("physical-progress/{birth}.work-stage")).exists()||root.join(format!("physical-progress/{birth}.selector-stage")).exists(){return Err("integrity:physical-birth-id-reuse".into());}
+        let abandoned=previous.as_ref().map(abandoned_owners).transpose()?.unwrap_or_default();
+        if abandoned.len()>=64{return Err("quota:maintenance-owner-bound-cleanup-first".into());}
+        j=Journal{version:2,id:birth,status:"building".into(),expected_config,catalog:None,old:old.clone(),reserved_bytes:reserve,used_bytes:0,deleted_bytes:0,deferred_bytes:0,target:None,abandoned,ownership_transferred:false};
         save(root,&j,m)?;io::checkpoint("pack-reservation")?;m.quota_limit=Some(reserve);m.quota_spent=0;
         let stage=root.join(format!("physical-stages/{}",j.id));let mut packs=vec![];let mut excluded=0u64;let mut excluded_bytes=0u64;
         let mut ordered:Vec<_>=keys.into_iter().collect();ordered.sort_by(|a,b|(a.role(),&a.0).cmp(&(b.role(),&b.0)));
@@ -489,7 +552,7 @@ pub(crate) fn run(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
         let hash=io::digest(&bytes);j.catalog=Some(hash.clone());save(root,&j,m)?;
         io::write_new(&root.join(format!("pack-catalogs/{hash}.json")),&bytes,m)?;
         let mut work=append_work(root,&store.config,&j.id,packs,&hash,&old,m)?;
-        if let Some(aborted)=&previous{inherit_aborted(root,aborted,&mut work)?;}
+        inherit_aborted(root,&j.abandoned,&mut work,m)?;
         // Initial legacy cleanup may have retained additional old containers.
         if store.config.version<3{if let Some(old_j)=&previous{for d in &old_j.old{physical::add_retired(&mut work,d.clone());}}}
         let mut target=store.config.clone();target.version=3;target.catalog=Some(hash.clone());
