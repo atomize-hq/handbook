@@ -11,4 +11,4 @@ Error: Repository "C:/Users/spmcc/.codex/worktrees/file-native-online-cp1-202610
     at async Command.<anonymous> (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/lazy-action.js:33:9)
 
 Node.js v22.15.0
-Indexed result UNKNOWN exact checkout unregistered; no indexing/bootstrap. Manual scope HIGH: only io metrics, packing protocol and physical_lifetime plus review artifacts since62ce.
+Indexed UNKNOWN exact unregistered checkout, no bootstrap. ManualHIGH bounded delta: metrics cleanup budget, physical work/candidate admission and owned directories; unchanged semantic COW and legacy whole-index format.

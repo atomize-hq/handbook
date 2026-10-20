@@ -1,12 +1,12 @@
 {
-  "status": "PROVISIONAL_P2_REMEDIATION_REVIEW__NOT_QUALIFIED",
+  "status": "PROVISIONAL_FINAL_CP1_REMEDIATION_REVIEW__RUNTIME_PROOF_PENDING",
   "utc": "2026-10-20T20:22:28.718821+00:00",
   "base_commit": "47d667f26a75fa1454dee2d1c50d238aec4cf6bd",
   "core_baseline": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
   "candidate_binary": {
-    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate8.exe",
-    "bytes": 2957312,
-    "sha256": "323608968d7cceb5c49bead47043a68eebf6ff2ca8e1668f39e2bf2436e6f7ec"
+    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate9.exe",
+    "bytes": 2979328,
+    "sha256": "b7b60980beaddc7af01302c05ea3eea8168e46ab3ac3db3d6ead05065ff2a4e7"
   },
   "guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
   "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
@@ -36,6 +36,6 @@
   "clock_reset": false,
   "functional_cutoff_utc": "2026-10-21T11:10:14Z",
   "no_full_experiment_pass": true,
-  "source_gate_fix": "Work2 immutable selected metadata progress, deterministic stages, flat owners, checked ordinal and birth claims",
+  "source_gate_fix": "single entry cleanup budget, single-try Q/W work CAS, immutable physical_parent and frozen target admission, explicit owned pack-directory tasks",
   "pending_review_findings": "F1 aborted ownership, F2 mutable work deletion, F3 metadata-stage/directory reaping, F4 idle/no-reuse require updated regression/review; fixes implemented, not yet claimed passed"
 }
