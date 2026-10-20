@@ -1,0 +1,87 @@
+{
+  "reviewed_utc": "2026-10-20T03:28:25.880277+00:00",
+  "review_scope": "exact post-GC preservation, independent verification/reopening and fresh authorization; NOT long packing admission",
+  "source_selected": {
+    "publication": "publication-49204-1792429021747802100-16",
+    "digest": "8b816596942b684e53a3f7366876976f73450280581ff4714472be26d9595169"
+  },
+  "manifest_sha256": "d73e91b3f0a86cedb7aefd117de295e3747620a7d5d9247fe7bdfc95d662229a",
+  "parent_independently_rehashed_inventory_and_transport": true,
+  "inventory_records_independently_counted": 510580,
+  "inventory_raw_bytes_independently_summed": 887923603,
+  "inventory_ledger_bytes": 246560316,
+  "inventory_ledger_sha256": "6ab8bef045580f7642b0f404cf58ab7cb8211badfeb68d258bc62e984e02af18",
+  "transport_source_excludes": [
+    "DISPOSABLE.json",
+    "preparation.lock",
+    "writer.lock"
+  ],
+  "complete_independent_verifier_publications": 101006,
+  "complete_independent_verifier_ledger_rows": 100000,
+  "complete_independent_verifier_seconds": 500.828,
+  "verifier_supervisor_seconds_before_final_census": 518.1928656101227,
+  "verifier_group_empty": true,
+  "verifier_job_query_errors": 0,
+  "verifier_sampled_aggregate_rss_bytes": 532934656,
+  "independent_reopen_engine_events": 110,
+  "retired_refusals": 101,
+  "accepted_outcome_probes": 6,
+  "frozen_slice1_binary_sha256": "369af68c46543d48f64f9d6ef79775a941873d8cc1404e1370870e7f808fd9a7",
+  "parent_independently_rehashed_frozen_binary": true,
+  "original_reopen_helper_exit": 1,
+  "original_failure": "plain Python path versus Windows extended canonical namespace after all engine operations completed",
+  "read_only_path_check_passed": true,
+  "no_successful_engine_cases_repeated": true,
+  "no_new_publication": true,
+  "fresh_disposable_authorization": true,
+  "current_qualified_history_source": "all accepted membership/outcomes, retained graph/projection/sources/controls",
+  "owner_allowance": "historical cumulative allowances are not actual physical storage and never replace census",
+  "retained_small_receipts": {
+    "receipts/preservation-capture-result.json": {
+      "bytes": 741,
+      "sha256": "67815d8117b85e2f807a2a82eb4819faea5243a61ba29879ee964d9b2607c83f"
+    },
+    "receipts/preservation-capture.json": {
+      "bytes": 15341,
+      "sha256": "73012d5d36be1c53d1104d85bd69bb447e5b9f846ed9a351a9b98101800590cc"
+    },
+    "receipts/preservation-restore-result.json": {
+      "bytes": 290,
+      "sha256": "728281f2df99f08d6a7ecc0255b8be283d18e888df880e8ce61597cc8505777f"
+    },
+    "receipts/preservation-restore.json": {
+      "bytes": 4732,
+      "sha256": "60c3c4f42e5a2df783a18eca605c17ca02f87a02ec50edabeb85a72137c3e470"
+    },
+    "receipts/preservation-verify-result.json": {
+      "bytes": 780,
+      "sha256": "04299a39a5fb845c489045bd024a876dd36ffe8c97d4141792da6e629eb3a197"
+    },
+    "receipts/preservation-verify.json": {
+      "bytes": 7029,
+      "sha256": "2680efbd8c823462aeea21efbe19ee70036670b7925ffca2d96d50c83a319550"
+    },
+    "receipts/preservation-reopen.json": {
+      "bytes": 2291,
+      "sha256": "cb64ae4d3efdf13e57fbe3b3d2706a024bb89878ea6effa2fa3ffd2419494ddf"
+    },
+    "receipts/preservation-reopen-path-check.json": {
+      "bytes": 1905,
+      "sha256": "f97fc00d1360d81564057748615d6bf0bba93c11d36d055e9575fa4d242e2c12"
+    },
+    "preservation-reopen/summary.json": {
+      "bytes": 755,
+      "sha256": "e9dfb6e5df75037ed176bf2fade8f99423c25e590a95055055d440ff82c7a526"
+    },
+    "post-gc-operational-backup/manifest.json": {
+      "bytes": 743,
+      "sha256": "d73e91b3f0a86cedb7aefd117de295e3747620a7d5d9247fe7bdfc95d662229a"
+    }
+  },
+  "remaining_gates": [
+    "full small packing fault capsule",
+    "large-stage actual and prospective resource admission",
+    "final P source/native qualification",
+    "full P measurement and packed restore matrices"
+  ]
+}

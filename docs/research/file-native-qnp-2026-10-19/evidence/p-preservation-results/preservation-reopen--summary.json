@@ -1,0 +1,18 @@
+{
+  "status": "verified-reopened-and-freshly-authorized",
+  "selected": {
+    "publication": "publication-49204-1792429021747802100-16",
+    "digest": "8b816596942b684e53a3f7366876976f73450280581ff4714472be26d9595169"
+  },
+  "publications": 101006,
+  "ledger_rows": 100000,
+  "retired_content_refusals": 101,
+  "engine_operations": 110,
+  "frozen_binary_sha256": "369af68c46543d48f64f9d6ef79775a941873d8cc1404e1370870e7f808fd9a7",
+  "no_new_publication": true,
+  "disposable_authority_imported": false,
+  "original_helper_exit": 1,
+  "original_failure": "final Python plain-path comparison versus Windows extended canonical namespace; all engine cases passed",
+  "read_only_supplement": true,
+  "successful_engine_cases_repeated": false
+}

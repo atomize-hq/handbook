@@ -1,0 +1,78 @@
+{
+  "argv": [
+    "python",
+    "docs/research/file-native-packing-2026-10-20/preservation_reopen_check.py"
+  ],
+  "cwd": null,
+  "started_utc": "2026-10-20T03:05:31.284245+00:00",
+  "seconds": 41.41997933387756,
+  "cap_seconds": 120,
+  "effective_seconds": 120,
+  "exit": 0,
+  "censor": null,
+  "independent_deadline": null,
+  "group_observations": {
+    "root_exit_seen_epoch": 1792465531.389375,
+    "group_empty_seen_epoch": 1792465531.389375
+  },
+  "job_query_errors": 0,
+  "per_process_rss_limit": 2147483648,
+  "aggregate_rss_limit": 4294967296,
+  "sampled_peak_rss_by_pid": {
+    "66744": 15749120,
+    "33588": 18403328
+  },
+  "missing_samples": 0,
+  "aggregate_sampled_peak_rss": 33869824,
+  "ownership_samples": [
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 1415627377,
+          "files": 513620
+        },
+        "worktree": {
+          "bytes": 68390854,
+          "files": 156
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 227056485,
+          "files": 1828
+        }
+      },
+      "total_new_bytes": 1658571628,
+      "total_new_files": 517551,
+      "free_bytes": 198881038336,
+      "time_utc": "2026-10-20T03:06:12.663663+00:00"
+    }
+  ],
+  "final_ownership": {
+    "scopes": {
+      "runtime": {
+        "bytes": 1415638711,
+        "files": 513622
+      },
+      "worktree": {
+        "bytes": 68394412,
+        "files": 157
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 227056485,
+        "files": 1828
+      }
+    },
+    "total_new_bytes": 1658586520,
+    "total_new_files": 517554,
+    "free_bytes": 198882910208,
+    "time_utc": "2026-10-20T03:06:56.914456+00:00"
+  },
+  "group_remaining_before_closure": []
+}

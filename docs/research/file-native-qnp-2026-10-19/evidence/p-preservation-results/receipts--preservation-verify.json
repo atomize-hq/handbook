@@ -1,0 +1,295 @@
+{
+  "argv": [
+    "python",
+    "docs/research/file-native-packing-2026-10-20/preservation_stage.py",
+    "verify"
+  ],
+  "cwd": null,
+  "started_utc": "2026-10-20T02:52:39.923133+00:00",
+  "seconds": 518.1928656101227,
+  "cap_seconds": 900,
+  "effective_seconds": 900,
+  "exit": 0,
+  "censor": null,
+  "independent_deadline": null,
+  "group_observations": {
+    "root_exit_seen_epoch": 1792465261.2277672,
+    "group_empty_seen_epoch": 1792465261.2277672
+  },
+  "job_query_errors": 0,
+  "per_process_rss_limit": 2147483648,
+  "aggregate_rss_limit": 4294967296,
+  "sampled_peak_rss_by_pid": {
+    "22600": 501133312,
+    "70956": 50020352
+  },
+  "missing_samples": 0,
+  "aggregate_sampled_peak_rss": 532934656,
+  "ownership_samples": [
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 1414008580,
+          "files": 513590
+        },
+        "worktree": {
+          "bytes": 68377611,
+          "files": 153
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 227056485,
+          "files": 1828
+        }
+      },
+      "total_new_bytes": 1656939588,
+      "total_new_files": 517518,
+      "free_bytes": 198873296896,
+      "time_utc": "2026-10-20T02:53:25.361599+00:00"
+    },
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 1414011206,
+          "files": 513593
+        },
+        "worktree": {
+          "bytes": 68379300,
+          "files": 153
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 227056485,
+          "files": 1828
+        }
+      },
+      "total_new_bytes": 1656943903,
+      "total_new_files": 517521,
+      "free_bytes": 198889725952,
+      "time_utc": "2026-10-20T02:54:19.120903+00:00"
+    },
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 1414161500,
+          "files": 513593
+        },
+        "worktree": {
+          "bytes": 68379300,
+          "files": 153
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 227056485,
+          "files": 1828
+        }
+      },
+      "total_new_bytes": 1657094197,
+      "total_new_files": 517521,
+      "free_bytes": 198887669760,
+      "time_utc": "2026-10-20T02:55:14.275023+00:00"
+    },
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 1414161580,
+          "files": 513593
+        },
+        "worktree": {
+          "bytes": 68379300,
+          "files": 153
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 227056485,
+          "files": 1828
+        }
+      },
+      "total_new_bytes": 1657094277,
+      "total_new_files": 517521,
+      "free_bytes": 198888976384,
+      "time_utc": "2026-10-20T02:56:07.741990+00:00"
+    },
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 1414161661,
+          "files": 513593
+        },
+        "worktree": {
+          "bytes": 68380649,
+          "files": 153
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 227056485,
+          "files": 1828
+        }
+      },
+      "total_new_bytes": 1657095707,
+      "total_new_files": 517521,
+      "free_bytes": 198888763392,
+      "time_utc": "2026-10-20T02:57:01.927356+00:00"
+    },
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 1414165514,
+          "files": 513594
+        },
+        "worktree": {
+          "bytes": 68380649,
+          "files": 153
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 227056485,
+          "files": 1828
+        }
+      },
+      "total_new_bytes": 1657099560,
+      "total_new_files": 517522,
+      "free_bytes": 198885199872,
+      "time_utc": "2026-10-20T02:57:52.710559+00:00"
+    },
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 1414168601,
+          "files": 513597
+        },
+        "worktree": {
+          "bytes": 68384326,
+          "files": 154
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 227056485,
+          "files": 1828
+        }
+      },
+      "total_new_bytes": 1657106324,
+      "total_new_files": 517526,
+      "free_bytes": 198885072896,
+      "time_utc": "2026-10-20T02:58:42.486472+00:00"
+    },
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 1415360620,
+          "files": 513605
+        },
+        "worktree": {
+          "bytes": 68384326,
+          "files": 154
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 227056485,
+          "files": 1828
+        }
+      },
+      "total_new_bytes": 1658298343,
+      "total_new_files": 517534,
+      "free_bytes": 198876438528,
+      "time_utc": "2026-10-20T02:59:37.226150+00:00"
+    },
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 1415362842,
+          "files": 513606
+        },
+        "worktree": {
+          "bytes": 68384326,
+          "files": 154
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 227056485,
+          "files": 1828
+        }
+      },
+      "total_new_bytes": 1658300565,
+      "total_new_files": 517535,
+      "free_bytes": 198875410432,
+      "time_utc": "2026-10-20T03:00:30.410269+00:00"
+    },
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 1415364404,
+          "files": 513607
+        },
+        "worktree": {
+          "bytes": 68384326,
+          "files": 154
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 227056485,
+          "files": 1828
+        }
+      },
+      "total_new_bytes": 1658302127,
+      "total_new_files": 517536,
+      "free_bytes": 198874349568,
+      "time_utc": "2026-10-20T03:01:18.075935+00:00"
+    }
+  ],
+  "final_ownership": {
+    "scopes": {
+      "runtime": {
+        "bytes": 1415366609,
+        "files": 513608
+      },
+      "worktree": {
+        "bytes": 68384326,
+        "files": 154
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 227056485,
+        "files": 1828
+      }
+    },
+    "total_new_bytes": 1658304332,
+    "total_new_files": 517537,
+    "free_bytes": 198871912448,
+    "time_utc": "2026-10-20T03:02:00.151293+00:00"
+  },
+  "group_remaining_before_closure": []
+}

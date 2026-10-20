@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "profile": "quiescent-full-operational",
+  "source_pin": "0dbbd89775b0dc1b43b1fd1b817b0756342dba64",
+  "original": "C:\\file-native-recovery-20261019\\history-restored\\disposable\\store",
+  "selected": {
+    "publication": "publication-49204-1792429021747802100-16",
+    "digest": "8b816596942b684e53a3f7366876976f73450280581ff4714472be26d9595169"
+  },
+  "files": 510580,
+  "logical_bytes": 887923603,
+  "inventory_sha256": "fd5fc7c9085e00b9a6a7af6980c431a4c36386bed59bff245b1d55ce413899ff",
+  "transport_sha256": "c052a458169768cd0b17e6b4ec9f0daec1f7aabab23d552288f9dde82587e452",
+  "excluded": [
+    "DISPOSABLE.json",
+    "preparation.lock",
+    "writer.lock"
+  ],
+  "seconds": 224.28100000001723
+}

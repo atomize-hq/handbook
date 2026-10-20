@@ -1,0 +1,36 @@
+{
+  "reviewed_utc": "2026-10-20T03:45:21.044090+00:00",
+  "core_commit": "4cb6b9fba9ffabc294a6006ec54fe75366968db4",
+  "handoff_commit": "59bbd168bfa67bbe68f6f4d669658018786ddaba",
+  "core_bindings_compared_to_actual_git_blobs": 18,
+  "core_delta_files": 8,
+  "core_added_lines": 624,
+  "core_removed_lines": 5,
+  "windows_exe_sha256": "478dd9ba9f687d4de81c60ce55f9ddf9e4e2fafcc493d581b3c63e12e42f7fe5",
+  "native_binary_parent_independently_rehashed": false,
+  "windows_binary_parent_independently_rehashed": true,
+  "raw_archive_sha256": "60afedc0e32e8060d59c9a9b5cc8381aa810334a79d44e066448cb40fe1ff8a3",
+  "raw_archive_bytes": 116459,
+  "raw_members_all_verified": 150,
+  "expanded_raw_bytes": 1244532,
+  "full_capsule_cases": 54,
+  "full_capsule_engine_events": 275,
+  "strict_supplement_cases": 24,
+  "additional_actual_recovery_cases": 24,
+  "additional_actual_recovery_operations": 282,
+  "manual_review": "Complete pack/index/codec and physical catalog/lifetime/maintenance source; all affected existing interfaces; independent decoder/inventory; operational/fault/strict and loose regression harnesses; fixed-source cargo/codec/license/donor inventory.",
+  "bounds_repairs_reviewed": [
+    "independent whole-Job deadlines unaffected by blocked stdin/census",
+    "descendant survival after root exit and explicit verified closure",
+    "pre-eviction and simultaneously borrowed incoming index charge",
+    "declared actual index bound before allocation",
+    "bounded streaming decode window/output/single frame",
+    "independent parser pre-allocation lengths and strict numeric types"
+  ],
+  "known_limits": [
+    "GitNexus unavailable for worktree: UNKNOWN/manual tracing, no clean graph claim",
+    "earlier overlapping Jobs had per-Job limits only; current heavy Jobs serialize with3GiB commit+1GiB host headroom",
+    "native qualification, long-byte/semantic and performance/packed-restore gates still open"
+  ],
+  "candidate_review_result": "candidate frozen for qualification and P0-only stage admission; no final packing recommendation"
+}
