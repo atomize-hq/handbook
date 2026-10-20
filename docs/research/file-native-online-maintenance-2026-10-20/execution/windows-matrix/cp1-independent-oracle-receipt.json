@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "schema_pin": "62ce963085ac054bcc34eb21c6733b94db160975",
+  "cases": [
+    {
+      "case": "A-actual-full",
+      "actual_H": 7,
+      "raw_records": 15
+    },
+    {
+      "case": "B-actual-full",
+      "actual_H": 3,
+      "raw_records": 15
+    },
+    {
+      "case": "pin-bool-version",
+      "refused": true,
+      "error": "AssertionError",
+      "fixture": "C:\\file-native-online-matrix-20261020\\protocol\\decoder-negatives\\pin-bool-version\\store"
+    },
+    {
+      "case": "missing-pin",
+      "refused": true,
+      "error": "FileNotFoundError",
+      "fixture": "C:\\file-native-online-matrix-20261020\\protocol\\decoder-negatives\\missing-pin\\store"
+    },
+    {
+      "case": "damaged-selected-plan",
+      "refused": true,
+      "error": "AssertionError",
+      "fixture": "C:\\file-native-online-matrix-20261020\\protocol\\decoder-negatives\\damaged-selected-plan\\store"
+    }
+  ],
+  "decoder_sha256": "eb00a0b49ce4754b23bb4e4a340ec99070805cf43b6f2e1c1125d029f5453001",
+  "outcome_oracle_sha256": "a5721ab4102ab742efe66f546c9016b051cd3914e07700cc3de7c0f55a3ced02",
+  "sources_read_only": true,
+  "selected_and_store_unchanged": true,
+  "qualification": "actual CP1 fixtures; negative derivatives are labeled structural integrity probes; not a final-pin matrix",
+  "raw_summary": "C:\\file-native-online-matrix-20261020\\receipts\\physical-decoder-v1\\summary.json",
+  "raw_guard": "C:/file-native-online-matrix-20261020/receipts/physical-decoder-v1-guard.json"
+}

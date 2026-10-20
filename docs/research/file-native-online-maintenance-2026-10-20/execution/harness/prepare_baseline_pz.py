@@ -23,6 +23,7 @@ inventory = root.parents[2]/(args.name+'-frozen-inventory.jsonl')
 assert not inventory.exists()
 frozen = freeze(root, inventory, True)
 d = Driver(BASELINE, RUNTIME/'receipts'/(args.name+'-PZ-build-events.jsonl'))
+d.call(root, 'lifecycle', operation='setup')  # Fresh root identity, never an imported marker.
 response = d.call(root, 'packing', operation='build', codec='zstd', include_attempts=True, cleanup=False)
 assert before == (root/'SELECTED.json').read_bytes()
 independent = verify(root, RUNTIME/'receipts'/(args.name+'-PZ-independent.json'), inventory)

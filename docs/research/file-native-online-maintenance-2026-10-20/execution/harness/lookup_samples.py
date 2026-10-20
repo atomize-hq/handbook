@@ -2,10 +2,11 @@
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import statistics
 from driver import Driver
-from job_guard import sha_file, write_json
+from job_guard import Budget, sha_file, write_json
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--exe', required=True)
@@ -14,6 +15,7 @@ parser.add_argument('--baseline', required=True)
 parser.add_argument('--output', required=True)
 parser.add_argument('--fresh', type=int, choices=[20, 50], default=20)
 args = parser.parse_args()
+Budget(os.environ['FILE_NATIVE_BUDGET']).check({'receipts': dict(bytes=4*1024**2, files=10)})
 base = json.loads(Path(args.baseline).read_bytes())
 out = Path(args.output)
 assert not out.exists()

@@ -6,15 +6,28 @@ history recipe helper's gap for the new authentic N128 fixtures.
 """
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import sys
 
-PRIOR = Path('C:/Users/spmcc/.codex/worktrees/file-native-qnp-integration-20261019/handbook/docs/research')
+PRIOR = Path(os.environ.get('FILE_NATIVE_ORACLE_RESEARCH',
+    'C:/Users/spmcc/.codex/worktrees/file-native-qnp-integration-20261019/handbook/docs/research'
+    if os.name == 'nt' else str(Path(__file__).resolve().parents[3])))
 
 
 def sha(data):
     return hashlib.sha256(data).hexdigest()
+
+
+def strict(data):
+    def unique(rows):
+        result = {}
+        for key, value in rows:
+            assert key not in result, 'duplicate-json-key'
+            result[key] = value
+        return result
+    return json.loads(data, object_pairs_hook=unique)
 
 
 def normalized(request):
@@ -48,17 +61,25 @@ def verify(root, decoder=None, known_requests=None):
         from independent import Decoder
         decoder = Decoder(root)
     known_requests = known_requests or {}
-    selector = json.loads((root/'SELECTED.json').read_bytes())
+    selector = strict((root/'SELECTED.json').read_bytes())
     initial = selector
     expected_sequence = None
     count = history = candidate_proofs = 0
     seen = set()
     origin = None
     evidence = hashlib.sha256()
+    b_controls = 0
     while selector is not None:
         assert count < 200001 and selector['publication'] not in seen
         seen.add(selector['publication'])
-        p = json.loads(decoder.checked(root/f"publications/{selector['publication']}.json", selector['digest']))
+        publication_bytes = decoder.checked(root/f"publications/{selector['publication']}.json", selector['digest'])
+        p = strict(publication_bytes)
+        if decoder.config['mode'] == 'B':
+            # Ordinary selected-once B browsing cannot invoke a pack decoder.
+            with (root/f"publications/{selector['publication']}.json").open('rb') as source:
+                assert os.fstat(source.fileno()).st_size == len(publication_bytes)
+                assert source.read(len(publication_bytes)+1) == publication_bytes
+            b_controls += 1
         assert p['id'] == selector['publication']
         if expected_sequence is not None:
             assert p['sequence'] == expected_sequence
@@ -71,7 +92,7 @@ def verify(root, decoder=None, known_requests=None):
             i = int(match[1])
             assert i == p['sequence'] and i >= 1
             if origin is None:
-                source = json.loads((root/'HISTORY-SOURCE.json').read_bytes())
+                source = strict((root/'HISTORY-SOURCE.json').read_bytes())
                 origin = decoder.checked(root/source['original'], source['digest'])
                 assert origin
             variant = origin[:-1]+(b'\n' if origin[-1:] == b' ' else b' ')
@@ -88,7 +109,7 @@ def verify(root, decoder=None, known_requests=None):
         # If unavailable, exact retained caller input or the explicit history
         # recipe above must establish the intent; never guess another request.
         try:
-            candidate = json.loads(decoder.raw(f"attempts/{p['attempt']}/candidate.json"))
+            candidate = strict(decoder.raw(f"attempts/{p['attempt']}/candidate.json"))
         except FileNotFoundError:
             candidate = None
         if candidate is not None:
@@ -102,7 +123,7 @@ def verify(root, decoder=None, known_requests=None):
             candidate_proofs += 1
         assert request is not None, 'missing-independent-request-intent-evidence:'+p['request']
         assert normalized(request)['request'] == p['request'] and intent(request) == p['intent'], 'request-intent-mismatch'
-        result = json.loads(decoder.checked(root/f"results/{p['result_hash']}.json", p['result_hash']))
+        result = strict(decoder.checked(root/f"results/{p['result_hash']}.json", p['result_hash']))
         assert result['request'] == p['request'] and result['publication'] == p['id'] and result['outcome'] == 'accepted'
         evidence.update(json.dumps([selector, p['intent'], p['result_hash']], separators=(',', ':')).encode()+b'\n')
         count += 1
@@ -112,4 +133,5 @@ def verify(root, decoder=None, known_requests=None):
     return dict(profile='independent-complete-exact-request-intent-and-accepted-result',
                 selected=initial, publications=count, actual_H=count,
                 authentic_history_recipe_intents=history, retained_candidate_proofs=candidate_proofs,
+                exact_loose_B_publication_controls=b_controls,
                 evidence_sha256=evidence.hexdigest(), engine_code_imported=False)
