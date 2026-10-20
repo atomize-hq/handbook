@@ -1,0 +1,82 @@
+{
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "-B",
+    "C:/file-native-qnp-20261019/followup-20261020/verify-delta.py"
+  ],
+  "cwd": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook",
+  "guard_sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68",
+  "started_utc": "2026-10-20T12:57:35.103388+00:00",
+  "seconds": 24.060020446777344,
+  "cap_seconds": 900,
+  "effective_seconds": 900,
+  "exit": 0,
+  "censor": null,
+  "independent_deadline": null,
+  "group_observations": {
+    "root_exit_seen_epoch": 1792501055.5455573,
+    "group_empty_seen_epoch": 1792501055.5455573
+  },
+  "job_query_errors": 0,
+  "process_closure_verified": true,
+  "per_process_rss_limit": 2147483648,
+  "job_commit_limit_bytes": 3221225472,
+  "aggregate_rss_limit": 4294967296,
+  "sampled_peak_rss_by_pid": {
+    "19392": 26025984,
+    "20400": 18923520
+  },
+  "missing_samples": 0,
+  "aggregate_sampled_peak_rss": 38252544,
+  "ownership_samples": [
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 2210105210,
+          "files": 64611
+        },
+        "worktree": {
+          "bytes": 23839894,
+          "files": 292
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 243057012,
+          "files": 2340
+        }
+      },
+      "total_new_bytes": 2424499028,
+      "total_new_files": 69190,
+      "free_bytes": 200056795136,
+      "time_utc": "2026-10-20T12:57:59.122899+00:00"
+    }
+  ],
+  "final_ownership": {
+    "scopes": {
+      "runtime": {
+        "bytes": 2210105210,
+        "files": 64611
+      },
+      "worktree": {
+        "bytes": 23839894,
+        "files": 292
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 243057012,
+        "files": 2340
+      }
+    },
+    "total_new_bytes": 2424499028,
+    "total_new_files": 69190,
+    "free_bytes": 200055128064,
+    "time_utc": "2026-10-20T12:58:21.291584+00:00"
+  },
+  "group_remaining_before_closure": []
+}

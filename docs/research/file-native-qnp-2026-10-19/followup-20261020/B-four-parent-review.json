@@ -1,0 +1,124 @@
+{
+  "status": "PARENT_FOUR_B_COMPARISONS_REVIEW_PASS_WITH_FROZEN_GATE_RESULTS",
+  "cohort_inventory_sha256": "b6850f05c7c6eda152aed9f8bbb5657f4ccf8579f620bb38c2d6e058e7661ccb",
+  "all_four_complete_inventory_case_replay_and_lookup_digests_match": true,
+  "ordinary_cases_each": 7,
+  "warm_samples_each_category": 500,
+  "fresh_processes_each": 120,
+  "cells": {
+    "L-old": {
+      "median_ns": 39991057000,
+      "ordinary_threshold_ns": 47990268400.0,
+      "ordinary_gate": true,
+      "warm_ns": {
+        "early": 998200.0,
+        "middle": 464350.0,
+        "recent": 291600.0,
+        "missing": 358350.0,
+        "cancelled": 391250.0,
+        "lost-reply": 439450.0
+      },
+      "job_seconds": 481.2472469806671,
+      "missing_RSS_samples": 0,
+      "measurement_sha256": "19d39c4ff90cc705868437f5b1183679cf53d645af8c6ba136ace6e94ef8d286"
+    },
+    "L-new": {
+      "median_ns": 38473217600,
+      "ordinary_threshold_ns": 47990268400.0,
+      "ordinary_gate": true,
+      "warm_ns": {
+        "early": 996950.0,
+        "middle": 477600.0,
+        "recent": 295350.0,
+        "missing": 354800.0,
+        "cancelled": 386200.0,
+        "lost-reply": 439500.0
+      },
+      "job_seconds": 469.05110001564026,
+      "missing_RSS_samples": 0,
+      "measurement_sha256": "074ba0af26373ac5f41ca3a29c5591f0f0089ec8d9e8d2d3d7bc15d48e6f093f"
+    },
+    "P0": {
+      "median_ns": 38818799400,
+      "ordinary_threshold_ns": 47990268400.0,
+      "ordinary_gate": true,
+      "warm_ns": {
+        "early": 1076400.0,
+        "middle": 443450.0,
+        "recent": 260400.0,
+        "missing": 322900.0,
+        "cancelled": 374300.0,
+        "lost-reply": 437250.0
+      },
+      "job_seconds": 469.438645362854,
+      "missing_RSS_samples": 0,
+      "measurement_sha256": "7aeef55566c9e635a03343874b32a057fb465835212232530267b6c7ae618418",
+      "warm_ratios": {
+        "early": 1.0783410138248848,
+        "middle": 0.9549908474211263,
+        "recent": 0.8930041152263375,
+        "missing": 0.901074368634017,
+        "cancelled": 0.9566773162939297,
+        "lost-reply": 0.9949937421777222
+      },
+      "warm_2x_gate": true,
+      "packing": {
+        "pack_index_bytes": 1808391,
+        "pack_index_catalog_files": 11,
+        "remaining_original_loose_duplicates": 8,
+        "remaining_original_loose_duplicate_bytes": 10268,
+        "original_cohort_files": 28,
+        "original_cohort_raw_bytes": 1804894,
+        "eligible_pack_index_catalog_and_duplicates_bytes": 1821105,
+        "eligible_physical_files_after": 19,
+        "file_reduction": 0.3214285714285714,
+        "ninety_five_percent_gate": false,
+        "other_owner_journal_control_files_additionally_charged": true
+      },
+      "independent_raw_tuple_digest": "48a0cc685a5bec9f77b7480a3f3de0c5fbeb9d2c228b65c5ce39146382e89ae5"
+    },
+    "PZ": {
+      "median_ns": 37552251500,
+      "ordinary_threshold_ns": 47990268400.0,
+      "ordinary_gate": true,
+      "warm_ns": {
+        "early": 1131250.0,
+        "middle": 460750.0,
+        "recent": 283650.0,
+        "missing": 334500.0,
+        "cancelled": 386000.0,
+        "lost-reply": 449700.0
+      },
+      "job_seconds": 469.3618803024292,
+      "missing_RSS_samples": 0,
+      "measurement_sha256": "c263b37c5f33e7d6ebb1c0ce52d108a35f267d0ecad4200159ad989d7ea2e1f9",
+      "warm_ratios": {
+        "early": 1.0509568933481976,
+        "middle": 1.0390122899988725,
+        "recent": 1.0892857142857142,
+        "missing": 1.0359244348095387,
+        "cancelled": 1.0312583489179803,
+        "lost-reply": 1.0284734133790738
+      },
+      "warm_2x_gate": true,
+      "packing": {
+        "pack_index_bytes": 412728,
+        "pack_index_catalog_files": 11,
+        "remaining_original_loose_duplicates": 8,
+        "remaining_original_loose_duplicate_bytes": 10268,
+        "original_cohort_files": 28,
+        "original_cohort_raw_bytes": 1804894,
+        "eligible_pack_index_catalog_and_duplicates_bytes": 425437,
+        "eligible_physical_files_after": 19,
+        "file_reduction": 0.3214285714285714,
+        "ninety_five_percent_gate": false,
+        "other_owner_journal_control_files_additionally_charged": true
+      },
+      "independent_raw_tuple_digest": "48a0cc685a5bec9f77b7480a3f3de0c5fbeb9d2c228b65c5ce39146382e89ae5"
+    }
+  },
+  "PZ_pack_index_reduction_over_P0": 0.7717705960713143,
+  "compression_20percent_gate": true,
+  "cache_note": "Same-process warm after first lookup; fresh-process OS/device caches uncontrolled.",
+  "no_threshold_changes": true
+}

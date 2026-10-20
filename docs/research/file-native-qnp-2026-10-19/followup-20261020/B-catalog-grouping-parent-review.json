@@ -1,0 +1,45 @@
+{
+  "status": "PARENT_P0_PZ_CATALOG_GROUPING_PASS",
+  "groups": [
+    [
+      "allocation",
+      2,
+      "attempts/attempt-56248-1792482528162797500-0/allocations/publication-56248-1792482566203283400-11.json",
+      "attempts/attempt-75848-1792482190458435800-1/allocations/publication-75848-1792482286699994500-8421.json"
+    ],
+    [
+      "candidate",
+      2,
+      "attempts/attempt-56248-1792482528162797500-0/candidate.json",
+      "attempts/attempt-75848-1792482190458435800-1/candidate.json"
+    ],
+    [
+      "hint",
+      8,
+      "attempt-hints/attempt-17076-1792482286753289900-0.json",
+      "attempt-hints/attempt-75848-1792482190458435800-1.json"
+    ],
+    [
+      "publication",
+      8,
+      "publications/publication-17076-1792482325969959200-12.json",
+      "publications/publication-75848-1792482286699994500-8421.json"
+    ],
+    [
+      "result",
+      8,
+      "results/0e43889f12cf981c6049c6d4d0b06692f69750efc53a063a1da1f893c63a4bce.json",
+      "results/fb8e34a23d84228ada9063a07695a5c2c76ce475a69ac9c769847b914ffd7a02.json"
+    ]
+  ],
+  "raw_codec": 0,
+  "zstd_codec": 1,
+  "P0_snapshot_matches_exact_archived_catalog_bytes_and_SHA": true,
+  "P0_catalog_sha256": "104844301cce15c42a137231438393997b46c34ade6130bd39ded86b1458f85c",
+  "P0_pack_index_bytes": 1808391,
+  "PZ_pack_index_bytes": 412728,
+  "PZ_catalog_current_binding_pending_archive_close": false,
+  "parent_review_note": "Earlier attempted JSON re-encoding hash comparison was not byte-identical; read and authenticated original FNOP1 catalog bytes instead. No source mutation or workload rerun.",
+  "PZ_snapshot_exact_current_and_archive_inventory_SHA_match": true,
+  "PZ_catalog_sha256": "4bcedd03ed1f3ec0a8ce985eb1800398579f2ba3c35af056c713d4d65b088153"
+}
