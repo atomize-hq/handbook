@@ -1,0 +1,76 @@
+{
+  "status": "final-source-small-qualification-complete-main-PZ-not-yet-admitted",
+  "utc": "2026-10-20T05:24:05.743819+00:00",
+  "core_commit": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "exe_sha256": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b",
+  "unit_tests": 5,
+  "focused_cases": 9,
+  "focused_engine_events": 26,
+  "ordinary_shell_processes": 9,
+  "full_packing_cases": 54,
+  "full_packing_events": 275,
+  "strict_cases": 24,
+  "strict_engine_events": 4,
+  "source_unchanged": true,
+  "all_groups_closed": true,
+  "read_only_P0_reader_core": "d70",
+  "unchanged_P0_pack_creation_core": "4cb",
+  "warm_over_qualified_L": {
+    "early": 0.9755443037974684,
+    "middle": 0.9442075337597725,
+    "recent": 0.9634076911132964,
+    "missing": 0.9950102249488753,
+    "cancelled": 1.0388062027585132,
+    "lost-reply": 1.0478801940518878
+  },
+  "intent_and_exact_outcomes_passed": true,
+  "current": {
+    "scopes": {
+      "runtime": {
+        "bytes": 2221011312,
+        "files": 536696
+      },
+      "worktree": {
+        "bytes": 1943039,
+        "files": 202
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 228673319,
+        "files": 1983
+      }
+    },
+    "total_new_bytes": 2399124582,
+    "total_new_files": 540828,
+    "free_bytes": 198010281984,
+    "time_utc": "2026-10-20T05:20:36.841068+00:00"
+  },
+  "temporary_Windows_cap_bytes": 2791728742,
+  "proposed_main_PZ_reservation": 350000000,
+  "measurement_report_margin": 33554432,
+  "prospective_main_PZ_bytes": 2782679014,
+  "prospective_headroom": 9049728,
+  "prospective_files": 542828,
+  "old_recovery_capsule_final_source": "pending separate admission; old4cb 24/282 preserved",
+  "H1000_control": "raw container + independent complete tuple verification passed",
+  "H10000_control": "not yet run",
+  "ordinary_representative_AB": "not yet run",
+  "large_cleanup_and_packed_restore": "not admitted",
+  "old_failed_gzip_preserved": {
+    "bytes": 66100201,
+    "sha256": "7215d45bca14cd9c1f6494ba42f57751ddf001ac957bc1d4812f924d544d9a8f"
+  },
+  "XZ_verified_and_reviewed": {
+    "bytes": 23759008,
+    "sha256": "849e159dd1c9130e5fa27a5d69947f717ad5256f01efe2ae6851c5fbb0ac7fb8"
+  },
+  "actual_reclaimed_files": 566,
+  "actual_reclaimed_target_bytes": 438731626,
+  "retained_helper_files": 2,
+  "service_stop": "parent-reported systemError preserved; reconciliation confirmed completed removals and unchanged source/bin; same authorized scope continued",
+  "functional_cutoff": "2026-10-20T07:55:16Z",
+  "closeout_deadline": "2026-10-20T08:25:16Z"
+}

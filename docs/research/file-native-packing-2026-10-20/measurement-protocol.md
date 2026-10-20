@@ -1,6 +1,12 @@
 # Matched measurement harness
 
-The engine remains frozen at `4cb6b9fba9ffabc294a6006ec54fe75366968db4`.
+The original measurements and P0 container creation used
+`4cb6b9fba9ffabc294a6006ec54fe75366968db4`. After the separately documented B
+loose-control publication fix, the final engine is frozen at
+`d70f3864f2888d46d9112213b4a03f8d82745a8e`. `fixed_P0_readonly.py` repeats P0
+reads with that final reader on the unchanged original containers;
+`final_long_matrix.py` builds, independently checks and measures final PZ.
+`final_tables.py` compares those final readers against qualified loose results.
 These scripts describe bounded experiment stages; their presence grants no stage
 admission. The controlling dispatch clock, resource admission and preserved
 failure/censor receipts continue to apply.
@@ -20,6 +26,8 @@ frozen P executable. Every engine event binds its executable path and SHA-256.
 Warm samples mean 500 repeated lookups per category in one process after its
 first lookup. Fresh samples mean 20 process starts per category with uncontrolled
 OS/device caches. Neither is a claim of physical-device cold performance.
+The first lookup reported for each category shares the resident process with
+preceding categories; it is not an additional fresh-process sample.
 `intent_probe.py` separately checks the actual original request's provided
 matching intent and a changed intent; those checks do not enter warm samples.
 

@@ -1,0 +1,1206 @@
+{
+  "core_commit": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "exe_sha256": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b",
+  "files": [
+    {
+      "path": "dependent-source/incremental/verify_store.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\verify_store.py",
+      "bytes": 10936,
+      "sha256": "ce74f48339b950ad62c9c159bd95d4f038248d500addd6b635559ccdba42e2b8"
+    },
+    {
+      "path": "dependent-source/navigation/oracle.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-navigation-2026-10-19\\oracle.py",
+      "bytes": 9057,
+      "sha256": "877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f"
+    },
+    {
+      "path": "dependent-source/recovery/operational_backup.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-recovery-reclamation-2026-10-19\\operational_backup.py",
+      "bytes": 8308,
+      "sha256": "20aa1b2965fd294bbf11942e5d399c7944c1f699b11021c0349b57ee5ee10bbe"
+    },
+    {
+      "path": "dependent-source/recovery/verify_operational.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-recovery-reclamation-2026-10-19\\verify_operational.py",
+      "bytes": 9290,
+      "sha256": "d86c7d5406d5c5a5d00553b85dd0f16a039838132c31f41cc0567a7e3920e5cd"
+    },
+    {
+      "path": "runtime/B-shell/fixed2-immediate/after.stderr",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\fixed2-immediate\\after.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/B-shell/fixed2-immediate/after.stdout",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\fixed2-immediate\\after.stdout",
+      "bytes": 5799,
+      "sha256": "87c81b557ce5d994f065940614e7a0b254fb78101bb96e011988d9d6c0568a03"
+    },
+    {
+      "path": "runtime/B-shell/fixed2-immediate/before.stderr",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\fixed2-immediate\\before.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/B-shell/fixed2-immediate/before.stdout",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\fixed2-immediate\\before.stdout",
+      "bytes": 5799,
+      "sha256": "87c81b557ce5d994f065940614e7a0b254fb78101bb96e011988d9d6c0568a03"
+    },
+    {
+      "path": "runtime/B-shell/fixed2-immediate/harness-source.py",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\fixed2-immediate\\harness-source.py",
+      "bytes": 2605,
+      "sha256": "fe8d45fb9d21b5ff946248b8e57577d1f2126902cb7e12c215685f48d3f74458"
+    },
+    {
+      "path": "runtime/B-shell/fixed2-immediate/selected_once_copy.ps1",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\fixed2-immediate\\selected_once_copy.ps1",
+      "bytes": 1836,
+      "sha256": "9a1433168ffe2fe22fcd694b6e6b82db4effeed081e94faaef6f06356aa74918"
+    },
+    {
+      "path": "runtime/B-shell/fixed2-immediate/summary.json",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\fixed2-immediate\\summary.json",
+      "bytes": 11419,
+      "sha256": "a82823ae7acc4dc986e0978517a2ed0d278a492dde948fb6bbeb4e76e73e8d18"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v2/before.stderr",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v2\\before.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v2/before.stdout",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v2\\before.stdout",
+      "bytes": 5803,
+      "sha256": "9ed148e07026fd07d5905241dcd272b817791b170fc0c1ad08c492c47b20f2e3"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v2/harness-source.py",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v2\\harness-source.py",
+      "bytes": 2428,
+      "sha256": "832a0382aae676004a72f53f590a1c9b8d3da06fe3d7b97f06601e400c7aae06"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v2/selected_once_copy.ps1",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v2\\selected_once_copy.ps1",
+      "bytes": 1558,
+      "sha256": "bfbdad50a7db38dc04bb182aebd3e711dc89db37593fc4bcd2c709da745bb01b"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v2/source-preservation-note.json",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v2\\source-preservation-note.json",
+      "bytes": 294,
+      "sha256": "2663e55253a73fb47909c7f3bc1ac5aad62e59b8f3d441e4478d53d110dd07a0"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v3/after.stderr",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\after.stderr",
+      "bytes": 542,
+      "sha256": "fd26a723499c159b2b10df7c4e7f9dace1fbdfaca91ee65d5b46758259c5cbd9"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v3/after.stdout",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\after.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v3/before.stderr",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\before.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v3/before.stdout",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\before.stdout",
+      "bytes": 5803,
+      "sha256": "e9fc2ae2394c4c0a9ec5b8b82858391d2614789f70bf0dbcfeeb25b2cb52a1fc"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v3/harness-source.py",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\harness-source.py",
+      "bytes": 2428,
+      "sha256": "2e5862ecd6290602911eeae2ba36b75634b8a360b9616293c669367602dbb011"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v3/selected_once_copy.ps1",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\selected_once_copy.ps1",
+      "bytes": 1558,
+      "sha256": "bfbdad50a7db38dc04bb182aebd3e711dc89db37593fc4bcd2c709da745bb01b"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v3/source-preservation-note.json",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\source-preservation-note.json",
+      "bytes": 286,
+      "sha256": "5a01d00a3d75d953b226deca0c54b656e026bf2a1791f0fa455d5f2fb03d2102"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate-v3/summary.json",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\summary.json",
+      "bytes": 6669,
+      "sha256": "009335071518ae1bcd2fad20ba00b3bcef4c875c4bd877d0e4a65d929a141450"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate/before.stderr",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate\\before.stderr",
+      "bytes": 566,
+      "sha256": "c4b92005e43152eb21a5b983da815f2ba83dcc85a752b1db4c16fb3870589574"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate/before.stdout",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate\\before.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate/harness-source.py",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate\\harness-source.py",
+      "bytes": 2428,
+      "sha256": "832a0382aae676004a72f53f590a1c9b8d3da06fe3d7b97f06601e400c7aae06"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate/selected_once_copy.ps1",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate\\selected_once_copy.ps1",
+      "bytes": 1414,
+      "sha256": "d3c82445ba5ba55eb0a6fc1e234e78f853342da598e89171c5321269914781e2"
+    },
+    {
+      "path": "runtime/B-shell/old-4cb-immediate/source-preservation-note.json",
+      "source": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate\\source-preservation-note.json",
+      "bytes": 278,
+      "sha256": "8eece8da62f46107e7d1a3e58b192aa1af7833c419c05f484f0471d7c803994d"
+    },
+    {
+      "path": "runtime/artifact-preservation-xz/archive-harness.py",
+      "source": "C:\\file-native-packing-20261020\\artifact-preservation-xz\\archive-harness.py",
+      "bytes": 6113,
+      "sha256": "8d9a7e2cc29223c560cf146e7a5f5f075ddf17f6076dcab2ba04ad37f9ca6a58"
+    },
+    {
+      "path": "runtime/artifact-preservation-xz/files.jsonl",
+      "source": "C:\\file-native-packing-20261020\\artifact-preservation-xz\\files.jsonl",
+      "bytes": 180219,
+      "sha256": "63d7df0a00d2ae819d2007674b98ce7a70f7b4376a44af3648f39d6ed6fce360"
+    },
+    {
+      "path": "runtime/artifact-preservation-xz/fresh-admission.json",
+      "source": "C:\\file-native-packing-20261020\\artifact-preservation-xz\\fresh-admission.json",
+      "bytes": 662,
+      "sha256": "e1de0e9d2fc01ad94b9227b5117b8117be493cf6d749c99c0d1659ef5f7687eb"
+    },
+    {
+      "path": "runtime/artifact-preservation-xz/manifest.json",
+      "source": "C:\\file-native-packing-20261020\\artifact-preservation-xz\\manifest.json",
+      "bytes": 1028,
+      "sha256": "6532170f2eaba287b9be52f07a9ffe89c1a51f2eccc61b6b67261b3d956a81be"
+    },
+    {
+      "path": "runtime/artifact-preservation/archive-harness.py",
+      "source": "C:\\file-native-packing-20261020\\artifact-preservation\\archive-harness.py",
+      "bytes": 6010,
+      "sha256": "4812184c4e1d077f9e8cc3815e7ee7775772235f00a44069dfa45abe7f490c5f"
+    },
+    {
+      "path": "runtime/artifact-preservation/fresh-admission.json",
+      "source": "C:\\file-native-packing-20261020\\artifact-preservation\\fresh-admission.json",
+      "bytes": 588,
+      "sha256": "ce2bf7ab98d997fe46d00325e5641a2e28fe7b93637deaacf72ce0173f915ae2"
+    },
+    {
+      "path": "runtime/artifact-preservation/incomplete-prefix.json",
+      "source": "C:\\file-native-packing-20261020\\artifact-preservation\\incomplete-prefix.json",
+      "bytes": 419,
+      "sha256": "0335f2217d532df9a2f76e64e85586a2d3ee5d710943b2ddb44e56d864a7f923"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-L-inventory.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-L-inventory.jsonl",
+      "bytes": 3878,
+      "sha256": "7a11d2f721f7bcc9f1390b1ede43a76e27f0541daac6fd3ec3ef0c87099efdd2"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-P0-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-P0-independent.json",
+      "bytes": 1264,
+      "sha256": "f2f90022a8186a548c87fd3a852881a4722c82d6ca1c7fffb89fc78bad543076"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-PZ-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-PZ-independent.json",
+      "bytes": 1438,
+      "sha256": "fb40161f41bf1b10f61ab716d4becab5aabcd758f06671456c6129221ae2b800"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-accounting-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-accounting-1-independent.json",
+      "bytes": 1261,
+      "sha256": "4d10c759b335d82bf1d09c0fec0f04c1dbf86995c2ee4306f738910517111162"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-accounting-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-accounting-1.jsonl",
+      "bytes": 2896,
+      "sha256": "9991f6d5b12cff5a09bfae17825daea96a8a3ab96e1cebe9f605c8b7120ade08"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-before-catalog-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-before-catalog-1-independent.json",
+      "bytes": 1260,
+      "sha256": "c23d98313373e64f84a7c8b76dacc10adf821ce56e74fb09bacd314c795b5b7c"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-before-catalog-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-before-catalog-1.jsonl",
+      "bytes": 2896,
+      "sha256": "9991f6d5b12cff5a09bfae17825daea96a8a3ab96e1cebe9f605c8b7120ade08"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-build-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-build-1-independent.json",
+      "bytes": 1261,
+      "sha256": "4d10c759b335d82bf1d09c0fec0f04c1dbf86995c2ee4306f738910517111162"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-build-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-build-1.jsonl",
+      "bytes": 2896,
+      "sha256": "9991f6d5b12cff5a09bfae17825daea96a8a3ab96e1cebe9f605c8b7120ade08"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-catalog-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-catalog-1-independent.json",
+      "bytes": 1260,
+      "sha256": "84d28ae5f221c77de483ad99fbf0b9c3ca32b0c0b674351bee494121826ae47b"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-catalog-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-catalog-1.jsonl",
+      "bytes": 2896,
+      "sha256": "9991f6d5b12cff5a09bfae17825daea96a8a3ab96e1cebe9f605c8b7120ade08"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-index-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-index-1-independent.json",
+      "bytes": 1259,
+      "sha256": "1f0f30fae4a177b029f6fddb2c33fef3f11563fdce16308cbcdf1bb603d83287"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-index-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-index-1.jsonl",
+      "bytes": 2896,
+      "sha256": "9991f6d5b12cff5a09bfae17825daea96a8a3ab96e1cebe9f605c8b7120ade08"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-install-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-install-1-independent.json",
+      "bytes": 1244,
+      "sha256": "3d54e929c2642e064da4b679e7e3a17de2881680f9d5d64822fef7fd33ca28cc"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-install-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-install-1.jsonl",
+      "bytes": 2896,
+      "sha256": "9991f6d5b12cff5a09bfae17825daea96a8a3ab96e1cebe9f605c8b7120ade08"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-loose-delete-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-loose-delete-1-independent.json",
+      "bytes": 1261,
+      "sha256": "4d10c759b335d82bf1d09c0fec0f04c1dbf86995c2ee4306f738910517111162"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-loose-delete-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-loose-delete-1.jsonl",
+      "bytes": 2896,
+      "sha256": "9991f6d5b12cff5a09bfae17825daea96a8a3ab96e1cebe9f605c8b7120ade08"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-loose-delete-3-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-loose-delete-3-independent.json",
+      "bytes": 1259,
+      "sha256": "03148423d9eb20c1a0844d2efa5acb3a270a5a10dfc1780f224072e85d72d711"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-loose-delete-3.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-loose-delete-3.jsonl",
+      "bytes": 2896,
+      "sha256": "9991f6d5b12cff5a09bfae17825daea96a8a3ab96e1cebe9f605c8b7120ade08"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-reservation-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-reservation-1-independent.json",
+      "bytes": 1258,
+      "sha256": "ee127ffddf65d1e1644be75179a296710113aac0e39d9c2aa9ed90c37d9f83a9"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pack-reservation-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pack-reservation-1.jsonl",
+      "bytes": 2896,
+      "sha256": "9991f6d5b12cff5a09bfae17825daea96a8a3ab96e1cebe9f605c8b7120ade08"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-pending-restored-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-pending-restored-independent.json",
+      "bytes": 1262,
+      "sha256": "b6e564309eac62ddd888d1dae91c2c25be73bdfe85a661710afc4b39fe494c4f"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-repacked-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-repacked-independent.json",
+      "bytes": 1457,
+      "sha256": "84067b0050e3da608fd2da4af1cd2ba0b9783cd68e53718937fd173094116c34"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/A-restored-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\A-restored-independent.json",
+      "bytes": 1436,
+      "sha256": "4641418230e2f19ec87eaca0bcb65c053b709c4b8dc0464cd3667993f1b63063"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-L-inventory.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-L-inventory.jsonl",
+      "bytes": 2912,
+      "sha256": "6d70b1faac9e86bfdf3ee48b2f41e25e899dffcf2aab4189878b3b1f6c5e2ca2"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-P0-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-P0-independent.json",
+      "bytes": 1262,
+      "sha256": "33b02303856edbb07402e840b1347b4be7d1be71be5ddbfc1ffe969bc1612238"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-PZ-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-PZ-independent.json",
+      "bytes": 1438,
+      "sha256": "4775285c78edd4a7488d9c15486502927eb890de4ed1598ae559931aeb820e90"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-accounting-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-accounting-1-independent.json",
+      "bytes": 1259,
+      "sha256": "75d2b3d123ca4acbd9d07f3db3823a70f95beabb0de3a00d9aa34cb6829ccd14"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-accounting-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-accounting-1.jsonl",
+      "bytes": 2897,
+      "sha256": "14fea5fe15caa9cc7cfcc71fe2d06d00fc06eb9eee059d0c1a65acee5bb9639b"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-before-catalog-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-before-catalog-1-independent.json",
+      "bytes": 1258,
+      "sha256": "cc7dd6ab541b04f2d4e30448b18d30f600e3c4e9e21920aca1e749969fa7e6cb"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-before-catalog-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-before-catalog-1.jsonl",
+      "bytes": 2897,
+      "sha256": "14fea5fe15caa9cc7cfcc71fe2d06d00fc06eb9eee059d0c1a65acee5bb9639b"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-build-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-build-1-independent.json",
+      "bytes": 1259,
+      "sha256": "75d2b3d123ca4acbd9d07f3db3823a70f95beabb0de3a00d9aa34cb6829ccd14"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-build-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-build-1.jsonl",
+      "bytes": 2897,
+      "sha256": "14fea5fe15caa9cc7cfcc71fe2d06d00fc06eb9eee059d0c1a65acee5bb9639b"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-catalog-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-catalog-1-independent.json",
+      "bytes": 1258,
+      "sha256": "9abdc61bdac765eb8f1c9d3bd48304da533639004dda93a837ca5d3e546d12f7"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-catalog-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-catalog-1.jsonl",
+      "bytes": 2897,
+      "sha256": "14fea5fe15caa9cc7cfcc71fe2d06d00fc06eb9eee059d0c1a65acee5bb9639b"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-index-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-index-1-independent.json",
+      "bytes": 1259,
+      "sha256": "7521cff607b050a005ecd4a1a23acfc45a76bf7197895e42fd69e3b3811108c0"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-index-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-index-1.jsonl",
+      "bytes": 2897,
+      "sha256": "14fea5fe15caa9cc7cfcc71fe2d06d00fc06eb9eee059d0c1a65acee5bb9639b"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-install-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-install-1-independent.json",
+      "bytes": 1258,
+      "sha256": "c36d735e82c525318b49cd5cc1e4785e1752bbd2dd45c75261606ce10eaee349"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-install-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-install-1.jsonl",
+      "bytes": 2897,
+      "sha256": "14fea5fe15caa9cc7cfcc71fe2d06d00fc06eb9eee059d0c1a65acee5bb9639b"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-loose-delete-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-loose-delete-1-independent.json",
+      "bytes": 1259,
+      "sha256": "5d2aac1cebbce287749cbdf5bdf224b2b6ed3a50af1658e8dc2bbfe7453256be"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-loose-delete-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-loose-delete-1.jsonl",
+      "bytes": 2897,
+      "sha256": "14fea5fe15caa9cc7cfcc71fe2d06d00fc06eb9eee059d0c1a65acee5bb9639b"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-loose-delete-3-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-loose-delete-3-independent.json",
+      "bytes": 1259,
+      "sha256": "75d2b3d123ca4acbd9d07f3db3823a70f95beabb0de3a00d9aa34cb6829ccd14"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-loose-delete-3.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-loose-delete-3.jsonl",
+      "bytes": 2897,
+      "sha256": "14fea5fe15caa9cc7cfcc71fe2d06d00fc06eb9eee059d0c1a65acee5bb9639b"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-reservation-1-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-reservation-1-independent.json",
+      "bytes": 1245,
+      "sha256": "3052b6a23dd0e33e79b25ff05e2e956c905196a74cc5fc006e5ff560cafc9ab7"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-pack-reservation-1.jsonl",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-pack-reservation-1.jsonl",
+      "bytes": 2897,
+      "sha256": "14fea5fe15caa9cc7cfcc71fe2d06d00fc06eb9eee059d0c1a65acee5bb9639b"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-repacked-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-repacked-independent.json",
+      "bytes": 1458,
+      "sha256": "a823ff28ee22151e1b3516e10cf23d0a072f275eaf72ce6546925033272c32bb"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/B-restored-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\B-restored-independent.json",
+      "bytes": 1408,
+      "sha256": "5bfbbdb91a4f134cf7c41b70a59bce24de18c1e2d0dda8c1a8f1e3f2d1a48b85"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/cases.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\cases.json",
+      "bytes": 7366,
+      "sha256": "cacfee3c92a4142bca34a34f95892233e25a6ecc05d0687ca3886282c86fd6ef"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/events.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\events.json",
+      "bytes": 659185,
+      "sha256": "3da4675e3034f110afa4fa96e3f6a8644cc6e46cf23c8af721c054a655f635f5"
+    },
+    {
+      "path": "runtime/fix2/full-capsule/summary.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\full-capsule\\summary.json",
+      "bytes": 8203,
+      "sha256": "c357c7e64ae2a9266cbc84fc943200e5b742b33119091cd302d48ba797016544"
+    },
+    {
+      "path": "runtime/fix2/regression/B-independent.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\B-independent.json",
+      "bytes": 1277,
+      "sha256": "2ab57031695f70049d410cfab0db7c7a02ef8db5cbca0f77356fe69248414fca"
+    },
+    {
+      "path": "runtime/fix2/regression/before-current.stderr",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\before-current.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/fix2/regression/before-current.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\before-current.stdout",
+      "bytes": 5792,
+      "sha256": "596ac1f069aff3a8b0f45d33f365ad8024b61855fae32f84c119e8fa98b04812"
+    },
+    {
+      "path": "runtime/fix2/regression/capsule.py",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\capsule.py",
+      "bytes": 19536,
+      "sha256": "b19f61524a6fb7baeadfaf82b32191ccf4f491d00541039c6aaf665af0f0a2ca"
+    },
+    {
+      "path": "runtime/fix2/regression/captured-initial.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\captured-initial.json",
+      "bytes": 143,
+      "sha256": "e36139c1a2ee3583332f0742a675de092ef4a6ba7fb3f5a865a04def31d3103f"
+    },
+    {
+      "path": "runtime/fix2/regression/current-after-cleanup.stderr",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\current-after-cleanup.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/fix2/regression/current-after-cleanup.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\current-after-cleanup.stdout",
+      "bytes": 5792,
+      "sha256": "596ac1f069aff3a8b0f45d33f365ad8024b61855fae32f84c119e8fa98b04812"
+    },
+    {
+      "path": "runtime/fix2/regression/current-after-writer.stderr",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\current-after-writer.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/fix2/regression/current-after-writer.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\current-after-writer.stdout",
+      "bytes": 5792,
+      "sha256": "be3b360fab8bb33c75df1cca52769bfd6540bf4c55f6d81860aa8d0bad3433c2"
+    },
+    {
+      "path": "runtime/fix2/regression/driver.py",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\driver.py",
+      "bytes": 3304,
+      "sha256": "6e45ef7892a2702ea6e8992102d06b472164e01a15dbae28efcfbb7cc9121aa0"
+    },
+    {
+      "path": "runtime/fix2/regression/events/events.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\events\\events.json",
+      "bytes": 70715,
+      "sha256": "b4b8c143e2e92c8e5664e554ae1b8822a5fb8693f63ca12c92ed88ce5a6da8d8"
+    },
+    {
+      "path": "runtime/fix2/regression/fix2_regression.py",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\fix2_regression.py",
+      "bytes": 7331,
+      "sha256": "5385233d18dcaa52f0ba81aaf50a948f26e72563c6754a8c2fc2420550556297"
+    },
+    {
+      "path": "runtime/fix2/regression/frozen-after-cleanup.stderr",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\frozen-after-cleanup.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/fix2/regression/frozen-after-cleanup.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\frozen-after-cleanup.stdout",
+      "bytes": 5793,
+      "sha256": "98f9adc6ec70e47577ce3a61ed9e5e6d8c5f5306af04f7b37f640d5d48301f08"
+    },
+    {
+      "path": "runtime/fix2/regression/frozen-after-repack.stderr",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\frozen-after-repack.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/fix2/regression/frozen-after-repack.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\frozen-after-repack.stdout",
+      "bytes": 5793,
+      "sha256": "98f9adc6ec70e47577ce3a61ed9e5e6d8c5f5306af04f7b37f640d5d48301f08"
+    },
+    {
+      "path": "runtime/fix2/regression/frozen-after-writer.stderr",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\frozen-after-writer.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/fix2/regression/frozen-after-writer.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\frozen-after-writer.stdout",
+      "bytes": 5793,
+      "sha256": "98f9adc6ec70e47577ce3a61ed9e5e6d8c5f5306af04f7b37f640d5d48301f08"
+    },
+    {
+      "path": "runtime/fix2/regression/frozen-during-build.stderr",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\frozen-during-build.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/fix2/regression/frozen-during-build.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\frozen-during-build.stdout",
+      "bytes": 5793,
+      "sha256": "98f9adc6ec70e47577ce3a61ed9e5e6d8c5f5306af04f7b37f640d5d48301f08"
+    },
+    {
+      "path": "runtime/fix2/regression/guard.py",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\guard.py",
+      "bytes": 11177,
+      "sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68"
+    },
+    {
+      "path": "runtime/fix2/regression/original.stderr",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\original.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/fix2/regression/original.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\original.stdout",
+      "bytes": 5793,
+      "sha256": "98f9adc6ec70e47577ce3a61ed9e5e6d8c5f5306af04f7b37f640d5d48301f08"
+    },
+    {
+      "path": "runtime/fix2/regression/retired-generation-refuses-copy.stderr",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\retired-generation-refuses-copy.stderr",
+      "bytes": 534,
+      "sha256": "728a10db7dc37427245ddf24c6fdc37a24371ea82461c996f11788d177e1910f"
+    },
+    {
+      "path": "runtime/fix2/regression/retired-generation-refuses-copy.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\retired-generation-refuses-copy.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/fix2/regression/selected_once_copy.ps1",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\selected_once_copy.ps1",
+      "bytes": 2146,
+      "sha256": "65eb08be1ae44fd138aaba24d24d5014c3be499c9a6ca017b48b45fe8ffa5bc4"
+    },
+    {
+      "path": "runtime/fix2/regression/summary.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\regression\\summary.json",
+      "bytes": 13625,
+      "sha256": "92d8501d04f596cbe4c7eb7d2f194958088698ca7b577609ad822c171bda0efb"
+    },
+    {
+      "path": "runtime/fix2/small-qualification/admission.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\small-qualification\\admission.json",
+      "bytes": 657,
+      "sha256": "f13021396986fa3e07054af4d7175195b2bbfb7546b6fd6e49cf77fe78ec76cc"
+    },
+    {
+      "path": "runtime/fix2/small-qualification/capsule.py",
+      "source": "C:\\file-native-packing-20261020\\fix2\\small-qualification\\capsule.py",
+      "bytes": 19536,
+      "sha256": "b19f61524a6fb7baeadfaf82b32191ccf4f491d00541039c6aaf665af0f0a2ca"
+    },
+    {
+      "path": "runtime/fix2/small-qualification/driver.py",
+      "source": "C:\\file-native-packing-20261020\\fix2\\small-qualification\\driver.py",
+      "bytes": 3304,
+      "sha256": "6e45ef7892a2702ea6e8992102d06b472164e01a15dbae28efcfbb7cc9121aa0"
+    },
+    {
+      "path": "runtime/fix2/small-qualification/final_small_qualification.py",
+      "source": "C:\\file-native-packing-20261020\\fix2\\small-qualification\\final_small_qualification.py",
+      "bytes": 3739,
+      "sha256": "5d392048bc96a8a5445a1e143f8d0bfc51ec2e41f97e65dc00bf32e8d55ce887"
+    },
+    {
+      "path": "runtime/fix2/small-qualification/full54.stderr",
+      "source": "C:\\file-native-packing-20261020\\fix2\\small-qualification\\full54.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/fix2/small-qualification/full54.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\small-qualification\\full54.stdout",
+      "bytes": 35176,
+      "sha256": "72d2ba7897f964423d7190cdbaf7d34e2fbc6c5d4a07aee86e5440501b91ade1"
+    },
+    {
+      "path": "runtime/fix2/small-qualification/guard.py",
+      "source": "C:\\file-native-packing-20261020\\fix2\\small-qualification\\guard.py",
+      "bytes": 11177,
+      "sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68"
+    },
+    {
+      "path": "runtime/fix2/small-qualification/independent.py",
+      "source": "C:\\file-native-packing-20261020\\fix2\\small-qualification\\independent.py",
+      "bytes": 12875,
+      "sha256": "6d376a8e0d6714d682158fc14cc4dd71ec433246d9222eb5d35d6daec99b3d65"
+    },
+    {
+      "path": "runtime/fix2/small-qualification/strict24.stderr",
+      "source": "C:\\file-native-packing-20261020\\fix2\\small-qualification\\strict24.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/fix2/small-qualification/strict24.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\small-qualification\\strict24.stdout",
+      "bytes": 44,
+      "sha256": "9c6f4d75a8078ee8b096456d8742fa0ed9389fd947111e0ec517d8963ece90c4"
+    },
+    {
+      "path": "runtime/fix2/small-qualification/strict_supplement.py",
+      "source": "C:\\file-native-packing-20261020\\fix2\\small-qualification\\strict_supplement.py",
+      "bytes": 5052,
+      "sha256": "6708b2a1cd14e5e00121ffe3afacdfd5cd2eb35823a0ae336d882ef80d7d6d67"
+    },
+    {
+      "path": "runtime/fix2/small-qualification/summary.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\small-qualification\\summary.json",
+      "bytes": 1431,
+      "sha256": "c7ce3a736a28558ebb17381ad3e8729601cf21ab64cde6b241edd1925a0c31b5"
+    },
+    {
+      "path": "runtime/fix2/strict-supplement/events.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\strict-supplement\\events.json",
+      "bytes": 8726,
+      "sha256": "10b19bca5f72913ad36a4194de5a29cd0ff9639c38571bdd3675270418f80de6"
+    },
+    {
+      "path": "runtime/fix2/strict-supplement/summary.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\strict-supplement\\summary.json",
+      "bytes": 2394,
+      "sha256": "8d6eb048f4765431d0471344e24acc76b0169cd8ecf56288f8b398e39708b799"
+    },
+    {
+      "path": "runtime/fix2/unit-tests/cargo.stderr",
+      "source": "C:\\file-native-packing-20261020\\fix2\\unit-tests\\cargo.stderr",
+      "bytes": 2723,
+      "sha256": "6e3b15fea079b8d6072c539a4fa4ce7c346fb82a66476f5b67f90b34e1ce7bd5"
+    },
+    {
+      "path": "runtime/fix2/unit-tests/cargo.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\unit-tests\\cargo.stdout",
+      "bytes": 918,
+      "sha256": "f9ab2b0e3136cb827273643b76dbc9f6f76ca80c958fbb58c470c965a01b92eb"
+    },
+    {
+      "path": "runtime/fix2/unit-tests/file_native_incremental-50bbacae6623bd61-list.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\unit-tests\\file_native_incremental-50bbacae6623bd61-list.stdout",
+      "bytes": 22,
+      "sha256": "414c144fa67f1df75f7b14a69af5641637772e81c4c3fa0a171e3228adbb922e"
+    },
+    {
+      "path": "runtime/fix2/unit-tests/file_native_incremental-59093b51f757fd16-list.stdout",
+      "source": "C:\\file-native-packing-20261020\\fix2\\unit-tests\\file_native_incremental-59093b51f757fd16-list.stdout",
+      "bytes": 346,
+      "sha256": "2832ca60d2f58493bcbea8b2b35463bfebf984f1bb6526093e4bf40b85de70be"
+    },
+    {
+      "path": "runtime/fix2/unit-tests/harness-source.py",
+      "source": "C:\\file-native-packing-20261020\\fix2\\unit-tests\\harness-source.py",
+      "bytes": 3567,
+      "sha256": "17702e378bea8295d4afd2b446e65bc4262ecee0634089acc7c61d6ed48dfad0"
+    },
+    {
+      "path": "runtime/fix2/unit-tests/prospective-admission.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\unit-tests\\prospective-admission.json",
+      "bytes": 749,
+      "sha256": "f46603cad1aa3bcbb3a7455ba87441b6dd99ce0d1c0878a944e4dccdbe2af9e2"
+    },
+    {
+      "path": "runtime/fix2/unit-tests/summary.json",
+      "source": "C:\\file-native-packing-20261020\\fix2\\unit-tests\\summary.json",
+      "bytes": 5401,
+      "sha256": "2764cdb8e568d8506ee3a2697ad3823b23d1a2a0c1df7078dd83fc4742c2a3e3"
+    },
+    {
+      "path": "runtime/long-matrix-fixed2/events/events.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix-fixed2\\events\\events.json",
+      "bytes": 331611,
+      "sha256": "2a9579dca137780d35fa16d45c786a89f981e7582680260cdb12a0f7ac07e196"
+    },
+    {
+      "path": "runtime/long-matrix-fixed2/measurement-source.py",
+      "source": "C:\\file-native-packing-20261020\\long-matrix-fixed2\\measurement-source.py",
+      "bytes": 3399,
+      "sha256": "ba33963106ab5d53dfca418a7cf85b37e58a6c9afdeec43a4c8dba903d323e20"
+    },
+    {
+      "path": "runtime/long-matrix-fixed2/summary.json",
+      "source": "C:\\file-native-packing-20261020\\long-matrix-fixed2\\summary.json",
+      "bytes": 356473,
+      "sha256": "38f3bf3550419a1015cda650ad0c78771dc12662e336e032b6718fdacfbe2d36"
+    },
+    {
+      "path": "runtime/receipts/B-shell-after-fix.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\B-shell-after-fix.json",
+      "bytes": 2327,
+      "sha256": "ebd856a2a43aed3bc81985bb62a6903470e17fb49dccacf7b04118256cdcf6a9"
+    },
+    {
+      "path": "runtime/receipts/B-shell-after-fix.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\B-shell-after-fix.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/B-shell-after-fix.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\B-shell-after-fix.stdout",
+      "bytes": 376,
+      "sha256": "d2a2ab34b1fd82f920e88cd594ccdcf0cf8b00e30845943078170ace236f2b66"
+    },
+    {
+      "path": "runtime/receipts/B-shell-before-fix-v2.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\B-shell-before-fix-v2.json",
+      "bytes": 2266,
+      "sha256": "12abfc0c3c19a159bda5bad861a582b27b58e1d8d313bc5ef4389ebbb6d03021"
+    },
+    {
+      "path": "runtime/receipts/B-shell-before-fix-v2.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\B-shell-before-fix-v2.stderr",
+      "bytes": 549,
+      "sha256": "6598f75c839c46fd3d588e40e80b80758149fa80c47a76c4bb392cad0f5cdf82"
+    },
+    {
+      "path": "runtime/receipts/B-shell-before-fix-v2.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\B-shell-before-fix-v2.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/B-shell-before-fix-v3.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\B-shell-before-fix-v3.json",
+      "bytes": 2316,
+      "sha256": "21b315ca4dc74bd08ef113e4701d8cf41a4938cf03dd6ed10441009afc5d32a2"
+    },
+    {
+      "path": "runtime/receipts/B-shell-before-fix-v3.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\B-shell-before-fix-v3.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/B-shell-before-fix-v3.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\B-shell-before-fix-v3.stdout",
+      "bytes": 373,
+      "sha256": "76be7d3b041731aaf09d33d0621cee46fb27eb310176c78955846d03c1f47bbf"
+    },
+    {
+      "path": "runtime/receipts/B-shell-before-fix.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\B-shell-before-fix.json",
+      "bytes": 2266,
+      "sha256": "c5005c4f8481510e8e153de72eb4938131b838bff9bd0fc8200cc6df291cc112"
+    },
+    {
+      "path": "runtime/receipts/B-shell-before-fix.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\B-shell-before-fix.stderr",
+      "bytes": 1030,
+      "sha256": "23d2164c913e16133edb0692b294592a384c082ce6741220410334ac48192a82"
+    },
+    {
+      "path": "runtime/receipts/B-shell-before-fix.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\B-shell-before-fix.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/archive-unit-sequencing-proposal.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\archive-unit-sequencing-proposal.json",
+      "bytes": 2097,
+      "sha256": "7c48560e94d3b3ddc28f17623b1998fbb9e4077007f4f07025c0feccc8ffad2f"
+    },
+    {
+      "path": "runtime/receipts/artifact-archive-XZ.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-archive-XZ.json",
+      "bytes": 3293,
+      "sha256": "a82ef4bf8d63a6155af2ac604569c5b7a8a61cefaf22d4d8f92ba3975d596a23"
+    },
+    {
+      "path": "runtime/receipts/artifact-archive-XZ.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-archive-XZ.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/artifact-archive-XZ.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-archive-XZ.stdout",
+      "bytes": 1030,
+      "sha256": "4317171dcc246e86bf7087aef547e4aa602df2200d43199a7f2e8c23dbef3bc5"
+    },
+    {
+      "path": "runtime/receipts/artifact-archive.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-archive.json",
+      "bytes": 2146,
+      "sha256": "953bce88db218b5a712fe09ab478a4b909fbd0ad70c47915c6da4168ebc9d2de"
+    },
+    {
+      "path": "runtime/receipts/artifact-archive.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-archive.stderr",
+      "bytes": 826,
+      "sha256": "a7f3a4e8c54e9dc23f42e5be018fc74d1daaba9c3d1a381b2255c5b1a149beb7"
+    },
+    {
+      "path": "runtime/receipts/artifact-archive.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-archive.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/artifact-reclaim-guard.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-reclaim-guard.json",
+      "bytes": 2252,
+      "sha256": "a0b1ff82ed925f34968c2890e8fc2b5a5972bc1ef0e1edf52deb967bc18fd92e"
+    },
+    {
+      "path": "runtime/receipts/artifact-reclaim-guard.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-reclaim-guard.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/artifact-reclaim-guard.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-reclaim-guard.stdout",
+      "bytes": 976,
+      "sha256": "7d59eea0451869eaded7cea366571bfe8dfac7f0ce7a7988112707ebac8780e9"
+    },
+    {
+      "path": "runtime/receipts/artifact-reclaim-plan-guard.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-reclaim-plan-guard.json",
+      "bytes": 2244,
+      "sha256": "b45726531bdc57069605d812d0603d8db980ccddfeb56f285fe4b40e8d8ba61f"
+    },
+    {
+      "path": "runtime/receipts/artifact-reclaim-plan-guard.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-reclaim-plan-guard.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/artifact-reclaim-plan-guard.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-reclaim-plan-guard.stdout",
+      "bytes": 960,
+      "sha256": "2006edc5f3bf7cea4aea44cfd1cfddb3bd49bf0d522cb942fe12b1027dfc468d"
+    },
+    {
+      "path": "runtime/receipts/artifact-reclaim-postcheck.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-reclaim-postcheck.json",
+      "bytes": 1115,
+      "sha256": "901506d34d44517bdccda1c22d065d14d030db5004413fadf95764a8662dab9e"
+    },
+    {
+      "path": "runtime/receipts/artifact-reclaim-source-quiescence.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-reclaim-source-quiescence.json",
+      "bytes": 3650,
+      "sha256": "a6a64a36f2f1a591d434b9eec247486b50a2e555cd6b66a2c263b56814fd14d3"
+    },
+    {
+      "path": "runtime/receipts/artifact-reclaim.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-reclaim.json",
+      "bytes": 974,
+      "sha256": "ca29c22bbad4dcbe71ca5e3b414f3156b5813eb2f5d593c9b2db09d580e418dc"
+    },
+    {
+      "path": "runtime/receipts/artifact-reclaim.json.jsonl",
+      "source": "C:\\file-native-packing-20261020\\receipts\\artifact-reclaim.json.jsonl",
+      "bytes": 146773,
+      "sha256": "fb5866c7d424808933d637f3f1130e80b8760e243e34c45f9a71be846f9437a8"
+    },
+    {
+      "path": "runtime/receipts/final-small-qualification.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\final-small-qualification.json",
+      "bytes": 5896,
+      "sha256": "87ca106a116d787af2177557b5eb6392473cea9bd4ec598c7f266cfca90b975e"
+    },
+    {
+      "path": "runtime/receipts/final-small-qualification.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\final-small-qualification.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/final-small-qualification.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\final-small-qualification.stdout",
+      "bytes": 1433,
+      "sha256": "d29c21d74cdbab703054d6755767652e3303fc46f5953c58562f68441ab499ae"
+    },
+    {
+      "path": "runtime/receipts/final-source-small-return.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\final-source-small-return.json",
+      "bytes": 2698,
+      "sha256": "76ef49f0e8bbdd75cfad0bd3a45e0d0357383bf3744c7d0a8bae48e1054b8353"
+    },
+    {
+      "path": "runtime/receipts/final-unit-tests.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\final-unit-tests.json",
+      "bytes": 2757,
+      "sha256": "3dd1dc17e513f1368890edcf562e7005998f38fb151e005ed54acb65a8797e39"
+    },
+    {
+      "path": "runtime/receipts/final-unit-tests.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\final-unit-tests.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/final-unit-tests.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\final-unit-tests.stdout",
+      "bytes": 1679,
+      "sha256": "e702f89a852c4c7a48cbdf6110cd8c27022f8670a23e5fe7885a52866a3b0e02"
+    },
+    {
+      "path": "runtime/receipts/fix2-build.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\fix2-build.json",
+      "bytes": 2609,
+      "sha256": "7a9209783c88dc47ebbb43a5506d40be1e4e5de9dedc1eb19eb7b39a2988420e"
+    },
+    {
+      "path": "runtime/receipts/fix2-build.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\fix2-build.stderr",
+      "bytes": 1734,
+      "sha256": "695ce79dfc54da119135a0f63d51ce14a4f78b37de82f7e514c97c3640d93532"
+    },
+    {
+      "path": "runtime/receipts/fix2-build.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\fix2-build.stdout",
+      "bytes": 387,
+      "sha256": "54e7bc0afbfe5cc65af17d975a3ac5c7ce2606bc1248430285330031f7454cc6"
+    },
+    {
+      "path": "runtime/receipts/fix2-regression.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\fix2-regression.json",
+      "bytes": 2672,
+      "sha256": "908971d89ca20768f1f858aa59a4af2d0252222671f39b513bf7f55f6086e1dd"
+    },
+    {
+      "path": "runtime/receipts/fix2-regression.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\fix2-regression.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/fix2-regression.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\fix2-regression.stdout",
+      "bytes": 1458,
+      "sha256": "98e797da6defa22e5ebe14a50394b32371da0fff04a5f78ce6b90de03019b574"
+    },
+    {
+      "path": "runtime/receipts/fixed-P0-readonly.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\fixed-P0-readonly.json",
+      "bytes": 4287,
+      "sha256": "c57b4dcfb51da445869c15f69666642d1315dc08af7f1dac1fb259af49b981f6"
+    },
+    {
+      "path": "runtime/receipts/fixed-P0-readonly.stderr",
+      "source": "C:\\file-native-packing-20261020\\receipts\\fixed-P0-readonly.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/receipts/fixed-P0-readonly.stdout",
+      "source": "C:\\file-native-packing-20261020\\receipts\\fixed-P0-readonly.stdout",
+      "bytes": 1027,
+      "sha256": "40aa76477917df44c566dbbdb72bae0000ee22f63082bfd599e67ecdcce09a41"
+    },
+    {
+      "path": "runtime/receipts/service-stop-reconciliation.json",
+      "source": "C:\\file-native-packing-20261020\\receipts\\service-stop-reconciliation.json",
+      "bytes": 1675,
+      "sha256": "69ef2a8aded01a8d365fad6fa364fdc0686a9c6bd8b83c9c0e19fd1d23c536f1"
+    },
+    {
+      "path": "source/archive_artifacts.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\archive_artifacts.py",
+      "bytes": 6010,
+      "sha256": "4812184c4e1d077f9e8cc3815e7ee7775772235f00a44069dfa45abe7f490c5f"
+    },
+    {
+      "path": "source/archive_artifacts_xz.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\archive_artifacts_xz.py",
+      "bytes": 6113,
+      "sha256": "8d9a7e2cc29223c560cf146e7a5f5f075ddf17f6076dcab2ba04ad37f9ca6a58"
+    },
+    {
+      "path": "source/b_shell_reproducer.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\b_shell_reproducer.py",
+      "bytes": 2605,
+      "sha256": "fe8d45fb9d21b5ff946248b8e57577d1f2126902cb7e12c215685f48d3f74458"
+    },
+    {
+      "path": "source/capsule.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\capsule.py",
+      "bytes": 19536,
+      "sha256": "b19f61524a6fb7baeadfaf82b32191ccf4f491d00541039c6aaf665af0f0a2ca"
+    },
+    {
+      "path": "source/driver.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\driver.py",
+      "bytes": 3304,
+      "sha256": "6e45ef7892a2702ea6e8992102d06b472164e01a15dbae28efcfbb7cc9121aa0"
+    },
+    {
+      "path": "source/final_small_qualification.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\final_small_qualification.py",
+      "bytes": 3739,
+      "sha256": "5d392048bc96a8a5445a1e143f8d0bfc51ec2e41f97e65dc00bf32e8d55ce887"
+    },
+    {
+      "path": "source/final_unit_tests.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\final_unit_tests.py",
+      "bytes": 3567,
+      "sha256": "17702e378bea8295d4afd2b446e65bc4262ecee0634089acc7c61d6ed48dfad0"
+    },
+    {
+      "path": "source/fix2_build.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\fix2_build.py",
+      "bytes": 2013,
+      "sha256": "1874b355489644b2ed6f1cf42ac18da6086f55a2bfa0ac56c2742ca96dcc5023"
+    },
+    {
+      "path": "source/fix2_checkpoint.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\fix2_checkpoint.py",
+      "bytes": 4863,
+      "sha256": "e1f3c604b5e52942480cca17f2cd10389eeda88abbc4fcbbfec174af77e36733"
+    },
+    {
+      "path": "source/fix2_regression.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\fix2_regression.py",
+      "bytes": 7331,
+      "sha256": "5385233d18dcaa52f0ba81aaf50a948f26e72563c6754a8c2fc2420550556297"
+    },
+    {
+      "path": "source/fixed_P0_readonly.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\fixed_P0_readonly.py",
+      "bytes": 3399,
+      "sha256": "ba33963106ab5d53dfca418a7cf85b37e58a6c9afdeec43a4c8dba903d323e20"
+    },
+    {
+      "path": "source/guard.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\guard.py",
+      "bytes": 11177,
+      "sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68"
+    },
+    {
+      "path": "source/independent.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\independent.py",
+      "bytes": 12875,
+      "sha256": "6d376a8e0d6714d682158fc14cc4dd71ec433246d9222eb5d35d6daec99b3d65"
+    },
+    {
+      "path": "source/reclaim_archived_targets.ps1",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\reclaim_archived_targets.ps1",
+      "bytes": 6077,
+      "sha256": "2eb4e232c3865e439caffac1f99ff8fa96057137fcd8208514663bdd9b4818df"
+    },
+    {
+      "path": "source/selected_once_copy.ps1",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\selected_once_copy.ps1",
+      "bytes": 2146,
+      "sha256": "65eb08be1ae44fd138aaba24d24d5014c3be499c9a6ca017b48b45fe8ffa5bc4"
+    },
+    {
+      "path": "source/strict_supplement.py",
+      "source": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\strict_supplement.py",
+      "bytes": 5052,
+      "sha256": "6708b2a1cd14e5e00121ffe3afacdfd5cd2eb35823a0ae336d882ef80d7d6d67"
+    }
+  ],
+  "expanded_file_bytes": 2356291,
+  "archive_bytes": 272678,
+  "archive_sha256": "3f8c0bb435118d48457602c791a062250f5e6df6bee1c2fdedbfe774427a30fb",
+  "round_trip_verified": true,
+  "large_fixture_and_artifact_archives": "preserved local paths and complete SHA-bound manifests; not duplicated into Git",
+  "old_P0_evidence": "separate immutable 4cb checkpoint; final-source reader qualification separately bound"
+}
