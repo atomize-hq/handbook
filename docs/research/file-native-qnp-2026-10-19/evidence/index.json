@@ -79,6 +79,10 @@
     "bytes": 1018,
     "sha256": "e912f76609787a7b621f7602e7f83f1a79222067937fe8ecad440f02137a9a05"
   },
+  "coordinator-p-native-restore-checkpoint-detect.txt": {
+    "bytes": 2135,
+    "sha256": "f866c5ec4d0e579c414758e9c94868e9bfc6455ebb836865fd1ac1c0e25a418f"
+  },
   "coordinator-p-postcleanup-detect-changes.txt": {
     "bytes": 2135,
     "sha256": "f866c5ec4d0e579c414758e9c94868e9bfc6455ebb836865fd1ac1c0e25a418f"
@@ -159,6 +163,10 @@
     "bytes": 2149,
     "sha256": "6ed27551e02b03d506071a4c7f936bbcada0503dec889d6af83877da23993b60"
   },
+  "p-final-native-resource-reallocation.json": {
+    "bytes": 786,
+    "sha256": "2d334afbcc1744996416794eecba1c76a3fd295df2326cf3431164d8cf3564e9"
+  },
   "p-fixed-candidate-old-counterexample.json": {
     "bytes": 6669,
     "sha256": "009335071518ae1bcd2fad20ba00b3bcef4c875c4bd877d0e4a65d929a141450"
@@ -191,6 +199,10 @@
     "bytes": 394,
     "sha256": "1226d117dc1466305d82cef06a236c07aa0b7f401773da1b6cbb85cbb1ae7fcc"
   },
+  "p-linux-final-qualification-map.json": {
+    "bytes": 38003,
+    "sha256": "ec53160ad948ef177cbcf2eaa2facdb64d398a105c67b731a98e9695781c413d"
+  },
   "p-linux-final-recovery-child-receipts.json": {
     "bytes": 169437,
     "sha256": "2d7f4aa7d9477b16bdff2ccf0283cb0361fd8b5bee663d4acaa54eb2c1cf6103"
@@ -206,6 +218,14 @@
   "p-linux-final-source-unit-remap-parent-review.json": {
     "bytes": 7413,
     "sha256": "24bf6f65202d404a5682e4e9faa05e5523ea343eb604f4d560fa7fee3e9a33a2"
+  },
+  "p-linux-fresh-F-parent-raw-review.json": {
+    "bytes": 4569,
+    "sha256": "3e9b3d314bbddd85a31d1db4f1c4d2c24f5a8e973144e453993efae400f9c877"
+  },
+  "p-linux-native-return-binding.json": {
+    "bytes": 489,
+    "sha256": "f506ddad56f1a9a33baaec204f7cd176d0ed51901fb94c63ac1bfad3bd57311e"
   },
   "p-linux-partial-final-closeout-closeout.json": {
     "bytes": 5003,
@@ -263,9 +283,25 @@
     "bytes": 362,
     "sha256": "e5ee6d6149702c4db0aa1e522910a93c0ebcb9a1e198d26e90593b433a335fb0"
   },
+  "p-linux-three-root-parent-verification.txt": {
+    "bytes": 926,
+    "sha256": "bc2b3f6b27e6e334f57afb7121da4261d919112a7168659553fad9b5fc773a3c"
+  },
+  "p-linux-three-root-reclamation.json": {
+    "bytes": 3276,
+    "sha256": "5d093e58d4f25e15bf85980b0b92e09d213e96deccd83215ea71fc36a8ad81e2"
+  },
+  "p-macos-build-failures-and-guard-review.json": {
+    "bytes": 1542,
+    "sha256": "dfdb61225a71ebab7f358dd4647ea6c335d86aff54f0d67c4a51cf5bd16f36d3"
+  },
   "p-macos-build-reservation-reallocation.json": {
     "bytes": 1350,
     "sha256": "8e70937feb32ebf6f70ec6daf7de56f6adb870eb2131e579860b378d1bbe2f9a"
+  },
+  "p-macos-build-supervisor-retry-review.json": {
+    "bytes": 1050,
+    "sha256": "87d750ed7cfffde40b603c0c78ce67f936e2a9b98af7fd26a645bebdfb8a13e2"
   },
   "p-macos-isolated-preparation-reservation.json": {
     "bytes": 934,
@@ -287,6 +323,14 @@
     "bytes": 1526,
     "sha256": "8041755b5665a161e825ef94038b7804aa03459aeaba1c596b2f44c4a1f490a5"
   },
+  "p-macos-reviewed-build-supervisor-v3.py": {
+    "bytes": 19092,
+    "sha256": "68b6f2e588bd606f28af47e1a82c546137eda06b8397f05dc5fe7ef745c739d7"
+  },
+  "p-macos-reviewed-build-supervisor-v4.py": {
+    "bytes": 19760,
+    "sha256": "eab01192c6665c0c70e920f20b0f219a32b5c2237e2867a02ca7809ce4452158"
+  },
   "p-macos-reviewed-build-supervisor.py": {
     "bytes": 18653,
     "sha256": "8bb745ac95cb18d63bef4af0f4573a4bb2e53d2d0d2bfb56143f4a3684095700"
@@ -306,6 +350,34 @@
   "p-p0-and-native-preflight-admission.json": {
     "bytes": 2056,
     "sha256": "eff0f060a6a650e0d061585fc2f5cf633e07b25158f0a9a7f5baa95fd32d400c"
+  },
+  "p-packed-capture-parent-stream-verification.txt": {
+    "bytes": 575,
+    "sha256": "42137ea59765870fa5b13970a96f438a4f0418c984053e46258e1e7df21e6a76"
+  },
+  "p-packed-restored-pre-successor-independent.json": {
+    "bytes": 1480,
+    "sha256": "05c7b6ecb770c430802d65daf7bad9d3e1e2d7160b7a626898d2bbee5a34015a"
+  },
+  "p-packed-restored-reopen-guard.json": {
+    "bytes": 3517,
+    "sha256": "4d86f2267667aa1ba2e280c5bd4677b4713a30752bd11ee0cf3628b352e517b0"
+  },
+  "p-packed-restored-reopen.json": {
+    "bytes": 240,
+    "sha256": "0102d4a32f82e360eeaaab697ae9cc97d65e242612c620b6bc0502a469dcd5d1"
+  },
+  "p-packed-restored-successor-preservation.json": {
+    "bytes": 108,
+    "sha256": "19a33b5ed1fdb1f5b7d1ad1e6541923785c6abab185e1daa47a5e24cb556566e"
+  },
+  "p-packed-restored-successor.json": {
+    "bytes": 5395,
+    "sha256": "32213f27d333dff7f5c7f16dafed2e9e6a82a80d89726215c90ef5c1e4a1bf53"
+  },
+  "p-packed-restored-verify-guard.json": {
+    "bytes": 3776,
+    "sha256": "646a06fdd54a46c4ddf8d823fb00b5d7931bfed3257ad2e9d0c44e8091c5bbb4"
   },
   "p-preservation-admission.json": {
     "bytes": 3391,

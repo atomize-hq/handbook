@@ -1,0 +1,17 @@
+{
+  "first_attempt": "failed before Cargo because ps_group counted own ps probe",
+  "first_failure_preserved": true,
+  "v2": "proposal only, exact probe PID excluded; validator passed after separate preserved validation-harness failure",
+  "parent_found_second_retry_issue": "existing empty private run-home would fail unconditional mkdir",
+  "v3_full_code_bytes": 19092,
+  "v3_full_code_sha256": "68b6f2e588bd606f28af47e1a82c546137eda06b8397f05dc5fe7ef745c739d7",
+  "parent_reconstructed_full_hash_equal": true,
+  "v3_only_changes": "owned receipt/target/frozen v3 paths; exact ps probe PID exclusion; assert and reuse existing empty ordinary canonical private run-home",
+  "v3_proposal_sha256": "6ada1a53eba322fd318e5c6e479e51586699d4f35b6e09d9d01e77bdc6fda394",
+  "same_original_go_utc": "2026-10-20T06:22:00Z",
+  "same_original_functional_cutoff_utc": "2026-10-20T06:32:00Z",
+  "same_original_closeout_utc": "2026-10-20T06:37:00Z",
+  "corrected_attempt_GO_utc": "2026-10-20T06:26:26Z",
+  "result": null,
+  "clock_reset": false
+}

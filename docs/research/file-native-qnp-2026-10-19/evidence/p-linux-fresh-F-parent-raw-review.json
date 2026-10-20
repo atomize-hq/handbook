@@ -1,0 +1,171 @@
+{
+  "events": 282,
+  "exits": {
+    "0": 252,
+    "86": 19,
+    "2": 11
+  },
+  "actions": {
+    "init": 25,
+    "lifecycle": 51,
+    "dump": 41,
+    "publish": 62,
+    "audit": 23,
+    "cancel": 4,
+    "packet": 4,
+    "prepare": 4,
+    "refresh": 29,
+    "resolve": 12,
+    "select": 4,
+    "resume": 15,
+    "inspect": 6,
+    "checkpoint": 2
+  },
+  "maximum_child_seconds": 6.0961281741037965,
+  "summary": {
+    "platform": "Linux-6.16.8-1-MANJARO-x86_64-with-glibc2.42",
+    "binary": "/home/spenser/file-native-p-linux-20261020/bin/candidate-linux-final",
+    "binary_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+    "cases": [
+      {
+        "case": "navigation-and-operational-backup",
+        "mode": "A",
+        "n": 16,
+        "status": "success"
+      },
+      {
+        "case": "navigation-and-operational-backup",
+        "mode": "A",
+        "n": 128,
+        "status": "success"
+      },
+      {
+        "case": "navigation-and-operational-backup",
+        "mode": "B",
+        "n": 16,
+        "status": "success"
+      },
+      {
+        "case": "navigation-and-operational-backup",
+        "mode": "B",
+        "n": 128,
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-plan",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-preserved",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-file",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-namespace",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-before-complete",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-complete",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "up",
+        "phase": "refresh-namespace-preserved",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-plan",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-preserved",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-file",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-namespace",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-before-complete",
+        "status": "success"
+      },
+      {
+        "case": "namespace-interruption-correcting-successor",
+        "direction": "down",
+        "phase": "refresh-complete",
+        "status": "success"
+      },
+      {
+        "case": "checkpoint-transfer-retire-repeat-gc",
+        "mode": "A",
+        "status": "success"
+      },
+      {
+        "case": "half-preparation-backup-recovery",
+        "mode": "A",
+        "status": "success"
+      },
+      {
+        "case": "checkpoint-transfer-retire-repeat-gc",
+        "mode": "B",
+        "status": "success"
+      },
+      {
+        "case": "half-preparation-backup-recovery",
+        "mode": "B",
+        "status": "success"
+      },
+      {
+        "case": "impossible-final-namespace",
+        "status": "expected refusal"
+      },
+      {
+        "case": "skipped-or-selected-once",
+        "mode": "A",
+        "status": "success"
+      },
+      {
+        "case": "skipped-or-selected-once",
+        "mode": "B",
+        "status": "success"
+      }
+    ],
+    "events": 282,
+    "seconds": 172.497405604925
+  },
+  "raw_events_match_all_282_child_action_exit_receipts": true
+}

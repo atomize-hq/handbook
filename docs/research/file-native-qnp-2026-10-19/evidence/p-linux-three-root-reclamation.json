@@ -1,0 +1,94 @@
+{
+  "epoch": 1792477253.8126116,
+  "status": "EXACT_THREE_VERIFIED_CASE_ROOTS_RECLAIMED",
+  "deleted_roots": [
+    {
+      "canonical_root": "/home/spenser/file-native-p-linux-20261020/final-qualification/fixtures",
+      "archive_label": "final-qualification-fixtures",
+      "verified_absent": true,
+      "logical_bytes_released": 169004770,
+      "files_released": 13619,
+      "directories_removed": 6972
+    },
+    {
+      "canonical_root": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture",
+      "archive_label": "recovery-bootstrap-fixture",
+      "verified_absent": true,
+      "logical_bytes_released": 345029,
+      "files_released": 57,
+      "directories_removed": 45
+    },
+    {
+      "canonical_root": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture-complete",
+      "archive_label": "recovery-complete-fixture",
+      "verified_absent": true,
+      "logical_bytes_released": 46475413,
+      "files_released": 5185,
+      "directories_removed": 2716
+    }
+  ],
+  "actual_release": {
+    "bytes": 215825212,
+    "files": 18861,
+    "directories": 9733
+  },
+  "sole_archive": {
+    "path": "/home/spenser/file-native-p-linux-20261020/preservation-three-20261020T060930Z/three-roots.tar.gz",
+    "bytes": 7702241,
+    "sha256": "d20d83d160af8dd38c9b0430d81a7e5d0296e7ff4198cf0f2ffa47645febfbdb",
+    "members_verified": 28594,
+    "logical_bytes_verified": 215825212,
+    "stream_EOF_CRC_verified": true,
+    "post_tar_zero_padding_drained_bytes": 0
+  },
+  "inventory": {
+    "path": "/home/spenser/file-native-p-linux-20261020/preservation-three-20261020T060930Z/inventory.jsonl",
+    "bytes": 6243337,
+    "sha256": "9a22bdf55e8ccb94b7229765a0d2e68ffd0f800168bc38af11dadb28d71cb354",
+    "rows": 28594,
+    "format": "sorted UTF-8 JSONL; explicit directories; bytes and SHA256 for each regular file"
+  },
+  "archive_inventory_unchanged": true,
+  "all_noncase_files_unchanged": true,
+  "noncase_file_count": 2689,
+  "original_protected_files": 2681,
+  "bindings": {
+    "final_source145_core18_match": true,
+    "old_source139_match": true,
+    "frozen_bins": {
+      "candidate-linux": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe",
+      "candidate-linux-final": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b"
+    },
+    "protected_QN_sources": [
+      {
+        "root": "/home/spenser/file-native-n-linux-20261019",
+        "source_files": 163,
+        "match": true
+      },
+      {
+        "root": "/home/spenser/file-native-q-linux-20261019-final",
+        "source_files": 95,
+        "match": true
+      }
+    ]
+  },
+  "zstd_sha256": "d03364aeedd46783c2f2ae4aae83f728bd1c8d2c5a6e31e5205bd95939f711c7",
+  "native_before_deletion": {
+    "bytes": 266392828,
+    "files": 21553
+  },
+  "native_after_deletion_before_this_receipt": {
+    "bytes": 50567616,
+    "files": 2692
+  },
+  "native_free_bytes": 24999591936,
+  "clocks": {
+    "receipt_epoch": 1792477190,
+    "functional_epoch": 1792477490,
+    "closeout_epoch": 1792477670
+  },
+  "quiescence_before_after": true,
+  "parent_independent_verification_receipt": "C:/file-native-qnp-20261019/linux-three-parent-verify.txt",
+  "no_engine_build_test_Cargo_restore": true,
+  "global_P_pass": null
+}

@@ -1,0 +1,22 @@
+{
+  "utc": "2026-10-20T06:26:26Z",
+  "components_bytes": {
+    "baseline": 38756059924,
+    "old_Mac_metadata": 2097152,
+    "parent_future": 16777216,
+    "Windows_P": 2684354560,
+    "Linux_closed_P": 83886080,
+    "Mac_P": 268435456,
+    "internal_closeout_reserve": 1073741824
+  },
+  "prospective_total_bytes": 42885352212,
+  "ceiling_bytes": 42949672960,
+  "unallocated_bytes": 64320748,
+  "parent_gross_external_and_changed_Git_current_bytes": 7363120,
+  "parent_reason": "native raw/source preservation returns and final integration; allocate before copies",
+  "Linux_actual_bytes": 64284587,
+  "Linux_final_return_reserved_bytes": 2097152,
+  "Linux_actual_released_bytes": 215825212,
+  "no_assumed_release": true,
+  "new_functional_work_admitted": false
+}

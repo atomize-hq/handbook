@@ -1,0 +1,2 @@
+{"status": "PARENT_INDEPENDENT_FN0P1_STREAM_AND_ORIGINAL_FILES_PASS", "transport_sha256": "2fabd1c2439fc95a37a0411c99025bfb5646dee855b6ed0e879fd190e35e324b", "inventory_sha256": "0974f4a1dac1f13618105b9fca425b2a56c99528accecb5255f0d4ec6515b9b5", "manifest_sha256": "3b8f1b875a6b567cb386be34f4b3f7442f9e3538d8a58fbac524cf1473777281", "files": 5807, "logical_bytes": 592458971, "whole_gzip_EOF": true, "complete_current_source_pathset_and_hashes_match": true, "SELECTED_STORE_unchanged": true, "archive_total_bytes": 314297593, "seconds": 30.75, "restore_performed": false}
+

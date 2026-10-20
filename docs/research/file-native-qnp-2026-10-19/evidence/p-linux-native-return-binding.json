@@ -1,0 +1,13 @@
+{
+  "archive_bytes": 1115241,
+  "archive_sha256": "6c41ff72856c5bcb0d602fc7e0272060cb44f008d0b535288611acf096ecb7c9",
+  "members": 43,
+  "raw_bytes": 1855985,
+  "source": "exact native bytes read-only SSH, hash-bound against native qualification map",
+  "full_manifest": "p-linux-final-qualification-map.json",
+  "parent_read_source": [
+    "final-qualification/actor-v3.py",
+    "recovery-only-20261020T054348Z/worker-v2.py"
+  ],
+  "whole_fixture_archive_not_copied": true
+}

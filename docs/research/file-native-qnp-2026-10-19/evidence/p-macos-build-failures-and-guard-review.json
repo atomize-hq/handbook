@@ -1,0 +1,28 @@
+{
+  "utc": "2026-10-20T06:33:36Z",
+  "Mac_original_stage_start": "2026-10-20T06:22:00Z",
+  "Mac_original_stage_end": "2026-10-20T06:32:00Z",
+  "status": "FAILED native build unqualified; unit5 NONSTARTED",
+  "V1_failure": "own ps probe included in closure assertion before Cargo",
+  "V2": "unexecuted corrected probe proposal; separate failed validator mock and successful actual validator preserved",
+  "V3_failure": "Cargo101 host libc build-script link missing System; explicit existing SDK verified afterward",
+  "V4_code_sha256": "eab01192c6665c0c70e920f20b0f219a32b5c2237e2867a02ca7809ce4452158",
+  "V4_failure": "live target census FileNotFoundError for vanished temporary rmeta; finalization killpg after TERM raised EPERM",
+  "V4_worker_PGID": null,
+  "V4_RSS": null,
+  "later_closure_observations": [
+    "2026-10-20T06:31:09.557346Z",
+    "2026-10-20T06:31:35.811034Z"
+  ],
+  "later_native_tools_or_helpers_observed": [],
+  "no_signal_needed_in_later_closure_scan": true,
+  "current_Mac_actual_bytes": 34812279,
+  "V4_target_bytes": 7648731,
+  "V3_target_bytes": 277070,
+  "old_source_QN_tools_private_shared_nonDB_and_SDK_match": true,
+  "DB_writer_attribution": "UNKNOWN",
+  "next_stage": "new preparation only, <=5min/8min closeout within original live P6h; harmless own-group watchdog test and one-pass coherent transient-aware census proposal; no build admitted",
+  "original_P_functional_cutoff": "2026-10-20T07:55:16Z",
+  "original_P_closeout": "2026-10-20T08:25:16Z",
+  "global_P_pass": false
+}

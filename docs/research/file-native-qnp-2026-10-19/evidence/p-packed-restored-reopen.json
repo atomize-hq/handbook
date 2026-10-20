@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "retired_refusals": 101,
+  "events": 111,
+  "original_outcomes_and_intent_checks": true,
+  "selected_unchanged": true,
+  "fresh_local_disposable_authority": false,
+  "imported_disposable_authority": false
+}
