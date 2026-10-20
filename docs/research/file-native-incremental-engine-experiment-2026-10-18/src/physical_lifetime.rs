@@ -127,6 +127,8 @@ pub(crate) struct Retired {pub descriptor:Descriptor,pub pack_done:bool,pub inde
 #[derive(Clone,Serialize,Deserialize)]
 #[serde(deny_unknown_fields)]
 pub(crate) struct Work {
+    #[serde(default,skip_serializing_if="Option::is_none")]
+    pub discovery:Option<crate::rolling::Discovery>,
     pub version:u32,pub store_id:String,pub physical_parent:String,pub transition_parent:Option<String>,pub birth_claims:Vec<String>,pub generation:Generation,pub older:Vec<Generation>,
     // Descriptor+ordinal cursors stream the legacy whole indexes. No key array,
     // predecessor-plan chain or one permanent file per activation is retained.
@@ -152,6 +154,7 @@ fn metadata_path(name:&str)->bool{
     }
 }
 pub(crate) fn validate_work(w:&Work)->Result<()>{
+    if let Some(d)=&w.discovery{crate::rolling::validate(d)?;}
     if !crate::objects::valid_hash(&w.physical_parent)||w.birth_claims.len()>64||w.birth_claims.iter().any(|id|!crate::model::safe_id(id))||w.transition_parent.as_ref().is_some_and(|h|!crate::objects::valid_hash(h))||w.version!=2||!crate::model::safe_id(&w.generation.id)||w.generation.ordinal==0||!crate::objects::valid_hash(&w.generation.catalog)||w.generation.packs.len()>64||w.older.len()>=MAX_GENERATIONS||w.jobs.len()>MAX_JOBS||w.retired.len()>MAX_JOBS||w.garbage.len()>MAX_JOBS{return Err("quota:physical-bookkeeping-bound".into());}
     let mut ids=std::collections::BTreeSet::new();
     for g in &w.older {
