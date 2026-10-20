@@ -44,6 +44,7 @@ pub fn run(v:Value,m:&mut Metrics,consumer:Option<&str>)->Result<Value>{
         "select"=>store.select_file(v["candidate"].as_str().ok_or("candidate")?,m),
         "resolve"=>if v["intent"].is_string(){store.resolve(v["request_id"].as_str().ok_or("request_id")?,v["intent"].as_str(),m)}
             else{Ok(serde_json::to_value(store.resolve_typed(v["request_id"].as_str().ok_or("request_id")?,m)?)?)},
+        "lookup-bench"=>crate::packing::probe(&store,&v,m),
         "checkpoint"=>store.checkpoint(v["request_id"].as_str().ok_or("request_id")?,m),
         "cancel"=>store.cancel(v["request_id"].as_str().ok_or("request_id")?,m),
         "cancel-signal"=>{

@@ -3,13 +3,13 @@ use crate::{io::{self,Metrics,Result},pack::{self,Descriptor,Index,Key},store::S
 use fs2::FileExt;
 use serde::{Serialize,Deserialize};
 use serde_json::{json,Value};
-use std::{collections::{BTreeMap,BTreeSet},fs::{self,File,OpenOptions},path::{Path,PathBuf},rc::Rc,time::{Duration,Instant}};
+use std::{collections::{BTreeMap,BTreeSet},fs::{File,OpenOptions},path::{Path,PathBuf},rc::Rc,time::{Duration,Instant}};
 
 #[derive(Clone,Serialize,Deserialize)]
 #[serde(deny_unknown_fields)]
 struct Catalog { version:u32,store_id:String,packs:Vec<Descriptor> }
 pub(crate) struct PhysicalRead {
-    _lease:File,root:PathBuf,catalog:Option<Catalog>,cache:BTreeMap<String,Rc<Index>>,cache_bytes:usize,
+    _lease:File,root:PathBuf,catalog:Option<Catalog>,cache:BTreeMap<String,Rc<Index>>,cache_bytes:usize,borrowed_index_bytes:usize,
 }
 fn strict<T:serde::de::DeserializeOwned>(bytes:&[u8])->Result<T>{Ok(serde_json::from_value(crate::api::strict_json(std::str::from_utf8(bytes)?)?)?)}
 fn gate(root:&Path,exclusive:bool)->Result<File> {
@@ -51,16 +51,26 @@ fn catalog(root:&Path,c:&crate::store::StoreConfig,m:&mut Metrics)->Result<Optio
 impl PhysicalRead {
     fn from_lease(root:&Path,lease:File,m:&mut Metrics)->Result<Self> {
         let c=config(root,m)?;let catalog=catalog(root,&c,m)?;
-        Ok(Self{_lease:lease,root:root.into(),catalog,cache:BTreeMap::new(),cache_bytes:0})
+        Ok(Self{_lease:lease,root:root.into(),catalog,cache:BTreeMap::new(),cache_bytes:0,borrowed_index_bytes:0})
     }
-    fn index(&mut self,d:&Descriptor,m:&mut Metrics)->Result<Rc<Index>> {
-        if let Some(index)=self.cache.get(&d.index){m.pack_cache_hits+=1;return Ok(index.clone());}
-        let index=Rc::new(Index::load(&self.root,d,m)?);let bytes=index.memory();
-        if bytes>pack::MAX_CACHE{return Err("integrity:index-cache-bound".into());}
-        while self.cache_bytes+bytes>pack::MAX_CACHE {
+    fn make_room(&mut self,incoming:usize,m:&mut Metrics)->Result<()> {
+        let bound=self.borrowed_index_bytes.checked_add(incoming).ok_or("integrity:index-memory-overflow")?;
+        if bound>pack::MAX_CACHE{return Err("integrity:index-cache-bound".into());}
+        while self.cache_bytes+bound>pack::MAX_CACHE {
             let key=self.cache.keys().next().ok_or("integrity:cache-accounting")?.clone();
             self.cache_bytes-=self.cache.remove(&key).unwrap().memory();
         }
+        // Charged transient upper bound, including an index being loaded and
+        // a verifier's simultaneously live index, not only the final cache.
+        m.pack_cache_peak_bytes=m.pack_cache_peak_bytes.max((self.cache_bytes+bound) as u64);Ok(())
+    }
+    fn index(&mut self,d:&Descriptor,m:&mut Metrics)->Result<Rc<Index>> {
+        if let Some(index)=self.cache.get(&d.index){m.pack_cache_hits+=1;return Ok(index.clone());}
+        let bound=Index::allocation_bound(d)?;
+        // Evict before allocation: the loading index is included in residency.
+        self.make_room(bound,m)?;
+        let index=Rc::new(Index::load(&self.root,d,m)?);let bytes=index.memory();
+        if bytes>bound{return Err("integrity:index-cache-estimate".into());}
         self.cache_bytes+=bytes;m.pack_cache_peak_bytes=m.pack_cache_peak_bytes.max(self.cache_bytes as u64);self.cache.insert(d.index.clone(),index.clone());Ok(index)
     }
     fn locate(&mut self,key:&Key,m:&mut Metrics)->Result<Option<(Rc<Index>,pack::Entry)>> {
@@ -96,6 +106,20 @@ pub(crate) fn exists(path:&Path,m:&mut Metrics)->Result<bool> {
     let mut physical=m.physical.take().ok_or("integrity:physical-capture")?;
     let result=physical.locate(&key,m).map(|v|v.is_some()||path.exists());m.physical=Some(physical);result
 }
+pub(crate) fn probe(store:&Store,v:&Value,m:&mut Metrics)->Result<Value> {
+    let count=v["count"].as_u64().unwrap_or(500);let requests=v["requests"].as_array().ok_or("requests")?;
+    if count==0||count>5000||requests.len()>64{return Err("refused:lookup-sample-bound".into());}
+    let mut rows=vec![];
+    for request in requests {
+        let id=request["id"].as_str().ok_or("lookup-id")?;let category=request["category"].as_str().ok_or("lookup-category")?;
+        let first=Instant::now();let expected=store.resolve(id,None,m)?;let first_ns=first.elapsed().as_nanos();let mut times=Vec::with_capacity(count as usize);
+        let (opens,storage,decoded,hits)=(m.opens,m.pack_storage_bytes,m.pack_decoded_bytes,m.pack_cache_hits);
+        for _ in 0..count {let t=Instant::now();let result=store.resolve(id,None,m)?;times.push(t.elapsed().as_nanos());if result!=expected{return Err("integrity:lookup-outcome-changed".into());}}
+        let mut sorted=times.clone();sorted.sort_unstable();
+        rows.push(json!({"category":category,"id":id,"first_lookup_ns":first_ns,"warm_ns":times,"warm_median_ns":sorted[sorted.len()/2],"warm_p95_ns":sorted[(sorted.len()*95/100).min(sorted.len()-1)],"warm_min_ns":sorted[0],"warm_max_ns":sorted.last(),"result_digest":io::digest(&serde_json::to_vec(&expected)?),"opens":m.opens-opens,"pack_storage_bytes":m.pack_storage_bytes-storage,"decoded_record_bytes":m.pack_decoded_bytes-decoded,"index_cache_hits":m.pack_cache_hits-hits}));
+    }
+    Ok(json!({"rows":rows,"cache_qualification":"same-process warm after separately timed first lookup; device/OS cache eviction unmeasured"}))
+}
 fn all_mapped(m:&mut Metrics)->Result<Vec<Key>> {
     let mut physical=m.physical.take().ok_or("integrity:physical-capture")?;
     let result=(||->Result<Vec<Key>>{
@@ -114,17 +138,50 @@ fn authorized(root:&Path,m:&mut Metrics)->Result<()> {
     let allowed:String=strict(&pack::native(&root.join("DISPOSABLE.json"),65536,m)?)?;
     if allowed!=root.canonicalize()?.to_string_lossy(){return Err("refused:disposable-identity".into());}Ok(())
 }
-fn cohort(store:&Store,m:&mut Metrics)->Result<BTreeSet<Key>> {
-    let mut keys=BTreeSet::new();let head=store.snapshot(m)?;
+fn sharing_refusal(error:&(dyn std::error::Error+'static))->bool {
+    #[cfg(windows)] {return error.downcast_ref::<std::io::Error>().is_some_and(|e|matches!(e.raw_os_error(),Some(32|33)));}
+    #[cfg(not(windows))] {let _=error;false}
+}
+fn cohort(store:&Store,include_attempts:bool,repack:bool,m:&mut Metrics)->Result<BTreeSet<Key>> {
+    let mut keys:BTreeSet<_>=all_mapped(m)?.into_iter().collect();let frozen=!keys.is_empty();
+    if frozen&&!include_attempts&&!repack{return Ok(keys);}
+    let mut attempts=BTreeMap::new();let mut live_owners=BTreeSet::new();let head=store.snapshot(m)?;
     let mut selected=store.membership_entries(m)?;selected.push((head.selected.publication.clone(),head.selected));
     for (_,s) in selected {
         let p=store.publication(&s,m)?;
-        for name in [format!("publications/{}.json",p.id),format!("results/{}.json",p.result_hash),format!("attempt-hints/{}.json",p.attempt)] {
-            keys.insert(Key::new(&name)?);
+        if lifetime::live(&store.root,&s).is_ok(){
+            live_owners.insert(p.attempt.clone());
+            if let Some(packet)=&p.packet_ref{live_owners.insert(packet.attempt.clone());}
+        }
+        if !frozen||keys.contains(&Key::new(&format!("publications/{}.json",p.id))?) {
+            attempts.insert(p.attempt.clone(),(p.request.clone(),p.intent.clone()));
+            if !frozen {
+                for name in [format!("publications/{}.json",p.id),format!("results/{}.json",p.result_hash),format!("attempt-hints/{}.json",p.attempt)] {keys.insert(Key::new(&name)?);}
+            }
         }
     }
-    // Mapped records are already admitted logical bytes; retain their identity.
-    keys.extend(all_mapped(m)?);Ok(keys)
+    let active=lifetime::reservations(&store.root,m)?;
+    if include_attempts {
+        let mut paths=vec![];lifetime::files(&store.root.join("attempts"),&mut paths)?;
+        for path in paths {
+            let relative=path.strip_prefix(&store.root)?.components().map(|c|c.as_os_str().to_string_lossy()).collect::<Vec<_>>().join("/");
+            let Ok(key)=Key::new(&relative) else{continue};
+            if !matches!(key.role(),Some("candidate"|"allocation")){continue;}
+            let attempt=key.0.split('/').nth(1).ok_or("integrity:attempt-key")?;
+            if !attempts.contains_key(attempt)||active.contains_key(attempt)||repack&&!live_owners.contains(attempt){continue;}
+            if key.role()==Some("candidate") {
+                let c:crate::store::Candidate=strict(&io::read(&path,m)?)?;let (request,intent)=&attempts[attempt];
+                if c.version!=2||c.purpose!="publication"||c.attempt!=attempt||c.store_id!=store.config.store_id||&c.request.request!=request||&c.intent!=intent{return Err("integrity:finalized-candidate-binding".into());}
+            } else {
+                #[derive(Deserialize)] #[serde(deny_unknown_fields)] struct Allocation{publication:String,result:String}
+                let a:Allocation=strict(&io::read(&path,m)?)?;
+                if !crate::model::safe_id(&a.publication)||!crate::objects::valid_hash(&a.result){return Err("integrity:finalized-allocation-binding".into());}
+            }
+            keys.insert(key);
+        }
+    }
+    if repack {keys.retain(|key|!matches!(key.role(),Some("candidate"|"allocation"))||key.0.split('/').nth(1).is_some_and(|attempt|live_owners.contains(attempt)));}
+    Ok(keys)
 }
 fn install(root:&Path,stage:&Path,bytes:&[u8],name:&str,hash:&str,m:&mut Metrics)->Result<()> {
     io::mkdir(stage,m)?;let private=stage.join(name);io::write_new(&private,bytes,m)?;
@@ -136,13 +193,52 @@ fn flush(root:&Path,stage:&Path,builder:pack::Builder,m:&mut Metrics)->Result<De
     io::checkpoint("pack-build")?;
     install(root,stage,&pack,&format!("{}.pack",d.pack),&d.pack,m)?;io::checkpoint("pack-index")?;
     install(root,stage,&index,&format!("{}.idx",d.index),&d.index,m)?;io::checkpoint("pack-install")?;
+    let started=Instant::now();let bound=Index::allocation_bound(&d)?;
+    if let Some(physical)=m.physical.as_mut(){physical.borrowed_index_bytes=bound;}
+    let mut physical=m.physical.take().ok_or("integrity:verification-capture")?;physical.make_room(0,m)?;m.physical=Some(physical);
     let checked=Index::load(root,&d,m)?;
     for n in 0..d.records as usize {
         let e=checked.entry(n)?;let raw=checked.read(root,&e,pack::MAX_RAW,m)?;
         let original=io::read(&root.join(&e.key.0),m)?;
         if raw!=original{return Err("integrity:pack-complete-input-correspondence".into());}
     }
-    Ok(d)
+    drop(checked);if let Some(physical)=m.physical.as_mut(){physical.borrowed_index_bytes=0;}
+    m.elapsed("pack-complete-verification",started);Ok(d)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test] fn loading_indexes_evicts_before_transient_allocation(){
+        let root=PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("target").join(io::unique("packing-cache-boundary"));
+        std::fs::create_dir_all(root.join("packs")).unwrap();
+        let lease=OpenOptions::new().create_new(true).read(true).write(true).open(root.join("lease")).unwrap();
+        let mut physical=PhysicalRead{_lease:lease,root:root.clone(),catalog:None,cache:BTreeMap::new(),cache_bytes:0,borrowed_index_bytes:0};let mut metrics=Metrics::default();
+        let mut descriptors=vec![];
+        for part in 0..5 {
+            let mut builder=pack::Builder::new("allocation",0);
+            for n in 0..56000 {let key=Key::new(&format!("attempts/{}-{part}/allocations/{}-{n:06}.json","a".repeat(80),"b".repeat(75))).unwrap();builder.push(key,b"").unwrap();}
+            let (d,p,i)=builder.finish().unwrap();std::fs::write(root.join(format!("packs/{}.pack",d.pack)),p).unwrap();std::fs::write(root.join(format!("packs/{}.idx",d.index)),i).unwrap();descriptors.push(d);
+        }
+        let total:usize=descriptors.iter().map(|d|Index::allocation_bound(d).unwrap()).sum();assert!(total>pack::MAX_CACHE);
+        for d in &descriptors {
+            let index=physical.index(d,&mut metrics).unwrap();assert_eq!(index.entry(0).unwrap().key.0,d.first);
+            assert!(physical.cache_bytes+physical.borrowed_index_bytes<=pack::MAX_CACHE);
+        }
+        assert!(physical.cache.len()<5);assert!(metrics.pack_cache_peak_bytes<=pack::MAX_CACHE as u64);assert!(metrics.pack_cache_peak_bytes>48*1024*1024);
+        // Maintenance verification also pins a separate incoming index while old
+        // catalog indexes are loaded: that storage shares the same budget.
+        physical.borrowed_index_bytes=Index::allocation_bound(&descriptors[0]).unwrap();physical.make_room(0,&mut metrics).unwrap();
+        for d in descriptors.iter().skip(1){physical.index(d,&mut metrics).unwrap();}
+        assert!(physical.cache_bytes+physical.borrowed_index_bytes<=pack::MAX_CACHE);assert!(metrics.pack_cache_peak_bytes<=pack::MAX_CACHE as u64);
+        physical.borrowed_index_bytes=0;
+        let mut changed=descriptors[0].clone();changed.index="f".repeat(64);changed.index_bytes=53;changed.records=1;
+        std::fs::copy(root.join(format!("packs/{}.idx",descriptors[0].index)),root.join(format!("packs/{}.idx",changed.index))).unwrap();
+        let before=physical.cache_bytes;
+        let error=match physical.index(&changed,&mut metrics){Ok(_)=>panic!("changed oversized index accepted"),Err(error)=>error};
+        assert!(error.to_string().contains("pack-file-bound"));assert!(physical.cache_bytes<=before);assert!(metrics.pack_cache_peak_bytes<=pack::MAX_CACHE as u64);
+        eprintln!("cache-boundary-receipt root={} total_index_charge={} transient_charged_peak={} remaining_cache_entries={} changed_index_refused_before_allocation=true",root.display(),total,metrics.pack_cache_peak_bytes,physical.cache.len());
+    }
 }
 pub(crate) fn run(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
     m.store_root=Some(root.into());
@@ -158,16 +254,16 @@ pub(crate) fn run(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
     }
     let protection=store.preparation_gate(false)?;
     let mut journal;
-    if operation=="build" {
+    if operation=="build"||operation=="repack" {
         if root.join("PACKING.json").exists() {
             let old:Journal=strict(&pack::native(&root.join("PACKING.json"),65536,m)?)?;
             if !["registered","complete","aborted-owned"].contains(&old.status.as_str()){return Err("refused:unfinished-maintenance-resume-or-abort".into());}
             io::mkdir(&root.join("packing-journals"),m)?;io::write_new(&root.join(format!("packing-journals/{}.json",old.id)),&io::json(&old)?,m)?;
         }
         let codec=match v["codec"].as_str().unwrap_or("raw"){"raw"=>0,"zstd"=>1,_=>return Err("refused:codec".into())};
-        let guard=store.lock(m)?;lifetime::recover_transfers(&store,m)?;
+        let construction=Instant::now();let guard=store.lock(m)?;lifetime::recover_transfers(&store,m)?;
         let expected_config=io::digest(&pack::native(&root.join("STORE.json"),65536,m)?);
-        let keys=cohort(&store,m)?;let old=m.physical.as_ref().and_then(|p|p.catalog.as_ref()).map_or(vec![],|c|c.packs.clone());drop(guard);
+        let keys=cohort(&store,v["include_attempts"].as_bool().unwrap_or(false),operation=="repack",m)?;let old=m.physical.as_ref().and_then(|p|p.catalog.as_ref()).map_or(vec![],|c|c.packs.clone());drop(guard);
         let reserve=v["reserve_bytes"].as_u64().unwrap_or(256*1024*1024);
         if reserve>4*1024*1024*1024||reserve<1024*1024{return Err("refused:maintenance-reservation-bound".into());}
         journal=Journal{version:1,id:io::unique("packing"),status:"building".into(),expected_config,catalog:None,old,reserved_bytes:reserve,used_bytes:0,deleted_bytes:0,deferred_bytes:0};
@@ -201,14 +297,14 @@ pub(crate) fn run(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
         else{io::write_new(&path,&bytes,m)?;}
         let mut candidate=store.config.clone();candidate.version=2;candidate.catalog=Some(hash.clone());catalog(root,&candidate,m)?;
         journal.catalog=Some(hash);journal.status="installed".into();journal.used_bytes=m.quota_spent;m.quota_limit=None;save(root,&journal,m)?;
-        io::checkpoint("pack-before-catalog")?;
-        m.ns.insert("pack-eligible-records".into(),records as u128);m.ns.insert("pack-eligible-raw-bytes".into(),logical as u128);m.ns.insert("pack-excluded-records".into(),excluded as u128);m.ns.insert("pack-excluded-bytes".into(),excluded_bytes as u128);
+        m.elapsed("pack-construction-inclusive",construction);io::checkpoint("pack-before-catalog")?;
+        m.pack_eligible_records=records;m.pack_eligible_raw_bytes=logical;m.pack_excluded_records=excluded;m.pack_excluded_bytes=excluded_bytes;
     } else if operation=="resume"||operation=="cleanup" {
         journal=strict(&pack::native(&root.join("PACKING.json"),65536,m)?)?;
         if journal.version!=1||journal.catalog.is_none()||!["installed","registered","cleaning","complete"].contains(&journal.status.as_str()){return Err("refused:incomplete-build-owned".into());}
     } else{return Err("refused:packing-operation".into());}
     // Never hold writer.lock while draining API readers (which may need that writer).
-    m.physical=None;io::checkpoint("pack-reader-drain")?;let exclusive=gate(root,true)?;
+    m.physical=None;io::checkpoint("pack-reader-drain")?;let drain=Instant::now();let exclusive=gate(root,true)?;m.elapsed("pack-reader-drain",drain);let registration=Instant::now();
     let guard=store.lock(m)?;let mut c=config(root,m)?;let current_hash=io::digest(&pack::native(&root.join("STORE.json"),65536,m)?);
     let target=journal.catalog.clone().ok_or("integrity:maintenance-catalog")?;
     if c.catalog.as_deref()!=Some(&target) {
@@ -217,9 +313,9 @@ pub(crate) fn run(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
         io::atomic(&root.join("STORE.json"),&io::json(&c)?,m)?;io::checkpoint("pack-catalog")?;
     }
     m.physical=Some(PhysicalRead::from_lease(root,exclusive,m)?);
-    journal.status="registered".into();save(root,&journal,m)?;io::checkpoint("pack-accounting")?;
+    journal.status="registered".into();save(root,&journal,m)?;io::checkpoint("pack-accounting")?;m.elapsed("pack-registration-inclusive",registration);
     if operation=="cleanup"||v["cleanup"].as_bool()==Some(true) {
-        journal.status="cleaning".into();save(root,&journal,m)?;
+        let deletion=Instant::now();journal.status="cleaning".into();save(root,&journal,m)?;
         let keys=all_mapped(m)?;let mut deferred=0u64;
         for key in keys {
             let path=root.join(&key.0);if !path.exists(){continue;}
@@ -228,7 +324,7 @@ pub(crate) fn run(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
             match lifetime::remove_checked(root,&path,m) {
                 Ok(n)=>{journal.deleted_bytes+=n;io::checkpoint("pack-loose-delete")?;},
                 Err(e)=>{
-                    #[cfg(windows)] {if path.exists(){deferred+=path.metadata()?.len();eprintln!("deferred-delete:{}:{e}",path.display());continue;}}
+                    if sharing_refusal(e.as_ref())&&path.exists(){deferred+=path.metadata()?.len();eprintln!("deferred-delete:{}:{e}",path.display());continue;}
                     return Err(e);
                 }
             }
@@ -240,13 +336,13 @@ pub(crate) fn run(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
                 match lifetime::remove_checked(root,&path,m) {
                     Ok(n)=>{journal.deleted_bytes+=n;io::checkpoint("pack-old-delete")?;},
                     Err(e)=>{
-                        #[cfg(windows)] {if path.exists(){deferred+=path.metadata()?.len();eprintln!("deferred-old-delete:{}:{e}",path.display());continue;}}
+                        if sharing_refusal(e.as_ref())&&path.exists(){deferred+=path.metadata()?.len();eprintln!("deferred-old-delete:{}:{e}",path.display());continue;}
                         return Err(e);
                     }
                 }
             }
         }
-        journal.deferred_bytes=deferred;journal.status=if deferred==0{"complete"}else{"cleaning"}.into();save(root,&journal,m)?;
+        journal.deferred_bytes=deferred;journal.status=if deferred==0{"complete"}else{"cleaning"}.into();save(root,&journal,m)?;m.elapsed("pack-deletion-inclusive",deletion);
     }
     drop(guard);drop(protection);Ok(json!({"status":journal.status,"catalog":target,"reserved_bytes":journal.reserved_bytes,"used_bytes":journal.used_bytes,"successfully_deleted_bytes_recorded":journal.deleted_bytes,"deferred_bytes":journal.deferred_bytes,"historical_allocation_owners_unchanged":true}))
 }

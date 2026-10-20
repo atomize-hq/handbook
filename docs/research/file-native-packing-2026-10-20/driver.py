@@ -1,22 +1,29 @@
 """Engine child controls inside the independently watchdog-enforced outer Job."""
-import json,os,subprocess,threading,time
+import json,os,subprocess,threading,time,sys
 from pathlib import Path
 import guard
-EXE=guard.ROOT/'build/release/file-native-incremental.exe'
+EXE=Path(os.environ.get('FILE_NATIVE_P_EXE',str(guard.ROOT/'build/release/file-native-incremental.exe')))
+def rss(pid):
+    if hasattr(guard,'rss'):return guard.rss(pid)
+    try:
+        if sys.platform=='darwin':
+            p=subprocess.run(['ps','-o','rss=','-p',str(pid)],capture_output=True,timeout=2);n=int(p.stdout.strip())*1024;return n,n
+        data=Path(f'/proc/{pid}/status').read_text();values={line.split(':')[0]:int(line.split()[1])*1024 for line in data.splitlines() if line.startswith(('VmRSS:','VmHWM:'))};return values['VmRSS'],values['VmHWM']
+    except (OSError,ValueError,KeyError,subprocess.TimeoutExpired):return None
 class Driver:
     def __init__(self,base):
-        self.base=Path(base);self.base.mkdir(parents=True,exist_ok=False);self.events=[]
+        self.base=Path(base);self.base.mkdir(parents=True,exist_ok=False);self.events=[];self.lock=threading.Lock()
     def call(self,root,action,code=0,env=None,timeout=120,**fields):
         payload=dict(root=str(root),action=action,**fields)
         environ={k:v for k,v in os.environ.items() if not k.startswith('EXP_')};environ['EXP_NAVIGATION']='4'
         if env:environ.update(env)
         p=subprocess.Popen([str(EXE)],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=environ)
         start=time.monotonic();stop=threading.Event();peak=None;missing=0;violations=[]
-        limit=256*1024**2 if action in ['resolve','point','inspect'] else 2*1024**3
+        limit=256*1024**2 if action in ['resolve','point','inspect','lookup-bench'] else 2*1024**3
         def sample():
             nonlocal peak,missing
             while not stop.is_set():
-                n=guard.rss(p.pid)
+                n=rss(p.pid)
                 if n is None:missing+=1
                 else:
                     peak=max(peak or 0,n[1])
@@ -27,7 +34,8 @@ class Driver:
         except subprocess.TimeoutExpired:p.kill();out,err=p.communicate();violations.append('time-censor')
         finally:stop.set();t.join(timeout=2)
         row=dict(input=payload,env=env,exit=p.returncode,seconds=time.monotonic()-start,stdout=out.decode(),stderr=err.decode(),sampled_peak_rss=peak,missing_samples=missing,rss_limit=limit,violations=violations)
-        self.events.append(row);(self.base/'events.json').write_text(json.dumps(self.events,indent=2),encoding='utf-8')
+        with self.lock:
+            self.events.append(row);(self.base/'events.json').write_text(json.dumps(self.events,indent=2),encoding='utf-8')
         assert p.returncode==code and not violations,row
         return json.loads(out) if out else None
     def head(self,root):return json.loads((Path(root)/'SELECTED.json').read_bytes())

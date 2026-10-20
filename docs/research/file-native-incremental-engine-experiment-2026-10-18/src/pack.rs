@@ -44,23 +44,28 @@ fn hash_bytes(hash:&str)->Result<Vec<u8>> {
     if !crate::objects::valid_hash(hash){return Err("integrity:pack-hash".into());}
     (0..64).step_by(2).map(|i|Ok(u8::from_str_radix(&hash[i..i+2],16)?)).collect()
 }
-fn hex(bytes:&[u8])->String{bytes.iter().map(|b|format!("{b:02x}")).collect()}
+fn hex(bytes:&[u8])->String{const H:&[u8]=b"0123456789abcdef";let mut out=String::with_capacity(bytes.len()*2);for b in bytes{out.push(H[(b>>4) as usize] as char);out.push(H[(b&15) as usize] as char);}out}
 pub(crate) fn native(path:&Path,limit:usize,m:&mut Metrics)->Result<Vec<u8>> {
-    let f=File::open(path).map_err(|e|format!("integrity:pack-required:{}:{e}",path.display()))?;
-    if f.metadata()?.len()>limit as u64{return Err("integrity:pack-file-bound".into());}
-    let mut b=Vec::new();f.take(limit as u64+1).read_to_end(&mut b)?;
-    if b.len()>limit{return Err("integrity:pack-file-bound".into());}
+    let mut f=File::open(path).map_err(|e|format!("integrity:pack-required:{}:{e}",path.display()))?;
+    let length=f.metadata()?.len();if length>limit as u64{return Err("integrity:pack-file-bound".into());}
+    let mut b=vec![0;length as usize];f.read_exact(&mut b)?;
+    if f.read(&mut [0])?!=0{return Err("integrity:pack-file-changed".into());}
     m.opens+=1;m.bytes_read+=b.len() as u64;m.pack_storage_bytes+=b.len() as u64;Ok(b)
 }
 pub(crate) struct Index { bytes:Vec<u8>, offsets:Vec<usize>, pub descriptor:Descriptor }
 #[derive(Clone)]
 pub(crate) struct Entry { pub key:Key,pub offset:u64,pub encoded:usize,pub raw:usize,pub hash:String }
 impl Index {
+    pub fn allocation_bound(d:&Descriptor)->Result<usize>{
+        let bytes=usize::try_from(d.index_bytes)?;let offsets=(d.records as usize).checked_mul(std::mem::size_of::<usize>()).ok_or("integrity:index-memory-overflow")?;
+        bytes.checked_add(offsets).and_then(|n|n.checked_add(4096)).ok_or_else(||"integrity:index-memory-overflow".into())
+    }
     pub fn load(root:&Path,d:&Descriptor,m:&mut Metrics)->Result<Self> {
         if !crate::objects::valid_hash(&d.pack)||!crate::objects::valid_hash(&d.index)||d.pack_bytes>MAX_PACK as u64||d.index_bytes>MAX_INDEX as u64||d.records==0||d.records as usize>MAX_RECORDS||d.codec>1 {
             return Err("integrity:pack-descriptor-bound".into());
         }
-        let b=native(&root.join(format!("packs/{}.idx",d.index)),MAX_INDEX,m)?;
+        // Reject a changed file before allocating beyond the incoming charge.
+        let b=native(&root.join(format!("packs/{}.idx",d.index)),usize::try_from(d.index_bytes)?,m)?;
         if b.len()!=d.index_bytes as usize||io::digest(&b)!=d.index||b.len()<HEADER||&b[..8]!=MAGIC||hex(&b[8..40])!=d.pack||u64::from_le_bytes(b[40..48].try_into()?)!=d.pack_bytes||b[48]!=d.codec||u32::from_le_bytes(b[49..53].try_into()?)!=d.records {
             return Err("integrity:index-pack-binding".into());
         }
@@ -92,7 +97,7 @@ impl Index {
         while lo<hi {let mid=(lo+hi)/2;let e=self.entry(mid)?;match e.key.cmp(key){std::cmp::Ordering::Less=>lo=mid+1,std::cmp::Ordering::Greater=>hi=mid,std::cmp::Ordering::Equal=>return Ok(Some(e))}}
         Ok(None)
     }
-    pub fn memory(&self)->usize{self.bytes.capacity()+self.offsets.capacity()*std::mem::size_of::<usize>()+1024}
+    pub fn memory(&self)->usize{self.bytes.capacity()+self.offsets.capacity()*std::mem::size_of::<usize>()+std::mem::size_of::<Self>()+1024+self.descriptor.pack.capacity()+self.descriptor.index.capacity()+self.descriptor.role.capacity()+self.descriptor.first.capacity()+self.descriptor.last.capacity()}
     pub fn read(&self,root:&Path,e:&Entry,limit:usize,m:&mut Metrics)->Result<Vec<u8>> {
         if e.raw>limit||e.raw>MAX_RAW{return Err("integrity:packed-read-bound".into());}
         io::checkpoint("pack-record-located")?;
@@ -113,26 +118,29 @@ pub(crate) fn decode(encoded:&[u8],raw:usize,codec:u8)->Result<Vec<u8>> {
         1=>{
             // One ordinary frame, no skippable/dictionary/concatenated frames.
             if encoded.get(..4)!=Some(&[0x28,0xb5,0x2f,0xfd])||zstd::zstd_safe::find_frame_compressed_size(encoded).map_err(|e|format!("integrity:zstd-frame:{e}"))?!=encoded.len(){return Err("integrity:zstd-single-frame".into());}
-            let mut decoder=zstd::bulk::Decompressor::new()?;
-            decoder.set_parameter(zstd::zstd_safe::DParameter::WindowLogMax(23))?;
-            // Fixed caller-owned output: frame-advertised lengths never allocate.
-            let mut output=vec![0;raw];let n=decoder.decompress_to_buffer(encoded,&mut output[..])?;
-            if n!=raw{return Err("integrity:zstd-raw-length".into());}Ok(output)
+            // Streaming API enforces WindowLogMax on its internal history buffer;
+            // one-shot APIs use caller output as history and do not provide the
+            // same independent window rejection. Never allocate from frame size.
+            let mut decoder=zstd::stream::read::Decoder::new(std::io::Cursor::new(encoded))?;
+            decoder.window_log_max(23)?;
+            let mut output=vec![0;raw];decoder.read_exact(&mut output)?;
+            if decoder.read(&mut [0])?!=0{return Err("integrity:zstd-raw-length".into());}Ok(output)
         },_=>Err("integrity:codec-version".into())
     }
 }
-pub(crate) struct Builder { pub pack:Vec<u8>, entries:Vec<Entry>,raw_bytes:usize,index_bytes:usize,role:String,codec:u8 }
+pub(crate) struct Builder { pub pack:Vec<u8>, entries:Vec<Entry>,raw_bytes:usize,index_bytes:usize,encoded_bound:usize,role:String,codec:u8 }
 impl Builder {
-    pub fn new(role:&str,codec:u8)->Self{Self{pack:vec![],entries:vec![],raw_bytes:0,index_bytes:HEADER,role:role.into(),codec}}
+    pub fn new(role:&str,codec:u8)->Self{Self{pack:vec![],entries:vec![],raw_bytes:0,index_bytes:HEADER,encoded_bound:0,role:role.into(),codec}}
     pub fn is_empty(&self)->bool{self.entries.is_empty()}
     pub fn fits(&self,key:&Key,raw:usize)->bool {
-        self.entries.len()<MAX_RECORDS && self.raw_bytes+raw<=60*1024*1024 && self.index_bytes+key.0.len()+50<=MAX_INDEX
+        self.entries.len()<MAX_RECORDS && self.raw_bytes+raw<=60*1024*1024 && self.index_bytes+key.0.len()+50<=MAX_INDEX && self.encoded_bound+zstd::zstd_safe::compress_bound(raw)<=MAX_PACK
     }
     pub fn push(&mut self,key:Key,raw:&[u8])->Result<()> {
         if raw.len()>MAX_RAW||key.role()!=Some(self.role.as_str())||!self.fits(&key,raw.len())||self.entries.last().is_some_and(|e|e.key>=key){return Err("refused:pack-builder-bound-order".into());}
         let encoded=match self.codec{0=>raw.to_vec(),1=>zstd::bulk::compress(raw,3)?,_=>return Err("integrity:codec-version".into())};
         if self.pack.len()+encoded.len()>MAX_PACK{return Err("refused:encoded-pack-bound".into());}
         self.index_bytes+=key.0.len()+50;
+        self.encoded_bound+=zstd::zstd_safe::compress_bound(raw.len());
         self.entries.push(Entry{key,offset:self.pack.len() as u64,encoded:encoded.len(),raw:raw.len(),hash:io::digest(raw)});
         self.pack.extend(encoded);self.raw_bytes+=raw.len();Ok(())
     }
@@ -154,6 +162,9 @@ mod tests {
         assert!(decode(&frame,1,1).is_err());assert!(decode(&frame,MAX_RAW+1,1).is_err());
         let mut extra=frame.clone();extra.extend(&frame);assert!(decode(&extra,2*1024*1024,1).is_err());
         assert_eq!(decode(&frame,1024*1024,1).unwrap(),vec![7;1024*1024]);
+        let mut large_window=zstd::stream::encode_all(std::io::Cursor::new(b"small payload"),3).unwrap();
+        assert_eq!(large_window[4]&32,0);large_window[5]=0xf8;
+        assert!(decode(&large_window,13,1).is_err());
     }
     #[test] fn typed_keys_exclude_controls_and_active_payloads(){
         for key in ["STORE.json","attempts/a/packet/MANIFEST.json","originals/a","attempts/../candidate.json","/results/a.json"]{assert!(Key::new(key).is_err());}

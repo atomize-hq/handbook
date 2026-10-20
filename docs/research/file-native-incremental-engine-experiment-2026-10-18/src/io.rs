@@ -9,6 +9,7 @@ pub struct Metrics {
     pub(crate) physical:Option<crate::packing::PhysicalRead>,
     pub pack_storage_bytes:u64,pub pack_decoded_bytes:u64,pub pack_records_read:u64,
     pub pack_index_loads:u64,pub pack_cache_hits:u64,pub pack_cache_peak_bytes:u64,pub pack_catalog_bytes:u64,
+    pub pack_eligible_records:u64,pub pack_eligible_raw_bytes:u64,pub pack_excluded_records:u64,pub pack_excluded_bytes:u64,
     #[serde(skip)]
     pub store_root:Option<std::path::PathBuf>,
     #[serde(skip)]

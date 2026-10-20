@@ -3,10 +3,10 @@
 Windows children start suspended, join a kill-on-close Job, then resume. Native
 children start a new session. Never terminates processes outside that group.
 """
-import argparse, ctypes, datetime, json, os, shutil, signal, subprocess, sys, time, threading
+import argparse, ctypes, datetime, json, os, shutil, signal, subprocess, sys, time, threading, hashlib
 from pathlib import Path
 
-ROOT=Path('C:/file-native-packing-20261020')
+ROOT=Path(os.environ.get('FILE_NATIVE_P_ROOT','C:/file-native-packing-20261020'))
 WORK=Path(__file__).resolve().parents[3]
 CUTOFF=datetime.datetime.fromisoformat('2026-10-20T07:55:16+00:00').timestamp()
 def census(path):
@@ -57,13 +57,16 @@ if os.name=='nt':
         return [int.from_bytes(buf.raw[8+i*ctypes.sizeof(ctypes.c_size_t):8+(i+1)*ctypes.sizeof(ctypes.c_size_t)],'little') for i in range(min(n,512))]
 
 def run(argv,seconds,receipt,cwd=None,limit=2*1024**3,allowance=536870912,files=25000,stdin=None,env=None):
+    source_hash=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
     begin=time.time();timeout=min(seconds,max(0,CUTOFF-begin));assert timeout>0,'functional-cutoff'
     receipt=Path(receipt);receipt.parent.mkdir(parents=True,exist_ok=True)
     out=receipt.with_suffix('.stdout').open('wb');err=receipt.with_suffix('.stderr').open('wb')
     data=Path(stdin).read_bytes() if stdin else None
     if os.name=='nt':
         job=K.CreateJobObjectW(None,None);assert job
-        lim=Limits();lim.Basic.Flags=0x2000|0x100|0x200;lim.Process=limit;lim.Job=4*1024**3
+        # Heavy Jobs are serialized. Keep 1 GiB below the host ceiling for this
+        # supervisor, read-only metadata helpers and bounded parent overhead.
+        lim=Limits();lim.Basic.Flags=0x2000|0x100|0x200;lim.Process=limit;lim.Job=3*1024**3
         assert K.SetInformationJobObject(job,9,ctypes.byref(lim),ctypes.sizeof(lim))
         p=subprocess.Popen(argv,cwd=cwd,stdin=subprocess.PIPE if data is not None else subprocess.DEVNULL,stdout=out,stderr=err,env=env,creationflags=0x4)
         if not K.AssignProcessToJobObject(job,w.HANDLE(p._handle)):
@@ -91,7 +94,7 @@ def run(argv,seconds,receipt,cwd=None,limit=2*1024**3,allowance=536870912,files=
         with termination_lock:
             members=group_members()
             if members==[]:return
-            if why is None:why=reason
+            if why is None and reason!='root-completed-group-cleanup':why=reason
             termination['requested_epoch']=time.time();termination['reason']=reason
             kill()
             termination['members_before_termination']=members
@@ -130,6 +133,8 @@ def run(argv,seconds,receipt,cwd=None,limit=2*1024**3,allowance=536870912,files=
     sampler=threading.Thread(target=sample_memory,daemon=True);sampler.start()
     try:
         while group_members()!=[]:
+            if p.poll() is not None:
+                terminate('root-completed-group-cleanup');break
             if time.time()>=next_disk:
                 sample=current();samples.append(sample);next_disk=time.time()+5
                 if sample['total_new_bytes']>allowance or sample['total_new_files']>files or sample['free_bytes']<140*1024**3:
@@ -146,7 +151,7 @@ def run(argv,seconds,receipt,cwd=None,limit=2*1024**3,allowance=536870912,files=
             K.CloseHandle(job)
         else:remaining=[]
         out.close();err.close()
-    result=dict(argv=argv,cwd=str(cwd) if cwd else None,started_utc=datetime.datetime.fromtimestamp(begin,datetime.timezone.utc).isoformat(),seconds=time.time()-begin,cap_seconds=seconds,effective_seconds=timeout,exit=p.returncode,censor=why,independent_deadline=termination or None,group_observations=group_observations,job_query_errors=job_query_errors,per_process_rss_limit=limit,aggregate_rss_limit=4*1024**3,sampled_peak_rss_by_pid=peaks or None,missing_samples=missing,aggregate_sampled_peak_rss=aggregate or None,ownership_samples=samples,final_ownership=current(),group_remaining_before_closure=remaining)
+    result=dict(argv=argv,cwd=str(cwd) if cwd else None,guard_sha256=source_hash,started_utc=datetime.datetime.fromtimestamp(begin,datetime.timezone.utc).isoformat(),seconds=time.time()-begin,cap_seconds=seconds,effective_seconds=timeout,exit=p.returncode,censor=why,independent_deadline=termination or None,group_observations=group_observations,job_query_errors=job_query_errors,process_closure_verified=remaining==[] and job_query_errors==0,per_process_rss_limit=limit,job_commit_limit_bytes=3*1024**3,aggregate_rss_limit=4*1024**3,sampled_peak_rss_by_pid=peaks or None,missing_samples=missing,aggregate_sampled_peak_rss=aggregate or None,ownership_samples=samples,final_ownership=current(),group_remaining_before_closure=remaining)
     receipt.write_text(json.dumps(result,indent=2),encoding='utf-8');return result
 
 if __name__=='__main__':
@@ -156,4 +161,4 @@ if __name__=='__main__':
         p=ROOT/'receipts/ownership-baseline.json';assert not p.exists();r=dict(scopes=ownership(),time_utc=datetime.datetime.now(datetime.timezone.utc).isoformat());p.write_text(json.dumps(r,indent=2));print(json.dumps(r))
     elif n.census:print(json.dumps(current(),indent=2))
     else:
-        argv=n.argv[1:] if n.argv[0]=='--' else n.argv;r=run(argv,n.seconds,n.receipt,n.cwd,n.limit,n.allowance,n.files,n.stdin);print(json.dumps({k:v for k,v in r.items() if k not in ['ownership_samples']},indent=2));sys.exit(0 if r['exit']==0 and not r['censor'] else 1)
+        argv=n.argv[1:] if n.argv[0]=='--' else n.argv;r=run(argv,n.seconds,n.receipt,n.cwd,n.limit,n.allowance,n.files,n.stdin);print(json.dumps({k:v for k,v in r.items() if k not in ['ownership_samples']},indent=2));sys.exit(0 if r['exit']==0 and not r['censor'] and r['process_closure_verified'] else 1)
