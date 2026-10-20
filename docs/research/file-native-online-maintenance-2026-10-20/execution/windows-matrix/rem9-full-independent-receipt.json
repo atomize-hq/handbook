@@ -181,10 +181,11 @@
     }
   ],
   "document_helper": {
-    "sha256": "29756e5dec11994dc934cb03226cdde249ed6bf19a9aee2d47c0a9bb8b2ddc33",
+    "sha256": "ea455b321e50c87dc3c3f508de5715d03245a2034d7bc56d840ba1044baf5a96",
     "execution": "NOT_RUN_WAITING_FINAL_PIN_AND_F07",
     "overlap": "explicit physical-before-selection ready/release barrier; ordinary clock starts after ready; release finally drains maintenance",
-    "percentiles_claimed": false
+    "percentiles_claimed": false,
+    "ordinary_timeout_seconds_both_variants": 45
   },
   "qualification": "historical cd12/rem9 full quiescent oracle pass only; separate authority/online/directory regressions and complete final matrix still required"
 }
