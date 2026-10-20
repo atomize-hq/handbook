@@ -21,8 +21,9 @@ class Driver:
         self.lock = threading.Lock()
         self.last = None
 
-    def call(self, root, action, *, timeout=120, code=0, env=None, **fields):
+    def call(self, root, action, *, timeout=120, code=0, env=None, on_started=None, **fields):
         assert time.time() < FUNCTIONAL, 'functional-cutoff'
+        assert on_started is None or callable(on_started), 'start-callback-must-be-callable'
         payload = dict(root=str(root), action=action, **fields)
         encoded = json.dumps(payload, separators=(',', ':')).encode()
         assert len(encoded) <= 4 * 1024**2
@@ -68,18 +69,39 @@ class Driver:
             stop.set()
             watcher.join(timeout=1)
             raise RuntimeError('engine-resume-failed')
+        resumed_ns = time.perf_counter_ns()
+        start_event = None
+        stdin_started_ns = None
         try:
+            if on_started is not None:
+                positive = rss(process.pid)
+                if process.poll() is not None or positive is None or not 0 < positive[0] <= limit:
+                    raise RuntimeError('positive-start-rss-refusal')
+                start_event = dict(pid=process.pid, resumed_ns=resumed_ns,
+                                   observed_ns=time.perf_counter_ns(), positive_rss=positive[0],
+                                   before_stdin_delivery=True)
+                on_started(dict(start_event))
+            stdin_started_ns = time.perf_counter_ns()
             stdout, stderr = process.communicate(encoded, timeout=min(timeout, max(.001, FUNCTIONAL-time.time())))
         except subprocess.TimeoutExpired:
             process.kill()
             stdout, stderr = process.communicate()
             violations.append('time-censor')
+        except BaseException as error:
+            if process.poll() is None:
+                process.kill()
+            stdout, stderr = process.communicate()
+            violations.append('driver-process-control-error:'+repr(error))
         finally:
             stop.set()
             watcher.join(timeout=1)
+        process_done_ns = time.perf_counter_ns()
         row = dict(input=payload, executable=str(self.executable),
                    executable_sha256=self.binary_sha256, env=env,
                    spawn_total_ns=time.perf_counter_ns()-started,
+                   process_started_ns=started, process_resumed_ns=resumed_ns,
+                   positive_start_event=start_event, stdin_started_ns=stdin_started_ns,
+                   process_done_ns=process_done_ns,
                    exit=process.returncode, stdout=stdout.decode(), stderr=stderr.decode(),
                    initial_suspended_rss=initial_rss[0], observed_peak_rss=peak[0],
                    missing_rss_samples=missing[0], rss_limit=limit, violations=violations)

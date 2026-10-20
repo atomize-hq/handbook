@@ -91,13 +91,18 @@ def physical(commands, phase):
         started = time.perf_counter_ns()
         response = md.call(maintained, timeout=120, **command)
         maintenance_rows.append(dict(phase=phase,index=index,started_ns=started,
-                                    ended_ns=time.perf_counter_ns(),response=response))
+                                    ended_ns=time.perf_counter_ns(),response=response,
+                                    process_started_ns=md.last['process_started_ns'],
+                                    stdin_started_ns=md.last['stdin_started_ns'],
+                                    process_done_ns=md.last['process_done_ns']))
 
 for variant, root in [('without-maintenance', control), ('with-maintenance', maintained)]:
     if variant == 'with-maintenance':
         physical(schedule['before_pair'], 'before_pair')
     rows = []
     for case, ops in operations:
+        positive_launch = []
+        release_ns = []
         readable_reserve = payload if args.mode == 'B' else 0
         budget.check({'document_controls':dict(bytes=readable_reserve+2*1024**2,files=args.count+2000)})
         if variant == 'with-maintenance':
@@ -115,20 +120,40 @@ for variant, root in [('without-maintenance', control), ('with-maintenance', mai
                             raise AssertionError('maintenance-completed-without-overlap-checkpoint')
                         assert time.monotonic() < deadline, 'maintenance-overlap-checkpoint-timeout'
                         time.sleep(.005)
+                    def launch(event):
+                        assert event['positive_rss'] > 0 and event['before_stdin_delivery']
+                        positive_launch.append(event)
+                        release.write_bytes(b'ordinary-engine-positive-start')
+                        release_ns.append(time.perf_counter_ns())
                     started = time.perf_counter_ns()
-                    response = d.publish(root, 'final-document-'+case, ops=ops, timeout=45)
+                    response = d.publish(root, 'final-document-'+case, ops=ops, timeout=45,on_started=launch)
                     ordinary_end = time.perf_counter_ns()
                 finally:
-                    release.write_bytes(b'release-after-ordinary-operation')
+                    if not release.exists():
+                        release.write_bytes(b'release-after-failed-positive-start')
                 future.result()
+            assert len(positive_launch) == len(release_ns) == 1
+            command_rows = [row for row in maintenance_rows if row['phase'] == phase and row['index'] == 0]
+            assert len(command_rows) == 1
+            first_maintenance = command_rows[0]
+            active_overlap = (min(d.last['process_done_ns'],first_maintenance['process_done_ns'])
+                              -max(d.last['stdin_started_ns'],release_ns[0]))
         else:
+            def launch(event):
+                assert event['positive_rss'] > 0 and event['before_stdin_delivery']
+                positive_launch.append(event)
+                (receipts/(label+'-control-'+case+'.positive-start')).write_bytes(b'ordinary-engine-positive-start')
             started = time.perf_counter_ns()
-            response = d.publish(root, 'final-document-'+case, ops=ops, timeout=45)
+            response = d.publish(root, 'final-document-'+case, ops=ops, timeout=45,on_started=launch)
             ordinary_end = time.perf_counter_ns()
+            active_overlap = None
         assert response['result']['status'] == 'published'
         rows.append(dict(case=case, started_ns=started, ended_ns=ordinary_end,
                          engine_ns=response['wall_ns'], spawn_total_ns=d.last['spawn_total_ns'],
-                         response=response))
+                         positive_launch=positive_launch,maintenance_release_ns=release_ns,
+                         ordinary_stdin_started_ns=d.last['stdin_started_ns'],
+                         ordinary_process_done_ns=d.last['process_done_ns'],
+                         concurrent_process_interval_ns=active_overlap,response=response))
     if variant == 'with-maintenance':
         physical(schedule['after_pair'], 'after_pair')
     verified = oracle.verify(root, receipts/(label+'-'+variant+'-independent.json'), quiescent=True)
@@ -141,6 +166,8 @@ assert sha_file(plan['binary']) == plan['binary_sha256']
 assert sha_file(plan['oracle_path']) == plan['oracle_sha256']
 for source in plan['source_files']:
     assert sha_file(source['path']) == source['sha256']
+qualified_overlap = all(row['concurrent_process_interval_ns'] > 0
+                        for row in observations['with-maintenance']['rows'])
 write_json(receipts/(label+'-comparison.json'),dict(source_pin=plan['source_pin'],
            binary_sha256=plan['binary_sha256'],plan_sha256=sha_file(plan_path),
            count=args.count,mode=args.mode,initial_selected=initial_selected,
@@ -148,6 +175,9 @@ write_json(receipts/(label+'-comparison.json'),dict(source_pin=plan['source_pin'
            actual_H_per_variant=3,semantic_operations_per_variant=2,
            full_oracles_pass=True,retained_old_N64_artifacts_unchanged=True,
            maintenance_overlap_checkpoint=plan['maintenance_overlap_checkpoint'],
-           ordinary_operations_executed_between_maintenance_ready_and_release=True,
-           qualification='two matched operations; no percentile claim; actual overlapping intervals retained, availability percentiles belong to concurrency cells'))
-print(json.dumps(dict(status='passed',count=args.count,mode=args.mode,variants=2,actual_H_each=3)))
+           release_at_positive_ordinary_start_before_input=True,
+           qualified_concurrent_process_overlap=qualified_overlap,
+           qualification='two matched operations; no percentile claim; post-release process intervals and engine clocks retained separately; no claim about continuous simultaneous CPU execution; any nonoverlap remains unqualified'))
+print(json.dumps(dict(status='passed' if qualified_overlap else 'unqualified-no-overlap',
+                     count=args.count,mode=args.mode,variants=2,actual_H_each=3)))
+sys.exit(0 if qualified_overlap else 2)
