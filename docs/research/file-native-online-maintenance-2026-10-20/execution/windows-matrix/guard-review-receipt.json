@@ -1,0 +1,161 @@
+{
+  "status": "passed",
+  "summary": {
+    "status": "passed",
+    "cases": [
+      {
+        "case": "normal",
+        "receipt": "C:\\file-native-online-matrix-20261020\\receipts\\guard-smoke-v4\\normal.json",
+        "elapsed_seconds": 4.75
+      },
+      {
+        "case": "blocked-stdin",
+        "receipt": "C:\\file-native-online-matrix-20261020\\receipts\\guard-smoke-v4\\blocked-stdin.json",
+        "elapsed_seconds": 6.157000000006519
+      },
+      {
+        "case": "descendant",
+        "receipt": "C:\\file-native-online-matrix-20261020\\receipts\\guard-smoke-v4\\descendant.json",
+        "elapsed_seconds": 4.109000000054948
+      },
+      {
+        "case": "shared-token-contention",
+        "holder": "C:\\file-native-online-matrix-20261020\\receipts\\guard-smoke-v4\\token-holder.json",
+        "waiter": "C:\\file-native-online-matrix-20261020\\receipts\\guard-smoke-v4\\token-waiter.json",
+        "waited_seconds": 2.615720272064209
+      },
+      {
+        "case": "prospective-cap-refusal",
+        "error": "prospective-category-cap:source:{\"bytes\": 56441, \"files\": 7, \"absolute_actual\": {\"bytes\": 56441, \"files\": 7}, \"reserve_bytes\": 1048577, \"reserve_files\": 0, \"charge_mode\": \"absolute\", \"additive_charge\": true, \"cap_bytes\": 1048576, \"cap_files\": 200}",
+        "child_started": false
+      }
+    ],
+    "guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+    "qualification": "benign Python processes only; no engine, build or corpus"
+  },
+  "raw": [
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\guard-smoke-v4\\blocked-stdin.json",
+      "sha256": "3d197d93cb12daa63288bb938edbf69445ca25d097f1daf33b5c18dbdd6394ba",
+      "censor": "time-censor",
+      "closure_checks": [
+        {
+          "epoch": 1792527205.3516474,
+          "members": []
+        },
+        {
+          "epoch": 1792527205.3728395,
+          "members": []
+        }
+      ],
+      "timing": {
+        "samples": 100,
+        "max_interval_seconds": 0.03200000000651926,
+        "intervals_over_40ms": 0
+      },
+      "rss_rows": 100,
+      "token_wait_seconds": 0.0,
+      "token_contentions": 0,
+      "supervisor_peak_rss": 30265344
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\guard-smoke-v4\\descendant.json",
+      "sha256": "ad5dac36dfc9711be6ffe56ffd6700815ae382a80b9100e977aae5a866c7a59e",
+      "censor": null,
+      "closure_checks": [
+        {
+          "epoch": 1792527209.4560313,
+          "members": []
+        },
+        {
+          "epoch": 1792527209.476699,
+          "members": []
+        }
+      ],
+      "timing": {
+        "samples": 7,
+        "max_interval_seconds": 0.03200000000651926,
+        "intervals_over_40ms": 0
+      },
+      "rss_rows": 7,
+      "token_wait_seconds": 0.0,
+      "token_contentions": 0,
+      "supervisor_peak_rss": 29990912
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\guard-smoke-v4\\normal.json",
+      "sha256": "94080e731a4c9afa2f54b9ab3713650990ac37d7c3e0d9a9d1f2d39775ff484a",
+      "censor": null,
+      "closure_checks": [
+        {
+          "epoch": 1792527199.1979988,
+          "members": []
+        },
+        {
+          "epoch": 1792527199.218687,
+          "members": []
+        }
+      ],
+      "timing": {
+        "samples": 1,
+        "max_interval_seconds": 0.0,
+        "intervals_over_40ms": 0
+      },
+      "rss_rows": 1,
+      "token_wait_seconds": 0.0,
+      "token_contentions": 0,
+      "supervisor_peak_rss": 29560832
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\guard-smoke-v4\\token-holder.json",
+      "sha256": "6758ff28b9cbaed20e16a496a85b600f99069835608b258d914ec8b53bf6b789",
+      "censor": null,
+      "closure_checks": [
+        {
+          "epoch": 1792527218.4737546,
+          "members": []
+        },
+        {
+          "epoch": 1792527218.494009,
+          "members": []
+        }
+      ],
+      "timing": {
+        "samples": 250,
+        "max_interval_seconds": 0.0470000000204891,
+        "intervals_over_40ms": 6
+      },
+      "rss_rows": 250,
+      "token_wait_seconds": 0.0,
+      "token_contentions": 0,
+      "supervisor_peak_rss": 50814976
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\guard-smoke-v4\\token-waiter.json",
+      "sha256": "48d1c6d79f0581043612d3c378788908f07fb6fbf0ee39040b8a696c16472aeb",
+      "censor": null,
+      "closure_checks": [
+        {
+          "epoch": 1792527220.3387554,
+          "members": []
+        },
+        {
+          "epoch": 1792527220.3598945,
+          "members": []
+        }
+      ],
+      "timing": {
+        "samples": 1,
+        "max_interval_seconds": 0.0,
+        "intervals_over_40ms": 0
+      },
+      "rss_rows": 1,
+      "token_wait_seconds": 2.615720272064209,
+      "token_contentions": 26,
+      "supervisor_peak_rss": 50647040
+    }
+  ],
+  "budget_sha256": "7d7d9cf53f76d3f659a818315b5909afbdbbe154be4d77c7db57646e54996969",
+  "historical_v2_failure_preserved": "C:/file-native-online-matrix-20261020/receipts/guard-smoke-v2/blocked-stdin.json",
+  "reconciliation": "C:/file-native-online-matrix-20261020/receipts/guard-v2-no-child-reconciliation.json"
+}
