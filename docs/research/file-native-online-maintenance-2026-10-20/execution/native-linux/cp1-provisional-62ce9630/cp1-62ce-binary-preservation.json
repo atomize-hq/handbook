@@ -1,0 +1,23 @@
+{
+  "source_pin": "62ce963085ac054bcc34eb21c6733b94db160975",
+  "reason": "Preserve provisional binary before replacementpin rebuild in ownednewtarget",
+  "qualification": "provisional build only; samplingcadencegap retained",
+  "epoch": 1792528322.1198173,
+  "before_evidence": {
+    "bytes": 211856,
+    "allocated_bytes": 495616,
+    "files": 155,
+    "directories": 5
+  },
+  "prospective_copy_bytes": 3545928,
+  "binary_path": "/home/spenser/file-native-online-linux-20261020/evidence/cp1-62ce-native-binary",
+  "binary_bytes": 3545928,
+  "binary_sha256": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5",
+  "after_evidence": {
+    "bytes": 3757784,
+    "allocated_bytes": 4042752,
+    "files": 156,
+    "directories": 5
+  },
+  "no_engine_invocation": true
+}

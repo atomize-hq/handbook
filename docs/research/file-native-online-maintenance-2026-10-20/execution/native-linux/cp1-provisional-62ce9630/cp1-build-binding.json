@@ -1,0 +1,44 @@
+{
+  "source_pin": "62ce963085ac054bcc34eb21c6733b94db160975",
+  "qualification": "PROVISIONAL build passed; 25Hz sampling cadence gap recorded; no engine invocation",
+  "source23_before_after_equal": true,
+  "binary": {
+    "path": "/home/spenser/file-native-online-linux-20261020/target/release/file-native-incremental",
+    "bytes": 3545928,
+    "sha256": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5"
+  },
+  "build_receipt_sha256": "21599cd73cc5ff1343ac65aa245ba7e9e3e526403a233dfa5500d1eefb0b45e1",
+  "build_seconds": 23.077325582504272,
+  "rss_peak_heavy": 459894784,
+  "rss_peak_supervisor": 49221632,
+  "rss_max_interval": 0.0580982337705791,
+  "intervals_over_40ms": 234,
+  "closure": true,
+  "scopes": {
+    "source": {
+      "bytes": 594771,
+      "allocated_bytes": 708608,
+      "files": 42,
+      "directories": 12
+    },
+    "target": {
+      "bytes": 126797363,
+      "allocated_bytes": 128069632,
+      "files": 408,
+      "directories": 90
+    },
+    "fixtures": {
+      "bytes": 0,
+      "allocated_bytes": 0,
+      "files": 0,
+      "directories": 0
+    },
+    "evidence": {
+      "bytes": 151364,
+      "allocated_bytes": 335872,
+      "files": 100,
+      "directories": 3
+    }
+  },
+  "native_linked_libraries": "\tlinux-vdso.so.1 (0x00007f3dddaf8000)\n\tlibgcc_s.so.1 => /usr/lib/libgcc_s.so.1 (0x00007f3ddd7aa000)\n\tlibc.so.6 => /usr/lib/libc.so.6 (0x00007f3ddd400000)\n\t/lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007f3dddafa000)\n"
+}

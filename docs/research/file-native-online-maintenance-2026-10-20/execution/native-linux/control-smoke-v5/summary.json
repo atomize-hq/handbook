@@ -1,0 +1,87 @@
+{
+  "status": "passed-control-only",
+  "epoch": 1792528253.2309296,
+  "cases": [
+    {
+      "case": "normal",
+      "exit": 0,
+      "censors": [],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.020101350266486406,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "0b2a3474de0325faad8df95baa921fff88ccfa67a7f005974d28cf37f83f7e49"
+    },
+    {
+      "case": "nested",
+      "exit": 0,
+      "censors": [],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.02018456580117345,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "dfdc7230ab771849d7faf138e38c4d6ac70c4d77a569b89b4a9ed60e72b048ee"
+    },
+    {
+      "case": "orphan-new-session",
+      "exit": 1,
+      "censors": [
+        "root-exit-left-descendants"
+      ],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.02009929995983839,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "8a3e7af19159c55d25fc6c8787824f21d4ee8230edfbe39acf5531f097614cca"
+    },
+    {
+      "case": "timeout",
+      "exit": 1,
+      "censors": [
+        "time-cutoff"
+      ],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.020106278359889984,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "40fce972c084ffc15cf6d746c9769ab09d995ec02cc59d971c6d983b1645fe2a"
+    },
+    {
+      "case": "memory",
+      "exit": 1,
+      "censors": [
+        "heavy-or-process-rss"
+      ],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.020045873709023,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "b7bcd23c390cea4879f59b419792bd60e9bd1fe3e1076e92983c2702a96c8b8c"
+    },
+    {
+      "case": "threaded-children-cpu",
+      "exit": 0,
+      "censors": [],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.020084678195416927,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "b1c8181468af0229fa82f0255409ee11f78aa4ad5596d8d66d1cdf4309c10978"
+    },
+    {
+      "case": "reservation-overrun",
+      "exit": 1,
+      "censors": [
+        "reservation-overrun:fixtures"
+      ],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.02008118014782667,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "2f4f60cea7242a4d46cfff5f9c899bee5e0795dd1f58041bae14dbf33ca2a303"
+    },
+    {
+      "case": "free-refusal",
+      "refused_before_launch": true
+    },
+    {
+      "case": "setup-cutoff",
+      "refused_before_launch": true
+    }
+  ],
+  "guard_sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
+  "no_engine_build_or_invocation": true
+}

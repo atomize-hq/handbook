@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "suite_pin": "CONTROL-ONLY-CAPSULE-NO-ENGINE",
+  "stage": "control",
+  "script": "/home/spenser/file-native-online-linux-20261020/source/fake_capsule.py",
+  "script_sha256": "8c657cda92aabfb020c3fae613787c49f9bc21513c2a477fcdbe7fbeaa8ec815",
+  "manifest_sha256": "1ca9ae2b17055c31f43bcb3251fb51f1b49391539dbb69866ff3bed1d849b387",
+  "executable": {
+    "path": "/home/spenser/file-native-online-linux-20261020/source/fake_protocol.py",
+    "sha256": "79283843f1e669c92c99cea0e4306aff29f00fb3bfa5c693d1c32d9fa5c4c540",
+    "source_pin": "CONTROL-ONLY-CAPSULE-NO-ENGINE"
+  },
+  "guard_sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
+  "guard_nonce": "b7581b2b589f400e81094623b821aecd",
+  "case_mapping": {
+    "CONTROL-ONLY": "fake-protocol-interface-check"
+  },
+  "seconds": 0.07666420936584473,
+  "failure": null,
+  "source_and_binary_verified_before_after": true,
+  "semantic_decoder_substituted": false,
+  "windows_controls_stubbed": false,
+  "closure_authority": "separate-outer-native-guard-receipt"
+}

@@ -1,0 +1,63 @@
+{
+  "status": "passed-control-only",
+  "epoch": 1792526681.388857,
+  "cases": [
+    {
+      "case": "normal",
+      "exit": 0,
+      "censors": [],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.036358478013426065,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "8e23d234b0ea96d2feb840eae05b2f5daa6bcec66c111f53f35dafab88a47c03"
+    },
+    {
+      "case": "nested",
+      "exit": 0,
+      "censors": [],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.03606959991157055,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "a28c6899b124863e0ff5d9e052d1552c1385981e75efb345db434005a3864c8b"
+    },
+    {
+      "case": "orphan-new-session",
+      "exit": 1,
+      "censors": [
+        "root-exit-left-descendants"
+      ],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.03622507303953171,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "b3f8ca3bab2ea115f1f0e11b912cc29430bd43f733f854af4b0e6e29e31b466d"
+    },
+    {
+      "case": "timeout",
+      "exit": 1,
+      "censors": [
+        "time-cutoff"
+      ],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.0346779590472579,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "6893bccf00ca89ba5eca9493956893aaf2cd939851cad602acc0bb0379c92167"
+    },
+    {
+      "case": "memory",
+      "exit": 1,
+      "censors": [
+        "heavy-or-process-rss"
+      ],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.020060451235622168,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "ee044144d2a189a7e4512abddcdee8bcd7a2c397cf4678b0732c9ae138990a62"
+    },
+    {
+      "case": "free-refusal",
+      "refused_before_launch": true
+    }
+  ],
+  "guard_sha256": "dd2f93a43afe79f4123a662a69dd8c3b1d0cbc15d186d46c3f812c5cb1d1bafa",
+  "no_engine_build_or_invocation": true
+}

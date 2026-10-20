@@ -1,0 +1,16 @@
+{
+  "status": "passed-driver-control-only",
+  "no_engine_invocation": true,
+  "fake_peer_sha256": "79283843f1e669c92c99cea0e4306aff29f00fb3bfa5c693d1c32d9fa5c4c540",
+  "driver_sha256": "dfe8ef569b4981a76e199a2763de8a3cf9988bb24785b280fc3662bcd09427ce",
+  "guard_sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
+  "events": 5,
+  "cases": [
+    "resolve",
+    "expected-error-exit",
+    "timeout-refusal",
+    "legacy-call-events",
+    "unbound-override-refusal",
+    "legacy-head-publish-packet"
+  ]
+}

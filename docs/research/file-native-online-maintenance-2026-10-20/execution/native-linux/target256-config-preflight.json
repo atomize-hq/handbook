@@ -1,0 +1,59 @@
+{
+  "status": "passed-config-only-preflight",
+  "epoch": 1792527794.4087558,
+  "guard_sha256": "528aaa3cf4b3df598f28e037f322cbd79fd9888f9f7edda4c31b1a37e9053a35",
+  "prior_config_guard_sha256": "e92aa3ffc7d743d2cffac15319fe00b48c0f522d3ff33a36e2480a4983f1062e",
+  "accepted_logic_sha256": "0c1e8b71aa38fd4c02a9fcfd509e66fd4fb1817c81d83a3d7a73cfcc1818a856",
+  "only_change": "F03target128MiB to256MiB via releasedC2earmark",
+  "limits": {
+    "source": [
+      4194304,
+      1500
+    ],
+    "target": [
+      268435456,
+      5000
+    ],
+    "fixtures": [
+      100663296,
+      30000
+    ],
+    "evidence": [
+      25165824,
+      2000
+    ]
+  },
+  "claim_sha256": "b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570",
+  "claim_path": "parent/admission-44gib-claims/claim-20261020T202101Z.json",
+  "fixture96_claim_sha256": "9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984",
+  "scopes_before_receipt": {
+    "source": {
+      "bytes": 35643,
+      "allocated_bytes": 86016,
+      "files": 16,
+      "directories": 0
+    },
+    "target": {
+      "bytes": 0,
+      "allocated_bytes": 0,
+      "files": 0,
+      "directories": 0
+    },
+    "fixtures": {
+      "bytes": 0,
+      "allocated_bytes": 0,
+      "files": 0,
+      "directories": 0
+    },
+    "evidence": {
+      "bytes": 85053,
+      "allocated_bytes": 253952,
+      "files": 93,
+      "directories": 3
+    }
+  },
+  "free_bytes": 87803576320,
+  "engine_source_pin": null,
+  "no_build_or_engine_or_corpus": true,
+  "heavy_unit_deferred_until_final_pin": true
+}

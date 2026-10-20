@@ -1,0 +1,78 @@
+{
+  "status": "passed-control-only",
+  "epoch": 1792526966.6953719,
+  "cases": [
+    {
+      "case": "normal",
+      "exit": 0,
+      "censors": [],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.02699997602030635,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "381c4bedd473fb6a35b4a1bc128d4adb3369eeec491f5aed9574732a87116c2b"
+    },
+    {
+      "case": "nested",
+      "exit": 0,
+      "censors": [],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.024464264046400785,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "53cefd0b3e2478592fb78d63e67e847f79cc10b2162e4517d72848be90431b8f"
+    },
+    {
+      "case": "orphan-new-session",
+      "exit": 1,
+      "censors": [
+        "root-exit-left-descendants"
+      ],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.027386805042624474,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "e05814566a43f5f9ab9eb9371b42b7643ccf3dbf96d271405daf5af37a08d385"
+    },
+    {
+      "case": "timeout",
+      "exit": 1,
+      "censors": [
+        "time-cutoff"
+      ],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.030959241092205048,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "70c67f7cea881ddea51e5687038fc3b170aa22ba2417578db96bb5578e011eff"
+    },
+    {
+      "case": "memory",
+      "exit": 1,
+      "censors": [
+        "heavy-or-process-rss"
+      ],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.020013039000332355,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "a766064b1da6b33f4c09e19d436efe79b41f2fdbc1dbec4646f49790dcd614aa"
+    },
+    {
+      "case": "reservation-overrun",
+      "exit": 1,
+      "censors": [
+        "reservation-overrun:fixtures"
+      ],
+      "process_closure_verified": true,
+      "memory_max_interval_seconds": 0.024958967696875334,
+      "intervals_over_40ms": 0,
+      "receipt_sha256": "4d8d85c03e5d2fd5813b23b2e49f0b7a5fbf01adacd60bbf63f585332217acb1"
+    },
+    {
+      "case": "free-refusal",
+      "refused_before_launch": true
+    },
+    {
+      "case": "setup-cutoff",
+      "refused_before_launch": true
+    }
+  ],
+  "guard_sha256": "0c1e8b71aa38fd4c02a9fcfd509e66fd4fb1817c81d83a3d7a73cfcc1818a856",
+  "no_engine_build_or_invocation": true
+}

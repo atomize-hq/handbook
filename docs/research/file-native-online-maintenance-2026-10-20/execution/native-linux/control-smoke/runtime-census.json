@@ -1,0 +1,41 @@
+{
+  "epoch": 1792526764.9271288,
+  "root": "/home/spenser/file-native-online-linux-20261020",
+  "scopes": {
+    "source": {
+      "bytes": 18587,
+      "allocated_bytes": 20480,
+      "files": 2,
+      "directories": 0
+    },
+    "target": {
+      "bytes": 0,
+      "allocated_bytes": 0,
+      "files": 0,
+      "directories": 0
+    },
+    "fixtures": {
+      "bytes": 0,
+      "allocated_bytes": 0,
+      "files": 0,
+      "directories": 0
+    },
+    "evidence": {
+      "bytes": 18758,
+      "allocated_bytes": 57344,
+      "files": 23,
+      "directories": 1
+    }
+  },
+  "total": {
+    "bytes": 37345,
+    "allocated_bytes": 77824,
+    "files": 26,
+    "directories": 5
+  },
+  "control_only": true,
+  "engine_source_pin": null,
+  "guard_sha256": "dd2f93a43afe79f4123a662a69dd8c3b1d0cbc15d186d46c3f812c5cb1d1bafa",
+  "summary_sha256": "ca716ef106a9dacc8b71a0d1319f0df68b4e9ce504579e4b17da0098e11840ac",
+  "free_bytes": 87803867136
+}

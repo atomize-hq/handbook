@@ -1,0 +1,7 @@
+{
+  "status": "passed-control-only",
+  "no_engine_invocation": true,
+  "adapter_sha256": "3bafbc8ac45de6ea2e4060d1a04c6fa5fc1ac278080e3ef1ffcececbd52481b7",
+  "driver_sha256": "dfe8ef569b4981a76e199a2763de8a3cf9988bb24785b280fc3662bcd09427ce",
+  "receipt_sha256": "751072ec3517c850a18d696ab155e1176efeac35781acde53f3501b3bfb47cd4"
+}

@@ -1,0 +1,51 @@
+{
+  "epoch": 1792529351.8991764,
+  "status": "adapter-preparation-only-no-new-engine-invocations",
+  "source_hashes": {
+    "native_guard.py": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
+    "native_driver.py": "dfe8ef569b4981a76e199a2763de8a3cf9988bb24785b280fc3662bcd09427ce",
+    "native_capsule_adapter.py": "3bafbc8ac45de6ea2e4060d1a04c6fa5fc1ac278080e3ef1ffcececbd52481b7",
+    "driver_control_smoke.py": "33bd894e46a5401a9b24a68a89992b89cf56e658c93f0d7abfbbb4b04e327942",
+    "capsule_control_smoke.py": "d7d70e4d2f64df71d2f4ed0dabb9eb77a8f98e3c0d9a6e6bd000829547d5e6ef",
+    "fake_protocol.py": "79283843f1e669c92c99cea0e4306aff29f00fb3bfa5c693d1c32d9fa5c4c540",
+    "fake_capsule.py": "8c657cda92aabfb020c3fae613787c49f9bc21513c2a477fcdbe7fbeaa8ec815"
+  },
+  "scopes_before_receipt": {
+    "source": {
+      "bytes": 631232,
+      "allocated_bytes": 802816,
+      "files": 61,
+      "directories": 12
+    },
+    "target": {
+      "bytes": 126797363,
+      "allocated_bytes": 128069632,
+      "files": 408,
+      "directories": 90
+    },
+    "fixtures": {
+      "bytes": 109,
+      "allocated_bytes": 4096,
+      "files": 1,
+      "directories": 5
+    },
+    "evidence": {
+      "bytes": 3961183,
+      "allocated_bytes": 4288512,
+      "files": 174,
+      "directories": 10
+    }
+  },
+  "total_before_receipt": {
+    "bytes": 131389887,
+    "allocated_bytes": 133165056,
+    "files": 645,
+    "directories": 121
+  },
+  "free_bytes": 87681916928,
+  "control_fixture_scope": "Fake selector JSON and emptycontrol directories only; notanenginecorpus",
+  "actual_engine_build_pin": "62ce963085ac054bcc34eb21c6733b94db160975",
+  "engine_units_or_protocol_calls_since_build": 0,
+  "replacement_pin": null,
+  "no_unregistered_supervisors_started_during_heavy": true
+}

@@ -1,0 +1,41 @@
+{
+  "suite_pin": "CONTROL-ONLY-CAPSULE-NO-ENGINE",
+  "guard_sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
+  "executable": {
+    "path": "/home/spenser/file-native-online-linux-20261020/source/fake_protocol.py",
+    "sha256": "79283843f1e669c92c99cea0e4306aff29f00fb3bfa5c693d1c32d9fa5c4c540",
+    "source_pin": "CONTROL-ONLY-CAPSULE-NO-ENGINE"
+  },
+  "source_files": {
+    "fake_capsule.py": {
+      "bytes": 404,
+      "sha256": "8c657cda92aabfb020c3fae613787c49f9bc21513c2a477fcdbe7fbeaa8ec815"
+    },
+    "fake_protocol.py": {
+      "bytes": 565,
+      "sha256": "79283843f1e669c92c99cea0e4306aff29f00fb3bfa5c693d1c32d9fa5c4c540"
+    },
+    "native_capsule_adapter.py": {
+      "bytes": 5750,
+      "sha256": "3bafbc8ac45de6ea2e4060d1a04c6fa5fc1ac278080e3ef1ffcececbd52481b7"
+    },
+    "native_driver.py": {
+      "bytes": 11682,
+      "sha256": "dfe8ef569b4981a76e199a2763de8a3cf9988bb24785b280fc3662bcd09427ce"
+    }
+  },
+  "stages": {
+    "control": {
+      "script": "fake_capsule.py",
+      "driver_interface": "legacy",
+      "argv": [
+        "--base",
+        "/home/spenser/file-native-online-linux-20261020/fixtures/control-capsule-adapter"
+      ],
+      "receipt": "/home/spenser/file-native-online-linux-20261020/evidence/capsule-adapter-control/adapter-receipt.json",
+      "case_mapping": {
+        "CONTROL-ONLY": "fake-protocol-interface-check"
+      }
+    }
+  }
+}
