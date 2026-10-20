@@ -1,13 +1,19 @@
-# Packing experiment — working report
+# Packing experiment — bounded results
 
-Status at 2026-10-20 06:53 UTC: the primary Windows A long-history PZ build,
+Functional closeout: **requested P scope remains incomplete**. The four N8000-B
+comparison cells are **unperformed / time-and-coexistence-censored**; their gates
+are null, not failed-engine outcomes or passes. Final Mac F qualification is also
+time-censored. No functional work continues beyond 07:55:16 UTC.
+
+The primary Windows A long-history PZ build,
 complete independent verification, matched measurements, physical cleanup and
 complete post-cleanup verification passed. Packed operational capture, parent
 independent transport/source verification, fresh byte restore, complete restored
 oracle, read-only reopen and valid successor passed. H1k/H10k record controls and
 the complete final-source Windows F recovery capsule passed. The authentic
-N8000-A baseline passed; its four measurement cells, N8000-B and native
-final-source results are still pending. This is research evidence,
+N8000-A baseline and all four valid matched measurement cells passed their
+correctness oracles. Its low-history file-count gate failed. The authentic
+N8000-B baseline passed, but its comparison cells were not admitted. This is research evidence,
 not approval of a production format or migration.
 
 ## Exact revisions and scope
@@ -175,10 +181,106 @@ including the impossible-final-namespace expected refusal. Its actual source,
 binary, child resources and fresh fixtures are separately preserved from the old
 4cb run. No old result was relabeled as a final-source pass.
 
-## Remaining scope and limits
+## Representative collection and research gates
 
-N8k A/B ordinary-publication gates and final native platform
-results must be reported from actual receipts. No pending stage is a pass.
+All four valid A cells use the same authentic N8000/H8 operational image, six
+original request categories, 500 warm samples per category, 120 fresh starts and
+the same seven real operations: payload, batch payload, label, rename, batch
+rename, explicit path-only move and relationship. Each reached H15. Their seven
+logical state digests match qualified L, and each passed complete semantic,
+source/navigation and full operational capture/source equality checks.
+
+| N8000-A cell | Median complete prepare + select, ms | / qualified L | Frozen ordinary gate |
+|---|---:|---:|---|
+| Qualified L | 370.8002 | 1.000 | pass |
+| New loose | 367.0095 | 0.990 | pass |
+| P0 | 364.7921 | 0.984 | pass |
+| PZ | 386.1715 | 1.041 | pass |
+
+Warm P0/qualified-L ratios are 0.941–1.022; PZ/P0 ratios are 1.006–1.084, so the
+two warm 2× gates pass. New loose tails are measured separately and never
+substitute for the original keys. Exact distributions/counters/RSS are retained.
+
+The frozen eligible cohort is only 28 records / 1,804,278 raw bytes. Both P0 and
+PZ use five packs, five indexes and one catalog: **11 representation files,
+60.7143% reduction — FAIL against the unchanged 95% file rule**. P0 pack/index
+bytes are 1,807,781; PZ is 412,467 (22.8162% of P0), passing compression. This
+negative short-history file result remains separate from the passing long A
+history result. Packing owners/journals/control files are additionally charged
+to whole-store footprint; omitting them cannot improve this failed criterion
+into a pass. B's required loose publication duplicates must also be charged.
+
+The first old-L cell used an invalid explicit path lacking the required
+`docs/item-` prefix. The engine correctly refused `semantic:local-I1` after five
+accepted publications. Its H13 clone, failed events, timings, source snapshot and
+complete lossless archive were preserved separately. No selector was rewound.
+The valid `-path-v2` epoch starts from a fresh authenticated baseline image; the
+pre-publication tuple inventory was checked equal to the original frozen cohort.
+Only the valid complete epoch enters matched tables. Literal source-pin
+clarifications distinguish qualified old baseline creation from the frozen d70
+candidate observer; original manifests/events/snapshots were not overwritten.
+
+## B censor and native qualification
+
+The N8000-B baseline completed genuine initialization and seven publications,
+reached H8, and passed its full 8,000-document oracle, complete capture and both
+worker and parent independent source/transport checks. Its image contains
+24,515 files / 320,288,418 raw bytes; the three archive files total 13,847,818
+bytes. Transport SHA-256 is
+`c5a8f54d0e1c4de85b795d9b4da2a4b8deedfa9c1a0b0e79edd312744aa7af14`.
+Initialization took 96.266 seconds; actual baseline publication costs included
+39.235, 37.187, 37.781 and 38.063 seconds. These are full-generation baseline
+costs and cannot establish any packing-attributable B regression.
+
+Its final guard closed with ownership 2,160,637,250 bytes / 60,730 files. Another
+600,000,000-byte B cell plus 64 MiB archive and 32 MiB returns exceeds the
+2.5 GiB Windows cap while the baseline is retained. Exact reclamation followed
+by seven approximately 39-second publications and full checks could not finish
+within the original remaining interval. Parent retained both the B source store
+and archive and admitted no B comparison cell. No N, history, sample, request or
+pin requirement was reduced; no deadline was extended.
+
+Native Linux/ext4 final-candidate evidence reports five units, four immediate
+A/B probes, 52 packing cases / 267 events, 24 strict cases, eight focused cases /
+25 events, 17 ordinary shell processes and a separate fresh F 24 cases / 282
+events. Three Windows-sharing checks are explicit platform SKIPs. The final
+Linux executable is SHA-256
+`a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b`;
+all 18 core files match d70. Earlier partial/bootstrap failures remain distinct.
+The consolidated native map is retained with exact source, binary, library and
+preservation bindings; it does not claim a global P pass.
+
+Parent's final Mac functional status at its fixed 07:52 cutoff: immediate A/B,
+52 packing cases / 267 events, 24 strict cases, eight focused cases / 25 events
+and all 17 authored Bash processes passed. Fresh final-source F stopped at
+37 / 282 events and is TIME-CENSORED. Overall Mac P qualification is incomplete;
+older N recovery evidence cannot substitute. Shutdown returned EPERM for PGID
+8284 with a zero-RSS row; closure at that original cutoff remains unknown, with
+no completed outer guard receipt. Zero RSS is not proof of closure. Parent's
+later independently checked supplement covers the exact union of 368 recorded
+PGIDs in two native numeric-column observations, both with no rows, at
+07:54:25.479251Z and 07:54:26.071197Z. This establishes eventual process absence;
+it does not turn the original closeout or two unreceipted groups into successful
+guard receipts. Original state/UID fields remain null, with no zombie inference.
+
+Parent matched all 345 engine events to raw child resources and checked all
+366 completed process receipts; their missing-RSS count is zero. Final Mac
+executable SHA-256 is
+`9ae57af7f16a05aa01d79b0aa88ce90b50f7669858548be6933cfc2d0f1c0def`;
+independent library SHA-256 is
+`69d8dee81bccdee425d167300d11431f3c5ecc34a3011400e536aa89f7756189`.
+The 145 source inputs / 18 core files remain d70. Original return archive
+1,119,837 bytes has SHA-256
+`032ab642f612583c6cbefb82fa80b2ff4e7069a1a4c6cdc2d50a346f6f819e61`;
+the 8,985-byte closure supplement is
+`3fb12d38c7b376b4e0b2ceeab03c64c98ab6b81693773cbff0cf1237ff3d84f1`.
+The later parent review is retained separately under `native-evidence/`.
+
+The sealed 695-member raw evidence package is an earlier as-of snapshot that
+correctly recorded Mac closure unknown. Its archive and indexes remain unchanged;
+this report and the separate native closure addendum incorporate the later audit.
+
+No absent stage or native partial phase is a pass.
 Current additional fixture grants are finite and coordinated globally; prospective
 release is never counted before actual deletion. The original functional cutoff
 is 07:55:16 UTC and closeout deadline is 08:25:16 UTC on 2026-10-20.
@@ -190,4 +292,9 @@ remains unsupported. GitNexus does not register this isolated experimental
 worktree, so attempted impact/detect calls remain UNKNOWN with manual traces,
 never a claimed clean graph result. No production adoption is authorized.
 
-Recommendation remains pending the required restore/publication/native results.
+Recommendation: **adjust; do not adopt as a universal replacement**.
+Keep the bounded private PZ prototype and long-history A evidence. The frozen
+short-history file criterion fails, fresh-process index startup is materially
+slower, B publication-control duplicates are necessary, and remaining native/B
+coverage must be reported from actual results. No new activation threshold,
+owner migration or production format is approved by these observations.

@@ -1,0 +1,2002 @@
+{
+  "utc": "2026-10-20T07:53:17.046902+00:00",
+  "status": "INCOMPLETE_OR_FAILED_PREFIX",
+  "phase_results": [
+    {
+      "phase": "immediate",
+      "exit": 0,
+      "resources": {
+        "seconds": 22.550072458107024,
+        "guard": {
+          "pgid": 8473,
+          "peak_group_rss_bytes": 35291136,
+          "peak_process_rss_bytes": 32718848,
+          "samples": 108,
+          "missing_samples": 0,
+          "violations": [],
+          "reason": null,
+          "remaining_group": false,
+          "deadline": 1792482720.0,
+          "native_ps": true,
+          "independent_watchdog_parent_EOF": true,
+          "raw_output_complete": true
+        }
+      }
+    },
+    {
+      "phase": "capsule",
+      "exit": 0,
+      "resources": {
+        "seconds": 1198.0128749590367,
+        "guard": {
+          "pgid": 9506,
+          "peak_group_rss_bytes": 59736064,
+          "peak_process_rss_bytes": 56803328,
+          "samples": 1522,
+          "missing_samples": 0,
+          "violations": [],
+          "reason": null,
+          "remaining_group": false,
+          "deadline": 1792482720.0,
+          "native_ps": true,
+          "independent_watchdog_parent_EOF": true,
+          "raw_output_complete": true
+        }
+      }
+    },
+    {
+      "phase": "strict",
+      "exit": 0,
+      "resources": {
+        "seconds": 20.802122875116765,
+        "guard": {
+          "pgid": 52037,
+          "peak_group_rss_bytes": 34340864,
+          "peak_process_rss_bytes": 32489472,
+          "samples": 17,
+          "missing_samples": 0,
+          "violations": [],
+          "reason": null,
+          "remaining_group": false,
+          "deadline": 1792482720.0,
+          "native_ps": true,
+          "independent_watchdog_parent_EOF": true,
+          "raw_output_complete": true
+        }
+      }
+    },
+    {
+      "phase": "focus",
+      "exit": 0,
+      "resources": {
+        "seconds": 237.5474524591118,
+        "guard": {
+          "pgid": 52601,
+          "peak_group_rss_bytes": 35389440,
+          "peak_process_rss_bytes": 35389440,
+          "samples": 176,
+          "missing_samples": 0,
+          "violations": [],
+          "reason": null,
+          "remaining_group": false,
+          "deadline": 1792482720.0,
+          "native_ps": true,
+          "independent_watchdog_parent_EOF": true,
+          "raw_output_complete": true
+        }
+      }
+    }
+  ],
+  "sequences": {
+    "immediate": {
+      "events": 12,
+      "action_exit_sequence": [
+        {
+          "action": "init",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "init",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "init",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "init",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        }
+      ]
+    },
+    "capsule": {
+      "events": 267,
+      "action_exit_sequence": [
+        {
+          "action": "init",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "checkpoint",
+          "exit": 0
+        },
+        {
+          "action": "prepare",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "refresh",
+          "exit": 86
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "refresh",
+          "exit": 0
+        },
+        {
+          "action": "select",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "refresh",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "inspect",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "point",
+          "exit": 2
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "init",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "checkpoint",
+          "exit": 0
+        },
+        {
+          "action": "prepare",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "select",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "inspect",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "point",
+          "exit": 2
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "init",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "prepare",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "select",
+          "exit": 2
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "init",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "prepare",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "select",
+          "exit": 2
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        }
+      ]
+    },
+    "strict": {
+      "events": 4,
+      "action_exit_sequence": [
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "point",
+          "exit": 2
+        },
+        {
+          "action": "select",
+          "exit": 2
+        }
+      ]
+    },
+    "focus": {
+      "events": 25,
+      "action_exit_sequence": [
+        {
+          "action": "init",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "point",
+          "exit": 2
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 2
+        },
+        {
+          "action": "init",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packing",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        }
+      ]
+    },
+    "recovery": {
+      "events": 37,
+      "action_exit_sequence": [
+        {
+          "action": "init",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "dump",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "dump",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "dump",
+          "exit": 0
+        },
+        {
+          "action": "dump",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "dump",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "cancel",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "packet",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "prepare",
+          "exit": 0
+        },
+        {
+          "action": "refresh",
+          "exit": 86
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "select",
+          "exit": 0
+        },
+        {
+          "action": "resolve",
+          "exit": 0
+        },
+        {
+          "action": "resume",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "audit",
+          "exit": 0
+        },
+        {
+          "action": "dump",
+          "exit": 0
+        },
+        {
+          "action": "inspect",
+          "exit": 2
+        },
+        {
+          "action": "lifecycle",
+          "exit": 2
+        },
+        {
+          "action": "init",
+          "exit": 0
+        },
+        {
+          "action": "lifecycle",
+          "exit": 0
+        },
+        {
+          "action": "dump",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "dump",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "dump",
+          "exit": 0
+        },
+        {
+          "action": "dump",
+          "exit": 0
+        },
+        {
+          "action": "publish",
+          "exit": 0
+        },
+        {
+          "action": "dump",
+          "exit": 0
+        }
+      ]
+    }
+  },
+  "completed_processes": 366,
+  "cutoff_observation": {
+    "functional_cutoff": "2026-10-20T07:52:00Z",
+    "outer_execute_exit": 1,
+    "cutoff_PGID": 8284,
+    "native_ps_at_cutoff": [
+      {
+        "pid": 8284,
+        "ppid": 8254,
+        "rss_bytes": 0
+      }
+    ],
+    "signal_zero_errno": 1,
+    "cutoff_closeout_exception": "PermissionError: [Errno 1] Operation not permitted",
+    "outer_guard_receipt_committed": false,
+    "read_only_owned_process_census_empty_at": "2026-10-20T07:52:26Z",
+    "no_post_cutoff_functional_work": true
+  },
+  "guard_reasons": [],
+  "missing_RSS_samples": 0,
+  "NULL_peak_processes": [],
+  "all_recorded_and_sampled_PGIDs_closed": {
+    "8284": true,
+    "8473": true,
+    "8496": true,
+    "8546": true,
+    "8559": true,
+    "8591": true,
+    "8610": true,
+    "8638": true,
+    "8923": true,
+    "8940": true,
+    "8957": true,
+    "8979": true,
+    "9014": true,
+    "9047": true,
+    "9063": true,
+    "9096": true,
+    "9131": true,
+    "9149": true,
+    "9345": true,
+    "9380": true,
+    "9400": true,
+    "9423": true,
+    "9506": true,
+    "9515": true,
+    "9717": true,
+    "9748": true,
+    "9785": true,
+    "9811": true,
+    "9844": true,
+    "9861": true,
+    "9885": true,
+    "9934": true,
+    "9983": true,
+    "10005": true,
+    "10047": true,
+    "10080": true,
+    "10115": true,
+    "10141": true,
+    "10212": true,
+    "10283": true,
+    "10307": true,
+    "10343": true,
+    "10368": true,
+    "10416": true,
+    "10435": true,
+    "10471": true,
+    "10490": true,
+    "10526": true,
+    "10558": true,
+    "10594": true,
+    "10656": true,
+    "10702": true,
+    "10841": true,
+    "10878": true,
+    "10926": true,
+    "10983": true,
+    "11047": true,
+    "11096": true,
+    "11118": true,
+    "11178": true,
+    "11264": true,
+    "11365": true,
+    "11406": true,
+    "11444": true,
+    "11494": true,
+    "11557": true,
+    "11595": true,
+    "11633": true,
+    "11672": true,
+    "11724": true,
+    "11779": true,
+    "12021": true,
+    "12192": true,
+    "12257": true,
+    "12314": true,
+    "12341": true,
+    "12433": true,
+    "12471": true,
+    "12513": true,
+    "12611": true,
+    "12649": true,
+    "12702": true,
+    "12743": true,
+    "12808": true,
+    "12873": true,
+    "12897": true,
+    "12949": true,
+    "12989": true,
+    "13078": true,
+    "13123": true,
+    "13175": true,
+    "13275": true,
+    "13318": true,
+    "13412": true,
+    "13468": true,
+    "13517": true,
+    "13614": true,
+    "13660": true,
+    "13704": true,
+    "13752": true,
+    "13814": true,
+    "13871": true,
+    "13963": true,
+    "14010": true,
+    "14098": true,
+    "14133": true,
+    "14218": true,
+    "14299": true,
+    "14356": true,
+    "14396": true,
+    "14481": true,
+    "14532": true,
+    "14585": true,
+    "14695": true,
+    "16938": true,
+    "17258": true,
+    "17495": true,
+    "17714": true,
+    "19463": true,
+    "19865": true,
+    "20055": true,
+    "20307": true,
+    "20798": true,
+    "20852": true,
+    "20943": true,
+    "21556": true,
+    "21658": true,
+    "21701": true,
+    "21812": true,
+    "21856": true,
+    "21968": true,
+    "22079": true,
+    "22147": true,
+    "22203": true,
+    "22257": true,
+    "22325": true,
+    "22394": true,
+    "22450": true,
+    "22515": true,
+    "22691": true,
+    "22802": true,
+    "22905": true,
+    "22983": true,
+    "23109": true,
+    "23272": true,
+    "23384": true,
+    "23469": true,
+    "23588": true,
+    "23667": true,
+    "23818": true,
+    "23907": true,
+    "24023": true,
+    "24131": true,
+    "24215": true,
+    "24293": true,
+    "24393": true,
+    "24483": true,
+    "24540": true,
+    "24674": true,
+    "24731": true,
+    "24800": true,
+    "24911": true,
+    "24969": true,
+    "25003": true,
+    "25227": true,
+    "25314": true,
+    "25451": true,
+    "25510": true,
+    "25520": true,
+    "25731": true,
+    "25824": true,
+    "25967": true,
+    "26020": true,
+    "26047": true,
+    "27401": true,
+    "27486": true,
+    "27584": true,
+    "27692": true,
+    "28254": true,
+    "33097": true,
+    "33171": true,
+    "33427": true,
+    "33689": true,
+    "34406": true,
+    "34457": true,
+    "34784": true,
+    "35324": true,
+    "35433": true,
+    "35603": true,
+    "35684": true,
+    "35711": true,
+    "36049": true,
+    "36103": true,
+    "36405": true,
+    "36457": true,
+    "36558": true,
+    "36621": true,
+    "36685": true,
+    "36744": true,
+    "36787": true,
+    "36847": true,
+    "36911": true,
+    "38274": true,
+    "39139": true,
+    "39212": true,
+    "39296": true,
+    "39377": true,
+    "40852": true,
+    "40996": true,
+    "41075": true,
+    "41153": true,
+    "41791": true,
+    "41982": true,
+    "42108": true,
+    "42207": true,
+    "42339": true,
+    "42400": true,
+    "42604": true,
+    "42723": true,
+    "42835": true,
+    "42896": true,
+    "42989": true,
+    "43204": true,
+    "43303": true,
+    "43385": true,
+    "43490": true,
+    "43589": true,
+    "43778": true,
+    "43882": true,
+    "43973": true,
+    "44106": true,
+    "44265": true,
+    "44345": true,
+    "44459": true,
+    "44644": true,
+    "44784": true,
+    "44942": true,
+    "45073": true,
+    "45171": true,
+    "45342": true,
+    "45519": true,
+    "45616": true,
+    "45726": true,
+    "45859": true,
+    "45948": true,
+    "46013": true,
+    "46219": true,
+    "46504": true,
+    "46603": true,
+    "46723": true,
+    "46913": true,
+    "47035": true,
+    "47365": true,
+    "47427": true,
+    "47569": true,
+    "47648": true,
+    "47658": true,
+    "47924": true,
+    "47998": true,
+    "48142": true,
+    "48212": true,
+    "48240": true,
+    "48490": true,
+    "48551": true,
+    "48683": true,
+    "48746": true,
+    "48776": true,
+    "49050": true,
+    "49131": true,
+    "49237": true,
+    "49301": true,
+    "49414": true,
+    "49519": true,
+    "49635": true,
+    "49940": true,
+    "50018": true,
+    "50136": true,
+    "50240": true,
+    "50276": true,
+    "50756": true,
+    "50873": true,
+    "51027": true,
+    "51107": true,
+    "51165": true,
+    "51241": true,
+    "51303": true,
+    "51386": true,
+    "51460": true,
+    "51746": true,
+    "51856": true,
+    "52037": true,
+    "52103": true,
+    "52246": true,
+    "52312": true,
+    "52361": true,
+    "52601": true,
+    "52639": true,
+    "52723": true,
+    "52816": true,
+    "52894": true,
+    "53008": true,
+    "53365": true,
+    "53529": true,
+    "53610": true,
+    "53673": true,
+    "53842": true,
+    "53934": true,
+    "54045": true,
+    "54220": true,
+    "54312": true,
+    "54371": true,
+    "54533": true,
+    "55013": true,
+    "55093": true,
+    "55172": true,
+    "55308": true,
+    "55372": true,
+    "55470": true,
+    "55550": true,
+    "55627": true,
+    "55752": true,
+    "56055": true,
+    "56169": true,
+    "56557": true,
+    "56656": true,
+    "56740": true,
+    "56824": true,
+    "56935": true,
+    "57029": true,
+    "57253": true,
+    "57397": true,
+    "57430": true,
+    "57516": true,
+    "57591": true,
+    "57751": true,
+    "57832": true,
+    "57929": true,
+    "58007": true,
+    "58086": true,
+    "58204": true,
+    "58328": true,
+    "58408": true,
+    "58489": true,
+    "58549": true,
+    "59781": true,
+    "59866": true,
+    "59964": true,
+    "60397": true,
+    "61602": true,
+    "61751": true,
+    "62416": true,
+    "62732": true,
+    "62879": true,
+    "63062": true,
+    "63183": true,
+    "63309": true,
+    "63440": true,
+    "63645": true,
+    "63735": true,
+    "64008": true,
+    "64097": true,
+    "64186": true,
+    "64272": true,
+    "64497": true,
+    "64603": true,
+    "64764": true,
+    "64905": true,
+    "64997": true
+  },
+  "sampled_PGIDs_without_completed_child_receipt": [
+    8284,
+    57397
+  ],
+  "before_after_QN_SDK_match": true,
+  "frozen_exe_sha256": "9ae57af7f16a05aa01d79b0aa88ce90b50f7669858548be6933cfc2d0f1c0def",
+  "native_owned_command_census_empty": true,
+  "after_preservation": {
+    "utc": "2026-10-20T07:53:11.929028+00:00",
+    "source_files_matched": 145,
+    "core_files": 18,
+    "tool_bindings": [
+      {
+        "path": "/Users/spensermcconnell/.rustup/toolchains/1.89.0-aarch64-apple-darwin/bin/rustc",
+        "bytes": 414776,
+        "sha256": "af4a9eb303553510e9d74220636dc4b21f8574ddeab73741bf6b892adc49c21c"
+      },
+      {
+        "path": "/Users/spensermcconnell/.rustup/toolchains/1.89.0-aarch64-apple-darwin/bin/cargo",
+        "bytes": 28655992,
+        "sha256": "798a97c06e6fc3a63f1b7e3141f87e515e6bc8da1527bc32e19ba27d86bb89c5"
+      },
+      {
+        "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "bytes": 141373024,
+        "sha256": "7def90dd8829726686213a747fc5bff1583df933dae5edc55d755479e0bfe00a"
+      }
+    ],
+    "private_registry_files_matched": 1520,
+    "shared_non_DB_files_matched": 1262,
+    "shared_DB_observations_only": {
+      "/Users/spensermcconnell/.cargo/.global-cache": {
+        "bytes": 372736,
+        "sha256": "64596a5f6de8df9cf4b2b8eaaf058cda0c55b9ec80c95b6ae804a20c76405c11",
+        "utc": "2026-10-20T07:53:11.743593+00:00",
+        "attribution": "UNKNOWN"
+      }
+    },
+    "shared_DB_preservation_through_closeout": null,
+    "writer_attribution": "UNKNOWN"
+  },
+  "old_QN": {
+    "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019": {
+      "files": 4606,
+      "bytes": 260604163,
+      "path_size_content_sha256": "dba145130c40e9eecc5b5af7db8bde82688889f8b3d29b0c1825d34bcd37ac64"
+    },
+    "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019": {
+      "files": 20445,
+      "bytes": 449300755,
+      "path_size_content_sha256": "4ef15e58759f9e1f4a05fcf37b512950e62d22fbf0a0c7e58c787248af0190ff"
+    },
+    "/private/tmp/file-native-q-macos-20261019": {
+      "files": 8466,
+      "bytes": 206414667,
+      "path_size_content_sha256": "951a8499b836a4c05b6c8b2303801beddcffaa67b1cfc9810ab85c243668753e"
+    },
+    "/private/tmp/file-native-q-macos-20261019-admission.json": {
+      "files": 1,
+      "bytes": 3979,
+      "path_size_content_sha256": "62d4f928ecf6f423326ff0289ce5d115568a1c49c3d7b5516084281bbf01e4fa"
+    }
+  },
+  "SDK": [
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json",
+      "bytes": 7774,
+      "sha256": "f8d005f09381389167f9e0aeaa169bc9e7dff162ef22ca2fd8e98df7ff1acafe"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.plist",
+      "bytes": 5388,
+      "sha256": "e5c7c40b8c5dc1a9f99f8b9fa51870f8fe180421225b8201d0c4c826aad11bdc"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libSystem.tbd",
+      "bytes": 334178,
+      "sha256": "20cfce043f11a083e2eb6111efe3579919a8082fa4cc912a7bd839af2010ec57"
+    }
+  ],
+  "archive_bindings": {
+    "/private/tmp/file-native-p-macos-20261020/preservation-build-unit-v6/targets.tar.gz": {
+      "bytes": 32603848,
+      "sha256": "163a4e98adcf372701fa8e68e35046b621439dfc0968251c24d926f3e7b0e8de"
+    },
+    "/private/tmp/file-native-p-macos-20261020/preservation-build-unit-v6/unit-fixture.tar.gz": {
+      "bytes": 1035975,
+      "sha256": "f86a392c3447d9657600a94f6a02a8229844cc5ba58900fc3e05b8e0cedddcdd"
+    },
+    "/private/tmp/file-native-p-macos-20261020/preservation-build-unit-v6/full-sorted-inventory.json": {
+      "bytes": 271496,
+      "sha256": "96ef101fde15c26547a4a8a4f57d8efb5a688b83db7c4a81a263ca5f673c18f7"
+    }
+  },
+  "source_manifest_sha256": "0c636670f89bd11086b139b966452d4f852e537d06997aa1f6649af5ad01d29a",
+  "library_sha256": "69d8dee81bccdee425d167300d11431f3c5ecc34a3011400e536aa89f7756189",
+  "corrected_code_sha256": {
+    "config.json": "f3fcfdddf2e993b6ad7b23a01aa3fd14bd06c9d91bea33f87ce641fe992a866a",
+    "control.py": "56fc2ff83fa16f0244e0a8cf8613f4443b49d6733d59513953787534edc0c34c",
+    "actor.py": "efe3751e20332303505b088c3a2afbb7d5ac5a1a714340d3187d4ed767db60a6",
+    "execute.py": "2e221e02d5d65ae7f16950d0983fd479775a7385fd8cceaddb1595a9df66b800",
+    "launch.py": "d715ad93cb2c675e3f033a416c768b54ec32c1f42ce5dd7ed76a47c1bb097587",
+    "ordinary-route.py": "1ec5218d4a165cec2009c6353290d4589cfc2dbe67b228ff48fec901d240c7be",
+    "ordinary-manifest.py": "5491a0fcd4354406edb2e989271b8b9dd884b17ba596619a57771a86d1818a92",
+    "ordinary-copy.sh": "4d0d82cdb01bd81255d5101f38d62b80c047378e996d090e7312ef89bbc69b5e",
+    "ordinary-copy-focus.sh": "4d0d82cdb01bd81255d5101f38d62b80c047378e996d090e7312ef89bbc69b5e"
+  },
+  "ownership_before_return": {
+    "bytes": 184394863,
+    "files": 12937
+  },
+  "functional_cutoff": "2026-10-20T07:52:00Z",
+  "artifact_cutoff": "2026-10-20T08:02:00Z",
+  "original_clocks_unchanged": true
+}

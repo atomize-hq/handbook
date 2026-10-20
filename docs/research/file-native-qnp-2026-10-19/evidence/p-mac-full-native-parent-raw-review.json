@@ -1,0 +1,139 @@
+{
+  "status": "INDEPENDENT_PARENT_RAW_RECEIPTS_MATCHED; OVERALL_MAC_P_INCOMPLETE",
+  "archive_sha256": "032ab642f612583c6cbefb82fa80b2ff4e7069a1a4c6cdc2d50a346f6f819e61",
+  "member_manifest_entries_verified": 46,
+  "all_archive_members": 47,
+  "code_hashes_exact_preapproved": 9,
+  "source_manifest_exact_parent": true,
+  "completed_process_receipts": 366,
+  "engine_events_matched_to_raw_child_resources": {
+    "immediate": 12,
+    "capsule": 267,
+    "strict": 4,
+    "focus": 25,
+    "recovery": 37
+  },
+  "engine_exit_counts": {
+    "0": 281,
+    "86": 23,
+    "2": 41
+  },
+  "max_recorded_engine_group_rss": 22560768,
+  "max_recorded_engine_child_seconds": 38.988699540961534,
+  "completed_receipt_missing_RSS_samples": 0,
+  "unreceipted_sampled_groups": [
+    8284,
+    57397
+  ],
+  "cutoff_observation": {
+    "functional_cutoff": "2026-10-20T07:52:00Z",
+    "outer_execute_exit": 1,
+    "cutoff_PGID": 8284,
+    "native_ps_at_cutoff": [
+      {
+        "pid": 8284,
+        "ppid": 8254,
+        "rss_bytes": 0
+      }
+    ],
+    "signal_zero_errno": 1,
+    "cutoff_closeout_exception": "PermissionError: [Errno 1] Operation not permitted",
+    "outer_guard_receipt_committed": false,
+    "read_only_owned_process_census_empty_at": "2026-10-20T07:52:26Z",
+    "no_post_cutoff_functional_work": true
+  },
+  "native_preservation": {
+    "utc": "2026-10-20T07:53:11.929028+00:00",
+    "source_files_matched": 145,
+    "core_files": 18,
+    "tool_bindings": [
+      {
+        "path": "/Users/spensermcconnell/.rustup/toolchains/1.89.0-aarch64-apple-darwin/bin/rustc",
+        "bytes": 414776,
+        "sha256": "af4a9eb303553510e9d74220636dc4b21f8574ddeab73741bf6b892adc49c21c"
+      },
+      {
+        "path": "/Users/spensermcconnell/.rustup/toolchains/1.89.0-aarch64-apple-darwin/bin/cargo",
+        "bytes": 28655992,
+        "sha256": "798a97c06e6fc3a63f1b7e3141f87e515e6bc8da1527bc32e19ba27d86bb89c5"
+      },
+      {
+        "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "bytes": 141373024,
+        "sha256": "7def90dd8829726686213a747fc5bff1583df933dae5edc55d755479e0bfe00a"
+      }
+    ],
+    "private_registry_files_matched": 1520,
+    "shared_non_DB_files_matched": 1262,
+    "shared_DB_observations_only": {
+      "/Users/spensermcconnell/.cargo/.global-cache": {
+        "bytes": 372736,
+        "sha256": "64596a5f6de8df9cf4b2b8eaaf058cda0c55b9ec80c95b6ae804a20c76405c11",
+        "utc": "2026-10-20T07:53:11.743593+00:00",
+        "attribution": "UNKNOWN"
+      }
+    },
+    "shared_DB_preservation_through_closeout": null,
+    "writer_attribution": "UNKNOWN"
+  },
+  "all_full_completed_phases": [
+    "immediate",
+    "capsule",
+    "strict",
+    "focus"
+  ],
+  "overall_qualification": "INCOMPLETE_F37_OF282",
+  "later_numeric_PGID_audit": {
+    "status": "PASS_PARENT_EXACT_368_GROUP_COVERAGE_IN_BOTH_NATIVE_OBSERVATIONS",
+    "times": [
+      "2026-10-20T07:54:25.479251+00:00",
+      "2026-10-20T07:54:26.071197+00:00"
+    ],
+    "original_cutoff_closure": "UNKNOWN; EPERM remains a failed cutoff closeout",
+    "state_at_original_cutoff": null,
+    "UID_at_original_cutoff": null,
+    "no_zombie_inference": true
+  },
+  "no_complete_outer_guard_receipt": true,
+  "closure_supplement_sha256": "3fb12d38c7b376b4e0b2ceeab03c64c98ab6b81693773cbff0cf1237ff3d84f1",
+  "final_native_binding_and_ownership": {
+    "utc": "2026-10-20T07:58:04.029390+00:00",
+    "nine_approved_wrapper_hashes_unchanged": true,
+    "approved_code_sha256": {
+      "config.json": "f3fcfdddf2e993b6ad7b23a01aa3fd14bd06c9d91bea33f87ce641fe992a866a",
+      "control.py": "56fc2ff83fa16f0244e0a8cf8613f4443b49d6733d59513953787534edc0c34c",
+      "actor.py": "efe3751e20332303505b088c3a2afbb7d5ac5a1a714340d3187d4ed767db60a6",
+      "execute.py": "2e221e02d5d65ae7f16950d0983fd479775a7385fd8cceaddb1595a9df66b800",
+      "launch.py": "d715ad93cb2c675e3f033a416c768b54ec32c1f42ce5dd7ed76a47c1bb097587",
+      "ordinary-route.py": "1ec5218d4a165cec2009c6353290d4589cfc2dbe67b228ff48fec901d240c7be",
+      "ordinary-manifest.py": "5491a0fcd4354406edb2e989271b8b9dd884b17ba596619a57771a86d1818a92",
+      "ordinary-copy.sh": "4d0d82cdb01bd81255d5101f38d62b80c047378e996d090e7312ef89bbc69b5e",
+      "ordinary-copy-focus.sh": "4d0d82cdb01bd81255d5101f38d62b80c047378e996d090e7312ef89bbc69b5e"
+    },
+    "source145_core18_exe_library_unchanged": {
+      "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+      "source145_core18": true,
+      "exe_sha256": "9ae57af7f16a05aa01d79b0aa88ce90b50f7669858548be6933cfc2d0f1c0def",
+      "lib_sha256": "69d8dee81bccdee425d167300d11431f3c5ecc34a3011400e536aa89f7756189",
+      "manifest_sha256": "0c636670f89bd11086b139b966452d4f852e537d06997aa1f6649af5ad01d29a"
+    },
+    "actual_whole": {
+      "bytes": 186776850,
+      "files": 12949
+    },
+    "actual_private": {
+      "bytes": 28017659,
+      "files": 1727
+    },
+    "all_closing_files_bytes": 3806512,
+    "original_archive_untouched": {
+      "bytes": 1119837,
+      "sha256": "032ab642f612583c6cbefb82fa80b2ff4e7069a1a4c6cdc2d50a346f6f819e61"
+    },
+    "supplemented_archive_untouched": {
+      "bytes": 1128876,
+      "sha256": "85af97d4b7db4b0e010314b945575f028244a224f936328c0eac383868cea9c4"
+    },
+    "no_functional_rerun": true
+  }
+}

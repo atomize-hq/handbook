@@ -1,8 +1,9 @@
 # Q/N/P research review
 
-Status: checkpoint at 2026-10-20 07:42 UTC. The isolated research branch has the
-reviewed P source; Mac full qualification and representative B measurements are
-still executing or pending. This checkpoint is not an overall P pass.
+Status: functional closeout checkpoint at 2026-10-20 07:52 UTC. The isolated
+research branch has the reviewed P source. Mac final-source recovery was censored
+at its fixed cutoff, and all four representative B comparison cells are unperformed.
+The requested P scope is incomplete; this is not an overall qualification pass.
 
 ## Recommendation
 
@@ -25,7 +26,7 @@ is authorized by this recommendation.
 | Primary P0 / PZ pack-plus-index bytes | 641,986,037 / 283,460,393; PZ is 55.85% smaller |
 | Primary eligible representation files | 504,833 to 33; 99.9935% reduction, pass |
 | Primary matched warm limits | P0/L and PZ/P0 below 2x in all six categories |
-| Primary fresh-process medians | P0/PZ about 18â€“45 ms; qualified L about 1.0â€“1.4 ms |
+| Primary fresh-process medians | P0/PZ about 18ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ45 ms; qualified L about 1.0ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ1.4 ms |
 | Complete independent history oracle | 101,007 publications, 100,000 ledger rows, 101 retired refusals; before and after cleanup |
 | Actual engine cleanup | 1,221,001,465 bytes / 504,865 files; no deferred bytes |
 | Packed fresh restore and reopen | Full independent oracle and 111 reopen events pass |
@@ -34,7 +35,7 @@ is authorized by this recommendation.
 | H10k compressed control | 27,715,268 versus P0 62,996,137 bytes |
 | Final Windows qualification | 5 units; 54 packing cases / 275 events; 24 strict; 9 focused / 26 events; F 24 / 282 |
 | Final native Linux qualification | 5 units; 52 applicable packing / 267 events; 24 strict; 8 focused / 25 events; F 24 / 282 |
-| Final native Mac checkpoint | Offline build and 5 units pass; full qualification in progress |
+| Final native Mac checkpoint | 5 units, immediate, packing 52/267, strict 24, focus 8/25 and 17 Bash pass; fresh F censored37/282 |
 
 The successor and both packed archives were verified against every current source
 file by the parent before their separately admitted regular-file reclamation.
@@ -61,7 +62,13 @@ warm categories pass both 2x limits. P0 contains 1,807,781 pack/index bytes and
 PZ 412,467, a 77.18% reduction. Both use five packs, five indexes and one selected
 catalog: **28 to 11 files, only 60.71% reduction; the 95% file gate fails**.
 This result is not repaired by the long-history pass or by excluding catalog cost.
-B baseline and all four B cells are pending at this checkpoint.
+The authentic N8000-B H8 baseline completed and passed the full oracle and
+parent stream/source verification: 24,515 files / 320,288,418 raw bytes. All four
+B measurement cells are unperformed. Measured initialization took96.266 s and
+publications about38ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“39 s each. Retained baseline ownership plus a 600 MB cell,
+64 MiB image and 32 MiB returns exceeds the 2.5 GiB allocation; exact reclamation
+plus seven measured publications and checks could not fit before 07:55:16.
+No smaller fixture, reduced samples, inferred median or extended clock was used.
 
 ## Preserved corrections and qualifications
 
@@ -81,7 +88,12 @@ approval delays remain attached to their actual attempts. All eight native unit 
 byte-for-byte.
 Native Mac preservation used a separately implemented manual USTAR verifier; its
 large archives were not transferred to the parent. Shared Cargo bookkeeping changed
-with unknown attribution; all 1,262 non-database shared inputs remained unchanged.
+with unknown attribution; all 1,262 non-database shared inputs remained unchanged. One Mac
+reclamation accounting helper contained a 300 MiB literal while its allocation
+was 288 MiB; the actual before-plus-return bound remained below 288 MiB, so no
+observed admission overrun followed. The full qualification guard uses 288 MiB.
+The earlier V4 termination error left closure/RSS fields unknown until later
+process census established no survivors; it is not a successful guarded run.
 
 Early overlapping Windows jobs did not continuously enforce a host-wide aggregate
 limit; later serialization does not erase that historical limitation. Directory
@@ -93,18 +105,35 @@ review used preserved attempts plus direct manual source and execution tracing.
 ## Bounds and landing
 
 The original P functional cutoff is 2026-10-20 07:55:16 UTC; its closeout deadline
-is 08:25:16. The current Mac full stage is 07:22â€“07:52 with artifact closeout by
+is 08:25:16. The current Mac full stage is 07:22ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ07:52 with artifact closeout by
 08:02. No clock extension or relabeling of expired attempts is implied.
 
 The 40 GiB / five-million-file global ceiling includes a 1 GiB / 100,000-file
-reserve. Current prospective allocations total 42,918,906,644 bytes, leaving
-30,766,316 bytes unassigned. Windows P is capped at 2.5 GiB, Mac at 288 MiB,
-closed Linux at 64 MiB, and parent final artifacts at 32 MiB. Actual reclamation
+reserve. Closed prospective allocations total 42,397,135,226 bytes, leaving 552,537,734
+bytes unassigned. Unused forecasts were released after execution stopped; no
+additional data deletion is implied. Closed Windows P is capped at
+2,254,857,830 bytes / 80,000 files, Mac at 192 MiB / 20,000 files, Linux at 64 MiB
+/ 5,000 files, and parent final artifacts at 40 MiB / 5,000 files. Actual reclamation
 alone earns release credit. The two blocked pnpm cache removals remain counted.
 
-Reviewed source and checkpoints are pushed to `codex/file-native-qnp-20261019`
-at f368fb4cdce0434ef701de5e4e2fc98abd8fc46e. This is an isolated research landing;
+Reviewed code and receipts are landed on codex/file-native-qnp-20261019.
+The final worker closing source is f59ba64d259abbb9ba140a3a2ef0663a35ab1725;
+all 18 Rust/Cargo files remain exact d70. The parent separately preserves the
+complete Mac raw archive, closure supplement and independent review. This is an isolated research landing;
 main/product branches and the shared working checkout are outside this landing.
 The current complete [worker report](../file-native-packing-2026-10-20/report.md)
-and [coordination history](README.md) retain detailed provenance. A subsequent
-closeout must replace pending statuses with actual receipts or explicit censors.
+and [coordination history](README.md) retain detailed provenance. Native Mac artifact closeout completed before 08:02. Parent independently verified
+the exact 47-member archive, every member hash, all nine approved wrapper hashes,
+and all 345 recorded engine events against their raw child input/output/exit and
+resource receipts. The recovery prefix has 37 committed events; completed case
+count remains unknown because no final recovery summary was written. Mac cutoff
+returned EPERM for PGID8284 with a zero-RSS row and no complete outer guard
+receipt. Original closure at that instant remains UNKNOWN. Both later native
+numeric-PGID observations covered all 368 recorded or sampled groups and found
+none at 07:54:25.479251 and 07:54:26.071197 UTC. This establishes later closure
+without relabeling the cutoff failure. The portable closure supplement and actual
+initial traceback are preserved. The sealed Windows archive also passed parent verification of all 695 members
+/ 47,330,271 raw bytes, complete gzip EOF and all 19 referenced retained files
+/ 713,676,747 bytes. All 72 archived harness source hashes match the final worker
+files. The 47 MB archive payload was not expanded into the parent filesystem.
+The earlier completed Mac N follow-up is separate and does not satisfy P recovery.

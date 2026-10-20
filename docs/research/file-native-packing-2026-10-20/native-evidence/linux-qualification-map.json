@@ -1,0 +1,1007 @@
+{
+  "epoch": 1792477346.4102204,
+  "platform": "native Linux Manjaro/ext4 via spenser-linux-codex",
+  "core_and_harness_commit": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "bindings": {
+    "final_source145_core18_match": true,
+    "old_source139_match": true,
+    "frozen_bins": {
+      "candidate-linux": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe",
+      "candidate-linux-final": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b"
+    },
+    "protected_QN_sources": [
+      {
+        "root": "/home/spenser/file-native-n-linux-20261019",
+        "source_files": 163,
+        "match": true
+      },
+      {
+        "root": "/home/spenser/file-native-q-linux-20261019-final",
+        "source_files": 95,
+        "match": true
+      }
+    ]
+  },
+  "library": {
+    "path": "/usr/lib/libzstd.so.1.5.7",
+    "bytes": 935880,
+    "sha256": "d03364aeedd46783c2f2ae4aae83f728bd1c8d2c5a6e31e5205bd95939f711c7",
+    "version": "1.5.7"
+  },
+  "completed_final_candidate_coverage": {
+    "library_units": 5,
+    "packing_cases": 52,
+    "packing_events": 267,
+    "strict_cases": 24,
+    "focused_cases": 8,
+    "focused_events": 25,
+    "ordinary_shell_processes": 17,
+    "immediate_A_B_N16_N128_cases": 4,
+    "fresh_actual_F_recovery_cases": 24,
+    "fresh_actual_F_recovery_events": 282
+  },
+  "applicable_Windows_sharing_SKIPs": [
+    "windows-loose-no-delete-sharing-A",
+    "windows-loose-no-delete-sharing-B",
+    "B-control-no-delete-sharing-remains-retained"
+  ],
+  "separate_censored_prefixes": [
+    {
+      "stage": "old 4cb qualification",
+      "status": "B16 immediate publication counterexample, censored larger probes",
+      "sole_archive": "/home/spenser/file-native-p-linux-20261020/preservation-artifact/two-roots.tar.gz",
+      "archive_sha256": "d6f3eca1abd4bb74ca393c9c3ef743abdf5c6061bb98aad74ac938769c2cdbc7",
+      "archive_prefix": "fixtures/"
+    },
+    {
+      "stage": "final-qualification",
+      "status": "PARTIAL_REPORT_PREFLIGHT_REFUSAL",
+      "recovery_completed_cases": 3,
+      "engine_events": 94,
+      "atomic_case_report_rows": 93,
+      "case_archive_prefix": "final-qualification-fixtures/recovery/",
+      "94th_raw_event_ledger": "/home/spenser/file-native-p-linux-20261020/final-qualification/raw-process-events.jsonl.gz"
+    },
+    {
+      "stage": "recovery-only bootstrap",
+      "status": "external adapter wrong oracle import, corrected separately",
+      "completed_cases": 0,
+      "engine_events": 2,
+      "archive_prefix": "recovery-bootstrap-fixture/"
+    },
+    {
+      "stage": "recovery-only complete fresh",
+      "status": "FRESH_ORIGINAL_F_24_CASES_282_EVENTS_PASS",
+      "cases": 24,
+      "engine_events": 282,
+      "archive_prefix": "recovery-complete-fixture/",
+      "original_UTF8_events": {
+        "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture-complete/events.json",
+        "bytes": 1567321,
+        "sha256": "54eb3dc6f6b533c66be24367a01fffe7565ff4c9d32d55932f66c48c0971e58f",
+        "rows": 282,
+        "compressed": false
+      },
+      "returned_UTF8_events_copy": "C:\\file-native-p-linux-20261020\\recovery-only-20261020T054348Z\\fixture-complete\\events.json"
+    }
+  ],
+  "reclaimed_case_roots_to_archive": [
+    {
+      "canonical_root": "/home/spenser/file-native-p-linux-20261020/final-qualification/fixtures",
+      "archive_label": "final-qualification-fixtures",
+      "verified_absent": true,
+      "logical_bytes_released": 169004770,
+      "files_released": 13619,
+      "directories_removed": 6972
+    },
+    {
+      "canonical_root": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture",
+      "archive_label": "recovery-bootstrap-fixture",
+      "verified_absent": true,
+      "logical_bytes_released": 345029,
+      "files_released": 57,
+      "directories_removed": 45
+    },
+    {
+      "canonical_root": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture-complete",
+      "archive_label": "recovery-complete-fixture",
+      "verified_absent": true,
+      "logical_bytes_released": 46475413,
+      "files_released": 5185,
+      "directories_removed": 2716
+    }
+  ],
+  "case_preservation": {
+    "sole_archive": {
+      "path": "/home/spenser/file-native-p-linux-20261020/preservation-three-20261020T060930Z/three-roots.tar.gz",
+      "bytes": 7702241,
+      "sha256": "d20d83d160af8dd38c9b0430d81a7e5d0296e7ff4198cf0f2ffa47645febfbdb",
+      "members_verified": 28594,
+      "logical_bytes_verified": 215825212,
+      "stream_EOF_CRC_verified": true,
+      "post_tar_zero_padding_drained_bytes": 0
+    },
+    "inventory": {
+      "path": "/home/spenser/file-native-p-linux-20261020/preservation-three-20261020T060930Z/inventory.jsonl",
+      "bytes": 6243337,
+      "sha256": "9a22bdf55e8ccb94b7229765a0d2e68ffd0f800168bc38af11dadb28d71cb354",
+      "rows": 28594,
+      "format": "sorted UTF-8 JSONL; explicit directories; bytes and SHA256 for each regular file"
+    },
+    "independent_parent_verification_receipt": "C:/file-native-qnp-20261019/linux-three-parent-verify.txt",
+    "actual_released": {
+      "bytes": 215825212,
+      "files": 18861,
+      "directories": 9733
+    }
+  },
+  "earlier_unit_fixture_mapping": "C:\\file-native-p-linux-20261020\\final-source-stage\\unit-fixture-remap-proposal.json",
+  "source_authority_manifest_sha256": "0c636670f89bd11086b139b966452d4f852e537d06997aa1f6649af5ad01d29a",
+  "adapters_with_hashes": [
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/actor-v2.py",
+      "bytes": 9625,
+      "sha256": "a41b921a9447effd34d9d7c291000ed94d9d3003101cf1f9b61b0f92e45bcf7c"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/actor-v3.py",
+      "bytes": 9628,
+      "sha256": "02cd4de8bdf2b28d6583e9929e99f021a0186d778db595ed33d2e94d23e9270e"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/actor.py",
+      "bytes": 9564,
+      "sha256": "4f3f159b35561450aa68d2b5dd16bdf45e6f4494cb6c4336854b6cf915cb0f13"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/cleanup-worker.py",
+      "bytes": 3878,
+      "sha256": "5813f961b94c301b0cb7ea7b53e0a17a0fb3b313ea400b7b4b802c16d82acc1e"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/control.py",
+      "bytes": 7901,
+      "sha256": "f48708326510c49bfb41f8d09405abbeddb3d9e69bbd23390bc220f839904eba"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/control_v2.py",
+      "bytes": 10287,
+      "sha256": "25a2ff15b1a5d92921ed0ac7a8ed64cfdcdee2ef13754f916a4a745fed09a791"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/ordinary-route.py",
+      "bytes": 1191,
+      "sha256": "1ec5218d4a165cec2009c6353290d4589cfc2dbe67b228ff48fec901d240c7be"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/watchdog-v2.py",
+      "bytes": 3521,
+      "sha256": "b4dd5b61244f10c5f36b136fcf8f4d4511e37777dd83ad64f84763537c41376f"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/watchdog.py",
+      "bytes": 3518,
+      "sha256": "5de5861d74290516a1078adf72cf36054a579f4ce2dc11d45e9cab864a576eba"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-source-stage/worker.py",
+      "bytes": 7569,
+      "sha256": "afd4206160dae31b03fc2673753d7ca3d0448d320b296f031d369913e3d88c6b"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/preservation-three-20261020T060930Z/supervisor.py",
+      "bytes": 2474,
+      "sha256": "c13a09161ba3b22d366388549b562402807d33dc9e9e904bc8124faf76931a77"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/preservation-three-20261020T060930Z/worker.py",
+      "bytes": 6860,
+      "sha256": "62ce48a14d845ace5866989d5fc8328812a6a376367a239bd825dcfa6d64c7ea"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/continuation-runner.py",
+      "bytes": 2921,
+      "sha256": "e86517848a885d9dfbbf4cb22f3d116fa054b204eda865295509c764cd29841b"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/native_adapter.py",
+      "bytes": 3910,
+      "sha256": "ff8e20270a523282e85467f3e2529a9edf75d0b04133bf95c37996d7125ffa75"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/native_adapter_v2.py",
+      "bytes": 3959,
+      "sha256": "1e8b49d51a09328704c0e94aeec2b39628b1b4c54ed76cca649422bbf20aee21"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/native_control.py",
+      "bytes": 4550,
+      "sha256": "c31b43951df281d6b8c7219d54ce661bb369b7c5417dd5bef60bff097951d48e"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/native_control_tiny.py",
+      "bytes": 4627,
+      "sha256": "993d8e5a952b78966049bf79b40d6c2a271cda3d08ff48ea7695e1edf8e898e9"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/native_control_v2.py",
+      "bytes": 4677,
+      "sha256": "497bfa49de411bf737295eece8b5e29082b8f6c686a61fa8fe06aa3fb9b93af6"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/remaining-runner.py",
+      "bytes": 251,
+      "sha256": "c581778da7d4b0ac4b460e472045b3a1f8e011586b7f325ee3bb4082dd926c89"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/watchdog.py",
+      "bytes": 2525,
+      "sha256": "d49fed6578f187017357701a634a0ce1b03cbd0160e3a062ba7ab3e951703e14"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/stage_control.py",
+      "bytes": 6848,
+      "sha256": "826890f88295fc280a9642a5e27f69f6df60336ebb30a8dece7ea26ea2ab5933"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/stage_control_v2.py",
+      "bytes": 7014,
+      "sha256": "f0d7f1652ee4323a351d90deff387fe4593b3962cbbec0816c0bce15e9a62a19"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/watchdog-v2.py",
+      "bytes": 3636,
+      "sha256": "778a829b1ad8213ae0f37d5c2ae3fcea4b270be125199dfcc4325a6fec296322"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/watchdog.py",
+      "bytes": 3633,
+      "sha256": "07697c2c62f9b96fcd2c985f220efbde2816d57980195be6e0037d05d5691092"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/worker-v2.py",
+      "bytes": 7885,
+      "sha256": "30fba70035e17e48153ee607b3098f8d0fc0f8da5c13f17c53a1e4e2794fdc95"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/worker.py",
+      "bytes": 7322,
+      "sha256": "d4cecf3dd8ad9803c581586c8a890b7266585b22e81d28180952d0ec34a7802e"
+    }
+  ],
+  "raw_receipt_bindings": [
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/raw-process-events.jsonl.gz",
+      "bytes": 258439,
+      "sha256": "bd3f3fab10d8bc44cff61eb16948d3774a430956555cff1e6ba4a903f7fa9501"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/raw-receipt-inventory.json.gz",
+      "bytes": 25700,
+      "sha256": "7b87a148e3186ab74eeb2be3e90e5b5b7a26b9e6f7ed7c63971ad06bbd2095c2"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/report-refusal-closeout.json",
+      "bytes": 7876,
+      "sha256": "ce8b0eeeab5bdc3a7198936440552d34ea5d4241e95c1448f7691db77af22c51"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-qualification/rss-samples.jsonl.gz",
+      "bytes": 43547,
+      "sha256": "f8d7af3e8b593a1c95f276804868e54614b7d0cda58ca1804b60d167997e93c3"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-source-stage/native-closeout.json",
+      "bytes": 21139,
+      "sha256": "f74c2c57cb90b1d02a8c2f8fbe55b7c877e307ec9e6bc4cf09c361adcbc059ec"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-source-stage/source-manifest.json",
+      "bytes": 47392,
+      "sha256": "0c636670f89bd11086b139b966452d4f852e537d06997aa1f6649af5ad01d29a"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/preflight/native-closeout.json",
+      "bytes": 11128,
+      "sha256": "a66cf2138fe062b9752c656f1e964a4e48ffd848da6d4f6781a5f9c4a469f681"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/preparation/preparation-closeout.json",
+      "bytes": 14879,
+      "sha256": "b5116ee127d09aadb448d7c8dda0b2938208f6ed6c0d7b1e01d54f899cb7c5e3"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/preparation/source-manifest.json",
+      "bytes": 40146,
+      "sha256": "17651cf2f2d96ad3d5d8bd23dd2bc9ab4afee26e87c1a405274f2543c6fa0754"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/preservation-artifact/manifest.json",
+      "bytes": 3271,
+      "sha256": "8c810dcd491a30e2f769f053a5c30455e26bf291aa6bd424c65e66bd4164aef3"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/preservation-three-20261020T060930Z/manifest.json",
+      "bytes": 2654,
+      "sha256": "5b630d8cf8735f0fe1b9d6fd4f53a85aa19c9d40c64f704e72ea064f78b08e3b"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/native-closeout.json",
+      "bytes": 136716,
+      "sha256": "11ae34046dd534f814aa2a5d205f385fd8bab2073d2adc47c099c9531daf2b3f"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/outer-complete-result.json",
+      "bytes": 7678,
+      "sha256": "1784fdd20c8c3f4503759940651adf6b795e7c8fc02c5d8f017aa4a99689cee6"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/raw-process-events.jsonl.gz",
+      "bytes": 535841,
+      "sha256": "e479d408cc11af746e8fe1de85fa3101ac524a004a54a52a6db05222b4dc9c62"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/raw-receipt-inventory.json.gz",
+      "bytes": 145090,
+      "sha256": "80b9239044200f06817085bf7efc3f6a97eae44f57028e2763214696915582a7"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/result-complete.json",
+      "bytes": 169437,
+      "sha256": "2d7f4aa7d9477b16bdff2ccf0283cb0361fd8b5bee663d4acaa54eb2c1cf6103"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/rss-samples.jsonl.gz",
+      "bytes": 245278,
+      "sha256": "bb0638f703017472aaff7823531a42d231cefe1753229999da872762fa4d5d09"
+    }
+  ],
+  "complete_noncase_inventory_binding": {
+    "path": "/home/spenser/file-native-p-linux-20261020/reclamation-three-20261020T061950Z/noncase-before.json.gz",
+    "bytes": 102464,
+    "sha256": "ea6202efd2dd3d49e088947d5c56cb64d5facfc96bec9180e1e4541b6da4cae6",
+    "rows": 2689
+  },
+  "resource_receipts": {
+    "final_source_build": {
+      "mode": "build",
+      "start_epoch": 1792472149.2830484,
+      "completed_epoch": 1792472171.5790265,
+      "command": [
+        "/home/spenser/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "build",
+        "--locked",
+        "--offline",
+        "--workspace",
+        "--release",
+        "-j2",
+        "--target-dir",
+        "/home/spenser/file-native-p-linux-20261020/target-final"
+      ],
+      "returncode": 0,
+      "seconds": 22.295978784561157,
+      "violations": [],
+      "native_final_binary": {
+        "path": "/home/spenser/file-native-p-linux-20261020/bin/candidate-linux-final",
+        "bytes": 3349520,
+        "sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+        "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+        "all145_and_core18_bound": true,
+        "executed": false
+      },
+      "source145_core18_before_after_match": true,
+      "old_source139_old_bin_archive_unchanged": true,
+      "ownership_after": {
+        "native": {
+          "root": "/home/spenser/file-native-p-linux-20261020",
+          "bytes": 156632404,
+          "files": 2296
+        },
+        "cache_positive_growth_bytes": 6079277,
+        "cache_new_files": 301,
+        "conservative_controller_bytes": 8388608,
+        "combined_bound_bytes": 168577735,
+        "combined_bound_files": 2797,
+        "free_bytes": 24927105024
+      },
+      "target": {
+        "root": "/home/spenser/file-native-p-linux-20261020/target-final",
+        "bytes": 123577017,
+        "files": 409
+      },
+      "new_synthetic_fixture": {
+        "root": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target",
+        "bytes": 0,
+        "files": 0
+      },
+      "ownership_samples": [
+        {
+          "epoch": 1792472149.7652128,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 29658218,
+              "files": 1885
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 41603549,
+            "combined_bound_files": 2386,
+            "free_bytes": 25028329472
+          },
+          "target_bytes": 4782950,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472150.7502296,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 51453393,
+              "files": 1989
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 63398724,
+            "combined_bound_files": 2490,
+            "free_bytes": 25002651648
+          },
+          "target_bytes": 30742072,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472151.7435553,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 67906396,
+              "files": 2063
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 79851727,
+            "combined_bound_files": 2564,
+            "free_bytes": 24993972224
+          },
+          "target_bytes": 42700897,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472152.7354867,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 76129364,
+              "files": 2073
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 88074695,
+            "combined_bound_files": 2574,
+            "free_bytes": 24979537920
+          },
+          "target_bytes": 57056793,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472153.7262428,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 98068271,
+              "files": 2133
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 110013602,
+            "combined_bound_files": 2634,
+            "free_bytes": 24968499200
+          },
+          "target_bytes": 68985248,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472154.7177258,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 101557117,
+              "files": 2161
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 113502448,
+            "combined_bound_files": 2662,
+            "free_bytes": 24964313088
+          },
+          "target_bytes": 73054665,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472155.7086115,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 105548518,
+              "files": 2187
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 117493849,
+            "combined_bound_files": 2688,
+            "free_bytes": 24959827968
+          },
+          "target_bytes": 77511994,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472156.6992755,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 107470609,
+              "files": 2196
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 119415940,
+            "combined_bound_files": 2697,
+            "free_bytes": 24957100032
+          },
+          "target_bytes": 80207719,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472157.6895225,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 112470021,
+              "files": 2211
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 124415352,
+            "combined_bound_files": 2712,
+            "free_bytes": 24954372096
+          },
+          "target_bytes": 82867621,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472158.677476,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 112526718,
+              "files": 2215
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 124472049,
+            "combined_bound_files": 2716,
+            "free_bytes": 24954294272
+          },
+          "target_bytes": 82942549,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472159.6680095,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 112630230,
+              "files": 2218
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 124575561,
+            "combined_bound_files": 2719,
+            "free_bytes": 24954265600
+          },
+          "target_bytes": 82971133,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472160.656089,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 112713630,
+              "files": 2220
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 124658961,
+            "combined_bound_files": 2721,
+            "free_bytes": 24954109952
+          },
+          "target_bytes": 83117301,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472161.6462219,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 113062638,
+              "files": 2223
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 125007969,
+            "combined_bound_files": 2724,
+            "free_bytes": 24952479744
+          },
+          "target_bytes": 84699438,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472162.6357725,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 117001915,
+              "files": 2262
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 128947246,
+            "combined_bound_files": 2763,
+            "free_bytes": 24949768192
+          },
+          "target_bytes": 87341661,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472163.6261735,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 119113746,
+              "files": 2263
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 131059077,
+            "combined_bound_files": 2764,
+            "free_bytes": 24947658752
+          },
+          "target_bytes": 89453492,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472164.6145098,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 119113746,
+              "files": 2263
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 131059077,
+            "combined_bound_files": 2764,
+            "free_bytes": 24947658752
+          },
+          "target_bytes": 89453492,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472165.6060762,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 119113746,
+              "files": 2263
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 131059077,
+            "combined_bound_files": 2764,
+            "free_bytes": 24947658752
+          },
+          "target_bytes": 89453492,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472166.6033962,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 119113746,
+              "files": 2264
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 131059077,
+            "combined_bound_files": 2765,
+            "free_bytes": 24947228672
+          },
+          "target_bytes": 89880988,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472167.597557,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 120237722,
+              "files": 2267
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 132183053,
+            "combined_bound_files": 2768,
+            "free_bytes": 24946139136
+          },
+          "target_bytes": 90961212,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472168.5920439,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 121235738,
+              "files": 2271
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 133181069,
+            "combined_bound_files": 2772,
+            "free_bytes": 24944807936
+          },
+          "target_bytes": 92282548,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472169.5841615,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 122472282,
+              "files": 2274
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 134417613,
+            "combined_bound_files": 2775,
+            "free_bytes": 24943714304
+          },
+          "target_bytes": 93371900,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472170.5770335,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 138946516,
+              "files": 2278
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 150891847,
+            "combined_bound_files": 2779,
+            "free_bytes": 24930500608
+          },
+          "target_bytes": 123577017,
+          "synthetic_bytes": 0
+        }
+      ],
+      "Cargo_metadata_before_backup": "/home/spenser/file-native-p-linux-20261020/final-source-stage/build-global-cache-before.bin",
+      "native_qualification_pass": null,
+      "full_capsule_or_cleanup_started": false
+    },
+    "final_source_five_units": {
+      "mode": "unit",
+      "start_epoch": 1792472227.185863,
+      "completed_epoch": 1792472232.1190543,
+      "command": [
+        "/home/spenser/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--workspace",
+        "--release",
+        "-j2",
+        "--target-dir",
+        "/home/spenser/file-native-p-linux-20261020/target-final"
+      ],
+      "returncode": 0,
+      "seconds": 4.933192014694214,
+      "violations": [],
+      "native_final_binary": {
+        "path": "/home/spenser/file-native-p-linux-20261020/bin/candidate-linux-final",
+        "bytes": 3349520,
+        "sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+        "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+        "all145_and_core18_bound": true,
+        "executed": false
+      },
+      "source145_core18_before_after_match": true,
+      "old_source139_old_bin_archive_unchanged": true,
+      "ownership_after": {
+        "native": {
+          "root": "/home/spenser/file-native-p-linux-20261020",
+          "bytes": 243848549,
+          "files": 2340
+        },
+        "cache_positive_growth_bytes": 6079277,
+        "cache_new_files": 301,
+        "conservative_controller_bytes": 8388608,
+        "combined_bound_bytes": 255823831,
+        "combined_bound_files": 2841,
+        "free_bytes": 24839749632
+      },
+      "target": {
+        "root": "/home/spenser/file-native-p-linux-20261020/target-final",
+        "bytes": 129336661,
+        "files": 434
+      },
+      "new_synthetic_fixture": {
+        "root": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target",
+        "bytes": 80976318,
+        "files": 8
+      },
+      "ownership_samples": [
+        {
+          "epoch": 1792472227.668998,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 157065776,
+              "files": 2308
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 169041058,
+            "combined_bound_files": 2809,
+            "free_bytes": 24923308032
+          },
+          "target_bytes": 126831775,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472228.6603372,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 160320620,
+              "files": 2327
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 172295902,
+            "combined_bound_files": 2828,
+            "free_bytes": 24923303936
+          },
+          "target_bytes": 126834887,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472229.6412275,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 160323732,
+              "files": 2328
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 172299014,
+            "combined_bound_files": 2829,
+            "free_bytes": 24922988544
+          },
+          "target_bytes": 127148079,
+          "synthetic_bytes": 0
+        },
+        {
+          "epoch": 1792472230.624095,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 161493316,
+              "files": 2338
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 173468598,
+            "combined_bound_files": 2839,
+            "free_bytes": 24907276288
+          },
+          "target_bytes": 129336661,
+          "synthetic_bytes": 13496053
+        },
+        {
+          "epoch": 1792472231.6013803,
+          "ownership": {
+            "native": {
+              "root": "/home/spenser/file-native-p-linux-20261020",
+              "bytes": 243803401,
+              "files": 2339
+            },
+            "cache_positive_growth_bytes": 6079277,
+            "cache_new_files": 301,
+            "conservative_controller_bytes": 8388608,
+            "combined_bound_bytes": 255778683,
+            "combined_bound_files": 2840,
+            "free_bytes": 24839794688
+          },
+          "target_bytes": 129336661,
+          "synthetic_bytes": 80976318
+        }
+      ],
+      "Cargo_metadata_before_backup": "/home/spenser/file-native-p-linux-20261020/final-source-stage/unit-global-cache-before.bin",
+      "native_qualification_pass": null,
+      "full_capsule_or_cleanup_started": false
+    },
+    "older_final_qualification": {
+      "sampled_aggregate_RSS_peak": 137076736,
+      "missing_samples": 424,
+      "exact_continuous_peak": null
+    },
+    "fresh_recovery": {
+      "count": 287,
+      "observed_aggregate_RSS_peak_bytes": 105123840,
+      "missing_samples_count": 287,
+      "missing_sample_value": null,
+      "exact_continuous_peak": null,
+      "violations": [],
+      "remaining_live_pids": []
+    },
+    "preservation_only": {
+      "observed_aggregate_RSS_peak_bytes": 112865280,
+      "exact_continuous_peak_bytes": null,
+      "missing_samples": 0,
+      "missing_sample_value": null,
+      "samples": 51,
+      "violations": [],
+      "remaining_live_pids": [],
+      "timer_independent_of_worker_and_census": true,
+      "whole_seconds_limit": 300.60488057136536
+    },
+    "reclamation_only": {
+      "observed_aggregate_RSS_peak_bytes": 93294592,
+      "exact_continuous_peak_bytes": null,
+      "missing_samples": 0,
+      "missing_sample_value": null,
+      "samples": 15,
+      "violations": [],
+      "remaining_live_pids": [],
+      "timer_independent_of_worker_and_census": true,
+      "whole_seconds_limit": 237.7495095729828
+    }
+  },
+  "all_native_processes_closed": true,
+  "old_partial_not_relabelled": true,
+  "no_global_P_pass_assigned": true,
+  "global_P_pass": null
+}

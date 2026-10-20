@@ -250,3 +250,22 @@ pending. The parent final-artifact allowance is now 32 MiB, reallocated from unu
 global space: prospective total 42,918,906,644 bytes, with the original internal
 1 GiB / 100,000-file reserve intact. Windows remains 2.5 GiB, Mac 288 MiB and
 closed Linux 64 MiB. All original P functional/closeout cutoffs still apply.
+
+
+Final bounded closeout: see [independent research review](research-review.md).
+Mac passed five units and four functional phases, but fresh P recovery was
+censored at 37/282 events. Its original EPERM/unknown cutoff closure remains;
+two later native numeric-PGID observations found all 368 groups absent. Parent
+verified the complete raw return, source/wrapper bindings and closure supplement.
+All four N8000-B comparison cells remain unperformed; the verified baseline and
+archive are retained. N8000-A ordinary/warm/compression gates pass, while its
+28-to-11 eligible-file reduction fails the frozen 95% rule. Requested P scope
+remains incomplete. The recommendation is adjust, with no general adoption.
+
+The sealed Windows raw package passed parent verification of all 695 members,
+all 19 retained external hashes and gzip EOF. Unused closed forecasts were
+released without data deletion: prospective 42,397,135,226 bytes within 40 GiB,
+including the unchanged internal 1 GiB/100,000-file reserve; 552,537,734 bytes remain
+unassigned. Parent artifacts are capped at 40 MiB. Original clocks and all
+failure/censor records remain. The shared checkout remains at
+379af4eda9b95ee82be9d3afcfdcdca2d6d132f9.

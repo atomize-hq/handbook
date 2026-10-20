@@ -1,0 +1,2200 @@
+{
+  "utc": "2026-10-20T07:55:17.835282+00:00",
+  "overall_native_qualification": "INCOMPLETE_CENSORED_AT_FIXED_CUTOFF",
+  "completed_phase_counts": {
+    "immediate_cases": 4,
+    "immediate_engine_events": 12,
+    "immediate_Bash": 8,
+    "packing_cases": 52,
+    "packing_engine_events": 267,
+    "strict_cases": 24,
+    "focus_cases": 8,
+    "focus_engine_events": 25,
+    "focus_Bash": 9,
+    "all_Bash": 17
+  },
+  "actual_F": {
+    "committed_events": 37,
+    "required_events": 282,
+    "required_cases": 24,
+    "completed_case_count": null,
+    "case_count_reason": "No final recovery summary committed before cutoff; do not infer cases from event prefix."
+  },
+  "cutoff_closeout_failure": {
+    "functional_cutoff": "2026-10-20T07:52:00Z",
+    "outer_execute_exit": 1,
+    "cutoff_PGID": 8284,
+    "native_ps_at_cutoff": [
+      {
+        "pid": 8284,
+        "ppid": 8254,
+        "rss_bytes": 0
+      }
+    ],
+    "signal_zero_errno": 1,
+    "cutoff_closeout_exception": "PermissionError: [Errno 1] Operation not permitted",
+    "outer_guard_receipt_committed": false,
+    "read_only_owned_process_census_empty_at": "2026-10-20T07:52:26Z",
+    "no_post_cutoff_functional_work": true
+  },
+  "all_sampled_groups": {
+    "8284": {
+      "name": "complete-native-qualification-worker",
+      "samples": 2032,
+      "peak_group_rss_bytes": 42975232,
+      "peak_process_rss_bytes": 42975232
+    },
+    "8473": {
+      "name": "phase-immediate",
+      "samples": 107,
+      "peak_group_rss_bytes": 35291136,
+      "peak_process_rss_bytes": 32718848
+    },
+    "8496": {
+      "name": "engine-init",
+      "samples": 7,
+      "peak_group_rss_bytes": 3883008,
+      "peak_process_rss_bytes": 3883008
+    },
+    "8546": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2375680,
+      "peak_process_rss_bytes": 2375680
+    },
+    "8559": {
+      "name": "bash-immediate-A16-before",
+      "samples": 1,
+      "peak_group_rss_bytes": 2031616,
+      "peak_process_rss_bytes": 2031616
+    },
+    "8591": {
+      "name": "engine-packing",
+      "samples": 2,
+      "peak_group_rss_bytes": 2916352,
+      "peak_process_rss_bytes": 2916352
+    },
+    "8610": {
+      "name": "bash-immediate-A16-after",
+      "samples": 1,
+      "peak_group_rss_bytes": 2031616,
+      "peak_process_rss_bytes": 2031616
+    },
+    "8638": {
+      "name": "engine-init",
+      "samples": 26,
+      "peak_group_rss_bytes": 5128192,
+      "peak_process_rss_bytes": 5128192
+    },
+    "8923": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 1343488,
+      "peak_process_rss_bytes": 1343488
+    },
+    "8940": {
+      "name": "bash-immediate-A128-before",
+      "samples": 1,
+      "peak_group_rss_bytes": 2605056,
+      "peak_process_rss_bytes": 2031616
+    },
+    "8957": {
+      "name": "engine-packing",
+      "samples": 2,
+      "peak_group_rss_bytes": 3178496,
+      "peak_process_rss_bytes": 3178496
+    },
+    "8979": {
+      "name": "bash-immediate-A128-after",
+      "samples": 1,
+      "peak_group_rss_bytes": 2162688,
+      "peak_process_rss_bytes": 2031616
+    },
+    "9014": {
+      "name": "engine-init",
+      "samples": 4,
+      "peak_group_rss_bytes": 3801088,
+      "peak_process_rss_bytes": 3801088
+    },
+    "9047": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2441216,
+      "peak_process_rss_bytes": 2441216
+    },
+    "9063": {
+      "name": "bash-immediate-B16-before",
+      "samples": 1,
+      "peak_group_rss_bytes": 2031616,
+      "peak_process_rss_bytes": 2031616
+    },
+    "9096": {
+      "name": "engine-packing",
+      "samples": 2,
+      "peak_group_rss_bytes": 3080192,
+      "peak_process_rss_bytes": 3080192
+    },
+    "9131": {
+      "name": "bash-immediate-B16-after",
+      "samples": 1,
+      "peak_group_rss_bytes": 2031616,
+      "peak_process_rss_bytes": 2031616
+    },
+    "9149": {
+      "name": "engine-init",
+      "samples": 18,
+      "peak_group_rss_bytes": 4816896,
+      "peak_process_rss_bytes": 4816896
+    },
+    "9345": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2342912,
+      "peak_process_rss_bytes": 2342912
+    },
+    "9380": {
+      "name": "bash-immediate-B128-before",
+      "samples": 1,
+      "peak_group_rss_bytes": 2031616,
+      "peak_process_rss_bytes": 2031616
+    },
+    "9400": {
+      "name": "engine-packing",
+      "samples": 2,
+      "peak_group_rss_bytes": 3227648,
+      "peak_process_rss_bytes": 3227648
+    },
+    "9423": {
+      "name": "bash-immediate-B128-after",
+      "samples": 1,
+      "peak_group_rss_bytes": 3637248,
+      "peak_process_rss_bytes": 2031616
+    },
+    "9506": {
+      "name": "phase-capsule",
+      "samples": 1521,
+      "peak_group_rss_bytes": 59736064,
+      "peak_process_rss_bytes": 56803328
+    },
+    "9515": {
+      "name": "engine-init",
+      "samples": 21,
+      "peak_group_rss_bytes": 5128192,
+      "peak_process_rss_bytes": 5128192
+    },
+    "9717": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2310144,
+      "peak_process_rss_bytes": 2310144
+    },
+    "9748": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 1818624,
+      "peak_process_rss_bytes": 1818624
+    },
+    "9785": {
+      "name": "engine-publish",
+      "samples": 2,
+      "peak_group_rss_bytes": 3817472,
+      "peak_process_rss_bytes": 3817472
+    },
+    "9811": {
+      "name": "engine-checkpoint",
+      "samples": 1,
+      "peak_group_rss_bytes": 2162688,
+      "peak_process_rss_bytes": 2162688
+    },
+    "9844": {
+      "name": "engine-prepare",
+      "samples": 1,
+      "peak_group_rss_bytes": 2260992,
+      "peak_process_rss_bytes": 2260992
+    },
+    "9861": {
+      "name": "engine-publish",
+      "samples": 2,
+      "peak_group_rss_bytes": 3801088,
+      "peak_process_rss_bytes": 3801088
+    },
+    "9885": {
+      "name": "engine-refresh",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "9934": {
+      "name": "engine-packing",
+      "samples": 2,
+      "peak_group_rss_bytes": 22560768,
+      "peak_process_rss_bytes": 22560768
+    },
+    "9983": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2457600,
+      "peak_process_rss_bytes": 2457600
+    },
+    "10005": {
+      "name": "engine-refresh",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "10047": {
+      "name": "engine-select",
+      "samples": 1,
+      "peak_group_rss_bytes": 2260992,
+      "peak_process_rss_bytes": 2260992
+    },
+    "10080": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "10115": {
+      "name": "engine-refresh",
+      "samples": 1,
+      "peak_group_rss_bytes": 2539520,
+      "peak_process_rss_bytes": 2539520
+    },
+    "10141": {
+      "name": "engine-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2359296,
+      "peak_process_rss_bytes": 2359296
+    },
+    "10212": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2228224,
+      "peak_process_rss_bytes": 2228224
+    },
+    "10283": {
+      "name": "engine-inspect",
+      "samples": 1,
+      "peak_group_rss_bytes": 2473984,
+      "peak_process_rss_bytes": 2473984
+    },
+    "10307": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2375680,
+      "peak_process_rss_bytes": 2375680
+    },
+    "10343": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2375680,
+      "peak_process_rss_bytes": 2375680
+    },
+    "10368": {
+      "name": "engine-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2375680,
+      "peak_process_rss_bytes": 2375680
+    },
+    "10416": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "10435": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "10471": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2473984,
+      "peak_process_rss_bytes": 2473984
+    },
+    "10490": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2490368,
+      "peak_process_rss_bytes": 2490368
+    },
+    "10526": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2539520,
+      "peak_process_rss_bytes": 2539520
+    },
+    "10558": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2310144,
+      "peak_process_rss_bytes": 2310144
+    },
+    "10594": {
+      "name": "engine-point",
+      "samples": 1,
+      "peak_group_rss_bytes": 1818624,
+      "peak_process_rss_bytes": 1818624
+    },
+    "10656": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2539520,
+      "peak_process_rss_bytes": 2539520
+    },
+    "10702": {
+      "name": "engine-init",
+      "samples": 13,
+      "peak_group_rss_bytes": 4997120,
+      "peak_process_rss_bytes": 4997120
+    },
+    "10841": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2310144,
+      "peak_process_rss_bytes": 2310144
+    },
+    "10878": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2490368,
+      "peak_process_rss_bytes": 2490368
+    },
+    "10926": {
+      "name": "engine-publish",
+      "samples": 4,
+      "peak_group_rss_bytes": 3866624,
+      "peak_process_rss_bytes": 3866624
+    },
+    "10983": {
+      "name": "engine-checkpoint",
+      "samples": 3,
+      "peak_group_rss_bytes": 3375104,
+      "peak_process_rss_bytes": 3375104
+    },
+    "11047": {
+      "name": "engine-prepare",
+      "samples": 2,
+      "peak_group_rss_bytes": 3473408,
+      "peak_process_rss_bytes": 3473408
+    },
+    "11096": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2457600,
+      "peak_process_rss_bytes": 2457600
+    },
+    "11118": {
+      "name": "engine-select",
+      "samples": 1,
+      "peak_group_rss_bytes": 1343488,
+      "peak_process_rss_bytes": 1343488
+    },
+    "11178": {
+      "name": "engine-publish",
+      "samples": 3,
+      "peak_group_rss_bytes": 3571712,
+      "peak_process_rss_bytes": 3571712
+    },
+    "11264": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "11365": {
+      "name": "engine-inspect",
+      "samples": 1,
+      "peak_group_rss_bytes": 2473984,
+      "peak_process_rss_bytes": 2473984
+    },
+    "11406": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2441216,
+      "peak_process_rss_bytes": 2441216
+    },
+    "11444": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2375680,
+      "peak_process_rss_bytes": 2375680
+    },
+    "11494": {
+      "name": "engine-publish",
+      "samples": 2,
+      "peak_group_rss_bytes": 3588096,
+      "peak_process_rss_bytes": 3588096
+    },
+    "11557": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2228224,
+      "peak_process_rss_bytes": 2228224
+    },
+    "11595": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2473984,
+      "peak_process_rss_bytes": 2473984
+    },
+    "11633": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2539520,
+      "peak_process_rss_bytes": 2539520
+    },
+    "11672": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2457600,
+      "peak_process_rss_bytes": 2457600
+    },
+    "11724": {
+      "name": "engine-lifecycle",
+      "samples": 3,
+      "peak_group_rss_bytes": 3866624,
+      "peak_process_rss_bytes": 3866624
+    },
+    "11779": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2293760,
+      "peak_process_rss_bytes": 2293760
+    },
+    "12021": {
+      "name": "engine-point",
+      "samples": 1,
+      "peak_group_rss_bytes": 1343488,
+      "peak_process_rss_bytes": 1343488
+    },
+    "12192": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2506752,
+      "peak_process_rss_bytes": 2506752
+    },
+    "12257": {
+      "name": "engine-init",
+      "samples": 2,
+      "peak_group_rss_bytes": 3686400,
+      "peak_process_rss_bytes": 3686400
+    },
+    "12314": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2162688,
+      "peak_process_rss_bytes": 2162688
+    },
+    "12341": {
+      "name": "engine-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 1703936,
+      "peak_process_rss_bytes": 1703936
+    },
+    "12433": {
+      "name": "engine-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "12471": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "12513": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "12611": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "12649": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 1425408,
+      "peak_process_rss_bytes": 1425408
+    },
+    "12702": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 1458176,
+      "peak_process_rss_bytes": 1458176
+    },
+    "12743": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2195456,
+      "peak_process_rss_bytes": 2195456
+    },
+    "12808": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "12873": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2359296,
+      "peak_process_rss_bytes": 2359296
+    },
+    "12897": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "12949": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "12989": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2162688,
+      "peak_process_rss_bytes": 2162688
+    },
+    "13078": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "13123": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2506752,
+      "peak_process_rss_bytes": 2506752
+    },
+    "13175": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "13275": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "13318": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 1458176,
+      "peak_process_rss_bytes": 1458176
+    },
+    "13412": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 1474560,
+      "peak_process_rss_bytes": 1474560
+    },
+    "13468": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2572288,
+      "peak_process_rss_bytes": 2572288
+    },
+    "13517": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "13614": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2375680,
+      "peak_process_rss_bytes": 2375680
+    },
+    "13660": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "13704": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2179072,
+      "peak_process_rss_bytes": 2179072
+    },
+    "13752": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2588672,
+      "peak_process_rss_bytes": 2588672
+    },
+    "13814": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "13871": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2162688,
+      "peak_process_rss_bytes": 2162688
+    },
+    "13963": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "14010": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2621440,
+      "peak_process_rss_bytes": 2621440
+    },
+    "14133": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2293760,
+      "peak_process_rss_bytes": 2293760
+    },
+    "14218": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2441216,
+      "peak_process_rss_bytes": 2441216
+    },
+    "14299": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2703360,
+      "peak_process_rss_bytes": 2703360
+    },
+    "14356": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "14396": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "14481": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "14532": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "14585": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "14695": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "16938": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "17258": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2457600,
+      "peak_process_rss_bytes": 2457600
+    },
+    "17495": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "17714": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 753664,
+      "peak_process_rss_bytes": 753664
+    },
+    "19463": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "19865": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2670592,
+      "peak_process_rss_bytes": 2670592
+    },
+    "20055": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "20307": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "20798": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "20852": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "20943": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "21556": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 1818624,
+      "peak_process_rss_bytes": 1818624
+    },
+    "21658": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "21812": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "21968": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2506752,
+      "peak_process_rss_bytes": 2506752
+    },
+    "22079": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "22147": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "22257": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2457600,
+      "peak_process_rss_bytes": 2457600
+    },
+    "22394": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "22515": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2539520,
+      "peak_process_rss_bytes": 2539520
+    },
+    "22691": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "22802": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2506752,
+      "peak_process_rss_bytes": 2506752
+    },
+    "22905": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "22983": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2506752,
+      "peak_process_rss_bytes": 2506752
+    },
+    "23109": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "23272": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "23384": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "23469": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "23667": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2506752,
+      "peak_process_rss_bytes": 2506752
+    },
+    "23818": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "23907": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2490368,
+      "peak_process_rss_bytes": 2490368
+    },
+    "24131": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "24215": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "24293": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "24393": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "24483": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "24540": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "24674": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "24731": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2293760,
+      "peak_process_rss_bytes": 2293760
+    },
+    "24800": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "24911": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "24969": {
+      "name": "engine-resolve",
+      "samples": 5,
+      "peak_group_rss_bytes": 1867776,
+      "peak_process_rss_bytes": 1867776
+    },
+    "25003": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2228224,
+      "peak_process_rss_bytes": 2228224
+    },
+    "25227": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2375680,
+      "peak_process_rss_bytes": 2375680
+    },
+    "25314": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 1835008,
+      "peak_process_rss_bytes": 1835008
+    },
+    "25451": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "25510": {
+      "name": "engine-resolve",
+      "samples": 5,
+      "peak_group_rss_bytes": 2146304,
+      "peak_process_rss_bytes": 2146304
+    },
+    "25520": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "25731": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2359296,
+      "peak_process_rss_bytes": 2359296
+    },
+    "25824": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2916352,
+      "peak_process_rss_bytes": 2916352
+    },
+    "25967": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2506752,
+      "peak_process_rss_bytes": 2506752
+    },
+    "26020": {
+      "name": "engine-resolve",
+      "samples": 5,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "26047": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "27401": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2359296,
+      "peak_process_rss_bytes": 2359296
+    },
+    "27486": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2768896,
+      "peak_process_rss_bytes": 2768896
+    },
+    "27584": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "27692": {
+      "name": "engine-resolve",
+      "samples": 4,
+      "peak_group_rss_bytes": 2310144,
+      "peak_process_rss_bytes": 2310144
+    },
+    "28254": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2228224,
+      "peak_process_rss_bytes": 2228224
+    },
+    "33097": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 311296,
+      "peak_process_rss_bytes": 311296
+    },
+    "33171": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2228224,
+      "peak_process_rss_bytes": 2228224
+    },
+    "33427": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "33689": {
+      "name": "engine-prepare",
+      "samples": 1,
+      "peak_group_rss_bytes": 2260992,
+      "peak_process_rss_bytes": 2260992
+    },
+    "34406": {
+      "name": "engine-packing",
+      "samples": 9,
+      "peak_group_rss_bytes": 3227648,
+      "peak_process_rss_bytes": 3227648
+    },
+    "34784": {
+      "name": "engine-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "35324": {
+      "name": "engine-select",
+      "samples": 1,
+      "peak_group_rss_bytes": 2260992,
+      "peak_process_rss_bytes": 2260992
+    },
+    "35433": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "35603": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "35684": {
+      "name": "engine-resolve",
+      "samples": 7,
+      "peak_group_rss_bytes": 2310144,
+      "peak_process_rss_bytes": 2310144
+    },
+    "35711": {
+      "name": "engine-packing",
+      "samples": 3,
+      "peak_group_rss_bytes": 3342336,
+      "peak_process_rss_bytes": 3342336
+    },
+    "36049": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "36103": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2310144,
+      "peak_process_rss_bytes": 2310144
+    },
+    "36405": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "36457": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2326528,
+      "peak_process_rss_bytes": 2326528
+    },
+    "36558": {
+      "name": "engine-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2375680,
+      "peak_process_rss_bytes": 2375680
+    },
+    "36621": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2539520,
+      "peak_process_rss_bytes": 2539520
+    },
+    "36685": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2441216,
+      "peak_process_rss_bytes": 2441216
+    },
+    "36744": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2228224,
+      "peak_process_rss_bytes": 2228224
+    },
+    "36787": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "36847": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2260992,
+      "peak_process_rss_bytes": 2260992
+    },
+    "36911": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "38274": {
+      "name": "engine-init",
+      "samples": 1,
+      "peak_group_rss_bytes": 1835008,
+      "peak_process_rss_bytes": 1835008
+    },
+    "39139": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2375680,
+      "peak_process_rss_bytes": 2375680
+    },
+    "39212": {
+      "name": "engine-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2113536,
+      "peak_process_rss_bytes": 2113536
+    },
+    "39296": {
+      "name": "engine-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "39377": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 2359296,
+      "peak_process_rss_bytes": 2359296
+    },
+    "40852": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "40996": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2211840,
+      "peak_process_rss_bytes": 2211840
+    },
+    "41075": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 2310144,
+      "peak_process_rss_bytes": 2310144
+    },
+    "41153": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 1900544,
+      "peak_process_rss_bytes": 1900544
+    },
+    "41791": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2179072,
+      "peak_process_rss_bytes": 2179072
+    },
+    "41982": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "42108": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2490368,
+      "peak_process_rss_bytes": 2490368
+    },
+    "42207": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "42339": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "42400": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2162688,
+      "peak_process_rss_bytes": 2162688
+    },
+    "42604": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2342912,
+      "peak_process_rss_bytes": 2342912
+    },
+    "42723": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2490368,
+      "peak_process_rss_bytes": 2490368
+    },
+    "42835": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "42896": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "42989": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2162688,
+      "peak_process_rss_bytes": 2162688
+    },
+    "43204": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "43303": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2342912,
+      "peak_process_rss_bytes": 2342912
+    },
+    "43385": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "43490": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "43589": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2162688,
+      "peak_process_rss_bytes": 2162688
+    },
+    "43778": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 1507328,
+      "peak_process_rss_bytes": 1507328
+    },
+    "43882": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "43973": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 2326528,
+      "peak_process_rss_bytes": 2326528
+    },
+    "44106": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2211840,
+      "peak_process_rss_bytes": 2211840
+    },
+    "44265": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "44345": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "44459": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 2473984,
+      "peak_process_rss_bytes": 2473984
+    },
+    "44644": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "44784": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "44942": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "45073": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "45171": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2375680,
+      "peak_process_rss_bytes": 2375680
+    },
+    "45342": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 868352,
+      "peak_process_rss_bytes": 868352
+    },
+    "45519": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2211840,
+      "peak_process_rss_bytes": 2211840
+    },
+    "45616": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "45726": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "45859": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "45948": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2326528,
+      "peak_process_rss_bytes": 2326528
+    },
+    "46013": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 2326528,
+      "peak_process_rss_bytes": 2326528
+    },
+    "46219": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "46504": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "46603": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "46723": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "46913": {
+      "name": "engine-resolve",
+      "samples": 5,
+      "peak_group_rss_bytes": 1867776,
+      "peak_process_rss_bytes": 1867776
+    },
+    "47035": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "47365": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "47427": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2555904,
+      "peak_process_rss_bytes": 2555904
+    },
+    "47569": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "47648": {
+      "name": "engine-resolve",
+      "samples": 5,
+      "peak_group_rss_bytes": 2146304,
+      "peak_process_rss_bytes": 2146304
+    },
+    "47658": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "47924": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2326528,
+      "peak_process_rss_bytes": 2326528
+    },
+    "47998": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2703360,
+      "peak_process_rss_bytes": 2703360
+    },
+    "48142": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2506752,
+      "peak_process_rss_bytes": 2506752
+    },
+    "48212": {
+      "name": "engine-resolve",
+      "samples": 5,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "48240": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2228224,
+      "peak_process_rss_bytes": 2228224
+    },
+    "48490": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2359296,
+      "peak_process_rss_bytes": 2359296
+    },
+    "48551": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "48683": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "48746": {
+      "name": "engine-resolve",
+      "samples": 5,
+      "peak_group_rss_bytes": 2326528,
+      "peak_process_rss_bytes": 2326528
+    },
+    "48776": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "49050": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2310144,
+      "peak_process_rss_bytes": 2310144
+    },
+    "49131": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2228224,
+      "peak_process_rss_bytes": 2228224
+    },
+    "49237": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "49301": {
+      "name": "engine-prepare",
+      "samples": 1,
+      "peak_group_rss_bytes": 2260992,
+      "peak_process_rss_bytes": 2260992
+    },
+    "49414": {
+      "name": "engine-packing",
+      "samples": 9,
+      "peak_group_rss_bytes": 3194880,
+      "peak_process_rss_bytes": 3194880
+    },
+    "49635": {
+      "name": "engine-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "49940": {
+      "name": "engine-select",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "50018": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "50136": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2441216,
+      "peak_process_rss_bytes": 2441216
+    },
+    "50240": {
+      "name": "engine-resolve",
+      "samples": 7,
+      "peak_group_rss_bytes": 2342912,
+      "peak_process_rss_bytes": 2342912
+    },
+    "50276": {
+      "name": "engine-packing",
+      "samples": 3,
+      "peak_group_rss_bytes": 3194880,
+      "peak_process_rss_bytes": 3194880
+    },
+    "50756": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "50873": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2293760,
+      "peak_process_rss_bytes": 2293760
+    },
+    "51027": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "51107": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2162688,
+      "peak_process_rss_bytes": 2162688
+    },
+    "51165": {
+      "name": "engine-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2375680,
+      "peak_process_rss_bytes": 2375680
+    },
+    "51241": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 1359872,
+      "peak_process_rss_bytes": 1359872
+    },
+    "51303": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 1458176,
+      "peak_process_rss_bytes": 1458176
+    },
+    "51386": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2244608,
+      "peak_process_rss_bytes": 2244608
+    },
+    "51460": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 2457600,
+      "peak_process_rss_bytes": 2457600
+    },
+    "51746": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 1785856,
+      "peak_process_rss_bytes": 1785856
+    },
+    "51856": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2637824,
+      "peak_process_rss_bytes": 2637824
+    },
+    "52037": {
+      "name": "phase-strict",
+      "samples": 16,
+      "peak_group_rss_bytes": 34340864,
+      "peak_process_rss_bytes": 32489472
+    },
+    "52103": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 1458176,
+      "peak_process_rss_bytes": 1458176
+    },
+    "52246": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "52312": {
+      "name": "engine-point",
+      "samples": 1,
+      "peak_group_rss_bytes": 2457600,
+      "peak_process_rss_bytes": 2457600
+    },
+    "52361": {
+      "name": "engine-select",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "52601": {
+      "name": "phase-focus",
+      "samples": 175,
+      "peak_group_rss_bytes": 35389440,
+      "peak_process_rss_bytes": 35389440
+    },
+    "52639": {
+      "name": "engine-init",
+      "samples": 1,
+      "peak_group_rss_bytes": 1835008,
+      "peak_process_rss_bytes": 1835008
+    },
+    "52723": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2359296,
+      "peak_process_rss_bytes": 2359296
+    },
+    "52816": {
+      "name": "bash-focus-original",
+      "samples": 1,
+      "peak_group_rss_bytes": 2064384,
+      "peak_process_rss_bytes": 2064384
+    },
+    "52894": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 1884160,
+      "peak_process_rss_bytes": 1884160
+    },
+    "53008": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2441216,
+      "peak_process_rss_bytes": 2441216
+    },
+    "53365": {
+      "name": "engine-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "53529": {
+      "name": "bash-focus-before-current",
+      "samples": 1,
+      "peak_group_rss_bytes": 2048000,
+      "peak_process_rss_bytes": 2048000
+    },
+    "53610": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2129920,
+      "peak_process_rss_bytes": 2129920
+    },
+    "53673": {
+      "name": "bash-focus-frozen-after-cleanup",
+      "samples": 1,
+      "peak_group_rss_bytes": 2080768,
+      "peak_process_rss_bytes": 2048000
+    },
+    "53842": {
+      "name": "bash-focus-current-after-cleanup",
+      "samples": 1,
+      "peak_group_rss_bytes": 2048000,
+      "peak_process_rss_bytes": 2048000
+    },
+    "53934": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "54045": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2228224,
+      "peak_process_rss_bytes": 2228224
+    },
+    "54220": {
+      "name": "bash-focus-frozen-after-repack",
+      "samples": 1,
+      "peak_group_rss_bytes": 2703360,
+      "peak_process_rss_bytes": 2048000
+    },
+    "54312": {
+      "name": "engine-packing",
+      "samples": 10,
+      "peak_group_rss_bytes": 2899968,
+      "peak_process_rss_bytes": 2899968
+    },
+    "54371": {
+      "name": "engine-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2359296,
+      "peak_process_rss_bytes": 2359296
+    },
+    "54533": {
+      "name": "bash-focus-frozen-during-build",
+      "samples": 1,
+      "peak_group_rss_bytes": 2048000,
+      "peak_process_rss_bytes": 2048000
+    },
+    "55013": {
+      "name": "bash-focus-frozen-after-writer",
+      "samples": 1,
+      "peak_group_rss_bytes": 2850816,
+      "peak_process_rss_bytes": 2048000
+    },
+    "55093": {
+      "name": "bash-focus-current-after-writer",
+      "samples": 1,
+      "peak_group_rss_bytes": 2048000,
+      "peak_process_rss_bytes": 2048000
+    },
+    "55172": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2506752,
+      "peak_process_rss_bytes": 2506752
+    },
+    "55308": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "55372": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 1441792,
+      "peak_process_rss_bytes": 1441792
+    },
+    "55470": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 1654784,
+      "peak_process_rss_bytes": 1654784
+    },
+    "55550": {
+      "name": "engine-point",
+      "samples": 1,
+      "peak_group_rss_bytes": 2490368,
+      "peak_process_rss_bytes": 2490368
+    },
+    "55627": {
+      "name": "engine-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "55752": {
+      "name": "bash-focus-retired-generation-refuses-copy",
+      "samples": 1,
+      "peak_group_rss_bytes": 3686400,
+      "peak_process_rss_bytes": 2048000
+    },
+    "56055": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2260992,
+      "peak_process_rss_bytes": 2260992
+    },
+    "56169": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2375680,
+      "peak_process_rss_bytes": 2375680
+    },
+    "56557": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2260992,
+      "peak_process_rss_bytes": 2260992
+    },
+    "56656": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2441216,
+      "peak_process_rss_bytes": 2441216
+    },
+    "56740": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2408448,
+      "peak_process_rss_bytes": 2408448
+    },
+    "56824": {
+      "name": "engine-init",
+      "samples": 1,
+      "peak_group_rss_bytes": 1835008,
+      "peak_process_rss_bytes": 1835008
+    },
+    "56935": {
+      "name": "engine-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2342912,
+      "peak_process_rss_bytes": 2342912
+    },
+    "57029": {
+      "name": "engine-packing",
+      "samples": 1,
+      "peak_group_rss_bytes": 2441216,
+      "peak_process_rss_bytes": 2441216
+    },
+    "57253": {
+      "name": "engine-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2490368,
+      "peak_process_rss_bytes": 2490368
+    },
+    "57397": {
+      "name": "phase-recovery",
+      "samples": 175,
+      "peak_group_rss_bytes": 39321600,
+      "peak_process_rss_bytes": 39321600
+    },
+    "57430": {
+      "name": "actual-prior-init",
+      "samples": 1,
+      "peak_group_rss_bytes": 1835008,
+      "peak_process_rss_bytes": 1835008
+    },
+    "57516": {
+      "name": "actual-prior-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2392064,
+      "peak_process_rss_bytes": 2392064
+    },
+    "57591": {
+      "name": "actual-prior-dump",
+      "samples": 1,
+      "peak_group_rss_bytes": 2473984,
+      "peak_process_rss_bytes": 2473984
+    },
+    "57751": {
+      "name": "actual-prior-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2293760,
+      "peak_process_rss_bytes": 2293760
+    },
+    "57832": {
+      "name": "actual-prior-dump",
+      "samples": 1,
+      "peak_group_rss_bytes": 2359296,
+      "peak_process_rss_bytes": 2359296
+    },
+    "57929": {
+      "name": "actual-prior-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "58007": {
+      "name": "actual-prior-dump",
+      "samples": 1,
+      "peak_group_rss_bytes": 1458176,
+      "peak_process_rss_bytes": 1458176
+    },
+    "58086": {
+      "name": "actual-prior-dump",
+      "samples": 1,
+      "peak_group_rss_bytes": 2605056,
+      "peak_process_rss_bytes": 2605056
+    },
+    "58204": {
+      "name": "actual-prior-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2293760,
+      "peak_process_rss_bytes": 2293760
+    },
+    "58328": {
+      "name": "actual-prior-dump",
+      "samples": 1,
+      "peak_group_rss_bytes": 2326528,
+      "peak_process_rss_bytes": 2326528
+    },
+    "58408": {
+      "name": "actual-prior-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2441216,
+      "peak_process_rss_bytes": 2441216
+    },
+    "58489": {
+      "name": "actual-prior-cancel",
+      "samples": 1,
+      "peak_group_rss_bytes": 2162688,
+      "peak_process_rss_bytes": 2162688
+    },
+    "58549": {
+      "name": "actual-prior-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2490368,
+      "peak_process_rss_bytes": 2490368
+    },
+    "59781": {
+      "name": "actual-prior-packet",
+      "samples": 1,
+      "peak_group_rss_bytes": 1818624,
+      "peak_process_rss_bytes": 1818624
+    },
+    "59866": {
+      "name": "actual-prior-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "59964": {
+      "name": "actual-prior-prepare",
+      "samples": 1,
+      "peak_group_rss_bytes": 1507328,
+      "peak_process_rss_bytes": 1507328
+    },
+    "60397": {
+      "name": "actual-prior-refresh",
+      "samples": 1,
+      "peak_group_rss_bytes": 2539520,
+      "peak_process_rss_bytes": 2539520
+    },
+    "61602": {
+      "name": "actual-prior-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "61751": {
+      "name": "actual-prior-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 1441792,
+      "peak_process_rss_bytes": 1441792
+    },
+    "62416": {
+      "name": "actual-prior-select",
+      "samples": 1,
+      "peak_group_rss_bytes": 1818624,
+      "peak_process_rss_bytes": 1818624
+    },
+    "62732": {
+      "name": "actual-prior-resolve",
+      "samples": 1,
+      "peak_group_rss_bytes": 2293760,
+      "peak_process_rss_bytes": 2293760
+    },
+    "62879": {
+      "name": "actual-prior-resume",
+      "samples": 1,
+      "peak_group_rss_bytes": 2424832,
+      "peak_process_rss_bytes": 2424832
+    },
+    "63062": {
+      "name": "actual-prior-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "63183": {
+      "name": "actual-prior-audit",
+      "samples": 1,
+      "peak_group_rss_bytes": 2523136,
+      "peak_process_rss_bytes": 2523136
+    },
+    "63309": {
+      "name": "actual-prior-dump",
+      "samples": 1,
+      "peak_group_rss_bytes": 2490368,
+      "peak_process_rss_bytes": 2490368
+    },
+    "63440": {
+      "name": "actual-prior-inspect",
+      "samples": 1,
+      "peak_group_rss_bytes": 0,
+      "peak_process_rss_bytes": 0
+    },
+    "63645": {
+      "name": "actual-prior-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2539520,
+      "peak_process_rss_bytes": 2539520
+    },
+    "63735": {
+      "name": "actual-prior-init",
+      "samples": 3,
+      "peak_group_rss_bytes": 4980736,
+      "peak_process_rss_bytes": 4980736
+    },
+    "64008": {
+      "name": "actual-prior-lifecycle",
+      "samples": 1,
+      "peak_group_rss_bytes": 2326528,
+      "peak_process_rss_bytes": 2326528
+    },
+    "64097": {
+      "name": "actual-prior-dump",
+      "samples": 1,
+      "peak_group_rss_bytes": 2441216,
+      "peak_process_rss_bytes": 2441216
+    },
+    "64186": {
+      "name": "actual-prior-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "64272": {
+      "name": "actual-prior-dump",
+      "samples": 1,
+      "peak_group_rss_bytes": 2686976,
+      "peak_process_rss_bytes": 2686976
+    },
+    "64497": {
+      "name": "actual-prior-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2277376,
+      "peak_process_rss_bytes": 2277376
+    },
+    "64603": {
+      "name": "actual-prior-dump",
+      "samples": 1,
+      "peak_group_rss_bytes": 2506752,
+      "peak_process_rss_bytes": 2506752
+    },
+    "64764": {
+      "name": "actual-prior-dump",
+      "samples": 1,
+      "peak_group_rss_bytes": 2703360,
+      "peak_process_rss_bytes": 2703360
+    },
+    "64905": {
+      "name": "actual-prior-publish",
+      "samples": 1,
+      "peak_group_rss_bytes": 2293760,
+      "peak_process_rss_bytes": 2293760
+    },
+    "64997": {
+      "name": "actual-prior-dump",
+      "samples": 1,
+      "peak_group_rss_bytes": 2588672,
+      "peak_process_rss_bytes": 2588672
+    }
+  },
+  "unfinished_group_receipt_ids": [
+    8284,
+    57397
+  ],
+  "native_numeric_closure_audit_sha256": "6c530c4816ebf7c910d40758782bc9271fa14833137eed9034b4d471c1ab49b3",
+  "all_368_groups_later_absent": true,
+  "original_failure_not_relabelled": true,
+  "preservation_after_pass": true,
+  "shared_DB_attribution": "UNKNOWN",
+  "no_post_cutoff_functional_work": true
+}

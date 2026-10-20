@@ -1,0 +1,15 @@
+{
+  "status": "PARENT_ALL_695_MEMBERS_AND_19_RETAINED_EXTERNAL_FILES_HASH_PASS",
+  "archive_sha256": "5176e47d4a7569ed7ac57b29fe0972e5d2e1d37c713f44c4d38c95311ded815d",
+  "members": 695,
+  "expanded_bytes": 47330271,
+  "whole_gzip_EOF": true,
+  "external_retained_files": 19,
+  "external_retained_bytes": 713676747,
+  "archive_harness_files": 72,
+  "current_harness_hash_differences": [],
+  "sealed_package_harness_head": "3592654b8a3fea3fca548f75161de4f16aa67342",
+  "sealed_package_core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "seconds": 0.7970000000204891,
+  "no_archive_extraction": true
+}

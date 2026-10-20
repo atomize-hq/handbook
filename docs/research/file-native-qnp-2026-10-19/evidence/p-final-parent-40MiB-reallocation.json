@@ -1,0 +1,18 @@
+{
+  "utc": "2026-10-20T08:03:11.880941+00:00",
+  "global_ceiling_bytes": 42949672960,
+  "global_files_ceiling": 5000000,
+  "reserve_bytes_inside_ceiling": 1073741824,
+  "reserve_files_inside_ceiling": 100000,
+  "parent_before_bytes": 33554432,
+  "parent_after_bytes": 41943040,
+  "additional_from_unassigned_bytes": 8388608,
+  "previous_combined_prospective_bytes": 42918906644,
+  "combined_prospective_bytes": 42927295252,
+  "unassigned_bytes": 22377708,
+  "prospective_files": 4607675,
+  "Windows_P_unchanged": 2684354560,
+  "Mac_P_unchanged": 301989888,
+  "Linux_P_closed_unchanged": 67108864,
+  "reason": "Bounded independent final raw-evidence integration: sealed Windows archive11,106,893 B plus exact Mac return/closure and existing source receipts. No native fixture or raw Windows archive expansion into parent filesystem."
+}

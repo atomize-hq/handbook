@@ -167,6 +167,22 @@
     "bytes": 2149,
     "sha256": "6ed27551e02b03d506071a4c7f936bbcada0503dec889d6af83877da23993b60"
   },
+  "p-final-closed-resource-forecasts.json": {
+    "bytes": 1203,
+    "sha256": "63a06e9982196477f9674d90d8c0a7b74340e51d7d7034641d71460d91a6fa89"
+  },
+  "p-final-integration-source-review.json": {
+    "bytes": 3368,
+    "sha256": "3196eaa07a7fc237199bd79232f4e1e5576c77239cd1d0971f44eb9a3466ba72"
+  },
+  "p-final-main-parent-archive-review.json": {
+    "bytes": 617,
+    "sha256": "ea4662fbd74a0f0b031b27c6cc024e5d531316b61f76d340cef81c6ac179b254"
+  },
+  "p-final-merge-precommit-detect.txt": {
+    "bytes": 2151,
+    "sha256": "72015f93bac21465d15a38d696cb847a30dc4277173034d6eac4f352603b392f"
+  },
   "p-final-native-resource-reallocation.json": {
     "bytes": 786,
     "sha256": "2d334afbcc1744996416794eecba1c76a3fd295df2326cf3431164d8cf3564e9"
@@ -174,6 +190,10 @@
   "p-final-parent-32MiB-reallocation.json": {
     "bytes": 607,
     "sha256": "8aee15bc6d55b1032ee4f46070db11368ec20027864d53c9dc92662efaa59e70"
+  },
+  "p-final-parent-40MiB-reallocation.json": {
+    "bytes": 853,
+    "sha256": "c9c73ba9357df70dda59d42a90062fbe1339283714af62494fa2bc242ef93a07"
   },
   "p-final-record-corpus-controls-binding.json": {
     "bytes": 1535,
@@ -323,6 +343,18 @@
     "bytes": 3276,
     "sha256": "5d093e58d4f25e15bf85980b0b92e09d213e96deccd83215ea71fc36a8ad81e2"
   },
+  "p-mac-full-native-initial-cutoff-tool-output.json": {
+    "bytes": 2661,
+    "sha256": "2c4930521fee98d0de5091ca216c491ecf1b2f58e4c33ce0d8d8cfa9cc51db11"
+  },
+  "p-mac-full-native-parent-member-review.json": {
+    "bytes": 7760,
+    "sha256": "ef93228c04961d25431963ef29f02f773bb0d1f5181b36a3930cbc8ac3cbd511"
+  },
+  "p-mac-full-native-parent-raw-review.json": {
+    "bytes": 5440,
+    "sha256": "6550cf447f7f0827ce35186f8ecd8875dc149548781c3c89ddf6d182f4263a84"
+  },
   "p-macos-benign-group-termination-result.json": {
     "bytes": 2103,
     "sha256": "c232478e7e3b3a7c8a8c597bb656be78ee00eaa511b8fb3f6fb4e5da04144f06"
@@ -347,9 +379,29 @@
     "bytes": 11608,
     "sha256": "56fc2ff83fa16f0244e0a8cf8613f4443b49d6733d59513953787534edc0c34c"
   },
+  "p-macos-full-final-approved-bindings-and-ownership.json": {
+    "bytes": 1829,
+    "sha256": "c40be452ff5bdae291e31109a1b81c70ee66a1d91bf7b6adae07187c3ae6d407"
+  },
+  "p-macos-full-numeric-PGID-closure-audit.json": {
+    "bytes": 12236,
+    "sha256": "6c530c4816ebf7c910d40758782bc9271fa14833137eed9034b4d471c1ab49b3"
+  },
+  "p-macos-full-original-closeout.json": {
+    "bytes": 40557,
+    "sha256": "b36a216435c21d6a7e9fb5ffb431313b5af8d293fba62d8fbbd11a3a21244ce0"
+  },
   "p-macos-full-parent-approved-code-hashes.json": {
     "bytes": 803,
     "sha256": "0b25c0df848691283ca967ba8de881b3d7c0e83d0e94f1d8748fa27054699377"
+  },
+  "p-macos-full-supplemental-closeout.json": {
+    "bytes": 56606,
+    "sha256": "2d772385b8b92cc440fa738304c5d5a55d1d8a636c77aeb732162c58c350c919"
+  },
+  "p-macos-full-verify-native-closure.py": {
+    "bytes": 1462,
+    "sha256": "b005d21f0cff8a0132712656a9fd36222eba0d26e200cf4ed9303d94ced4a006"
   },
   "p-macos-isolated-preparation-reservation.json": {
     "bytes": 934,
@@ -438,6 +490,10 @@
   "p-N8000-A-PZ-v2-parent-verify.txt": {
     "bytes": 766,
     "sha256": "a803d2cf091d8437873f1256dfc733a09a3b0cb365129df022f1ce1f757762fc"
+  },
+  "p-N8000-B-baseline-parent-verify.txt": {
+    "bytes": 751,
+    "sha256": "e206ef4d16a6761ca0dcef768839e63ef2640a6b82c5cdf718499e5b2cfd765e"
   },
   "p-native-stage-resource-precommit.txt": {
     "bytes": 2766,

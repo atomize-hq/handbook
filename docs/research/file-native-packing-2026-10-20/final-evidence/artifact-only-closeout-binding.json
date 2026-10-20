@@ -1,0 +1,37 @@
+{
+  "scope": "artifact-only; no engine, dataset, recovery, packing, or benchmark child",
+  "original_functional_cutoff": "2026-10-20T07:55:16Z",
+  "artifact_closeout_deadline": "2026-10-20T08:25:16Z",
+  "seconds": 120,
+  "actual": {
+    "scopes": {
+      "runtime": {
+        "bytes": 1978547086,
+        "files": 56338
+      },
+      "worktree": {
+        "bytes": 3177446,
+        "files": 257
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 231471604,
+        "files": 2193
+      }
+    },
+    "total_new_bytes": 2160693048,
+    "total_new_files": 60735,
+    "free_bytes": 198715305984,
+    "time_utc": "2026-10-20T07:57:10.357319+00:00"
+  },
+  "total_new_return_reservation": 33554432,
+  "archive_prewrite_limit": 12582912,
+  "package_limit": 14680064,
+  "positive_Git_and_receipt_margin": 18874368,
+  "artifact_sha256": "ec0a8726c7125e6ade1d3771b5686b12e2a244726a12bd06c169924998f37da0",
+  "guard_original_sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68",
+  "wrapper_sha256": "fe9f8ed90e64ef1d9a55433286c0af152aa0f8565a1ebd09d1156ab592c81c91"
+}
