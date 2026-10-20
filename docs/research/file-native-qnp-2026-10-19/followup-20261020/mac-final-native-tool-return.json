@@ -1,0 +1,39 @@
+{
+  "overall_new_run": "FRESH_F24_282_PASS_PENDING_PARENT_REVIEW",
+  "completed_cases": 24,
+  "completed_events": 282,
+  "final_actual_whole_bytes": 235928344,
+  "final_actual_whole_files": 18177,
+  "new_closing_total_bytes": 2589312,
+  "new_preparation_total_bytes": 113212,
+  "old_all12953files_and_nine_wrappers_unchanged": true,
+  "source145_core18_exe_library_match": {
+    "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+    "source145_core18": true,
+    "exe_sha256": "9ae57af7f16a05aa01d79b0aa88ce90b50f7669858548be6933cfc2d0f1c0def",
+    "lib_sha256": "69d8dee81bccdee425d167300d11431f3c5ecc34a3011400e536aa89f7756189",
+    "manifest_sha256": "0c636670f89bd11086b139b966452d4f852e537d06997aa1f6649af5ad01d29a"
+  },
+  "shared_DB_before": {
+    "/Users/spensermcconnell/.cargo/.global-cache": {
+      "bytes": 372736,
+      "sha256": "6a0c0324016791cc4179db8b69967869f707d2390438a0d57e12d4277a046102",
+      "utc": "2026-10-20T12:00:00.822277+00:00",
+      "attribution": "UNKNOWN"
+    }
+  },
+  "shared_DB_after": {
+    "/Users/spensermcconnell/.cargo/.global-cache": {
+      "bytes": 372736,
+      "sha256": "6a0c0324016791cc4179db8b69967869f707d2390438a0d57e12d4277a046102",
+      "utc": "2026-10-20T12:11:32.481766+00:00",
+      "attribution": "UNKNOWN"
+    }
+  },
+  "shared_DB_attribution": "UNKNOWN",
+  "whole_run_aggregate_RSS_peak": null,
+  "whole_run_aggregate_RSS_note": "3GiB live aggregate ceiling checked by approved control; separate aggregate peak not persisted. Exact per-group samples retained.",
+  "archive_SHA256": "e13fe472478797febb6312bc32cd7e69c37ecc08b38df344f1ad9f2308105455",
+  "transfer_chunks_emitted": "95/95",
+  "parent_reconstruction_confirmed": false
+}

@@ -1,0 +1,88 @@
+{
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "-B",
+    "C:/file-native-qnp-20261019/verify-operational-image.py",
+    "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\L-old-path-v2-operational-backup",
+    "C:\\file-native-packing-20261020\\operational-matrix\\n8000-B\\L-old-path-v2\\disposable\\store",
+    "e5a7d1183ca4cc1db46ff2a48d3bef6d4e4a3670affe894a822d317788ac3742",
+    "57eb1d5b93bb470e7c95091f2c6bccf105ccb0c0e2c50ddac3655e9e636c22cd",
+    "32617",
+    "425970525"
+  ],
+  "cwd": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook",
+  "guard_sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68",
+  "started_utc": "2026-10-20T12:04:42.332275+00:00",
+  "seconds": 25.23638677597046,
+  "cap_seconds": 900,
+  "effective_seconds": 900,
+  "exit": 0,
+  "censor": null,
+  "independent_deadline": null,
+  "group_observations": {
+    "root_exit_seen_epoch": 1792497904.3462074,
+    "group_empty_seen_epoch": 1792497904.3462074
+  },
+  "job_query_errors": 0,
+  "process_closure_verified": true,
+  "per_process_rss_limit": 2147483648,
+  "job_commit_limit_bytes": 3221225472,
+  "aggregate_rss_limit": 4294967296,
+  "sampled_peak_rss_by_pid": {
+    "39212": 30511104,
+    "74740": 30830592
+  },
+  "missing_samples": 0,
+  "aggregate_sampled_peak_rss": 58580992,
+  "ownership_samples": [
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 2113877392,
+          "files": 64486
+        },
+        "worktree": {
+          "bytes": 14461434,
+          "files": 278
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 241879403,
+          "files": 2294
+        }
+      },
+      "total_new_bytes": 2317715141,
+      "total_new_files": 69005,
+      "free_bytes": 200278028288,
+      "time_utc": "2026-10-20T12:05:07.527991+00:00"
+    }
+  ],
+  "final_ownership": {
+    "scopes": {
+      "runtime": {
+        "bytes": 2113877392,
+        "files": 64486
+      },
+      "worktree": {
+        "bytes": 14461434,
+        "files": 278
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 241879403,
+        "files": 2294
+      }
+    },
+    "total_new_bytes": 2317715141,
+    "total_new_files": 69005,
+    "free_bytes": 200278028288,
+    "time_utc": "2026-10-20T12:05:30.842614+00:00"
+  },
+  "group_remaining_before_closure": []
+}

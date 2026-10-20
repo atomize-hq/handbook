@@ -1,0 +1,109 @@
+{
+  "status": "L_OLD_COMPLETE_PARENT_ARCHIVE_REVIEW_PASS",
+  "documents": 8000,
+  "history_before": 8,
+  "history_after": 15,
+  "cohort_records": 28,
+  "ordinary_median_complete_engine_ns": 39991057000,
+  "publication_cases": [
+    {
+      "case": "payload",
+      "complete_engine_ns": 70202168300,
+      "replay_objects": 7,
+      "replay_files": 3,
+      "result_state_digest": "926de339afe9d2bdc1062fab4c48a6dfcc04775f047032a5656a45ad20af4717"
+    },
+    {
+      "case": "batch-payload",
+      "complete_engine_ns": 41405422700,
+      "replay_objects": 14,
+      "replay_files": 10,
+      "result_state_digest": "da47153d0453e258a54d868aadad19414c72f4f39b71671dc458550e22b6c6eb"
+    },
+    {
+      "case": "label",
+      "complete_engine_ns": 39387630700,
+      "replay_objects": 5,
+      "replay_files": 2,
+      "result_state_digest": "4255d59515f7b759327088cd3fed0d7612689692e801c3d57cc22cc1889e9c19"
+    },
+    {
+      "case": "title-and-derived-path",
+      "complete_engine_ns": 39764223400,
+      "replay_objects": 13,
+      "replay_files": 4,
+      "result_state_digest": "0ffcfcc3cb58335e33c91bc5871100b00510fbf91a4c33622e8d7f5fa571e7ec"
+    },
+    {
+      "case": "batch-title-and-derived-path",
+      "complete_engine_ns": 41250247200,
+      "replay_objects": 29,
+      "replay_files": 8,
+      "result_state_digest": "fbbb7df490b49d21037f13e2b595973c89454c70c8eecf284e6b79e6a40c0f30"
+    },
+    {
+      "case": "explicit-path-move",
+      "complete_engine_ns": 39991057000,
+      "replay_objects": 11,
+      "replay_files": 4,
+      "result_state_digest": "c1017429fd2fe849f48909032fb3c58916d052c195ac5e80ca6f6daebe8a526a"
+    },
+    {
+      "case": "relationship",
+      "complete_engine_ns": 38357174800,
+      "replay_objects": 11,
+      "replay_files": 4,
+      "result_state_digest": "fbe7ed2ce2fcc6d6d437a035be7b571cb236e0688ef53fc6095b9040146bf36c"
+    }
+  ],
+  "warm": [
+    {
+      "category": "early",
+      "id": "initial",
+      "warm_median_ns": 998200,
+      "result_digest": "349fd634fa83a41e87ba5d9e9ce30b6c29d20b540b5b4717c297617f36aa1da4",
+      "samples": 500
+    },
+    {
+      "category": "middle",
+      "id": "prefix-3",
+      "warm_median_ns": 464400,
+      "result_digest": "5442335dfb612bbe5945c01c24435cf93e71318b49516f1c77847ab521969084",
+      "samples": 500
+    },
+    {
+      "category": "recent",
+      "id": "prefix-6",
+      "warm_median_ns": 291600,
+      "result_digest": "1902dae84e05f0f79714a13d4f4bfa91eeef9118b181d106c6cfb0f53872d160",
+      "samples": 500
+    },
+    {
+      "category": "missing",
+      "id": "missing",
+      "warm_median_ns": 358400,
+      "result_digest": "7c7393d930ebcb4a48b8f3af80cfe1df279940cbbafe294f176bce6bd0238af7",
+      "samples": 500
+    },
+    {
+      "category": "cancelled",
+      "id": "cancelled",
+      "warm_median_ns": 391300,
+      "result_digest": "96f412505fb99c6126a3fe652d4f0536578f47a66d4040536f1d0865d506f325",
+      "samples": 500
+    },
+    {
+      "category": "lost-reply",
+      "id": "lost-reply",
+      "warm_median_ns": 439600,
+      "result_digest": "cf1a5572c4b5a095a5c07795fcb1c310d20845a96cd4baa6c8af8d8a26bc629f",
+      "samples": 500
+    }
+  ],
+  "fresh_processes": 120,
+  "cache_qualification": "same-process warm after first lookup; fresh process not device cold",
+  "retention": "same initial and original-cohort pins in each authentic restore; retire only new unpinned predecessor tails outside measured publication clocks",
+  "parent_full_verification_job": "B-L-old-parent-verify-job.json",
+  "source_measurement_sha256": "19d39c4ff90cc705868437f5b1183679cf53d645af8c6ba136ace6e94ef8d286",
+  "later_cells": "not yet asserted"
+}

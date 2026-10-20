@@ -1,0 +1,65 @@
+{
+  "status": "PARENT_INDEPENDENT_FRESH_MAC_F24_282_REVIEW_PASS",
+  "archive_sha256": "e13fe472478797febb6312bc32cd7e69c37ecc08b38df344f1ad9f2308105455",
+  "archive_bytes": 1131583,
+  "regular_members": 32,
+  "data_member_SHA_checks": 31,
+  "member_manifest_sha256": "3fee3dcbef7d4c6efcdcf181b9db50d82501854d20704e17a3ccb05b0587df17",
+  "gzip_EOF_checked": true,
+  "actual_cases": 24,
+  "success_cases": 23,
+  "expected_refusals": 1,
+  "engine_events": 282,
+  "all_engine_input_exit_stdout_stderr_pairs_match_raw": true,
+  "engine_exit_counts": {
+    "0": 252,
+    "86": 19,
+    "2": 11
+  },
+  "raw_process_records": 284,
+  "independently_derived_groups": 284,
+  "rss_sample_ledger_records": 3807,
+  "rss_sample_ledger_groups": 279,
+  "initial_RSS_guard_only_groups": [
+    2637,
+    4824,
+    5787,
+    15097,
+    15136
+  ],
+  "all284groups_have_positive_native_RSS_evidence_and_two_numeric_absence_observations": true,
+  "parent_check_corrections": [
+    "First parent check overrequired loop-ledger row for five children with initial-only native RSS sample retained in guard record.",
+    "Second parent check overrequired32 inventory rows:31 data rows plus the self-excluded manifest make32 archive members. Exact set/content/wholearchive hash checked."
+  ],
+  "guard_failures": 0,
+  "completed_process_missing_RSS": 0,
+  "unknown_final_presence": 0,
+  "largest_engine_seconds": 5.4807354169897735,
+  "maximum_process_group_sample_bytes": 80740352,
+  "whole_run_aggregate_peak_RSS": null,
+  "aggregate_peak_note": "3GiB live aggregate ceiling checked by approved control; separate aggregate peak not persisted. Exact per-group samples retained.",
+  "stage_start": "2026-10-20T11:59:56.797333+00:00",
+  "stage_cutoff": "2026-10-20T12:29:56.797333+00:00",
+  "closeout": "2026-10-20T12:11:32.533131+00:00",
+  "historical_preservation": {
+    "old_owned_files": 12953,
+    "old_owned_bytes": 186789357,
+    "old_owned_path_size_content_sha256": "5748928c5f5d1307f64b692b8cd4206dbe8c5269284ec84727fe704a0aabbbd7",
+    "old_nine_wrappers_match": true,
+    "old_QN_SDK_archives_match": true
+  },
+  "source_binding": {
+    "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+    "source145_core18": true,
+    "exe_sha256": "9ae57af7f16a05aa01d79b0aa88ce90b50f7669858548be6933cfc2d0f1c0def",
+    "lib_sha256": "69d8dee81bccdee425d167300d11431f3c5ecc34a3011400e536aa89f7756189",
+    "manifest_sha256": "0c636670f89bd11086b139b966452d4f852e537d06997aa1f6649af5ad01d29a"
+  },
+  "original_censored_run_unchanged": true,
+  "controller_console_NULL_observations": 3,
+  "shared_DB_writer_attribution": "UNKNOWN",
+  "final_actual_whole_bytes": 235928344,
+  "final_actual_whole_files": 18177,
+  "new_closing_total_bytes": 2589312
+}
