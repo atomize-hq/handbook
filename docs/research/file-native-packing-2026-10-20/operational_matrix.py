@@ -29,9 +29,10 @@ def initial(mode,count):
     write(case/'baseline.json',dict(mode=mode,documents=count,initial=first,selected=d.head(root),history=8,requests=requests,capture=captured,qualified_binary_sha256=sha(OLD.read_bytes())))
     print(json.dumps(dict(status='baseline-captured',mode=mode,documents=count)))
 def operations():
-    # The existing API couples title and derived path movement in rename; there
-    # is no independent path opcode. Labels describe those actual operations.
-    return [('payload',[dict(kind='edit',id='d000004',text=' ordinary payload')]),('batch-payload',[dict(kind='edit',id=f'd{i:06}',text=' batch') for i in range(16,24)]),('label',[dict(kind='label',id='d000005',text='ordinary-label')]),('title-and-derived-path',[dict(kind='rename',id='d000004',text='Ordinary exact matched title')]),('batch-title-and-derived-path',[dict(kind='rename',id=f'd{i:06}',text=f'Ordinary batch title {i}') for i in range(16,24)]),('second-derived-path-move',[dict(kind='rename',id='d000005',text='Ordinary second derived location')]),('relationship',[dict(kind='edge',id='d000004',text='cites',target='d000005')])]
+    # Actual Store::prepare uses graph::transition, which supports explicit path.
+    # The older baseline_model::apply reference helper has a narrower opcode set.
+    # Rename changes title and derived path together; path alone is case six.
+    return [('payload',[dict(kind='edit',id='d000004',text=' ordinary payload')]),('batch-payload',[dict(kind='edit',id=f'd{i:06}',text=' batch') for i in range(16,24)]),('label',[dict(kind='label',id='d000005',text='ordinary-label')]),('title-and-derived-path',[dict(kind='rename',id='d000004',text='Ordinary exact matched title')]),('batch-title-and-derived-path',[dict(kind='rename',id=f'd{i:06}',text=f'Ordinary batch title {i}') for i in range(16,24)]),('explicit-path-move',[dict(kind='path',id='d000005',text='docs/ordinary-moved-d000005.md')]),('relationship',[dict(kind='edge',id='d000004',text='cites',target='d000005')])]
 def cell(mode,count,representation):
     case=BASE/f'n{count}-{mode}';baseline=read(case/'baseline.json');d=Driver(case/(representation+'-events'));root=case/representation/'disposable/store'
     restored=backup.restore(case/'baseline-operational-backup',root);engine=OLD if representation=='L-old' else NEW

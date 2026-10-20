@@ -11,7 +11,7 @@ from guard import current
 HERE=Path(__file__).resolve().parent;R=Path('C:/file-native-packing-20261020')
 ROOT=R/'history-restored/disposable/store';CAPSULE=R/'packed-operational-backup';RESTORED=R/'packed-restored/disposable/store'
 SOURCE=HERE.parent/'file-native-recovery-reclamation-2026-10-19/operational_backup.py'
-CAP=2766562918;FILES=560000;CAPTURE_BYTES=620000000;RESTORE_BYTES=600000000
+CAP=2684354560;FILES=560000;CAPTURE_BYTES=620000000;RESTORE_BYTES=600000000
 read=lambda p:json.loads(Path(p).read_bytes())
 def sha_file(path):
     h=hashlib.sha256()
