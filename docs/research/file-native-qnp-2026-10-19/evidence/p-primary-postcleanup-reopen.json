@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "retired_content_refusals": 101,
+  "engine_events": 111,
+  "same_and_changed_intent_checked": true,
+  "all_original_lookup_outcomes_unchanged": true,
+  "selected_store_unchanged": true,
+  "no_publication": true,
+  "eligible_class_file_reduction": 0.9999346318485519,
+  "ninety_five_percent_gate": true
+}

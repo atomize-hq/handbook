@@ -1,0 +1,28 @@
+{
+  "utc": "2026-10-20T06:15:56Z",
+  "status": "admitted within original P clock",
+  "components_bytes": {
+    "baseline": 38756059924,
+    "old_Mac_metadata": 2097152,
+    "parent_future": 8388608,
+    "Windows_P": 2415919104,
+    "Linux_P": 297795584,
+    "Mac_P": 268435456,
+    "internal_closeout_reserve": 1073741824
+  },
+  "prospective_total_bytes": 42822437652,
+  "ceiling_bytes": 42949672960,
+  "unallocated_bytes": 127235308,
+  "file_ceiling": 5000000,
+  "internal_reserve_files": 100000,
+  "actual_Windows_cleanup_released_bytes": 1221001465,
+  "Windows_fresh_actual_bytes": 1463610171,
+  "Windows_capture_additional_max_bytes": 653554432,
+  "Windows_capture_forecast_bytes": 2117164603,
+  "Linux_release_assumed": false,
+  "Mac_build_go_utc": "2026-10-20T06:22:00Z",
+  "Mac_build_whole_cutoff_utc": "2026-10-20T06:32:00Z",
+  "Mac_artifact_close_utc": "2026-10-20T06:37:00Z",
+  "P_functional_cutoff_utc": "2026-10-20T07:55:16Z",
+  "P_closeout_utc": "2026-10-20T08:25:16Z"
+}

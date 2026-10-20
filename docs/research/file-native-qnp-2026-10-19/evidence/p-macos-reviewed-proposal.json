@@ -1,0 +1,63 @@
+{
+  "status": "PROPOSAL_ONLY",
+  "future256MiB_allocated": false,
+  "build_GO": false,
+  "original_dispatch_utc": "2026-10-20T02:25:16Z",
+  "original_functional_cutoff_utc": "2026-10-20T07:55:16Z",
+  "original_closeout_utc": "2026-10-20T08:25:16Z",
+  "completed_preparation_worker_utc": "2026-10-20T05:15:54.828420Z",
+  "completed_preparation_supervisor_utc": "2026-10-20T05:15:55.472804Z",
+  "current_caps": {
+    "whole_bytes": 41943040,
+    "private_bytes": 37748736,
+    "other_including_reserve_bytes": 4194304,
+    "files": 5000
+  },
+  "future_build_components_MiB": {
+    "private_cache_and_receipts": 36,
+    "target": 164,
+    "frozen_bin": 8,
+    "other_including_1_5_reserve": 4,
+    "sum": 212
+  },
+  "future_overall_MiB": 256,
+  "build_target_soft_MiB": 130,
+  "build_target_inflight_MiB": 34,
+  "whole_build_soft_MiB": 220,
+  "conditional_units": {
+    "fresh_pre_actual_max_bytes": 161480704,
+    "additional_target_MiB": 16,
+    "fixture_MiB": 84,
+    "returns_MiB": 2,
+    "actual_reserve_additionally_charged": 1572864,
+    "test_command_seconds": 120,
+    "file_limit_MiB": 16,
+    "retain_fixture": true
+  },
+  "whole_stage_seconds_max": 600,
+  "build_command_seconds_max": 600,
+  "ordinary_child_seconds": 120,
+  "per_process_RSS_bytes": 2147483648,
+  "aggregate_RSS_bytes": 3221225472,
+  "RLIMIT_AS": null,
+  "disk_enforcement": "Sampled conservative stop with inflight reserve, NOT aggregate kernel quota; transient overshoot cannot be ruled out. Censor on observed bounds or missing measurements.",
+  "scope": "One root release binary; freeze after Cargo process descendants close; conditional --release --target aarch64-apple-darwin --locked --offline -j1 --workspace --lib tests5; no engine CLI or qualification.",
+  "environment": "Whitelist only; owned HOME/TMPDIR/module cache, direct existing native1.89 toolchain/clang, explicit ARM64 target; reject all ancestor Cargo config. See helper environment().",
+  "shared_DB": "Raw read/hash observations only. Baseline/immediate/late remain separate; attribution UNKNOWN. Never restore. Shared action remains superseded/blocked.",
+  "limitations": [
+    "Native cold resolution/build size unproved until future GO.",
+    "5000 file cap retained; nonstart/censor on failure.",
+    "On killed/failed worker, post-preservation is UNKNOWN unless after receipt exists; parent closeout required.",
+    "No cleanup, reclamation, target, fixture or compiler invocation during preparation."
+  ],
+  "activation_example_NOT_AUTHORIZATION": {
+    "status": "PARENT_EXPLICIT_GO",
+    "allocated_bytes": 268435456,
+    "go_utc": "PARENT_SUPPLIES_FUTURE_UTC",
+    "whole_stage_seconds": 600,
+    "build_seconds": 600,
+    "conditional_units": true,
+    "code_sha256": "PARENT_BINDS_REVIEWED_FILE",
+    "config_sha256": "PARENT_BINDS_REVIEWED_FILE"
+  }
+}

@@ -1,0 +1,5843 @@
+{
+  "epoch": 1792475899.5475218,
+  "status": "FRESH_ORIGINAL_F_24_CASES_282_EVENTS_PASS",
+  "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "exe_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+  "fixture": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture-complete",
+  "cases": [
+    {
+      "case": "navigation-and-operational-backup",
+      "mode": "A",
+      "n": 16,
+      "status": "success"
+    },
+    {
+      "case": "navigation-and-operational-backup",
+      "mode": "A",
+      "n": 128,
+      "status": "success"
+    },
+    {
+      "case": "navigation-and-operational-backup",
+      "mode": "B",
+      "n": 16,
+      "status": "success"
+    },
+    {
+      "case": "navigation-and-operational-backup",
+      "mode": "B",
+      "n": 128,
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-plan",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-preserved",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-file",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-namespace",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-before-complete",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-complete",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "up",
+      "phase": "refresh-namespace-preserved",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-plan",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-preserved",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-file",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-namespace",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-before-complete",
+      "status": "success"
+    },
+    {
+      "case": "namespace-interruption-correcting-successor",
+      "direction": "down",
+      "phase": "refresh-complete",
+      "status": "success"
+    },
+    {
+      "case": "checkpoint-transfer-retire-repeat-gc",
+      "mode": "A",
+      "status": "success"
+    },
+    {
+      "case": "half-preparation-backup-recovery",
+      "mode": "A",
+      "status": "success"
+    },
+    {
+      "case": "checkpoint-transfer-retire-repeat-gc",
+      "mode": "B",
+      "status": "success"
+    },
+    {
+      "case": "half-preparation-backup-recovery",
+      "mode": "B",
+      "status": "success"
+    },
+    {
+      "case": "impossible-final-namespace",
+      "status": "expected refusal"
+    },
+    {
+      "case": "skipped-or-selected-once",
+      "mode": "A",
+      "status": "success"
+    },
+    {
+      "case": "skipped-or-selected-once",
+      "mode": "B",
+      "status": "success"
+    }
+  ],
+  "events": 282,
+  "original_events_UTF8_JSON": {
+    "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture-complete/events.json",
+    "bytes": 1567321,
+    "sha256": "54eb3dc6f6b533c66be24367a01fffe7565ff4c9d32d55932f66c48c0971e58f",
+    "rows": 282,
+    "compressed": false
+  },
+  "source_before_after": {
+    "source145_core18_match": true,
+    "old_source139_match": true,
+    "old063_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe",
+    "new_a850_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+    "old_QN_source_bindings": [
+      {
+        "root": "/home/spenser/file-native-n-linux-20261019",
+        "source_files": 163,
+        "all_match": true
+      },
+      {
+        "root": "/home/spenser/file-native-q-linux-20261019-final",
+        "source_files": 95,
+        "all_match": true
+      }
+    ]
+  },
+  "old_entire_native_tree_unchanged_including_compressed_prefix": true,
+  "old_tree_files": 15990,
+  "old_tree_inventory_path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/old-native-tree-before-complete.json.gz",
+  "old_tree_inventory_sha256": "d84f62f9d4246cfe58085badf339c8a9689decb5f93d12c39e06c2fa3f613df2",
+  "ownership": {
+    "native": {
+      "bytes": 251890762,
+      "files": 21537
+    },
+    "new_fixture": {
+      "bytes": 46820442,
+      "files": 5242
+    },
+    "fixtures": {
+      "bytes": 215825212,
+      "files": 18861
+    },
+    "combined_bound_bytes": 265288228,
+    "combined_bound_files": 22338,
+    "native_report_bytes": 1853742,
+    "free_bytes": 24755965952
+  },
+  "resources": [
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.394195226021111,
+      "guard": {
+        "root_pid": 340599,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340600,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 53071872,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.1871890570037067,
+      "guard": {
+        "root_pid": 340602,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340603,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.16676231287419796,
+      "guard": {
+        "root_pid": 340607,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340608,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6057780622504652,
+      "guard": {
+        "root_pid": 340610,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340611,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 52756480,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.16746983071789145,
+      "guard": {
+        "root_pid": 340613,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340614,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.5911649740301073,
+      "guard": {
+        "root_pid": 340616,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340617,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 52731904,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.16737626027315855,
+      "guard": {
+        "root_pid": 340619,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340620,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.16795713873580098,
+      "guard": {
+        "root_pid": 340622,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340623,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6400099219754338,
+      "guard": {
+        "root_pid": 340625,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340626,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 52686848,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.16821281984448433,
+      "guard": {
+        "root_pid": 340628,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340629,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.25658310344442725,
+      "guard": {
+        "root_pid": 340631,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340632,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 52842496,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "cancel",
+      "exit": 0,
+      "seconds": 0.2928157323040068,
+      "guard": {
+        "root_pid": 340634,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340635,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 52027392,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.18609046284109354,
+      "guard": {
+        "root_pid": 340637,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340638,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "packet",
+      "exit": 0,
+      "seconds": 0.3606978808529675,
+      "guard": {
+        "root_pid": 340640,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340641,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 53116928,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.48305117432028055,
+      "guard": {
+        "root_pid": 340643,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340644,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 52834304,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "prepare",
+      "exit": 0,
+      "seconds": 0.2964944988489151,
+      "guard": {
+        "root_pid": 340646,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340647,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 52609024,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.26179082691669464,
+      "guard": {
+        "root_pid": 340649,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340650,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 52363264,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resolve",
+      "exit": 0,
+      "seconds": 0.16838810918852687,
+      "guard": {
+        "root_pid": 340672,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340673,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.18638133816421032,
+      "guard": {
+        "root_pid": 340675,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340676,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "select",
+      "exit": 0,
+      "seconds": 0.48447277303785086,
+      "guard": {
+        "root_pid": 340678,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340679,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 53628928,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resolve",
+      "exit": 0,
+      "seconds": 0.16804132098332047,
+      "guard": {
+        "root_pid": 340681,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340682,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.26146805519238114,
+      "guard": {
+        "root_pid": 340684,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340685,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 53346304,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.4011643738485873,
+      "guard": {
+        "root_pid": 340687,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340688,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 53321728,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.25353965489193797,
+      "guard": {
+        "root_pid": 340690,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340691,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 53002240,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.16846257774159312,
+      "guard": {
+        "root_pid": 340693,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340694,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "inspect",
+      "exit": 2,
+      "seconds": 0.1678597591817379,
+      "guard": {
+        "root_pid": 340696,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340697,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 2,
+      "seconds": 0.1683953651227057,
+      "guard": {
+        "root_pid": 340699,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340700,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 6.084535458125174,
+      "guard": {
+        "root_pid": 340702,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340703,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 54169600,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 54,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.18738974211737514,
+      "guard": {
+        "root_pid": 340706,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340707,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1709528691135347,
+      "guard": {
+        "root_pid": 340709,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340710,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.8106969501823187,
+      "guard": {
+        "root_pid": 340712,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340713,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 54468608,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 7,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1718464228324592,
+      "guard": {
+        "root_pid": 340715,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340716,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6939778830856085,
+      "guard": {
+        "root_pid": 340718,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340719,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 54956032,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 6,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17046963889151812,
+      "guard": {
+        "root_pid": 340721,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340722,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17101901909336448,
+      "guard": {
+        "root_pid": 340724,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340725,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.7225671065971255,
+      "guard": {
+        "root_pid": 340727,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340728,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 55402496,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 6,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1711209947243333,
+      "guard": {
+        "root_pid": 340731,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340732,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.35304577089846134,
+      "guard": {
+        "root_pid": 340734,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340735,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 56193024,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "cancel",
+      "exit": 0,
+      "seconds": 0.29175486508756876,
+      "guard": {
+        "root_pid": 340737,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340738,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 55308288,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.18696365505456924,
+      "guard": {
+        "root_pid": 340740,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340741,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "packet",
+      "exit": 0,
+      "seconds": 0.4814218347892165,
+      "guard": {
+        "root_pid": 340743,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340744,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 56365056,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6036822809837759,
+      "guard": {
+        "root_pid": 340746,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340747,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 56193024,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "prepare",
+      "exit": 0,
+      "seconds": 0.28914254484698176,
+      "guard": {
+        "root_pid": 340751,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340752,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 56373248,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.2626253762282431,
+      "guard": {
+        "root_pid": 340754,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340755,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 56315904,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resolve",
+      "exit": 0,
+      "seconds": 0.16854600282385945,
+      "guard": {
+        "root_pid": 340779,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340780,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.29378526331856847,
+      "guard": {
+        "root_pid": 340782,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340783,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 57266176,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "select",
+      "exit": 0,
+      "seconds": 0.513424766715616,
+      "guard": {
+        "root_pid": 340785,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340786,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 57937920,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resolve",
+      "exit": 0,
+      "seconds": 0.1718752752058208,
+      "guard": {
+        "root_pid": 340788,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340789,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.28001598501577973,
+      "guard": {
+        "root_pid": 340791,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340792,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 57774080,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.3829512009397149,
+      "guard": {
+        "root_pid": 340794,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340795,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 57794560,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.27936137607321143,
+      "guard": {
+        "root_pid": 340800,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340801,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 57864192,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17139560403302312,
+      "guard": {
+        "root_pid": 340803,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340804,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "inspect",
+      "exit": 2,
+      "seconds": 0.16915556509047747,
+      "guard": {
+        "root_pid": 340806,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340807,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 2,
+      "seconds": 0.16925764782354236,
+      "guard": {
+        "root_pid": 340809,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340810,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.2675393773242831,
+      "guard": {
+        "root_pid": 340812,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340813,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 58855424,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 11,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.1887546256184578,
+      "guard": {
+        "root_pid": 340819,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340820,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1707132733426988,
+      "guard": {
+        "root_pid": 340822,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340823,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6538460189476609,
+      "guard": {
+        "root_pid": 340825,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340826,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 58531840,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17320386786013842,
+      "guard": {
+        "root_pid": 340828,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340829,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6537609570659697,
+      "guard": {
+        "root_pid": 340831,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340832,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 58417152,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17019509384408593,
+      "guard": {
+        "root_pid": 340834,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340835,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1704036807641387,
+      "guard": {
+        "root_pid": 340837,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340838,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.7546968436799943,
+      "guard": {
+        "root_pid": 340840,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340841,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 58548224,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 6,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17099084984511137,
+      "guard": {
+        "root_pid": 340843,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340844,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.2533136219717562,
+      "guard": {
+        "root_pid": 340846,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340847,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 58281984,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "cancel",
+      "exit": 0,
+      "seconds": 0.29630945483222604,
+      "guard": {
+        "root_pid": 340850,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340851,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 58421248,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.13419703487306833,
+      "guard": {
+        "root_pid": 340854,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340855,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "packet",
+      "exit": 0,
+      "seconds": 0.5193316023796797,
+      "guard": {
+        "root_pid": 340857,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340858,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 59027456,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "prepare",
+      "exit": 0,
+      "seconds": 0.4889769838191569,
+      "guard": {
+        "root_pid": 340860,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340861,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 58626048,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resolve",
+      "exit": 0,
+      "seconds": 0.17006673803552985,
+      "guard": {
+        "root_pid": 340887,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340888,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.18952451273798943,
+      "guard": {
+        "root_pid": 340890,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340891,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "select",
+      "exit": 0,
+      "seconds": 0.379647278226912,
+      "guard": {
+        "root_pid": 340893,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340894,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 58912768,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resolve",
+      "exit": 0,
+      "seconds": 0.17026415513828397,
+      "guard": {
+        "root_pid": 340896,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340897,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6539116012863815,
+      "guard": {
+        "root_pid": 340899,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340900,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 58974208,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.17329844599589705,
+      "guard": {
+        "root_pid": 340902,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340903,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17072459496557713,
+      "guard": {
+        "root_pid": 340905,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340906,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "inspect",
+      "exit": 2,
+      "seconds": 0.17069746972993016,
+      "guard": {
+        "root_pid": 340908,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340909,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 2,
+      "seconds": 0.16633938904851675,
+      "guard": {
+        "root_pid": 340911,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340912,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 5.120225276332349,
+      "guard": {
+        "root_pid": 340914,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340915,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 59662336,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 45,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.13543815165758133,
+      "guard": {
+        "root_pid": 340919,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340920,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17207380337640643,
+      "guard": {
+        "root_pid": 340923,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340924,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 1.7327118529938161,
+      "guard": {
+        "root_pid": 340926,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340927,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 59604992,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 15,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1724566943012178,
+      "guard": {
+        "root_pid": 340929,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340930,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 1.6602981141768396,
+      "guard": {
+        "root_pid": 340932,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340933,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 60309504,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 14,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1726688127964735,
+      "guard": {
+        "root_pid": 340935,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340936,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.16709232470020652,
+      "guard": {
+        "root_pid": 340938,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340939,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 1.6050822432152927,
+      "guard": {
+        "root_pid": 340941,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340942,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 60538880,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 14,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17188228201121092,
+      "guard": {
+        "root_pid": 340944,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340945,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.40969177102670074,
+      "guard": {
+        "root_pid": 340947,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340948,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 60985344,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "cancel",
+      "exit": 0,
+      "seconds": 0.2968114409595728,
+      "guard": {
+        "root_pid": 340950,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340951,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 59977728,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.1856805570423603,
+      "guard": {
+        "root_pid": 340953,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340954,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "packet",
+      "exit": 0,
+      "seconds": 0.48684644885361195,
+      "guard": {
+        "root_pid": 340956,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340957,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 60796928,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "prepare",
+      "exit": 0,
+      "seconds": 1.2732606967911124,
+      "guard": {
+        "root_pid": 340959,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340960,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 60542976,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 11,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resolve",
+      "exit": 0,
+      "seconds": 0.17109544901177287,
+      "guard": {
+        "root_pid": 340993,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340994,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.13604792021214962,
+      "guard": {
+        "root_pid": 340996,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 340997,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "select",
+      "exit": 0,
+      "seconds": 0.38117196690291166,
+      "guard": {
+        "root_pid": 340999,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341000,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 61911040,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resolve",
+      "exit": 0,
+      "seconds": 0.16901593515649438,
+      "guard": {
+        "root_pid": 341002,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341003,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 1.2942419559694827,
+      "guard": {
+        "root_pid": 341005,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341006,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62345216,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 11,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.300226166844368,
+      "guard": {
+        "root_pid": 341008,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341009,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 61435904,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1712861848063767,
+      "guard": {
+        "root_pid": 341011,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341012,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "inspect",
+      "exit": 2,
+      "seconds": 0.17221790784969926,
+      "guard": {
+        "root_pid": 341014,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341015,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 2,
+      "seconds": 0.17175431922078133,
+      "guard": {
+        "root_pid": 341017,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341018,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.4236454595811665,
+      "guard": {
+        "root_pid": 341020,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341021,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62816256,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.18933298904448748,
+      "guard": {
+        "root_pid": 341023,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341024,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.4851109921000898,
+      "guard": {
+        "root_pid": 341027,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341028,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62050304,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.1354049639776349,
+      "guard": {
+        "root_pid": 341030,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341031,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.5180565002374351,
+      "guard": {
+        "root_pid": 341033,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341034,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 61919232,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.3864680021069944,
+      "guard": {
+        "root_pid": 341036,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341037,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62242816,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.2646930329501629,
+      "guard": {
+        "root_pid": 341039,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341040,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 61620224,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.2615728583186865,
+      "guard": {
+        "root_pid": 341042,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341043,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 61894656,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17247005179524422,
+      "guard": {
+        "root_pid": 341045,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341046,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.386555046774447,
+      "guard": {
+        "root_pid": 341050,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341051,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62447616,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.19008732587099075,
+      "guard": {
+        "root_pid": 341053,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341054,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.485262384172529,
+      "guard": {
+        "root_pid": 341057,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341058,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 61992960,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.27912952890619636,
+      "guard": {
+        "root_pid": 341060,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341061,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 61915136,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.48192682303488255,
+      "guard": {
+        "root_pid": 341063,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341064,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62345216,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.39010779233649373,
+      "guard": {
+        "root_pid": 341066,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341067,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62267392,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.2618179698474705,
+      "guard": {
+        "root_pid": 341069,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341070,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 61935616,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.30838162591680884,
+      "guard": {
+        "root_pid": 341072,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341073,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 61804544,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17204355308786035,
+      "guard": {
+        "root_pid": 341075,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341076,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.4096328117884696,
+      "guard": {
+        "root_pid": 341078,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341079,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62640128,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.1917043779976666,
+      "guard": {
+        "root_pid": 341081,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341082,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.5368399899452925,
+      "guard": {
+        "root_pid": 341084,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341085,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62984192,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.2913415119983256,
+      "guard": {
+        "root_pid": 341087,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341088,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62730240,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.523154922761023,
+      "guard": {
+        "root_pid": 341090,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341091,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62754816,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.3863642541691661,
+      "guard": {
+        "root_pid": 341093,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341094,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62889984,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.26187819009646773,
+      "guard": {
+        "root_pid": 341096,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341097,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62615552,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.261531266849488,
+      "guard": {
+        "root_pid": 341100,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341101,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62353408,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1715530352666974,
+      "guard": {
+        "root_pid": 341103,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341104,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.3305137157440186,
+      "guard": {
+        "root_pid": 341106,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341107,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63082496,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 11,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.19006223883479834,
+      "guard": {
+        "root_pid": 341109,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341110,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.4952775249257684,
+      "guard": {
+        "root_pid": 341112,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341113,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62906368,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.29736285004764795,
+      "guard": {
+        "root_pid": 341115,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341116,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62603264,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.5138424350880086,
+      "guard": {
+        "root_pid": 341118,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341119,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62771200,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.38563576713204384,
+      "guard": {
+        "root_pid": 341121,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341122,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62730240,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.2668360713869333,
+      "guard": {
+        "root_pid": 341124,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341125,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62935040,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.25382055807858706,
+      "guard": {
+        "root_pid": 341127,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341128,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62750720,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1682314621284604,
+      "guard": {
+        "root_pid": 341130,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341131,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.4232094958424568,
+      "guard": {
+        "root_pid": 341133,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341134,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63455232,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.19026608392596245,
+      "guard": {
+        "root_pid": 341136,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341137,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.5163309597410262,
+      "guard": {
+        "root_pid": 341139,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341140,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62914560,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.2918269596993923,
+      "guard": {
+        "root_pid": 341142,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341143,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62246912,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.5192874316126108,
+      "guard": {
+        "root_pid": 341146,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341147,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63168512,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.2776702642440796,
+      "guard": {
+        "root_pid": 341149,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341150,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62709760,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.2671039397828281,
+      "guard": {
+        "root_pid": 341152,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341153,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62779392,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.25922798877581954,
+      "guard": {
+        "root_pid": 341155,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341156,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62791680,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1744311130605638,
+      "guard": {
+        "root_pid": 341158,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341159,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.4234764580614865,
+      "guard": {
+        "root_pid": 341161,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341162,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63483904,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.19237969117239118,
+      "guard": {
+        "root_pid": 341164,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341165,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.493869022000581,
+      "guard": {
+        "root_pid": 341167,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341168,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63094784,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.3061056458391249,
+      "guard": {
+        "root_pid": 341170,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341171,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62734336,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.5228747050277889,
+      "guard": {
+        "root_pid": 341175,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341176,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63160320,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.28538077091798186,
+      "guard": {
+        "root_pid": 341180,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341181,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62906368,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.2664973419159651,
+      "guard": {
+        "root_pid": 341183,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341184,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62906368,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.25134167075157166,
+      "guard": {
+        "root_pid": 341186,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341187,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62791680,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1714373230934143,
+      "guard": {
+        "root_pid": 341189,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341190,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.4536708248779178,
+      "guard": {
+        "root_pid": 341192,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341193,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63774720,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.19116761535406113,
+      "guard": {
+        "root_pid": 341195,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341196,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.49293986009433866,
+      "guard": {
+        "root_pid": 341200,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341201,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63381504,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.2542649111710489,
+      "guard": {
+        "root_pid": 341203,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341204,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62824448,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.522360255010426,
+      "guard": {
+        "root_pid": 341206,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341207,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63594496,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.3665833971463144,
+      "guard": {
+        "root_pid": 341209,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341210,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63598592,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.2749026780948043,
+      "guard": {
+        "root_pid": 341212,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341213,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62812160,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.25910150399431586,
+      "guard": {
+        "root_pid": 341215,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341216,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63537152,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17224696977064013,
+      "guard": {
+        "root_pid": 341218,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341219,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.401198610663414,
+      "guard": {
+        "root_pid": 341221,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341222,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64028672,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.19203075906261802,
+      "guard": {
+        "root_pid": 341224,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341225,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6346020656637847,
+      "guard": {
+        "root_pid": 341227,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341228,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63664128,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.4991486887447536,
+      "guard": {
+        "root_pid": 341230,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341231,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63524864,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.19193250825628638,
+      "guard": {
+        "root_pid": 341233,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341234,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.519325858913362,
+      "guard": {
+        "root_pid": 341238,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341239,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63623168,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.4014702099375427,
+      "guard": {
+        "root_pid": 341241,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341242,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63369216,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.25638854410499334,
+      "guard": {
+        "root_pid": 341244,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341245,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63270912,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.2653127037920058,
+      "guard": {
+        "root_pid": 341247,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341248,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 62889984,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1727522467263043,
+      "guard": {
+        "root_pid": 341250,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341251,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.4004249568097293,
+      "guard": {
+        "root_pid": 341255,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341256,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63922176,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.19072919664904475,
+      "guard": {
+        "root_pid": 341258,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341259,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6294920141808689,
+      "guard": {
+        "root_pid": 341261,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341262,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63606784,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.49932210985571146,
+      "guard": {
+        "root_pid": 341264,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341265,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 63352832,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.27904225094243884,
+      "guard": {
+        "root_pid": 341267,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341268,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64184320,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.5230532810091972,
+      "guard": {
+        "root_pid": 341270,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341271,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64610304,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.401185454800725,
+      "guard": {
+        "root_pid": 341273,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341274,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64663552,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.2666822001338005,
+      "guard": {
+        "root_pid": 341276,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341277,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64245760,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.2644496173597872,
+      "guard": {
+        "root_pid": 341279,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341280,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64155648,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1722432398237288,
+      "guard": {
+        "root_pid": 341282,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341283,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.4585965522564948,
+      "guard": {
+        "root_pid": 341285,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341286,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64888832,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.13566300366073847,
+      "guard": {
+        "root_pid": 341288,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341289,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6083280169405043,
+      "guard": {
+        "root_pid": 341291,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341292,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64782336,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.5033319992944598,
+      "guard": {
+        "root_pid": 341302,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341303,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64434176,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.30397888319566846,
+      "guard": {
+        "root_pid": 341305,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341306,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64610304,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.478358905762434,
+      "guard": {
+        "root_pid": 341308,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341309,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64372736,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.3912944449111819,
+      "guard": {
+        "root_pid": 341311,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341312,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64733184,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.260522045660764,
+      "guard": {
+        "root_pid": 341314,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341315,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64540672,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.2608420173637569,
+      "guard": {
+        "root_pid": 341317,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341318,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64454656,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17274881107732654,
+      "guard": {
+        "root_pid": 341320,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341321,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.4391522333025932,
+      "guard": {
+        "root_pid": 341323,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341324,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65073152,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.13896208116784692,
+      "guard": {
+        "root_pid": 341326,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341327,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6253051911480725,
+      "guard": {
+        "root_pid": 341329,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341330,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64528384,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.4939092770218849,
+      "guard": {
+        "root_pid": 341333,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341334,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64258048,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.25166996428743005,
+      "guard": {
+        "root_pid": 341336,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341337,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64000000,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.5158307440578938,
+      "guard": {
+        "root_pid": 341340,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341341,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64528384,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.40771940210834146,
+      "guard": {
+        "root_pid": 341343,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341344,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 64380928,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.26747961807996035,
+      "guard": {
+        "root_pid": 341346,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341347,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65200128,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.26179035380482674,
+      "guard": {
+        "root_pid": 341349,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341350,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65396736,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17319580307230353,
+      "guard": {
+        "root_pid": 341352,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341353,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.4541131779551506,
+      "guard": {
+        "root_pid": 341355,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341356,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65941504,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.19041232811287045,
+      "guard": {
+        "root_pid": 341360,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341361,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6384607790969312,
+      "guard": {
+        "root_pid": 341363,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341364,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66088960,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.49242874002084136,
+      "guard": {
+        "root_pid": 341366,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341367,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65822720,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.25825286796316504,
+      "guard": {
+        "root_pid": 341369,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341370,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65650688,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.48492479929700494,
+      "guard": {
+        "root_pid": 341372,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341373,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65802240,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.29391203075647354,
+      "guard": {
+        "root_pid": 341375,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341376,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65568768,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.2714116028510034,
+      "guard": {
+        "root_pid": 341378,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341379,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65667072,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.2629470000974834,
+      "guard": {
+        "root_pid": 341381,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341382,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65634304,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1729581318795681,
+      "guard": {
+        "root_pid": 341384,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341385,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.4518993617966771,
+      "guard": {
+        "root_pid": 341387,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341388,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66187264,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.19219058007001877,
+      "guard": {
+        "root_pid": 341390,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341391,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6410056040622294,
+      "guard": {
+        "root_pid": 341393,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341394,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66183168,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.5126022561453283,
+      "guard": {
+        "root_pid": 341396,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341397,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65552384,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 86,
+      "seconds": 0.27747278241440654,
+      "guard": {
+        "root_pid": 341399,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341400,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65495040,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.5246532671153545,
+      "guard": {
+        "root_pid": 341404,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341405,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66019328,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.29066329868510365,
+      "guard": {
+        "root_pid": 341407,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341408,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65830912,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resume",
+      "exit": 0,
+      "seconds": 0.2683389210142195,
+      "guard": {
+        "root_pid": 341410,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341411,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66015232,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.2651800289750099,
+      "guard": {
+        "root_pid": 341413,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341414,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65380352,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.1679053520783782,
+      "guard": {
+        "root_pid": 341416,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341417,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.4362617847509682,
+      "guard": {
+        "root_pid": 341420,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341421,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66437120,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.13692347006872296,
+      "guard": {
+        "root_pid": 341423,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341424,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6295638983137906,
+      "guard": {
+        "root_pid": 341426,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341427,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66420736,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.3395764622837305,
+      "guard": {
+        "root_pid": 341429,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341430,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66400256,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 11,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.192343361210078,
+      "guard": {
+        "root_pid": 341433,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341434,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 86,
+      "seconds": 0.3689099969342351,
+      "guard": {
+        "root_pid": 341436,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341437,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65712128,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resolve",
+      "exit": 0,
+      "seconds": 0.17303284211084247,
+      "guard": {
+        "root_pid": 341439,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341440,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "checkpoint",
+      "exit": 0,
+      "seconds": 0.4056055978871882,
+      "guard": {
+        "root_pid": 341443,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341444,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65523712,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.2544513619504869,
+      "guard": {
+        "root_pid": 341446,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341447,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65089536,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.29910408379510045,
+      "guard": {
+        "root_pid": 341449,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341450,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65683456,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.1742049972526729,
+      "guard": {
+        "root_pid": 341452,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341453,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resolve",
+      "exit": 0,
+      "seconds": 0.17293429793789983,
+      "guard": {
+        "root_pid": 341455,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341456,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.1759890508837998,
+      "guard": {
+        "root_pid": 341458,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341459,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.419453020207584,
+      "guard": {
+        "root_pid": 341461,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341462,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66285568,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.1427377900108695,
+      "guard": {
+        "root_pid": 341464,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341465,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 86,
+      "seconds": 0.1921120029874146,
+      "guard": {
+        "root_pid": 341467,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341468,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.3065523961558938,
+      "guard": {
+        "root_pid": 341487,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341488,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65650688,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 2,
+      "seconds": 0.17293290700763464,
+      "guard": {
+        "root_pid": 341490,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341491,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.2660778942517936,
+      "guard": {
+        "root_pid": 341493,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341494,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65347584,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.29768723994493484,
+      "guard": {
+        "root_pid": 341498,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341499,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65486848,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.4007242158986628,
+      "guard": {
+        "root_pid": 341501,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341502,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66289664,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.1997681087814271,
+      "guard": {
+        "root_pid": 341506,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341507,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66355200,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 10,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.19200134370476007,
+      "guard": {
+        "root_pid": 341509,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341510,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 86,
+      "seconds": 0.5886614196933806,
+      "guard": {
+        "root_pid": 341512,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341513,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66703360,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resolve",
+      "exit": 0,
+      "seconds": 0.17309167282655835,
+      "guard": {
+        "root_pid": 341515,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341516,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "checkpoint",
+      "exit": 0,
+      "seconds": 0.6036803382448852,
+      "guard": {
+        "root_pid": 341518,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341519,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66478080,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.298834471963346,
+      "guard": {
+        "root_pid": 341523,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341524,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65482752,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.39057484781369567,
+      "guard": {
+        "root_pid": 341526,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341527,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66260992,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 3,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.17301691882312298,
+      "guard": {
+        "root_pid": 341529,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341530,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "resolve",
+      "exit": 0,
+      "seconds": 0.17247011000290513,
+      "guard": {
+        "root_pid": 341532,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341533,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "audit",
+      "exit": 0,
+      "seconds": 0.18403675174340606,
+      "guard": {
+        "root_pid": 341536,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341537,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.311351791024208,
+      "guard": {
+        "root_pid": 341539,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341540,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66232320,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 11,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.1941926977597177,
+      "guard": {
+        "root_pid": 341542,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341543,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 86,
+      "seconds": 0.2958959680981934,
+      "guard": {
+        "root_pid": 341545,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341546,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65683456,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.30125587433576584,
+      "guard": {
+        "root_pid": 341566,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341567,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65556480,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 2,
+      "seconds": 0.1678630611859262,
+      "guard": {
+        "root_pid": 341569,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341570,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.2793431016616523,
+      "guard": {
+        "root_pid": 341572,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341573,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65699840,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.30040264083072543,
+      "guard": {
+        "root_pid": 341575,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341576,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66035712,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6415841118432581,
+      "guard": {
+        "root_pid": 341578,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341579,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66666496,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.3990504080429673,
+      "guard": {
+        "root_pid": 341581,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341582,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66560000,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.3018008917570114,
+      "guard": {
+        "root_pid": 341584,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341585,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65994752,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 2,
+      "seconds": 0.2871413337998092,
+      "guard": {
+        "root_pid": 341589,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341590,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65818624,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.381756644230336,
+      "guard": {
+        "root_pid": 341592,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341593,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66723840,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 12,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.3009964469820261,
+      "guard": {
+        "root_pid": 341595,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341596,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65531904,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17345622973516583,
+      "guard": {
+        "root_pid": 341598,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341599,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "inspect",
+      "exit": 0,
+      "seconds": 0.17368844617158175,
+      "guard": {
+        "root_pid": 341601,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341602,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.48949575889855623,
+      "guard": {
+        "root_pid": 341604,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341605,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66494464,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.4907892611809075,
+      "guard": {
+        "root_pid": 341607,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341608,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66166784,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 4,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "refresh",
+      "exit": 0,
+      "seconds": 0.28742204094305634,
+      "guard": {
+        "root_pid": 341610,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341611,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 65789952,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17909066006541252,
+      "guard": {
+        "root_pid": 341613,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341614,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "init",
+      "exit": 0,
+      "seconds": 1.182227665092796,
+      "guard": {
+        "root_pid": 341616,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341617,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66891776,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 10,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "lifecycle",
+      "exit": 0,
+      "seconds": 0.30206142319366336,
+      "guard": {
+        "root_pid": 341619,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341620,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 66134016,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 2,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17422405816614628,
+      "guard": {
+        "root_pid": 341622,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341623,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "inspect",
+      "exit": 0,
+      "seconds": 0.16798202227801085,
+      "guard": {
+        "root_pid": 341625,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341626,
+        "seconds_limit": 115.0,
+        "per_process_limit": 268435456,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6595994499512017,
+      "guard": {
+        "root_pid": 341629,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341630,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 67268608,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "publish",
+      "exit": 0,
+      "seconds": 0.6613043341785669,
+      "guard": {
+        "root_pid": 341632,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341633,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": 67031040,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 5,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    },
+    {
+      "action": "dump",
+      "exit": 0,
+      "seconds": 0.17430968396365643,
+      "guard": {
+        "root_pid": 341635,
+        "supervisor_pid": 340595,
+        "watchdog_pid": 341636,
+        "seconds_limit": 115.0,
+        "per_process_limit": 2147483648,
+        "aggregate_limit": 3221225472,
+        "observed_aggregate_peak": null,
+        "exact_continuous_peak": null,
+        "missing_samples": 1,
+        "sample_count": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "timer_independent_of_census_and_worker": true
+      }
+    }
+  ],
+  "new_stage_only_repeated_F_recovery_authorized": true,
+  "bootstrap_failure_prefix_preserved": true,
+  "frozen_oracle_binding": {
+    "path": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-navigation-2026-10-19/oracle.py",
+    "sha256": "877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f"
+  },
+  "old_phase_partial_not_relabelled": true,
+  "global_P_pass": null
+}

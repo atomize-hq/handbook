@@ -1,0 +1,122 @@
+{
+  "epoch": 1792476198.657862,
+  "status": "FRESH_ORIGINAL_F_24_CASES_282_EVENTS_PASS",
+  "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "exe_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+  "cases": 24,
+  "events": 282,
+  "original_events_UTF8_JSON": {
+    "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture-complete/events.json",
+    "bytes": 1567321,
+    "sha256": "54eb3dc6f6b533c66be24367a01fffe7565ff4c9d32d55932f66c48c0971e58f",
+    "rows": 282,
+    "compressed": false
+  },
+  "summary": {
+    "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/fixture-complete/summary.json",
+    "bytes": 3635,
+    "sha256": "82a485d5798bbbb3680a529e02b6e1f964360206d3a7dcb88e5cf24dbbe4f17a"
+  },
+  "source_before_after": {
+    "source145_core18_match": true,
+    "old_source139_match": true,
+    "old063_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe",
+    "new_a850_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+    "old_QN_source_bindings": [
+      {
+        "root": "/home/spenser/file-native-n-linux-20261019",
+        "source_files": 163,
+        "all_match": true
+      },
+      {
+        "root": "/home/spenser/file-native-q-linux-20261019-final",
+        "source_files": 95,
+        "all_match": true
+      }
+    ]
+  },
+  "old_entire_native_tree_unchanged_including_compressed_prefix": true,
+  "old_tree_files": 15990,
+  "bootstrap_failure_prefix_preserved": true,
+  "frozen_oracle_binding": {
+    "path": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-navigation-2026-10-19/oracle.py",
+    "sha256": "877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f"
+  },
+  "outer": {
+    "seconds": 174.37729357881472,
+    "guard": {
+      "root_pid": 340595,
+      "supervisor_pid": 340594,
+      "watchdog_pid": 340596,
+      "seconds_limit": 502.4897201061249,
+      "per_process_limit": 2147483648,
+      "aggregate_limit": 3221225472,
+      "observed_aggregate_peak": 105123840,
+      "exact_continuous_peak": null,
+      "missing_samples": 1,
+      "sample_count": 1390,
+      "violations": [],
+      "remaining_live_pids": [],
+      "timer_independent_of_census_and_worker": true
+    }
+  },
+  "engine_resources_count": 282,
+  "all_guard_receipts": {
+    "count": 287,
+    "observed_aggregate_RSS_peak_bytes": 105123840,
+    "missing_samples_count": 287,
+    "missing_sample_value": null,
+    "exact_continuous_peak": null,
+    "violations": [],
+    "remaining_live_pids": []
+  },
+  "post_run_proc_scan": [],
+  "disk": {
+    "operation_forecast_rows": 319,
+    "max_operation_reserved_whole_bytes": 267186856,
+    "atomic_write_rows": 285,
+    "max_atomic_report_with_temp_preflight_bytes": 3419623,
+    "max_atomic_whole_with_temp_preflight_bytes": 266842370,
+    "exact_continuous_disk_peak_bytes": null
+  },
+  "ownership": {
+    "native": {
+      "bytes": 252215262,
+      "files": 21541
+    },
+    "new_fixture": {
+      "bytes": 46820442,
+      "files": 5242
+    },
+    "fixtures": {
+      "bytes": 215825212,
+      "files": 18861
+    },
+    "combined_bound_bytes": 265612728,
+    "combined_bound_files": 22342,
+    "native_report_bytes": 2178144,
+    "free_bytes": 24755638272
+  },
+  "raw_receipt_inventory": {
+    "path": "/home/spenser/file-native-p-linux-20261020/recovery-only-20261020T054348Z/raw-receipt-inventory.json.gz",
+    "rows": 5550,
+    "bytes": 145090,
+    "sha256": "80b9239044200f06817085bf7efc3f6a97eae44f57028e2763214696915582a7",
+    "excludes_itself_and_later_closeout_files": true
+  },
+  "clocks": {
+    "receipt_epoch": 1792475028,
+    "functional_cutoff_epoch": 1792476228,
+    "closeout_deadline_epoch": 1792476528,
+    "original_P_dispatch_epoch": 1792463116,
+    "original_P_functional_epoch": 1792482916,
+    "original_P_closeout_epoch": 1792484716
+  },
+  "old_phase_partial_not_relabelled": true,
+  "global_P_pass": null,
+  "cleanup_performed": false,
+  "unmeasured": {
+    "exact_continuous_memory_peak": null,
+    "exact_continuous_disk_peak": null
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "independent_parent_XZ_full_stream_and_current_tree_verification": true,
+  "members": 568,
+  "raw_bytes": 440175466,
+  "compressed_bytes": 23759008,
+  "transport_sha256": "849e159dd1c9130e5fa27a5d69947f717ad5256f01efe2ae6851c5fbb0ac7fb8",
+  "inventory_sha256": "63d7df0a00d2ae819d2007674b98ce7a70f7b4376a44af3648f39d6ed6fce360",
+  "retained_executable_bytes": 1443840,
+  "potential_release_after_separate_review_bytes": 438731626,
+  "failed_gzip_prefix": {
+    "bytes": 66100201,
+    "sha256": "7215d45bca14cd9c1f6494ba42f57751ddf001ac957bc1d4812f924d544d9a8f"
+  },
+  "no_deletion": true,
+  "verifier_seconds": 2.1560000000172295
+}

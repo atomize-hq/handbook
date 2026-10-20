@@ -1,0 +1,144 @@
+{
+  "status": "complete",
+  "api": "GetFileInformationByHandleEx(FileStandardInfo=1).AllocationSize",
+  "total": {
+    "files": 5812,
+    "logical_bytes": 592459049,
+    "allocation_bytes": 601891608
+  },
+  "engine_excluding_test_ledger": {
+    "files": 5811,
+    "logical_bytes": 345898733,
+    "allocation_bytes": 355328792
+  },
+  "roles": {
+    "DISPOSABLE.json": {
+      "files": 1,
+      "logical_bytes": 78,
+      "allocation_bytes": 80
+    },
+    "expected-ledger.jsonl": {
+      "files": 1,
+      "logical_bytes": 246560316,
+      "allocation_bytes": 246562816
+    },
+    "HISTORY-SOURCE.json": {
+      "files": 1,
+      "logical_bytes": 375,
+      "allocation_bytes": 376
+    },
+    "INITIAL-ORACLE.json": {
+      "files": 1,
+      "logical_bytes": 7915,
+      "allocation_bytes": 8192
+    },
+    "pack-maintenance.lock": {
+      "files": 1,
+      "logical_bytes": 0,
+      "allocation_bytes": 0
+    },
+    "pack-readers.lock": {
+      "files": 1,
+      "logical_bytes": 0,
+      "allocation_bytes": 0
+    },
+    "PACKING.json": {
+      "files": 1,
+      "logical_bytes": 8085,
+      "allocation_bytes": 8192
+    },
+    "preparation.lock": {
+      "files": 1,
+      "logical_bytes": 0,
+      "allocation_bytes": 0
+    },
+    "README.md": {
+      "files": 1,
+      "logical_bytes": 348,
+      "allocation_bytes": 352
+    },
+    "RESERVATIONS.json": {
+      "files": 1,
+      "logical_bytes": 2,
+      "allocation_bytes": 8
+    },
+    "SELECTED.json": {
+      "files": 1,
+      "logical_bytes": 143,
+      "allocation_bytes": 144
+    },
+    "STORE.json": {
+      "files": 1,
+      "logical_bytes": 238,
+      "allocation_bytes": 240
+    },
+    "VIEW.json": {
+      "files": 1,
+      "logical_bytes": 490,
+      "allocation_bytes": 496
+    },
+    "writer.lock": {
+      "files": 1,
+      "logical_bytes": 0,
+      "allocation_bytes": 0
+    },
+    "derived": {
+      "files": 22,
+      "logical_bytes": 8599,
+      "allocation_bytes": 11648
+    },
+    "fences": {
+      "files": 4,
+      "logical_bytes": 83,
+      "allocation_bytes": 96
+    },
+    "objects": {
+      "files": 5597,
+      "logical_bytes": 62062756,
+      "allocation_bytes": 71417920
+    },
+    "originals": {
+      "files": 17,
+      "logical_bytes": 155648,
+      "allocation_bytes": 155648
+    },
+    "pack-catalogs": {
+      "files": 2,
+      "logical_bytes": 15569,
+      "allocation_bytes": 16384
+    },
+    "packing-journals": {
+      "files": 1,
+      "logical_bytes": 377,
+      "allocation_bytes": 384
+    },
+    "packing-owners": {
+      "files": 2,
+      "logical_bytes": 8311,
+      "allocation_bytes": 8504
+    },
+    "packs": {
+      "files": 32,
+      "logical_bytes": 283460393,
+      "allocation_bytes": 283529216
+    },
+    "retired": {
+      "files": 101,
+      "logical_bytes": 14554,
+      "allocation_bytes": 14696
+    },
+    "view": {
+      "files": 20,
+      "logical_bytes": 154769,
+      "allocation_bytes": 156216
+    }
+  },
+  "workers": 16,
+  "max_pending": 64,
+  "seconds": 19.03100000001723,
+  "selected_unchanged": true,
+  "store_unchanged": true,
+  "directory_filesystem_metadata": null,
+  "physical_device_writes": null,
+  "qualification": "regular-file data allocation only; coexisting immutable loose duplicates retain matched original-cohort bytes; whole-store loose allocation before activation was not measured"
+}

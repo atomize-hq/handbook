@@ -1,0 +1,57 @@
+{
+  "status": "PREPARATORY_CODE_READY_FOR_PARENT_AUDIT; BUILD_HOLD",
+  "utc": "2026-10-20T06:01:56.957939+00:00",
+  "code": {
+    "file": "build-supervisor.py",
+    "bytes": 18653,
+    "sha256": "8bb745ac95cb18d63bef4af0f4573a4bb2e53d2d0d2bfb56143f4a3684095700"
+  },
+  "config": {
+    "file": "proposal.json",
+    "bytes": 2814,
+    "sha256": "def5177722eef6eb119a02655923c0e5cd5dfeed7ba80a24f45630e6252288bc"
+  },
+  "validation": {
+    "syntax_compile_without_bytecode": "PASS",
+    "default_dry_run_exit": 0,
+    "source145_and_core18_match": true,
+    "private_registry1520_match": true,
+    "target_exists": false,
+    "fixture_exists": false,
+    "frozen_exists": false,
+    "Cargo_compiler_engine_invoked": false,
+    "future_allocation": null
+  },
+  "dry_forecast": {
+    "current_whole": {
+      "bytes": 26695127,
+      "files": 1757
+    },
+    "current_private": {
+      "bytes": 24247976,
+      "files": 1536
+    },
+    "other_bytes_plus_1572864_reserve": 4020015,
+    "build_proposal_MiB": 212,
+    "future_cap_MiB_NOT_ALLOCATED": 256,
+    "conditional_units_pre_actual_max_bytes": 161480704,
+    "additional_reserve_charged": 1572864,
+    "unit_additional_MiB": 102
+  },
+  "remaining_proof": [
+    "Parent audit of executable helper/config before GO.",
+    "Physical capacity release verified and explicit256MiB allocation plus UTC GO.",
+    "Native actual Cargo cold offline locked resolution/build/size and five tests remain unproved.",
+    "RSS ps availability required; missing means NULL and stop.",
+    "Aggregate disk enforcement is sampled conservative stopping, not a kernel quota.",
+    "Killed/failed run may need parent closeout to establish after-bindings; UNKNOWN until obtained."
+  ],
+  "original_preparation_completion": {
+    "worker_utc": "2026-10-20T05:15:54.828420Z",
+    "supervisor_utc": "2026-10-20T05:15:55.472804Z"
+  },
+  "original_functional_cutoff_utc": "2026-10-20T07:55:16Z",
+  "original_closeout_utc": "2026-10-20T08:25:16Z",
+  "shared_DB_attribution": "UNKNOWN",
+  "shared_action": "superseded/blocked; no retry or restoration"
+}

@@ -1,0 +1,87 @@
+{
+  "final_source_files_parent_verified": 145,
+  "new_exe_parent_sha256": "a8501737ca4fdd5cfc177620860c1ae103d56f2e9b2151104a922df511a3d84b",
+  "old_bin_preserved": true,
+  "archive_hash_unchanged": true,
+  "unit_fixture_files_independently_matched_to_archive": 8,
+  "unit_fixture_raw_bytes": 80976318,
+  "directory_relative_names": [
+    "packing-cache-boundary-337442-1792472230531780250-1",
+    "packing-cache-boundary-337442-1792472230531780250-1/packs"
+  ],
+  "mapping": [
+    {
+      "new_path": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-337442-1792472230531780250-1/lease",
+      "new_relative": "packing-cache-boundary-337442-1792472230531780250-1/lease",
+      "normalized_path": "lease",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "existing_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/lease",
+      "matches_existing_verified_archive_inventory": true
+    },
+    {
+      "new_path": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-337442-1792472230531780250-1/packs/14129ba46852350f7a557e7925fe0d1e4ff81fa3aed9ca1899022d8232b1ec28.idx",
+      "new_relative": "packing-cache-boundary-337442-1792472230531780250-1/packs/14129ba46852350f7a557e7925fe0d1e4ff81fa3aed9ca1899022d8232b1ec28.idx",
+      "normalized_path": "packs/14129ba46852350f7a557e7925fe0d1e4ff81fa3aed9ca1899022d8232b1ec28.idx",
+      "bytes": 13496053,
+      "sha256": "14129ba46852350f7a557e7925fe0d1e4ff81fa3aed9ca1899022d8232b1ec28",
+      "existing_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/14129ba46852350f7a557e7925fe0d1e4ff81fa3aed9ca1899022d8232b1ec28.idx",
+      "matches_existing_verified_archive_inventory": true
+    },
+    {
+      "new_path": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-337442-1792472230531780250-1/packs/2e30643ec03ee32590ddbd030db51b5dfbf95052bd915c4d5d33a1834343658c.idx",
+      "new_relative": "packing-cache-boundary-337442-1792472230531780250-1/packs/2e30643ec03ee32590ddbd030db51b5dfbf95052bd915c4d5d33a1834343658c.idx",
+      "normalized_path": "packs/2e30643ec03ee32590ddbd030db51b5dfbf95052bd915c4d5d33a1834343658c.idx",
+      "bytes": 13496053,
+      "sha256": "2e30643ec03ee32590ddbd030db51b5dfbf95052bd915c4d5d33a1834343658c",
+      "existing_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/2e30643ec03ee32590ddbd030db51b5dfbf95052bd915c4d5d33a1834343658c.idx",
+      "matches_existing_verified_archive_inventory": true
+    },
+    {
+      "new_path": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-337442-1792472230531780250-1/packs/317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3.idx",
+      "new_relative": "packing-cache-boundary-337442-1792472230531780250-1/packs/317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3.idx",
+      "normalized_path": "packs/317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3.idx",
+      "bytes": 13496053,
+      "sha256": "317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3",
+      "existing_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3.idx",
+      "matches_existing_verified_archive_inventory": true
+    },
+    {
+      "new_path": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-337442-1792472230531780250-1/packs/8c3e874cb9612903b53911498b8e5d6fd7c55d4c1aa95d3f9f36e080cc1d1549.idx",
+      "new_relative": "packing-cache-boundary-337442-1792472230531780250-1/packs/8c3e874cb9612903b53911498b8e5d6fd7c55d4c1aa95d3f9f36e080cc1d1549.idx",
+      "normalized_path": "packs/8c3e874cb9612903b53911498b8e5d6fd7c55d4c1aa95d3f9f36e080cc1d1549.idx",
+      "bytes": 13496053,
+      "sha256": "8c3e874cb9612903b53911498b8e5d6fd7c55d4c1aa95d3f9f36e080cc1d1549",
+      "existing_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/8c3e874cb9612903b53911498b8e5d6fd7c55d4c1aa95d3f9f36e080cc1d1549.idx",
+      "matches_existing_verified_archive_inventory": true
+    },
+    {
+      "new_path": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-337442-1792472230531780250-1/packs/9451e66a13810fefcd5605edd2a50c982f909d9c993047467013f2769e08bd8e.idx",
+      "new_relative": "packing-cache-boundary-337442-1792472230531780250-1/packs/9451e66a13810fefcd5605edd2a50c982f909d9c993047467013f2769e08bd8e.idx",
+      "normalized_path": "packs/9451e66a13810fefcd5605edd2a50c982f909d9c993047467013f2769e08bd8e.idx",
+      "bytes": 13496053,
+      "sha256": "9451e66a13810fefcd5605edd2a50c982f909d9c993047467013f2769e08bd8e",
+      "existing_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/9451e66a13810fefcd5605edd2a50c982f909d9c993047467013f2769e08bd8e.idx",
+      "matches_existing_verified_archive_inventory": true
+    },
+    {
+      "new_path": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-337442-1792472230531780250-1/packs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.pack",
+      "new_relative": "packing-cache-boundary-337442-1792472230531780250-1/packs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.pack",
+      "normalized_path": "packs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.pack",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "existing_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.pack",
+      "matches_existing_verified_archive_inventory": true
+    },
+    {
+      "new_path": "/home/spenser/file-native-p-linux-20261020/source-final/docs/research/file-native-incremental-engine-experiment-2026-10-18/target/packing-cache-boundary-337442-1792472230531780250-1/packs/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.idx",
+      "new_relative": "packing-cache-boundary-337442-1792472230531780250-1/packs/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.idx",
+      "normalized_path": "packs/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.idx",
+      "bytes": 13496053,
+      "sha256": "317b6f5883c3513b584f4cef3bc3e5a538384a192761097ca53c8778c258b4b3",
+      "existing_archive_member": "unit-cache/packing-cache-boundary-334097-1792469481472076095-2/packs/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.idx",
+      "matches_existing_verified_archive_inventory": true
+    }
+  ],
+  "no_deletion_performed": true
+}

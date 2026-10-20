@@ -1,0 +1,58 @@
+{
+  "utc": "2026-10-20T06:12:54.629663+00:00",
+  "status": "CAPTURE-ONLY PROPOSAL; requires parent admission",
+  "cleanup_closed": true,
+  "cleanup_guard_exit": 0,
+  "cleanup_deferred_bytes": 0,
+  "actual_deleted_bytes": 1221001465,
+  "fresh_total_owned": {
+    "scopes": {
+      "runtime": {
+        "bytes": 1284711124,
+        "files": 31984
+      },
+      "worktree": {
+        "bytes": 2360901,
+        "files": 223
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 229041234,
+        "files": 2035
+      }
+    },
+    "total_new_bytes": 1463610171,
+    "total_new_files": 36189,
+    "free_bytes": 199525818368,
+    "time_utc": "2026-10-20T06:11:42.028880+00:00"
+  },
+  "source_store_expected_bytes": 592459042,
+  "source_store_expected_files": 5812,
+  "corrected_postcleanup_full_oracle": "running, must pass before capture",
+  "capture_capsule": "C:/file-native-packing-20261020/packed-operational-backup",
+  "capture_prewrite_combined_transport_inventory_limit": 620000000,
+  "source_stream_limit": 600000000,
+  "source_file_limit": 12000,
+  "receipt_source_binding_and_stage_margin": 33554432,
+  "capture_only_prospective_total": 2117164603,
+  "current_total_cap": 2766562918,
+  "capture_only_fits": true,
+  "wrapper": "docs/research/file-native-packing-2026-10-20/packed_backup_stage.py",
+  "stream_adapter_check": "prepared, unrun until verifier group closes",
+  "same_FN0P1_profile_and_raw_sha_inventory": true,
+  "capture_excludes": [
+    "DISPOSABLE.json",
+    "writer.lock",
+    "preparation.lock",
+    "pack-readers.lock",
+    "pack-maintenance.lock"
+  ],
+  "original_root_immutable_during_capture": true,
+  "no_data_cleanup_in_wrapper": true,
+  "restore_remains_separate": "after ACTUAL archive bytes + fresh ownership; max600000000 restored bytes and fresh root; prewrite quota across all threads",
+  "original_cutoff": "2026-10-20T07:55:16Z",
+  "original_final_deadline": "2026-10-20T08:25:16Z"
+}

@@ -79,6 +79,10 @@
     "bytes": 1018,
     "sha256": "e912f76609787a7b621f7602e7f83f1a79222067937fe8ecad440f02137a9a05"
   },
+  "coordinator-p-postcleanup-detect-changes.txt": {
+    "bytes": 2135,
+    "sha256": "f866c5ec4d0e579c414758e9c94868e9bfc6455ebb836865fd1ac1c0e25a418f"
+  },
   "coordinator-p-preparation-detect-changes.txt": {
     "bytes": 2151,
     "sha256": "ba3f391ca7e56875a2440abd066551bcfe8ac7e6a03dbcace54e8057e8523928"
@@ -187,6 +191,22 @@
     "bytes": 394,
     "sha256": "1226d117dc1466305d82cef06a236c07aa0b7f401773da1b6cbb85cbb1ae7fcc"
   },
+  "p-linux-final-recovery-child-receipts.json": {
+    "bytes": 169437,
+    "sha256": "2d7f4aa7d9477b16bdff2ccf0283cb0361fd8b5bee663d4acaa54eb2c1cf6103"
+  },
+  "p-linux-final-recovery-closeout-audit.json": {
+    "bytes": 4107,
+    "sha256": "dd5697857d6f6a0bf81834bb5cf589cf8d99ab3d791342113a8dcb7993cc020e"
+  },
+  "p-linux-final-recovery-report.md": {
+    "bytes": 3016,
+    "sha256": "940d168c799a253cf36783b6ea4e68345d01c8ce80dd9b19bc40f4cf2820decf"
+  },
+  "p-linux-final-source-unit-remap-parent-review.json": {
+    "bytes": 7413,
+    "sha256": "24bf6f65202d404a5682e4e9faa05e5523ea343eb604f4d560fa7fee3e9a33a2"
+  },
   "p-linux-partial-final-closeout-closeout.json": {
     "bytes": 5003,
     "sha256": "0da910f4f760879edda4be7705c51a2275a00d31fe90e7d24e73e0301622f448"
@@ -247,6 +267,10 @@
     "bytes": 1350,
     "sha256": "8e70937feb32ebf6f70ec6daf7de56f6adb870eb2131e579860b378d1bbe2f9a"
   },
+  "p-macos-isolated-preparation-reservation.json": {
+    "bytes": 934,
+    "sha256": "125b3aab7d7ac1a76953fe79c6b865c3d0f2abc23731b1143d39ebb94f035772"
+  },
   "p-macos-preflight-raw.tar.gz": {
     "bytes": 45963,
     "sha256": "5439523092f9927226d783781a0ee82af972294a5051d28e4a2bb34f496b105a"
@@ -258,6 +282,22 @@
   "p-macos-preparation-and-build-proposal.json": {
     "bytes": 17617,
     "sha256": "ef22f2bf4c6e80d236b0ce803fa42ce089122e97d2efaec99e7b48ca17bc6f76"
+  },
+  "p-macos-private-preparation-parent-audit.json": {
+    "bytes": 1526,
+    "sha256": "8041755b5665a161e825ef94038b7804aa03459aeaba1c596b2f44c4a1f490a5"
+  },
+  "p-macos-reviewed-build-supervisor.py": {
+    "bytes": 18653,
+    "sha256": "8bb745ac95cb18d63bef4af0f4573a4bb2e53d2d0d2bfb56143f4a3684095700"
+  },
+  "p-macos-reviewed-preparatory-report.json": {
+    "bytes": 2074,
+    "sha256": "0b6a1fdadd38fccd340cb6c787308913d440e374a362ee1eaea65ada4f71f236"
+  },
+  "p-macos-reviewed-proposal.json": {
+    "bytes": 2814,
+    "sha256": "def5177722eef6eb119a02655923c0e5cd5dfeed7ba80a24f45630e6252288bc"
   },
   "p-native-stage-resource-precommit.txt": {
     "bytes": 2766,
@@ -330,6 +370,58 @@
   "p-preservation-supervision/root-exits-descendant-survives.json": {
     "bytes": 2297,
     "sha256": "cc237cb7ffdadd808c5c69e68930c03188c2997e2cbfc6cbc10f6a305bafdad0"
+  },
+  "p-primary-cleanup-guard.json": {
+    "bytes": 4914,
+    "sha256": "7dea5474998c08ee517a324a87f3bd19c865b7eb0789c920ab416aeb041b035f"
+  },
+  "p-primary-cleanup-summary.json": {
+    "bytes": 3038,
+    "sha256": "36376210b6b0915c20958a9bf4335657bad604c50f43cab3cd450faaf5b315bb"
+  },
+  "p-primary-packed-capture-proposal.json": {
+    "bytes": 2046,
+    "sha256": "859a02ea4f75b7e16f2235a5c8c13cc737e004910bc61f2b9b78d9abe25af85c"
+  },
+  "p-primary-postcleanup-allocation.json": {
+    "bytes": 3467,
+    "sha256": "e89171416d40293ab49b651e2b55c8e9aeea7817d24eb94527165b27481c497c"
+  },
+  "p-primary-postcleanup-independent.json": {
+    "bytes": 1468,
+    "sha256": "19e2eb46022e1e25dec70d9a430ecdc50ebf204f7ce807f9ad7a4b43a11d96a2"
+  },
+  "p-primary-postcleanup-parent-checkpoint.json": {
+    "bytes": 1494,
+    "sha256": "db46e281b240746b83ea61702e6f6ef6c352266ddac3ede0a8693f2624ed7798"
+  },
+  "p-primary-postcleanup-reopen.json": {
+    "bytes": 339,
+    "sha256": "ed5d42c8587d00aa21de0c100d22dd9b130c38e87ab5dd410300cdb762cc92c9"
+  },
+  "p-primary-postcleanup-verify-guard.json": {
+    "bytes": 3205,
+    "sha256": "e39b82168ff64d2777005f0f582cf0cf529d9cc913911c4b853e7690658c2296"
+  },
+  "p-primary-PZ-independent.json": {
+    "bytes": 1480,
+    "sha256": "687566ff2f70b047766a0ad6ad43edaf2a710b0afc73d2967bf3b3f3e200415d"
+  },
+  "p-primary-PZ-measurement.json": {
+    "bytes": 356086,
+    "sha256": "4757bfd4dac1e8f105520cfd8db9e75ae3defda2d7b03a8311fa2b2f6296a42d"
+  },
+  "p-reallocation-mac-build-256mib.json": {
+    "bytes": 1012,
+    "sha256": "7dfd739a60c6f9f335dc3596b9962c6b01a84084d4d0ddba3687e50e6fa0677e"
+  },
+  "p-temporary-archive-unit-allocation.json": {
+    "bytes": 1362,
+    "sha256": "b9e98a71f9266f48ee3343d6b9f44cdd802391ba6f21c8a71f650bf53b3d0656"
+  },
+  "p-windows-XZ-parent-review.json": {
+    "bytes": 652,
+    "sha256": "cbeb9b1047cd128f8a172fb34a914ed80eb0e74afcaca2af62cadb033e01bf64"
   },
   "p0-checkpoint-final-core-binding.json": {
     "bytes": 3159,

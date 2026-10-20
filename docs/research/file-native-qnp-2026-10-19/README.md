@@ -3,8 +3,10 @@
 October 19, 2026. **The three-task increment is incomplete.** Fresh top-level Q
 Linux, Q Mac and N chats were dispatched under the human's authorization.
 The human approved 40 GiB combined capacity; finite Q/N execution is now admitted.
-Q Linux, Q Mac and N Linux have passed independent coordinator evidence review. P has
-not been dispatched because the remaining Q/N gates are open.
+Q and N have passed independent coordinator evidence review. P is executing under
+its original six-hour allocation and remains incomplete. The dated paragraphs
+below preserve earlier admission decisions; the task table and latest checkpoint
+describe current status.
 
 The integration branch is `codex/file-native-qnp-20261019`, based on verified
 recovery commit `f0904a63cb2500b9bea3a4034d19cbe38bfac729`. Current Rust/Cargo
@@ -16,10 +18,10 @@ original H101003 store, original archive and final H101006 clone are preserved.
 | --- | --- | --- |
 | Q native Linux/ext4 | required named cases passed; reviewed and integrated | optional stress censor and late read-only closeout remain explicit |
 | Q native macOS | required functional cases passed; reviewed and integrated | approval-delayed artifact closeout exceeded original budget; explicitly retained |
-| N Windows | frozen 4bde core and final 83f7330f report reviewed and integrated | native Mac qualification remains the functional gate |
+| N Windows | frozen 4bde core and final 83f7330f report reviewed and integrated | completed N prerequisites; P is separately qualified |
 | N native Linux/ext4 | final 4bde: 39 focused, 24 recovery, eight README cases passed | source, archive and native binary authenticated; reports integrated |
-| N native macOS | final 4bde tests/build and all 39 focused checks passed; 83 recovery operations recorded before censor | full recovery and supplements incomplete; original overall N window expired; fresh bounded follow-up needs human authorization |
-| P | undispatched | reviewed Q/N, actual integrated-pin native qualification, frozen navigation |
+| N native macOS | original censor preserved; separate authorized follow-up passed 24 recovery cases / 282 operations and 14 supplements | parent reviewed and integrated; original clock discrepancy retained |
+| P | executing; final core d70f, primary PZ and post-cleanup full oracle passed | Mac final-source qualification, packed capture/restore/successor, representative matrix and compression controls remain |
 
 Linux's original retained samples failed admission. After the human freed space,
 the refreshed sample records 51,107,393,536 free bytes versus 21,474,836,480
@@ -172,11 +174,51 @@ file reduction and compressed/restore results remain unqualified. See the
 [checkpoint](evidence/p0-checkpoint-report.md) and
 [parent review](evidence/coordinator-p0-and-native-regression-review.json).
 
-Native Linux independently found a correctness defect in candidate 4cb6:
+At the earlier P0 checkpoint, native Linux independently found a correctness defect in candidate 4cb6:
 immediate B-mode cleanup removes the loose publication file required to discover
 the selected generation with ordinary shell tools. The failing prefix is
 preserved, the P owner is preparing a fix, and further destructive packing is
 held. Linux's unit/packing/strict results remain partial evidence on 4cb6;
 recovery also stopped on a fixture-component overshoot. Native Mac P has only
 completed read-only preflight and artifact return. Neither native P qualification
-is complete, and new source must receive its own qualification.
+was complete at that checkpoint, and new source required its own qualification.
+
+At 06:16 UTC, final core `d70f3864f2888d46d9112213b4a03f8d82745a8e`
+retains B publication controls needed for ordinary shell discovery. Windows
+passed five unit tests, 54 packing cases, 24 strict supplements, and nine focused
+cases. Native Linux passed five units, 52 applicable packing cases, 24 strict
+supplements, eight applicable focused cases, ordinary Bash extraction and a fresh
+24-case / 282-operation recovery capsule. The old 4cb6 counterexample, resource
+censors, report-writer refusal and separate two-call oracle-bootstrap failure
+remain preserved; none is relabeled as a passing run.
+
+The primary PZ pack/index representation is 283,460,393 bytes versus P0's
+641,986,037 bytes, passing the frozen 20% reduction gate. Matched warm lookups
+pass the 2x gate. Fresh-process lookups remain about 18–45 ms versus qualified
+loose storage's 1.0–1.4 ms, separately reported. The independent Python verifier
+needed serialization around its shared mutable Zstandard decoder context; the
+first failure and race diagnostics survive, while Rust/core source is unchanged.
+Complete verification passed before and after physical cleanup with identical
+504,833-record inventory, 101,007 publications, 100,000 ledger rows and permanent
+history digest. Cleanup actually released 1,221,001,465 bytes / 504,865 files,
+with no deferred bytes. Eligible representation file count fell from 504,833 to
+33. Whole-store regular-file allocation is measured after cleanup; the missing
+whole-loose pre-activation allocation remains null. See the
+[parent checkpoint](evidence/p-primary-postcleanup-parent-checkpoint.json).
+
+Mac P has prepared an isolated private Cargo home and source-bound build
+supervisor. The parent audited all preparation write paths and reviewed the full
+build supervisor. The later shared Cargo bookkeeping database hash changed with
+unknown attribution; all 1,262 non-database shared inputs remained unchanged.
+No shared-cache mutation action was retried. The offline native build plus
+conditional units is admitted for 06:22–06:32 UTC, with artifact closeout by
+06:37. This is not a Mac build or qualification result. Its 256 MiB allocation
+comes from verified Windows release and reduced unused Windows forecasts. The
+[current reservation](evidence/p-reallocation-mac-build-256mib.json) totals
+42,822,437,652 bytes, including the internal 1 GiB reserve, below 40 GiB.
+
+Packed capture is separately admitted. Fresh restore, full verification, reopen,
+valid successor, H1k/H10k compression controls and the representative ordinary
+publication matrix remain pending. The integration branch still contains the
+qualified N engine; final P source has not yet been merged. No overall P pass or
+product-adoption recommendation is claimed.

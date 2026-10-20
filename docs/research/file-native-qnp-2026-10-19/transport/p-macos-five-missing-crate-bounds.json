@@ -1,0 +1,70 @@
+{
+  "created_utc": "2026-10-20T05:10:18.128421+00:00",
+  "lock_sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+  "scope": "read-only five exact package header bounds; no source/dependency changes",
+  "packages": [
+    {
+      "name": "cc",
+      "version": "1.9.0",
+      "sha256": "877bf67ac8e52449eb2f9e98a344ea163beb70dd1f9eebe3cc5357dcfeaee4df",
+      "archive_bytes": 147091,
+      "regular_payload_bytes": 572915,
+      "files": 39,
+      "directories": 0,
+      "max_file_bytes": 247051,
+      "tar_member_metadata_sha256": "5676a6aadb16cbab8b251a8517f2b9e899e0dc7ff79d372cd62582c06cb89bc0",
+      "expected_root_prefix": "cc-1.9.0/"
+    },
+    {
+      "name": "find-msvc-tools",
+      "version": "0.1.15",
+      "sha256": "1c66915cc5391097de7a2b0b972e8505aa33c0df401fd3a6811dbdb32881ba48",
+      "archive_bytes": 31634,
+      "regular_payload_bytes": 117324,
+      "files": 19,
+      "directories": 0,
+      "max_file_bytes": 60879,
+      "tar_member_metadata_sha256": "0ad3048911901928da1c1138848b5d624771b9b0d33a6b824f4e1e8c3da2a48e",
+      "expected_root_prefix": "find-msvc-tools-0.1.15/"
+    },
+    {
+      "name": "zstd",
+      "version": "0.14.3",
+      "sha256": "db3ae9bf90af6e40197bef767eeefc46ad6397420fe873830bd85e5fbbfb3c70",
+      "archive_bytes": 52615,
+      "regular_payload_bytes": 220987,
+      "files": 44,
+      "directories": 0,
+      "max_file_bytes": 16526,
+      "tar_member_metadata_sha256": "4183b3690b0df420ce748443d1a2e709caf4ddaa9ef22c28697c0efb2171f1f6",
+      "expected_root_prefix": "zstd-0.14.3/"
+    },
+    {
+      "name": "zstd-safe",
+      "version": "8.2.0",
+      "sha256": "ded520f16b29e1a9b771c722221b2b0a0398c2316d9bb3c42b458a5414d7434b",
+      "archive_bytes": 46799,
+      "regular_payload_bytes": 211956,
+      "files": 19,
+      "directories": 0,
+      "max_file_bytes": 106419,
+      "tar_member_metadata_sha256": "c373addd605fbe3366994359eba4acc9f7ec6dbef992327592372c8a46031307",
+      "expected_root_prefix": "zstd-safe-8.2.0/"
+    },
+    {
+      "name": "zstd-sys",
+      "version": "2.1.2+zstd.1.5.7",
+      "sha256": "481ada9c543b2323cbb7bbdbb5249177fbf0188ed959ed2c15e4b22421c84ed3",
+      "archive_bytes": 785774,
+      "regular_payload_bytes": 3655839,
+      "files": 129,
+      "directories": 0,
+      "max_file_bytes": 345541,
+      "tar_member_metadata_sha256": "55445ff19ecdfb1d38703dbacc769d2cecd78274d9359829c001a1410827c402",
+      "expected_root_prefix": "zstd-sys-2.1.2+zstd.1.5.7/"
+    }
+  ],
+  "total_archive_bytes": 1063913,
+  "total_regular_payload_bytes": 4779021,
+  "total_files": 250
+}

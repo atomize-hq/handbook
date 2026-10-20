@@ -1,0 +1,20 @@
+{
+  "utc": "2026-10-20T05:11:36.524702+00:00",
+  "status": "reservation only; isolated preparation still awaits parent proposal review",
+  "global_ceiling_bytes": 42949672960,
+  "baseline_bytes": 38756059924,
+  "oldMac_metadata_bytes": 2097152,
+  "parent_future_bytes": 8388608,
+  "Windows_P_cap_bytes": 2791728742,
+  "Linux_P_cap_bytes": 268435456,
+  "Mac_P_cap_bytes": 41943040,
+  "Mac_shared_Cargo_changes": "blocked; pending direct human authorization; not retried",
+  "Mac_isolated_Cargo_proposal": "read-only assessment indicates actual copies, no aliases or shared writes; full proposal under review",
+  "inside_reserve_bytes": 1073741824,
+  "prospective_total_bytes": 42942394746,
+  "unallocated_bytes": 7278214,
+  "no_actual_deletion_credit": true,
+  "source_core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "functional_cutoff": "2026-10-20T07:55:16Z",
+  "closeout_deadline": "2026-10-20T08:25:16Z"
+}
