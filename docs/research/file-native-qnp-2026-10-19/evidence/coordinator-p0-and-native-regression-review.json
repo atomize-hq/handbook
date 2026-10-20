@@ -1,0 +1,48 @@
+{
+  "utc": "2026-10-20T04:34:38.632586+00:00",
+  "parent_tip": "2e70d4758cb22797750619f6492ff38f02b03aa9",
+  "core": "4cb6b9fba9ffabc294a6006ec54fe75366968db4",
+  "p0_independent_parent_review": {
+    "archive_sha256": "0a6e60887bcb906f940d7acbb6f8bf78a41a21c2ef3f3e98c7700149e8a9ef57",
+    "members_verified": 94,
+    "expanded_bytes": 3508190,
+    "proof_receipt_hashes_verified": 5,
+    "all_raw_records": 504833,
+    "all_accepted_publications": 101007,
+    "ledger_rows": 100000,
+    "physical_cleanup": false
+  },
+  "B_discovery_regression": {
+    "native_linux_independently_reproduced": true,
+    "trigger": "fresh B init -> pack cleanup -> ordinary selected-once shell discovery before later publication",
+    "observed": "SELECTED points to missing loose publications/<id>.json; Bash exit21",
+    "custom_decoder_used": false,
+    "status": "main P owner remediation requested; destructive packing held; old evidence retains old source pin"
+  },
+  "linux_partial_qualification": {
+    "unit_pass": 5,
+    "applicable_packing_unique_pass": 52,
+    "packing_run_uninterrupted": false,
+    "packing_censored_prefix_retained": true,
+    "windows_only_skip": 2,
+    "strict_pass": 24,
+    "old_recovery_events_before_component_stop": 94,
+    "fixture_component_overshoot_bytes": 10914018,
+    "overall_qualification": null
+  },
+  "mac_preflight_parent_review": {
+    "archive_sha256": "5439523092f9927226d783781a0ee82af972294a5051d28e4a2bb34f496b105a",
+    "members_verified": 29,
+    "expanded_bytes": 206070,
+    "no_qualification_build": true,
+    "continuing_native_with_return_archive_bytes": 252033,
+    "stage_cap_bytes": 1048576
+  },
+  "remaining_gates": [
+    "B ordinary discovery fix and exact final source review",
+    "source-qualified native Linux and Mac execution",
+    "PZ/cleanup/packed restore separate prospective admissions"
+  ],
+  "functional_cutoff": "2026-10-20T07:55:16Z",
+  "closeout_deadline": "2026-10-20T08:25:16Z"
+}

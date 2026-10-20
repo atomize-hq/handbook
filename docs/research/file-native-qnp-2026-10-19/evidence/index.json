@@ -83,6 +83,10 @@
     "bytes": 3956,
     "sha256": "3bada7a3c4191f9fd5bad016e5878c6e9a4fccf24bdb840d2866e92f76678357"
   },
+  "coordinator-p0-and-native-regression-review.json": {
+    "bytes": 1999,
+    "sha256": "8d1d58526f748d7e1914dcbb29368b6528480fc471e9136a29c3127ec3aa94ef"
+  },
   "coordinator-q-linux-review.json": {
     "bytes": 901,
     "sha256": "ec3a47cb6d61eabe633de9fa44fe2e94713a6f62b4d38620ca688c6eae09e299"
@@ -155,6 +159,14 @@
     "bytes": 2490,
     "sha256": "82bc6f0cd69267df2f55b26ad701b9fc1b0e9dced5e47c544f55dea08699d3c6"
   },
+  "p-macos-preflight-raw.tar.gz": {
+    "bytes": 45963,
+    "sha256": "5439523092f9927226d783781a0ee82af972294a5051d28e4a2bb34f496b105a"
+  },
+  "p-macos-preflight-report.md": {
+    "bytes": 6056,
+    "sha256": "5854278af200f2512c458293c7d200e36396c134a769a79eaa35480c579b3f56"
+  },
   "p-p0-and-native-preflight-admission.json": {
     "bytes": 2056,
     "sha256": "eff0f060a6a650e0d061585fc2f5cf633e07b25158f0a9a7f5baa95fd32d400c"
@@ -222,6 +234,30 @@
   "p-preservation-supervision/root-exits-descendant-survives.json": {
     "bytes": 2297,
     "sha256": "cc237cb7ffdadd808c5c69e68930c03188c2997e2cbfc6cbc10f6a305bafdad0"
+  },
+  "p0-checkpoint-final-core-binding.json": {
+    "bytes": 3159,
+    "sha256": "8a79b7caeaa59762e58b95b54aeb8e86554fc0107330ac2dd6ceabb8c5af71f9"
+  },
+  "p0-checkpoint-raw-evidence-index.json": {
+    "bytes": 27469,
+    "sha256": "915ba27b2f4a90a3e47bb3b74ab7ffddb0068431e54079802c477f1f38905a50"
+  },
+  "p0-checkpoint-raw-evidence.tar.gz": {
+    "bytes": 569099,
+    "sha256": "0a6e60887bcb906f940d7acbb6f8bf78a41a21c2ef3f3e98c7700149e8a9ef57"
+  },
+  "p0-checkpoint-report.md": {
+    "bytes": 4748,
+    "sha256": "38aa3126ecb560db640424df67b1215c7b37e83c24c19e77485d829ca524973a"
+  },
+  "p0-checkpoint-summary.json": {
+    "bytes": 8516,
+    "sha256": "24cffe6bdb3c7dd7ab9925909dc5e7f141945d893c6f280aecbe6ad052a1b43b"
+  },
+  "p0-regression-review-precommit.txt": {
+    "bytes": 2731,
+    "sha256": "df7e21c468539b4ddc83b23c23d614eac485e899b6b850261c1ca9c4e35e114b"
   },
   "pre-p-three-host-census-summary.json": {
     "bytes": 1256,

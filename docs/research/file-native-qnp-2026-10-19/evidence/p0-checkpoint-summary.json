@@ -1,0 +1,204 @@
+{
+  "status": "P0-build-byte-semantic-and-matched-lookup-stages-passed",
+  "utc": "2026-10-20T04:22:10.564202+00:00",
+  "core_pin": "4cb6b9fba9ffabc294a6006ec54fe75366968db4",
+  "harness_commit": "5b49815e",
+  "engine_binary_sha256": "478dd9ba9f687d4de81c60ce55f9ddf9e4e2fafcc493d581b3c63e12e42f7fe5",
+  "pack_index_bytes": 641986037,
+  "packs": 16,
+  "raw_records": 504833,
+  "raw_bytes": 579015428,
+  "semantic": {
+    "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+    "selected": {
+      "publication": "publication-26408-1792467841305851000-19",
+      "digest": "6d11b0a4e06e4c85ae391516bc99c840f4724bb547d018268bd9e9a2c7ea81cf"
+    },
+    "publications": 101007,
+    "ledger_rows": 100000,
+    "permanent_digest": "f398ab10c2020b988d46530c6e93e0c6c6e0188d6e66e9b8e4e07e96c107f63e",
+    "retired_publications": 101,
+    "retired_content": "unavailable-by-contract",
+    "unique_content_roots": 90,
+    "root_visits": 101007,
+    "sources": 39,
+    "pins": 0,
+    "reservations": 0,
+    "packets": 0,
+    "generations": 0,
+    "conservative_cumulative_owner_allowance_bytes": 6789171737728,
+    "actual_physical_owner_bytes": false,
+    "seconds": 24.95299999997951
+  },
+  "warm_lookup_2x_gate": true,
+  "warm_P0_over_qualified_L": {
+    "early": 0.9680506329113924,
+    "middle": 0.9724845161945375,
+    "recent": 0.9860255680347808,
+    "missing": 0.9797955010224949,
+    "cancelled": 0.9963375672095379,
+    "lost-reply": 0.9979962033326303
+  },
+  "fresh_process_cost": "19-43ms median engine vs qualified loose 1.0-1.4ms; full distributions retained; no device-cold claim",
+  "intent": {
+    "status": "passed",
+    "cell": "P0",
+    "request": "history-050000",
+    "original_publication": {
+      "publication": "publication-70136-1792364483512848600-703641",
+      "digest": "8e8a926cec3932c10b4a38c900f88f99bf3f7027f5d95bc0ac18f86439a1e8b7"
+    },
+    "original_intent": "39952b2c38bebeb35f07e450790594c60692a086615ed5844033b4603d358704",
+    "same_intent_exact_original_outcome": true,
+    "different_intent_refusal": "refused:request-id-intent-mismatch",
+    "original_request_publish_replay_checked": true,
+    "selected_unchanged": true,
+    "events": 4
+  },
+  "current_actual": {
+    "scopes": {
+      "runtime": {
+        "bytes": 2235115595,
+        "files": 527573
+      },
+      "worktree": {
+        "bytes": 149711634,
+        "files": 197
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 227602335,
+        "files": 1906
+      }
+    },
+    "total_new_bytes": 2559926476,
+    "total_new_files": 531623,
+    "free_bytes": 197926871040,
+    "time_utc": "2026-10-20T04:29:48.394279+00:00"
+  },
+  "physical_cleanup_complete": false,
+  "loose_duplicates_coexist": true,
+  "PZ_build_admitted": false,
+  "PZ_qualification": null,
+  "large_cleanup_admitted": false,
+  "packed_operational_restore_qualification": null,
+  "allocation": {
+    "utc": "2026-10-20T04:23:57.436963+00:00",
+    "loose_eligible_immutable_classes": {
+      "files": 504833,
+      "logical_bytes": 579015428,
+      "allocation_bytes": 1047946944
+    },
+    "P0_registered_representation_including_catalog": {
+      "files": 33,
+      "logical_bytes": 641993822,
+      "allocation_bytes": 642060288
+    },
+    "P0_pack_index_bytes": 641986037,
+    "logical_ratio_pack_index_over_loose": 1.108754630627908,
+    "allocated_data_ratio_representation_over_loose": 0.612683964275199,
+    "registered_representation_file_ratio": 6.536815144810264e-05,
+    "eligible_file_reduction_after_successful_cleanup_gate": null,
+    "current_actual_whole_engine_excluding_ledger": {
+      "files": 510641,
+      "logical_bytes": 1283415930,
+      "allocation_bytes": 1761774040
+    },
+    "physical_cleanup_complete": false,
+    "qualification": "loose eligible records measured while exact duplicates coexist after P0; whole-store L allocation before activation not measured; regular-file data allocation excludes directory/MFT metadata and device writes"
+  },
+  "next_resource_proposal": {
+    "status": "proposal-only-no-archive-or-deletion-admitted",
+    "utc": "2026-10-20T04:30:26.230223+00:00",
+    "ownership_receipt": "subset-H1000-P0-verify.json",
+    "current": {
+      "scopes": {
+        "runtime": {
+          "bytes": 2235115595,
+          "files": 527573
+        },
+        "worktree": {
+          "bytes": 149711634,
+          "files": 197
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 227602335,
+          "files": 1906
+        }
+      },
+      "total_new_bytes": 2559926476,
+      "total_new_files": 531623,
+      "free_bytes": 197926871040,
+      "time_utc": "2026-10-20T04:29:48.394279+00:00"
+    },
+    "total_cap_bytes": 2684354560,
+    "exact_archive_targets": [
+      "C:\\file-native-packing-20261020\\build",
+      "C:/Users/spmcc/.codex/worktrees/file-native-packing-20261020/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18/target"
+    ],
+    "candidate_archive_raw_bytes": 359160871,
+    "archive_cap_bytes": 67108864,
+    "retained_executable_bound": 16777216,
+    "required_preservation": "all regular target files inventoried with path, raw length and SHA-256; archive round-trip stream verification against complete inventory; source and lock hashes retained; exact original failed/censored run receipts and cache-fixture contents preserved in archive; no originals or old Q/N targets touched",
+    "review_needed": "exact target archival/reclamation admission after full P0 raw/semantic verification and matched measurements; no deletion executed",
+    "peak_archive_plus_retained_before_reclaim": 2643812556,
+    "PZ_additional_reservation": 350000000,
+    "measurement_report_margin": 33554432,
+    "prospective_after_verified_archive_reclaim": 2668206117,
+    "remaining_bytes": 16148443,
+    "files_guard": 560000,
+    "large_cleanup_and_packed_restore": "separate later admissions; no assumed credit until actual successful deletion",
+    "original_functional_cutoff": "2026-10-20T07:55:16Z",
+    "retained_executables_in_place": [
+      "C:/file-native-packing-20261020/build/release/qualified_lookup.exe",
+      "C:/file-native-packing-20261020/build/release/packing-sample.exe"
+    ],
+    "subset_status": "H1k corpus/raw containers and independent complete tuple verification passed; H10k and all compression controls remain unrun"
+  },
+  "proof": {
+    "P0-build.json": {
+      "path": "C:\\file-native-packing-20261020\\long-matrix\\P0-build.json",
+      "sha256": "2ace38bee3221ce7c56c178f5be3598bdefe4d52cef204b8cf5659987d8aeed9"
+    },
+    "P0-independent.json": {
+      "path": "C:\\file-native-packing-20261020\\long-matrix\\P0-independent.json",
+      "sha256": "834ac5ed44db274abe4b0596e1db95cb93d9341fa07521a1f2e75017619df6bf"
+    },
+    "P0-measurement.json": {
+      "path": "C:\\file-native-packing-20261020\\long-matrix\\P0-measurement.json",
+      "sha256": "b4c1f21762c1911e5d6d8d87b1c62f9d677734506bf0ac9247dfbb313f8df698"
+    },
+    "P0-intent.json": {
+      "path": "C:\\file-native-packing-20261020\\long-matrix\\P0-intent.json",
+      "sha256": "a9f3b6d3c825164bf661932aab285fb91450a5d7eac45c566b68e23a3100a29c"
+    },
+    "tables/lookup-tables.json": {
+      "path": "C:\\file-native-packing-20261020\\long-matrix\\tables\\lookup-tables.json",
+      "sha256": "4290567e118b3276b1d6dac0fbea74054ef8e4204b2301b3360effadd35fe2e6"
+    }
+  },
+  "functional_cutoff": "2026-10-20T07:55:16Z",
+  "closeout_deadline": "2026-10-20T08:25:16Z",
+  "H1000_record_subset": {
+    "status": "passed",
+    "profile": "record-subset-not-operational-history",
+    "records": 4800,
+    "raw_bytes": 5298334,
+    "pack_plus_index_bytes": 5885907,
+    "packs": 5,
+    "codec": 0,
+    "independent_codec": null,
+    "source_inventory_sha256": "c92db05fbdf50c02b29b1259137f7a3d1e905bfb1af9c88102bb4da897a45ea1",
+    "source_corpus_sha256": "7c74902c8f218c784cb0b36cdd00adee5b8907b2a07001a7eb2f5615e46b8f01",
+    "source_capture_transport_sha256": "c052a458169768cd0b17e6b4ec9f0daec1f7aabab23d552288f9dde82587e452",
+    "source_capture_inventory_sha256": "fd5fc7c9085e00b9a6a7af6980c431a4c36386bed59bff245b1d55ce413899ff",
+    "seconds": 0.046999999962281436
+  }
+}

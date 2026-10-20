@@ -163,3 +163,20 @@ censored prefixes and both blocked-cleanup caches stay counted. Large P stages
 and native P stages require separate prospective admission within the same
 40 GiB combined ceiling and internal closeout reserve. This admission is not
 a packing correctness or performance result.
+
+P is now executing within its original October 20 window (functional cutoff
+07:55:16 UTC, closeout deadline 08:25:16). The Windows P0 checkpoint verified
+504,833 raw records, all 101,007 accepted publications, the 100,000-row ledger,
+and retained graph/content obligations. Loose duplicates still coexist; physical
+file reduction and compressed/restore results remain unqualified. See the
+[checkpoint](evidence/p0-checkpoint-report.md) and
+[parent review](evidence/coordinator-p0-and-native-regression-review.json).
+
+Native Linux independently found a correctness defect in candidate 4cb6:
+immediate B-mode cleanup removes the loose publication file required to discover
+the selected generation with ordinary shell tools. The failing prefix is
+preserved, the P owner is preparing a fix, and further destructive packing is
+held. Linux's unit/packing/strict results remain partial evidence on 4cb6;
+recovery also stopped on a fixture-component overshoot. Native Mac P has only
+completed read-only preflight and artifact return. Neither native P qualification
+is complete, and new source must receive its own qualification.
