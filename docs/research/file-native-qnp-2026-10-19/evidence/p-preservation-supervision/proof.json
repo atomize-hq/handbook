@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "guard_sha256": "05c673af2aac60c781edd91ac42b53105a59055341fa27188cf1b565d14b8833",
+  "cases": [
+    {
+      "case": "blocked-stdin",
+      "group_terminated_after_seconds": 1.0054385662078857,
+      "root_exit": 137,
+      "receipt": "C:\\file-native-packing-20261020\\watchdog-group-check\\blocked-stdin.json"
+    },
+    {
+      "case": "root-exits-descendant-survives",
+      "group_terminated_after_seconds": 1.0034832954406738,
+      "root_exit": 0,
+      "receipt": "C:\\file-native-packing-20261020\\watchdog-group-check\\root-exits-descendant-survives.json"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "admission_utc": "2026-10-20T02:43:23Z",
+  "chat": "01a15720-db7d-7dd1-b2af-a7748cf22d91",
+  "status": "GO exact protected post-GC capture, one fresh restore, independent verification/reopen/disposable authorization",
+  "total_p_bytes_replaces_initial": 2415919104,
+  "total_p_files_replaces_initial": 560000,
+  "initial_not_additive": true,
+  "prospective_stage_bytes": 2191571810,
+  "prospective_stage_files": 537583,
+  "global_prospective_bytes_including_reserve": 42382035732,
+  "global_prospective_files_including_reserve": 4572675,
+  "global_ceiling_bytes": 42949672960,
+  "global_ceiling_files": 5000000,
+  "remaining_unallocated_bytes": 567637228,
+  "inside_reserve_bytes": 1073741824,
+  "inside_reserve_files": 100000,
+  "guard_sha256": "05c673af2aac60c781edd91ac42b53105a59055341fa27188cf1b565d14b8833",
+  "parent_reviewed_actual_guard_and_both_receipts": true,
+  "whole_job_tests": [
+    {
+      "case": "blocked-stdin",
+      "group_terminated_after_seconds": 1.0054385662078857,
+      "root_exit": 137,
+      "receipt": "C:\\file-native-packing-20261020\\watchdog-group-check\\blocked-stdin.json"
+    },
+    {
+      "case": "root-exits-descendant-survives",
+      "group_terminated_after_seconds": 1.0034832954406738,
+      "root_exit": 0,
+      "receipt": "C:\\file-native-packing-20261020\\watchdog-group-check\\root-exits-descendant-survives.json"
+    }
+  ],
+  "source": "C:\\file-native-recovery-20261019\\history-restored\\disposable\\store",
+  "source_census": {
+    "bytes": 887923682,
+    "files": 510583
+  },
+  "source_bindings": {
+    "SELECTED.json": {
+      "bytes": 143,
+      "sha256": "d7d4947606e55161714c40c77bf23662acf7ea782175abbc5b0c52929a730680"
+    },
+    "STORE.json": {
+      "bytes": 130,
+      "sha256": "45a88628e73594ba5d233b4ee7ec61e334d992555c4a4a607f067add7a1dffc8"
+    },
+    "HISTORY-SOURCE.json": {
+      "bytes": 375,
+      "sha256": "669f57a8fe4b12fbff7fd1033c3ffd569a433e38c88d6270f8adc558df06c3b2"
+    },
+    "expected-ledger.jsonl": {
+      "bytes": 246560316,
+      "sha256": "6ab8bef045580f7642b0f404cf58ab7cb8211badfeb68d258bc62e984e02af18"
+    },
+    "RESERVATIONS.json": {
+      "bytes": 2,
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    "VIEW.json": {
+      "bytes": 490,
+      "sha256": "33fd9d1d49387486afeb6041e56a33708b57921ac49229d775eac3136c137a32"
+    }
+  },
+  "destinations": [
+    "C:/file-native-packing-20261020/post-gc-operational-backup",
+    "C:/file-native-packing-20261020/history-restored/disposable/store"
+  ],
+  "stage_caps": {
+    "capture_seconds": 1800,
+    "restore_seconds": 1800,
+    "complete_independent_verifier_seconds": 900,
+    "ordinary_seconds": 120,
+    "checker_rss_bytes": 2147483648,
+    "aggregate_rss_bytes": 4294967296
+  },
+  "functional_cutoff": "2026-10-20T07:55:16Z",
+  "closeout_deadline": "2026-10-20T08:25:16Z",
+  "still_unadmitted": [
+    "long packing cleanup",
+    "long repack",
+    "packed operational restore",
+    "native P lanes"
+  ],
+  "protected_originals": "read-only, all prior censors and failed prefixes preserved",
+  "mac_postcommit_ownership_bytes": 451470220,
+  "mac_postcommit_files": 20671,
+  "mac_metadata_delta_bytes": 521089,
+  "mac_metadata_delta_files": 63,
+  "mac_delta_covered_by_previous_2mib_200file_forecast": true
+}

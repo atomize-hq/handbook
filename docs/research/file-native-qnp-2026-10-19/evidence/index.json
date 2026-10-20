@@ -139,6 +139,30 @@
     "bytes": 1714,
     "sha256": "2305faf1ee5f61ca1880d18c75dcd688dd218361eb5f695e401fcae6241d622e"
   },
+  "p-preservation-admission.json": {
+    "bytes": 3391,
+    "sha256": "fa8370b9e85f56ccc02015162d0e46520ce6c5a990da72b1861a8ca3f0b5618c"
+  },
+  "p-preservation-precommit.txt": {
+    "bytes": 2149,
+    "sha256": "6ed27551e02b03d506071a4c7f936bbcada0503dec889d6af83877da23993b60"
+  },
+  "p-preservation-stage-request.json": {
+    "bytes": 2668,
+    "sha256": "49870f0ac26c3464032fe5b367bf512bee11e045a0b57bc7a5c6058af9b5b57e"
+  },
+  "p-preservation-supervision/blocked-stdin.json": {
+    "bytes": 2213,
+    "sha256": "dead6833e6e9d5e3656da53e9f27dc2cb13985a7adb3282cded46f11f83e60b4"
+  },
+  "p-preservation-supervision/proof.json": {
+    "bytes": 620,
+    "sha256": "bd57cff490cd3b3f25dc4522f5bca05f05b8e770534f8e9989e77ed72ff572bb"
+  },
+  "p-preservation-supervision/root-exits-descendant-survives.json": {
+    "bytes": 2297,
+    "sha256": "cc237cb7ffdadd808c5c69e68930c03188c2997e2cbfc6cbc10f6a305bafdad0"
+  },
   "pre-p-three-host-census-summary.json": {
     "bytes": 1256,
     "sha256": "b37c13bb12c3f9c99cb0ff80a42f9b46882e4cf8cbb81a3224c632d2340427ad"

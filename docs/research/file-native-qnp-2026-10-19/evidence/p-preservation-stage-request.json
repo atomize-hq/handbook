@@ -1,0 +1,84 @@
+{
+  "request": "parent admission for exact post-GC capture, one fresh restore, independent complete verification and reopen, fresh disposable setup; no long packing cleanup yet",
+  "source": "C:\\file-native-recovery-20261019\\history-restored\\disposable\\store",
+  "source_census": {
+    "bytes": 887923682,
+    "files": 510583
+  },
+  "source_bindings": {
+    "SELECTED.json": {
+      "bytes": 143,
+      "sha256": "d7d4947606e55161714c40c77bf23662acf7ea782175abbc5b0c52929a730680"
+    },
+    "STORE.json": {
+      "bytes": 130,
+      "sha256": "45a88628e73594ba5d233b4ee7ec61e334d992555c4a4a607f067add7a1dffc8"
+    },
+    "HISTORY-SOURCE.json": {
+      "bytes": 375,
+      "sha256": "669f57a8fe4b12fbff7fd1033c3ffd569a433e38c88d6270f8adc558df06c3b2"
+    },
+    "expected-ledger.jsonl": {
+      "bytes": 246560316,
+      "sha256": "6ab8bef045580f7642b0f404cf58ab7cb8211badfeb68d258bc62e984e02af18"
+    },
+    "RESERVATIONS.json": {
+      "bytes": 2,
+      "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    "VIEW.json": {
+      "bytes": 490,
+      "sha256": "33fd9d1d49387486afeb6041e56a33708b57921ac49229d775eac3136c137a32"
+    }
+  },
+  "current_p_ownership": {
+    "scopes": {
+      "runtime": {
+        "bytes": 366198,
+        "files": 62
+      },
+      "worktree": {
+        "bytes": 656802,
+        "files": 121
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 226935084,
+        "files": 1776
+      }
+    },
+    "total_new_bytes": 175454996,
+    "total_new_files": 3906,
+    "free_bytes": 201010372608,
+    "time_utc": "2026-10-20T02:33:24.682110+00:00"
+  },
+  "proposed_total_p_cap_bytes": 2415919104,
+  "proposed_total_p_cap_files": 560000,
+  "prospective": {
+    "existing_initial_allocation": 536870912,
+    "capture_transport_plus_inventory_cap": 750000000,
+    "fresh_restore_cap": 887923682,
+    "stage_metadata_cap": 16777216,
+    "total_bytes": 2191571810,
+    "files": 537583
+  },
+  "destinations": [
+    "C:/file-native-packing-20261020/post-gc-operational-backup",
+    "C:/file-native-packing-20261020/history-restored/disposable/store"
+  ],
+  "stage_caps": {
+    "capture_seconds": 1800,
+    "restore_seconds": 1800,
+    "complete_independent_verifier_seconds": 900,
+    "ordinary_seconds": 120,
+    "checker_rss_bytes": 2147483648,
+    "aggregate_rss_bytes": 4294967296
+  },
+  "functional_cutoff": "2026-10-20T07:55:16Z",
+  "closeout_deadline": "2026-10-20T08:25:16Z",
+  "no_scope_or_resource_grant_inferred": true,
+  "seconds": 50.954073667526245
+}

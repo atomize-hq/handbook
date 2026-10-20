@@ -1,0 +1,90 @@
+{
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "-c",
+    "import subprocess,sys;subprocess.Popen([sys.executable,\"-c\",\"import time;time.sleep(30)\"])"
+  ],
+  "cwd": null,
+  "started_utc": "2026-10-20T02:40:54.596236+00:00",
+  "seconds": 4.943374872207642,
+  "cap_seconds": 1,
+  "effective_seconds": 1,
+  "exit": 0,
+  "censor": "time-censor",
+  "independent_deadline": {
+    "requested_epoch": 1792464055.5997195,
+    "reason": "time-censor",
+    "members_before_termination": [
+      8844
+    ],
+    "child_exit_epoch": 1792464055.5997195,
+    "exit": 0,
+    "group_after_termination": [],
+    "group_termination_observed_epoch": 1792464055.5997195
+  },
+  "group_observations": {
+    "root_exit_seen_epoch": 1792464054.6517088,
+    "group_empty_seen_epoch": 1792464055.5997195
+  },
+  "job_query_errors": 0,
+  "per_process_rss_limit": 2147483648,
+  "aggregate_rss_limit": 4294967296,
+  "sampled_peak_rss_by_pid": {
+    "78904": 2289664,
+    "79852": 21495808,
+    "8844": 10248192
+  },
+  "missing_samples": 0,
+  "aggregate_sampled_peak_rss": 30347264,
+  "ownership_samples": [
+    {
+      "scopes": {
+        "runtime": {
+          "bytes": 192810816,
+          "files": 601
+        },
+        "worktree": {
+          "bytes": 706275,
+          "files": 126
+        },
+        "cargo": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "shared_git": {
+          "bytes": 226935084,
+          "files": 1776
+        }
+      },
+      "total_new_bytes": 367949087,
+      "total_new_files": 4450,
+      "free_bytes": 200845856768,
+      "time_utc": "2026-10-20T02:40:59.498493+00:00"
+    }
+  ],
+  "final_ownership": {
+    "scopes": {
+      "runtime": {
+        "bytes": 192810816,
+        "files": 601
+      },
+      "worktree": {
+        "bytes": 706275,
+        "files": 126
+      },
+      "cargo": {
+        "bytes": 893702027,
+        "files": 18188
+      },
+      "shared_git": {
+        "bytes": 226935084,
+        "files": 1776
+      }
+    },
+    "total_new_bytes": 367949087,
+    "total_new_files": 4450,
+    "free_bytes": 200846360576,
+    "time_utc": "2026-10-20T02:41:04.419785+00:00"
+  },
+  "group_remaining_before_closure": []
+}
