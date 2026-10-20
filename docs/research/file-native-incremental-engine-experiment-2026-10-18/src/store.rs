@@ -6,7 +6,7 @@ use fs2::FileExt;
 use std::{collections::BTreeMap,fs::{self,File,OpenOptions},path::{Path,PathBuf},time::{Instant,Duration}};
 #[derive(Clone,Serialize,Deserialize)]
 #[serde(deny_unknown_fields)]
-pub struct StoreConfig{pub version:u32,pub store_id:String,pub mode:String,pub consumer:String,pub fallback:bool,#[serde(default="legacy_navigation")] pub navigation_version:u32,#[serde(default,skip_serializing_if="Option::is_none")] pub catalog:Option<Id>}
+pub struct StoreConfig{pub version:u32,pub store_id:String,pub mode:String,pub consumer:String,pub fallback:bool,#[serde(default="legacy_navigation")] pub navigation_version:u32,#[serde(default,skip_serializing_if="Option::is_none")] pub catalog:Option<Id>,#[serde(default,skip_serializing_if="Option::is_none")] pub physical:Option<crate::physical_lifetime::Binding>}
 fn legacy_navigation()->u32{1}
 pub struct Store{pub root:PathBuf,pub config:StoreConfig}
 pub struct LockGuard{_file:File,started:Instant,counter:std::sync::Arc<std::sync::atomic::AtomicU64>}
@@ -70,8 +70,8 @@ impl Store{
     pub fn open(root:&Path,m:&mut Metrics)->Result<Self>{
         m.store_root=Some(root.into());
         crate::packing::capture(root,m)?;
-        let config:StoreConfig=serde_json::from_slice(&io::read_bounded(&root.join("STORE.json"),65536,m)?)?;
-        if ![1,2].contains(&config.version)||![1,2,3,4].contains(&config.navigation_version)||!["A","B"].contains(&config.mode.as_str())||!["project","research"].contains(&config.consumer.as_str()){
+        let config=crate::packing::captured_config(m)?;
+        if ![1,2,3].contains(&config.version)||![1,2,3,4].contains(&config.navigation_version)||!["A","B"].contains(&config.mode.as_str())||!["project","research"].contains(&config.consumer.as_str()){
             return Err("integrity:store-version-kind".into());
         }
         Ok(Self{root:root.into(),config})
@@ -93,6 +93,15 @@ impl Store{
         }}
         m.elapsed("lock-wait",t);io::checkpoint("lock-acquired")?;
         Ok(LockGuard{_file:f,started:Instant::now(),counter:m.lock_hold_counter.clone()})
+    }
+    // Activation calls this only once under Q; contention must release Q.
+    pub(crate) fn try_writer(&self,m:&mut Metrics)->Result<Option<LockGuard>>{
+        let f=OpenOptions::new().create(true).truncate(false).read(true).write(true).open(self.root.join("writer.lock"))?;
+        match FileExt::try_lock_exclusive(&f) {
+            Ok(())=>Ok(Some(LockGuard{_file:f,started:Instant::now(),counter:m.lock_hold_counter.clone()})),
+            Err(e) if e.kind()==fs2::lock_contended_error().kind()=>Ok(None),
+            Err(e)=>Err(e.into()),
+        }
     }
     pub fn preparation_gate(&self,exclusive:bool)->Result<File>{
         let f=OpenOptions::new().create(true).truncate(false).read(true).write(true).open(self.root.join("preparation.lock"))?;
@@ -400,7 +409,7 @@ impl Store{
         m.store_root=Some(root.into());
         if root.exists()||!["A","B"].contains(&mode)||!["project","research"].contains(&consumer)||n<10||n>100_000{return Err("refused:init-arguments-existing".into());}
         io::mkdir(root,m)?;
-        let config=StoreConfig{version:1,store_id:io::unique("store"),mode:mode.into(),consumer:consumer.into(),fallback,navigation_version:projection::new_profile(),catalog:None};
+        let config=StoreConfig{version:1,store_id:io::unique("store"),mode:mode.into(),consumer:consumer.into(),fallback,navigation_version:projection::new_profile(),catalog:None,physical:None};
         io::write_new(&root.join("STORE.json"),&io::json(&config)?,m)?;
         if config.navigation_version<=3{io::write_new(&root.join("README.md"),b"# File-native collection\n\nRead SELECTED.json once and verify its publication digest. The publication binds exact immutable state. B: retain generations/<attempt>/ once and read collection.yaml and exact source paths. A: view/ may mix/lag; VIEW.json names completed state and PENDING.json records unfinished work. Ordinary edits are not automatically admitted.\n",m)?;}
         let store=Self{root:root.into(),config};let _guard=store.lock(m)?;

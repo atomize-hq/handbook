@@ -16,6 +16,19 @@ const HEADER: usize = 8+32+8+1+4;
 pub(crate) struct Descriptor {
     pub pack: String, pub index: String, pub pack_bytes: u64, pub index_bytes: u64,
     pub records: u32, pub codec: u8, pub role: String, pub first: String, pub last: String,
+    #[serde(default,skip_serializing_if="Option::is_none")]
+    pub instance: Option<String>,
+}
+impl Descriptor {
+    pub fn path(&self, extension:&str)->Result<String> {
+        let hash=match extension{"pack"=>&self.pack,"idx"=>&self.index,_=>return Err("integrity:container-extension".into())};
+        if !crate::objects::valid_hash(hash){return Err("integrity:container-hash".into());}
+        match &self.instance {
+            Some(id) if crate::model::safe_id(id)=>Ok(format!("packs/{id}/{hash}.{extension}")),
+            None=>Ok(format!("packs/{hash}.{extension}")),
+            _=>Err("integrity:container-instance".into()),
+        }
+    }
 }
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub(crate) struct Key(pub String);
@@ -65,11 +78,11 @@ impl Index {
             return Err("integrity:pack-descriptor-bound".into());
         }
         // Reject a changed file before allocating beyond the incoming charge.
-        let b=native(&root.join(format!("packs/{}.idx",d.index)),usize::try_from(d.index_bytes)?,m)?;
+        let b=native(&root.join(d.path("idx")?),usize::try_from(d.index_bytes)?,m)?;
         if b.len()!=d.index_bytes as usize||io::digest(&b)!=d.index||b.len()<HEADER||&b[..8]!=MAGIC||hex(&b[8..40])!=d.pack||u64::from_le_bytes(b[40..48].try_into()?)!=d.pack_bytes||b[48]!=d.codec||u32::from_le_bytes(b[49..53].try_into()?)!=d.records {
             return Err("integrity:index-pack-binding".into());
         }
-        if root.join(format!("packs/{}.pack",d.pack)).metadata().map_err(|e|format!("integrity:pack-missing:{e}"))?.len()!=d.pack_bytes{return Err("integrity:pack-size-binding".into());}
+        if root.join(d.path("pack")?).metadata().map_err(|e|format!("integrity:pack-missing:{e}"))?.len()!=d.pack_bytes{return Err("integrity:pack-size-binding".into());}
         let mut index=Self{bytes:b,offsets:Vec::with_capacity(d.records as usize),descriptor:d.clone()};
         let mut position=HEADER;let mut last=String::new();let mut end=0u64;
         for _ in 0..d.records {
@@ -97,11 +110,11 @@ impl Index {
         while lo<hi {let mid=(lo+hi)/2;let e=self.entry(mid)?;match e.key.cmp(key){std::cmp::Ordering::Less=>lo=mid+1,std::cmp::Ordering::Greater=>hi=mid,std::cmp::Ordering::Equal=>return Ok(Some(e))}}
         Ok(None)
     }
-    pub fn memory(&self)->usize{self.bytes.capacity()+self.offsets.capacity()*std::mem::size_of::<usize>()+std::mem::size_of::<Self>()+1024+self.descriptor.pack.capacity()+self.descriptor.index.capacity()+self.descriptor.role.capacity()+self.descriptor.first.capacity()+self.descriptor.last.capacity()}
+    pub fn memory(&self)->usize{self.bytes.capacity()+self.offsets.capacity()*std::mem::size_of::<usize>()+std::mem::size_of::<Self>()+1024+self.descriptor.pack.capacity()+self.descriptor.index.capacity()+self.descriptor.role.capacity()+self.descriptor.first.capacity()+self.descriptor.last.capacity()+self.descriptor.instance.as_ref().map_or(0,String::capacity)}
     pub fn read(&self,root:&Path,e:&Entry,limit:usize,m:&mut Metrics)->Result<Vec<u8>> {
         if e.raw>limit||e.raw>MAX_RAW{return Err("integrity:packed-read-bound".into());}
         io::checkpoint("pack-record-located")?;
-        let mut f=File::open(root.join(format!("packs/{}.pack",self.descriptor.pack))).map_err(|e|format!("integrity:pack-required:{e}"))?;
+        let mut f=File::open(root.join(self.descriptor.path("pack")?)).map_err(|e|format!("integrity:pack-required:{e}"))?;
         if f.metadata()?.len()!=self.descriptor.pack_bytes{return Err("integrity:pack-size-binding".into());}
         f.seek(SeekFrom::Start(e.offset))?;let mut encoded=vec![0;e.encoded];f.read_exact(&mut encoded)?;
         m.opens+=1;m.bytes_read+=e.encoded as u64;m.pack_storage_bytes+=e.encoded as u64;m.pack_records_read+=1;
@@ -149,7 +162,7 @@ impl Builder {
         let hash=io::digest(&self.pack);let mut index=MAGIC.to_vec();index.extend(hash_bytes(&hash)?);index.extend((self.pack.len() as u64).to_le_bytes());index.push(self.codec);index.extend((self.entries.len() as u32).to_le_bytes());
         for e in &self.entries {index.extend((e.key.0.len() as u16).to_le_bytes());index.extend(e.key.0.as_bytes());index.extend(e.offset.to_le_bytes());index.extend((e.encoded as u32).to_le_bytes());index.extend((e.raw as u32).to_le_bytes());index.extend(hash_bytes(&e.hash)?);}
         if index.len()>MAX_INDEX{return Err("refused:index-size".into());}
-        let d=Descriptor{pack:hash,index:io::digest(&index),pack_bytes:self.pack.len() as u64,index_bytes:index.len() as u64,records:self.entries.len() as u32,codec:self.codec,role:self.role,first:self.entries[0].key.0.clone(),last:self.entries.last().unwrap().key.0.clone()};
+        let d=Descriptor{instance:None,pack:hash,index:io::digest(&index),pack_bytes:self.pack.len() as u64,index_bytes:index.len() as u64,records:self.entries.len() as u32,codec:self.codec,role:self.role,first:self.entries[0].key.0.clone(),last:self.entries.last().unwrap().key.0.clone()};
         Ok((d,self.pack,index))
     }
 }

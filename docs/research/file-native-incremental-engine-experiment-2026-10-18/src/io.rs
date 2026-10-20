@@ -5,6 +5,7 @@ pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 static SEQ: AtomicU64 = AtomicU64::new(0);
 #[derive(Default, Serialize)]
 pub struct Metrics {
+    pub physical_activation_holds_ns:Vec<u64>,
     #[serde(skip)]
     pub(crate) physical:Option<crate::packing::PhysicalRead>,
     pub pack_storage_bytes:u64,pub pack_decoded_bytes:u64,pub pack_records_read:u64,

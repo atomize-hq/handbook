@@ -1,0 +1,40 @@
+{
+  "status": "REVIEWABLE_SOURCE_CHECKPOINT__QUALIFICATION_INCOMPLETE",
+  "utc": "2026-10-20T20:22:28.718821+00:00",
+  "base_commit": "47d667f26a75fa1454dee2d1c50d238aec4cf6bd",
+  "core_baseline": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "candidate_binary": {
+    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate3.exe",
+    "bytes": 2902528,
+    "sha256": "f1439fd9f222d327ac4c820ca2e0afa5c49bc7e83d8116b47c6b391a593fe4dc"
+  },
+  "guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
+  "evidence_root": "C:\\file-native-online-cp1-20261020\\evidence",
+  "passed": [
+    "offline release workspace compile",
+    "4 small workspace tests, heavy cache unit explicitly deferred",
+    "six N16 A/B physical generations with exact outcomes/selection/payloads and engine audits",
+    "held old physical reader16.110s through two successor activations while new readers/two accepted publishers progress",
+    "omitted-held-generation progress corruption refusal",
+    "invented-garbage progress corruption refusal",
+    "post-release old-container cleanup",
+    "old B selected-once manifest binding and20exact paths"
+  ],
+  "preserved_failure": "smoke1 final harness assertion expected obsolete collection.yaml; original guard exit1 and raw retained; engine44calls/6audits had passed; corrected independently in focus2",
+  "pending": [
+    "independent full oracles and complete A/B N64/H64 schedules",
+    "all process death/cancel/journal/delete phase schedules",
+    "stale CAS/two maintainer/sharing release-retry/protected owner schedules",
+    "1000 activation stress and frozen latency gate assessment",
+    "complete newly-unmapped-publication capture-gap+new-tail-compaction causal test in CP2",
+    "native final-pin Windows/Linux/macOS qualification",
+    "full final workspace including cache unit",
+    "rolling discovery/segments and paged lookup checkpoints"
+  ],
+  "gitnexus": "UNKNOWN exact checkout unregistered; per-symbol cached CLI attempts and manualHIGH trace preserved in evidence; no bootstrap",
+  "clock_reset": false,
+  "functional_cutoff_utc": "2026-10-21T11:10:14Z",
+  "no_full_experiment_pass": true,
+  "source_gate_fix": "Physical build no longer acquires W for transfer reconciliation; still-reserved attempts remain conservatively excluded. Candidate3 compile+four units pass. Candidate2 focus proof remains separately bound; same-source focus3 pending."
+}
