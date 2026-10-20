@@ -175,9 +175,9 @@ def run(base):
         wait(ready2);cancel.write_bytes(b'cancel');release2.write_bytes(b'go');assert finished(writer,writer_state)['error']=='cancelled:pack-barrier'
         release.write_bytes(b'go');finished(reader,reader_state);d.call(root,'resolve',request_id='initial');d.call(root,'packing',operation='resume',cleanup=True);note('cancelled-drain-releases-barriers-'+mode)
         if os.name=='nt':
-            root=clone(seed,base/(mode+'-loose-sharing')/'disposable/store');d.call(root,'lifecycle',operation='setup');loose=next((root/'publications').glob('*.json'));size=loose.stat().st_size;release=exclusive_delete_handle(loose)
+            root=clone(seed,base/(mode+'-loose-sharing')/'disposable/store');d.call(root,'lifecycle',operation='setup');loose_role='results' if mode=='B' else 'publications';loose=next((root/loose_role).glob('*.json'));size=loose.stat().st_size;release=exclusive_delete_handle(loose)
             result=d.call(root,'packing',operation='build',codec='raw',include_attempts=True,cleanup=True)['result'];assert result['status']=='cleaning' and result['deferred_bytes']>=size and loose.exists()
-            release();d.call(root,'packing',operation='cleanup');assert not loose.exists();note('windows-loose-no-delete-sharing-'+mode,deferred_bytes_at_least=size)
+            release();d.call(root,'packing',operation='cleanup');assert not loose.exists();note('windows-loose-no-delete-sharing-'+mode,deferred_bytes_at_least=size,loose_role=loose_role)
         # Repack deletion interrupted after an actual old container removal.
         root=clone(seed,base/(mode+'-old-pack-deletion')/'disposable/store');d.call(root,'lifecycle',operation='setup');initial=head(root);d.call(root,'packing',operation='build',codec='raw',include_attempts=True,cleanup=True);d.publish(root,'later');d.call(root,'lifecycle',operation='retire',selected=initial);d.call(root,'lifecycle',operation='collect')
         d.call(root,'packing',operation='repack',codec='zstd',include_attempts=True,cleanup=True,code=86,env={'EXP_EXIT':'pack-old-delete'});assert d.call(root,'resolve',request_id='initial')['result']==expected;d.call(root,'packing',operation='resume',cleanup=True);d.call(root,'audit');note('repack-old-pack-deletion-interruption-'+mode)

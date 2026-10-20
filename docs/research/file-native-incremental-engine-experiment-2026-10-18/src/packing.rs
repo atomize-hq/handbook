@@ -314,13 +314,23 @@ pub(crate) fn run(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
     }
     m.physical=Some(PhysicalRead::from_lease(root,exclusive,m)?);
     journal.status="registered".into();save(root,&journal,m)?;io::checkpoint("pack-accounting")?;m.elapsed("pack-registration-inclusive",registration);
+    let mut retained_loose_control_records=0u64;let mut retained_loose_control_bytes=0u64;
     if operation=="cleanup"||v["cleanup"].as_bool()==Some(true) {
         let deletion=Instant::now();journal.status="cleaning".into();save(root,&journal,m)?;
         let keys=all_mapped(m)?;let mut deferred=0u64;
         for key in keys {
-            let path=root.join(&key.0);if !path.exists(){continue;}
+            // Ordinary B readers capture SELECTED once and follow its loose
+            // publication to a generation. Historical selectors need the same
+            // binding. These permanent control duplicates survive retirement;
+            // generation content still has its independent existing lifetime.
+            let control=c.mode=="B"&&key.role()==Some("publication");
+            let path=root.join(&key.0);if !path.exists(){
+                if control{return Err("integrity:B-loose-control-publication-missing".into());}
+                continue;
+            }
             let canonical=io::read(&path,m)?;let loose=pack::native(&path,pack::MAX_RAW,m)?;
             if canonical!=loose{return Err("integrity:cleanup-conflicting-duplicate".into());}
+            if control{retained_loose_control_records+=1;retained_loose_control_bytes+=loose.len() as u64;continue;}
             match lifetime::remove_checked(root,&path,m) {
                 Ok(n)=>{journal.deleted_bytes+=n;io::checkpoint("pack-loose-delete")?;},
                 Err(e)=>{
@@ -344,5 +354,5 @@ pub(crate) fn run(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
         }
         journal.deferred_bytes=deferred;journal.status=if deferred==0{"complete"}else{"cleaning"}.into();save(root,&journal,m)?;m.elapsed("pack-deletion-inclusive",deletion);
     }
-    drop(guard);drop(protection);Ok(json!({"status":journal.status,"catalog":target,"reserved_bytes":journal.reserved_bytes,"used_bytes":journal.used_bytes,"successfully_deleted_bytes_recorded":journal.deleted_bytes,"deferred_bytes":journal.deferred_bytes,"historical_allocation_owners_unchanged":true}))
+    drop(guard);drop(protection);Ok(json!({"status":journal.status,"catalog":target,"reserved_bytes":journal.reserved_bytes,"used_bytes":journal.used_bytes,"successfully_deleted_bytes_recorded":journal.deleted_bytes,"deferred_bytes":journal.deferred_bytes,"retained_loose_control_records":retained_loose_control_records,"retained_loose_control_bytes":retained_loose_control_bytes,"retained_loose_control_scope":"mapped B publication duplicates; excludes new loose tail; no deletion credit","historical_allocation_owners_unchanged":true}))
 }

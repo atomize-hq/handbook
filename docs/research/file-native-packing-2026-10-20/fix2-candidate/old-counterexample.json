@@ -1,0 +1,160 @@
+{
+  "status": "confirmed-B-shell-regression",
+  "exe": "C:\\file-native-packing-20261020\\bin\\candidate1.exe",
+  "exe_sha256": "478dd9ba9f687d4de81c60ce55f9ddf9e4e2fafcc493d581b3c63e12e42f7fe5",
+  "selected_unchanged": true,
+  "no_post_packing_publication": true,
+  "results": {
+    "before": {
+      "exit": 0,
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\selected_once_copy.ps1",
+        "-Root",
+        "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\disposable\\store",
+        "-Destination",
+        "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\before-copy"
+      ],
+      "stdout_sha256": "e9fc2ae2394c4c0a9ec5b8b82858391d2614789f70bf0dbcfeeb25b2cb52a1fc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body": {
+        "selected": {
+          "publication": "publication-52584-1792471173424035400-27",
+          "digest": "c217a9eb7655825e18b2500c39bdae3cc9bb56f1d1bd145dc299988aeece6aca"
+        },
+        "attempt": "attempt-52584-1792471173289169000-1",
+        "generation": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\disposable\\store\\generations\\attempt-52584-1792471173289169000-1",
+        "files": [
+          {
+            "path": "docs/item-attachments-d000009/evidence/deep/source.txt",
+            "bytes": 65536,
+            "sha256": "0626e770a287286f918006fe5ae36b042c238bc3e9d5fcb8035fe1c90abe26e2"
+          },
+          {
+            "path": "docs/item-aux--d000005.md",
+            "bytes": 4096,
+            "sha256": "7a8149ee50a8cd9a506835ae44e23406383ada573a9006979fce4cc0060b0ec8"
+          },
+          {
+            "path": "docs/item-case-d000006.md",
+            "bytes": 4096,
+            "sha256": "16f81f0e49aa829b7b6c41185950a50ae8a3e59ee3f0a8ecd7c27cb846379f1f"
+          },
+          {
+            "path": "docs/item-case-d000007.md",
+            "bytes": 16384,
+            "sha256": "c60a3160df4d699b47ce9616409a2aadcdc6bfa98ab8c1926a52ee33076474a5"
+          },
+          {
+            "path": "docs/item-con-d000003.md",
+            "bytes": 4096,
+            "sha256": "bd6ad66bf35a2aa8315b40520eeacde8142ad3b42fa690704c3864d4fc552d08"
+          },
+          {
+            "path": "docs/item-con--d000004.md",
+            "bytes": 4096,
+            "sha256": "5fd4a48bec1093a6697daa1d1898bb85acae1d5ba97369ef5f393c4bc90437d1"
+          },
+          {
+            "path": "docs/item---d000008.md",
+            "bytes": 16384,
+            "sha256": "d4d912aab1de8fbfc9db72569895a81a49e4c651ef4cdf32bac960006708d104"
+          },
+          {
+            "path": "docs/item-decision-caf--d000002.json",
+            "bytes": 4096,
+            "sha256": "fb62599a81b1cc1f15af9ff1412bc26ca5bf27331ba36eb7cbb5cbcda82a8869"
+          },
+          {
+            "path": "docs/item-overview-d000000.yaml",
+            "bytes": 4096,
+            "sha256": "9968d0d760a9b3214d613d18b985cbada9d4b6be09ac7777e198e3f243feea55"
+          },
+          {
+            "path": "docs/item-project-source-10-d000010.yaml",
+            "bytes": 4096,
+            "sha256": "82a735e23d2b6a74e08fda1108e84ac239973129f59ffdc857365263a3d8f548"
+          },
+          {
+            "path": "docs/item-project-source-11-d000011.yaml",
+            "bytes": 4096,
+            "sha256": "2d7b7f63613d7f15a9a9aeb238dfe13bfa8b403cafaced91bfcdec172a049403"
+          },
+          {
+            "path": "docs/item-project-source-12-d000012.json",
+            "bytes": 4096,
+            "sha256": "6cfda89790e9a60edddc441a00ea5fb9ea8478d440c3a0e75544c4fcf5e1651a"
+          },
+          {
+            "path": "docs/item-project-source-13-d000013.md",
+            "bytes": 4096,
+            "sha256": "264fcd27398ee1a1cdc5d29d0ede0afadc95de5fdd6e061d2a264ac05ab567db"
+          },
+          {
+            "path": "docs/item-project-source-14-d000014.md",
+            "bytes": 4096,
+            "sha256": "79d763dca7f6dc8116d5b0759a640fcb1241e056f44d226f90321280b6eb808b"
+          },
+          {
+            "path": "docs/item-project-source-15-d000015.md",
+            "bytes": 4096,
+            "sha256": "85c555da0673c9b597fcd23072564701d9e45a30bea3cc0751d581b7610097da"
+          },
+          {
+            "path": "docs/item-requirement---d000001.yaml",
+            "bytes": 4096,
+            "sha256": "57cb37815517806140ddc9244b4bdb60b185b23f9bc5465c0ba25c7ff47e8812"
+          },
+          {
+            "path": "MANIFEST.json",
+            "bytes": 4855,
+            "sha256": "7c1f814d42acbf163b2ca7d3039880e5d47b1d08017abae20f1f1dbb19d2824c"
+          },
+          {
+            "path": "navigation.yaml",
+            "bytes": 336,
+            "sha256": "80cc103cef138b3ce7a5f49472442470a8a433026412a3619804d39e3f222c00"
+          },
+          {
+            "path": "navigation/groups/root.yaml",
+            "bytes": 2653,
+            "sha256": "62bed9beb00dbe3b1c5321342c0599387d5d0111434cc4a1c1b08ee07f69f6d1"
+          },
+          {
+            "path": "packet/context.md",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "packet/provenance.json",
+            "bytes": 228,
+            "sha256": "c647b542162249c8dd53e5a6e0eb37398fea70a97c23c2c482587c0f9a09e8bc"
+          }
+        ],
+        "discovery": "ordinary PowerShell; SELECTED captured exactly once; no engine or pack decoder"
+      }
+    },
+    "after": {
+      "exit": 1,
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-packing-20261020\\handbook\\docs\\research\\file-native-packing-2026-10-20\\selected_once_copy.ps1",
+        "-Root",
+        "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\disposable\\store",
+        "-Destination",
+        "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\after-copy"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "fd26a723499c159b2b10df7c4e7f9dace1fbdfaca91ee65d5b46758259c5cbd9"
+    }
+  },
+  "fixture": "C:\\file-native-packing-20261020\\B-shell\\old-4cb-immediate-v3\\disposable\\store"
+}

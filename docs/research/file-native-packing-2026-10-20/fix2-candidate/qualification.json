@@ -1,0 +1,18 @@
+{
+  "utc": "2026-10-20T04:48:34.087127+00:00",
+  "core_base": "4cb6b9fba9ffabc294a6006ec54fe75366968db4",
+  "core_files": 18,
+  "exe_sha256": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b",
+  "release_build_passed": true,
+  "immediate_B_shell_copy_passed": true,
+  "targeted_cases": 9,
+  "targeted_engine_events": 26,
+  "targeted_ordinary_shell_processes": 9,
+  "affected_full_capsule": "pending verified artifact archival and separate reclamation admission",
+  "old_candidate1_and_P0_measurements_remain_on_4cb": true,
+  "B_publications": "all mapped publication duplicates retained and compared with canonical raw bytes, including historical and retired; no deletion credit",
+  "already_broken_missing_B_control": "fails closed; no silent repair",
+  "research_gate": "B residual publication controls remain charged and may fail the frozen 95 percent file-reduction rule",
+  "main_PZ_admitted": false,
+  "large_cleanup_admitted": false
+}
