@@ -1,0 +1,147 @@
+{
+  "binary": {
+    "bytes": 3202560,
+    "path": "C:/file-native-online-cp1-20261020/build/release/file-native-incremental.exe",
+    "sha256": "e7f648ec50bd0facab8c9e20eb0a0fe0d8d80dc32ecbe4cfb3986822bd2604d9"
+  },
+  "guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "base": "7a6ee9db03f5cd2e388129a9019c0d5f274a1844",
+  "runs": {
+    "cp3-build7.json": {
+      "sha256": "279ab8e0bb120200cfd902cc3935f6230003be720cf7b0dee93a613ab1e1b196",
+      "bytes": 27038
+    },
+    "cp3-conversion.json": {
+      "sha256": "e345d013f33e9ccf9e35fc237b8f8514cec9a987fc097a6db763626e2e8fdf74",
+      "bytes": 7511
+    },
+    "cp3-conversion-results.json": {
+      "sha256": "9d014edf59879c3d13c724d60d927a77f51e1a0eea7361fdfe55e37d2172d389",
+      "bytes": 686
+    },
+    "cp3-smoke3.json": {
+      "sha256": "3c3ca3b5a6552069e63e6c49c7c6da65f9b249fcc2cfd3d4a7568d9925d96da5",
+      "bytes": 18321
+    },
+    "cp3-smoke3-results.json": {
+      "sha256": "76a844ad038588d0f1e2a9eee296a5fbf008ee702f09af0912d449d501898970",
+      "bytes": 1829
+    },
+    "cp3-build3-source.json": {
+      "sha256": "fd2355fffaf0dc8536c5e8cf63332c5a666b013cf67d59bda538240eef856fe8",
+      "bytes": 2817
+    },
+    "cp3-budget.json": {
+      "sha256": "9c9c491a7c77c5dbd36a9d20afdc6bd421525c882b878511ded33de765a36e30",
+      "bytes": 2635
+    },
+    "cp3-impact-before.txt": {
+      "sha256": "2a3741a33bfa6a85399fafd324f57d3dc24eb8dea23ad8eddf850ed9b0d6fa35",
+      "bytes": 13314
+    }
+  },
+  "source_format": "provisional CAT4/FNPIDX02; STORE3 generation protocol",
+  "files": {
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock": {
+      "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+      "bytes": 10547
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml": {
+      "sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74",
+      "bytes": 561
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/Cargo.toml": {
+      "sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e",
+      "bytes": 147
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/src/main.rs": {
+      "sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173",
+      "bytes": 68
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/Cargo.toml": {
+      "sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed",
+      "bytes": 148
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/src/main.rs": {
+      "sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac",
+      "bytes": 69
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs": {
+      "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851",
+      "bytes": 12161
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs": {
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+      "bytes": 8570
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs": {
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "bytes": 1001
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs": {
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "bytes": 2661
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs": {
+      "sha256": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d",
+      "bytes": 30973
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs": {
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+      "bytes": 14324
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs": {
+      "sha256": "e3c24f0a9c77e108f8e35f463d5aae598f568a426351eb901e8aa7af90e2d3e0",
+      "bytes": 14405
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs": {
+      "sha256": "fba1eb82cbb6f5400adf283569178750ca7fb75f51a56c8bbd0cadb5abf716ea",
+      "bytes": 476
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs": {
+      "sha256": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+      "bytes": 15945
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs": {
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "bytes": 57
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs": {
+      "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+      "bytes": 10576
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs": {
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+      "bytes": 3551
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs": {
+      "sha256": "db970681071d639906202091396ad8e95b912c2e0fa4d66d606b656286a9ec8a",
+      "bytes": 15306
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs": {
+      "sha256": "38b56ec0234569b0c253388c6df9eca1684bd5292ac66d0baf8e6a291d756fcb",
+      "bytes": 61425
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/paged.rs": {
+      "sha256": "6cbafeaa7a880e8744e291daa1a077b98879e3e18029b7c3843ddd4a0789eb3f",
+      "bytes": 20932
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/physical_lifetime.rs": {
+      "sha256": "bcea0c7e8c8bb3a01933db272dcf10fd04c56c0e9ca9ef978865205b834666ec",
+      "bytes": 23403
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs": {
+      "sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6",
+      "bytes": 27876
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/rolling.rs": {
+      "sha256": "7f2ff7f8266a8d2d7d306051bbd5e12fc039abc3f8ff5b09c1b4993fad14776d",
+      "bytes": 9157
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs": {
+      "sha256": "31cafafddede7c2347a1fe85d3f18346972796af9fa8cb6b12c6c531502eb58d",
+      "bytes": 36078
+    }
+  },
+  "branch": "codex/file-native-online-cp3-20261020"
+}

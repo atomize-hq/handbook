@@ -4,6 +4,7 @@ use fs2::FileExt;
 use crate::physical_lifetime as physical;
 use serde::{Serialize,Deserialize};
 use serde_json::{json,Value};
+use sha2::{Digest,Sha256};
 use std::{collections::{BTreeMap,BTreeSet},fs::{File,OpenOptions},path::{Path,PathBuf},rc::Rc,time::{Duration,Instant}};
 
 #[derive(Clone,Serialize,Deserialize)]
@@ -26,9 +27,10 @@ fn catalog(root:&Path,c:&crate::store::StoreConfig,m:&mut Metrics)->Result<Optio
             if io::digest(&b)!=hash{return Err("integrity:catalog-digest".into());}
             m.pack_catalog_bytes+=b.len() as u64;
             let cat:Catalog=strict(&b)?;
-            if !(if c.version==3{cat.version==2||cat.version==3}else{cat.version==1})||cat.store_id!=c.store_id||cat.packs.len()>64{return Err("integrity:catalog-version-count".into());}
+            if !(if c.version==3{matches!(cat.version,2|3|4)}else{cat.version==1})||cat.store_id!=c.store_id||cat.packs.len()>64{return Err("integrity:catalog-version-count".into());}
             let mut previous:Option<&Descriptor>=None;let mut hashes=BTreeSet::new();let mut segments=BTreeSet::new();
             for d in &cat.packs {
+                if d.page.is_some(){if cat.version!=4{return Err("integrity:paged-catalog-version".into());}crate::paged::validate(d)?;}
                 if c.version==2&&d.instance.is_some()||c.version==3&&d.instance.is_none()&&cat.version<3||!crate::objects::valid_hash(&d.pack)||!crate::objects::valid_hash(&d.index)||d.pack_bytes>pack::MAX_PACK as u64||d.index_bytes>pack::MAX_INDEX as u64||d.records==0||d.records as usize>pack::MAX_RECORDS||d.codec>1||Key::new(&d.first)?.role()!=Some(d.role.as_str())||Key::new(&d.last)?.role()!=Some(d.role.as_str())||d.first>d.last||!hashes.insert(d.path("idx")?)||cat.version<3&&d.segment!=0 {
                     return Err("integrity:catalog-descriptor".into());
                 }
@@ -61,7 +63,7 @@ impl PhysicalRead {
         m.pack_cache_peak_bytes=m.pack_cache_peak_bytes.max((self.cache_bytes+bound) as u64);Ok(())
     }
     fn index(&mut self,d:&Descriptor,m:&mut Metrics)->Result<Rc<Index>> {
-        let cache_key=d.path("idx")?;
+        let cache_key=if let Some(p)=&d.page{format!("{}:{}:{}:{}:{}",d.path("idx")?,p.version,p.hash,p.bytes,p.height)}else{d.path("idx")?};
         if let Some(index)=self.cache.get(&cache_key){m.pack_cache_hits+=1;return Ok(index.clone());}
         let bound=Index::allocation_bound(d)?;
         // Evict before allocation: the loading index is included in residency.
@@ -70,22 +72,28 @@ impl PhysicalRead {
         if bytes>bound{return Err("integrity:index-cache-estimate".into());}
         self.cache_bytes+=bytes;m.pack_cache_peak_bytes=m.pack_cache_peak_bytes.max(self.cache_bytes as u64);self.cache.insert(cache_key,index.clone());Ok(index)
     }
-    fn locate(&mut self,key:&Key,m:&mut Metrics)->Result<Option<(Descriptor,pack::Entry)>> {
+    fn locate(&mut self,key:&Key,m:&mut Metrics)->Result<Option<(Descriptor,pack::Entry,Vec<u8>)>> {
         let descriptors=self.catalog.as_ref().map_or(vec![],|cat|cat.packs.iter().filter(|d|Some(d.role.as_str())==key.role()&&d.first<=key.0&&key.0<=d.last).cloned().collect::<Vec<_>>());
+        let before_pages=m.pack_page_reads;let before_bytes=m.pack_index_metadata_bytes;m.pack_physical_key_lookups+=1;m.pack_key_relevant_max=m.pack_key_relevant_max.max(descriptors.len() as u64);
+        let result=(||->Result<Option<(Descriptor,pack::Entry,Vec<u8>)>>{
         if descriptors.len()>4{return Err("integrity:relevant-segment-cap".into());}
-        let mut found:Option<(Descriptor,pack::Entry)>=None;
+        let mut found:Option<(Descriptor,pack::Entry,Vec<u8>)>=None;
         for d in descriptors {
             // No Rc survives a subsequent cache load: eviction never leaves an
             // uncharged borrowed index. Every relevant route is authenticated.
             let index=self.index(&d,m)?;
-            if let Some(e)=index.find(key)? {
-                if let Some((_,old))=&found {
+            if let Some(e)=index.find(key,m)? {
+                let raw=index.read(&self.root,&e,pack::MAX_RAW,m)?;
+                if let Some((_,old,bytes))=&found {
                     if old.hash!=e.hash||old.raw!=e.raw{return Err("integrity:segment-conflicting-identity".into());}
-                    index.read(&self.root,&e,pack::MAX_RAW,m)?;
-                }else{found=Some((d,e));}
+                    if bytes!=&raw{return Err("integrity:segment-conflicting-raw".into());}
+                }else{found=Some((d,e,raw));}
             }
         }
         Ok(found)
+        })();
+        let pages=m.pack_page_reads-before_pages;let bytes=m.pack_index_metadata_bytes-before_bytes;m.pack_key_page_read_max=m.pack_key_page_read_max.max(pages);m.pack_key_index_bytes_max=m.pack_key_index_bytes_max.max(bytes);
+        if pages>12||bytes>192*1024{return Err("integrity:paged-physical-key-work-bound".into());}result
     }
 }
 pub(crate) fn capture(root:&Path,m:&mut Metrics)->Result<()> {
@@ -93,8 +101,10 @@ pub(crate) fn capture(root:&Path,m:&mut Metrics)->Result<()> {
         if p.root!=root{return Err("integrity:physical-root-rebind".into());}
         return Ok(());
     }
-    let (c,lease)=physical::capture(root,m)?;
+    let before=m.bytes_read;let (c,lease)=physical::capture(root,m)?;
     m.physical=Some(PhysicalRead::from_lease(root,lease,c,m)?);
+    let bytes=m.bytes_read-before;m.physical_capture_bytes+=bytes;
+    if m.physical.as_ref().and_then(|p|p.catalog.as_ref()).is_some_and(|c|c.version==4)&&bytes>65536{return Err("integrity:paged-startup-budget".into());}
     io::checkpoint("pack-read-lease")?;io::checkpoint("pack-catalog-captured")
 }
 fn key_for(path:&Path,m:&Metrics)->Option<(PathBuf,Key)> {
@@ -107,7 +117,7 @@ pub(crate) fn read(path:&Path,limit:usize,m:&mut Metrics)->Result<Option<Vec<u8>
     capture(&root,m)?;
     let mut physical=m.physical.take().ok_or("integrity:physical-capture")?;
     let result=(||->Result<Option<Vec<u8>>>{
-        if let Some((d,e))=physical.locate(&key,m)?{let index=physical.index(&d,m)?;return Ok(Some(index.read(&root,&e,limit,m)?));}Ok(None)
+        if let Some((_,e,raw))=physical.locate(&key,m)?{if e.raw>limit{return Err("integrity:packed-read-bound".into());}return Ok(Some(raw));}Ok(None)
     })();m.physical=Some(physical);result
 }
 pub(crate) fn exists(path:&Path,m:&mut Metrics)->Result<bool> {
@@ -135,7 +145,7 @@ fn all_mapped(m:&mut Metrics)->Result<Vec<Key>> {
         let mut keys=vec![];
         for d in physical.catalog.as_ref().map_or(vec![],|c|c.packs.clone()) {
             let index=physical.index(&d,m)?;
-            for n in 0..d.records as usize{keys.push(index.entry(n)?.key);}
+            for n in 0..d.records as usize{keys.push(index.entry(n,m)?.key);}
         }Ok(keys)
     })();m.physical=Some(physical);result
 }
@@ -175,7 +185,7 @@ fn consolidate(keys:&mut BTreeSet<Key>,old:&[Descriptor],limit:usize,m:&mut Metr
         let mut physical=m.physical.take().ok_or("integrity:consolidation-capture")?;
         let index=physical.index(d,m);m.physical=Some(physical);let index=index?;
         for n in 0..d.records as usize{
-            let e=index.entry(n)?;
+            let e=index.entry(n,m)?;
             m.rolling_collateral_raw_bytes=m.rolling_collateral_raw_bytes.checked_add(e.raw as u64).ok_or("quota:collateral-overflow")?;
             if m.rolling_collateral_raw_bytes>64*1024*1024{return Err("quota:collateral-rewrite-bound".into());}
             if (keys.len()+1)*768>16*1024*1024{return Err("quota:consolidation-bookkeeping".into());}
@@ -193,28 +203,52 @@ fn install(root:&Path,stage:&Path,bytes:&[u8],name:&str,hash:&str,m:&mut Metrics
     if io::digest(bytes)!=hash{return Err("integrity:install-container-hash".into());}
     io::write_new(&destination,bytes,m)
 }
-fn flush(root:&Path,stage:&Path,builder:pack::Builder,m:&mut Metrics)->Result<Descriptor> {
+fn identity(hash:&mut Sha256,e:&pack::Entry){hash.update((e.key.0.len() as u64).to_le_bytes());hash.update(e.key.0.as_bytes());hash.update((e.raw as u64).to_le_bytes());hash.update(e.hash.as_bytes());}
+fn flush(root:&Path,stage:&Path,builder:pack::Builder,m:&mut Metrics,expected_identity:Option<String>)->Result<Descriptor> {
     let (mut d,pack,index)=builder.finish()?;
     d.instance=Some(stage.file_name().and_then(|s|s.to_str()).ok_or("integrity:birth-id")?.into());
     io::checkpoint("pack-build")?;
     install(root,stage,&pack,&format!("{}.pack",d.pack),&d.pack,m)?;io::checkpoint("pack-index")?;
     install(root,stage,&index,&format!("{}.idx",d.index),&d.index,m)?;io::checkpoint("pack-install")?;
     let started=Instant::now();let bound=Index::allocation_bound(&d)?;
-    if let Some(physical)=m.physical.as_mut(){physical.borrowed_index_bytes=bound;}
+    let previous_borrow=m.physical.as_ref().map_or(0,|p|p.borrowed_index_bytes);
+    if let Some(physical)=m.physical.as_mut(){physical.borrowed_index_bytes=previous_borrow.checked_add(bound).ok_or("integrity:index-memory-overflow")?;}
     let mut physical=m.physical.take().ok_or("integrity:verification-capture")?;physical.make_room(0,m)?;m.physical=Some(physical);
     let checked=Index::load(root,&d,m)?;
+    checked.audit(m)?;crate::paged::verify_file(&root.join(d.path("pack")?),d.pack_bytes,&d.pack,m)?;
+    let mut actual_identity=Sha256::new();
     for n in 0..d.records as usize {
-        let e=checked.entry(n)?;let raw=checked.read(root,&e,pack::MAX_RAW,m)?;
-        let original=io::read(&root.join(&e.key.0),m)?;
-        if raw!=original{return Err("integrity:pack-complete-input-correspondence".into());}
+        let e=checked.entry(n,m)?;let raw=checked.read(root,&e,pack::MAX_RAW,m)?;
+        identity(&mut actual_identity,&e);
+        if expected_identity.is_none(){let original=io::read(&root.join(&e.key.0),m)?;if raw!=original{return Err("integrity:pack-complete-input-correspondence".into());}}
     }
-    drop(checked);if let Some(physical)=m.physical.as_mut(){physical.borrowed_index_bytes=0;}
+    if expected_identity.as_ref().is_some_and(|expected|format!("{:x}",actual_identity.finalize())!=*expected){return Err("integrity:conversion-complete-input-correspondence".into());}
+    drop(checked);if let Some(physical)=m.physical.as_mut(){physical.borrowed_index_bytes=previous_borrow;}
     m.elapsed("pack-complete-verification",started);Ok(d)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]fn paged_cache_identity_preserves_physical_instance(){
+        let root=PathBuf::from(std::env::var_os("EXP_PACK_TEST_ROOT").expect("explicit fixture root required")).join(io::unique("paged-instance"));
+        let mut builder=pack::Builder::new("result",0);builder.push(Key::new(&format!("results/{}.json","a".repeat(64))).unwrap(),b"raw").unwrap();let (mut a,pack,bytes)=builder.finish().unwrap();a.instance=Some("first".into());let mut b=a.clone();b.instance=Some("second".into());
+        for d in [&a,&b]{std::fs::create_dir_all(root.join(format!("packs/{}",d.instance.as_ref().unwrap()))).unwrap();std::fs::write(root.join(d.path("pack").unwrap()),&pack).unwrap();std::fs::write(root.join(d.path("idx").unwrap()),&bytes).unwrap();}
+        let lease=physical::lock_file(&root.join("lease"),true).unwrap();let mut p=PhysicalRead{_lease:lease,root:root.clone(),config:crate::store::StoreConfig{version:1,store_id:"cache-test".into(),mode:"A".into(),consumer:"project".into(),fallback:false,navigation_version:4,catalog:None,physical:None},catalog:None,cache:BTreeMap::new(),cache_bytes:0,borrowed_index_bytes:0};let mut m=Metrics::default();p.index(&a,&mut m).unwrap();
+        let mut damaged=bytes;damaged[0]^=1;std::fs::write(root.join(b.path("idx").unwrap()),damaged).unwrap();assert!(p.index(&b,&mut m).is_err());assert_eq!(p.cache.len(),1);assert!(m.pack_cache_peak_bytes<=pack::MAX_CACHE as u64);
+    }
+    #[test]fn paged_four_routes_negative_duplicates_and_conflict(){
+        let root=PathBuf::from(std::env::var_os("EXP_PACK_TEST_ROOT").expect("explicit fixture root required")).join(io::unique("paged-four"));std::fs::create_dir_all(&root).unwrap();
+        let mut descriptors=vec![];
+        for part in 0..5{
+            let mut builder=pack::Builder::new("result",0);for n in 0..2400{builder.push(Key::new(&format!("results/{:064x}.json",n*2)).unwrap(),if part==4&&n==1200{b"BAD"}else{b"raw"}).unwrap();}
+            let (mut d,pack,bytes)=builder.finish().unwrap();d.instance=Some(format!("route-{part}"));d.segment=part+1;std::fs::create_dir_all(root.join(format!("packs/route-{part}"))).unwrap();std::fs::write(root.join(d.path("pack").unwrap()),pack).unwrap();std::fs::write(root.join(d.path("idx").unwrap()),bytes).unwrap();descriptors.push(d);
+        }
+        let lease=physical::lock_file(&root.join("lease"),true).unwrap();let mut p=PhysicalRead{_lease:lease,root:root.clone(),config:crate::store::StoreConfig{version:3,store_id:"four-routes".into(),mode:"A".into(),consumer:"project".into(),fallback:false,navigation_version:4,catalog:None,physical:None},catalog:Some(Catalog{version:4,store_id:"four-routes".into(),packs:descriptors[..4].to_vec()}),cache:BTreeMap::new(),cache_bytes:0,borrowed_index_bytes:0};let mut m=Metrics::default();
+        let hit=Key::new(&format!("results/{:064x}.json",1200*2)).unwrap();let value=p.locate(&hit,&mut m).unwrap().unwrap();assert_eq!(value.2,b"raw");assert_eq!(m.pack_key_relevant_max,4);assert_eq!(m.pack_key_page_read_max,12);assert!(m.pack_key_index_bytes_max<=192*1024);
+        let missing=Key::new(&format!("results/{:064x}.json",1200*2+1)).unwrap();assert!(p.locate(&missing,&mut m).unwrap().is_none());
+        p.catalog.as_mut().unwrap().packs[3]=descriptors[4].clone();assert!(p.locate(&hit,&mut m).err().unwrap().to_string().contains("segment-conflicting"));
+    }
     #[test] fn loading_indexes_evicts_before_transient_allocation(){
         let root=std::env::var_os("EXP_PACK_TEST_ROOT").map(PathBuf::from).unwrap_or_else(||PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("target")).join(io::unique("packing-cache-boundary"));
         std::fs::create_dir_all(root.join("packs")).unwrap();
@@ -224,11 +258,11 @@ mod tests {
         for part in 0..5 {
             let mut builder=pack::Builder::new("allocation",0);
             for n in 0..56000 {let key=Key::new(&format!("attempts/{}-{part}/allocations/{}-{n:06}.json","a".repeat(80),"b".repeat(75))).unwrap();builder.push(key,b"").unwrap();}
-            let (d,p,i)=builder.finish().unwrap();std::fs::write(root.join(format!("packs/{}.pack",d.pack)),p).unwrap();std::fs::write(root.join(format!("packs/{}.idx",d.index)),i).unwrap();descriptors.push(d);
+            let (d,p,i)=builder.finish_legacy().unwrap();std::fs::write(root.join(format!("packs/{}.pack",d.pack)),p).unwrap();std::fs::write(root.join(format!("packs/{}.idx",d.index)),i).unwrap();descriptors.push(d);
         }
         let total:usize=descriptors.iter().map(|d|Index::allocation_bound(d).unwrap()).sum();assert!(total>pack::MAX_CACHE);
         for d in &descriptors {
-            let index=physical.index(d,&mut metrics).unwrap();assert_eq!(index.entry(0).unwrap().key.0,d.first);
+            let index=physical.index(d,&mut metrics).unwrap();assert_eq!(index.entry(0,&mut metrics).unwrap().key.0,d.first);
             assert!(physical.cache_bytes+physical.borrowed_index_bytes<=pack::MAX_CACHE);
         }
         assert!(physical.cache.len()<5);assert!(metrics.pack_cache_peak_bytes<=pack::MAX_CACHE as u64);assert!(metrics.pack_cache_peak_bytes>48*1024*1024);
@@ -275,6 +309,34 @@ fn append_work(root:&Path,c:&crate::store::StoreConfig,id:&str,packs:Vec<Descrip
 }
 fn next_ordinal(c:&crate::store::StoreConfig)->Result<u64>{
     c.physical.as_ref().map_or(Some(1),|b|b.ordinal.checked_add(1)).ok_or_else(||"quota:physical-generation-overflow".into())
+}
+// Deliberately full, explicit representation work. It neither advances a
+// semantic discovery cursor nor materializes the complete mapped key set.
+fn convert_pairs(root:&Path,stage:&Path,old:&[Descriptor],m:&mut Metrics)->Result<(Vec<Descriptor>,u64,u64)>{
+    let mut output=vec![];let mut records=0u64;let mut raw_bytes=0u64;
+    for d in old{
+        if physical::cancelled(){return Err("cancelled:full-conversion".into());}
+        let charge=Index::allocation_bound(d)?;
+        let mut physical=m.physical.take().ok_or("integrity:conversion-capture")?;
+        if physical.borrowed_index_bytes!=0{return Err("integrity:conversion-borrow".into());}
+        physical.borrowed_index_bytes=charge;physical.make_room(0,m)?;m.physical=Some(physical);
+        let index=Index::load(root,d,m)?;index.audit(m)?;crate::paged::verify_file(&root.join(d.path("pack")?),d.pack_bytes,&d.pack,m)?;
+        let mut builder=pack::Builder::new(&d.role,d.codec);let mut source_identity=Sha256::new();
+        for n in 0..d.records as usize{
+            if physical::cancelled(){return Err("cancelled:full-conversion".into());}
+            let e=index.entry(n,m)?;let raw=index.read(root,&e,pack::MAX_RAW,m)?;
+            if !builder.fits(&e.key,raw.len()){
+                let expected=format!("{:x}",std::mem::take(&mut source_identity).finalize());
+                let mut new=flush(root,stage,builder,m,Some(expected))?;new.segment=d.segment;output.push(new);builder=pack::Builder::new(&d.role,d.codec);
+            }
+            records=records.checked_add(1).ok_or("integrity:conversion-overflow")?;raw_bytes=raw_bytes.checked_add(raw.len() as u64).ok_or("integrity:conversion-overflow")?;
+            identity(&mut source_identity,&e);builder.push(e.key,&raw)?;
+        }
+        if !builder.is_empty(){let expected=format!("{:x}",source_identity.finalize());let mut new=flush(root,stage,builder,m,Some(expected))?;new.segment=d.segment;output.push(new);}
+        drop(index);if let Some(p)=m.physical.as_mut(){p.borrowed_index_bytes=0;}
+        if output.len()>64{return Err("quota:conversion-pack-cap".into());}
+    }
+    Ok((output,records,raw_bytes))
 }
 fn abandoned_owners(old:&Journal)->Result<Vec<BirthOwner>>{
     if old.version!=2||old.status!="aborted-owned"{return Ok(vec![]);}
@@ -353,6 +415,8 @@ fn activate(root:&Path,store:&Store,j:&Journal,m:&mut Metrics)->Result<()> {
 
     // Revalidate every candidate record outside Q/W, including a resumed build.
     let cat=catalog(root,target,m)?.ok_or("integrity:activation-catalog")?;
+    let upgrade=cat.version==4&&m.physical.as_ref().and_then(|p|p.catalog.as_ref()).is_none_or(|c|c.version<4);
+    let upgrade_pins=if upgrade{physical::upgrade_handles(root,&now,m)?}else{vec![]};
     let inherited=selected_packs(m);
     for d in &cat.packs {
         // Continuous immutable parent descriptors are not newly constructed
@@ -362,7 +426,8 @@ fn activate(root:&Path,store:&Store,j:&Journal,m:&mut Metrics)->Result<()> {
         if let Some(p)=m.physical.as_mut(){p.borrowed_index_bytes=bound;}
         let mut p=m.physical.take().ok_or("integrity:activation-capture")?;p.make_room(0,m)?;m.physical=Some(p);
         let index=Index::load(root,d,m)?;
-        for n in 0..d.records as usize{let e=index.entry(n)?;index.read(root,&e,pack::MAX_RAW,m)?;}
+        index.audit(m)?;crate::paged::verify_file(&root.join(d.path("pack")?),d.pack_bytes,&d.pack,m)?;
+        for n in 0..d.records as usize{let e=index.entry(n,m)?;index.read(root,&e,pack::MAX_RAW,m)?;}
         drop(index);if let Some(p)=m.physical.as_mut(){p.borrowed_index_bytes=0;}
     }
     physical::load(root,target,m)?;
@@ -388,13 +453,21 @@ fn activate(root:&Path,store:&Store,j:&Journal,m:&mut Metrics)->Result<()> {
             let f=physical::lock_file(&root.join("pack-readers.lock"),true)?;
             match FileExt::try_lock_exclusive(&f){Ok(())=>Some(f),Err(e) if physical::contended(&e)=>{drop(q);record_activation_hold(m,hold)?;if wait.elapsed()>Duration::from_millis(cap){return Err("busy:legacy-readers".into());}std::thread::sleep(Duration::from_millis(2));continue;},Err(e)=>return Err(e.into())}
         }else{None};
+        let mut locked=0usize;
+        for pin in &upgrade_pins{match FileExt::try_lock_exclusive(pin){Ok(())=>locked+=1,Err(e) if physical::contended(&e)=>break,Err(e)=>return Err(e.into())}}
+        if locked!=upgrade_pins.len(){
+            for pin in upgrade_pins.iter().take(locked){FileExt::unlock(pin)?;}drop(legacy);drop(q);m.physical_upgrade_holds_ns.push(hold.elapsed().as_nanos().min(u64::MAX as u128) as u64);record_activation_hold(m,hold)?;
+            if wait.elapsed()>Duration::from_millis(cap){return Err("busy:upgrade-readers".into());}std::thread::sleep(Duration::from_millis(2));continue;
+        }
         let Some(writer)=store.try_writer(m)? else{
+            for pin in &upgrade_pins{FileExt::unlock(pin)?;}
             drop(legacy);drop(q);
             record_activation_hold(m,hold)?;
             if wait.elapsed()>Duration::from_millis(cap){return Err("busy:activation-writer".into());}
             std::thread::sleep(Duration::from_millis(2));continue;
         };
         let result=io::replace(&stage,&root.join("STORE.json"),m).and_then(|_|io::sync_dir(root,m));
+        if upgrade{m.physical_upgrade_holds_ns.push(hold.elapsed().as_nanos().min(u64::MAX as u128) as u64);m.physical_upgrade_wait_ns=wait.elapsed().as_nanos().min(u64::MAX as u128) as u64;}
         drop(writer);drop(legacy);drop(q);record_activation_hold(m,hold)?;m.elapsed("physical-activation-hold",hold);m.elapsed("physical-activation-wait-inclusive",wait);
         // No injected barrier or journal I/O runs under Q/W.
         result?;io::checkpoint("physical-after-store-replace")?;std::fs::remove_dir(stage.parent().ok_or("integrity:stage-parent")?)?;io::checkpoint("pack-catalog")?;io::checkpoint("physical-after-selection")?;return Ok(());
@@ -441,11 +514,11 @@ fn cleanup(root:&Path,c:&crate::store::StoreConfig,m:&mut Metrics)->Result<Value
         let bound=Index::allocation_bound(&job.descriptor)?;
         if let Some(p)=m.physical.as_mut(){p.borrowed_index_bytes=bound;}
         let mut p=m.physical.take().ok_or("integrity:cleanup-capture")?;p.make_room(0,m)?;m.physical=Some(p);
-        m.cleanup_step()?;let index_started=Instant::now();let index=Index::load(root,&job.descriptor,m)?;m.elapsed("cleanup-legacy-whole-index-indivisible",index_started);
-        if !m.cleanup_available(){return Err("deferred:legacy-whole-index-budget".into());}
+        m.cleanup_step()?;let index_started=Instant::now();let index=Index::load(root,&job.descriptor,m)?;m.elapsed(if job.descriptor.page.is_some(){"cleanup-paged-open"}else{"cleanup-legacy-whole-index-indivisible"},index_started);
+        if !m.cleanup_available(){return Err("deferred:index-open-budget".into());}
         while w.jobs[n].position<job.descriptor.records&&m.cleanup_available(){
             if physical::cancelled(){physical::save(root,binding,&mut w,m)?;return Err("cancelled:physical-cleanup".into());}
-            candidates+=1;m.cleanup_step()?;let e=index.entry(w.jobs[n].position as usize)?;let path=root.join(&e.key.0);
+            candidates+=1;m.cleanup_step()?;let e=index.entry(w.jobs[n].position as usize,m)?;let path=root.join(&e.key.0);
             if c.mode=="B"&&e.key.role()==Some("publication"){
                 m.cleanup_step()?;let record_started=Instant::now();let raw=index.read(root,&e,pack::MAX_RAW,m)?;m.elapsed("cleanup-legacy-record-indivisible",record_started);m.cleanup_step()?;let loose=pack::native(&path,pack::MAX_RAW,m)?;
                 if raw!=loose{return Err("integrity:B-loose-control-publication-missing-or-conflict".into());}
@@ -529,6 +602,16 @@ fn run_inner(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
     if operation=="status"{
         return Ok(json!({"journal":previous,"selected_work":if store.config.version==3{Some(physical::load(root,&store.config,m)?)}else{None}}));
     }
+    if operation=="verify"{
+        let packs=selected_packs(m);let mut records=0u64;
+        for d in &packs{
+            let mut p=m.physical.take().ok_or("integrity:verify-capture")?;p.borrowed_index_bytes=Index::allocation_bound(d)?;p.make_room(0,m)?;m.physical=Some(p);
+            let index=Index::load(root,d,m)?;index.audit(m)?;crate::paged::verify_file(&root.join(d.path("pack")?),d.pack_bytes,&d.pack,m)?;
+            for n in 0..d.records as usize{let e=index.entry(n,m)?;index.read(root,&e,pack::MAX_RAW,m)?;records+=1;}
+            drop(index);if let Some(p)=m.physical.as_mut(){p.borrowed_index_bytes=0;}
+        }
+        return Ok(json!({"status":"complete-physical-audit","packs":packs.len(),"records":records}));
+    }
     if operation=="abort"{
         let mut j=previous.ok_or("refused:no-maintenance")?;
         if store.config.physical.as_ref().map(|b|&b.id)==Some(&j.id)||!["building","installed"].contains(&j.status.as_str()){return Err("refused:only-unselected-build-abort".into());}
@@ -546,7 +629,9 @@ fn run_inner(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
     }
     let protection=store.preparation_gate(false)?;
     let mut j;
-    if operation=="build"||operation=="repack"{
+    if operation=="build"||operation=="repack"||operation=="convert"{
+        let conversion=operation=="convert";
+        if conversion&&v["force"].as_bool()!=Some(true){return Err("refused:explicit-full-conversion-required".into());}
         if let Some(old)=&previous{
             let selected=store.config.physical.as_ref().map(|b|&b.id)==Some(&old.id);
             if !selected&&!["registered","cleaning","complete","aborted-owned"].contains(&old.status.as_str()){return Err("refused:unfinished-maintenance-resume-or-abort".into());}
@@ -560,11 +645,12 @@ fn run_inner(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
         if io::json(&expected)?!=io::json(&store.config)?{return Err("conflict:physical-capture-parent".into());}
         let expected_config=io::digest(&expected_bytes);
         let prior=if store.config.version==3{physical::load(root,&store.config,m)?.discovery}else{None};
-        let (discovery,mut keys)=crate::rolling::discover(&store,prior,v,m)?;
+        let (discovery,mut keys)=if conversion{(prior,BTreeSet::new())}else{let (d,keys)=crate::rolling::discover(&store,prior,v,m)?;(Some(d),keys)};
         let old=selected_packs(m);
         let segment_limit=v["segment_limit"].as_u64().unwrap_or(4);
         if segment_limit==0||segment_limit>4{return Err("refused:segment-limit".into());}
-        let retained=consolidate(&mut keys,&old,segment_limit as usize,m)?;
+        let retained=if conversion{vec![]}else{consolidate(&mut keys,&old,segment_limit as usize,m)?};
+        if conversion&&old.is_empty(){return Err("refused:full-conversion-needs-mapped-input".into());}
         // A low-count automatic refusal creates no build ownership/output.
         let mut potential_removable=0u64;
         for key in &keys{
@@ -590,16 +676,18 @@ fn run_inner(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
         let stage=root.join(format!("physical-stages/{}",j.id));let mut packs=vec![];let mut excluded=0u64;let mut excluded_bytes=0u64;
         let mut ordered:Vec<_>=keys.into_iter().collect();ordered.sort_by(|a,b|(a.role(),&a.0).cmp(&(b.role(),&b.0)));
         let mut builder:Option<pack::Builder>=None;let mut role=String::new();let mut logical=0u64;let mut records=0u64;let mut removable=(0u64,0u64);
-        for key in ordered{
+        if conversion{
+            let (converted,count,bytes)=convert_pairs(root,&stage,&old,m)?;packs=converted;records=count;logical=bytes;
+        }else{for key in ordered{
             let raw=io::read(&root.join(&key.0),m)?;
             if raw.len()>pack::MAX_RAW{excluded+=1;excluded_bytes+=raw.len() as u64;continue;}
             if root.join(&key.0).exists()&&!(store.config.mode=="B"&&key.role()==Some("publication")){removable.0+=1;removable.1+=raw.len() as u64;}
             if root.join(&key.0).exists()&&pack::native(&root.join(&key.0),128*1024*1024,m)?!=raw{return Err("integrity:conflicting-loose-duplicate".into());}
-            if builder.as_ref().is_some_and(|b|role!=key.role().unwrap()||!b.fits(&key,raw.len())){packs.push(flush(root,&stage,builder.take().unwrap(),m)?);}
+            if builder.as_ref().is_some_and(|b|role!=key.role().unwrap()||!b.fits(&key,raw.len())){packs.push(flush(root,&stage,builder.take().unwrap(),m,None)?);}
             if builder.is_none(){role=key.role().unwrap().into();builder=Some(pack::Builder::new(&role,codec));}
             logical+=raw.len() as u64;records+=1;builder.as_mut().unwrap().push(key,&raw)?;
-        }
-        if let Some(b)=builder{if !b.is_empty(){packs.push(flush(root,&stage,b,m)?);}}
+        }}
+        if let Some(b)=builder{if !b.is_empty(){packs.push(flush(root,&stage,b,m,None)?);}}
         let added_files=packs.len()*2+3;
 
         if v["force"].as_bool()!=Some(true)&&(removable.0<128||removable.0<4*added_files as u64||removable.1<=m.quota_spent+physical::WORK_LIMIT as u64+physical::CATALOG_LIMIT as u64+4096){
@@ -608,18 +696,18 @@ fn run_inner(root:&Path,v:&Value,m:&mut Metrics)->Result<Value> {
             j.status="aborted-owned".into();j.used_bytes=m.quota_spent;m.quota_limit=None;save(root,&j,m)?;
             return Err("refused:automatic-compaction-benefit".into());
         }
-        for d in &mut packs{d.segment=ordinal;}
+        if !conversion{for d in &mut packs{d.segment=ordinal;}}
         packs.extend(retained);
         packs.sort_by(|a,b|(a.segment,&a.role,&a.first).cmp(&(b.segment,&b.role,&b.first)));
         if packs.len()>64{return Err("refused:registered-pack-cap".into());}
-        let cat=Catalog{version:3,store_id:store.config.store_id.clone(),packs:packs.clone()};let bytes=io::json(&cat)?;
+        let cat=Catalog{version:4,store_id:store.config.store_id.clone(),packs:packs.clone()};let bytes=io::json(&cat)?;
         if bytes.len()>physical::CATALOG_LIMIT{return Err("refused:catalog-size".into());}
         let hash=io::digest(&bytes);j.catalog=Some(hash.clone());save(root,&j,m)?;
         let catalog_path=root.join(format!("pack-catalogs/{hash}.json"));
         if catalog_path.exists(){if pack::native(&catalog_path,physical::CATALOG_LIMIT,m)?!=bytes{return Err("integrity:existing-catalog-conflict".into());}}
         else{io::write_new(&catalog_path,&bytes,m)?;}
         let mut work=append_work(root,&store.config,&j.id,packs,&hash,&old,&j.expected_config,m)?;
-        work.discovery=Some(discovery);
+        work.discovery=discovery;
         inherit_aborted(root,&j.abandoned,&mut work,m)?;
         // Initial legacy cleanup may have retained additional old containers.
         if store.config.version<3{if let Some(old_j)=&previous{for d in &old_j.old{physical::add_retired(&mut work,d.clone());}}}

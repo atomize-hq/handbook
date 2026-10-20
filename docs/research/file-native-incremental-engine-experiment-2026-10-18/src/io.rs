@@ -5,6 +5,10 @@ pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 static SEQ: AtomicU64 = AtomicU64::new(0);
 #[derive(Default, Serialize)]
 pub struct Metrics {
+    pub pack_page_reads:u64,pub pack_pages_parsed:u64,pub pack_page_hash_bytes:u64,pub pack_index_metadata_bytes:u64,pub pack_full_audit_bytes:u64,pub pack_metadata_stats:u64,
+    pub physical_upgrade_holds_ns:Vec<u64>,pub physical_upgrade_wait_ns:u64,pub physical_capture_bytes:u64,
+    pub pack_page_resident_peak_bytes:u64,pub pack_page_parse_peak_bytes:u64,pub pack_legacy_index_bytes:u64,
+    pub pack_physical_key_lookups:u64,pub pack_key_page_read_max:u64,pub pack_key_index_bytes_max:u64,pub pack_key_relevant_max:u64,
     pub rolling_publications_visited:u64,pub rolling_deferred_visited:u64,pub rolling_collateral_records:u64,pub rolling_collateral_raw_bytes:u64,pub rolling_bootstrap:bool,
     #[serde(skip)]
     pub(crate) cleanup_budget:Option<crate::physical_lifetime::CleanupBudget>,

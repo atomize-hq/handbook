@@ -83,6 +83,16 @@ pub(crate) fn candidate_pin(root:&Path,c:&StoreConfig,m:&mut Metrics)->Result<Fi
     let mut f=lock_file(&root.join(pin_name(&expected.id)?),false).map_err(|e|format!("integrity:candidate-pin-required:{e}"))?;
     FileExt::try_lock_shared(&f)?;validate_pin(&mut f,&expected,m)?;Ok(f)
 }
+// M owns the retained set. Open and authenticate all pre-upgrade handles before
+// Q/W; only nonblocking native lock attempts occur during the final capture CAS.
+pub(crate) fn upgrade_handles(root:&Path,c:&StoreConfig,m:&mut Metrics)->Result<Vec<File>>{
+    if c.version<3{return Ok(vec![]);}
+    let w=load(root,c,m)?;let mut out=vec![];
+    for g in std::iter::once(&w.generation).chain(w.older.iter()){
+        let mut f=lock_file(&root.join(pin_name(&g.id)?),false)?;
+        validate_pin(&mut f,&PinIdentity{version:1,store_id:c.store_id.clone(),id:g.id.clone(),ordinal:g.ordinal,catalog:g.catalog.clone()},m)?;out.push(f);
+    }Ok(out)
+}
 fn validate_pin(f:&mut File,expected:&PinIdentity,m:&mut Metrics)->Result<()>{
     m.cleanup_step()?;
     if f.metadata()?.len()>1024{return Err("integrity:pin-bound".into());}
@@ -161,7 +171,7 @@ pub(crate) fn validate_work(w:&Work)->Result<()>{
         if !crate::model::safe_id(&g.id)||g.ordinal>=w.generation.ordinal||!ids.insert(g.id.clone())||!crate::objects::valid_hash(&g.catalog)||g.plan.as_ref().is_none_or(|h|!crate::objects::valid_hash(h))||g.packs.len()>64{return Err("integrity:retained-generation".into());}
     }
     for j in &w.jobs{if j.position>j.descriptor.records||j.frontier>w.generation.ordinal||j.frontier==0{return Err("integrity:cleanup-cursor".into());}}
-    for d in w.generation.packs.iter().chain(w.older.iter().flat_map(|g|&g.packs)).chain(w.jobs.iter().map(|j|&j.descriptor)).chain(w.retired.iter().map(|r|&r.descriptor)){d.path("pack")?;d.path("idx")?;}
+    for d in w.generation.packs.iter().chain(w.older.iter().flat_map(|g|&g.packs)).chain(w.jobs.iter().map(|j|&j.descriptor)).chain(w.retired.iter().map(|r|&r.descriptor)){d.path("pack")?;d.path("idx")?;if d.page.is_some(){crate::paged::validate(d)?;}}
     if w.garbage.iter().any(|p|!metadata_path(p)){return Err("integrity:work-metadata-path".into());}
     Ok(())
 }
