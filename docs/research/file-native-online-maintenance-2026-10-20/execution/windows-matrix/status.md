@@ -26,13 +26,14 @@ The historical producer deferred A refresh and then passed full current-A
 verification at each target boundary. Its per-publication timings are retained
 with that workload label.
 
-The new document helper is unexecuted and needs a positive-engine-start release
-hook after the shared-harness handoff. Its current pause-until-operation-end
-prototype does not qualify active concurrent maintenance. The required final
-version will create two stores per size/mode, run the control first, release
-maintenance at positive ordinary engine launch and record actual overlap. Each
-variant retains exactly two payload/title operations and full oracles; no
-percentile is inferred. Final pin, operation plan and F07 admission remain held.
+The document helper now releases maintenance at positive ordinary engine start,
+before stdin delivery. The optional callback and raised-callback child closure
+controls passed under the unchanged frozen guard; exact old Driver bytes and
+bindings remain retained. Both variants record positive launch and process
+intervals, and any absent overlap is unqualified. The actual final-pin document
+pairs remain unexecuted until the source, plan and F07 allocation are frozen.
+They retain two stores per size/mode and exactly two payload/title operations;
+no percentile is inferred from those two operations.
 
 The quiescent ready-cohort F05 area contains **552,141,207 logical bytes and
 129,768 files**. Its unchanged continuation forecast includes every one of the

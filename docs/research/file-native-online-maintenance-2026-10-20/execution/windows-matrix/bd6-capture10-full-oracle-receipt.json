@@ -1,0 +1,190 @@
+{
+  "utc": "2026-10-20T22:05:37.582313+00:00",
+  "ENGINE_SOURCE_PIN": "bd6dd9367acddaddcd7873c8043548502a170c3b",
+  "parser_schema_source_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+  "schema_equivalence_sha256": "87f176556e971add6c58b93c16e5711e8a9e5c16a141cc7c2601d56a69ac4292",
+  "candidate_binary": {
+    "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate10.exe",
+    "bytes": 2979328,
+    "sha256": "7d1157d5a2df08904e118ce86647fd45f1ae7fec209494c02afdb1fac4b0b22f"
+  },
+  "oracle": {
+    "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+    "raw_records": 5,
+    "raw_bytes": 5133,
+    "inventory_digest": "10c085a27e13fb25a8eff1834e124c3d496ee496562b4997e4d613246b14b928",
+    "physical_metadata": {
+      "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+      "work_version": 2,
+      "selected_generation": {
+        "id": "physical-3-birth-24844-1792533189048401900-0",
+        "ordinal": 3,
+        "plan": "23460072e82bcba4ef5762d84d917a86368c5bef746d32cea06b14dbc78c17b4"
+      },
+      "physical_parent": "29f407c262a5df3da52ebdf48d0f074ee8278a11a323983f0375f7c58734e8c1",
+      "physical_parent_is_initial_physical_CAS_token": true,
+      "transition_parent": "ea65b9921d4f3d890f51cb89f430d02a5af1fbf6c315fa51912f469181cc64cb",
+      "transition_parent_is_comparison_token_not_retained_chain": true,
+      "birth_claims": [],
+      "birth_claim_count": 0,
+      "retained_generations": 0,
+      "pending_loose_jobs": 0,
+      "retired_container_jobs": 0,
+      "garbage_entries": 1,
+      "pending_garbage": 0,
+      "absent_garbage_tombstones": 1,
+      "owned_aborted_pack_directories": [],
+      "observed_removed_bytes": 36791,
+      "observed_removed_files": 31,
+      "observed_reconciled_absent": 15,
+      "counters_are_not_admission_credit": true,
+      "metadata_work_root_selection_is_not_physical_activation": true,
+      "mutable_progress_accepted": false,
+      "pending_selector_stage": null,
+      "journal": {
+        "version": 2,
+        "id": "physical-3-birth-24844-1792533189048401900-0",
+        "status": "registered",
+        "abandoned_owner_count": 0,
+        "ownership_transferred": false,
+        "selected_by_STORE": true,
+        "pending_owned_refs": [],
+        "establishes_acceptance": false
+      },
+      "owned_work_stage": null,
+      "required_paths": [
+        "PACKING.json",
+        "STORE.json",
+        "pack-catalogs/fcc1e7702ecb2b6b455e92a6c4324e17b5a3dd8de1fe2e264429847b1682765a.json",
+        "packs/physical-3-birth-24844-1792533189048401900-0/2d02fd2f2b5903b92d357eb46922dfe3d6fdf3ae4fd5d310a693f132148dbcff.pack",
+        "packs/physical-3-birth-24844-1792533189048401900-0/3464419a61368d3ad1d5cf856ee9d75f4ee4b69e30077c29f3c46754d03effd9.idx",
+        "packs/physical-3-birth-24844-1792533189048401900-0/622f1a33e8fb6ed8ddc9883bf214f65b40792816d747f1f3014eb8622499e716.idx",
+        "packs/physical-3-birth-24844-1792533189048401900-0/7829c190899f66dd67c34c746107e4ba66c49e1a7aede3749f2d3f04c54abe82.pack",
+        "packs/physical-3-birth-24844-1792533189048401900-0/b81d16273ff338a4d3562aadf8e001f76fad1eb10ffa2412c1e1a2ee2d1795a6.pack",
+        "packs/physical-3-birth-24844-1792533189048401900-0/d6e42bba70b820726362ddfb57b75919ba7d269629044b0fdf67f420a44fb7f7.idx",
+        "packs/physical-3-birth-24844-1792533189048401900-0/d86c02bac22cf6379e926607fda87428dd647d263d4743abf0d9c563d4da848b.idx",
+        "packs/physical-3-birth-24844-1792533189048401900-0/e892f72b894d152553d0836818f91ae279a9b869a02008430611653b0927b500.idx",
+        "packs/physical-3-birth-24844-1792533189048401900-0/eb56813227204b9601ae05197220e93b8fdcfe118e391382a1ef6b9018e1a21c.pack",
+        "packs/physical-3-birth-24844-1792533189048401900-0/edf5a2310d107b2b7ea0a700918f64c870bd335863e317e533822e4de52f9c26.pack",
+        "physical-pins/physical-3-birth-24844-1792533189048401900-0.lock",
+        "physical-plans/23460072e82bcba4ef5762d84d917a86368c5bef746d32cea06b14dbc78c17b4.json"
+      ],
+      "quiescent_native_lock_state_unmeasured": true
+    },
+    "semantic": {
+      "profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+      "selected": {
+        "publication": "publication-6432-1792533188914293100-6",
+        "digest": "6858ca3b48c896985edaf5f4731a19aed89b99fa9d5d6567add27d73a8474b05"
+      },
+      "publications": 2,
+      "ledger_rows": 0,
+      "permanent_digest": "52a50c82d303f88ad06eb8c93943344bb5d08134feb0d5df4f93a8ad4e28dbc2",
+      "retired_publications": 0,
+      "retired_content": "none",
+      "unique_content_roots": 1,
+      "root_visits": 2,
+      "sources": 14,
+      "pins": 0,
+      "reservations": 0,
+      "packets": 0,
+      "generations": 0,
+      "conservative_cumulative_owner_allowance_bytes": 137217728,
+      "actual_physical_owner_bytes": false,
+      "seconds": 0.0
+    },
+    "navigation": {
+      "documents": 10,
+      "supplemented_documents": 10,
+      "projection_files": 14,
+      "immutable_discovery_semantics_verified": true,
+      "readable_declared_current": true,
+      "discovery_relationships_and_extraction": true
+    },
+    "request_intents": {
+      "profile": "independent-complete-exact-request-intent-and-accepted-result",
+      "selected": {
+        "publication": "publication-6432-1792533188914293100-6",
+        "digest": "6858ca3b48c896985edaf5f4731a19aed89b99fa9d5d6567add27d73a8474b05"
+      },
+      "publications": 2,
+      "actual_H": 2,
+      "authentic_history_recipe_intents": 0,
+      "retained_candidate_proofs": 2,
+      "exact_loose_B_publication_controls": 0,
+      "evidence_sha256": "f7cdf061512e17e17ea17ba5fb4c35aca9d2c1572518194f4396d4e15ce66f9d",
+      "engine_code_imported": false
+    },
+    "independent_codec": null,
+    "seconds": 0.046999999904073775,
+    "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+  },
+  "read_only": {
+    "root": "C:\\file-native-online-cp1-20261020\\fixtures\\capture10\\disposable\\store",
+    "module": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v3.py",
+    "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+    "source_file_count": 61,
+    "source_logical_bytes": 287361,
+    "source_directory_count": 47,
+    "all_file_hashes_sizes_names_and_directories_unchanged": true,
+    "before_sha256": "ce9c7772f009d989380163952f7e8ed36869ee3b25be111678785233b7124f0b",
+    "after_sha256": "ce9c7772f009d989380163952f7e8ed36869ee3b25be111678785233b7124f0b",
+    "no_engine_calls": true,
+    "no_fixture_copies": true
+  },
+  "raw": [
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-capture10-full-oracle.json",
+      "bytes": 5331,
+      "sha256": "c9145905273fb503c12da799bdb6e219f501c6453d0babaf5fdf68a10eb0c63f"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-capture10-full-oracle.before.json",
+      "bytes": 12873,
+      "sha256": "ce9c7772f009d989380163952f7e8ed36869ee3b25be111678785233b7124f0b"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-capture10-full-oracle.after.json",
+      "bytes": 12873,
+      "sha256": "ce9c7772f009d989380163952f7e8ed36869ee3b25be111678785233b7124f0b"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-capture10-full-oracle.read-only.json",
+      "bytes": 779,
+      "sha256": "7d1c9a3f600f50904bf555c8072e44a52a00afda8b84b29d16e479d442d2a2a1"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-capture10-full-oracle-guard.json",
+      "bytes": 7621,
+      "sha256": "4a513129a78739d8ec9f18d637abc2e76a8ef02fcddaeccf1d043d5d7c36e6dd"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\bd6-capture10-full-oracle-source-binding.json",
+      "bytes": 7891,
+      "sha256": "e8c63db777f06d9fc1978359e780658907958d8d8f0095ea880139983c0e41e7"
+    }
+  ],
+  "guard": {
+    "exit": 0,
+    "censor": null,
+    "errors": [],
+    "closure_checks": [
+      {
+        "epoch": 1792533605.0570061,
+        "members": []
+      },
+      {
+        "epoch": 1792533605.0776534,
+        "members": []
+      }
+    ],
+    "process_closure_verified": true,
+    "memory_sample_timing": {
+      "samples": 11,
+      "max_interval_seconds": 0.03200000000651926,
+      "intervals_over_40ms": 0
+    },
+    "job_aggregate_sampled_peak_rss": 22937600
+  },
+  "qualification": "latest bd6 capture-before-semantic gap fixture full quiescent proof; no rolling-tail or final CP3 qualification claim"
+}

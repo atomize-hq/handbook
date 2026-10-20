@@ -1,0 +1,79 @@
+{
+  "utc": "2026-10-20T22:05:37.594363+00:00",
+  "owner_handoff": "CP1 declared no more bound helper jobs; change made after capture10 positive closure",
+  "controls": {
+    "status": "passed",
+    "positive_callback_before_input": true,
+    "with_and_without_hook_state_digests_match": true,
+    "raised_hook_killed_and_waited": true,
+    "raised_hook_input_not_sent": true,
+    "positive_event": {
+      "pid": 29712,
+      "resumed_ns": 577960909414700,
+      "observed_ns": 577960909427500,
+      "positive_rss": 1998848,
+      "before_stdin_delivery": true
+    },
+    "old_driver_sha256": "1444b169e9f4184d43f08192fe07d95b92e68106433be7a76399badc6e52c164",
+    "new_driver_sha256": "924fea5aeafc19d9a45c37e6527f6ed842e8c16f6d5aba861c3fb17de5413ae2",
+    "frozen_guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+    "baseline_executable_sha256": "568f631acf528c7de911bb88ec85d07ead9d7b4435ebe970c61053f06e31a93b"
+  },
+  "guard": {
+    "exit": 0,
+    "censor": null,
+    "errors": [],
+    "closure_checks": [
+      {
+        "epoch": 1792533784.372458,
+        "members": []
+      },
+      {
+        "epoch": 1792533784.3935258,
+        "members": []
+      }
+    ],
+    "process_closure_verified": true,
+    "memory_sample_timing": {
+      "samples": 700,
+      "max_interval_seconds": 0.0470000000204891,
+      "intervals_over_40ms": 7
+    },
+    "job_aggregate_sampled_peak_rss": 28585984
+  },
+  "raw": [
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\driver-before-start-hook.py.txt",
+      "bytes": 4627,
+      "sha256": "1444b169e9f4184d43f08192fe07d95b92e68106433be7a76399badc6e52c164"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\driver-start-controls.json",
+      "bytes": 771,
+      "sha256": "56cad6c391c2457df436e2078f5510ed812dea70ce36b459ff2b6f95b31ea34b"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\driver-start-controls-guard.json",
+      "bytes": 16064,
+      "sha256": "bc2015b7f8cc81dec68e8b4c4ca875311952dff0d3f7adb6aeed4430d5c71707"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\driver-start-controls-source-binding.json",
+      "bytes": 7499,
+      "sha256": "3086c8534f58ec9dec86c264c90a5c758b5bcbaa3dafbbf77dbef98586f32309"
+    }
+  ],
+  "new_driver": {
+    "path": "docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\driver.py",
+    "bytes": 5928,
+    "sha256": "924fea5aeafc19d9a45c37e6527f6ed842e8c16f6d5aba861c3fb17de5413ae2"
+  },
+  "new_document_helper": {
+    "path": "docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\final_document_controls.py",
+    "bytes": 10832,
+    "sha256": "f5979c260e5401f0b654635f4271174d0712faa9caa730e87b8705a858ae0588"
+  },
+  "document_execution": "NOT_RUN_WAITING_FINAL_PIN_AND_F07",
+  "overlap_policy": "maintenance release at positive ordinary launch before input; retain post-release and ordinary stdin/process intervals; nonoverlap is unqualified and no automatic unbudgeted repeat",
+  "frozen_guard_unchanged": true
+}
