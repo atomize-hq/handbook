@@ -1,0 +1,30 @@
+{
+  "scope": "conservative parent artifact census; shared Git growth separately included in Windows continuing ownership",
+  "roots": [
+    {
+      "root": "C:\\file-native-qnp-20261019",
+      "bytes": 17689494,
+      "files": 434
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-qnp-2026-10-19",
+      "bytes": 8009701,
+      "files": 243
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-packing-2026-10-20",
+      "bytes": 22857556,
+      "files": 161
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\19\\01a155e1-fe59-7682-be45-f6204e9f8824",
+      "bytes": 0,
+      "files": 0
+    }
+  ],
+  "bytes": 48556751,
+  "files": 838,
+  "cap_bytes": 58720256,
+  "cap_files": 5000,
+  "no_deletion_credit": true
+}
