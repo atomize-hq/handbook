@@ -1,0 +1,126 @@
+{
+  "epoch": 1792470946.7882922,
+  "status": "FINAL_ARTIFACT_ONLY_CLOSEOUT",
+  "native_qualification_pass": false,
+  "functional_checks_stopped": true,
+  "controller": {
+    "root": "C:\\file-native-p-linux-20261020",
+    "bytes": 3157032,
+    "files": 119
+  },
+  "native_roots": [
+    {
+      "root": "/home/spenser/file-native-p-linux-20261020/bin",
+      "bytes": 3349920,
+      "files": 1
+    },
+    {
+      "root": "/home/spenser/file-native-p-linux-20261020/qualification",
+      "bytes": 133544059,
+      "files": 13237
+    },
+    {
+      "root": "/home/spenser/file-native-p-linux-20261020/preparation",
+      "bytes": 9954331,
+      "files": 27
+    },
+    {
+      "root": "/home/spenser/file-native-p-linux-20261020/source",
+      "bytes": 81828920,
+      "files": 147
+    },
+    {
+      "root": "/home/spenser/file-native-p-linux-20261020/preflight",
+      "bytes": 109067,
+      "files": 3
+    }
+  ],
+  "native_bytes": 228786297,
+  "native_files": 13415,
+  "native_Cargo": {
+    "root": "/home/spenser/.cargo",
+    "bytes": 627576362,
+    "files": 22804,
+    "positive_growth_bytes": 6079277,
+    "new_files": 301
+  },
+  "controller_Cargo": {
+    "root": "C:\\Users\\spmcc\\.cargo",
+    "bytes": 893702027,
+    "files": 18188
+  },
+  "shared_Git": {
+    "root": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\.git",
+    "bytes": 228248434,
+    "files": 1924
+  },
+  "shared_Git_positive_net_growth_bytes": 993408,
+  "shared_Git_positive_net_growth_files": 55,
+  "controller_free_bytes": 197922017280,
+  "native_free_bytes": 24812494848,
+  "source139_all_match": true,
+  "source139_bindings_sha256": "34560fd241c59a11438612ab0bb58c9a4b983ae7e1b5dfeeef348ff2f90d9291",
+  "frozen_bin": {
+    "path": "/home/spenser/file-native-p-linux-20261020/bin/candidate-linux",
+    "bytes": 3349920,
+    "sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe"
+  },
+  "counterexample_store": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store",
+  "missing_ordinary_control": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store/publications/publication-335941-1792470750343863243-27.json",
+  "shell_exit": 21,
+  "shell_stdout": {
+    "path": "/home/spenser/file-native-p-linux-20261020/qualification/process/ordinary-B16-discovery-335940-4.stdout",
+    "bytes": 303,
+    "sha256": "c3a64926f013887f63aa824fbd4efd06142157fceef4bcbed6e9f18f97744557",
+    "text": "FAIL missing ordinary selected publication control: /home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store/publications/publication-335941-1792470750343863243-27.json\nNo engine, custom pack decoder, generation scan, or alternative discovery was used.\n"
+  },
+  "tiny_receipt_hashes": [
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/tiny-bash/admission.json",
+      "bytes": 1029,
+      "sha256": "eab0d541a4c128812f6ebe78eef51a0ab9fcb759c86c6e82d49750322fa11947"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/tiny-bash/engine-events.json",
+      "bytes": 16743,
+      "sha256": "33b43c40b1ad7bd263533594083378d29bfde8566d059ff5c94df0f7a17d0eca"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/tiny-bash/ordinary-discovery.sh",
+      "bytes": 1313,
+      "sha256": "e4bd6a650ea1cb615733f61dd739cb27fefb61d7472bcfa3df5201b6b75000d2"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/tiny-bash/pack-forecast.json",
+      "bytes": 288,
+      "sha256": "a4e6e948b099f6eb03879b6c59928c02053be803c6de8d09b9a916628cd26f1f"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/tiny-bash/result.json",
+      "bytes": 33988,
+      "sha256": "a175ed231763867b528fd274384df6152b1277376d486e8cf4eae917afef56be"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-shell/expected-publication-path.txt",
+      "bytes": 167,
+      "sha256": "64ef25aaa5ffff331df1bacb1c0f39bc1494a02bb017a19294346016f9b6ea77"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-shell/selected-read-once.json",
+      "bytes": 145,
+      "sha256": "613fed8dbb515c91b9109c5b73244a174c0fba13a42a6b3a4d185d2bc7477e33"
+    }
+  ],
+  "protected_census_all_unchanged": true,
+  "owned_native_processes_closed": true,
+  "last_SSH_worker_closed": true,
+  "actual_all_new_bytes": 239016014,
+  "actual_all_new_files": 13890,
+  "ceiling_bytes": 293601280,
+  "ceiling_files": 20000,
+  "cap_pass": true,
+  "fixed_functional_cutoff": "2026-10-20T04:39:12Z",
+  "fixed_closeout_deadline": "2026-10-20T04:44:12Z",
+  "censors_and_counterexample_preserved": true,
+  "future_execution_needs_separate_GO": true
+}

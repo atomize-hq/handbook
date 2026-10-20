@@ -1,0 +1,331 @@
+{
+  "epoch": 1792470943.614059,
+  "own_pid": 336056,
+  "status": "FINAL_ARTIFACT_ONLY_COUNTEREXAMPLE_CLOSEOUT",
+  "functional_stopped": true,
+  "native_qualification_pass": false,
+  "core": "4cb6b9fba9ffabc294a6006ec54fe75366968db4",
+  "harness": "59bbd168bfa67bbe68f6f4d669658018786ddaba",
+  "source139_all_match": true,
+  "source139_bindings": {
+    "path": "/home/spenser/file-native-p-linux-20261020/qualification/final-closeout/source139-bindings.json",
+    "bytes": 29665,
+    "sha256": "34560fd241c59a11438612ab0bb58c9a4b983ae7e1b5dfeeef348ff2f90d9291"
+  },
+  "frozen_bin": {
+    "path": "/home/spenser/file-native-p-linux-20261020/bin/candidate-linux",
+    "bytes": 3349920,
+    "sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe"
+  },
+  "counterexample_store": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store",
+  "missing_ordinary_control": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store/publications/publication-335941-1792470750343863243-27.json",
+  "ordinary_control_exists": false,
+  "saved_selector_receipt": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-shell/selected-read-once.json",
+  "SELECTED_reread": false,
+  "shell_exit": 21,
+  "shell_stdout": {
+    "path": "/home/spenser/file-native-p-linux-20261020/qualification/process/ordinary-B16-discovery-335940-4.stdout",
+    "bytes": 303,
+    "sha256": "c3a64926f013887f63aa824fbd4efd06142157fceef4bcbed6e9f18f97744557",
+    "text": "FAIL missing ordinary selected publication control: /home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store/publications/publication-335941-1792470750343863243-27.json\nNo engine, custom pack decoder, generation scan, or alternative discovery was used.\n"
+  },
+  "tiny_receipts": [
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/tiny-bash/admission.json",
+      "bytes": 1029,
+      "sha256": "eab0d541a4c128812f6ebe78eef51a0ab9fcb759c86c6e82d49750322fa11947"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/tiny-bash/engine-events.json",
+      "bytes": 16743,
+      "sha256": "33b43c40b1ad7bd263533594083378d29bfde8566d059ff5c94df0f7a17d0eca"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/tiny-bash/ordinary-discovery.sh",
+      "bytes": 1313,
+      "sha256": "e4bd6a650ea1cb615733f61dd739cb27fefb61d7472bcfa3df5201b6b75000d2"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/tiny-bash/pack-forecast.json",
+      "bytes": 288,
+      "sha256": "a4e6e948b099f6eb03879b6c59928c02053be803c6de8d09b9a916628cd26f1f"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/tiny-bash/result.json",
+      "bytes": 33988,
+      "sha256": "a175ed231763867b528fd274384df6152b1277376d486e8cf4eae917afef56be"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-shell/expected-publication-path.txt",
+      "bytes": 167,
+      "sha256": "64ef25aaa5ffff331df1bacb1c0f39bc1494a02bb017a19294346016f9b6ea77"
+    },
+    {
+      "path": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-shell/selected-read-once.json",
+      "bytes": 145,
+      "sha256": "613fed8dbb515c91b9109c5b73244a174c0fba13a42a6b3a4d185d2bc7477e33"
+    }
+  ],
+  "old_raw_inventory": {
+    "path": "/home/spenser/file-native-p-linux-20261020/qualification/raw-inventory.json",
+    "bytes": 310260,
+    "sha256": "967a0f704f6c7a8c37a0ceae987d7ef0c06ee1ca526f03120907bb12f9f4e396",
+    "count": 1566
+  },
+  "old_guard_and_protected_content_receipt": {
+    "path": "/home/spenser/file-native-p-linux-20261020/qualification/native-closeout.json",
+    "sha256": "11ae34046dd534f814aa2a5d205f385fd8bab2073d2adc47c099c9531daf2b3f"
+  },
+  "protected_roots": [
+    {
+      "root": "/home/spenser/file-native-incremental-capsule-f3e942f.tar",
+      "bytes": 440320,
+      "files": 1,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-capsule-fb73e75.tar",
+      "bytes": 419840,
+      "files": 1,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-capsule-rootfix-precommit.tar",
+      "bytes": 460800,
+      "files": 1,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-accounting-evidence",
+      "bytes": 1196716,
+      "files": 26,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-accounting-final",
+      "bytes": 418729890,
+      "files": 9037,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-audit-export",
+      "bytes": 318186,
+      "files": 14,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-audit-final",
+      "bytes": 374253222,
+      "files": 2396,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-evidence-20261018",
+      "bytes": 1952060,
+      "files": 73,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-evidence-20261018.tar.gz",
+      "bytes": 1930575,
+      "files": 1,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-final-20261018",
+      "bytes": 464753721,
+      "files": 18511,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-recipe",
+      "bytes": 90109427,
+      "files": 1473,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-replay-final",
+      "bytes": 436421501,
+      "files": 13009,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-rootfix",
+      "bytes": 385222788,
+      "files": 5847,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-rootfix-evidence",
+      "bytes": 942298,
+      "files": 23,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-linux-rootfix-evidence.tar.gz",
+      "bytes": 939385,
+      "files": 1,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-replay-probe",
+      "bytes": 13970252,
+      "files": 2121,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-5a65a21",
+      "bytes": 27435661,
+      "files": 694,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-7ac70f9",
+      "bytes": 6886129,
+      "files": 365,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-7e00d22",
+      "bytes": 9072770,
+      "files": 444,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-f3e942f",
+      "bytes": 474589,
+      "files": 55,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-recipe",
+      "bytes": 466855,
+      "files": 60,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-incremental-source-rootfix",
+      "bytes": 444599,
+      "files": 56,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-n-linux-20261019",
+      "bytes": 532429255,
+      "files": 24303,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-prerequisite-linux-20261018",
+      "bytes": 1304492667,
+      "files": 123143,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-q-linux-20261019-final",
+      "bytes": 277573914,
+      "files": 15443,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-recovery-20261019",
+      "bytes": 631851798,
+      "files": 29739,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/file-native-recovery-20261019-source.tar",
+      "bytes": 573440,
+      "files": 1,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/incremental-extra-evidence",
+      "bytes": 614285,
+      "files": 20,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/incremental-extra-evidence.tar.gz",
+      "bytes": 610419,
+      "files": 1,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/incremental-recipe-proof.tar.gz",
+      "bytes": 214376,
+      "files": 1,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/incremental-replay-evidence",
+      "bytes": 1721534,
+      "files": 38,
+      "unchanged": true
+    },
+    {
+      "root": "/home/spenser/incremental-replay-evidence.tar.gz",
+      "bytes": 1708580,
+      "files": 1,
+      "unchanged": true
+    }
+  ],
+  "protected_census_all_unchanged": true,
+  "native_Cargo": {
+    "root": "/home/spenser/.cargo",
+    "bytes": 627576362,
+    "files": 22804,
+    "positive_growth_bytes": 6079277,
+    "new_files": 301
+  },
+  "owned_native_processes_remaining": [],
+  "owned_native_processes_closed": true,
+  "free_bytes": 24812494848,
+  "allfixtures": {
+    "root": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures",
+    "bytes": 128692325,
+    "files": 11696
+  },
+  "synthetic_cache_fixture": {
+    "root": "/home/spenser/file-native-p-linux-20261020/source/docs/research/file-native-incremental-engine-experiment-2026-10-18/target",
+    "bytes": 80976318,
+    "files": 8
+  },
+  "top_level_target_absent": true,
+  "engine_or_pack_decoder_used_during_discovery": false,
+  "no_subsequent_publication": true,
+  "recovery_continuation_started": false,
+  "source_change_or_repair_after_stop": false,
+  "native_roots": [
+    {
+      "root": "/home/spenser/file-native-p-linux-20261020/bin",
+      "bytes": 3349920,
+      "files": 1
+    },
+    {
+      "root": "/home/spenser/file-native-p-linux-20261020/qualification",
+      "bytes": 133544059,
+      "files": 13237
+    },
+    {
+      "root": "/home/spenser/file-native-p-linux-20261020/preparation",
+      "bytes": 9954331,
+      "files": 27
+    },
+    {
+      "root": "/home/spenser/file-native-p-linux-20261020/source",
+      "bytes": 81828920,
+      "files": 147
+    },
+    {
+      "root": "/home/spenser/file-native-p-linux-20261020/preflight",
+      "bytes": 109067,
+      "files": 3
+    }
+  ],
+  "native_total_bytes": 228786297,
+  "native_total_files": 13415,
+  "fixed_functional_cutoff": "2026-10-20T04:39:12Z",
+  "fixed_closeout_deadline": "2026-10-20T04:44:12Z",
+  "unknown_scopes": "Other native repositories and older excluded parent scopes remain preserved under parent accounting; no capacity credit claimed."
+}

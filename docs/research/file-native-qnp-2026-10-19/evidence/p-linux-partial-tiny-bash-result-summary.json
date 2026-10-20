@@ -1,0 +1,34 @@
+{
+  "epoch": 1792470754.4834766,
+  "status": "counterexample",
+  "shell_returncode": 21,
+  "shell_stdout": "FAIL missing ordinary selected publication control: /home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store/publications/publication-335941-1792470750343863243-27.json\nNo engine, custom pack decoder, generation scan, or alternative discovery was used.\n",
+  "shell_stderr": "",
+  "store": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store",
+  "engine_operations": [
+    "init",
+    "lifecycle",
+    "packing"
+  ],
+  "no_subsequent_publication": true,
+  "ordinary_control_route_pass": false,
+  "exact_copy_pass": null,
+  "allfixtures": {
+    "root": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures",
+    "bytes": 128692325,
+    "files": 11696
+  },
+  "ownership": {
+    "native": {
+      "root": "/home/spenser/file-native-p-linux-20261020",
+      "bytes": 228711913,
+      "files": 13412
+    },
+    "cache_positive_growth_bytes": 6079277,
+    "cache_new_files": 301,
+    "conservative_controller_bytes": 8388608,
+    "combined_bound_bytes": 243179798,
+    "combined_bound_files": 13913,
+    "free_bytes": 24812650496
+  }
+}

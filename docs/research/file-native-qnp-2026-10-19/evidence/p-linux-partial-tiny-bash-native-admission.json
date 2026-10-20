@@ -1,0 +1,30 @@
+{
+  "epoch": 1792470748.4254353,
+  "native_current": {
+    "native": {
+      "root": "/home/spenser/file-native-p-linux-20261020",
+      "bytes": 228334627,
+      "files": 13326
+    },
+    "cache_positive_growth_bytes": 6079277,
+    "cache_new_files": 301,
+    "conservative_controller_bytes": 8388608,
+    "combined_bound_bytes": 242802512,
+    "combined_bound_files": 13827,
+    "free_bytes": 24813375488
+  },
+  "allfixtures_current": {
+    "root": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures",
+    "bytes": 128354530,
+    "files": 11630
+  },
+  "init_max_new_bytes": 8388608,
+  "lifecycle_max_new_bytes": 1048576,
+  "pack_build_and_cleanup_max_new_bytes": 8388608,
+  "ordinary_shell_max_new_bytes": 2097152,
+  "extra_all_returns_max_new_bytes": 1048576,
+  "allfixtures_prospective_bytes": 148277474,
+  "total_prospective_bytes": 263774032,
+  "prospective_files": 15827,
+  "admission": "parent tiny-only GO with source8/cache8/synthetic84/allfixtures160/returns16 within280MiB; no recovery continuation"
+}

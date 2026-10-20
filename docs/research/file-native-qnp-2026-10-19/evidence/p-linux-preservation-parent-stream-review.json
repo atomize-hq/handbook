@@ -1,0 +1,9 @@
+{
+  "independent_parent_native_stream_verification": true,
+  "members": 17967,
+  "raw_bytes": 209668643,
+  "archive_sha256": "d6f3eca1abd4bb74ca393c9c3ef743abdf5c6061bb98aad74ac938769c2cdbc7",
+  "inventory_sha256": "1cf2e7bb0116495dfd0b883bf62916bd8701be60db9305eec5ff62ffc4b27ad9",
+  "originals_match_complete_inventory": true,
+  "no_deletion": true
+}

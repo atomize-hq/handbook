@@ -159,6 +159,70 @@
     "bytes": 2490,
     "sha256": "82bc6f0cd69267df2f55b26ad701b9fc1b0e9dced5e47c544f55dea08699d3c6"
   },
+  "p-linux-counterexample-parent-native-read.json": {
+    "bytes": 394,
+    "sha256": "1226d117dc1466305d82cef06a236c07aa0b7f401773da1b6cbb85cbb1ae7fcc"
+  },
+  "p-linux-partial-final-closeout-closeout.json": {
+    "bytes": 5003,
+    "sha256": "0da910f4f760879edda4be7705c51a2275a00d31fe90e7d24e73e0301622f448"
+  },
+  "p-linux-partial-final-closeout-native-final.json": {
+    "bytes": 11063,
+    "sha256": "f448ee037a13702706066dd102b6458f321f571f2147b14a14e50f9f0d076e33"
+  },
+  "p-linux-partial-final-closeout-report.md": {
+    "bytes": 1001,
+    "sha256": "f5f878298f6416aa8fe75343630263a85dae68b92e30bbb2a669509abbedba2d"
+  },
+  "p-linux-partial-final-closeout-source139-bindings.json": {
+    "bytes": 29665,
+    "sha256": "34560fd241c59a11438612ab0bb58c9a4b983ae7e1b5dfeeef348ff2f90d9291"
+  },
+  "p-linux-partial-parent-reallocation-proposal.json": {
+    "bytes": 1487,
+    "sha256": "beaa6dc2c9f3adf5587fc733cc40d5112f3f92826a124ffef3991b2f707d0361"
+  },
+  "p-linux-partial-report.md": {
+    "bytes": 5208,
+    "sha256": "548c050acad01c337792036153d9dfb3581848d0ffa71cdb8cdeb7a43ad7bd7f"
+  },
+  "p-linux-partial-tiny-bash-native-admission.json": {
+    "bytes": 1029,
+    "sha256": "eab0d541a4c128812f6ebe78eef51a0ab9fcb759c86c6e82d49750322fa11947"
+  },
+  "p-linux-partial-tiny-bash-native-engine-events.json": {
+    "bytes": 16743,
+    "sha256": "33b43c40b1ad7bd263533594083378d29bfde8566d059ff5c94df0f7a17d0eca"
+  },
+  "p-linux-partial-tiny-bash-native-ordinary-discovery.sh": {
+    "bytes": 1313,
+    "sha256": "e4bd6a650ea1cb615733f61dd739cb27fefb61d7472bcfa3df5201b6b75000d2"
+  },
+  "p-linux-partial-tiny-bash-native-result.json": {
+    "bytes": 33988,
+    "sha256": "a175ed231763867b528fd274384df6152b1277376d486e8cf4eae917afef56be"
+  },
+  "p-linux-partial-tiny-bash-report.md": {
+    "bytes": 2393,
+    "sha256": "6a5eccf1a2e5cf6b79910386a6a518dcb89599ed502886eed6f7aff1f5598df6"
+  },
+  "p-linux-partial-tiny-bash-result-summary.json": {
+    "bytes": 1293,
+    "sha256": "e16eb4fd608bbf7b6fb74746be71646279fd36bc4013ed7d2abd880606fa512e"
+  },
+  "p-linux-preservation-manifest.json": {
+    "bytes": 3271,
+    "sha256": "8c810dcd491a30e2f769f053a5c30455e26bf291aa6bd424c65e66bd4164aef3"
+  },
+  "p-linux-preservation-parent-stream-review.json": {
+    "bytes": 362,
+    "sha256": "e5ee6d6149702c4db0aa1e522910a93c0ebcb9a1e198d26e90593b433a335fb0"
+  },
+  "p-macos-build-reservation-reallocation.json": {
+    "bytes": 1350,
+    "sha256": "8e70937feb32ebf6f70ec6daf7de56f6adb870eb2131e579860b378d1bbe2f9a"
+  },
   "p-macos-preflight-raw.tar.gz": {
     "bytes": 45963,
     "sha256": "5439523092f9927226d783781a0ee82af972294a5051d28e4a2bb34f496b105a"
@@ -166,6 +230,14 @@
   "p-macos-preflight-report.md": {
     "bytes": 6056,
     "sha256": "5854278af200f2512c458293c7d200e36396c134a769a79eaa35480c579b3f56"
+  },
+  "p-macos-preparation-and-build-proposal.json": {
+    "bytes": 17617,
+    "sha256": "ef22f2bf4c6e80d236b0ce803fa42ce089122e97d2efaec99e7b48ca17bc6f76"
+  },
+  "p-native-stage-resource-precommit.txt": {
+    "bytes": 2766,
+    "sha256": "e3d171660c9e16862d8979e8c7478817dfa7605c56e491cea9e8cac9b8a762b3"
   },
   "p-p0-and-native-preflight-admission.json": {
     "bytes": 2056,

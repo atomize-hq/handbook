@@ -1,0 +1,19 @@
+{
+  "status": "NOT ADMITTED. Parent review needed after fixture-component stop. No functional work resumed.",
+  "continuing_lane_allocation_unchanged_bytes": 293601280,
+  "same_clock_cutoff": "2026-10-20T04:39:12Z",
+  "proposed_component_reallocation_bytes": {
+    "source_transport_frozen_bin": 8388608,
+    "cache_growth_and_backups_lowered_after_all_Cargo_work_complete": 8388608,
+    "retained_synthetic_cache_fixture": 88080384,
+    "all_small_AB_legacy_failed_prefixes_and_future_Bash": 167772160,
+    "all_controller_native_raw_returns_Git": 16777216
+  },
+  "prospective_components_bytes": 289406976,
+  "margin_bytes": 4194304,
+  "requires_parent_GO": true,
+  "justification": "Current cache growth plus original metadata backups=6736190B, and no more Cargo work is needed; lowering cache allowance32->8MiB can support a larger retained-fixture allowance within the same280MiB. This is a proposal, not a capacity grant or a qualification claim.",
+  "must_preflight_remaining_steps": "Remaining actual recovery case boundaries cannot be inferred as passed from94events. Preserve failed prefix; parent selects a bounded semantic continuation or reports censor. Reforecast all retained prefixes and new complete-operation worst-case writes, plus raw returns, before execution. Faster census alone does not preempt a large copy; require per-step prospective write bounds.",
+  "no_cleanup_of_failed_or_censored_prefixes": true,
+  "no_clock_reset_or_extension": true
+}

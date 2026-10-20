@@ -1,0 +1,279 @@
+[
+  {
+    "payload": {
+      "root": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store",
+      "action": "init",
+      "mode": "B",
+      "consumer": "project",
+      "count": 16
+    },
+    "returncode": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":16445,\"bytes_control_written\":12425,\"bytes_metadata_read\":1728948,\"bytes_metadata_written\":12028,\"bytes_payload_read\":615403,\"bytes_payload_written\":309310,\"bytes_read\":2360954,\"bytes_result_read\":0,\"bytes_result_written\":475,\"bytes_written\":334238,\"copies\":20,\"created_directories\":43,\"directory_syncs\":243,\"documents_visited\":16,\"edges_visited\":8,\"file_syncs\":54,\"index_updates\":0,\"namespace_ops\":54,\"navigation_bytes\":2989,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":2,\"ns\":{\"B-generation-inclusive\":190038250,\"B-generation-verification-inclusive\":1323496,\"copy\":1972668,\"creation-inclusive\":408503023,\"directory-create\":2765349,\"lock-hold\":934050062,\"lock-wait\":21693,\"read\":6590410,\"replace\":326706,\"selection-inclusive\":94351268,\"sync\":947107379,\"write\":2444881},\"opens\":421,\"pack_cache_hits\":0,\"pack_cache_peak_bytes\":0,\"pack_catalog_bytes\":0,\"pack_decoded_bytes\":0,\"pack_eligible_raw_bytes\":0,\"pack_eligible_records\":0,\"pack_excluded_bytes\":0,\"pack_excluded_records\":0,\"pack_index_loads\":0,\"pack_records_read\":0,\"pack_storage_bytes\":158,\"page_reads\":282,\"quota_limit\":null,\"quota_spent\":26533,\"range_calls\":{\"D\":3,\"E\":17,\"P\":16,\"docs\":16,\"navigation\":1,\"navigation.yaml\":1,\"packet\":2},\"range_leaf_pairs\":{\"D\":120,\"E\":680,\"P\":640,\"docs\":320,\"navigation\":20,\"navigation.yaml\":20,\"packet\":40},\"range_page_visits\":{\"D\":3,\"E\":17,\"P\":16,\"docs\":16,\"navigation\":1,\"navigation.yaml\":1,\"packet\":2},\"range_rows\":{\"D\":48,\"E\":8,\"P\":0,\"docs\":0,\"navigation\":0,\"navigation.yaml\":0,\"packet\":0},\"replacements\":29,\"touched_paths\":0,\"unique_pages\":[\"7d86f8f20646062c2a1458fdbe62fd02eebab516f2f7e9e7d0277e7a365f797c\",\"b0941651d7dae9e571379ebf0598c283758902182d5caf510c9aca11079edcbc\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4243456,\"result\":{\"delivery_error\":null,\"readable\":\"generations/attempt-335941-1792470749496390913-1\",\"result\":{\"changed\":[\"d000000\",\"d000001\",\"d000002\",\"d000003\",\"d000004\",\"d000005\",\"d000006\",\"d000007\",\"d000008\",\"d000009\",\"d000010\",\"d000011\",\"d000012\",\"d000013\",\"d000014\",\"d000015\"],\"outcome\":\"accepted\",\"publication\":\"publication-335941-1792470750343863243-27\",\"removed\":[],\"request\":\"initial\",\"state_digest\":\"1a1a19330f3a30a64b1f3979a6e8e19fc869ba252694fa833e123d73f8343da7\"},\"selected\":{\"digest\":\"4003a5178bf9ceb8cfd02e7f38e18791db574e0990a7fa7e14fae6eacf4d7b10\",\"publication\":\"publication-335941-1792470750343863243-27\"},\"status\":\"published\"},\"status\":\"ok\",\"wall_ns\":974358642}\n",
+    "stderr": "progress:creation:0/16:{\"pack_storage_bytes\":0,\"pack_decoded_bytes\":0,\"pack_records_read\":0,\"pack_index_loads\":0,\"pack_cache_hits\":0,\"pack_cache_peak_bytes\":0,\"pack_catalog_bytes\":0,\"pack_eligible_records\":0,\"pack_eligible_raw_bytes\":0,\"pack_excluded_records\":0,\"pack_excluded_bytes\":0,\"page_reads\":0,\"unique_pages\":[],\"documents_visited\":0,\"edges_visited\":0,\"index_updates\":0,\"range_calls\":{},\"range_rows\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"navigation_parts\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"touched_paths\":0,\"namespace_ops\":2,\"quota_limit\":71908864,\"quota_spent\":0,\"verify_only\":false,\"ns\":{\"directory-create\":67505,\"lock-wait\":21693,\"replace\":26341,\"sync\":58397162,\"write\":46547},\"bytes_read\":0,\"bytes_written\":428,\"opens\":2,\"file_syncs\":2,\"directory_syncs\":9,\"unsupported_directory_syncs\":0,\"copies\":0,\"replacements\":1,\"created_directories\":3,\"bytes_metadata_read\":0,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_control_read\":0,\"bytes_control_written\":428,\"bytes_result_read\":0,\"bytes_result_written\":0}\nprogress:creation-complete:16:{\"pack_storage_bytes\":0,\"pack_decoded_bytes\":0,\"pack_records_read\":0,\"pack_index_loads\":0,\"pack_cache_hits\":0,\"pack_cache_peak_bytes\":0,\"pack_catalog_bytes\":0,\"pack_eligible_records\":0,\"pack_eligible_raw_bytes\":0,\"pack_excluded_records\":0,\"pack_excluded_bytes\":0,\"page_reads\":0,\"unique_pages\":[],\"documents_visited\":0,\"edges_visited\":0,\"index_updates\":0,\"range_calls\":{},\"range_rows\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"navigation_parts\":0,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"touched_paths\":0,\"namespace_ops\":18,\"quota_limit\":71908864,\"quota_spent\":217088,\"verify_only\":false,\"ns\":{\"directory-create\":1141242,\"lock-wait\":21693,\"read\":608425,\"replace\":26341,\"sync\":461159201,\"write\":1124216},\"bytes_read\":151552,\"bytes_written\":151980,\"opens\":34,\"file_syncs\":18,\"directory_syncs\":122,\"unsupported_directory_syncs\":0,\"copies\":0,\"replacements\":17,\"created_directories\":20,\"bytes_metadata_read\":0,\"bytes_metadata_written\":0,\"bytes_payload_read\":151552,\"bytes_payload_written\":151552,\"bytes_control_read\":0,\"bytes_control_written\":428,\"bytes_result_read\":0,\"bytes_result_written\":0}\n",
+    "resource": {
+      "argv": [
+        "/home/spenser/file-native-p-linux-20261020/bin/candidate-linux"
+      ],
+      "returncode": 0,
+      "seconds": 1.0892437528818846,
+      "violations": [],
+      "guard": {
+        "root_pid": 335941,
+        "supervisor_pid": 335940,
+        "watchdog_pid": 335942,
+        "seconds_limit": 115.0,
+        "per_process_limit_bytes": 2147483648,
+        "native_aggregate_limit_bytes": 3221225472,
+        "observed_native_aggregate_peak_bytes": 54472704,
+        "missing_samples": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "samples": [
+          {
+            "epoch": 1792470749.4742007,
+            "native_aggregate_rss_bytes": 52834304,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470749.5442014,
+            "native_aggregate_rss_bytes": 53587968,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470749.6151073,
+            "native_aggregate_rss_bytes": 53587968,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470749.6859505,
+            "native_aggregate_rss_bytes": 53587968,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470749.7566564,
+            "native_aggregate_rss_bytes": 53587968,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470749.827442,
+            "native_aggregate_rss_bytes": 53751808,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470749.8982568,
+            "native_aggregate_rss_bytes": 53751808,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470749.969135,
+            "native_aggregate_rss_bytes": 54145024,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470750.0399058,
+            "native_aggregate_rss_bytes": 54145024,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470750.1068296,
+            "native_aggregate_rss_bytes": 54145024,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470750.177668,
+            "native_aggregate_rss_bytes": 54145024,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470750.2486458,
+            "native_aggregate_rss_bytes": 54472704,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470750.3193333,
+            "native_aggregate_rss_bytes": 54472704,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470750.390143,
+            "native_aggregate_rss_bytes": 54472704,
+            "live_owned_pids": [
+              335941
+            ]
+          },
+          {
+            "epoch": 1792470750.4608865,
+            "native_aggregate_rss_bytes": null,
+            "live_owned_pids": []
+          }
+        ],
+        "independent_timer": true,
+        "includes_supervisor_and_watchdog": true
+      },
+      "ownership_samples": [],
+      "stdout_sha256": "9d21dca6b0dfcdeb105e121cb85773d2edd2789f45a225fcca4ba514bc1f14c9",
+      "stderr_sha256": "6456a66f8c6bbe7cccb719416ecc4f108aaba697deb5d3ce32271bd7d57c7145"
+    },
+    "fixture_growth_bytes": 333299,
+    "maximum_forecast_bytes": 8388608
+  },
+  {
+    "payload": {
+      "root": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store",
+      "action": "lifecycle",
+      "operation": "setup"
+    },
+    "returncode": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":1350,\"bytes_control_written\":108,\"bytes_metadata_read\":12028,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":13536,\"bytes_result_read\":0,\"bytes_result_written\":0,\"bytes_written\":108,\"copies\":0,\"created_directories\":0,\"directory_syncs\":3,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":1,\"index_updates\":0,\"namespace_ops\":1,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"lock-hold\":27736480,\"lock-wait\":54432,\"read\":44822,\"replace\":9369,\"sync\":27595828,\"write\":37999},\"opens\":7,\"pack_cache_hits\":0,\"pack_cache_peak_bytes\":0,\"pack_catalog_bytes\":0,\"pack_decoded_bytes\":0,\"pack_eligible_raw_bytes\":0,\"pack_eligible_records\":0,\"pack_excluded_bytes\":0,\"pack_excluded_records\":0,\"pack_index_loads\":0,\"pack_records_read\":0,\"pack_storage_bytes\":158,\"page_reads\":2,\"quota_limit\":null,\"quota_spent\":4204,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":1,\"touched_paths\":0,\"unique_pages\":[\"7d86f8f20646062c2a1458fdbe62fd02eebab516f2f7e9e7d0277e7a365f797c\",\"b0941651d7dae9e571379ebf0598c283758902182d5caf510c9aca11079edcbc\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":3596288,\"result\":{\"status\":\"disposable\"},\"status\":\"ok\",\"wall_ns\":27885276}\n",
+    "stderr": "",
+    "resource": {
+      "argv": [
+        "/home/spenser/file-native-p-linux-20261020/bin/candidate-linux"
+      ],
+      "returncode": 0,
+      "seconds": 0.1923131551593542,
+      "violations": [],
+      "guard": {
+        "root_pid": 335945,
+        "supervisor_pid": 335940,
+        "watchdog_pid": 335946,
+        "seconds_limit": 115.0,
+        "per_process_limit_bytes": 2147483648,
+        "native_aggregate_limit_bytes": 3221225472,
+        "observed_native_aggregate_peak_bytes": 53432320,
+        "missing_samples": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "samples": [
+          {
+            "epoch": 1792470751.8700287,
+            "native_aggregate_rss_bytes": 53432320,
+            "live_owned_pids": [
+              335945
+            ]
+          },
+          {
+            "epoch": 1792470751.940011,
+            "native_aggregate_rss_bytes": null,
+            "live_owned_pids": []
+          }
+        ],
+        "independent_timer": true,
+        "includes_supervisor_and_watchdog": true
+      },
+      "ownership_samples": [],
+      "stdout_sha256": "4c38afc2821b235b32cd27fe9317dc26c7813e1f1dfac488fb4afdcb6598feef",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "fixture_growth_bytes": 108,
+    "maximum_forecast_bytes": 1048576
+  },
+  {
+    "payload": {
+      "root": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures/bash-B16-immediate-pack/disposable/store",
+      "action": "packing",
+      "operation": "build",
+      "codec": "raw",
+      "include_attempts": true,
+      "cleanup": true
+    },
+    "returncode": 0,
+    "stdout": "{\"error\":null,\"metrics\":{\"bytes_control_read\":32897,\"bytes_control_written\":12233,\"bytes_metadata_read\":24056,\"bytes_metadata_written\":0,\"bytes_payload_read\":0,\"bytes_payload_written\":0,\"bytes_read\":82052,\"bytes_result_read\":1900,\"bytes_result_written\":0,\"bytes_written\":12233,\"copies\":0,\"created_directories\":5,\"directory_syncs\":104,\"documents_visited\":0,\"edges_visited\":0,\"file_syncs\":18,\"index_updates\":0,\"namespace_ops\":23,\"navigation_bytes\":0,\"navigation_oversize_relationship_parts\":0,\"navigation_parts\":0,\"ns\":{\"directory-create\":243568,\"lock-hold\":80281338,\"lock-wait\":7222,\"pack-complete-verification\":405465,\"pack-construction-inclusive\":269963805,\"pack-deletion-inclusive\":55106577,\"pack-reader-drain\":25635,\"pack-registration-inclusive\":24999819,\"read\":403242,\"replace\":324103,\"sync\":344953029,\"write\":1247127},\"opens\":81,\"pack_cache_hits\":5,\"pack_cache_peak_bytes\":10972,\"pack_catalog_bytes\":7332,\"pack_decoded_bytes\":13148,\"pack_eligible_raw_bytes\":6574,\"pack_eligible_records\":5,\"pack_excluded_bytes\":0,\"pack_excluded_records\":0,\"pack_index_loads\":10,\"pack_records_read\":10,\"pack_storage_bytes\":36347,\"page_reads\":4,\"quota_limit\":null,\"quota_spent\":77157,\"range_calls\":{},\"range_leaf_pairs\":{},\"range_page_visits\":{},\"range_rows\":{},\"replacements\":16,\"touched_paths\":0,\"unique_pages\":[\"7d86f8f20646062c2a1458fdbe62fd02eebab516f2f7e9e7d0277e7a365f797c\",\"b0941651d7dae9e571379ebf0598c283758902182d5caf510c9aca11079edcbc\"],\"unsupported_directory_syncs\":0,\"verify_only\":false},\"peak_memory_bytes\":4014080,\"result\":{\"catalog\":\"b30a49c00ba4cbd260914fc8fa2f222cc1f11aaf24da03296c85bb131cf4b06d\",\"deferred_bytes\":0,\"historical_allocation_owners_unchanged\":true,\"reserved_bytes\":268435456,\"status\":\"complete\",\"successfully_deleted_bytes_recorded\":6574,\"used_bytes\":54944},\"status\":\"ok\",\"wall_ns\":350263260}\n",
+    "stderr": "",
+    "resource": {
+      "argv": [
+        "/home/spenser/file-native-p-linux-20261020/bin/candidate-linux"
+      ],
+      "returncode": 0,
+      "seconds": 0.46507628820836544,
+      "violations": [],
+      "guard": {
+        "root_pid": 335947,
+        "supervisor_pid": 335940,
+        "watchdog_pid": 335948,
+        "seconds_limit": 115.0,
+        "per_process_limit_bytes": 2147483648,
+        "native_aggregate_limit_bytes": 3221225472,
+        "observed_native_aggregate_peak_bytes": 53792768,
+        "missing_samples": 1,
+        "violations": [],
+        "remaining_live_pids": [],
+        "samples": [
+          {
+            "epoch": 1792470753.3829415,
+            "native_aggregate_rss_bytes": 53268480,
+            "live_owned_pids": [
+              335947
+            ]
+          },
+          {
+            "epoch": 1792470753.4532394,
+            "native_aggregate_rss_bytes": 53628928,
+            "live_owned_pids": [
+              335947
+            ]
+          },
+          {
+            "epoch": 1792470753.5239007,
+            "native_aggregate_rss_bytes": 53792768,
+            "live_owned_pids": [
+              335947
+            ]
+          },
+          {
+            "epoch": 1792470753.594744,
+            "native_aggregate_rss_bytes": 53792768,
+            "live_owned_pids": [
+              335947
+            ]
+          },
+          {
+            "epoch": 1792470753.665533,
+            "native_aggregate_rss_bytes": 53792768,
+            "live_owned_pids": [
+              335947
+            ]
+          },
+          {
+            "epoch": 1792470753.7362778,
+            "native_aggregate_rss_bytes": null,
+            "live_owned_pids": []
+          }
+        ],
+        "independent_timer": true,
+        "includes_supervisor_and_watchdog": true
+      },
+      "ownership_samples": [],
+      "stdout_sha256": "bfe3b06346e75e41d72d9e55bb93b3ab3f4aa90cd632a6b3e0829e7119c23c0a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "fixture_growth_bytes": 4076,
+    "maximum_forecast_bytes": 2382204
+  }
+]

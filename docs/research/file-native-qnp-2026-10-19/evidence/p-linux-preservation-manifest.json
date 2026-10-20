@@ -1,0 +1,93 @@
+{
+  "stage": "artifact-only-preservation",
+  "receipt_epoch": 1792471070,
+  "archive_deadline_epoch": 1792471670,
+  "closeout_deadline_epoch": 1792471970,
+  "no_original_deletion_admitted_or_performed": true,
+  "native_qualification_pass": false,
+  "roots": {
+    "unit-cache": "/home/spenser/file-native-p-linux-20261020/source/docs/research/file-native-incremental-engine-experiment-2026-10-18/target",
+    "fixtures": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures"
+  },
+  "base_native_ownership": {
+    "native": {
+      "root": "/home/spenser/file-native-p-linux-20261020",
+      "bytes": 228798005,
+      "files": 13418
+    },
+    "cache_positive_growth_bytes": 6079277,
+    "cache_new_files": 301,
+    "conservative_controller_bytes": 8388608,
+    "combined_bound_bytes": 243265890,
+    "combined_bound_files": 13919,
+    "free_bytes": 24812351488
+  },
+  "base_combined_future_bound_bytes": 240100410,
+  "caps": {
+    "archive_bytes": 20971520,
+    "archive_soft_bytes": 20905984,
+    "inventory_bytes": 4194304,
+    "all_stage_reports_bytes": 1048576,
+    "lane_bytes": 268435456,
+    "lane_files": 20000
+  },
+  "status": "verified-preservation-archive",
+  "original_root_census": [
+    {
+      "label": "unit-cache",
+      "root": "/home/spenser/file-native-p-linux-20261020/source/docs/research/file-native-incremental-engine-experiment-2026-10-18/target",
+      "files": 8,
+      "directories": 3,
+      "logical_bytes": 80976318
+    },
+    {
+      "label": "fixtures",
+      "root": "/home/spenser/file-native-p-linux-20261020/qualification/fixtures",
+      "files": 11696,
+      "directories": 6260,
+      "logical_bytes": 128692325
+    }
+  ],
+  "inventory": {
+    "path": "/home/spenser/file-native-p-linux-20261020/preservation-artifact/inventory.jsonl",
+    "bytes": 3299193,
+    "rows": 17967,
+    "sha256": "1cf2e7bb0116495dfd0b883bf62916bd8701be60db9305eec5ff62ffc4b27ad9",
+    "format": "sorted compact JSONL: p=relative labeled path,t=f/d,n=raw bytes,h=SHA256 or NULL for directories"
+  },
+  "archive": {
+    "path": "/home/spenser/file-native-p-linux-20261020/preservation-artifact/two-roots.tar.gz",
+    "bytes": 5525691,
+    "sha256": "d6f3eca1abd4bb74ca393c9c3ef743abdf5c6061bb98aad74ac938769c2cdbc7"
+  },
+  "streaming_roundtrip": {
+    "all_members_verified": 17967,
+    "all_raw_bytes_verified": 209668643,
+    "complete_inventory_match": true,
+    "gzip_and_file_EOF_verified": true,
+    "no_duplicate_restore": true
+  },
+  "originals_after_equal_inventory": true,
+  "source139_and_frozen_bin_unchanged": true,
+  "frozen_bin_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe",
+  "source139_bindings_sha256": "34560fd241c59a11438612ab0bb58c9a4b983ae7e1b5dfeeef348ff2f90d9291",
+  "completed_epoch": 1792471292.738736,
+  "spent_bytes": {
+    "archive": 5525691,
+    "inventory": 3299193,
+    "reports": 64763
+  },
+  "native_final_ownership": {
+    "native": {
+      "root": "/home/spenser/file-native-p-linux-20261020",
+      "bytes": 237652554,
+      "files": 13421
+    },
+    "cache_positive_growth_bytes": 6079277,
+    "cache_new_files": 301,
+    "conservative_controller_bytes": 8388608,
+    "combined_bound_bytes": 252120439,
+    "combined_bound_files": 13922,
+    "free_bytes": 24803487744
+  }
+}

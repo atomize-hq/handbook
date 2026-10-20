@@ -1,0 +1,700 @@
+{
+  "source139": [
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock",
+      "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+      "sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_lane.py",
+      "sha256": "a7ac38462e0f79c4ae5fb0474b3fd511968a3abe56afcfaa564a0ae9ea9f23d6",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_windows.py",
+      "sha256": "13044cf051998f87b54ca2ab18af227827c12e675fba775f7ba853fb0d113401",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/accounting_wsl_final.py",
+      "sha256": "c156580992d64dc872bff52a55c5af8f2fab790c103ebf91c256282988ae8798",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/adversarial.py",
+      "sha256": "c08899a6e79b874439b3f82e077fad849822707f8c2caf674fa4fd1627d5e02a",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/audit_evidence.py",
+      "sha256": "2b4698807001737c9aad61e96b6e6902995bef5123c89fc5fd91a65b51d15283",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/audit_lane.py",
+      "sha256": "4b4d2d7e44fe016e7f9a8b97e25480ec046d6939a443fb8531abf7462279544a",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/calibrate_documents.py",
+      "sha256": "bdaf6e022e0ec0c95b4998d737a6bdf3daf205e252e92f132a884ec18515a2b9",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/census.py",
+      "sha256": "1f4b5634124ecd060bc50f204b506f3d1206402063af28d3703c10a4f88f01f5",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/checks.py",
+      "sha256": "5d8a9c65847a9c767bfb8f53ef753ec808bdd602954ab1e35072cf46b25f0926",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/codec_geometry.py",
+      "sha256": "f934a442cf1834735804313d7a8019d73604c182e849b0b11f6d81017652e56d",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/codec_upgrade.py",
+      "sha256": "818ea99b09477667b0b4049e2f7085bd42d3d8323cc21f08465617495f46755c",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/Cargo.toml",
+      "sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/src/main.rs",
+      "sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/Cargo.toml",
+      "sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/src/main.rs",
+      "sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/contention_final.py",
+      "sha256": "799fb2ef05c94f16a430d41881931b887c5e599302fa16735642a25911332fc9",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/Cargo.lock",
+      "sha256": "bb23d7bd14f839abff0b4d9168483ee60e9a26a50fad8cf4a0f5531d3b77b998",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/Cargo.toml",
+      "sha256": "e78e45c7ae6d58958327510d3e699459a8cf2d64174c54861c4bed9e43315dd0",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/backend.rs",
+      "sha256": "fac529f6d41ee08eb693aa9ec3dc4d3777d16919156268b15b37c7222272b90b",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/disk.rs",
+      "sha256": "cd3e54ea95b7386c6120810007c9e736b507738855d0098a574e5f39993fd4c5",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/io.rs",
+      "sha256": "9ba206a4ddf86993702aca2b0dbcdc120d510e2a5b43f71ef0c789e30703c47e",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/lifecycle.rs",
+      "sha256": "30b22dd7131bac476fbcf3037f2bedf793990b764ed485667f21a9ff2202b5b4",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/main.rs",
+      "sha256": "8cd6800fb18e1c5f26738f648589287a3d8fb2a217b0f4bd4d6dc17310083d57",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/control/src/model.rs",
+      "sha256": "a4d21cfb691dcfbf59af3cb09305610bfbb415abed1306fbfd8d0ab556d0ab10",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/controller.py",
+      "sha256": "89d028bbd2096849a7e30522dbe27c9b6ae2e3293d9317a87de3af35585b1d43",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/deep_cases.py",
+      "sha256": "ae6f436c7f61b53e4d3e076dd2be14c67ba992190d6cd0145302f537af967427",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/derive_contention.py",
+      "sha256": "f22b6ca75f09d10fe67d60ca846e3e38a0d745edbb8e7fcc1c1a630f746d6367",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/export_wsl_evidence.py",
+      "sha256": "a9a8f459a3ae13ead970bafcb5a9cb081eb2dace54a726b43045554b07e76c7a",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/final_resources.py",
+      "sha256": "5f87c4a387b7ac2417846f8f480c5d9c3221d71305e930d8f13e13d08eb2ec25",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_matrix.py",
+      "sha256": "b3b61908cf7f7ea8f23459a65156c650a7d03abb5540be34a22adf24a15f0078",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_proofs.py",
+      "sha256": "88bfa819cbeb44b233febe3904fb7afd7466c424e7655b112444664cd4d00ae2",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_resource_census.py",
+      "sha256": "775cff35118acdf60e4bee861eb9fc5acbda543d07e107785f2598365f1192ec",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/finish_verification.py",
+      "sha256": "d93ef4a40a4a0ece6712565a7e8ead30994322da2c0c6c3c3ae80d0ca78e26c7",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/history_gc_continuation.py",
+      "sha256": "5fa5971a95df75a86cfb1519eb99a2d03646db0ef9d3f833d289a51fb96b07c2",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/history_run.py",
+      "sha256": "c6c68c200eba300dd356656cf4b1c85c2646eda18c1158854a6c2ade0ea5f078",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/index_evidence.py",
+      "sha256": "9100ab78ae8e3532e7ebe1431241a84b2523098cc9974f6ed5de6595fd08fa4c",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/install_wsl_budget.py",
+      "sha256": "4f7f13ac9adde65e2d74e057ca8e912ee342f3e502781ce8bf2fe3a92579f010",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/matrix.py",
+      "sha256": "ac1262c01f179d0e2121d678289fb79a8c107803ed348e4f2a3ce6bfad33d52b",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/namespace_cases.py",
+      "sha256": "bbec0fe3968276c28a8f642074b79a2bfb7bb7f934ba6579cb737303661aad7f",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native.py",
+      "sha256": "ddb05219ad510dfa7c75228776625e33d35ad1b72331d11286e779bbdc004a26",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/native_linux_final_census.py",
+      "sha256": "111a10aadc6e3074a7dff74fc09178b5228746f37570350499ba908afc98f4c8",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/ordinary.py",
+      "sha256": "46099f91b88479000dfc664b8e1f52f45bc9d039d52ac01893ff8fc2dcdaa879",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/pack_evidence.py",
+      "sha256": "b441e0228c9bafd940e06ee9327a9fef1fe5632ded76f22606ea7ac63f35413a",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/pack_history.py",
+      "sha256": "f3756aea5aa4b01f90474fe25f68230a20aaf4a14c05352a7837815764a2c7d6",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/pack_ledger.py",
+      "sha256": "0abd63bf569176dadf7fc0870e191540296c9e44da5e60f1b0f1e4cc6c9eb727",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/paired_intents.py",
+      "sha256": "ba03e027317196442c990151110c6597866ba2129e937bc702408ade1546a4e6",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/proof_intent_regression.py",
+      "sha256": "217cd4ecf5c03511f5dbaeba026a51539bbc965e12a3c1fcf250437dd5b9037f",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/proof_retired_regression.py",
+      "sha256": "9d2efec2cfcc741402b9e59a5531d4011dbaafdb48ec49bc3a86286c8b7f2ba6",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/quota_bytes.py",
+      "sha256": "96a3aa501233f53e8a845211e3aea7cbc14cb6c1e5aae8586f4b76e402899e34",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/replay_lifetime.py",
+      "sha256": "b946c1d46b4ec8e87cae6d812692bb40f0b333d251bce77e92a56c22cec48dc0",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/resource_bindings.py",
+      "sha256": "4091f282c99678ff849950cf08fce1fa110c98b7ddecfd0200186c7744f6caf0",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/root_geometry.py",
+      "sha256": "b584463cf66179f8ce56bd94287aeedd8d29a916ac423f1b349c951934b3776b",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/run_differential.py",
+      "sha256": "28d1e65382dae3960b160eb5864b5f3521f258b4a1a429b02e2d3fa9a02f4384",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/run_lane.py",
+      "sha256": "3bf89a8e12454856fccfa56538684cc44392465ad46b5b9fde0250f29b931ed6",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/serial_windows.py",
+      "sha256": "c3095eb7017747c61ea2d0feb01a9a20a37203d5711526d8ceb5e28cbb9caad6",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/serial_windows_v2.py",
+      "sha256": "5a1366b97566981480c978d091becfbd7da0aab85206b8e515bc5853514720f9",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/session_source_associations.py",
+      "sha256": "bcd1d8b0dd6b7f6948a8e1d910471d33feae8cbb7efce74f8eda6acdbe8c6757",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs",
+      "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs",
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs",
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs",
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs",
+      "sha256": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs",
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs",
+      "sha256": "66bf895132ce9dc22b8be04cb6558390ef940f6868c69fe99969508b90e8d93a",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs",
+      "sha256": "a86f5ca110500f55fe860f20988125c85e63fcf6e2a7fbb4204bfd77898a7ce5",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+      "sha256": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs",
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs",
+      "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs",
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs",
+      "sha256": "4d854885a54ee95ffed44bfec704f95c5c91d95b98964d419a7607dd2a48b2e3",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "sha256": "d3a718dd4a2f098d60e07cdd03d1ca96555bed60c93398ac3dcad0328a89c91e",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs",
+      "sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs",
+      "sha256": "569e9470bda03dcfeadc6ed49e5c0058cb9a27e0d0f54fe383eadb6b9d0fa330",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/summarize.py",
+      "sha256": "68ff8a0919f6e6b0e4d133ea282e53ccacd0e5d67fbf535f45bc0c383d6c2ed9",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/supplement.py",
+      "sha256": "8b1065cda56fa39ddaa1a29bca96f5f353d07a8c9e632bf8b9a690a4cd6ec951",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_exports.py",
+      "sha256": "244d4690c3285c2ac07a286fff1f69199fa694bbe8ccafc367bc589ec118c0f8",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_gc_outcomes.py",
+      "sha256": "f516ecf5b1d2938b287cbc5a1062073ff8ff66a6afd29504e3a84892b3d6d16d",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_genuine.py",
+      "sha256": "9ac86c78f5377fc291a9dfbc40544817b41a005032373ec4a653cb43933ecbdc",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_projection.py",
+      "sha256": "863520716831775a43096a311fa78ca4bde4f3a6824412855e0b07317918b5a2",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_store.py",
+      "sha256": "ce74f48339b950ad62c9c159bd95d4f038248d500addd6b635559ccdba42e2b8",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/verify_wsl_sources.py",
+      "sha256": "a9bc29f202cd32d91ba518d4d122a713d8948e2254a46c50f24db327ee8bc71f",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/walk_cases.py",
+      "sha256": "33e02d7a3c072f0f9a8e276d50ed2b82c6eac47723b5b361a6d73a332799db58",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/windows_resources.py",
+      "sha256": "d4670c2cb25df61c5286e835e6360b042992d04bd86e401a8de26f948beebcd1",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/wsl_budget_adapter.py",
+      "sha256": "5ac1fbd17a1e8416aa7f73255faf9df804414868105d75e165dde7fd9fdff603",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-navigation-2026-10-19/archive_fixture.py",
+      "sha256": "e35d428146f33016b00543616d473355b7ea8fc2e2acda5f9ab6107ca87f5540",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-navigation-2026-10-19/census.py",
+      "sha256": "efc320fa4ebe77e6abc04a2b3e067b202ad177ecd63a0de77a2aa320a819fa24",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-navigation-2026-10-19/closeout.py",
+      "sha256": "73e547ee685455b10b2042f5951a3aedbdafad9c05c32941f4a7c5849e99998d",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-navigation-2026-10-19/focused.py",
+      "sha256": "482d54fc38aa1412022980ffc42af9b61d196b5dbb84a1adbf0fbb0e054bb412",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-navigation-2026-10-19/genesis_delta.py",
+      "sha256": "8797f823e82aab8f6042db18714baf9e845bed61a4c183dbf935e359162c21a8",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-navigation-2026-10-19/legacy-fixtures.tar.gz",
+      "sha256": "eeae73e002ce81539ace34d7bb3cd41e551b79b0516781cfb6050b181b32095b",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-navigation-2026-10-19/measure.py",
+      "sha256": "63ae6deac8737223c87570e25fd216b9d575fb48707c65c922dd7d180a8059e3",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-navigation-2026-10-19/oracle.py",
+      "sha256": "877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-navigation-2026-10-19/seed.py",
+      "sha256": "dee6b294bfcdb70af6bedf2d8fa2bc7a1a13adef4d81dd1aa4c6ad2a94e3b903",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-navigation-2026-10-19/stage1.py",
+      "sha256": "3eda45a36ae84a12faa61049c355dd4642186564242f3d058bdd65c4540a9b58",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-navigation-2026-10-19/summarize.py",
+      "sha256": "78a739fa5d5e0351754fb471dbb698becc087b7669c036a07b3651b34efa205f",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/allocation.py",
+      "sha256": "35597fb1bcbfd6bdff752c44ba401b4febe1fb748a771a039d9cd817e921e97e",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/bind.py",
+      "sha256": "2ec687791c80d660238235f900bad612d064b0bccf6151cf3f34bcf75343c3f5",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/candidate/handoff.json",
+      "sha256": "79537f07428b0e10f86f3228598091d398c51d366ecbc71a39d354f080da0bad",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/candidate/source-binding.json",
+      "sha256": "35f52f2e5ef5f043de9d13abe182e3f1b96e36083d0471abda2da3b682ef75fa",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/capsule.py",
+      "sha256": "651553806375b0ab0a5c2e99608984eaa4528e086efa06f7f3f707ff15e35719",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/cohort_forecast.py",
+      "sha256": "4b414feffbae25f6d145d6bb43abcb085e7e91f7e97e990ece3a1aa1a0a25371",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/dependency_inventory.py",
+      "sha256": "11a7522d770793ad511426a647392ee93750f33c6e84de82c8b6dceeec9ce7de",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/driver.py",
+      "sha256": "6921e3c82e4cca2bdefe815f26d4ad93ebba4bb9b6c5ca72a0285d32858bfee7",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/guard.py",
+      "sha256": "a83169e99aad14bf776e1aa032938c00a5e13c01b90c46ad909297f6b9bb1e68",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/handoff_candidate.py",
+      "sha256": "fcea46327aec21af3b26c9b7e87bfe0433bd270dc00c88fd467c5aaec1ce88cb",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/independent.py",
+      "sha256": "edd24a9f4fd3e08c47a6902b06fb7a780a9c5c1965733d08b8b0ebc3aa733311",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/inspect_dependencies.py",
+      "sha256": "fcf87ec13fb20c3ae6cc87c51bfc542ddcfc738109e0fb3a6b01216eedae11b3",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/loose_regression.py",
+      "sha256": "57d72688fefef474683b6386693e581d13e99d7ff3f1e9c8299c3f707f708bba",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/preservation_reopen.py",
+      "sha256": "e32ef57bb25ccb470f80d2f5ddef835ad8f44d1e3b382fb4f66a3eb077e99bc3",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/preservation_reopen_check.py",
+      "sha256": "1bb4bc1799a580b94e705550676797e7cc755b3872bb67b86c8ed0ce42f6b109",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/preservation_stage.py",
+      "sha256": "02af0fec598be7a8a289ac93b834e42e8c99ee24a0b0c076152c97d9b9289a1b",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/qualified_loose.py",
+      "sha256": "8e99633ec9852e962ae34693505f19e2d7435d497e9d2fbae6c6cc88c3779d16",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/request_preservation.py",
+      "sha256": "2fd8bd5bcf6609fc01eaea2ea10d20329f09b71d99ac3cefed6148c6911bc762",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/slice1.py",
+      "sha256": "6983ff46129a74a23f2001b2e402120df229492b44fa7f431c627fe2e1be41d1",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/strict_supplement.py",
+      "sha256": "6708b2a1cd14e5e00121ffe3afacdfd5cd2eb35823a0ae336d882ef80d7d6d67",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/watchdog_check.py",
+      "sha256": "fe1097cd79fc4dc0bd79fe5b34d6ded16d0ecc840765ce05296122a402d181fd",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/watchdog_final_check.py",
+      "sha256": "2a6fc792a4f0d3362e9f27b89a3028752fee7be5889a8a764d45ab8a87b326d7",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-packing-2026-10-20/watchdog_group_check.py",
+      "sha256": "67793a252aa29687cb584f5fa7154813a6c8efeac10b8c7d4726630c271ccb4f",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/bounded.py",
+      "sha256": "fae22396ad0c0e5b2915c692b31202e8ea18fe66d57acc10b3cba8faf6e244e3",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/bundle_results.py",
+      "sha256": "d5ea275bab5b1a4d70ee131d8028d17e0cf4f78ad6b5fbded1479913514c1caf",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/capsule.py",
+      "sha256": "1b997e6bc058660fcfe7246ee98a7b13317e63f7232acef73fef6c3987273b71",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/collect_native_evidence.py",
+      "sha256": "06529314d6d55c4f8bc4c4f3ad4258962c7992bc7cc319b0932917d82bfe4a35",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/final_native.py",
+      "sha256": "ca2b017489aaef6ea45615fd44fd8f6f67925b2d987b2f6008cf8c1b348ad270",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/finish_compatible.py",
+      "sha256": "7ebbb3b2c73437af51e6127b53538ef4c20e49360b1c7e156ebfaa244fb5bf1b",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/focused_extra.py",
+      "sha256": "1010406cb71faa449d79d4e8bf141839ea742c4bb35626e685a30a73a572b4d9",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/inventory.py",
+      "sha256": "85b19a9057b6202f3d71669e5c7a2213660b69bc8e74e21aca774fccfbc42a68",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/legacy_compatibility.py",
+      "sha256": "c8eb8214133bcdcb8a8945dd62384f3ea8ed0b23cff5112ca2a79d118bb6508a",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/long_trial.py",
+      "sha256": "91f6db36141e713a528f7ad1662d37afdfd8dde284fe2ed267e298ff1e8c3f3b",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/native_runner.py",
+      "sha256": "48c9d6efedd2124818cd7c5554698f62e60ec4a5e58ff89417e446817601d357",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/operational_backup.py",
+      "sha256": "20aa1b2965fd294bbf11942e5d399c7944c1f699b11021c0349b57ee5ee10bbe",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/oracle.py",
+      "sha256": "a5ff418c13571fe1163a1ccfa8fdc01cf6af37d9f690009002c5cc3a49d4b431",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/oracle_supplement.py",
+      "sha256": "3455217beae778b69a8c32057f899a17aab3f85fe653c4e57c3408e5d892d0a6",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/post_gc_probes.py",
+      "sha256": "292442dba0707a5f49b4fe9668cd2ea60307bb6f70ffcfd23a01e17c54dfe5ff",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/restore_gate.py",
+      "sha256": "2750f3401f29e34dd74fbbd8bde9cfe8444b3d7e01b140ecdf5a88dd14325bb6",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/restored_fences.py",
+      "sha256": "9e1096285ca7cb02174f62c047b5142f22a75386f73e55389c4a654f9d009c26",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/small_costs.py",
+      "sha256": "7b32c85582af39f2e0b03b236951c8a90ca1438b2d5d6b4020f3131b4cfc324e",
+      "match": true
+    },
+    {
+      "path": "docs/research/file-native-recovery-reclamation-2026-10-19/verify_operational.py",
+      "sha256": "d86c7d5406d5c5a5d00553b85dd0f16a039838132c31f41cc0567a7e3920e5cd",
+      "match": true
+    }
+  ],
+  "exe_sha256": "063342e6bbd6bfb49729ff856462b9fdaa4a8d7cdf51d941d2a60f356d2c0cbe"
+}
