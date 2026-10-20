@@ -10,6 +10,7 @@ pub mod projection;
 mod navigation;
 mod pack;
 mod packing;
+mod rolling;
 mod physical_lifetime;
 pub mod lifetime;
 pub mod api;
