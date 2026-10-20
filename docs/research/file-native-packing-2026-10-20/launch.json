@@ -1,0 +1,21 @@
+{
+  "task": "P",
+  "dispatch_utc": "2026-10-20T02:25:16Z",
+  "functional_cutoff_utc": "2026-10-20T07:55:16Z",
+  "closeout_deadline_utc": "2026-10-20T08:25:16Z",
+  "source_pin": "afbd768a19032b34c53251f08198ea78a23a978d",
+  "initial_core": "4bde156323812ef18c0dea6798cfc2108aaad933",
+  "branch": "codex/file-native-packing-20261020",
+  "runtime_root": "C:/file-native-packing-20261020",
+  "worktree": "C:/Users/spmcc/.codex/worktrees/file-native-packing-20261020/handbook",
+  "initial_full_checkout_bytes": 290234504,
+  "initial_full_checkout_files": 5038,
+  "initial_total_new_allowance_bytes": 536870912,
+  "initial_total_new_allowance_files": 25000,
+  "global_cap_bytes": 42949672960,
+  "global_cap_files": 5000000,
+  "inside_reserve_bytes": 1073741824,
+  "inside_reserve_files": 100000,
+  "large_stages_admitted": false,
+  "subagents": false
+}
