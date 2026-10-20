@@ -1,0 +1,188 @@
+{
+  "status": "READ_ONLY_PROSPECTIVE_F08_FORECAST_NOT_ADMISSION_OR_MEASURED_NEW_PEAK",
+  "epoch": 1792530304.3045082,
+  "sources": {
+    "inventory": {
+      "path": "/home/spenser/file-native-p-linux-20261020/preservation-three-20261020T060930Z/inventory.jsonl",
+      "bytes": 6243337,
+      "sha256": "9a22bdf55e8ccb94b7229765a0d2e68ffd0f800168bc38af11dadb28d71cb354"
+    },
+    "case_archive": {
+      "path": "/home/spenser/file-native-p-linux-20261020/preservation-three-20261020T060930Z/three-roots.tar.gz",
+      "bytes": 7702241,
+      "sha256": "d20d83d160af8dd38c9b0430d81a7e5d0296e7ff4198cf0f2ffa47645febfbdb"
+    },
+    "unit_map": {
+      "path": "/home/spenser/file-native-p-linux-20261020/final-source-stage/unit-fixture-remap-proposal.json",
+      "sha256": "c91bd77fd9507db96ded926a73de194ff90eb9f1b5f8cd2c3d30b8bad8468e5b"
+    },
+    "unit_archive": {
+      "path": "/home/spenser/file-native-p-linux-20261020/preservation-artifact/two-roots.tar.gz",
+      "bytes": 5525691,
+      "sha256": "d6f3eca1abd4bb74ca393c9c3ef743abdf5c6061bb98aad74ac938769c2cdbc7"
+    }
+  },
+  "all_donor_groups": {
+    "final-qualification-fixtures": {
+      "bytes": 0,
+      "files": 0,
+      "directories": 1
+    },
+    "final-qualification-fixtures/capsule": {
+      "bytes": 72746985,
+      "files": 7718,
+      "directories": 4416
+    },
+    "final-qualification-fixtures/focus": {
+      "bytes": 3380134,
+      "files": 649,
+      "directories": 357
+    },
+    "final-qualification-fixtures/immediate": {
+      "bytes": 7323987,
+      "files": 723,
+      "directories": 380
+    },
+    "final-qualification-fixtures/ordinary": {
+      "bytes": 31134684,
+      "files": 636,
+      "directories": 73
+    },
+    "final-qualification-fixtures/recovery": {
+      "bytes": 34334126,
+      "files": 3214,
+      "directories": 1287
+    },
+    "final-qualification-fixtures/search-log-preservation": {
+      "bytes": 382705,
+      "files": 2,
+      "directories": 1
+    },
+    "final-qualification-fixtures/strict": {
+      "bytes": 19702149,
+      "files": 677,
+      "directories": 457
+    },
+    "recovery-bootstrap-fixture": {
+      "bytes": 345029,
+      "files": 57,
+      "directories": 45
+    },
+    "recovery-complete-fixture": {
+      "bytes": 46475413,
+      "files": 5185,
+      "directories": 2716
+    }
+  },
+  "required_one_final_run_components": [
+    {
+      "component": "final-qualification-fixtures/capsule",
+      "bytes": 72746985,
+      "files": 7718,
+      "directories": 4416,
+      "basis": "authenticated historical donor inventory"
+    },
+    {
+      "component": "final-qualification-fixtures/strict",
+      "bytes": 19702149,
+      "files": 677,
+      "directories": 457,
+      "basis": "authenticated historical donor inventory"
+    },
+    {
+      "component": "final-qualification-fixtures/focus",
+      "bytes": 3380134,
+      "files": 649,
+      "directories": 357,
+      "basis": "authenticated historical donor inventory"
+    },
+    {
+      "component": "final-qualification-fixtures/immediate",
+      "bytes": 7323987,
+      "files": 723,
+      "directories": 380,
+      "basis": "authenticated historical donor inventory"
+    },
+    {
+      "component": "final-qualification-fixtures/ordinary",
+      "bytes": 31134684,
+      "files": 636,
+      "directories": 73,
+      "basis": "authenticated historical donor inventory"
+    },
+    {
+      "component": "recovery-complete-fixture",
+      "bytes": 46475413,
+      "files": 5185,
+      "directories": 2716,
+      "basis": "authenticated historical donor inventory"
+    },
+    {
+      "component": "retained final large cache unit",
+      "bytes": 80976318,
+      "files": 8,
+      "directories": 2,
+      "basis": "historical actual unit receipt and byte-identical archived eight-file map"
+    }
+  ],
+  "required_donor_geometry_bytes": 261739670,
+  "required_donor_geometry_files": 15596,
+  "all_historical_donor_roots_plus_cache_bytes": 296801530,
+  "excluded_from_new_required_run_only": [
+    "historical recovery partial/censored prefix",
+    "historical recovery bootstrap prefix",
+    "duplicate search-log preservation archive"
+  ],
+  "exclusion_does_not_reclaim_or_reclassify_old_bytes": true,
+  "prospective_additions": [
+    {
+      "component": "new generation/rolling/paged/compatibility focused fixtures retained",
+      "bytes": 134217728,
+      "files": 20000,
+      "basis": "prospective bounded allowance; exact final harness geometry not yet available"
+    },
+    {
+      "component": "additional candidate/backup/restore temporary coexistence",
+      "bytes": 33554432,
+      "files": 4000,
+      "basis": "prospective extra above donor coexistence, not deletion credit"
+    },
+    {
+      "component": "new versioned plan/pin/cursor/journal metadata, small units and forecast margin",
+      "bytes": 16777216,
+      "files": 8000,
+      "basis": "prospective allowance"
+    },
+    {
+      "component": "existing fake-control selector retained",
+      "bytes": 109,
+      "files": 1,
+      "basis": "current native own fixture census"
+    }
+  ],
+  "forecast_bytes": 446289155,
+  "forecast_files": 47597,
+  "recommended_total_fixture_cap_bytes": 469762048,
+  "recommended_total_fixture_file_cap": 50000,
+  "headroom_bytes": 23472893,
+  "headroom_files": 2403,
+  "current_fixture_cap_bytes": 100663296,
+  "current_fixture_file_cap": 30000,
+  "requested_cap_increment_per_host_bytes": 369098752,
+  "requested_file_increment_per_host": 20000,
+  "two_host_increment_bytes": 738197504,
+  "comparison_to_supplied_central_173528715": {
+    "additional_unused_forecast_release_needed_before_two_host_admission_bytes": 564668789,
+    "not_a_fresh_global_census": true
+  },
+  "no_deletion_or_reclassification_or_engine_execution": true,
+  "conditions": [
+    "one complete final run; failed repeated large unit or capsule prefixes require fresh census/reallocation",
+    "large unit remains retained",
+    "full applicable capsules and legacy case mappings remain required",
+    "new focused geometry must be checked against exact final harness before growth;128MiB is forecast not measured peak",
+    "logical bytes charged; sparse allocated bytes are no discount; directories retained separately",
+    "old donor roots/archives stay protected and already charged; no restore was performed",
+    "same cap proposed for Mac by shared logical geometry, not a measured Mac census"
+  ]
+}

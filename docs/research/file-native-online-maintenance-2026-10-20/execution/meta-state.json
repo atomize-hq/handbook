@@ -1,5 +1,5 @@
 {
-  "status": "CP1_REMEDIATION_REVIEW_HOLD_BASELINE_HISTORY_ACTIVE",
+  "status": "CP1_ENGINEERING_INTEGRATED_CP2_PROVISIONAL_REVIEW_FULL_QUALIFICATION_RESOURCE_NO_GO",
   "human_byte_ceiling": 47244640256,
   "file_cap": 5000000,
   "inside_closeout_bytes": 1073741824,
@@ -94,7 +94,9 @@
     "C2_build_topups": 402653184,
     "C3_source_review_control": 16777216,
     "C2_unclaimed_Windows_topup": 134217728,
-    "C3_unsubclaimed_bytes": 12582912
+    "C3_unsubclaimed_bytes": 10354688,
+    "C3_META_REVIEW_bytes": 4194304,
+    "C1_Mac_private_cache_active_bytes": 67108864
   },
   "Windows_guard": {
     "owner": "matrix worker",
@@ -107,34 +109,28 @@
     "status": "parent reviewed frozen v4 raw control receipts; actual engine/build released20:15Z",
     "sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae"
   },
-  "source_protocol_candidate": "STORE v3 physical generation binding, one-time legacy drain/refusal, separate short Q capture, generation pins, unique container birth-id instances, successor-carried bounded retirement/deferred work; not implemented/qualified yet",
+  "source_protocol_candidate": "CP1 reviewed engineering integrated; STORE3/Work2 generation lifetime and short capture gates; CP2 segmented rolling-tail source provisional; CP3 not implemented",
   "next_required": [
-    "Finish CP1 immutable-root remediation and deterministic full-oracle regressions, review exact pushed replacement pin",
-    "CP1 reviewed source and adversarial generation/cleanup schedules",
-    "Fresh CP2 rolling cutoff/deferred-tail implementation worker from reviewed CP1 pin",
-    "Fresh CP3 paged authenticated lookup worker from reviewed CP2 pin",
-    "Independent code review/remediation and one final frozen source pin",
-    "Complete required matrix and same-final-pin native Windows/Linux/Mac capsules",
-    "Complete long representation verification, backup/restore/full oracle and accepted successor",
-    "Final resource/evidence review, isolated commit/push and truthful KEEP/ADJUST/PIVOT closeout"
+    "Review CP2 b876 rolling source and exact independent full oracles; remediate source findings before handoff",
+    "Review Mac v25 guard delta and streaming snapshot tiny controls",
+    "CP3 single paged format from reviewed CP2; independent review and final source freeze",
+    "Run scoped long conversion under existing F09/F10/F14; full oracle then actual retirement/census before any reallocation",
+    "Measure final native targets then seal full-suite rebudget only if all44GiB conditions proved",
+    "Complete full Windows/Linux/Mac same-final-pin capsules, scaled history/document and lookup matrices",
+    "Full streaming backup/restore oracle and destination accepted successor",
+    "Final evidence/resource review, isolated commit/push and truthful KEEP/ADJUST/PIVOT closeout"
   ],
   "native_Linux_guard": {
     "sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
     "review": "Parent re-read full source and verified eight launched v5/stress receipts, gzip SHA/row counts, joined monitors and two numeric empty closure observations; max20.185ms; accepted for next exact reviewed source pin. Prior provisional62ce compile passed but58.10ms cadence gap remains unqualified."
   },
   "shared_harness_pin": "01ff272a98fe2cddf01f8ebfc399192f234051af",
-  "CP1_open_source_review_findings": [
-    "F1 required: preserve transitive aborted birth-owner closure before PACKING overwrite",
-    "F2 required: immutable selected cleanup Work replaces mutable progress omission/forged completion",
-    "F3 required: deterministic owned progress/activation stages with crash recovery",
-    "F4 required: checked durable ordinal plus nonce prevents physical birth-path reuse",
-    "Replacement early review: forged selector-stage deletion authority; finite durable idle-progress reconciliation still under remediation"
-  ],
-  "as_of": "2026-10-20T20:45:00Z",
-  "landing_head": "626c8653",
-  "latest_harness_source_pin": "ddd7bbeef1cd500b9ef828a308c6233a7a6fc727",
-  "CP1_provisional_pin": "62ce963085ac054bcc34eb21c6733b94db160975",
-  "CP1_replacement_schema": "Work v2 selected by STORE v3 physical.plan; same physical id/ordinal/catalog/pin for metadata-only cleanup CAS; unqualified pending exact replacement pin review and full regressions",
+  "CP1_open_source_review_findings": [],
+  "as_of": "2026-10-20T22:18:00Z",
+  "landing_head": "784b49d7",
+  "latest_harness_source_pin": "2aebde505a0f399d1c863084a461bd3c43ef01fa",
+  "CP1_provisional_pin": "bd6dd9367acddaddcd7873c8043548502a170c3b",
+  "CP1_replacement_schema": "STORE3/Work2 immutable selected roots; physical_parent exact initial STORE CAS-parent token, transition_parent metadata comparison-only token, bounded birth_claims; stable pin{id,ordinal,catalog}; no predecessor traversal; explicit owned pack-directory tasks; 128KiB private Work cap prospective quota/backpressure",
   "claim_file_envelope_extension": {
     "additional_files": 64,
     "from_existing_central_headroom": true,
@@ -145,27 +141,105 @@
   },
   "Mac_qualification_chat": "01a15af8-2912-7262-b618-6b3682739acd",
   "native_Mac_guard": {
-    "sha256": "4ec468760ef9bdfafc13787db5beca95659a25bd10d44b8496bee16217ce9aac",
-    "status": "CONTROL_ONLY_REMEDIATION_REQUIRED",
-    "remaining": [
-      "per-category prospective reservation/source+claim binding",
-      "scoped descendant escape detection and exact foreground launcher contract",
-      "persistent host fence for UNKNOWN closure; explicit two observations",
-      "live disk/output/fixed cutoff stress",
-      "strict sample cadence qualification; supervisor-death gzip truncated retained"
-    ]
+    "status": "V25_DELTA_REVIEW_PENDING_NO_ENGINE_CACHECOPY_BUILD",
+    "delta_sha256": "82c50c26c4a66a31915a1eb02016f4626e08e3b726345d69e48db3098d65d226",
+    "delta_bytes": 228373,
+    "reported_controls": "128 sequential children,130 retained identities/peak3live/max19.1ms; separate C1 category and thin role driver; parent verification pending"
   },
   "CP1_independent_reviewer_chat": "01a15afe-d0c1-78c3-95c7-74a9bf9d5354",
   "CP2_worker": {
     "chat": "01a15aff-e2aa-72b1-a51f-753daf259843",
-    "status": "READ_PLAN_ONLY_NO_MUTATIONS_UNTIL_REVIEWED_CP1_GO",
+    "status": "IMPLEMENTED_PROVISIONAL_SOURCE_FROZEN_RUNTIME_SCHEDULES_ACTIVE",
     "prospective_path": "C:/Users/spmcc/.codex/worktrees/file-native-online-cp2-20261020/handbook",
     "C3_source_admin_bytes": 2097152,
-    "build": "exclusive reuse of existing F02 after source-owner handoff, no new target allowance"
+    "build": "exclusive reuse of existing F02 after source-owner handoff, no new target allowance",
+    "source_pin": "b876df9e01957be29b5c9cbd676d5a169aaa6c67",
+    "reviewer_chat": "01a15b60-3770-70d0-9129-7a9c916ba116",
+    "initial_proofs": "N16 A/B three cycles adding16 each;49 exact outcomes/mode; partial interval and reduced-limit consolidation; 4 small units PASS; N64/full independent oracles pending"
   },
   "baseline_progress": {
-    "H1k": "authentic1000 API history +genesis; matchedH1002 includes lost reply; loose six-category50fresh+500warm PASS; originalPZ samecohort5010raw fullverify PASS, sampling active",
-    "H10k": "authentic staged producer active; no full extra clone; all future rolling cycles/coexistence included F05 prospective admission",
-    "qualification": "baseline only; not final-source matrix qualification"
+    "H1k": "ActualH1002; both loose and oldPZ controls300fresh+3000warm PASS; sameacceptedcohort and SELECTED; full5010-record PZ oracle PASS",
+    "H10k": "Authentic H10002 both loose/original whole-index PZ 300 fresh plus3000 warm each complete; exact accepted outcomes/SELECTED and full50010-record oracle PASS; final pin required",
+    "exact_long": "Two authenticated FNOP1 passes5807files592458971/fullEOF/allhashes; exactH101007 head/predecessor/nav/lostinput bridge and1007knownrequestinput mapping verified without restore/engine open. Final fullrepresentation/backup/restore stillpending.",
+    "F07": "OldN64A/Bcontrols8435478B retained; new two-final-pin-paired-store helper prepared but not executed/N1kheld until finalpin and F07admission",
+    "qualification": "None substitutes final-source fullmatrix"
+  },
+  "CP1_candidate_binary": {
+    "path": "C:/file-native-online-cp1-20261020/evidence/candidate10.exe",
+    "sha256": "7d1157d5a2df08904e118ce86647fd45f1ae7fec209494c02afdb1fac4b0b22f",
+    "build_and_small_units": "PASS;4 small tests, large cache final only",
+    "qualification": "bounded source review and focused schedules; final complete gate pending"
+  },
+  "full_qualification_admission": {
+    "status": "NO_GO_PROSPECTIVE_FULL_SUITE_REBUDGET_ONLY",
+    "claim004_sha256": "2546259c68428b3148bab6584a1593d65ee4173766542eb6a1f4002a77c981bc",
+    "proposed_448_native_480_Windows_F07_192_forecast_bytes": 47641536885,
+    "over_44GiB_bytes": 396896629,
+    "allocations_applied": false,
+    "existing_limited_claims_unchanged": true,
+    "reason": "Native complete donor stack261739670B/host before new focused protocols; old96MiB native and64MiB F07 underforecast. All full suites held; no tests dropped.",
+    "native_64MiB_new_focus_rejected": "Default B N64/H112 readable payload copies alone87162880B; no profile reduction or implicit reclamation",
+    "F07_proposed_bytes": 201326592,
+    "F07_full_two_final_store_forecast": 195311382,
+    "F07_prospective_files": 40000,
+    "F05_latest_boundary": {
+      "actual_H": 8001,
+      "actual_bytes": 419691930,
+      "files": 105212,
+      "remaining_all_history_rolling_and_coexistence_bytes": 327155712,
+      "future_total": 746847642,
+      "proposed_736MiB_cap_fits": true,
+      "current_guard_cap_still": 1073741824
+    },
+    "valid_unused_earmark_options_not_yet_applied": [
+      "C1Windows192MiB and Linux64MiB unneeded/no private copies",
+      "C2Windows128MiB unused",
+      "F05current1GiB may reduce after sealed exact boundary forecast",
+      "F14whole283460393 conditional on reviewed direct legacy-to-paged index-only upgrade; current build copies both, so stillheld",
+      "F03/F04partial64MiB each only after exact final builds prove target fits192MiB; current256 stillheld",
+      "MacC1cache64 remainsheld until concrete read-only cache/SDK proof"
+    ],
+    "reserve_untouched": true,
+    "protected_data_untouched": true,
+    "no_link_clone_or_planned_deletion_credit": true,
+    "selected_scope_preserving_route": {
+      "status": "CONDITIONAL_NOT_APPLIED",
+      "long_phase_existing_claims_fit": true,
+      "expected_new_long_source_bytes": 606617332,
+      "stream_F11_max_source_bytes": 651179227,
+      "F14_reassignment_condition": "ACTUAL old pair retirement after independent full oracle, quiescent census, no pending stages/jobs/owner claims, process closure; original archive protected",
+      "native_target_reassignment_condition": "ACTUAL exact final targets each <=192MiB and complete target/profile/dependency receipts; current256MiB held",
+      "combined_possible_margin_bytes": 20781492,
+      "no_planned_deletion_credit": true,
+      "no_additional_human_budget": true
+    }
+  },
+  "CP3_worker": {
+    "chat": "01a15b15-3362-7133-b789-1ff556b75d04",
+    "status": "READ_PLAN_ONLY_NO_MUTATIONS_BEFORE_REVIEWED_CP2_HANDOFF",
+    "credible_paged_designs": 1,
+    "design": "One self-contained variable-page FNPIDX02 index per pack; <=48 slots/page, <=16KiB/page, max3pages/route and4segments=>192KiB. Catalog root SHA/len/format plus wholefile SHA audit. Typed keymax225B checked; exactserializedindexlimit16MiB.",
+    "long_index_upper_bytes": 77128970,
+    "F10_bytes": 83886080,
+    "conditional_index_only_upgrade": "Fallback NOT SELECTED; original normal pair build and staged actual F14 expiry selected. One paged format only; implementation remains HOLD pending reviewed CP2"
+  },
+  "CP1_engineering_disposition": {
+    "review": "INTEGRATE_BOUNDED_ENGINEERING",
+    "full_gate": "OPEN_FINAL_PIN_REQUIRED",
+    "source_pin": "bd6dd9367acddaddcd7873c8043548502a170c3b",
+    "review_sha256": "63c2195f4e093c4a9c04ec141ca3f06df6ab9ac2eb249f7a53c806b331c6e2e1",
+    "evidence_sha256": "a2135421b5e6ef7175c8079dadce1ea23743bff63193f7cf19c8fc701918830b",
+    "source_owner": "READONLY_NO_MORE_JOBS",
+    "F02_exclusive_owner": "CP2"
+  },
+  "stream_snapshot_worker": {
+    "chat": "01a15b51-a50b-7930-8633-b42694240252",
+    "claim008_sha256": "8b69a7c60846c637d77d2011ab1e39baab31617c9cba2da0b0a76cbe843804b5",
+    "status": "SOURCE_AND_TINY_CONTROLS_ONLY",
+    "source_bytes": 131072,
+    "protocol_bytes": 2097152,
+    "evidence_bytes": 524288,
+    "all_other_landing_harness_files_frozen": true,
+    "long_restore": "HOLD_FINAL_PIN_AND_REVIEW"
   }
 }

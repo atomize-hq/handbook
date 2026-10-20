@@ -1,0 +1,173 @@
+{
+  "kind": "44GiB-staged-long-phase-feasibility-analysis",
+  "claim_id": "44GiB-CENTRAL-005-STAGED-LONG-F14-EXPIRY-F11-STREAM-ANALYSIS",
+  "utc": "2026-10-20T21:42:02.501654+00:00",
+  "status": "ANALYSIS_ONLY_NO_NEW_GO_OR_ALLOCATION_RELEASE",
+  "authority": "Meta asks evaluate existingapplied longallocations as stagedroute before extra descriptor/index-onlycomplexity. All enlargedfullcaps remainHOLD until measurementsandreview validatereassignment.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T211715Z.json",
+    "sha256": "2546259c68428b3148bab6584a1593d65ee4173766542eb6a1f4002a77c981bc",
+    "status": "Preservedfailedfullforecastaudit, not erasedbythisconditionalroute"
+  },
+  "recommendation": "Prefer the ordinary newbirth pack+singlepagedindex layout and one directlegacy->paged conversion IF exactfinalpin supports it. ExistingF09/F10/F14 can cover that boundedlongstage. Do not add two-location descriptor semantics solely toobtainforecastrelease. F14expires onlyafteractualenginecleanupandcompleteproof. F11requires reviewedstreaming operationalcapture/restore or newdiskarchiveallocation; do not assumeoldarchivecoversnewformat.",
+  "authenticated_geometry": {
+    "receipt": "C:/file-native-packing-20261020/long-matrix-fixed2/PZ-build.json",
+    "receipt_sha256": "a54a04a4fdc8dad85dee038502976886b015ed5b53bb1b8fbcf32dcffe8ca1ad",
+    "source_full_restore_bytes": 592458971,
+    "old_containers_bytes": 283460393,
+    "old_pack_payload_bytes": 220489784,
+    "old_index_bytes": 62970609,
+    "descriptors": 16,
+    "new_paged_index_upper_bytes": 77128970,
+    "index_upper_status": "CP3read-onlyupper77,128,970 acrosssame16groups, not measuredcandidate. Actualsourcepin/cohort/grouping/codecbounds mustmatchbeforebuild.",
+    "new_PZ_pack_bytes_assumption": 220489784,
+    "assumption_conditions": "Same full rawcohort/exactrecordbytes, grouping,codec/version make existingpackbytes credibleexpectedbound. If candidate regrouping/codec/layout differs, recalc beforewrite. No silentrecord exclusion/reducedoracles."
+  },
+  "applied_long_reservations": {
+    "F09": 592458971,
+    "F10": 83886080,
+    "F14": 283460393,
+    "F11": 676345051,
+    "total_bytes": 1636150495,
+    "no_new_allocation": true
+  },
+  "phase_peaks": [
+    {
+      "phase": "A initialfreshindependentlegacyrestore andoriginalwhole-indexbaselines",
+      "charge_categories": [
+        "F09"
+      ],
+      "source_logical_bytes": 592458971,
+      "conditions": [
+        "Restoreall5807inventoryfiles incl246560316testledger fromprotectedarchive; excludedephemeralgates only, includenewformatdurablepinmetadatawhenlatercaptured.",
+        "Completeindependentbyte/outcome/source oracle andfulloriginalsixcategorybaselines; no protectedoriginalengineopen/recovery.",
+        "Newroot authorizeddisposable forenginephysicalcleanup; priorarchive andoriginals untouched."
+      ]
+    },
+    {
+      "phase": "B ONE directlegacy->newpaged PZ build/activation witholdcontainersretained",
+      "charge_categories": [
+        "F09",
+        "F10",
+        "F14"
+      ],
+      "combined_cap_bytes": 959805444,
+      "projected_source_plus_new_containers_bytes": 890077725,
+      "remaining_stage_headroom_bytes": 69727719,
+      "conditions": [
+        "No intermediatelegacygenerationfullrepack/secondlongclone. Exactfinalsource must support directconversion andlegacyquiescence.",
+        "Newphysicalpack/indexwrites counted once; currentCP1install writesdirectlytosinglefreshbirthpathname fromRAM. FinalCP3diskstagingmustbeaudited; any extradiskcopy counts against69,727,719headroom.",
+        "Allold+newfiles,journals,catalogs,Work,pins,stages,progress,deferred/garbage count. F10indexupperleaves6,757,110 foritsmetadata; allcategoryorcombinedreassignmentrequiresrecordedguardbounds.",
+        "Fullcandidateglobalverificationandcompleteinputbytecorrespondence beforeactivation; fullrecord/outcome oracleafteractivation.",
+        "Failureprefix/stale candidate remainscharged; no automaticsecond297MBattempt without freshcensus andguardedengineabort/reapingproof or newadmission."
+      ]
+    },
+    {
+      "phase": "C nativeenginecleanup,quiescentfulloracleandallpathcensus",
+      "charge_categories": [
+        "F09",
+        "F10",
+        "F14 untilproof"
+      ],
+      "projected_after_actual_removal_source_bytes": 606617332,
+      "post_cleanup_F09_plus_F10_cap_bytes": 676345051,
+      "post_cleanup_headroom_bytes": 69727719,
+      "conditions": [
+        "Onlyengineprotocol mayremoveobsoletecontainers innewdisposablederivative. No manualdeletion/oldtarget/protectedarchive change.",
+        "No removalcredit fromjournal labels/processdeath/plannedcleanup. Verify exactbefore/afterpathhashinventory andsuccessfulnative removal/absence peroldcontainer. PreexistingabsentP0 paths are reconciledwithoutcredit.",
+        "Releasealloldreaders/owners; oldgenerationretirementjobs/stages/abandoned/garbage/deferredstate mustbeemptyorboundedandexplicit. SelectedWork completion andnativeabsencebothrequired.",
+        "FullsourceoracleacceptedH101007/completechosenrepresentation aftercleanup; selectedsemanticbindingunchanged, expectedpermanent/outcomedigestsunchanged.",
+        "Allproducer/reader/maintainerJobs empty, ownedhandlesclosed,sourcequiescentandpinnedforcapture. No furtherwhole-longphysicalrebuildscheduled afterthispoint."
+      ]
+    },
+    {
+      "phase": "D finalnewformatoperationalcapture+independentfreshrestore+acceptedsemanticsuccessor",
+      "charge_categories": [
+        "F09+F10 source",
+        "F11 destination+boundedcapturemetadata+successor"
+      ],
+      "projected_two_roots_no_archive_bytes": 1213234664,
+      "post_F14_total_cap_bytes": 1352690102,
+      "two_roots_headroom_bytes": 139455438,
+      "F11_extra_headroom_after_projected_destination_bytes": 69727719,
+      "capture_metadata_reservation_within_F11_bytes": 8388608,
+      "successor_positive_growth_reservation_within_F11_bytes": 16777216,
+      "max_actual_source_for_F11_with_these_extra_reservations_bytes": 651179227,
+      "conditions": [
+        "Streamingmode mustbeexplicitlyreviewed: no persistentnewcompressedtransportfile, no intermediatefullsnapshotclone; allsourcebytes throughoneboundedpipe/stream toquarantineddestination.",
+        "Sourcekeptquiescent asretainedfinal-formatoperationalimage with completefileinventory/selectedbinding before/afterstream. Dest remainsquarantineandneverengineopened untilEOF/hash/fullmanifest/sourcecheckscomplete.",
+        "Producerandindependentconsumer hashentirecompressedstream;gzipCRC/trailer/EOF andexactFNOP1frame/end validated; everypath/size/rawhash matchesindependentfrozen sourceinventory, exactfile/directoryclosure andaggregatecounts checked.",
+        "Boundedmemory/backpressure;allsourceanddestinationdatafilesquiescent/fyncedasexistingprofile requires, excludeonlytrueephemeralgates, preservephysical-pins/*.lock JSONidentity andselectedWork/stages/catalogs/indexes.",
+        "Fullindependentrestorednewformatbyte/outcome/source/navigation oracles, thenoneboundedacceptedsemanticsuccessor onDESTONLY with fullpostsuccessororacle. Source staysread-only, no furtherlongphysicalrebuild.",
+        "Require actualsourceS+8MiBcapturemetadata+16MiBsuccessorgrowth<=F11, filecount+newmetadata/successor<=8000, andsourceS<=F09+F10. If not, re-admit beforecapture/successor.",
+        "StreamingstreamSHA/inventory+EOF proof is evidence ofcompletebytestreamcapture/restore, NOT aclaimretainedportablecompressedarchiveexists. If controllingdecisionrequiresretainednewcompressedarchive, thismode cannotdeclarecompletion withoutthatartifact andnewbudget.",
+        "Failedpartialdestination remainscharged; no automaticfullretry/deletioncredit."
+      ]
+    }
+  ],
+  "F14_expiry_rule": {
+    "maximum_conditional_forecast_reassignment_bytes": 283460393,
+    "not_actual_reclaimed_bytes_by_itself": true,
+    "must_precede_reassignment": [
+      "PhaseBcompleteonecohortconversion/fulloracles",
+      "PhaseCsuccessfulenginecleanup/nativeallpathcensusandfullquiescentoracle",
+      "Alloldcontainers actuallyremoved orpreexistingabsenceexplicitwithoutcredit",
+      "No pendingoldreaders/Jobs/handles/stages orfuturewholelongrebuild need",
+      "Postsource fitsF09+F10andstreamingF11conditionsaccepted",
+      "Meta recordsnewactual+unusedforecastpartition beforeenlargedqualificationrelease"
+    ],
+    "double_credit_prohibition": "Beforecleanup,F09/F10/F14 coveractualsource+old/newcoexistence. Aftercleanup,sourceactual fallsandfitsF09/F10; F14unusedfuturecoexistenceforecastmayexpire. Do notsubtract283MBactualANDsubtractF14againfromseparatelycountedactual; eachactualpathonceplusstillunusedreservations."
+  },
+  "F11_disk_archive_comparison": {
+    "historical_protected_archive_bytes_reference": 313275597,
+    "not_future_archive_size_guarantee": true,
+    "projected_destination_plus_same_size_new_archive_bytes": 919892929,
+    "over_F11_bytes": 243547878,
+    "max_new_persistent_archive_if_pooling_F09F10_and_F11_slacks_beforemetadata_successor": 139455438,
+    "source_archive_restore_threecopy_reference_bytes": 1526510261,
+    "all_long_caps_with_F14_bytes": 1636150495,
+    "headroom_if_F14_kept_for_diskarchive_reference": 109640234,
+    "maximum_potential_F14_release_at_reference_before_overheads": 109640234,
+    "fullF14release_not_supported_if_retained_archive_reference_persists": true,
+    "protected_prior_archive_not_newformat_restore_substitute": true
+  },
+  "native_target_conditional_rule": {
+    "current_each_cap": 268435456,
+    "potential_each_new_cap": 201326592,
+    "potential_twohost_unused_release_bytes": 134217728,
+    "proof_before_reassignment": [
+      "Finalreviewedsourcepin, sameprivateNEWtargetpath/profile/feature/Cargo.lock/nativecompilerbindings; offlinej2guardedbuildandallunittestexecutablescompiled --no-run.",
+      "Actualcomplete target+allretainedexecutable/source/artifactcopies within192MiB; fixtures80,976,318outsidebuildquota viaEXP_PACK_TEST_ROOT.",
+      "Peak/sourceartifactcoexistence observedwithin current256cap, processclosureandsharedcachegrowthcharged.",
+      "No remainingcompile/feature/helper variant orfutureadditionaltarget/rebuild unreserved; reduced192guard acceptedbeforeunits execute.",
+      "HistoricalMac81,216,173B/400 andLinux126,797,363B/408 arefeasibilityonly, notfinalmeasuredproof."
+    ],
+    "no_growth_credit_or_deletion": true
+  },
+  "whole_future_conditional_arithmetic": {
+    "failedfull448host_F07192_forecast_bytes": 47641536885,
+    "future_actual_cleanup_F14_forecast_expiry_bytes": 283460393,
+    "future_finalnative_target_unused_release_bytes": 134217728,
+    "potential_revised_complete_forecast_bytes": 47223858764,
+    "cap_bytes": 47244640256,
+    "potential_margin_bytes": 20781492,
+    "requires_all_prior_supported_release_candidates_from_audit004": "C1Win192/Linux64,C2Win128,F05dynamic256to768MiB stillneed allocatoracceptance; MacC164retained, closeoutreserveuntouched",
+    "F07_files_recommendation": 40000,
+    "projected_files_includingF07_plus10k_andprior64claimslots": 4842604,
+    "file_margin": 157396,
+    "not_activated": true
+  },
+  "F07_helper_review": {
+    "pin": "af2cf2af7f28d785f4d8a0b137a0f929e5d19fc5",
+    "sha256": "08feceddcf74a3f9da8c4fe187728faaf6ba2869cfc78156de451c1f206d1748",
+    "complete_forecast_bytes": 195311382,
+    "proposed_cap_bytes": 201326592,
+    "slack": 6015210,
+    "old_N64_all_artifacts_counted": 8435478,
+    "two_finalstores_percell": true,
+    "N1k_old_d70_thirdstore": false,
+    "actualsource_does_not_consume_oldmatchedseeds": true,
+    "held_pending_allocation": true
+  },
+  "disposition": "Conditionalstagedroute isresourcecredible under EXISTING longreservations aftersource/guard/metareview, withoutnewdescriptorlocationcomplexity. Thisanalysis grants NOnewGO and releasesNOreservation. Enlargednative/Windowsfullcapsules remainHOLDuntilactualmeasurements/fulloracle/processclosure plusfinalF11profile review validatecompletebudget. No cap/reserveincrease, protecteddeletion, clonecredit or matrixreduction."
+}

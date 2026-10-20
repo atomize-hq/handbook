@@ -1,0 +1,2964 @@
+{
+  "status": "READ_ONLY_CONDITIONAL_TARGET192_FEASIBILITY_NOT_RELEASE",
+  "epoch": 1792531657.418243,
+  "source_pin": "62ce963085ac054bcc34eb21c6733b94db160975",
+  "target": "/home/spenser/file-native-online-linux-20261020/target",
+  "current_bytes": 126797363,
+  "current_files": 408,
+  "current_groups": {
+    "registry-and-admin": {
+      "bytes": 71326130,
+      "files": 274
+    },
+    "local-package": {
+      "bytes": 39464407,
+      "files": 34
+    },
+    "registry-build": {
+      "bytes": 16006826,
+      "files": 100
+    }
+  },
+  "current_local_deps_bytes": 20959160,
+  "current_local_fingerprint_bytes": 14090,
+  "current_artifacts": [
+    {
+      "path": ".rustc_info.json",
+      "bytes": 1039,
+      "sha256": "df56436a5512ced44eff0c3ea3c290c0b07657c2cb9f464d7676b56723e9503d",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.cargo-lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/block-buffer-58969ce616c2ad7f/dep-lib-block_buffer",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/block-buffer-58969ce616c2ad7f/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/block-buffer-58969ce616c2ad7f/lib-block_buffer",
+      "bytes": 16,
+      "sha256": "1aeb42991db703ac8b28024cc38dde890f36ec982d5ce947acdbc5ca2322914b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/block-buffer-58969ce616c2ad7f/lib-block_buffer.json",
+      "bytes": 425,
+      "sha256": "060a1654e591b748931f72a441d61999bc152fcd6b0cbe42a61f9127912a64e5",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/cc-a696846de8fbf1ab/dep-lib-cc",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/cc-a696846de8fbf1ab/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/cc-a696846de8fbf1ab/lib-cc",
+      "bytes": 16,
+      "sha256": "091aaf40cac4c3d3eafd3a69523cc0dc92f73f28df124fffe1747104f0e24070",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/cc-a696846de8fbf1ab/lib-cc.json",
+      "bytes": 644,
+      "sha256": "0e26a4c43b2fef278eed0cbb17afa64199d35c29434f584a2e549d4d41d19b95",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/cfg-if-46859684c6fd246d/dep-lib-cfg_if",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/cfg-if-46859684c6fd246d/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/cfg-if-46859684c6fd246d/lib-cfg_if",
+      "bytes": 16,
+      "sha256": "192ddbdbc7391cce0e89cbc1ec39e5a5d8862b5503ef7d1294a100526629299a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/cfg-if-46859684c6fd246d/lib-cfg_if.json",
+      "bytes": 378,
+      "sha256": "e1ecf6c47909f211b599d6242cc4bd078ec75197c677640ed6e22b08986cb3d3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/cpufeatures-38122a3e7ee1c3f6/dep-lib-cpufeatures",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/cpufeatures-38122a3e7ee1c3f6/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/cpufeatures-38122a3e7ee1c3f6/lib-cpufeatures",
+      "bytes": 16,
+      "sha256": "05f876b3fd4775d16ea9432b45cddf49ec34b4e3b5947085a7ce6c38fd2f8875",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/cpufeatures-38122a3e7ee1c3f6/lib-cpufeatures.json",
+      "bytes": 358,
+      "sha256": "300866f331f0d3443eb9452a42e2600430711a3a8be8664bd345536ea2dffe1e",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/crypto-common-dcde5dca831496a9/dep-lib-crypto_common",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/crypto-common-dcde5dca831496a9/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/crypto-common-dcde5dca831496a9/lib-crypto_common",
+      "bytes": 16,
+      "sha256": "e7b6d57da3851dc3f41d370d969dc3fcb3ba67033ca34a30f8900e31e2c15084",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/crypto-common-dcde5dca831496a9/lib-crypto_common.json",
+      "bytes": 531,
+      "sha256": "808e2d0958aadcb92be52d5a4f7c9f8eebee39a016e9da1b0a4238d17a901666",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/digest-1f6263320c2a95d1/dep-lib-digest",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/digest-1f6263320c2a95d1/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/digest-1f6263320c2a95d1/lib-digest",
+      "bytes": 16,
+      "sha256": "056883915ef56b4753a975feed944762fb097ff238b9859c6f485160ee85403d",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/digest-1f6263320c2a95d1/lib-digest.json",
+      "bytes": 682,
+      "sha256": "5bc8de31a5ab5e1609bc9c9a0bda94bb8e310d8dd1ec74815bd34e09d636c67f",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/file-native-incremental-28a42899a8fe7db7/dep-lib-file_native_incremental",
+      "bytes": 320,
+      "sha256": "22cb7cad19b7fd2059507e69fe45756697481ce3a06278f16c23a3d10084cc98",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/file-native-incremental-28a42899a8fe7db7/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/file-native-incremental-28a42899a8fe7db7/lib-file_native_incremental",
+      "bytes": 16,
+      "sha256": "6e30d1015c2ac4962eff896b6d27acbb24feab10a977b229466d30d0dbf399d6",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/file-native-incremental-28a42899a8fe7db7/lib-file_native_incremental.json",
+      "bytes": 667,
+      "sha256": "751fc72ed340ae19ad6139f4b792e01ade9f6f66e155cbc16f085ce203bae371",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/file-native-incremental-28a42899a8fe7db7/output-lib-file_native_incremental",
+      "bytes": 11125,
+      "sha256": "a0acc540c055a7cdf54c733de4d189ed693e76c6d533c454c4a8a8b17aab425a",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/file-native-incremental-9c5a2a833af28a88/bin-file-native-incremental",
+      "bytes": 16,
+      "sha256": "eb16963e5d5b99f5bd603eb78a8c04f3dc2268d64e660bef95bb6aea61cc0089",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/file-native-incremental-9c5a2a833af28a88/bin-file-native-incremental.json",
+      "bytes": 742,
+      "sha256": "7bf00b000203256beb72c6e08820695cba8a06ebecbdd9a9ef05472c66a223d9",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/file-native-incremental-9c5a2a833af28a88/dep-bin-file-native-incremental",
+      "bytes": 31,
+      "sha256": "dd32b16937730a9a92a8070aa73e4dbbc632703f88e1395eb2196a4f6b11a95a",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/file-native-incremental-9c5a2a833af28a88/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/find-msvc-tools-3bd63f1cd2f23934/dep-lib-find_msvc_tools",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/find-msvc-tools-3bd63f1cd2f23934/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/find-msvc-tools-3bd63f1cd2f23934/lib-find_msvc_tools",
+      "bytes": 16,
+      "sha256": "0727ce8b0ee9ece028fdf4c1bb3ce68e8dc7c869e8d602bcb5d3bdae9fc0931f",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/find-msvc-tools-3bd63f1cd2f23934/lib-find_msvc_tools.json",
+      "bytes": 366,
+      "sha256": "35dfa7d7d14bbab72ee328ec0c5ecf04a5e37d237765fa9ebcb8ca3a5731d04b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/fs2-d2d75760aaf48668/dep-lib-fs2",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/fs2-d2d75760aaf48668/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/fs2-d2d75760aaf48668/lib-fs2",
+      "bytes": 16,
+      "sha256": "667d2a1cbf1dcf06a5560d7a995d94278cdf15c7e69f990a1659f7e733ad3947",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/fs2-d2d75760aaf48668/lib-fs2.json",
+      "bytes": 399,
+      "sha256": "aae3eb3a7c6edf2aeb4c46246261ee06ea5dbea0a5993e1febde5f4e50a04f4f",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/generic-array-5670661d62b73fa1/run-build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "e3d08f3a7873d72ea1f9a5a03da445ad9038f7512796f89f55c08137e3c8dca1",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/generic-array-5670661d62b73fa1/run-build-script-build-script-build.json",
+      "bytes": 258,
+      "sha256": "27bfa9cd36a608aab5e10108019644c620b165e4f21c715cce421cef28838d30",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/generic-array-8c6804b81fcfe3a9/build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "b44ea7e49c2b712f96b7f50abcf2fc72fa74efb8c6b9a3df57fe9242ce3a86d7",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/generic-array-8c6804b81fcfe3a9/build-script-build-script-build.json",
+      "bytes": 496,
+      "sha256": "148811150a247daaaebfc3f6f22aa4e762ff5cbe4fee02fbc2909e4b08419c96",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/generic-array-8c6804b81fcfe3a9/dep-build-script-build-script-build",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/generic-array-8c6804b81fcfe3a9/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/generic-array-b3410cfdcb563e5a/dep-lib-generic_array",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/generic-array-b3410cfdcb563e5a/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/generic-array-b3410cfdcb563e5a/lib-generic_array",
+      "bytes": 16,
+      "sha256": "9500b19402fcdca476b45bfae122307e10b8ce50b9fef9628ad1c406706995ea",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/generic-array-b3410cfdcb563e5a/lib-generic_array.json",
+      "bytes": 547,
+      "sha256": "e2907dfc4422e786b0998dd34a04480a8c6400e8d61ee3b70b61e439954d4637",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/itoa-074c51ea3812bd39/dep-lib-itoa",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/itoa-074c51ea3812bd39/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/itoa-074c51ea3812bd39/lib-itoa",
+      "bytes": 16,
+      "sha256": "d24b3fc8c3af52dde619d9d35ed54c1b2036f9e20446a4b4af130d5af2e3d460",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/itoa-074c51ea3812bd39/lib-itoa.json",
+      "bytes": 356,
+      "sha256": "88158b2cf39c41b46fbd18770f6e5466a577c3653eb6f088143b8b719053b78e",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/jobserver-d67c845a3295e0f1/dep-lib-jobserver",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/jobserver-d67c845a3295e0f1/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/jobserver-d67c845a3295e0f1/lib-jobserver",
+      "bytes": 16,
+      "sha256": "ee8a04e579547a53e77bd01f78a7e38b92f20267eeb75cc4a21243d18b98e635",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/jobserver-d67c845a3295e0f1/lib-jobserver.json",
+      "bytes": 410,
+      "sha256": "007e552887a19116c49f478e42bb73e94a9770526542d1917f40d5c576fe6905",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-021e3ac55f80f8da/dep-lib-libc",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-021e3ac55f80f8da/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-021e3ac55f80f8da/lib-libc",
+      "bytes": 16,
+      "sha256": "468e2c6e86ffcae06216fc7af18f88dd5dbe3de9deca4af336b3fa42aa88f798",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-021e3ac55f80f8da/lib-libc.json",
+      "bytes": 568,
+      "sha256": "84ac6e46c0f3bad067fc26513da25eaed6d0a50dff06f7869423cb45f68b2a09",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-3ef4a51b97e152e1/run-build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "c38e181ea4ee2b3edfff46d529274ad34cb222a74765d8f93b8e4369d865bb63",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-3ef4a51b97e152e1/run-build-script-build-script-build.json",
+      "bytes": 468,
+      "sha256": "e476fe54e317a2a442ccd9450270b14e0115cc14daea6b0ae21597b010540e15",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-4b9df6eb4ac9325d/build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "10e08a55926cc071f3900a6441c3f19d5daa3b0b3e22e418b27784ac4954b9dc",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-4b9df6eb4ac9325d/build-script-build-script-build.json",
+      "bytes": 522,
+      "sha256": "f29cfbd29135f648549008866896512b5109df3f2eb1cb2ea8f96b9443cfe4cf",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-4b9df6eb4ac9325d/dep-build-script-build-script-build",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-4b9df6eb4ac9325d/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-80dedf9472149c12/run-build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "898daa5a6c68dd7567ee815be6419854390657cf96954b893379bb4ff4ffabde",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-80dedf9472149c12/run-build-script-build-script-build.json",
+      "bytes": 468,
+      "sha256": "fd062fa0b1cdb0eaf579f17a8098ebb005b23990b16436e5d3e49613cbdbd18f",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-8f2fbb6ce246c439/dep-lib-libc",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-8f2fbb6ce246c439/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-8f2fbb6ce246c439/lib-libc",
+      "bytes": 16,
+      "sha256": "6436d6f76caebaa76dba558c9abc81912fecd847677dfa0a3b896462d8b42690",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/libc-8f2fbb6ce246c439/lib-libc.json",
+      "bytes": 569,
+      "sha256": "8563a636c7fb4a86377d5091222f85d94764b10417d7fd7be92a2dd72418fb59",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/memchr-e9d8d51591cca967/dep-lib-memchr",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/memchr-e9d8d51591cca967/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/memchr-e9d8d51591cca967/lib-memchr",
+      "bytes": 16,
+      "sha256": "390e1101edb0714b1e965133bfff459c096e2fdb59b55f39b2e5fe82180c4d0c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/memchr-e9d8d51591cca967/lib-memchr.json",
+      "bytes": 464,
+      "sha256": "c384a01bb1cb02aaf3c0eb76553671e83658ca61297abc98c70ae961d847f03b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/pkg-config-47b98ac83663a1f0/dep-lib-pkg_config",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/pkg-config-47b98ac83663a1f0/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/pkg-config-47b98ac83663a1f0/lib-pkg_config",
+      "bytes": 16,
+      "sha256": "5b908c817d021962f3c4da18cdcc3e3182036b4c458705b396bf68a13dd02873",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/pkg-config-47b98ac83663a1f0/lib-pkg_config.json",
+      "bytes": 354,
+      "sha256": "5eb11edd948a921c07784e31708063664590115e9ee74ada2bdad7edb4a3e04b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/proc-macro2-1641415e55011e4f/run-build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "e69d076a14d653208b42c1e736a45efd1a350c05aba2b69d68831f99d02f2090",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/proc-macro2-1641415e55011e4f/run-build-script-build-script-build.json",
+      "bytes": 490,
+      "sha256": "9c4d49b544df86ccbdbff822fa5ffbd7c0ca07377cddd303d8fdbe27d0d39dab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/proc-macro2-640e9bdcd9e12cab/build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "4934d04826e48551d239ad81073b3d8d8d6928ce3e633029ffe088ab86fdf57b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/proc-macro2-640e9bdcd9e12cab/build-script-build-script-build.json",
+      "bytes": 447,
+      "sha256": "c7123d7410f8f28cc93af938e64fa179937453f697c2212e0b6354652adb56de",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/proc-macro2-640e9bdcd9e12cab/dep-build-script-build-script-build",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/proc-macro2-640e9bdcd9e12cab/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/proc-macro2-c87ae25ce2b2faa5/dep-lib-proc_macro2",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/proc-macro2-c87ae25ce2b2faa5/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/proc-macro2-c87ae25ce2b2faa5/lib-proc_macro2",
+      "bytes": 16,
+      "sha256": "c0dcaa302b0a3765eb65253d73f1fe3d5b585ac6c9386e9d17e3bfa59de7d713",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/proc-macro2-c87ae25ce2b2faa5/lib-proc_macro2.json",
+      "bytes": 566,
+      "sha256": "c4201e3909ffefc617e2cf3b279994db6f43dc95c57307e02a2864a24dbb148e",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/project-consumer-38866cf71e08a33b/bin-project-consumer",
+      "bytes": 16,
+      "sha256": "7415c05a8b169be5e4b7fb4d3dfb3ffd58e3320a0ea3bda246636c81d9f4d0b3",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/project-consumer-38866cf71e08a33b/bin-project-consumer.json",
+      "bytes": 443,
+      "sha256": "caa6d7ca0e2d2ba2b1790f69287f961fb8304533fe56877f493404c9a7075fa8",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/project-consumer-38866cf71e08a33b/dep-bin-project-consumer",
+      "bytes": 31,
+      "sha256": "dd32b16937730a9a92a8070aa73e4dbbc632703f88e1395eb2196a4f6b11a95a",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/project-consumer-38866cf71e08a33b/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/quote-8b05c944f7b9a46b/build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "435140f817ba46fc64adedc6298be9ab27c7f74c78ef7afd53c73dd0d76550f6",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/quote-8b05c944f7b9a46b/build-script-build-script-build.json",
+      "bytes": 408,
+      "sha256": "d47648f0942110180c43e631e0b0abfde4816a0032927c177e92a7bdf974baba",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/quote-8b05c944f7b9a46b/dep-build-script-build-script-build",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/quote-8b05c944f7b9a46b/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/quote-d4308b99b55c6dc8/run-build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "5ecae82f688e4e936e60b2c1cae18b655ca795e2ad2a9e878f411d92e04aa54b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/quote-d4308b99b55c6dc8/run-build-script-build-script-build.json",
+      "bytes": 327,
+      "sha256": "2bb3a3705cf5651b4ef925edd8019bed562f564fbb11804715c616c3b2eb044f",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/quote-dd637d4dd1f56864/dep-lib-quote",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/quote-dd637d4dd1f56864/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/quote-dd637d4dd1f56864/lib-quote",
+      "bytes": 16,
+      "sha256": "fae6dbeae5143f058b40138edbaa4e89fa7ef4cb76f87e6a6e72f9d85f2a4101",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/quote-dd637d4dd1f56864/lib-quote.json",
+      "bytes": 517,
+      "sha256": "0bbd3562d4383be2f5ce6713048745ab806627b425161eb8ae0d6ab4c44201dd",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/research-consumer-31518807d669f34a/bin-research-consumer",
+      "bytes": 16,
+      "sha256": "5f49bda05362edbb01946ac82b66bd18c780c5e3031297d39be56ea385eeb227",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/research-consumer-31518807d669f34a/bin-research-consumer.json",
+      "bytes": 444,
+      "sha256": "fd94505d8c904cd8b5eb52242640f284bd85f361d7b63e2899960ff91d1a5a7b",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/research-consumer-31518807d669f34a/dep-bin-research-consumer",
+      "bytes": 31,
+      "sha256": "dd32b16937730a9a92a8070aa73e4dbbc632703f88e1395eb2196a4f6b11a95a",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/research-consumer-31518807d669f34a/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/ryu-54ab9059af110e0b/dep-lib-ryu",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/ryu-54ab9059af110e0b/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/ryu-54ab9059af110e0b/lib-ryu",
+      "bytes": 16,
+      "sha256": "d03c01ee1093e94d3c5cb4f189c9f60c6c59266e5dd616b2eba05e00f1778be3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/ryu-54ab9059af110e0b/lib-ryu.json",
+      "bytes": 366,
+      "sha256": "32f5f2a76dd06854092b2cfe68df829a4f1b206725dc24d222b789c3f35df1cc",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde-32898d8bf4ee85ef/dep-lib-serde",
+      "bytes": 71,
+      "sha256": "7f37f88f639718565442d4f88f65df48b0ee381c898a59cbf1423f70c60abed6",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde-32898d8bf4ee85ef/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde-32898d8bf4ee85ef/lib-serde",
+      "bytes": 16,
+      "sha256": "489f5512ac553c521e3c300dd343c8347ba71cb41066d7126062b05bed91b0d8",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde-32898d8bf4ee85ef/lib-serde.json",
+      "bytes": 675,
+      "sha256": "1e9ca43c2753bc27e856f0f82e3a60c198fa5d0e1aa5f86fa904133aafe2b18e",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde-ded2ce24cebc58ef/run-build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "b5ef15960faaf0f07d70fac5ce84b7bfd48c5a5a182b9d090033c9b29e2f11f5",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde-ded2ce24cebc58ef/run-build-script-build-script-build.json",
+      "bytes": 328,
+      "sha256": "17b3de4e859de428886a1cac49541ae6bba9b623a79768f0b01206af5fc6662d",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde-eac8d156e1aafd27/build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "babdb18eec29b6ea02d00a13c72b44b69401fb0676938198d145b2fa98cd8312",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde-eac8d156e1aafd27/build-script-build-script-build.json",
+      "bytes": 500,
+      "sha256": "b808f7c8dee54f85580d377f2d88da72607d03c971c0f7a5ed152e2d38a1c32c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde-eac8d156e1aafd27/dep-build-script-build-script-build",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde-eac8d156e1aafd27/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_core-23804d373f34135e/run-build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "fdf53b3f45e5669b099cf4adabc79880aab677eb96b690d17498bc45e3543683",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_core-23804d373f34135e/run-build-script-build-script-build.json",
+      "bytes": 334,
+      "sha256": "d0a0ebbdc2dbfd0797ca45a9fefa44606d364c70f11c728244a9e697ac964825",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_core-b48555e24db0f06e/dep-lib-serde_core",
+      "bytes": 76,
+      "sha256": "9a63c52ef9e1a35b645f1aaccdb44a4135206c3b63d0e9224b5298581778119c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_core-b48555e24db0f06e/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_core-b48555e24db0f06e/lib-serde_core",
+      "bytes": 16,
+      "sha256": "1c8ad92b43ee4311231611806cbabaef21ebb1cb7766e84954785df5685b421c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_core-b48555e24db0f06e/lib-serde_core.json",
+      "bytes": 509,
+      "sha256": "6e98d113beb1055eeee27357d3f907931adeb0a68e58479412738539a4d2a73c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_core-bc703b9ce42eef35/build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "25be40d105ab132fe92130c7fe65010a1383e85d6818a359f6e2b3a3f7c4c292",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_core-bc703b9ce42eef35/build-script-build-script-build.json",
+      "bytes": 457,
+      "sha256": "7985758090f1758f4d5b2a668d68ef6363187c3c36b55b3475885345a2f7556b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_core-bc703b9ce42eef35/dep-build-script-build-script-build",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_core-bc703b9ce42eef35/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_derive-5aa4dd4a4fd46b68/dep-lib-serde_derive",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_derive-5aa4dd4a4fd46b68/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_derive-5aa4dd4a4fd46b68/lib-serde_derive",
+      "bytes": 16,
+      "sha256": "7825a3c9b1ce402d67aac963fe48b5a489897369290b5090cb40dbb8fdf748e5",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_derive-5aa4dd4a4fd46b68/lib-serde_derive.json",
+      "bytes": 585,
+      "sha256": "46f5c4722f1f45b20e3c871441ce70c86ff5d0ba2f79fc985c33360f085ad355",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_json-08f2035256154e2a/dep-lib-serde_json",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_json-08f2035256154e2a/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_json-08f2035256154e2a/lib-serde_json",
+      "bytes": 16,
+      "sha256": "a49bfa97ba067ace117c935ad75a8518b440a5455842a3a85e9cc147a8483964",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_json-08f2035256154e2a/lib-serde_json.json",
+      "bytes": 823,
+      "sha256": "55be5ecf7e73cb397a7d8fa472307647754def575d254c817b0e31e63c3495a1",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_json-38159fe781fbcbc3/run-build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "80ad29cfe2ff75370588d662760bd00030facb65bc59054f56600caee4f6082a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_json-38159fe781fbcbc3/run-build-script-build-script-build.json",
+      "bytes": 334,
+      "sha256": "8becd123f74edad02734c762008b5244890d82eeece3aa225addc6508ba3ad76",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_json-f5bf93390e17a453/build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "08a4487c9e112d47b026d07dada6f16db0515dc43876f71babbd9e343ccd6e01",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_json-f5bf93390e17a453/build-script-build-script-build.json",
+      "bytes": 540,
+      "sha256": "c76269617c0227bb050055946acbfac326d5d225928ad2b84aa358147ba4c7f6",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_json-f5bf93390e17a453/dep-build-script-build-script-build",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/serde_json-f5bf93390e17a453/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/sha2-2a7d97c59ba4c36b/dep-lib-sha2",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/sha2-2a7d97c59ba4c36b/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/sha2-2a7d97c59ba4c36b/lib-sha2",
+      "bytes": 16,
+      "sha256": "8e887453dbfb3cf2e966a6c661206158890e2649dbd57bcbba47f2a429d7ef89",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/sha2-2a7d97c59ba4c36b/lib-sha2.json",
+      "bytes": 685,
+      "sha256": "5443c08f7bc7475f81df4e444aa5d05827b3b977d97a87a7d08cef9dcec6a4f0",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/shlex-21c59ab66aa519c2/dep-lib-shlex",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/shlex-21c59ab66aa519c2/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/shlex-21c59ab66aa519c2/lib-shlex",
+      "bytes": 16,
+      "sha256": "8948bd323d944d4067ce607dc20ab1f138eda3a9aca8421b7319716f3c15c168",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/shlex-21c59ab66aa519c2/lib-shlex.json",
+      "bytes": 388,
+      "sha256": "e9f2278add3f9e77d6aabb1c958beef832e7ed8d1189bf923f4c1d28bc86ce60",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/syn-fdd856e2e39c49b9/dep-lib-syn",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/syn-fdd856e2e39c49b9/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/syn-fdd856e2e39c49b9/lib-syn",
+      "bytes": 16,
+      "sha256": "f2632face04a067100bcf6aa4ed5b3ff403352f3e9b82d73ddd9d3d486e5cfb9",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/syn-fdd856e2e39c49b9/lib-syn.json",
+      "bytes": 754,
+      "sha256": "63c145b2031e6de8bc944c43f5d8eb32b2b5a5829f13702f3b127e877063e00c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/typenum-466d2e3dac709a42/dep-lib-typenum",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/typenum-466d2e3dac709a42/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/typenum-466d2e3dac709a42/lib-typenum",
+      "bytes": 16,
+      "sha256": "14d962bc5e50160cb9e983e0ce78dd6e6016bedc073976d70ebf401b09751e6e",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/typenum-466d2e3dac709a42/lib-typenum.json",
+      "bytes": 422,
+      "sha256": "2f124122c1846c2f70ce0e1828568b2f79f2043434fb105fcd5b46ef82855588",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/unicode-ident-f5ee80b821a0006b/dep-lib-unicode_ident",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/unicode-ident-f5ee80b821a0006b/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/unicode-ident-f5ee80b821a0006b/lib-unicode_ident",
+      "bytes": 16,
+      "sha256": "30c3ee1a1eb09906a6febc0d429341f5cbcdcfa14c2bf8eababbda71ec33e498",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/unicode-ident-f5ee80b821a0006b/lib-unicode_ident.json",
+      "bytes": 362,
+      "sha256": "46b09b6bcb29b1af95b7d42f3d92a1df6b9fd85dfb6e42a0448c244c5be230e8",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/version_check-141f421cbfdea5c4/dep-lib-version_check",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/version_check-141f421cbfdea5c4/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/version_check-141f421cbfdea5c4/lib-version_check",
+      "bytes": 16,
+      "sha256": "85e72faf884ec22ce30b66852bc9d992e2d2b3f5f35108acb5ffa66973b1f52f",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/version_check-141f421cbfdea5c4/lib-version_check.json",
+      "bytes": 362,
+      "sha256": "dd7f1a2609e0f4c156b7bf46856186711d323b5dd1a53639daf87a78a955824c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-9d8a04e9c04e8826/dep-lib-zstd",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-9d8a04e9c04e8826/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-9d8a04e9c04e8826/lib-zstd",
+      "bytes": 16,
+      "sha256": "7c7cf734f34c5c170b77d8357cf1279c5b8c52abb303c0a3e3525641f53e4836",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-9d8a04e9c04e8826/lib-zstd.json",
+      "bytes": 650,
+      "sha256": "e74d562f5b51e70b152cde4341a87bd909ae51b59684c0795b2659d982fdd6c4",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-safe-3ebd488881846682/run-build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "5eff07a06b38c9b37fd9045e5e769e089d670e6a306e23f18b0ee062bbef12f0",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-safe-3ebd488881846682/run-build-script-build-script-build.json",
+      "bytes": 327,
+      "sha256": "e97c39d8731b0b73f7b4b06a78271079cd6d755ec248f65340d6a4053dac516a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-safe-77193e2180079a35/dep-lib-zstd_safe",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-safe-77193e2180079a35/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-safe-77193e2180079a35/lib-zstd_safe",
+      "bytes": 16,
+      "sha256": "d124b3313cd4f7d0fbcd8c0161b1bc8c346e90882280ad3e1958a045d2908aa0",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-safe-77193e2180079a35/lib-zstd_safe.json",
+      "bytes": 751,
+      "sha256": "3bb4caafcaaf732d9b494865d7a7c8a89fe3f9d3b1fbc47fad138f2c7db6df1a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-safe-a6b3cf3cb7ba7a04/build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "c002e1352377e2c382614e8573f9ecbaa9f3c917e46a001ef584ee9ec280c63e",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-safe-a6b3cf3cb7ba7a04/build-script-build-script-build.json",
+      "bytes": 637,
+      "sha256": "e9fa341464de460b87fbc55d9b401bbba4a7b69268e33ace3cd102003ddf7410",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-safe-a6b3cf3cb7ba7a04/dep-build-script-build-script-build",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-safe-a6b3cf3cb7ba7a04/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-sys-afdb3fae1594e158/dep-lib-zstd_sys",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-sys-afdb3fae1594e158/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-sys-afdb3fae1594e158/lib-zstd_sys",
+      "bytes": 16,
+      "sha256": "e220098810d6ff5fcc8d0fc35e5f0bd4212704814063dc23bf2bbf77aeba686e",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-sys-afdb3fae1594e158/lib-zstd_sys.json",
+      "bytes": 670,
+      "sha256": "b9e91dc7b0ac755d38ac51d3718e72b7cbe011e20bb933c8d60317d06554f461",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-sys-f3fb3376f6aedb7c/build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "d37a017833427c31709a84d3a09077d0df30f46652ce3c888f429c0d390c7fb3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-sys-f3fb3376f6aedb7c/build-script-build-script-build.json",
+      "bytes": 733,
+      "sha256": "d3f997011f67bfecefcabf8af5b616d95e0a1ecf86f8d768a500cd28f39249f3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-sys-f3fb3376f6aedb7c/dep-build-script-build-script-build",
+      "bytes": 14,
+      "sha256": "93a4afc37518a1bf7830744017176e1d1946e5df993e47159069839f61fe49ab",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-sys-f3fb3376f6aedb7c/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-sys-ffed14b8ce062b8d/run-build-script-build-script-build",
+      "bytes": 16,
+      "sha256": "25c3cb7008486b53cb82ddf709b98f151530ce7a8f02bf70d47a67dd591e96b0",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/.fingerprint/zstd-sys-ffed14b8ce062b8d/run-build-script-build-script-build.json",
+      "bytes": 2020,
+      "sha256": "c5e37f2ceef84e1f4532efc9df21beba92cf77135b0f12d1e12c3a3979f06d6a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/generic-array-5670661d62b73fa1/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/generic-array-5670661d62b73fa1/output",
+      "bytes": 34,
+      "sha256": "728ed3558e77726a99b8d4db0825e424cd99543ac81da7d80f84a5e04cf74869",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/generic-array-5670661d62b73fa1/root-output",
+      "bytes": 103,
+      "sha256": "db274633f81e86bc28259bf32bd3197908e1de2eafd75737c404110a93bea570",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/generic-array-5670661d62b73fa1/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/generic-array-8c6804b81fcfe3a9/build-script-build",
+      "bytes": 598128,
+      "sha256": "bcbfe2479f65cf959716ed79f1c4ba26074489398fa36f44dad51ccbc4bd6047",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/generic-array-8c6804b81fcfe3a9/build_script_build-8c6804b81fcfe3a9",
+      "bytes": 598128,
+      "sha256": "bcbfe2479f65cf959716ed79f1c4ba26074489398fa36f44dad51ccbc4bd6047",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/generic-array-8c6804b81fcfe3a9/build_script_build-8c6804b81fcfe3a9.d",
+      "bytes": 570,
+      "sha256": "362ae8ded4692e426b5198eecfc5020c45e8121f2bdbac6836ff4f30752f7a3b",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/libc-3ef4a51b97e152e1/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/libc-3ef4a51b97e152e1/output",
+      "bytes": 1478,
+      "sha256": "425a12207c5bfe7c3d4ba249841d7da1f5ca9b4a4dbf8e4eefe52ec4ee6f398f",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/libc-3ef4a51b97e152e1/root-output",
+      "bytes": 94,
+      "sha256": "4562ec6d3c7cf7b20812e73178b6f28ac37ea8a64b44ed52edf01f89e91ed733",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/libc-3ef4a51b97e152e1/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/libc-4b9df6eb4ac9325d/build-script-build",
+      "bytes": 659640,
+      "sha256": "caa890ce8bd4417460801e8b566588f99284ea5cf1019145c33d7abb89804af0",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/libc-4b9df6eb4ac9325d/build_script_build-4b9df6eb4ac9325d",
+      "bytes": 659640,
+      "sha256": "caa890ce8bd4417460801e8b566588f99284ea5cf1019145c33d7abb89804af0",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/libc-4b9df6eb4ac9325d/build_script_build-4b9df6eb4ac9325d.d",
+      "bytes": 528,
+      "sha256": "cf2b751bd08527819ed014a1b3eb281a1654c1e370ca7aa1ed062dd3ab1e6256",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/libc-80dedf9472149c12/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/libc-80dedf9472149c12/output",
+      "bytes": 1478,
+      "sha256": "425a12207c5bfe7c3d4ba249841d7da1f5ca9b4a4dbf8e4eefe52ec4ee6f398f",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/libc-80dedf9472149c12/root-output",
+      "bytes": 94,
+      "sha256": "3861d8c9208ab4963a3ac4c5c2ed30a8c0e0cc2f0b0037c476a23e1be6692d42",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/libc-80dedf9472149c12/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/proc-macro2-1641415e55011e4f/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/proc-macro2-1641415e55011e4f/output",
+      "bytes": 1061,
+      "sha256": "196b70ed0e47e00b2c4bb6fb3f905afa0ef532e0323e68790722afb598f83c73",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/proc-macro2-1641415e55011e4f/root-output",
+      "bytes": 101,
+      "sha256": "a4c14662a25ad52723c3320ba79d971e7a193da03c802212fdb825d24e70bc4e",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/proc-macro2-1641415e55011e4f/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/proc-macro2-640e9bdcd9e12cab/build-script-build",
+      "bytes": 605344,
+      "sha256": "2f89ebcdcac001bda411cf317b6a2b7686dcadaeb7266c0e6cc9f33ab7da6b7a",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/proc-macro2-640e9bdcd9e12cab/build_script_build-640e9bdcd9e12cab",
+      "bytes": 605344,
+      "sha256": "2f89ebcdcac001bda411cf317b6a2b7686dcadaeb7266c0e6cc9f33ab7da6b7a",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/proc-macro2-640e9bdcd9e12cab/build_script_build-640e9bdcd9e12cab.d",
+      "bytes": 563,
+      "sha256": "207d97c5dde8fa9d7dc5b919fd92d814ec469961920cebe12b9a3b7993b6c4e5",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/quote-8b05c944f7b9a46b/build-script-build",
+      "bytes": 547536,
+      "sha256": "535bc817e6a020b803b4cdb85770be94513fb68d0744cb6841a9f2bcf9ebd1dc",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/quote-8b05c944f7b9a46b/build_script_build-8b05c944f7b9a46b",
+      "bytes": 547536,
+      "sha256": "535bc817e6a020b803b4cdb85770be94513fb68d0744cb6841a9f2bcf9ebd1dc",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/quote-8b05c944f7b9a46b/build_script_build-8b05c944f7b9a46b.d",
+      "bytes": 530,
+      "sha256": "bd696df6e168d5a010fd410d22c249963bed62d8f875b2ef79413dec60a09ff8",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/quote-d4308b99b55c6dc8/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/quote-d4308b99b55c6dc8/output",
+      "bytes": 83,
+      "sha256": "e18aa0a6d8bc038d8be01c064d207eaefa1412edd991b27eb123b0664c53fecc",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/quote-d4308b99b55c6dc8/root-output",
+      "bytes": 95,
+      "sha256": "34b8a7f20f9731c2294a64ba1dad3cc861ecc60d005dc954ba4a805f46006a05",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/quote-d4308b99b55c6dc8/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde-ded2ce24cebc58ef/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde-ded2ce24cebc58ef/out/private.rs",
+      "bytes": 142,
+      "sha256": "f8e9470772811a1bdcd201fb21e14cbf37a57d192b38cd98f66bd4a83442c26b",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde-ded2ce24cebc58ef/output",
+      "bytes": 582,
+      "sha256": "fbefaabcc65c2512e804f217336578c3751a411d58efabf3d24b8a74e2072fbb",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde-ded2ce24cebc58ef/root-output",
+      "bytes": 95,
+      "sha256": "85fb928a0e49db6705da4bd1eb010f21d987aaef5c8381dc7867c253534fd1f5",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde-ded2ce24cebc58ef/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde-eac8d156e1aafd27/build-script-build",
+      "bytes": 577040,
+      "sha256": "34e7013c8bc0de355accfb5301f0604a3d578202a06b94b1832ef2174454ecb4",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/serde-eac8d156e1aafd27/build_script_build-eac8d156e1aafd27",
+      "bytes": 577040,
+      "sha256": "34e7013c8bc0de355accfb5301f0604a3d578202a06b94b1832ef2174454ecb4",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/serde-eac8d156e1aafd27/build_script_build-eac8d156e1aafd27.d",
+      "bytes": 533,
+      "sha256": "6826a60dfaab56e636ce7b7f57847e13445d458662dde4ddc71a1e514bd8e27c",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde_core-23804d373f34135e/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde_core-23804d373f34135e/out/private.rs",
+      "bytes": 90,
+      "sha256": "27ad1b5fb4eebeb1da6419cbfad3ac1922ed1d817fcbab0a1dae1bdfd38d8307",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde_core-23804d373f34135e/output",
+      "bytes": 484,
+      "sha256": "b05731ace603d330b9a7aaf76b8433df15c3e1b2a3a95f4c644d5f5ed0c82f84",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde_core-23804d373f34135e/root-output",
+      "bytes": 100,
+      "sha256": "6fe158e9bca216864d0967948ee3ebb47ae780286c250c5bc3dd03afaba2cac2",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde_core-23804d373f34135e/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde_core-bc703b9ce42eef35/build-script-build",
+      "bytes": 577408,
+      "sha256": "9c8184df57a392a92343e6398e468cf788dd0246b8e44e82f0cf626c04e060f0",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/serde_core-bc703b9ce42eef35/build_script_build-bc703b9ce42eef35",
+      "bytes": 577408,
+      "sha256": "9c8184df57a392a92343e6398e468cf788dd0246b8e44e82f0cf626c04e060f0",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/serde_core-bc703b9ce42eef35/build_script_build-bc703b9ce42eef35.d",
+      "bytes": 558,
+      "sha256": "9e4b7a3ed0c107c190d9926144140b068eb8e722e36da0640a6a417641c784ad",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde_json-38159fe781fbcbc3/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde_json-38159fe781fbcbc3/output",
+      "bytes": 132,
+      "sha256": "6bb524834a0c0657c682dbb81bc6eeb23ac92c48da502f17ce4455240e5d062b",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde_json-38159fe781fbcbc3/root-output",
+      "bytes": 100,
+      "sha256": "f1e34f8ef94c8f836f640c52671bbbc5ebed37da0eea92777fe7ea3d10eccafa",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde_json-38159fe781fbcbc3/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/serde_json-f5bf93390e17a453/build-script-build",
+      "bytes": 443224,
+      "sha256": "5fbcd2af5b7895c98db8825f327180379043c12dd93eae41a48535336b0aa298",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/serde_json-f5bf93390e17a453/build_script_build-f5bf93390e17a453",
+      "bytes": 443224,
+      "sha256": "5fbcd2af5b7895c98db8825f327180379043c12dd93eae41a48535336b0aa298",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/serde_json-f5bf93390e17a453/build_script_build-f5bf93390e17a453.d",
+      "bytes": 558,
+      "sha256": "974a72bc64058aae6f6019ea2a9ef9910ed54f2b8cb7c086dd0527f12a9e6ced",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-safe-3ebd488881846682/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-safe-3ebd488881846682/output",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-safe-3ebd488881846682/root-output",
+      "bytes": 99,
+      "sha256": "25846571ac081c07f1927577a0481ddfd7f0d5d9bd8bcee1ed7aaa4567246673",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-safe-3ebd488881846682/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-safe-a6b3cf3cb7ba7a04/build-script-build",
+      "bytes": 443936,
+      "sha256": "951161a5e1bd7ad61b386c5013cef6d31dc5515653afdfe4da8f74d3123d7fdb",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/zstd-safe-a6b3cf3cb7ba7a04/build_script_build-a6b3cf3cb7ba7a04",
+      "bytes": 443936,
+      "sha256": "951161a5e1bd7ad61b386c5013cef6d31dc5515653afdfe4da8f74d3123d7fdb",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/zstd-safe-a6b3cf3cb7ba7a04/build_script_build-a6b3cf3cb7ba7a04.d",
+      "bytes": 547,
+      "sha256": "9bdadd3e233a1559e82488f101f15828cecf79034118ae9fdccdfb94db99402a",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-f3fb3376f6aedb7c/build-script-build",
+      "bytes": 2421536,
+      "sha256": "a68c2ae8bd3dcfbf40de28c3e4e73fed531e22a9f64e35553cd97446b3e09006",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/zstd-sys-f3fb3376f6aedb7c/build_script_build-f3fb3376f6aedb7c",
+      "bytes": 2421536,
+      "sha256": "a68c2ae8bd3dcfbf40de28c3e4e73fed531e22a9f64e35553cd97446b3e09006",
+      "category": "registry-build",
+      "nlink": 2
+    },
+    {
+      "path": "release/build/zstd-sys-f3fb3376f6aedb7c/build_script_build-f3fb3376f6aedb7c.d",
+      "bytes": 575,
+      "sha256": "5b2b5d2152d439f7a51b84f98e2338d5301b770486c4eb3728a46731238afac9",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/invoked.timestamp",
+      "bytes": 48,
+      "sha256": "5a109e6643e8d3e88642e3f35e85d2a83e639d07523aa6e99166c48178e965c3",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/4df03d43a7b8ac19-huf_decompress_amd64.o",
+      "bytes": 3424,
+      "sha256": "c2fc4cb738b2cdeb8cebb55d82a1f33078aae3c9990e917a1c0b73a84fe6efe7",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/4f97f2375d6aa471-debug.o",
+      "bytes": 1048,
+      "sha256": "c8a791a76fcb0c92c8126fd25b54c1c39cee9452594fddc24184b731da55c09a",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/4f97f2375d6aa471-entropy_common.o",
+      "bytes": 8648,
+      "sha256": "6c97728a45288f6d67738fd6cdde6b1ab5e1040cf0deeefe9971a76c5b475832",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/4f97f2375d6aa471-error_private.o",
+      "bytes": 8448,
+      "sha256": "8d0e69dc8816beb35d6aaacbdf4b0f4c9732fda0e094a74e22fa917e55a03fbc",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/4f97f2375d6aa471-fse_decompress.o",
+      "bytes": 11784,
+      "sha256": "cd6e2fe76a9f220681e95adec7b0d73380018bd30291da7c4153f0f149ff025a",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/4f97f2375d6aa471-pool.o",
+      "bytes": 3016,
+      "sha256": "b509dce4074a63133886d1c4d6391548673f0a496f945003cb859532fd97f242",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/4f97f2375d6aa471-threading.o",
+      "bytes": 1096,
+      "sha256": "4782c6bef245f6523bf8ce8aeda6a89c739428f2340985d7237982dd026be8a3",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/4f97f2375d6aa471-zstd_common.o",
+      "bytes": 2832,
+      "sha256": "ba414838689c232b6cb054e2099a7a4abc11274aa2637f31b0d897c78336b6c8",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-fse_compress.o",
+      "bytes": 9592,
+      "sha256": "033314843f036a44732ba1df93f96433b62c9764de807e7c94d4baccdfdc738f",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-hist.o",
+      "bytes": 7472,
+      "sha256": "8c00dab029ee8827820a5b3b632e1b7a987c72e439f3a2bdd9585be1ec8c66cc",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-huf_compress.o",
+      "bytes": 33344,
+      "sha256": "ff46077fae092c90b8b8ddda4516dc92df468890e68965c9e9bec51a22f58fab",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-zstd_compress.o",
+      "bytes": 175904,
+      "sha256": "427967fc99d8202502f16095fe445018c75b37edaeb1caca99fe81cc757759f6",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-zstd_compress_literals.o",
+      "bytes": 3928,
+      "sha256": "c646a59070dc3e477358ba271538f4ed903602d4d2952d0f497befb3055ca75d",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-zstd_compress_sequences.o",
+      "bytes": 12360,
+      "sha256": "3341a416d315e9d42d9135883923e28914027e0af2f3b3ce8c86fde383a5622e",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-zstd_compress_superblock.o",
+      "bytes": 9696,
+      "sha256": "47a2c1ca6f1c1e693b26ec3211a070306307b10d781310fb612392b38535c717",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-zstd_double_fast.o",
+      "bytes": 58592,
+      "sha256": "a1523f0f786679f948fb0f21430665afdcfcca08d297b64e6632d2dbe7523ce1",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-zstd_fast.o",
+      "bytes": 54016,
+      "sha256": "bf844617be252017fa2f44004faacf278991d6f6a5e4e6e886fe1ee949536f19",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-zstd_lazy.o",
+      "bytes": 282816,
+      "sha256": "441453be51ac5894940b7ddabfe3204818bb548eb314044bfb6be6385eae7b41",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-zstd_ldm.o",
+      "bytes": 15008,
+      "sha256": "39f33197bfe56431c9fa36b010a6fffddf28aed34f624ae0244c118a46c84552",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-zstd_opt.o",
+      "bytes": 74928,
+      "sha256": "7ebc5f5402e5ceae2d9999198ce19b859b87b26260a60ad354a46d84cf18343b",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-zstd_preSplit.o",
+      "bytes": 4448,
+      "sha256": "861483bd6217cf36be9bcc9f5d39ef13790a88023f28446d16b68e7217b14ae7",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/7c9960efb53c0b35-zstdmt_compress.o",
+      "bytes": 24136,
+      "sha256": "871539cea98c9e3ef91dfd6da8a9a1dc8ec55a9bba4cdded44b93731e66a5100",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/865a32d3ef5dbaad-huf_decompress.o",
+      "bytes": 76760,
+      "sha256": "a444347474810febec8f6d881ec1b9f331b74265feffcb18a13b4937e9e002f7",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/865a32d3ef5dbaad-zstd_ddict.o",
+      "bytes": 6640,
+      "sha256": "2f1efcab2860525219ba9076f73a3b4aa2652aad71ca73832629f85c1b2c2db7",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/865a32d3ef5dbaad-zstd_decompress.o",
+      "bytes": 62768,
+      "sha256": "1185fab39f230befd8819433e717bf411ec1ea40bb84fd41be53c2d6813d8d8f",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/865a32d3ef5dbaad-zstd_decompress_block.o",
+      "bytes": 69400,
+      "sha256": "6ef3c61b8bbdc2621611610d53f1d8b3b5af2789f2f3205f1994a8494f82f45e",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/flag_check",
+      "bytes": 1304,
+      "sha256": "e75124532d4f1a27a9fc11b5526168b2fb689b337f112e940cabd0d168954851",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/flag_check.c",
+      "bytes": 28,
+      "sha256": "65d2fad425e300ae19bd229a513aa7564086a7f0feb9405f806c70b2366ad59a",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/include/zstd.h",
+      "bytes": 181748,
+      "sha256": "9b4bc8245565c98ccfc61c07749928b57e7c0f6fddb0530c4f6aa1971893d88b",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/include/zstd_errors.h",
+      "bytes": 4278,
+      "sha256": "66a8c3f71d12ea6e797e4f622f31f3f8f81c41b36f48cad4f5de7d8bfb6aac0a",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/out/libzstd.a",
+      "bytes": 1034572,
+      "sha256": "a1e0a606cdde70d40908c70cf8097b402fcf4507754cb4558ad2ab4c2cc6bc92",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/output",
+      "bytes": 3223,
+      "sha256": "db1b950b62d82125a1289021e5c6e2377dcc6f0f371864aecc80ded1854f2382",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/root-output",
+      "bytes": 98,
+      "sha256": "dfdf63be6fda7a723f53b0b46c198dee9c5c9e5b4b707d6c197e3e93975f99b0",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/build/zstd-sys-ffed14b8ce062b8d/stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "category": "registry-build",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/block_buffer-58969ce616c2ad7f.d",
+      "bytes": 1117,
+      "sha256": "13325666f40aa57e93309fb049f5d92f4d58b5d432456df9304465603f66027b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/cc-a696846de8fbf1ab.d",
+      "bytes": 8855,
+      "sha256": "a4edf2f245f74c11f94d75499ebe8f6cc24f2df407b1ada94dc299fb346d3f22",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/cfg_if-46859684c6fd246d.d",
+      "bytes": 666,
+      "sha256": "7abc95c1d070c7a2519387e8012db54db8bbc682c917fc060f194c4fca824b24",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/cpufeatures-38122a3e7ee1c3f6.d",
+      "bytes": 1094,
+      "sha256": "46b98ede32bd92e32edf0845d4b44c33f141ac5cd9e5cf60b924010523494476",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/crypto_common-dcde5dca831496a9.d",
+      "bytes": 715,
+      "sha256": "49164b493f274465c597192bd5b2f65dd73b10e60c9cb59f1c908bfab0c10690",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/digest-1f6263320c2a95d1.d",
+      "bytes": 3168,
+      "sha256": "1bf11962f5b4cb837a915c29325d336db567ad6953d1bbd0a196b6573f3d4d51",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/file_native_incremental-28a42899a8fe7db7.d",
+      "bytes": 1291,
+      "sha256": "eb08ec028d52934b6a260e3e95942aa391297f113e193b69c838dbc417dde60b",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/file_native_incremental-9c5a2a833af28a88",
+      "bytes": 3545928,
+      "sha256": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5",
+      "category": "local-package",
+      "nlink": 2
+    },
+    {
+      "path": "release/deps/file_native_incremental-9c5a2a833af28a88.d",
+      "bytes": 261,
+      "sha256": "5b55c64d8bbeaf8f48ad738bd7375748acb7087110fd0d74c2d689a889da942f",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/find_msvc_tools-3bd63f1cd2f23934.d",
+      "bytes": 1575,
+      "sha256": "460ffc7386c381a8b06881f3d00dacc36b9d7d513682766e31e7640ef3cf7c94",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/fs2-d2d75760aaf48668.d",
+      "bytes": 1002,
+      "sha256": "c9ae47c357ce6a3168a8f03b89f06d992b9cbb5ceb2b7bb6adc52f71f8d80fc4",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/generic_array-b3410cfdcb563e5a.d",
+      "bytes": 3161,
+      "sha256": "93127d5c760a237f7db507b1e549d2a1ad3524d7be7c52a8492a57183fe26e35",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/itoa-074c51ea3812bd39.d",
+      "bytes": 1037,
+      "sha256": "cb3b1ae379a1c2cadfc507fcb9abb42c37792bc0f7c85cb514d3583319a258f3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/jobserver-d67c845a3295e0f1.d",
+      "bytes": 1465,
+      "sha256": "f641be245fbd939c4ec101eb323e381d6a4a389dc93bbc1caba20376c769e95d",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libblock_buffer-58969ce616c2ad7f.rlib",
+      "bytes": 63450,
+      "sha256": "3c1868e274c3274fa529b102d369910f8a3ae424be3e616b37835050e8080e31",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libblock_buffer-58969ce616c2ad7f.rmeta",
+      "bytes": 61048,
+      "sha256": "4df7eddfe8f2bad6db53bcc6cd35f19cede2d081f4d7e97dff525be37a597aba",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libc-021e3ac55f80f8da.d",
+      "bytes": 30252,
+      "sha256": "2a60af33acff5c3e3f83b15e89ada3e65cd15c75cdefa86840a73167bf050dfe",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libc-8f2fbb6ce246c439.d",
+      "bytes": 30252,
+      "sha256": "5b26b18ed7ac02e7fd852d6ca8be8872c3280845ada8e972ff094c9c56ec8510",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libcc-a696846de8fbf1ab.rlib",
+      "bytes": 4101460,
+      "sha256": "497e06baf473a34e13dffbb98f863de16602fc4cca8439e57328e1a432b6c749",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libcc-a696846de8fbf1ab.rmeta",
+      "bytes": 807055,
+      "sha256": "a9ac3f966b177302448787ca110ea9d348a4596370a08a42e397597a2213af4a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libcfg_if-46859684c6fd246d.rlib",
+      "bytes": 7214,
+      "sha256": "c5ec48564d42cc3256e675bd6a58973c8ace977066fa6922ddbb2831017da0e3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libcfg_if-46859684c6fd246d.rmeta",
+      "bytes": 5712,
+      "sha256": "874c1d575620c1b34e2f94471a93687c07c481d9b6d62e5c41119b7f608aa00a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libcpufeatures-38122a3e7ee1c3f6.rlib",
+      "bytes": 40560,
+      "sha256": "753b5594fb77ca16853675eee1574cbb6eb1f12906fa3b6ffbe2b197f46d700d",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libcpufeatures-38122a3e7ee1c3f6.rmeta",
+      "bytes": 39033,
+      "sha256": "c150191ff4365e26257743c66258a8915b9115160a80c5f2fbafba56216d1c1c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libcrypto_common-dcde5dca831496a9.rlib",
+      "bytes": 33006,
+      "sha256": "3765aa0b1b92cf3fc273ee926e0f378a701fb9b172019c35bf47d54b5b3175ef",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libcrypto_common-dcde5dca831496a9.rmeta",
+      "bytes": 30592,
+      "sha256": "fb289ac0a4d6b0e93817e8787f8167dd3d7c71f9bd9a599717da387cb1ae0a7e",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libdigest-1f6263320c2a95d1.rlib",
+      "bytes": 187004,
+      "sha256": "20a635d3947833f95db6a243c083611f0295b32f883975b6b5138a9289a62926",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libdigest-1f6263320c2a95d1.rmeta",
+      "bytes": 183453,
+      "sha256": "f47adb3e2b2fa005e60c5827077c72fbaaa06757ceb6e2cdd95f2ef65eafecac",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libfile_native_incremental-28a42899a8fe7db7.rlib",
+      "bytes": 7843556,
+      "sha256": "6468aa9dae9e6d5bdfe599d211206a0f0f64e42ada29fa793e82d4011992b3fd",
+      "category": "local-package",
+      "nlink": 2
+    },
+    {
+      "path": "release/deps/libfile_native_incremental-28a42899a8fe7db7.rmeta",
+      "bytes": 2475693,
+      "sha256": "e5e4f73bd94a8779e25535d4cf5e351665109819212262a2620f5b83083b27bd",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libfind_msvc_tools-3bd63f1cd2f23934.rlib",
+      "bytes": 279958,
+      "sha256": "26e31ac181bacf3ff5812745f74d04659a5bc88b6d16830e5c416b2097261c6c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libfind_msvc_tools-3bd63f1cd2f23934.rmeta",
+      "bytes": 50712,
+      "sha256": "cdaeaa6242e16c3d997365458e79a88dfd56409f33dc7b847c5e282875994f56",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libfs2-d2d75760aaf48668.rlib",
+      "bytes": 41260,
+      "sha256": "710eaefb102a58dfc05478e07e0bc5d7bc9fac28f335018c394874a0e99d94bc",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libfs2-d2d75760aaf48668.rmeta",
+      "bytes": 32773,
+      "sha256": "4008c55aff7f5d237e32df3be7362014b9fdd6704d7bd1134eae964f84cc4683",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libgeneric_array-b3410cfdcb563e5a.rlib",
+      "bytes": 991458,
+      "sha256": "6a6faa7f6db53cdc6d91f0aae3101e84c77b9c5722f0d861110d12ff6b77cd8b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libgeneric_array-b3410cfdcb563e5a.rmeta",
+      "bytes": 987104,
+      "sha256": "5367e14bd5257ed3e9c48f562d9c9142ccf7aa9134a4cea74658d7cf3eefacd3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libitoa-074c51ea3812bd39.rlib",
+      "bytes": 84550,
+      "sha256": "da1cc2d933e96f97f70320c81542b4fedad17fdd24e882320ecafa5ebf58d812",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libitoa-074c51ea3812bd39.rmeta",
+      "bytes": 75248,
+      "sha256": "213929a7d96620d12141c1b5292873bd4381f3cc76652bc02bd7d1f79e62af19",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libjobserver-d67c845a3295e0f1.rlib",
+      "bytes": 493282,
+      "sha256": "92994133d7af0c49d005626cc97789235dd8ca37c1a4ecbce9f0c05dfe6c1c44",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libjobserver-d67c845a3295e0f1.rmeta",
+      "bytes": 94062,
+      "sha256": "baa00304b682eade56a3fc6b1f2617e30d3964f65dcae64a931f7638f36131d1",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/liblibc-021e3ac55f80f8da.rlib",
+      "bytes": 4646376,
+      "sha256": "890ad487fb10ad5ea8252b68c92c5500b659cf2949a538ab18ea903f56ab37fe",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/liblibc-021e3ac55f80f8da.rmeta",
+      "bytes": 4631225,
+      "sha256": "c85d3e786118d2fe6e925fbe79274210c0cf95b33b85fcbf010e381aa7a367d7",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/liblibc-8f2fbb6ce246c439.rlib",
+      "bytes": 4581844,
+      "sha256": "c12eb546ae6264c50d011740ef4753c725910a7855653f020518f095e4960a2e",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/liblibc-8f2fbb6ce246c439.rmeta",
+      "bytes": 4552068,
+      "sha256": "9940c76147545d438da92392b59143df38951a94e5fa4e8c1eef95fd129b7fed",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libmemchr-e9d8d51591cca967.rlib",
+      "bytes": 1422040,
+      "sha256": "84822b9f94b320f1048e50c6edbb520d02d4d86f98434c1197cd8a657b8cc836",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libmemchr-e9d8d51591cca967.rmeta",
+      "bytes": 1346864,
+      "sha256": "74bd47e25af73949ebb4dddefacb75744f13bff2c1e518800ed99a82f5806459",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libpkg_config-47b98ac83663a1f0.rlib",
+      "bytes": 906202,
+      "sha256": "7ac96bde58d4d63062d369fb8c869055a4ae5b14d88393a0283438ab1e2530db",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libpkg_config-47b98ac83663a1f0.rmeta",
+      "bytes": 68587,
+      "sha256": "d4fcabb802d257005907433ef940f5993ffd44b2c5023d037f51677d0efcf64a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libproc_macro2-c87ae25ce2b2faa5.rlib",
+      "bytes": 1165796,
+      "sha256": "d4814395858f03a19fa9d77f68baeaa4e30e228ce37a058433b526df0a1cff2a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libproc_macro2-c87ae25ce2b2faa5.rmeta",
+      "bytes": 340068,
+      "sha256": "d721b6cb50a015851200b1e0655421afb773de836e2fe4c77fb642020555044f",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libquote-dd637d4dd1f56864.rlib",
+      "bytes": 483312,
+      "sha256": "e2589f2c2d863c320555bd0158b4bb9bd342629f406d63a2a09d6af8adca9fad",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libquote-dd637d4dd1f56864.rmeta",
+      "bytes": 270751,
+      "sha256": "3dca1b8722ed0d7609f586b48e91d635d97cd90ce437d89d0718db831c38f44b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libryu-54ab9059af110e0b.rlib",
+      "bytes": 78516,
+      "sha256": "8739a253737cd09ca0aed732f7648e17f268f74eedb2a95f01bed265fe8d2a7c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libryu-54ab9059af110e0b.rmeta",
+      "bytes": 57507,
+      "sha256": "0ab35be29fd4661572329a360a24dfa7db89e175bf88471a2d6594d072b49e7a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libserde-32898d8bf4ee85ef.rlib",
+      "bytes": 942550,
+      "sha256": "278e5dc12bd50e0b79a78293c9692172906ee7a2897d3744a246b9f82026138e",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libserde-32898d8bf4ee85ef.rmeta",
+      "bytes": 913364,
+      "sha256": "2f3f64363043633a7206c2a4e912563ab5e8b6df974d1bf59331351e0dd60b57",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libserde_core-b48555e24db0f06e.rlib",
+      "bytes": 5241458,
+      "sha256": "a53a3287796c769a4014830e3b68925c6ce91385318878e4c5f7b448d885e89a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libserde_core-b48555e24db0f06e.rmeta",
+      "bytes": 5150327,
+      "sha256": "fecc852feb4bc18dbcd5df7abbe401cc8cb2e66a47c8eb94a0a903a9a1ba2ec6",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libserde_derive-5aa4dd4a4fd46b68.so",
+      "bytes": 3649712,
+      "sha256": "97f175081cc6259d00785cb046a67b9cefbd4cdcce5675b20c0d24f2792f7323",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libserde_json-08f2035256154e2a.rlib",
+      "bytes": 1974568,
+      "sha256": "416e1046e052f2801d213730f15675dcc2ce47d8c14b50a4a27d519e12df3936",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libserde_json-08f2035256154e2a.rmeta",
+      "bytes": 1622523,
+      "sha256": "fa23bc9dc39d738b4d3a8e93ffaf6159c815707c264c527daaff09d486626d54",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libsha2-2a7d97c59ba4c36b.rlib",
+      "bytes": 709124,
+      "sha256": "d4d3dfa83c6f6039416f48f8a28c89c113c7a4655ccf8232b2253bc46d51c81c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libsha2-2a7d97c59ba4c36b.rmeta",
+      "bytes": 662517,
+      "sha256": "7364d103b94e78d5921a98edf40ee6e4a2a1e80d9fcfdd96ad018cb1e234d9a8",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libshlex-21c59ab66aa519c2.rlib",
+      "bytes": 126568,
+      "sha256": "9e1073dab313c2af3dfcb6d17d9033ac7cd469680f3994ea41a3c4403e4016f9",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libshlex-21c59ab66aa519c2.rmeta",
+      "bytes": 48764,
+      "sha256": "39ceba6d884ceead3b3f56b874cb78707fd1ac78d322af2801058bad587f704d",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libsyn-fdd856e2e39c49b9.rlib",
+      "bytes": 5938610,
+      "sha256": "bd5eecfe44addae9cd801069e575141226d1e74f690102d75bbbc4998022924b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libsyn-fdd856e2e39c49b9.rmeta",
+      "bytes": 2224730,
+      "sha256": "51c08a12a7f57ef68834781766e3f80b068432fb8b9ec3225e07997a844d2628",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libtypenum-466d2e3dac709a42.rlib",
+      "bytes": 2730534,
+      "sha256": "809e09e167ac0415e29d1fa79ec6a54375815d921c83bd7bb3c2ad63a2328833",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libtypenum-466d2e3dac709a42.rmeta",
+      "bytes": 2727069,
+      "sha256": "c764e03c86c12b0b69108434b6c5efd38b3711f84883256f2a10470aa996044a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libunicode_ident-f5ee80b821a0006b.rlib",
+      "bytes": 52172,
+      "sha256": "74596eef699b45dd65efed9e3cdc73e6d42ee21d07adb9374c0f84144017aac3",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libunicode_ident-f5ee80b821a0006b.rmeta",
+      "bytes": 34826,
+      "sha256": "d9b021ccc8419c75425eea8efbe600348dd3d5d00aa28c36dd2cc9d1b49b5271",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libversion_check-141f421cbfdea5c4.rlib",
+      "bytes": 434650,
+      "sha256": "b8cde73759375e941c9129a499febef8a5fafd9abd9e32674bd8f1062adc0480",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libversion_check-141f421cbfdea5c4.rmeta",
+      "bytes": 73482,
+      "sha256": "ded44c3bc081cb7693cb53540be26ebb50cc6cc095c3b9137f85130c8d1cf128",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libzstd-9d8a04e9c04e8826.rlib",
+      "bytes": 392674,
+      "sha256": "7ac954f8cd854aa9eef8fb42418efea2b5c83cc595cf4066b8faa529c4fc609c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libzstd-9d8a04e9c04e8826.rmeta",
+      "bytes": 319881,
+      "sha256": "b223126c94a52541c7c8aa0ac85d847a995cd085ec43b5c4a10d2f239996fec7",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libzstd_safe-77193e2180079a35.rlib",
+      "bytes": 255980,
+      "sha256": "abd9f3ab16794f70992bc2c3b45fcadecb49b826c593942bb84914cd069c3c6f",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libzstd_safe-77193e2180079a35.rmeta",
+      "bytes": 212431,
+      "sha256": "d35b04e27d15a68f7783fe16060b0c0e6ad060537f8e9e76840d3d6dec839db2",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libzstd_sys-afdb3fae1594e158.rlib",
+      "bytes": 1238878,
+      "sha256": "dca77672475c251a37d1e646b4079f4fbbd281f2fae392c5a24e4592c145c99a",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/libzstd_sys-afdb3fae1594e158.rmeta",
+      "bytes": 202931,
+      "sha256": "fea9c4432343d64a9299f0200763b8afae2610bb2d6b76b3c055678225541a3d",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/memchr-e9d8d51591cca967.d",
+      "bytes": 11520,
+      "sha256": "71edfc653c4dde82a3df104a2d0ea7135a4d96e19b25a0423fdfe3ac28c4d9ca",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/pkg_config-47b98ac83663a1f0.d",
+      "bytes": 698,
+      "sha256": "3a3d09af0ed289b721d2686fece555ce95f535bcf37ed63c001c19f6d0d4a235",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/proc_macro2-c87ae25ce2b2faa5.d",
+      "bytes": 4943,
+      "sha256": "a111ccd45875b8e887bba6008a91e76a67560b8e4537746f40a18b820ac33537",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/project_consumer-38866cf71e08a33b",
+      "bytes": 3545912,
+      "sha256": "c33ee66b3b59b6d8a6d4d6141749c59234e27ac22c755eadd7e3df9911b008cf",
+      "category": "local-package",
+      "nlink": 2
+    },
+    {
+      "path": "release/deps/project_consumer-38866cf71e08a33b.d",
+      "bytes": 301,
+      "sha256": "95485353299bdd809202ea226da6a63149adc51e941bd963e4a81e81f1e529d9",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/quote-dd637d4dd1f56864.d",
+      "bytes": 2965,
+      "sha256": "430f4b849da727d5815da3700e7d8c5f6d0aae8a67de5d4f37389a9fa445ea5e",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/research_consumer-31518807d669f34a",
+      "bytes": 3545912,
+      "sha256": "6c13e149f82f5483f34e08ed9c44e29b2b9fbca1264f3df8834bb289a1abb6b0",
+      "category": "local-package",
+      "nlink": 2
+    },
+    {
+      "path": "release/deps/research_consumer-31518807d669f34a.d",
+      "bytes": 306,
+      "sha256": "a01627a055aca1f5cf19c85c88702d7d864acf033ae10e3437a8e5191a99d5c7",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/ryu-54ab9059af110e0b.d",
+      "bytes": 4904,
+      "sha256": "6b8f6ae312c734bc6edcb787001c54ac49145fbd5b75f17ab5cf8da1eff6db7b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/serde-32898d8bf4ee85ef.d",
+      "bytes": 2807,
+      "sha256": "ec2276b04cd81d8a3fa406aa001b30dcb1dfdc0e4797ae6d14ee01caa0dc5406",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/serde_core-b48555e24db0f06e.d",
+      "bytes": 8380,
+      "sha256": "fb05f28c5d0513209f7f9fbcf107a3cdfbdbdc7738bcd5ff2b38c7f9543531e9",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/serde_derive-5aa4dd4a4fd46b68.d",
+      "bytes": 9269,
+      "sha256": "2a2976bfc53dd7c39d0d049a00c19dbc4980f5aea7800b79499cc9feece34569",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/serde_json-08f2035256154e2a.d",
+      "bytes": 6765,
+      "sha256": "311c5a034af30fd9d7094647b7aa154d24511210b43c282b385f47b314f3678d",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/sha2-2a7d97c59ba4c36b.d",
+      "bytes": 3720,
+      "sha256": "d972c88eda17e36552438b7a559b6977ddcb514395aa7bac0ee9936373f1dbda",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/shlex-21c59ab66aa519c2.d",
+      "bytes": 1028,
+      "sha256": "92f81112d74a578a7785383c6c282e537d372e26c48049f89ab8a725691e5888",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/syn-fdd856e2e39c49b9.d",
+      "bytes": 16459,
+      "sha256": "298c72fb47f56abd0d07bfa697af92402657296a69220b9a74730ceab86a91a9",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/typenum-466d2e3dac709a42.d",
+      "bytes": 5365,
+      "sha256": "cd3cd54e88c2dc390567c1c8cc434f6bf0324696e9bd4c32026ae31a22de4260",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/unicode_ident-f5ee80b821a0006b.d",
+      "bytes": 1128,
+      "sha256": "5c5abb4281d9bc7c08045a371abcdb8c71059cacfd9baa29382ca6ae07f89188",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/version_check-141f421cbfdea5c4.d",
+      "bytes": 1930,
+      "sha256": "9e8e23d2112b4e205526f906e5add44cdf8f833922030f19fe2b659f1e67e2e0",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/zstd-9d8a04e9c04e8826.d",
+      "bytes": 5480,
+      "sha256": "afc8d2d7ac125108b0bd51c9cc13927baa84909fa22880de6cf15686ee4ec92c",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/zstd_safe-77193e2180079a35.d",
+      "bytes": 1088,
+      "sha256": "a513c99e9cb9bd6d6692855fff93c9a3145a598c3a1a6e3c4dc2082380694b62",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/deps/zstd_sys-afdb3fae1594e158.d",
+      "bytes": 1181,
+      "sha256": "a8f2b31c7e5fd5a3b9f4fd6c88b22d877551489387876983c7dbc693e74a389b",
+      "category": "registry-and-admin",
+      "nlink": 1
+    },
+    {
+      "path": "release/file-native-incremental",
+      "bytes": 3545928,
+      "sha256": "11c306c4fa30d74a6f83274666024591e0e150674419d1e4dbe06e9a251a34f5",
+      "category": "local-package",
+      "nlink": 2
+    },
+    {
+      "path": "release/file-native-incremental.d",
+      "bytes": 2491,
+      "sha256": "5abea41b4d03ecca788540cdc4287ae545525878f6ffd774faa8d01618eb5265",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/libfile_native_incremental.d",
+      "bytes": 2352,
+      "sha256": "a0651bc22ebc39a8f9c0b357d5a3df08d62136ab4f0a4d1f1ed2d9c936e7c7ee",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/libfile_native_incremental.rlib",
+      "bytes": 7843556,
+      "sha256": "6468aa9dae9e6d5bdfe599d211206a0f0f64e42ada29fa793e82d4011992b3fd",
+      "category": "local-package",
+      "nlink": 2
+    },
+    {
+      "path": "release/project-consumer",
+      "bytes": 3545912,
+      "sha256": "c33ee66b3b59b6d8a6d4d6141749c59234e27ac22c755eadd7e3df9911b008cf",
+      "category": "local-package",
+      "nlink": 2
+    },
+    {
+      "path": "release/project-consumer.d",
+      "bytes": 2502,
+      "sha256": "5165b5bc3d9831ef072355af97c6f7cab47a4b9485a617b117eb0fbf2bc48997",
+      "category": "local-package",
+      "nlink": 1
+    },
+    {
+      "path": "release/research-consumer",
+      "bytes": 3545912,
+      "sha256": "6c13e149f82f5483f34e08ed9c44e29b2b9fbca1264f3df8834bb289a1abb6b0",
+      "category": "local-package",
+      "nlink": 2
+    },
+    {
+      "path": "release/research-consumer.d",
+      "bytes": 2504,
+      "sha256": "83cd042af984a1754e991874d73e37de994927726b53832225233b5f9e741444",
+      "category": "local-package",
+      "nlink": 1
+    }
+  ],
+  "current_fingerprints": [
+    {
+      "path": "release/.fingerprint/file-native-incremental-9c5a2a833af28a88/bin-file-native-incremental.json",
+      "sha256": "7bf00b000203256beb72c6e08820695cba8a06ebecbdd9a9ef05472c66a223d9",
+      "rustc": 12013579709055016942,
+      "profile": 2040997289075261528,
+      "config": 2069994364910194474,
+      "rustflags": [],
+      "features": "[]",
+      "target": 16312942712357782561
+    },
+    {
+      "path": "release/.fingerprint/file-native-incremental-28a42899a8fe7db7/lib-file_native_incremental.json",
+      "sha256": "751fc72ed340ae19ad6139f4b792e01ade9f6f66e155cbc16f085ce203bae371",
+      "rustc": 12013579709055016942,
+      "profile": 2040997289075261528,
+      "config": 2069994364910194474,
+      "rustflags": [],
+      "features": "[]",
+      "target": 13841677747306984049
+    }
+  ],
+  "source_root": "/home/spenser/file-native-online-linux-20261020/source/cp1-62ce9630/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+  "cargo_lock_sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+  "cargo_manifest_sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74",
+  "historical_reference": {
+    "core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+    "build_receipt": "/home/spenser/file-native-p-linux-20261020/final-source-stage/build-result.json",
+    "build_receipt_sha256": "a26974ba778fbcf2a371688c9f46b447b1586dcb35194a4419e3c9a1a3c0e819",
+    "build_target_bytes": 123577017,
+    "build_target_files": 409,
+    "all_workspace_units_receipt": "/home/spenser/file-native-p-linux-20261020/final-source-stage/unit-result.json",
+    "unit_receipt_sha256": "cb59e4a6f10d1ac6e5a1bba2b326f9d7dfbea06862af9532d8b2b87ae0640428",
+    "unit_target_bytes": 129336661,
+    "unit_target_files": 434,
+    "unit_delta_bytes": 5759644,
+    "unit_delta_files": 25,
+    "large_unit_fixture_separate_bytes": 80976318,
+    "historical_target_now_present": false,
+    "same_Cargo_lock_and_manifest": true,
+    "not_a_fresh_old_target_census": true
+  },
+  "prospective_allowances": [
+    {
+      "name": "one additional local deps+fingerprint set if switching once to stable build-work package path",
+      "bytes": 20973250,
+      "basis": "current measured same-package artifact size; possible duplicate conservatively charged"
+    },
+    {
+      "name": "release test executable set and test metadata",
+      "bytes": 8388608,
+      "basis": "historical measured delta5759644B, rounded upward; final new tests may use growth allowance"
+    },
+    {
+      "name": "final local code/test artifact growth",
+      "bytes": 16777216,
+      "basis": "prospective allowance, not measured compiler bound"
+    },
+    {
+      "name": "j2 codegen/archive/linker temporary coexistence",
+      "bytes": 16777216,
+      "basis": "prospective allowance; no new registry build expected under frozen lock/profile/toolchain"
+    }
+  ],
+  "conditional_forecast_bytes": 189713653,
+  "proposed_target_cap_bytes": 201326592,
+  "forecast_headroom_bytes": 11612939,
+  "existing_target_cap_bytes": 268435456,
+  "possible_later_forecast_release_bytes": 67108864,
+  "conditions": [
+    "no engine/build run for this audit",
+    "keep current256MiB guard and full existing forecast until exactpin/release",
+    "at most one new stable build-work source path; then reuse that path across remaining pins",
+    "old62ce source/archive/binary evidence preserved; no oldtarget deletion credit",
+    "same compiler/Cargo versions, Cargo.lock, features, profile, rustflags, registry paths; otherwise reforecast",
+    "CARGO_INCREMENTAL=0; release only; offline lockedworkspace j2; no debug or clean build",
+    "large cache unit uses external EXP_PACK_TEST_ROOT in F08; all compiler scratch is explicitly owned/accounted",
+    "final source build and all five required unit executables compiled before considering release; final same-pin source/binary binding and process closure",
+    "final retained target census mustremain<=192MiB with no more builds admitted; any subsequent source/build change needs fresh admission",
+    "sampled temporary peaks remain sampled; no universal Rust or arbitrary finalsource size guarantee"
+  ],
+  "no_fixture_or_target_or_dependency_mutation": true
+}

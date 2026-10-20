@@ -1,0 +1,19 @@
+{
+  "claim_id": "44GiB-CENTRAL-004-FULL-FINAL-QUALIFICATION-FORECAST-CORRECTION",
+  "utc": "2026-10-20T21:17:15.920849+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T211715Z.json",
+      "bytes": 16151,
+      "sha256": "2546259c68428b3148bab6584a1593d65ee4173766542eb6a1f4002a77c981bc"
+    },
+    {
+      "file": "claim-20261020T211715Z.md",
+      "bytes": 3729,
+      "sha256": "74a2f8eaa8681d517bc5bac4396b12fba48d040001558df4aac7cac6bb1d0d29"
+    }
+  ],
+  "prior_claim_sha256": "d9bdae045a8775f7bbccd1b54fb533fdc6758a329fce76fb3c5c7a6f1db352ef",
+  "status": "NO_GO_FOR_FINAL_QUALIFICATION_OR_NEW_LARGE_GROWTH__PROPOSED_REBUDGET_NOT_APPLIED",
+  "sealed": true
+}
