@@ -5,6 +5,8 @@ pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 static SEQ: AtomicU64 = AtomicU64::new(0);
 #[derive(Default, Serialize)]
 pub struct Metrics {
+    #[serde(skip)]
+    pub(crate) cleanup_budget:Option<crate::physical_lifetime::CleanupBudget>,
     pub physical_activation_holds_ns:Vec<u64>,
     pub physical_work_holds_ns:Vec<u64>,
     #[serde(skip)]
@@ -39,6 +41,12 @@ pub struct Metrics {
     pub bytes_result_read:u64,pub bytes_result_written:u64,
 }
 impl Metrics {
+    pub(crate) fn cleanup_step(&mut self)->Result<()> {
+        if let Some(b)=self.cleanup_budget.as_mut(){b.step()?;}Ok(())
+    }
+    pub(crate) fn cleanup_available(&self)->bool {
+        self.cleanup_budget.as_ref().is_none_or(|b|b.work_available())
+    }
     pub(crate) fn record_bytes(&mut self,path:&Path,n:u64,write:bool){
         let path=self.store_root.as_ref().and_then(|root|path.strip_prefix(root).ok()).unwrap_or(path);
         let has=|name:&str|path.components().any(|c|c.as_os_str()==name);
