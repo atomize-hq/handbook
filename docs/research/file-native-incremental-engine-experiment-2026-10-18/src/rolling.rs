@@ -27,7 +27,7 @@ pub(crate) fn validate(d:&Discovery)->Result<()>{
     for item in &d.deferred{
         if !valid_cutoff(&item.publication)||item.roles==0||item.roles>31||!ids.insert(item.publication.selected.publication.clone())||!matches!(item.reason.as_str(),"reservation"|"retired"|"oversize"|"partial"){return Err("integrity:deferred-eligibility".into());}
     }
-    if io::json(d)?.len()>MAX_STATE{return Err("quota:discovery-state-bytes".into());}Ok(())
+    let serialized=io::json(d)?;io::discovery_serialized(serialized.len());if serialized.len()>MAX_STATE{return Err("quota:discovery-state-bytes".into());}Ok(())
 }
 fn keys(p:&Publication)->Result<[Key;5]>{Ok([
     Key::new(&format!("publications/{}.json",p.id))?,Key::new(&format!("results/{}.json",p.result_hash))?,Key::new(&format!("attempt-hints/{}.json",p.attempt))?,
@@ -72,11 +72,11 @@ fn eligible(store:&Store,c:&Cutoff,p:&Publication,mask:u8,active:&BTreeMap<Strin
     }
     Ok(if deferred==0{None}else{Some(Deferred{publication:c.clone(),roles:deferred,reason:reason.into()})})
 }
-pub(crate) fn discover(store:&Store,prior:Option<Discovery>,v:&Value,m:&mut Metrics)->Result<(Discovery,BTreeSet<Key>)>{
+pub(crate) fn discover(store:&Store,prior:Option<Discovery>,v:&Value,m:&mut Metrics)->Result<(Discovery,BTreeSet<Key>)>{let _scope=io::DiscoveryScope::new(&m.discovery_context);let result:Result<(Discovery,BTreeSet<Key>)>=(||{
     let bootstrap=prior.is_none();
     if bootstrap&&v["bootstrap"].as_bool()!=Some(true){return Err("refused:explicit-discovery-bootstrap-required".into());}
     let mut d=prior.unwrap_or(Discovery{version:1,completed:None,interval:None,deferred:vec![],include_attempts:v["include_attempts"].as_bool().unwrap_or(true)});
-    validate(&d)?;
+    validate(&d)?;m.discovery_context.set((0,0,d.completed.as_ref().map(|c|c.sequence)));
     if v["include_attempts"].as_bool().is_some_and(|b|b!=d.include_attempts){return Err("refused:discovery-cohort-change-requires-reconciliation".into());}
     m.rolling_bootstrap=bootstrap;
     let limit=v["discovery_limit"].as_u64().unwrap_or(4096);
@@ -85,10 +85,10 @@ pub(crate) fn discover(store:&Store,prior:Option<Discovery>,v:&Value,m:&mut Metr
     let deferred=std::mem::take(&mut d.deferred);
     for old in deferred{
         if crate::physical_lifetime::cancelled(){return Err("cancelled:rolling-discovery".into());}
-        let p=store.publication(&old.publication.selected,m)?;m.rolling_deferred_visited+=1;
+        m.discovery_context.set((3,old.publication.sequence,m.discovery_context.get().2));let p=store.publication(&old.publication.selected,m)?;m.rolling_deferred_visited+=1;
         if let Some(next)=eligible(store,&old.publication,&p,old.roles,&active,&mut out,m)?{d.deferred.push(next);}
     }
-    if d.interval.is_none(){
+    m.discovery_context.set((1,0,m.discovery_context.get().2));if d.interval.is_none(){
         let h=store.snapshot(m)?;let target=Cutoff{selected:h.selected,sequence:h.publication.sequence};
         if d.completed.as_ref()==Some(&target){validate(&d)?;return Ok((d,out));}
         if d.completed.as_ref().is_some_and(|c|c.sequence>=target.sequence){return Err("integrity:discovery-non-descendant-head".into());}
@@ -106,7 +106,7 @@ pub(crate) fn discover(store:&Store,prior:Option<Discovery>,v:&Value,m:&mut Metr
         // Reserve one deferred slot before consuming a publication; a full set
         // applies explicit backpressure without advancing over an unknown hole.
         if d.deferred.len()>=MAX_DEFERRED{return Err("quota:deferred-eligibility-bound".into());}
-        let p=store.publication(&next,m)?;m.rolling_publications_visited+=1;
+        m.discovery_context.set((2,i.expected_sequence,m.discovery_context.get().2));let p=store.publication(&next,m)?;m.rolling_publications_visited+=1;
         if p.sequence!=i.expected_sequence||p.sequence==0&&p.predecessor.is_some()||p.sequence>0&&p.predecessor.is_none(){return Err("integrity:discovery-predecessor-sequence".into());}
         let c=Cutoff{selected:next,sequence:p.sequence};let mask=if d.include_attempts{31}else{7};
         if let Some(item)=eligible(store,&c,&p,mask,&active,&mut out,m)?{d.deferred.push(item);}
@@ -114,4 +114,30 @@ pub(crate) fn discover(store:&Store,prior:Option<Discovery>,v:&Value,m:&mut Metr
         io::checkpoint("rolling-discovery-publication")?;
     }
     validate(&d)?;io::checkpoint("rolling-discovery-complete")?;Ok((d,out))
+})();result
+}
+
+#[cfg(test)]
+mod boundary_tests {
+use super::*;
+fn padded_discovery(n:usize,target:Option<usize>)->Discovery {
+    let mut d=Discovery{version:1,completed:None,interval:None,include_attempts:true,deferred:(0..n).map(|i|Deferred{publication:Cutoff{selected:Selector{publication:format!("d{i:03}"),digest:"0".repeat(64)},sequence:0},roles:1,reason:"partial".into()}).collect()};
+    if let Some(target)=target {
+        let mut left=target.checked_sub(io::json(&d).unwrap().len()).unwrap();
+        for row in &mut d.deferred {let s=&mut row.publication.selected.publication;let n=left.min(99-s.len());s.extend(std::iter::repeat('x').take(n));left-=n;}
+        assert_eq!(left,0);assert_eq!(io::json(&d).unwrap().len(),target);
+    } d
+}
+#[test]fn discovery_count_bound(){
+    let d=padded_discovery(128,None);let bytes=io::json(&d).unwrap().len();
+    assert_eq!(validate(&d).unwrap_err().to_string(),"quota:discovery-state-bytes");
+    let e=validate(&padded_discovery(129,None)).unwrap_err().to_string();assert_eq!(e,"integrity:discovery-state");
+    eprintln!("boundary structural-deferred count128_bytes={bytes} count128=byte-refusal count129=count-refusal actual-reservations=0");
+}
+#[test]fn discovery_byte_bound(){
+    let mut d=padded_discovery(110,Some(32768));validate(&d).unwrap();
+    d.deferred.last_mut().unwrap().publication.selected.publication.push('x');
+    assert_eq!(io::json(&d).unwrap().len(),32769);assert_eq!(validate(&d).unwrap_err().to_string(),"quota:discovery-state-bytes");
+    eprintln!("boundary structural-discovery bytes32768=accepted bytes32769=refused actual-reservations=0");
+}
 }

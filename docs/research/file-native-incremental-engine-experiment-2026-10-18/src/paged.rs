@@ -115,7 +115,7 @@ impl Reader{
     }
 }
 pub(crate) fn verify_file(path:&Path,bytes:u64,hash:&str,m:&mut Metrics)->Result<()>{
-    let mut f=File::open(path)?;m.pack_metadata_stats+=1;if f.metadata()?.len()!=bytes{return Err("integrity:audit-file-size".into());}
+    let mut f=File::open(path)?;io::forbidden();m.pack_metadata_stats+=1;if f.metadata()?.len()!=bytes{return Err("integrity:audit-file-size".into());}
     let mut digest=Sha256::new();let mut buffer=[0u8;65536];let mut total=0u64;
     loop{let n=f.read(&mut buffer)?;if n==0{break;}total=total.checked_add(n as u64).ok_or("integrity:audit-overflow")?;if total>bytes{return Err("integrity:audit-file-changed".into());}digest.update(&buffer[..n]);}
     m.opens+=1;m.bytes_read+=total;m.pack_storage_bytes+=total;m.pack_full_audit_bytes+=total;

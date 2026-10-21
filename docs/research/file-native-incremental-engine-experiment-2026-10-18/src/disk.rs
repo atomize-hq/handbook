@@ -441,7 +441,7 @@ impl DiskIndex {
     }
 
     /// Initial bulk construction only. Runtime insertion always uses path COW.
-    pub fn bulk(store: &mut Objects, mut pairs: Vec<(String, Vec<u8>)>) -> Result<Self> {
+    pub fn bulk(store: &mut Objects, mut pairs: Vec<(String, Vec<u8>)>) -> Result<Self> {if !pairs.is_empty(){crate::io::forbidden();}
         if pairs.is_empty() {
             return Ok(Self { root: None });
         }
@@ -595,7 +595,7 @@ impl DiskIndex {
 
     /// Returns pair count. Global ordering, exact subtree ranges, height,
     /// repeated identities/cycles and a bounded traversal budget are checked.
-    pub fn audit(&mut self, store: &mut Objects) -> Result<usize> {
+    pub fn audit(&mut self, store: &mut Objects) -> Result<usize> {if self.root.is_some(){crate::io::forbidden();}
         fn visit(
             store: &mut Objects,
             id: &str,
@@ -637,7 +637,7 @@ impl DiskIndex {
 
 
 impl DiskIndex {
-    pub fn entries(&mut self, store: &mut Objects) -> Result<Vec<(String,Vec<u8>)>> {
+    pub fn entries(&mut self, store: &mut Objects) -> Result<Vec<(String,Vec<u8>)>> {if self.root.is_some(){crate::io::forbidden();}
         fn visit(store:&mut Objects,id:&str,expected:Option<&Bounds>,out:&mut Vec<(String,Vec<u8>)>,seen:&mut HashSet<Id>)->Result<()> {
             if !seen.insert(id.to_owned()) || seen.len()>MAX_AUDIT_NODES {return Err("integrity:cow-cycle-or-cap".into());}
             match read_node(store,id,expected)? {
@@ -720,7 +720,7 @@ fn decode_node(bytes:&[u8])->Result<Node> {
     if c.p!=bytes.len(){return Err("codec:trailing".into());}bounds(&node)?;Ok(node)
 }
 impl DiskIndex {
-    pub fn reachable(&mut self,store:&mut Objects)->Result<Vec<Id>>{
+    pub fn reachable(&mut self,store:&mut Objects)->Result<Vec<Id>>{if self.root.is_some(){crate::io::forbidden();}
         fn visit(store:&mut Objects,id:&str,expected:Option<&Bounds>,seen:&mut HashSet<Id>,out:&mut Vec<Id>)->Result<()>{
             if !seen.insert(id.to_owned()){return Err("integrity:repeated-tree-page".into());}
             if seen.len()>MAX_AUDIT_NODES{return Err("integrity:audit-cap".into());}
@@ -738,7 +738,7 @@ impl DiskIndex {
         }
         let mut out=vec![];if let Some(id)=&self.root{visit(store,id,None,&mut HashSet::new(),&mut out)?;}Ok(out)
     }
-    pub fn range(&mut self,store:&mut Objects,lo:&str,hi:&str)->Result<Vec<(String,Vec<u8>)>>{
+    pub fn range(&mut self,store:&mut Objects,lo:&str,hi:&str)->Result<Vec<(String,Vec<u8>)>>{if self.root.is_some(){crate::io::forbidden();}
         fn visit(store:&mut Objects,id:&str,expected:Option<&Bounds>,lo:&str,hi:&str,out:&mut Vec<(String,Vec<u8>)>,depth:usize)->Result<()>{
             if depth>MAX_HEIGHT as usize{return Err("integrity:range-depth".into());}
             let role=lo.split('/').next().unwrap_or("").to_owned();

@@ -3,8 +3,39 @@ use sha2::{Digest, Sha256};
 use std::{collections::BTreeMap, fs::{self, File, OpenOptions}, io::{Read, Write}, path::Path, sync::atomic::{AtomicU64, Ordering}, time::{Instant, SystemTime, UNIX_EPOCH}};
 pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 static SEQ: AtomicU64 = AtomicU64::new(0);
+
+static WRITERS:AtomicU64=AtomicU64::new(0);
+static CAPTURES:AtomicU64=AtomicU64::new(0);
+static FORBIDDEN:AtomicU64=AtomicU64::new(0);
+static DISCOVERY_SERIALIZED:AtomicU64=AtomicU64::new(0);
+static WORK_READ:AtomicU64=AtomicU64::new(0);
+static WORK_WRITTEN:AtomicU64=AtomicU64::new(0);
+pub(crate) type DiscoveryCell=std::rc::Rc<std::cell::Cell<(u8,u64,Option<u64>)>>;
+pub(crate) struct DiscoveryScope(DiscoveryCell,(u8,u64,Option<u64>));
+impl DiscoveryScope{pub(crate) fn new(cell:&DiscoveryCell)->Self{Self(cell.clone(),cell.replace((0,0,None)))}}
+impl Drop for DiscoveryScope{fn drop(&mut self){self.0.set(self.1);}}
+pub(crate) struct GlobalGate{file:Option<File>,writer:bool}
+impl GlobalGate{
+    pub(crate) fn new(file:File,writer:bool)->Self{if writer{&WRITERS}else{&CAPTURES}.fetch_add(1,Ordering::Relaxed);Self{file:Some(file),writer}}
+}
+impl Drop for GlobalGate{fn drop(&mut self){drop(self.file.take());if self.writer{&WRITERS}else{&CAPTURES}.fetch_sub(1,Ordering::Relaxed);}}
+pub(crate) fn forbidden(){if WRITERS.load(Ordering::Relaxed)>0||CAPTURES.load(Ordering::Relaxed)>0{FORBIDDEN.fetch_add(1,Ordering::Relaxed);}}
+pub(crate) fn discovery_serialized(n:usize){DISCOVERY_SERIALIZED.fetch_add(n as u64,Ordering::Relaxed);}
+pub(crate) fn record_envelope(path:&Path,n:usize,write:bool){
+    let dir=path.parent().and_then(Path::file_name).and_then(|s|s.to_str());let name=path.file_name().and_then(|s|s.to_str()).unwrap_or("");
+    let plan=dir==Some("physical-plans")&&name.strip_suffix(".json").is_some_and(crate::objects::valid_hash);
+    let stage=dir==Some("physical-progress")&&name.strip_suffix(".work-stage").is_some_and(crate::model::safe_id);
+    if plan||stage{if write{&WORK_WRITTEN}else{&WORK_READ}.fetch_add(n as u64,Ordering::Relaxed);}
+
+}
+pub(crate) fn remove_dir(path:impl AsRef<Path>)->std::io::Result<()>{forbidden();fs::remove_dir(path)}
+pub(crate) fn read_dir(path:impl AsRef<Path>)->std::io::Result<fs::ReadDir>{let entries=fs::read_dir(path)?;forbidden();Ok(entries)}
+
 #[derive(Default, Serialize)]
 pub struct Metrics {
+    pub rolling_publication_body_opens:u64,pub rolling_deferred_body_opens:u64,pub unchanged_historical_body_opens:u64,
+    pub rolling_discovery_metadata_bytes:u64,pub rolling_discovery_metadata_read_bytes:u64,pub rolling_discovery_metadata_written_bytes:u64,pub rolling_discovery_serialized_bytes:u64,pub rolling_deferred_rechecked:u64,pub forbidden_global_operations:u64,
+    #[serde(skip)] pub(crate) discovery_context:DiscoveryCell,
     pub pack_page_reads:u64,pub pack_pages_parsed:u64,pub pack_page_hash_bytes:u64,pub pack_index_metadata_bytes:u64,pub pack_full_audit_bytes:u64,pub pack_metadata_stats:u64,
     pub physical_upgrade_holds_ns:Vec<u64>,pub physical_upgrade_wait_ns:u64,pub physical_capture_bytes:u64,
     pub pack_page_resident_peak_bytes:u64,pub pack_page_parse_peak_bytes:u64,pub pack_legacy_index_bytes:u64,
@@ -50,6 +81,16 @@ pub struct Metrics {
     pub bytes_result_read:u64,pub bytes_result_written:u64,
 }
 impl Metrics {
+    pub(crate) fn record_body(&mut self,path:&Path){
+        let context=self.discovery_context.get();let relative=self.store_root.as_ref().and_then(|r|path.strip_prefix(r).ok()).unwrap_or(path);
+        if context.0!=0&&relative.components().next().is_some_and(|c|c.as_os_str()=="publications"){
+            self.rolling_publication_body_opens+=1;
+            if context.0==3{self.rolling_deferred_body_opens+=1;}
+            if context.0==2&&context.2.is_some_and(|n|context.1<=n){self.unchanged_historical_body_opens+=1;}
+            if matches!(context.0,2|3){forbidden();}
+        }
+    }
+
     pub(crate) fn cleanup_step(&mut self)->Result<()> {
         if let Some(b)=self.cleanup_budget.as_mut(){b.step()?;}Ok(())
     }
@@ -72,6 +113,10 @@ impl Metrics {
         *field+=n;
     }
     pub fn finish(&mut self){
+        self.forbidden_global_operations=FORBIDDEN.load(Ordering::Relaxed);
+        self.rolling_discovery_metadata_read_bytes=WORK_READ.load(Ordering::Relaxed);self.rolling_discovery_metadata_written_bytes=WORK_WRITTEN.load(Ordering::Relaxed);
+        self.rolling_discovery_metadata_bytes=self.rolling_discovery_metadata_read_bytes+self.rolling_discovery_metadata_written_bytes;
+        self.rolling_discovery_serialized_bytes=DISCOVERY_SERIALIZED.load(Ordering::Relaxed);self.rolling_deferred_rechecked=self.rolling_deferred_visited;
         self.ns.insert("lock-hold".into(),self.lock_hold_counter.load(Ordering::Relaxed) as u128);
     }
     pub fn charge(&mut self,n:u64)->Result<()> {
@@ -82,7 +127,7 @@ impl Metrics {
     }
     pub fn elapsed(&mut self, name: &str, start: Instant) { *self.ns.entry(name.into()).or_default() += start.elapsed().as_nanos(); }
 }
-pub fn digest(bytes: &[u8]) -> String { format!("{:x}",Sha256::digest(bytes)) }
+pub fn digest(bytes: &[u8]) -> String { if bytes.len()>65536{forbidden();} format!("{:x}",Sha256::digest(bytes)) }
 pub fn unique(prefix: &str) -> String { format!("{}-{}-{}-{}",prefix,std::process::id(),SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos(),SEQ.fetch_add(1,Ordering::Relaxed)) }
 pub fn checkpoint(name: &str) -> Result<()> {
     if std::env::var("EXP_TRACE").is_ok() { eprintln!("checkpoint:{name}"); }
@@ -121,13 +166,13 @@ pub fn read(path: &Path, m: &mut Metrics) -> Result<Vec<u8>> {
 fn is_dir(path:&Path,m:&mut Metrics)->bool{m.io_metadata_stats+=1;path.is_dir()}
 pub fn read_bounded(path: &Path, limit: usize, m: &mut Metrics) -> Result<Vec<u8>> {
     let t=Instant::now();
-    if let Some(bytes)=crate::packing::read(path,limit,m)?{m.elapsed("read",t);return Ok(bytes);}
+    if let Some(bytes)=crate::packing::read(path,limit,m)?{m.record_body(path);m.elapsed("read",t);return Ok(bytes);}
     let f=File::open(path).map_err(|e|format!("integrity-read:{}:{e}",path.display()))?;
     m.io_metadata_stats+=1;if f.metadata()?.len()>limit as u64 {return Err("integrity:file-length-bound".into());}
     let mut b=Vec::new();
     f.take(limit as u64+1).read_to_end(&mut b)?;
     if b.len()>limit {return Err("integrity:file-length-bound".into());}
-    m.opens+=1; m.bytes_read+=b.len() as u64;m.record_bytes(path,b.len() as u64,false);m.elapsed("read",t); Ok(b)
+    m.opens+=1; m.bytes_read+=b.len() as u64;m.record_bytes(path,b.len() as u64,false);m.record_body(path);record_envelope(path,b.len(),false);m.elapsed("read",t); Ok(b)
 }
 pub fn sync_file(path: &Path, m: &mut Metrics) -> Result<()> {
     let t=Instant::now(); OpenOptions::new().read(true).write(true).open(path)?.sync_all()?;
@@ -147,7 +192,7 @@ pub fn write_new(path: &Path, bytes: &[u8], m: &mut Metrics) -> Result<()> {
     m.charge(bytes.len() as u64+4096)?;m.namespace_ops+=1;
     mkdir(path.parent().ok_or("no-parent")?,m)?;
     let t=Instant::now(); let mut f=OpenOptions::new().create_new(true).write(true).open(path)?;
-    m.opens+=1; f.write_all(bytes)?; m.bytes_written+=bytes.len() as u64;m.record_bytes(path,bytes.len() as u64,true);
+    m.opens+=1; f.write_all(bytes)?;record_envelope(path,bytes.len(),true);if bytes.len()>65536{forbidden();} m.bytes_written+=bytes.len() as u64;m.record_bytes(path,bytes.len() as u64,true);
     checkpoint("file-write")?;
     let role=if path.file_name().unwrap().to_string_lossy().starts_with("selector-stage"){"selector"}else if path.parent().unwrap().ends_with("publications"){"publication"}else if path.file_name().unwrap()=="state.json"{"state"}else if path.file_name().unwrap()=="MANIFEST.json"{"manifest"}else if path.parent().unwrap().ends_with("receipts"){"receipt"}else{"other"};
     checkpoint(&format!("{role}-file-write"))?;m.elapsed("write",t);
@@ -210,7 +255,7 @@ pub fn copy(source: &Path, dest: &Path, m: &mut Metrics) -> Result<()> {
     m.io_metadata_stats+=1;m.charge(source.metadata()?.len()+4096)?;m.namespace_ops+=1;
     mkdir(dest.parent().unwrap(),m)?; let t=Instant::now();
     let mut src=File::open(source)?; let mut dst=OpenOptions::new().write(true).create_new(true).open(dest)?;
-    m.opens+=2; let mut buf=[0u8;65536];
+    m.opens+=2;forbidden(); let mut buf=[0u8;65536];
     loop { let n=src.read(&mut buf)?; if n==0 {break;} dst.write_all(&buf[..n])?; m.bytes_read+=n as u64; m.bytes_written+=n as u64;m.record_bytes(source,n as u64,false);m.record_bytes(dest,n as u64,true); }
     m.copies+=1; m.elapsed("copy",t); checkpoint("copy-write")?;
     let role=if dest.file_name().unwrap().to_string_lossy().starts_with("view-stage"){"view"}else if dest.to_string_lossy().contains("generation-stage"){"generation"}else{"packet"};
@@ -230,4 +275,27 @@ pub fn peak_memory() -> Option<u64> {
     }
     #[cfg(unix)] { if let Ok(s)=fs::read_to_string("/proc/self/status") { return s.lines().find(|l|l.starts_with("VmHWM:")).and_then(|l|l.split_whitespace().nth(1)).and_then(|s|s.parse::<u64>().ok()).map(|n|n*1024); } }
     None
+}
+
+#[cfg(test)]mod telemetry_tests{
+use super::*;
+#[test]fn telemetry_writer_observes_nested_io(){
+    let root=std::path::PathBuf::from(std::env::var_os("EXP_PACK_TEST_ROOT").unwrap()).join(unique("telemetry-w"));fs::create_dir_all(&root).unwrap();fs::write(root.join("canary"),b"x").unwrap();
+    let store=crate::store::Store{root:root.clone(),config:crate::store::StoreConfig{version:1,store_id:"unit".into(),mode:"A".into(),consumer:"project".into(),fallback:false,navigation_version:4,catalog:None,physical:None}};
+    let mut m=Metrics::default();let mut b=crate::pack::Builder::new("result",0);b.push(crate::pack::Key::new(&format!("results/{:064x}.json",0)).unwrap(),b"x").unwrap();let(d,body,index)=b.finish_legacy().unwrap();assert!(d.index_bytes<65536);write_new(&root.join(d.path("pack").unwrap()),&body,&mut m).unwrap();write_new(&root.join(d.path("idx").unwrap()),&index,&mut m).unwrap();m.finish();let before=m.forbidden_global_operations;let guard=store.lock(&mut m).unwrap();let mut nested=Metrics::default();assert!(read_dir(&root).unwrap().count()>0);nested.finish();assert!(nested.forbidden_global_operations>before);let directory=nested.forbidden_global_operations;crate::pack::Index::load(&root,&d,&mut nested).unwrap();nested.finish();assert!(nested.forbidden_global_operations>=directory+3);drop(guard);let after=nested.forbidden_global_operations;read_dir(&root).unwrap().count();nested.finish();assert_eq!(nested.forbidden_global_operations,after);
+    eprintln!("telemetry actual-W-native-enumeration nested-metrics=observed small-full-index=observed after-drop=unchanged");
+}
+#[test]fn telemetry_old_suffix_vs_deferred(){
+    let root=std::path::PathBuf::from(std::env::var_os("EXP_PACK_TEST_ROOT").unwrap()).join(unique("telemetry-body")).join("disposable").join("store");let mut setup=Metrics::default();
+    crate::store::Store::init(&root,"A","project",1,false,&mut setup).unwrap();
+    let store=crate::store::Store::open(&root,&mut setup).unwrap();
+    crate::lifetime::run(&store,&serde_json::json!({"operation":"setup"}),&mut setup).unwrap();
+    let old:crate::model::Selector=serde_json::from_slice(&fs::read(root.join("SELECTED.json")).unwrap()).unwrap();
+    store.publish(crate::model::Request{request:"telemetry-next".into(),base:Some(old.clone()),ops:vec![],packet:false},&mut setup).unwrap();
+    let p=root.join(format!("publications/{}.json",old.publication));let mut m=Metrics::default();m.store_root=Some(root);
+    m.discovery_context.set((2,0,Some(1)));read_bounded(&p,65536,&mut m).unwrap();assert_eq!(m.unchanged_historical_body_opens,1);
+    m.discovery_context.set((3,0,Some(1)));read_bounded(&p,65536,&mut m).unwrap();assert_eq!(m.rolling_publication_body_opens,2);assert_eq!(m.rolling_deferred_body_opens,1);assert_eq!(m.unchanged_historical_body_opens,1);
+    {let _scope=DiscoveryScope::new(&m.discovery_context);m.discovery_context.set((1,0,None));}assert_eq!(m.discovery_context.get(),(3,0,Some(1)));
+    eprintln!("telemetry actual-accepted-old-body=1 explicit-deferred-context=1 total-body=2 scope-restored=true");
+}
 }

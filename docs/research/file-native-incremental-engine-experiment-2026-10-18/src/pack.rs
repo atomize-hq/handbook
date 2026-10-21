@@ -68,7 +68,7 @@ pub(crate) fn native(path:&Path,limit:usize,m:&mut Metrics)->Result<Vec<u8>> {
     m.pack_metadata_stats+=1;let length=f.metadata()?.len();if length>limit as u64{return Err("integrity:pack-file-bound".into());}
     let mut b=vec![0;length as usize];f.read_exact(&mut b)?;
     if f.read(&mut [0])?!=0{return Err("integrity:pack-file-changed".into());}
-    m.opens+=1;m.bytes_read+=b.len() as u64;m.pack_storage_bytes+=b.len() as u64;Ok(b)
+    io::record_envelope(path,b.len(),false);m.opens+=1;m.bytes_read+=b.len() as u64;m.pack_storage_bytes+=b.len() as u64;Ok(b)
 }
 pub(crate) struct Index { bytes:Vec<u8>, offsets:Vec<usize>, pub descriptor:Descriptor, paged:Option<crate::paged::Reader> }
 pub(crate) fn path_exists(path:&Path,m:&mut Metrics)->bool{m.pack_metadata_stats+=1;path.exists()}
@@ -87,13 +87,13 @@ impl Index {
         if d.page.is_some(){return Ok(Self{bytes:vec![],offsets:vec![],descriptor:d.clone(),paged:Some(crate::paged::Reader::open(root,d,m)?)});}
         // Reject a changed file before allocating beyond the incoming charge.
         let t=std::time::Instant::now();let b=native(&root.join(d.path("idx")?),usize::try_from(d.index_bytes)?,m)?;m.elapsed("pack-legacy-index-read",t);
-        m.pack_legacy_index_bytes+=b.len() as u64;m.pack_index_metadata_bytes+=b.len() as u64;
-        let t=std::time::Instant::now();let digest=io::digest(&b);m.elapsed("pack-legacy-index-hash",t);
+        io::forbidden();m.pack_legacy_index_bytes+=b.len() as u64;m.pack_index_metadata_bytes+=b.len() as u64;
+        let t=std::time::Instant::now();io::forbidden();let digest=io::digest(&b);m.elapsed("pack-legacy-index-hash",t);
         if b.len()!=d.index_bytes as usize||digest!=d.index||b.len()<HEADER||&b[..8]!=MAGIC||hex(&b[8..40])!=d.pack||u64::from_le_bytes(b[40..48].try_into()?)!=d.pack_bytes||b[48]!=d.codec||u32::from_le_bytes(b[49..53].try_into()?)!=d.records {
             return Err("integrity:index-pack-binding".into());
         }
         m.pack_metadata_stats+=1;if root.join(d.path("pack")?).metadata().map_err(|e|format!("integrity:pack-missing:{e}"))?.len()!=d.pack_bytes{return Err("integrity:pack-size-binding".into());}
-        let t=std::time::Instant::now();let parsed=(||->Result<Self>{let mut index=Self{bytes:b,offsets:Vec::with_capacity(d.records as usize),descriptor:d.clone(),paged:None};
+        let t=std::time::Instant::now();io::forbidden();let parsed=(||->Result<Self>{let mut index=Self{bytes:b,offsets:Vec::with_capacity(d.records as usize),descriptor:d.clone(),paged:None};
         let mut position=HEADER;let mut last=String::new();let mut end=0u64;
         for _ in 0..d.records {
             index.offsets.push(position);let (e,next)=index.at(position)?;
@@ -158,11 +158,13 @@ pub(crate) fn decode(encoded:&[u8],raw:usize,codec:u8)->Result<Vec<u8>> {
         },_=>Err("integrity:codec-version".into())
     }
 }
-pub(crate) struct Builder { pub pack:Vec<u8>, entries:Vec<Entry>,raw_bytes:usize,index_bytes:usize,encoded_bound:usize,role:String,codec:u8 }
+pub(crate) struct Builder { pub pack:Vec<u8>, entries:Vec<Entry>,entry_heap_bytes:usize,raw_bytes:usize,index_bytes:usize,encoded_bound:usize,role:String,codec:u8 }
 impl Builder {
-    pub fn new(role:&str,codec:u8)->Self{Self{pack:vec![],entries:vec![],raw_bytes:0,index_bytes:HEADER,encoded_bound:0,role:role.into(),codec}}
+    pub fn new(role:&str,codec:u8)->Self{Self{pack:vec![],entries:vec![],entry_heap_bytes:0,raw_bytes:0,index_bytes:HEADER,encoded_bound:0,role:role.into(),codec}}
     pub fn is_empty(&self)->bool{self.entries.is_empty()}
-    pub fn metadata_memory(&self)->usize{std::mem::size_of::<Self>()+self.role.capacity()+self.entries.capacity()*std::mem::size_of::<Entry>()+self.entries.iter().map(|e|e.key.0.capacity()+e.hash.capacity()).sum::<usize>()}
+    // Only owned string capacities are cached. Vec growth and its transient
+    // old/new allocations remain charged by push_bound before ownership moves.
+    pub fn metadata_memory(&self)->usize{std::mem::size_of::<Self>()+self.role.capacity()+self.entries.capacity()*std::mem::size_of::<Entry>()+self.entry_heap_bytes}
     pub fn push_bound(&self,key:&Key)->Result<usize>{
         let old=self.entries.capacity();let next=if self.entries.len()==old{old.checked_mul(2).ok_or("integrity:builder-memory-overflow")?.max(4)}else{old};
         self.metadata_memory().checked_add(if next!=old{next.checked_mul(std::mem::size_of::<Entry>()).ok_or("integrity:builder-memory-overflow")?}else{0}).and_then(|n|n.checked_add(key.0.capacity())).and_then(|n|n.checked_add(4096)).ok_or_else(||"integrity:builder-memory-overflow".into())
@@ -178,9 +180,13 @@ impl Builder {
         if raw.len()>MAX_RAW||key.role()!=Some(self.role.as_str())||!self.fits(&key,raw.len())||self.entries.last().is_some_and(|e|e.key>=key){return Err("refused:pack-builder-bound-order".into());}
         let encoded=match self.codec{0=>raw.to_vec(),1=>zstd::bulk::compress(raw,3)?,_=>return Err("integrity:codec-version".into())};
         if self.pack.len()+encoded.len()>MAX_PACK{return Err("refused:encoded-pack-bound".into());}
-        self.index_bytes+=key.0.len()+50;
+        let entry=Entry{key,offset:self.pack.len() as u64,encoded:encoded.len(),raw:raw.len(),hash:io::digest(raw)};
+        let heap=self.entry_heap_bytes.checked_add(entry.key.0.capacity()).and_then(|n|n.checked_add(entry.hash.capacity())).ok_or("integrity:builder-memory-overflow")?;
+        let key_bytes=entry.key.0.len();
+        self.entries.push(entry);
+        self.entry_heap_bytes=heap;
+        self.index_bytes+=key_bytes+50;
         self.encoded_bound+=zstd::zstd_safe::compress_bound(raw.len());
-        self.entries.push(Entry{key,offset:self.pack.len() as u64,encoded:encoded.len(),raw:raw.len(),hash:io::digest(raw)});
         self.pack.extend(encoded);self.raw_bytes+=raw.len();Ok(())
     }
     pub fn finish_reserved(self,approved:usize)->Result<(Descriptor,Vec<u8>,Vec<u8>)> {
@@ -207,6 +213,27 @@ impl Builder {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test] fn cached_metadata_matches_owned_allocations_on_growth_and_failure(){
+        fn scanned(b:&Builder)->usize{std::mem::size_of::<Builder>()+b.role.capacity()+b.entries.capacity()*std::mem::size_of::<Entry>()+b.entries.iter().map(|e|e.key.0.capacity()+e.hash.capacity()).sum::<usize>()}
+        let mut b=Builder::new("publication",0);assert_eq!(b.metadata_memory(),scanned(&b));
+        let mut growths=0;
+        for n in 0..513{
+            let mut key=Key::new(&format!("publications/{n:06}.json")).unwrap();key.0.reserve_exact(n%97+1);
+            let capacity=b.entries.capacity();let bound=b.push_bound(&key).unwrap();b.push(key,b"raw").unwrap();
+            growths+=usize::from(capacity!=b.entries.capacity());assert_eq!(b.metadata_memory(),scanned(&b));assert!(scanned(&b)<=bound);
+        }
+        assert!(growths>=8);
+        let before=(b.entries.len(),b.entry_heap_bytes,b.pack.clone(),b.index_bytes,b.raw_bytes,b.encoded_bound);
+        let duplicate=b.entries.last().unwrap().key.clone();assert!(b.push(duplicate,b"different").is_err());
+        assert!(b.push(Key::new(&format!("results/{}.json","a".repeat(64))).unwrap(),b"raw").is_err());
+        assert_eq!((b.entries.len(),b.entry_heap_bytes,b.pack.clone(),b.index_bytes,b.raw_bytes,b.encoded_bound),before);assert_eq!(b.metadata_memory(),scanned(&b));
+        // Exercise checked accumulation without allocating an impossible heap.
+        let owned=b.entry_heap_bytes;b.entry_heap_bytes=usize::MAX;
+        assert!(b.push(Key::new("publications/999999.json").unwrap(),b"raw").err().unwrap().to_string().contains("builder-memory-overflow"));
+        b.entry_heap_bytes=owned;assert_eq!((b.entries.len(),b.entry_heap_bytes,b.pack.clone(),b.index_bytes,b.raw_bytes,b.encoded_bound),before);assert_eq!(b.metadata_memory(),scanned(&b));
+        let approved=b.finish_bound().unwrap();assert!(approved>scanned(&b));assert!(b.finish_reserved(approved-1).is_err());
+        let mut invalid=Builder::new("publication",2);let memory=scanned(&invalid);assert!(invalid.push(Key::new("publications/a.json").unwrap(),b"raw").is_err());assert_eq!(scanned(&invalid),memory);assert_eq!(invalid.metadata_memory(),memory);
+    }
     #[test] fn decoder_never_uses_advertised_size(){
         let frame=zstd::bulk::compress(&vec![7;1024*1024],3).unwrap();
         assert!(decode(&frame,1,1).is_err());assert!(decode(&frame,MAX_RAW+1,1).is_err());
@@ -220,4 +247,19 @@ mod tests {
         for key in ["STORE.json","attempts/a/packet/MANIFEST.json","originals/a","attempts/../candidate.json","/results/a.json"]{assert!(Key::new(key).is_err());}
         assert_eq!(Key::new("attempts/a/candidate.json").unwrap().role(),Some("candidate"));
     }
+}
+
+#[cfg(test)]
+mod boundary_tests {
+use super::*;
+#[test]fn raw_record_builder_bound(){
+    let raw=vec![42u8;8*1024*1024+1];let mut b=Builder::new("result",0);
+    b.push(Key::new(&format!("results/{:064x}.json",1)).unwrap(),&raw[..8*1024*1024]).unwrap();
+    let before=(b.pack.len(),b.entries.len(),b.raw_bytes,b.index_bytes,b.entry_heap_bytes);
+    assert_eq!(b.push(Key::new(&format!("results/{:064x}.json",2)).unwrap(),&raw).unwrap_err().to_string(),"refused:pack-builder-bound-order");
+    assert_eq!((b.pack.len(),b.entries.len(),b.raw_bytes,b.index_bytes,b.entry_heap_bytes),before);
+    let approved=b.finish_bound().unwrap();let(d,body,index)=b.finish_reserved(approved).unwrap();
+    assert_eq!(body.as_slice(),&raw[..8*1024*1024]);assert_eq!(d.pack_bytes,8388608);assert_eq!(d.records,1);assert_eq!(io::digest(&index),d.index);
+    eprintln!("boundary production-builder raw8388608=accepted raw8388609=refused unchanged=true files=0");
+}
 }

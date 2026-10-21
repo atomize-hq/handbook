@@ -267,7 +267,7 @@ fn save_inner(root:&Path,b:&Binding,w:&mut Work,m:&mut Metrics)->Result<()>{
     if cancelled(){return Err("cancelled:physical-cleanup".into());}
     let q=lock_file(&root.join("physical-capture.lock"),true)?;
     FileExt::try_lock_exclusive(&q).map_err(|e|if contended(&e){"deferred:work-capture".to_owned()}else{format!("integrity:work-capture:{e}")})?;
-    let hold=Instant::now();
+    let q=io::GlobalGate::new(q,false);let hold=Instant::now();
     let selected=(||->Result<()>{
         m.cleanup_step()?;let actual=pack::native(&root.join("STORE.json"),BINDING_LIMIT,m)?;
         if io::digest(&actual)!=expected{return Err("conflict:work-parent".into());}
@@ -355,4 +355,23 @@ pub(crate) fn garbage_referenced(w:&Work,b:&Binding,name:&str)->Result<bool>{
         if name==d.path("pack")?||name==d.path("idx")?{return Ok(true);}
     }
     Ok(false)
+}
+
+#[cfg(test)]
+mod boundary_tests {
+use super::*;
+fn padded_work(target:usize)->Work{
+    let h="0".repeat(64);let mut w=Work{discovery:None,version:2,store_id:"unit".into(),physical_parent:h.clone(),transition_parent:None,birth_claims:vec![],generation:Generation{id:"g".into(),ordinal:1,catalog:h,plan:None,packs:vec![]},older:vec![],jobs:vec![],retired:vec![],garbage:(0..1100).map(|i|format!("physical-pins/u{i:04}.lock")).collect(),removed_bytes:0,removed_files:0,reconciled_absent:0};
+    let mut left=target.checked_sub(io::json(&w).unwrap().len()).unwrap();
+    for name in &mut w.garbage{let n=left.min(99-(name.len()-"physical-pins/".len()-5));let at=name.len()-5;name.insert_str(at,&"x".repeat(n));left-=n;}
+    assert_eq!(left,0);assert_eq!(io::json(&w).unwrap().len(),target);w
+}
+#[test]fn work_byte_bound(){
+    let root=std::path::PathBuf::from(std::env::var_os("EXP_PACK_TEST_ROOT").unwrap()).join(io::unique("work-bound"));
+    let mut m=Metrics::default();let w=padded_work(131072);validate_work(&w).unwrap();let hash=persist_plan(&root,&w,&mut m).unwrap();
+    let path=root.join(plan_name(&hash).unwrap());let before=std::fs::read(&path).unwrap();assert_eq!(before.len(),131072);
+    let w=padded_work(131073);validate_work(&w).unwrap();let written=m.bytes_written;
+    assert_eq!(persist_plan(&root,&w,&mut m).unwrap_err().to_string(),"quota:physical-work-bytes");assert_eq!(m.bytes_written,written);assert_eq!(std::fs::read(path).unwrap(),before);
+    eprintln!("boundary structural-work bytes131072=persisted bytes131073=prewrite-refusal actual-garbage-files=0");
+}
 }
