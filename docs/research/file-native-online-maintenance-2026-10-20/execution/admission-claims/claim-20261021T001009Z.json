@@ -1,0 +1,207 @@
+{
+  "kind": "combined-mandatory-source-and-bounded-CP-heavy-proof-funded-by-unused-WindowsC1",
+  "claim_id": "44GiB-CENTRAL-022-C1WIN-EXPIRY-CP192-SOURCE128KiB",
+  "utc": "2026-10-21T00:10:09.557121+00:00",
+  "status": "RESERVATIONS_APPLIED__NEW_BUDGET_REGISTRATION_AND_EXACT_PHASE_GO_REQUIRED__NO_NATIVE_FULL_GO",
+  "authority": "META explicitly revised022: onacceptedfreshC1Winproof expireonlyWin192MiB unusedearmark, raiseCPfixtures96->192MiB for mandatorysamefinalpin19units+actual64MiBconstructorproof, reserveC3newqualificationhelpers128KiB/8. LinuxC1/C2Winheldconservatively; no diagnosticseal.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T234639Z.json",
+    "sha256": "22579012869c8a8f18d589a10e30f900a0a6cd6fc17b4e41d8574288ab851b9c"
+  },
+  "C1Windows_unused_expiry": {
+    "earmark_before": 201326592,
+    "earmark_after": 0,
+    "unused_forecast_expiry_bytes": 201326592,
+    "actual_reclaimed_bytes": 0,
+    "actual_deleted_files": 0,
+    "actual_deleted_bytes": 0,
+    "fresh_proof": {
+      "owner_report_forwarded_by_META": "C1Windows neverclaimed/activated, all builds used existing global C:/Users/spmcc/.cargo, privatecargo pathsnevercreated, all Cargo/engine/ownedJobs closed. CP3currenttarget+planned48MiB fitscurrent256; no futureprivatecacheplanned.",
+      "independent_current_environment_scopes": [
+        {
+          "Scope": "Process",
+          "CARGO_HOME": null
+        },
+        {
+          "Scope": "User",
+          "CARGO_HOME": null
+        },
+        {
+          "Scope": "Machine",
+          "CARGO_HOME": null
+        }
+      ],
+      "independent_runtime_children": [
+        "build",
+        "evidence",
+        "fixtures"
+      ],
+      "independent_private_candidate_absence": [
+        {
+          "path": "C:\\file-native-online-cp1-20261020\\cargo-private",
+          "exists": false,
+          "is_symlink": false
+        },
+        {
+          "path": "C:\\file-native-online-cp1-20261020\\cargo-home",
+          "exists": false,
+          "is_symlink": false
+        },
+        {
+          "path": "C:\\file-native-online-cp1-20261020\\private-cache",
+          "exists": false,
+          "is_symlink": false
+        },
+        {
+          "path": "C:\\file-native-online-cp1-20261020\\cache",
+          "exists": false,
+          "is_symlink": false
+        }
+      ],
+      "independent_runtime_actuals": {
+        "build": {
+          "bytes": 201412934,
+          "files": 517
+        },
+        "fixtures": {
+          "bytes": 77395734,
+          "files": 12078
+        },
+        "evidence": {
+          "bytes": 44511732,
+          "files": 383
+        }
+      },
+      "closure_scope": "METAforwarded ownerpositiveclosure plus resource currentprocess snapshot found only its ownreadonlyPowerShell probes matchingruntime; no live CP Cargo/rustc/engine observed. This is currentcensus, not measurement of historicalresourcepeaks.",
+      "existing_global_Cargo": "C:/Users/spmcc/.cargo staysprotected andpositivegrowthF13; no cachefilesremoved/rebased or copied. Only neverused192MiB earmarkexpires."
+    },
+    "proof_accepted_for_forecast_only": true,
+    "future_private_CARGO_HOME": "No futureprivatecacheactivationauthorized; anylaterneed requiresnewexplicitallocationbeforecreation."
+  },
+  "C1Linux_and_C2Windows": {
+    "C1Linux64MiB": {
+      "cap_held": 67108864,
+      "release_applied": 0,
+      "reason": "freshowner existing-globalofflinecache/noactivation/pathproof pending; do notinferfromWindows"
+    },
+    "C2Windows128MiB": {
+      "cap_held": 134217728,
+      "release_applied": 0,
+      "reason": "Neverclaimedreported andcurrenttarget+48MiBforecastfits256; conservativelykeephelduntilactualadmittedfinalbuild/link/coexistencepeak andclosedtargetplan proveunused. Currentforecastisnotactualfuturelinkpeak."
+    }
+  },
+  "F06_bounded_CP_proof": {
+    "CP_fixture_path": "C:\\file-native-online-cp1-20261020\\fixtures",
+    "CP_cap_before": 100663296,
+    "CP_cap_after": 201326592,
+    "CP_regular_file_cap_unchanged": 75000,
+    "Matrix_protocol_cap_unchanged": 33554432,
+    "Matrix_protocol_files_unchanged": 25000,
+    "F06_total_before": 134217728,
+    "F06_total_after": 234881024,
+    "F06_total_files_unchanged": 100000,
+    "positive_forecast_increase": 100663296,
+    "scope": "Mandatory SAMEfinalacceptedpin full19workspaceunits and actual64MiBconstruction/cache proof underexistingreader/checker/hostRSS/job/deadline controls. This is resourcecap only; not a testPASS or liveRUN GO.",
+    "reported_finite_next_fixture_components": {
+      "retained_current": 77395734,
+      "full_heavy_reference": 80976318,
+      "protocol_positive_growth_upper": 10485760,
+      "prospective_sum": 168857812,
+      "CP192_cap": 201326592,
+      "headroom": 32468780
+    },
+    "limitations": [
+      "80976318 is statedreference/prospectivebound, not finalsource-proved actualnextsuite peak. Owner must freezeexact19testnames/source/binary, fixture constructors/inmemory versusdisk writes andallfailedprefixes beforeRUN.",
+      "No omittedactual64MiBconstructor/legacycachetest andno fabricatedall19PASS fromtargetedfilteredunits. Samefinalsource fullsuiteplusretainedfailures counts.",
+      "Count all test-rootnames, temporary/corruptindexcopies, rawpack/index buffers andretainedfilegrowth, code-owned16MiB serializedindexconstructor charge andstatistics; no reusedcorruptfixturehiddenretry.",
+      "Sourcefreeze/deadline/strictactual25HzRSS/QPCguardcompatibility and fullcontrolreview stillrequired. Buildj2; checker2GiB/readers256MiB/globalWindows4GiB unchanged.",
+      "FullN64/native/1000activation/largebody/F07work isNOTreleased. Eightreservationabandon isNOTrelease; noGC/credit."
+    ]
+  },
+  "F02_and_F12_unchanged": {
+    "F02_target_path": "C:\\file-native-online-cp1-20261020\\build",
+    "target_cap": 268435456,
+    "target_files": 5000,
+    "current_target": {
+      "bytes": 201412934,
+      "files": 517
+    },
+    "future_build_bound": 50331648,
+    "current_plus_future": 251744582,
+    "headroom_under256": 16690874,
+    "C2_not_assumed": true,
+    "enforcement": "Hardactualtargetcap includesallcompiler/link/temp/executables; stop/censor beforeescapingcap. Numericforecastisnotactualfuturebuildproof.",
+    "CP_evidence_path": "C:\\file-native-online-cp1-20261020\\evidence",
+    "CP_shared_F12_cap": 50331648,
+    "current_evidence": {
+      "bytes": 44511732,
+      "files": 383
+    },
+    "evidence_remaining": 5819916,
+    "next_evidence_rule": "Ownerexactnext-commandstdout/stderr/RSS/rawreceipts/outerfinalization forecast mustfitremaining48MiB; noF12topuphere. Existing6MiBphaseestimatecannotbeassumedfree atopcurrent44.5MBactual.",
+    "Windows_F12_CP48_plus_Matrix52": 104857600
+  },
+  "C3_new_HELPER_source": {
+    "total_C3_unchanged": 16777216,
+    "helper_cap": 131072,
+    "helper_files": 8,
+    "unsubclaimed_before": 4063232,
+    "unsubclaimed_after": 3932160,
+    "preexisting32KiBcontrolhold_inside_unsubclaimed": 32768,
+    "exact_NEW_parent_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes",
+    "parent_root_has_no_additive_unowned_files": "Allfiles mustliveunderoneoftwo exactsubroots; no unclassifiedtop-levelhelper files. Parentdirs countasdirectoriesinallpathcensus.",
+    "long": {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\long",
+      "bytes": 65536,
+      "files": 4,
+      "owner_chat": "01a15b51-a50b-7930-8633-b42694240252",
+      "scope": "NEW longarchive+stream helper source/manifest/fakecontrolsonly; originalstream_snapshot.pyf8unchanged; concretefilename/sourcehashmanifestbeforefirstwrite."
+    },
+    "history": {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\history",
+      "bytes": 65536,
+      "files": 4,
+      "owner_chat": "META_RESERVED_FRESH_HISTORY_WORKER_NOT_YET_CREATED",
+      "scope": "NEW boundedF05mandatory1600historyhelper source/manifest/fakecontrolsonly. META mustassignexactchatowner+filename/sourcehashmanifestbeforefirstwrite; reservationdoesnotdispatchorcreatechat."
+    },
+    "membership": "Exactqualification-lanes/long and/history originals chargedC3HELPER once. Theseoriginalfiles areNOTC3META andNOTMatrixF01source1MiB. DistinctPpacket/archive/extract/Landingreviewcopies elsewhere remainMETA8, allGitobjects/indexlockspositiveF13 once.",
+    "source_only_rules": [
+      "Parentregisternewimmutablebudgetandexactsourcepaths/groupcaps beforecopy; ownerfinalsource/controlreview+finitefakecontrolplan beforeexecution.",
+      "No sourcewriteoutsideownsubroot, no rewritingfrozenstreamf8/guard1e4/sharedMatrixsource; no protecteddata/corpus/sourcearchivecopy.",
+      "No runtimefixture/engine/realhistory/longGO here; helpers firstsourceandpurefakecontrols reviewedwithactualnext-phaseforecast.",
+      "128KiB isassignedinsideexistingC3, notnewoverallbytes/files; combined8files drawexistingC3filecap."
+    ]
+  },
+  "whole_allocator_after022": {
+    "whole_before": 47092083061,
+    "central_before": 152557195,
+    "C1Win_unused_forecast_expiry": 201326592,
+    "CP_F06_increase": 100663296,
+    "net_whole_decrease": 100663296,
+    "whole_after": 46991419765,
+    "central_after": 253220491,
+    "cap": 47244640256,
+    "reserve_inside_bytes_unchanged": 1073741824,
+    "reserve_inside_files_unchanged": 100000,
+    "reserved_files_unchanged": 4792604,
+    "remaining_files_unchanged": 207396,
+    "actual_delete_credit": 0,
+    "C3_total_unchanged": 16777216,
+    "C3_unsubclaimed_after": 3932160
+  },
+  "future_scenario_accounting": "Priorfull512/560/576andunequalWin640/native560tables ALREADYassumedC1Win192expiry. Do NOT addanother192MiBcredit. CurrentCP192proofcap isSUBSUMED in futureWinfullbody cap; recomputefuturetopupsfromnew192baseline, not add96again atop640. Thisclaim neitherfundsnoradmitsfullbodies/F07; allWinretained77395734/12078+1000extras/nativewhole556M+unknownconstructors/terminals remainunclosed.",
+  "new_immutable_budget_registration": [
+    "Bind022sealedSHA andC1Winexpiredstate; priorversionsimmutable.",
+    "CPsource/admin1+2MiB/F02target256/CPfixtures192MiB75000/F12CP48/exclusiveJob/readercheckerRSS hardcaps andglobalF13groupunchanged.",
+    "F06CP192+Matrix32combined224MiB/100000files; no separatelyadditive newfullsuitecap.",
+    "C3HELPER long64KiB4 +history64KiB4 underexactNEWroots, outsideMETA/F01currentmembership; sourceownerfilenamemanifestbeforefirstwrite.",
+    "Parent grants ONLYconcreteboundedsourceGO/19unitphaseGO afterfinalsource/control/forecastreview; no permissioninferredfromcap alone."
+  ],
+  "prior_versions_seals_immutable": true,
+  "worker_actions": "Read-onlyenv/paths/runtimecensus/proofchecks andimmutableclaimfilesonly; no cachedeletion, engine/build/run, livebudget/guard/source/index or otherpath edits.",
+  "sourcefreeze": "04:10unchanged; noreset",
+  "clocks_unchanged": {
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "closeout_end": "2026-10-21T13:10:14Z"
+  }
+}

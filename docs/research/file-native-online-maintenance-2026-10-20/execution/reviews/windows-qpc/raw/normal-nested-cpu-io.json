@@ -1,0 +1,545 @@
+{
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "-B",
+    "-c",
+    "import sys,os,json,time;sys.path.insert(0,'C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-online-matrix-20261020\\\\handbook\\\\docs\\\\research\\\\file-native-online-maintenance-2026-10-20\\\\execution\\\\windows-cadence');import job_guard_qpc as g;print(json.dumps(dict(pid=os.getpid(),creation_time=g.creation_time(os.getpid()))),flush=True);import subprocess;subprocess.Popen([sys.executable,\"-B\",\"-c\",\"import sys,os,json,time;sys.path.insert(0,'C:\\\\\\\\Users\\\\\\\\spmcc\\\\\\\\.codex\\\\\\\\worktrees\\\\\\\\file-native-online-matrix-20261020\\\\\\\\handbook\\\\\\\\docs\\\\\\\\research\\\\\\\\file-native-online-maintenance-2026-10-20\\\\\\\\execution\\\\\\\\windows-cadence');import job_guard_qpc as g;print(json.dumps(dict(pid=os.getpid(),creation_time=g.creation_time(os.getpid()))),flush=True);time.sleep(20)\"]);f=open('C:\\\\file-native-online-matrix-20261020\\\\protocol\\\\windows-cadence\\\\stress.bin',\"xb\");until=time.perf_counter()+5\nwhile time.perf_counter()<until:\n sum(i*i for i in range(1000));f.seek(0);f.write(b\"x\"*4096);f.flush();os.fsync(f.fileno())\nf.close();print(\"normal-nested-cpu-io-complete\",flush=True)"
+  ],
+  "cwd": null,
+  "started_epoch": 1792539696.834088,
+  "token_acquired_epoch": 1792539744.5905302,
+  "token_wait_seconds": 33.64960169792175,
+  "token_wait_started_epoch": 1792539710.9409285,
+  "token_contentions": 334,
+  "before_token_setup_seconds": 14.106840372085571,
+  "total_seconds": 65.4591875076294,
+  "stage_seconds": 17.70274543762207,
+  "requested_seconds": 30,
+  "functional_cutoff_epoch": 1792581014.0,
+  "absolute_deadline_epoch": 1792539774.5905302,
+  "memory_sample_timing": {
+    "samples": 256,
+    "max_interval_seconds": 0.0327326,
+    "intervals_over_40ms": 0,
+    "completed_samples": 256,
+    "max_completion_interval_seconds": 0.0340642,
+    "max_collection_duration_seconds": 0.0016427,
+    "max_sample_duration_seconds": 0.0016907,
+    "max_recorded_interval_seconds": 0.0340698,
+    "slow_samples": 0,
+    "clock": "perf_counter_ns",
+    "target_interval_ns": 20000000,
+    "censor_interval_ns": 40000000,
+    "clock_info": {
+      "perf_counter": {
+        "implementation": "QueryPerformanceCounter()",
+        "monotonic": true,
+        "adjustable": false,
+        "resolution": 1e-07
+      },
+      "monotonic": {
+        "implementation": "GetTickCount64()",
+        "monotonic": true,
+        "adjustable": false,
+        "resolution": 0.015625
+      }
+    },
+    "interval_seconds_clock": "perf_counter_ns; monotonic fields are coarse diagnostics",
+    "first_positive_full_sample_ns": 583933838387000,
+    "last_recorded_sample_ns": 583938949010100,
+    "root_wait_returned_ns": 583938956950800,
+    "root_end_coverage_gap_seconds": 0.0079407,
+    "job_empty_observed_ns": 583938957430900,
+    "job_end_coverage_gap_seconds": 0.0084208
+  },
+  "raw_rss": "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\normal-nested-cpu-io.rss.jsonl.gz",
+  "closure_checks": [
+    {
+      "epoch": 1792539762.2504053,
+      "members": []
+    },
+    {
+      "epoch": 1792539762.2711215,
+      "members": []
+    }
+  ],
+  "exit": 0,
+  "censor": null,
+  "errors": [],
+  "job_commit_limit": 3221225472,
+  "process_commit_limit": 2147483648,
+  "job_aggregate_sampled_peak_rss": 38592512,
+  "per_process_observed_peak_rss": {
+    "10232": 19447808,
+    "22592": 19144704
+  },
+  "missing_memory_samples": 0,
+  "pid_exit_races": [],
+  "initial_suspended_root_rss": 2072576,
+  "supervisor_rss_limit": 805306368,
+  "supervisor_peak_rss": 112439296,
+  "supervisor_samples": [
+    {
+      "epoch": 1792539744.6286154,
+      "total": 110813184,
+      "processes": [
+        {
+          "pid": 58360,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23856,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86802432,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 24010752,
+          "peak": 25747456
+        }
+      ]
+    },
+    {
+      "epoch": 1792539757.1278079,
+      "total": 111128576,
+      "processes": [
+        {
+          "pid": 58360,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23856,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 24387584,
+          "peak": 25849856
+        }
+      ]
+    },
+    {
+      "epoch": 1792539758.1359882,
+      "total": 112357376,
+      "processes": [
+        {
+          "pid": 58360,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23856,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25616384,
+          "peak": 25849856
+        }
+      ]
+    },
+    {
+      "epoch": 1792539759.1489637,
+      "total": 112431104,
+      "processes": [
+        {
+          "pid": 58360,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23856,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25690112,
+          "peak": 25849856
+        }
+      ]
+    },
+    {
+      "epoch": 1792539760.1788025,
+      "total": 112140288,
+      "processes": [
+        {
+          "pid": 58360,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23856,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25395200,
+          "peak": 26652672
+        }
+      ]
+    },
+    {
+      "epoch": 1792539761.1942039,
+      "total": 112144384,
+      "processes": [
+        {
+          "pid": 58360,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23856,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25399296,
+          "peak": 26652672
+        }
+      ]
+    },
+    {
+      "epoch": 1792539762.2085097,
+      "total": 111521792,
+      "processes": [
+        {
+          "pid": 58360,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23856,
+          "state": "ended-or-reused"
+        },
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 24776704,
+          "peak": 26652672
+        }
+      ]
+    }
+  ],
+  "owner": {
+    "pid": 5396,
+    "creation_time": 134370132967366804,
+    "nonce": "45bc755c59dc45f4a14b701a9c23f1d1",
+    "acquired_epoch": 1792539744.5905302,
+    "job_root_pid": 10232,
+    "categories": [
+      "source",
+      "source_admin",
+      "protocol",
+      "document_controls",
+      "receipts",
+      "history",
+      "shared_git",
+      "shared_cargo",
+      "stream_receipts",
+      "stream_landing_controls",
+      "final_protocol_source",
+      "windows_cadence_source",
+      "windows_cadence_protocol",
+      "windows_cadence_receipts",
+      "paged_controls_protocol"
+    ],
+    "budget_sha256": "0a1a73bd7f8094f1bf2e7f79cf40b6eff970acc2bb7c1640fbad52f3846be55a",
+    "receipt": "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\normal-nested-cpu-io.json",
+    "state": "closed",
+    "authority": "advisory ownership only; OS byte lock controls exclusion",
+    "job_root_creation_time": 134370133571205072,
+    "initial_root_rss": 2072576,
+    "resumed_epoch": 1792539757.1278079,
+    "closed_epoch": 1792539762.291711,
+    "remaining_job_pids": [],
+    "errors": []
+  },
+  "remaining_job_pids": [],
+  "process_closure_verified": true,
+  "terminations": [
+    {
+      "epoch": 1792539762.247404,
+      "reason": "root-completed-descendant-cleanup"
+    }
+  ],
+  "disk_samples": [],
+  "prospective": {
+    "categories": {
+      "source": {
+        "bytes": 933377,
+        "files": 90,
+        "absolute_actual": {
+          "bytes": 933377,
+          "files": 90
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1048576,
+        "cap_files": 200
+      },
+      "source_admin": {
+        "bytes": 941574,
+        "files": 8,
+        "absolute_actual": {
+          "bytes": 941574,
+          "files": 8
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 100
+      },
+      "protocol": {
+        "bytes": 6325095,
+        "files": 1140,
+        "absolute_actual": {
+          "bytes": 6325095,
+          "files": 1140
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 33554432,
+        "cap_files": 25000
+      },
+      "document_controls": {
+        "bytes": 8435478,
+        "files": 820,
+        "absolute_actual": {
+          "bytes": 8435478,
+          "files": 820
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 67108864,
+        "cap_files": 30000
+      },
+      "receipts": {
+        "bytes": 19661700,
+        "files": 1243,
+        "absolute_actual": {
+          "bytes": 19661700,
+          "files": 1243
+        },
+        "reserve_bytes": 1048576,
+        "reserve_files": 40,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 54525952,
+        "cap_files": 10000
+      },
+      "history": {
+        "bytes": 552141207,
+        "files": 129768,
+        "absolute_actual": {
+          "bytes": 552141207,
+          "files": 129768
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1073741824,
+        "cap_files": 400000
+      },
+      "shared_git": {
+        "bytes": 4715674,
+        "files": 697,
+        "absolute_actual": {
+          "bytes": 256893317,
+          "files": 3196
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "shared_cargo": {
+        "bytes": 0,
+        "files": 0,
+        "absolute_actual": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "stream_receipts": {
+        "bytes": 559003,
+        "files": 23,
+        "absolute_actual": {
+          "bytes": 559003,
+          "files": 23
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 983040,
+        "cap_files": 40
+      },
+      "stream_landing_controls": {
+        "bytes": 63390,
+        "files": 7,
+        "absolute_actual": {
+          "bytes": 63390,
+          "files": 7
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 65536,
+        "cap_files": 9
+      },
+      "final_protocol_source": {
+        "bytes": 188865,
+        "files": 9,
+        "absolute_actual": {
+          "bytes": 188865,
+          "files": 9
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 196608,
+        "cap_files": 12
+      },
+      "windows_cadence_source": {
+        "bytes": 59673,
+        "files": 4,
+        "absolute_actual": {
+          "bytes": 59673,
+          "files": 4
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 65536,
+        "cap_files": 8
+      },
+      "windows_cadence_protocol": {
+        "bytes": 10932,
+        "files": 1,
+        "absolute_actual": {
+          "bytes": 10932,
+          "files": 1
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 1048576,
+        "cap_files": 100
+      },
+      "windows_cadence_receipts": {
+        "bytes": 0,
+        "files": 0,
+        "absolute_actual": {
+          "bytes": 0,
+          "files": 0
+        },
+        "reserve_bytes": 1048576,
+        "reserve_files": 40,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 1048576,
+        "cap_files": 40
+      },
+      "paged_controls_protocol": {
+        "bytes": 120,
+        "files": 4,
+        "absolute_actual": {
+          "bytes": 120,
+          "files": 4
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 300
+      }
+    },
+    "shared_groups": {
+      "F13_windows_shared_support": {
+        "bytes": 4715674,
+        "files": 697,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "F12_matrix_evidence_total": {
+        "bytes": 20773666,
+        "files": 1290,
+        "cap_bytes": 54525952,
+        "cap_files": 10000
+      }
+    },
+    "free_bytes": 199912869888,
+    "epoch": 1792539710.9203963,
+    "qualification": "logical bytes; no planned deletion credit; parent owns cross-host ledger"
+  },
+  "guard_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "budget_sha256": "0a1a73bd7f8094f1bf2e7f79cf40b6eff970acc2bb7c1640fbad52f3846be55a",
+  "frozen_reference_guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "frozen_reference_expected_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "sampling_revision": "qpc-ns-v2; whole-Job tail coverage; strict >40ms; coarse monotonic retained; no retrospective requalification",
+  "qualification": "one owned Job; sampled RSS; commit hard caps; shared token waits excluded from engine latency"
+}

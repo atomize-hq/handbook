@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-024-REPORT-FAMILY128FILES",
+  "utc": "2026-10-21T00:15:43.669867+00:00",
+  "status": "DURABLE_REPORT_FILE_ENVELOPE_EXTENSION_ONLY",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T001543Z.json",
+      "bytes": 4425,
+      "sha256": "011825b6a11c267bb2cba5582faa5f835d44f9779003d19659ea01e44d371a1d"
+    },
+    {
+      "file": "claim-20261021T001543Z.md",
+      "bytes": 966,
+      "sha256": "d2b728e18b9c620b0e230af496fa4d457ed3cc772e7eace1b55c12747d989e18"
+    }
+  ]
+}

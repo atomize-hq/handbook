@@ -1,0 +1,69 @@
+{
+  "status": "CORRECTIVE_INJECTED_FAULT_PASSED",
+  "passed": true,
+  "source_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "control_input_sha256": "4b47c112904488634c061f4de7b894fd8257b3c4f206d0f5770650222d59fce3",
+  "original_input_sha256": "afba936c992f018318aca1f2d07b44c1e8507631b0291aec75f826ea6505c180",
+  "original_failed_prefix": "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss.json",
+  "separately_authorized_phase_start_epoch": 1792540440.1404736,
+  "separately_authorized_phase_end_epoch": 1792540530.1404736,
+  "started_epoch": 1792540452.672301,
+  "ended_epoch": 1792540477.7180264,
+  "injection": [
+    {
+      "pid": 67460,
+      "native_value": [
+        2072576,
+        2072576
+      ],
+      "injected_value": null
+    }
+  ],
+  "raw_rows": 0,
+  "gzip_full_EOF": true,
+  "native_closure_proven": true,
+  "token_reacquired_and_released": true,
+  "receipt": "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss-v2.json",
+  "actual_censor": "memory-monitor-error",
+  "errors": [
+    "RuntimeError('unreadable-owned-pid-rss:67460')",
+    "RuntimeError('memory-sampler-not-ready-before-resume')"
+  ],
+  "owner": {
+    "pid": 9712,
+    "creation_time": 134370140400775033,
+    "nonce": "d71ecbbe86ef46159bfa93dacfb1c93c",
+    "acquired_epoch": 1792540465.2412775,
+    "job_root_pid": 67460,
+    "categories": [
+      "source",
+      "source_admin",
+      "protocol",
+      "document_controls",
+      "receipts",
+      "history",
+      "shared_git",
+      "shared_cargo",
+      "stream_receipts",
+      "stream_landing_controls",
+      "final_protocol_source",
+      "windows_cadence_source",
+      "windows_cadence_protocol",
+      "windows_cadence_receipts",
+      "paged_controls_protocol"
+    ],
+    "budget_sha256": "0a1a73bd7f8094f1bf2e7f79cf40b6eff970acc2bb7c1640fbad52f3846be55a",
+    "receipt": "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss-v2.json",
+    "state": "closed",
+    "authority": "advisory ownership only; OS byte lock controls exclusion",
+    "job_root_creation_time": 134370140776533975,
+    "initial_root_rss": 2072576,
+    "closed_epoch": 1792540477.7091656,
+    "remaining_job_pids": [],
+    "errors": [
+      "RuntimeError('unreadable-owned-pid-rss:67460')",
+      "RuntimeError('memory-sampler-not-ready-before-resume')"
+    ]
+  },
+  "qualification": "CPython trace modifies a captured sampled local only; actual native RSS query succeeded before simulated unreadability. No source/time/module monkeypatch; no engine qualification."
+}

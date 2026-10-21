@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-025-C3-WINDOWS-FINAL-PLATFORM512KiB",
+  "utc": "2026-10-21T00:30:42.307016+00:00",
+  "status": "SOURCE_RESERVATION_APPLIED__PARENT_REGISTRATION_REQUIRED__NO_RUNTIME_GO",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T003042Z.json",
+      "bytes": 5448,
+      "sha256": "29aeb8e27edbc42f603ccac8024a1833abf04a7aa49db6ca9c8649940997397a"
+    },
+    {
+      "file": "claim-20261021T003042Z.md",
+      "bytes": 728,
+      "sha256": "5fec92a022adce204bd412e4ff17c947e377925b4ce841e5ad9fc5889afefc59"
+    }
+  ]
+}

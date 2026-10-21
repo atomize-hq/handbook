@@ -1,0 +1,164 @@
+{
+  "kind": "C3-META8MiB-finite-sourcepacket-review-closeout-topup",
+  "claim_id": "44GiB-CENTRAL-021-C3-META-REVIEW-8MiB",
+  "utc": "2026-10-20T23:46:39.234219+00:00",
+  "status": "AUTHORIZED_INTERNAL_C3_META8MiB__FINITE_REVIEW_COPIES_ONLY__NO_ENGINE_NATIVE_RESOURCE_GO",
+  "authority": "META explicitly authorizes direct6->8MiB within existingC3; no7MiBintermediate, overallforecast/reserve/filecaps unchanged. One intentionalclaimslot; laterthree standardclaims reserved for actualphaseclosure/final.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T233347Z.json",
+    "sha256": "9c8c1b428f11d08178e9a2d276970bb4480775681f8aa017c380f3c665fead45"
+  },
+  "C3_transfer": {
+    "total_C3_unchanged": 16777216,
+    "META_before": 6291456,
+    "META_increase": 2097152,
+    "META_after": 8388608,
+    "unsubclaimed_before": 6160384,
+    "unsubclaimed_after": 4063232,
+    "preexisting32KiBcontrolhold_inside_unsubclaimed": 32768,
+    "unsubclaimed_after_excluding_hold": 4030464,
+    "other_subclaims_unchanged": {
+      "CP2_CP3_combined_source_admin": 3145728,
+      "long_stream_source": 131072,
+      "Matrix_admin_extra": 1048576
+    },
+    "sum_subclaims_unsubclaimed_equals16MiB": true,
+    "C3_total_files_unchanged": 15000,
+    "META_regular_file_cap_unchanged": 2000
+  },
+  "closed_META_path_membership": {
+    "parent": {
+      "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be",
+      "selector": "ALL regular files recursively, including all current/future archives, extracted packet/source/control/receipt copies, failedreviews, transferJSON/base64 ifpersisted, claimfamilies and proposed integration/reviewlogs. Wholeparentcount is conservative; no selective subtraction or byte dedup.",
+      "current_bytes": 4807084,
+      "current_files": 622
+    },
+    "Landing_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution",
+    "included_complete_subtrees": [
+      "admission/",
+      "admission-claims/",
+      "native-macos/",
+      "reviews/",
+      "final-protocol/",
+      "windows-matrix/ EXCEPT exact windows-matrix/stream-snapshot-controls/ subtree"
+    ],
+    "included_root_regular_files": [
+      "authorization-amendment-20261020.md",
+      "gitnexus-amendment-detect.txt",
+      "gitnexus-detect-changes-meta-checkpoint.txt",
+      "guard-review-20261020.json",
+      "meta-state.json",
+      "native-guard-review-20261020.json"
+    ],
+    "Landing_partition_current": {
+      "admission": {
+        "bytes": 35785,
+        "files": 8
+      },
+      "admission-claims": {
+        "bytes": 296274,
+        "files": 60
+      },
+      "ROOT_FILES": {
+        "bytes": 32323,
+        "files": 6
+      },
+      "final-protocol": {
+        "bytes": 188865,
+        "files": 9
+      },
+      "native-macos": {
+        "bytes": 520350,
+        "files": 10
+      },
+      "reviews": {
+        "bytes": 222325,
+        "files": 19
+      },
+      "windows-matrix": {
+        "bytes": 110551,
+        "files": 11
+      }
+    },
+    "newly_explicit_final_protocol": {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\final-protocol",
+      "bytes": 188865,
+      "files": 9,
+      "accounting": "Physicallydistinct Landing review/sourcecopy chargedMETA; Matrixworktree originals remainF01Matrix. Neverexclude it fromMETA merely because filename/content matchesF01 originals."
+    },
+    "exclusions_exact": {
+      "harness/stream_snapshot.py": "C3_LONG_STREAM_SOURCE128KiB; originalLanding streammodule, noMETA doublecharge",
+      "harness/ allother21 sharedsourcefiles": "F01sharedoriginalsource; noMETA doublecharge",
+      "native-linux/ entiresubtree": "NativeLinux ORIGINAL localcontroller/source andcontrol/evidence outputs; pernativeplanF01source/F12Linux, retainglobalcharges; not META reviewcopy unless separatelyassigned physicalnewcopy",
+      "windows-matrix/stream-snapshot-controls/": "F12 streamLanding64KiB/9files unchanged",
+      "engine_source_admin": "ExactCP2/CP3checkout/source/admin pool separate; commonGitadmin countedF13once, notMETA",
+      "commonGitobjects_refs_logs_locks": "F13positivegrowth grouped hardcap, notMETA"
+    },
+    "excluded_current_counts": {
+      "F01_SHARED_SOURCE": {
+        "bytes": 140330,
+        "files": 21
+      },
+      "C3_LONG_STREAM_SOURCE": {
+        "bytes": 34729,
+        "files": 1
+      },
+      "NATIVE_LINUX_ORIGINAL_F01_OR_F12": {
+        "bytes": 1148884,
+        "files": 182
+      },
+      "F12_STREAM_LANDING": {
+        "bytes": 63390,
+        "files": 7
+      }
+    },
+    "native_ownership_evidence": "Landingexecution/native-linux/plan.md explicitlynames thislocaloutputroot andstates localreportcopiescharged nativeevidence. Distinctparent archives/extracts/Linuxreviewcopies underP stillMETA. Sourceoriginals andreviewcopies areseparatephysicalpaths.",
+    "unlisted_future_paths": "Require explicitper-file/subtree ownerregistration beforefutureLandingcopy outside includedselector. Do not extend native-linux exclusion to a physicallydistinct META returnpacket merely because it containsLinuxsource; place/assign thatnewcopy undera named META selector. No duplicatefullrootcensus."
+  },
+  "current_and_finite_future": {
+    "independent_current_META_bytes_before_this_claim": 6213557,
+    "independent_current_META_files_before_this_claim": 745,
+    "old6MiB_headroom_now": 77899,
+    "authorized_next_native_source_packets_archives_extracts_reviews_thinLandingcopies_v5review_integrationlogs_bytes": 2097152,
+    "authorized_future_regular_files": 200,
+    "scope": "Finite sharedMETA sourcefreeze preparation budget; all archives+distinctextracts+Landingcopies countedonce each, originalnative/sourceevidence remainsinownerpool. Includes failedreturns/reviews and versioned reviewlogs; no deletion/compressioncredit.",
+    "future2MiB_forecast_before_claim_reports": 8310709,
+    "headroom_after_full_future_before_claim_reports": 77899,
+    "additional_claim_self_and_distinct_Landingcopy_safety_envelope": 32768,
+    "future_plus_claim_safety_forecast": 8343477,
+    "headroom_after_full_future_and_claim_safety": 45131,
+    "future_files_with200plus_claimparent_andLandingtriplets": 951,
+    "parent_reported_completed_copy_delta": 409336,
+    "parent_reported_completed_copy_files": 35,
+    "past_copy_note": "Pre5803001+actual409336=6212337 before METArootfileupdates. Independentfreshcensus above supersedes onlycurrentmeasurement; oldforecasts/rawcounts retained.",
+    "nextcopy_rule": "Beforeeverynewpacket/copy, refresh BOTH Pwhole and includedLanding physicalmembers plus pendingremainingreservation. Requireactual+prospectivearchive/extract/copy/outerreport/log <=8MiB/2000. This claim doesnot grant arbitrary additional2MiB if priorpendingreservations alreadyconsumeit."
+  },
+  "global_allocator_unchanged": {
+    "whole_forecast": 47092083061,
+    "central": 152557195,
+    "ceiling": 47244640256,
+    "reserved_files": 4792604,
+    "remaining_files": 207396,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "new_overallforecast_bytes": 0,
+    "new_overallforecast_files": 0,
+    "native_full_long_resource_GO": "UNCHANGED_WITHHELD; review/sourcecopy scopeonly"
+  },
+  "permission_and_freeze": {
+    "current_source_review": "META nowreportsa3freshsourceaccepted; quota/cachedBuilderCPU followupfixstillpending beforefinalfreeze, so acceptedsourceisnot finalnativequalification",
+    "sourcefreeze": "04:10 unchanged perMETA; noreset or scopeextension",
+    "not_authorized": [
+      "engine/Cargo/test/native/long runs",
+      "corpus/restore/cachecopies or protecteddeletions",
+      "guardbody/systempriority/timerresolution/dependencies changes",
+      "releaseofF09/F10/F11/F14 or native unusedforecasts"
+    ],
+    "old_versions": "Alloldseals/budgets/failedraw immutable; boundedowner registration ofMETA8 beforecopiespast6MiB; do not rewriteoldclaim012/019"
+  },
+  "resource_worker_actions": "Read-only currentmembership census/priorseal hashchecks and immutableclaimreport only. No source/livebudget/Git/index/engine/cache/archive extraction or othercopy byresourceworker.",
+  "prior_hashes_verified": {
+    "claim_seals": 20,
+    "initial44GiB_manifest": true
+  }
+}

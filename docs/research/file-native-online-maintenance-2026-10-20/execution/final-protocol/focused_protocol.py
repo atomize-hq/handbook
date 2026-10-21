@@ -6,9 +6,11 @@ independent complete decoder, never engine audit. See README for exact boundary.
 """
 import copy
 import hashlib
+import inspect
 import json
 import math
 import threading
+import time
 from contextlib import contextmanager, ExitStack
 
 MIB = 1024**2
@@ -252,7 +254,7 @@ class Harness:
             if failure is None:
                 self.note('schedule-complete-unqualified', case_id=case_id, root=str(root))
 
-    def call(self, root, action, *, timeout=120, code=0, env=None,
+    def call(self, root, action, *, timeout=120, code=0, env=None, on_started=None,
              allowed_errors=(), observed_exits=(), **fields):
         require(root in self.active, 'unadmitted-root')
         self.check_time()
@@ -264,11 +266,18 @@ class Harness:
         # actual Driver signatures env is consumed before **engine_fields.
         payload = dict(root=str(root), action=action, **copy.deepcopy(fields))
         environment = copy.deepcopy(env)
+        require(on_started is None or callable(on_started), 'start-callback-must-be-callable')
+        if on_started is not None:
+            parameter = inspect.signature(self.driver.call, follow_wrapped=False).parameters.get('on_started')
+            require(parameter is not None and parameter.kind in
+                    (inspect.Parameter.KEYWORD_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD),
+                    'driver-must-explicitly-consume-start-callback-outside-engine-JSON')
+        transport = {} if on_started is None else {'on_started': on_started}
         self.note('request-before-dispatch', input=payload, env=environment,
                   expected_exit=code, observed_exits=list(observed_exits), role=role)
         try:
             response = self.driver.call(root, action, timeout=min(timeout, FUNCTIONAL_CUTOFF-self.a.wall_time()),
-                                        code=code, env=environment, **fields)
+                                        code=code, env=environment, **transport, **fields)
         except AssertionError as error:
             # Existing Windows/Linux Driver.call accepts one expected exit, but
             # a concurrent publish can legitimately return 0 OR semantic exit2.
@@ -559,6 +568,119 @@ class Harness:
             require(self.read(root, key, 128*1024) == raw, 'B-publication-control-must-remain-loose')
         self.verify(root, label+'-post-resume-reap', mapped_keys=[key])
 
+    def single_publisher_round(self, root, label, name, codec='zstd'):
+        """Map a real prior tail while a positively started publisher is held.
+
+        The physical candidate is fully constructed before publication begins.
+        These are live process intervals spanning physical activation, not a
+        claim that constructor CPU overlaps publisher CPU. No fixture writes.
+        """
+        require({'barrier:physical-before-selection', 'barrier:candidate-ready'} <=
+                set(self.a.capabilities), 'real-physical-and-publisher-barriers-required')
+        before = self.state(root)
+        tail = before['selected']
+        key = 'publications/'+tail['publication']+'.json'
+        raw = self.read(root, key, 128*1024)
+        unmapped = self.a.mapping(root, key)
+        require(unmapped.get('mapped') is False and unmapped.get('independent') is True
+                and unmapped.get('receipt_sha256'), 'positive-unmapped-tail-proof-required')
+        prior_discovery = before['work'].get('discovery') or {}
+        require(type(prior_discovery.get('completed')) is dict
+                and prior_discovery.get('interval') is None
+                and prior_discovery['completed'].get('selected') != tail,
+                'tail-must-follow-completed-physical-cutoff')
+        controls = [self.a.control(root, label+'-maintenance'), self.a.control(root, label+'-publisher')]
+        request = dict(request=name, base=tail, ops=[], packet=False)
+        self.ledgers[root].record(request)
+        calls, started, times = [], {}, {}
+        primary = None
+        def callback(role):
+            def observed(event):
+                require(type(event) is dict and type(event.get('pid')) is int and event['pid'] > 0
+                        and type(event.get('positive_rss')) is int and 0 < event['positive_rss'] <= 2048*MIB
+                        and event.get('before_stdin_delivery') is True
+                        and type(event.get('observed_ns')) is int and event['observed_ns'] > 0,
+                        'positive-native-start-before-stdin-required')
+                require(role not in started, 'duplicate-native-start-callback')
+                started[role] = copy.deepcopy(event)
+                times[role+'-started'] = time.perf_counter_ns()
+            return observed
+        def environment(control, phase):
+            return dict(EXP_BARRIER=phase, EXP_READY=control['ready'], EXP_RELEASE=control['release'])
+        try:
+            calls.append(self.a.spawn(lambda: self.call(root, 'packing', operation='build', codec=codec,
+                include_attempts=True, cleanup=False, force=True, timeout=60,
+                env=environment(controls[0], 'physical-before-selection'), on_started=callback('maintenance'))))
+            self.a.await_ready(controls[0], calls[0], 10)
+            times['maintenance-ready'] = time.perf_counter_ns()
+            require('maintenance' in started and self.a.alive(calls[0]), 'real-maintenance-not-held')
+            journal = self.document(root, 'PACKING.json')
+            target = journal.get('target') or {}
+            binding = target.get('physical') or {}
+            require(journal.get('status') == 'installed' and journal.get('id') == binding.get('id')
+                    and isinstance(binding.get('id'), str) and binding['id'] != before['store']['physical']['id']
+                    and binding.get('ordinal') == before['store']['physical']['ordinal']+1
+                    and target.get('catalog') != before['store']['catalog']
+                    and journal.get('expected_config') == sha(self.read(root, 'STORE.json', 4096)),
+                    'physical-ready-must-have-new-installed-mapping')
+            plan_raw = self.read(root, 'physical-plans/'+binding['plan']+'.json', 128*1024)
+            require(sha(plan_raw) == binding['plan'], 'candidate-work-hash')
+            candidate = strict(plan_raw, 128*1024)
+            generation = candidate.get('generation') or {}
+            require(candidate.get('physical_parent') == journal['expected_config']
+                    and generation.get('id') == binding['id'] and generation.get('ordinal') == binding['ordinal']
+                    and generation.get('catalog') == target['catalog'], 'candidate-work-binding')
+            discovery = candidate.get('discovery') or {}
+            require((discovery.get('completed') or {}).get('selected') == tail
+                    and discovery.get('interval') is None and discovery.get('deferred') == [],
+                    'real-candidate-must-complete-eligible-tail-cutoff')
+            calls.append(self.a.spawn(lambda: self.call(root, 'publish', request=request, timeout=60,
+                env=environment(controls[1], 'candidate-ready'), on_started=callback('publisher'))))
+            self.a.await_ready(controls[1], calls[1], 10)
+            times['publisher-ready'] = time.perf_counter_ns()
+            require(set(started) == {'maintenance', 'publisher'}
+                    and started['maintenance']['pid'] != started['publisher']['pid']
+                    and all(self.a.alive(handle) for handle in calls), 'two-real-held-native-processes-required')
+            times['both-live-before-any-release'] = time.perf_counter_ns()
+            self.note('single-publisher-overlap-observations', root=str(root), label=label,
+                      observations_ns=times, clock='time.perf_counter_ns', native_start_events=started)
+            require(times['maintenance-started'] < times['maintenance-ready'] < times['publisher-started']
+                    < times['publisher-ready']
+                    <= times['both-live-before-any-release'], 'positive-publisher-maintenance-interval-required')
+            self.note('single-publisher-live-overlap', root=str(root), label=label, request=request,
+                      tail=tail, candidate_target=target, native_start_events=started, observations_ns=times,
+                      clock='time.perf_counter_ns',
+                      positive_interval_seconds=(times['publisher-ready']-times['publisher-started'])/1e9,
+                      construction_overlap_claimed=False, observed_before_all_releases=True)
+        except BaseException as error:
+            primary = error
+        finally:
+            joined = self.join_callbacks(root, label, calls, controls, primary=primary)
+        maintenance, published = joined
+        metric = maintenance.get('metrics') or {}
+        require(len(metric.get('physical_activation_holds_ns', [])) == 1
+                and metric.get('pack_eligible_records', 0) > 0
+                and metric.get('rolling_publications_visited', 0) > 0,
+                'real-eligible-physical-activation-required')
+        value = published['result']
+        self.ledgers[root].accept(request, value['result'], value['selected'])
+        after = self.state(root)
+        # No second maintainer or cleanup runs in this pair. Ordinary no-op
+        # publication cannot normalize the physical plan. Bind the selection
+        # to the exact installed target inspected before either release.
+        require(after['store'] == target, 'activated-store-target-mismatch')
+        require(after['work'] == candidate, 'activated-Work-target-mismatch')
+        transition(before, after)
+        mapped = self.a.mapping(root, key)
+        require(mapped.get('mapped') is True and mapped.get('independent') is True
+                and mapped.get('receipt_sha256') and mapped.get('raw_sha256') == sha(raw),
+                'actual-activated-tail-mapping-proof-required')
+        self.note('single-publisher-overlap-joined', root=str(root), label=label,
+                  observations_ns=times, clock='time.perf_counter_ns', native_start_events=started, mapping=mapped,
+                  selected_target=after['store'], captured_work_sha256=sha(plan_raw), exact_candidate_selected=True,
+                  physical_activation_holds_ns=metric['physical_activation_holds_ns'])
+        return published
+
     def concurrent_cycle(self, root, label, publishers, accepted=16, readers=4, codec='zstd',
                          collect_conflicts=False):
         require(publishers in (1, 4) and readers == 4 and accepted >= 16, 'required-concurrency-shape')
@@ -571,8 +693,13 @@ class Harness:
                     'pack-catalog-captured', request_id='initial'))[0] for i in range(readers)]
             for number in range(accepted):
                 if publishers == 1:
-                    self.publish(root, f'{label}-p0-{number}', retries=1)
-                    self.pack(root, codec)
+                    if number == 0:
+                        # Exactly one of the required sixteen is the eligible
+                        # seed after bootstrap; fifteen coupled rounds follow.
+                        self.publish(root, f'{label}-p0-{number}', retries=1)
+                    else:
+                        self.single_publisher_round(root, f'{label}-coupled{number}',
+                                                    f'{label}-p0-{number}', codec)
                 else:
                     # Exactly four attempts/round, all on the SAME captured base.
                     # All four reach candidate-ready before any is released:
@@ -644,46 +771,16 @@ class Harness:
         self.verify(root, label+'-cycle-boundary')
 
     def collect_failed_round(self, root, label, requests, outcomes, candidates):
-        """Optional frozen policy, using supported owner abandonment/semantic GC.
+        """SOURCE PLAN ONLY: exact terminal-v2 source/schema adapter pending.
 
-        No planned bytes are credited. Exact owner/raw prefix evidence and full
-        independent oracles precede collection. The next command remains blocked
-        until a real before/after census proves actual engine removal.
+        Reviewed design requires explicit v2 opt-in, definitive preselection
+        conflicts, durable attempt fence then atomic active-to-terminal charge,
+        all garbage retained and reclaimed=0. Legacy owners, selected/lost
+        replies, packets and selection-started attempts cannot use it. Active8,
+        terminal4096; small cases forecast48 terminal receipts per A/B root.
+        No handler/request/response names are guessed here. V2 GC must refuse.
         """
-        require('failed-round-collection' in self.a.capabilities, 'failed-round-collection-adapter-required')
-        require(type(candidates) is dict and set(candidates) == {r['request'] for r in requests},
-                'all-four-prepared-candidate-owners-required')
-        failed = []
-        for request, response in zip(requests, outcomes):
-            item = candidates[request['request']]
-            raw = item['bytes']
-            candidate = strict(raw, 4*MIB)
-            require(candidate.get('request') == request and candidate.get('intent') == intent(request)
-                    and candidate.get('expected') == request['base']
-                    and item['path'] == 'attempts/'+candidate['attempt']+'/candidate.json',
-                    'exact-native-prepared-owner-binding')
-            self.note('prepared-prefix-raw-candidate', root=str(root), label=label,
-                      request=request, path=item['path'], sha256=sha(raw), raw_utf8=raw.decode())
-            if response.get('status') == 'error':
-                failed.append(candidate['attempt'])
-        require(len(failed) == 3, 'exact-three-failed-owners-per-round')
-        prefix = self.a.retain_failed_prefix(root, label, failed)
-        require(prefix.get('all_raw_events_retained') is True and prefix.get('inventory_sha256')
-                and prefix.get('raw_candidate_evidence_retained') is True,
-                'failed-prefix-evidence-must-precede-collection')
-        self.note('failed-prefix-retained', root=str(root), label=label, evidence=prefix)
-        self.verify(root, label+'-before-legitimate-collection')
-        before = self.a.inventory(root)
-        for attempt in failed:
-            self.call(root, 'lifecycle', operation='abandon', attempt=attempt)
-        collected = self.call(root, 'lifecycle', operation='collect')
-        after = self.a.inventory(root)
-        proof = self.a.collection_proof(root, failed, before, after)
-        self.note('engine-collection-actual-census', label=label, response=collected, proof=proof)
-        require(proof.get('actual_removal_proven') is True and proof.get('all_failed_generations_removed') is True
-                and proof.get('planned_credit') == 0 and proof.get('retained_evidence_sha256'),
-                'no-actual-failed-generation-collection-proof')
-        self.verify(root, label+'-after-legitimate-collection')
+        raise Unsupported('pending-exact-source-bound-terminal-v2-interface; legacy-abandon-collect-disabled')
 
     def small(self, root, mode, forecast, codec='zstd'):
         with self.case('S-'+mode+'-'+codec, root, forecast):

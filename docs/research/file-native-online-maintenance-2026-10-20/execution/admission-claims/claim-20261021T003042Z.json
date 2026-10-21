@@ -1,0 +1,121 @@
+{
+  "claim_id": "44GiB-CENTRAL-025-C3-WINDOWS-FINAL-PLATFORM512KiB",
+  "utc": "2026-10-21T00:30:42.307016+00:00",
+  "status": "SOURCE_RESERVATION_APPLIED__PARENT_REGISTRATION_REQUIRED__NO_RUNTIME_GO",
+  "authority": "METAfinal025specONLY;512KiBfromexistingC3, nootherallocation/diagnosticseal.",
+  "prior024": {
+    "file": "claim-20261021T001543Z.json",
+    "sha256": "011825b6a11c267bb2cba5582faa5f835d44f9779003d19659ea01e44d371a1d"
+  },
+  "family_addendum": {
+    "file": "claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "cap_files": 128,
+    "cap_bytes": 524288
+  },
+  "owner_chat": "01a15bd5-7694-7981-a619-9a23d4774b60",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform",
+  "root_before": {
+    "exists": false,
+    "bytes": 0,
+    "files": 0
+  },
+  "caps": {
+    "bytes": 524288,
+    "files": 32,
+    "closed_names": 27,
+    "no28th_without_parent_registration": true
+  },
+  "groups": {
+    "SOURCE": {
+      "bytes": 196608,
+      "files": 11,
+      "per_file_bytes": {
+        "windows_driver.py": 24576,
+        "windows_native.py": 24576,
+        "windows_adapter.py": 28672,
+        "windows_growth.py": 16384,
+        "windows_capsule.py": 16384,
+        "windows_hooks.py": 24576,
+        "windows_oracle_bridge.py": 8192,
+        "windows_bootstrap.py": 8192,
+        "windows_evidence.py": 12288,
+        "source_controls.py": 24576,
+        "windows_deadlines.py": 8192
+      }
+    },
+    "CASEDATA": {
+      "bytes": 262144,
+      "files": 8,
+      "per_file_bytes": {
+        "packing52.json": 32768,
+        "recovery24.json": 32768,
+        "strict24.json": 32768,
+        "focused_windows.json": 32768,
+        "protocol.json": 32768,
+        "workspace_ordinary.json": 32768,
+        "source_constructors.json": 32768,
+        "growth_actions.json": 32768
+      }
+    },
+    "BINDINGS": {
+      "bytes": 65536,
+      "files": 8,
+      "per_file_bytes": {
+        "README.md": 8192,
+        "interface.md": 8192,
+        "controls-forecast.json": 8192,
+        "source-bindings.json": 8192,
+        "final-engine-bindings.json": 8192,
+        "source-receipt.json": 8192,
+        "static-controls-result.json": 8192,
+        "platform-source-review-notes.md": 8192
+      }
+    }
+  },
+  "checks_before_every_write": "Exactregisteredname, individualcap, groupbyte/filecaps, whole524288/32, owner/globalforecast. Fiveunusedrootfileslots doNOTauthorizeextra names orimplicitpycache/temp/output. Parentregisterrevisionbefore28th.",
+  "C3": {
+    "total_unchanged": 16777216,
+    "unsubclaimed_before": 3932160,
+    "new_WINDOWS_FINAL_PLATFORM": 524288,
+    "unsubclaimed_after": 3407872,
+    "existing32KiBcontrolhold_inside_unsubclaimed": 32768,
+    "file_pool": 15000,
+    "file_headroom_check": {
+      "003_META_CP_subclaim_files_preserved": 4000,
+      "stream_source": 1,
+      "qualification_helpers": 8,
+      "Matrix_admin_conservative_nonadditive_F13": 100,
+      "preexisting_control_hold_conservative_buffer_not_new_grant": 64,
+      "new_Windows_platform": 32,
+      "conservative_sum": 4205,
+      "headroom": 10795,
+      "notes": "AllnamedlaterC3drawsfitparent15k; META2000unchangedinside003andfamily128nestedMETA, notaddedagain. Conservativeadmin/controlbufferisnotactualdoublecharge orothernewgrant. New32drawexistingC3allowance, noreserve/globalfileincrease."
+    }
+  },
+  "ownership": "Originalwindows-final-platform filesC3WINDOWS, NOTMETA8/MatrixF01. DistinctPpacket/returncopiesMETA8; commonGitpositiveobjects/index/locksF13once. Qualification-lanesexact8unchanged, no9thpath.",
+  "scope": [
+    "NEWWindowsDriverCOPY/version mayrecordrawpartialstdoutBEFOREJSONdecode andfaithfullycontrolopaqueownedprocessdeath; oldDriver/1e4controller frozen. BindactualDriverANDguardpaths/hashes separately.",
+    "WindowsNativeAdapter,interrupt/closecase/fullphysicalsource/resource/sourcecasemaps andF05historybridge. NoRust/nativeengine/worktree/admin/target/dependency/cache/corpusgrant.",
+    "All166WindowscaseIDs incl1000mapping/F05history PENDING. No unsupportedPASS, omittedcase, quota/default/profilewaiver orfunctionaladmission fromfakecontrols.",
+    "FullsourcereviewandseparatefinitebenigncontrolRUNGO/forecast beforeANYruntimecontrols. Source/staticresultcapisnotruntimeartifact allowance."
+  ],
+  "registration": "OwnerREADONLY untilparentNEWimmutablebudgetbind025+addendum/root/27names/allcaps andexplicitSOURCEONLYwriteGO. Runtime/controlGOseparate aftersource review, exactresource/RSS/ownedprocess/closure/deadlineforecast.",
+  "unchanged_allocator": {
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "human_cap": 47244640256,
+    "reserved_files": 4792652,
+    "unassigned_files": 207348,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "CP_fixture192MiB": 201326592,
+    "F06total224MiB": 234881024,
+    "F02target256MiB": 268435456,
+    "C2Win128MiB_held": 134217728,
+    "new_overall_bytes": 0,
+    "new_overall_files": 0
+  },
+  "held": "Noengine/native/realhistory/long/F07/fullbody/phaseexpiryGO. Allwholebody/constructor/terminal/fileboundsopen. Sourcefreeze04:10unchanged.",
+  "resource_actions": "Readonlyroot/cap/priorhashchecks+this025triplet only; nohelper/source/livebudget/Git/run/build/cache/corpus mutation."
+}

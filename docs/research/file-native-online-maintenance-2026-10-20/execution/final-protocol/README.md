@@ -2,7 +2,7 @@
 
 Source-only handoff. No engine/build/native workload or real fixture was run by
 this worker. All engine cases remain PENDING on the eventual reviewed final pin.
-The replacement source budget is 196,608 bytes /12 regular files, nested inside Matrix F01's
+The v3 source budget is 229,376 bytes /16 regular files, nested inside Matrix F01's
 existing 1MiB source allocation. Parent owns staging/commit/integration. The
 proposed structured format standard remains proposed; JSON here is a new private
 machine receipt, Markdown a derived explanation. No engine format is changed.
@@ -12,8 +12,58 @@ standard, frozen gates/watchdogs, execution checklist and admission claims were
 read. Main and prior integration were read only. Retained CP1/CP2 scripts were
 inspected as source, never executed/copied as qualification. GitNexus has no
 available tools and this checkout is unregistered: dependency impact is UNKNOWN,
-treated as manual HIGH. Only new symbols in this directory were created/edited;
-no existing caller/engine symbol was changed. No indexing/bootstrap or Git action.
+treated as manual HIGH. V3 changes owner Harness.call, concurrent_cycle and
+collect_failed_round, adding single_publisher_round. Direct users are small()
+and injected Driver adapters; native schedules depend on them. No engine symbol,
+index/bootstrap or Git mutation. Parent separately authorized immutable a3 git
+show reads for the source-bound whole-case dossier.
+
+V3 supersedes v2's synchronous single-publisher ordering. One of sixteen required
+accepted publications is a seed; fifteen paired rounds follow. Each starts a real
+maintenance build held at physical-before-selection. An independently unmapped
+tail, installed new target, exact Work hash/generation/parent and completed tail
+cutoff must agree before a publisher starts. Its transport-only on_started
+callback requires positive native PID/RSS before stdin. Publisher candidate-ready
+and two distinct live native identities precede every release. perf_counter_ns
+records a positive observed overlap; construction completed before this span,
+so no simultaneous-construction claim is made. Both releases and both waits are
+attempted on every exceptional path, plus four held reader closures. Final
+activation metrics, changed mapping identity and independent raw-tail mapping
+are mandatory. Missing readiness/start/eligible-tail facts fail the case.
+
+Driver.call must explicitly consume on_started, forwarding it only to its native
+transport. The minimum callback event is pid:int>0, positive_rss:int in the checker
+limit, before_stdin_delivery:true and observed_ns:int>0 from perf_counter_ns.
+Harness.call never inserts the callable in engine JSON, env or evidence. Existing
+env/raw-row binding remains unchanged. overlap_controls.py adds50 MEMORY ONLY
+controls including all paired spawn/ready/release/wait failure positions. Its
+fake native identities and maps are not native evidence. The original36 controls
+and33 remediation checks/53 exception scenarios remain required and passed.
+
+Immutable full v2 is parent transfers/focused-v2-native-source.tar.gz,51,034 bytes,
+SHA2569ce3ded9aa01724c25074cf3b83505826f8d140c63311e383b99b409ac671ebe,
+and Landing90216ef1. source_receipt_v2.json preserves exact original ae78 receipt;
+its file manifest describes that archive, not the changed v3 files beside it.
+
+V3.1 remediates independent review F5: after both actors join, selected STORE
+must equal the complete installed target captured at physical-before-selection,
+including catalog and physical id/ordinal/plan. Selected Work must equal the
+captured hash-bound candidate Work. This pair has no other maintainer/cleanup,
+and ordinary no-op publication cannot normalize the plan; no generic equivalence
+or full-oracle substitution is permitted. These checks precede successful joined
+overlap evidence. Memory controls mutate only post-release id/catalog/plan/ordinal,
+Work and completed cutoff, independently, in both physical-first and publisher-first
+commit orderings. All refuse with all callback/reader closures retained; exact
+target positives pass. The pre-fix gap was reproduced for five independent
+postselection mutations in both orderings, with17 accepted/15 successful pairs.
+All50 overlap controls are MEMORY ONLY, including these14 additions.
+
+Full pre-fix v3 archive is parent transfers/focused-v3-negative-source.tar.gz,
+59,042 bytes, SHA25611b134c1ca04cb17925fbeaccdbf1aeb4239ec0a1ff030f3e23f45332d0c6b15.
+All11 members/217,213 bytes, original receipt478f4696ca4543dee1ac1f4badeca8130021354ffdf108d8ce71a6f307fd9a17,
+all member hashes and strict gzip/tar EOF were verified before any edit. Parent
+review-v3.md/evidence-v3.json remain unchanged. Terminal-v2 is still failclosed
+pending its exact source/schema handoff; no native or engine run is authorized.
 
 `focused_protocol.py` contains the injected Driver-facing core. It imports only
 Python standard-library data/thread/context helpers; native processes, Windows
@@ -136,16 +186,19 @@ and the general bounded cleanup helper is not relabeled as
 a single pass. Complete independent oracles run at all implemented critical
 crashes and cycle/restore boundaries. Missing counters refuse qualification.
 
-An OPTIONAL policy `forecast.conflict_policy='engine-abandon-collect-each-round'`
-has source support, disabled by default. It needs `failed-round-collection` plus
-prepared_candidates/retain_failed_prefix/collection_proof adapter hooks. Exact
-candidate bytes/intent/attempt paths from all4 paused publishers are captured;
-raw failed-prefix events/candidates/inventory are retained BEFORE a full oracle.
-Only the3 failed owners may be legally lifecycle-abandoned and engine-collected.
-Another full oracle and actual complete before/after removal census precede the
-next phase. No accepted B snapshot is retired to finance work. Planned collection
-never funds peak admission. The retained-all forecast remains controlling until
-the parent freezes/reviews this alternative and its actual peak/evidence topology.
+Legacy abandon+collect is disabled: collect_failed_round now always raises
+Unsupported before any lifecycle call. The exact terminal-v2 interface is pending
+its reviewed source/schema. Approved design requires explicit v2 opt-in and only
+definitive ordinary sealed NEW conflicts before selection starts; retain every
+owned byte and reclaimed=0. Persist a fence before atomic active-to-terminal
+transfer, charging used+128KiB without treating that charge as a new128KiB file.
+Active8 remains; terminal4096 is a count cap, not4096 preallocated receipts.
+Ordinary small cases have48 losers per A/B root. Keep raw candidate/input/events,
+full independent oracles and terminal receipts. Legacy, packet, lost-reply and
+selection-started owners cannot terminalize; v2 collect refuses before W. No
+request/response names or final receipt layout are guessed. Retain-all remains
+charged, but its four-publisher runtime progress is unqualified because active8
+fills; this is an explicit pending dependency. No accepted B snapshot is retired.
 
 ## Required pending adapter work
 

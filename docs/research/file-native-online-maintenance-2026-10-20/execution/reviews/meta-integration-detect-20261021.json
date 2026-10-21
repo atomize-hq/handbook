@@ -1,0 +1,22 @@
+{
+  "utc": "2026-10-21T00:50:22.921782+00:00",
+  "tool": "cached GitNexus1.6.12 detect-changes --scope all --repo exact Landing path",
+  "exit": 1,
+  "graph_scope": "UNKNOWN",
+  "reason": "Exact isolated worktree unregistered; no bootstrap/index attempted",
+  "manual_risk": "HIGH; accepted focused_protocol overlap/captured-target validation and QPC native Job resource controller",
+  "expected_paths": [
+    "execution/final-protocol",
+    "execution/windows-cadence",
+    "execution/reviews/{focused,cp4,windows-qpc}",
+    "execution/admission",
+    "execution/admission-claims",
+    "execution/meta-state.json"
+  ],
+  "excluded_unreviewed": [
+    "execution/native-linux new revisions",
+    "execution/qualification-lanes",
+    "execution/windows-final-platform"
+  ],
+  "full_qualification": "INCOMPLETE"
+}

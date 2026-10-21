@@ -1,0 +1,406 @@
+{
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "-B",
+    "-c",
+    "import sys,os,json,time;sys.path.insert(0,'C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-online-matrix-20261020\\\\handbook\\\\docs\\\\research\\\\file-native-online-maintenance-2026-10-20\\\\execution\\\\windows-cadence');import job_guard_qpc as g;print(json.dumps(dict(pid=os.getpid(),creation_time=g.creation_time(os.getpid()))),flush=True);time.sleep(20)"
+  ],
+  "cwd": null,
+  "started_epoch": 1792539828.430123,
+  "token_acquired_epoch": 1792539844.46112,
+  "token_wait_seconds": 0.0,
+  "token_wait_started_epoch": 1792539844.46112,
+  "token_contentions": 0,
+  "before_token_setup_seconds": 16.030996799468994,
+  "total_seconds": 32.55396628379822,
+  "stage_seconds": 16.522969484329224,
+  "requested_seconds": 30,
+  "functional_cutoff_epoch": 1792581014.0,
+  "absolute_deadline_epoch": 1792539874.46112,
+  "memory_sample_timing": {
+    "samples": 1,
+    "max_interval_seconds": 0.0834048,
+    "intervals_over_40ms": 1,
+    "completed_samples": 1,
+    "max_completion_interval_seconds": 0.0,
+    "max_collection_duration_seconds": 0.0009903,
+    "max_sample_duration_seconds": 0.0010432,
+    "max_recorded_interval_seconds": 0.0,
+    "slow_samples": 0,
+    "clock": "perf_counter_ns",
+    "target_interval_ns": 20000000,
+    "censor_interval_ns": 40000000,
+    "clock_info": {
+      "perf_counter": {
+        "implementation": "QueryPerformanceCounter()",
+        "monotonic": true,
+        "adjustable": false,
+        "resolution": 1e-07
+      },
+      "monotonic": {
+        "implementation": "GetTickCount64()",
+        "monotonic": true,
+        "adjustable": false,
+        "resolution": 0.015625
+      }
+    },
+    "interval_seconds_clock": "perf_counter_ns; monotonic fields are coarse diagnostics",
+    "first_positive_full_sample_ns": 584037565569000,
+    "last_recorded_sample_ns": 584037565569000,
+    "root_wait_returned_ns": 584037651308800,
+    "root_end_coverage_gap_seconds": 0.0857398,
+    "job_empty_observed_ns": 584037651484800,
+    "job_end_coverage_gap_seconds": 0.0859158
+  },
+  "raw_rss": "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\start-gap.rss.jsonl.gz",
+  "closure_checks": [
+    {
+      "epoch": 1792539860.9418635,
+      "members": []
+    },
+    {
+      "epoch": 1792539860.9619339,
+      "members": []
+    }
+  ],
+  "exit": 137,
+  "censor": "memory-sample-cadence-censor",
+  "errors": [],
+  "job_commit_limit": 3221225472,
+  "process_commit_limit": 2147483648,
+  "job_aggregate_sampled_peak_rss": 2072576,
+  "per_process_observed_peak_rss": {
+    "34924": 2072576
+  },
+  "missing_memory_samples": 0,
+  "pid_exit_races": [],
+  "initial_suspended_root_rss": 2072576,
+  "supervisor_rss_limit": 805306368,
+  "supervisor_peak_rss": 112398336,
+  "supervisor_samples": [
+    {
+      "epoch": 1792539844.47514,
+      "total": 112177152,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86704128,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25473024,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539860.8550134,
+      "total": 112398336,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25657344,
+          "peak": 28196864
+        }
+      ]
+    }
+  ],
+  "owner": {
+    "pid": 5396,
+    "creation_time": 134370132967366804,
+    "nonce": "e1358b092585435f8f074bd1978e048b",
+    "acquired_epoch": 1792539844.46112,
+    "job_root_pid": 34924,
+    "categories": [
+      "source",
+      "source_admin",
+      "protocol",
+      "document_controls",
+      "receipts",
+      "history",
+      "shared_git",
+      "shared_cargo",
+      "stream_receipts",
+      "stream_landing_controls",
+      "final_protocol_source",
+      "windows_cadence_source",
+      "windows_cadence_protocol",
+      "windows_cadence_receipts",
+      "paged_controls_protocol"
+    ],
+    "budget_sha256": "0a1a73bd7f8094f1bf2e7f79cf40b6eff970acc2bb7c1640fbad52f3846be55a",
+    "receipt": "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\start-gap.json",
+    "state": "closed",
+    "authority": "advisory ownership only; OS byte lock controls exclusion",
+    "job_root_creation_time": 134370134608505326,
+    "initial_root_rss": 2072576,
+    "resumed_epoch": 1792539860.8550134,
+    "closed_epoch": 1792539860.9820042,
+    "remaining_job_pids": [],
+    "errors": []
+  },
+  "remaining_job_pids": [],
+  "process_closure_verified": true,
+  "terminations": [
+    {
+      "epoch": 1792539860.937953,
+      "reason": "memory-sample-cadence-censor"
+    },
+    {
+      "epoch": 1792539860.9413092,
+      "reason": "memory-sample-cadence-censor"
+    },
+    {
+      "epoch": 1792539860.9413092,
+      "reason": "memory-sample-cadence-censor"
+    }
+  ],
+  "disk_samples": [],
+  "prospective": {
+    "categories": {
+      "source": {
+        "bytes": 936276,
+        "files": 90,
+        "absolute_actual": {
+          "bytes": 936276,
+          "files": 90
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1048576,
+        "cap_files": 200
+      },
+      "source_admin": {
+        "bytes": 941574,
+        "files": 8,
+        "absolute_actual": {
+          "bytes": 941574,
+          "files": 8
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 100
+      },
+      "protocol": {
+        "bytes": 6798333,
+        "files": 1240,
+        "absolute_actual": {
+          "bytes": 6798333,
+          "files": 1240
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 33554432,
+        "cap_files": 25000
+      },
+      "document_controls": {
+        "bytes": 8435478,
+        "files": 820,
+        "absolute_actual": {
+          "bytes": 8435478,
+          "files": 820
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 67108864,
+        "cap_files": 30000
+      },
+      "receipts": {
+        "bytes": 19825568,
+        "files": 1261,
+        "absolute_actual": {
+          "bytes": 19825568,
+          "files": 1261
+        },
+        "reserve_bytes": 967269,
+        "reserve_files": 28,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 54525952,
+        "cap_files": 10000
+      },
+      "history": {
+        "bytes": 552141207,
+        "files": 129768,
+        "absolute_actual": {
+          "bytes": 552141207,
+          "files": 129768
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1073741824,
+        "cap_files": 400000
+      },
+      "shared_git": {
+        "bytes": 4715674,
+        "files": 697,
+        "absolute_actual": {
+          "bytes": 256893317,
+          "files": 3196
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "shared_cargo": {
+        "bytes": 0,
+        "files": 0,
+        "absolute_actual": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "stream_receipts": {
+        "bytes": 559003,
+        "files": 23,
+        "absolute_actual": {
+          "bytes": 559003,
+          "files": 23
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 983040,
+        "cap_files": 40
+      },
+      "stream_landing_controls": {
+        "bytes": 63390,
+        "files": 7,
+        "absolute_actual": {
+          "bytes": 63390,
+          "files": 7
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 65536,
+        "cap_files": 9
+      },
+      "final_protocol_source": {
+        "bytes": 188865,
+        "files": 9,
+        "absolute_actual": {
+          "bytes": 188865,
+          "files": 9
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 196608,
+        "cap_files": 12
+      },
+      "windows_cadence_source": {
+        "bytes": 59673,
+        "files": 4,
+        "absolute_actual": {
+          "bytes": 59673,
+          "files": 4
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 65536,
+        "cap_files": 8
+      },
+      "windows_cadence_protocol": {
+        "bytes": 15028,
+        "files": 2,
+        "absolute_actual": {
+          "bytes": 15028,
+          "files": 2
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 1048576,
+        "cap_files": 100
+      },
+      "windows_cadence_receipts": {
+        "bytes": 81307,
+        "files": 12,
+        "absolute_actual": {
+          "bytes": 81307,
+          "files": 12
+        },
+        "reserve_bytes": 967269,
+        "reserve_files": 28,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 1048576,
+        "cap_files": 40
+      },
+      "paged_controls_protocol": {
+        "bytes": 469262,
+        "files": 103,
+        "absolute_actual": {
+          "bytes": 469262,
+          "files": 103
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 300
+      }
+    },
+    "shared_groups": {
+      "F13_windows_shared_support": {
+        "bytes": 4715674,
+        "files": 697,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "F12_matrix_evidence_total": {
+        "bytes": 20856227,
+        "files": 1296,
+        "cap_bytes": 54525952,
+        "cap_files": 10000
+      }
+    },
+    "free_bytes": 199904415744,
+    "epoch": 1792539844.4464946,
+    "qualification": "logical bytes; no planned deletion credit; parent owns cross-host ledger"
+  },
+  "guard_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "budget_sha256": "0a1a73bd7f8094f1bf2e7f79cf40b6eff970acc2bb7c1640fbad52f3846be55a",
+  "frozen_reference_guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "frozen_reference_expected_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "sampling_revision": "qpc-ns-v2; whole-Job tail coverage; strict >40ms; coarse monotonic retained; no retrospective requalification",
+  "qualification": "one owned Job; sampled RSS; commit hard caps; shared token waits excluded from engine latency"
+}

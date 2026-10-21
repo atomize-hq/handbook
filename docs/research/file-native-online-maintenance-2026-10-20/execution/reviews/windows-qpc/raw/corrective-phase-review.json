@@ -1,0 +1,640 @@
+{
+  "status": "CORRECTIVE_INJECTED_FAULT_PASSED",
+  "separate_phase_seconds": 51.22726631164551,
+  "separate_phase_limit_seconds": 90,
+  "within_phase_limit": true,
+  "preflight": {
+    "categories": {
+      "source": {
+        "bytes": 948717,
+        "files": 92,
+        "absolute_actual": {
+          "bytes": 948717,
+          "files": 92
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1048576,
+        "cap_files": 200
+      },
+      "source_admin": {
+        "bytes": 941574,
+        "files": 8,
+        "absolute_actual": {
+          "bytes": 941574,
+          "files": 8
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 100
+      },
+      "protocol": {
+        "bytes": 6808462,
+        "files": 1242,
+        "absolute_actual": {
+          "bytes": 6808462,
+          "files": 1242
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 33554432,
+        "cap_files": 25000
+      },
+      "document_controls": {
+        "bytes": 8435478,
+        "files": 820,
+        "absolute_actual": {
+          "bytes": 8435478,
+          "files": 820
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 67108864,
+        "cap_files": 30000
+      },
+      "receipts": {
+        "bytes": 23094345,
+        "files": 1357,
+        "absolute_actual": {
+          "bytes": 23094345,
+          "files": 1357
+        },
+        "reserve_bytes": 196608,
+        "reserve_files": 6,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 54525952,
+        "cap_files": 10000
+      },
+      "history": {
+        "bytes": 552141207,
+        "files": 129768,
+        "absolute_actual": {
+          "bytes": 552141207,
+          "files": 129768
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1073741824,
+        "cap_files": 400000
+      },
+      "shared_git": {
+        "bytes": 4930152,
+        "files": 758,
+        "absolute_actual": {
+          "bytes": 257107795,
+          "files": 3257
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "shared_cargo": {
+        "bytes": 0,
+        "files": 0,
+        "absolute_actual": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "stream_receipts": {
+        "bytes": 559003,
+        "files": 23,
+        "absolute_actual": {
+          "bytes": 559003,
+          "files": 23
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 983040,
+        "cap_files": 40
+      },
+      "stream_landing_controls": {
+        "bytes": 63390,
+        "files": 7,
+        "absolute_actual": {
+          "bytes": 63390,
+          "files": 7
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 65536,
+        "cap_files": 9
+      },
+      "final_protocol_source": {
+        "bytes": 188865,
+        "files": 9,
+        "absolute_actual": {
+          "bytes": 188865,
+          "files": 9
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 196608,
+        "cap_files": 12
+      },
+      "windows_cadence_source": {
+        "bytes": 59673,
+        "files": 4,
+        "absolute_actual": {
+          "bytes": 59673,
+          "files": 4
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 65536,
+        "cap_files": 8
+      },
+      "windows_cadence_protocol": {
+        "bytes": 25157,
+        "files": 4,
+        "absolute_actual": {
+          "bytes": 25157,
+          "files": 4
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 1048576,
+        "cap_files": 100
+      },
+      "windows_cadence_receipts": {
+        "bytes": 218824,
+        "files": 26,
+        "absolute_actual": {
+          "bytes": 218824,
+          "files": 26
+        },
+        "reserve_bytes": 196608,
+        "reserve_files": 6,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 1048576,
+        "cap_files": 40
+      },
+      "paged_controls_protocol": {
+        "bytes": 469262,
+        "files": 103,
+        "absolute_actual": {
+          "bytes": 469262,
+          "files": 103
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 300
+      }
+    },
+    "shared_groups": {
+      "F13_windows_shared_support": {
+        "bytes": 4930152,
+        "files": 758,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "F12_matrix_evidence_total": {
+        "bytes": 23354343,
+        "files": 1370,
+        "cap_bytes": 54525952,
+        "cap_files": 10000
+      }
+    },
+    "free_bytes": 199894892544,
+    "epoch": 1792540452.6702914,
+    "qualification": "logical bytes; no planned deletion credit; parent owns cross-host ledger"
+  },
+  "postfinal_full_census": {
+    "categories": {
+      "source": {
+        "bytes": 948717,
+        "files": 92,
+        "absolute_actual": {
+          "bytes": 948717,
+          "files": 92
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1048576,
+        "cap_files": 200
+      },
+      "source_admin": {
+        "bytes": 941574,
+        "files": 8,
+        "absolute_actual": {
+          "bytes": 941574,
+          "files": 8
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 100
+      },
+      "protocol": {
+        "bytes": 6808462,
+        "files": 1242,
+        "absolute_actual": {
+          "bytes": 6808462,
+          "files": 1242
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 33554432,
+        "cap_files": 25000
+      },
+      "document_controls": {
+        "bytes": 8435478,
+        "files": 820,
+        "absolute_actual": {
+          "bytes": 8435478,
+          "files": 820
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 67108864,
+        "cap_files": 30000
+      },
+      "receipts": {
+        "bytes": 23108165,
+        "files": 1362,
+        "absolute_actual": {
+          "bytes": 23108165,
+          "files": 1362
+        },
+        "reserve_bytes": 65536,
+        "reserve_files": 1,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 54525952,
+        "cap_files": 10000
+      },
+      "history": {
+        "bytes": 552141207,
+        "files": 129768,
+        "absolute_actual": {
+          "bytes": 552141207,
+          "files": 129768
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1073741824,
+        "cap_files": 400000
+      },
+      "shared_git": {
+        "bytes": 4930152,
+        "files": 758,
+        "absolute_actual": {
+          "bytes": 257107795,
+          "files": 3257
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "shared_cargo": {
+        "bytes": 0,
+        "files": 0,
+        "absolute_actual": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "stream_receipts": {
+        "bytes": 559003,
+        "files": 23,
+        "absolute_actual": {
+          "bytes": 559003,
+          "files": 23
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 983040,
+        "cap_files": 40
+      },
+      "stream_landing_controls": {
+        "bytes": 63390,
+        "files": 7,
+        "absolute_actual": {
+          "bytes": 63390,
+          "files": 7
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 65536,
+        "cap_files": 9
+      },
+      "final_protocol_source": {
+        "bytes": 188865,
+        "files": 9,
+        "absolute_actual": {
+          "bytes": 188865,
+          "files": 9
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 196608,
+        "cap_files": 12
+      },
+      "windows_cadence_source": {
+        "bytes": 59673,
+        "files": 4,
+        "absolute_actual": {
+          "bytes": 59673,
+          "files": 4
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 65536,
+        "cap_files": 8
+      },
+      "windows_cadence_protocol": {
+        "bytes": 25157,
+        "files": 4,
+        "absolute_actual": {
+          "bytes": 25157,
+          "files": 4
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 1048576,
+        "cap_files": 100
+      },
+      "windows_cadence_receipts": {
+        "bytes": 232644,
+        "files": 31,
+        "absolute_actual": {
+          "bytes": 232644,
+          "files": 31
+        },
+        "reserve_bytes": 65536,
+        "reserve_files": 1,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 1048576,
+        "cap_files": 40
+      },
+      "paged_controls_protocol": {
+        "bytes": 469262,
+        "files": 103,
+        "absolute_actual": {
+          "bytes": 469262,
+          "files": 103
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 300
+      }
+    },
+    "shared_groups": {
+      "F13_windows_shared_support": {
+        "bytes": 4930152,
+        "files": 758,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "F12_matrix_evidence_total": {
+        "bytes": 23237091,
+        "files": 1370,
+        "cap_bytes": 54525952,
+        "cap_files": 10000
+      }
+    },
+    "free_bytes": 199897251840,
+    "epoch": 1792540491.346776,
+    "qualification": "logical bytes; no planned deletion credit; parent owns cross-host ledger"
+  },
+  "all_original_and_retry_files": {
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\absolute-timeout.json": {
+      "bytes": 15130,
+      "sha256": "f90edee901aa8af58990f5368b2784e1033085042405ce6d8d8aa400fc42e31b"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\absolute-timeout.rss.jsonl.gz": {
+      "bytes": 23474,
+      "sha256": "e7072b885f97e218ed5fcd2dec8c6fbfb663c91be85e109eab116d463e8bc5b4",
+      "gzip_full_EOF": true,
+      "uncompressed_bytes": 270726
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\absolute-timeout.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\absolute-timeout.stdout": {
+      "bytes": 53,
+      "sha256": "346c8b064f14b59b4983220d0b1003f517a5ecf341f47fa20aefdc507c567a84"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\first-slow.json": {
+      "bytes": 11394,
+      "sha256": "9eb3205b6fc4d498d583da98f6b5c82c0e3ecef58c3cbafddb2d4c95087a965b"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\first-slow.rss.jsonl.gz": {
+      "bytes": 412,
+      "sha256": "e30a0015801606fd90393a1978d774d5f9c5fb5905c0a59e39d97116241add4e",
+      "gzip_full_EOF": true,
+      "uncompressed_bytes": 964
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\first-slow.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\first-slow.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\independent-review.json": {
+      "bytes": 14138,
+      "sha256": "454d1c173015b7d7360ffd314a7f652b7232963decc9a884be036cc7f7e004e1"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss-v2-result.json": {
+      "bytes": 2618,
+      "sha256": "581ca2ffd3f03c05383eb27ad0c9998bcf72c47701fcc9cd912e323f128a27b8"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss-v2.json": {
+      "bytes": 11151,
+      "sha256": "62552c525b3d935c8560f0f81543319baaf0cbd08a7d7324b2ca1fa8eb505956"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss-v2.rss.jsonl.gz": {
+      "bytes": 51,
+      "sha256": "ebcee176d4606dd5d68ede0cfb3dee3603fc964c2bd95daa669b30ac2b21e6ad",
+      "gzip_full_EOF": true,
+      "uncompressed_bytes": 0
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss-v2.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss-v2.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss.json": {
+      "bytes": 16769,
+      "sha256": "172403ab4a3184aec42fd43e7a8953d3291803329bde6774291a43a5cb8b6fe5"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss.rss.jsonl.gz": {
+      "bytes": 34198,
+      "sha256": "ec54316a666681a2e3e733c7e14f57b0b70f19764d56bc0c83f3c490cee21604",
+      "gzip_full_EOF": true,
+      "uncompressed_bytes": 400464
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss.stdout": {
+      "bytes": 53,
+      "sha256": "b1dce07915861f5492858e62c6e048134af266673483f4814dec6c64590d6fbc"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\normal-nested-cpu-io.json": {
+      "bytes": 15937,
+      "sha256": "3b217c71b47a108b14f59f736e498d83017341ad751a8ad3bcd756b1401d5d3c"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\normal-nested-cpu-io.rss.jsonl.gz": {
+      "bytes": 14770,
+      "sha256": "0466b8668eeaf3b8a572c5bee318c911c0ae85d792b026875c1f946e59c73b01",
+      "gzip_full_EOF": true,
+      "uncompressed_bytes": 188813
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\normal-nested-cpu-io.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\normal-nested-cpu-io.stdout": {
+      "bytes": 137,
+      "sha256": "2e9a6366ece03f6ec0647c6e8d199e4f65337daee5f636563ed3e0a0a59b3cd1"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\start-gap.json": {
+      "bytes": 12036,
+      "sha256": "6d0141769d228a0e50455658c815d57b4680a8d5ce4a4b26fcc483b8c1be3b48"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\start-gap.rss.jsonl.gz": {
+      "bytes": 564,
+      "sha256": "a43907584ecc2f9ccd26ed5e6039c2d064e3d532725f452e6c26ad8d0e5e93a4",
+      "gzip_full_EOF": true,
+      "uncompressed_bytes": 1238
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\start-gap.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\start-gap.stdout": {
+      "bytes": 53,
+      "sha256": "8eed316367085c95a095b021d709b74e135af90ebf95469e6b12ec43b8e40990"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\summary.json": {
+      "bytes": 45301,
+      "sha256": "bd2645edf9cfb49d51a9acd2124c5e8157919239929e2a45a3dc632972584005"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\whole-job-tail-gap.json": {
+      "bytes": 12593,
+      "sha256": "34db994e77d6db051747d3a593565590a0276c9b8b07e2a16d247c860542e2b1"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\whole-job-tail-gap.rss.jsonl.gz": {
+      "bytes": 1707,
+      "sha256": "7da910e009900c8f314de7a3f00d773564edbe1b92901a3e018e80f07db1b1f8",
+      "gzip_full_EOF": true,
+      "uncompressed_bytes": 10272
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\whole-job-tail-gap.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\whole-job-tail-gap.stdout": {
+      "bytes": 105,
+      "sha256": "bcd38edfd84a85f295b3c7eeee4098221e216a56050b7c55360a499ff856c5ec"
+    },
+    "C:\\file-native-online-matrix-20261020\\protocol\\windows-cadence\\controls.py": {
+      "bytes": 10932,
+      "sha256": "afba936c992f018318aca1f2d07b44c1e8507631b0291aec75f826ea6505c180"
+    },
+    "C:\\file-native-online-matrix-20261020\\protocol\\windows-cadence\\missing_retry.py": {
+      "bytes": 3834,
+      "sha256": "e4e9a8a3400b372e43b978934d68f84fe03241d1e6a334521132263977e1501a"
+    },
+    "C:\\file-native-online-matrix-20261020\\protocol\\windows-cadence\\missing_retry_phase90.py": {
+      "bytes": 6295,
+      "sha256": "4b47c112904488634c061f4de7b894fd8257b3c4f206d0f5770650222d59fce3"
+    },
+    "C:\\file-native-online-matrix-20261020\\protocol\\windows-cadence\\stress.bin": {
+      "bytes": 4096,
+      "sha256": "a2e659dacb4691e887ac0139f8893d04764ee197d70fb73d3190d56113d18e3e"
+    }
+  },
+  "manifest_self_excluded": true,
+  "own_receipts": {
+    "bytes": 232644,
+    "files": 31
+  },
+  "own_protocol": {
+    "bytes": 25157,
+    "files": 4
+  },
+  "source": {
+    "bytes": 59673,
+    "files": 4
+  },
+  "source_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "frozen_reference_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "original_failure_preserved": true
+}

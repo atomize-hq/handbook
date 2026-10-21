@@ -1,0 +1,542 @@
+{
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "-B",
+    "-c",
+    "import sys,os,json,time;sys.path.insert(0,'C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-online-matrix-20261020\\\\handbook\\\\docs\\\\research\\\\file-native-online-maintenance-2026-10-20\\\\execution\\\\windows-cadence');import job_guard_qpc as g;print(json.dumps(dict(pid=os.getpid(),creation_time=g.creation_time(os.getpid()))),flush=True);time.sleep(20)"
+  ],
+  "cwd": null,
+  "started_epoch": 1792539762.3261578,
+  "token_acquired_epoch": 1792539774.6473732,
+  "token_wait_seconds": 0.0,
+  "token_wait_started_epoch": 1792539774.6473732,
+  "token_contentions": 0,
+  "before_token_setup_seconds": 12.321215391159058,
+  "total_seconds": 33.52505326271057,
+  "stage_seconds": 21.203837871551514,
+  "requested_seconds": 21,
+  "functional_cutoff_epoch": 1792581014.0,
+  "absolute_deadline_epoch": 1792539795.6473732,
+  "memory_sample_timing": {
+    "samples": 442,
+    "max_interval_seconds": 0.0323771,
+    "intervals_over_40ms": 0,
+    "completed_samples": 442,
+    "max_completion_interval_seconds": 0.0325802,
+    "max_collection_duration_seconds": 0.0009777,
+    "max_sample_duration_seconds": 0.0010496,
+    "max_recorded_interval_seconds": 0.0325723,
+    "slow_samples": 0,
+    "clock": "perf_counter_ns",
+    "target_interval_ns": 20000000,
+    "censor_interval_ns": 40000000,
+    "clock_info": {
+      "perf_counter": {
+        "implementation": "QueryPerformanceCounter()",
+        "monotonic": true,
+        "adjustable": false,
+        "resolution": 1e-07
+      },
+      "monotonic": {
+        "implementation": "GetTickCount64()",
+        "monotonic": true,
+        "adjustable": false,
+        "resolution": 0.015625
+      }
+    },
+    "interval_seconds_clock": "perf_counter_ns; monotonic fields are coarse diagnostics",
+    "first_positive_full_sample_ns": 583963551468400,
+    "last_recorded_sample_ns": 583972371868400,
+    "root_wait_returned_ns": 583972374196300,
+    "root_end_coverage_gap_seconds": 0.0023279,
+    "job_empty_observed_ns": 583972374879800,
+    "job_end_coverage_gap_seconds": 0.0030114
+  },
+  "raw_rss": "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\absolute-timeout.rss.jsonl.gz",
+  "closure_checks": [
+    {
+      "epoch": 1792539795.8091047,
+      "members": []
+    },
+    {
+      "epoch": 1792539795.8299944,
+      "members": []
+    }
+  ],
+  "exit": 137,
+  "censor": "time-censor",
+  "errors": [],
+  "job_commit_limit": 3221225472,
+  "process_commit_limit": 2147483648,
+  "job_aggregate_sampled_peak_rss": 19132416,
+  "per_process_observed_peak_rss": {
+    "31120": 19132416
+  },
+  "missing_memory_samples": 0,
+  "pid_exit_races": [],
+  "initial_suspended_root_rss": 2072576,
+  "supervisor_rss_limit": 805306368,
+  "supervisor_peak_rss": 113717248,
+  "supervisor_samples": [
+    {
+      "epoch": 1792539774.659879,
+      "total": 111521792,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 24776704,
+          "peak": 27156480
+        }
+      ]
+    },
+    {
+      "epoch": 1792539786.841283,
+      "total": 111603712,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 24858624,
+          "peak": 27197440
+        }
+      ]
+    },
+    {
+      "epoch": 1792539787.8512902,
+      "total": 113676288,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 26931200,
+          "peak": 27197440
+        }
+      ]
+    },
+    {
+      "epoch": 1792539788.86346,
+      "total": 113717248,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 26972160,
+          "peak": 27197440
+        }
+      ]
+    },
+    {
+      "epoch": 1792539789.8659425,
+      "total": 113037312,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 26292224,
+          "peak": 27447296
+        }
+      ]
+    },
+    {
+      "epoch": 1792539790.8915124,
+      "total": 111992832,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25247744,
+          "peak": 27447296
+        }
+      ]
+    },
+    {
+      "epoch": 1792539791.9043925,
+      "total": 111394816,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 24649728,
+          "peak": 27447296
+        }
+      ]
+    },
+    {
+      "epoch": 1792539792.9330163,
+      "total": 111812608,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25067520,
+          "peak": 27447296
+        }
+      ]
+    },
+    {
+      "epoch": 1792539793.9448402,
+      "total": 111398912,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 24653824,
+          "peak": 27447296
+        }
+      ]
+    },
+    {
+      "epoch": 1792539794.9733467,
+      "total": 112058368,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86745088,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25313280,
+          "peak": 27447296
+        }
+      ]
+    }
+  ],
+  "owner": {
+    "pid": 5396,
+    "creation_time": 134370132967366804,
+    "nonce": "083718a1ada94b9ca7d558a1b8a45a3a",
+    "acquired_epoch": 1792539774.6473732,
+    "job_root_pid": 31120,
+    "categories": [
+      "source",
+      "source_admin",
+      "protocol",
+      "document_controls",
+      "receipts",
+      "history",
+      "shared_git",
+      "shared_cargo",
+      "stream_receipts",
+      "stream_landing_controls",
+      "final_protocol_source",
+      "windows_cadence_source",
+      "windows_cadence_protocol",
+      "windows_cadence_receipts",
+      "paged_controls_protocol"
+    ],
+    "budget_sha256": "0a1a73bd7f8094f1bf2e7f79cf40b6eff970acc2bb7c1640fbad52f3846be55a",
+    "receipt": "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\absolute-timeout.json",
+    "state": "closed",
+    "authority": "advisory ownership only; OS byte lock controls exclusion",
+    "job_root_creation_time": 134370133868341959,
+    "initial_root_rss": 2072576,
+    "resumed_epoch": 1792539786.841283,
+    "closed_epoch": 1792539795.8502073,
+    "remaining_job_pids": [],
+    "errors": []
+  },
+  "remaining_job_pids": [],
+  "process_closure_verified": true,
+  "terminations": [
+    {
+      "epoch": 1792539795.660818,
+      "reason": "time-censor"
+    }
+  ],
+  "disk_samples": [],
+  "prospective": {
+    "categories": {
+      "source": {
+        "bytes": 934668,
+        "files": 90,
+        "absolute_actual": {
+          "bytes": 934668,
+          "files": 90
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1048576,
+        "cap_files": 200
+      },
+      "source_admin": {
+        "bytes": 941574,
+        "files": 8,
+        "absolute_actual": {
+          "bytes": 941574,
+          "files": 8
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 100
+      },
+      "protocol": {
+        "bytes": 6798333,
+        "files": 1240,
+        "absolute_actual": {
+          "bytes": 6798333,
+          "files": 1240
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 33554432,
+        "cap_files": 25000
+      },
+      "document_controls": {
+        "bytes": 8435478,
+        "files": 820,
+        "absolute_actual": {
+          "bytes": 8435478,
+          "files": 820
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 67108864,
+        "cap_files": 30000
+      },
+      "receipts": {
+        "bytes": 19774364,
+        "files": 1252,
+        "absolute_actual": {
+          "bytes": 19774364,
+          "files": 1252
+        },
+        "reserve_bytes": 1017732,
+        "reserve_files": 36,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 54525952,
+        "cap_files": 10000
+      },
+      "history": {
+        "bytes": 552141207,
+        "files": 129768,
+        "absolute_actual": {
+          "bytes": 552141207,
+          "files": 129768
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1073741824,
+        "cap_files": 400000
+      },
+      "shared_git": {
+        "bytes": 4715674,
+        "files": 697,
+        "absolute_actual": {
+          "bytes": 256893317,
+          "files": 3196
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "shared_cargo": {
+        "bytes": 0,
+        "files": 0,
+        "absolute_actual": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "stream_receipts": {
+        "bytes": 559003,
+        "files": 23,
+        "absolute_actual": {
+          "bytes": 559003,
+          "files": 23
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 983040,
+        "cap_files": 40
+      },
+      "stream_landing_controls": {
+        "bytes": 63390,
+        "files": 7,
+        "absolute_actual": {
+          "bytes": 63390,
+          "files": 7
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 65536,
+        "cap_files": 9
+      },
+      "final_protocol_source": {
+        "bytes": 188865,
+        "files": 9,
+        "absolute_actual": {
+          "bytes": 188865,
+          "files": 9
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 196608,
+        "cap_files": 12
+      },
+      "windows_cadence_source": {
+        "bytes": 59673,
+        "files": 4,
+        "absolute_actual": {
+          "bytes": 59673,
+          "files": 4
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 65536,
+        "cap_files": 8
+      },
+      "windows_cadence_protocol": {
+        "bytes": 15028,
+        "files": 2,
+        "absolute_actual": {
+          "bytes": 15028,
+          "files": 2
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 1048576,
+        "cap_files": 100
+      },
+      "windows_cadence_receipts": {
+        "bytes": 30844,
+        "files": 4,
+        "absolute_actual": {
+          "bytes": 30844,
+          "files": 4
+        },
+        "reserve_bytes": 1017732,
+        "reserve_files": 36,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 1048576,
+        "cap_files": 40
+      },
+      "paged_controls_protocol": {
+        "bytes": 469262,
+        "files": 103,
+        "absolute_actual": {
+          "bytes": 469262,
+          "files": 103
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 300
+      }
+    },
+    "shared_groups": {
+      "F13_windows_shared_support": {
+        "bytes": 4715674,
+        "files": 697,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "F12_matrix_evidence_total": {
+        "bytes": 20855486,
+        "files": 1295,
+        "cap_bytes": 54525952,
+        "cap_files": 10000
+      }
+    },
+    "free_bytes": 199907053568,
+    "epoch": 1792539774.6279838,
+    "qualification": "logical bytes; no planned deletion credit; parent owns cross-host ledger"
+  },
+  "guard_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "budget_sha256": "0a1a73bd7f8094f1bf2e7f79cf40b6eff970acc2bb7c1640fbad52f3846be55a",
+  "frozen_reference_guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "frozen_reference_expected_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "sampling_revision": "qpc-ns-v2; whole-Job tail coverage; strict >40ms; coarse monotonic retained; no retrospective requalification",
+  "qualification": "one owned Job; sampled RSS; commit hard caps; shared token waits excluded from engine latency"
+}

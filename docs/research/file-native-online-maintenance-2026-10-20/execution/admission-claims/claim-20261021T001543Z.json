@@ -1,0 +1,71 @@
+{
+  "claim_id": "44GiB-CENTRAL-024-REPORT-FAMILY128FILES",
+  "utc": "2026-10-21T00:15:43.669867+00:00",
+  "status": "DURABLE_REPORT_FILE_ENVELOPE_EXTENSION_ONLY",
+  "authority": "META fixed024spec: authorizeinternalreport80->128files fromexistingunassignedcentralfileheadroom;512KiBbytecap/5mhumanfilecap/100kinsidecloseoutreserve unchanged. Nootherallocationinthisturn.",
+  "prior023": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261021T001220Z.json",
+    "sha256": "ff6a60ef8d5bff5d0d34fec2d35c84802be27f8f05f5414719bf8e3cc0de71b5",
+    "unchanged": true
+  },
+  "crossed_instruction_addendum": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "unchanged": true,
+    "treatment": "Preservedintent/ownerrecord, notanother48filedebit. Noactualfamilygrowthpast80occurredbefore024. Thisdurable024sealistheoperative80->128authorization; doNOTadd48twiceifaddendumstatewasalreadyregistered."
+  },
+  "report_family": {
+    "roots": [
+      "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib",
+      "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims"
+    ],
+    "old_file_envelope": 80,
+    "new_file_envelope": 128,
+    "byte_envelope_unchanged": 524288,
+    "actual_before024_files": 77,
+    "actual_before024_bytes": 368884,
+    "new024_files": 3,
+    "actual_after024_files": 80,
+    "old80_limit_respected_during_creation": true,
+    "remaining_after024_file_slots": 48,
+    "future_standard_triplets_capacity": 16,
+    "future_byte_planning": "16futuretriplets<=8192bytes each fitremaining48files; freshaggregatebytecheck mandatory. 17tripletswouldexceed128after024, so17isnotadmitted.",
+    "per_claim_rule": "BeforeEVERYclaimwrite checknewJSON/MD/seal againstfamily<=128files AND<=524288bytes; alsocountallparent+distinctLandingreportphysicalcopies withinMETA8MiB/2000files andremainingpendingforecasts. Compactpriorhashreferences; no93KiBduplicatedaudit.",
+    "META_cap_unchanged": 8388608,
+    "META_files_unchanged": 2000
+  },
+  "fresh_authoritative_prospective_file_check": {
+    "basis": "Verifiedlatestapplied023conservativeglobalreservationforecast andall23priorseals+initialmanifest; notnewallhostphysicalcensus. Nootherlaterfileallocationapplied. Allstillvalidreservations/closeout included; oldunusedcachefilecapacitiesnotreleased.",
+    "global_cap": 5000000,
+    "reserved_before_extension": 4792604,
+    "central_unassigned_before": 207396,
+    "additional_report_files": 48,
+    "reserved_after_extension": 4792652,
+    "central_unassigned_after": 207348,
+    "inside_closeout_files_unchanged": 100000,
+    "reserve_used": 0,
+    "protected_deleted_files": 0,
+    "actual_reclaimed_files": 0,
+    "count_once": "Theaddendumand024describeONE48filereassignment, not96. ExistingC3/METAfilehardgroups remainunchanged; newreportenvelopeisafiniteinternalregistration."
+  },
+  "history_owner_binding": {
+    "file": "qualification-lanes/history_lane.py",
+    "owner_chat": "01a15bcc-6fb9-7e63-b935-a60d25d9390a",
+    "cap_bytes": 49152,
+    "other_source_caps": "Exact023FLAT8individual/group/whole131072/8unchanged; noadditionalhelpersourcebytes/subtraction. LONG+CONTROLowner01a15b51unchanged. Parentregistration/SOURCEONLYGOrequired."
+  },
+  "byte_and_other_allocator_UNCHANGED": {
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "cap_bytes": 47244640256,
+    "inside_closeout_bytes": 1073741824,
+    "C3_total": 16777216,
+    "C3_unsubclaimed": 3932160,
+    "CP_fixture_cap": 201326592,
+    "F06_CP192_Matrix32_total": 234881024,
+    "WindowsC2_128MiB_held": 134217728,
+    "new_source_engine_fixture_evidence_cache_byte_grant": 0
+  },
+  "effective_registration": "Onlyafterthis024JSON+MD+seal existverifiedmay128fileenvelopebeused. Parentregister024SHAwith023flat-source/historyownerbinding; allpriorversionsimmutable.",
+  "permissions": "ReportcapacityONLY, notengine/source/control/native/long/fullbodyGO, actualphaseexpiry, quota/casewaiver, deletion orreserveuse. Source/RUNTIMEGOsseparateparentregistration/exactforecast. Sourcefreeze04:10unchanged."
+}

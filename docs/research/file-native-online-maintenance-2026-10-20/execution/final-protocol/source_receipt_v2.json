@@ -1,0 +1,820 @@
+{
+  "status": "SOURCE_V2_FROZEN_FOR_FOCUSED_REREVIEW__REAL_EXECUTION_HOLD",
+  "owner_chat": "01a15b6c-b109-7090-a8c2-0e165f92f51e",
+  "ownership_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\final-protocol",
+  "source_cap_bytes": 196608,
+  "source_cap_regular_files": 12,
+  "source_budget_sha256_before": "0b26efdba8af4ab41a939697244e02b1e7da1ec55ab857d05bd6d74de89ca781",
+  "source_budget_sha256_after": "0b26efdba8af4ab41a939697244e02b1e7da1ec55ab857d05bd6d74de89ca781",
+  "global_budget_modified": false,
+  "original_preserved": {
+    "archive": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\focused-review\\original-source-a6ebd313.tar.gz",
+    "bytes": 37463,
+    "sha256": "6e3c520553743e75cef982c302c65a7f90b455d7623cbb83f0c975227bd35617",
+    "manifest": {
+      "case_ledger.py": {
+        "bytes": 14422,
+        "sha256": "e910aeb01cafca1968c9b36e8234a59956feb6b71b853d2e9c81d51ac99c0ad9"
+      },
+      "fake_controls.py": {
+        "bytes": 20642,
+        "sha256": "8030fb289a1443f6e8d3c5340004a998200b70858d521533a07d07f465d62b08"
+      },
+      "focused_protocol.py": {
+        "bytes": 38155,
+        "sha256": "1b10f9121483bb6b5adf1ca20ba31bfad3367161d7d8d77925ce30eb14b17a83"
+      },
+      "focused_schedules.py": {
+        "bytes": 19586,
+        "sha256": "35ffbbaed3281ca470391f2dbc078805ae5fa5adec725d690b11d54c6ec571d5"
+      },
+      "forecast.json": {
+        "bytes": 11496,
+        "sha256": "0e697724206bf90f9222febba15535ba4c0de3f02d8b4da1b0dd335d679b4588"
+      },
+      "README.md": {
+        "bytes": 15332,
+        "sha256": "f513a35417ff13348a1bb7a3fd2dbfaccaf234a70a8e7fc4c4072409da2811b8"
+      },
+      "source_receipt.json": {
+        "bytes": 9128,
+        "sha256": "a6ebd313ca3f7f8c81b0ac2e2b1bca8b30d30c4861bfae4dd45a4f0f90b8e7b8"
+      }
+    },
+    "read_in_memory_no_extraction": true,
+    "old_engineering_status": "REMEDIATE; original36fakePASS did not model Driver env or exceptional joins correctly"
+  },
+  "review_read_before_edits": {
+    "review.md": {
+      "bytes": 15990,
+      "sha256": "0a4b73c525e7f6d35f5175dd96fa7a4b7fe367875712b29442cd346847eb8340"
+    },
+    "evidence.json": {
+      "bytes": 5055,
+      "sha256": "af2e1547169433c005d966ddd4e244e9b713eab8557ca528fbdf5c366155b970"
+    }
+  },
+  "manifest_self_exclusion": "source_receipt.json excluded from eight-file manifest; parent separately hashes this receipt",
+  "files": {
+    "case_ledger.py": {
+      "bytes": 14462,
+      "sha256": "ce7fb4983b5f31e0f529a69431a169574e7ba5cb55e225b17d42d10354be931b"
+    },
+    "fake_controls.py": {
+      "bytes": 21062,
+      "sha256": "e4c49ca9cb6afb409b88eca0c6a60742b373d72f93252219af3130ca4e2cd398"
+    },
+    "focused_protocol.py": {
+      "bytes": 43172,
+      "sha256": "58928f6bf82f82d13fb5d809c8d6095e331ec4feeac48c389d72744a3ff32859"
+    },
+    "focused_schedules.py": {
+      "bytes": 27562,
+      "sha256": "ee7d2aef5b7ecd492602c49f9e78646465bc2cd04a1e597e1d46e86cd67ff756"
+    },
+    "forecast.json": {
+      "bytes": 13832,
+      "sha256": "d1740d60ba591294cfa4c95c0eddc82ad0e76d36f39a842da58a60efebcfca50"
+    },
+    "README.md": {
+      "bytes": 16667,
+      "sha256": "fe80f4bc566f8fae59f8812a1f5eef8b007a67548fb106080a5050d486cfef87"
+    },
+    "remediation.md": {
+      "bytes": 6081,
+      "sha256": "a2be84efeacf85d40dbb054bcd0d3ae3daa914c0cd2a13f2925a89e6ded27e6c"
+    },
+    "remediation_controls.py": {
+      "bytes": 19858,
+      "sha256": "2d41785a24b9671594fdc61131f672ea63fac5c0b37ddf9116ef2b54204e349d"
+    }
+  },
+  "source_manifest_json_sha256": "bad1bce648243a8c9d44b4b09cbcffda5ed5e3d9d4edabae26e71d789211936f",
+  "direct_directory_census": {
+    "v2_before": {
+      "bytes": 128761,
+      "regular_files": 7
+    },
+    "observed_intermediate_bytes": [
+      140995,
+      160777,
+      167884,
+      170220,
+      171824
+    ]
+  },
+  "syntax": {
+    "python": "3.11.9",
+    "compiled_in_memory": [
+      "case_ledger.py",
+      "fake_controls.py",
+      "focused_protocol.py",
+      "focused_schedules.py",
+      "remediation_controls.py"
+    ],
+    "dont_write_bytecode": true
+  },
+  "corrected_original_controls": {
+    "status": "PASSED_MEMORY_ONLY_CONTROLS",
+    "count": 36,
+    "tracemalloc_peak_bytes": 885803,
+    "allocation_limit": 8388608,
+    "engine_native_qualification": false
+  },
+  "remediation_controls": {
+    "status": "PASSED_MEMORY_ONLY_REMEDIATION_CONTROLS",
+    "checks": [
+      "F1-real-signature-absent",
+      "F1-real-signature-None",
+      "F1-real-signature-barrier",
+      "F1-reject-input",
+      "F1-reject-env",
+      "F1-reject-missing-env",
+      "F1-reject-binary",
+      "F1-reject-rss",
+      "F1-reject-timeout",
+      "F1-reject-semantic-error",
+      "F2-omitted-or-null-target",
+      "F2-nonnull-target-{}",
+      "F2-nonnull-target-{'physical': {}}",
+      "F2-nonnull-target-False",
+      "F2-nonnull-target-0",
+      "F2-nonnull-target-'not-null'",
+      "F2-not-aborted-owner",
+      "F2-missing-owner-identity",
+      "F3-finite-admission-trace-H151",
+      "F3-finite-admission-trace-H551",
+      "F3-H551-still-declines-is-incomplete",
+      "F3-all-declined-owners-and-failures-retained-at-ceiling",
+      "F3-no-H551-forecast-refuses-before-init",
+      "F3-no-cleanup-bound-refuses-before-init",
+      "F4-every-spawn-ready-release-wait-position-plus-callback-maintenance-and-combined-failures",
+      "crash-exit0-cleaning-then-authentic86-two-call-trace",
+      "crash-reject-unbound86-input",
+      "crash-reject-unbound86-env",
+      "crash-reject-unbound86-binary",
+      "crash-reject-unbound86-rss",
+      "crash-reject-unbound86-timeout",
+      "crash-exit0-is-not-pass-None",
+      "crash-exit0-is-not-pass-complete"
+    ],
+    "checks_count": 33,
+    "exception_matrix": [
+      {
+        "fault": "spawn",
+        "position": 1,
+        "spawned": 0,
+        "waited": 0,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "spawn",
+        "position": 2,
+        "spawned": 1,
+        "waited": 1,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "spawn",
+        "position": 3,
+        "spawned": 2,
+        "waited": 2,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "spawn",
+        "position": 4,
+        "spawned": 3,
+        "waited": 3,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "spawn",
+        "position": 5,
+        "spawned": 4,
+        "waited": 4,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "spawn",
+        "position": 6,
+        "spawned": 5,
+        "waited": 5,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "spawn",
+        "position": 7,
+        "spawned": 6,
+        "waited": 6,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "spawn",
+        "position": 8,
+        "spawned": 7,
+        "waited": 7,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "ready",
+        "position": 1,
+        "spawned": 1,
+        "waited": 1,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "ready",
+        "position": 2,
+        "spawned": 2,
+        "waited": 2,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "ready",
+        "position": 3,
+        "spawned": 3,
+        "waited": 3,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "ready",
+        "position": 4,
+        "spawned": 4,
+        "waited": 4,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "ready",
+        "position": 5,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "ready",
+        "position": 6,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "ready",
+        "position": 7,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "ready",
+        "position": 8,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "release",
+        "position": 1,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "release",
+        "position": 2,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "release",
+        "position": 3,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "release",
+        "position": 4,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "release",
+        "position": 5,
+        "spawned": 12,
+        "waited": 12,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "release",
+        "position": 6,
+        "spawned": 12,
+        "waited": 12,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "release",
+        "position": 7,
+        "spawned": 12,
+        "waited": 12,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "release",
+        "position": 8,
+        "spawned": 12,
+        "waited": 12,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait",
+        "position": 1,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait",
+        "position": 2,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait",
+        "position": 3,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait",
+        "position": 4,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait",
+        "position": 5,
+        "spawned": 12,
+        "waited": 12,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait",
+        "position": 6,
+        "spawned": 12,
+        "waited": 12,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait",
+        "position": 7,
+        "spawned": 12,
+        "waited": 12,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait",
+        "position": 8,
+        "spawned": 12,
+        "waited": 12,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait-before",
+        "position": 1,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait-before",
+        "position": 4,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait-before",
+        "position": 5,
+        "spawned": 12,
+        "waited": 12,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait-before",
+        "position": 8,
+        "spawned": 12,
+        "waited": 12,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "callback",
+        "position": 0,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "callback",
+        "position": 1,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "callback",
+        "position": 2,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "callback",
+        "position": 3,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "reader-release",
+        "position": 1,
+        "spawned": 68,
+        "waited": 68,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "reader-release",
+        "position": 2,
+        "spawned": 68,
+        "waited": 68,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "reader-release",
+        "position": 3,
+        "spawned": 68,
+        "waited": 68,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "reader-release",
+        "position": 4,
+        "spawned": 68,
+        "waited": 68,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "reader-wait",
+        "position": 1,
+        "spawned": 68,
+        "waited": 68,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "reader-wait",
+        "position": 2,
+        "spawned": 68,
+        "waited": 68,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "reader-wait",
+        "position": 3,
+        "spawned": 68,
+        "waited": 68,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "reader-wait",
+        "position": 4,
+        "spawned": 68,
+        "waited": 68,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "release-before",
+        "position": 1,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "release-before",
+        "position": 4,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "pack",
+        "position": 1,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "pack",
+        "position": 1,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": true,
+        "secondary_wait": true,
+        "status": "expected-memory-failure-retained"
+      },
+      {
+        "fault": "wait-clock",
+        "position": 1,
+        "spawned": 8,
+        "waited": 8,
+        "all_threads_joined": true,
+        "primary_and_secondary_retained": true,
+        "secondary_release": false,
+        "secondary_wait": false,
+        "status": "expected-memory-failure-retained"
+      }
+    ],
+    "exception_scenarios": 53,
+    "tracemalloc_peak_bytes": 1115760,
+    "python_allocation_limit_bytes": 16777216,
+    "real_engine_calls": 0,
+    "native_processes": 0,
+    "fixture_writes": 0,
+    "filesystem_writes": 0,
+    "bytecode_writes": false,
+    "real_case_qualification": false,
+    "required_engine_cases_still_pending": true
+  },
+  "default_geometry_unchanged": {
+    "profile": "inspected-CP2-project-N64-profile4-default-payload-no-op",
+    "schedule": [
+      1,
+      4,
+      1
+    ],
+    "actual_final_H": 114,
+    "failed_prepared_generations": 48,
+    "total_generation_copies": 162,
+    "source_payload_bytes": 778240,
+    "group_bytes": 9904,
+    "description_bytes": 336,
+    "provenance_bytes": 228,
+    "manifest_bytes": 17453,
+    "generation_regular_files": 69,
+    "generation_supplement_bytes": 27921,
+    "per_generation_bytes": 806161,
+    "failed_noop_external_metadata_upper": 17408,
+    "accepted_external_metadata_upper": 131072,
+    "B_payload_only_floor": 126853120,
+    "B_generation_plus_external_upper": 147154114,
+    "qualification": "source-derived conditional bound; final source/IDs/no-op replay must be rebound; init graph/projection objects, physical metadata, raw receipts, failed process prefixes and any failed-round-collection overhead remain separately charged"
+  },
+  "required_case_ledger_rows": {
+    "Windows": 166,
+    "Linux": 158,
+    "Mac": 158
+  },
+  "all_required_engine_case_status": "PENDING",
+  "findings_source_changes": {
+    "F1": "env separate from engine payload; authentic row also binds env,binary,exit,violations; fake signatures now real",
+    "F2": "optional omitted target accepted with get; nonnull/malformed owner rejected",
+    "F3": "boundedH551 forecast required before init; H151 and ceiling declines retained; no manualabort/force; initialbootstrap160 notsmalltail2",
+    "F4": "allcontrols release/allspawned callbacks wait on every path, primary+secondary retained; explicit native+Python callback closure required",
+    "crash_construction": "actual retired/aborted-owned work source constructors; reviewed final-source binding plus2buildpeak/8cleanupcall forecasts; runtime proof stillPENDING"
+  },
+  "new_adapter_requirements": [
+    "close_case must additionally prove python_callbacks_joined",
+    "crash_source_binding final_pin/checkpoint/source_sha256/status reviewed-source-map and constructor:<phase> capability",
+    "cleanup_to_exit may produce ObservedExit86 harness-only; normal exit0 is continuation/failure, never crash PASS"
+  ],
+  "resource_forecast": {
+    "status": "NO_GO; all runtime remains HOLD",
+    "whole_provisional_bytes": 529480133,
+    "whole_provisional_files": 58096,
+    "partial_F1_F2_size_notes": "parent approximately7.70MB/16.54MB are lower observations; compactCOW13.53/30.34MB partial only; exact final whole topology pending"
+  },
+  "scope": {
+    "real_engine_calls": 0,
+    "native_processes": 0,
+    "fixtures_written": 0,
+    "Cargo_builds": 0,
+    "Git_operations": 0,
+    "other_source_directories_modified": false,
+    "main_landing_prior_integration_modified": false,
+    "subagents_chats_spawned": 0
+  },
+  "impact": "GitNexus unavailable/unregistered; indexed impactUNKNOWN/manualHIGH; confined to new helper symbols. No index/bootstrap or commit.",
+  "clock_reset": false,
+  "functional_cutoff_utc": "2026-10-21T11:10:14Z",
+  "closeout_cutoff_utc": "2026-10-21T13:10:14Z"
+}

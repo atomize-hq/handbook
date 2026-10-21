@@ -1,0 +1,112 @@
+Before integration 1017b76aae7fb787a91a68d225ee9ec751ab0c83; exact worktree UNKNOWN/manual HIGH; no index/bootstrap
+
+  GitNexus Detect Changes (1.6.12)
+file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435
+            throw new Error(`Repository "${repoParam}" not found. Available: ${labels.join(', ')}`);
+                  ^
+
+Error: Repository "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook" not found. Available: handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation-20260808), handbook (C:\Users\spmcc\.codex\worktrees\hcm32r-adf08a6e\handbook), handbook (C:\Users\spmcc\Documents\__Project_Code\handbook)
+    at LocalBackend.selectToolRepository (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435:19)
+    at async LocalBackend.callTool (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:2075:22)
+    at async detectChangesCommand (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/tool.js:293:20)
+    at async Command.<anonymous> (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/lazy-action.js:33:9)
+
+Node.js v22.15.0
+Before integration 22160a94fdd7d7f6060e30f3211d4f72d24194f3; exact worktree UNKNOWN/manual HIGH; no index/bootstrap
+
+  GitNexus Detect Changes (1.6.12)
+file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435
+            throw new Error(`Repository "${repoParam}" not found. Available: ${labels.join(', ')}`);
+                  ^
+
+Error: Repository "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook" not found. Available: handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation-20260808), handbook (C:\Users\spmcc\.codex\worktrees\hcm32r-adf08a6e\handbook), handbook (C:\Users\spmcc\Documents\__Project_Code\handbook)
+    at LocalBackend.selectToolRepository (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435:19)
+    at async LocalBackend.callTool (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:2075:22)
+    at async detectChangesCommand (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/tool.js:293:20)
+    at async Command.<anonymous> (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/lazy-action.js:33:9)
+
+Node.js v22.15.0
+Before integration cb33a92c5c9267b07a81558770cbc6c1c6acb8ff; exact worktree UNKNOWN/manual HIGH; no index/bootstrap
+
+  GitNexus Detect Changes (1.6.12)
+file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435
+            throw new Error(`Repository "${repoParam}" not found. Available: ${labels.join(', ')}`);
+                  ^
+
+Error: Repository "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook" not found. Available: handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation-20260808), handbook (C:\Users\spmcc\.codex\worktrees\hcm32r-adf08a6e\handbook), handbook (C:\Users\spmcc\Documents\__Project_Code\handbook)
+    at LocalBackend.selectToolRepository (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435:19)
+    at async LocalBackend.callTool (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:2075:22)
+    at async detectChangesCommand (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/tool.js:293:20)
+    at async Command.<anonymous> (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/lazy-action.js:33:9)
+
+Node.js v22.15.0
+Before integration 078586cac9ee212fe37a5d74f0a915ac45e3c55b; exact worktree UNKNOWN/manual HIGH; no index/bootstrap
+
+  GitNexus Detect Changes (1.6.12)
+file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435
+            throw new Error(`Repository "${repoParam}" not found. Available: ${labels.join(', ')}`);
+                  ^
+
+Error: Repository "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook" not found. Available: handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation-20260808), handbook (C:\Users\spmcc\.codex\worktrees\hcm32r-adf08a6e\handbook), handbook (C:\Users\spmcc\Documents\__Project_Code\handbook)
+    at LocalBackend.selectToolRepository (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435:19)
+    at async LocalBackend.callTool (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:2075:22)
+    at async detectChangesCommand (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/tool.js:293:20)
+    at async Command.<anonymous> (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/lazy-action.js:33:9)
+
+Node.js v22.15.0
+Before integration e1219d021ed12de675a5519c26c277b9d144c25e; exact worktree UNKNOWN/manual HIGH; no index/bootstrap
+
+  GitNexus Detect Changes (1.6.12)
+file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435
+            throw new Error(`Repository "${repoParam}" not found. Available: ${labels.join(', ')}`);
+                  ^
+
+Error: Repository "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook" not found. Available: handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation-20260808), handbook (C:\Users\spmcc\.codex\worktrees\hcm32r-adf08a6e\handbook), handbook (C:\Users\spmcc\Documents\__Project_Code\handbook)
+    at LocalBackend.selectToolRepository (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435:19)
+    at async LocalBackend.callTool (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:2075:22)
+    at async detectChangesCommand (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/tool.js:293:20)
+    at async Command.<anonymous> (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/lazy-action.js:33:9)
+
+Node.js v22.15.0
+Before integration 2aebde505a0f399d1c863084a461bd3c43ef01fa; exact worktree UNKNOWN/manual HIGH; no index/bootstrap
+
+  GitNexus Detect Changes (1.6.12)
+file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435
+            throw new Error(`Repository "${repoParam}" not found. Available: ${labels.join(', ')}`);
+                  ^
+
+Error: Repository "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook" not found. Available: handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation-20260808), handbook (C:\Users\spmcc\.codex\worktrees\hcm32r-adf08a6e\handbook), handbook (C:\Users\spmcc\Documents\__Project_Code\handbook)
+    at LocalBackend.selectToolRepository (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435:19)
+    at async LocalBackend.callTool (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:2075:22)
+    at async detectChangesCommand (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/tool.js:293:20)
+    at async Command.<anonymous> (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/lazy-action.js:33:9)
+
+Node.js v22.15.0
+Before integration 7c348f12a37a68d895b48f84fa08c030b5344b57; exact worktree UNKNOWN/manual HIGH; no index/bootstrap
+
+  GitNexus Detect Changes (1.6.12)
+file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435
+            throw new Error(`Repository "${repoParam}" not found. Available: ${labels.join(', ')}`);
+                  ^
+
+Error: Repository "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook" not found. Available: handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation-20260808), handbook (C:\Users\spmcc\.codex\worktrees\hcm32r-adf08a6e\handbook), handbook (C:\Users\spmcc\Documents\__Project_Code\handbook)
+    at LocalBackend.selectToolRepository (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435:19)
+    at async LocalBackend.callTool (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:2075:22)
+    at async detectChangesCommand (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/tool.js:293:20)
+    at async Command.<anonymous> (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/lazy-action.js:33:9)
+
+Node.js v22.15.0
+Before integration 5bb4d800e05203e681d237cbc501e97b4bd50ba7; exact worktree UNKNOWN/manual HIGH; no index/bootstrap
+
+  GitNexus Detect Changes (1.6.12)
+file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435
+            throw new Error(`Repository "${repoParam}" not found. Available: ${labels.join(', ')}`);
+                  ^
+
+Error: Repository "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook" not found. Available: handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-atomic-authority-replanning), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation), handbook (C:\Users\spmcc\.codex\orchestration\handbook-hcm-3-6-implementation-20260808), handbook (C:\Users\spmcc\.codex\worktrees\hcm32r-adf08a6e\handbook), handbook (C:\Users\spmcc\Documents\__Project_Code\handbook)
+    at LocalBackend.selectToolRepository (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:1435:19)
+    at async LocalBackend.callTool (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/mcp/local/local-backend.js:2075:22)
+    at async detectChangesCommand (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/tool.js:293:20)
+    at async Command.<anonymous> (file:///C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a155e76749-e278/node_modules/.pnpm/gitnexus@1.6.12_graphology-types@0.24.8_zod@4.6.7/node_modules/gitnexus/dist/cli/lazy-action.js:33:9)
+
+Node.js v22.15.0

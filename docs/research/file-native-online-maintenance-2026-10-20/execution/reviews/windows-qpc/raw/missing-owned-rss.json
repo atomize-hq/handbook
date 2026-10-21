@@ -1,0 +1,614 @@
+{
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "-B",
+    "-c",
+    "import sys,os,json,time;sys.path.insert(0,'C:\\\\Users\\\\spmcc\\\\.codex\\\\worktrees\\\\file-native-online-matrix-20261020\\\\handbook\\\\docs\\\\research\\\\file-native-online-maintenance-2026-10-20\\\\execution\\\\windows-cadence');import job_guard_qpc as g;print(json.dumps(dict(pid=os.getpid(),creation_time=g.creation_time(os.getpid()))),flush=True);time.sleep(20)"
+  ],
+  "cwd": null,
+  "started_epoch": 1792539861.0019765,
+  "token_acquired_epoch": 1792539877.803124,
+  "token_wait_seconds": 0.0,
+  "token_wait_started_epoch": 1792539877.803124,
+  "token_contentions": 0,
+  "before_token_setup_seconds": 16.8011474609375,
+  "total_seconds": 46.89284420013428,
+  "stage_seconds": 30.091696739196777,
+  "requested_seconds": 30,
+  "functional_cutoff_epoch": 1792581014.0,
+  "absolute_deadline_epoch": 1792539907.803124,
+  "memory_sample_timing": {
+    "samples": 654,
+    "max_interval_seconds": 0.0338298,
+    "intervals_over_40ms": 0,
+    "completed_samples": 654,
+    "max_completion_interval_seconds": 0.0332249,
+    "max_collection_duration_seconds": 0.0022006,
+    "max_sample_duration_seconds": 0.0023015,
+    "max_recorded_interval_seconds": 0.0332568,
+    "slow_samples": 0,
+    "clock": "perf_counter_ns",
+    "target_interval_ns": 20000000,
+    "censor_interval_ns": 40000000,
+    "clock_info": {
+      "perf_counter": {
+        "implementation": "QueryPerformanceCounter()",
+        "monotonic": true,
+        "adjustable": false,
+        "resolution": 1e-07
+      },
+      "monotonic": {
+        "implementation": "GetTickCount64()",
+        "monotonic": true,
+        "adjustable": false,
+        "resolution": 0.015625
+      }
+    },
+    "interval_seconds_clock": "perf_counter_ns; monotonic fields are coarse diagnostics",
+    "first_positive_full_sample_ns": 584071466559200,
+    "last_recorded_sample_ns": 584084529646100,
+    "root_wait_returned_ns": 584084532240500,
+    "root_end_coverage_gap_seconds": 0.0025944,
+    "job_empty_observed_ns": 584084533021000,
+    "job_end_coverage_gap_seconds": 0.0033749
+  },
+  "raw_rss": "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss.rss.jsonl.gz",
+  "closure_checks": [
+    {
+      "epoch": 1792539907.8531759,
+      "members": []
+    },
+    {
+      "epoch": 1792539907.8734868,
+      "members": []
+    }
+  ],
+  "exit": 137,
+  "censor": "time-censor",
+  "errors": [],
+  "job_commit_limit": 3221225472,
+  "process_commit_limit": 2147483648,
+  "job_aggregate_sampled_peak_rss": 18890752,
+  "per_process_observed_peak_rss": {
+    "27028": 18890752
+  },
+  "missing_memory_samples": 0,
+  "pid_exit_races": [],
+  "initial_suspended_root_rss": 2072576,
+  "supervisor_rss_limit": 805306368,
+  "supervisor_peak_rss": 114245632,
+  "supervisor_samples": [
+    {
+      "epoch": 1792539877.8174555,
+      "total": 112328704,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25587712,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539894.7557223,
+      "total": 112508928,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25767936,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539895.7657456,
+      "total": 113033216,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 26292224,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539896.7817082,
+      "total": 113389568,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 26648576,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539897.7953937,
+      "total": 113393664,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 26652672,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539898.809592,
+      "total": 113209344,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 26468352,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539899.810299,
+      "total": 113213440,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 26472448,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539900.820751,
+      "total": 113217536,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 26476544,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539901.8356118,
+      "total": 112594944,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25853952,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539902.836634,
+      "total": 112586752,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25845760,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539903.8507535,
+      "total": 112590848,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25849856,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539904.8646665,
+      "total": 112599040,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 25858048,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539905.8669066,
+      "total": 113012736,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 26271744,
+          "peak": 28196864
+        }
+      ]
+    },
+    {
+      "epoch": 1792539906.8820271,
+      "total": 114237440,
+      "processes": [
+        {
+          "pid": 23920,
+          "creation_time": 134370132964639779,
+          "rss": 86740992,
+          "peak": 88395776
+        },
+        {
+          "pid": 5396,
+          "creation_time": 134370132967366804,
+          "rss": 27496448,
+          "peak": 28196864
+        }
+      ]
+    }
+  ],
+  "owner": {
+    "pid": 5396,
+    "creation_time": 134370132967366804,
+    "nonce": "146270874b3b47e9a3d76528ac3e4cc6",
+    "acquired_epoch": 1792539877.803124,
+    "job_root_pid": 27028,
+    "categories": [
+      "source",
+      "source_admin",
+      "protocol",
+      "document_controls",
+      "receipts",
+      "history",
+      "shared_git",
+      "shared_cargo",
+      "stream_receipts",
+      "stream_landing_controls",
+      "final_protocol_source",
+      "windows_cadence_source",
+      "windows_cadence_protocol",
+      "windows_cadence_receipts",
+      "paged_controls_protocol"
+    ],
+    "budget_sha256": "0a1a73bd7f8094f1bf2e7f79cf40b6eff970acc2bb7c1640fbad52f3846be55a",
+    "receipt": "C:\\file-native-online-matrix-20261020\\receipts\\windows-cadence\\missing-owned-rss.json",
+    "state": "closed",
+    "authority": "advisory ownership only; OS byte lock controls exclusion",
+    "job_root_creation_time": 134370134947504992,
+    "initial_root_rss": 2072576,
+    "resumed_epoch": 1792539894.7557223,
+    "closed_epoch": 1792539907.8938117,
+    "remaining_job_pids": [],
+    "errors": []
+  },
+  "remaining_job_pids": [],
+  "process_closure_verified": true,
+  "terminations": [
+    {
+      "epoch": 1792539907.81894,
+      "reason": "time-censor"
+    }
+  ],
+  "disk_samples": [],
+  "prospective": {
+    "categories": {
+      "source": {
+        "bytes": 936276,
+        "files": 90,
+        "absolute_actual": {
+          "bytes": 936276,
+          "files": 90
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1048576,
+        "cap_files": 200
+      },
+      "source_admin": {
+        "bytes": 941574,
+        "files": 8,
+        "absolute_actual": {
+          "bytes": 941574,
+          "files": 8
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 100
+      },
+      "protocol": {
+        "bytes": 6798333,
+        "files": 1240,
+        "absolute_actual": {
+          "bytes": 6798333,
+          "files": 1240
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 33554432,
+        "cap_files": 25000
+      },
+      "document_controls": {
+        "bytes": 8435478,
+        "files": 820,
+        "absolute_actual": {
+          "bytes": 8435478,
+          "files": 820
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 67108864,
+        "cap_files": 30000
+      },
+      "receipts": {
+        "bytes": 19846124,
+        "files": 1266,
+        "absolute_actual": {
+          "bytes": 19846124,
+          "files": 1266
+        },
+        "reserve_bytes": 954616,
+        "reserve_files": 24,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 54525952,
+        "cap_files": 10000
+      },
+      "history": {
+        "bytes": 552141207,
+        "files": 129768,
+        "absolute_actual": {
+          "bytes": 552141207,
+          "files": 129768
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1073741824,
+        "cap_files": 400000
+      },
+      "shared_git": {
+        "bytes": 4715715,
+        "files": 698,
+        "absolute_actual": {
+          "bytes": 256893358,
+          "files": 3197
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "shared_cargo": {
+        "bytes": 0,
+        "files": 0,
+        "absolute_actual": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "stream_receipts": {
+        "bytes": 559003,
+        "files": 23,
+        "absolute_actual": {
+          "bytes": 559003,
+          "files": 23
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 983040,
+        "cap_files": 40
+      },
+      "stream_landing_controls": {
+        "bytes": 63390,
+        "files": 7,
+        "absolute_actual": {
+          "bytes": 63390,
+          "files": 7
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 65536,
+        "cap_files": 9
+      },
+      "final_protocol_source": {
+        "bytes": 188865,
+        "files": 9,
+        "absolute_actual": {
+          "bytes": 188865,
+          "files": 9
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 196608,
+        "cap_files": 12
+      },
+      "windows_cadence_source": {
+        "bytes": 59673,
+        "files": 4,
+        "absolute_actual": {
+          "bytes": 59673,
+          "files": 4
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 65536,
+        "cap_files": 8
+      },
+      "windows_cadence_protocol": {
+        "bytes": 15028,
+        "files": 2,
+        "absolute_actual": {
+          "bytes": 15028,
+          "files": 2
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 1048576,
+        "cap_files": 100
+      },
+      "windows_cadence_receipts": {
+        "bytes": 93960,
+        "files": 16,
+        "absolute_actual": {
+          "bytes": 93960,
+          "files": 16
+        },
+        "reserve_bytes": 954616,
+        "reserve_files": 24,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 1048576,
+        "cap_files": 40
+      },
+      "paged_controls_protocol": {
+        "bytes": 469262,
+        "files": 103,
+        "absolute_actual": {
+          "bytes": 469262,
+          "files": 103
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 300
+      }
+    },
+    "shared_groups": {
+      "F13_windows_shared_support": {
+        "bytes": 4715715,
+        "files": 698,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "F12_matrix_evidence_total": {
+        "bytes": 20864130,
+        "files": 1297,
+        "cap_bytes": 54525952,
+        "cap_files": 10000
+      }
+    },
+    "free_bytes": 199910776832,
+    "epoch": 1792539877.788235,
+    "qualification": "logical bytes; no planned deletion credit; parent owns cross-host ledger"
+  },
+  "guard_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "budget_sha256": "0a1a73bd7f8094f1bf2e7f79cf40b6eff970acc2bb7c1640fbad52f3846be55a",
+  "frozen_reference_guard_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "frozen_reference_expected_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "sampling_revision": "qpc-ns-v2; whole-Job tail coverage; strict >40ms; coarse monotonic retained; no retrospective requalification",
+  "qualification": "one owned Job; sampled RSS; commit hard caps; shared token waits excluded from engine latency"
+}

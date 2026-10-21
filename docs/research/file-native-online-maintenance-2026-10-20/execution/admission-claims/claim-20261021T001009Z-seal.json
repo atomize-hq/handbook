@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-022-C1WIN-EXPIRY-CP192-SOURCE128KiB",
+  "utc": "2026-10-21T00:10:09.557121+00:00",
+  "status": "RESERVATIONS_APPLIED__NEW_BUDGET_REGISTRATION_AND_EXACT_PHASE_GO_REQUIRED__NO_NATIVE_FULL_GO",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T001009Z.json",
+      "bytes": 11377,
+      "sha256": "905543e536ad5b7fd8db19c252a99d5e4fd432401f556bced4e236fea4358b36"
+    },
+    {
+      "file": "claim-20261021T001009Z.md",
+      "bytes": 1963,
+      "sha256": "5617caf11f0fb5645d85f750af7e657045867a4400961942851b65fa89ef76a5"
+    }
+  ]
+}

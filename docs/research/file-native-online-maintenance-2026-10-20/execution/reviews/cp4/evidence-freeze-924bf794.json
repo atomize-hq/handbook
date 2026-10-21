@@ -1,0 +1,100 @@
+{
+  "kind": "CP4 independent static source review; not runtime admission",
+  "base": "a3f9805eccc19ede8dd5c735b54e675e98e63714",
+  "freeze": {
+    "path": "C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be/cp4-review/source-freeze.json",
+    "bytes": 6384,
+    "sha256": "924bf794bfa730b664acb9ddc1d1ef6871fbdca714c89d1f069640abffc9a9c1",
+    "verified_files": 29,
+    "Rust_Cargo": 25,
+    "controls_docs": 4,
+    "mismatches": []
+  },
+  "source_hashes": {
+    "lifetime.rs": "31ca252691bcbbad32b99796642c2af07f0b837e83f954323b61df0669b8a507",
+    "pack.rs": "a421e97d45168ae541e80ec6caada2475a159297b9286d47b0372b2c7f458887",
+    "packing.rs": "9b000069b2b5b6a6213e078871fedc28ccad4995f658e433ea5e4b4e5319aa6c",
+    "store.rs": "379d42d6fa30cf92c1accf4f78fc253c3adfb6c28fa3bf7c0aa17fec56098b7c"
+  },
+  "verdict": "REMEDIATE",
+  "full_qualification": "INCOMPLETE",
+  "a3_verdict": "INTEGRATE preserved",
+  "graph": "UNKNOWN exact unregistered checkout; manual HIGH risk",
+  "reviewer_runtime_actions": 0,
+  "reviewer_source_edits": 0,
+  "reviewer_fixture_mutations": 0,
+  "units_prepared": 19,
+  "units_run_by_reviewer": 0,
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "P1",
+      "source": "lifetime.rs239,249-251; io.rs141-149",
+      "trace": [
+        "exact active sealed-preselection owner",
+        "create_new publishes empty abandoned/attempt",
+        "process death before write_all",
+        "active remains and terminal aggregate unchanged",
+        "release exact-byte check refuses; selection fence refuses; abandon/transfer/collect cannot recover",
+        "8 interrupted owners exhaust active slots"
+      ],
+      "proof_type": "static syscall/state trace, no engine reproduction",
+      "missing_control": "create-before-firstwrite and actual partial receipt/stage interruption"
+    },
+    {
+      "id": "F2",
+      "priority": "P1",
+      "source": "lifetime.rs153-165,192-198",
+      "trace": [
+        "exact active owner + canonical durable receipt after interrupted release",
+        "known owned scratch path is regular hardlink to SELECTED/protected original",
+        "regular endpoint passes symlink/reparse checks",
+        "exact CAS tokens still match",
+        "truncate(true) mutates both scratch and live alias before replacement"
+      ],
+      "proof_type": "static file identity trace, no filesystem mutation",
+      "missing_control": "native hardlink alias refusal before truncation; preserved authority/payload bytes"
+    }
+  ],
+  "reviewed_invariants": [
+    "whole-registry preservation",
+    "legacy owner provenance across opt-in/seal",
+    "selection-started before accepting writes",
+    "outside-W proofs plus native control CAS",
+    "attempt-only fence and accepted result precedence",
+    "active presence as one-envelope commit discriminator for complete receipts",
+    "V2 collect entry refusal and V1 P then one try-W",
+    "checked quota/count/margin retention and zero reclamation credit",
+    "O1 cached owned string capacity plus actual Vec reservations",
+    "actual-cache + standalone borrowed source + production builder planned heavy test"
+  ],
+  "static_boundary_arithmetic": {
+    "assumption": "64-bit sizes; source-only sizing, not allocator measurements",
+    "records": 56000,
+    "key_bytes": 191,
+    "legacy_index_bytes": 13496053,
+    "conservative_source_charge": 13948149,
+    "estimated_finish_bound": 37684082,
+    "one_cache_plus_source_finish": 65580380,
+    "two_cache_plus_source_finish": 79528529,
+    "limit": 67108864,
+    "actual_serialized_output_bytes": 14351124
+  },
+  "controls": {
+    "protocol_lines": 329,
+    "designed_modes": [
+      "A",
+      "B"
+    ],
+    "publisher_rounds_per_mode": 4,
+    "publishers": 4,
+    "losers_per_mode": 12,
+    "held_reader_seconds": 15.1,
+    "original_death_windows": 8,
+    "cap_fixture": "structural, not4096 actual attempts",
+    "guard_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+    "budget_sha256": "ca5592807f608afd7f76052f3121b9d8610f7177b1e0a569173172f4d87860f3"
+  },
+  "no_new_allocation_or_clock_grant": true,
+  "source_freeze_release": "notified parent after full read/hash checks; no source reread afterward"
+}
