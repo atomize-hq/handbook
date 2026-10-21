@@ -664,7 +664,7 @@ def verify_guard_memory(g):
                 need(not decoder.unused_data,'gzip-trailing-member-or-bytes')
     need(decoder.eof and not decoder.unused_data and not decoder.unconsumed_tail and not pending,'complete-single-gzip-member')
     need(count==g['memory_sample_count'] and count>=2 and positive>0,'complete-positive-native-memory-series')
-    return dict(samples=count,raw_max_interval_seconds=maximum,positive_live_member_observations=positive,
+    return dict(samples=count,last_epoch=prior,raw_max_interval_seconds=maximum,positive_live_member_observations=positive,
                 explicit_zombie_observations=zombies,single_gzip_member=True)
 
 

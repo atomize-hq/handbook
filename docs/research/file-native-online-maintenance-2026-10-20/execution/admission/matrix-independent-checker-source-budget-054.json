@@ -1,0 +1,70 @@
+{
+  "kind": "private-Matrix-independent-checker-source-budget-054",
+  "owner": "01a15ae2-798d-7a91-b063-7e45b4768671",
+  "checkout_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook",
+  "source_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20",
+  "whole_bytes": 1114112,
+  "whole_files": 200,
+  "membership": "ALLregularfilesrecursivelyundersource_rootPLUScheckout_root/.gitregularpointerfile82B. Alloldsource/bytecode/protocolcopiesremaincounted; no physicaldeletioncredit. GitADMIN/objectsF13separate.",
+  "groups": {
+    "FOCUSED": {
+      "prefix": "execution/final-protocol",
+      "bytes": 229376,
+      "files": 16
+    },
+    "QPC": {
+      "prefix": "execution/windows-cadence",
+      "bytes": 65536,
+      "files": 8
+    },
+    "OTHER": {
+      "membership": "Allremainingwholemembership",
+      "bytes": 819200,
+      "files": 176
+    }
+  },
+  "new_cli": {
+    "path": "execution/harness/independent_checker_cli.py",
+    "max_bytes": 24576,
+    "max_files": 1
+  },
+  "quota_source_subset": {
+    "max_bytes": 49152,
+    "max_files": 5,
+    "paths": {
+      "execution/harness/quota_v2_oracle.py": 18432,
+      "execution/harness/quota_v2_controls.py": 10240,
+      "execution/harness/verify_operational_v2.py": 10240,
+      "execution/harness/physical_decoder_v6.py": 8192,
+      "execution/windows-matrix/quota-v2-plan.md": 2048
+    }
+  },
+  "claim052_sha256": "404d8959500bff1409ce8298279ca330be8f5d35b50914dacefd99872d43bccd",
+  "claim053_sha256": "1a8d9d2b940afe9b3868491d0e9e86eb5a998d57c0f208fceafa085cccc04db7",
+  "C3_topup_32768_unchanged_count_once": true,
+  "additional_global_or_C3_draw": 0,
+  "engine_commit_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "source_only": true,
+  "runtime_go": false,
+  "pure_memory_parse_compile_go": true,
+  "issued": "2026-10-21T06:56:54.081056+00:00",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z",
+  "rules": [
+    "OnlyNEWCLIandv6exact062data+NAMEDclosedartifact_limits/twoboundedwriterportmaychange. Oldv5/quota/control/semanticbytesunchanged. LegacyNonev6sinkbehaviorunchanged.",
+    "BeforeeachwriteverifyimmutablebudgetSHA andALLcandidateperfile/subset/group/wholephysicalmembership+maximalintermediate; noextras/temp/sourcebackups/pycache/links/reparse. Existingoldpycachecounted/preserved, nonewbytecode.",
+    "Oldv6c4e4036Bdurablea5Git; sourcecontrols70unrun. Sourcechangesfreshfullhashfreeze/review+finitephaseadmissionbeforenative/fixtures/checkers/runtime.",
+    "Boundactualeveryoutput/identity/partial/proof/index/errorphysicalwritebeforeappend; failuresretainpartials+censor, no inventedPASS/referenceonlystdout. No arbitrarymoduleI/Omonkeypatch/circularCLIimport.",
+    "Parentsourceadmissiondoesnotauthorizebuild/cache/corpus/archive/retire/Git. Ownsourceallocationchecks, validforeignholdskeptcentrally."
+  ],
+  "prewrite": {
+    "whole_actual": 1067113,
+    "whole_files": 102,
+    "other_actual": 782057,
+    "focus_actual": 225383,
+    "QPC_actual": 59673,
+    "max_new_candidate_whole": 1095845,
+    "max_new_candidate_other": 810789
+  },
+  "claim054_sha256": "4555a0c32401bfa82f15e7fa6e8089f19b0e6de4aa20c5ac826cc71951b80ad9"
+}

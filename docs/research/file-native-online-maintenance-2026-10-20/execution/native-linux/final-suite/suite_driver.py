@@ -3,7 +3,7 @@ import base64, copy, fcntl, hashlib, json, os, selectors, signal, subprocess, sy
 from pathlib import Path
 import native_guard as guard
 from native_driver_v3 import Driver as EngineDriver
-from suite_bootstrap import need, encoded, digest, owned, strict
+from suite_bootstrap import need, encoded, digest, owned, strict,retain_birth
 from native_resources_v3 import confined,regular_read
 
 from suite_recovery import Commands,descendants
@@ -219,19 +219,23 @@ def suite_guard_run(ns):
     command = ns.command[1:] if ns.command[:1] == ['--'] else ns.command
     if not command:
         raise RuntimeError('command-required')
+    state_lock=threading.RLock()
     p = subprocess.Popen([sys.executable, str(Path(guard.__file__).resolve()), '--child', str(read_fd), *command], cwd=ns.cwd, env=env, stdin=stdin, stdout=output, stderr=errors, start_new_session=True, pass_fds=(read_fd,))
     os.close(read_fd)
     initial = process(p.pid)
     if initial is None or initial['state'] == 'Z' or initial['rss'] is None or (initial['hwm'] is None) or (initial['rss'] <= 0):
-        fd=os.pidfd_open(p.pid)
-        try:signal.pidfd_send_signal(fd,signal.SIGKILL)
-        finally:os.close(fd)
+        if initial is not None:
+            starts={};handles={}
+            retain_birth(starts,handles,initial,state_lock,'blocked-root-refusal')
+            try:signal.pidfd_send_signal(handles[p.pid],signal.SIGKILL)
+            finally:os.close(handles[p.pid])
         p.wait(timeout=5)
         raise RuntimeError('blocked-launch-positive-rss-required')
-    tracked = {p.pid: initial['start']}
+    tracked = {}
     active = {p.pid}
     registered_supervisors = {pid: row['start'] for pid, row in processes().items() if pid not in (os.getpid(), p.pid) and str(ROOT) in row['cmd']}
-    pidfds = {p.pid: os.pidfd_open(p.pid)}
+    pidfds = {}
+    retain_birth(tracked,pidfds,initial,state_lock,'blocked-root')
     stop = threading.Event()
     reasons = []
     termination = []
@@ -245,7 +249,6 @@ def suite_guard_run(ns):
     process_peaks = {}
     intervals = []
     last_sample = None
-    state_lock = threading.Lock()
 
     def terminate(reason):
         with state_lock:
@@ -269,14 +272,7 @@ def suite_guard_run(ns):
         with state_lock:
             for pid in selected:
                 row = rows[pid]
-                if pid not in tracked:
-                    try:
-                        fd=os.pidfd_open(pid)
-                    except ProcessLookupError:continue
-                    again=process(pid,with_memory=False)
-                    if again is None or again['start']!=row['start']:
-                        os.close(fd);raise RuntimeError('guard5-pidfd-birth-race')
-                    tracked[pid]=row['start'];pidfds[pid]=fd
+                retain_birth(tracked,pidfds,row,state_lock,'tree-scan')
         return [rows[pid] for pid in selected if tracked.get(pid)==rows[pid]['start'] and pid in pidfds]
 
     def children(pid):
@@ -312,12 +308,7 @@ def suite_guard_run(ns):
             if pid in tracked and tracked[pid] != row['start']:
                 raise RuntimeError('owned-pid-identity-reused')
             with state_lock:
-                if pid not in tracked:
-                    tracked[pid] = row['start']
-                    try:
-                        pidfds[pid] = os.pidfd_open(pid)
-                    except ProcessLookupError:
-                        pass
+                retain_birth(tracked,pidfds,row,state_lock,'rss-sampler')
                 active.add(pid)
             rows.append(row)
             pending |= children(pid) - seen
@@ -494,3 +485,64 @@ def verify_guard_policy(m,packet,g):
     need(claim['guard_version']==5 and claim['guard_sha256']==g['guard_sha256'] and
          claim['nonce']==g['owner_nonce'] and claim['process_start']==g['owner_process_start'] and
          claim['categories']==g['prospective_reservation'],'new-guard4-retained-owner-claim')
+
+
+def phase_terminal(receipt,manifest_sha,identity,covered,deadline):
+    """No substantive file work follows the observer handoff."""
+    import suite_bootstrap as early
+    receipt_sha=digest(receipt)
+    need(early.EARLY_THREAD.is_alive(),'caller-observer-live-through-final-receipt')
+    early.EARLY_STOP.set();early.EARLY_THREAD.join(.04)
+    need(not early.EARLY_THREAD.is_alive(),'caller-observer-terminal-join')
+    rows=early.EARLY_ROWS
+    i=next((i for i,r in enumerate(rows) if r['epoch']>=covered),len(rows))
+    tail=rows[max(0,i-1):]
+    endpoint=early.caller_sample();tail.append(endpoint)
+    need(2<=len(tail)<=256 and tail[0]['epoch']<=covered and tail[-1]['epoch']>=covered,'bounded-caller-tail-overlap')
+    for a,b in zip(tail,tail[1:]):need(0<=b['epoch']-a['epoch']<=.04,'caller-tail-cadence')
+    need(all(r['caller_pid']==identity['pid'] and r['caller_start']==identity['start'] for r in tail),'same-caller-birth-through-tail')
+    value=dict(kind='V5_PHASE_TERMINAL',receipt_sha256=receipt_sha,manifest_sha256=manifest_sha,
+        caller_pid=identity['pid'],caller_start=identity['start'],deadline_epoch=deadline,
+        substantive_end_epoch=endpoint['epoch'],covered_epoch=covered,observer_joined=True,
+        samples=[[r['epoch'],r['caller_rss'],r['caller_hwm']] for r in tail])
+    raw=encoded(value)+b'\n';need(len(raw)<=15360,'terminal-witness-byte-cap')
+    def emit(block,prior):
+        need(len(block)<=15360 and time.time()<deadline,'terminal-output-bounds')
+        # Small writes, post-write synchronous RSS/HWM and cadence checks. A
+        # blocked write or failed final check cannot finish with exit code zero.
+        while block:
+            part=block[:4096];n=os.write(1,part);need(n>0,'terminal-output-progress');block=block[n:]
+            row=early.caller_sample();need(0<=row['epoch']-prior<=.04 and row['epoch']<deadline,'terminal-output-cadence')
+            prior=row['epoch']
+        return prior
+    end=emit(raw,endpoint['epoch'])
+    terminal=early.caller_sample()
+    need(0<=terminal['epoch']-end<=.04,'terminal-final-sample-cadence')
+    final=encoded(dict(kind='V5_PHASE_EXIT',witness_sha256=hashlib.sha256(raw).hexdigest(),
+        epoch=terminal['epoch'],rss=terminal['caller_rss'],hwm=terminal['caller_hwm']))+b'\n'
+    need(len(final)<=512,'constant-terminal-exit-record')
+    emit(final,terminal['epoch'])
+    os._exit(0)
+
+def verify_phase_terminal(binding,receipt):
+    """Parent-sealed actual exit plus exact two retained stdout records."""
+    need(binding['reviewed'] is True and binding['returncode']==0,'parent-observed-successful-phase-exit')
+    path=owned(binding['path'],guard.ROOT/'evidence')
+    need(path.stat().st_size<=16384 and digest(path)==binding['sha256'],'terminal-witness-file-bound')
+    raw=path.read_bytes();lines=raw.splitlines(keepends=True)
+    need(len(lines)==2 and all(line.endswith(b'\n') for line in lines),'exact-two-terminal-records')
+    a,b=[strict(line,16384) for line in lines]
+    need(receipt['kind']=='V5_PHASE_FINAL' and receipt['status']=='PENDING_TERMINAL' and
+        a['kind']=='V5_PHASE_TERMINAL' and b['kind']=='V5_PHASE_EXIT' and
+        a['receipt_sha256']==binding['receipt_sha256'] and a['manifest_sha256']==receipt['manifest_sha256'] and
+        b['witness_sha256']==hashlib.sha256(lines[0]).hexdigest(),'source-bound-terminal-receipt')
+    need(a['caller_pid']==receipt['phase_caller']['pid'] and a['caller_start']==receipt['phase_caller']['start'] and
+        a['deadline_epoch']==receipt['deadline_epoch'] and a['observer_joined'] is True and
+        a['covered_epoch']==receipt['phase_memory_proof']['last_epoch'],'terminal-caller-memory-overlap')
+    rows=a['samples'];need(2<=len(rows)<=256 and rows[0][0]<=a['covered_epoch']<=rows[-1][0] and
+        rows[-1][0]==a['substantive_end_epoch'],'bounded-terminal-tail-endpoints')
+    rows=rows+[[b['epoch'],b['rss'],b['hwm']]]
+    for row in rows:need(len(row)==3 and all(type(x) in (int,float) for x in row) and
+        0<row[1]<=row[2]<=768*1024**2 and row[0]<receipt['deadline_epoch'],'terminal-positive-caller-memory')
+    for x,y in zip(rows,rows[1:]):need(0<=y[0]-x[0]<=.04,'terminal-memory-cadence')
+    return dict(receipt, status='PASSED',terminal_witness_sha256=binding['sha256'])

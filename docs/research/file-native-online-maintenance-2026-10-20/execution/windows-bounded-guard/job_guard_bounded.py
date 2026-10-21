@@ -1,3 +1,183 @@
+GUARD_WIRE_CONTRACT = { 'api': 'bounded-windows-guard-wire-r3',
+  'version': 1,
+  'sampling_revision': 'bounded-QPC-v4; resource-closure-independent-health',
+  'qpc_schema': 'bounded-windows-job-qpc-jsonl-r3',
+  'qpc_revision': 'R3',
+  'row_encoding': 'ASCII JSON plus LF; ensure_ascii=true; allow_nan=false',
+  'clock': { 'sample': 'time.perf_counter_ns',
+             'sample_unit': 'nanoseconds',
+             'sample_frequency_hz': 1000000000,
+             'nominal_period_ns': 20000000,
+             'censor_interval_ns': 40000000,
+             'epoch': 'Unix seconds from time.time',
+             'monotonic': 'diagnostic seconds from time.monotonic',
+             'creation_time': 'unsigned FILETIME 100ns since1601; GetProcessTimes on same retained HANDLE'},
+  'field_widths': { 'pid': {'native': 'DWORD', 'bits': 32},
+                    'creation_time': {'native': 'FILETIME', 'bits': 64},
+                    'rss': {'native': 'SIZE_T', 'bits': 64},
+                    'peak': {'native': 'SIZE_T', 'bits': 64},
+                    'perf_counter_ns': {'min': 1, 'max': 9223372036854775807},
+                    'counts': {'min': 0, 'max': 9223372036854775807}},
+  'dimensions': { 'job_member_table': 2048,
+                  'registered_supervisors': 16,
+                  'inner_live_process_limit': 12,
+                  'outer_live_process_limit': 16,
+                  'live_registered_supervisors': 4,
+                  'per_process_rss': 2147483648,
+                  'job_aggregate_rss': 3221225472,
+                  'supervisor_rss': 805306368,
+                  'native_commit_flags': 8968,
+                  'process_commit_bytes': 2147483648,
+                  'job_commit_bytes': 3221225472},
+  'bounds_contract': { 'mandatory': True,
+                       'version': 1,
+                       'root_keys': [ 'version',
+                                      'receipt_prefix',
+                                      'invocation',
+                                      'rss',
+                                      'collections',
+                                      'stdio',
+                                      'final',
+                                      'aggregate'],
+                       'rss': [ 'complete_rows',
+                                'total_rows',
+                                'row_bytes',
+                                'raw_bytes',
+                                'gzip_bytes',
+                                'finish_reserve_bytes'],
+                       'invocation': ['argv_bytes', 'argv_items', 'stdin_bytes', 'cwd_bytes'],
+                       'collections': ['disk', 'supervisor', 'exit', 'identity', 'peaks', 'errors', 'terminations'],
+                       'collection_limits': ['rows', 'bytes'],
+                       'stdio': ['stdout', 'stderr', 'read_chunk_bytes'],
+                       'stream_limits': ['capture_bytes', 'overflow_tail_bytes'],
+                       'final': ['json_bytes', 'emergency_bytes', 'completion_bytes'],
+                       'aggregate': ['retained_bytes', 'retained_files'],
+                       'binding': 'bounds_sha256=SHA256(exact ASCII compact JSON evidence_bounds plus LF)',
+                       'row_bytes_cap': 'evidence_bounds.rss.row_bytes; checked before CRC/write',
+                       'no_duration_defaults': True},
+  'rows': { 'rss-sample': { 'sample_complete': True,
+                            'required': [ 'event',
+                                          'sample_complete',
+                                          'epoch',
+                                          'perf_counter_ns',
+                                          'completed_perf_counter_ns',
+                                          'collection_duration_seconds',
+                                          'completion_interval_seconds',
+                                          'monotonic',
+                                          'monotonic_interval_seconds',
+                                          'interval_seconds',
+                                          'sample_id',
+                                          'job_rss',
+                                          'processes',
+                                          'supervisor_rss',
+                                          'supervisors',
+                                          'run_nonce'],
+                            'process': ['pid', 'creation_time', 'rss', 'peak'],
+                            'supervisor_live': ['pid', 'creation_time', 'rss', 'peak'],
+                            'supervisor_departed': ['pid', 'creation_time', 'state'],
+                            'supervisor_departure_states': [ 'ended-before-open-or-reused',
+                                                             'ended-or-reused',
+                                                             'exited-during-rss'],
+                            'nullable_seconds': [ 'completion_interval_seconds',
+                                                  'monotonic_interval_seconds',
+                                                  'interval_seconds']},
+            'rss-write-complete': { 'sample_complete': False,
+                                    'required': [ 'event',
+                                                  'sample_complete',
+                                                  'sample_id',
+                                                  'perf_counter_ns',
+                                                  'completed_perf_counter_ns',
+                                                  'recorded_perf_counter_ns',
+                                                  'duration_seconds',
+                                                  'run_nonce']},
+            'root-end-sampling-coverage': { 'sample_complete': False,
+                                            'required': [ 'event',
+                                                          'sample_complete',
+                                                          'perf_counter_ns',
+                                                          'previous_recorded_perf_counter_ns',
+                                                          'interval_seconds',
+                                                          'run_nonce']},
+            'job-drain-sampling-coverage': { 'sample_complete': False,
+                                             'required': [ 'event',
+                                                           'sample_complete',
+                                                           'perf_counter_ns',
+                                                           'previous_recorded_perf_counter_ns',
+                                                           'interval_seconds',
+                                                           'members',
+                                                           'empty_observed',
+                                                           'run_nonce']},
+            'cadence-gap-before-rss': {'sample_complete': False},
+            'full-sample-cadence-late': {'sample_complete': False},
+            'stale-sample-before-resume': {'sample_complete': False},
+            'disk-budget': {'sample_complete': False, 'value': 'actual bounded category census'},
+            'pid-exit-race': { 'sample_complete': False,
+                               'value': 'native exit/departure observation; no zero RSS credit'}},
+  'gzip': { 'codec': 'gzip-stored-deflate-v1',
+            'members': 1,
+            'header_bytes': 10,
+            'stored_block_max': 65535,
+            'stored_block_overhead_bytes': 5,
+            'finish_bytes': 13,
+            'min_finish_reserve_bytes': 65536,
+            'compression_credit': False},
+  'stdio': { 'read_chunk_max': 4096,
+             'EOF': [109, 'actual zero-byte read'],
+             'disconnected_233': 'CENSOR; never EOF',
+             'retention': 'bounded prefix plus contiguous bounded overflow tail; exact bytes/hash',
+             'unknown_close': 'retain all references, refuse later controller admission'},
+  'publication': { 'receipt_suffixes': ['.json', '.rss.jsonl.gz', '.stdout', '.stderr', '.bounds.json'],
+                   'stored_json': 'qualified=false; postwrite census pending',
+                   'returned_completion': 'actual receipt SHA plus inclusive postwrite census; caller must persist in '
+                                          'separately admitted sink',
+                   'process_closure_verified': 'physical native resource predicate only; independent errors/censor',
+                   'qualified': 'exit0 AND no censor AND no health errors AND physical closure AND complete gzip/stdio '
+                                'AND actual postwrite census'},
+  'native_lifetime': { 'schema': 'original-job-native-lifetime-v1',
+                       'keys': [ 'schema',
+                                 'run_nonce',
+                                 'guard_sha256',
+                                 'creator',
+                                 'creator_job_query',
+                                 'job_handle_flags',
+                                 'source_audit_ref',
+                                 'empty_observations',
+                                 'job_close',
+                                 'host'],
+                       'creator': ['pid', 'creation'],
+                       'creator_job_query': ['success', 'is_member', 'exact_job_handle', 'perf_ns'],
+                       'job_handle_flags': ['query_success', 'flags', 'perf_ns'],
+                       'empty_observations': ['perf_ns', 'members'],
+                       'job_close': ['success', 'completed_perf_ns'],
+                       'host': [ 'pid',
+                                 'creation',
+                                 'exit_observed_perf_ns',
+                                 'exit_code',
+                                 'io_closed',
+                                 'writer_closed',
+                                 'callbacks_joined'],
+                       'publisher': 'job_guard_bounded.native_lifetime; actual inner guard-worker creator/host; parent '
+                                    'separately reaps guard-worker and closes outer Job'},
+  'parent_completion': { 'schema': 'parent-original-guard-completion-v1',
+                         'required': [ 'schema',
+                                       'run_nonce',
+                                       'guard_sha256',
+                                       'creator',
+                                       'guard_reaped',
+                                       'guard_exit_code',
+                                       'stdout_eof',
+                                       'stderr_eof',
+                                       'callbacks_joined',
+                                       'completed_perf_ns',
+                                       'native_guard_worker_exit',
+                                       'outer_controller_lifetime',
+                                       'postclose_census',
+                                       'original_returned_completion',
+                                       'outer_receipt_ref'],
+                         'guard_reaped': 'actual guard-worker wait + native SIGNALLED + checked native handle close; '
+                                         'never publisher self-exit'},
+  'ownership': 'unnamed noninheritable Job; exact newly created Job query; source-reviewed no Job handle duplication; '
+               'no arbitrary OS isolation claim'}
+
 import argparse
 import contextlib
 import ctypes
@@ -19,7 +199,11 @@ import uuid
 walk_tree = os.walk
 HANDLE = w.HANDLE
 DWORD = w.DWORD
-qpc = time.perf_counter_ns
+def qpc():
+  n=time.perf_counter_ns()
+  if type(n) is not int or not 0<n<=9223372036854775807:
+    raise RuntimeError('QPC-integer-range')
+  return n
 epoch = time.time
 ref = ctypes.byref
 winerr = ctypes.WinError
@@ -33,6 +217,7 @@ REGISTRY = TOKEN.with_name('supervisors.json')
 OWNER = TOKEN.with_name('current-owner.json')
 REGISTRY_LOCK = TOKEN.with_name('supervisors.lock')
 GiB = 1024 ** 3
+if size_of(ctypes.c_size_t)!=8:raise RuntimeError('64bit-Windows-required')
 K = ctypes.WinDLL('kernel32', use_last_error=True)
 PS = ctypes.WinDLL('psapi', use_last_error=True)
 class Basic(ctypes.Structure):
@@ -225,7 +410,7 @@ def supervisors(extra_pids=()):
       started = creation_time(pid)
       assert started is not None, 'supervisor-owner-vanished'
       live[pid] = dict(pid=pid, creation_time=started, registered_by=os.getpid(), role='guard-or-explicit-new-work-supervisor')
-    assert len(live) <= 16, 'supervisor-registry-cap'
+    assert len(live) <= 4, 'live-supervisor-count-censor'
     control_json(REGISTRY, list(live.values()))
     return list(live.values())
 def members(job):
@@ -264,13 +449,15 @@ def write_json(path, row, limit=8192):
     output.flush()
     os.fsync(output.fileno())
 def supervisor_rss(rows=None):
-  total = 0
+  total = live = 0
   samples = []
   for row in registry_rows() if rows is None else rows:
     value, race = _super_memory(row['pid'], row['creation_time'])
     if race:
       samples.append(dict(pid=row['pid'], creation_time=row['creation_time'], state=race))
       continue
+    live += 1
+    if live > 4:raise RuntimeError('live-supervisor-count-censor')
     total += value[0]
     samples.append(dict(pid=row['pid'], creation_time=row['creation_time'], rss=value[0], peak=value[1]))
   if total > 768 * 1024 ** 2:
@@ -546,7 +733,7 @@ def _super_memory(pid, expected):
     if K.GetProcessId(handle) != pid or _stamp(handle) != expected:
       return (None, 'ended-or-reused')
     value = _memory_handle(handle)
-    if value is None:
+    if value is None or value[0] <= 0:
       if K.WaitForSingleObject(handle, 0) == 0:
         return (None, 'exited-during-rss')
       raise RuntimeError('unreadable-live-supervisor-rss')
@@ -729,7 +916,9 @@ class PipeCapture:
       self.closed = True
   def reference(self):
     return {name: dict(retained_bytes=row['bytes'],retained_sha256=row['sha'].hexdigest(),captured_bytes=min(row['bytes'],self.state.bounds.b['stdio'][name]['capture_bytes']),observed_bytes=row['bytes'],total_output_bytes=row['bytes'] if row['eof'] else None,eof=row['eof'],truncated=row['truncated'] or row['bytes'] > self.state.bounds.b['stdio'][name]['capture_bytes'],complete=row['eof'] and row['closed'] and (row['bytes'] <= self.state.bounds.b['stdio'][name]['capture_bytes'])) for name,row in self.rows.items()}
+_ROOT_PENDING=False
 def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None):
+  global _ROOT_PENDING
   if _UNCLOSED:
     raise RuntimeError('previous-controller-IO-closure-unknown')
   if type(seconds) not in (int, float) or not math.isfinite(seconds) or seconds <= 0:
@@ -786,6 +975,7 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
     initial_rss = None
     remaining = None
     closure_checks = []
+    job_limit_checks = []
     creator_lifetime=job_close=None
     io_unknown = False
     def current_members():
@@ -849,7 +1039,9 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
               return
           last_tick, last_coarse = (tick, coarse)
           timing['samples'] += 1
+          check_job_limits(job,12,state)
           pids = current_members()
+          if len(pids)>12:raise RuntimeError('inner-live-process-count')
           js.sweep(pids)
           current = 0
           rows = []
@@ -955,17 +1147,13 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
         raise winerr(last_error())
       try:creator_lifetime=_creator(job)
       except BaseException:state.uncertain=True;raise
-      limits = Limits()
-      limits.Basic.Flags = 8192 | 256 | 512
-      limits.Process = 2 * GiB
-      limits.Job = 3 * GiB
-      if not K.SetInformationJobObject(job, 9, ref(limits), size_of(limits)):
-        raise winerr(last_error())
+      job_limit_checks.append(set_job_limits(job,12,state))
       timer = threading.Timer(max(0, absolute_deadline - epoch()), terminate, args=('time-censor',))
       timer.daemon = True
       timer.start()
       raw = StoredGzip(receipt.with_suffix('.rss.jsonl.gz'), state)
       state.raw = raw
+      _ROOT_PENDING=True
       process = subprocess.Popen(argv,cwd=cwd,env=env,close_fds=True,bufsize=0,stdin=subprocess.PIPE if stdin is not None else subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE,creationflags=4)
       if not K.AssignProcessToJobObject(job, HANDLE(process._handle)):
         process.kill()
@@ -973,6 +1161,7 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
         raise winerr(last_error())
       if process.pid not in current_members():
         raise RuntimeError('suspended-root-not-in-job')
+      _ROOT_PENDING=False
       js = JobSampling(state, job, current_members)
       initial_rss = js.memory(process.pid)
       if initial_rss is None or initial_rss[0] <= 0:
@@ -996,6 +1185,7 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
         terminate('memory-sample-cadence-censor')
       if reason or errors:
         raise RuntimeError('memory-sampler-refused-before-resume')
+      job_limit_checks.append(check_job_limits(job,12,state))
       timing['root_resume_check_ns'] = qpc()
       if epoch() >= absolute_deadline or NT.NtResumeProcess(HANDLE(process._handle)) != 0:
         raise RuntimeError('resume-failed')
@@ -1018,6 +1208,7 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
         feeder = threading.Thread(target=feed, name='owned-stdin', daemon=False)
         feeder.start()
       process.wait(timeout=max(0.001, absolute_deadline - epoch()) + 10)
+      timing['host_exit_observed_ns']=qpc()
       coverage('root-end-sampling-coverage')
       if current_members():
         terminate('root-completed-descendant-cleanup')
@@ -1031,6 +1222,7 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
       if process:
         try:
           process.wait(timeout=5)
+          timing['host_exit_observed_ns']=qpc()
         except subprocess.TimeoutExpired:
           errors.append('termination-wait-failed')
     finally:
@@ -1135,7 +1327,14 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
     raw_ref = raw.reference() if raw else dict(gzip_complete=False, evidence_complete=False)
     if not raw_ref['gzip_complete']:
       terminate('gzip-incomplete')
-    row = dict(creator_lifetime=creator_lifetime,job_close=job_close,argv=argv,cwd=str(cwd) if cwd else None,started_epoch=begin,token_acquired_epoch=acquired,token_wait_seconds=acquired - token_wait_begin,token_wait_started_epoch=token_wait_begin,token_contentions=token_contentions,before_token_setup_seconds=token_wait_begin - begin,total_seconds=epoch() - begin,stage_seconds=epoch() - acquired,requested_seconds=seconds,functional_cutoff_epoch=FUNCTIONAL,absolute_deadline_epoch=absolute_deadline,memory_sample_timing=timing,raw_rss=str(receipt.with_suffix('.rss.jsonl.gz')),closure_checks=closure_checks,exit=process.returncode if process else None,censor=reason[0] if reason else None,errors=errors,job_commit_limit=3 * GiB,process_commit_limit=2 * GiB,job_aggregate_sampled_peak_rss=aggregate[0] or None,per_process_observed_peak_rss=peaks,missing_memory_samples=missing[0],pid_exit_races=exit_races,initial_suspended_root_rss=initial_rss[0] if initial_rss else None,supervisor_rss_limit=768 * 1024 ** 2,supervisor_peak_rss=supervisor_peak[0],supervisor_samples=supervisor_samples,owner=owner,remaining_job_pids=remaining,process_closure_verified=proven and (not errors),terminations=terminations,disk_samples=samples,prospective=preflight,guard_sha256=sha_file(__file__),budget_sha256=budget.raw_hash,frozen_reference_guard_sha256=sha_file(Path(__file__).resolve().parent.parent / 'harness/job_guard.py'),frozen_reference_expected_sha256='1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae',donor_sha256='50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378',run_nonce=state.run_nonce,bounds_sha256=bounds.sha,collection_usage=state.used,suppressed_collection_rows=state.suppressed,native_identity_rows=js.identities if js else [],identity_peak_rss=js.identity_peaks if js else {},stdio=streams,rss_evidence=raw_ref,cap=state.cap_reason,termination_native_attempts=native_calls[0],qualified=False,postwrite_census_required=True,sampling_revision='bounded-QPC-v3',qualification='caller completion')
+    native_host=None
+    if process is not None:
+      native_host=dict(pid=process.pid,creation=owner.get('job_root_creation_time') if owner else None,
+        exit_observed_perf_ns=timing.get('host_exit_observed_ns'),exit_code=process.returncode,
+        io_closed=bool(pipes and all(x['closed'] for x in pipes.rows.values())),
+        writer_closed=bool(raw and raw.closed and raw.file.closed),
+        callbacks_joined=not any(t and t.is_alive() for t in (timer,sampler,disk_thread,feeder,pipes.thread if pipes else None)))
+    row = dict(job_limit_checks=job_limit_checks,native_host=native_host,creator_lifetime=creator_lifetime,job_close=job_close,argv=argv,cwd=str(cwd) if cwd else None,started_epoch=begin,token_acquired_epoch=acquired,token_wait_seconds=acquired - token_wait_begin,token_wait_started_epoch=token_wait_begin,token_contentions=token_contentions,before_token_setup_seconds=token_wait_begin - begin,total_seconds=epoch() - begin,stage_seconds=epoch() - acquired,requested_seconds=seconds,functional_cutoff_epoch=FUNCTIONAL,absolute_deadline_epoch=absolute_deadline,memory_sample_timing=timing,raw_rss=str(receipt.with_suffix('.rss.jsonl.gz')),closure_checks=closure_checks,exit=process.returncode if process else None,censor=reason[0] if reason else None,errors=errors,job_commit_limit=3 * GiB,process_commit_limit=2 * GiB,job_aggregate_sampled_peak_rss=aggregate[0] or None,per_process_observed_peak_rss=peaks,missing_memory_samples=missing[0],pid_exit_races=exit_races,initial_suspended_root_rss=initial_rss[0] if initial_rss else None,supervisor_rss_limit=768 * 1024 ** 2,supervisor_peak_rss=supervisor_peak[0],supervisor_samples=supervisor_samples,owner=owner,remaining_job_pids=remaining,process_closure_verified=proven,terminations=terminations,disk_samples=samples,prospective=preflight,guard_sha256=sha_file(__file__),budget_sha256=budget.raw_hash,frozen_reference_guard_sha256=sha_file(Path(__file__).resolve().parent.parent / 'harness/job_guard.py'),frozen_reference_expected_sha256='1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae',donor_sha256='50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378',run_nonce=state.run_nonce,bounds_sha256=bounds.sha,collection_usage=state.used,suppressed_collection_rows=state.suppressed,native_identity_rows=js.identities if js else [],identity_peak_rss=js.identity_peaks if js else {},stdio=streams,rss_evidence=raw_ref,cap=state.cap_reason,termination_native_attempts=native_calls[0],qualified=False,postwrite_census_required=True,sampling_revision='bounded-QPC-v4; resource-closure-independent-health',qualification='caller completion')
     try:
       data = _encode(row, bounds.b['final']['json_bytes'])
     except EvidenceCap:
@@ -1165,7 +1364,7 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
       row['censor'] = 'postwrite-census-error'
       row['completion_error'] = _error(error)
     row['qualified'] = row.get('exit') == 0 and (not row.get('censor')) and (not errors) and proven and raw_ref['gzip_complete'] and all((x['complete'] for x in streams.values())) and (row.get('postwrite_census_complete') is True)
-    completion = {k: row.get(k) for k in ('exit','censor','qualified','process_closure_verified','postwrite_census_complete','receipt_sha256','guard_sha256','budget_sha256','bounds_sha256','creator_lifetime','job_close','closure_checks')}
+    completion = {k: row.get(k) for k in ('exit','censor','qualified','process_closure_verified','postwrite_census_complete','receipt_sha256','guard_sha256','budget_sha256','bounds_sha256','run_nonce','creator_lifetime','job_close','closure_checks','native_host')}
     completion['postwrite_census'] = row.get('postwrite_census')
     try:
       _encode(completion, bounds.b['final']['completion_bytes'])
@@ -1200,6 +1399,7 @@ def _checked_close(handle, origin, pid=None, creation=None):
     public = dict(kind='native-close-uncertain', origin=origin, pid=pid, creation_time=creation, close_attempted=True)
     _UNCLOSED.append(dict(kind='native-close-uncertain', handle=handle, public=public))
     raise RuntimeError('native-close-uncertain:' + origin)
+  return ok
 def _finish_io_fence(nonce, deadline):
   if len(_UNCLOSED)!=1:raise RuntimeError('close-unknown')
   c=_UNCLOSED[0]
@@ -1216,7 +1416,7 @@ def _finish_io_fence(nonce, deadline):
   pipes=c['pipes'];pipes.thread.join(left())
   if pipes.thread.is_alive() or not all(x['closed'] for x in pipes.rows.values()):
     raise RuntimeError('IO-open')
-  root=c['process'];root.wait(timeout=left())
+  root=c['process'];root.wait(timeout=left());exit_ns=qpc()
   created=_stamp(HANDLE(root._handle))
   if created!=c['owner']['job_root_creation_time'] or K.GetProcessId(HANDLE(root._handle))!=root.pid:
     raise RuntimeError('root-identity')
@@ -1232,7 +1432,7 @@ def _finish_io_fence(nonce, deadline):
   root._handle.Close()
   _checked_close(c['job'],'IO-fence-Job')
   closed=dict(checked=True,perf_counter_ns=qpc())
-  return dict(creator_lifetime=c['creator_lifetime'],job_close=closed,run_nonce=nonce,root_creation_time=created,closure_checks=empty,
+  return dict(native_host=dict(pid=root.pid,creation=created,exit_code=root.returncode,exit_observed_perf_ns=exit_ns,io_closed=True,writer_closed=c['raw'].closed and c['raw'].file.closed,callbacks_joined=True),creator_lifetime=c['creator_lifetime'],job_close=closed,run_nonce=nonce,root_creation_time=created,closure_checks=empty,
              IO_closed=True)
 def _creator(job):
   h=K.GetCurrentProcess();inside=w.BOOL();flags=DWORD()
@@ -1243,6 +1443,99 @@ def _creator(job):
   ok=K.GetHandleInformation(job,ref(flags));flags_perf_ns=qpc()
   if not ok or flags.value&1:
     raise RuntimeError('Job-inheritable-or-unknown')
-  return dict(creator_job_query=dict(perf_ns=query_perf_ns),job_handle_flags=dict(perf_ns=flags_perf_ns),pid=os.getpid(),creation_time=created,exact_job_query_succeeded=True,
+  return dict(creator_job_query=dict(success=True,is_member=False,exact_job_handle=True,perf_ns=query_perf_ns),job_handle_flags=dict(query_success=True,flags=flags.value,perf_ns=flags_perf_ns),pid=os.getpid(),creation_time=created,exact_job_query_succeeded=True,
     in_exact_job=False,handle_flags=flags.value,unnamed_job=True,
     source_known_duplicate_handles=0,source_known_inherited_handles=0)
+
+def set_job_limits(job,active,state):
+  if active not in (12,16):raise ValueError('closed-live-limit')
+  v=Limits();v.Basic.Flags=8968;v.Basic.Active=active
+  v.Process=2*GiB;v.Job=3*GiB
+  if not K.SetInformationJobObject(job,9,ref(v),size_of(v)):raise winerr(last_error())
+  return check_job_limits(job,active,state)
+
+def check_job_limits(job,active,state):
+  v=Limits();a=ctypes.create_string_buffer(48)
+  if not K.QueryInformationJobObject(job,9,ref(v),size_of(v),None) or not K.QueryInformationJobObject(job,1,a,48,None):
+    raise winerr(last_error())
+  count=int.from_bytes(a.raw[40:44],'little');terminated=int.from_bytes(a.raw[44:48],'little')
+  row=dict(perf_ns=qpc(),active_limit=v.Basic.Active,flags=v.Basic.Flags,active_processes=count,limit_terminated_processes=terminated)
+  if v.Basic.Flags!=8968 or v.Basic.Active!=active or v.Process!=2*GiB or v.Job!=3*GiB or count>active or terminated:
+    state.log('native-job-live-limit',row);state.cap('native-active-process-limit')
+    raise RuntimeError('native-job-live-limit')
+  return row
+
+def native_lifetime(row, source_sha, audit_ref):
+  def check(ok,label):
+    if not ok:raise RuntimeError(label)
+  check(row["process_closure_verified"] is True and row.get("native_host") is not None,
+    "positive-original-resource-closure")
+  creator = row["creator_lifetime"]
+  host = row["native_host"]
+  check(all(host[k] is True for k in ("io_closed", "writer_closed", "callbacks_joined")) and
+    type(host["exit_observed_perf_ns"]) is int, "actual-original-host-closure")
+  checks = row["closure_checks"]
+  check(len(checks) == 2 and all(x["members"] == [] for x in checks) and
+    row["job_close"]["checked"] is True, "actual-original-Job-close")
+  return dict(schema="original-job-native-lifetime-v1", run_nonce=row["run_nonce"],
+    guard_sha256=source_sha, creator=dict(pid=creator["pid"], creation=creator["creation_time"]),
+    creator_job_query=creator["creator_job_query"], job_handle_flags=creator["job_handle_flags"],
+    source_audit_ref=audit_ref, empty_observations=[dict(perf_ns=x["perf_counter_ns"], members=x["members"]) for x in checks],
+    job_close=dict(success=row["job_close"]["checked"], completed_perf_ns=row["job_close"]["perf_counter_ns"]),
+    host=host)
+
+
+
+def native_image(handle):
+  K.QueryFullProcessImageNameW.argtypes = [HANDLE,DWORD,w.LPWSTR,ptr(DWORD)]
+  K.QueryFullProcessImageNameW.restype = w.BOOL
+  count=DWORD(32768);buf=ctypes.create_unicode_buffer(count.value)
+  if not K.QueryFullProcessImageNameW(handle,0,buf,ref(count)):raise winerr(last_error())
+  return str(Path(buf.value).resolve())
+
+
+def native_argv():
+  def check(ok,label):
+    if not ok:raise RuntimeError(label)
+  K.GetCommandLineW.restype=w.LPWSTR
+  shell=ctypes.WinDLL("shell32",use_last_error=True)
+  shell.CommandLineToArgvW.argtypes=[w.LPCWSTR,ptr(ctypes.c_int)]
+  shell.CommandLineToArgvW.restype=ptr(w.LPWSTR)
+  count=ctypes.c_int()
+  values=shell.CommandLineToArgvW(K.GetCommandLineW(),ref(count))
+  check(bool(values),"native-parent-command-line")
+  try:
+    check(1<=count.value<=32,"native-parent-argv-count")
+    result=[values[i] for i in range(count.value)]
+    check(sum(len(x) for x in result)<=16384,"native-parent-argv-bytes")
+    return result
+  finally:
+    K.LocalFree.argtypes=[HANDLE];K.LocalFree.restype=HANDLE
+    if K.LocalFree(ctypes.cast(values,HANDLE)):
+      _UNCLOSED.append(dict(kind="native-argv-free-uncertain",pointer=values,shell=shell))
+      raise RuntimeError("native-argv-free-uncertain")
+
+
+def check_census_envelope(budget):
+  def worst(x):
+    if type(x) is dict:
+      return {k:worst(v) for k,v in x.items()}
+    if type(x) is list:
+      return [worst(v) for v in x]
+    return 2**64-1 if type(x) in (int,float) else x
+  _encode(worst(budget.check()),4096)
+
+
+def reserves(budget, entries):
+  result = {}
+  for p, size, count in entries:
+    covered = False
+    for name, rule in budget.categories.items():
+      if Path(p).is_relative_to(Path(rule["root"]).resolve()):
+        row = result.setdefault(name, dict(bytes=0, files=0))
+        row["bytes"] += size
+        row["files"] += count
+        covered = True
+    if not covered:raise RuntimeError("every-output-admitted")
+  return result
+

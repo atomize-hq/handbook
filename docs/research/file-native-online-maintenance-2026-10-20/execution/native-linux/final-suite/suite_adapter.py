@@ -7,7 +7,7 @@ from native_driver import owner
 from native_resources_v3 import Reservations, canonical, confined, inventory, regular_read, strict
 from native_adapter_v3 import NativeAdapter
 from focused_protocol import Harness, Inputs, intent, normalize, ORACLE_CHECKS
-from suite_bootstrap import need, encoded, digest, owned
+from suite_bootstrap import need, encoded, digest, owned,retain_birth
 from suite_driver import Commands,JsonDriver
 
 
@@ -537,19 +537,14 @@ def phase_launch(m,manifest_sha,deadline):
             for pid in owned_pids:
                 row=guard.process(pid)
                 if row is None:continue
-                if pid in tracked:need(tracked[pid]==row['start'],'phase-PID-reuse')
-                else:
-                    fd=os.pidfd_open(pid)
-                    again=guard.process(pid)
-                    if again is None or again['start']!=row['start']:
-                        os.close(fd);raise RuntimeError('phase-pidfd-birth-race')
-                    tracked[pid]=row['start'];handles[pid]=fd
+                retain_birth(tracked,handles,row,registry_lock,'phase-tree')
                 result.append(row)
             return result
     def kill_owned():
         try:members()
         except BaseException as e:errors.append('phase-kill-observation:'+repr(e))
-        for pid,fd in list(handles.items()):
+        with registry_lock:retained=list(handles.items())
+        for pid,fd in retained:
             try:signal.pidfd_send_signal(fd,signal.SIGKILL)
             except ProcessLookupError:pass
             except BaseException as e:errors.append('phase-owned-kill:'+repr(e))
@@ -571,9 +566,9 @@ def phase_launch(m,manifest_sha,deadline):
             due+=.02;stop.wait(max(0,due-time.monotonic()))
     failure=None;result=None;guard_receipt=None;readers=[];raw_outputs={};raw_counts={}
     from suite_bootstrap import EARLY_ROWS,EARLY_STOP,EARLY_THREAD
+    need(EARLY_THREAD is not None and EARLY_THREAD.is_alive(),'continuous-caller-observer-required')
     if EARLY_STOP is not None:
-        EARLY_STOP.set();EARLY_THREAD.join(2);need(not EARLY_THREAD.is_alive(),'early-phase-observer-joined')
-        for row in EARLY_ROWS:
+        for row in tuple(EARLY_ROWS):
             samples+=1
             if last is not None:gaps.append(row['epoch']-last)
             last=row['epoch'];compressed_write(compressed.compress(encoded(row)+b'\n'))
@@ -668,16 +663,16 @@ def phase_launch(m,manifest_sha,deadline):
     need(not failure and not errors and samples>=2 and time.time()<deadline,'phase-complete-within-deadline:'+str(failure))
     from suite_bootstrap import verify_guard_memory
     phase_memory_proof=verify_guard_memory(dict(memory_samples_path=str(phase_memory),memory_samples_sha256=digest(phase_memory),tracked_identity={str(pid):start for pid,start in tracked.items()},memory_sample_count=samples,heavy_rss_limit=2*1024**3,process_rss_limit=2*1024**3,supervisor_rss_limit=768*1024**2,native_host_rss_limit=3*1024**3))
-    value=dict(kind='V5_PHASE_FINAL',status='PASSED',scope=m['runtime_scope'],engine_qualification=phase['mode']=='full-body',unit_qualification=phase['mode']=='workspace' and phase['native_stage']=='test',
+    value=dict(kind='V5_PHASE_FINAL',status='PENDING_TERMINAL',scope=m['runtime_scope'],engine_qualification=phase['mode']=='full-body',unit_qualification=phase['mode']=='workspace' and phase['native_stage']=='test',
         manifest_sha256=manifest_sha,final_pin=m['final_pin'],claim=m['claim'],phase_caller=own,phase_memory_path=str(phase_memory),phase_memory_sha256=digest(phase_memory),
         phase_memory_samples=samples,phase_memory_proof=phase_memory_proof,phase_caller_outputs={k:dict(path=str(p),bytes=p.stat().st_size,sha256=digest(p)) for k,p in raw_outputs.items()},phase_max_interval=max(gaps),phase_memory_observer_joined=True,phase_owned_closure=closure,guard_receipt_sha256=digest(guard_receipt),packet_sha256=digest(packet_path),
         deadline_epoch=deadline,completed_epoch=time.time(),global_cache_identity_sha256=protected,result=result)
     result=inclusive_receipt(m,final,value,before,reserve)
     need(time.time()<deadline,'deadline-through-own-receipt-and-inclusive-census')
-    # No output or census follows cancellation. Exit is the external completion
-    # witness; failure before this point leaves the prefix, never a qualified run.
-    signal.setitimer(signal.ITIMER_REAL,0)
-    return result
+    # The independent caller observer remains live through all hashes, receipt
+    # fsync and inclusive census. Only bounded terminal recording follows.
+    from suite_driver import phase_terminal
+    return phase_terminal(final,manifest_sha,own,last,deadline)
 
 @contextmanager
 def phase_io(m,exclusive):

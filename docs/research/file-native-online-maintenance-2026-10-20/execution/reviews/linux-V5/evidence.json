@@ -1,0 +1,356 @@
+{
+ "kind": "LINUX_V5_INDEPENDENT_SOURCE_REVIEW",
+ "status": "READ_COMPLETE_SOURCE_DEFECTS_NO_GO",
+ "source_only": true,
+ "runtime_go": false,
+ "finite8_admission": "NO_GO",
+ "engine_cases_qualified": 0,
+ "controls_executed": 0,
+ "private_cache_copies": 0,
+ "builds": 0,
+ "tests": 0,
+ "rust_core_commit": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+ "source_root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/native-linux/final-suite",
+ "first_identity_utc": "2026-10-21T06:40:29.067031+00:00",
+ "last_identity_utc": "2026-10-21T06:50:26.091817+00:00",
+ "first_last_all40_equal": true,
+ "coverage": {
+  "suite13": "all fully read anew",
+  "unchanged27": "prior full read in same conversation explicitly reused; all bytes/hash match previous read and both V5 boundaries",
+  "native5": "actual frozen donor files, not reconstructed substitutes",
+  "shared": 4,
+  "harness": 7,
+  "research": 11,
+  "research_origin": "git show fixed062 commit exact docs/research logical paths; read-only",
+  "truncated_reads_credited": false
+ },
+ "identities": [
+  {
+   "logical": "suite/suite_adapter.py",
+   "bytes": 47542,
+   "sha256": "b8a4b2764563f8c077b7fbf0ae21ac0e3c94c92bfbe6a253d14f25646afbdac3"
+  },
+  {
+   "logical": "suite/suite_bootstrap.py",
+   "bytes": 13016,
+   "sha256": "38b8403b62017461ae7753e35fa2b354797805bb760ddb256351e30042368c4b"
+  },
+  {
+   "logical": "suite/suite_driver.py",
+   "bytes": 28900,
+   "sha256": "97e99b5224decc5fc1f73c5fa564fb09c2dfd216d6d073fdea2c0a6096e8613f"
+  },
+  {
+   "logical": "suite/suite_extensions.py",
+   "bytes": 48251,
+   "sha256": "b37d5c4477a6ff368c8e25e47de6490cef787209380905b729cfde23a7f8119a"
+  },
+  {
+   "logical": "suite/suite_main.py",
+   "bytes": 16195,
+   "sha256": "3dcf6cbdeb8928947c483f6b169049d6487acf92b341369f60dc7a482eeef5ea"
+  },
+  {
+   "logical": "suite/suite_oracle.py",
+   "bytes": 11460,
+   "sha256": "59ac7c58f399230419edbc82ecd52c1585c7f15e65420d001353baaf3f3a915a"
+  },
+  {
+   "logical": "suite/suite_ordinary.py",
+   "bytes": 6561,
+   "sha256": "fccad1637fa9c85f5fb3d77094f13ddc9bc810bca9410dc9aed01f940c80e942"
+  },
+  {
+   "logical": "suite/suite_packing.py",
+   "bytes": 33420,
+   "sha256": "729acc93dcd09af43d3a63daa4f10a3953eacabec938eedef9453fcc6fb83cb9"
+  },
+  {
+   "logical": "suite/suite_recovery.py",
+   "bytes": 20950,
+   "sha256": "c9ed77d902b7458517b60060af75cf901406210d34c699c45472c2bc52a03788"
+  },
+  {
+   "logical": "suite/suite_units.py",
+   "bytes": 6134,
+   "sha256": "229f305bb107fc54df60df630b8f6dce162548562464e8ca95b24c286b483e62"
+  },
+  {
+   "logical": "suite/suite_growth.json",
+   "bytes": 10743,
+   "sha256": "10cafcf77caef864e07b8dec0c7d35af27c8638e87cbd9069f500ba4aab66e93"
+  },
+  {
+   "logical": "native/native_guard.py",
+   "bytes": 22935,
+   "sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9"
+  },
+  {
+   "logical": "native/native_driver.py",
+   "bytes": 11682,
+   "sha256": "dfe8ef569b4981a76e199a2763de8a3cf9988bb24785b280fc3662bcd09427ce"
+  },
+  {
+   "logical": "native/native_driver_v3.py",
+   "bytes": 27241,
+   "sha256": "d2f3d88bbab83e089120754e3bb8006f77d4915c0c7d19d59364f5e55ac1a7d8"
+  },
+  {
+   "logical": "native/native_resources_v3.py",
+   "bytes": 16072,
+   "sha256": "cbf601e0ebe547cc25ba194f5fc0f0d808300366388f0decfd866609701e96c5"
+  },
+  {
+   "logical": "native/native_adapter_v3.py",
+   "bytes": 21582,
+   "sha256": "da273c4866883a7f4bb7b417ffa19ad0ea408e869601f502cc9e6a71b18d08de"
+  },
+  {
+   "logical": "shared/focused_protocol.py",
+   "bytes": 50073,
+   "sha256": "7ce0a4a06a35fa9e7f4f4080a40315a418bb45e47a8946ca06d78c2117d855e8"
+  },
+  {
+   "logical": "shared/focused_schedules.py",
+   "bytes": 27562,
+   "sha256": "ee7d2aef5b7ecd492602c49f9e78646465bc2cd04a1e597e1d46e86cd67ff756"
+  },
+  {
+   "logical": "shared/case_ledger.py",
+   "bytes": 14462,
+   "sha256": "ce7fb4983b5f31e0f529a69431a169574e7ba5cb55e225b17d42d10354be931b"
+  },
+  {
+   "logical": "shared/source_receipt.json",
+   "bytes": 10144,
+   "sha256": "4719748175f99b3f00a281f526c0deabcac0977122c07bb6d7c517080fb45381"
+  },
+  {
+   "logical": "harness/physical_decoder.py",
+   "bytes": 17128,
+   "sha256": "eb00a0b49ce4754b23bb4e4a340ec99070805cf43b6f2e1c1125d029f5453001"
+  },
+  {
+   "logical": "harness/physical_decoder_v5.py",
+   "bytes": 44817,
+   "sha256": "1347778df8839da571603b215a8f3aecac70b40eff571ddbad0cb19e27bf5be9"
+  },
+  {
+   "logical": "harness/paged_index.py",
+   "bytes": 8097,
+   "sha256": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea"
+  },
+  {
+   "logical": "harness/outcome_oracle.py",
+   "bytes": 6564,
+   "sha256": "a5721ab4102ab742efe66f546c9016b051cd3914e07700cc3de7c0f55a3ced02"
+  },
+  {
+   "logical": "harness/physical_decoder_v6.py",
+   "bytes": 4036,
+   "sha256": "c4e0a160816372b76ffbfd2102a1a2d98985e0190bdbf2dff2c3fbb118ea3811"
+  },
+  {
+   "logical": "harness/quota_v2_oracle.py",
+   "bytes": 18418,
+   "sha256": "bf4e892298760c79ce5a164c3294e069e5188b8c2c260c8477e9c93e64c468d3"
+  },
+  {
+   "logical": "harness/verify_operational_v2.py",
+   "bytes": 10071,
+   "sha256": "e517d07c5f345e9fb3a90535d5185828147b45a27896e658dbf4164ea7a76caf"
+  },
+  {
+   "logical": "research/file-native-incremental-engine-experiment-2026-10-18/verify_store.py",
+   "bytes": 10936,
+   "sha256": "ce74f48339b950ad62c9c159bd95d4f038248d500addd6b635559ccdba42e2b8"
+  },
+  {
+   "logical": "research/file-native-packing-2026-10-20/independent.py",
+   "bytes": 13097,
+   "sha256": "94987dbe1c992ef2491bb9819ad90185d2f29aef704b1bfaaa8f7e052a449e66"
+  },
+  {
+   "logical": "research/file-native-recovery-reclamation-2026-10-19/verify_operational.py",
+   "bytes": 9290,
+   "sha256": "d86c7d5406d5c5a5d00553b85dd0f16a039838132c31f41cc0567a7e3920e5cd"
+  },
+  {
+   "logical": "research/file-native-navigation-2026-10-19/oracle.py",
+   "bytes": 9057,
+   "sha256": "877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f"
+  },
+  {
+   "logical": "research/file-native-recovery-reclamation-2026-10-19/oracle.py",
+   "bytes": 3702,
+   "sha256": "a5ff418c13571fe1163a1ccfa8fdc01cf6af37d9f690009002c5cc3a49d4b431"
+  },
+  {
+   "logical": "research/file-native-packing-2026-10-20/capsule.py",
+   "bytes": 19536,
+   "sha256": "b19f61524a6fb7baeadfaf82b32191ccf4f491d00541039c6aaf665af0f0a2ca"
+  },
+  {
+   "logical": "research/file-native-packing-2026-10-20/strict_supplement.py",
+   "bytes": 5052,
+   "sha256": "6708b2a1cd14e5e00121ffe3afacdfd5cd2eb35823a0ae336d882ef80d7d6d67"
+  },
+  {
+   "logical": "research/file-native-packing-2026-10-20/fix2_regression.py",
+   "bytes": 7331,
+   "sha256": "5385233d18dcaa52f0ba81aaf50a948f26e72563c6754a8c2fc2420550556297"
+  },
+  {
+   "logical": "research/file-native-recovery-reclamation-2026-10-19/capsule.py",
+   "bytes": 11507,
+   "sha256": "1b997e6bc058660fcfe7246ee98a7b13317e63f7232acef73fef6c3987273b71"
+  },
+  {
+   "logical": "research/file-native-recovery-reclamation-2026-10-19/operational_backup.py",
+   "bytes": 8308,
+   "sha256": "20aa1b2965fd294bbf11942e5d399c7944c1f699b11021c0349b57ee5ee10bbe"
+  },
+  {
+   "logical": "research/file-native-recovery-reclamation-2026-10-19/bash_walk.sh",
+   "bytes": 1096,
+   "sha256": "f75f640e6734ffef72727f72864502938bbb79b993001352ba50317329a40b89"
+  },
+  {
+   "logical": "suite/suite_manifest.json",
+   "bytes": 15904,
+   "sha256": "22f96a3fb3fe078a1398288749c789a517bf6ebcd329c5f2583de21b9f9f3fb4"
+  },
+  {
+   "logical": "suite/source_receipt.json",
+   "bytes": 8176,
+   "sha256": "75d0869698d81201e9d36323debd6485b4db135a299684af0a9d7290c2d42fcc"
+  }
+ ],
+ "arithmetic": {
+  "authored13_bytes": 267252,
+  "new35_runtime_copy_bytes": 577536,
+  "reused5_native_bytes": 99512,
+  "logical40_bytes": 677048,
+  "external22_bytes": 310284,
+  "physical_all_sink_admission_granted": false
+ },
+ "static_ast_compile": [
+  "suite_adapter.py",
+  "suite_bootstrap.py",
+  "suite_driver.py",
+  "suite_extensions.py",
+  "suite_main.py",
+  "suite_oracle.py",
+  "suite_ordinary.py",
+  "suite_packing.py",
+  "suite_recovery.py",
+  "suite_units.py"
+ ],
+ "private_imports": 0,
+ "source_edits": 0,
+ "git_mutations": 0,
+ "index_bootstraps": 0,
+ "findings": [
+  {
+   "id": "V5-P1-PIDFD",
+   "priority": 1,
+   "file": "suite_driver.py",
+   "start": 315,
+   "end": 320,
+   "related_lines": [
+    250,
+    258,
+    272,
+    279
+   ],
+   "status": "BLOCKS_FINITE8_AND_OTHER_PHASES",
+   "trigger": "child exit/reap and numeric PID reuse between process read and pidfd_open; later terminate signals the wrongly bound descriptor",
+   "required": "post-open birth recheck and atomic registration, close/refuse on mismatch/disappearance"
+  },
+  {
+   "id": "V5-P1-RSS-END",
+   "priority": 1,
+   "file": "suite_adapter.py",
+   "start": 662,
+   "end": 675,
+   "related_file": "suite_extensions.py",
+   "related_symbol": "verify_guard_memory",
+   "status": "BLOCKS_FINITE8_AND_OTHER_PHASES",
+   "trigger": "caller allocates during verification/hash/receipt after both early and phase observers have stopped; internal sample gaps do not prove endpoint coverage",
+   "required": "caller enforcement through substantive final work plus bounded terminal evidence and last-sample endpoint validation"
+  }
+ ],
+ "prior_V4_findings": {
+  "deadline": "source architecture repaired; OS watchdog remains armed through final inclusive receipt and deadline check",
+  "census": "source architecture repaired; exclusive writer lock, self-byte fixed point, write/fsync and checked actual post-write census",
+  "closure_prefix": "source repaired; retained prefix plus terminal empty pair accepted",
+  "copy_arithmetic": "reconciled new exact577536; no historical rescore"
+ },
+ "scope_gates": {
+  "finite8": "blocked by two findings; fresh parent source/claim/phase/data admission and later actual controls still required",
+  "C1": "defaultfalse; own copy_go/claim needed, no actual copy proof",
+  "native_build": "unrun; exact tool/source/private-cache/target bindings required",
+  "native31": "unrun here; list and once-only unfiltered test providers source reviewed, not qualified",
+  "full158": "NO_GO pending exact source releases and retained growth feasibility",
+  "old_v3_controls": "historical five-call peer evidence only; zero engine qualification, not V5 eight controls"
+ },
+ "provider_review": {
+  "entry": "bootstrap phase -> adapter.phase_launch -> bootstrap phase-body -> driver.suite_guard_main",
+  "outer_owner": "actual live parent PID/start/cmdline/manifest/claim/deadline binding",
+  "preassignment_failures": "outer subreaper owns partial child tree; no successful receipt without empty terminal pair and closed raw readers",
+  "control_wire": "typed incomplete input negatives and exact written-prefix SHA; all stdout/stderr chunks retained/reconstructed",
+  "final_census": "logical bytes/files compare after own receipt under exclusive evidence writer lock",
+  "C1": {
+   "archives": 45,
+   "unpacked_roots": 32,
+   "sparse_plus_config": 46,
+   "files": 1653,
+   "bytes": 39205355,
+   "manifest_sha256": "7f0443c355439d2a45ddac9b7ce646f5c4067ffaf94493d61e039e9dcfa90f78",
+   "global_cache": "full file identity/content equality before/after; actual run unproved"
+  },
+  "native31": {
+   "frozen_source_files": 25,
+   "test_names": 31,
+   "unfiltered_once": true,
+   "full_raw_required": true,
+   "prior_reuse": "explicit reviewed prior phase + exact sources/tests/raw hashes/fixture census, no automatic rerun"
+  }
+ },
+ "budget": {
+  "utc": "2026-10-21T06:53:35.611416+00:00",
+  "membership_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\meta-membership-v7.json",
+  "membership_sha256": "742c435ebc495a62de638e7ec3a1fdc85988010a1f80b406a3a7eaabe15cb011",
+  "cap_bytes": 10747904,
+  "cap_files_retained": 2000,
+  "actual_bytes": 10403905,
+  "actual_files": 1229,
+  "aliases": [],
+  "remaining_pending_before_pair": 173245,
+  "pending_authority": "META parent explicit148669 remaining plus V5 review24576; newer than on-disk historical snapshots; conservatively held at latest prewrite census, no new spending inferred from unrelated concurrent materialization",
+  "prospective_bytes": 10577150,
+  "prospective_headroom": 170754,
+  "review_pair_cap_bytes": 24576,
+  "review_pair_cap_files": 2,
+  "new_pair_paths_absent": true
+ },
+ "accounting": {
+  "new_files": 2,
+  "pair_cap_bytes": 24576,
+  "pair_remaining_before_write": 24576,
+  "other_pending_bytes": 148669,
+  "consume": "new actual report bytes only, once; unused pair remainder retained",
+  "stale_generic_reserves_added": false,
+  "C3_or_native_originals_double_counted": false,
+  "previous_reports_modified": false
+ },
+ "limitations": [
+  "Static source review, not a runtime execution certificate",
+  "Sampled disk caps are not per-write kernel quotas",
+  "Fresh128MiB target ceiling conditional",
+  "No waiver of required31 units/full158/ordinary17/native pressure/compatibility obligations",
+  "No clock reset, historical failure rescore, deletion or expiry credit"
+ ],
+ "functional_cutoff": "2026-10-21T11:10:14Z",
+ "closeout_end": "2026-10-21T13:10:14Z"
+}

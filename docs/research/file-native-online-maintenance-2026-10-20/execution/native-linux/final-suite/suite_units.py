@@ -16,7 +16,10 @@ def run(c):
     if prior:
         need(prior['reviewed'] is True,'reviewed-prior-native-unit-phase')
         path=owned(prior['path']);need(digest(path)==prior['sha256'],'prior-unit-phase-SHA')
-        phase=strict(path.read_bytes(),4*1024**2);proof=phase['result']
+        phase=strict(path.read_bytes(),4*1024**2)
+        from suite_driver import verify_phase_terminal
+        need(prior['terminal']['receipt_sha256']==prior['sha256'],'prior-unit-terminal-receipt-SHA')
+        phase=verify_phase_terminal(prior['terminal'],phase);proof=phase['result']
         need(phase['kind']=='V5_PHASE_FINAL' and phase['status']=='PASSED' and phase['scope']=='workspace-v5' and phase['final_pin']==c.a.m['final_pin'] and proof['stage']=='test','same-final31-phase')
         need(proof['source_files']=={k:([v['bytes'],v['sha256']] if type(v) is dict else v) for k,v in spec['source_files'].items()} and len(proof['tests'])==31 and set(proof['tests'])==set(spec['expected_test_functions']),'exact-source31-prior-unit-identities')
         stdout=owned(proof['stdout_path']);stderr=owned(proof['stderr_path'])

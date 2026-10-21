@@ -121,7 +121,7 @@ def dispatch(c,name):
 import base64,copy,json,os,selectors,signal,subprocess,threading,time,uuid,sys,fcntl
 READER_ACTIONS={'resolve','point','inspect','lookup-bench','ordinary'}
 import native_guard as guard
-from suite_bootstrap import encoded,digest,owned
+from suite_bootstrap import encoded,digest,owned,retain_birth
 from native_resources_v3 import confined,regular_read
 def descendants(pid):
     answer=set()
@@ -145,12 +145,20 @@ class Commands:
         need(not errors,'native-command-close:'+repr(errors))
     def _kill(self,state,reason):
         # Only our retained pidfds are authority; no reopened PID or foreign group.
-        for pid,(start,fd) in list(state['owned'].items()):
+        with self.lock:retained=list(state['owned'].items())
+        for pid,(start,fd) in retained:
             row=guard.process(pid,with_memory=False)
             if row is not None and row['start']==start and row['state']!='Z':
                 try:signal.pidfd_send_signal(fd,signal.SIGKILL)
                 except ProcessLookupError:pass
         state['kill_reasons'].append(reason)
+    def _retain(self,state,row,stage):
+        with self.lock:
+            starts={pid:birth for pid,(birth,fd) in state['owned'].items()}
+            handles={pid:fd for pid,(birth,fd) in state['owned'].items()}
+            retain_birth(starts,handles,row,self.lock,stage)
+            state['owned'][row['pid']]=(starts[row['pid']],handles[row['pid']])
+
     def run(self,root,action,argv,stdin=b'',*,expected=0,seconds=120,env=None):
         need(type(stdin) is bytes,'command-bytes-input')
         self.host.command_binding(action,argv,stdin,env)
@@ -185,7 +193,7 @@ class Commands:
             os.close(gate_r);gate_r=None
             initial=guard.process(p.pid)
             need(initial and initial['rss'] and initial['hwm'] and initial['pgid']==os.getpgrp(),'blocked-native-command-positive-rss')
-            state['pid']=p.pid;state['owned'][p.pid]=(initial['start'],os.pidfd_open(p.pid))
+            state['pid']=p.pid;self._retain(state,initial,'command-root')
             with self.lock:self.active[token]=state
             def memory():
                 nonlocal maximum
@@ -200,11 +208,7 @@ class Commands:
                                 row=guard.process(pid)
                                 if row is None or row['state']=='Z':continue
                                 need(row['pgid']==os.getpgrp(),'command-child-left-owned-group')
-                                if pid not in state['owned']:
-                                    fd=os.pidfd_open(pid);again=guard.process(pid)
-                                    if again is None or again['start']!=row['start']:
-                                        os.close(fd);raise RuntimeError('command-pidfd-birth-race')
-                                    state['owned'][pid]=(row['start'],fd)
+                                self._retain(state,row,'command-child')
                                 need(state['owned'][pid][0]==row['start'] and row['rss'] is not None and row['hwm'] is not None,'command-live-rss-identity')
                                 maximum=max(maximum,row['hwm'])
                                 observations.append(dict(epoch=time.time(),pid=pid,start=row['start'],rss=row['rss'],hwm=row['hwm']))

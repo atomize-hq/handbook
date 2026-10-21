@@ -432,6 +432,9 @@ def native_stage_command(m):
     receipt=owned(cache['qualified_copy']['path'],guard.ROOT/'evidence')
     need(digest(receipt)==cache['qualified_copy']['sha256'],'source-bound-C1-phase-receipt')
     proof=__import__('suite_bootstrap',fromlist=['strict']).strict(receipt.read_bytes(),4*1024**2)
+    from suite_driver import verify_phase_terminal
+    need(cache['qualified_copy']['terminal']['receipt_sha256']==cache['qualified_copy']['sha256'],'C1-terminal-receipt-SHA')
+    proof=verify_phase_terminal(cache['qualified_copy']['terminal'],proof)
     need(proof['kind']=='V5_PHASE_FINAL' and proof['status']=='PASSED' and proof['scope']=='private-cache-v5' and proof['final_pin']==m['final_pin'] and proof['result']['manifest_sha256']==cache['manifest_sha256'],'actual-qualified-C1-copy')
     for tool in [m['cargo'],m['rustc'],m['rustdoc']]:
         need('/.cargo/bin/' not in tool and digest(tool)==m['tools'][tool]['sha256'],'exact-sysroot-tool')

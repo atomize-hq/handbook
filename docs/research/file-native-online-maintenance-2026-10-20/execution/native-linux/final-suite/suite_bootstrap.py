@@ -10,6 +10,17 @@ if __name__=='__main__' and '--phase' in sys.argv:
     signal.signal(signal.SIGALRM,phase_alarm)
     signal.setitimer(signal.ITIMER_REAL,PHASE_DEADLINE-PHASE_STARTED)
 EARLY_ROWS=[];EARLY_STOP=None;EARLY_THREAD=None
+
+def caller_sample():
+    values={}
+    with open('/proc/self/status') as f:
+        for line in f:
+            if line.startswith(('VmRSS:','VmHWM:')):
+                k,v=line.split(':',1);values[k]=int(v.split()[0])*1024
+    with open('/proc/self/stat') as f:raw=f.read()
+    start=int(raw[raw.rfind(')')+2:].split()[19]);rss=values.get('VmRSS');hwm=values.get('VmHWM')
+    if not(rss and hwm and rss<=hwm<=768*1024**2):os._exit(126)
+    return dict(epoch=time.time(),caller_pid=os.getpid(),caller_start=start,caller_rss=rss,caller_hwm=hwm,supervisor_rss=rss,heavy_rss=0,members=[],zombie_pids=[])
 if __name__=='__main__':
     sys.modules['suite_bootstrap']=sys.modules[__name__]
 if PHASE_DEADLINE is not None:
@@ -18,15 +29,11 @@ if PHASE_DEADLINE is not None:
     def early_observe():
         due=time.monotonic();last=None
         while not EARLY_STOP.is_set():
-            now=time.time();values={}
-            with open('/proc/self/status') as f:
-                for line in f:
-                    if line.startswith(('VmRSS:','VmHWM:')):
-                        k,v=line.split(':',1);values[k]=int(v.split()[0])*1024
-            with open('/proc/self/stat') as f:raw=f.read()
-            start=int(raw[raw.rfind(')')+2:].split()[19]);rss=values.get('VmRSS');hwm=values.get('VmHWM')
-            if not(rss and hwm and rss<=hwm<=768*1024**2) or (last is not None and not 0<=now-last<=.04) or len(EARLY_ROWS)>=16000:os._exit(126)
-            EARLY_ROWS.append(dict(epoch=now,caller_pid=os.getpid(),caller_start=start,caller_rss=rss,caller_hwm=hwm,supervisor_rss=rss,heavy_rss=0,members=[],zombie_pids=[]))
+            try:row=caller_sample()
+            except BaseException:os._exit(126)
+            now=row['epoch']
+            if (last is not None and not 0<=now-last<=.04) or len(EARLY_ROWS)>=50000:os._exit(126)
+            EARLY_ROWS.append(row)
             last=now;due+=.02;EARLY_STOP.wait(max(0,due-time.monotonic()))
     EARLY_THREAD=threading.Thread(target=early_observe,daemon=True);EARLY_THREAD.start()
 import argparse, hashlib, importlib.abc, importlib.machinery, json
@@ -66,6 +73,35 @@ def owned(path,base=ROOT):
     for part in p.parts[1:]:
         current/=part;need(not current.is_symlink(),'no-symlink-component')
     return p
+
+
+class OwnedBirthUncertain(RuntimeError):
+    """No descriptor from an uncertain observation is ever published or signalled."""
+    def __init__(self,pid,start,stage,observed=None,reason=None):
+        self.identity=dict(pid=pid,expected_start=start,stage=stage,observed_start=observed,reason=reason)
+        super().__init__('owned-process-identity-uncertain',self.identity)
+
+def retain_birth(starts,handles,row,lock,stage):
+    import native_guard as native
+    pid=row['pid'];start=row['start']
+    with lock:
+        if pid in starts:
+            if starts[pid]!=start or pid not in handles:
+                raise OwnedBirthUncertain(pid,start,stage,starts.get(pid),'existing-birth-mismatch')
+            return
+        fd=None;observed=None
+        try:
+            fd=os.pidfd_open(pid)
+            after=native.process(pid,with_memory=False)
+            observed=None if after is None else after['start']
+            values=[int(line.split(':',1)[1].split()[0]) for line in Path('/proc/self/fdinfo',str(fd)).read_text().splitlines() if line.startswith('Pid:')]
+            if after is None or observed!=start or values!=[pid]:
+                raise OwnedBirthUncertain(pid,start,stage,observed,'post-open-birth-or-fdinfo-mismatch')
+        except BaseException as error:
+            if fd is not None:os.close(fd)
+            if isinstance(error,OwnedBirthUncertain):raise
+            raise OwnedBirthUncertain(pid,start,stage,observed,type(error).__name__) from error
+        starts[pid]=start;handles[pid]=fd
 
 class ClosedImports(importlib.abc.MetaPathFinder):
     def __init__(self,files): self.files=files
