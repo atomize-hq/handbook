@@ -480,7 +480,7 @@ def phase_launch(m,manifest_sha,deadline):
     Parent-owned post-exit checks remain inside this phase and its absolute clock.
     """
     import ctypes,gzip,signal,subprocess,zlib
-    from suite_driver import descendants
+    from suite_driver import descendants,retain_tree
     from suite_bootstrap import strict
     phase=m['phase'];need(phase['deadline_epoch']==deadline and time.time()<deadline,'one-absolute-phase-deadline')
     need(phase['combined_source_cap_bytes'] in {4*1024**2,4608*1024} and
@@ -527,19 +527,8 @@ def phase_launch(m,manifest_sha,deadline):
         written+=len(data)
     def members():
         with registry_lock:
-            snapshot=guard.processes();owned_pids={pid for pid,start in tracked.items() if pid in snapshot and snapshot[pid]['start']==start}
-            owned_pids.update(pid for pid,row in snapshot.items() if row['ppid']==os.getpid())
-            while True:
-                extra={pid for pid,row in snapshot.items() if row['ppid'] in owned_pids}-owned_pids
-                if not extra:break
-                owned_pids.update(extra)
-            result=[]
-            for pid in owned_pids:
-                row=guard.process(pid)
-                if row is None:continue
-                retain_birth(tracked,handles,row,registry_lock,'phase-tree')
-                result.append(row)
-            return result
+            snapshot=guard.processes()
+            return retain_tree(tracked,handles,snapshot,registry_lock,'phase-tree')
     def kill_owned():
         try:members()
         except BaseException as e:errors.append('phase-kill-observation:'+repr(e))
@@ -639,26 +628,45 @@ def phase_launch(m,manifest_sha,deadline):
         # Alarm expiry is irrevocably FAILED. Disable only to permit bounded
         # process reaping; this path can never produce a successful receipt.
         if time.time()>=deadline:signal.setitimer(signal.ITIMER_REAL,0);failure=failure or 'phase-deadline-expired'
+        def cleanup(label,action):
+            try:return action()
+            except BaseException as error:
+                errors.append(label+':'+repr(error))
+                return None
         until=time.monotonic()+10
         while time.monotonic()<until:
-            rows=members()
-            if any(r['state']!='Z' for r in rows):kill_owned()
+            rows=cleanup('phase-cleanup-discovery',members)
+            if rows is None or any(r['state']!='Z' for r in rows):kill_owned()
             if root is not None:
                 try:root.wait(timeout=.1)
                 except subprocess.TimeoutExpired:pass
+                except BaseException as error:errors.append('phase-root-reap:'+repr(error))
             for pid in list(tracked):
                 try:os.waitpid(pid,os.WNOHANG)
                 except ChildProcessError:pass
-            rows=members();closure.append(dict(epoch=time.time(),pids=[r['pid'] for r in rows],states=[r['state'] for r in rows]))
+                except BaseException as error:errors.append('phase-descendant-reap:'+repr(error))
+            rows=cleanup('phase-cleanup-closure',members)
+            closure.append(dict(epoch=time.time(),pids=['UNKNOWN'] if rows is None else [r['pid'] for r in rows],states=['UNKNOWN'] if rows is None else [r['state'] for r in rows]))
             if len(closure)>=2 and not closure[-1]['pids'] and not closure[-2]['pids']:break
-            time.sleep(.02)
-        for t in readers:t.join(3)
-        need(all(not t.is_alive() for t in readers),'phase-caller-output-readers-joined')
+            cleanup('phase-cleanup-pause',lambda:time.sleep(.02))
+        for t in readers:cleanup('phase-reader-join',lambda t=t:t.join(3))
+        if any(t.is_alive() for t in readers):errors.append('phase-caller-output-reader-not-joined')
         stop.set()
-        if worker is not None:worker.join(5)
-        need(worker is None or not worker.is_alive(),'phase-caller-memory-observer-joined')
-        compressed_write(compressed.flush());memory.flush();os.fsync(memory.fileno());memory.close()
-        for fd in handles.values():os.close(fd)
+        if worker is not None:cleanup('phase-observer-join',lambda:worker.join(5))
+        if worker is not None and worker.is_alive():errors.append('phase-memory-observer-not-joined')
+        cleanup('phase-compressor-flush',lambda:compressed_write(compressed.flush()))
+        cleanup('phase-memory-flush',memory.flush)
+        cleanup('phase-memory-fsync',lambda:os.fsync(memory.fileno()))
+        cleanup('phase-memory-close',memory.close)
+        for fd in list(handles.values()):cleanup('phase-pidfd-close',lambda fd=fd:os.close(fd))
+        if failure or errors:
+            note=encoded(dict(kind='V5_PHASE_CENSORED',failure=(failure or '')[:240],errors=[e[:240] for e in errors[:8]],discovery_uncertain=any(r['pids']==['UNKNOWN'] for r in closure)))
+            def failure_note():
+                os.set_blocking(2,False);os.write(2,note+b'\n')
+            cleanup('phase-bounded-censor-record',failure_note)
+        # Failed joins cannot leave Python waiting indefinitely for non-daemon
+        # threads. All retained handle/reap/close attempts above still occur.
+        if any(t.is_alive() for t in readers) or (worker is not None and worker.is_alive()):os._exit(126)
     need(len(closure)>=2 and all(not r['pids'] and not r['states'] for r in closure[-2:]),'phase-terminal-two-empty')
     need(not failure and not errors and samples>=2 and time.time()<deadline,'phase-complete-within-deadline:'+str(failure))
     from suite_bootstrap import verify_guard_memory

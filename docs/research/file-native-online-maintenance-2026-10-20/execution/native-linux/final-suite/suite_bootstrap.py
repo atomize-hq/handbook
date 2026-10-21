@@ -81,7 +81,7 @@ class OwnedBirthUncertain(RuntimeError):
         self.identity=dict(pid=pid,expected_start=start,stage=stage,observed_start=observed,reason=reason)
         super().__init__('owned-process-identity-uncertain',self.identity)
 
-def retain_birth(starts,handles,row,lock,stage):
+def retain_birth(starts,handles,row,lock,stage,parent=None):
     import native_guard as native
     pid=row['pid'];start=row['start']
     with lock:
@@ -89,19 +89,48 @@ def retain_birth(starts,handles,row,lock,stage):
             if starts[pid]!=start or pid not in handles:
                 raise OwnedBirthUncertain(pid,start,stage,starts.get(pid),'existing-birth-mismatch')
             return
+        parent=parent or native.process(os.getpid(),with_memory=False)
+        if parent is None or row['ppid']!=parent['pid'] or (parent['pid']!=os.getpid() and starts.get(parent['pid'])!=parent['start']):
+            raise OwnedBirthUncertain(pid,start,stage,reason='unproved-parent-edge')
+        def parent_live():
+            p=native.process(parent['pid'],with_memory=False)
+            if p is None or p['start']!=parent['start'] or p['state']=='Z':
+                raise OwnedBirthUncertain(pid,start,stage,reason='parent-birth-not-live')
         fd=None;observed=None
         try:
+            parent_live()
             fd=os.pidfd_open(pid)
             after=native.process(pid,with_memory=False)
             observed=None if after is None else after['start']
             values=[int(line.split(':',1)[1].split()[0]) for line in Path('/proc/self/fdinfo',str(fd)).read_text().splitlines() if line.startswith('Pid:')]
-            if after is None or observed!=start or values!=[pid]:
+            if after is None or observed!=start or values!=[pid] or after['ppid']!=parent['pid']:
                 raise OwnedBirthUncertain(pid,start,stage,observed,'post-open-birth-or-fdinfo-mismatch')
+            parent_live()
         except BaseException as error:
             if fd is not None:os.close(fd)
             if isinstance(error,OwnedBirthUncertain):raise
             raise OwnedBirthUncertain(pid,start,stage,observed,type(error).__name__) from error
         starts[pid]=start;handles[pid]=fd
+
+
+def observed_children(parent):
+    import native_guard as native
+    def live():
+        p=native.process(parent['pid'],with_memory=False)
+        if p is None or p['start']!=parent['start'] or p['state']=='Z':
+            raise OwnedBirthUncertain(parent['pid'],parent['start'],'child-discovery',reason='parent-birth-not-live')
+    live();pids=set()
+    for task in Path('/proc',str(parent['pid']),'task').iterdir():
+        try:pids.update(map(int,(task/'children').read_text().split()))
+        except FileNotFoundError:pass
+    rows=[]
+    for pid in pids:
+        row=native.process(pid)
+        if row is None:continue
+        if row['ppid']!=parent['pid']:
+            raise OwnedBirthUncertain(pid,row['start'],'child-discovery',reason='fresh-parent-edge-changed')
+        rows.append(row)
+    live();return rows
 
 class ClosedImports(importlib.abc.MetaPathFinder):
     def __init__(self,files): self.files=files

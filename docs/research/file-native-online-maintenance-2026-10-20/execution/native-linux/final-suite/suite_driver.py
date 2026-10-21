@@ -3,10 +3,33 @@ import base64, copy, fcntl, hashlib, json, os, selectors, signal, subprocess, sy
 from pathlib import Path
 import native_guard as guard
 from native_driver_v3 import Driver as EngineDriver
-from suite_bootstrap import need, encoded, digest, owned, strict,retain_birth
+from suite_bootstrap import need, encoded, digest, owned, strict,retain_birth,observed_children,OwnedBirthUncertain
 from native_resources_v3 import confined,regular_read
 
 from suite_recovery import Commands,descendants
+
+
+def retain_tree(starts,handles,snapshot,lock,stage):
+    """Retain the exact ownership-observed rows, never a replacement birth."""
+    with lock:
+        owner=guard.process(os.getpid(),with_memory=False)
+        need(owner is not None,'tree-owner-live')
+        kept={}
+        for pid,start in list(starts.items()):
+            row=snapshot.get(pid)
+            if row is None:continue
+            if row['start']!=start:raise OwnedBirthUncertain(pid,start,stage,row['start'],'retained-PID-reused')
+            retain_birth(starts,handles,row,lock,stage);kept[pid]=row
+        parents=[owner,*kept.values()];seen=set()
+        while parents:
+            parent=parents.pop()
+            if parent['pid'] in seen:continue
+            seen.add(parent['pid'])
+            for row in snapshot.values():
+                if row['ppid']!=parent['pid'] or row['pid'] in kept:continue
+                retain_birth(starts,handles,row,lock,stage,parent)
+                kept[row['pid']]=row;parents.append(row)
+        return list(kept.values())
 
 READER_ACTIONS={'resolve','point','inspect','lookup-bench','ordinary'}
 
@@ -261,58 +284,32 @@ def suite_guard_run(ns):
                     signal.pidfd_send_signal(fd, signal.SIGKILL)
                 except ProcessLookupError:
                     pass
+                except BaseException as error:
+                    sample_errors.append('retained-signal:'+repr(error))
 
     def members(rows):
-        selected = {pid for pid, row in rows.items() if tracked.get(pid) == row['start']}
-        while True:
-            added = {pid for pid, row in rows.items() if row['ppid'] in selected or (row['ppid'] == os.getpid() and pid != p.pid)}
-            if added <= selected:
-                break
-            selected |= added
-        with state_lock:
-            for pid in selected:
-                row = rows[pid]
-                retain_birth(tracked,pidfds,row,state_lock,'tree-scan')
-        return [rows[pid] for pid in selected if tracked.get(pid)==rows[pid]['start'] and pid in pidfds]
-
-    def children(pid):
-        """All threads' children, including spawns from harness reader threads."""
-        found = set()
-        try:
-            tasks = list(Path(f'/proc/{pid}/task').iterdir())
-        except FileNotFoundError:
-            return found
-        for task in tasks:
-            try:
-                found.update((int(x) for x in (task / 'children').read_text().split()))
-            except FileNotFoundError:
-                pass
-        return found
+        return retain_tree(tracked,pidfds,rows,state_lock,'tree-scan')
 
     def owned_snapshot():
         with state_lock:
-            pending = set(active)
-        pending |= children(os.getpid())
-        seen = set()
-        rows = []
-        while pending:
-            pid = pending.pop()
-            if pid in seen or pid == os.getpid():
-                continue
-            seen.add(pid)
-            row = process(pid)
-            if row is None:
-                with state_lock:
-                    active.discard(pid)
-                continue
-            if pid in tracked and tracked[pid] != row['start']:
-                raise RuntimeError('owned-pid-identity-reused')
-            with state_lock:
-                retain_birth(tracked,pidfds,row,state_lock,'rss-sampler')
-                active.add(pid)
-            rows.append(row)
-            pending |= children(pid) - seen
-        return rows
+            owner=process(os.getpid(),with_memory=False)
+            need(owner is not None,'rss-owner-live')
+            pending=[]
+            for pid,start in list(tracked.items()):
+                row=process(pid)
+                if row is None:active.discard(pid);continue
+                if row['start']!=start:raise OwnedBirthUncertain(pid,start,'rss-sampler',row['start'],'retained-PID-reused')
+                pending.append((row,None))
+            pending.extend((row,owner) for row in observed_children(owner))
+            seen=set();rows=[]
+            while pending:
+                row,parent=pending.pop();pid=row['pid']
+                if pid in seen:continue
+                seen.add(pid)
+                retain_birth(tracked,pidfds,row,state_lock,'rss-sampler',parent)
+                active.add(pid);rows.append(row)
+                if row['state']!='Z':pending.extend((child,row) for child in observed_children(row))
+            return rows
 
     def sample_memory():
         nonlocal last_sample, memory_count, aggregate_peak, supervisor_peak, root_exec
@@ -445,27 +442,24 @@ def suite_guard_run(ns):
                 break
             time.sleep(0.05)
     finally:
-        if p.poll() is None:
-            terminate('supervisor-finally')
-            p.wait(timeout=10)
+        abnormal=sys.exc_info()[0] is not None
+        def cleanup(label,action):
+            try:return action()
+            except BaseException as error:
+                sample_errors.append(label+':'+repr(error))
+                return None
+        cleanup('guard-final-retained-kill',lambda:terminate('supervisor-finally') if p.poll() is None or sample_errors or abnormal or len(closure)<2 or any(r['pids'] for r in closure[-2:]) else None)
+        cleanup('guard-root-reap',lambda:p.wait(timeout=10))
         stop.set()
-        timer.cancel()
-        timer.join(timeout=10)
-        sampler.join(timeout=10)
-        disk.join(timeout=10)
-        monitors_joined = not any((t.is_alive() for t in (timer, sampler, disk)))
-        if not monitors_joined:
-            emergency = dict(status='failed-monitor-shutdown', source_pin=ns.pin, nonce=nonce, process_closure_observations=closure, timer_alive=timer.is_alive(), sampler_alive=sampler.is_alive(), disk_alive=disk.is_alive(), censors=reasons, process_closure_verified=False)
-            receipt.write_text(json.dumps(emergency) + '\n')
-            print(json.dumps(emergency), flush=True)
-            os._exit(2)
-        memory_stream.close()
-        output.close()
-        errors.close()
-        if ns.stdin:
-            stdin.close()
-        for fd in pidfds.values():
-            os.close(fd)
+        cleanup('guard-timer-cancel',timer.cancel)
+        for thread in (timer,sampler,disk):cleanup('guard-monitor-join',lambda thread=thread:thread.join(timeout=10))
+        monitors_joined=not any(t.is_alive() for t in (timer,sampler,disk))
+        cleanup('guard-memory-close',memory_stream.close)
+        cleanup('guard-output-close',output.close)
+        cleanup('guard-errors-close',errors.close)
+        if ns.stdin:cleanup('guard-input-close',stdin.close)
+        for fd in list(pidfds.values()):cleanup('guard-pidfd-close',lambda fd=fd:os.close(fd))
+        if not monitors_joined:os._exit(2)
     positive = len(closure) >= 2 and (not closure[-1]['pids']) and (not closure[-2]['pids'])
     cadence_qualified = bool(intervals) and (not any((x > 0.04 for x in intervals)))
     row = dict(root_exec=root_exec,command=command, cwd=ns.cwd, source_pin=ns.pin, guard_sha256=digest(__file__), started_epoch=start, absolute_deadline_epoch=absolute_deadline, execute_started_epoch=execute_started, setup_seconds=execute_started - start if execute_started else None, execute_and_shutdown_seconds=time.time() - execute_started if execute_started else None, blocked_launch_positive_rss=initial['rss'], monitors_joined=monitors_joined, owner_nonce=nonce, owner_pid=os.getpid(), owner_process_start=identity['start'], registered_supervisor_identities=registered_supervisors, claim_id=ns.claim_id, ledger_sha256=ns.ledger_sha256, prospective_reservation=reserves, claim_path=str(claim_path), effective_cap_seconds=effective, seconds=time.time() - start, exit=p.returncode, censors=reasons, termination=termination, group_id=p.pid, tracked_identity=tracked, process_closure_verified=positive, closure_observations=closure, memory_interval_target_seconds=0.02, memory_max_interval_seconds=max(intervals, default=None), memory_intervals_over_40ms=sum((x > 0.04 for x in intervals)), rss_sampling_cadence_qualified=cadence_qualified, memory_samples_path=str(memory_path), memory_samples_sha256=digest(memory_path), memory_sample_count=memory_count, aggregate_heavy_peak_bytes=aggregate_peak, aggregate_supervisor_peak_bytes=supervisor_peak, process_high_water_bytes=process_peaks, heavy_rss_limit=ns.heavy_limit, process_rss_limit=ns.process_limit, supervisor_rss_limit=768 * MIB, native_host_rss_limit=3 * 1024 ** 3, free_floor_bytes=ns.free_floor, disk_samples=disk_rows, baseline=before, final={k: inventory(ROOT / k) for k in limits}, observation_errors=sample_errors, stdout_sha256=digest(receipt.with_suffix('.stdout')), stderr_sha256=digest(receipt.with_suffix('.stderr')), guard_version=5, runtime_scope=m.get('runtime_scope','full-body'), category_limits={k: list(v) for k, v in limits.items()}, policy_manifest_path=ns.policy_manifest_path, policy_manifest_sha256=ns.policy_manifest_sha256, guard_utility_sha256='4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9')

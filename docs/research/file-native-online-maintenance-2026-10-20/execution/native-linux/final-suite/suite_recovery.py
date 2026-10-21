@@ -121,7 +121,7 @@ def dispatch(c,name):
 import base64,copy,json,os,selectors,signal,subprocess,threading,time,uuid,sys,fcntl
 READER_ACTIONS={'resolve','point','inspect','lookup-bench','ordinary'}
 import native_guard as guard
-from suite_bootstrap import encoded,digest,owned,retain_birth
+from suite_bootstrap import encoded,digest,owned,retain_birth,observed_children,OwnedBirthUncertain
 from native_resources_v3 import confined,regular_read
 def descendants(pid):
     answer=set()
@@ -147,16 +147,15 @@ class Commands:
         # Only our retained pidfds are authority; no reopened PID or foreign group.
         with self.lock:retained=list(state['owned'].items())
         for pid,(start,fd) in retained:
-            row=guard.process(pid,with_memory=False)
-            if row is not None and row['start']==start and row['state']!='Z':
-                try:signal.pidfd_send_signal(fd,signal.SIGKILL)
-                except ProcessLookupError:pass
+            try:signal.pidfd_send_signal(fd,signal.SIGKILL)
+            except ProcessLookupError:pass
+            except BaseException as error:state['errors'].append('retained-signal:'+repr(error))
         state['kill_reasons'].append(reason)
-    def _retain(self,state,row,stage):
+    def _retain(self,state,row,stage,parent=None):
         with self.lock:
             starts={pid:birth for pid,(birth,fd) in state['owned'].items()}
             handles={pid:fd for pid,(birth,fd) in state['owned'].items()}
-            retain_birth(starts,handles,row,self.lock,stage)
+            retain_birth(starts,handles,row,self.lock,stage,parent)
             state['owned'][row['pid']]=(starts[row['pid']],handles[row['pid']])
 
     def run(self,root,action,argv,stdin=b'',*,expected=0,seconds=120,env=None):
@@ -200,19 +199,23 @@ class Commands:
                 try:
                     while not stop.is_set():
                         with self.lock:
-                            pending=list(state['owned']);seen=set()
-                            while pending:
-                                pid=pending.pop()
-                                if pid in seen:continue
-                                seen.add(pid);pending.extend(descendants(pid))
+                            pending=[];seen=set()
+                            for pid,(start,fd) in list(state['owned'].items()):
                                 row=guard.process(pid)
-                                if row is None or row['state']=='Z':continue
+                                if row is None:continue
+                                if row['start']!=start:raise OwnedBirthUncertain(pid,start,'command-monitor',row['start'],'retained-PID-reused')
+                                pending.append((row,None))
+                            while pending:
+                                row,parent=pending.pop();pid=row['pid']
+                                if pid in seen:continue
+                                seen.add(pid)
+                                self._retain(state,row,'command-child',parent)
+                                if row['state']=='Z':continue
                                 need(row['pgid']==os.getpgrp(),'command-child-left-owned-group')
-                                self._retain(state,row,'command-child')
                                 need(state['owned'][pid][0]==row['start'] and row['rss'] is not None and row['hwm'] is not None,'command-live-rss-identity')
                                 maximum=max(maximum,row['hwm'])
                                 observations.append(dict(epoch=time.time(),pid=pid,start=row['start'],rss=row['rss'],hwm=row['hwm']))
-                                if row['rss']>limit:state['errors'].append('command-role-rss-censor');self._kill(state,'rss')
+                                pending.extend((child,row) for child in observed_children(row))
                             if time.time()>=deadline:state['errors'].append('command-time-censor');self._kill(state,'deadline')
                         stop.wait(.01)
                 except BaseException as e:
