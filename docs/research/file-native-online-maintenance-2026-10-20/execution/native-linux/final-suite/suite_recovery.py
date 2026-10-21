@@ -116,3 +116,197 @@ def dispatch(c,name):
         need(c.selected()==before,'impossible-operation-changed-selected');return c.verify('impossible-refusal')
     if name.startswith('skipped-or-selected-once/'):return selected_once(c,name[-1])
     raise RuntimeError('closed-R24-ID-unimplemented:'+name)
+
+# Native command ownership shared with workspace, oracle and ordinary routes.
+import base64,copy,json,os,selectors,signal,subprocess,threading,time,uuid,sys,fcntl
+READER_ACTIONS={'resolve','point','inspect','lookup-bench','ordinary'}
+import native_guard as guard
+from suite_bootstrap import encoded,digest,owned
+from native_resources_v3 import confined,regular_read
+def descendants(pid):
+    answer=set()
+    try:
+        for task in Path('/proc',str(pid),'task').iterdir():
+            try: answer.update(map(int,(task/'children').read_text().split()))
+            except FileNotFoundError: pass
+    except FileNotFoundError: pass
+    return answer
+class Commands:
+    def __init__(self,host):
+        self.host=host;self.lock=threading.RLock();self.active={}
+    def close(self):
+        errors=[]
+        with self.lock:
+            for state in self.active.values():
+                try:self._kill(state,'case-close')
+                except BaseException as e:errors.append(repr(e))
+        for state in list(self.active.values()):
+            if not state['done'].wait(5):errors.append('command-owner-not-joined')
+        need(not errors,'native-command-close:'+repr(errors))
+    def _kill(self,state,reason):
+        # Only our retained pidfds are authority; no reopened PID or foreign group.
+        for pid,(start,fd) in list(state['owned'].items()):
+            row=guard.process(pid,with_memory=False)
+            if row is not None and row['start']==start and row['state']!='Z':
+                try:signal.pidfd_send_signal(fd,signal.SIGKILL)
+                except ProcessLookupError:pass
+        state['kill_reasons'].append(reason)
+    def run(self,root,action,argv,stdin=b'',*,expected=0,seconds=120,env=None):
+        need(type(stdin) is bytes,'command-bytes-input')
+        self.host.command_binding(action,argv,stdin,env)
+        root=owned(root,guard.ROOT/'fixtures')
+        deadline=min(time.time()+seconds,self.host.driver.owner['absolute_deadline'],guard.CUTOFF)
+        need(deadline>time.time(),'native-command-fixed-deadline')
+        limit=256*1024**2 if action in READER_ACTIONS else 2*1024**3
+        executable=Path(argv[0]);binary_sha=digest(executable)
+        token=uuid.uuid4().hex;gate_r,gate_w=os.pipe()
+        state=dict(owned={},done=threading.Event(),kill_reasons=[],errors=[],pid=None)
+        stop=threading.Event();watcher=None;p=None;rawout=bytearray();rawerr=bytearray()
+        maximum=0;observations=[];sent=0;full=False;input_closed=False;selection=selectors.DefaultSelector()
+        lease=None;wire_lease=None;failure=None;record=None;initial=None;exec_proof=None;pipe_fds=[]
+        try:
+            # Allocate exact output geometry and reserve before creating a child.
+            out_r,out_w=os.pipe();pipe_fds.extend([out_r,out_w])
+            err_r,err_w=os.pipe();pipe_fds.extend([err_r,err_w])
+            tail=sum(fcntl.fcntl(fd,fcntl.F_GETPIPE_SZ) for fd in (out_w,err_w))
+            payload=dict(root=str(root),action=action,operation=action,argv=argv,stdin_bytes=len(stdin),
+                         stdin_sha256=hashlib.sha256(stdin).hexdigest())
+            lease=self.host.budget.reserve_call(token,payload,env,tail)
+            need(len(stdin)<=lease['input_bytes'],'complete-command-stdin-forecast')
+            wire_bound=(4*(len(stdin)+lease['stdout_bytes']+lease['stderr_bytes']+tail)+2)//3+8192
+            self.host.budget.reserve_evidence('command-wire-'+token,wire_bound,0)
+            wire_lease='command-wire-'+token
+            p=subprocess.Popen([sys.executable,str(Path(guard.__file__).resolve()),'--child',str(gate_r),*argv],
+                               stdin=subprocess.PIPE,stdout=out_w,stderr=err_w,
+                               pass_fds=(gate_r,),close_fds=True,env=self.host.environment(env))
+            os.close(out_w);pipe_fds.remove(out_w);os.close(err_w);pipe_fds.remove(err_w)
+            p.stdout=os.fdopen(out_r,'rb',buffering=0);pipe_fds.remove(out_r)
+            p.stderr=os.fdopen(err_r,'rb',buffering=0);pipe_fds.remove(err_r)
+            os.close(gate_r);gate_r=None
+            initial=guard.process(p.pid)
+            need(initial and initial['rss'] and initial['hwm'] and initial['pgid']==os.getpgrp(),'blocked-native-command-positive-rss')
+            state['pid']=p.pid;state['owned'][p.pid]=(initial['start'],os.pidfd_open(p.pid))
+            with self.lock:self.active[token]=state
+            def memory():
+                nonlocal maximum
+                try:
+                    while not stop.is_set():
+                        with self.lock:
+                            pending=list(state['owned']);seen=set()
+                            while pending:
+                                pid=pending.pop()
+                                if pid in seen:continue
+                                seen.add(pid);pending.extend(descendants(pid))
+                                row=guard.process(pid)
+                                if row is None or row['state']=='Z':continue
+                                need(row['pgid']==os.getpgrp(),'command-child-left-owned-group')
+                                if pid not in state['owned']:
+                                    fd=os.pidfd_open(pid);again=guard.process(pid)
+                                    if again is None or again['start']!=row['start']:
+                                        os.close(fd);raise RuntimeError('command-pidfd-birth-race')
+                                    state['owned'][pid]=(row['start'],fd)
+                                need(state['owned'][pid][0]==row['start'] and row['rss'] is not None and row['hwm'] is not None,'command-live-rss-identity')
+                                maximum=max(maximum,row['hwm'])
+                                observations.append(dict(epoch=time.time(),pid=pid,start=row['start'],rss=row['rss'],hwm=row['hwm']))
+                                if row['rss']>limit:state['errors'].append('command-role-rss-censor');self._kill(state,'rss')
+                            if time.time()>=deadline:state['errors'].append('command-time-censor');self._kill(state,'deadline')
+                        stop.wait(.01)
+                except BaseException as e:
+                    state['errors'].append('command-monitor:'+repr(e))
+                    with self.lock:self._kill(state,'monitor-error')
+            watcher=threading.Thread(target=memory,daemon=False);watcher.start()
+            os.write(gate_w,b'G');os.close(gate_w);gate_w=None
+            # Bash/Python stdin scripts cannot begin file I/O before this proof.
+            while True:
+                need(time.time()<deadline,'actual-command-exec-deadline')
+                row=guard.process(p.pid);need(row and row['start']==initial['start'] and row['state']!='Z','command-exited-before-native-exec-proof')
+                try:actual=Path(os.readlink('/proc/'+str(p.pid)+'/exe'))
+                except FileNotFoundError:actual=None
+                if actual==executable.resolve():
+                    live_exe=Path('/proc',str(p.pid),'exe');live_stat=live_exe.stat();named_stat=executable.stat()
+                    need(row['rss'] and row['rss']<=limit and digest(live_exe)==binary_sha==digest(executable) and
+                         (live_stat.st_dev,live_stat.st_ino)==(named_stat.st_dev,named_stat.st_ino),'actual-command-exec-rss-sha-inode')
+                    exec_proof=dict(path=str(actual),sha256=binary_sha,device=live_stat.st_dev,inode=live_stat.st_ino,
+                                    rss=row['rss'],hwm=row['hwm'],before_stdin_delivery=True)
+                    break
+                time.sleep(.001)
+            started_ns=time.perf_counter_ns();self.host.command_started(token,p.pid,initial['start'],action,started_ns)
+            for name,f in [('stdin',p.stdin),('stdout',p.stdout),('stderr',p.stderr)]:
+                os.set_blocking(f.fileno(),False)
+                selection.register(f,selectors.EVENT_WRITE if name=='stdin' else selectors.EVENT_READ,name)
+            kill_at=None
+            while selection.get_map():
+                if state['errors']:
+                    kill_at=kill_at or time.monotonic()
+                    need(time.monotonic()-kill_at<5,'command-pipe-closure-censor')
+                ready=selection.select(.01);ready.sort(key=lambda x:x[0].data=='stdin')
+                for item,_ in ready:
+                    f,name=item.fileobj,item.data
+                    if name=='stdin':
+                        try:sent+=os.write(f.fileno(),stdin[sent:sent+65536])
+                        except BrokenPipeError:
+                            state['errors'].append('command-incomplete-input');selection.unregister(f);f.close();input_closed=True
+                            continue
+                        if sent==len(stdin):
+                            selection.unregister(f);f.close();input_closed=True;full=True
+                    else:
+                        try:block=os.read(f.fileno(),16384)
+                        except BlockingIOError:continue
+                        if not block:selection.unregister(f);f.close();continue
+                        target=rawout if name=='stdout' else rawerr;target.extend(block)
+                        if len(target)>lease[name+'_bytes']:
+                            state['errors'].append('command-output-censor:'+name)
+                            with self.lock:self._kill(state,'output')
+                        need(len(rawout)+len(rawerr)<=lease['stdout_bytes']+lease['stderr_bytes']+tail,'command-tail-reservation-exceeded')
+            p.wait(timeout=5)
+            need(full or not stdin,'command-full-input-required')
+        except BaseException as e:
+            failure=repr(e);state['errors'].append(failure)
+        finally:
+            if p is not None:
+                with self.lock:self._kill(state,'owner-finally')
+                try:p.wait(timeout=5)
+                except subprocess.TimeoutExpired:state['errors'].append('command-root-not-reaped')
+            stop.set()
+            if watcher is not None:
+                watcher.join(5)
+                if watcher.is_alive():state['errors'].append('command-monitor-not-joined')
+            selection.close()
+            for fd in (gate_r,gate_w):
+                if fd is not None:os.close(fd)
+            for fd in pipe_fds:os.close(fd)
+            if p is not None:
+                # Drain setup-failure tails in this owner only. A missing EOF is
+                # an explicit raw-capture failure, never a truncated success.
+                for f,target in [(p.stdout,rawout),(p.stderr,rawerr)]:
+                    if f.closed:continue
+                    os.set_blocking(f.fileno(),False)
+                    while True:
+                        try:b=os.read(f.fileno(),16384)
+                        except BlockingIOError:state['errors'].append('command-raw-eof-not-observed');break
+                        if not b:break
+                        target.extend(b)
+                    f.close()
+                if p.stdin and not p.stdin.closed:p.stdin.close()
+            with self.lock:
+                if watcher is None or not watcher.is_alive():
+                    for start,fd in state['owned'].values():os.close(fd)
+                record=dict(kind='native-command',token=token,root=str(root),action=action,argv=argv,
+                    env=env,binary_sha256=binary_sha,pid=state['pid'],start=initial['start'] if initial else None,
+                    initial_blocked_rss=initial['rss'] if initial else None,actual_exec=exec_proof,
+                    stdin_bytes=len(stdin),input_bytes_sent=sent,input_fully_delivered=full,stdin_closed=input_closed,
+                    stdin_sha256=hashlib.sha256(stdin).hexdigest(),stdin_bytes_b64=base64.b64encode(stdin).decode(),
+                    stdout=rawout.decode(errors='replace'),stderr=rawerr.decode(errors='replace'),
+                    stdout_bytes_b64=base64.b64encode(rawout).decode(),stderr_bytes_b64=base64.b64encode(rawerr).decode(),
+                    stdout_sha256=hashlib.sha256(rawout).hexdigest(),stderr_sha256=hashlib.sha256(rawerr).hexdigest(),
+                    exit=p.returncode if p else None,errors=state['errors'],memory=observations,peak_rss=maximum,
+                    rss_limit=limit,started_ns=locals().get('started_ns'),done_ns=time.perf_counter_ns(),
+                    root_reaped=p is not None and p.returncode is not None,
+                    watcher_joined=watcher is None or not watcher.is_alive(),outer_guard_closure_still_required=True)
+            try:
+                self.host.emit(record)
+                if lease is not None:self.host.budget.settle(token)
+                if wire_lease is not None:self.host.budget.settle(wire_lease)
+            finally:state['done'].set()
+        need(record['exit']==expected and not state['errors'],'native-command-failed:'+repr(record))
+        return record

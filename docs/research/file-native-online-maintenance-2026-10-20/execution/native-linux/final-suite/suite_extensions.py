@@ -412,7 +412,7 @@ PEER4=dict(path='/home/spenser/file-native-online-linux-20261020/target/native-p
  sha256='fa2b5ae4ae2fe27bf3d5c320b2178bd3947ab01e1f028a2599fc8d38a224f770',
  source_pin='efd07cb5dee46a335be8c03a2f2c0462d7f923ca')
 def validate_controls(m):
-    need(m['runtime_scope']=='interface-controls-v4' and m['engine_case_qualification'] is False,'controls-scope-only')
+    need(m['runtime_scope']=='interface-controls-v5' and m['engine_case_qualification'] is False,'controls-scope-only')
     need(m['interface_peer']==PEER4 and digest(PEER4['path'])==PEER4['sha256'],'existing-reviewed-native-peer')
     need(m['final_pin']!=PEER4['source_pin'],'peer-producer-versus-new-harness-pin')
     need(m['native_guard_policy']['fixture_cap_bytes']==96*1024**2,'controls-current-F08-only')
@@ -446,12 +446,12 @@ def interface_controls_v4(m,manifest_sha):
     try:suite_owner(bad)
     except RuntimeError as e:results.append(dict(test='wrong-owner-policy',refusal=str(e),peer_children=0))
     else:raise RuntimeError('wrong owner policy admitted')
-    slot='interface-v4';spec=dict(m['control_case'],root=str(root),forecast_sha256=sha(canonical(m['control_forecast'])))
+    slot='interface-v5';spec=dict(m['control_case'],root=str(root),forecast_sha256=sha(canonical(m['control_forecast'])))
     admission=dict(go=True,final_pin=m['final_pin'],claim_id=claim['claim_id'],ledger_sha256=claim['ledger_sha256'],cases={slot:spec})
     budget=SuiteReservations(m,claim,admission,expected_ledger_sha256=claim['ledger_sha256'])
     budget.preflight(slot,root,m['control_forecast'])
     budget.reserve_control('control-root',0,directories=8);root.mkdir(parents=True);budget.settle('control-root')
-    wire=out/'controls-v4-wires.jsonl';budget.reserve_evidence('wire-file',4096,1)
+    wire=out/'controls-v5-wires.jsonl';budget.reserve_evidence('wire-file',4096,1)
     with wire.open('xb'):pass
     budget.settle('wire-file');lock=threading.RLock()
     def spool(row):
@@ -467,7 +467,7 @@ def interface_controls_v4(m,manifest_sha):
              set(env or {})<={'EXP_PEER_EARLY_JSON','EXP_PEER_EARLY_READY','EXP_PEER_PARTIAL_JSON','EXP_READY','EXP_RELEASE'},'closed-peer-fields')
         counter['n']+=1;need(counter['n']<=8,'eight-peer-limit')
         return dict(expected_error='conflict:captured-base' if code==2 else None)
-    d=JsonDriver(PEER4['path'],out/'controls-v4-events.jsonl',expected_sha256=PEER4['sha256'],
+    d=JsonDriver(PEER4['path'],out/'controls-v5-events.jsonl',expected_sha256=PEER4['sha256'],
         suite_pin=m['final_pin'],binary_source_pin=PEER4['source_pin'],reservations=budget,
         historical_policy=policy,wire_sink=spool,suite_manifest=m)
     failure=None;worker=None
@@ -523,12 +523,193 @@ def interface_controls_v4(m,manifest_sha):
         d.close_owned('v4-control-finally')
         if worker is not None:worker.join(5);need(not worker.is_alive(),'control-Python-worker-joined')
         registry=d.controls()
-        report=dict(kind='V4 INTERFACE CONTROLS ONLY; ZERO ENGINE CASES QUALIFIED',failure=failure,
+        report=dict(kind='V5 INTERFACE CONTROLS ONLY; ZERO ENGINE CASES QUALIFIED',failure=failure,
             harness_pin=m['final_pin'],peer_producer=PEER4,manifest_sha256=manifest_sha,results=results,
-            registry=registry,raw_events_sha256=digest(d.output),raw_wire_sha256=digest(wire),outer_guard_closure_required=True)
+            registry=registry,guard_nonce=claim['nonce'],claim=m['claim'],raw_files={str(p):dict(bytes=p.stat().st_size,sha256=digest(p)) for p in [d.output,wire]},raw_events_sha256=digest(d.output),raw_wire_sha256=digest(wire),outer_guard_closure_required=True)
         raw=encoded(report)+b'\n';budget.reserve_evidence('report',len(raw),1)
-        with (out/'controls-v4-report.json').open('xb') as f:f.write(raw)
+        with (out/'controls-v5-report.json').open('xb') as f:f.write(raw)
         budget.settle('report')
         need(all(v['closed'] and v['resources_closed'] and v['callback_joined'] for v in registry.values()),'all-control-native-handles-closed')
 
 
+
+# Shared post-exit proofs; loaded only after closed source admission.
+from suite_bootstrap import owned,strict
+import native_guard as guard
+ROOT=guard.ROOT
+def verify_raw_packet(m,packet):
+    """Read every retained native call, chunk and direct closure; no subprocess."""
+    import base64
+    starts={};calls={};chunks={};wires={};commands=[];closures={};registry=[]
+    for name,row in packet['raw_files'].items():
+        p=owned(name,ROOT/'evidence')
+        need(p.stat().st_size==row['bytes'] and digest(p)==row['sha256'],'full-raw-artifact')
+        with p.open('rb') as stream:
+            for line in stream:
+                event=strict(line,16*1024**2);kind=event.get('kind')
+                if kind=='native-positive-start':
+                    token=event['control_token'];need(token not in starts,'duplicate-native-start');starts[token]=event
+                elif kind=='native-call':
+                    token=event['call_token'];need(token not in calls,'duplicate-native-call');calls[token]=event
+                elif kind=='native-raw-chunk':
+                    key=(event['call'],event['stream']);need(event['stream'] in {'stdout','stderr'},'raw-stream-name')
+                    data=base64.b64decode(event['bytes_b64'],validate=True)
+                    prior=chunks.setdefault(key,bytearray());need(event['offset']==len(prior),'contiguous-full-native-stream')
+                    prior.extend(data)
+                elif kind=='native-command':commands.append(event)
+                elif kind=='suite-native-input-wire':
+                    token=event['call'];need(token not in wires,'one-native-input-wire');wires[token]=event
+                elif kind=='case-closure':
+                    case_id=event['case_id'];need(case_id not in closures,'duplicate-case-closure');closures[case_id]=event
+                    c=event['closure']
+                    while len(registry)<len(c['registries']):registry.append({})
+                    need(len(registry)==len(c['registries']),'stable-driver-registry-order')
+                    for old,delta in zip(registry,c['registries']):
+                        need(not(set(old)&set(delta)),'immutable-closed-registry-row');old.update(delta)
+                    need(hashlib.sha256(encoded(registry)).hexdigest()==c['global_registry_sha256'] and
+                         sum(len(r) for r in registry)==c['global_registry_entries'],'lossless-exact-global-closure-reconstruction')
+    need(starts and set(starts)==set(calls),'every-native-start-has-one-final-row')
+    need(set(wires)==set(calls),'exact-wire-artifact-for-every-native-call')
+    need(registry==packet['final_native_registry'] and all(r['closed'] and r['resources_closed'] and r['callback_joined']
+         for rows in registry for r in rows.values()),'retained-full-final-registry')
+    need(all(key[0] in calls for key in chunks),'no-orphan-raw-chunks')
+    for token,row in calls.items():
+        start=starts[token]
+        need(row['guard_nonce']==packet['guard_nonce'] and row['source_pin']==m['final_pin'] and
+             row['suite_pin']==m['final_pin'] and row['claim_id']==m['claim']['claim_id'],'native-call-claim-source')
+        need(start['pid']==row['pid'] and start['process_start_ticks']==row['process_start_ticks'] and
+             start['input']==row['input'] and start['env']==row['env'],'same-retained-native-call-identity')
+        need(start['before_stdin_delivery'] is True and row['observed_ns']<=row['stdin_ns']<=row['done_ns'],'positive-native-start-before-input')
+        need(row['initial_blocked_rss']>0 and row['actual_exec_rss']>0 and
+             row['observed_peak_rss']>0 and row['observed_peak_rss']<=row['rss_limit'],'real-positive-role-RSS')
+        need(row['engine_root_reaped'] and row['engine_monitor_joined'] and row['python_callback_joined'] and
+             not row['violations'],'uncensored-native-call-closure')
+        if row['binary_role']=='candidate':
+            need(row['executable_sha256']==m['candidate']['sha256'] and row['binary_source_pin']==m['final_pin'],'same-final-ELF')
+        else:
+            binding=m['compatibility'][row['historical_case_id']]
+            need(row['binary_role']=='historical' and row['executable_sha256']==binding['producer_binary_sha256'] and
+                 row['binary_source_pin']==binding['producer_source_pin']!=m['final_pin'],'distinct-granted-historical-ELF')
+        wire=base64.b64decode(wires[token]['bytes_b64'],validate=True)
+        need(wires[token]['before_stdin_delivery'] and len(wire)==wires[token]['bytes'] and
+             hashlib.sha256(wire).hexdigest()==wires[token]['sha256'] and strict(wire,4*1024**2)==row['input'],'native-raw-wire-json-binding')
+        need(row['input_fully_delivered'] and row['stdin_closed'] and not row['input_broken_pipe'] and
+             len(wire)==row['input_bytes_expected']==row['input_bytes_sent'],'complete-engine-input')
+        need(hashlib.sha256(wire).hexdigest()==row['input_wire_sha256']==row['input_written_prefix_sha256'],'exact-native-input-wire')
+        for stream in ['stdout','stderr']:
+            raw=bytes(chunks.get((token,stream),b''))
+            need(hashlib.sha256(raw).hexdigest()==row[stream+'_sha256'] and
+                 raw.decode(errors='replace')==row[stream],'complete-native-raw-stream')
+        if row['intentional_interrupt']:
+            need(row['intentional_interrupt'] in {'cancel','death'} and row['exit'] in {-9,-15},'exact-intentional-native-termination')
+        elif row['exit']==86:need(row['env'] and row['env'].get('EXP_EXIT'),'source-declared-exit86')
+        else:need(row['exit'] in {0,2},'unexpected-native-exit')
+    for row in commands:
+        need(row['guard_nonce']==packet['guard_nonce'] and row['qualification_pin']==m['final_pin'],'same-native-command-stage')
+        need(row['root_reaped'] and row['watcher_joined'] and not row['errors'],'native-command-closure')
+        proof=row['actual_exec']
+        need(proof and proof['before_stdin_delivery'] and proof['rss']>0 and proof['inode']>0 and
+             proof['sha256']==row['binary_sha256']==m['tools'][row['argv'][0]]['sha256'],'actual-command-ELF-inode-RSS-proof')
+        need(row['initial_blocked_rss']>0 and row['peak_rss']>0 and row['peak_rss']<=row['rss_limit'],'native-command-role-memory')
+        raw=base64.b64decode(row['stdin_bytes_b64'],validate=True)
+        need(row['input_fully_delivered'] and row['stdin_closed'] and
+             len(raw)==row['stdin_bytes']==row['input_bytes_sent'] and hashlib.sha256(raw).hexdigest()==row['stdin_sha256'],'full-command-input')
+        for stream in ['stdout','stderr']:
+            raw=base64.b64decode(row[stream+'_bytes_b64'],validate=True)
+            need(hashlib.sha256(raw).hexdigest()==row[stream+'_sha256'] and raw.decode(errors='replace')==row[stream],'full-command-raw-stream')
+    for row in packet['observations']:
+        case_id=row['case_id'];need(case_id in closures,'actual-direct-case-closure')
+        end=closures[case_id];c=end['closure']
+        need(end['failure'] is None and c['processes_closed'] and c['handles_closed'] and
+             c['python_callbacks_joined'] and not c['errors'],'case-not-positively-closed')
+    return dict(engine_calls=len(calls),generic_native_commands=len(commands),direct_case_closures=len(closures),
+                all_wire_hashes_and_raw_streams_verified=True)
+def verify_guard_memory(g):
+    import zlib
+    path=owned(g['memory_samples_path'],ROOT/'evidence')
+    need(digest(path)==g['memory_samples_sha256'],'guard-memory-file-hash')
+    decoder=zlib.decompressobj(16+zlib.MAX_WBITS)
+    pending=b'';count=0;prior=None;maximum=0.;positive=0;zombies=0
+    def sample(raw):
+        nonlocal count,prior,maximum,positive,zombies
+        row=strict(raw,1024**2);count+=1
+        need(count<=g['memory_sample_count'],'unexpected-extra-memory-row')
+        epoch=row['epoch']
+        if prior is not None:
+            gap=epoch-prior;need(0<=gap<=.04,'raw-memory-cadence-not-qualified');maximum=max(maximum,gap)
+        prior=epoch
+        live=[];z=set(row['zombie_pids']);zombies+=len(z)
+        for member in row['members']:
+            need(g['tracked_identity'].get(str(member['pid']))==member['start'],'retained-guard-PID-start')
+            if member['pid'] in z:
+                need(member['rss'] is None or member['rss']>=0,'explicit-zombie-RSS')
+            else:
+                need(type(member['rss']) is int and member['rss']>0 and
+                     type(member['hwm']) is int and member['hwm']>=member['rss'],'positive-live-native-RSS')
+                live.append(member['rss']);positive+=1
+        need(sum(live)==row['heavy_rss'] and row['heavy_rss']<=g['heavy_rss_limit'] and
+             all(r<=g['process_rss_limit'] for r in live),'actual-heavy-and-process-memory')
+        need(0<row['supervisor_rss']<=g['supervisor_rss_limit'] and
+             row['heavy_rss']+row['supervisor_rss']<g['native_host_rss_limit'],'actual-supervisor-host-memory')
+    with path.open('rb') as stream:
+        for block in iter(lambda:stream.read(65536),b''):
+            need(not decoder.eof,'gzip-trailing-member-or-bytes')
+            incoming=block
+            while incoming:
+                piece=decoder.decompress(incoming,1024**2);incoming=decoder.unconsumed_tail
+                pending+=piece
+                while b'\n' in pending:
+                    line,pending=pending.split(b'\n',1);need(bool(line),'blank-memory-row');sample(line)
+                need(len(pending)<=1024**2,'memory-row-byte-bound')
+                need(not decoder.unused_data,'gzip-trailing-member-or-bytes')
+    need(decoder.eof and not decoder.unused_data and not decoder.unconsumed_tail and not pending,'complete-single-gzip-member')
+    need(count==g['memory_sample_count'] and count>=2 and positive>0,'complete-positive-native-memory-series')
+    return dict(samples=count,raw_max_interval_seconds=maximum,positive_live_member_observations=positive,
+                explicit_zombie_observations=zombies,single_gzip_member=True)
+
+
+def finalize_controls(m,packet,g):
+    """Verify eight NEW peer calls and their typed negative input proofs."""
+    import base64
+    need(packet['failure'] is None and packet['manifest_sha256']==m['manifest_sha256'] and packet['claim']==m['claim'] and packet['guard_nonce']==g['owner_nonce'],'controls-source-owner')
+    names=['normal-full-input','semantic-exit2','early-JSON-refuses','partial-BrokenPipe-refuses','injected86','reader-cancel','reader-death','maintainer-death']
+    negative=[r for r in packet['results'] if r['test']=='missing-source']
+    need(len(negative)==38 and len({r['key'] for r in negative})==38 and all(r['peer_children']==0 and r['refusal'] for r in negative),'all38-prepeer-refusals')
+    for label in ['wrong-source-sha','wrong-owner-policy']:
+        rows=[r for r in packet['results'] if r['test']==label];need(len(rows)==1 and rows[0]['peer_children']==0 and rows[0]['refusal'],'prepeer-negative:'+label)
+    tests=[r for r in packet['results'] if r['test'] in names];need([r['test'] for r in tests]==names,'exact8-new-controls')
+    starts={};calls={};wires={};chunks={}
+    for name,info in packet['raw_files'].items():
+        p=owned(name,ROOT/'evidence');need(p.stat().st_size==info['bytes'] and digest(p)==info['sha256'],'complete-control-raw')
+        with p.open('rb') as stream:
+            for raw in stream:
+                r=strict(raw,4*1024**2);kind=r.get('kind')
+                if kind in {'native-positive-start','native-call','suite-native-input-wire'}:
+                    table,key=(starts,r.get('control_token')) if kind=='native-positive-start' else (calls,r.get('call_token')) if kind=='native-call' else (wires,r.get('call'))
+                    need(key and key not in table,'unique-native-row');table[key]=r
+                elif kind=='native-raw-chunk':
+                    key=(r['call'],r['stream']);data=base64.b64decode(r['bytes_b64'],validate=True);old=chunks.setdefault(key,bytearray());need(r['offset']==len(old),'contiguous-control-output');old.extend(data)
+    tokens={r['call'] for r in tests};need(len(tokens)==8 and tokens==set(starts)==set(calls)==set(wires)==set(packet['registry']),'exact8-raw-registry')
+    need(all(r['closed'] and r['resources_closed'] and r['callback_joined'] for r in packet['registry'].values()),'control-handles-joined')
+    for test in tests:
+        token=test['call'];r=calls[token];a=starts[token];w=wires[token];wire=base64.b64decode(w['bytes_b64'],validate=True);label=test['test']
+        need(r['guard_nonce']==g['owner_nonce'] and r['claim_id']==m['claim']['claim_id'] and r['suite_pin']==m['final_pin'],'native-control-claim')
+        need(r['executable_sha256']==PEER4['sha256'] and r['binary_source_pin']==PEER4['source_pin']!=m['final_pin'],'peer-only-producer')
+        need(a['pid']==r['pid'] and a['process_start_ticks']==r['process_start_ticks'] and a['input']==r['input'] and a['env']==r['env'],'control-PID-start')
+        need(a['before_stdin_delivery'] and r['observed_ns']<=r['stdin_ns']<=r['done_ns'] and r['actual_exec_rss']>0 and r['initial_blocked_rss']>0 and 0<r['observed_peak_rss']<=r['rss_limit'],'positive-native-control-start')
+        need(r['engine_root_reaped'] and r['engine_monitor_joined'] and r['python_callback_joined'],'native-control-closure')
+        need(w['before_stdin_delivery'] and len(wire)==w['bytes']==r['input_bytes_expected'] and strict(wire,262144)==r['input'] and hashlib.sha256(wire).hexdigest()==r['input_wire_sha256']==w['sha256'],'complete-control-wire')
+        sent=r['input_bytes_sent'];need(0<=sent<=len(wire) and hashlib.sha256(wire[:sent]).hexdigest()==r['input_written_prefix_sha256'],'actual-written-prefix')
+        if label in {'early-JSON-refuses','partial-BrokenPipe-refuses'}:
+            need(r['violations']==['response-before-complete-input','incomplete-input-delivery'] and r['exit']==0 and not r['input_fully_delivered'],'typed-negative-input')
+            need((sent==0) if label=='early-JSON-refuses' else (0<sent<len(wire) and r['input_broken_pipe']),'early-versus-BrokenPipe')
+        else:need(not r['violations'] and r['input_fully_delivered'] and r['stdin_closed'] and sent==len(wire),'fully-delivered-normal-or-interrupted-input')
+        for stream in ['stdout','stderr']:
+            raw=bytes(chunks.get((token,stream),b''));need(hashlib.sha256(raw).hexdigest()==r[stream+'_sha256'] and raw.decode(errors='replace')==r[stream],'full-control-output')
+        if label.endswith('cancel'):need(r['intentional_interrupt']=='cancel' and r['exit']==-15,'real-reader-cancel')
+        elif label.endswith('death'):need(r['intentional_interrupt']=='death' and r['exit']==-9,'real-owned-death')
+        elif label=='injected86':need(r['exit']==86 and r['input']['peer']=='exit86','explicit-peer86')
+        elif label=='semantic-exit2':need(r['exit']==2,'semantic2-only')
+        else:need(r['exit']==0,'peer-exit0')
+    need(all(k[0] in tokens and k[1] in {'stdout','stderr'} for k in chunks),'no-orphan-output')
+    return dict(status='PASSED',scope='interface-controls-v5',engine_cases_qualified=0,peer_calls=8,prepeer_refusals=40,raw_files=packet['raw_files'])

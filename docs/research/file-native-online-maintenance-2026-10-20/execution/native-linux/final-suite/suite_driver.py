@@ -6,6 +6,8 @@ from native_driver_v3 import Driver as EngineDriver
 from suite_bootstrap import need, encoded, digest, owned, strict
 from native_resources_v3 import confined,regular_read
 
+from suite_recovery import Commands,descendants
+
 READER_ACTIONS={'resolve','point','inspect','lookup-bench','ordinary'}
 
 class JsonDriver(EngineDriver):
@@ -48,7 +50,7 @@ class JsonDriver(EngineDriver):
         row=self.source_row(row)
         super().append(row,state)
     def source_row(self,row):
-        return dict(row,guard_version=4,guard_sha256=self.guard_sha256,
+        return dict(row,guard_version=5,guard_sha256=self.guard_sha256,
                  guard_utility_sha256='4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9')
     def wait(self,token,timeout):return self.source_row(super().wait(token,timeout))
     def interrupt(self,token,kind):
@@ -88,190 +90,7 @@ class JsonDriver(EngineDriver):
             # If a timed-out spool callback is still writing, retain its lease.
             if not writing.is_set() or finished.is_set():self.reservations.settle(lease)
 
-def descendants(pid):
-    answer=set()
-    try:
-        for task in Path('/proc',str(pid),'task').iterdir():
-            try: answer.update(map(int,(task/'children').read_text().split()))
-            except FileNotFoundError: pass
-    except FileNotFoundError: pass
-    return answer
 
-class Commands:
-    def __init__(self,host):
-        self.host=host;self.lock=threading.RLock();self.active={}
-    def close(self):
-        errors=[]
-        with self.lock:
-            for state in self.active.values():
-                try:self._kill(state,'case-close')
-                except BaseException as e:errors.append(repr(e))
-        for state in list(self.active.values()):
-            if not state['done'].wait(5):errors.append('command-owner-not-joined')
-        need(not errors,'native-command-close:'+repr(errors))
-    def _kill(self,state,reason):
-        # Only our retained pidfds are authority; no reopened PID or foreign group.
-        for pid,(start,fd) in list(state['owned'].items()):
-            row=guard.process(pid,with_memory=False)
-            if row is not None and row['start']==start and row['state']!='Z':
-                try:signal.pidfd_send_signal(fd,signal.SIGKILL)
-                except ProcessLookupError:pass
-        state['kill_reasons'].append(reason)
-    def run(self,root,action,argv,stdin=b'',*,expected=0,seconds=120,env=None):
-        need(type(stdin) is bytes,'command-bytes-input')
-        self.host.command_binding(action,argv,stdin,env)
-        root=owned(root,guard.ROOT/'fixtures')
-        deadline=min(time.time()+seconds,self.host.driver.owner['absolute_deadline'],guard.CUTOFF)
-        need(deadline>time.time(),'native-command-fixed-deadline')
-        limit=256*1024**2 if action in READER_ACTIONS else 2*1024**3
-        executable=Path(argv[0]);binary_sha=digest(executable)
-        token=uuid.uuid4().hex;gate_r,gate_w=os.pipe()
-        state=dict(owned={},done=threading.Event(),kill_reasons=[],errors=[],pid=None)
-        stop=threading.Event();watcher=None;p=None;rawout=bytearray();rawerr=bytearray()
-        maximum=0;observations=[];sent=0;full=False;input_closed=False;selection=selectors.DefaultSelector()
-        lease=None;wire_lease=None;failure=None;record=None;initial=None;exec_proof=None;pipe_fds=[]
-        try:
-            # Allocate exact output geometry and reserve before creating a child.
-            out_r,out_w=os.pipe();pipe_fds.extend([out_r,out_w])
-            err_r,err_w=os.pipe();pipe_fds.extend([err_r,err_w])
-            tail=sum(fcntl.fcntl(fd,fcntl.F_GETPIPE_SZ) for fd in (out_w,err_w))
-            payload=dict(root=str(root),action=action,operation=action,argv=argv,stdin_bytes=len(stdin),
-                         stdin_sha256=hashlib.sha256(stdin).hexdigest())
-            lease=self.host.budget.reserve_call(token,payload,env,tail)
-            need(len(stdin)<=lease['input_bytes'],'complete-command-stdin-forecast')
-            wire_bound=(4*(len(stdin)+lease['stdout_bytes']+lease['stderr_bytes']+tail)+2)//3+8192
-            self.host.budget.reserve_evidence('command-wire-'+token,wire_bound,0)
-            wire_lease='command-wire-'+token
-            p=subprocess.Popen([sys.executable,str(Path(guard.__file__).resolve()),'--child',str(gate_r),*argv],
-                               stdin=subprocess.PIPE,stdout=out_w,stderr=err_w,
-                               pass_fds=(gate_r,),close_fds=True,env=self.host.environment(env))
-            os.close(out_w);pipe_fds.remove(out_w);os.close(err_w);pipe_fds.remove(err_w)
-            p.stdout=os.fdopen(out_r,'rb',buffering=0);pipe_fds.remove(out_r)
-            p.stderr=os.fdopen(err_r,'rb',buffering=0);pipe_fds.remove(err_r)
-            os.close(gate_r);gate_r=None
-            initial=guard.process(p.pid)
-            need(initial and initial['rss'] and initial['hwm'] and initial['pgid']==os.getpgrp(),'blocked-native-command-positive-rss')
-            state['pid']=p.pid;state['owned'][p.pid]=(initial['start'],os.pidfd_open(p.pid))
-            with self.lock:self.active[token]=state
-            def memory():
-                nonlocal maximum
-                try:
-                    while not stop.is_set():
-                        with self.lock:
-                            pending=list(state['owned']);seen=set()
-                            while pending:
-                                pid=pending.pop()
-                                if pid in seen:continue
-                                seen.add(pid);pending.extend(descendants(pid))
-                                row=guard.process(pid)
-                                if row is None or row['state']=='Z':continue
-                                need(row['pgid']==os.getpgrp(),'command-child-left-owned-group')
-                                if pid not in state['owned']:state['owned'][pid]=(row['start'],os.pidfd_open(pid))
-                                need(state['owned'][pid][0]==row['start'] and row['rss'] is not None and row['hwm'] is not None,'command-live-rss-identity')
-                                maximum=max(maximum,row['hwm'])
-                                observations.append(dict(epoch=time.time(),pid=pid,start=row['start'],rss=row['rss'],hwm=row['hwm']))
-                                if row['rss']>limit:state['errors'].append('command-role-rss-censor');self._kill(state,'rss')
-                            if time.time()>=deadline:state['errors'].append('command-time-censor');self._kill(state,'deadline')
-                        stop.wait(.01)
-                except BaseException as e:
-                    state['errors'].append('command-monitor:'+repr(e))
-                    with self.lock:self._kill(state,'monitor-error')
-            watcher=threading.Thread(target=memory,daemon=False);watcher.start()
-            os.write(gate_w,b'G');os.close(gate_w);gate_w=None
-            # Bash/Python stdin scripts cannot begin file I/O before this proof.
-            while True:
-                need(time.time()<deadline,'actual-command-exec-deadline')
-                row=guard.process(p.pid);need(row and row['start']==initial['start'] and row['state']!='Z','command-exited-before-native-exec-proof')
-                try:actual=Path(os.readlink('/proc/'+str(p.pid)+'/exe'))
-                except FileNotFoundError:actual=None
-                if actual==executable.resolve():
-                    live_exe=Path('/proc',str(p.pid),'exe');live_stat=live_exe.stat();named_stat=executable.stat()
-                    need(row['rss'] and row['rss']<=limit and digest(live_exe)==binary_sha==digest(executable) and
-                         (live_stat.st_dev,live_stat.st_ino)==(named_stat.st_dev,named_stat.st_ino),'actual-command-exec-rss-sha-inode')
-                    exec_proof=dict(path=str(actual),sha256=binary_sha,device=live_stat.st_dev,inode=live_stat.st_ino,
-                                    rss=row['rss'],hwm=row['hwm'],before_stdin_delivery=True)
-                    break
-                time.sleep(.001)
-            started_ns=time.perf_counter_ns();self.host.command_started(token,p.pid,initial['start'],action,started_ns)
-            for name,f in [('stdin',p.stdin),('stdout',p.stdout),('stderr',p.stderr)]:
-                os.set_blocking(f.fileno(),False)
-                selection.register(f,selectors.EVENT_WRITE if name=='stdin' else selectors.EVENT_READ,name)
-            kill_at=None
-            while selection.get_map():
-                if state['errors']:
-                    kill_at=kill_at or time.monotonic()
-                    need(time.monotonic()-kill_at<5,'command-pipe-closure-censor')
-                ready=selection.select(.01);ready.sort(key=lambda x:x[0].data=='stdin')
-                for item,_ in ready:
-                    f,name=item.fileobj,item.data
-                    if name=='stdin':
-                        try:sent+=os.write(f.fileno(),stdin[sent:sent+65536])
-                        except BrokenPipeError:
-                            state['errors'].append('command-incomplete-input');selection.unregister(f);f.close();input_closed=True
-                            continue
-                        if sent==len(stdin):
-                            selection.unregister(f);f.close();input_closed=True;full=True
-                    else:
-                        try:block=os.read(f.fileno(),16384)
-                        except BlockingIOError:continue
-                        if not block:selection.unregister(f);f.close();continue
-                        target=rawout if name=='stdout' else rawerr;target.extend(block)
-                        if len(target)>lease[name+'_bytes']:
-                            state['errors'].append('command-output-censor:'+name)
-                            with self.lock:self._kill(state,'output')
-                        need(len(rawout)+len(rawerr)<=lease['stdout_bytes']+lease['stderr_bytes']+tail,'command-tail-reservation-exceeded')
-            p.wait(timeout=5)
-            need(full or not stdin,'command-full-input-required')
-        except BaseException as e:
-            failure=repr(e);state['errors'].append(failure)
-        finally:
-            if p is not None:
-                with self.lock:self._kill(state,'owner-finally')
-                try:p.wait(timeout=5)
-                except subprocess.TimeoutExpired:state['errors'].append('command-root-not-reaped')
-            stop.set()
-            if watcher is not None:
-                watcher.join(5)
-                if watcher.is_alive():state['errors'].append('command-monitor-not-joined')
-            selection.close()
-            for fd in (gate_r,gate_w):
-                if fd is not None:os.close(fd)
-            for fd in pipe_fds:os.close(fd)
-            if p is not None:
-                # Drain setup-failure tails in this owner only. A missing EOF is
-                # an explicit raw-capture failure, never a truncated success.
-                for f,target in [(p.stdout,rawout),(p.stderr,rawerr)]:
-                    if f.closed:continue
-                    os.set_blocking(f.fileno(),False)
-                    while True:
-                        try:b=os.read(f.fileno(),16384)
-                        except BlockingIOError:state['errors'].append('command-raw-eof-not-observed');break
-                        if not b:break
-                        target.extend(b)
-                    f.close()
-                if p.stdin and not p.stdin.closed:p.stdin.close()
-            with self.lock:
-                if watcher is None or not watcher.is_alive():
-                    for start,fd in state['owned'].values():os.close(fd)
-                record=dict(kind='native-command',token=token,root=str(root),action=action,argv=argv,
-                    env=env,binary_sha256=binary_sha,pid=state['pid'],start=initial['start'] if initial else None,
-                    initial_blocked_rss=initial['rss'] if initial else None,actual_exec=exec_proof,
-                    stdin_bytes=len(stdin),input_bytes_sent=sent,input_fully_delivered=full,stdin_closed=input_closed,
-                    stdin_sha256=hashlib.sha256(stdin).hexdigest(),stdin_bytes_b64=base64.b64encode(stdin).decode(),
-                    stdout=rawout.decode(errors='replace'),stderr=rawerr.decode(errors='replace'),
-                    stdout_bytes_b64=base64.b64encode(rawout).decode(),stderr_bytes_b64=base64.b64encode(rawerr).decode(),
-                    stdout_sha256=hashlib.sha256(rawout).hexdigest(),stderr_sha256=hashlib.sha256(rawerr).hexdigest(),
-                    exit=p.returncode if p else None,errors=state['errors'],memory=observations,peak_rss=maximum,
-                    rss_limit=limit,started_ns=locals().get('started_ns'),done_ns=time.perf_counter_ns(),
-                    root_reaped=p is not None and p.returncode is not None,
-                    watcher_joined=watcher is None or not watcher.is_alive(),outer_guard_closure_still_required=True)
-            try:
-                self.host.emit(record)
-                if lease is not None:self.host.budget.settle(token)
-                if wire_lease is not None:self.host.budget.settle(wire_lease)
-            finally:state['done'].set()
-        need(record['exit']==expected and not state['errors'],'native-command-failed:'+repr(record))
-        return record
 
 # SOURCE-PROPOSED guard4. Frozen4dd body/checks retained below; own authority.
 # Changes: closed parent-selected96/512/640MiB fixture policy; explicit new source/manifest owner binding;
@@ -280,7 +99,7 @@ import argparse,ctypes,gzip,shutil
 ROOT=guard.ROOT
 CUTOFF=guard.CUTOFF
 MIB=1024**2
-SUITE_LIMITS={'source':(4*MIB,1500),'target':(256*MIB,5000),'fixtures':(640*MIB,30000),'evidence':(24*MIB,2000)}
+SUITE_LIMITS={'source':(4*MIB,1500),'target':(256*MIB,5000),'fixtures':(640*MIB,30000),'evidence':(24*MIB,2000),'cargo-private':(64*MIB,4096)}
 inventory=guard.inventory
 process=guard.process
 processes=guard.processes
@@ -293,14 +112,20 @@ def _guard_admit(ns):
         if directory not in sys.path:sys.path.insert(0,directory)
     os.environ['FILE_NATIVE_ORACLE_RESEARCH']=m['oracle']['research_root']
     from suite_adapter import suite_limits
-    if m.get('runtime_scope')=='interface-controls-v4':
+    if m.get('runtime_scope')=='interface-controls-v5':
         from suite_extensions import validate_controls
         validate_controls(m)
+    elif m.get('runtime_scope') in {'native-build-v5','workspace-v5'}:
+        from suite_oracle import native_stage_command
+        template=m['native_guard_policy']['command_template']
+        need(template==native_stage_command(m),'exact-reviewed-native-Cargo-provider')
+    elif m.get('runtime_scope')=='private-cache-v5':
+        need(m['private_cache']['enabled'] is True and m['private_cache']['copy_go'] is True,'C1-copy-authority')
     else:
         from suite_main import expand,validate
         m=expand(m);validate(m)
     p=m['native_guard_policy']
-    need(all(v[0]<=SUITE_LIMITS[k][0] and v[1]==SUITE_LIMITS[k][1] for k,v in suite_limits(m).items()),'closed-new-guard4-policy-ceilings')
+    need(all(v[0]<=SUITE_LIMITS[k][0] and v[1]<=SUITE_LIMITS[k][1] for k,v in suite_limits(m).items()),'closed-new-guard4-policy-ceilings')
     need(ns.pin==m['final_pin'] and ns.claim_id==m['claim']['claim_id'] and ns.ledger_sha256==m['claim']['ledger_sha256'],'new-guard-claim-release')
     need(0<ns.seconds<=p['seconds'] and ns.process_limit==2*1024**3 and ns.heavy_limit==2*1024**3 and
          ns.free_floor>=20*1024**3 and ns.cwd==str(ROOT) and ns.stdin is None,'same-memory-time-free-floor-root-policy')
@@ -309,6 +134,11 @@ def _guard_admit(ns):
     command=ns.command[1:] if ns.command[:1]==['--'] else ns.command
     expected=[x.replace('@MANIFEST_PATH@',m['manifest_path']).replace('@MANIFEST_SHA256@',m['manifest_sha256']) for x in p['command_template']]
     need(command==expected and command,'exact-reviewed-child-launch')
+    phase=strict(owned(m['phase']['owner_path'],ROOT/'evidence').read_bytes(),65536)
+    parent=process(os.getppid())
+    need(phase['kind']=='live-V5-phase-owner' and parent and phase['pid']==parent['pid'] and phase['start']==parent['start'] and
+         phase['claim']==m['claim'] and phase['final_pin']==m['final_pin'] and phase['manifest_sha256']==m['manifest_sha256'] and
+         phase['deadline_epoch']==m['phase']['deadline_epoch'] and digest(Path('/proc',str(parent['pid']),'cmdline'))==phase['cmdline_sha256'],'actual-live-outer-phase-watchdog')
     return m
 
 def suite_guard_main(manifest_path,manifest_sha256,argv):
@@ -326,11 +156,11 @@ def suite_guard_main(manifest_path,manifest_sha256,argv):
     return suite_guard_run(ns)
 
 def suite_guard_run(ns):
+    start = time.time()
     m = _guard_admit(ns)
     from suite_adapter import suite_limits
     limits = suite_limits(m)
-    start = time.time()
-    absolute_deadline = min(start + ns.seconds, CUTOFF)
+    absolute_deadline = min(start + ns.seconds, m['phase']['deadline_epoch'], CUTOFF)
     if sys.platform != 'linux':
         raise RuntimeError('native-linux-required')
     if ROOT.resolve() != ROOT or ROOT.is_symlink():
@@ -361,7 +191,8 @@ def suite_guard_run(ns):
     if reserves['evidence']['bytes'] < 65536 or reserves['source']['bytes'] < 1024:
         raise RuntimeError('receipt-and-owner-reservation-required')
     cargo = Path('/home/spenser/.cargo')
-    cargo_before = inventory(cargo, allow_links=True) if ns.monitor_cargo else None
+    from suite_adapter import cache_identity
+    cargo_before = cache_identity(cargo,hashes=False) if ns.monitor_cargo else None
     for key, val in before.items():
         if val['bytes'] + reserves[key]['bytes'] > limits[key][0] or val['files'] + reserves[key]['files'] > limits[key][1]:
             raise RuntimeError('prospective-allocation:' + key)
@@ -374,7 +205,7 @@ def suite_guard_run(ns):
     env['PYTHONDONTWRITEBYTECODE'] = '1'
     nonce = uuid.uuid4().hex
     identity = process(os.getpid())
-    owner = dict(nonce=nonce, pid=os.getpid(), process_start=identity['start'], claim_id=ns.claim_id, ledger_sha256=ns.ledger_sha256, source_pin=ns.pin, categories=reserves, before=before, absolute_deadline=absolute_deadline, epoch=time.time(), guard_version=4, runtime_scope=m.get('runtime_scope','full-body'), guard_sha256=digest(__file__), category_limits={k: list(v) for k, v in limits.items()}, policy_manifest_path=ns.policy_manifest_path, policy_manifest_sha256=ns.policy_manifest_sha256, owner_cmdline_sha256=digest(Path('/proc', str(os.getpid()), 'cmdline')))
+    owner = dict(nonce=nonce, pid=os.getpid(), process_start=identity['start'], claim_id=ns.claim_id, ledger_sha256=ns.ledger_sha256, source_pin=ns.pin, categories=reserves, before=before, absolute_deadline=absolute_deadline, epoch=time.time(), guard_version=5, runtime_scope=m.get('runtime_scope','full-body'), guard_sha256=digest(__file__), category_limits={k: list(v) for k, v in limits.items()}, policy_manifest_path=ns.policy_manifest_path, policy_manifest_sha256=ns.policy_manifest_sha256, owner_cmdline_sha256=digest(Path('/proc', str(os.getpid()), 'cmdline')))
     owner_path = ROOT / 'source' / ('guard-owner-' + nonce + '.json')
     claim_path = ROOT / 'evidence' / ('claim-' + nonce + '.json')
     owner_path.write_text(json.dumps(owner, separators=(',', ':')) + '\n')
@@ -392,7 +223,9 @@ def suite_guard_run(ns):
     os.close(read_fd)
     initial = process(p.pid)
     if initial is None or initial['state'] == 'Z' or initial['rss'] is None or (initial['hwm'] is None) or (initial['rss'] <= 0):
-        os.killpg(p.pid, signal.SIGKILL)
+        fd=os.pidfd_open(p.pid)
+        try:signal.pidfd_send_signal(fd,signal.SIGKILL)
+        finally:os.close(fd)
         p.wait(timeout=5)
         raise RuntimeError('blocked-launch-positive-rss-required')
     tracked = {p.pid: initial['start']}
@@ -404,6 +237,7 @@ def suite_guard_run(ns):
     termination = []
     memory_path = receipt.with_suffix('.memory.jsonl.gz')
     memory_stream = gzip.open(memory_path, 'wt', encoding='utf-8')
+    root_exec = None
     memory_count = 0
     aggregate_peak = supervisor_peak = 0
     disk_rows = []
@@ -419,10 +253,6 @@ def suite_guard_run(ns):
                 reasons.append(reason)
             handles = list(pidfds.items())
             termination.append(dict(epoch=time.time(), reason=reason, tracked_pids=[pid for pid, _ in handles]))
-            try:
-                os.killpg(p.pid, signal.SIGKILL)
-            except ProcessLookupError:
-                pass
             for _, fd in handles:
                 try:
                     signal.pidfd_send_signal(fd, signal.SIGKILL)
@@ -430,7 +260,7 @@ def suite_guard_run(ns):
                     pass
 
     def members(rows):
-        selected = {pid for pid, row in rows.items() if row['pgid'] == p.pid or tracked.get(pid) == row['start']}
+        selected = {pid for pid, row in rows.items() if tracked.get(pid) == row['start']}
         while True:
             added = {pid for pid, row in rows.items() if row['ppid'] in selected or (row['ppid'] == os.getpid() and pid != p.pid)}
             if added <= selected:
@@ -440,12 +270,14 @@ def suite_guard_run(ns):
             for pid in selected:
                 row = rows[pid]
                 if pid not in tracked:
-                    tracked[pid] = row['start']
                     try:
-                        pidfds[pid] = os.pidfd_open(pid)
-                    except ProcessLookupError:
-                        pass
-        return [rows[pid] for pid in selected]
+                        fd=os.pidfd_open(pid)
+                    except ProcessLookupError:continue
+                    again=process(pid,with_memory=False)
+                    if again is None or again['start']!=row['start']:
+                        os.close(fd);raise RuntimeError('guard5-pidfd-birth-race')
+                    tracked[pid]=row['start'];pidfds[pid]=fd
+        return [rows[pid] for pid in selected if tracked.get(pid)==rows[pid]['start'] and pid in pidfds]
 
     def children(pid):
         """All threads' children, including spawns from harness reader threads."""
@@ -492,7 +324,7 @@ def suite_guard_run(ns):
         return rows
 
     def sample_memory():
-        nonlocal last_sample, memory_count, aggregate_peak, supervisor_peak
+        nonlocal last_sample, memory_count, aggregate_peak, supervisor_peak, root_exec
         due = time.monotonic()
         while not stop.is_set():
             begin = time.monotonic()
@@ -519,6 +351,15 @@ def suite_guard_run(ns):
                 overhead_rows = [detail for pid in supervisors if (detail := process(pid)) is not None and detail['state'] != 'Z']
                 if any((x['rss'] is None or x['hwm'] is None for x in overhead_rows)):
                     raise RuntimeError('missing-live-supervisor-memory')
+                if m['phase']['mode'] in {'build','workspace'} and root_exec is None:
+                    root_row=next((x for x in live if x['pid']==p.pid),None)
+                    if root_row:
+                        ep=Path('/proc',str(p.pid),'exe')
+                        try:
+                            if str(ep.resolve())==m['cargo']:
+                                st=ep.stat();need(digest(ep)==m['tools'][m['cargo']]['sha256'],'actual-Cargo-root-hash')
+                                root_exec=dict(pid=p.pid,start=root_row['start'],rss=root_row['rss'],inode=st.st_ino,sha256=digest(ep),epoch=time.time())
+                        except FileNotFoundError:pass
                 heavy = sum((x['rss'] for x in live))
                 overhead = sum((x['rss'] for x in overhead_rows))
                 for row in owned:
@@ -551,9 +392,9 @@ def suite_guard_run(ns):
                 free = shutil.disk_usage(ROOT).free
                 row = dict(epoch=time.time(), scopes=now, free_bytes=free)
                 if ns.monitor_cargo:
-                    current_cargo = inventory(cargo, allow_links=True)
-                    row['cargo_growth'] = max(0, current_cargo['bytes'] - cargo_before['bytes'])
-                    if row['cargo_growth'] > 4 * MIB:
+                    current_cargo = cache_identity(cargo,hashes=False)
+                    row['cargo_identity_sha256'] = current_cargo
+                    if current_cargo != cargo_before:
                         terminate('shared-cargo-growth')
                         return
                 disk_rows.append(row)
@@ -636,19 +477,20 @@ def suite_guard_run(ns):
             os.close(fd)
     positive = len(closure) >= 2 and (not closure[-1]['pids']) and (not closure[-2]['pids'])
     cadence_qualified = bool(intervals) and (not any((x > 0.04 for x in intervals)))
-    row = dict(command=command, cwd=ns.cwd, source_pin=ns.pin, guard_sha256=digest(__file__), started_epoch=start, absolute_deadline_epoch=absolute_deadline, execute_started_epoch=execute_started, setup_seconds=execute_started - start if execute_started else None, execute_and_shutdown_seconds=time.time() - execute_started if execute_started else None, blocked_launch_positive_rss=initial['rss'], monitors_joined=monitors_joined, owner_nonce=nonce, owner_pid=os.getpid(), owner_process_start=identity['start'], registered_supervisor_identities=registered_supervisors, claim_id=ns.claim_id, ledger_sha256=ns.ledger_sha256, prospective_reservation=reserves, claim_path=str(claim_path), effective_cap_seconds=effective, seconds=time.time() - start, exit=p.returncode, censors=reasons, termination=termination, group_id=p.pid, tracked_identity=tracked, process_closure_verified=positive, closure_observations=closure, memory_interval_target_seconds=0.02, memory_max_interval_seconds=max(intervals, default=None), memory_intervals_over_40ms=sum((x > 0.04 for x in intervals)), rss_sampling_cadence_qualified=cadence_qualified, memory_samples_path=str(memory_path), memory_samples_sha256=digest(memory_path), memory_sample_count=memory_count, aggregate_heavy_peak_bytes=aggregate_peak, aggregate_supervisor_peak_bytes=supervisor_peak, process_high_water_bytes=process_peaks, heavy_rss_limit=ns.heavy_limit, process_rss_limit=ns.process_limit, supervisor_rss_limit=768 * MIB, native_host_rss_limit=3 * 1024 ** 3, free_floor_bytes=ns.free_floor, disk_samples=disk_rows, baseline=before, final={k: inventory(ROOT / k) for k in limits}, observation_errors=sample_errors, stdout_sha256=digest(receipt.with_suffix('.stdout')), stderr_sha256=digest(receipt.with_suffix('.stderr')), guard_version=4, runtime_scope=m.get('runtime_scope','full-body'), category_limits={k: list(v) for k, v in limits.items()}, policy_manifest_path=ns.policy_manifest_path, policy_manifest_sha256=ns.policy_manifest_sha256, guard_utility_sha256='4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9')
-    receipt.write_text(json.dumps(row, separators=(',', ':')) + '\n')
+    row = dict(root_exec=root_exec,command=command, cwd=ns.cwd, source_pin=ns.pin, guard_sha256=digest(__file__), started_epoch=start, absolute_deadline_epoch=absolute_deadline, execute_started_epoch=execute_started, setup_seconds=execute_started - start if execute_started else None, execute_and_shutdown_seconds=time.time() - execute_started if execute_started else None, blocked_launch_positive_rss=initial['rss'], monitors_joined=monitors_joined, owner_nonce=nonce, owner_pid=os.getpid(), owner_process_start=identity['start'], registered_supervisor_identities=registered_supervisors, claim_id=ns.claim_id, ledger_sha256=ns.ledger_sha256, prospective_reservation=reserves, claim_path=str(claim_path), effective_cap_seconds=effective, seconds=time.time() - start, exit=p.returncode, censors=reasons, termination=termination, group_id=p.pid, tracked_identity=tracked, process_closure_verified=positive, closure_observations=closure, memory_interval_target_seconds=0.02, memory_max_interval_seconds=max(intervals, default=None), memory_intervals_over_40ms=sum((x > 0.04 for x in intervals)), rss_sampling_cadence_qualified=cadence_qualified, memory_samples_path=str(memory_path), memory_samples_sha256=digest(memory_path), memory_sample_count=memory_count, aggregate_heavy_peak_bytes=aggregate_peak, aggregate_supervisor_peak_bytes=supervisor_peak, process_high_water_bytes=process_peaks, heavy_rss_limit=ns.heavy_limit, process_rss_limit=ns.process_limit, supervisor_rss_limit=768 * MIB, native_host_rss_limit=3 * 1024 ** 3, free_floor_bytes=ns.free_floor, disk_samples=disk_rows, baseline=before, final={k: inventory(ROOT / k) for k in limits}, observation_errors=sample_errors, stdout_sha256=digest(receipt.with_suffix('.stdout')), stderr_sha256=digest(receipt.with_suffix('.stderr')), guard_version=5, runtime_scope=m.get('runtime_scope','full-body'), category_limits={k: list(v) for k, v in limits.items()}, policy_manifest_path=ns.policy_manifest_path, policy_manifest_sha256=ns.policy_manifest_sha256, guard_utility_sha256='4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9')
+    from suite_adapter import inclusive_receipt
+    row=inclusive_receipt(m,receipt,row,before,reserves)
     print(json.dumps({k: row[k] for k in ('exit', 'censors', 'seconds', 'process_closure_verified', 'memory_max_interval_seconds', 'memory_intervals_over_40ms')}))
     return 0 if p.returncode == 0 and (not reasons) and positive and (not sample_errors) and cadence_qualified else 1
 
 def verify_guard_policy(m,packet,g):
     policy=m['native_guard_policy']
-    need(g['guard_version']==4 and g['guard_sha256']==policy['source_sha256'] and
+    need(g['guard_version']==5 and g['guard_sha256']==policy['source_sha256'] and
          g['policy_manifest_path']==packet['manifest_path'] and g['policy_manifest_sha256']==packet['manifest_sha256'],
          'new-guard4-source-and-policy-manifest')
     from suite_adapter import suite_limits
     need(g['category_limits']=={k:list(v) for k,v in suite_limits(m).items()},'no-implicit-limit-override')
     claim=strict(owned(g['claim_path'],ROOT/'evidence').read_bytes(),8192)
-    need(claim['guard_version']==4 and claim['guard_sha256']==g['guard_sha256'] and
+    need(claim['guard_version']==5 and claim['guard_sha256']==g['guard_sha256'] and
          claim['nonce']==g['owner_nonce'] and claim['process_start']==g['owner_process_start'] and
          claim['categories']==g['prospective_reservation'],'new-guard4-retained-owner-claim')

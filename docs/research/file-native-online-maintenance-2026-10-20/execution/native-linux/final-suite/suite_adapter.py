@@ -13,12 +13,17 @@ from suite_driver import Commands,JsonDriver
 
 def suite_limits(m):
     policy=m['native_guard_policy']
-    need(policy['reviewed'] is True and policy['version']==4,'explicit-new-guard4-source-review')
+    need(policy['reviewed'] is True and policy['version']==5,'explicit-new-guard4-source-review')
     need(policy['source_sha256']==m['source_files'][policy['source_path']]['sha256'] and
          digest(policy['source_path'])==policy['source_sha256'],'actual-new-guard4-source')
     cap=policy['fixture_cap_bytes'];need(type(cap) is int and cap in {96*1024**2,512*1024**2,640*1024**2},'closed-parent-selected-fixture-cap')
-    return {'source':(4*1024**2,1500),'target':(256*1024**2,5000),
-            'fixtures':(cap,30000),'evidence':(24*1024**2,2000)}
+    limits={'source':(4*1024**2,1500),'target':(256*1024**2,5000),'fixtures':(cap,30000),'evidence':(24*1024**2,2000)}
+    c=m.get('private_cache',{'enabled':False})
+    if c['enabled']:
+        need(c['reviewed'] is True and c['claim_id']==m['claim']['claim_id'] and c['ledger_sha256']==m['claim']['ledger_sha256'] and c['root']==str(guard.ROOT/'cargo-private'),'explicit-Linux-C1-allocation')
+        need(type(c['cap_bytes']) is int and 0<c['cap_bytes']<=64*1024**2 and type(c['cap_files']) is int and 0<c['cap_files']<=4096,'closed-Linux-C1-limits')
+        limits['cargo-private']=(c['cap_bytes'],c['cap_files'])
+    return limits
 
 def suite_owner(m):
     """New owner protocol; never relabel the frozen4dd ancestor convention."""
@@ -29,7 +34,7 @@ def suite_owner(m):
     candidates=[]
     for path in (guard.ROOT/'source').glob('guard-owner-*.json'):
         data=strict(regular_read(path,65536),65536)
-        if data.get('guard_version')!=4:continue
+        if data.get('guard_version')!=5:continue
         row=ancestors.get(data['pid'])
         if row is None or row['start']!=data['process_start']:continue
         need(data['runtime_scope']==m.get('runtime_scope','full-body') and data['guard_sha256']==m['native_guard_policy']['source_sha256'] and
@@ -403,3 +408,283 @@ class Case:
     def clone(self,label):
         root=self.a.alias(self.id,label,self.root);return Case(self.a,self.id,root)
     def selected(self):return self.h.selected(self.root)
+
+
+# V5 phase completion owns its receipt and caller, not merely its workload.
+def checked_snapshot(m,before,reserve):
+    limits=suite_limits(m);answer={}
+    for category,(cap,files) in limits.items():
+        row=guard.inventory(guard.ROOT/category)
+        ceiling=reserve[category]
+        need(row['bytes']<=min(cap,before[category]['bytes']+ceiling['bytes']) and
+             row['files']<=min(files,before[category]['files']+ceiling['files']),'inclusive-phase-cap:'+category)
+        answer[category]=row
+    phase=m['phase']
+    need(answer['source']['bytes']+phase['external_source_upper_bytes']<=phase['combined_source_cap_bytes'],'whole-local-native-future-source')
+    need(answer['evidence']['bytes']+phase['external_evidence_upper_bytes']<=phase['combined_evidence_cap_bytes'],'whole-local-native-return-evidence')
+    need(shutil.disk_usage(guard.ROOT).free>=20*1024**3,'phase-free-floor')
+    return answer
+
+
+def inclusive_receipt(m,path,value,before,reserve):
+    """Fixed point counts this exclusive output before writing and checks afterward.
+    No self hash or recursive receipt. The caller accepts only this function's
+    successful return AND the phase process's clean exit under its live watchdog.
+    """
+    with phase_io(m,True):
+        import os
+        path=owned(path,guard.ROOT/'evidence');need(not path.exists(),'fresh-inclusive-receipt')
+        current=checked_snapshot(m,before,reserve);predicted=copy.deepcopy(current)
+        value=dict(value);value['inclusive_final']=predicted
+        if 'final' in value:value['final']=predicted
+        size=-1
+        for attempt in range(16):
+            raw=encoded(value)+b'\n'
+            if len(raw)==size:break
+            size=len(raw);predicted['evidence']=dict(current['evidence'])
+            predicted['evidence']['bytes']+=size;predicted['evidence']['files']+=1
+            # Allocated blocks are observed afterward, not guessed from logical bytes.
+            predicted['evidence'].pop('allocated_bytes',None)
+            value['receipt_bytes']=size
+        else:raise RuntimeError('receipt-byte-fixed-point')
+        raw=encoded(value)+b'\n';need(len(raw)==size and size<=(m['phase']['guard_receipt_max_bytes'] if str(path)==m['phase']['guard_receipt_path'] else m['phase']['receipt_max_bytes']),'receipt-byte-exact-and-bounded')
+        cap=min(suite_limits(m)['evidence'][0],before['evidence']['bytes']+reserve['evidence']['bytes'])
+        files=min(suite_limits(m)['evidence'][1],before['evidence']['files']+reserve['evidence']['files'])
+        need(current['evidence']['bytes']+size<=cap and current['evidence']['files']+1<=files,'own-receipt-prospective-allocation')
+        need(current['evidence']['bytes']+size+m['phase']['external_evidence_upper_bytes']<=m['phase']['combined_evidence_cap_bytes'],'own-receipt-all-copy-cap')
+        with path.open('xb') as out:out.write(raw);out.flush();os.fsync(out.fileno())
+        actual=checked_snapshot(m,before,reserve)
+        for key in actual:
+            need(actual[key]['bytes']==predicted[key]['bytes'] and actual[key]['files']==predicted[key]['files'],'quiescent-inclusive-receipt-census:'+key)
+        need(path.stat().st_size==size,'own-receipt-final-size')
+        return value
+
+
+def cache_identity(root,hashes=True):
+    """Protected global cache identity includes removals, changes and aliases.
+    Never copy configuration or credentials. Identities, not their contents, are
+    retained in evidence. Regular-file SHA is checked before and after a phase.
+    """
+    rows=[];root=Path(root)
+    for folder,dirs,names in os.walk(root,followlinks=False):
+        for name in dirs+names:
+            p=Path(folder)/name;s=p.lstat();rel=p.relative_to(root).as_posix()
+            if p.is_symlink():rows.append([rel,'link',os.readlink(p)])
+            elif p.is_file():rows.append([rel,s.st_size,s.st_mtime_ns,s.st_dev,s.st_ino,digest(p) if hashes else None])
+    return hashlib.sha256(encoded(sorted(rows))).hexdigest()
+
+
+def phase_launch(m,manifest_sha,deadline):
+    """Concrete same-file launcher. The bootstrap's OS watchdog is already armed.
+    Source/claim/config are sealed before this function. No absent shell wrapper.
+    Parent-owned post-exit checks remain inside this phase and its absolute clock.
+    """
+    import ctypes,gzip,signal,subprocess,zlib
+    from suite_driver import descendants
+    from suite_bootstrap import strict
+    phase=m['phase'];need(phase['deadline_epoch']==deadline and time.time()<deadline,'one-absolute-phase-deadline')
+    need(phase['combined_source_cap_bytes'] in {4*1024**2,4608*1024} and
+         phase['combined_evidence_cap_bytes']==24*1024**2,'closed-combined-source-evidence-policy')
+    need(phase['mode'] in {'controls','full-body','workspace','build','cache'} and phase['seconds']>0,'closed-concrete-phase-mode')
+    scopes={'controls':'interface-controls-v5','full-body':'full-body','workspace':'workspace-v5','build':'native-build-v5','cache':'private-cache-v5'}
+    need(m['runtime_scope']==scopes[phase['mode']],'one-literal-phase-scope')
+    if phase['mode'] in {'build','workspace'}:
+        from suite_oracle import native_stage_command
+        native_stage_command(m)
+
+    from suite_bootstrap import PHASE_STARTED
+    need(deadline<=guard.CUTOFF and 0<deadline-PHASE_STARTED<=phase['seconds'],'finite-phase-duration')
+    need(digest(m['python'])==m['tools'][m['python']]['sha256'],'phase-exact-native-Python')
+    limits=suite_limits(m);reserve={k:dict(bytes=0,files=0) for k in limits}
+    for entry in phase['reserve']:
+        k,amount=entry.split('=',1);b,f=map(int,amount.split(':'));need(k in reserve and b>=0 and f>=0,'phase-reservation');reserve[k]=dict(bytes=b,files=f)
+    before={k:guard.inventory(guard.ROOT/k) for k in limits}
+    for k,(b,f) in limits.items():need(before[k]['bytes']+reserve[k]['bytes']<=b and before[k]['files']+reserve[k]['files']<=f,'phase-prospective-total:'+k)
+    checked_snapshot(m,before,reserve)
+    if phase['mode'] in {'build','workspace'}:
+        target=owned(m['workspace']['target_dir'],guard.ROOT/'target')
+        temporary=guard.ROOT/'fixtures'/('native-final31-tmp-'+m['final_pin']) if phase['native_stage']=='test' else target/'owned-tmp'
+        owned(temporary,guard.ROOT).mkdir(parents=True,exist_ok=True)
+    output=owned(m['evidence_root'],guard.ROOT/'evidence');need(not output.exists(),'fresh-admitted-phase-output-parent');output.mkdir(parents=True)
+    phase_memory=owned(phase['memory_path'],output);final=owned(phase['receipt_path'],output)
+    need(not phase_memory.exists() and not final.exists(),'fresh-phase-artifacts')
+    own=guard.process(os.getpid());need(own and own['rss']>0,'positive-phase-caller-RSS')
+    need(ctypes.CDLL(None,use_errno=True).prctl(36,1,0,0,0)==0,'phase-subreaper')
+    global_cache=Path('/home/spenser/.cargo');protected=None
+    with owned(phase['io_lock_path'],output).open('xb'):pass
+    inclusive_receipt(m,phase['owner_path'],dict(kind='live-V5-phase-owner',pid=own['pid'],start=own['start'],claim=m['claim'],final_pin=m['final_pin'],manifest_sha256=manifest_sha,deadline_epoch=deadline,cmdline_sha256=digest(Path('/proc',str(os.getpid()),'cmdline'))),before,reserve)
+    bootstrap=owned(Path(__file__).parent/'suite_bootstrap.py',guard.ROOT/'source')
+    command=[m['python'],'-I','-S','-B',str(bootstrap),'--phase-body','--manifest',m['manifest_path'],'--sha256',manifest_sha]
+    expected=[x.replace('@MANIFEST_PATH@',m['manifest_path']).replace('@MANIFEST_SHA256@',manifest_sha) for x in phase['guard_launch_template']]
+    need(command==expected,'exact-same-file-phase-child')
+    streams={};tracked={};handles={};registry_lock=threading.RLock();errors=[];samples=0;gaps=[];last=None;stop=threading.Event();root=None;worker=None;closure=[]
+    compressed=zlib.compressobj(level=6,wbits=31);memory=phase_memory.open('xb');written=0
+    def compressed_write(data):
+        nonlocal written
+        need(written+len(data)<=phase['memory_max_bytes'],'phase-memory-reservation')
+        if data:
+            with phase_io(m,False):memory.write(data);memory.flush()
+        written+=len(data)
+    def members():
+        with registry_lock:
+            snapshot=guard.processes();owned_pids={pid for pid,start in tracked.items() if pid in snapshot and snapshot[pid]['start']==start}
+            owned_pids.update(pid for pid,row in snapshot.items() if row['ppid']==os.getpid())
+            while True:
+                extra={pid for pid,row in snapshot.items() if row['ppid'] in owned_pids}-owned_pids
+                if not extra:break
+                owned_pids.update(extra)
+            result=[]
+            for pid in owned_pids:
+                row=guard.process(pid)
+                if row is None:continue
+                if pid in tracked:need(tracked[pid]==row['start'],'phase-PID-reuse')
+                else:
+                    fd=os.pidfd_open(pid)
+                    again=guard.process(pid)
+                    if again is None or again['start']!=row['start']:
+                        os.close(fd);raise RuntimeError('phase-pidfd-birth-race')
+                    tracked[pid]=row['start'];handles[pid]=fd
+                result.append(row)
+            return result
+    def kill_owned():
+        try:members()
+        except BaseException as e:errors.append('phase-kill-observation:'+repr(e))
+        for pid,fd in list(handles.items()):
+            try:signal.pidfd_send_signal(fd,signal.SIGKILL)
+            except ProcessLookupError:pass
+            except BaseException as e:errors.append('phase-owned-kill:'+repr(e))
+    def observe():
+        nonlocal samples,last
+        due=time.monotonic()
+        while not stop.is_set():
+            try:
+                now=time.time();rows=members();caller=guard.process(os.getpid());need(caller and caller['rss']>0,'live-phase-caller')
+                live=[r for r in rows if r['state']!='Z'];need(all(type(r['rss']) is int and r['rss']>0 for r in live),'phase-owned-positive-memory')
+                heavy=sum(r['rss'] for r in live);need(heavy<=2*1024**3 and all(r['rss']<=2*1024**3 for r in live),'phase-owned-memory')
+                supervisors=caller['rss']+sum(r['rss'] for r in live if (root is not None and r['pid']==root.pid) or str(bootstrap) in r['cmd'])
+                need(supervisors<=768*1024**2 and heavy+caller['rss']<3*1024**3,'phase-caller-and-controller-supervisor-plus-owned-memory')
+                if last is not None:gaps.append(now-last);need(0<=now-last<=.04,'phase-50Hz-cadence')
+                last=now;samples+=1
+                row=dict(epoch=now,caller_pid=own['pid'],caller_start=own['start'],caller_rss=caller['rss'],caller_hwm=caller['hwm'],members=rows,heavy_rss=heavy,supervisor_rss=supervisors,zombie_pids=[r['pid'] for r in rows if r['state']=='Z'])
+                compressed_write(compressed.compress(encoded(row)+b'\n'))
+            except BaseException as e:errors.append(repr(e));kill_owned();return
+            due+=.02;stop.wait(max(0,due-time.monotonic()))
+    failure=None;result=None;guard_receipt=None;readers=[];raw_outputs={};raw_counts={}
+    from suite_bootstrap import EARLY_ROWS,EARLY_STOP,EARLY_THREAD
+    if EARLY_STOP is not None:
+        EARLY_STOP.set();EARLY_THREAD.join(2);need(not EARLY_THREAD.is_alive(),'early-phase-observer-joined')
+        for row in EARLY_ROWS:
+            samples+=1
+            if last is not None:gaps.append(row['epoch']-last)
+            last=row['epoch'];compressed_write(compressed.compress(encoded(row)+b'\n'))
+    def drain(stream,name):
+        count=0
+        try:
+            with streams[name] as out:
+                while True:
+                    block=os.read(stream.fileno(),65536)
+                    if not block:break
+                    need(count+len(block)<=phase['caller_stream_max_bytes'],'phase-caller-output-bound')
+                    with phase_io(m,False):out.write(block);out.flush()
+                    count+=len(block)
+                os.fsync(out.fileno())
+            raw_counts[name]=count
+        except BaseException as e:errors.append('phase-output:'+repr(e));kill_owned()
+        finally:stream.close()
+    try:
+        worker=threading.Thread(target=observe,daemon=False);worker.start()
+        protected=cache_identity(global_cache)
+        need(protected==phase['global_cache_identity_sha256'],'parent-exact-global-cache-file-baseline')
+        inner={k:dict(bytes=0,files=0) for k in limits}
+        for entry in m['native_guard_policy']['reserve']:
+            k,amount=entry.split('=',1);b,f=map(int,amount.split(':'));inner[k]=dict(bytes=b,files=f)
+        now=checked_snapshot(m,before,reserve)
+        for k in limits:
+            extra=phase['memory_max_bytes']+phase['receipt_max_bytes']+2*phase['caller_stream_max_bytes'] if k=='evidence' else 0
+            need(now[k]['bytes']+inner[k]['bytes']+extra<=before[k]['bytes']+reserve[k]['bytes'] and now[k]['files']+inner[k]['files']+(3 if k=='evidence' else 0)<=before[k]['files']+reserve[k]['files'],'outer-plus-inner-retained-reservations:'+k)
+        for name in ['stdout','stderr']:
+            raw_outputs[name]=owned(phase[name+'_path'],output);streams[name]=raw_outputs[name].open('xb')
+        root=subprocess.Popen(command,cwd=str(guard.ROOT),stdin=subprocess.DEVNULL,start_new_session=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        for name,stream in [('stdout',root.stdout),('stderr',root.stderr)]:
+            t=threading.Thread(target=drain,args=(stream,name),daemon=False);readers.append(t);t.start()
+        while root.poll() is None:
+            if errors:kill_owned();raise RuntimeError('phase-memory-censor:'+repr(errors))
+            need(time.time()<deadline,'absolute-phase-timeout');time.sleep(.005)
+        for t in readers:t.join(3)
+        need(all(not t.is_alive() for t in readers) and len(raw_counts)==2,'phase-caller-output-EOF-and-joined')
+        need(root.returncode==0 and not errors,'phase-child-failure')
+        from suite_driver import verify_guard_policy
+        guard_receipt=owned(phase['guard_receipt_path'],output);g=strict(guard_receipt.read_bytes(),phase['guard_receipt_max_bytes'])
+        verify_guard_policy(m,dict(manifest_path=m['manifest_path'],manifest_sha256=manifest_sha),g)
+        need(g['source_pin']==m['final_pin'] and g['claim_id']==m['claim']['claim_id'] and g['ledger_sha256']==m['claim']['ledger_sha256'],'same-phase-guard-source-claim')
+        need(g['exit']==0 and not g['censors'] and not g['observation_errors'] and g['monitors_joined'],'accepted-inner-V5-guard')
+        need(len(g['closure_observations'])>=2 and all(not r['pids'] and not r['states'] for r in g['closure_observations'][-2:]),'terminal-two-numeric-empty-inner-observations')
+        from suite_bootstrap import verify_guard_memory
+        memory_proof=verify_guard_memory(g)
+        packet_path=owned(phase['packet_path'],output)
+        if phase['mode'] in {'build','workspace'}:
+            from suite_oracle import native_stage_finalize
+            result=native_stage_finalize(m,g)
+            packet_path=guard_receipt
+        else:
+            packet=strict(packet_path.read_bytes(),phase['packet_max_bytes'])
+            if phase['mode']=='cache':
+                need(packet['kind']=='V5_PRIVATE_C1_COPY_ONLY' and packet['final_pin']==m['final_pin'] and packet['claim']==m['claim'] and packet['manifest_sha256']==m['private_cache']['manifest_sha256'],'actual-C1-copy-report')
+                result=packet
+            elif phase['mode']=='controls':
+                from suite_extensions import finalize_controls
+                result=finalize_controls(m,packet,g)
+            else:
+                from suite_main import finalize
+                result=finalize(m,packet,str(guard_receipt))
+        result=dict(result,inner_memory=memory_proof)
+        need(cache_identity(global_cache)==protected,'protected-global-cache-file-change')
+    except BaseException as e:failure=repr(e);kill_owned()
+    finally:
+        # Alarm expiry is irrevocably FAILED. Disable only to permit bounded
+        # process reaping; this path can never produce a successful receipt.
+        if time.time()>=deadline:signal.setitimer(signal.ITIMER_REAL,0);failure=failure or 'phase-deadline-expired'
+        until=time.monotonic()+10
+        while time.monotonic()<until:
+            rows=members()
+            if any(r['state']!='Z' for r in rows):kill_owned()
+            if root is not None:
+                try:root.wait(timeout=.1)
+                except subprocess.TimeoutExpired:pass
+            for pid in list(tracked):
+                try:os.waitpid(pid,os.WNOHANG)
+                except ChildProcessError:pass
+            rows=members();closure.append(dict(epoch=time.time(),pids=[r['pid'] for r in rows],states=[r['state'] for r in rows]))
+            if len(closure)>=2 and not closure[-1]['pids'] and not closure[-2]['pids']:break
+            time.sleep(.02)
+        for t in readers:t.join(3)
+        need(all(not t.is_alive() for t in readers),'phase-caller-output-readers-joined')
+        stop.set()
+        if worker is not None:worker.join(5)
+        need(worker is None or not worker.is_alive(),'phase-caller-memory-observer-joined')
+        compressed_write(compressed.flush());memory.flush();os.fsync(memory.fileno());memory.close()
+        for fd in handles.values():os.close(fd)
+    need(len(closure)>=2 and all(not r['pids'] and not r['states'] for r in closure[-2:]),'phase-terminal-two-empty')
+    need(not failure and not errors and samples>=2 and time.time()<deadline,'phase-complete-within-deadline:'+str(failure))
+    from suite_bootstrap import verify_guard_memory
+    phase_memory_proof=verify_guard_memory(dict(memory_samples_path=str(phase_memory),memory_samples_sha256=digest(phase_memory),tracked_identity={str(pid):start for pid,start in tracked.items()},memory_sample_count=samples,heavy_rss_limit=2*1024**3,process_rss_limit=2*1024**3,supervisor_rss_limit=768*1024**2,native_host_rss_limit=3*1024**3))
+    value=dict(kind='V5_PHASE_FINAL',status='PASSED',scope=m['runtime_scope'],engine_qualification=phase['mode']=='full-body',unit_qualification=phase['mode']=='workspace' and phase['native_stage']=='test',
+        manifest_sha256=manifest_sha,final_pin=m['final_pin'],claim=m['claim'],phase_caller=own,phase_memory_path=str(phase_memory),phase_memory_sha256=digest(phase_memory),
+        phase_memory_samples=samples,phase_memory_proof=phase_memory_proof,phase_caller_outputs={k:dict(path=str(p),bytes=p.stat().st_size,sha256=digest(p)) for k,p in raw_outputs.items()},phase_max_interval=max(gaps),phase_memory_observer_joined=True,phase_owned_closure=closure,guard_receipt_sha256=digest(guard_receipt),packet_sha256=digest(packet_path),
+        deadline_epoch=deadline,completed_epoch=time.time(),global_cache_identity_sha256=protected,result=result)
+    result=inclusive_receipt(m,final,value,before,reserve)
+    need(time.time()<deadline,'deadline-through-own-receipt-and-inclusive-census')
+    # No output or census follows cancellation. Exit is the external completion
+    # witness; failure before this point leaves the prefix, never a qualified run.
+    signal.setitimer(signal.ITIMER_REAL,0)
+    return result
+
+@contextmanager
+def phase_io(m,exclusive):
+    import fcntl
+    p=owned(m['phase']['io_lock_path'],guard.ROOT/'evidence')
+    fd=os.open(p,os.O_RDWR|os.O_NOFOLLOW)
+    try:
+        fcntl.flock(fd,fcntl.LOCK_EX if exclusive else fcntl.LOCK_SH)
+        yield
+    finally:os.close(fd)

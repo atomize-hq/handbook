@@ -343,3 +343,142 @@ def packing_dispatch(c,name):
     if name.startswith('cancelled-drain-releases-barriers-'):return cancelled_drain(c,name[-1])
     if name.startswith('repack-old-pack-deletion-interruption-'):return old_deletion(c,name[-1])
     raise RuntimeError('closed-P52-ID-unimplemented:'+name)
+
+def private_cache_clone(m):
+    """Explicit V5 C1 entry; default false. Copies only one sealed dependency set."""
+    import os,tomllib,time,stat
+    from suite_adapter import suite_owner,suite_limits
+    from suite_bootstrap import owned,encoded
+    import native_guard as guard
+    cfg=m['private_cache'];claim=suite_owner(m);dest=owned(cfg['root'],guard.ROOT)
+    need(cfg['enabled'] is True and cfg['copy_go'] is True and cfg['reviewed'] is True,'explicit-C1-copy-GO')
+    need(dest==guard.ROOT/'cargo-private' and 'cargo-private' in claim['categories'],'separate-Linux-C1-claim')
+    need(claim['before']['cargo-private']['bytes']==0 and claim['before']['cargo-private']['files']==0,'fresh-C1-namespace')
+    need(not any(dest.iterdir()),'C1-empty-no-prefix-overwrite')
+    cap=min(suite_limits(m)['cargo-private'][0],claim['categories']['cargo-private']['bytes'])
+    file_cap=min(suite_limits(m)['cargo-private'][1],claim['categories']['cargo-private']['files'])
+    source=Path('/home/spenser/.cargo');registry='index.crates.io-1949cf8c6b5b557f'
+    lock=owned(Path(m['workspace']['source_root'])/'Cargo.lock',guard.ROOT/'source')
+    need(digest(lock)=='20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d','exact-C1-lock')
+    packages=[p for p in tomllib.loads(lock.read_text())['package'] if p.get('source','').startswith('registry+')]
+    need(len(packages)==45,'exact45-locked-registry-packages')
+    rows={}
+    def member(path):
+        need(path.is_file() and all(not p.is_symlink() for p in [path,*path.parents] if p.is_relative_to(source)),'C1-regular-source-without-parent-alias')
+        info=path.stat();need(info.st_nlink==1,'C1-no-source-alias')
+        rows[path.relative_to(source).as_posix()]=[info.st_size,digest(path)]
+    roots=0
+    for p in packages:
+        n=p['name'];stem=n+'-'+p['version'];arc=source/'registry/cache'/registry/(stem+'.crate')
+        need(digest(arc)==p['checksum'],'locked-archive-checksum');member(arc)
+        src=source/'registry/src'/registry/stem
+        if src.is_dir() and n not in {'winapi','winapi-i686-pc-windows-gnu','winapi-x86_64-pc-windows-gnu'}:
+            roots+=1
+            for folder,dirs,names in os.walk(src,followlinks=False):
+                need(not any((Path(folder)/x).is_symlink() for x in dirs),'C1-no-source-directory-alias')
+                for name in names:member(Path(folder)/name)
+        rel='1/'+n if len(n)==1 else '2/'+n if len(n)==2 else '3/'+n[0]+'/'+n if len(n)==3 else n[:2]+'/'+n[2:4]+'/'+n
+        member(source/'registry/index'/registry/'.cache'/rel)
+    member(source/'registry/index'/registry/'config.json')
+    manifest=[[k,*v] for k,v in sorted(rows.items())];total=sum(v[1] for v in manifest)
+    need(roots==32 and total==39205355 and len(manifest)==1653 and
+         hashlib.sha256(json.dumps(manifest,separators=(',',':')).encode()).hexdigest()==cfg['manifest_sha256']=='7f0443c355439d2a45ddac9b7ce646f5c4067ffaf94493d61e039e9dcfa90f78','exact-Linux-C1-closure')
+    need(total<=cap and len(manifest)<=file_cap,'C1-entire-prospective-copy')
+    remaining=total;remaining_files=len(manifest)
+    for rel,size,expected in manifest:
+        need(time.time()<claim['absolute_deadline'],'C1-copy-deadline')
+        current=guard.inventory(dest)
+        need(current['bytes']+remaining<=cap and current['files']+remaining_files<=file_cap,'C1-prewrite-all-retained-and-remaining')
+        need(__import__('shutil').disk_usage(dest).free>=20*1024**3,'C1-free-floor')
+        src=source/rel;need(all(not p.is_symlink() for p in [src,*src.parents] if p.is_relative_to(source)),'C1-source-parent-unchanged');target=owned(dest/rel,dest);before=src.stat();target.parent.mkdir(parents=True,exist_ok=True)
+        h=hashlib.sha256();count=0
+        fd=os.open(src,os.O_RDONLY|os.O_NOFOLLOW)
+        with os.fdopen(fd,'rb') as inp:
+            opened=os.fstat(inp.fileno());need((opened.st_dev,opened.st_ino,opened.st_size,opened.st_mtime_ns)==(before.st_dev,before.st_ino,size,before.st_mtime_ns),'C1-source-open-identity')
+            with target.open('xb') as out:
+                while True:
+                    need(time.time()<claim['absolute_deadline'],'C1-chunk-deadline')
+                    block=inp.read(min(65536,size-count+1))
+                    if not block:break
+                    need(count+len(block)<=size,'C1-chunk-before-write-bound')
+                    out.write(block);h.update(block);count+=len(block)
+                out.flush();os.fsync(out.fileno())
+            after=os.fstat(inp.fileno());need((after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns)==(before.st_dev,before.st_ino,size,before.st_mtime_ns),'C1-source-final-identity')
+        need(count==size and h.hexdigest()==expected and target.stat().st_size==size and digest(target)==expected,'C1-exact-copied-member')
+        remaining-=size;remaining_files-=1
+    result=dict(kind='V5_PRIVATE_C1_COPY_ONLY',engine_qualification=False,final_pin=m['final_pin'],claim=m['claim'],files=1653,bytes=total,manifest_sha256=cfg['manifest_sha256'],partials_retained=True,global_cache_modified=False)
+    raw=encoded(result)+b'\n';output=owned(m['phase']['packet_path'],guard.ROOT/'evidence')
+    need(len(raw)<=m['phase']['packet_max_bytes'],'C1-report-reservation')
+    current=guard.inventory(guard.ROOT/'evidence');e=claim['categories']['evidence'];before=claim['before']['evidence']
+    need(current['bytes']+len(raw)<=min(24*1024**2,before['bytes']+e['bytes']) and current['files']+1<=before['files']+e['files'],'C1-report-allocation')
+    with output.open('xb') as out:out.write(raw);out.flush();os.fsync(out.fileno())
+    return result
+
+def native_stage_command(m):
+    import re
+    import native_guard as guard
+    from suite_bootstrap import owned,need,digest
+    w=m['workspace'];stage=m['phase']['native_stage'];need(stage in {'build','list','test'},'closed-native-Cargo-stage')
+    need(w['reviewed'] is True and w['source_pin']==m['final_pin'],'same-final-workspace-source-release')
+    root=owned(w['source_root'],guard.ROOT/'source');need(root==guard.ROOT/'source/final-engine','frozen25-source-prefix')
+    for name,row in w['source_files'].items():
+        size,sha=(row if type(row) is list else [row['bytes'],row['sha256']]);p=owned(root/name,root)
+        need(p.stat().st_size==size and digest(p)==sha,'same-frozen-Rust-Cargo:'+name)
+    need(len(w['source_files'])==25,'exact25-native-source-files')
+    target=owned(w['target_dir'],guard.ROOT/'target')
+    need(target==guard.ROOT/'target'/('native-v5-'+m['final_pin']),'fresh-bounded-private-target-prefix')
+    names=[r[0] for r in w['unit_catalog']];need(len(names)==len(set(names))==31,'exact-source31-native-unit-catalog')
+    cache=m['private_cache'];need(cache['enabled'] is True and cache['reviewed'] is True and cache['copy_go'] is False,'separately-admitted-private-Cargo-home')
+    receipt=owned(cache['qualified_copy']['path'],guard.ROOT/'evidence')
+    need(digest(receipt)==cache['qualified_copy']['sha256'],'source-bound-C1-phase-receipt')
+    proof=__import__('suite_bootstrap',fromlist=['strict']).strict(receipt.read_bytes(),4*1024**2)
+    need(proof['kind']=='V5_PHASE_FINAL' and proof['status']=='PASSED' and proof['scope']=='private-cache-v5' and proof['final_pin']==m['final_pin'] and proof['result']['manifest_sha256']==cache['manifest_sha256'],'actual-qualified-C1-copy')
+    for tool in [m['cargo'],m['rustc'],m['rustdoc']]:
+        need('/.cargo/bin/' not in tool and digest(tool)==m['tools'][tool]['sha256'],'exact-sysroot-tool')
+    fixture=owned(w['fixture_prefix'],guard.ROOT/'fixtures')
+    need(fixture==guard.ROOT/'fixtures'/('native-final31-'+m['final_pin']),'one-final31-fixture-lineage')
+    if stage=='test':need(not fixture.exists(),'heavy-unit-lineage-only-once-no-rerun')
+    common=['--manifest-path',str(root/'Cargo.toml'),'--locked','--offline','--workspace','--release','-j2','--target-dir',str(target)]
+    cargo=[m['cargo'],'build' if stage=='build' else 'test',*common]
+    cargo+=['--message-format','json-render-diagnostics'] if stage=='build' else ['--','--list'] if stage=='list' else ['--','--test-threads=1']
+    return ['/usr/bin/env','CARGO_HOME='+cache['root'],'CARGO_NET_OFFLINE=true','CARGO_INCREMENTAL=0','RUSTC='+m['rustc'],'RUSTDOC='+m['rustdoc'],'TMPDIR='+str(guard.ROOT/'fixtures'/('native-final31-tmp-'+m['final_pin']) if stage=='test' else target/'owned-tmp'),'EXP_PACK_TEST_ROOT='+str(fixture),*cargo]
+
+
+def native_stage_finalize(m,g):
+    import re
+    from suite_bootstrap import owned,strict,need,digest,encoded
+    import native_guard as guard
+    stage=m['phase']['native_stage'];out=owned(m['phase']['guard_receipt_path'],guard.ROOT/'evidence')
+    stdout=out.with_suffix('.stdout');stderr=out.with_suffix('.stderr')
+    need(digest(stdout)==g['stdout_sha256'] and digest(stderr)==g['stderr_sha256'],'complete-Cargo-stdout-stderr')
+    proof=g['root_exec'];need(proof and proof['sha256']==m['tools'][m['cargo']]['sha256'] and proof['rss']>0 and proof['inode']>0,'actual-Cargo-executable-identity-RSS')
+    need(g['command']==native_stage_command_for_result(m),'same-exact-native-stage-command')
+    raw=stdout.read_bytes();text=raw.decode('utf-8');names=[r[0] for r in m['workspace']['unit_catalog']]
+    result=dict(stage=stage,final_pin=m['final_pin'],stdout_path=str(stdout),stdout_sha256=digest(stdout),stderr_path=str(stderr),stderr_sha256=digest(stderr),source_files=m['workspace']['source_files'],tests=[])
+    if stage=='build':
+        messages=[strict(line,4*1024**2) for line in raw.splitlines() if line];need(messages and messages[-1].get('reason')=='build-finished' and messages[-1]['success'],'full-Cargo-build-finished')
+        artifacts=[r for r in messages if r.get('reason')=='compiler-artifact' and r.get('target',{}).get('name')=='file-native-incremental' and r.get('executable')]
+        need(len(artifacts)==1,'one-actual-final-engine-artifact');p=owned(artifacts[0]['executable'],guard.ROOT/'target')
+        result['binary']=dict(path=str(p),bytes=p.stat().st_size,sha256=digest(p),source_pin=m['final_pin'])
+    else:
+        listed=re.findall(r'^(.+): test$',text,re.M) if stage=='list' else re.findall(r'^test (.+) \.\.\. ok$',text,re.M)
+        need(len(listed)==31 and set(listed)==set(names) and 'FAILED' not in text and 'FAILED' not in stderr.read_text(),'all31-exact-native-unit-identities')
+        result['tests']=listed
+        if stage=='test':
+            fixture=owned(m['workspace']['fixture_prefix'],guard.ROOT/'fixtures');rows={}
+            for p in fixture.rglob('*'):
+                need(not p.is_symlink(),'unit-fixture-no-alias')
+                if p.is_file():rows[p.relative_to(fixture).as_posix()]=dict(bytes=p.stat().st_size,sha256=digest(p))
+            need(rows,'complete-real-unit-fixture-census');result['fixture_prefix']=str(fixture);result['fixtures']=rows
+    return result
+
+
+def native_stage_command_for_result(m):
+    import copy
+    import native_guard as guard
+    w=copy.deepcopy(m);stage=w['phase']['native_stage']
+    if stage!='test':return native_stage_command(w)
+    w['phase']['native_stage']='list';command=native_stage_command(w)
+    command[-1]='--test-threads=1'
+    target=Path(m['workspace']['target_dir']);fixture=Path(m['workspace']['fixture_prefix'])
+    return [str(x).replace('TMPDIR='+str(target/'owned-tmp'),'TMPDIR='+str(guard.ROOT/'fixtures'/('native-final31-tmp-'+m['final_pin']))) for x in command]

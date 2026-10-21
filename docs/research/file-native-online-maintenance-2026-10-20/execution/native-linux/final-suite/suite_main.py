@@ -18,6 +18,7 @@ from suite_extensions import EXTENSIONS,BOUNDARIES,DONOR_CASES
 def expand(m):
     """Expand compact parent-reviewed rules into the identical158 exact IDs."""
     m=copy.deepcopy(m);cases=required_cases('Linux')
+    if m.get('donor_cases')=='source-closed21':m['donor_cases']=copy.deepcopy(DONOR_CASES)
     ws=m['workspace']
     ws['source_files']={k:(dict(bytes=v[0],sha256=v[1]) if type(v) is list else v) for k,v in ws['source_files'].items()}
     ws['source_sha256s']=sorted({v['sha256'] for v in ws['source_files'].values()})
@@ -106,7 +107,7 @@ def validate(m):
     need(ws['reviewed'] is True and ws['source_pin']==m['final_pin'],'final-workspace-release')
     need(len(ws['expected_test_functions'])>=20 and len(set(ws['expected_test_functions']))==len(ws['expected_test_functions']),'all-actual-workspace-tests')
     need(len(ws['source_sha256s'])>=1,'actual-unit-source-hashes')
-    need(ws['no_private_cache'] is True and ws['fixture_max_bytes']>=80*1024**2,'unit80MiB-plus-new-test-fixtures')
+    need(ws['no_private_cache'] is (not m.get('private_cache',{}).get('enabled',False)) and ws['fixture_max_bytes']>=80*1024**2,'unit80MiB-plus-new-test-fixtures')
     need(set(m['boundary_test_bindings'])==BOUNDARIES,'closed-boundary-assertion-catalog')
     for name in BOUNDARIES:
         b=m['boundary_test_bindings'][name]
@@ -188,12 +189,12 @@ def run(m,manifest_sha):
 
 def finalize(m,packet,guard_path):
     """Return a ledger; caller reserves and retains its one new output file."""
-    gpath=owned(guard_path,guard.ROOT/'evidence');g=strict(gpath.read_bytes(),262144)
+    gpath=owned(guard_path,guard.ROOT/'evidence');g=strict(gpath.read_bytes(),m['phase']['guard_receipt_max_bytes'])
     need(g['source_pin']==m['final_pin'] and g['claim_id']==m['claim']['claim_id'] and
          g['ledger_sha256']==m['claim']['ledger_sha256'] and g['owner_nonce']==packet['guard_nonce'],'same-source-claim-guard')
     need(g['exit']==0 and not g['censors'] and not g['observation_errors'],'uncensored-outer-guard')
-    need(g['monitors_joined'] and g['process_closure_verified'] and len(g['closure_observations'])==2 and
-         all(not row['pids'] for row in g['closure_observations']),'actual-two-empty-native-closure')
+    need(g['monitors_joined'] and g['process_closure_verified'] and len(g['closure_observations'])>=2 and
+         all(not row['pids'] for row in g['closure_observations'][-2:]),'actual-two-empty-native-closure')
     need(g['rss_sampling_cadence_qualified'] and g['memory_intervals_over_40ms']==0,'accepted-native-cadence')
     need(digest(g['memory_samples_path'])==g['memory_samples_sha256'],'raw-memory-artifact-hash')
     need(packet['failure'] is None and packet['manifest_sha256']==digest(packet['manifest_path']),'completed-source-bound-packet')

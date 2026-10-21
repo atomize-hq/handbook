@@ -1,5 +1,36 @@
 """Closed Linux final-suite source loader. No workload is authorized by this file."""
-import argparse, hashlib, importlib.abc, importlib.machinery, json, os, sys
+import os,sys,time,signal,math
+PHASE_STARTED=time.time();PHASE_DEADLINE=None
+if __name__=='__main__' and '--phase' in sys.argv:
+    # Absolute parent clock includes all subsequent stdlib/owned imports,
+    # admission, census, child work, gzip closure and post-exit finalization.
+    PHASE_DEADLINE=float(sys.argv[sys.argv.index('--phase-deadline')+1])
+    if not math.isfinite(PHASE_DEADLINE) or PHASE_DEADLINE<=PHASE_STARTED:raise SystemExit('expired-phase-before-import')
+    def phase_alarm(signum,frame):raise TimeoutError('absolute-V5-phase-deadline')
+    signal.signal(signal.SIGALRM,phase_alarm)
+    signal.setitimer(signal.ITIMER_REAL,PHASE_DEADLINE-PHASE_STARTED)
+EARLY_ROWS=[];EARLY_STOP=None;EARLY_THREAD=None
+if __name__=='__main__':
+    sys.modules['suite_bootstrap']=sys.modules[__name__]
+if PHASE_DEADLINE is not None:
+    import threading
+    EARLY_STOP=threading.Event()
+    def early_observe():
+        due=time.monotonic();last=None
+        while not EARLY_STOP.is_set():
+            now=time.time();values={}
+            with open('/proc/self/status') as f:
+                for line in f:
+                    if line.startswith(('VmRSS:','VmHWM:')):
+                        k,v=line.split(':',1);values[k]=int(v.split()[0])*1024
+            with open('/proc/self/stat') as f:raw=f.read()
+            start=int(raw[raw.rfind(')')+2:].split()[19]);rss=values.get('VmRSS');hwm=values.get('VmHWM')
+            if not(rss and hwm and rss<=hwm<=768*1024**2) or (last is not None and not 0<=now-last<=.04) or len(EARLY_ROWS)>=16000:os._exit(126)
+            EARLY_ROWS.append(dict(epoch=now,caller_pid=os.getpid(),caller_start=start,caller_rss=rss,caller_hwm=hwm,supervisor_rss=rss,heavy_rss=0,members=[],zombie_pids=[]))
+            last=now;due+=.02;EARLY_STOP.wait(max(0,due-time.monotonic()))
+    EARLY_THREAD=threading.Thread(target=early_observe,daemon=True);EARLY_THREAD.start()
+import argparse, hashlib, importlib.abc, importlib.machinery, json
+
 from pathlib import Path
 
 ROOT=Path('/home/spenser/file-native-online-linux-20261020')
@@ -77,8 +108,8 @@ def load(path,expected):
     files=verify_sources(m)
     # Runtime remains NO_GO until the parent seals pin, body, all hooks and oracle.
     need(m['go'] is True and m['final_pin'] and len(m['final_pin'])==40,'parent-runtime-GO-required')
-    scope=m.get('runtime_scope','full-body');need(scope in {'full-body','interface-controls-v4'},'closed-runtime-scope')
-    if scope=='interface-controls-v4':need(m['engine_case_qualification'] is False,'controls-never-engine-qualification')
+    scope=m.get('runtime_scope','full-body');need(scope in {'full-body','interface-controls-v5','private-cache-v5','workspace-v5','native-build-v5'},'closed-runtime-scope')
+    if scope in {'interface-controls-v5','private-cache-v5','native-build-v5','workspace-v5'}:need(m['engine_case_qualification'] is False,'nonworkload-never-engine-qualification')
     else:
         need(m['candidate']['source_pin']==m['final_pin'],'same-final-candidate-pin')
         need(digest(owned(m['candidate']['path'],ROOT/'target'))==m['candidate']['sha256'],'candidate-binary-binding')
@@ -93,152 +124,86 @@ def load(path,expected):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--manifest',required=True);p.add_argument('--sha256',required=True)
+    p.add_argument('--prepare-controls',action='store_true');p.add_argument('--authority');p.add_argument('--authority-sha256')
+    p.add_argument('--phase',action='store_true');p.add_argument('--phase-body',action='store_true');p.add_argument('--phase-deadline',type=float)
     ns=p.parse_args();need(sys.platform=='linux' and __debug__ and sys.flags.isolated and sys.flags.no_site,'isolated-native-python')
+    if ns.prepare_controls:
+        path=owned(ns.manifest,ROOT/'source');need(digest(path)==ns.sha256,'seed-manifest-SHA')
+        seed=strict(path.read_bytes());verify_sources(json.loads(json.dumps(seed)))
+        authority=owned(ns.authority,ROOT/'source');need(digest(authority)==ns.authority_sha256,'parent-authority-SHA')
+        result=encoded(control_config(seed,strict(authority.read_bytes())))
+        need(len(result)<=16384,'sealed-control-config-byte-cap');sys.stdout.buffer.write(result);return
     m=load(ns.manifest,ns.sha256)
+    need(not(ns.phase and ns.phase_body),'one-phase-entry-mode')
     sys.meta_path.insert(0,ClosedImports(m['source_files']))
     for item in reversed(m['import_directories']):sys.path.insert(0,item)
     os.environ['FILE_NATIVE_ORACLE_RESEARCH']=str(owned(m['oracle']['research_root'],ROOT/'source'))
     os.environ['PYTHONDONTWRITEBYTECODE']='1'
-    if m.get('runtime_scope')=='interface-controls-v4':
+    if ns.phase:
+        from suite_adapter import phase_launch
+        return phase_launch(m,ns.sha256,PHASE_DEADLINE)
+    if ns.phase_body:
+        from suite_driver import suite_guard_main
+        argv=[x.replace('@MANIFEST_PATH@',m['manifest_path']).replace('@MANIFEST_SHA256@',m['manifest_sha256']) for x in m['phase']['guard_argv_template']]
+        returncode=suite_guard_main(ns.manifest,ns.sha256,argv)
+        raise SystemExit(returncode)
+    if m.get('runtime_scope') in {'native-build-v5','workspace-v5'}:
+        raise RuntimeError('native-stage-runs-only-as-exact-reviewed-guard-command')
+    if m.get('runtime_scope')=='private-cache-v5':
+        from suite_packing import private_cache_clone
+        return private_cache_clone(m)
+    if m.get('runtime_scope')=='interface-controls-v5':
         from suite_extensions import interface_controls_v4
         interface_controls_v4(m,ns.sha256)
     else:
         from suite_main import run
         run(m,ns.sha256)
 
-def verify_raw_packet(m,packet):
-    """Read every retained native call, chunk and direct closure; no subprocess."""
-    import base64
-    starts={};calls={};chunks={};wires={};commands=[];closures={};registry=[]
-    for name,row in packet['raw_files'].items():
-        p=owned(name,ROOT/'evidence')
-        need(p.stat().st_size==row['bytes'] and digest(p)==row['sha256'],'full-raw-artifact')
-        with p.open('rb') as stream:
-            for line in stream:
-                event=strict(line,16*1024**2);kind=event.get('kind')
-                if kind=='native-positive-start':
-                    token=event['control_token'];need(token not in starts,'duplicate-native-start');starts[token]=event
-                elif kind=='native-call':
-                    token=event['call_token'];need(token not in calls,'duplicate-native-call');calls[token]=event
-                elif kind=='native-raw-chunk':
-                    key=(event['call'],event['stream']);need(event['stream'] in {'stdout','stderr'},'raw-stream-name')
-                    data=base64.b64decode(event['bytes_b64'],validate=True)
-                    prior=chunks.setdefault(key,bytearray());need(event['offset']==len(prior),'contiguous-full-native-stream')
-                    prior.extend(data)
-                elif kind=='native-command':commands.append(event)
-                elif kind=='suite-native-input-wire':
-                    token=event['call'];need(token not in wires,'one-native-input-wire');wires[token]=event
-                elif kind=='case-closure':
-                    case_id=event['case_id'];need(case_id not in closures,'duplicate-case-closure');closures[case_id]=event
-                    c=event['closure']
-                    while len(registry)<len(c['registries']):registry.append({})
-                    need(len(registry)==len(c['registries']),'stable-driver-registry-order')
-                    for old,delta in zip(registry,c['registries']):
-                        need(not(set(old)&set(delta)),'immutable-closed-registry-row');old.update(delta)
-                    need(hashlib.sha256(encoded(registry)).hexdigest()==c['global_registry_sha256'] and
-                         sum(len(r) for r in registry)==c['global_registry_entries'],'lossless-exact-global-closure-reconstruction')
-    need(starts and set(starts)==set(calls),'every-native-start-has-one-final-row')
-    need(set(wires)==set(calls),'exact-wire-artifact-for-every-native-call')
-    need(registry==packet['final_native_registry'] and all(r['closed'] and r['resources_closed'] and r['callback_joined']
-         for rows in registry for r in rows.values()),'retained-full-final-registry')
-    need(all(key[0] in calls for key in chunks),'no-orphan-raw-chunks')
-    for token,row in calls.items():
-        start=starts[token]
-        need(row['guard_nonce']==packet['guard_nonce'] and row['source_pin']==m['final_pin'] and
-             row['suite_pin']==m['final_pin'] and row['claim_id']==m['claim']['claim_id'],'native-call-claim-source')
-        need(start['pid']==row['pid'] and start['process_start_ticks']==row['process_start_ticks'] and
-             start['input']==row['input'] and start['env']==row['env'],'same-retained-native-call-identity')
-        need(start['before_stdin_delivery'] is True and row['observed_ns']<=row['stdin_ns']<=row['done_ns'],'positive-native-start-before-input')
-        need(row['initial_blocked_rss']>0 and row['actual_exec_rss']>0 and
-             row['observed_peak_rss']>0 and row['observed_peak_rss']<=row['rss_limit'],'real-positive-role-RSS')
-        need(row['engine_root_reaped'] and row['engine_monitor_joined'] and row['python_callback_joined'] and
-             not row['violations'],'uncensored-native-call-closure')
-        if row['binary_role']=='candidate':
-            need(row['executable_sha256']==m['candidate']['sha256'] and row['binary_source_pin']==m['final_pin'],'same-final-ELF')
-        else:
-            binding=m['compatibility'][row['historical_case_id']]
-            need(row['binary_role']=='historical' and row['executable_sha256']==binding['producer_binary_sha256'] and
-                 row['binary_source_pin']==binding['producer_source_pin']!=m['final_pin'],'distinct-granted-historical-ELF')
-        wire=base64.b64decode(wires[token]['bytes_b64'],validate=True)
-        need(wires[token]['before_stdin_delivery'] and len(wire)==wires[token]['bytes'] and
-             hashlib.sha256(wire).hexdigest()==wires[token]['sha256'] and strict(wire,4*1024**2)==row['input'],'native-raw-wire-json-binding')
-        need(row['input_fully_delivered'] and row['stdin_closed'] and not row['input_broken_pipe'] and
-             len(wire)==row['input_bytes_expected']==row['input_bytes_sent'],'complete-engine-input')
-        need(hashlib.sha256(wire).hexdigest()==row['input_wire_sha256']==row['input_written_prefix_sha256'],'exact-native-input-wire')
-        for stream in ['stdout','stderr']:
-            raw=bytes(chunks.get((token,stream),b''))
-            need(hashlib.sha256(raw).hexdigest()==row[stream+'_sha256'] and
-                 raw.decode(errors='replace')==row[stream],'complete-native-raw-stream')
-        if row['intentional_interrupt']:
-            need(row['intentional_interrupt'] in {'cancel','death'} and row['exit'] in {-9,-15},'exact-intentional-native-termination')
-        elif row['exit']==86:need(row['env'] and row['env'].get('EXP_EXIT'),'source-declared-exit86')
-        else:need(row['exit'] in {0,2},'unexpected-native-exit')
-    for row in commands:
-        need(row['guard_nonce']==packet['guard_nonce'] and row['qualification_pin']==m['final_pin'],'same-native-command-stage')
-        need(row['root_reaped'] and row['watcher_joined'] and not row['errors'],'native-command-closure')
-        proof=row['actual_exec']
-        need(proof and proof['before_stdin_delivery'] and proof['rss']>0 and proof['inode']>0 and
-             proof['sha256']==row['binary_sha256']==m['tools'][row['argv'][0]]['sha256'],'actual-command-ELF-inode-RSS-proof')
-        need(row['initial_blocked_rss']>0 and row['peak_rss']>0 and row['peak_rss']<=row['rss_limit'],'native-command-role-memory')
-        raw=base64.b64decode(row['stdin_bytes_b64'],validate=True)
-        need(row['input_fully_delivered'] and row['stdin_closed'] and
-             len(raw)==row['stdin_bytes']==row['input_bytes_sent'] and hashlib.sha256(raw).hexdigest()==row['stdin_sha256'],'full-command-input')
-        for stream in ['stdout','stderr']:
-            raw=base64.b64decode(row[stream+'_bytes_b64'],validate=True)
-            need(hashlib.sha256(raw).hexdigest()==row[stream+'_sha256'] and raw.decode(errors='replace')==row[stream],'full-command-raw-stream')
-    for row in packet['observations']:
-        case_id=row['case_id'];need(case_id in closures,'actual-direct-case-closure')
-        end=closures[case_id];c=end['closure']
-        need(end['failure'] is None and c['processes_closed'] and c['handles_closed'] and
-             c['python_callbacks_joined'] and not c['errors'],'case-not-positively-closed')
-    return dict(engine_calls=len(calls),generic_native_commands=len(commands),direct_case_closures=len(closures),
-                all_wire_hashes_and_raw_streams_verified=True)
 
+
+
+
+
+
+
+
+def verify_raw_packet(m,packet):
+    from suite_extensions import verify_raw_packet as check
+    return check(m,packet)
 
 def verify_guard_memory(g):
-    import zlib
-    path=owned(g['memory_samples_path'],ROOT/'evidence')
-    need(digest(path)==g['memory_samples_sha256'],'guard-memory-file-hash')
-    decoder=zlib.decompressobj(16+zlib.MAX_WBITS)
-    pending=b'';count=0;prior=None;maximum=0.;positive=0;zombies=0
-    def sample(raw):
-        nonlocal count,prior,maximum,positive,zombies
-        row=strict(raw,1024**2);count+=1
-        need(count<=g['memory_sample_count'],'unexpected-extra-memory-row')
-        epoch=row['epoch']
-        if prior is not None:
-            gap=epoch-prior;need(0<=gap<=.04,'raw-memory-cadence-not-qualified');maximum=max(maximum,gap)
-        prior=epoch
-        live=[];z=set(row['zombie_pids']);zombies+=len(z)
-        for member in row['members']:
-            need(g['tracked_identity'].get(str(member['pid']))==member['start'],'retained-guard-PID-start')
-            if member['pid'] in z:
-                need(member['rss'] is None or member['rss']>=0,'explicit-zombie-RSS')
-            else:
-                need(type(member['rss']) is int and member['rss']>0 and
-                     type(member['hwm']) is int and member['hwm']>=member['rss'],'positive-live-native-RSS')
-                live.append(member['rss']);positive+=1
-        need(sum(live)==row['heavy_rss'] and row['heavy_rss']<=g['heavy_rss_limit'] and
-             all(r<=g['process_rss_limit'] for r in live),'actual-heavy-and-process-memory')
-        need(0<row['supervisor_rss']<=g['supervisor_rss_limit'] and
-             row['heavy_rss']+row['supervisor_rss']<g['native_host_rss_limit'],'actual-supervisor-host-memory')
-    with path.open('rb') as stream:
-        for block in iter(lambda:stream.read(65536),b''):
-            need(not decoder.eof,'gzip-trailing-member-or-bytes')
-            incoming=block
-            while incoming:
-                piece=decoder.decompress(incoming,1024**2);incoming=decoder.unconsumed_tail
-                pending+=piece
-                while b'\n' in pending:
-                    line,pending=pending.split(b'\n',1);need(bool(line),'blank-memory-row');sample(line)
-                need(len(pending)<=1024**2,'memory-row-byte-bound')
-                need(not decoder.unused_data,'gzip-trailing-member-or-bytes')
-    need(decoder.eof and not decoder.unused_data and not decoder.unconsumed_tail and not pending,'complete-single-gzip-member')
-    need(count==g['memory_sample_count'] and count>=2 and positive>0,'complete-positive-native-memory-series')
-    return dict(samples=count,raw_max_interval_seconds=maximum,positive_live_member_observations=positive,
-                explicit_zombie_observations=zombies,single_gzip_member=True)
+    from suite_extensions import verify_guard_memory as check
+    return check(g)
 
 
+def control_config(seed,authority):
+    """Pure concrete finite8 config builder. Parent must seal/review its output.
+    Authority supplies exact paths, final pin, claim, phase and source policy;
+    go defaults false and never follows merely from successful construction.
+    """
+    import copy
+    m=copy.deepcopy(seed)
+    for key in ['final_pin','claim','phase','native_guard_policy','control_root','evidence_root','tools']:
+        need(key in authority,'missing-explicit-control-authority:'+key);m[key]=copy.deepcopy(authority[key])
+    m['go']=authority.get('go',False);m['runtime_scope']='interface-controls-v5';m['engine_case_qualification']=False;m['private_cache']={'enabled':False}
+    m['interface_peer']=dict(path=str(ROOT/'target/native-peer-v3-targeted'),sha256='fa2b5ae4ae2fe27bf3d5c320b2178bd3947ab01e1f028a2599fc8d38a224f770',source_pin='efd07cb5dee46a335be8c03a2f2c0462d7f923ca')
+    m['control_forecast']=dict(kind='V5-finite8-peer-only',source_pin=m['final_pin'],bytes=1048576,files=128,directories=128)
+    profile=dict(growth=dict(bytes=65536,files=16,directories=8),stdout_bytes=8192,stderr_bytes=8192,event_bytes=327680,input_bytes=262144,required_fields={},env_keys=['EXP_PEER_EARLY_JSON','EXP_PEER_EARLY_READY','EXP_PEER_PARTIAL_JSON','EXP_READY','EXP_RELEASE'])
+    m['control_case']=dict(ceiling=dict(bytes=1048576,files=128,directories=128),calls={'resolve/':dict(profile,max_calls=7),'packing/build':dict(profile,max_calls=1)},controls=dict(max_controls=32))
+    phase=m['phase'];phase['mode']='controls'
+    output=owned(m['evidence_root'],ROOT/'evidence');boot=str(Path(m['source_roots']['suite'])/'suite_bootstrap.py')
+    defaults={'owner_path':'phase-owner.json','io_lock_path':'phase-io.lock','memory_path':'phase-memory.jsonl.gz','receipt_path':'phase-final.json','packet_path':'controls-v5-report.json','guard_receipt_path':'controls-v5-guard.json','stdout_path':'phase-child.stdout','stderr_path':'phase-child.stderr'}
+    for key,name in defaults.items():phase[key]=str(output/name)
+    phase['memory_max_bytes']=131072;phase['receipt_max_bytes']=262144;phase['guard_receipt_max_bytes']=262144;phase['packet_max_bytes']=1048576;phase['caller_stream_max_bytes']=65536
+    phase['guard_launch_template']=[m['python'],'-I','-S','-B',boot,'--phase-body','--manifest','@MANIFEST_PATH@','--sha256','@MANIFEST_SHA256@']
+    p=m['native_guard_policy'];p['version']=5
+    p['reserve']=['evidence=1048576:8' if x.startswith('evidence=') else x for x in p['reserve']]
+    p['command_template']=[m['python'],'-I','-S','-B',boot,'--manifest','@MANIFEST_PATH@','--sha256','@MANIFEST_SHA256@']
+    args=['--receipt',phase['guard_receipt_path'],'--seconds',str(p['seconds']),'--pin',m['final_pin'],'--claim-id',m['claim']['claim_id'],'--ledger-sha256',m['claim']['ledger_sha256']]
+    for reserve in p['reserve']:args+=['--reserve',reserve]
+    phase['guard_argv_template']=args+['--monitor-cargo','--cwd',str(ROOT),'--',*p['command_template']]
+    keep={'version','platform','source_files','source_roots','import_directories','growth_path','oracle','python','native_guard_policy','private_cache','go','final_pin','runtime_scope','engine_case_qualification','claim','phase','control_root','evidence_root','interface_peer','control_forecast','control_case','tools'}
+    return {k:m[k] for k in keep if k in m}
 
 
 if __name__=='__main__':main()

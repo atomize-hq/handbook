@@ -1,0 +1,39 @@
+{
+  "kind": "private-native-macos-v36-source-budget-051",
+  "owner": "01a15af8-2912-7262-b618-6b3682739acd",
+  "native_root": "/private/tmp/file-native-online-macos-20261020",
+  "source_root": "/private/tmp/file-native-online-macos-20261020",
+  "joint_F01_bytes": 4718592,
+  "max_bytes": 163840,
+  "max_files": 8,
+  "paths": {
+    "execution/native-macos/native_role_v36.py": 36864,
+    "execution/native-macos/native_facade_v36.py": 28672,
+    "execution/native-macos/native_lifecycle_v36.py": 16384,
+    "execution/native-macos/native_cases_v36.py": 40960,
+    "execution/native-macos/native_case_map_v36.py": 12288,
+    "execution/native-macos/native_cache_activate_v36.py": 12288,
+    "execution/native-macos/native_suite_v36.py": 12288,
+    "evidence/control/native-source-review-v36.json": 4096
+  },
+  "semantic_source_subset": {
+    "bytes": 1048576,
+    "files": 52
+  },
+  "claim051_sha256": "2bc5a4744375d07f154604709b894d6dc5d423587d330311a278646eb07b88e7",
+  "source_only": true,
+  "runtime_go": false,
+  "pure_memory_parse_compile_go": true,
+  "engine_commit_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "C1_Mac_bytes_unchanged": 67108864,
+  "rules": [
+    "All new8 paths plus existing native/local source and obligated copies share F01 4718592; secondary160KiB8 and semantic1MiB52 are subsets, neverextra.",
+    "Beforeeverywrite samebudgetSHA +perfile/group/whole/sourcephysicalcopy obligations; no links/reparse/pycache/extrafiles. Preservev35 unchanged.",
+    "Oldnativev20guard4MiB remainsstricter untilseparatelyreviewedretarget; do not silentlypatch.",
+    "Fullsourcefreeze/freshreview/actualfinitecontrols/explicitphaseadmission beforecachecopy/build/fixture/runtime. No globalcache modification."
+  ],
+  "issued": "2026-10-21T06:30:12.281716+00:00",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z",
+  "local_write_check": "Own closed source allocation+authenticatedimmutablebudget; valid foreign reservations held centrally. No unrelated foreign census prerequisite on each local sourcewrite."
+}

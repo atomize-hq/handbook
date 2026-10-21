@@ -1,12 +1,12 @@
 {
-  "status": "SOURCE_FROZEN_ENGINE_SOURCE_ACCEPTED_PLATFORM_INTEGRATION_BLOCKED_FULL_QUALIFICATION_INCOMPLETE",
+  "status": "BOUNDED_HARNESS_REPAIRS_ACTIVE_ENGINE_062_FIXED_FULL_QUALIFICATION_INCOMPLETE",
   "human_byte_ceiling": 47244640256,
   "file_cap": 5000000,
   "inside_closeout_bytes": 1073741824,
   "inside_closeout_files": 100000,
-  "whole_conservative_prospective_with_earmarks": 46924310901,
-  "central_unassigned_bytes": 320329355,
-  "remaining_files": 207284,
+  "whole_conservative_prospective_with_earmarks": 46992468341,
+  "central_unassigned_bytes": 252171915,
+  "remaining_files": 203188,
   "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
   "t0": "2026-10-20T19:10:14Z",
   "functional_cutoff": "2026-10-21T11:10:14Z",
@@ -126,10 +126,11 @@
   },
   "source_protocol_candidate": "Reviewed a3 STORE3/Work2/catalog4/FNPIDX02 normal-pair conversion; no split-location fallback. Full qualification pending.",
   "next_required": [
-    "Verify exact frozen source25 copy receipts on native hosts; no old source/cache/target mutation",
-    "Assess only existing frozen controllers and complete private-cache/all-sink/clock/closure data for any separate build or31-unit attempt; no runtime launches while their gates remain unqualified",
-    "Preserve all final reviews and original failures; keep every missing mandatory cell INCOMPLETE",
-    "Continue admitted read-only qualification and evidence closeout to fixed functional/closeout cutoffs; no source repairs, clock reset, reduced workload or unearned expiry"
+    "Finish scope-preserving privateharness/controller repairs inside sealedsourcebudgets; keepengine062andprotectedolddatafixed",
+    "Freshfullsource reviews on completehashfrozen artifacts; actualboundednativecontrols forrepairedcontrollers beforecache/build/workload",
+    "Reconcileallphysicalsource/evidence/cache/build/fixture/supervisor sinksandfuturevalidholds inside44GiB/5M/closeoutreserve; no unearnedexpirycredit",
+    "Run mandatorywholematrix onlyunderreviewed finitephaseadmissions; missing/unrun/censoredcells remainINCOMPLETE",
+    "Preserveoldfailedsource/nativeevidence and closeout atfixed11:10functional13:10withoutclockreset"
   ],
   "native_Linux_guard": {
     "sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
@@ -137,8 +138,8 @@
   },
   "shared_harness_pin": "01ff272a98fe2cddf01f8ebfc399192f234051af",
   "CP1_open_source_review_findings": [],
-  "as_of": "2026-10-21T04:41:06.321464+00:00",
-  "landing_head": "b76958c1",
+  "as_of": "2026-10-21T06:34:18.041728+00:00",
+  "landing_head": "a5b53218aed9d77a87a835064a8b51eeccbb2ab0",
   "latest_harness_source_pin": "5bb4d800",
   "CP1_provisional_pin": "bd6dd9367acddaddcd7873c8043548502a170c3b",
   "CP1_replacement_schema": "STORE3/Work2 immutable selected roots; physical_parent exact initial STORE CAS-parent token, transition_parent metadata comparison-only token, bounded birth_claims; stable pin{id,ordinal,catalog}; no predecessor traversal; explicit owned pack-directory tasks; 128KiB private Work cap prospective quota/backpressure",
@@ -414,12 +415,12 @@
   },
   "historical_nested_forecasts": "Older nested implementation plans, source hashes, compile evidence and allocations are preserved history. frozen_source_state and current_runtime_admissions below control the current candidate. No source remediation after cutoff.",
   "META_membership": {
-    "cap_bytes": 10485760,
-    "manifest_sha256": "c7ed56acf1e46aec557642fae700a456e1e8a2a013b48eb54a8c84e36137d713",
-    "promoted_harness_files": 24,
-    "promoted_harness_bytes": 245974,
-    "path": "execution/admission/meta-membership-v6.json",
-    "all_physical_copies_counted_once_per_pathname": true
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\meta-membership-v7.json",
+    "bytes": 4822,
+    "sha256": "742c435ebc495a62de638e7ec3a1fdc85988010a1f80b406a3a7eaabe15cb011",
+    "cap_bytes": 10747904,
+    "original_Context_source": "SeparateC3notMETA",
+    "pending_owner": "Resourceworker,rollingheldforecastsnotrepeatedgeneric256000"
   },
   "Linux_peer_compile": {
     "source_pin": "efd07cb5dee46a335be8c03a2f2c0462d7f923ca",
@@ -465,7 +466,7 @@
     "all_scope_preserved": true
   },
   "source_cutoff": "2026-10-21T04:10:14Z",
-  "source_edits_closed": true,
+  "source_edits_closed": false,
   "frozen_source_state": {
     "source_cutoff": "2026-10-21T04:10:14Z",
     "source_ledger": "execution/source-cutoff-20261021T041014Z.json",
@@ -568,5 +569,56 @@
     "copy_budget": "execution/admission/native-final-engine-source-copy-budget-v1.json",
     "source_copy_is_not_runtime_qualification": true,
     "no_actual_fixture_retirement_or_expiry_credit": true
+  },
+  "historical_a5_state": {
+    "commit": "a5b53218aed9d77a87a835064a8b51eeccbb2ab0",
+    "meta_state_sha256": "e36bdfdba9d42bc1d49b12f3399068671412b6fed9e91be91d97e32821fd896c",
+    "status": "SOURCE_FROZEN_ENGINE_SOURCE_ACCEPTED_PLATFORM_INTEGRATION_BLOCKED_FULL_QUALIFICATION_INCOMPLETE",
+    "source_edits_closed": true,
+    "note": "Preserved in committed Git. Blanket interpretation of04:10reviewwatchdog corrected prospectively; earlierfailures andtemporal sourceledger remainhistorical."
+  },
+  "source_repair_authority": {
+    "basis": "Originalhumanfull-experimentauthorizationincludesroutinefixes/reviews/nativecoordination/commits/pushes; gates-and-watchdogs intermediatecheckpoints require scopepreservingreview/reallocation.04:10MISSED isnotblankethardcodestop.",
+    "engine_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+    "claims": "046-051 prospective privateharness/controller source allocations; exactimmutableparentbudgets beforewrite.052requestednotyetGO.",
+    "hard_functional": "2026-10-21T11:10:14Z",
+    "hard_closeout": "2026-10-21T13:10:14Z",
+    "clock_reset": false,
+    "runtime_go": false,
+    "scope_unchanged": true,
+    "prior_frozen_state_below": "Historical04:10sourceledger andR2/V4/v35rejections remain unchanged, notcurrentacceptance."
+  },
+  "prospective_repair_state": {
+    "guard_R3": {
+      "source_review": "REMEDIATE_FULL_READ",
+      "native_controls": 0,
+      "negative_source_archive": {
+        "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\transfers\\bounded-guard-R3-negative-source.json.gz",
+        "bytes": 39715,
+        "sha256": "1de77bfa3d8b7e768a6cf4370f9e37134ac277debd2e4ea1597e038365962995"
+      },
+      "blockers": [
+        "Unassignedsuspendedrootfallbacktermination/reap",
+        "Whole-callwatchdogbeforeload_configthroughfinalpublicationcensusstdout",
+        "40msterminalrootJobRSScoverage",
+        "Publicparentrecords/grantmustrequireouterqualificationnotphysicalclosedalone"
+      ],
+      "R4": "RAMrepairing;052sourcebudgetpending;prospective12inner16outer4supervisorsmustbenativelyenforced"
+    },
+    "Linux_V5": "Consistent13-filefreeze/completeclosure/operatorCLI pending; no newcontrols/cache/build",
+    "Mac_v36": "051160KiB8SOURCEGOreleased;oldv35preserved;158providers/phasecacheoperatorcompletefreeze/reviewpending",
+    "Windows_R3": "051512KiB27neutralrebalanceSOURCEGOreleased;actualprovidersandOraclechildcontractpending",
+    "qualification_helpers_R3": "WIPnotqualified;052neutral29491210rebalancepending;actualall-sinkmodel/finalizer/grants/nativecontractsneedfreshreview",
+    "Context": "05148KiB1SOURCEGOreleased;old40916/32768breach8148preservedexactnegative;constructor/11nativehooks/sourcefullreview/38applicabilitypending",
+    "Archive": "051netzero80KiB4R3controlsSOURCEGOreleased;coree99unchanged;no realretireGO",
+    "independent_oracle_CLI": "Matrixsoleownerassigned;newsourceallocation052pending;v6finalpinbinding062andactualfullproof/companionsrequired",
+    "state_note_envelope": {
+      "source_enforced_selected_state_whole_payload_bytes": 32768,
+      "mandatory_max_count": 2416,
+      "status": "CONDITIONAL_BOUNDED_ATTEMPT_NOT_HEALTHY_FIT_PROOF",
+      "oversize": "RefusalCENSOR_INCOMPLETEpreserveallpriorraw/F05root/failureescrow; no truncate/drop/retrylarger/scopechange",
+      "unconditional_raw_bound_bytes": 4750148336,
+      "runtime_go": false
+    }
   }
 }

@@ -168,3 +168,11 @@ print(json.dumps({'written':CFG['output'],'sha256':digest(CFG['output'])}))
         # exact source-bound receipt, including all accepted request intentions.
         need(proof['schema_pin']==final_pin and proof['request_intents'],'complete-independent-intent-proof')
         return row
+
+def native_stage_command(m):
+    from suite_packing import native_stage_command as provider
+    return provider(m)
+
+def native_stage_finalize(m,g):
+    from suite_packing import native_stage_finalize as verify
+    return verify(m,g)
