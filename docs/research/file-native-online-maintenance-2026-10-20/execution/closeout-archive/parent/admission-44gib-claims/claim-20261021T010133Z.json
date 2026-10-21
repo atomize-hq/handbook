@@ -1,0 +1,106 @@
+{
+  "claim_id": "44GiB-CENTRAL-026-C3-MATRIX-OTHER-SOURCE32KiB",
+  "utc": "2026-10-21T01:01:33.596293+00:00",
+  "status": "SOURCE_TOPUP_APPLIED__CP4_REVIEW_AND_PARENT_REGISTRATION_REQUIRED",
+  "authority": "METAconcrete026ONLY;32KiBinternalC3 forfiveNEWMatrixsourcefiles; nootherallocation/runtimeGO.",
+  "prior025": {
+    "file": "claim-20261021T003042Z.json",
+    "sha256": "29aeb8e27edbc42f603ccac8024a1833abf04a7aa49db6ca9c8649940997397a"
+  },
+  "family_addendum": {
+    "file": "claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "files_cap": 128,
+    "bytes_cap": 524288
+  },
+  "owner_chat": "01a15ae2-798d-7a91-b063-7e45b4768671",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook",
+  "five_closed_files_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness",
+  "per_file_caps": {
+    "quota_v2_oracle.py": 14336,
+    "quota_v2_controls.py": 14336,
+    "verify_operational_v2.py": 10240,
+    "physical_decoder_v6.py": 4096,
+    "quota-v2-plan.md": 2048
+  },
+  "five_total_bytes": 45056,
+  "five_count": 5,
+  "five_actual_before": 0,
+  "C3": {
+    "total_unchanged": 16777216,
+    "unsubclaimed_before": 3407872,
+    "Matrix_other_topup": 32768,
+    "unsubclaimed_after": 3375104,
+    "new_globalbytes": 0
+  },
+  "joint_caps": {
+    "F01_base_unchanged": 1048576,
+    "C3_topup": 32768,
+    "same_root_combined_bytes": 1081344,
+    "root_files_unchanged": 200,
+    "focus_unchanged": {
+      "bytes": 229376,
+      "files": 16
+    },
+    "QPC_unchanged": {
+      "bytes": 65536,
+      "files": 8
+    },
+    "other_before": {
+      "bytes": 753664,
+      "files": 176
+    },
+    "other_after": {
+      "bytes": 786432,
+      "files": 176
+    },
+    "accounting": "RootactualONCEincluding82B.gitpointer; F01base+C3topupformONEcombinedcap. Focus/QPC/othernested, notadditiveagain. Five45056consumeexistingotherheadroom+32768topup, notnew45056globalgrant. Fivefilepathsdrawexisting176/200, no globalfile/reserveincrease."
+  },
+  "fresh_census": {
+    "parts": {
+      "focus": {
+        "bytes": 225383,
+        "files": 11
+      },
+      "QPC": {
+        "bytes": 59673,
+        "files": 4
+      },
+      "other": {
+        "bytes": 737251,
+        "files": 82
+      }
+    },
+    "whole_bytes": 1022307,
+    "whole_files": 97,
+    "other_plus_five": 782307,
+    "other_slack": 4125,
+    "other_files_plus_five": 87,
+    "whole_plus_five": 1067363,
+    "combined_slack": 13981
+  },
+  "old_budget": {
+    "path": "C:\\file-native-online-matrix-20261020\\receipts\\budget-final-source-v4.json",
+    "sha256": "998cf09ec140a8d452bf7bb8ac46c500d93c2d41015cbbcd158b4c7651d3b9ea",
+    "immutable": true,
+    "admin2MiB_nonadditiveF13_unchanged": true
+  },
+  "implementation_gate": [
+    "WAIT exactCP4STAGEfreeze3172/9ec7review; bindfullreviewedsourcepin/manifest beforeimplementation.",
+    "ParentNEWimmutablebudgetbind026/root/base+topup/partitions/closedfivecaps thenexplicitSOURCEONLYwriteGO. No permissionfromcapalone.",
+    "Validatedv5/R1/bytecore unchanged; noqualificationhelper9thpath. OldDriver/guardandotherownerfiles frozen.",
+    "No runtime/oracle/control/engine/build/copy/Git/nativeGO. Onlyboundedsourcewritingaftergate; sourcefreeze04:10unchanged."
+  ],
+  "global_unchanged": {
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "cap_bytes": 47244640256,
+    "reserved_files": 4792652,
+    "unassigned_files": 207348,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "META8MiB": 8388608,
+    "C2Win128MiB_held": 134217728
+  },
+  "actions": "Readonlycap/census/priorhashchecks andone026triplet; nootherfiles/source/livebudget/Git/runtimechanges."
+}

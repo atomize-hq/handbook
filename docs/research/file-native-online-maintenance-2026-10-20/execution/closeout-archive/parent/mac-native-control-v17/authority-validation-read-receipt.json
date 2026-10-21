@@ -1,0 +1,21 @@
+{
+  "kind": "authority-validation-and-read-completion",
+  "utc": "2026-10-20T20:37:46.916924+00:00",
+  "source_commit": "94734e76bfe3c58ee93de77ec25e3d7df459d7c4",
+  "archive": "/private/tmp/file-native-online-macos-20261020/authority-94734e76.tar.gz",
+  "compressed_bytes": 74975,
+  "compressed_sha256": "a2dc385f028e9bf89a808e9aa25d315350093c0964b6a5872a60ab77f9c6b964",
+  "tar_bytes": 225280,
+  "regular_members": 13,
+  "complete_gzip_eof": true,
+  "tar_end_verified": true,
+  "all_members_size_sha_and_extracted_bytes_verified": true,
+  "all_12_controlling_documents_read_in_full": true,
+  "read_completion_record_already_in_original_v6_bundle": "evidence/control/review-summary.json: full_authority_read=true",
+  "v6_bundle_unchanged": true,
+  "F04_claim002_received": "b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570",
+  "F04_authorized_target_bytes": 268435456,
+  "frozen_v6_guard_still_has_prior_128MiB_limit": "Will update only in a new reviewed guard revision; no build has occurred",
+  "C1_cache_copy": "CLAIM_HELD_NO_COPY",
+  "engine_pin_release": false
+}

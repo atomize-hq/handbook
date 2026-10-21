@@ -1,0 +1,58 @@
+{
+  "kind": "private-Windows-bounded-guard-R4.1-source-budget-058",
+  "owner": "01a15ae1-839d-7b02-843b-558ddc9e78cc",
+  "source_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard",
+  "max_bytes": 166912,
+  "max_files": 5,
+  "paths": {
+    "job_guard_bounded.py": 77824,
+    "unlocked_capture.py": 65536,
+    "controls.py": 15360,
+    "README.md": 4096,
+    "source-receipt.json": 4096
+  },
+  "claim050_sha256": "2f10ddd07a7cd5cd190593ceb3cc59a745f0a3614fc991bfaac712214333a2fa",
+  "source_only": true,
+  "runtime_go": false,
+  "build_go": false,
+  "cache_copy_go": false,
+  "pure_memory_parse_compile_go": true,
+  "engine_commit_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z",
+  "issued": "2026-10-21T07:59:13.595664+00:00",
+  "rules": [
+    "Beforeeverywritecheckactualallocatedroot,perfile/groupcapsandallphysicalcopieschargedtoYOURownsourceallocation;foreignvalidreservationsremainheldcentrally.",
+    "No unregisteredcopies/links/reparse/pycache. Olda5/R2sourcespreserved; sourcewatchdog04:10MISSEDnotretroqualified.",
+    "Newprospectiveprivatecontrollerrepaironly; sourcehashfreeze/fullindependentreviewandfinitephaseGO beforeactivation. NoRust/core/publicformat change."
+  ],
+  "claim052_sha256": "404d8959500bff1409ce8298279ca330be8f5d35b50914dacefd99872d43bccd",
+  "negative_source_archives": [
+    [
+      "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\transfers\\bounded-guard-R3-negative-source.json.gz",
+      39715,
+      "1de77bfa3d8b7e768a6cf4370f9e37134ac277debd2e4ea1597e038365962995"
+    ],
+    [
+      "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\transfers\\guard-R3-before052-negative-source.json.gz",
+      39987,
+      "a66716c091c1361a9b3bf5d5cbdaa0928c36e61177bab8b0771277ce29df0f1c"
+    ]
+  ],
+  "required_repairs": [
+    "FullR3reviewall4P1 beforequalification",
+    "Sourceenforcednative12inner/16outer/4registeredliveSupervisors;2048tablecapacitynotliveforecast",
+    "v2-r3postexitgranttwoauthority_ref/profile_catalogue_ref;boundsviaactualimmutableinnerbudgetJSONthroughauthority",
+    "InnerROOT_PENDING acquisitionunknown permanentlyfencesphysicalclosureandlateradmissionunlesspositivelyresolved",
+    "FixednativeSSHphaseWindowsONLYtransportseparateLinuxguard/operator; no arbitraryargv/callback andnoHISTORYgrant"
+  ],
+  "local_write_check": "Ownclosedsourceallocation+authenticatedbudget; validforeignreservations centrallyheld, noforeigncensus prerequisiteon everylocalwrite.",
+  "claim058_sha256": "c2e2521d80bf63301947dc91bfc73ace1fcf373c8b5b457ab45fcd78f4b21534",
+  "source_scope": [
+    "Fixed source-owned native-ssh-phase role: actual reviewed SSHimage/alias/fixed remote phaseCLI for Linuxnative8/build/native31; existing exactouterNativeJob/RSS/IO/census/timer. No generic callback/executor/argv, engine/Matrixbootstrap/HISTORYgrant.",
+    "R4review terminalnativeJobdenialafterlastpoll accounting repair, actualsource final checks.",
+    "Initial source startup watchdog ceiling900 to3600 only; actualphaseconfig immediatelytightens against SAME fixeddeadline/functional cutoff. No timerrestart, t0reset or functionalextension. HYSTprofile2400 must use truthful full forecast and separate actualGo.",
+    "Contextsource-read ceiling65536 to98304 for actualfrozen92445-byte source; bind same hashed buffer under exact reviewed sourcebudget. C31fixed crash producer is NOTimplemented/qualified by this SSH scope; separate later source delta/review/actual phases required."
+  ],
+  "preservation_commit": "46fab6bbe9f377c0878baa9fa36c90df7f662f1a"
+}

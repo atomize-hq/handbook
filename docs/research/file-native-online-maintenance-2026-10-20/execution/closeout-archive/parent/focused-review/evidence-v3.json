@@ -1,0 +1,63 @@
+{
+  "bounded_source_disposition": "REMEDIATE",
+  "full_qualification": "INCOMPLETE",
+  "all_real_case_status": "PENDING",
+  "execution": "HOLD",
+  "files": 11,
+  "source_bytes": 217213,
+  "entry_completion_hashes_match": true,
+  "receipt_sha256": "478f4696ca4543dee1ac1f4badeca8130021354ffdf108d8ce71a6f307fd9a17",
+  "tenfile_manifest_sha256_independently_recomputed": "3760948e2440b5b2d37eeaef21d7538174bef7611316f3c64f94005b1405cff8",
+  "core_sha256": "2802eff72d57a5ef5d27407a201a3754ce0bc343a37cd9ec939c03afefeb1702",
+  "schedules_sha256": "ee7d2aef5b7ecd492602c49f9e78646465bc2cd04a1e597e1d46e86cd67ff756",
+  "overlap_controls_sha256": "1704bed9b5b02b8469a94cbfcc4608d01ebd41cbe5469fc540ff4de26c166534",
+  "v2_archive_independently_verified": {
+    "bytes": 51034,
+    "sha256": "9ce3ded9aa01724c25074cf3b83505826f8d140c63311e383b99b409ac671ebe",
+    "extraction": false,
+    "preserved_ae78_receipt_byte_identical": true
+  },
+  "required_findings": [
+    {
+      "id": "F5",
+      "priority": 2,
+      "file": "focused_protocol.py",
+      "line": 667,
+      "cause": "Post-join selected catalog/physical binding/Work is not compared with the installed candidate whose parent and completed cutoff were inspected before release",
+      "fix": "Bind selected catalog/id/ordinal/plan and Work to captured target/candidate, or explicitly assert final-source-bound permitted plan normalization",
+      "required_negatives": ["wrong selected id", "wrong selected catalog", "wrong selected plan", "wrong selected Work/cutoff"]
+    }
+  ],
+  "original_findings_F1_F4": "REMAIN_ADDRESSED",
+  "memory_checks": {
+    "python": "3.11.9",
+    "compiled_in_memory_python_files": 6,
+    "original": {"passed": 36, "peak_tracemalloc_bytes": 890647},
+    "remediation": {"passed": 33, "exception_scenarios": 53, "peak_tracemalloc_bytes": 1086783},
+    "overlap": {"passed": 36, "peak_tracemalloc_bytes": 1563013},
+    "additional_wrong_selected_control": {
+      "setup": "Existing Adapter/TraceHarness and Driver subclass changes selected physical id after packing barrier returns; captured target is unchanged",
+      "error": null,
+      "accepted_including_genesis": 17,
+      "coupled_rounds_joined": 15,
+      "final_status": "schedule-complete-unqualified",
+      "all_threads_joined": true,
+      "meaning": "Assertion gap only; no claim of a real engine or native full oracle accepting corrupted state"
+    },
+    "native_RSS_qualification": false,
+    "engine_calls": 0,
+    "native_processes": 0,
+    "fixture_writes": 0,
+    "bytecode_writes": false
+  },
+  "terminal_v2": "Honest Unsupported source placeholder; exact future interface not required for overlap design review; real four-publisher qualification remains pending",
+  "runtime_resource_forecast": "NO_GO; parent-owned a3 sufficient topology references are conditional and require final-source rebinding",
+  "review_source_Git_build_engine_native_oracle_actions": 0,
+  "review_outputs": ["review-v3.md", "evidence-v3.json"],
+  "new_output_cap_bytes": 24576,
+  "new_output_cap_files": 2,
+  "clock_reset": false,
+  "functional_cutoff_utc": "2026-10-21T11:10:14Z",
+  "closeout_cutoff_utc": "2026-10-21T13:10:14Z",
+  "notifications": "Authorized meta chat 01a15ab8-d85f-71b1-8d37-c3c5689790be only"
+}

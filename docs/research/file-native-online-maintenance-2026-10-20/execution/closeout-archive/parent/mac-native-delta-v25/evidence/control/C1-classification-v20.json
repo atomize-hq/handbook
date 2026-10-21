@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "activated_claim": "CLAIM007:8232ff614dd32922175b8fc558c57293760dfc6460b888dc4402640588f9be35:seal:e29fce55d34c685b2579e3cc2c277ed731cb72606985ccf425ca2742b006812a",
+  "C1_effective": {
+    "bytes": 67108864,
+    "files": 5000,
+    "claim": "CLAIM007:8232ff614dd32922175b8fc558c57293760dfc6460b888dc4402640588f9be35:seal:e29fce55d34c685b2579e3cc2c277ed731cb72606985ccf425ca2742b006812a"
+  },
+  "synthetic_snapshot": {
+    "categories": {
+      "F01": {
+        "logical_bytes": 2,
+        "allocated_bytes": 4096,
+        "files": 1,
+        "directories": 1,
+        "symlinks": 0
+      },
+      "F04": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "files": 0,
+        "directories": 0,
+        "symlinks": 0
+      },
+      "F08": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "files": 0,
+        "directories": 0,
+        "symlinks": 0
+      },
+      "F12": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "files": 0,
+        "directories": 0,
+        "symlinks": 0
+      },
+      "C1": {
+        "logical_bytes": 1,
+        "allocated_bytes": 4096,
+        "files": 1,
+        "directories": 1,
+        "symlinks": 0
+      }
+    },
+    "free_bytes": 161782738944
+  },
+  "refusals": [
+    "C1-operation-prewrite-cap:bytes",
+    "C1-operation-prewrite-cap:bytes",
+    "prospective-byte-cap:C1",
+    "prospective-file-cap:C1"
+  ],
+  "synthetic_written_bytes": 3,
+  "real_cache_created": false,
+  "no_cache_copy_build_engine": true
+}

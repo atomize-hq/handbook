@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-031-C3-WINDOWS-BOUNDED-GUARD64KiB",
+  "utc": "2026-10-21T01:54:08.012858+00:00",
+  "status": "INTERNAL_SOURCE_RESERVATION_ONLY__READONLY_PLAN_THEN_PARENT_SOURCE_GO__NO_RUN",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T015408Z.json",
+      "bytes": 4047,
+      "sha256": "d0dea4565c6287aaf6459f070e4956a5e8ee2b31f532c04c97c2d3507c5ca19c"
+    },
+    {
+      "file": "claim-20261021T015408Z.md",
+      "bytes": 911,
+      "sha256": "8941193697a37d14c26164820c09d7d0ecc6cb373847dfc1587cd115851e5dc4"
+    }
+  ]
+}

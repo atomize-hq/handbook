@@ -1,0 +1,357 @@
+{
+  "source": "7a6ee9db03f5cd2e388129a9019c0d5f274a1844",
+  "base": "b876df9e01957be29b5c9cbd676d5a169aaa6c67",
+  "source_binding_entries_verified": 24,
+  "source_binding_mismatches": [],
+  "events": [
+    {
+      "name": "cp2-remediate",
+      "events": 862,
+      "exits": {
+        "0": 857,
+        "2": 4,
+        "86": 1
+      },
+      "binary_sha256s": {
+        "6f77de3001f488d6dd57317b04f33f216856f11fbfd65d8236e8b45d28ebc4b5": 862
+      },
+      "errors": {
+        "retired:snapshot": 2,
+        "refused:automatic-compaction-benefit": 2
+      },
+      "violations": [],
+      "build_force_counts": {
+        "True": 9,
+        "False": 2
+      },
+      "automatic_events": [
+        {
+          "row": 830,
+          "root": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F2-auto\\disposable\\store",
+          "exit": 2,
+          "error": "refused:automatic-compaction-benefit",
+          "status": null,
+          "forced_correctness": null,
+          "visited": 1,
+          "used_bytes": null
+        },
+        {
+          "row": 862,
+          "root": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F2-auto\\disposable\\store",
+          "exit": 2,
+          "error": "refused:automatic-compaction-benefit",
+          "status": null,
+          "forced_correctness": null,
+          "visited": 31,
+          "used_bytes": null
+        }
+      ]
+    },
+    {
+      "name": "cp2-finish",
+      "events": 122,
+      "exits": {
+        "0": 121,
+        "2": 1
+      },
+      "binary_sha256s": {
+        "6f77de3001f488d6dd57317b04f33f216856f11fbfd65d8236e8b45d28ebc4b5": 122
+      },
+      "errors": {
+        "refused:automatic-compaction-benefit": 1
+      },
+      "violations": [],
+      "build_force_counts": {
+        "False": 1
+      },
+      "automatic_events": [
+        {
+          "row": 122,
+          "root": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F2-auto\\disposable\\store",
+          "exit": 2,
+          "error": "refused:automatic-compaction-benefit",
+          "status": null,
+          "forced_correctness": null,
+          "visited": 151,
+          "used_bytes": null
+        }
+      ]
+    },
+    {
+      "name": "cp2-finish2",
+      "events": 511,
+      "exits": {
+        "0": 511
+      },
+      "binary_sha256s": {
+        "6f77de3001f488d6dd57317b04f33f216856f11fbfd65d8236e8b45d28ebc4b5": 511
+      },
+      "errors": {},
+      "violations": [],
+      "build_force_counts": {
+        "False": 1,
+        "True": 4
+      },
+      "automatic_events": [
+        {
+          "row": 402,
+          "root": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F2-auto\\disposable\\store",
+          "exit": 0,
+          "error": null,
+          "status": "registered",
+          "forced_correctness": false,
+          "visited": 551,
+          "used_bytes": 1389742
+        }
+      ]
+    }
+  ],
+  "root_action_totals": {
+    "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F1-retired\\disposable\\store": {
+      "init": 1,
+      "lifecycle": 263,
+      "resolve": 264,
+      "matched_exact_accepted_resolves": 264,
+      "publish": 262,
+      "packing": 15,
+      "point": 2,
+      "audit": 1
+    },
+    "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F1-oversize\\disposable\\store": {
+      "init": 1,
+      "lifecycle": 3,
+      "packing": 4,
+      "publish": 1
+    },
+    "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F1-reservation\\disposable\\store": {
+      "init": 1,
+      "lifecycle": 1,
+      "packing": 5,
+      "publish": 2
+    },
+    "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F2-auto\\disposable\\store": {
+      "init": 1,
+      "lifecycle": 1,
+      "resolve": 5,
+      "matched_exact_accepted_resolves": 5,
+      "packing": 49,
+      "publish": 550,
+      "audit": 1
+    },
+    "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\stable-base\\disposable\\store": {
+      "init": 1,
+      "lifecycle": 1,
+      "packing": 12,
+      "publish": 48
+    }
+  },
+  "exact_outcome_mismatches": [],
+  "guards": [
+    {
+      "exit": 0,
+      "errors": [],
+      "censor": null,
+      "stage_seconds": 26.656691074371338,
+      "total_seconds": 29.3933687210083,
+      "job_aggregate_sampled_peak_rss": 439410688,
+      "memory_sample_timing": {
+        "samples": 1188,
+        "max_interval_seconds": 0.06299999996554106,
+        "intervals_over_40ms": 15
+      },
+      "closure_checks": [
+        {
+          "epoch": 1792534796.2344062,
+          "members": []
+        },
+        {
+          "epoch": 1792534796.254916,
+          "members": []
+        }
+      ],
+      "process_closure_verified": true,
+      "qualification": "one owned Job; sampled RSS; commit hard caps; shared token waits excluded from engine latency",
+      "name": "cp2-build3"
+    },
+    {
+      "exit": 1,
+      "errors": [],
+      "censor": null,
+      "stage_seconds": 28.797893047332764,
+      "total_seconds": 31.616863012313843,
+      "job_aggregate_sampled_peak_rss": 36446208,
+      "memory_sample_timing": {
+        "samples": 1259,
+        "max_interval_seconds": 0.06299999996554106,
+        "intervals_over_40ms": 3
+      },
+      "closure_checks": [
+        {
+          "epoch": 1792535212.9349034,
+          "members": []
+        },
+        {
+          "epoch": 1792535212.9550176,
+          "members": []
+        }
+      ],
+      "process_closure_verified": true,
+      "qualification": "one owned Job; sampled RSS; commit hard caps; shared token waits excluded from engine latency",
+      "name": "cp2-remediate"
+    },
+    {
+      "exit": 1,
+      "errors": [],
+      "censor": null,
+      "stage_seconds": 12.914966583251953,
+      "total_seconds": 15.954814195632935,
+      "job_aggregate_sampled_peak_rss": 26329088,
+      "memory_sample_timing": {
+        "samples": 478,
+        "max_interval_seconds": 0.046999999904073775,
+        "intervals_over_40ms": 1
+      },
+      "closure_checks": [
+        {
+          "epoch": 1792535262.5029616,
+          "members": []
+        },
+        {
+          "epoch": 1792535262.5234675,
+          "members": []
+        }
+      ],
+      "process_closure_verified": true,
+      "qualification": "one owned Job; sampled RSS; commit hard caps; shared token waits excluded from engine latency",
+      "name": "cp2-finish"
+    },
+    {
+      "exit": 0,
+      "errors": [],
+      "censor": null,
+      "stage_seconds": 35.62775778770447,
+      "total_seconds": 39.49038791656494,
+      "job_aggregate_sampled_peak_rss": 27029504,
+      "memory_sample_timing": {
+        "samples": 1609,
+        "max_interval_seconds": 0.06299999996554106,
+        "intervals_over_40ms": 13
+      },
+      "closure_checks": [
+        {
+          "epoch": 1792535382.4359977,
+          "members": []
+        },
+        {
+          "epoch": 1792535382.4567225,
+          "members": []
+        }
+      ],
+      "process_closure_verified": true,
+      "qualification": "one owned Job; sampled RSS; commit hard caps; shared token waits excluded from engine latency",
+      "name": "cp2-finish2"
+    }
+  ],
+  "references": [
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-build3.json",
+      "bytes": 26627,
+      "sha256": "022557f27d6867c975cde32373c76b1fba242eb63a565a4a0e0a29f0ed66038b"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-build3.stdout",
+      "bytes": 839,
+      "sha256": "f14d3995bacc929695b0a7d058d397ab5fb86498161818cdde7c0fd18e2b1a4e"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-build3.stderr",
+      "bytes": 5076,
+      "sha256": "0a18ec109e41e4d129fd3e1a72eda1bd6aa29c9fc238b1a1a80a119f23c581c2"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-remediate.json",
+      "bytes": 38632,
+      "sha256": "07a4afcee0b0a7c52c2f31a4206e53a74aa4b8f276c4abcc9844b0b50d20e803"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-remediate.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-remediate.stderr",
+      "bytes": 780,
+      "sha256": "8ee2ee138abd1fa1cf78c185d6873ee415a7dc346798a7051525e47a70bb58f9"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-remediate.py",
+      "bytes": 7174,
+      "sha256": "28fdd927fc782f7f420eb2141641abcac20ad640f96ff60bf3aee9869e8fcd52"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-remediate-events.jsonl.gz",
+      "bytes": 257950,
+      "sha256": "d383821d95c0242e4e31f389bc69be9826ada3a7ace3901cc2f9e8f7b307a555"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-remediate-results.json",
+      "bytes": 810,
+      "sha256": "196be234ceff172015d64aca0afaaafacdeb5f221f9c9701e5bf01618a691dd1"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish.json",
+      "bytes": 16259,
+      "sha256": "d20abf327ea17d9256d44ed39225ff5b214d9a20bb2e717127124ca32e84aa0c"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish.stderr",
+      "bytes": 4114,
+      "sha256": "aeefcd48e76ff6941089f0367302d549cfd6146b6c4b187f8ee1f91fd99e40d8"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish.py",
+      "bytes": 3509,
+      "sha256": "05b01ab42bc58d9e035db308714c53f756e6059d67c8e275e05652abf9ea06b7"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish-events.jsonl.gz",
+      "bytes": 57647,
+      "sha256": "4037d207fa73ab75a06921fc5860ce07f25c629ae1854a716209c076b1244791"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish2.json",
+      "bytes": 40195,
+      "sha256": "f02f8d26729e76c0bd6aa754a45121bb2bc694821c1aad04f95dc1a9018bf6b6"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish2.stdout",
+      "bytes": 32,
+      "sha256": "63d0a9a9d4b09c579a33dffd164e1f7d5b095e703fd4ab0218a30b78c311e7f7"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish2.py",
+      "bytes": 3627,
+      "sha256": "db92ec1d8cc992d6aef01351931ba2680be576468c26ba72ea25d42cdc869a82"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish2-events.jsonl.gz",
+      "bytes": 251649,
+      "sha256": "862f5919ad142f8348e1288c8fc9c7c1792a596d288917377b84687e15449d47"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish2-results.json",
+      "bytes": 667,
+      "sha256": "5f7368e5717910cfce041ca247efe1ec9ed4baf7a0cc8e3246a228e3ba9f5978"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "claim_id": "44GiB-CENTRAL-003-C3-META-REVIEW-CP2-SOURCE",
+  "utc": "2026-10-20T20:44:44.078913+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T204444Z.json",
+      "bytes": 9381,
+      "sha256": "d9bdae045a8775f7bbccd1b54fb533fdc6758a329fce76fb3c5c7a6f1db352ef"
+    },
+    {
+      "file": "claim-20261020T204444Z.md",
+      "bytes": 1658,
+      "sha256": "50a0105dce4c8811ae24d278b762d6a4b67dfce83f4894afcafcad4c6fb812f9"
+    }
+  ],
+  "previous_claim_sha256": "b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570",
+  "whole_prospective_bytes": 47071111541,
+  "central_contingency_bytes": 173528715,
+  "sealed": true
+}

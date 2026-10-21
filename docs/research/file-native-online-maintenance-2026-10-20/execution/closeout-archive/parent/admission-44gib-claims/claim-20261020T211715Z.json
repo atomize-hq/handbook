@@ -1,0 +1,328 @@
+{
+  "kind": "44GiB-full-scope-prospective-rebudget-audit",
+  "claim_id": "44GiB-CENTRAL-004-FULL-FINAL-QUALIFICATION-FORECAST-CORRECTION",
+  "utc": "2026-10-20T21:17:15.920849+00:00",
+  "status": "NO_GO_FOR_FINAL_QUALIFICATION_OR_NEW_LARGE_GROWTH__PROPOSED_REBUDGET_NOT_APPLIED",
+  "authority": "Meta requests completeforecastcorrection, nohuman capincrease authorized. Existing limitedsource/protocol remediation maycontinue within its existingclaims. Allforecastreleases below require allocator acceptance and updatedguardcaps before use.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T204444Z.json",
+    "sha256": "d9bdae045a8775f7bbccd1b54fb533fdc6758a329fce76fb3c5c7a6f1db352ef",
+    "preserved_unchanged": true
+  },
+  "file_control_receipt": {
+    "message_authority": "Meta previouslyauthorized+64claim/controlfile reservation fromexisting207460 centralfileheadroom, toberecordedinNEXTclaim004",
+    "previous_reserved_total_files": 4792540,
+    "claim_control_files_newly_reserved": 64,
+    "new_live_reserved_total_files": 4792604,
+    "remaining_central_files_after_64": 207396,
+    "admission_family_envelope_before": 16,
+    "new_family_envelope": 80,
+    "bytes_unchanged": true,
+    "no_addition_to_global5mcap": true
+  },
+  "donor_geometry": {
+    "native_forecast_path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-fixture-forecast.json",
+    "sha256": "f2c3bdbb310154e79407c27e7e0c5a0be917ab4c591d522424893d958459f2f0",
+    "authenticated_required_donor_bytes_each_host": 261739670,
+    "donor_files_each_host": 15596,
+    "large_cache_unit_bytes": 80976318,
+    "large_cache_unit_files": 8,
+    "native448_forecast_bytes_each": 446289155,
+    "native448_cap_bytes_each": 469762048,
+    "native448_cap_files_each": 50000,
+    "donor_exclusions": "Originalfailed/censored/bootstrap/donorarchivessurvive inoldownership. Not repeated inonefreshfinalrun, noactualdeletioncredit.",
+    "new_protocol128MiB_is": "Unmeasuredprospectiveceiling, not provenminimum. Mayrefineonlywithcompletefocusedharnessgeometry."
+  },
+  "document_control_correction": {
+    "old_F07_bytes": 67108864,
+    "source_payload_N64_bytes": 778240,
+    "source_payload_N1000_bytes": 12697600,
+    "fixture_formula": "size(i)=4096 fori%10<=6,16384for7/8,65536for9;sumper10=126976",
+    "initial_baseline_and_matched_initial_payload_floor_bytes": 107806720,
+    "required_extra_B_generations_payload_floor_bytes": 53903360,
+    "payload_only_floor_after_all_baseline_candidate_controls_bytes": 161710080,
+    "exceeds_old64MiB_by_bytes": 94601216,
+    "proposed_F07_bytes": 201326592,
+    "metadata_headroom_above_payload_floor_bytes": 39616512,
+    "proof": "ForABatN64/N1000,controls()keepsbaselinepluscopytree matched-initial. EachinitialstorehasoriginalpayloadS plusview(A)/generation(B)payloadS:8*(S64+S1000). Baselineandcandidateeachperformpayload/title; withouthistoryretirement/collectioneachBpairretains4extrafullgenerationpayloadcopies perN:4*(S64+S1000). Candidateusesmatched-initial, no extrathirdstoreassumed. OrdinaryPZrecordpackingdoesnotcompressoriginalsandrequiredreadableBcontrols.",
+    "current_N64A_actual_bytes": 3394332,
+    "current_N64A_files": 341,
+    "observed_matched_initial_N64_originals_bytes": 778240,
+    "donor_ordinary31MB_reclassification": "NotreleasedintoF07: alreadyinsufficientforactualrequiredshallowcontrols. F06donorordinaryfourcellsremainrequiredandchargedunlessprovenlogicaloverlapwithidenticalcohorts,whichisnotestablished.",
+    "qualification": "161710080ispayload/readablelowerboundunderthecurrentcopytree/generationharness,notexacttotalorclaimallimplementationsneedthis.192MiBisanadmissionforecast,notmeasuredfuturepeak."
+  },
+  "F05_dynamic_reforecast": {
+    "utc": "2026-10-20T21:10:56.857928Z",
+    "start_end_selector_stable": true,
+    "selector": {
+      "publication": "publication-74164-1792530644405624900-1624",
+      "digest": "8a575efc8a9fc90e39b5afc4596638d68d4cf91795d828a216377bd911b981e4"
+    },
+    "authenticated_start_api_history_non_genesis": 7600,
+    "authenticated_start_actualH": 7601,
+    "whole_retained_history_actual_bytes": 400881349,
+    "whole_retained_history_actual_files": 100303,
+    "parts_bytes": {
+      "remaining2400historypublications": 157286400,
+      "ALL1200rollingpublications": 78643200,
+      "physical_old_new_coexistence": 67108864,
+      "frozen_inventories": 16777216,
+      "generation_deferred_journal_bookkeeping": 16777216,
+      "chunk_handoff_slack": 16777216
+    },
+    "forecast_bytes": 754251461,
+    "current_cap_bytes": 1073741824,
+    "proposed_cap_bytes": 805306368,
+    "proposed_release_bytes": 268435456,
+    "slack_after_proposed_cap_bytes": 51054907,
+    "old_static_H1forecast_bytes": 876921829,
+    "controls": "NoextrafullH10kclone,retainedH1kcloneincludedinactual.64KiBlogicalgrowth/publicationisforecastwith100pubprewrite/censusguard,notuniversalbound. ALL1200rollingcellskept;nodeletion/clonecredit.",
+    "further_release": "Extra32MiBto736MiB wouldleave17500475B againstthisforecast;notreleasedhere. Extra64MiBto704MiBdoesnotfit:waitfreshH10kboundary."
+  },
+  "valid_unused_forecast_release_candidates": [
+    {
+      "id": "C1-Windows",
+      "bytes": 201326592,
+      "basis": "Meta confirmsUNCLAIMED/no privatecachecopies;existingglobalcacheused",
+      "actual_bytes_reclaimed": 0
+    },
+    {
+      "id": "C1-Linux",
+      "bytes": 67108864,
+      "basis": "Linuxsource/nativeproof CARGO_HOMEunset,45archives/32hostcrates1530filesverified,privatecopydirsabsent;sharedF13growthstillcharged",
+      "actual_bytes_reclaimed": 0
+    },
+    {
+      "id": "C2-Windows",
+      "bytes": 134217728,
+      "basis": "Unclaimedtopup;F02newtarget~200MiBwithinexisting256MiB;oldpreservedtargetsuntouched",
+      "actual_bytes_reclaimed": 0
+    },
+    {
+      "id": "F05-dynamic-tail-unused",
+      "bytes": 268435456,
+      "basis": "Freshfullretainedhistory+remaining2400+ALL1200rolling+physical+bookkeepingforecast754251461 fits768MiB",
+      "actual_bytes_reclaimed": 0
+    }
+  ],
+  "held_reservations": [
+    "C1Mac64MiBpendingcache-read/privatecopyproof",
+    "F14unique-packcopy283460393:CP3planone.idxbesidebirth.pack;noapprovedsharing/clonecredit",
+    "C3replacement16MiB inclmeta2MiB/CP2source2MiB/futureCP3source/reviews/control",
+    "F03/F04private256MiBtargets; no newevidencetoreducecaps",
+    "F09complete592458971 initialrestore includingtestledger",
+    "F1080MiBpagedindexmetadata ceiling77128970 pluscatalog/Work/stagesunknown",
+    "F11676345051 completeindependentfinalrestore/sourcecoexistence",
+    "F12128MiBevidence andF1332MiBsharedgrowth",
+    "Inside1GiB/100kcloseoutreserve/protectedoriginals/archives/rejectedtargets"
+  ],
+  "full_proposed_functional_rows": [
+    {
+      "label": "Three source-only sparse research copies, worktree metadata and small controller copies",
+      "bytes": 12582912,
+      "files": 3000,
+      "id": "F01",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Windows one private offline j2 target, release plus capsule/unit artifacts",
+      "bytes": 268435456,
+      "files": 5000,
+      "id": "F02",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Linux one private offline j2 target",
+      "bytes": 268435456,
+      "files": 5000,
+      "id": "F03",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Mac one private offline j2 target",
+      "bytes": 268435456,
+      "files": 5000,
+      "id": "F04",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "F05 authenticH1k/H10k+all1200rolling, afterdynamicreforecast; proposed768MiB, noextrafullH10kclone",
+      "bytes": 805306368,
+      "files": 400000,
+      "id": "F05",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "F06 Windowsfinalapplicablefullstack448MiB incllargecacheunit/newprotocol/coexistence +matrixsmallprotocol32MiB",
+      "bytes": 503316480,
+      "files": 100000,
+      "id": "F06",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "F07 A/B N64/N1k matchedpayload/title: baselineandmatched-initial, fullreadablecoexistence; proposed192MiB replacesinvalid64MiB",
+      "bytes": 201326592,
+      "files": 30000,
+      "id": "F07",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "F08 Linux448MiB/50kfiles +Mac448MiB/50kfiles finalqualification stacks",
+      "bytes": 939524096,
+      "files": 100000,
+      "id": "F08",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Exact H101007 full FNOP1 initial restore including test ledger",
+      "bytes": 592458971,
+      "files": 5807,
+      "id": "F09",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "New paged metadata with old index retained; no pack-copy credit needed for this optimistic option",
+      "bytes": 83886080,
+      "files": 2000,
+      "id": "F10",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Final independent long restore retaining source including added metadata",
+      "bytes": 676345051,
+      "files": 8000,
+      "id": "F11",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Functional raw samples, counters, ledgers and manifests",
+      "bytes": 134217728,
+      "files": 10000,
+      "id": "F12",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "label": "Additional shared Git/Cargo/parent integration growth beyond measured baselines",
+      "bytes": 33554432,
+      "files": 5000,
+      "id": "F13",
+      "owner": "meta shared allocator",
+      "allocation_status": "shared functional reservation; not a worker-independent allowance"
+    },
+    {
+      "id": "F14",
+      "label": "Unique old/new pack-byte coexistence if generation namespace requires physical copies; reserved now, no link/clone credit",
+      "bytes": 283460393,
+      "files": 32,
+      "owner": "meta assigns to one long-lane worker",
+      "allocation_status": "reserved, conditional actual use"
+    }
+  ],
+  "remaining_proposed_central_earmarks": [
+    {
+      "id": "C1-Mac",
+      "bytes": 67108864,
+      "files_held_within_existing_C1_forecast": 20000,
+      "status": "HELD"
+    },
+    {
+      "id": "C3",
+      "bytes": 16777216,
+      "files": 15000,
+      "status": "HELD inclclaims003"
+    }
+  ],
+  "arithmetic": {
+    "prior_whole_prospective_bytes": 47071111541,
+    "Windows_F06_increase_bytes": 369098752,
+    "F07_document_controls_increase_bytes": 134217728,
+    "native_F08_twohost_increase_bytes": 738197504,
+    "total_increases_bytes": 1241513984,
+    "C1WindowsLinux_unused_release_bytes": 268435456,
+    "C2Windows_unused_release_bytes": 134217728,
+    "F05_dynamic_unused_release_bytes": 268435456,
+    "total_release_bytes": 671088640,
+    "proposed_whole_bytes": 47641536885,
+    "cap_bytes": 47244640256,
+    "shortfall_after_all_supported_release_candidates_bytes": 396896629,
+    "prior_central_contingency_bytes": 173528715,
+    "central_contingency_is_cap_minus_prior_forecast_not_additive": true,
+    "functional_proposed_bytes": 5071285471,
+    "inside_closeout_reserve_bytes": 1073741824,
+    "conservative_actual_upper_basis_bytes": 41412623510,
+    "central_proposed_remaining_earmarks_bytes": 83886080,
+    "file_total_with_native50k_each_and64claimslots": 4832604,
+    "file_cap": 5000000,
+    "remaining_files": 167396,
+    "file_credit_for_released_cachebuildforecasts": 0
+  },
+  "conditional_unapproved_384_scenario": {
+    "requirements": "Linux/Mac/WindowscompleteNEWfocusedgeometryproves<=64MiBwhileeveryrequiredcasekept,noactivationstressrepeatnativeorlargehistoryduplicatenative;donorstackstillseparate",
+    "native_F08_bytes_each": 402653184,
+    "Windows_F06_bytes": 436207616,
+    "F07_document_controls_bytes": 201326592,
+    "save_vs448_scenario_bytes": 201326592,
+    "whole_bytes": 47440210293,
+    "shortfall_bytes": 195570037,
+    "status": "HYPOTHESIS_ONLY_NO_GEOMETRY_PROOF_YET",
+    "Mac_private_cache32_and_F05extra32_if_proven": {
+      "potential_extra_release_bytes": 67108864,
+      "residual_shortfall_bytes": 128461173,
+      "no_GO_from_this_combination": true
+    }
+  },
+  "evidence": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-fixture-forecast.json",
+      "bytes": 6374,
+      "sha256": "f2c3bdbb310154e79407c27e7e0c5a0be917ab4c591d522424893d958459f2f0"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\H10000-prospective-admission.json",
+      "bytes": 7829,
+      "sha256": "6612609cc453056673a76d9c636ec09bf5de033aa0314a2e26b0d607a27223b7"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp1-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\baseline_model.rs",
+      "bytes": 8570,
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp1-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\projection.rs",
+      "bytes": 27876,
+      "sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp1-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\store.rs",
+      "bytes": 36078,
+      "sha256": "31cafafddede7c2347a1fe85d3f18346972796af9fa8cb6b12c6c531502eb58d"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\baseline.py",
+      "bytes": 11524,
+      "sha256": "3751c943e0905b11ec4188d7b0ae8c5a34b89af6b7a782eaf6673ebab02f1a65"
+    }
+  ],
+  "disposition": "NO GO forfinalqualification/newlargecorpus/nativeunitsunderrevisedcompleteforecasts. Mainlimitedsource/protocolremediationwithinexistingadmittedclaims maycontinue. PreserveoldGOasdatedprospectivehistory. No capincreasequestionorallocationapprovalrequestedbeforethisconcreteledger. Furtherproof-basedreforecastmayreduceceilings; donotsilentlydropmatrix/data/closeoutreserve.",
+  "no_mutations": {
+    "engine_runs": 0,
+    "builds": 0,
+    "restores": 0,
+    "corpus_copies": 0,
+    "protected_edits": 0,
+    "deletions": 0,
+    "only_new_audit_reports": true
+  }
+}

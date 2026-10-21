@@ -1,0 +1,64 @@
+{
+  "kind": "explicit-own-supervisor-death",
+  "supervisor_identity": {
+    "pid_requested": 86782,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 86782,
+    "ppid": 86604,
+    "uid": 501,
+    "pgid": 86604,
+    "state": 2,
+    "start": [
+      1792528411,
+      532515
+    ]
+  },
+  "anchor_identity": {
+    "pid_requested": 86784,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 86784,
+    "ppid": 86782,
+    "uid": 501,
+    "pgid": 86784,
+    "state": 2,
+    "start": [
+      1792528411,
+      581977
+    ]
+  },
+  "owned_supervisor_exit": -9,
+  "closure_observations": [
+    {
+      "pgid_requested": 86784,
+      "returned_bytes": 8,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        86785,
+        86784
+      ],
+      "monotonic_ns": 3216862267604083
+    },
+    {
+      "pgid_requested": 86784,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216862318210291
+    },
+    {
+      "pgid_requested": 86784,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216862371853625
+    }
+  ],
+  "closure": "PROVEN_EMPTY"
+}

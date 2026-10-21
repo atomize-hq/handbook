@@ -1,0 +1,342 @@
+{
+  "name": "local-timeout-final-v16",
+  "exit": 1,
+  "stdout": "{\"censor\": \"RuntimeError(\\\"positive-RSS-before-GO-failed:RuntimeError('rss-sample-gap-over-40ms')\\\")\", \"closure\": \"NO_WORKLOAD_CREATED\", \"token_released\": true, \"sample_count\": 63, \"sample_gap_max_s\": 0.04315662523731589, \"workload_GO\": false, \"worker_exit\": null, \"keeper_recovery_socket\": \"/private/tmp/file-native-online-macos-20261020/keeper-2b837e1b3cc5cea660cba709da6e9d28.release.json\", \"nonce\": \"2b837e1b3cc5cea660cba709da6e9d28\"}\n",
+  "stderr": "",
+  "started_epoch": 1792531514.916173,
+  "argv": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "/private/tmp/file-native-online-macos-20261020/execution/native-macos/guard_v7.py",
+    "--name",
+    "local-timeout-final-v16",
+    "--seconds",
+    "12",
+    "--prospective",
+    "{\"F01\":{\"bytes\":131072,\"files\":8},\"F04\":{\"bytes\":0,\"files\":0},\"F08\":{\"bytes\":0,\"files\":0},\"F12\":{\"bytes\":2097152,\"files\":8},\"F13\":{\"bytes\":0,\"files\":0}}",
+    "--control-only",
+    "--seconds",
+    "6",
+    "--",
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "-c",
+    "import time; time.sleep(20)"
+  ],
+  "guard_sha256": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6",
+  "result": {
+    "kind": "native-guard-v7",
+    "nonce": "2b837e1b3cc5cea660cba709da6e9d28",
+    "status": "GUARD_CONTROL_CANDIDATE_NO_ENGINE_RELEASE",
+    "source_sha256": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6",
+    "adapter_source_bindings": {
+      "monitor_v7.py": "96eccfa0e6c4ca9ed35511ea0242bc8abff64d12d7ba2fc5f76558a57544bade",
+      "control_smoke_v7.py": "fa5d0d32aa4a0ad321ec523b7e56b058a0c04e881b4226923943012ab80597d9",
+      "keeper_v7.py": "7b2b4017b3c5f4e23402eb66aa1d4fa5cbe1993c1e01d3920bc49544f6ac0958",
+      "admission_v7.py": "c23ed5d767b74fce3e0d1478f333a72bfa84683a2cfc582648fd7db557bbfe05",
+      "guard_v7.py": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6"
+    },
+    "source_pin": "CONTROL_ONLY",
+    "claims": {
+      "F01": "initial-native-worker-source4MiB-at-authority94734e76",
+      "F04": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570",
+      "F08": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984",
+      "F12": "initial-native-worker-functional-evidence24MiB",
+      "F13": "initial-native-worker-combined-positive-shared-growth4MiB"
+    },
+    "limits": {
+      "F01": {
+        "bytes": 4194304,
+        "files": 1000,
+        "claim": "initial-native-worker-source4MiB-at-authority94734e76"
+      },
+      "F04": {
+        "bytes": 268435456,
+        "files": 5000,
+        "claim": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570"
+      },
+      "F08": {
+        "bytes": 100663296,
+        "files": 30000,
+        "claim": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984"
+      },
+      "F12": {
+        "bytes": 25165824,
+        "files": 10000,
+        "claim": "initial-native-worker-functional-evidence24MiB"
+      },
+      "F13": {
+        "bytes": 4194304,
+        "files": 1500,
+        "claim": "initial-native-worker-combined-positive-shared-growth4MiB"
+      }
+    },
+    "prospective": {
+      "F01": {
+        "bytes": 131072,
+        "files": 8
+      },
+      "F04": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F08": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F12": {
+        "bytes": 2097152,
+        "files": 8
+      },
+      "F13": {
+        "bytes": 0,
+        "files": 0
+      }
+    },
+    "started_epoch": 1792531515.0624828,
+    "functional_cutoff_epoch": 1792581014.0,
+    "effective_fixed_cutoff_epoch": 1792581014.0,
+    "local_deadline_monotonic": 3219971.358072583,
+    "global_enumeration": false,
+    "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('rss-sample-gap-over-40ms')\")",
+    "closure": "NO_WORKLOAD_CREATED",
+    "token_released": true,
+    "worker_exit": null,
+    "supervisor": {
+      "pid_requested": 75865,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 75865,
+      "ppid": 73227,
+      "uid": 501,
+      "pgid": 73227,
+      "state": 2,
+      "start": [
+        1792531514,
+        916419
+      ]
+    },
+    "before_setup_positive_RSS": {
+      "return": 0,
+      "errno": 0,
+      "rss_bytes": 26656768,
+      "start_abstime": 77279165088226
+    },
+    "observed_output_bytes": 0,
+    "workload_GO": false,
+    "closure_proofs": [],
+    "termination": [],
+    "keeper_identity": {
+      "pid_requested": 75866,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 75866,
+      "ppid": 75865,
+      "uid": 501,
+      "pgid": 75866,
+      "state": 2,
+      "start": [
+        1792531515,
+        79734
+      ]
+    },
+    "keeper_recovery_socket": "/private/tmp/file-native-online-macos-20261020/keeper-2b837e1b3cc5cea660cba709da6e9d28.release.json",
+    "token_acquired_epoch": 1792531515.238192,
+    "admission_snapshot": {
+      "categories": {
+        "F01": {
+          "logical_bytes": 624030,
+          "allocated_bytes": 729088,
+          "files": 42,
+          "directories": 9,
+          "symlinks": 0
+        },
+        "F04": {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0,
+          "directories": 0,
+          "symlinks": 0
+        },
+        "F08": {
+          "logical_bytes": 24585,
+          "allocated_bytes": 61440,
+          "files": 12,
+          "directories": 1,
+          "symlinks": 0
+        },
+        "F12": {
+          "logical_bytes": 4430640,
+          "allocated_bytes": 5713920,
+          "files": 740,
+          "directories": 161,
+          "symlinks": 0
+        },
+        "F13": {
+          "logical_bytes": 82,
+          "files": 2,
+          "allocated_bytes": null,
+          "shared_components": {
+            "Git": {
+              "logical_bytes": 187972974,
+              "allocated_bytes": 205033472,
+              "files": 5494,
+              "directories": 371,
+              "symlinks": 0,
+              "baseline_logical_bytes": 187972892,
+              "baseline_files": 5492,
+              "positive_bytes": 82,
+              "positive_files": 2
+            },
+            "Cargo": {
+              "logical_bytes": 1859795101,
+              "allocated_bytes": 2063294464,
+              "files": 81747,
+              "directories": 15833,
+              "symlinks": 13,
+              "baseline_logical_bytes": 1859800817,
+              "baseline_files": 81747,
+              "positive_bytes": 0,
+              "positive_files": 0
+            }
+          }
+        }
+      },
+      "free_bytes": 162130915328
+    },
+    "admitted_growth_ceiling": {
+      "F01": {
+        "bytes": 755102,
+        "files": 50
+      },
+      "F04": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F08": {
+        "bytes": 24585,
+        "files": 12
+      },
+      "F12": {
+        "bytes": 6527792,
+        "files": 748
+      },
+      "F13": {
+        "bytes": 82,
+        "files": 2
+      }
+    },
+    "launcher": {
+      "path": "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3.11",
+      "sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+      "argv": [
+        "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+        "-B",
+        "-c",
+        "import time; time.sleep(20)"
+      ],
+      "cwd": "/private/tmp/file-native-online-macos-20261020",
+      "contract": "foreground, no daemonization or session escape; all subprocesses sampled"
+    },
+    "primary_sample_failure": "RuntimeError('rss-sample-gap-over-40ms')",
+    "sample_count": 63,
+    "sample_gap_max_s": 0.04315662523731589,
+    "sample_failure": "RuntimeError('rss-sample-gap-over-40ms')",
+    "peak_group_rss": 0,
+    "peak_all_helpers_rss": 55803904,
+    "disk_monitor": {
+      "latest": {
+        "monotonic": 3219974.034988541,
+        "snapshot": {
+          "categories": {
+            "F01": {
+              "logical_bytes": 623338,
+              "allocated_bytes": 729088,
+              "files": 42,
+              "directories": 9,
+              "symlinks": 0
+            },
+            "F04": {
+              "logical_bytes": 0,
+              "allocated_bytes": 0,
+              "files": 0,
+              "directories": 0,
+              "symlinks": 0
+            },
+            "F08": {
+              "logical_bytes": 24585,
+              "allocated_bytes": 61440,
+              "files": 12,
+              "directories": 1,
+              "symlinks": 0
+            },
+            "F12": {
+              "logical_bytes": 4432727,
+              "allocated_bytes": 5718016,
+              "files": 741,
+              "directories": 161,
+              "symlinks": 0
+            }
+          },
+          "free_bytes": 162131341312
+        },
+        "shared_checked": false
+      },
+      "failure": null
+    },
+    "keeper_reaped": true,
+    "raw_rows_written": 67,
+    "finished_epoch": 1792531523.851478,
+    "test_fault": null
+  },
+  "raw": {
+    "compressed_sha256": "b2145e3d9864e7eb96eb546fff8c1a953beb6799ce8b8c53e95a36b744567329",
+    "compressed_bytes": 2275,
+    "gzip_eof_complete": true,
+    "json_rows": 67,
+    "rss_rows": 64,
+    "max_RSS_start_gap_s": 0.04315183265134692,
+    "rows_match_receipt": true,
+    "raw_censored": false
+  },
+  "keeper": {
+    "kind": "independent-native-keeper",
+    "nonce": "2b837e1b3cc5cea660cba709da6e9d28",
+    "identity": {
+      "pid_requested": 75866,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 75866,
+      "ppid": 75865,
+      "uid": 501,
+      "pgid": 75866,
+      "state": 2,
+      "start": [
+        1792531515,
+        79734
+      ]
+    },
+    "fixed_cutoff_epoch": 1792581014.0,
+    "local_deadline_monotonic": 3219971.358072583,
+    "token_received": true,
+    "state": "CLOSED_AFTER_CENSOR",
+    "reason": "RSS-heartbeat-gap-over-40ms",
+    "events": [
+      {
+        "notify_parent": {
+          "pid": 75865,
+          "start": [
+            1792531514,
+            916419
+          ],
+          "signal": 30,
+          "sent": true,
+          "errno": 0
+        }
+      }
+    ]
+  }
+}

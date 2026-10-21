@@ -1,0 +1,259 @@
+{
+  "entries": [
+    {
+      "path": "evidence/control/budget-refusal-v20",
+      "included": false,
+      "result_sha256": "ac73c7d40bc8f5b03f3e07fdb2a57efbf4bbb56d417e8404554bbea016a6e4ac",
+      "GO": false,
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/budget-refusal-v20b",
+      "included": true,
+      "result_sha256": "f42e9ea29f20a92dd31a24f8a59202d4b70e2b27ce4b42b1dc985c5766ed1298",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('owned-cumulative-identity-budget')\")",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/cadence-final-v20",
+      "included": true,
+      "result_sha256": "3e74e8fe703fbd54087d24f214d4b66acbe0c24cecda72e17c41c9e7cb5197ba",
+      "GO": true,
+      "censor": "RuntimeError('independent-or-absolute-deadline')",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/checker-timeout-v24-outer",
+      "included": true,
+      "result_sha256": "5ca9a12ac9e727e1b4f946d2a5a66cf278e01daef88104afd0b9e3a7ab17f555",
+      "GO": true,
+      "censor": null,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/closure-HOLD-final-v20",
+      "included": true,
+      "result_sha256": "d5725c5039e1acfa2a9f7579c426fa459b517bcb5a1a23655593145d4a23d907",
+      "GO": true,
+      "censor": null,
+      "closure": "UNKNOWN_HOLD"
+    },
+    {
+      "path": "evidence/control/escape-final-v20",
+      "included": true,
+      "result_sha256": "4c318f2b9eb0ab3345ddd19aafc2d652d771f4eb1ee41b4855bd08a95dacf57b",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('owned-descendant-escaped-session')\")",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/fixed-setup-wait-v20",
+      "included": true,
+      "result_sha256": "71d444d0c5891c657c4eee745311bd47155d4f245e6137d392c41ef64d788b69",
+      "GO": false,
+      "censor": "RuntimeError('deadline-or-sampler-during-setup-wait')",
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/fixed-token-wait-v20",
+      "included": true,
+      "result_sha256": "0b9375ea11fc33858adda52b5857042579b14a4f88262ac78060d4919601dab7",
+      "GO": false,
+      "censor": "RuntimeError('keeper-alert-during-token-wait')",
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/live-byte-final-v20",
+      "included": true,
+      "result_sha256": "5388fcdcb9eea62d266b26e29d0b72f8d5e6aaafb91d559eee5fcbbda9e147a7",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/live-file-final-v20",
+      "included": true,
+      "result_sha256": "47b8b0a56123795a359a3cdc9955c6f61fad1def5e7c4fe22f0794f352c27d95",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/local-timeout-final-v20",
+      "included": false,
+      "result_sha256": "153b75d43b29c7b7eb3186ab394e1751455f343c616aafc9e5f0732b877601c1",
+      "GO": false,
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-contention')\")",
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/memory-final-v20",
+      "included": true,
+      "result_sha256": "5c226efe5640a61e727c8075811ea4af0f12e61c11f0e68ff125b6a816b6a099",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('per-process-rss-cap')\")",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/missing-final-v20",
+      "included": true,
+      "result_sha256": "b1148f55d3053bebc464f2adca917ad8e4d4019a33769163db68e1e03493150f",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('missing-live-rss-or-identity')\")",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/nested-final-v20",
+      "included": true,
+      "result_sha256": "b486e4ab7b361555bf72fdd9b3f48599efd34d14aae77e2451fc04654455dedb",
+      "GO": true,
+      "censor": null,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-final-v20",
+      "included": true,
+      "result_sha256": "c8f2fb5b0e3660c6ce7c34a4f4e13d620d321423555224fc80c6747e45a929e8",
+      "GO": true,
+      "censor": null,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/orphan-final-v20",
+      "included": true,
+      "result_sha256": "fc63feccf14d572d834b4661b1adeb82f547d765903d36af7c344db8e0aba0c5",
+      "GO": true,
+      "censor": "RuntimeError('root-completed-orphan-tree')",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/output-final-v20",
+      "included": true,
+      "result_sha256": "955d51b3e73d71680b174532b3e6ae7c121d337c32cf5605252c22cb8c00f038",
+      "GO": true,
+      "censor": "RuntimeError('output-prewrite-cap')",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/reader-memory-v24-outer",
+      "included": true,
+      "result_sha256": "3972bb498a107f3dc4284dc881b0841d5cb05853e99885b0f346b80109d19f82",
+      "GO": true,
+      "censor": null,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/roles-control-v20",
+      "included": false,
+      "result_sha256": "3f397a4cd2fd421a0a113c78c130777d0cf7b6605eaa150c1a4ca92c55cd86f7",
+      "GO": false,
+      "censor": "RuntimeError('control-only-python-launcher-required')",
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/roles-control-v20b",
+      "included": false,
+      "result_sha256": "eafe19b66bd819a66469fa45f953165413c9992d2c2ea992b50afaa2b4766153",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('supervisor-registry-sample-stale')\")",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/roles-control-v21",
+      "included": false,
+      "result_sha256": "f5a89705639f2a5e34d1edfe395d0b0fa5bd56f00b10428531b7338ece12471d",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F12')\")",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/roles-control-v22",
+      "included": false,
+      "result_sha256": "19fad3b6f541739ecc0611dedf4b08708386672e4a2da7dee253ec7fe5032aa2",
+      "GO": true,
+      "censor": null,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/roles-control-v23",
+      "included": false,
+      "result_sha256": "109cb3a8ab6986d1357eedc05536ad02afde0ffb4077a0dd9f219d11a4331506",
+      "GO": true,
+      "censor": "RuntimeError('RuntimeError(\\'live-group-identity-unknown:{\"pid_requested\": 12732, \"returned_bytes\": 0, \"errno\": 3, \"expected_bytes\": 136}\\')')",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/roles-normal-binding-v25",
+      "included": true,
+      "result_sha256": "2d27193ab48bd0694c21198edbe2010e3d051c1edf4d83626ece66c7ebbae9b1",
+      "GO": true,
+      "censor": null,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/sequential128-v19",
+      "included": false,
+      "result_sha256": "89da65769193a2ffbe7794a6139df648d1f467a551890917197874049f044f45",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('live-descendant-identity-unknown')\")",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/sequential128-v20",
+      "included": true,
+      "result_sha256": "c211bb642ca75ec10130fb9d23406a15f43ec337e6943ee0d6143e767ac6cef9",
+      "GO": true,
+      "censor": null,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/source-release-direct-v20",
+      "included": false,
+      "result_sha256": "ccc60a1e7ec3e8e99f2a0ba7de2c5b5cd6d743863a486f6623cd0be9f7d4bb5a",
+      "GO": false,
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/source-release-direct-v20b",
+      "included": true,
+      "result_sha256": "b1f72469f1236de2f3b106a0bda8730de1de1aedf3d460cde6380c5cb15ebf6b",
+      "GO": false,
+      "censor": "ValueError('engine-source-release-required')",
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/supervisor-death-final-v20",
+      "included": true,
+      "result_present": false
+    },
+    {
+      "path": "evidence/control/timeout-direct-v20",
+      "included": false,
+      "result_sha256": "b53f276b3287f2144d638418367f3836420f242d46f7920a49c77f5fb43382e2",
+      "GO": false,
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/timeout-direct-v20b",
+      "included": true,
+      "result_sha256": "fdd2892e0d4a408e3f84b64ae414da89b9b1d2ca666cc736306f7375b1f58185",
+      "GO": true,
+      "censor": "RuntimeError('independent-or-absolute-deadline')",
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/watchdog-death-final-v20",
+      "included": true,
+      "result_sha256": "0173314746506847c7f3582a8e1e6103799c75ba797c176b2302240fb6d52c97",
+      "GO": true,
+      "censor": "RuntimeError('injected-watchdog-death-after-GO')",
+      "closure": "PROVEN_EMPTY_TWICE"
+    }
+  ],
+  "all_prior_raw_and_sources_remain_on_host": true,
+  "not_included_old_development_runs_are_not_passes": true
+}

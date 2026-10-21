@@ -1,8 +1,9 @@
 import base64,copy,gzip,hashlib,threading,time,uuid
 from pathlib import Path
 from windows_deadlines import canonical,digest,integer,need,Refusal,strict,project_response
-from windows_growth import confined,file_hash,inventory
+from windows_growth import confined,file_hash,inventory,regular_read,authenticate_action_profile
 from windows_native import counter
+from windows_hooks import adopt_capture_profile,SIDEBAND_KINDS
 
 class Evidence:
     def __init__(self,path,ledger,category,*,max_bytes,max_files=1,binding=None):
@@ -63,16 +64,16 @@ class Evidence:
             need(self.written+sum(self.pending.values())+maximum<=self.max_bytes,"whole-call-before-dispatch")
             self.pending[token]=maximum
 
-    def prepare_pending(self,token,root,action,profile):
+    def prepare_pending(self,token,root,action,profile,planned_launch=None):
         from windows_growth import profile_reservation_v2
-        need(token not in self.calls and profile["profile_sha256"]==self.binding["profile_sha256"],
-             "profile-before-intent")
+        need(token not in self.calls,"profile-before-intent")
+        authenticate_action_profile(profile,self.profiles,self.binding["profile_sha256"])
         maximum=profile_reservation_v2(profile)
         self._ensure_bridge()
         self.reserve_call(token,maximum)
         self.calls[token]=dict(hash=hashlib.sha256(),begin=self.written,end=self.written,bytes=0,
             frames=0,ended=False,start=None,start_ref=None,launch_ref=None,root=str(root),action=action,profile=copy.deepcopy(profile),
-            encoded=None,env=None,intent=None,adopted=False,writer_closed=False,meta_ref=None,
+            encoded=None,env=None,intent=None,adopted=False,writer_closed=False,meta_ref=None,planned_launch=copy.deepcopy(planned_launch),
             streams={s:dict(accepted=0,written=0,buffer=bytearray(),final=False) for s in ("in","out","err")})
         return token
 
@@ -80,8 +81,9 @@ class Evidence:
         with self.lock:
             if token not in self.calls:self.prepare_pending(token,payload.get("root",""),payload.get("action","script"),profile)
             c=self.calls[token]
-            need(not c["adopted"] and c["profile"]["profile_sha256"]==profile["profile_sha256"],
-                 "unadopted-profile")
+            need(not c["adopted"],"unadopted-profile")
+            adopt_capture_profile(self.profiles,self.binding["profile_sha256"],c["profile"],profile)
+            c["profile"]=copy.deepcopy(profile)
             if c["encoded"] is None:self._intent(token,payload,encoded,env)
             need(c["encoded"]==encoded and c["env"]==env and c["input_sha"]==digest(encoded),
                  "adopt-exact-token-planned-bytes-env")
@@ -147,16 +149,17 @@ class Evidence:
             ref=self._intent(token,value["input"],canonical(value["input"]),value["env"])
             value={k:v for k,v in value.items() if k not in ("input","env")}
             value["input_ref"]=ref
-            launch=self.calls[token]["profile"]["launch"]
+            launch=self.calls[token]["planned_launch"]
             self.launch(token,**launch)
-            return self._write(value,token)
+            from windows_growth import capture_sideband
+            return capture_sideband(self,value,token)
         if kind=="raw-complete":return dict(covered_by="canonical-END")
         if kind=="native-RSS":
             c=self.calls[token]
             return self._write(dict(kind="rss",pid=value["pid"],creation=value["creation_time"],
                 qpc=counter(),rss=value["rss"],peak=value["peak"],
                 role="reader" if value["rss_limit"]==268435456 else "checker",
-                phase="sample" if c["start"] else "suspended"),token,True)
+                phase="running" if c["start"] else "suspended"),token,True)
         if kind=="positive-native-start":
             ref=self._write(dict(kind="start",pid=value["pid"],creation=value["creation_time"],
                 qpc=counter(),rss=value["positive_rss"],executable_sha256=value["executable_sha256"]),token,True)
@@ -175,7 +178,7 @@ class Evidence:
                 intent=value["intentional_interrupt"],violations=value["violations"])
             end_ref=self._write(end,token,True);ref=self.call_reference(token)
             c=self.calls[token];context=value.get("context") or {}
-            launch=c["launch_value"];start=c["start"]
+            launch=c.get("launch_value") or ([],value["executable_sha256"],"candidate",value["source_pin"],[],None);start=c["start"]
             metadata=dict(schema="native-call-meta-v2",call=token,run=self.run,raw_ref=ref,
                 source_pin=self.binding["final_pin"],binary_sha256=launch[1],
                 producer_kind=launch[2],producer_source_pin=launch[3],
@@ -185,11 +188,13 @@ class Evidence:
                 image_proof_ref=c["start_ref"],
                 qpc_frequency=self.qpc_frequency,clock_bridge_ref=self.bridge_ref,closure_ref=end_ref,
                 case_id=context.get("case_id"),scope_id=context.get("scope_id"),
-                case_scope=context.get("case_scope"))
+                case_scope=context.get("case_scope"),action_profile_id=c["profile"]["profile_id"],
+                action_profile_sha256=c["profile"]["profile_sha256"])
             need(len(canonical(metadata))+1<=c["profile"]["native_metadata_max_bytes"],"typed-native-meta-width")
             c["meta_ref"]=self._write(metadata,token)
             c["writer_closed"]=value["resources_closed"] and value["python_callback_joined"]
             return ref
+        if kind=="callback-cleanup":value=self._callback_projection(value)
         if self.context is not None:
             completed=getattr(self.context,"completed_token",None)
             pending=getattr(self.context,"pending_token",None)
@@ -207,7 +212,46 @@ class Evidence:
                             metadata_ref=c["meta_ref"])
                     value=project_response(value,ref,getattr(self.context,"completed_response",None),
                         max_bytes=16*1024**2)
-        return self._write(value)
+        from windows_growth import capture_sideband
+        need(kind in SIDEBAND_KINDS,"source-owned-sideband-kind")
+        return capture_sideband(self,value)
+
+    def state_reference(self,value):
+        from windows_growth import state_reference
+        return state_reference(self,value)
+
+
+    def _callback_projection(self,value):
+        responses=value["responses"];n=value["spawned"]
+        need(type(n) is int and 0<=n<=128 and len(responses)==n==value["observed_waits"],
+            "source-callback-wait-count")
+        queued=getattr(self.context,"callback_waits",[])
+        rows=queued[-n:] if n else []
+        need(len(rows)==n,"actual-ordered-callback-waits")
+        if n:del queued[-n:]
+        scope=getattr(self.context,"value",{}).get("case_scope");refs=[]
+        def walk(v,handle):
+            if type(v) is dict:
+                if set(v)=={"status","result","error","metrics","wall_ns","peak_memory_bytes"}:
+                    wanted=digest(canonical(v));matches=[]
+                    for token in handle["native_tokens"]:
+                        s=self.driver_registry[token]
+                        if s["context"].get("handle_id")==handle["id"] and s["context"].get("case_scope")==scope:
+                            if s.get("response_sha256")==wanted and s["done"].is_set() and s["resources_closed"]:
+                                matches.append(s["raw_reference"])
+                    need(len(matches)==1,"one-actual-callback-native-response")
+                    return dict(schema="native-response-ref-v1",raw_ref=copy.deepcopy(matches[0]))
+                return {k:walk(x,handle) for k,x in v.items()}
+            if type(v) is list:return [walk(x,handle) for x in v]
+            return v
+        out=[]
+        for response,row in zip(responses,rows):
+            handle=self.callback_handles[row["handle_id"]]
+            need(handle["case_scope"]==scope
+                and row["response_sha256"]==digest(canonical(response)),"same-wait-return-and-case")
+            out.append(walk(response,handle));refs.append(row["proof_ref"])
+        value["responses"]=out;value["callback_wait_refs"]=refs
+        return value
 
     def _ensure_bridge(self):
         if self.bridge_ref is not None:return
@@ -260,96 +304,64 @@ class Evidence:
             return self.reference()
 
 
-def record_call(driver,state,payload,encoded,env,argv,profile,historical,script_gate,
-                 output_mode,actual_sha,started,peak,samples,deadline,out,err,offsets,code,limit):
-    token=state["token"];p=state["process"];response=None;flushed=True
-    if not state["input_fully_delivered"] and state["intentional_interrupt"] is None and code!=86:
-        state["violations"].append("incomplete-input-delivery")
-    if p is not None:
-        for name in ("stdout","stderr"):
-            if not state[name+"_eof"]:
-                state["violations"].append("raw-pipe-EOF-not-observed:"+name)
-    for name,target in (("stdout",out),("stderr",err)):
-        try:
-            while offsets[name]<len(target):
-                end=min(len(target),offsets[name]+65536)
-                try:
-                    driver.evidence.raw(token,name,offsets[name],bytes(target[offsets[name]:end]))
-                    offsets[name]=end
-                finally:
-                    if profile.get("api_version")==2:offsets[name]=driver.evidence.accepted(token,name)
-        except BaseException as error:
-            state["violations"].append("raw-retry-"+name+":"+repr(error))
-    if profile.get("api_version")==2:
-        try:flushed=driver.evidence.flush_call(token)
-        except BaseException as error:
-            flushed=False;state["violations"].append("raw-coalescer-flush:"+repr(error))
-    try:
-        driver.evidence.append(dict(kind="raw-complete",call_token=token,
-        stdout_bytes=len(out),stdout_sha256=digest(out),stderr_bytes=len(err),
-        stderr_sha256=digest(err),stdout_eof=state["stdout_eof"],stderr_eof=state["stderr_eof"],
-        process_reaped=p is not None and p.returncode is not None,no_child_started=p is None,
-        input_bytes_expected=len(encoded),input_bytes_sent=state["input_bytes_sent"],
-        stdin_closed=state["stdin_closed"],input_fully_delivered=state["input_fully_delivered"]))
-    except BaseException as error:
-        state["violations"].append("raw-complete-sink:"+repr(error))
-    try:
-        out_text=bytes(out).decode("utf-8");err_text=bytes(err).decode("utf-8")
-        if output_mode=="json" and out and not state["intentional_interrupt"]:
-            response=strict(bytes(out),profile["stdout_bytes"])
-        elif output_mode=="raw":
-            response=dict(raw_stdout_sha256=digest(out),raw_stderr_sha256=digest(err))
-        elif (not out and code!=86 and not state["intentional_interrupt"]
-              and not(p is not None and p.returncode==86 and profile.get("observed_exit_codes")==[86])):
-            raise Refusal("missing-complete-JSON-response")
-    except BaseException as error:
-        out_text=bytes(out).decode("utf-8",errors="replace")
-        err_text=bytes(err).decode("utf-8",errors="replace")
-        parse_error=repr(error);state["violations"].append("strict-output:"+parse_error)
-    if deadline.remaining()<=0 and "time-censor" not in state["violations"]:
-        state["violations"].append("time-censor")
-    if historical and historical["expected_error"] is not None:
-        if not(type(response) is dict and response.get("status")=="error" and response.get("error")==historical["expected_error"]):
-            state["violations"].append("historical-exact-refusal-mismatch")
-    if type(response) is dict and response.get("peak_memory_bytes") is not None:
-        if not integer(response["peak_memory_bytes"]) or response["peak_memory_bytes"]>limit:
-            state["violations"].append("reported-process-peak-RSS-censor")
-    done=time.perf_counter_ns()
-    row=dict(input=payload,env=copy.deepcopy(env),executable=argv[0],
-        executable_sha256=actual_sha,source_pin=driver.final_pin,suite_pin=driver.final_pin,
-        binary_source_pin=historical["binary_source_pin"] if historical else (None if script_gate else driver.final_pin),
-        binary_role="historical" if historical else "python-argv" if script_gate else "candidate",call_token=token,
-        exit=None if p is None else p.returncode,stdout=out_text,stderr=err_text,
-        stdout_bytes=len(out),stderr_bytes=len(err),
-        stdout_sha256=digest(out),stderr_sha256=digest(err),violations=list(state["violations"]),
-        positive_start_event=state.get("positive_start_event"),rss_limit=limit,
-        observed_peak_rss=peak,memory_sample_count=samples,
-        input_bytes_expected=len(encoded),input_bytes_sent=state["input_bytes_sent"],
-        first_write_qpc=state.get("first_write_qpc"),
-        input_wire_sha256=digest(encoded),input_written_prefix_sha256=digest(encoded[:state["input_bytes_sent"]]),
-        input_transfer_accounting_complete=state["input_transfer_accounting_complete"],
-        stdin_started_ns=state.get("stdin_started_ns"),input_complete_ns=state.get("input_complete_ns"),
-        stdin_closed=state["stdin_closed"],input_fully_delivered=state["input_fully_delivered"],
-        input_delivery_scope="completed native writes plus stdin closure; no child-consumption inference",
-        process_started_ns=started,process_resumed_ns=state.get("resumed_ns"),
-        process_done_ns=done,spawn_total_ns=done-started,
-        intentional_interrupt=state["intentional_interrupt"],termination_requests=state["termination_requests"],
-        native_identity=state.get("public_identity"),resources_closed=state["resources_closed"],
-        ownership=state["ownership"],termination_retired=state["termination_retired"],
-        no_child_started=p is None,popen_reaped=state["popen_reaped"],
-        popen_handle_closed=state["popen_handle_closed"],stdout_eof=state["stdout_eof"],
-        stderr_eof=state["stderr_eof"],raw_retained=False,
-        owner_completion_fence="wait_control-done-event-required",
-        python_callback_joined=state["callback_joined"],historical_invocation=historical,
-        raw_before_strict_parse=True,context=state["context"],
-        outer_Job_closure="separate-accepted-QPC-final-receipt-required")
-    try:
-        row["raw_retained"]=flushed and offsets["stdout"]==len(out) and offsets["stderr"]==len(err)
-        state["raw_reference"]=driver.evidence.append(dict(kind="native-call",**row))
-        state["raw_row_written"]=True
-    except BaseException as error:
-        state["violations"].append("native-row-sink:"+repr(error))
-        row["raw_retained"]=False
-        row["violations"]=list(state["violations"])
-    return response,row
 
+WIRE_CONTRACT={'api':'windows-capture-v2-r3','status':'RAM_CONTRACT_NOT_RUNTIME_GO','encoding':'UTF8 sorted compact JSON allow_nan_false plus LF; RFC4648 base64 no LF','parameters':{'tape_path_bytes':[1,32767],'root_bytes':[1,32767],'env_json_bytes':[2,8192],'argv_json_bytes':[2,131072],'source_files_json_bytes':[2,131072],'sideband_json_bytes':[2,4194304],'case_id_bytes':[1,256],'scope_id_bytes':[1,256],'reason_bytes':[1,8192],'case_call_count':[1,100000],'case_page_count':[1,1024],'proof_json_bytes':[2,4194304],'action_profile_id_bytes':[1,256]},'types':{'range_ref':{'object':{'path':{'string':{'parameter':'tape_path_bytes'}},'offset':{'uint':64},'bytes':{'uint':64},'sha256':{'ascii':64}}},'raw_ref':{'object':{'schema':{'literal':'single-raw-ref-v1'},'path':{'string':{'parameter':'tape_path_bytes'}},'run':{'ascii':32},'call':{'ascii':32},'begin':{'uint':64},'end':{'uint':64},'frames':{'uint':64},'bytes':{'uint':64},'sha256':{'ascii':64}}},'planned_ref':{'object':{'schema':{'literal':'planned-input-ref-v1'},'path':{'string':{'parameter':'tape_path_bytes'}},'run':{'ascii':32},'call':{'ascii':32},'begin':{'uint':64},'input_n':{'uint':64},'input_sha':{'ascii':64}}},'identity':{'object':{'pid':{'uint':32},'creation':{'uint':64},'executable_sha256':{'ascii':64}}},'script_gate':{'object':{'ready':{'string':{'parameter':'tape_path_bytes'}},'release':{'string':{'parameter':'tape_path_bytes'}},'nonce':{'ascii':32},'manifest_sha256':{'ascii':64},'root':{'string':{'parameter':'root_bytes'}}}}},'record_schemas':{'stream':{'object':{'v':{'literal':2},'kind':{'literal':'stream'},'run':{'ascii':32},'source_pin':{'ascii':40},'binary_sha':{'ascii':64},'guard_sha':{'ascii':64},'driver_sha':{'ascii':64},'profile_sha':{'ascii':64}}},'begin':{'object':{'v':{'literal':2},'kind':{'literal':'begin'},'call':{'ascii':32},'seq':{'uint':64},'root':{'string':{'parameter':'root_bytes'}},'action':{'ascii':32},'role':{'ascii':16},'env':{'bytes':{'parameter':'env_json_bytes'}},'input_n':{'uint':64},'input_sha':{'ascii':64},'input_scope':{'literal':'planned'},'pid':{'oneof':[{'uint':32},{'literal':None}]},'creation':{'oneof':[{'uint':64},{'literal':None}]},'qpc_start':{'uint':64}}},'launch':{'object':{'v':{'literal':2},'kind':{'literal':'launch'},'call':{'ascii':32},'seq':{'uint':64},'argv':{'bytes':{'parameter':'argv_json_bytes'}},'executable_sha256':{'ascii':64},'producer_kind':{'oneof':[{'literal':'candidate'},{'literal':'historical'},{'literal':'python-argv'},{'literal':'native-argv'}]},'producer_source_pin':{'ascii':40},'source_files':{'bytes':{'parameter':'source_files_json_bytes'}},'startup_gate_sha256':{'oneof':[{'ascii':64},{'literal':None}]}}},'start':{'object':{'v':{'literal':2},'kind':{'literal':'start'},'call':{'ascii':32},'seq':{'uint':64},'pid':{'uint':32},'creation':{'uint':64},'qpc':{'uint':64},'rss':{'uint':32},'executable_sha256':{'ascii':64}}},'data':{'object':{'v':{'literal':2},'kind':{'literal':'data'},'call':{'ascii':32},'seq':{'uint':64},'stream':{'oneof':[{'literal':'in'},{'literal':'out'},{'literal':'err'}]},'offset':{'uint':64},'n':{'uint':64},'sha':{'ascii':64},'b64':{'literal':''}}},'rss':{'object':{'v':{'literal':2},'kind':{'literal':'rss'},'call':{'ascii':32},'seq':{'uint':64},'pid':{'uint':32},'creation':{'uint':64},'qpc':{'uint':64},'rss':{'uint':32},'peak':{'uint':32},'role':{'oneof':[{'literal':'reader'},{'literal':'checker'}]},'phase':{'oneof':[{'literal':'suspended'},{'literal':'running'}]}}},'end':{'object':{'v':{'literal':2},'kind':{'literal':'end'},'call':{'ascii':32},'seq':{'uint':64},'exit':{'oneof':[{'uint':32},{'literal':None}]},'in_n':{'uint':64},'out_n':{'uint':64},'err_n':{'uint':64},'in_sha':{'ascii':64},'out_sha':{'ascii':64},'err_sha':{'ascii':64},'input_complete':{'oneof':[{'literal':True},{'literal':False}]},'out_eof':{'oneof':[{'literal':True},{'literal':False}]},'err_eof':{'oneof':[{'literal':True},{'literal':False}]},'rss_n':{'uint':64},'peak':{'uint':32},'qpc_end':{'uint':64},'first_write_qpc':{'oneof':[{'uint':64},{'literal':None}]},'native_closed':{'oneof':[{'literal':True},{'literal':False}]},'io_closed':{'oneof':[{'literal':True},{'literal':False}]},'callbacks_joined':{'oneof':[{'literal':True},{'literal':False}]},'intent':{'oneof':[{'literal':None},{'literal':'cancel'},{'literal':'death'}]},'violations':{'array':{'count':16,'item':{'string':{'parameter':'reason_bytes'}}}}}},'bridge':{'object':{'schema':{'literal':'native-qpc-bridge-v1'},'run':{'ascii':32},'frequency':{'uint':64},'qpc_before':{'uint':64},'perf_ns':{'uint':64},'qpc_after':{'uint':64}}},'native_meta':{'object':{'schema':{'literal':'native-call-meta-v2'},'call':{'ascii':32},'run':{'ascii':32},'raw_ref':{'named':'raw_ref'},'process_started_ns':{'uint':64},'process_done_ns':{'uint':64},'spawn_total_ns':{'uint':64},'source_pin':{'ascii':40},'binary_sha256':{'ascii':64},'producer_kind':{'ascii':16},'producer_source_pin':{'ascii':40},'identity':{'oneof':[{'named':'identity'},{'literal':None}]},'source_proof_ref':{'named':'range_ref'},'image_proof_ref':{'oneof':[{'named':'range_ref'},{'literal':None}]},'qpc_frequency':{'uint':64},'clock_bridge_ref':{'named':'range_ref'},'closure_ref':{'named':'range_ref'},'case_id':{'string':{'parameter':'case_id_bytes'}},'scope_id':{'string':{'parameter':'scope_id_bytes'}},'case_scope':{'ascii':32},'action_profile_id':{'string':{'parameter':'action_profile_id_bytes'}},'action_profile_sha256':{'ascii':64}}},'sideband':{'object':{'schema':{'literal':'capture-sideband-v1'},'run':{'ascii':32},'kind':{'literal':'sideband'},'sideband_kind':{'ascii':96},'case_id':{'oneof':[{'string':{'parameter':'case_id_bytes'}},{'literal':None}]},'scope_id':{'oneof':[{'string':{'parameter':'scope_id_bytes'}},{'literal':None}]},'case_scope':{'oneof':[{'ascii':32},{'literal':None}]},'payload':{'bytes':{'parameter':'sideband_json_bytes'}},'payload_sha256':{'ascii':64}}},'case_proof':{'object':{'schema':{'literal':'native-case-proof-v1'},'kind':{'ascii':32},'run':{'ascii':32},'source_pin':{'ascii':40},'binary_sha256':{'ascii':64},'budget_sha256':{'ascii':64},'profile_catalogue_sha256':{'ascii':64},'case_id':{'string':{'parameter':'case_id_bytes'}},'scope_id':{'string':{'parameter':'scope_id_bytes'}},'case_scope':{'ascii':32},'root':{'string':{'parameter':'root_bytes'}},'start_ns':{'uint':64},'end_ns':{'uint':64},'clock_bridge_ref':{'named':'range_ref'},'payload':{'bytes':{'parameter':'proof_json_bytes'}}}},'case_index_page':{'object':{'schema':{'literal':'native-case-index-page-v1'},'run':{'ascii':32},'case_id':{'string':{'parameter':'case_id_bytes'}},'scope_id':{'string':{'parameter':'scope_id_bytes'}},'case_scope':{'ascii':32},'ordinal':{'uint':64},'first_call':{'uint':64},'calls':{'array':{'count':128,'item':{'object':{'raw_ref':{'named':'raw_ref'},'meta_ref':{'named':'range_ref'}}}}}}},'case_index':{'object':{'schema':{'literal':'native-case-index-v1'},'run':{'ascii':32},'source_pin':{'ascii':40},'binary_sha256':{'ascii':64},'budget_sha256':{'ascii':64},'profile_catalogue_sha256':{'ascii':64},'case_id':{'string':{'parameter':'case_id_bytes'}},'scope_id':{'string':{'parameter':'scope_id_bytes'}},'case_scope':{'ascii':32},'root':{'string':{'parameter':'root_bytes'}},'start_ns':{'uint':64},'end_ns':{'uint':64},'total_calls':{'uint':64},'pages':{'array':{'count':{'parameter':'case_page_count'},'item':{'named':'range_ref'}}},'ready_refs':{'array':{'count':4,'item':{'named':'range_ref'}}},'origin_ref':{'oneof':[{'named':'range_ref'},{'literal':None}]},'case_closure_ref':{'named':'range_ref'},'owned_drain_ref':{'named':'range_ref'},'checkpoint_ref':{'named':'range_ref'}}},'physical_state_ref':{'object':{'schema':{'literal':'physical-state-ref-v1'},'record_ref':{'named':'range_ref'},'source_proof_ref':{'named':'range_ref'},'run':{'ascii':32},'case_id':{'string':{'parameter':'case_id_bytes'}},'scope_id':{'string':{'parameter':'scope_id_bytes'}},'case_scope':{'ascii':32},'state_sha256':{'ascii':64}}}},'invariants':{'chunk_bytes':16384,'coalescing':'full16384 then one partial per stream only at EOF/failure; RSS never flushes','frame_members':['begin','launch','start','data','rss','end'],'call_hash':'exact canonical frame bytes in physical order for this run/call including END; exclude bridge/native_meta/sideband; seq0 strictly+1','range_hash':'exact SAME-handle verified range including LF','planned':'planned IN once; BEGIN may precede LAUNCH/START; no execution inferred','order':'BEGIN.qpc_start<=START.qpc<=runningRSS<=END.qpc_end; suspendedRSS identity-linked before START; first_write>=START and<=END; actual prefix digest','meta_refs':'source_proof_ref=exact stream header range; image_proof_ref=exact START range; closure_ref=exact END range; no richer proof invented','case':'case_id parent166; scope_id helperlabel; case_scope fresh32hex; complete case engine+checker through close','profile_global':'stream.profile_sha = SHA256 canonical profile catalogue {version:3,schedule_sha256,profiles:{id:action_payload}}','profile_action':'profile.profile_sha256 = SHA256 canonical action payload excluding ONLY profile_sha256 and profile_catalogue_sha256; catalogue stores same payload; no circular hash','widths':'parameters are bounded numeric data only; named resolves ONLY this types map; no caller schema nodes','b64_width':'DATA b64 literal empty is metadata baseline only; add 4*ceil(raw_chunk_bytes/3) per full coalesced chunk/one final partial','profile_adoption':'Prepare authenticated profile_type=group max lease. Adopt authenticated member whose group_id matches and profile_id is in group.members; each bound/component <=group; global catalogue hash equal. Persist actual action_profile_id/SHA in native_meta. Never rewrite global SHA as action SHA.','script_gate':'Source Driver injects FILE_NATIVE_SCRIPT_GATE canonical JSON exact five fields; LAUNCH binds its SHA. Child publishes readyJSON {pid,nonce,manifest_sha256}, waits parent releaseJSON {nonce,pid} before corpus I/O. Driver verifies actual live creation-bound PID/RSS before release; actual ready range retained in script-startup-gate-ready sideband. Driver additionally injects FILE_NATIVE_SCRIPT_DEADLINE_PERF_NS positive int64 absolute perf ns after actual phase/total clamp and before Popen; child polls it while waiting and before corpus access. Gate root means corpus; ready/release share owned artifact parent. Source preallocates 16384 bytes and 2 files before Popen, retains full upper hold on all paths. No caller env GO.'}}
+
+
+def source_admission(ref):
+    """Authenticate the parent's immutable physical source allocation."""
+    need(type(ref) is dict and set(ref)=={"path","bytes","sha256"} and integer(ref["bytes"],1)
+        and ref["bytes"]<=65536,"closed-source-admission-reference")
+    raw=regular_read(ref["path"],ref["bytes"])
+    need(len(raw)==ref["bytes"] and digest(raw)==ref["sha256"],"same-buffer-parent-source-admission")
+    b=strict(raw,65536)
+    kinds={
+        "private-qualification-R3-source-budget-046-v2":(None,
+            dict(LONG=49152,HISTORY=57344,CONTROL=32768,PROFILES=73728,FINALIZER=81920)),
+        "private-qualification-R3-source-budget-052-v3":(
+            "404d8959500bff1409ce8298279ca330be8f5d35b50914dacefd99872d43bccd",
+            dict(LONG=47104,HISTORY=57344,CONTROL=16384,PROFILES=81920,FINALIZER=92160))}
+    need(b.get("kind") in kinds,"known-approved-source-allocation-kind")
+    claim,groups=kinds[b["kind"]]
+    total=b["max_bytes"]
+    if total in (303104,313344):
+        need(b["kind"]=="private-qualification-R3-source-budget-052-v3"
+            and b.get("claim059_sha256")=="96043645ad042150623ed0141d9ffe9ad8c90df67e9cce88daba3c0a4be139bd",
+            "additional-source-physical-claim059")
+        if total==313344:need(b.get("claim069_sha256")=="3ca712ec1c824741a5b83aad2723206de7a989b28a84c918bc0a9283baffdea7","source-claim069")
+        groups={name:b["groups"][name]["bytes"] for name in groups}
+        need(all(integer(n,1) for n in groups.values()),"parent-group-allocation-integers")
+        if groups["PROFILES"]==83968 or "claim061_sha256" in b:
+            need(b.get("claim061_sha256")=="5103300b9bb3a49eee35968d28347260109011419e49d7dc238be6f7611208b6",
+                "source-claim061-refinement")
+    else:need(total==294912,"approved-source-physical-total")
+    need(b["claim046_sha256"]=="6bd67f146b344cdb8bd501a261df795e946a49b557d5a5d5227665c8e8e581ba"
+        and (claim is None or b["claim052_sha256"]==claim)
+        and b["engine_commit_fixed"]=="0628322e4b48e0efad19cdc32238a622d4aaa7a8"
+        and b["owners"]==dict(LONG_PROFILES_FINALIZER="01a15b51-a50b-7930-8633-b42694240252",
+            HISTORY="01a15bcc-6fb9-7e63-b935-a60d25d9390a")
+        and b["source_only"] is True and b["runtime_go"] is False
+        and b["max_bytes"]==b["bytes"]==total and b["max_files"]==b["files"]==10,
+        "approved-claims-owners-pin-and-physical-total")
+    names=dict(LONG={"long_lane.py","legacy_archive_restore.py"},HISTORY={"history_lane.py"},
+        CONTROL={"fake_controls.py","fake_cases.json","lane_config.example.json","source-manifest.json","README.md"},
+        PROFILES={"long_source_profiles.py"},FINALIZER={"phase_finalizer.py"})
+    need(set(b["groups"])==set(names),"closed-source-groups")
+    folder=Path(b["source_root"]);need(folder.is_absolute(),"absolute-source-allocation-root")
+    actual={};total=0
+    for group,paths in names.items():
+        g=b["groups"][group]
+        need(set(g)=={"bytes","files","paths"} and set(g["paths"])==paths
+            and g["bytes"]==groups[group] and g["files"]==len(paths)
+            and all(integer(cap,1) for cap in g["paths"].values()),"closed-source-group-caps")
+        size=0
+        for name,cap in g["paths"].items():
+            p=folder/name;s=p.lstat()
+            need(p.is_file() and not p.is_symlink() and s.st_nlink==1
+                and not(s.st_file_attributes&1024) and s.st_size<=cap,"actual-source-file-cap")
+            actual[name]=file_hash(p,cap);size+=s.st_size
+        need(size<=g["bytes"],"actual-source-group-cap");total+=size
+    need({p.name for p in folder.iterdir()}==set(actual)
+        and total<=b["max_bytes"] and sum(groups.values())==b["max_bytes"],
+        "closed-ten-source-files-and-whole-cap")
+    return copy.deepcopy(ref)

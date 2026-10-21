@@ -1,0 +1,288 @@
+{
+  "schema": "private-windows-case-map-v1",
+  "runtime_go": false,
+  "final_engine_pin": null,
+  "case_source_review_sha256": null,
+  "rule": "All null bindings refuse before mutation. Existing case IDs and assertions remain obligations; historical counts are not final events.",
+  "group": "legacy-recovery",
+  "cases": [
+    {
+      "case_id": "R/navigation-and-operational-backup/A/N16",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "navigation-and-operational-backup/A/N16"
+    },
+    {
+      "case_id": "R/navigation-and-operational-backup/A/N128",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "navigation-and-operational-backup/A/N128"
+    },
+    {
+      "case_id": "R/navigation-and-operational-backup/B/N16",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "navigation-and-operational-backup/B/N16"
+    },
+    {
+      "case_id": "R/navigation-and-operational-backup/B/N128",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "navigation-and-operational-backup/B/N128"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-plan",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/up/refresh-plan"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-preserved",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/up/refresh-preserved"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-file",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/up/refresh-file"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-namespace",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/up/refresh-namespace"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-before-complete",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/up/refresh-before-complete"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-complete",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/up/refresh-complete"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-namespace-preserved",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/up/refresh-namespace-preserved"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/down/refresh-plan",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/down/refresh-plan"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/down/refresh-preserved",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/down/refresh-preserved"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/down/refresh-file",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/down/refresh-file"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/down/refresh-namespace",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/down/refresh-namespace"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/down/refresh-before-complete",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/down/refresh-before-complete"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/down/refresh-complete",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "namespace-interruption-correcting-successor/down/refresh-complete"
+    },
+    {
+      "case_id": "R/checkpoint-transfer-retire-repeat-gc/A",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "checkpoint-transfer-retire-repeat-gc/A"
+    },
+    {
+      "case_id": "R/half-preparation-backup-recovery/A",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "half-preparation-backup-recovery/A"
+    },
+    {
+      "case_id": "R/checkpoint-transfer-retire-repeat-gc/B",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "checkpoint-transfer-retire-repeat-gc/B"
+    },
+    {
+      "case_id": "R/half-preparation-backup-recovery/B",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "half-preparation-backup-recovery/B"
+    },
+    {
+      "case_id": "R/impossible-final-namespace",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "impossible-final-namespace"
+    },
+    {
+      "case_id": "R/skipped-or-selected-once/A",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "skipped-or-selected-once/A"
+    },
+    {
+      "case_id": "R/skipped-or-selected-once/B",
+      "status": "PENDING",
+      "entry": "suite_recovery.py:dispatch",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "skipped-or-selected-once/B"
+    }
+  ],
+  "event_count": null,
+  "old282_is_not_final": true,
+  "template_sources": {
+    "suite_recovery.py": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_recovery.py",
+      "bytes": 8089,
+      "sha256": "da30aececf9ae58b48322dfcdb91f33d83928b874236b2c34e600104353d6f2e",
+      "reviewed": false
+    }
+  },
+  "template_functions": {
+    "suite_recovery.py:dispatch": "9ce3758fd45e37c4f32e48ea43dd8c1a14a6c98cd54716c852cee4a0510f17f1"
+  },
+  "source_only_dispatch_status": "Actual donor function bodies bound; Windows IO/helper closure and native extra constructors remain unreleased. No execution or qualification."
+}

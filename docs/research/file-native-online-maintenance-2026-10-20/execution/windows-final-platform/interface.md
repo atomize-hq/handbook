@@ -1,105 +1,49 @@
-# Private platform039 interfaces — SOURCE ONLY
+# Private Windows R3 source interfaces
 
-No interface is runtime GO. Parent source/binary/schema/review/guard/budget
-bindings and actual complete import closure must precede activation.
+Source freeze is awaiting fresh complete review. Runtime admission is false. These are private research interfaces; the structured format standard remains proposed.
 
-LaneHost exposes authorize(config,lane), FAST poll(), checkpoint(label,reserves),
-invoke(spec), record(label,value,category,max_bytes), drain(label), and run_case.
-history_authorization is None until actual authorize(config,"history") stores
-the full positive receipt. Shared runner public make_runner(host,bindings) is
-pure before that authority; preflight may then touch native ports/harness.
-harness is exact reviewed shared7ce; its Driver/AssertionError(row) contract stays.
+The fixed engine source is 0628322e4b48e0efad19cdc32238a622d4aaa7a8. The shared Harness SHA remains 7ce0a4a06a35fa9e7f4f4080a40315a418bb45e47a8946ca06d78c2117d855e8. The 166 required IDs remain PENDING. No controls/native calls/builds were executed by this source worker.
 
-lane-invoke-v2 closed common fields:
-kind,api,label,executable,role,timeout_seconds,max_stdout_bytes,max_stderr_bytes,
-growth,allowed_exit_codes,profile,transport_profile,max_receipt_bytes.
-engine-json adds final_pin,root,action,fields,stdin_release,max_input_bytes,
-quarantine_release. fields MUST exclude root/action; publish wraps request once.
-python-argv adds script,argv,transitive_bindings,startup_gate,required_gate,
-max_stdin_bytes,output. Scripts require unique reserved startup gate before any
-SELECTED/corpus IO. Only one exact expected exit; profile is parent-reviewed
-typed data, never a formula callback. The actual invocation policy and profile
-must agree before launch. Return includes response in memory and raw single-ref,
-exit/source/image/budget/closure, engine_ns/spawn_total_ns/native peak.
-No duplicate standalone stdout JSON file. Helper must consume response directly.
-record(bytes) preserves exact bytes and hash; projection happens before encoding.
+## Authority
 
-Single raw stream: canonical UTF8 sorted compact JSON plus LF, RFC4648 base64.
-One stream header binds run/source manifest/guard/claim. Each call has seq:u64
-starting0, strictly+1 on every BEGIN/plannedIN/START/RSS/out/err/END.
-BEGIN pid/creation nullable, input_scope="planned", input_n/input_sha and exact
-planned input frames; this is forensic request capture, not stdin delivery.
-START closed {v,kind,call,seq,pid,creation,qpc,rss}, one positive owned native
-identity/RSS before actual stdin operation. DATA closed
-{v,kind,call,seq,stream,offset,n,sha,b64}, <=16384 raw bytes, stream in/out/err.
-RSS retains actual QPC/native PID/creation/rss/peak/role/phase.
-END retains actual closure/violations/source/image/input/output clocks and counts,
-in_n/in_sha actual completed written PREFIX and first_write_qpc.
-first_write_qpc is sampled immediately before first WriteFile eventually returning
-positive completion; pending candidate retained until completion. Zero written
-means null. Positive means >=START.qpc. PlannedIN may precede START; successful
-out/err and actual stdin cannot. Constructor failure without START is censored.
+LaneHost construction requires the bootstrap's verified gate, immutable source closure, parent runtime grant and current native owner. Before Evidence opens, manifest.capture.guard_bounds must equal the actual inner and outer sealed budget evidence_bounds. grant.guard_budget_refs contains exact inner/outer RangeRefs. Inner binds FILE_NATIVE_BUDGET/owner hash; outer binds the actual outer owner budget, nonce, source and inner-guard identity. LaneHost-start captures the original refs and numeric pair.
 
-Reference closed {schema:"single-raw-ref-v1",path,run,call,begin,end,frames,bytes,
-sha256}. begin/end bound physical span, possibly interleaved other calls. SHA
-and bytes cover ONLY exact canonical frames for this call in physical order,
-including END; no self-hash field. Finalizer also hashes closed whole stream.
-Extractor checks sequence, stream continuity, exactSHA/call/run/source/image,
-positive start, expected actual native identity, full stdin/EOF/reap/IO/callback
-closure and strict stdout JSON. Unknown/nonclosed data/start/begin refuses.
+authorize(config,lane) first checks the exact original configuration hash and parent lane permission. Helper source admission authenticates the exact parent-selected budget reference, fixed owners/ten names, claims and actual per-file/group/whole sizes. Current helper 069 total313344 requires its actual claim. History additionally verifies canonical parent source manifest/review acceptance and linked review hashes. Original helper guard data must equal the verified manifest pair. No label containing PASS grants authority.
 
-Projection closed {schema:"native-response-ref-v1",raw_ref:<exact ref>}.
-Only exact persisted decoded native engine envelope is replaced; expanded size,
-depth and nodes are bounded. Actual response bytes exist once in raw capture.
-No caller-supplied response flag creates PASS. NativeCallFailure args[0] remains
-the unchanged in-memory row; bounded repr points to this call's raw evidence.
+## Engine and checker calls
 
-transport_envelope_v2 derives per16KiB base64+256-byte metadata ceiling, actual
-input, stdout/stderr caps,1024-byte RSS rows, BEGIN/END max and all sink membership.
-Each active call reserves success raw bound plus failure escrow. Pending escrow
-is released only after owner/writer completion; retained stream count increases
-monotonically. Profile keys include api_version=2,capture_schema,chunk_bytes=16384,
-profile_sha256,stdout_bytes,stderr_bytes,rss_samples,callback_seconds,
-failure_tail_bytes,begin_max_bytes,end_max_bytes,reference_max_bytes,
-projection_max_bytes,all_sink_components v2. All sink components are mandatory:
-input_frames,stdout_frames,stderr_frames,rss_frames,call_header_footer,
-reference_rows,harness_projection,helper_records,oracle_metadata,outer_guard,
-finalization. Whole-phase aggregate counts live escrow once per maximum live
-writers, not per602 sequential calls. No averages/gzip/deletion credit.
+invoke(spec) supports closed lane-invoke-v2 engine-json calls. It requires the actual LONG root release, exact candidate image, authenticated catalogue action profile and original phase reserve data. Native Driver applies total/phase deadlines before launch, captures suspended identity/RSS, records START before resume, and retains one raw capture with real EOF/handle/callback closure.
 
-closed-writer-settlement-v1 requires source_manifest/profile/budget/whole-phase
-SHA and positive process_reaped,io_closed,callbacks_joined,raw_writer_released.
-Actual retained category bytes/files/dirs must not exceed prior upper lease.
-Only unwritten potential is released; original upper and closure proof remain.
-Corpus upper leases stay until a source-proven actual delta/quiescent census.
-Parent grant supplies profile_sha256/whole_phase_forecast_sha256.
-checkpoint emits forecast_sha256 and raw_ref. Final outer census follows all
-host output, gzip/finalJSON closure and two actual empty Job observations.
+OracleBridge owns the sole checker entry. checker_capture reads the actual independently maintained CLI CONTRACT through AST literal evaluation. Parent checker_policy supplies exact cli/interpreter/source references, per-mode finite limits/profile IDs/counts, existing output roots, category_aliases, readonly provenance/quota refs and exact refusal expectations. category_aliases names the actual evidence and protocol ledger categories.
 
-HistoryPorts source owns bindings/build/catalog/namespace/ownedread/write,
-verify_ready/clock_sample/enter/leave/set_origin/observe_started/current and phase
-observations/abort/guard_prefix/donor_authority/seal_context/index/read_reference.
-Shared036 owns semantics, exact16 phases,1600 accepts/4000 offers/640 paced calls
-and640000 warm+640 first, matched initial unpaced samples and final provisional
-seals. Exact finite selected policy is publisher44s/reader48s/oldpin23.6s with
-unchanged45s pacing; profile owner035 must bind actual budgets/serializer widths.
-031 prefix observation is provisional and cannot pretend final closed gzip/Job.
-Final16 body refs exclude own ref and are joined only after host exit.
+A request is written once with an actual offset-zero reference. Python uses -I -S -B -u. Root in the five-field gate is the corpus; ready/release paths use the existing controls_root with run/mode/call-bound names. The Driver supplies the actual absolute performance-counter deadline. invocation-closure joins the original request and actual emitted index to the same native call.
 
-Windows Native uses the same lifetime lock as Driver for identity/memory/resume/
-terminate/close. Retired or uncertain numeric handles are not retried. Driver
-owns Popen/all3pipes/reap. W5 drain handles unstarted threads, isolates everyjoin
-and retains errors. finalize independently attempts evidence/census/native close.
-Reader end proofs are idempotent and require actual owner/EOF/native/IO/callback
-closure. Ordinary injected exit2 differs from intentional138/137.
+consume_checker checks all final/partial companions, exact hashes, complete before/after proof and actual independent payload. Full normalization uses successful semantic/request/navigation/R1 results; the complete result stays in a hashed artifact. HISTORY's normalized summary keeps its existing eleven-field ABI.
 
-Clock ABI counter(),frequency(),bridge(),process_proof(pid) uses actual lazy
-kernel32 QPC and bound retained stage/child identity, never arbitrary PID reopen.
-No native API has been invoked. Bootstrap explicitly opts into a new031
-source/schema via exact parent release; old50ecc is immutable.
+legacy_full(root,checkpoint,known_requests_ref,request_provenance_ref,required_mapped_keys,transport_profile,output_prefix,limits) returns exactly index_ref, request_ref, native and artifacts. LONG validates its exact retained cohort from the actual result artifact.
 
-165 case source entries are named but source/Windows ABI review and complete
-dependencies remain pending; the remaining document-matrix body is explicit.
-No case, build, unit, native control or runtime qualification is implied.
+CHECKER_WRITER_CONTRACT declares serialized max_live1, 17 potential output names, full gate hold16384/two files, positive call-scoped output/gate settlement, and full-hold failure stop. Settlement requires the same exact child done/owner-finished/resources/EOF/callback closure and exact known output/partial membership. It releases only unwritten allowance, retains all actual files, and claims no deletion credit or whole-Job emptiness.
 
-045 FINAL SOURCE BOUNDARY: canonicalv2 coalescing, pending input capture, LAUNCH/image/meta refs, case tags, bounded failure repr/str, atomic evidence close fence and actual scoped closure settlement are SOURCE IMPLEMENTATIONS, UNREVIEWED/UNEXECUTED. Scope contract: case_id parent166, scope_id helperlabel, case_scope fresh32hex. Native metadata follows selected meta-v2 keys. Guard prefix now hashes complete uncompressed JSONL through selected completed RSS and refuses if older40ms; active-gzip publication still requires native proof. All prior donor/profile/sealer/direct-checker integration gaps remain NO_GO until actual complete review. No claim165 runnablecases or fullsource acceptance. Hardfreeze04:10:14Z unchanged.
+## LONG byte transport
+
+NativeHost.long_stream_capture(stream_config,verifier) checks equality with the originally authorized LONG stream projection. It loads the frozen byte module from the verified buffer. Only that fresh module instance receives source-owned fixed Runtime/Popen provider objects; stdlib globals are not patched. The exact two worker argv/topology are checked.
+
+Workers use normal Driver script gates and captured bounded JSON control stdio. Payload bytes use one dedicated inherited anonymous pipe endpoint per worker, not control stdin/stdout. Both workers execute unchanged frozen produce/consume primitives. No compressed payload is retained. The pipe endpoints close once; unknown closure permanently fences further calls. Two actual raw captures, metadata/gate refs and invocation closures are attached to native_helpers. provider_api is long-stream-native-r3.
+
+LONG_STREAM_CONTRACT supplies exact helper IDs long/stream-produce and long/stream-consume, reader role, control0/4096/8192 bounds, max_live2, two gates/callbacks, metadata upper12 and actual proof fields. Failure escrow allows four callback-wait observations. The verifier runs only after the frozen byte/directory/inventory/CRC/EOF checks and actual positive native helper closure.
+
+The source archive has one explicit local ledger lease before restore. Stream growth is separately held from the immutable parent long_stream_growth allocation before writes. Legacy remaining forecasts derive from the actual quiescent inventory rather than a future caller hash.
+
+authorize(...,'long:verified-engine-release') verifies the same-run full checker result, original request, complete allpath-derived inventory, actual byte proof and derived forecast file. Source/destination stay quarantined until that gate succeeds. The R-long-stream-restore obligation references the actual completed LONG origin and successor proofs; native events keep their true original scope.
+
+## Cases and controls
+
+source_preflight reads six actual case maps and requires exactly166 unique IDs, parent constructor reviews and exact source/function bindings before corpus work. All authored case statuses stay PENDING until real qualification.
+
+CaseTemplates.dispatch calls run(case,args) or a one-argument source constructor after exact source/function validation and the closed import/provider rewrite. NativeCase exposes init(mode,n), selected, read, document, write, publish, pack, drain, verify, clone and call; h/a/host/root/id refer to actual guarded objects. initialize already selects consumer=project and lifecycle.setup. The template namespace provides ordinary(case,label,selected,kind,expected). D dispatches to its actual Matrix-owned callable, not a generic invocation placeholder.
+
+Aliases inherit the actual parent phase before filesystem mutation. Source-less aliases require one admitted base case. Case scopes and fresh nonces follow derivatives; callback results bind exact native response hashes and handles.
+
+source_controls contains 64 bounded prepared memory groups, including endpoint close-once/failure/birth-fence assertions. It is not an executed result. Any future control run needs separate parent admission. Full review, actual Windows binary/build/source bindings, real all-sink allocations and native qualification remain required.
+
+The closed runtime manifest requires capture, including actual guard_bounds checked by LaneHost/Adapter. Independent checker CLI source same-buffer read cap is34816. Legacy restore remaining forecast derives from the fixed authenticated ORIGINAL archive, not later stream destination limits.

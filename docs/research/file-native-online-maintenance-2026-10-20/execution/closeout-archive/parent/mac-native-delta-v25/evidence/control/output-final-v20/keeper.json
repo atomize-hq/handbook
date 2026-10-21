@@ -1,0 +1,159 @@
+{
+  "kind": "independent-native-keeper",
+  "nonce": "c0df6a6dd131bdba6c8ba46771502597",
+  "identity": {
+    "pid_requested": 9027,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 9027,
+    "ppid": 9026,
+    "uid": 501,
+    "pgid": 9027,
+    "state": 2,
+    "start": [
+      1792532940,
+      928579
+    ]
+  },
+  "fixed_cutoff_epoch": 1792581014.0,
+  "local_deadline_monotonic": 3221403.196095083,
+  "token_received": true,
+  "state": "CLOSED_AFTER_CENSOR",
+  "identity_budget": 4096,
+  "reason": "RuntimeError('output-prewrite-cap')",
+  "events": [
+    {
+      "termination": {
+        "status": "FROZEN_TREE_SIGNALLED",
+        "steps": [
+          {
+            "pid": 9036,
+            "start": [
+              1792532942,
+              624482
+            ],
+            "signal": 17,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 9029,
+            "start": [
+              1792532942,
+              571621
+            ],
+            "signal": 17,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 9036,
+            "start": [
+              1792532942,
+              624482
+            ],
+            "signal": 9,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 9029,
+            "start": [
+              1792532942,
+              571621
+            ],
+            "signal": 9,
+            "sent": true,
+            "errno": 0
+          }
+        ],
+        "known": [
+          {
+            "pid_requested": 9029,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 9029,
+            "ppid": 9027,
+            "uid": 501,
+            "pgid": 9029,
+            "state": 4,
+            "start": [
+              1792532942,
+              571621
+            ]
+          },
+          {
+            "pid_requested": 9036,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 9036,
+            "ppid": 9029,
+            "uid": 501,
+            "pgid": 9029,
+            "state": 4,
+            "start": [
+              1792532942,
+              624482
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "notify_parent": {
+        "pid": 9026,
+        "start": [
+          1792532940,
+          859265
+        ],
+        "signal": 30,
+        "sent": true,
+        "errno": 0
+      }
+    },
+    {
+      "closure": {
+        "proven": true,
+        "required_observations": 2,
+        "observations": [
+          {
+            "monotonic": 3221392.955535,
+            "groups": [
+              {
+                "pgid_requested": 9029,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3221392955525041
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          },
+          {
+            "monotonic": 3221392.975975666,
+            "groups": [
+              {
+                "pgid_requested": 9029,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3221392975962333
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          }
+        ],
+        "total_numeric_observations": 2
+      }
+    }
+  ]
+}

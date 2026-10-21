@@ -1,0 +1,12 @@
+{
+  "kind": "parent-reviewed-bootstrap-exec-prefix-v1",
+  "prefix": "import hashlib,pathlib,sys\nb,l,bs,ls=sys.argv[1:5]\nbb=pathlib.Path(b).read_bytes()\nif hashlib.sha256(bb).hexdigest()!=bs or hashlib.sha256(pathlib.Path(l).read_bytes()).hexdigest()!=ls: raise SystemExit(\"preimport-source-binding\")\nsys.argv=[b,*sys.argv[5:]]\nexec(compile(bb,b,\"exec\"),{\"__name__\":\"__main__\",\"__file__\":b,\"__package__\":None})\n",
+  "prefix_sha256": "220c739210dd01e6092ae38a7131ac3a75e6863c3b93f5ff15f171e1266738aa",
+  "bootstrap_sha256": "ac2cc1e993fc861a174da06b6c5c619f0f3bf3355450cb367b9a9b2a2ed59e79",
+  "loader_sha256": "5b6034a1f5ddce88ec76b3566a0e00224ae8fcbefe404e39d2156d92b54522b9",
+  "old_runpy_prefix_sha256": "dae316abd1a901312af6c2f5f6d6b871a38ac625be22e57332057def40311a33",
+  "old_prefix_status": "STATIC_SELF_MODULE_BLOCKER_NOT_EXECUTED",
+  "mechanism": "Hash both inputs first; compile exactly captured bootstrap bytes in separate anonymous globals. Outer -c __main__ has no owned __file__. Bootstrap verifies full closure and all previously imported modules before installing finder; no gate disabled. No owned implementation import or source code changed.",
+  "runtime_go": false,
+  "manifest_sha256": "afbe9f7bc83531b6fc6caf0f97f028fc092524a760a32115fdb0d4e7de6ec609"
+}

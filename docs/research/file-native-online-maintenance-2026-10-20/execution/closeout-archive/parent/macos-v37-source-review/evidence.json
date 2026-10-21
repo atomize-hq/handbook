@@ -1,0 +1,149 @@
+{
+  "kind": "macos-v37-independent-static-review",
+  "source_pin": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "disposition": {
+    "cache_direct_callable": "BOUNDED_SOURCE_ACCEPT",
+    "runtime_factory_mechanism": "BOUNDED_SOURCE_ACCEPT",
+    "isolated_cargo_composite": "REMEDIATE_HELPER_IMPORT_BINDING",
+    "full158": "NO_INTEGRATE_PENDING",
+    "runtime_go": false
+  },
+  "scope": {
+    "files": 8,
+    "code_files": 7,
+    "bytes": 145705,
+    "all_read_unreduced": true,
+    "manifest_bytes": 1651,
+    "manifest_sha256": "96eeaa1f3bb7582242e62dbe4c47c61fddfa9545237d01c5ad9ef375c64fde08",
+    "closure_sha256": "6f3c2e76a95931ef336de5ddb34d39e612972a5978c428987ff4aedf9c1332a8",
+    "packet_bytes": 45153,
+    "packet_sha256": "0920ac80e0f0f49ab840b7f7934e8e59fb2e231fefde52ea1229d946f4c26e35"
+  },
+  "findings": [
+    {
+      "id": "M37-HELPER-IMPORT",
+      "priority": 1,
+      "scope": "composite isolated cache/Cargo operator",
+      "path": "execution/native-macos/native_cases_v36.py",
+      "start": 455,
+      "end": 457,
+      "source_gate": [
+        442,
+        453
+      ],
+      "factory_install": 420,
+      "factory_call": 497,
+      "reason": "Ordinary helper imports before frozen loader; actual imported helper paths/code markers unchecked. Listed disk hashes do not bind sys.modules/sys.path-selected code.",
+      "repair": "Load/bind the three inert helpers through exact closed source loader; or return concrete bootstrap proving it, with cached-module handling.",
+      "full158_dependency": false,
+      "direct_cache_callable_blocker": false,
+      "static_counterexample_only": true
+    }
+  ],
+  "prior_findings": {
+    "M36_PHASE": {
+      "constructor_cycle": "CLOSED_SOURCE",
+      "actual_operators": "PRESENT",
+      "composite_helper_entry": "NEW_REPAIR",
+      "exact_phase_inputs": "PENDING"
+    },
+    "M36_INVENTORY": "CLOSED_SOURCE_ONERROR_RAISES",
+    "M36_ORACLE_WIRE": "CLOSED_SOURCE_CHECKER_STDIN",
+    "M36_CLOSURE": "FULL158_STILL_PENDING"
+  },
+  "phase_results": {
+    "cache": "UNRUN",
+    "build_no_run": "UNRUN",
+    "list31": "UNRUN",
+    "unfiltered31": "UNRUN",
+    "ordinary17": "UNRUN",
+    "full158": "PENDING"
+  },
+  "source_evidence": {
+    "cache": [
+      "native_cache_activate_v36.py:32-107 validates exact copy release/source25/locked45/forecast before factory",
+      "native_cache_activate_v36.py:108-165 runtime/guard/admission then bounded streaming/census/receipt"
+    ],
+    "runtime_factory": [
+      "native_cases_v36.py:396-427 complete source/module map, byte loader, actual module marker"
+    ],
+    "isolated": [
+      "native_cases_v36.py:429-572 no full facade constructor/SDK/prebuilt binary",
+      "native_cases_v36.py:502 uses __new__",
+      "native_cases_v36.py:541-554 explicit no-run/list/single31"
+    ],
+    "inventory": [
+      "native_cases_v36.py:220 raising onerror",
+      "native_cases_v36.py:390-394 walk_files raising onerror"
+    ],
+    "checker": [
+      "native_suite_v36.py:18-22 exact checker-stdin route",
+      "native_role_v36.py:194-208 bounded Python script mode",
+      "native_facade_v36.py:138-145 actual grant binding",
+      "native_role_v36.py:367-419 native proof precedes payload"
+    ],
+    "unit_parser": [
+      "native_suite_v36.py:65-75 raw all31 list/pass/outcome/closure verification"
+    ]
+  },
+  "pending_inputs": [
+    "Exact released45 archive/index copy manifest",
+    "Actual Darwin package resolution/unpack forecast",
+    "Authenticated RAM/file cache payload hydration",
+    "Complete runtime_modules/source/asset closure",
+    "Concrete bound helper bootstrap",
+    "Exact Cargo/Python/toolchain/environment/output/resource grants",
+    "Real finite native controls",
+    "Explicit per-phase GO",
+    "Native outer guard final closure",
+    "Full158 SDK/projection/checker adapter assembly"
+  ],
+  "comparison_interfaces_not_exact_runtime_release": [
+    "admission_v20.bounded_receipt",
+    "monitor_v20.Registry",
+    "guard_v20.Events"
+  ],
+  "dynamic_execution": {
+    "candidate_imports": 0,
+    "compile_parse_runs": 0,
+    "factory_invocations": 0,
+    "native_processes": 0,
+    "cache_writes": 0,
+    "builds": 0,
+    "tests": 0,
+    "source_edits": 0,
+    "git": 0,
+    "indexing": 0,
+    "network": 0
+  },
+  "authorization": {
+    "claim": "071",
+    "claim_sha256": "128a66f9c06c021deffd26aec1ac70a2e54dddcb61e0ded0250c20ccac107c56",
+    "membership": "meta-membership-v14.json",
+    "membership_bytes": 7348,
+    "membership_sha256": "8f186a77435afa16723514b56af168532a6fb68e895fb5f14f8b00334ac81822",
+    "cap_bytes": 11599872,
+    "pair_max_bytes": 24576,
+    "pair_max_files": 2,
+    "base_future": 112617,
+    "publication_future": 0,
+    "closed_guardR43_future": 0
+  },
+  "prepublication_census": {
+    "actual_bytes": 11267558,
+    "files": 1361,
+    "pending": 262749,
+    "projection": 11530307,
+    "cap": 11599872,
+    "mac_return_bytes": 192509,
+    "mac_return_files": 10
+  },
+  "verification": "All8 exact file sizes and hashes before/after publication; source freeze released on final successful verification.",
+  "limitations": [
+    "STATIC_ONLY",
+    "NO_NATIVE_PHASE_GO",
+    "GITNEXUS_UNAVAILABLE_IMPACT_UNKNOWN_HIGH",
+    "FULL158_PENDING",
+    "EXACT_RUNTIME_RELEASE_PENDING"
+  ]
+}

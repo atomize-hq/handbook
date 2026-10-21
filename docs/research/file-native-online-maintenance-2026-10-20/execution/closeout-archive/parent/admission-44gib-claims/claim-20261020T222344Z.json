@@ -1,0 +1,98 @@
+{
+  "kind": "44GiB-F12-stream-evidence-subcap-repair-after-measured-overrun",
+  "claim_id": "44GiB-CENTRAL-011-STREAM-EVIDENCE-1MiB-WITHIN-MATRIX40",
+  "utc": "2026-10-20T22:23:44.973197+00:00",
+  "status": "AUTHORIZED_INTERNAL_REPAIR__PRIOR_OVERRUN_PRESERVED__WORKER_STOP_UNTIL_REGISTRATION_FORECAST",
+  "authority": "Metaauditedoverrunandstoppedworkernewwrites/runsbeforefinalregistration; authorizes512KiBreassignmentfromexistingmatrix40MiBpool. No newwholecapacity/fileallowance.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T222156Z.json",
+    "sha256": "088331e9e86133ac9f612aaf44d8cb1a32814c55632517eca9d0be3f8f1c16a0"
+  },
+  "observed_prior_overrun": {
+    "measurement_source": "METAauditbeforefinalstreambudgetregistration",
+    "runtime_actual_bytes": 472977,
+    "runtime_files": 11,
+    "runtime_prior_cap_bytes": 458752,
+    "runtime_overrun_bytes": 14225,
+    "Landing_actual_bytes": 56201,
+    "Landing_files": 6,
+    "Landing_prior_cap_bytes": 65536,
+    "Landing_within_cap": true,
+    "combined_actual_bytes": 529178,
+    "combined_prior_cap_bytes": 524288,
+    "combined_overrun_bytes": 4890,
+    "retained_failed_receipt_bytes": 194335,
+    "retained_RSS_bytes": 208922,
+    "retained_failed_receipt_plus_RSS_bytes": 403257,
+    "runtime_other_bytes": 69720,
+    "all_failed_files_and_data_preserved": true,
+    "no_deletion_rebase_or_zeroing_actual": true,
+    "cause": "Finalreceiptpostchecktimingisnotyetconfirmed. PreservecauseUNKNOWN pendingguard/source/receipttrace; do notclaimenforcementheld.",
+    "global_parent_pool": "METAconfirmsexistingparentmatrixevidence40MiBpoolfits; thatdoesnotexcusetheviolatedassignedruntime/combinedsubcaps.",
+    "historical_status": "Actualpriorruntime14,225B/combined4,890Boverrun staysnegativeevidence; newclaimisnotretroactiveadmission."
+  },
+  "F12_internal_transfer": {
+    "from": "Othermatrixevidence39.5MiBshare",
+    "to": "Streaming evidence0.5MiBshare",
+    "transfer_bytes": 524288,
+    "matrix_stream_pool_bytes_unchanged": 41943040,
+    "prior_stream_total_bytes": 524288,
+    "new_stream_total_bytes": 1048576,
+    "prior_other_matrix_bytes": 41418752,
+    "new_other_matrix_bytes": 40894464,
+    "new_stream_runtime_bytes": 983040,
+    "stream_Landing_bytes_unchanged": 65536,
+    "pool_sum_validated": true,
+    "no_byte_or_globalfile_increase": true
+  },
+  "file_subcaps_unchanged": {
+    "protocol_regular_files": 166,
+    "protocol_bytes": 2097152,
+    "runtime_evidence_files": 40,
+    "Landing_evidence_files": 9,
+    "source_files": 1,
+    "stream_combined_files": 216,
+    "F12_evidence_files_total": 49,
+    "global_file_forecast_unchanged": 4792604,
+    "remaining_central_files_unchanged": 207396
+  },
+  "remaining_new_subcap_headroom_before_future_run": {
+    "runtime_bytes": 510063,
+    "Landing_bytes": 9335,
+    "combined_bytes": 519398,
+    "runtime_files": 29,
+    "Landing_files": 3,
+    "qualification": "ProspectiveheadroomunderNEWboundsonly, notunusedactualdeletioncredit. Mustincludeeveryfuturefinalreceipt/RSS/binding/log/summarycopybeforewrite."
+  },
+  "required_registration_and_partition": [
+    "Parentregistersnewversionedstreambudgetandownerbindingincorporating009/010/011AFTERthisseal; nolivebudgeteditbyresourceworker.",
+    "Fullfinalrun/rawRSS/receipt/binding/summaryforecastmustfit960KiBruntimeand40files,64KiBLandingand9files,combined1MiB/49; priorfailedprefixesstaycharged.",
+    "Sharedmatrixreceipts40MiBmustbeagroupwithnonstreamowned39MiBplusstreamowned1MiB. Ifoutercensussumswholeglobalreceiptdirectory, subtractexactnestedstreamactual+reservationfromnonstreamcalculation, thenaddstreamactual/reservationONCE.",
+    "RuntimeandLandingstreamcopiesarephysicallydistinctandbothincludedinstream1MiBpool. No freeperpathduplicationandnoothermatrix39.5MiBleftaftertransfer.",
+    "No silentbaseline reset: changingbounddoesnotresetcumulativepositivegrowthorcurrentactual. Preservefrozenfailedreceipt/RSSbindingsandoldbudgetcapsinoldreceipts.",
+    "Beforefinalrerun, parentreviews/fixesverifiedguardpostfinalreceiptownershipcheckandrecordsfinalactualcensusindependently; cause/verificationlimitationmustremainifnotfullyrepaired.",
+    "WorkerstaysSTOPnewwrites/runsuntilbindingandfullfutureforecastreview. Onlycomplete29controlrerunwithallsource/byte/EOF/durablepin/quarantineassertionswithinadmittedbounds; no omittedcases/engine/realstore/longexecution."
+  ],
+  "whole_applied_allocator_unchanged": {
+    "whole_forecast_bytes": 47079500149,
+    "central_contingency_bytes": 165140107,
+    "inside_closeout_reserve_bytes": 1073741824,
+    "inside_closeout_reserve_files": 100000,
+    "F12_Windows_bytes": 92274688,
+    "F12_CP_shared_bytes": 50331648,
+    "F12_matrix_stream_pool_bytes": 41943040,
+    "F12_global_bytes": 142606336,
+    "C3_unsubclaimed_bytes": 9306112,
+    "global_byte_cap": 47244640256,
+    "global_file_cap": 5000000,
+    "conditional_future_fullsuite_margin_bytes": 12392884,
+    "future_fullsuite_admission": "NO_GOuntilactualstagedproofs/allcostsvalidated"
+  },
+  "resource_worker_actions": "Newimmutableclaimreports only; no livebudget/source/guard/Git edit, no controlrun/engine/build/restore/copy/deletion.",
+  "prior_seals_unchanged": true,
+  "clocks_unchanged": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z"
+  }
+}

@@ -4,9 +4,9 @@
   "file_cap": 5000000,
   "inside_closeout_bytes": 1073741824,
   "inside_closeout_files": 100000,
-  "whole_conservative_prospective_with_earmarks": 46992468341,
-  "central_unassigned_bytes": 252171915,
-  "remaining_files": 203188,
+  "whole_conservative_prospective_with_earmarks": 47010692766,
+  "central_unassigned_bytes": 233947490,
+  "remaining_files": 182868,
   "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
   "t0": "2026-10-20T19:10:14Z",
   "functional_cutoff": "2026-10-21T11:10:14Z",
@@ -96,8 +96,8 @@
     "C2_build_topups": 402653184,
     "C3_source_review_control": 16777216,
     "C2_unclaimed_Windows_topup": 134217728,
-    "C3_unsubclaimed_bytes": 901120,
-    "C3_META_REVIEW_bytes": 10485760,
+    "C3_unsubclaimed_bytes": 68608,
+    "C3_META_REVIEW_bytes": 11075584,
     "C1_Mac_private_cache_active_bytes": 67108864,
     "C3_CP2_CP3_SOURCE_ADMIN_bytes": 3145728,
     "C3_Matrix_admin_topup_bytes": 1048576,
@@ -107,7 +107,8 @@
     "C1_Windows_and_Linux_unused_expired": true,
     "C3_fixture_retirement_bytes": 81920,
     "C3_bounded_guard_bytes": 81920,
-    "C3_shared_runtime_bytes": 81920
+    "C3_shared_runtime_bytes": 81920,
+    "META_central_supplement_bytes": 131072
   },
   "Windows_guard": {
     "owner": "matrix worker",
@@ -138,8 +139,8 @@
   },
   "shared_harness_pin": "01ff272a98fe2cddf01f8ebfc399192f234051af",
   "CP1_open_source_review_findings": [],
-  "as_of": "2026-10-21T06:34:18.041728+00:00",
-  "landing_head": "a5b53218aed9d77a87a835064a8b51eeccbb2ab0",
+  "as_of": "2026-10-21T09:30:59.601238+00:00",
+  "landing_head": "543e7482ca374339c1658148850110be07b8bd3f",
   "latest_harness_source_pin": "5bb4d800",
   "CP1_provisional_pin": "bd6dd9367acddaddcd7873c8043548502a170c3b",
   "CP1_replacement_schema": "STORE3/Work2 immutable selected roots; physical_parent exact initial STORE CAS-parent token, transition_parent metadata comparison-only token, bounded birth_claims; stable pin{id,ordinal,catalog}; no predecessor traversal; explicit owned pack-directory tasks; 128KiB private Work cap prospective quota/backpressure",
@@ -363,8 +364,12 @@
     "exclusive_F02": "C:/file-native-online-cp1-20261020/build"
   },
   "landing_head_before_metadata": "9ee0d66e",
-  "latest_claim": "045_WINDOWS_SOURCE221184_CASE237568_BIND65536",
-  "claim_family_cap_files": 192,
+  "latest_claim": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261021T092725Z.json",
+    "sha256": "1d7b1f1686ff5a70d918cf182599a264611f4894e6c947d0ea675c4d36889099",
+    "scope": "Finalizer fresh24576 pair from existingMETAheadroom; no global draw"
+  },
+  "claim_family_cap_files": 224,
   "claim_family_cap_bytes": 786432,
   "claim_family_internal_extension_files": 48,
   "independent_v5_R1": {
@@ -415,12 +420,17 @@
   },
   "historical_nested_forecasts": "Older nested implementation plans, source hashes, compile evidence and allocations are preserved history. frozen_source_state and current_runtime_admissions below control the current candidate. No source remediation after cutoff.",
   "META_membership": {
-    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\meta-membership-v7.json",
-    "bytes": 4822,
-    "sha256": "742c435ebc495a62de638e7ec3a1fdc85988010a1f80b406a3a7eaabe15cb011",
-    "cap_bytes": 10747904,
-    "original_Context_source": "SeparateC3notMETA",
-    "pending_owner": "Resourceworker,rollingheldforecastsnotrepeatedgeneric256000"
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\meta-membership-v13.json",
+    "cap_bytes": 11206656,
+    "physical_membership": "Same closed P and Landing selectors as v12; historical memberships retained",
+    "pending_base": 160472,
+    "publication_remaining": 812,
+    "open_review_roots": [
+      "independent-checker-source-repair-review",
+      "phase-finalizer-R3-review"
+    ],
+    "open_pair_caps": 24576,
+    "closed_unused_released_once": 23542
   },
   "Linux_peer_compile": {
     "source_pin": "efd07cb5dee46a335be8c03a2f2c0462d7f923ca",
@@ -557,18 +567,11 @@
     "qualification_scope": "FINITE_V34_TRANSPORT_CONTROLS_ONLY"
   },
   "current_runtime_admissions": {
-    "full_history": false,
-    "full_LONG": false,
-    "Windows166": false,
-    "Linux158": false,
-    "Mac158": false,
-    "final_Rust_builds": false,
-    "final31_units": false,
-    "Windows27_diagnostics": false,
-    "native_source25_exact_copy": true,
-    "copy_budget": "execution/admission/native-final-engine-source-copy-budget-v1.json",
-    "source_copy_is_not_runtime_qualification": true,
-    "no_actual_fixture_retirement_or_expiry_credit": true
+    "status": "NO_NEW_NATIVE_PHASE_GO",
+    "all_final31_unrun": true,
+    "native27_unrun": true,
+    "nativeLinux8_unrun": true,
+    "full_matrix_incomplete": true
   },
   "historical_a5_state": {
     "commit": "a5b53218aed9d77a87a835064a8b51eeccbb2ab0",
@@ -589,36 +592,29 @@
     "prior_frozen_state_below": "Historical04:10sourceledger andR2/V4/v35rejections remain unchanged, notcurrentacceptance."
   },
   "prospective_repair_state": {
-    "guard_R3": {
-      "source_review": "REMEDIATE_FULL_READ",
-      "native_controls": 0,
-      "negative_source_archive": {
-        "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\transfers\\bounded-guard-R3-negative-source.json.gz",
-        "bytes": 39715,
-        "sha256": "1de77bfa3d8b7e768a6cf4370f9e37134ac277debd2e4ea1597e038365962995"
-      },
-      "blockers": [
-        "Unassignedsuspendedrootfallbacktermination/reap",
-        "Whole-callwatchdogbeforeload_configthroughfinalpublicationcensusstdout",
-        "40msterminalrootJobRSScoverage",
-        "Publicparentrecords/grantmustrequireouterqualificationnotphysicalclosedalone"
-      ],
-      "R4": "RAMrepairing;052sourcebudgetpending;prospective12inner16outer4supervisorsmustbenativelyenforced"
-    },
-    "Linux_V5": "Consistent13-filefreeze/completeclosure/operatorCLI pending; no newcontrols/cache/build",
-    "Mac_v36": "051160KiB8SOURCEGOreleased;oldv35preserved;158providers/phasecacheoperatorcompletefreeze/reviewpending",
-    "Windows_R3": "051512KiB27neutralrebalanceSOURCEGOreleased;actualprovidersandOraclechildcontractpending",
-    "qualification_helpers_R3": "WIPnotqualified;052neutral29491210rebalancepending;actualall-sinkmodel/finalizer/grants/nativecontractsneedfreshreview",
-    "Context": "05148KiB1SOURCEGOreleased;old40916/32768breach8148preservedexactnegative;constructor/11nativehooks/sourcefullreview/38applicabilitypending",
-    "Archive": "051netzero80KiB4R3controlsSOURCEGOreleased;coree99unchanged;no realretireGO",
-    "independent_oracle_CLI": "Matrixsoleownerassigned;newsourceallocation052pending;v6finalpinbinding062andactualfullproof/companionsrequired",
-    "state_note_envelope": {
-      "source_enforced_selected_state_whole_payload_bytes": 32768,
-      "mandatory_max_count": 2416,
-      "status": "CONDITIONAL_BOUNDED_ATTEMPT_NOT_HEALTHY_FIT_PROOF",
-      "oversize": "RefusalCENSOR_INCOMPLETEpreserveallpriorraw/F05root/failureescrow; no truncate/drop/retrylarger/scopechange",
-      "unconditional_raw_bound_bytes": 4750148336,
-      "runtime_go": false
-    }
+    "as_of": "2026-10-21T09:30:59.601238+00:00",
+    "engine_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+    "Windows_guard": "R4.2 full source reviewed; finite27/SSH source accepted; HYST date regex rejects all valid timestamps. Minimal R4.3 correction authorized after preserved tree6fbfb132. Native27/SSH stillUNRUN.",
+    "Linux": "V5.4 277747/13; finite8/C1/build/list/ONE31 source accepted. Full158 pending release/growth; native copy/cache/build/units UNRUN.",
+    "Mac": "Connected; v36 exact8/131020 fully reviewedREMEDIATE: missing phase bootstrap, built-engine cycle, walk errors, stdin/argv incompatibility and SDK binding. v37 repairs authorized, no cache/build/tests.",
+    "Context": "96861 SHA52e44f8d41c2e1d8c574766d60783653e9a749d0ef97dcbc707e06c12625e507 scoped CONTROL source INTEGRATE. Actual38UNRUN, C31 realkill and REALqualification adapter pending.",
+    "Runtime": "90542 SHAae2694e4a36d8edb496257b4a0cf2bee5749f85bcccc2bdf40d23a952f9b3cd0 full source INTEGRATE; no runtimeGO.",
+    "Checker": "066 CLI33763 SHA186135a62d34e78b85c3a07fdff2013a3a8ac4f2c9037a1892b1d1a62d85fb37 frozen for fresh review. Controls70UNRUN.",
+    "Finalizer": "103738 SHA82b23967df7270dbece193e2d8082f7a670aec1f6d2fbcdc09affbfa9796bea8 full review requires outer provenance join, fail-closed census and endpoint-specific RSS coverage; repairs RAM only until release/preserve.",
+    "Windows_platform": "WIP under063; LONG paired stream provider, build bootstrap and D callable body still being completed. No166run.",
+    "final31": "All31 final-source unit bodies remainUNRUN on Windows/Linux/Mac. Actual native build operator missing on Windows/Mac; Linux source operator reviewed but not admitted.",
+    "full_matrix": "Mandatory scopes unchanged; no full qualification or performance PASS. Functional11:10:14Z and closeout13:10:14Z fixed."
+  },
+  "bootstrap_incident": {
+    "evidence": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\bootstrap-incident-20261021T065454Z.json",
+    "status": "Historical unadmitted bootstrap retained; bounded undo of new dlx directory verified, old caches preserved. Remaining store/metadata growth conservatively funded by055.",
+    "retained_conservative_bytes": 18048297,
+    "retained_files": 288,
+    "claim055": "cf5cc6fa26cda403e1e6f4149159a5910f793299589274f2a149dede3ea3c818",
+    "no_retroactive_pass": true
+  },
+  "pending_resource_changes": {
+    "F07": "Parent authorized prospective192MiB/40000 allocation; not effective until068sealed. Currentlive64MiB/30000; D not admitted.",
+    "Windows31": "Need actual fixture category/root binding,8MiBraw evidence and fixedCargo phase operator; no launch."
   }
 }

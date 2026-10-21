@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-018-MATRIX-F12-PLUS12MiB",
+  "utc": "2026-10-20T23:14:05.922899+00:00",
+  "status": "ALLOCATOR_APPLIED_WITHIN44GiB__SOURCE_ONLY_GO__QPC_CONTROLS_EARMARK_ONLY__FULL_QUALIFICATION_NO_GO",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261020T231405Z.json",
+      "bytes": 9789,
+      "sha256": "cef59d7dc178514fe3564b34b46ce6b78ba5a5d9b9f85149772793df2eaf8d75"
+    },
+    {
+      "file": "claim-20261020T231405Z.md",
+      "bytes": 2269,
+      "sha256": "ec79fbbb05324730a16c34674ba4f7c824008162609beb14fb8a3dc32f1e1c7a"
+    }
+  ]
+}

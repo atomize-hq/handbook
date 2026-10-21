@@ -1,0 +1,101 @@
+{
+  "kind": "44GiB-limited-CP3-F06-proof-headroom-claim",
+  "claim_id": "44GiB-CENTRAL-013-F06-CP-SHARED-108MiB",
+  "utc": "2026-10-20T22:33:12.125808+00:00",
+  "status": "AUTHORIZED_CURRENT_PROOF_CAP_INCREASE__PARENT_REVIEW_HANDOFF_BINDING_REQUIRED",
+  "authority": "Metaauthorizes12MiBcentraldrawforlimitedCP3source/proofphase afterCP2proofunderforecast. Native/fullsuiteadmissionremainsNO_GO; currentCP2jobsclosedpermeta. Source/build/evidencetotalsunchanged.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T222533Z.json",
+    "sha256": "f6fcb5e711fc0a4f90f172a7ae6c8e9ce28902d8bf38e1d3784dee89329ada09",
+    "control_receipts_since": "Read-onlyownerrecordfornewfinal-protocolworkerbelow; nointerveningwholeallocationchanges."
+  },
+  "CP2_measured_underforecast": {
+    "quiescent_CPshared_F06_actual_bytes": 57785994,
+    "quiescent_files": 9683,
+    "preproof_actual_bytes": 31893004,
+    "measured_positive_growth_bytes": 25892990,
+    "worker_prospective_increment_bytes": 16777216,
+    "increment_above_worker_forecast_bytes": 9115774,
+    "previous_assigned_hard_cap_bytes": 100663296,
+    "hard_cap_not_exceeded": true,
+    "hard_cap_headroom_at_observation_bytes": 42877302,
+    "historical_record": "Prospective16MiBunderforecastpreserved; do notretroactivelyclaimforecastheld. Hard96MiBcapwasnotexceeded. AllH551/F1rawfailures/prefixesremaincharged; nocleanup/deletion/rebasecredit."
+  },
+  "current_F06_increase": {
+    "CPshared_prior_cap_bytes": 100663296,
+    "CPshared_new_cap_bytes": 113246208,
+    "central_draw_bytes": 12582912,
+    "matrix_protocol_cap_bytes_unchanged": 33554432,
+    "Windows_F06_prior_total_bytes": 134217728,
+    "Windows_F06_new_total_bytes": 146800640,
+    "files_unchanged": true,
+    "new_CP3_positive_proof_forecast_bytes": 50331648,
+    "actual_plus_proof_forecast_bytes": 108117642,
+    "headroom_to108MiB_bytes": 5128566,
+    "scope": "OnlycurrentWindowsCPsharedsmallsource/prooffixtures, onecumulativeCP1/2/3pool. Matrix32MiBnotenlarged; noindependent48MiBgrantforeachworker. Existingoldproofdataremaincounted."
+  },
+  "whole_applied_allocator_after": {
+    "prior_whole_forecast_bytes": 47079500149,
+    "increase_bytes": 12582912,
+    "new_whole_forecast_bytes": 47092083061,
+    "cap_bytes": 47244640256,
+    "prior_central_contingency_bytes": 165140107,
+    "new_central_contingency_bytes": 152557195,
+    "inside_closeout_reserve_bytes_unchanged": 1073741824,
+    "inside_closeout_reserve_files_unchanged": 100000,
+    "global_file_cap": 5000000,
+    "reserved_files_with64claimslots_unchanged": 4792604,
+    "remaining_central_files_unchanged": 207396
+  },
+  "future_fullsuite_no_double_charge": {
+    "proposed_final_Windows_F06_total_bytes_unchanged": 503316480,
+    "proposed_final_CPstack_bytes": 469762048,
+    "proposed_final_matrix_protocol_bytes": 33554432,
+    "previous_remaining_F06_expansion_bytes": 369098752,
+    "new_remaining_F06_expansion_bytes": 356515840,
+    "current12MiB_plus_remaining340MiB_equals_old352MiB": true,
+    "prior_fullsuite_forecast_afterF12claim009_bytes": 47649925493,
+    "future_fullsuite_forecast_still_bytes": 47649925493,
+    "shortfall_before_conditional_staged_releases_bytes": 405285237,
+    "potential_after_actual_F14_expiry_and_native192_unused_release_bytes": 47232247372,
+    "conditional_margin_still_bytes": 12392884,
+    "future_margin_unchanged": 12392884,
+    "qualification": "Future480MiBF06alreadyincludescurrent140MiB. Do notadd12MiBagainonfuture480. Allotherfuturecosts/proofsremain; nocreditfromunprovenCPfixture/evidenceforecasts. Native/fullqualificationNO_GOunchanged."
+  },
+  "unchanged_CP3_scopes": {
+    "source_admin_combined_C3_bytes": 3145728,
+    "source_owned_file_cap_bytes": 1048576,
+    "exact_admin_subset_nonadditive_F13_cap_bytes": 2097152,
+    "same_checkout_package_path": "C:/Users/spmcc/.codex/worktrees/file-native-online-cp2-20261020/handbook",
+    "same_F02_target_cap_bytes": 268435456,
+    "same_F02_target_path": "C:/file-native-online-cp1-20261020/build",
+    "CPshared_F12_evidence_bytes": 50331648,
+    "C2_Windows_unused_topup_not_activated": true,
+    "no_new_worktree_or_target": true
+  },
+  "final_protocol_source_owner_control_receipt": {
+    "worker_chat": "01a15b6c-b109-7090-a8c2-0e165f92f51e",
+    "scope": "OnlyNEWMatrixexecution/final-protocol <=128KiB/8files UNDERexistingF01Matrixsource1MiB, no newglobal/C3grant/worktree/admin/target/engine/Git. Existingmatrixcode/oracleownedbycurrentworkers.",
+    "registered_budget_sha256": "4ab05e3a333d4ec238ad80e64399affff78623e14faec77214e696177cc209c2",
+    "source_actual_at_registration_bytes": 546130,
+    "source_plus128KiB_prospective_bytes": 677202,
+    "parent_F01Matrix_cap_bytes": 1048576,
+    "nested_subset_nonadditive": true,
+    "registration_previously_passed": true
+  },
+  "preconditions_before_limited_CP3_proof": [
+    "Parentreviews/acceptsCP2fixesandexplicitexclusiveownershiphandoff, confirmsnoactiveCP2Jobsorunownedchildprocesses; sourcepinandbinarybindingsfrozenforeachproofstage.",
+    "ParentregistersnewversionedCP3budgetAFTERthisseal andfreshactual/prospectivecensus CPshared108MiB+matrix32MiB aggregate140MiB, fileswithinexistingcaps.",
+    "SameF02target/sourcepath; no thirdcompiledpackagecohort/newtarget. ExistingWindowsheavyJobtoken/j2/3GiBJob/checker2GiB/reader256MiB/helpercapsandabsolutecutoffremain.",
+    "Proofgroupactual+48MiBforecastmustfit108MiB; everyphaseprewrite/runtime/postreceiptcheckmustcountoldfailedprefixesandallnewoutputs; refusebeforeunbudgetedgrowth.",
+    "Noengine/long/corpus/native/fullsuitepermissionfromresourceclaimalone; metaissuesonlylimitedsmallprooffollowingreview/handoff.",
+    "Sourceharnessfreezes, C1privatecache/protecteddata/oldtargets remainuntouched. No retriesoverwriteorretireoriginalH551/F1failures."
+  ],
+  "resource_worker_actions": "Newimmutableclaimreports only; no livebudget/source/Git/engine/build/corpus/restore/cachecopy/deletion.",
+  "prior_seals_unchanged": true,
+  "clocks_unchanged": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z"
+  }
+}

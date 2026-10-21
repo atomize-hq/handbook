@@ -1,0 +1,135 @@
+{
+  "schema": "private-platform-static-source-result-v1",
+  "status": "SYNTAX_ONLY_V2_AND_W5_UNREVIEWED_UNQUALIFIED",
+  "compilation": "Python3.11.9 compile(source,filename,'exec',dont_inherit=True) in memory only; no module execution/import.",
+  "syntax_files": [
+    {
+      "path": "source_controls.py",
+      "bytes": 28421,
+      "sha256": "df46a38fbfbe9cf85425d8e1314340739632059a78567beebcb7e8c335ec88bd"
+    },
+    {
+      "path": "windows_adapter.py",
+      "bytes": 22291,
+      "sha256": "891bb454beeb629ad5c38a7eb0125be69a14e8f2e4d8338562e420b45f36baaa"
+    },
+    {
+      "path": "windows_bootstrap.py",
+      "bytes": 8151,
+      "sha256": "32f01f6ffcf58f0d3914e447b7ddd2cd864c3c80d2c4ec5ad8b2d112f39765f7"
+    },
+    {
+      "path": "windows_capsule.py",
+      "bytes": 20300,
+      "sha256": "95c4f22ea5df63419cc3453f9e5229d5ab080f53ecf15594a61dce0b906e571d"
+    },
+    {
+      "path": "windows_deadlines.py",
+      "bytes": 3749,
+      "sha256": "da4309d25abeac4ddcd20fe8f92ca8bf3e539313d8d3df72b805a7e41fb68b1d"
+    },
+    {
+      "path": "windows_driver.py",
+      "bytes": 21497,
+      "sha256": "1aa1c16d4647dd72cfb6c7e45f2492c559029b01c2e20cd78af281bc5333aadb"
+    },
+    {
+      "path": "windows_evidence.py",
+      "bytes": 16200,
+      "sha256": "b505aec5e5c10fd8dd52de5752d4013ac53b48b14e6e8ef3f247ae96d1b8c972"
+    },
+    {
+      "path": "windows_growth.py",
+      "bytes": 13652,
+      "sha256": "7a9207b110dac69e11777cc85f812c24daad81d7f5f5cde5b9284acac5a55cab"
+    },
+    {
+      "path": "windows_hooks.py",
+      "bytes": 24532,
+      "sha256": "91ba4ecf80230776d2b4e2f01c8809cb34e1bd41263bfc7923f487f1950fae63"
+    },
+    {
+      "path": "windows_native.py",
+      "bytes": 25843,
+      "sha256": "a4c02bebadf58c99e902b45479daea676dcc39c195abc2d1d6692cebae89be1c"
+    },
+    {
+      "path": "windows_oracle_bridge.py",
+      "bytes": 8131,
+      "sha256": "bbdb821e5a39cc2411434ee58e72d08dffd88011df4f5fcb22e56996af9bfb04"
+    }
+  ],
+  "syntax_file_count": 11,
+  "case_ID_count": 166,
+  "unique_case_ID_count": 166,
+  "all_case_status": "PENDING",
+  "prepared_control_call_sites": 44,
+  "prepared_max_checks": 64,
+  "memory_controls_executed": 0,
+  "native_controls_executed": 0,
+  "engine_calls": 0,
+  "Win32_provider_constructions": 0,
+  "process_launches_for_experiment": 0,
+  "Jobs": 0,
+  "builds": 0,
+  "fixture_or_corpus_writes": 0,
+  "bytecode_writes": 0,
+  "source_processing_tools": "PowerShell/Python -B and cached GitNexus upstream attempt only; no control or experiment process.",
+  "old_source_preservation": {
+    "final-protocol/focused_protocol.py": {
+      "bytes": 50073,
+      "sha256": "7ce0a4a06a35fa9e7f4f4080a40315a418bb45e47a8946ca06d78c2117d855e8"
+    },
+    "final-protocol/source_receipt.json": {
+      "bytes": 10144,
+      "sha256": "4719748175f99b3f00a281f526c0deabcac0977122c07bb6d7c517080fb45381"
+    },
+    "harness/driver.py": {
+      "bytes": 5928,
+      "sha256": "924fea5aeafc19d9a45c37e6527f6ed842e8c16f6d5aba861c3fb17de5413ae2"
+    },
+    "harness/job_guard.py": {
+      "bytes": 28324,
+      "sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae"
+    },
+    "harness/paged_index.py": {
+      "bytes": 8097,
+      "sha256": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea"
+    },
+    "harness/physical_decoder_v5.py": {
+      "bytes": 44817,
+      "sha256": "1347778df8839da571603b215a8f3aecac70b40eff571ddbad0cb19e27bf5be9"
+    },
+    "windows-cadence/job_guard_qpc.py": {
+      "bytes": 37051,
+      "sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378"
+    }
+  },
+  "writes": "Every write individually projected file cap, group cap and whole closed27-name census before opening.",
+  "invalid_source_executed": false,
+  "scope": "Static counts and compile are not a memory-control/native/runtime qualification result.",
+  "pending": [
+    "fresh full039 W5/v2/ports review",
+    "v2-specific controls source/admission",
+    "all166 actualWindowsABI and finalengine/unit sources",
+    "D document matrix body",
+    "complete quantitative035 profiles/whole forecast/sinks",
+    "finite memory/native control GO",
+    "full runtime body admission"
+  ],
+  "prepared_top_level_groups": 64,
+  "prepared_original_groups": 43,
+  "prepared_regression_groups": 21,
+  "prepared_transport_fault_runs": 19,
+  "current_budget_sha256": "b79a0cccaf96be247bba2b48bada220417bc083eb4b09828aa43642719e5eaa3",
+  "previous_negative_review_sha256": "8bf9a1429f6617b156a9379a002d7f77e2cdf50b4d35ee0de0e2e31af31e487e",
+  "clock_AST_hashes": {
+    "bridge": "a8448669fac3a029418ab2bd9d792446df363ba49dc164872c858869ae4551d3",
+    "counter": "c5bbcf3af7852cbb98d373ca2cedf5d5d8c376c3ab030f2c2f72972aab0fa629",
+    "frequency": "0510b141cc4997d04805ccd5d8de757714a52667974711cc704f638766a65aa6",
+    "process_proof": "eb224105e730808ef23779c92d9a98b35140ca9d24626cecdbfaeae2c91647f4"
+  },
+  "case_source_bodies_named": 165,
+  "native_case_execution": 0,
+  "known_capture_blocker": "request-before-dispatch input duplication and failures before Driver._execute require pending-call planned-input ownership handshake"
+}

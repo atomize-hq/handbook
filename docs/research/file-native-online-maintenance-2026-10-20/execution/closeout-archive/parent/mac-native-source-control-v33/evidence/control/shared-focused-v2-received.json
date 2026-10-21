@@ -1,0 +1,26 @@
+{
+  "archive_bytes": 51034,
+  "archive_sha256": "9ce3ded9aa01724c25074cf3b83505826f8d140c63311e383b99b409ac671ebe",
+  "tar_bytes": 204800,
+  "members": 9,
+  "member_bytes": 188865,
+  "receipt_sha256": "ae78d32a4a14d8327c3b4090fea3ea05f4f69b8542c0e3c281692ec7acc7b63a",
+  "all_eight_manifest_members_SHA_size_match": true,
+  "manifest_canonical_SHA": "bad1bce648243a8c9d44b4b09cbcffda5ed5e3d9d4edabae26e71d789211936f",
+  "safe_regular_path_tar_EOF_gzip_EOF": true,
+  "F01_before": {
+    "logical_bytes": 1816166,
+    "allocated_bytes": 2080768,
+    "files": 110,
+    "directories": 9,
+    "symlinks": 0
+  },
+  "prospective_source_growth": {
+    "bytes": 239899,
+    "files": 10
+  },
+  "extracted_root": "/private/tmp/file-native-online-macos-20261020/shared-focused-v2",
+  "reference_only_not_final_run": true,
+  "source_landing": "90216ef1",
+  "live_execution": false
+}

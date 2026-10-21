@@ -1,0 +1,86 @@
+{
+  "claim_id": "44GiB-CENTRAL-040-BOUNDED-GUARD80KiB",
+  "utc": "2026-10-21T03:10:17.932708+00:00",
+  "status": "SOURCE_CAP_ALLOCATION_ONLY__NEW_PARENT_BUDGET_AND_SOURCE_GO_REQUIRED",
+  "authority": "META explicit040 guard+8192 within existing C3; old caps fit; no retroactive qualification.",
+  "prior039": {
+    "file": "claim-20261021T025305Z.json",
+    "sha256": "2ad791f85e6bddb49bf47bd731259606ccd0cf936bec8c99d1554e1c91376e1d"
+  },
+  "guard": {
+    "owner": "01a15ae1-839d-7b02-843b-558ddc9e78cc",
+    "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard",
+    "old_bytes": 73728,
+    "new_bytes": 81920,
+    "files": 4,
+    "new_caps": {
+      "job_guard_bounded.py": 59392,
+      "controls.py": 12288,
+      "README.md": 5120,
+      "source-receipt.json": 5120
+    },
+    "fresh_members": [
+      {
+        "file": "job_guard_bounded.py",
+        "bytes": 57075,
+        "sha256": "d3e554e0557f8d9939b3a579a3122fc6234c89f6a0414b028d7bc940236c3815",
+        "old_cap": 57344,
+        "new_cap": 59392
+      },
+      {
+        "file": "controls.py",
+        "bytes": 8183,
+        "sha256": "b2aebd784d822bfe83e3d6d7e2ec328f905b66987b3cd6fcb3e2b51faf6c54cd",
+        "old_cap": 8192,
+        "new_cap": 12288
+      },
+      {
+        "file": "README.md",
+        "bytes": 3744,
+        "sha256": "86a1dd012b1dec9d7223d3da107fb9297f4cc60b24d6579d39b40781274d5e81",
+        "old_cap": 4096,
+        "new_cap": 5120
+      },
+      {
+        "file": "source-receipt.json",
+        "bytes": 2961,
+        "sha256": "8b4b997edd5343e34d29748cd043f98115b71f8a1d8096bea1d04e7d40367971",
+        "old_cap": 4096,
+        "new_cap": 5120
+      }
+    ],
+    "all_fit_old_caps": true
+  },
+  "C3": {
+    "total_unchanged": 16777216,
+    "unclaimed_before": 925696,
+    "draw": 8192,
+    "unclaimed_after": 917504,
+    "old32768_hold_inside_unclaimed": true
+  },
+  "reason": "Readable remediations: transient native CloseHandle fencing, census fail-closed, control completions, effective IO fence, error233 EOF. No field drops/runtime expansion.",
+  "unchanged": {
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "reserved_files": 4792716,
+    "central_unassigned_files": 207284,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "META_bytes": 10485760,
+    "family_files": 192,
+    "family_bytes": 786432,
+    "new_global_bytes": 0,
+    "new_global_files": 0
+  },
+  "prewrite": {
+    "family_files": 125,
+    "family_bytes": 459204,
+    "META_bytes": 8972558,
+    "META_files": 1069,
+    "META_manifest": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\meta-membership-v5.json",
+    "META_manifest_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+    "pending_report_packet_return_reserve": 944912
+  },
+  "gate": "Hold upward writes until parent NEW immutable guard budget binds040/per-file caps and explicit SOURCE GO. Same four names/owner; no implicit temps/pycache. No imports/controls/runtime/Job/build/corpus/copy/archive/restore/delete/Git GO. Old frozen guards, receipts, censors and failed prefixes unchanged; no retrofix. All039/038/034pairs and other source/resource caps intact. Context plan has no allocation.",
+  "actions": "Read-only fresh source/META/family census and all prior seal/addendum hash verification; this040 triplet only."
+}

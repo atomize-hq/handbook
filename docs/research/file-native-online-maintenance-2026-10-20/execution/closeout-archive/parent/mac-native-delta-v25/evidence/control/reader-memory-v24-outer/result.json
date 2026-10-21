@@ -1,0 +1,613 @@
+{
+  "kind": "native-guard-v20",
+  "nonce": "7f1a64abcd1ccd52e9e87d3ff3a4c396",
+  "status": "GUARD_CONTROL_CANDIDATE_NO_ENGINE_RELEASE",
+  "source_sha256": "c33fa117667de50c9010e27830a1ec63019deb7186d4a047e439bda04530cfb4",
+  "adapter_source_bindings": {
+    "admission_v20.py": "aaf37aa66d486805a5fed459ba632d39bc65749d67ee153bc92a575b69410fe3",
+    "keeper_v20.py": "5a96e449f32f971dbd57f2ca62cdc194920858ae9708d5ecd6bec25e19aa8978",
+    "monitor_v20.py": "7b3f3fd0c79ddb3fd4115c22c0b17c1d7914ce2aca0aff54f16fcd4587bf52a7",
+    "guard_v20.py": "c33fa117667de50c9010e27830a1ec63019deb7186d4a047e439bda04530cfb4",
+    "role_driver_v20.py": "ecc1ac2af4849a1a826b5019ec9cadb0e0f7da52d412ef6222c84661534de6e0"
+  },
+  "source_pin": "CONTROL_ONLY",
+  "claims": {
+    "F01": "initial-native-worker-source4MiB-at-authority94734e76",
+    "F04": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570",
+    "F08": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984",
+    "F12": "initial-native-worker-functional-evidence24MiB",
+    "F13": "initial-native-worker-combined-positive-shared-growth4MiB",
+    "C1": "CLAIM007:8232ff614dd32922175b8fc558c57293760dfc6460b888dc4402640588f9be35:seal:e29fce55d34c685b2579e3cc2c277ed731cb72606985ccf425ca2742b006812a"
+  },
+  "limits": {
+    "F01": {
+      "bytes": 4194304,
+      "files": 1000,
+      "claim": "initial-native-worker-source4MiB-at-authority94734e76"
+    },
+    "F04": {
+      "bytes": 268435456,
+      "files": 5000,
+      "claim": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570"
+    },
+    "F08": {
+      "bytes": 100663296,
+      "files": 30000,
+      "claim": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984"
+    },
+    "F12": {
+      "bytes": 25165824,
+      "files": 10000,
+      "claim": "initial-native-worker-functional-evidence24MiB"
+    },
+    "F13": {
+      "bytes": 4194304,
+      "files": 1500,
+      "claim": "initial-native-worker-combined-positive-shared-growth4MiB"
+    },
+    "C1": {
+      "bytes": 67108864,
+      "files": 5000,
+      "claim": "CLAIM007:8232ff614dd32922175b8fc558c57293760dfc6460b888dc4402640588f9be35:seal:e29fce55d34c685b2579e3cc2c277ed731cb72606985ccf425ca2742b006812a"
+    }
+  },
+  "prospective": {
+    "F01": {
+      "bytes": 131072,
+      "files": 8
+    },
+    "F04": {
+      "bytes": 0,
+      "files": 0
+    },
+    "F08": {
+      "bytes": 0,
+      "files": 0
+    },
+    "F12": {
+      "bytes": 3145728,
+      "files": 16
+    },
+    "F13": {
+      "bytes": 0,
+      "files": 0
+    },
+    "C1": {
+      "bytes": 0,
+      "files": 0
+    }
+  },
+  "identity_budget": 32,
+  "live_process_cap": 64,
+  "started_epoch": 1792533266.361783,
+  "functional_cutoff_epoch": 1792581014.0,
+  "effective_fixed_cutoff_epoch": 1792581014.0,
+  "local_deadline_monotonic": 3221726.635267458,
+  "global_enumeration": false,
+  "censor": null,
+  "closure": "PROVEN_EMPTY_TWICE",
+  "token_released": true,
+  "worker_exit": 0,
+  "supervisor": {
+    "pid_requested": 13627,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 13627,
+    "ppid": 13590,
+    "uid": 501,
+    "pgid": 13590,
+    "state": 2,
+    "start": [
+      1792533266,
+      313388
+    ]
+  },
+  "before_setup_positive_RSS": {
+    "return": 0,
+    "errno": 0,
+    "rss_bytes": 26329088,
+    "start_abstime": 77321198084953
+  },
+  "observed_output_bytes": 151,
+  "workload_GO": true,
+  "closure_proofs": [
+    {
+      "proven": true,
+      "required_observations": 2,
+      "observations": [
+        {
+          "monotonic": 3221719.898910166,
+          "groups": [
+            {
+              "pgid_requested": 13665,
+              "returned_bytes": 4,
+              "errno": 0,
+              "valid": true,
+              "members": [
+                13665
+              ],
+              "monotonic_ns": 3221719898900541
+            }
+          ],
+          "remaining": [],
+          "unknown_errno_observations": [],
+          "empty": false
+        },
+        {
+          "monotonic": 3221719.925635708,
+          "groups": [
+            {
+              "pgid_requested": 13665,
+              "returned_bytes": 0,
+              "errno": 0,
+              "valid": true,
+              "members": [],
+              "monotonic_ns": 3221719925613875
+            }
+          ],
+          "remaining": [],
+          "unknown_errno_observations": [],
+          "empty": true
+        },
+        {
+          "monotonic": 3221719.954822791,
+          "groups": [
+            {
+              "pgid_requested": 13665,
+              "returned_bytes": 0,
+              "errno": 0,
+              "valid": true,
+              "members": [],
+              "monotonic_ns": 3221719954811375
+            }
+          ],
+          "remaining": [],
+          "unknown_errno_observations": [],
+          "empty": true
+        }
+      ],
+      "total_numeric_observations": 3
+    }
+  ],
+  "termination": [],
+  "keeper_identity": {
+    "pid_requested": 13628,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 13628,
+    "ppid": 13627,
+    "uid": 501,
+    "pgid": 13628,
+    "state": 2,
+    "start": [
+      1792533266,
+      380248
+    ]
+  },
+  "keeper_recovery_socket": "/private/tmp/file-native-online-macos-20261020/keeper-7f1a64abcd1ccd52e9e87d3ff3a4c396.release.json",
+  "token_acquired_epoch": 1792533266.38374,
+  "admission_snapshot": {
+    "categories": {
+      "F01": {
+        "logical_bytes": 1146270,
+        "allocated_bytes": 1314816,
+        "files": 66,
+        "directories": 9,
+        "symlinks": 0
+      },
+      "F04": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "files": 0,
+        "directories": 0,
+        "symlinks": 0
+      },
+      "F08": {
+        "logical_bytes": 32786,
+        "allocated_bytes": 98304,
+        "files": 20,
+        "directories": 5,
+        "symlinks": 0
+      },
+      "F12": {
+        "logical_bytes": 5677701,
+        "allocated_bytes": 7356416,
+        "files": 951,
+        "directories": 210,
+        "symlinks": 0
+      },
+      "C1": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "files": 0,
+        "directories": 0,
+        "symlinks": 0
+      },
+      "F13": {
+        "logical_bytes": 82,
+        "files": 2,
+        "allocated_bytes": null,
+        "shared_components": {
+          "Git": {
+            "logical_bytes": 187972974,
+            "allocated_bytes": 205033472,
+            "files": 5494,
+            "directories": 371,
+            "symlinks": 0,
+            "baseline_logical_bytes": 187972892,
+            "baseline_files": 5492,
+            "positive_bytes": 82,
+            "positive_files": 2
+          },
+          "Cargo": {
+            "logical_bytes": 1859795101,
+            "allocated_bytes": 2063294464,
+            "files": 81747,
+            "directories": 15833,
+            "symlinks": 13,
+            "baseline_logical_bytes": 1859800817,
+            "baseline_files": 81747,
+            "positive_bytes": 0,
+            "positive_files": 0
+          }
+        }
+      }
+    },
+    "free_bytes": 161335087104
+  },
+  "admitted_growth_ceiling": {
+    "F01": {
+      "bytes": 1277342,
+      "files": 74
+    },
+    "F04": {
+      "bytes": 0,
+      "files": 0
+    },
+    "F08": {
+      "bytes": 32786,
+      "files": 20
+    },
+    "F12": {
+      "bytes": 8823429,
+      "files": 967
+    },
+    "C1": {
+      "bytes": 0,
+      "files": 0
+    },
+    "F13": {
+      "bytes": 82,
+      "files": 2
+    }
+  },
+  "launcher": {
+    "path": "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3.11",
+    "sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+    "argv": [
+      "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+      "-B",
+      "/private/tmp/file-native-online-macos-20261020/execution/native-macos/reader-memory-v24.py"
+    ],
+    "cwd": "/private/tmp/file-native-online-macos-20261020",
+    "contract": "foreground, no daemonization or session escape; all subprocesses sampled"
+  },
+  "anchor": {
+    "pid_requested": 13665,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 13665,
+    "ppid": 13628,
+    "uid": 501,
+    "pgid": 13665,
+    "state": 2,
+    "start": [
+      1792533269,
+      239506
+    ]
+  },
+  "before_GO_positive_RSS": {
+    "kind": "rss",
+    "monotonic": 3221719.570616541,
+    "processes": [
+      {
+        "identity": {
+          "pid_requested": 13627,
+          "returned_bytes": 136,
+          "errno": 0,
+          "expected_bytes": 136,
+          "pid": 13627,
+          "ppid": 13590,
+          "uid": 501,
+          "pgid": 13590,
+          "state": 2,
+          "start": [
+            1792533266,
+            313388
+          ]
+        },
+        "usage": {
+          "return": 0,
+          "errno": 0,
+          "rss_bytes": 29065216,
+          "start_abstime": 77321198084953
+        }
+      },
+      {
+        "identity": {
+          "pid_requested": 13628,
+          "returned_bytes": 136,
+          "errno": 0,
+          "expected_bytes": 136,
+          "pid": 13628,
+          "ppid": 13627,
+          "uid": 501,
+          "pgid": 13628,
+          "state": 2,
+          "start": [
+            1792533266,
+            380248
+          ]
+        },
+        "usage": {
+          "return": 0,
+          "errno": 0,
+          "rss_bytes": 9191424,
+          "start_abstime": 77321199689572
+        }
+      },
+      {
+        "identity": {
+          "pid_requested": 13665,
+          "returned_bytes": 136,
+          "errno": 0,
+          "expected_bytes": 136,
+          "pid": 13665,
+          "ppid": 13628,
+          "uid": 501,
+          "pgid": 13665,
+          "state": 2,
+          "start": [
+            1792533269,
+            239506
+          ]
+        },
+        "usage": {
+          "return": 0,
+          "errno": 0,
+          "rss_bytes": 26656768,
+          "start_abstime": 77321268311078
+        }
+      }
+    ],
+    "all_helpers_rss": 38256640,
+    "owned_group_rss": 26656768,
+    "tree": {
+      "group": {
+        "pgid_requested": 13665,
+        "returned_bytes": 4,
+        "errno": 0,
+        "valid": true,
+        "members": [
+          13665
+        ],
+        "monotonic_ns": 3221719570141416
+      },
+      "identities": [
+        {
+          "pid_requested": 13665,
+          "returned_bytes": 136,
+          "errno": 0,
+          "expected_bytes": 136,
+          "pid": 13665,
+          "ppid": 13628,
+          "uid": 501,
+          "pgid": 13665,
+          "state": 2,
+          "start": [
+            1792533269,
+            239506
+          ]
+        }
+      ],
+      "live_count": 1,
+      "peak_live_count": 1,
+      "retained_identity_count": 1,
+      "identity_budget": 32,
+      "escaped": []
+    },
+    "completed_monotonic": 3221719.570745916
+  },
+  "workload_child_pid": 13666,
+  "sample_count": 325,
+  "sample_gap_max_s": 0.027187791652977467,
+  "sample_failure": null,
+  "peak_group_rss": 279724032,
+  "peak_all_helpers_rss": 64815104,
+  "last_tree_trace": [
+    {
+      "monotonic_ns": 3221719757913500,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719768361666,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719780164541,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719787047625,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719800904333,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719808909083,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719819922750,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719827393458,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719837637375,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719847008250,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719861033625,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719868789333,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719879905291,
+      "pids": [
+        13665,
+        13666
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719889294583,
+      "pids": [
+        13665
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719889455625,
+      "pids": [
+        13665
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719897141208,
+      "pids": [
+        13665
+      ],
+      "escaped_pids": []
+    },
+    {
+      "monotonic_ns": 3221719909319083,
+      "pids": [],
+      "escaped_pids": []
+    }
+  ],
+  "disk_monitor": {
+    "latest": {
+      "monotonic": 3221719.942903291,
+      "snapshot": {
+        "categories": {
+          "F01": {
+            "logical_bytes": 1146255,
+            "allocated_bytes": 1314816,
+            "files": 66,
+            "directories": 9,
+            "symlinks": 0
+          },
+          "F04": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0,
+            "directories": 0,
+            "symlinks": 0
+          },
+          "F08": {
+            "logical_bytes": 32786,
+            "allocated_bytes": 98304,
+            "files": 20,
+            "directories": 5,
+            "symlinks": 0
+          },
+          "F12": {
+            "logical_bytes": 5688987,
+            "allocated_bytes": 7376896,
+            "files": 955,
+            "directories": 211,
+            "symlinks": 0
+          },
+          "C1": {
+            "logical_bytes": 0,
+            "allocated_bytes": 0,
+            "files": 0,
+            "directories": 0,
+            "symlinks": 0
+          }
+        },
+        "free_bytes": 161335152640
+      },
+      "shared_checked": false
+    },
+    "failure": null
+  },
+  "keeper_reaped": true,
+  "raw_rows_written": 336,
+  "finished_epoch": 1792533269.731222,
+  "test_fault": null
+}

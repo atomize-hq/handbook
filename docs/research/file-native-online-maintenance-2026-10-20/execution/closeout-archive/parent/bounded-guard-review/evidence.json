@@ -1,0 +1,224 @@
+{
+  "kind": "independent-bounded-guard-full-source-review-v1",
+  "verdict": "REMEDIATE",
+  "runtime_go": false,
+  "reviewer_scope": "Complete candidate guard/controls/docs/receipt/budget; complete donor comparison; private transitive import and SHA-reference closure.",
+  "inputs": [
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-bounded-guard/job_guard_bounded.py",
+      "bytes": 57075,
+      "sha256": "d3e554e0557f8d9939b3a579a3122fc6234c89f6a0414b028d7bc940236c3815"
+    },
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-bounded-guard/controls.py",
+      "bytes": 8183,
+      "sha256": "b2aebd784d822bfe83e3d6d7e2ec328f905b66987b3cd6fcb3e2b51faf6c54cd"
+    },
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-bounded-guard/README.md",
+      "bytes": 3744,
+      "sha256": "86a1dd012b1dec9d7223d3da107fb9297f4cc60b24d6579d39b40781274d5e81"
+    },
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-bounded-guard/source-receipt.json",
+      "bytes": 2961,
+      "sha256": "8b4b997edd5343e34d29748cd043f98115b71f8a1d8096bea1d04e7d40367971"
+    },
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-cadence/job_guard_qpc.py",
+      "bytes": 37051,
+      "sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378"
+    },
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/admission/windows-bounded-guard-source-budget-037-v2.json",
+      "bytes": 2037,
+      "sha256": "a5b5dab1c9d775cbe5aa232978547ef206c4cee75b1088762f5fc59b9aee6066"
+    },
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/harness/job_guard.py",
+      "bytes": 28324,
+      "sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae"
+    }
+  ],
+  "source_aggregate": {
+    "bytes": 71963,
+    "files": 4,
+    "cap_bytes": 73728,
+    "cap_files": 4,
+    "individual_caps": [
+      57344,
+      8192,
+      4096,
+      4096
+    ]
+  },
+  "findings": [
+    {
+      "id": "BG-1",
+      "priority": 1,
+      "file": "job_guard_bounded.py",
+      "lines": [
+        721,
+        724
+      ],
+      "issue": "ERROR_PIPE_NOT_CONNECTED 233 accepted as complete EOF; positive total/qualification without drained EOF proof."
+    },
+    {
+      "id": "BG-2",
+      "priority": 1,
+      "file": "job_guard_bounded.py",
+      "lines": [
+        640,
+        642
+      ],
+      "also_lines": [
+        149,
+        162
+      ],
+      "issue": "Unchecked temporary CloseHandle failures lose ownership and bypass uncertainty fence."
+    },
+    {
+      "id": "BG-3",
+      "priority": 1,
+      "file": "controls.py",
+      "lines": [
+        137,
+        160
+      ],
+      "issue": "Returned completion/receipt SHA/postwrite census discarded; stored receipt stays pending."
+    },
+    {
+      "id": "BG-4",
+      "priority": 2,
+      "file": "controls.py",
+      "lines": [
+        125,
+        127
+      ],
+      "issue": "0.2-second delay cannot force 5+1-second join fence; neither retention nor subsequent-call refusal asserted."
+    },
+    {
+      "id": "BG-5",
+      "priority": 1,
+      "inherited": true,
+      "file": "job_guard_bounded.py",
+      "lines": [
+        70,
+        90
+      ],
+      "issue": "os.walk suppresses enumeration errors without onerror, allowing a partial census to be marked complete."
+    }
+  ],
+  "full_source_read": {
+    "guard_lines": 1249,
+    "controls_lines": 181,
+    "donor_lines": 727,
+    "readme": true,
+    "receipt": true,
+    "source_budget": true
+  },
+  "donor_comparison": {
+    "method": "Complete donor and candidate source reads plus textual comparison and symbol/region mapping; no Git.",
+    "signature_preserved": true,
+    "core_native_limits_preserved": true,
+    "old_cli_absent": true,
+    "donor_unchanged": true
+  },
+  "private_closure": {
+    "guard_imports": "stdlib only; ctypes native DLLs",
+    "controls_dynamic_import": "exact manifest-hashed guard after RUN GO prechecks; not performed",
+    "budget": "embedded private implementation; no matrix_budget import",
+    "frozen_guard": "SHA read only, no import/invocation",
+    "unreviewed_private_imports": []
+  },
+  "finite_control_names": [
+    "normal-nested",
+    "sequential-128",
+    "rss-rows",
+    "rss-row-bytes",
+    "rss-raw",
+    "rss-gzip",
+    "disk-rows",
+    "disk-bytes",
+    "supervisor-rows",
+    "supervisor-bytes",
+    "identities",
+    "final-preflight",
+    "stdout",
+    "stderr",
+    "timeout",
+    "missing-live-rss",
+    "slow-first",
+    "start-gap",
+    "root-end-gap",
+    "whole-job-gap",
+    "exit-race",
+    "pipe-fence",
+    "error-storm"
+  ],
+  "independent_execution": {
+    "reviewed_python_import": false,
+    "ast_parse": false,
+    "compile": false,
+    "native_controls": false,
+    "Job": false,
+    "engine": false,
+    "Cargo": false,
+    "Git": false,
+    "corpus_mutation": false
+  },
+  "remaining": [
+    "remediate source findings and re-freeze exact hashes",
+    "fresh changed-source review",
+    "explicit per-case/suite sink admission and RUN GO",
+    "execute finite controls",
+    "independent full raw QPC/identity/EOF/gzip/closure validation",
+    "persist completions and final inclusive physical census"
+  ],
+  "authority": {
+    "structured_standard": "proposed; no format migration/default approval",
+    "gitnexus": "UNKNOWN/unregistered; no bootstrap",
+    "manual_blast_radius": "HIGH",
+    "source_edits": false,
+    "old_receipt_requalification": false
+  },
+  "deadlines_utc": {
+    "source": "2026-10-21T04:10:14Z",
+    "functional": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z",
+    "reset": false
+  },
+  "accounting": {
+    "membership_path": "C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be/meta-membership-v5.json",
+    "membership_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+    "cap_bytes": 10485760,
+    "authorized_artifacts": 2,
+    "report_aggregate_cap_bytes": 24576,
+    "future_reserve_bytes": 256000,
+    "precompute_utf8_before_write": true,
+    "closed_census_before_each_write": true,
+    "physical_path_dedup_only": true,
+    "no_deletion_credit": true,
+    "before_review_write": {
+      "utc": "2026-10-21T03:09:06.0688340Z",
+      "bytes": 8955023,
+      "files": 1067,
+      "cap_bytes": 10485760,
+      "future_reserve_bytes": 256000
+    },
+    "before_evidence_write": {
+      "utc": "2026-10-21T03:09:06.6923058Z",
+      "bytes": 8964653,
+      "files": 1068,
+      "cap_bytes": 10485760,
+      "future_reserve_bytes": 256000
+    }
+  },
+  "references": [
+    "https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-",
+    "https://learn.microsoft.com/en-us/windows/win32/api/namedpipeapi/nf-namedpipeapi-peeknamedpipe",
+    "https://docs.python.org/3/library/os.html#os.walk"
+  ],
+  "final_unchanged_hash_check_utc": "2026-10-21T03:09:05.5277387Z",
+  "review_utc": "2026-10-21T03:09:06.6929415Z"
+}

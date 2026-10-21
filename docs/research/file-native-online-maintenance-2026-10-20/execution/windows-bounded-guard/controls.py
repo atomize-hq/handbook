@@ -234,8 +234,9 @@ def main():
     g.K.PeekNamedPipe=peek
     g.K.CreateJobObjectW=create
     g._memory_handle=memory
-    threading.settrace(trace)
-    sys.settrace(trace)
+    if name in('slow-first', 'start-gap', 'root-end-gap', 'whole-job-gap', 'error-storm', 'pipe-fence', 'exit-race'):
+     threading.settrace(trace)
+     sys.settrace(trace)
     row=g.run([sys.executable,'-I','-S','-B','-u','-c',program],c['receipt'],c['budget'],c['seconds'],reserves=sink.reserves(g.Budget(c['budget'])))
     sink.put(dict(done(row,c,g),faults=hits,jobs=L(jobs)))
     expected=c['expected_censor']

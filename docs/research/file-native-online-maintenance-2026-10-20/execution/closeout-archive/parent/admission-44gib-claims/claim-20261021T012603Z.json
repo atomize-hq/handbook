@@ -1,0 +1,84 @@
+{
+  "claim_id": "44GiB-CENTRAL-029-C3-FIXTURE-RETIREMENT-SOURCE64KiB",
+  "utc": "2026-10-21T01:26:03.449679+00:00",
+  "status": "INTERNAL_C3_SOURCE_RESERVATION_ONLY__NO_ARCHIVE_RUN_COPY_OR_DELETE",
+  "authority": "METAconcrete029ONLY after028seal:65536/4NEWsourcesfromexistingC3unsubclaimed, read-onlysourcedesignfirst. Nootherresourcechange.",
+  "prior028": {
+    "file": "claim-20261021T012007Z.json",
+    "sha256": "3ad3354481b240452730d9c81f4984a3c852a38a6a3e1319ace2f158e5052ee9",
+    "sealed_before029": true
+  },
+  "family_addendum": {
+    "file": "claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "cap_files": 128,
+    "cap_bytes": 524288
+  },
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\fixture-retirement",
+  "owner_chat": "01a15b8f-0e20-7553-941c-3210d5cb46e6",
+  "actual_root_before": {
+    "exists": false,
+    "bytes": 0,
+    "files": 0
+  },
+  "closed_per_file_caps": {
+    "archive.py": 32768,
+    "controls.py": 16384,
+    "README.md": 8192,
+    "source-receipt.json": 8192
+  },
+  "whole_caps": {
+    "bytes": 65536,
+    "files": 4
+  },
+  "C3": {
+    "total_unchanged": 16777216,
+    "unsubclaimed_before": 3375104,
+    "new_SOURCEdraw": 65536,
+    "unsubclaimed_after": 3309568,
+    "file_pool_unchanged": 15000,
+    "new4files": "ExistingunassignedC3sourcefileallowance, no globalfile/reserveincrease; prior025conservative4205+new4=4209within15k,026fivealreadywithinMatrix200."
+  },
+  "ownership": "Originalfixture-retirementsourceC3, NOTMETA/MatrixF01. DistinctPpacket/returnreviewcopiesMETA8; commonGitpositivegrowthF13once. Existingqualification8/Windows27/Matrixquota5andallfrozenoldmodules unchanged.",
+  "gate": [
+    "OwnerREADONLY/designuntilparentNEWimmutablebudgetbind029/root/fourcapsandexplicitSOURCEGO. Beforeeachsourcewrite exactname/perfile/whole/sourcefilecaps checked. Noimplicitfifthfile/pycache/temp/output.",
+    "No actualarchive, control/fakeRUN,nativeJob,copy,restoreordelete authorized. Code review/sourcehashbinding/finitecontrolplanandfuturephaseadmission remainseparate."
+  ],
+  "future_archive_PROPOSAL_ONLY": {
+    "archive_cap_bytes": 67108864,
+    "sidecar_and_finalization_cap_bytes": 1048576,
+    "sidecar_files": 4,
+    "allocation_applied": false,
+    "accounting": "Futurearchive+metadata MUSTfitinsideeachfixturebodycoexistenceandretainedfloor. SourceANDnewarchive/partials/sidecarscountduringcapture; retainedverifiedarchivecountsafteractualallowedretirement. No separatehiddenpool,no assumedcompression/deletion/retrycredit.",
+    "full_byte_backup_requirement": "Anyfuture retirement requiresfullverifiedbytebackup first, independentcompleteinventory/hash/EOF/restoreability andsourcebeforeafterproof plusallhostsamefinalpinmandatorycases/fulloracles/restoredsuccessor/ordinaryevidence complete. Noactualencoding/capture/validation here."
+  },
+  "retirement_authority_NOT_GRANTED": {
+    "exact_new_final_prefix_allowlists": "UNKNOWN; futureexplicitper-prefixclassification/authorizationbeforeaction",
+    "protected_solebackup_classification": "UNKNOWN; neverinferfromDISPOSABLEmarker orcompletedtestalone",
+    "excluded": [
+      "alloldCP4",
+      "oldcontrols",
+      "baselines",
+      "LONGsourceS+verifieddestinationDsuccessor",
+      "protectedsource/evidence/archives",
+      "solebackups",
+      "rejectedcleanuptargets"
+    ],
+    "retention": "Allrawnegative/results/manifests/inputrecipes/backupsneededremainingtests retained. Samefinalsource/fullhostcasesmandatory. No administrative-retirementproductcleanup/95percent/permanent-historybenefitcredit. No futuredeletecredittofundnextphase beforeactualauthorizedremoval+census."
+  },
+  "unchanged_global": {
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "cap_bytes": 47244640256,
+    "reserved_files": 4792652,
+    "unassigned_files": 207348,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "META8MiB": 8388608,
+    "C2Windows128MiB_held": 134217728,
+    "new_global_bytes": 0,
+    "new_global_files": 0,
+    "actual_deleted_bytes": 0
+  },
+  "actions": "Readonlyabsent-root/cap/priorsealverification andone029triplet only; nootherclaim/allocation/source/runtime/copy/delete. Sourcefreeze04:10unchanged."
+}

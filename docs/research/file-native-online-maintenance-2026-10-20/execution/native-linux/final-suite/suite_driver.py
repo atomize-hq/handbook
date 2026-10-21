@@ -29,7 +29,23 @@ def retain_tree(starts,handles,snapshot,lock,stage):
                 if row['ppid']!=parent['pid'] or row['pid'] in kept:continue
                 retain_birth(starts,handles,row,lock,stage,parent)
                 kept[row['pid']]=row;parents.append(row)
-        return list(kept.values())
+        result=[]
+        for row in kept.values():
+            if row['state']=='Z':result.append(row);continue
+            parent=owner if row['ppid']==owner['pid'] else kept.get(row['ppid'])
+            if parent is None:raise OwnedBirthUncertain(row['pid'],row['start'],stage,reason='memory-parent-unproved')
+            def parent_same():
+                fresh=guard.process(parent['pid'],with_memory=False)
+                if fresh is None or fresh['start']!=parent['start'] or fresh['state']=='Z':
+                    raise OwnedBirthUncertain(row['pid'],row['start'],stage,reason='memory-parent-birth-changed')
+            parent_same()
+            fresh=guard.process(row['pid'])
+            if fresh is None or fresh['start']!=row['start'] or fresh['ppid']!=row['ppid']:
+                raise OwnedBirthUncertain(row['pid'],row['start'],stage,reason='memory-birth-or-parent-changed')
+            parent_same()
+            if fresh['state']!='Z':need(type(fresh['rss']) is int and type(fresh['hwm']) is int and 0<fresh['rss']<=fresh['hwm'],'positive-matching-birth-memory')
+            result.append(fresh)
+        return result
 
 READER_ACTIONS={'resolve','point','inspect','lookup-bench','ordinary'}
 

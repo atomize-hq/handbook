@@ -1,0 +1,160 @@
+{
+  "kind": "native-guard-control-candidate",
+  "nonce": "3dc3062176d8ec4c9d21f907f08f4408",
+  "source_sha256": "4ec468760ef9bdfafc13787db5beca95659a25bd10d44b8496bee16217ce9aac",
+  "supervisor": {
+    "pid_requested": 86827,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 86827,
+    "ppid": 54542,
+    "uid": 501,
+    "pgid": 86827,
+    "state": 2,
+    "start": [
+      1792528418,
+      68168
+    ]
+  },
+  "started_epoch": 1792528418.266597,
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "seconds_cap": 4,
+  "global_enumeration": false,
+  "censor": "[Errno 54] Connection reset by peer",
+  "closure": "PROVEN_EMPTY",
+  "samples": 0,
+  "peak_group_rss": 0,
+  "peak_supervisor_rss": 0,
+  "missing_live_rss": [],
+  "transient_exited_members": [],
+  "termination": [
+    {
+      "identity": {
+        "pid_requested": 86859,
+        "returned_bytes": 136,
+        "errno": 0,
+        "expected_bytes": 136,
+        "pid": 86859,
+        "ppid": 86827,
+        "uid": 501,
+        "pgid": 86859,
+        "state": 2,
+        "start": [
+          1792528418,
+          276316
+        ]
+      },
+      "matches": true,
+      "signal_errno": null,
+      "steps": [
+        {
+          "pgid_requested": 86859,
+          "returned_bytes": 4,
+          "errno": 0,
+          "valid": true,
+          "members": [
+            86859
+          ],
+          "monotonic_ns": 3216868648649833
+        },
+        {
+          "pgid_requested": 86859,
+          "returned_bytes": 4,
+          "errno": 0,
+          "valid": true,
+          "members": [
+            86859
+          ],
+          "monotonic_ns": 3216868659167041
+        }
+      ],
+      "signal": "OWNED_MEMBERS_DRAINED_ANCHOR_KILLED"
+    }
+  ],
+  "sample_interval_max_s": 0,
+  "late_intervals": 0,
+  "per_process_cap": 2147483648,
+  "group_cap": 2147483648,
+  "supervisor_cap": 805306368,
+  "aggregate_cap": 3221225472,
+  "command": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "-c",
+    "raise RuntimeError(\"MUST_NOT_LAUNCH\")"
+  ],
+  "source_pin": "PENDING_NO_ENGINE_RELEASE",
+  "token_acquired": 1792528418.272661,
+  "prelaunch_census": {
+    "logical_bytes": 431341,
+    "allocated_bytes": 585728,
+    "files": 87
+  },
+  "prelaunch_free_bytes": 167603933184,
+  "anchor": {
+    "pid_requested": 86859,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 86859,
+    "ppid": 86827,
+    "uid": 501,
+    "pgid": 86859,
+    "state": 2,
+    "start": [
+      1792528418,
+      276316
+    ]
+  },
+  "last_disk_observation": {
+    "last": null,
+    "failure": null
+  },
+  "closure_history": [
+    {
+      "pgid_requested": 86859,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216868660656708
+    },
+    {
+      "pgid_requested": 86859,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216868715407041
+    }
+  ],
+  "closure_observations": [
+    {
+      "pgid_requested": 86859,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216868660656708
+    },
+    {
+      "pgid_requested": 86859,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216868715407041
+    }
+  ],
+  "anchor_exit": -9,
+  "watchdog_exit_reaped": true,
+  "worker_exit": null,
+  "finished_epoch": 1792528418.3878021,
+  "final_census": {
+    "logical_bytes": 431341,
+    "allocated_bytes": 585728,
+    "files": 89
+  },
+  "qualification": "CONTROL_CANDIDATE_ONLY_NO_ENGINE_RELEASE"
+}

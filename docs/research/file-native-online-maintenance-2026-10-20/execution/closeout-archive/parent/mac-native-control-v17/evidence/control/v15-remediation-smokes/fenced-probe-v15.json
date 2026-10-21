@@ -1,0 +1,25 @@
+{
+  "name": "fenced-probe-v15",
+  "exit": 1,
+  "stdout": "{\"censor\": \"durable-host-fence\", \"closure\": \"NO_NEW_WORKLOAD\", \"token_released\": false, \"sample_count\": null, \"sample_gap_max_s\": null, \"workload_GO\": null, \"worker_exit\": null, \"keeper_recovery_socket\": null, \"nonce\": null}\n",
+  "stderr": "",
+  "started_epoch": 1792531315.698532,
+  "argv": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "/private/tmp/file-native-online-macos-20261020/execution/native-macos/guard_v7.py",
+    "--name",
+    "fenced-probe-v15",
+    "--seconds",
+    "12",
+    "--prospective",
+    "{\"F01\":{\"bytes\":131072,\"files\":8},\"F04\":{\"bytes\":0,\"files\":0},\"F08\":{\"bytes\":0,\"files\":0},\"F12\":{\"bytes\":2097152,\"files\":8},\"F13\":{\"bytes\":0,\"files\":0}}",
+    "--control-only",
+    "--",
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "-c",
+    "raise RuntimeError(\"MUST_NOT_LAUNCH\")"
+  ],
+  "guard_sha256": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6"
+}

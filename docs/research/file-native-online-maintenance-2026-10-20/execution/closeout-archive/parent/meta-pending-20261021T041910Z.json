@@ -1,0 +1,68 @@
+{
+  "kind": "META10_remaining_forecast_snapshot",
+  "utc": "2026-10-21T04:19:10.333201+00:00",
+  "status": "IMMUTABLE_RECONCILIATION_ONLY_NO_CAP_CHANGE",
+  "supersedes": {
+    "path": "meta-pending-20261021T041812Z.json",
+    "sha256": "7ab26b46458ed67346503a317c49ec3164f451b9b274f4298bfba49d5a3b29f6",
+    "preserved": true
+  },
+  "authority": "META explicit corrected pending451248 minus verified runtimeR2 actual12077 and admitted guardwithdrawal actual3308; unconsumed grant remainders held. Source/cap/global forecasts unchanged.",
+  "membership": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\meta-membership-v5.json",
+    "sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+    "cap_bytes": 10485760,
+    "cap_files": 2000
+  },
+  "fresh_actual_before_this_metadata": {
+    "bytes": 9834331,
+    "files": 1147
+  },
+  "remaining_pending_bytes": {
+    "old_reports": 18033,
+    "source_packets": 124072,
+    "remaining_returns": 229376,
+    "R2_reviews_remaining": 43114,
+    "new_Linux_review_pair": 20480,
+    "guard_withdrawal_remaining": 788
+  },
+  "remaining_pending_total": 435863,
+  "R2_remaining_detail": {
+    "guard": 1943,
+    "runtime": 211,
+    "profiles": 20480,
+    "Windows": 20480
+  },
+  "verified_new_materialization": [
+    {
+      "path": "shared-runtime-review/review-R2.md",
+      "bytes": 4556,
+      "sha256": "3ff1106387694ff2caf3f18b0222cb76fa61d787b24f931c1915672338bcbe5c"
+    },
+    {
+      "path": "shared-runtime-review/evidence-R2.json",
+      "bytes": 7521,
+      "sha256": "0412ee45ffa8a9de480cd93aa51da75a825ba3f27ce5de30a3bd098f8343666d"
+    },
+    {
+      "path": "bounded-guard-review/R2/qualification-withdrawal.json",
+      "bytes": 3308,
+      "sha256": "bfd1b778a03339fe4ea21efe31ff4f56b128e7f1bc0e2341acea2edfeedd93cd"
+    }
+  ],
+  "arithmetic": {
+    "pending_before": 451248,
+    "runtime_R2_consumed": 12077,
+    "guard_withdrawal_consumed": 3308,
+    "pending_after": 435863
+  },
+  "do_not_add_again": [
+    "obsolete472893 or447152 or451248 balances",
+    "generic256000 future is duplicate",
+    "runtime12288 belongs to existing R2 grant;12077 already actual,211 left",
+    "Windows finalpacket86677 and guardR2pair10345 already reconciled",
+    "cutoffmanifest38862 and CP4review19876 already actual"
+  ],
+  "accounting": "Fresh ALL physical membership actual + ONLY remaining435863. This metadata consumes actual headroom, not oldreportreserve. Later verified authorized materialization consumes matching remaining allowance once; no deletion, expiry, relabel or count cap change. New Linux20480/2 remains pending; packet124072 includes remaining finalMac/other source packets.",
+  "gates": "Budget sufficiency only; not source/controller/engine/native/runtime/archive/retirement GO. GuardR2 controller global-PASS acceptance withdrawn; mechanism source proof separate. Context absent/unallocated after sourcecutoff. Keep44GiB hardcap, all mandatory obligations and protected bodies. ParentGit/index/lock positive growth remains separately F13, never META or zero-cost."
+}

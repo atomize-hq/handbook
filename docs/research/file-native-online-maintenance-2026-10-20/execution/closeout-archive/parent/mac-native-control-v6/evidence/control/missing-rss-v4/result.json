@@ -1,0 +1,1528 @@
+{
+  "kind": "native-guard-control-candidate",
+  "nonce": "e1ab610178bd38d05cda048872d7a6e6",
+  "source_sha256": "c1ecda58cac32a096c99979e0e820c4b4ede1b0afffd15f89164b98381ccbce2",
+  "supervisor": {
+    "pid_requested": 85370,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 85370,
+    "ppid": 54542,
+    "uid": 501,
+    "pgid": 85370,
+    "state": 2,
+    "start": [
+      1792528315,
+      471103
+    ]
+  },
+  "started_epoch": 1792528315.768415,
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "seconds_cap": 3,
+  "global_enumeration": false,
+  "censor": "missing-live-rss-or-identity",
+  "closure": "UNKNOWN_OR_REMAINING",
+  "samples": 0,
+  "peak_group_rss": 0,
+  "peak_supervisor_rss": 0,
+  "missing_live_rss": [
+    {
+      "identity": {
+        "pid_requested": 85435,
+        "returned_bytes": 136,
+        "errno": 0,
+        "expected_bytes": 136,
+        "pid": 85435,
+        "ppid": 85370,
+        "uid": 501,
+        "pgid": 85435,
+        "state": 2,
+        "start": [
+          1792528315,
+          773009
+        ]
+      },
+      "usage": {
+        "return": -1,
+        "errno": 1,
+        "rss_bytes": null,
+        "start_abstime": null
+      }
+    }
+  ],
+  "transient_exited_members": [],
+  "termination": [
+    {
+      "identity": {
+        "pid_requested": 85435,
+        "returned_bytes": 136,
+        "errno": 0,
+        "expected_bytes": 136,
+        "pid": 85435,
+        "ppid": 85370,
+        "uid": 501,
+        "pgid": 85435,
+        "state": 2,
+        "start": [
+          1792528315,
+          773009
+        ]
+      },
+      "matches": true,
+      "signal_errno": null,
+      "signal": "SIGKILL_OWNED_ANCHORED_GROUP"
+    }
+  ],
+  "sample_interval_max_s": 0,
+  "late_intervals": 0,
+  "per_process_cap": 2147483648,
+  "group_cap": 2147483648,
+  "supervisor_cap": 805306368,
+  "aggregate_cap": 3221225472,
+  "command": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "-c",
+    "import time; time.sleep(3)"
+  ],
+  "source_pin": "PENDING_NO_ENGINE_RELEASE",
+  "token_acquired": 1792528315.770858,
+  "prelaunch_census": {
+    "logical_bytes": 352123,
+    "allocated_bytes": 442368,
+    "files": 47
+  },
+  "prelaunch_free_bytes": 167625621504,
+  "anchor": {
+    "pid_requested": 85435,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 85435,
+    "ppid": 85370,
+    "uid": 501,
+    "pgid": 85435,
+    "state": 2,
+    "start": [
+      1792528315,
+      773009
+    ]
+  },
+  "closure_history": [
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766149722583,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 245760,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766200445500,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766255742875,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766311038125,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766366300458,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766421604083,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766473754333,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766527300916,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766580089583,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766634090833,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766688756500,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766743952166,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766799233333,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766850697791,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766905999916,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216766961297208,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767012786625,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767068082541,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767120168541,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767175433875,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767230661958,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767283822583,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767337562083,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767391188750,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767445856875,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767500143083,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767552795958,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767608026208,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767658804791,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767712038875,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767767186291,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767819313458,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767874650666,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767928111416,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216767979809000,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216768033046500,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216768084053083,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216768137797541,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    }
+  ],
+  "closure_observations": [
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216768084053083,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    },
+    {
+      "pgid_requested": 85435,
+      "returned_bytes": 4,
+      "errno": 0,
+      "valid": true,
+      "members": [
+        85436
+      ],
+      "monotonic_ns": 3216768137797541,
+      "remaining_identities": [
+        {
+          "identity": {
+            "pid_requested": 85436,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 85436,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 85435,
+            "state": 2,
+            "start": [
+              1792528315,
+              817854
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 14860288,
+            "start_abstime": 77202387498913
+          }
+        }
+      ]
+    }
+  ],
+  "anchor_exit": -9,
+  "watchdog_exit_reaped": true,
+  "worker_exit": null,
+  "finished_epoch": 1792528317.865765,
+  "sample_span_s": 2.048100665677339,
+  "effective_samples_hz": 0.0,
+  "final_census": {
+    "logical_bytes": 352166,
+    "allocated_bytes": 446464,
+    "files": 50
+  },
+  "qualification": "CONTROL_CANDIDATE_ONLY_NO_ENGINE_RELEASE"
+}

@@ -1,0 +1,128 @@
+{
+  "kind": "parent-verified-cp4-source-freeze-not-execution-go",
+  "base": "a3f9805eccc19ede8dd5c735b54e675e98e63714",
+  "worktree": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook",
+  "files": {
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock": {
+      "bytes": 10547,
+      "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml": {
+      "bytes": 561,
+      "sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/Cargo.toml": {
+      "bytes": 147,
+      "sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/src/main.rs": {
+      "bytes": 68,
+      "sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/Cargo.toml": {
+      "bytes": 148,
+      "sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/src/main.rs": {
+      "bytes": 69,
+      "sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs": {
+      "bytes": 12161,
+      "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs": {
+      "bytes": 8570,
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs": {
+      "bytes": 1001,
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs": {
+      "bytes": 2661,
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs": {
+      "bytes": 30973,
+      "sha256": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs": {
+      "bytes": 14324,
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs": {
+      "bytes": 15130,
+      "sha256": "8e0cff3a25773a1a24dbf58cec803bb2ff39216b9c3bd4e087257263226185d7"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs": {
+      "bytes": 476,
+      "sha256": "fba1eb82cbb6f5400adf283569178750ca7fb75f51a56c8bbd0cadb5abf716ea"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs": {
+      "bytes": 38163,
+      "sha256": "31ca252691bcbbad32b99796642c2af07f0b837e83f954323b61df0669b8a507"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs": {
+      "bytes": 57,
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs": {
+      "bytes": 10576,
+      "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs": {
+      "bytes": 3551,
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs": {
+      "bytes": 19797,
+      "sha256": "a421e97d45168ae541e80ec6caada2475a159297b9286d47b0372b2c7f458887"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs": {
+      "bytes": 76637,
+      "sha256": "9b000069b2b5b6a6213e078871fedc28ccad4995f658e433ea5e4b4e5319aa6c"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/paged.rs": {
+      "bytes": 21418,
+      "sha256": "0c5008b7a3a77e60bab665ba311d7ae5ed2db2537efd5a38f1a81b2a59aeabdb"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/physical_lifetime.rs": {
+      "bytes": 23488,
+      "sha256": "9f108c01abf845880028aab91ddd5be84eeb1e34641a75111e7aa073ea2a290f"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs": {
+      "bytes": 27876,
+      "sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/rolling.rs": {
+      "bytes": 9157,
+      "sha256": "7f2ff7f8266a8d2d7d306051bbd5e12fc039abc3f8ff5b09c1b4993fad14776d"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs": {
+      "bytes": 36016,
+      "sha256": "379d42d6fa30cf92c1accf4f78fc253c3adfb6c28fa3bf7c0aa17fec56098b7c"
+    },
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/control.py": {
+      "bytes": 4194,
+      "sha256": "d9e0c219fa9f2f7f347efc4aa006c59f28fbf4bf1b3d4d0c80a7208840933480"
+    },
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/forecast.json": {
+      "bytes": 2733,
+      "sha256": "c1637c91be07380e4ab09e3229888f1f84c1b7931ab45524b623880fdc4425fd"
+    },
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/protocol.py": {
+      "bytes": 16794,
+      "sha256": "823f8e76cf2da3bd6bc9c33279b087c308b2a95f061879166e4745b4d702cde0"
+    },
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/README.md": {
+      "bytes": 8682,
+      "sha256": "c7e372475f25c03129348bd841d10e766321ef761f61013aeceb725921951a55"
+    }
+  },
+  "source_files": 25,
+  "control_files": 4,
+  "uncompiled": true,
+  "guard_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "budget_sha256": "ca5592807f608afd7f76052f3121b9d8610f7177b1e0a569173172f4d87860f3"
+}

@@ -1,0 +1,174 @@
+{
+  "source_pin": "f9b762a1a0d352564542bb4850ad77ee14a7c6e4",
+  "base_pin": "7a6ee9db03f5cd2e388129a9019c0d5f274a1844",
+  "source_binding": {
+    "sha256": "0b4e3ad991c3b5e453ec9a0443fe427376cdbdcb51f00a3ad93fc2507b652293",
+    "files": 25,
+    "mismatches": [],
+    "manifest_run_bindings": 8,
+    "run_mismatches": []
+  },
+  "binary": {
+    "bytes": 3202560,
+    "sha256": "e7f648ec50bd0facab8c9e20eb0a0fe0d8d80dc32ecbe4cfb3986822bd2604d9"
+  },
+  "verdict": "REMEDIATE",
+  "qualification": "INCOMPLETE",
+  "graph": "UNKNOWN: exact checkout unregistered; manual risk HIGH",
+  "no_runtime_review_invocations": true,
+  "static_simulations": {
+    "kind": "source-only arithmetic/state trace; no runtime engine proof",
+    "geometry": {
+      "records": 55366,
+      "keyBytes": 225,
+      "pageWidths": [
+        1154,
+        25,
+        1
+      ],
+      "indexBytes": 16191779
+    },
+    "cache": {
+      "limit": 67108864,
+      "residentLegacyCharge": 62914560,
+      "incomingReaderCharge": 1048576,
+      "chargedTotal": 63963136,
+      "serializedIndexStillLive": 16191779,
+      "minimumIndexBytesIncludingOutput": 79106339,
+      "passesMakeRoom": true,
+      "exceedsLimit": true
+    },
+    "readLimit": {
+      "raw": 8388608,
+      "caller": 65536,
+      "locateReadLimit": 8388608,
+      "decodeBeforeCallerCheck": true
+    },
+    "conversionCollision": {
+      "inputs": "Two independently born same-content descriptors in different segments, admitted by catalog and exercised in four-route test",
+      "firstOutput": "packs/newbirth/<same-packSHA>.pack",
+      "secondOutput": "packs/newbirth/<same-packSHA>.pack",
+      "secondCreateNew": "AlreadyExists before index correspondence; old STORE remains selected"
+    },
+    "explicitMetadata": {
+      "descriptors": 64,
+      "uncountedCatalogStatCalls": 128,
+      "uncountedSelectedPinStatCalls": 1
+    }
+  },
+  "build7": {
+    "guard_exit": 0,
+    "errors": [],
+    "censor": null,
+    "empty_closure_checks": 2,
+    "small_units": 10,
+    "heavy_cache_filtered": 1,
+    "peak_rss": 454582272,
+    "sample_max_ms": 47,
+    "sample_intervals_over_40ms": 8
+  },
+  "conversion": {
+    "guard_exit": 0,
+    "errors": [],
+    "censor": null,
+    "empty_closure_checks": 2,
+    "events": 28,
+    "final_binary_events": 14,
+    "old_binary_events": 14,
+    "exit0": 28,
+    "violations": 0,
+    "peak_rss": 25653248,
+    "sample_max_ms": 32,
+    "expected_outcomes": 8,
+    "independently_matched_final_resolves": 8,
+    "mismatches": [],
+    "records_per_mode": 20,
+    "discovery_none_preserved": true,
+    "engine_audits": "not independent oracles",
+    "max_per_key_paged_bytes": 740,
+    "max_per_key_pages": 1,
+    "max_capture_bytes": 7169
+  },
+  "smoke3": {
+    "binding": "historical build3 only, not final source",
+    "binary": "bb18f8b01340a61cb7228f33528a9e5152281475cf5a10fe6ee1e28e51983fb6",
+    "events": 267,
+    "historical_candidate_events": 250,
+    "old_binary_events": 17,
+    "exit0": 262,
+    "exit2": 5,
+    "violations": 0,
+    "guard_exit": 0,
+    "errors": [],
+    "censor": null,
+    "empty_closure_checks": 2,
+    "peak_rss": 30580736,
+    "sample_max_ms": 63,
+    "sample_intervals_over_40ms": 7,
+    "outcomes_per_mode": 52,
+    "tail_cycles_per_mode": 3,
+    "new_pubs_per_cycle": 16
+  },
+  "retained_failures": {
+    "smoke1": 1,
+    "smoke2": 1,
+    "build6": 101
+  },
+  "extra_input_hashes": [
+    {
+      "name": "cp3-build7.stdout",
+      "bytes": 1277,
+      "sha256": "0b62e0f148a970feea53847a4fc34053727b3d41deede2f9bbf4d7bab8fe8b6b"
+    },
+    {
+      "name": "cp3-build7.stderr",
+      "bytes": 5565,
+      "sha256": "82348a85560f49c4e3364fc57292b295723a6a3f9640d274a8a52649fbd1963b"
+    },
+    {
+      "name": "cp3-conversion-events.jsonl",
+      "bytes": 90893,
+      "sha256": "f66de61bee85c11b5941c5d8f7202a0c3fc80ae58f82dd74b53f126acdc0dfac"
+    },
+    {
+      "name": "cp3-smoke3-events.jsonl",
+      "bytes": 963371,
+      "sha256": "cf1499e991de22e18af1d50ea4f0eb59b0356d951cf1362e426edc4f6c0d2a29"
+    },
+    {
+      "name": "cp3-smoke.stderr",
+      "bytes": 1696,
+      "sha256": "207888188e5f25405f8effc26b230d7545bbbfbd26543899f35ee3640e6298bb"
+    },
+    {
+      "name": "cp3-smoke2.stderr",
+      "bytes": 466,
+      "sha256": "dc522d05e86d13f392c7a5571b710395619adf14452f92a9190ae991d2651eae"
+    },
+    {
+      "name": "cp3-build6.stderr",
+      "bytes": 6009,
+      "sha256": "cd10452e0f2312784d618295b876eef0f7fe2757172e2867247c1d0cbb7807c4"
+    },
+    {
+      "name": "cp3-smoke.json",
+      "bytes": 6837,
+      "sha256": "5caca68a3e7472a012767d358b90ef1c61e555232fd283fbcdf3b4ee8c9d93ea"
+    },
+    {
+      "name": "cp3-smoke2.json",
+      "bytes": 7811,
+      "sha256": "7cbe797f1e98440d5dd4047edb1083cd72cbc16694ca66721631d808c7ef7565"
+    },
+    {
+      "name": "cp3-build6.json",
+      "bytes": 21323,
+      "sha256": "7058046a7c95297c663a09a6c057b86b097662bb3d4226fe278e324617fae275"
+    },
+    {
+      "name": "cp3-detect-final.txt",
+      "bytes": 2141,
+      "sha256": "f0603f9f78e971ecfb4626cbc71a069167ced3d32fd73cacbccc176cd1f6ad72"
+    }
+  ]
+}

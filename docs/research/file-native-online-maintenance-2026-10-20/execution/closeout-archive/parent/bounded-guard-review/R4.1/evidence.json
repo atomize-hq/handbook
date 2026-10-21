@@ -1,0 +1,265 @@
+{
+  "schema": "independent-bounded-guard-source-review-R4.1",
+  "verdict": "REMEDIATE",
+  "review_scope": "Full exact five frozen sources; relevant dependency contracts; static text/hash/metadata only.",
+  "source_freeze_utc": "2026-10-21T08:19:42.179492Z",
+  "review_started_utc": "2026-10-21T08:40:36Z",
+  "sources": [
+    {
+      "name": "job_guard_bounded.py",
+      "bytes": 77503,
+      "sha256": "300a71f666c61c8301aa782df2c10412e6afa574891aa071ff897d96f940cfe2"
+    },
+    {
+      "name": "unlocked_capture.py",
+      "bytes": 58923,
+      "sha256": "447f164837ad7a4b46b923f90a72c1568f536d96af29355a48edb421563d44ef"
+    },
+    {
+      "name": "controls.py",
+      "bytes": 14902,
+      "sha256": "24b88e544417d909cebdd5dd4e4cb993e35dcfa230b30d3f3059cb3238c2d9c5"
+    },
+    {
+      "name": "README.md",
+      "bytes": 4078,
+      "sha256": "dedc5c37b316af68095c00188e1ff5febc761f392e13c74168dcd6aecbbf326a"
+    },
+    {
+      "name": "source-receipt.json",
+      "bytes": 3432,
+      "sha256": "2116d8d84f81385ff5da6c26aac4193ed8310f182c7d96308d348d9d01120664"
+    }
+  ],
+  "source_total": {
+    "bytes": 158838,
+    "files": 5,
+    "cap_bytes": 166912,
+    "cap_files": 5
+  },
+  "source_budget": {
+    "name": "windows-bounded-guard-R4.1-source-budget-058.json",
+    "bytes": 3834,
+    "sha256": "ea7e3478651f0dc53c8a04dd8d74e0a8d9b7073535eeb8c5d13e289e0ec967d1"
+  },
+  "findings": [
+    {
+      "id": "R4.1-1",
+      "priority": "P1",
+      "scope": [
+        "native27 qualifying source admission",
+        "fixedSSH finite8 qualifying source admission",
+        "HYST"
+      ],
+      "file": "unlocked_capture.py",
+      "lines": [
+        379,
+        477,
+        757,
+        968
+      ],
+      "issue": "Actual reopened outer Budget.raw_hash is not compared with reviewed config; owner and receipt/completion omit actual budget/bounds association.",
+      "consumer": {
+        "file": "windows_adapter.py",
+        "lines": [
+          574,
+          592
+        ],
+        "effect": "Missing outer budget_sha256 rejects before Evidence."
+      }
+    },
+    {
+      "id": "R4.1-2",
+      "priority": "P1",
+      "scope": [
+        "HYST postexit"
+      ],
+      "file": "unlocked_capture.py",
+      "lines": [
+        900,
+        914
+      ],
+      "issue": "Capture closed finalizer-allocation schema excludes source_freeze required by current finalizer closed schema.",
+      "consumer": {
+        "file": "qualification-lanes/phase_finalizer.py",
+        "lines": [
+          1375,
+          1383
+        ],
+        "effect": "No authority satisfies both exact closed key sets."
+      }
+    }
+  ],
+  "prior_reassessment": {
+    "R4_final_same_job_denial_accounting": "Static repair present in BOTH Jobs, including final error/denial health censor and cleanup; native regression UNRUN.",
+    "R4_inner_pending_acquisition": "Static repair present: pending gates admission and physical closure, retains actual resource context.",
+    "R3_unassigned_outer_root": "Static repair present; retained root native handle terminated/reaped/checked close, unknown acquisition fenced.",
+    "R3_watchdog_publication": "Static repair present; whole watchdog through durable publication/census/stdout.",
+    "R3_terminal_coverage": "Static repair present; both terminal witnesses with three <=40ms gaps.",
+    "R3_qualified_old_outer_grant": "Static repair present; actual old qualified capability and global no-fence/expiry gates."
+  },
+  "admission": {
+    "native27": "NO_GO pending actual outer allocation source binding and fresh bounded admission.",
+    "fixedSSH_finite8": "NO_GO for qualifying admission under requested internal actual-budget proof; transport mechanisms reviewed, no native result.",
+    "HYST": "NO_GO budget owner association plus current authority schema incompatibility.",
+    "runtime_go": false,
+    "engine_go": false,
+    "build_go": false,
+    "retirement_go": false,
+    "retroactive_rescoring": false
+  },
+  "dependencies": [
+    {
+      "name": "harness/job_guard.py",
+      "sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+      "scope": "Reference hash rechecked; not imported."
+    },
+    {
+      "name": "windows-final-platform/windows_bootstrap.py",
+      "sha256": "a5d82e50c1c2b5d685498b63f6ef204dc6a4daf7431f1918dbbe276045d84e68",
+      "scope": "Current complete source read."
+    },
+    {
+      "name": "native-linux/final-suite/suite_bootstrap.py",
+      "bytes": 16104,
+      "sha256": "8ce97085723d2657f9148bfa81bf3d70e67759c86872e30bd87b09805562a135",
+      "scope": "Complete read; fixed phase ABI matches; Linux V5.3 qualification separate."
+    },
+    {
+      "name": "windows-final-platform/windows_adapter.py",
+      "sha256": "d5a35d663872abff8fbb4dc1ff3c388f8f25f68edeb8cd3171b215a74c40aa18",
+      "scope": "Actual pre-Evidence budget consumer contract."
+    },
+    {
+      "name": "windows-final-platform/windows_capsule.py",
+      "sha256": "33a8f19f863ecd5723dcfb12ac5159688954f324ce75879744f7c09281053007",
+      "scope": "Pre-Evidence invocation order."
+    },
+    {
+      "name": "qualification-lanes/phase_finalizer.py",
+      "sha256": "5eb58dc9f0f8718cf70b8b3a82492deeacea7e632f690afce29595a0d9a8035d",
+      "scope": "Current postexit authority/source-freeze/new-owner contract; not full unrelated implementation rereview."
+    },
+    {
+      "name": "fixture-retirement-native-context/windows_context.py",
+      "sha256": "757798dccac67f7dab6c8150f5cf69df87b1c1bbb7623a957a32fef0d8be0136",
+      "scope": "Separate changed source, NOT admitted by this review."
+    },
+    {
+      "name": "C:/Windows/System32/OpenSSH/ssh.exe",
+      "bytes": 1251328,
+      "sha256": "8e1212d6b10bbab3dfd85077c1a7d0b60373fde702dfa9ea8c57924793bdb317",
+      "scope": "Read-only metadata/hash; no launch; source nlink2 exception audited."
+    }
+  ],
+  "clock": {
+    "functional": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z",
+    "reset": false,
+    "initial_max_seconds": 3600,
+    "controls_max_seconds": 900,
+    "worker_max_seconds": 3600,
+    "verified_config": "tighten only; actual endpoint",
+    "expiry_cleanup_seconds": 12,
+    "cleanup_qualifies": false
+  },
+  "execution": {
+    "source_text_reads": true,
+    "hash_metadata": true,
+    "reviewed_module_import": false,
+    "AST_compile": false,
+    "native_calls": false,
+    "SSH": false,
+    "Jobs": false,
+    "controls": false,
+    "engine": false,
+    "Cargo": false,
+    "Git": false,
+    "source_edits": false,
+    "subagents": false,
+    "new_chats": false
+  },
+  "constraints": {
+    "structured_standard": "proposed; no migration/default approval",
+    "GitNexus": "Landing UNKNOWN/unregistered; no bootstrap/index; manual HIGH lifecycle impact",
+    "historical_negative_archives": "preserved; no retroPASS"
+  },
+  "accounting": {
+    "membership": "meta-membership-v9.json",
+    "membership_sha256": "842fb0c2f51715ad4af257738df9dbabb6e97f74659aeccad0795f012ee49386",
+    "cap_bytes": 10878976,
+    "other_pending_bytes": 136381,
+    "pair_allocation_bytes": 24576,
+    "pair_allocation_files": 2,
+    "no_legacy_hold_revival": true,
+    "deduplication": "absolute physical pathname OrdinalIgnoreCase; complete selector census; fail closed on reparse/enumeration error",
+    "before_first_write": {
+      "utc": "2026-10-21T08:49:32.2263554Z",
+      "prewrite_bytes": 10605179,
+      "prewrite_files": 1278,
+      "pending_before": 160957,
+      "prospective_before": 10766136,
+      "bytes": 11717,
+      "sha256": "2472b09f052ced7d0a5fe1c226209bafe94788e365d7a3aa08ff436bf315fc27",
+      "pending_after": 149240
+    },
+    "before_second_write": {
+      "utc": "2026-10-21T08:50:09.0992866Z",
+      "actual_bytes": 10616896,
+      "regular_files": 1279,
+      "pending_bytes": 149240,
+      "prospective": 10766136
+    },
+    "pair_consumption_bytes": 21479,
+    "unused_pair_release_bytes": 3097,
+    "other_pending_after_release_bytes": 136381,
+    "release_policy": "One-time release only of unused part of this 24576-byte pair, after successful delivery; other pending136381 retained."
+  },
+  "review_artifact": {
+    "utc": "2026-10-21T08:49:32.2263554Z",
+    "prewrite_bytes": 10605179,
+    "prewrite_files": 1278,
+    "pending_before": 160957,
+    "prospective_before": 10766136,
+    "bytes": 11717,
+    "sha256": "2472b09f052ced7d0a5fe1c226209bafe94788e365d7a3aa08ff436bf315fc27",
+    "pending_after": 149240
+  },
+  "final_source_recheck": {
+    "utc": "2026-10-21T08:50:09.0950039Z",
+    "all_five_match": true,
+    "source_budget_matches": true,
+    "files": [
+      {
+        "name": "job_guard_bounded.py",
+        "bytes": 77503,
+        "sha256": "300a71f666c61c8301aa782df2c10412e6afa574891aa071ff897d96f940cfe2",
+        "matches": true
+      },
+      {
+        "name": "unlocked_capture.py",
+        "bytes": 58923,
+        "sha256": "447f164837ad7a4b46b923f90a72c1568f536d96af29355a48edb421563d44ef",
+        "matches": true
+      },
+      {
+        "name": "controls.py",
+        "bytes": 14902,
+        "sha256": "24b88e544417d909cebdd5dd4e4cb993e35dcfa230b30d3f3059cb3238c2d9c5",
+        "matches": true
+      },
+      {
+        "name": "README.md",
+        "bytes": 4078,
+        "sha256": "dedc5c37b316af68095c00188e1ff5febc761f392e13c74168dcd6aecbbf326a",
+        "matches": true
+      },
+      {
+        "name": "source-receipt.json",
+        "bytes": 3432,
+        "sha256": "2116d8d84f81385ff5da6c26aac4193ed8310f182c7d96308d348d9d01120664",
+        "matches": true
+      }
+    ]
+  }
+}

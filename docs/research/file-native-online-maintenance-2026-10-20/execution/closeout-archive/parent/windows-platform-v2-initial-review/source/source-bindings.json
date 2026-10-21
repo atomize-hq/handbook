@@ -1,0 +1,141 @@
+{
+  "schema": "private-platform-source-bindings-v1",
+  "source_only": true,
+  "runtime_go": false,
+  "claim025_sha256": "29aeb8e27edbc42f603ccac8024a1833abf04a7aa49db6ca9c8649940997397a",
+  "budget": {
+    "path": "execution/admission/windows-final-platform-source-budget-039.json",
+    "sha256": "b79a0cccaf96be247bba2b48bada220417bc083eb4b09828aa43642719e5eaa3"
+  },
+  "observed_helper_sources": [
+    {
+      "path": "execution/qualification-lanes/history_lane.py",
+      "bytes": 48321,
+      "sha256": "83a633283fa16169793c47dbdf2c927be70766700a2c31bbb1861757b0c71366",
+      "status": "SOURCE_PROPOSAL_ONLY_RUNTIME_NOT_RELEASED"
+    },
+    {
+      "path": "execution/qualification-lanes/long_lane.py",
+      "bytes": 28445,
+      "sha256": "854ee63f0f24dd71546e84af1371e0bd6a6999b82d50105548bd5dfe212cc466",
+      "status": "SOURCE_PROPOSAL_ONLY_RUNTIME_NOT_RELEASED"
+    }
+  ],
+  "accepted_reference_sources": {
+    "final-protocol/focused_protocol.py": {
+      "bytes": 50073,
+      "sha256": "7ce0a4a06a35fa9e7f4f4080a40315a418bb45e47a8946ca06d78c2117d855e8"
+    },
+    "final-protocol/source_receipt.json": {
+      "bytes": 10144,
+      "sha256": "4719748175f99b3f00a281f526c0deabcac0977122c07bb6d7c517080fb45381"
+    },
+    "harness/driver.py": {
+      "bytes": 5928,
+      "sha256": "924fea5aeafc19d9a45c37e6527f6ed842e8c16f6d5aba861c3fb17de5413ae2"
+    },
+    "harness/job_guard.py": {
+      "bytes": 28324,
+      "sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae"
+    },
+    "harness/paged_index.py": {
+      "bytes": 8097,
+      "sha256": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea"
+    },
+    "harness/physical_decoder_v5.py": {
+      "bytes": 44817,
+      "sha256": "1347778df8839da571603b215a8f3aecac70b40eff571ddbad0cb19e27bf5be9"
+    },
+    "windows-cadence/job_guard_qpc.py": {
+      "bytes": 37051,
+      "sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378"
+    }
+  },
+  "accepted_reference_pin": "80dfd1addad5cb6f6c92dd8f05eb18ff69e4b567",
+  "reference_scope": "Source/API only; complete real transitive import map and review docs still required. Parent materialized unchanged paged byte core; no copy by this owner.",
+  "own_import_map": {
+    "source_controls": "source_controls.py",
+    "windows_adapter": "windows_adapter.py",
+    "windows_bootstrap": "windows_bootstrap.py",
+    "windows_capsule": "windows_capsule.py",
+    "windows_deadlines": "windows_deadlines.py",
+    "windows_driver": "windows_driver.py",
+    "windows_evidence": "windows_evidence.py",
+    "windows_growth": "windows_growth.py",
+    "windows_hooks": "windows_hooks.py",
+    "windows_native": "windows_native.py",
+    "windows_oracle_bridge": "windows_oracle_bridge.py"
+  },
+  "method_hash_domain": "SHA256 UTF8 ast.get_source_segment(FunctionDef), excludes decorator lines; complete file SHA also mandatory.",
+  "method_hashes": {
+    "LaneHost.poll": "7a7a959f433902123ab8306e23079309e3487bac6e5ebe970ecf95dbe4ccce88",
+    "LaneHost.authorize": "1b953d345287f49e1b4d04a1b0dde2eb0e5b12aab1ccda5107d8f945982bbd27",
+    "LaneHost.checkpoint": "221956c082ab6213f88c4b2326bcf811103da025ffae50b031fa72b21a65ae5d",
+    "LaneHost.writer_closure_proof": "0d5e7f2202d40ccb388a50db94e36e0f1809ce5d55675b9b9099b0b3bafc4046",
+    "LaneHost.record": "ad6aab63c67789b88c2c0ba0b1908eac5302611c37fb4b84508dbe13cf16f779",
+    "LaneHost.invoke": "58db1813561fad38919d748da61afa0ebddfa310d17464a71844c9bdff42bac6",
+    "LaneHost.run_case": "bbc85addfbbd8e31a130e58bb913f95abe4dcbe4460affe1830b157158b50dbb",
+    "LaneHost.drain": "b655167290c6eb5fd3d9d5a0d38884dc16aa419411b1c16f30dc0e0ad04ccb65"
+  },
+  "runtime_source_files": null,
+  "runtime_release": null,
+  "final_engine_pin": null,
+  "impact": {
+    "target": "WindowsDriver",
+    "direction": "upstream",
+    "repository": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook",
+    "cli": "cached GitNexus1.6.12",
+    "result": "Repository not found; no alternate selected",
+    "indexed_risk": "UNKNOWN",
+    "manual_risk": "HIGH",
+    "direct_consumers": [
+      "NativeAdapter",
+      "LaneHost",
+      "HistoryNative/HistoryLease",
+      "shared Harness/helper boundaries"
+    ],
+    "affected_processes": [
+      "input/output delivery",
+      "reader termination",
+      "maintenance concurrency",
+      "independent verification",
+      "closeout"
+    ],
+    "blast_radius": "No registered exact-checkout graph; unknown transitive count. Manual HIGH reported before edits."
+  },
+  "no_bootstrap_index_or_Git_write": true,
+  "claim034_sha256": "7cef582dea91aeced39b332d37a6c4d6259d786b600d4afcc3387b66077f28b3",
+  "previous_negative": {
+    "archive_sha256": "926469b3d65c99f55a6404fc8931ab4b32b70f5551816cc61c07c2a2de9d179f",
+    "source_receipt_sha256": "b4671f65fe56b6cf964aa850c843fac49fa36c0fe4050891a5a302dc8ab76ec6",
+    "source_bindings_sha256": "341b2f654dccaae7ad53d677a5cebc401781081a0a35c2ed574d1cc17b6f7c27",
+    "review_sha256": "8bf9a1429f6617b156a9379a002d7f77e2cdf50b4d35ee0de0e2e31af31e487e"
+  },
+  "clock_method_hashes": {
+    "frequency": "0510b141cc4997d04805ccd5d8de757714a52667974711cc704f638766a65aa6",
+    "counter": "c5bbcf3af7852cbb98d373ca2cedf5d5d8c376c3ab030f2c2f72972aab0fa629",
+    "bridge": "a8448669fac3a029418ab2bd9d792446df363ba49dc164872c858869ae4551d3",
+    "process_proof": "eb224105e730808ef23779c92d9a98b35140ca9d24626cecdbfaeae2c91647f4"
+  },
+  "source_inputs_inheritance": "Full original input byte bindings remain in the preserved negative source-bindings member.",
+  "claim039_sha256": "2ad791f85e6bddb49bf47bd731259606ccd0cf936bec8c99d1554e1c91376e1d",
+  "previous_034": {
+    "receipt_sha256": "7c31340ccbd4509692f46192f7521d5285d049b8b6c73248ddfac8ca695fde4d",
+    "archive_sha256": "dbbe3867c15e07f3ceae1a4f3736d3b5112b66f388e23bc13eebebaed7a77027",
+    "review_sha256": "7d955028b98d82b18ee4154fb37acaea9005454d1945f20a248f316f32eb66d8"
+  },
+  "protocols": [
+    "lane-invoke-v2",
+    "single-raw-ref-v1",
+    "native-response-ref-v1",
+    "closed-writer-settlement-v1",
+    "history-ports-v1"
+  ],
+  "constructor_status": "165 named source bodies; Windows ABI/full dependencies unreviewed, D matrix missing.",
+  "selected_history_policy": {
+    "publisher_deadline_seconds": 44,
+    "reader_deadline_seconds": 48,
+    "old_pin_deadline_seconds": 23.6
+  },
+  "known_capture_blocker": "request-before-dispatch input duplication and failures before Driver._execute require pending-call planned-input ownership handshake"
+}

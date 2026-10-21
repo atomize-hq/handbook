@@ -1,0 +1,192 @@
+{
+  "kind": "actual-unused-LinuxC1-closure-and-exact-flat-source-membership-correction",
+  "claim_id": "44GiB-CENTRAL-023-C1LINUX-EXPIRY-EXACT8HELPERS",
+  "utc": "2026-10-21T00:12:20.892141+00:00",
+  "status": "LINUX_UNUSED_FORECAST_EXPIRY_APPLIED__SOURCE_MEMBERSHIP_SUPERSEDES022_PROVISIONAL_SUBROOTS__REGISTRATION_REQUIRED",
+  "authority": "META suppliedfreshLinuxunusedcache/closurebindingproof andexacteightflatfilenames after022 hadalreadysealed. Preserve022 unchanged; applythese concreteclosure/ownershipchanges as023, leavingone standardfinalclaimslot. No diagnosticseal, no native/long/fullengineGO.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261021T001009Z.json",
+    "sha256": "905543e536ad5b7fd8db19c252a99d5e4fd432401f556bced4e236fea4358b36",
+    "preserved_unchanged": true,
+    "timing": "022sealed2026-10-21T00:10:09ZbeforelatestLinux/flatfilename revision arrived; no sealrewrite."
+  },
+  "LinuxC1_unused_forecast_expiry": {
+    "before": 67108864,
+    "after": 0,
+    "unused_release": 67108864,
+    "actual_deleted_bytes": 0,
+    "actual_deleted_files": 0,
+    "actual_reclaimed_bytes": 0,
+    "proof_type": "Nativeownerfreshreadonlyproof forwardedbyMETA, independently authenticatedlocalretainedreceipt/binding/Cargo.lock; resourceworker didnot rerunremotehashing oropenremoteCargo.",
+    "receipt": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\native-source-receipt-v3.json",
+      "bytes": 6346,
+      "sha256": "cb828b1524ac380748246256e79204071c09f4f65e19156f3ac0c6775f91cdce"
+    },
+    "fresh_owner_cache_and_closure": {
+      "cargo_private": {
+        "exists": false,
+        "bytes": 0,
+        "files": 0
+      },
+      "cargo_home": {
+        "exists": false,
+        "bytes": 0,
+        "files": 0
+      },
+      "private_cache": {
+        "exists": false,
+        "bytes": 0,
+        "files": 0
+      },
+      "CARGO_HOME": "UNSET",
+      "global_cache": "/home/spenser/.cargo",
+      "existing_heavy_lock_exclusive_available": true,
+      "recorded_owner_claims": 28,
+      "live_matching_owner_identities": 0,
+      "dependency_binding_sha256": "13316af81fdd91285007ede59d694bf6398bf6aaf6cbeb24b428e9d0551f55e4",
+      "fresh_archive_hash_matches": 45,
+      "fresh_unpacked_roots": 32,
+      "fresh_source_file_hash_matches": 1530,
+      "mismatches": [],
+      "future_private_copy_planned": false,
+      "only_unused_forecast_expiry_no_actual_delete_credit": true
+    },
+    "source_review": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\native-source-review-v3.md",
+      "sha256": "6e3c624c7c01825c5e73033ae91c210bfce3cfa4c1d203886c9a4447589c920a"
+    },
+    "retained_dependency_binding": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\cp1-provisional-62ce9630\\cp1-dependency-binding.json",
+      "bytes": 180560,
+      "sha256": "13316af81fdd91285007ede59d694bf6398bf6aaf6cbeb24b428e9d0551f55e4",
+      "archive_count": 45,
+      "unpacked_roots": 32,
+      "source_files": 1530
+    },
+    "planned_Cargo_lock_current": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\Cargo.lock",
+      "bytes": 10547,
+      "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+      "matches_native_binding": true
+    },
+    "owner_extra_detail": "All3privatecandidatepathsabsent0/non-symlink; existingheavy-session.lockopenedREADONLY/nonblockingexclusiveacquire+release withnonewfile/write. All28PID+startowneridentitiesdead; previousguardbuildclosuretrue andnojobs. Existingglobalcache/home/spenser/.cargo staysintact. Earlierknowncadencefailure remainsunqualified, not erased.",
+    "future_build_contract": "env -u CARGO_HOME, CARGO_INCREMENTAL=0, CARGO_NET_OFFLINE=true, cargo --locked --offline --workspace --release -j2, samebuild-work/target/current256MiB. PositiveglobalCargo growth<=F13Linux4MiB, unchanged. Missing/newdeps STOP/reforecast; no privatefallback/copy authorized.",
+    "no_current_native_run_GO": true
+  },
+  "exact_HELPER_flat_path_membership": {
+    "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes",
+    "actual_root_present_before_claim": false,
+    "total_cap_unchanged": 131072,
+    "regular_file_cap_unchanged": 8,
+    "source_allocation": "Existing022 C3HELPER128KiB only; NO new byte/fileallocation and NO secondC3 subtraction. C3unsubclaimed remains3932160 including32KiBcontrolhold.",
+    "supersedes": "022provisionalqualification-lanes/long64KiB4 and/history64KiB4 subroots areNOTthewriteauthorization. ReplacewithEXACTeight flatnames inthisclaim. Thoseuncreatedsubrootsgainno files/extrareservation.",
+    "files": [
+      {
+        "name": "legacy_archive_restore.py",
+        "group": "LONG",
+        "cap_bytes": 16384,
+        "owner": "01a15b51-a50b-7930-8633-b42694240252"
+      },
+      {
+        "name": "long_lane.py",
+        "group": "LONG",
+        "cap_bytes": 32768,
+        "owner": "01a15b51-a50b-7930-8633-b42694240252"
+      },
+      {
+        "name": "history_lane.py",
+        "group": "HISTORY",
+        "cap_bytes": 49152,
+        "owner": "METAassignfreshhistorychatbeforewrites"
+      },
+      {
+        "name": "fake_controls.py",
+        "group": "CONTROL",
+        "cap_bytes": 18432,
+        "owner": "01a15b51-a50b-7930-8633-b42694240252"
+      },
+      {
+        "name": "fake_cases.json",
+        "group": "CONTROL",
+        "cap_bytes": 4096,
+        "owner": "01a15b51-a50b-7930-8633-b42694240252"
+      },
+      {
+        "name": "lane_config.example.json",
+        "group": "CONTROL",
+        "cap_bytes": 4096,
+        "owner": "01a15b51-a50b-7930-8633-b42694240252"
+      },
+      {
+        "name": "README.md",
+        "group": "CONTROL",
+        "cap_bytes": 4096,
+        "owner": "01a15b51-a50b-7930-8633-b42694240252"
+      },
+      {
+        "name": "source-manifest.json",
+        "group": "CONTROL",
+        "cap_bytes": 2048,
+        "owner": "01a15b51-a50b-7930-8633-b42694240252"
+      }
+    ],
+    "group_caps": {
+      "LONG": {
+        "bytes": 49152,
+        "files": 2
+      },
+      "HISTORY": {
+        "bytes": 49152,
+        "files": 1
+      },
+      "CONTROL": {
+        "bytes": 32768,
+        "files": 5
+      }
+    },
+    "allcaps_required": "Beforeeverywrite/projectedcopy requirewhole<=131072/8, EVERYgroupcap, EVERYindividualfilecap andexactlistednames. No9thimplicitfile, root/subdir outputs,pycache,temporarybackups or hiddencompiler artifacts; anyneededtemp requiresexplicitforecast/registration withinexistingcaps beforewrites.",
+    "owner_binding": "Stream01a15b51 ownslongtwo+controlfive. HistoryownernewchatNOTYETCREATED; METAassignexactchatbeforehistoryfilewrite; resourceclaimdoesnotdispatchorcreatechat.",
+    "membership": "TheseoriginalsC3HELPER, NOTMETA8orMatrixF01. Distinctarchive/extract/reviewcopies elsewhereMETA8; Gitobject/index/ref/lockgrowthF13 once. Existingstream_snapshot.pyf8 andfrozenguard1e4 unchangedunderseparateoriginalsourceownership.",
+    "initial_scope": "SOURCEONLY afterparentregistration/explicitboundedsourceGO. Code review/sourcehashmanifestandfinitefakecontrolplanrequired; no runtime/control/engine/realhistory/long/nativeGO fromthisclaim.",
+    "no_new_worktree_admin_target_dependencies": true
+  },
+  "allocator_after023": {
+    "whole_before023": 46991419765,
+    "central_before023": 253220491,
+    "Linux_unused_expiry": 67108864,
+    "whole_after": 46924310901,
+    "central_after": 320329355,
+    "cap": 47244640256,
+    "C3_total": 16777216,
+    "C3_unsubclaimed_unchanged": 3932160,
+    "global_reserved_files_unchanged": 4792604,
+    "global_remaining_files_unchanged": 207396,
+    "inside_closeout_reserve_bytes": 1073741824,
+    "inside_closeout_reserve_files": 100000,
+    "actual_delete_credit": 0
+  },
+  "combined022_023_summary": {
+    "before022whole": 47092083061,
+    "before022central": 152557195,
+    "WindowsC1_unused_expiry192MiB": 201326592,
+    "LinuxC1_unused_expiry64MiB": 67108864,
+    "combined_unused_expiry256MiB": 268435456,
+    "CP_fixture_topup96MiB": 100663296,
+    "net_whole_reduction160MiB": 167772160,
+    "CP_fixture_cap192MiB_unchanged_from022": 201326592,
+    "F06_CP192_plus_Matrix32_total224MiB": 234881024,
+    "WindowsC2_128MiB_kept_held": 134217728,
+    "F02_current_cap256MiB_unchanged": 268435456,
+    "CP_F12_shared48MiB_unchanged": 50331648,
+    "future_accounting": "Priorfullbodyconditionaltables alreadyassumedbothC1expiries. DoNOTaddtheir256MiBcreditagain. CP192isinsidefutureWinfullbodycap, notextra96MiBontop. Nofullbody/F07raiseoractualF05/F09/F11expiryhere."
+  },
+  "registration_before_source_or_run": [
+    "NEWimmutablebudget/allocatorstate binds022AND023 hashes, C1Win/Linuxexpiry, C2Winheld, CP192fixture/F06total224, unchangedhardtarget256/evidence48 andglobalgroups.",
+    "Flatqualification-lanesEXACT8files/individual+group+wholecaps replace022provisionalsubroots. Bindfreshhistoryownerbeforethatfilewrite.",
+    "Parentthenauthorizesonlyconcreteboundedsourcecopy/review/fakeplan. Full19unit/actual64MiBconstruction RUN needsacceptedfinalpin,binary,source/controlreview,newguardbudget andexactnextfixture/target/evidence/RSS/file/deadlineforecast separately.",
+    "Keepalloldbudgetversions,seals,failedraw/protecteddata. No compression/deletion/abandoncredit. Sourcefreeze04:10unchanged."
+  ],
+  "resource_worker_actions": "Localreadonlyreceipt/binding/lockhashverification andimmutableclaimreport only; no remoteCargo/job/cache mutations, engine/source/helper/budgetwrites byresourceworker.",
+  "remaining_full_bounds": "AllWindowsretainedCP+1000extras/native553840496+knownunit+terminal/constructor/case/reset/fileboundspending; mandatory1600historiesunderF051GiB+longexistingpoolsstillrequired beforeanyactualunusedphaseexpiry/fullbodyGO."
+}

@@ -1,0 +1,101 @@
+{
+  "kind": "windows-platform-independent-source-review-034",
+  "disposition": "REMEDIATE",
+  "source_only": true,
+  "runtime_GO": false,
+  "finding": {
+    "id": "W5",
+    "priority": "P2",
+    "file": "windows_capsule.py",
+    "start": 260,
+    "end": 264,
+    "trigger": "NativeAdapter.spawn registers a thread, then thread.start fails before start; LaneHost.drain joins the retained unstarted handle without an ident guard or per-handle exception isolation.",
+    "effect": "RuntimeError aborts later callback joins, drain receipt and bootstrap finalization; direct finalize has the same drain precondition.",
+    "related": ["windows_adapter.py:164-173", "windows_bootstrap.py:165-167"],
+    "execution_reproduction": false
+  },
+  "original_findings": {
+    "W1": "ADDRESSED_IN_TARGETED_SOURCE_PATH",
+    "W2": "ADDRESSED_IN_TARGETED_SOURCE_PATH",
+    "W3": "ORIGINAL_PATHS_ADDRESSED_HOST_DRAIN_W5_REMAINS",
+    "W4": "ADDRESSED_IN_TARGETED_SOURCE_PATH"
+  },
+  "source": {
+    "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-final-platform",
+    "files": 27,
+    "bytes": 263081,
+    "receipt_bytes": 6963,
+    "receipt_sha256": "7c31340ccbd4509692f46192f7521d5285d049b8b6c73248ddfac8ca695fde4d",
+    "canonical_manifest_sha256": "4c644c15c56f300233552e17702d04bb45a2051bdc6e1e57c221d9b3d90193cf",
+    "all_26_entry_sizes_and_hashes_verified": true,
+    "closed_names_and_all_caps_verified": true,
+    "source_group": {"files": 11, "bytes": 158648},
+    "case_group": {"files": 8, "bytes": 59764},
+    "bindings_with_receipt": {"files": 8, "bytes": 44669},
+    "budget_bytes": 2829,
+    "budget_sha256": "38c9924d8812345700490b9867f7553e915bd344a843f2171c80d309d6bf2293"
+  },
+  "negative_predecessor": {
+    "archive_bytes": 53005,
+    "archive_sha256": "926469b3d65c99f55a6404fc8931ab4b32b70f5551816cc61c07c2a2de9d179f",
+    "receipt_sha256": "b4671f65fe56b6cf964aa850c843fac49fa36c0fe4050891a5a302dc8ab76ec6",
+    "files": 27,
+    "uncompressed_bytes": 222646,
+    "all_manifest_entries_verified": true,
+    "byte_identical_replacement_files": 12,
+    "archive_extracted": false,
+    "original_reports_preserved": true
+  },
+  "clock": {
+    "APIs": ["frequency", "counter", "bridge", "process_proof"],
+    "file_sha256": "a4c02bebadf58c99e902b45479daea676dcc39c195abc2d1d6692cebae89be1c",
+    "source_observation": "Actual lazy kernel32 QPC, retained stage/owned registry under common lifetime lock, no fallback clock or arbitrary PID reopen.",
+    "source_blocker_found": false,
+    "AST_binding_independently_recomputed": false,
+    "native_executed": false,
+    "qualified": false
+  },
+  "controls": {
+    "prepared_groups": 64,
+    "original_groups": 43,
+    "regression_groups": 21,
+    "prepared_fake_transport_scenarios": 19,
+    "literal_assertion_sites_owner_reported": 44,
+    "memory_controls_run": 0,
+    "native_controls_run": 0,
+    "real_cases": 166,
+    "all_real_case_status": "PENDING"
+  },
+  "META_prewrite": {
+    "utc": "2026-10-21T02:44:30.202823Z",
+    "membership": "meta-membership-v5.json",
+    "membership_bytes": 3503,
+    "membership_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+    "cap_bytes": 10485760,
+    "actual_bytes": 8772035,
+    "actual_files": 1050,
+    "whole_P_and_closed_Landing_plus_exact_promoted20": true,
+    "promoted_bytes": 203215,
+    "two_report_max_bytes": 20480,
+    "preserved_future_bytes": 262144,
+    "projected_bytes": 9054659,
+    "headroom_after_both_reserves": 1431101,
+    "prior_cap_retroqualification": false
+  },
+  "reviewer_operations": {
+    "source_data_reads_hashes_diffs_and_census": true,
+    "supplied_module_imports": 0,
+    "AST_or_compile": 0,
+    "controls_or_native_API_calls": 0,
+    "engine_build_Job_calls": 0,
+    "source_edits": 0,
+    "Git_index_bootstrap_mutations": 0,
+    "subagents_chats_worktrees": 0,
+    "only_output_files": ["review-034.md", "evidence-034.json"]
+  },
+  "risk": "GitNexus exact checkout unavailable UNKNOWN; manual HIGH across transport/reader/helper/closeout; no graph counts claimed",
+  "source_freeze_target": "2026-10-21T04:10:14Z",
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "protected_closeout": "2026-10-21T13:10:14Z",
+  "clock_reset": false
+}

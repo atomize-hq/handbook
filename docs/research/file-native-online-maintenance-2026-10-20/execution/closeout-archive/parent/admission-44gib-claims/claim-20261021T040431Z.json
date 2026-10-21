@@ -1,0 +1,169 @@
+{
+  "claim_id": "44GiB-CENTRAL-045-WINDOWS-SOURCE216KiB-CASEDATA232KiB",
+  "utc": "2026-10-21T04:04:31.152656+00:00",
+  "status": "SOURCE_GROUP_TRANSFER_AND_EXPLICIT_PENDING_CORRECTION__PARENT_BUDGET_SOURCE_GO_REQUIRED",
+  "authority": "META explicitly prioritizes Windows045; Context attempted seal failed PREWRITE and remains unallocated. META authorizes remaining pending forecast944912->524288; no actual deletion/expiry.",
+  "prior043": {
+    "file": "claim-20261021T033411Z.json",
+    "sha256": "b5001198b5ea42a54129436497d93f5e18bc82b09b76ea98788ec68d5b998e90",
+    "immutable": true
+  },
+  "prior044": {
+    "file": "claim-20261021T034607Z.json",
+    "sha256": "8d2f99dd441cefe7b04ec43a828a6de3e205ee56077e6bda65b2581f2266e291",
+    "immutable": true
+  },
+  "owner_chat": "01a15bd5-7694-7981-a619-9a23d4774b60",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform",
+  "groups": {
+    "SOURCE": {
+      "old_bytes": 212992,
+      "new_bytes": 221184,
+      "files": 11
+    },
+    "CASEDATA": {
+      "old_bytes": 245760,
+      "new_bytes": 237568,
+      "files": 8
+    },
+    "BINDINGS": {
+      "bytes": 65536,
+      "files": 8
+    },
+    "whole_bytes": 524288,
+    "closed_names": 27,
+    "root_conservative_filecap": 32
+  },
+  "new_SOURCE_per_file_caps": {
+    "windows_driver.py": 24576,
+    "windows_native.py": 26624,
+    "windows_adapter.py": 24576,
+    "windows_growth.py": 16384,
+    "windows_capsule.py": 22528,
+    "windows_hooks.py": 28672,
+    "windows_oracle_bridge.py": 12288,
+    "source_controls.py": 30720,
+    "windows_deadlines.py": 4096,
+    "windows_bootstrap.py": 8192,
+    "windows_evidence.py": 22528
+  },
+  "new_CASEDATA_per_file_caps": {
+    "packing52.json": 29696,
+    "recovery24.json": 29696,
+    "strict24.json": 29696,
+    "focused_windows.json": 29696,
+    "protocol.json": 29696,
+    "workspace_ordinary.json": 29696,
+    "source_constructors.json": 29696,
+    "growth_actions.json": 29696
+  },
+  "BINDINGS_each8192_names": [
+    "README.md",
+    "interface.md",
+    "controls-forecast.json",
+    "source-bindings.json",
+    "final-engine-bindings.json",
+    "source-receipt.json",
+    "static-controls-result.json",
+    "platform-source-review-notes.md"
+  ],
+  "fresh_SOURCE_members": [
+    {
+      "file": "windows_driver.py",
+      "bytes": 24343,
+      "sha256": "84216d84601e6e6e2178462c0bf372dde0d1860883f9992ae722dce4d70bb12b"
+    },
+    {
+      "file": "windows_native.py",
+      "bytes": 25843,
+      "sha256": "a4c02bebadf58c99e902b45479daea676dcc39c195abc2d1d6692cebae89be1c"
+    },
+    {
+      "file": "windows_adapter.py",
+      "bytes": 22884,
+      "sha256": "c94e0d653deca8d62e6a764187249bad112b296152c7b175b02386d244ca6dd1"
+    },
+    {
+      "file": "windows_growth.py",
+      "bytes": 13738,
+      "sha256": "1799de85869fe2b42550061d1fb18d4d365bf5f947be3042394620059534e220"
+    },
+    {
+      "file": "windows_capsule.py",
+      "bytes": 20300,
+      "sha256": "95c4f22ea5df63419cc3453f9e5229d5ab080f53ecf15594a61dce0b906e571d"
+    },
+    {
+      "file": "windows_hooks.py",
+      "bytes": 24532,
+      "sha256": "91ba4ecf80230776d2b4e2f01c8809cb34e1bd41263bfc7923f487f1950fae63"
+    },
+    {
+      "file": "windows_oracle_bridge.py",
+      "bytes": 8131,
+      "sha256": "bbdb821e5a39cc2411434ee58e72d08dffd88011df4f5fcb22e56996af9bfb04"
+    },
+    {
+      "file": "source_controls.py",
+      "bytes": 28421,
+      "sha256": "df46a38fbfbe9cf85425d8e1314340739632059a78567beebcb7e8c335ec88bd"
+    },
+    {
+      "file": "windows_deadlines.py",
+      "bytes": 3749,
+      "sha256": "da4309d25abeac4ddcd20fe8f92ca8bf3e539313d8d3df72b805a7e41fb68b1d"
+    },
+    {
+      "file": "windows_bootstrap.py",
+      "bytes": 8151,
+      "sha256": "32f01f6ffcf58f0d3914e447b7ddd2cd864c3c80d2c4ec5ad8b2d112f39765f7"
+    },
+    {
+      "file": "windows_evidence.py",
+      "bytes": 16200,
+      "sha256": "b505aec5e5c10fd8dd52de5752d4013ac53b48b14e6e8ef3f247ae96d1b8c972"
+    }
+  ],
+  "fresh_group_bytes": {
+    "SOURCE": 196292,
+    "CASEDATA": 102129,
+    "BINDINGS": 46986
+  },
+  "all27_fit_old_and_new_perfile_and_group_caps": true,
+  "META_pending_correction": {
+    "old_remaining_bytes": 944912,
+    "new_remaining_bytes": 524288,
+    "reports": 32768,
+    "source_packets": 262144,
+    "remaining_returns": 229376,
+    "reason": "Existing source/review packets already charged in actual census no longer future forecast. Returned Mac native raw belongs to separately admitted F12 outside META. No actuals deleted, expired, relabeled or credited.",
+    "old_membership_file_immutable": true,
+    "parent_new_immutable_membership_required": true
+  },
+  "unchanged_allocator": {
+    "C3_total": 16777216,
+    "C3_unclaimed": 901120,
+    "META_cap": 10485760,
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "reserved_files": 4792716,
+    "unassigned_files": 207284,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "new_C3draw": 0,
+    "new_global_bytes": 0,
+    "new_global_files": 0,
+    "Context_unallocated": true
+  },
+  "prewrite": {
+    "prior_seals_verified": 45,
+    "family_files": 140,
+    "family_bytes": 480727,
+    "META_bytes": 9549997,
+    "META_files": 1124,
+    "pending_META_reserve": 524288,
+    "META_manifest_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be"
+  },
+  "gate": "Owner holds upward writes until NEW immutable parent Windows budget binds045/all per-file/group caps and explicit SOURCE GO. Same27 names/no implicittemps/pycache. No runtime/control/engine/Job/build/copy/corpus/archive/restore/deletion/Git/newnamespace authority. Source cutoff2026-10-21T04:10:14Z unchanged. Prior failures/receipts preserved; no retrofix. Context root/source allocation absent.",
+  "actions": "Read-only all27 cap/META/family census/all priorseal/addendum checks plus045 triplet only; old manifests/livebudgets/source unedited."
+}

@@ -1,0 +1,123 @@
+{
+  "kind": "44GiB-streaming-harness-bounded-subownership-claim",
+  "claim_id": "44GiB-CENTRAL-008-STREAM-HARNESS-SOURCE-TINY-CONTROLS",
+  "utc": "2026-10-20T21:58:22.555556+00:00",
+  "status": "BOUNDED_SOURCE_AND_SYNTHETIC_CONTROL_SUBCLAIMS_AUTHORIZED__REAL_LONG_STAGE_HOLD",
+  "authority": "Meta explicitly authorizes fresh streaming read/planworker to writeonlyafterthisclaimseal, withinEXISTING categoryearmarks. No newworktree/admin/buildtarget, engine, real longrestoreorcorpuscopy. ParentsoleGitcommitter.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T214509Z.json",
+    "sha256": "8232ff614dd32922175b8fc558c57293760dfc6460b888dc4402640588f9be35"
+  },
+  "subclaims": [
+    {
+      "id": "C3LONG-STREAM-SOURCE",
+      "parent_category": "C3replacement16MiB",
+      "bytes": 131072,
+      "files": 1,
+      "owner": "freshstreamingharnessworker, threadIDregisteredbymeta beforehandoff",
+      "paths": [
+        "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/harness/stream_snapshot.py"
+      ],
+      "C3_unsubclaimed_before_bytes": 10485760,
+      "C3_unsubclaimed_after_bytes": 10354688,
+      "remaining_MiB": 9.875,
+      "no_worktree_or_admin_grant": true,
+      "scope": "Onlynewownedsourcefile; exactsourcehashpinnedforparentreview. Landingexistingworktree, no broadsourcecopy. SharedGitobjects/admin globalF13once, notagainC3."
+    },
+    {
+      "id": "F06-MATRIX-STREAM-TINY-CONTROLS",
+      "parent_category": "F06 matrixprotocol32MiB subset",
+      "bytes": 2097152,
+      "files": 150,
+      "paths": [
+        "C:/file-native-online-matrix-20261020/protocol/stream-control/"
+      ],
+      "matrix_protocol_bytes_before": 33554432,
+      "matrix_other_protocol_bytes_after": 31457280,
+      "matrix_other_protocol_files_after": 24850,
+      "scope": "Synthetictinyfiles/streams/quarantinedrestorecontrols only. Allsourceanddestinationfixtures,emptydirsmetadata,partialfailureprefixesandtemporarybufferspersistedondisk countthis2MiB; no hiddenrealstorecopy/engineinvocation."
+    },
+    {
+      "id": "F12-MATRIX-STREAM-EVIDENCE",
+      "parent_category": "F12 matrixevidence32MiB subset",
+      "bytes": 524288,
+      "files": 49,
+      "paths": [
+        "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-matrix/stream-snapshot-controls/",
+        "C:/file-native-online-matrix-20261020/receipts/stream-control-*"
+      ],
+      "matrix_evidence_bytes_before": 33554432,
+      "matrix_other_evidence_bytes_after": 33030144,
+      "shared_worker_evidence_file_subset_before": 1000,
+      "subset_other_files_after": 951,
+      "scope": "Alllandingcontrolreceipts,reports,rawoutputsandruntime receiptcopiescombined<=512KiB. Physicallydistinctduplicates countonceeachinF12; no unlimitedperpathallowance."
+    }
+  ],
+  "file_partition": {
+    "total_stream_subowner_reserved_files": 200,
+    "C3_source": 1,
+    "F06_existing25000": 150,
+    "F12_existing1000_subset": 49,
+    "net_new_global_reserved_files": 0,
+    "all_parent_file_caps_remain": true
+  },
+  "source_and_runtime_partition": {
+    "sourceC3countonce": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/harness/stream_snapshot.py",
+    "syntheticfixtureF06countonce": "C:/file-native-online-matrix-20261020/protocol/stream-control/",
+    "evidenceF12countonce": [
+      "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-matrix/stream-snapshot-controls/",
+      "C:/file-native-online-matrix-20261020/receipts/stream-control-*"
+    ],
+    "registry_rule": "Matrixguard/subownershiprecord mustregistertheseexactpaths/byte/filecapsBEFOREworkerwrites/runscontrols. Existingrootcategorycensusremainsglobalonce; subownershipis apartition, not additivecopiesofcategoryactual. No resourceworkereditoflivebudget/source; meta/matrixownerapplyreviewedsubrecord.",
+    "Git_rule": "Parentsolecommitter; localcommonGitgrowthcountedF13once globally. Do not addsourceblobsizeagainperworker or create newworktree/admin/targetgrant."
+  },
+  "control_scope_and_gates": [
+    "Preserve existingFNOP1byte/fileidentity contract; no sourceformatmigration or relaxedschema.",
+    "Tinypositive/negativecontrols mustprovewholeouterstreamhash+EOF/truncation/trailing refusal,everyrecord/path/size/hash,totalfilecoverage,empty-directoryclosureanddurablephysicalpinmetadata;quarantinedpartialrestoreunusableuntildone.",
+    "Useboundedstreaming/backpressure; actuals+allpartialprefixesfit2MiB/150fixturefiles, receipts/landingduplicationfit512KiB/49files. Failedcontrolprefixtakescapacity; nodeletion/retrycredit assumed.",
+    "ApplyexistingWindowsheavyJobtoken/ownedJob/member/deadline/RSSrules tosynthchildcontrols; sourcewritingitselfdoesnotgrantengineexecution.",
+    "No actualenginecall, realH1k/H10k/longstoreopen/recovery/restore/copy, productionorprotectedoriginalpath. No packageinstall/indexing/bootstrap.",
+    "Parentreviews exactsource/controlrawreceipts andintegratesbefore ANY reallongstage. Claim005phasepeaks, F11fullstreamproof andnoF14credituntilactualcleanup allremain."
+  ],
+  "F05_scope_update_for_next_phase": {
+    "meta_frozen_control_change": "PerH1/H10 and1/4publisherconfig, extra100publicationno-maintenancecontrolFIRST, thenALLTHREE100publicationcyclesactuallyconcurrentlymaintained",
+    "total_required_concurrency_publications": 1600,
+    "old_forecast_publications": 1200,
+    "added_publications": 400,
+    "added_future_bytes_at65536": 26214400,
+    "H10002_prior_whole_forecast_bytes": 748224919,
+    "H10002_updated_whole_forecast_bytes": 774439319,
+    "proposed_F05_768MiB_cap": 805306368,
+    "headroom_to_proposed768_bytes": 30867049,
+    "current_guard_cap_bytes_unchanged": 1073741824,
+    "736MiB_further_release_invalid": true,
+    "over736MiB_bytes": 2687383,
+    "added_future_files": 12800,
+    "F05_files_cap_unchanged": 400000,
+    "no_new_clone_or_history_rewind": true,
+    "required_maintained_cycles_preserved": true,
+    "allocation_change_applied_here": false
+  },
+  "whole_applied_allocator_unchanged": {
+    "whole_prospective_bytes": 47071111541,
+    "central_contingency_bytes": 173528715,
+    "reserved_files_withprior64claimslots": 4792604,
+    "remaining_central_files": 207396,
+    "inside_closeout_reserve_bytes": 1073741824,
+    "global_byte_cap": 47244640256,
+    "global_file_cap": 5000000,
+    "C3_META_REVIEW_bytes_unchanged": 4194304,
+    "CP2_SOURCE_ADMIN_bytes_unchanged": 2097152,
+    "C1_Mac64MiB_held_activated_unchanged": true,
+    "C2_private_targets_unchanged": true,
+    "F05_current1GiB_guard_unchanged": true,
+    "enlarged_fullcaps_qualification_admission": "NO_GO/HOLDpendingmeasurementsandcompletereallocation; stagedanalysisnotactualrelease"
+  },
+  "previous_seals_unchanged": true,
+  "no_resource_worker_growth": "Newclaimreports only. No source/controlhelperwrite, no budgetfileedit, no engine/build/realcorpusrestore/copy/deletion.",
+  "clocks_unchanged": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z"
+  }
+}

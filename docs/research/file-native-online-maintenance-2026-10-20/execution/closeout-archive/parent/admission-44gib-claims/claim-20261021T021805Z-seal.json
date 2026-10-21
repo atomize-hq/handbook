@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-035-C3-HELPER-PROFILES-FINALIZER128KiB",
+  "utc": "2026-10-21T02:18:05.293911+00:00",
+  "status": "INTERNAL_C3_SOURCE_RESERVATION_APPLIED__PARENT_BUDGET_SOURCE_GO_BEFORE_NEW_NAMES",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T021805Z.json",
+      "bytes": 4812,
+      "sha256": "83c72145f5545e17f67b33c96cd612ab998d7c86f8c0b05477b3792ba43f86fd"
+    },
+    {
+      "file": "claim-20261021T021805Z.md",
+      "bytes": 697,
+      "sha256": "30ff81d281bcf95f069ead585ed79b44c23e41b007aa1387a885d58725ccb8e8"
+    }
+  ]
+}

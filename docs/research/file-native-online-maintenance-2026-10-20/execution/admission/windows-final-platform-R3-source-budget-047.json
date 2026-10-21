@@ -1,0 +1,70 @@
+{
+  "kind": "private-Windows-platform-R3-source-budget-047",
+  "source_root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-final-platform",
+  "owner": "01a15bd5-7694-7981-a619-9a23d4774b60",
+  "bytes": 524288,
+  "files": 27,
+  "max_bytes": 524288,
+  "max_files": 27,
+  "groups": {
+    "source": {
+      "bytes": 278528,
+      "files": 11,
+      "paths": {
+        "windows_driver.py": 32768,
+        "windows_native.py": 32768,
+        "windows_adapter.py": 32768,
+        "windows_growth.py": 20480,
+        "windows_capsule.py": 28672,
+        "windows_hooks.py": 40960,
+        "windows_oracle_bridge.py": 16384,
+        "source_controls.py": 32768,
+        "windows_deadlines.py": 4096,
+        "windows_bootstrap.py": 8192,
+        "windows_evidence.py": 28672
+      }
+    },
+    "case_data": {
+      "bytes": 180224,
+      "files": 8,
+      "paths": {
+        "packing52.json": 22528,
+        "recovery24.json": 22528,
+        "strict24.json": 22528,
+        "focused_windows.json": 20480,
+        "protocol.json": 24576,
+        "workspace_ordinary.json": 22528,
+        "source_constructors.json": 22528,
+        "growth_actions.json": 22528
+      }
+    },
+    "bindings": {
+      "bytes": 65536,
+      "files": 8,
+      "paths": {
+        "README.md": 8192,
+        "interface.md": 8192,
+        "controls-forecast.json": 8192,
+        "source-bindings.json": 8192,
+        "final-engine-bindings.json": 8192,
+        "source-receipt.json": 8192,
+        "static-controls-result.json": 8192,
+        "platform-source-review-notes.md": 8192
+      }
+    }
+  },
+  "claim047_sha256": "f74455d7c0cdbe1e5bfe2302cc430099c07c23a2c025d8bcdc2897e083ffaa6e",
+  "source_only": true,
+  "runtime_go": false,
+  "pure_memory_parse_compile_go": true,
+  "engine_commit_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z",
+  "historical_review_watchdog": "04:10:14Z MISSED; preservea5/R2failedsnapshots. Newprospectivecontrollerrepairsauthorized, no oldcellrescore/clockreset.",
+  "rules": [
+    "ChecksameimmutablebudgetSHA andindividual/group/wholeALLphysicalsourcecopies plusfuturecopyobligations beforeeverywrite; no links/reparse/bytecode/extrafiles.",
+    "OldsourceversionsdurableatGit a5b53218 and062enginefixed. No Rust/core/publicformat change.",
+    "Newsourcepinsfreshfullreviewandexplicitfiniteadmissionbeforeanyruntime/build/cache/fixture/archive/delete."
+  ],
+  "issued": "2026-10-21T05:05:16.066158+00:00"
+}

@@ -1,0 +1,61 @@
+{
+  "kind": "unadmitted-GitNexus-bootstrap-incident-and-bounded-undo-v1",
+  "status": "HISTORICAL_RESOURCE_VIOLATION_PRESERVED_CURRENT_RESERVATIONS_RECONCILED_NO_RUNTIME_QUALIFICATION",
+  "trigger_worker": "01a15bcc-6fb9-7e63-b935-a60d25d9390a",
+  "start_utc": "2026-10-21T06:54:54.009Z",
+  "trigger": "Main.gitnexus/run.cjs unexpectedly selected pnpm dlx gitnexus@latest with permitted package build scripts; explicitlyforbidden bootstrap. No candidate engine qualification follows.",
+  "observed_process_tree": [
+    69132,
+    8488,
+    26272
+  ],
+  "stop_command_utc": "2026-10-21T06:55:34.381Z",
+  "stop_completed_utc": "2026-10-21T06:55:35.393Z",
+  "closure_limitation": "Observed exacttree absent; matchinginstaller commandlines0 after. Uninstrumented installer-native side effects outsideobservedtree notcertifiedabsent.",
+  "initial_unadmitted_conservative_hold": 1079329441,
+  "initial_unfunded_forecast_excess": 827190294,
+  "new_installation_undo": {
+    "path": "C:/Users/spmcc/AppData/Local/pnpm-cache/dlx/0d139a0cd124739f2ff8499929822f327233958cc0ac609c1c658e58fe68e1fc/1a15d3dd4c0-66a0",
+    "native_root_id": 18295873490697489,
+    "native_volume": 3966032726,
+    "root_created_ns": 1792565695680978100,
+    "regular_logical_bytes_unlinked": 1050910072,
+    "regular_paths": 15045,
+    "shared_hardlink_names_unlinked": 11933,
+    "junction_links_unlinked_without_target_traversal": 633,
+    "directories_including_root": 2536,
+    "predelete_inventory_sha256": "a47f594e68106820f890b889a5baa6b6aa605a6f7097d46b2dca1cb45cb83adb",
+    "native_protocol": "ExactresolvedabsoluteNEWroot/nativeID/ctimeverified. Root+parentNoDeleteSharehandlesheld. FULLPath.lstat/nativeIDs/read-onlyattributechecks/hashinventory. DeleteFileW onlyNEWnames(no attribute/contentwrite), RemoveDirectoryW onlyjunctionlinks/emptydirs. FinalrootSAMEDELETEhandle disposition+checkedclose. Twoabsencechecks andindependentnativeCreateFileWerror2.",
+    "precondition_abort": "FirstattemptWindowsDirEntry.stat zerosidentity/linkfields causedabortBEFOREanydeletion. CorrectedFULLPath.lstat usedforactualoperation.",
+    "old_cached_CLI_sha256_unchanged": "e2c96d62b26a1898e536457377f7b73c539b080c7e8c316869ffc6a790003eb4",
+    "all_preexisting_sibling_names_retained": true,
+    "old_hardlinked_contents_and_attributes_written": false,
+    "shared_link_counts": "UnlinkingNEWnames decreasesnativehardlinkcounts; no claimalloldnativefilemetadataunchanged.",
+    "allocated_storage_credit": "No physicalfreed-inode-byteclaim forsharedhardlinks; onlyactualownedlogicalpathabsencecredited.",
+    "elapsed_seconds": 116.822
+  },
+  "remaining_conservative_actual_hold": {
+    "regular_bytes": 18048297,
+    "regular_files": 288,
+    "shared_store_bytes": 286626,
+    "shared_store_files": 60,
+    "metadata_bytes": 17761671,
+    "metadata_files": 228,
+    "metadata_uncertainty": "Atomicoverwriteprebaselineunknown; fullcurrentrecentpathsheldconservatively, notexactgrowthclaim.",
+    "shared_store_deleted": false,
+    "metadata_deleted": false
+  },
+  "current_reservations": {
+    "whole_bytes": 47010549406,
+    "cap_bytes": 47244640256,
+    "central_unassigned_bytes": 234090850,
+    "reserved_files": 4797100,
+    "unassigned_files": 202900,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "claim055_sha256": "cf5cc6fa26cda403e1e6f4149159a5910f793299589274f2a149dede3ea3c818"
+  },
+  "prevention": "OnlyknownEXACTcachedGitNexusCLIabsolute path; no mainwrapper/npx/npm/pnpm/packagebootstrap. Unindexedcheckout remainsUNKNOWN/manualtrace, neverbootstrap.",
+  "source_resume": "Parentexplicitmessage after055+v8/CLIbudgetsealed; no runtime/cache/build/fixture/retireGO.",
+  "reported_utc": "2026-10-21T07:18:16.873928+00:00"
+}

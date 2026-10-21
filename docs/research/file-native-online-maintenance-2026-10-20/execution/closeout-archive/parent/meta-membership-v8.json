@@ -1,0 +1,105 @@
+{
+  "kind": "META10.375_closed_membership_v8",
+  "cap_bytes": 10878976,
+  "P_all_regular_files_recursive": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be",
+  "Landing_research_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20",
+  "Landing_regular_files_only_at_roots": [
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution"
+  ],
+  "Landing_recursive_execution_subtrees": [
+    "admission",
+    "admission-claims",
+    "native-macos",
+    "reviews",
+    "final-protocol",
+    "windows-matrix",
+    "windows-cadence"
+  ],
+  "Landing_excluded_subtree": "execution/windows-matrix/stream-snapshot-controls",
+  "Landing_promoted_harness_files": [
+    "cp2_decoder_static_controls.py",
+    "cp2_decoder_static_final.py",
+    "cp2_full_batch.py",
+    "cp2_journal_controls.py",
+    "driver.py",
+    "driver_start_controls.py",
+    "final_document_controls.py",
+    "finish_h10_baseline.py",
+    "h10_ready_census.py",
+    "matrix_budget.py",
+    "matrix_budget_controls.py",
+    "oracle_batch.py",
+    "physical_decoder_v3.py",
+    "physical_decoder_v4.py",
+    "quiescent_oracle.py",
+    "request_provenance.py",
+    "physical_decoder_v5.py",
+    "cohort_closure_controls.py",
+    "paged_index.py",
+    "paged_index_controls.py",
+    "quota_v2_oracle.py",
+    "quota_v2_controls.py",
+    "verify_operational_v2.py",
+    "physical_decoder_v6.py"
+  ],
+  "promoted_harness_bytes": 245974,
+  "excluded_original_source_subtrees": [
+    "execution/native-linux",
+    "execution/qualification-lanes",
+    "execution/windows-final-platform",
+    "execution/fixture-retirement",
+    "execution/windows-bounded-guard",
+    "execution/shared-runtime-contracts",
+    "execution/fixture-retirement-native-context"
+  ],
+  "accounting": "All physical copies charged once per pathname. P archives/extracts included. Old F01 reservations retained conservatively; no expiry/deletion credit. Native/Linux originals F01/F12, helper/windows originals C3, not META. Shared Git positive growth F13 separately.",
+  "prewrite_actual_bytes": 7988080,
+  "prewrite_regular_files": 943,
+  "future_report_reserve_bytes": 32768,
+  "future_packet_reserve_bytes": 262144,
+  "claim030_sha256": "da2b03916a20440f8df17247bb095505123dac2df6ed6c4759571273a70e3b0b",
+  "prior_manifest_sha256": "742c435ebc495a62de638e7ec3a1fdc85988010a1f80b406a3a7eaabe15cb011",
+  "planned_additional_return_review_reserve_bytes": 650000,
+  "future_promotions_only_after_independent_INTEGRATE": {
+    "quota_v2_oracle.py": 18432,
+    "quota_v2_controls.py": 10240,
+    "verify_operational_v2.py": 10240,
+    "physical_decoder_v6.py": 4096,
+    "quota-v2-plan.md": 2048
+  },
+  "claim037_sha256": "efc97e0b8192bfa9c78020102879e7fa6250027428f5323c67d23d62d330c6be",
+  "claim_family_caps": {
+    "files": 192,
+    "bytes": 786432,
+    "extra_files": 64,
+    "central_unassigned_files": 207284
+  },
+  "allocation_note": "055C3neutral131072METAincrease10747904to10878976; SAMEphysicalmembership, no newglobalallowance; C3unclaimed311296. Historicalbootstrapunadmittedexcessrecorded, no retroPASS.",
+  "raw_return_allocation": "NEWexecution/native-macos-raw futureactualruntimeartifacts jointMacF12native+local<=24MiB separatelynotMETA, BEFOREwriteperreturnbudget; sourcepacketsP/native-macosstayMETA. NativeLinuxoriginalrawF12 unchanged.",
+  "exact_quota_v2_promotions": {
+    "quota_v2_oracle.py": {
+      "bytes": 18418,
+      "sha256": "bf4e892298760c79ce5a164c3294e069e5188b8c2c260c8477e9c93e64c468d3"
+    },
+    "quota_v2_controls.py": {
+      "bytes": 10234,
+      "sha256": "59b06c0db3e426a8147490ac9aa6add5f1d1c3dd56156cb804d222c213c0cb57"
+    },
+    "verify_operational_v2.py": {
+      "bytes": 10071,
+      "sha256": "e517d07c5f345e9fb3a90535d5185828147b45a27896e658dbf4164ea7a76caf"
+    },
+    "physical_decoder_v6.py": {
+      "bytes": 4036,
+      "sha256": "c4e0a160816372b76ffbfd2102a1a2d98985e0190bdbf2dff2c3fbb118ea3811"
+    }
+  },
+  "quota_doc_counted_once_in_windows_matrix_subtree": true,
+  "source_freeze": "04:10 review watchdog MISSED preserved; scope-preserving harness repairs prospectivelyauthorized under046-051, engine062fixed; hardfunctional11:10/closeout13:10 unchanged.",
+  "runtime_go": false,
+  "claim046_sha256": "6bd67f146b344cdb8bd501a261df795e946a49b557d5a5d5227665c8e8e581ba",
+  "current_pending_accounting": "Resource rolling136381 futureholds snapshot; onlyexactnewreviewcapsaddedonce, consumeactual/releaseunused; no historicgeneric256000 or oldreportdoublehold.",
+  "issued": "2026-10-21T07:18:16.873928+00:00",
+  "claim055_sha256": "cf5cc6fa26cda403e1e6f4149159a5910f793299589274f2a149dede3ea3c818"
+}

@@ -1,0 +1,193 @@
+{
+  "Git_mutations": 0,
+  "Jobs": 0,
+  "accepted_outer_QPC_SHA256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "actual_memory_controls_executed": 0,
+  "actual_native_controls_executed": 0,
+  "actual_regular_files": 27,
+  "actual_total_bytes": 341882,
+  "all_case_status": "PENDING",
+  "builds": 0,
+  "case_ID_count": 166,
+  "case_source_bodies_named": 165,
+  "claim039_sha256": "2ad791f85e6bddb49bf47bd731259606ccd0cf936bec8c99d1554e1c91376e1d",
+  "clock_reset": false,
+  "corpus_fixture_runtime_writes": 0,
+  "engine_calls": 0,
+  "experiment_processes": 0,
+  "extra_files": 0,
+  "frozen_utc": "2026-10-21T03:21:15.786352+00:00",
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "groups": {
+    "bindings": {
+      "bytes_excluding_receipt": 39367,
+      "cap_bytes": 65536,
+      "cap_files": 8,
+      "files_excluding_receipt": 7
+    },
+    "case_data": {
+      "bytes_excluding_receipt": 102129,
+      "cap_bytes": 262144,
+      "cap_files": 8,
+      "files_excluding_receipt": 8
+    },
+    "source": {
+      "bytes_excluding_receipt": 192767,
+      "cap_bytes": 196608,
+      "cap_files": 11,
+      "files_excluding_receipt": 11
+    }
+  },
+  "known_capture_blocker": "request-before-dispatch input duplication and failures before Driver._execute require pending-call planned-input ownership handshake",
+  "manifest": {
+    "README.md": {
+      "bytes": 5232,
+      "sha256": "b13a25dea736d0fed0d4593546d0341ab1dbb2c93a35a0853528b42fd3145872"
+    },
+    "controls-forecast.json": {
+      "bytes": 3584,
+      "sha256": "aa5a2148469cf57df5fff9a7aaa48c11706cbbf74e4b1b6221c69f1c3144a5f7"
+    },
+    "final-engine-bindings.json": {
+      "bytes": 3838,
+      "sha256": "825642be83c91c1a9fc96caeb7632bc7b2ba2775d38751f7e7a68605849fad95"
+    },
+    "focused_windows.json": {
+      "bytes": 6538,
+      "sha256": "63bdc916399ae476146fd8fedcd60a609b3d2290810c1a0a93e3cbe9a082bcd4"
+    },
+    "growth_actions.json": {
+      "bytes": 6603,
+      "sha256": "b071f7d17fa0ee3bf195959fe983d7d1d70b106d87bf368c64799ca430d57b5a"
+    },
+    "interface.md": {
+      "bytes": 7551,
+      "sha256": "d64535f907acff1bb943845d6d460943def687d0db2f251940f149f7d230bb70"
+    },
+    "packing52.json": {
+      "bytes": 21122,
+      "sha256": "6028f8fc4a01ae4d0303d7f92f91db28a3c417b5aeaa4695ddbd3fd1a190b506"
+    },
+    "platform-source-review-notes.md": {
+      "bytes": 7517,
+      "sha256": "b1b1ec5e55cb57e1fdbe0ddd57df479152d4fe434a68a03761f49a512f5ced01"
+    },
+    "protocol.json": {
+      "bytes": 24128,
+      "sha256": "c4d390f0354ca0e689ab0602f1291fc98a6fe3ca07f76bc84e663a3ca5417711"
+    },
+    "recovery24.json": {
+      "bytes": 11328,
+      "sha256": "dc164a0f0fda3e1935f78d2944fe0328b3970a86dff1c78e34a634fac5dad746"
+    },
+    "source-bindings.json": {
+      "bytes": 6519,
+      "sha256": "ee1ab87c63b157279fb3fd0ce1d55f39ca171dfee9b7c86f4de6f9f551bf7e69"
+    },
+    "source_constructors.json": {
+      "bytes": 17755,
+      "sha256": "7ecf0fc058b8515a606ebf30acf7779e6cb89d3f4aac20842d88c29406824497"
+    },
+    "source_controls.py": {
+      "bytes": 28421,
+      "sha256": "df46a38fbfbe9cf85425d8e1314340739632059a78567beebcb7e8c335ec88bd"
+    },
+    "static-controls-result.json": {
+      "bytes": 5126,
+      "sha256": "ae9e4a8c8924c771e215255a5907c1b312f162cae6a045e8ea93b6fdf90da895"
+    },
+    "strict24.json": {
+      "bytes": 10194,
+      "sha256": "407eb436cb4b28b0b7695e9ab6ea4f3063ea4242a91f2a66cc67220ab116d8e7"
+    },
+    "windows_adapter.py": {
+      "bytes": 22291,
+      "sha256": "891bb454beeb629ad5c38a7eb0125be69a14e8f2e4d8338562e420b45f36baaa"
+    },
+    "windows_bootstrap.py": {
+      "bytes": 8151,
+      "sha256": "32f01f6ffcf58f0d3914e447b7ddd2cd864c3c80d2c4ec5ad8b2d112f39765f7"
+    },
+    "windows_capsule.py": {
+      "bytes": 20300,
+      "sha256": "95c4f22ea5df63419cc3453f9e5229d5ab080f53ecf15594a61dce0b906e571d"
+    },
+    "windows_deadlines.py": {
+      "bytes": 3749,
+      "sha256": "da4309d25abeac4ddcd20fe8f92ca8bf3e539313d8d3df72b805a7e41fb68b1d"
+    },
+    "windows_driver.py": {
+      "bytes": 21497,
+      "sha256": "1aa1c16d4647dd72cfb6c7e45f2492c559029b01c2e20cd78af281bc5333aadb"
+    },
+    "windows_evidence.py": {
+      "bytes": 16200,
+      "sha256": "b505aec5e5c10fd8dd52de5752d4013ac53b48b14e6e8ef3f247ae96d1b8c972"
+    },
+    "windows_growth.py": {
+      "bytes": 13652,
+      "sha256": "7a9207b110dac69e11777cc85f812c24daad81d7f5f5cde5b9284acac5a55cab"
+    },
+    "windows_hooks.py": {
+      "bytes": 24532,
+      "sha256": "91ba4ecf80230776d2b4e2f01c8809cb34e1bd41263bfc7923f487f1950fae63"
+    },
+    "windows_native.py": {
+      "bytes": 25843,
+      "sha256": "a4c02bebadf58c99e902b45479daea676dcc39c195abc2d1d6692cebae89be1c"
+    },
+    "windows_oracle_bridge.py": {
+      "bytes": 8131,
+      "sha256": "bbdb821e5a39cc2411434ee58e72d08dffd88011df4f5fcb22e56996af9bfb04"
+    },
+    "workspace_ordinary.json": {
+      "bytes": 4461,
+      "sha256": "4989441f99816c0a8be029d8137736494859beb284121d27cb57b7d6d932dc59"
+    }
+  },
+  "manifest_domain": "SHA256 UTF8 sorted compact JSON of26-entry manifest only; excludes this receipt. Parent independently hashes receipt for full27.",
+  "module_imports_or_test_executions": 0,
+  "native_qualification": false,
+  "next_boundary": "Fresh full source review plus remediation of explicit capture/case/profile gaps. No controls/imports/runtime until separate finite GO.",
+  "old_Driver_SHA256": "924fea5aeafc19d9a45c37e6527f6ed842e8c16f6d5aba861c3fb17de5413ae2",
+  "old_guard_SHA256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "owner": "01a15bd5-7694-7981-a619-9a23d4774b60",
+  "prepared_W5_subtraces": true,
+  "prepared_memory_groups": 64,
+  "previous_034": {
+    "archive_sha256": "dbbe3867c15e07f3ceae1a4f3736d3b5112b66f388e23bc13eebebaed7a77027",
+    "receipt_sha256": "7c31340ccbd4509692f46192f7521d5285d049b8b6c73248ddfac8ca695fde4d",
+    "review_sha256": "7d955028b98d82b18ee4154fb37acaea9005454d1945f20a248f316f32eb66d8"
+  },
+  "previous_negative": {
+    "archive_sha256": "926469b3d65c99f55a6404fc8931ab4b32b70f5551816cc61c07c2a2de9d179f",
+    "review_sha256": "8bf9a1429f6617b156a9379a002d7f77e2cdf50b4d35ee0de0e2e31af31e487e",
+    "source_bindings_sha256": "341b2f654dccaae7ad53d677a5cebc401781081a0a35c2ed574d1cc17b6f7c27",
+    "source_receipt_sha256": "b4671f65fe56b6cf964aa850c843fac49fa36c0fe4050891a5a302dc8ab76ec6"
+  },
+  "protected_closeout": "2026-10-21T13:10:14Z",
+  "pycache_files": 0,
+  "remaining_native_case_ABI": [
+    "Windows historical producer",
+    "guarded oracle decoder/refuse constructor queries",
+    "workspace boundary/unit runner",
+    "ordinary PowerShell copy",
+    "backup_restore",
+    "reference helper globals",
+    "D-N64-N1k-AandB-payload-title body",
+    "typed035 profiles/whole sink forecast",
+    "finalengine/checkpoint/unit/nativeCLI source"
+  ],
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform",
+  "runtime_GO": false,
+  "schema": "private-windows-platform039-source-receipt-v1",
+  "source_budget_sha256": "b79a0cccaf96be247bba2b48bada220417bc083eb4b09828aa43642719e5eaa3",
+  "source_freeze_target": "2026-10-21T04:10:14Z",
+  "source_manifest_sha256": "ace7e15a6753feb121d4b4a09ae12602e6bdf9857a56c4bc9778a57b0408a485",
+  "source_only": true,
+  "status": "FIRST_V2_SOURCE_FROZEN_FOR_REVIEW_KNOWN_REMEDIATION_REQUIRED",
+  "subdirectories": 0,
+  "syntax_compiled_in_memory_files": 11,
+  "unique_case_ID_count": 166,
+  "v2_specific_control_status": "NOT_PREPARED_NOT_EXECUTED"
+}

@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-008-STREAM-HARNESS-SOURCE-TINY-CONTROLS",
+  "utc": "2026-10-20T21:58:22.555556+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T215822Z.json",
+      "bytes": 7588,
+      "sha256": "8b69a7c60846c637d77d2011ab1e39baab31617c9cba2da0b0a76cbe843804b5"
+    },
+    {
+      "file": "claim-20261020T215822Z.md",
+      "bytes": 1820,
+      "sha256": "d242afe1a55ef34ca3e2a3f81de7cd646a7fff6ccfa734e8f10a7277aaeca328"
+    }
+  ],
+  "status": "BOUNDED_SOURCE_AND_SYNTHETIC_CONTROL_SUBCLAIMS_AUTHORIZED__REAL_LONG_STAGE_HOLD",
+  "sealed": true
+}

@@ -1,0 +1,17 @@
+{
+  "claim_id": "44GiB-CENTRAL-043-WINDOWS-SOURCE208KiB-CASEDATA240KiB",
+  "utc": "2026-10-21T03:34:11.047604+00:00",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T033411Z.json",
+      "bytes": 4690,
+      "sha256": "b5001198b5ea42a54129436497d93f5e18bc82b09b76ea98788ec68d5b998e90"
+    },
+    {
+      "file": "claim-20261021T033411Z.md",
+      "bytes": 410,
+      "sha256": "0f887ab9a1d35aa26235d1cd438422d2ad99454d844258f82f3651ff39046486"
+    }
+  ]
+}

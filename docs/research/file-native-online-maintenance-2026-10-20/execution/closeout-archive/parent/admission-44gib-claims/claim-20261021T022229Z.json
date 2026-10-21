@@ -1,0 +1,63 @@
+{
+  "claim_id": "44GiB-CENTRAL-036-C3-SHARED-RUNTIME-CONTRACTS64KiB",
+  "utc": "2026-10-21T02:22:29.150094+00:00",
+  "status": "INTERNAL_SOURCE_RESERVATION_ONLY__NO_RUNTIME_GO",
+  "authority": "METAconcrete036ONLYfromexistingC3unclaimed; oneNEWpuresourcemodule, nootherresourcechange.",
+  "prior035": {
+    "file": "claim-20261021T021805Z.json",
+    "sha256": "83c72145f5545e17f67b33c96cd612ab998d7c86f8c0b05477b3792ba43f86fd"
+  },
+  "family_addendum": {
+    "file": "claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "cap_files": 128,
+    "cap_bytes": 524288
+  },
+  "owner_chat": "01a15b6c-b109-7090-a8c2-0e165f92f51e",
+  "owner_prefix_authority": "META01a15b6c; sameexistingfocused-sourceowner",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\shared-runtime-contracts",
+  "closed_per_file_caps": {
+    "runtime_contracts.py": 65536
+  },
+  "whole_caps": {
+    "bytes": 65536,
+    "files": 1,
+    "closed_names": 1
+  },
+  "actual_before": {
+    "root_exists": false,
+    "file_exists": false,
+    "bytes": 0,
+    "files": 0
+  },
+  "namespace": "ONLYruntime_contracts.py. NoREADME/source-receipt/metadata/pycache/temp/implicitsecondfileorsubnamespace inroot; parentbindingsoutsideinappropriatelyownedmetadata.",
+  "C3": {
+    "total_unchanged": 16777216,
+    "unclaimed_before": 2064384,
+    "new_SOURCEdraw": 65536,
+    "unclaimed_after": 1998848,
+    "filepool_unchanged": 15000,
+    "new1file": "DrawexistingunassignedC3sourceallowance, notnewglobalfile/reserve; prior035conservative4215+1=4216within15k."
+  },
+  "scope": [
+    "Puresource-onlysharedRunner/phasecoordinatorandclosedsource-derivedforecaster, opt-inintegrationwithexisting027/035qualificationhelpersandownedWindows/nativeplatform. Importmustnotperformactions.",
+    "PreserveALLfixed16phasecounts,640readerand1200fresh+24warm obligations. SourceboundcalculationsarenotactualcasePASS/resourceproof.",
+    "Noacceptedfocusedsourcefork,Rust/parserfork orownershiptakeover. Existingacceptedfocused/oldDriver/guard/helpers/platformsourcesremainunderexistingfreezes/caps."
+  ],
+  "ownership": "Originalshared-runtime-contractsfileC3, notMETA/F01. Physicallydistinctpacket/reviewcopiesMETA9; commonGitpositivegrowthF13once. ParentMETAmembershipmustexcludeexactoriginalroot; metadatafilenameoutsideisnotanotherfilegrant.",
+  "gate": "OwnerREADONLYuntilparentNEWimmutablebudgetbind036/root/ONEname/cap+explicitSOURCEGOafterseal. No runtime/history/native/engine/build/Git/corpus/copy/control/restore/deletionGO. Allphaseadmission/sourcebinding/ownedidentity/RSS/cadence/EOF/fulloraclegatesremain. Sourcefreeze04:10unchanged.",
+  "unchanged_global": {
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "cap_bytes": 47244640256,
+    "reserved_files": 4792652,
+    "unassigned_files": 207348,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "META9MiB": 9437184,
+    "C2Win128MiB_held": 134217728,
+    "new_global_bytes": 0,
+    "new_global_files": 0
+  },
+  "actions": "Readonlyabsentpath/cap/priorsealchecks+one036triplet only; noothernamespace/allocation/source/budget/runtimechange."
+}

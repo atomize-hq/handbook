@@ -1,0 +1,76 @@
+{
+  "kind": "44GiB-existing-C1Mac-private-cache-activation",
+  "claim_id": "44GiB-CENTRAL-007-ACTIVATE-C1-MAC-64MiB",
+  "utc": "2026-10-20T21:45:09.868652+00:00",
+  "status": "ALREADY_RESERVED_C1_MAC_ACTIVATED__NO_BUILD_OR_FINAL_QUALIFICATION_GO",
+  "authority": "Meta explicitly authorizesactivationofalreadyheldC1Mac64MiB before privatecachecopy/build, withdistinctcategory/accounting. Wholeforecastunchanged.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T214306Z.json",
+    "sha256": "1222683122d8c0f433b6e2dbb5951a248bee80f63dda8b09f29a71331567673e"
+  },
+  "C1_Mac_activation": {
+    "bytes": 67108864,
+    "files": 5000,
+    "owner": "nativeMacworker via metaallocator",
+    "root": "/private/tmp/file-native-online-macos-20261020/cargo-private",
+    "CARGO_HOME": "/private/tmp/file-native-online-macos-20261020/cargo-private",
+    "root_evidence": "Parentreturned reviewedMaccontrolguardv6 ROOT=/private/tmp/file-native-online-macos-20261020; newprivatecacheclaimusesexactNEWROOT/cargo-private. Finalreplacementguardmustconfirmthesamecanonicalrootbeforecopy.",
+    "reserved_before_this_claim": true,
+    "activated_from_held_forecast_bytes": 67108864,
+    "net_new_forecast_bytes": 0,
+    "actual_copy_or_build_performed_by_resource_worker": false,
+    "prior28MBprivate_cache_geometry": "Historicalprivatecache~28MBisfeasibilityonly; actualnewselectedcopiesandbookkeepingmustfit64MiB/5000. Oldprivatecacherootsremainprotected/charged.",
+    "private_cache_rules": [
+      "Beforeanycopy, guardadds C1privatecategoryandprospective+livebyte/filecounters; checkentirecopyforecastandactualresidualprefix.",
+      "F01/controller/sourcecensusMUSTexcludeexactcanonicalcargo-private subtree, then C1censusitonce. Do notexcludeunrelatedrootfileswithgenericcacheglob.",
+      "NEWROOT partitionmustcoverallownedfilesexactlyonce acrosssource/admin/build/fixtures/evidence/privatecache; whole-rootcrosscheckagainstcategorysumwithreparse/symlinkpolicyexplicit.",
+      "CARGO_HOMEalwayspointsNEWprivatecache; no writes/reclassificationofoldsharedcacheasF01 oruseofprotectedoldprivatecacheasnewtarget.",
+      "Archives,unpackedcrates,registryindex/cacheDBandallprivatebookkeepingcountsC1. Partialcopyorfailedprefixremainscharged; no planneddelete/retrycredit.",
+      "Source globalcacheinputsread-only/hashboundasrequired; no package/bootstrap/newdependencies authorization.",
+      "Anycasecannotfit64MiB/5000refusesbeforegrowthandreturnsmeta forcentralreallocation, noindependentallowance."
+    ]
+  },
+  "file_reservation_partition": {
+    "C1_original_global_files": 20000,
+    "C1_Mac_files_activated": 5000,
+    "remaining_C1_file_forecast_unassigned_or_other_hosts": 15000,
+    "net_new_reserved_files": 0,
+    "qualification": "OriginalC1global20kforecastalreadycharged;5000isitsMacshare,notanaddition. ReleasingunusedWindows/Linuxbytesdoesnotautomaticallyreleasealltheirfileheadroom."
+  },
+  "F13_Mac_distinct": {
+    "shared_global_Git_Cargo_positive_growth_bytes": 4194304,
+    "charge_basis": "PositivegrowthfromfrozennativeglobalbaselinecountedonceunderF13Mac4MiB; privatecachefilecopiesactualsbelongC1only. No per-workerrechargeofwholeglobalcaches/Git.",
+    "privatecopy_does_not_create_anotherF13_privatecharge": true
+  },
+  "C3_confirmation": {
+    "effective_claim": "44GiB-CENTRAL-006-C3-META-REVIEW-4MiB",
+    "claim_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T214306Z.json",
+    "META_REVIEW_bytes": 4194304,
+    "CP2_SOURCE_ADMIN_bytes": 2097152,
+    "C3_remaining_unsubclaimed_bytes": 10485760,
+    "replacement_bundle_compressed_bytes": 193338,
+    "transport_JSON_measured_bytes": 259273,
+    "raw_member_sum_reported_approx_bytes": 1097600,
+    "whole_coexisting_C3_actual_prewrite_census_still_required": true,
+    "no_newC3topup_here": true
+  },
+  "whole_applied_allocator_unchanged": {
+    "whole_prospective_bytes": 47071111541,
+    "central_contingency_bytes": 173528715,
+    "reserved_files_with64claimslots": 4792604,
+    "remaining_central_files": 207396,
+    "cap_bytes": 47244640256,
+    "file_cap": 5000000,
+    "inside_closeout_reserve_bytes": 1073741824,
+    "inside_closeout_reserve_files": 100000,
+    "full_rebudget_status": "Audit004 enlargedfinalqualificationNO_GOand005stagedproofconditionsremainunchanged. ActivationofexistingC1isnotfullqualificationadmission."
+  },
+  "execution_holds": "Privatecopyonlyafterreplacementguardcategorypartition/prospective/livecounterreviewandmetarelease. Nativeengine/buildstillheldpendingpin/guardrelease. Largerfullcaps remainHOLD. All futureworkerquestionsrouteMETA.",
+  "no_changes_to_sealed_prior_claims": true,
+  "clocks_unchanged": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z"
+  },
+  "resource_worker_mutations": "Newclaimreports only; no cachecopy/build/engine/corpus/restore/deletion."
+}

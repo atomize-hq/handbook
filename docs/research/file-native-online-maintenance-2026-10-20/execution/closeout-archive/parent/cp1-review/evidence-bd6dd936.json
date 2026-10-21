@@ -1,0 +1,1093 @@
+{
+  "utc": "2026-10-20T21:44:14.921093+00:00",
+  "source_pin": "bd6dd9367acddaddcd7873c8043548502a170c3b",
+  "parent": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+  "pushed_and_clean_checked": true,
+  "source_disposition": "INTEGRATE bounded CP1 engineering source checkpoint bd6dd936/candidate10; all identified required code defects addressed; corrected14death schedule and requested5latestroot full independent oracles PASS. FullCP1/experiment qualification and resource/CP2/CP3/finalnative gates remainOPEN. Meta owns integration/continuation.",
+  "bindings": [
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock",
+      "bytes": 10547,
+      "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+      "bytes": 561,
+      "sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/Cargo.toml",
+      "bytes": 147,
+      "sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/src/main.rs",
+      "bytes": 68,
+      "sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/Cargo.toml",
+      "bytes": 148,
+      "sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/src/main.rs",
+      "bytes": 69,
+      "sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs",
+      "bytes": 12161,
+      "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs",
+      "bytes": 8570,
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs",
+      "bytes": 1001,
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs",
+      "bytes": 2661,
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs",
+      "bytes": 30973,
+      "sha256": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs",
+      "bytes": 14324,
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs",
+      "bytes": 13704,
+      "sha256": "9d2cd54ec0151cc073da38324ddb2fc7ce5e51b2d3106e1196cae4369524a808",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs",
+      "bytes": 452,
+      "sha256": "2f7b086f78f5860e2d2592757e29817d6bd435c1808e37d79d07504718e5c9ed",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+      "bytes": 15945,
+      "sha256": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs",
+      "bytes": 57,
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs",
+      "bytes": 10576,
+      "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs",
+      "bytes": 3551,
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs",
+      "bytes": 13379,
+      "sha256": "b452e2d6fe7d794953ed5c8a1e8d0020dd9241eca05a36c55518e7063533f755",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "bytes": 48489,
+      "sha256": "bc3fcf3340e1cd98c8f5967b15c4595d8cd7bdf856595e8817d3770542a779d9",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/physical_lifetime.rs",
+      "bytes": 22534,
+      "sha256": "eca827a29e88eab2f2ff2127c3fed4f431dc4037beda6f174e19af13dd8b72d4",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs",
+      "bytes": 27876,
+      "sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs",
+      "bytes": 36078,
+      "sha256": "31cafafddede7c2347a1fe85d3f18346972796af9fa8cb6b12c6c531502eb58d",
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild10b_matches": true
+    }
+  ],
+  "executable": {
+    "bytes": 2979328,
+    "sha256": "7d1157d5a2df08904e118ce86647fd45f1ae7fec209494c02afdb1fac4b0b22f"
+  },
+  "delta": "One condition: directory classifier now uses strip_prefix(packs/).is_some_and(safe_id), exact closed directory grammar. No other Rust/Cargo/consumer changes.",
+  "runtime": {
+    "native10": {
+      "events": 18,
+      "all_sha_match": true,
+      "exit_counts": {
+        "0": 16,
+        "2": 2
+      },
+      "errors": [
+        "busy:legacy-readers",
+        "busy:competing-maintenance:The process cannot access the file because another process has locked a portion of the file. (os error 33)"
+      ],
+      "violations": [],
+      "guard": {
+        "exit": 1,
+        "censor": null,
+        "errors": [],
+        "total_seconds": 54.531999588012695,
+        "stage_seconds": 29.06499433517456,
+        "job_aggregate_sampled_peak_rss": 31039488,
+        "memory_sample_timing": {
+          "samples": 1310,
+          "max_interval_seconds": 0.0470000000204891,
+          "intervals_over_40ms": 15
+        },
+        "closure_checks": [
+          {
+            "epoch": 1792532390.4652765,
+            "members": []
+          },
+          {
+            "epoch": 1792532390.4861655,
+            "members": []
+          }
+        ]
+      },
+      "partial_results": [
+        {
+          "case": "legacy-first-conversion-drains-old-reader-new-reader-progress-old-binary-refuses-v3",
+          "refusal": "unknown field `physical`, expected one of `version`, `store_id`, `mode`, `consumer`, `fallback`, `navigation_version`, `catalog`"
+        },
+        {
+          "case": "windows-no-delete-sharing-defers-current-readers-progress",
+          "result": {
+            "aborted_owner_adoption_backpressure": false,
+            "batch_ns": 2831800,
+            "blocked_checks": 1,
+            "candidate_limit": 1000,
+            "candidates": 71,
+            "catalog": "4a47fd69f208aec2c2e2538afa6779433861c30791bf1e1ced6f37c93e5cd38d",
+            "completion_basis": "selected immutable Work plus native absence of immutable instance names; absent metadata tombstones do not create work",
+            "cooperative_limit_ms": 50,
+            "deleted_this_batch_bytes": 0,
+            "deleted_this_batch_files": 0,
+            "generation": {
+              "id": "physical-2-birth-73408-1792532365107391500-0",
+              "ordinal": 2,
+              "plan": "2cab17b25d2572181b4a4b455fd87d7823c7f2068a89a6cb095084b75654b5f9"
+            },
+            "historical_allocation_owners_unchanged": true,
+            "native_allocation_credit": 0,
+            "pending_aborted_owners": 0,
+            "pending_loose_jobs": 0,
+            "pending_metadata": 0,
+            "pending_old_containers": 1,
+            "protected_metadata_until_successor": 0,
+            "reconciled_absent_without_credit": 8,
+            "retained_generations": 1,
+            "retained_loose_control_bytes": 0,
+            "retained_loose_control_records": 0,
+            "status": "cleaning",
+            "successfully_deleted_bytes_recorded": 17444
+          }
+        },
+        {
+          "case": "windows-sharing-release-retry-reclaims"
+        },
+        {
+          "case": "reader-progress-at-deletion-barrier"
+        }
+      ]
+    },
+    "native10b": {
+      "events": 14,
+      "all_sha_match": true,
+      "exit_counts": {
+        "0": 11,
+        "2": 3
+      },
+      "errors": [
+        "busy:competing-maintenance:The process cannot access the file because another process has locked a portion of the file. (os error 33)",
+        "cancelled:pack-barrier",
+        "quota:physical-generation-overflow"
+      ],
+      "violations": [],
+      "guard": {
+        "exit": 0,
+        "censor": null,
+        "errors": [],
+        "total_seconds": 32.8151650428772,
+        "stage_seconds": 3.2621078491210938,
+        "job_aggregate_sampled_peak_rss": 30793728,
+        "memory_sample_timing": {
+          "samples": 36,
+          "max_interval_seconds": 0.06299999996554106,
+          "intervals_over_40ms": 1
+        },
+        "closure_checks": [
+          {
+            "epoch": 1792532444.966332,
+            "members": []
+          },
+          {
+            "epoch": 1792532444.9875567,
+            "members": []
+          }
+        ]
+      },
+      "results": {
+        "status": "PASS_FOCUSED_FULL_INDEPENDENT_ORACLES_PENDING",
+        "cases": [
+          {
+            "case": "two-maintainers-serialized-semantic-advance-keeps-physical-CAS"
+          },
+          {
+            "case": "cancellation-owned-candidate-selection-unchanged-resumable"
+          },
+          {
+            "case": "checked-ordinal-overflow-refuses-all-bytes-preserved"
+          }
+        ],
+        "binary_sha256": "7d1157d5a2df08904e118ce86647fd45f1ae7fec209494c02afdb1fac4b0b22f"
+      }
+    }
+  },
+  "artifacts": {
+    "native10-events.jsonl": {
+      "bytes": 56133,
+      "sha256": "941c62622f9291954839a3cce8dd4ea74cbe2220b0f095d68e4f9c44a3e82181"
+    },
+    "native10-guard.json": {
+      "bytes": 47154,
+      "sha256": "5caa123d3fc0b8737d7375b569ce98328d78c849841f5af92497aedb2a2d073b"
+    },
+    "native10-guard.rss.jsonl.gz": {
+      "bytes": 26634,
+      "sha256": "fa92b809105fb54f1d4dfcb7e6b21a818e537d950bf0b4a3298547b50c0ac553"
+    },
+    "native10-guard.stderr": {
+      "bytes": 1483,
+      "sha256": "2b91db52cb12d7be4ff6e96e50cc27c30c02425d1b63c74ae3f7f23370b8b1f4"
+    },
+    "native10-guard.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native10-program.txt": {
+      "bytes": 7613,
+      "sha256": "26e082391b3ab025b09e50129d0506206735c4ff725e43a8f36580ecc0b4be8b"
+    },
+    "native10-partial.json": {
+      "bytes": 1736,
+      "sha256": "24fe69623ea9d29ebc4b0e1d5fef84001f9fc4286dd3db5b0cfb0495803dc74c"
+    },
+    "native10b-events.jsonl": {
+      "bytes": 42582,
+      "sha256": "9cc8285ac43d44d3938c93978de3a2b4eb534105b7ae9ccc107f85f404ac0779"
+    },
+    "native10b-guard.json": {
+      "bytes": 12467,
+      "sha256": "8ed6fd52ca9b315ba112b9e08d30ec9eb99b1b7dbe5f27a2ae46bc7214ea0758"
+    },
+    "native10b-guard.rss.jsonl.gz": {
+      "bytes": 1924,
+      "sha256": "3c4a201d1dc26fe383b458c69d4c791da20046dc406c9ce90ce6e91682f61280"
+    },
+    "native10b-guard.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native10b-guard.stdout": {
+      "bytes": 32,
+      "sha256": "7c0f3426f4cf811f1be190e1e708d148b1b4041a14c8cf8cf7bcd263954a7410"
+    },
+    "native10b-program.txt": {
+      "bytes": 4585,
+      "sha256": "e5968122191976c0c14e4b1b2f1c766eb203ecdb735fb60d94a9c117621b59e0"
+    },
+    "native10b-results.json": {
+      "bytes": 445,
+      "sha256": "e04c4a3bcc0071dc0bd66cf2919a391099d0a8b140ec317272d0fb59b7dcbce6"
+    },
+    "native10b-partial.json": {
+      "bytes": 258,
+      "sha256": "0278e925ad6f5e4187d48451be3b9a07275f543231b6aafce2c901d4b0205e01"
+    },
+    "build10b-source-before.json": {
+      "bytes": 4621,
+      "sha256": "df71cb8fe185afbb99d63ddbfd6f630a3395d2cab67bbe5ef27cd3e5df0b8b69"
+    },
+    "build10b-units.json": {
+      "bytes": 36264,
+      "sha256": "4c324e148a65f98e63d49860f6655c9f2a889c2329a1a236f82e28f877cb331d"
+    },
+    "build10b-units.stdout": {
+      "bytes": 839,
+      "sha256": "f14d3995bacc929695b0a7d058d397ab5fb86498161818cdde7c0fd18e2b1a4e"
+    },
+    "build10b-units.stderr": {
+      "bytes": 4658,
+      "sha256": "6ca8b5962075718e24bb2e9013217028c3bd212f80ec0990ac235df638452959"
+    },
+    "build10b-units.rss.jsonl.gz": {
+      "bytes": 43626,
+      "sha256": "ea92b3b390b8dca7779cf5851054a0dba889110c7be3545329fb7ab67bcfb1c1"
+    },
+    "candidate10-binding.json": {
+      "bytes": 5169,
+      "sha256": "056720cbc93cd7e01bfea225b8b87abc44cb614019176f0b39a73ff3bc93bdf0"
+    },
+    "native10-old-events.jsonl": {
+      "bytes": 16346,
+      "sha256": "b170efe930ba3cafc13ea9fbb988bdbb3a52affb6d4db566e9fd5d2570fa2a67"
+    },
+    "faults10-program.txt": {
+      "bytes": 3549,
+      "sha256": "fc5d3aaae9dd92d668d27a5b548240214ff981ba4ca0b14a7c2be3a5bf8460d8"
+    },
+    "faults10-events.jsonl": {
+      "bytes": 224888,
+      "sha256": "a587a80ea28bafb984ae6c9fe4de582f25f90239fcaf8d1bb8fcb5e10733f805"
+    },
+    "faults10-guard.json": {
+      "bytes": 13398,
+      "sha256": "f6850866d0fe72d656b6a2c10e750843109740c359e20ee0634e6a9db1f23a26"
+    },
+    "faults10-guard.stderr": {
+      "bytes": 4076,
+      "sha256": "4de7e8ec3e0d75de5b8ef878ae5ff94a281e9fc83c6e39b97cb15e5857cf4578"
+    },
+    "faults10-partial.json": {
+      "bytes": 7130,
+      "sha256": "603395786e9400c4ce61dbe8ab980b3f7cb85ddac7ba85657027f61093d25073"
+    },
+    "faults10b-events.jsonl": {
+      "bytes": 657117,
+      "sha256": "5a1b52352c8378fa6b2434049fe4e137d0ea80c4e3f676084a3997137a9ccf39"
+    },
+    "faults10b-guard.json": {
+      "bytes": 19414,
+      "sha256": "f923168f564150f12bb952fbd4cc7e5768ca91a3c66bdb3fd1b3753f2f572149"
+    },
+    "faults10b-guard.rss.jsonl.gz": {
+      "bytes": 11500,
+      "sha256": "edd4c1f965c87f1a90ab1ddcff916ac6cd4611acda9c04dfb5469baff56917c4"
+    },
+    "faults10b-guard.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "faults10b-guard.stdout": {
+      "bytes": 33,
+      "sha256": "600446bb85e89dafac5d7ad45bba7c75949377c416fe9301ec27afcacb15524d"
+    },
+    "faults10b-program.txt": {
+      "bytes": 3870,
+      "sha256": "a0b179260891246d7aab4b73638b48c7764c7965db22b0f7dd738ebad925f631"
+    },
+    "faults10b-partial.json": {
+      "bytes": 19965,
+      "sha256": "3472b3ae4e0eb9b47b71747c94e744ab23c781135291f9ce0a8c60f38825cf33"
+    },
+    "faults10b-results.json": {
+      "bytes": 21352,
+      "sha256": "82f57bf0267f7aafeafa39817517a8e7d20eeb395874bc688eabccef033b37d3"
+    },
+    "cp1-handoff10.json": {
+      "bytes": 4502,
+      "sha256": "87db7c8f661afb09d1c3dd6fc5f58e171ab5b5d88c211dd99320813c4d6d810d"
+    },
+    "handoff10-local-census.json": {
+      "bytes": 766,
+      "sha256": "6ff21894ec4f236db098cb19411b9c2cc21cc336dbb20bd7f0546f4368dd0df3"
+    }
+  },
+  "no_prior_pin_rebinding": true,
+  "gitnexus": "UNKNOWN/unavailable",
+  "review_actions": "Read/hash/parse only; no engine/build/source/fixture mutations/recovery/copies/subagents",
+  "cp2_released": false,
+  "full_experiment_complete": false,
+  "build10b": {
+    "exit": 0,
+    "censor": null,
+    "errors": [],
+    "total_seconds": 28.954405069351196,
+    "stage_seconds": 26.20918297767639,
+    "job_aggregate_sampled_peak_rss": 436928512,
+    "memory_sample_timing": {
+      "samples": 1171,
+      "max_interval_seconds": 0.0470000000204891,
+      "intervals_over_40ms": 9
+    }
+  },
+  "faults10_preserved_failure": {
+    "partial_completed_phases": 5,
+    "mismatch": "A pack-loose-delete expectedexit86,actualexit0/complete",
+    "interpretation": "Frozen reused fixture had no mapped loose duplicate; actual deletion death hook not reached. Not a14cell pass; corrected causal fixture required."
+  },
+  "faults10b": {
+    "utc": "2026-10-20T21:54:47.179129+00:00",
+    "events": 270,
+    "all_executable_sha_match": true,
+    "exit_counts": {
+      "0": 242,
+      "2": 14,
+      "86": 14
+    },
+    "actual_deaths": [
+      {
+        "mode": "A",
+        "phase": "pack-reservation",
+        "exit": 86
+      },
+      {
+        "mode": "A",
+        "phase": "pack-install",
+        "exit": 86
+      },
+      {
+        "mode": "A",
+        "phase": "pack-before-catalog",
+        "exit": 86
+      },
+      {
+        "mode": "A",
+        "phase": "physical-after-selection",
+        "exit": 86
+      },
+      {
+        "mode": "A",
+        "phase": "pack-accounting",
+        "exit": 86
+      },
+      {
+        "mode": "A",
+        "phase": "pack-loose-delete",
+        "exit": 86
+      },
+      {
+        "mode": "A",
+        "phase": "pack-old-delete",
+        "exit": 86
+      },
+      {
+        "mode": "B",
+        "phase": "pack-reservation",
+        "exit": 86
+      },
+      {
+        "mode": "B",
+        "phase": "pack-install",
+        "exit": 86
+      },
+      {
+        "mode": "B",
+        "phase": "pack-before-catalog",
+        "exit": 86
+      },
+      {
+        "mode": "B",
+        "phase": "physical-after-selection",
+        "exit": 86
+      },
+      {
+        "mode": "B",
+        "phase": "pack-accounting",
+        "exit": 86
+      },
+      {
+        "mode": "B",
+        "phase": "pack-loose-delete",
+        "exit": 86
+      },
+      {
+        "mode": "B",
+        "phase": "pack-old-delete",
+        "exit": 86
+      }
+    ],
+    "errors": [
+      "refused:protected-snapshot"
+    ],
+    "event_violations": [],
+    "cases": [
+      {
+        "mode": "A",
+        "phase": "pack-reservation",
+        "outcomes": 3,
+        "payload_paths": 30,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "A",
+        "phase": "pack-install",
+        "outcomes": 5,
+        "payload_paths": 30,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "A",
+        "phase": "pack-before-catalog",
+        "outcomes": 7,
+        "payload_paths": 30,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "A",
+        "phase": "physical-after-selection",
+        "outcomes": 9,
+        "payload_paths": 30,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "A",
+        "phase": "pack-accounting",
+        "outcomes": 11,
+        "payload_paths": 30,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "A",
+        "phase": "pack-loose-delete",
+        "outcomes": 13,
+        "payload_paths": 30,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "A",
+        "phase": "pack-old-delete",
+        "outcomes": 15,
+        "payload_paths": 30,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "B",
+        "phase": "pack-reservation",
+        "outcomes": 3,
+        "payload_paths": 61,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "B",
+        "phase": "pack-install",
+        "outcomes": 5,
+        "payload_paths": 91,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "B",
+        "phase": "pack-before-catalog",
+        "outcomes": 7,
+        "payload_paths": 121,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "B",
+        "phase": "physical-after-selection",
+        "outcomes": 9,
+        "payload_paths": 151,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "B",
+        "phase": "pack-accounting",
+        "outcomes": 11,
+        "payload_paths": 181,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "B",
+        "phase": "pack-loose-delete",
+        "outcomes": 13,
+        "payload_paths": 211,
+        "preparation_packet_snapshot_protected": true
+      },
+      {
+        "mode": "B",
+        "phase": "pack-old-delete",
+        "outcomes": 15,
+        "payload_paths": 241,
+        "preparation_packet_snapshot_protected": true
+      }
+    ],
+    "guard": {
+      "exit": 0,
+      "censor": null,
+      "errors": [],
+      "total_seconds": 11.054951906204224,
+      "stage_seconds": 8.679235219955444,
+      "job_aggregate_sampled_peak_rss": 27181056,
+      "memory_sample_timing": {
+        "samples": 311,
+        "max_interval_seconds": 0.0470000000204891,
+        "intervals_over_40ms": 4
+      },
+      "closure_checks": [
+        {
+          "epoch": 1792532575.2512734,
+          "members": []
+        },
+        {
+          "epoch": 1792532575.2722082,
+          "members": []
+        }
+      ]
+    },
+    "qualification": "two sequential N10 roots; loose-delete uses exact initial-result duplicate reinsertion because CP1 freezes mapped cohort; no new-tail/CP2 or fullN64/H64 claim",
+    "loose_hook_causal": "exact saved initial result duplicate reinserted; actual exit86 per mode; no newly mapped tail claim"
+  },
+  "final_oracles": {
+    "utc": "2026-10-20T21:58:15.552324+00:00",
+    "engine_pin": "bd6dd9367acddaddcd7873c8043548502a170c3b",
+    "candidate_binary": {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\candidate10.exe",
+      "bytes": 2979328,
+      "sha256": "7d1157d5a2df08904e118ce86647fd45f1ae7fec209494c02afdb1fac4b0b22f"
+    },
+    "schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+    "schema_equivalence_verified": true,
+    "all24_oracle_source_files_hash_verified": true,
+    "module_sha256": "27fba357cef53f1775801d2e4bf4b63166356cf94edb8a0ec094453f9aab8a24",
+    "cases": [
+      {
+        "label": "legacy10",
+        "root": "C:/file-native-online-cp1-20261020/fixtures/legacy10/disposable/store",
+        "exit": 0,
+        "parser_schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "read_only_all_file_names_hashes_sizes_and_dirs_verified": true,
+        "before_after_sha256": "39c825061d85c6b93b963bb25ec7096294df14eb48cccce32044324d7fed2b2a",
+        "source_files": 55,
+        "source_dirs_including_root": 46,
+        "source_logical_bytes": 283576,
+        "raw_records": 5,
+        "raw_bytes": 5133,
+        "inventory_digest": "99ce450f4eed7a1f81ce19a407f35cf8d070999901641f3ec96ef1c6dbd99f6e",
+        "accepted_publications": 1,
+        "pins": 0,
+        "reservations": 0,
+        "packets": 0,
+        "generations": 0,
+        "semantic_profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "exact_intent_actual_H": 1,
+        "retained_candidate_proofs": 1,
+        "exact_loose_B_publication_controls": 0,
+        "pending_garbage": 0,
+        "absent_garbage_tombstones": 1,
+        "retained_physical_generations": 0,
+        "pending_loose_jobs": 0,
+        "retired_container_jobs": 0,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      {
+        "label": "sharing10",
+        "root": "C:/file-native-online-cp1-20261020/fixtures/sharing10/disposable/store",
+        "exit": 0,
+        "parser_schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "read_only_all_file_names_hashes_sizes_and_dirs_verified": true,
+        "before_after_sha256": "8432e8eb51855abb53562e76e0878aeacddaea290bb43f9e638b0f3febf6f554",
+        "source_files": 54,
+        "source_dirs_including_root": 43,
+        "source_logical_bytes": 283553,
+        "raw_records": 5,
+        "raw_bytes": 5124,
+        "inventory_digest": "901358f3090567dd78046c30dc7ff9eea83191a8ff011234a77831d9809fafe5",
+        "accepted_publications": 1,
+        "pins": 0,
+        "reservations": 0,
+        "packets": 0,
+        "generations": 0,
+        "semantic_profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "exact_intent_actual_H": 1,
+        "retained_candidate_proofs": 1,
+        "exact_loose_B_publication_controls": 0,
+        "pending_garbage": 0,
+        "absent_garbage_tombstones": 1,
+        "retained_physical_generations": 0,
+        "pending_loose_jobs": 0,
+        "retired_container_jobs": 0,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      {
+        "label": "native10b",
+        "root": "C:/file-native-online-cp1-20261020/fixtures/native10b/disposable/store",
+        "exit": 0,
+        "parser_schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "read_only_all_file_names_hashes_sizes_and_dirs_verified": true,
+        "before_after_sha256": "5d69923a0d0a4e9b76928d12f4f5e7d27c3d7928c225603ef1c3e22fbb1b6c0a",
+        "source_files": 61,
+        "source_dirs_including_root": 47,
+        "source_logical_bytes": 287394,
+        "raw_records": 5,
+        "raw_bytes": 5133,
+        "inventory_digest": "4e5a75a40c88549a6ae615dbe63a1f0e5566c867433e5d8ef1682edec1a31736",
+        "accepted_publications": 2,
+        "pins": 0,
+        "reservations": 0,
+        "packets": 0,
+        "generations": 0,
+        "semantic_profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "exact_intent_actual_H": 2,
+        "retained_candidate_proofs": 2,
+        "exact_loose_B_publication_controls": 0,
+        "pending_garbage": 0,
+        "absent_garbage_tombstones": 1,
+        "retained_physical_generations": 0,
+        "pending_loose_jobs": 0,
+        "retired_container_jobs": 0,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      {
+        "label": "faults10bA",
+        "root": "C:/file-native-online-cp1-20261020/fixtures/faults10b-A/disposable/store",
+        "exit": 0,
+        "parser_schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "read_only_all_file_names_hashes_sizes_and_dirs_verified": true,
+        "before_after_sha256": "09513a8e8afd5567f85e4613eb156e0aa6ece263e5cd443916d58c6fd9e740f7",
+        "source_files": 164,
+        "source_dirs_including_root": 106,
+        "source_logical_bytes": 598677,
+        "raw_records": 10,
+        "raw_bytes": 8360,
+        "inventory_digest": "76a8c4f75075d12a57139b03ceace1b4fa2b3c43f851e69b54dfb11dd3bac79d",
+        "accepted_publications": 15,
+        "pins": 1,
+        "reservations": 1,
+        "packets": 1,
+        "generations": 0,
+        "semantic_profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "exact_intent_actual_H": 15,
+        "retained_candidate_proofs": 15,
+        "exact_loose_B_publication_controls": 0,
+        "pending_garbage": 0,
+        "absent_garbage_tombstones": 1,
+        "retained_physical_generations": 0,
+        "pending_loose_jobs": 0,
+        "retired_container_jobs": 0,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      },
+      {
+        "label": "faults10bB",
+        "root": "C:/file-native-online-cp1-20261020/fixtures/faults10b-B/disposable/store",
+        "exit": 0,
+        "parser_schema_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+        "read_only_all_file_names_hashes_sizes_and_dirs_verified": true,
+        "before_after_sha256": "a32689cb1bd104133e5b224f7081d3ab24edb603306aa721ed27f3e45f66922f",
+        "source_files": 376,
+        "source_dirs_including_root": 220,
+        "source_logical_bytes": 2461583,
+        "raw_records": 10,
+        "raw_bytes": 8608,
+        "inventory_digest": "cb168bb937671847ff641087c10d7902f51f503c0f3f9366669bc4798a6d3089",
+        "accepted_publications": 15,
+        "pins": 1,
+        "reservations": 1,
+        "packets": 1,
+        "generations": 15,
+        "semantic_profile": "all-accepted-membership-outcomes-retained-graph-projection-sources-controls",
+        "navigation": {
+          "documents": 10,
+          "supplemented_documents": 10,
+          "projection_files": 14,
+          "immutable_discovery_semantics_verified": true,
+          "readable_declared_current": true,
+          "discovery_relationships_and_extraction": true
+        },
+        "exact_intent_actual_H": 15,
+        "retained_candidate_proofs": 15,
+        "exact_loose_B_publication_controls": 15,
+        "pending_garbage": 0,
+        "absent_garbage_tombstones": 1,
+        "retained_physical_generations": 0,
+        "pending_loose_jobs": 0,
+        "retired_container_jobs": 0,
+        "qualification": "quiescent full selected representation and bounded pending ownership; immutable Work2 only; native liveness/crash schedules separately required"
+      }
+    ],
+    "guard": {
+      "exit": 0,
+      "censor": null,
+      "errors": [],
+      "stage_seconds": 13.072462320327759,
+      "total_seconds": 24.727194786071777,
+      "job_aggregate_sampled_peak_rss": 43311104,
+      "memory_sample_timing": {
+        "samples": 87,
+        "max_interval_seconds": 0.0470000000204891,
+        "intervals_over_40ms": 3
+      },
+      "closure_checks": [
+        {
+          "epoch": 1792533347.2146149,
+          "members": []
+        },
+        {
+          "epoch": 1792533347.235501,
+          "members": []
+        }
+      ]
+    },
+    "artifacts": {
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\legacy10.json": {
+        "bytes": 5330,
+        "sha256": "16ae943c7269c15a9735dfcf10dd9f20c42418da20c4648336b7dc6258e1b8f4"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\legacy10.before.json": {
+        "bytes": 11640,
+        "sha256": "39c825061d85c6b93b963bb25ec7096294df14eb48cccce32044324d7fed2b2a"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\legacy10.after.json": {
+        "bytes": 11640,
+        "sha256": "39c825061d85c6b93b963bb25ec7096294df14eb48cccce32044324d7fed2b2a"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\legacy10.read-only.json": {
+        "bytes": 778,
+        "sha256": "bf1c365362ecbee05e04db414102c4320179814e867e9084cc9ed8afd0ca601a"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\legacy10.stdout": {
+        "bytes": 123,
+        "sha256": "aa39cea375143e4448e95bd91780c60e944bd42bcbe74e9517a7af158e68da7b"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\legacy10.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\sharing10.json": {
+        "bytes": 5330,
+        "sha256": "549ee2edb2dd61f953f81372ea7ecb27b35cec06cdb897e9f8cdfa8812d2e44e"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\sharing10.before.json": {
+        "bytes": 11353,
+        "sha256": "8432e8eb51855abb53562e76e0878aeacddaea290bb43f9e638b0f3febf6f554"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\sharing10.after.json": {
+        "bytes": 11353,
+        "sha256": "8432e8eb51855abb53562e76e0878aeacddaea290bb43f9e638b0f3febf6f554"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\sharing10.read-only.json": {
+        "bytes": 779,
+        "sha256": "8d452e35a5954513356687ea63a098efc0cdf08cca702065d866958ee44dd58e"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\sharing10.stdout": {
+        "bytes": 123,
+        "sha256": "c493befc0c6fd59ac618e1c93751103555b37d58b54c2eb352543008154790b2"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\sharing10.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\native10b.json": {
+        "bytes": 5347,
+        "sha256": "de2b3b3ad76692ee3cff4216901ed5986eda1b2a682bfc6751d41c008a94ec39"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\native10b.before.json": {
+        "bytes": 12880,
+        "sha256": "5d69923a0d0a4e9b76928d12f4f5e7d27c3d7928c225603ef1c3e22fbb1b6c0a"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\native10b.after.json": {
+        "bytes": 12880,
+        "sha256": "5d69923a0d0a4e9b76928d12f4f5e7d27c3d7928c225603ef1c3e22fbb1b6c0a"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\native10b.read-only.json": {
+        "bytes": 779,
+        "sha256": "241d82f34fb6b5ed0de65d9442a51eeefbeeaeba0ba52bfa3a1a31fb096022c9"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\native10b.stdout": {
+        "bytes": 123,
+        "sha256": "9469bc72953d29569c0631a6e4b94e0ee467f381b1077850fc025cab1104f652"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\native10b.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bA.json": {
+        "bytes": 5532,
+        "sha256": "2ee0820659f13a299c31663981c739245bd41fd8d846fd9d75bb57a704be1aa2"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bA.before.json": {
+        "bytes": 35619,
+        "sha256": "09513a8e8afd5567f85e4613eb156e0aa6ece263e5cd443916d58c6fd9e740f7"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bA.after.json": {
+        "bytes": 35619,
+        "sha256": "09513a8e8afd5567f85e4613eb156e0aa6ece263e5cd443916d58c6fd9e740f7"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bA.read-only.json": {
+        "bytes": 783,
+        "sha256": "c8f0dcc3dada99cd7eabf0b30cb193ffae079ae5c0afc111838eaa7e036235f7"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bA.stdout": {
+        "bytes": 127,
+        "sha256": "9b277f08a5769bbdab3588956c5bc81f84bb843c259cfbb6db83715cc7c15d8d"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bA.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bB.json": {
+        "bytes": 5533,
+        "sha256": "9b86e03e98d377534e47ea00c0bfdf66aac1ece5ebce2aef572c30f661166146"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bB.before.json": {
+        "bytes": 87229,
+        "sha256": "a32689cb1bd104133e5b224f7081d3ab24edb603306aa721ed27f3e45f66922f"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bB.after.json": {
+        "bytes": 87229,
+        "sha256": "a32689cb1bd104133e5b224f7081d3ab24edb603306aa721ed27f3e45f66922f"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bB.read-only.json": {
+        "bytes": 784,
+        "sha256": "a3ec430f951cd16e7ac6fa93b4b9772d640fa167c0792101cc0092cb8330ebcd"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bB.stdout": {
+        "bytes": 127,
+        "sha256": "1bb6cfa733c5a86977c3119fbed0f651e827310025f2ca2deaed3368cbdc8ca4"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\faults10bB.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles\\batch-results.json": {
+        "bytes": 1836,
+        "sha256": "2b2df51c78da62aa0636645b1d13a60d24d36a395ba527e419505f42d657e635"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles-guard.json": {
+        "bytes": 8554,
+        "sha256": "ae9ef02cac8ed2d77c51d5a5b97ecb417c8a5ed209052949bd84a79c8ccabdbe"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles-guard.rss.jsonl.gz": {
+        "bytes": 3677,
+        "sha256": "cd45743657f55562bef27efd62ae22588efa11851f5ca48acd058c4bf183dd91"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles-guard.stdout": {
+        "bytes": 176,
+        "sha256": "88b43055c0c0cd8b3f9aaf62dac40d9ace5c56fb1c505386d5bc5890872219f5"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles-guard.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "C:\\file-native-online-matrix-20261020\\receipts\\bd6-latest-full-oracles-source-binding.json": {
+        "bytes": 7891,
+        "sha256": "e8c63db777f06d9fc1978359e780658907958d8d8f0095ea880139983c0e41e7"
+      },
+      "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-matrix\\bd6-schema-equivalence-binding.json": {
+        "bytes": 8415,
+        "sha256": "87f176556e971add6c58b93c16e5711e8a9e5c16a141cc7c2601d56a69ac4292"
+      }
+    },
+    "no_rebound_engine_executions": true,
+    "no_engine_calls_or_fixture_copies": true
+  },
+  "final_verdict": "INTEGRATE bounded CP1 engineering source checkpoint bd6dd936/candidate10; all identified required code defects addressed; corrected14death schedule and requested5latestroot full independent oracles PASS. FullCP1/experiment qualification and resource/CP2/CP3/finalnative gates remainOPEN. Meta owns integration/continuation."
+}

@@ -87,8 +87,8 @@
     "F11_expiry": "after-destination-successor-full-oracle"
   },
   "stream": null,
-  "note": "035 SOURCE ONLY. False/null intentionally refuse. Exact v2 source-owned capture schema, coalescing producer, source bindings, embedded prior-admitted geometry, all retained sinks and sealed allocation required before long admission. No imports/controls/engine RUN GO.",
+  "note": "R3 SOURCE ONLY. False/null refuse. Requires actual source admission, global catalogue, complete source-derived sinks, fresh review and separate RUN GO.",
   "cohort_digest": null,
-  "profile_inputs": null
+  "profile_inputs": null,
+  "source_admission": null
 }
-

@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-036-C3-SHARED-RUNTIME-CONTRACTS64KiB",
+  "utc": "2026-10-21T02:22:29.150094+00:00",
+  "status": "INTERNAL_SOURCE_RESERVATION_ONLY__NO_RUNTIME_GO",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T022229Z.json",
+      "bytes": 3292,
+      "sha256": "9ef60fba14531d5d43e68f7bd3641ee63a789f9632e495180c18fa1a72538f57"
+    },
+    {
+      "file": "claim-20261021T022229Z.md",
+      "bytes": 714,
+      "sha256": "f3b6e074e99f5de5d7b34bb2566eabde3ddd7ba0ba58329f4047f9b12ce39a4e"
+    }
+  ]
+}

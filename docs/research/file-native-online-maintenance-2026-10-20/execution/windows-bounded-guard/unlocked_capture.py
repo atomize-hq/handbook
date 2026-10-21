@@ -1,4 +1,6 @@
-CAPTURE_WIRE_CONTRACT = {"api":"bounded-unlocked-outer-wire-r3","schema":"bounded-unlocked-outer-qpc-jsonl-r3","version":1,"clock":"checked time.perf_counter_ns nanoseconds","period_ns":20000000,"live_process_limit":16,"live_registered_supervisors":4,"member_table_capacity":2048,"parent_grant_schema":"postexit-finalizer-grant-v2-r3","parent_grant_refs":["authority_ref","profile_catalogue_ref"],"maximum_active_gap_ns":40000000,"rss_row_fields":["event","sample_complete","epoch","perf_counter_ns","completed_perf_counter_ns","interval_seconds","completion_interval_seconds","collection_duration_seconds","job_rss","processes","supervisor_rss","supervisors","suspended","run_nonce"],"process_fields":["pid","creation_time","rss","peak"],"write_complete_fields":["event","sample_complete","sample_id","perf_counter_ns","completed_perf_counter_ns","recorded_perf_counter_ns","duration_seconds","run_nonce"],"row_cap":"budget.evidence_bounds.rss.row_bytes","compression":"bounded gzip-stored-deflate-v1","qualification":"native/QPC health; controls additionally exact27 pass and nestedJob","authority":"fixed roles; no inner heavyTOKEN held","terminal_events":["outer-root-end-coverage","outer-job-tail-coverage"]}
+CAPTURE_WIRE_CONTRACT = {"api":"bounded-unlocked-outer-wire-r3","schema":"bounded-unlocked-outer-qpc-jsonl-r3","version":1,"clock":"checked time.perf_counter_ns nanoseconds","period_ns":20000000,"live_process_limit":16,"live_registered_supervisors":4,"member_table_capacity":2048,"parent_grant_schema":"postexit-finalizer-grant-v2-r3","parent_grant_refs":["authority_ref","profile_catalogue_ref"],"maximum_active_gap_ns":40000000,"rss_row_fields":["event","sample_complete","epoch","perf_counter_ns","completed_perf_counter_ns","interval_seconds","completion_interval_seconds","collection_duration_seconds","job_rss","processes","supervisor_rss","supervisors","suspended","run_nonce"],"process_fields":["pid","creation_time","rss","peak"],"write_complete_fields":["event","sample_complete","sample_id","perf_counter_ns","completed_perf_counter_ns","recorded_perf_counter_ns","duration_seconds","run_nonce"],"row_cap":"budget.evidence_bounds.rss.row_bytes","compression":"bounded gzip-stored-deflate-v1","qualification":"native/QPC health; controls additionally exact27 pass and nestedJob","authority":"fixed roles; no inner heavyTOKEN held","terminal_events":["outer-root-end-coverage","outer-job-tail-coverage"],"native_ssh_profile":"NATIVE_SSH_PROFILE","modes":["controls","guarded-bootstrap","context","native-ssh-phase"],"initial_max_seconds":3600,"controls_max_seconds":900,"cleanup_grace_seconds":12,"deadline_policy":"verified endpoint; tighten only"}
+NATIVE_SSH_PROFILE = {'version': 1, 'mode': 'native-ssh-phase', 'ssh_path': 'C:/Windows/System32/OpenSSH/ssh.exe', 'ssh_nlink': 2, 'ssh_bytes': 1251328, 'ssh_sha256': '8e1212d6b10bbab3dfd85077c1a7d0b60373fde702dfa9ea8c57924793bdb317', 'alias': 'spenser-linux-codex', 'flags': ['-T', '-oBatchMode=yes', '-oStrictHostKeyChecking=yes', '-oConnectTimeout=10'], 'remote_python': '/usr/bin/python3', 'remote_python_flags': ['-I', '-S', '-B'], 'native_root': '/home/spenser/file-native-online-linux-20261020', 'bootstrap': '/home/spenser/file-native-online-linux-20261020/source/final-suite-v5/suite_bootstrap.py', 'phase_abi': ['--phase', '--manifest', 'PARAM_PATH', '--sha256', 'PARAM_SHA256', '--phase-deadline', 'FIXED_EPOCH'], 'local_bootstrap': 'native-linux/final-suite/suite_bootstrap.py', 'transport_scope': 'Windows SSH process and inherited local children only'}
+
 
 """Bounded Windows outer lane."""
 import ast
@@ -7,7 +9,8 @@ import importlib.util
 import json
 import math
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
+import shlex
 import re
 import stat
 import subprocess
@@ -93,13 +96,63 @@ def file_ref(p, cap):
   raw = read(p, cap)
   return dict(path=str(p), bytes=len(raw), sha256=digest(raw))
 
+def native_ssh_config(c,m,review):
+  p=NATIVE_SSH_PROFILE
+  shape(m,"phase_manifest_ref phase_deadline_epoch source_manifest_ref approved_operator_source_ref","native-ssh-profile")
+  need(m["phase_deadline_epoch"]==c["absolute_deadline"],"one-native-Windows-phase-endpoint")
+  ssh=dict(path=p["ssh_path"],bytes=p["ssh_bytes"],sha256=p["ssh_sha256"])
+  with path(p["ssh_path"]).open("rb") as stream:
+    before=os.fstat(stream.fileno())
+    need(stat.S_ISREG(before.st_mode) and before.st_size==p["ssh_bytes"] and
+         before.st_nlink==p["ssh_nlink"],"fixed-system-SSH-file")
+    raw=stream.read(2*1024**2+1)
+    after=os.fstat(stream.fileno())
+  need((before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns,before.st_nlink)==
+       (after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns,after.st_nlink) and
+       len(raw)==p["ssh_bytes"] and digest(raw)==p["ssh_sha256"],"same-buffer-system-SSH-image")
+  bootstrap=m["approved_operator_source_ref"]
+  reference(bootstrap,65536,False)
+  reference(m["source_manifest_ref"],131072,False)
+  need(path(bootstrap["path"])==Path(__file__).resolve().parent.parent/p["local_bootstrap"] and
+       review.get("native_ssh_phase_reviewed") is True and
+       review.get("native_bootstrap_sha256")==bootstrap["sha256"] and
+       review.get("native_source_manifest_sha256")==m["source_manifest_ref"]["sha256"],
+       "reviewed-native-phase-source-closure")
+  phase_ref=m["phase_manifest_ref"]
+  phase=reference(phase_ref,131072)
+  name=path(phase_ref["path"]).name
+  need(re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,122}\.json",name) is not None,
+       "closed-native-parameter-name")
+  native=str(PurePosixPath(p["bootstrap"]).parent/name)
+  need(phase["go"] is True and phase["final_pin"]=="0628322e4b48e0efad19cdc32238a622d4aaa7a8" and
+       phase["phase"]["deadline_epoch"]==m["phase_deadline_epoch"] and
+       0<phase["phase"]["seconds"]<=3600 and phase["python"]==p["remote_python"] and
+       phase["source_roots"]["suite"]==str(PurePosixPath(p["bootstrap"]).parent) and
+       phase["runtime_scope"] in ("interface-controls-v5","private-cache-v5",
+                                  "native-build-v5","workspace-v5","full-body"),
+       "actual-native-phase-admission")
+  need(c["inner"] is None and c["invocation"] is None and c["release"] is None and
+       c["sources"]["bootstrap"] is None and c["sources"]["context"] is None and
+       c["context_manifest_output"] is None,"native-SSH-only-route")
+  remote=[p["remote_python"],*p["remote_python_flags"],p["bootstrap"],"--phase",
+          "--manifest",native,"--sha256",phase_ref["sha256"],
+          "--phase-deadline",str(m["phase_deadline_epoch"])]
+  command=shlex.join(remote)
+  need(len(command.encode())<=4096,"bounded-fixed-native-command")
+  return dict(argv=[p["ssh_path"],*p["flags"],p["alias"],command],ssh_source=ssh,
+              ssh_file_identity=dict(device=before.st_dev,inode=before.st_ino,nlink=before.st_nlink),
+              bootstrap_source=bootstrap,source_manifest=m["source_manifest_ref"],
+              phase_manifest=phase_ref,native_manifest=native,
+              deadline_epoch=m["phase_deadline_epoch"],scope=phase["runtime_scope"])
+
 def _load_config(config_path, expected,wd):
   raw = read(config_path, 131072)
   need(digest(raw) == expected, "configuration-hash")
   c = shape(strict(raw), "api runtime_go mode run_nonce absolute_deadline python sources budget "
        "receipt manifest invocation inner outputs source_review release context_manifest_output", "capture-config")
   need(c["api"] == API and c["runtime_go"] is True and
-    c["mode"] in ("controls", "guarded-bootstrap","context"), "explicit-capture-GO")
+    c["mode"] in ("controls", "guarded-bootstrap","context","native-ssh-phase"), "explicit-capture-GO")
+  if c["mode"]=="controls":wd.tighten(min(wd.deadline,time.time()+900))
   need(type(c["absolute_deadline"]) in (int, float) and math.isfinite(c["absolute_deadline"]) and
     time.time() < c["absolute_deadline"] <= wd.deadline,
     "absolute-capture-deadline")
@@ -108,8 +161,8 @@ def _load_config(config_path, expected,wd):
   src = shape(c["sources"], "guard controls capture bootstrap context", "source-universe")
   here = Path(__file__).resolve()
   for key, cap, name in (("guard", 77824, "job_guard_bounded.py"),
-              ("controls", 16384, "controls.py"),
-              ("capture", 53248, "unlocked_capture.py")):
+              ("controls", 15360, "controls.py"),
+              ("capture", 65536, "unlocked_capture.py")):
     reference(src[key], cap, False)
     need(path(src[key]["path"]) == here.parent / name, "fixed-cooperating-source")
   need(path(src["capture"]["path"]) == here, "capture-self")
@@ -135,8 +188,10 @@ def _load_config(config_path, expected,wd):
       any(isinstance(t, ast.Name) and t.id == "CASES" for t in n.targets)))
     need(len(cases) == 27 and [x["name"] for x in manifest["cases"]] == list(cases) and
       cases[-1] == "pipe-fence" and manifest["summary_limit"] == 65536, "exact-27-controls")
+  elif c["mode"]=="native-ssh-phase":
+    c["_native_ssh"]=native_ssh_config(c,manifest,review)
   elif c["mode"]=="context":
-    reference(src["context"],65536,False)
+    reference(src["context"],98304,False)
     need(path(src["context"]["path"])==here.parent.parent/"fixture-retirement-native-context/windows_context.py","fixed-Context-source")
     shape(manifest,"version runtime_go action parent_capture_sha256 context_source_sha256 deadline_perf_ns deadline_epoch real_retire_go authority parent","Context-template")
     need(manifest["version"]==1 and manifest["runtime_go"] is True and manifest["parent"] is None and
@@ -166,7 +221,7 @@ def _load_config(config_path, expected,wd):
     shape(c["inner"]["completion"], "path max_bytes", "inner-completion-sink")
     need(c["inner"]["completion"]["max_bytes"] == 65536, "inner-completion-cap")
     inner_budget=reference(c["inner"]["budget"],131072)
-    need(inner_budget["evidence_bounds"]["final"]["json_bytes"]<=2*1024**2,"inner-receipt-read-cap")
+    c["_inner_receipt_cap"]=number(inner_budget["evidence_bounds"]["final"]["json_bytes"],8192,32*1024**2,"inner-receipt-read-cap")
     if c["invocation"] is not None:
       need(type(c["invocation"]) is str and c["invocation"] in manifest["invocations"],
         "closed-bootstrap-invocation")
@@ -178,6 +233,7 @@ def _load_config(config_path, expected,wd):
     shape(sink, "path max_bytes", "publisher-sink")
     number(sink["max_bytes"], 8192, 65536, "publisher-cap")
     need(path(sink["path"], True).parent.is_dir(), "publisher-directory")
+  c["_config_ref"]=dict(path=str(path(config_path)),bytes=len(raw),sha256=expected)
   c["_watchdog"]=wd
   c["_config_path"], c["_config_sha"], c["_manifest"] = str(path(config_path)), expected, manifest
   return c
@@ -213,6 +269,8 @@ def child_forecast(c,g):
         "case-aggregate")
       entries.append((path(item["receipt"], True), size, 5))
     entries.append((path(m["summary_path"], True), 65536, 1))
+  elif c["mode"]=="native-ssh-phase":
+    return entries
   elif c["mode"]=="context":
     authority=reference(m["authority"],65536)
     body=reference(authority["budget"],65536)
@@ -245,7 +303,7 @@ def child_forecast(c,g):
 
 class WholeCallWatchdog:
   def __init__(self):
-    self.deadline=min(time.time()+900,FUNCTIONAL)
+    self.deadline=min(time.time()+3600,FUNCTIONAL)
     self.expired=False;self.completed=False;self.owner=None
     self.timers=[];self.lock=threading.RLock()
     self.arm(self.deadline)
@@ -320,6 +378,8 @@ class Capture:
     self.c = c
     self.g = g = guard_module(c)
     self.budget = g.Budget(c["budget"]["path"])
+    need(self.budget.raw_hash==c["budget"]["sha256"],"actual-reviewed-outer-budget")
+    self.config_ref=c["_config_ref"]
     g.check_census_envelope(self.budget)
     self.publisher = dict(pid=os.getpid(), creation=g._stamp(g.K.GetCurrentProcess()),
                image=str(Path(sys.executable).resolve()),
@@ -343,14 +403,21 @@ class Capture:
     self.saw_nested = False
     self.published = set()
     self.receipt = path(c["receipt"], True)
+    self.root_source=c["python"]
     self.argv = [c["python"]["path"], "-I", "-S", "-B", "-u"]
     if c["mode"] == "controls":
       self.argv += [c["sources"]["controls"]["path"], c["manifest"]["path"], c["manifest"]["sha256"]]
+    elif c["mode"]=="native-ssh-phase":
+      self.argv=c["_native_ssh"]["argv"]
+      self.root_source=c["_native_ssh"]["ssh_source"]
     elif c["mode"]=="context":
       self.argv += [c["sources"]["context"]["path"],c["context_manifest_output"]["path"],c["manifest"]["sha256"]]
     else:
       self.argv += [c["sources"]["capture"]["path"], "--worker", c["_config_path"], c["_config_sha"]]
     self.bounds = g.Bounds(self.budget, self.receipt, self.argv, None, None)
+    if c["mode"]=="native-ssh-phase":
+      need(self.bounds.b["stdio"]["stdout"]["capture_bytes"]==16384,
+           "fixed-native-terminal-stdout-cap")
     self.state = g.EvidenceState(self.bounds)
     self.state.run_nonce = c["run_nonce"]
     self.state.terminate = self.terminate
@@ -400,7 +467,7 @@ class Capture:
       self.watchdog.check()
       self.root_creation=g._stamp(g.HANDLE(self.process._handle))
       self.root_image=g.native_image(g.HANDLE(self.process._handle))
-      need(path(self.root_image)==path(c["python"]["path"]),"actual-root-image")
+      need(path(self.root_image)==path(self.root_source["path"]),"actual-root-image")
       need(bool(g.K.AssignProcessToJobObject(self.job, g.HANDLE(self.process._handle))),
         "nested-outer-Job-assignment")
       inside=g.w.BOOL()
@@ -412,6 +479,7 @@ class Capture:
       self.sample(suspended=True)
       self.owner = dict(pid=self.publisher["pid"], creation_time=self.publisher["creation"],
         nonce=c["run_nonce"], guard_sha256=c["sources"]["capture"]["sha256"],
+        budget_sha256=self.budget.raw_hash,bounds_sha256=self.bounds.sha,config_ref=self.config_ref,
         state="suspended", job_root_pid=self.process.pid,
         job_root_creation_time=self.js.live[self.process.pid][1], receipt=str(self.receipt))
       g.control_json(OWNER, self.owner)
@@ -444,7 +512,14 @@ class Capture:
   def fail(self, error, label):
     self.failed = True
     if self.first_error is None:
-      self.first_error = (label + ":" + self.g._error(error))[:128]
+      trace, detail = error.__traceback__, ""
+      for _ in range(8):
+        if trace is None:break
+        path = trace.tb_frame.f_code.co_filename
+        if path in (self.g.__file__, __file__):
+          detail += (">g:" if path == self.g.__file__ else ">c:") + str(trace.tb_lineno)
+        trace = trace.tb_next
+      self.first_error = (label + ":" + self.g._error(error) + detail)[:128]
     self.errors.append(self.first_error)
     self.terminate(label)
 
@@ -588,7 +663,7 @@ class Capture:
     try:
       while self.process.poll() is None and not self.state.frozen and not self.failed:
         need(time.time() < self.c["absolute_deadline"], "outer-deadline")
-        self.stop.wait(max(0, (next_tick - counter()) / 1e9))
+        time.sleep(max(0, (next_tick - counter()) / 1e9))
         self.sample()
         self.release_bootstrap_gate()
         next_tick = max(next_tick + 20000000, counter())
@@ -672,6 +747,10 @@ class Capture:
           writer_closed=bool(self.raw and self.raw.closed and self.raw.file.closed),
           callbacks_joined=not any(x and x.is_alive() for x in workers))
       if self.job:
+        try:g.check_job_limits(self.job,16,self.state,self.job_limit_checks)
+        except BaseException as error:
+          self.job_limit_checks.append(dict(final_error=g._error(error)))
+          self.fail(error,"outer-final-Job-accounting")
         self.lock.acquire();self.job_close_attempted=True
         closing = self.job
         closed = g._checked_close(closing, "outer-final-Job")
@@ -687,6 +766,7 @@ class Capture:
       _FENCES.append(self)
     physical = self.status == "closed" and ((self.host is not None and len(self.empties) == 2) or self.process is None)
     self.result = dict(schema=API, run_nonce=self.c["run_nonce"],
+      budget_sha256=self.budget.raw_hash,bounds_sha256=self.bounds.sha,config_ref=self.config_ref,
       guard_sha256=self.c["sources"]["capture"]["sha256"], dependency_guard_sha256=self.c["sources"]["guard"]["sha256"],
       job_limit_checks=getattr(self,"job_limit_checks",[]),creator_lifetime=self.creator, host=self.host, closure_checks=self.empties, job_close=self.job_close,
       terminal_coverage=self.coverage_checks,process_closure_verified=physical, errors=list(self.errors), first_error=self.first_error,
@@ -764,7 +844,7 @@ def publish_parent_records(cap):
   creator = data["creator_lifetime"]
   need(creator["pid"] == cap.host["pid"] and creator["creation_time"] == cap.host["creation"],
     "native-reaped-original-guard-creator")
-  original=reference(data["receipt_ref"], 2 * 1024**2)
+  original=reference(data["receipt_ref"], cap.c["_inner_receipt_cap"])
   need(data["completion"]["receipt_sha256"]==data["receipt_ref"]["sha256"] and
     original["run_nonce"]==data["completion"]["run_nonce"] and original["owner"]==data["owner"] and
     data["completion"]["budget_sha256"]==cap.c["inner"]["budget"]["sha256"],"same-original-receipt-return")
@@ -783,7 +863,8 @@ def publish_parent_records(cap):
   lifetime = cap.g.native_lifetime(row, cap.c["sources"]["guard"]["sha256"], audit_ref)
   life_ref = cap.publish("lifetime", lifetime)
   streams = cap.pipes.reference()
-  completion = dict(schema="parent-original-guard-completion-v1", run_nonce=lifetime["run_nonce"],
+  completion = dict(schema="parent-original-guard-completion-v1",
+    budget_sha256=cap.budget.raw_hash,bounds_sha256=cap.bounds.sha,config_ref=cap.config_ref, run_nonce=lifetime["run_nonce"],
     guard_sha256=lifetime["guard_sha256"], creator=lifetime["creator"],
     guard_reaped=bool(cap.root_exit and cap.root_exit["wait_result"] == 0 and cap.root_exit["handle_close_result"] is True),
     native_guard_worker_exit=cap.root_exit, outer_controller_lifetime=dict(schema="unlocked-outer-job-native-lifetime-v1",run_nonce=cap.c["run_nonce"],
@@ -806,6 +887,53 @@ def publish_parent_records(cap):
   cap.parent_records["census_ref"] = census_ref
   cap.parent_records["inclusive_census"] = cap.budget.check()
   return cap.parent_records
+
+def budget_reference(ref):
+  if type(ref) is dict and "offset" in ref:
+    shape(ref,"path offset bytes sha256","whole-budget-reference")
+    need(type(ref["offset"]) is int and ref["offset"]==0,"whole-budget-zero-offset")
+    ref={k:ref[k] for k in ("path","bytes","sha256")}
+  return reference(ref,131072)
+
+def validate_grant_source_freeze(authority,previous):
+  from datetime import datetime
+  freeze=shape(authority["source_freeze"],"engine harness manifest_ref review_ref","source-freeze")
+  need(freeze["engine"]=="2026-10-21T04:10:14Z" and type(freeze["harness"]) is str and
+       re.fullmatch(r"2026-10-21T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?Z",freeze["harness"]),
+       "fixed-source-freeze-clock")
+  instant=datetime.fromisoformat(freeze["harness"][:-1]+"+00:00")
+  need(datetime.fromisoformat("2026-10-21T04:10:14+00:00")<=instant<
+       datetime.fromisoformat("2026-10-21T11:10:14+00:00"),"source-freeze-before-functional")
+  values={};total=0
+  for name in ("manifest_ref","review_ref"):
+    ref=shape(freeze[name],"path offset bytes sha256","source-freeze-reference")
+    need(type(ref["offset"]) is int and ref["offset"]==0 and path(ref["path"]).is_relative_to(PARENT_ROOT),
+         "parent-owned-source-freeze")
+    total+=number(ref["bytes"],1,65536,"source-freeze-byte-cap")
+    need(total<=65536,"source-freeze-pair-cap")
+    values[name]=reference({k:ref[k] for k in ("path","bytes","sha256")},65536)
+  manifest=shape(values["manifest_ref"],"kind version final_pin frozen_utc source_files","source-manifest")
+  review=shape(values["review_ref"],"kind version verdict final_pin source_manifest_sha256 source_files_sha256 review_refs","source-review")
+  pin=authority["source_pin"];files=manifest["source_files"]
+  need(pin=="0628322e4b48e0efad19cdc32238a622d4aaa7a8" and
+       manifest["kind"]=="private-harness-source-manifest-v1" and type(manifest["version"]) is int and
+       manifest["version"]==1 and manifest["final_pin"]==pin and manifest["frozen_utc"]==freeze["harness"] and
+       type(files) is dict and 0<len(files)<=512,"actual-source-freeze")
+  encoded=json.dumps(files,sort_keys=True,separators=(",",":"),ensure_ascii=False,allow_nan=False).encode("utf-8")
+  need(review["kind"]=="private-harness-review-acceptance-v1" and type(review["version"]) is int and
+       review["version"]==1 and review["verdict"]=="SOURCE_ACCEPTED_FOR_BOUNDED_PHASE_ADMISSION" and
+       review["final_pin"]==pin and review["source_manifest_sha256"]==freeze["manifest_ref"]["sha256"] and
+       review["source_files_sha256"]==digest(encoded) and type(review["review_refs"]) is list and
+       0<len(review["review_refs"])<=64,"reviewed-source-freeze-association")
+  indexed={}
+  for source,row in files.items():
+    shape(row,"bytes sha256","source-manifest-entry")
+    key=os.path.normcase(str(path(source)))
+    need(key not in indexed,"unique-frozen-source-path");indexed[key]=row
+  for name in ("guard","capture","controls"):
+    ref=previous.c["sources"][name]
+    need(indexed.get(os.path.normcase(str(path(ref["path"]))))==
+         {k:ref[k] for k in ("bytes","sha256")},"actual-frozen-capture-source")
 
 def _issue_postexit_grant(previous, prepared, plan):
   need(type(previous) is Capture and type(prepared) is Capture and previous.status == "closed" and previous.result["qualified"] is True and not _FENCES and not previous.watchdog.expired and previous.c["mode"] == "guarded-bootstrap" and
@@ -830,10 +958,18 @@ def _issue_postexit_grant(previous, prepared, plan):
   index = reference(plan["phase_index_ref"], 1024 * 1024)
   records = previous.parent_records
   authority=reference(plan["authority_ref"],4*1024**2)
-  shape(authority,"schema run source_pin budget_sha256 parent_case_id census output limits caps guard_bounds_ref","finalizer-allocation")
+  shape(authority,"schema run source_pin budget_sha256 parent_case_id census output limits caps guard_bounds_ref outer_guard_bounds_ref source_freeze","finalizer-allocation")
   catalogue=reference(plan["profile_catalogue_ref"],4*1024**2)
   shape(catalogue,"version schedule_sha256 profiles","profile-catalogue")
-  inner_budget=reference(authority["guard_bounds_ref"],131072)
+  validate_grant_source_freeze(authority,previous)
+  inner_budget=budget_reference(authority["guard_bounds_ref"])
+  outer_budget=budget_reference(authority["outer_guard_bounds_ref"])
+  outer_ref=authority["outer_guard_bounds_ref"]
+  need(path(outer_ref["path"])==path(previous.c["budget"]["path"]) and
+       outer_ref["bytes"]==previous.c["budget"]["bytes"] and
+       outer_ref["sha256"]==previous.budget.raw_hash==previous.result["budget_sha256"] and
+       digest(native._encode(outer_budget["evidence_bounds"],65536))==
+       previous.bounds.sha==previous.result["bounds_sha256"],"actual-old-outer-budget-bounds")
   bounds=inner_budget["evidence_bounds"]
   returned=records["completion"]["original_returned_completion"]
   need(authority["schema"]=="finalizer-allocation-v1" and
@@ -880,6 +1016,14 @@ def publish_controls_records(cap):
   need(cap.status=="closed","closed-native-capture")
   review=reference(cap.c["source_review"],65536)
   creator=cap.creator
+  native_ssh=None
+  if cap.c["mode"]=="native-ssh-phase":
+    native_ssh=dict(cap.c["_native_ssh"],observed_native_root_image=cap.root_image,
+      actual_root_exit=cap.root_exit,windows_transport_only=True,
+      native_children_use_separate_Linux_guard=True,verify_phase_terminal_required=True,
+      stdout_ref=file_ref(cap.receipt.with_suffix(".stdout"),20480),
+      stderr_ref=file_ref(cap.receipt.with_suffix(".stderr"),
+        cap.bounds.b["stdio"]["stderr"]["capture_bytes"]+4096))
   audit=cap.publish("audit",dict(guard_sha256=cap.c["sources"]["capture"]["sha256"],
     no_job_handle_duplication=review["no_job_handle_duplication"],
     no_job_handle_inheritance=review["no_job_handle_inheritance"],
@@ -889,7 +1033,8 @@ def publish_controls_records(cap):
     guard_sha256=cap.c["sources"]["capture"]["sha256"],creator=creator,
     source_audit_ref=audit,host=cap.host,empty_observations=cap.empties,job_close=cap.job_close)
   life=cap.publish("lifetime",lifetime)
-  done=cap.publish("completion",dict(schema="bounded-outer-caller-completion-v1",
+  done=cap.publish("completion",dict(schema="bounded-outer-caller-completion-v1",mode=cap.c["mode"],native_ssh=native_ssh,
+    budget_sha256=cap.budget.raw_hash,bounds_sha256=cap.bounds.sha,config_ref=cap.config_ref,
     qualified=cap.result["qualified"],process_closure_verified=cap.result["process_closure_verified"],
     native_root_exit=cap.root_exit,outer_lifetime_ref=life,receipt_ref=cap.result["receipt_ref"],
     actual_postclose_census=cap.budget.check()))
@@ -946,7 +1091,7 @@ def worker(config_path, expected):
   g.check_census_envelope(budget)
   target = path(c["inner"]["completion"]["path"], True)
   row = g.run(argv, c["inner"]["receipt"], c["inner"]["budget"]["path"],
-        min(900, c["absolute_deadline"]-time.time()),
+        min(3600, c["absolute_deadline"]-time.time()),
         reserves=g.reserves(budget, [(target, 65536, 1)]))
   body = dict(schema="bounded-inner-guard-return-v1", completion=row["completion"],
     receipt_ref=file_ref(path(c["inner"]["receipt"]), budget.config["evidence_bounds"]["final"]["json_bytes"]),

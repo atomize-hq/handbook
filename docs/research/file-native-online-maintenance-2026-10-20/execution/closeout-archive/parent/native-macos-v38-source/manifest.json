@@ -1,0 +1,44 @@
+{
+  "kind": "mac-v38-source-return-v1",
+  "packet": {
+    "bytes": 45668,
+    "sha256": "01a1c0fca3a8d2c94739a455ea3544a7708989e6a1073ea599b7af58d191e733"
+  },
+  "closure_manifest_sha256": "6b5562e0ea771bc11262c10ca8322252dd941c308b5caa807e9fdd898291f66d",
+  "files": {
+    "evidence/control/native-source-review-v36.json": {
+      "bytes": 3903,
+      "sha256": "6538be8940f268ea0390d8b838cd6101e0d6a5e93a9745cc7ef3bb7b47b12657"
+    },
+    "execution/native-macos/native_cache_activate_v36.py": {
+      "bytes": 12287,
+      "sha256": "d941ba6dbd2b04cae872d8828fd50b74f11c0af0869555f6a430fc7d5b2908e3"
+    },
+    "execution/native-macos/native_case_map_v36.py": {
+      "bytes": 10666,
+      "sha256": "5bbb2a0d2e67b217b50fc39fc2abd1061c57b9dfc5bbd0a91414a05e70bfb7f2"
+    },
+    "execution/native-macos/native_cases_v36.py": {
+      "bytes": 39569,
+      "sha256": "d944dbb438e25fc9e44b9877f6ca3504373fa740b09529117716d43e927a569b"
+    },
+    "execution/native-macos/native_facade_v36.py": {
+      "bytes": 27850,
+      "sha256": "bc52a421c0b2511a2ce1f32d63959f7708289ca1e8bf2f2750ea3fbecaf2a5bd"
+    },
+    "execution/native-macos/native_lifecycle_v36.py": {
+      "bytes": 10547,
+      "sha256": "9aad6f5a80797ce1042b90729977e15f17b644bc36cb5a9c0a2694d0d514f30e"
+    },
+    "execution/native-macos/native_role_v36.py": {
+      "bytes": 32156,
+      "sha256": "f93bf5f3d4fc02b3e2de8f9d6785b2df0cf4bfd094c7447626f5fb77353443e4"
+    },
+    "execution/native-macos/native_suite_v36.py": {
+      "bytes": 9979,
+      "sha256": "9285236be78c922e6fe2672d402917d0f848c4916485ba438006dc540281b1b5"
+    }
+  },
+  "source_only": true,
+  "runtime_go": false
+}

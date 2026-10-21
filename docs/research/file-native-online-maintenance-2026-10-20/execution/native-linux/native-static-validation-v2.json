@@ -1,0 +1,123 @@
+{
+  "kind": "STATIC ONLY; not a runtime control",
+  "ast": [
+    {
+      "file": "native_adapter_v2.py",
+      "ast_compiled": true,
+      "classes": [
+        "NativeAdapter"
+      ],
+      "imported_modules": [
+        "pathlib",
+        "contextlib",
+        "native_driver",
+        "native_driver_v2",
+        "native_resources_v2"
+      ]
+    },
+    {
+      "file": "native_capsule_v2.py",
+      "ast_compiled": true,
+      "classes": [
+        "Capsule"
+      ],
+      "imported_modules": [
+        "pathlib",
+        "native_driver",
+        "native_driver_v2",
+        "native_adapter_v2",
+        "native_historical_v2",
+        "native_resources_v2"
+      ]
+    },
+    {
+      "file": "native_driver_v2.py",
+      "ast_compiled": true,
+      "classes": [
+        "Driver"
+      ],
+      "imported_modules": [
+        "pathlib",
+        "native_driver",
+        "native_resources_v2"
+      ]
+    },
+    {
+      "file": "native_historical_v2.py",
+      "ast_compiled": true,
+      "classes": [
+        "HistoricalFactory",
+        "HistoricalDriver"
+      ],
+      "imported_modules": [
+        "pathlib",
+        "native_driver_v2",
+        "native_resources_v2"
+      ]
+    },
+    {
+      "file": "native_packet_v2.py",
+      "ast_compiled": true,
+      "classes": [],
+      "imported_modules": [
+        "pathlib"
+      ]
+    },
+    {
+      "file": "native_resources_v2.py",
+      "ast_compiled": true,
+      "classes": [
+        "Reservations"
+      ],
+      "imported_modules": [
+        "pathlib"
+      ]
+    }
+  ],
+  "accepted_sources_unchanged": {
+    "native_guard.py": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
+    "native_driver.py": "dfe8ef569b4981a76e199a2763de8a3cf9988bb24785b280fc3662bcd09427ce",
+    "native_capsule_adapter.py": "3bafbc8ac45de6ea2e4060d1a04c6fa5fc1ac278080e3ef1ffcececbd52481b7"
+  },
+  "shared_source_bindings": {
+    "focused_protocol.py": "58928f6bf82f82d13fb5d809c8d6095e331ec4feeac48c389d72744a3ff32859",
+    "focused_schedules.py": "ee7d2aef5b7ecd492602c49f9e78646465bc2cd04a1e597e1d46e86cd67ff756",
+    "case_ledger.py": "ce7fb4983b5f31e0f529a69431a169574e7ba5cb55e225b17d42d10354be931b",
+    "source_receipt.json": "ae78d32a4a14d8327c3b4090fea3ea05f4f69b8542c0e3c281692ec7acc7b63a"
+  },
+  "no_native_copy": true,
+  "no_compiler": true,
+  "no_process_control": true,
+  "no_engine": true,
+  "gitnexus": "UNAVAILABLE; index impact UNKNOWN/manual HIGH, new-only files/import trace",
+  "native_census": {
+    "source": {
+      "bytes": 631232,
+      "files": 61,
+      "directories": 12
+    },
+    "target": {
+      "bytes": 126797363,
+      "files": 408,
+      "directories": 90
+    },
+    "fixtures": {
+      "bytes": 109,
+      "files": 1,
+      "directories": 5
+    },
+    "evidence": {
+      "bytes": 4076854,
+      "files": 177,
+      "directories": 10
+    }
+  },
+  "unsealed_draft_format_failure": {
+    "bytes": 273253,
+    "files": 11,
+    "cap": 262144,
+    "reason": "Pretty derived crosswalk exceeded envelope before seal; compacted without removing rows",
+    "native_transfer": false,
+    "engine_or_control_run": false
+  }
+}

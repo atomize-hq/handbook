@@ -1,0 +1,97 @@
+{
+  "kind": "native-guard-control-candidate",
+  "nonce": "922a0655f73de18d34a13bb7aa49e837",
+  "source_sha256": "f4f8219d32ee764f0fdfcc074743c7d68206456ba756c268089a7ca0beb7b45a",
+  "supervisor": {
+    "pid_requested": 84099,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 84099,
+    "ppid": 54542,
+    "uid": 501,
+    "pgid": 84099,
+    "state": 2,
+    "start": [
+      1792528236,
+      186869
+    ]
+  },
+  "started_epoch": 1792528236.356692,
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "seconds_cap": 3.0,
+  "global_enumeration": false,
+  "censor": null,
+  "closure": "PROVEN_EMPTY",
+  "samples": 16,
+  "peak_group_rss": 54706176,
+  "peak_supervisor_rss": 31064064,
+  "missing_live_rss": [],
+  "transient_exited_members": [],
+  "termination": [],
+  "sample_interval_max_s": 0.03828312503173947,
+  "late_intervals": 0,
+  "per_process_cap": 2147483648,
+  "group_cap": 2147483648,
+  "supervisor_cap": 805306368,
+  "aggregate_cap": 3221225472,
+  "command": [
+    "python3",
+    "-B",
+    "-c",
+    "import subprocess,sys; subprocess.run([sys.executable,\"-B\",\"-c\",\"import time; time.sleep(.4)\"],check=True)"
+  ],
+  "source_pin": "PENDING_NO_ENGINE_RELEASE",
+  "token_acquired": 1792528236.359005,
+  "prelaunch_census": {
+    "logical_bytes": 328734,
+    "allocated_bytes": 380928,
+    "files": 24
+  },
+  "prelaunch_free_bytes": 167653273600,
+  "anchor": {
+    "pid_requested": 84131,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 84131,
+    "ppid": 84099,
+    "uid": 501,
+    "pgid": 84131,
+    "state": 2,
+    "start": [
+      1792528236,
+      361005
+    ]
+  },
+  "closure_observations": [
+    {
+      "pgid_requested": 84131,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216687205571333
+    },
+    {
+      "pgid_requested": 84131,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216687265859208
+    }
+  ],
+  "anchor_exit": 0,
+  "watchdog_exit_reaped": true,
+  "worker_exit": 0,
+  "finished_epoch": 1792528236.995494,
+  "sample_span_s": 0.47091299993917346,
+  "effective_samples_hz": 33.976551936486516,
+  "final_census": {
+    "logical_bytes": 329899,
+    "allocated_bytes": 385024,
+    "files": 27
+  },
+  "qualification": "CONTROL_CANDIDATE_ONLY_NO_ENGINE_RELEASE"
+}

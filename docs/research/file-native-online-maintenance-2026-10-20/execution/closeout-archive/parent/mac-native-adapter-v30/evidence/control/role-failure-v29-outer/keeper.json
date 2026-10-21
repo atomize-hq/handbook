@@ -1,0 +1,39 @@
+{
+  "kind": "independent-native-keeper",
+  "nonce": "d3eb08057d7890a8628c8fef357abae7",
+  "identity": {
+    "pid_requested": 64886,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 64886,
+    "ppid": 64884,
+    "uid": 501,
+    "pgid": 64886,
+    "state": 2,
+    "start": [
+      1792535349,
+      817586
+    ]
+  },
+  "fixed_cutoff_epoch": 1792581014.0,
+  "local_deadline_monotonic": 3223814.853246125,
+  "token_received": true,
+  "state": "CLOSED_AFTER_CENSOR",
+  "identity_budget": 32,
+  "reason": "RSS-heartbeat-gap-over-40ms",
+  "events": [
+    {
+      "notify_parent": {
+        "pid": 64884,
+        "start": [
+          1792535349,
+          462421
+        ],
+        "signal": 30,
+        "sent": true,
+        "errno": 0
+      }
+    }
+  ]
+}

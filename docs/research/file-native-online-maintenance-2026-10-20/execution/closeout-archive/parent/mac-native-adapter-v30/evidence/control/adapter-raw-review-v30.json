@@ -1,0 +1,228 @@
+{
+  "kind": "adapter-final-v30-selected-raw-verification",
+  "core_v20_and_role_v23_frozen": {
+    "guard_v20.py": "c33fa117667de50c9010e27830a1ec63019deb7186d4a047e439bda04530cfb4",
+    "monitor_v20.py": "7b3f3fd0c79ddb3fd4115c22c0b17c1d7914ce2aca0aff54f16fcd4587bf52a7",
+    "keeper_v20.py": "5a96e449f32f971dbd57f2ca62cdc194920858ae9708d5ecd6bec25e19aa8978",
+    "admission_v20.py": "aaf37aa66d486805a5fed459ba632d39bc65749d67ee153bc92a575b69410fe3",
+    "role_driver_v23.py": "f79bc1737b0ff0ba4fff4e4db4e15ffb2acce82cd88cf79a81e66a3c516ffa98"
+  },
+  "candidate_adapter_sha256": "e93cf4914435338e11b1d259bc8f7e4ae4f18d8e8b506e9b21e879fbd5ce5fad",
+  "candidate_role_driver_sha256": "ad855d5d8c96eac726d9f649b3c014f563dd45fc07e7ab3514e10e3c43af2cde",
+  "outer_controls": [
+    {
+      "name": "adapter-tiny-v30-outer",
+      "raw_sha256": "d8c4be77285663fb0c190f4305110d4eaac5eed3b517bb012ed63ef3bd381fcb",
+      "gzip_EOF": true,
+      "rss_rows": 359,
+      "reported_workload_end_samples": 356,
+      "extra_closeout_RSS_rows": 3,
+      "all_raw_rows": 384,
+      "max_gap_s": 0.012577707879245281,
+      "two_numeric_empty_group_observations": true,
+      "token_released": true
+    },
+    {
+      "name": "ordinary-tiny-v30-outer",
+      "raw_sha256": "466322f00786793c0715b987724e79dcc5f52949d43b25fb7e1e6f61b98c0088",
+      "gzip_EOF": true,
+      "rss_rows": 313,
+      "reported_workload_end_samples": 309,
+      "extra_closeout_RSS_rows": 4,
+      "all_raw_rows": 333,
+      "max_gap_s": 0.014698749873787165,
+      "two_numeric_empty_group_observations": true,
+      "token_released": true
+    },
+    {
+      "name": "output-cap-tiny-v30-outer",
+      "raw_sha256": "508cadd4521d8926198711b43af4c07a764241e317b0c9c4ab8db58ef3c2eb4d",
+      "gzip_EOF": true,
+      "rss_rows": 220,
+      "reported_workload_end_samples": 215,
+      "extra_closeout_RSS_rows": 5,
+      "all_raw_rows": 227,
+      "max_gap_s": 0.012593124993145466,
+      "two_numeric_empty_group_observations": true,
+      "token_released": true
+    },
+    {
+      "name": "role-failure-v29b-outer",
+      "raw_sha256": "25b203f5287d4f9730706987d9d776a9a29e64f0ad39fe3e43e44a435384a334",
+      "gzip_EOF": true,
+      "rss_rows": 226,
+      "reported_workload_end_samples": 221,
+      "extra_closeout_RSS_rows": 5,
+      "all_raw_rows": 234,
+      "max_gap_s": 0.015538624953478575,
+      "two_numeric_empty_group_observations": true,
+      "token_released": true
+    }
+  ],
+  "role_controls": [
+    {
+      "name": "adapter-tiny-v30-1",
+      "role": "reader",
+      "rss_limit_bytes": 268435456,
+      "raw_sha256": "891b8da18748e5f6dd7269a21a2bd36d2dcfb75c598a3dbff7e60dfd3235f8f9",
+      "gzip_EOF": true,
+      "samples": 15,
+      "max_gap_s": 0.01280904095619917,
+      "exit": 0,
+      "failures": [],
+      "output_complete": true,
+      "output_bytes": 50128,
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "adapter-tiny-v30-2",
+      "role": "checker",
+      "rss_limit_bytes": 2147483648,
+      "raw_sha256": "2798c951728f5492a8b3720c7ecbb7c591622061855dad21dbb31c51625d97e8",
+      "gzip_EOF": true,
+      "samples": 15,
+      "max_gap_s": 0.012811250053346157,
+      "exit": 2,
+      "failures": [],
+      "output_complete": true,
+      "output_bytes": 50132,
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "adapter-tiny-v30-3",
+      "role": "checker",
+      "rss_limit_bytes": 2147483648,
+      "raw_sha256": "3e3b2692f4801d12b5755af8f949e04c36c27a7762cf9c52ef35b081b8eb560c",
+      "gzip_EOF": true,
+      "samples": 15,
+      "max_gap_s": 0.012705707922577858,
+      "exit": 86,
+      "failures": [],
+      "output_complete": true,
+      "output_bytes": 0,
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "adapter-tiny-v30-4",
+      "role": "checker",
+      "rss_limit_bytes": 2147483648,
+      "raw_sha256": "27eec1fb8075d6251fa50df6490779ebd913808abcb955844feac1e4aa0340f8",
+      "gzip_EOF": true,
+      "samples": 15,
+      "max_gap_s": 0.012682541273534298,
+      "exit": 2,
+      "failures": [],
+      "output_complete": true,
+      "output_bytes": 50141,
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "adapter-tiny-v30-5",
+      "role": "checker",
+      "rss_limit_bytes": 2147483648,
+      "raw_sha256": "2db61ba4a63623a10e8c89ec4dc85bcd27048fa50f86858db0c0e15b4169d0e0",
+      "gzip_EOF": true,
+      "samples": 16,
+      "max_gap_s": 0.01275808410719037,
+      "exit": 0,
+      "failures": [],
+      "output_complete": true,
+      "output_bytes": 30,
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "ordinary-tiny-v30-1",
+      "role": "reader",
+      "rss_limit_bytes": 268435456,
+      "raw_sha256": "8afb1a5362a71692fe8bd5810bd6070a1c6463a5c380c0ad736f535881720d56",
+      "gzip_EOF": true,
+      "samples": 25,
+      "max_gap_s": 0.012793374713510275,
+      "exit": 0,
+      "failures": [],
+      "output_complete": true,
+      "output_bytes": 700,
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "ordinary-tiny-v30-2",
+      "role": "reader",
+      "rss_limit_bytes": 268435456,
+      "raw_sha256": "81aeccb59f0f79b60d9bb3b8f096ffef2acca12691ce01b46cb9cb0413bbfbe2",
+      "gzip_EOF": true,
+      "samples": 25,
+      "max_gap_s": 0.012795375194400549,
+      "exit": 0,
+      "failures": [],
+      "output_complete": true,
+      "output_bytes": 683,
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "ordinary-tiny-v30-3",
+      "role": "reader",
+      "rss_limit_bytes": 268435456,
+      "raw_sha256": "a912a130535d9f7d9e5d76c308a2845fcfc211a6bf784d76b676e825034d8778",
+      "gzip_EOF": true,
+      "samples": 23,
+      "max_gap_s": 0.012952625285834074,
+      "exit": 1,
+      "failures": [],
+      "output_complete": true,
+      "output_bytes": 853,
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "output-cap-tiny-v30-1",
+      "role": "checker",
+      "rss_limit_bytes": 2147483648,
+      "raw_sha256": "bf45f4287fa10681b16247b30fbb55202914944bae5b33ec4658b67ff7ecbcab",
+      "gzip_EOF": true,
+      "samples": 15,
+      "max_gap_s": 0.012731291819363832,
+      "exit": -9,
+      "failures": [
+        "RuntimeError('role-output-cap:stdout')"
+      ],
+      "output_complete": false,
+      "output_bytes": 0,
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "role-failure-memory-v29",
+      "role": "reader",
+      "rss_limit_bytes": 268435456,
+      "raw_sha256": "b8b68a86b9abfe6def076f5cecc0255ced2cfabf96fdf5c5fd86437bef6d794d",
+      "gzip_EOF": true,
+      "samples": 4,
+      "max_gap_s": 0.012799374759197235,
+      "exit": -9,
+      "failures": [
+        "RuntimeError('explicit-reader-RSS-cap')",
+        "RuntimeError(\"RuntimeError('explicit-reader-RSS-cap')\")"
+      ],
+      "output_complete": false,
+      "output_bytes": 0,
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "role-failure-timeout-v29",
+      "role": "checker",
+      "rss_limit_bytes": 2147483648,
+      "raw_sha256": "93a5e60db9df66ee8a62baacc7e5a62b90d9797edfa9d5f2ba2b1966741b6391",
+      "gzip_EOF": true,
+      "samples": 15,
+      "max_gap_s": 0.012664792127907276,
+      "exit": -9,
+      "failures": [
+        "RuntimeError('role-timeout')"
+      ],
+      "output_complete": false,
+      "output_bytes": 0,
+      "two_positive_identity_absences": true
+    }
+  ],
+  "capsule_call_logs_EOF": true,
+  "full_engine_capsules_or_build_executed": false,
+  "cache_directory_created": false
+}

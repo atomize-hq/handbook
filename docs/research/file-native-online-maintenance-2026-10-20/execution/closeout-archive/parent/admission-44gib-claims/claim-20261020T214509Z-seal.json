@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-007-ACTIVATE-C1-MAC-64MiB",
+  "utc": "2026-10-20T21:45:09.868652+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T214509Z.json",
+      "bytes": 5144,
+      "sha256": "8232ff614dd32922175b8fc558c57293760dfc6460b888dc4402640588f9be35"
+    },
+    {
+      "file": "claim-20261020T214509Z.md",
+      "bytes": 1357,
+      "sha256": "ce3950e5d43757dc0cbbe11814f15b210a363bd32baa7d32f0af6f38118b7267"
+    }
+  ],
+  "status": "ALREADY_RESERVED_C1_MAC_ACTIVATED__NO_BUILD_OR_FINAL_QUALIFICATION_GO",
+  "sealed": true
+}

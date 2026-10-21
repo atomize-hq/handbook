@@ -1,0 +1,42 @@
+{
+  "kind": "private-runtime-contracts-R3-source-budget-046",
+  "source_only": true,
+  "runtime_go": false,
+  "claim036_sha256": "9ef60fba14531d5d43e68f7bd3641ee63a789f9632e495180c18fa1a72538f57",
+  "owner": "01a15b6c-b109-7090-a8c2-0e165f92f51e",
+  "source_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\shared-runtime-contracts",
+  "bytes": 81920,
+  "files": 1,
+  "paths": {
+    "runtime_contracts.py": 90112
+  },
+  "allocation": "C3existing16MiB; unassigned2064384\u21921998848, globalunchanged; originalexcludedMETA, copies/reviewsMETA9",
+  "required": [
+    "ConcreteRunner bindings/preflight/adopt/lookup/phase/release_definitive_conflicts and direct ownedreader_capacity/derive_whole_forecast APIs",
+    "Same16phases/1600accept/4000offers/2400terminal/640reader640000warm+640first/1200fresh+24warm initialcalls; countallactualadditionalassertion/state/oracle/controlcalls",
+    "Singleactualrawcapture with reconstructible refs; phasefinalprovisionalbodysealed AFTERdrainage/oracle/owneddrain/checkpoint; ownref excludedbody",
+    "ExactnativePIDcreation/image/readymarker/clock_kind/frequency/anchor/pacing/nativeownedclosure; no logicaldummyholds orsyntheticPASS",
+    "Pure closeddata/sourceprofiles; no arbitrary formula callbacks, semanticdecoderfork, Rust fork oracceptedfocusedcore edits",
+    "Source-ownedconcreteplatform optin only after hash/ABI/review/runtime GO; missingunimplementeddependencies refuse before corpus writes"
+  ],
+  "rules": [
+    "Newprospectiveprivateharness/controllerrepairversiononly; oldfrozena5sourceandallfailurespreservedinGit. No Rust/core/publicformat edits.",
+    "BeforeEVERYwriteverifythisimmutablebudgetSHA andindividual/group/wholecaps, noextras/pycache/symlink/reparse/hardlinks.",
+    "No runtime/build/cache/fixture/archive/delete/engineauthority untilfreshfullsource-reviewandexplicitphaseadmission.",
+    "Rereadactualsame-bufferproducerliteralcontract; no fabricatedprooffields/defaultTrue orscope/denominatorchanges."
+  ],
+  "claim042_sha256": "59d21fa39a24e2cf4f9464265135d6604121285ad18691d1f776ba99c93daceb",
+  "negative_freeze_sha256": "959e9836aa04325df146e6ee305b9b72ca66326d467bb9208804bdfeb43aca8a",
+  "required_repairs": "R1representationmetadata/actualoracles,R2familyclockkind,R3historywrapper,R4selected18fieldfinalbodyandcaseindex,R5source-derivedP4indexwidth",
+  "max_bytes": 90112,
+  "max_files": 1,
+  "caps": {
+    "runtime_contracts.py": 90112
+  },
+  "claim046_sha256": "6bd67f146b344cdb8bd501a261df795e946a49b557d5a5d5227665c8e8e581ba",
+  "engine_commit_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "historical_review_watchdog": "2026-10-21T04:10:14Z MISSED, olda5/R2preserved; thisnewprospectiverepairdoesnotretroqualify",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z",
+  "issued": "2026-10-21T05:03:27.013341+00:00"
+}

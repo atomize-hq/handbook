@@ -1,0 +1,328 @@
+{
+  "status": "REMEDIATE_SOURCE_ONLY",
+  "runtime_go": false,
+  "source_binding": {
+    "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\shared-runtime-contracts\\runtime_contracts.py",
+    "bytes": 65394,
+    "sha256": "959e9836aa04325df146e6ee305b9b72ca66326d467bb9208804bdfeb43aca8a"
+  },
+  "initial_assignment_hash_not_reviewed": "92bc601b859b908f405d425db86a76940bb403d1ced46c7802b0336b8c6e12c7",
+  "explicit_meta_retarget": true,
+  "structured_standard": "PROPOSED_READ_MAIN_OWNER_SOURCE",
+  "full_runtime_source_read": true,
+  "runtime_source_lines": 1124,
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "P2 Required",
+      "title": "Return the complete 027 lookup representation shape",
+      "source_lines": [
+        491,
+        521
+      ],
+      "consumer": "history_lane.py:validate_lookup_evidence",
+      "reason": "lookup appends only format/fresh/warm; exact027 requires source_pin,binary_sha256,actual_H,full_oracle_sha256 as well. A real completed initial lookup fails closed-shape before phases. Obtain actual per-format complete oracle receipts; do not invent hashes."
+    },
+    {
+      "id": "R2",
+      "priority": "P2 Required",
+      "title": "Match the actual paced input, ready and anchor ABI",
+      "source_lines": [
+        672,
+        770,
+        799
+      ],
+      "consumer": "accepted current packing.rs Pace/PaceAnchor/paced_probe",
+      "reason": "Pace requires family; PaceAnchor requires clock_kind; current ready includes clock_kind/family. _pace_fields omits family, anchor omits clock_kind, closed _ready rejects those emitted keys. Bind f05-selected and windows-qpc from the actual reviewed ABI and validate full captured physical tuple. Original4434 manifest was read; current accepted source hash differs and is separately bound."
+    },
+    {
+      "id": "R3",
+      "priority": "P2 Required",
+      "title": "Reconcile the closed runtime wrapper with the 035 flat binding contract",
+      "source_lines": [
+        299,
+        310,
+        708
+      ],
+      "consumer": "long_source_profiles.py:939,950,1058,1071",
+      "reason": "derive_whole_forecast passes closed BINDING_KEYS wrapper to035 derive_history_forecast; _derive_history_forecast reads bindings[source_pin], absent from that wrapper. No closed036 input can supply the flat field. Select one source-owned typed three-argument ABI consistently for whole and phase profiles; no arbitrary callbacks."
+    },
+    {
+      "id": "R4",
+      "priority": "P2 Required",
+      "title": "Seal a final body consumable by the existing post-exit finalizer",
+      "source_lines": [
+        1039,
+        1081,
+        1106
+      ],
+      "consumer": "phase_finalizer.py:PHASE_BODY_KEYS,_phase_windows439",
+      "reason": "036 writes phase/runtime_sha256/guard_sha256/finalizer_sha256/post_case shape, while035 requires phase_id,plan_sha256,budget_sha256,outer_run_id,source_profile_sha256,summary and three top-level closure/checkpoint refs. Exact key-set check rejects every036 body; external index shape also differs. Produce the actual final reference body after all attachments and case closure, keep its own hash external, and validate external index identity rather than synthesizing final PASS."
+    },
+    {
+      "id": "R5",
+      "priority": "P2 Required",
+      "title": "Admit the real phase call-index width before publishers write",
+      "source_lines": [
+        968,
+        979
+      ],
+      "consumer": "long_source_profiles.py:1078 call_index_record_bytes=16384",
+      "reason": "finish writes all native call raw_refs plus40reader records in one bounded record. Every P4 phase has400 mandatory publish refs: their SHA strings alone occupy25600ASCII bytes, already exceeding16384 before all remaining reference/reader/maintenance fields. Current preflight checks only that width is an integer. Derive the actual source-owned width or stream references and include every sink in the whole prewrite forecast."
+    }
+  ],
+  "bindings": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\shared-runtime-contracts\\runtime_contracts.py",
+      "bytes": 65394,
+      "sha256": "959e9836aa04325df146e6ee305b9b72ca66326d467bb9208804bdfeb43aca8a"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\admission\\shared-runtime-contracts-source-budget-036.json",
+      "bytes": 1943,
+      "sha256": "e3e449d27c773ab79c853f59f0cbb33084a45ed62da268998155c9ebdd28e4fb"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\history_lane.py",
+      "bytes": 54942,
+      "sha256": "ca13492950a59884347aa92cfa4f889b7ce384eeda091a8a712cef92ee5f5df9"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\qualification-profiles-review\\long_source_profiles.py",
+      "bytes": 60286,
+      "sha256": "14b4c434c44d77fee1bb2e8d68dabf62b1779c0e84c6ad761515282db6d926d3"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\qualification-profiles-review\\phase_finalizer.py",
+      "bytes": 41293,
+      "sha256": "8cca3a66468bdf2fb46ec71bec47bf59a3992ba4ced28ce45c8a099da2657c6f"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\cp4-paced-review\\source-freeze-paced.json",
+      "bytes": 12601,
+      "sha256": "4434afbb3b5a4725f3d609001da93d9a4b55978bde3f7ce5cc148ab47caf2c4c"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\packing.rs",
+      "bytes": 93068,
+      "sha256": "ce56c21764155b5e2d8fcef483dfdab847160c4aa0a53db8bb8baa9b1915f794"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\lifetime.rs",
+      "bytes": 47764,
+      "sha256": "3172ba1b1e78d048c2eb168b02ca524b4d3979abaa6528aaebb149a8a2c3b824"
+    }
+  ],
+  "actions": {
+    "private_imports": 0,
+    "compilations": 0,
+    "source_edits": 0,
+    "controls": 0,
+    "native_runs": 0,
+    "engine_runs": 0,
+    "Cargo_builds": 0,
+    "Git_commands": 0,
+    "indexing": 0,
+    "delegation": 0
+  },
+  "limitation": "static cross-module review; no runtime/control execution; unavailable platform ports are dependencies, not fabricated implementation proofs",
+  "meta_prewrite_1": {
+    "utc": "2026-10-21T03:23:35.158588+00:00",
+    "membership_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+    "bytes": 8989917,
+    "files": 1078,
+    "groups": {
+      "P-all": {
+        "bytes": 6240322,
+        "files": 760
+      },
+      "Landing-root:C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20": {
+        "bytes": 34805,
+        "files": 9
+      },
+      "Landing-root:C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution": {
+        "bytes": 38471,
+        "files": 6
+      },
+      "Landing:admission": {
+        "bytes": 114885,
+        "files": 34
+      },
+      "Landing:admission-claims": {
+        "bytes": 402165,
+        "files": 103
+      },
+      "Landing:native-macos": {
+        "bytes": 520350,
+        "files": 10
+      },
+      "Landing:reviews": {
+        "bytes": 851295,
+        "files": 89
+      },
+      "Landing:final-protocol": {
+        "bytes": 225383,
+        "files": 11
+      },
+      "Landing:windows-matrix": {
+        "bytes": 299353,
+        "files": 32
+      },
+      "Landing:windows-cadence": {
+        "bytes": 59673,
+        "files": 4
+      },
+      "promoted20": {
+        "bytes": 203215,
+        "files": 20
+      }
+    },
+    "report_pair_cap_bytes": 24576,
+    "future_reserve_bytes": 256000,
+    "projected_bytes": 9270493,
+    "cap_bytes": 10485760,
+    "credit_bytes": 0
+  },
+  "meta_prewrite_2": {
+    "utc": "2026-10-21T03:23:35.386175+00:00",
+    "membership_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+    "bytes": 8996649,
+    "files": 1079,
+    "groups": {
+      "P-all": {
+        "bytes": 6247054,
+        "files": 761
+      },
+      "Landing-root:C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20": {
+        "bytes": 34805,
+        "files": 9
+      },
+      "Landing-root:C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution": {
+        "bytes": 38471,
+        "files": 6
+      },
+      "Landing:admission": {
+        "bytes": 114885,
+        "files": 34
+      },
+      "Landing:admission-claims": {
+        "bytes": 402165,
+        "files": 103
+      },
+      "Landing:native-macos": {
+        "bytes": 520350,
+        "files": 10
+      },
+      "Landing:reviews": {
+        "bytes": 851295,
+        "files": 89
+      },
+      "Landing:final-protocol": {
+        "bytes": 225383,
+        "files": 11
+      },
+      "Landing:windows-matrix": {
+        "bytes": 299353,
+        "files": 32
+      },
+      "Landing:windows-cadence": {
+        "bytes": 59673,
+        "files": 4
+      },
+      "promoted20": {
+        "bytes": 203215,
+        "files": 20
+      }
+    },
+    "report_pair_cap_bytes": 24576,
+    "future_reserve_bytes": 256000,
+    "projected_bytes": 9277225,
+    "cap_bytes": 10485760,
+    "credit_bytes": 0
+  },
+  "final_source_sha256": "959e9836aa04325df146e6ee305b9b72ca66326d467bb9208804bdfeb43aca8a",
+  "source_freeze_released_to_meta": true,
+  "R1_re_review": {
+    "source_binding": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\shared-runtime-contracts\\runtime_contracts.py",
+      "bytes": 76873,
+      "sha256": "9be1a22be429f5a1a161dad3ceb5b2a5fa35949ab78ca46d8feaf74750fb225f"
+    },
+    "status": "REMEDIATE_SOURCE_ONLY",
+    "prior_repairs": {
+      "R1": "fixed",
+      "R2": "fixed",
+      "R3": "fixed_in_current035",
+      "R4": "fixed_against_current18field_finalizer",
+      "R5": "width_fixed_geometry_fields_missing"
+    },
+    "findings": [
+      {
+        "id": "R1-A",
+        "priority": "P2 Required",
+        "function": "HistoryRunner.preflight/_case_call_index",
+        "reason": "035 history_phase_profile missingcase_index_scope/max_calls requiredbyconsumer"
+      },
+      {
+        "id": "R1-B",
+        "priority": "P2 Required",
+        "function": "Phase.finish/seal_final_provisional",
+        "reason": "control boundary_cleanup_calls/final_unprotected_backlog None rejectedby027validator"
+      }
+    ],
+    "inputs": [
+      {
+        "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\admission\\shared-runtime-contracts-source-budget-042.json",
+        "bytes": 2307,
+        "sha256": "d84b317a83d722be89c04067a758ba8ecf09a9c9b96ca40d80b803e8d59647ee"
+      },
+      {
+        "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\long_source_profiles.py",
+        "bytes": 63404,
+        "sha256": "dfcd23dc8d61882b7112f1089bfd220ff0f6de77130ad960b415d47c20574ff6"
+      },
+      {
+        "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\phase_finalizer.py",
+        "bytes": 64016,
+        "sha256": "ae05ec070100cb7ec8163a9559f8af20f749ca6ee6a65a9320ee8db98080b106"
+      },
+      {
+        "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\history_lane.py",
+        "bytes": 54942,
+        "sha256": "ca13492950a59884347aa92cfa4f889b7ce384eeda091a8a712cef92ee5f5df9"
+      },
+      {
+        "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\transfers\\runtime-contracts-negative-959e.json.gz",
+        "bytes": 26244,
+        "sha256": "e4baba7df5eb1a83074d2d032d77c6f69b69f7d3e2927e284fb965d3492e08b4"
+      }
+    ],
+    "prewrite_1": {
+      "utc": "2026-10-21T04:06:37.734768+00:00",
+      "actual_bytes": 9611771,
+      "files": 1130,
+      "full_pair_reserved": 24576,
+      "future_reserved": 256000,
+      "projected_bytes": 9892347,
+      "cap_bytes": 10485760,
+      "membership_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+      "credit": 0
+    },
+    "full_source_read": true,
+    "runtime_go": false,
+    "no_execution_or_source_edits": true,
+    "prewrite_2": {
+      "utc": "2026-10-21T04:06:37.993758+00:00",
+      "actual_bytes": 9614878,
+      "files": 1130,
+      "full_pair_reserved": 24576,
+      "future_reserved": 256000,
+      "projected_bytes": 9895454,
+      "cap_bytes": 10485760,
+      "membership_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+      "credit": 0
+    },
+    "final_source_sha256": "9be1a22be429f5a1a161dad3ceb5b2a5fa35949ab78ca46d8feaf74750fb225f",
+    "source_freeze_released_to_meta": true
+  }
+}

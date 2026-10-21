@@ -1,0 +1,38 @@
+{
+  "kind": "independent-native-keeper",
+  "nonce": "bfb6580318aaf51f09fdc9d1e8ad93f2",
+  "identity": {
+    "pid_requested": 70556,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 70556,
+    "ppid": 70555,
+    "uid": 501,
+    "pgid": 70556,
+    "state": 2,
+    "start": [
+      1792531306,
+      4627
+    ]
+  },
+  "fixed_cutoff_epoch": 1792531306.291998,
+  "local_deadline_monotonic": 3219768.30414325,
+  "token_received": false,
+  "state": "CLOSED_AFTER_CENSOR",
+  "reason": "fixed-cutoff",
+  "events": [
+    {
+      "notify_parent": {
+        "pid": 70555,
+        "start": [
+          1792531305,
+          942321
+        ],
+        "signal": 30,
+        "sent": true,
+        "errno": 0
+      }
+    }
+  ]
+}

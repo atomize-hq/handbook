@@ -1,0 +1,183 @@
+{
+  "kind": "native-control-preparation-census",
+  "utc": "2026-10-20T20:29:03.119522+00:00",
+  "retained_roots": [
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019",
+      "logical_bytes": 260604163,
+      "allocated_bytes": 271814656,
+      "files": 4606,
+      "directories": 858,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019",
+      "logical_bytes": 449300755,
+      "allocated_bytes": 470208512,
+      "files": 20445,
+      "directories": 7511,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/file-native-q-macos-20261019",
+      "logical_bytes": 206414667,
+      "allocated_bytes": 217174016,
+      "files": 8466,
+      "directories": 4348,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/file-native-q-macos-20261019-admission.json",
+      "logical_bytes": 3979,
+      "allocated_bytes": 4096,
+      "files": 1,
+      "directories": 0,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/file-native-prerequisite-macos-20261018-source",
+      "logical_bytes": 150224451,
+      "allocated_bytes": 160022528,
+      "files": 3952,
+      "directories": 961,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/file-native-incremental-macos-20261018",
+      "logical_bytes": 2450424153,
+      "allocated_bytes": 2608316416,
+      "files": 71418,
+      "directories": 19232,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/file-native-prerequisite-macos-20261018",
+      "logical_bytes": 1287637311,
+      "allocated_bytes": 1452539904,
+      "files": 117676,
+      "directories": 45273,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/docs/research/file-native-engine-followup-2026-10-17",
+      "logical_bytes": 25705615,
+      "allocated_bytes": 26853376,
+      "files": 404,
+      "directories": 16,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/docs/research/file-native-publication-experiment-2026-10-17",
+      "logical_bytes": 3132716,
+      "allocated_bytes": 3297280,
+      "files": 60,
+      "directories": 3,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/sw17-native-macos-env-20261018.ziJ037",
+      "logical_bytes": 518057,
+      "allocated_bytes": 815104,
+      "files": 88,
+      "directories": 1,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/sw17-native-macos-env-20261018.ziJ037.tar.gz",
+      "logical_bytes": 145933,
+      "allocated_bytes": 147456,
+      "files": 1,
+      "directories": 0,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/file-native-p-macos-20261020",
+      "logical_bytes": 235928344,
+      "allocated_bytes": 241590272,
+      "files": 18177,
+      "directories": 9261,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/sw17-authority-transfer-20261018.VvggVC",
+      "logical_bytes": 10156,
+      "allocated_bytes": 20480,
+      "files": 5,
+      "directories": 1,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/sw17-authority-transfer-fresh-20261018.z40IVW",
+      "logical_bytes": 614892,
+      "allocated_bytes": 655360,
+      "files": 21,
+      "directories": 12,
+      "errors": [],
+      "matches_prior_logical_bytes_files": true
+    }
+  ],
+  "all_prior_logical_size_counts_match": true,
+  "checkouts": [
+    {
+      "path": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook",
+      "head": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+      "clean": true,
+      "same_head_as_prior": true
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook",
+      "head": "82520a70efd481cf72de33219c69967b13600f1f",
+      "clean": true,
+      "same_head_as_prior": true
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook",
+      "head": "faa9e9d03886d680a65f3cea022479a4c4a1ecab",
+      "clean": true,
+      "same_head_as_prior": true
+    }
+  ],
+  "old_preflight_report_bindings": [
+    {
+      "path": "/private/tmp/file-native-online-macos-preflight-20261020T1955Z/attribution-addendum.json",
+      "bytes": 9736,
+      "sha256": "d8b1d5eca346f7a1a2168d2f3bd8c4a8fad8f996672074df57b9928a5be2a318"
+    },
+    {
+      "path": "/private/tmp/file-native-online-macos-preflight-20261020T1955Z/readiness-44GiB-20261020.json",
+      "bytes": 6731,
+      "sha256": "90fb41e0a5f118cb518afe7d8eae9cccc8ca01b39020cc5413bc07ce272ff6cd"
+    },
+    {
+      "path": "/private/tmp/file-native-online-macos-preflight-20261020T1955Z/report.json",
+      "bytes": 18320,
+      "sha256": "967f3c92d127f730148c1321a8ce678cccbc646f8fc15360ba582d72aaf3ed26"
+    }
+  ],
+  "current_new_runtime": {
+    "logical_bytes": 303167,
+    "allocated_bytes": 344064,
+    "files": 17,
+    "directories": 11,
+    "errors": []
+  },
+  "free_bytes": 167660478464,
+  "free_floor_bytes": 21474836480,
+  "status": "PREREQUISITE_ONLY_GUARD_UNIMPLEMENTED_SOURCE_PIN_PENDING",
+  "engine_build_corpus_runs": false,
+  "no_old_mutation_by_worker": true,
+  "full_content_identity_inferred": false
+}

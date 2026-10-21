@@ -1,0 +1,171 @@
+{
+  "kind": "native-bridge-v31-source-only-review-proposal",
+  "status": "PARENT_REVIEW_REQUIRED_NO_NEW_LIVE_CONTROLS",
+  "qualification": "v30 remains transport/role-output candidate only; not final capsule bridge",
+  "immutable_baselines": {
+    "guard_v20.py": "c33fa117667de50c9010e27830a1ec63019deb7186d4a047e439bda04530cfb4",
+    "monitor_v20.py": "7b3f3fd0c79ddb3fd4115c22c0b17c1d7914ce2aca0aff54f16fcd4587bf52a7",
+    "keeper_v20.py": "5a96e449f32f971dbd57f2ca62cdc194920858ae9708d5ecd6bec25e19aa8978",
+    "admission_v20.py": "aaf37aa66d486805a5fed459ba632d39bc65749d67ee153bc92a575b69410fe3",
+    "role_driver_v23.py": "f79bc1737b0ff0ba4fff4e4db4e15ffb2acce82cd88cf79a81e66a3c516ffa98",
+    "role_driver_v29.py": "ad855d5d8c96eac726d9f649b3c014f563dd45fc07e7ab3514e10e3c43af2cde",
+    "capsule_adapter_v30.py": "e93cf4914435338e11b1d259bc8f7e4ae4f18d8e8b506e9b21e879fbd5ce5fad",
+    "native-capsule-adapter-delta-v30.tar.gz": "bb00c4b5fe81474591446e70c892c005e2cc8ffb3f17ef5ec483b8a84ae25de7"
+  },
+  "new_source": {
+    "native_start_gate_v31.py": {
+      "bytes": 3409,
+      "sha256": "ee4a805ced554a3c3c0828db178571e235306e06e1f24abda3fe3d23d1bd224f"
+    },
+    "bash_start_gate_v31.sh": {
+      "bytes": 342,
+      "sha256": "c31ed78b52b0cab268654a835b5106cd51a8e7544290a5cdde05e67afe81d677"
+    },
+    "cache_stream_v31.py": {
+      "bytes": 3874,
+      "sha256": "05ee6a655eafd4aaf3938ff2f6fe503491d90b26028381650e0af395aafaea8c"
+    }
+  },
+  "new_source_not_wired_into_any_launcher": true,
+  "only_verification": "Python compile of the two new Python modules; no import/native probe/child/control execution",
+  "format_selection": "Preserve existing JSON engine request/results and case IDs. This parent-review proposal is a private machine-managed JSON receipt; proposed repository format standard is not adopted and no existing encoding changes.",
+  "impact": "GitNexus private /tmp invoke target not indexed, UNKNOWN. Direct trace: role driver -> new scoped proof -> stdin delivery and optional callback; capsule driver -> per-call row, immutable producer identity; full shared harness/decoder not yet available.",
+  "input_gate": {
+    "ownership": "Popen native binary directly with stdin=PIPE; parent holds the only writer and sends zero bytes/never closes before proof. stdout/stderr remain nonblocking pipes under existing caps.",
+    "native_contract_prerequisite": "Exact reviewed final engine reads request stdin to EOF; prove from final source. A process requiring no stdin cannot use this engine-input gate.",
+    "proof": "Verify created child birth/PPID/PGID/UID, scoped proc_pidpath exact canonical native binary, nonzero native RSS and unchanged identity before/after path/RSS. Check actual parent birth, ancestor_token, sampler health/gap/limits and fixed deadline before callback and again before delivery.",
+    "ordering": [
+      "start samplers and independent helper publisher",
+      "created child identity + actual native path/RSS proof while request withheld",
+      "raw actual-exec-before-stdin event",
+      "optional on_started callback while stdin still withheld, bounded by same owner deadline",
+      "repeat actual-native identity/path/RSS and sampler/ancestor/fence checks",
+      "nonblocking bounded request write integrated with stdout/stderr drain and role health; close stdin only after full bounded payload",
+      "do not stop samplers during output drain/wait/closure"
+    ],
+    "no_unbounded_write": "Register stdin for nonblocking selector write; <=16KiB per writable event. No blocking write of a >pipe-size JSON request. Reject input > bound before any child launch.",
+    "opaque_handle_proposal": "Provisional OwnedCall object stored in a private nonce->(Popen,birth,parent,group,role,producer binding,deadline,case grant) table. Public call_id/started_proof_ref/status only, no PID command API. Wait drains both output streams under owner deadline; interrupt accepts a reviewed case operation enum and verifies exact live native birth/path/group immediately before a scoped signal. Barrier cancellation is a separate case-bound path/nonce operation, not arbitrary filesystem writes. All actions logged with actual observations. Exact names/signals/async lifecycle await frozen shared README.",
+    "no_fake_overlap": "Actual native barrier-ready/overlap/cancel/backlog/death assertions require the frozen core interface and owned handles. Input withholding alone proves startup, not positive overlap or a native lifetime barrier.",
+    "first_positive_not_slow_helper": "Current slow Python controls do not qualify this gate. New proposed control child must read stdin and exit immediately after EOF; no artificial post-input sleep. The actual exec proof must precede the first delivered request byte."
+  },
+  "ordinary_gate": {
+    "proposal": "Spawn actual /bin/bash with bash_start_gate_v31.sh and reviewed ordinary-copy script arguments. Gate script executes only Bash builtins until one exact line is delivered through owned stdin. It does not launch Python or read SELECTED before release; after native Bash path/RSS proof and callback, send NATIVE-ROLE-GO-v31 LF and close stdin; script execs /bin/bash into the reviewed copy script.",
+    "bindings": "Require exact /bin/bash binary binding, gate script hash, ordinary route/copy/manifest hashes and fixed argument paths in the parent phase release/source closure. No unbound -c string or Python preexec proof substitutes for Bash proof.",
+    "selected_once": "Existing ordinary route reads SELECTED or captured selection exactly once, preserves selected publication/generation hashes, performs exact filesystem copy, and never imports engine/pack decoder. Requalify startup gate and actual selected-once route together after review."
+  },
+  "conflict_contract": {
+    "proposed_signature": "Driver.call(root, action, *, code=0, env=None, on_started=None, case_id, forecast_id, producer=\"candidate\", **engine_fields); exact shared signature pending frozen README",
+    "environment_boundary": "Payload contains only root/action/engine_fields. EXP env options and callbacks/forecast/producer metadata are separate call parameters and never serialized into engine payload.",
+    "publish": "For publish with expected code 0, allow native transport exit (0,2) so exit2 can be parsed. Only a strict genuine expected-publication conflict response produces the exact per-call AssertionError(row) expected by shared Harness. Row binds exact input, actual exit2, violations=[], stderr/stdout identities, env, producer source/binary bindings and unique call_id. Other semantic failures remain hard failures; no conversion of technical censors.",
+    "row_isolation": "Construct immutable local row from that invocation result; append under lock; raise AssertionError(that_row) directly. Never read shared calls[-1], mutable last-result, or environment from payload.",
+    "resources": "RSS/time/missing native identity/path/output cap/unknown exit remain RuntimeError/censored, never AssertionError semantic conflicts.",
+    "identity_properties": "Driver.binary_sha256 and exact source binding initialized from reviewed producer entry; every row records same producer identity. Historical producer rows carry actual old binary/source, never candidate identity."
+  },
+  "version_map": {
+    "case_ID_policy": "Preserve all packing52/strict24/recovery24/focus8 IDs and explicit POSIX-only Windows skips. New physical/lifetime/barrier expectations require a version-map entry linked to exact final source, not silently removed assertions.",
+    "event_counts": "267/282 are historical diagnostics only. Remove hardcoded final-event-count assertions; measure all actual events/call IDs and bind them to the required preserved case coverage.",
+    "immediate": "Explicit source-approved force:true/bootstrap:true in new immediate build request; no old small-build policy assumed.",
+    "decoder": "Use exact parent-released shared v5 Python decoder for catalog4/FNPIDX02. Validate its manifest/hash before imports. No native fork, legacy-decoder fallback or oracle substitution.",
+    "pending_inputs": [
+      "Frozen revised shared README and source manifest from parent Matrix execution/final-protocol",
+      "Exact shared v5 decoder bytes/hash and API",
+      "Final source pin and approved changed expectation map",
+      "Exact opaque handle/barrier/overlap/backlog/interrupt/wait interface"
+    ],
+    "pending_is_not_pass": true
+  },
+  "historical_producer_PROPOSAL_ONLY_NO_IMPLEMENTATION": {
+    "choice": "Closed parent-released per-case historical compatibility grant; keep ordinary candidate token.source_pin==candidate binding.source_pin path unchanged. No unbound exe_override. Do not modify accepted v20 core.",
+    "grant_fields": [
+      "kind/version",
+      "grant_id",
+      "parent_run_id",
+      "case_id",
+      "active_candidate_pin",
+      "active_candidate_source_binding_sha256",
+      "active_guard_sha256",
+      "historical_source_pin",
+      "historical_source_manifest_path/sha256",
+      "historical_build_receipt_sha256",
+      "historical_binary_path/sha256",
+      "allowed_operations and exact expected request preimages",
+      "allowed_new_fixture_prefix",
+      "fixed_expiry_no_later_than_functional_cutoff",
+      "parent_released"
+    ],
+    "checks": "Caller supplies expected sealed grant SHA from frozen parent release; verify closed shape, active token/guard/final source binding, exact case/run/operation/request and allowed fixture destination. Independently verify historical source member bytes and actual old build receipt/binary. Historical archives/checkouts remain read-only. Case writes only fresh native fixtures. Recheck native actual-exec path/RSS against historical binary hash, not candidate.",
+    "row_labels": "producer_kind=historical; producer_source_pin=actual-old; producer_binary_sha256=actual-old; active_candidate_pin=final; grant_sha256/case_id distinct. No final-pin relabeling.",
+    "alternative": "Separately guarded old-source phases require their own explicit source-binding/storage proposal. Do not swap stable final package bytes, rebase claims, or silently bypass admission.source_binding.",
+    "parent_approval_required_before_historical_branch_code": true
+  },
+  "growth_forecasts": {
+    "accounting": "Snapshot counts each existing root exactly once. Add only outstanding uncovered growth reservations from a frozen case/action forecast. Hold reservations through operation and finalization; reconcile actual growth with census. Retain every failed generation and partial output; no assumed GC/deletion credit.",
+    "large_B_example": "An existing ~149MiB root is not multiplied by 2 or 3 for prepare/publish. Source-derived new prepared generation bound ~806161 bytes plus exact candidate/metadata/temp/journal bounds is per new operation; four concurrent prepares reserve four such deltas. This number is provisional until the exact final source establishes all changed writers.",
+    "copy_truth": "A case that actually clones an entire149MiB root must reserve that entire new copy plus temporary coexistence. Never substitute the ~806161 generation bound for a real full-root clone.",
+    "forecast_keys": [
+      "case_id",
+      "action/suboperation",
+      "mode/layout/version",
+      "count and bounded graph/record geometry",
+      "new generation/content/pack/index/catalog/control metadata",
+      "simultaneous temporary coexistence",
+      "failed-generation retention",
+      "copy/backup/restore scope",
+      "output/RSS/call-log/closure receipts and file counts"
+    ],
+    "packing": "Derive raw/zstd container, descriptor/index/catalog and old/new coexistence bounds from shared final source and exact eligible inventory; no 3*root generic multiplier or assumed compression ratio.",
+    "evidence": "Choose explicit per-action stdout/stderr/input/RSS/log/result ceilings from source response geometry. Proposed reader stdout64KiB, inspect128KiB, stderr16KiB, RSS128KiB; dump/other large responses need separate approved bounds (possibly1MiB). Full response under a bound or censor, never truncate. Four default4MiB output reservations are removed.",
+    "finalization": "Reserve final gzip trailers/results/manifest space before GO; check prospective total at stage preflight, per-call prewrite and before finalization, and final actual census. Existing retained controls stay charged in native24MiB F12.",
+    "capacity": "Current F08 remains96MiB HOLD. Proposed448/480MiB allocations are unresolved NO_GO; this worker raises no caps. Actual267/282-derived or revised event cadence/identity budgets remain unqualified until real guarded stages."
+  },
+  "cache_stream_source": {
+    "max_historical_archive": 2947998,
+    "chunk_bytes": 65536,
+    "caller_release_required": "Parent-reviewed final pin/lock, exact source/manifest/binary-guard binding and sealed C1 claim plus explicit cache-copy GO; lower-level helper is not an activation route.",
+    "source_behavior": "Exact manifest length/hash, fresh destination only, reserve whole file/count before mkdir/open, no replacement/negative credit, no symlink destination parents, source O_NOFOLLOW/O_NONBLOCK then regular fstat identity, <=64KiB reads/writes, fixed deadline, final source identity/hash/size, retain mismatched/partial output within claim.",
+    "synthetic_mode": "Only ROOT/fixtures, charged F08, no real ROOT/cargo-private creation. Caller serializes copies and holds uncovered reservations through final receipt."
+  },
+  "PROPOSED_FUTURE_CONTROL_PACKET_NOT_EXECUTED": {
+    "approval_gate": "Parent must review new source/diff and separately approve exact later live control source before any new live controls. No real engine/cache/capsule/build GO implied.",
+    "cases": [
+      "Fast stdin-to-EOF fake child: exact native Python image/path/RSS proof and positive sampler row before first byte; immediately exits after response",
+      "Arg-only actual Bash gate: zero SELECTED/helper reads before release, positive actual Bash image/RSS then tiny selected-once fixture route",
+      "Missing/mismatched actual exec path, dead birth, callback failure and blocked stdin/backpressure censor with two positive closure observations",
+      "Per-call publish conflict row and separate env with concurrent two-call row isolation after frozen Driver API arrives",
+      "137123-byte synthetic streaming source/destination with64KiB chunks, exact SHA; smaller ceiling rejects before destination creation; wrong hash retains censored partial"
+    ],
+    "prospective_category_growth": {
+      "F01": {
+        "bytes": 262144,
+        "files": 16
+      },
+      "F04": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F08": {
+        "bytes": 1048576,
+        "files": 32
+      },
+      "F12": {
+        "bytes": 2097152,
+        "files": 96
+      },
+      "F13": {
+        "bytes": 0,
+        "files": 0
+      },
+      "C1": {
+        "bytes": 0,
+        "files": 0
+      }
+    },
+    "role_limits": "reader256MiB/checker2GiB, outer2GiB, aggregate/new helpers768MiB, total<3GiB; explicit identities<=64 for tiny packet, same global token and fixed cutoffs",
+    "no_final_sources_or_unreviewed_handles": true
+  },
+  "no_live_control_no_engine_no_cache_copy_no_build": true,
+  "fixed_t0": "2026-10-20T19:10:14Z",
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_cutoff": "2026-10-21T13:10:14Z",
+  "clock_reset": false
+}

@@ -1,0 +1,78 @@
+# Exact provisional replacement review: cd12ea8 / candidate9
+
+Source: `cd12ea85db214428998f5507ffdf81fc8708ba67`, parent `f6f907943c54936e49123a136a5f0f87993758ab`, branch `codex/file-native-online-cp1-20261020`. Remote head independently matched this pin. Candidate9 is 2,979,328 bytes, SHA-256 `b7b60980beaddc7af01302c05ea3eea8168e46ab3ac3db3d6ead05065ff2a4e7`. All 23 source-binding entries match committed blobs, runtime candidate9-binding and build9-source-before. Review uses committed bytes only.
+
+**Superseding disposition: REMEDIATE for the newly observed legacy-flat-file deletion defect.** Candidate9's new authority/online/stress evidence is preserved below, but native9 found a concrete legacy compatibility failure. The initial source inspection did not catch that path. This is not a final experiment pass or acceptance of any later source. Earlier 62ce963, f6f9079 and early-hazard reports remain preserved. No reviewer engine calls, builds, source/fixture changes, recovery, corpus copies, subagents or new chats. GitNexus remains unavailable/UNKNOWN; manual callsite tracing is the fallback.
+
+## Source disposition
+
+All source paths are under `docs/research/file-native-incremental-engine-experiment-2026-10-18/src/` at cd12ea8.
+
+**F1 — addressed in source.** `packing.rs:272-327,561-564,582-590` preserves the flat bounded aborted-owner closure before journal overwrite, authenticates inherited aborted Work, and selects adoption ownership before releasing journal references. An interrupted handover preserves either the old journal or duplicate journal/selected Work ownership. Candidate9 rem9 repeats the immediate B-death and transitive installed-abort regressions successfully.
+
+**F2 — addressed in source.** Mutable progress is rejected; Work2 is immutable and selected through STORE.plan. Same-generation checkpoint CAS preserves generation/pin/catalog. Every required save uses error propagation; if preparing/persisting/CAS/selecting a checkpoint defers, control exits before dependent pin/container deletion. Drain checkpoints occur before old pins can be removed; completed-job checkpoints occur before replacement containers can disappear (`packing.rs:420-423,460-474`). Hash/closed-shape/root correspondence and selected catalog correspondence remain checked.
+
+**F3 — addressed in source, new directory regressions pending.** Fixed selector/work stages and authenticated recovery replace random untracked progress stages. Recovery requires an exact candidate SHA, closed Work2, same store/birth/ordinal/catalog and transition_parent equal to the current selected plan; malformed ownership refuses. All Work load/save/recovery callsites remain under M. New explicit `packs/<declared-aborted-id>` tasks are queued even for empty directories (`packing.rs:287-295`), accepted by the closed task grammar, and removed with native empty-only remove_dir (`392-397`). Nonempty/sharing-blocked directories retain the task. Thus absence of a last file cannot erase the separate directory obligation; initial empty birth directories also have an owner. Physical-stages empty-directory recovery remains explicit. Current/retained files stay protected, and empty-only directory deletion cannot remove required bytes.
+
+**F4 — addressed in source, explicit claim/collision regression pending.** Checked next ordinal plus nonce, selected birth claims, journal owners and direct path checks precede birth writes (`packing.rs:557-564`). Adoption selects the claim before same-parent reclamation (`315-327`). Same-generation checkpoints preserve claims. A higher-ordinal unselected candidate clears only its own copy; the current selected parent remains authoritative if build/activation fails (`254-266`). Claims and parent tokens have bounded closed decoding.
+
+**Frozen configuration / target owner — addressed in source, negative tests pending.** `packing.rs:335-345` checks the already-selected generation shortcut before validating stale target contents, then requires target version 3, identical store_id/mode/consumer/fallback/navigation_version, journal birth id, exact journal catalog, checked next ordinal and exclusion from abandoned owner ids. The candidate native pin is opened/identity-validated before selection. Changing A to B or changing target ownership must refuse before STORE replacement; actual selected STORE remains recovery authority.
+
+**Immutable physical parent — addressed in source, stale-journal negative test pending.** Initial Work.physical_parent is set from SHA-256 of exact pre-build STORE bytes (`549-552,582`), not inherited from an older Work. Metadata checkpoint updates preserve it. Activation authenticates that field against journal.expected_config (`343-344`), then the bounded in-Q CAS checks actual STORE bytes against that same expected digest (`371-373`). Editing only the mutable journal token cannot rebase a stale candidate that would drop unfinished work. physical_parent and transition_parent are comparison tokens; neither is recursively loaded as a retained ancestor chain.
+
+## Cleanup budget review
+
+`packing::run` starts the cleanup budget before Store open, ownership adoption and recovery (`502-507`). Metrics carries the one shared budget. The work loop stops at 800 charged phases or 35 ms; checkpoints use the remaining allowance up to 1,000 phases/50 ms. Load and save perform bounded metadata checks, and only one known absent parent tombstone plus declared generation stage names are checked during cleanup normalization. Other garbage remains resumable rather than undergoing the prior unbounded native-stat prepass.
+
+Metadata CAS tries Q exclusive and W once. Contention returns an explicit maintenance deferral. Q is released without waiting for W. A pre-selection failure/expiry propagates out before dependent deletions; an expiry after successful selection leaves the new selected root owning old-root garbage for retry. The entry wrapper reports total time/count for successful and deferred calls. Legacy whole-index/location/record work is timed separately, and there is no first-record bypass after index work exhausts the work budget (`433-435`).
+
+This is cooperative checking between declared phases, not preemption of native calls or the retained legacy index decoder. Long-history 50 ms qualification remains explicitly pending CP3 and final evidence. The 128 KiB Work cap bounds serialized metadata and rejects oversize roots before selection; it does not prove every allowed catalog/backlog combination fits. Entry timing is authoritative; nested recovery/metadata phase timings overlap and must not be summed as disjoint costs. Adoption timing is currently inserted only on successful adoption return; early deferrals retain total entry timing but may omit that phase bucket. No per-phase failure attribution beyond the emitted data is claimed.
+
+## Capacity screen
+
+Owner `work-root-forecast.json` hashes the exact retained PZ receipt `a54a04a4fdc8dad85dee038502976886b015ed5b53bb1b8fbcf32dcffe8ca1ad`, all 16 descriptors and prospective 99-character ids. It reports 110,147 bytes with three older pins held, 88,665 with only the oldest held and newer drained, and 96,421 with 64 claims/eight metadata references. Those are serialized-size forecasts, not authenticated runtime roots or a general maximum.
+
+The independent `prospective-work128-geometry.json` projection includes physical_parent, transition_parent, current/older descriptors, jobs/retirement and stage paths. A more conservative initial-jobs-pending + three older held + 64 max-length claims model reaches 128,676 bytes, only 2,396 bytes below 128 KiB before further directory tasks/schema growth. Both calculations support the declared ordinary 16-pack envelope and require explicit backpressure beyond it; neither establishes universal 64-pack/64-generation capacity. Final-schema retained-history/checkpoint cost proof remains open.
+
+## Candidate9 evidence inspected so far
+
+`rem9-results.json` and program report seven focused cases on the exact candidate9 executable: A abort/B reservation death/C selection; transitive installed-plan abort; ten byte/hash/file/directory-count-stable idle cleanup/status calls with zero physical/work CAS samples; malformed completed-stage refusal with owner bytes preserved; fixed selector write death; repeated progress-plan deaths with plan counts [3,3,3] then drain; STORE-replace empty activation-directory recovery. The raw file has 55 events and every event binds candidate9's SHA. These repeat earlier regressions at the new pin; none is relabeled from candidate8.
+
+Completed dedicated cleanup calls in this small run reached at most 33,197,200 ns entry-inclusive and 201 charged phases. This does not demonstrate deadline contention or long index behavior. rem9 guard exits 0 with no censor/errors; sampled peak RSS 26,460,160 bytes, maximum sample interval 47 ms and two intervals over 40 ms. Those sampling gaps remain visible.
+
+Build9 reports locked/offline release build and four small tests passing, one heavy cache test skipped. Supplied peak RSS is 430,325,760 bytes; exact receipt timings/sampling and artifact hashes belong in the companion evidence file. No full native or resource-envelope pass is inferred.
+
+## Proof still required before a bounded acceptance decision
+
+- Actual latest-pin frozen-mode/config, target-id/ordinal/catalog/native-pin and immutable-parent/stale-journal refusals with unchanged STORE, plus already-selected stale-target recovery.
+- Empty aborted pack directory before first file and death after last file unlink/before directory removal; full file and directory census after retry/successor.
+- Budget expiry and real Q/W contention: no deletion after an unselected required checkpoint, prompt explicit defer, later safe drainage, total entry timing/counts.
+- Valid forged foreign-owner and same-generation wrong-parent stage refusals, old mutable-progress refusal, and claim retention/collision/overflow evidence.
+- Latest-pin held reader beyond 15 seconds across two successors, new readers/publishers, release then actual old-instance drainage.
+- Required independent full oracles and all remaining small/native/stress/backup/restore gates. Rem9 expressly labels those pending.
+
+The source still deliberately uses frozen/nonincremental cohort discovery and the legacy whole-index reader outside Q/W. The fully causal newly-unmapped-tail capture gap remains CP2-pending; rolling/deferred discovery, bounded segments and paged lookup remain required. No CP2 release, automatic merge, public format freeze, allocation change or clock reset is granted by this review.
+
+## Superseding runtime review
+
+### P2 Required: flat legacy containers are misclassified as directories
+
+`packing.rs:395` tests only `name.starts_with("packs/") && name.split('/').count()==2`. Legitimate legacy `packs/<hash>.pack` and `packs/<hash>.idx` paths satisfy it, so `try_remove` calls remove_dir instead of file unlink. Native9's legacy STORE2 reader correctly delayed conversion; after STORE3 selection, resume/cleanup exited 2 with Windows OS267, "The directory name is invalid." Raw native9 events/stderr retain the exact candidate9 SHA and failure. Ownership remains retained; no data loss was observed.
+
+Restrict the directory branch to the same extension-free safe birth-id grammar used for explicit directory tasks; legacy flat files must use the file branch. Re-run actual old-reader conversion, flat pack/index cleanup and new empty aborted-directory crash windows on the replacement pin. Candidate10 is expected; cd12ea8 remains REMEDIATE until that exact replacement is reviewed. This defect was discovered by the native test after the initial static review and is acknowledged here plainly.
+
+### Candidate9 focused proof now independently inspected
+
+Authority9: 39 raw events, all candidate9-bound; 30 normal exits, four intended integrity refusals and five injected deaths. Recorded program checks unchanged all-file hashes on mode flip, authenticated other-owner target and missing-pin refusals; an already-owned stale candidate cannot be rebased by editing expected_config after selected Work advances. A real held W produces deferred:work-writer at 10,477,700 ns/143 phases (15 ms spawned observation); a new ordinary resolve succeeds while W remains held. Both aborted empty-pack-directory crash windows are real checkpoint injections, including death after the last file unlink; cleanup removes directories, preserves the birth claim, and ten later idle calls preserve bytes/census/zero CAS. Guard exits 0, no errors/censor; sampled peak RSS 30,560,256 bytes, max sample interval 32 ms, no over-40 ms intervals.
+
+Online9: 24 raw events, all candidate9-bound; 19 normal exits, four intended integrity refusals, one injected death. A reader is held 16.109 seconds across two actual successors with holds 584,700 and 676,700 ns, two publishers and new accepted reads; ten old container files remain while held and are absent after release. Immutable selected-Work mutation refuses by digest; unexpected mutable progress refuses. Foreign-store selector and same-birth wrong transition_parent refuse with all files unchanged. Guard exits 0, no errors/censor; sampled peak RSS 30,605,312 bytes, max sample interval 47 ms with nine over-40 ms intervals.
+
+Stress9b: independently parsed 2,034 raw events, all candidate9 SHA, all exit 0, no event violations. Grouping each build with its succeeding completed cleanup establishes **1,000 distinct generation IDs and exact ordinals 1 through 1,000**. This matters because one build's post-selection cleanup deferred and its response has no generation field. The 1,000 physical activation holds exactly match the result array: p50 536,800 ns, p99 929,300 ns, max 2,089,000 ns. The separate 2,999 metadata-CAS holds also match raw events: p50 503,300 ns, p99 1,763,300 ns, max 5,215,100 ns. Metadata changes are not counted as physical activations.
+
+Every 50th stress generation records 54 files, 42 directories, one plan, one pin, one pack-instance directory; max 280,803 bytes. Ten idle calls remain byte-identical with zero CAS. Independent read-only census of the final stress fixture matches 54/42/280,803 and its selected Work hash; the other three quiescent authority/directory/online roots also hash-match their STORE-selected Work and have no older generations/jobs/retirement rows. Each has one absent predecessor tombstone; it is not a live plan chain.
+
+One of 2,010 timed stress cleanup-stage batches reports **50,077,000 ns/145 phases** with explicit deferred:cleanup-entry-budget, followed by safe completion. Do not report that every batch was <=50 ms. It is a visible 77 microsecond cooperative overshoot. Authority's 17 timed batches max at 29.6256 ms/265 phases; online's six at 34.223 ms/238. These are small fixtures, not final long-index deadline qualification.
+
+Stress guard exits 0, no errors/censor; sampled peak RSS 27,299,840 bytes. Internal stress clock (~83.157 s), guard stage (86.416 s), and guard total including setup/token wait (119.721 s) are different clocks. Sampling max is 63 ms, with 30 intervals over 40 ms. The invalid N2 initial stress attempt remains a preserved refusal; stress9b uses valid N10 and is a separate run.
+
+Full independent oracles for the four quiescent roots were queued, not yet reviewed here. Legacy/native sharing, reader/maintainer death, contenders/cancel/overflow and additional protected-owner tests remain pending, as do full final native/matrix/resource gates. Source/qualified stress results must stay attached to cd12ea8 and cannot be rebound to candidate10 or a later CP3 pin.

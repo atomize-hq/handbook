@@ -1,0 +1,17 @@
+{
+  "claim_id": "44GiB-CENTRAL-040-BOUNDED-GUARD80KiB",
+  "utc": "2026-10-21T03:10:17.932708+00:00",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T031017Z.json",
+      "bytes": 3510,
+      "sha256": "13452d906ce2a25f76af800f3a194934896b3e70db18ff1a4f4c424f09dd4a06"
+    },
+    {
+      "file": "claim-20261021T031017Z.md",
+      "bytes": 437,
+      "sha256": "37fa72992a1c188fddcc7373fad6ed03ef1a4af6ed65650b504bd45df1c41c4e"
+    }
+  ]
+}

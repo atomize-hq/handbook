@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-014-REVERSE-UNUSED013-12MiB",
+  "utc": "2026-10-20T22:36:48.656399+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T223648Z.json",
+      "bytes": 8096,
+      "sha256": "992e41ef6aa6aeec05532663e531e08d158ef22550ec61dec5d17ac1ede03ff4"
+    },
+    {
+      "file": "claim-20261020T223648Z.md",
+      "bytes": 1935,
+      "sha256": "0d11b427eae031ffdaef1c2fc51203bc1bc7928433a8b08e295b3f58f79e756f"
+    }
+  ],
+  "status": "AUTHORIZED_UNUSED_FORECAST_REVERSAL__NO_ACTUAL_DATA_RECLAIM",
+  "sealed": true
+}

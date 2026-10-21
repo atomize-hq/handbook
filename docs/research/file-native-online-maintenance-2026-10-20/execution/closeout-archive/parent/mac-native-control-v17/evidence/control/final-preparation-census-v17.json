@@ -1,0 +1,204 @@
+{
+  "utc": "2026-10-20T21:30:59.933533+00:00",
+  "retained_roots": [
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019",
+      "logical_bytes": 260604163,
+      "files": 4606,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019",
+      "logical_bytes": 449300755,
+      "files": 20445,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/file-native-q-macos-20261019",
+      "logical_bytes": 206414667,
+      "files": 8466,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/file-native-q-macos-20261019-admission.json",
+      "logical_bytes": 3979,
+      "files": 1,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/file-native-prerequisite-macos-20261018-source",
+      "logical_bytes": 150224451,
+      "files": 3952,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/file-native-incremental-macos-20261018",
+      "logical_bytes": 2450424153,
+      "files": 71418,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/file-native-prerequisite-macos-20261018",
+      "logical_bytes": 1287637311,
+      "files": 117676,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/docs/research/file-native-engine-followup-2026-10-17",
+      "logical_bytes": 25705615,
+      "files": 404,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/docs/research/file-native-publication-experiment-2026-10-17",
+      "logical_bytes": 3132716,
+      "files": 60,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/sw17-native-macos-env-20261018.ziJ037",
+      "logical_bytes": 518057,
+      "files": 88,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/sw17-native-macos-env-20261018.ziJ037.tar.gz",
+      "logical_bytes": 145933,
+      "files": 1,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/file-native-p-macos-20261020",
+      "logical_bytes": 235928344,
+      "files": 18177,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/sw17-authority-transfer-20261018.VvggVC",
+      "logical_bytes": 10156,
+      "files": 5,
+      "matches_prior_logical_bytes_files": true
+    },
+    {
+      "root": "/private/tmp/sw17-authority-transfer-fresh-20261018.z40IVW",
+      "logical_bytes": 614892,
+      "files": 21,
+      "matches_prior_logical_bytes_files": true
+    }
+  ],
+  "all_prior_logical_size_counts_match": true,
+  "checkouts": [
+    {
+      "path": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook",
+      "head": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+      "clean": true,
+      "same_head_as_prior": true
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook",
+      "head": "82520a70efd481cf72de33219c69967b13600f1f",
+      "clean": true,
+      "same_head_as_prior": true
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook",
+      "head": "faa9e9d03886d680a65f3cea022479a4c4a1ecab",
+      "clean": true,
+      "same_head_as_prior": true
+    }
+  ],
+  "allocation": {
+    "categories": {
+      "F01": {
+        "logical_bytes": 622895,
+        "allocated_bytes": 729088,
+        "files": 42,
+        "directories": 9,
+        "symlinks": 0
+      },
+      "F04": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "files": 0,
+        "directories": 0,
+        "symlinks": 0
+      },
+      "F08": {
+        "logical_bytes": 24585,
+        "allocated_bytes": 61440,
+        "files": 12,
+        "directories": 1,
+        "symlinks": 0
+      },
+      "F12": {
+        "logical_bytes": 4539351,
+        "allocated_bytes": 5857280,
+        "files": 763,
+        "directories": 165,
+        "symlinks": 0
+      },
+      "F13": {
+        "logical_bytes": 82,
+        "files": 2,
+        "allocated_bytes": null,
+        "shared_components": {
+          "Git": {
+            "logical_bytes": 187972974,
+            "allocated_bytes": 205033472,
+            "files": 5494,
+            "directories": 371,
+            "symlinks": 0,
+            "baseline_logical_bytes": 187972892,
+            "baseline_files": 5492,
+            "positive_bytes": 82,
+            "positive_files": 2
+          },
+          "Cargo": {
+            "logical_bytes": 1859795101,
+            "allocated_bytes": 2063294464,
+            "files": 81747,
+            "directories": 15833,
+            "symlinks": 13,
+            "baseline_logical_bytes": 1859800817,
+            "baseline_files": 81747,
+            "positive_bytes": 0,
+            "positive_files": 0
+          }
+        }
+      }
+    },
+    "free_bytes": 162109640704
+  },
+  "limits": {
+    "F01": {
+      "bytes": 4194304,
+      "files": 1000,
+      "claim": "initial-native-worker-source4MiB-at-authority94734e76"
+    },
+    "F04": {
+      "bytes": 268435456,
+      "files": 5000,
+      "claim": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570"
+    },
+    "F08": {
+      "bytes": 100663296,
+      "files": 30000,
+      "claim": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984"
+    },
+    "F12": {
+      "bytes": 25165824,
+      "files": 10000,
+      "claim": "initial-native-worker-functional-evidence24MiB"
+    },
+    "F13": {
+      "bytes": 4194304,
+      "files": 1500,
+      "claim": "initial-native-worker-combined-positive-shared-growth4MiB"
+    }
+  },
+  "host_fence_present": false,
+  "heavy_token_observed_available": true,
+  "helper_registry": {},
+  "full_content_identity_inferred": false,
+  "no_engine_build_corpus": true
+}

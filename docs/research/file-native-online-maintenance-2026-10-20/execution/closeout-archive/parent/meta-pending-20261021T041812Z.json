@@ -1,0 +1,68 @@
+{
+  "kind": "META10_remaining_forecast_snapshot",
+  "utc": "2026-10-21T04:18:12.094500+00:00",
+  "status": "IMMUTABLE_METADATA_ONLY_NO_CAP_CHANGE",
+  "authority": "META explicit corrected remaining pending447152 plus NEW4096/1 guard qualification withdrawal. Previous generic256000 future is duplicate, not extra authority.",
+  "membership": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\meta-membership-v5.json",
+    "sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+    "cap_bytes": 10485760,
+    "cap_files": 2000,
+    "all_physical_actuals_preserved": true
+  },
+  "fresh_actual_before_this_metadata": {
+    "bytes": 9830920,
+    "files": 1146
+  },
+  "remaining_pending_bytes": {
+    "old_reports": 18033,
+    "source_packets": 124072,
+    "remaining_returns": 229376,
+    "R2_reviews_remaining": 55191,
+    "new_Linux_review_pair": 20480,
+    "new_guard_qualification_withdrawal": 4096
+  },
+  "remaining_pending_total": 451248,
+  "R2_detail": {
+    "guard_unused_within_prior12KiB": 1943,
+    "runtime12KiB_already_included": 12288,
+    "profiles20KiB_already_included": 20480,
+    "Windows20KiB_already_included": 20480
+  },
+  "do_not_add_again": [
+    "obsolete472893 pending",
+    "generic256000 future",
+    "runtime12288 already inside R2remaining55191",
+    "cutoffmanifest38862 already actual",
+    "CP4review19876 already actual, oldreportreserve retained conservatively"
+  ],
+  "verified_consumption": {
+    "packet": {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\transfers\\windows-platform-final-045-source.json.gz",
+      "bytes": 86677,
+      "sha256": "d028a15b182b36c426e7ff3def9a9c567c19befa1dadca82388464c354af8c3b",
+      "remaining_packet_before": 210749,
+      "remaining_packet_after": 124072
+    },
+    "guard_R2": {
+      "refs": [
+        {
+          "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\bounded-guard-review\\R2\\review.md",
+          "bytes": 6850,
+          "sha256": "a71eb557185219709bad0cd0aa87ba82ab428e210fa088dc26309caedce98431"
+        },
+        {
+          "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\bounded-guard-review\\R2\\evidence.json",
+          "bytes": 3495,
+          "sha256": "2edd82026f4fabc6a16b7d69688dc147a2b6d2355e7355ecd0234b43ebfd5173"
+        }
+      ],
+      "bytes": 10345,
+      "R2_before": 65536,
+      "R2_after": 55191
+    }
+  },
+  "rules": "Use fresh full membership actual + remaining pending451248. This snapshot file consumes actual headroom, not oldreportreserve. Any later VERIFIED authorized materialization consumes its matching reservation once; until reconciled, holding it is conservative. No extra generic future reserves. No actual deletion, relabel, expiry or global forecast change.",
+  "new_guard_withdrawal": "4096 bytes/1 metadata file only; prior R2pair preserved. Guard mechanisms source proof does not qualify controller global-PASS contract; native27 remains diagnostic finite-plan only, no engine GO.",
+  "gates": "44GiB hard cap unchanged. No source/code/control/runtime/engine/archive/retirement/Git permission; Context remains absent/unallocated after04:10:14Z cutoff. New immutable snapshot only; old manifests and claims untouched."
+}

@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-033-FIXTURE-RETIREMENT-PERFILE-REDISTRIBUTION",
+  "utc": "2026-10-21T02:09:06.943537+00:00",
+  "status": "SOURCE_PERFILE_REDISTRIBUTION_ONLY__LATEST_PREWRITE_SPEC__NO_ARCHIVE_RUN_DELETE",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T020906Z.json",
+      "bytes": 3773,
+      "sha256": "9ec7ba7517d15e10945a4ce2dcee46d5e1e1d5782efd79f1d2c9c5a4ce9841be"
+    },
+    {
+      "file": "claim-20261021T020906Z.md",
+      "bytes": 635,
+      "sha256": "cd31315e65bedb9a0b858d0b9d01c2b9b3189c40cc81163c91a49e63384611ce"
+    }
+  ]
+}

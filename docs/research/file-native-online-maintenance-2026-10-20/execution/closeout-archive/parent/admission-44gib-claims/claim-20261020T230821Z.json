@@ -1,0 +1,79 @@
+{
+  "kind": "resource-lane-registration-and-integrity-cadence-hold",
+  "claim_id": "44GiB-CENTRAL-017-MATRIX-CADENCE-SOURCE-ONLY",
+  "utc": "2026-10-20T23:08:21.424931+00:00",
+  "status": "SOURCE_ONLY_WITHIN_EXISTING_F01__NO_CONTROLS_OR_QUALIFICATION_GO",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T230350Z.json",
+    "sha256": "040fbc8003c17cb71c6fc79dfbe953208a155709fdd6041a089d852676bd2111"
+  },
+  "meta_steering": {
+    "cp3_source": "f9 abbreviated source reference; full exact pin not supplied in steering, no invented binding",
+    "fresh_review": "REMEDIATE",
+    "open_findings": [
+      "caller read limit checked after decode",
+      "index constructor16MiB allocation not charged",
+      "duplicate full conversion pathname collision",
+      "statistics coverage"
+    ],
+    "scope": "active remediation within existing phase growth48MiB build/32MiB fixtures/6MiB evidence and96MiB total fixture cap; no long/native/fullGO",
+    "reported_actual_bytes": {
+      "build": 200886189,
+      "fixtures": 73812794,
+      "evidence": 44002895
+    },
+    "reported_actuals_are_worker_census_not_independent_new_census": true,
+    "remaining_cap_bytes": {
+      "build": 67549267,
+      "fixtures": 26850502,
+      "evidence": 6328753
+    },
+    "live_budget_sha256": "9c9c491a7c77c5dbd36a9d20afdc6bd421525c882b878511ded33de765a36e30"
+  },
+  "new_source_lane": {
+    "owner_chat": "01a15b8f-0e20-7553-941c-3210d5cb46e6",
+    "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-cadence",
+    "cap_bytes": 65536,
+    "cap_files": 8,
+    "accounting": "nonadditive named subset of existing Matrix F01 source1MiB; existing global file allowance, no new worktree/admin/build/fixture/control allocation",
+    "whole_matrix_source_actual_bytes_excluding_git_pointer": 729859,
+    "whole_matrix_source_regular_files_excluding_git_pointer": 75,
+    "lane_actual_bytes": 0,
+    "lane_actual_files": 0,
+    "whole_source_prospective_after_remaining_lane_bytes": 795395,
+    "source_cap_bytes": 1048576,
+    "prospective_source_slack_bytes": 253181,
+    "byte_fit": true,
+    "scope": "NEW QPC variant minimal source difference and static review only; preserve frozen guard and existing receipts; no controls until separately bounded GO"
+  },
+  "clock_and_qualification": {
+    "local_python": "3.11 reported by META",
+    "old_monotonic_clock": "GetTickCount64 reported15.625ms resolution",
+    "perf_counter_clock": "QPC reported100ns resolution",
+    "past_gaps": "47/63ms may include quantization; preserve original measurements, failures and RSS receipts",
+    "retroactive_qualification": false,
+    "new_frozen_1e4_guard": "UNCHANGED",
+    "new_QPC_variant": "source-only initial; high resolution timestamps alone do not prove actual sample cadence",
+    "final_requirement": "strict actual25Hz RSS sampling on final guarded workloads; measure elapsed intervals with QPC and preserve raw intervals/maxima/violations; no pass from intended sleep rate or average cadence",
+    "forbidden_changes": [
+      "process priority",
+      "system timer resolution",
+      "system settings",
+      "new dependencies"
+    ],
+    "controls_resource_allocation": "NONE; requires source review and explicit bounded control admission later"
+  },
+  "global_allocator": {
+    "new_bytes": 0,
+    "new_regular_files": 0,
+    "whole_applied_forecast_bytes": 47079500149,
+    "central_contingency_bytes": 165140107,
+    "whole_reserved_files": 4792604,
+    "remaining_files": 207396,
+    "CP3_fixture_total_cap_bytes": 100663296,
+    "full_qualification": "CONDITIONAL_NO_GO",
+    "native_long": "NO_GO"
+  },
+  "actions": "read-only Matrix source census and live budget hash; immutable small reports only; no engine/source/guard edits, controls, builds, cachecopies, restore or deletion",
+  "prior_seals_preserved": true
+}

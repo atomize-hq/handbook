@@ -1,0 +1,2680 @@
+{
+  "kind": "44GiB-readonly-F1-F2-source-COW-and-boundary-unit-audit",
+  "claim_id": "44GiB-CENTRAL-016-READONLY-F1-F2-SOURCE-AND-UNIT-MAP",
+  "utc": "2026-10-20T23:03:50.966486+00:00",
+  "status": "READ_ONLY_AUDIT__WHOLE_ROOT_FORECAST_REQUIRED__NO_ALLOCATION_OR_FULL_GO",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T225543Z.json",
+    "bytes": 11785,
+    "sha256": "da8a13b08e75f1051bcd657fb1c9e1d5633b201e66e9670ad31501842126f29b"
+  },
+  "authority": "Meta requested read-only exact F1/F2 and unit/reuse audit. No engine/source/fixture/cache/build changes or runs authorized here.",
+  "gitnexus": "No GitNexus MCP exposed in current tools. Read exploration skill; source trace read-only; no symbol edits, index work or graph-derived blast-radius claim.",
+  "baseline_pin": "7a6ee9db03f5cd2e388129a9019c0d5f274a1844",
+  "semantic_source_equality": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\store.rs",
+      "bytes": 36078,
+      "sha256": "31cafafddede7c2347a1fe85d3f18346972796af9fa8cb6b12c6c531502eb58d",
+      "byte_identical_7a": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\graph.rs",
+      "bytes": 14324,
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+      "byte_identical_7a": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\objects.rs",
+      "bytes": 3551,
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+      "byte_identical_7a": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\projection.rs",
+      "bytes": 27876,
+      "sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6",
+      "byte_identical_7a": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\disk.rs",
+      "bytes": 30973,
+      "sha256": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d",
+      "byte_identical_7a": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\baseline_model.rs",
+      "bytes": 8570,
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+      "byte_identical_7a": true
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\lifetime.rs",
+      "bytes": 15945,
+      "sha256": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+      "byte_identical_7a": true
+    }
+  ],
+  "working_source_snapshot_not_final_pin": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\api.rs",
+      "bytes": 12161,
+      "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\baseline_model.rs",
+      "bytes": 8570,
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\bounds_tests.rs",
+      "bytes": 1001,
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\differential.rs",
+      "bytes": 2661,
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\disk.rs",
+      "bytes": 30973,
+      "sha256": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\graph.rs",
+      "bytes": 14324,
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\io.rs",
+      "bytes": 14405,
+      "sha256": "e3c24f0a9c77e108f8e35f463d5aae598f568a426351eb901e8aa7af90e2d3e0"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\lib.rs",
+      "bytes": 476,
+      "sha256": "fba1eb82cbb6f5400adf283569178750ca7fb75f51a56c8bbd0cadb5abf716ea"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\lifetime.rs",
+      "bytes": 15945,
+      "sha256": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\main.rs",
+      "bytes": 57,
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\navigation.rs",
+      "bytes": 10576,
+      "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\objects.rs",
+      "bytes": 3551,
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\pack.rs",
+      "bytes": 15306,
+      "sha256": "db970681071d639906202091396ad8e95b912c2e0fa4d66d606b656286a9ec8a"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\packing.rs",
+      "bytes": 61425,
+      "sha256": "38b56ec0234569b0c253388c6df9eca1684bd5292ac66d0baf8e6a291d756fcb"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\paged.rs",
+      "bytes": 20932,
+      "sha256": "6cbafeaa7a880e8744e291daa1a077b98879e3e18029b7c3843ddd4a0789eb3f"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\physical_lifetime.rs",
+      "bytes": 23403,
+      "sha256": "bcea0c7e8c8bb3a01933db272dcf10fd04c56c0e9ca9ef978865205b834666ec"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\projection.rs",
+      "bytes": 27876,
+      "sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\rolling.rs",
+      "bytes": 9157,
+      "sha256": "7f2ff7f8266a8d2d7d306051bbd5e12fc039abc3f8ff5b09c1b4993fad14776d"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\store.rs",
+      "bytes": 36078,
+      "sha256": "31cafafddede7c2347a1fe85d3f18346972796af9fa8cb6b12c6c531502eb58d"
+    }
+  ],
+  "evidence_bindings": [
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-remediate.py",
+      "bytes": 7174,
+      "sha256": "28fdd927fc782f7f420eb2141641abcac20ad640f96ff60bf3aee9869e8fcd52"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish.py",
+      "bytes": 3509,
+      "sha256": "05b01ab42bc58d9e035db308714c53f756e6059d67c8e275e05652abf9ea06b7"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish2.py",
+      "bytes": 3627,
+      "sha256": "db92ec1d8cc992d6aef01351931ba2680be576468c26ba72ea25d42cdc869a82"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-remediate-events.jsonl.gz",
+      "bytes": 257950,
+      "sha256": "d383821d95c0242e4e31f389bc69be9826ada3a7ace3901cc2f9e8f7b307a555"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish-events.jsonl.gz",
+      "bytes": 57647,
+      "sha256": "4037d207fa73ab75a06921fc5860ce07f25c629ae1854a716209c076b1244791"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-finish2-events.jsonl.gz",
+      "bytes": 251649,
+      "sha256": "862f5919ad142f8348e1288c8fc9c7c1792a596d288917377b84687e15449d47"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp3-build7.stdout",
+      "bytes": 1277,
+      "sha256": "0b62e0f148a970feea53847a4fc34053727b3d41deede2f9bbf4d7bab8fe8b6b"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp3-build7.json",
+      "bytes": 27038,
+      "sha256": "279ab8e0bb120200cfd902cc3935f6230003be720cf7b0dee93a613ab1e1b196"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp3-build6.stderr",
+      "bytes": 6009,
+      "sha256": "cd10452e0f2312784d618295b876eef0f7fe2757172e2867247c1d0cbb7807c4"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp3-smoke.json",
+      "bytes": 6837,
+      "sha256": "5caca68a3e7472a012767d358b90ef1c61e555232fd283fbcdf3b4ee8c9d93ea"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp3-smoke2.json",
+      "bytes": 7811,
+      "sha256": "7cbe797f1e98440d5dd4047edb1083cd72cbc16694ca66721631d808c7ef7565"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp3-smoke3.json",
+      "bytes": 18321,
+      "sha256": "3c3ca3b5a6552069e63e6c49c7c6da65f9b249fcc2cfd3d4a7568d9925d96da5"
+    }
+  ],
+  "retained_roots": [
+    {
+      "name": "F1-retired",
+      "path": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F1-retired\\disposable\\store",
+      "scope": "PROTECTED_QUIESCENT_READONLY_PRIOR_7a_FIXTURE; not a final-pin execution",
+      "N": 10,
+      "H": 263,
+      "publish_calls": 262,
+      "ops_per_publish": 0,
+      "packet": false,
+      "request_bytes_max": 16,
+      "bytes": 7701780,
+      "regular_files": 1781,
+      "all_regular_file_content_census_digest": "58fa78bdfdb802f8d94213137d421894e8acc68b99385984300c2dcf6e28abb4",
+      "before_after_regular_file_content_equal": true,
+      "roles": {
+        "attempts": {
+          "bytes": 409969,
+          "files": 520
+        },
+        "derived": {
+          "bytes": 2315,
+          "files": 4
+        },
+        "root-controls": {
+          "bytes": 7567,
+          "files": 11
+        },
+        "objects": {
+          "bytes": 6614705,
+          "files": 931
+        },
+        "originals": {
+          "bytes": 126976,
+          "files": 10
+        },
+        "pack-catalogs": {
+          "bytes": 7280,
+          "files": 1
+        },
+        "packs": {
+          "bytes": 357670,
+          "files": 26
+        },
+        "physical-pins": {
+          "bytes": 222,
+          "files": 1
+        },
+        "physical-plans": {
+          "bytes": 8596,
+          "files": 1
+        },
+        "retired": {
+          "bytes": 37189,
+          "files": 262
+        },
+        "view": {
+          "bytes": 129291,
+          "files": 14
+        }
+      },
+      "object_types": {
+        "compact-leaf": 535,
+        "compact-branch": 396
+      },
+      "compact_leaf_bytes_by_role": {
+        "membership": 1274579,
+        "outcomes": 5130734,
+        "other": 7844
+      },
+      "compact_leaf_max_by_role": {
+        "membership": 7109,
+        "outcomes": 28736,
+        "other": 4806
+      },
+      "historical_raw_metrics": {
+        "init": {
+          "calls": 1,
+          "bytes_written_sum": 278263,
+          "bytes_written_max": 278263
+        },
+        "lifecycle": {
+          "calls": 263,
+          "bytes_written_sum": 37279,
+          "bytes_written_max": 143
+        },
+        "resolve": {
+          "calls": 264,
+          "bytes_written_sum": 0,
+          "bytes_written_max": 0
+        },
+        "publish": {
+          "calls": 262,
+          "bytes_written_sum": 8287573,
+          "bytes_written_max": 43480
+        },
+        "packing": {
+          "calls": 15,
+          "bytes_written_sum": 618514,
+          "bytes_written_max": 237326
+        },
+        "point": {
+          "calls": 2,
+          "bytes_written_sum": 0,
+          "bytes_written_max": 0
+        },
+        "audit": {
+          "calls": 1,
+          "bytes_written_sum": 0,
+          "bytes_written_max": 0
+        }
+      },
+      "historical_cumulative_bytes_written": 9221629,
+      "historical_write_sum_is_future_upper": false,
+      "packing_build_observations": [
+        {
+          "input": {
+            "root": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F1-retired\\disposable\\store",
+            "action": "packing",
+            "operation": "build",
+            "codec": "zstd",
+            "force": true,
+            "include_attempts": true,
+            "cleanup": false,
+            "bootstrap": true
+          },
+          "error": null,
+          "bytes_written": 191813,
+          "pack_eligible_records": 395,
+          "pack_eligible_raw_bytes": 216182
+        },
+        {
+          "input": {
+            "root": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F1-retired\\disposable\\store",
+            "action": "packing",
+            "operation": "build",
+            "codec": "zstd",
+            "force": true,
+            "include_attempts": true,
+            "cleanup": false,
+            "discovery_limit": 2
+          },
+          "error": null,
+          "bytes_written": 42453,
+          "pack_eligible_records": 10,
+          "pack_eligible_raw_bytes": 6404
+        },
+        {
+          "input": {
+            "root": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F1-retired\\disposable\\store",
+            "action": "packing",
+            "operation": "build",
+            "codec": "zstd",
+            "force": true,
+            "include_attempts": true,
+            "cleanup": false
+          },
+          "error": null,
+          "bytes_written": 237326,
+          "pack_eligible_records": 390,
+          "pack_eligible_raw_bytes": 212134
+        }
+      ],
+      "source_compact_COW_history_bound": {
+        "scope": "ONLY all immutable membership+outcome COW node writes across accepted history; NOT whole root or CP3 containers/metadata/stages",
+        "ID_width_max": 99,
+        "OutcomeRef_compact_JSON_max": 504,
+        "tree_height_max": 1,
+        "branch_children_max": 8,
+        "membership_per_insert_max": 13009,
+        "outcome_per_insert_max": 38644,
+        "sum_bytes_max": 13533086,
+        "node_files_max": 1572,
+        "root_forecast_status": "FORECAST_REQUIRED"
+      }
+    },
+    {
+      "name": "F2-auto",
+      "path": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F2-auto\\disposable\\store",
+      "scope": "PROTECTED_QUIESCENT_READONLY_PRIOR_7a_FIXTURE; not a final-pin execution",
+      "N": 10,
+      "H": 551,
+      "publish_calls": 550,
+      "ops_per_publish": 0,
+      "packet": false,
+      "request_bytes_max": 15,
+      "bytes": 16544850,
+      "regular_files": 2149,
+      "all_regular_file_content_census_digest": "aa6b26b134eefe3b704fedf0517509b03fa3a2f486a9f30f7294501902f8b4ca",
+      "before_after_regular_file_content_equal": true,
+      "roles": {
+        "derived": {
+          "bytes": 2315,
+          "files": 4
+        },
+        "root-controls": {
+          "bytes": 2254,
+          "files": 11
+        },
+        "objects": {
+          "bytes": 14964121,
+          "files": 2097
+        },
+        "originals": {
+          "bytes": 126976,
+          "files": 10
+        },
+        "pack-catalogs": {
+          "bytes": 2884,
+          "files": 1
+        },
+        "packs": {
+          "bytes": 1312792,
+          "files": 10
+        },
+        "physical-pins": {
+          "bytes": 222,
+          "files": 1
+        },
+        "physical-plans": {
+          "bytes": 3995,
+          "files": 1
+        },
+        "view": {
+          "bytes": 129291,
+          "files": 14
+        }
+      },
+      "object_types": {
+        "compact-leaf": 1125,
+        "compact-branch": 972
+      },
+      "compact_leaf_bytes_by_role": {
+        "membership": 2788982,
+        "outcomes": 11239127,
+        "other": 7844
+      },
+      "compact_leaf_max_by_role": {
+        "membership": 7110,
+        "outcomes": 28621,
+        "other": 4806
+      },
+      "historical_raw_metrics": {
+        "init": {
+          "calls": 1,
+          "bytes_written_sum": 278263,
+          "bytes_written_max": 278263
+        },
+        "lifecycle": {
+          "calls": 1,
+          "bytes_written_sum": 87,
+          "bytes_written_max": 87
+        },
+        "resolve": {
+          "calls": 5,
+          "bytes_written_sum": 0,
+          "bytes_written_max": 0
+        },
+        "packing": {
+          "calls": 49,
+          "bytes_written_sum": 2210137,
+          "bytes_written_max": 1331560
+        },
+        "publish": {
+          "calls": 550,
+          "bytes_written_sum": 18478973,
+          "bytes_written_max": 44932
+        },
+        "audit": {
+          "calls": 1,
+          "bytes_written_sum": 0,
+          "bytes_written_max": 0
+        }
+      },
+      "historical_cumulative_bytes_written": 20967460,
+      "historical_write_sum_is_future_upper": false,
+      "packing_build_observations": [
+        {
+          "input": {
+            "root": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F2-auto\\disposable\\store",
+            "action": "packing",
+            "operation": "build",
+            "codec": "zstd",
+            "include_attempts": true,
+            "cleanup": false,
+            "bootstrap": true
+          },
+          "error": "refused:automatic-compaction-benefit",
+          "bytes_written": 0,
+          "pack_eligible_records": 0,
+          "pack_eligible_raw_bytes": 0
+        },
+        {
+          "input": {
+            "root": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F2-auto\\disposable\\store",
+            "action": "packing",
+            "operation": "build",
+            "codec": "zstd",
+            "include_attempts": true,
+            "cleanup": false,
+            "bootstrap": true
+          },
+          "error": "refused:automatic-compaction-benefit",
+          "bytes_written": 75108,
+          "pack_eligible_records": 0,
+          "pack_eligible_raw_bytes": 0
+        },
+        {
+          "input": {
+            "root": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F2-auto\\disposable\\store",
+            "action": "packing",
+            "operation": "build",
+            "codec": "zstd",
+            "include_attempts": true,
+            "cleanup": false,
+            "bootstrap": true
+          },
+          "error": "refused:automatic-compaction-benefit",
+          "bytes_written": 361818,
+          "pack_eligible_records": 0,
+          "pack_eligible_raw_bytes": 0
+        },
+        {
+          "input": {
+            "root": "C:\\file-native-online-cp1-20261020\\fixtures\\cp2\\F2-auto\\disposable\\store",
+            "action": "packing",
+            "operation": "build",
+            "codec": "zstd",
+            "include_attempts": true,
+            "cleanup": false,
+            "bootstrap": true
+          },
+          "error": null,
+          "bytes_written": 1331560,
+          "pack_eligible_records": 2755,
+          "pack_eligible_raw_bytes": 1764692
+        }
+      ],
+      "source_compact_COW_history_bound": {
+        "scope": "ONLY all immutable membership+outcome COW node writes across accepted history; NOT whole root or CP3 containers/metadata/stages",
+        "ID_width_max": 99,
+        "OutcomeRef_compact_JSON_max": 503,
+        "tree_height_max": 1,
+        "branch_children_max": 17,
+        "membership_per_insert_max": 15115,
+        "outcome_per_insert_max": 40055,
+        "sum_bytes_max": 30343500,
+        "node_files_max": 3300,
+        "root_forecast_status": "FORECAST_REQUIRED"
+      }
+    }
+  ],
+  "bound_derivation": {
+    "entry": "api.rs sets EXP_CODEC=compact; no-op Store::compute leaves graph/projection/changes IDs unchanged atprofile4, packet=false; Store::select_locked inserts prior publication once in each permanent history tree.",
+    "widths": "safe_id is ASCII and len<100 =>99 bytes; request script maxima16/15; SHA256 IDs64; selected digest JSON string66; no escaped string expansion in these fields. io::unique has prefix/u32 PID/u128 nanos/u64 sequence; 99 is existing validated semantic cap, not a shortened nonce assumption.",
+    "OutcomeRef": "serde_json compact field-order known; F1 max504B, F2 max503B, both<4096 indirection threshold.",
+    "tree": "FNC1 leaf7+sum(2+key+4+value), branch8+sum(32+2+min+2+max). Capacity64, single insert splits65 into32/33. AtN<=550 prior outcomes/members min32pairs/leaf -><=17children<32 fanout, soheight<=1.",
+    "write_upper": "At most two new leafs whose totalpaircount<=65 plus onebranch perindex perinsert. Bound uses14+65*(6+keymax+valuemax), plus8+floor(N/32)*(36+2*keymax) with at least2children. Includes every COW write without deletion/dedup credit. Max3nodesperindex=>6nodefiles peraccepted publish.",
+    "limits": "COW component excludes initialgraph/projection/originals/view, source controls/retirement markers/reservations/refresh plan temps, CP3 packs/indexes, Work/catalog/journal/pins/birthowners, candidate verification, legacy conversion, failed-owner files and native allocation. It cannot replace a whole-root cap. No128KiB*H placeholder used."
+  },
+  "F1_schedule_match": "N10,130bootstrap noops and132delta noops, retirement130+132=262; prior261? allraw count262; initialresolve plus262requestoutcomes preserved. New schedule additionally collect and fullindependentoracle, so priorfinalcensus isnot its future peak.",
+  "F2_failure_preservation": {
+    "H31": "owned automatic-benefit refusal; expected target:null vs omittedNone harness failure preserved",
+    "H151": "legitimate positive-benefit refusal retained, notauto-success",
+    "H551": "400 further noops thenautomatic success, cleanup andexactinitialresolve; no manualabort/force",
+    "new_focused_source": "automatic_policy currently expects success after30+120=150new/H151; itmust preserveknownfailure and use admitted proven schedule, or establish newCP3benefit with measured rawmetadata. No automaticshrink/hiddenretry.",
+    "automatic_source_formula": "potential_removable>=128; afterconstruction removablefiles>=128 and>=4*(2*packs+3), removablebytes>quota_spent+131072+60416+4096. Newpagedindex overhead may change benefit;551 is priorPASSnotCP3guarantee."
+  },
+  "CP3_physical_bound_separate": {
+    "MAX_PACK": 67108864,
+    "MAX_INDEX": 16777216,
+    "MAX_RAW": 8388608,
+    "MAX_RECORDS": 65536,
+    "MAX_CACHE": 67108864,
+    "descriptor_count": 64,
+    "page_bytes": 16384,
+    "page_slots": 48,
+    "page_height": 2,
+    "paged_size_bound": "entries+pages*1024+(pages-1)*291; leaves=ceil(records/48); mid=ceil(leaves/48)if leaves>48else0; pages=leaves+mid+(leaves>1). Bound each actualrole partition separately and include retained+new+failed representations.",
+    "Work_limit": 131072,
+    "catalog_limit": 60416,
+    "discovery_state_limit": 32768,
+    "deferred_count_limit": 128,
+    "physical_metadata_note": "Descriptor includes optional versioned page{version,hash,bytes,height}; each Work generation/jobs/retired embeds descriptors. Serialization must fit actual128KiBWork and59KiBcatalog caps. Neither is perpublication history. Count allcurrent andstage files/native pin names; do not multiply128KiB by263 asacceptedsemantic growth.",
+    "status": "FORECAST_REQUIRED: exactrole/descriptorpagecounts and all preselection/failedowner/coexistence peaks notproven in thisaudit."
+  },
+  "case_unit_subset_crosswalk": [
+    {
+      "case": "Q-pack64MiB-index16MiB-record65536 / index geometry only",
+      "unit": "paged::tests::paged_exact_geometry_and_closed_keys",
+      "constructor": "RAM arithmetic only",
+      "proves": "size_bound(55366,55366*275)=16,777,059; 55367 and 65536 max-width keys exceed16MiB; closed key lengths117/77/118/123/225",
+      "does_not_prove": "65536 short-key success; pack64MiB/raw8MiB exact boundaries; runtime full16MiB index load"
+    },
+    {
+      "case": "Q-pack64MiB-index16MiB-record65536 / maximum-key builder only",
+      "unit": "paged::tests::paged_maximum_keys_split_before_total_index_bound",
+      "constructor": "RAM Builder; zero raw pack bytes; one index Vec; does not write a fixture",
+      "proves": "actual55366 maximum-width records, next refuses via fits; <=16MiB paged image, height2",
+      "does_not_prove": "exact16MiB file read/refusal boundary; short-key65536 builder success; 65537 refusal;64MiB pack boundary"
+    },
+    {
+      "case": "Q-catalog64-Work128KiB-cache64MiB / cache only",
+      "unit": "packing::tests::loading_indexes_evicts_before_transient_allocation",
+      "constructor": "EXISTING separately counted80MiB donor allowance; one explicit EXP_PACK_TEST_ROOT; source uses5*56000 legacy entries+oversized-index negative copy, all failed directories counted",
+      "proves": "total_index_charge>64MiB; transient chargedpeak<=64MiB and>48MiB; eviction; borrowed checker index sharesbudget; oversized advertised-index read refused beforeallocation",
+      "does_not_prove": "exactly64MiB resident peak;64/65 catalogdescriptors;128KiB Work boundary; finalnative PASS",
+      "latest_observed_build7": "EXPLICITLY SKIPPED; tenpass/onefiltered isnotcacheproof",
+      "allocation_rule": "charge this test fixture once in donor; do not add artificial full-store cache images for identical obligation"
+    },
+    {
+      "case": "Q-raw8MiB / decoder protection subset",
+      "unit": "pack::tests::decoder_never_uses_advertised_size",
+      "constructor": "RAM1MiB frame/output; no store image",
+      "proves": "advertised small/overMAX_RAW refusal; concatenated frame and huge window refusal;1MiB actual success",
+      "does_not_prove": "8MiB-1/8MiB/8MiB+1 actual raw constructor/read paths or64MiB pack"
+    },
+    {
+      "case": "CP3 route positive/negative/cache",
+      "unit": "paged::tests::paged_positive_negative_boundary_and_cache",
+      "constructor": "one tiny2400result fixture under explicit EXP_PACK_TEST_ROOT",
+      "proves": "boundaryordinal0/47/48/2303/2304/2399, negative gaps, route<=3pages,12pagecache and fullaudit",
+      "does_not_prove": "all six historical outcome categories or finalnative fullsuite"
+    },
+    {
+      "case": "CP3 touched/untouched and malformed",
+      "unit": "paged::tests::paged_touched_untouched_and_malformed_refusal",
+      "constructor": "one120result fixture; singlebyte patch restored inplace; no fullindex backup",
+      "proves": "untouched route canpass, touched route and fullaudit refuse; malformed/truncated/rootversion refusal",
+      "does_not_prove": "all independent malformed legacycases or accepted-source restoration"
+    },
+    {
+      "case": "CP3 duplicates and every relevant segment",
+      "unit": "packing::tests::paged_four_routes_negative_duplicates_and_conflict",
+      "constructor": "five2400result images in one explicit root; fourvisible then swapfifth",
+      "proves": "four relevant routes; hit/miss; equalrawduplicatesagree; conflicting identity refuses;12pages<=192KiB",
+      "does_not_prove": "all live catalog pressure/backpressure/recoveryoracles"
+    },
+    {
+      "case": "CP3 physical instance cache binding",
+      "unit": "packing::tests::paged_cache_identity_preserves_physical_instance",
+      "constructor": "two tiny physicalinstances; corruptsecond index inplace",
+      "proves": "firstinstancecache cannot masksecondinstancecorruption",
+      "does_not_prove": "full stalejournal pathname reuse/native deletion lifetime"
+    }
+  ],
+  "remaining_constructor_gaps": [
+    "actual8MiB below/at/above raw/read",
+    "actual64MiB pack boundary and authentic reducedlimit pressure",
+    "65536 short-key admitted records and65537 refusal",
+    "exact16MiB file before/at/above bound separate from maximum-key builder",
+    "catalog64/65 entries, Work131072/131073 bytes",
+    "deferred128/129 and32768/32769 bytes with genuine reservation holes and laterrelease",
+    "finalpin allworkspace including actualcache boundary; exactbinary/platform/guard/closure receipts",
+    "every one of166Windows/158Linux/158Mac ledgerrows needs actualseed/reset/fulloracle map beforefullGO"
+  ],
+  "case_counts": {
+    "Windows": 166,
+    "Linux": 158,
+    "Mac": 158
+  },
+  "complete_required_case_mapping_audit": [
+    {
+      "case_id": "P/operational-A",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/operational-B",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/orphan-unregistered-backup-restore",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/unselected-installed-backup-restore",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/missing-catalog",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/corrupt-catalog",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/missing-index",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/corrupt-index",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/missing-pack",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/truncated-pack",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/corrupt-record",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/offset-overflow",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/raw-length-bound",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/duplicate-key",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/omitted-entry",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/wrong-pack-binding",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/raw-hash-mismatch",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/bad-codec",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/too-many-packs",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/duplicate-json-key",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-A-pack-reservation-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-A-pack-build-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-A-pack-index-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-A-pack-install-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-A-pack-before-catalog-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-A-pack-catalog-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-A-pack-accounting-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-A-pack-loose-delete-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-A-pack-loose-delete-3",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/protected-read-A-pack-read-lease",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/protected-read-A-pack-catalog-captured",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/protected-read-A-resolve-history-captured",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/protected-read-A-pack-record-located",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/writer-and-competing-maintenance-A",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/cancelled-drain-releases-barriers-A",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/repack-old-pack-deletion-interruption-A",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-B-pack-reservation-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-B-pack-build-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-B-pack-index-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-B-pack-install-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-B-pack-before-catalog-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-B-pack-catalog-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-B-pack-accounting-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-B-pack-loose-delete-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/interruption-B-pack-loose-delete-3",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/protected-read-B-pack-read-lease",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/protected-read-B-pack-catalog-captured",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/protected-read-B-resolve-history-captured",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/protected-read-B-pack-record-located",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/writer-and-competing-maintenance-B",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/cancelled-drain-releases-barriers-B",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/repack-old-pack-deletion-interruption-B",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing capsule + final version map",
+      "proposed_reuse": "same shallow donor obligation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/navigation-and-operational-backup/A/N16",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/navigation-and-operational-backup/A/N128",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/navigation-and-operational-backup/B/N16",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/navigation-and-operational-backup/B/N128",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-plan",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-preserved",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-file",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-namespace",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-before-complete",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-complete",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/up/refresh-namespace-preserved",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/down/refresh-plan",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/down/refresh-preserved",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/down/refresh-file",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/down/refresh-namespace",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/down/refresh-before-complete",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/namespace-interruption-correcting-successor/down/refresh-complete",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/checkpoint-transfer-retire-repeat-gc/A",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/half-preparation-backup-recovery/A",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/checkpoint-transfer-retire-repeat-gc/B",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/half-preparation-backup-recovery/B",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/impossible-final-namespace",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/skipped-or-selected-once/A",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R/skipped-or-selected-once/B",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing recovery capsule",
+      "proposed_reuse": "one existing shallow source/restore set",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-missing-catalog",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-corrupt-catalog",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-missing-index",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-corrupt-index",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-missing-pack",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-truncated-pack",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-corrupt-record",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-offset-overflow",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-raw-length-bound",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-duplicate-key",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-omitted-entry",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-wrong-pack-binding",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-raw-hash-mismatch",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-bad-codec",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-too-many-packs",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-duplicate-json-key",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/strict-numeric-type-version",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/strict-numeric-type-records",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/strict-numeric-type-pack_bytes",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/strict-numeric-type-index_bytes",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/strict-numeric-type-codec",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-oversize-catalog",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/independent-oversize-index",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "I/physical-catalog-and-hint-cannot-grant-membership",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing strict supplement + version map",
+      "proposed_reuse": "one malformed donor lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "F/historical-selector-captured-before-publish-and-cleanup-exact-copy",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing focused capsule + version map",
+      "proposed_reuse": "one shallow B/A donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "F/retained-controls-have-no-deletion-credit",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing focused capsule + version map",
+      "proposed_reuse": "one shallow B/A donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "F/historical-generation-discovery-after-repack",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing focused capsule + version map",
+      "proposed_reuse": "one shallow B/A donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "F/concurrent-semantic-writer-preserves-frozen-and-new-current-discovery",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing focused capsule + version map",
+      "proposed_reuse": "one shallow B/A donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "F/retirement-removes-content-but-keeps-permanent-B-publication-control",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing focused capsule + version map",
+      "proposed_reuse": "one shallow B/A donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "F/missing-control-fails-closed",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing focused capsule + version map",
+      "proposed_reuse": "one shallow B/A donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "F/conflicting-control-fails-closed",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing focused capsule + version map",
+      "proposed_reuse": "one shallow B/A donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "F/A-cleanup-retains-no-publication-control-duplicates",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "existing focused capsule + version map",
+      "proposed_reuse": "one shallow B/A donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-A-zstd",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "Harness.small",
+      "proposed_reuse": "one-new-A-N64-H114",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-B-zstd",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "Harness.small",
+      "proposed_reuse": "ONE-new-B-N64-H114",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "C-P0-small",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "Harness.pack + oracle",
+      "proposed_reuse": "existing-shallow-donor-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "D-partial-fixed-cutoff",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "partial_interval",
+      "proposed_reuse": "new-shallow-A-N10-interval",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "D-reservation-late-eligible",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "reservation_late",
+      "proposed_reuse": "new-shallow-A-N10-reservation",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "D-cutoff-Q-stale-CAS",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "cutoff_and_stale_cas",
+      "proposed_reuse": "new-shallow-A-N10-cutoff",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "F1-terminal-retired-bootstrap-delta",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "terminal_retirement",
+      "proposed_reuse": "new-shallow-A-N10-retired",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "F2-auto-decline-later-admit",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "automatic_policy",
+      "proposed_reuse": "new-shallow-A-N10-auto",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "D-stable-base-segment-pressure",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "stable_base",
+      "proposed_reuse": "new-shallow-A-N10-stable",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-persistent-owners",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "persistent_owners",
+      "proposed_reuse": "operational-A/B-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-two-maintainers-semantic-crossing",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "contenders",
+      "proposed_reuse": "writer-and-competing-maintenance-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-reader-error",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "reader_end",
+      "proposed_reuse": "protected-read-A/B-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-reader-cancel",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "native adapter required",
+      "proposed_reuse": "protected-read-A/B-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-reader-death",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "native adapter required",
+      "proposed_reuse": "protected-read-A/B-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-maintainer-death",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "native adapter required",
+      "proposed_reuse": "interruption-A/B-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-path-reuse-fresh-birth",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "native adapter required",
+      "proposed_reuse": "repack-old-pack-deletion-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "D-terminal-oversize",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "source-bound constructor required",
+      "proposed_reuse": "operational-A-oversize-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "D-deferred128-and-state32KiB",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "source-bound constructor required",
+      "proposed_reuse": "pressure-A-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "D-segment4-and-collateral64MiB",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "source-bound constructor required",
+      "proposed_reuse": "pressure-A-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Q-raw8MiB",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "source-bound constructor required",
+      "proposed_reuse": "oversize-A-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Q-pack64MiB-index16MiB-record65536",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "source-bound constructor required",
+      "proposed_reuse": "limit-A-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Q-catalog64-Work128KiB-cache64MiB",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "source-bound constructor required",
+      "proposed_reuse": "strict-and-workspace-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "CP3-six-outcome-categories",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "paged adapter required",
+      "proposed_reuse": "existing-packed-A/B-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "CP3-authenticated-negative-all-segments",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "paged adapter required",
+      "proposed_reuse": "malformed-seed-A-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "CP3-touched-route-leaf-raw",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "paged adapter required",
+      "proposed_reuse": "malformed-A-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "CP3-untouched-full-audit",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "paged adapter required",
+      "proposed_reuse": "malformed-A-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "CP3-duplicates-segments",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "paged adapter required",
+      "proposed_reuse": "malformed-A-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "CP3-candidate-full-verification",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "paged adapter required",
+      "proposed_reuse": "unselected-installed-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Compat-STORE1-STORE2-to-new",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "versioned adapter required",
+      "proposed_reuse": "shallow-legacy-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Compat-STORE3-to-final",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "versioned adapter required",
+      "proposed_reuse": "shallow-v3-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Backup-durable-pin-locks",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "backup adapter required",
+      "proposed_reuse": "operational/recovery-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Backup-shallow-final-restore-successor",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "backup adapter required",
+      "proposed_reuse": "operational/recovery-donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Final-two-pass-drain",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "Harness.drain_two_passes",
+      "proposed_reuse": "each-new-or-donor-lineage",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-crash-pack-reservation",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "crash_extension",
+      "proposed_reuse": "existing-matching-interruption-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-crash-pack-install",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "crash_extension",
+      "proposed_reuse": "existing-matching-interruption-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-crash-pack-before-catalog",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "crash_extension",
+      "proposed_reuse": "existing-matching-interruption-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-crash-physical-before-selection",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "crash_extension",
+      "proposed_reuse": "existing-matching-interruption-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-crash-physical-after-selection",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "crash_extension",
+      "proposed_reuse": "existing-matching-interruption-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-crash-pack-accounting",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "crash_extension",
+      "proposed_reuse": "existing-matching-interruption-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-crash-pack-loose-delete",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "crash_extension",
+      "proposed_reuse": "existing-matching-interruption-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-crash-pack-old-delete",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "crash_extension",
+      "proposed_reuse": "existing-matching-interruption-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-crash-physical-after-owned-file-delete",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "crash_extension",
+      "proposed_reuse": "existing-matching-interruption-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "S-crash-physical-progress-plan-installed",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "crash_extension",
+      "proposed_reuse": "existing-matching-interruption-A/B",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Workspace/unit-slot-1",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "exact final cargo test manifest",
+      "proposed_reuse": "one external cache unit root",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Workspace/unit-slot-2",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "exact final cargo test manifest",
+      "proposed_reuse": "one external cache unit root",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Workspace/unit-slot-3",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "exact final cargo test manifest",
+      "proposed_reuse": "one external cache unit root",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Workspace/unit-slot-4",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "exact final cargo test manifest",
+      "proposed_reuse": "one external cache unit root",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Workspace/unit-slot-5",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "exact final cargo test manifest",
+      "proposed_reuse": "one external cache unit root",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Ordinary/all-routes",
+      "applicable_hosts": [
+        "Windows",
+        "Linux",
+        "Mac"
+      ],
+      "source_implementation": "exact shell route manifest",
+      "proposed_reuse": "existing immediate/ordinary roots",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/windows-loose-no-delete-sharing-A",
+      "applicable_hosts": [
+        "Windows"
+      ],
+      "source_implementation": "native sharing adapter required",
+      "proposed_reuse": "matching shallow packing donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "P/windows-loose-no-delete-sharing-B",
+      "applicable_hosts": [
+        "Windows"
+      ],
+      "source_implementation": "native sharing adapter required",
+      "proposed_reuse": "matching shallow packing donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "F/B-control-no-delete-sharing-remains-retained",
+      "applicable_hosts": [
+        "Windows"
+      ],
+      "source_implementation": "native sharing adapter required",
+      "proposed_reuse": "existing shallow B donor",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "Windows-pack-index-no-delete-sharing",
+      "applicable_hosts": [
+        "Windows"
+      ],
+      "source_implementation": "native sharing adapter required",
+      "proposed_reuse": "operational-A/B oldcontainers",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "X-Windows1000",
+      "applicable_hosts": [
+        "Windows"
+      ],
+      "source_implementation": "Harness.mapping_stress",
+      "proposed_reuse": "ONE-new-A-N10-stress",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "H1k-H10k-three-cycles-1and4",
+      "applicable_hosts": [
+        "Windows"
+      ],
+      "source_implementation": "Matrix owner",
+      "proposed_reuse": "F05",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "D-N64-N1k-AandB-payload-title",
+      "applicable_hosts": [
+        "Windows"
+      ],
+      "source_implementation": "Matrix owner",
+      "proposed_reuse": "F07",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "L-H1k-H10k-exact-long",
+      "applicable_hosts": [
+        "Windows"
+      ],
+      "source_implementation": "Matrix owner",
+      "proposed_reuse": "F09/F10",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    },
+    {
+      "case_id": "R-long-stream-restore",
+      "applicable_hosts": [
+        "Windows"
+      ],
+      "source_implementation": "Matrix/stream owner",
+      "proposed_reuse": "F11",
+      "actual_final_pin_seed_reset_oracle_map": "REQUIRED_NOT_PROVIDED",
+      "status": "PENDING"
+    }
+  ],
+  "mapping_disposition": "No cases omitted ormarkedPASS. Proposedreuse strings are not actualroot/seed/reset/version/fulloracle proofs. Exactsource/units can satisfy matching identicalobligations once finalsuite executes; onecase mayshareoneconstructor if assertionscoverboth, withoutdoublefixturecharges. Existingcorrupt/failedprefixes never become healthyreuse by label. FullGO remains withheld until everyrow maps orreportsincomplete.",
+  "preserve_failure_prefixes": [
+    "C:/file-native-online-cp1-20261020/fixtures/cp2/F1-retired",
+    "C:/file-native-online-cp1-20261020/fixtures/cp2/F2-auto",
+    "C:/file-native-online-cp1-20261020/evidence/cp2-remediate*",
+    "C:/file-native-online-cp1-20261020/evidence/cp2-finish*",
+    "C:/file-native-online-cp1-20261020/fixtures/cp3",
+    "C:/file-native-online-cp1-20261020/evidence/cp3-smoke*",
+    "C:/file-native-online-cp1-20261020/evidence/cp3-build6*",
+    "all prior protected cache-unit directories including failedattempts; exactnativefinalpaths required fromowners"
+  ],
+  "allocation": {
+    "change_bytes": 0,
+    "change_files": 0,
+    "whole_applied_forecast_bytes": 47079500149,
+    "central_contingency_bytes": 165140107,
+    "whole_reserved_files": 4792604,
+    "CP3_fixture_livecap_bytes": 100663296,
+    "status": "unchanged014;013wasunregisteredreversed;480MiB015hypothesisnotapplied"
+  },
+  "actions": {
+    "read_only_source_census_hash_arithmetic": true,
+    "engine_or_Cargo_or_cache_copy_or_restore_or_delete": false,
+    "qualification_runs": 0,
+    "prior_claims_unchanged": true
+  }
+}

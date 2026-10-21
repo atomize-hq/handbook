@@ -1,0 +1,26 @@
+{
+  "kind": "private-runtime-R3-source-budget-046-v2",
+  "source_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\shared-runtime-contracts",
+  "owner": "01a15b6c-b109-7090-a8c2-0e165f92f51e",
+  "bytes": 90112,
+  "files": 1,
+  "max_bytes": 90112,
+  "max_files": 1,
+  "paths": {
+    "runtime_contracts.py": 90112
+  },
+  "claim046_sha256": "6bd67f146b344cdb8bd501a261df795e946a49b557d5a5d5227665c8e8e581ba",
+  "source_only": true,
+  "runtime_go": false,
+  "pure_memory_parse_compile_go": true,
+  "engine_commit_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z",
+  "historical_review_watchdog": "04:10:14Z MISSED; preservea5/R2failedsnapshots. Newprospectivecontrollerrepairsauthorized, no oldcellrescore/clockreset.",
+  "rules": [
+    "ChecksameimmutablebudgetSHA andindividual/group/wholeALLphysicalsourcecopies plusfuturecopyobligations beforeeverywrite; no links/reparse/bytecode/extrafiles.",
+    "OldsourceversionsdurableatGit a5b53218 and062enginefixed. No Rust/core/publicformat change.",
+    "Newsourcepinsfreshfullreviewandexplicitfiniteadmissionbeforeanyruntime/build/cache/fixture/archive/delete."
+  ],
+  "issued": "2026-10-21T05:05:16.065127+00:00"
+}

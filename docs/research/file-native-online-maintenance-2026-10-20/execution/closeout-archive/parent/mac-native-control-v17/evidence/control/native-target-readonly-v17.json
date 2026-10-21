@@ -1,0 +1,200 @@
+{
+  "utc": "2026-10-20T21:30:35.217657+00:00",
+  "method": "Read-only old JSON inventories and streaming current tool/SDK hashes; no compiler execution, extraction, dependency copy or cache writes.",
+  "historical_build": {
+    "label": "native-build",
+    "argv": [
+      "/Users/spensermcconnell/.rustup/toolchains/1.89.0-aarch64-apple-darwin/bin/cargo",
+      "build",
+      "--release",
+      "--target",
+      "aarch64-apple-darwin",
+      "--locked",
+      "--offline",
+      "-j1",
+      "-p",
+      "file-native-incremental",
+      "--bin",
+      "file-native-incremental"
+    ],
+    "exit": 0,
+    "finished_utc": "2026-10-20T06:41:59.995231+00:00"
+  },
+  "historical_units": {
+    "label": "workspace-five-units",
+    "argv": [
+      "/Users/spensermcconnell/.rustup/toolchains/1.89.0-aarch64-apple-darwin/bin/cargo",
+      "test",
+      "--release",
+      "--target",
+      "aarch64-apple-darwin",
+      "--locked",
+      "--offline",
+      "-j1",
+      "--workspace",
+      "--lib",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "finished_utc": "2026-10-20T06:42:09.963059+00:00"
+  },
+  "historical_profile_environment": {
+    "CARGO_PROFILE_RELEASE_DEBUG": "0",
+    "CARGO_PROFILE_RELEASE_STRIP": "symbols",
+    "CARGO_PROFILE_RELEASE_CODEGEN_UNITS": "1"
+  },
+  "historical_target": {
+    "files": 400,
+    "logical_bytes": 81216173,
+    "allocated_file_bytes": 82468864,
+    "inventory_sha256": "f0df9bed0f0ded6e6a8208e80c306eb7c1d3c18710a1691a6cbeab69c8a2c644"
+  },
+  "largest_target_entries": [
+    {
+      "path": "aarch64-apple-darwin/release/deps/libserde_core-e2ac758057c7b180.rlib",
+      "bytes": 5216088,
+      "allocated_bytes": 5218304,
+      "sha256": "3fcb55dab4420caece8510e74b9d82466524c25da5a28fb872a484424dbdfd06"
+    },
+    {
+      "path": "aarch64-apple-darwin/release/deps/libserde_core-e2ac758057c7b180.rmeta",
+      "bytes": 5151898,
+      "allocated_bytes": 5152768,
+      "sha256": "7a9715b7ba5262bf6172761daeb9eee8b714a980979ccde388021cddd019b466"
+    },
+    {
+      "path": "release/deps/libsyn-1036d6a6e857fcae.rlib",
+      "bytes": 4848088,
+      "allocated_bytes": 4849664,
+      "sha256": "78d64975f41efbfd372c31a46daed46c2afd8f07b6f6b780dd382ea8f4e513de"
+    },
+    {
+      "path": "aarch64-apple-darwin/release/deps/libfile_native_incremental-40110565c54ad3bd.rlib",
+      "bytes": 4038152,
+      "allocated_bytes": 4038656,
+      "sha256": "bfd3c52363b147a6921cb33d0ae68e1fdb717f8c2de3dde5d38c8dfeb01d77c1"
+    },
+    {
+      "path": "release/deps/libcc-b084d085f633b0b6.rlib",
+      "bytes": 3087032,
+      "allocated_bytes": 3088384,
+      "sha256": "c61b6e5a17c3bc849cd576521362c818e749006bafe3386b8db5dfa8c4cf9994"
+    },
+    {
+      "path": "aarch64-apple-darwin/release/deps/liblibc-b6a04ac1af18b463.rlib",
+      "bytes": 2984152,
+      "allocated_bytes": 2985984,
+      "sha256": "4fcefdb275799b10c5ac07eb3b036f8601fe82db6d61968f7e3466f80333467d"
+    },
+    {
+      "path": "aarch64-apple-darwin/release/deps/liblibc-b6a04ac1af18b463.rmeta",
+      "bytes": 2960663,
+      "allocated_bytes": 2961408,
+      "sha256": "4302385cc84b5b1c6f0939091c32deded628c524d67c12c1b66fe8896b553e69"
+    },
+    {
+      "path": "release/deps/liblibc-fe406088a7dbbde1.rlib",
+      "bytes": 2955944,
+      "allocated_bytes": 2957312,
+      "sha256": "6affc290d86d9962b706de919617162a0a98079405d84ad72516ae3252d5a1f9"
+    },
+    {
+      "path": "release/deps/liblibc-fe406088a7dbbde1.rmeta",
+      "bytes": 2863107,
+      "allocated_bytes": 2867200,
+      "sha256": "1985f006fbb2409f221abe1d9fe49f69951ff1dbad63c7efe3855aa5b4409c45"
+    },
+    {
+      "path": "aarch64-apple-darwin/release/deps/libtypenum-69166468a74f0648.rlib",
+      "bytes": 2730096,
+      "allocated_bytes": 2732032,
+      "sha256": "4a14c5bf1ea3e87cff2957de1463a1173648219f426cea28220b1066cf9ebba4"
+    },
+    {
+      "path": "aarch64-apple-darwin/release/deps/libtypenum-69166468a74f0648.rmeta",
+      "bytes": 2727642,
+      "allocated_bytes": 2727936,
+      "sha256": "153a2d592abe38fe99e7aeaa492bd68f13593f1023d9054b0fd88a97cb1416a9"
+    },
+    {
+      "path": "release/deps/libserde_derive-dfe2a83f7a554e9e.dylib",
+      "bytes": 2278128,
+      "allocated_bytes": 2281472,
+      "sha256": "451f77980b1d2c77aa9377dfb68bd6fa3de35708f85c2a7c969c0816dbdf0727"
+    }
+  ],
+  "historical_fixture_bytes_external_to_target": 80976318,
+  "current_tools": [
+    {
+      "path": "/Users/spensermcconnell/.rustup/toolchains/1.89.0-aarch64-apple-darwin/bin/cargo",
+      "bytes": 28655992,
+      "sha256": "798a97c06e6fc3a63f1b7e3141f87e515e6bc8da1527bc32e19ba27d86bb89c5"
+    },
+    {
+      "path": "/Users/spensermcconnell/.rustup/toolchains/1.89.0-aarch64-apple-darwin/bin/rustc",
+      "bytes": 414776,
+      "sha256": "af4a9eb303553510e9d74220636dc4b21f8574ddeab73741bf6b892adc49c21c"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+      "bytes": 141373024,
+      "sha256": "7def90dd8829726686213a747fc5bff1583df933dae5edc55d755479e0bfe00a"
+    }
+  ],
+  "current_SDK": [
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json",
+      "bytes": 7774,
+      "sha256": "f8d005f09381389167f9e0aeaa169bc9e7dff162ef22ca2fd8e98df7ff1acafe"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.plist",
+      "bytes": 5388,
+      "sha256": "e5c7c40b8c5dc1a9f99f8b9fa51870f8fe180421225b8201d0c4c826aad11bdc"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/libSystem.tbd",
+      "bytes": 334178,
+      "sha256": "20cfce043f11a083e2eb6111efe3579919a8082fa4cc912a7bd839af2010ec57"
+    }
+  ],
+  "SDK_matches_old_receipt": true,
+  "historical_frozen_binary": {
+    "path": "/private/tmp/file-native-p-macos-20261020/frozen-bin-private-proposed-v6/file-native-incremental",
+    "bytes": 2194384,
+    "sha256": "9ae57af7f16a05aa01d79b0aa88ce90b50f7669858548be6933cfc2d0f1c0def"
+  },
+  "historical_receipt_bindings": [
+    {
+      "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/.p-build-receipts-v6/CLOSEOUT-SUMMARY.json",
+      "bytes": 5050,
+      "sha256": "b205df65a6e56c4b9abe88e682e134d7bd6e814cc680abac09335de758dcbaf9"
+    },
+    {
+      "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/.p-build-receipts-v6/retained-target-and-unit-inventory.json",
+      "bytes": 118040,
+      "sha256": "90596921bad2ebc17d8164dd7d4020e687ed5a081c9b202dec3b6bcecde08873"
+    },
+    {
+      "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/.p-build-receipts-v6/SDK-after.json",
+      "bytes": 839,
+      "sha256": "9329f484e76a7eadad873763c06495ad0fa99341c64eacd9cec5a8e95e0f76c6"
+    },
+    {
+      "path": "/private/tmp/file-native-p-macos-20261020/cargo-private-proposed/.p-build-receipts-v6/build-supervisor.py",
+      "bytes": 23754,
+      "sha256": "a737c9f564290840c4c66c95570b9b9fc10aac6b20433882d31f78280116d645"
+    }
+  ],
+  "planning_only_192MiB": {
+    "cap_bytes": 201326592,
+    "historical_target_headroom_bytes": 120110419,
+    "feasibility": "Plausible planning cap only. Final lock/workspace/consumer target scope, peak intermediates, and new j2 build remain unmeasured.",
+    "release_or_new_claim": false,
+    "current_256MiB_claim_unchanged": true
+  },
+  "engine_source_pin": "PENDING_PARENT_RELEASE",
+  "current_engine_builds": 0
+}

@@ -1,0 +1,118 @@
+{
+  "kind": "native-guard-control-candidate",
+  "nonce": "66cafc7d701c943ccff9949e21f5002a",
+  "source_sha256": "6294d6750a8115b920d1474bc95f5990abcb6f561d49510a25c87c768ff6930a",
+  "supervisor": {
+    "pid_requested": 84354,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 84354,
+    "ppid": 84324,
+    "uid": 501,
+    "pgid": 84324,
+    "state": 2,
+    "start": [
+      1792528253,
+      166074
+    ]
+  },
+  "started_epoch": 1792528253.20853,
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "seconds_cap": 3.0,
+  "global_enumeration": false,
+  "censor": "root-completed-orphan-group",
+  "closure": "PROVEN_EMPTY",
+  "samples": 2,
+  "peak_group_rss": 37470208,
+  "peak_supervisor_rss": 31129600,
+  "missing_live_rss": [],
+  "transient_exited_members": [],
+  "termination": [
+    {
+      "identity": {
+        "pid_requested": 84356,
+        "returned_bytes": 136,
+        "errno": 0,
+        "expected_bytes": 136,
+        "pid": 84356,
+        "ppid": 84354,
+        "uid": 501,
+        "pgid": 84356,
+        "state": 2,
+        "start": [
+          1792528253,
+          213291
+        ]
+      },
+      "matches": true,
+      "signal_errno": null,
+      "signal": "SIGKILL_OWNED_ANCHORED_GROUP"
+    }
+  ],
+  "sample_interval_max_s": 0.037900791969150305,
+  "late_intervals": 0,
+  "per_process_cap": 2147483648,
+  "group_cap": 2147483648,
+  "supervisor_cap": 805306368,
+  "aggregate_cap": 3221225472,
+  "command": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "-c",
+    "import subprocess,sys; subprocess.Popen([sys.executable,\"-B\",\"-c\",\"import time; time.sleep(5)\"])"
+  ],
+  "source_pin": "PENDING_NO_ENGINE_RELEASE",
+  "token_acquired": 1792528253.210985,
+  "prelaunch_census": {
+    "logical_bytes": 336456,
+    "allocated_bytes": 401408,
+    "files": 33
+  },
+  "prelaunch_free_bytes": 167651581952,
+  "anchor": {
+    "pid_requested": 84356,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 84356,
+    "ppid": 84354,
+    "uid": 501,
+    "pgid": 84356,
+    "state": 2,
+    "start": [
+      1792528253,
+      213291
+    ]
+  },
+  "closure_observations": [
+    {
+      "pgid_requested": 84356,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216703624998500
+    },
+    {
+      "pgid_requested": 84356,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216703681994041
+    }
+  ],
+  "anchor_exit": -9,
+  "watchdog_exit_reaped": true,
+  "worker_exit": 0,
+  "finished_epoch": 1792528253.410212,
+  "sample_span_s": 0.1534024584107101,
+  "effective_samples_hz": 13.037600705494079,
+  "final_census": {
+    "logical_bytes": 336943,
+    "allocated_bytes": 405504,
+    "files": 36
+  },
+  "qualification": "CONTROL_CANDIDATE_ONLY_NO_ENGINE_RELEASE"
+}

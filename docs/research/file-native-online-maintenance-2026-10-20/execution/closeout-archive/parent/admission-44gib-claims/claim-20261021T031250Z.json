@@ -1,0 +1,85 @@
+{
+  "claim_id": "44GiB-CENTRAL-041-WINDOWS-HOOKS-DRIVER1KiB-TRANSFER",
+  "utc": "2026-10-21T03:12:50.431536+00:00",
+  "status": "SOURCE_PERFILE_TRANSFER_ONLY__NEW_PARENT_BUDGET_SOURCE_GO_REQUIRED",
+  "authority": "META041 hooks+1024/driver-1024 before growth;040 already sealed.",
+  "prior039": {
+    "file": "claim-20261021T025305Z.json",
+    "sha256": "2ad791f85e6bddb49bf47bd731259606ccd0cf936bec8c99d1554e1c91376e1d",
+    "immutable": true
+  },
+  "prior040": {
+    "file": "claim-20261021T031017Z.json",
+    "sha256": "13452d906ce2a25f76af800f3a194934896b3e70db18ff1a4f4c424f09dd4a06",
+    "immutable": true
+  },
+  "owner_chat": "01a15bd5-7694-7981-a619-9a23d4774b60",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform",
+  "new_SOURCE_per_file_caps": {
+    "windows_driver.py": 21504,
+    "windows_native.py": 26624,
+    "windows_adapter.py": 22528,
+    "windows_growth.py": 14336,
+    "windows_capsule.py": 20480,
+    "windows_hooks.py": 25600,
+    "windows_oracle_bridge.py": 8192,
+    "windows_bootstrap.py": 8192,
+    "windows_evidence.py": 16384,
+    "source_controls.py": 28672,
+    "windows_deadlines.py": 4096
+  },
+  "fresh_changed_members": [
+    {
+      "file": "windows_driver.py",
+      "bytes": 21482,
+      "sha256": "a9b0412d67b1ba0665d5b447ead7dc42ce5a2bb1ff873ae3b27e88959e1eb5a7",
+      "old_cap": 22528,
+      "new_cap": 21504
+    },
+    {
+      "file": "windows_hooks.py",
+      "bytes": 24486,
+      "sha256": "940ffad0f7ef31a242b7c85f52f3f5b36139e26347b74d13b625170d46ec4d66",
+      "old_cap": 24576,
+      "new_cap": 25600
+    }
+  ],
+  "all27_fit_revised_caps": true,
+  "changed_members_fit_old_caps": true,
+  "reason": "Concrete166 function-only port closure completion needs about500bytes; readable source and full proofs remain required.",
+  "unchanged_caps": {
+    "SOURCE_bytes": 196608,
+    "SOURCE_files": 11,
+    "CASEDATA_bytes": 262144,
+    "CASEDATA_files": 8,
+    "BINDINGS_bytes": 65536,
+    "BINDINGS_files": 8,
+    "whole_bytes": 524288,
+    "closed_names": 27,
+    "root_conservative_filecap": 32
+  },
+  "unchanged_allocator": {
+    "C3_total": 16777216,
+    "C3_unclaimed": 917504,
+    "META_cap": 10485760,
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "reserved_files": 4792716,
+    "unassigned_files": 207284,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "new_C3draw": 0,
+    "new_global_bytes": 0,
+    "new_global_files": 0
+  },
+  "prewrite": {
+    "family_files": 128,
+    "family_bytes": 463609,
+    "META_bytes": 8976963,
+    "META_files": 1072,
+    "META_manifest_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+    "pending_META_reserve": 944912
+  },
+  "gate": "All039/038/034/032 pairs retained. Owners hold upward writes until NEW immutable parent Windows budget binds041+all caps and explicit SOURCE GO. Enforce per-file/group/whole/exact27 names. No runtime/native controls/engine/build/copy/corpus/archive/deletion/Git/new namespace permission. Context plan remains read-only/unallocated; old evidence unchanged.",
+  "actions": "Read-only source cap/census and all prior seal/addendum hash checks; one041 triplet only."
+}

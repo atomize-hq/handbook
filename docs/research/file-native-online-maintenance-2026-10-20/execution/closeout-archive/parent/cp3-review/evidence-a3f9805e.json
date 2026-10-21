@@ -1,0 +1,120 @@
+{
+  "source_pin": "a3f9805eccc19ede8dd5c735b54e675e98e63714",
+  "base_pin": "f9b762a1a0d352564542bb4850ad77ee14a7c6e4",
+  "verdict": "INTEGRATE bounded engineering",
+  "qualification": "INCOMPLETE",
+  "required_findings": {
+    "F1": "addressed",
+    "F2": "addressed structurally; actual 64MiB boundary remains qualification",
+    "F3": "addressed",
+    "F4": "addressed"
+  },
+  "manifest": {
+    "sha256": "f21a616e822c906f75eabff04dd7e97435781ee7a4fa32171acd62d6f119317b",
+    "source_files": 25,
+    "mismatches": [],
+    "run_bindings": 12,
+    "run_mismatches": [],
+    "prebuild9_files": 25,
+    "prebuild9_manifest_mismatches": []
+  },
+  "binary": {
+    "bytes": 3217408,
+    "sha256": "ce8b4d5cc6981e3ec4ee24e7d3fc25447550bd7d68b440d04bc334635d6ee2da"
+  },
+  "graph": "UNKNOWN/unregistered; manual HIGH risk; no indexing",
+  "reviewer_actions": {
+    "engine": false,
+    "cargo": false,
+    "source_edits": false,
+    "fixture_writes": false,
+    "oracles": false,
+    "spawns": false
+  },
+  "build9": {
+    "exit": 0,
+    "errors": [],
+    "censor": null,
+    "small_units_passed": 11,
+    "filtered": [
+      "loading_indexes_evicts_before_transient_allocation",
+      "paged_four_routes_negative_duplicates_and_conflict",
+      "paged_positive_negative_boundary_and_cache"
+    ],
+    "empty_closures": 2,
+    "remaining_pids": [],
+    "sampled_peak_rss": 467599360,
+    "sample_max_ms": 47,
+    "sample_over_40ms": 16
+  },
+  "red": {
+    "binding": "f9 only",
+    "binary": "e7f648ec50bd0facab8c9e20eb0a0fe0d8d80dc32ecbe4cfb3986822bd2604d9",
+    "events": 8,
+    "exit0": 7,
+    "exit2": 1,
+    "violations": 0,
+    "expected_error": "The file exists. (os error 80)",
+    "guard_exit": 0,
+    "guard_errors": [],
+    "censor": null,
+    "empty_closures": 2,
+    "sampled_peak_rss": 26374144,
+    "sample_max_ms": 32
+  },
+  "green": {
+    "events": 70,
+    "exact_final_binary_events": 70,
+    "exit0": 42,
+    "exit2": 26,
+    "exit86": 2,
+    "violations": 0,
+    "expected_errors": {
+      "integrity:paged-page-hash": 14,
+      "integrity:audit-file-hash": 10,
+      "refused:incomplete-build-owned": 2
+    },
+    "actual_deaths": {
+      "operation": "convert",
+      "EXP_EXIT": "pack-index",
+      "count": 2
+    },
+    "guard_exit": 0,
+    "guard_errors": [],
+    "censor": null,
+    "empty_closures": 2,
+    "sampled_peak_rss": 27348992,
+    "sample_max_ms": 46,
+    "sample_over_40ms": 1,
+    "independently_matched_repeated_resolves": 12,
+    "existing_requests": 6,
+    "resolve_mismatches": [],
+    "confirmed_new_published_accepted_successors": 2,
+    "accepted_requests_per_mode": 4,
+    "per_mode": {
+      "input_descriptors": 12,
+      "input_record_occurrences": 36,
+      "output_descriptors": 7,
+      "output_record_occurrences": 21,
+      "deduplicated_occurrences": 15,
+      "raw_map_keys_compared": 21,
+      "output_created_files": 12,
+      "same_owner_reuses": 12,
+      "cache_charged_peak": 3145728,
+      "constructor_charged_peak": 1088008
+    },
+    "discovery": {
+      "A": "None preserved",
+      "B": "existing value preserved"
+    },
+    "full_engine_audit": "not independent production full oracle"
+  },
+  "static_checks": {
+    "caller_bound": "all required route metadata first, entry sizes before any body",
+    "constructor": "pre-reservation before push/finish, retained borrowed legacy input, explicit installed-buffer drops before verifier",
+    "sharing": "only same live owner created+synced files; complete length/hash verification; unknown existing paths refuse; building install cannot resume",
+    "mixed_work": "total legacy+paged bytes, separate counters, paged-only gate"
+  },
+  "source_performance_limit": "metadata_memory scans growing entries per push; long conversion CPU remains unqualified",
+  "deferred": "actual 64MiB/native construction boundary; final full units/native/history/long/independent oracles/restore matrix mandatory"
+}

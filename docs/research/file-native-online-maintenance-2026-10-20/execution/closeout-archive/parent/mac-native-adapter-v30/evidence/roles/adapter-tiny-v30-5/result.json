@@ -1,0 +1,52 @@
+{
+  "role": "checker",
+  "limit_bytes": 2147483648,
+  "failures": [],
+  "samples": 16,
+  "max_start_gap_s": 0.01275808410719037,
+  "peak_RSS_bytes": 15204352,
+  "closure": [
+    {
+      "monotonic": 3223870.36063675,
+      "identities": [
+        {
+          "pid_requested": 68281,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    },
+    {
+      "monotonic": 3223870.384037833,
+      "identities": [
+        {
+          "pid_requested": 68281,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    }
+  ],
+  "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+  "source_pin": "CONTROL_ONLY",
+  "exit": 0,
+  "seconds": 0.17960304208099842,
+  "guarded_seconds": 0.22745033400133252,
+  "output_complete": true,
+  "outputs": {
+    "stdout": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/adapter-tiny-v30-5/stdout.bin",
+      "bytes": 30,
+      "sha256": "2da88a03ebf7a079df5d34fe68401c218980e10d2dffdf4eab743f649d0af938"
+    },
+    "stderr": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/adapter-tiny-v30-5/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "kind": "private-native-Linux-source-pure-fixture-validation-v1",
+  "owner": "01a15ae6-04a2-7292-8ebe-30ad725ca61b",
+  "source_budget_sha256": "cb907157a626839d15b7f96d0180557a148b08337aec0b60c546b7240ee8b533",
+  "source_only": true,
+  "pure_in_memory_fixture_eval_go": true,
+  "native_runtime_go": false,
+  "engine_go": false,
+  "file_write_go": false,
+  "scope": "Selected source AST functions/classes for retained-birth/tree-memory/live-role-limit and uncertainty cleanup ONLY, using closed fakeprocess/FD/clock/stop/signal objects; neverexecmodule top-level or private imports.",
+  "limits": {
+    "fixture_scenarios": 16,
+    "fake_calls_each": 128,
+    "source_bytes": 327680,
+    "stdout_bytes": 16384,
+    "desired_seconds": 10
+  },
+  "required_properties": [
+    "stableownedbirthreturnspositiveliveRSSfrommatchingbirth; neverrssNoneforlivequalifiedrow",
+    "snapshotoldbirth/freshforeignreplacementmustnotregisterorsignalforeignFD",
+    "liveRSSoverrolelimitcensorsandkillsONLYknownownedfakeFD",
+    "discoveryuncertaintydoesnotpreventALLknownhandlecleanup/reap/joins/close; noPASS"
+  ],
+  "rules": [
+    "Read/hashselectedsourcebytes, ASTextractONLYnamedfunctions andnecessarypureexceptionclasses. No source-module import/exec/top-level effects.",
+    "Closedrestrictedglobals withFakeOS/FakeGuard/Fakeclock/FakeStop/FakeFDs ONLY; no real open/import/nativecalls/subprocess/network/sleep/signals/files/threads.",
+    "Fakecall/iteration ceilings mustabort; existingbundledPython -I -S -B inline source, no newscript/bytecode/dependency/packagebootstrap.",
+    "OutputseparatelySTATIC_PURE_FIXTURE results, native/control/enginequalification0; freshfullsource review andactualfinitecontrols stillrequired.",
+    "OriginalfrozenV5.2 source/report retained beforepatch; parentGitpreservationpending. TestoldcounterexampleinRAMifavailable, thenfixedsource\u2014no claimfromfixturetestsaboutactualOSraces."
+  ],
+  "issued": "2026-10-21T08:24:24.274994+00:00"
+}

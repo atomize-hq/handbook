@@ -1,0 +1,182 @@
+{
+  "kind": "shared-runtime-R2-static-review",
+  "verdict": "REMEDIATE",
+  "runtime_go": false,
+  "source_cutoff_utc": "2026-10-21T04:10:14Z",
+  "post_cutoff_source_repair_authorized": false,
+  "method": {
+    "runtime_full_text_read": true,
+    "companion_contracts_read": true,
+    "private_imports": false,
+    "compile": false,
+    "native_controls_engine_Cargo": false,
+    "Git_indexing": false,
+    "source_edits": false,
+    "delegation": false,
+    "new_algorithm": false
+  },
+  "sources": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\shared-runtime-contracts\\runtime_contracts.py",
+      "bytes": 81001,
+      "sha256": "de7702855dbb17b5cd00832aff457215ddcc4419bd77c3490faa1764c3eb932d"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\history_lane.py",
+      "bytes": 54727,
+      "sha256": "100fe59f34524b15c1033e5f1a93849a69766f36362ff37da3ef090278e02c3e"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\long_source_profiles.py",
+      "bytes": 64788,
+      "sha256": "c3a99f696786483989a5e170110eb483dd82953a5e0ec04867caaf3bf6b05797"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\phase_finalizer.py",
+      "bytes": 64474,
+      "sha256": "cb1aeec1fd40ff459694b4f0b86bfc256496e6eaf0099d4608fbaa83b9ed8792"
+    }
+  ],
+  "claim042": {
+    "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\admission\\shared-runtime-contracts-source-budget-042.json",
+    "bytes": 2307,
+    "sha256": "d84b317a83d722be89c04067a758ba8ecf09a9c9b96ca40d80b803e8d59647ee"
+  },
+  "source_cap": {
+    "bytes": 81920,
+    "files": 1,
+    "actual_bytes": 81001
+  },
+  "structured_standard": {
+    "path": "C:/Users/spmcc/Documents/__Project_Code/handbook/docs/specs/handbook-contract-membrane/structured-data-format-standard.md",
+    "approval_status": "PROPOSED",
+    "migration_or_defaults_approved": false
+  },
+  "findings": [
+    {
+      "id": "R2-A",
+      "priority": 2,
+      "status": "required",
+      "consumer": "runtime_contracts.py:474-480",
+      "producer": "long_source_profiles.py:1077-1100",
+      "missing_field": "case_index_scope",
+      "required_value": "closed-case-all-engine-and-checker-calls",
+      "case_index_max_calls_now_present": true,
+      "effect": "Every phase preflight deterministically refuses source-derived-complete-case-index-geometry; independent of missing platform ports."
+    },
+    {
+      "id": "R2-B",
+      "priority": 2,
+      "status": "required",
+      "coordinator": "history_lane.py:445 onward",
+      "runtime_anchors": [
+        "runtime_contracts.py:399-400",
+        "runtime_contracts.py:655-693",
+        "runtime_contracts.py:1247"
+      ],
+      "consumer": "phase_finalizer.py:697-705",
+      "source_search": {
+        "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20",
+        "glob": "*.py",
+        "patterns": [
+          "seal_case(",
+          "seal_trace("
+        ],
+        "only_matches": [
+          "runtime_contracts.py:655 definition",
+          "runtime_contracts.py:674 definition"
+        ],
+        "existing_dispatcher_callers_found": 0
+      },
+      "effect": "Six initial indices and complete22-case trace never produced by supplied coordinator; sixteen phase bodies do not satisfy whole-history reconstruction."
+    }
+  ],
+  "prior_repairs": {
+    "lookup_metadata_actual_oracles": "repaired",
+    "paced_family_clock_physical_tuple": "repaired",
+    "history_wrapper": "repaired",
+    "18field_final_body": "repaired",
+    "source_derived_width_count": "repaired except missing scope",
+    "R1_B": "resolved; prior control-zero suggestion superseded",
+    "control_boundary_cleanup_calls": 0,
+    "control_backlog": null,
+    "control_backlog_meaning": "UNMEASURED",
+    "online_backlog": "measured0 and2 actual boundary passes required"
+  },
+  "retained_static_contracts": [
+    "21 required ports including case_call_pairs",
+    "parentcase_id / helperscope_id / fresh32hex case_scope",
+    "all engine/checker raw/meta pairs",
+    "4 ready_refs and origin_ref",
+    "source-file SHA separate from model SHA",
+    "actual buffer length/SHA/reread and external own-body hash",
+    "44s publisher /48s reader /23.6s old-pin",
+    "PROVISIONAL_UNQUALIFIED only"
+  ],
+  "runtime_dependencies": [
+    "reviewed concrete Windows prefix/ports",
+    "positive source-bound prewrite admission",
+    "actual native ownership/closure and raw evidence",
+    "all mandatory cells",
+    "post-host-exit receipt join"
+  ],
+  "prior_pair_preserved": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\shared-runtime-review\\review.md",
+      "bytes": 9839,
+      "sha256": "2c391491f378a7ec8b1b08af95ba7ab25542675d3fa537870d548c4f60eb9c8f"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\shared-runtime-review\\evidence.json",
+      "bytes": 14089,
+      "sha256": "3978079ee22da1a09bbcca0b30633cd4591c1e779efefc2f096b1aab2f210024"
+    }
+  ],
+  "accounting": {
+    "manifest": {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\meta-membership-v5.json",
+      "bytes": 3503,
+      "sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be"
+    },
+    "pair_cap_bytes": 12288,
+    "prewrite_review": {
+      "utc": "2026-10-21T04:16:50.451965+00:00",
+      "files": 1143,
+      "actual_bytes": 9815535,
+      "remaining_pending_including_own_pair": 447152,
+      "projected_bytes": 10262687,
+      "cap_bytes": 10485760,
+      "headroom_bytes": 223073
+    },
+    "prewrite_evidence": {
+      "utc": "2026-10-21T04:16:50.538165+00:00",
+      "files": 1144,
+      "actual_bytes": 9820091,
+      "remaining_pending_including_own_pair": 442596,
+      "projected_bytes": 10262687,
+      "cap_bytes": 10485760,
+      "headroom_bytes": 223073
+    },
+    "parent_reservation_update": {
+      "authority_thread": "01a15ab8-d85f-71b1-8d37-c3c5689790be",
+      "remaining_pending_at_grant": 447152,
+      "categories": {
+        "oldreport": 18033,
+        "packets": 124072,
+        "returns": 229376,
+        "new_R2_including_own_full12288": 55191,
+        "Linux_review": 20480
+      },
+      "old472893_replaced": true,
+      "generic256000_future_and_fullownpair_not_added_twice": true,
+      "future_packet_return_reserves_total": 353448,
+      "only_actual_own_bytes_consumed": true
+    },
+    "deletion_expiry_relabel_credit": 0
+  },
+  "review_report": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\shared-runtime-review\\review-R2.md",
+    "bytes": 4556,
+    "sha256": "3ff1106387694ff2caf3f18b0222cb76fa61d787b24f931c1915672338bcbe5c"
+  }
+}

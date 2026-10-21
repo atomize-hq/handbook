@@ -1,0 +1,17 @@
+{
+  "claim_id": "44GiB-CENTRAL-044-GUARD80KiB-PERFILE-TRANSFER",
+  "utc": "2026-10-21T03:46:07.922979+00:00",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T034607Z.json",
+      "bytes": 3435,
+      "sha256": "8d2f99dd441cefe7b04ec43a828a6de3e205ee56077e6bda65b2581f2266e291"
+    },
+    {
+      "file": "claim-20261021T034607Z.md",
+      "bytes": 344,
+      "sha256": "e1a862f01698f6fcd52e5ca8348649c133659933cc850e20e74022cfd1857e68"
+    }
+  ]
+}

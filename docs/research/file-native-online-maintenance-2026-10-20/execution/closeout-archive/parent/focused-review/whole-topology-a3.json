@@ -1,0 +1,245 @@
+{
+  "status": "SOURCE_ONLY__NATIVE_512MiB_60000_NO_GO",
+  "revision2_supersedes_null_tight_bounds": {
+    "F1_bytes": 25703478,
+    "F1_files": 3633,
+    "F2_bytes": 48988533,
+    "F2_files": 6531,
+    "F1_rounded_MiB": 25,
+    "F2_rounded_MiB": 47,
+    "F1_work_plan_bytes": 9152590,
+    "F2_work_plan_bytes": 10219998,
+    "F1_initial_Work_base": 11910,
+    "F1_later_Work_base": 45277,
+    "F2_Work_base": 17118,
+    "parent_garbage_name_increment": 92,
+    "F1_plan_formula": "321*11910+92*sum(0..320)+8*(45277+92*329)",
+    "F2_plan_formula": "321*17118+92*sum(0..320)",
+    "F1_components": [524288,131072,13533086,1341440,52924,800525,135336,9152590,26073,3072,3072],
+    "F2_components": [524288,131072,30558000,2816000,4017010,715360,10219998,4757,1024,1024],
+    "new_provisional_aggregate_bytes": 553840496,
+    "new_provisional_aggregate_files": 58260,
+    "new_aggregate_over_512MiB": 16969584,
+    "with_other_units_delta_bytes": 556194560,
+    "with_other_units_delta_over_512MiB": 19323648,
+    "logical_sufficient_cap_not_minimum_physical_requirement": true,
+    "no_deletion_credit": true,
+    "all_COW_and_all_immutable_plan_births_retained": true,
+    "terminal_receipts_in_F1_F2": 0,
+    "small_primary_terminal_receipts_each_root": 48,
+    "global_large_history_distinct_failures_two_roots_ceiling": 2400,
+    "terminal_receipt_bytes_and_registry_geometry": null,
+    "source_binding_note": "Only immutable a3 git show reads newly authorized; mutable pack/packing changed and are not represented as a3. Original14unit map applies to a3 only."
+  },
+  "meaning": "Complete prospective fit is unproved; no claim that actual consumption necessarily exceeds cap.",
+  "platform_scenarios_incomplete": {"native_known_bytes":556194560,"native_known_files":58314,"native560MiB_slack_before_unknown":31008000,"Windows_old_additive_bytes":77395734,"Windows_old_additive_files":12078,"Windows_known_bytes_before_stress_terminal":633590294,"Windows_known_files_before_stress_terminal":70392,"Windows640MiB_slack_before_stress_terminal":37498346,"Windows_COW_only_stress_upper":52886466,"runtime_GO":false},
+  "engine": {
+    "commit": "a3f9805eccc19ede8dd5c735b54e675e98e63714",
+    "source_binding_sha256": "f21a616e822c906f75eabff04dd7e97435781ee7a4fa32171acd62d6f119317b",
+    "verified_manifest_files": 25,
+    "binary_sha256": "ce8b4d5cc6981e3ec4ee24e7d3fc25447550bd7d68b440d04bc334635d6ee2da"
+  },
+  "harness": {
+    "receipt_sha256": "ae78d32a4a14d8327c3b4090fea3ea05f4f69b8542c0e3c281692ec7acc7b63a",
+    "files": 9,
+    "bytes": 188865,
+    "mutated": false
+  },
+  "units": {
+    "required": 14,
+    "retained_build9_passed": 11,
+    "retained_build9_filtered": 3,
+    "one_fresh_run_bytes": 83330382,
+    "one_fresh_run_files": 62,
+    "actual64MiB_constructor_implemented": false,
+    "actual64MiB_constructor_extra_disk_bytes": null,
+    "actual64MiB_constructor_extra_disk_files": null,
+    "fixtures": [
+      [
+        "bounds_tests::bounded_file_and_indirection_routes_refuse",
+        1049,
+        2
+      ],
+      [
+        "disk::codec_tests::compact_refuses_damage_before_allocating",
+        0,
+        0
+      ],
+      [
+        "pack::tests::decoder_never_uses_advertised_size",
+        0,
+        0
+      ],
+      [
+        "pack::tests::typed_keys_exclude_controls_and_active_payloads",
+        0,
+        0
+      ],
+      [
+        "packing::tests::caller_limit_precedes_raw_and_zstd_bodies_after_all_routes",
+        264793,
+        13
+      ],
+      [
+        "packing::tests::constructor_reservation_evicts_before_allocating_output",
+        63765,
+        11
+      ],
+      [
+        "packing::tests::mixed_capture_and_cold_warm_measurements_reconcile",
+        16384,
+        8
+      ],
+      [
+        "packing::tests::paged_cache_identity_preserves_physical_instance",
+        724,
+        5
+      ],
+      [
+        "packing::tests::paged_four_routes_negative_duplicates_and_conflict",
+        1658660,
+        11
+      ],
+      [
+        "packing::tests::loading_indexes_evicts_before_transient_allocation",
+        80976318,
+        8
+      ],
+      [
+        "paged::tests::paged_exact_geometry_and_closed_keys",
+        0,
+        0
+      ],
+      [
+        "paged::tests::paged_positive_negative_boundary_and_cache",
+        331732,
+        2
+      ],
+      [
+        "paged::tests::paged_touched_untouched_and_malformed_refusal",
+        16957,
+        2
+      ],
+      [
+        "paged::tests::paged_maximum_keys_split_before_total_index_bound",
+        0,
+        0
+      ]
+    ],
+    "environment": [
+      "EXP_PACK_TEST_ROOT",
+      "TMP",
+      "TEMP",
+      "TMPDIR"
+    ],
+    "no_execution": true
+  },
+  "F1": {
+    "N": 10,
+    "H": 263,
+    "new_publications": 262,
+    "retired": 262,
+    "builds": 3,
+    "bootstrap_cleanup_max": 160,
+    "final_tail_calls": 2,
+    "COW_only_upper_bytes": 13533086,
+    "COW_node_files_upper": 1572,
+    "proposed_whole_bytes": 16777216,
+    "proposed_whole_files": 4000,
+    "tight_whole_peak_bytes": null,
+    "tight_whole_peak_files": null,
+    "gross_cumulative_logical_write_volume_outer_ceiling": 20845045440,
+    "measured_older_bytes": 7701780,
+    "measured_older_files": 1781
+  },
+  "F2": {
+    "N": 10,
+    "H_ceiling": 551,
+    "new_publications_ceiling": 550,
+    "build_attempts": 4,
+    "owned_declines_before_last": 2,
+    "bootstrap_cleanup_max": 160,
+    "request_max_bytes": 21,
+    "outcome_ref_max_bytes": 509,
+    "COW_only_upper_bytes": 30558000,
+    "COW_node_files_upper": 3300,
+    "obsolete_COW_subtotal": 30343500,
+    "proposed_whole_bytes": 33554432,
+    "proposed_whole_files": 6000,
+    "tight_whole_peak_bytes": null,
+    "tight_whole_peak_files": null,
+    "gross_cumulative_logical_write_volume_outer_ceiling": 42931439296,
+    "measured_older_bytes": 16544850,
+    "measured_older_files": 2149
+  },
+  "gross_outer_ceiling_basis": {
+    "initial_bytes": 78497472,
+    "per_noop_bytes": 75759616,
+    "per_build_bytes": 269484032,
+    "per_cleanup_checkpoint_bytes": 266240,
+    "F1_cleanup_checkpoint_opportunities": 326,
+    "F2_cleanup_checkpoint_opportunities": 320,
+    "per_cleanup_journal_bytes": 131072,
+    "one_time_outside_bytes": 1048576,
+    "logical_not_native_allocated": true,
+    "counts_overwritten_and_renamed_bytes_repeatedly": true,
+    "not_a_small_envelope_fit": true
+  },
+  "diagnostic": {
+    "native_proposed_bytes": 536870912,
+    "native_proposed_files": 60000,
+    "old_provisional_topology_bytes": 529480133,
+    "old_provisional_topology_files": 58096,
+    "old_provisional_slack_bytes": 7390779,
+    "old_provisional_slack_files": 1904,
+    "full_units_extra_if_heavy_fixture_already_same_owner_bytes": 2354064,
+    "full_units_extra_if_heavy_fixture_already_same_owner_files": 54,
+    "remaining_conditional_slack_bytes": 5036715,
+    "whole_topology_closed": false
+  },
+  "required_roots": [
+    "primary-A",
+    "primary-B-one-deep-lineage",
+    "interval-A",
+    "reservation-A",
+    "cutoff-A",
+    "retired-A-F1",
+    "auto-A-F2",
+    "stable-A",
+    "native-pressure-A",
+    "source-bound-shallow-donor-extensions"
+  ],
+  "unresolved": [
+    "tight whole F1 upper",
+    "tight whole F2 upper",
+    "primary A/B and physical metadata peaks",
+    "exact donor seed/reset/expiry/closure/census",
+    "real 64MiB constructor interaction fixture",
+    "all remaining original native boundary constructors",
+    "native sharing/death/path reuse adapters",
+    "paged corruption/duplicate/all-segment cases",
+    "crash deletion source binding and actual removal",
+    "raw evidence caps separate from roots",
+    "quota8 losing reservation terminal contract",
+    "positive single-publisher/maintenance overlap in revised harness",
+    "native allocation and RSS"
+  ],
+  "preservation": {
+    "publisher_counts": [
+      1,
+      4,
+      1
+    ],
+    "accepted_per_cycle": 16,
+    "readers": 4,
+    "losing_preparations": 48,
+    "implicit_retries": 0,
+    "accepted_B_retirement_credit": false,
+    "global_cumulative_bytes": 47244640256,
+    "clock_reset": false,
+    "runtime_GO": false,
+    "engine_or_harness_edits": false,
+    "Git_probes": false
+  }
+}
+

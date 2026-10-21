@@ -1,0 +1,58 @@
+{
+  "claim_id": "44GiB-CENTRAL-042-SHARED-RUNTIME-CONTRACTS80KiB",
+  "status": "SOURCE_CAP_ALLOCATION_ONLY__NEW_PARENT_BUDGET_SOURCE_GO_REQUIRED",
+  "authority": "META A shared source+16384 from existing C3; no retroactive qualification.",
+  "prior041": {
+    "file": "claim-20261021T031250Z.json",
+    "sha256": "a2f26bcdbc39238cbd9c1498047ad1441a2d1895c763e2179ab83381c4053e26"
+  },
+  "source": {
+    "owner": "01a15b6c-b109-7090-a8c2-0e165f92f51e",
+    "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\shared-runtime-contracts",
+    "file": "runtime_contracts.py",
+    "old_cap_bytes": 65536,
+    "new_cap_bytes": 81920,
+    "files_unchanged": 1,
+    "fresh_members": [
+      {
+        "file": "runtime_contracts.py",
+        "bytes": 65394,
+        "sha256": "959e9836aa04325df146e6ee305b9b72ca66326d467bb9208804bdfeb43aca8a"
+      }
+    ],
+    "all_fit_old_caps": true
+  },
+  "C3": {
+    "total": 16777216,
+    "unclaimed_before": 917504,
+    "draw": 16384,
+    "unclaimed_after": 901120
+  },
+  "unchanged": {
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "reserved_files": 4792716,
+    "central_unassigned_files": 207284,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "C3_total": 16777216,
+    "META_cap": 10485760,
+    "family_cap_files": 192,
+    "family_cap_bytes": 786432,
+    "new_global_bytes": 0,
+    "new_global_files": 0
+  },
+  "prewrite": {
+    "prior_seals_verified": 42,
+    "family_files": 131,
+    "family_bytes": 467758,
+    "META_bytes": 9034273,
+    "META_files": 1083,
+    "pending_META_reserve": 944912,
+    "META_manifest_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be"
+  },
+  "reason": "Five review fixes need readable complete scope beyond old142-byte slack; no field/proof omissions.",
+  "gate": "Owner holds upward writes until NEW immutable parent budget binds042 and explicit SOURCE GO. Exactly one original source file, no README/receipt/pycache/second file. No imports/controls/runtime/engine/Job/build/corpus/copy/archive/restore/deletion/Git permission. Context32KiB plan unallocated. All earlier caps/pairs and failed evidence unchanged.",
+  "actions": "Read-only source/census/priorseal checks plus042 triplet only.",
+  "utc": "2026-10-21T03:34:10.376612+00:00"
+}

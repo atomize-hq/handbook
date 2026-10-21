@@ -1,0 +1,126 @@
+{
+  "claim_id": "44GiB-CENTRAL-035-C3-HELPER-PROFILES-FINALIZER128KiB",
+  "utc": "2026-10-21T02:18:05.293911+00:00",
+  "status": "INTERNAL_C3_SOURCE_RESERVATION_APPLIED__PARENT_BUDGET_SOURCE_GO_BEFORE_NEW_NAMES",
+  "authority": "METAconcrete035ONLY:assign131072/2 fromexistingC3unclaimed toqualificationprofiles/finalizer, nootherresourcechange.",
+  "prior034": {
+    "file": "claim-20261021T021335Z.json",
+    "sha256": "7cef582dea91aeced39b332d37a6c4d6259d786b600d4afcc3387b66077f28b3"
+  },
+  "preserved027_helpercaps": {
+    "file": "claim-20261021T010313Z.json",
+    "sha256": "6f6cb79f053b3c1578883bfeda76358ce9306f55bdfd880d7b433cc6f3ea43ae"
+  },
+  "family_addendum": {
+    "file": "claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "cap_files": 128,
+    "cap_bytes": 524288
+  },
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes",
+  "old_whole": {
+    "bytes": 131072,
+    "files": 8
+  },
+  "new_whole": {
+    "bytes": 262144,
+    "files": 10,
+    "exact_flat_names": 10
+  },
+  "preserved_groups": {
+    "byte_caps": {
+      "LONG": 49152,
+      "HISTORY": 55296,
+      "CONTROL": 26624
+    },
+    "per_file_caps": {
+      "LONG": {
+        "legacy_archive_restore.py": 16384,
+        "long_lane.py": 32768
+      },
+      "HISTORY": {
+        "history_lane.py": 55296
+      },
+      "CONTROL": {
+        "fake_controls.py": 18432,
+        "fake_cases.json": 4096,
+        "lane_config.example.json": 4096,
+        "README.md": 4096,
+        "source-manifest.json": 2048
+      }
+    },
+    "file_counts": {
+      "LONG": 2,
+      "HISTORY": 1,
+      "CONTROL": 5
+    }
+  },
+  "new_groups": {
+    "PROFILES": {
+      "long_source_profiles.py": 65536
+    },
+    "FINALIZER": {
+      "phase_finalizer.py": 65536
+    }
+  },
+  "new_group_file_counts": {
+    "PROFILES": 1,
+    "FINALIZER": 1
+  },
+  "owners": {
+    "LONG_CONTROL_PROFILES_FINALIZER": "01a15b51-a50b-7930-8633-b42694240252",
+    "HISTORY": "01a15bcc-6fb9-7e63-b935-a60d25d9390a"
+  },
+  "fresh_snapshot": {
+    "old_groups": {
+      "LONG": {
+        "bytes": 48787,
+        "files": 2,
+        "manifest_sha256": "7484dd5a9a0847fc4ad38e664d51d87a8a4e9987f60c958a5c8eeb259c40fe79"
+      },
+      "HISTORY": {
+        "bytes": 54942,
+        "files": 1,
+        "manifest_sha256": "89761624d32cfed118dbf2e4e2fc96cce9763b191ed813644c9f54fa54d5cea8"
+      },
+      "CONTROL": {
+        "bytes": 24507,
+        "files": 5,
+        "manifest_sha256": "1fdc71758bedd06b5346e4f67a301b2f432b124b3b985d989e9be3a81ebfa339"
+      }
+    },
+    "old_whole_actual": 128236,
+    "old_names_exact": true,
+    "new_two_paths_absent": true,
+    "all_old_individual_group_caps_fit": true
+  },
+  "C3": {
+    "total_unchanged": 16777216,
+    "unclaimed_before": 2195456,
+    "new_SOURCEdraw": 131072,
+    "unclaimed_after": 2064384,
+    "source_filepool_unchanged": 15000,
+    "two_new_files": "DrawexistinginternalC3sourceallowance, noglobalfile/reserveincrease; conservative4213+2=4215within15k."
+  },
+  "implementation_scope": "Sourceonlypureimport/noactions calculators: closedsource-derivedenginegeometry/serializer/sink/raw bounds andtypedpostexitfinalizer. APIs/sourceprofilesarenotcasequalification, actualresourceproof orruntimeauthorization. No hardcodedestimatedbounds disguisedasfullsourceproof; allmandatoryvalidation stayspending untilseparatelyreviewed/admitted.",
+  "gate": [
+    "ParentNEWimmutablebudgetbind035/new262144/10/alloldgroups+new65536eachandexplicitSOURCEGO BEFOREanynewnamewrite. Sourceworkerheld; noimplicittemps/eleventhfile/pycache/unregisteredoutput.",
+    "ALLoldLONG49152/2,HISTORY55296/1,CONTROL26624/5andindividualcapsunchanged. Sourcewritesmustfitindividual/group/whole/pathcaps, notjustnewaggregate.",
+    "No runtimeLONG/history/control/engine/native/build/copy/restore/deletion/GitGO. Allruntime/output/RSS/source/identity/closure/clock/fulloraclecases requireseparatefiniteadmission. Sourcefreeze04:10unchanged."
+  ],
+  "ownership": "OriginalqualificationmodulesC3HELPER, notMETA/F01; distinctPpacket/returnreviewcopiesMETA9/commonGitpositiveF13. Existingf8/oldDriver/1e4andallotherownersourcecaps unchanged.",
+  "unchanged_global": {
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "cap_bytes": 47244640256,
+    "reserved_files": 4792652,
+    "unassigned_files": 207348,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "C2Win128MiB_held": 134217728,
+    "META9MiB": 9437184,
+    "new_global_bytes": 0,
+    "new_global_files": 0
+  },
+  "actions": "Readonlyold/newpath/cap/priorhashchecks+one035triplet only; nootherclaim/source/livebudget/runtimechange."
+}

@@ -1,0 +1,89 @@
+{
+  "kind": "private-qualification-lanes-R3-source-budget-046",
+  "source_only": true,
+  "engine_control_build_runtime_go": false,
+  "source_root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/qualification-lanes",
+  "bytes": 262144,
+  "files": 10,
+  "claim022_sha256": "905543e536ad5b7fd8db19c252a99d5e4fd432401f556bced4e236fea4358b36",
+  "claim023_sha256": "ff6a60ef8d5bff5d0d34fec2d35c84802be27f8f05f5414719bf8e3cc0de71b5",
+  "allocation": "C3_HELPER_SOURCE inside existing16MiB; distinct from META8, Matrix F01 and stream C3 source; no new global allowance",
+  "groups": {
+    "LONG": {
+      "bytes": 49152,
+      "files": 2,
+      "paths": {
+        "long_lane.py": 32768,
+        "legacy_archive_restore.py": 16384
+      }
+    },
+    "HISTORY": {
+      "bytes": 57344,
+      "files": 1,
+      "paths": {
+        "history_lane.py": 57344
+      }
+    },
+    "CONTROL": {
+      "bytes": 32768,
+      "files": 5,
+      "paths": {
+        "fake_controls.py": 14336,
+        "fake_cases.json": 8192,
+        "lane_config.example.json": 4096,
+        "source-manifest.json": 2048,
+        "README.md": 4096
+      }
+    },
+    "PROFILES": {
+      "bytes": 73728,
+      "files": 1,
+      "paths": {
+        "long_source_profiles.py": 73728
+      }
+    },
+    "FINALIZER": {
+      "bytes": 81920,
+      "files": 1,
+      "paths": {
+        "phase_finalizer.py": 81920
+      }
+    }
+  },
+  "rules": [
+    "Newprospectiveprivateharness/controllerrepairversiononly; oldfrozena5sourceandallfailurespreservedinGit. No Rust/core/publicformat edits.",
+    "BeforeEVERYwriteverifythisimmutablebudgetSHA andindividual/group/wholecaps, noextras/pycache/symlink/reparse/hardlinks.",
+    "No runtime/build/cache/fixture/archive/delete/engineauthority untilfreshfullsource-reviewandexplicitphaseadmission.",
+    "Rereadactualsame-bufferproducerliteralcontract; no fabricatedprooffields/defaultTrue orscope/denominatorchanges."
+  ],
+  "claim023_addendum_sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+  "claim024_sha256": "011825b6a11c267bb2cba5582faa5f835d44f9779003d19659ea01e44d371a1d",
+  "report_family_max_files": 128,
+  "report_family_max_bytes": 524288,
+  "allocation_note": "035 adds128KiB/2fromexistingC3unassigned; oldLONG/HISTORY/CONTROLcapsandownersunchanged; newpure source-derivedprofiles pluspostexitfinalizer, no runtime",
+  "claim027_sha256": "6f6cb79f053b3c1578883bfeda76358ce9306f55bdfd880d7b433cc6f3ea43ae",
+  "negative_freeze": {
+    "source_manifest_sha256": "f6c57e9a6f07becc21069338ea4c541a73c95ff150096c1971a83983a796f03d",
+    "archive_sha256": "9ede89a320a6d62edd371909e8d6a213d4ca894fad380d9511f2b6a421bfd5b7",
+    "archive_bytes": 31484,
+    "required_fixes": "R1 positivehostauth/polls;R2 finitepacedreadcoverage;R3 provisionalphase/postexitjoin;R4 quantitativewholeprofiles;R5 warmexactid;R6 fulllegacyoraclebeforeengine"
+  },
+  "claim035_sha256": "83c72145f5545e17f67b33c96cd612ab998d7c86f8c0b05477b3792ba43f86fd",
+  "prior_027_source_commit": "9ee0d66e",
+  "prior_027_source_manifest_sha256": "e45c8b91cbc8c06a5c77ac60d8eaed876678232bae2b8bbbc1ba008a649fea86",
+  "required_implementation": [
+    "Closed engine serializer/geometry/operation schedule/all sink source-derived formulas; complete source pins before runtime",
+    "One raw capture plus reconstructible offset/len/SHA references, success/failure/live potential accounting explicit",
+    "Outside original Job streaming strict complete QPC/identity/phase-window/twoempty/census finalizer, refuse unsupported oldshape",
+    "No import/private module execution, controls, native, engine, build, restore, corpus or Git mutation before separate source review and finite GO"
+  ],
+  "max_bytes": 294912,
+  "max_files": 10,
+  "claim046_sha256": "6bd67f146b344cdb8bd501a261df795e946a49b557d5a5d5227665c8e8e581ba",
+  "runtime_go": false,
+  "engine_commit_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "historical_review_watchdog": "2026-10-21T04:10:14Z MISSED, olda5/R2preserved; thisnewprospectiverepairdoesnotretroqualify",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z",
+  "issued": "2026-10-21T05:03:27.013341+00:00"
+}

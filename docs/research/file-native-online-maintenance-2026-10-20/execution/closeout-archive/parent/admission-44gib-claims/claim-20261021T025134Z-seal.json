@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-038-WINDOWS-EVIDENCE-DEADLINES4KiB-TRANSFER",
+  "utc": "2026-10-21T02:51:34.451685+00:00",
+  "status": "INTERNAL_SOURCE_PERFILE_TRANSFER_ONLY__NEW_BUDGET_SOURCE_GO_REQUIRED",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T025134Z.json",
+      "bytes": 3379,
+      "sha256": "65d2b457df776609ef3fdab629e28f9de8e288a6dcff903923eb2732aec5716b"
+    },
+    {
+      "file": "claim-20261021T025134Z.md",
+      "bytes": 492,
+      "sha256": "254ead0934e927255525aa2cf2cf134ce773bbf558596722e9429e9bf0d8eedb"
+    }
+  ]
+}

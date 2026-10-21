@@ -1,0 +1,142 @@
+{
+  "utc": "2026-10-20T21:20:49.068394+00:00",
+  "scope": "Read-only serialized-size projection on actual16 retained descriptors; NOT authenticated candidate work, engine test, or capacity qualification",
+  "source_receipt": "C:\\file-native-packing-20261020\\long-matrix-fixed2\\PZ-build.json",
+  "source_receipt_bytes": 141997,
+  "source_receipt_sha256": "a54a04a4fdc8dad85dee038502976886b015ed5b53bb1b8fbcf32dcffe8ca1ad",
+  "descriptor_count": 16,
+  "descriptor_role_counts": {
+    "allocation": 2,
+    "candidate": 7,
+    "hint": 2,
+    "publication": 3,
+    "result": 2
+  },
+  "encoding": "UTF-8 JSON, indent2, no trailing LF, ASCII source fields; Python rendering independently matched exact existing serde Work bytes on rem8 selected root",
+  "encoding_check_root_sha256": "7e92e8c7d6c45c2b478b8591c593d31995bdf5c05228e52b03734d518393f585",
+  "prospective_schema": [
+    "version",
+    "store_id",
+    "physical_parent",
+    "transition_parent",
+    "birth_claims",
+    "generation",
+    "older",
+    "jobs",
+    "retired",
+    "garbage",
+    "removed_bytes",
+    "removed_files",
+    "reconciled_absent"
+  ],
+  "shape": "Current generation4;3 successors after generation1;2older=[1,3] models drained intermediate,3older=[1,2,3] models held older readers. Jobs cover generations2..4 or1..4 if initial jobs pending; retirement covers1..3. Every generation/container uses exact retained descriptors plus unique projected instance id. Garbage includes one predecessor plan tombstone and four activation-stage paths.",
+  "results": [
+    {
+      "older_generations": 2,
+      "pending_initial_jobs": false,
+      "birth_id_bytes": 52,
+      "birth_claims": 0,
+      "pending_jobs": 48,
+      "retired_descriptors": 48,
+      "projected_pretty_json_bytes": 92882,
+      "cap_bytes": 131072,
+      "headroom_bytes": 38190
+    },
+    {
+      "older_generations": 2,
+      "pending_initial_jobs": false,
+      "birth_id_bytes": 99,
+      "birth_claims": 0,
+      "pending_jobs": 48,
+      "retired_descriptors": 48,
+      "projected_pretty_json_bytes": 99979,
+      "cap_bytes": 131072,
+      "headroom_bytes": 31093
+    },
+    {
+      "older_generations": 2,
+      "pending_initial_jobs": true,
+      "birth_id_bytes": 52,
+      "birth_claims": 0,
+      "pending_jobs": 64,
+      "retired_descriptors": 48,
+      "projected_pretty_json_bytes": 103236,
+      "cap_bytes": 131072,
+      "headroom_bytes": 27836
+    },
+    {
+      "older_generations": 2,
+      "pending_initial_jobs": true,
+      "birth_id_bytes": 99,
+      "birth_claims": 0,
+      "pending_jobs": 64,
+      "retired_descriptors": 48,
+      "projected_pretty_json_bytes": 111085,
+      "cap_bytes": 131072,
+      "headroom_bytes": 19987
+    },
+    {
+      "older_generations": 3,
+      "pending_initial_jobs": false,
+      "birth_id_bytes": 52,
+      "birth_claims": 0,
+      "pending_jobs": 48,
+      "retired_descriptors": 48,
+      "projected_pretty_json_bytes": 102824,
+      "cap_bytes": 131072,
+      "headroom_bytes": 28248
+    },
+    {
+      "older_generations": 3,
+      "pending_initial_jobs": false,
+      "birth_id_bytes": 99,
+      "birth_claims": 0,
+      "pending_jobs": 48,
+      "retired_descriptors": 48,
+      "projected_pretty_json_bytes": 110720,
+      "cap_bytes": 131072,
+      "headroom_bytes": 20352
+    },
+    {
+      "older_generations": 3,
+      "pending_initial_jobs": true,
+      "birth_id_bytes": 52,
+      "birth_claims": 0,
+      "pending_jobs": 64,
+      "retired_descriptors": 48,
+      "projected_pretty_json_bytes": 113178,
+      "cap_bytes": 131072,
+      "headroom_bytes": 17894
+    },
+    {
+      "older_generations": 3,
+      "pending_initial_jobs": true,
+      "birth_id_bytes": 99,
+      "birth_claims": 0,
+      "pending_jobs": 64,
+      "retired_descriptors": 48,
+      "projected_pretty_json_bytes": 121826,
+      "cap_bytes": 131072,
+      "headroom_bytes": 9246
+    },
+    {
+      "older_generations": 3,
+      "pending_initial_jobs": true,
+      "birth_id_bytes": 99,
+      "birth_claims": 64,
+      "pending_jobs": 64,
+      "retired_descriptors": 48,
+      "projected_pretty_json_bytes": 128676,
+      "cap_bytes": 131072,
+      "headroom_bytes": 2396
+    }
+  ],
+  "limits": [
+    "New explicit aborted-pack-directory tasks and additional nonstage garbage/owner closure are not included.",
+    "Metadata counter growth beyond zero changes digit count; further schema changes require recomputation.",
+    "IDs and hash values are shape-valid placeholders for size only; descriptor payloads/ranges come from the exact retained receipt.",
+    "No claim all64pack catalog states fit or held/producers can progress without bound.",
+    "Actual Rust final-schema admitted root and checkpoint cost/budget evidence remain required."
+  ],
+  "actions": "No engine/build/recovery/source/fixture mutations or corpus copies; aggregate review output only"
+}

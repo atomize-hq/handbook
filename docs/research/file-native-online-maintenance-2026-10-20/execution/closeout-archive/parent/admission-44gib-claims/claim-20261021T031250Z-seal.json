@@ -1,0 +1,17 @@
+{
+  "claim_id": "44GiB-CENTRAL-041-WINDOWS-HOOKS-DRIVER1KiB-TRANSFER",
+  "utc": "2026-10-21T03:12:50.431536+00:00",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T031250Z.json",
+      "bytes": 3310,
+      "sha256": "a2f26bcdbc39238cbd9c1498047ad1441a2d1895c763e2179ab83381c4053e26"
+    },
+    {
+      "file": "claim-20261021T031250Z.md",
+      "bytes": 366,
+      "sha256": "1c25c07df890ea5ce23d0d4d142147cc74c0c53e13e6b947e645636e7949ac1f"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "claim_id": "44GiB-CENTRAL-030-C3-META9MiB",
+  "utc": "2026-10-21T01:40:58.976379+00:00",
+  "status": "INTERNAL_META_TOPUP_APPLIED__NEW_IMMUTABLE_MEMBERSHIP_BUDGET_REQUIRED",
+  "authority": "METAconcrete030ONLYafter029:1MiBinternalC3unsubclaimed->META8to9MiB, finitependingreview/sourcecopies, noothergrant.",
+  "prior029": {
+    "file": "claim-20261021T012603Z.json",
+    "sha256": "d574c59a7a08f480a2570f6e526e0762899b28eee5383118760937743335a1b4"
+  },
+  "family_addendum": {
+    "file": "claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "files_cap": 128,
+    "bytes_cap": 524288
+  },
+  "C3_transfer": {
+    "total_unchanged": 16777216,
+    "META_before": 8388608,
+    "META_increase": 1048576,
+    "META_after": 9437184,
+    "META_files_unchanged": 2000,
+    "unsubclaimed_before": 3309568,
+    "unsubclaimed_after": 2260992,
+    "old32KiBcontrolhold_inside_unsubclaimed": 32768,
+    "new_global_bytes": 0,
+    "new_global_files": 0
+  },
+  "canonical_old_membership": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\meta-membership.json",
+    "bytes": 2257,
+    "sha256": "a3d26618a7d0e1facaef914831be1be8f87eab7747d56292e8e8afe26fa8b106",
+    "immutable_old8MiB": true,
+    "selector": "ALLP recursive +regularfilesdirectlyatLandingresearchroot/executionroot +sevenlistedexecution subtrees-minusstream +exactpromotedharnesslist; no contentdedup.",
+    "seven_subtrees": [
+      "admission",
+      "admission-claims",
+      "native-macos",
+      "reviews",
+      "final-protocol",
+      "windows-matrix",
+      "windows-cadence"
+    ],
+    "stream_excluded": "execution/windows-matrix/stream-snapshot-controls",
+    "promoted20": [
+      "cp2_decoder_static_controls.py",
+      "cp2_decoder_static_final.py",
+      "cp2_full_batch.py",
+      "cp2_journal_controls.py",
+      "driver.py",
+      "driver_start_controls.py",
+      "final_document_controls.py",
+      "finish_h10_baseline.py",
+      "h10_ready_census.py",
+      "matrix_budget.py",
+      "matrix_budget_controls.py",
+      "oracle_batch.py",
+      "physical_decoder_v3.py",
+      "physical_decoder_v4.py",
+      "quiescent_oracle.py",
+      "request_provenance.py",
+      "physical_decoder_v5.py",
+      "cohort_closure_controls.py",
+      "paged_index.py",
+      "paged_index_controls.py"
+    ],
+    "promoted_current_bytes": 203215,
+    "current_original_exclusions": [
+      "execution/native-linux",
+      "execution/qualification-lanes",
+      "execution/windows-final-platform",
+      "execution/fixture-retirement"
+    ],
+    "ownership": "NativeLinuxoriginalsF01/F12; qualification/helper/windows/fixture-retirement originalsC3, notMETA. SharedGitpositiveF13. OldF01source reservationsretainedconservatively; nodeletion/expirycredit. PhysicallydistinctPpacket/archive/extract/returncopiesMETA."
+  },
+  "fresh_current_META": {
+    "bytes": 7980774,
+    "files": 940,
+    "old8MiB_slack": 407834,
+    "old_cap_not_breached": true,
+    "preserved_Windows_negative_bytes_reported": 53005,
+    "retained_no_retroactivefix": true
+  },
+  "finite_pending_forecast": {
+    "individual_caps_bytes": {
+      "Macv34_archive": 65536,
+      "Macv34_extract8files": 108544,
+      "Macv34_review": 24576,
+      "Macv34_distinctLandingcopy": 81920,
+      "CP4pacefreeze": 8192,
+      "CP4review": 40960,
+      "CP4Landingcopies": 49152,
+      "CP4compile_protocol_selectedmetadata": 99328,
+      "Windowsrepairedreview": 32768,
+      "WindowsLandingreview": 32768,
+      "helper027Landingreview": 16384,
+      "v2fiveFULLpromotions": 45056,
+      "v2review": 24576,
+      "v2Landingreview": 24576,
+      "v2rawmanifest": 8192,
+      "claims026_030distinctLandingcopies": 32768,
+      "newsourcebudgets": 24576,
+      "archive_helper_sourcereview": 32768
+    },
+    "itemized_sum": 752640,
+    "conservative_pending_total": 848896,
+    "margin_above_itemized": 96256,
+    "prospective_current_plus_finite": 8829670,
+    "headroom_under9MiB": 607514,
+    "margin_scope": "96256Bcoversreportself/finalization/rounding withinfinite829KiB total; notbulkrawcopypermission. New030parenttriplet consumesmargin; distinctLanding026-030copiesstayinside32768slot.",
+    "future_v2_promoted_full_files": [
+      "quota_v2_oracle.py",
+      "quota_v2_controls.py",
+      "verify_operational_v2.py",
+      "physical_decoder_v6.py",
+      "quota-v2-plan.md"
+    ],
+    "v2_membership_gate": "AddfiveFULLphysicalLandingcopies onlyafteractualINTEGRATE/newmembershipregistration, countmax45056 once; MatrixsourceoriginalsremainF01/C3jointpool. OldF01reservationheld, no negativeoldsourcecredit.",
+    "before_each_copy": "FreshALLP+closedLandingactual plusALLstill-validpendingreservations+prospectivearchive/extract/copy/terminalmetadata mustfit9MiB/2000. CurrentitemizedcapsarenotfullrawbulkcopyGO; exactindividualsource/hash/path/capchecksrequired."
+  },
+  "parent_registration": "NEWimmutableMETA9membership/budgetafterseal binds030+oldmembershiphash+updatedexactpromotions/exclusions. DoNOToverwriteoldMETA8manifest/caps/negativearchives. Sourcecopyselection/runtimesremainseparatelyauthorized.",
+  "unchanged_global": {
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "cap_bytes": 47244640256,
+    "reserved_files": 4792652,
+    "unassigned_files": 207348,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "C3_total": 16777216,
+    "C3_unsubclaimed_after": 2260992
+  },
+  "no_new_permissions": "Noimplicitroot/worktree/source/fixture/native/runtime/deletiongrant. Alloldcaps/failures/archivesretained. Sourcefreeze04:10unchanged. Thisbytepartitiondoesnotqualifyanycaseorapplyphaseexpiry.",
+  "actions": "Readonlycanonicalmembership/freshMETA/family/priorhashchecks andonecompact030triplet only; nootherresource/source/livebudget/copy/runtimechanges."
+}

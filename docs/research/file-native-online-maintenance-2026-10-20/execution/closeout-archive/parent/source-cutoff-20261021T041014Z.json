@@ -1,0 +1,670 @@
+{
+  "schema": "private-experiment-source-cutoff-ledger-v1",
+  "source_cutoff": "2026-10-21T04:10:14Z",
+  "observed_at": "2026-10-21T04:10:56.241443+00:00",
+  "runtime_go": false,
+  "notes": [
+    "Hashes preserve observed bytes, not qualification. Mac remote sources are separately frozen and pending receipt. Metadata/config binding may follow; code edits prohibited after cutoff."
+  ],
+  "files": [
+    {
+      "group": "qualification-lanes",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\fake_cases.json",
+      "bytes": 2526,
+      "sha256": "5363b095b635d101af0a7d533ccc36fa990d33fa396351dd47c8be7e027882d9",
+      "last_write_utc": "2026-10-21T03:36:10.417676+00:00"
+    },
+    {
+      "group": "qualification-lanes",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\fake_controls.py",
+      "bytes": 13208,
+      "sha256": "dd74df5830cc0a3055e478c652d2b90b1ca22951fddb5c935caa1e6984aa7b57",
+      "last_write_utc": "2026-10-21T03:36:09.167992+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "qualification-lanes",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\history_lane.py",
+      "bytes": 54727,
+      "sha256": "100fe59f34524b15c1033e5f1a93849a69766f36362ff37da3ef090278e02c3e",
+      "last_write_utc": "2026-10-21T04:08:32.626947+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "qualification-lanes",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\lane_config.example.json",
+      "bytes": 2872,
+      "sha256": "cf3d60bdc6fec058ffaf50d596a46c53f33e9279142a4055f7117931b1aca868",
+      "last_write_utc": "2026-10-21T03:36:11.551985+00:00"
+    },
+    {
+      "group": "qualification-lanes",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\legacy_archive_restore.py",
+      "bytes": 13982,
+      "sha256": "4598ad53e91775e104e08df9b51e242bd24efd837d620df259c529b541a1b1b4",
+      "last_write_utc": "2026-10-21T03:25:56.368108+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "qualification-lanes",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\long_lane.py",
+      "bytes": 29946,
+      "sha256": "bc018fecaed9a9c691506e1c2406eeb51f2c9a37181d89fb10059b6bc32bd433",
+      "last_write_utc": "2026-10-21T03:25:49.582257+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "qualification-lanes",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\long_source_profiles.py",
+      "bytes": 64788,
+      "sha256": "c3a99f696786483989a5e170110eb483dd82953a5e0ec04867caaf3bf6b05797",
+      "last_write_utc": "2026-10-21T04:08:08.307239+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "qualification-lanes",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\phase_finalizer.py",
+      "bytes": 64474,
+      "sha256": "cb1aeec1fd40ff459694b4f0b86bfc256496e6eaf0099d4608fbaa83b9ed8792",
+      "last_write_utc": "2026-10-21T04:08:09.450522+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "qualification-lanes",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\README.md",
+      "bytes": 3977,
+      "sha256": "583548f20847189bb36312ec08731f493b4036a38e4228e661c5012a82296303",
+      "last_write_utc": "2026-10-21T03:36:12.690067+00:00"
+    },
+    {
+      "group": "qualification-lanes",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes\\source-manifest.json",
+      "bytes": 1675,
+      "sha256": "86038660021a1c7aea298569026b0aefdd3a7701e0db5f51a19fb84a3543d42b",
+      "last_write_utc": "2026-10-21T04:09:43.608271+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\controls-forecast.json",
+      "bytes": 3897,
+      "sha256": "2ba00e9374ed800dfd7c71394a78813ba537dc0db37e5ea74c5b119c7e5e00d1",
+      "last_write_utc": "2026-10-21T04:09:55.741039+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\final-engine-bindings.json",
+      "bytes": 4160,
+      "sha256": "130853968cf83cd69a0327563b3dd7a7490e460d25788f7597380e5f69841b0c",
+      "last_write_utc": "2026-10-21T04:09:55.743083+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\focused_windows.json",
+      "bytes": 6538,
+      "sha256": "182fd6a3b7c307d84445ea9fb8a85dc9343c6aa2103e4c40afb24c26ee54e25b",
+      "last_write_utc": "2026-10-21T04:09:55.754084+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\growth_actions.json",
+      "bytes": 6603,
+      "sha256": "b071f7d17fa0ee3bf195959fe983d7d1d70b106d87bf368c64799ca430d57b5a",
+      "last_write_utc": "2026-10-21T03:20:43.461968+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\interface.md",
+      "bytes": 7715,
+      "sha256": "e72424417f2f0b779a3c7c54bb31be237831e34f417612da5f490342a706a11f",
+      "last_write_utc": "2026-10-21T04:09:55.749084+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\packing52.json",
+      "bytes": 21122,
+      "sha256": "6028f8fc4a01ae4d0303d7f92f91db28a3c417b5aeaa4695ddbd3fd1a190b506",
+      "last_write_utc": "2026-10-21T03:09:39.259344+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\platform-source-review-notes.md",
+      "bytes": 7681,
+      "sha256": "03d1d0e53bb371fdfb246499b9123c58e0df906f4e769925ccf2a7471d52c812",
+      "last_write_utc": "2026-10-21T04:09:55.752084+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\protocol.json",
+      "bytes": 24128,
+      "sha256": "c4d390f0354ca0e689ab0602f1291fc98a6fe3ca07f76bc84e663a3ca5417711",
+      "last_write_utc": "2026-10-21T04:09:55.757306+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\README.md",
+      "bytes": 5396,
+      "sha256": "c7ed92578e1de5e21073006b48ae967566b3a4bbbeb831db3066ab1e23a8b793",
+      "last_write_utc": "2026-10-21T04:09:55.746083+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\recovery24.json",
+      "bytes": 11328,
+      "sha256": "dc164a0f0fda3e1935f78d2944fe0328b3970a86dff1c78e34a634fac5dad746",
+      "last_write_utc": "2026-10-21T03:09:40.076812+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\source-bindings.json",
+      "bytes": 7177,
+      "sha256": "76abda6db9467ad779c03ee72c56b14c32b9f50d616572b63d237394bb1da8a6",
+      "last_write_utc": "2026-10-21T04:09:55.735003+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\source-receipt.json",
+      "bytes": 5774,
+      "sha256": "580d7098ea13db2d52748a5d2f80d1705e4c60f0d54e4784476596cd23a16f9c",
+      "last_write_utc": "2026-10-21T04:09:55.826301+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\source_constructors.json",
+      "bytes": 17755,
+      "sha256": "7ecf0fc058b8515a606ebf30acf7779e6cb89d3f4aac20842d88c29406824497",
+      "last_write_utc": "2026-10-21T03:09:44.175132+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\source_controls.py",
+      "bytes": 30719,
+      "sha256": "fb12679d89f1f2b37e02688c1498554ac32399d8828a2cfc4a777e7000005a86",
+      "last_write_utc": "2026-10-21T04:07:22.420858+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\static-controls-result.json",
+      "bytes": 5515,
+      "sha256": "0a9432af479a872202f3dbc52db1a04dfd58a594a1d719504cb6712b35fbb1a8",
+      "last_write_utc": "2026-10-21T04:09:55.738601+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\strict24.json",
+      "bytes": 10194,
+      "sha256": "407eb436cb4b28b0b7695e9ab6ea4f3063ea4242a91f2a66cc67220ab116d8e7",
+      "last_write_utc": "2026-10-21T03:09:40.908313+00:00"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\windows_adapter.py",
+      "bytes": 23367,
+      "sha256": "518d10d6e91e615db85121178a8257c14fb309bc9d02ecd6882e1aae9658114c",
+      "last_write_utc": "2026-10-21T04:08:40.834261+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\windows_bootstrap.py",
+      "bytes": 8151,
+      "sha256": "32f01f6ffcf58f0d3914e447b7ddd2cd864c3c80d2c4ec5ad8b2d112f39765f7",
+      "last_write_utc": "2026-10-21T03:15:41.622049+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\windows_capsule.py",
+      "bytes": 21659,
+      "sha256": "7944c5711b8bf7d77bd53d52d4a98f181f8290bb6da7c2c8de731e81a82168f2",
+      "last_write_utc": "2026-10-21T04:08:42.567500+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\windows_deadlines.py",
+      "bytes": 3749,
+      "sha256": "da4309d25abeac4ddcd20fe8f92ca8bf3e539313d8d3df72b805a7e41fb68b1d",
+      "last_write_utc": "2026-10-21T03:20:40.176966+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\windows_driver.py",
+      "bytes": 24343,
+      "sha256": "84216d84601e6e6e2178462c0bf372dde0d1860883f9992ae722dce4d70bb12b",
+      "last_write_utc": "2026-10-21T04:07:18.228541+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\windows_evidence.py",
+      "bytes": 22056,
+      "sha256": "bf8ee356ca7cb196a1383feeaa1189d4b731779fa82d03cc502aa2dec633e4bf",
+      "last_write_utc": "2026-10-21T04:08:41.680149+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\windows_growth.py",
+      "bytes": 14804,
+      "sha256": "1315c8383689736f88e6067e47cd5608569dfedfd73a75375b4ac1f109c24e8e",
+      "last_write_utc": "2026-10-21T04:07:17.332945+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\windows_hooks.py",
+      "bytes": 26555,
+      "sha256": "4fb796cab36cea1e8cf037bdf66555fa23bde1a6214354f4acd05c551b8056e9",
+      "last_write_utc": "2026-10-21T04:08:43.432864+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\windows_native.py",
+      "bytes": 25843,
+      "sha256": "a4c02bebadf58c99e902b45479daea676dcc39c195abc2d1d6692cebae89be1c",
+      "last_write_utc": "2026-10-21T02:16:53.256901+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\windows_oracle_bridge.py",
+      "bytes": 11857,
+      "sha256": "e7970124dc02fabac9cca8aac573ba351936c1a7dea589073104c70606eb7512",
+      "last_write_utc": "2026-10-21T04:08:44.321877+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-final-platform",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform\\workspace_ordinary.json",
+      "bytes": 4461,
+      "sha256": "4989441f99816c0a8be029d8137736494859beb284121d27cb57b7d6d932dc59",
+      "last_write_utc": "2026-10-21T03:09:43.354456+00:00"
+    },
+    {
+      "group": "windows-bounded-guard",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard\\controls.py",
+      "bytes": 14332,
+      "sha256": "3a642d67ad0473da45062af82fb3fae42e0fca4d7a3d90a50d9170d3e3b2f98a",
+      "last_write_utc": "2026-10-21T04:07:48.356698+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-bounded-guard",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard\\job_guard_bounded.py",
+      "bytes": 60355,
+      "sha256": "c6dc7a797af9cc4288f29740818c224de7da6b2215084efd8224c138559feb78",
+      "last_write_utc": "2026-10-21T04:07:48.377784+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "windows-bounded-guard",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard\\README.md",
+      "bytes": 4083,
+      "sha256": "8eb9474209a1c70877f81b16d1d31b878fc7a33d1ed033fbc60e9e961b253854",
+      "last_write_utc": "2026-10-21T04:07:48.379785+00:00"
+    },
+    {
+      "group": "windows-bounded-guard",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard\\source-receipt.json",
+      "bytes": 2863,
+      "sha256": "e203c0cedf6f2bbe2c89826be0dc1150ca76766c0aa1eaefb382c4aaca9f56d8",
+      "last_write_utc": "2026-10-21T04:07:48.379785+00:00"
+    },
+    {
+      "group": "fixture-retirement",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\fixture-retirement\\archive.py",
+      "bytes": 51047,
+      "sha256": "e99cf2aceeca406c36f8b809869e9aba5e26c1eb70a5157b8bf3d4842baf3f4b",
+      "last_write_utc": "2026-10-21T03:09:02.617559+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "fixture-retirement",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\fixture-retirement\\controls.py",
+      "bytes": 18350,
+      "sha256": "3c89ed1b3720c601558cf2202fe6b5a9b6d08113bff79fb01cbfc95ace38edeb",
+      "last_write_utc": "2026-10-21T03:09:37.771915+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "fixture-retirement",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\fixture-retirement\\README.md",
+      "bytes": 4081,
+      "sha256": "6746aaa969c3e2def09836452ee5aba97eaf948dcd779947a0f123ed43d0cc76",
+      "last_write_utc": "2026-10-21T03:09:37.773576+00:00"
+    },
+    {
+      "group": "fixture-retirement",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\fixture-retirement\\source-receipt.json",
+      "bytes": 1805,
+      "sha256": "15125e5133d4c45669aa6db3d6a2916109b62ef17f692a084b660cca29425cfe",
+      "last_write_utc": "2026-10-21T03:09:37.774575+00:00"
+    },
+    {
+      "group": "shared-runtime-contracts",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\shared-runtime-contracts\\runtime_contracts.py",
+      "bytes": 81001,
+      "sha256": "de7702855dbb17b5cd00832aff457215ddcc4419bd77c3490faa1764c3eb932d",
+      "last_write_utc": "2026-10-21T04:09:40.169095+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\source_receipt.json",
+      "bytes": 6650,
+      "sha256": "f62dd302ce93c44a501cb57e8677faf7d92a18ac425072491237d74105dc1456",
+      "last_write_utc": "2026-10-21T04:09:52.102286+00:00"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_adapter.py",
+      "bytes": 27588,
+      "sha256": "facafce5c23b5d343c682ced0e96b6e0dc5962c0ccbde527da2011702372ebba",
+      "last_write_utc": "2026-10-21T04:05:07.368917+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_bootstrap.py",
+      "bytes": 15712,
+      "sha256": "525f8379a3845c33628a0a09d13a3b0a6e088b26d9fee21ab315353d3f318f66",
+      "last_write_utc": "2026-10-21T03:57:53.910468+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_driver.py",
+      "bytes": 39049,
+      "sha256": "60c627134507cfb4906f3827406ea7091ff033e1ab985aee8ff34a7c0207fad8",
+      "last_write_utc": "2026-10-21T04:08:56.404844+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_extensions.py",
+      "bytes": 32947,
+      "sha256": "4ad6ad44d3e39251087c353780c1020ed538d3142068059132bb7dcc6a3c6978",
+      "last_write_utc": "2026-10-21T04:05:06.594427+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_growth.json",
+      "bytes": 10743,
+      "sha256": "10cafcf77caef864e07b8dec0c7d35af27c8638e87cbd9069f500ba4aab66e93",
+      "last_write_utc": "2026-10-21T03:47:27.412053+00:00"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_main.py",
+      "bytes": 16020,
+      "sha256": "0abde008b783ce067544f5afa89a9b184934792ff365d31e776ee05617c854e2",
+      "last_write_utc": "2026-10-21T03:57:02.621068+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_manifest.json",
+      "bytes": 15944,
+      "sha256": "0112c70c39b411879533e1843cd6e1d78f8cad79d46770927c0993bb97aaa5d4",
+      "last_write_utc": "2026-10-21T04:09:52.042269+00:00"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_oracle.py",
+      "bytes": 11226,
+      "sha256": "bf98a035f567aa65cafe4ce9703761e36030279060d4019263133f8841f45ee3",
+      "last_write_utc": "2026-10-21T03:21:59.666929+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_ordinary.py",
+      "bytes": 6561,
+      "sha256": "fccad1637fa9c85f5fb3d77094f13ddc9bc810bca9410dc9aed01f940c80e942",
+      "last_write_utc": "2026-10-21T02:48:58.657338+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_packing.py",
+      "bytes": 21996,
+      "sha256": "c455908bdff907ef35cf424e1cd2d84804fd1577a39de31646513b96551a2ee1",
+      "last_write_utc": "2026-10-21T03:22:45.713901+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_recovery.py",
+      "bytes": 8089,
+      "sha256": "da30aececf9ae58b48322dfcdb91f33d83928b874236b2c34e600104353d6f2e",
+      "last_write_utc": "2026-10-21T01:43:02.271451+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "native-linux/final-suite",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_units.py",
+      "bytes": 3189,
+      "sha256": "05b49bb269b404eedc433f598328be6217a99823a9ef90ae3d09dcaf1daa10f9",
+      "last_write_utc": "2026-10-21T02:41:02.015535+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\Cargo.lock",
+      "bytes": 10547,
+      "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+      "last_write_utc": "2026-10-20T22:04:44.676381+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\Cargo.toml",
+      "bytes": 561,
+      "sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74",
+      "last_write_utc": "2026-10-20T22:04:44.677382+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\consumers\\project\\Cargo.toml",
+      "bytes": 147,
+      "sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e",
+      "last_write_utc": "2026-10-20T22:04:44.678383+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\consumers\\project\\src\\main.rs",
+      "bytes": 68,
+      "sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173",
+      "last_write_utc": "2026-10-20T22:04:44.678383+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\consumers\\research\\Cargo.toml",
+      "bytes": 148,
+      "sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed",
+      "last_write_utc": "2026-10-20T22:04:44.679382+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\consumers\\research\\src\\main.rs",
+      "bytes": 69,
+      "sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac",
+      "last_write_utc": "2026-10-20T22:04:44.679382+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\api.rs",
+      "bytes": 12161,
+      "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851",
+      "last_write_utc": "2026-10-20T22:04:44.680382+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\baseline_model.rs",
+      "bytes": 8570,
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+      "last_write_utc": "2026-10-20T22:04:44.680382+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\bounds_tests.rs",
+      "bytes": 1001,
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "last_write_utc": "2026-10-20T22:04:44.680382+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\differential.rs",
+      "bytes": 2661,
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "last_write_utc": "2026-10-20T22:04:44.680382+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\disk.rs",
+      "bytes": 31206,
+      "sha256": "2ea695569eba8a5631be5b1708273b2796c7c5573149a304b9e695e531b9208b",
+      "last_write_utc": "2026-10-21T03:27:08.714045+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\graph.rs",
+      "bytes": 14324,
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+      "last_write_utc": "2026-10-20T22:04:44.681382+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\io.rs",
+      "bytes": 21979,
+      "sha256": "1e401ad489b78e10845dac65ccc1b36ee9f99753c0870aa5a41c4da6661aa02c",
+      "last_write_utc": "2026-10-21T03:39:49.509378+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\lib.rs",
+      "bytes": 476,
+      "sha256": "fba1eb82cbb6f5400adf283569178750ca7fb75f51a56c8bbd0cadb5abf716ea",
+      "last_write_utc": "2026-10-20T22:36:59.757785+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\lifetime.rs",
+      "bytes": 47780,
+      "sha256": "6e788c5b66d8baddd3344e3332415a6e0b15d26c911d67bdc58421c5113160eb",
+      "last_write_utc": "2026-10-21T03:29:39.682893+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\main.rs",
+      "bytes": 57,
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "last_write_utc": "2026-10-20T22:04:44.683382+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\navigation.rs",
+      "bytes": 10576,
+      "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+      "last_write_utc": "2026-10-20T22:04:44.683382+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\objects.rs",
+      "bytes": 3551,
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+      "last_write_utc": "2026-10-20T22:04:44.684380+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\pack.rs",
+      "bytes": 20837,
+      "sha256": "993dfc29a6647c50e55c3751f68f6b36d8ee79fecd957cb0f6229031d43ab288",
+      "last_write_utc": "2026-10-21T03:27:08.713045+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\packing.rs",
+      "bytes": 93086,
+      "sha256": "188c9f32796fc50003cb32f57f3d8c9b13af66ff0025b7a49247fd0120c13c1f",
+      "last_write_utc": "2026-10-21T03:29:39.681892+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\paged.rs",
+      "bytes": 21434,
+      "sha256": "16515455ea11552fc566cce11a3069a14c3a68c04b540c92d0773076e2fd8aa0",
+      "last_write_utc": "2026-10-21T03:27:08.714045+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\physical_lifetime.rs",
+      "bytes": 25113,
+      "sha256": "f6ad2c0d5a5c371ca76bf5efe7ffd208100c2990a0d9f904b4608cda80db933a",
+      "last_write_utc": "2026-10-21T03:37:36.203102+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\projection.rs",
+      "bytes": 27876,
+      "sha256": "6c4eb7de16dd3b75507e6ba4016a0ad65e714519990c148df3856b43018d32eb",
+      "last_write_utc": "2026-10-21T04:08:18.204388+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\rolling.rs",
+      "bytes": 11249,
+      "sha256": "35fc900eeba0f0abd1200bac092eb90c291bca00dc53c1e315e2edeae36c53d4",
+      "last_write_utc": "2026-10-21T03:32:58.873346+00:00"
+    },
+    {
+      "group": "cp4-rust",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\src\\store.rs",
+      "bytes": 36102,
+      "sha256": "0caee89818eb36c2dba092e9ffd44645613cedb8583f15d34fcd0a85498e92cc",
+      "last_write_utc": "2026-10-21T04:09:56.815600+00:00"
+    },
+    {
+      "group": "cp4-controls",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\checkpoint4\\control.py",
+      "bytes": 4668,
+      "sha256": "362b89fb9c3d2bc6e36eebc8dbebdf18236a94fe8afc2e00095c79d3ec6e34c4",
+      "last_write_utc": "2026-10-21T03:42:21.699651+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "cp4-controls",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\checkpoint4\\forecast.json",
+      "bytes": 10914,
+      "sha256": "a4d1ef288e11e88be7c3f276e7aa1847379572b7de3313830089e97d1049f621",
+      "last_write_utc": "2026-10-21T04:09:56.816601+00:00"
+    },
+    {
+      "group": "cp4-controls",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\checkpoint4\\pace_controls.py",
+      "bytes": 11490,
+      "sha256": "4d64b06747e0a31bbea36684db555190d32e71ed4eacb2e190ab6e549cde39cc",
+      "last_write_utc": "2026-10-21T03:03:57.618620+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "cp4-controls",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\checkpoint4\\protocol.py",
+      "bytes": 23534,
+      "sha256": "3d3aff0fdb35bba6c40ced2c00b8a24d37e1187b9fe9ff9f3cceb5b67ad46118",
+      "last_write_utc": "2026-10-21T02:58:16.016398+00:00",
+      "compile_only": "PASS"
+    },
+    {
+      "group": "cp4-controls",
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\checkpoint4\\README.md",
+      "bytes": 26555,
+      "sha256": "87f071111c166df25a01b28db446aa0892ad9f7eee7498c01d122a8a9cce7470",
+      "last_write_utc": "2026-10-21T04:09:56.816601+00:00"
+    }
+  ],
+  "errors": []
+}

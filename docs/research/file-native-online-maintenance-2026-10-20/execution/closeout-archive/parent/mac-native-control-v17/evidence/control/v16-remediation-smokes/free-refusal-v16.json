@@ -1,0 +1,27 @@
+{
+  "name": "free-refusal-v16",
+  "exit": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/private/tmp/file-native-online-macos-20261020/execution/native-macos/guard_v7.py\", line 637, in <module>\n    row = run(arguments())\n          ^^^^^^^^^^^^^^^^\n  File \"/private/tmp/file-native-online-macos-20261020/execution/native-macos/guard_v7.py\", line 208, in run\n    admission.admit(light,requested,cap,ns.free_floor)\n  File \"/private/tmp/file-native-online-macos-20261020/execution/native-macos/admission_v7.py\", line 127, in admit\n    raise RuntimeError('free-space-refusal')\nRuntimeError: free-space-refusal\n",
+  "started_epoch": 1792531513.03137,
+  "argv": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "/private/tmp/file-native-online-macos-20261020/execution/native-macos/guard_v7.py",
+    "--name",
+    "free-refusal-v16",
+    "--seconds",
+    "12",
+    "--prospective",
+    "{\"F01\":{\"bytes\":131072,\"files\":8},\"F04\":{\"bytes\":0,\"files\":0},\"F08\":{\"bytes\":0,\"files\":0},\"F12\":{\"bytes\":2097152,\"files\":8},\"F13\":{\"bytes\":0,\"files\":0}}",
+    "--control-only",
+    "--free-floor",
+    "1000000000000000",
+    "--",
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "-c",
+    "raise RuntimeError(\"MUST_NOT_LAUNCH\")"
+  ],
+  "guard_sha256": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6"
+}

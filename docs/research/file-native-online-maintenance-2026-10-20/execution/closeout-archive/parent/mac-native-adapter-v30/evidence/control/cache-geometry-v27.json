@@ -1,0 +1,70 @@
+{
+  "kind": "historical-donor-required-cache-geometry-readonly",
+  "donor_lock_sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+  "final_lock_unknown": true,
+  "files_over_1MiB": {
+    "/Users/spensermcconnell/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/winapi-0.3.9.crate": {
+      "bytes": 1200382,
+      "package": "winapi-0.3.9",
+      "source": "global",
+      "kind": "archives"
+    },
+    "/Users/spensermcconnell/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/winapi-i686-pc-windows-gnu-0.4.0.crate": {
+      "bytes": 2918815,
+      "package": "winapi-i686-pc-windows-gnu-0.4.0",
+      "source": "global",
+      "kind": "archives"
+    },
+    "/Users/spensermcconnell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winapi-i686-pc-windows-gnu-0.4.0/lib/libwinapi_ntdll.a": {
+      "bytes": 1658338,
+      "package": "winapi-i686-pc-windows-gnu-0.4.0",
+      "source": "global",
+      "kind": "source_directories"
+    },
+    "/Users/spensermcconnell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winapi-i686-pc-windows-gnu-0.4.0/lib/libwinapi_kernel32.a": {
+      "bytes": 1061514,
+      "package": "winapi-i686-pc-windows-gnu-0.4.0",
+      "source": "global",
+      "kind": "source_directories"
+    },
+    "/Users/spensermcconnell/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/winapi-x86_64-pc-windows-gnu-0.4.0.crate": {
+      "bytes": 2947998,
+      "package": "winapi-x86_64-pc-windows-gnu-0.4.0",
+      "source": "global",
+      "kind": "archives"
+    },
+    "/Users/spensermcconnell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winapi-x86_64-pc-windows-gnu-0.4.0/lib/libwinapi_ntdll.a": {
+      "bytes": 1670630,
+      "package": "winapi-x86_64-pc-windows-gnu-0.4.0",
+      "source": "global",
+      "kind": "source_directories"
+    },
+    "/Users/spensermcconnell/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winapi-x86_64-pc-windows-gnu-0.4.0/lib/libwinapi_kernel32.a": {
+      "bytes": 1074054,
+      "package": "winapi-x86_64-pc-windows-gnu-0.4.0",
+      "source": "global",
+      "kind": "source_directories"
+    },
+    "/Users/spensermcconnell/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/windows-sys-0.59.0.crate": {
+      "bytes": 2387323,
+      "package": "windows-sys-0.59.0",
+      "source": "global",
+      "kind": "archives"
+    }
+  },
+  "largest": [
+    "/Users/spensermcconnell/.cargo/registry/cache/index.crates.io-1949cf8c6b5b557f/winapi-x86_64-pc-windows-gnu-0.4.0.crate",
+    {
+      "bytes": 2947998,
+      "package": "winapi-x86_64-pc-windows-gnu-0.4.0",
+      "source": "global",
+      "kind": "archives"
+    }
+  ],
+  "streaming_copy_required_for_whole_lock_closure": true,
+  "no_cache_copy_or_Cargo": true,
+  "stable_source_package": "/private/tmp/file-native-online-macos-20261020/source/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+  "stable_target": "/private/tmp/file-native-online-macos-20261020/target",
+  "target_exists": false,
+  "stream_copy_plan": "After final lock and separate copy GO: manifest exact sources/lengths/hashes; reserve whole replacement length + file count against sealed C1 64MiB/5000 before mkdir/open; copy bounded <=64KiB chunks with cumulative ceiling and streaming SHA; reject source identity/length/hash drift; retain any partial within allocation; never copy protected stores wholesale."
+}

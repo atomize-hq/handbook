@@ -1,0 +1,207 @@
+{
+  "kind": "CP4_FINAL_V3_INDEPENDENT_PRODUCTION_SOURCE_REVIEW",
+  "verdict": "INTEGRATE_SOURCE_ONLY",
+  "scope": "Fresh actual telemetry production paths plus boundary31/finite cleanup controls; no runtime/build/test authority.",
+  "final_freeze": {
+    "path": "C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15b15-3362-7133-b789-1ff556b75d04/cp4-final31-source-freeze-final-v3.json",
+    "bytes": 9252,
+    "sha256": "464dcf878410def63bd3b04d4f48f17d75418c04262cb4745ebc0e6d5e1de6b3",
+    "base": "a3f9805eccc19ede8dd5c735b54e675e98e63714",
+    "file_count": 30,
+    "total_source_and_control_bytes": 478740,
+    "independent_hash_checks": 2,
+    "mismatches": [],
+    "telemetry_paths": 10,
+    "telemetry_delta_bytes_author": 7817,
+    "telemetry_delta_cap": 8192,
+    "checkpoint_bytes": 77161,
+    "checkpoint_cap": 81920,
+    "per_file_caps": {
+      "control_py": 5120,
+      "forecast_json": 11264,
+      "pace_controls_py": 14336,
+      "protocol_py": 24576,
+      "README_md": 26624
+    },
+    "source_read_release": "after final all30check; no source reread afterward"
+  },
+  "closed_findings": [
+    {
+      "title": "Unhooked native projection directory deletion",
+      "old_path": "src/projection.rs:357",
+      "trigger": "execute_plan reachable under W from select_locked",
+      "new_event": "io::remove_dir(p)",
+      "semantics": "same native deletion/result handling plus existing telemetry hook",
+      "observed_mtime_utc": "2026-10-21T04:08:18.2043880Z"
+    },
+    {
+      "title": "Checkpoint predecessor work could fail before a later hook",
+      "old_path": "src/store.rs:440",
+      "trigger": "predecessor body read under actual W; corrupt/cyclic early return before entries/bulk",
+      "new_event": "io::forbidden() at each entered predecessor iteration",
+      "observed_mtime_utc": "2026-10-21T04:09:56.8156005Z"
+    }
+  ],
+  "open_findings": [
+    {
+      "priority": "P2",
+      "classification": "documentation/configuration inconsistency; source-nonblocking",
+      "paths": [
+        "checkpoint4/forecast.json:105",
+        "checkpoint4/README.md:307"
+      ],
+      "stale_cap_bytes": 8192,
+      "actual_pace_control_bytes": 11490,
+      "approved_current_cap_bytes": 14336,
+      "runtime_effect": "No8192 runtime bound in control.py or pace_controls.py; neither loads forecast. The launcher uses exact SHA-bound budget/guard and explicit reserves. Consumers must use current sealed admission rather than stale field.",
+      "cutoff": "proposed doc correction guard failed before firstwrite; no post-cutoff source correction authorized",
+      "action": "reconcile current-cap declarations only in a separately allowed future source increment"
+    }
+  ],
+  "telemetry_assurance": {
+    "new_serialized_u64_fields": [
+      "rolling_publication_body_opens",
+      "rolling_deferred_body_opens",
+      "unchanged_historical_body_opens",
+      "rolling_discovery_metadata_bytes",
+      "rolling_discovery_metadata_read_bytes",
+      "rolling_discovery_metadata_written_bytes",
+      "rolling_discovery_serialized_bytes",
+      "rolling_deferred_rechecked",
+      "forbidden_global_operations"
+    ],
+    "skipped_field": "discovery_context",
+    "body": "actual successful packed/loose bounded publication-body returns, including second eligible read; perMetrics discovery scope",
+    "old_suffix": "context2 expected_sequence <= priorcompleted; context3 deferred countedseparately; headtarget excluded; not a global count of arbitrary semantic old reads",
+    "raii_context": "safe Rc/Cell clone/save/reset/restore on success/error/unwind; no raw pointer",
+    "metadata": "actual completed immutable Work-plan/deterministic Work-stage read/write bytes; whole envelope conservative upper bound; canonical Discovery serialization separate; no invented JSON subspan",
+    "global_gate": "actual acquired native Wboth paths/Qexclusiveboth paths; native File closes before depth decrement; processglobal union covers nestedMetrics; sibling processes independent",
+    "finish": "global cumulative process totals snapshot withoutreset; deferred_rechecked reflects actualdeferred_visited; APIfinish success/error. Resident producer rows globalvalues cumulative, do not sum as independent increments.",
+    "forbidden_sites": [
+      "directory enumeration",
+      "directory/file deletion",
+      "full copies",
+      "Disk bulk/range/entries/reachable/audit",
+      "small or large legacy index read/hash/parse",
+      "paged full-file audit reached by Reader.audit",
+      "cohort hashing",
+      "generic wholebufferdigest>64KiB supplemental",
+      "large writes",
+      "checkpoint actual predecessor iteration"
+    ],
+    "allowances": "bounded selectedhead/control CAS/pagedpoint routes; no blankethash/contextskip",
+    "limitation": "unused all_mapped has no eventhook and no callers; hooking required if reactivated. Multiple hooks can count one operation; this is not a unique syscall count.",
+    "source_reads": "full io.rs/rolling.rs; complete affected production functions and calling context all10Rustpaths; complete5control/contracts/protocol; prioracceptedpacingcontext. No claim allunchangedfilesrereadlinebyline."
+  },
+  "tests": {
+    "independent_literal_count": 31,
+    "expected_catalog_count": 31,
+    "file_name_mismatches": [],
+    "catalog_path": "C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15b15-3362-7133-b789-1ff556b75d04/cp4-final31-unit-catalog-final-v3.json",
+    "catalog_bytes": 2608,
+    "catalog_sha256": "9306071c419670e5d50049d217978e67361a5167c3cdbace1116f908c7c08e6b",
+    "actual_runs": 0,
+    "new_boundary_cases": [
+      "structuraldeferred128 byte-refusal versus129 count-refusal, not128reservations",
+      "Discovery32768/32769 productionserialization",
+      "Builder8MiB/8MiB+1 no mutation",
+      "Catalog64realpairs/65descriptorrefusal, not59KiBbyteboundary",
+      "Work131072persist/131073prewrite refusal, not1100garbagefiles",
+      "install staleowner/freshbirth/sameliveownerreuse"
+    ],
+    "positive_telemetry": [
+      "actualW/nativeenumeration/smalllegacyindex/nestedMetrics/afterdrop",
+      "actualacceptedolderbody suffix versusdeferred/contextrestoration"
+    ],
+    "protocol": "realpack-indexdeath/unfinishedjournalrefusal/abort/freshbirth; UNRUN",
+    "heavy_fixture_bytes": 80976318,
+    "heavy_run_by_reviewer": false,
+    "heavy_requirement": "ONCE onfinalreviewedRust underseparateexactruntimeadmission"
+  },
+  "pacing": {
+    "prior_no_cleanup_blocker": "source-addressed by4cooperativecleanup aftereach10builds =40calls; no retries/drainloops",
+    "headroom_bytes": 98304,
+    "proof": "actualWorkhash/size/oldermembers/ordinal plus ownedfirst+ordinaryprocess proofs/milestonebracketing and actualabsentmiddleplan beforefirstpin_drop",
+    "warm_queries": 40000,
+    "first_queries": 40,
+    "raw": "Driverstdoutlogging must be preserved by reviewedOwnedDriver adapter",
+    "deadline_and_backlog_qualification": "UNRUN",
+    "adapter": "reviewed actual NativeOwnedDriver/Native4 registry stillrequired",
+    "evidence_requested": 4194304,
+    "evidence_reserved": 0,
+    "stated_evidence_deficit": 1709823,
+    "runtime_go": false
+  },
+  "review_axes": {
+    "correctness": "two telemetry blindspotsclosed; no remainingproductionblocker found",
+    "readability": "dense experimental code; definitions documented; stalecap docs remain",
+    "architecture": "private additiveMetrics/callsitehooks, noalgorithm/package/default/formatchange",
+    "security": "same native lockownership lifetime; closeddisposable scoping; no newsource blocker",
+    "performance": "counterscheap constant eventwork; nativeCPU/RSS/cadence unqualified"
+  },
+  "restrictions": {
+    "build": false,
+    "typecheck": false,
+    "test": false,
+    "heavy_test": false,
+    "python_import": false,
+    "native_engine": false,
+    "git": false,
+    "indexing": false,
+    "source_write": false,
+    "fixture_write": false
+  },
+  "authority": {
+    "gitnexus": "unavailable/unregistered; impactUNKNOWN/manualHIGH; sourcecalltracing",
+    "structured_standard": "PROPOSED; no public migration/default authority",
+    "cutoff_utc": "2026-10-21T04:10:14Z",
+    "author_final_write_utc": "2026-10-21T04:09:56.816601+00:00",
+    "review_only_artifacts": true
+  },
+  "preservation": {
+    "old_manifest": {
+      "bytes": 8857,
+      "sha256": "9d49b3dffbcfa5e92481ef76a418265fecd6226f2d6a1353fc14975059cccd67"
+    },
+    "projection_v2": {
+      "bytes": 9191,
+      "sha256": "7757d1fc3bc43567f7563fe7d160dc99e838e0bc22dc42c1ed1749d7439d49c6"
+    },
+    "all_prior_negative_reviews": true,
+    "temporary_control_overrun_preserved": {
+      "bytes": 66000,
+      "cap": 65536,
+      "overrun": 464
+    },
+    "no_failure_requalification": true
+  },
+  "resource_accounting": {
+    "membership": "META10v5 allP regularfiles recursively incl copies/archives/extracts; twoLandingroots;7declaredrecursiveexecutionareas with streamsnapshotexclusion; exact20promotedharness",
+    "manifest_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+    "cap_bytes": 10485760,
+    "before_review": {
+      "actual_bytes": 9706306,
+      "actual_regular_files": 1139,
+      "maximum_pair_allowance": 40960,
+      "future_reserve": 256000,
+      "projection": 10003266,
+      "cap_bytes": 10485760
+    },
+    "before_evidence": {
+      "actual_bytes": 9718945,
+      "actual_regular_files": 1141,
+      "maximum_pair_allowance": 40960,
+      "future_reserve": 256000,
+      "projection": 10015905,
+      "cap_bytes": 10485760
+    },
+    "maximum_new_review_bytes": 40960,
+    "future_reserve_bytes": 256000,
+    "report_folder": "P/cp4-telemetry-review",
+    "folder_limit_bytes": 65536,
+    "folder_file_limit": 4,
+    "planned_files": 2,
+    "retained_source_manifests": "Referenced allocated author copies; no duplicate freeze copied to P",
+    "credits": "none from deletion/expiry/relabel/donor"
+  }
+}

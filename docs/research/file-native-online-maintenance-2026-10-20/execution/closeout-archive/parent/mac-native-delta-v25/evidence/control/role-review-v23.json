@@ -1,0 +1,118 @@
+{
+  "status": "ROLE_INTERFACE_PREPARED_REVIEW_REQUIRED_ENGINE_BINDING_UNRUN",
+  "driver_absolute": "/private/tmp/file-native-online-macos-20261020/execution/native-macos/role_driver_v23.py",
+  "driver_sha256": "f79bc1737b0ff0ba4fff4e4db4e15ffb2acce82cd88cf79a81e66a3c516ffa98",
+  "outer_guard": "guard_v20.py",
+  "role_limits": {
+    "reader": 268435456,
+    "checker": 2147483648
+  },
+  "selected_role_controls": [
+    {
+      "name": "reader-normal-v25",
+      "role": "reader",
+      "limit_bytes": 268435456,
+      "samples": 19,
+      "max_start_gap_s": 0.015367916785180569,
+      "peak_RSS_bytes": 14745600,
+      "failures": [],
+      "source_pin": "CONTROL_ONLY",
+      "raw_rows": 21,
+      "RSS_rows_match": true,
+      "gzipEOF": true,
+      "raw_sha256": "57895eb04cbe70e5b74b032e4a66467297c67e8c368abe25f2e2786f6f5af0e7",
+      "ancestor_nonce": "7c1aae0102a8a8ca7c4d48053488c58e",
+      "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "checker-normal-v25",
+      "role": "checker",
+      "limit_bytes": 2147483648,
+      "samples": 17,
+      "max_start_gap_s": 0.015306874644011259,
+      "peak_RSS_bytes": 15007744,
+      "failures": [],
+      "source_pin": "CONTROL_ONLY",
+      "raw_rows": 19,
+      "RSS_rows_match": true,
+      "gzipEOF": true,
+      "raw_sha256": "c64880aa7ad537dcf58cd3832fa33b16ef41188fd107b760cef6f0c59db62d22",
+      "ancestor_nonce": "7c1aae0102a8a8ca7c4d48053488c58e",
+      "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "reader-memory-v24",
+      "role": "reader",
+      "limit_bytes": 268435456,
+      "samples": 4,
+      "max_start_gap_s": 0.015510042198002338,
+      "peak_RSS_bytes": 300236800,
+      "failures": [
+        "RuntimeError('explicit-reader-RSS-cap')",
+        "RuntimeError(\"RuntimeError('explicit-reader-RSS-cap')\")"
+      ],
+      "source_pin": "CONTROL_ONLY",
+      "raw_rows": 6,
+      "RSS_rows_match": true,
+      "gzipEOF": true,
+      "raw_sha256": "d588c83f949fe28a8b0d4d2755a79428cdd68a830b5a2d9a2794ec8bf65505ef",
+      "ancestor_nonce": "7f1a64abcd1ccd52e9e87d3ff3a4c396",
+      "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+      "two_positive_identity_absences": true
+    },
+    {
+      "name": "checker-timeout-v24",
+      "role": "checker",
+      "limit_bytes": 2147483648,
+      "samples": 12,
+      "max_start_gap_s": 0.015512083191424608,
+      "peak_RSS_bytes": 14712832,
+      "failures": [
+        "RuntimeError('role-timeout')",
+        "RuntimeError(\"RuntimeError('role-timeout')\")"
+      ],
+      "source_pin": "CONTROL_ONLY",
+      "raw_rows": 14,
+      "RSS_rows_match": true,
+      "gzipEOF": true,
+      "raw_sha256": "1c44dbd76cb00a2b4dc33273ca1da454022c7340976842051b90fc1af23a8bea",
+      "ancestor_nonce": "1a281a3bacfdb86a1770eb23cbaaa646",
+      "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+      "two_positive_identity_absences": true
+    }
+  ],
+  "negative_binding_controls": [
+    "undefined role rejected",
+    "non-Python control binary rejected beforeexec",
+    "engine call without reviewed build binding rejected beforeexec",
+    "role-heavy-token-not-held"
+  ],
+  "normal_binding_outer_guard": {
+    "GO": true,
+    "closure": "PROVEN_EMPTY_TWICE",
+    "token_released": true,
+    "max_gap_s": 0.017851958982646465
+  },
+  "interface": "invoke(role, argv, name, timeout, identity_budget, binding, binding_sha256, input_path, evidence_cap, control_only). Role is mandatory and independent of executable name.",
+  "engine_binding_fields": [
+    "source_pin",
+    "source_binding",
+    "source_binding_sha256",
+    "guard_sha256",
+    "binary_path",
+    "binary_sha256",
+    "engine_release"
+  ],
+  "engine_binding_checks": "Parent supplies exact build-binding SHA after source/build review. Driver verifies exact binary bytes, source binding bytes and members, source pin/guard SHA, token is held and live keeper is its ancestor in same anchor group, fixed cutoff; per-role RSS and timeout failures raise and remain censored. No parent source/build binding exists yet.",
+  "helper_accounting": "Independent positive helper RSS publication continues through closure and receipt writing; role work has its own raw RSS stream. Outer v20 sampler records the whole admitted heavy process tree.",
+  "censored_development": [
+    "roles-control-v20 exact Python launcher mismatch beforeGO",
+    "roles-control-v20b initial helper teardown publication stale",
+    "roles-control-v21 prospective8-file growth refused when four role streams requiredmore",
+    "roles-control-v23 outer exiting-group identityUNKNOWN; separate focused controls completed under unchanged role_driver_v23 and outercorev20"
+  ],
+  "ownership": "Only exact born-owned child identities signalled; two numeric owned-identity absence checks. Outer guard retains heavy ownership/token and performs group closure. Unknown identity never authorizes a stale PID signal.",
+  "no_engine_build_corpus_cache_copy": true
+}

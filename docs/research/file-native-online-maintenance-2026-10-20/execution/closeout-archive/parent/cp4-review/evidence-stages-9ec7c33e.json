@@ -1,0 +1,109 @@
+{
+  "kind": "CP4 staged-handoff static remediation review; no runtime",
+  "base": "a3f9805eccc19ede8dd5c735b54e675e98e63714",
+  "freeze": {
+    "name": "source-freeze-stages.json",
+    "bytes": 6774,
+    "sha256": "9ec7c33e31ae7a23b5c0079dccc13d3f4f2a7c1798438f57458305bfd8920252",
+    "files_verified": 29,
+    "mismatches": [],
+    "changed_from_924": [
+      "lifetime.rs",
+      "checkpoint4/control.py",
+      "checkpoint4/forecast.json",
+      "checkpoint4/protocol.py",
+      "checkpoint4/README.md"
+    ]
+  },
+  "lifetime_sha256": "3172ba1b1e78d048c2eb168b02ca524b4d3979abaa6528aaebb149a8a2c3b824",
+  "verdict": "INTEGRATE exact frozen source/control set, bounded engineering only",
+  "qualification": "INCOMPLETE",
+  "prior_negative": {
+    "freeze": "924bf794bfa730b664acb9ddc1d1ef6871fbdca714c89d1f069640abffc9a9c1",
+    "F1": "closed structurally by durable active namespace claim and atomic complete receipt publication",
+    "F2": "closed structurally by same native handle regular/single-link/nofollow/identity checks before truncation",
+    "original_reports": "preserved unchanged"
+  },
+  "graph": "UNKNOWN unregistered; manual HIGH risk",
+  "runtime_invocations": 0,
+  "source_edits": 0,
+  "fixture_mutations": 0,
+  "unit_tests_prepared": 20,
+  "unit_tests_run": 0,
+  "selected_alternative": "two active-owned deterministic stages inside attempts/<attempt>, not prefix repair",
+  "source_traces": {
+    "stage_ownership": "both slots absent before new sealed-preselection stamp; legacy owners cannot claim",
+    "receipt": "empty/prefix remains private and full-active-charged; only complete synced bytes atomic-publish final",
+    "handle": "existing nontruncating nofollow handle + native identity/nlink1 + nonblocking exclusive lock retained to write; same-handle recheck before set_len",
+    "new_path": "create_new; appeared-after-preproof yields deferred, no adoption under W",
+    "current_final": "actual final receipt reread after 3-token CAS; exact resync, mismatch refusal, absent-active never repairs",
+    "accounting": "one atomic envelope removes active + adds retained terminal bytes/count; no pending or deletion credit",
+    "accepted_stage": "attempt-local intermediates covered by existing accepted full allocation owner",
+    "collect": "V2 refuses at entry; V1 P then one tryW"
+  },
+  "platform_checks": {
+    "unix_constants": {
+      "source": "installed locked libc0.2.191",
+      "linux_x86_64_O_NOFOLLOW": "0x20000",
+      "darwin_bsd_O_NOFOLLOW": "0x100",
+      "native_executed": false
+    },
+    "windows": {
+      "APIs": [
+        "GetFileInformationByHandle",
+        "BY_HANDLE_FILE_INFORMATION.nNumberOfLinks",
+        "FILE_FLAG_OPEN_REPARSE_POINT",
+        "FILE_SHARE_READ"
+      ],
+      "native_executed": false,
+      "scope": "selected native local filesystem; no general ReFS/network guarantee"
+    },
+    "primary_references": [
+      "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getfileinformationbyhandle",
+      "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/ns-fileapi-by_handle_file_information",
+      "https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew"
+    ]
+  },
+  "prepared_protocol": {
+    "lines": 415,
+    "death_windows": 18,
+    "distinct_zero_partial_stage_owners": 10,
+    "concurrent_preproof_death_cases": 4,
+    "hardlink_endpoint_cases": 3,
+    "hardlinks": "new disposable fault canaries only, all names/bytes charged",
+    "additional": [
+      "preclaim unknown slot refusal",
+      "selected allocation owner retains structural partial attempt stage",
+      "A/B four publishers + old reader + other preparation/packet",
+      "quota cap structural only"
+    ],
+    "executed": false
+  },
+  "meta_before_writes": {
+    "membership": "all P; seven selected Landing execution subtrees with stream snapshot exclusion; R/exec root files; exact18 promoted harness; absolute-path deduplicated",
+    "files": 917,
+    "bytes": 7792975,
+    "P_bytes": 5447727,
+    "promoted_harness18_bytes": 179468,
+    "R_root_bytes": 34805,
+    "execution_root_bytes": 36626,
+    "groups": {
+      "admission": 47097,
+      "admission_claims": 351808,
+      "native_macos": 520350,
+      "reviews": 590685,
+      "final_protocol": 225383,
+      "windows_matrix": 299353,
+      "windows_cadence": 59673
+    },
+    "included_stage_manifest_bytes": 6774,
+    "new_report_pair_cap": 40960,
+    "parent_future_reserve": 262144,
+    "prospective": 8096079,
+    "cap": 8388608,
+    "headroom": 292529
+  },
+  "report_pair_cap_bytes": 40960,
+  "no_new_allocation_or_runtime_go": true,
+  "source_freeze_released_before_reports": true
+}

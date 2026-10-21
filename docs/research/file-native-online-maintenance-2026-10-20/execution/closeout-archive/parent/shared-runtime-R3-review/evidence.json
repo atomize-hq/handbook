@@ -1,0 +1,235 @@
+{
+  "verdict": "INTEGRATE_SOURCE_ONLY",
+  "runtime_go": false,
+  "candidate": {
+    "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/shared-runtime-contracts/runtime_contracts.py",
+    "bytes": 90542,
+    "sha256": "ae2694e4a36d8edb496257b4a0cf2bee5749f85bcccc2bdf40d23a952f9b3cd0",
+    "lines": 1511,
+    "full_source_read": true,
+    "final_hash_reverified": true
+  },
+  "runtime_owned_required_findings": [],
+  "old_findings": {
+    "lookup_metadata": "repaired with actual per-format complete oracle refs",
+    "paced_ABI": "repaired family, clockkind and full physical tuple",
+    "wrapper_ABI": "current035 source wrapper consistent",
+    "body": "18-field provisional body, actual external index/body hash and validator RAM projection consistent",
+    "width": "source-derived call/page/index/body widths, native paged case index before publication via preflight",
+    "R2_A": "resolved profile1367 returns exact scope/count; runtime563 requires both",
+    "R2_B": "resolved HISTORY517/530 seals six initial cases after close;580 trace after sixteen body seals;582 returns actual reference",
+    "R1_B": "resolved control boundary0 / backlogNoneUNMEASURED; online actual2 passes/measured0"
+  },
+  "checks": {
+    "budget": "same bounded artifact buffer hashed then decoded;294912/303104 preserved,309248 requires052-v3+046+052+059+exact065d2435f10; fixed062 engine, owners, ten closed names/groups/arithmetic, parentSourceAdmission/source_freeze before Harness",
+    "budget_ref": {
+      "bytes": 3400,
+      "sha256": "889ee13fbbdeedc61ed3570e25f9315c3130797a0c097f6ca5aa005014a16bfe"
+    },
+    "loaders": "profile/HISTORY compile the exact previously hashed raw buffer; lock/hash-keyed cache and rehash after loading",
+    "native": "producer-owned canonical pages/index/proofs, stream/START/END exact ranges, flatclockbridge, actual parentcase/helper/nonce, ready4 andorigin, actualstate sideband ref",
+    "qualification": "fixed16phase1600accept4000offer2400terminal and finite readers;44/48/23.6; no finalJobPASS"
+  },
+  "scope": {
+    "reports_written": 2,
+    "private_imports": 0,
+    "compile": 0,
+    "tests_controls_native_engine": 0,
+    "Git_indexing": 0,
+    "bootstrap": 0,
+    "source_edits": 0,
+    "delegation": 0,
+    "standard_status": "PROPOSED",
+    "fixed_cutoffs_unchanged": true,
+    "prospective_source_authority": "046/052/060/065; oldR2negative snapshots retain status"
+  },
+  "source_acceptance_only": true,
+  "runtime_findings": [],
+  "integration_dependencies": [
+    {
+      "owner": "Windows platform",
+      "source": "windows_evidence.py",
+      "bytes": 32499,
+      "sha256": "2ea593ee4cca5ac4308c738ab6cf74c99a7c2a56f2733940dd481783cc95c715",
+      "anchor": "source_admission:311-337",
+      "issue": "Current implementation accepts303104 else requires294912; actual065 budget309248 therefore rejected in LaneHost.authorize before runtime. Native source is WIP, so this observation is pinned only to inspected hash.",
+      "effect": "Integrated runtime NO_GO",
+      "required": "Reconcile exact065/native-source-admission contract under separate source ownership, freeze and fresh review. Do not weaken runtime admission."
+    }
+  ],
+  "companion_reviewed_snapshots": [
+    {
+      "path": "qualification-lanes/history_lane.py",
+      "bytes": 56996,
+      "sha256": "db1541a81e35932a5cd1edb5a5c38d1b12b7cac50c0424e2954182f98cf7922a"
+    },
+    {
+      "path": "qualification-lanes/long_source_profiles.py",
+      "bytes": 83674,
+      "sha256": "278a7027c2b0c21918258ffad745fe18cf1dbe775adb6e3fe067cdea9774b4a9"
+    },
+    {
+      "path": "qualification-lanes/phase_finalizer.py",
+      "bytes": 103738,
+      "sha256": "82b23967df7270dbece193e2d8082f7a670aec1f6d2fbcdc09affbfa9796bea8"
+    }
+  ],
+  "source_cap": {
+    "max_bytes": 94208,
+    "max_files": 1,
+    "actual_bytes": 90542,
+    "actual_files": 1,
+    "budget": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\admission\\shared-runtime-contracts-R3-source-budget-060.json",
+      "bytes": 1740,
+      "sha256": "93c7c725affe3f9aa925b2668c650dc03063826352dc994e95be2afaaf5cb580"
+    }
+  },
+  "exact065_claim": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261021T091326Z.json",
+    "bytes": 4927,
+    "sha256": "d2435f10a115669217ded30296bbd51083b4ace38efeaedb8c763781b236fd9e"
+  },
+  "actual065_budget": {
+    "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\admission\\qualification-lanes-R3-source-budget-065-v3.json",
+    "bytes": 3400,
+    "sha256": "889ee13fbbdeedc61ed3570e25f9315c3130797a0c097f6ca5aa005014a16bfe"
+  },
+  "preserved_prior_pair_reports": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\shared-runtime-review\\review.md",
+      "bytes": 9839,
+      "sha256": "2c391491f378a7ec8b1b08af95ba7ab25542675d3fa537870d548c4f60eb9c8f"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\shared-runtime-review\\evidence.json",
+      "bytes": 14089,
+      "sha256": "3978079ee22da1a09bbcca0b30633cd4591c1e779efefc2f096b1aab2f210024"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\shared-runtime-review\\review-R2.md",
+      "bytes": 4556,
+      "sha256": "3ff1106387694ff2caf3f18b0222cb76fa61d787b24f931c1915672338bcbe5c"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\shared-runtime-review\\evidence-R2.json",
+      "bytes": 7521,
+      "sha256": "0412ee45ffa8a9de480cd93aa51da75a825ba3f27ce5de30a3bd098f8343666d"
+    }
+  ],
+  "accounting": {
+    "membership": {
+      "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\meta-membership-v12.json",
+      "bytes": 4557,
+      "sha256": "00f1472015c30bb24f555a7dcddd94c2aa12ccec2bc6a10318ac36d97dc6154b"
+    },
+    "fresh066_pair_cap_bytes": 24576,
+    "pair_file_cap": 2,
+    "before_review_write": {
+      "utc": "2026-10-21T09:25:15.051350+00:00",
+      "files": 1318,
+      "actual_bytes": 10945764,
+      "pair_roots": [
+        {
+          "name": "GuardR4.2",
+          "occupied_bytes": 22793,
+          "files": 2,
+          "remaining": 1783
+        },
+        {
+          "name": "LinuxV5.3",
+          "occupied_bytes": 24191,
+          "files": 2,
+          "remaining": 385
+        },
+        {
+          "name": "Contextrepair",
+          "occupied_bytes": 18868,
+          "files": 2,
+          "remaining": 5708
+        },
+        {
+          "name": "Macv36",
+          "occupied_bytes": 16586,
+          "files": 2,
+          "remaining": 7990
+        },
+        {
+          "name": "Checkerrepair",
+          "occupied_bytes": 0,
+          "files": 0,
+          "remaining": 24576
+        },
+        {
+          "name": "RuntimeR3",
+          "occupied_bytes": 0,
+          "files": 0,
+          "remaining": 24576
+        }
+      ],
+      "fixed_future_bytes": 161284,
+      "future_bytes": 226302,
+      "projected_bytes": 11172066,
+      "cap_bytes": 11206656,
+      "headroom_bytes": 34590
+    },
+    "before_evidence_write": {
+      "utc": "2026-10-21T09:25:15.167383+00:00",
+      "files": 1319,
+      "actual_bytes": 10953271,
+      "pair_roots": [
+        {
+          "name": "GuardR4.2",
+          "occupied_bytes": 22793,
+          "files": 2,
+          "remaining": 1783
+        },
+        {
+          "name": "LinuxV5.3",
+          "occupied_bytes": 24191,
+          "files": 2,
+          "remaining": 385
+        },
+        {
+          "name": "Contextrepair",
+          "occupied_bytes": 18868,
+          "files": 2,
+          "remaining": 5708
+        },
+        {
+          "name": "Macv36",
+          "occupied_bytes": 16586,
+          "files": 2,
+          "remaining": 7990
+        },
+        {
+          "name": "Checkerrepair",
+          "occupied_bytes": 0,
+          "files": 0,
+          "remaining": 24576
+        },
+        {
+          "name": "RuntimeR3",
+          "occupied_bytes": 7507,
+          "files": 1,
+          "remaining": 17069
+        }
+      ],
+      "fixed_future_bytes": 161284,
+      "future_bytes": 218795,
+      "projected_bytes": 11172066,
+      "cap_bytes": 11206656,
+      "headroom_bytes": 34590
+    },
+    "dynamic_pending_formula": "160472+812+sum(max(0,24576-rootActual) for five065roots)+max(0,24576-RuntimeRootActual)",
+    "oldR2_or_generic_duplicate_reserve": false,
+    "deletion_expiry_relabel_credit": 0,
+    "unused_allowances_closed_only_by_parent": true,
+    "post_pair_census": "Performed after both writes and returned in tool output/parent handoff; no third artifact."
+  },
+  "review_report": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\shared-runtime-R3-review\\review.md",
+    "bytes": 7507,
+    "sha256": "dd7808392f4a6501b86815d1922ba357f4f16c4f31ff8930df8b8d50409248c7"
+  }
+}

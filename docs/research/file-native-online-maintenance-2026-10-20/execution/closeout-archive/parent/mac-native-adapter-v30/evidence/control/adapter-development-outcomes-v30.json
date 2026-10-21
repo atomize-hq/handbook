@@ -1,0 +1,122 @@
+{
+  "source_only_unrun_incomplete": [
+    "capsule_adapter_v26.py",
+    "role_driver_v26.py"
+  ],
+  "preserved_censored_details": {
+    "ordinary-tiny-v28-outer": "Third synthetic shell call role-descendant-identity-unknown. Workload exit1; outer closure proven and token released. First two copies passed; no all-case pass claimed. Fixed bounded8ms descendant exit retry in role29, matching accepted core rule.",
+    "role-failure-v29-outer": "Before workload GO scheduler gap69.267ms caused expected fail-closed admission. No inner role invocation; later fresh attempt v29b passed. No clock reset."
+  },
+  "outer_runs": [
+    {
+      "name": "adapter-tiny-v27-outer",
+      "result_sha256": "2c5128d9826cdba525ae6cf1782594c345cc7423bba861971306db7812f3fd9f",
+      "GO": true,
+      "censor": null,
+      "worker_exit": 0,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released": true,
+      "selected_final": false
+    },
+    {
+      "name": "adapter-tiny-v28-outer",
+      "result_sha256": "2975f9c07b641a0d1d1fc7e376944480f696fc054010fa840a5300a1a2f9ec78",
+      "GO": true,
+      "censor": null,
+      "worker_exit": 0,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released": true,
+      "selected_final": false
+    },
+    {
+      "name": "adapter-tiny-v29-outer",
+      "result_sha256": "722bb5375b10a38bd461f910344bffa3d8e9a7b9f3b2a27b640f2bacfc110091",
+      "GO": true,
+      "censor": null,
+      "worker_exit": 0,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released": true,
+      "selected_final": false
+    },
+    {
+      "name": "adapter-tiny-v30-outer",
+      "result_sha256": "33cdf09b7f70a0ec0470cc89d6fd90669365209cfa7feb341c81525f4676b4bf",
+      "GO": true,
+      "censor": null,
+      "worker_exit": 0,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released": true,
+      "selected_final": true
+    },
+    {
+      "name": "ordinary-tiny-v28-outer",
+      "result_sha256": "12bf91f054487dd1340944775cc1d2236b51f569a5e4c0910a459872b3358507",
+      "GO": true,
+      "censor": null,
+      "worker_exit": 1,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released": true,
+      "selected_final": false
+    },
+    {
+      "name": "ordinary-tiny-v29-outer",
+      "result_sha256": "3ef177a94c032281cbfbdef92e3ce178ec094c2c52439c49dc6dbdc25fbed951",
+      "GO": true,
+      "censor": null,
+      "worker_exit": 0,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released": true,
+      "selected_final": false
+    },
+    {
+      "name": "ordinary-tiny-v30-outer",
+      "result_sha256": "b3cfb76043d13ac0197bd867b48a3c10ba4a645f4152c63b746b1fc5bab7b022",
+      "GO": true,
+      "censor": null,
+      "worker_exit": 0,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released": true,
+      "selected_final": true
+    },
+    {
+      "name": "output-cap-tiny-v29-outer",
+      "result_sha256": "2072a1432a999a6b5204794a6fbb73872cb6a8d3fd19550a0a348ab75e0ff4f5",
+      "GO": true,
+      "censor": null,
+      "worker_exit": 0,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released": true,
+      "selected_final": false
+    },
+    {
+      "name": "output-cap-tiny-v30-outer",
+      "result_sha256": "9f52d9374cccec116ee6f3106f0f2a6c3694f89ef8e937d749523c37b1ce62ae",
+      "GO": true,
+      "censor": null,
+      "worker_exit": 0,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released": true,
+      "selected_final": true
+    },
+    {
+      "name": "role-failure-v29-outer",
+      "result_sha256": "699c4a1c4bc28ed945c5ff3c602c2d354029bbc13facd39f4111f87c4950bf9a",
+      "GO": false,
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('rss-sample-gap-over-40ms')\")",
+      "worker_exit": null,
+      "closure": "NO_WORKLOAD_CREATED",
+      "token_released": true,
+      "selected_final": false
+    },
+    {
+      "name": "role-failure-v29b-outer",
+      "result_sha256": "4c9ba73d6095f254bdcbdbbb87c4881da56822be40d914dec64f2bd017ce0979",
+      "GO": true,
+      "censor": null,
+      "worker_exit": 0,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released": true,
+      "selected_final": true
+    }
+  ]
+}

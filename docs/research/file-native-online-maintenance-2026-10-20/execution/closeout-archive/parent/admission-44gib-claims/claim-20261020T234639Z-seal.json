@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-021-C3-META-REVIEW-8MiB",
+  "utc": "2026-10-20T23:46:39.234219+00:00",
+  "status": "AUTHORIZED_INTERNAL_C3_META8MiB__FINITE_REVIEW_COPIES_ONLY__NO_ENGINE_NATIVE_RESOURCE_GO",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261020T234639Z.json",
+      "bytes": 8527,
+      "sha256": "22579012869c8a8f18d589a10e30f900a0a6cd6fc17b4e41d8574288ab851b9c"
+    },
+    {
+      "file": "claim-20261020T234639Z.md",
+      "bytes": 1756,
+      "sha256": "17daa28f38501a3b4b443bd75da9322a161758a253bf852e2e0f8ed37dfa8b63"
+    }
+  ]
+}

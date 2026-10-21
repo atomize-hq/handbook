@@ -1,0 +1,127 @@
+{
+  "review_kind": "independent-source-only",
+  "verdict": "REMEDIATE",
+  "source_root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/qualification-lanes",
+  "freeze_manifest": {
+    "path": "source-manifest.json",
+    "bytes": 1316,
+    "sha256": "f6c57e9a6f07becc21069338ea4c541a73c95ff150096c1971a83983a796f03d",
+    "self_excluded": true,
+    "all_seven_entries_independently_length_and_hash_verified": true,
+    "rechecked_before_write": true
+  },
+  "files": [
+    {"path":"fake_cases.json","bytes":1956,"sha256":"44230218839d9d1101dcc4d38316234289fbc1e64b8c4a7228c49a6b2706f578"},
+    {"path":"fake_controls.py","bytes":11565,"sha256":"1878368eb8a6a4aa018ab364bd38ebb72c46477aa62e32f271ba4843eeed4eac"},
+    {"path":"history_lane.py","bytes":48321,"sha256":"83a633283fa16169793c47dbdf2c927be70766700a2c31bbb1861757b0c71366"},
+    {"path":"lane_config.example.json","bytes":2774,"sha256":"9704358fa9284d38675f9444f273b226088bbfa9f80ae713e1df0a4bbb815eaf"},
+    {"path":"legacy_archive_restore.py","bytes":13939,"sha256":"6066957734e744331585e194973b3daeeffd605464b301860129cbcde58ce81c"},
+    {"path":"long_lane.py","bytes":28445,"sha256":"854ee63f0f24dd71546e84af1371e0bd6a6999b82d50105548bd5dfe212cc466"},
+    {"path":"README.md","bytes":3951,"sha256":"18efbb2eef14d178664aa04813cb43896060fca88fbe8c17dd3e2b64dd7061da"},
+    {"path":"source-manifest.json","bytes":1316,"sha256":"f6c57e9a6f07becc21069338ea4c541a73c95ff150096c1971a83983a796f03d"}
+  ],
+  "source_caps": {
+    "long": {"files":2,"bytes":42384,"cap_bytes":49152},
+    "history": {"files":1,"bytes":48321,"cap_bytes":49152},
+    "controls": {"files":5,"bytes":21562,"cap_bytes":32768},
+    "whole": {"files":8,"bytes":112267,"cap_bytes":131072}
+  },
+  "preserved_incidents": [
+    {"file":"history_lane.py","observed_bytes":52692,"cap_bytes":49152,"over_bytes":3540,"state":"prior failed cap write; current repair is not retrospective qualification","basis":"parent assignment"},
+    {"file":"README.md","observed_bytes":4310,"cap_bytes":4096,"over_bytes":214,"state":"prior failed cap write; current repair is not retrospective qualification","basis":"parent assignment and frozen manifest/README"}
+  ],
+  "dependency_source_check": {
+    "path":"C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/harness/stream_snapshot.py",
+    "bytes":34729,
+    "sha256":"f8d223618d869bf85a11ec648254830e643aa1abbb86374233ac9f31fe46cc20",
+    "rehashed":true,
+    "interfaces_read":["StrictGzipReader","inventory","compare_source","compare_destination","Runtime limits/metadata","capture_restore entry"],
+    "imported_or_executed":false,
+    "qualification":"source interface/byte compatibility only"
+  },
+  "findings": [
+    {"id":"R1","priority":"P2 Required","file":"history_lane.py","lines":[635,636,689,690,692,693],"issue":"Negative host authorization can pass if receipt hash is valid; pacing poll results are ignored","method":"static source counterexample; no execution"},
+    {"id":"R2","priority":"P2 Required","file":"history_lane.py","lines":[98,100,143,148,427,434,646,650,683,703],"issue":"Forced40call40000query budget lacks preflight coverage schedule for >=39.6s publisher horizon/4readers/held reader","method":"source arithmetic and interface inspection; exhaustion likelihood is conditional, not a measured failure"},
+    {"id":"R3","priority":"P2 Required","file":"history_lane.py","lines":[491,511,703,724],"issue":"Current in-host phase-complete schema must distinguish observed prefixes/owned drain from post-exit final outer QPC receipt","proposed_remedy":"provisional observations with exact pending external link; separately reviewed platform post-exit join/finalizer","implemented_in_frozen_source":false},
+    {"id":"R4","priority":"P2 Required before RUN","file":"long_lane.py","lines":[167,198,205,232,276,320,352,394,428,520],"issue":"Whole physical/output/evidence forecast not quantitatively bound to command counts and caps before restore","history_limit":"forecast_history validates supplied closed sums/proof identifiers; concrete schedule-derived proof/preflight implementation still required"},
+    {"id":"R5","priority":"P2 Required","file":"long_lane.py","lines":[323,348],"related":"fake_controls.py112-114","issue":"Warm rows can omit/wrong id while categories, timings and same outcome digest pass","method":"static validation-path inspection; no control run"}
+  ],
+  "derived_counts": {
+    "history_accepted":1600,
+    "history_offers":4000,
+    "history_losers":2400,
+    "history_phases":16,
+    "publisher_interval_ns":400000000,
+    "per_phase_min_offer_horizon_ns":39600000000,
+    "reader_calls_per_phase":40,
+    "warm_queries_per_phase":40000,
+    "long_lookup_engine_calls":602,
+    "long_all_engine_calls_excluding_cleanup":606,
+    "long_cleanup_calls":"explicit configured K",
+    "long_independent_oracles":4,
+    "allowed_max_engine_stdout_bytes":2097152,
+    "lookup_stdout_cap_product_bytes":1262485504,
+    "max_assigned_evidence_bytes":54525952,
+    "oracle_max_output_total_bytes":8388608,
+    "M_cap_bytes":8388608,
+    "stream_subset_bytes":2097152,
+    "qualification":"static bounds, not runtime output measurements"
+  },
+  "runtime_release_status": {
+    "source_only":true,
+    "runtime_go":false,
+    "example_false_and_null":true,
+    "lane_invoke_v1":"proposal requiring concrete pinned native mapping",
+    "history_native_v1":"proposal requiring concrete released runner/preflight/phase/terminal hooks",
+    "v5_R1_normalization":"pending exact implemented schema/CLI bindings",
+    "startup_gate":"pending actual native implementation/qualification before first corpus IO",
+    "post_exit_join":"proposed platform-owned remedy; no ninth packet helper; source review and actual receipt join required",
+    "pure_controls":"unrun; finite <=48cases/16MiB proposal only; do not qualify native/restore behavior"
+  },
+  "prewrite_census": {
+    "utc":"2026-10-21T00:56:21.3701205Z",
+    "P_root":"C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be",
+    "P_bytes":5439994,
+    "P_files":672,
+    "Landing_R_root":"C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20",
+    "LandingMETA_includes":["R-root regular files","execution-root regular files (conservative inclusion)","execution/admission/","execution/admission-claims/","execution/native-macos/","execution/reviews/","execution/final-protocol/","execution/windows-matrix/"],
+    "LandingMETA_excludes":["execution/windows-matrix/stream-snapshot-controls/","execution/windows-matrix/windows-cadence/","qualification-lanes originals","native-linux originals","windows-final-platform originals","all other nonmember roots"],
+    "LandingMETA_measured_bytes":2106107,
+    "LandingMETA_measured_files":222,
+    "LandingMETA_parent_floor_bytes":2130237,
+    "LandingMETA_carried_bytes":2130237,
+    "uncredited_difference_bytes":24130,
+    "promoted_fixed_bytes":179468,
+    "promoted_files":18,
+    "existing_total_carried_bytes":7749699,
+    "existing_review_already_inside_P_bytes":22323,
+    "planned_report_max_bytes":32768,
+    "future_packet_reserved_bytes":131072,
+    "prospective_total_bytes":7913539,
+    "META_cap_bytes":8388608,
+    "remaining_after_plan_bytes":475069,
+    "accounting_note":"Updated parent membership supersedes earlier promoted constant. Carry larger parent Landing census; reserve full32KiB revision in addition to reports already inP and128KiB future packet; no subtraction or future deletion credit.",
+    "fits":true,
+    "planned_delete_or_future_reassignment_credit":0
+  },
+  "review_outputs": {
+    "directory":"C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be/qualification-source-review",
+    "files":["review.md","evidence.json"],
+    "combined_cap_bytes":32768,
+    "file_cap":2
+  },
+  "reviewer_actions": {
+    "source_and_metadata_reads":true,
+    "reviewed_module_imports":0,
+    "controls_executed":0,
+    "compiles":0,
+    "engine_calls":0,
+    "builds":0,
+    "native_runner_or_oracle_invocations":0,
+    "Git_commands":0,
+    "source_edits":0,
+    "corpus_copies_or_mutations":0,
+    "subagents":0,
+    "new_chats":0
+  }
+}

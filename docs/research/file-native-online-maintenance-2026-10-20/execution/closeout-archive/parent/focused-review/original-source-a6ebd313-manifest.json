@@ -1,0 +1,42 @@
+{
+  "archive_sha256": "6e3c520553743e75cef982c302c65a7f90b455d7623cbb83f0c975227bd35617",
+  "archive_bytes": 37463,
+  "files": [
+    {
+      "path": "case_ledger.py",
+      "bytes": 14422,
+      "sha256": "e910aeb01cafca1968c9b36e8234a59956feb6b71b853d2e9c81d51ac99c0ad9"
+    },
+    {
+      "path": "fake_controls.py",
+      "bytes": 20642,
+      "sha256": "8030fb289a1443f6e8d3c5340004a998200b70858d521533a07d07f465d62b08"
+    },
+    {
+      "path": "focused_protocol.py",
+      "bytes": 38155,
+      "sha256": "1b10f9121483bb6b5adf1ca20ba31bfad3367161d7d8d77925ce30eb14b17a83"
+    },
+    {
+      "path": "focused_schedules.py",
+      "bytes": 19586,
+      "sha256": "35ffbbaed3281ca470391f2dbc078805ae5fa5adec725d690b11d54c6ec571d5"
+    },
+    {
+      "path": "forecast.json",
+      "bytes": 11496,
+      "sha256": "0e697724206bf90f9222febba15535ba4c0de3f02d8b4da1b0dd335d679b4588"
+    },
+    {
+      "path": "README.md",
+      "bytes": 15332,
+      "sha256": "f513a35417ff13348a1bb7a3fd2dbfaccaf234a70a8e7fc4c4072409da2811b8"
+    },
+    {
+      "path": "source_receipt.json",
+      "bytes": 9128,
+      "sha256": "a6ebd313ca3f7f8c81b0ac2e2b1bca8b30d30c4861bfae4dd45a4f0f90b8e7b8"
+    }
+  ],
+  "known_review_disposition": "REMEDIATE; source-only no engine execution"
+}

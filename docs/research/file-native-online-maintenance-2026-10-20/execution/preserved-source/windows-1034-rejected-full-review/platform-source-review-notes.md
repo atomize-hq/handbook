@@ -1,0 +1,19 @@
+# R3 source review notes
+
+Status: SOURCE_FROZEN_AWAITING_FULL_REVIEW_NO_GO. All166 case results are PENDING. This source worker performed only reads, approved source writes, compile/AST/symbol/export checks. No private module/control/native/engine/build/corpus execution or Git mutation occurred.
+
+The 045 negative receipt 580d7098ea13db2d52748a5d2f80d1705e4c60f0d54e4784476596cd23a16f9c remains historical, preserved by the parent. The missed04:10 review target is not a new clock origin. Functional cutoff11:10:14Z and closeout13:10:14Z remain fixed.
+
+R3 closes source paths for planned-input/prelaunch failures; action/group catalogue authentication; physical-state single-record references; actual native START ordering and phase clamp; exact intentional-error consumption; actual callback response/handle projection; complete scoped case indices; bounded guard-prefix evidence; finite historical/Cargo/PowerShell providers; full backup/restore; actual checker artifacts; original-config/source-budget/guard joins; and actual LONG quarantine release. This is implementation scope, not a qualification claim.
+
+The paired stream path is new and especially needs full review and targeted qualification. It supplies source-owned fixed Runtime/Popen objects only to a freshly verified byte-module instance. Payload uses inherited anonymous pipe endpoints while Driver captures bounded JSON control stdio. Frozen byte codec/inventory sources remain unchanged. Endpoint unknowns fence admission; no payload duplicate or fake empty transport capture is claimed. Both actual worker closures precede verifier access.
+
+Source-only static checks cannot prove Win32 execution, filesystem sharing, injected creator/closure faults, complete all166 readiness, deadlines under native load or performance gates. Parent must provide real immutable runtime manifests, binary/build and source receipts, source acceptance, quantitative catalogue/limits and exact constructor/derivative data. Null historical data fields in case maps remain refusal points, not permissions.
+
+GitNexus exact-worktree impact attempts failed because this isolated worktree is unregistered. No package/bootstrap/index was run. Manual caller traces treated Driver/Adapter/hook/template/alias changes as HIGH risk. One alias symbol-level attempt was mistakenly made after its edit; this is an audit defect, not a successful pre-edit analysis. Native/Capsule/Adapter/Hooks/controls indentation compaction was checked against unchanged pre-compaction ASTs; string literals, codec data and existing functional statements were preserved. Fresh source/function hashes replace textual hashes.
+
+Required review focus: exact two-worker argv and handle inheritance, positive gate/RSS before corpus, all failure/unknown cleanup paths, SourceControl/Driver resource fences, original source/case scopes and phase aliases, no duplicate root/growth charging, immutable original helper config joins, all checker result/partial files and actual request/index bindings, full legacy result/inventory joins, and absence of fabricated native PASS fields.
+
+No independent source acceptance is authored here. No source review may rely on these implementation notes in place of reading the actual complete sources and dependencies.
+
+Fresh full review caught two still-present LONG blockers after the 10:28 freeze: checker_results publication followed an unconditional return; run_lane retained a RangeRef where the dependency expected a body. That freeze is withdrawn. Publication now follows positive settlement and precedes return. The original LONG result ref and parsed body are separate; the dependency rehash-reads the original ref and preserves it. Four historical clock segment hashes were refreshed after indentation compaction. All checks here remain static; no private import/control/native execution.

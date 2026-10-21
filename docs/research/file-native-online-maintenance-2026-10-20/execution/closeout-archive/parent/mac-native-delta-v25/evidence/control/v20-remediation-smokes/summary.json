@@ -1,0 +1,177 @@
+{
+  "status": "CONTROL_SMOKES_RECORDED_REVIEW_REQUIRED",
+  "guard_sha256": "c33fa117667de50c9010e27830a1ec63019deb7186d4a047e439bda04530cfb4",
+  "cases": [
+    {
+      "name": "normal-final-v20",
+      "exit": 0,
+      "censor": null,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "GO": true
+    },
+    {
+      "name": "nested-final-v20",
+      "exit": 0,
+      "censor": null,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "GO": true
+    },
+    {
+      "name": "orphan-final-v20",
+      "exit": 1,
+      "censor": "RuntimeError('root-completed-orphan-tree')",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "GO": true
+    },
+    {
+      "name": "memory-final-v20",
+      "exit": 1,
+      "censor": "RuntimeError(\"RuntimeError('per-process-rss-cap')\")",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "GO": true
+    },
+    {
+      "name": "missing-final-v20",
+      "exit": 1,
+      "censor": "RuntimeError(\"RuntimeError('missing-live-rss-or-identity')\")",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "GO": true
+    },
+    {
+      "name": "cadence-final-v20",
+      "exit": 1,
+      "censor": "RuntimeError('independent-or-absolute-deadline')",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "GO": true
+    },
+    {
+      "name": "watchdog-death-final-v20",
+      "exit": 1,
+      "censor": "RuntimeError('injected-watchdog-death-after-GO')",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "GO": true
+    },
+    {
+      "name": "output-final-v20",
+      "exit": 1,
+      "censor": "RuntimeError('output-prewrite-cap')",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "GO": true
+    },
+    {
+      "name": "live-byte-final-v20",
+      "exit": 1,
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "GO": true
+    },
+    {
+      "name": "live-file-final-v20",
+      "exit": 1,
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "GO": true
+    },
+    {
+      "name": "escape-final-v20",
+      "exit": 1,
+      "censor": "RuntimeError(\"RuntimeError('owned-descendant-escaped-session')\")",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "GO": true
+    },
+    {
+      "name": "source-pin-refusal-v20",
+      "exit": 2,
+      "censor": null,
+      "closure": null,
+      "GO": null
+    },
+    {
+      "name": "free-refusal-v20",
+      "exit": 1,
+      "censor": null,
+      "closure": null,
+      "GO": null
+    },
+    {
+      "name": "fixed-token-wait-v20",
+      "exit": 1,
+      "censor": "RuntimeError('keeper-alert-during-token-wait')",
+      "closure": "NO_WORKLOAD_CREATED",
+      "GO": false
+    },
+    {
+      "name": "fixed-setup-wait-v20",
+      "exit": 1,
+      "censor": "RuntimeError('deadline-or-sampler-during-setup-wait')",
+      "closure": "NO_WORKLOAD_CREATED",
+      "GO": false
+    },
+    {
+      "name": "local-timeout-final-v20",
+      "exit": 1,
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-contention')\")",
+      "closure": "NO_WORKLOAD_CREATED",
+      "GO": false
+    },
+    {
+      "name": "closure-HOLD-final-v20",
+      "exit": 1,
+      "censor": null,
+      "closure": "UNKNOWN_HOLD",
+      "GO": true
+    }
+  ],
+  "driver_RSS_errors": [],
+  "peer_stale_refusals_retained": [
+    {
+      "monotonic": 3221384.444826083,
+      "peers": [
+        "de3bd147dc2cf7ba4f3891367573780d"
+      ]
+    },
+    {
+      "monotonic": 3221386.804755333,
+      "peers": [
+        "d7bfe56d4f64b452b8c15504bdd474f9"
+      ]
+    },
+    {
+      "monotonic": 3221388.628515375,
+      "peers": [
+        "5a80271d91073112c2b07d3020ebc05e"
+      ]
+    },
+    {
+      "monotonic": 3221391.070180041,
+      "peers": [
+        "81d5195fbf860e00c99c0c7cfbd64a42"
+      ]
+    },
+    {
+      "monotonic": 3221400.119040375,
+      "peers": [
+        "6f9f44e11ac8b05ba6f834fc739ae48f"
+      ]
+    },
+    {
+      "monotonic": 3221404.148622375,
+      "peers": [
+        "66be2eba3269dd13822090f92df19661"
+      ]
+    },
+    {
+      "monotonic": 3221406.719969083,
+      "peers": [
+        "78d1e635329ba25ac098db9bd1be2987"
+      ]
+    },
+    {
+      "monotonic": 3221408.859916083,
+      "peers": [
+        "8ce493cafb84e0eaba59283201cf7ee2"
+      ]
+    }
+  ],
+  "no_engine_build_corpus": true
+}

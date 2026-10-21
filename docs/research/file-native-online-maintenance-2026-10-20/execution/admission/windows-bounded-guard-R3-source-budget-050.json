@@ -1,0 +1,29 @@
+{
+  "kind": "private-Windows-bounded-guard-R3-source-budget-050",
+  "owner": "01a15ae1-839d-7b02-843b-558ddc9e78cc",
+  "source_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard",
+  "max_bytes": 147456,
+  "max_files": 5,
+  "paths": {
+    "job_guard_bounded.py": 73728,
+    "controls.py": 16384,
+    "unlocked_capture.py": 49152,
+    "README.md": 4096,
+    "source-receipt.json": 4096
+  },
+  "claim050_sha256": "2f10ddd07a7cd5cd190593ceb3cc59a745f0a3614fc991bfaac712214333a2fa",
+  "source_only": true,
+  "runtime_go": false,
+  "build_go": false,
+  "cache_copy_go": false,
+  "pure_memory_parse_compile_go": true,
+  "engine_commit_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z",
+  "issued": "2026-10-21T05:30:30.716206+00:00",
+  "rules": [
+    "Beforeeverywritecheckactualallocatedroot,perfile/groupcapsandallphysicalcopieschargedtoYOURownsourceallocation;foreignvalidreservationsremainheldcentrally.",
+    "No unregisteredcopies/links/reparse/pycache. Olda5/R2sourcespreserved; sourcewatchdog04:10MISSEDnotretroqualified.",
+    "Newprospectiveprivatecontrollerrepaironly; sourcehashfreeze/fullindependentreviewandfinitephaseGO beforeactivation. NoRust/core/publicformat change."
+  ]
+}

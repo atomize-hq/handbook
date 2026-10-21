@@ -1,0 +1,183 @@
+{
+  "kind": "44GiB-shared-allocator-dated-subclaims",
+  "claim_id": "44GiB-CENTRAL-003-C3-META-REVIEW-CP2-SOURCE",
+  "utc": "2026-10-20T20:44:44.078913+00:00",
+  "status": "AUTHORIZED_SUBCLAIMS_WITHIN_EXISTING_C3_REPLACEMENT",
+  "authority": "Coordinator explicitly requests/authorizes two2MiB C3replacement subclaims before CP2creation/enginework. Same44GiBcontinuation, no addedcapacity.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T202101Z.json",
+    "sha256": "b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570",
+    "claim_id": "44GiB-CENTRAL-002-NATIVE-PRIVATE-TARGETS"
+  },
+  "subclaims": [
+    {
+      "id": "C3-META-REVIEW",
+      "bytes": 2097152,
+      "files": 2000,
+      "owner": "meta parent review/control return copies",
+      "roots": [
+        {
+          "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be/mac-native-control-v6",
+          "bytes": 171065,
+          "files": 77,
+          "categories": {
+            "MANIFEST.json": 13703,
+            "execution": 33564,
+            "evidence": 123798
+          }
+        },
+        {
+          "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be/cp1-review",
+          "bytes": 30561,
+          "files": 2
+        },
+        {
+          "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be/transfers/mac-control-parts.json",
+          "bytes": 52626,
+          "files": 1
+        },
+        {
+          "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be/transfers/native-control-review-v6.tar.gz",
+          "bytes": 39223,
+          "files": 1
+        },
+        {
+          "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be/transfers/mac-authority-94734e76.b64",
+          "bytes": 99968,
+          "files": 1
+        },
+        {
+          "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be/transfers/mac-authority-94734e76.json",
+          "bytes": 310,
+          "files": 1
+        },
+        {
+          "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be/transfers/mac-authority-94734e76.tar.gz",
+          "bytes": 74975,
+          "files": 1
+        }
+      ],
+      "point_in_time_actual_bytes": 468728,
+      "point_in_time_actual_files": 84,
+      "remaining_byte_headroom": 1628424,
+      "scope": "Parent newMaccontrol/source/rawreceipt copies and review/checkpointmetadata. Compressedtransport, base64, transportJSON and extractedregularfiles are distinctphysicalcopies, all counted once. Archive225280B expandedtar stream is not an extra persistedfile and is not added to extractedregularbytes. No claim all sourcebytes compressedsizeonly."
+    },
+    {
+      "id": "C3-CP2-SOURCE-ADMIN",
+      "bytes": 2097152,
+      "files": 2000,
+      "owner": "fresh CP2source-only checkout/admin",
+      "registered_path": null,
+      "path_rule": "Meta registers exact freshsource-onlycheckout path beforecreation; no CP2root found in currentonlineworktree inventory.",
+      "actual_observed_bytes": 0,
+      "scope": "Workingtree sourcefiles and admin outside sharedcommonGit, total<=2MiB; any .gitpointerfile counted once inworkingtree. CommonGit objects/index/worktreeadmin measured once globally under F13, not counted again here.",
+      "build_rule": "CP2mayreuse F02 same NEWprivateWindowsbuildtarget only viaexclusivehandoff; no additionaltarget reservation; no engine/build command until reviewedCP1GO and meta release withhostguard/token."
+    }
+  ],
+  "C3_live_snapshot": {
+    "replacement_bytes": 16777216,
+    "new_subclaims_bytes": 4194304,
+    "remaining_not_subclaimed_bytes": 12582912,
+    "files_replacement_total": 15000,
+    "new_subclaims_files_total": 4000,
+    "files_not_subclaimed": 11000,
+    "preexisting_resource_control_hold_within_remaining_bytes": 32768,
+    "current_controlroot_actual_bytes": 1505,
+    "current_controlroot_files": 5,
+    "remaining_after_control_hold_bytes": 12550144,
+    "rule": "Subclaims partition alreadycharged C3replacement; actualdraw replaces unusedreservation, never additive to wholeforecast. Other C3draws must be claimed against remainder, not inferred from idleworkers."
+  },
+  "census": {
+    "utc": "2026-10-20T20:43:25.312823Z",
+    "method": "Read-only iterative scandir/lstat logicalregularbytes; symlink/reparse not followed; no errors in selectedroots; activeworkloads maygrow during enumeration.",
+    "shared_common_Git": {
+      "root": "C:/Users/spmcc/Documents/__Project_Code/handbook/.git",
+      "bytes": 254217274,
+      "files": 2627,
+      "44GiB_baseline_bytes": 252177643,
+      "growth_bytes": 2039631,
+      "growth_files": 128,
+      "charge": "F13 global Windows/meta sharedGitgrowth budget24MiB, ONCE; includes allcommonobjects and worktreeadmin. Do not sum sourcefiles as Gitobjects again or allocate fullsharedGit separatelyperworker.",
+      "F13_Windows_budget_bytes": 25165824,
+      "F13_Windows_headroom_after_observed_Gitgrowth_bytes": 23126193,
+      "qualification": "This headroom excludes any other F13growth not in this Gitroot; meta monitors allF13claims."
+    },
+    "runtime_CP1": {
+      "root": "C:/file-native-online-cp1-20261020",
+      "bytes": 219264065,
+      "files": 2107,
+      "build_bytes": 196686300,
+      "build_files": 517,
+      "fixture_bytes": 9752529,
+      "fixture_files": 1526,
+      "evidence_bytes": 12825236,
+      "evidence_files": 64,
+      "assignment": "buildF02 (256MiB original), fixturesF06, evidenceF12; no additivewholeforecastchange"
+    },
+    "runtime_matrix": {
+      "root": "C:/file-native-online-matrix-20261020",
+      "bytes": 247130903,
+      "files": 59332,
+      "history_bytes": 240801236,
+      "history_files": 58595,
+      "protocol_bytes": 1162731,
+      "protocol_files": 302,
+      "receipts_bytes": 5166936,
+      "receipts_files": 435,
+      "assignment": "historyF05(1GiB staged), protocolF06, receiptsF12; rootactive/snapshotnotproofacceptedHcount; meta reportsH10kproducer>3701 atdispatch"
+    },
+    "online_worktrees": [
+      {
+        "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-cp1-20261020",
+        "bytes": 1099449,
+        "files": 212
+      },
+      {
+        "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020",
+        "bytes": 1944117,
+        "files": 242,
+        "44GiB_existing_docs_baseline_bytes": 907464,
+        "new_source_or_report_growth_bytes": 1036653
+      },
+      {
+        "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020",
+        "bytes": 174511,
+        "files": 24
+      }
+    ],
+    "worktree_assignment": "ExistingCP1/matrixnewsourcecopies and metaadditionalmaterializedsource fitF01shared12MiB; metaold907464docs already44GiBactual. C3CP2freshfuturecopy is separate. CommonGit counted globallyonce. No priorprotectedworktree charged as newfullcheckout."
+  },
+  "other_reservations_unchanged": {
+    "F03_Linux_private_target_bytes": 268435456,
+    "F04_Mac_private_target_bytes": 268435456,
+    "Linux_retained_native_oldtarget_reported_bytes": 126797363,
+    "Linux_retained_native_oldtarget_reported_files": 408,
+    "Linux_oldtarget_note": "Parentreportsretainedoldnativebuild: no resourceworkerrecompile orcopy. Preservedoldtargetalreadyowned; do not count it as asecondnewF03target.",
+    "F08_final_fixture_eachhost_bytes": 100663296,
+    "F05_authentic_history_bytes": 1073741824,
+    "C2_Windows_remaining_bytes": 134217728,
+    "C1_privatecache_cap_bytes": 335544320,
+    "F02_same_newtarget_reused_only": true
+  },
+  "whole_allocator_snapshot": {
+    "cap_bytes": 47244640256,
+    "whole_prospective_before_bytes": 47071111541,
+    "subclaim_net_new_prospective_bytes": 0,
+    "whole_prospective_after_bytes": 47071111541,
+    "central_contingency_before_bytes": 173528715,
+    "central_contingency_after_bytes": 173528715,
+    "inside_closeout_reserve_bytes": 1073741824,
+    "whole_prospective_files_unchanged": 4792540,
+    "remaining_files_unchanged": 207460,
+    "no_additive_worker_allowances": true
+  },
+  "report_accounting": {
+    "new_claim_files": 3,
+    "family_files_after": 16,
+    "family_file_envelope": 16,
+    "family_byte_envelope": 524288,
+    "future_claims_note": "The16file amendmentfamily envelope is nowfull. Future datedclaims need an explicit non-additive file-slot reassignment from existing C3/closeout fileheadroom BEFORE writing; no oldsealedreportdeletion and no implicitfilecapincrease."
+  },
+  "execution_and_protection": "Noengine/build/corpus action byresourceworker. CP2enginehold pendingreviewedCP1GO, sameheavyjobtoken/j2/RSS/rolecaps and onegloballonglane remain. No protectedtouch/deletion/growthcredit. Originalclockterms and priorseals unchanged.",
+  "disposition": "SubclaimsC3-META-REVIEW2MiB and C3-CP2-SOURCE-ADMIN2MiB recorded. ResourceGOretained, wholeforecast/centralcontingencyunchanged."
+}

@@ -1,0 +1,70 @@
+{
+  "kind": "private-qualification-R3-source-budget-046-v2",
+  "source_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes",
+  "owners": {
+    "LONG_PROFILES_FINALIZER": "01a15b51-a50b-7930-8633-b42694240252",
+    "HISTORY": "01a15bcc-6fb9-7e63-b935-a60d25d9390a"
+  },
+  "bytes": 294912,
+  "files": 10,
+  "max_bytes": 294912,
+  "max_files": 10,
+  "groups": {
+    "LONG": {
+      "bytes": 49152,
+      "files": 2,
+      "paths": {
+        "long_lane.py": 32768,
+        "legacy_archive_restore.py": 16384
+      }
+    },
+    "HISTORY": {
+      "bytes": 57344,
+      "files": 1,
+      "paths": {
+        "history_lane.py": 57344
+      }
+    },
+    "CONTROL": {
+      "bytes": 32768,
+      "files": 5,
+      "paths": {
+        "fake_controls.py": 14336,
+        "fake_cases.json": 8192,
+        "lane_config.example.json": 4096,
+        "source-manifest.json": 2048,
+        "README.md": 4096
+      }
+    },
+    "PROFILES": {
+      "bytes": 73728,
+      "files": 1,
+      "paths": {
+        "long_source_profiles.py": 73728
+      }
+    },
+    "FINALIZER": {
+      "bytes": 81920,
+      "files": 1,
+      "paths": {
+        "phase_finalizer.py": 81920
+      }
+    }
+  },
+  "claim046_sha256": "6bd67f146b344cdb8bd501a261df795e946a49b557d5a5d5227665c8e8e581ba",
+  "supersedes_unreleased_draft_sha256": "f915142d40a119fd02ceece98673739d50b0964ed2b2e5e0d031cfa094b51ab7",
+  "semantic_baseline035_sha256": "dd1b8ebfb2b35e32fde2873da2d8e5a4becb77c49e1f27a9649ac63ffa97c785",
+  "source_only": true,
+  "runtime_go": false,
+  "pure_memory_parse_compile_go": true,
+  "engine_commit_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z",
+  "historical_review_watchdog": "04:10:14Z MISSED; preservea5/R2failedsnapshots. Newprospectivecontrollerrepairsauthorized, no oldcellrescore/clockreset.",
+  "rules": [
+    "ChecksameimmutablebudgetSHA andindividual/group/wholeALLphysicalsourcecopies plusfuturecopyobligations beforeeverywrite; no links/reparse/bytecode/extrafiles.",
+    "OldsourceversionsdurableatGit a5b53218 and062enginefixed. No Rust/core/publicformat change.",
+    "Newsourcepinsfreshfullreviewandexplicitfiniteadmissionbeforeanyruntime/build/cache/fixture/archive/delete."
+  ],
+  "issued": "2026-10-21T05:05:16.064129+00:00"
+}

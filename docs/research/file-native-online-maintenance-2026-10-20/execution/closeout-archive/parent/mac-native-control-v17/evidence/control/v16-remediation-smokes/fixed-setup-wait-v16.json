@@ -1,0 +1,212 @@
+{
+  "name": "fixed-setup-wait-v16",
+  "exit": 1,
+  "stdout": "{\"censor\": \"RuntimeError('deadline-or-sampler-during-setup-wait')\", \"closure\": \"NO_WORKLOAD_CREATED\", \"token_released\": true, \"sample_count\": 15, \"sample_gap_max_s\": 0.01848070789128542, \"workload_GO\": false, \"worker_exit\": null, \"keeper_recovery_socket\": \"/private/tmp/file-native-online-macos-20261020/keeper-a01631e517009dac6cc7fc9320306440.release.json\", \"nonce\": \"a01631e517009dac6cc7fc9320306440\"}\n",
+  "stderr": "",
+  "started_epoch": 1792531514.033371,
+  "argv": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "/private/tmp/file-native-online-macos-20261020/execution/native-macos/guard_v7.py",
+    "--name",
+    "fixed-setup-wait-v16",
+    "--seconds",
+    "12",
+    "--prospective",
+    "{\"F01\":{\"bytes\":131072,\"files\":8},\"F04\":{\"bytes\":0,\"files\":0},\"F08\":{\"bytes\":0,\"files\":0},\"F12\":{\"bytes\":2097152,\"files\":8},\"F13\":{\"bytes\":0,\"files\":0}}",
+    "--control-only",
+    "--test-fixed-epoch",
+    "1792531514.383082",
+    "--setup-delay",
+    "2",
+    "--",
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "-c",
+    "raise RuntimeError(\"MUST_NOT_LAUNCH\")"
+  ],
+  "guard_sha256": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6",
+  "result": {
+    "kind": "native-guard-v7",
+    "nonce": "a01631e517009dac6cc7fc9320306440",
+    "status": "GUARD_CONTROL_CANDIDATE_NO_ENGINE_RELEASE",
+    "source_sha256": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6",
+    "adapter_source_bindings": {
+      "monitor_v7.py": "96eccfa0e6c4ca9ed35511ea0242bc8abff64d12d7ba2fc5f76558a57544bade",
+      "control_smoke_v7.py": "fa5d0d32aa4a0ad321ec523b7e56b058a0c04e881b4226923943012ab80597d9",
+      "keeper_v7.py": "7b2b4017b3c5f4e23402eb66aa1d4fa5cbe1993c1e01d3920bc49544f6ac0958",
+      "admission_v7.py": "c23ed5d767b74fce3e0d1478f333a72bfa84683a2cfc582648fd7db557bbfe05",
+      "guard_v7.py": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6"
+    },
+    "source_pin": "CONTROL_ONLY",
+    "claims": {
+      "F01": "initial-native-worker-source4MiB-at-authority94734e76",
+      "F04": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570",
+      "F08": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984",
+      "F12": "initial-native-worker-functional-evidence24MiB",
+      "F13": "initial-native-worker-combined-positive-shared-growth4MiB"
+    },
+    "limits": {
+      "F01": {
+        "bytes": 4194304,
+        "files": 1000,
+        "claim": "initial-native-worker-source4MiB-at-authority94734e76"
+      },
+      "F04": {
+        "bytes": 268435456,
+        "files": 5000,
+        "claim": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570"
+      },
+      "F08": {
+        "bytes": 100663296,
+        "files": 30000,
+        "claim": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984"
+      },
+      "F12": {
+        "bytes": 25165824,
+        "files": 10000,
+        "claim": "initial-native-worker-functional-evidence24MiB"
+      },
+      "F13": {
+        "bytes": 4194304,
+        "files": 1500,
+        "claim": "initial-native-worker-combined-positive-shared-growth4MiB"
+      }
+    },
+    "prospective": {
+      "F01": {
+        "bytes": 131072,
+        "files": 8
+      },
+      "F04": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F08": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F12": {
+        "bytes": 2097152,
+        "files": 8
+      },
+      "F13": {
+        "bytes": 0,
+        "files": 0
+      }
+    },
+    "started_epoch": 1792531514.149666,
+    "functional_cutoff_epoch": 1792581014.0,
+    "effective_fixed_cutoff_epoch": 1792531514.383082,
+    "local_deadline_monotonic": 3219976.445263,
+    "global_enumeration": false,
+    "censor": "RuntimeError('deadline-or-sampler-during-setup-wait')",
+    "closure": "NO_WORKLOAD_CREATED",
+    "token_released": true,
+    "worker_exit": null,
+    "supervisor": {
+      "pid_requested": 75777,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 75777,
+      "ppid": 73227,
+      "uid": 501,
+      "pgid": 73227,
+      "state": 2,
+      "start": [
+        1792531514,
+        33667
+      ]
+    },
+    "before_setup_positive_RSS": {
+      "return": 0,
+      "errno": 0,
+      "rss_bytes": 26558464,
+      "start_abstime": 77279143902337
+    },
+    "observed_output_bytes": 0,
+    "workload_GO": false,
+    "closure_proofs": [],
+    "termination": [],
+    "keeper_identity": {
+      "pid_requested": 75789,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 75789,
+      "ppid": 75777,
+      "uid": 501,
+      "pgid": 75789,
+      "state": 2,
+      "start": [
+        1792531514,
+        177332
+      ]
+    },
+    "keeper_recovery_socket": "/private/tmp/file-native-online-macos-20261020/keeper-a01631e517009dac6cc7fc9320306440.release.json",
+    "token_acquired_epoch": 1792531514.3610392,
+    "sample_count": 15,
+    "sample_gap_max_s": 0.01848070789128542,
+    "sample_failure": null,
+    "peak_group_rss": 0,
+    "peak_all_helpers_rss": 54738944,
+    "disk_monitor": {
+      "latest": null,
+      "failure": null
+    },
+    "keeper_shutdown_error": "RuntimeError('keeper-handshake-failed:closed')",
+    "keeper_reaped": true,
+    "raw_rows_written": 15,
+    "finished_epoch": 1792531514.8912818,
+    "test_fault": null
+  },
+  "raw": {
+    "compressed_sha256": "06f23294a09a9335cb3d7cff18cd11e00d78d38f2bd12d0a4666231591b9af2b",
+    "compressed_bytes": 758,
+    "gzip_eof_complete": true,
+    "json_rows": 15,
+    "rss_rows": 15,
+    "max_RSS_start_gap_s": 0.01851150020956993,
+    "rows_match_receipt": true,
+    "raw_censored": false
+  },
+  "keeper": {
+    "kind": "independent-native-keeper",
+    "nonce": "a01631e517009dac6cc7fc9320306440",
+    "identity": {
+      "pid_requested": 75789,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 75789,
+      "ppid": 75777,
+      "uid": 501,
+      "pgid": 75789,
+      "state": 2,
+      "start": [
+        1792531514,
+        177332
+      ]
+    },
+    "fixed_cutoff_epoch": 1792531514.383082,
+    "local_deadline_monotonic": 3219976.445263,
+    "token_received": true,
+    "state": "CLOSED_AFTER_CENSOR",
+    "reason": "fixed-cutoff",
+    "events": [
+      {
+        "notify_parent": {
+          "pid": 75777,
+          "start": [
+            1792531514,
+            33667
+          ],
+          "signal": 30,
+          "sent": true,
+          "errno": 0
+        }
+      }
+    ]
+  }
+}

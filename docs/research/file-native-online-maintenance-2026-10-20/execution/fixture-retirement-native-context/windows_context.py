@@ -260,16 +260,19 @@ class Pin:
     def __init__(self, native, path, access=0x80000080, share=1, allow_reparse=False):
         self.n, self.path, self.handles = native, absolute(str(path)), []
         self.closed = False
+        self.chain = []
         try:
             item = Path(self.path)
             for ancestor in reversed(item.parents):
                 handle = native.open(str(ancestor))
                 self.handles.append(handle)
                 meta = native.meta(handle)
+                self.chain.append(meta)
                 need(meta["directory"] and not meta["attrs"] & 0x400, "reparse-ancestor")
             self.handle = native.open(self.path, access, share)
             self.handles.append(self.handle)
             self.meta = native.meta(self.handle)
+            self.chain.append(self.meta)
             need(allow_reparse or not self.meta["attrs"] & 0x400, "reparse-reference")
         except BaseException:
             self.close()
@@ -336,6 +339,7 @@ class Context:
         self.refs, self.plans, self.actors = {}, {}, []
         self.buffered_bytes, self.control_scopes = 0, {}
         self.anchor_parents = []
+        self.namespace_pins = {}
         self.control_case, self.batch_expected = None, None
         self.lease, self.parent_handle = None, None
         self.archive_module = None
@@ -521,13 +525,17 @@ class Context:
              and type(self.protected["roots"]) is list
              and 0 < len(self.protected["roots"]) <= 256, "protected-root-count")
         self.read_ref(self.protected["review"])
+        self.protected_ids, self.protected_ancestors = set(), set()
         self.protected_pins = []
         for row in self.protected["roots"]:
             closed(row, {"path", "identity", "mount"}, "protected-root")
             pin = Pin(self.n, row["path"])
             self.protected_pins.append(pin)
+            self.protected_ids.add(pin.meta["identity"])
+            self.protected_ancestors.update(x["identity"] for x in pin.chain)
             need(pin.meta["identity"] == row["identity"] and pin.meta["mount"] == row["mount"],
                  "protected-native-identity")
+
 
     def native_scope(self, *, path, handle, identity, parent_path, parent_handle,
                      root, protected_roots, plan_sha256):
@@ -535,40 +543,33 @@ class Context:
         node = self.n.meta(handle)
         need(node["identity"] == identity, "node-ID")
         self.n.streams(handle)
-        owned_parent, top = None, None
-        if parent_handle is None:
-            owned_parent = Pin(self.n, parent_path)
-            parent_handle = owned_parent.handle
+        parent_pin, top = Pin(self.n, parent_path, share=5), None
         try:
-            parent = self.n.meta(parent_handle)
+            parent = self.n.meta(parent_handle) if parent_handle is not None else parent_pin.meta
+            need(parent["identity"] == parent_pin.meta["identity"] and parent["directory"]
+                 and not parent["attrs"] & 0x400, "native-parent-binding")
             top = self.root_pin(root)
-            need(parent["directory"] and not parent["attrs"] & 0x400
-                 and node["mount"] == parent["mount"] == top.meta["mount"], "mounted-node-or-parent")
-            canonical = node["path"].casefold()
-            base = top.meta["path"].rstrip("\\").casefold()
-            need(canonical == base or canonical.startswith(base + "\\"), "outside-root")
-            for pin in self.protected_pins:
-                protected = pin.meta["path"].rstrip("\\").casefold()
-                need(not (canonical == protected or canonical.startswith(protected + "\\")
-                     or protected.startswith(canonical.rstrip("\\") + "\\")), "protected-alias")
-                need(node["identity"] != pin.meta["identity"], "protected-native-ID")
+            chain = {x["identity"] for x in parent_pin.chain}
+            need(node["mount"] == parent["mount"] == top.meta["mount"]
+                 and (identity == root["identity"] or root["identity"] in chain), "outside-native-root")
+            need(not chain & self.protected_ids and identity not in self.protected_ancestors
+                 and root["identity"] not in self.protected_ancestors, "protected-native-ancestry")
             if (not node["directory"] or node["attrs"] & 0x400) and node["links"] > 1:
-                self.alias_root = root["path"]
-                self.aliases(path, node, base)
+                self.aliases(path, node, root)
             return dict(go=True, epoch=time.time(), backend="win32-pinned-volume-reparse",
                 namespace=self.protected["namespace"], mount=node["mount"], parent_mount=parent["mount"],
                 root_mount=top.meta["mount"], root_identity=root["identity"], node_identity=identity,
                 parent_identity=parent["identity"], protected_roots_sha256=hashlib.sha256(encode(protected_roots)).hexdigest(),
                 protected_scope_sha256=self.scope_sha(self.plan(plan_sha256)), source_pin=ENGINE,
-                guard_sha256=self.m["parent_capture_sha256"], freeze_nonce=self.plan(plan_sha256)["namespace_freeze_nonce"],
+                guard_sha256=self.m["parent_capture_sha256"],
+                freeze_nonce=self.plan(plan_sha256)["namespace_freeze_nonce"],
                 no_protected_alias=True, provider_sha256=self.m["context_source_sha256"])
         finally:
             if top:
                 top.close()
-            if owned_parent:
-                owned_parent.close()
+            parent_pin.close()
 
-    def aliases(self, path, node, base):
+    def aliases(self, path, node, root):
         size, text = w.DWORD(32768), c.create_unicode_buffer(32768)
         search = self.n.k.FindFirstFileNameW(str(path), 0, c.byref(size), text)
         need(search not in (None, c.c_void_p(-1).value), "native-alias-enumeration")
@@ -576,16 +577,18 @@ class Context:
         try:
             while True:
                 self.poll()
-                need(len(seen) < self.limits["max_aliases"], "alias-count")
-                alias = node["path"][:node["path"].find("}\\") + 1] + text.value
-                need(alias.casefold() not in seen and alias.casefold().startswith(base + "\\"), "external-alias")
-                seen.add(alias.casefold())
-                # Open via the admitted DOS root, not an unchecked volume/device path.
-                root = self.writers["root"]
-                suffix = alias[len(base):].lstrip("\\")
-                pin = Pin(self.n, ntpath.join(self.alias_root, suffix), share=5, allow_reparse=True)
+                need(len(seen) < self.limits["max_aliases"] and text.value not in seen, "alias-count-or-duplicate")
+                seen.add(text.value)
+                # Enumerated volume-relative names are opened on this admitted
+                # drive and checked by retained native ancestor IDs, not folding.
+                need(text.value.startswith("\\") and not text.value.startswith("\\\\"), "alias-volume-relative-name")
+                pin = Pin(self.n, ntpath.splitdrive(root["path"])[0] + text.value,
+                          share=5, allow_reparse=True)
                 try:
-                    need(pin.meta["identity"] == node["identity"] and pin.meta["mount"] == node["mount"], "alias-ID")
+                    ancestors = {x["identity"] for x in pin.chain[:-1]}
+                    need(pin.meta["identity"] == node["identity"] and pin.meta["mount"] == node["mount"]
+                         and root["identity"] in ancestors and not ancestors & self.protected_ids,
+                         "external-alias-or-native-ID")
                 finally:
                     pin.close()
                 size.value = len(text)
@@ -597,6 +600,8 @@ class Context:
             if not self.n.k.FindClose(search):
                 self.n.uncertain.append(("alias-search", search))
                 raise Refusal("alias-search-close")
+
+
 
 
     def root_pin(self, root):
@@ -614,6 +619,7 @@ class Context:
         if digest not in self.plans:
             if self.m["action"] == "CONTROL":
                 need(self.control_case is not None, "no-active-control")
+                self.namespace(self.control_case["root"])
                 found = []
                 for name in ("capture-plan.json", "parent-retirement-permit.json"):
                     path = ntpath.join(self.control_case["root"], name)
@@ -688,6 +694,7 @@ class Context:
         else:
             need(plan["control_only"] is True, "CONTROL-only-plan")
         need(integer(prospective_bytes, 0, plan["limits"]["archive_bytes"] + 1048576), "prospective-bound")
+        self.check_budget(prospective_bytes, 5 if prospective_bytes > plan["limits"]["archive_bytes"] else 0)
         self.charged_archive = max(self.charged_archive, prospective_bytes)
         retiring = phase == "retire"
         if retiring:
@@ -755,17 +762,71 @@ class Context:
         return total, files
 
 
+
+
+    def namespace(self, path, new=False, protect=True):
+        path = absolute(path)
+        need(path.isascii(), "CONTROL-output-ASCII-scope")
+        if path not in self.namespace_pins:
+            anchor, tail = path, []
+            while True:
+                handle = self.n.k.CreateFileW(anchor, 0x80, 1, None, 3, 0x02200000, None)
+                error = c.get_last_error()
+                if handle not in (None, c.c_void_p(-1).value):
+                    self.n.close(handle)
+                    break
+                need(error in (2, 3), "output-absence-not-native")
+                parent, name = ntpath.split(anchor)
+                need(parent != anchor and name, "output-no-existing-anchor")
+                tail.insert(0, name); anchor = parent
+            pin = Pin(self.n, anchor)
+            need(pin.meta["directory"] and pin.meta["path"].isascii(), "output-native-directory-ASCII")
+            self.namespace_pins[path] = pin
+            pin.future_parts = tail
+        pin = self.namespace_pins[path]
+        actual = self.n.meta(pin.handle)
+        need(actual["identity"] == pin.meta["identity"] and actual["mount"] == pin.meta["mount"]
+             and actual["directory"] and not actual["attrs"] & 0x400, "output-anchor-rebound")
+        if protect:
+            need(not {x["identity"] for x in pin.chain} & self.protected_ids
+                 and (pin.future_parts or pin.meta["identity"] not in self.protected_ancestors),
+                 "protected-output-prefix")
+        if new:
+            handle = self.n.k.CreateFileW(path, 0x80, 1, None, 3, 0x02200000, None)
+            error = c.get_last_error()
+            if handle not in (None, c.c_void_p(-1).value):
+                self.n.close(handle)
+                raise Refusal("output-prefix-already-exists")
+            need(error in (2, 3), "output-absence-not-positive-native")
+        return ntpath.join(pin.meta["path"], *pin.future_parts).rstrip("\\").lower()
+
+    def output_partition(self):
+        body, evidence = (absolute(self.limits[k]) for k in ("control_root", "evidence_root"))
+        keys = [absolute(row["root"]) for row in self.budget["root_caps"]]
+        need(len(keys) == 2 and set(keys) == {body, evidence}, "complete-owned-body-evidence-budget")
+        bindings = [self.namespace(p) for p in (body, evidence)]
+        need(all(not (a == b or a.startswith(b + "\\") or b.startswith(a + "\\"))
+                 for a, b in [(bindings[0], bindings[1])]), "overlapping-owned-budget-roots")
+        for path, byte_key, file_key in ((body, "body_bytes", "body_files"),
+                                         (evidence, "evidence_bytes", "evidence_files")):
+            row = next(r for r in self.budget["root_caps"] if r["root"] == path)
+            need(row["reserve_bytes"] >= self.limits[byte_key] and row["reserve_files"] >= self.limits[file_key],
+                 "unfunded-full-finite-phase")
+
     def check_budget(self, prospective_bytes, prospective_files):
         closed(self.budget, {"version", "root_caps", "review"}, "Context-budget")
-        need(self.budget["version"] == 1 and type(self.budget["root_caps"]) is list
-             and len(self.budget["root_caps"]) <= 32, "Context-budget-version")
+        need(type(self.budget["version"]) is int and self.budget["version"] == 1
+             and type(self.budget["root_caps"]) is list, "Context-budget-version")
+        for rule in self.budget["root_caps"]:
+            closed(rule, {"root", "bytes", "files", "reserve_bytes", "reserve_files"}, "root-budget")
+            absolute(rule["root"])
+            need(all(integer(rule[k], 0, 2**46) for k in
+                 ("bytes", "files", "reserve_bytes", "reserve_files")), "budget-bound")
+        self.output_partition()
         self.read_ref(self.budget["review"])
         if not hasattr(self, "budget_tickets"):
             self.budget_tickets = {}
         for rule in self.budget["root_caps"]:
-            closed(rule, {"root", "bytes", "files", "reserve_bytes", "reserve_files"}, "root-budget")
-            need(all(integer(rule[k], 0, 2**46) for k in
-                 ("bytes", "files", "reserve_bytes", "reserve_files")), "budget-bound")
             actual, files = self.census(rule["root"])
             key = rule["root"]
             if key not in self.budget_tickets:
@@ -778,11 +839,28 @@ class Context:
                  and ticket[3] <= ticket[1] + rule["reserve_files"] <= rule["files"], "phase-ticket-exceeded")
         need(integer(prospective_bytes, 0, self.limits["body_bytes"])
              and integer(prospective_files, 0, self.limits["body_files"]), "control-prospective-bound")
+        body = next(row for row in self.budget["root_caps"] if row["root"] == self.limits["control_root"])
+        ticket = self.budget_tickets[body["root"]]
+        need(ticket[2] + prospective_bytes <= ticket[0] + body["reserve_bytes"]
+             and ticket[3] + prospective_files <= ticket[1] + body["reserve_files"], "prospective-unfunded-body-write")
         free = c.c_ulonglong()
         self.n.k.GetDiskFreeSpaceExW.argtypes = [w.LPCWSTR, c.c_void_p, c.c_void_p, c.c_void_p]
         self.n.k.GetDiskFreeSpaceExW.restype = w.BOOL
         need(self.n.k.GetDiskFreeSpaceExW("C:\\", c.byref(free), None, None)
              and free.value >= 140 * 1024**3, "Windows-free-floor")
+
+    def control_write(self, name, raw, cap=16384):
+        need(self.m["action"] == "CONTROL" and self.control_case is not None
+             and self.control_case["root"] == ntpath.join(self.limits["control_root"], self.control_case["case_id"])
+             and name in {"native-scope.json", "capture-plan.json", "parent-retirement-permit.json",
+                          "native-control-receipt.json", "negative-archive.py", "negative-authority.json",
+                          "negative-manifest.json", "fault-checkpoint.json", "recovery-proof.json"}
+             and type(raw) is bytes and len(raw) <= cap <= 131072, "bounded-control-sink")
+        self.check_budget(len(raw), 1)
+        path = ntpath.join(self.control_case["root"], name)
+        with open(path, "xb") as stream:
+            stream.write(raw); stream.flush(); os.fsync(stream.fileno())
+        return dict(path=path, bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest())
 
     def archive(self):
         if self.archive_module is None:
@@ -798,6 +876,7 @@ class Context:
         self.lease.check()
         case = self.control_case
         need(self.m["action"] == "CONTROL" and case is not None, "control-constructor-authority")
+        self.namespace(case["root"])
         path = ntpath.join(case["root"], "source")
         need(prepared["roots"][0]["path"] == path and len(prepared["roots"]) == 1
              and prepared["artifact_root"] == ntpath.join(case["root"], "archive")
@@ -856,6 +935,13 @@ class Context:
              and expected["guard_sha256"] == self.m["parent_capture_sha256"]
              and expected["forecast_sha256"] == hashlib.sha256(json.dumps(forecast, sort_keys=True).encode()).hexdigest()
              and time.time() < expected["deadline_epoch"] <= self.m["deadline_epoch"], "control-catalog")
+        need(forecast["fixture_archive_restore_partial_bytes"] <= self.limits["body_bytes"]
+             and forecast["fixture_archive_restore_partial_files"] <= self.limits["body_files"]
+             and forecast["evidence_bytes"] <= self.limits["evidence_bytes"]
+             and forecast["evidence_files"] <= self.limits["evidence_files"], "full-control-forecast-funding")
+        self.namespace(self.limits["control_root"], new=True)
+        if self.a["native_controls"] is not None:
+            self.c31_port()
         self.check_budget(forecast["fixture_archive_restore_partial_bytes"],
                           forecast["fixture_archive_restore_partial_files"])
         self.control_deadline = expected["deadline_epoch"]
@@ -881,31 +967,13 @@ class Context:
         need(self.case_reserve_bytes <= self.limits["body_bytes"]
              and self.case_reserve_files <= self.limits["body_files"], "control-catalog-reservation")
         self.check_budget(expected["prospective_bytes"], expected["prospective_files"])
+        self.namespace(expected["root"], new=True)
         self.control_case = dict(expected)
         return dict(expected, go=True, epoch=time.time())
 
 
 
-    def control_write(self, name, raw, cap=16384):
-        need(self.m["action"] == "CONTROL" and self.control_case is not None
-             and name in {"native-scope.json", "capture-plan.json", "parent-retirement-permit.json",
-                          "native-control-receipt.json", "negative-archive.py", "negative-authority.json",
-                          "negative-manifest.json", "fault-checkpoint.json", "recovery-proof.json"}
-             and type(raw) is bytes and len(raw) <= cap <= 131072, "bounded-control-sink")
-        self.check_budget(0, 0)
-        path = ntpath.join(self.control_case["root"], name)
-        owners = 0
-        for rule in self.budget["root_caps"]:
-            prefix = ntpath.normcase(rule["root"]).rstrip("\\") + "\\"
-            if ntpath.normcase(path).startswith(prefix):
-                ticket = self.budget_tickets[rule["root"]]
-                need(ticket[2] + len(raw) <= ticket[0] + rule["reserve_bytes"]
-                     and ticket[3] + 1 <= ticket[1] + rule["reserve_files"], "control-sink-ticket")
-                owners += 1
-        need(owners, "control-sink-no-owner")
-        with open(path, "xb") as stream:
-            stream.write(raw); stream.flush(); os.fsync(stream.fileno())
-        return dict(path=path, bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest())
+
 
     def control_snapshot(self, path):
         """Bounded no-follow forensic snapshot of this disposable control only."""
@@ -955,6 +1023,7 @@ class Context:
 
     def native_actor(self, kind, source):
         """Source-owned finite actor. No callback, executable, argv or plugin port."""
+        self.check_budget(CHUNK if kind == "writer" else 0, 0)
         ready, stop = threading.Event(), threading.Event()
         result = {"kind": kind, "closed": False, "bytes": 0, "error": None}
         pipe = [w.HANDLE(), w.HANDLE()]
@@ -1273,6 +1342,10 @@ class Context:
              and q["nonce"] == "C31-crash-journal"
              and not ntpath.normcase(q["fixture_root"]).startswith(ntpath.normcase(q["batch_root"]) + "\\"),
              "C31-independent-fixed-prefix")
+        batch = self.namespace(q["batch_root"], protect=False)
+        fixture = self.namespace(q["fixture_root"], protect=False)
+        need(not (batch == fixture or batch.startswith(fixture + "\\") or fixture.startswith(batch + "\\")),
+             "C31-bidirectional-native-prefix-disjointness")
         return port["phase"], q
 
     def control_fact(self, path, cap):
@@ -1515,7 +1588,7 @@ class Context:
         """Release only after reviewed synchronous helper and actual handle closure."""
         need(not self.completed, "Context-finish-twice")
         pins = [pin for pin, raw in self.refs.values()]
-        pins += getattr(self, "protected_pins", []) + self.anchor_parents
+        pins += getattr(self, "protected_pins", []) + self.anchor_parents + list(self.namespace_pins.values())
         for pin in reversed(pins):
             pin.close()
         if self.parent_handle:

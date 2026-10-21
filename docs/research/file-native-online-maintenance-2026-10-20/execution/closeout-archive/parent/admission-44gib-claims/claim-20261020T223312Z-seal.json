@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-013-F06-CP-SHARED-108MiB",
+  "utc": "2026-10-20T22:33:12.125808+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T223312Z.json",
+      "bytes": 6327,
+      "sha256": "6ab8d769924d79d6ded7baa81cfc6617cad239b9fd970fce4f78239e95b84d7c"
+    },
+    {
+      "file": "claim-20261020T223312Z.md",
+      "bytes": 1792,
+      "sha256": "4fe6e5b8b6ed557ed006e18039a50310fed660852c4c8acef3c77be85623e160"
+    }
+  ],
+  "status": "AUTHORIZED_CURRENT_PROOF_CAP_INCREASE__PARENT_REVIEW_HANDOFF_BINDING_REQUIRED",
+  "sealed": true
+}

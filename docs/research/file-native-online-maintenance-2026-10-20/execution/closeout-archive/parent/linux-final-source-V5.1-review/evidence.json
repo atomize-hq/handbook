@@ -1,0 +1,366 @@
+{
+ "kind": "LINUX_V5_1_INDEPENDENT_FULL_SOURCE_REVIEW",
+ "status": "READ_COMPLETE_SOURCE_DEFECTS_NO_GO",
+ "source_only": true,
+ "runtime_go": false,
+ "controls_executed": 0,
+ "builds": 0,
+ "tests": 0,
+ "private_imports": 0,
+ "source_edits": 0,
+ "git_mutations": 0,
+ "package_bootstrap_commands": 0,
+ "core_commit": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+ "candidate_frozen_utc": "2026-10-21T07:30:16.180Z",
+ "first_identity_utc": "2026-10-21T07:36:40.591343+00:00",
+ "last_identity_utc": "2026-10-21T07:44:56.198314+00:00",
+ "all40_first_last_equal": true,
+ "all38_manifest_records_match": true,
+ "coverage": {
+  "fresh_full_read_suite13": [
+   "suite/suite_adapter.py",
+   "suite/suite_bootstrap.py",
+   "suite/suite_driver.py",
+   "suite/suite_extensions.py",
+   "suite/suite_main.py",
+   "suite/suite_oracle.py",
+   "suite/suite_ordinary.py",
+   "suite/suite_packing.py",
+   "suite/suite_recovery.py",
+   "suite/suite_units.py",
+   "suite/suite_growth.json",
+   "suite/suite_manifest.json",
+   "suite/source_receipt.json"
+  ],
+  "changed_python7": [
+   "suite_bootstrap.py",
+   "suite_driver.py",
+   "suite_adapter.py",
+   "suite_extensions.py",
+   "suite_recovery.py",
+   "suite_packing.py",
+   "suite_units.py"
+  ],
+  "unchanged_dependencies27": "prior full reads in same conversation reused only after exact size/SHA comparison to both V5.1 boundaries and previous full-read identities",
+  "native5": "actual frozen files",
+  "historical11": "exact062 Git blobs, read-only git show, no extraction",
+  "private_source_execution": false,
+  "truncated_output_credited": false
+ },
+ "identities": [
+  {
+   "logical": "suite/suite_adapter.py",
+   "bytes": 47315,
+   "sha256": "beba7ef8eda25ac2079457174da960032f6e1543f1d503b6a127e61903eb94ef"
+  },
+  {
+   "logical": "suite/suite_bootstrap.py",
+   "bytes": 14638,
+   "sha256": "8a6f74f2ae0a9f74bf2e1adde9e2a83ea0083b374d79ef1a87386779224b3a7f"
+  },
+  {
+   "logical": "suite/suite_driver.py",
+   "bytes": 32809,
+   "sha256": "8f30e60268898fc2aad5d7e8a87d95b1bea85476a29b4d46179196af2943cd9e"
+  },
+  {
+   "logical": "suite/suite_extensions.py",
+   "bytes": 48268,
+   "sha256": "71189d39ef28328563aaf1d26404ca89fa9c8b50cd2335f2b58bf1791a901f78"
+  },
+  {
+   "logical": "suite/suite_main.py",
+   "bytes": 16195,
+   "sha256": "3dcf6cbdeb8928947c483f6b169049d6487acf92b341369f60dc7a482eeef5ea"
+  },
+  {
+   "logical": "suite/suite_oracle.py",
+   "bytes": 11460,
+   "sha256": "59ac7c58f399230419edbc82ecd52c1585c7f15e65420d001353baaf3f3a915a"
+  },
+  {
+   "logical": "suite/suite_ordinary.py",
+   "bytes": 6561,
+   "sha256": "fccad1637fa9c85f5fb3d77094f13ddc9bc810bca9410dc9aed01f940c80e942"
+  },
+  {
+   "logical": "suite/suite_packing.py",
+   "bytes": 33671,
+   "sha256": "a965daddeac898d091753d152460c5734b1e5b90d4fe482d3a8b5f04cdd0487f"
+  },
+  {
+   "logical": "suite/suite_recovery.py",
+   "bytes": 21007,
+   "sha256": "79787472077fbfee1f85ce73a8876234a24649d285acf70d02c1c8135f97401c"
+  },
+  {
+   "logical": "suite/suite_units.py",
+   "bytes": 6351,
+   "sha256": "021d7fb7f99e96e536484dfdf6230f7b1798180ceda39b1c030e3de61782e8ab"
+  },
+  {
+   "logical": "suite/suite_growth.json",
+   "bytes": 10743,
+   "sha256": "10cafcf77caef864e07b8dec0c7d35af27c8638e87cbd9069f500ba4aab66e93"
+  },
+  {
+   "logical": "native/native_guard.py",
+   "bytes": 22935,
+   "sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9"
+  },
+  {
+   "logical": "native/native_driver.py",
+   "bytes": 11682,
+   "sha256": "dfe8ef569b4981a76e199a2763de8a3cf9988bb24785b280fc3662bcd09427ce"
+  },
+  {
+   "logical": "native/native_driver_v3.py",
+   "bytes": 27241,
+   "sha256": "d2f3d88bbab83e089120754e3bb8006f77d4915c0c7d19d59364f5e55ac1a7d8"
+  },
+  {
+   "logical": "native/native_resources_v3.py",
+   "bytes": 16072,
+   "sha256": "cbf601e0ebe547cc25ba194f5fc0f0d808300366388f0decfd866609701e96c5"
+  },
+  {
+   "logical": "native/native_adapter_v3.py",
+   "bytes": 21582,
+   "sha256": "da273c4866883a7f4bb7b417ffa19ad0ea408e869601f502cc9e6a71b18d08de"
+  },
+  {
+   "logical": "shared/focused_protocol.py",
+   "bytes": 50073,
+   "sha256": "7ce0a4a06a35fa9e7f4f4080a40315a418bb45e47a8946ca06d78c2117d855e8"
+  },
+  {
+   "logical": "shared/focused_schedules.py",
+   "bytes": 27562,
+   "sha256": "ee7d2aef5b7ecd492602c49f9e78646465bc2cd04a1e597e1d46e86cd67ff756"
+  },
+  {
+   "logical": "shared/case_ledger.py",
+   "bytes": 14462,
+   "sha256": "ce7fb4983b5f31e0f529a69431a169574e7ba5cb55e225b17d42d10354be931b"
+  },
+  {
+   "logical": "shared/source_receipt.json",
+   "bytes": 10144,
+   "sha256": "4719748175f99b3f00a281f526c0deabcac0977122c07bb6d7c517080fb45381"
+  },
+  {
+   "logical": "harness/physical_decoder.py",
+   "bytes": 17128,
+   "sha256": "eb00a0b49ce4754b23bb4e4a340ec99070805cf43b6f2e1c1125d029f5453001"
+  },
+  {
+   "logical": "harness/physical_decoder_v5.py",
+   "bytes": 44817,
+   "sha256": "1347778df8839da571603b215a8f3aecac70b40eff571ddbad0cb19e27bf5be9"
+  },
+  {
+   "logical": "harness/paged_index.py",
+   "bytes": 8097,
+   "sha256": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea"
+  },
+  {
+   "logical": "harness/outcome_oracle.py",
+   "bytes": 6564,
+   "sha256": "a5721ab4102ab742efe66f546c9016b051cd3914e07700cc3de7c0f55a3ced02"
+  },
+  {
+   "logical": "harness/physical_decoder_v6.py",
+   "bytes": 4036,
+   "sha256": "c4e0a160816372b76ffbfd2102a1a2d98985e0190bdbf2dff2c3fbb118ea3811"
+  },
+  {
+   "logical": "harness/quota_v2_oracle.py",
+   "bytes": 18418,
+   "sha256": "bf4e892298760c79ce5a164c3294e069e5188b8c2c260c8477e9c93e64c468d3"
+  },
+  {
+   "logical": "harness/verify_operational_v2.py",
+   "bytes": 10071,
+   "sha256": "e517d07c5f345e9fb3a90535d5185828147b45a27896e658dbf4164ea7a76caf"
+  },
+  {
+   "logical": "research/file-native-incremental-engine-experiment-2026-10-18/verify_store.py",
+   "bytes": 10936,
+   "sha256": "ce74f48339b950ad62c9c159bd95d4f038248d500addd6b635559ccdba42e2b8"
+  },
+  {
+   "logical": "research/file-native-packing-2026-10-20/independent.py",
+   "bytes": 13097,
+   "sha256": "94987dbe1c992ef2491bb9819ad90185d2f29aef704b1bfaaa8f7e052a449e66"
+  },
+  {
+   "logical": "research/file-native-recovery-reclamation-2026-10-19/verify_operational.py",
+   "bytes": 9290,
+   "sha256": "d86c7d5406d5c5a5d00553b85dd0f16a039838132c31f41cc0567a7e3920e5cd"
+  },
+  {
+   "logical": "research/file-native-navigation-2026-10-19/oracle.py",
+   "bytes": 9057,
+   "sha256": "877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f"
+  },
+  {
+   "logical": "research/file-native-recovery-reclamation-2026-10-19/oracle.py",
+   "bytes": 3702,
+   "sha256": "a5ff418c13571fe1163a1ccfa8fdc01cf6af37d9f690009002c5cc3a49d4b431"
+  },
+  {
+   "logical": "research/file-native-packing-2026-10-20/capsule.py",
+   "bytes": 19536,
+   "sha256": "b19f61524a6fb7baeadfaf82b32191ccf4f491d00541039c6aaf665af0f0a2ca"
+  },
+  {
+   "logical": "research/file-native-packing-2026-10-20/strict_supplement.py",
+   "bytes": 5052,
+   "sha256": "6708b2a1cd14e5e00121ffe3afacdfd5cd2eb35823a0ae336d882ef80d7d6d67"
+  },
+  {
+   "logical": "research/file-native-packing-2026-10-20/fix2_regression.py",
+   "bytes": 7331,
+   "sha256": "5385233d18dcaa52f0ba81aaf50a948f26e72563c6754a8c2fc2420550556297"
+  },
+  {
+   "logical": "research/file-native-recovery-reclamation-2026-10-19/capsule.py",
+   "bytes": 11507,
+   "sha256": "1b997e6bc058660fcfe7246ee98a7b13317e63f7232acef73fef6c3987273b71"
+  },
+  {
+   "logical": "research/file-native-recovery-reclamation-2026-10-19/operational_backup.py",
+   "bytes": 8308,
+   "sha256": "20aa1b2965fd294bbf11942e5d399c7944c1f699b11021c0349b57ee5ee10bbe"
+  },
+  {
+   "logical": "research/file-native-recovery-reclamation-2026-10-19/bash_walk.sh",
+   "bytes": 1096,
+   "sha256": "f75f640e6734ffef72727f72864502938bbb79b993001352ba50317329a40b89"
+  },
+  {
+   "logical": "suite/suite_manifest.json",
+   "bytes": 16073,
+   "sha256": "6ae235a6fd2d71b71e6af05870418cbbea2d07c7e21909c4d24597c40dcafde2"
+  },
+  {
+   "logical": "suite/source_receipt.json",
+   "bytes": 7826,
+   "sha256": "1d6c837c7c462da80b51c589e3e38017f2608518f65a346a60f66e808a3934ce"
+  }
+ ],
+ "bytes": {
+  "suite13": 272917,
+  "new35": 583201,
+  "reused_native5": 99512,
+  "logical40": 682713,
+  "external22": 310284
+ },
+ "static_AST_compile": "PASS; all10Python; no import/execute",
+ "findings": [
+  {
+   "id": "V51-P1-OWNERSHIP-BIRTH-HANDOFF",
+   "priority": 1,
+   "file": "suite_adapter.py",
+   "start": 538,
+   "end": 540,
+   "related_lines": [
+    530,
+    543,
+    549
+   ],
+   "detail": "ownership comes from snapshot but acquisition uses fresh process row without snapshot-start equality; a reused foreign birth can be registered and signalled; inner numeric-child-ID handoff has analogous missing association",
+   "required": "preserve ownership-observed birth or revalidate owned parent edge/birth before commit"
+  },
+  {
+   "id": "V51-P2-UNCERTAINTY-CLEANUP",
+   "priority": 2,
+   "file": "suite_adapter.py",
+   "start": 644,
+   "end": 652,
+   "detail": "unguarded members inside finally can raise acquisition uncertainty and skip retained process termination/reaping and reader/observer/handle closure",
+   "required": "continue bounded cleanup with existing verified handles while preserving failure and uncertainty"
+  }
+ ],
+ "repair_assessment": {
+  "post_open_pidfd": "repaired inside shared retain_birth; post-open birth/fdinfo match and close-before-publish on uncertainty",
+  "ownership_to_input": "not repaired; P1",
+  "failure_cleanup": "not complete; P2",
+  "caller_final_RSS_tail": "source architecture repaired by continuously live bootstrap caller observer plus bounded terminal handoff",
+  "own_receipt_census": "retained exclusive writer lock/fixed point/fsync/checked actual census",
+  "terminal_closure_prefix": "retained prefix plus terminal empty pair accepted",
+  "deadline": "OS alarm active through bounded terminal emission and immediate exit0",
+  "historical_artifacts": "not modified or rescored"
+ },
+ "terminal": {
+  "receipt_status_before_native_witness": "PENDING_TERMINAL",
+  "requires_actual_parent_returncode": 0,
+  "records": 2,
+  "total_stdout_max": 16384,
+  "first_record_max": 15360,
+  "exit_record_max": 512,
+  "write_piece_max": 4096,
+  "tail_sample_min": 2,
+  "tail_sample_max": 256,
+  "cadence_max_seconds": 0.04,
+  "caller_HWM_max_bytes": 805306368,
+  "observer_live_through": [
+   "proof parse",
+   "gzip closure",
+   "hashes",
+   "own receipt write/fsync",
+   "inclusive census"
+  ],
+  "handoff": "tail overlaps final phase-memory epoch; synchronous RSS/HWM after writes; absolute alarm active",
+  "verifier": "suite_driver.verify_phase_terminal; native path/SHA+receipt/manifest/witness linkage+caller birth+endpoint/cadence",
+  "source_only_assessment": true
+ },
+ "consumer_links": {
+  "C1": "terminal.receipt_sha256 explicitly equals actual qualified_copy.sha256 before verifier",
+  "prior31": "terminal.receipt_sha256 explicitly equals actual prior.sha256; full31 results/sources/raw/fixture census rechecked",
+  "receipt_link_finding": false
+ },
+ "scope_gates": {
+  "finite8": "NO_GO; P1/P2; separate new native admission and actual controls required",
+  "private_C1": "NO_COPY_GO from review; explicit private claim and qualification needed",
+  "native_build31": "UNRUN; exact sources/tools/cache/target/native output and terminal proof required",
+  "full158": "NO_GO; releases and retained feasibility still pending",
+  "engine_cases_qualified": 0
+ },
+ "C1": {
+  "archives": 45,
+  "unpacked_roots": 32,
+  "files": 1653,
+  "bytes": 39205355,
+  "manifest_sha256": "7f0443c355439d2a45ddac9b7ce646f5c4067ffaf94493d61e039e9dcfa90f78"
+ },
+ "accounting": {
+  "physical_all_copy_admission_granted": false,
+  "terminal_native_and_local_paths_need_reservation": true,
+  "no_deletion_expiry_credit": true,
+  "budget_before_write": {
+   "utc": "2026-10-21T07:44:55.959879+00:00",
+   "membership": "meta-membership-v8.json",
+   "membership_sha256": "42fe5298f372601c0696017f16ec0e0281a00f223d5a6aabe54ed19836edb9ba",
+   "cap_bytes": 10878976,
+   "cap_files": 2000,
+   "actual_bytes": 10485161,
+   "actual_files": 1249,
+   "other_pending_bytes": 136381,
+   "R4_pending_separate": 24576,
+   "V51_pair_pending": 24576,
+   "pending_total": 185533,
+   "prospective_bytes": 10670694,
+   "headroom": 208282,
+   "pair_paths_absent": true,
+   "aliases": false
+  },
+  "pair_cap_bytes": 24576,
+  "pair_cap_files": 2,
+  "consume_actual_once": true,
+  "unused_pair_remainder_held": true,
+  "previous_reports_modified": false
+ },
+ "functional_cutoff": "2026-10-21T11:10:14Z",
+ "closeout_end": "2026-10-21T13:10:14Z"
+}

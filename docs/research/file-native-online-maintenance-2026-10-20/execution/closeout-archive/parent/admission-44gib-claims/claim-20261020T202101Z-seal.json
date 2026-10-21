@@ -1,0 +1,20 @@
+{
+  "claim_id": "44GiB-CENTRAL-002-NATIVE-PRIVATE-TARGETS",
+  "utc": "2026-10-20T20:21:01.479681+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T202101Z.json",
+      "bytes": 4703,
+      "sha256": "b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570"
+    },
+    {
+      "file": "claim-20261020T202101Z.md",
+      "bytes": 969,
+      "sha256": "faa6da8be4f0c57093092330c2f4ac11588a17d55ba1e11d4fad24645e551a92"
+    }
+  ],
+  "previous_claim_sha256": "9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984",
+  "whole_prospective_bytes": 47071111541,
+  "central_contingency_bytes": 173528715,
+  "sealed": true
+}

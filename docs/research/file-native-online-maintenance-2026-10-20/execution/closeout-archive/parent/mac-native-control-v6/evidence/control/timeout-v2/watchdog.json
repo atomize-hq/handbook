@@ -1,0 +1,1 @@
+{"reason": "absolute-deadline", "events": [{"identity": {"pid_requested": 84255, "returned_bytes": 136, "errno": 0, "expected_bytes": 136, "pid": 84255, "ppid": 84193, "uid": 501, "pgid": 84255, "state": 2, "start": [1792528244, 21851]}, "matches": true, "signal_errno": null, "signal": "SIGKILL_OWNED_ANCHORED_GROUP"}], "utc": "2026-10-20T20:30:44.519643+00:00"}

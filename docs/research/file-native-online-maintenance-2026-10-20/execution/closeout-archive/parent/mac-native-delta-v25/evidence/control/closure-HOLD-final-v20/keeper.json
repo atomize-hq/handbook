@@ -1,0 +1,248 @@
+{
+  "kind": "independent-native-keeper",
+  "nonce": "78d1e635329ba25ac098db9bd1be2987",
+  "identity": {
+    "pid_requested": 9380,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 9380,
+    "ppid": 9379,
+    "uid": 501,
+    "pgid": 9380,
+    "state": 2,
+    "start": [
+      1792532954,
+      601073
+    ]
+  },
+  "fixed_cutoff_epoch": 1792581014.0,
+  "local_deadline_monotonic": 3221416.868090083,
+  "token_received": true,
+  "state": "CLOSED_AFTER_EXPLICIT_REVIEW",
+  "identity_budget": 4096,
+  "reason": "parent-UNKNOWN-closure",
+  "fence": {
+    "kind": "native-host-ownership-HOLD",
+    "nonce": "78d1e635329ba25ac098db9bd1be2987",
+    "parent": {
+      "pid_requested": 9379,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 9379,
+      "ppid": 8796,
+      "uid": 501,
+      "pgid": 8796,
+      "state": 2,
+      "start": [
+        1792532954,
+        530390
+      ]
+    },
+    "keeper": {
+      "pid_requested": 9380,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 9380,
+      "ppid": 9379,
+      "uid": 501,
+      "pgid": 9380,
+      "state": 2,
+      "start": [
+        1792532954,
+        601073
+      ]
+    },
+    "anchor": {
+      "pid_requested": 9388,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 9388,
+      "ppid": 9380,
+      "uid": 501,
+      "pgid": 9388,
+      "state": 2,
+      "start": [
+        1792532956,
+        250704
+      ]
+    },
+    "known": [
+      {
+        "pid_requested": 9388,
+        "returned_bytes": 136,
+        "errno": 0,
+        "expected_bytes": 136,
+        "pid": 9388,
+        "ppid": 9380,
+        "uid": 501,
+        "pgid": 9388,
+        "state": 2,
+        "start": [
+          1792532956,
+          250704
+        ]
+      },
+      {
+        "pid_requested": 9389,
+        "returned_bytes": 136,
+        "errno": 0,
+        "expected_bytes": 136,
+        "pid": 9389,
+        "ppid": 9388,
+        "uid": 501,
+        "pgid": 9388,
+        "state": 2,
+        "start": [
+          1792532956,
+          305551
+        ]
+      }
+    ],
+    "reason": "parent-UNKNOWN-closure",
+    "recovery_socket": "/private/tmp/file-native-online-macos-20261020/keeper-78d1e635329ba25ac098db9bd1be2987.release.json",
+    "recovery_channel": "bounded-regular-JSON-file",
+    "token_retained_by_keeper": true,
+    "no_PID_only_resume": true,
+    "utc": "2026-10-20T21:49:16.438852+00:00"
+  },
+  "events": [
+    {
+      "termination": {
+        "status": "FROZEN_TREE_SIGNALLED",
+        "steps": [],
+        "known": [
+          {
+            "pid_requested": 9388,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 9388,
+            "ppid": 9380,
+            "uid": 501,
+            "pgid": 9388,
+            "state": 2,
+            "start": [
+              1792532956,
+              250704
+            ]
+          },
+          {
+            "pid_requested": 9389,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 9389,
+            "ppid": 9388,
+            "uid": 501,
+            "pgid": 9388,
+            "state": 2,
+            "start": [
+              1792532956,
+              305551
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "notify_parent": {
+        "pid": 9379,
+        "signal": 30,
+        "sent": false,
+        "reason": "identity-not-proven",
+        "observed": {
+          "pid_requested": 9379,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      }
+    },
+    {
+      "closure": {
+        "proven": true,
+        "required_observations": 2,
+        "observations": [
+          {
+            "monotonic": 3221406.701927875,
+            "groups": [
+              {
+                "pgid_requested": 9388,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3221406701920375
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          },
+          {
+            "monotonic": 3221406.723243208,
+            "groups": [
+              {
+                "pgid_requested": 9388,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3221406723229083
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          }
+        ],
+        "total_numeric_observations": 2
+      }
+    },
+    {
+      "explicit_recovery_closure": {
+        "proven": true,
+        "required_observations": 2,
+        "observations": [
+          {
+            "monotonic": 3221406.7969805,
+            "groups": [
+              {
+                "pgid_requested": 9388,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3221406796966625
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          },
+          {
+            "monotonic": 3221406.818250791,
+            "groups": [
+              {
+                "pgid_requested": 9388,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3221406818236958
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          }
+        ],
+        "total_numeric_observations": 2
+      }
+    }
+  ]
+}

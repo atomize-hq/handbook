@@ -1,0 +1,739 @@
+{
+  "name": "live-byte-final-v15",
+  "exit": 1,
+  "stdout": "{\"censor\": \"RuntimeError(\\\"RuntimeError('live-admitted-growth-cap:F08')\\\")\", \"closure\": \"PROVEN_EMPTY_TWICE\", \"token_released\": true, \"sample_count\": 206, \"sample_gap_max_s\": 0.015452333260327578, \"workload_GO\": true, \"worker_exit\": null, \"keeper_recovery_socket\": \"/private/tmp/file-native-online-macos-20261020/keeper-88071d4f2d2c51fc1c7f786d226d7d38.release.json\", \"nonce\": \"88071d4f2d2c51fc1c7f786d226d7d38\"}\n",
+  "stderr": "",
+  "started_epoch": 1792531296.802829,
+  "argv": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "/private/tmp/file-native-online-macos-20261020/execution/native-macos/guard_v7.py",
+    "--name",
+    "live-byte-final-v15",
+    "--seconds",
+    "12",
+    "--prospective",
+    "{\"F01\":{\"bytes\":131072,\"files\":8},\"F04\":{\"bytes\":0,\"files\":0},\"F08\":{\"bytes\":1024,\"files\":1},\"F12\":{\"bytes\":2097152,\"files\":8},\"F13\":{\"bytes\":0,\"files\":0}}",
+    "--control-only",
+    "--",
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "-c",
+    "from pathlib import Path; import time; p=Path(\"/private/tmp/file-native-online-macos-20261020/fixtures/live-byte-v15\"); p.parent.mkdir(exist_ok=True); p.write_bytes(b\"x\"*8192); time.sleep(1)"
+  ],
+  "guard_sha256": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6",
+  "result": {
+    "kind": "native-guard-v7",
+    "nonce": "88071d4f2d2c51fc1c7f786d226d7d38",
+    "status": "GUARD_CONTROL_CANDIDATE_NO_ENGINE_RELEASE",
+    "source_sha256": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6",
+    "adapter_source_bindings": {
+      "monitor_v7.py": "96eccfa0e6c4ca9ed35511ea0242bc8abff64d12d7ba2fc5f76558a57544bade",
+      "control_smoke_v7.py": "17bb86987bca3282bd95f8657e5bd2284b90065c7fe42b66b7aed888b40899af",
+      "keeper_v7.py": "7b2b4017b3c5f4e23402eb66aa1d4fa5cbe1993c1e01d3920bc49544f6ac0958",
+      "admission_v7.py": "c23ed5d767b74fce3e0d1478f333a72bfa84683a2cfc582648fd7db557bbfe05",
+      "guard_v7.py": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6"
+    },
+    "source_pin": "CONTROL_ONLY",
+    "claims": {
+      "F01": "initial-native-worker-source4MiB-at-authority94734e76",
+      "F04": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570",
+      "F08": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984",
+      "F12": "initial-native-worker-functional-evidence24MiB",
+      "F13": "initial-native-worker-combined-positive-shared-growth4MiB"
+    },
+    "limits": {
+      "F01": {
+        "bytes": 4194304,
+        "files": 1000,
+        "claim": "initial-native-worker-source4MiB-at-authority94734e76"
+      },
+      "F04": {
+        "bytes": 268435456,
+        "files": 5000,
+        "claim": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570"
+      },
+      "F08": {
+        "bytes": 100663296,
+        "files": 30000,
+        "claim": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984"
+      },
+      "F12": {
+        "bytes": 25165824,
+        "files": 10000,
+        "claim": "initial-native-worker-functional-evidence24MiB"
+      },
+      "F13": {
+        "bytes": 4194304,
+        "files": 1500,
+        "claim": "initial-native-worker-combined-positive-shared-growth4MiB"
+      }
+    },
+    "prospective": {
+      "F01": {
+        "bytes": 131072,
+        "files": 8
+      },
+      "F04": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F08": {
+        "bytes": 1024,
+        "files": 1
+      },
+      "F12": {
+        "bytes": 2097152,
+        "files": 8
+      },
+      "F13": {
+        "bytes": 0,
+        "files": 0
+      }
+    },
+    "started_epoch": 1792531296.855448,
+    "functional_cutoff_epoch": 1792581014.0,
+    "effective_fixed_cutoff_epoch": 1792581014.0,
+    "local_deadline_monotonic": 3219759.167687208,
+    "global_enumeration": false,
+    "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+    "closure": "PROVEN_EMPTY_TWICE",
+    "token_released": true,
+    "worker_exit": null,
+    "supervisor": {
+      "pid_requested": 70428,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 70428,
+      "ppid": 70050,
+      "uid": 501,
+      "pgid": 70050,
+      "state": 2,
+      "start": [
+        1792531296,
+        802945
+      ]
+    },
+    "before_setup_positive_RSS": {
+      "return": 0,
+      "errno": 0,
+      "rss_bytes": 26345472,
+      "start_abstime": 77273930764411
+    },
+    "observed_output_bytes": 0,
+    "workload_GO": true,
+    "closure_proofs": [
+      {
+        "proven": true,
+        "required_observations": 2,
+        "observations": [
+          {
+            "monotonic": 3219749.26293025,
+            "groups": [
+              {
+                "pgid_requested": 70495,
+                "returned_bytes": 8,
+                "errno": 0,
+                "valid": true,
+                "members": [
+                  70495,
+                  70496
+                ],
+                "monotonic_ns": 3219749262907541
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": false
+          },
+          {
+            "monotonic": 3219749.285928333,
+            "groups": [
+              {
+                "pgid_requested": 70495,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3219749285914625
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          },
+          {
+            "monotonic": 3219749.307761666,
+            "groups": [
+              {
+                "pgid_requested": 70495,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3219749307743916
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          }
+        ],
+        "total_numeric_observations": 3
+      }
+    ],
+    "termination": [],
+    "keeper_identity": {
+      "pid_requested": 70429,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 70429,
+      "ppid": 70428,
+      "uid": 501,
+      "pgid": 70429,
+      "state": 2,
+      "start": [
+        1792531296,
+        869920
+      ]
+    },
+    "keeper_recovery_socket": "/private/tmp/file-native-online-macos-20261020/keeper-88071d4f2d2c51fc1c7f786d226d7d38.release.json",
+    "token_acquired_epoch": 1792531296.873285,
+    "admission_snapshot": {
+      "categories": {
+        "F01": {
+          "logical_bytes": 609821,
+          "allocated_bytes": 712704,
+          "files": 41,
+          "directories": 9,
+          "symlinks": 0
+        },
+        "F04": {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0,
+          "directories": 0,
+          "symlinks": 0
+        },
+        "F08": {
+          "logical_bytes": 16390,
+          "allocated_bytes": 40960,
+          "files": 8,
+          "directories": 1,
+          "symlinks": 0
+        },
+        "F12": {
+          "logical_bytes": 3840289,
+          "allocated_bytes": 4911104,
+          "files": 632,
+          "directories": 138,
+          "symlinks": 0
+        },
+        "F13": {
+          "logical_bytes": 82,
+          "files": 2,
+          "allocated_bytes": null,
+          "shared_components": {
+            "Git": {
+              "logical_bytes": 187972974,
+              "allocated_bytes": 205033472,
+              "files": 5494,
+              "directories": 371,
+              "symlinks": 0,
+              "baseline_logical_bytes": 187972892,
+              "baseline_files": 5492,
+              "positive_bytes": 82,
+              "positive_files": 2
+            },
+            "Cargo": {
+              "logical_bytes": 1859795101,
+              "allocated_bytes": 2063294464,
+              "files": 81747,
+              "directories": 15833,
+              "symlinks": 13,
+              "baseline_logical_bytes": 1859800817,
+              "baseline_files": 81747,
+              "positive_bytes": 0,
+              "positive_files": 0
+            }
+          }
+        }
+      },
+      "free_bytes": 162155474944
+    },
+    "admitted_growth_ceiling": {
+      "F01": {
+        "bytes": 740893,
+        "files": 49
+      },
+      "F04": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F08": {
+        "bytes": 17414,
+        "files": 9
+      },
+      "F12": {
+        "bytes": 5937441,
+        "files": 640
+      },
+      "F13": {
+        "bytes": 82,
+        "files": 2
+      }
+    },
+    "launcher": {
+      "path": "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3.11",
+      "sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+      "argv": [
+        "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+        "-B",
+        "-c",
+        "from pathlib import Path; import time; p=Path(\"/private/tmp/file-native-online-macos-20261020/fixtures/live-byte-v15\"); p.parent.mkdir(exist_ok=True); p.write_bytes(b\"x\"*8192); time.sleep(1)"
+      ],
+      "cwd": "/private/tmp/file-native-online-macos-20261020",
+      "contract": "foreground, no daemonization or session escape; all subprocesses sampled"
+    },
+    "anchor": {
+      "pid_requested": 70495,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 70495,
+      "ppid": 70429,
+      "uid": 501,
+      "pgid": 70495,
+      "state": 2,
+      "start": [
+        1792531298,
+        768807
+      ]
+    },
+    "before_GO_positive_RSS": {
+      "kind": "rss",
+      "monotonic": 3219749.138600875,
+      "processes": [
+        {
+          "identity": {
+            "pid_requested": 70428,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70428,
+            "ppid": 70050,
+            "uid": 501,
+            "pgid": 70050,
+            "state": 2,
+            "start": [
+              1792531296,
+              802945
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 29179904,
+            "start_abstime": 77273930764411
+          }
+        },
+        {
+          "identity": {
+            "pid_requested": 70429,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70429,
+            "ppid": 70428,
+            "uid": 501,
+            "pgid": 70429,
+            "state": 2,
+            "start": [
+              1792531296,
+              869920
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 9093120,
+            "start_abstime": 77273932371808
+          }
+        },
+        {
+          "identity": {
+            "pid_requested": 70495,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70495,
+            "ppid": 70429,
+            "uid": 501,
+            "pgid": 70495,
+            "state": 2,
+            "start": [
+              1792531298,
+              768807
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 26673152,
+            "start_abstime": 77273977944926
+          }
+        }
+      ],
+      "all_helpers_rss": 67125248,
+      "owned_group_rss": 26673152,
+      "tree": {
+        "group": {
+          "pgid_requested": 70495,
+          "returned_bytes": 4,
+          "errno": 0,
+          "valid": true,
+          "members": [
+            70495
+          ],
+          "monotonic_ns": 3219749138031125
+        },
+        "identities": [
+          {
+            "pid_requested": 70495,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70495,
+            "ppid": 70429,
+            "uid": 501,
+            "pgid": 70495,
+            "state": 2,
+            "start": [
+              1792531298,
+              768807
+            ]
+          }
+        ],
+        "escaped": []
+      },
+      "completed_monotonic": 3219749.138729375
+    },
+    "workload_child_pid": 70496,
+    "sample_count": 206,
+    "sample_gap_max_s": 0.015452333260327578,
+    "sample_failure": null,
+    "peak_group_rss": 41435136,
+    "peak_all_helpers_rss": 67141632,
+    "last_tree_trace": [
+      {
+        "monotonic_ns": 3219749138131916,
+        "pids": [
+          70495
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219749146732791,
+        "pids": [
+          70495,
+          70496
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219749156095208,
+        "pids": [
+          70495,
+          70496
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219749166883458,
+        "pids": [
+          70495,
+          70496
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219749178499833,
+        "pids": [
+          70495,
+          70496
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219749186934958,
+        "pids": [
+          70495,
+          70496
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219749198373541,
+        "pids": [
+          70495,
+          70496
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219749205241291,
+        "pids": [
+          70495,
+          70496
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219749216158458,
+        "pids": [
+          70495,
+          70496
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219749228963875,
+        "pids": [
+          70495,
+          70496
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219749235112333,
+        "pids": [
+          70495,
+          70496
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219749245769833,
+        "pids": [
+          70495,
+          70496
+        ],
+        "escaped_pids": []
+      }
+    ],
+    "disk_monitor": {
+      "latest": {
+        "monotonic": 3219749.1591215,
+        "snapshot": {
+          "categories": {
+            "F01": {
+              "logical_bytes": 609805,
+              "allocated_bytes": 712704,
+              "files": 41,
+              "directories": 9,
+              "symlinks": 0
+            },
+            "F04": {
+              "logical_bytes": 0,
+              "allocated_bytes": 0,
+              "files": 0,
+              "directories": 0,
+              "symlinks": 0
+            },
+            "F08": {
+              "logical_bytes": 16390,
+              "allocated_bytes": 40960,
+              "files": 8,
+              "directories": 1,
+              "symlinks": 0
+            },
+            "F12": {
+              "logical_bytes": 3845522,
+              "allocated_bytes": 4915200,
+              "files": 634,
+              "directories": 138,
+              "symlinks": 0
+            }
+          },
+          "free_bytes": 162155474944
+        },
+        "shared_checked": false
+      },
+      "failure": "RuntimeError('live-admitted-growth-cap:F08')"
+    },
+    "keeper_reaped": true,
+    "raw_rows_written": 216,
+    "finished_epoch": 1792531298.9962502,
+    "test_fault": null
+  },
+  "raw": {
+    "compressed_sha256": "73cd94249706368366bef151f4ae8d1930ef70e8dec17f7fd9b1e102b0957de8",
+    "compressed_bytes": 6440,
+    "gzip_eof_complete": true,
+    "json_rows": 216,
+    "rss_rows": 212,
+    "max_RSS_start_gap_s": 0.015418624971061945,
+    "rows_match_receipt": true,
+    "raw_censored": false
+  },
+  "keeper": {
+    "kind": "independent-native-keeper",
+    "nonce": "88071d4f2d2c51fc1c7f786d226d7d38",
+    "identity": {
+      "pid_requested": 70429,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 70429,
+      "ppid": 70428,
+      "uid": 501,
+      "pgid": 70429,
+      "state": 2,
+      "start": [
+        1792531296,
+        869920
+      ]
+    },
+    "fixed_cutoff_epoch": 1792581014.0,
+    "local_deadline_monotonic": 3219759.167687208,
+    "token_received": true,
+    "state": "CLOSED_AFTER_CENSOR",
+    "reason": "RuntimeError('live-admitted-growth-cap:F08')",
+    "events": [
+      {
+        "termination": {
+          "status": "FROZEN_TREE_SIGNALLED",
+          "steps": [
+            {
+              "pid": 70496,
+              "start": [
+                1792531298,
+                827978
+              ],
+              "signal": 17,
+              "sent": true,
+              "errno": 0
+            },
+            {
+              "pid": 70495,
+              "start": [
+                1792531298,
+                768807
+              ],
+              "signal": 17,
+              "sent": true,
+              "errno": 0
+            },
+            {
+              "pid": 70496,
+              "start": [
+                1792531298,
+                827978
+              ],
+              "signal": 9,
+              "sent": true,
+              "errno": 0
+            },
+            {
+              "pid": 70495,
+              "start": [
+                1792531298,
+                768807
+              ],
+              "signal": 9,
+              "sent": true,
+              "errno": 0
+            }
+          ],
+          "known": [
+            {
+              "pid_requested": 70495,
+              "returned_bytes": 136,
+              "errno": 0,
+              "expected_bytes": 136,
+              "pid": 70495,
+              "ppid": 70429,
+              "uid": 501,
+              "pgid": 70495,
+              "state": 4,
+              "start": [
+                1792531298,
+                768807
+              ]
+            },
+            {
+              "pid_requested": 70496,
+              "returned_bytes": 136,
+              "errno": 0,
+              "expected_bytes": 136,
+              "pid": 70496,
+              "ppid": 70495,
+              "uid": 501,
+              "pgid": 70495,
+              "state": 4,
+              "start": [
+                1792531298,
+                827978
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "notify_parent": {
+          "pid": 70428,
+          "start": [
+            1792531296,
+            802945
+          ],
+          "signal": 30,
+          "sent": true,
+          "errno": 0
+        }
+      },
+      {
+        "closure": {
+          "proven": true,
+          "required_observations": 2,
+          "observations": [
+            {
+              "monotonic": 3219749.263514,
+              "groups": [
+                {
+                  "pgid_requested": 70495,
+                  "returned_bytes": 0,
+                  "errno": 0,
+                  "valid": true,
+                  "members": [],
+                  "monotonic_ns": 3219749263464833
+                }
+              ],
+              "remaining": [],
+              "unknown_errno_observations": [],
+              "empty": true
+            },
+            {
+              "monotonic": 3219749.285812416,
+              "groups": [
+                {
+                  "pgid_requested": 70495,
+                  "returned_bytes": 0,
+                  "errno": 0,
+                  "valid": true,
+                  "members": [],
+                  "monotonic_ns": 3219749285791416
+                }
+              ],
+              "remaining": [],
+              "unknown_errno_observations": [],
+              "empty": true
+            }
+          ],
+          "total_numeric_observations": 2
+        }
+      }
+    ]
+  }
+}

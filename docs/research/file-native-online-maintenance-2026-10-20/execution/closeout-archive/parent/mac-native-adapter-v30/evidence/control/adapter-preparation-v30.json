@@ -1,0 +1,162 @@
+{
+  "kind": "version-scoped-native-capsule-adapter-preparation",
+  "candidate_adapter": "capsule_adapter_v30.py",
+  "candidate_role_driver": "role_driver_v29.py",
+  "accepted_guard_core_unchanged": true,
+  "candidate_parent_review_pending": true,
+  "engine_cache_copy_build_GO": false,
+  "full_capsules_executed": false,
+  "format_selection": "Preserve donor JSON request/results and plain event values. New private config/receipts remain machine-managed JSON; no format migration or proposed-standard adoption.",
+  "source_files": {
+    "capsule_adapter_v30.py": {
+      "bytes": 17382,
+      "sha256": "e93cf4914435338e11b1d259bc8f7e4ae4f18d8e8b506e9b21e879fbd5ce5fad"
+    },
+    "role_driver_v29.py": {
+      "bytes": 17149,
+      "sha256": "ad855d5d8c96eac726d9f649b3c014f563dd45fc07e7ab3514e10e3c43af2cde"
+    },
+    "ordinary_copy_v27.sh": {
+      "bytes": 278,
+      "sha256": "6651630a039c8efec160a55ec509af483c7514c44c716430eb31b44ad26db5ac"
+    },
+    "ordinary_route_v27.py": {
+      "bytes": 1191,
+      "sha256": "1ec5218d4a165cec2009c6353290d4589cfc2dbe67b228ff48fec901d240c7be"
+    },
+    "ordinary_manifest_v27.py": {
+      "bytes": 1099,
+      "sha256": "5491a0fcd4354406edb2e989271b8b9dd884b17ba596619a57771a86d1818a92"
+    },
+    "fake_capsule_child_v28.py": {
+      "bytes": 736,
+      "sha256": "b6eddf7f9144e79fb3a916bdee6fd5a30ce28c471671cef0f2f62bc6ef0fb3e5"
+    },
+    "adapter_control_v30.py": {
+      "bytes": 1919,
+      "sha256": "2d653d7f55df58a0db2c2e2351873539528ac044e75b74534aab34c8413daa2c"
+    },
+    "ordinary_control_v30.py": {
+      "bytes": 2220,
+      "sha256": "695f3dc43bdc7b6844273fa69c02980cb5f5ae0bf4f97feccf07e9c39c90da28"
+    },
+    "output_cap_control_v30.py": {
+      "bytes": 1041,
+      "sha256": "5be0d9656d99578fa76a2c3be8c999fd73c4567cace858ecd7d542c2268449b4"
+    },
+    "role_failure_control_v29.py": {
+      "bytes": 944,
+      "sha256": "19db929fb57b71b6270344fbc00c6e365db6356d089b16d62fbd80052d5d6f3f"
+    },
+    "verify_adapter_v30.py": {
+      "bytes": 4800,
+      "sha256": "27fb4521bdc2e29be0540475207251e9b6b86ea60b38d1dc849fe3790fef1547"
+    }
+  },
+  "donor_source_sha256": {
+    "file-native-packing-2026-10-20/capsule.py": "b19f61524a6fb7baeadfaf82b32191ccf4f491d00541039c6aaf665af0f0a2ca",
+    "file-native-packing-2026-10-20/driver.py": "6e45ef7892a2702ea6e8992102d06b472164e01a15dbae28efcfbb7cc9121aa0",
+    "file-native-packing-2026-10-20/strict_supplement.py": "6708b2a1cd14e5e00121ffe3afacdfd5cd2eb35823a0ae336d882ef80d7d6d67",
+    "file-native-packing-2026-10-20/fix2_regression.py": "5385233d18dcaa52f0ba81aaf50a948f26e72563c6754a8c2fc2420550556297",
+    "file-native-packing-2026-10-20/loose_regression.py": "57d72688fefef474683b6386693e581d13e99d7ff3f1e9c8299c3f707f708bba",
+    "file-native-packing-2026-10-20/independent.py": "6d376a8e0d6714d682158fc14cc4dd71ec433246d9222eb5d35d6daec99b3d65",
+    "file-native-recovery-reclamation-2026-10-19/capsule.py": "1b997e6bc058660fcfe7246ee98a7b13317e63f7232acef73fef6c3987273b71"
+  },
+  "phases": {
+    "capsule": {
+      "cases": 52,
+      "engine_events": 267,
+      "POSIX_skips": [
+        "windows-loose-no-delete-sharing-A",
+        "windows-loose-no-delete-sharing-B"
+      ]
+    },
+    "strict": {
+      "cases": 24,
+      "engine_events_historical": 4,
+      "requires_previous_capsule_fixture": true
+    },
+    "focus": {
+      "cases": 8,
+      "engine_events": 25,
+      "ordinary_shell_calls": 9,
+      "frozen_AST_omission": "Windows bootstrap and B-control-no-delete-sharing-remains-retained only; native binding/ordinary Bash replacement"
+    },
+    "recovery": {
+      "cases": 24,
+      "engine_events": 282,
+      "donor_assertions_check_real_exit_0_2_86": true
+    },
+    "immediate": {
+      "cases": 4,
+      "engine_events": 12,
+      "ordinary_shell_calls": 8,
+      "modes": [
+        "A",
+        "B"
+      ],
+      "counts": [
+        16,
+        128
+      ]
+    }
+  },
+  "role_policy": {
+    "reader_bytes": 268435456,
+    "checker_bytes": 2147483648,
+    "reader_actions": [
+      "resolve",
+      "point",
+      "inspect",
+      "lookup-bench"
+    ],
+    "all_other_engine_actions": "checker",
+    "ordinary_shell": "reader via separate exact /bin/bash binding",
+    "binary_basename_selects_policy": false,
+    "transparent_recovery_allowed_exit_codes": [
+      0,
+      2,
+      86
+    ],
+    "ordinary_expected_retired_exit": 1
+  },
+  "logging": {
+    "per_call_stdout_default": 4194304,
+    "per_call_stderr": 65536,
+    "raw_output_files": "F12 evidence/roles/<unique-call>/{stdout,stderr}.bin; exact hashes/sizes",
+    "overflow": "censored incomplete output, never accepted JSON",
+    "timing": "seconds covers launch through child exit and stream EOF; guarded_seconds includes closure/receipt work",
+    "call_metadata": "bounded calls.jsonl.gz, request inputs, role result + raw output identities",
+    "donor_events": "every original JSON event value and raw stdout/stderr string retained; 8MiB per-report bound, old+temp charged before write",
+    "duplicate_key_response_refused": true,
+    "concurrent_full_capture_reservations": true
+  },
+  "build_geometry": {
+    "stable_package": "/private/tmp/file-native-online-macos-20261020/source/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+    "stable_target": "/private/tmp/file-native-online-macos-20261020/target",
+    "target_capacity_bytes": 268435456,
+    "eventual_192MiB_reassignment": "Only after actual final all-unit executables and quiescent census; no present change",
+    "jobs": 2,
+    "target_exists": false
+  },
+  "cache_geometry_receipt": "evidence/control/cache-geometry-v27.json",
+  "real_run_requirements": [
+    "Exact final source pin/lock and source-bound member bytes at ROOT/source",
+    "Parent review and immutable candidate hashes",
+    "Parent phase release config, exact per-executable binary/build/source/guard binding including /bin/bash for ordinary helpers",
+    "Exact libzstd path/SHA binding and helper source hashes",
+    "New sealed fixture allocation: historical whole matrix 261739670 bytes exceeds current F08 96MiB; no cumulative matrix launch on current allocation",
+    "Explicit per-phase cumulative identity budget <=4096; actual 267/282-event cadence and all raw evidence EOF/closure must qualify, not inferred from 128 control",
+    "Actual source/target/cache/evidence and shared growth checks remain six-category guard admission; no cutoff resets"
+  ],
+  "historical_response_geometry_readonly": {
+    "packing_events": 267,
+    "packing_max_stdout_bytes": 4174,
+    "packing_total_stdout": 418436,
+    "recovery_events": 282,
+    "recovery_max_stdout_bytes": 49738,
+    "recovery_total_stdout": 1259646,
+    "forecast_only_no_final_response_promise": true
+  },
+  "controls": "adapter-raw-review-v30.json verifies final adapter/role controls; synthetic shell data, no engine or full corpus imported"
+}

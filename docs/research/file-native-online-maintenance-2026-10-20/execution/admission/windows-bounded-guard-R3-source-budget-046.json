@@ -1,0 +1,51 @@
+{
+  "kind": "private-Windows-bounded-guard-R3-source-budget-046",
+  "source_only": true,
+  "runtime_go": false,
+  "owner": "01a15ae1-839d-7b02-843b-558ddc9e78cc",
+  "source_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard",
+  "claim031_sha256": "d0dea4565c6287aaf6459f070e4956a5e8ee2b31f532c04c97c2d3507c5ca19c",
+  "max_bytes": 131072,
+  "max_files": 5,
+  "paths": {
+    "job_guard_bounded.py": 73728,
+    "controls.py": 16384,
+    "unlocked_capture.py": 32768,
+    "README.md": 4096,
+    "source-receipt.json": 4096
+  },
+  "donor_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "rules": [
+    "Newprospectiveprivateharness/controllerrepairversiononly; oldfrozena5sourceandallfailurespreservedinGit. No Rust/core/publicformat edits.",
+    "BeforeEVERYwriteverifythisimmutablebudgetSHA andindividual/group/wholecaps, noextras/pycache/symlink/reparse/hardlinks.",
+    "No runtime/build/cache/fixture/archive/delete/engineauthority untilfreshfullsource-reviewandexplicitphaseadmission.",
+    "Rereadactualsame-bufferproducerliteralcontract; no fabricatedprooffields/defaultTrue orscope/denominatorchanges."
+  ],
+  "claim037_sha256": "efc97e0b8192bfa9c78020102879e7fa6250027428f5323c67d23d62d330c6be",
+  "supersedes_unused_budget_sha256": "c6d47a8da1dfb01663437e3dfb6caeb477ec9c905a69b524d00095c723a475f1",
+  "claim040_sha256": "13452d906ce2a25f76af800f3a194934896b3e70db18ff1a4f4c424f09dd4a06",
+  "negative_source_archive_sha256": "35d435d6f27cb75465247719750e04e7bf6d7cd219ce0a63f3637c09ca57c399",
+  "required_fixes": [
+    "BG1uncertain233notEOF",
+    "BG2alltemporarynativeCloseHandlefailuresretained/fenced/raised",
+    "BG3persistentpercaseactualreturnedcompletion/receiptSHA/postwritecensus",
+    "BG4genuineunjoinedIOfence+subsequentadmissionrefusal+actualrelease/join/closure",
+    "BG5failclosedos.walkonerrorallpathscompletecensus",
+    "Source-backedactualcreatoroutsideexactoriginalJob,noninheritableJobhandle,2emptyandcheckedlastJobcloseQPCforpostexitgrant"
+  ],
+  "claim044_sha256": "8d2f99dd441cefe7b04ec43a828a6de3e205ee56077e6bda65b2581f2266e291",
+  "closed_names": 5,
+  "caps": {
+    "job_guard_bounded.py": 73728,
+    "controls.py": 16384,
+    "unlocked_capture.py": 32768,
+    "README.md": 4096,
+    "source-receipt.json": 4096
+  },
+  "claim046_sha256": "6bd67f146b344cdb8bd501a261df795e946a49b557d5a5d5227665c8e8e581ba",
+  "engine_commit_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "historical_review_watchdog": "2026-10-21T04:10:14Z MISSED, olda5/R2preserved; thisnewprospectiverepairdoesnotretroqualify",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z",
+  "issued": "2026-10-21T05:03:27.013341+00:00"
+}

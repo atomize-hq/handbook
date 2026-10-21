@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-023-C1LINUX-EXPIRY-EXACT8HELPERS",
+  "utc": "2026-10-21T00:12:20.892141+00:00",
+  "status": "LINUX_UNUSED_FORECAST_EXPIRY_APPLIED__SOURCE_MEMBERSHIP_SUPERSEDES022_PROVISIONAL_SUBROOTS__REGISTRATION_REQUIRED",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T001220Z.json",
+      "bytes": 10416,
+      "sha256": "ff6a60ef8d5bff5d0d34fec2d35c84802be27f8f05f5414719bf8e3cc0de71b5"
+    },
+    {
+      "file": "claim-20261021T001220Z.md",
+      "bytes": 1682,
+      "sha256": "f6f2ed47b33671bb2ba244a2678dae9482c73978262441966183a501662cce00"
+    }
+  ]
+}

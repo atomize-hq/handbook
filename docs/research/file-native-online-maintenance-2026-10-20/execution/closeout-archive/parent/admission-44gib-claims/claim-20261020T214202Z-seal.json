@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-005-STAGED-LONG-F14-EXPIRY-F11-STREAM-ANALYSIS",
+  "utc": "2026-10-20T21:42:02.501654+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T214202Z.json",
+      "bytes": 12333,
+      "sha256": "ad1df90740038e794a3b6c981f608bc5a17a98f2559bbdf8758e3c8e54efcc8d"
+    },
+    {
+      "file": "claim-20261020T214202Z.md",
+      "bytes": 4296,
+      "sha256": "19bd2e64c7a2404c17b3e756fec9a809860174d84a87cd3e84b5f7971db9bafa"
+    }
+  ],
+  "status": "ANALYSIS_ONLY_NO_NEW_GO_OR_ALLOCATION_RELEASE",
+  "sealed": true
+}

@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-016-READONLY-F1-F2-SOURCE-AND-UNIT-MAP",
+  "utc": "2026-10-20T23:03:50.966486+00:00",
+  "status": "READ_ONLY_AUDIT__WHOLE_ROOT_FORECAST_REQUIRED__NO_ALLOCATION_OR_FULL_GO",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261020T230350Z.json",
+      "bytes": 93658,
+      "sha256": "040fbc8003c17cb71c6fc79dfbe953208a155709fdd6041a089d852676bd2111"
+    },
+    {
+      "file": "claim-20261020T230350Z.md",
+      "bytes": 2248,
+      "sha256": "307543039cdb486c31ad0c42f89cfa639027b21a9d2ed30f4b10bc67ed16af5d"
+    }
+  ]
+}

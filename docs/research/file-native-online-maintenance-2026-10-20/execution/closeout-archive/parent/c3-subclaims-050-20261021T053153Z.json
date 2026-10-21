@@ -1,0 +1,111 @@
+{
+  "kind": "C3_closed_subclaim_inventory_after050",
+  "utc": "2026-10-21T05:31:53.628928+00:00",
+  "status": "RESERVATION_MEMBERSHIP_ONLY__CONTEXT_PERFILE_BREACH_PRESERVED",
+  "C3_total_bytes": 16777216,
+  "C3_file_pool": 15000,
+  "subclaim_schema": [
+    "name",
+    "reserved_bytes",
+    "controlling_claim"
+  ],
+  "subclaims": [
+    [
+      "META_REVIEW",
+      10747904,
+      "claim-20261021T050145Z.json"
+    ],
+    [
+      "CP2_CP3_SOURCE_ADMIN_combined",
+      3145728,
+      "claim-20261020T222114Z.json"
+    ],
+    [
+      "Matrix_ADMIN_TOPUP_ONLY",
+      1048576,
+      "claim-20261020T232437Z.json"
+    ],
+    [
+      "original_stream_snapshot",
+      131072,
+      "claim-20261020T215822Z.json"
+    ],
+    [
+      "qualification_lanes",
+      294912,
+      "claim-20261021T050145Z.json"
+    ],
+    [
+      "Windows_final_platform",
+      524288,
+      "claim-20261021T050307Z.json"
+    ],
+    [
+      "Matrix_source_TOPUP_ONLY",
+      32768,
+      "claim-20261021T010133Z.json"
+    ],
+    [
+      "fixture_retirement",
+      81920,
+      "claim-20261021T052212Z.json"
+    ],
+    [
+      "bounded_guard",
+      147456,
+      "claim-20261021T052212Z.json"
+    ],
+    [
+      "shared_runtime_contracts",
+      90112,
+      "claim-20261021T050145Z.json"
+    ],
+    [
+      "Windows_native_Context",
+      32768,
+      "claim-20261021T050145Z.json"
+    ]
+  ],
+  "allocated_sum": 16277504,
+  "unclaimed": 499712,
+  "inside_unclaimed_control_hold": 32768,
+  "unclaimed_after_control_hold": 466944,
+  "claim_SHA256": {
+    "claim-20261021T050145Z.json": "6bd67f146b344cdb8bd501a261df795e946a49b557d5a5d5227665c8e8e581ba",
+    "claim-20261020T222114Z.json": "dfe85f98db9820fbda0cdaf96bd97b51fdb376679df03646099e9d015fe31653",
+    "claim-20261020T232437Z.json": "04e70d78bc8bbe25c9542ed1718c2416680186b9c875e32ed572bde869117a5c",
+    "claim-20261020T215822Z.json": "8b69a7c60846c637d77d2011ab1e39baab31617c9cba2da0b0a76cbe843804b5",
+    "claim-20261021T050307Z.json": "f74455d7c0cdbe1e5bfe2302cc430099c07c23a2c025d8bcdc2897e083ffaa6e",
+    "claim-20261021T010133Z.json": "18e44280b22f62d6b0c1c3441a8d0cfbefd20b369ffbaad0d4db71ac9d49114e",
+    "claim-20261021T052212Z.json": "2f10ddd07a7cd5cd190593ceb3cc59a745f0a3614fc991bfaac712214333a2fa"
+  },
+  "known_noncompliance": {
+    "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\fixture-retirement-native-context\\windows_context.py",
+    "allocated_per_file": 32768,
+    "observed_bytes": 40916,
+    "sha256": "4350d9cdb4bb51ed6de9d7668f1afa630c44d4e694b73fe78052b0c2747e99d6",
+    "excess": 8148,
+    "disposition": "No furtherContextwrites/sourceacceptance. Parentprospectivecap/dispositionpending; no retroqualification. EntireC3poolremainsreserved so knownexcessdoesnotcreatefreecapacity; doNOTassertallsubclaimsphysicallycompliant."
+  },
+  "ownership": "Originalownedruntimefile90112 includescurrentoriginal+remainingfuturegrowthONCE. DistinctP/archive/reviewcopiesMETA10747904; nativefuturecopiesF01Linux4718592/Mac4194304 independently; Gitobjects/adminF13positiveonce. MatrixbaseF01source1048576 isNOTC3; only32768topupC3. Matrixadminonly1048576TOPUPC3; adminactualnonadditiveF13, likewiseCPcombinedgate.",
+  "own_source_prewrite": "VerifyownimmutablebudgetSHA, exactownedpath/names/regularnoaliasmembership, owncurrentbytes+knownremaininggrowth<=ownclosedcap; retainallothersubclaimcaps+holds. Do notstatforeignunrelatedrootseverytinywrite or inventforeignactualsnapshot. No unadmittedextraP/native/localcopies. Parentfreshglobalcensus+exactphaseadmissionstillrequiredfornewcross-root/runtime/corpusoperations. Inventorydoesnotwaiveowncapchecksorknownbreaches.",
+  "unchanged_global_after049": {
+    "whole_bytes": 46991944053,
+    "central_bytes": 252696203,
+    "reserved_files": 4796812,
+    "unassigned_files": 203188,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000
+  },
+  "prewrite": {
+    "prior_seals_verified": 51,
+    "family_files": 158,
+    "family_bytes": 514718,
+    "META_actual": 10223791,
+    "META_files": 1200,
+    "pending": 136381,
+    "membership": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\meta-membership-v6.json",
+    "membership_sha256": "c7ed56acf1e46aec557642fae700a456e1e8a2a013b48eb54a8c84e36137d713"
+  },
+  "actions": "Smallimmutablebudgetmetadataonly, chargedactualMETAheadroom; no cap/claim/source/runtimechange."
+}

@@ -1,0 +1,75 @@
+{
+  "engineering_disposition": "REMEDIATE",
+  "experiment_qualification": "INCOMPLETE",
+  "real_execution": "HOLD",
+  "reviewed_source_bytes": 128761,
+  "reviewed_source_files": 7,
+  "source_rechecked_unchanged_before_freeze_release": true,
+  "source_files": {
+    "case_ledger.py": {"bytes": 14422, "sha256": "e910aeb01cafca1968c9b36e8234a59956feb6b71b853d2e9c81d51ac99c0ad9"},
+    "fake_controls.py": {"bytes": 20642, "sha256": "8030fb289a1443f6e8d3c5340004a998200b70858d521533a07d07f465d62b08"},
+    "focused_protocol.py": {"bytes": 38155, "sha256": "1b10f9121483bb6b5adf1ca20ba31bfad3367161d7d8d77925ce30eb14b17a83"},
+    "focused_schedules.py": {"bytes": 19586, "sha256": "35ffbbaed3281ca470391f2dbc078805ae5fa5adec725d690b11d54c6ec571d5"},
+    "forecast.json": {"bytes": 11496, "sha256": "0e697724206bf90f9222febba15535ba4c0de3f02d8b4da1b0dd335d679b4588"},
+    "README.md": {"bytes": 15332, "sha256": "f513a35417ff13348a1bb7a3fd2dbfaccaf234a70a8e7fc4c4072409da2811b8"},
+    "source_receipt.json": {"bytes": 9128, "sha256": "a6ebd313ca3f7f8c81b0ac2e2b1bca8b30d30c4861bfae4dd45a4f0f90b8e7b8"}
+  },
+  "receipt_declared_sixfile_manifest_sha256": "fc40bab3cf0a022f4d860570dcaa9d592d9b004f22ed13283abae423dcdbe757",
+  "actual_file_hashes_and_sizes_match_receipt": true,
+  "F3_retained_raw_confirmation": {
+    "root_init": "A/project/N10",
+    "packing_options": "build/zstd/include_attempts=true/cleanup=false/bootstrap=true/force omitted",
+    "binary_sha256": "6f77de3001f488d6dd57317b04f33f216856f11fbfd65d8236e8b45d28ebc4b5",
+    "compressed_raw_files": [
+      {"path": "C:/file-native-online-cp1-20261020/evidence/cp2-remediate-events.jsonl.gz", "sha256": "d383821d95c0242e4e31f389bc69be9826ada3a7ace3901cc2f9e8f7b307a555", "observations": [{"row": 830, "visited_H": 1, "exit": 2}, {"row": 862, "visited_H": 31, "exit": 2}]},
+      {"path": "C:/file-native-online-cp1-20261020/evidence/cp2-finish-events.jsonl.gz", "sha256": "4037d207fa73ab75a06921fc5860ce07f25c629ae1854a716209c076b1244791", "observations": [{"row": 122, "visited_H": 151, "exit": 2}]},
+      {"path": "C:/file-native-online-cp1-20261020/evidence/cp2-finish2-events.jsonl.gz", "sha256": "862f5919ad142f8348e1288c8fc9c7c1792a596d288917377b84687e15449d47", "observations": [{"row": 402, "visited_H": 551, "exit": 0}]}
+    ],
+    "new_engine_execution": false
+  },
+  "engine_contract_source": "Git blobs at 7a6ee9db03f5cd2e388129a9019c0d5f274a1844; never mutable CP3 source",
+  "findings": [
+    {"id": "F1", "priority": 1, "file": "focused_protocol.py", "line": 248, "cause": "env transport option included in expected engine input, excluded by both actual Driver signatures"},
+    {"id": "F2", "priority": 2, "file": "focused_schedules.py", "line": 182, "cause": "Journal target=None is omitted by exact CP2 serialization; mandatory lookup raises KeyError"},
+    {"id": "F3", "priority": 2, "file": "focused_schedules.py", "line": 192, "cause": "Unforced H151 admission expectation already disproved by reviewed exact CP2 evidence; forecast unchanged"},
+    {"id": "F4", "priority": 2, "file": "focused_protocol.py", "line": 529, "cause": "Exception before release-finally completion skips all publisher joins"}
+  ],
+  "memory_validation": {
+    "python": "3.11.9",
+    "existing_controls": 36,
+    "existing_controls_status": "PASSED_MEMORY_ONLY_CONTROLS",
+    "tracemalloc_peak_bytes": 887202,
+    "native_RSS_qualification": false,
+    "real_signature_conflict": [
+      {"control": "without-env", "outcome": "recovered-semantic-conflict"},
+      {"control": "env-None", "outcome": "RAISED-AssertionError-valid-conflict-rejected"},
+      {"control": "barrier-env", "outcome": "RAISED-AssertionError-valid-conflict-rejected"}
+    ],
+    "join_failure_control": {
+      "injection": "maintenance pack raises after all four native-model candidate ready events",
+      "spawned_memory_handles": 8,
+      "waited_by_harness": 4,
+      "unjoined_publisher_handles": 4,
+      "reviewer_cleanup_all_memory_threads_joined": true,
+      "qualification": "Pure memory scheduling observation; no native process or fixture"
+    },
+    "engine_calls": 0,
+    "fixture_writes": 0,
+    "bytecode_writes": false
+  },
+  "qualification_dependencies": [
+    "Source-bound real deletion/abandoned-owner preconditions for crash hooks; no false exit86 or planned-removal credit",
+    "Final CP3 pin/schema and reviewed native adapters, guard bindings and exact donor/reset map",
+    "Complete independent oracle artifacts and all final-pin native/Matrix/long restore obligations",
+    "New prospective resource GO; current native96MiB and full448MiB proposal HOLD"
+  ],
+  "source_changes": 0,
+  "native_engine_build_or_oracle_executions": 0,
+  "new_worktrees_chats_or_subagents": 0,
+  "commits_or_indexing": 0,
+  "gitnexus": "UNAVAILABLE; indexed impact UNKNOWN; manual HIGH; no bootstrap",
+  "notifications": "Authorized meta chat 01a15ab8-d85f-71b1-8d37-c3c5689790be only",
+  "clock_reset": false,
+  "functional_cutoff_utc": "2026-10-21T11:10:14Z",
+  "closeout_cutoff_utc": "2026-10-21T13:10:14Z"
+}

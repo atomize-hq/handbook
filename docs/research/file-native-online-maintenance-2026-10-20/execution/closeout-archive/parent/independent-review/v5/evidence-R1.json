@@ -1,0 +1,274 @@
+{
+  "disposition": "INTEGRATE exact R1 parser source",
+  "qualification": "INCOMPLETE; no engine GO, no real-store/full-oracle-v2 qualification",
+  "primary_sources_first": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v5.py",
+      "bytes": 44817,
+      "sha256": "1347778df8839da571603b215a8f3aecac70b40eff571ddbad0cb19e27bf5be9"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\cohort_closure_controls.py",
+      "bytes": 15336,
+      "sha256": "fc6f0ac9e569d240faad977dfef247aec645b8f2b4df00c6901a866c08d307e3"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\paged_index.py",
+      "bytes": 8097,
+      "sha256": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\paged_index_controls.py",
+      "bytes": 15650,
+      "sha256": "7d5dc2ae47359c17dce6f363bfc8f6d9e3f7a24603944e50258cb9b059c36e85"
+    }
+  ],
+  "primary_sources_last": [
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v5.py",
+      "bytes": 44817,
+      "sha256": "1347778df8839da571603b215a8f3aecac70b40eff571ddbad0cb19e27bf5be9"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\cohort_closure_controls.py",
+      "bytes": 15336,
+      "sha256": "fc6f0ac9e569d240faad977dfef247aec645b8f2b4df00c6901a866c08d307e3"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\paged_index.py",
+      "bytes": 8097,
+      "sha256": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea"
+    },
+    {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\paged_index_controls.py",
+      "bytes": 15650,
+      "sha256": "7d5dc2ae47359c17dce6f363bfc8f6d9e3f7a24603944e50258cb9b059c36e85"
+    }
+  ],
+  "unchanged": true,
+  "last_source_hash_check_before_freeze_release": true,
+  "source_reads_after_release": false,
+  "all8_binding_entries_rehashed_and_match": true,
+  "raw_files": [
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\v5-R1-memory-v1-binding.json",
+      "bytes": 9665,
+      "sha256": "217445cac6b713adac7bffc7fb7dca0e224ff5b370e57842e13a811b4c02aa7d"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\v5-R1-memory-v1-guard.json",
+      "bytes": 11707,
+      "sha256": "bece3fb71af5400d969ca8fb9cb2e6e844af9131f499e13c350440ce95993a7f"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\v5-R1-memory-v1-guard.stdout",
+      "bytes": 20825,
+      "sha256": "aa76539cb162bf0ea75274b139ffafe47d5a8b9498e526d6e34b63acc2acafbc"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\v5-R1-memory-v1-guard.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\v5-R1-memory-v1-guard.rss.jsonl.gz",
+      "bytes": 988,
+      "sha256": "2c3461933b6d93c616d95293f1efc18ad95d459d8b02203fa5db14776b6d8c86"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\v5-R1-memory-v1-final.json",
+      "bytes": 9954,
+      "sha256": "3e9e5e94b134dcda5db7655c862d945610432553b4686ae493adc6c66da834a3"
+    }
+  ],
+  "raw_total_bytes": 53139,
+  "positives": [
+    "authenticated-accepted-five-role-cohort",
+    "retired-accepted-metadata-and-legacy-accepted-owner-retry-allocation",
+    "same-birth-same-pack-distinct-legacy-and-paged-indexes",
+    "genuine-owned-installed-pending-context-captured-selected-authority"
+  ],
+  "negative_cases": [
+    {
+      "case": "self-hashed-extra-publication",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-publication-not-accepted"
+    },
+    {
+      "case": "self-hashed-extra-result",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-result-not-accepted"
+    },
+    {
+      "case": "self-hashed-extra-hint",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-attempt-not-accepted"
+    },
+    {
+      "case": "self-hashed-extra-candidate",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-attempt-not-accepted"
+    },
+    {
+      "case": "self-hashed-extra-allocation",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-attempt-not-accepted"
+    },
+    {
+      "case": "wrong-accepted-publication-binding",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "('publications/publication-0.json', '69bcd9c43cafb6c8de12817f3e7c18ae83f4bda36c6c8790ae2e9cc2559db1cf')"
+    },
+    {
+      "case": "wrong-accepted-result-binding",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": ""
+    },
+    {
+      "case": "wrong-accepted-hint-binding",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-hint-accepted-binding"
+    },
+    {
+      "case": "wrong-accepted-candidate-binding",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-candidate-accepted-binding"
+    },
+    {
+      "case": "wrong-accepted-allocation-binding",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-allocation-wrong-accepted-owner"
+    },
+    {
+      "case": "canonical-allocation-wrong-result",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-allocation-accepted-result"
+    },
+    {
+      "case": "accepted-candidate-wrong-normalized-intent",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-candidate-request-intent"
+    },
+    {
+      "case": "legacy-retry-path-body-mismatch",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-allocation-path-binding"
+    },
+    {
+      "case": "legacy-retry-unknown-field",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": ""
+    },
+    {
+      "case": "candidate-missing-captured-authority",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "captured-selected-authority-required"
+    },
+    {
+      "case": "self-authorizing-candidate-context",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "self-authorizing-physical-candidate"
+    },
+    {
+      "case": "pending-output-unselected-attempt",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-attempt-not-accepted"
+    },
+    {
+      "case": "journal-owned-output-is-not-accepted-authority",
+      "refused": true,
+      "error_type": "AssertionError",
+      "reason": "mapped-attempt-not-accepted"
+    }
+  ],
+  "raw_vector_count": 16,
+  "raw_vector_data_decoded_json_valid": true,
+  "guard": {
+    "exit": 0,
+    "errors": [],
+    "censor": null,
+    "stage_seconds": 12.51990008354187,
+    "total_seconds": 25.1894314289093,
+    "peak_rss": 21147648,
+    "timing": {
+      "samples": 7,
+      "max_interval_seconds": 0.0311218,
+      "intervals_over_40ms": 0,
+      "completed_samples": 7,
+      "max_completion_interval_seconds": 0.0311226,
+      "max_collection_duration_seconds": 0.0009052,
+      "max_sample_duration_seconds": 0.0009543,
+      "max_recorded_interval_seconds": 0.0311325,
+      "slow_samples": 0,
+      "clock": "perf_counter_ns",
+      "target_interval_ns": 20000000,
+      "censor_interval_ns": 40000000,
+      "clock_info": {
+        "perf_counter": {
+          "implementation": "QueryPerformanceCounter()",
+          "monotonic": true,
+          "adjustable": false,
+          "resolution": 1E-07
+        },
+        "monotonic": {
+          "implementation": "GetTickCount64()",
+          "monotonic": true,
+          "adjustable": false,
+          "resolution": 0.015625
+        }
+      },
+      "interval_seconds_clock": "perf_counter_ns; monotonic fields are coarse diagnostics",
+      "first_positive_full_sample_ns": 587778538794300,
+      "last_recorded_sample_ns": 587778658814000,
+      "root_wait_returned_ns": 587778679135800,
+      "root_end_coverage_gap_seconds": 0.0203218,
+      "job_empty_observed_ns": 587778679338100,
+      "job_end_coverage_gap_seconds": 0.0205241
+    },
+    "closure_checks": [
+      {
+        "epoch": 1792543601.9687917,
+        "members": []
+      },
+      {
+        "epoch": 1792543601.9898226,
+        "members": []
+      }
+    ]
+  },
+  "sampling_raw": {
+    "rss_samples": 7,
+    "root_end_coverage_records": 1,
+    "job_drain_coverage_records": 1,
+    "peak_rss": 21147648,
+    "max_interval_seconds": 0.0311218,
+    "intervals_over40ms": 0
+  },
+  "prewrite_census": {
+    "path": "C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be",
+    "bytes": 5396135,
+    "files": 668,
+    "new_review_allowance": 24576,
+    "future_reserve": 131072,
+    "prospective_bytes": 5551783,
+    "cap": 8388608
+  },
+  "reviewer_actions": "Read/hash source and six receipts; parse JSON/Base64 and gzip sampling data; no parser/control/engine/native/oracle/store/fixture/Git execution; write exactly two new reports"
+}

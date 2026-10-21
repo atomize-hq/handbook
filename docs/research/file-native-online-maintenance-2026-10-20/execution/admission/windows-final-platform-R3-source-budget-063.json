@@ -1,0 +1,74 @@
+{
+  "kind": "private-Windows-platform-R3-source-budget-063",
+  "source_root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-final-platform",
+  "owner": "01a15bd5-7694-7981-a619-9a23d4774b60",
+  "bytes": 524288,
+  "files": 27,
+  "max_bytes": 524288,
+  "max_files": 27,
+  "groups": {
+    "source": {
+      "bytes": 327680,
+      "files": 11,
+      "paths": {
+        "windows_driver.py": 40960,
+        "windows_native.py": 32768,
+        "windows_adapter.py": 32768,
+        "windows_growth.py": 20480,
+        "windows_capsule.py": 45056,
+        "windows_hooks.py": 57344,
+        "windows_oracle_bridge.py": 20480,
+        "source_controls.py": 32768,
+        "windows_deadlines.py": 4096,
+        "windows_bootstrap.py": 8192,
+        "windows_evidence.py": 32768
+      }
+    },
+    "case_data": {
+      "bytes": 131072,
+      "files": 8,
+      "paths": {
+        "protocol.json": 26624,
+        "packing52.json": 22528,
+        "recovery24.json": 15360,
+        "strict24.json": 13312,
+        "focused_windows.json": 12288,
+        "workspace_ordinary.json": 8192,
+        "source_constructors.json": 22528,
+        "growth_actions.json": 10240
+      }
+    },
+    "bindings": {
+      "bytes": 65536,
+      "files": 8,
+      "paths": {
+        "README.md": 8192,
+        "interface.md": 8192,
+        "controls-forecast.json": 8192,
+        "source-bindings.json": 8192,
+        "final-engine-bindings.json": 8192,
+        "source-receipt.json": 8192,
+        "static-controls-result.json": 8192,
+        "platform-source-review-notes.md": 8192
+      }
+    }
+  },
+  "claim047_sha256": "f74455d7c0cdbe1e5bfe2302cc430099c07c23a2c025d8bcdc2897e083ffaa6e",
+  "source_only": true,
+  "runtime_go": false,
+  "pure_memory_parse_compile_go": true,
+  "engine_commit_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z",
+  "historical_review_watchdog": "04:10:14Z MISSED; preservea5/R2failedsnapshots. Newprospectivecontrollerrepairsauthorized, no oldcellrescore/clockreset.",
+  "rules": [
+    "ChecksameimmutablebudgetSHA andindividual/group/wholeALLphysicalsourcecopies plusfuturecopyobligations beforeeverywrite; no links/reparse/bytecode/extrafiles.",
+    "OldsourceversionsdurableatGit a5b53218 and062enginefixed. No Rust/core/publicformat change.",
+    "Newsourcepinsfreshfullreviewandexplicitfiniteadmissionbeforeanyruntime/build/cache/fixture/archive/delete."
+  ],
+  "issued": "2026-10-21T09:08:12.427317+00:00",
+  "claim051_sha256": "2bc5a4744375d07f154604709b894d6dc5d423587d330311a278646eb07b88e7",
+  "local_write_check": "Own closed source allocation+authenticatedimmutablebudget; valid foreign reservations held centrally. No unrelated foreign census prerequisite on each local sourcewrite.",
+  "claim063_sha256": "cb4edef4ea2ada17095420a90a9afc140c4a98dffb4401f3fd516933b20a7e8a",
+  "transition": "Exact sealed063 neutral source/case transfer; stale062 not activated. All27 candidate, per-file/group/whole and maximal intermediate must fit before any write. Source only; full review and separate bounded runtime admission required."
+}

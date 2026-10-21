@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-029-C3-FIXTURE-RETIREMENT-SOURCE64KiB",
+  "utc": "2026-10-21T01:26:03.449679+00:00",
+  "status": "INTERNAL_C3_SOURCE_RESERVATION_ONLY__NO_ARCHIVE_RUN_COPY_OR_DELETE",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T012603Z.json",
+      "bytes": 4384,
+      "sha256": "d574c59a7a08f480a2570f6e526e0762899b28eee5383118760937743335a1b4"
+    },
+    {
+      "file": "claim-20261021T012603Z.md",
+      "bytes": 845,
+      "sha256": "dde5a2bcb2b4b25e591cf426316638f8df62faa1ed34e27bb889be4a1f4b6b83"
+    }
+  ]
+}

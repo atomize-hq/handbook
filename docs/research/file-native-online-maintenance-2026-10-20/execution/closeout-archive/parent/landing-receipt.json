@@ -1,0 +1,49 @@
+{
+  "status": "PUSHED_REVIEWED_PREFLIGHT_NO_GO_ENGINE_INCREMENT_INCOMPLETE",
+  "utc": "2026-10-20T19:28:41.508604+00:00",
+  "branch": "codex/file-native-online-maintenance-20261020",
+  "commit": "47d667f26a75fa1454dee2d1c50d238aec4cf6bd",
+  "remote_commit": "47d667f26a75fa1454dee2d1c50d238aec4cf6bd",
+  "base_commit": "a0b92fe5dc64269508601dcddf7e2e2ca477e30d",
+  "unchanged_core": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+  "diff": "59 additions solely under docs/research/file-native-online-maintenance-2026-10-20",
+  "worktree_clean": true,
+  "main_and_prior_integration_heads_unchanged": true,
+  "engine_diff_empty": true,
+  "build_corpus_restore_newqualification": "UNPERFORMED_ADMISSION_REFUSED",
+  "closeout_resources": {
+    "new_worktree": {
+      "bytes": 907464,
+      "files": 60
+    },
+    "parent_meta_artifacts_before_receipt": {
+      "bytes": 405789,
+      "files": 32
+    },
+    "shared_git_current": {
+      "bytes": 252170430,
+      "files": 2489
+    },
+    "positive_shared_git_growth_since_preflight": 1077554,
+    "Mac_report_only_root_bytes": 28056,
+    "measured_new_charge_bytes_before_this_receipt": 2418863,
+    "receipt_and_final_message_margin_bytes": 32768,
+    "shared_closeout_subreservation_inside_1GiB": 4194304,
+    "pass": true,
+    "cap_overrun": false,
+    "native_allocation_not_inferred": true
+  },
+  "protection": {
+    "deleted_bytes": 0,
+    "deleted_files": 0,
+    "rejected_prior_cleanup_targets_retained": true,
+    "complete_original_consultation_retained": true
+  },
+  "review": "PASS corrected conservative NO-GO; strict universal impossibility unproven",
+  "clock": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "protected_closeout_end": "2026-10-21T13:10:14Z",
+    "reset": false
+  }
+}

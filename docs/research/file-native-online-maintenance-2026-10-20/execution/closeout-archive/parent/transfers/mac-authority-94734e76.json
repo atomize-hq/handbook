@@ -1,0 +1,10 @@
+{
+  "name": "mac-authority-94734e76",
+  "source_commit": "94734e76bfe3c58ee93de77ec25e3d7df459d7c4",
+  "compressed_bytes": 74975,
+  "tar_bytes": 225280,
+  "sha256": "a2dc385f028e9bf89a808e9aa25d315350093c0964b6a5872a60ab77f9c6b964",
+  "members": 13,
+  "base64_chars": 99968,
+  "chunk_chars": 16000
+}

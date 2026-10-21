@@ -1,73 +1,51 @@
-# Windows platform039 — source review packet
+# Windows platform source â€” R3 source freeze awaiting review
 
-SOURCE ONLY, runtime/body GO false, global experiment INCOMPLETE.
-Owner01a15bd5-7694-7981-a619-9a23d4774b60. Budget039 SHA256
-b79a0cccaf96be247bba2b48bada220417bc083eb4b09828aa43642719e5eaa3,
-claim0392ad791f85e6bddb49bf47bd731259606ccd0cf936bec8c99d1554e1c91376e1d.
-Same27 flat names/524288 bytes; source11/196608, case8/262144,
-bindings8/65536. Every individual/group/whole projection precedes each write.
-No Git/staging/commit or extra file was created by this owner.
+Status: **R3_SOURCE_FROZEN_AWAITING_FULL_REVIEW_NO_GO**. All 166 required cases remain PENDING. No private module, control, Win32 provider, engine, build, corpus, or qualification body has been executed by this worker. Compilation and AST checks do not admit execution.
 
-W1–W4 targeted source remediation was independently reviewed;034 was rejected for
-W5. Parent preserved034 exact27 bytes in META transfer archive
-windows-platform-034-source.json.gz100021B,
-SHAdbbe3867c15e07f3ceae1a4f3736d3b5112b66f388e23bc13eebebaed7a77027.
-Review034 SHA7d955028b98d82b18ee4154fb37acaea9005454d1945f20a248f316f32eb66d8.
-Original b467 negative receipt/archive926469b3... remain preserved.
+The fixed engine source is `0628322e4b48e0efad19cdc32238a622d4aaa7a8`. The shared Harness remains `7ce0a4a06a35fa9e7f4f4080a40315a418bb45e47a8946ca06d78c2117d855e8`. This directory does not supply a qualified binary or change that Harness.
 
-W5 now joins only started callback threads, independently attempts every later
-handle, retains start/join errors, and emits honest closure. finalize attempts
-evidence/native closure and census even on drain failure, caches its result, and
-bootstrap uses nested finally. A prepared fake trace covers unstarted/failed/
-later joins plus repeated drain/finalize. All64 memory groups remain UNEXECUTED.
+The functional cutoff is 2026-10-21T11:10:14Z and closeout is 13:10:14Z. The missed 04:10:14Z review target is historical; it does not reset clocks or qualify earlier events. Negative 045 source is preserved by the parent in Git and its named source archive. Its receipt SHA is `580d7098ea13db2d52748a5d2f80d1705e4c60f0d54e4784476596cd23a16f9c`.
 
-V2 lane-invoke-v2 uses one lossless canonicalLF raw stream and single-raw-ref-v1.
-Begin/planned-input may precede Popen; positive native START precedes actual stdin.
-Every call frame has strict seq, actual output offsets and exact per-call SHA
-over physical canonical frames. Completed stdin prefix/count/hash and
-first_write_qpc are distinct from planned bytes. Bounded extraction checks native
-identity, raw counts/hashes/EOF/reap/IO/callback closure before strict stdout JSON.
-Persisted decoded engine envelopes use closed native-response-ref-v1.
-NativeCallFailure remains AssertionError(row) compatible; its repr uses call/ref
-instead of duplicating raw stdout. In-memory shared7ce row behavior stays intact.
+## Current source boundaries
 
-Growth v2 derives frame/serializer bounds, tracks live fatal escrow through
-pending call reservations and releases only unwritten potential. Evidence/record
-closed-writer settlement requires positive source/profile/budget/whole-phase
-bindings and writer closure; retained bytes never receive reclaim credit.
-Corpus leases remain conservative. Quantitative final profiles/all sinks and
-runtime admission remain pending; no fit claim follows from this source.
+- `windows_driver.py`: suspended native capture, BEGIN/LAUNCH/START/RSS/END ordering, bounded raw pipes, actual phase deadlines, registered reader interruption, and the narrowly authenticated S-maintainer-death checkpoint. NativeCommands owns finite workspace Cargo and ordinary PowerShell argv families.
+- `windows_evidence.py`: the authoritative import-free WIRE_CONTRACT literal, authenticated action/group profile adoption, call metadata, callback projection, sidebands, and private helper source-allocation authentication.
+- `windows_growth.py`: actual root inventory and prospective leases, compact checkpoint projections, raw capture bounds and state-reference verification.
+- `windows_adapter.py`: native case/control/callback ownership, full backup/restore, candidate byte descriptors, and the two sealed guard-budget comparison before Evidence opens.
+- `windows_capsule.py`: lane authorization, parent machine source-freeze verification, source-owned workspace/ordinary providers, and checker request construction/native capture.
+- `windows_oracle_bridge.py`: complete checker artifact consumption and a source-grounded full-result projection. It imports neither a decoder nor the engine. Its LONG `legacy_full` return has exactly `index_ref`, `request_ref`, `native`, and `artifacts`.
+- `windows_hooks.py`: source-bound hook loading, concrete input/forecast/checkpoint/interruption/removal/overlap policies, actual case indices and guard-prefix observations, and build-binding validation.
+- `windows_native.py`: creation-bound Windows handles and overlapped pipes; fixed ordinary PowerShell; finite historical/native case providers.
+- Bootstrap, deadlines and prepared controls complete the eleven Python sources.
 
-LaneHost exposes exact v2 invocation, actual engine/spawn clocks, checkpoint
-forecast SHA/raw refs, positive history_authorization and source-owned case routes.
-HistoryPorts implements actual retained native start/ready, QPC, owned namespace,
-registry observations, donor byte refs, partial actual031 raw-prefix observations,
-owned seal context and index writes. make_runner is the shared036 public factory;
-its actual source/hash/review and full bindings remain runtime prerequisites.
-031 opt-in is explicit actual guard source/schema plus parent grant; old50ecc
-and original Driver924/guard1e4 are unchanged and gain no new qualification.
+## Checker integration
 
-Case maps now name actual source/AST bodies for157 donor routes plus4 Windows
-sharing, X1000 and external HISTORY/LONG/stream source bodies. Those are SOURCE
-bindings, not165 completed cases. D-N64-N1k-AandB-payload-title still lacks its
-final Windows matrix body. NativeCase, fixture IO/clone and exact function-only
-template loading avoid importing Linux providers. Remaining donor interfaces
-include independent decoder/refusal constructor queries, workspace boundary
-runner, native ordinary extraction, backup/restore, Windows historical producer,
-and some reference helper globals. These are explicit blockers, not fake passes.
-All166 cases and20 constructor obligations stay PENDING. Do not count old5 unit
-slots as the final29+ unit catalog.
+The sole checker CLI is maintained by the matrix owner in that owner's worktree. No competing CLI or independent decoder is created here. The latest selected source must be included in the parent's exact transitive source manifest before use.
 
-All11 modules compiled in memory only. No supplied module import, test/control,
-Win32/QPC/provider invocation, engine/build/Job, runtime fixture or corpus write.
-Full fresh source review precedes finite control GO. Final engine/terminal-v2/
-quota oracle and all-sink Windows budgets remain unreleased. The standard remains
-PROPOSED; no product format/default/migration is adopted.
+Checker requests are created from the actual CLI's AST-literal CONTRACT. The caller supplies bounded numeric limits and immutable source references, not a schema or callback. A checker process uses isolated Python with site initialization disabled, the exact CLI and transitive source hashes, a finite authenticated profile and a finite invocation counter. The original request and resulting INDEX are joined to the same actual native call by the invocation-closure event.
 
-GitNexus exact Landing impact remains unavailable, treated manually HIGH across
-transport, host/adapter cleanup, bootstrap, case/HISTORY/LONG helpers and closeout.
-Parent alone must detect_changes before commits. Source04:10:14Z, functional
-11:10:14Z and protected closeout13:10:14Z on2026-10-21 remain fixed.
-Global44GiB/5m files/internal1GiB100k reserve and protected data remain unchanged.
+The gate carrier has exactly ready, release, nonce, manifest_sha256 and root. Root means the corpus. Gate files live in the existing manifest.release.controls_root, with run/mode/call-bound names. Driver reserves 16384 bytes/two files before Popen and supplies the actual clamped absolute performance-counter deadline. The child must publish its own ready identity and await release before corpus access.
 
-045 FINAL SOURCE BOUNDARY: canonicalv2 coalescing, pending input capture, LAUNCH/image/meta refs, case tags, bounded failure repr/str, atomic evidence close fence and actual scoped closure settlement are SOURCE IMPLEMENTATIONS, UNREVIEWED/UNEXECUTED. Scope contract: case_id parent166, scope_id helperlabel, case_scope fresh32hex. Native metadata follows selected meta-v2 keys. Guard prefix now hashes complete uncompressed JSONL through selected completed RSS and refuses if older40ms; active-gzip publication still requires native proof. All prior donor/profile/sealer/direct-checker integration gaps remain NO_GO until actual complete review. No claim165 runnablecases or fullsource acceptance. Hardfreeze04:10:14Z unchanged.
+Full/history/legacy verification retains the complete result and all-path before/after artifacts. LIVE mapping uses the CLI's actual shared-pin/read-footprint proof. Backlog is actor-quiescent after all same-root calls close; its proof scope follows the actual CLI contract. Physical-only raw/entry is confined to the declared orphan route and cannot become a full/cohort pass.
+
+The provider preallocates every output final/partial name. Positive call-scoped output and gate settlement is implemented; native qualification and full body fit remain unproved. Partial, unknown or failed captures retain their evidence and reservation.
+
+## Admission data
+
+The parent's immutable grant must select actual checker sources, interpreter, per-mode numeric limits, finite profile IDs/counts, existing output roots, readonly provenance/quota references, and exact refusal expectations. Missing data refuses. Final engine input rules and incremental growth remain parent-selected and root/case scoped.
+
+Build validation requires an actual engine_build_binding reference, actual binary descriptor, source snapshots before/after the build and nonempty guard receipts. The build argv and crate cwd must match the selected engine descriptor. Source files, native process closure and postwrite census are checked, not inferred from a success label.
+
+Before any Evidence writer, capture.guard_bounds must equal the inner and outer sealed budgets' actual evidence_bounds. The inner reference binds FILE_NATIVE_BUDGET and the current owner. The outer owner must bind its actual budget hash, run nonce and inner-guard process identity. Old outer-owner records lacking that field cannot pass.
+
+The parent source-freeze manifest and acceptance are separate canonical machine records. They hash the exact source map and linked independent review records. Local source-receipt.json is a work-progress snapshot, not that acceptance.
+
+## Remaining work
+
+The checker settlement/native return, LONG release/paired transport and original helper guard joins are implemented. Complete actual runtime binding data and independent source review remain required. Reconcile the latest CLI repair freeze and guard R4.1 owner fields. Then obtain fresh complete source review and explicit finite control/native/body admission. The eight case data files preserve every required obligation; historical null/PENDING descriptors do not authorize mutation.
+
+Source writes remain limited to the sealed 27 regular names, without links, bytecode, temp copies or extra files. Active allocation070 holds524288 bytes total: source335872, case data122880 and bindings65536. Every write checks the immutable budget hash and individual/group/whole caps. A requested redistribution has no effect until the parent publishes it. The structured-data format standard remains proposed; these private source protocols do not authorize public serialization migrations.
+
+The paired stream provider is a source-owned fixed Runtime/Popen injection into one fresh verified byte-module instance, with two real Driver JSON-control workers and a dedicated inherited payload pipe. No stdlib global is patched and no compressed payload is retained. This new path has not been executed or qualified.
+
+Full review W1-W3 corrections: checker CLI cap34816; original archive forecast592458971/5807 with authenticated manifest/current lease; runtime bootstrap requires capture. Prior10:34 freeze is superseded by this source-only repair. No executed controls/native or case qualification.

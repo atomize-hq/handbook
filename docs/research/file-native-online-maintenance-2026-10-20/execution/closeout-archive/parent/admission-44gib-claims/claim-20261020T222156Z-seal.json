@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-010-STREAM-CONTROLS-166FILES",
+  "utc": "2026-10-20T22:21:56.128649+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T222156Z.json",
+      "bytes": 3819,
+      "sha256": "088331e9e86133ac9f612aaf44d8cb1a32814c55632517eca9d0be3f8f1c16a0"
+    },
+    {
+      "file": "claim-20261020T222156Z.md",
+      "bytes": 960,
+      "sha256": "710f7432ea3d85a968e95ad12451fa73484f95eea479836f8a2287ab807bece8"
+    }
+  ],
+  "status": "AUTHORIZED_INTERNAL_FILE_SUBALLOCATION__VERSIONED_BINDING_REQUIRED",
+  "sealed": true
+}

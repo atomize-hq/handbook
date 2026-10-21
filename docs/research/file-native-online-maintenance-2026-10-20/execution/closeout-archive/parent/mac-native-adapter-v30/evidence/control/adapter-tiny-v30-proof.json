@@ -1,0 +1,1 @@
+{"kind":"tiny-fake-adapter-control-only","bridge_calls":5,"donor_events":3,"raw_response_bytes":150377,"roles":["reader","checker","checker","checker","checker"],"expected_exits":[0,2,86,2,0],"duplicate_key_refusal":true,"all_raw_output_SHA_size_match":true,"full_capsule_executed":false}

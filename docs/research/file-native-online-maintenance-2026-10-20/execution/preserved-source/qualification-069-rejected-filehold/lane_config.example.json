@@ -1,0 +1,94 @@
+{
+  "schema": "private-long-lane-v1",
+  "go": false,
+  "runtime_go": false,
+  "final_pin": null,
+  "qualification": "research-only-process-crash",
+  "roots": {
+    "archive": "C:/file-native-packing-20261020/packed-operational-backup",
+    "source": "C:/file-native-online-matrix-20261020/long-source/disposable/store",
+    "destination": "C:/file-native-online-matrix-20261020/long-restored/disposable/store",
+    "metadata": "C:/file-native-online-matrix-20261020/long-capture",
+    "evidence": null
+  },
+  "bindings": {
+    "engine": null,
+    "python": null,
+    "oracle": null,
+    "oracle_cli": null,
+    "stream": null,
+    "stream_guard": null,
+    "legacy_adapter": null,
+    "intent_plan": null,
+    "request_provenance": null,
+    "lookup_expectations": null,
+    "startup_gate": null,
+    "long_source": null,
+    "cohort_inventory": null,
+    "profile_calculator": null
+  },
+  "categories": {
+    "source": "F09",
+    "source_evidence": null,
+    "destination_metadata": "F11"
+  },
+  "archive": {
+    "selected": {
+      "publication": "publication-26408-1792467841305851000-19",
+      "digest": "6d11b0a4e06e4c85ae391516bc99c840f4724bb547d018268bd9e9a2c7ea81cf"
+    },
+    "compressed_bytes": 313275597
+  },
+  "limits": {
+    "source_construction_bytes": 959805444,
+    "source_construction_files": 7839,
+    "destination_all_bytes": 676345051,
+    "destination_all_files": 8000,
+    "metadata_bytes": 8388608,
+    "metadata_files": 40,
+    "engine_reserve_bytes": 335544320,
+    "successor_bytes": 16777216,
+    "source_final_files": 7908,
+    "record_bytes": 131072,
+    "evidence_bytes": null,
+    "evidence_files": null,
+    "cleanup_batches": null,
+    "sample_bytes": null,
+    "cleanup_receipt_bytes": null,
+    "result_bytes": null
+  },
+  "evidence_admission": {
+    "assigned": false,
+    "receipt_sha256": null,
+    "reviewed_source_forecast": false
+  },
+  "cli": {
+    "api": "reviewed-v5-R1-cli",
+    "startup_gate": "owned-before-any-corpus-read-or-write",
+    "oracle_argv": null
+  },
+  "phase_reserves": {
+    "source-restore": null,
+    "legacy-samples": null,
+    "convert": null,
+    "converted-oracle": null,
+    "paged-samples": null,
+    "cleanup": null,
+    "cleaned-oracle": null,
+    "stream-restore": null,
+    "restored-oracle": null,
+    "successor": null,
+    "successor-oracle": null,
+    "closure": null,
+    "legacy-oracle": null
+  },
+  "claims": {
+    "F14_expiry": "after-reaped-convert-full-oracle-census",
+    "F11_expiry": "after-destination-successor-full-oracle"
+  },
+  "stream": null,
+  "note": "R3 SOURCE ONLY. False/null refuse. Requires actual source admission, global catalogue, complete source-derived sinks, fresh review and separate RUN GO.",
+  "cohort_digest": null,
+  "profile_inputs": null,
+  "source_admission": null
+}

@@ -1,0 +1,144 @@
+{
+  "kind": "parent-reviewed-exec-prefix-final-launch-binding",
+  "execution_authorized": false,
+  "runtime_data_go": true,
+  "scope": "5 peer calls interface controls ONLY;158 engine cases PENDING",
+  "suite_pin": "efd07cb5dee46a335be8c03a2f2c0462d7f923ca",
+  "harness_clean_git_pin": "2b651e05aa265c76e0c8d8254ff1d34035573f52",
+  "manifest_sha256": "afbe9f7bc83531b6fc6caf0f97f028fc092524a760a32115fdb0d4e7de6ec609",
+  "admission_sha256": "61026455f802b5f46673d4ff9c77056fd132bb1ae63cb3e6c6875ecbb3257ce8",
+  "prefix_sha256": "220c739210dd01e6092ae38a7131ac3a75e6863c3b93f5ff15f171e1266738aa",
+  "prefix_artifact_sha256": "b5ccbe2d276acd992d3edb3d05c6c64aebd2b67b287b8b7d81c18eb98f92895d",
+  "bootstrap_sha256": "ac2cc1e993fc861a174da06b6c5c619f0f3bf3355450cb367b9a9b2a2ed59e79",
+  "loader_sha256": "5b6034a1f5ddce88ec76b3566a0e00224ae8fcbefe404e39d2156d92b54522b9",
+  "command_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-S",
+    "-B",
+    "-c",
+    "import hashlib,pathlib,sys\nb,l,bs,ls=sys.argv[1:5]\nbb=pathlib.Path(b).read_bytes()\nif hashlib.sha256(bb).hexdigest()!=bs or hashlib.sha256(pathlib.Path(l).read_bytes()).hexdigest()!=ls: raise SystemExit(\"preimport-source-binding\")\nsys.argv=[b,*sys.argv[5:]]\nexec(compile(bb,b,\"exec\"),{\"__name__\":\"__main__\",\"__file__\":b,\"__package__\":None})\n",
+    "/home/spenser/file-native-online-linux-20261020/source/native_bootstrap_v3.py",
+    "/home/spenser/file-native-online-linux-20261020/source/native_capsule_v3.py",
+    "ac2cc1e993fc861a174da06b6c5c619f0f3bf3355450cb367b9a9b2a2ed59e79",
+    "5b6034a1f5ddce88ec76b3566a0e00224ae8fcbefe404e39d2156d92b54522b9",
+    "--manifest",
+    "/home/spenser/file-native-online-linux-20261020/source/targeted-controls-v3/manifest-run.json",
+    "--manifest-sha256",
+    "afbe9f7bc83531b6fc6caf0f97f028fc092524a760a32115fdb0d4e7de6ec609",
+    "--bootstrap-sha256",
+    "ac2cc1e993fc861a174da06b6c5c619f0f3bf3355450cb367b9a9b2a2ed59e79",
+    "--loader-sha256",
+    "5b6034a1f5ddce88ec76b3566a0e00224ae8fcbefe404e39d2156d92b54522b9",
+    "--claim-id",
+    "LINUX-V3-INTERFACE-CONTROLS-20261021",
+    "--ledger-sha256",
+    "d574c59a7a08f480a2570f6e526e0762899b28eee5383118760937743335a1b4"
+  ],
+  "guard_argv": [
+    "/usr/bin/python3",
+    "/home/spenser/file-native-online-linux-20261020/source/native_guard.py",
+    "--receipt",
+    "/home/spenser/file-native-online-linux-20261020/evidence/native-v3-targeted-controls.json",
+    "--seconds",
+    "60",
+    "--pin",
+    "efd07cb5dee46a335be8c03a2f2c0462d7f923ca",
+    "--claim-id",
+    "LINUX-V3-INTERFACE-CONTROLS-20261021",
+    "--ledger-sha256",
+    "d574c59a7a08f480a2570f6e526e0762899b28eee5383118760937743335a1b4",
+    "--reserve",
+    "source=4096:1",
+    "--reserve",
+    "target=0:0",
+    "--reserve",
+    "fixtures=1048576:128",
+    "--reserve",
+    "evidence=1572864:16",
+    "--cwd",
+    "/home/spenser/file-native-online-linux-20261020",
+    "--",
+    "/usr/bin/python3",
+    "-I",
+    "-S",
+    "-B",
+    "-c",
+    "import hashlib,pathlib,sys\nb,l,bs,ls=sys.argv[1:5]\nbb=pathlib.Path(b).read_bytes()\nif hashlib.sha256(bb).hexdigest()!=bs or hashlib.sha256(pathlib.Path(l).read_bytes()).hexdigest()!=ls: raise SystemExit(\"preimport-source-binding\")\nsys.argv=[b,*sys.argv[5:]]\nexec(compile(bb,b,\"exec\"),{\"__name__\":\"__main__\",\"__file__\":b,\"__package__\":None})\n",
+    "/home/spenser/file-native-online-linux-20261020/source/native_bootstrap_v3.py",
+    "/home/spenser/file-native-online-linux-20261020/source/native_capsule_v3.py",
+    "ac2cc1e993fc861a174da06b6c5c619f0f3bf3355450cb367b9a9b2a2ed59e79",
+    "5b6034a1f5ddce88ec76b3566a0e00224ae8fcbefe404e39d2156d92b54522b9",
+    "--manifest",
+    "/home/spenser/file-native-online-linux-20261020/source/targeted-controls-v3/manifest-run.json",
+    "--manifest-sha256",
+    "afbe9f7bc83531b6fc6caf0f97f028fc092524a760a32115fdb0d4e7de6ec609",
+    "--bootstrap-sha256",
+    "ac2cc1e993fc861a174da06b6c5c619f0f3bf3355450cb367b9a9b2a2ed59e79",
+    "--loader-sha256",
+    "5b6034a1f5ddce88ec76b3566a0e00224ae8fcbefe404e39d2156d92b54522b9",
+    "--claim-id",
+    "LINUX-V3-INTERFACE-CONTROLS-20261021",
+    "--ledger-sha256",
+    "d574c59a7a08f480a2570f6e526e0762899b28eee5383118760937743335a1b4"
+  ],
+  "stdin_bytes": 0,
+  "stdin_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "argv_hash_encoding": "UTF8 compact JSON ensure_ascii=false no finalLF",
+  "current_native": {
+    "source": {
+      "bytes": 872844,
+      "files": 81,
+      "directories": 14
+    },
+    "target": {
+      "bytes": 126813675,
+      "files": 409,
+      "directories": 90
+    },
+    "fixtures": {
+      "bytes": 109,
+      "files": 1,
+      "directories": 7
+    },
+    "evidence": {
+      "bytes": 4103111,
+      "files": 187,
+      "directories": 10
+    }
+  },
+  "free_bytes": 78403489792,
+  "source_cumulative": {
+    "bytes": 241612,
+    "files": 20
+  },
+  "source_with_next_owner_reserved": {
+    "bytes": 245708,
+    "files": 21,
+    "cap_bytes": 262144,
+    "cap_files": 24
+  },
+  "f12_conservative_before_this_binding": {
+    "bytes": 86667,
+    "files": 42,
+    "includes_false_source_data_snapshots": true
+  },
+  "f12_additional_main_and_local_return_reserved": {
+    "bytes": 3145728,
+    "files": 32
+  },
+  "f12_cumulative_caps": {
+    "bytes": 4194304,
+    "files": 96
+  },
+  "self_sha_excluded": true,
+  "prior_runpy_prefix_never_executed": true,
+  "frozen_source_unchanged": true,
+  "command_argv_sha256": "812a07d785dd8296d8058819aa9f14e2b09a8cbf88effd0c1f21d0240d40b0c0",
+  "guard_argv_sha256": "32bb984bc35fa90f28512c3dfb4ad69185f34408f373ddbbf7f54f820266153d",
+  "self_bytes": 5717,
+  "f12_conservative_inclusive": {
+    "bytes": 92384,
+    "files": 43
+  }
+}

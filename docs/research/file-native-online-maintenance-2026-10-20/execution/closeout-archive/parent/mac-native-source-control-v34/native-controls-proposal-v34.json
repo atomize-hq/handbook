@@ -1,0 +1,105 @@
+{
+  "kind": "native-v34-controls-proposal",
+  "status": "PROPOSAL_NO_GO",
+  "parent_released": false,
+  "manifest_sha256": "11ab40b7f48625d582a75ab74ffe2f5f73613debdb81522096592cfbe79784e0",
+  "argv_NOT_AUTHORIZED": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3.11",
+    "-B",
+    "/private/tmp/file-native-online-macos-20261020/execution/native-macos/guard_v20.py",
+    "--name",
+    "native-controls-v34",
+    "--seconds",
+    "45",
+    "--control-only",
+    "--identity-budget",
+    "64",
+    "--output-cap",
+    "8192",
+    "--rss-evidence-cap",
+    "131072",
+    "--prospective",
+    "{\"F01\":{\"bytes\":131072,\"files\":8},\"F04\":{\"bytes\":0,\"files\":0},\"F08\":{\"bytes\":1048576,\"files\":32},\"F12\":{\"bytes\":3145728,\"files\":96},\"F13\":{\"bytes\":0,\"files\":0},\"C1\":{\"bytes\":0,\"files\":0}}",
+    "--",
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3.11",
+    "-B",
+    "/private/tmp/file-native-online-macos-20261020/execution/native-macos/control_native_v34.py",
+    "--admission",
+    "/private/tmp/file-native-online-macos-20261020/evidence/control/native-controls-release-v34.json",
+    "--admission-sha256",
+    "PARENT_RELEASE_DOCUMENT_SHA256_REQUIRED"
+  ],
+  "prospective": {
+    "F01": {
+      "bytes": 131072,
+      "files": 8
+    },
+    "F04": {
+      "bytes": 0,
+      "files": 0
+    },
+    "F08": {
+      "bytes": 1048576,
+      "files": 32
+    },
+    "F12": {
+      "bytes": 3145728,
+      "files": 96
+    },
+    "F13": {
+      "bytes": 0,
+      "files": 0
+    },
+    "C1": {
+      "bytes": 0,
+      "files": 0
+    }
+  },
+  "fixed_t0": "2026-10-20T19:10:14Z",
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_cutoff": "2026-10-21T13:10:14Z",
+  "clock_reset": false,
+  "limits": {
+    "seconds": 45,
+    "cumulative_outer_identities": 64,
+    "native_calls": 10,
+    "role_identities": 16,
+    "reader_bytes": 268435456,
+    "checker_bytes": 2147483648,
+    "all_new_helpers_bytes": 805306368,
+    "all_new_work_bytes_less_than": 3221225472
+  },
+  "future_release": {
+    "path": "evidence/control/native-controls-release-v34.json",
+    "byte_cap": 4096,
+    "kind": "native-control-release-v34",
+    "parent_released": false,
+    "runtime_sources": "Exact 17 name-to-SHA256 entries in the bound manifest, including Bash gate and ordinary helpers.",
+    "python": {
+      "path": "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3.11",
+      "sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf"
+    },
+    "required_fields": [
+      "kind",
+      "parent_released",
+      "phase",
+      "source_pin",
+      "guard_sha256",
+      "claims",
+      "baseline",
+      "budget",
+      "runtime_sources",
+      "python",
+      "fixed_cutoff",
+      "issued_monotonic",
+      "deadline_monotonic",
+      "max_calls",
+      "directory_cap",
+      "guard_prospective"
+    ],
+    "issue_conditions": "Only after exact-source parent review and separate explicit control GO. Fresh F08/F12 baselines before release/outer output; compact strict JSON; finite current monotonic issue/deadline <=45s apart; CONTROL_ONLY; fixed cutoff from guard; same claims; max_calls10; directory_cap128; proposed budgets and prospective exact. Pass exact release SHA on CLI."
+  },
+  "source_import_rule": "Standard-library bootstrap verifies release SHA, all 17 private runtime members and Python executable before any private import. No new runtime imports occurred during this source-only preparation.",
+  "other_growth": 0,
+  "engine_cache_build_corpus_GO": false
+}

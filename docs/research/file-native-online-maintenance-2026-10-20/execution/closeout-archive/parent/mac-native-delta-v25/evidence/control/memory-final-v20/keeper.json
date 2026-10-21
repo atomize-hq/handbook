@@ -1,0 +1,177 @@
+{
+  "kind": "independent-native-keeper",
+  "nonce": "de3bd147dc2cf7ba4f3891367573780d",
+  "identity": {
+    "pid_requested": 8949,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 8949,
+    "ppid": 8944,
+    "uid": 501,
+    "pgid": 8949,
+    "state": 2,
+    "start": [
+      1792532932,
+      348208
+    ]
+  },
+  "fixed_cutoff_epoch": 1792581014.0,
+  "local_deadline_monotonic": 3221394.617271291,
+  "token_received": true,
+  "state": "CLOSED_AFTER_CENSOR",
+  "identity_budget": 4096,
+  "reason": "RuntimeError('per-process-rss-cap')",
+  "events": [
+    {
+      "termination": {
+        "status": "FROZEN_TREE_SIGNALLED",
+        "steps": [
+          {
+            "pid": 8953,
+            "start": [
+              1792532934,
+              94446
+            ],
+            "signal": 17,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 8952,
+            "start": [
+              1792532934,
+              33639
+            ],
+            "signal": 17,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 8953,
+            "start": [
+              1792532934,
+              94446
+            ],
+            "signal": 9,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 8952,
+            "start": [
+              1792532934,
+              33639
+            ],
+            "signal": 9,
+            "sent": true,
+            "errno": 0
+          }
+        ],
+        "known": [
+          {
+            "pid_requested": 8952,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 8952,
+            "ppid": 8949,
+            "uid": 501,
+            "pgid": 8952,
+            "state": 4,
+            "start": [
+              1792532934,
+              33639
+            ]
+          },
+          {
+            "pid_requested": 8953,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 8953,
+            "ppid": 8952,
+            "uid": 501,
+            "pgid": 8952,
+            "state": 4,
+            "start": [
+              1792532934,
+              94446
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "notify_parent": {
+        "pid": 8944,
+        "start": [
+          1792532932,
+          280993
+        ],
+        "signal": 30,
+        "sent": true,
+        "errno": 0
+      }
+    },
+    {
+      "closure": {
+        "proven": true,
+        "required_observations": 2,
+        "observations": [
+          {
+            "monotonic": 3221384.432011791,
+            "groups": [
+              {
+                "pgid_requested": 8952,
+                "returned_bytes": 4,
+                "errno": 0,
+                "valid": true,
+                "members": [
+                  8953
+                ],
+                "monotonic_ns": 3221384431997416
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": false
+          },
+          {
+            "monotonic": 3221384.45322775,
+            "groups": [
+              {
+                "pgid_requested": 8952,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3221384453212000
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          },
+          {
+            "monotonic": 3221384.474031333,
+            "groups": [
+              {
+                "pgid_requested": 8952,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3221384474018583
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          }
+        ],
+        "total_numeric_observations": 3
+      }
+    }
+  ]
+}

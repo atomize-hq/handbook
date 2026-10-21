@@ -1,0 +1,144 @@
+{
+  "kind": "44GiB-finite-Matrix-admin-transient-topup-within-existing-C3",
+  "claim_id": "44GiB-CENTRAL-019-MATRIX-ADMIN-2MiB",
+  "utc": "2026-10-20T23:24:37.533858+00:00",
+  "status": "RESERVATION_APPLIED__MATRIX_GIT_HELD_UNTIL_NEW_IMMUTABLE_018_019_BUDGET_REGISTERED",
+  "authority": "META authorizes1MiB transfer from existing C3 unsubclaimed to Matrix admin transient cap1->2MiB, matching CP2/CP3 index+index.lock contract; no global budget increase or execution permission.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T231405Z.json",
+    "sha256": "cef59d7dc178514fe3564b34b46ce6b78ba5a5d9b9f85149772793df2eaf8d75"
+  },
+  "C3_internal_transfer": {
+    "C3_total_unchanged": 16777216,
+    "unsubclaimed_before": 7208960,
+    "Matrix_ADMIN_topup": 1048576,
+    "unsubclaimed_after": 6160384,
+    "preexisting_control_hold_inside_unsubclaimed": 32768,
+    "remaining_after_control_hold": 6127616,
+    "unchanged_other_subclaims": {
+      "META_REVIEW": 6291456,
+      "CP2_CP3_combined_source_admin": 3145728,
+      "long_stream_source": 131072
+    },
+    "subclaims_plus_unsubclaimed_equals16MiB": true,
+    "parent_C3_files_unchanged": 15000
+  },
+  "Matrix_source_admin": {
+    "source_root": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook",
+    "admin_root": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\.git\\worktrees\\handbook9",
+    "source_cap_unchanged": 1048576,
+    "source_regular_files_unchanged": 200,
+    "admin_cap_before": 1048576,
+    "admin_cap_after": 2097152,
+    "admin_regular_files_cap_unchanged": 100,
+    "combined_before": 2097152,
+    "combined_after": 3145728,
+    "reservation_provenance": "originalF01 source1MiB+admin1MiB; extraC3 admin1MiB. No newworktree/target/cache.",
+    "admin_actual_accounting": "Nonadditive subset of F13 Windows shared-Git/Cargo24MiB HARD GROUP. Count commonGit/admin/index/index.lock/object/ref/reflog changes globally once, using existing positive-delta baseline and grouped Git+Cargo aggregation. Do not add adminactual again to C3/globalactual.",
+    "source_actual_accounting": "Workingtree source actuals remain owned F01; no new global source bytes/files. Source019 does not widen018 source subownership."
+  },
+  "independent_admin_census": {
+    "root": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\.git\\worktrees\\handbook9",
+    "utc": "2026-10-20T23:24:37.533858+00:00",
+    "files": [
+      {
+        "path": "COMMIT_EDITMSG",
+        "bytes": 75,
+        "sha256": "f5304080b6d060ddaf723e465a0bf36defb2af0a59ccdc1e4a99d8678ead26d8"
+      },
+      {
+        "path": "commondir",
+        "bytes": 6,
+        "sha256": "340ddcb67a6204f742cd1e28e5b462622dde7daaa8ee36001897196aacdc6d47"
+      },
+      {
+        "path": "config.worktree",
+        "bytes": 58,
+        "sha256": "97997ba84fd1c44263deb6f412fc3bef4b05e0103d00c5a97a97ca928299aa13"
+      },
+      {
+        "path": "gitdir",
+        "bytes": 81,
+        "sha256": "b44b2e04240685db261f086db03e435c429b30e25047d1fcc58bbefb4d654689"
+      },
+      {
+        "path": "HEAD",
+        "bytes": 57,
+        "sha256": "13771f1b2c31c7c35ebd676d47addfd3b3c451e673039e7780001602b29d3a0c"
+      },
+      {
+        "path": "index",
+        "bytes": 938129,
+        "sha256": "60ad645b5ada1b5cae0eb34e3cc65079c5f1ddfedae06a6cec1c6344c5667db2"
+      },
+      {
+        "path": "info/sparse-checkout",
+        "bytes": 159,
+        "sha256": "678aa61f584eb794b59a52c59f4fc740e8ca3ad4995ea32b7521d45c46e72857"
+      },
+      {
+        "path": "logs/HEAD",
+        "bytes": 3009,
+        "sha256": "10ff975ac638289a545c5c133be804df0f797e8bd4bea743fa506427441efccf"
+      }
+    ],
+    "actual_bytes": 941574,
+    "regular_files": 8,
+    "index_bytes": 938129,
+    "index_lock_current_bytes": 0,
+    "other_admin_bytes": 3445,
+    "current_under_old1MiB_cap": true,
+    "prospective_same_size_index_and_full_lock_plus_all_other_bytes": 1879703,
+    "old1MiB_prospective_excess": 831127,
+    "new2MiB_slack": 217449,
+    "native_allocated_bytes": "not inferred from logical file lengths",
+    "is_past_transient_measurement": false
+  },
+  "durable_index_lock_prospective_contract": {
+    "rule": "Before EACH Git operation that may write index/admin/objects, refresh exact admin+globalF13 census and forecast new index.lock, other lock/stage/commit message/ref/reflog/object writes. Count oldindex AND full newindex.lock simultaneously, including durable leftovers. Require total projected admin<=2097152/100files and grouped F13<=25165824/5000files before writes.",
+    "safe_admin_envelope_formula": "Let I=currentindex length, L=max(current durable index.lock, predicted new serialized index.lock length), O=all other projected adminfiles including any other staged/lock files. Require 2*max(I,L)+O<=2097152 as a conservative envelope for both retained index versions and replacement; count global Git object/compression/ref temporaries separately inside F13.",
+    "at_current_other_admin_max_each_index_or_lock_bytes": 1046853,
+    "at_current_index_additional_per_index_headroom_bytes": 108724,
+    "note": "Current oldindex and same-sized futurelock fit; this is not an unlimited futureindex growth grant. Changed staging/source paths/index extensions/commit message/log or other lock sizes need a new source-bound next-command forecast. Existing durable lock is counted and is not deleted by this resource worker.",
+    "guard": "Use registered new immutable budget and process/outer-guard forecast with positive RSS/closure; do not run MatrixGit outside admitted guard merely to avoid transient monitoring.",
+    "credit": "Atomic replace/unlink after actual Git completion may reduce measured files; no planned-delete/cleanup credit before actual closure."
+  },
+  "past_transient_statement": {
+    "status": "UNMEASURED",
+    "known": "Past commits had no active guard coverage for brief index.lock coexistence; exact lock maxima/durations unavailable.",
+    "not_claimed": [
+      "actual past breach",
+      "past compliance",
+      "retroactive qualification"
+    ],
+    "source_inference_only": "Potential current941574+938129=1879703 bytes exceeds old1MiB cap prospectively, showing oldcap is inadequate for a next equal-size indexrewrite. This does not prove the size of any historical lock."
+  },
+  "budget_registration_hold": {
+    "current_old_budget_path": "C:\\file-native-online-matrix-20261020\\receipts\\budget-final-source-v2.json",
+    "old_budget_sha256": "0b26efdba8af4ab41a939697244e02b1e7da1ec55ab857d05bd6d74de89ca781",
+    "old_budget_source_admin_cap": 1048576,
+    "old_version_immutable": true,
+    "future_Matrix_Git": "HOLD until Matrix owner/META creates and registers NEW immutable budget bound to018 AND019 with source1MiB/admin2MiB, nonadditive F13, combined3MiB,018evidence/source/controlsubclaims and all global hardgroups intact.",
+    "new_version_after_this_seal": true,
+    "resource_worker_live_budget_edit": false,
+    "guard_body_and_source_unchanged_by_thisclaim": true
+  },
+  "global_allocator_unchanged": {
+    "whole_forecast_bytes": 47092083061,
+    "central_contingency_bytes": 152557195,
+    "ceiling_bytes": 47244640256,
+    "global_files_reserved": 4792604,
+    "global_files_remaining": 207396,
+    "F13_Windows_shared_hardgroup_bytes": 25165824,
+    "F13_Windows_shared_hardgroup_files": 5000,
+    "inside_closeout_reserve_bytes": 1073741824,
+    "inside_closeout_reserve_files": 100000,
+    "actual_delete_credit": 0,
+    "new_globalforecast_bytes": 0,
+    "new_global_file_reservation": 0,
+    "full_qualification": "NO_GO",
+    "QPCcontrols": "earmarkonly; no runtimeGOfrom019"
+  },
+  "worker_actions": "Read-only admincensus/indexhash/budgetread and immutable smallreport only; no Git/index/lock/source/guard/livebudget edits, builds/cachecopy/restore/deletion or testexecution.",
+  "previous_seals_unchanged": true
+}

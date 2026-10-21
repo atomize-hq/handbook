@@ -1,0 +1,267 @@
+{
+  "kind": "parent-verified-cp4-paced-crossplatform-source-freeze-NO_RUN",
+  "base": "a3f9805eccc19ede8dd5c735b54e675e98e63714",
+  "worktree": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook",
+  "files": {
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock": {
+      "bytes": 10547,
+      "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml": {
+      "bytes": 561,
+      "sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/Cargo.toml": {
+      "bytes": 147,
+      "sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/src/main.rs": {
+      "bytes": 68,
+      "sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/Cargo.toml": {
+      "bytes": 148,
+      "sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/src/main.rs": {
+      "bytes": 69,
+      "sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs": {
+      "bytes": 12161,
+      "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs": {
+      "bytes": 8570,
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs": {
+      "bytes": 1001,
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs": {
+      "bytes": 2661,
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs": {
+      "bytes": 30973,
+      "sha256": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs": {
+      "bytes": 14324,
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs": {
+      "bytes": 15130,
+      "sha256": "8e0cff3a25773a1a24dbf58cec803bb2ff39216b9c3bd4e087257263226185d7"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs": {
+      "bytes": 476,
+      "sha256": "fba1eb82cbb6f5400adf283569178750ca7fb75f51a56c8bbd0cadb5abf716ea"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs": {
+      "bytes": 47764,
+      "sha256": "3172ba1b1e78d048c2eb168b02ca524b4d3979abaa6528aaebb149a8a2c3b824"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs": {
+      "bytes": 57,
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs": {
+      "bytes": 10576,
+      "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs": {
+      "bytes": 3551,
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs": {
+      "bytes": 19797,
+      "sha256": "a421e97d45168ae541e80ec6caada2475a159297b9286d47b0372b2c7f458887"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs": {
+      "bytes": 90226,
+      "sha256": "bebfdf8a3d5ec55eabc249054bfa50fd064419e03e2ad0fe915f73a7bf550bf5"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/paged.rs": {
+      "bytes": 21418,
+      "sha256": "0c5008b7a3a77e60bab665ba311d7ae5ed2db2537efd5a38f1a81b2a59aeabdb"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/physical_lifetime.rs": {
+      "bytes": 23488,
+      "sha256": "9f108c01abf845880028aab91ddd5be84eeb1e34641a75111e7aa073ea2a290f"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs": {
+      "bytes": 27876,
+      "sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/rolling.rs": {
+      "bytes": 9157,
+      "sha256": "7f2ff7f8266a8d2d7d306051bbd5e12fc039abc3f8ff5b09c1b4993fad14776d"
+    },
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs": {
+      "bytes": 36016,
+      "sha256": "379d42d6fa30cf92c1accf4f78fc253c3adfb6c28fa3bf7c0aa17fec56098b7c"
+    },
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/control.py": {
+      "bytes": 4668,
+      "sha256": "b8fb4df3dd1f5f5080b8cb1e65fbbefe46b2032f7ce6329fc209a62911c47047"
+    },
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/forecast.json": {
+      "bytes": 8768,
+      "sha256": "74b6d506d32c184d830abe8f15679c44e4d54d4650e389c51d1fd5ba0a62e1aa"
+    },
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/protocol.py": {
+      "bytes": 22369,
+      "sha256": "885f4cdd20d396893bd47ffe7d2632dd30b3a73ab8991b10c890c501af51533d"
+    },
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/README.md": {
+      "bytes": 21679,
+      "sha256": "9334dc090e51f2ed29171ec2a4c97967d81d6c8a73c4fb746c6e733338936c78"
+    },
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/pace_controls.py": {
+      "bytes": 7976,
+      "sha256": "92e97f4b84f244e4342cbb397fe7b741dcb7bdda338b153cc41b8984ed29fcbb"
+    }
+  },
+  "source_owner_manifest_sha256": "63ac3648af44bf3c37199780686900dd34082c4a4fd8ee8d4b3ffd22cd0425a8",
+  "prior_stage_freeze_sha256": "9ec7c33e31ae7a23b5c0079dccc13d3f4f2a7c1798438f57458305bfd8920252",
+  "changed_since_stage": [
+    "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/control.py",
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/forecast.json",
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/README.md",
+    "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/pace_controls.py"
+  ],
+  "unit_count": 23,
+  "actual_tests_executed": 0,
+  "unit_catalog": [
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs",
+      "function": "bounded_file_and_indirection_routes_refuse",
+      "line": 2
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs",
+      "function": "compact_refuses_damage_before_allocating",
+      "line": 759
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+      "function": "v1_bytes_and_old_parser_boundary_are_preserved",
+      "line": 558
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+      "function": "terminal_caps_and_charge_are_independent_of_live_slots",
+      "line": 563
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+      "function": "legacy_owner_cannot_acquire_new_preselection_proof",
+      "line": 568
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+      "function": "stage_handle_aliases_refuse_before_truncation",
+      "line": 576
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs",
+      "function": "cached_metadata_matches_owned_allocations_on_growth_and_failure",
+      "line": 216
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs",
+      "function": "decoder_never_uses_advertised_size",
+      "line": 237
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs",
+      "function": "typed_keys_exclude_controls_and_active_payloads",
+      "line": 246
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "function": "closed",
+      "line": 290
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "function": "schedule",
+      "line": 295
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "function": "header",
+      "line": 296
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "function": "production_builder_preserves_near_limit_index_bytes",
+      "line": 411
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "function": "caller_limit_precedes_raw_and_zstd_bodies_after_all_routes",
+      "line": 425
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "function": "constructor_reservation_evicts_before_allocating_output",
+      "line": 432
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "function": "mixed_capture_and_cold_warm_measurements_reconcile",
+      "line": 439
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "function": "paged_cache_identity_preserves_physical_instance",
+      "line": 446
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "function": "paged_four_routes_negative_duplicates_and_conflict",
+      "line": 453
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "function": "loading_indexes_evicts_before_transient_allocation",
+      "line": 465
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/paged.rs",
+      "function": "paged_exact_geometry_and_closed_keys",
+      "line": 160
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/paged.rs",
+      "function": "paged_positive_negative_boundary_and_cache",
+      "line": 165
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/paged.rs",
+      "function": "paged_touched_untouched_and_malformed_refusal",
+      "line": 172
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/paged.rs",
+      "function": "paged_maximum_keys_split_before_total_index_bound",
+      "line": 178
+    }
+  ],
+  "packing_addition_bytes": 13589,
+  "checkpoint_controls_bytes": 65460,
+  "engine_build_protocol_go": false,
+  "source_incident": "Temporary docs aggregate66000 exceeded65536 by464; corrected65460 beforefreeze; no retroactive all-timecompliance",
+  "runtime_dependencies": [
+    "Independent fresh full source review",
+    "OwnedDriver native-owned-v1 adapter with Native+retainedOwnedProcessRegistry actualchildhandle beforecallbacks; noPID-onlyfallback",
+    "Fresh fullbuild/23units/heavy/protocol budget+GO; heavy fixture onlyONCE onfinalRustsource",
+    "Paceevidence3MiBnotadmitted/current661247Bdeficit; nativeclock/platformABI/path/SHA mustreviewbeforepaceRUN"
+  ],
+  "schedule": "45s4realstreams*10*1000warm+40first, held16s/2.9ms ordinary4.5ms; maxlag100ms; publishers100accept400msslots; noreset/skip/extras",
+  "selected_roots": "Windows exactH1002/H10002F05 +CP4; Unix onlyparentapprovednative-paced-cp4/native-final lowercase40hexpin-safecomponents; absolute canonicalancestors+disposablemarker; pacefilesOUTSIDEStore"
+}

@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-032-WINDOWS-PLATFORM-PERFILE-TRANSFER",
+  "utc": "2026-10-21T02:07:56.736600+00:00",
+  "status": "SOURCE_CAP_REDISTRIBUTION_ONLY__NEW_BUDGET_SOURCE_GO_REQUIRED",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T020756Z.json",
+      "bytes": 3939,
+      "sha256": "34287b0111983302ad3b0608d819beb1aaab258fb40bb030a4e0b4a274fb1e92"
+    },
+    {
+      "file": "claim-20261021T020756Z.md",
+      "bytes": 430,
+      "sha256": "26ccc7d0379ddd75e79cc54864cff37119006462fe3e72eb1d0780590ca3b297"
+    }
+  ]
+}

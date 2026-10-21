@@ -1,0 +1,70 @@
+{
+  "kind": "native-source-review-v37",
+  "source_version": 37,
+  "review_kind": "author_self_check_not_independent",
+  "status": "SOURCE_FROZEN_PENDING_FRESH_REVIEW",
+  "source_pin": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "source_files": {
+    "native_cache_activate_v36.py": {
+      "bytes": 12287,
+      "sha256": "d941ba6dbd2b04cae872d8828fd50b74f11c0af0869555f6a430fc7d5b2908e3"
+    },
+    "native_case_map_v36.py": {
+      "bytes": 10666,
+      "sha256": "5bbb2a0d2e67b217b50fc39fc2abd1061c57b9dfc5bbd0a91414a05e70bfb7f2"
+    },
+    "native_cases_v36.py": {
+      "bytes": 38754,
+      "sha256": "31e3a9c60dfe0678c24ea3f858994c101b70d54c9b3b81ad290f020375efa037"
+    },
+    "native_facade_v36.py": {
+      "bytes": 27850,
+      "sha256": "bc52a421c0b2511a2ce1f32d63959f7708289ca1e8bf2f2750ea3fbecaf2a5bd"
+    },
+    "native_lifecycle_v36.py": {
+      "bytes": 10547,
+      "sha256": "9aad6f5a80797ce1042b90729977e15f17b644bc36cb5a9c0a2694d0d514f30e"
+    },
+    "native_role_v36.py": {
+      "bytes": 32156,
+      "sha256": "f93bf5f3d4fc02b3e2de8f9d6785b2df0cf4bfd094c7447626f5fb77353443e4"
+    },
+    "native_suite_v36.py": {
+      "bytes": 9979,
+      "sha256": "9285236be78c922e6fe2672d402917d0f848c4916485ba438006dc540281b1b5"
+    }
+  },
+  "seven_source_manifest_sha256": "fe75e714ff24b571e6094e74a7c75ccab9eb91879544dbbb420e05ec4af10e0b",
+  "parse_compile": "PASS_ALL7",
+  "candidate_imports": 0,
+  "runtime_go": false,
+  "cache_copy_go": false,
+  "fixture_build_control_runs": 0,
+  "C1_absent": true,
+  "full_facade_ready": false,
+  "case_status": {
+    "PENDING": 158
+  },
+  "review_responded_to": {
+    "review_sha256": "e802304c9f829daefe354be5132bd8a9944007fc382f3d74a7556364cd36dd06",
+    "disposition": "REMEDIATE_NO_INTEGRATE"
+  },
+  "repairs": {
+    "M36-PHASE": "Concrete cache activate(raw,sha,factory,blobs); make_phase_runtime_factory(raw,sha); isolated_cargo_phase(raw,sha,factory,blobs). No full facade constructor/SDK/prebuilt engine. Source25/whole29 and locked45 preflight before runtime factory. Explicit cache/build_no_run/list31/test31 grants.",
+    "M36-INVENTORY": "Store inventory and cache/phase traversal raise walk errors; no incomplete before/after census accepted.",
+    "M36-STDIN": "checker-stdin mode accepts only exact isolated Python argv, bounded owned input, exact payload/environment and frozen checker source grant. Native proof still precedes payload.",
+    "M36-SDK": "UNRESOLVED. Full158 NO_INTEGRATE until exact SDK/projection/version/parameter and concrete checker adapter closure is supplied and reviewed."
+  },
+  "phase_inputs_pending": [
+    "Actual released45-file/index copy manifest and host unpack forecast; RAM payload hydration from retained authenticated107 chunks",
+    "Exact runtime_modules/source closure, tool argv/environment/output grants and phase resources",
+    "Fresh independent review, real finite native controls and explicit phase GO"
+  ],
+  "operator_effect": "Provisional phase receipts only; list/no-run are not test passes; unfiltered31 runs once; original158 remain PENDING; final guard closure required.",
+  "source_budget_sha256": "ca902a83be355ab50360ae92941913aee756ea45c5619952517a295b1ca6c03b",
+  "future_SDK_bytes_held": 655360,
+  "old_v35": "Immutable negative retained locally",
+  "old_v36": "Exact131020 negative packet preserved at parent; no native duplicate",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z"
+}

@@ -1,0 +1,38 @@
+{
+  "kind": "independent-native-keeper",
+  "nonce": "9cd1f4af6f7a4f3866b1bb968ff14faf",
+  "identity": {
+    "pid_requested": 70282,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 70282,
+    "ppid": 70281,
+    "uid": 501,
+    "pgid": 70282,
+    "state": 2,
+    "start": [
+      1792531291,
+      985400
+    ]
+  },
+  "fixed_cutoff_epoch": 1792581014.0,
+  "local_deadline_monotonic": 3219754.285125625,
+  "token_received": true,
+  "state": "CLOSED_AFTER_CENSOR",
+  "reason": "RuntimeError('supervisor-registry-sample-stale')",
+  "events": [
+    {
+      "notify_parent": {
+        "pid": 70281,
+        "start": [
+          1792531291,
+          915775
+        ],
+        "signal": 30,
+        "sent": true,
+        "errno": 0
+      }
+    }
+  ]
+}

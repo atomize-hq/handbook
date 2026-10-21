@@ -1,0 +1,97 @@
+{
+  "kind": "native-guard-control-candidate",
+  "nonce": "9f62052644eb49fd88fced72435a8d9a",
+  "source_sha256": "f4f8219d32ee764f0fdfcc074743c7d68206456ba756c268089a7ca0beb7b45a",
+  "supervisor": {
+    "pid_requested": 83772,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 83772,
+    "ppid": 54542,
+    "uid": 501,
+    "pgid": 83772,
+    "state": 2,
+    "start": [
+      1792528226,
+      226524
+    ]
+  },
+  "started_epoch": 1792528226.450469,
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "seconds_cap": 3.0,
+  "global_enumeration": false,
+  "censor": null,
+  "closure": "PROVEN_EMPTY",
+  "samples": 15,
+  "peak_group_rss": 38551552,
+  "peak_supervisor_rss": 31014912,
+  "missing_live_rss": [],
+  "transient_exited_members": [],
+  "termination": [],
+  "sample_interval_max_s": 0.03855662513524294,
+  "late_intervals": 0,
+  "per_process_cap": 2147483648,
+  "group_cap": 2147483648,
+  "supervisor_cap": 805306368,
+  "aggregate_cap": 3221225472,
+  "command": [
+    "python3",
+    "-B",
+    "-c",
+    "import time; time.sleep(.4)"
+  ],
+  "source_pin": "PENDING_NO_ENGINE_RELEASE",
+  "token_acquired": 1792528226.4530282,
+  "prelaunch_census": {
+    "logical_bytes": 325399,
+    "allocated_bytes": 372736,
+    "files": 20
+  },
+  "prelaunch_free_bytes": 167657111552,
+  "anchor": {
+    "pid_requested": 83811,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 83811,
+    "ppid": 83772,
+    "uid": 501,
+    "pgid": 83811,
+    "state": 2,
+    "start": [
+      1792528226,
+      454392
+    ]
+  },
+  "closure_observations": [
+    {
+      "pgid_requested": 83811,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216677268012916
+    },
+    {
+      "pgid_requested": 83811,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216677321472625
+    }
+  ],
+  "anchor_exit": 0,
+  "watchdog_exit_reaped": true,
+  "worker_exit": 0,
+  "finished_epoch": 1792528227.052453,
+  "sample_span_s": 0.44027512473985553,
+  "effective_samples_hz": 34.06960592848169,
+  "final_census": {
+    "logical_bytes": 326443,
+    "allocated_bytes": 376832,
+    "files": 23
+  },
+  "qualification": "CONTROL_CANDIDATE_ONLY_NO_ENGINE_RELEASE"
+}

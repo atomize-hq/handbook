@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-019-MATRIX-ADMIN-2MiB",
+  "utc": "2026-10-20T23:24:37.533858+00:00",
+  "status": "RESERVATION_APPLIED__MATRIX_GIT_HELD_UNTIL_NEW_IMMUTABLE_018_019_BUDGET_REGISTERED",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261020T232437Z.json",
+      "bytes": 7972,
+      "sha256": "04e70d78bc8bbe25c9542ed1718c2416680186b9c875e32ed572bde869117a5c"
+    },
+    {
+      "file": "claim-20261020T232437Z.md",
+      "bytes": 1677,
+      "sha256": "d9ffe4d9bc6a704d9252f6e5f0f4508b8848f92806105f01f43dbf30a22b8c68"
+    }
+  ]
+}

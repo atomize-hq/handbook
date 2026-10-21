@@ -1,11 +1,9 @@
-"""SOURCE ONLY shared-runtime-contracts-v1 under claim042 (one80KiB file).
-Stdlib-only module load: no private import/native/thread/write/engine action.
-Direct owned API: reader_capacity, derive_whole_forecast, make_runner,
-seal_final_provisional, sealed_phase_evidence. 035 owns ALL typed formulas and
-encode_private_record. Windows-only frozen1600-history; native158unchanged.
-Native source-bound PORT_METHODS supplies primitives, never whole-phase PASS.
+"""Source-only R3 runtime under claim046-v2 (one88KiB file).
+035 owns formulas/encoding; native producers own wire/proof/index records.
+Import performs no private import, native calls, threads, or writes.
 """
 
+import ast
 import copy
 import hashlib
 import importlib.util
@@ -34,7 +32,7 @@ ARTIFACTS = (
     "runtime_source", "profile_source", "profile_review", "ports_source",
     "ports_review", "paced_source", "paced_review", "guard_source",
     "guard_schema", "guard_review", "clock_source", "clock_review",
-    "finalizer_source", "finalizer_review", "history_source", "budget", "phase_go",
+    "finalizer_source", "finalizer_review", "history_source", "source_admission", "budget", "phase_go",
 )
 BINDING_KEYS = (
     "version", "platform", "history", "runtime_go", "paced_schema",
@@ -51,12 +49,12 @@ PORT_METHODS = (
     "read_owned", "write_once", "verify_ready", "clock_sample", "enter_phase",
     "leave_phase", "set_origin", "observe_started", "current_call_observation",
     "phase_call_observations", "abort_phase", "guard_prefix", "donor_authority",
-    "seal_context", "append_phase_index", "read_reference", "case_call_pairs",
+    "append_phase_index", "read_reference", "case_call_pairs", "seal_case_index", "state_reference",
 )
 FULL_FORECAST_KEYS = (
     "source_pin", "capsule_sha256", "counts", "F05_bytes", "F05_files",
     "protocol_bytes", "protocol_files", "evidence_bytes", "evidence_files",
-    "expanded_trace_sha256", "all_sink_membership_sha256", "profile_sha256",
+    "expanded_trace_sha256", "all_sink_membership_sha256", "profile_sha256", "profile_catalogue_sha256",
 )
 _PROFILES = {}
 _HISTORY = {}
@@ -153,6 +151,88 @@ def reference(value, maximum=64 * MIB):
     return copy.deepcopy(value)
 
 
+def validate_source_admission(runtime_bindings):
+    """Validate source-only 046 metadata. Native parent authority is separate."""
+    need(type(runtime_bindings) is dict and type(runtime_bindings.get("history")) is dict
+         and "source_admission" in runtime_bindings, "source-admission-bindings")
+    ref = copy.deepcopy(runtime_bindings["source_admission"])
+    raw = artifact(ref, 16384)
+    data = control_json(raw, 16384)  # Hash and decode the SAME bounded buffer.
+    need(type(data) is dict, "source-admission-object")
+    need(data.get("kind") in ("private-qualification-R3-source-budget-046-v2",
+                              "private-qualification-R3-source-budget-052-v3")
+         and data.get("source_only") is True and data.get("runtime_go") is False
+         and data.get("pure_memory_parse_compile_go") is True
+         and data.get("engine_commit_fixed") == "0628322e4b48e0efad19cdc32238a622d4aaa7a8"
+         and data["engine_commit_fixed"] == runtime_bindings["history"]["source_pin"]
+         and data.get("functional_hard_cutoff") == "2026-10-21T11:10:14Z"
+         and data.get("closeout_hard_cutoff") == "2026-10-21T13:10:14Z"
+         and data.get("claim046_sha256") == "6bd67f146b344cdb8bd501a261df795e946a49b557d5a5d5227665c8e8e581ba"
+         and data.get("semantic_baseline035_sha256") == "dd1b8ebfb2b35e32fde2873da2d8e5a4becb77c49e1f27a9649ac63ffa97c785", "actual-source-only-contract")
+    if data["kind"].endswith("052-v3"):
+        need(data.get("claim052_sha256") == "404d8959500bff1409ce8298279ca330be8f5d35b50914dacefd99872d43bccd", "claim052")
+    names = {
+        "LONG": ("long_lane.py", "legacy_archive_restore.py"),
+        "HISTORY": ("history_lane.py",),
+        "CONTROL": ("fake_controls.py", "fake_cases.json", "lane_config.example.json",
+                    "source-manifest.json", "README.md"),
+        "PROFILES": ("long_source_profiles.py",), "FINALIZER": ("phase_finalizer.py",)}
+    closed(data.get("groups"), names, "046-ten-source-members")
+    owners = closed(data.get("owners"), ("LONG_PROFILES_FINALIZER", "HISTORY"), "046-owners")
+    need(owners == {"LONG_PROFILES_FINALIZER": "01a15b51-a50b-7930-8633-b42694240252",
+                    "HISTORY": "01a15bcc-6fb9-7e63-b935-a60d25d9390a"}, "fixed-source-owners")
+    total, files = 0, 0
+    for group, members in names.items():
+        entry = closed(data["groups"][group], ("bytes", "files", "paths"), "046-group")
+        closed(entry["paths"], members, "046-paths")
+        need(entry["files"] == len(members) and type(entry["files"]) is int
+             and all(integer(n, 1, 294912) for n in entry["paths"].values())
+             and integer(entry["bytes"], 1, 294912)
+             and entry["bytes"] <= sum(entry["paths"].values()), "046-closed-path-caps")
+        total += entry["bytes"]
+        files += entry["files"]
+    if total in (303104, 309248, 313344):
+        need(data["kind"].endswith("052-v3")
+             and data.get("claim059_sha256") == "96043645ad042150623ed0141d9ffe9ad8c90df67e9cce88daba3c0a4be139bd", "claim059")
+    if total in (309248, 313344):
+        need(data.get("claim065_sha256") == "d2435f10a115669217ded30296bbd51083b4ace38efeaedb8c763781b236fd9e", "claim065")
+    if total == 313344:
+        need(data.get("claim069_sha256") == "3ca712ec1c824741a5b83aad2723206de7a989b28a84c918bc0a9283baffdea7", "claim069")
+    need(total in (294912, 303104, 309248, 313344) and total == data.get("bytes") == data.get("max_bytes")
+         and files == data.get("files") == data.get("max_files") == 10
+         and type(data.get("source_root")) is str and Path(data["source_root"]).is_absolute()
+         and tuple(Path(data["source_root"]).parts[-6:]) == (
+             "handbook", "docs", "research", "file-native-online-maintenance-2026-10-20",
+             "execution", "qualification-lanes"), "046-authoring-allocation")
+    # Authoring root is not compared with a separately admitted publication path.
+    need(runtime_bindings["history"].get("source_budget_sha256") == ref["sha256"],
+         "046-release-source-budget-link")
+    return ref
+
+
+def _literal(spec, name, api):
+    raw = artifact(spec)
+    tree = ast.parse(raw)
+    values = [n.value for n in tree.body if isinstance(n, ast.Assign)
+              and any(isinstance(t, ast.Name) and t.id == name for t in n.targets)]
+    need(len(values) == 1, "one-source-owned-literal:" + name)
+    value = ast.literal_eval(values[0])
+    need(type(value) is dict and value.get("api") == api, "canonical-literal:" + name)
+    return value
+
+
+def _wire(bindings):
+    spec = bindings["profile_config"]["data"]["capture"]["source_bindings"]["evidence"]
+    need(Path(spec["path"]).name == "windows_evidence.py"
+         and Path(spec["path"]).resolve().parent
+         == Path(bindings["ports_source"]["path"]).resolve().parent, "canonical-native-producer")
+    return _literal(spec, "WIRE_CONTRACT", "windows-capture-v2-r3")
+
+
+def _native_fields(bindings, kind):
+    return _wire(bindings)["record_schemas"][kind]["object"]
+
+
 def _bindings(value, execution=False):
     closed(value, BINDING_KEYS, "runtime-bindings")
     need(value["version"] == 1 and type(value["version"]) is int
@@ -171,20 +251,21 @@ def _bindings(value, execution=False):
                 "oracle_sha256", "oracle_review_sha256", "terminal_api_sha256",
                 "terminal_review_sha256", "qpc_sha256", "budget_sha256", "phase_go_sha256",
                 "reader_probe_sha256", "growth_capsule_sha256", "postexit_finalizer_sha256",
-                "clock_handshake_sha256", "history_source_sha256"):
+                "clock_handshake_sha256", "history_source_sha256", "source_budget_sha256"):
         need(digest(h.get(key)), "history-binding:" + key)
     links = {
         "runner_sha256": "runtime_source", "reader_probe_sha256": "paced_source",
         "growth_capsule_sha256": "profile_source", "postexit_finalizer_sha256": "finalizer_source",
         "clock_handshake_sha256": "clock_source", "budget_sha256": "budget",
         "phase_go_sha256": "phase_go", "qpc_sha256": "guard_source",
-        "history_source_sha256": "history_source",
+        "history_source_sha256": "history_source", "source_budget_sha256": "source_admission",
     }
     need(all(h[key] == value[name]["sha256"] for key, name in links.items()), "binding-links")
     need(value["guard_source"]["sha256"] != HISTORICAL_GUARD, "historical-guard-is-not-031")
-    guard_schema = control_json(artifact(value["guard_schema"]), 2 * MIB)
-    need(guard_schema.get("revision") == "031" and guard_schema.get("source_sha256")
-         == value["guard_source"]["sha256"], "explicit-reviewed-guard031-schema")
+    guard_schema = _literal(value["guard_schema"], "GUARD_WIRE_CONTRACT", "bounded-windows-guard-wire-r3")
+    need(guard_schema.get("version") == 1
+         and guard_schema.get("qpc_schema") == "bounded-windows-job-qpc-jsonl-r3",
+         "actual-source-owned-guard-R3-schema")
     catalog = value["case_catalog"]
     closed(catalog, ("source", "ids", "history_case"), "frozen-case-catalog")
     artifact(catalog["source"])
@@ -193,6 +274,8 @@ def _bindings(value, execution=False):
          and catalog["history_case"] == "H1k-H10k-three-cycles-1and4"
          and catalog["history_case"] in catalog["ids"], "complete-Windows166-case-map")
     need(type(value["profile_config"]) is dict, "closed-profile-data-required")
+    validate_source_admission(value)
+    _wire(value)
     if execution:
         need(value["runtime_go"] is True and h.get("runtime_go") is True
              and h.get("source_review") is True and h.get("terminal_review") is True
@@ -205,14 +288,14 @@ def _bindings(value, execution=False):
 def _profiles(bindings):
     closed(bindings, BINDING_KEYS, "profile-binding")
     spec = bindings["profile_source"]
-    artifact(spec)
+    raw = artifact(spec)
     with _PROFILE_LOCK:
         key = spec["sha256"]
         if key not in _PROFILES:
             loader = importlib.util.spec_from_file_location("owned_profiles_" + key, spec["path"])
             need(loader is not None and loader.loader is not None, "035-profile-loader")
             module = importlib.util.module_from_spec(loader)
-            loader.loader.exec_module(module)
+            exec(compile(raw, spec["path"], "exec"), module.__dict__)
             need(Path(module.__file__).resolve() == Path(spec["path"]).resolve(),
                  "035-profile-module-path")
             for name in ("encode_private_record", "fixed_reader_capacity",
@@ -225,7 +308,7 @@ def _profiles(bindings):
 
 def _history(bindings):
     spec = bindings["history_source"]
-    artifact(spec)
+    raw = artifact(spec)
     need(Path(spec["path"]).name == "history_lane.py", "owned-027-history-validator")
     with _PROFILE_LOCK:
         key = spec["sha256"]
@@ -233,7 +316,7 @@ def _history(bindings):
             loader = importlib.util.spec_from_file_location("owned_history_" + key, spec["path"])
             need(loader is not None and loader.loader is not None, "027-validator-loader")
             module = importlib.util.module_from_spec(loader)
-            loader.loader.exec_module(module)
+            exec(compile(raw, spec["path"], "exec"), module.__dict__)
             need(callable(getattr(module, "validate_phase_evidence", None)), "027-validator-export")
             artifact(spec)
             _HISTORY[key] = module
@@ -328,12 +411,12 @@ def derive_whole_forecast(plan, runtime_bindings, current):
          and model["counts"] == plan["finite_command_bounds"], "source-derived-schedule-counts")
     for name in ("F05_bytes", "F05_files", "protocol_bytes", "protocol_files", "evidence_bytes", "evidence_files"):
         need(integer(model[name]), "whole-model:" + name)
-    for name in ("expanded_trace_sha256", "all_sink_membership_sha256", "profile_sha256"):
+    for name in ("expanded_trace_sha256", "all_sink_membership_sha256", "profile_sha256", "profile_catalogue_sha256"):
         need(digest(model[name]), "whole-model-proof:" + name)
     need(model["F05_bytes"] <= 1073741824 and model["F05_files"] <= 400000,
          "whole-F05-admission")
     artifact(b["profile_source"])
-    return copy.deepcopy(model)
+    return {k: copy.deepcopy(model[k]) for k in FULL_FORECAST_KEYS}
 
 
 def _observation(value, b, root, action=None):
@@ -405,6 +488,10 @@ class HistoryRunner:
         need(type(auth) is dict and auth.get("go") is True
              and auth.get("final_pin") == self.b["history"]["source_pin"]
              and digest(auth.get("receipt_sha256")), "positive-host-authorization-before-properties")
+        admission = validate_source_admission(self.b)
+        need(auth.get("source_admission") == admission == self.b["source_admission"]
+             and auth.get("source_freeze") == self.b["history"]["source_freeze"],
+             "actual-parent-SourceGrant-before-Harness")
         self.h = host.harness
         need(self.h.final_pin == self.b["history"]["source_pin"]
              and self.h.driver.binary_sha256 == self.b["history"]["binary_sha256"], "same-Harness-image")
@@ -434,7 +521,7 @@ class HistoryRunner:
             "clock_sha256": self.b["clock_source"]["sha256"],
             "paced_sha256": self.b["paced_source"]["sha256"],
             "capture_schema": CAPTURE, "native_meta_schema": "native-call-meta-v2",
-            "case_observations_scope": "case-open-through-close",
+            "case_observations_scope": "complete-case-through-closure",
         }
         need(result == expected, "native-port-exact-closure")
         return result
@@ -478,13 +565,15 @@ class HistoryRunner:
             need(data.get("case_index_scope") == "closed-case-all-engine-and-checker-calls"
                  and integer(data.get("case_index_max_calls"), phase["max_offers"] + 40),
                  "source-derived-complete-case-index-geometry")
-            for k in ("origin_record_bytes", "slot_record_bytes", "call_index_record_bytes", "closure_record_bytes"):
+            for k in ("origin_record_bytes", "slot_record_bytes", "call_index_record_bytes", "page_record_bytes",
+                      "final_body_record_bytes", "closure_record_bytes"):
                 need(integer(data[k], 1, MAX_PHASE), "source-record-width:"+k)
         for case in self._initial_cases(plan):
             data = _profiles(self.b).initial_case_profile(plan, case["id"], self.b, current)
             need(data.get("complete") is True and data.get("source_pin") == self.h.final_pin
                  and integer(data.get("case_index_max_calls"), 1)
-                 and integer(data.get("call_index_record_bytes"), 1, MAX_PHASE),
+                 and integer(data.get("call_index_record_bytes"), 1, MAX_PHASE)
+                 and integer(data.get("page_record_bytes"), 1, MAX_PHASE),
                  "source-derived-initial-case-index")
         trace = _profiles(self.b).global_trace_profile(plan, self.b, current)
         need(trace.get("complete") is True and trace.get("case_count") == 22
@@ -581,12 +670,13 @@ class HistoryRunner:
                  "no_semantic_change": h.selected(root) == donor["selected"],
                  "receipt_sha256": self._last(root, "lifecycle")["raw_ref"]["sha256"]}
         need(ready["initial_active_reservations"] == 0, "initial-v2-active-empty")
+        initial_profile = _profiles(self.b).initial_case_profile(self.plan, "lookup-" + donor["id"], self.b, self.current)
         raw = self.host.record("history-initial-lookup", {
             "representations": [{"format": r["format"],
                 "fresh": [{k: v[k] for k in ("category", "id", "sample", "raw_sha256")} for v in r["fresh"]],
                 "warm": [{k: v[k] for k in ("category", "id", "raw_sha256")} for v in r["warm"]]}
                 for r in representations], "oracle_refs": [r["full_oracle_sha256"] for r in representations], "ready": ready},
-                               category="evidence", max_bytes=MAX_PHASE)
+                               category="evidence", max_bytes=initial_profile["lookup_record_bytes"])
         return {"donor": donor["id"], "actual_H": donor["actual_H"],
                 "selected_before": donor["selected"], "selected_after": h.selected(root),
                 "source_pin": h.final_pin, "binary_sha256": h.driver.binary_sha256,
@@ -656,18 +746,8 @@ class HistoryRunner:
         self._execute()
         phase = next((c for c in self._initial_cases() if c["id"] == case_id), None)
         need(phase is not None and case_id not in self.closed_phases, "one-authenticated-initial-case")
-        context = self.ports.seal_context(case_id)
-        need(context.get("case_closed") is True
-             and context.get("case_id") == self.b["case_catalog"]["history_case"]
-             and context.get("scope_id") == case_id and digest(context.get("case_scope"), 32)
-             and integer(context.get("case_start_ns"), 1)
-             and integer(context.get("case_end_ns"), context["case_start_ns"], time.perf_counter_ns()),
-             "actual-completed-initial-case")
-        for key, kind in (("owned_drain_ref", "owned-drain"), ("checkpoint_ref", "checkpoint"),
-                          ("case_closure_ref", "case-close")):
-            _case_attachment(self.ports, context[key], context, self.b, phase, kind)
         self.closed_phases[case_id] = {"state": "sealing-initial"}
-        ref = _case_call_index(self, phase, context)
+        ref, context = _case_call_index(self, phase)
         self.closed_phases[case_id] = {"index": ref}
         return ref
 
@@ -714,6 +794,7 @@ class Phase:
         self.origin, self.namespace, self.anchor_ref = None, None, None
         self.finished, self.closed, self.publishers_done = False, False, False
         self.physical_states = []
+        self.case_scope = None
         self.start_ns, self.end_ns = 0, 0
         self._finish_value = None
 
@@ -976,6 +1057,13 @@ class Phase:
                   and r["input"].get("request", {}).get("request") in names]
         need(len(offers) == self.phase["publishers"] and len({r["token"] for r in offers}) == len(offers),
              "all-actual-native-offer-rows")
+        scopes = {r["case_scope"] for r in offers}
+        need(len(scopes) == 1 and all(r["scope_id"] == self.phase["id"]
+             and r["case_id"] == self.b["case_catalog"]["history_case"] for r in offers),
+             "actual-native-offer-scope")
+        scope = next(iter(scopes))
+        need(self.case_scope in (None, scope), "unchanged-phase-native-scope")
+        self.case_scope = scope
         normalized = []
         for request in requests:
             row = next(r for r in offers if r["input"]["request"] == request)
@@ -1010,11 +1098,39 @@ class Phase:
         })
         self.host.record("history-slot", _encode({
             "phase": self.phase["id"], "slot": self.slots[-1],
-            "state": progress.get("state")}, self.b), category="evidence",
+            "state": self._state_ref(progress["state"]) if self.phase["online"] else None}, self.b), category="evidence",
             max_bytes=self.profile["slot_record_bytes"])
         if number == 99:
             self.publishers_done = True
         return {"number": number, "offered_ns": offered, "done_ns": done}
+
+    def _state_ref(self, state):
+        token = self.ports.state_reference(copy.deepcopy(state))
+        closed(token, _native_fields(self.b, "physical_state_ref"), "actual-physical-state-ref")
+        need(token["schema"] == "physical-state-ref-v1"
+             and token["case_id"] == self.b["case_catalog"]["history_case"]
+             and token["scope_id"] == self.phase["id"] and token["case_scope"] == self.case_scope
+             and token["state_sha256"] == _value_digest(state, self.b), "exact-native-state-projection")
+        note = _read_record(self.ports, token["record_ref"], 8 * MIB)
+        closed(note, _native_fields(self.b, "sideband"), "actual-state-sideband")
+        need(all(note[k] == token[k] for k in ("run", "case_id", "scope_id", "case_scope"))
+             and note["schema"] == "capture-sideband-v1"
+             and note["sideband_kind"] == "selected-state"
+             and note["payload_sha256"] == _value_digest(note["payload"], self.b),
+             "same-native-state-envelope")
+        payload = note["payload"]
+        need(payload.get("kind") == "selected-state" and payload.get("root") == self.phase["root"]
+             and payload.get("final_pin") == self.h.final_pin and payload.get("state") == state
+             and len(_encode(payload, self.b))-1 <= 32768,
+             "lossless-already-emitted-state")
+        header = _read_record(self.ports, token["source_proof_ref"])
+        closed(header, _native_fields(self.b, "stream"), "actual-state-source-header")
+        need(header["run"] == token["run"] and header["source_pin"] == self.h.final_pin
+             and header["binary_sha"] == self.b["history"]["binary_sha256"]
+             and header["guard_sha"] == self.b["guard_source"]["sha256"]
+             and header["profile_sha"] == self.r.model["profile_catalogue_sha256"],
+             "state-producer-source-run")
+        return token
 
     def finish(self):
         need(not self.finished and len(self.slots) == 100, "exact100-slots-before-finish")
@@ -1164,92 +1280,137 @@ def _read_record(ports, ref, maximum=MAX_PHASE):
     return control_json(raw, maximum)
 
 
-def _case_attachment(ports, ref, context, b, phase, kind):
-    proof = _read_record(ports, ref)
-    need(all(proof.get(k) == v for k, v in {
-        "case_id": context["case_id"], "outer_run_id": context["outer_run_id"],
-        "source_pin": b["history"]["source_pin"], "binary_sha256": b["history"]["binary_sha256"],
-        "budget_sha256": b["history"]["budget_sha256"], "clock_domain": context["clock_domain"]
-    }.items()), "actual-scoped-" + kind)
-    need(integer(proof.get("start_ns"), context["case_start_ns"], context["case_end_ns"])
-         and integer(proof.get("end_ns"), proof["start_ns"], context["case_end_ns"]),
-         "actual-attachment-window:" + kind)
-    if kind != "owned-drain":
-        need(proof.get("owned_drain_sha256") == context["owned_drain_ref"]["sha256"],
-             "actual-attachment-drain:" + kind)
+def _native_record(ports, ref, b, kind, maximum=8 * MIB):
+    value = _read_record(ports, ref, maximum)
+    fields = _native_fields(b, kind)
+    closed(value, fields, "canonical-native-" + kind)
+    for name, node in fields.items():
+        if "literal" in node:
+            need(value[name] == node["literal"], "native-record-tag:" + kind)
+    return value
+
+
+def _case_attachment(ports, ref, context, b, kind):
+    proof = _native_record(ports, ref, b, "case_proof")
+    need(proof["kind"] == kind and all(proof[k] == context[k] for k in
+         ("run", "source_pin", "binary_sha256", "budget_sha256", "profile_catalogue_sha256",
+          "case_id", "scope_id", "case_scope", "root")), "same-native-case-proof:" + kind)
+    need(integer(proof["start_ns"], context["start_ns"], context["end_ns"])
+         and integer(proof["end_ns"], proof["start_ns"], context["end_ns"]),
+         "actual-native-proof-window:" + kind)
+    bridge = _native_record(ports, proof["clock_bridge_ref"], b, "bridge")
+    need(bridge["run"] == context["run"] and integer(bridge["frequency"], 1)
+         and integer(bridge["qpc_before"], 1)
+         and integer(bridge["qpc_after"], bridge["qpc_before"])
+         and integer(bridge["perf_ns"], 1), "actual-flat-native-clock-proof")
+    payload = proof["payload"]
+    contract = _literal(b["ports_source"], "PROOF_PAYLOAD_CONTRACT", "windows-proof-payload-r3")
+    spec = contract["kinds"][kind]
+    closed(payload, spec["fields"], "actual-native-proof-payload:" + kind)
+    need(len(_encode(payload, b))-1 <= spec["max_bytes"] and payload.get("failures", []) == [],
+         "successful-bounded-native-case-observation")
+    required = {"owned-drain": ("children_empty", "callbacks_joined"),
+                "checkpoint": ("go", "no_other_semantic_writer"),
+                "case-close": ("processes_closed", "handles_closed", "python_callbacks_joined")}[kind]
+    need(all(payload.get(k) is True for k in required), "positive-native-proof-payload:" + kind)
     if kind == "owned-drain":
-        need(proof.get("children_empty") is True and proof.get("callbacks_joined") is True
-             and proof.get("scope") == "owned-children-IO-handles", "actual-owned-drain")
-    elif kind == "checkpoint":
-        need(proof.get("go") is True and proof.get("no_other_semantic_writer") is True,
-             "actual-scoped-checkpoint")
-    else:
-        need(proof.get("processes_closed") is True and proof.get("handles_closed") is True
-             and proof.get("python_callbacks_joined") is True, "actual-case-close")
+        polls = payload["owned_members_polls"]
+        need(payload["scope"] == "owned-children-IO-handles" and type(polls) is list
+             and len(polls) == 2 and polls[0]["observed_ns"] < polls[1]["observed_ns"],
+             "two-actual-owned-member-observations")
+        for row in polls:
+            closed(row, spec["poll_fields"], "actual-owned-member-poll")
+            need(row["owned_children"] == [] and integer(row["observed_ns"], context["start_ns"], context["end_ns"])
+                 and type(row["members"]) is list and all(integer(n, 1, (1<<32)-1) for n in row["members"]),
+                 "actual-empty-owned-children")
+    elif kind == "case-close":
+        need(all(payload[k] == context[k] for k in ("case_id", "scope_id", "case_scope", "root"))
+             and integer(payload["closed_ns"], context["start_ns"], proof["end_ns"]),
+             "actual-parent-case-helper-scope-close")
     return proof
 
 
-def _case_call_index(owner, phase, context, lease=None):
+def _case_call_index(owner, phase, lease=None):
     ports, b = owner.ports, owner.b
-    rows = ports.case_call_pairs(phase["id"])
-    need(type(rows) is list and rows, "complete-closed-case-observations")
     profile = lease.profile if lease is not None else _profiles(b).initial_case_profile(
         owner.plan, phase["id"], b, owner.current)
-    readers = lease.readers if lease is not None else []
-    need(len(rows) <= profile["case_index_max_calls"], "source-derived-complete-case-call-bound")
-    calls, tokens = [], set()
-    previous = -1
-    for row in sorted(rows, key=lambda x: x["raw_ref"]["begin"]):
-        closed(row, ("raw_ref", "meta_ref"), "complete-case-call-pair")
-        raw, meta_ref = reference(row["raw_ref"]), reference(row["meta_ref"])
-        need(raw.get("schema") == CAPTURE and raw["run"] == context["outer_run_id"]
-             and raw["call"] not in tokens
-             and raw["begin"] > previous,
-             "one-ordered-case-native-capture")
-        # Native capture decoding belongs to the reviewed platform/finalizer.
-        # Read the metadata through its actual ref, without copying native payloads.
-        meta = _read_record(ports, meta_ref)
-        need(meta.get("schema") == "native-call-meta-v2" and meta.get("raw_ref") == raw
-             and meta.get("case_id") == context["case_id"] and meta.get("scope_id") == context["scope_id"]
-             and meta.get("case_scope") == context["case_scope"], "actual-case-native-meta")
-        start, end = meta.get("process_started_ns"), meta.get("process_done_ns")
-        need(integer(start, context["case_start_ns"], context["case_end_ns"])
-             and integer(end, start, context["case_end_ns"])
-             and integer(meta.get("spawn_total_ns"), end-start), "actual-case-native-clock-window")
-        previous = raw["begin"]
-        need(integer(meta.get("qpc_frequency"), 1), "actual-native-clock-frequency")
-        for key in ("clock_bridge_ref", "closure_ref"):
-            reference(meta[key])
-        tokens.add(raw["call"])
-        calls.append({"raw_ref": raw, "meta_ref": meta_ref})
-    need(all(r["raw_ref"]["call"] in tokens for r in readers),
-         "all-forty-reader-calls-in-closed-case")
-    body = {
-        "schema": "history-native-case-index-v1", "phase_id": phase["id"],
-        "outer_run_id": context["outer_run_id"], "source_pin": b["history"]["source_pin"],
-        "binary_sha256": b["history"]["binary_sha256"], "budget_sha256": b["history"]["budget_sha256"],
-        "case_start_ns": context["case_start_ns"], "case_end_ns": context["case_end_ns"],
-        "case_id": context["case_id"], "scope_id": context["scope_id"],
-        "case_scope": context["case_scope"], "call_count": len(calls),
-        "calls": calls, "readers": copy.deepcopy(readers),
-        "ready_refs": [reference(lease.markers[i]["ref"]) for i in range(4)] if lease else [],
-        "origin_ref": reference(lease.anchor_ref) if lease else None,
-        "owned_closure_ref": reference(context["owned_drain_ref"]),
-        "checkpoint_ref": reference(context["checkpoint_ref"]),
-        "case_closure_ref": reference(context["case_closure_ref"]),
-    }
-    raw = _encode(body, b)
-    need(len(raw) <= profile["call_index_record_bytes"], "035-complete-case-index-width")
-    ref = reference(owner.host.record("history-native-case-index-" + phase["id"], raw,
-        category="evidence", max_bytes=profile["call_index_record_bytes"]), MAX_PHASE)
-    need(ref["bytes"] == len(raw) and ref["sha256"] == sha(raw), "actual-completed-case-index")
-    need(_read_record(ports, ref) == body, "case-index-same-buffer-reread")
+    ready = [reference(lease.markers[i]["ref"]) for i in range(4)] if lease else []
+    origin = reference(lease.anchor_ref) if lease else None
+    # The native producer owns all page/index/proof bytes; this consumer never forges them.
+    ref = reference(ports.seal_case_index(phase["id"], copy.deepcopy(ready), copy.deepcopy(origin)))
+    context = _native_record(ports, ref, b, "case_index", profile["call_index_record_bytes"])
+    need(context["source_pin"] == b["history"]["source_pin"]
+         and context["binary_sha256"] == b["history"]["binary_sha256"]
+         and context["budget_sha256"] == b["history"]["budget_sha256"]
+         and context["profile_catalogue_sha256"] == owner.model["profile_catalogue_sha256"]
+         and context["case_id"] == b["case_catalog"]["history_case"]
+         and context["scope_id"] == phase["id"] and digest(context["case_scope"], 32)
+         and context["root"] == phase["root"] and digest(context["run"], 32)
+         and integer(context["start_ns"], 1)
+         and integer(context["end_ns"], context["start_ns"], time.perf_counter_ns()),
+         "actual-complete-native-case-index")
+    need(integer(context["total_calls"], 1, profile["case_index_max_calls"])
+         and type(context["pages"]) is list and 1 <= len(context["pages"]) <= 1024,
+         "source-derived-native-case-pages")
+    need(context["ready_refs"] == ready and context["origin_ref"] == origin,
+         "actual-four-ready-and-anchor-references")
+    if lease is not None:
+        need(context["start_ns"] <= lease.start_ns <= lease.end_ns <= context["end_ns"]
+             and context["case_scope"] == lease.case_scope, "native-case-encloses-actual-reader-lease")
+    for key, kind in (("owned_drain_ref", "owned-drain"), ("checkpoint_ref", "checkpoint"),
+                      ("case_closure_ref", "case-close")):
+        _case_attachment(ports, context[key], context, b, kind)
+    tokens, prior, count = set(), -1, 0
+    for number, page_ref in enumerate(context["pages"]):
+        page = _native_record(ports, page_ref, b, "case_index_page", profile["page_record_bytes"])
+        need(page["ordinal"] == number and page["first_call"] == count
+             and all(page[k] == context[k] for k in ("run", "case_id", "scope_id", "case_scope"))
+             and type(page["calls"]) is list and 1 <= len(page["calls"]) <= 128,
+             "ordered-canonical-native-case-page")
+        for pair in page["calls"]:
+            closed(pair, ("raw_ref", "meta_ref"), "native-case-call-pair")
+            raw = reference(pair["raw_ref"])
+            meta = _native_record(ports, pair["meta_ref"], b, "native_meta")
+            need(raw.get("schema") == CAPTURE and raw["run"] == context["run"]
+                 and raw["call"] not in tokens and raw["begin"] > prior
+                 and meta["raw_ref"] == raw and meta["call"] == raw["call"]
+                 and all(meta[k] == context[k] for k in ("run", "case_id", "scope_id", "case_scope", "source_pin")),
+                 "native-case-call-meta-membership")
+            need(integer(meta["process_started_ns"], context["start_ns"], context["end_ns"])
+                 and integer(meta["process_done_ns"], meta["process_started_ns"], context["end_ns"])
+                 and integer(meta["spawn_total_ns"], meta["process_done_ns"]-meta["process_started_ns"]),
+                 "actual-native-case-call-timing")
+            header = _native_record(ports, meta["source_proof_ref"], b, "stream")
+            start = _native_record(ports, meta["image_proof_ref"], b, "start")
+            end = _native_record(ports, meta["closure_ref"], b, "end")
+            source_ref = reference(meta["source_proof_ref"])
+            need(source_ref["path"] == raw["path"] and source_ref.get("offset", 0) == 0,
+                 "actual-same-tape-stream-header")
+            for key in ("image_proof_ref", "closure_ref"):
+                proof_ref = reference(meta[key])
+                need(proof_ref["path"] == raw["path"] and proof_ref.get("offset", 0) >= raw["begin"]
+                     and proof_ref.get("offset", 0) + proof_ref["bytes"] <= raw["end"],
+                     "actual-in-call-native-proof-range")
+            need(header["run"] == context["run"] and header["source_pin"] == context["source_pin"]
+                 and header["profile_sha"] == context["profile_catalogue_sha256"]
+                 and start["call"] == end["call"] == raw["call"]
+                 and meta["identity"] == {k: start[k] for k in ("pid", "creation", "executable_sha256")}
+                 and meta["binary_sha256"] == start["executable_sha256"]
+                 and integer(start["qpc"], 1) and integer(end["qpc_end"], start["qpc"])
+                 and integer(start["seq"], 1) and integer(end["seq"], start["seq"]+1)
+                 and end["violations"] == [] and all(end[k] is True for k in
+                 ("input_complete", "out_eof", "err_eof", "native_closed", "io_closed", "callbacks_joined")),
+                 "actual-stream-START-END-reference-domains")
+            tokens.add(raw["call"]);prior = raw["begin"];count += 1
+    need(count == context["total_calls"], "complete-canonical-native-case-count")
+    if lease:
+        need(all(r["raw_ref"]["call"] in tokens for r in lease.readers), "all-forty-readers-in-native-index")
     owner.case_indices[phase["id"]] = ref
-    return ref
+    return ref, context
 
 
 def seal_final_provisional(host, phase, evidence, runtime_bindings):
-    """Seal once AFTER case close, including every boundary engine/checker call."""
+    """Seal after actual case close, including all boundary engine/checker calls."""
     b = _bindings(runtime_bindings, execution=True)
     need(type(phase) is dict and type(evidence) is dict and evidence.get("phase") == phase["id"],
          "exact-phase-to-seal")
@@ -1261,23 +1422,10 @@ def seal_final_provisional(host, phase, evidence, runtime_bindings):
     ports = owner.ports
     lease = owner.completed_phases.get(phase["id"])
     need(lease is not None and lease.closed and lease.finished, "actual-finished-closed-lease")
-    context = ports.seal_context(phase["id"])
-    closed(context, ("case_closed", "case_id", "scope_id", "case_start_ns", "case_end_ns", "case_scope",
-        "case_closure_ref", "checkpoint_ref", "owned_drain_ref",
-        "outer_run_id", "host_pid", "host_creation_id", "clock_domain"), "after-case-seal-context")
-    need(context["case_closed"] is True and context["case_id"] == b["case_catalog"]["history_case"]
-         and context["scope_id"] == phase["id"] and digest(context["case_scope"], 32)
-         and integer(context["case_start_ns"], 1, lease.start_ns)
-         and integer(context["case_end_ns"], lease.end_ns)
-         and context["case_end_ns"] <= time.perf_counter_ns(), "actual-complete-case-window")
-    # Actual adapter nonce identifies this helper scope within the parent case.
-    for key, kind in (("owned_drain_ref", "owned-drain"), ("checkpoint_ref", "checkpoint"),
-                      ("case_closure_ref", "case-close")):
-        _case_attachment(ports, context[key], context, b, phase, kind)
     need(evidence.get("closure") == {
         "processes_closed": True, "handles_closed": True, "callbacks_joined": True,
         "empty_observations": 2, "post_close_census": True, "scope": "owned-children-IO-handles"},
-        "seal-after-actual-owned-closure")
+        "actual-owned-closure-attachment")
     oracle = evidence.get("oracle")
     need(type(oracle) is dict and oracle.get("passed") is True
          and oracle.get("engine_audit_used") is False and oracle.get("actual_H") == phase["H_end"]
@@ -1287,46 +1435,43 @@ def seal_final_provisional(host, phase, evidence, runtime_bindings):
         need(evidence["maintenance"]["boundary_cleanup_calls"] == 2
              and evidence["maintenance"]["final_unprotected_backlog"] == 0, "two-actual-boundary-passes")
     need(evidence["slots"] == lease._finish_value["slots"], "actual-lease-slot-links")
-    # This is the case window, extending beyond the earlier reader lease window.
-    guard = ports.guard_prefix(phase["id"], context["case_start_ns"], context["case_end_ns"])
-    need(type(guard) is dict and guard.get("status") == "PROVISIONAL_UNQUALIFIED"
-         and guard.get("final_receipt") is None
-         and guard.get("phase_start_ns") == context["case_start_ns"]
-         and guard.get("phase_end_ns") == context["case_end_ns"]
-         and guard.get("guard_sha256") == b["guard_source"]["sha256"]
-         and guard.get("budget_sha256") == b["history"]["budget_sha256"]
-         and guard.get("finalizer_sha256") == b["finalizer_source"]["sha256"]
-         and all(guard.get(k) == context[k] for k in ("outer_run_id", "host_pid", "host_creation_id", "clock_domain"))
-         and guard.get("owned_drain_sha256") == context["owned_drain_ref"]["sha256"],
-         "actual-full-case-031-prefix")
     owner.closed_phases[phase["id"]] = {"state": "sealing"}
-    index_ref = _case_call_index(owner, phase, context, lease)
+    index_ref, context = _case_call_index(owner, phase, lease)
+    guard = ports.guard_prefix(phase["id"], context["start_ns"], context["end_ns"])
+    need(type(guard) is dict and guard.get("status") == "PROVISIONAL_UNQUALIFIED"
+         and guard.get("final_receipt") is None and guard.get("outer_run_id") == context["run"]
+         and guard.get("phase_start_ns") == context["start_ns"]
+         and guard.get("phase_end_ns") == context["end_ns"]
+         and guard.get("guard_sha256") == b["guard_source"]["sha256"]
+         and guard.get("source_pin") == context["source_pin"]
+         and guard.get("binary_sha256") == context["binary_sha256"]
+         and guard.get("budget_sha256") == context["budget_sha256"]
+         and guard.get("finalizer_sha256") == b["finalizer_source"]["sha256"]
+         and guard.get("owned_drain_sha256") == context["owned_drain_ref"]["sha256"],
+         "actual-full-case-native-prefix")
     inner = copy.deepcopy(evidence)
     inner["guard_observation"] = guard
     inner["readers"]["rows_sha256"] = index_ref["sha256"]
     inner["maintenance"]["raw_sha256"] = index_ref["sha256"]
-    inner["receipt_sha256"] = index_ref["sha256"]  # REAL completed index; RAM pre-validation only.
+    inner["receipt_sha256"] = index_ref["sha256"]  # Actual completed index; RAM validation only.
     summary = _history(b).validate_phase_evidence(phase, inner)
-    inner.pop("receipt_sha256")
-    summary.pop("receipt_sha256")
+    inner.pop("receipt_sha256");summary.pop("receipt_sha256")
     body = {
         "schema": BODY_SCHEMA, "status": "PROVISIONAL_UNQUALIFIED", "phase_id": phase["id"],
         "plan_sha256": owner.plan["plan_sha256"], "source_pin": b["history"]["source_pin"],
         "binary_sha256": b["history"]["binary_sha256"], "budget_sha256": b["history"]["budget_sha256"],
-        "outer_run_id": context["outer_run_id"], "source_profile_sha256": b["profile_source"]["sha256"],
+        "outer_run_id": context["run"], "source_profile_sha256": b["profile_source"]["sha256"],
         "runtime_sha256": b["runtime_source"]["sha256"], "guard_sha256": b["guard_source"]["sha256"],
         "finalizer_sha256": b["finalizer_source"]["sha256"], "evidence": inner, "summary": summary,
-        "owned_closure_ref": reference(context["owned_drain_ref"]),
-        "checkpoint_ref": reference(context["checkpoint_ref"]),
-        "case_closure_ref": reference(context["case_closure_ref"]), "native_call_index_ref": index_ref,
-    }
+        "owned_closure_ref": context["owned_drain_ref"], "checkpoint_ref": context["checkpoint_ref"],
+        "case_closure_ref": context["case_closure_ref"], "native_call_index_ref": index_ref}
     closed(body, BODY_KEYS, "selected-eighteen-field-body")
     raw = _encode(body, b)
-    need(len(raw) <= MAX_PHASE, "final-phase-body-bound")
+    need(len(raw) <= lease.profile["final_body_record_bytes"] <= MAX_PHASE, "final-phase-body-bound")
     ref = reference(host.record("history-final-provisional-" + phase["id"], raw,
-                               category="evidence", max_bytes=MAX_PHASE), MAX_PHASE)
-    need(ref["bytes"] == len(raw) and ref["sha256"] == sha(raw), "actual-written-final-body")
-    need(_read_record(ports, ref) == body, "final-body-same-buffer-reread")
+                               category="evidence", max_bytes=lease.profile["final_body_record_bytes"]), MAX_PHASE)
+    need(ref["bytes"] == len(raw) and ref["sha256"] == sha(raw)
+         and _read_record(ports, ref) == body, "actual-written-and-reread-final-body")
     index = {"id": phase["id"], "body_ref": ref}
     external = reference(ports.append_phase_index(copy.deepcopy(index)))
     need(_read_record(ports, external) == index, "actual-external-index-identity")

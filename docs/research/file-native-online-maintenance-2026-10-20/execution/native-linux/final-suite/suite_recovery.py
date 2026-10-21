@@ -215,6 +215,8 @@ class Commands:
                                 need(state['owned'][pid][0]==row['start'] and row['rss'] is not None and row['hwm'] is not None,'command-live-rss-identity')
                                 maximum=max(maximum,row['hwm'])
                                 observations.append(dict(epoch=time.time(),pid=pid,start=row['start'],rss=row['rss'],hwm=row['hwm']))
+                                if row['rss']>limit:
+                                    state['errors'].append('command-role-rss-censor');self._kill(state,'rss')
                                 pending.extend((child,row) for child in observed_children(row))
                             if time.time()>=deadline:state['errors'].append('command-time-censor');self._kill(state,'deadline')
                         stop.wait(.01)

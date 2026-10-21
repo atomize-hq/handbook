@@ -1,0 +1,47 @@
+{
+  "nonce": "3200ad95eceae01e3050fb3898a4d741",
+  "token_retained_during_HOLD": true,
+  "new_heavy_refused": "{\"censor\": \"durable-host-fence\", \"closure\": \"NO_NEW_WORKLOAD\", \"token_released\": false, \"sample_count\": null, \"sample_gap_max_s\": null, \"workload_GO\": null, \"worker_exit\": null, \"keeper_recovery_socket\": null, \"nonce\": null}",
+  "closure_before_explicit_release": {
+    "proven": true,
+    "required_observations": 2,
+    "observations": [
+      {
+        "monotonic": 3220101.665756708,
+        "groups": [
+          {
+            "pgid_requested": 78242,
+            "returned_bytes": 0,
+            "errno": 0,
+            "valid": true,
+            "members": [],
+            "monotonic_ns": 3220101665734041
+          }
+        ],
+        "remaining": [],
+        "unknown_errno_observations": [],
+        "empty": true
+      },
+      {
+        "monotonic": 3220101.687078791,
+        "groups": [
+          {
+            "pgid_requested": 78242,
+            "returned_bytes": 0,
+            "errno": 0,
+            "valid": true,
+            "members": [],
+            "monotonic_ns": 3220101687059208
+          }
+        ],
+        "remaining": [],
+        "unknown_errno_observations": [],
+        "empty": true
+      }
+    ],
+    "total_numeric_observations": 2
+  },
+  "token_only_available_after_keeper_release": true,
+  "helper_publication_errors": [],
+  "signal_sent": false
+}

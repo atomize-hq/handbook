@@ -1,0 +1,76 @@
+{
+  "role": "reader",
+  "limit_bytes": 268435456,
+  "failures": [],
+  "samples": 23,
+  "max_start_gap_s": 0.012952625285834074,
+  "peak_RSS_bytes": 32489472,
+  "closure": [
+    {
+      "monotonic": 3223873.620431,
+      "identities": [
+        {
+          "pid_requested": 68313,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 68314,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 68315,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    },
+    {
+      "monotonic": 3223873.641369291,
+      "identities": [
+        {
+          "pid_requested": 68313,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 68314,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 68315,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    }
+  ],
+  "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+  "source_pin": "CONTROL_ONLY",
+  "exit": 1,
+  "seconds": 0.27152320835739374,
+  "guarded_seconds": 0.31530962511897087,
+  "output_complete": true,
+  "outputs": {
+    "stdout": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/ordinary-tiny-v30-3/stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/ordinary-tiny-v30-3/stderr.bin",
+      "bytes": 853,
+      "sha256": "b0aa590d50319b7237b29262cd6dc588c6e98e230f3a860d45bb010ffc592e30"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "claim_id": "44GiB-CENTRAL-044-GUARD80KiB-PERFILE-TRANSFER",
+  "utc": "2026-10-21T03:46:07.922979+00:00",
+  "status": "SOURCE_PERFILE_TRANSFER_ONLY__NEW_PARENT_BUDGET_SOURCE_GO_REQUIRED",
+  "authority": "META guard internal redistribution after043; all physical files fit old/new caps.",
+  "prior040": {
+    "file": "claim-20261021T031017Z.json",
+    "sha256": "13452d906ce2a25f76af800f3a194934896b3e70db18ff1a4f4c424f09dd4a06",
+    "immutable": true
+  },
+  "prior043": {
+    "file": "claim-20261021T033411Z.json",
+    "sha256": "b5001198b5ea42a54129436497d93f5e18bc82b09b76ea98788ec68d5b998e90",
+    "immutable": true
+  },
+  "owner_chat": "01a15ae1-839d-7b02-843b-558ddc9e78cc",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard",
+  "old_caps": {
+    "job_guard_bounded.py": 59392,
+    "controls.py": 12288,
+    "README.md": 5120,
+    "source-receipt.json": 5120
+  },
+  "new_caps": {
+    "job_guard_bounded.py": 60416,
+    "controls.py": 14336,
+    "README.md": 4096,
+    "source-receipt.json": 3072
+  },
+  "whole_bytes_unchanged": 81920,
+  "closed_names_unchanged": 4,
+  "fresh_members": [
+    {
+      "file": "job_guard_bounded.py",
+      "bytes": 59386,
+      "sha256": "0a62be3938d434e5493b2da0f6002294ce85b8a020a62fb051e2b2cacb85faca",
+      "old_cap": 59392,
+      "new_cap": 60416
+    },
+    {
+      "file": "controls.py",
+      "bytes": 8183,
+      "sha256": "b2aebd784d822bfe83e3d6d7e2ec328f905b66987b3cd6fcb3e2b51faf6c54cd",
+      "old_cap": 12288,
+      "new_cap": 14336
+    },
+    {
+      "file": "README.md",
+      "bytes": 3744,
+      "sha256": "86a1dd012b1dec9d7223d3da107fb9297f4cc60b24d6579d39b40781274d5e81",
+      "old_cap": 5120,
+      "new_cap": 4096
+    },
+    {
+      "file": "source-receipt.json",
+      "bytes": 2961,
+      "sha256": "8b4b997edd5343e34d29748cd043f98115b71f8a1d8096bea1d04e7d40367971",
+      "old_cap": 5120,
+      "new_cap": 3072
+    }
+  ],
+  "all_fit_old_and_new_caps": true,
+  "reason": "Readable required actual creator/Job lifetime proof and27 control invocations; no scope expansion or field/proof drops.",
+  "unchanged_allocator": {
+    "C3_total": 16777216,
+    "C3_unclaimed": 901120,
+    "META_cap": 10485760,
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "reserved_files": 4792716,
+    "unassigned_files": 207284,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "new_C3draw": 0,
+    "new_global_bytes": 0,
+    "new_global_files": 0
+  },
+  "prewrite": {
+    "prior_seals_verified": 44,
+    "family_files": 137,
+    "family_bytes": 476481,
+    "META_bytes": 9516701,
+    "META_files": 1119,
+    "pending_META_reserve": 944912,
+    "META_manifest_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be"
+  },
+  "gate": "Owner holds upward writes until NEW immutable parent guard budget binds044/all per-file caps and explicit SOURCE GO. Same4names/owner, no implicittemps/pycache. No import/control/runtime/Job/engine/build/copy/corpus/archive/restore/deletion/Git authority. Earlier039/041/042/043and other source caps unchanged. Context32KiB plan still unallocated. Old frozen sources/receipts/failures/censors unchanged; no retroqualification.",
+  "actions": "Read-only source/META/family census/priorseal/addendum hash verification plus one044 triplet only."
+}

@@ -1,0 +1,127 @@
+{
+  "schema": "private-windows-case-map-v1",
+  "runtime_go": false,
+  "final_engine_pin": null,
+  "case_source_review_sha256": null,
+  "rule": "All null bindings refuse before mutation. Existing case IDs and assertions remain obligations; historical counts are not final events.",
+  "cases": [
+    {
+      "case_id": "Workspace/unit-slot-1",
+      "status": "PENDING",
+      "entry": "suite_units.py:run",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "unit-slot-1"
+    },
+    {
+      "case_id": "Workspace/unit-slot-2",
+      "status": "PENDING",
+      "entry": "suite_units.py:run",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "unit-slot-2"
+    },
+    {
+      "case_id": "Workspace/unit-slot-3",
+      "status": "PENDING",
+      "entry": "suite_units.py:run",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "unit-slot-3"
+    },
+    {
+      "case_id": "Workspace/unit-slot-4",
+      "status": "PENDING",
+      "entry": "suite_units.py:run",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "unit-slot-4"
+    },
+    {
+      "case_id": "Workspace/unit-slot-5",
+      "status": "PENDING",
+      "entry": "suite_units.py:run",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "unit-slot-5"
+    },
+    {
+      "case_id": "Ordinary/all-routes",
+      "status": "PENDING",
+      "entry": "suite_ordinary.py:run",
+      "version_map": "SOURCE_DONOR_ONLY_WINDOWS_ABI_REVIEW_PENDING",
+      "checkpoint_map": null,
+      "donor_binding": null,
+      "oracle_schema": null,
+      "final_pin": null,
+      "constructor_arguments": "all-routes"
+    }
+  ],
+  "workspace": {
+    "legacy_identity_slots": 5,
+    "actual_final_test_catalog": null,
+    "actual_final_test_names": null,
+    "actual_final_test_count": null,
+    "observed_new_source_units_lower_bound": 19,
+    "rule": "Identity slots are crosswalks, never a five-test ceiling. Enumerate and execute EVERY actual final source test including heavy cache/construction and structural units. No filtered test passes."
+  },
+  "ordinary": {
+    "route_catalog": null,
+    "original_routes": 17,
+    "immediate": [
+      {
+        "mode": "A",
+        "N": 16
+      },
+      {
+        "mode": "A",
+        "N": 128
+      },
+      {
+        "mode": "B",
+        "N": 16
+      },
+      {
+        "mode": "B",
+        "N": 128
+      }
+    ],
+    "shell": "native PowerShell",
+    "old_B_binding": "capture once and retain exact source/hash; no installed-engine dependency"
+  },
+  "execution_bound": null,
+  "template_sources": {
+    "suite_units.py": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_units.py",
+      "bytes": 3189,
+      "sha256": "05b49bb269b404eedc433f598328be6217a99823a9ef90ae3d09dcaf1daa10f9",
+      "reviewed": false
+    },
+    "suite_ordinary.py": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite\\suite_ordinary.py",
+      "bytes": 6561,
+      "sha256": "fccad1637fa9c85f5fb3d77094f13ddc9bc810bca9410dc9aed01f940c80e942",
+      "reviewed": false
+    }
+  },
+  "template_functions": {
+    "suite_units.py:run": "954bbae70e3d3b3190664d9268b4cf40d4404bdcd62de4654dcffd77a97512f5",
+    "suite_ordinary.py:run": "834c6638e9bd3d15518507b46d928e8908e5a53a7e90a41e66c489b1db1d53cf"
+  },
+  "source_only_dispatch_status": "Actual donor function bodies bound; Windows IO/helper closure and native extra constructors remain unreleased. No execution or qualification."
+}

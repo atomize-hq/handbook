@@ -1,0 +1,167 @@
+{
+  "kind": "native-v34-source-control-review",
+  "status": "SOURCE_ONLY_CANDIDATE_PARENT_REVIEW_NO_GO",
+  "root": "/private/tmp/file-native-online-macos-20261020",
+  "manifest_sha256": "11ab40b7f48625d582a75ab74ffe2f5f73613debdb81522096592cfbe79784e0",
+  "proposal_sha256": "d58b4aebc477822021fa9ea1e5707597c681990000eafcd9cf6fe6f380d1baf2",
+  "new_sources": {
+    "role_driver_v34.py": {
+      "bytes": 29706,
+      "sha256": "d7e4b93238935361d7e5d23e14191e12819e70f7e0ae7e75e09a19b53cf2a2e3"
+    },
+    "capsule_adapter_v34.py": {
+      "bytes": 24496,
+      "sha256": "e75aac3c08cc7215758e7660349a08d252be1852bc38a083b46905b88146dc4a"
+    },
+    "control_native_v34.py": {
+      "bytes": 15637,
+      "sha256": "69c04d126e826aeae6d03e51b0ff0dce4cdd7d4c5d89f19e563844c18cad1528"
+    },
+    "control_historical_v34.py": {
+      "bytes": 5220,
+      "sha256": "ba201f2cf491509c9a873b0d6d67c2ed77c7d7bca91385af7082d8ad5b3bb372"
+    }
+  },
+  "new_code_bytes": 75059,
+  "runtime_closure_files": 17,
+  "runtime_closure_bytes": 173220,
+  "prior_sources_verified_unchanged": true,
+  "prior_v33_packet_sha256": "e2ab0d6d96ef9c798aec7e70e48bbcfd0cc1f00b63d8b5ca459855b3a05491b5",
+  "source_accounting_incident": {
+    "earlier_envelope": {
+      "bytes": 262144,
+      "files": 16
+    },
+    "earlier_reported_code_archive": {
+      "bytes": 199343,
+      "files": 14
+    },
+    "omitted_F12_source_review_documents": {
+      "bytes": 414318,
+      "files": 13
+    },
+    "actual_semantic_total_before_v34": {
+      "bytes": 613661,
+      "files": 27
+    },
+    "earlier_semantic_envelope_satisfied": false,
+    "reconciliation": "Parent explicitly authorized 786432 bytes/40 files for semantic source plus review documentation. No retroactive qualification, removal, category relabeling, refund, or hard-cap increase. Existing F01/F12/global charges remain.",
+    "incoming_reference_separate": {
+      "bytes": 239899,
+      "files": 10
+    }
+  },
+  "phase_write_coverage": [
+    {
+      "boundary": "Driver.call",
+      "coverage": "First statement rejects NaN, +inf, -inf, zero, negative and bool before min/path/context/serial/input/dispatch. Proposed Driver facade control compares serial, calls, files and promised counters across seven invalid values."
+    },
+    {
+      "boundary": "phase admission",
+      "coverage": "Required parent-hashed strict release before private imports; PhaseLease authenticates held live heavy token, fixed root/nonce/native identities/claims/source/clock, whole F12 3MiB/96 and F08 1MiB/32 before output mkdir/open. F01 guard minimum128KiB/8 preserved; others zero."
+    },
+    {
+      "boundary": "call log",
+      "coverage": "262144-byte/file slot reserved after configuration/forecast/binary validation, before adapter folder mkdir or Events open. Compressed writes and final footer share this slot."
+    },
+    {
+      "boundary": "owner activation",
+      "coverage": "OwnedCall constructor makes a non-daemon thread without starting it; phase role-output slots and owner registry precede activation. Adapter creates Call wrapper and appends registry before activate. Start failure cancels only unstarted owners; ambiguous started closure holds. Invoke requires registered activated controller."
+    },
+    {
+      "boundary": "role output",
+      "coverage": "stdout8192/stderr8192/samples16384/result32768 per control call, 40 slots/655360 bytes reserved before workers start. Native identity observation has an additional cumulative64 control-phase check; outer guard independently retains all identities."
+    },
+    {
+      "boundary": "direct control inputs",
+      "coverage": "Exact serialized input length reserved before Path.write_bytes, including ~196KiB backpressure request. Forecast and report/grant writes enter declared F12 phase hook slots before open; default small F12 slot32768."
+    },
+    {
+      "boundary": "synthetic F08",
+      "coverage": "Fresh native-controls-v34 prefix; ordinary source, grants, ready file default4096-byte slots; Bash external output doc/manifest/route/saved files4096 each and output directory declared before Bash. Source/good/wrong stream files137123 each; failed-open slot4096 retained."
+    },
+    {
+      "boundary": "write and close",
+      "coverage": "Path.mkdir, Path.open and builtins.open installed for trusted selected parent process; per-file byte caps applied on writes/truncate. External child write sites are bounded by inspected pinned tiny helper sources and predeclared slots; no OS filesystem hard quota is claimed. No F08/F12 lease refund on failure or success. Whole actual growth checked against sealed baselines; retained censored prefixes stay charged."
+    },
+    {
+      "boundary": "lease release",
+      "coverage": "Registered native owners must prove native/helper closure and Python worker join; registered publication-control threads must also have joined. Tracked output handles close, source hashes rechecked and bounded phase receipt written before hooks restore. Unknown closure, drift, write/finalization error retains phase/HOLD; outer guard owns independent process-group closeout."
+    },
+    {
+      "boundary": "historical validator",
+      "coverage": "Fresh v34 shadow only after native calls complete; old bytes restored after retaining changed hex/SHA in negative-control evidence; actual admission.ROOT restored in finally. No historical binary execution or qualification."
+    }
+  ],
+  "whole_phase_pool": {
+    "F12": {
+      "bytes": 3145728,
+      "files": 96
+    },
+    "F08": {
+      "bytes": 1048576,
+      "files": 32
+    },
+    "external_outer_keeper_finalization_reserved": {
+      "bytes": 1253376,
+      "files": 8
+    },
+    "release_document_reserved": {
+      "bytes": 4096,
+      "files": 1
+    },
+    "role_output_reserved": {
+      "bytes": 655360,
+      "files": 40
+    },
+    "calls_log_reserved": {
+      "bytes": 262144,
+      "files": 1
+    },
+    "all_other_direct_files": "Taken monotonically from same whole pool before open; no per-call refund."
+  },
+  "proposed_controls": [
+    "Nonfinite/nonpositive owned timeouts, nonfinite stream deadline and nonfinite JSON input reject without native launch or destination file",
+    "Fast fake native immediate-EOF exit with proof before first byte, no post-input sleep",
+    "196608-byte input backpressure via nonblocking IO",
+    "Callback failure and wrong actual image censor before input; both positive closures",
+    "Real owned terminate after fake child authentic ready-file write, exact native proof and -15 raw exit",
+    "Two concurrent Driver.call publisher conflicts: exact distinct per-call rows, env outside payload, correct binary SHA",
+    "None env distinction plus declared raw86 observation, not crash-case pass",
+    "Actual native Bash paused before SELECTED/helper reads then exact selected-once copy",
+    "137123-byte synthetic F08 streaming copy with64KiB chunks; prewrite ceiling; wrong hash retains partial; destination-open injection proves source FD EBADF",
+    "Synthetic closed historical validator: positive actual old source/binary labels and7 negative cases; no old binary launch",
+    "Actual Driver.call seven invalid timeout values; zero native calls or allocation changes for those refusals."
+  ],
+  "native_calls_proposed": 10,
+  "verification": {
+    "compile_from_bytes_only": 4,
+    "AST_first_Driver_timeout_guard": true,
+    "AST_no_start_in_OwnedCall_constructor": true,
+    "AST_Call_and_registry_before_activation": true,
+    "private_new_module_imports": 0,
+    "native_controls_run": 0,
+    "cache_copy_build_corpus_run": false,
+    "admission_precheck_before_every_write": true,
+    "all_eight_path_caps_checked": true,
+    "no_ninth_path_no_archive_no_full_diff": true
+  },
+  "not_yet_qualified": [
+    "Full shared Harness preflight/current_case/before_call and authentic ready-barrier facade. Existing per-call NativeAdapter/Driver APIs are source-only primitives; full bridge is not ready.",
+    "Sole-publisher positive WORK overlap v3 and final terminal cancellation/death API, source checkpoint maps and actual interval evidence. Before-stdin startup is not overlap evidence.",
+    "Shared v5 decoder/oracle/schema-bound corruption and lifetime constructors; no legacy decoder fallback.",
+    "Exact final source pin and complete per-case growth forecasts, all five actual workspace unit names/binaries, all17 ordinary routes. Full158 case mappings remain PENDING.",
+    "Real historical-client compatibility run and authenticated real parent grant. Synthetic validator controls do not launch old binaries.",
+    "Copy activation/final lock manifest/source+guard binding; realC1 remains absent.",
+    "Actual267/282-or-revised full-stage cumulative identity cadence and complete raw gzip/closure evidence."
+  ],
+  "shared_status": "158 prior inventory IDs remain PENDING, five workspace slots and17 ordinary routes. No final source pin/newest shared core or decoder received or run by this packet. Incoming v2 reference remains separate and superseded.",
+  "actual_controls_GO": false,
+  "engine_cache_build_corpus_GO": false,
+  "fixed_clocks": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "closeout_cutoff": "2026-10-21T13:10:14Z",
+    "reset": false
+  }
+}

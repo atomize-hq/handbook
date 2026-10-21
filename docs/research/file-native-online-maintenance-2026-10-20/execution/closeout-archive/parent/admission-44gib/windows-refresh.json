@@ -1,0 +1,46 @@
+{
+  "utc": "2026-10-20T19:55:34.086799+00:00",
+  "rows": [
+    {
+      "root": "C:\\Users\\spmcc\\Documents\\__Project_Code\\handbook\\.git",
+      "exists": true,
+      "bytes": 252177643,
+      "files": 2499,
+      "directories": 436,
+      "links_skipped": 0,
+      "errors": []
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.cargo",
+      "exists": true,
+      "bytes": 893702027,
+      "files": 18188,
+      "directories": 3910,
+      "links_skipped": 0,
+      "errors": []
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020",
+      "exists": true,
+      "bytes": 907464,
+      "files": 60,
+      "directories": 11,
+      "links_skipped": 0,
+      "errors": []
+    },
+    {
+      "root": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be",
+      "exists": true,
+      "bytes": 408215,
+      "files": 34,
+      "directories": 5,
+      "links_skipped": 0,
+      "errors": []
+    }
+  ],
+  "parent_excludes_new_amendment_before_writes": true,
+  "free_bytes": 201291649024,
+  "new_online_roots": [],
+  "old_corpus_reenumerated": false,
+  "basis_for_retained_corpus": "meta confirms no corpus growth since sealed original census; current hashes/selected controls and new ownership scopes checked; no removal credit"
+}

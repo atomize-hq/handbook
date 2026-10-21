@@ -1,0 +1,35 @@
+{
+  "root": "C:\\file-native-recovery-20261019\\history-operational-backup",
+  "manifest": {
+    "version": 1,
+    "profile": "quiescent-full-operational",
+    "source_pin": "3d3f7b47264029dd1a8a3a1298cb1c740c0e7ae9",
+    "original": "C:\\file-native-incremental-20261018\\history-common-pin\\store",
+    "selected": {
+      "publication": "publication-74796-1792371048916760700-13",
+      "digest": "9b80c0b54b15af6457ee50290f266684bed6c06223cbe105a2654da7bb368546"
+    },
+    "files": 1413489,
+    "logical_bytes": 5464941402,
+    "inventory_sha256": "49867dde93ab75e7c9d8bad71729834e8896c374d1ce5c0862a7d3c5e24faaf7",
+    "transport_sha256": "9e43778043425cc46b1f92df7ffa9ab7d47501f035fdc688ff4e4db677ebec79",
+    "excluded": [
+      "DISPOSABLE.json",
+      "preparation.lock",
+      "writer.lock"
+    ],
+    "seconds": 546.5939999999828
+  },
+  "hashes": {
+    "files.jsonl": {
+      "actual_sha256": "49867dde93ab75e7c9d8bad71729834e8896c374d1ce5c0862a7d3c5e24faaf7",
+      "expected_sha256": "49867dde93ab75e7c9d8bad71729834e8896c374d1ce5c0862a7d3c5e24faaf7",
+      "match": true
+    },
+    "operational.bin.gz": {
+      "actual_sha256": "9e43778043425cc46b1f92df7ffa9ab7d47501f035fdc688ff4e4db677ebec79",
+      "expected_sha256": "9e43778043425cc46b1f92df7ffa9ab7d47501f035fdc688ff4e4db677ebec79",
+      "match": true
+    }
+  }
+}

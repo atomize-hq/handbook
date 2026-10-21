@@ -1,10 +1,11 @@
 import gzip
+import time
 import copy
 import os
 from pathlib import Path
 import stat
 import threading
-from windows_deadlines import canonical, digest, integer, need, strict
+from windows_deadlines import canonical, digest, integer, need, strict, Refusal
 
 
 def confined(base, path):
@@ -73,7 +74,8 @@ def inventory(root, poll=None, absent=False):
         need(absent, "missing-inventory-root")
         return dict(files={}, directories=[], bytes=0, file_count=0, directory_count=0)
     files, directories = {}, []
-    for folder, dirs, names in os.walk(root, followlinks=False):
+    def failed(error):raise error
+    for folder, dirs, names in os.walk(root, followlinks=False,onerror=failed):
         if poll:
             poll()
         for name in dirs+names:
@@ -92,6 +94,8 @@ def inventory(root, poll=None, absent=False):
 
 class GrowthLedger:
     def __init__(self, roots, poll):
+        need(1<=len(roots)<=64 and all(type(n) is str and 1<=len(n)<=128 and n.isascii()
+            and all(c.isalnum() or c in "-_." for c in n) for n in roots),"bounded-source-root-categories")
         self.roots = copy.deepcopy(roots)
         self.poll = poll
         self.lock = threading.RLock()
@@ -176,8 +180,17 @@ class GrowthLedger:
                 self.reserve(marker,reserves)
                 del self.leases[marker]  # Never spent: shared outer allocation remains held.
             self.check()
-            return dict(label=label, actual=copy.deepcopy(measured),
-                        prospective=copy.deepcopy(self.leases), planned_reclaim_credit=0)
+            need(type(label) is str and label.isascii() and len(label)<=256,"bounded-checkpoint-label")
+            actual={n:dict(bytes=row["bytes"],files=row["file_count"],
+                directories=row["directory_count"],inventory_sha256=digest(canonical(row)))
+                for n,row in measured.items()}
+            prospective={n:dict(bytes=0,files=0,directories=0) for n in self.roots}
+            for lease in self.leases.values():
+                for n,row in lease["growth"].items():
+                    for field,value in row.items():prospective[n][field]+=value
+            return dict(label=label,actual=actual,prospective=prospective,
+                lease_count=len(self.leases),lease_set_sha256=digest(canonical(self.leases)),
+                planned_reclaim_credit=0)
 
 
 def per_call_envelope(parts):
@@ -290,3 +303,83 @@ def abort_pending(self,token,payload,env,binary_sha,source_pin,error):
         process_started_ns=time.perf_counter_ns(),process_done_ns=time.perf_counter_ns(),spawn_total_ns=0)
     self.append(dict(kind="native-call",**row));return row
 
+
+def action_profile_payload(profile):
+    need(type(profile) is dict,"closed-action-profile")
+    return {k:v for k,v in profile.items() if k not in
+        ("profile_sha256","profile_catalogue_sha256")}
+
+def action_profile_digest(profile):
+    return digest(canonical(action_profile_payload(profile)))
+
+def catalogue_digest(catalogue):
+    need(type(catalogue) is dict and set(catalogue)=={"version","schedule_sha256","profiles"}
+         and catalogue["version"]==3 and type(catalogue["profiles"]) is dict,"closed-profile-catalogue")
+    need(type(catalogue["schedule_sha256"]) is str and len(catalogue["schedule_sha256"])==64,
+         "source-bound-expanded-schedule")
+    need(all(type(k) is str and type(v) is dict for k,v in catalogue["profiles"].items()),
+         "source-bound-action-payloads")
+    return digest(canonical(catalogue))
+
+def authenticate_action_profile(profile,catalogue,expected):
+    need(catalogue_digest(catalogue)==expected,"global-profile-catalogue-hash")
+    payload=action_profile_payload(profile)
+    key=profile["profile_id"]
+    need(key in catalogue["profiles"] and catalogue["profiles"][key]==payload,
+         "action-is-exact-catalogue-entry")
+    need(profile["profile_catalogue_sha256"]==expected
+         and profile["profile_sha256"]==action_profile_digest(profile),"authenticated-action-profile-sha")
+    return payload
+
+def capture_scope(e,value=None):
+    context=(value or {}).get("context")
+    if context is None:context=getattr(e.context,"value",{}) if e.context is not None else {}
+    return {k:context.get(k) for k in ("case_id","scope_id","case_scope")}
+
+def capture_sideband(e,value,token=None):
+    from windows_oracle_bridge import read_ref
+    scope=capture_scope(e,value);kind=value["kind"];payload=copy.deepcopy(value)
+    states=getattr(e,"state_records",None)
+    if states is None:e.state_records={};states=e.state_records
+    if kind=="selected-state":
+        actual=canonical(value["state"]);key=(scope["case_scope"],digest(actual))
+        old=states.get(key)
+        if old is not None:
+            payload["state"]=state_reference(e,value["state"],scope)
+    bound=e.sideband_bounds[kind]
+    need(len(canonical(payload))<=bound,"source-kind-sideband-bound")
+    body=dict(schema="capture-sideband-v1",run=e.run,kind="sideband",sideband_kind=kind,
+        payload=payload,payload_sha256=digest(canonical(payload)),**scope)
+    ref=e._write(body,token)
+    if kind=="selected-state" and key not in states:
+        states[key]=dict(record_ref=ref,scope=scope,state_sha256=digest(actual),actual=actual)
+    return ref
+
+def state_reference(e,actual,scope=None):
+    from windows_oracle_bridge import read_ref
+    need(type(actual) is dict,"actual-state-dictionary")
+    scope=scope or capture_scope(e)
+    raw=canonical(actual);key=(scope["case_scope"],digest(raw));row=e.state_records.get(key)
+    need(row is not None and row["actual"]==raw and row["scope"]==scope,"same-emitted-state-scope")
+    observed=strict(read_ref(row["record_ref"],e.max_bytes),e.max_bytes)
+    need(observed["payload_sha256"]==digest(canonical(observed["payload"]))
+         and canonical(observed["payload"]["state"])==raw and
+         all(observed[k]==scope[k] for k in scope),"authentic-emitted-state-bytes")
+    return dict(schema="physical-state-ref-v1",record_ref=copy.deepcopy(row["record_ref"]),
+        source_proof_ref=copy.deepcopy(e.header_ref),run=e.run,state_sha256=digest(raw),**scope)
+
+
+
+def read_ref(ref,maximum):
+    import os
+    need(type(ref) is dict and type(ref.get("path")) is str,"bounded-reference")
+    n=ref.get("bytes",ref.get("length"));at=ref.get("offset",0)
+    need(integer(n) and n<=maximum and integer(at),"bounded-reference-range")
+    p=Path(ref["path"]);confined(Path(p.anchor),p)
+    with p.open("rb") as stream:
+        before=os.fstat(stream.fileno());need(at+n<=before.st_size,"reference-within-file")
+        stream.seek(at);raw=stream.read(n+1 if at+n==before.st_size else n)
+        after=os.fstat(stream.fileno())
+    need(len(raw)==n and (before.st_dev,before.st_ino)==(after.st_dev,after.st_ino)
+         and after.st_size>=at+n and digest(raw)==ref["sha256"],"same-handle-reference-hash")
+    return raw

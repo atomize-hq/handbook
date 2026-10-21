@@ -1,0 +1,99 @@
+{
+  "kind": "adapter-v30-final-census",
+  "census": {
+    "categories": {
+      "F01": {
+        "logical_bytes": 1571957,
+        "allocated_bytes": 1810432,
+        "files": 96,
+        "directories": 9,
+        "symlinks": 0
+      },
+      "F04": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "files": 0,
+        "directories": 0,
+        "symlinks": 0
+      },
+      "F08": {
+        "logical_bytes": 444979,
+        "allocated_bytes": 630784,
+        "files": 54,
+        "directories": 34,
+        "symlinks": 0
+      },
+      "F12": {
+        "logical_bytes": 6869568,
+        "allocated_bytes": 9199616,
+        "files": 1210,
+        "directories": 270,
+        "symlinks": 0
+      },
+      "C1": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "files": 0,
+        "directories": 0,
+        "symlinks": 0
+      },
+      "F13": {
+        "logical_bytes": 82,
+        "files": 2,
+        "allocated_bytes": null,
+        "shared_components": {
+          "Git": {
+            "logical_bytes": 187972974,
+            "allocated_bytes": 205033472,
+            "files": 5494,
+            "directories": 371,
+            "symlinks": 0,
+            "baseline_logical_bytes": 187972892,
+            "baseline_files": 5492,
+            "positive_bytes": 82,
+            "positive_files": 2
+          },
+          "Cargo": {
+            "logical_bytes": 1859795101,
+            "allocated_bytes": 2063294464,
+            "files": 81747,
+            "directories": 15833,
+            "symlinks": 13,
+            "baseline_logical_bytes": 1859800817,
+            "baseline_files": 81747,
+            "positive_bytes": 0,
+            "positive_files": 0
+          }
+        }
+      }
+    },
+    "free_bytes": 161204727808
+  },
+  "heavy_token_flock_available": true,
+  "helper_registry": {},
+  "host_fence_absent": true,
+  "protected_checkouts": [
+    {
+      "path": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook",
+      "HEAD": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+      "status": ""
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019/handbook",
+      "HEAD": "82520a70efd481cf72de33219c69967b13600f1f",
+      "status": ""
+    },
+    {
+      "path": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook",
+      "HEAD": "faa9e9d03886d680a65f3cea022479a4c4a1ecab",
+      "status": ""
+    }
+  ],
+  "target_exists": false,
+  "actual_C1_directory_exists": false,
+  "stable_package_exists": false,
+  "fixed_t0": "2026-10-20T19:10:14Z",
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_cutoff": "2026-10-21T13:10:14Z",
+  "clock_reset": false
+}

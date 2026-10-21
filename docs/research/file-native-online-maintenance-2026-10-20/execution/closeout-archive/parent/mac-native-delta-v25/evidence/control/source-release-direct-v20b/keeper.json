@@ -1,0 +1,25 @@
+{
+  "kind": "independent-native-keeper",
+  "nonce": "986336bb82b5a84f3e54c59fe726f652",
+  "identity": {
+    "pid_requested": 12125,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 12125,
+    "ppid": 12124,
+    "uid": 501,
+    "pgid": 12125,
+    "state": 2,
+    "start": [
+      1792533164,
+      733245
+    ]
+  },
+  "fixed_cutoff_epoch": 1792581014.0,
+  "local_deadline_monotonic": 3221629.990349208,
+  "token_received": true,
+  "state": "CLOSED",
+  "identity_budget": 32,
+  "events": []
+}

@@ -1,0 +1,79 @@
+{
+  "claim_id": "44GiB-CENTRAL-039-WINDOWS-CONTROLS-ADAPTER2KiB-TRANSFER",
+  "utc": "2026-10-21T02:53:05.048686+00:00",
+  "status": "SOURCE_PERFILE_TRANSFER_ONLY__NEW_BUDGET_SOURCE_GO_REQUIRED",
+  "authority": "METAconditional039pairONLYbecause038alreadysealed. Preserve038/oldseals; noovercapwrite/aggregatechange.",
+  "prior038": {
+    "file": "claim-20261021T025134Z.json",
+    "sha256": "65d2b457df776609ef3fdab629e28f9de8e288a6dcff903923eb2732aec5716b",
+    "immutable": true
+  },
+  "operative_family037": {
+    "file": "claim-20261021T023945Z.json",
+    "sha256": "efc97e0b8192bfa9c78020102879e7fa6250027428f5323c67d23d62d330c6be",
+    "filecap": 192,
+    "bytecap": 786432
+  },
+  "owner_chat": "01a15bd5-7694-7981-a619-9a23d4774b60",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform",
+  "new_SOURCE_per_file_caps": {
+    "windows_driver.py": 22528,
+    "windows_native.py": 26624,
+    "windows_adapter.py": 22528,
+    "windows_growth.py": 14336,
+    "windows_capsule.py": 20480,
+    "windows_hooks.py": 24576,
+    "windows_oracle_bridge.py": 8192,
+    "windows_bootstrap.py": 8192,
+    "windows_evidence.py": 16384,
+    "source_controls.py": 28672,
+    "windows_deadlines.py": 4096
+  },
+  "pair": "source_controls.py26624->28672;windows_adapter.py24576->22528,net0. Evidence16384/deadlines4096from038retained; allother034/032pairsretained.",
+  "fresh_changed_members": [
+    {
+      "file": "windows_adapter.py",
+      "bytes": 19120,
+      "sha256": "b5cf47a39e50c17305bd11e2570767bac61934a49a5f096f8de35f1ddb2daaee",
+      "old_cap": 24576,
+      "new_cap": 22528
+    },
+    {
+      "file": "source_controls.py",
+      "bytes": 26484,
+      "sha256": "cbfb8bdbeecbb176156f4a3bbca552012732f10f0019f1f9c49de2aa66746037",
+      "old_cap": 26624,
+      "new_cap": 28672
+    }
+  ],
+  "all27_fit_revised_caps": true,
+  "changed_members_fit_old_caps": true,
+  "reason": "W5unstarted+later-live+joinfail/repeatdrainregressionsrequiremaintainablecompletecontrolcoverage beforegrowth. Capisnotfunctionalacceptance; noomission/minifiedproofsubstitute.",
+  "unchanged_caps": {
+    "SOURCE_bytes": 196608,
+    "SOURCE_files": 11,
+    "CASEDATA_bytes": 262144,
+    "CASEDATA_files": 8,
+    "BINDINGS_bytes": 65536,
+    "BINDINGS_files": 8,
+    "whole_bytes": 524288,
+    "closed_names": 27,
+    "root_conservative_filecap": 32
+  },
+  "registration_gate": "AllownersholdupwardwritesuntilparentNEWimmutableWindowsbudgetbind039+038/capsandexplicitSOURCEGOafterreviewrelease. Enforceindividual/group/whole/exactnames. No runtime/nativecontrol/engine/build/copy/corpus/deletion/Gitpermission ornewnames; allcase/ownership/identity/closure/sourcebinding/RSS/cadencegatesunchanged.",
+  "unchanged_allocator": {
+    "C3_total": 16777216,
+    "C3_unclaimed": 925696,
+    "META10MiB": 10485760,
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "reserved_files": 4792716,
+    "unassigned_files": 207284,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "new_C3draw": 0,
+    "new_global_bytes": 0,
+    "new_global_files": 0
+  },
+  "actions": "Readonlysnapshot/cap/priorhashchecks+one039triplet only; nootherresource/source/livebudget/runtimechange."
+}

@@ -1,0 +1,140 @@
+{
+  "claim_id": "44GiB-CENTRAL-043-WINDOWS-SOURCE208KiB-CASEDATA240KiB",
+  "status": "SOURCE_GROUP_TRANSFER_ONLY__NEW_PARENT_BUDGET_SOURCE_GO_REQUIRED",
+  "authority": "META B Windows internal16KiB case-data to source; build on041;042 only shared C3 draw.",
+  "prior041": {
+    "file": "claim-20261021T031250Z.json",
+    "sha256": "a2f26bcdbc39238cbd9c1498047ad1441a2d1895c763e2179ab83381c4053e26",
+    "immutable": true
+  },
+  "prior042": {
+    "file": "claim-20261021T033410Z.json",
+    "sha256": "59d21fa39a24e2cf4f9464265135d6604121285ad18691d1f776ba99c93daceb",
+    "immutable": true
+  },
+  "owner_chat": "01a15bd5-7694-7981-a619-9a23d4774b60",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform",
+  "groups": {
+    "SOURCE": {
+      "old_bytes": 196608,
+      "new_bytes": 212992,
+      "files": 11
+    },
+    "CASEDATA": {
+      "old_bytes": 262144,
+      "new_bytes": 245760,
+      "files": 8
+    },
+    "BINDINGS": {
+      "bytes": 65536,
+      "files": 8
+    },
+    "whole_bytes": 524288,
+    "closed_names": 27,
+    "root_conservative_filecap": 32
+  },
+  "new_SOURCE_per_file_caps": {
+    "windows_driver.py": 24576,
+    "windows_native.py": 26624,
+    "windows_adapter.py": 24576,
+    "windows_growth.py": 14336,
+    "windows_capsule.py": 20480,
+    "windows_hooks.py": 28672,
+    "windows_oracle_bridge.py": 8192,
+    "windows_bootstrap.py": 8192,
+    "windows_evidence.py": 20480,
+    "source_controls.py": 32768,
+    "windows_deadlines.py": 4096
+  },
+  "new_CASEDATA_per_file_caps": {
+    "packing52.json": 30720,
+    "recovery24.json": 30720,
+    "strict24.json": 30720,
+    "focused_windows.json": 30720,
+    "protocol.json": 30720,
+    "workspace_ordinary.json": 30720,
+    "source_constructors.json": 30720,
+    "growth_actions.json": 30720
+  },
+  "BINDINGS_each8192_names": [
+    "README.md",
+    "interface.md",
+    "controls-forecast.json",
+    "source-bindings.json",
+    "final-engine-bindings.json",
+    "source-receipt.json",
+    "static-controls-result.json",
+    "platform-source-review-notes.md"
+  ],
+  "fresh_changed_members": [
+    {
+      "file": "windows_driver.py",
+      "bytes": 21497,
+      "sha256": "1aa1c16d4647dd72cfb6c7e45f2492c559029b01c2e20cd78af281bc5333aadb",
+      "old_cap": 21504,
+      "new_cap": 24576
+    },
+    {
+      "file": "windows_adapter.py",
+      "bytes": 22291,
+      "sha256": "891bb454beeb629ad5c38a7eb0125be69a14e8f2e4d8338562e420b45f36baaa",
+      "old_cap": 22528,
+      "new_cap": 24576
+    },
+    {
+      "file": "windows_hooks.py",
+      "bytes": 24532,
+      "sha256": "91ba4ecf80230776d2b4e2f01c8809cb34e1bd41263bfc7923f487f1950fae63",
+      "old_cap": 25600,
+      "new_cap": 28672
+    },
+    {
+      "file": "windows_evidence.py",
+      "bytes": 16200,
+      "sha256": "b505aec5e5c10fd8dd52de5752d4013ac53b48b14e6e8ef3f247ae96d1b8c972",
+      "old_cap": 16384,
+      "new_cap": 20480
+    },
+    {
+      "file": "source_controls.py",
+      "bytes": 28421,
+      "sha256": "df46a38fbfbe9cf85425d8e1314340739632059a78567beebcb7e8c335ec88bd",
+      "old_cap": 28672,
+      "new_cap": 32768
+    }
+  ],
+  "fresh_group_bytes": {
+    "SOURCE": 192767,
+    "CASEDATA": 102129,
+    "BINDINGS": 46986
+  },
+  "all27_fit_old_and_new_caps": true,
+  "unchanged_allocator": {
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "reserved_files": 4792716,
+    "central_unassigned_files": 207284,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "C3_total": 16777216,
+    "META_cap": 10485760,
+    "family_cap_files": 192,
+    "family_cap_bytes": 786432,
+    "new_global_bytes": 0,
+    "new_global_files": 0,
+    "C3_unclaimed": 901120,
+    "new_C3draw": 0
+  },
+  "prewrite": {
+    "prior_seals_verified": 43,
+    "family_files": 134,
+    "family_bytes": 470906,
+    "META_bytes": 9037421,
+    "META_files": 1086,
+    "pending_META_reserve": 944912,
+    "META_manifest_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be"
+  },
+  "gate": "Owners hold upward writes until NEW immutable parent Windows budget binds043/all per-file/group caps and explicit SOURCE GO. All unmodified041/039/038/034/032 path caps retained. Exact27 names/no implicittemps/pycache. No runtime/controls/engine/Job/build/copy/corpus/archive/restore/deletion/Git/newnamespace permission. Context32KiB still unallocated. Existing review/failures remain; no retroqualification.",
+  "actions": "Read-only all27source/case/binding cap checks and fresh META/family/priorseal verification;043 triplet only.",
+  "utc": "2026-10-21T03:34:11.047604+00:00"
+}

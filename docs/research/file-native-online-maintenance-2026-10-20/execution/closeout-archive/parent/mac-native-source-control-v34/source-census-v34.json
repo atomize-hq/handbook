@@ -1,0 +1,121 @@
+{
+  "kind": "native-v34-source-only-pre-document-refresh-census",
+  "snapshot": {
+    "categories": {
+      "F01": {
+        "logical_bytes": 2258748,
+        "allocated_bytes": 2568192,
+        "files": 131,
+        "directories": 12,
+        "symlinks": 0
+      },
+      "F04": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "files": 0,
+        "directories": 0,
+        "symlinks": 0
+      },
+      "F08": {
+        "logical_bytes": 444979,
+        "allocated_bytes": 630784,
+        "files": 54,
+        "directories": 34,
+        "symlinks": 0
+      },
+      "F12": {
+        "logical_bytes": 7330760,
+        "allocated_bytes": 9699328,
+        "files": 1231,
+        "directories": 270,
+        "symlinks": 0
+      },
+      "C1": {
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "files": 0,
+        "directories": 0,
+        "symlinks": 0
+      },
+      "F13": {
+        "logical_bytes": 82,
+        "files": 2,
+        "allocated_bytes": null,
+        "shared_components": {
+          "Git": {
+            "logical_bytes": 187972974,
+            "allocated_bytes": 205033472,
+            "files": 5494,
+            "directories": 371,
+            "symlinks": 0,
+            "baseline_logical_bytes": 187972892,
+            "baseline_files": 5492,
+            "positive_bytes": 82,
+            "positive_files": 2
+          },
+          "Cargo": {
+            "logical_bytes": 1859795101,
+            "allocated_bytes": 2063294464,
+            "files": 81747,
+            "directories": 15833,
+            "symlinks": 13,
+            "baseline_logical_bytes": 1859800817,
+            "baseline_files": 81747,
+            "positive_bytes": 0,
+            "positive_files": 0
+          }
+        }
+      }
+    },
+    "free_bytes": 172433428480
+  },
+  "source_envelope": {
+    "existing_bytes": 613661,
+    "existing_files": 27,
+    "new_code_bytes": 75059,
+    "new_code_files": 4,
+    "all_eight_maximum_bytes": 108544,
+    "all_eight_maximum_files": 8,
+    "semantic_after_all_maxima_bytes": 722205,
+    "semantic_after_all_maxima_files": 35,
+    "authorized_bytes": 786432,
+    "authorized_files": 40,
+    "incoming_reference_separate_bytes": 239899,
+    "incoming_reference_separate_files": 10
+  },
+  "source_accounting_incident": {
+    "earlier_envelope": {
+      "bytes": 262144,
+      "files": 16
+    },
+    "earlier_reported_code_archive": {
+      "bytes": 199343,
+      "files": 14
+    },
+    "omitted_F12_source_review_documents": {
+      "bytes": 414318,
+      "files": 13
+    },
+    "actual_semantic_total_before_v34": {
+      "bytes": 613661,
+      "files": 27
+    },
+    "earlier_semantic_envelope_satisfied": false,
+    "reconciliation": "Parent explicitly authorized 786432 bytes/40 files for semantic source plus review documentation. No retroactive qualification, removal, category relabeling, refund, or hard-cap increase. Existing F01/F12/global charges remain.",
+    "incoming_reference_separate": {
+      "bytes": 239899,
+      "files": 10
+    }
+  },
+  "conservative_F01_plus_semantic_F12_plus_remaining_maxima_bytes": 2705834,
+  "conservative_source_hard_cap_bytes": 4194304,
+  "new_native_controls_run": false,
+  "target_exists": false,
+  "C1_exists": false,
+  "v34_fixtures_exist": false,
+  "helper_registry_empty": true,
+  "host_fence_absent": true,
+  "protected_repo_head": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+  "protected_repo_status": "",
+  "token_available": true
+}

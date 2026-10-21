@@ -1,0 +1,320 @@
+{
+  "explicit_owned_supervisor": {
+    "pid_requested": 82686,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 82686,
+    "ppid": 82655,
+    "uid": 501,
+    "pgid": 82655,
+    "state": 2,
+    "start": [
+      1792531798,
+      548959
+    ]
+  },
+  "signal": {
+    "pid": 82686,
+    "start": [
+      1792531798,
+      548959
+    ],
+    "signal": 9,
+    "sent": true,
+    "errno": 0
+  },
+  "external_numeric_closure": {
+    "proven": true,
+    "required_observations": 2,
+    "observations": [
+      {
+        "monotonic": 3220252.979375125,
+        "groups": [
+          {
+            "pgid_requested": 82723,
+            "returned_bytes": 8,
+            "errno": 0,
+            "valid": true,
+            "members": [
+              82724,
+              82723
+            ],
+            "monotonic_ns": 3220252979349541
+          }
+        ],
+        "remaining": [
+          {
+            "identity": {
+              "pid_requested": 82723,
+              "returned_bytes": 136,
+              "errno": 0,
+              "expected_bytes": 136,
+              "pid": 82723,
+              "ppid": 82687,
+              "uid": 501,
+              "pgid": 82723,
+              "state": 2,
+              "start": [
+                1792531802,
+                594949
+              ]
+            },
+            "usage": {
+              "return": 0,
+              "errno": 0,
+              "rss_bytes": 26607616,
+              "start_abstime": 77286069319686
+            }
+          }
+        ],
+        "unknown_errno_observations": [],
+        "empty": false
+      },
+      {
+        "monotonic": 3220253.008419416,
+        "groups": [
+          {
+            "pgid_requested": 82723,
+            "returned_bytes": 8,
+            "errno": 0,
+            "valid": true,
+            "members": [
+              82724,
+              82723
+            ],
+            "monotonic_ns": 3220253008397791
+          }
+        ],
+        "remaining": [
+          {
+            "identity": {
+              "pid_requested": 82723,
+              "returned_bytes": 136,
+              "errno": 0,
+              "expected_bytes": 136,
+              "pid": 82723,
+              "ppid": 82687,
+              "uid": 501,
+              "pgid": 82723,
+              "state": 4,
+              "start": [
+                1792531802,
+                594949
+              ]
+            },
+            "usage": {
+              "return": 0,
+              "errno": 0,
+              "rss_bytes": 26607616,
+              "start_abstime": 77286069319686
+            }
+          }
+        ],
+        "unknown_errno_observations": [],
+        "empty": false
+      },
+      {
+        "monotonic": 3220253.029004791,
+        "groups": [
+          {
+            "pgid_requested": 82723,
+            "returned_bytes": 0,
+            "errno": 0,
+            "valid": true,
+            "members": [],
+            "monotonic_ns": 3220253028984791
+          }
+        ],
+        "remaining": [],
+        "unknown_errno_observations": [],
+        "empty": true
+      },
+      {
+        "monotonic": 3220253.049877875,
+        "groups": [
+          {
+            "pgid_requested": 82723,
+            "returned_bytes": 0,
+            "errno": 0,
+            "valid": true,
+            "members": [],
+            "monotonic_ns": 3220253049858875
+          }
+        ],
+        "remaining": [],
+        "unknown_errno_observations": [],
+        "empty": true
+      }
+    ],
+    "total_numeric_observations": 4
+  },
+  "keeper": {
+    "kind": "independent-native-keeper",
+    "nonce": "904c6875348241fb9f01bd5d4835eb89",
+    "identity": {
+      "pid_requested": 82687,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 82687,
+      "ppid": 82686,
+      "uid": 501,
+      "pgid": 82687,
+      "state": 2,
+      "start": [
+        1792531798,
+        629519
+      ]
+    },
+    "fixed_cutoff_epoch": 1792581014.0,
+    "local_deadline_monotonic": 3220260.896051208,
+    "token_received": true,
+    "state": "CLOSED_AFTER_CENSOR",
+    "reason": "supervisor-death-or-identity-unknown",
+    "events": [
+      {
+        "termination": {
+          "status": "FROZEN_TREE_SIGNALLED",
+          "steps": [
+            {
+              "pid": 82724,
+              "start": [
+                1792531802,
+                659003
+              ],
+              "signal": 17,
+              "sent": true,
+              "errno": 0
+            },
+            {
+              "pid": 82723,
+              "start": [
+                1792531802,
+                594949
+              ],
+              "signal": 17,
+              "sent": true,
+              "errno": 0
+            },
+            {
+              "pid": 82724,
+              "start": [
+                1792531802,
+                659003
+              ],
+              "signal": 9,
+              "sent": true,
+              "errno": 0
+            },
+            {
+              "pid": 82723,
+              "start": [
+                1792531802,
+                594949
+              ],
+              "signal": 9,
+              "sent": true,
+              "errno": 0
+            }
+          ],
+          "known": [
+            {
+              "pid_requested": 82723,
+              "returned_bytes": 136,
+              "errno": 0,
+              "expected_bytes": 136,
+              "pid": 82723,
+              "ppid": 82687,
+              "uid": 501,
+              "pgid": 82723,
+              "state": 4,
+              "start": [
+                1792531802,
+                594949
+              ]
+            },
+            {
+              "pid_requested": 82724,
+              "returned_bytes": 136,
+              "errno": 0,
+              "expected_bytes": 136,
+              "pid": 82724,
+              "ppid": 82723,
+              "uid": 501,
+              "pgid": 82723,
+              "state": 4,
+              "start": [
+                1792531802,
+                659003
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "notify_parent": {
+          "pid": 82686,
+          "signal": 30,
+          "sent": false,
+          "reason": "identity-not-proven",
+          "observed": {
+            "pid_requested": 82686,
+            "returned_bytes": 0,
+            "errno": 3,
+            "expected_bytes": 136
+          }
+        }
+      },
+      {
+        "closure": {
+          "proven": true,
+          "required_observations": 2,
+          "observations": [
+            {
+              "monotonic": 3220253.01046275,
+              "groups": [
+                {
+                  "pgid_requested": 82723,
+                  "returned_bytes": 0,
+                  "errno": 0,
+                  "valid": true,
+                  "members": [],
+                  "monotonic_ns": 3220253010455125
+                }
+              ],
+              "remaining": [],
+              "unknown_errno_observations": [],
+              "empty": true
+            },
+            {
+              "monotonic": 3220253.031189166,
+              "groups": [
+                {
+                  "pgid_requested": 82723,
+                  "returned_bytes": 0,
+                  "errno": 0,
+                  "valid": true,
+                  "members": [],
+                  "monotonic_ns": 3220253031157500
+                }
+              ],
+              "remaining": [],
+              "unknown_errno_observations": [],
+              "empty": true
+            }
+          ],
+          "total_numeric_observations": 2
+        }
+      }
+    ]
+  },
+  "RSS_stream": {
+    "gzip_eof_complete": false,
+    "compressed_bytes": 10293,
+    "compressed_sha256": "1e1a02ac7da50b157e7f47d88c3601c1d3c0d3c2e9959a2a68628654e8974cf1",
+    "raw_censored": true
+  },
+  "helper_publication_errors": [],
+  "qualification": "Killed writer stream is censored; external numeric closure is separate proof. No engine/build/corpus."
+}

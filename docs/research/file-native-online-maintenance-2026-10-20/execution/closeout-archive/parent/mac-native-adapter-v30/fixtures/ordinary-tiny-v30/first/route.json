@@ -1,0 +1,12 @@
+{
+  "selected": {
+    "publication": "p0",
+    "digest": "2cf7c7ec099db8bc9a12c8fcf59c5ada8eb43fa7c3d9f6d816c9c1ff5e82ef48"
+  },
+  "attempt": "tiny-0",
+  "generation": "/private/tmp/file-native-online-macos-20261020/fixtures/ordinary-tiny-v30/disposable/store/generations/tiny-0",
+  "mode": "B",
+  "selection_source": "/private/tmp/file-native-online-macos-20261020/fixtures/ordinary-tiny-v30/disposable/store/SELECTED.json",
+  "selection_read_count": 1,
+  "engine_or_pack_decoder_used": false
+}

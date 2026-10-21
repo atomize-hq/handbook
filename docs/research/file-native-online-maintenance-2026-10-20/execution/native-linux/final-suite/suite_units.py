@@ -32,7 +32,7 @@ def run(c):
             if p.is_file():actual[p.relative_to(root).as_posix()]=dict(bytes=p.stat().st_size,sha256=digest(p))
         need(actual==proof['fixtures'],'complete-prior-unit-fixture-census')
         smoke=c.verify('prior-all31-native-units-same-final-smoke')
-        result=dict(status='passed',final_pin=c.a.m['final_pin'],tests=proof['tests'],actual_test_functions=31,prior_phase_sha256=prior['sha256'],artifacts=actual,oracle=smoke,oracle_scope='smoke + exact31 prior native assertions and complete fixture bytes',no_heavy_rerun=True)
+        result=dict(status='passed',final_pin=c.a.m['final_pin'],tests=proof['tests'],actual_test_functions=31,prior_phase_sha256=prior['sha256'],artifacts=actual,artifact_manifest_sha256=hashlib.sha256(encoded(actual)).hexdigest(),oracle=smoke,oracle_scope='smoke + exact31 prior native assertions and complete fixture bytes',no_heavy_rerun=True)
         c.a.emit(dict(kind='workspace-prior31-reuse',**result));c.a.workspace_proof=result;return result
     import native_guard as guard
     need(not (guard.ROOT/'fixtures'/('native-final31-'+c.a.m['final_pin'])).exists(),'prior-unit-attempt-needs-reviewed-reuse-binding')

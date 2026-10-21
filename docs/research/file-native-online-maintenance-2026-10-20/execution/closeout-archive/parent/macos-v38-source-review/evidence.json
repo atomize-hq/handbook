@@ -1,0 +1,174 @@
+{
+  "kind": "mac-v38-source-and-direct-cache-data-review",
+  "source_pin": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "disposition": {
+    "source": "SOURCE_ACCEPT",
+    "cache_operator": "SOURCE_ACCEPT",
+    "runtime_factory": "SOURCE_ACCEPT",
+    "cargo_helper_fix": "SOURCE_ACCEPT",
+    "manifest_data": "BOUNDED_DATA_ACCEPT",
+    "prepared_R2_admission_template": "NO_GO_DATA_CORRECTIONS_REQUIRED",
+    "runtime_go": false,
+    "full158": "PENDING_NO_INTEGRATE"
+  },
+  "source": {
+    "files": 8,
+    "bytes": 146957,
+    "manifest_bytes": 1651,
+    "manifest_sha256": "a429a9c5e330e85578150ab1484eb9c65ecb25183272f0d4f0429acc2f0ac433",
+    "closure_sha256": "6b5562e0ea771bc11262c10ca8322252dd941c308b5caa807e9fdd898291f66d",
+    "packet_bytes": 45668,
+    "packet_sha256": "01a1c0fca3a8d2c94739a455ea3544a7708989e6a1073ea599b7af58d191e733"
+  },
+  "data": {
+    "bytes": 63069,
+    "sha256": "132476a8a5b615d95a6acff8dde73c2b717c2b2b65d8fc1c12b60d7c7e32e06d",
+    "status": "PREPARED_NOT_ADMITTED",
+    "kind": "mac-direct-C1-phase-data-RAM-v38-R2"
+  },
+  "findings": [
+    {
+      "id": "M38-GUARDIAN-BINDING",
+      "priority": 1,
+      "kind": "DATA_INTERFACE",
+      "supplied": false,
+      "required": true,
+      "field": "guardian_source_binding.engine_release",
+      "evidence": [
+        "guard_v20.py:313-316 calls admission.source_binding without control-only",
+        "admission_v20.py:148-149 requires engine_release is True"
+      ],
+      "repair": "Parent-owned exact source binding engine_release=true while DIRECT_CACHE_ONLY and cache runtime_go=false; bind final hashes. No code change/control-only bypass."
+    },
+    {
+      "id": "M38-F12-FORECAST",
+      "priority": 1,
+      "kind": "DATA_RESOURCE",
+      "supplied_other_forecast": 1179648,
+      "guard_required": 1769472,
+      "guard_min_files": 8,
+      "cache_receipt_cap": 65536,
+      "cache_receipt_files": 1,
+      "required_remaining_F12": 1835008,
+      "required_remaining_F12_files": 9,
+      "total_with_actual_input": 3070327,
+      "total_with_input_cap": 3085008,
+      "total_files_with_input": 10,
+      "evidence": "guard_v20.py:203-205; output131072+RSS524288+2*524288+65536",
+      "repair": "Complete parent-bound six-category prospective vector; staged input counted once in actual. F01 minimum131072/8; all current category/free-space preflights."
+    }
+  ],
+  "checks": {
+    "lock_sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+    "locked_registry_packages": 45,
+    "archives": 45,
+    "indices": 45,
+    "public_configs": 1,
+    "entries": 91,
+    "copy_bytes": 21464410,
+    "RAM_members": 8,
+    "RAM_bytes": 1234315,
+    "framed_input_bytes": 1235319,
+    "framed_input_cap": 1250000,
+    "framed_input_sha256": "d44bd298af777fedcc43caf83254531377ecd9fef1bfb4a68e7cbb204178debf",
+    "conservative_Darwin_packages": 31,
+    "unpack_bytes": 17461584,
+    "unpack_files": 1461,
+    "bookkeeping_bytes": 1048576,
+    "bookkeeping_files": 256,
+    "total_C1_bytes": 39974570,
+    "total_C1_files": 1808,
+    "C1_cap_bytes": 67108864,
+    "C1_cap_files": 5000,
+    "manifest_shape_path_identity_checksum_failures": [],
+    "candidate_source_records_match": 8,
+    "runtime_records_exact_local_match": 9,
+    "engine_source_records_exact_local_match": 25,
+    "prior_CP4_transport_admission_pins": 4,
+    "source_file_rows": 45,
+    "bootstrap_bytes": 2139,
+    "bootstrap_sha256": "96294853116ac45662b5a005e74cfab1dfdb21fa49cf59e602358312960b6e6c",
+    "bootstrap_matches_guardian_c_argument": true,
+    "changed_source_prefix_equal_through_line": 454,
+    "changed_source_suffix_new469_equals_old458": true,
+    "unchanged_code_modules": 6
+  },
+  "runtime_modules": [
+    "admission_v20",
+    "cache_stream_v33",
+    "guard_v20",
+    "keeper_v20",
+    "monitor_v20",
+    "native_probe",
+    "native_role_v36",
+    "native_start_gate_v31",
+    "producer_binding_v32"
+  ],
+  "source_fix": {
+    "prior": "M37-HELPER-IMPORT",
+    "status": "CLOSED",
+    "path": "execution/native-macos/native_cases_v36.py",
+    "lines": [
+      455,
+      468
+    ],
+    "mechanism": "Exact bytes -> fresh inert module AST stdlib-only -> actual exports; no cached helpers/sys.modules patch"
+  },
+  "native_pending": [
+    "Exact materialized corrected template/source-binding hashes",
+    "Parent-owned GO/review flags",
+    "Actual source/cache identities and sparse/public config bytes",
+    "Framed input hydration/fullhash/memberhash checks",
+    "Live ancestor nonce/parent/keeper and held heavy token",
+    "Once-only clipped monotonic stage",
+    "All six prospective category vector/fresh snapshots/free floor",
+    "Existing reviewed finite native controls",
+    "Guardian/keeper final numeric closure"
+  ],
+  "cutoffs": {
+    "functional": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z"
+  },
+  "operations": {
+    "candidate_imports": 0,
+    "compile_parse_runs": 0,
+    "factory_calls": 0,
+    "native": 0,
+    "cache_writes": 0,
+    "builds": 0,
+    "tests": 0,
+    "source_edits": 0,
+    "git": 0,
+    "indexing": 0,
+    "network": 0
+  },
+  "accounting": {
+    "claim": "074",
+    "claim_sha256": "d617f1106d5070d6ab4979e5da8013d998f0015d6cdab67fa1aff9a7cc78ade6",
+    "pair_cap_bytes": 24576,
+    "pair_cap_files": 2,
+    "cache_data_claim": "076",
+    "cache_data_cap_bytes": 65536,
+    "cache_data_cap_files": 1,
+    "META_cap": 11862016,
+    "membership": "meta-membership-v15.json",
+    "base_future": 112617,
+    "source_return_bytes": 194276,
+    "source_return_cap": 221184
+  },
+  "prepublication_census": {
+    "actual_bytes": 11625437,
+    "files": 1394,
+    "pending": 202497,
+    "projection": 11827934,
+    "cap": 11862016
+  },
+  "verification": "Source all8 and exact preparedR2 data sizes/SHA checked before/after report; immutable old R2 retained. Source freeze may be released after final check.",
+  "limits": [
+    "STATIC_ONLY",
+    "NO_NATIVE_GO",
+    "EXACT_R2_TEMPLATE_NOT_ADMITTED",
+    "FULL158_PENDING",
+    "GITNEXUS_UNAVAILABLE_IMPACT_UNKNOWN_HIGH"
+  ]
+}

@@ -1,104 +1,21 @@
-# 039 source review — W5 and explicit v2, NO runtime GO
+# R3 source review notes
 
-Read ALL27 files and actual dependencies before selecting any finite control.
-All11 Python modules compile in memory only. All64 prepared memory groups,
-including W5 new subtraces, remain UNEXECUTED. No supplied module import, provider,
-QPC/native API, engine, Job, build, corpus or runtime fixture writes occurred.
+Status: SOURCE_FROZEN_AWAITING_FULL_REVIEW_NO_GO. All166 case results are PENDING. This source worker performed only reads, approved source writes, compile/AST/symbol/export checks. No private module/control/native/engine/build/corpus execution or Git mutation occurred.
 
-Preserved negative lineage:
-original receipt b4671f65fe56b6cf964aa850c843fac49fa36c0fe4050891a5a302dc8ab76ec6,
-tar926469b3d65c99f55a6404fc8931ab4b32b70f5551816cc61c07c2a2de9d179f;
-034 receipt7c31340ccbd4509692f46192f7521d5285d049b8b6c73248ddfac8ca695fde4d,
-parent034archive dbbe3867c15e07f3ceae1a4f3736d3b5112b66f388e23bc13eebebaed7a77027,
-review0347d955028b98d82b18ee4154fb37acaea9005454d1945f20a248f316f32eb66d8.
-034 review found W1-W4 targeted source corrected and rejected W5.
+The 045 negative receipt 580d7098ea13db2d52748a5d2f80d1705e4c60f0d54e4784476596cd23a16f9c remains historical, preserved by the parent. The missed04:10 review target is not a new clock origin. Functional cutoff11:10:14Z and closeout13:10:14Z remain fixed.
 
-W5: LaneHost.drain now checks ident before join, catches each handle's exception,
-attempts later handles and retains start/join errors. Repeated drain after stream
-close returns retained proof. finalize caches actual result and independently
-attempts drain/evidence close/census/native close. own_closed cannot hide
-technical drain failures. Bootstrap nested finally guarantees finalize attempt.
-Adapter close_case also isolates joins and retains its actual closure reference.
-Prepared fake regression covers unstarted, failed join, later callback, repeat
-drain/finalize and failure closure. No result is inferred from that source.
+R3 closes source paths for planned-input/prelaunch failures; action/group catalogue authentication; physical-state single-record references; actual native START ordering and phase clamp; exact intentional-error consumption; actual callback response/handle projection; complete scoped case indices; bounded guard-prefix evidence; finite historical/Cargo/PowerShell providers; full backup/restore; actual checker artifacts; original-config/source-budget/guard joins; and actual LONG quarantine release. This is implementation scope, not a qualification claim.
 
-V2 changes: explicit lane-invoke-v2 closed schema, in-memory decoded response plus
-single raw ref, no standalone stdout file. One canonicalLF stream captures planned
-input/output/RSS/native-end. Every per-call frame seq0..N is strict and hashed
-in physical order. START has actual retainedPID/creation/QPC/positiveRSS; planned
-input before Popen is distinguished from actual completed-write prefix.
-first_write_qpc candidate is sampled immediately before WriteFile, published
-only when positive completion occurs. Failed construction cannot qualify.
-Bounded extractor verifies canonical bytes, sequence, closed start/data/begin,
-counts/hashes/EOF/reap/nativeIO/callback closure and actualsource before JSON.
-NativeCallFailure stays AssertionError(row) compatible while its repr references
-raw evidence instead of copying stdout into failed Harness events.
+The paired stream path is new and especially needs full review and targeted qualification. It supplies source-owned fixed Runtime/Popen objects only to a freshly verified byte-module instance. Payload uses inherited anonymous pipe endpoints while Driver captures bounded JSON control stdio. Frozen byte codec/inventory sources remain unchanged. Endpoint unknowns fence admission; no payload duplicate or fake empty transport capture is claimed. Both actual worker closures precede verifier access.
 
-Evidence projection substitutes only exact decoded engine envelopes with closed
-native-response-ref-v1. In-memory row/response remains for unchanged7ce.
-Typed profile bounds expansion/depth/nodes. Helpers must project before exact
-byte record; record itself never rewrites caller bytes. No average or gzip credit.
-Per-call raw reservation includes failure escrow only while live, then releases
-unwritten potential. Whole stream remains charged. Record/evidence final closure
-can settle actual retained counts with positive source/profile/budget/whole-phase
-bindings. Original upper retained in proof; actual bytes never receive credit.
-Corpus leases remain conservative. Final source profiles and whole-phase sink
-schedules remain unresolved; this is not a fit/admission claim.
+Source-only static checks cannot prove Win32 execution, filesystem sharing, injected creator/closure faults, complete all166 readiness, deadlines under native load or performance gates. Parent must provide real immutable runtime manifests, binary/build and source receipts, source acceptance, quantitative catalogue/limits and exact constructor/derivative data. Null historical data fields in case maps remain refusal points, not permissions.
 
-HistoryPorts implements actual retained registry/QPC/readiness, ownedpacednamespace,
-start callback proof, per-call observations, actual partial031rawprefix, donor
-source refs and postcase seal/index context. Shared036 make_runner is public
-factory; history_authorization is None until full actual host authorization.
-Factory/source binding and implementation require independent complete review.
-Raw outer partial prefix remains PROVISIONAL and cannot supply final empty Job,
-closed gzip/finalJSON or postclose actual census. Guard source/schema/release
-opt-in is explicit; old50ecc/1e4/924 immutable. QPC source ABI itself is unchanged.
+GitNexus exact-worktree impact attempts failed because this isolated worktree is unregistered. No package/bootstrap/index was run. Manual caller traces treated Driver/Adapter/hook/template/alias changes as HIGH risk. One alias symbol-level attempt was mistakenly made after its edit; this is an audit defect, not a successful pre-edit analysis. Native/Capsule/Adapter/Hooks/controls indentation compaction was checked against unchanged pre-compaction ASTs; string literals, codec data and existing functional statements were preserved. Fresh source/function hashes replace textual hashes.
 
-Windows case adaptation is explicitly incomplete:
--157 existing donor rows bind actual source and function AST bodies. NativeCase,
- owned fixture writes/clones and source-function-only loading supply Windows
- host primitives without importing Linux providers. Exact donor bodies remain
- unchanged; inner Linux provider imports and their caller closure refuse.
--4 Windows share cases have actual CreateFileW no-delete-share opens, exactheld
- bytes, cleanup whileheld, perhandle close and release/retry assertions. One
- uses permanent Bcontrol retention; pack/index case checks actual removal.
--X1000 binds actual shared Harness.mapping_stress count1000, native_focusedFalse.
- HISTORY/LONG/stream point at actual observed owner bodies, not runtime releases.
--The D-N64-N1k-AandB-payload-title final Windows matrix body remains missing.
--Specific remaining donor APIs: Windows historical Producer/compatibility route,
- independent decoder/refuse fixture queries as guarded checker processes,
- workspace-boundary runner and full29+ unit catalog, ordinary PowerShell copy,
- backup_restore and remaining imported helper globals. Some paths still have
- direct hook prerequisites. No catalogue assertion creates those capabilities.
--Final engine/checkpoint/schema/native CLI/unit proof bindings remain pending.
- All166 cases and20 constructor obligations stay PENDING. No old offsets/busy
- assertions or old267/282 totals substitute for final source.
+Required review focus: exact two-worker argv and handle inheritance, positive gate/RSS before corpus, all failure/unknown cleanup paths, SourceControl/Driver resource fences, original source/case scopes and phase aliases, no duplicate root/growth charging, immutable original helper config joins, all checker result/partial files and actual request/index bindings, full legacy result/inventory joins, and absence of fabricated native PASS fields.
 
-Review particular risk areas:
-1 Serializer/formula consistency and actual metadata/frame widths; failure-prefix
- retention; start/first-write ordering and capped raw extraction.
-2 Positive actual writer-closure settlement and whole-phase forecast proof;
- original retained corpus accounting and no actual-byte credit.
-3 Source-function-only template namespace completeness and exactversion
- obligations. Mapping a function name does not make a Windows constructor run.
-4 Allnative/file/processHANDLE ownership, partial construction, callback/event/
- Popen close races, stage/native and bootstrap failure cleanup.
-5 Actual031 schema/guard source compatibility and closed 036ports outputs.
-6 Independent full oracle and all mapped-root/request-intent/Bcontrol closure,
- exactfinal engine/build/test unit list and each absent native extension.
+No independent source acceptance is authored here. No source review may rely on these implementation notes in place of reading the actual complete sources and dependencies.
 
-Budget039: same27/source196608/case262144/bindings65536/whole524288. New caps:
-Evidence16384/Deadlines4096,Controls28672/Adapter22528, unchangedothers.
-Each write independently checks full caps/membership before opening. No28thfile,
-subdir/temp/pycache or Git mutation. Exact-checkout cached GitNexus upstream
-attempts were made for changed classes/methods; checkout unregistered.
-Indexed risk UNKNOWN was treated manually HIGH across Driver/Evidence/Growth/
-NativeAdapter/LaneHost/bootstrap, case/HISTORY/LONG helpers and verification.
-Parent alone must detect_changes before commits.
+Fresh full review caught two still-present LONG blockers after the 10:28 freeze: checker_results publication followed an unconditional return; run_lane retained a RangeRef where the dependency expected a body. That freeze is withdrawn. Publication now follows positive settlement and precedes return. The original LONG result ref and parsed body are separate; the dependency rehash-reads the original ref and preserves it. Four historical clock segment hashes were refreshed after indentation compaction. All checks here remain static; no private import/control/native execution.
 
-Source target04:10:14Z, functional11:10:14Z, closeout13:10:14Z on2026-10-21
-unchanged. Selected reader44/48/23.6 policy does not reset clocks or prove fit.
-Global44GiB/5m/internal1GiB100k reserve unchanged; protected data intact.
-Structured-data standard remains PROPOSED; no product default/migration adopted.
-
-045 FINAL SOURCE BOUNDARY: canonicalv2 coalescing, pending input capture, LAUNCH/image/meta refs, case tags, bounded failure repr/str, atomic evidence close fence and actual scoped closure settlement are SOURCE IMPLEMENTATIONS, UNREVIEWED/UNEXECUTED. Scope contract: case_id parent166, scope_id helperlabel, case_scope fresh32hex. Native metadata follows selected meta-v2 keys. Guard prefix now hashes complete uncompressed JSONL through selected completed RSS and refuses if older40ms; active-gzip publication still requires native proof. All prior donor/profile/sealer/direct-checker integration gaps remain NO_GO until actual complete review. No claim165 runnablecases or fullsource acceptance. Hardfreeze04:10:14Z unchanged.
+Full27 review W1-W3 repair: checker CLI read cap is34816, matching admitted CLI source cap. legacy_forecast authenticates the ORIGINAL archive manifest SHA, exact592458971 bytes/5807 files and current long-archive lease before subtracting actual inventory. Bootstrap requires capture in its closed manifest field set; existing LaneHost/Adapter validation remains authoritative. Upstream GitNexus attempts could not resolve this worktree; manual HIGH blast radius is checker launches/original restore/bootstrap entry. No new runtime work. Prior10:34 packet preserved at parent refs/codex/file-native-online/windows-1034-rejected-full-review; tree1f1a31f586372849eba2b8491ee8da1ce09dd4bf.

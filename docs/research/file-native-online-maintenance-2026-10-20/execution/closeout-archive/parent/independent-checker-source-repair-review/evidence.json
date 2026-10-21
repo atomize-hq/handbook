@@ -1,0 +1,216 @@
+{
+  "AST_compile": false,
+  "Git_index_operations": false,
+  "META_prewrite": {
+    "actual_bytes": 10974423,
+    "actual_files": 1327,
+    "cap_bytes": 11206656,
+    "headroom": 38697,
+    "membership_sha256": "00f1472015c30bb24f555a7dcddd94c2aa12ccec2bc6a10318ac36d97dc6154b",
+    "pairs": {
+      "Checkerrepair": {
+        "actual_bytes": 0,
+        "actual_files": 0,
+        "closed_by_parent": false,
+        "future_bytes": 24576,
+        "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\independent-checker-source-repair-review"
+      },
+      "Contextrepair": {
+        "actual_bytes": 18868,
+        "actual_files": 2,
+        "closed_by_parent": true,
+        "future_bytes": 0,
+        "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\fixture-retirement-native-Context-repair-review"
+      },
+      "GuardR4.2": {
+        "actual_bytes": 22793,
+        "actual_files": 2,
+        "closed_by_parent": true,
+        "future_bytes": 0,
+        "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\bounded-guard-review\\R4.2"
+      },
+      "LinuxV5.3": {
+        "actual_bytes": 24191,
+        "actual_files": 2,
+        "closed_by_parent": true,
+        "future_bytes": 0,
+        "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\linux-final-source-V5.3-review"
+      },
+      "Macv36": {
+        "actual_bytes": 16586,
+        "actual_files": 2,
+        "closed_by_parent": true,
+        "future_bytes": 0,
+        "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\macos-v36-source-review"
+      },
+      "Runtime": {
+        "actual_bytes": 16900,
+        "actual_files": 2,
+        "closed_by_parent": false,
+        "future_bytes": 7676,
+        "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\shared-runtime-R3-review"
+      }
+    },
+    "parent_closed_four_unused_released_bytes": 15866,
+    "prior_pending": 160472,
+    "projected_bytes": 11167959,
+    "publication_remaining": 812,
+    "remaining_pending": 193536,
+    "utc": "2026-10-21T09:32:25.933883+00:00"
+  },
+  "Matrix_source_census": {
+    "git_pointer_bytes": 82,
+    "groups": {
+      "FOCUSED": {
+        "bytes": 225383,
+        "files": 11
+      },
+      "OTHER": {
+        "bytes": 831209,
+        "files": 89
+      },
+      "QPC": {
+        "bytes": 59673,
+        "files": 4
+      }
+    },
+    "quota_subset_bytes": 47932,
+    "whole_bytes": 1116265,
+    "whole_files": 104
+  },
+  "R1_four_preserved": {
+    "cohort_closure_controls.py": "fc6f0ac9e569d240faad977dfef247aec645b8f2b4df00c6901a866c08d307e3",
+    "paged_index.py": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea",
+    "paged_index_controls.py": "7d5dc2ae47359c17dce6f363bfc8f6d9e3f7a24603944e50258cb9b059c36e85",
+    "physical_decoder_v5.py": "1347778df8839da571603b215a8f3aecac70b40eff571ddbad0cb19e27bf5be9"
+  },
+  "budget": {
+    "bytes": 3883,
+    "sha256": "1d2116dd1a699fc58dd753f1c987c4fee293969ffdc882026b070326bbbd849c"
+  },
+  "closed_four_authority": "Parent message: GuardR4.2, LinuxV5.3, Contextrepair, Macv36 future0; unused15866 released. Actual files remain in census.",
+  "closure": {
+    "C:\\Program Files\\Git\\mingw64\\bin\\libzstd.dll": {
+      "bytes": 1179848,
+      "sha256": "f216ea8efb5b3bb9ad3d938fb9ac07e3b8f78c2c92faab03d2c468d0b6798a5a"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\independent_backlog.py": {
+      "bytes": 12263,
+      "sha256": "07b2764c6e7aefbec44e3c2ff913b280fb3ab2d77f13bc5e02539461fe640116"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\independent_checker_cli.py": {
+      "bytes": 33763,
+      "sha256": "186135a62d34e78b85c3a07fdff2013a3a8ac4f2c9037a1892b1d1a62d85fb37"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\outcome_oracle.py": {
+      "bytes": 6564,
+      "sha256": "a5721ab4102ab742efe66f546c9016b051cd3914e07700cc3de7c0f55a3ced02"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\paged_index.py": {
+      "bytes": 8097,
+      "sha256": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder.py": {
+      "bytes": 17128,
+      "sha256": "eb00a0b49ce4754b23bb4e4a340ec99070805cf43b6f2e1c1125d029f5453001"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v5.py": {
+      "bytes": 44817,
+      "sha256": "1347778df8839da571603b215a8f3aecac70b40eff571ddbad0cb19e27bf5be9"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\physical_decoder_v6.py": {
+      "bytes": 7162,
+      "sha256": "a355f3d524d91fd98865c35670c462c62e306d641ae52dc292a09e0467090c93"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\quota_v2_oracle.py": {
+      "bytes": 18418,
+      "sha256": "bf4e892298760c79ce5a164c3294e069e5188b8c2c260c8477e9c93e64c468d3"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness\\verify_operational_v2.py": {
+      "bytes": 10071,
+      "sha256": "e517d07c5f345e9fb3a90535d5185828147b45a27896e658dbf4164ea7a76caf"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-incremental-engine-experiment-2026-10-18\\verify_store.py": {
+      "bytes": 10936,
+      "sha256": "ce74f48339b950ad62c9c159bd95d4f038248d500addd6b635559ccdba42e2b8"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-navigation-2026-10-19\\oracle.py": {
+      "bytes": 9057,
+      "sha256": "877ff874cef9b9ec3867a3b7e6482a5130b4fc995f6d08ff401a96f321a6132f"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-packing-2026-10-20\\independent.py": {
+      "bytes": 13097,
+      "sha256": "94987dbe1c992ef2491bb9819ad90185d2f29aef704b1bfaaa8f7e052a449e66"
+    },
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-qnp-integration-20261019\\handbook\\docs\\research\\file-native-recovery-reclamation-2026-10-19\\verify_operational.py": {
+      "bytes": 9290,
+      "sha256": "d86c7d5406d5c5a5d00553b85dd0f16a039838132c31f41cc0567a7e3920e5cd"
+    }
+  },
+  "completion_rule": "Final source/receipt hashes and postwrite META check before releasing source read hold. Own unused allowance awaits parental closure.",
+  "dependency_context": "All14 hashes rechecked; complete CLI/backlog/v6 reread; unchanged companion semantic/loader/codec/ownership/navigation/quota source context retained from full057 review",
+  "engine_pin": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "findings": [
+    {
+      "basis": "dirs entries never checked; nonfollowing os.walk skips linked directory without onerror; parent/files checks never visit it",
+      "file": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/harness/independent_checker_cli.py",
+      "id": "CK5",
+      "lines": [
+        173,
+        174,
+        175,
+        176,
+        177,
+        180,
+        182,
+        189,
+        424,
+        449
+      ],
+      "priority": "P1",
+      "remedy": "lstat and validate every child directory before traversal can skip it; reject symlink/reparse/wrong-type/metadata failure",
+      "title": "Directory symlinks silently skipped from complete full-root proof",
+      "verification": "static local stdlib source os.py412-419; no crafted case executed"
+    }
+  ],
+  "first_contract": "Read directly; owner FIRSTAST not reproduced",
+  "freeze": "066-CK",
+  "freeze_receipt": {
+    "bytes": 9856,
+    "path": "C:/file-native-online-matrix-20261020/receipts/independent-checker-066-CK-source-freeze.json",
+    "sha256": "76ed13569c7cc54a2f3b257d44c1007c0f776ffefa5b190a2af1e5055bfdea41"
+  },
+  "full_source_read": {
+    "backlog_lines": 167,
+    "cli_lines": 466,
+    "v6_lines": 113
+  },
+  "gitnexus": "Exact-checkout unavailable; UNKNOWN/manual HIGH; no edited symbols or commit",
+  "native_or_DLL_execution": false,
+  "original_negative_evidence_preserved": true,
+  "output_pair_cap": {
+    "bytes": 24576,
+    "files": 2
+  },
+  "prior_findings": {
+    "CK1": "source repair accepted; safe_path canonicalization/reparse/parent-component/output+audit",
+    "CK2": "source repair accepted; os.walk onerror Censor",
+    "CK3": "source repair accepted; original request bytes length/SHA/path/offset/root in index",
+    "CK4": "source repair accepted; exact bool and lowerhex64 plus presence-based fallback"
+  },
+  "runtime_go": false,
+  "schema": "independent-checker-source-repair-review-evidence-v1",
+  "scope_exclusion": "Separate RAM D body not in this freeze",
+  "source_check_before_write": {
+    "R1_four_match": true,
+    "all14_match": true,
+    "receipt_match": true,
+    "utc": "2026-10-21T09:32:25.822346+00:00"
+  },
+  "source_copies": false,
+  "source_edits": false,
+  "structured_format_standard": "PROPOSED; no migration/default approval",
+  "supplied_imports": false,
+  "tests_executed": false,
+  "verdict": "REMEDIATE"
+}

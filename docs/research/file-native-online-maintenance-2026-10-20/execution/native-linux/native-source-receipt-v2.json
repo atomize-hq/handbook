@@ -1,0 +1,75 @@
+{
+  "status": "STATIC SOURCE PACKET FOR REVIEW; NO CONTROL GO",
+  "files": {
+    "native_resources_v2.py": {
+      "bytes": 9950,
+      "sha256": "345289713a2c12faf19bd01927121f2f728357b7ad11be3bd2084525d4603293"
+    },
+    "native_driver_v2.py": {
+      "bytes": 25088,
+      "sha256": "5e5fbfcca9a14e5c9494f1f34985cc32028681b630dbf380c3ce29ea12d84e0d"
+    },
+    "native_historical_v2.py": {
+      "bytes": 6006,
+      "sha256": "253c79f199637e269c43e72a710d2924ce7e452024c2bae79fbc8327e307726d"
+    },
+    "native_adapter_v2.py": {
+      "bytes": 21576,
+      "sha256": "c2e8cb629b66a0e3a27264aa293871c23124ed161e652980c1a1317854e80879"
+    },
+    "native_capsule_v2.py": {
+      "bytes": 7157,
+      "sha256": "5c0b588461a62d7f27c737084cefff570bea45744e8029c0b63fd25b66efb84a"
+    },
+    "native_peer_v2.c": {
+      "bytes": 2497,
+      "sha256": "fdf0a708e52d0a80873e445c88bbb9ec4b96d35533d48ed3c36372ff329c274b"
+    },
+    "native_packet_v2.py": {
+      "bytes": 8463,
+      "sha256": "2aa7276697affee754c8335a02e51ad5f64632aed101b91a80d45cc94d15aa0a"
+    },
+    "native-case-map-v2.json": {
+      "bytes": 152931,
+      "sha256": "91b172f39938a2cb9fb2f29cfbe4359d024b120a46daa984aa07a7bc40b99888"
+    },
+    "native-static-validation-v2.json": {
+      "bytes": 3111,
+      "sha256": "4a6a994a0391fc27f4ca4a236df4427bd36ee7d3cfa0ab9e94938cd1122157ee"
+    },
+    "native-source-review-v2.md": {
+      "bytes": 7039,
+      "sha256": "1443cc03e316d82ce7ee8e5d9df06632d2a86497340340d5cf0ace39159d6f0c"
+    },
+    "native-control-plan-v2.md": {
+      "bytes": 5353,
+      "sha256": "da96193f83da5a036e1bd6e6db2cd28f5f2372f544832cabbc83bbff567b9eab"
+    },
+    "native-source-receipt-v2-pre-review.json": {
+      "bytes": 2632,
+      "sha256": "da91e3ead433cba261c0eeaa6c28b42e1105ffaff74b74d08736d091518a5026"
+    }
+  },
+  "payload_bytes": 251803,
+  "payload_files": 12,
+  "receipt_excluded_from_own_manifest": true,
+  "source_envelope": {
+    "bytes": 262144,
+    "files": 16
+  },
+  "accepted_immutable": {
+    "native_guard.py": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9",
+    "native_driver.py": "dfe8ef569b4981a76e199a2763de8a3cf9988bb24785b280fc3662bcd09427ce",
+    "native_capsule_adapter.py": "3bafbc8ac45de6ea2e4060d1a04c6fa5fc1ac278080e3ef1ffcececbd52481b7"
+  },
+  "shared_api": {
+    "focused_protocol.py": "58928f6bf82f82d13fb5d809c8d6095e331ec4feeac48c389d72744a3ff32859",
+    "focused_schedules.py": "ee7d2aef5b7ecd492602c49f9e78646465bc2cd04a1e597e1d46e86cd67ff756",
+    "case_ledger.py": "ce7fb4983b5f31e0f529a69431a169574e7ba5cb55e225b17d42d10354be931b",
+    "source_receipt.json": "ae78d32a4a14d8327c3b4090fea3ea05f4f69b8542c0e3c281692ec7acc7b63a"
+  },
+  "final_pin": null,
+  "live_controls_run": 0,
+  "engine_calls_run": 0,
+  "native_transfers": 0
+}

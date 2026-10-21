@@ -1,0 +1,173 @@
+{
+  "kind": "independent-native-keeper",
+  "nonce": "947ff757837f00e7db4c717d654d6040",
+  "identity": {
+    "pid_requested": 70188,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 70188,
+    "ppid": 70187,
+    "uid": 501,
+    "pgid": 70188,
+    "state": 2,
+    "start": [
+      1792531283,
+      213514
+    ]
+  },
+  "fixed_cutoff_epoch": 1792581014.0,
+  "local_deadline_monotonic": 3219745.515130125,
+  "token_received": true,
+  "state": "CLOSED_AFTER_CENSOR",
+  "reason": "RuntimeError('root-completed-orphan-tree')",
+  "events": [
+    {
+      "termination": {
+        "status": "FROZEN_TREE_SIGNALLED",
+        "steps": [
+          {
+            "pid": 70230,
+            "start": [
+              1792531284,
+              893674
+            ],
+            "signal": 17,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 70227,
+            "start": [
+              1792531284,
+              816845
+            ],
+            "signal": 17,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 70230,
+            "start": [
+              1792531284,
+              893674
+            ],
+            "signal": 9,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 70227,
+            "start": [
+              1792531284,
+              816845
+            ],
+            "signal": 9,
+            "sent": true,
+            "errno": 0
+          }
+        ],
+        "known": [
+          {
+            "pid_requested": 70227,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70227,
+            "ppid": 70188,
+            "uid": 501,
+            "pgid": 70227,
+            "state": 4,
+            "start": [
+              1792531284,
+              816845
+            ]
+          },
+          {
+            "pid_requested": 70229,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70229,
+            "ppid": 70227,
+            "uid": 501,
+            "pgid": 70227,
+            "state": 2,
+            "start": [
+              1792531284,
+              870473
+            ]
+          },
+          {
+            "pid_requested": 70230,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70230,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 70227,
+            "state": 4,
+            "start": [
+              1792531284,
+              893674
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "notify_parent": {
+        "pid": 70187,
+        "start": [
+          1792531283,
+          156153
+        ],
+        "signal": 30,
+        "sent": true,
+        "errno": 0
+      }
+    },
+    {
+      "closure": {
+        "proven": true,
+        "required_observations": 2,
+        "observations": [
+          {
+            "monotonic": 3219735.246634458,
+            "groups": [
+              {
+                "pgid_requested": 70227,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3219735246622708
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          },
+          {
+            "monotonic": 3219735.268792,
+            "groups": [
+              {
+                "pgid_requested": 70227,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3219735268778125
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          }
+        ],
+        "total_numeric_observations": 2
+      }
+    }
+  ]
+}

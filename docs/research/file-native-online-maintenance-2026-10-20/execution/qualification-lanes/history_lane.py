@@ -1,9 +1,11 @@
-# SOURCE ONLY: direct frozen036 API +035 formulas; runtime and post-exit qualification require independent review/GO. No module/control/native execution in source preparation.
+# SOURCE ONLY: direct R3 runtime API +035 formulas; effective046 admission and post-exit qualification require independent review/GO. No module/control/native execution in source preparation.
 import copy
 import hashlib
 import json
 import math
 import time
+from datetime import datetime
+from pathlib import PureWindowsPath, PurePosixPath
 VERSION = 1
 MIB = 1024 * 1024
 F05_BYTES = 1073741824
@@ -104,17 +106,38 @@ def forecast_history(components):
         supplemental[group] = copy.deepcopy(part)
     return dict(status='component-arithmetic-only-PROVISIONAL_UNQUALIFIED', source_pin=components['source_pin'], bytes=total_bytes, files=total_files, directories=total_dirs, byte_headroom=F05_BYTES - total_bytes, file_headroom=F05_FILES - total_files, protocol=supplemental['protocol'], evidence=supplemental['evidence'], proof_sha256=components['proof_sha256'], components_sha256=_same(components), actual_reclaimed_credit=0, still_requires_fresh_actual_preflight=True)
 
-def validate_release(bindings):
+def validate_release(bindings, *, expected_source_budget_sha256):
     _closed(bindings, ('version', 'source_pin', *HASH_FIELDS, 'api', 'source_review', 'oracle_review', 'terminal_review', 'runtime_go', 'default_payloads', 'profile', 'strict_25Hz', 'phase_go_scope', 'cutoff', 'source_freeze', 'same_final_pin_native'), 'history-release')
     _need(type(bindings['version']) is int and bindings['version'] == VERSION, 'release-version')
     _need(_digest(bindings['source_pin'], 40), 'final-source-pin-not-released')
     for key in HASH_FIELDS:
         _need(_digest(bindings[key]), 'final-binding-unreleased:' + key)
     _need(bindings['api'] == 'history-native-v1', 'unreleased-runner-interface')
-    _need(bindings['qpc_sha256'] != QPC_SHA256 and bindings['source_budget_sha256'] == SOURCE_BUDGET_SHA256, 'exact-QPC-and-source-budget')
+    _need(_digest(expected_source_budget_sha256) and bindings['qpc_sha256'] != QPC_SHA256 and bindings['source_budget_sha256'] == expected_source_budget_sha256, 'exact-QPC-and-admitted-source-budget')
     _need(all((bindings[key] is True for key in ('source_review', 'oracle_review', 'terminal_review', 'runtime_go', 'default_payloads', 'strict_25Hz', 'same_final_pin_native'))), 'final-review-or-separate-runtime-GO-required')
     _need(type(bindings['profile']) is int and bindings['profile'] == 4, 'default-profile4')
-    _need(bindings['phase_go_scope'] == 'all1600-plus-initial-exact-lookups' and bindings['cutoff'] == FUNCTIONAL_UTC and (bindings['source_freeze'] == SOURCE_FREEZE_UTC), 'bounded-phase-GO-and-shared-clock')
+    freeze = _closed(bindings['source_freeze'], ('engine', 'harness', 'manifest_ref', 'review_ref'), 'R3-source-freeze')
+    _need(freeze['engine'] == SOURCE_FREEZE_UTC, 'fixed-engine-checkpoint')
+    stamp = freeze['harness']
+    _need(type(stamp) is str and 20 <= len(stamp) <= 27 and stamp.endswith('Z'), 'actual-harness-UTC')
+    try:
+        instant = datetime.fromisoformat(stamp[:-1] + '+00:00')
+    except ValueError as error:
+        raise HistoryRefusal('actual-harness-UTC') from error
+    _need(stamp[:19] == instant.strftime('%Y-%m-%dT%H:%M:%S') and
+          (len(stamp) == 20 or (stamp[19] == '.' and stamp[20:-1].isascii() and stamp[20:-1].isdigit())) and
+          datetime.fromisoformat(SOURCE_FREEZE_UTC[:-1] + '+00:00') <= instant <
+          datetime.fromisoformat(FUNCTIONAL_UTC[:-1] + '+00:00'), 'prospective-harness-freeze-within-fixed-clock')
+    # Native parent authority verifies these ranges before this pure validator.
+    for name in ('manifest_ref', 'review_ref'):
+        ref = _closed(freeze[name], ('path', 'offset', 'bytes', 'sha256'), name)
+        path = ref['path']
+        _need(type(path) is str and path.isascii() and 1 <= len(path) <= 4096 and
+              (PureWindowsPath(path).is_absolute() or PurePosixPath(path).is_absolute()), 'absolute-freeze-reference')
+        _integer(ref['offset'], 0, 2 ** 63 - 1, name + '-offset')
+        _integer(ref['bytes'], 1, 64 * MIB, name + '-bytes')
+        _need(_digest(ref['sha256']), 'freeze-reference-digest')
+    _need(bindings['phase_go_scope'] == 'all1600-plus-initial-exact-lookups' and bindings['cutoff'] == FUNCTIONAL_UTC, 'bounded-phase-GO-and-shared-clock')
     return copy.deepcopy(bindings)
 
 def _quantiles(values):
@@ -445,17 +468,22 @@ def validate_reader_origin(value, phase, selected, bindings):
 def run_history(host, config):
     _closed(config, ('go', 'plan', 'bindings', 'forecast', 'phase_forecasts', 'runtime_bindings'), 'run-history')
     _need(config['go'] is True, 'default-go-false-separate-runtime-release')
-    bindings = validate_release(config['bindings'])
-    plan = history_plan(config['plan'])
-    forecast = forecast_history(config['forecast'])
+    bindings = config['bindings']
+    _need(type(bindings) is dict and _digest(bindings.get('source_pin'), 40), 'parent-authorization-source-pin')
+    authorization = validate_host_authorization(host.authorize(config, 'history'), bindings['source_pin'])
     from pathlib import Path
     import runtime_contracts as shared
     rb = config['runtime_bindings']
     _need(type(rb) is dict and rb.get('history') == bindings and (rb.get('runtime_go') is True), 'supplemental-source-bindings')
     spec = rb['runtime_source']
-    _need(_digest(spec['sha256']) and spec['sha256'] == bindings['runner_sha256'] and type(spec['bytes']) is int and 0 < spec['bytes'] <= 81920 and (Path(shared.__file__).resolve() == Path(spec['path']).resolve()), 'exact-frozen036-module')
+    _need(_digest(spec['sha256']) and spec['sha256'] == bindings['runner_sha256'] and type(spec['bytes']) is int and 0 < spec['bytes'] <= 94208 and (Path(shared.__file__).resolve() == Path(spec['path']).resolve()), 'exact-admitted-R3-runtime-module')
     raw = Path(shared.__file__).read_bytes()
     _need(len(raw) == spec['bytes'] and hashlib.sha256(raw).hexdigest() == spec['sha256'] and (shared.API == 'shared-runtime-contracts-v1'), 'actual036-source-bytes')
+    admitted_source = shared.validate_source_admission(rb)
+    _need(authorization.get('source_admission') == admitted_source == rb['source_admission'] and authorization.get('source_freeze') == bindings['source_freeze'], 'parent-granted-source-admission-and-freeze')
+    bindings = validate_release(bindings, expected_source_budget_sha256=admitted_source['sha256'])
+    plan = history_plan(config['plan'])
+    forecast = forecast_history(config['forecast'])
     _need(rb['profile_config']['components'] == config['forecast'], 'same-source-profile-components')
     capacity = shared.reader_capacity(rb)
     validate_reader_capacity(plan, capacity)
@@ -463,15 +491,14 @@ def run_history(host, config):
     expected = dict(F05_bytes=forecast['bytes'], F05_files=forecast['files'], protocol_bytes=forecast['protocol']['additional_bytes'], protocol_files=forecast['protocol']['additional_files'], evidence_bytes=forecast['evidence']['additional_bytes'], evidence_files=forecast['evidence']['additional_files'])
     _need(all((type(model[k]) is int and model[k] == v for k, v in expected.items())) and model['counts'] == plan['finite_command_bounds'], 'concrete035-model-equals-all-reservations')
     source_admission = dict(whole_profile=model, reader_capacity_sha256=_same(capacity))
-    authorization = validate_host_authorization(host.authorize(config, 'history'), bindings['source_pin'])
-    h = host.harness
-    _need(bindings['source_pin'] == forecast['source_pin'] == h.final_pin, 'same-final-source-in-all-inputs')
     _need(type(config['phase_forecasts']) is dict and set(config['phase_forecasts']) == {phase['id'] for phase in plan['phases']} | {'lookup-H1', 'lookup-H10', 'bootstrap-H1-p1', 'bootstrap-H1-p4', 'bootstrap-H10-p1', 'bootstrap-H10-p4'}, 'all-lookup-bootstrap-reader-phase-oracle-finalization-forecasts-required')
     runner = shared.make_runner(host, rb)
     host.history = runner
     _need(runner is not None and getattr(runner, 'api', None) == 'history-native-v1', 'released-native-runner-required')
     _need(runner.bindings() == bindings, 'runner-exact-release-match')
     permit = runner.preflight(plan, forecast, bindings)
+    h = host.harness
+    _need(bindings['source_pin'] == forecast['source_pin'] == h.final_pin, 'same-final-source-in-all-inputs')
     _need(permit.get('go') is True and permit.get('plan_sha256') == plan['plan_sha256'] and (permit.get('fresh_whole_census') is True) and (permit.get('no_other_semantic_writer') is True) and (permit.get('no_clone') is True) and (permit.get('F05_bytes') == F05_BYTES) and (permit.get('F05_files') == F05_FILES), 'fresh-whole-phase-admission-required')
     _need(permit.get('reader_capacity_sha256') == source_admission['reader_capacity_sha256'] and permit.get('quantitative_profile_sha256') == source_admission['whole_profile']['profile_sha256'], 'runner-must-admit-exact-reader-capacity-and-quantitative-profile')
     h.note('history-plan-admitted', plan=plan, forecast=forecast, bindings=bindings, permit=permit, source_admission=source_admission)
@@ -487,6 +514,7 @@ def run_history(host, config):
             lookup_results.append(validate_lookup_evidence(plan, evidence))
             h.note('history-initial-lookups-complete', receipt_sha256=evidence['receipt_sha256'], donor=donor['id'])
             _boundary(h, runner, donor['root'], 'lookup-' + donor['id'] + '-full', donor['actual_H'])
+        runner.seal_case('lookup-' + donor['id'])
     for identity, donor in plan['donors'].items():
         root = donor['root']
         for phase in [row for row in plan['phases'] if row['donor'] == identity]:
@@ -499,6 +527,7 @@ def run_history(host, config):
                     h.cleanup(root, max_batches=160)
                     _need(h.selected(root) == selected_before, 'bootstrap-physical-only')
                     _boundary(h, runner, root, label + '-reopen-full', phase['H_start'])
+                runner.seal_case(label)
             with h.case(phase['id'], root, config['phase_forecasts'][phase['id']]):
                 _need(len(h.ledgers[root].accepted) == phase['H_start'], 'no-hidden-pubs-before-phase')
                 observations = []
@@ -548,5 +577,6 @@ def run_history(host, config):
             summaries.append(summary)
             phase_seals.append(sealed)
     comparison = compare_history(plan, summaries)
+    expanded_trace = runner.seal_trace()
     h.note('history-all1600-provisional', comparison=comparison, initial_lookup_receipts=lookup_results, semantic_write_freeze=True, future_forecast_expiry_requires_actual_quiescent_census=True)
-    return dict(comparison=comparison, lookups=lookup_results, phases=summaries, phase_seals=phase_seals, qualification='PROVISIONAL_UNQUALIFIED: post-exit receipt join and all other mandatory cells remain required')
+    return dict(comparison=comparison, lookups=lookup_results, phases=summaries, phase_seals=phase_seals, expanded_trace=expanded_trace, qualification='PROVISIONAL_UNQUALIFIED: post-exit receipt join and all other mandatory cells remain required')

@@ -1,0 +1,754 @@
+{
+  "name": "escape-final-v15",
+  "exit": 1,
+  "stdout": "{\"censor\": \"RuntimeError(\\\"RuntimeError('owned-descendant-escaped-session')\\\")\", \"closure\": \"PROVEN_EMPTY_TWICE\", \"token_released\": true, \"sample_count\": 192, \"sample_gap_max_s\": 0.01509845769032836, \"workload_GO\": true, \"worker_exit\": null, \"keeper_recovery_socket\": \"/private/tmp/file-native-online-macos-20261020/keeper-c14265b42bb4890c86714e4039a4046b.release.json\", \"nonce\": \"c14265b42bb4890c86714e4039a4046b\"}\n",
+  "stderr": "",
+  "started_epoch": 1792531301.491449,
+  "argv": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "/private/tmp/file-native-online-macos-20261020/execution/native-macos/guard_v7.py",
+    "--name",
+    "escape-final-v15",
+    "--seconds",
+    "12",
+    "--prospective",
+    "{\"F01\":{\"bytes\":131072,\"files\":8},\"F04\":{\"bytes\":0,\"files\":0},\"F08\":{\"bytes\":0,\"files\":0},\"F12\":{\"bytes\":2097152,\"files\":8},\"F13\":{\"bytes\":0,\"files\":0}}",
+    "--control-only",
+    "--",
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "-c",
+    "import subprocess,sys,time; subprocess.run([sys.executable,\"-B\",\"-c\",\"import os,time; os.setsid(); time.sleep(4)\"])"
+  ],
+  "guard_sha256": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6",
+  "result": {
+    "kind": "native-guard-v7",
+    "nonce": "c14265b42bb4890c86714e4039a4046b",
+    "status": "GUARD_CONTROL_CANDIDATE_NO_ENGINE_RELEASE",
+    "source_sha256": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6",
+    "adapter_source_bindings": {
+      "monitor_v7.py": "96eccfa0e6c4ca9ed35511ea0242bc8abff64d12d7ba2fc5f76558a57544bade",
+      "control_smoke_v7.py": "17bb86987bca3282bd95f8657e5bd2284b90065c7fe42b66b7aed888b40899af",
+      "keeper_v7.py": "7b2b4017b3c5f4e23402eb66aa1d4fa5cbe1993c1e01d3920bc49544f6ac0958",
+      "admission_v7.py": "c23ed5d767b74fce3e0d1478f333a72bfa84683a2cfc582648fd7db557bbfe05",
+      "guard_v7.py": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6"
+    },
+    "source_pin": "CONTROL_ONLY",
+    "claims": {
+      "F01": "initial-native-worker-source4MiB-at-authority94734e76",
+      "F04": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570",
+      "F08": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984",
+      "F12": "initial-native-worker-functional-evidence24MiB",
+      "F13": "initial-native-worker-combined-positive-shared-growth4MiB"
+    },
+    "limits": {
+      "F01": {
+        "bytes": 4194304,
+        "files": 1000,
+        "claim": "initial-native-worker-source4MiB-at-authority94734e76"
+      },
+      "F04": {
+        "bytes": 268435456,
+        "files": 5000,
+        "claim": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570"
+      },
+      "F08": {
+        "bytes": 100663296,
+        "files": 30000,
+        "claim": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984"
+      },
+      "F12": {
+        "bytes": 25165824,
+        "files": 10000,
+        "claim": "initial-native-worker-functional-evidence24MiB"
+      },
+      "F13": {
+        "bytes": 4194304,
+        "files": 1500,
+        "claim": "initial-native-worker-combined-positive-shared-growth4MiB"
+      }
+    },
+    "prospective": {
+      "F01": {
+        "bytes": 131072,
+        "files": 8
+      },
+      "F04": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F08": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F12": {
+        "bytes": 2097152,
+        "files": 8
+      },
+      "F13": {
+        "bytes": 0,
+        "files": 0
+      }
+    },
+    "started_epoch": 1792531301.56075,
+    "functional_cutoff_epoch": 1792581014.0,
+    "effective_fixed_cutoff_epoch": 1792581014.0,
+    "local_deadline_monotonic": 3219763.872971125,
+    "global_enumeration": false,
+    "censor": "RuntimeError(\"RuntimeError('owned-descendant-escaped-session')\")",
+    "closure": "PROVEN_EMPTY_TWICE",
+    "token_released": true,
+    "worker_exit": null,
+    "supervisor": {
+      "pid_requested": 70512,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 70512,
+      "ppid": 70050,
+      "uid": 501,
+      "pgid": 70050,
+      "state": 2,
+      "start": [
+        1792531301,
+        491598
+      ]
+    },
+    "before_setup_positive_RSS": {
+      "return": 0,
+      "errno": 0,
+      "rss_bytes": 26787840,
+      "start_abstime": 77274043291651
+    },
+    "observed_output_bytes": 0,
+    "workload_GO": true,
+    "closure_proofs": [
+      {
+        "proven": true,
+        "required_observations": 2,
+        "observations": [
+          {
+            "monotonic": 3219753.844575458,
+            "groups": [
+              {
+                "pgid_requested": 70539,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3219753844508125
+              },
+              {
+                "pgid_requested": 70541,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3219753844564541
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          },
+          {
+            "monotonic": 3219753.870206708,
+            "groups": [
+              {
+                "pgid_requested": 70539,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3219753870032291
+              },
+              {
+                "pgid_requested": 70541,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3219753870173375
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          }
+        ],
+        "total_numeric_observations": 2
+      }
+    ],
+    "termination": [],
+    "keeper_identity": {
+      "pid_requested": 70513,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 70513,
+      "ppid": 70512,
+      "uid": 501,
+      "pgid": 70513,
+      "state": 2,
+      "start": [
+        1792531301,
+        574849
+      ]
+    },
+    "keeper_recovery_socket": "/private/tmp/file-native-online-macos-20261020/keeper-c14265b42bb4890c86714e4039a4046b.release.json",
+    "token_acquired_epoch": 1792531301.5826309,
+    "admission_snapshot": {
+      "categories": {
+        "F01": {
+          "logical_bytes": 609821,
+          "allocated_bytes": 712704,
+          "files": 41,
+          "directories": 9,
+          "symlinks": 0
+        },
+        "F04": {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0,
+          "directories": 0,
+          "symlinks": 0
+        },
+        "F08": {
+          "logical_bytes": 24585,
+          "allocated_bytes": 61440,
+          "files": 12,
+          "directories": 1,
+          "symlinks": 0
+        },
+        "F12": {
+          "logical_bytes": 3924483,
+          "allocated_bytes": 5009408,
+          "files": 644,
+          "directories": 140,
+          "symlinks": 0
+        },
+        "F13": {
+          "logical_bytes": 82,
+          "files": 2,
+          "allocated_bytes": null,
+          "shared_components": {
+            "Git": {
+              "logical_bytes": 187972974,
+              "allocated_bytes": 205033472,
+              "files": 5494,
+              "directories": 371,
+              "symlinks": 0,
+              "baseline_logical_bytes": 187972892,
+              "baseline_files": 5492,
+              "positive_bytes": 82,
+              "positive_files": 2
+            },
+            "Cargo": {
+              "logical_bytes": 1859795101,
+              "allocated_bytes": 2063294464,
+              "files": 81747,
+              "directories": 15833,
+              "symlinks": 13,
+              "baseline_logical_bytes": 1859800817,
+              "baseline_files": 81747,
+              "positive_bytes": 0,
+              "positive_files": 0
+            }
+          }
+        }
+      },
+      "free_bytes": 162155229184
+    },
+    "admitted_growth_ceiling": {
+      "F01": {
+        "bytes": 740893,
+        "files": 49
+      },
+      "F04": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F08": {
+        "bytes": 24585,
+        "files": 12
+      },
+      "F12": {
+        "bytes": 6021635,
+        "files": 652
+      },
+      "F13": {
+        "bytes": 82,
+        "files": 2
+      }
+    },
+    "launcher": {
+      "path": "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3.11",
+      "sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+      "argv": [
+        "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+        "-B",
+        "-c",
+        "import subprocess,sys,time; subprocess.run([sys.executable,\"-B\",\"-c\",\"import os,time; os.setsid(); time.sleep(4)\"])"
+      ],
+      "cwd": "/private/tmp/file-native-online-macos-20261020",
+      "contract": "foreground, no daemonization or session escape; all subprocesses sampled"
+    },
+    "anchor": {
+      "pid_requested": 70539,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 70539,
+      "ppid": 70513,
+      "uid": 501,
+      "pgid": 70539,
+      "state": 2,
+      "start": [
+        1792531303,
+        388784
+      ]
+    },
+    "before_GO_positive_RSS": {
+      "kind": "rss",
+      "monotonic": 3219753.757665458,
+      "processes": [
+        {
+          "identity": {
+            "pid_requested": 70512,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70512,
+            "ppid": 70050,
+            "uid": 501,
+            "pgid": 70050,
+            "state": 2,
+            "start": [
+              1792531301,
+              491598
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 29540352,
+            "start_abstime": 77274043291651
+          }
+        },
+        {
+          "identity": {
+            "pid_requested": 70513,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70513,
+            "ppid": 70512,
+            "uid": 501,
+            "pgid": 70513,
+            "state": 2,
+            "start": [
+              1792531301,
+              574849
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 9125888,
+            "start_abstime": 77274045289656
+          }
+        },
+        {
+          "identity": {
+            "pid_requested": 70539,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70539,
+            "ppid": 70513,
+            "uid": 501,
+            "pgid": 70539,
+            "state": 2,
+            "start": [
+              1792531303,
+              388784
+            ]
+          },
+          "usage": {
+            "return": 0,
+            "errno": 0,
+            "rss_bytes": 26755072,
+            "start_abstime": 77274088823938
+          }
+        }
+      ],
+      "all_helpers_rss": 67567616,
+      "owned_group_rss": 26755072,
+      "tree": {
+        "group": {
+          "pgid_requested": 70539,
+          "returned_bytes": 4,
+          "errno": 0,
+          "valid": true,
+          "members": [
+            70539
+          ],
+          "monotonic_ns": 3219753757342166
+        },
+        "identities": [
+          {
+            "pid_requested": 70539,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70539,
+            "ppid": 70513,
+            "uid": 501,
+            "pgid": 70539,
+            "state": 2,
+            "start": [
+              1792531303,
+              388784
+            ]
+          }
+        ],
+        "escaped": []
+      },
+      "completed_monotonic": 3219753.757763625
+    },
+    "workload_child_pid": 70540,
+    "primary_sample_failure": "RuntimeError('owned-descendant-escaped-session')",
+    "sample_count": 192,
+    "sample_gap_max_s": 0.01509845769032836,
+    "sample_failure": "RuntimeError('owned-descendant-escaped-session')",
+    "peak_group_rss": 57327616,
+    "peak_all_helpers_rss": 67567616,
+    "last_tree_trace": [
+      {
+        "monotonic_ns": 3219753757436583,
+        "pids": [
+          70539
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219753766003250,
+        "pids": [
+          70539,
+          70540
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219753773835791,
+        "pids": [
+          70539,
+          70540
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219753788588000,
+        "pids": [
+          70539,
+          70540
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219753795732458,
+        "pids": [
+          70539,
+          70540,
+          70541
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219753806880500,
+        "pids": [
+          70539,
+          70540,
+          70541
+        ],
+        "escaped_pids": []
+      },
+      {
+        "monotonic_ns": 3219753816272333,
+        "pids": [
+          70539,
+          70540,
+          70541
+        ],
+        "escaped_pids": [
+          70541
+        ]
+      }
+    ],
+    "disk_monitor": {
+      "latest": {
+        "monotonic": 3219753.857791291,
+        "snapshot": {
+          "categories": {
+            "F01": {
+              "logical_bytes": 609808,
+              "allocated_bytes": 712704,
+              "files": 41,
+              "directories": 9,
+              "symlinks": 0
+            },
+            "F04": {
+              "logical_bytes": 0,
+              "allocated_bytes": 0,
+              "files": 0,
+              "directories": 0,
+              "symlinks": 0
+            },
+            "F08": {
+              "logical_bytes": 24585,
+              "allocated_bytes": 61440,
+              "files": 12,
+              "directories": 1,
+              "symlinks": 0
+            },
+            "F12": {
+              "logical_bytes": 3930000,
+              "allocated_bytes": 5013504,
+              "files": 646,
+              "directories": 140,
+              "symlinks": 0
+            }
+          },
+          "free_bytes": 162155212800
+        },
+        "shared_checked": false
+      },
+      "failure": null
+    },
+    "keeper_shutdown_error": "RuntimeError('keeper-handshake-failed:closed')",
+    "keeper_reaped": true,
+    "raw_rows_written": 197,
+    "finished_epoch": 1792531304.068695,
+    "test_fault": null
+  },
+  "raw": {
+    "compressed_sha256": "132a3f458b8a677e331e33418d5a0b7dc342cbcb6d2a482407b2bced114075ed",
+    "compressed_bytes": 5867,
+    "gzip_eof_complete": true,
+    "json_rows": 197,
+    "rss_rows": 193,
+    "max_RSS_start_gap_s": 0.015211957972496748,
+    "rows_match_receipt": true,
+    "raw_censored": false
+  },
+  "keeper": {
+    "kind": "independent-native-keeper",
+    "nonce": "c14265b42bb4890c86714e4039a4046b",
+    "identity": {
+      "pid_requested": 70513,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 70513,
+      "ppid": 70512,
+      "uid": 501,
+      "pgid": 70513,
+      "state": 2,
+      "start": [
+        1792531301,
+        574849
+      ]
+    },
+    "fixed_cutoff_epoch": 1792581014.0,
+    "local_deadline_monotonic": 3219763.872971125,
+    "token_received": true,
+    "state": "CLOSED_AFTER_CENSOR",
+    "reason": "RuntimeError('owned-descendant-escaped-session')",
+    "events": [
+      {
+        "termination": {
+          "status": "FROZEN_TREE_SIGNALLED",
+          "steps": [
+            {
+              "pid": 70540,
+              "start": [
+                1792531303,
+                447461
+              ],
+              "signal": 17,
+              "sent": true,
+              "errno": 0
+            },
+            {
+              "pid": 70539,
+              "start": [
+                1792531303,
+                388784
+              ],
+              "signal": 17,
+              "sent": true,
+              "errno": 0
+            },
+            {
+              "pid": 70541,
+              "start": [
+                1792531303,
+                480725
+              ],
+              "signal": 17,
+              "sent": true,
+              "errno": 0
+            },
+            {
+              "pid": 70540,
+              "start": [
+                1792531303,
+                447461
+              ],
+              "signal": 9,
+              "sent": true,
+              "errno": 0
+            },
+            {
+              "pid": 70541,
+              "start": [
+                1792531303,
+                480725
+              ],
+              "signal": 9,
+              "sent": true,
+              "errno": 0
+            },
+            {
+              "pid": 70539,
+              "start": [
+                1792531303,
+                388784
+              ],
+              "signal": 9,
+              "sent": true,
+              "errno": 0
+            }
+          ],
+          "known": [
+            {
+              "pid_requested": 70539,
+              "returned_bytes": 136,
+              "errno": 0,
+              "expected_bytes": 136,
+              "pid": 70539,
+              "ppid": 70513,
+              "uid": 501,
+              "pgid": 70539,
+              "state": 4,
+              "start": [
+                1792531303,
+                388784
+              ]
+            },
+            {
+              "pid_requested": 70540,
+              "returned_bytes": 136,
+              "errno": 0,
+              "expected_bytes": 136,
+              "pid": 70540,
+              "ppid": 70539,
+              "uid": 501,
+              "pgid": 70539,
+              "state": 4,
+              "start": [
+                1792531303,
+                447461
+              ]
+            },
+            {
+              "pid_requested": 70541,
+              "returned_bytes": 136,
+              "errno": 0,
+              "expected_bytes": 136,
+              "pid": 70541,
+              "ppid": 70540,
+              "uid": 501,
+              "pgid": 70541,
+              "state": 4,
+              "start": [
+                1792531303,
+                480725
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "notify_parent": {
+          "pid": 70512,
+          "start": [
+            1792531301,
+            491598
+          ],
+          "signal": 30,
+          "sent": true,
+          "errno": 0
+        }
+      },
+      {
+        "closure": {
+          "proven": true,
+          "required_observations": 2,
+          "observations": [
+            {
+              "monotonic": 3219753.843733791,
+              "groups": [
+                {
+                  "pgid_requested": 70539,
+                  "returned_bytes": 0,
+                  "errno": 0,
+                  "valid": true,
+                  "members": [],
+                  "monotonic_ns": 3219753843665125
+                },
+                {
+                  "pgid_requested": 70541,
+                  "returned_bytes": 0,
+                  "errno": 0,
+                  "valid": true,
+                  "members": [],
+                  "monotonic_ns": 3219753843717875
+                }
+              ],
+              "remaining": [],
+              "unknown_errno_observations": [],
+              "empty": true
+            },
+            {
+              "monotonic": 3219753.866343208,
+              "groups": [
+                {
+                  "pgid_requested": 70539,
+                  "returned_bytes": 0,
+                  "errno": 0,
+                  "valid": true,
+                  "members": [],
+                  "monotonic_ns": 3219753866156833
+                },
+                {
+                  "pgid_requested": 70541,
+                  "returned_bytes": 0,
+                  "errno": 0,
+                  "valid": true,
+                  "members": [],
+                  "monotonic_ns": 3219753866319958
+                }
+              ],
+              "remaining": [],
+              "unknown_errno_observations": [],
+              "empty": true
+            }
+          ],
+          "total_numeric_observations": 2
+        }
+      }
+    ]
+  }
+}

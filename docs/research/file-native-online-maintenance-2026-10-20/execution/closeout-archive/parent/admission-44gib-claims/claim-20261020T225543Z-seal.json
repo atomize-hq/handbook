@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-015-READONLY-FOCUSED-480MiB-FEASIBILITY",
+  "utc": "2026-10-20T22:55:43.074640+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T225543Z.json",
+      "bytes": 11785,
+      "sha256": "da8a13b08e75f1051bcd657fb1c9e1d5633b201e66e9670ad31501842126f29b"
+    },
+    {
+      "file": "claim-20261020T225543Z.md",
+      "bytes": 2814,
+      "sha256": "d9b48e4d0787c79c3de5000426832808c14a57d528354c31e40b35d51e77c535"
+    }
+  ],
+  "status": "READ_ONLY_DOSSIER__NO_NEW_ALLOCATION_OR_QUALIFICATION_GO",
+  "sealed": true
+}

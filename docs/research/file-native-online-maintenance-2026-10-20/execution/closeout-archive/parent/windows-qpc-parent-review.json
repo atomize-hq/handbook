@@ -1,0 +1,24 @@
+{
+  "disposition": "ACCEPT_BOUNDED_QPC_CONTROLLER_FOR_EXPLICIT_FUTURE_OPT_IN",
+  "guard_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "original_frozen_sha256": "1e4a965139cac5b48e6cbef57d0ac8cc3c3d0294f36a392383308abcee3affae",
+  "original_review_sha256": "454d1c173015b7d7360ffd314a7f652b7232963decc9a884be036cc7f7e004e1",
+  "corrective_review_sha256": "c0f1770d03aa9f1853cc44beadbef89209d98d45a70f48701522fa5843b0ebbf",
+  "parent_read": "Full complete run diff + unchanged helper/tail comparisons, complete original and corrective control source; all manifest sizes/SHA and seven strict single-member gzip streams independently checked; six original native Job closures and corrective two-empty/no-resume proof read",
+  "normal_actual_samples": 256,
+  "normal_max_start_interval_seconds": 0.0327326,
+  "normal_max_full_sample_seconds": 0.0016907,
+  "normal_strict_over_40ms": 0,
+  "negative_controls": [
+    "prospective cap before child",
+    "absolute timeout",
+    "first full sample 61.6274ms before resume",
+    "start gap83.4048ms",
+    "whole Job tail65.727ms vs root0.278ms",
+    "corrected injected missing owned RSS before resume"
+  ],
+  "failed_prefix_preserved": "original missing-RSS v1 injection failed, actual timeout654validsamples; original summary remains PARTIAL",
+  "scope": "Benign controller/interface controls only; no engine qualification; every future run must bind actual controller/budget/input source and retain all sampling gaps/censors/closure. Frozen old evidence unchanged.",
+  "source_bytes": 59673,
+  "source_files": 4
+}

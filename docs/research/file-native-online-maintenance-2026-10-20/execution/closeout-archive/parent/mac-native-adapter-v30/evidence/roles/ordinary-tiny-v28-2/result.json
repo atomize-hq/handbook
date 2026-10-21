@@ -1,0 +1,88 @@
+{
+  "role": "reader",
+  "limit_bytes": 268435456,
+  "failures": [],
+  "samples": 26,
+  "max_start_gap_s": 0.012864583171904087,
+  "peak_RSS_bytes": 36372480,
+  "closure": [
+    {
+      "monotonic": 3223718.364760166,
+      "identities": [
+        {
+          "pid_requested": 62022,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62023,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62024,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62026,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    },
+    {
+      "monotonic": 3223718.389794291,
+      "identities": [
+        {
+          "pid_requested": 62022,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62023,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62024,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62026,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    }
+  ],
+  "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+  "source_pin": "CONTROL_ONLY",
+  "exit": 0,
+  "seconds": 0.299902708735317,
+  "guarded_seconds": 0.34906754177063704,
+  "output_complete": true,
+  "outputs": {
+    "stdout": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/ordinary-tiny-v28-2/stdout.bin",
+      "bytes": 683,
+      "sha256": "7cbd7270c7fbb474ebbd7e6f0d8a7d9e74cb4544fce7a31dfda51aa9543b55c6"
+    },
+    "stderr": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/ordinary-tiny-v28-2/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

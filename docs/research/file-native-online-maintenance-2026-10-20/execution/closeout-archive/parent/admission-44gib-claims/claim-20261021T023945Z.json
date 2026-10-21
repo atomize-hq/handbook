@@ -1,0 +1,162 @@
+{
+  "claim_id": "44GiB-CENTRAL-037-ARCHIVE80K-META10M-FAMILY192-GUARD72K",
+  "utc": "2026-10-21T02:39:45.811660+00:00",
+  "status": "INTERNAL_COMBINED_CAPS_APPLIED__PARENT_REGISTRATION_SOURCE_GO_REQUIRED__NO_RUNTIME",
+  "authority": "META037A/B/Cplusguard8KiBamendmentarrivedBEFOREseal, includedONCE; no038/unrelatedallocation.",
+  "prior036": {
+    "file": "claim-20261021T022229Z.json",
+    "sha256": "9ef60fba14531d5d43e68f7bd3641ee63a789f9632e495180c18fa1a72538f57"
+  },
+  "prior_family_addendum": {
+    "file": "claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "immutable": true
+  },
+  "A_archive": {
+    "owner": "01a15b8f-0e20-7553-941c-3210d5cb46e6",
+    "old_bytes": 65536,
+    "new_bytes": 81920,
+    "files_unchanged": 4,
+    "new_caps": {
+      "archive.py": 57344,
+      "controls.py": 18432,
+      "README.md": 4096,
+      "source-receipt.json": 2048
+    },
+    "C3draw": 16384,
+    "reason": "Fiveblockingreviewfixesneedreadablecapacity, notomitted/minifiedproof;oldphysicalcapsfit."
+  },
+  "B_META": {
+    "old_bytes": 9437184,
+    "new_bytes": 10485760,
+    "files_unchanged": 2000,
+    "C3draw": 1048576,
+    "old_manifest_path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\meta-membership-v4.json",
+    "old_manifest_sha256": "024a23d8304de4dec44332b1c6d686031ffc1dbc9f5a30e678f2bae03d5dfe0e",
+    "old_manifest_immutable": true,
+    "fresh_actual_bytes": 8748338,
+    "fresh_files": 1041,
+    "fresh_old9cap_fits": true,
+    "new10_headroom_beforeclaim": 1737422,
+    "rule": "ParentnewimmutableMETA10membership/budget; allP/archives/extracts/closedLanding/promotedphysicalcopiescountonce. Allpendingforecast+individualprewritechecks stillrequired. Old8/9Mfailures/censorsNOTretroqualified; newcapdoesnoteraseoldresults. Noimplicitbulkcopypermission."
+  },
+  "C_report_family": {
+    "roots": [
+      "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib",
+      "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims"
+    ],
+    "old_caps": {
+      "files": 128,
+      "bytes": 524288
+    },
+    "new_caps": {
+      "files": 192,
+      "bytes": 786432
+    },
+    "extra64files": "EXISTINGUNASSIGNEDcentralfileheadroom ONLY, no100kinsidereserve/protecteddelete/reclaim",
+    "reserved_before": 4792652,
+    "reserved_after": 4792716,
+    "unassigned_before": 207348,
+    "unassigned_after": 207284,
+    "global_filecap": 5000000,
+    "inside_closeout_files_unchanged": 100000,
+    "extra256KiB": "WITHINMETA10, notadditionalglobal/C3draw; distinctLandingcopiesalsoMETA.",
+    "actual_before": {
+      "files": 116,
+      "bytes": 442506
+    },
+    "activation": "ThistripletcreatedandverifiedunderOLD128/512KiB. OnlyAFTERdurablesealnew192/768operative. Freshfamilyfiles/bytes+METAactualcopies/pendinggrowthcheckEVERYclaim;compactreferences."
+  },
+  "D_guard": {
+    "owner": "01a15ae1-839d-7b02-843b-558ddc9e78cc",
+    "old_bytes": 65536,
+    "new_bytes": 73728,
+    "files_unchanged": 4,
+    "new_caps": {
+      "job_guard_bounded.py": 57344,
+      "controls.py": 8192,
+      "README.md": 4096,
+      "source-receipt.json": 4096
+    },
+    "C3draw": 8192,
+    "reason": "Readable50943Bcompletecandidatewasheldbeforewrite; currentphysicalsourcefitsold49152. Preferoriginalreadableformatbeforefreshreview; no semantic/runtimeexpansion. Frozen50eccsource/receiptsimmutable."
+  },
+  "fresh_SOURCE_snapshots": {
+    "archive": {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\fixture-retirement",
+      "members": [
+        {
+          "file": "archive.py",
+          "bytes": 42695,
+          "sha256": "5b0dceb50362ee988b181c6f9a08d46c3a0990d012597362547d0008dc075c98"
+        },
+        {
+          "file": "controls.py",
+          "bytes": 16222,
+          "sha256": "bcdb8341c2c15db95f891abb2d102058dee1d3ce342e34dc6eebcb76437f0677"
+        },
+        {
+          "file": "README.md",
+          "bytes": 4089,
+          "sha256": "5328d209d642ef9634b670e1ff952541554e9171b46f5e8cb7d8b91aa40552fe"
+        },
+        {
+          "file": "source-receipt.json",
+          "bytes": 1701,
+          "sha256": "3b5d019a183cba05764e870dd520403122ac3239591c59ccdf684c324058131c"
+        }
+      ],
+      "actual_bytes": 64707,
+      "old_caps_fit": true
+    },
+    "guard": {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard",
+      "members": [
+        {
+          "file": "job_guard_bounded.py",
+          "bytes": 49129,
+          "sha256": "0a1e20fb755b27538521f96614e4fe279e0e4005f69eafff9db9a31ed2c30e46"
+        },
+        {
+          "file": "controls.py",
+          "bytes": 0,
+          "sha256": null
+        },
+        {
+          "file": "README.md",
+          "bytes": 0,
+          "sha256": null
+        },
+        {
+          "file": "source-receipt.json",
+          "bytes": 0,
+          "sha256": null
+        }
+      ],
+      "actual_bytes": 49129,
+      "old_caps_fit": true
+    }
+  },
+  "C3": {
+    "total_unchanged": 16777216,
+    "unclaimed_before": 1998848,
+    "archive_draw": 16384,
+    "META_draw": 1048576,
+    "guard_draw": 8192,
+    "combined_draw": 1073152,
+    "unclaimed_after": 925696,
+    "old32KiBcontrolhold_inside_unclaimed": 32768,
+    "family_extra_byte_draw": 0
+  },
+  "gate": "ParentNEWimmutablebudgetsbind037/allperfilegroups/archive80K/guard72K/META10/family192thenexplicitSOURCEGO BEFOREgrowth. Exactnames/ownersunchanged; noimplicittemps/pycache/output. Allruntime/archive/nativecontrols/Jobs/engine/build/corpus/copy/restore/deletion/Gitunadmitted; separatefullreview+finitephase/evidence/RSS/identity/closureforecastrequired.",
+  "protected": "OldCP4/controls/baselines/LONGS+D/protectedarchives/solebackups/rejectedtargetsintact. Archive64MiB+sidecar1MiBfuturebodycoexistence/retainedfloorproposalunadmitted, no compression/cleanup/productcredit.",
+  "unchanged_global_bytes": {
+    "whole": 46924310901,
+    "central": 320329355,
+    "cap": 47244640256,
+    "inside_closeout_bytes": 1073741824,
+    "new_globalbytes": 0,
+    "C2Win128MiB_held": 134217728
+  },
+  "actions": "Readonlyfreshcensus/cap/fileheadroom/priorhashchecks+one037triplet only. Sourcefreeze04:10unchanged."
+}

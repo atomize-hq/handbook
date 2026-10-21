@@ -1,0 +1,1164 @@
+{
+  "utc": "2026-10-20T21:27:20.023870+00:00",
+  "source_pin": "cd12ea85db214428998f5507ffdf81fc8708ba67",
+  "parent": "f6f907943c54936e49123a136a5f0f87993758ab",
+  "remote_checked_match": true,
+  "source_disposition": "REMEDIATE cd12ea8: native9 concrete legacy flat-container deletion defect. Later runtime successes remain bound to candidate9; candidate10 replacement review pending.",
+  "source_bindings": [
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.lock",
+      "sha256": "20e60d9dfc38e093a3926f6867b5519356685bdb6ca38c488857216f5bc9bb7d",
+      "bytes": 10547,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/Cargo.toml",
+      "sha256": "0011321addea1183db4da81c4158214b8136c8d410389c3db90122824213ab74",
+      "bytes": 561,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/Cargo.toml",
+      "sha256": "df269faad840d9855e7eaa51f85e556599271adce3f7e135d60833ecb889c69e",
+      "bytes": 147,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/project/src/main.rs",
+      "sha256": "f2e0f1e632c0380ace4f104c056ac097a0ad982956209edabf70c8426553b173",
+      "bytes": 68,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/Cargo.toml",
+      "sha256": "aaa715292c6546c80100d28632647e6b9e87df5ff683b5821fb0e3c41928e5ed",
+      "bytes": 148,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/consumers/research/src/main.rs",
+      "sha256": "8d8f2facd52ce977fa3b5577001ccdc98e1bc227e7ba0b3b41b5b664475c33ac",
+      "bytes": 69,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/api.rs",
+      "sha256": "974ca413f15da15ffdc66d02e2792c76d33a1951d34ad9f403ddfca6c7c65851",
+      "bytes": 12161,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/baseline_model.rs",
+      "sha256": "c441b4350e8c1f36ab9bba788962b82e2a51d36eb28eba00ae01cb46bf4b493c",
+      "bytes": 8570,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/bounds_tests.rs",
+      "sha256": "7d3e87e0556d1674e81a7ceeedbbbd028cdc3ba5a8d6e7f0cacee2b84e5f2594",
+      "bytes": 1001,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/differential.rs",
+      "sha256": "3a757d092f9c6564943443ca562eb1151ef4b32d8ef9c56ee8a905eb2d821761",
+      "bytes": 2661,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/disk.rs",
+      "sha256": "45f6288284e9f86e69028f4cc5a53aaac88720b7d805f9e1cb6964105edfdd4d",
+      "bytes": 30973,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/graph.rs",
+      "sha256": "d96a608b34202f617146ddbb532b8656ff41e646e05f7c9fb8992aa8c826dd27",
+      "bytes": 14324,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/io.rs",
+      "sha256": "9d2cd54ec0151cc073da38324ddb2fc7ce5e51b2d3106e1196cae4369524a808",
+      "bytes": 13704,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lib.rs",
+      "sha256": "2f7b086f78f5860e2d2592757e29817d6bd435c1808e37d79d07504718e5c9ed",
+      "bytes": 452,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/lifetime.rs",
+      "sha256": "c6407aef8706a710caad8451b76515e7439746f3ca601b8c005da2c3647be02f",
+      "bytes": 15945,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/main.rs",
+      "sha256": "3b871fc8cbabc018814a98a65bfbb7b005b198d374694119a7cbb69aa5f73701",
+      "bytes": 57,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/navigation.rs",
+      "sha256": "358d976f97866aefb7a3a7cc1fe4a3811f4694f25624039d3c50b66d2ab8f3d6",
+      "bytes": 10576,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/objects.rs",
+      "sha256": "47f36d2323636f2d4162d33be5921cb31ce8902ab2121e4f02728213b225b1e6",
+      "bytes": 3551,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/pack.rs",
+      "sha256": "b452e2d6fe7d794953ed5c8a1e8d0020dd9241eca05a36c55518e7063533f755",
+      "bytes": 13379,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/packing.rs",
+      "sha256": "b583ddaa513e7b761d1da81bf60e1f7158530fe9d5f675c8ce2b39af91cdc2a7",
+      "bytes": 48481,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/physical_lifetime.rs",
+      "sha256": "eca827a29e88eab2f2ff2127c3fed4f431dc4037beda6f174e19af13dd8b72d4",
+      "bytes": 22534,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/projection.rs",
+      "sha256": "c0a7fd4479470fd618a726cc29df02b31d49d9b5ec4d281eb55fabb5e42c91b6",
+      "bytes": 27876,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    },
+    {
+      "path": "docs/research/file-native-incremental-engine-experiment-2026-10-18/src/store.rs",
+      "sha256": "31cafafddede7c2347a1fe85d3f18346972796af9fa8cb6b12c6c531502eb58d",
+      "bytes": 36078,
+      "commit_matches": true,
+      "runtime_matches": true,
+      "prebuild_matches": true
+    }
+  ],
+  "executable": {
+    "bytes": 2979328,
+    "sha256": "b7b60980beaddc7af01302c05ea3eea8168e46ab3ac3db3d6ead05065ff2a4e7"
+  },
+  "artifact_hashes": {
+    "candidate9-binding.json": {
+      "bytes": 5166,
+      "sha256": "aecad3128bef63fd23ab231c5369c6deea6b3608f52a9396e74955b3c66b6651"
+    },
+    "build9-source-before.json": {
+      "bytes": 4870,
+      "sha256": "f65a9b29cfc804c96a380530b5127e818a4527e9917f780f8371e5ac007dc6d9"
+    },
+    "build9-units.json": {
+      "bytes": 35478,
+      "sha256": "5897e1ae408bf3389d420a8fe9fd5a0ed27aa08530821ba0f32ce22cd10d99f4"
+    },
+    "build9-units.stdout": {
+      "bytes": 839,
+      "sha256": "90cc7e3607ef2ead0cb8b6175aa279c243767c82044f6ee474bd9109a07553e0"
+    },
+    "build9-units.stderr": {
+      "bytes": 4658,
+      "sha256": "f7227ac7c2099a7f7aed757b8829ccb0f91be2c04be81f56f238303f57c95dfa"
+    },
+    "build9-units.rss.jsonl.gz": {
+      "bytes": 41973,
+      "sha256": "cc8a7aad951c1cfb54ef53e1a5161b1e581fbb1a8b1bdb18f327eadeece7e9a5"
+    },
+    "rem9-events.jsonl": {
+      "bytes": 192017,
+      "sha256": "eeca814aa493d48d4c84d7645876c8f6191f58b66cf9074408b2c0202209d844"
+    },
+    "rem9-guard.json": {
+      "bytes": 14868,
+      "sha256": "2b0f30ed0e19d76a22b42e1076479f3668a6ce4fc2bb2b6b1f82b639443939a6"
+    },
+    "rem9-guard.stdout": {
+      "bytes": 32,
+      "sha256": "c47dc5c08252cd63fc77fe6aab7c5d7f7b901338c84bd117e97fa621c0cb0b8e"
+    },
+    "rem9-guard.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rem9-guard.rss.jsonl.gz": {
+      "bytes": 3971,
+      "sha256": "d96166964417d1291e75af95720fb6ff4f64b5406fc18f777cc3a457da873df0"
+    },
+    "rem9-program.txt": {
+      "bytes": 6148,
+      "sha256": "0729658d322eeaa142291f751540042690c366f98e9514e71871bffe53231776"
+    },
+    "rem9-partial.json": {
+      "bytes": 692,
+      "sha256": "70d3844313c3a6cda2ac32225901743a70758a7915740fdb7c8e2cf51a2eb53a"
+    },
+    "rem9-results.json": {
+      "bytes": 923,
+      "sha256": "185f535402262e4ae65e3181b5b848c6e58118cf4f872fa0b89d06fa70f027ce"
+    },
+    "work-root-forecast.json": {
+      "bytes": 769,
+      "sha256": "334fd2ed8a9244db34f275e2be032accd1587e3a096ff46263c0e3adab533730"
+    }
+  },
+  "build": {
+    "exit": 0,
+    "censor": null,
+    "errors": [],
+    "total_seconds": 39.657874584198,
+    "stage_seconds": 25.021063089370728,
+    "job_aggregate_sampled_peak_rss": 430325760,
+    "memory_sample_timing": {
+      "samples": 1141,
+      "max_interval_seconds": 0.0470000000204891,
+      "intervals_over_40ms": 11
+    }
+  },
+  "rem9": {
+    "events": 55,
+    "all_executable_bindings_match": true,
+    "exit_counts": {
+      "0": 44,
+      "2": 1,
+      "86": 10
+    },
+    "errors": [
+      "integrity:work-stage-selector:key must be a string at line 1 column 2"
+    ],
+    "event_guard_violations": [],
+    "guard": {
+      "exit": 0,
+      "censor": null,
+      "errors": [],
+      "total_seconds": 43.41184663772583,
+      "stage_seconds": 4.3954198360443115,
+      "job_aggregate_sampled_peak_rss": 26460160,
+      "memory_sample_timing": {
+        "samples": 86,
+        "max_interval_seconds": 0.0470000000204891,
+        "intervals_over_40ms": 2
+      }
+    },
+    "result": {
+      "status": "PASS_FOCUSED_FULL_INDEPENDENT_ORACLES_PENDING",
+      "cases": [
+        {
+          "case": "A-abort-B-reservation-death-C-select",
+          "old_owner_files": 2
+        },
+        {
+          "case": "transitive-installed-plan-abort",
+          "owned_instances": 22
+        },
+        {
+          "case": "ten-idle-cleanup-status-noop",
+          "files": 56,
+          "directories": 46
+        },
+        {
+          "case": "corrupt-complete-stage-refuses-owner-preserved",
+          "error": "integrity:work-stage-selector:key must be a string at line 1 column 2"
+        },
+        {
+          "case": "fixed-selector-file-write-death-recovery"
+        },
+        {
+          "case": "repeated-progress-death-bounded-artifacts",
+          "counts": [
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "case": "STORE-replace-empty-directory-recovery"
+        }
+      ],
+      "binary_sha256": "b7b60980beaddc7af01302c05ea3eea8168e46ab3ac3db3d6ead05065ff2a4e7"
+    },
+    "dedicated_cleanup_calls": [
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 9505000,
+        "entry_ns": 9534800,
+        "charged_phases": 85,
+        "metadata_ns": 4531700,
+        "recovery_ns": 710800,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 10472800,
+        "entry_ns": 10496800,
+        "charged_phases": 87,
+        "metadata_ns": 4656600,
+        "recovery_ns": 798600,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 3825700,
+        "entry_ns": 3843600,
+        "charged_phases": 68,
+        "metadata_ns": 894300,
+        "recovery_ns": 1248500,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 2325500,
+        "entry_ns": 2341800,
+        "charged_phases": 68,
+        "metadata_ns": 611200,
+        "recovery_ns": 677100,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 2170300,
+        "entry_ns": 2189300,
+        "charged_phases": 68,
+        "metadata_ns": 646100,
+        "recovery_ns": 701600,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 1972300,
+        "entry_ns": 1988800,
+        "charged_phases": 68,
+        "metadata_ns": 498200,
+        "recovery_ns": 590800,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 2057700,
+        "entry_ns": 2074800,
+        "charged_phases": 68,
+        "metadata_ns": 565400,
+        "recovery_ns": 632200,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 1899500,
+        "entry_ns": 1915000,
+        "charged_phases": 68,
+        "metadata_ns": 496000,
+        "recovery_ns": 598700,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 2002800,
+        "entry_ns": 2017300,
+        "charged_phases": 68,
+        "metadata_ns": 530400,
+        "recovery_ns": 611200,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 1995300,
+        "entry_ns": 2010300,
+        "charged_phases": 68,
+        "metadata_ns": 524100,
+        "recovery_ns": 634900,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 2309500,
+        "entry_ns": 2326000,
+        "charged_phases": 68,
+        "metadata_ns": 645000,
+        "recovery_ns": 644000,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 1883500,
+        "entry_ns": 1898800,
+        "charged_phases": 68,
+        "metadata_ns": 500100,
+        "recovery_ns": 576400,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 2,
+        "status": null,
+        "error": "integrity:work-stage-selector:key must be a string at line 1 column 2",
+        "deferral": null,
+        "batch_ns": null,
+        "entry_ns": 1390900,
+        "charged_phases": 28,
+        "metadata_ns": null,
+        "recovery_ns": 290300,
+        "legacy_index_ns": null
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 33174300,
+        "entry_ns": 33197200,
+        "charged_phases": 201,
+        "metadata_ns": 15966100,
+        "recovery_ns": 9145300,
+        "legacy_index_ns": 370800
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 30646000,
+        "entry_ns": 30668200,
+        "charged_phases": 198,
+        "metadata_ns": 20116700,
+        "recovery_ns": 4340600,
+        "legacy_index_ns": 370300
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 29925400,
+        "entry_ns": 29949400,
+        "charged_phases": 201,
+        "metadata_ns": 15228600,
+        "recovery_ns": 4871100,
+        "legacy_index_ns": 392600
+      },
+      {
+        "exit": 0,
+        "status": "complete",
+        "error": null,
+        "deferral": null,
+        "batch_ns": 30069300,
+        "entry_ns": 30092600,
+        "charged_phases": 194,
+        "metadata_ns": 15993400,
+        "recovery_ns": 2621300,
+        "legacy_index_ns": 466400
+      }
+    ]
+  },
+  "review_actions": "Read committed source and existing raw artifacts only; no engine/build/recovery/source/fixture mutations/corpus copies/subagents",
+  "gitnexus": "UNKNOWN/unavailable",
+  "full_experiment_complete": false,
+  "cp2_released": false,
+  "clock_reset": false,
+  "superseding_runtime": {
+    "authority9": {
+      "events": 39,
+      "all_executable_sha_matches": true,
+      "exit_counts": {
+        "0": 30,
+        "2": 4,
+        "86": 5
+      },
+      "errors": [
+        "integrity:activation-frozen-config",
+        "integrity:activation-candidate-owner",
+        "integrity:candidate-pin-required:The system cannot find the file specified. (os error 2)",
+        "integrity:activation-parent-plan"
+      ],
+      "event_violations": [],
+      "guard": {
+        "exit": 0,
+        "censor": null,
+        "errors": [],
+        "total_seconds": 9.310218334197998,
+        "stage_seconds": 4.875022649765015,
+        "job_aggregate_sampled_peak_rss": 30560256,
+        "memory_sample_timing": {
+          "samples": 88,
+          "max_interval_seconds": 0.03200000000651926,
+          "intervals_over_40ms": 0
+        }
+      },
+      "results": {
+        "status": "PASS_FOCUSED_FULL_INDEPENDENT_ORACLES_PENDING",
+        "cases": [
+          {
+            "case": "valid-valued-frozen-mode-refusal",
+            "error": "integrity:activation-frozen-config"
+          },
+          {
+            "case": "other-authenticated-owner-target-refusal",
+            "error": "integrity:activation-candidate-owner"
+          },
+          {
+            "case": "missing-candidate-pin-refusal",
+            "error": "integrity:candidate-pin-required:The system cannot find the file specified. (os error 2)"
+          },
+          {
+            "case": "single-try-writer-deferral-new-reader-progress",
+            "deferrals": [
+              {
+                "elapsed": 0.015000000013969839,
+                "result": {
+                  "batch_ns": 10477700,
+                  "candidate_limit": 1000,
+                  "candidates": 143,
+                  "completed": false,
+                  "cooperative_limit_ms": 50,
+                  "legacy_whole_index_indivisible": true,
+                  "maintenance_deferral": "deferred:work-writer",
+                  "native_allocation_credit": 0,
+                  "selected_authority": "STORE.json",
+                  "status": "cleaning"
+                }
+              }
+            ]
+          },
+          {
+            "case": "forged-expected-parent-cannot-rebase-stale-work",
+            "error": "integrity:activation-parent-plan"
+          },
+          {
+            "case": "aborted-birth-mkdir-before-first-file-reaped"
+          },
+          {
+            "case": "last-aborted-file-death-empty-parent-reaped-claim-retained"
+          },
+          {
+            "case": "directory-repair-idle-ten-noop",
+            "files": 54,
+            "directories": 42
+          }
+        ],
+        "binary_sha256": "b7b60980beaddc7af01302c05ea3eea8168e46ab3ac3db3d6ead05065ff2a4e7"
+      },
+      "batches": {
+        "count": 17,
+        "max_ns": 29625600,
+        "max_phases": 265,
+        "over50ms": [],
+        "deferrals": [
+          {
+            "operation": "cleanup",
+            "batch_ns": 10477700,
+            "entry_ns": 10477700,
+            "phases": 143,
+            "deferral": "deferred:work-writer"
+          }
+        ]
+      }
+    },
+    "online9": {
+      "events": 24,
+      "all_executable_sha_matches": true,
+      "exit_counts": {
+        "0": 19,
+        "2": 4,
+        "86": 1
+      },
+      "errors": [
+        "integrity:work-plan-digest",
+        "integrity:unexpected-mutable-progress",
+        "integrity:foreign-work-stage",
+        "integrity:work-stage-plan-owner"
+      ],
+      "event_violations": [],
+      "guard": {
+        "exit": 0,
+        "censor": null,
+        "errors": [],
+        "total_seconds": 22.592280864715576,
+        "stage_seconds": 19.92679762840271,
+        "job_aggregate_sampled_peak_rss": 30605312,
+        "memory_sample_timing": {
+          "samples": 839,
+          "max_interval_seconds": 0.0470000000204891,
+          "intervals_over_40ms": 9
+        }
+      },
+      "results": {
+        "status": "PASS_FOCUSED_FULL_INDEPENDENT_ORACLES_PENDING",
+        "cases": [
+          {
+            "case": "two-successors-readers-and-publishers-progress-old-instances-retained",
+            "activations": [
+              {
+                "seconds": 0.0779999999795109,
+                "holds": [
+                  584700
+                ]
+              },
+              {
+                "seconds": 0.06299999996554106,
+                "holds": [
+                  676700
+                ]
+              }
+            ]
+          },
+          {
+            "case": "immutable-work-omitted-held-generation-refused",
+            "error": "integrity:work-plan-digest"
+          },
+          {
+            "case": "legacy-mutable-progress-refused",
+            "error": "integrity:unexpected-mutable-progress"
+          },
+          {
+            "case": "old-reader-16s-exact-result-release-reclaims",
+            "held_seconds": 16.108999999938533,
+            "old_instances": 10
+          },
+          {
+            "case": "foreign-selector-stage-refuses-all-bytes-preserved",
+            "error": "integrity:foreign-work-stage"
+          },
+          {
+            "case": "same-birth-wrong-transition-parent-refuses-all-bytes-preserved",
+            "error": "integrity:work-stage-plan-owner"
+          }
+        ],
+        "binary_sha256": "b7b60980beaddc7af01302c05ea3eea8168e46ab3ac3db3d6ead05065ff2a4e7"
+      },
+      "batches": {
+        "count": 6,
+        "max_ns": 34223000,
+        "max_phases": 238,
+        "over50ms": [],
+        "deferrals": []
+      }
+    },
+    "stress9b": {
+      "events": 2034,
+      "all_executable_sha_matches": true,
+      "exit_counts": {
+        "0": 2034
+      },
+      "errors": [],
+      "event_violations": [],
+      "guard": {
+        "exit": 0,
+        "censor": null,
+        "errors": [],
+        "total_seconds": 119.72054481506348,
+        "stage_seconds": 86.41594862937927,
+        "job_aggregate_sampled_peak_rss": 27299840,
+        "memory_sample_timing": {
+          "samples": 4160,
+          "max_interval_seconds": 0.06300000008195639,
+          "intervals_over_40ms": 30
+        }
+      },
+      "verified_physical_build_groups": 1000,
+      "unique_generation_ids": 1000,
+      "ordinals_exact1to1000": true,
+      "activation_holds": {
+        "count": 1000,
+        "p50": 536800,
+        "p99": 929300,
+        "max": 2089000
+      },
+      "metadata_holds": {
+        "count": 2999,
+        "p50": 503300,
+        "p99": 1763300,
+        "max": 5215100
+      },
+      "hold_arrays_match_raw_results": true,
+      "recorded_census": [
+        {
+          "activations": 50,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280755,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 100,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280776,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 150,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280782,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 200,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280782,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 250,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280782,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 300,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280767,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 350,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280782,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 400,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280782,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 450,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280782,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 500,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280782,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 550,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280782,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 600,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280782,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 650,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280782,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 700,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280782,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 750,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280782,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 800,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280783,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 850,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280768,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 900,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280783,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 950,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280784,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        },
+        {
+          "activations": 1000,
+          "files": 54,
+          "directories": 42,
+          "bytes": 280803,
+          "plans": 1,
+          "pins": 1,
+          "pack_instances": 1
+        }
+      ],
+      "ten_idle_byte_identical": true,
+      "internal_total_seconds": 83.15700000000652,
+      "qualification": "N10 small stress only; legacy whole index retained; CP2/CP3 and full matrix remain required",
+      "batches": {
+        "count": 2010,
+        "max_ns": 50077000,
+        "max_phases": 171,
+        "over50ms": [
+          {
+            "operation": "build",
+            "batch_ns": 50077000,
+            "entry_ns": 50077000,
+            "phases": 145,
+            "deferral": "deferred:cleanup-entry-budget"
+          }
+        ],
+        "deferrals": [
+          {
+            "operation": "build",
+            "batch_ns": 50077000,
+            "entry_ns": 50077000,
+            "phases": 145,
+            "deferral": "deferred:cleanup-entry-budget"
+          }
+        ]
+      }
+    },
+    "readonly_final_census": [
+      {
+        "case": "authority9",
+        "files": 63,
+        "directories": 50,
+        "bytes": 292375,
+        "selected_work_sha256": "4845083e901702e756823923ac8cf50b4bf2904887088253d10826ff81ecbb3b",
+        "matches_STORE": true,
+        "work_bytes": 3625,
+        "ordinal": 1,
+        "older": 0,
+        "jobs": 0,
+        "retired": 0,
+        "garbage": 1,
+        "birth_claims": 2
+      },
+      {
+        "case": "directory9",
+        "files": 54,
+        "directories": 42,
+        "bytes": 283139,
+        "selected_work_sha256": "13a6d65e1ab9272a0d45d6315f8d8023f1d3ff9260ed3b7708e41ade3975abde",
+        "matches_STORE": true,
+        "work_bytes": 3572,
+        "ordinal": 1,
+        "older": 0,
+        "jobs": 0,
+        "retired": 0,
+        "garbage": 1,
+        "birth_claims": 1
+      },
+      {
+        "case": "online9",
+        "files": 82,
+        "directories": 60,
+        "bytes": 348251,
+        "selected_work_sha256": "2265ab46daa65858f2353149422e65b7a95c4e020779de5b83f501f2b786dad5",
+        "matches_STORE": true,
+        "work_bytes": 3514,
+        "ordinal": 4,
+        "older": 0,
+        "jobs": 0,
+        "retired": 0,
+        "garbage": 1,
+        "birth_claims": 0
+      },
+      {
+        "case": "stress9b",
+        "files": 54,
+        "directories": 42,
+        "bytes": 280803,
+        "selected_work_sha256": "d70bf67fe1462f2221cca8bf521bfd2d46b515639aa35b24b3ab47a8e1ac9a98",
+        "matches_STORE": true,
+        "work_bytes": 3549,
+        "ordinal": 1000,
+        "older": 0,
+        "jobs": 0,
+        "retired": 0,
+        "garbage": 1,
+        "birth_claims": 0
+      }
+    ],
+    "new_artifact_hashes": {
+      "authority9-events.jsonl": {
+        "bytes": 101185,
+        "sha256": "90a4e92773c82c59b80833114cc1466a4ae5021febc8de03b846b7513ec30ced"
+      },
+      "authority9-guard.json": {
+        "bytes": 15448,
+        "sha256": "27b45b91e816b78668df0f4a5a83e0cf652ba09800c17a2310cf4ac976119f5f"
+      },
+      "authority9-guard.rss.jsonl.gz": {
+        "bytes": 4161,
+        "sha256": "8501bcaff0188ed50fff931eb419b5fb12d0e619f19a185ebe63c16cf74c073b"
+      },
+      "authority9-guard.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "authority9-guard.stdout": {
+        "bytes": 32,
+        "sha256": "c24861aa57c688ac64d74ee15507f6a6bc87aa7cc80656e325cb179667aae60f"
+      },
+      "authority9-program.txt": {
+        "bytes": 6802,
+        "sha256": "0c0be96111f9ac710bb26783abeef037ba8639e6cd5fea4897d212773724d29f"
+      },
+      "authority9-results.json": {
+        "bytes": 1634,
+        "sha256": "517251b3bb35c041e61da36501e2e501640f1c300ff04615729bbaef564932de"
+      },
+      "online9-events.jsonl": {
+        "bytes": 66494,
+        "sha256": "9f319583f86f00abe6127fd3ffa68f15aca5c9c82bfd33bcc9ccea69ba18d89a"
+      },
+      "online9-guard.json": {
+        "bytes": 31009,
+        "sha256": "f737dcbc9cb7804924b66e9e8dd64c7c0f108c6c67e8d33076dd10e3a67b2c78"
+      },
+      "online9-guard.rss.jsonl.gz": {
+        "bytes": 17839,
+        "sha256": "d04dc1f2e03a1ad3cfe1b137ad055748f2bb8413bf8ac76ef50dc0f1cc89f4b9"
+      },
+      "online9-guard.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "online9-guard.stdout": {
+        "bytes": 32,
+        "sha256": "0b454cdcdddd48ed1de5d26fb6b82851542a9026459624cc5df16406db53b6af"
+      },
+      "online9-program.txt": {
+        "bytes": 5658,
+        "sha256": "5aee137517f20f1073ec1402f99bc8950f19f1b9740866739dcc62c409a45a72"
+      },
+      "online9-results.json": {
+        "bytes": 1221,
+        "sha256": "821b5dc02a9ef512a73ca70b853db285da4f0d1b941e6b4c0b25396290f1ab3d"
+      },
+      "stress9b-events.jsonl": {
+        "bytes": 6837128,
+        "sha256": "4283a7902a647c79f28663547c8e6c6caa0077a69d4e5fe20610874ce3eb172d"
+      },
+      "stress9b-guard.json": {
+        "bytes": 136745,
+        "sha256": "0ac79ab6c45185aab6db797617c1ae75990b21b426007762211345b45cbf69b7"
+      },
+      "stress9b-guard.rss.jsonl.gz": {
+        "bytes": 156257,
+        "sha256": "a2dde3109694d0ca7e81bd375c7ae614a9878bb5e37fa9187b6e2781c892fe18"
+      },
+      "stress9b-guard.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stress9b-guard.stdout": {
+        "bytes": 303,
+        "sha256": "3abf90c96315884f719298f05ffa0aac5347144ff95d3c93992a2bda7b24d0c3"
+      },
+      "stress9b-program.txt": {
+        "bytes": 3926,
+        "sha256": "ab6ce5792cee571826bd9d3e37403443569a8202b2d2e85b1ab16dcb70205fb1"
+      },
+      "stress9b-results.json": {
+        "bytes": 178460,
+        "sha256": "dd97a93ce9eb01976853de16a2f30dff5512092fcc21d4009ae9084204f75473"
+      },
+      "stress9-events.jsonl": {
+        "bytes": 1805,
+        "sha256": "d79cb105f7af7d335205c6530e1b55263613a31cf7c14f7ad09ca173551a9073"
+      },
+      "stress9-guard.json": {
+        "bytes": 11162,
+        "sha256": "cbf001f489de1b58dd0ab2626ece768a54cdfe5bde7d8a94d32e789d287e649a"
+      },
+      "stress9-guard.stderr": {
+        "bytes": 2141,
+        "sha256": "9b80acb8cae9c4b3b6c6e62796bd3681ee376cd5798ced3632fc73d76a64ea49"
+      },
+      "stress9-program.txt": {
+        "bytes": 3920,
+        "sha256": "7a575d08d976ee7edd1ad9de85fc25ce3fc514eb9d449bd9cae744f576be1f07"
+      },
+      "native9-events.jsonl": {
+        "bytes": 7004,
+        "sha256": "f31d2b2fd7934ea08ea8803336a9ea55e1c27b3005421c5dab032702ff675fc0"
+      },
+      "native9-old-events.jsonl": {
+        "bytes": 14525,
+        "sha256": "3c7cc187d7e8032d7d16fcb302e981e7f860a2765302e0206f95abe8df341313"
+      },
+      "native9-guard.json": {
+        "bytes": 15627,
+        "sha256": "c1172cef4ae1f939462172cd952b79aa5cd7e810fc8213b34bd408eb548992b9"
+      },
+      "native9-guard.stderr": {
+        "bytes": 2635,
+        "sha256": "32333404d91cf4c1497740587808e91838c7f883c7cd117e1167cb046a010ec7"
+      },
+      "native9-program.txt": {
+        "bytes": 7559,
+        "sha256": "d3e919ad345178ca0547c7b3ee96d30739124ce8451f342f4f0f1bb7b931beed"
+      }
+    },
+    "legacy_regression": {
+      "severity": "P2 Required",
+      "source": "packing.rs395",
+      "cause": "two-component directory predicate also matches flat legacy .pack/.idx files",
+      "raw_native9_error": "The directory name is invalid. (os error 267)",
+      "required": "replacement pin extension-free safe birth-directory predicate; exact legacy and directory regression proof",
+      "state": "OPEN at cd12ea8; ownership retained, no observed data loss"
+    },
+    "utc": "2026-10-20T21:39:51.958460+00:00"
+  }
+}

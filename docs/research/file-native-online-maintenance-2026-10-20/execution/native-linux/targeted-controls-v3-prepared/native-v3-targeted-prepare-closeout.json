@@ -1,0 +1,150 @@
+{
+  "status": "SOURCE_PREPARED_NO_IMPORT_NO_EXECUTION_STATIC_PREFIX_BLOCKER",
+  "manifest_path": "/home/spenser/file-native-online-linux-20261020/source/targeted-controls-v3/manifest-run.json",
+  "manifest_sha256": "afbe9f7bc83531b6fc6caf0f97f028fc092524a760a32115fdb0d4e7de6ec609",
+  "source_files": {
+    "native_guard.py": {
+      "bytes": 22935,
+      "sha256": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9"
+    },
+    "native_driver.py": {
+      "bytes": 11682,
+      "sha256": "dfe8ef569b4981a76e199a2763de8a3cf9988bb24785b280fc3662bcd09427ce"
+    },
+    "native_resources_v3.py": {
+      "bytes": 16072,
+      "sha256": "cbf601e0ebe547cc25ba194f5fc0f0d808300366388f0decfd866609701e96c5"
+    },
+    "native_driver_v3.py": {
+      "bytes": 27241,
+      "sha256": "d2f3d88bbab83e089120754e3bb8006f77d4915c0c7d19d59364f5e55ac1a7d8"
+    },
+    "native_adapter_v3.py": {
+      "bytes": 21582,
+      "sha256": "da273c4866883a7f4bb7b417ffa19ad0ea408e869601f502cc9e6a71b18d08de"
+    },
+    "native_historical_v3.py": {
+      "bytes": 6006,
+      "sha256": "94f95e64cfc2cdca934ffc4e98343d4fe54e757e88d73144ff1295b3c612a65b"
+    },
+    "native_capsule_v3.py": {
+      "bytes": 9864,
+      "sha256": "5b6034a1f5ddce88ec76b3566a0e00224ae8fcbefe404e39d2156d92b54522b9"
+    },
+    "native_bootstrap_v3.py": {
+      "bytes": 8018,
+      "sha256": "ac2cc1e993fc861a174da06b6c5c619f0f3bf3355450cb367b9a9b2a2ed59e79"
+    },
+    "native_controls_v3.py": {
+      "bytes": 11397,
+      "sha256": "4698beeba0af0e8fcc79ed872d83529efb21c57a2f3d100233543436a1dd7092"
+    },
+    "native_peer_v3.c": {
+      "bytes": 3159,
+      "sha256": "f8347099548f27d354179f4dd7a68fd08e4f8e70dc635c4e61871e50058db8af"
+    },
+    "native-source-review-v3.md": {
+      "bytes": 10191,
+      "sha256": "6e3c624c7c01825c5e73033ae91c210bfce3cfa4c1d203886c9a4447589c920a"
+    },
+    "native-source-receipt-v3.json": {
+      "bytes": 6346,
+      "sha256": "cb828b1524ac380748246256e79204071c09f4f65e19156f3ac0c6775f91cdce"
+    },
+    "shared-v2/focused_protocol.py": {
+      "bytes": 43172,
+      "sha256": "58928f6bf82f82d13fb5d809c8d6095e331ec4feeac48c389d72744a3ff32859"
+    },
+    "shared-v2/focused_schedules.py": {
+      "bytes": 27562,
+      "sha256": "ee7d2aef5b7ecd492602c49f9e78646465bc2cd04a1e597e1d46e86cd67ff756"
+    },
+    "shared-v2/case_ledger.py": {
+      "bytes": 14462,
+      "sha256": "ce7fb4983b5f31e0f529a69431a169574e7ba5cb55e225b17d42d10354be931b"
+    },
+    "shared-v2/source_receipt.json": {
+      "bytes": 26169,
+      "sha256": "ae78d32a4a14d8327c3b4090fea3ea05f4f69b8542c0e3c281692ec7acc7b63a"
+    },
+    "targeted-controls-v3/admission-run.json": {
+      "bytes": 814,
+      "sha256": "61026455f802b5f46673d4ff9c77056fd132bb1ae63cb3e6c6875ecbb3257ce8"
+    },
+    "targeted-controls-v3/versions-run.json": {
+      "bytes": 537,
+      "sha256": "dc9b79352eeccac21dbffe8df9a6dd8d24da9e1575e7e39469ff050f193f088b"
+    },
+    "targeted-controls-v3/build-run.json": {
+      "bytes": 1321,
+      "sha256": "13d06137a38203795cd1de7a9235dc43ce99c656d6355b7f9f04f5184c78684f"
+    }
+  },
+  "admission_sha256": "61026455f802b5f46673d4ff9c77056fd132bb1ae63cb3e6c6875ecbb3257ce8",
+  "versions_sha256": "dc9b79352eeccac21dbffe8df9a6dd8d24da9e1575e7e39469ff050f193f088b",
+  "build_sha256": "13d06137a38203795cd1de7a9235dc43ce99c656d6355b7f9f04f5184c78684f",
+  "prepared_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-S",
+    "-B",
+    "-c",
+    "import hashlib,pathlib,runpy,sys\nb,l,bs,ls=sys.argv[1:5]\nfor p,s in ((b,bs),(l,ls)):\n if hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()!=s: raise SystemExit(\"preimport-source-binding\")\nsys.argv=[b,*sys.argv[5:]]\nrunpy.run_path(b,run_name=\"__main__\")\n",
+    "/home/spenser/file-native-online-linux-20261020/source/native_bootstrap_v3.py",
+    "/home/spenser/file-native-online-linux-20261020/source/native_capsule_v3.py",
+    "ac2cc1e993fc861a174da06b6c5c619f0f3bf3355450cb367b9a9b2a2ed59e79",
+    "5b6034a1f5ddce88ec76b3566a0e00224ae8fcbefe404e39d2156d92b54522b9",
+    "--manifest",
+    "/home/spenser/file-native-online-linux-20261020/source/targeted-controls-v3/manifest-run.json",
+    "--manifest-sha256",
+    "afbe9f7bc83531b6fc6caf0f97f028fc092524a760a32115fdb0d4e7de6ec609",
+    "--bootstrap-sha256",
+    "ac2cc1e993fc861a174da06b6c5c619f0f3bf3355450cb367b9a9b2a2ed59e79",
+    "--loader-sha256",
+    "5b6034a1f5ddce88ec76b3566a0e00224ae8fcbefe404e39d2156d92b54522b9",
+    "--claim-id",
+    "LINUX-V3-INTERFACE-CONTROLS-20261021",
+    "--ledger-sha256",
+    "d574c59a7a08f480a2570f6e526e0762899b28eee5383118760937743335a1b4"
+  ],
+  "original_prefix_sha256": "dae316abd1a901312af6c2f5f6d6b871a38ac625be22e57332057def40311a33",
+  "source_pin": "efd07cb5dee46a335be8c03a2f2c0462d7f923ca",
+  "harness_clean_git_pin": "2b651e05aa265c76e0c8d8254ff1d34035573f52",
+  "claim_id": "LINUX-V3-INTERFACE-CONTROLS-20261021",
+  "ledger_sha256": "d574c59a7a08f480a2570f6e526e0762899b28eee5383118760937743335a1b4",
+  "runtime_data_go": true,
+  "execution_authorized": false,
+  "static_blocker": "runpy __main__ owned __file__ self is rejected by frozen bootstrap pre-import scan; awaiting parent-reviewed external-prefix fix",
+  "copy_bytes": 234554,
+  "copy_files": 17,
+  "phase_sha256": "483a38ab0d9f35e5ceb851da5c12a9e01cf7f362d4e17024d75fbbec33650f12",
+  "initial_compile_before": {
+    "source_bytes": 631232,
+    "source_files": 61
+  },
+  "final_inclusive": {
+    "source": {
+      "bytes": 872844,
+      "files": 81,
+      "directories": 14
+    },
+    "target": {
+      "bytes": 126813675,
+      "files": 409,
+      "directories": 90
+    },
+    "fixtures": {
+      "bytes": 109,
+      "files": 1,
+      "directories": 7
+    },
+    "evidence": {
+      "bytes": 4103111,
+      "files": 187,
+      "directories": 10
+    }
+  },
+  "self_bytes": 5863,
+  "self_sha_excluded": true,
+  "free_bytes": 74073579520
+}

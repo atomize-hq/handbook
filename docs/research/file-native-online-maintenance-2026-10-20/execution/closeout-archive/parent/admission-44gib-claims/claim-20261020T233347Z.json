@@ -1,0 +1,277 @@
+{
+  "kind": "read-only-extra-staged-unused-long-forecast-expiry-analysis",
+  "claim_id": "44GiB-CENTRAL-020-F09-F11-UNUSED-EXPIRY-512MiB-FEASIBILITY",
+  "utc": "2026-10-20T23:33:47.957610+00:00",
+  "status": "ANALYSIS_ONLY__NO_ALLOCATION_OR_RELEASE__LONG_NATIVE_FULL_GO_WITHHELD",
+  "authority": "META requests arithmetic/disjointness/read-only exactlonghead/archiveview analysis. Neither A norB funds any growth until future actual closure and separate allocator claim.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T232437Z.json",
+    "sha256": "04e70d78bc8bbe25c9542ed1718c2416680186b9c875e32ed572bde869117a5c"
+  },
+  "authenticated_readonly_inputs": {
+    "focused_forecast": {
+      "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\final-protocol\\forecast.json",
+      "bytes": 13832,
+      "sha256": "d1740d60ba591294cfa4c95c0eddc82ad0e76d36f39a842da58a60efebcfca50",
+      "status": "SOURCE_ONLY__REAL_EXECUTION_NO_GO"
+    },
+    "archive_manifest": {
+      "path": "C:\\file-native-packing-20261020\\packed-operational-backup\\manifest.json",
+      "bytes": 784,
+      "sha256": "3b8f1b875a6b567cb386be34f4b3f7442f9e3538d8a58fbac524cf1473777281",
+      "selected": {
+        "publication": "publication-26408-1792467841305851000-19",
+        "digest": "6d11b0a4e06e4c85ae391516bc99c840f4724bb547d018268bd9e9a2c7ea81cf"
+      },
+      "source_pin": "d70f3864f2888d46d9112213b4a03f8d82745a8e"
+    },
+    "archive_inventory": {
+      "path": "C:\\file-native-packing-20261020\\packed-operational-backup\\files.jsonl",
+      "bytes": 1021212,
+      "sha256": "0974f4a1dac1f13618105b9fca425b2a56c99528accecb5255f0d4ec6515b9b5",
+      "matches_manifest": true,
+      "rows": 5807,
+      "summed_logical_bytes": 592458971
+    },
+    "exact_archive_head_bridge": {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\long-exact-archive-head-proof.json",
+      "bytes": 4986,
+      "sha256": "192cfe2031850295d33beb6cf27ce31a1e701aa493f2b195b1d43aa4b0166701",
+      "matches_prior_binding": true,
+      "graph": {
+        "version": 1,
+        "consumer": "project",
+        "budget": 1000,
+        "cost": 0,
+        "count": 16,
+        "tree": "647c416f2c2048915c2d14d2fa083e1e89345a60d2dbd34b2713834ab4fe641a",
+        "fallback": false
+      },
+      "actual_H": 101007,
+      "head_selected_matches_archive_manifest": true,
+      "qualification": "prior authenticated packed-head proof, not a new engine-open or finalcandidate oracle"
+    },
+    "transport": {
+      "path": "C:\\file-native-packing-20261020\\packed-operational-backup\\operational.bin.gz",
+      "prior_protected_archive_sha256": "2fabd1c2439fc95a37a0411c99025bfb5646dee855b6ed0e879fd190e35e324b",
+      "hash_not_recomputed_in_this_audit": true,
+      "no_readwrite_open_or_restore": true
+    }
+  },
+  "512MiB_focused_diagnostic": {
+    "provisional_bytes": 529480133,
+    "provisional_files": 58096,
+    "proposed_each_host_cap_bytes": 536870912,
+    "proposed_each_host_files": 60000,
+    "diagnostic_byte_slack": 7390779,
+    "diagnostic_file_slack": 1904,
+    "threehost448_to512_increase_bytes": 201326592,
+    "status": "NOT_ADMITTED; F1/F2 proposals and unknown constructors/failedprefix/reset/oracle mappings still require full source bounds. Diagnostic7.39MB/1904file slack is not reserve for arbitrary unknown cases."
+  },
+  "conditional_A_F09_BODY": {
+    "F09_initial_cap": 592458971,
+    "F10_unchanged_entire_cap": 83886080,
+    "F14_separate_initial_coexistence": 283460393,
+    "old_index_actual_inventory_bytes": 62970609,
+    "old_pack_actual_inventory_bytes": 220489784,
+    "old_index_files": 16,
+    "old_pack_files": 16,
+    "new_selected_paged_index_expected_upper": 77128970,
+    "expected_final_source": 606617332,
+    "expected_BODY_excluding_all_F10_owned_paged_index_metadata": 529488362,
+    "candidate_BODY_cap": 536870912,
+    "candidate_BODY_slack_before_new_metadata_adjustments": 7382550,
+    "potential_unused_F09_forecast_expiry": 55588059,
+    "joint_F09_BODY_plus_F10_unchanged_cap": 620756992,
+    "joint_slack_at_expected_source": 14139660,
+    "not_actual_final_geometry": "606617332=old592458971-old62970609+new77128970, assuming identicalpackpayload/cohort. New catalog/Work/pin/journal/format metadata and failedprefixes can change finalactual. Expected source and BODY are not measured finalcandidate totals.",
+    "disjointness_contract": [
+      "After actual oldpair reap plus fullcompleteoracle/quiescence, freeze one full source path/length/hash/nativeallocation inventory. Require no retained unselectedindex/stage/owner/garbage/reader/builder/producer work or unreserved futuremutation.",
+      "Define F10 set by exactselected code-owned pagedindex paths and explicitly reviewed metadata paths, not arbitrary extension relabeling. Everyphysicalindex byte remainscharged; keep entireF10 80MiB. Other immutableCOW graph/outcome objects and packpayload remainBODY.",
+      "Prove F10set andBODYset disjoint and union equals every actualsource regularfile, with symlink/hardlink/nativeallocation treatment consistent with globalcensus. Enumerate all directories/durable pins/locks/journals/stages and zero-byte files. No double charging or missingcategory.",
+      "Independent classifier proves F10actual<=80MiB and remainingBODYactual<=512MiB including bounded futurewrite/guard-finalization safety. Guard wholejoint source root once under592MiB, not two additive full-directory censuses. Existingengine namespace/layout/descriptors remainunchanged.",
+      "Do not activate joint592MiB until actual finalsource and partitionproof fit. PriorF09+F10 cap676345051 remainsheld before that claim; conversion peak stillusesF14 until originalclosureproof.",
+      "OriginalF14 expiry removes futurecoexistence reservation after oldpairgone. A additionally consumes55,588,059 of69,727,719 leftoverpostcleanup forecastslack, leaving14,139,660; do not subtract actualoldindex/oldpair as a second globalcredit."
+    ]
+  },
+  "conditional_B_F11_postsuccess": {
+    "current_F11_cap": 676345051,
+    "candidate_postclosure_cap": 629145600,
+    "potential_unused_forecast_expiry": 47199451,
+    "expected_source_copy_bytes": 606617332,
+    "headroom_under600_after_expected_destination": 22528268,
+    "old_preexecution_capture_metadata_reservation": 8388608,
+    "old_preexecution_successor_growth_reservation": 16777216,
+    "old_two_reservations_plus_expected_source": 631783156,
+    "excess_of_old_preexecution_reservations_over600": 2637556,
+    "if_full16MiB_successor_still_pending_max_capture_metadata_under600": 5751052,
+    "important_phase_rule": "DO NOT shrinkF11 to600 before streamrestore/completeindependentoracle/acceptedDESTsuccessor/postsuccessororacle/fullclosure. Old8MiB+16MiB reservations alreadyexceed600 by2,637,556 at expected606,617,332source. Keepfull676,345,051 during all execution. Postactualclosure only, residualunusedforecast mayexpire.",
+    "must_prove": [
+      "Actual destination+allcapture/control/oraclemetadata/temps/failedprefixes/durablepins/ledger and retainedsuccessor bytes<=629145600 with explicit boundedpostclosure safety; no extra retainedtransport archive or fullclone.",
+      "Completequarantined stream validation before destinationengineopen, allpath/hash/EOF/gzip/FNOP frame and empty-directory/durable-pin closure, complete exactselectednewformat byte/outcome/graph/source/navigation oracles.",
+      "One admitted DEST-only acceptedsemantic successor, exactintents and fullpostsuccessororacle; source remainsunmodified. Choose and freeze actualsuccessor request/profile before execution and forecast graph/COW/projection/refresh/stage bytes from finalsource.",
+      "All jobs/handles/owners/builders/stages closed and source+destination retainedfrozen with NOFURTHERWRITES planned. Any laterengineopen that could create/update lock/metadata requires separate forecast beforechange. Rawread/hash-only observations remainread-only.",
+      "All attempted/failedrestore destinations count unless actualauthorizedengineclosure and census proves absence; no silent delete/retry credit. No prospective release based on ~608MB expectation."
+    ]
+  },
+  "N_and_view_evidence": {
+    "graph_count": 16,
+    "graph_count_basis": "Authenticated exactretained H101007 head selecteddigest and priorbridge192cfe...; not inferred from recipe. Finalphysicalconversion mustretain identicalsemanticbinding for thisfact toremainapplicable.",
+    "view_files": 20,
+    "view_bytes": 154769,
+    "view_largest_file_bytes": 65536,
+    "view_inventory": [
+      {
+        "path": "view/docs/item---d000008.md",
+        "bytes": 16384,
+        "sha256": "d4d912aab1de8fbfc9db72569895a81a49e4c651ef4cdf32bac960006708d104"
+      },
+      {
+        "path": "view/docs/item-attachments-d000009/evidence/deep/source.txt",
+        "bytes": 65536,
+        "sha256": "0626e770a287286f918006fe5ae36b042c238bc3e9d5fcb8035fe1c90abe26e2"
+      },
+      {
+        "path": "view/docs/item-aux--d000005.md",
+        "bytes": 4096,
+        "sha256": "7a8149ee50a8cd9a506835ae44e23406383ada573a9006979fce4cc0060b0ec8"
+      },
+      {
+        "path": "view/docs/item-case-d000006.md",
+        "bytes": 4096,
+        "sha256": "16f81f0e49aa829b7b6c41185950a50ae8a3e59ee3f0a8ecd7c27cb846379f1f"
+      },
+      {
+        "path": "view/docs/item-case-d000007.md",
+        "bytes": 16384,
+        "sha256": "c60a3160df4d699b47ce9616409a2aadcdc6bfa98ab8c1926a52ee33076474a5"
+      },
+      {
+        "path": "view/docs/item-con--d000004.md",
+        "bytes": 4096,
+        "sha256": "5fd4a48bec1093a6697daa1d1898bb85acae1d5ba97369ef5f393c4bc90437d1"
+      },
+      {
+        "path": "view/docs/item-con-d000003.md",
+        "bytes": 4096,
+        "sha256": "bd6ad66bf35a2aa8315b40520eeacde8142ad3b42fa690704c3864d4fc552d08"
+      },
+      {
+        "path": "view/docs/item-decision-caf--d000002.json",
+        "bytes": 4096,
+        "sha256": "fb62599a81b1cc1f15af9ff1412bc26ca5bf27331ba36eb7cbb5cbcda82a8869"
+      },
+      {
+        "path": "view/docs/item-overview-d000000.yaml",
+        "bytes": 4096,
+        "sha256": "9968d0d760a9b3214d613d18b985cbada9d4b6be09ac7777e198e3f243feea55"
+      },
+      {
+        "path": "view/docs/item-project-source-10-d000010.yaml",
+        "bytes": 4096,
+        "sha256": "82a735e23d2b6a74e08fda1108e84ac239973129f59ffdc857365263a3d8f548"
+      },
+      {
+        "path": "view/docs/item-project-source-11-d000011.yaml",
+        "bytes": 4096,
+        "sha256": "2d7b7f63613d7f15a9a9aeb238dfe13bfa8b403cafaced91bfcdec172a049403"
+      },
+      {
+        "path": "view/docs/item-project-source-12-d000012.json",
+        "bytes": 4096,
+        "sha256": "6cfda89790e9a60edddc441a00ea5fb9ea8478d440c3a0e75544c4fcf5e1651a"
+      },
+      {
+        "path": "view/docs/item-project-source-13-d000013.md",
+        "bytes": 4096,
+        "sha256": "264fcd27398ee1a1cdc5d29d0ede0afadc95de5fdd6e061d2a264ac05ab567db"
+      },
+      {
+        "path": "view/docs/item-project-source-14-d000014.md",
+        "bytes": 4096,
+        "sha256": "79d763dca7f6dc8116d5b0759a640fcb1241e056f44d226f90321280b6eb808b"
+      },
+      {
+        "path": "view/docs/item-project-source-15-d000015.md",
+        "bytes": 4096,
+        "sha256": "85c555da0673c9b597fcd23072564701d9e45a30bea3cc0751d581b7610097da"
+      },
+      {
+        "path": "view/docs/item-requirement---d000001.yaml",
+        "bytes": 4096,
+        "sha256": "57cb37815517806140ddc9244b4bdb60b185b23f9bc5465c0ba25c7ff47e8812"
+      },
+      {
+        "path": "view/navigation/groups/root.yaml",
+        "bytes": 2653,
+        "sha256": "62bed9beb00dbe3b1c5321342c0599387d5d0111434cc4a1c1b08ee07f69f6d1"
+      },
+      {
+        "path": "view/navigation.yaml",
+        "bytes": 336,
+        "sha256": "80cc103cef138b3ce7a5f49472442470a8a433026412a3619804d39e3f222c00"
+      },
+      {
+        "path": "view/packet/context.md",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "view/packet/provenance.json",
+        "bytes": 228,
+        "sha256": "c647b542162249c8dd53e5a6e0eb37398fea70a97c23c2c482587c0f9a09e8bc"
+      }
+    ],
+    "source_originals": {
+      "bytes": 155648,
+      "files": 17
+    },
+    "current_projection_profile_does_not_substitute_final_refresh_bound": true,
+    "full_replace_one_view_image_reference_bytes": 154769,
+    "read_only_reference": "One additional complete copy of currentview would be154769B, but this alone is NOT a bound on finalSource::compute/refresh: targetprofile regeneration/newderived objects/COW updates/PENDING plan/preservednamespace/atomicstages/control+Work growth need actualsource forecast.",
+    "capture_metadata_caution": {
+      "old_inventory_bytes": 1021212,
+      "old_manifest_bytes": 784,
+      "old_inventory_plus_manifest_bytes": 1021996,
+      "one_MiB_remaining_after_old_inventory_and_manifest": 26580,
+      "note": "Oldfiles.jsonl already1,021,212B; ~1MB capturemetadata is approximate. Count everydistinct source/destination inventory/manifest/directory/RSS/rawreceipt copy; do not assume repeated copiesarefree. FinalF11 allpathcensus decidespostclosure expiry."
+    }
+  },
+  "whole_future_staged_math": {
+    "full448_after018": 47662508405,
+    "original_conditional_F14_and_native64each_releases": 417678121,
+    "extra_conditional_actual112MiB_releases": 117440512,
+    "full448_after_original_and_extra_conditional_releases": 47127389772,
+    "previous_conditional_full480_margin": 16587188,
+    "threehost512_delta_from448": 201326592,
+    "full512_after_existing_original_extra_routes": 47328716364,
+    "shortfall_without_A_B": 84076108,
+    "conditional_A_plus_B": 102787510,
+    "full512_after_all_existing_and_A_B_conditional_releases": 47225928854,
+    "potential_remaining_margin": 18711402,
+    "actual_release_applied": 0,
+    "new_body_allocation_applied": 0,
+    "additional_F05_shrink_assumed": 0,
+    "note": "Only at corresponding proof and allocatorregistration boundaries. All numbers conditional on baselinefull448 route, existingunusedreserveproofs and later512casebound review. Furtherconstructor/evidence costsreduce18,711,402margin. No reserve/ceilingincrease or omittedcases."
+  },
+  "ordering": [
+    "Finalize/review exactengine/schema/guard and boundedLONG plan; no GO grantedbythisaudit.",
+    "Under existinglongreservations, originalfulllegacybaselines then one completeconversion/lookup/candidateverification, actualoldpairreap/fulloracle/quiescence; F14 helduntil its originalproof.",
+    "Onlyafter disjointactualsource proof may A expireunusedF09forecast via separateclaim and registerjointBODY512+F10entire80. Preserve source.",
+    "Execute reviewedfullstreamcapture/restore/independentoracle/acceptedDESTsuccessor while fullF11 remainsheld.",
+    "Onlyafter fullsuccess/allpathcensus/quiescent frozenNOFURTHERWRITES may B expireunusedF11forecast via separateclaim. Preserve destination.",
+    "Combine actualunusedproofs with target/cacheclosureproofs and complete percase constructor/reset/fulloracle maps; onlythen consider separately claimed512MiB/60k nativebodies. No native/fullGOhere."
+  ],
+  "no_double_credit": "Currentactualphysical paths countedonce; a reduced future reservation is unusedforecastexpiry only. Do not subtract actualoldpair removal andF14 expiry andA as three independent actual-byte reductions. A/B must each reduce previously heldunusedreservation exactlyonce with retainedsource+dest actuals shown againstnewcaps.",
+  "current_applied_allocator_unchanged": {
+    "whole_forecast": 47092083061,
+    "central": 152557195,
+    "C3_unsubclaimed": 6160384,
+    "cap": 47244640256,
+    "reserved_files": 4792604,
+    "closeout_bytes_inside": 1073741824,
+    "closeout_files_inside": 100000
+  },
+  "worker_actions": "Read-only JSON manifests/headproof/sourceforecast hash/arithmetic; immutable smallreport only. No archiveextraction, restore, engineopen, build, cachecopy, longmutation, nativeexecution or deletion.",
+  "prior_seals_preserved": true
+}

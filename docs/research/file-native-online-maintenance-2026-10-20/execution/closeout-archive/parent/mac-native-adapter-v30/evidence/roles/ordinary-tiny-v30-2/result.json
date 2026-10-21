@@ -1,0 +1,88 @@
+{
+  "role": "reader",
+  "limit_bytes": 268435456,
+  "failures": [],
+  "samples": 25,
+  "max_start_gap_s": 0.012795375194400549,
+  "peak_RSS_bytes": 36388864,
+  "closure": [
+    {
+      "monotonic": 3223873.231963,
+      "identities": [
+        {
+          "pid_requested": 68307,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 68308,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 68309,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 68311,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    },
+    {
+      "monotonic": 3223873.253191,
+      "identities": [
+        {
+          "pid_requested": 68307,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 68308,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 68309,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 68311,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    }
+  ],
+  "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+  "source_pin": "CONTROL_ONLY",
+  "exit": 0,
+  "seconds": 0.299561332911253,
+  "guarded_seconds": 0.34557637479156256,
+  "output_complete": true,
+  "outputs": {
+    "stdout": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/ordinary-tiny-v30-2/stdout.bin",
+      "bytes": 683,
+      "sha256": "f192cd415e94c769cd0a06bc61a5933b779b18e8ae08a672c2aab01705ab0726"
+    },
+    "stderr": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/ordinary-tiny-v30-2/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

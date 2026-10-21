@@ -1,0 +1,502 @@
+{
+  "report_kind": "native-macos-read-only-online-maintenance-preflight",
+  "started_from_shared_watchdog_utc": "2026-10-20T19:35:14Z",
+  "observed_utc": "2026-10-20T19:14:34.103059+00:00",
+  "status": "PREFLIGHT_COMPLETE_EXECUTION_HOLD",
+  "clocks": {
+    "functional_cutoff_utc": "2026-10-21T11:10:14Z",
+    "closeout_ends_utc": "2026-10-21T13:10:14Z",
+    "reset": false
+  },
+  "scope": {
+    "builds": false,
+    "executable_or_source_edits": false,
+    "corpus_growth": false,
+    "deletion": false,
+    "indexing": false,
+    "fetch": false,
+    "only_new_output_root": "/private/tmp/file-native-online-macos-preflight-20261020T1955Z"
+  },
+  "measurement": {
+    "method": "os.lstat st_size and native st_blocks times512; recursive scandir; symlinks not followed; directories separate; each listed root disjoint",
+    "apfs_allocation_limit": "Reported allocations are conservative per-path native allocations, not exclusive physical extents; clones and hardlinks may share extents. No physical-write or peak-disk claim.",
+    "files_definition": "regular_files plus symlinks; directory counts also supplied",
+    "attribution": "Shared Git/Cargo/Rustup/npm are censused once as whole shared-support upper bounds; parent must select attributed charge. They are not all experiment-owned.",
+    "unknown_scopes": [
+      "OS incidental tool-cache attribution outside identified roots remains unknown; no zero claim.",
+      "Other-host actuals and still-valid global forecasts require parent aggregation.",
+      "Unreferenced protected paths outside locally recovered reports are unknown."
+    ]
+  },
+  "roots": [
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-q-macos-20261019",
+      "regular_files": 4606,
+      "symlinks": 0,
+      "directories": 858,
+      "logical_bytes": 260604163,
+      "allocated_file_bytes": 271814656,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 4606,
+      "allocated_bytes_with_directories": 271814656,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019",
+      "regular_files": 20445,
+      "symlinks": 0,
+      "directories": 7511,
+      "logical_bytes": 449300755,
+      "allocated_file_bytes": 470208512,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 20445,
+      "allocated_bytes_with_directories": 470208512,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/private/tmp/file-native-q-macos-20261019",
+      "regular_files": 8466,
+      "symlinks": 0,
+      "directories": 4348,
+      "logical_bytes": 206414667,
+      "allocated_file_bytes": 217174016,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 8466,
+      "allocated_bytes_with_directories": 217174016,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/private/tmp/file-native-q-macos-20261019-admission.json",
+      "regular_files": 1,
+      "symlinks": 0,
+      "directories": 0,
+      "logical_bytes": 3979,
+      "allocated_file_bytes": 4096,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 1,
+      "allocated_bytes_with_directories": 4096,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/private/tmp/file-native-prerequisite-macos-20261018-source",
+      "regular_files": 3952,
+      "symlinks": 0,
+      "directories": 961,
+      "logical_bytes": 150224451,
+      "allocated_file_bytes": 160022528,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 3952,
+      "allocated_bytes_with_directories": 160022528,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/private/tmp/file-native-incremental-macos-20261018",
+      "regular_files": 71418,
+      "symlinks": 0,
+      "directories": 19232,
+      "logical_bytes": 2450424153,
+      "allocated_file_bytes": 2608316416,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 71418,
+      "allocated_bytes_with_directories": 2608316416,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/private/tmp/file-native-prerequisite-macos-20261018",
+      "regular_files": 117676,
+      "symlinks": 0,
+      "directories": 45273,
+      "logical_bytes": 1287637311,
+      "allocated_file_bytes": 1452539904,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 117676,
+      "allocated_bytes_with_directories": 1452539904,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/docs/research/file-native-engine-followup-2026-10-17",
+      "regular_files": 404,
+      "symlinks": 0,
+      "directories": 16,
+      "logical_bytes": 25705615,
+      "allocated_file_bytes": 26853376,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 404,
+      "allocated_bytes_with_directories": 26853376,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/docs/research/file-native-publication-experiment-2026-10-17",
+      "regular_files": 60,
+      "symlinks": 0,
+      "directories": 3,
+      "logical_bytes": 3132716,
+      "allocated_file_bytes": 3297280,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 60,
+      "allocated_bytes_with_directories": 3297280,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/Users/spensermcconnell/__Active_Code/atomize-hq/handbook/.git",
+      "regular_files": 5492,
+      "symlinks": 0,
+      "directories": 365,
+      "logical_bytes": 187972892,
+      "allocated_file_bytes": 205025280,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 5492,
+      "allocated_bytes_with_directories": 205025280,
+      "complete": true,
+      "category": "shared_support_upper_bound"
+    },
+    {
+      "root": "/Users/spensermcconnell/.cargo",
+      "regular_files": 81734,
+      "symlinks": 13,
+      "directories": 15833,
+      "logical_bytes": 1859795101,
+      "allocated_file_bytes": 2063294464,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 81747,
+      "allocated_bytes_with_directories": 2063294464,
+      "complete": true,
+      "category": "shared_support_upper_bound"
+    },
+    {
+      "root": "/Users/spensermcconnell/.rustup",
+      "regular_files": 143329,
+      "symlinks": 0,
+      "directories": 5621,
+      "logical_bytes": 7189392555,
+      "allocated_file_bytes": 7616475136,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 143329,
+      "allocated_bytes_with_directories": 7616475136,
+      "complete": true,
+      "category": "shared_support_upper_bound"
+    },
+    {
+      "root": "/Users/spensermcconnell/.npm/_npx",
+      "regular_files": 251236,
+      "symlinks": 408,
+      "directories": 30349,
+      "logical_bytes": 5520186620,
+      "allocated_file_bytes": 6240976896,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 251644,
+      "allocated_bytes_with_directories": 6240976896,
+      "complete": true,
+      "category": "shared_support_upper_bound"
+    },
+    {
+      "root": "/private/tmp/sw17-native-macos-env-20261018.ziJ037",
+      "regular_files": 88,
+      "symlinks": 0,
+      "directories": 1,
+      "logical_bytes": 518057,
+      "allocated_file_bytes": 815104,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 88,
+      "allocated_bytes_with_directories": 815104,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/private/tmp/sw17-native-macos-env-20261018.ziJ037.tar.gz",
+      "regular_files": 1,
+      "symlinks": 0,
+      "directories": 0,
+      "logical_bytes": 145933,
+      "allocated_file_bytes": 147456,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 1,
+      "allocated_bytes_with_directories": 147456,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/private/tmp/file-native-p-macos-20261020",
+      "regular_files": 18177,
+      "symlinks": 0,
+      "directories": 9261,
+      "logical_bytes": 235928344,
+      "allocated_file_bytes": 241590272,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 18177,
+      "allocated_bytes_with_directories": 241590272,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/private/tmp/sw17-authority-transfer-20261018.VvggVC",
+      "regular_files": 5,
+      "symlinks": 0,
+      "directories": 1,
+      "logical_bytes": 10156,
+      "allocated_file_bytes": 20480,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 5,
+      "allocated_bytes_with_directories": 20480,
+      "complete": true,
+      "category": "retained_experiment"
+    },
+    {
+      "root": "/private/tmp/sw17-authority-transfer-fresh-20261018.z40IVW",
+      "regular_files": 21,
+      "symlinks": 0,
+      "directories": 12,
+      "logical_bytes": 614892,
+      "allocated_file_bytes": 655360,
+      "allocated_directory_bytes": 0,
+      "errors": [],
+      "entries_excluding_directories": 21,
+      "allocated_bytes_with_directories": 655360,
+      "complete": true,
+      "category": "retained_experiment"
+    }
+  ],
+  "totals": {
+    "retained_experiment": {
+      "regular_files": 245320,
+      "symlinks": 0,
+      "directories": 87477,
+      "entries_excluding_directories": 245320,
+      "logical_bytes": 5070665192,
+      "allocated_file_bytes": 5453459456,
+      "allocated_directory_bytes": 0,
+      "allocated_bytes_with_directories": 5453459456
+    },
+    "shared_support_upper_bound": {
+      "regular_files": 481791,
+      "symlinks": 421,
+      "directories": 52168,
+      "entries_excluding_directories": 482212,
+      "logical_bytes": 14757347168,
+      "allocated_file_bytes": 16125771776,
+      "allocated_directory_bytes": 0,
+      "allocated_bytes_with_directories": 16125771776
+    },
+    "all_measured_roots_conservative": {
+      "regular_files": 727111,
+      "symlinks": 421,
+      "directories": 139645,
+      "entries_excluding_directories": 727532,
+      "logical_bytes": 19828012360,
+      "allocated_file_bytes": 21579231232,
+      "allocated_directory_bytes": 0,
+      "allocated_bytes_with_directories": 21579231232
+    },
+    "all_measured_plus_this_report": {
+      "regular_files": 727112,
+      "symlinks": 421,
+      "directories": 139646,
+      "entries_excluding_directories": 727533,
+      "logical_bytes": 19828030680,
+      "allocated_file_bytes": 21579251712,
+      "allocated_directory_bytes": 0,
+      "allocated_bytes_with_directories": 21579251712
+    }
+  },
+  "free_space": {
+    "available_bytes": 170694938624,
+    "floor_bytes": 21474836480,
+    "floor_pass": true,
+    "filesystem": "APFS",
+    "device": "/dev/disk3s5"
+  },
+  "readiness": {
+    "checkout_branch": {
+      "exit": 0,
+      "stdout": "feat/handbook-b04-source-review",
+      "stderr": ""
+    },
+    "checkout_head": {
+      "exit": 0,
+      "stdout": "379af4eda9b95ee82be9d3afcfdcdca2d6d132f9",
+      "stderr": ""
+    },
+    "checkout_status": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "rustc": {
+      "exit": 0,
+      "stdout": "rustc 1.89.0 (29483883e 2025-08-04)",
+      "stderr": ""
+    },
+    "cargo": {
+      "exit": 0,
+      "stdout": "cargo 1.89.0 (c24e10642 2025-06-23)",
+      "stderr": ""
+    },
+    "python": {
+      "exit": 0,
+      "stdout": "Python 3.11.9",
+      "stderr": ""
+    },
+    "git": {
+      "exit": 0,
+      "stdout": "git version 2.50.1 (Apple Git-155)",
+      "stderr": ""
+    },
+    "ssh": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": "OpenSSH_10.3p1, LibreSSL 3.3.6"
+    },
+    "system": {
+      "exit": 0,
+      "stdout": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.1\nBuildVersion:\t\t25G76",
+      "stderr": ""
+    },
+    "architecture": {
+      "exit": 0,
+      "stdout": "arm64",
+      "stderr": ""
+    },
+    "mount": {
+      "exit": 0,
+      "stdout": "/dev/disk3s5 on /System/Volumes/Data (apfs, local, journaled, nobrowse, protect, root data)",
+      "stderr": ""
+    },
+    "file-native-n-macos-20261019": {
+      "head": {
+        "exit": 0,
+        "stdout": "faa9e9d03886d680a65f3cea022479a4c4a1ecab",
+        "stderr": ""
+      },
+      "status": {
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "file-native-q-macos-20261019": {
+      "head": {
+        "exit": 0,
+        "stdout": "82520a70efd481cf72de33219c69967b13600f1f",
+        "stderr": ""
+      },
+      "status": {
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    },
+    "ssh_endpoint_authentication": null,
+    "new_RSS_limits": {
+      "aggregate_bytes": 3221225472,
+      "reader_bytes": 268435456,
+      "checker_bytes": 2147483648,
+      "build_jobs": 2,
+      "enforcement": "prospective only; no workload launched"
+    }
+  },
+  "remote": {
+    "url": "https://github.com/atomize-hq/handbook.git",
+    "branch": "codex/file-native-qnp-20261019",
+    "ls_remote_result": "a0b92fe5dc64269508601dcddf7e2e2ca477e30d",
+    "matches_requested_integrated_pin": true,
+    "core_pin_requested": "d70f3864f2888d46d9112213b4a03f8d82745a8e",
+    "integrated_commit_local_available": false,
+    "network_note": "Sandbox DNS failed; authorized escalated read-only git ls-remote succeeded. No fetch.",
+    "ssh_client_available": true,
+    "ssh_endpoint_authentication": null,
+    "ssh_note": "No named SSH endpoint supplied; no credential files inspected or exposed."
+  },
+  "forecast_reconciliation": {
+    "active_new_Mac_execution_forecast": null,
+    "new_preflight_output_limit_bytes": 524288,
+    "old_Q_execution_unspent_forecast_bytes": 0,
+    "old_P_and_recovery_unspent_forecast_bytes": 0,
+    "reason": "Historical Q and P/followup phases have closed and their absolute cutoffs expired; do not carry their unused execution forecasts into a new run. All retained outputs are charged as actual above; no bytes deleted or reclaimed. Prior preparation proposals are not additive actuals or continuing execution grants. Global reservation ledger reconciliation remains parent-owned.",
+    "new_global_closeout_reserve_inside_cap": {
+      "bytes": 1073741824,
+      "files": 100000
+    },
+    "combined_all_host_cap": {
+      "bytes": 42949672960,
+      "files": 5000000
+    },
+    "global_admission": false,
+    "old_N_execution_unspent_forecast_bytes": 0,
+    "old_N_evidence": "Retained file-native-recovery-reclamation report states active reservations empty; historical cumulative allowances are not storage bytes."
+  },
+  "prior_completed_proof": {
+    "recovery": "Fresh final-d70 recovery 24cases/282events complete, local closeout retained. Historical aggregate RSS remains null.",
+    "all_four_N8000B_comparisons": "COMPLETE per controlling dispatch; not revived",
+    "whole_historical_aggregate_RSS": null,
+    "recovery_closeout_path": "/private/tmp/file-native-p-macos-20261020/native-P-recovery-followup-20261020/closeout/closeout.json"
+  },
+  "authority": {
+    "full_controlling_docs": "Windows main only; transfer pending; fetching source is not authority transport",
+    "new_source_pin": "pending parent shared admission",
+    "future_requested_scope": "online generation cleanup; rolling accepted tail; paged authenticated fresh lookup; same final pin Mac workspace/strict-input/packing/recovery plus focused generation/file-lifetime/compatibility tests",
+    "qualification_started": false
+  },
+  "blockers": [
+    "All-host actuals plus still-valid parent reservations and inside-cap closeout reserve must be aggregated before GO.",
+    "Full controlling documents must be transferred explicitly from Windows main before implementation.",
+    "New source pin and bounded Mac stage/build/test forecasts are not yet supplied.",
+    "Integrated a0b92fe5 object is not locally present; future authorized source transport/fetch needed.",
+    "SSH authentication readiness is unverified because endpoint is unspecified."
+  ],
+  "evidence_sources": [
+    "/private/tmp/file-native-q-macos-20261019-admission.json",
+    "/private/tmp/file-native-q-macos-20261019/deliverable/report.md",
+    "/private/tmp/file-native-p-macos-20261020/preflight/root-census.json",
+    "/private/tmp/file-native-p-macos-20261020/preflight/REPORT.md",
+    "/private/tmp/file-native-p-macos-20261020/native-P-full-closeout-v1/final-approved-bindings-and-ownership.json",
+    "/private/tmp/file-native-p-macos-20261020/native-P-recovery-followup-20261020/closeout/closeout.json",
+    "/Users/spensermcconnell/.codex/worktrees/file-native-n-macos-20261019/handbook/docs/research/file-native-recovery-reclamation-2026-10-19/report.md"
+  ],
+  "preflight_output_actual": {
+    "root": "/private/tmp/file-native-online-macos-preflight-20261020T1955Z",
+    "regular_files": 1,
+    "symlinks": 0,
+    "directories": 1,
+    "logical_bytes": 18320,
+    "allocated_file_bytes": 20480,
+    "allocated_directory_bytes": 0,
+    "errors": [],
+    "entries_excluding_directories": 1,
+    "allocated_bytes_with_directories": 20480,
+    "complete": true
+  },
+  "process_census": {
+    "utc": "2026-10-20T19:15:20.097238+00:00",
+    "exit": 0,
+    "matching_file_native_cargo_rustc_executables": [],
+    "method": "native ps -axo pid,ppid,pgid,rss,comm; no command arguments/environment; sandbox restriction resolved with authorized read-only escalation",
+    "limitation": "Only named native executables; no claim that every interpreter process on host is experiment-owned or idle."
+  },
+  "report_accounting": "preflight_output_actual is a separate nonoverlapping root; add it exactly once to all_measured_roots_conservative. report.json is the only new output file."
+}

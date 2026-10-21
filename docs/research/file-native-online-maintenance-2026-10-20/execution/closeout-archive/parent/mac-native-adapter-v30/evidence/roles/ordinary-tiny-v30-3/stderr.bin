@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/private/tmp/file-native-online-macos-20261020/execution/native-macos/ordinary_route_v27.py", line 7, in <module>
+    p=root/'publications'/(s['publication']+'.json');b=p.read_bytes();assert hashlib.sha256(b).hexdigest()==s['digest'],'selected-publication-digest';pub=json.loads(b);tree=root/'generations'/pub['attempt'];assert tree.is_dir(),'selected-generation-missing';mb=(tree/'MANIFEST.json').read_bytes();assert hashlib.sha256(mb).hexdigest()==pub['generation_manifest'],'selected-generation-manifest-digest';attempt=pub['attempt']
+                                                                                                                                                                                                                      ^^^^^^^^^^^^^
+AssertionError: selected-generation-missing

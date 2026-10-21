@@ -1,0 +1,160 @@
+{
+  "kind": "macos-v36-independent-static-review",
+  "source_pin": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "disposition": "REMEDIATE_NO_INTEGRATE_FULL158",
+  "runtime_go": false,
+  "all158": "UNRUN",
+  "scope": {
+    "all_frozen_files_read_unreduced": true,
+    "files": 8,
+    "code_files": 7,
+    "bytes": 131020,
+    "manifest_bytes": 1651,
+    "manifest_sha256": "677c13a931ce590568300d0e4fe01d038ac8777e5640e0b24096fd381ca5006d",
+    "closure_sha256": "15db98f95c162c9a4de4115c49964b3aa4016b594eab4427428f69e3f734461c",
+    "packet_bytes": 39846,
+    "packet_sha256": "392a1a967a4a033191ef6e4ab185701b573c6aff9fb2525c21bfbc26fccda54a"
+  },
+  "findings": [
+    {
+      "id": "M36-PHASE",
+      "priority": 1,
+      "scope": "cache/build/list/no-run/full31",
+      "status": "NO_GO",
+      "locations": [
+        "all seven __main__ blocks",
+        "native_suite_v36.py:7-12",
+        "native_facade_v36.py:229-239",
+        "native_cache_activate_v36.py:32"
+      ],
+      "reason": "No concrete closed isolated operators; supplied build host requires full158 metadata and existing final engine.",
+      "repair": "Separate SHA-bound cache operator and leased phase host; preserve exact grants/ownership/closure."
+    },
+    {
+      "id": "M36-INVENTORY",
+      "priority": 1,
+      "scope": "full158 inventory users",
+      "status": "repair required",
+      "locations": [
+        "native_cases_v36.py:218-228",
+        "native_cases_v36.py:239-251"
+      ],
+      "reason": "os.walk without onerror silently skips inaccessible directory contents; incomplete snapshots can compare equal.",
+      "repair": "Raise every traversal error; retain owned identity/cap checks.",
+      "isolated_cache_or_cargo_blocker": false
+    },
+    {
+      "id": "M36-ORACLE-WIRE",
+      "priority": 1,
+      "scope": "shared checker stdin API",
+      "status": "incompatible transport",
+      "locations": [
+        "native_suite_v36.py:18-33",
+        "native_role_v36.py:201-208",
+        "suite_oracle.py:150",
+        "native_cases_v36.py:163-165"
+      ],
+      "reason": "oracle maps to argv yet nonempty stdin yields input_path which argv refuses.",
+      "qualification": "NativeOracle overrides inherited __call__; this is not a claim that inherited checker currently executes. Injected alternative decoder remains unfrozen.",
+      "repair": "Exact checker-script mode/adapter with bounded withheld source and native ownership/proof."
+    },
+    {
+      "id": "M36-CLOSURE",
+      "priority": 1,
+      "scope": "full158",
+      "status": "missing integration evidence",
+      "locations": [
+        "native_cases_v36.py:33-102",
+        "native_cases_v36.py:128-169",
+        "native_cases_v36.py:237-251",
+        "native_facade_v36.py:228-229",
+        "author receipt"
+      ],
+      "reason": "Exact SDK projections, substitution/source maps and concrete checker interface closure absent.",
+      "isolated_cache_or_cargo_blocker": false
+    }
+  ],
+  "v35_findings": {
+    "owned_control_paths": "STRUCTURALLY_REPAIRED",
+    "barrier_variable": "STRUCTURALLY_REPAIRED_EXP_BARRIER",
+    "receipt_relabeling": "REPLACED_BY_CONCRETE_SHARED_PROVIDERS_BUT_EXACT_SDK_RELEASE_PENDING"
+  },
+  "phase_status": {
+    "cache": "CALLABLE_REVIEWED_OPERATOR_NO_GO",
+    "build": "NO_GO",
+    "list31": "NO_GO",
+    "no_run": "NO_GO",
+    "unfiltered31": "PARSER_REVIEWED_OPERATOR_NO_GO",
+    "ordinary17": "CONCRETE_SHARED_BODY_FOUND_UNRUN",
+    "full158": "NO_INTEGRATE_UNRUN"
+  },
+  "comparison_sources_not_promoted_to_mac_closure": [
+    {
+      "name": "suite_adapter.py",
+      "bytes": 48263,
+      "sha256": "930c650e08de9f13cc905831239f53a5f5155b9252d0bdf1f41ace10eabed4c3"
+    },
+    {
+      "name": "suite_oracle.py",
+      "bytes": 11460,
+      "sha256": "59ac7c58f399230419edbc82ecd52c1585c7f15e65420d001353baaf3f3a915a"
+    },
+    {
+      "name": "suite_ordinary.py",
+      "bytes": 6561,
+      "sha256": "fccad1637fa9c85f5fb3d77094f13ddc9bc810bca9410dc9aed01f940c80e942"
+    },
+    {
+      "name": "suite_packing.py",
+      "bytes": 33671,
+      "sha256": "a965daddeac898d091753d152460c5734b1e5b90d4fe482d3a8b5f04cdd0487f"
+    },
+    {
+      "name": "suite_recovery.py",
+      "bytes": 21458,
+      "sha256": "cafc96fee600c22a8962343cf227d70f09fdb45cc76605eeaee75c0e27bd0caa"
+    },
+    {
+      "name": "suite_extensions.py",
+      "bytes": 48268,
+      "sha256": "71189d39ef28328563aaf1d26404ca89fa9c8b50cd2335f2b58bf1791a901f78"
+    }
+  ],
+  "dynamic_execution": {
+    "candidate_imports": 0,
+    "native_processes": 0,
+    "cache_writes": 0,
+    "builds": 0,
+    "tests": 0,
+    "source_edits": 0,
+    "network": 0,
+    "git": 0,
+    "indexing": 0
+  },
+  "authorization": {
+    "claim": "065",
+    "claim_sha256": "d2435f10a115669217ded30296bbd51083b4ace38efeaedb8c763781b236fd9e",
+    "membership": "meta-membership-v11.json",
+    "membership_sha256": "f516f1475d072cef530dfab3cea18891a148cadef4fc954960fcb4b8f73d51a1",
+    "pair_cap_bytes": 24576,
+    "pair_cap_files": 2,
+    "cap_bytes": 11206656,
+    "prior_pending": 160472,
+    "publication_remaining": 812
+  },
+  "prepublication_census": {
+    "actual_bytes": 10854886,
+    "files": 1308,
+    "pending": 284164,
+    "projection": 11139050,
+    "cap": 11206656
+  },
+  "source_verification": "All eight exact size/SHA checks before and after publication required; final verification also releases read freeze.",
+  "limitations": [
+    "STATIC_ONLY",
+    "GITNEXUS_UNAVAILABLE_IMPACT_UNKNOWN_HIGH",
+    "EXACT_MAC_SDK_NOT_FROZEN",
+    "DECODER_INTERFACE_NOT_FROZEN",
+    "NO_NATIVE_RESULTS"
+  ]
+}

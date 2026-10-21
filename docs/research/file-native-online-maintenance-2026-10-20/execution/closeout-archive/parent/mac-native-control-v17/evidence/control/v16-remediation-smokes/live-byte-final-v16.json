@@ -1,0 +1,304 @@
+{
+  "name": "live-byte-final-v16",
+  "exit": 1,
+  "stdout": "{\"censor\": \"RuntimeError(\\\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\\\")\", \"closure\": \"NO_WORKLOAD_CREATED\", \"token_released\": true, \"sample_count\": 6, \"sample_gap_max_s\": 0.033624292351305485, \"workload_GO\": false, \"worker_exit\": null, \"keeper_recovery_socket\": \"/private/tmp/file-native-online-macos-20261020/keeper-d77179c8ee7cc627718b9c018e6c9cd0.release.json\", \"nonce\": \"d77179c8ee7cc627718b9c018e6c9cd0\"}\n",
+  "stderr": "",
+  "started_epoch": 1792531487.786837,
+  "argv": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "/private/tmp/file-native-online-macos-20261020/execution/native-macos/guard_v7.py",
+    "--name",
+    "live-byte-final-v16",
+    "--seconds",
+    "12",
+    "--prospective",
+    "{\"F01\":{\"bytes\":131072,\"files\":8},\"F04\":{\"bytes\":0,\"files\":0},\"F08\":{\"bytes\":1024,\"files\":1},\"F12\":{\"bytes\":2097152,\"files\":8},\"F13\":{\"bytes\":0,\"files\":0}}",
+    "--control-only",
+    "--",
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "-c",
+    "from pathlib import Path; import time; p=Path(\"/private/tmp/file-native-online-macos-20261020/fixtures/live-byte-v16\"); p.parent.mkdir(exist_ok=True); p.write_bytes(b\"x\"*8192); time.sleep(1)"
+  ],
+  "guard_sha256": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6",
+  "result": {
+    "kind": "native-guard-v7",
+    "nonce": "d77179c8ee7cc627718b9c018e6c9cd0",
+    "status": "GUARD_CONTROL_CANDIDATE_NO_ENGINE_RELEASE",
+    "source_sha256": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6",
+    "adapter_source_bindings": {
+      "monitor_v7.py": "96eccfa0e6c4ca9ed35511ea0242bc8abff64d12d7ba2fc5f76558a57544bade",
+      "control_smoke_v7.py": "fa5d0d32aa4a0ad321ec523b7e56b058a0c04e881b4226923943012ab80597d9",
+      "keeper_v7.py": "7b2b4017b3c5f4e23402eb66aa1d4fa5cbe1993c1e01d3920bc49544f6ac0958",
+      "admission_v7.py": "c23ed5d767b74fce3e0d1478f333a72bfa84683a2cfc582648fd7db557bbfe05",
+      "guard_v7.py": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6"
+    },
+    "source_pin": "CONTROL_ONLY",
+    "claims": {
+      "F01": "initial-native-worker-source4MiB-at-authority94734e76",
+      "F04": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570",
+      "F08": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984",
+      "F12": "initial-native-worker-functional-evidence24MiB",
+      "F13": "initial-native-worker-combined-positive-shared-growth4MiB"
+    },
+    "limits": {
+      "F01": {
+        "bytes": 4194304,
+        "files": 1000,
+        "claim": "initial-native-worker-source4MiB-at-authority94734e76"
+      },
+      "F04": {
+        "bytes": 268435456,
+        "files": 5000,
+        "claim": "CLAIM002:b77352544db52170902dd7b90a76c045943d38eaacb63523db08b71ebd9f2570"
+      },
+      "F08": {
+        "bytes": 100663296,
+        "files": 30000,
+        "claim": "central:9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984"
+      },
+      "F12": {
+        "bytes": 25165824,
+        "files": 10000,
+        "claim": "initial-native-worker-functional-evidence24MiB"
+      },
+      "F13": {
+        "bytes": 4194304,
+        "files": 1500,
+        "claim": "initial-native-worker-combined-positive-shared-growth4MiB"
+      }
+    },
+    "prospective": {
+      "F01": {
+        "bytes": 131072,
+        "files": 8
+      },
+      "F04": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F08": {
+        "bytes": 1024,
+        "files": 1
+      },
+      "F12": {
+        "bytes": 2097152,
+        "files": 8
+      },
+      "F13": {
+        "bytes": 0,
+        "files": 0
+      }
+    },
+    "started_epoch": 1792531487.9233322,
+    "functional_cutoff_epoch": 1792581014.0,
+    "effective_fixed_cutoff_epoch": 1792581014.0,
+    "local_deadline_monotonic": 3219950.219134208,
+    "global_enumeration": false,
+    "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+    "closure": "NO_WORKLOAD_CREATED",
+    "token_released": true,
+    "worker_exit": null,
+    "supervisor": {
+      "pid_requested": 73671,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 73671,
+      "ppid": 73227,
+      "uid": 501,
+      "pgid": 73227,
+      "state": 2,
+      "start": [
+        1792531487,
+        787012
+      ]
+    },
+    "before_setup_positive_RSS": {
+      "return": 0,
+      "errno": 0,
+      "rss_bytes": 26542080,
+      "start_abstime": 77278513987551
+    },
+    "observed_output_bytes": 0,
+    "workload_GO": false,
+    "closure_proofs": [],
+    "termination": [],
+    "keeper_identity": {
+      "pid_requested": 73672,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 73672,
+      "ppid": 73671,
+      "uid": 501,
+      "pgid": 73672,
+      "state": 2,
+      "start": [
+        1792531488,
+        6319
+      ]
+    },
+    "keeper_recovery_socket": "/private/tmp/file-native-online-macos-20261020/keeper-d77179c8ee7cc627718b9c018e6c9cd0.release.json",
+    "token_acquired_epoch": 1792531488.022252,
+    "admission_snapshot": {
+      "categories": {
+        "F01": {
+          "logical_bytes": 624031,
+          "allocated_bytes": 729088,
+          "files": 42,
+          "directories": 9,
+          "symlinks": 0
+        },
+        "F04": {
+          "logical_bytes": 0,
+          "allocated_bytes": 0,
+          "files": 0,
+          "directories": 0,
+          "symlinks": 0
+        },
+        "F08": {
+          "logical_bytes": 24585,
+          "allocated_bytes": 61440,
+          "files": 12,
+          "directories": 1,
+          "symlinks": 0
+        },
+        "F12": {
+          "logical_bytes": 4332013,
+          "allocated_bytes": 5554176,
+          "files": 715,
+          "directories": 155,
+          "symlinks": 0
+        },
+        "F13": {
+          "logical_bytes": 82,
+          "files": 2,
+          "allocated_bytes": null,
+          "shared_components": {
+            "Git": {
+              "logical_bytes": 187972974,
+              "allocated_bytes": 205033472,
+              "files": 5494,
+              "directories": 371,
+              "symlinks": 0,
+              "baseline_logical_bytes": 187972892,
+              "baseline_files": 5492,
+              "positive_bytes": 82,
+              "positive_files": 2
+            },
+            "Cargo": {
+              "logical_bytes": 1859795101,
+              "allocated_bytes": 2063294464,
+              "files": 81747,
+              "directories": 15833,
+              "symlinks": 13,
+              "baseline_logical_bytes": 1859800817,
+              "baseline_files": 81747,
+              "positive_bytes": 0,
+              "positive_files": 0
+            }
+          }
+        }
+      },
+      "free_bytes": 162159525888
+    },
+    "admitted_growth_ceiling": {
+      "F01": {
+        "bytes": 755103,
+        "files": 50
+      },
+      "F04": {
+        "bytes": 0,
+        "files": 0
+      },
+      "F08": {
+        "bytes": 25609,
+        "files": 13
+      },
+      "F12": {
+        "bytes": 6429165,
+        "files": 723
+      },
+      "F13": {
+        "bytes": 82,
+        "files": 2
+      }
+    },
+    "launcher": {
+      "path": "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3.11",
+      "sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+      "argv": [
+        "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+        "-B",
+        "-c",
+        "from pathlib import Path; import time; p=Path(\"/private/tmp/file-native-online-macos-20261020/fixtures/live-byte-v16\"); p.parent.mkdir(exist_ok=True); p.write_bytes(b\"x\"*8192); time.sleep(1)"
+      ],
+      "cwd": "/private/tmp/file-native-online-macos-20261020",
+      "contract": "foreground, no daemonization or session escape; all subprocesses sampled"
+    },
+    "primary_sample_failure": "RuntimeError('supervisor-registry-sample-stale')",
+    "sample_count": 6,
+    "sample_gap_max_s": 0.033624292351305485,
+    "sample_failure": "RuntimeError('supervisor-registry-sample-stale')",
+    "peak_group_rss": 0,
+    "peak_all_helpers_rss": 55001088,
+    "disk_monitor": {
+      "latest": null,
+      "failure": null
+    },
+    "keeper_reaped": true,
+    "raw_rows_written": 7,
+    "finished_epoch": 1792531495.054968,
+    "test_fault": null
+  },
+  "raw": {
+    "compressed_sha256": "2540471143901fffc2cf8340a76843dd7cfd226c1f6956e7c916fbe834a0aa80",
+    "compressed_bytes": 562,
+    "gzip_eof_complete": true,
+    "json_rows": 7,
+    "rss_rows": 6,
+    "max_RSS_start_gap_s": 0.034174792002886534,
+    "rows_match_receipt": true,
+    "raw_censored": false
+  },
+  "keeper": {
+    "kind": "independent-native-keeper",
+    "nonce": "d77179c8ee7cc627718b9c018e6c9cd0",
+    "identity": {
+      "pid_requested": 73672,
+      "returned_bytes": 136,
+      "errno": 0,
+      "expected_bytes": 136,
+      "pid": 73672,
+      "ppid": 73671,
+      "uid": 501,
+      "pgid": 73672,
+      "state": 2,
+      "start": [
+        1792531488,
+        6319
+      ]
+    },
+    "fixed_cutoff_epoch": 1792581014.0,
+    "local_deadline_monotonic": 3219950.219134208,
+    "token_received": true,
+    "state": "CLOSED_AFTER_CENSOR",
+    "reason": "RSS-heartbeat-gap-over-40ms",
+    "events": [
+      {
+        "notify_parent": {
+          "pid": 73671,
+          "start": [
+            1792531487,
+            787012
+          ],
+          "signal": 30,
+          "sent": true,
+          "errno": 0
+        }
+      }
+    ]
+  }
+}

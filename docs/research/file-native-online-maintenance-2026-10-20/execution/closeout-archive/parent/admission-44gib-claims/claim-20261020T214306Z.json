@@ -1,0 +1,74 @@
+{
+  "kind": "44GiB-C3-meta-review-topup-and-staged-capture-design-receipt",
+  "claim_id": "44GiB-CENTRAL-006-C3-META-REVIEW-4MiB",
+  "utc": "2026-10-20T21:43:06.304681+00:00",
+  "status": "C3_INTERNAL_TOPUP_AUTHORIZED__LARGE_EXECUTION_STILL_HOLD",
+  "authority": "Meta authorizes+2MiB C3-META-REVIEW beforeparentnewreplacementbundlewrites beyondold2MiB. Also selects stagednormalpair+actualF14expiry/streamingcapture designforfurtherproof; no newexecutionGO.",
+  "sequence_note": "Analysisclaim005wasalreadysealedjustbeforethisincominginstruction. Preserveitunchanged; recordthisauthorizationasclaim006ratherthanrewrite005.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T214202Z.json",
+    "sha256": "ad1df90740038e794a3b6c981f608bc5a17a98f2559bbdf8758e3c8e54efcc8d"
+  },
+  "C3_subclaims_after": {
+    "replacement_total_bytes": 16777216,
+    "META_REVIEW_prior_bytes": 2097152,
+    "META_REVIEW_topup_bytes": 2097152,
+    "META_REVIEW_new_bytes": 4194304,
+    "META_REVIEW_files_unchanged": 2000,
+    "CP2_SOURCE_ADMIN_bytes_unchanged": 2097152,
+    "CP2_SOURCE_ADMIN_files_unchanged": 2000,
+    "remaining_unsubclaimed_bytes": 10485760,
+    "preexisting_control_hold_within_remaining_bytes": 32768,
+    "remaining_after_control_hold_bytes": 10452992,
+    "files_total_unchanged": 15000,
+    "files_not_subclaimed_unchanged": 11000,
+    "rule": "TopupcomesfromalreadychargedC3unsubclaimedbytes; no centralcontingencydraw,no additionalworkergrant,no forecastincrease."
+  },
+  "bundle_scope": {
+    "replacement_compressed_bytes_reported": 193338,
+    "members_reported": 139,
+    "raw_regular_byte_sum": "PENDINGparentinventory; no fabricatedexactsum",
+    "allocation": "C3-META-REVIEW4MiB coversallparentreviewcopies/transportJSON/base64/compressed/extracted/newreviews pluspriorartifacts, not4MiB perfile or perbundle. CommonGitgrowthcountedonceinF13.",
+    "prewrite_condition": "Parentmustobtainrawsum, addallcoexistingcopies/currentC3actual, andrefuseextraction/writeif >4MiB orfilecap. Allocationexistsbeforegrowth; itdoesnotproveunknownrawbundlefits."
+  },
+  "applied_whole_allocator_unchanged": {
+    "whole_prospective_bytes": 47071111541,
+    "central_contingency_bytes": 173528715,
+    "reserved_files_includingprevious64controlslots": 4792604,
+    "remaining_central_files": 207396,
+    "global_file_cap": 5000000,
+    "inside_closeout_reserve_bytes": 1073741824,
+    "inside_closeout_reserve_files": 100000,
+    "all_earlier_failedfullforecastaudits_remainHOLD": true
+  },
+  "selected_staged_route": {
+    "design_accepted_by_meta_forfurtherproof": true,
+    "normal_newbirth_paged_pair": true,
+    "extra_two_location_descriptor_extension_required_by_resources": false,
+    "long_stage_uses_existing_F09_F10_F14": true,
+    "F14_not_reassigned_until_actual_enginecleanup_census_fulloracle_andclosure": true,
+    "F11_full676345051_retained": true,
+    "streaming_full_capture_restore_accepted_design": {
+      "no_persisted_duplicate_newcompressedtransport_promised": true,
+      "all_initialseed_files_testledger_and_record_payload_coverage": true,
+      "newphysicalrepresentation_must_preserve_exactrequiredrawrecord_semanticbyteoracles": true,
+      "source_retainedquiescent": true,
+      "protected_originalarchive_unchanged": true,
+      "complete_outerhash_EOF_everyrecord_inventory_sourcebeforeafter_fulloracle_and_dest_successor": true,
+      "independent_destination_quarantine_until_all_checks": true,
+      "reviewed_shared_harness_required_before_long_execution": true
+    },
+    "no_new_GO": true,
+    "enlarged_finalcaps_admission": "HOLDpendingallmeasurements/proofs/completeledger"
+  },
+  "prior_seals_unchanged": true,
+  "resource_worker_actions": {
+    "new_claim_reports_only": true,
+    "engine_build_restore_corpus_deletion": false
+  },
+  "clocks_unchanged": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional_cutoff": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z"
+  }
+}

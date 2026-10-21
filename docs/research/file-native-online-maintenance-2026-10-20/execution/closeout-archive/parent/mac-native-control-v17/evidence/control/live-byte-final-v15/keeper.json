@@ -1,0 +1,158 @@
+{
+  "kind": "independent-native-keeper",
+  "nonce": "88071d4f2d2c51fc1c7f786d226d7d38",
+  "identity": {
+    "pid_requested": 70429,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 70429,
+    "ppid": 70428,
+    "uid": 501,
+    "pgid": 70429,
+    "state": 2,
+    "start": [
+      1792531296,
+      869920
+    ]
+  },
+  "fixed_cutoff_epoch": 1792581014.0,
+  "local_deadline_monotonic": 3219759.167687208,
+  "token_received": true,
+  "state": "CLOSED_AFTER_CENSOR",
+  "reason": "RuntimeError('live-admitted-growth-cap:F08')",
+  "events": [
+    {
+      "termination": {
+        "status": "FROZEN_TREE_SIGNALLED",
+        "steps": [
+          {
+            "pid": 70496,
+            "start": [
+              1792531298,
+              827978
+            ],
+            "signal": 17,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 70495,
+            "start": [
+              1792531298,
+              768807
+            ],
+            "signal": 17,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 70496,
+            "start": [
+              1792531298,
+              827978
+            ],
+            "signal": 9,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 70495,
+            "start": [
+              1792531298,
+              768807
+            ],
+            "signal": 9,
+            "sent": true,
+            "errno": 0
+          }
+        ],
+        "known": [
+          {
+            "pid_requested": 70495,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70495,
+            "ppid": 70429,
+            "uid": 501,
+            "pgid": 70495,
+            "state": 4,
+            "start": [
+              1792531298,
+              768807
+            ]
+          },
+          {
+            "pid_requested": 70496,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 70496,
+            "ppid": 70495,
+            "uid": 501,
+            "pgid": 70495,
+            "state": 4,
+            "start": [
+              1792531298,
+              827978
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "notify_parent": {
+        "pid": 70428,
+        "start": [
+          1792531296,
+          802945
+        ],
+        "signal": 30,
+        "sent": true,
+        "errno": 0
+      }
+    },
+    {
+      "closure": {
+        "proven": true,
+        "required_observations": 2,
+        "observations": [
+          {
+            "monotonic": 3219749.263514,
+            "groups": [
+              {
+                "pgid_requested": 70495,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3219749263464833
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          },
+          {
+            "monotonic": 3219749.285812416,
+            "groups": [
+              {
+                "pgid_requested": 70495,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3219749285791416
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          }
+        ],
+        "total_numeric_observations": 2
+      }
+    }
+  ]
+}

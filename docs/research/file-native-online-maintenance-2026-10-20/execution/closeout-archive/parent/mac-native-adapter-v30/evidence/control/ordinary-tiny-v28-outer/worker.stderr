@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/private/tmp/file-native-online-macos-20261020/execution/native-macos/ordinary_control_v28.py", line 19, in <module>
+    error=copy('retired',captured=base/'captured.json',code=1);assert 'selected-generation-missing' in error
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/file-native-online-macos-20261020/execution/native-macos/ordinary_control_v28.py", line 12, in copy
+    p,res=b.invoke('reader',argv,code=code,timeout=5)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/file-native-online-macos-20261020/execution/native-macos/capsule_adapter_v28.py", line 81, in invoke
+    result=roles.invoke(role,argv,name=name,timeout=min(timeout,115),identity_budget=self.identity_budget,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/file-native-online-macos-20261020/execution/native-macos/role_driver_v28.py", line 295, in invoke
+    if failure: raise RuntimeError('role-invocation-censored:'+repr(failure))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: role-invocation-censored:["RuntimeError('role-descendant-identity-unknown')", 'RuntimeError("RuntimeError(\'role-descendant-identity-unknown\')")']

@@ -1,0 +1,79 @@
+{
+  "role": "reader",
+  "limit_bytes": 268435456,
+  "failures": [
+    "RuntimeError('role-descendant-identity-unknown')",
+    "RuntimeError(\"RuntimeError('role-descendant-identity-unknown')\")"
+  ],
+  "samples": 15,
+  "max_start_gap_s": 0.012810540851205587,
+  "peak_RSS_bytes": 32112640,
+  "closure": [
+    {
+      "monotonic": 3223718.661524916,
+      "identities": [
+        {
+          "pid_requested": 62039,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62040,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62041,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    },
+    {
+      "monotonic": 3223718.683738541,
+      "identities": [
+        {
+          "pid_requested": 62039,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62040,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62041,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    }
+  ],
+  "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+  "source_pin": "CONTROL_ONLY",
+  "exit": -9,
+  "seconds": 0.1839741668663919,
+  "guarded_seconds": 0.2314856667071581,
+  "output_complete": false,
+  "outputs": {
+    "stdout": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/ordinary-tiny-v28-3/stdout.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/ordinary-tiny-v28-3/stderr.bin",
+      "bytes": 853,
+      "sha256": "b0aa590d50319b7237b29262cd6dc588c6e98e230f3a860d45bb010ffc592e30"
+    }
+  }
+}

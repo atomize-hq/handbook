@@ -1,0 +1,97 @@
+{
+  "kind": "44GiB-shared-allocator-dated-claim",
+  "claim_id": "44GiB-CENTRAL-002-NATIVE-PRIVATE-TARGETS",
+  "utc": "2026-10-20T20:21:01.479681+00:00",
+  "status": "AUTHORIZED_EXISTING_RESERVATION_TRANSFER_BEFORE_FIRST_BUILD",
+  "authority": "Same-meta human-authorized continuation; coordinator authorizes C2 Linux/Mac release before either native firstbuild. No independent grants.",
+  "predecessor": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib-claims\\claim-20261020T200854Z.json",
+    "sha256": "9b19a7b0eb3fab63f76c53b7b629b18ec1828c3c4346dc4d839380299bd5f984",
+    "prior_claim_id": "44GiB-CENTRAL-001-F08-FINAL-NATIVE"
+  },
+  "original_admission": {
+    "path": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be\\admission-44gib\\admission-ledger.json",
+    "sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
+    "preserved_unchanged": true
+  },
+  "reason": {
+    "retained_native_release_target_measured_bytes": 123577017,
+    "retained_native_after_units_bytes": 129336661,
+    "old_target_cap_bytes_each": 134217728,
+    "old_after_units_headroom_bytes": 4881067,
+    "need": "CP1 added module/unitcoverage needs credible private target headroom before firstbuild. Retained measurements are forecasts for new targets, not newactual growth."
+  },
+  "transfers": [
+    {
+      "from": "C2 Linux private-target topup earmark",
+      "to": "F03 native Linux NEW private target",
+      "bytes": 134217728,
+      "old_F03_bytes": 134217728,
+      "new_F03_bytes": 268435456
+    },
+    {
+      "from": "C2 Mac private-target topup earmark",
+      "to": "F04 native Mac NEW private target",
+      "bytes": 134217728,
+      "old_F04_bytes": 134217728,
+      "new_F04_bytes": 268435456
+    }
+  ],
+  "C2_after": {
+    "prior_total_bytes": 402653184,
+    "transferred_bytes": 268435456,
+    "remaining_held_bytes": 134217728,
+    "remaining_owner": "Windows topup only, held centrally; no newclaim oractualgrowth implied",
+    "Linux_unclaimed_topup_bytes": 0,
+    "Mac_unclaimed_topup_bytes": 0
+  },
+  "native_target_caps_after": {
+    "Linux_F03_bytes": 268435456,
+    "Mac_F04_bytes": 268435456,
+    "scope": "One newprivate target perhost, reused within this experiment as admitted. All oldpreservedtargets untouched; no targetcopy/deletion credit.",
+    "F08_final_native_fixture_caps_unchanged": {
+      "Linux_bytes": 100663296,
+      "Mac_bytes": 100663296,
+      "separate_from_targets": true
+    }
+  },
+  "whole_allocator_snapshot": {
+    "cap_bytes": 47244640256,
+    "whole_prospective_before_bytes": 47071111541,
+    "transfer_net_new_prospective_bytes": 0,
+    "whole_prospective_after_bytes": 47071111541,
+    "central_contingency_before_bytes": 173528715,
+    "central_contingency_after_bytes": 173528715,
+    "inside_closeout_reserve_bytes": 1073741824,
+    "inside_closeout_reserve_files": 100000,
+    "whole_prospective_files_unchanged": 4792540,
+    "remaining_files_unchanged": 207460,
+    "file_suballocations": "No file allowance increase. Original F03/F04 each5000files remain; C2central15000files stays tracked centrally against original overallfileforecast. Any newfileclaim must be non-additive within that existing reservation.",
+    "C1_private_caches_unchanged": true,
+    "C3_replacement16MiB_unchanged": true,
+    "F08_96MiB_each_unchanged": true
+  },
+  "execution_controls": "Nativefirstbuild requires finalsourcepin, privatecache/source/rootclaim, exclusivehostheavy token, ownedprocessgroup/guard, j2, aggregate3GiB and existingrolecaps, free>=20GiB. Targetcap release is not engine/sourcequalification. Parent routes cap before pinbuild.",
+  "report_accounting": {
+    "new_files": 3,
+    "new_report_budget_bytes": 32768,
+    "admission_family_files_after_claim": 13,
+    "admission_family_file_envelope": 16,
+    "admission_family_byte_envelope": 524288,
+    "charge": "Existing charged amendment512KiB/16file envelope; parent duplicates/Git remain in C3/closeout. No addedcap."
+  },
+  "actual_growth_this_claim": {
+    "new_target_growth_bytes": 0,
+    "builds_performed_by_resource_worker": 0,
+    "corpus_copies": 0,
+    "deletions": 0,
+    "only_new_claim_reports": true
+  },
+  "unchanged_clocks": {
+    "t0_utc": "2026-10-20T19:10:14Z",
+    "functional_cutoff_utc": "2026-10-21T11:10:14Z",
+    "closeout_cutoff_utc": "2026-10-21T13:10:14Z",
+    "clock_reset": false
+  },
+  "disposition": "RESOURCE GO retained; C2 transfer complete, native F03/F04 targetcap256MiB each; meta controls actual guarded firstbuild."
+}

@@ -71,7 +71,10 @@ def load_stream(config):
     require(item['sha256'] == STREAM_SHA, 'stream-version')
     spec = importlib.util.spec_from_file_location('reviewed_fnop_stream', item['path'])
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    with Path(item['path']).open('rb') as source:
+        raw = source.read(2*1024**2+1)
+    require(len(raw)<=2*1024**2 and hashlib.sha256(raw).hexdigest()==item['sha256'], 'stream-verified-buffer')
+    exec(compile(raw,item['path'],'exec'),module.__dict__)
     return module
 
 
@@ -288,4 +291,3 @@ def legacy_restore(host, config):
                dict(status='quarantined-incomplete', error=ascii(error)[:1000],
                     no_delete=True, no_automatic_retry=True), config['categories']['source_evidence'], 4096)
         raise
-

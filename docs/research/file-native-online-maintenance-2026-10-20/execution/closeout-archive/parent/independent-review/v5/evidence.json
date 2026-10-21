@@ -1,0 +1,90 @@
+{
+  "disposition": "REMEDIATE",
+  "qualification": "INCOMPLETE/no engine GO",
+  "primary_source_first_observation": [
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/harness/paged_index.py",
+      "bytes": 8097,
+      "sha256": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea"
+    },
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/harness/physical_decoder_v5.py",
+      "bytes": 37720,
+      "sha256": "f317601646d0ba267cede9d09e750e36e84f3d47e919ede880295547b850edc5"
+    },
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/harness/paged_index_controls.py",
+      "bytes": 15650,
+      "sha256": "7d5dc2ae47359c17dce6f363bfc8f6d9e3f7a24603944e50258cb9b059c36e85"
+    }
+  ],
+  "primary_source_last_observation": [
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/harness/paged_index.py",
+      "bytes": 8097,
+      "sha256": "788286c46af4c53b045e0c029ae7ef22f83ecd92e31de18147c7e23fc44660ea"
+    },
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/harness/physical_decoder_v5.py",
+      "bytes": 37720,
+      "sha256": "f317601646d0ba267cede9d09e750e36e84f3d47e919ede880295547b850edc5"
+    },
+    {
+      "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/harness/paged_index_controls.py",
+      "bytes": 15650,
+      "sha256": "7d5dc2ae47359c17dce6f363bfc8f6d9e3f7a24603944e50258cb9b059c36e85"
+    }
+  ],
+  "observations_match": true,
+  "last_hash_observation_precedes_static_complete_freeze_release_notice": true,
+  "source_read_after_release": false,
+  "static_receipt_sha256": "8ffe1ff327a983fb2c42168883f0793498a070967be321d6c3c49f274eefe4cb",
+  "historical_schema_pin": "f9b762a1a0d352564542bb4850ad77ee14a7c6e4",
+  "compared_rust_pin": "a3f9805eccc19ede8dd5c735b54e675e98e63714",
+  "equivalence_scope": "paged layout/parse/emit and descriptor shape only; not full future owner protocol qualification",
+  "finding": {
+    "id": "R1",
+    "priority": 1,
+    "file": "physical_decoder_v5.py",
+    "lines": [
+      266,
+      274,
+      324,
+      393,
+      597,
+      604,
+      629
+    ],
+    "issue": "No reverse closure from every selected mapped role to authenticated accepted/allowed owner cohort without optional inventory",
+    "static_counterexample_only": true
+  },
+  "synthetic": {
+    "negatives": 53,
+    "positive_trees": 4,
+    "four_height2_routes_pages": 12,
+    "four_height2_routes_index_bytes": 55768,
+    "protocol_bytes": 469262,
+    "protocol_files": 103,
+    "guard_exit": 0,
+    "errors": [],
+    "censor": null,
+    "sampled_peak_rss": 25849856,
+    "stage_seconds": 37.52843379974365,
+    "max_sampling_interval_seconds": 0.06299999996554106,
+    "intervals_over40ms": 13,
+    "actual_cp3_stores_qualified": 0
+  },
+  "references": [
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\paged-index-v5-controls-v1.json",
+      "bytes": 29787,
+      "sha256": "e6cc75394a2147bbdfe625fc075c1d486e805d75d2da15c88b305f46ca244e65"
+    },
+    {
+      "path": "C:\\file-native-online-matrix-20261020\\receipts\\paged-index-v5-controls-v1-guard.json",
+      "bytes": 31532,
+      "sha256": "3f971ef247517e6a375d1285a730bae690f5527a75c5438f478a17017975a924"
+    }
+  ],
+  "reviewer_actions": "Read source, Git objects and receipts; hash files; write exactly two review artifacts. No parser/control/engine/native/store/oracle execution, no source edits, no fixtures, no subagents."
+}

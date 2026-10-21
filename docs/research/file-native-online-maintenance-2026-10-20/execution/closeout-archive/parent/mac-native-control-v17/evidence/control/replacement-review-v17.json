@@ -1,0 +1,1514 @@
+{
+  "status": "REPLACEMENT_GUARD_REVIEW_REQUIRED_ENGINE_HOLD",
+  "utc": "2026-10-20T21:31:26.497431+00:00",
+  "source_hashes": {
+    "guard_v7.py": "a2db9b6962e7b1c41e9f8ceb8f1bb6d1f282c29d51b8341f22d72299cd46b3b6",
+    "admission_v7.py": "c23ed5d767b74fce3e0d1478f333a72bfa84683a2cfc582648fd7db557bbfe05",
+    "monitor_v7.py": "96eccfa0e6c4ca9ed35511ea0242bc8abff64d12d7ba2fc5f76558a57544bade",
+    "keeper_v7.py": "7b2b4017b3c5f4e23402eb66aa1d4fa5cbe1993c1e01d3920bc49544f6ac0958",
+    "native_probe.py": "ba21a8452e1b70d4725f387babcf31c6c994868137cf5a50552812e43bd61c90",
+    "control_smoke_v7.py": "fa5d0d32aa4a0ad321ec523b7e56b058a0c04e881b4226923943012ab80597d9"
+  },
+  "selected_same_core_control_results": [
+    {
+      "name": "cadence-final-v15",
+      "GO": true,
+      "censor": "RuntimeError('independent-or-absolute-deadline')",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 4579,
+      "raw_sha256": "687ddf93786cc0fcc260ed446bc99709e73af061a50694896eeddb9aaccf946b",
+      "json_rows": 162,
+      "receipt_rows": 162,
+      "rows_match": true,
+      "RSS_rows": 159,
+      "observed_max_RSS_start_gap_s": 0.015440667048096657,
+      "reported_max_gap_s": 0.015447209123522043,
+      "keeper_reason": "RSS-heartbeat-gap-over-40ms",
+      "peak_group_RSS": 26624000,
+      "peak_all_helpers_RSS": 66764800
+    },
+    {
+      "name": "closure-HOLD-final-v15",
+      "GO": true,
+      "censor": null,
+      "closure": "UNKNOWN_HOLD",
+      "token_released_at_result": false,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 5012,
+      "raw_sha256": "30f0e9ab7f0c3c8627e651488ef8ce8c696c8a268ebbd96dda0a6b92e5f6a3c4",
+      "json_rows": 173,
+      "receipt_rows": 173,
+      "rows_match": true,
+      "RSS_rows": 171,
+      "observed_max_RSS_start_gap_s": 0.014549624640494585,
+      "reported_max_gap_s": 0.014539292082190514,
+      "keeper_reason": "parent-UNKNOWN-closure",
+      "peak_group_RSS": 41369600,
+      "peak_all_helpers_RSS": 72646656
+    },
+    {
+      "name": "escape-final-v15",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('owned-descendant-escaped-session')\")",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 5867,
+      "raw_sha256": "132a3f458b8a677e331e33418d5a0b7dc342cbcb6d2a482407b2bced114075ed",
+      "json_rows": 197,
+      "receipt_rows": 197,
+      "rows_match": true,
+      "RSS_rows": 193,
+      "observed_max_RSS_start_gap_s": 0.015211957972496748,
+      "reported_max_gap_s": 0.01509845769032836,
+      "keeper_reason": "RuntimeError('owned-descendant-escaped-session')",
+      "peak_group_RSS": 57327616,
+      "peak_all_helpers_RSS": 67567616
+    },
+    {
+      "name": "fixed-setup-wait-v15",
+      "GO": false,
+      "censor": "RuntimeError('deadline-or-sampler-during-setup-wait')",
+      "closure": "NO_WORKLOAD_CREATED",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 1037,
+      "raw_sha256": "d1dbed08ef89da492dd6d7e9a02a491ee569057e321e0358ccc7a19458bac76b",
+      "json_rows": 29,
+      "receipt_rows": 29,
+      "rows_match": true,
+      "RSS_rows": 29,
+      "observed_max_RSS_start_gap_s": 0.014495874755084515,
+      "reported_max_gap_s": 0.014456207863986492,
+      "keeper_reason": "fixed-cutoff",
+      "peak_group_RSS": 0,
+      "peak_all_helpers_RSS": 64389120
+    },
+    {
+      "name": "fixed-token-wait-v15",
+      "GO": false,
+      "censor": "RuntimeError('keeper-alert-during-token-wait')",
+      "closure": "NO_WORKLOAD_CREATED",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 1062,
+      "raw_sha256": "c372745f64261fa3fc807c7a1436a9b37322b1d06f16629e9169f8547c30d7bf",
+      "json_rows": 29,
+      "receipt_rows": 29,
+      "rows_match": true,
+      "RSS_rows": 29,
+      "observed_max_RSS_start_gap_s": 0.014863708056509495,
+      "reported_max_gap_s": 0.014905125368386507,
+      "keeper_reason": "fixed-cutoff",
+      "peak_group_RSS": 0,
+      "peak_all_helpers_RSS": 64208896
+    },
+    {
+      "name": "live-byte-final-v15",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 6440,
+      "raw_sha256": "73cd94249706368366bef151f4ae8d1930ef70e8dec17f7fd9b1e102b0957de8",
+      "json_rows": 216,
+      "receipt_rows": 216,
+      "rows_match": true,
+      "RSS_rows": 212,
+      "observed_max_RSS_start_gap_s": 0.015418624971061945,
+      "reported_max_gap_s": 0.015452333260327578,
+      "keeper_reason": "RuntimeError('live-admitted-growth-cap:F08')",
+      "peak_group_RSS": 41435136,
+      "peak_all_helpers_RSS": 67141632
+    },
+    {
+      "name": "live-file-final-v15",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 5711,
+      "raw_sha256": "a8fa40474ff6cc68150ba080c9be4fc1319ba09897766beed1b1699aae5850b2",
+      "json_rows": 188,
+      "receipt_rows": 188,
+      "rows_match": true,
+      "RSS_rows": 186,
+      "observed_max_RSS_start_gap_s": 0.01745674991980195,
+      "reported_max_gap_s": 0.017316124867647886,
+      "keeper_reason": "RuntimeError('live-admitted-growth-cap:F08')",
+      "peak_group_RSS": 41336832,
+      "peak_all_helpers_RSS": 67764224
+    },
+    {
+      "name": "local-timeout-final-v15",
+      "GO": true,
+      "censor": "RuntimeError('independent-or-absolute-deadline')",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 24760,
+      "raw_sha256": "deada40b667f64a853461c0a0d264c1f8073949a4923d58caec8420a2877da96",
+      "json_rows": 666,
+      "receipt_rows": 666,
+      "rows_match": true,
+      "RSS_rows": 605,
+      "observed_max_RSS_start_gap_s": 0.014934208244085312,
+      "reported_max_gap_s": 0.015894500073045492,
+      "keeper_reason": "RuntimeError('independent-or-absolute-deadline')",
+      "peak_group_RSS": 41353216,
+      "peak_all_helpers_RSS": 68075520
+    },
+    {
+      "name": "memory-final-v15",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('per-process-rss-cap')\")",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 4968,
+      "raw_sha256": "8797d14c51415ba94cec63ea0af52d318cfc89a43fb228562feaea36e6914f60",
+      "json_rows": 168,
+      "receipt_rows": 168,
+      "rows_match": true,
+      "RSS_rows": 163,
+      "observed_max_RSS_start_gap_s": 0.015333333052694798,
+      "reported_max_gap_s": 0.015371375251561403,
+      "keeper_reason": "RuntimeError('per-process-rss-cap')",
+      "peak_group_RSS": 115392512,
+      "peak_all_helpers_RSS": 66306048
+    },
+    {
+      "name": "missing-final-v15",
+      "GO": true,
+      "censor": "RuntimeError(\"RuntimeError('missing-live-rss-or-identity')\")",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 4776,
+      "raw_sha256": "751d0062771ecd26f7379c0176521a8e5423571c4a09a03ce1c6f132f74969ec",
+      "json_rows": 169,
+      "receipt_rows": 169,
+      "rows_match": true,
+      "RSS_rows": 165,
+      "observed_max_RSS_start_gap_s": 0.014571416657418013,
+      "reported_max_gap_s": 0.014516624622046947,
+      "keeper_reason": "RuntimeError('missing-live-rss-or-identity')",
+      "peak_group_RSS": 26312704,
+      "peak_all_helpers_RSS": 66895872
+    },
+    {
+      "name": "nested-final-v15",
+      "GO": true,
+      "censor": null,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 7683,
+      "raw_sha256": "4b7e7bdd680da2ef24d6b2aa2fe85d0099c7b42ee0b6d810ceaa875f27f9842b",
+      "json_rows": 228,
+      "receipt_rows": 228,
+      "rows_match": true,
+      "RSS_rows": 219,
+      "observed_max_RSS_start_gap_s": 0.014800374861806631,
+      "reported_max_gap_s": 0.014831791166216135,
+      "keeper_reason": null,
+      "peak_group_RSS": 57475072,
+      "peak_all_helpers_RSS": 65634304
+    },
+    {
+      "name": "normal-final-v15",
+      "GO": true,
+      "censor": null,
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 7262,
+      "raw_sha256": "e76b180228cdb9974d552343c69f8079a71d5bb6f1fc54e014cc4ba78922f268",
+      "json_rows": 226,
+      "receipt_rows": 226,
+      "rows_match": true,
+      "RSS_rows": 217,
+      "observed_max_RSS_start_gap_s": 0.014820415992289782,
+      "reported_max_gap_s": 0.014775833114981651,
+      "keeper_reason": null,
+      "peak_group_RSS": 41549824,
+      "peak_all_helpers_RSS": 64438272
+    },
+    {
+      "name": "orphan-final-v15",
+      "GO": true,
+      "censor": "RuntimeError('root-completed-orphan-tree')",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 5595,
+      "raw_sha256": "c43d86d57ce4433c06a1c0a3a64ec06e874f4c580168f7727c2183df6fc4e4d2",
+      "json_rows": 181,
+      "receipt_rows": 181,
+      "rows_match": true,
+      "RSS_rows": 176,
+      "observed_max_RSS_start_gap_s": 0.015063541941344738,
+      "reported_max_gap_s": 0.015038707759231329,
+      "keeper_reason": "RuntimeError('root-completed-orphan-tree')",
+      "peak_group_RSS": 45285376,
+      "peak_all_helpers_RSS": 67338240
+    },
+    {
+      "name": "output-final-v15",
+      "GO": true,
+      "censor": "RuntimeError('output-prewrite-cap')",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 5123,
+      "raw_sha256": "d89a76af599a14f4e9d418d3db70b9edd3b407e47b75ae75b453e37ff790e6c0",
+      "json_rows": 175,
+      "receipt_rows": 175,
+      "rows_match": true,
+      "RSS_rows": 173,
+      "observed_max_RSS_start_gap_s": 0.01509858388453722,
+      "reported_max_gap_s": 0.015089874621480703,
+      "keeper_reason": "RuntimeError('output-prewrite-cap')",
+      "peak_group_RSS": 40927232,
+      "peak_all_helpers_RSS": 67043328
+    },
+    {
+      "name": "source-pin-refusal-v15",
+      "GO": false,
+      "censor": "ValueError('engine-source-release-required')",
+      "closure": "NO_WORKLOAD_CREATED",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 4392,
+      "raw_sha256": "e3bb432fcadcb812bac97b8999b966d250a7aafe497d8606325c413e33eeb8f2",
+      "json_rows": 168,
+      "receipt_rows": 168,
+      "rows_match": true,
+      "RSS_rows": 168,
+      "observed_max_RSS_start_gap_s": 0.014972125180065632,
+      "reported_max_gap_s": 0.014980207663029432,
+      "keeper_reason": null,
+      "peak_group_RSS": 0,
+      "peak_all_helpers_RSS": 66043904
+    },
+    {
+      "name": "watchdog-death-final-v15",
+      "GO": false,
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "closure": "NO_WORKLOAD_CREATED",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 3669,
+      "raw_sha256": "19882a6bb7d3e080918fd3bf75a418d4bf64427ddd1765e877fa09760e229404",
+      "json_rows": 134,
+      "receipt_rows": 134,
+      "rows_match": true,
+      "RSS_rows": 133,
+      "observed_max_RSS_start_gap_s": 0.029433708637952805,
+      "reported_max_gap_s": 0.029520499985665083,
+      "keeper_reason": "RuntimeError('supervisor-registry-sample-stale')",
+      "peak_group_RSS": 0,
+      "peak_all_helpers_RSS": 66469888
+    },
+    {
+      "name": "watchdog-direct-v17",
+      "GO": true,
+      "censor": "RuntimeError('injected-watchdog-death-after-GO')",
+      "closure": "PROVEN_EMPTY_TWICE",
+      "token_released_at_result": true,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 4906,
+      "raw_sha256": "6405336d703335d46e72bee4e7489a58ce026536c2b963c8cf7687ac6dfbbca4",
+      "json_rows": 173,
+      "receipt_rows": 173,
+      "rows_match": true,
+      "RSS_rows": 168,
+      "observed_max_RSS_start_gap_s": 0.014801916666328907,
+      "reported_max_gap_s": 0.014774959068745375,
+      "keeper_reason": null,
+      "peak_group_RSS": 26148864,
+      "peak_all_helpers_RSS": 37945344
+    },
+    {
+      "name": "HOLD-direct-v17",
+      "GO": true,
+      "censor": null,
+      "closure": "UNKNOWN_HOLD",
+      "token_released_at_result": false,
+      "core_hashes_match": true,
+      "gzip_eof_complete": true,
+      "raw_bytes": 5302,
+      "raw_sha256": "e96c2aa05895a7f5b411a91272e25c45a080f65fc4f91d54d7f2804ce2274fd5",
+      "json_rows": 184,
+      "receipt_rows": 184,
+      "rows_match": true,
+      "RSS_rows": 182,
+      "observed_max_RSS_start_gap_s": 0.014687708113342524,
+      "reported_max_gap_s": 0.014765334315598011,
+      "keeper_reason": "parent-UNKNOWN-closure",
+      "peak_group_RSS": 41287680,
+      "peak_all_helpers_RSS": 38666240
+    }
+  ],
+  "all_selected_complete_streams_rowcounts_match": true,
+  "maximum_complete_stream_RSS_gap_s": 0.029433708637952805,
+  "cadence_fault_proof": "cadence-final-v15 deliberately stops sampling. Keeper reason RSS-heartbeat-gap-over-40ms proves refusal; complete-stream pair gaps exclude terminal silence.",
+  "HOLD_proof": "evidence/control/HOLD-direct-v17/independent-HOLD-proof.json",
+  "supervisor_death_proof": "evidence/control/supervisor-death-direct-v17/independent-death-proof.json; killed RSS writer EOF incomplete is CENSORED, separate external numeric closure proven.",
+  "failed_suites": "v15 aborted at recovery token-release oracle race after release request; v16 helper cadence/refusal interrupted suite; no full v15/v16 all-pass claim. v14 prior successful suite retained, prior core not substituted for current core.",
+  "retained_development_index": [
+    {
+      "path": "evidence/control/HOLD-direct-v17",
+      "result_sha256": "e9ea5b969b43313bdfdb79fde4556a4002e01b2a120e2ef1597541abfcc1a1b2",
+      "censor": null,
+      "GO": true,
+      "closure": "UNKNOWN_HOLD"
+    },
+    {
+      "path": "evidence/control/cadence-final-v10",
+      "result_sha256": "eeb05bf513e206878552c2be31dd7167a7ec97fd19589804998dc7825ed61177",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/cadence-final-v11",
+      "result_sha256": "0d2936cbb2f2ff9d062cd152fd286f0b9285a2ffd2305edb632992c6e46abce6",
+      "censor": "RuntimeError('independent-or-absolute-deadline')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/cadence-final-v13",
+      "result_sha256": "3420afacfca0ce13d1718f14d7d51e90880fba77d24449e472f6a00481516465",
+      "censor": "RuntimeError('independent-or-absolute-deadline')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/cadence-final-v14",
+      "result_sha256": "96ac5ef653c755efc91af31bf7bdeba70aa25f8149e1e269ba6b8626356597b2",
+      "censor": "RuntimeError('independent-or-absolute-deadline')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/cadence-final-v15",
+      "result_sha256": "f35d4f6e54050bbc6cb4e14410ad588765db46af130ed9e234c8774a35de41e6",
+      "censor": "RuntimeError('independent-or-absolute-deadline')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/cadence-final-v16",
+      "result_sha256": "205c50603897b00f15f5a6929fbd2e94f94ccd6ab6ac7c9033f7fc773468d80a",
+      "censor": "RuntimeError('keeper-alert-during-token-wait')",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/cadence-final-v7",
+      "result_sha256": "e445c5cfe0ac904827888fd5a24a1871d72a925b10cc190516e8933b426cd325",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/cadence-final-v9",
+      "result_sha256": "f3d8ee51d052bc31e335d21a116f703c9a37c95693a7fb59166f30b18a6fad05",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/closure-HOLD-final-v10",
+      "result_sha256": "ee3ecdfbe0e57ffaa91012dbb025245e2ffabcfcfc48e67b3d1c1e4cedb325cf",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/closure-HOLD-final-v14",
+      "result_sha256": "962633b33fd8efd978e5db1b2ed03583956d4f77abf4e62289530f83d71b8ce5",
+      "censor": null,
+      "GO": true,
+      "closure": "UNKNOWN_HOLD"
+    },
+    {
+      "path": "evidence/control/closure-HOLD-final-v15",
+      "result_sha256": "c9af233a2b02db4e9b2327f568824bc86ecf91eaba93a59b8444b219308b64f8",
+      "censor": null,
+      "GO": true,
+      "closure": "UNKNOWN_HOLD"
+    },
+    {
+      "path": "evidence/control/closure-HOLD-final-v16",
+      "result_sha256": "5681ac6110f1aae0e6f7f4792e9869f413eba9115b42c5b8511a7448838f79ec",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('rss-sample-gap-over-40ms')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/closure-HOLD-final-v7",
+      "result_sha256": "dc626d6bce3c0e1ab57f28c6cb496aa9c826cbe731dcee4a11d49c86b6ec8b2d",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/closure-HOLD-final-v9",
+      "result_sha256": "20a67179e2de25f0528391bdf69b29e048ccc1e00b25374af223e44c9a3bff7f",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/escape-final-v10",
+      "result_sha256": "33feacf669eda0eeaef36259fa015c0f474a594fa140e06bcc2d9d4516c2214a",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/escape-final-v11",
+      "result_sha256": "fcc6302085c7b0127dca725698b867940e115ece6ebc1b5a502952af93fbc80d",
+      "censor": "RuntimeError(\"RuntimeError('descendant-starttime-mismatch')\")",
+      "GO": true,
+      "closure": "UNKNOWN_HOLD"
+    },
+    {
+      "path": "evidence/control/escape-final-v14",
+      "result_sha256": "e9f57a6161182f99838d60f2d69cc1cab4d644b8b5fc8d6bfbfe99d3f401a67f",
+      "censor": "RuntimeError(\"RuntimeError('missing-live-rss-or-identity')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/escape-final-v15",
+      "result_sha256": "e6ca032a579cd430fb56a6c91eb18b7ad7653a4933aeba58ef50837f2ffd0a8b",
+      "censor": "RuntimeError(\"RuntimeError('owned-descendant-escaped-session')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/escape-final-v16",
+      "result_sha256": "266f948e66a2033043371e6c35b0d4a87ebdc1ad48e3cd01b44856be91b54ee2",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/escape-final-v7",
+      "result_sha256": "f89648e3814ce6ace494064ac1007fd29b6c08feb589b1de5d4dfe1a3d12bffb",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/escape-final-v9",
+      "result_sha256": "7a7de4963aa02f9b53d368e965ee09a85908ee15401c74ba038d0a279d6b9dd0",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/escape-focus-v12",
+      "result_sha256": "a4c5cc5199d8f13ef56a002b598c070abb1f4efed91d452e371e68679c108cd5",
+      "censor": "RuntimeError(\"RuntimeError('owned-descendant-escaped-session')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/fixed-setup-wait-v10",
+      "result_sha256": "bf879792c80ffef821a99156ccd9a1436446b9b2afb323eda0a88896a8052813",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/fixed-setup-wait-v14",
+      "result_sha256": "ca84ed37b3d14002c3bec61fde52ccbf990e8b1e266c9193c3ade0bee360859c",
+      "censor": "RuntimeError('deadline-or-sampler-during-setup-wait')",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/fixed-setup-wait-v15",
+      "result_sha256": "380a986aae4b1022d5dfd516567ba31e68fd55f35a2b45fbaa09fd4cf88c1e5e",
+      "censor": "RuntimeError('deadline-or-sampler-during-setup-wait')",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/fixed-setup-wait-v16",
+      "result_sha256": "a8c75773cf0ddade7d07e8d79d51b2ff924240f494d8c75022a6d6e238c8dcd5",
+      "censor": "RuntimeError('deadline-or-sampler-during-setup-wait')",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/fixed-setup-wait-v7",
+      "result_sha256": "985d832f719ab9e29f8a9055b097d0d7aa2512e46d533f9f4191c2df536a5dfa",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/fixed-setup-wait-v9",
+      "result_sha256": "50dbf4f9f606a1013517927ce577f8b623ce114a2308793ed18bd2ae0c45b2b8",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/fixed-token-wait-v10",
+      "result_sha256": "ae8a46d7e856004dc861a776ebd20d986f0a66d1f225238193429b14d8cfa072",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/fixed-token-wait-v14",
+      "result_sha256": "da0cfd5a449cc5ae3f1956b84abbd5c3d642aedf525ded0f78210749a20118ff",
+      "censor": "RuntimeError('keeper-alert-during-token-wait')",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/fixed-token-wait-v15",
+      "result_sha256": "f89de21e48c5a52f975734c557619e4948061eb2881b79917f3f350fff72465c",
+      "censor": "RuntimeError('keeper-alert-during-token-wait')",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/fixed-token-wait-v16",
+      "result_sha256": "94aab3aca81989dd3cbc3f62a85c0504418eb245414c21cbb71c8572dbbd290d",
+      "censor": "RuntimeError('keeper-alert-during-token-wait')",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/fixed-token-wait-v7",
+      "result_sha256": "f27ba341f4938b2a00cc2198ea6eeea2e289575a1588f0e3feec4e80e5e866b0",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/fixed-token-wait-v9",
+      "result_sha256": "426b4921d4da3530b5f9880c1b964d0e511de688ef0acd82a20edf138a6a0c9d",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/free-v2",
+      "result_sha256": "3e89d9fd5895a8ddbc707c812371c9754b95c8ae9844ad2cc7c2a3b054c14b5c",
+      "censor": "free-space-refusal",
+      "GO": null,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/live-byte-final-v10",
+      "result_sha256": "9b3e105fb8202231f91cb0388fcdbe189f0a285e1eced6ebce5850f4b75d8826",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/live-byte-final-v11",
+      "result_sha256": "6cc33cdbf1f989878397a250f07bf3d6963f8fa2d7a1102ce1b33f38d6a88a8d",
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/live-byte-final-v14",
+      "result_sha256": "a17301b3055d320ed9290810905cc44dbc3f06d54be2b71bcb8c881bfd474abf",
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/live-byte-final-v15",
+      "result_sha256": "b4acf64b2ec13ca115b32e631c10095501cd26a79219f910c6b2155c19efc95e",
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/live-byte-final-v16",
+      "result_sha256": "3486e4bfde20abe361657b8ee9eb3dc5829fcefd2df2caec9bbdfd32cf005a34",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/live-byte-final-v7",
+      "result_sha256": "facf06f05e83a06975f54b905a7f8e9d4423a0b87b86e040a4bafe916ad25152",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/live-byte-final-v9",
+      "result_sha256": "ddf92ba0f90e8507ba2962f5a6369fa59b7088447188c61dfdec97c12f1ac30e",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/live-file-final-v10",
+      "result_sha256": "8e048bb12d0235ccd6687f2fdea2ab7ce19b5a8516d6744d3ea99e38378cb082",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/live-file-final-v11",
+      "result_sha256": "3d3b765169867bf2d32c8c66eff39fe3c4bf57efa52de0e2577caa4b2485c497",
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/live-file-final-v14",
+      "result_sha256": "5397580b5f276837f2013f96d06d926596cc511c0731f04e1022a8a7294456a9",
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/live-file-final-v15",
+      "result_sha256": "8b7f476b78c2bc20da13d5f6e18eb13cc5133e67aecae0f2de392939664a2819",
+      "censor": "RuntimeError(\"RuntimeError('live-admitted-growth-cap:F08')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/live-file-final-v16",
+      "result_sha256": "57d1908cb6a6c16c6131f737c32c9ac9a6f9c7dbfe62733b108e47cf10014fc3",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('rss-sample-gap-over-40ms')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/live-file-final-v7",
+      "result_sha256": "77e775226389731dea729d9157f7b901d6905d9a1b172481e18233bc0b47efc8",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/live-file-final-v9",
+      "result_sha256": "b04231f9a3027416e768d25dfafc077cd5e396ba8e8c9022e0a8fc3d21ca5ca2",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/local-timeout-final-v10",
+      "result_sha256": "929510400e13cdfdf8f80359a8fcc9478ca9c7597f37ab6d82913bc26bbc532f",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/local-timeout-final-v14",
+      "result_sha256": "38f20b6d5ef23f598d339fd16f1f33cfbc8baf754b084a8deea84f5f9c55b2ea",
+      "censor": "RuntimeError('independent-or-absolute-deadline')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/local-timeout-final-v15",
+      "result_sha256": "97b57715c4c5cc1a9ca02c123f4cc8a0c3c7f5228ea1bc8cd714e48fc16a923c",
+      "censor": "RuntimeError('independent-or-absolute-deadline')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/local-timeout-final-v16",
+      "result_sha256": "3f2b8ce8f4e10315ee1fdc708237db06e40ea3aaa954577f36135d1c69eea956",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('rss-sample-gap-over-40ms')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/local-timeout-final-v7",
+      "result_sha256": "36e64951ce8b319c41b6d212cdd71aae4264d35a241a06669c5de8c78972b6a9",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/local-timeout-final-v9",
+      "result_sha256": "8bc84c89e05e6243c34133426e89d634645442cfe4d5f0a499030b551066b9f8",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/memory-final-v10",
+      "result_sha256": "36c1b28aa49f4bc6eb244ef739448f52d5eff74711183660d18995cd9a4e1d04",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/memory-final-v11",
+      "result_sha256": "817b910f2f7a973106b9b6bd0bfcfaaccc1b63327338ae3371f522d27e372a00",
+      "censor": "RuntimeError(\"RuntimeError('per-process-rss-cap')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/memory-final-v12",
+      "result_sha256": "e43ae743bf67b4eeef866c41d9d198cefc5da974ecf9095524b75c73d6da11f4",
+      "censor": "RuntimeError(\"RuntimeError('per-process-rss-cap')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/memory-final-v13",
+      "result_sha256": "397e310fb879d0531e0b0453c275a3bdcec994b0f9d47a65b5ee165759596a70",
+      "censor": "RuntimeError(\"RuntimeError('per-process-rss-cap')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/memory-final-v14",
+      "result_sha256": "4c5ea40241ba162e5fbb07d56e7be3604279e9d1b2156042ac4cadce7447d5d3",
+      "censor": "RuntimeError(\"RuntimeError('per-process-rss-cap')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/memory-final-v15",
+      "result_sha256": "4aa1d1f8dcccee7dbad05ad81679492311de905d53a0020f599a7923214c1713",
+      "censor": "RuntimeError(\"RuntimeError('per-process-rss-cap')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/memory-final-v16",
+      "result_sha256": "b49a77f79b31462f79aaa5fd5b3425c31b8131e1eaaf99025511b22239db6e7d",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/memory-final-v7",
+      "result_sha256": "854ee11afbe01305f1b84161b88352cf07883cf3471b51cc101e230bf22f6a13",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/memory-final-v9",
+      "result_sha256": "38504031ca057a737690c802f485779a509129b9d432559186af632200875e87",
+      "censor": "RuntimeError(\"RuntimeError('per-process-rss-cap')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/memory-v2",
+      "result_sha256": "71ea2285dd5f6aa200d5ee064db3cf41a0a22b809191fcc7c86d6d24e05b435f",
+      "censor": "per-process-rss-cap",
+      "GO": null,
+      "closure": "UNKNOWN_OR_REMAINING"
+    },
+    {
+      "path": "evidence/control/memory-v3",
+      "result_sha256": "b2eb7af49c3fb3cedd7f24d1b35439a1b85a3901b123516b44f97cc0ff234b0c",
+      "censor": "per-process-rss-cap",
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/memory-v6",
+      "result_sha256": "6dcc20446f49e2484279599d793a1bdd0ec416852333996812e1f4424dcea1a8",
+      "censor": "per-process-rss-cap",
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/missing-final-v10",
+      "result_sha256": "eb6367e955b9b0efc91ca4473d67d279dff75b94e3fe3b452432b9ca0e74d1bf",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/missing-final-v11",
+      "result_sha256": "d073be3dffa80cbf99710390090b81e40b74f42087e674a1d9ac1b5eb4b69c34",
+      "censor": "RuntimeError(\"RuntimeError('missing-live-rss-or-identity')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/missing-final-v12",
+      "result_sha256": "04ef7bd4bc9bfb80f39d03362f638d0e4df2ee8083a064574d1fe94b6d845740",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('rss-sample-gap-over-40ms')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/missing-final-v13",
+      "result_sha256": "f4035bc66573c13aff77b850e44da385bf82f95ccc423bad4627a956c472e3b9",
+      "censor": "RuntimeError(\"RuntimeError('missing-live-rss-or-identity')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/missing-final-v14",
+      "result_sha256": "80584d3200ca11b63ac2bad3ddb81e140d693a281f5b401a16821f4f10ae29ac",
+      "censor": "RuntimeError(\"RuntimeError('missing-live-rss-or-identity')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/missing-final-v15",
+      "result_sha256": "a0794892c4523273c3042d643f445b792716c86cc174c2fea99ce132d3bd8867",
+      "censor": "RuntimeError(\"RuntimeError('missing-live-rss-or-identity')\")",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/missing-final-v16",
+      "result_sha256": "8ebe90ce3b961c77879fb97694ba1ade0c392691a9a5db28f090a3b555dc72bc",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/missing-final-v7",
+      "result_sha256": "3051f7b4bc8050f51abe132d8e23acc995ea438fa101923a700db43d474b1d07",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/missing-final-v9",
+      "result_sha256": "cf7552b699ec412e1fa724df9827196a54d4cfe25a00c916dd399d2e01d2da41",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/missing-rss-v4",
+      "result_sha256": "c35633b9d26d130d851736ba7a2809aa760a355554c42a914a42c86633f612a1",
+      "censor": "missing-live-rss-or-identity",
+      "GO": null,
+      "closure": "UNKNOWN_OR_REMAINING"
+    },
+    {
+      "path": "evidence/control/missing-rss-v6",
+      "result_sha256": "86d7955c6308b1e1f494861619a4989ef891d416bad3d556d3ed31514c08838e",
+      "censor": "missing-live-rss-or-identity",
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/nested-final-v10",
+      "result_sha256": "a9a110e0ea237b8050c9880016f2cd4052eb087fe6ffe4107822a1b4aa7a8082",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/nested-final-v11",
+      "result_sha256": "e7103a4868bf2893bf705ab78bb2127b458e74ff3eaff4a920ef7ae975fb33ba",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/nested-final-v12",
+      "result_sha256": "bb40634d301a2a521b65006ca0a67bba9bdafcc305c49a6f9fce12be79d15332",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/nested-final-v13",
+      "result_sha256": "a8887c67603041acaac37df70a9f3abb986d3ffc603673c0ae5495d583b43431",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/nested-final-v14",
+      "result_sha256": "a156d2cfd0303131a3b2b43a82b6faf1b525cb67457a0d5d4a74fe40979e0029",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/nested-final-v15",
+      "result_sha256": "78f8aad7812ec0e1ba7df333ded8ec91066e2524fd107fe6984aeda105660baa",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/nested-final-v16",
+      "result_sha256": "43c84309d27686e5dcac5f5f7c8809697bde985f5867bced5d7d206d6c4d47f8",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/nested-final-v7",
+      "result_sha256": "355c02a4d4c44210ecd030e897e07953a64d9da36ab7727a6e24efa6ef0b30ed",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/nested-final-v9",
+      "result_sha256": "a628feb7383b70967c8c7a45b3e9a4b671e219acb6ead32af42b95a285bfb9f8",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/nested-v1",
+      "result_sha256": "3a0ea1e35fb3ba7a7e6f009c35c5a2b6bb68b92f721ca06592f4e7c9c8415699",
+      "censor": null,
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/nested-v6",
+      "result_sha256": "21c681e9a77d418e11f3baa241e2affac73c3cdbd31e92e230c967017b8c1054",
+      "censor": null,
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/nested-v7d",
+      "result_sha256": "4b6b98523aaf279e9a5134df9ddaec515a721410f74e1d6483e0fcda8c9da5fb",
+      "censor": "OSError(39, 'Destination address required')",
+      "GO": false,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-final-v10",
+      "result_sha256": "a44ac042d2186199fc1a5b76fbc613949110813fde72dacf175a46e94928e243",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-final-v11",
+      "result_sha256": "bf601e675e1c58769cfbcc558a13a12f591273ee4b11455bd273ab8c0a0006c2",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-final-v12",
+      "result_sha256": "b6f0d46e867cf33a96bb06457e0ffc2a86f2488339291d4a2699d06d3b762dff",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-final-v13",
+      "result_sha256": "d0760d9dec33d98884dab88a3aee3e81febd9af1cf0e14584358f4657e97cd86",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-final-v14",
+      "result_sha256": "9018367a4bd940f94a1df29ed00e4cefbc553984ef069bfdd6c57c76ee32e76b",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-final-v15",
+      "result_sha256": "d97b67dbf01f62e45524093a17b47a0b4867aadaaf1609ce8d05269d13ad10d3",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-final-v16",
+      "result_sha256": "5090306f6a77a9e8ace09332f1fda403e5d0719cf7ba99c82ddc6c8815f0bf7c",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-final-v7",
+      "result_sha256": "079311aacf76096960a57af4b1c8727c3833ab350b4697119f4546a681665a70",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-final-v8",
+      "result_sha256": "bf45deea1eec9cb147ff7a9be09ff53d46869ad83a75e0f785063a14af44a080",
+      "censor": "RuntimeError(\"RuntimeError('live-group-identity-unknown')\")",
+      "GO": true,
+      "closure": "UNKNOWN_HOLD"
+    },
+    {
+      "path": "evidence/control/normal-final-v9",
+      "result_sha256": "7690257cdc7cebb59e4aca995512a1940eef8f525177bccc212de8ccbe2726ac",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-v1",
+      "result_sha256": "c4c4aea6524b4b0149a595b0b08d9ce22d646fd9c2d1ab9a7af3a576bc8f1083",
+      "censor": null,
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/normal-v5",
+      "result_sha256": "96ea5802b18e83e7845d4a2559ab207f3b122df4f0985e2077545ffa5204b5ab",
+      "censor": null,
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/normal-v6",
+      "result_sha256": "6ded2cc5487a8e7ced0c98f17e623fb8cf30af720df23c1b0a5aa14b31cff67c",
+      "censor": null,
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/normal-v7a",
+      "result_sha256": "4beba33bf0d310cc2d78e2999bada731caeedb8a88add5119862acbb475f8ab4",
+      "censor": "RuntimeError('keeper-handshake-failed:ready')",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/normal-v7b",
+      "result_sha256": "80d31412f16d6f8cb75eba0beae3c86e5c79e46ccdeb289e495b8c298a7d4113",
+      "censor": "disk-monitor-not-closed",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-v7c",
+      "result_sha256": "6362885d7e5bb5b7619f66c649e956062e80e6bade702c97d747e5eefb42c722",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-v7e",
+      "result_sha256": "aa8524778b3600970edaede9c3246ca0c013925f59a9ca3a71ee6a7dd0eeb03f",
+      "censor": "ConnectionResetError(54, 'Connection reset by peer')",
+      "GO": false,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-v7f",
+      "result_sha256": "ef3ace9ce34e767969d425ddd6411ffc64644aa7352cc456cf3a3a2cec84e300",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/normal-v9a",
+      "result_sha256": "ee9cb69ab28b9e9917c86b5f77a4a3a7995a4bb525c2b32a642cbc27adae2302",
+      "censor": "OSError(40, 'Message too long')",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/normal-v9b",
+      "result_sha256": "a4fa6c40ec59f8ba3e937da7a81f08f9eaca78230d7ff13e99f76441d160c158",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('rss-sample-gap-over-40ms')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/normal-v9c",
+      "result_sha256": "3b4385c5760e347ce9d1a4c71793a884d54c743bd070bf2b7f3549cb642699e9",
+      "censor": null,
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/orphan-final-v10",
+      "result_sha256": "c94dd4e33b08d0970e0c4a113762731009c849e0fc7423df4f557c116977510e",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/orphan-final-v11",
+      "result_sha256": "c4879a1bb57cf75bda5d2fa17d2b79ced832d236b306fcbf09091b746e27616b",
+      "censor": "RuntimeError('root-completed-orphan-tree')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/orphan-final-v12",
+      "result_sha256": "56ec0ab0000f5b60f043fc8b49975c6137a2ae7c2a667f5698ec1e2e8cdbecb3",
+      "censor": "RuntimeError('root-completed-orphan-tree')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/orphan-final-v13",
+      "result_sha256": "e63f45e32e80a3496a90844a1334c8aa97412ff87c78c8d2a266c868c2c42505",
+      "censor": "RuntimeError('root-completed-orphan-tree')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/orphan-final-v14",
+      "result_sha256": "be27c85bb64edae21d0a0297761ffd85ba49daf27bdfb74a8dabaef97bd5d466",
+      "censor": "RuntimeError('root-completed-orphan-tree')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/orphan-final-v15",
+      "result_sha256": "2521de12fe7989efbc58f68f72a2a1c209740621ad078e2299c8c94ad1a84853",
+      "censor": "RuntimeError('root-completed-orphan-tree')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/orphan-final-v16",
+      "result_sha256": "47258a007d8e008ec142d70a8fa49705b463c8be7107e79f8fa16a875fc4ef7d",
+      "censor": "RuntimeError('root-completed-orphan-tree')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/orphan-final-v7",
+      "result_sha256": "03ad4105a5ca5f96ae013d69378d1f9ee117fb0d769598fc1be03b4162541fc7",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/orphan-final-v9",
+      "result_sha256": "edd3d023aac1de3a1a5c47407397eda9d915ceb39cd04ccabb6401e5ee964933",
+      "censor": "RuntimeError('root-completed-orphan-tree')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/orphan-v2",
+      "result_sha256": "0435cdf29c74e9303a1f69013614436971b73c9371da4b343a419800bac5cc82",
+      "censor": "root-completed-orphan-group",
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/orphan-v6",
+      "result_sha256": "6921df452edeee0c2a9f2716be0a04d0b3881ff37638bc561745e9a10fe20a8a",
+      "censor": "root-completed-orphan-group",
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/output-final-v10",
+      "result_sha256": "3947f0f7d1411d23cf68f2424e73fe4fcec7fd54e13048b6df415afbe2f3ef52",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/output-final-v11",
+      "result_sha256": "fee1abadf79cc4b49e2382febdcf7f1f33a69b50516a39e816933ff114d7a246",
+      "censor": "RuntimeError('output-prewrite-cap')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/output-final-v14",
+      "result_sha256": "584993e4c8165fb8bb58c155fe429409057b1f30e97c052feeaeaf26ac53be6c",
+      "censor": "RuntimeError('output-prewrite-cap')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/output-final-v15",
+      "result_sha256": "1acb620a0b501759d4c9f8d86dd7586371ee7f601c74c8a81e906b2be853b7b7",
+      "censor": "RuntimeError('output-prewrite-cap')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/output-final-v16",
+      "result_sha256": "9e5aee861e29546469a92fa682714b616bd0069d664fe69dc4f74da792be0668",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/output-final-v7",
+      "result_sha256": "fca4adfbdf24014ac8a9b0bb3ffbf9b60b2c544d2a0949353ca369e55bcc2afb",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/output-final-v9",
+      "result_sha256": "a3963aa5e5bdd5357abc89f6e1d13ecc2d0609f5c3df97e2dccb2f983443e652",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/prospective-v2",
+      "result_sha256": "29cc0d2139082f20113954b3d92313c072b44643a0bce5be078037282667b83b",
+      "censor": "prospective-runtime-cap-refusal",
+      "GO": null,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/source-pin-refusal-v10",
+      "result_sha256": "c8b3a28aefa0a610f5d4061f161ccc791fa2ae0d800d135002a70e7da4f277cc",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/source-pin-refusal-v14",
+      "result_sha256": "01c258bf4da02c4b8258728bd4d86bb5646ea01f3cb60c1041fe43acfb179c93",
+      "censor": "ValueError('engine-source-release-required')",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/source-pin-refusal-v15",
+      "result_sha256": "db86041a94854aabfd9f76ae14a3addedc1add7dd0d1f0ad56c6fa483af54db8",
+      "censor": "ValueError('engine-source-release-required')",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/source-pin-refusal-v16",
+      "result_sha256": "0e6815bb6408bb52796d5688f021332df4e291634cbf8d928321c8864d97f37f",
+      "censor": "ValueError('engine-source-release-required')",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/source-pin-refusal-v7",
+      "result_sha256": "39e3d70469f82020aadec4a68bd2e0a980203898d0c2dc23e4d1f220e6423545",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/source-pin-refusal-v9",
+      "result_sha256": "05dcb091f7c417797e0b351ee0fc9e6ba1719b528c80a6b3da388223f5fb5de5",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/supervisor-death-direct-v17",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/supervisor-death-final-v14",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/supervisor-death-v6",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/timeout-v2",
+      "result_sha256": "1b3ceec8e9c234eab41fc05b32550c2c8f3eb42ec837d6506aea1e0bc2be9ed2",
+      "censor": "absolute-deadline",
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/timeout-v6",
+      "result_sha256": "c85396cdae05fa7128f14fdb0a1dec2a2ddfb7c35bb3f127884ad0b8656e57b0",
+      "censor": "absolute-deadline",
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/token-wait-v4",
+      "result_sha256": "65c270226e6fed56a0e2415e025b5d2a9463cc4b6bbaab724db9f5822b238e26",
+      "censor": "deadline-during-token-wait",
+      "GO": null,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/v10-remediation-smokes",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/v11-remediation-smokes",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/v12-remediation-smokes",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/v13-remediation-smokes",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/v14-remediation-smokes",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/v15-remediation-smokes",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/v16-remediation-smokes",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/v7-remediation-smokes",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/v8-remediation-smokes",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/v9-remediation-smokes",
+      "result_present": false,
+      "qualification": "No completion inference; retained development/test directory."
+    },
+    {
+      "path": "evidence/control/watchdog-active-v9a",
+      "result_sha256": "1db5ac6b0756a2cce32f5b9738ad888dd4d4439ce096e538a3278e74dd00527f",
+      "censor": "RuntimeError('injected-watchdog-death-after-GO')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/watchdog-death-final-v10",
+      "result_sha256": "f011cf42ff87c269ef2b1d5c08e41c9c117a5fb179afbc487fa58effe26478b0",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/watchdog-death-final-v11",
+      "result_sha256": "21d97a209484409659f35935ed7663d34783cb7e4617b5630829d5d09f9863f4",
+      "censor": "RuntimeError('injected-watchdog-death-after-GO')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/watchdog-death-final-v14",
+      "result_sha256": "28ce94691280fbbf925c8567ef3e49b5e7ea218089cdee56e022a30b9256d9e7",
+      "censor": "RuntimeError('injected-watchdog-death-after-GO')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    },
+    {
+      "path": "evidence/control/watchdog-death-final-v15",
+      "result_sha256": "f3a2cd380f810f7d7d6f2014d3b3ad32634635e8e0a7fba77c3d49e2b1c9d213",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/watchdog-death-final-v16",
+      "result_sha256": "87fa9d1d0e8189b83471ec248ec060265ed57dbceaab9845b9f7a281486bbbef",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/watchdog-death-final-v7",
+      "result_sha256": "090158272da1c7c99b54eb641017e8e234e2a539545d3d121c758c8f821e940a",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/watchdog-death-final-v9",
+      "result_sha256": "f3ff92f89fc3f7be740328126eaf86f93b835415c1a9d2142178960939c9fddc",
+      "censor": "RuntimeError(\"positive-RSS-before-GO-failed:RuntimeError('supervisor-registry-sample-stale')\")",
+      "GO": false,
+      "closure": "NO_WORKLOAD_CREATED"
+    },
+    {
+      "path": "evidence/control/watchdog-death-v6",
+      "result_sha256": "b73edf73ae3ab5f26b33aab152e405bc6d38879ad82aef5fe95a2722db07617b",
+      "censor": "[Errno 54] Connection reset by peer",
+      "GO": null,
+      "closure": "PROVEN_EMPTY"
+    },
+    {
+      "path": "evidence/control/watchdog-direct-v17",
+      "result_sha256": "d410c3ef087bdc61e584fe0fe40d9f33268e8d95813b1819c4d46552511d8e5d",
+      "censor": "RuntimeError('injected-watchdog-death-after-GO')",
+      "GO": true,
+      "closure": "PROVEN_EMPTY_TWICE"
+    }
+  ],
+  "limits_and_uncertainties": [
+    "Engine source release/final pin pending; no engine/Cargo/corpus in newroot.",
+    "F08 remains96MiB; full donor capsules require261739670B, so full native matrix blocked until sealed allocation claim.",
+    "C1 private cache64MiB HELD; five exact donor-lock archives absent globally. No copy/download authorized by this report.",
+    "Arbitrary daemonizers unsupported; scoped PGID plus PPID descendant enumeration tracks at most64 total identities per guarded stage. Actual compiler/helper tree remains unrun.",
+    "Live allocation sampling is detection after workload writes, not filesystem hard quota. Prospective admission, output and receipt writes are prechecked.",
+    "Each complete selected stream and raw rows validated independently; killed-writer stream cannot prove uninterrupted RSS coverage.",
+    "Protected corpus preservation census compares logical size/counts, not full content identity.",
+    "192MiB target only plausible historic planning estimate; current256MiB claim unchanged."
+  ],
+  "cutoffs": {
+    "t0": "2026-10-20T19:10:14Z",
+    "functional": "2026-10-21T11:10:14Z",
+    "closeout": "2026-10-21T13:10:14Z",
+    "reset": false
+  },
+  "engine_GO": false
+}

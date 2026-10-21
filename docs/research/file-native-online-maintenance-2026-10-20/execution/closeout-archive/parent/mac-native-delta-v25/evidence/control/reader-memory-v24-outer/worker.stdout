@@ -1,0 +1,1 @@
+EXPECTED_ROLE_CENSOR role-invocation-censored:["RuntimeError('explicit-reader-RSS-cap')", 'RuntimeError("RuntimeError(\'explicit-reader-RSS-cap\')")']

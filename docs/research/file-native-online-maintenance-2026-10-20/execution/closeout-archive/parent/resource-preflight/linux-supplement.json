@@ -1,0 +1,45 @@
+{
+  "roots": [
+    {
+      "root": "/home/spenser/incremental-extra-evidence",
+      "logical_bytes": 614285,
+      "files": 20,
+      "allocated_file_bytes": 659456
+    },
+    {
+      "root": "/home/spenser/incremental-extra-evidence.tar.gz",
+      "logical_bytes": 610419,
+      "files": 1,
+      "allocated_file_bytes": 614400
+    },
+    {
+      "root": "/home/spenser/incremental-recipe-proof.tar.gz",
+      "logical_bytes": 214376,
+      "files": 1,
+      "allocated_file_bytes": 217088
+    },
+    {
+      "root": "/home/spenser/incremental-replay-evidence",
+      "logical_bytes": 1721534,
+      "files": 38,
+      "allocated_file_bytes": 1830912
+    },
+    {
+      "root": "/home/spenser/incremental-replay-evidence.tar.gz",
+      "logical_bytes": 1708580,
+      "files": 1,
+      "allocated_file_bytes": 1712128
+    }
+  ],
+  "tools": {
+    "cargo": "cargo 1.89.0 (c24e10642 2025-06-23)\n",
+    "rustc": "rustc 1.89.0 (29483883e 2025-08-04)\n",
+    "rustup": "rustup 1.28.2 (e4f3ad6f8 2025-04-28)\n"
+  },
+  "source_archives": [
+    "/home/spenser/capsule-7ac70f9.tar",
+    "/home/spenser/capsule-recipe-precommit.tar",
+    "/home/spenser/capsule-5a65a21.tar",
+    "/home/spenser/capsule-7e00d22.tar"
+  ]
+}

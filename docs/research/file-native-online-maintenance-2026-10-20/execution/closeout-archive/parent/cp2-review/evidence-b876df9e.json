@@ -1,0 +1,167 @@
+{
+  "source": "b876df9e01957be29b5c9cbd676d5a169aaa6c67",
+  "base": "bd6dd9367acddaddcd7873c8043548502a170c3b",
+  "source_binding_entries_verified_before_freeze_release": 24,
+  "source_binding_all_bytes_and_sha256_match": true,
+  "engineering": "REMEDIATE",
+  "full_qualification": "INCOMPLETE",
+  "reviewer_execution": "read-only source/evidence parsing only; no engine, Cargo, oracle, fixture copies, commits, or source edits",
+  "raw_events": [
+    {
+      "name": "cp2-smoke",
+      "events": 244,
+      "exits": {
+        "0": 244
+      },
+      "binary_sha256s": [
+        "8dd3a498289c2e5c438385e4cecd1af2c0cfb84f2769e28048a1a40666383467"
+      ],
+      "violations": 0,
+      "death_envs": []
+    },
+    {
+      "name": "cp2-schedules",
+      "events": 74,
+      "exits": {
+        "0": 67,
+        "86": 3,
+        "2": 4
+      },
+      "binary_sha256s": [
+        "8dd3a498289c2e5c438385e4cecd1af2c0cfb84f2769e28048a1a40666383467"
+      ],
+      "violations": 0,
+      "death_envs": [
+        "{\"EXP_EXIT\":\"selection-boundary\"}",
+        "{\"EXP_EXIT\":\"physical-before-selection\"}",
+        "{\"EXP_EXIT\":\"physical-before-selection\"}"
+      ]
+    }
+  ],
+  "guards": [
+    {
+      "name": "cp2-build2",
+      "exit": 0,
+      "errors": [],
+      "censor": null,
+      "stage_seconds": 26.131900548934937,
+      "total_seconds": 28.674973487854004,
+      "sampled_peak_rss": 436330496,
+      "sample_timing": {
+        "samples": 1177,
+        "max_interval_seconds": 0.062000000034458935,
+        "intervals_over_40ms": 12
+      },
+      "closure_checks": [
+        {
+          "epoch": 1792534198.0198157,
+          "members": []
+        },
+        {
+          "epoch": 1792534198.0405893,
+          "members": []
+        }
+      ]
+    },
+    {
+      "name": "cp2-smoke",
+      "exit": 0,
+      "errors": [],
+      "censor": null,
+      "stage_seconds": 12.841402530670166,
+      "total_seconds": 15.50588083267212,
+      "sampled_peak_rss": 26513408,
+      "sample_timing": {
+        "samples": 512,
+        "max_interval_seconds": 0.0470000000204891,
+        "intervals_over_40ms": 3
+      },
+      "closure_checks": [
+        {
+          "epoch": 1792534247.5342,
+          "members": []
+        },
+        {
+          "epoch": 1792534247.554301,
+          "members": []
+        }
+      ]
+    },
+    {
+      "name": "cp2-schedules",
+      "exit": 0,
+      "errors": [],
+      "censor": null,
+      "stage_seconds": 23.358131647109985,
+      "total_seconds": 26.085216999053955,
+      "sampled_peak_rss": 31035392,
+      "sample_timing": {
+        "samples": 996,
+        "max_interval_seconds": 0.0470000000204891,
+        "intervals_over_40ms": 5
+      },
+      "closure_checks": [
+        {
+          "epoch": 1792534416.2622418,
+          "members": []
+        },
+        {
+          "epoch": 1792534416.2825587,
+          "members": []
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-build2.json",
+      "bytes": 26619,
+      "sha256": "005be12b65b6ed9341b127f6cfc73f6dd801f8bdbc527fc1466567c559ad39eb"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-build2.stdout",
+      "bytes": 839,
+      "sha256": "647c0dac88f5324fcefe05a44d9efd87919862695ef4962ea643804671a5eb4c"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-smoke.py",
+      "bytes": 3152,
+      "sha256": "21494cda136159db47780874b9dd4590616848dff033498241ab00a9d732ae03"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-smoke.json",
+      "bytes": 17889,
+      "sha256": "525f9228e46a51295c543534057d5fa4ff85cee3ba97235fe1d583bda418d336"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-smoke-results.json",
+      "bytes": 3236,
+      "sha256": "8c1ef1ffca84cd3a105d99fd568241d3b8febf0215541b12c58de57cbfbad09e"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-smoke-events.jsonl.gz",
+      "bytes": 68359,
+      "sha256": "3061d4a8ba31e87756ea755a99fa684bd956f5de16c556cbf3eb50dc8281a618"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-schedules.py",
+      "bytes": 7233,
+      "sha256": "65ae630838cac202f599c59dc875b9f2716ac6f0d29934816ecae6ac28d50d75"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-schedules.json",
+      "bytes": 22124,
+      "sha256": "8db34ba068d3dca27585bd771661c49271fddc7ed9fb8fc55436da52dab8864c"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-schedules-results.json",
+      "bytes": 2636,
+      "sha256": "54395cbb8ebc4900bfae80ce9613c1158926dacf3e927391554bf35222b44aaf"
+    },
+    {
+      "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp2-schedules-events.jsonl.gz",
+      "bytes": 27857,
+      "sha256": "6bfe5cb51681faab104c8cd885d91aaf8223c2005acf7a85c09a052c077b11ab"
+    }
+  ]
+}

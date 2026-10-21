@@ -1,0 +1,54 @@
+{
+  "kind": "native-guard-control-candidate",
+  "nonce": "20d8c21b5ea3a6c31df00ae3e965ff46",
+  "source_sha256": "c1ecda58cac32a096c99979e0e820c4b4ede1b0afffd15f89164b98381ccbce2",
+  "supervisor": {
+    "pid_requested": 85446,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 85446,
+    "ppid": 85370,
+    "uid": 501,
+    "pgid": 85370,
+    "state": 2,
+    "start": [
+      1792528317,
+      869725
+    ]
+  },
+  "started_epoch": 1792528317.916594,
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "seconds_cap": 0.2,
+  "global_enumeration": false,
+  "censor": "deadline-during-token-wait",
+  "closure": "NO_WORKLOAD_CREATED",
+  "samples": 0,
+  "peak_group_rss": 0,
+  "peak_supervisor_rss": 0,
+  "missing_live_rss": [],
+  "transient_exited_members": [],
+  "termination": [],
+  "sample_interval_max_s": 0,
+  "late_intervals": 0,
+  "per_process_cap": 2147483648,
+  "group_cap": 2147483648,
+  "supervisor_cap": 805306368,
+  "aggregate_cap": 3221225472,
+  "command": [
+    "/Users/spensermcconnell/.pyenv/versions/3.11.9/bin/python3",
+    "-B",
+    "-c",
+    "pass"
+  ],
+  "source_pin": "PENDING_NO_ENGINE_RELEASE",
+  "watchdog_exit_reaped": true,
+  "worker_exit": null,
+  "finished_epoch": 1792528318.1261609,
+  "final_census": {
+    "logical_bytes": 386677,
+    "allocated_bytes": 487424,
+    "files": 52
+  },
+  "qualification": "CONTROL_CANDIDATE_ONLY_NO_ENGINE_RELEASE"
+}

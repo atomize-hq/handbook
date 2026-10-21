@@ -1,0 +1,77 @@
+{
+  "kind": "own-child-libproc-prerequisite",
+  "status": "PASS_PREREQUISITE_ONLY",
+  "utc": "2026-10-20T20:27:42.227613+00:00",
+  "source_sha256": "ba21a8452e1b70d4725f387babcf31c6c994868137cf5a50552812e43bd61c90",
+  "nonce": "c4b5f40d39fa8927c1c9f027f81f8c1a",
+  "nonce_handshake": true,
+  "supervisor": {
+    "pid_requested": 82140,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 82140,
+    "ppid": 54542,
+    "uid": 501,
+    "pgid": 82140,
+    "state": 2,
+    "start": [
+      1792528061,
+      974606
+    ]
+  },
+  "child_identity": {
+    "pid_requested": 82173,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 82173,
+    "ppid": 82140,
+    "uid": 501,
+    "pgid": 82173,
+    "state": 2,
+    "start": [
+      1792528062,
+      145611
+    ]
+  },
+  "child_rusage": {
+    "return": 0,
+    "errno": 0,
+    "rss_bytes": 14778368,
+    "start_abstime": 77196299377026
+  },
+  "live_group": {
+    "pgid_requested": 82173,
+    "returned_bytes": 4,
+    "errno": 0,
+    "valid": true,
+    "members": [
+      82173
+    ],
+    "monotonic_ns": 3216512494730041
+  },
+  "child_exit": 0,
+  "two_numeric_own_group_closure_observations": [
+    {
+      "pgid_requested": 82173,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216512499112958
+    },
+    {
+      "pgid_requested": 82173,
+      "returned_bytes": 0,
+      "errno": 0,
+      "valid": true,
+      "members": [],
+      "monotonic_ns": 3216512556024625
+    }
+  ],
+  "signals_sent": false,
+  "global_process_enumeration": false,
+  "qualification": "No guard/RSS-frequency/orphan/watchdog qualification inferred",
+  "absolute_functional_cutoff_utc": "2026-10-21T11:10:14Z"
+}

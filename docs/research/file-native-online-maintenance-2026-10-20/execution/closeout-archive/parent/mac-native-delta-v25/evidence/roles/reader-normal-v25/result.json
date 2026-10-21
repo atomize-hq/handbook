@@ -1,0 +1,36 @@
+{
+  "role": "reader",
+  "limit_bytes": 268435456,
+  "failures": [],
+  "samples": 19,
+  "max_start_gap_s": 0.015367916785180569,
+  "peak_RSS_bytes": 14745600,
+  "closure": [
+    {
+      "monotonic": 3221765.201848541,
+      "identities": [
+        {
+          "pid_requested": 14383,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    },
+    {
+      "monotonic": 3221765.23187025,
+      "identities": [
+        {
+          "pid_requested": 14383,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    }
+  ],
+  "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+  "source_pin": "CONTROL_ONLY"
+}

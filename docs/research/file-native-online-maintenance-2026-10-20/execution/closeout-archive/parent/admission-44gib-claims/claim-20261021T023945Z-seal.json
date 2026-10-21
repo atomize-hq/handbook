@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-037-ARCHIVE80K-META10M-FAMILY192-GUARD72K",
+  "utc": "2026-10-21T02:39:45.811660+00:00",
+  "status": "INTERNAL_COMBINED_CAPS_APPLIED__PARENT_REGISTRATION_SOURCE_GO_REQUIRED__NO_RUNTIME",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T023945Z.json",
+      "bytes": 6560,
+      "sha256": "efc97e0b8192bfa9c78020102879e7fa6250027428f5323c67d23d62d330c6be"
+    },
+    {
+      "file": "claim-20261021T023945Z.md",
+      "bytes": 719,
+      "sha256": "fa02f486134893fb451469bb461f44f5cc67885a7d6f9f5d263473e1900779fc"
+    }
+  ]
+}

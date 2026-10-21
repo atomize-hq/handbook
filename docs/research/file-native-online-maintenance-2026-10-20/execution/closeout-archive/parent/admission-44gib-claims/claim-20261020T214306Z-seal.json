@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-006-C3-META-REVIEW-4MiB",
+  "utc": "2026-10-20T21:43:06.304681+00:00",
+  "files": [
+    {
+      "file": "claim-20261020T214306Z.json",
+      "bytes": 4119,
+      "sha256": "1222683122d8c0f433b6e2dbb5951a248bee80f63dda8b09f29a71331567673e"
+    },
+    {
+      "file": "claim-20261020T214306Z.md",
+      "bytes": 1297,
+      "sha256": "280aa51b360a38eacbb85778dcd1e84eccec03d542ecf7efa6fe031cf4eb6a1b"
+    }
+  ],
+  "status": "C3_INTERNAL_TOPUP_AUTHORIZED__LARGE_EXECUTION_STILL_HOLD",
+  "sealed": true
+}

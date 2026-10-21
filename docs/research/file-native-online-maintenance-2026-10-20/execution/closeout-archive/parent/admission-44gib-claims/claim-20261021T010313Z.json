@@ -1,0 +1,156 @@
+{
+  "claim_id": "44GiB-CENTRAL-027-HELPER-HISTORY6KiB-GROUP-TRANSFER",
+  "utc": "2026-10-21T01:03:13.112279+00:00",
+  "status": "INTERNAL_HELPER_GROUP_TRANSFER_APPLIED__NEW_BUDGET_SOURCE_GO_BEFORE_EDITS__NO_RUN",
+  "authority": "METAconcrete027AFTER026seal: transfer6144B CONTROL->HISTORY insideunchanged131072/8helper; nootherallocation.",
+  "prior026": {
+    "file": "claim-20261021T010133Z.json",
+    "sha256": "18e44280b22f62d6b0c1c3441a8d0cfbefd20b369ffbaad0d4db71ac9d49114e",
+    "sealed_before027": true
+  },
+  "family_addendum": {
+    "file": "claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "file_cap": 128,
+    "byte_cap": 524288
+  },
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\qualification-lanes",
+  "old_group_caps": {
+    "LONG": 49152,
+    "HISTORY": 49152,
+    "CONTROL": 32768
+  },
+  "new_group_caps": {
+    "LONG": 49152,
+    "HISTORY": 55296,
+    "CONTROL": 26624
+  },
+  "group_files_unchanged": {
+    "LONG": 2,
+    "HISTORY": 1,
+    "CONTROL": 5
+  },
+  "new_per_file_caps": {
+    "LONG": {
+      "legacy_archive_restore.py": 16384,
+      "long_lane.py": 32768
+    },
+    "HISTORY": {
+      "history_lane.py": 55296
+    },
+    "CONTROL": {
+      "fake_controls.py": 18432,
+      "fake_cases.json": 4096,
+      "lane_config.example.json": 4096,
+      "README.md": 4096,
+      "source-manifest.json": 2048
+    }
+  },
+  "whole_unchanged": {
+    "bytes": 131072,
+    "files": 8,
+    "exact_names": 8
+  },
+  "owners_unchanged": {
+    "LONG_CONTROL": "01a15b51-a50b-7930-8633-b42694240252",
+    "HISTORY": "01a15bcc-6fb9-7e63-b935-a60d25d9390a"
+  },
+  "fresh_readonly_census": {
+    "LONG": {
+      "bytes": 42384,
+      "files": 2,
+      "members": [
+        {
+          "file": "legacy_archive_restore.py",
+          "bytes": 13939,
+          "sha256": "6066957734e744331585e194973b3daeeffd605464b301860129cbcde58ce81c"
+        },
+        {
+          "file": "long_lane.py",
+          "bytes": 28445,
+          "sha256": "854ee63f0f24dd71546e84af1371e0bd6a6999b82d50105548bd5dfe212cc466"
+        }
+      ]
+    },
+    "HISTORY": {
+      "bytes": 48321,
+      "files": 1,
+      "members": [
+        {
+          "file": "history_lane.py",
+          "bytes": 48321,
+          "sha256": "83a633283fa16169793c47dbdf2c927be70766700a2c31bbb1861757b0c71366"
+        }
+      ]
+    },
+    "CONTROL": {
+      "bytes": 21562,
+      "files": 5,
+      "members": [
+        {
+          "file": "fake_controls.py",
+          "bytes": 11565,
+          "sha256": "1878368eb8a6a4aa018ab364bd38ebb72c46477aa62e32f271ba4843eeed4eac"
+        },
+        {
+          "file": "fake_cases.json",
+          "bytes": 1956,
+          "sha256": "44230218839d9d1101dcc4d38316234289fbc1e64b8c4a7228c49a6b2706f578"
+        },
+        {
+          "file": "lane_config.example.json",
+          "bytes": 2774,
+          "sha256": "9704358fa9284d38675f9444f273b226088bbfa9f80ae713e1df0a4bbb815eaf"
+        },
+        {
+          "file": "README.md",
+          "bytes": 3951,
+          "sha256": "18efbb2eef14d178664aa04813cb43896060fca88fbe8c17dd3e2b64dd7061da"
+        },
+        {
+          "file": "source-manifest.json",
+          "bytes": 1316,
+          "sha256": "f6c57e9a6f07becc21069338ea4c541a73c95ff150096c1971a83983a796f03d"
+        }
+      ]
+    }
+  },
+  "slack_after_transfer": {
+    "HISTORY": 6975,
+    "CONTROL": 5062,
+    "LONG": 6768,
+    "whole": 18805
+  },
+  "cap_interaction": "Onlyhistory_lane.pyindividualcapchanges49152->55296. ALLfiveCONTROLindividualcapsUNCHANGED(totalceilings32768), butcombinedCONTROLgroupNEW26624strictlyenforced; everyindividualANDgroupANDwholecap requiredbeforewrites. Exact8names remainclosed, no9thimplicitfile/temp/pycache/subroot. Transferisunusedcapacity, notactualdatareclaim.",
+  "reason_pending_source_remediation": [
+    "IndependentR1authorization/poll",
+    "R2finite readercoverage",
+    "R3postexitfinaljoin",
+    "R4quantitativewholeforecasts",
+    "R5warmrequestidentity",
+    "ParentR6missinglegacyfulloracle"
+  ],
+  "negative_freeze": "Currentf6source-manifest.jsonSHAf6c57e9a6f07becc21069338ea4c541a73c95ff150096c1971a83983a796f03d andcurrentsourcehashesrecorded. Parentrequiresf6negativefreezeARCHIVEretained; thisresourceworkerchanges/deletesnoarchive/source andclaimsno retroactivePASS. Sourcegroupchangeisnotreviewacceptance.",
+  "registration_gate": [
+    "BeforeACTUALedits parentNEWimmutablehelperbudgetbind027, group26624/55296/49152 andindividualhistory55296, exactnames/owners;explicitboundedSOURCEGOafterreviewrelease.",
+    "NoRUN/fake/native/engine/build/control/data/restore/Gitpermission. Sourceonlyboundedremediation, notrealhistory/longqualification.",
+    "Existingstreamf8/guard1e4,qualificationeightnames, sourceownershipseparation andallfrozencontrols unaffected. Distinctarchive/reviewcopiesMETA8;originalhelpersC3HELPER. Sourcefreeze04:10unchanged."
+  ],
+  "unchanged_allocator": {
+    "C3_total": 16777216,
+    "C3_HELPER": 131072,
+    "C3_unsubclaimed_after026": 3375104,
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "cap_bytes": 47244640256,
+    "reserved_files": 4792652,
+    "unassigned_files": 207348,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "new_C3_draw": 0,
+    "new_global_bytes": 0,
+    "new_global_files": 0,
+    "actual_deleted_bytes": 0
+  },
+  "resource_actions": "Freshreadonlyeight-filecensus+hash/cap/priorsealchecks andone027triplet only; nohelper/code/budget/Git/engine/runtimechanges."
+}

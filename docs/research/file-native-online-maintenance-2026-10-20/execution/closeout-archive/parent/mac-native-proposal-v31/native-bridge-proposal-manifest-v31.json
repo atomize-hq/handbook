@@ -1,0 +1,30 @@
+{
+  "kind": "native-v31-source-only-proposal-not-live-qualified",
+  "members": [
+    {
+      "path": "execution/native-macos/native_start_gate_v31.py",
+      "bytes": 3409,
+      "sha256": "ee4a805ced554a3c3c0828db178571e235306e06e1f24abda3fe3d23d1bd224f"
+    },
+    {
+      "path": "execution/native-macos/bash_start_gate_v31.sh",
+      "bytes": 342,
+      "sha256": "c31ed78b52b0cab268654a835b5106cd51a8e7544290a5cdde05e67afe81d677"
+    },
+    {
+      "path": "execution/native-macos/cache_stream_v31.py",
+      "bytes": 3874,
+      "sha256": "05ee6a655eafd4aaf3938ff2f6fe503491d90b26028381650e0af395aafaea8c"
+    },
+    {
+      "path": "evidence/control/native-bridge-proposal-v31.json",
+      "bytes": 15430,
+      "sha256": "b253a1b169c8a159d2d26facb8f32d0e2d4dc83dd4ae617d169a35a47ba27ca8"
+    },
+    {
+      "path": "evidence/control/native-bridge-proposal-diff-v31.json",
+      "bytes": 8731,
+      "sha256": "26b3d36ffa885238231ca3c7efd0a947c56263e4089349551fa794fe1008d8c6"
+    }
+  ]
+}

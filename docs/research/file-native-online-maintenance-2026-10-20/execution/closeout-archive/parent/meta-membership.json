@@ -1,0 +1,53 @@
+{
+  "kind": "META8_closed_membership_v3",
+  "cap_bytes": 8388608,
+  "P_all_regular_files_recursive": "C:\\Users\\spmcc\\.codex\\visualizations\\2026\\10\\20\\01a15ab8-d85f-71b1-8d37-c3c5689790be",
+  "Landing_research_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20",
+  "Landing_regular_files_only_at_roots": [
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20",
+    "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution"
+  ],
+  "Landing_recursive_execution_subtrees": [
+    "admission",
+    "admission-claims",
+    "native-macos",
+    "reviews",
+    "final-protocol",
+    "windows-matrix",
+    "windows-cadence"
+  ],
+  "Landing_excluded_subtree": "execution/windows-matrix/stream-snapshot-controls",
+  "Landing_promoted_harness_files": [
+    "cp2_decoder_static_controls.py",
+    "cp2_decoder_static_final.py",
+    "cp2_full_batch.py",
+    "cp2_journal_controls.py",
+    "driver.py",
+    "driver_start_controls.py",
+    "final_document_controls.py",
+    "finish_h10_baseline.py",
+    "h10_ready_census.py",
+    "matrix_budget.py",
+    "matrix_budget_controls.py",
+    "oracle_batch.py",
+    "physical_decoder_v3.py",
+    "physical_decoder_v4.py",
+    "quiescent_oracle.py",
+    "request_provenance.py",
+    "physical_decoder_v5.py",
+    "cohort_closure_controls.py",
+    "paged_index.py",
+    "paged_index_controls.py"
+  ],
+  "promoted_harness_bytes": 203215,
+  "excluded_original_source_subtrees": [
+    "execution/native-linux",
+    "execution/qualification-lanes",
+    "execution/windows-final-platform"
+  ],
+  "accounting": "All physical copies charged once per pathname. P archives/extracts included. Old F01 reservations retained conservatively; no expiry/deletion credit. Native/Linux originals F01/F12, helper/windows originals C3, not META. Shared Git positive growth F13 separately.",
+  "prewrite_actual_bytes": 7879619,
+  "prewrite_regular_files": 928,
+  "future_report_reserve_bytes": 32768,
+  "future_packet_reserve_bytes": 262144
+}

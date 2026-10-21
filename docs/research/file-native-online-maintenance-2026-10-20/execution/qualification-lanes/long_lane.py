@@ -97,12 +97,20 @@ def binding(row, label):
    h.update(block)
  need(h.hexdigest() == row['sha256'], 'bound-source-sha:' + label)
  return row
-def load_adapter(c):
- row = binding(c['bindings']['legacy_adapter'], 'legacy-adapter')
- spec = importlib.util.spec_from_file_location('legacy_archive_restore', row['path'])
- module = importlib.util.module_from_spec(spec)
- spec.loader.exec_module(module)
+def load_binding(row,name):
+ row=binding(row,name);path=Path(row['path'])
+ with path.open('rb') as f:
+  before=os.fstat(f.fileno());raw=f.read(row['bytes']+1);after=os.fstat(f.fileno())
+ need(len(raw)==row['bytes'] and digest(raw)==row['sha256'] and
+  (before.st_dev,before.st_ino,before.st_size,before.st_mtime_ns)==
+  (after.st_dev,after.st_ino,after.st_size,after.st_mtime_ns) and before.st_nlink==1,
+  'same-buffer-source-before-compile')
+ spec=importlib.util.spec_from_file_location(name,row['path'])
+ module=importlib.util.module_from_spec(spec)
+ exec(compile(raw,row['path'],'exec'),module.__dict__)
  return module
+def load_adapter(c):
+ return load_binding(c['bindings']['legacy_adapter'],'legacy_archive_restore')
 def validate_config(c):
  
  need(type(c) is dict and c.get('schema') == 'private-long-lane-v1' and
@@ -153,10 +161,8 @@ def validate_config(c):
    'F12-is-not-automatically-32MiB')
  need(c['archive']['selected'] == SELECTED and
    c['archive']['compressed_bytes'] == 313275597, 'exact-archive-plan')
- need(c['cli']['api'] == 'reviewed-v5-R1-cli' and
-   c['cli']['startup_gate'] == 'owned-before-any-corpus-read-or-write' and
-   type(c['cli']['oracle_argv']) is list and c['cli']['oracle_argv'] and
-   all(type(x) is str for x in c['cli']['oracle_argv']), 'pending-oracle-CLI-gate')
+ need(set(c['cli'])=={'api','startup_gate'} and c['cli']['api'] == 'independent-checker-cli-v1' and
+   c['cli']['startup_gate'] == 'owned-before-any-corpus-read-or-write', 'pending-oracle-CLI-gate')
  needed = {'source-restore', 'legacy-oracle', 'legacy-samples', 'convert', 'converted-oracle',
      'paged-samples', 'cleanup', 'cleaned-oracle', 'stream-restore',
      'restored-oracle', 'successor', 'successor-oracle', 'closure'}
@@ -265,53 +271,55 @@ def oracle_summary(value, expected_h, baseline=None):
  return dict(selected=semantic['selected'], permanent_digest=semantic['permanent_digest'],
     publications=semantic['publications'], actual_H=expected_h,
     full_physical_audit=True, exact_intents=True)
-def run_oracle(host, c, adapter, root, label, known, expected_h, baseline=None):
- before = adapter.inventory(host, c, root, maximum=c['limits']['source_construction_bytes'])
- core = adapter.load_stream(c)
- tokens = dict(ROOT=str(root), OUTPUT=str(Path(c['roots']['metadata']) / label / 'oracle.json'),
-      INVENTORY=c['bindings']['cohort_inventory']['path'], KNOWN=known['path'],
-      PROVENANCE=c['bindings']['request_provenance']['path'])
- argv = []
- for token in c['cli']['oracle_argv']:
-  if token.startswith('{') and token.endswith('}'):
-   need(token[1:-1] in tokens, 'unknown-oracle-argv-placeholder')
-   token = tokens[token[1:-1]]
-  argv.append(token)
+def run_oracle(host,c,adapter,root,label,known,expected_h,baseline=None,expected_selected=None):
+ before=adapter.inventory(host,c,root,maximum=c['limits']['source_construction_bytes'])
+ core=adapter.load_stream(c);bounds=c['_forecast']['oracle_output']
+ def range_ref(row):
+  reference(row,'checker-input');return dict(path=row['path'],offset=0,bytes=row['bytes'],sha256=row['sha256'])
+ result=host.oracle.legacy_full(str(root),label,range_ref(known),
+  range_ref(c['bindings']['request_provenance']),[],c['_forecast']['transport_profiles']['oracle'],
+  str(Path(c['roots']['evidence'])/(label+'-oracle-index.json')),bounds['limits'])
+ need(type(result) is dict and set(result)=={'index_ref','request_ref','native','artifacts'},'actual-legacy-checker-return')
+ native=result['native'];native_reference(native['raw'])
+ need(native['exit_code']==0 and native['startup_gate_before_corpus_IO'] is True and
+  native['children_empty'] is True and native['source_pin']==c['final_pin'] and
+  hex64(native['budget_receipt_sha256']) and hex64(native['closure_receipt_sha256']),
+  'actual-checker-native-admission-and-closure')
+ index=check_ref(result['index_ref'],bounds['index_bytes'],'actual-legacy-index')
+ request=check_ref(result['request_ref'],bounds['request_bytes'],'actual-legacy-request')
+ need(index['status']=='passed' and index['mode']==request['mode']=='legacy_full' and
+  index['engine_pin']==c['final_pin'] and request['root']==str(root) and
+  request['checkpoint']==label and request['limits']==bounds['limits'] and
+  request['known_requests_ref']==range_ref(known) and
+  request['request_provenance_ref']==range_ref(c['bindings']['request_provenance']) and
+  request['quiescent'] is True and index['artifacts']==result['artifacts'],
+  'actual-root-known-inputs-limits-and-mode')
+ source=c['bindings']['oracle'];sources={Path(p).resolve():v for p,v in index['sources'].items()}
+ need(sources.get(Path(source['path']).resolve())=={k:source[k] for k in ('bytes','sha256')},
+  'actual-frozen-v5-backend-source')
+ artifacts={}
+ for row in result['artifacts']:
+  need(row['complete'] is True and row['role'] not in artifacts,'complete-unique-checker-artifact')
+  artifacts[row['role']]=dict(path=row['path'],offset=0,bytes=row['bytes'],sha256=row['sha256'])
+ need({'before','after','result','payload','progress'}<=set(artifacts) and 'error' not in artifacts,
+  'complete-legacy-checker-companions')
+ value=check_ref(artifacts['result'],min(bounds['limits']['payload_bytes'],64*MiB),label)
+ need(value['inventory_digest']==c['cohort_digest'],'exact-all-504833-record-cohort')
+ normalized=oracle_summary(value,expected_h,baseline and baseline['value'])
  if baseline is not None:
-  argv += ['--baseline', baseline['path']]
- profile = c['_forecast']['profiles']['oracle']
- spec = dict(kind='python-argv', api='lane-invoke-v1', label=label,
-    executable=c['bindings']['python'], script=c['bindings']['oracle_cli'],
-    argv=argv, transitive_bindings=c['bindings'], profile=profile,
-    transport_profile=c['_forecast']['transport_profiles']['oracle'],
-    startup_gate=c['bindings']['startup_gate'],
-    required_gate=c['cli']['startup_gate'], role='checker', timeout_seconds=c['_forecast']['transport_profiles']['oracle']['timeout_seconds'],
-    max_stdin_bytes=0, max_stdout_bytes=profile['stdout'],
-    max_stderr_bytes=profile['stderr'], max_receipt_bytes=profile['receipt'],
-    output=dict(path=tokens['OUTPUT'], max_bytes=profile['output'],
-       category=c['categories']['destination_metadata']),
-    growth=c['phase_reserves'][c['_phase']], allowed_exit_codes=[0])
- result = host.invoke(spec)
- need(type(result) is dict and result.get('exit_code') == 0 and
-   result.get('startup_gate_before_corpus_IO') is True and
-   result.get('children_empty') is True and result.get('source_pin') == c['final_pin'] and
-   result.get('oracle_sha256') == c['bindings']['oracle']['sha256'] and
-   hex64(result.get('budget_receipt_sha256')) and hex64(result.get('closure_receipt_sha256')),
-   'oracle-pinned-native-admission-and-closure')
- value = check_ref(result['output'], profile['output'], label)
- need(value['inventory_digest'] == c['cohort_digest'], 'exact-all-504833-record-cohort')
- normalized = oracle_summary(value, expected_h, baseline and baseline['value'])
- after = adapter.inventory(host, c, root, maximum=c['limits']['source_construction_bytes'])
- core.compare_source(before, after)
- proof = record(host, c, label+'-inventory-proof.json',
-       dict(before=core.inventory_digest(before), after=core.inventory_digest(after),
-      files=len(before['files']), directories=len(before['directories']),
-      full_file_directory_hash_proof=True), 4096, True)
- summary = record(host, c, label+'-normalized.json', normalized, 16384, True)
- return dict(value=normalized, raw=result['output'], inventory=proof, normalized=summary,
-    full_file_directory_hash_proof=True,
-    budget_receipt_sha256=result['budget_receipt_sha256'],
-    closure_receipt_sha256=result['closure_receipt_sha256'])
+  need(value['semantic']['permanent_digest']==baseline['value']['permanent_digest'] and
+   value['semantic']['selected']==expected_selected,'actual-successor-baseline-and-selected')
+ after=adapter.inventory(host,c,root,maximum=c['limits']['source_construction_bytes'])
+ core.compare_source(before,after)
+ proof=record(host,c,label+'-inventory-proof.json',
+  dict(before=core.inventory_digest(before),after=core.inventory_digest(after),
+   files=len(before['files']),directories=len(before['directories']),
+   full_file_directory_hash_proof=True,index_ref=result['index_ref'],artifacts=artifacts),16384)
+ summary=record(host,c,label+'-normalized.json',normalized,16384)
+ return dict(value=normalized,raw=artifacts['result'],inventory=proof,normalized=summary,
+  full_file_directory_hash_proof=True,index_ref=result['index_ref'],request_ref=result['request_ref'],
+  budget_receipt_sha256=native['budget_receipt_sha256'],closure_receipt_sha256=native['closure_receipt_sha256'])
+
 def validate_samples(rows, warm, expected):
  need(type(rows) is list and len(rows) == 300, 'exact300-fresh-samples')
  need(type(warm) is dict and type(warm.get('rows')) is list and
@@ -425,21 +433,29 @@ def release_engine(host, c, root, byte_proof, oracle):
 def run_long(host, config):
  
  c = dict(validate_config(config))
+ permit = host.authorize(config, 'long')
+ need(type(permit) is dict and permit.get('go') is True and
+   permit.get('final_pin') == c['final_pin'] and hex64(permit.get('receipt_sha256')),
+   'parent-exact-config-authorization-before-private-source')
+ need(permit.get('source_admission')==c.get('source_admission'),'exact-parent-source-admission')
+ authority=check_ref(permit['source_admission'],16384,'physical-source-authority')
+ caps={name:cap for group in authority['groups'].values() for name,cap in group['paths'].items()}
+ for name,filename in (('legacy_adapter','legacy_archive_restore.py'),
+  ('long_source','long_lane.py'),('profile_calculator','long_source_profiles.py')):
+  row=c['bindings'][name]
+  need(Path(row['path'])==Path(authority['source_root'])/filename and
+   type(caps[filename]) is int and row['bytes']<=caps[filename],'actual-allocated-private-source')
  adapter = load_adapter(c)
- profile_binding = binding(c['bindings']['profile_calculator'], 'profile-calculator')
- spec = importlib.util.spec_from_file_location('reviewed_long_profiles', profile_binding['path'])
- calculator = importlib.util.module_from_spec(spec)
- spec.loader.exec_module(calculator)
- need(getattr(calculator, 'API', None) == 'long-source-profiles-v1',
+ calculator = load_binding(c['bindings']['profile_calculator'],'reviewed_long_profiles')
+ need(getattr(calculator, 'API', None) == 'long-source-profiles-v2-r3',
    'PENDING-source-derived-action-QPC-host-oracle-profiles')
  c['_forecast'] = calculator.derive_long_forecast(c)
+ need(hex64(c['_forecast'].get('profile_catalogue_sha256')) and
+  c['_forecast']['catalogue_status']=='AUTHENTICATED_GLOBAL_CATALOGUE',
+  'global-native-catalogue-required-preview-is-not-executable')
  need(c['_forecast']['E_bytes'] <= c['limits']['evidence_bytes'] and
    c['_forecast']['E_files'] <= c['limits']['evidence_files'], 'assigned-whole-E-limits')
  c['_forecast_sha256'] = digest(encode(c['_forecast']))
- permit = host.authorize(c, 'long')
- need(type(permit) is dict and permit.get('go') is True and
-   permit.get('final_pin') == c['final_pin'] and
-   hex64(permit.get('receipt_sha256')), 'parent-runtime-GO')
  for name, row in c['bindings'].items():
   binding(row, name)
  root, dest = Path(c['roots']['source']), Path(c['roots']['destination'])
@@ -450,7 +466,7 @@ def run_long(host, config):
   phase(host, c, 'source-restore')
   proof['source_forecast'] = record(host, c, 'long-forecast.json', c['_forecast'],
    min(c['limits']['record_bytes'], c['profile_inputs']['retained_artifacts']['forecast']['bytes']))
-  proof['archive'] = adapter.legacy_restore(host, c)
+  proof['archive'] = adapter.legacy_restore(host, config)
   need(proof['archive']['engine_open_allowed'] is False, 'byte-quarantine')
   known = prepare_known(host, c)
   phase(host, c, 'legacy-oracle')
@@ -483,14 +499,25 @@ def run_long(host, config):
   phase(host, c, 'stream-restore')
   core = adapter.load_stream(c)
   def independent_destination(destination, byte_proof):
-   need(Path(destination) == dest and byte_proof['both_helpers_closed'] is True,
-     'byte-closure-before-oracle')
+   helpers=byte_proof['native_helpers']
+   need(Path(destination)==dest and byte_proof['both_helpers_closed'] is True and
+    byte_proof['provider_api']=='long-stream-native-r3' and
+    [r['role'] for r in helpers]==['produce','consume'],'native-pair-before-oracle')
+   for row in helpers:
+    need(set(row)=={'role','raw_ref','metadata_ref','closure_ref','gate_ref'},'closed-native-helper')
+    native_reference(row['raw_ref'])
+    for kind in ('metadata_ref','closure_ref','gate_ref'):
+     ref=reference(row[kind],kind)
+     need(set(ref)=={'path','offset','bytes','sha256'} and type(ref['offset']) is int and
+      ref['offset']>=0 and ref['bytes']>0,'retained-native-helper-range')
+   need(len({r['raw_ref']['call'] for r in helpers})==2 and
+    len({r['raw_ref']['run'] for r in helpers})==1,'two-distinct-same-run-helpers')
    phase(host, c, 'restored-oracle')
    restored = run_oracle(host, c, adapter, dest, 'restored', known, ACTUAL_H)
    proof['restored_oracle'] = restored
    return dict(status='passed', oracle_sha256=c['bindings']['oracle']['sha256'],
       raw=restored['raw'], actual_H=ACTUAL_H)
-  proof['transport'] = core.capture_restore(stream_config, independent_destination)
+  proof['transport'] = host.long_stream_capture(stream_config, independent_destination)
   c['_dest_release'] = release_engine(host, c, dest, proof['transport'], proof['restored_oracle'])
   core.compare_source(frozen_source, adapter.inventory(host, c, root, maximum=651179227))
   phase(host, c, 'successor')
@@ -511,7 +538,7 @@ def run_long(host, config):
   baseline_ref = record(host, c, 'successor-baseline.json', baseline_value, 4096, True)
   phase(host, c, 'successor-oracle')
   proof['successor_oracle'] = run_oracle(host, c, adapter, dest, 'successor', successor_known,
-              ACTUAL_H+1, dict(value=baseline_value, **baseline_ref))
+              ACTUAL_H+1, dict(value=baseline_value, **baseline_ref), publish['result']['selected'])
   proof['successor_publish'], proof['successor_resolve'] = retained_call(publish), retained_call(resolved)
   core.compare_source(frozen_source, adapter.inventory(host, c, root, maximum=651179227))
   phase(host, c, 'closure')
@@ -532,4 +559,5 @@ def run_long(host, config):
      closure=closure, deletion=False, automatic_retry=False,
      forecast_expiry=False), 16384)
   raise
+
 

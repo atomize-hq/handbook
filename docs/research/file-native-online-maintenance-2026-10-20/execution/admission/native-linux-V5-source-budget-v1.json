@@ -1,0 +1,42 @@
+{
+  "kind": "private-Linux-V5-prospective-controller-source-budget",
+  "source_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\native-linux\\final-suite",
+  "owner": "01a15ae6-04a2-7292-8ebe-30ad725ca61b",
+  "bytes": 327680,
+  "files": 13,
+  "max_bytes": 327680,
+  "max_files": 13,
+  "paths": {
+    "suite_bootstrap.py": 16384,
+    "suite_driver.py": 40960,
+    "suite_adapter.py": 49152,
+    "suite_oracle.py": 16384,
+    "suite_packing.py": 40960,
+    "suite_recovery.py": 32768,
+    "suite_extensions.py": 49152,
+    "suite_ordinary.py": 16384,
+    "suite_units.py": 8192,
+    "suite_manifest.json": 16384,
+    "suite_growth.json": 16384,
+    "suite_main.py": 16384,
+    "source_receipt.json": 8192
+  },
+  "whole_F01_cap": 4194304,
+  "whole_F01_enforcement": "Stronger wholelocal/native+shareddeps+allfutureCOPYmaxima capgoverns; requested13capsdoNOTgrant extrawholeF01. Askforreallocationifgrowthmakeswhole4Munknown.",
+  "C1_Linux_cache_go": false,
+  "C1_Linux_bytes_allocated": 0,
+  "new_C1_source_support": "CanimplementdefaultfalseoptionalexplicitpolicyinV5; activationrequiresnewclaim/categorymonitorandcopyadmission.",
+  "source_only": true,
+  "runtime_go": false,
+  "pure_memory_parse_compile_go": true,
+  "engine_commit_fixed": "0628322e4b48e0efad19cdc32238a622d4aaa7a8",
+  "functional_hard_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_hard_cutoff": "2026-10-21T13:10:14Z",
+  "historical_review_watchdog": "04:10:14Z MISSED; preservea5/R2failedsnapshots. Newprospectivecontrollerrepairsauthorized, no oldcellrescore/clockreset.",
+  "rules": [
+    "ChecksameimmutablebudgetSHA andindividual/group/wholeALLphysicalsourcecopies plusfuturecopyobligations beforeeverywrite; no links/reparse/bytecode/extrafiles.",
+    "OldsourceversionsdurableatGit a5b53218 and062enginefixed. No Rust/core/publicformat change.",
+    "Newsourcepinsfreshfullreviewandexplicitfiniteadmissionbeforeanyruntime/build/cache/fixture/archive/delete."
+  ],
+  "issued": "2026-10-21T05:05:16.066158+00:00"
+}

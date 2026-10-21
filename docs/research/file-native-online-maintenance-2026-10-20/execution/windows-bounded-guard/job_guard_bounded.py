@@ -39,12 +39,7 @@ GUARD_WIRE_CONTRACT = { 'api': 'bounded-windows-guard-wire-r3',
                                       'stdio',
                                       'final',
                                       'aggregate'],
-                       'rss': [ 'complete_rows',
-                                'total_rows',
-                                'row_bytes',
-                                'raw_bytes',
-                                'gzip_bytes',
-                                'finish_reserve_bytes'],
+                       'rss': ['complete_rows', 'total_rows', 'row_bytes', 'raw_bytes', 'gzip_bytes', 'finish_reserve_bytes'],
                        'invocation': ['argv_bytes', 'argv_items', 'stdin_bytes', 'cwd_bytes'],
                        'collections': ['disk', 'supervisor', 'exit', 'identity', 'peaks', 'errors', 'terminations'],
                        'collection_limits': ['rows', 'bytes'],
@@ -75,12 +70,8 @@ GUARD_WIRE_CONTRACT = { 'api': 'bounded-windows-guard-wire-r3',
                             'process': ['pid', 'creation_time', 'rss', 'peak'],
                             'supervisor_live': ['pid', 'creation_time', 'rss', 'peak'],
                             'supervisor_departed': ['pid', 'creation_time', 'state'],
-                            'supervisor_departure_states': [ 'ended-before-open-or-reused',
-                                                             'ended-or-reused',
-                                                             'exited-during-rss'],
-                            'nullable_seconds': [ 'completion_interval_seconds',
-                                                  'monotonic_interval_seconds',
-                                                  'interval_seconds']},
+                            'supervisor_departure_states': ['ended-before-open-or-reused', 'ended-or-reused', 'exited-during-rss'],
+                            'nullable_seconds': ['completion_interval_seconds', 'monotonic_interval_seconds', 'interval_seconds']},
             'rss-write-complete': { 'sample_complete': False,
                                     'required': [ 'event',
                                                   'sample_complete',
@@ -110,8 +101,7 @@ GUARD_WIRE_CONTRACT = { 'api': 'bounded-windows-guard-wire-r3',
             'full-sample-cadence-late': {'sample_complete': False},
             'stale-sample-before-resume': {'sample_complete': False},
             'disk-budget': {'sample_complete': False, 'value': 'actual bounded category census'},
-            'pid-exit-race': { 'sample_complete': False,
-                               'value': 'native exit/departure observation; no zero RSS credit'}},
+            'pid-exit-race': {'sample_complete': False, 'value': 'native exit/departure observation; no zero RSS credit'}},
   'gzip': { 'codec': 'gzip-stored-deflate-v1',
             'members': 1,
             'header_bytes': 10,
@@ -127,11 +117,11 @@ GUARD_WIRE_CONTRACT = { 'api': 'bounded-windows-guard-wire-r3',
              'unknown_close': 'retain all references, refuse later controller admission'},
   'publication': { 'receipt_suffixes': ['.json', '.rss.jsonl.gz', '.stdout', '.stderr', '.bounds.json'],
                    'stored_json': 'qualified=false; postwrite census pending',
-                   'returned_completion': 'actual receipt SHA plus inclusive postwrite census; caller must persist in '
-                                          'separately admitted sink',
+                   'returned_completion': 'actual receipt SHA plus inclusive postwrite census; caller must persist in separately '
+                                          'admitted sink',
                    'process_closure_verified': 'physical native resource predicate only; independent errors/censor',
-                   'qualified': 'exit0 AND no censor AND no health errors AND physical closure AND complete gzip/stdio '
-                                'AND actual postwrite census'},
+                   'qualified': 'exit0 AND no censor AND no health errors AND physical closure AND complete gzip/stdio AND actual '
+                                'postwrite census'},
   'native_lifetime': { 'schema': 'original-job-native-lifetime-v1',
                        'keys': [ 'schema',
                                  'run_nonce',
@@ -155,8 +145,8 @@ GUARD_WIRE_CONTRACT = { 'api': 'bounded-windows-guard-wire-r3',
                                  'io_closed',
                                  'writer_closed',
                                  'callbacks_joined'],
-                       'publisher': 'job_guard_bounded.native_lifetime; actual inner guard-worker creator/host; parent '
-                                    'separately reaps guard-worker and closes outer Job'},
+                       'publisher': 'job_guard_bounded.native_lifetime; actual inner guard-worker creator/host; parent separately '
+                                    'reaps guard-worker and closes outer Job'},
   'parent_completion': { 'schema': 'parent-original-guard-completion-v1',
                          'required': [ 'schema',
                                        'run_nonce',
@@ -172,11 +162,14 @@ GUARD_WIRE_CONTRACT = { 'api': 'bounded-windows-guard-wire-r3',
                                        'outer_controller_lifetime',
                                        'postclose_census',
                                        'original_returned_completion',
-                                       'outer_receipt_ref'],
-                         'guard_reaped': 'actual guard-worker wait + native SIGNALLED + checked native handle close; '
-                                         'never publisher self-exit'},
-  'ownership': 'unnamed noninheritable Job; exact newly created Job query; source-reviewed no Job handle duplication; '
-               'no arbitrary OS isolation claim'}
+                                       'outer_receipt_ref',
+                                       'budget_sha256',
+                                       'bounds_sha256',
+                                       'config_ref'],
+                         'guard_reaped': 'actual guard-worker wait + native SIGNALLED + checked native handle close; never '
+                                         'publisher self-exit'},
+  'ownership': 'unnamed noninheritable Job; exact newly created Job query; source-reviewed no Job handle duplication; no arbitrary '
+               'OS isolation claim'}
 
 import argparse
 import contextlib
@@ -919,7 +912,7 @@ class PipeCapture:
 _ROOT_PENDING=False
 def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None):
   global _ROOT_PENDING
-  if _UNCLOSED:
+  if _UNCLOSED or _ROOT_PENDING:
     raise RuntimeError('previous-controller-IO-closure-unknown')
   if type(seconds) not in (int, float) or not math.isfinite(seconds) or seconds <= 0:
     raise ValueError('positive-finite-stage-seconds')
@@ -1105,7 +1098,7 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
             failed(error, 'memory-monitor-error')
           return
         next_tick = max(next_tick + 20000000, qpc())
-        stop.wait(max(0, (next_tick - qpc()) / 1000000000.0))
+        time.sleep(max(0, (next_tick - qpc()) / 1000000000.0))
     def disk_watch():
       while not stop.is_set() and (not state.frozen):
         try:
@@ -1247,7 +1240,7 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
         if pipes.thread.is_alive():
           io_unknown = True
           failed(RuntimeError(), 'unjoined-owned-stdio')
-      if state.uncertain or _UNCLOSED or (process is not None and process.poll() is None):
+      if _ROOT_PENDING or state.uncertain or _UNCLOSED or (process is not None and process.poll() is None):
         io_unknown = True
         failed(RuntimeError(), 'owned-resource-closure-unknown')
       if job:
@@ -1270,7 +1263,7 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
         remaining = []
       if io_unknown:
         state.frozen = True
-        _UNCLOSED.append(dict(kind='unjoined-io',run_nonce=state.run_nonce,job=job,process=process,raw=raw,pipes=pipes,sampler=sampler,disk=disk_thread,feeder=feeder,timer=timer,identities=js,state=state,owner=owner,creator_lifetime=creator_lifetime))
+        _UNCLOSED.append(dict(kind='acquisition-unknown' if _ROOT_PENDING else 'unjoined-io',acquisition_pending=_ROOT_PENDING,run_nonce=state.run_nonce,job=job,process=process,raw=raw,pipes=pipes,sampler=sampler,disk=disk_thread,feeder=feeder,timer=timer,identities=js,state=state,owner=owner,creator_lifetime=creator_lifetime))
       else:
         if js:
           try:
@@ -1300,6 +1293,10 @@ def run(argv, receipt, budget_path, seconds, reserves=None, stdin=None, cwd=None
             failed(error, 'root-handle-close-unknown')
         if job:
           with lock:
+            try:check_job_limits(job,12,state,job_limit_checks)
+            except BaseException as error:
+              job_limit_checks.append(dict(final_error=_error(error)))
+              failed(error,'final-Job-accounting')
             closing = job
             job = None
             try:
@@ -1454,12 +1451,13 @@ def set_job_limits(job,active,state):
   if not K.SetInformationJobObject(job,9,ref(v),size_of(v)):raise winerr(last_error())
   return check_job_limits(job,active,state)
 
-def check_job_limits(job,active,state):
+def check_job_limits(job,active,state,records=None):
   v=Limits();a=ctypes.create_string_buffer(48)
   if not K.QueryInformationJobObject(job,9,ref(v),size_of(v),None) or not K.QueryInformationJobObject(job,1,a,48,None):
     raise winerr(last_error())
   count=int.from_bytes(a.raw[40:44],'little');terminated=int.from_bytes(a.raw[44:48],'little')
   row=dict(perf_ns=qpc(),active_limit=v.Basic.Active,flags=v.Basic.Flags,active_processes=count,limit_terminated_processes=terminated)
+  if records is not None:records.append(row)
   if v.Basic.Flags!=8968 or v.Basic.Active!=active or v.Process!=2*GiB or v.Job!=3*GiB or count>active or terminated:
     state.log('native-job-live-limit',row);state.cap('native-active-process-limit')
     raise RuntimeError('native-job-live-limit')

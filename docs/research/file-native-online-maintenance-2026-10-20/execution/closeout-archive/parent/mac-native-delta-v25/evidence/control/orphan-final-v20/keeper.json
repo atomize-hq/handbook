@@ -1,0 +1,174 @@
+{
+  "kind": "independent-native-keeper",
+  "nonce": "234a2ac32e03769f85751c7beeff4fe7",
+  "identity": {
+    "pid_requested": 8910,
+    "returned_bytes": 136,
+    "errno": 0,
+    "expected_bytes": 136,
+    "pid": 8910,
+    "ppid": 8909,
+    "uid": 501,
+    "pgid": 8910,
+    "state": 2,
+    "start": [
+      1792532929,
+      991187
+    ]
+  },
+  "fixed_cutoff_epoch": 1792581014.0,
+  "local_deadline_monotonic": 3221392.260631833,
+  "token_received": true,
+  "state": "CLOSED_AFTER_CENSOR",
+  "identity_budget": 4096,
+  "reason": "RuntimeError('root-completed-orphan-tree')",
+  "events": [
+    {
+      "termination": {
+        "status": "FROZEN_TREE_SIGNALLED",
+        "steps": [
+          {
+            "pid": 8914,
+            "start": [
+              1792532931,
+              692498
+            ],
+            "signal": 17,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 8911,
+            "start": [
+              1792532931,
+              605899
+            ],
+            "signal": 17,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 8914,
+            "start": [
+              1792532931,
+              692498
+            ],
+            "signal": 9,
+            "sent": true,
+            "errno": 0
+          },
+          {
+            "pid": 8911,
+            "start": [
+              1792532931,
+              605899
+            ],
+            "signal": 9,
+            "sent": true,
+            "errno": 0
+          }
+        ],
+        "known": [
+          {
+            "pid_requested": 8911,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 8911,
+            "ppid": 8910,
+            "uid": 501,
+            "pgid": 8911,
+            "state": 4,
+            "start": [
+              1792532931,
+              605899
+            ]
+          },
+          {
+            "pid_requested": 8913,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 8913,
+            "ppid": 8911,
+            "uid": 501,
+            "pgid": 8911,
+            "state": 2,
+            "start": [
+              1792532931,
+              668152
+            ]
+          },
+          {
+            "pid_requested": 8914,
+            "returned_bytes": 136,
+            "errno": 0,
+            "expected_bytes": 136,
+            "pid": 8914,
+            "ppid": 1,
+            "uid": 501,
+            "pgid": 8911,
+            "state": 4,
+            "start": [
+              1792532931,
+              692498
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "notify_parent": {
+        "pid": 8909,
+        "start": [
+          1792532929,
+          923469
+        ],
+        "signal": 30,
+        "sent": true,
+        "errno": 0
+      }
+    },
+    {
+      "closure": {
+        "proven": true,
+        "required_observations": 2,
+        "observations": [
+          {
+            "monotonic": 3221382.0114005,
+            "groups": [
+              {
+                "pgid_requested": 8911,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3221382011387166
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          },
+          {
+            "monotonic": 3221382.032486166,
+            "groups": [
+              {
+                "pgid_requested": 8911,
+                "returned_bytes": 0,
+                "errno": 0,
+                "valid": true,
+                "members": [],
+                "monotonic_ns": 3221382032468166
+              }
+            ],
+            "remaining": [],
+            "unknown_errno_observations": [],
+            "empty": true
+          }
+        ],
+        "total_numeric_observations": 2
+      }
+    }
+  ]
+}

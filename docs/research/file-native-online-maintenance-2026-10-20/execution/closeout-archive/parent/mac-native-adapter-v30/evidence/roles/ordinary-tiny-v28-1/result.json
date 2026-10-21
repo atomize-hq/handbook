@@ -1,0 +1,100 @@
+{
+  "role": "reader",
+  "limit_bytes": 268435456,
+  "failures": [],
+  "samples": 26,
+  "max_start_gap_s": 0.013007041998207569,
+  "peak_RSS_bytes": 35700736,
+  "closure": [
+    {
+      "monotonic": 3223717.937707583,
+      "identities": [
+        {
+          "pid_requested": 62017,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62018,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62019,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62020,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62021,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    },
+    {
+      "monotonic": 3223717.960489083,
+      "identities": [
+        {
+          "pid_requested": 62017,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62018,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62019,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62020,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        },
+        {
+          "pid_requested": 62021,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    }
+  ],
+  "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+  "source_pin": "CONTROL_ONLY",
+  "exit": 0,
+  "seconds": 0.30304750008508563,
+  "guarded_seconds": 0.3480097088031471,
+  "output_complete": true,
+  "outputs": {
+    "stdout": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/ordinary-tiny-v28-1/stdout.bin",
+      "bytes": 700,
+      "sha256": "f3c6f8747741909d2817c65b922375bf40de9dbed57de9e70e6d5ef3819a7cdd"
+    },
+    "stderr": {
+      "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/ordinary-tiny-v28-1/stderr.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

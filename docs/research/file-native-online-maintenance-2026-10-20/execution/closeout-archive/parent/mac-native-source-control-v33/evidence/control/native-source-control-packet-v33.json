@@ -1,0 +1,238 @@
+{
+  "kind": "native-owned-driver-adapter-v33-source-control-review",
+  "status": "SOURCE_ONLY_CANDIDATE_PARENT_REVIEW_NO_CONTROLS_RUN",
+  "source_files": {
+    "role_driver_v33.py": {
+      "bytes": 28534,
+      "sha256": "0c84fceeec2659e650e898f42421c035ac3e3355283f74f1d71c8bd3766e5404"
+    },
+    "producer_binding_v32.py": {
+      "bytes": 9009,
+      "sha256": "e380774fb2a969dfb101761fd5e9b3370528e9b982ed7eec91c34c543a02ca80"
+    },
+    "capsule_adapter_v33.py": {
+      "bytes": 17176,
+      "sha256": "246993faee25ad018c1aa47506d47add56b55391dc368c9adfba3b7e5bd9a646"
+    },
+    "cache_stream_v33.py": {
+      "bytes": 4167,
+      "sha256": "f3b58ce6a0600081fe86f67d1ea97da4d813c1982ed3000fe02054fd5a83b85b"
+    },
+    "fake_native_v32.py": {
+      "bytes": 1124,
+      "sha256": "ef801838ac7ab0aa66e9f4124a6252ea685f8730a0b4f753b9f9cae7eba6359d"
+    },
+    "control_native_v33.py": {
+      "bytes": 12922,
+      "sha256": "5adda56cd03293bb5ae4883acd3d4f33dcc6e45491919abb6083efc7bc8de92c"
+    },
+    "control_historical_v33.py": {
+      "bytes": 5117,
+      "sha256": "701e42a207de67cfad4043e7881a0d7331ab3b04f7c1a9e2abc7e5cec44e2392"
+    }
+  },
+  "preserved_exact_sources": {
+    "guard_v20.py": "c33fa117667de50c9010e27830a1ec63019deb7186d4a047e439bda04530cfb4",
+    "monitor_v20.py": "7b3f3fd0c79ddb3fd4115c22c0b17c1d7914ce2aca0aff54f16fcd4587bf52a7",
+    "keeper_v20.py": "5a96e449f32f971dbd57f2ca62cdc194920858ae9708d5ecd6bec25e19aa8978",
+    "admission_v20.py": "aaf37aa66d486805a5fed459ba632d39bc65749d67ee153bc92a575b69410fe3",
+    "role_driver_v23.py": "f79bc1737b0ff0ba4fff4e4db4e15ffb2acce82cd88cf79a81e66a3c516ffa98",
+    "role_driver_v29.py": "ad855d5d8c96eac726d9f649b3c014f563dd45fc07e7ab3514e10e3c43af2cde",
+    "capsule_adapter_v30.py": "e93cf4914435338e11b1d259bc8f7e4ae4f18d8e8b506e9b21e879fbd5ce5fad",
+    "native_start_gate_v31.py": "ee4a805ced554a3c3c0828db178571e235306e06e1f24abda3fe3d23d1bd224f",
+    "bash_start_gate_v31.sh": "c31ed78b52b0cab268654a835b5106cd51a8e7544290a5cdde05e67afe81d677"
+  },
+  "reused_runtime_sources": {
+    "native_start_gate_v31.py": {
+      "bytes": 3409,
+      "sha256": "ee4a805ced554a3c3c0828db178571e235306e06e1f24abda3fe3d23d1bd224f"
+    },
+    "bash_start_gate_v31.sh": {
+      "bytes": 342,
+      "sha256": "c31ed78b52b0cab268654a835b5106cd51a8e7544290a5cdde05e67afe81d677"
+    },
+    "ordinary_copy_v27.sh": {
+      "bytes": 278,
+      "sha256": "6651630a039c8efec160a55ec509af483c7514c44c716430eb31b44ad26db5ac"
+    },
+    "ordinary_route_v27.py": {
+      "bytes": 1191,
+      "sha256": "1ec5218d4a165cec2009c6353290d4589cfc2dbe67b228ff48fec901d240c7be"
+    },
+    "ordinary_manifest_v27.py": {
+      "bytes": 1099,
+      "sha256": "5491a0fcd4354406edb2e989271b8b9dd884b17ba596619a57771a86d1818a92"
+    },
+    "native_probe.py": {
+      "bytes": 5072,
+      "sha256": "ba21a8452e1b70d4725f387babcf31c6c994868137cf5a50552812e43bd61c90"
+    }
+  },
+  "verification": "Seven Python candidate/control modules compiled from bytes only. No import of new runtime modules, no native probes, child/control launches, real cache copies, engine or build. Shared CaseLedger data evaluated only to catalog158 PENDING IDs.",
+  "implemented": {
+    "native_input_gate": "Owned stdin PIPE withheld until positive sampled native birth, proc_pidpath, PPID/PGID/UID and RSS; callback; sampler/token/exec recheck; <=16KiB nonblocking writes, EOF after complete request; raw proof/first-byte/complete timestamps.",
+    "ordinary_Bash_gate": "Actual /bin/bash + exact accepted v31 builtin gate file; controlled line releases reviewed copy script only after actual Bash proof.",
+    "opaque_owned_calls": "Per-call private Popen/birth owner; async worker + started/wait/input-delivered state. Scoped interrupts need parent-sealed per-case source/request grant or explicit control-only enum. Owner queue re-proves native image/birth/RSS before signal; two numeric absence observations; unknown closeout retains reservations and blocks new work. No public PID API. Closed now also requires actual owner-thread join, positive native closure and sampler/helper shutdown; a worker event alone never releases growth reservations. Negative signal exit requires that owner\u2019s actual interrupt acknowledgment.",
+    "semantic_contract": "Driver.call explicitly consumes timeout/code/env/on_started. raw env None preserved. Row includes executable_sha256; publish0/2 yields AssertionError(own_row) only for genuine conflict. Source-mapped EXP_EXIT can return raw86 AssertionError for Harness.ObservedExit; not a crash pass. No shared last. Technical failures remain censored exceptions.",
+    "producer_bindings": "Candidate token/source/binary checks stay strict. Closed historical grant separately binds active final source/guard plus actual historical source-member bytes/build receipt/binary/case/run/request/env/fixture scope/expiry; historical labels never final labels; unbound overrides refused.",
+    "growth": "Required parent-hashed per-case/action/role/response-growth manifest; no2*root or3*root multiplier. Existing census counts roots once; pending new deltas remain conservative until operation closeout. Source-complete forecast population/full topology still pending final source.",
+    "stream_copy": "Separate source and destination nested ownership; source FD closes if destination.open fails. Fresh-file whole-length/file prospective admission, bounded64KiB reads/writes, regular O_NOFOLLOW/O_NONBLOCK input, identity/hash/size checks and retained partials. Lower-level source only; activation wrapper/finalpin/guard/C1/copy GO still required.",
+    "finite_front_gates": "OwnedCall constructor and invoke reject nonfinite/nonpositive timeouts; source streaming rejects nonfinite deadlines; adapter serializes requests with allow_nan=False before input file/serial allocation."
+  },
+  "focused_reference": {
+    "archive_sha256": "9ce3ded9aa01724c25074cf3b83505826f8d140c63311e383b99b409ac671ebe",
+    "archive_bytes": 51034,
+    "members": 9,
+    "member_bytes": 188865,
+    "receipt_sha256": "ae78d32a4a14d8327c3b4090fea3ea05f4f69b8542c0e3c281692ec7acc7b63a",
+    "all_members_verified": true,
+    "source_only_prefix": "shared-focused-v2",
+    "landing_reference": "90216ef1",
+    "reference_not_final_run": true
+  },
+  "coverage": {
+    "kind": "Mac-native-required-case-source-inventory-v32",
+    "focused_reference_landing": "90216ef1",
+    "focused_reference_receipt_sha256": "ae78d32a4a14d8327c3b4090fea3ea05f4f69b8542c0e3c281692ec7acc7b63a",
+    "case_ledger_source_sha256": "ce7fb4983b5f31e0f529a69431a169574e7ba5cb55e225b17d42d10354be931b",
+    "required_cases": 158,
+    "family_counts": {
+      "activation": 1,
+      "focused": 8,
+      "legacy-packing": 52,
+      "legacy-recovery": 24,
+      "new-focused": 43,
+      "ordinary": 1,
+      "strict": 24,
+      "workspace": 5
+    },
+    "all_statuses_PENDING": true,
+    "final_pin_received": false,
+    "shared_v5_decoder_received": false,
+    "v2_reference_not_final_run": true,
+    "pending_core_revisions": [
+      "sole-publisher positive-work overlap v3",
+      "new terminal cancel/death interface"
+    ],
+    "no_hardcoded_267_or_282_event_gate": true,
+    "full_inventory_sha256": "cd96e0f212c481257127aec3f601bf852156cdcc853fb8ea21de402106298146",
+    "full_inventory_bytes": 93922,
+    "full_bridge_ready": false,
+    "pending_adapter_facade": "NativeAdapter currently requires explicit case_id/forecast_id. Driver exposes a current_case hook for the future final shared preflight facade; it is not yet wired. No unsupported oracle/barrier/overlap/cancel/death/paged hook is advertised as passing."
+  },
+  "not_yet_implemented_or_qualified": [
+    "Full shared Harness preflight/current_case/before_call and authentic ready-barrier facade. Existing per-call NativeAdapter/Driver APIs are source-only primitives; full bridge is not ready.",
+    "Sole-publisher positive WORK overlap v3 and final terminal cancellation/death API, source checkpoint maps and actual interval evidence. Before-stdin startup is not overlap evidence.",
+    "Shared v5 decoder/oracle/schema-bound corruption and lifetime constructors; no legacy decoder fallback.",
+    "Exact final source pin and complete per-case growth forecasts, all five actual workspace unit names/binaries, all17 ordinary routes. Full158 case mappings remain PENDING.",
+    "Real historical-client compatibility run and authenticated real parent grant. Synthetic validator controls do not launch old binaries.",
+    "Copy activation/final lock manifest/source+guard binding; realC1 remains absent.",
+    "Actual267/282-or-revised full-stage cumulative identity cadence and complete raw gzip/closure evidence."
+  ],
+  "future_control_source": "control_native_v33.py under unchanged guard_v20.py --control-only only after parent review",
+  "proposed_control_cases": [
+    "Nonfinite/nonpositive owned timeouts, nonfinite stream deadline and nonfinite JSON input reject without native launch or destination file",
+    "Fast fake native immediate-EOF exit with proof before first byte, no post-input sleep",
+    "196608-byte input backpressure via nonblocking IO",
+    "Callback failure and wrong actual image censor before input; both positive closures",
+    "Real owned terminate after fake child authentic ready-file write, exact native proof and -15 raw exit",
+    "Two concurrent Driver.call publisher conflicts: exact distinct per-call rows, env outside payload, correct binary SHA",
+    "None env distinction plus declared raw86 observation, not crash-case pass",
+    "Actual native Bash paused before SELECTED/helper reads then exact selected-once copy",
+    "137123-byte synthetic F08 streaming copy with64KiB chunks; prewrite ceiling; wrong hash retains partial; destination-open injection proves source FD EBADF",
+    "Synthetic closed historical validator: positive actual old source/binary labels and7 negative cases; no old binary launch"
+  ],
+  "control_native_invocations": 10,
+  "proposed_growth": {
+    "F01": {
+      "bytes": 262144,
+      "files": 16
+    },
+    "F04": {
+      "bytes": 0,
+      "files": 0
+    },
+    "F08": {
+      "bytes": 1048576,
+      "files": 32
+    },
+    "F12": {
+      "bytes": 3145728,
+      "files": 96
+    },
+    "F13": {
+      "bytes": 0,
+      "files": 0
+    },
+    "C1": {
+      "bytes": 0,
+      "files": 0
+    }
+  },
+  "F12_proposal_change": "3MiB proposed growth supersedes earlier2MiB estimate for this larger10-call packet and outer/keeper512KiB receipt ceilings. Native24MiB category cap unchanged. Not admitted for execution by this source packet.",
+  "control_limits": {
+    "outer_seconds": 45,
+    "outer_identity_budget": 64,
+    "per_role_identity_budget": 16,
+    "per_role_RSS_evidence_cap": 16384,
+    "per_role_stdout_cap": 8192,
+    "per_role_stderr_cap": 8192,
+    "per_role_receipt_cap": 32768,
+    "per_role_input_cap_max": 262144,
+    "reader_bytes": 268435456,
+    "checker_bytes": 2147483648,
+    "outer_bytes": 2147483648,
+    "all_new_helpers_bytes": 805306368,
+    "total_bytes_less_than": 3221225472
+  },
+  "control_static_allocation_envelope": {
+    "regular_role_stream_files": 40,
+    "input_files_upper": 12,
+    "other_F12_files_upper": 35,
+    "role_evidence_and_response_receipt_ceiling_bytes": 655360,
+    "input_total_upper": 230000,
+    "call_log_ceiling": 262144,
+    "outer_RSS_ceiling": 131072,
+    "outer_outputs_ceiling": 16384,
+    "outer_and_keeper_receipt_ceiling": 1048576,
+    "other_reports_and_finalize_upper": 300000,
+    "proposed_F12_bytes": 3145728,
+    "note": "Conservative bounded source estimate only; actual prospective six-category census required immediately before any later authorized control launch."
+  },
+  "all_new_controls_NOT_RUN": true,
+  "engine_cache_build_full_corpus_GO": false,
+  "accepted_v20_core_edited": false,
+  "current_F08_capacity": 100663296,
+  "proposed_448_480MiB_NOT_ADOPTED": true,
+  "fixed_t0": "2026-10-20T19:10:14Z",
+  "functional_cutoff": "2026-10-21T11:10:14Z",
+  "closeout_cutoff": "2026-10-21T13:10:14Z",
+  "clock_reset": false,
+  "supersedes_unreviewed_draft_packet_sha256": "ea0685bebc7de0129e80282eb16528efd0b7698f462c20097cad5718d6d53ee7",
+  "new_source_bytes": 78049,
+  "new_source_files": 7,
+  "new_control_fixture_prefix_exists": false,
+  "preserved_unreviewed_v32_drafts": {
+    "role_driver_v32.py": {
+      "bytes": 28317,
+      "sha256": "7ccdf8f17901434b591398a5aeef539c7ea054420c8d6295502c9993cc7d9716"
+    },
+    "capsule_adapter_v32.py": {
+      "bytes": 17125,
+      "sha256": "286631580e159ed6b2bd6f14c79a9fc29a59ee632309fc3cf86a11a74a8c0c9a"
+    },
+    "cache_stream_v32.py": {
+      "bytes": 4035,
+      "sha256": "961e7a03832bf4f40ae2082d8aa6fca2dd5bacf322e1d2fcfb2283b7db4a03a2"
+    },
+    "control_native_v32.py": {
+      "bytes": 12020,
+      "sha256": "23663a758a2d974ee3ecdcaaa89acea1a0ddf56b6ec8c9ff801f3d4b38aca9fc"
+    },
+    "control_historical_v32.py": {
+      "bytes": 5117,
+      "sha256": "e54e9af06ed98720b88530aace3200827f8785612a4fcd1b6ab1d0c0a73669dd"
+    }
+  },
+  "revision_reason": "Preserve v32 drafts and add explicit finite local deadlines/timeouts and finite JSON input before native launch or source-file copying."
+}

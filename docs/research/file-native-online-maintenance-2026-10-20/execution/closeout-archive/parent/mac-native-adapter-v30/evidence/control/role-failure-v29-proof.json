@@ -1,0 +1,119 @@
+[
+  {
+    "case": "memory",
+    "expected": "explicit-reader-RSS-cap",
+    "result": {
+      "role": "reader",
+      "limit_bytes": 268435456,
+      "failures": [
+        "RuntimeError('explicit-reader-RSS-cap')",
+        "RuntimeError(\"RuntimeError('explicit-reader-RSS-cap')\")"
+      ],
+      "samples": 4,
+      "max_start_gap_s": 0.012799374759197235,
+      "peak_RSS_bytes": 289062912,
+      "closure": [
+        {
+          "monotonic": 3223824.855595583,
+          "identities": [
+            {
+              "pid_requested": 67222,
+              "returned_bytes": 0,
+              "errno": 3,
+              "expected_bytes": 136
+            }
+          ],
+          "absent": true
+        },
+        {
+          "monotonic": 3223824.880619958,
+          "identities": [
+            {
+              "pid_requested": 67222,
+              "returned_bytes": 0,
+              "errno": 3,
+              "expected_bytes": 136
+            }
+          ],
+          "absent": true
+        }
+      ],
+      "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+      "source_pin": "CONTROL_ONLY",
+      "exit": -9,
+      "seconds": 0.03832270810380578,
+      "guarded_seconds": 0.09424033341929317,
+      "output_complete": false,
+      "outputs": {
+        "stdout": {
+          "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/role-failure-memory-v29/stdout.bin",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/role-failure-memory-v29/stderr.bin",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    }
+  },
+  {
+    "case": "timeout",
+    "expected": "role-timeout",
+    "result": {
+      "role": "checker",
+      "limit_bytes": 2147483648,
+      "failures": [
+        "RuntimeError('role-timeout')"
+      ],
+      "samples": 15,
+      "max_start_gap_s": 0.012664792127907276,
+      "peak_RSS_bytes": 14974976,
+      "closure": [
+        {
+          "monotonic": 3223825.1301275,
+          "identities": [
+            {
+              "pid_requested": 67223,
+              "returned_bytes": 0,
+              "errno": 3,
+              "expected_bytes": 136
+            }
+          ],
+          "absent": true
+        },
+        {
+          "monotonic": 3223825.153729625,
+          "identities": [
+            {
+              "pid_requested": 67223,
+              "returned_bytes": 0,
+              "errno": 3,
+              "expected_bytes": 136
+            }
+          ],
+          "absent": true
+        }
+      ],
+      "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+      "source_pin": "CONTROL_ONLY",
+      "exit": -9,
+      "seconds": null,
+      "guarded_seconds": 0.23034524964168668,
+      "output_complete": false,
+      "outputs": {
+        "stdout": {
+          "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/role-failure-timeout-v29/stdout.bin",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/private/tmp/file-native-online-macos-20261020/evidence/roles/role-failure-timeout-v29/stderr.bin",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    }
+  }
+]

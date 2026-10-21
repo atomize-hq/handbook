@@ -1,0 +1,17 @@
+{
+  "claim_id": "44GiB-CENTRAL-042-SHARED-RUNTIME-CONTRACTS80KiB",
+  "utc": "2026-10-21T03:34:10.376612+00:00",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T033410Z.json",
+      "bytes": 2406,
+      "sha256": "59d21fa39a24e2cf4f9464265135d6604121285ad18691d1f776ba99c93daceb"
+    },
+    {
+      "file": "claim-20261021T033410Z.md",
+      "bytes": 273,
+      "sha256": "ee6d62832b9707019fa2dfdf61a656d7c6f43277b1eddad0f2fbe8711738d95e"
+    }
+  ]
+}

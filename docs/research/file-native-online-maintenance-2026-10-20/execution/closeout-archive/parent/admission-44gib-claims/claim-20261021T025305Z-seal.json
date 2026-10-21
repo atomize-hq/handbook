@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-039-WINDOWS-CONTROLS-ADAPTER2KiB-TRANSFER",
+  "utc": "2026-10-21T02:53:05.048686+00:00",
+  "status": "SOURCE_PERFILE_TRANSFER_ONLY__NEW_BUDGET_SOURCE_GO_REQUIRED",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T025305Z.json",
+      "bytes": 3330,
+      "sha256": "2ad791f85e6bddb49bf47bd731259606ccd0cf936bec8c99d1554e1c91376e1d"
+    },
+    {
+      "file": "claim-20261021T025305Z.md",
+      "bytes": 528,
+      "sha256": "7d1d0ba6849fe9fe920f5f7b8d272dedee7073a1f139a4c734c1247b6f89e2ee"
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "kind": "independent-cp4-paced-source-only-review",
+  "scope": "exact frozen 30-file bundle; no execution qualification",
+  "source_freeze": {
+    "path": "C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be/cp4-paced-review/source-freeze-paced.json",
+    "bytes": 12601,
+    "sha256": "4434afbb3b5a4725f3d609001da93d9a4b55978bde3f7ce5cc148ab47caf2c4c",
+    "base": "a3f9805eccc19ede8dd5c735b54e675e98e63714",
+    "file_count": 30,
+    "total_bytes": 452222,
+    "initial_and_final_hash_comparisons": "all30 independently length/SHA checked twice; zero mismatches",
+    "packing": {
+      "bytes": 90226,
+      "sha256": "bebfdf8a3d5ec55eabc249054bfa50fd064419e03e2ad0fe915f73a7bf550bf5",
+      "growth_bytes": 13589,
+      "growth_cap_bytes": 16384,
+      "full_lines_read": 966
+    },
+    "checkpoint_controls": {
+      "files": 5,
+      "bytes": 65460,
+      "cap_bytes": 65536,
+      "previous_temporary_overrun": {
+        "actual": 66000,
+        "cap": 65536,
+        "over_by": 464,
+        "corrected_before_freeze": true,
+        "failure_preserved": true
+      }
+    },
+    "unchanged_inputs": "24 other Rust/Cargo exactly prior stage freeze; protocol.py unchanged",
+    "prior_stage_manifest_sha256": "9ec7c33e31ae7a23b5c0079dccc13d3f4f2a7c1798438f57458305bfd8920252"
+  },
+  "verdicts": {
+    "engine_pacing": "INTEGRATE bounded engine source only",
+    "frozen_pace_controls": "NO-INTEGRATE pending P1 correction",
+    "runtime_pacing": "NOT GO; reviewed native-owned-v1/Native4 adapter and registry absent",
+    "full_qualification": "INCOMPLETE"
+  },
+  "findings": [
+    {
+      "priority": "P1",
+      "file": "docs/research/file-native-online-maintenance-2026-10-20/checkpoint4/pace_controls.py",
+      "start": 131,
+      "end": 132,
+      "title": "Drain bounded Work between repeated publisher builds",
+      "trigger": "100 publishers; build after every10; initial and all10 successors cleanup=False; no cleanup call",
+      "consequence": "candidate Work exceeds128KiB; quota:physical-work-bytes; publisher future raises before bounded pacing PASS",
+      "evidence_paths": [
+        "packing.rs:331-352 consolidation preserves old Work history",
+        "packing.rs:513-533 appends older generations/jobs/retired descriptors",
+        "packing.rs:942-951 constructs and persists candidate Work",
+        "packing.rs:964 cleanup only on explicit true",
+        "physical_lifetime.rs:178-179 enforces128KiB after io::json",
+        "io.rs:224 uses serde_json::to_vec_pretty"
+      ],
+      "static_lower_bound": {
+        "bytes": 145423,
+        "descriptor_occurrences": 212,
+        "older_segment_counts": [
+          1,
+          2,
+          3,
+          4,
+          3,
+          4,
+          3,
+          4,
+          3,
+          4
+        ],
+        "older_descriptors_excluding_result": 124,
+        "current_descriptors_excluding_result": 12,
+        "loose_jobs_excluding_result": 44,
+        "retired_descriptors_excluding_result": 32,
+        "omitted": "ALL result descriptors, discovery and garbage; IDs/digits shortened; current generation plan null; repeated IDs/segments intentionally describe only a serialization lower bound, not a valid plan or fixture"
+      },
+      "limit_bytes": 131072,
+      "over_limit_by": 14351,
+      "method": "Pure JavaScript schema-size arithmetic only. No engine/native/fixture/test execution. JSON.stringify(space=2) over ASCII fields matches serde pretty shape. Intentionally shortened/repeated dummy values are NOT a valid Work object. All result descriptors omitted; real unique IDs, lengths, discovery and garbage increase bytes.",
+      "remediation": "Introduce budgeted cooperative cleanup at suitable intervals or amend activation workload/forecast, with held-reader pin and cadence still accounted; new source freeze/review. Do not enlarge Work cap or suppress refusal."
+    }
+  ],
+  "review_coverage": {
+    "complete_current_packing": true,
+    "all_five_controls_and_contracts": true,
+    "protocol": "previous full review, same hash",
+    "engine_checks": [
+      "closed Pace/PaceAnchor fields and count bounds",
+      "immutable origin/globalordinal/due overflow",
+      "native QPC and clock_gettime declared ABI",
+      "source-owned root allowlists and canonical disposable identity",
+      "sleep outside raw query timer; exact warm/first counts",
+      "cache owned capacity reconciliation and Rc alias refusal",
+      "semantic snapshot then cache/sole generation lease drop before timestamp",
+      "max2048 header/max4096 ready-anchor/10milestones",
+      "max60successors and100mslag status",
+      "adapter factory contract checked before fixture init"
+    ],
+    "clock_primary_sources": [
+      {
+        "url": "https://raw.githubusercontent.com/apple-oss-distributions/Libc/main/include/_time.h",
+        "supports": "CLOCK_MONOTONIC=6; clock_gettime signature"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/torvalds/linux/master/include/uapi/linux/time.h",
+        "supports": "CLOCK_MONOTONIC=1; kernel timespec declaration"
+      }
+    ],
+    "native_abi_qualification": "UNRUN; primary header inspection is not installed ABI/same-clock proof",
+    "gitnexus": "unavailable/unregistered checkout; impact UNKNOWN; manual HIGH; no edits/commit",
+    "structured_standard": "PROPOSED; no new authority/default/migration approval",
+    "source_read_freeze": "released after final all30hash check; no source reread afterward"
+  },
+  "tests": {
+    "literal_declarations": 23,
+    "by_source": {
+      "bounds_tests.rs": 1,
+      "disk.rs": 1,
+      "lifetime.rs": 4,
+      "paged.rs": 4,
+      "pack.rs": 3,
+      "packing.rs": 10
+    },
+    "new_pacing_names": [
+      "closed",
+      "schedule",
+      "header"
+    ],
+    "actual_runs_this_freeze": 0,
+    "builds_by_this_reviewer": 0,
+    "heavy_constructor_cache": "UNRUN on this freeze; once-only final-source native run remains required",
+    "global_boundary_obligations": "Rolling128/129, serialized32768/32769, freshbirth/stalejournal, raw8MiB/catalog64KiB/Work128KiB remain qualification; not extra source defects merely because cases missing"
+  },
+  "prohibited_actions_performed": {
+    "build": false,
+    "test": false,
+    "native": false,
+    "python_import": false,
+    "git": false,
+    "fixture_write": false,
+    "indexing": false,
+    "source_write": false
+  },
+  "resource_accounting": {
+    "manifest_v5_sha256": "ce01f5bc510f5472feaac941b82da16bf78b3c09d737231c4d2f2c9e4d01b3be",
+    "cap_bytes": 10485760,
+    "closed_membership": "all physical regular files recursively P incl archives/extracts; regularfiles at two Landing roots; admission/admission-claims/native-macos/reviews/final-protocol/windows-matrix/windows-cadence recursively except stream-snapshot-controls; exact20 promoted harness files",
+    "promoted_harness_bytes": 203215,
+    "before_review": {
+      "regular_files": 1053,
+      "actual_bytes": 8788954
+    },
+    "before_evidence": {
+      "actual_bytes": 8799461,
+      "actual_regular_files": 1055,
+      "maximum_pair_allowance": 40960,
+      "future_reserve": 256000,
+      "projection": 9096421,
+      "cap_bytes": 10485760
+    },
+    "future_reserve_bytes": 256000,
+    "pair_limit_bytes": 40960,
+    "folder_limit_bytes": 65536,
+    "folder_file_limit": 4,
+    "manifest_bytes": 12601,
+    "folder_max_projection_bytes": 53561,
+    "folder_projected_files": 3,
+    "credit": "No deletion/expiry/donor/relabel credit. Prior failed artifacts retained; prior8/9MiB failures not retroqualified."
+  },
+  "earlier_provisional_size_estimates": "Coordinator received265descriptor/~140185standalone assumption then224descriptor/154681nested; final report uses stronger212descriptor/145423lowerbound omitting ALL results and currentplan=null. These were static arithmetic refinements, never executed fixture outcomes."
+}

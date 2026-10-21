@@ -1,0 +1,39 @@
+{
+  "role": "checker",
+  "limit_bytes": 2147483648,
+  "failures": [
+    "RuntimeError('role-timeout')",
+    "RuntimeError(\"RuntimeError('role-timeout')\")"
+  ],
+  "samples": 12,
+  "max_start_gap_s": 0.015512083191424608,
+  "peak_RSS_bytes": 14712832,
+  "closure": [
+    {
+      "monotonic": 3221722.13153225,
+      "identities": [
+        {
+          "pid_requested": 13688,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    },
+    {
+      "monotonic": 3221722.161086416,
+      "identities": [
+        {
+          "pid_requested": 13688,
+          "returned_bytes": 0,
+          "errno": 3,
+          "expected_bytes": 136
+        }
+      ],
+      "absent": true
+    }
+  ],
+  "binary_sha256": "462a4a5541dcc3408115ad2bcd3580c6a196818726ed57592a4d253768885fdf",
+  "source_pin": "CONTROL_ONLY"
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "Mac-native-required-case-source-inventory-v32",
+  "focused_reference_landing": "90216ef1",
+  "focused_reference_receipt_sha256": "ae78d32a4a14d8327c3b4090fea3ea05f4f69b8542c0e3c281692ec7acc7b63a",
+  "case_ledger_source_sha256": "ce7fb4983b5f31e0f529a69431a169574e7ba5cb55e225b17d42d10354be931b",
+  "required_cases": 158,
+  "family_counts": {
+    "activation": 1,
+    "focused": 8,
+    "legacy-packing": 52,
+    "legacy-recovery": 24,
+    "new-focused": 43,
+    "ordinary": 1,
+    "strict": 24,
+    "workspace": 5
+  },
+  "all_statuses_PENDING": true,
+  "final_pin_received": false,
+  "shared_v5_decoder_received": false,
+  "v2_reference_not_final_run": true,
+  "pending_core_revisions": [
+    "sole-publisher positive-work overlap v3",
+    "new terminal cancel/death interface"
+  ],
+  "no_hardcoded_267_or_282_event_gate": true,
+  "full_inventory_sha256": "cd96e0f212c481257127aec3f601bf852156cdcc853fb8ea21de402106298146",
+  "full_inventory_bytes": 93922,
+  "full_bridge_ready": false,
+  "pending_adapter_facade": "NativeAdapter currently requires explicit case_id/forecast_id. Driver exposes a current_case hook for the future final shared preflight facade; it is not yet wired. No unsupported oracle/barrier/overlap/cancel/death/paged hook is advertised as passing."
+}
