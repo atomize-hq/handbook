@@ -1,0 +1,27 @@
+{
+  "kind": "private-windows-bounded-guard-source-only-031",
+  "source_only": true,
+  "runtime_go": false,
+  "owner": "01a15ae1-839d-7b02-843b-558ddc9e78cc",
+  "source_root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard",
+  "claim031_sha256": "d0dea4565c6287aaf6459f070e4956a5e8ee2b31f532c04c97c2d3507c5ca19c",
+  "max_bytes": 65536,
+  "max_files": 4,
+  "paths": {
+    "job_guard_bounded.py": 49152,
+    "controls.py": 8192,
+    "README.md": 4096,
+    "source-receipt.json": 4096
+  },
+  "donor_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "rules": [
+    "New private version only; preserve donor and all prior raw receipts/callers",
+    "Closed finite evidence_bounds required before heavy token; no inferred runtime defaults",
+    "Pre-admit every encoded collection, row, gzip stored-block byte, stdio capture/tail, final JSON and shared-control temporary coexistence",
+    "Cap produces durable labelled CENSOR, freezes ordinary evidence growth, terminates only owned Job and retains closure uncertainty",
+    "Preserve positive suspended sample, actual handle creation+Job membership, full QPC completed coverage, unreadable LIVE failclosed, aggregate RSS/free floors, two numeric empty observations",
+    "Pure in-memory AST/compile allowed; no imports/native Jobs/controls/engine/build/cache/corpus/Git mutation",
+    "All four caps and 65536/4 checked before every write; original C3 allocation excluded META, separate review copies included META9",
+    "Source freeze2026-10-21T04:10:14Z,functional11:10:14Z,closeout13:10:14Z unchanged"
+  ]
+}

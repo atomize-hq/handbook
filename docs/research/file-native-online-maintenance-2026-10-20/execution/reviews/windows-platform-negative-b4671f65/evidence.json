@@ -1,0 +1,56 @@
+{
+  "bounded_source_disposition": "REMEDIATE",
+  "control_GO": false,
+  "runtime_GO": false,
+  "full_qualification": "INCOMPLETE",
+  "all_real_cases": "PENDING",
+  "files": 27,
+  "bytes": 222646,
+  "all_entry_completion_hashes_match": true,
+  "receipt_sha256": "b4671f65fe56b6cf964aa850c843fac49fa36c0fe4050891a5a302dc8ab76ec6",
+  "manifest26_sha256_independently_recomputed": "3e3505e2cba61387327f802deae11d6885ba0996410f4cdcc97dc25cee8fd3c3",
+  "complete_read_groups": {
+    "python_modules": {"files": 11, "bytes": 121436},
+    "case_data": {"files": 8, "bytes": 59371},
+    "bindings_including_receipt": {"files": 8, "bytes": 41839}
+  },
+  "transitive_source": {
+    "accepted_QPC_full_source_read_and_hash_verified": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+    "shared_core_hash_verified_prior_review_inherited_contract_rechecked": "7ce0a4a06a35fa9e7f4f4080a40315a418bb45e47a8946ca06d78c2117d855e8"
+  },
+  "case_maps": {"IDs": 166, "unique_IDs": 166, "all_pending": true, "actual_final_unit_catalog": null, "full_body_E_total": null},
+  "findings": [
+    {"id": "W1", "priority": 1, "file": "windows_driver.py", "line": 292, "cause": "Tail until initialized only on reap exception; successful reap with unread pipes escapes finally before raw and resource cleanup"},
+    {"id": "W2", "priority": 1, "file": "windows_native.py", "line": 156, "supporting_lines": [147, 279, 291], "cause": "Native termination and identity/Popen handle closure lack one serialized capability lifetime; setup fallback can use already closed numeric Popen HANDLE"},
+    {"id": "W3", "priority": 2, "file": "windows_driver.py", "line": 178, "supporting_lines": [122, 135], "cause": "List RHS partial pipe acquisition loses earlier handles; registered pre-try image hash failure strands evidence and done state"},
+    {"id": "W4", "priority": 2, "file": "windows_adapter.py", "line": 250, "supporting_lines": [255, 261], "cause": "Reader cancel/death interrupt returns request instead of shared required closed proof; ordinary injected error cannot satisfy intentional_interrupt==error"}
+  ],
+  "proof_type": "Static causal source inspection only; proposed reproduction/verification schedules in report",
+  "executed": {"supplied_module_imports": 0, "controls": 0, "compile_checks": 0, "native_API_or_Job": 0, "engine_build_or_oracle": 0, "Git_index_bootstrap": 0, "fixture_or_source_writes": 0, "subagents_or_chats": 0},
+  "prepared_controls": {"literal_sites": 43, "max_checks_proposal": 64, "max_Python_traced_bytes_proposal": 8388608, "reviewer_executed": false},
+  "META8_prewrite_census": {
+    "utc": "2026-10-21T01:19:39.2796923Z",
+    "membership_sha256": "a3d26618a7d0e1facaef914831be1be8f87eab7747d56292e8e8afe26fa8b106",
+    "P_files": 683,
+    "P_bytes": 5512881,
+    "whole_files": 929,
+    "whole_bytes": 7881876,
+    "promoted_harness_files": 20,
+    "promoted_harness_bytes": 203215,
+    "report_reserved_bytes": 32768,
+    "future_packet_reserved_bytes": 262144,
+    "prospective_bytes": 8176788,
+    "cap_bytes": 8388608,
+    "prospective_slack_bytes": 211820,
+    "scope": "All P recursive + exact Landing closed membership; stream-snapshot-controls and original helper/windows/native-linux exclusions honored",
+    "deletion_or_expiry_credit": 0
+  },
+  "new_reports": ["review.md", "evidence.json"],
+  "combined_report_cap_bytes": 32768,
+  "report_cap_files": 2,
+  "notifications": "Authorized meta chat 01a15ab8-d85f-71b1-8d37-c3c5689790be only",
+  "clock_reset": false,
+  "source_freeze_release": "Static review complete; parent routing only",
+  "functional_cutoff_utc": "2026-10-21T11:10:14Z",
+  "protected_closeout_utc": "2026-10-21T13:10:14Z"
+}

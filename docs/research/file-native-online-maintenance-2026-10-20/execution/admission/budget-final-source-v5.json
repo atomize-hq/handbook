@@ -1,0 +1,155 @@
+{
+  "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
+  "categories": {
+    "source": {
+      "bytes": 1081344,
+      "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook",
+      "files": 200
+    },
+    "source_admin": {
+      "bytes": 2097152,
+      "root": "C:/Users/spmcc/Documents/__Project_Code/handbook/.git/worktrees/handbook9",
+      "files": 100,
+      "nonadditive_subset_of": "shared_git"
+    },
+    "protocol": {
+      "bytes": 33554432,
+      "root": "C:/file-native-online-matrix-20261020/protocol",
+      "files": 25000
+    },
+    "document_controls": {
+      "bytes": 67108864,
+      "root": "C:/file-native-online-matrix-20261020/document-controls",
+      "files": 30000
+    },
+    "receipts": {
+      "bytes": 54525952,
+      "root": "C:/file-native-online-matrix-20261020/receipts",
+      "files": 10000
+    },
+    "history": {
+      "bytes": 1073741824,
+      "root": "C:/file-native-online-matrix-20261020/history",
+      "files": 400000
+    },
+    "shared_git": {
+      "bytes": 25165824,
+      "root": "C:/Users/spmcc/Documents/__Project_Code/handbook/.git",
+      "files": 5000,
+      "charge_mode": "positive_delta",
+      "baseline_files": 2499,
+      "baseline_bytes": 252177643
+    },
+    "shared_cargo": {
+      "bytes": 25165824,
+      "root": "C:/Users/spmcc/.cargo",
+      "files": 5000,
+      "charge_mode": "positive_delta",
+      "baseline_files": 18188,
+      "baseline_bytes": 893702027
+    },
+    "stream_receipts": {
+      "root": "C:\\file-native-online-matrix-20261020\\receipts\\stream-control-main",
+      "bytes": 983040,
+      "files": 40,
+      "nonadditive_subset_of": "receipts"
+    },
+    "stream_landing_controls": {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-matrix\\stream-snapshot-controls",
+      "bytes": 65536,
+      "files": 9
+    },
+    "final_protocol_source": {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\final-protocol",
+      "bytes": 229376,
+      "files": 16,
+      "nonadditive_subset_of": "source",
+      "owner_chat": "01a15b6c-b109-7090-a8c2-0e165f92f51e",
+      "scope": "Bounded v3 overlap and explicit reviewed terminal-owner API adaptation; source/purememory only, no engine/native/Git"
+    },
+    "windows_cadence_source": {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-cadence",
+      "bytes": 65536,
+      "files": 8,
+      "nonadditive_subset_of": "source",
+      "owner_chat": "01a15b8f-0e20-7553-941c-3210d5cb46e6",
+      "scope": "NEWsourceonly; frozenjob_guard1e4 unchanged; no controls until parentstaticreview and runregistration"
+    },
+    "windows_cadence_protocol": {
+      "root": "C:/file-native-online-matrix-20261020/protocol/windows-cadence",
+      "bytes": 1048576,
+      "files": 100,
+      "nonadditive_subset_of": "protocol"
+    },
+    "windows_cadence_receipts": {
+      "root": "C:/file-native-online-matrix-20261020/receipts/windows-cadence",
+      "bytes": 1048576,
+      "files": 40,
+      "nonadditive_subset_of": "receipts"
+    },
+    "paged_controls_protocol": {
+      "root": "C:/file-native-online-matrix-20261020/protocol/paged-controls-v5",
+      "bytes": 2097152,
+      "files": 300,
+      "nonadditive_subset_of": "protocol"
+    }
+  },
+  "groups": {
+    "F13_windows_shared_support": {
+      "files": 5000,
+      "categories": [
+        "shared_git",
+        "shared_cargo"
+      ],
+      "bytes": 25165824
+    },
+    "F12_matrix_evidence_total": {
+      "categories": [
+        "receipts",
+        "stream_landing_controls"
+      ],
+      "bytes": 54525952,
+      "files": 10000
+    }
+  },
+  "claim009_sha256": "dfe85f98db9820fbda0cdaf96bd97b51fdb376679df03646099e9d015fe31653",
+  "claim010_sha256": "088331e9e86133ac9f612aaf44d8cb1a32814c55632517eca9d0be3f8f1c16a0",
+  "claim011_sha256": "107f419f47418eeefa40dffc5e2bd70b38743e388de10246b92597c8055c4b49",
+  "allocation_notes": {
+    "matrix_plus_stream_total_bytes": 54525952,
+    "matrix_nonstream_receipts_max_bytes": 53477376,
+    "stream_runtime_bytes": 983040,
+    "stream_landing_bytes": 65536,
+    "prior_overrun_preserved": "Claim011 actual runtime472977 exceedsold458752 by14225; laterlanding57266 yieldscombined530243 exceedsold524288 by5955; not retroactivepass",
+    "final_run_forecast": "runtime472977+327680=800657<983040; landing57266+6144=63410<65536; protocol165forecast<=166 and2MiB; final32controls90s prospective; outerfinalJSON/RSS ownoutput reservations included",
+    "frozen_other_landing_harness_files": 21,
+    "source_only_suballocations": "BaseF01source1MiB+C3topup32KiB same root1081344; focus224KiB16+QPC64KiB8+other768KiB176; global unchanged",
+    "matrix_excluding_reserved_receipts_max_bytes": 52428800,
+    "windows_cadence_receipts_bytes": 1048576,
+    "source_admin_transient": "Before every Git write: actual index + equal-size index.lock + other admin <=2MiB; shared F13 positive growth additionally enforced. Past transient unmeasured.",
+    "run_permission": "Source registration only. Any run requires separate exact parent finite GO; final native/fullmatrix NOT authorized.",
+    "registration": "After positive12rootbatch and90sQPCcorrection closure; priorv3 immutable, fullruntimeGOs not inherited",
+    "C3_source_topup_bytes": 32768,
+    "quota_v2_source_owner": "01a15ae2-798d-7a91-b063-7e45b4768671",
+    "quota_v2_closed_new_file_caps": {
+      "quota_v2_oracle.py": 14336,
+      "quota_v2_controls.py": 14336,
+      "verify_operational_v2.py": 10240,
+      "physical_decoder_v6.py": 4096,
+      "quota-v2-plan.md": 2048
+    },
+    "quota_v2_scope": "SOURCEONLY private owner oracle against reviewed9ec7 STAGE lifetime3172; v5/R1/paged originals unchanged; no runtime/control/oracle/native/build/Git authorization"
+  },
+  "source_reservation_categories": [
+    "final_protocol_source",
+    "windows_cadence_source"
+  ],
+  "claim014_sha256": "992e41ef6aa6aeec05532663e531e08d158ef22550ec61dec5d17ac1ede03ff4",
+  "claim018_sha256": "cef59d7dc178514fe3564b34b46ce6b78ba5a5d9b9f85149772793df2eaf8d75",
+  "claim019_sha256": "04e70d78bc8bbe25c9542ed1718c2416680186b9c875e32ed572bde869117a5c",
+  "receipt_reservation_categories": [
+    "stream_receipts",
+    "windows_cadence_receipts"
+  ],
+  "claim026_sha256": "18e44280b22f62d6b0c1c3441a8d0cfbefd20b369ffbaad0d4db71ac9d49114e"
+}

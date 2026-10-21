@@ -1,0 +1,124 @@
+{
+  "status": "DRAFT_READONLY_PREFLIGHT_NO_RUN",
+  "run_go": false,
+  "source_freeze_sha256": "9ec7c33e31ae7a23b5c0079dccc13d3f4f2a7c1798438f57458305bfd8920252",
+  "verified_source_control_files": 29,
+  "actual_tests_executed": 0,
+  "runtime_engine_calls": 0,
+  "input_bytes": 4321,
+  "census_and_prospective": {
+    "categories": {
+      "source": {
+        "bytes": 464402,
+        "files": 39,
+        "absolute_actual": {
+          "bytes": 464402,
+          "files": 39
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 1048576,
+        "cap_files": 400
+      },
+      "source_admin": {
+        "bytes": 931525,
+        "files": 8,
+        "absolute_actual": {
+          "bytes": 931525,
+          "files": 8
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": false,
+        "cap_bytes": 2097152,
+        "cap_files": 100
+      },
+      "build": {
+        "bytes": 201412934,
+        "files": 517,
+        "absolute_actual": {
+          "bytes": 201412934,
+          "files": 517
+        },
+        "reserve_bytes": 50331648,
+        "reserve_files": 150,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 268435456,
+        "cap_files": 5000
+      },
+      "fixtures": {
+        "bytes": 77395734,
+        "files": 12078,
+        "absolute_actual": {
+          "bytes": 77395734,
+          "files": 12078
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 201326592,
+        "cap_files": 75000
+      },
+      "evidence": {
+        "bytes": 44527021,
+        "files": 387,
+        "absolute_actual": {
+          "bytes": 44527021,
+          "files": 387
+        },
+        "reserve_bytes": 393216,
+        "reserve_files": 25,
+        "charge_mode": "absolute",
+        "additive_charge": true,
+        "cap_bytes": 50331648,
+        "cap_files": 10000
+      },
+      "shared_git": {
+        "bytes": 5329637,
+        "files": 929,
+        "absolute_actual": {
+          "bytes": 257507280,
+          "files": 3428
+        },
+        "reserve_bytes": 0,
+        "reserve_files": 0,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      },
+      "shared_cargo": {
+        "bytes": 0,
+        "files": 0,
+        "absolute_actual": {
+          "bytes": 893702027,
+          "files": 18188
+        },
+        "reserve_bytes": 1048576,
+        "reserve_files": 64,
+        "charge_mode": "positive_delta",
+        "additive_charge": true,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      }
+    },
+    "shared_groups": {
+      "F13_Windows_shared": {
+        "bytes": 6378213,
+        "files": 993,
+        "cap_bytes": 25165824,
+        "cap_files": 5000
+      }
+    },
+    "free_bytes": 199588380672,
+    "epoch": 1792545211.0700727,
+    "qualification": "logical bytes; no planned deletion credit; parent owns cross-host ledger"
+  },
+  "own_receipt_covered_by_evidence_reserve": true,
+  "old_unused_82b8_budget_preserved_not_additive": true
+}

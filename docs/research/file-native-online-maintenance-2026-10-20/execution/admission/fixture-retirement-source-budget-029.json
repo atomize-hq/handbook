@@ -1,0 +1,33 @@
+{
+  "kind": "fixture-retirement-source-only-v1",
+  "claim029_sha256": "d574c59a7a08f480a2570f6e526e0762899b28eee5383118760937743335a1b4",
+  "owner": "01a15b8f-0e20-7553-941c-3210d5cb46e6",
+  "root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/fixture-retirement",
+  "source_only": true,
+  "runtime_control_archive_copy_delete_go": false,
+  "bytes": 65536,
+  "files": 4,
+  "paths": {
+    "archive.py": 32768,
+    "controls.py": 16384,
+    "README.md": 8192,
+    "source-receipt.json": 8192
+  },
+  "allocation": "Existing C3 source draw65536, total16MiB/global44GiB/5m/inside reserve unchanged. Originals C3ARCHIVE, not META; distinct reviews/packets META and Git positive growth F13.",
+  "rules": [
+    "Exactly four flat registered names; no fifth file, cache, subdir, bytecode or implicit test artifact",
+    "Before every write enforce individual/whole bounds and reserve all other files full remaining caps",
+    "Source/AST in-memory only; no reviewed-module import, control or native execution, archive writes, fixture copies, restore or deletion",
+    "No old protected roots, CP4, baselines, source/builds, rejected targets, LONG S/D or sole backup disposal",
+    "Any future archive/control/retirement requires separately reviewed source, concrete exact roots/allowlist/source/case/oracle/backup/native quiescence proofs and explicit parent phase GO",
+    "Retirement defaults NO_GO; no future deletion/compression/unused-forecast credit",
+    "Functional cutoff2026-10-21T11:10:14Z/sourcefreeze04:10:14Z unchanged"
+  ],
+  "future_archive_proposal": {
+    "compressed_max_bytes": 67108864,
+    "sidecar_and_finalization_max_bytes": 1048576,
+    "sidecar_regular_files": 4,
+    "admitted": false,
+    "coexistence": "Source + archive + all partials + retained previous host archives count inside each eventual F06/F08 fixture-body admission; no assumed compression ratio"
+  }
+}

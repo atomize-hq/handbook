@@ -1,0 +1,107 @@
+{
+  "claim_id": "44GiB-CENTRAL-028-QUOTA-V2-PERFILE4KiB-TRANSFER",
+  "utc": "2026-10-21T01:20:07.093138+00:00",
+  "status": "INTERNAL_PERFILE_CAP_TRANSFER_APPLIED__NEW_BUDGET_SOURCE_GO_BEFORE_GROWTH",
+  "authority": "METApriority028ONLY:4096Bcontrols->oracle; originalfive45056/5and026topup/wholecaps unchanged, nootherallocation ordiagnosticseal.",
+  "prior027": {
+    "file": "claim-20261021T010313Z.json",
+    "sha256": "6f6cb79f053b3c1578883bfeda76358ce9306f55bdfd880d7b433cc6f3ea43ae"
+  },
+  "amends026_per_file_caps_only": {
+    "file": "claim-20261021T010133Z.json",
+    "sha256": "18e44280b22f62d6b0c1c3441a8d0cfbefd20b369ffbaad0d4db71ac9d49114e",
+    "priorimmutable": true
+  },
+  "family_addendum": {
+    "file": "claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "files_cap": 128,
+    "bytes_cap": 524288
+  },
+  "owner_chat": "01a15ae2-798d-7a91-b063-7e45b4768671",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\harness",
+  "old_per_file_caps": {
+    "quota_v2_oracle.py": 14336,
+    "quota_v2_controls.py": 14336,
+    "verify_operational_v2.py": 10240,
+    "physical_decoder_v6.py": 4096,
+    "quota-v2-plan.md": 2048
+  },
+  "new_per_file_caps": {
+    "quota_v2_oracle.py": 18432,
+    "quota_v2_controls.py": 10240,
+    "verify_operational_v2.py": 10240,
+    "physical_decoder_v6.py": 4096,
+    "quota-v2-plan.md": 2048
+  },
+  "aggregate_unchanged": {
+    "bytes": 45056,
+    "files": 5,
+    "sameclosedpaths": true
+  },
+  "fresh_readonly_census": [
+    {
+      "file": "quota_v2_oracle.py",
+      "exists": true,
+      "bytes": 14333,
+      "sha256": "5d45287195d938d7c63faabc7649e6b4fba213bc8c0fd586883094979f38cd94"
+    },
+    {
+      "file": "quota_v2_controls.py",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "file": "verify_operational_v2.py",
+      "exists": true,
+      "bytes": 9673,
+      "sha256": "b50dec00d98754cc043b76da1ed6c123579e591e039a770b0fee7acffa68cef5"
+    },
+    {
+      "file": "physical_decoder_v6.py",
+      "exists": true,
+      "bytes": 3710,
+      "sha256": "71a9c83aee3c402d2603a26e3b400a48e01f6e7f58f563c1d0cfd624b4ca123e"
+    },
+    {
+      "file": "quota-v2-plan.md",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    }
+  ],
+  "census_actual_sum": 27716,
+  "oracle_old_cap_slack_before_claim": 3,
+  "oracle_new_cap_slack": 4099,
+  "reason": "ASTdraft14333nearoldcapbeforecompleteB-generation/privatepathproof; allowmaintainablecompletechecker, no omittedproof orminifiedlogic substitute. Additionalcapisnotfunctionalcheckeracceptance.",
+  "gate": [
+    "ParentNEWimmutablev6budgetbind028/newperfilecaps BEFOREexplicitSOURCEONLYGO andbeforeoracleexceeds14336. Ownerhasnotexceededoldlimit.",
+    "Samefivepaths/owners and026reviewgate/source-onlyscope persist. AllindividualANDfiveaggregateANDother/rootcaps checkedbeforewrites.",
+    "Allvalidated134/fc6/788/7d5sourcebindings unchangedbythisclaim; no helper9thpath oroldbytecore changes.",
+    "NoRUN/runtime/oracle/control/engine/build/copy/Git/nativeGO; review/staticnegativeevidence andexactsourcegates remain. Sourcefreeze04:10unchanged."
+  ],
+  "unchanged_caps_and_allocator": {
+    "C3_total": 16777216,
+    "C3_unsubclaimed": 3375104,
+    "026_C3topup": 32768,
+    "MatrixF01_base": 1048576,
+    "Matrix_combined_source": 1081344,
+    "other_source": 786432,
+    "root_files": 200,
+    "other_files": 176,
+    "focus224KiB": 229376,
+    "QPC64KiB": 65536,
+    "admin2MiB_nonaddF13": 2097152,
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "global_files": 4792652,
+    "unassigned_files": 207348,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "new_C3draw": 0,
+    "new_global_bytes": 0,
+    "new_global_files": 0
+  },
+  "actions": "Readonlyfive-filehash/cap/priorsealchecks andonecompact028triplet; nootherfiles/source/budget/runtimechanges."
+}

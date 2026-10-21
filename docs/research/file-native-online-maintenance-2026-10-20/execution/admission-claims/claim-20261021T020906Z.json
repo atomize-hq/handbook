@@ -1,0 +1,97 @@
+{
+  "claim_id": "44GiB-CENTRAL-033-FIXTURE-RETIREMENT-PERFILE-REDISTRIBUTION",
+  "utc": "2026-10-21T02:09:06.943537+00:00",
+  "status": "SOURCE_PERFILE_REDISTRIBUTION_ONLY__LATEST_PREWRITE_SPEC__NO_ARCHIVE_RUN_DELETE",
+  "authority": "METAupdatedarchiveexactspecarrivedbeforearchivecapreceiptsealed. Use43008/16384/4096/2048 directly, notearlier42/12/6/4KiBproposal. One033only; Windows032immutable.",
+  "prior032": {
+    "file": "claim-20261021T020756Z.json",
+    "sha256": "34287b0111983302ad3b0608d819beb1aaab258fb40bb030a4e0b4a274fb1e92"
+  },
+  "amends029_perfile_only": {
+    "file": "claim-20261021T012603Z.json",
+    "sha256": "d574c59a7a08f480a2570f6e526e0762899b28eee5383118760937743335a1b4",
+    "originalimmutable": true
+  },
+  "family_addendum": {
+    "file": "claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "cap_files": 128,
+    "cap_bytes": 524288
+  },
+  "owner_chat": "01a15b8f-0e20-7553-941c-3210d5cb46e6",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\fixture-retirement",
+  "old_caps": {
+    "archive.py": 32768,
+    "controls.py": 16384,
+    "README.md": 8192,
+    "source-receipt.json": 8192
+  },
+  "new_caps": {
+    "archive.py": 43008,
+    "controls.py": 16384,
+    "README.md": 4096,
+    "source-receipt.json": 2048
+  },
+  "aggregate_unchanged": {
+    "bytes": 65536,
+    "files": 4,
+    "exact_names": 4
+  },
+  "transfer": "archive+10240,README-4096,source-receipt-6144; controlsUNCHANGED16384. Net0. Earlierproposedcontrols12288revisionNEVERsealed/applied.",
+  "fresh_physical_snapshot": [
+    {
+      "file": "archive.py",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "file": "controls.py",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "file": "README.md",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    },
+    {
+      "file": "source-receipt.json",
+      "exists": false,
+      "bytes": 0,
+      "sha256": null
+    }
+  ],
+  "physical_actual_total": 0,
+  "old_and_new_caps_fit": true,
+  "owner_reported_MEMORY_draft_only": {
+    "archive.py": 41679,
+    "controls.py": 15927,
+    "archive_headroom_new": 1329,
+    "controls_headroom_new": 457,
+    "not_on_disk_resource_overrun": "Parentreportsbothauthorsheldbeforewrites; memorydraftsizesarenotnewphysicalsourcefilesorretrospectivecapfix."
+  },
+  "gate": [
+    "ParentNEWimmutablearchiveSOURCEbudgetbind033/029/exactcaps andexplicitSOURCEGO beforegrowth. EveryindividualANDwhole65536/4/namecap checked. Noimplicitfifthsourcefile.",
+    "Noactualarchive/control/fakeRUN/nativeJob/copy/restore/deletionorenginepermission. Future64MiBarchive+1MiBsidecarsremainsPROPOSALinsidefixturebodycoexistence/retainedfloor, noassumedcompressioncredit.",
+    "AlloldCP4/controls/baselines/LONGS+D/protectedarchives/solebackups/rejectedtargets excluded; newprefixclassification/retirementauthorizationstillUNKNOWN. Fullverifiedbytebackupbeforeanyfutureapprovedretirement, allsamefinalpincases/evidence retained, no95percent/productcredit."
+  ],
+  "unchanged_allocator": {
+    "C3_total": 16777216,
+    "C3_unsubclaimed": 2195456,
+    "archive_source": 65536,
+    "META9MiB": 9437184,
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "reserved_files": 4792652,
+    "unassigned_files": 207348,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "new_C3draw": 0,
+    "new_global_bytes": 0,
+    "new_global_files": 0
+  },
+  "actions": "Readonlyfourfile/cap/priorhashchecks+033triplet; nootherresource/source/livebudget/runtime/deletionchange. Sourcefreeze04:10unchanged."
+}

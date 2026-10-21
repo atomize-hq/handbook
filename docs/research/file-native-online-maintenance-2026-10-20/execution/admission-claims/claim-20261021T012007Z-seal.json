@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-028-QUOTA-V2-PERFILE4KiB-TRANSFER",
+  "utc": "2026-10-21T01:20:07.093138+00:00",
+  "status": "INTERNAL_PERFILE_CAP_TRANSFER_APPLIED__NEW_BUDGET_SOURCE_GO_BEFORE_GROWTH",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T012007Z.json",
+      "bytes": 4050,
+      "sha256": "3ad3354481b240452730d9c81f4984a3c852a38a6a3e1319ace2f158e5052ee9"
+    },
+    {
+      "file": "claim-20261021T012007Z.md",
+      "bytes": 646,
+      "sha256": "bd049154016502a036390cdae37c82575d6d3a67fd93ce16a4ba2c371c89f6bb"
+    }
+  ]
+}

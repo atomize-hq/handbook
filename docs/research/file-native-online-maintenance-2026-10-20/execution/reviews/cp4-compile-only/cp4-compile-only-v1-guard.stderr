@@ -1,0 +1,115 @@
+   Compiling file-native-incremental v0.1.0 (C:\Users\spmcc\.codex\worktrees\file-native-online-cp2-20261020\handbook\docs\research\file-native-incremental-engine-experiment-2026-10-18)
+warning: unused import: `Metrics`
+ --> src\graph.rs:2:23
+  |
+2 | use crate::{io::{self,Metrics,Result},objects::{self,Id,Objects},model::{self,Doc,Edge,Op,State}};
+  |                       ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `self`
+ --> src\store.rs:6:38
+  |
+6 | use std::{collections::BTreeMap,fs::{self,File,OpenOptions},path::{Path,PathBuf},time::{Instant,Duration}};
+  |                                      ^^^^
+
+warning: unused import: `PathBuf`
+ --> src\projection.rs:5:59
+  |
+5 | use std::{collections::{BTreeMap,BTreeSet},fs,path::{Path,PathBuf},time::Instant};
+  |                                                           ^^^^^^^
+
+warning: unused import: `OpenOptions`
+ --> src\packing.rs:8:54
+  |
+8 | use std::{collections::{BTreeMap,BTreeSet},fs::{File,OpenOptions},path::{Path,PathBuf},rc::Rc,time::{Duration,Instant}};
+  |                                                      ^^^^^^^^^^^
+
+warning: unused import: `Publication`
+ --> src\lifetime.rs:2:79
+  |
+2 | use crate::{io::{self,Metrics,Result},model::Selector,store::{Store,Candidate,Publication},objects};
+  |                                                                               ^^^^^^^^^^^
+
+warning: function `hash_bytes` is never used
+  --> src\pack.rs:61:4
+   |
+61 | fn hash_bytes(hash:&str)->Result<Vec<u8>> {
+   |    ^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: function `all_mapped` is never used
+   --> src\packing.rs:151:4
+    |
+151 | fn all_mapped(m:&mut Metrics)->Result<Vec<Key>> {
+    |    ^^^^^^^^^^
+
+warning: `file-native-incremental` (lib) generated 7 warnings (run `cargo fix --lib -p file-native-incremental` to apply 5 suggestions)
+   Compiling research-consumer v0.1.0 (C:\Users\spmcc\.codex\worktrees\file-native-online-cp2-20261020\handbook\docs\research\file-native-incremental-engine-experiment-2026-10-18\consumers\research)
+   Compiling project-consumer v0.1.0 (C:\Users\spmcc\.codex\worktrees\file-native-online-cp2-20261020\handbook\docs\research\file-native-incremental-engine-experiment-2026-10-18\consumers\project)
+    Finished `release` profile [optimized] target(s) in 19.11s
+warning: unused import: `Metrics`
+ --> src\graph.rs:2:23
+  |
+2 | use crate::{io::{self,Metrics,Result},objects::{self,Id,Objects},model::{self,Doc,Edge,Op,State}};
+  |                       ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `self`
+ --> src\store.rs:6:38
+  |
+6 | use std::{collections::BTreeMap,fs::{self,File,OpenOptions},path::{Path,PathBuf},time::{Instant,Duration}};
+  |                                      ^^^^
+
+warning: unused import: `PathBuf`
+ --> src\projection.rs:5:59
+  |
+5 | use std::{collections::{BTreeMap,BTreeSet},fs,path::{Path,PathBuf},time::Instant};
+  |                                                           ^^^^^^^
+
+warning: unused import: `OpenOptions`
+ --> src\packing.rs:8:54
+  |
+8 | use std::{collections::{BTreeMap,BTreeSet},fs::{File,OpenOptions},path::{Path,PathBuf},rc::Rc,time::{Duration,Instant}};
+  |                                                      ^^^^^^^^^^^
+
+warning: unused import: `Publication`
+ --> src\lifetime.rs:2:79
+  |
+2 | use crate::{io::{self,Metrics,Result},model::Selector,store::{Store,Candidate,Publication},objects};
+  |                                                                               ^^^^^^^^^^^
+
+warning: function `hash_bytes` is never used
+  --> src\pack.rs:61:4
+   |
+61 | fn hash_bytes(hash:&str)->Result<Vec<u8>> {
+   |    ^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: function `all_mapped` is never used
+   --> src\packing.rs:151:4
+    |
+151 | fn all_mapped(m:&mut Metrics)->Result<Vec<Key>> {
+    |    ^^^^^^^^^^
+
+   Compiling file-native-incremental v0.1.0 (C:\Users\spmcc\.codex\worktrees\file-native-online-cp2-20261020\handbook\docs\research\file-native-incremental-engine-experiment-2026-10-18)
+warning: `file-native-incremental` (lib) generated 7 warnings (run `cargo fix --lib -p file-native-incremental` to apply 5 suggestions)
+   Compiling project-consumer v0.1.0 (C:\Users\spmcc\.codex\worktrees\file-native-online-cp2-20261020\handbook\docs\research\file-native-incremental-engine-experiment-2026-10-18\consumers\project)
+   Compiling research-consumer v0.1.0 (C:\Users\spmcc\.codex\worktrees\file-native-online-cp2-20261020\handbook\docs\research\file-native-incremental-engine-experiment-2026-10-18\consumers\research)
+warning: function `all_mapped` is never used
+   --> src\packing.rs:151:4
+    |
+151 | fn all_mapped(m:&mut Metrics)->Result<Vec<Key>> {
+    |    ^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `file-native-incremental` (lib test) generated 5 warnings (4 duplicates)
+    Finished `release` profile [optimized] target(s) in 9.02s
+  Executable unittests src\lib.rs (C:/file-native-online-cp1-20261020/build\release\deps\file_native_incremental-59093b51f757fd16.exe)
+  Executable unittests src\main.rs (C:/file-native-online-cp1-20261020/build\release\deps\file_native_incremental-50bbacae6623bd61.exe)
+  Executable unittests src\main.rs (C:/file-native-online-cp1-20261020/build\release\deps\project_consumer-7e76476ff57557fb.exe)
+  Executable unittests src\main.rs (C:/file-native-online-cp1-20261020/build\release\deps\research_consumer-9e66335d7f3c0dde.exe)

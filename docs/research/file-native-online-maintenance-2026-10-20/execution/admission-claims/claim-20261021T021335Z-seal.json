@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-034-WINDOWS-NATIVE-DRIVER2KiB-TRANSFER",
+  "utc": "2026-10-21T02:13:35.411409+00:00",
+  "status": "SOURCE_PERFILE_TRANSFER_ONLY__PARENT_NEW_BUDGET_SOURCE_GO_REQUIRED",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T021335Z.json",
+      "bytes": 3623,
+      "sha256": "7cef582dea91aeced39b332d37a6c4d6259d786b600d4afcc3387b66077f28b3"
+    },
+    {
+      "file": "claim-20261021T021335Z.md",
+      "bytes": 477,
+      "sha256": "4e8b13aca9d4eae9807fa2cc9cf27a1afe66a26e1b798058d487f0227eb8401a"
+    }
+  ]
+}

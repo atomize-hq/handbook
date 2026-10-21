@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-027-HELPER-HISTORY6KiB-GROUP-TRANSFER",
+  "utc": "2026-10-21T01:03:13.112279+00:00",
+  "status": "INTERNAL_HELPER_GROUP_TRANSFER_APPLIED__NEW_BUDGET_SOURCE_GO_BEFORE_EDITS__NO_RUN",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T010313Z.json",
+      "bytes": 5643,
+      "sha256": "6f6cb79f053b3c1578883bfeda76358ce9306f55bdfd880d7b433cc6f3ea43ae"
+    },
+    {
+      "file": "claim-20261021T010313Z.md",
+      "bytes": 714,
+      "sha256": "dcaa26b893af127b0fe10cb2b41ff6743f4ddc84f9c8a00b8db675a1425d8042"
+    }
+  ]
+}

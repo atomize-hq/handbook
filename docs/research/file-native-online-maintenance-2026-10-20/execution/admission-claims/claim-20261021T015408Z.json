@@ -1,0 +1,74 @@
+{
+  "claim_id": "44GiB-CENTRAL-031-C3-WINDOWS-BOUNDED-GUARD64KiB",
+  "utc": "2026-10-21T01:54:08.012858+00:00",
+  "status": "INTERNAL_SOURCE_RESERVATION_ONLY__READONLY_PLAN_THEN_PARENT_SOURCE_GO__NO_RUN",
+  "authority": "METAconcrete031ONLYafter030:65536/4NEWboundedguardsourcewithinC3; nootherresourcechange.",
+  "prior030": {
+    "file": "claim-20261021T014058Z.json",
+    "sha256": "da2b03916a20440f8df17247bb095505123dac2df6ed6c4759571273a70e3b0b"
+  },
+  "family_addendum": {
+    "file": "claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "cap_files": 128,
+    "cap_bytes": 524288
+  },
+  "owner_chat": "01a15ae1-839d-7b02-843b-558ddc9e78cc",
+  "owner_boundary": "ClosedCP1chatrepurposedtoNEWPythoncontrollerSOURCEonly; noRust/core/targetownership.",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-bounded-guard",
+  "root_before": {
+    "exists": false,
+    "bytes": 0,
+    "files": 0
+  },
+  "closed_per_file_caps": {
+    "job_guard_bounded.py": 49152,
+    "controls.py": 8192,
+    "README.md": 4096,
+    "source-receipt.json": 4096
+  },
+  "whole_caps": {
+    "bytes": 65536,
+    "files": 4
+  },
+  "C3": {
+    "total_unchanged": 16777216,
+    "unsubclaimed_before": 2260992,
+    "new_SOURCEdraw": 65536,
+    "unsubclaimed_after": 2195456,
+    "file_pool_unchanged": 15000,
+    "new4files": "ExistingC3unassignedsourcefileallowance, notglobal/reserveincrease; prior029conservative4209+new4=4213within15k."
+  },
+  "frozen_parent_source": {
+    "path": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-matrix-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-cadence\\job_guard_qpc.py",
+    "bytes": 37051,
+    "sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+    "oldsource_and_receipts_immutable": true,
+    "newversion": "Separatejob_guard_bounded.pyonly; nooverwriteold50ecc,guard1e4orotherownersources."
+  },
+  "source_purpose": [
+    "Explicit hardcontrollerRSS, gziptrace/rawrow/disk bounds, supervisor/error/processidentity/finalJSON andstdio bounds; preserveeveryrequiredfailure/censorrecordwithinadmittedoutputs.",
+    "Oldsourcehasnohardrow/rawcapandmaincleanupmaydelaystop;30s/.02samplingisnotanunconditionalevidencebytebound. Thisprospectivefixdoesnotrevokeoldqualifiedresultsorrewritereceipts.",
+    "RetainALLQPCcadence, ownership/free/RSS/closure/sourcebindinggates. Boundhits mustcensor/failclosed, never silentlydropmandatoryrowsorreportPASS."
+  ],
+  "ownership": "Originalwindows-bounded-guardfilesC3,NOTMETA/F01. DistinctPpacket/returnreviewcopiesMETA9andcommonGitpositivegrowthF13once. ParentnewMETAmembershipmustkeepexactoriginalsourcepathoutsideMETAselectors; originalselsewhereandalloldreceiptsremaincharged.",
+  "registration_gate": [
+    "Read-onlysourcedesignfirst; parentNEWimmutableSOURCEbudgetbind031/root/exactfourcaps+explicitSOURCEGO BEFOREwrites. Eachwriteexactname/perfile/wholechecked; noimplicitfifthsourcefile/pycache/temp/output.",
+    "No controls/Jobs/build/native/copy/corpus/deletionorenginepermission. Futurefinitebenigncontrols needfullsourcereviewandSEPARATEruntime/evidence/root/RSS/stdio/finalizationbudgetregistration andGO.",
+    "Noimplicitprivatecache/dependencies/worktree/admin/target/coreeditgrant. Existingallcase/resource/clockgatesunchanged; sourcefreeze04:10unchanged."
+  ],
+  "unchanged_global": {
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "cap_bytes": 47244640256,
+    "reserved_files": 4792652,
+    "unassigned_files": 207348,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "META9MiB": 9437184,
+    "new_global_bytes": 0,
+    "new_global_files": 0,
+    "C2Windows128MiB_held": 134217728
+  },
+  "actions": "Readonlyabsent-root/frozen50ecc/cap/priorhashchecks andone031triplet only; nootherclaim/source/budget/runtime/copy/deletion."
+}

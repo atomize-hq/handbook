@@ -1,0 +1,101 @@
+{
+  "claim_id": "44GiB-CENTRAL-032-WINDOWS-PLATFORM-PERFILE-TRANSFER",
+  "utc": "2026-10-21T02:07:56.736600+00:00",
+  "status": "SOURCE_CAP_REDISTRIBUTION_ONLY__NEW_BUDGET_SOURCE_GO_REQUIRED",
+  "authority": "METArequestsoneWindows025internalcaprevision; noaggregate/globalchange, authorsheldbeforegrowth.",
+  "prior031": {
+    "file": "claim-20261021T015408Z.json",
+    "sha256": "d0dea4565c6287aaf6459f070e4956a5e8ee2b31f532c04c97c2d3507c5ca19c"
+  },
+  "amends025_SOURCE_perfile_only": {
+    "file": "claim-20261021T003042Z.json",
+    "sha256": "29aeb8e27edbc42f603ccac8024a1833abf04a7aa49db6ca9c8649940997397a",
+    "originalimmutable": true
+  },
+  "family_addendum": {
+    "file": "claim-20261021T001220Z-addendum.json",
+    "sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+    "cap_files": 128,
+    "cap_bytes": 524288
+  },
+  "owner_chat": "01a15bd5-7694-7981-a619-9a23d4774b60",
+  "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-maintenance-20261020\\handbook\\docs\\research\\file-native-online-maintenance-2026-10-20\\execution\\windows-final-platform",
+  "changed_caps": [
+    {
+      "file": "source_controls.py",
+      "bytes": 7678,
+      "sha256": "a8dd0061b307ab742a709fae9a2b8dccddb9cc020e9c4cde0cd8c52d5e719ed9",
+      "old_cap": 24576,
+      "new_cap": 26624
+    },
+    {
+      "file": "windows_adapter.py",
+      "bytes": 19120,
+      "sha256": "b5cf47a39e50c17305bd11e2570767bac61934a49a5f096f8de35f1ddb2daaee",
+      "old_cap": 28672,
+      "new_cap": 24576
+    },
+    {
+      "file": "windows_capsule.py",
+      "bytes": 16139,
+      "sha256": "ca49fa612f264b92eed41f9bf9617c90cb00c016f63d2fe710c3e2de0de599a1",
+      "old_cap": 16384,
+      "new_cap": 20480
+    },
+    {
+      "file": "windows_growth.py",
+      "bytes": 9310,
+      "sha256": "14776f4820e52452460bd0d6a525436a5b83eb0e0156d1a215f4c4353640a979",
+      "old_cap": 16384,
+      "new_cap": 14336
+    }
+  ],
+  "SOURCE_all_new_caps": {
+    "windows_driver.py": 24576,
+    "windows_native.py": 24576,
+    "windows_adapter.py": 24576,
+    "windows_growth.py": 14336,
+    "windows_capsule.py": 20480,
+    "windows_hooks.py": 24576,
+    "windows_oracle_bridge.py": 8192,
+    "windows_bootstrap.py": 8192,
+    "windows_evidence.py": 12288,
+    "source_controls.py": 26624,
+    "windows_deadlines.py": 8192
+  },
+  "unchanged_group_and_whole_caps": {
+    "SOURCE_bytes": 196608,
+    "SOURCE_files": 11,
+    "CASEDATA_bytes": 262144,
+    "CASEDATA_files": 8,
+    "BINDINGS_bytes": 65536,
+    "BINDINGS_files": 8,
+    "whole_bytes": 524288,
+    "whole_conservative_filecap": 32,
+    "closed_names": 27,
+    "no28th_without_parentregistration": true
+  },
+  "transfers": "capsule+4096/adapter-4096;source_controls+2048/windows_growth-2048. Bothpairsnets0; allotherperfilecaps/names/ownersunchanged.",
+  "fresh_snapshot": {
+    "whole_actual_bytes": 237134,
+    "whole_actual_files": 27,
+    "all_names_and_revised_individualcaps_fit": true,
+    "changed_members_fit_old_caps": true,
+    "past": "Currentfitsandparentheldauthors, prospectiveonly; no retroactiveoverrunrepair asserted."
+  },
+  "registration_gate": "ParentNEWimmutableWindowsplatformsourcebudgetbind032/025/exactnewcaps beforeexplicitSOURCEGO orcrossingoldgrowingcaps. Allindividual+SOURCE+CASEDATA+BINDINGS+whole/pathlimitsremain. No runtime/control/native/engine/build/copy/corpus/deletion/Gitpermission. All166casesPENDING, oldDriver/1e4frozen, qualifications/quotasunchanged.",
+  "allocator_unchanged": {
+    "C3_total": 16777216,
+    "C3_unsubclaimed": 2195456,
+    "whole_bytes": 46924310901,
+    "central_bytes": 320329355,
+    "reserved_files": 4792652,
+    "unassigned_files": 207348,
+    "inside_closeout_bytes": 1073741824,
+    "inside_closeout_files": 100000,
+    "new_C3draw": 0,
+    "new_global_bytes": 0,
+    "new_global_files": 0
+  },
+  "actions": "Readonlysnapshot/cap/priorhashchecks+032triplet only; no source/livebudget/runtimechange."
+}

@@ -1,0 +1,18 @@
+{
+  "claim_id": "44GiB-CENTRAL-030-C3-META9MiB",
+  "utc": "2026-10-21T01:40:58.976379+00:00",
+  "status": "INTERNAL_META_TOPUP_APPLIED__NEW_IMMUTABLE_MEMBERSHIP_BUDGET_REQUIRED",
+  "sealed": true,
+  "files": [
+    {
+      "file": "claim-20261021T014058Z.json",
+      "bytes": 5892,
+      "sha256": "da2b03916a20440f8df17247bb095505123dac2df6ed6c4759571273a70e3b0b"
+    },
+    {
+      "file": "claim-20261021T014058Z.md",
+      "bytes": 878,
+      "sha256": "7087c6a5736c1eb9697e08f116f36b5b150b569c1c5fb8725a9580769d3e86b2"
+    }
+  ]
+}

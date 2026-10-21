@@ -1,0 +1,70 @@
+{
+  "kind": "private-windows-final-platform-source-only-034",
+  "source_only": true,
+  "runtime_go": false,
+  "source_root": "C:/Users/spmcc/.codex/worktrees/file-native-online-maintenance-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-final-platform",
+  "owner": "01a15bd5-7694-7981-a619-9a23d4774b60",
+  "max_bytes": 524288,
+  "max_files": 27,
+  "closed_names": 27,
+  "claim025_sha256": "29aeb8e27edbc42f603ccac8024a1833abf04a7aa49db6ca9c8649940997397a",
+  "claim023_addendum_sha256": "39f205ac06b5a4e14a1f7fd0da96234044cae5866a3370a4eff2b022f785ea20",
+  "groups": {
+    "source": {
+      "bytes": 196608,
+      "files": 11,
+      "paths": {
+        "windows_driver.py": 22528,
+        "windows_native.py": 26624,
+        "windows_adapter.py": 24576,
+        "windows_growth.py": 14336,
+        "windows_capsule.py": 20480,
+        "windows_hooks.py": 24576,
+        "windows_oracle_bridge.py": 8192,
+        "windows_bootstrap.py": 8192,
+        "windows_evidence.py": 12288,
+        "source_controls.py": 26624,
+        "windows_deadlines.py": 8192
+      }
+    },
+    "case_data": {
+      "bytes": 262144,
+      "files": 8,
+      "paths": {
+        "packing52.json": 32768,
+        "recovery24.json": 32768,
+        "strict24.json": 32768,
+        "focused_windows.json": 32768,
+        "protocol.json": 32768,
+        "workspace_ordinary.json": 32768,
+        "source_constructors.json": 32768,
+        "growth_actions.json": 32768
+      }
+    },
+    "bindings": {
+      "bytes": 65536,
+      "files": 8,
+      "paths": {
+        "README.md": 8192,
+        "interface.md": 8192,
+        "controls-forecast.json": 8192,
+        "source-bindings.json": 8192,
+        "final-engine-bindings.json": 8192,
+        "source-receipt.json": 8192,
+        "static-controls-result.json": 8192,
+        "platform-source-review-notes.md": 8192
+      }
+    }
+  },
+  "rules": [
+    "No 28th file or subdirectory/symlink/reparse/bytecode without new parent registration",
+    "Check individual plus group plus whole projected counts/bytes before EVERY write",
+    "Old Driver and guards remain immutable; new one-owner transport version is explicit source, not monkeypatch",
+    "Pure in-memory compile permitted; no native/engine/build/control/corpus/target/cache/dependency/worktree/Git writes or runs until separate parent GO",
+    "All 166 Windows cases remain pending; absent hooks/source maps refuse rather than pass",
+    "Original source is separate C3 allocation inside16MiB; distinct review copies META8, common Git positive F13",
+    "Sourcefreeze2026-10-21T04:10:14Z, functional11:10:14Z unchanged"
+  ],
+  "claim032_sha256": "34287b0111983302ad3b0608d819beb1aaab258fb40bb030a4e0b4a274fb1e92",
+  "claim034_sha256": "7cef582dea91aeced39b332d37a6c4d6259d786b600d4afcc3387b66077f28b3"
+}

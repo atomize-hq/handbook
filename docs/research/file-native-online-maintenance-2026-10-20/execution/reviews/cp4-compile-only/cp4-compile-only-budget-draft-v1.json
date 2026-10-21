@@ -1,0 +1,117 @@
+{
+  "admission_ledger_sha256": "2ff4e277a44c3dea99f53d5b098250e78a50c40d63539022bf365f4cc048c82c",
+  "categories": {
+    "source": {
+      "root": "C:\\Users\\spmcc\\.codex\\worktrees\\file-native-online-cp2-20261020\\handbook",
+      "bytes": 1048576,
+      "files": 400
+    },
+    "source_admin": {
+      "root": "C:/Users/spmcc/Documents/__Project_Code/handbook/.git/worktrees/handbook11",
+      "bytes": 2097152,
+      "files": 100,
+      "nonadditive_subset_of": "shared_git"
+    },
+    "build": {
+      "root": "C:\\file-native-online-cp1-20261020\\build",
+      "bytes": 268435456,
+      "files": 5000
+    },
+    "fixtures": {
+      "root": "C:\\file-native-online-cp1-20261020\\fixtures",
+      "bytes": 201326592,
+      "files": 75000
+    },
+    "evidence": {
+      "root": "C:\\file-native-online-cp1-20261020\\evidence",
+      "bytes": 50331648,
+      "files": 10000
+    },
+    "shared_git": {
+      "root": "C:/Users/spmcc/Documents/__Project_Code/handbook/.git",
+      "charge_mode": "positive_delta",
+      "baseline_bytes": 252177643,
+      "baseline_files": 2499,
+      "bytes": 25165824,
+      "files": 5000
+    },
+    "shared_cargo": {
+      "root": "C:/Users/spmcc/.cargo",
+      "charge_mode": "positive_delta",
+      "baseline_bytes": 893702027,
+      "baseline_files": 18188,
+      "bytes": 25165824,
+      "files": 5000
+    }
+  },
+  "groups": {
+    "F13_Windows_shared": {
+      "categories": [
+        "shared_git",
+        "shared_cargo"
+      ],
+      "bytes": 25165824,
+      "files": 5000
+    }
+  },
+  "notes": "SOURCE-BOUND DRAFT, run_go false. Compilation ONLY at verified 9ec7 stage freeze: cargo build, cargo test --no-run. No engine, actual tests, heavy fixture, protocol or pacing execution. Same source/target/profile/dependencies/global Cargo. Old ca559/UNUSED82b8 budgets retained; replace their unused phase forecast rather than adding it. Absolute caps remain source1MiB/admin2MiB/F02target256MiB/F06fixtures192MiB/F12evidence48MiB and existing F13.",
+  "claim009_sha256": "dfe85f98db9820fbda0cdaf96bd97b51fdb376679df03646099e9d015fe31653",
+  "owner_chat": "01a15b15-3362-7133-b789-1ff556b75d04",
+  "source_base_pin": "a3f9805eccc19ede8dd5c735b54e675e98e63714",
+  "source_branch": "codex/file-native-online-cp3-20261020",
+  "phase_growth_reservations": {
+    "source_bytes": 0,
+    "checkpoint_control_docs_bytes": 0,
+    "build": {
+      "bytes": 50331648,
+      "files": 150
+    },
+    "fixtures": {
+      "bytes": 0,
+      "files": 0
+    },
+    "evidence": {
+      "bytes": 393216,
+      "files": 25
+    },
+    "shared_cargo": {
+      "bytes": 1048576,
+      "files": 64
+    }
+  },
+  "claim022_sha256": "905543e536ad5b7fd8db19c252a99d5e4fd432401f556bced4e236fea4358b36",
+  "claim023_sha256": "ff6a60ef8d5bff5d0d34fec2d35c84802be27f8f05f5414719bf8e3cc0de71b5",
+  "run_go": false,
+  "required_guard_sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378",
+  "run_scope": "DRAFT COMPILE ONLY; explicit parent approval of exact input/budget SHA required. No actual unit/test executable or engine invocation.",
+  "parent_source_freeze_sha256": "9ec7c33e31ae7a23b5c0079dccc13d3f4f2a7c1798438f57458305bfd8920252",
+  "parent_source_freeze_path": "C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be/cp4-review/source-freeze-stages.json",
+  "run_limits": {
+    "compile_seconds": 240,
+    "compiled_source_unit_count": 20,
+    "actual_unit_executions": 0,
+    "engine_executions": 0,
+    "protocol_executions": 0,
+    "tmp_temp": "C:/file-native-online-cp1-20261020/build/tmp",
+    "cargo_jobs": 2
+  },
+  "input_path": "C:/file-native-online-cp1-20261020/evidence/cp4-compile-only-input-v1.json",
+  "receipt_prefix": "C:/file-native-online-cp1-20261020/evidence/cp4-compile-only-v1-guard",
+  "prior_unexecuted_runtime_budget": {
+    "path": "C:/file-native-online-cp1-20261020/evidence/cp4-runtime-budget-claim022.json",
+    "sha256": "82b8a1c359dac02dae732620faf64eeafd0bb95892a6625163a0f0c6fca551ad",
+    "preserved": true,
+    "executed": false,
+    "unused_prospective_replaced_not_added": true
+  },
+  "deferred_final_qualification_proposal": {
+    "runtime_go": false,
+    "requires_final_paced_source_decision_and_fresh_census": true,
+    "heavy_unit_bytes": 80976318,
+    "nonheavy_units_bytes": 2621440,
+    "protocol_bytes": 8912896,
+    "total_fixture_growth_bytes": 92510654,
+    "actual_tests_still_unrun": true,
+    "evidence_growth_bytes": 3145728
+  }
+}

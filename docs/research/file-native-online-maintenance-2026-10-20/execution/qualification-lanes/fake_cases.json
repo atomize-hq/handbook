@@ -1,0 +1,61 @@
+{
+  "schema": "qualification-lanes-pure-cases-v1",
+  "source_only": true,
+  "run_go": false,
+  "max_cases": 48,
+  "max_output_bytes": 32768,
+  "pure_suite": "fake_controls.execute_pure",
+  "coverage": [
+    "pending release refuses before host",
+    "negative live poll and native invocation refuse",
+    "duplicate/nonfinite/bounded JSON",
+    "unsafe paths and durable pin lock inclusion",
+    "old DFS order retained independently of canonical destination sort",
+    "duplicate, case collision and file-directory inventory failures",
+    "strict single gzip member CRC/truncation/EOF/padding/concatenation",
+    "exact 300 fresh and 3000 warm samples per representation",
+    "sample index/outcome/digest/clock failures",
+    "incomplete oracle and bare-pass refusal",
+    "five-oracle/606+K source schedule arithmetic; underallocated E and M refuse",
+    "missing/wrong warm query IDs with identical outcomes refuse"
+  ],
+  "optional_history_pure_hooks": [
+    "history_plan",
+    "forecast_history",
+    "positive-authorization validhash go:false negative",
+    "positive-poll validhash live:false negative"
+  ],
+  "excluded_runtime_coverage": [
+    "archive filesystem writer",
+    "engine calls",
+    "Windows Job containment",
+    "startup gate before real corpus IO",
+    "RSS and free-space enforcement",
+    "full oracle or real restore",
+    "history native scheduling"
+  ],
+  "required_followup_before_real_long": [
+    "parent source review",
+    "exact v5-R1 normalization and cleanup terminal API",
+    "pinned LaneHost runner and startup gate source closure",
+    "assigned F12 evidence/source forecast",
+    "finite control RUN GO",
+    "bounded archive-writer fixtures under separate admitted fixture root",
+    "exact final pin/binary/source/budget/oracle/QPC bindings",
+    "separate real long RUN GO"
+  ],
+  "evidence_rule": "Raw per-case outcomes plus exact source hashes; pure controls never qualify native behavior or release reservations.",
+  "CONTROL_PLAN": {
+    "status": "proposed-unadmitted",
+    "retained_bytes_max": 16777216,
+    "base_pure_cases": 46,
+    "optional_history_cases": 2,
+    "real_archive_writer": false,
+    "required_history_negatives": [
+      "validhash receipt go:false",
+      "validhash receipt live:false"
+    ]
+  },
+  "remediation": "027 source-only R1-R6. Negative f6 archive retained. Concrete profile widths/native pace/post-exit finalizer remain pending; no flags/hash-only forecast authority."
+}
+

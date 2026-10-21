@@ -1,0 +1,81 @@
+{
+  "status": "PARENT_APPROVED_COMPILATION_ONLY",
+  "run_go": true,
+  "scope": "COMPILATION ONLY; never use checkpoint4/control.py build mode for this phase",
+  "allocation_draft": {
+    "path": "C:/file-native-online-cp1-20261020/evidence/cp4-compile-only-budget-draft-v1.json",
+    "sha256": "fc6ebb937112c14d73de38e001308e6d4b4ddbf742ab81a7428430f14161846f",
+    "executed": false
+  },
+  "source_freeze": {
+    "path": "C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be/cp4-review/source-freeze-stages.json",
+    "sha256": "9ec7c33e31ae7a23b5c0079dccc13d3f4f2a7c1798438f57458305bfd8920252",
+    "files": 29
+  },
+  "guard": {
+    "path": "C:/Users/spmcc/.codex/worktrees/file-native-online-matrix-20261020/handbook/docs/research/file-native-online-maintenance-2026-10-20/execution/windows-cadence/job_guard_qpc.py",
+    "sha256": "50ecc7c40c1cdda6493817261b5755fe2d823fdae271118698828c39a0400378"
+  },
+  "receipt": "C:/file-native-online-cp1-20261020/evidence/cp4-compile-only-v1-guard.json",
+  "seconds": 240,
+  "cwd": "C:/Users/spmcc/.codex/worktrees/file-native-online-cp2-20261020/handbook/docs/research/file-native-incremental-engine-experiment-2026-10-18",
+  "reserves": {
+    "build": {
+      "bytes": 50331648,
+      "files": 150
+    },
+    "fixtures": {
+      "bytes": 0,
+      "files": 0
+    },
+    "evidence": {
+      "bytes": 393216,
+      "files": 25
+    },
+    "shared_cargo": {
+      "bytes": 1048576,
+      "files": 64
+    }
+  },
+  "argv": [
+    "C:\\Users\\spmcc\\.pyenv\\pyenv-win\\versions\\3.11.9\\python.exe",
+    "-B",
+    "-c",
+    "import hashlib,json,os,subprocess\nfrom pathlib import Path\nroot=Path(\"C:/Users/spmcc/.codex/worktrees/file-native-online-cp2-20261020/handbook\")\nfreeze=Path(\"C:/Users/spmcc/.codex/visualizations/2026/10/20/01a15ab8-d85f-71b1-8d37-c3c5689790be/cp4-review/source-freeze-stages.json\")\nexpected=\"9ec7c33e31ae7a23b5c0079dccc13d3f4f2a7c1798438f57458305bfd8920252\"\nassert hashlib.sha256(freeze.read_bytes()).hexdigest()==expected\nbinding=json.loads(freeze.read_bytes())\nassert len(binding['files'])==29 and Path(binding['worktree']).resolve()==root.resolve()\ndef verify():\n    for name,row in binding['files'].items():\n        path=root/name\n        assert path.stat().st_size==row['bytes'] and hashlib.sha256(path.read_bytes()).hexdigest()==row['sha256'], name\nverify()\nassert not os.environ.get('CARGO_HOME') or Path(os.environ['CARGO_HOME']).resolve()==Path('C:/Users/spmcc/.cargo').resolve()\nprint(json.dumps(dict(stage='PREBUILD_INPUTS',source_freeze_sha256=expected,verified_files=binding['files'],actual_tests_executed=0)),flush=True)\ntmp=Path(\"C:/file-native-online-cp1-20261020/build/tmp\");tmp.mkdir(exist_ok=True)\nos.environ.update(TMP=str(tmp),TEMP=str(tmp))\ncommands=[[\"C:/Users/spmcc/.cargo/bin/cargo.exe\",\"build\",\"--locked\",\"--offline\",\"--workspace\",\"--release\",\"-j2\",\"--target-dir\",\"C:/file-native-online-cp1-20261020/build\"],[\"C:/Users/spmcc/.cargo/bin/cargo.exe\",\"test\",\"--locked\",\"--offline\",\"--workspace\",\"--release\",\"-j2\",\"--target-dir\",\"C:/file-native-online-cp1-20261020/build\",\"--no-run\"]]\nassert len(commands)==2 and commands[1][-1]=='--no-run'\nfor command in commands:\n    subprocess.run(command,check=True)\nverify()\nbinary=root/Path(\"C:/file-native-online-cp1-20261020/build/release/file-native-incremental.exe\")\nprint(json.dumps(dict(stage='COMPILE_ONLY_COMPLETE',source_freeze_sha256=expected,source_unit_count=20,actual_tests_executed=0,engine_calls=0,binary_sha256=hashlib.sha256(binary.read_bytes()).hexdigest())),flush=True)\n"
+  ],
+  "declared_cargo_commands": [
+    [
+      "C:/Users/spmcc/.cargo/bin/cargo.exe",
+      "build",
+      "--locked",
+      "--offline",
+      "--workspace",
+      "--release",
+      "-j2",
+      "--target-dir",
+      "C:/file-native-online-cp1-20261020/build"
+    ],
+    [
+      "C:/Users/spmcc/.cargo/bin/cargo.exe",
+      "test",
+      "--locked",
+      "--offline",
+      "--workspace",
+      "--release",
+      "-j2",
+      "--target-dir",
+      "C:/file-native-online-cp1-20261020/build",
+      "--no-run"
+    ]
+  ],
+  "fixtures_created": 0,
+  "tests_to_execute": 0,
+  "protocol_calls": 0,
+  "source_unit_count_compiled_only": 20,
+  "no_heavy_fixture_until_final_pin": true,
+  "prior_82b8_budget_preserved_unexecuted": true,
+  "allocation_runtime": {
+    "path": "C:\\file-native-online-cp1-20261020\\evidence\\cp4-compile-only-budget-runtime-v1.json",
+    "sha256": "b006b2ab0c81ef9a5a5224985e736acaa0428d419333f9fa09fd758bbf781bd1"
+  }
+}
