@@ -1,0 +1,178 @@
+{
+  "status": "COMPILE_PASSED_ELF_NOT_EXECUTED",
+  "scope": "native interface peer only; zero peer/engine/controls execution",
+  "source_pin": "efd07cb5dee46a335be8c03a2f2c0462d7f923ca",
+  "claim_id": "LINUX-V3-PEER-COMPILE-20261021",
+  "ledger_sha256": "29aeb8e27edbc42f603ccac8024a1833abf04a7aa49db6ca9c8649940997397a",
+  "artifacts": {
+    "evidence/native-v3-peer-compile.json": {
+      "bytes": 4615,
+      "sha256": "8ede1220d2449fe712dafc8c014a39cb0ac26e1d25e9fe294e42173c74d69460"
+    },
+    "evidence/native-v3-peer-compile-phase.json": {
+      "bytes": 3438,
+      "sha256": "44cae9544ce087b683342efb2e840245371f018ab250f334b51f3997f6ee78fd"
+    },
+    "evidence/native-v3-peer-compile.memory.jsonl.gz": {
+      "bytes": 365,
+      "sha256": "56b298d66d0f135fe45476b405a99fcaa8fcb4f3a508c20c0b0d3106f141a6be"
+    },
+    "evidence/native-v3-peer-compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/native-v3-peer-compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/native-v3-peer-compile-tools-before.json": {
+      "bytes": 635,
+      "sha256": "967a4efe43700921b56a6c85c2498ced9be57d3c1f26d6cffdc463d2211accac"
+    },
+    "evidence/claim-52ccec34fd1d43a8b7a4555729b660c4.json": {
+      "bytes": 833,
+      "sha256": "40eb91e866997083c4e75e8ace8400a9cab91590979a395444763615baf86629"
+    }
+  },
+  "binary": {
+    "path": "/home/spenser/file-native-online-linux-20261020/target/native-peer-v3-targeted",
+    "bytes": 16312,
+    "sha256": "fa2b5ae4ae2fe27bf3d5c320b2178bd3947ab01e1f028a2599fc8d38a224f770",
+    "ELF_magic": true,
+    "executed": false
+  },
+  "source_before_after": {
+    "C": "f8347099548f27d354179f4dd7a68fd08e4f8e70dc635c4e61871e50058db8af",
+    "plan": "55941a0c20eded5b10c8c6b655b7d20b76f8c0870890e0b36c2a7b5a374d4931",
+    "guard": "4ddf6c15c87a200530c2c5e15d6c5be26ff3251019d20f8dea6ca83948b634f9"
+  },
+  "tools_before_after_equal": {
+    "/usr/bin/gcc": "1ae1a26817f3a77ec366da649e4796019b8b67dac95c85917206321f616a96cd",
+    "/usr/bin/as": "352305212d74e9edc3881b8ef84b12fe58a8bba7ca54ce9bac3cf11df34efafd",
+    "/usr/bin/ld": "88d8f5918c283792d5947a86311db349fcd30196c2de9aedcbbbed91d9955b6d",
+    "/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/cc1": "569fdb899d20e696e7545f359a930dbc560016b03b797b4e0d2c7bc409c54b8f",
+    "/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/collect2": "3be5c90c6166b4faed62f2eaae48659304de91badcc83ec8c4c51ed11bc9d70c"
+  },
+  "elapsed_seconds": 0.17150259017944336,
+  "rss": {
+    "blocked_positive": 16384,
+    "heavy_peak": 40644608,
+    "supervisor_peak": 45764608
+  },
+  "sampling": {
+    "count": 8,
+    "maximum_interval": 0.020101954229176044,
+    "over40": 0,
+    "raw_wall_max": 0.02414560317993164
+  },
+  "closure": {
+    "monitors_joined": true,
+    "process_closure_verified": true,
+    "observations": [
+      {
+        "epoch": 1792544139.7300718,
+        "pids": [],
+        "states": []
+      },
+      {
+        "epoch": 1792544139.8056102,
+        "pids": [],
+        "states": []
+      }
+    ],
+    "tracked_identity": {
+      "618613": 337429864,
+      "618617": 337429867
+    }
+  },
+  "before": {
+    "source": {
+      "bytes": 631232,
+      "files": 61,
+      "directories": 12
+    },
+    "target": {
+      "bytes": 126797363,
+      "files": 408,
+      "directories": 90
+    },
+    "fixtures": {
+      "bytes": 109,
+      "files": 1,
+      "directories": 5
+    },
+    "evidence": {
+      "bytes": 4076854,
+      "files": 177,
+      "directories": 10
+    }
+  },
+  "final_inclusive": {
+    "source": {
+      "bytes": 638290,
+      "files": 64,
+      "directories": 12
+    },
+    "target": {
+      "bytes": 126813675,
+      "files": 409,
+      "directories": 90
+    },
+    "fixtures": {
+      "bytes": 109,
+      "files": 1,
+      "directories": 7
+    },
+    "evidence": {
+      "bytes": 4091616,
+      "files": 185,
+      "directories": 10
+    }
+  },
+  "growth_inclusive": {
+    "source": {
+      "bytes": 7058,
+      "files": 3,
+      "directories": 0
+    },
+    "target": {
+      "bytes": 16312,
+      "files": 1,
+      "directories": 0
+    },
+    "fixtures": {
+      "bytes": 0,
+      "files": 0,
+      "directories": 2
+    },
+    "evidence": {
+      "bytes": 14762,
+      "files": 8,
+      "directories": 0
+    }
+  },
+  "self_bytes": 4876,
+  "self_sha_excluded": true,
+  "cumulative_growth_caps": {
+    "source": {
+      "bytes": 16384,
+      "files": 4
+    },
+    "target": {
+      "bytes": 131072,
+      "files": 8
+    },
+    "fixtures": {
+      "bytes": 1048576,
+      "files": 128
+    },
+    "evidence": {
+      "bytes": 1572864,
+      "files": 24
+    }
+  },
+  "native_growth_only": true,
+  "remaining_budget_requires_local_copy_census": true,
+  "source_total_conservative_local": 1468174,
+  "free_bytes": 74080788480
+}

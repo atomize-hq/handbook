@@ -1,0 +1,231 @@
+{
+  "status": "STATIC SOURCE REMEDIATION FOR REVIEW; NO CONTROL GO",
+  "revision": 3,
+  "v2_receipt": {
+    "path": "native-source-receipt-v2.json",
+    "bytes": 2793,
+    "sha256": "325618b2be500f0435b944c6fba9365ed32c82b0683156c7e0269e9af6c6a30e",
+    "all_13_files_unchanged": true
+  },
+  "files": {
+    "native_adapter_v3.py": {
+      "bytes": 21582,
+      "sha256": "da273c4866883a7f4bb7b417ffa19ad0ea408e869601f502cc9e6a71b18d08de"
+    },
+    "native_bootstrap_v3.py": {
+      "bytes": 8018,
+      "sha256": "ac2cc1e993fc861a174da06b6c5c619f0f3bf3355450cb367b9a9b2a2ed59e79"
+    },
+    "native_capsule_v3.py": {
+      "bytes": 9864,
+      "sha256": "5b6034a1f5ddce88ec76b3566a0e00224ae8fcbefe404e39d2156d92b54522b9"
+    },
+    "native_controls_v3.py": {
+      "bytes": 11397,
+      "sha256": "4698beeba0af0e8fcc79ed872d83529efb21c57a2f3d100233543436a1dd7092"
+    },
+    "native_driver_v3.py": {
+      "bytes": 27241,
+      "sha256": "d2f3d88bbab83e089120754e3bb8006f77d4915c0c7d19d59364f5e55ac1a7d8"
+    },
+    "native_historical_v3.py": {
+      "bytes": 6006,
+      "sha256": "94f95e64cfc2cdca934ffc4e98343d4fe54e757e88d73144ff1295b3c612a65b"
+    },
+    "native_resources_v3.py": {
+      "bytes": 16072,
+      "sha256": "cbf601e0ebe547cc25ba194f5fc0f0d808300366388f0decfd866609701e96c5"
+    },
+    "native_peer_v3.c": {
+      "bytes": 3159,
+      "sha256": "f8347099548f27d354179f4dd7a68fd08e4f8e70dc635c4e61871e50058db8af"
+    },
+    "native-source-review-v3.md": {
+      "bytes": 10191,
+      "sha256": "6e3c624c7c01825c5e73033ae91c210bfce3cfa4c1d203886c9a4447589c920a"
+    }
+  },
+  "payload_bytes": 113530,
+  "payload_files": 9,
+  "receipt_excluded_from_own_manifest": true,
+  "whole_new_envelope": {
+    "bytes": 393216,
+    "files": 24
+  },
+  "prospective_v3_envelope": {
+    "bytes": 122880,
+    "files": 10
+  },
+  "controls_source": {
+    "files": [
+      "native_controls_v3.py",
+      "native_peer_v3.c"
+    ],
+    "current_bytes": 14556,
+    "future_manifest_max_bytes": 16384,
+    "control_source_ceiling_bytes": 49152,
+    "control_source_ceiling_files": 8
+  },
+  "static_validation": {
+    "ast": [
+      {
+        "file": "native_adapter_v3.py",
+        "compiled_in_memory": true,
+        "from_imports": [
+          "contextlib",
+          "native_driver",
+          "native_driver_v3",
+          "native_resources_v3",
+          "pathlib"
+        ]
+      },
+      {
+        "file": "native_bootstrap_v3.py",
+        "compiled_in_memory": true,
+        "from_imports": [
+          "native_capsule_v3",
+          "pathlib"
+        ]
+      },
+      {
+        "file": "native_capsule_v3.py",
+        "compiled_in_memory": true,
+        "from_imports": [
+          "native_adapter_v3",
+          "native_bootstrap_v3",
+          "native_driver",
+          "native_driver_v3",
+          "native_historical_v3",
+          "native_resources_v3",
+          "pathlib"
+        ]
+      },
+      {
+        "file": "native_controls_v3.py",
+        "compiled_in_memory": true,
+        "from_imports": [
+          "native_bootstrap_v3",
+          "native_resources_v3",
+          "pathlib"
+        ]
+      },
+      {
+        "file": "native_driver_v3.py",
+        "compiled_in_memory": true,
+        "from_imports": [
+          "native_driver",
+          "native_resources_v3",
+          "pathlib"
+        ]
+      },
+      {
+        "file": "native_historical_v3.py",
+        "compiled_in_memory": true,
+        "from_imports": [
+          "native_driver_v3",
+          "native_resources_v3",
+          "pathlib"
+        ]
+      },
+      {
+        "file": "native_resources_v3.py",
+        "compiled_in_memory": true,
+        "from_imports": [
+          "pathlib"
+        ]
+      }
+    ],
+    "all_local_imports_within_required_closure": true,
+    "broken_pipe_no_offset_completion_assignment": true,
+    "new_budget_no_guard_inventory_skip_on_missing": true,
+    "live_controls_run": 0,
+    "engine_calls_run": 0,
+    "builds_run": 0,
+    "native_copies": 0,
+    "original_case_map_unchanged_158_pending": true,
+    "gitnexus": "unavailable; indexed impact UNKNOWN/manual HIGH new-only dependency trace",
+    "pre_handoff_correction": {
+      "unsubmitted_receipt_sha256": "08183422379657ba22a99fcc8065c06b14bc5fb7b27b569acd51e982f1ab6f82",
+      "change": "Check deadline for every file as well as every directory; no control/engine execution"
+    }
+  },
+  "parent_trusted_prefix": {
+    "text": "import hashlib,pathlib,runpy,sys\nb,l,bs,ls=sys.argv[1:5]\nfor p,s in ((b,bs),(l,ls)):\n if hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()!=s: raise SystemExit(\"preimport-source-binding\")\nsys.argv=[b,*sys.argv[5:]]\nrunpy.run_path(b,run_name=\"__main__\")\n",
+    "sha256": "dae316abd1a901312af6c2f5f6d6b871a38ac625be22e57332057def40311a33",
+    "execution_required_flags": [
+      "-I",
+      "-S",
+      "-B"
+    ],
+    "arguments": [
+      "BOOT",
+      "LOADER",
+      "BOOT_SHA",
+      "LOADER_SHA",
+      "--manifest",
+      "MANIFEST",
+      "--manifest-sha256",
+      "MANIFEST_SHA",
+      "--bootstrap-sha256",
+      "BOOT_SHA",
+      "--loader-sha256",
+      "LOADER_SHA",
+      "--claim-id",
+      "CLAIM",
+      "--ledger-sha256",
+      "LEDGER_SHA"
+    ],
+    "review_required_before_use": true
+  },
+  "current_native_census": {
+    "source": [
+      631232,
+      61,
+      12
+    ],
+    "target": [
+      126797363,
+      408,
+      90
+    ],
+    "fixtures": [
+      109,
+      1,
+      5
+    ],
+    "evidence": [
+      4076854,
+      177,
+      10
+    ]
+  },
+  "cache_earmark_readonly_confirmation": {
+    "cargo_private": {
+      "exists": false,
+      "bytes": 0,
+      "files": 0
+    },
+    "cargo_home": {
+      "exists": false,
+      "bytes": 0,
+      "files": 0
+    },
+    "private_cache": {
+      "exists": false,
+      "bytes": 0,
+      "files": 0
+    },
+    "CARGO_HOME": "UNSET",
+    "global_cache": "/home/spenser/.cargo",
+    "existing_heavy_lock_exclusive_available": true,
+    "recorded_owner_claims": 28,
+    "live_matching_owner_identities": 0,
+    "dependency_binding_sha256": "13316af81fdd91285007ede59d694bf6398bf6aaf6cbeb24b428e9d0551f55e4",
+    "fresh_archive_hash_matches": 45,
+    "fresh_unpacked_roots": 32,
+    "fresh_source_file_hash_matches": 1530,
+    "mismatches": [],
+    "future_private_copy_planned": false,
+    "only_unused_forecast_expiry_no_actual_delete_credit": true
+  }
+}

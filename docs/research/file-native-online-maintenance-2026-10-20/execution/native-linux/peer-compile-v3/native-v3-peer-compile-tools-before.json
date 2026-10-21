@@ -1,0 +1,11 @@
+{
+  "phase_sha256": "44cae9544ce087b683342efb2e840245371f018ab250f334b51f3997f6ee78fd",
+  "tools": {
+    "/usr/bin/gcc": "1ae1a26817f3a77ec366da649e4796019b8b67dac95c85917206321f616a96cd",
+    "/usr/bin/as": "352305212d74e9edc3881b8ef84b12fe58a8bba7ca54ce9bac3cf11df34efafd",
+    "/usr/bin/ld": "88d8f5918c283792d5947a86311db349fcd30196c2de9aedcbbbed91d9955b6d",
+    "/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/cc1": "569fdb899d20e696e7545f359a930dbc560016b03b797b4e0d2c7bc409c54b8f",
+    "/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/collect2": "3be5c90c6166b4faed62f2eaae48659304de91badcc83ec8c4c51ed11bc9d70c"
+  },
+  "no_execution": true
+}
